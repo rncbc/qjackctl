@@ -1430,7 +1430,7 @@ void qjackctlMainForm::showSetupForm (void)
 {
     qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
     if (pSetupForm) {
-        // Check out some intial nullities(tm)...
+        // Check out some initial nullities(tm)...
         if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesForm)
             m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
         if (m_pSetup->sDisplayFont1.isEmpty())
