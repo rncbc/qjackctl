@@ -10,8 +10,8 @@ ChangeLog
   on a per preset basis (as proposed for Lionstracs' Mediastation).
 
 - Server state now shown (back gain) on the system tray icon tooltip; 
-  speaking of which, tooltips are now also featured on connections and
-  status windows.
+  speaking of which, tooltips are now also featured on connections, status
+  and patchbay windows.
 
 
 0.2.14   2005-01-23  More progressive optimizations.

@@ -30,6 +30,7 @@
 #include <qpixmap.h>
 #include <qpainter.h>
 #include <qpopupmenu.h>
+#include <qtooltip.h>
 
 // Our external patchbay models.
 #include "qjackctlPatchbayRack.h"
@@ -55,6 +56,26 @@ class qjackctlPatchbay;
 #define QJACKCTL_XPM_MIDI_SOCKET_X  4
 #define QJACKCTL_XPM_MIDI_PLUG      5
 #define QJACKCTL_XPM_PIXMAPS        6
+
+
+// Custom tooltip class.
+class qjackctlPatchbayToolTip : public QToolTip
+{
+public:
+
+	// Constructor.
+	qjackctlPatchbayToolTip(qjackctlSocketListView *pListView);
+
+protected:
+
+	// Tooltip handler.
+	void maybeTip(const QPoint& pos);
+
+private:
+
+	// The actual parent widget holder.
+	qjackctlSocketListView *m_pListView;
+};
 
 
 // Patchbay plug (port) list item.
@@ -289,6 +310,10 @@ private:
     QTimer *m_pAutoOpenTimer;
     // Item we'll eventually drop something.
     QListViewItem *m_pDragDropItem;
+
+
+	// Listview item tooltip.
+	qjackctlPatchbayToolTip *m_pToolTip;
 };
 
 

@@ -32,7 +32,6 @@
 qjackctlConnectToolTip::qjackctlConnectToolTip ( qjackctlClientListView *pListView )
 	: QToolTip(pListView->viewport())
 {
-	// No explicit initialization needed.
 	m_pListView = pListView;
 }
 

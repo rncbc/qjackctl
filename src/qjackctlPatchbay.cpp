@@ -42,6 +42,38 @@ static int      g_iXpmRefCount = 0;
 // Exclusive socket overlay pixmap.
 static QPixmap *g_pXpmXSocket1 = 0;
 
+
+//----------------------------------------------------------------------
+// class qjackctlConnectToolTip -- custom list view tooltips.
+
+// Constructor.
+qjackctlPatchbayToolTip::qjackctlPatchbayToolTip ( qjackctlSocketListView *pListView )
+	: QToolTip(pListView->viewport())
+{
+	m_pListView = pListView;
+}
+
+// Tooltip handler.
+void qjackctlPatchbayToolTip::maybeTip ( const QPoint& pos )
+{
+	QListViewItem *pItem = m_pListView->itemAt(pos);
+	if (pItem == 0)
+		return;
+
+	QRect rect(m_pListView->itemRect(pItem));
+	if (!rect.isValid())
+		return;
+
+	if (pItem->rtti() == QJACKCTL_SOCKETITEM) {
+		qjackctlSocketItem *pSocket = (qjackctlSocketItem *) pItem;
+		QToolTip::tip(rect, pSocket->clientName());
+	} else {
+		qjackctlPlugItem *pPlug = (qjackctlPlugItem *) pItem;
+		QToolTip::tip(rect, pPlug->plugName());
+	}
+}
+
+
 //----------------------------------------------------------------------
 // class qjackctlPlugItem -- Socket plug list item.
 //
@@ -748,6 +780,8 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
     m_iAutoOpenTimeout = 0;
     m_pDragDropItem    = 0;
     
+	m_pToolTip = new qjackctlPatchbayToolTip(this);
+
     if (bReadable)
         QListView::addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
     else
@@ -765,6 +799,8 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
     
     QListView::setSorting(-1);
 
+	QListView::setShowToolTips(false);
+    
     setAutoOpenTimeout(800);
 }
 
@@ -772,6 +808,8 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
 qjackctlSocketListView::~qjackctlSocketListView (void)
 {
     setAutoOpenTimeout(0);
+
+	delete m_pToolTip;
 }
 
 
