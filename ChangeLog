@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.13   2004-11-06  Retouches and minor optimizations.
+0.2.13   2004-11-11  Retouches and minor optimizations.
 
 - Main window is now properly minimized instead of simply hidden when
   the system tray icon is not available nor opted in (as suggested
@@ -22,6 +22,8 @@ ChangeLog
 - Support for maximum scheduling delay status added (EXPERIMENTAL);
   this relies on jack_get_max_delayed_usecs() function availability at
   configure time, depending on a Lee Revell's non-official JACK patch.
+
+- Patchbay Activate button is now a toggle button widget.
 
 - Preset selection has been added to the context menu.
 

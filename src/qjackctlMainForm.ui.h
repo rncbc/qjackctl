@@ -1013,6 +1013,9 @@ bool qjackctlMainForm::isActivePatchbay ( const QString& sPatchbayPath )
 // Force update of active patchbay definition profile, if applicable.
 void qjackctlMainForm::updateActivePatchbay (void)
 {
+    if (m_pSetup == NULL)
+        return;
+
     // Time to load the active patchbay rack profiler?
     if (m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty()) {
         if (!qjackctlPatchbayFile::load(&m_patchbayRack, m_pSetup->sActivePatchbayPath)) {
@@ -1030,12 +1033,20 @@ void qjackctlMainForm::updateActivePatchbay (void)
     m_iPatchbayRefresh++;
 }
 
-// Force active patchbay setting.
-void qjackctlMainForm::activatePatchbay ( const QString& sPatchbayPath )
+// Toggle active patchbay setting.
+void qjackctlMainForm::toggleActivePatchbay ( const QString& sPatchbayPath )
 {
+    if (m_pSetup == NULL)
+        return;
+        
     if (!sPatchbayPath.isEmpty()) {
-        m_pSetup->bActivePatchbay = true;
-        m_pSetup->sActivePatchbayPath = sPatchbayPath;
+        // If already exactly active, deactivate it.
+        if (m_pSetup->bActivePatchbay && m_pSetup->sActivePatchbayPath == sPatchbayPath) {
+            m_pSetup->bActivePatchbay = false;
+        } else {
+            m_pSetup->bActivePatchbay = true;
+            m_pSetup->sActivePatchbayPath = sPatchbayPath;
+        }
     }
     updateActivePatchbay();
 }
@@ -1076,6 +1087,9 @@ void qjackctlMainForm::resetXrunStats (void)
     refreshXrunStats();
 
     appendMessages(tr("Statistics reset."));
+
+    // Make sure all status(es) will be updated ASAP.
+    m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
 }
 
 

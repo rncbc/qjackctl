@@ -128,15 +128,18 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     SavePatchbayPushButton->setEnabled(PatchbayView->dirty());
     ActivatePatchbayPushButton->setEnabled(QFileInfo(m_sPatchbayPath).exists());
 
+    bool bActive = false;
     QString sText = m_sPatchbayName;
     if (PatchbayView->dirty()) {
         sText += " [" + tr("modified") + "]";
     } else {
         qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-        if (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath))
+        bActive = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
+        if (bActive)
             sText += " [" + tr("active") + "]";
     }
     PatchbayTextLabel->setText(sText);
+    ActivatePatchbayPushButton->setOn(bActive);
 
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
@@ -305,7 +308,7 @@ void qjackctlPatchbayForm::savePatchbay()
 
 
 // Set current active patchbay definition file.
-void qjackctlPatchbayForm::activatePatchbay()
+void qjackctlPatchbayForm::toggleActivePatchbay()
 {
     // Check if we're going to discard safely the current one...
     if (!queryClose())
@@ -314,7 +317,7 @@ void qjackctlPatchbayForm::activatePatchbay()
     // Activate it...
     qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
-        pMainForm->activatePatchbay(m_sPatchbayPath);
+        pMainForm->toggleActivePatchbay(m_sPatchbayPath);
 }
 
 

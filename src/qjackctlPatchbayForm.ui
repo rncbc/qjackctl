@@ -198,6 +198,9 @@
                     <property name="autoDefault">
                         <bool>false</bool>
                     </property>
+                    <property name="toggleButton">
+                        <bool>true</bool>
+                    </property>
                     <property name="iconSet">
                         <iconset>apply1.png</iconset>
                     </property>
@@ -205,7 +208,7 @@
                         <bool>true</bool>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string>Activate current patchbay profile</string>
+                        <string>Toggle activation of current patchbay profile</string>
                     </property>
                 </widget>
             </hbox>
@@ -719,7 +722,7 @@
         <sender>ActivatePatchbayPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlPatchbayForm</receiver>
-        <slot>activatePatchbay()</slot>
+        <slot>toggleActivePatchbay()</slot>
     </connection>
     <connection>
         <sender>OSocketAddPushButton</sender>
@@ -845,7 +848,7 @@
     <slot specifier="non virtual">newPatchbay()</slot>
     <slot specifier="non virtual">loadPatchbay()</slot>
     <slot specifier="non virtual">savePatchbay()</slot>
-    <slot specifier="non virtual">activatePatchbay()</slot>
+    <slot specifier="non virtual">toggleActivePatchbay()</slot>
     <slot specifier="non virtual">addOSocket()</slot>
     <slot specifier="non virtual">removeOSocket()</slot>
     <slot specifier="non virtual">editOSocket()</slot>
