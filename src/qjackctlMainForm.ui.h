@@ -278,7 +278,7 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
     sTemp.replace("%r", QString::number(m_preset.iSampleRate));
     sTemp.replace("%p", QString::number(m_preset.iFrames));
     sTemp.replace("%n", QString::number(m_preset.iPeriods));
-    
+
     appendMessages(sStartMessage);
     appendMessagesColor(sTemp.stripWhiteSpace(), "#990099");
     QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
@@ -321,6 +321,7 @@ void qjackctlMainForm::startJack (void)
 
     sTemp = (m_bJackDetach ? tr("Activating") : tr("Starting"));
     setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
+    ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(false);
 
@@ -330,8 +331,11 @@ void qjackctlMainForm::startJack (void)
     m_iJackRefresh = 0;
 
     // If we ain't to be the server master...
-    if (m_bJackDetach)
+    if (m_bJackDetach) {
+        StopPushButton->setEnabled(true);
+        startJackClient(false);
         return;
+    }
 
     // Load primary/default server preset...
     if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
@@ -562,6 +566,7 @@ void qjackctlMainForm::processJackExit (void)
     else
         sTemp = tr("Stopped");
     setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
+    ServerStateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(m_pJackClient == NULL);
     StopPushButton->setEnabled(m_pJackClient != NULL);
@@ -672,7 +677,7 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
     QToolTip::remove(TransportTimeTextLabel);
 
     QString sTimeDisplay   = tr("Transport BBT (bar:beat.ticks)");
-    QString sTransportTime = tr("Transport time (hh:mm:ss)");
+    QString sTransportTime = tr("Transport time (hh:mm:ss.ddd)");
 
     switch (m_pSetup->iTimeDisplay) {
     case DISPLAY_TRANSPORT_TIME:
@@ -1289,7 +1294,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // Remember to schedule an initial connection refreshment.
     refreshConnections();
 
-    // Displayes are highlighted from now on.
+    // All displays are highlighted from now on.
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
     CpuLoadTextLabel->setPaletteForegroundColor(Qt::yellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
@@ -1362,7 +1367,6 @@ void qjackctlMainForm::stopJackClient (void)
     m_iShutNotify = 0;
 
     // Displays are deemed again.
-    ServerStateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     CpuLoadTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
@@ -1542,9 +1546,10 @@ void qjackctlMainForm::transportStop()
 // Almost-complete running status refresher.
 void qjackctlMainForm::refreshStatus (void)
 {
-    QString n = "--";
-    QString t = "--:--:--";
-    QString sStopped = tr("Stopped");
+    const QString n = "--";
+    const QString t = "--:--:--";
+    const QString tt = t + ".---";
+    const QString sStopped = tr("Stopped");
 
     if (m_pJackClient) {
         QString s = " ";
@@ -1576,11 +1581,24 @@ void qjackctlMainForm::refreshStatus (void)
                 break;
         }
         updateStatus(STATUS_TRANSPORT_STATE, sText);
-        // Transport timecode position (hh:mm:ss).
-    //  if (bPlaying)
-            updateStatus(STATUS_TRANSPORT_TIME, formatTime((int) (tpos.frame / tpos.frame_rate)));
-    //  else
-    //      updateStatus(STATUS_TRANSPORT_TIME, t);
+        // Transport timecode position (hh:mm:ss.ddd).
+    //  if (bPlaying) {
+    //      updateStatus(STATUS_TRANSPORT_TIME, formatTime((int) (tpos.frame / tpos.frame_rate)));
+            char szText[13];
+            unsigned int hh, mm, ss;
+            unsigned int ddd;
+            double ts = (double) tpos.frame / (double) tpos.frame_rate;
+            hh  = (unsigned int) (ts / 3600.0);
+            ts -= (double) (hh * 3600.0);
+            mm  = (unsigned int) (ts / 60.0);
+            ts -= (double) (mm * 60.0);
+            ss  = (unsigned int) ts;
+            ts -= (double) ss;
+            ddd = (unsigned int) (ts * 100.0);
+            snprintf(szText, sizeof(szText), "%02u:%02u:%02u.%03u", hh, mm, ss, ddd);
+            updateStatus(STATUS_TRANSPORT_TIME, szText);
+    //  }
+    //  else updateStatus(STATUS_TRANSPORT_TIME, tt);
         // Transport barcode position (bar:beat.tick)
         if (tpos.valid & JackPositionBBT) {
             updateStatus(STATUS_TRANSPORT_BBT, QString::number(tpos.bar) + ":" + QString::number(tpos.beat) + "." + QString::number(tpos.tick));
@@ -1593,7 +1611,7 @@ void qjackctlMainForm::refreshStatus (void)
         PausePushButton->setEnabled(bPlaying);
 #else   // !CONFIG_JACK_TRANSPORT
         updateStatus(STATUS_TRANSPORT_STATE, n);
-        updateStatus(STATUS_TRANSPORT_TIME, t);
+        updateStatus(STATUS_TRANSPORT_TIME, tt);
         updateStatus(STATUS_TRANSPORT_BBT, t);
         updateStatus(STATUS_TRANSPORT_BPM, n);
         PlayPushButton->setEnabled(false);
@@ -1605,7 +1623,7 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatus(STATUS_BUFFER_SIZE, n);
         updateStatus(STATUS_REALTIME, n);
         updateStatus(STATUS_TRANSPORT_STATE, n);
-        updateStatus(STATUS_TRANSPORT_TIME, t);
+        updateStatus(STATUS_TRANSPORT_TIME, tt);
         updateStatus(STATUS_TRANSPORT_BBT, t);
         updateStatus(STATUS_TRANSPORT_BPM, n);
         PlayPushButton->setEnabled(false);

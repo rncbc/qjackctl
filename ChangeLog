@@ -3,10 +3,15 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.2   2004-01-09  Yet more minor bugfixes.
+0.2.2   2004-01-15  Yet more minor bugfixes.
+
+- Transport time is now shown with hundreths of second (hh:mm:ss.ddd),
+  as it was once before but not constant zero.
 
 - Client start delay now configurable on setup; this may be of help for
   slow machines or unusual long server driver startups (e.g. portaudio).
+
+- Client-only mode restart has been fixed.
 
 - Messages color retouching.
 
@@ -16,7 +21,7 @@ ChangeLog
 0.2.1   2003-12-29  The fix of fixes.
 
 - Fixed jackstart/jackd command line parameter argument concatenation.
-  
+
 - Front panel status display font can now be customized.
 
 - Some connection graph changes were being silently missed, now fixed.
