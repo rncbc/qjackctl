@@ -690,7 +690,7 @@ void qjackctlConnectorView::drawConnections (void)
     h1 = ((m_pConnectView->OListView())->header())->sectionRect(0).height();
     h2 = ((m_pConnectView->IListView())->header())->sectionRect(0).height();
     // about some specialty line width...
-    w = m_pConnectView->iconSize() + 1;
+    w = m_pConnectView->iconSize();
     if (w < 2)
         w = 0;
     // For each client item...

@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.12   2004-09-25  Larger icons and font option on connections/patchbay.
+0.2.12   2004-09-26  Larger icons and font option on connections/patchbay.
 
 - Connection line width follows icon size in discrete proportion.
 
