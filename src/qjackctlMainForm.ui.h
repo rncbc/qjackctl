@@ -54,10 +54,11 @@ static int g_fdShut[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 // To have clue about current buffer size (in frames).
 static jack_nframes_t g_nframes = 0;
 
-
 // Kind of constructor.
 void qjackctlMainForm::init (void)
 {
+    m_pSetup      = NULL;
+
     m_pJack       = NULL;
     m_pJackClient = NULL;
     m_bJackDetach = false;
@@ -67,7 +68,7 @@ void qjackctlMainForm::init (void)
     m_iDirtyCount = 0;
 
     m_pStdoutNotifier = NULL;
-    
+
     m_pPortNotifier = NULL;
     m_pXrunNotifier = NULL;
     m_pBuffNotifier = NULL;
@@ -96,35 +97,6 @@ void qjackctlMainForm::init (void)
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const char *,const char*,unsigned int)),
         this, SLOT(cableConnectSlot(const char *,const char*,unsigned int)));
 
-    // Load any saved profile settings and options.
-    m_setup.load();
-    // Try to restore old window positioning.
-    m_setup.loadWidgetGeometry(this);
-    // And for the whole widget gallore...
-    m_setup.loadWidgetGeometry(m_pMessagesForm);
-    m_setup.loadWidgetGeometry(m_pStatusForm);
-    m_setup.loadWidgetGeometry(m_pConnectionsForm);
-    m_setup.loadWidgetGeometry(m_pPatchbayForm);
-
-    // Initial XRUN statistics reset.
-    resetXrunStats();
-
-    // Set defaults...
-    updateMessagesFont();
-    updateTimeDisplayToolTips();
-    updateActivePatchbay();
-
-    // Load patchbay from default path.
-    if (m_pPatchbayForm && !m_setup.sPatchbayPath.isEmpty())
-        m_pPatchbayForm->loadPatchbayFile(m_setup.sPatchbayPath);
-
-    // Try to find if we can start in detached mode (client-only)
-    // just in case there's a JACK server already running.
-    m_bJackDetach = startJackClient(true);
-    // Final startup stabilization...
-    stabilizeForm();
-    processJackExit();
-
     // Register the timer slot.
     QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     // Our timer is standard.
@@ -138,11 +110,49 @@ void qjackctlMainForm::destroy (void)
     // Stop server, if not already...
     stopJack();
 
-    // Save profile settings and options.
-    m_setup.save();
-
     // Kill timer.
     delete m_pTimer;
+}
+
+
+// Make and set a proper setup step.
+void qjackctlMainForm::setup ( qjackctlSetup *pSetup )
+{
+    // Finally, fix settings descriptor
+    // and stabilize the form.
+    m_pSetup = pSetup;
+
+    // Try to restore old window positioning.
+    m_pSetup->loadWidgetGeometry(this);
+    // And for the whole widget gallore...
+    m_pSetup->loadWidgetGeometry(m_pMessagesForm);
+    m_pSetup->loadWidgetGeometry(m_pStatusForm);
+    m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
+    m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
+
+    // Initial XRUN statistics reset.
+    resetXrunStats();
+
+    // Set defaults...
+    updateMessagesFont();
+    updateTimeDisplayToolTips();
+    updateActivePatchbay();
+
+    // Load patchbay from default path.
+    if (m_pPatchbayForm && !m_pSetup->sPatchbayPath.isEmpty())
+        m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
+
+    // Look for immediate startup?...
+    if (m_pSetup->bStartJack) {
+        startJack();
+    } else {
+        // Try to find if we can start in detached mode (client-only)
+        // just in case there's a JACK server already running.
+        m_bJackDetach = startJackClient(true);
+        // Final startup stabilization...
+        stabilizeForm();
+        processJackExit();
+    }
 }
 
 
@@ -151,7 +161,7 @@ bool qjackctlMainForm::queryClose (void)
 {
     bool bQueryClose = true;
 
-    if (m_pJack && m_pJack->isRunning() && m_setup.bQueryClose) {
+    if (m_pJack && m_pJack->isRunning() && m_pSetup->bQueryClose) {
         bQueryClose = (QMessageBox::warning(this, tr("Warning"),
             tr("JACK is currently running.") + "\n\n" +
             tr("Closing this application will also terminate the JACK audio server."),
@@ -162,20 +172,20 @@ bool qjackctlMainForm::queryClose (void)
     if (bQueryClose && m_pPatchbayForm) {
         bQueryClose = m_pPatchbayForm->queryClose();
         if (bQueryClose && !m_pPatchbayForm->patchbayPath().isEmpty())
-            m_setup.sPatchbayPath = m_pPatchbayForm->patchbayPath();
+            m_pSetup->sPatchbayPath = m_pPatchbayForm->patchbayPath();
     }
 
     // Some windows default fonts is here on demeand too.
     if (bQueryClose && m_pMessagesForm)
-        m_setup.sMessagesFont = m_pMessagesForm->messagesFont().toString();
+        m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
 
     // Try to save current positioning.
     if (bQueryClose) {
-        m_setup.saveWidgetGeometry(m_pMessagesForm);
-        m_setup.saveWidgetGeometry(m_pStatusForm);
-        m_setup.saveWidgetGeometry(m_pConnectionsForm);
-        m_setup.saveWidgetGeometry(m_pPatchbayForm);
-        m_setup.saveWidgetGeometry(this);
+        m_pSetup->saveWidgetGeometry(m_pMessagesForm);
+        m_pSetup->saveWidgetGeometry(m_pStatusForm);
+        m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
+        m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
+        m_pSetup->saveWidgetGeometry(this);
     }
 
     return bQueryClose;
@@ -209,15 +219,25 @@ QString qjackctlMainForm::formatExitStatus ( int iExitStatus )
 }
 
 
-// Common shell executive...
+// Common shell script executive, with placeholder substitution...
 void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QString& sStartMessage, const QString& sStopMessage )
 {
+    QString sTemp = sShellCommand;
+
+    sTemp.replace("%P", m_pSetup->sDefPreset);
+
+    sTemp.replace("%s", m_preset.sServer);
+    sTemp.replace("%d", m_preset.sDriver);
+    sTemp.replace("%i", m_preset.sInterface);
+    sTemp.replace("%r", QString::number(m_preset.iSampleRate));
+    sTemp.replace("%p", QString::number(m_preset.iFrames));
+    sTemp.replace("%n", QString::number(m_preset.iPeriods));
+    
     appendMessages(sStartMessage);
-    QString sTemp = "[" + sShellCommand;
-    appendMessages(sTemp.stripWhiteSpace() + "]");
+    appendMessages("[" + sTemp.stripWhiteSpace() + "]");
     QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
     // Execute and set exit status message...
-    sTemp = sStopMessage + formatExitStatus(::system(sShellCommand));
+    sTemp = sStopMessage + formatExitStatus(::system(sTemp));
    // Wait a litle bit (~half-second) before continue...
     QTime t;
     t.start();
@@ -266,9 +286,15 @@ void qjackctlMainForm::startJack (void)
     if (m_bJackDetach)
         return;
 
+    // LOad default server preset...
+    if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
+        appendMessagesError(tr("Could not load default preset. Sorry."));
+        return;
+    }
+
     // Do we have any startup script?...
-    if (m_setup.bStartupScript && !m_setup.sStartupScriptShell.isEmpty())
-        shellExecute(m_setup.sStartupScriptShell, tr("Startup script..."), tr("Startup script terminated"));
+    if (m_pSetup->bStartupScript && !m_pSetup->sStartupScriptShell.isEmpty())
+        shellExecute(m_pSetup->sStartupScriptShell, tr("Startup script..."), tr("Startup script terminated"));
 
     // OK. Let's build the startup process...
     m_pJack = new QProcess(this);
@@ -281,20 +307,20 @@ void qjackctlMainForm::startJack (void)
     QObject::connect(m_pJack, SIGNAL(processExited()),   this, SLOT(processJackExit()));
 
     // Build process arguments...
-    m_pJack->addArgument(m_setup.sServer);
-    if (m_setup.bVerbose)
+    m_pJack->addArgument(m_preset.sServer);
+    if (m_preset.bVerbose)
         m_pJack->addArgument("-v");
-    if (m_setup.bRealtime)
+    if (m_preset.bRealtime)
         m_pJack->addArgument("-R");
-    if (m_setup.iPriority > 0) {
+    if (m_preset.iPriority > 0) {
         m_pJack->addArgument("-P");
-        m_pJack->addArgument(QString::number(m_setup.iPriority));
+        m_pJack->addArgument(QString::number(m_preset.iPriority));
     }
-    if (m_setup.iTimeout > 0) {
+    if (m_preset.iTimeout > 0) {
         m_pJack->addArgument("-t");
-        m_pJack->addArgument(QString::number(m_setup.iTimeout));
+        m_pJack->addArgument(QString::number(m_preset.iTimeout));
     }
-    sTemp = m_setup.sDriver;
+    sTemp = m_preset.sDriver;
     m_pJack->addArgument("-d");
     m_pJack->addArgument(sTemp);
     bool bDummy     = (sTemp == "dummy");
@@ -302,41 +328,41 @@ void qjackctlMainForm::startJack (void)
     bool bPortaudio = (sTemp == "portaudio");
     if (bAlsa) {
         m_pJack->addArgument("-d");
-        m_pJack->addArgument(m_setup.sInterface);
+        m_pJack->addArgument(m_preset.sInterface);
     }
-    if (bPortaudio && m_setup.iChan > 0) {
+    if (bPortaudio && m_preset.iChan > 0) {
         m_pJack->addArgument("-c");
-        m_pJack->addArgument(QString::number(m_setup.iChan));
+        m_pJack->addArgument(QString::number(m_preset.iChan));
     }
-    if (m_setup.iSampleRate > 0) {
+    if (m_preset.iSampleRate > 0) {
         m_pJack->addArgument("-r");
-        m_pJack->addArgument(QString::number(m_setup.iSampleRate));
+        m_pJack->addArgument(QString::number(m_preset.iSampleRate));
     }
-    if (m_setup.iFrames > 0) {
+    if (m_preset.iFrames > 0) {
         m_pJack->addArgument("-p");
-        m_pJack->addArgument(QString::number(m_setup.iFrames));
+        m_pJack->addArgument(QString::number(m_preset.iFrames));
     }
     if (bAlsa) {
-        if (m_setup.iPeriods > 0) {
+        if (m_preset.iPeriods > 0) {
             m_pJack->addArgument("-n");
-            m_pJack->addArgument(QString::number(m_setup.iPeriods));
+            m_pJack->addArgument(QString::number(m_preset.iPeriods));
         }
-        if (m_setup.bSoftMode)
+        if (m_preset.bSoftMode)
             m_pJack->addArgument("-s");
-        if (m_setup.bMonitor)
+        if (m_preset.bMonitor)
             m_pJack->addArgument("-m");
-        if (m_setup.bShorts)
+        if (m_preset.bShorts)
             m_pJack->addArgument("-S");
-        if (m_setup.iInChannels > 0) {
+        if (m_preset.iInChannels > 0) {
             m_pJack->addArgument("-i");
-            m_pJack->addArgument(QString::number(m_setup.iInChannels));
+            m_pJack->addArgument(QString::number(m_preset.iInChannels));
         }
-        if (m_setup.iOutChannels > 0) {
+        if (m_preset.iOutChannels > 0) {
             m_pJack->addArgument("-o");
-            m_pJack->addArgument(QString::number(m_setup.iOutChannels));
+            m_pJack->addArgument(QString::number(m_preset.iOutChannels));
         }
     }
-    switch (m_setup.iAudio) {
+    switch (m_preset.iAudio) {
     case 0:
     //  m_pJack->addArgument("-D");
         break;
@@ -347,12 +373,12 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument("-P");
         break;
     }
-    if (bDummy && m_setup.iWait > 0) {
+    if (bDummy && m_preset.iWait > 0) {
         m_pJack->addArgument("-w");
-        m_pJack->addArgument(QString::number(m_setup.iWait));
+        m_pJack->addArgument(QString::number(m_preset.iWait));
     }
     if (!bDummy) {
-        switch (m_setup.iDither) {
+        switch (m_preset.iDither) {
         case 0:
         //  m_pJack->addArgument("-z-");
             break;
@@ -368,9 +394,9 @@ void qjackctlMainForm::startJack (void)
         }
     }
     if (bAlsa) {
-        if (m_setup.bHWMon)
+        if (m_preset.bHWMon)
             m_pJack->addArgument("-H");
-        if (m_setup.bHWMeter)
+        if (m_preset.bHWMeter)
             m_pJack->addArgument("-M");
     }
 
@@ -464,8 +490,8 @@ void qjackctlMainForm::processJackExit (void)
             m_pJack->kill();
         delete m_pJack;
         // Do we have any shutdown script?...
-        if (m_setup.bShutdownScript && !m_setup.sShutdownScriptShell.isEmpty())
-            shellExecute(m_setup.sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
+        if (m_pSetup->bShutdownScript && !m_pSetup->sShutdownScriptShell.isEmpty())
+            shellExecute(m_pSetup->sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
     }
     m_pJack = NULL;
 
@@ -486,12 +512,12 @@ void qjackctlMainForm::processJackExit (void)
 // XRUN detection routine.
 QString& qjackctlMainForm::detectXrun( QString & s )
 {
-    QRegExp rx(m_setup.sXrunRegex);
+    QRegExp rx(m_pSetup->sXrunRegex);
     int iPos = rx.search(s);
     if (iPos >= 0) {
         s.insert(iPos + rx.matchedLength(), "</font>");
         s.insert(iPos, "<font color=\"#cc0000\">");
-        if (m_iXrunStats > 0 || !m_setup.bXrunIgnoreFirst) {
+        if (m_iXrunStats > 0 || !m_pSetup->bXrunIgnoreFirst) {
             m_tXrunLast   = QTime::currentTime();
             m_fXrunLast   = rx.cap(1).toFloat();
             m_fXrunTotal += m_fXrunLast;
@@ -551,9 +577,9 @@ void qjackctlMainForm::appendMessagesError( const QString& s )
 // Force update of the messages font.
 void qjackctlMainForm::updateMessagesFont (void)
 {
-    if (m_pMessagesForm && !m_setup.sMessagesFont.isEmpty()) {
+    if (m_pMessagesForm && !m_pSetup->sMessagesFont.isEmpty()) {
         QFont font;
-        if (font.fromString(m_setup.sMessagesFont))
+        if (font.fromString(m_pSetup->sMessagesFont))
             m_pMessagesForm->setMessagesFont(font);
     }
 }
@@ -568,7 +594,7 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
     QString sTimeDisplay   = tr("Transport BBT (bar:beat.ticks)");
     QString sTransportTime = tr("Transport time (hh:mm:ss)");
 
-    switch (m_setup.iTimeDisplay) {
+    switch (m_pSetup->iTimeDisplay) {
     case DISPLAY_TRANSPORT_TIME:
     {
         QString sTemp  = sTimeDisplay;
@@ -594,8 +620,8 @@ bool qjackctlMainForm::isActivePatchbay ( const QString& sPatchbayPath )
 {
     bool bActive = false;
 
-    if (m_setup.bActivePatchbay && !m_setup.sActivePatchbayPath.isEmpty())
-        bActive = (m_setup.sActivePatchbayPath == sPatchbayPath);
+    if (m_pSetup && m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty())
+        bActive = (m_pSetup->sActivePatchbayPath == sPatchbayPath);
 
     return bActive;
 }
@@ -605,10 +631,10 @@ bool qjackctlMainForm::isActivePatchbay ( const QString& sPatchbayPath )
 void qjackctlMainForm::updateActivePatchbay (void)
 {
     // Time to load the active patchbay rack profiler?
-    if (m_setup.bActivePatchbay && !m_setup.sActivePatchbayPath.isEmpty()) {
-        if (!qjackctlPatchbayFile::load(&m_patchbayRack, m_setup.sActivePatchbayPath)) {
+    if (m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty()) {
+        if (!qjackctlPatchbayFile::load(&m_patchbayRack, m_pSetup->sActivePatchbayPath)) {
             appendMessagesError(tr("Could not load active patchbay definition. Disabled."));
-            m_setup.bActivePatchbay = false;
+            m_pSetup->bActivePatchbay = false;
         }   // If we're up and running, make it dirty :)
         else if (m_pJackClient) {
             m_iDirtyCount++;
@@ -620,8 +646,8 @@ void qjackctlMainForm::updateActivePatchbay (void)
 void qjackctlMainForm::activatePatchbay ( const QString& sPatchbayPath )
 {
     if (!sPatchbayPath.isEmpty()) {
-        m_setup.bActivePatchbay = true;
-        m_setup.sActivePatchbayPath = sPatchbayPath;
+        m_pSetup->bActivePatchbay = true;
+        m_pSetup->sActivePatchbayPath = sPatchbayPath;
     }
     updateActivePatchbay();
 }
@@ -702,8 +728,8 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem, const QTime& t, b
     }
 
     // Display elapsed time as big time?
-    if ((iStatusItem == STATUS_RESET_TIME && m_setup.iTimeDisplay == DISPLAY_RESET_TIME) ||
-        (iStatusItem == STATUS_XRUN_TIME  && m_setup.iTimeDisplay == DISPLAY_XRUN_TIME)) {
+    if ((iStatusItem == STATUS_RESET_TIME && m_pSetup->iTimeDisplay == DISPLAY_RESET_TIME) ||
+        (iStatusItem == STATUS_XRUN_TIME  && m_pSetup->iTimeDisplay == DISPLAY_XRUN_TIME)) {
         TimeDisplayTextLabel->setText(sTemp);
     }
 
@@ -907,14 +933,14 @@ void qjackctlMainForm::timerSlot (void)
         // Are we about to enforce a connections persistence profile?
         if (m_iDirtyCount > 0) {
             m_iDirtyCount = 0;
-            if (m_setup.bActivePatchbay) {
+            if (m_pSetup->bActivePatchbay) {
                 appendMessagesColor(tr("Active patchbay scan") + "...", "#6699cc");
                 m_patchbayRack.connectScan(m_pJackClient);
                 refreshConnections();
             }
         }
         // Shall we refresh connections now and then?
-        if (m_setup.bAutoRefresh && (m_iTimerSlot % m_setup.iTimeRefresh) == 0)
+        if (m_pSetup->bAutoRefresh && (m_iTimerSlot % m_pSetup->iTimeRefresh) == 0)
             refreshConnections();
         // Are we about to refresh it, really?
         if (m_iRefresh > 0) {
@@ -941,7 +967,7 @@ void qjackctlMainForm::connectChangedSlot (void)
 // Cable connection notification slot.
 void qjackctlMainForm::cableConnectSlot ( const char *pszOutputPort, const char *pszInputPort, unsigned int ulCableFlags )
 {
-    QString sText = QFileInfo(m_setup.sActivePatchbayPath).baseName() + ": ";
+    QString sText = QFileInfo(m_pSetup->sActivePatchbayPath).baseName() + ": ";
     QString sColor;
 
     sText += pszOutputPort;
@@ -1124,8 +1150,8 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // Do we have any post-startup scripting?...
     // (only if we're not a detached client)
-    if (!bDetach && !m_bJackDetach && m_setup.bPostStartupScript && !m_setup.sPostStartupScriptShell.isEmpty())
-        shellExecute(m_setup.sPostStartupScriptShell, tr("Post-startup script..."), tr("Post-startup script terminated"));
+    if (!bDetach && !m_bJackDetach && m_pSetup->bPostStartupScript && !m_pSetup->sPostStartupScriptShell.isEmpty())
+        shellExecute(m_pSetup->sPostStartupScriptShell, tr("Post-startup script..."), tr("Post-startup script terminated"));
 
     return true;
 }
@@ -1197,7 +1223,7 @@ void qjackctlMainForm::refreshConnections (void)
 void qjackctlMainForm::toggleMessagesForm (void)
 {
     if (m_pMessagesForm) {
-        m_setup.saveWidgetGeometry(m_pMessagesForm);
+        m_pSetup->saveWidgetGeometry(m_pMessagesForm);
         if (m_pMessagesForm->isVisible())
             m_pMessagesForm->hide();
         else
@@ -1210,7 +1236,7 @@ void qjackctlMainForm::toggleMessagesForm (void)
 void qjackctlMainForm::toggleStatusForm (void)
 {
     if (m_pStatusForm) {
-        m_setup.saveWidgetGeometry(m_pStatusForm);
+        m_pSetup->saveWidgetGeometry(m_pStatusForm);
         if (m_pStatusForm->isVisible())
             m_pStatusForm->hide();
         else
@@ -1223,7 +1249,7 @@ void qjackctlMainForm::toggleStatusForm (void)
 void qjackctlMainForm::toggleConnectionsForm (void)
 {
     if (m_pConnectionsForm) {
-        m_setup.saveWidgetGeometry(m_pConnectionsForm);
+        m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
         m_pConnectionsForm->setJackClient(m_pJackClient);
         if (m_pConnectionsForm->isVisible())
             m_pConnectionsForm->hide();
@@ -1237,7 +1263,7 @@ void qjackctlMainForm::toggleConnectionsForm (void)
 void qjackctlMainForm::togglePatchbayForm (void)
 {
     if (m_pPatchbayForm) {
-        m_setup.saveWidgetGeometry(m_pPatchbayForm);
+        m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
         m_pPatchbayForm->setJackClient(m_pJackClient);
         if (m_pPatchbayForm->isVisible())
             m_pPatchbayForm->hide();
@@ -1253,23 +1279,21 @@ void qjackctlMainForm::showSetupForm (void)
     qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
     if (pSetupForm) {
         // To track down immediate changes.
-        QString sOldMessagesFont       = m_setup.sMessagesFont;
-        int     iOldTimeDisplay        = m_setup.iTimeDisplay;
-        bool    bOldActivePatchbay     = m_setup.bActivePatchbay;
-        QString sOldActivePatchbayPath = m_setup.sActivePatchbayPath;
+        QString sOldMessagesFont       = m_pSetup->sMessagesFont;
+        int     iOldTimeDisplay        = m_pSetup->iTimeDisplay;
+        bool    bOldActivePatchbay     = m_pSetup->bActivePatchbay;
+        QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
         // Load the current setup settings.
-        pSetupForm->load(&m_setup);
+        pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
         if (pSetupForm->exec()) {
-            // Save the new setup settings.
-            pSetupForm->save(&m_setup);
             // Check wheather something immediate has changed.
-            if (sOldMessagesFont != m_setup.sMessagesFont)
+            if (sOldMessagesFont != m_pSetup->sMessagesFont)
                 updateMessagesFont();
-            if (iOldTimeDisplay |= m_setup.iTimeDisplay)
+            if (iOldTimeDisplay |= m_pSetup->iTimeDisplay)
                 updateTimeDisplayToolTips();
-            if ((!bOldActivePatchbay && m_setup.bActivePatchbay) ||
-                (sOldActivePatchbayPath != m_setup.sActivePatchbayPath))
+            if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||
+                (sOldActivePatchbayPath != m_pSetup->sActivePatchbayPath))
                 updateActivePatchbay();
         }
         delete pSetupForm;
@@ -1432,16 +1456,16 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
         TransportStateTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_TIME:
-        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_TIME)
+        if (m_pSetup->iTimeDisplay == DISPLAY_TRANSPORT_TIME)
             TimeDisplayTextLabel->setText(sText);
         else
             TransportTimeTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_BBT:
-        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_BBT)
+        if (m_pSetup->iTimeDisplay == DISPLAY_TRANSPORT_BBT)
             TimeDisplayTextLabel->setText(sText);
         else
-        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_TIME)
+        if (m_pSetup->iTimeDisplay == DISPLAY_TRANSPORT_TIME)
             TransportTimeTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_BPM:

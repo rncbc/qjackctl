@@ -26,18 +26,9 @@
 #include <qsettings.h>
 #include <qcombobox.h>
 
-
-// Common settings profile class.
-class qjackctlSetup
+// Server settings preset struct.
+struct qjackctlPreset
 {
-public:
-
-    // Constructor.
-    qjackctlSetup();
-    // destructor;
-    ~qjackctlSetup();
-    
-    // Settings...
     QString sServer;
     bool    bRealtime;
     bool    bSoftMode;
@@ -59,6 +50,30 @@ public:
     int     iInChannels;
     int     iOutChannels;
     bool    bVerbose;
+};
+
+// Common settings profile class.
+class qjackctlSetup
+{
+public:
+
+    // Constructor.
+    qjackctlSetup();
+    // destructor;
+    ~qjackctlSetup();
+
+    // Command line arguments parser.
+    bool parse_args(int argc, char **argv);
+    // Command line usage helper.
+    void print_usage(const char *arg0);
+
+    // Immediate server start option.
+    bool bStartJack;
+
+    // Current (default) preset name.
+    QString sDefPreset;
+    // Available presets list.
+    QStringList presets;
 
     // Options...
     bool    bStartupScript;
@@ -80,9 +95,10 @@ public:
     // Defaults...
     QString sPatchbayPath;
 
-    // Public I/O methods.
-    void load();
-    void save();
+    // Preset management methods.
+    bool loadPreset(qjackctlPreset& preset, const QString& sPreset);
+    bool savePreset(qjackctlPreset& preset, const QString& sPreset);
+    bool deletePreset(const QString& sPreset);
 
     // Combo box history persistence helper prototypes.
     void add2ComboBoxHistory(QComboBox *pComboBox, const QString& sNewText, int iLimit = 8, int iIndex = -1);
@@ -93,8 +109,10 @@ public:
     void saveWidgetGeometry(QWidget *pWidget);
     void loadWidgetGeometry(QWidget *pWidget);
 
+private:
+
     // Our proper settings profile.
-    QSettings settings;
+    QSettings m_settings;
 };
 
 

@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>518</width>
-            <height>369</height>
+            <width>532</width>
+            <height>387</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -116,11 +116,11 @@
                 <attribute name="title">
                     <string>Settings</string>
                 </attribute>
-                <vbox>
+                <grid>
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QGroupBox">
+                    <widget class="QGroupBox" row="1" column="0">
                         <property name="name">
                             <cstring>ServerDriverGroupBox</cstring>
                         </property>
@@ -152,7 +152,7 @@
                                     </font>
                                 </property>
                                 <property name="text">
-                                    <string>Ser&amp;ver Path:</string>
+                                    <string>Server &amp;Path:</string>
                                 </property>
                                 <property name="alignment">
                                     <set>AlignVCenter</set>
@@ -210,7 +210,7 @@
                                     </font>
                                 </property>
                                 <property name="text">
-                                    <string>&amp;Driver:</string>
+                                    <string>Driv&amp;er:</string>
                                 </property>
                                 <property name="alignment">
                                     <set>AlignVCenter|AlignRight</set>
@@ -252,7 +252,92 @@
                             </widget>
                         </hbox>
                     </widget>
-                    <widget class="QGroupBox">
+                    <widget class="QLayoutWidget" row="0" column="0">
+                        <property name="name">
+                            <cstring>layout7</cstring>
+                        </property>
+                        <hbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel">
+                                <property name="name">
+                                    <cstring>PresetTextLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Preset &amp;Name:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>PresetComboBox</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox">
+                                <item>
+                                    <property name="text">
+                                        <string>(default)</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>PresetComboBox</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Settings preset name</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>PresetSavePushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Save</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+S</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="iconSet">
+                                    <iconset>save1.png</iconset>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Save settings as current preset name</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>PresetDeletePushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Delete</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+D</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="iconSet">
+                                    <iconset>remove1.png</iconset>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Delete current settings preset</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                    <widget class="QGroupBox" row="2" column="0">
                         <property name="name">
                             <cstring>ParametersGroupBox</cstring>
                         </property>
@@ -274,7 +359,7 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLayoutWidget" row="0" column="5">
+                            <widget class="QLayoutWidget" row="0" column="4">
                                 <property name="name">
                                     <cstring>layout3</cstring>
                                 </property>
@@ -348,7 +433,10 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>A&amp;udio:</string>
+                                            <string>&amp;Audio:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>AudioComboBox</cstring>
@@ -364,10 +452,10 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>H/W Mo&amp;nitor</string>
+                                            <string>H/W M&amp;onitor</string>
                                         </property>
                                         <property name="accel">
-                                            <string>Alt+N</string>
+                                            <string>Alt+O</string>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Enable hardware monitoring of capture ports</string>
@@ -439,6 +527,9 @@
                                         <property name="text">
                                             <string>&amp;Timeout (msec):</string>
                                         </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>TimeoutComboBox</cstring>
                                         </property>
@@ -454,6 +545,9 @@
                                         </property>
                                         <property name="text">
                                             <string>Dit&amp;her:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>DitherComboBox</cstring>
@@ -517,113 +611,14 @@
                                         <property name="text">
                                             <string>&amp;Interface:</string>
                                         </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>InterfaceComboBox</cstring>
                                         </property>
                                     </widget>
                                 </grid>
-                            </widget>
-                            <widget class="QLayoutWidget" row="4" column="0" rowspan="1" colspan="6">
-                                <property name="name">
-                                    <cstring>layout7</cstring>
-                                </property>
-                                <property name="font">
-                                    <font>
-                                    </font>
-                                </property>
-                                <hbox>
-                                    <property name="name">
-                                        <cstring>unnamed</cstring>
-                                    </property>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>VerboseCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Verbose messages output</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+V</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Whether to give verbose output on messages</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QLabel">
-                                        <property name="name">
-                                            <cstring>LatencyTextLabel</cstring>
-                                        </property>
-                                        <property name="sizePolicy">
-                                            <sizepolicy>
-                                                <hsizetype>5</hsizetype>
-                                                <vsizetype>5</vsizetype>
-                                                <horstretch>0</horstretch>
-                                                <verstretch>0</verstretch>
-                                            </sizepolicy>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Latency:</string>
-                                        </property>
-                                        <property name="alignment">
-                                            <set>AlignVCenter|AlignRight</set>
-                                        </property>
-                                    </widget>
-                                    <widget class="QLabel">
-                                        <property name="name">
-                                            <cstring>LatencyTextValue</cstring>
-                                        </property>
-                                        <property name="sizePolicy">
-                                            <sizepolicy>
-                                                <hsizetype>1</hsizetype>
-                                                <vsizetype>5</vsizetype>
-                                                <horstretch>0</horstretch>
-                                                <verstretch>0</verstretch>
-                                            </sizepolicy>
-                                        </property>
-                                        <property name="minimumSize">
-                                            <size>
-                                                <width>60</width>
-                                                <height>0</height>
-                                            </size>
-                                        </property>
-                                        <property name="maximumSize">
-                                            <size>
-                                                <width>80</width>
-                                                <height>32767</height>
-                                            </size>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="frameShape">
-                                            <enum>StyledPanel</enum>
-                                        </property>
-                                        <property name="frameShadow">
-                                            <enum>Sunken</enum>
-                                        </property>
-                                        <property name="text">
-                                            <string>0</string>
-                                        </property>
-                                        <property name="alignment">
-                                            <set>AlignCenter</set>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Output latency in milliseconds, calculated based on the period, rate and buffer settings</string>
-                                        </property>
-                                    </widget>
-                                </hbox>
                             </widget>
                             <widget class="QLayoutWidget" row="0" column="0">
                                 <property name="name">
@@ -662,10 +657,10 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>Force 16&amp;bit</string>
+                                            <string>Force &amp;16bit</string>
                                         </property>
                                         <property name="accel">
-                                            <string>Alt+B</string>
+                                            <string>Alt+1</string>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Force 16bit mode instead of failing over 32bit (default)</string>
@@ -780,7 +775,7 @@
                                     </widget>
                                 </grid>
                             </widget>
-                            <widget class="QLayoutWidget" row="0" column="2" rowspan="1" colspan="2">
+                            <widget class="QLayoutWidget" row="0" column="2">
                                 <property name="name">
                                     <cstring>layout4</cstring>
                                 </property>
@@ -848,7 +843,10 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Periods/Buffer:</string>
+                                            <string>Periods/&amp;Buffer:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>PeriodsComboBox</cstring>
@@ -1008,6 +1006,9 @@
                                         <property name="text">
                                             <string>Priorit&amp;y:</string>
                                         </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>PriorityComboBox</cstring>
                                         </property>
@@ -1024,6 +1025,9 @@
                                         <property name="text">
                                             <string>&amp;Wait (usec):</string>
                                         </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>WaitComboBox</cstring>
                                         </property>
@@ -1039,6 +1043,9 @@
                                         </property>
                                         <property name="text">
                                             <string>&amp;Frames/Period:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>FramesComboBox</cstring>
@@ -1107,6 +1114,9 @@
                                         <property name="text">
                                             <string>Sample &amp;Rate:</string>
                                         </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>SampleRateComboBox</cstring>
                                         </property>
@@ -1130,7 +1140,7 @@
                                     </size>
                                 </property>
                             </spacer>
-                            <spacer row="0" column="4">
+                            <spacer row="0" column="3">
                                 <property name="name">
                                     <cstring>spacer22</cstring>
                                 </property>
@@ -1147,24 +1157,7 @@
                                     </size>
                                 </property>
                             </spacer>
-                            <spacer row="2" column="0" rowspan="1" colspan="3">
-                                <property name="name">
-                                    <cstring>spacer24</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>MinimumExpanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>170</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <spacer row="1" column="3">
+                            <spacer row="1" column="2">
                                 <property name="name">
                                     <cstring>spacer23</cstring>
                                 </property>
@@ -1181,7 +1174,115 @@
                                     </size>
                                 </property>
                             </spacer>
-                            <spacer row="3" column="3">
+                            <widget class="QLayoutWidget" row="4" column="0" rowspan="1" colspan="5">
+                                <property name="name">
+                                    <cstring>layout7</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                    </font>
+                                </property>
+                                <hbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>VerboseCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Verbose messages output</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+V</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to give verbose output on messages</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>LatencyTextLabel</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>5</hsizetype>
+                                                <vsizetype>5</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>NoFrame</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Plain</enum>
+                                        </property>
+                                        <property name="text">
+                                            <string>Latency:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>LatencyTextValue</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>1</hsizetype>
+                                                <vsizetype>5</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>60</width>
+                                                <height>0</height>
+                                            </size>
+                                        </property>
+                                        <property name="maximumSize">
+                                            <size>
+                                                <width>80</width>
+                                                <height>32767</height>
+                                            </size>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>StyledPanel</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Sunken</enum>
+                                        </property>
+                                        <property name="text">
+                                            <string>0</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignCenter</set>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Output latency in milliseconds, calculated based on the period, rate and buffer settings</string>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
+                            <spacer row="3" column="2">
                                 <property name="name">
                                     <cstring>spacer25</cstring>
                                 </property>
@@ -1198,9 +1299,9 @@
                                     </size>
                                 </property>
                             </spacer>
-                            <widget class="QLayoutWidget" row="2" column="3" rowspan="1" colspan="3">
+                            <widget class="QLayoutWidget" row="2" column="0" rowspan="1" colspan="5">
                                 <property name="name">
-                                    <cstring>layout16</cstring>
+                                    <cstring>layout8</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
@@ -1238,6 +1339,23 @@
                                             <string>Maximum input audio hardware channels to allocate</string>
                                         </property>
                                     </widget>
+                                    <spacer>
+                                        <property name="name">
+                                            <cstring>spacer24</cstring>
+                                        </property>
+                                        <property name="orientation">
+                                            <enum>Horizontal</enum>
+                                        </property>
+                                        <property name="sizeType">
+                                            <enum>MinimumExpanding</enum>
+                                        </property>
+                                        <property name="sizeHint">
+                                            <size>
+                                                <width>120</width>
+                                                <height>8</height>
+                                            </size>
+                                        </property>
+                                    </spacer>
                                     <widget class="QLabel">
                                         <property name="name">
                                             <cstring>OutChannelsTextLabel</cstring>
@@ -1251,7 +1369,7 @@
                                             <string>&amp;Output Channels:</string>
                                         </property>
                                         <property name="buddy" stdset="0">
-                                            <cstring>InChannelsSpinBox</cstring>
+                                            <cstring>OutChannelsSpinBox</cstring>
                                         </property>
                                     </widget>
                                     <widget class="QSpinBox">
@@ -1274,7 +1392,7 @@
                             </widget>
                         </grid>
                     </widget>
-                </vbox>
+                </grid>
             </widget>
             <widget class="QWidget">
                 <property name="name">
@@ -1392,7 +1510,46 @@
                             </widget>
                             <widget class="QPushButton" row="0" column="2">
                                 <property name="name">
-                                    <cstring>StartupScriptPushButton</cstring>
+                                    <cstring>StartupScriptSymbolPushButton</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&gt;</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Scripting argument meta-symbols</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="0" column="3">
+                                <property name="name">
+                                    <cstring>StartupScriptBrowsePushButton</cstring>
                                 </property>
                                 <property name="sizePolicy">
                                     <sizepolicy>
@@ -1421,6 +1578,9 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed before starting up the JACK audio server</string>
@@ -1452,7 +1612,46 @@
                             </widget>
                             <widget class="QPushButton" row="1" column="2">
                                 <property name="name">
-                                    <cstring>PostStartupScriptPushButton</cstring>
+                                    <cstring>PostStartupScriptSymbolPushButton</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&gt;</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Scripting argument meta-symbols</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="1" column="3">
+                                <property name="name">
+                                    <cstring>PostStartupScriptBrowsePushButton</cstring>
                                 </property>
                                 <property name="sizePolicy">
                                     <sizepolicy>
@@ -1481,6 +1680,9 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed after starting up the JACK audio server</string>
@@ -1488,7 +1690,46 @@
                             </widget>
                             <widget class="QPushButton" row="2" column="2">
                                 <property name="name">
-                                    <cstring>ShutdownScriptPushButton</cstring>
+                                    <cstring>ShutdownScriptSymbolPushButton</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&gt;</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Scripting argument meta-symbols</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="2" column="3">
+                                <property name="name">
+                                    <cstring>ShutdownScriptBrowsePushButton</cstring>
                                 </property>
                                 <property name="sizePolicy">
                                     <sizepolicy>
@@ -1517,6 +1758,9 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed after shutting down the JACK audio server</string>
@@ -1799,6 +2043,9 @@
                                 <property name="text">
                                     <string>...</string>
                                 </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for a patchbay definition file to be activated</string>
                                 </property>
@@ -2018,6 +2265,9 @@
                                 <property name="accel">
                                     <string>Alt+F</string>
                                 </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Select font for the messages text display</string>
                                 </property>
@@ -2088,6 +2338,24 @@
 </widget>
 <connections>
     <connection>
+        <sender>PresetComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>changePreset(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>PresetSavePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>savePreset()</slot>
+    </connection>
+    <connection>
+        <sender>PresetDeletePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>deletePreset()</slot>
+    </connection>
+    <connection>
         <sender>RealtimeCheckBox</sender>
         <signal>toggled(bool)</signal>
         <receiver>PriorityTextLabel</receiver>
@@ -2132,7 +2400,13 @@
     <connection>
         <sender>StartupScriptCheckBox</sender>
         <signal>toggled(bool)</signal>
-        <receiver>StartupScriptPushButton</receiver>
+        <receiver>StartupScriptSymbolPushButton</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>StartupScriptCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>StartupScriptBrowsePushButton</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
@@ -2144,7 +2418,13 @@
     <connection>
         <sender>PostStartupScriptCheckBox</sender>
         <signal>toggled(bool)</signal>
-        <receiver>PostStartupScriptPushButton</receiver>
+        <receiver>PostStartupScriptSymbolPushButton</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>PostStartupScriptCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>PostStartupScriptBrowsePushButton</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
@@ -2156,7 +2436,13 @@
     <connection>
         <sender>ShutdownScriptCheckBox</sender>
         <signal>toggled(bool)</signal>
-        <receiver>ShutdownScriptPushButton</receiver>
+        <receiver>ShutdownScriptSymbolPushButton</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ShutdownScriptBrowsePushButton</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
@@ -2172,22 +2458,40 @@
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
-        <sender>StartupScriptPushButton</sender>
+        <sender>StartupScriptBrowsePushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browseStartupScript()</slot>
     </connection>
     <connection>
-        <sender>PostStartupScriptPushButton</sender>
+        <sender>PostStartupScriptBrowsePushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browsePostStartupScript()</slot>
     </connection>
     <connection>
-        <sender>ShutdownScriptPushButton</sender>
+        <sender>ShutdownScriptBrowsePushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browseShutdownScript()</slot>
+    </connection>
+    <connection>
+        <sender>StartupScriptSymbolPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>symbolStartupScript()</slot>
+    </connection>
+    <connection>
+        <sender>PostStartupScriptSymbolPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>symbolPostStartupScript()</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptSymbolPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>symbolShutdownScript()</slot>
     </connection>
     <connection>
         <sender>ActivePatchbayPathPushButton</sender>
@@ -2222,6 +2526,9 @@
 </connections>
 <tabstops>
     <tabstop>SetupTabWidget</tabstop>
+    <tabstop>PresetComboBox</tabstop>
+    <tabstop>PresetSavePushButton</tabstop>
+    <tabstop>PresetDeletePushButton</tabstop>
     <tabstop>ServerComboBox</tabstop>
     <tabstop>DriverComboBox</tabstop>
     <tabstop>RealtimeCheckBox</tabstop>
@@ -2245,13 +2552,16 @@
     <tabstop>VerboseCheckBox</tabstop>
     <tabstop>StartupScriptCheckBox</tabstop>
     <tabstop>StartupScriptShellComboBox</tabstop>
-    <tabstop>StartupScriptPushButton</tabstop>
+    <tabstop>StartupScriptSymbolPushButton</tabstop>
+    <tabstop>StartupScriptBrowsePushButton</tabstop>
     <tabstop>PostStartupScriptCheckBox</tabstop>
     <tabstop>PostStartupScriptShellComboBox</tabstop>
-    <tabstop>PostStartupScriptPushButton</tabstop>
+    <tabstop>PostStartupScriptSymbolPushButton</tabstop>
+    <tabstop>PostStartupScriptBrowsePushButton</tabstop>
     <tabstop>ShutdownScriptCheckBox</tabstop>
     <tabstop>ShutdownScriptShellComboBox</tabstop>
-    <tabstop>ShutdownScriptPushButton</tabstop>
+    <tabstop>ShutdownScriptSymbolPushButton</tabstop>
+    <tabstop>ShutdownScriptBrowsePushButton</tabstop>
     <tabstop>XrunRegexComboBox</tabstop>
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
     <tabstop>ActivePatchbayCheckBox</tabstop>
@@ -2272,22 +2582,35 @@
     <include location="global" impldecl="in declaration">qjackctlSetup.h</include>
     <include location="local" impldecl="in implementation">qjackctlSetupForm.ui.h</include>
 </includes>
+<variables>
+    <variable access="private">qjackctlSetup *m_pSetup;</variable>
+    <variable access="private">int m_iDirtySetup;</variable>
+</variables>
 <slots>
+    <slot specifier="non virtual">changePreset( const QString&amp; sPreset )</slot>
+    <slot specifier="non virtual">savePreset()</slot>
+    <slot specifier="non virtual">deletePreset()</slot>
+    <slot specifier="non virtual">resetPresets()</slot>
     <slot specifier="non virtual">changeLatency( const QString &amp; )</slot>
     <slot specifier="non virtual">changeDriver( const QString &amp; sDriver )</slot>
+    <slot specifier="non virtual">symbolStartupScript()</slot>
+    <slot specifier="non virtual">symbolPostStartupScript()</slot>
+    <slot specifier="non virtual">symbolShutdownScript()</slot>
     <slot specifier="non virtual">browseStartupScript()</slot>
     <slot specifier="non virtual">browsePostStartupScript()</slot>
     <slot specifier="non virtual">browseShutdownScript()</slot>
     <slot specifier="non virtual">browseActivePatchbayPath()</slot>
     <slot specifier="non virtual">chooseMessagesFont()</slot>
+    <slot specifier="non virtual">accept()</slot>
+    <slot specifier="non virtual">reject()</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
+    <function specifier="non virtual">setup( qjackctlSetup *pSetup )</function>
     <function access="private" specifier="non virtual">computeLatency()</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>
-    <function specifier="non virtual">load( qjackctlSetup * pSetup )</function>
-    <function specifier="non virtual">save( qjackctlSetup * pSetup )</function>
+    <function access="private" specifier="non virtual">symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButton )</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>

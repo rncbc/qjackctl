@@ -3,7 +3,9 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.1.3   2003-11-20  Unamed release.
+0.1.3   2003-11-24  Server parameter presets option.
+
+- Server setup settings may now be named and saved as presets.
 
 - New configure argument debugging option.
 

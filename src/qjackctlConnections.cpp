@@ -45,13 +45,13 @@ static int g_iXpmRefCount = 0;
 static QPixmap *g_pXpmClientI = 0;  // Input client item pixmap.
 static QPixmap *g_pXpmClientO = 0;  // Output client item pixmap.
 static QPixmap *g_pXpmPortPTI = 0;  // Physcal Terminal Input port pixmap.
-static QPixmap *g_pXpmPortPTO = 0;  // Physical Terminal input port pixmap.
+static QPixmap *g_pXpmPortPTO = 0;  // Physical Terminal Output port pixmap.
 static QPixmap *g_pXpmPortPNI = 0;  // Physical Non-terminal Input port pixmap.
-static QPixmap *g_pXpmPortPNO = 0;  // Physical Non-terminal input port pixmap.
+static QPixmap *g_pXpmPortPNO = 0;  // Physical Non-terminal Output port pixmap.
 static QPixmap *g_pXpmPortLTI = 0;  // Logical Terminal Input port pixmap.
-static QPixmap *g_pXpmPortLTO = 0;  // Logical Terminal input port pixmap.
+static QPixmap *g_pXpmPortLTO = 0;  // Logical Terminal Output port pixmap.
 static QPixmap *g_pXpmPortLNI = 0;  // Logical Non-terminal Input port pixmap.
-static QPixmap *g_pXpmPortLNO = 0;  // Logical Non-terminal input port pixmap.
+static QPixmap *g_pXpmPortLNO = 0;  // Logical Non-terminal Output port pixmap.
 
 
 //----------------------------------------------------------------------

@@ -23,6 +23,8 @@
 #include <qvalidator.h>
 #include <qfiledialog.h>
 #include <qfontdialog.h>
+#include <qpopupmenu.h>
+#include <qlineedit.h>
 
 #include "config.h"
 
@@ -30,7 +32,13 @@
 // Kind of constructor.
 void qjackctlSetupForm::init (void)
 {
+    // No settings descriptor initially (the caller will set it).
+    m_pSetup = NULL;
+    // Initialize dirty control state.
+    m_iDirtySetup = 0;
+
     // Set dialog validators...
+    PresetComboBox->setValidator(new QRegExpValidator(QRegExp("[\\w]+"), PresetComboBox));
     ChanComboBox->setValidator(new QIntValidator(ChanComboBox));
     PriorityComboBox->setValidator(new QIntValidator(PriorityComboBox));
     FramesComboBox->setValidator(new QIntValidator(FramesComboBox));
@@ -42,15 +50,165 @@ void qjackctlSetupForm::init (void)
 
     // Try to restore old window positioning.
     adjustSize();
-
-    // Final startup stabilization...
-    stabilizeForm();
 }
 
 
 // Kind of destructor.
 void qjackctlSetupForm::destroy (void)
 {
+}
+
+
+// Populate (setup) dialog controls from settings descriptors.
+void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
+{
+    // Set reference descriptor.
+    m_pSetup = pSetup;
+
+    // Load combo box history...
+    m_pSetup->loadComboBoxHistory(ServerComboBox);
+    m_pSetup->loadComboBoxHistory(InterfaceComboBox);
+    m_pSetup->loadComboBoxHistory(StartupScriptShellComboBox);
+    m_pSetup->loadComboBoxHistory(PostStartupScriptShellComboBox);
+    m_pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
+    m_pSetup->loadComboBoxHistory(XrunRegexComboBox);
+    m_pSetup->loadComboBoxHistory(ActivePatchbayPathComboBox);
+
+    // Load Options...
+    StartupScriptCheckBox->setChecked(m_pSetup->bStartupScript);
+    StartupScriptShellComboBox->setCurrentText(m_pSetup->sStartupScriptShell);
+    PostStartupScriptCheckBox->setChecked(m_pSetup->bPostStartupScript);
+    PostStartupScriptShellComboBox->setCurrentText(m_pSetup->sPostStartupScriptShell);
+    ShutdownScriptCheckBox->setChecked(m_pSetup->bShutdownScript);
+    ShutdownScriptShellComboBox->setCurrentText(m_pSetup->sShutdownScriptShell);
+    XrunRegexComboBox->setCurrentText(m_pSetup->sXrunRegex);
+    XrunIgnoreFirstCheckBox->setChecked(m_pSetup->bXrunIgnoreFirst);
+    ActivePatchbayCheckBox->setChecked(m_pSetup->bActivePatchbay);
+    ActivePatchbayPathComboBox->setCurrentText(m_pSetup->sActivePatchbayPath);
+    AutoRefreshCheckBox->setChecked(m_pSetup->bAutoRefresh);
+    TimeRefreshComboBox->setCurrentText(QString::number(m_pSetup->iTimeRefresh));
+
+    // Load Defaults...
+    TimeDisplayButtonGroup->setButton(m_pSetup->iTimeDisplay);
+    QFont font;
+    if (m_pSetup->sMessagesFont.isEmpty() || !font.fromString(m_pSetup->sMessagesFont))
+        font = QFont("Terminal", 8);
+    MessagesFontTextLabel->setFont(font);
+    MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+
+    // Other misc options...
+    QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
+
+    // Finally, load preset list...
+    m_iDirtySetup++;
+    resetPresets();
+    PresetComboBox->setCurrentText(m_pSetup->sDefPreset);
+    m_iDirtySetup--;
+
+    // Finally, load default settings...
+    changePreset(PresetComboBox->currentText());
+}
+
+
+void qjackctlSetupForm::changePreset( const QString& sPreset )
+{
+    if (m_iDirtySetup > 0)
+        return;
+
+    // Load Settings...
+    qjackctlPreset preset;
+    if (m_pSetup->loadPreset(preset, sPreset)) {
+        ServerComboBox->setCurrentText(preset.sServer);
+        RealtimeCheckBox->setChecked(preset.bRealtime);
+        SoftModeCheckBox->setChecked(preset.bSoftMode);
+        MonitorCheckBox->setChecked(preset.bMonitor);
+        ShortsCheckBox->setChecked(preset.bShorts);
+        ChanComboBox->setCurrentText(QString::number(preset.iChan));
+        PriorityComboBox->setCurrentText(QString::number(preset.iPriority));
+        FramesComboBox->setCurrentText(QString::number(preset.iFrames));
+        SampleRateComboBox->setCurrentText(QString::number(preset.iSampleRate));
+        PeriodsComboBox->setCurrentText(QString::number(preset.iPeriods));
+        WaitComboBox->setCurrentText(QString::number(preset.iWait));
+        DriverComboBox->setCurrentText(preset.sDriver);
+        InterfaceComboBox->setCurrentText(preset.sInterface);
+        AudioComboBox->setCurrentItem(preset.iAudio);
+        DitherComboBox->setCurrentItem(preset.iDither);
+        TimeoutComboBox->setCurrentText(QString::number(preset.iTimeout));
+        HWMonCheckBox->setChecked(preset.bHWMon);
+        HWMeterCheckBox->setChecked(preset.bHWMeter);
+        InChannelsSpinBox->setValue(preset.iInChannels);
+        OutChannelsSpinBox->setValue(preset.iOutChannels);
+        VerboseCheckBox->setChecked(preset.bVerbose);
+    }
+    stabilizeForm();
+}
+
+
+void qjackctlSetupForm::savePreset (void)
+{
+    QString sPreset = PresetComboBox->currentText();
+    if (sPreset.isEmpty())
+        return;
+
+    // Unload settings.
+    qjackctlPreset preset;
+    preset.sServer      = ServerComboBox->currentText();
+    preset.bRealtime    = RealtimeCheckBox->isChecked();
+    preset.bSoftMode    = SoftModeCheckBox->isChecked();
+    preset.bMonitor     = MonitorCheckBox->isChecked();
+    preset.bShorts      = ShortsCheckBox->isChecked();
+    preset.iChan        = ChanComboBox->currentText().toInt();
+    preset.iPriority    = PriorityComboBox->currentText().toInt();
+    preset.iFrames      = FramesComboBox->currentText().toInt();
+    preset.iSampleRate  = SampleRateComboBox->currentText().toInt();
+    preset.iPeriods     = PeriodsComboBox->currentText().toInt();
+    preset.iWait        = WaitComboBox->currentText().toInt();
+    preset.sDriver      = DriverComboBox->currentText();
+    preset.sInterface   = InterfaceComboBox->currentText();
+    preset.iAudio       = AudioComboBox->currentItem();
+    preset.iDither      = DitherComboBox->currentItem();
+    preset.iTimeout     = TimeoutComboBox->currentText().toInt();
+    preset.bHWMon       = HWMonCheckBox->isChecked();
+    preset.bHWMeter     = HWMeterCheckBox->isChecked();
+    preset.iInChannels  = InChannelsSpinBox->value();
+    preset.iOutChannels = OutChannelsSpinBox->value();
+    preset.bVerbose     = VerboseCheckBox->isChecked();
+    m_pSetup->savePreset(preset, sPreset);
+
+    m_iDirtySetup++;
+    resetPresets();
+    PresetComboBox->setCurrentText(sPreset);
+    m_iDirtySetup--;
+
+    stabilizeForm();
+}
+
+
+void qjackctlSetupForm::deletePreset (void)
+{
+    QString sPreset = PresetComboBox->currentText();
+    if (sPreset.isEmpty())
+        return;
+
+    // Remove current preset item...
+    m_iDirtySetup++;
+    int iItem = PresetComboBox->currentItem();
+    m_pSetup->deletePreset(sPreset);
+    resetPresets();
+    PresetComboBox->setCurrentItem(iItem);
+    m_iDirtySetup--;
+
+    // Load a new preset...
+    changePreset(PresetComboBox->currentText());
+    stabilizeForm();
+}
+
+
+void qjackctlSetupForm::resetPresets (void)
+{
+    PresetComboBox->clear();
+    PresetComboBox->insertStringList(m_pSetup->presets);
+    PresetComboBox->insertItem("(default)");
 }
 
 
@@ -109,23 +267,37 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     computeLatency();
 }
 
+
+// Stabilize current form state.
 void qjackctlSetupForm::stabilizeForm (void)
 {
+    QString sPreset = PresetComboBox->currentText();
+    if (!sPreset.isEmpty()) {
+        PresetSavePushButton->setEnabled(true);
+        PresetDeletePushButton->setEnabled(m_pSetup->presets.find(sPreset) != m_pSetup->presets.end());
+    } else {
+        PresetSavePushButton->setEnabled(false);
+        PresetDeletePushButton->setEnabled(false);
+    }
+
     bool bEnabled = RealtimeCheckBox->isChecked();
     PriorityTextLabel->setEnabled(bEnabled);
     PriorityComboBox->setEnabled(bEnabled);
-    
+
     bEnabled = StartupScriptCheckBox->isChecked();
     StartupScriptShellComboBox->setEnabled(bEnabled);
-    StartupScriptPushButton->setEnabled(bEnabled);
+    StartupScriptSymbolPushButton->setEnabled(bEnabled);
+    StartupScriptBrowsePushButton->setEnabled(bEnabled);
     
     bEnabled = PostStartupScriptCheckBox->isChecked();
     PostStartupScriptShellComboBox->setEnabled(bEnabled);
-    PostStartupScriptPushButton->setEnabled(bEnabled);
-    
+    PostStartupScriptSymbolPushButton->setEnabled(bEnabled);
+    PostStartupScriptBrowsePushButton->setEnabled(bEnabled);
+
     bEnabled = ShutdownScriptCheckBox->isChecked();
     ShutdownScriptShellComboBox->setEnabled(bEnabled);
-    ShutdownScriptPushButton->setEnabled(bEnabled);
+    ShutdownScriptSymbolPushButton->setEnabled(bEnabled);
+    ShutdownScriptBrowsePushButton->setEnabled(bEnabled);
 
     bEnabled = ActivePatchbayCheckBox->isChecked();
     ActivePatchbayPathComboBox->setEnabled(bEnabled);
@@ -137,14 +309,60 @@ void qjackctlSetupForm::stabilizeForm (void)
 }
 
 
+// Meta-symbol menu executive.
+void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButton )
+{
+    const QString s = "  ";
+
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+
+    pContextMenu->insertItem("%P" + s + tr("&Preset Name"));
+    pContextMenu->insertSeparator();
+    pContextMenu->insertItem("%s" + s + tr("&Server Path"));
+    pContextMenu->insertItem("%d" + s + tr("&Driver"));
+    pContextMenu->insertItem("%i" + s + tr("&Interface"));
+    pContextMenu->insertSeparator();
+    pContextMenu->insertItem("%r" + s + tr("Sample &Rate"));
+    pContextMenu->insertItem("%p" + s + tr("&Frames/Period"));
+    pContextMenu->insertItem("%n" + s + tr("Periods/&Buffer"));
+
+    int iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
+    if (iItemID != -1) {
+        QString sText = pContextMenu->text(iItemID);
+        int iMetaChar = sText.find('%');
+        if (iMetaChar >= 0)
+            pLineEdit->insert("%" + sText[iMetaChar + 1]);
+    }
+}
+
+
+// Startup script meta-symbol button slot.
+void qjackctlSetupForm::symbolStartupScript (void)
+{
+    symbolMenu(StartupScriptShellComboBox->lineEdit(), StartupScriptSymbolPushButton);
+}
+
+// Post-startup script meta-symbol button slot.
+void qjackctlSetupForm::symbolPostStartupScript (void)
+{
+    symbolMenu(PostStartupScriptShellComboBox->lineEdit(), PostStartupScriptSymbolPushButton);
+}
+
+// Shutdown script meta-symbol button slot.
+void qjackctlSetupForm::symbolShutdownScript (void)
+{
+    symbolMenu(ShutdownScriptShellComboBox->lineEdit(), ShutdownScriptSymbolPushButton);
+}
+
+
 // Startup script browse slot.
 void qjackctlSetupForm::browseStartupScript()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            StartupScriptShellComboBox->currentText(),	// Start here.
-            QString::null, 								// Filter (all files?)
-            this, 0,									// Parent and name (none)
-            tr("Startup script")						// Caption.
+            StartupScriptShellComboBox->currentText(),  // Start here.
+            QString::null,                              // Filter (all files?)
+            this, 0,                                    // Parent and name (none)
+            tr("Startup script")                        // Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -161,7 +379,7 @@ void qjackctlSetupForm::browsePostStartupScript()
             PostStartupScriptShellComboBox->currentText(),  // Start here.
             QString::null,                                  // Filter (all files?)
             this, 0,                                        // Parent and name (none)
-            tr("Post-startup script")				        // Caption.
+            tr("Post-startup script")                       // Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -175,12 +393,12 @@ void qjackctlSetupForm::browsePostStartupScript()
 void qjackctlSetupForm::browseShutdownScript()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            ShutdownScriptShellComboBox->currentText(),	// Start here.
-            QString::null, 								// Filter (all files?)
-            this, 0,									// Parent and name (none)
-            tr("Shutdown script")						// Caption.
+            ShutdownScriptShellComboBox->currentText(), // Start here.
+            QString::null,                              // Filter (all files?)
+            this, 0,                                    // Parent and name (none)
+            tr("Shutdown script")                       // Caption.
     );
-    
+
     if (!sFileName.isEmpty()) {
         ShutdownScriptShellComboBox->setCurrentText(sFileName);
         ShutdownScriptShellComboBox->setFocus();
@@ -217,127 +435,55 @@ void qjackctlSetupForm::chooseMessagesFont()
 }
 
 
-// Populate (load) dialog controls from setup struct members.
-void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
+// Accept settings (OK button slot).
+void qjackctlSetupForm::accept (void)
 {
-    // Load combo box history...
-    pSetup->settings.beginGroup("/History");
-    pSetup->loadComboBoxHistory(ServerComboBox);
-    pSetup->loadComboBoxHistory(InterfaceComboBox);
-    pSetup->loadComboBoxHistory(StartupScriptShellComboBox);
-    pSetup->loadComboBoxHistory(PostStartupScriptShellComboBox);
-    pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
-    pSetup->loadComboBoxHistory(XrunRegexComboBox);
-    pSetup->loadComboBoxHistory(ActivePatchbayPathComboBox);
-    pSetup->settings.endGroup();
+    // Save preset list.
+    m_pSetup->sDefPreset = PresetComboBox->currentText();
 
-    // Load Settings...
-    ServerComboBox->setCurrentText(pSetup->sServer);
-    RealtimeCheckBox->setChecked(pSetup->bRealtime);
-    SoftModeCheckBox->setChecked(pSetup->bSoftMode);
-    MonitorCheckBox->setChecked(pSetup->bMonitor);
-    ShortsCheckBox->setChecked(pSetup->bShorts);
-    ChanComboBox->setCurrentText(QString::number(pSetup->iChan));
-    PriorityComboBox->setCurrentText(QString::number(pSetup->iPriority));
-    FramesComboBox->setCurrentText(QString::number(pSetup->iFrames));
-    SampleRateComboBox->setCurrentText(QString::number(pSetup->iSampleRate));
-    PeriodsComboBox->setCurrentText(QString::number(pSetup->iPeriods));
-    WaitComboBox->setCurrentText(QString::number(pSetup->iWait));
-    DriverComboBox->setCurrentText(pSetup->sDriver);
-    InterfaceComboBox->setCurrentText(pSetup->sInterface);
-    AudioComboBox->setCurrentItem(pSetup->iAudio);
-    DitherComboBox->setCurrentItem(pSetup->iDither);
-    TimeoutComboBox->setCurrentText(QString::number(pSetup->iTimeout));
-    HWMonCheckBox->setChecked(pSetup->bHWMon);
-    HWMeterCheckBox->setChecked(pSetup->bHWMeter);
-    InChannelsSpinBox->setValue(pSetup->iInChannels);
-    OutChannelsSpinBox->setValue(pSetup->iOutChannels);
-    VerboseCheckBox->setChecked(pSetup->bVerbose);
-
-    // Load Options...
-    StartupScriptCheckBox->setChecked(pSetup->bStartupScript);
-    StartupScriptShellComboBox->setCurrentText(pSetup->sStartupScriptShell);
-    PostStartupScriptCheckBox->setChecked(pSetup->bPostStartupScript);
-    PostStartupScriptShellComboBox->setCurrentText(pSetup->sPostStartupScriptShell);
-    ShutdownScriptCheckBox->setChecked(pSetup->bShutdownScript);
-    ShutdownScriptShellComboBox->setCurrentText(pSetup->sShutdownScriptShell);
-    XrunRegexComboBox->setCurrentText(pSetup->sXrunRegex);
-    XrunIgnoreFirstCheckBox->setChecked(pSetup->bXrunIgnoreFirst);
-    ActivePatchbayCheckBox->setChecked(pSetup->bActivePatchbay);
-    ActivePatchbayPathComboBox->setCurrentText(pSetup->sActivePatchbayPath);
-    AutoRefreshCheckBox->setChecked(pSetup->bAutoRefresh);
-    TimeRefreshComboBox->setCurrentText(QString::number(pSetup->iTimeRefresh));
-
-    // Load Defaults...
-    TimeDisplayButtonGroup->setButton(pSetup->iTimeDisplay);
-    QFont font;
-    if (pSetup->sMessagesFont.isEmpty() || !font.fromString(pSetup->sMessagesFont))
-        font = QFont("Terminal", 8);
-    MessagesFontTextLabel->setFont(font);
-    MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
-
-    // Othet options finally...
-    QueryCloseCheckBox->setChecked(pSetup->bQueryClose);
-}
-
-
-// Populate (save) setup struct members from dialog controls.
-void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
-{
-    // Save Settings...
-    pSetup->sServer      = ServerComboBox->currentText();
-    pSetup->bRealtime    = RealtimeCheckBox->isChecked();
-    pSetup->bSoftMode    = SoftModeCheckBox->isChecked();
-    pSetup->bMonitor     = MonitorCheckBox->isChecked();
-    pSetup->bShorts      = ShortsCheckBox->isChecked();
-    pSetup->iChan        = ChanComboBox->currentText().toInt();
-    pSetup->iPriority    = PriorityComboBox->currentText().toInt();
-    pSetup->iFrames      = FramesComboBox->currentText().toInt();
-    pSetup->iSampleRate  = SampleRateComboBox->currentText().toInt();
-    pSetup->iPeriods     = PeriodsComboBox->currentText().toInt();
-    pSetup->iWait        = WaitComboBox->currentText().toInt();
-    pSetup->sDriver      = DriverComboBox->currentText();
-    pSetup->sInterface   = InterfaceComboBox->currentText();
-    pSetup->iAudio       = AudioComboBox->currentItem();
-    pSetup->iDither      = DitherComboBox->currentItem();
-    pSetup->iTimeout     = TimeoutComboBox->currentText().toInt();
-    pSetup->bHWMon       = HWMonCheckBox->isChecked();
-    pSetup->bHWMeter     = HWMeterCheckBox->isChecked();
-    pSetup->iInChannels  = InChannelsSpinBox->value();
-    pSetup->iOutChannels = OutChannelsSpinBox->value();
-    pSetup->bVerbose     = VerboseCheckBox->isChecked();
+    // Save current settings...
+    savePreset();
 
     // Save Options...
-    pSetup->bStartupScript          = StartupScriptCheckBox->isChecked();
-    pSetup->sStartupScriptShell     = StartupScriptShellComboBox->currentText();
-    pSetup->bPostStartupScript      = PostStartupScriptCheckBox->isChecked();
-    pSetup->sPostStartupScriptShell = PostStartupScriptShellComboBox->currentText();
-    pSetup->bShutdownScript         = ShutdownScriptCheckBox->isChecked();
-    pSetup->sShutdownScriptShell    = ShutdownScriptShellComboBox->currentText();
-    pSetup->sXrunRegex              = XrunRegexComboBox->currentText();
-    pSetup->bXrunIgnoreFirst        = XrunIgnoreFirstCheckBox->isChecked();
-    pSetup->bActivePatchbay         = ActivePatchbayCheckBox->isChecked();
-    pSetup->sActivePatchbayPath     = ActivePatchbayPathComboBox->currentText();
-    pSetup->bAutoRefresh            = AutoRefreshCheckBox->isChecked();
-    pSetup->iTimeRefresh            = TimeRefreshComboBox->currentText().toInt();
+    m_pSetup->bStartupScript          = StartupScriptCheckBox->isChecked();
+    m_pSetup->sStartupScriptShell     = StartupScriptShellComboBox->currentText();
+    m_pSetup->bPostStartupScript      = PostStartupScriptCheckBox->isChecked();
+    m_pSetup->sPostStartupScriptShell = PostStartupScriptShellComboBox->currentText();
+    m_pSetup->bShutdownScript         = ShutdownScriptCheckBox->isChecked();
+    m_pSetup->sShutdownScriptShell    = ShutdownScriptShellComboBox->currentText();
+    m_pSetup->sXrunRegex              = XrunRegexComboBox->currentText();
+    m_pSetup->bXrunIgnoreFirst        = XrunIgnoreFirstCheckBox->isChecked();
+    m_pSetup->bActivePatchbay         = ActivePatchbayCheckBox->isChecked();
+    m_pSetup->sActivePatchbayPath     = ActivePatchbayPathComboBox->currentText();
+    m_pSetup->bAutoRefresh            = AutoRefreshCheckBox->isChecked();
+    m_pSetup->iTimeRefresh            = TimeRefreshComboBox->currentText().toInt();
 
     // Save Defaults...
-    pSetup->iTimeDisplay  = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
-    pSetup->sMessagesFont = MessagesFontTextLabel->font().toString();
-    pSetup->bQueryClose   = QueryCloseCheckBox->isChecked();
+    m_pSetup->iTimeDisplay  = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
+    m_pSetup->sMessagesFont = MessagesFontTextLabel->font().toString();
+    m_pSetup->bQueryClose   = QueryCloseCheckBox->isChecked();
 
     // Save combobox history...
-    pSetup->settings.beginGroup("/History");
-    pSetup->saveComboBoxHistory(ServerComboBox);
-    pSetup->saveComboBoxHistory(PriorityComboBox);
-    pSetup->saveComboBoxHistory(InterfaceComboBox);
-    pSetup->saveComboBoxHistory(StartupScriptShellComboBox);
-    pSetup->saveComboBoxHistory(PostStartupScriptShellComboBox);
-    pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);
-    pSetup->saveComboBoxHistory(XrunRegexComboBox);
-    pSetup->saveComboBoxHistory(ActivePatchbayPathComboBox);
-    pSetup->settings.endGroup();
+    m_pSetup->saveComboBoxHistory(ServerComboBox);
+    m_pSetup->saveComboBoxHistory(PriorityComboBox);
+    m_pSetup->saveComboBoxHistory(InterfaceComboBox);
+    m_pSetup->saveComboBoxHistory(StartupScriptShellComboBox);
+    m_pSetup->saveComboBoxHistory(PostStartupScriptShellComboBox);
+    m_pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);
+    m_pSetup->saveComboBoxHistory(XrunRegexComboBox);
+    m_pSetup->saveComboBoxHistory(ActivePatchbayPathComboBox);
+
+    // Just go with dialog acceptance.
+    QDialog::accept();
+}
+
+// Reject settings (Cancel button slot).
+void qjackctlSetupForm::reject (void)
+{
+    QDialog::reject();
 }
 
 
 // end of qjackctlSetupForm.ui.h
+
+
