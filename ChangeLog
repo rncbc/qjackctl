@@ -23,7 +23,8 @@ ChangeLog
   this relies on jack_get_max_delayed_usecs() function availability at
   configure time, depending on a Lee Revell's non-official JACK patch.
 
-- Patchbay Activate button is now a toggle button widget.
+- Patchbay Activate button is now a toggle button widget, allowing the
+  deactivation of the current patchbay profile.
 
 - Preset selection has been added to the context menu.
 

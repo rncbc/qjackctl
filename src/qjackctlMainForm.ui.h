@@ -1022,13 +1022,16 @@ void qjackctlMainForm::updateActivePatchbay (void)
             appendMessagesError(tr("Could not load active patchbay definition.\n\nDisabled."));
             m_pSetup->bActivePatchbay = false;
         } else {
+            appendMessages(tr("Patchbay activated."));
             // If we're up and running, make it dirty :)
             if (m_pJackClient)
                 m_iJackDirty++;
             if (m_pAlsaSeq)
                 m_iAlsaDirty++;
         }
-    }
+    }   // We're sure there's no active patchbay...
+    else appendMessages(tr("Patchbay deactivated."));
+
     // Should refresh anyway.
     m_iPatchbayRefresh++;
 }
