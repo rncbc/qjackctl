@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>630</width>
-            <height>501</height>
+            <width>657</width>
+            <height>496</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -986,198 +986,7 @@
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QComboBox" row="0" column="1" rowspan="1" colspan="2">
-                                        <item>
-                                            <property name="text">
-                                                <string>default</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>hw:0</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>hw:1</string>
-                                            </property>
-                                        </item>
-                                        <property name="name">
-                                            <cstring>InterfaceComboBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="editable">
-                                            <bool>true</bool>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>The ALSA pcm device name to use</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QSpinBox" row="5" column="1">
-                                        <property name="name">
-                                            <cstring>OutChannelsSpinBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="maxValue">
-                                            <number>32</number>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Maximum output audio hardware channels to allocate (alsa, oss)</string>
-                                        </property>
-                                    </widget>
-                                    <spacer row="4" column="2" rowspan="2" colspan="1">
-                                        <property name="name">
-                                            <cstring>spacer13</cstring>
-                                        </property>
-                                        <property name="orientation">
-                                            <enum>Horizontal</enum>
-                                        </property>
-                                        <property name="sizeType">
-                                            <enum>MinimumExpanding</enum>
-                                        </property>
-                                        <property name="sizeHint">
-                                            <size>
-                                                <width>40</width>
-                                                <height>8</height>
-                                            </size>
-                                        </property>
-                                    </spacer>
-                                    <widget class="QLabel" row="0" column="0">
-                                        <property name="name">
-                                            <cstring>InterfaceTextLabel</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Interface:</string>
-                                        </property>
-                                        <property name="alignment">
-                                            <set>AlignVCenter|AlignRight</set>
-                                        </property>
-                                        <property name="buddy" stdset="0">
-                                            <cstring>InterfaceComboBox</cstring>
-                                        </property>
-                                    </widget>
-                                    <widget class="QComboBox" row="1" column="1" rowspan="1" colspan="2">
-                                        <item>
-                                            <property name="text">
-                                                <string>Duplex</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>Capture Only</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>Playback Only</string>
-                                            </property>
-                                        </item>
-                                        <property name="name">
-                                            <cstring>AudioComboBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Provide either audio capture, playback or both</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="2">
-                                        <item>
-                                            <property name="text">
-                                                <string>(default)</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>/dev/dsp</string>
-                                            </property>
-                                        </item>
-                                        <property name="name">
-                                            <cstring>InDeviceComboBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="editable">
-                                            <bool>true</bool>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Alternate input device for capture</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QLabel" row="5" column="0">
-                                        <property name="name">
-                                            <cstring>OutChannelsTextLabel</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Output Channels:</string>
-                                        </property>
-                                        <property name="alignment">
-                                            <set>AlignVCenter|AlignRight</set>
-                                        </property>
-                                        <property name="buddy" stdset="0">
-                                            <cstring>OutChannelsSpinBox</cstring>
-                                        </property>
-                                    </widget>
-                                    <widget class="QSpinBox" row="4" column="1">
-                                        <property name="name">
-                                            <cstring>InChannelsSpinBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="maxValue">
-                                            <number>32</number>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Maximum input audio hardware channels to allocate (alsa, oss)</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QLabel" row="4" column="0">
-                                        <property name="name">
-                                            <cstring>InChannelsTextLabel</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Input Channels:</string>
-                                        </property>
-                                        <property name="alignment">
-                                            <set>AlignVCenter|AlignRight</set>
-                                        </property>
-                                        <property name="buddy" stdset="0">
-                                            <cstring>InChannelsSpinBox</cstring>
-                                        </property>
-                                    </widget>
-                                    <widget class="QComboBox" row="7" column="1" rowspan="1" colspan="2">
+                                    <widget class="QComboBox" row="7" column="1" rowspan="1" colspan="3">
                                         <item>
                                             <property name="text">
                                                 <string>200</string>
@@ -1223,6 +1032,85 @@
                                             <string>Set client timeout limit in miliseconds</string>
                                         </property>
                                     </widget>
+                                    <widget class="QLabel" row="6" column="0">
+                                        <property name="name">
+                                            <cstring>DitherTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>NoFrame</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Plain</enum>
+                                        </property>
+                                        <property name="text">
+                                            <string>Dit&amp;her:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>DitherComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="2">
+                                        <item>
+                                            <property name="text">
+                                                <string>(default)</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>/dev/dsp</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>InDeviceComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Alternate input device for capture</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox" row="1" column="1" rowspan="1" colspan="3">
+                                        <item>
+                                            <property name="text">
+                                                <string>Duplex</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>Capture Only</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>Playback Only</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>AudioComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Provide either audio capture, playback or both</string>
+                                        </property>
+                                    </widget>
                                     <widget class="QLabel" row="1" column="0">
                                         <property name="name">
                                             <cstring>AudioTextLabel</cstring>
@@ -1242,7 +1130,213 @@
                                             <cstring>AudioComboBox</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QComboBox" row="6" column="1" rowspan="1" colspan="2">
+                                    <widget class="QLabel" row="0" column="0">
+                                        <property name="name">
+                                            <cstring>InterfaceTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Interface:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>InterfaceComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QPushButton" row="2" column="3">
+                                        <property name="name">
+                                            <cstring>InDevicePushButton</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>0</hsizetype>
+                                                <vsizetype>0</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>22</width>
+                                                <height>22</height>
+                                            </size>
+                                        </property>
+                                        <property name="maximumSize">
+                                            <size>
+                                                <width>22</width>
+                                                <height>22</height>
+                                            </size>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&gt;</string>
+                                        </property>
+                                        <property name="autoDefault">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Select input device for capture</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="4" column="0">
+                                        <property name="name">
+                                            <cstring>InChannelsTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Input Channels:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>InChannelsSpinBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QSpinBox" row="5" column="1">
+                                        <property name="name">
+                                            <cstring>OutChannelsSpinBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>32</number>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Maximum output audio hardware channels to allocate (alsa, oss)</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QPushButton" row="0" column="3">
+                                        <property name="name">
+                                            <cstring>InterfacePushButton</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>0</hsizetype>
+                                                <vsizetype>0</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>22</width>
+                                                <height>22</height>
+                                            </size>
+                                        </property>
+                                        <property name="maximumSize">
+                                            <size>
+                                                <width>22</width>
+                                                <height>22</height>
+                                            </size>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&gt;</string>
+                                        </property>
+                                        <property name="autoDefault">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Select PCM device name</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QPushButton" row="3" column="3">
+                                        <property name="name">
+                                            <cstring>OutDevicePushButton</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>0</hsizetype>
+                                                <vsizetype>0</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>22</width>
+                                                <height>22</height>
+                                            </size>
+                                        </property>
+                                        <property name="maximumSize">
+                                            <size>
+                                                <width>22</width>
+                                                <height>22</height>
+                                            </size>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&gt;</string>
+                                        </property>
+                                        <property name="autoDefault">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Select output device for playback</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="3" column="0">
+                                        <property name="name">
+                                            <cstring>OutDeviceTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Output Device:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>OutDeviceComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QSpinBox" row="4" column="1">
+                                        <property name="name">
+                                            <cstring>InChannelsSpinBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>32</number>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Maximum input audio hardware channels to allocate (alsa, oss)</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox" row="6" column="1" rowspan="1" colspan="3">
                                         <item>
                                             <property name="text">
                                                 <string>None</string>
@@ -1300,25 +1394,6 @@
                                             <cstring>TimeoutComboBox</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QLabel" row="2" column="0">
-                                        <property name="name">
-                                            <cstring>InDeviceTextLabel</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Input Device:</string>
-                                        </property>
-                                        <property name="alignment">
-                                            <set>AlignVCenter|AlignRight</set>
-                                        </property>
-                                        <property name="buddy" stdset="0">
-                                            <cstring>InDeviceComboBox</cstring>
-                                        </property>
-                                    </widget>
                                     <widget class="QComboBox" row="3" column="1" rowspan="1" colspan="2">
                                         <item>
                                             <property name="text">
@@ -1345,34 +1420,45 @@
                                             <string>Alternate output device for playback</string>
                                         </property>
                                     </widget>
-                                    <widget class="QLabel" row="6" column="0">
+                                    <spacer row="4" column="2" rowspan="2" colspan="2">
                                         <property name="name">
-                                            <cstring>DitherTextLabel</cstring>
+                                            <cstring>spacer13</cstring>
+                                        </property>
+                                        <property name="orientation">
+                                            <enum>Horizontal</enum>
+                                        </property>
+                                        <property name="sizeType">
+                                            <enum>MinimumExpanding</enum>
+                                        </property>
+                                        <property name="sizeHint">
+                                            <size>
+                                                <width>8</width>
+                                                <height>8</height>
+                                            </size>
+                                        </property>
+                                    </spacer>
+                                    <widget class="QLabel" row="2" column="0">
+                                        <property name="name">
+                                            <cstring>InDeviceTextLabel</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
                                                 <bold>0</bold>
                                             </font>
                                         </property>
-                                        <property name="frameShape">
-                                            <enum>NoFrame</enum>
-                                        </property>
-                                        <property name="frameShadow">
-                                            <enum>Plain</enum>
-                                        </property>
                                         <property name="text">
-                                            <string>Dit&amp;her:</string>
+                                            <string>&amp;Input Device:</string>
                                         </property>
                                         <property name="alignment">
                                             <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
-                                            <cstring>DitherComboBox</cstring>
+                                            <cstring>InDeviceComboBox</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QLabel" row="3" column="0">
+                                    <widget class="QLabel" row="5" column="0">
                                         <property name="name">
-                                            <cstring>OutDeviceTextLabel</cstring>
+                                            <cstring>OutChannelsTextLabel</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -1380,13 +1466,44 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Output Device:</string>
+                                            <string>&amp;Output Channels:</string>
                                         </property>
                                         <property name="alignment">
                                             <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
-                                            <cstring>OutDeviceComboBox</cstring>
+                                            <cstring>OutChannelsSpinBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox" row="0" column="1" rowspan="1" colspan="2">
+                                        <item>
+                                            <property name="text">
+                                                <string>default</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hw:0</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hw:1</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>InterfaceComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>The PCM device name to use</string>
                                         </property>
                                     </widget>
                                 </grid>
@@ -3572,6 +3689,24 @@
         <slot>changeDriver(const QString&amp;)</slot>
     </connection>
     <connection>
+        <sender>InterfacePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>selectInterface()</slot>
+    </connection>
+    <connection>
+        <sender>InDevicePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>selectInDevice()</slot>
+    </connection>
+    <connection>
+        <sender>OutDevicePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>selectOutDevice()</slot>
+    </connection>
+    <connection>
         <sender>AudioComboBox</sender>
         <signal>highlighted(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -4077,9 +4212,12 @@
     <tabstop>ChanSpinBox</tabstop>
     <tabstop>PortMaxComboBox</tabstop>
     <tabstop>InterfaceComboBox</tabstop>
+    <tabstop>InterfacePushButton</tabstop>
     <tabstop>AudioComboBox</tabstop>
     <tabstop>InDeviceComboBox</tabstop>
+    <tabstop>InDevicePushButton</tabstop>
     <tabstop>OutDeviceComboBox</tabstop>
+    <tabstop>OutDevicePushButton</tabstop>
     <tabstop>InChannelsSpinBox</tabstop>
     <tabstop>OutChannelsSpinBox</tabstop>
     <tabstop>DitherComboBox</tabstop>
@@ -4154,6 +4292,9 @@
     <slot specifier="non virtual">deleteCurrentPreset()</slot>
     <slot specifier="non virtual">changeAudio( int )</slot>
     <slot specifier="non virtual">changeDriver( const QString &amp; )</slot>
+    <slot specifier="non virtual">selectInterface()</slot>
+    <slot specifier="non virtual">selectInDevice()</slot>
+    <slot specifier="non virtual">selectOutDevice()</slot>
     <slot specifier="non virtual">symbolStartupScript()</slot>
     <slot specifier="non virtual">symbolPostStartupScript()</slot>
     <slot specifier="non virtual">symbolShutdownScript()</slot>
@@ -4184,6 +4325,7 @@
     <function access="private" specifier="non virtual">computeLatency()</function>
     <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>
+    <function access="private" specifier="non virtual">deviceMenu( QLineEdit *pLineEdit, QPushButton *pPushButton, int iStream, bool bAlternate )</function>
     <function access="private" specifier="non virtual">symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButton )</function>
 </functions>
 <pixmapinproject/>

@@ -29,6 +29,11 @@
 
 #include "config.h"
 
+#include <alsa/asoundlib.h>
+
+#define QJACKCTL_STREAM_PLAYBACK	0
+#define QJACKCTL_STREAM_CAPTURE		1
+
 
 // Kind of constructor.
 void qjackctlSetupForm::init (void)
@@ -408,8 +413,10 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 
     InDeviceTextLabel->setEnabled(bInEnabled);
     InDeviceComboBox->setEnabled(bInEnabled);
+    InDevicePushButton->setEnabled(bInEnabled && bAlsa);
     OutDeviceTextLabel->setEnabled(bOutEnabled);
     OutDeviceComboBox->setEnabled(bOutEnabled);
+    OutDevicePushButton->setEnabled(bOutEnabled && bAlsa);
 
     InChannelsTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
     InChannelsSpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
@@ -455,6 +462,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 
     InterfaceTextLabel->setEnabled(bAlsa);
     InterfaceComboBox->setEnabled(bAlsa);
+    InterfacePushButton->setEnabled(bAlsa);
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
     DitherComboBox->setEnabled(bAlsa || bPortaudio);
@@ -524,8 +532,106 @@ void qjackctlSetupForm::stabilizeForm (void)
 }
 
 
+// Device selection menu executive.
+void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
+	QPushButton *pPushButton, int iStream, bool bAlternate )
+{
+	// FIXME: Only valid for ALSA devices,
+	// for the time being...
+	if (DriverComboBox->currentText() != "alsa")
+	    return;
+	
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+	QString sText;
+
+	// Enumerate just the ALSA cards and PCM harfware devices...
+	snd_ctl_t *handle;
+	snd_ctl_card_info_t *info;
+	snd_pcm_info_t *pcminfo;
+	
+	snd_ctl_card_info_alloca(&info);
+	snd_pcm_info_alloca(&pcminfo);
+
+	int iCards = 0;
+	int iCard = -1;
+	while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
+		if (snd_ctl_open(&handle, sText.latin1(), 0) >= 0
+			&& snd_ctl_card_info(handle, info) >= 0) {
+			if (iCards > 0)
+    			pContextMenu->insertSeparator();
+			sText = QString("hw:%1\t%2")
+				.arg(iCard)
+				.arg(snd_ctl_card_info_get_name(info));
+    		pContextMenu->insertItem(sText);
+			int iDevice = -1;
+			while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
+				&& iDevice >= 0) {
+				snd_pcm_info_set_device(pcminfo, iDevice);
+				snd_pcm_info_set_subdevice(pcminfo, 0);
+				snd_pcm_info_set_stream(pcminfo, iStream);
+				if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
+					sText = QString("hw:%1,%2\t%3")
+						.arg(iCard)
+						.arg(iDevice)
+						.arg(snd_pcm_info_get_name(pcminfo));
+    				pContextMenu->insertItem(sText);
+				}
+			}
+			snd_ctl_close(handle);
+			++iCards;
+		}
+	}
+	
+	// Maybe this is an alternate settting...
+	if (bAlternate) {
+		if (iCards > 0)
+			pContextMenu->insertSeparator();
+		pContextMenu->insertItem(m_pSetup->sDefPresetName);
+	}
+	
+	// Show the device menu and read selection...
+    int iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
+    if (iItemID != -1) {
+        sText = pContextMenu->text(iItemID);
+        int iLength = sText.find('\t');
+        if (iLength >= 0)
+            pLineEdit->setText(sText.left(iLength));
+		else
+            pLineEdit->setText(sText);
+    //  settingsChanged();
+    }
+
+    delete pContextMenu;
+}
+
+
+// Interface device selection menu.
+void qjackctlSetupForm::selectInterface (void)
+{
+    deviceMenu(InterfaceComboBox->lineEdit(), InterfacePushButton,
+		QJACKCTL_STREAM_PLAYBACK, false);
+}
+
+
+// Input device selection menu.
+void qjackctlSetupForm::selectInDevice (void)
+{
+    deviceMenu(InDeviceComboBox->lineEdit(), InDevicePushButton,
+		QJACKCTL_STREAM_CAPTURE, true);
+}
+
+
+// Output device selection menu.
+void qjackctlSetupForm::selectOutDevice (void)
+{
+    deviceMenu(OutDeviceComboBox->lineEdit(), OutDevicePushButton,
+		QJACKCTL_STREAM_PLAYBACK, true);
+}
+
+
 // Meta-symbol menu executive.
-void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButton )
+void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit,
+	QPushButton *pPushButton )
 {
     const QString s = "  ";
 
