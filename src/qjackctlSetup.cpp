@@ -60,10 +60,14 @@ qjackctlSetup::qjackctlSetup (void)
     iTimeDisplay            = m_settings.readNumEntry("/TimeDisplay", 0);
     iTimeFormat             = m_settings.readNumEntry("/TimeFormat", 0);
     sMessagesFont           = m_settings.readEntry("/MessagesFont", QString::null);
+    bMessagesLimit          = m_settings.readBoolEntry("/MessagesLimit", true);
+    iMessagesLimitLines     = m_settings.readNumEntry("/MessagesLimitLines", 1000);
     sDisplayFont1           = m_settings.readEntry("/DisplayFont1", QString::null);
     sDisplayFont2           = m_settings.readEntry("/DisplayFont2", QString::null);
     bQueryClose             = m_settings.readBoolEntry("/QueryClose", true);
     bKeepOnTop              = m_settings.readBoolEntry("/KeepOnTop", true);
+    bServerConfig           = m_settings.readBoolEntry("/ServerConfig", true);
+    sServerConfigName       = m_settings.readEntry("/ServerConfigName", ".jackdrc");
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -110,10 +114,14 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/TimeDisplay",             iTimeDisplay);
     m_settings.writeEntry("/TimeFormat",              iTimeFormat);
     m_settings.writeEntry("/MessagesFont",            sMessagesFont);
+    m_settings.writeEntry("/MessagesLimit",           bMessagesLimit);
+    m_settings.writeEntry("/MessagesLimitLines",      iMessagesLimitLines);
     m_settings.writeEntry("/DisplayFont1",            sDisplayFont1);
     m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);
     m_settings.writeEntry("/QueryClose",              bQueryClose);
     m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
+    m_settings.writeEntry("/ServerConfig",            bServerConfig);
+    m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");

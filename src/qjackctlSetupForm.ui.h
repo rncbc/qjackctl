@@ -48,6 +48,7 @@ void qjackctlSetupForm::init (void)
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
     TimeRefreshComboBox->setValidator(new QIntValidator(TimeRefreshComboBox));
     StartDelayComboBox->setValidator(new QIntValidator(StartDelayComboBox));
+    MessagesLimitLinesComboBox->setValidator(new QIntValidator(MessagesLimitLinesComboBox));
 
     // Try to restore old window positioning.
     adjustSize();
@@ -74,6 +75,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     m_pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
     m_pSetup->loadComboBoxHistory(XrunRegexComboBox);
     m_pSetup->loadComboBoxHistory(ActivePatchbayPathComboBox);
+    m_pSetup->loadComboBoxHistory(ServerConfigNameComboBox);
 
     // Load Options...
     StartupScriptCheckBox->setChecked(m_pSetup->bStartupScript);
@@ -110,10 +112,16 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     DisplayFont2TextLabel->setFont(font);
     DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
+    // Messages limit option.
+    MessagesLimitCheckBox->setChecked(m_pSetup->bMessagesLimit);
+    MessagesLimitLinesComboBox->setCurrentText(QString::number(m_pSetup->iMessagesLimitLines));
+
     // Other misc options...
     StartJackCheckBox->setChecked(m_pSetup->bStartJack);
     QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
     KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
+    ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
+    ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
 
     // Finally, load preset list...
     m_iDirtySetup++;
@@ -327,7 +335,9 @@ void qjackctlSetupForm::stabilizeForm (void)
     ActivePatchbayPathPushButton->setEnabled(bEnabled);
 
     TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
-    
+    MessagesLimitLinesComboBox->setEnabled(MessagesLimitCheckBox->isChecked());
+    ServerConfigNameComboBox->setEnabled(ServerConfigCheckBox->isChecked());
+
     changeDriver(DriverComboBox->currentText());
 }
 
@@ -509,14 +519,18 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->iTimeRefresh            = TimeRefreshComboBox->currentText().toInt();
 
     // Save Defaults...
-    m_pSetup->iTimeDisplay   = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
-    m_pSetup->iTimeFormat    = TimeFormatComboBox->currentItem();
-    m_pSetup->sMessagesFont  = MessagesFontTextLabel->font().toString();
-    m_pSetup->sDisplayFont1  = DisplayFont1TextLabel->font().toString();
-    m_pSetup->sDisplayFont2  = DisplayFont2TextLabel->font().toString();
-    m_pSetup->bStartJack     = StartJackCheckBox->isChecked();
-    m_pSetup->bQueryClose    = QueryCloseCheckBox->isChecked();
-    m_pSetup->bKeepOnTop     = KeepOnTopCheckBox->isChecked();
+    m_pSetup->iTimeDisplay            = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
+    m_pSetup->iTimeFormat             = TimeFormatComboBox->currentItem();
+    m_pSetup->sMessagesFont           = MessagesFontTextLabel->font().toString();
+    m_pSetup->bMessagesLimit          = MessagesLimitCheckBox->isChecked();
+    m_pSetup->iMessagesLimitLines     = MessagesLimitLinesComboBox->currentText().toInt();
+    m_pSetup->sDisplayFont1           = DisplayFont1TextLabel->font().toString();
+    m_pSetup->sDisplayFont2           = DisplayFont2TextLabel->font().toString();
+    m_pSetup->bStartJack              = StartJackCheckBox->isChecked();
+    m_pSetup->bQueryClose             = QueryCloseCheckBox->isChecked();
+    m_pSetup->bKeepOnTop              = KeepOnTopCheckBox->isChecked();
+    m_pSetup->bServerConfig           = ServerConfigCheckBox->isChecked();
+    m_pSetup->sServerConfigName       = ServerConfigNameComboBox->currentText();
 
     // Save combobox history...
     m_pSetup->saveComboBoxHistory(ServerComboBox);
@@ -527,6 +541,7 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);
     m_pSetup->saveComboBoxHistory(XrunRegexComboBox);
     m_pSetup->saveComboBoxHistory(ActivePatchbayPathComboBox);
+    m_pSetup->saveComboBoxHistory(ServerConfigNameComboBox);
 
     // Just go with dialog acceptance.
     QDialog::accept();

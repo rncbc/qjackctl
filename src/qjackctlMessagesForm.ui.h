@@ -31,6 +31,8 @@
 // Kind of constructor.
 void qjackctlMessagesForm::init (void)
 {
+    // Initialize default message limit.
+    m_iMessagesLimit = QJACKCTL_MESSAGES_MAXLINES;
 }
 
 
@@ -73,6 +75,18 @@ void qjackctlMessagesForm::setMessagesFont ( const QFont & font )
 }
 
 
+// Messages line limit accessors.
+int qjackctlMessagesForm::messagesLimit (void)
+{
+    return m_iMessagesLimit;
+}
+
+void qjackctlMessagesForm::setMessagesLimit( int iMessagesLimit )
+{
+    m_iMessagesLimit = iMessagesLimit;
+}
+
+
 // Messages widget output method.
 void qjackctlMessagesForm::appendMessages( const QString& s )
 {
@@ -86,15 +100,18 @@ void qjackctlMessagesForm::appendMessagesColor( const QString& s, const QString&
 
 void qjackctlMessagesForm::appendMessagesText( const QString& s )
 {
-    int iParagraphs = MessagesTextView->paragraphs();
-    if (iParagraphs > QJACKCTL_MESSAGES_MAXLINES) {
-        MessagesTextView->setUpdatesEnabled(false);
-        while (iParagraphs > QJACKCTL_MESSAGES_MAXLINES) {
-            MessagesTextView->removeParagraph(0);
-            iParagraphs--;
+    // Check for message line limit...
+    if (m_iMessagesLimit > 0) {
+        int iParagraphs = MessagesTextView->paragraphs();
+        if (iParagraphs > m_iMessagesLimit) {
+            MessagesTextView->setUpdatesEnabled(false);
+            while (iParagraphs > m_iMessagesLimit) {
+                MessagesTextView->removeParagraph(0);
+                iParagraphs--;
+            }
+            MessagesTextView->scrollToBottom();
+            MessagesTextView->setUpdatesEnabled(true);
         }
-        MessagesTextView->scrollToBottom();
-        MessagesTextView->setUpdatesEnabled(true);
     }
     MessagesTextView->append(s);
 }

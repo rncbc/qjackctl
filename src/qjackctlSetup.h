@@ -96,10 +96,14 @@ public:
     int     iTimeDisplay;
     int     iTimeFormat;
     QString sMessagesFont;
+    bool    bMessagesLimit;
+    int     iMessagesLimitLines;
     QString sDisplayFont1;
     QString sDisplayFont2;
     bool    bQueryClose;
     bool    bKeepOnTop;
+    bool    bServerConfig;
+    QString sServerConfigName;
 
     // Defaults...
     QString sPatchbayPath;

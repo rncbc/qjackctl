@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>564</width>
-            <height>402</height>
+            <width>500</width>
+            <height>371</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -2341,7 +2341,7 @@
                                         </property>
                                         <property name="minimumSize">
                                             <size>
-                                                <width>120</width>
+                                                <width>180</width>
                                                 <height>0</height>
                                             </size>
                                         </property>
@@ -2391,7 +2391,7 @@
                                         </property>
                                         <property name="minimumSize">
                                             <size>
-                                                <width>120</width>
+                                                <width>180</width>
                                                 <height>0</height>
                                             </size>
                                         </property>
@@ -2451,7 +2451,7 @@
                                     </widget>
                                     <widget class="QLabel" row="2" column="0" rowspan="1" colspan="2">
                                         <property name="name">
-                                            <cstring>textLabel1_2</cstring>
+                                            <cstring>DisplayFont2Label</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -2486,7 +2486,7 @@
                                     </widget>
                                     <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
                                         <property name="name">
-                                            <cstring>textLabel1</cstring>
+                                            <cstring>DisplayFont1Label</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -2618,11 +2618,11 @@
                         <property name="flat">
                             <bool>true</bool>
                         </property>
-                        <grid>
+                        <hbox>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="QLabel">
                                 <property name="name">
                                     <cstring>MessagesFontTextLabel</cstring>
                                 </property>
@@ -2633,6 +2633,12 @@
                                         <horstretch>0</horstretch>
                                         <verstretch>0</verstretch>
                                     </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>180</width>
+                                        <height>0</height>
+                                    </size>
                                 </property>
                                 <property name="paletteBackgroundColor">
                                     <color>
@@ -2659,7 +2665,7 @@
                                     <string>Sample messages text font display</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="0" column="1">
+                            <widget class="QPushButton">
                                 <property name="name">
                                     <cstring>MessagesFontPushButton</cstring>
                                 </property>
@@ -2681,7 +2687,7 @@
                                     <string>Select font for the messages text display</string>
                                 </property>
                             </widget>
-                            <spacer row="0" column="2">
+                            <spacer>
                                 <property name="name">
                                     <cstring>space43</cstring>
                                 </property>
@@ -2693,12 +2699,80 @@
                                 </property>
                                 <property name="sizeHint">
                                     <size>
-                                        <width>160</width>
+                                        <width>8</width>
                                         <height>8</height>
                                     </size>
                                 </property>
                             </spacer>
-                        </grid>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>MessagesLimitCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Messages limit:</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+M</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to keep a maximum number of lines in the messages window</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox">
+                                <item>
+                                    <property name="text">
+                                        <string>100</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>250</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>500</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>1000</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>2500</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>5000</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>MessagesLimitLinesComboBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="currentItem">
+                                    <number>3</number>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>The maximum number of message lines to keep in view</string>
+                                </property>
+                            </widget>
+                        </hbox>
                     </widget>
                     <widget class="QGroupBox">
                         <property name="name">
@@ -2715,68 +2789,128 @@
                         <property name="flat">
                             <bool>true</bool>
                         </property>
-                        <vbox>
+                        <grid>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QCheckBox">
+                            <widget class="QLayoutWidget" row="0" column="0" rowspan="2" colspan="1">
                                 <property name="name">
-                                    <cstring>StartJackCheckBox</cstring>
+                                    <cstring>layout11</cstring>
                                 </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Start JACK audio server on application startup</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+S</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Whether to start JACK audio server immediately on application startup</string>
-                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>StartJackCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Start JACK audio server on application startup</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+S</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to start JACK audio server immediately on application startup</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>QueryCloseCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Confirm application close</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+C</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to ask for confirmation on application exit</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>KeepOnTopCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Keep child windows always on top</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+K</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to keep all child windows on top of the main window</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
                             </widget>
-                            <widget class="QCheckBox">
+                            <widget class="QLayoutWidget" row="0" column="1">
                                 <property name="name">
-                                    <cstring>QueryCloseCheckBox</cstring>
+                                    <cstring>layout15</cstring>
                                 </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Confirm application close</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+C</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Whether to ask for confirmation on application exit</string>
-                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>ServerConfigCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>S&amp;ave JACK audio server configuration to:</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+A</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to save the JACK server command-line configuration to a local file</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox">
+                                        <item>
+                                            <property name="text">
+                                                <string>.jackdrc</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>ServerConfigNameComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>The server configuration local file name</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
                             </widget>
-                            <widget class="QCheckBox">
-                                <property name="name">
-                                    <cstring>KeepOnTopCheckBox</cstring>
-                                </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Keep child windows always on top</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+K</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Whether to keep all child windows on top of the main window</string>
-                                </property>
-                            </widget>
-                        </vbox>
+                        </grid>
                     </widget>
                 </vbox>
             </widget>
@@ -2989,6 +3123,18 @@
         <slot>chooseMessagesFont()</slot>
     </connection>
     <connection>
+        <sender>MessagesLimitCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MessagesLimitLinesComboBox</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>ServerConfigCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ServerConfigNameComboBox</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
         <sender>OkPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3009,19 +3155,19 @@
     <tabstop>ServerComboBox</tabstop>
     <tabstop>DriverComboBox</tabstop>
     <tabstop>RealtimeCheckBox</tabstop>
-    <tabstop>PriorityComboBox</tabstop>
-    <tabstop>InterfaceComboBox</tabstop>
     <tabstop>SoftModeCheckBox</tabstop>
-    <tabstop>FramesComboBox</tabstop>
-    <tabstop>AudioComboBox</tabstop>
     <tabstop>MonitorCheckBox</tabstop>
-    <tabstop>SampleRateComboBox</tabstop>
-    <tabstop>DitherComboBox</tabstop>
     <tabstop>ShortsCheckBox</tabstop>
-    <tabstop>PeriodsComboBox</tabstop>
-    <tabstop>TimeoutComboBox</tabstop>
     <tabstop>ChanComboBox</tabstop>
+    <tabstop>PriorityComboBox</tabstop>
+    <tabstop>FramesComboBox</tabstop>
+    <tabstop>SampleRateComboBox</tabstop>
+    <tabstop>PeriodsComboBox</tabstop>
     <tabstop>WaitComboBox</tabstop>
+    <tabstop>InterfaceComboBox</tabstop>
+    <tabstop>AudioComboBox</tabstop>
+    <tabstop>DitherComboBox</tabstop>
+    <tabstop>TimeoutComboBox</tabstop>
     <tabstop>HWMonCheckBox</tabstop>
     <tabstop>HWMeterCheckBox</tabstop>
     <tabstop>InChannelsSpinBox</tabstop>
@@ -3056,9 +3202,13 @@
     <tabstop>DisplayFont1PushButton</tabstop>
     <tabstop>DisplayFont2PushButton</tabstop>
     <tabstop>MessagesFontPushButton</tabstop>
+    <tabstop>MessagesLimitCheckBox</tabstop>
+    <tabstop>MessagesLimitLinesComboBox</tabstop>
     <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>KeepOnTopCheckBox</tabstop>
+    <tabstop>ServerConfigCheckBox</tabstop>
+    <tabstop>ServerConfigNameComboBox</tabstop>
     <tabstop>OkPushButton</tabstop>
     <tabstop>CancelPushButton</tabstop>
 </tabstops>

@@ -91,13 +91,18 @@
     <include location="local" impldecl="in implementation">qjackctlMainForm.h</include>
     <include location="local" impldecl="in implementation">qjackctlMessagesForm.ui.h</include>
 </includes>
+<variables>
+    <variable access="private">int m_iMessagesLimit;</variable>
+</variables>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
     <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
     <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
     <function specifier="non virtual" returnType="QFont">messagesFont()</function>
-    <function specifier="non virtual">setMessagesFont(const QFont &amp; font)</function>
+    <function specifier="non virtual">setMessagesFont( const QFont &amp; font )</function>
+    <function specifier="non virtual" returnType="int">messagesLimit()</function>
+    <function specifier="non virtual">setMessagesLimit( int iMessagesLimit )</function>
     <function specifier="non virtual">appendMessages( const QString &amp; s )</function>
     <function specifier="non virtual">appendMessagesColor( const QString &amp; s, const QString &amp; c )</function>
     <function specifier="non virtual">appendMessagesText( const QString &amp; s )</function>

@@ -155,6 +155,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // Set defaults...
     updateMessagesFont();
+    updateMessagesLimit();
     updateTimeDisplayFonts();
     updateTimeDisplayToolTips();
     updateTimeFormat();
@@ -691,6 +692,21 @@ void qjackctlMainForm::updateMessagesFont (void)
         QFont font;
         if (font.fromString(m_pSetup->sMessagesFont))
             m_pMessagesForm->setMessagesFont(font);
+    }
+}
+
+
+// Update messages window line limit.
+void qjackctlMainForm::updateMessagesLimit (void)
+{
+    if (m_pSetup == NULL)
+        return;
+
+    if (m_pMessagesForm) {
+        if (m_pSetup->bMessagesLimit)
+            m_pMessagesForm->setMessagesLimit(m_pSetup->iMessagesLimitLines);
+        else
+            m_pMessagesForm->setMessagesLimit(0);
     }
 }
 
@@ -1295,6 +1311,10 @@ void qjackctlMainForm::closePipes (void)
 // Start our jack audio control client...
 bool qjackctlMainForm::startJackClient ( bool bDetach )
 {
+    // Have it a setup?
+    if (m_pSetup == NULL)
+        return false;
+        
     // If can't be already started, are we?
     if (m_pJackClient)
         return true;
@@ -1382,13 +1402,13 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     if (m_pPatchbayForm)
         m_pPatchbayForm->setJackClient(m_pJackClient);
 
-    // Save .jackdrc configuration file.
-    if (!m_sJackCmdLine.isEmpty()) {
+    // Save server configuration file.
+    if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
         QString sFilename = ::getenv("HOME");
-        sFilename += "/.jackdrc";
+        sFilename += "/" + m_pSetup->sServerConfigName;
         QFile file(sFilename);
         if (file.open(IO_WriteOnly | IO_Truncate)) {
-            QTextStream(&file) << m_sJackCmdLine;
+            QTextStream(&file) << m_sJackCmdLine << endl;
             file.close();
             appendMessages(tr("Server configuration saved to") + " " + sFilename);
         }
@@ -1618,6 +1638,8 @@ void qjackctlMainForm::showSetupForm (void)
         QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
         bool    bStdoutCapture         = m_pSetup->bStdoutCapture;
         bool    bKeepOnTop             = m_pSetup->bKeepOnTop;
+        int     bMessagesLimit         = m_pSetup->bMessagesLimit;
+        int     iMessagesLimitLines    = m_pSetup->iMessagesLimitLines;
         // Load the current setup settings.
         pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
@@ -1634,6 +1656,10 @@ void qjackctlMainForm::showSetupForm (void)
             // Check wheather something immediate has changed.
             if (sOldMessagesFont != m_pSetup->sMessagesFont)
                 updateMessagesFont();
+            if (( bMessagesLimit && !m_pSetup->bMessagesLimit) ||
+                (!bMessagesLimit &&  m_pSetup->bMessagesLimit) ||
+                (iMessagesLimitLines !=  m_pSetup->iMessagesLimitLines))
+                updateMessagesLimit();
             if (sOldDisplayFont1 != m_pSetup->sDisplayFont1 ||
                 sOldDisplayFont2 != m_pSetup->sDisplayFont2)
                 updateTimeDisplayFonts();
