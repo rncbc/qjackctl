@@ -99,6 +99,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     ActivePatchbayPathComboBox->setCurrentText(m_pSetup->sActivePatchbayPath);
     AutoRefreshCheckBox->setChecked(m_pSetup->bAutoRefresh);
     TimeRefreshComboBox->setCurrentText(QString::number(m_pSetup->iTimeRefresh));
+    BezierLinesCheckBox->setChecked(m_pSetup->bBezierLines);
 
     // Load some other defaults...
     TimeDisplayButtonGroup->setButton(m_pSetup->iTimeDisplay);
@@ -699,6 +700,7 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->sActivePatchbayPath     = ActivePatchbayPathComboBox->currentText();
         m_pSetup->bAutoRefresh            = AutoRefreshCheckBox->isChecked();
         m_pSetup->iTimeRefresh            = TimeRefreshComboBox->currentText().toInt();
+        m_pSetup->bBezierLines            = BezierLinesCheckBox->isChecked();
         // Save Defaults...
         m_pSetup->iTimeDisplay            = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
         m_pSetup->iTimeFormat             = TimeFormatComboBox->currentItem();

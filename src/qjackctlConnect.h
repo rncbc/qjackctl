@@ -333,6 +333,10 @@ public:
     qjackctlClientList *OClientList();
     qjackctlClientList *IClientList();
 
+    // Connector line style accessors.
+    void setBezierLines(bool bBezierLines);
+    bool isBezierLines();
+    
 public slots:
 
     // Common context menu slot.
@@ -347,6 +351,9 @@ private:
 
     // The main binding object.
     qjackctlConnect *m_pConnect;
+    
+    // How we'll draw connector lines.
+    bool m_bBezierLines;
 };
 
 

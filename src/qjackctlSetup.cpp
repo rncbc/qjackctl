@@ -58,6 +58,7 @@ qjackctlSetup::qjackctlSetup (void)
     sActivePatchbayPath     = m_settings.readEntry("/ActivePatchbayPath", QString::null);
     bAutoRefresh            = m_settings.readBoolEntry("/AutoRefresh", false);
     iTimeRefresh            = m_settings.readNumEntry("/TimeRefresh", 10);
+    bBezierLines            = m_settings.readBoolEntry("/BezierLines", false);
     iTimeDisplay            = m_settings.readNumEntry("/TimeDisplay", 0);
     iTimeFormat             = m_settings.readNumEntry("/TimeFormat", 0);
     sMessagesFont           = m_settings.readEntry("/MessagesFont", QString::null);
@@ -114,6 +115,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/ActivePatchbayPath",      sActivePatchbayPath);
     m_settings.writeEntry("/AutoRefresh",             bAutoRefresh);
     m_settings.writeEntry("/TimeRefresh",             iTimeRefresh);
+    m_settings.writeEntry("/BezierLines",             bBezierLines);
     m_settings.writeEntry("/TimeDisplay",             iTimeDisplay);
     m_settings.writeEntry("/TimeFormat",              iTimeFormat);
     m_settings.writeEntry("/MessagesFont",            sMessagesFont);

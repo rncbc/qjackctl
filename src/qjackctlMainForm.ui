@@ -774,6 +774,7 @@
     <function access="private" specifier="non virtual">appendMessagesError( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">updateMessagesFont( void )</function>
     <function access="private" specifier="non virtual">updateMessagesLimit( void )</function>
+    <function access="private" specifier="non virtual">updateBezierLines( void )</function>
     <function access="private" specifier="non virtual">updateTimeDisplayFonts( void )</function>
     <function access="private" specifier="non virtual">updateTimeDisplayToolTips( void )</function>
     <function access="private" specifier="non virtual">updateTimeFormat( void )</function>

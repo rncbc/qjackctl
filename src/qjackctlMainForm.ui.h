@@ -172,6 +172,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     // Set defaults...
     updateMessagesFont();
     updateMessagesLimit();
+    updateBezierLines();
     updateTimeDisplayFonts();
     updateTimeDisplayToolTips();
     updateTimeFormat();
@@ -814,6 +815,9 @@ void qjackctlMainForm::appendMessagesError( const QString& s )
 // Force update of the messages font.
 void qjackctlMainForm::updateMessagesFont (void)
 {
+    if (m_pSetup == NULL)
+        return;
+
     if (m_pMessagesForm && !m_pSetup->sMessagesFont.isEmpty()) {
         QFont font;
         if (font.fromString(m_pSetup->sMessagesFont))
@@ -833,6 +837,26 @@ void qjackctlMainForm::updateMessagesLimit (void)
             m_pMessagesForm->setMessagesLimit(m_pSetup->iMessagesLimitLines);
         else
             m_pMessagesForm->setMessagesLimit(0);
+    }
+}
+
+
+// Update the connection and patchbay line style.
+void qjackctlMainForm::updateBezierLines (void)
+{
+    if (m_pSetup == NULL)
+        return;
+
+    if (m_pConnectionsForm) {
+        m_pConnectionsForm->JackConnectView->setBezierLines(m_pSetup->bBezierLines);
+        m_pConnectionsForm->AlsaConnectView->setBezierLines(m_pSetup->bBezierLines);
+        m_pConnectionsForm->JackConnectView->ConnectorView()->update();
+        m_pConnectionsForm->AlsaConnectView->ConnectorView()->update();
+    }
+
+    if (m_pPatchbayForm) {
+        m_pPatchbayForm->PatchbayView->setBezierLines(m_pSetup->bBezierLines);
+        m_pPatchbayForm->PatchbayView->PatchworkView()->update();
     }
 }
 
@@ -1694,26 +1718,15 @@ void qjackctlMainForm::showSetupForm (void)
         bool    bSystemTray            = m_pSetup->bSystemTray;
         int     bMessagesLimit         = m_pSetup->bMessagesLimit;
         int     iMessagesLimitLines    = m_pSetup->iMessagesLimitLines;
+        bool    bBezierLines           = m_pSetup->bBezierLines;
         // Load the current setup settings.
         pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
         if (pSetupForm->exec()) {
-            // Warn if something will be only effective on next run.
-            if (( bStdoutCapture && !m_pSetup->bStdoutCapture) ||
-                (!bStdoutCapture &&  m_pSetup->bStdoutCapture) ||
-                ( bKeepOnTop     && !m_pSetup->bKeepOnTop)     ||
-                (!bKeepOnTop     &&  m_pSetup->bKeepOnTop)) {
-                QMessageBox::information(this, tr("Information"),
-                    tr("Some settings will be only effective\n"
-                       "the next time you start this program."), tr("OK"));
-            }
-            // If server is currently running, prompt user...
-            if (m_pJackClient) {
-                QMessageBox::warning(this, tr("Warning"),
-                    tr("Server settings will be only effective after\n"
-                       "restarting the JACK audio server."), tr("OK"));
-            }
             // Check wheather something immediate has changed.
+            if (( bBezierLines && !m_pSetup->bBezierLines) ||
+                (!bBezierLines &&  m_pSetup->bBezierLines))
+                updateBezierLines();
             if (sOldMessagesFont != m_pSetup->sMessagesFont)
                 updateMessagesFont();
             if (( bMessagesLimit && !m_pSetup->bMessagesLimit) ||
@@ -1733,6 +1746,21 @@ void qjackctlMainForm::showSetupForm (void)
             if (( bSystemTray && !m_pSetup->bSystemTray) ||
                 (!bSystemTray &&  m_pSetup->bSystemTray))
                 updateSystemTray();
+            // Warn if something will be only effective on next run.
+            if (( bStdoutCapture && !m_pSetup->bStdoutCapture) ||
+                (!bStdoutCapture &&  m_pSetup->bStdoutCapture) ||
+                ( bKeepOnTop     && !m_pSetup->bKeepOnTop)     ||
+                (!bKeepOnTop     &&  m_pSetup->bKeepOnTop)) {
+                QMessageBox::information(this, tr("Information"),
+                    tr("Some settings will be only effective\n"
+                       "the next time you start this program."), tr("OK"));
+            }
+            // If server is currently running, prompt user...
+            if (m_pJackClient) {
+                QMessageBox::warning(this, tr("Warning"),
+                    tr("Server settings will be only effective after\n"
+                       "restarting the JACK audio server."), tr("OK"));
+            }
         }
         delete pSetupForm;
     }

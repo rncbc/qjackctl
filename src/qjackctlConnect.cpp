@@ -653,13 +653,16 @@ void qjackctlConnectorView::drawConnectionLine ( QPainter& p, int x1, int y1, in
     if (y1 > h1)
         p.drawLine(x1, y1, x1 + 4, y1);
 
-    // Setup control points
-    QPointArray spline(4);
-    int cp = (int)((double)(x2 - x1 - 8) * 0.4);
-    spline.putPoints(0, 4, x1 + 4, y1, x1 + 4 + cp, y1, x2 - 4 - cp, y2, x2 - 4, y2);
-    // The connection line, it self.
-    p.drawCubicBezier(spline);
-//- p.drawLine(x1 + 4, y1, x2 - 4, y2);
+    // How do we'll draw it?
+    if (m_pConnectView->isBezierLines()) {
+        // Setup control points
+        QPointArray spline(4);
+        int cp = (int)((double)(x2 - x1 - 8) * 0.4);
+        spline.putPoints(0, 4, x1 + 4, y1, x1 + 4 + cp, y1, x2 - 4 - cp, y2, x2 - 4, y2);
+        // The connection line, it self.
+        p.drawCubicBezier(spline);
+    }
+    else p.drawLine(x1 + 4, y1, x2 - 4, y2);
 
     // Invisible input ports don't get a connecting dot.
     if (y2 > h2)
@@ -777,7 +780,9 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
     m_pIListView     = new qjackctlClientListView(this, false);
 
     m_pConnect = 0;
-
+    
+    m_bBezierLines = false;
+    
     QObject::connect(m_pOListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(contentsMoving(int, int)),   m_pConnectorView, SLOT(contentsMoved(int, int)));
@@ -851,6 +856,18 @@ qjackctlClientList *qjackctlConnectView::IClientList (void)
         return m_pConnect->OClientList();
     else
         return 0;
+}
+
+
+// Connector line style accessors.
+void qjackctlConnectView::setBezierLines ( bool bBezierLines )
+{
+    m_bBezierLines = bBezierLines;
+}
+
+bool qjackctlConnectView::isBezierLines (void)
+{
+    return m_bBezierLines;
 }
 
 

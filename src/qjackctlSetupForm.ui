@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>514</width>
-            <height>453</height>
+            <width>520</width>
+            <height>497</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -317,7 +317,7 @@
                             </property>
                             <spacer row="1" column="2">
                                 <property name="name">
-                                    <cstring>spacer23</cstring>
+                                    <cstring>spacer13</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Vertical</enum>
@@ -412,7 +412,7 @@
                                     </widget>
                                     <spacer>
                                         <property name="name">
-                                            <cstring>spacer24</cstring>
+                                            <cstring>spacer14</cstring>
                                         </property>
                                         <property name="orientation">
                                             <enum>Horizontal</enum>
@@ -518,7 +518,7 @@
                             </widget>
                             <spacer row="3" column="2">
                                 <property name="name">
-                                    <cstring>spacer25</cstring>
+                                    <cstring>spacer15</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Vertical</enum>
@@ -566,7 +566,7 @@
                                     </widget>
                                     <spacer>
                                         <property name="name">
-                                            <cstring>spacer26</cstring>
+                                            <cstring>spacer16</cstring>
                                         </property>
                                         <property name="orientation">
                                             <enum>Horizontal</enum>
@@ -655,7 +655,7 @@
                                     </widget>
                                     <spacer>
                                         <property name="name">
-                                            <cstring>spacer27</cstring>
+                                            <cstring>spacer17</cstring>
                                         </property>
                                         <property name="orientation">
                                             <enum>Horizontal</enum>
@@ -716,12 +716,6 @@
                                             <size>
                                                 <width>60</width>
                                                 <height>0</height>
-                                            </size>
-                                        </property>
-                                        <property name="maximumSize">
-                                            <size>
-                                                <width>80</width>
-                                                <height>32767</height>
                                             </size>
                                         </property>
                                         <property name="font">
@@ -1063,7 +1057,7 @@
                             </widget>
                             <spacer row="0" column="1">
                                 <property name="name">
-                                    <cstring>spacer21</cstring>
+                                    <cstring>spacer11</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -1242,7 +1236,7 @@
                             </widget>
                             <spacer row="0" column="3">
                                 <property name="name">
-                                    <cstring>spacer22</cstring>
+                                    <cstring>spacer12</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -1545,11 +1539,11 @@
                                                 <bold>0</bold>
                                             </font>
                                         </property>
-                                        <property name="minValue">
-                                            <number>0</number>
-                                        </property>
                                         <property name="maxValue">
                                             <number>99</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>0</number>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Number of periods in the hardware buffer (alsa)</string>
@@ -1643,11 +1637,11 @@
                                                 <bold>0</bold>
                                             </font>
                                         </property>
-                                        <property name="minValue">
-                                            <number>0</number>
-                                        </property>
                                         <property name="maxValue">
                                             <number>89</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>0</number>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Scheduler priority when running realtime</string>
@@ -2256,7 +2250,7 @@
                             </widget>
                             <spacer row="1" column="3" rowspan="1" colspan="2">
                                 <property name="name">
-                                    <cstring>spacer31</cstring>
+                                    <cstring>spacer21</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -2266,7 +2260,7 @@
                                 </property>
                                 <property name="sizeHint">
                                     <size>
-                                        <width>160</width>
+                                        <width>180</width>
                                         <height>8</height>
                                     </size>
                                 </property>
@@ -2372,6 +2366,42 @@
                                     <string>Whether to activate a patchbay definition for connection persistence profile.</string>
                                 </property>
                             </widget>
+                            <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="5">
+                                <property name="name">
+                                    <cstring>BezierLinesCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Draw connection and patchbay lines as &amp;Bezier curves</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+B</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to draw connection lines as cubic Bezier curves</string>
+                                </property>
+                            </widget>
+                            <spacer row="2" column="0">
+                                <property name="name">
+                                    <cstring>spacer22</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Vertical</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>8</width>
+                                        <height>30</height>
+                                    </size>
+                                </property>
+                            </spacer>
                         </grid>
                     </widget>
                 </vbox>
@@ -2730,7 +2760,7 @@
                             </widget>
                             <spacer row="1" column="1" rowspan="1" colspan="2">
                                 <property name="name">
-                                    <cstring>spacer42</cstring>
+                                    <cstring>spacer32</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -2747,7 +2777,7 @@
                             </spacer>
                             <spacer row="0" column="1">
                                 <property name="name">
-                                    <cstring>spacer41</cstring>
+                                    <cstring>spacer31</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -3127,7 +3157,7 @@
                 </property>
                 <spacer>
                     <property name="name">
-                        <cstring>spacer1</cstring>
+                        <cstring>spacer01</cstring>
                     </property>
                     <property name="orientation">
                         <enum>Horizontal</enum>
@@ -3518,6 +3548,12 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
+        <sender>BezierLinesCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
         <sender>TransportTimeRadioButton</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3655,6 +3691,7 @@
     <tabstop>ActivePatchbayPathPushButton</tabstop>
     <tabstop>AutoRefreshCheckBox</tabstop>
     <tabstop>TimeRefreshComboBox</tabstop>
+    <tabstop>BezierLinesCheckBox</tabstop>
     <tabstop>TransportTimeRadioButton</tabstop>
     <tabstop>TransportBBTRadioButton</tabstop>
     <tabstop>ElapsedResetRadioButton</tabstop>

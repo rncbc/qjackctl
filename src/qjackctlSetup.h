@@ -108,6 +108,7 @@ public:
     QString sActivePatchbayPath;
     bool    bAutoRefresh;
     int     iTimeRefresh;
+    bool    bBezierLines;
     int     iTimeDisplay;
     int     iTimeFormat;
     QString sMessagesFont;

@@ -361,6 +361,10 @@ public:
     qjackctlSocketList *OSocketList();
     qjackctlSocketList *ISocketList();
 
+    // Patchwork line style accessors.
+    void setBezierLines(bool bBezierLines);
+    bool isBezierLines();
+
     // Patchbay dirty flag accessors.
     void setDirty (bool bDirty);
     bool dirty();
@@ -385,6 +389,9 @@ private:
     // The main binding object.
     qjackctlPatchbay *m_pPatchbay;
     
+    // How we'll draw patchwork lines.
+    bool m_bBezierLines;
+
     // The obnoxious dirty flag.
     bool m_bDirty;
 };

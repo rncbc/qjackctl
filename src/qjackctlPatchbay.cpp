@@ -988,13 +988,16 @@ void qjackctlPatchworkView::drawConnectionLine ( QPainter& p, int x1, int y1, in
     if (y1 > h1)
         p.drawLine(x1, y1, x1 + 4, y1);
 
-    // Setup control points            
-    QPointArray spline(4);
-    int cp = (int)((double)(x2 - x1 - 8) * 0.4);
-    spline.putPoints(0, 4, x1 + 4, y1, x1 + 4 + cp, y1, x2 - 4 - cp, y2, x2 - 4, y2);
-    // The connection line, it self.
-    p.drawCubicBezier(spline);
-//- p.drawLine(x1 + 4, y1, x2 - 4, y2);
+    // How do we'll draw it?
+    if (m_pPatchbayView->isBezierLines()) {
+        // Setup control points
+        QPointArray spline(4);
+        int cp = (int)((double)(x2 - x1 - 8) * 0.4);
+        spline.putPoints(0, 4, x1 + 4, y1, x1 + 4 + cp, y1, x2 - 4 - cp, y2, x2 - 4, y2);
+        // The connection line, it self.
+        p.drawCubicBezier(spline);
+    }   // Old style...
+    else p.drawLine(x1 + 4, y1, x2 - 4, y2);
 
     // Invisible input plugs don't get a connecting dot.
     if (y2 > h2)
@@ -1107,6 +1110,8 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszNa
 
     m_pPatchbay = 0;
 
+    m_bBezierLines = false;
+
     QObject::connect(m_pOListView, SIGNAL(currentChanged(QListViewItem *)), m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(expanded(QListViewItem *)),  m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(collapsed(QListViewItem *)), m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
@@ -1204,6 +1209,18 @@ qjackctlSocketList *qjackctlPatchbayView::ISocketList (void)
         return m_pPatchbay->ISocketList();
     else
         return 0;
+}
+
+
+// Patchwork line style accessors.
+void qjackctlPatchbayView::setBezierLines ( bool bBezierLines )
+{
+    m_bBezierLines = bBezierLines;
+}
+
+bool qjackctlPatchbayView::isBezierLines (void)
+{
+    return m_bBezierLines;
 }
 
 
