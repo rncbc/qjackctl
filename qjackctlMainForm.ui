@@ -1853,7 +1853,7 @@
     <slot specifier="non virtual">processJackExit()</slot>
     <slot specifier="non virtual">toggleDetails( void )</slot>
     <slot specifier="non virtual">toggleAsio( void )</slot>
-    <slot>changeDriver( const QString &amp; sDriver )</slot>
+    <slot specifier="non virtual">changeDriver( const QString &amp; sDriver )</slot>
     <slot specifier="non virtual">resetXrunStats()</slot>
     <slot specifier="non virtual">portNotifySlot( int fd )</slot>
     <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>

@@ -672,7 +672,7 @@ QString qjackctlMainForm::formatElapsedTime ( QTime& t, bool bElapsed )
 {
     QString sText = t.toString();
     int iSeconds = (t.elapsed() / 1000);
-    if (bElapsed && iSeconds > 1) {
+    if (bElapsed && iSeconds > 0) {
         int iHours   = 0;
         int iMinutes = 0;
         sText += " (";
@@ -694,7 +694,7 @@ QString qjackctlMainForm::formatElapsedTime ( QTime& t, bool bElapsed )
 void qjackctlMainForm::updateElapsedTimes (void)
 {
     m_apStats[STATS_RESET_TIME]->setText(1, formatElapsedTime(m_tResetLast, true));
-    m_apStats[STATS_XRUN_TIME]->setText(1, formatElapsedTime(m_tXrunLast, (m_iXrunCount > 1)));
+    m_apStats[STATS_XRUN_TIME]->setText(1, formatElapsedTime(m_tXrunLast, (m_iXrunCount > 0)));
 }
 
 
