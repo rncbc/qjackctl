@@ -1345,7 +1345,7 @@
                                             <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
-                                            <cstring>PeriodsComboBox</cstring>
+                                            <cstring>PeriodsSpinBox</cstring>
                                         </property>
                                     </widget>
                                     <widget class="QLabel" row="1" column="0">
@@ -1536,42 +1536,20 @@
                                             <string>Sample rate in frames per second</string>
                                         </property>
                                     </widget>
-                                    <widget class="QComboBox" row="3" column="1">
-                                        <item>
-                                            <property name="text">
-                                                <string>2</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>4</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>8</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>16</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>32</string>
-                                            </property>
-                                        </item>
+                                    <widget class="QSpinBox" row="3" column="1">
                                         <property name="name">
-                                            <cstring>PeriodsComboBox</cstring>
+                                            <cstring>PeriodsSpinBox</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
                                                 <bold>0</bold>
                                             </font>
                                         </property>
-                                        <property name="editable">
-                                            <bool>true</bool>
+                                        <property name="minValue">
+                                            <number>0</number>
+                                        </property>
+                                        <property name="maxValue">
+                                            <number>99</number>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Number of periods in the hardware buffer (alsa)</string>
@@ -3372,8 +3350,8 @@
         <slot>settingsChanged()</slot>
     </connection>
     <connection>
-        <sender>PeriodsComboBox</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <sender>PeriodsSpinBox</sender>
+        <signal>valueChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>settingsChanged()</slot>
     </connection>
@@ -3642,7 +3620,7 @@
     <tabstop>PrioritySpinBox</tabstop>
     <tabstop>FramesComboBox</tabstop>
     <tabstop>SampleRateComboBox</tabstop>
-    <tabstop>PeriodsComboBox</tabstop>
+    <tabstop>PeriodsSpinBox</tabstop>
     <tabstop>WordLengthComboBox</tabstop>
     <tabstop>WaitComboBox</tabstop>
     <tabstop>ChanComboBox</tabstop>

@@ -45,7 +45,6 @@ void qjackctlSetupForm::init (void)
     ChanComboBox->setValidator(new QIntValidator(ChanComboBox));
     FramesComboBox->setValidator(new QIntValidator(FramesComboBox));
     SampleRateComboBox->setValidator(new QIntValidator(SampleRateComboBox));
-    PeriodsComboBox->setValidator(new QIntValidator(PeriodsComboBox));
     WaitComboBox->setValidator(new QIntValidator(WaitComboBox));
     WordLengthComboBox->setValidator(new QIntValidator(WordLengthComboBox));
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
@@ -171,7 +170,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         PrioritySpinBox->setValue(preset.iPriority);
         FramesComboBox->setCurrentText(QString::number(preset.iFrames));
         SampleRateComboBox->setCurrentText(QString::number(preset.iSampleRate));
-        PeriodsComboBox->setCurrentText(QString::number(preset.iPeriods));
+        PeriodsSpinBox->setValue(preset.iPeriods);
         WordLengthComboBox->setCurrentText(QString::number(preset.iWordLength));
         WaitComboBox->setCurrentText(QString::number(preset.iWait));
         ChanComboBox->setCurrentText(QString::number(preset.iChan));
@@ -221,7 +220,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.iPriority    = PrioritySpinBox->value();
     preset.iFrames      = FramesComboBox->currentText().toInt();
     preset.iSampleRate  = SampleRateComboBox->currentText().toInt();
-    preset.iPeriods     = PeriodsComboBox->currentText().toInt();
+    preset.iPeriods     = PeriodsSpinBox->value();
     preset.iWordLength  = WordLengthComboBox->currentText().toInt();
     preset.iWait        = WaitComboBox->currentText().toInt();
     preset.iChan        = ChanComboBox->currentText().toInt();
@@ -353,7 +352,7 @@ void qjackctlSetupForm::computeLatency (void)
     float lat = 0.0;
     int p = FramesComboBox->currentText().toInt();
     int r = SampleRateComboBox->currentText().toInt();
-    int n = PeriodsComboBox->currentText().toInt();
+    int n = PeriodsSpinBox->value();
     if (r > 0)
         lat = (float) (1000.0 * p * n) / (float) r;
     if (lat > 0.0)
@@ -423,7 +422,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     IgnoreHWCheckBox->setEnabled(bOss);
 
     PeriodsTextLabel->setEnabled(bAlsa || bOss);
-    PeriodsComboBox->setEnabled(bAlsa || bOss);
+    PeriodsSpinBox->setEnabled(bAlsa || bOss);
 
     WordLengthTextLabel->setEnabled(bOss);
     WordLengthComboBox->setEnabled(bOss);

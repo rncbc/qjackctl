@@ -5,8 +5,8 @@ ChangeLog
 
 0.3.0   2004-07-12  Work in progress...
 
-- Priority setup control is now a spinbox ranging from 0..89 (as suggested
-  by Florian Schmidt).
+- Priority and setup control is now a spinbox ranging from 0..89 (as suggested
+  by Florian Schmidt). Same for Periods/Buffer.
 
 - Patchbay connection lines are now drawn correctly when items are
   scrolled out of view. Additionally, the connection lines can now be
