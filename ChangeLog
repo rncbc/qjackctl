@@ -3,13 +3,16 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.1   2003-12-23  The fix of fixes.
+0.2.1   2003-12-26  The fix of fixes.
 
+- Fixed jackstart/jackd command line parameter argument concatenation.
+  
 - Front panel status display font can now be customized.
 
 - Some connection graph changes were being silently missed, now fixed.
 
-- Messages window fallback fix.
+- Messages window fallback fix; stdout handling has been retouched to
+  be more line buffer oriented.
 
 
 0.2.0   2003-12-12  ALSA sequencer patchbay entrance.

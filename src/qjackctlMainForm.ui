@@ -699,12 +699,14 @@
     <variable access="private">qjackctlPatchbayForm *m_pPatchbayForm;</variable>
     <variable access="private">qjackctlPatchbayRack m_patchbayRack;</variable>
     <variable access="private">qjackctlPreset m_preset;</variable>
+    <variable access="private">QString m_sStdoutBuffer;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack( void )</slot>
     <slot specifier="non virtual">stopJack( void )</slot>
     <slot specifier="non virtual">readJackStdout( void )</slot>
-    <slot specifier="non virtual">readJackStderr( void )</slot>
+    <slot specifier="non virtual">appendStdoutBuffer( const QString &amp; s )</slot>
+    <slot specifier="non virtual">flushStdoutBuffer( void )</slot>
     <slot specifier="non virtual">processJackExit( void )</slot>
     <slot specifier="non virtual">stdoutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">alsaNotifySlot( int fd )</slot>

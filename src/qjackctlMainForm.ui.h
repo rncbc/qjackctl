@@ -354,7 +354,7 @@ void qjackctlMainForm::startJack (void)
     if (m_pSetup->bStdoutCapture) {
         m_pJack->setCommunication(QProcess::Stdout | QProcess::Stderr | QProcess::DupStderr);
         QObject::connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
-        QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
+        QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStdout()));
     }
     // The unforgiveable signal communication...
     QObject::connect(m_pJack, SIGNAL(processExited()), this, SLOT(processJackExit()));
@@ -366,54 +366,37 @@ void qjackctlMainForm::startJack (void)
     if (m_preset.bRealtime)
         m_pJack->addArgument("-R");
     if (m_preset.iPriority > 0) {
-        m_pJack->addArgument("-P");
-        m_pJack->addArgument(QString::number(m_preset.iPriority));
+        m_pJack->addArgument("-P" + QString::number(m_preset.iPriority));
     }
     if (m_preset.iTimeout > 0) {
-        m_pJack->addArgument("-t");
-        m_pJack->addArgument(QString::number(m_preset.iTimeout));
+        m_pJack->addArgument("-t" + QString::number(m_preset.iTimeout));
     }
     sTemp = m_preset.sDriver;
-    m_pJack->addArgument("-d");
-    m_pJack->addArgument(sTemp);
+    m_pJack->addArgument("-d" + sTemp);
     bool bDummy     = (sTemp == "dummy");
     bool bAlsa      = (sTemp == "alsa");
     bool bPortaudio = (sTemp == "portaudio");
+    if (bAlsa)
+        m_pJack->addArgument("-d" + m_preset.sInterface);
+    if (bPortaudio && m_preset.iChan > 0)
+        m_pJack->addArgument("-c" + QString::number(m_preset.iChan));
+    if (m_preset.iSampleRate > 0)
+        m_pJack->addArgument("-r" + QString::number(m_preset.iSampleRate));
+    if (m_preset.iFrames > 0)
+        m_pJack->addArgument("-p" + QString::number(m_preset.iFrames));
     if (bAlsa) {
-        m_pJack->addArgument("-d");
-        m_pJack->addArgument(m_preset.sInterface);
-    }
-    if (bPortaudio && m_preset.iChan > 0) {
-        m_pJack->addArgument("-c");
-        m_pJack->addArgument(QString::number(m_preset.iChan));
-    }
-    if (m_preset.iSampleRate > 0) {
-        m_pJack->addArgument("-r");
-        m_pJack->addArgument(QString::number(m_preset.iSampleRate));
-    }
-    if (m_preset.iFrames > 0) {
-        m_pJack->addArgument("-p");
-        m_pJack->addArgument(QString::number(m_preset.iFrames));
-    }
-    if (bAlsa) {
-        if (m_preset.iPeriods > 0) {
-            m_pJack->addArgument("-n");
-            m_pJack->addArgument(QString::number(m_preset.iPeriods));
-        }
+        if (m_preset.iPeriods > 0)
+            m_pJack->addArgument("-n" + QString::number(m_preset.iPeriods));
         if (m_preset.bSoftMode)
             m_pJack->addArgument("-s");
         if (m_preset.bMonitor)
             m_pJack->addArgument("-m");
         if (m_preset.bShorts)
             m_pJack->addArgument("-S");
-        if (m_preset.iInChannels > 0) {
-            m_pJack->addArgument("-i");
-            m_pJack->addArgument(QString::number(m_preset.iInChannels));
-        }
-        if (m_preset.iOutChannels > 0) {
-            m_pJack->addArgument("-o");
-            m_pJack->addArgument(QString::number(m_preset.iOutChannels));
-        }
+        if (m_preset.iInChannels > 0)
+            m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
+        if (m_preset.iOutChannels > 0)
+            m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     }
     switch (m_preset.iAudio) {
     case 0:
@@ -426,10 +409,8 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument("-P");
         break;
     }
-    if (bDummy && m_preset.iWait > 0) {
-        m_pJack->addArgument("-w");
-        m_pJack->addArgument(QString::number(m_preset.iWait));
-    }
+    if (bDummy && m_preset.iWait > 0)
+        m_pJack->addArgument("-w" + QString::number(m_preset.iWait));
     if (!bDummy) {
         switch (m_preset.iDither) {
         case 0:
@@ -457,7 +438,7 @@ void qjackctlMainForm::startJack (void)
     QStringList list = m_pJack->arguments();
     QStringList::Iterator iter = list.begin();
     sTemp = "[";
-    while( iter != list.end() ) {
+    while (iter != list.end()) {
 	    sTemp += *iter++;
         sTemp += " ";
     }
@@ -516,16 +497,33 @@ void qjackctlMainForm::stopJack (void)
 // Stdout handler...
 void qjackctlMainForm::readJackStdout (void)
 {
-    QString s = m_pJack->readStdout();
-    appendMessagesText(detectXrun(s));
+    appendStdoutBuffer(m_pJack->readStdout());
 }
 
 
-// Stderr handler...
-void qjackctlMainForm::readJackStderr (void)
+// Stdout buffer handler -- now splitted by complete new-lines...
+void qjackctlMainForm::appendStdoutBuffer ( const QString& s )
 {
-    QString s = m_pJack->readStderr();
-    appendMessagesText(detectXrun(s));
+    m_sStdoutBuffer.append(s);
+    
+    int iLength = m_sStdoutBuffer.findRev('\n') + 1;
+    if (iLength > 0) {
+        QString sTemp = m_sStdoutBuffer.left(iLength);
+        m_sStdoutBuffer.remove(0, iLength);
+        QStringList list = QStringList::split('\n', sTemp, true);
+        for (QStringList::Iterator iter = list.begin(); iter != list.end(); iter++)
+            appendMessagesText(detectXrun(*iter));
+    }
+}
+
+
+// Stdout flusher -- show up any unfinished line...
+void qjackctlMainForm::flushStdoutBuffer (void)
+{
+    if (!m_sStdoutBuffer.isEmpty()) {
+        appendMessagesText(detectXrun(m_sStdoutBuffer));
+        m_sStdoutBuffer.truncate(0);
+    }
 }
 
 
@@ -535,6 +533,9 @@ void qjackctlMainForm::processJackExit (void)
     // Force client code cleanup.
     if (!m_bJackDetach)
         stopJackClient();
+
+    // Flush anything that maybe pending...
+    flushStdoutBuffer();
 
     if (m_pJack) {
         // Force final server shutdown...
@@ -595,7 +596,7 @@ void qjackctlMainForm::stdoutNotifySlot ( int fd )
     int  cchBuffer = ::read(fd, achBuffer, sizeof(achBuffer) - 1);
     if (cchBuffer > 0) {
         achBuffer[cchBuffer] = (char) 0;
-        appendMessagesText(achBuffer);
+        appendStdoutBuffer(achBuffer);
     }
 }
 
