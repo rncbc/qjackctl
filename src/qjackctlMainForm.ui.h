@@ -200,13 +200,18 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
             QObject::connect(m_pAlsaNotifier, SIGNAL(activated(int)), this, SLOT(alsaNotifySlot(int)));
         }
     }
-
-    // Rather obvious setup.
-    if (m_pConnectionsForm)
-        m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
-    if (m_pPatchbayForm)
-        m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
-
+    
+    // Could we start without it?
+    if (m_pAlsaSeq == NULL) {
+        appendMessagesError(tr("Could not open ALSA sequencer as a client; MIDI patchbay will be not available."));
+    } else {
+        // Rather obvious setup.
+        if (m_pConnectionsForm)
+            m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
+        if (m_pPatchbayForm)
+            m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
+    }
+    
     // Load patchbay from default path.
     if (m_pPatchbayForm && !m_pSetup->sPatchbayPath.isEmpty())
         m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
@@ -1652,6 +1657,12 @@ void qjackctlMainForm::showSetupForm (void)
                 QMessageBox::information(this, tr("Information"),
                     tr("Some settings will be only effective\n"
                        "the next time you start this program."), tr("OK"));
+            }
+            // If server is currently running, prompt user...
+            if (m_pJackClient) {
+                QMessageBox::warning(this, tr("Warning"),
+                    tr("Server settings will be only effective after\n"
+                       "restarting the JACK audio server."), tr("OK"));
             }
             // Check wheather something immediate has changed.
             if (sOldMessagesFont != m_pSetup->sMessagesFont)

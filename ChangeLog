@@ -8,6 +8,9 @@ ChangeLog
 - Message window line limit is now a configurable option on setup, as is
   whether the command-line local configuration file gets saved at all.
 
+- Warning message issued if ALSA sequencer is not available on startup;
+  also if server settings are changed while client is currently active.
+
 
 0.2.5  2004-02-16  Server survival option and command-line wrapper feature.
 
