@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>96</height>
+            <width>448</width>
+            <height>103</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -66,6 +66,12 @@
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
+            <property name="maximumSize">
+                <size>
+                    <width>260</width>
+                    <height>80</height>
+                </size>
+            </property>
             <property name="paletteForegroundColor">
                 <color>
                     <red>0</red>
@@ -79,6 +85,9 @@
                     <green>0</green>
                     <blue>0</blue>
                 </color>
+            </property>
+            <property name="paletteBackgroundPixmap">
+                <pixmap>displaybg1.png</pixmap>
             </property>
             <property name="frameShape">
                 <enum>Panel</enum>
@@ -111,12 +120,8 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>170</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
@@ -124,6 +129,9 @@
                             </property>
                             <property name="alignment">
                                 <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                            <property name="indent">
+                                <number>2</number>
                             </property>
                             <property name="toolTip" stdset="0">
                                 <string>JACK server state</string>
@@ -139,19 +147,15 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>170</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
                                 </font>
                             </property>
                             <property name="alignment">
-                                <set>AlignVCenter|AlignHCenter</set>
+                                <set>AlignCenter</set>
                             </property>
                             <property name="toolTip" stdset="0">
                                 <string>JACK server mode</string>
@@ -167,12 +171,8 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>170</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
@@ -195,12 +195,8 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>170</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
@@ -233,15 +229,14 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>0</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="alignment">
                                 <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                            <property name="indent">
+                                <number>2</number>
                             </property>
                             <property name="toolTip" stdset="0">
                                 <string>XRUN Count</string>
@@ -257,12 +252,8 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>0</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
@@ -300,12 +291,8 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>0</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
@@ -313,6 +300,9 @@
                             </property>
                             <property name="alignment">
                                 <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                            <property name="indent">
+                                <number>2</number>
                             </property>
                             <property name="toolTip" stdset="0">
                                 <string>Transport state</string>
@@ -328,12 +318,8 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>0</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
@@ -356,12 +342,8 @@
                                     <height>0</height>
                                 </size>
                             </property>
-                            <property name="paletteForegroundColor">
-                                <color>
-                                    <red>0</red>
-                                    <green>170</green>
-                                    <blue>0</blue>
-                                </color>
+                            <property name="backgroundOrigin">
+                                <enum>ParentOrigin</enum>
                             </property>
                             <property name="font">
                                 <font>
@@ -745,6 +727,7 @@
     <slot specifier="non virtual">timerSlot( void )</slot>
     <slot specifier="non virtual">jackConnectChanged( void )</slot>
     <slot specifier="non virtual">alsaConnectChanged( void )</slot>
+    <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
     <slot specifier="non virtual">toggleMainForm( void )</slot>
     <slot specifier="non virtual">toggleMessagesForm( void )</slot>
     <slot specifier="non virtual">toggleStatusForm( void )</slot>
@@ -754,7 +737,6 @@
     <slot specifier="non virtual">showAboutForm( void )</slot>
     <slot specifier="non virtual">transportStart()</slot>
     <slot specifier="non virtual">transportStop()</slot>
-    <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
     <slot specifier="non virtual">systemTrayContextMenu( const QPoint &amp; pos )</slot>
     <slot specifier="non virtual">quitMainForm( void )</slot>
 </slots>
@@ -788,12 +770,12 @@
     <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( int iStatusItem, const QTime &amp; t, bool bElapsed )</function>
     <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>
     <function specifier="non virtual">refreshXrunStats( void )</function>
-    <function access="private" specifier="non virtual" returnType="bool">startJackClient( bool bDetach )</function>
-    <function access="private" specifier="non virtual">stopJackClient( void )</function>
     <function access="private" specifier="non virtual">portNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">xrunNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">buffNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">shutNotifyEvent( void )</function>
+    <function access="private" specifier="non virtual" returnType="bool">startJackClient( bool bDetach )</function>
+    <function access="private" specifier="non virtual">stopJackClient( void )</function>
     <function access="private" specifier="non virtual">refreshConnections( void )</function>
     <function specifier="non virtual">refreshJackConnections( void )</function>
     <function specifier="non virtual">refreshAlsaConnections( void )</function>

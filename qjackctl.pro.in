@@ -31,6 +31,7 @@ FORMS    = src/qjackctlMainForm.ui \
            src/qjackctlAboutForm.ui
 
 IMAGES   = icons/qjackctl.xpm \
+           icons/displaybg1.png \
            icons/start1.png \
            icons/stop1.png \
            icons/quit1.png \

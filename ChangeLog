@@ -5,6 +5,8 @@ ChangeLog
 
 0.3.0   2004-07-15  Work in progress...
 
+- Main display background gets shinny effect.
+
 - Priority and setup control is now a spinbox ranging from 0..89 (as suggested
   by Florian Schmidt). Same for Periods/Buffer.
 
