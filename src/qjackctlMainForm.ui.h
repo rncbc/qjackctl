@@ -813,7 +813,7 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem, const QTime& t, b
 
     // Display time remaining on start delay...
     if (m_iTimerDelay < m_iStartDelay)
-        TimeDisplayTextLabel->setText("-" + formatTime((m_iStartDelay - m_iTimerDelay) / 1000));
+        TimeDisplayTextLabel->setText(formatTime((m_iStartDelay - m_iTimerDelay) / 1000));
     else
     // Display elapsed time as big time?
     if ((iStatusItem == STATUS_RESET_TIME && m_pSetup->iTimeDisplay == DISPLAY_RESET_TIME) ||
@@ -1286,6 +1286,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     refreshConnections();
 
     // Displayes are highlighted from now on.
+    XrunCountTextLabel->setPaletteForegroundColor(Qt::green);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::green);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::green);
@@ -1356,6 +1357,10 @@ void qjackctlMainForm::stopJackClient (void)
     m_iShutNotify = 0;
 
     // Displays are deemed again.
+    QColor fgcolor = Qt::darkGreen;
+    if ((m_iXrunCount + m_iXrunCallbacks) > 0)
+        fgcolor = (m_iXrunCallbacks > 0 ? Qt::darkRed : Qt::darkYellow);
+    XrunCountTextLabel->setPaletteForegroundColor(fgcolor);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::darkGreen);
