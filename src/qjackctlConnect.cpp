@@ -651,8 +651,9 @@ int qjackctlClientListView::compare (const QString& s1, const QString& s2, bool 
         while (s2.at(ich2).isSpace())
             ich2++;
 
-        QChar ch1 = s1.at(ich1);
-        QChar ch2 = s2.at(ich2);
+		// Normalize (to uppercase) the next characters...
+        QChar ch1 = s1.at(ich1).upper();
+        QChar ch2 = s2.at(ich2).upper();
 
         if (ch1.isDigit() && ch2.isDigit()) {
             // Find the whole length numbers...
@@ -670,8 +671,8 @@ int qjackctlClientListView::compare (const QString& s1, const QString& s2, bool 
             else if (iNumber1 > iNumber2)
                 return (bAscending ?  1 : -1);
             // Go on with this next char...
-            ch1 = s1.at(ich1);
-            ch2 = s2.at(ich2);
+            ch1 = s1.at(ich1).upper();
+            ch2 = s2.at(ich2).upper();
         }
 
         // Compare this char...

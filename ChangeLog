@@ -3,10 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.14   2005-01-10  Work in progress...
+0.2.14   2005-01-12  Work in progress...
 
-- All conection view items are now sorted in natural order, not just audio 
-  port names as was before.
+- All conection view items are now sorted in natural case insensitive order,
+  not just as audio port names as was before.
 
 - Got rid of those nonsense paranoid and rather stupid mutex guards on the
   connections management framework (nuff said :).
