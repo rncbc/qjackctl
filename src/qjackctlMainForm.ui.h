@@ -133,7 +133,7 @@ void qjackctlMainForm::destroy (void)
         delete m_pConnectionsForm;
     if (m_pPatchbayForm)
         delete m_pPatchbayForm;
-
+        
     // Quit off system tray widget.
     if (m_pSystemTray)
         delete m_pSystemTray;
@@ -161,15 +161,6 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
         this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
-    // Try to open the system tray widget.
-    m_pSystemTray = new qjackctlSystemTray(this);
-
-    if (m_pSetup->bSystemTray)
-        m_pSystemTray->show();
-
-    QObject::connect(m_pSystemTray, SIGNAL(contextMenuRequested(qjackctlSystemTray *, const QPoint &)),
-        this, SLOT(systemTrayContextMenu(qjackctlSystemTray *, const QPoint &)));
-
     // Try to restore old window positioning.
     m_pSetup->loadWidgetGeometry(this);
     // And for the whole widget gallore...
@@ -185,6 +176,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     updateTimeDisplayToolTips();
     updateTimeFormat();
     updateActivePatchbay();
+    updateSystemTray();
 
     // Initial XRUN statistics reset.
     resetXrunStats();
@@ -1757,15 +1749,6 @@ void qjackctlMainForm::showSetupForm (void)
                     tr("Some settings will be only effective\n"
                        "the next time you start this program."), tr("OK"));
             }
-            // The system tray icon maybe already available.
-            if (m_pSystemTray &&
-                ( bSystemTray && !m_pSetup->bSystemTray) ||
-                (!bSystemTray &&  m_pSetup->bSystemTray)) {
-                if (m_pSetup->bSystemTray)
-                    m_pSystemTray->show();
-                else
-                    m_pSystemTray->hide();
-            }
             // If server is currently running, prompt user...
             if (m_pJackClient) {
                 QMessageBox::warning(this, tr("Warning"),
@@ -1789,6 +1772,9 @@ void qjackctlMainForm::showSetupForm (void)
             if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||
                 (sOldActivePatchbayPath != m_pSetup->sActivePatchbayPath))
                 updateActivePatchbay();
+            if (( bSystemTray && !m_pSetup->bSystemTray) ||
+                (!bSystemTray &&  m_pSetup->bSystemTray))
+                updateSystemTray();
         }
         delete pSetupForm;
     }
@@ -1998,6 +1984,24 @@ void qjackctlMainForm::updateTitle ( const QString& sTitle, int iState )
             break;
         }
         QToolTip::add(m_pSystemTray, sTitle);
+    }
+}
+
+
+// System tray master switcher.
+void qjackctlMainForm::updateSystemTray (void)
+{
+    if (!m_pSetup->bSystemTray && m_pSystemTray) {
+        m_pSystemTray->close();
+        delete m_pSystemTray;
+        m_pSystemTray = NULL;
+    }
+    
+    if (m_pSetup->bSystemTray && m_pSystemTray == NULL) {
+        m_pSystemTray = new qjackctlSystemTray(this);
+        m_pSystemTray->show();
+        QObject::connect(m_pSystemTray, SIGNAL(contextMenuRequested(qjackctlSystemTray *, const QPoint &)),
+            this, SLOT(systemTrayContextMenu(qjackctlSystemTray *, const QPoint &)));
     }
 }
 

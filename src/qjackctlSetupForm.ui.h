@@ -134,7 +134,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
     ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
 
-#ifndef CONFIG_KDE
+#ifndef CONFIG_SYSTEM_TRAY
     SystemTrayCheckBox->setChecked(false);
     SystemTrayCheckBox->setEnabled(false);
 #endif

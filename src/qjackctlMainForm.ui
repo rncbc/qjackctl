@@ -801,6 +801,7 @@
     <function access="private" specifier="non virtual">refreshStatus( void )</function>
     <function access="private" specifier="non virtual">updateStatus( int iStatusItem, const QString &amp; sText )</function>
     <function access="private" specifier="non virtual">updateTitle( const QString &amp; sTitle, int iState )</function>
+    <function access="private" specifier="non virtual">updateSystemTray( void )</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>

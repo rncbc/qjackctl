@@ -42,6 +42,12 @@ void qjackctlAboutForm::init (void)
     sText += "<br />\n";
     sText += "</font></small>";
 #endif
+#ifndef CONFIG_SYSTEM_TRAY
+    sText += "<small><font color=\"red\">";
+    sText += tr("System tray disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
 #ifndef CONFIG_JACK_TRANSPORT
     sText += "<small><font color=\"red\">";
     sText += tr("Transport status control disabled.");

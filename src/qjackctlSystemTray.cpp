@@ -27,10 +27,15 @@
 
 #include "config.h"
 
-#ifdef CONFIG_KDE
+#ifdef CONFIG_SYSTEM_TRAY
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+// System Tray Protocol Specification opcodes.
+#define SYSTEM_TRAY_REQUEST_DOCK    0
+#define SYSTEM_TRAY_BEGIN_MESSAGE   1
+#define SYSTEM_TRAY_CANCEL_MESSAGE  2
 #endif
+
 
 
 //----------------------------------------------------------------------------
@@ -38,17 +43,54 @@
 
 // Constructor.
 qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent , const char *pszName )
-    : QLabel(pParent, pszName, Qt::WType_TopLevel)
+    : QLabel(pParent, pszName, WMouseNoMask | WRepaintNoErase | WType_TopLevel | WStyle_Customize | WStyle_NoBorder | WStyle_StaysOnTop)
 {
     QLabel::setBackgroundMode(Qt::X11ParentRelative);
     QLabel::setBackgroundOrigin(QWidget::WindowOrigin);
 
-#ifdef CONFIG_KDE
-    Display *dpy  = qt_xdisplay();
-    WId trayWin   = winId();
-    WId forWin    = pParent ? pParent->topLevelWidget()->winId() : qt_xrootwin();
-    Atom trayAtom = XInternAtom(dpy, "_KDE_NET_WM_SYSTEM_TRAY_WINDOW_FOR", false);
+#ifdef CONFIG_SYSTEM_TRAY
+
+    Display *dpy = qt_xdisplay();
+    WId trayWin  = winId();
+
+	// System Tray Protocol Specification.
+	Screen *screen = XDefaultScreenOfDisplay(dpy);
+	int iScreen = XScreenNumberOfScreen(screen);
+	char szAtom[32];
+	snprintf(szAtom, sizeof(szAtom), "_NET_SYSTEM_TRAY_S%d", iScreen);
+	Atom selectionAtom = XInternAtom(dpy, szAtom, false);
+	XGrabServer(dpy);
+	Window managerWin = XGetSelectionOwner(dpy, selectionAtom);
+	if (managerWin != None)
+		XSelectInput(dpy, managerWin, StructureNotifyMask);
+	XUngrabServer(dpy);
+	XFlush(dpy);
+	if (managerWin != None) {
+    	XEvent ev;
+    	memset(&ev, 0, sizeof(ev));
+    	ev.xclient.type = ClientMessage;
+    	ev.xclient.window = managerWin;
+    	ev.xclient.message_type = XInternAtom(dpy, "_NET_SYSTEM_TRAY_OPCODE", false);
+    	ev.xclient.format = 32;
+    	ev.xclient.data.l[0] = CurrentTime;
+    	ev.xclient.data.l[1] = SYSTEM_TRAY_REQUEST_DOCK;
+    	ev.xclient.data.l[2] = trayWin;
+    	ev.xclient.data.l[3] = 0;
+    	ev.xclient.data.l[4] = 0;
+    	XSendEvent(dpy, managerWin, false, NoEventMask, &ev);
+    	XSync(dpy, false);
+    }
+
+    // Follwing simple KDE specs:
+    WId forWin = pParent ? pParent->topLevelWidget()->winId() : qt_xrootwin();
+    Atom trayAtom;
+    // For older KDE's (hopefully)...
+    trayAtom = XInternAtom(dpy, "KWM_DOCKWINDOW", false);
+    XChangeProperty(dpy, trayWin, trayAtom, trayAtom, 32, PropModeReplace, (unsigned char *) &forWin, 1);
+    // For not so older KDE's...
+    trayAtom = XInternAtom(dpy, "_KDE_NET_WM_SYSTEM_TRAY_WINDOW_FOR", false);
     XChangeProperty(dpy, trayWin, trayAtom, XA_WINDOW, 32, PropModeReplace, (unsigned char *) &forWin, 1);
+
 #endif
 
     if (pParent) {
