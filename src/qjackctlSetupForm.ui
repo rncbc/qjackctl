@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>qjackctlSetupForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>552</width>
-            <height>497</height>
+            <width>647</width>
+            <height>531</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -2539,6 +2539,12 @@
                                                 <height>0</height>
                                             </size>
                                         </property>
+                                        <property name="maximumSize">
+                                            <size>
+                                                <width>260</width>
+                                                <height>32767</height>
+                                            </size>
+                                        </property>
                                         <property name="paletteForegroundColor">
                                             <color>
                                                 <red>0</red>
@@ -2546,11 +2552,12 @@
                                                 <blue>0</blue>
                                             </color>
                                         </property>
-                                        <property name="paletteBackgroundPixmap">
-                                            <pixmap>displaybg1.png</pixmap>
-                                        </property>
-                                        <property name="backgroundOrigin">
-                                            <enum>WidgetOrigin</enum>
+                                        <property name="paletteBackgroundColor">
+                                            <color>
+                                                <red>0</red>
+                                                <green>0</green>
+                                                <blue>0</blue>
+                                            </color>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -2588,6 +2595,12 @@
                                                 <height>0</height>
                                             </size>
                                         </property>
+                                        <property name="maximumSize">
+                                            <size>
+                                                <width>260</width>
+                                                <height>32767</height>
+                                            </size>
+                                        </property>
                                         <property name="paletteForegroundColor">
                                             <color>
                                                 <red>0</red>
@@ -2595,11 +2608,12 @@
                                                 <blue>0</blue>
                                             </color>
                                         </property>
-                                        <property name="paletteBackgroundPixmap">
-                                            <pixmap>displaybg1.png</pixmap>
-                                        </property>
-                                        <property name="backgroundOrigin">
-                                            <enum>WidgetOrigin</enum>
+                                        <property name="paletteBackgroundColor">
+                                            <color>
+                                                <red>0</red>
+                                                <green>0</green>
+                                                <blue>0</blue>
+                                            </color>
                                         </property>
                                         <property name="font">
                                             <font>
