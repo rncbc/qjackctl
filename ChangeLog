@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.9   2004-06-20  Sloppy boy fixes and minor featuritis.
+0.2.9   2004-07-01  Sloppy boy fixes and minor featuritis.
 
 - Patchbay socket dialog client and plug list option items are now
   properly escaped as regular expressions.

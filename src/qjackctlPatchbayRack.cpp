@@ -527,14 +527,12 @@ void qjackctlPatchbayRack::connectAudioScan ( jack_client_t *pJackClient )
 
     // Cache client descriptor.
     m_pJackClient = pJackClient;
-    // Cache all current output client-ports...
+    // Cache all current client-ports...
     m_ppszOAudioPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsOutput);
-    if (m_ppszOAudioPorts == NULL)
-        return;
-
-    // Cache all current input client-ports...
     m_ppszIAudioPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsInput);
-    if (m_ppszIAudioPorts) {
+
+    // Start looking for connections...
+    if (m_ppszOAudioPorts && m_ppszIAudioPorts) {
         for (qjackctlPatchbayCable *pCable = m_cablelist.first(); pCable; pCable = m_cablelist.next())
             connectAudioCable(pCable->outputSocket(), pCable->inputSocket());
     }
@@ -544,10 +542,9 @@ void qjackctlPatchbayRack::connectAudioScan ( jack_client_t *pJackClient )
         ::free(m_ppszOAudioPorts);
     if (m_ppszIAudioPorts)
         ::free(m_ppszIAudioPorts);
-
     // Reset cached pointers.
     m_ppszOAudioPorts = NULL;
-    m_ppszIAudioPorts  = NULL;
+    m_ppszIAudioPorts = NULL;
     m_pJackClient = NULL;
 }
 
