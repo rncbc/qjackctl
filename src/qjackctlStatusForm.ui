@@ -2,7 +2,7 @@
 <class>qjackctlStatusForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -186,12 +186,14 @@
 </tabstops>
 <includes>
     <include location="global" impldecl="in declaration">qlistview.h</include>
+    <include location="global" impldecl="in declaration">qtooltip.h</include>
     <include location="global" impldecl="in declaration">jack/jack.h</include>
     <include location="local" impldecl="in implementation">qjackctlMainForm.h</include>
     <include location="local" impldecl="in implementation">qjackctlStatusForm.ui.h</include>
 </includes>
 <variables>
     <variable access="private">QListViewItem *m_apStatus[18];</variable>
+    <variable access="private">QToolTip *m_pToolTip;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">resetXrunStats( void )</slot>

@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -24,6 +24,34 @@
 
 #include "qjackctlStatus.h"
 #include "qjackctlSetup.h"
+
+// Custom tooltip class.
+class qjackctlStatusToolTip : public QToolTip
+{
+public:
+
+	// Constructor.
+	qjackctlStatusToolTip(QListView *pListView)
+		: QToolTip(pListView->viewport()) { m_pListView = pListView; }
+
+protected:
+
+	// Tooltip handler.
+	void maybeTip(const QPoint& pos) 
+	{
+		QListViewItem *pItem = m_pListView->itemAt(pos);
+		if (pItem) {
+			QRect rect(m_pListView->itemRect(pItem));
+			if (rect.isValid())
+				QToolTip::tip(rect, pItem->text(0).remove(':'));
+		}
+	}
+
+private:
+
+	// The actual parent widget holder.
+	QListView *m_pListView;
+};
 
 
 // Kind of constructor.
@@ -62,12 +90,15 @@ void qjackctlStatusForm::init (void)
     m_apStatus[STATUS_CPU_LOAD]     = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
     m_apStatus[STATUS_SERVER_STATE] = new QListViewItem(StatsListView, s + tr("Server state") + c, n);
 
+	// Create the tooltip handler...
+	m_pToolTip = (QToolTip *) new qjackctlStatusToolTip(StatsListView);
 }
 
 
 // Kind of destructor.
 void qjackctlStatusForm::destroy (void)
 {
+	delete (qjackctlStatusToolTip *) m_pToolTip;
 }
 
 
