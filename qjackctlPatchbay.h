@@ -32,6 +32,10 @@
 
 #include <jack/jack.h>
 
+// QListViewItem::rtti return values.
+#define QJACKCTL_CLIENTITEM 1001
+#define QJACKCTL_PORTITEM   1002
+
 // Forward declarations.
 class qjackctlPortItem;
 class qjackctlClientItem;
@@ -51,8 +55,8 @@ public:
     QString& clientName();
     QString& portName();
 
-    // List view accessors.
-    QListView *listView();
+    // Complete client:port name helper.
+    QString clientPortName();
 
     // Jack handles accessors.
     jack_client_t *jackClient();
@@ -67,10 +71,13 @@ public:
 
     int portMark();
 
-private:
+    // To virtually distinguish between list view items.
+    int rtti() const;
 
     // Special port name sorting virtual comparator.
     int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
+
+private:
 
     // Instance variables.
     qjackctlClientItem *m_pClient;
@@ -100,9 +107,6 @@ public:
     // Instance accessors.
     QString& clientName();
 
-    // List view accessors.
-    QListView *listView();
-
     // Jack client accessors.
     jack_client_t *jackClient();
     unsigned long  jackFlags();
@@ -116,6 +120,9 @@ public:
     void cleanClientPorts(int iMark);
 
     int clientMark();
+
+    // To virtually distinguish between list view items.
+    int rtti() const;
 
 private:
 
@@ -172,7 +179,7 @@ private:
     QListView     *m_pListView;
     jack_client_t *m_pJackClient;
     unsigned long  m_ulJackFlags;
-    
+
     QPtrList<qjackctlClientItem> m_clients;
 };
 

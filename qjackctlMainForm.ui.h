@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.3.2"
+#define QJACKCTL_VERSION	"0.0.3.3"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>

@@ -6,11 +6,15 @@ ChangeLog
 0.0.4   2003-08-27  Minor changes and bugfixes.
 
 - The patchbay port lists are now sorted in a more numerical friendly manner
-  (as been suggested by Steve Harris); the sort code has been "borrowed" from
+  (as suggested by Steve Harris); the sort code has been "borrowed" from
   qjackconnect, yet again.
 
 - Patchbay port connection lines are now shown always visible, even if their
   respective connected port items aren't.
+
+- Multiple simultaneous port connection can now be handled when a client
+  application item is selected for connection/disconnection (as suggested by
+  Steve Harris), replicating and extending qjackconnect's similar behaviour.
 
 0.0.3   2003-08-07  Integrated visual patchbay.
 
