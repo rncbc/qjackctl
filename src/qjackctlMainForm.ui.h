@@ -117,7 +117,7 @@ void qjackctlMainForm::destroy (void)
 
 
 // Make and set a proper setup step.
-bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
+bool qjackctlMainForm::setupInit ( qjackctlSetup *pSetup )
 {
     // Finally, fix settings descriptor
     // and stabilize the form.
@@ -207,7 +207,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
 
 // Show up initial widget geometries and visbility state.
-void qjackctlMainForm::setupShow ( qjackctlSetup *pSetup )
+void qjackctlMainForm::setupShow (void)
 {
     // Try to restore old window positioning.
     m_pSetup->loadWidgetGeometry(this);

@@ -52,12 +52,12 @@ int main ( int argc, char **argv )
     }
     // Construct the main form.
     qjackctlMainForm w;
-    if (!w.setup(&settings)) {
+    if (!w.setupInit(&settings)) {
         app.quit();
         return 2;
     }
     // Show it to the world.
-    w.setupShow(&settings);
+    w.setupShow();
 
     // Register the quit signal/slot.
     app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));

@@ -733,8 +733,8 @@
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
-    <function specifier="non virtual" returnType="bool">setup( qjackctlSetup * pSetup )</function>
-    <function specifier="non virtual">setupShow( qjackctlSetup * pSetup )</function>
+    <function specifier="non virtual" returnType="bool">setupInit( qjackctlSetup * pSetup )</function>
+    <function specifier="non virtual">setupShow( void )</function>
     <function access="private" specifier="non virtual" returnType="bool">queryClose( void )</function>
     <function access="private" specifier="non virtual">closeEvent( QCloseEvent * pCloseEvent )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatExitStatus ( int iExitStatus )</function>
