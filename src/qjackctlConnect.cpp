@@ -25,6 +25,37 @@
 #include <qmessagebox.h>
 #include <qtimer.h>
 
+//----------------------------------------------------------------------
+// class qjackctlConnectToolTip -- custom list view tooltips.
+
+// Constructor.
+qjackctlConnectToolTip::qjackctlConnectToolTip ( qjackctlClientListView *pListView )
+	: QToolTip(pListView->viewport())
+{
+	// No explicit initialization needed.
+	m_pListView = pListView;
+}
+
+// Tooltip handler.
+void qjackctlConnectToolTip::maybeTip ( const QPoint& pos )
+{
+	QListViewItem *pItem = m_pListView->itemAt(pos);
+	if (pItem == 0)
+		return;
+
+	QRect rect(m_pListView->itemRect(pItem));
+	if (!rect.isValid())
+		return;
+
+	if (pItem->rtti() == QJACKCTL_CLIENTITEM) {
+		qjackctlClientItem *pClient = (qjackctlClientItem *) pItem;
+		QToolTip::tip(rect, pClient->clientName());
+	} else {
+		qjackctlPortItem *pPort = (qjackctlPortItem *) pItem;
+		QToolTip::tip(rect, pPort->portName());
+	}
+}
+
 
 //----------------------------------------------------------------------
 // class qjackctlPortItem -- Port list item.
@@ -493,7 +524,9 @@ qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectVi
     
 	m_pAliases = 0;
 	m_bRenameEnabled = false;
-    
+
+	m_pToolTip = new qjackctlConnectToolTip(this);
+
     if (bReadable)
         QListView::addColumn(tr("Readable Clients") + " / " + tr("Output Ports"));
     else
@@ -508,6 +541,8 @@ qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectVi
     QListView::setAcceptDrops(true);
     QListView::setDragAutoScroll(true);
     QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+
+	QListView::setShowToolTips(false);
     
     setAutoOpenTimeout(800);
     
@@ -519,6 +554,8 @@ qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectVi
 qjackctlClientListView::~qjackctlClientListView (void)
 {
     setAutoOpenTimeout(0);
+
+	delete m_pToolTip;
 }
 
 

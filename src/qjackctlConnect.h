@@ -29,6 +29,7 @@
 #include <qptrlist.h>
 #include <qpixmap.h>
 #include <qpainter.h>
+#include <qtooltip.h>
 
 #include "qjackctlConnectAlias.h"
 
@@ -45,6 +46,27 @@ class qjackctlClientListView;
 class qjackctlConnectorView;
 class qjackctlConnectView;
 class qjackctlConnect;
+
+
+// Custom tooltip class.
+class qjackctlConnectToolTip : public QToolTip
+{
+public:
+
+	// Constructor.
+	qjackctlConnectToolTip(qjackctlClientListView *pListView);
+
+protected:
+
+	// Tooltip handler.
+	void maybeTip(const QPoint& pos);
+
+private:
+
+	// The actual parent widget holder.
+	qjackctlClientListView *m_pListView;
+};
+
 
 // Port list item.
 class qjackctlPortItem : public QListViewItem
@@ -287,6 +309,9 @@ private:
 	// Aliasing support.
 	qjackctlConnectAlias *m_pAliases;
 	bool m_bRenameEnabled;
+
+	// Listview item tooltip.
+	qjackctlConnectToolTip *m_pToolTip;
 };
 
 
