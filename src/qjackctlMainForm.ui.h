@@ -286,10 +286,14 @@ void qjackctlMainForm::startJack (void)
     if (m_bJackDetach)
         return;
 
-    // LOad default server preset...
+    // Load primary/default server preset...
     if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
-        appendMessagesError(tr("Could not load default preset. Sorry."));
-        return;
+        appendMessagesError(tr("Could not load preset") + " \"" + m_pSetup->sDefPreset + "\". " + tr("Retrying with default."));
+        if (!m_pSetup->loadPreset(m_preset, QString::null)) {
+            appendMessagesError(tr("Could not load default preset. Sorry."));
+            processJackExit();
+            return;
+        }
     }
 
     // Do we have any startup script?...

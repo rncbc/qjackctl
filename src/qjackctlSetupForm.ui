@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>532</width>
-            <height>387</height>
+            <width>500</width>
+            <height>374</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -1528,8 +1528,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>22</width>
-                                        <height>22</height>
+                                        <width>26</width>
+                                        <height>26</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -1630,8 +1630,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>22</width>
-                                        <height>22</height>
+                                        <width>26</width>
+                                        <height>26</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -1708,8 +1708,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>22</width>
-                                        <height>22</height>
+                                        <width>26</width>
+                                        <height>26</height>
                                     </size>
                                 </property>
                                 <property name="font">
