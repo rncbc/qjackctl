@@ -55,10 +55,11 @@
 
 static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
-static int g_fdPort[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
-static int g_fdXrun[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
-static int g_fdBuff[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
-static int g_fdShut[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+// Custom event types.
+#define QJACKCTL_PORT_EVENT     1000
+#define QJACKCTL_XRUN_EVENT     1001
+#define QJACKCTL_BUFF_EVENT     1002
+#define QJACKCTL_SHUT_EVENT     1003
 
 // To have clue about current buffer size (in frames).
 static jack_nframes_t g_nframes = 0;
@@ -86,10 +87,6 @@ void qjackctlMainForm::init (void)
     m_pStdoutNotifier = NULL;
 
     m_pAlsaNotifier = NULL;
-    m_pPortNotifier = NULL;
-    m_pXrunNotifier = NULL;
-    m_pBuffNotifier = NULL;
-    m_pShutNotifier = NULL;
 
     m_iAlsaNotify = 0;
     m_iPortNotify = 0;
@@ -335,6 +332,28 @@ void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
         pCloseEvent->accept();
     else
         pCloseEvent->ignore();
+}
+
+
+void qjackctlMainForm::customEvent ( QCustomEvent *pCustomEvent )
+{
+    switch (pCustomEvent->type()) {
+      case QJACKCTL_PORT_EVENT:
+        portNotifyEvent();
+        break;
+      case QJACKCTL_XRUN_EVENT:
+        xrunNotifyEvent();
+        break;
+      case QJACKCTL_BUFF_EVENT:
+        buffNotifyEvent();
+        break;
+      case QJACKCTL_SHUT_EVENT:
+        xrunNotifyEvent();
+        break;
+      default:
+        QWidget::customEvent(pCustomEvent);
+        break;
+    }
 }
 
 
@@ -1105,21 +1124,17 @@ void qjackctlMainForm::refreshXrunStats (void)
 
 // Jack port registration callback funtion, called
 // whenever a jack port is registered or unregistered.
-static void qjackctl_portRegistrationCallback ( jack_port_id_t, int, void * )
+static void qjackctl_portRegistrationCallback ( jack_port_id_t, int, void *pvData )
 {
-    char c = 0;
-
-    ::write(g_fdPort[QJACKCTL_FDWRITE], &c, sizeof(c));
+    QApplication::postEvent((qjackctlMainForm *) pvData, new QCustomEvent(QJACKCTL_PORT_EVENT));
 }
 
 
 // Jack graph order callback function, called
 // whenever the processing graph is reordered.
-static int qjackctl_graphOrderCallback ( void * )
+static int qjackctl_graphOrderCallback ( void *pvData )
 {
-    char c = 0;
-
-    ::write(g_fdPort[QJACKCTL_FDWRITE], &c, sizeof(c));
+    QApplication::postEvent((qjackctlMainForm *) pvData, new QCustomEvent(QJACKCTL_PORT_EVENT));
 
     return 0;
 }
@@ -1127,25 +1142,21 @@ static int qjackctl_graphOrderCallback ( void * )
 
 // Jack XRUN callback function, called
 // whenever there is a xrun.
-static int qjackctl_xrunCallback ( void * )
+static int qjackctl_xrunCallback ( void *pvData )
 {
-    char c = 0;
-
-    ::write(g_fdXrun[QJACKCTL_FDWRITE], &c, sizeof(c));
+    QApplication::postEvent((qjackctlMainForm *) pvData, new QCustomEvent(QJACKCTL_XRUN_EVENT));
 
     return 0;
 }
 
 // Jack buffer size function, called
 // whenever the server changes buffer size.
-static int qjackctl_bufferSizeCallback ( jack_nframes_t nframes, void * )
+static int qjackctl_bufferSizeCallback ( jack_nframes_t nframes, void *pvData )
 {
-    char c = 0;
-
     // Update our global static variable.
     g_nframes = nframes;
 
-    ::write(g_fdBuff[QJACKCTL_FDWRITE], &c, sizeof(c));
+    QApplication::postEvent((qjackctlMainForm *) pvData, new QCustomEvent(QJACKCTL_BUFF_EVENT));
 
     return 0;
 }
@@ -1153,25 +1164,18 @@ static int qjackctl_bufferSizeCallback ( jack_nframes_t nframes, void * )
 
 // Jack shutdown function, called
 // whenever the server terminates this client.
-static void qjackctl_shutdown ( void * )
+static void qjackctl_shutdown ( void *pvData )
 {
-    char c = 0;
-
-    ::write(g_fdShut[QJACKCTL_FDWRITE], &c, sizeof(c));
+    QApplication::postEvent((qjackctlMainForm *) pvData, new QCustomEvent(QJACKCTL_SHUT_EVENT));
 }
 
 
 // Jack socket notifier port/graph callback funtion.
-void qjackctlMainForm::portNotifySlot ( int fd )
+void qjackctlMainForm::portNotifyEvent (void)
 {
-    char c = 0;
-
     if (m_iPortNotify > 0)
         return;
     m_iPortNotify++;
-
-    // Read from our pipe.
-    ::read(fd, &c, sizeof(c));
 
     // Log some message here, if new.
     if (m_iJackRefresh == 0)
@@ -1186,16 +1190,11 @@ void qjackctlMainForm::portNotifySlot ( int fd )
 
 
 // Jack socket notifier XRUN callback funtion.
-void qjackctlMainForm::xrunNotifySlot ( int fd )
+void qjackctlMainForm::xrunNotifyEvent (void)
 {
-    char c = 0;
-
     if (m_iXrunNotify > 0)
         return;
     m_iXrunNotify++;
-
-    // Read from our pipe.
-    ::read(fd, &c, sizeof(c));
 
     // Just increment callback counter.
     m_iXrunCallbacks++;
@@ -1210,16 +1209,11 @@ void qjackctlMainForm::xrunNotifySlot ( int fd )
 
 
 // Jack buffer size notifier callback funtion.
-void qjackctlMainForm::buffNotifySlot ( int fd )
+void qjackctlMainForm::buffNotifyEvent (void)
 {
-    char c = 0;
-
     if (m_iBuffNotify > 0)
         return;
     m_iBuffNotify++;
-
-    // Read from our pipe.
-    ::read(fd, &c, sizeof(c));
 
     // Don't need to nothing, it was handled on qjackctl_bufferSizeCallback;
     // just log this event as routine.
@@ -1230,16 +1224,11 @@ void qjackctlMainForm::buffNotifySlot ( int fd )
 
 
 // Jack socket notifier callback funtion.
-void qjackctlMainForm::shutNotifySlot ( int fd )
+void qjackctlMainForm::shutNotifyEvent (void)
 {
-    char c = 0;
-
     if (m_iShutNotify > 0)
         return;
     m_iShutNotify++;
-
-    // Read from our pipe.
-    ::read(fd, &c, sizeof(c));
 
     // Log this event.
     appendMessagesColor(tr("Shutdown notification."), "#cc9999");
@@ -1397,48 +1386,6 @@ void qjackctlMainForm::cableConnectSlot ( const QString& sOutputPort, const QStr
 }
 
 
-// Close notification pipes.
-void qjackctlMainForm::closePipes (void)
-{
-    // Port/Graph notification pipe.
-    if (g_fdPort[QJACKCTL_FDREAD] != QJACKCTL_FDNIL) {
-        ::close(g_fdPort[QJACKCTL_FDREAD]);
-        g_fdPort[QJACKCTL_FDREAD] = QJACKCTL_FDNIL;
-    }
-    if (g_fdPort[QJACKCTL_FDWRITE] != QJACKCTL_FDNIL) {
-        ::close(g_fdPort[QJACKCTL_FDWRITE]);
-        g_fdPort[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-    }
-    // XRUN notification pipe.
-    if (g_fdXrun[QJACKCTL_FDREAD] != QJACKCTL_FDNIL) {
-        ::close(g_fdXrun[QJACKCTL_FDREAD]);
-        g_fdXrun[QJACKCTL_FDREAD] = QJACKCTL_FDNIL;
-    }
-    if (g_fdXrun[QJACKCTL_FDWRITE] != QJACKCTL_FDNIL) {
-        ::close(g_fdXrun[QJACKCTL_FDWRITE]);
-        g_fdXrun[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-    }
-    // Buffer size notification pipe.
-    if (g_fdBuff[QJACKCTL_FDREAD] != QJACKCTL_FDNIL) {
-        ::close(g_fdBuff[QJACKCTL_FDREAD]);
-        g_fdBuff[QJACKCTL_FDREAD] = QJACKCTL_FDNIL;
-    }
-    if (g_fdBuff[QJACKCTL_FDWRITE] != QJACKCTL_FDNIL) {
-        ::close(g_fdBuff[QJACKCTL_FDWRITE]);
-        g_fdBuff[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-    }
-    // Shutdown notification pipe.
-    if (g_fdShut[QJACKCTL_FDREAD] != QJACKCTL_FDNIL) {
-        ::close(g_fdShut[QJACKCTL_FDREAD]);
-        g_fdShut[QJACKCTL_FDREAD] = QJACKCTL_FDNIL;
-    }
-    if (g_fdShut[QJACKCTL_FDWRITE] != QJACKCTL_FDNIL) {
-        ::close(g_fdShut[QJACKCTL_FDWRITE]);
-        g_fdShut[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-    }
-}
-
-
 // Start our jack audio control client...
 bool qjackctlMainForm::startJackClient ( bool bDetach )
 {
@@ -1458,71 +1405,22 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
         refreshStatus();
     }
 
-    // Create port notification pipe.
-    if (::pipe(g_fdPort) < 0) {
-        g_fdPort[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
-        g_fdPort[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-        closePipes();
-        appendMessagesError(tr("Could not create port notification pipe."));
-        return false;
-    }
-
-    // Create XRUN notification pipe.
-    if (::pipe(g_fdXrun) < 0) {
-        g_fdXrun[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
-        g_fdXrun[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-        closePipes();
-        appendMessagesError(tr("Could not create XRUN notification pipe."));
-        return false;
-    }
-
-    // Create buffer size notification pipe.
-    if (::pipe(g_fdBuff) < 0) {
-        g_fdBuff[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
-        g_fdBuff[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-        closePipes();
-        appendMessagesError(tr("Could not create buffer size notification pipe."));
-        return false;
-    }
-
-    // Create shutdown notification pipe.
-    if (::pipe(g_fdShut) < 0) {
-        g_fdShut[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
-        g_fdShut[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
-        closePipes();
-        appendMessagesError(tr("Could not create shutdown notification pipe."));
-        return false;
-    }
-
     // Create the jack client handle, using a distinct identifier (PID?)
     // surely
     QString sClientName = "qjackctl-" + QString::number((int) ::getpid());
     m_pJackClient = jack_client_new(sClientName.latin1());
     if (m_pJackClient == NULL) {
-        closePipes();
         if (!bDetach)
             appendMessagesError(tr("Could not connect to JACK server as client."));
         return false;
     }
 
     // Set notification callbacks.
-    jack_set_graph_order_callback(m_pJackClient, qjackctl_graphOrderCallback, NULL);
-    jack_set_port_registration_callback(m_pJackClient, qjackctl_portRegistrationCallback, NULL);
-    jack_set_xrun_callback(m_pJackClient, qjackctl_xrunCallback, NULL);
-    jack_set_buffer_size_callback(m_pJackClient, qjackctl_bufferSizeCallback, NULL);
-    jack_on_shutdown(m_pJackClient, qjackctl_shutdown, NULL);
-
-    // Create our notification managers.
-    m_pPortNotifier = new QSocketNotifier(g_fdPort[QJACKCTL_FDREAD], QSocketNotifier::Read);
-    m_pXrunNotifier = new QSocketNotifier(g_fdXrun[QJACKCTL_FDREAD], QSocketNotifier::Read);
-    m_pBuffNotifier = new QSocketNotifier(g_fdBuff[QJACKCTL_FDREAD], QSocketNotifier::Read);
-    m_pShutNotifier = new QSocketNotifier(g_fdShut[QJACKCTL_FDREAD], QSocketNotifier::Read);
-
-    // And connect it to the proper slots.
-    QObject::connect(m_pPortNotifier, SIGNAL(activated(int)), this, SLOT(portNotifySlot(int)));
-    QObject::connect(m_pXrunNotifier, SIGNAL(activated(int)), this, SLOT(xrunNotifySlot(int)));
-    QObject::connect(m_pBuffNotifier, SIGNAL(activated(int)), this, SLOT(buffNotifySlot(int)));
-    QObject::connect(m_pShutNotifier, SIGNAL(activated(int)), this, SLOT(shutNotifySlot(int)));
+    jack_set_graph_order_callback(m_pJackClient, qjackctl_graphOrderCallback, this);
+    jack_set_port_registration_callback(m_pJackClient, qjackctl_portRegistrationCallback, this);
+    jack_set_xrun_callback(m_pJackClient, qjackctl_xrunCallback, this);
+    jack_set_buffer_size_callback(m_pJackClient, qjackctl_bufferSizeCallback, this);
+    jack_on_shutdown(m_pJackClient, qjackctl_shutdown, this);
 
     // First knowledge about buffer size.
     g_nframes = jack_get_buffer_size(m_pJackClient);
@@ -1631,28 +1529,10 @@ void qjackctlMainForm::stopJackClient (void)
         jack_client_close(m_pJackClient);
     m_pJackClient = NULL;
 
-    // Close notification pipes.
-    closePipes();
-
-    // Destroy socket notifiers.
-    if (m_pPortNotifier)
-        delete m_pPortNotifier;
-    m_pPortNotifier = NULL;
+    // Reset notification counters.
     m_iPortNotify = 0;
-
-    if (m_pXrunNotifier)
-        delete m_pXrunNotifier;
-    m_pXrunNotifier = NULL;
     m_iXrunNotify = 0;
-
-    if (m_pBuffNotifier)
-        delete m_pBuffNotifier;
-    m_pBuffNotifier = NULL;
     m_iBuffNotify = 0;
-
-    if (m_pShutNotifier)
-        delete m_pShutNotifier;
-    m_pShutNotifier = NULL;
     m_iShutNotify = 0;
 
     // Displays are deemed again.

@@ -3,8 +3,14 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.9   2004-06-09  Sloppy boy fixes and minor featuritis.
+0.2.9   2004-06-20  Sloppy boy fixes and minor featuritis.
 
+- Patchbay socket dialog client and plug list option items are now
+  properly escaped as regular expressions.
+
+- JACK callbacks are now internally mapped to QCustomeEvent's instead
+  of using the traditional pipe notifications.
+  
 - The system tray popup menu is now featured as a context menu on the
   main application window too.
 

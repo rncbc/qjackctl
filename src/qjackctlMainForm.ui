@@ -707,10 +707,6 @@
     <variable access="private">int m_iPatchbayRefresh;</variable>
     <variable access="private">QSocketNotifier *m_pStdoutNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pAlsaNotifier;</variable>
-    <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
-    <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
-    <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
-    <variable access="private">QSocketNotifier *m_pBuffNotifier;</variable>
     <variable access="private">int m_iAlsaNotify;</variable>
     <variable access="private">int m_iPortNotify;</variable>
     <variable access="private">int m_iXrunNotify;</variable>
@@ -745,10 +741,6 @@
     <slot specifier="non virtual">flushStdoutBuffer( void )</slot>
     <slot specifier="non virtual">processJackExit( void )</slot>
     <slot specifier="non virtual">stdoutNotifySlot( int fd )</slot>
-    <slot specifier="non virtual">portNotifySlot( int fd )</slot>
-    <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
-    <slot specifier="non virtual">buffNotifySlot( int fd )</slot>
-    <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">alsaNotifySlot( int fd )</slot>
     <slot specifier="non virtual">timerSlot( void )</slot>
     <slot specifier="non virtual">jackConnectChanged( void )</slot>
@@ -772,6 +764,7 @@
     <function specifier="non virtual" returnType="bool">setup( qjackctlSetup * pSetup )</function>
     <function access="private" specifier="non virtual" returnType="bool">queryClose( void )</function>
     <function access="private" specifier="non virtual">closeEvent( QCloseEvent * pCloseEvent )</function>
+    <function access="private" specifier="non virtual">customEvent( QCustomEvent *pCustomEvent )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatExitStatus ( int iExitStatus )</function>
     <function access="private" specifier="non virtual">shellExecute( const QString &amp; sShellCommand, const QString &amp; sStartMessage, const QString &amp; sStopMessage )</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
@@ -794,9 +787,12 @@
     <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( int iStatusItem, const QTime &amp; t, bool bElapsed )</function>
     <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>
     <function specifier="non virtual">refreshXrunStats( void )</function>
-    <function access="private" specifier="non virtual">closePipes( void )</function>
     <function access="private" specifier="non virtual" returnType="bool">startJackClient( bool bDetach )</function>
     <function access="private" specifier="non virtual">stopJackClient( void )</function>
+    <function access="private" specifier="non virtual">portNotifyEvent( void )</function>
+    <function access="private" specifier="non virtual">xrunNotifyEvent( void )</function>
+    <function access="private" specifier="non virtual">buffNotifyEvent( void )</function>
+    <function access="private" specifier="non virtual">shutNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">refreshConnections( void )</function>
     <function specifier="non virtual">refreshJackConnections( void )</function>
     <function specifier="non virtual">refreshAlsaConnections( void )</function>

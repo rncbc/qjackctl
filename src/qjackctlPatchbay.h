@@ -210,7 +210,7 @@ public:
     QPixmap& pixmap(int iPixmap);
 
     // Escape and format a string as a regular expresion
-    QString escapeRegExpDigits(const QString& s, unsigned int iThreshold = 2);
+    static QString escapeRegExpDigits(const QString& s, unsigned int iThreshold = 2);
 
 public slots:
 
