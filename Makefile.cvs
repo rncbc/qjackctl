@@ -1,0 +1,9 @@
+all:	configure
+
+configure:	 Makefile.in configure.in
+	@autoheader
+	@autoconf
+
+clean:
+	@rm -rvf Makefile configure config.*
+	@rm -rvf *.cache *.log *.status *.pro
