@@ -5,7 +5,7 @@ ChangeLog
 
 0.2.12   2004-09-20  Icon under restructure.
 
-- All XPM icons were brainlessly converted to PNG format.
+- All inline XPM icons were removed and brainlessly converted to PNG format.
 
 
 0.2.11   2004-09-10  Shiny display now optional and other fixes.
