@@ -223,8 +223,6 @@ protected slots:
 
     // Auto-open timeout slot.
     void timeoutSlot();
-    // Context menu slot.
-    void contextMenuSlot(QListViewItem *, const QPoint&, int);
 
 protected:
 
@@ -234,6 +232,8 @@ protected:
     virtual void dragLeaveEvent(QDragLeaveEvent *);
     virtual void dropEvent(QDropEvent *pDropEvent);
     virtual QDragObject *dragObject();
+    // Context menu request event handler.
+    virtual void contextMenuEvent(QContextMenuEvent *);
 
 private:
 
@@ -276,7 +276,9 @@ protected:
     // Specific event handlers.
     virtual void paintEvent(QPaintEvent *);
     virtual void resizeEvent(QResizeEvent *);
-
+    // Context menu request event handler.
+    virtual void contextMenuEvent(QContextMenuEvent *);
+    
 private:
 
     // Drawing methods.
@@ -316,6 +318,11 @@ public:
     qjackctlClientList *OClientList();
     qjackctlClientList *IClientList();
 
+public slots:
+
+    // Common context menu slot.
+    void contextMenu(const QPoint& pos);
+    
 private:
 
     // Child controls.

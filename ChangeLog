@@ -3,9 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.6   2003-09-11  Work in progress.
+0.0.6   2003-09-11  Drag-n-drop and more feature enhancements and bufixes.
 
 - Patchbay connection user interface handling has been fairly rewritten;
+  (features new bugs while fixing old ones ;-)
 
 - Reset XRUN statistics button added; reset time recorded on statistics;
   calculated latency is now shown on settings; ASIO mode disables
@@ -21,16 +22,18 @@ ChangeLog
   taking account for sub-numbering port names (following yet another
   suggestion from Lawrie).
 
-- Connection drag-and-drop is now featured after many requests.
+- Connection drag-and-drop is now featured after many, many requests.
+
 
 0.0.5   2003-09-05  Minor feature enhancements and bugfixes.
 
 - Internationalization support added; future qjackctl_${LANG}.qm translation
   files are located on ${prefix}/share/locale .
 
-- New dummy and portaudio driver support (as of jack release 0.80.0+).
+- New dummy and portaudio driver support (as of JACK release 0.80.0+).
 
 - A couple of silent memory leak bugs have been corrected.
+
 
 0.0.4   2003-08-29  Minor changes and bugfixes.
 
@@ -52,16 +55,19 @@ ChangeLog
   as before, position is saved for the minimal view mode; but now, the details
   dialog view mode gets its position and size independantly saved also.
 
+
 0.0.3   2003-08-07  Integrated visual patchbay.
 
 - A patchbay for jack port connections is now integrated, much like the
   greatest Mathias Nagorni's qjackconnect (http://www.suse.de/~mana/jack.html).
+
 
 0.0.2   2003-08-02  Client code features introduced.
 
 - JACK library and header files are checked on configure.
 - Server CPU load, sample rate and time elapsed since last XRUN
   detected, are now displayed on statistics.
+  
   
 0.0.1   2003-07-26  Initial release.
 

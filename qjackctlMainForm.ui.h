@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.5.4"
+#define QJACKCTL_VERSION	"0.0.5.5"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -471,7 +471,7 @@ void qjackctlMainForm::stopJack (void)
 void qjackctlMainForm::readJackStdout (void)
 {
     QString s = m_pJack->readStdout();
-    appendMessages(detectXrun(s));
+    appendMessagesText(detectXrun(s));
 }
 
 
@@ -479,7 +479,7 @@ void qjackctlMainForm::readJackStdout (void)
 void qjackctlMainForm::readJackStderr (void)
 {
     QString s = m_pJack->readStderr();
-    appendMessages(detectXrun(s));
+    appendMessagesText(detectXrun(s));
 }
 
 
@@ -535,7 +535,12 @@ QString& qjackctlMainForm::detectXrun( QString & s )
 
 
 // Messages widget output method.
-void qjackctlMainForm::appendMessages( const QString & s )
+void qjackctlMainForm::appendMessages( const QString& s )
+{
+    appendMessagesText("<font color=\"gray\">" + s + "</font>");
+}
+
+void qjackctlMainForm::appendMessagesText( const QString& s )
 {
     while (MessagesTextView->paragraphs() > 100) {
         MessagesTextView->removeParagraph(0);
@@ -674,6 +679,8 @@ void qjackctlMainForm::resetXrunStats (void)
     m_iXrunCallbacks = 0;
 
     refreshXrunStats();
+
+    appendMessages(tr("Statistics reset") + " (" + m_tResetLast.toString() + ")");
 }
 
 

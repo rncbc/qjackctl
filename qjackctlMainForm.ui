@@ -1058,7 +1058,7 @@
                                     <set>AlignCenter</set>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>Calculated latency in microseconds, based on the period, rate and buffer settings</string>
+                                    <string>Calculated latency in milliseconds, based on the period, rate and buffer settings</string>
                                 </property>
                             </widget>
                             <widget class="QLabel" row="0" column="2">
@@ -1866,6 +1866,7 @@
     <function access="private" returnType="bool">queryClose( void )</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
+    <function access="private" specifier="non virtual">appendMessagesText( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">computeLatency( void )</function>
     <function access="private" specifier="non virtual">stabilizeForm( bool bSavePosition )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
