@@ -1695,7 +1695,7 @@ void qjackctlMainForm::toggleMainForm (void)
             hide();
         } else {
             // Minimize (iconify) normally.
-            setWindowState(Qt::WindowMinimized);
+            showMinimized();
         }
     } else {
         show();
@@ -2132,6 +2132,11 @@ void qjackctlMainForm::updateSystemTray (void)
         QObject::connect(m_pSystemTray, SIGNAL(clicked()), this, SLOT(toggleMainForm()));
         QObject::connect(m_pSystemTray, SIGNAL(contextMenuRequested(const QPoint &)),
             this, SLOT(systemTrayContextMenu(const QPoint &)));
+    } else {
+        // Make sure the main widget is visible.
+        show();
+        raise();
+        setActiveWindow();
     }
 #endif
 }
