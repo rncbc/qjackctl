@@ -522,7 +522,7 @@ void qjackctlMainForm::startJack (void)
     m_pJack->addArgument("-d" + sTemp);
     bool bDummy     = (sTemp == "dummy");
     bool bOss       = (sTemp == "oss");
-    bool bAlsa      = (sTemp == "alsa");
+    bool bAlsa      = (sTemp == "alsa" || sTemp == "usx2y");
     bool bPortaudio = (sTemp == "portaudio");
     if (bAlsa)
         m_pJack->addArgument("-d" + m_preset.sInterface);

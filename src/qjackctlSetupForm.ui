@@ -273,6 +273,11 @@
                                 </item>
                                 <item>
                                     <property name="text">
+                                        <string>usx2y</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
                                         <string>portaudio</string>
                                     </property>
                                 </item>

@@ -5,6 +5,8 @@ ChangeLog
 
 0.2.12   2004-09-24  Larger icons and font option on connections/patchbay.
 
+- Added new usx2y driver support (EXPERIMENTAL).
+
 - New setup options as for the connections/patchbay view apprearence: larger
   icon sizes and font selection are now possible, to better ease manipulation
   on a touchscreen (feature requested for Lionstracs' Mediastation).

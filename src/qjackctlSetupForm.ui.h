@@ -384,7 +384,7 @@ void qjackctlSetupForm::computeLatency (void)
 void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 {
     bool bOss        = (sDriver == "oss");
-    bool bAlsa       = (sDriver == "alsa");
+    bool bAlsa       = (sDriver == "alsa" || sDriver == "usx2y");
     bool bInEnabled  = false;
     bool bOutEnabled = false;
     
@@ -425,7 +425,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 {
     bool bDummy     = (sDriver == "dummy");
     bool bOss       = (sDriver == "oss");
-    bool bAlsa      = (sDriver == "alsa");
+    bool bAlsa      = (sDriver == "alsa" || sDriver == "usx2y");
     bool bPortaudio = (sDriver == "portaudio");
 
     SoftModeCheckBox->setEnabled(bAlsa);
