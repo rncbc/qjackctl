@@ -36,6 +36,12 @@ void qjackctlAboutForm::init (void)
     sText += "<br />\n";
     sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
     sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
+#ifdef CONFIG_DEBUG
+    sText += "<small><font color=\"red\">";
+    sText += tr("Debugging option enabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
 #ifndef CONFIG_JACK_TRANSPORT
     sText += "<small><font color=\"red\">";
     sText += tr("Transport status control disabled.");

@@ -11,6 +11,17 @@ fi
 AC_SUBST(ac_prefix)
 AC_DEFINE_UNQUOTED(CONFIG_PREFIX, ["$ac_prefix"], [Default installation prefix.])
 
+dnl Enable debugging argument option.
+AC_ARG_ENABLE(debug,
+  [  --enable-debug          enable debugging (default=no)],
+  [ac_debug="debug"],
+  [ac_debug="release"])
+AC_SUBST(ac_debug)
+
+if test "x$ac_debug" = "xdebug"; then
+   AC_DEFINE(CONFIG_DEBUG, 1, [Define if debugging is enabled.])
+fi
+
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CPP
@@ -127,13 +138,13 @@ if test "x$ac_jack_transport" = "xno"; then
    AC_MSG_WARN([*** JACK 0.80.0 or later may be required.])
    AC_MSG_WARN([*** Transport features will be disabled.])
 else
-   AC_DEFINE(CONFIG_JACK_TRANSPORT, 1, [jack_tranport_query is defined.])
+   AC_DEFINE(CONFIG_JACK_TRANSPORT, 1, [Define if jack_tranport_query is available.])
 fi
 
 dnl Check for jack_is_realtime function.
 AC_CHECK_LIB(jack, jack_is_realtime, [ac_jack_realtime="yes"], [ac_jack_realtime="no"])
 if test "x$ac_jack_realtime" = "xyes"; then
-   AC_DEFINE(CONFIG_JACK_REALTIME, 1, [jack_is_realtime is defined.])
+   AC_DEFINE(CONFIG_JACK_REALTIME, 1, [Define if jack_is_realtime is available.])
 fi
 
 dnl Finally produce a configure header file and the main makefile.
