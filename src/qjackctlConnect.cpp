@@ -762,7 +762,7 @@ void qjackctlConnectorView::contentsMoved ( int, int )
 
 // Constructor.
 qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName )
-    : QHBox(pParent, pszName)
+    : QSplitter(Qt::Horizontal, pParent, pszName)
 {
     m_pOListView     = new qjackctlClientListView(this, true);
     m_pConnectorView = new qjackctlConnectorView(this);
@@ -777,6 +777,8 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
     QObject::connect(m_pIListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(contentsMoving(int, int)),   m_pConnectorView, SLOT(contentsMoved(int, int)));
+    
+    QSplitter::setChildrenCollapsible(false);
 }
 
 

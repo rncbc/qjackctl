@@ -157,6 +157,7 @@ void qjackctlConnectionsForm::jackDisconnectAll()
 void qjackctlConnectionsForm::jackRefresh ( void )
 {
     refreshJack(false);
+    refreshAlsa(false);
 }
 
 
@@ -201,6 +202,7 @@ void qjackctlConnectionsForm::alsaDisconnectAll()
 void qjackctlConnectionsForm::alsaRefresh ( void )
 {
     refreshAlsa(false);
+    refreshJack(false);
 }
 
 

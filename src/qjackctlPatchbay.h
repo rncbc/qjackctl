@@ -25,7 +25,7 @@
 #include <qdragobject.h>
 #include <qlistview.h>
 #include <qheader.h>
-#include <qhbox.h>
+#include <qsplitter.h>
 #include <qptrlist.h>
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -337,7 +337,7 @@ private:
 //----------------------------------------------------------------------------
 // qjackctlPatchbayView -- Patchbay integrated widget.
 
-class qjackctlPatchbayView : public QHBox
+class qjackctlPatchbayView : public QSplitter
 {
     Q_OBJECT
 

@@ -3,6 +3,15 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.7   2004-03-17  User-interface refinements.
+
+- Connections and patchbay windows horizontal layout are now user
+  configurable via splitter widgets.
+
+- Refresh on connections window now take effect on both tabs, Audio
+  (JACK) and MIDI (ALSA).
+  
+
 0.2.6   2004-02-29  More work in progress.
 
 - Message window line limit is now a configurable option on setup, as is

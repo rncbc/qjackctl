@@ -25,7 +25,7 @@
 #include <qdragobject.h>
 #include <qlistview.h>
 #include <qheader.h>
-#include <qhbox.h>
+#include <qsplitter.h>
 #include <qptrlist.h>
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -309,7 +309,7 @@ private:
 //----------------------------------------------------------------------------
 // qjackctlConnectView -- Connections view integrated widget.
 
-class qjackctlConnectView : public QHBox
+class qjackctlConnectView : public QSplitter
 {
     Q_OBJECT
 

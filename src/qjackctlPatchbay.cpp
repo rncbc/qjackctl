@@ -1083,7 +1083,7 @@ void qjackctlPatchworkView::contentsMoved ( int, int )
 
 // Constructor.
 qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszName )
-    : QHBox(pParent, pszName)
+    : QSplitter(Qt::Horizontal, pParent, pszName)
 {
     m_pOListView     = new qjackctlSocketListView(this, true);
     m_pPatchworkView = new qjackctlPatchworkView(this);
@@ -1100,6 +1100,8 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszNa
     QObject::connect(m_pIListView, SIGNAL(expanded(QListViewItem *)),  m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(collapsed(QListViewItem *)), m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(contentsMoving(int, int)),   m_pPatchworkView, SLOT(contentsMoved(int, int)));
+
+    QSplitter::setChildrenCollapsible(false);
 
     m_bDirty = false;
 }
