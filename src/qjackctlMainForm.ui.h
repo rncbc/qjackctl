@@ -1772,7 +1772,7 @@ void qjackctlMainForm::refreshStatus (void)
     const QString sStopped = tr("Stopped");
 
     if (m_pJackClient) {
-        QString s = " ";
+        const QString s = " ";
         updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + "%");
         updateStatus(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + tr("Hz"));
         updateStatus(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
@@ -1832,6 +1832,7 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatus(STATUS_SAMPLE_RATE, n);
         updateStatus(STATUS_BUFFER_SIZE, n);
         updateStatus(STATUS_REALTIME, n);
+        ServerModeTextLabel->setText(n);
         updateStatus(STATUS_TRANSPORT_STATE, n);
         updateStatus(STATUS_TRANSPORT_TIME, m_sTimeDashes);
         updateStatus(STATUS_TRANSPORT_BBT, b);
