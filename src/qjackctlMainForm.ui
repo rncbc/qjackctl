@@ -1,0 +1,684 @@
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<class>qjackctlMainForm</class>
+<comment>JACK Audio Connection Kit - Qt GUI Interface.
+
+   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+</comment>
+<author>rncbc aka Rui Nuno Capela</author>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>qjackctlMainForm</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>434</width>
+            <height>110</height>
+        </rect>
+    </property>
+    <property name="sizePolicy">
+        <sizepolicy>
+            <hsizetype>1</hsizetype>
+            <vsizetype>1</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </property>
+    <property name="font">
+        <font>
+        </font>
+    </property>
+    <property name="caption">
+        <string>JACK Audio Connection Kit - Qt GUI Interface</string>
+    </property>
+    <property name="icon">
+        <pixmap>qjackctl.xpm</pixmap>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QFrame" row="0" column="2" rowspan="2" colspan="2">
+            <property name="name">
+                <cstring>StatusDisplayFrame</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="paletteForegroundColor">
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="paletteBackgroundColor">
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="frameShape">
+                <enum>Panel</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout2</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel" row="2" column="3">
+                            <property name="name">
+                                <cstring>TransportBBTTextLabel</cstring>
+                            </property>
+                            <property name="minimumSize">
+                                <size>
+                                    <width>60</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                            <property name="maximumSize">
+                                <size>
+                                    <width>60</width>
+                                    <height>32767</height>
+                                </size>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>0</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                    <bold>1</bold>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignRight</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Transport BBT (Bar:Beat.Tick)</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="1" column="1" rowspan="1" colspan="3">
+                            <property name="name">
+                                <cstring>TransportTimeTextLabel</cstring>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>0</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                    <pointsize>12</pointsize>
+                                    <bold>1</bold>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignRight</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Transport timecode (hh:mm:ss.ddd)</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="1" column="0">
+                            <property name="name">
+                                <cstring>XrunCountTextLabel</cstring>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>0</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignLeft</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>XRUN Count</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="2">
+                            <property name="name">
+                                <cstring>CpuLoadTextLabel</cstring>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>255</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignCenter</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>CPU Load</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="2" column="2">
+                            <property name="name">
+                                <cstring>TransportBPMTextLabel</cstring>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>0</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignCenter</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Transport BPM</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="3">
+                            <property name="name">
+                                <cstring>SampleRateTextLabel</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>5</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="minimumSize">
+                                <size>
+                                    <width>60</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                            <property name="maximumSize">
+                                <size>
+                                    <width>60</width>
+                                    <height>32767</height>
+                                </size>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>255</red>
+                                    <green>192</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignRight</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Sample rate</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="2" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>TransportStateTextLabel</cstring>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>0</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Transport state</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>ServerStateTextLabel</cstring>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>255</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>JACK server state</string>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QPushButton" row="0" column="4">
+            <property name="name">
+                <cstring>QuitPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Quit</string>
+            </property>
+            <property name="accel">
+                <string>Alt+Q</string>
+            </property>
+            <property name="iconSet">
+                <iconset>quit1.png</iconset>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Quit processing and exit</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="0" column="0">
+            <property name="name">
+                <cstring>StartPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Start</string>
+            </property>
+            <property name="accel">
+                <string>Alt+S</string>
+            </property>
+            <property name="toggleButton">
+                <bool>false</bool>
+            </property>
+            <property name="iconSet">
+                <iconset>start1.png</iconset>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Start the JACK server</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="0" column="1">
+            <property name="name">
+                <cstring>StopPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>S&amp;top</string>
+            </property>
+            <property name="accel">
+                <string>Alt+T</string>
+            </property>
+            <property name="on">
+                <bool>false</bool>
+            </property>
+            <property name="iconSet">
+                <iconset>stop1.png</iconset>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Stop the JACK server</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="2">
+            <property name="name">
+                <cstring>PlayPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Play</string>
+            </property>
+            <property name="accel">
+                <string>Alt+P</string>
+            </property>
+            <property name="iconSet">
+                <iconset>play1.png</iconset>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Start transport rolling</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="3">
+            <property name="name">
+                <cstring>PausePushButton</cstring>
+            </property>
+            <property name="text">
+                <string>Pa&amp;use</string>
+            </property>
+            <property name="accel">
+                <string>Alt+U</string>
+            </property>
+            <property name="iconSet">
+                <iconset>pause1.png</iconset>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Stop transport rolling</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="1" column="1">
+            <property name="name">
+                <cstring>StatusPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>St&amp;atus</string>
+            </property>
+            <property name="accel">
+                <string>Alt+A</string>
+            </property>
+            <property name="toggleButton">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Show/hide the extended status window</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="4">
+            <property name="name">
+                <cstring>AboutPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>Ab&amp;out...</string>
+            </property>
+            <property name="accel">
+                <string>Alt+O</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Show information about this application</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="1" column="4">
+            <property name="name">
+                <cstring>SetupPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>S&amp;etup...</string>
+            </property>
+            <property name="accel">
+                <string>Alt+E</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Show settings and options dialog</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="1" column="0">
+            <property name="name">
+                <cstring>MessagesPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Messages</string>
+            </property>
+            <property name="accel">
+                <string>Alt+M</string>
+            </property>
+            <property name="toggleButton">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Show/hide the messages log window</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="1">
+            <property name="name">
+                <cstring>PatchbayPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>Patch&amp;bay</string>
+            </property>
+            <property name="accel">
+                <string>Alt+B</string>
+            </property>
+            <property name="toggleButton">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Show/hide the actual patchbay plumbing configuration window</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="0">
+            <property name="name">
+                <cstring>ConnectionsPushButton</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Connections</string>
+            </property>
+            <property name="accel">
+                <string>Alt+C</string>
+            </property>
+            <property name="toggleButton">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Show/hide the actual connections patchbay window</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>StartPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>startJack()</slot>
+    </connection>
+    <connection>
+        <sender>StopPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>stopJack()</slot>
+    </connection>
+    <connection>
+        <sender>QuitPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>close()</slot>
+    </connection>
+    <connection>
+        <sender>SetupPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>showSetupForm()</slot>
+    </connection>
+    <connection>
+        <sender>StatusPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>toggleStatusForm()</slot>
+    </connection>
+    <connection>
+        <sender>MessagesPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>toggleMessagesForm()</slot>
+    </connection>
+    <connection>
+        <sender>ConnectionsPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>toggleConnectionsForm()</slot>
+    </connection>
+    <connection>
+        <sender>PatchbayPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>togglePatchbayForm()</slot>
+    </connection>
+    <connection>
+        <sender>AboutPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>showAboutForm()</slot>
+    </connection>
+    <connection>
+        <sender>PlayPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>transportStart()</slot>
+    </connection>
+    <connection>
+        <sender>PausePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>transportStop()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>StartPushButton</tabstop>
+    <tabstop>StopPushButton</tabstop>
+    <tabstop>QuitPushButton</tabstop>
+    <tabstop>MessagesPushButton</tabstop>
+    <tabstop>StatusPushButton</tabstop>
+    <tabstop>ConnectionsPushButton</tabstop>
+    <tabstop>PatchbayPushButton</tabstop>
+    <tabstop>PlayPushButton</tabstop>
+    <tabstop>PausePushButton</tabstop>
+    <tabstop>SetupPushButton</tabstop>
+    <tabstop>AboutPushButton</tabstop>
+</tabstops>
+<includes>
+    <include location="global" impldecl="in implementation">stdlib.h</include>
+    <include location="global" impldecl="in implementation">unistd.h</include>
+    <include location="global" impldecl="in declaration">qsettings.h</include>
+    <include location="global" impldecl="in declaration">qprocess.h</include>
+    <include location="global" impldecl="in declaration">qsocketnotifier.h</include>
+    <include location="global" impldecl="in declaration">qtimer.h</include>
+    <include location="global" impldecl="in declaration">jack/jack.h</include>
+    <include location="local" impldecl="in declaration">qjackctlSetup.h</include>
+    <include location="local" impldecl="in declaration">qjackctlConnections.h</include>
+    <include location="local" impldecl="in declaration">qjackctlPatchbay.h</include>
+    <include location="local" impldecl="in declaration">qjackctlMessagesForm.h</include>
+    <include location="local" impldecl="in declaration">qjackctlStatusForm.h</include>
+    <include location="local" impldecl="in declaration">qjackctlConnectionsForm.h</include>
+    <include location="local" impldecl="in declaration">qjackctlPatchbayForm.h</include>
+    <include location="local" impldecl="in implementation">qjackctlSetupForm.h</include>
+    <include location="local" impldecl="in implementation">qjackctlAboutForm.h</include>
+    <include location="local" impldecl="in implementation">qjackctlMainForm.ui.h</include>
+</includes>
+<variables>
+    <variable access="public">qjackctlSetup m_setup;</variable>
+    <variable access="private">QProcess *m_pJack;</variable>
+    <variable access="private">jack_client_t *m_pJackClient;</variable>
+    <variable access="private">bool m_bJackDetach;</variable>
+    <variable access="private">QTimer *m_pTimer;</variable>
+    <variable access="private">int m_iTimerSlot;</variable>
+    <variable access="private">int m_iRefresh;</variable>
+    <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
+    <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
+    <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
+    <variable access="private">QSocketNotifier *m_pBuffNotifier;</variable>
+    <variable access="private">int m_iPortNotify;</variable>
+    <variable access="private">int m_iXrunNotify;</variable>
+    <variable access="private">int m_iShutNotify;</variable>
+    <variable access="private">int m_iBuffNotify;</variable>
+    <variable access="private">int m_iXrunCallbacks;</variable>
+    <variable access="private">int m_iXrunStats;</variable>
+    <variable access="private">int m_iXrunCount;</variable>
+    <variable access="private">float m_fXrunTotal;</variable>
+    <variable access="private">float m_fXrunMax;</variable>
+    <variable access="private">float m_fXrunMin;</variable>
+    <variable access="private">float m_fXrunLast;</variable>
+    <variable access="private">QTime m_tXrunLast;</variable>
+    <variable access="private">QTime m_tResetLast;</variable>
+    <variable access="private">qjackctlPatchbay *m_pJackPatchbay;</variable>
+    <variable access="private">qjackctlMessagesForm *m_pMessagesForm;</variable>
+    <variable access="private">qjackctlStatusForm *m_pStatusForm;</variable>
+    <variable access="private">qjackctlConnectionsForm *m_pConnectionsForm;</variable>
+    <variable access="private">qjackctlPatchbayForm *m_pPatchbayForm;</variable>
+</variables>
+<slots>
+    <slot access="protected" specifier="non virtual">reject( void )</slot>
+    <slot specifier="non virtual">startJack( void )</slot>
+    <slot specifier="non virtual">stopJack( void )</slot>
+    <slot specifier="non virtual">readJackStdout( void )</slot>
+    <slot specifier="non virtual">readJackStderr( void )</slot>
+    <slot specifier="non virtual">processJackExit( void )</slot>
+    <slot specifier="non virtual">portNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">buffNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">timerSlot( void )</slot>
+    <slot specifier="non virtual">refreshConnections( void )</slot>
+    <slot specifier="non virtual">toggleMessagesForm( void )</slot>
+    <slot specifier="non virtual">showSetupForm( void )</slot>
+    <slot specifier="non virtual">toggleStatusForm( void )</slot>
+    <slot specifier="non virtual">toggleConnectionsForm( void )</slot>
+    <slot specifier="non virtual">togglePatchbayForm( void )</slot>
+    <slot specifier="non virtual">showAboutForm( void )</slot>
+    <slot specifier="non virtual">transportStart()</slot>
+    <slot specifier="non virtual">transportStop()</slot>
+</slots>
+<functions>
+    <function access="private" specifier="non virtual">init()</function>
+    <function access="private" specifier="non virtual">destroy()</function>
+    <function access="private" specifier="non virtual" returnType="bool">queryClose( void )</function>
+    <function access="private" specifier="non virtual">closeEvent( QCloseEvent * pCloseEvent )</function>
+    <function access="private" specifier="non virtual" returnType="QString">formatExitStatus ( int iExitStatus )</function>
+    <function access="private" specifier="non virtual">shellExecute( const QString &amp; sShellCommand, const QString &amp; sStartMessage, const QString &amp; sStopMessage )</function>
+    <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
+    <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
+    <function access="private" specifier="non virtual">appendMessagesColor( const QString &amp; s, const QString &amp; c )</function>
+    <function access="private" specifier="non virtual">appendMessagesText( const QString &amp; s )</function>
+    <function access="private" specifier="non virtual">appendMessagesError( const QString &amp; s )</function>
+    <function specifier="non virtual">stabilizeForm( void )</function>
+    <function specifier="non virtual">resetXrunStats( void )</function>
+    <function access="private" specifier="non virtual">updateBufferSize( void )</function>
+    <function access="private" specifier="non virtual">updateXrunCount( void )</function>
+    <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( const QTime &amp; t, bool bElapsed )</function>
+    <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>
+    <function specifier="non virtual">refreshXrunStats( void )</function>
+    <function access="private" specifier="non virtual">closePipes( void )</function>
+    <function access="private" specifier="non virtual" returnType="bool">startJackClient( bool bDetach )</function>
+    <function access="private" specifier="non virtual">stopJackClient( void )</function>
+    <function access="private" specifier="non virtual">refreshStatus( void )</function>
+    <function access="private" specifier="non virtual">updateStatus( int iStatusItem, const QString &amp; sText )</function>
+</functions>
+<pixmapinproject/>
+<layoutdefaults spacing="4" margin="4"/>
+</UI>

@@ -1,0 +1,391 @@
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<class>qjackctlSocketForm</class>
+<comment>JACK Audio Connection Kit - Qt GUI Interface.
+
+   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+</comment>
+<author>rncbc aka Rui Nuno Capela</author>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>qjackctlSocketForm</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>387</width>
+            <height>293</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Socket</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget" row="3" column="0">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>120</width>
+                            <height>8</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>OkPushButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>OK</string>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>accept1.png</iconset>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>CancelPushButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Cancel</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>quit1.png</iconset>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string></string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QTabWidget" row="2" column="0">
+            <property name="name">
+                <cstring>SocketTabWidget</cstring>
+            </property>
+            <property name="tabPosition">
+                <enum>Top</enum>
+            </property>
+            <property name="tabShape">
+                <enum>Rounded</enum>
+            </property>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>&amp;Socket</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QLabel" row="1" column="0">
+                        <property name="name">
+                            <cstring>ClientNameTextLabel</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Client:</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignVCenter|AlignRight</set>
+                        </property>
+                        <property name="buddy" stdset="0">
+                            <cstring>ClientNameComboBox</cstring>
+                        </property>
+                    </widget>
+                    <widget class="QLineEdit" row="0" column="1">
+                        <property name="name">
+                            <cstring>SocketNameLineEdit</cstring>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Socket name (an alias for client name)</string>
+                        </property>
+                    </widget>
+                    <widget class="QLabel" row="0" column="0">
+                        <property name="name">
+                            <cstring>SocketNameTextLabel</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Name (alias):</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignVCenter|AlignRight</set>
+                        </property>
+                        <property name="buddy" stdset="0">
+                            <cstring>SocketNameLineEdit</cstring>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" row="1" column="1">
+                        <property name="name">
+                            <cstring>ClientNameComboBox</cstring>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>JACK Client name (regular expression)</string>
+                        </property>
+                    </widget>
+                    <widget class="QListBox" row="3" column="1" rowspan="4" colspan="1">
+                        <property name="name">
+                            <cstring>PlugListBox</cstring>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Socket plug list</string>
+                        </property>
+                    </widget>
+                    <spacer row="4" column="2">
+                        <property name="name">
+                            <cstring>spacer1</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>16</width>
+                                <height>24</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget class="QPushButton" row="6" column="2">
+                        <property name="name">
+                            <cstring>PlugDownPushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Down</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+D</string>
+                        </property>
+                        <property name="iconSet">
+                            <iconset>down1.png</iconset>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Move down currently selected plug socket plugst</string>
+                        </property>
+                    </widget>
+                    <widget class="QPushButton" row="5" column="2">
+                        <property name="name">
+                            <cstring>PlugUpPushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Up</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+U</string>
+                        </property>
+                        <property name="iconSet">
+                            <iconset>up1.png</iconset>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Move up current selected plug socket plugst</string>
+                        </property>
+                    </widget>
+                    <widget class="QPushButton" row="3" column="2">
+                        <property name="name">
+                            <cstring>PlugRemovePushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Remove</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+R</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Remove currently selected plug from socket plug list</string>
+                        </property>
+                    </widget>
+                    <widget class="QPushButton" row="2" column="2">
+                        <property name="name">
+                            <cstring>PlugAddPushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Add Plug</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+A</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Add plug to socket plug list</string>
+                        </property>
+                    </widget>
+                    <widget class="QLabel" row="2" column="0">
+                        <property name="name">
+                            <cstring>PlugNameTextLabel</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Plug:</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignVCenter|AlignRight</set>
+                        </property>
+                        <property name="buddy" stdset="0">
+                            <cstring>PlugNameComboBox</cstring>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" row="2" column="1">
+                        <property name="name">
+                            <cstring>PlugNameComboBox</cstring>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>JACK port short name (regular expression)</string>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>OkPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>acceptForm()</slot>
+    </connection>
+    <connection>
+        <sender>CancelPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>PlugAddPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>addPlug()</slot>
+    </connection>
+    <connection>
+        <sender>PlugRemovePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>removePlug()</slot>
+    </connection>
+    <connection>
+        <sender>PlugUpPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>moveUpPlug()</slot>
+    </connection>
+    <connection>
+        <sender>PlugDownPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>moveDownPlug()</slot>
+    </connection>
+    <connection>
+        <sender>PlugListBox</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>stabilizeForm()</slot>
+    </connection>
+    <connection>
+        <sender>SocketNameLineEdit</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>stabilizeForm()</slot>
+    </connection>
+    <connection>
+        <sender>ClientNameComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>clientNameChanged()</slot>
+    </connection>
+    <connection>
+        <sender>PlugNameComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>stabilizeForm()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>SocketTabWidget</tabstop>
+    <tabstop>SocketNameLineEdit</tabstop>
+    <tabstop>ClientNameComboBox</tabstop>
+    <tabstop>PlugNameComboBox</tabstop>
+    <tabstop>PlugAddPushButton</tabstop>
+    <tabstop>PlugListBox</tabstop>
+    <tabstop>PlugRemovePushButton</tabstop>
+    <tabstop>PlugUpPushButton</tabstop>
+    <tabstop>PlugDownPushButton</tabstop>
+    <tabstop>OkPushButton</tabstop>
+    <tabstop>CancelPushButton</tabstop>
+</tabstops>
+<includes>
+    <include location="global" impldecl="in declaration">qjackctlPatchbay.h</include>
+    <include location="local" impldecl="in implementation">qjackctlSocketForm.ui.h</include>
+</includes>
+<variables>
+    <variable access="private">jack_client_t *m_pJackClient;</variable>
+    <variable access="private">unsigned long m_ulSocketFlags;</variable>
+    <variable access="private">QPixmap *m_pXpmPlug;</variable>
+</variables>
+<slots>
+    <slot specifier="non virtual">stabilizeForm()</slot>
+    <slot>acceptForm()</slot>
+    <slot specifier="non virtual">addPlug()</slot>
+    <slot specifier="non virtual">removePlug()</slot>
+    <slot specifier="non virtual">moveUpPlug()</slot>
+    <slot specifier="non virtual">moveDownPlug()</slot>
+    <slot specifier="non virtual">clientNameChanged()</slot>
+</slots>
+<functions>
+    <function access="private" specifier="non virtual">init()</function>
+    <function access="private" specifier="non virtual">destroy()</function>
+    <function specifier="non virtual">setSocketCaption( const QString &amp; sSocketCaption )</function>
+    <function specifier="non virtual">setSocketPixmap( QPixmap *pXpmSocket )</function>
+    <function specifier="non virtual">setPlugPixmap( QPixmap *pXpmPlug )</function>
+    <function specifier="non virtual">setJackClient( jack_client_t *pJackClient, unsigned long ulSocketFlags )</function>
+    <function specifier="non virtual">load( qjackctlPatchbaySocket * pSocket )</function>
+    <function specifier="non virtual">save( qjackctlPatchbaySocket * pSocket )</function>
+    <function access="private" specifier="non virtual" returnType="bool">validateForm()</function>
+</functions>
+<pixmapinproject/>
+<layoutdefaults spacing="4" margin="8"/>
+</UI>

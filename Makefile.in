@@ -2,8 +2,37 @@ prefix  = @ac_prefix@
 qmake   = @ac_qmake@
 
 name    = qjackctl
-headers = qjackctlMainForm.ui.h qjackctlPatchbay.h config.h
-sources = qjackctlMainForm.ui qjackctlPatchbay.cpp main.cpp
+
+headers = config.h \
+	src/qjackctlStatus.h \
+	src/qjackctlSetup.h \
+	src/qjackctlAbout.h \
+	src/qjackctlConnections.h \
+	src/qjackctlPatchbay.h \
+	src/qjackctlPatchbayRack.h \
+	src/qjackctlPatchbayFile.h \
+	src/qjackctlMainForm.ui.h \
+	src/qjackctlMessagesForm.ui.h \
+	src/qjackctlStatusForm.ui.h \
+	src/qjackctlConnectionsForm.ui.h \
+	src/qjackctlPatchbayForm.ui.h \
+	src/qjackctlSocketForm.ui.h \
+	src/qjackctlSetupForm.ui.h \
+	src/qjackctlAboutForm.ui.h
+          
+sources = src/main.cpp \
+	src/qjackctlSetup.cpp \
+	src/qjackctlConnections.cpp \
+	src/qjackctlPatchbay.cpp \
+	src/qjackctlPatchbayRack.cpp \
+	src/qjackctlPatchbayFile.cpp \
+	src/qjackctlMainForm.ui \
+	src/qjackctlMessagesForm.ui \
+	src/qjackctlStatusForm.ui \
+	src/qjackctlConnectionsForm.ui \
+	src/qjackctlSocketForm.ui \
+	src/qjackctlSetupForm.ui \
+	src/qjackctlAboutForm.ui
 
 all:	$(name)
 

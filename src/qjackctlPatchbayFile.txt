@@ -1,0 +1,49 @@
+qjackctlPatchbayFile format specification
+-----------------------------------------
+
+  <!DOCTYPE patchbay>
+  <patchbay name="patchbay-name" version="patchbay-version" >
+    <output-sockets>
+      <socket name="socket-name" client="client-name" >
+        <plug>plug-name</plug>
+        .
+        .
+        .
+      </output-socket>
+      .
+      .
+      .
+    </output-sockets>
+    <input-sockets>
+      <socket name="socket-name" client="client-name" >
+        <plug>plug-name</plug>
+        .
+        .
+        .
+      </socket>
+      .
+      .
+      .
+    </input-sockets>
+#   <slots>
+#     <slot name="slot-name" mode="slot-mode" output="socket-name" input="socket-name" />
+#      .
+#      .
+#      .
+#   </slots>
+    <cables>
+      <cable output="socket-name" input="socket-name" />
+       .
+       .
+       .
+    </cables>
+  </patchbay>
+
+
+  patchbay-name     := string-literal
+  patchbay-version  := string-literal
+  socket-name       := string-literal
+# slot-name         := string-literal
+# slot-mode         := "open" | "half" | "full"
+  client-name       := string-regexp (JACK client name)
+  plug-name         := string-regexp (JACK port short name)

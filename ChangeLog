@@ -3,14 +3,18 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.9a  2003-10-03  Tiny bugfixes.
+0.1.0   2003-10-10  Major user interface redesign.
 
-- Startup/shutdown script options now correctly saved and restored.
+- Main application window complete restyling, now more like a multimedia
+  control panel--old main window dialog tabs are now splitted in separate
+  pop-up windows/dialogs.
+  
+- Deprecated options for forcing aRTs and jackd daemons are no longer
+  available; this functionality can be officially superceded by the generic
+  startup/shutdown script options.
 
-- Dummy driver wait parameter is now properly set on startup.
-
-- Confirmation warning on disconnecting all ports (as suggested
-  by Robert Jonsson).
+- Seamless support for externally started JACK server, providing a client-only
+  mode of operation.
 
 
 0.0.9   2003-09-25  Work in progress.
