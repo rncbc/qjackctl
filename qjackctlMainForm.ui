@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>474</width>
-            <height>287</height>
+            <width>488</width>
+            <height>309</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -72,6 +72,9 @@
                     <property name="text">
                         <string>&amp;Start</string>
                     </property>
+                    <property name="accel">
+                        <string>Alt+S</string>
+                    </property>
                     <property name="iconSet">
                         <iconset>start1.png</iconset>
                     </property>
@@ -96,6 +99,9 @@
                     </property>
                     <property name="text">
                         <string>S&amp;top</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+T</string>
                     </property>
                     <property name="iconSet">
                         <iconset>stop1.png</iconset>
@@ -1394,13 +1400,13 @@
                     <cstring>tab</cstring>
                 </property>
                 <attribute name="title">
-                    <string>Statistics</string>
+                    <string>Status</string>
                 </attribute>
                 <grid>
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QListView" row="0" column="0" rowspan="2" colspan="1">
+                    <widget class="QListView" row="0" column="0" rowspan="4" colspan="1">
                         <column>
                             <property name="text">
                                 <string>Description</string>
@@ -1443,8 +1449,14 @@
                         <property name="allColumnsShowFocus">
                             <bool>true</bool>
                         </property>
+                        <property name="showSortIndicator">
+                            <bool>true</bool>
+                        </property>
                         <property name="itemMargin">
                             <number>1</number>
+                        </property>
+                        <property name="rootIsDecorated">
+                            <bool>true</bool>
                         </property>
                         <property name="resizeMode">
                             <enum>AllColumns</enum>
@@ -1453,7 +1465,7 @@
                             <string>Statistics since last server startup</string>
                         </property>
                     </widget>
-                    <widget class="QPushButton" row="1" column="1">
+                    <widget class="QPushButton" row="3" column="1">
                         <property name="name">
                             <cstring>StatsResetPushButton</cstring>
                         </property>
@@ -1467,7 +1479,7 @@
                             <string>Reset XRUN statistic values</string>
                         </property>
                     </widget>
-                    <spacer row="0" column="1">
+                    <spacer row="2" column="1">
                         <property name="name">
                             <cstring>spacer41</cstring>
                         </property>
@@ -1484,6 +1496,40 @@
                             </size>
                         </property>
                     </spacer>
+                    <widget class="QPushButton" row="1" column="1">
+                        <property name="name">
+                            <cstring>TransportStopPushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>P&amp;ause</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+A</string>
+                        </property>
+                        <property name="iconSet">
+                            <iconset>pause1.png</iconset>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Stop transport rolling</string>
+                        </property>
+                    </widget>
+                    <widget class="QPushButton" row="0" column="1">
+                        <property name="name">
+                            <cstring>TransportStartPushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Play</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+P</string>
+                        </property>
+                        <property name="iconSet">
+                            <iconset>play1.png</iconset>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Start transport rolling</string>
+                        </property>
+                    </widget>
                 </grid>
             </widget>
             <widget class="QWidget">
@@ -1833,6 +1879,18 @@
         <receiver>qjackctlMainForm</receiver>
         <slot>aboutQt()</slot>
     </connection>
+    <connection>
+        <sender>TransportStartPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>transportStart()</slot>
+    </connection>
+    <connection>
+        <sender>TransportStopPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>transportStop()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>StartPushButton</tabstop>
@@ -1870,6 +1928,8 @@
     <tabstop>AutoRefreshCheckBox</tabstop>
     <tabstop>TimeRefreshComboBox</tabstop>
     <tabstop>StatsListView</tabstop>
+    <tabstop>TransportStartPushButton</tabstop>
+    <tabstop>TransportStopPushButton</tabstop>
     <tabstop>StatsResetPushButton</tabstop>
     <tabstop>PatchbayView</tabstop>
     <tabstop>ConnectPushButton</tabstop>
@@ -1877,6 +1937,7 @@
     <tabstop>DisconnectAllPushButton</tabstop>
     <tabstop>RefreshPushButton</tabstop>
     <tabstop>AboutTextView</tabstop>
+    <tabstop>AboutQtButton</tabstop>
 </tabstops>
 <includes>
     <include location="global" impldecl="in implementation">stdlib.h</include>
@@ -1913,7 +1974,7 @@
     <variable access="private">float m_fXrunLast;</variable>
     <variable access="private">QTime m_tXrunLast;</variable>
     <variable access="private">QTime m_tResetLast;</variable>
-    <variable access="private">QListViewItem *m_apStats[10];</variable>
+    <variable access="private">QListViewItem *m_apStats[14];</variable>
     <variable access="private">QPoint m_pos;</variable>
     <variable access="private">QPoint m_pos1;</variable>
     <variable access="private">QSize m_size1;</variable>
@@ -1941,6 +2002,8 @@
     <slot specifier="non virtual">disconnectAll()</slot>
     <slot specifier="non virtual">refreshConnections( void )</slot>
     <slot specifier="non virtual">stabilizeConnections( void )</slot>
+    <slot specifier="non virtual">transportStart()</slot>
+    <slot specifier="non virtual">transportStop()</slot>
     <slot specifier="non virtual">aboutQt()</slot>
 </slots>
 <functions>

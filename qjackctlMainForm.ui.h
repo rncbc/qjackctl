@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.7"
+#define QJACKCTL_VERSION	"0.0.7.1"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -34,17 +34,23 @@
 #include <qmessagebox.h>
 #include <qvalidator.h>
 
+#include "config.h"
+
 // List view statistics item indexes
-#define STATS_CPU_LOAD      0
-#define STATS_SAMPLE_RATE   1
-#define STATS_RESET_TIME    2
-#define STATS_XRUN_AVG      3
-#define STATS_XRUN_COUNT    4
-#define STATS_XRUN_LAST     5
-#define STATS_XRUN_MAX      6
-#define STATS_XRUN_MIN      7
-#define STATS_XRUN_TIME     8
-#define STATS_XRUN_TOTAL    9
+#define STATS_CPU_LOAD          0
+#define STATS_SAMPLE_RATE       1
+#define STATS_TRANSPORT_STATE   2
+#define STATS_TRANSPORT_TIME    3
+#define STATS_TRANSPORT_BBT     4
+#define STATS_TRANSPORT_BPM     5
+#define STATS_XRUN_COUNT        6
+#define STATS_XRUN_TIME         7
+#define STATS_XRUN_LAST         8
+#define STATS_XRUN_MAX          9
+#define STATS_XRUN_MIN          10
+#define STATS_XRUN_AVG          11
+#define STATS_XRUN_TOTAL        12
+#define STATS_RESET_TIME        13
 
 
 // Kind of constructor.
@@ -71,16 +77,29 @@ void qjackctlMainForm::init (void)
     QString c = ":" + s;
     QString z = "0";
     QString n = tr("n/a");
-    m_apStats[STATS_CPU_LOAD]    = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
+    QListViewItem *pViewItem;
+
+    StatsListView->setSorting(3); // Initially unsorted.
+
+    m_apStats[STATS_RESET_TIME] = new QListViewItem(StatsListView, s + tr("Time of last reset") + c, z);
+
+    pViewItem = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
+    m_apStats[STATS_XRUN_COUNT] = pViewItem;
+    m_apStats[STATS_XRUN_TOTAL] = new QListViewItem(pViewItem, s + tr("XRUN total") + c, z);
+    m_apStats[STATS_XRUN_AVG]   = new QListViewItem(pViewItem, s + tr("XRUN average") + c, z);
+    m_apStats[STATS_XRUN_MIN]   = new QListViewItem(pViewItem, s + tr("XRUN minimum") + c, z);
+    m_apStats[STATS_XRUN_MAX]   = new QListViewItem(pViewItem, s + tr("XRUN maximum") + c, z);
+    m_apStats[STATS_XRUN_LAST]  = new QListViewItem(pViewItem, s + tr("XRUN last") + c, z);
+    m_apStats[STATS_XRUN_TIME]  = new QListViewItem(pViewItem, s + tr("XRUN last time detected") + c, n);
+
+    pViewItem = new QListViewItem(StatsListView, s + tr("Transport state") + c, n);
+    m_apStats[STATS_TRANSPORT_STATE] = pViewItem;
+    m_apStats[STATS_TRANSPORT_BPM]  = new QListViewItem(pViewItem, s + tr("Transport BPM") + c, n);
+    m_apStats[STATS_TRANSPORT_BBT]  = new QListViewItem(pViewItem, s + tr("Transport BBT") + c, n);
+    m_apStats[STATS_TRANSPORT_TIME] = new QListViewItem(pViewItem, s + tr("Transport timecode") + c, n);
+
     m_apStats[STATS_SAMPLE_RATE] = new QListViewItem(StatsListView, s + tr("Sample Rate") + c, n);
-    m_apStats[STATS_RESET_TIME]  = new QListViewItem(StatsListView, s + tr("Time of last reset") + c, z);
-    m_apStats[STATS_XRUN_AVG]    = new QListViewItem(StatsListView, s + tr("XRUN average") + c, z);
-    m_apStats[STATS_XRUN_COUNT]  = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
-    m_apStats[STATS_XRUN_LAST]   = new QListViewItem(StatsListView, s + tr("XRUN last") + c, z);
-    m_apStats[STATS_XRUN_MAX]    = new QListViewItem(StatsListView, s + tr("XRUN maximum") + c, z);
-    m_apStats[STATS_XRUN_MIN]    = new QListViewItem(StatsListView, s + tr("XRUN minimum") + c, z);
-    m_apStats[STATS_XRUN_TIME]   = new QListViewItem(StatsListView, s + tr("XRUN last time detected") + c, n);
-    m_apStats[STATS_XRUN_TOTAL]  = new QListViewItem(StatsListView, s + tr("XRUN total") + c, z);
+    m_apStats[STATS_CPU_LOAD]    = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
 
     resetXrunStats();
 
@@ -520,6 +539,9 @@ void qjackctlMainForm::processJackExit (void)
     setCaption(QJACKCTL_TITLE " - " + tr("Stopped."));
     StartPushButton->setEnabled(true);
     StopPushButton->setEnabled(false);
+    
+    TransportStartPushButton->setEnabled(false);
+    TransportStopPushButton->setEnabled(false);
 }
 
 
@@ -764,13 +786,13 @@ void qjackctlMainForm::refreshXrunStats (void)
 
 
 // Notification pipes descriptors
-#define FD_NIL     -1
-#define FD_READ     0
-#define FD_WRITE    1
+#define QJACKCTL_FDNIL     -1
+#define QJACKCTL_FDREAD     0
+#define QJACKCTL_FDWRITE    1
 
-static int g_fdPort[2] = { FD_NIL, FD_NIL };
-static int g_fdXrun[2] = { FD_NIL, FD_NIL };
-static int g_fdShut[2] = { FD_NIL, FD_NIL };
+static int g_fdPort[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+static int g_fdXrun[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+static int g_fdShut[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
 // Jack port registration callback funtion, called
 // whenever a jack port is registered or unregistered.
@@ -778,7 +800,7 @@ static void qjackctl_portRegistrationCallback ( jack_port_id_t, int, void * )
 {
     char c = 0;
 
-    ::write(g_fdPort[FD_WRITE], &c, sizeof(c));
+    ::write(g_fdPort[QJACKCTL_FDWRITE], &c, sizeof(c));
 }
 
 
@@ -788,7 +810,7 @@ static int qjackctl_graphOrderCallback ( void * )
 {
     char c = 0;
 
-    ::write(g_fdPort[FD_WRITE], &c, sizeof(c));
+    ::write(g_fdPort[QJACKCTL_FDWRITE], &c, sizeof(c));
 
     return 0;
 }
@@ -800,7 +822,7 @@ static int qjackctl_xrunCallback ( void * )
 {
     char c = 0;
 
-    ::write(g_fdXrun[FD_WRITE], &c, sizeof(c));
+    ::write(g_fdXrun[QJACKCTL_FDWRITE], &c, sizeof(c));
 
     return 0;
 }
@@ -811,7 +833,7 @@ static void qjackctl_shutdown ( void * )
 {
     char c = 0;
 
-    ::write(g_fdShut[FD_WRITE], &c, sizeof(c));
+    ::write(g_fdShut[QJACKCTL_FDWRITE], &c, sizeof(c));
 }
 
 
@@ -902,6 +924,55 @@ void qjackctlMainForm::timerSlot (void)
         QString s = " ";
         m_apStats[STATS_CPU_LOAD]->setText(1, QString::number(jack_cpu_load(m_pJackClient), 'g', 3) + s + "%");
         m_apStats[STATS_SAMPLE_RATE]->setText(1, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
+#ifdef CONFIG_JACK_TRANSPORT
+        char    szText[32];
+        QString n = tr("n/a");
+        QString sText = n;
+        jack_position_t tpos;
+        jack_transport_state_t tstate = jack_transport_query(m_pJackClient, &tpos);
+        switch (tstate) {
+            case JackTransportStopped:
+                sText = tr("Stopped");
+                break;
+            case JackTransportRolling:
+                sText = tr("Rolling");
+                break;
+            case JackTransportLooping:
+                sText = tr("Looping");
+                break;
+            case JackTransportStarting:
+                sText = tr("Starting");
+                break;
+        }
+        m_apStats[STATS_TRANSPORT_STATE]->setText(1, sText);
+        // Transport timecode position (hh:mm:ss.dd).
+        if (tpos.valid & JackPositionTimecode) {
+            unsigned int hh, mm, ss, dd;
+            double tt = (double) (tpos.frame / tpos.frame_rate);
+            hh  = (unsigned int) (tt / 3600.0);
+            tt -= (double) (hh * 3600.0);
+            mm  = (unsigned int) (tt / 60.0);
+            tt -= (double) (mm * 60.0);
+            ss  = (unsigned int) tt;
+            tt -= (double) ss;
+            dd  = (unsigned int) (tt * 100.0);
+            snprintf(szText, sizeof(szText), "%02u:%02u:%02u.%02u", hh, mm, ss, dd);
+            m_apStats[STATS_TRANSPORT_TIME]->setText(1, szText);
+        } else {
+            m_apStats[STATS_TRANSPORT_TIME]->setText(1, n);
+        }
+        // Transport barcode position (bar:beat.tick)
+        if (tpos.valid & JackPositionBBT) {
+            snprintf(szText, sizeof(szText), "%u:%03u.%03u", tpos.bar, tpos.beat, tpos.tick);
+            m_apStats[STATS_TRANSPORT_BBT]->setText(1, szText);
+            m_apStats[STATS_TRANSPORT_BPM]->setText(1, QString::number(tpos.beats_per_minute));
+        } else {
+            m_apStats[STATS_TRANSPORT_BBT]->setText(1, n);
+            m_apStats[STATS_TRANSPORT_BPM]->setText(1, n);
+        }
+        TransportStartPushButton->setEnabled(tstate == JackTransportStopped);
+        TransportStopPushButton->setEnabled(tstate == JackTransportRolling || tstate == JackTransportLooping);
+#endif  // CONFIG_JACK_TRANSPORT
     }
     updateElapsedTimes();
     StatsListView->triggerUpdate();
@@ -912,31 +983,31 @@ void qjackctlMainForm::timerSlot (void)
 void qjackctlMainForm::closePipes (void)
 {
     // Port/Graph notification pipe.
-    if (g_fdPort[FD_READ] != FD_NIL) {
-        ::close(g_fdPort[FD_READ]);
-        g_fdPort[FD_READ] = FD_NIL;
+    if (g_fdPort[QJACKCTL_FDREAD] != QJACKCTL_FDNIL) {
+        ::close(g_fdPort[QJACKCTL_FDREAD]);
+        g_fdPort[QJACKCTL_FDREAD] = QJACKCTL_FDNIL;
     }
-    if (g_fdPort[FD_WRITE] != FD_NIL) {
-        ::close(g_fdPort[FD_WRITE]);
-        g_fdPort[FD_WRITE] = FD_NIL;
+    if (g_fdPort[QJACKCTL_FDWRITE] != QJACKCTL_FDNIL) {
+        ::close(g_fdPort[QJACKCTL_FDWRITE]);
+        g_fdPort[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
     }
     // XRUN notification pipe.
-    if (g_fdXrun[FD_READ] != FD_NIL) {
-        ::close(g_fdXrun[FD_READ]);
-        g_fdXrun[FD_READ] = FD_NIL;
+    if (g_fdXrun[QJACKCTL_FDREAD] != QJACKCTL_FDNIL) {
+        ::close(g_fdXrun[QJACKCTL_FDREAD]);
+        g_fdXrun[QJACKCTL_FDREAD] = QJACKCTL_FDNIL;
     }
-    if (g_fdXrun[FD_WRITE] != FD_NIL) {
-        ::close(g_fdXrun[FD_WRITE]);
-        g_fdXrun[FD_WRITE] = FD_NIL;
+    if (g_fdXrun[QJACKCTL_FDWRITE] != QJACKCTL_FDNIL) {
+        ::close(g_fdXrun[QJACKCTL_FDWRITE]);
+        g_fdXrun[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
     }
     // Shutdown notification pipe.
-    if (g_fdShut[FD_READ] != FD_NIL) {
-        ::close(g_fdShut[FD_READ]);
-        g_fdShut[FD_READ] = FD_NIL;
+    if (g_fdShut[QJACKCTL_FDREAD] != QJACKCTL_FDNIL) {
+        ::close(g_fdShut[QJACKCTL_FDREAD]);
+        g_fdShut[QJACKCTL_FDREAD] = QJACKCTL_FDNIL;
     }
-    if (g_fdShut[FD_WRITE] != FD_NIL) {
-        ::close(g_fdShut[FD_WRITE]);
-        g_fdShut[FD_WRITE] = FD_NIL;
+    if (g_fdShut[QJACKCTL_FDWRITE] != QJACKCTL_FDNIL) {
+        ::close(g_fdShut[QJACKCTL_FDWRITE]);
+        g_fdShut[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
     }
 }
 
@@ -946,8 +1017,8 @@ void qjackctlMainForm::startJackClient (void)
 {
     // Create port notification pipe.
     if (::pipe(g_fdPort) < 0) {
-        g_fdPort[FD_READ]  = FD_NIL;
-        g_fdPort[FD_WRITE] = FD_NIL;
+        g_fdPort[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
+        g_fdPort[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
         closePipes();
         QMessageBox::critical(this, tr("Error"),
             tr("Could not create port notification pipe."),
@@ -957,8 +1028,8 @@ void qjackctlMainForm::startJackClient (void)
 
     // Create XRUN notification pipe.
     if (::pipe(g_fdXrun) < 0) {
-        g_fdXrun[FD_READ]  = FD_NIL;
-        g_fdXrun[FD_WRITE] = FD_NIL;
+        g_fdXrun[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
+        g_fdXrun[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
         closePipes();
         QMessageBox::critical(this, tr("Error"),
             tr("Could not create XRUN notification pipe."),
@@ -968,8 +1039,8 @@ void qjackctlMainForm::startJackClient (void)
 
     // Create shutdown notification pipe.
     if (::pipe(g_fdShut) < 0) {
-        g_fdShut[FD_READ]  = FD_NIL;
-        g_fdShut[FD_WRITE] = FD_NIL;
+        g_fdShut[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
+        g_fdShut[QJACKCTL_FDWRITE] = QJACKCTL_FDNIL;
         closePipes();
         QMessageBox::critical(this, tr("Error"),
             tr("Could not create shutdown notification pipe."),
@@ -994,9 +1065,9 @@ void qjackctlMainForm::startJackClient (void)
     jack_on_shutdown(m_pJackClient, qjackctl_shutdown, NULL);
 
     // Create our notification managers.
-    m_pPortNotifier = new QSocketNotifier(g_fdPort[FD_READ], QSocketNotifier::Read);
-    m_pXrunNotifier = new QSocketNotifier(g_fdXrun[FD_READ], QSocketNotifier::Read);
-    m_pShutNotifier = new QSocketNotifier(g_fdShut[FD_READ], QSocketNotifier::Read);
+    m_pPortNotifier = new QSocketNotifier(g_fdPort[QJACKCTL_FDREAD], QSocketNotifier::Read);
+    m_pXrunNotifier = new QSocketNotifier(g_fdXrun[QJACKCTL_FDREAD], QSocketNotifier::Read);
+    m_pShutNotifier = new QSocketNotifier(g_fdShut[QJACKCTL_FDREAD], QSocketNotifier::Read);
 
     // And connect it to the proper slots.
     QObject::connect(m_pPortNotifier, SIGNAL(activated(int)), this, SLOT(portNotifySlot(int)));
@@ -1127,6 +1198,25 @@ void qjackctlMainForm::stabilizeConnections (void)
 }
 
 
+// Transport start (play)
+void qjackctlMainForm::transportStart()
+{
+#ifdef CONFIG_JACK_TRANSPORT
+    if (m_pJackClient)
+        jack_transport_start(m_pJackClient);
+#endif
+}
+
+// Transport stop (pause).
+void qjackctlMainForm::transportStop()
+{
+#ifdef CONFIG_JACK_TRANSPORT
+    if (m_pJackClient)
+        jack_transport_stop(m_pJackClient);
+#endif
+}
+
+
 // About Qt request.
 void qjackctlMainForm::aboutQt()
 {
@@ -1135,5 +1225,4 @@ void qjackctlMainForm::aboutQt()
 
 
 // end of ui.h
-
 
