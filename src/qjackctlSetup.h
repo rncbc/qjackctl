@@ -34,21 +34,26 @@ struct qjackctlPreset
     bool    bSoftMode;
     bool    bMonitor;
     bool    bShorts;
-    int     iChan;
+    bool    bNoMemLock;
+    bool    bHWMon;
+    bool    bHWMeter;
+    bool    bIgnoreHW;
     int     iPriority;
     int     iFrames;
     int     iSampleRate;
     int     iPeriods;
+    int     iWordLength;
     int     iWait;
+    int     iChan;
     QString sDriver;
     QString sInterface;
     int     iAudio;
     int     iDither;
     int     iTimeout;
-    bool    bHWMon;
-    bool    bHWMeter;
     int     iInChannels;
     int     iOutChannels;
+    QString sInDevice;
+    QString sOutDevice;
     int     iStartDelay;
     bool    bVerbose;
 };
@@ -104,6 +109,7 @@ public:
     bool    bKeepOnTop;
     bool    bServerConfig;
     QString sServerConfigName;
+    bool    bServerConfigTemp;
 
     // Defaults...
     QString sPatchbayPath;
@@ -123,6 +129,9 @@ public:
     void loadWidgetGeometry(QWidget *pWidget);
 
 private:
+
+    // A recursive QSettings key entry remover.
+    void deleteKey(const QString& sKey);
 
     // Our proper settings profile.
     QSettings m_settings;

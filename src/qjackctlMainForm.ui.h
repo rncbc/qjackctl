@@ -431,15 +431,16 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument("-v");
     if (m_preset.bRealtime)
         m_pJack->addArgument("-R");
-    if (m_preset.iPriority > 0) {
+    if (m_preset.iPriority > 0)
         m_pJack->addArgument("-P" + QString::number(m_preset.iPriority));
-    }
-    if (m_preset.iTimeout > 0) {
+    if (m_preset.iTimeout > 0)
         m_pJack->addArgument("-t" + QString::number(m_preset.iTimeout));
-    }
+    if (m_preset.bNoMemLock)
+        m_pJack->addArgument("-m");
     sTemp = m_preset.sDriver;
     m_pJack->addArgument("-d" + sTemp);
     bool bDummy     = (sTemp == "dummy");
+    bool bOss       = (sTemp == "oss");
     bool bAlsa      = (sTemp == "alsa");
     bool bPortaudio = (sTemp == "portaudio");
     if (bAlsa)
@@ -459,21 +460,35 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-m");
         if (m_preset.bShorts)
             m_pJack->addArgument("-S");
+    }
+    if (bOss) {
+        if (m_preset.iWordLength > 0)
+            m_pJack->addArgument("-w" + QString::number(m_preset.iWordLength));
+        if (!m_preset.sInDevice.isEmpty())
+            m_pJack->addArgument("-C" + m_preset.sInDevice);
+        if (!m_preset.sOutDevice.isEmpty())
+            m_pJack->addArgument("-P" + m_preset.sOutDevice);
+        if (m_preset.bIgnoreHW)
+            m_pJack->addArgument("-b");
+    }
+    if (bOss || bAlsa) {
         if (m_preset.iInChannels > 0)
             m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
         if (m_preset.iOutChannels > 0)
             m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     }
-    switch (m_preset.iAudio) {
-    case 0:
-    //  m_pJack->addArgument("-D");
-        break;
-    case 1:
-        m_pJack->addArgument("-C");
-        break;
-    case 2:
-        m_pJack->addArgument("-P");
-        break;
+    if (!bOss) {
+        switch (m_preset.iAudio) {
+        case 0:
+        //  m_pJack->addArgument("-D");
+            break;
+        case 1:
+            m_pJack->addArgument("-C");
+            break;
+        case 2:
+            m_pJack->addArgument("-P");
+            break;
+        }
     }
     if (bDummy && m_preset.iWait > 0)
         m_pJack->addArgument("-w" + QString::number(m_preset.iWait));
@@ -1422,11 +1437,17 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // Save server configuration file.
     if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
+        QString sJackCmdLine = m_sJackCmdLine;
+        if (m_pSetup->bServerConfigTemp) {
+            int iPos = sJackCmdLine.find(' ');
+            if (iPos > 0)
+                sJackCmdLine = sJackCmdLine.insert(iPos, " -T");
+        }
         QString sFilename = ::getenv("HOME");
         sFilename += "/" + m_pSetup->sServerConfigName;
         QFile file(sFilename);
         if (file.open(IO_WriteOnly | IO_Truncate)) {
-            QTextStream(&file) << m_sJackCmdLine << endl;
+            QTextStream(&file) << sJackCmdLine << endl;
             file.close();
             appendMessagesColor(tr("Server configuration saved to") + " \"" + sFilename + "\"", "#999933");
         }

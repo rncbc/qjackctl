@@ -45,6 +45,7 @@ void qjackctlSetupForm::init (void)
     SampleRateComboBox->setValidator(new QIntValidator(SampleRateComboBox));
     PeriodsComboBox->setValidator(new QIntValidator(PeriodsComboBox));
     WaitComboBox->setValidator(new QIntValidator(WaitComboBox));
+    WordLengthComboBox->setValidator(new QIntValidator(WordLengthComboBox));
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
     TimeRefreshComboBox->setValidator(new QIntValidator(TimeRefreshComboBox));
     StartDelayComboBox->setValidator(new QIntValidator(StartDelayComboBox));
@@ -122,6 +123,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
     ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
     ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
+    ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
 
     // Finally, load preset list...
     m_iDirtySetup++;
@@ -147,19 +149,22 @@ void qjackctlSetupForm::changePreset( const QString& sPreset )
         SoftModeCheckBox->setChecked(preset.bSoftMode);
         MonitorCheckBox->setChecked(preset.bMonitor);
         ShortsCheckBox->setChecked(preset.bShorts);
-        ChanComboBox->setCurrentText(QString::number(preset.iChan));
+        NoMemLockCheckBox->setChecked(preset.bNoMemLock);
+        HWMonCheckBox->setChecked(preset.bHWMon);
+        HWMeterCheckBox->setChecked(preset.bHWMeter);
+        IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
         PriorityComboBox->setCurrentText(QString::number(preset.iPriority));
         FramesComboBox->setCurrentText(QString::number(preset.iFrames));
         SampleRateComboBox->setCurrentText(QString::number(preset.iSampleRate));
         PeriodsComboBox->setCurrentText(QString::number(preset.iPeriods));
+        WordLengthComboBox->setCurrentText(QString::number(preset.iWordLength));
         WaitComboBox->setCurrentText(QString::number(preset.iWait));
+        ChanComboBox->setCurrentText(QString::number(preset.iChan));
         DriverComboBox->setCurrentText(preset.sDriver);
         InterfaceComboBox->setCurrentText(preset.sInterface);
         AudioComboBox->setCurrentItem(preset.iAudio);
         DitherComboBox->setCurrentItem(preset.iDither);
         TimeoutComboBox->setCurrentText(QString::number(preset.iTimeout));
-        HWMonCheckBox->setChecked(preset.bHWMon);
-        HWMeterCheckBox->setChecked(preset.bHWMeter);
         InChannelsSpinBox->setValue(preset.iInChannels);
         OutChannelsSpinBox->setValue(preset.iOutChannels);
         StartDelayComboBox->setCurrentText(QString::number(preset.iStartDelay));
@@ -182,19 +187,22 @@ void qjackctlSetupForm::savePreset (void)
     preset.bSoftMode    = SoftModeCheckBox->isChecked();
     preset.bMonitor     = MonitorCheckBox->isChecked();
     preset.bShorts      = ShortsCheckBox->isChecked();
-    preset.iChan        = ChanComboBox->currentText().toInt();
+    preset.bNoMemLock   = NoMemLockCheckBox->isChecked();
+    preset.bHWMon       = HWMonCheckBox->isChecked();
+    preset.bHWMeter     = HWMeterCheckBox->isChecked();
+    preset.bIgnoreHW    = IgnoreHWCheckBox->isChecked();
     preset.iPriority    = PriorityComboBox->currentText().toInt();
     preset.iFrames      = FramesComboBox->currentText().toInt();
     preset.iSampleRate  = SampleRateComboBox->currentText().toInt();
     preset.iPeriods     = PeriodsComboBox->currentText().toInt();
+    preset.iWordLength  = WordLengthComboBox->currentText().toInt();
     preset.iWait        = WaitComboBox->currentText().toInt();
+    preset.iChan        = ChanComboBox->currentText().toInt();
     preset.sDriver      = DriverComboBox->currentText();
     preset.sInterface   = InterfaceComboBox->currentText();
     preset.iAudio       = AudioComboBox->currentItem();
     preset.iDither      = DitherComboBox->currentItem();
     preset.iTimeout     = TimeoutComboBox->currentText().toInt();
-    preset.bHWMon       = HWMonCheckBox->isChecked();
-    preset.bHWMeter     = HWMeterCheckBox->isChecked();
     preset.iInChannels  = InChannelsSpinBox->value();
     preset.iOutChannels = OutChannelsSpinBox->value();
     preset.iStartDelay  = StartDelayComboBox->currentText().toInt();
@@ -260,21 +268,29 @@ void qjackctlSetupForm::computeLatency (void)
 void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 {
     bool bDummy     = (sDriver == "dummy");
+    bool bOss       = (sDriver == "oss");
     bool bAlsa      = (sDriver == "alsa");
     bool bPortaudio = (sDriver == "portaudio");
 
     SoftModeCheckBox->setEnabled(bAlsa);
     MonitorCheckBox->setEnabled(bAlsa);
     ShortsCheckBox->setEnabled(bAlsa);
-
-    ChanTextLabel->setEnabled(bPortaudio);
-    ChanComboBox->setEnabled(bPortaudio);
+    HWMonCheckBox->setEnabled(bAlsa);
+    HWMeterCheckBox->setEnabled(bAlsa);
+    
+    IgnoreHWCheckBox->setEnabled(bOss);
 
     PeriodsTextLabel->setEnabled(bAlsa);
     PeriodsComboBox->setEnabled(bAlsa);
 
+    WordLengthTextLabel->setEnabled(bOss);
+    WordLengthComboBox->setEnabled(bOss);
+
     WaitTextLabel->setEnabled(bDummy);
     WaitComboBox->setEnabled(bDummy);
+
+    ChanTextLabel->setEnabled(bPortaudio);
+    ChanComboBox->setEnabled(bPortaudio);
 
     InterfaceTextLabel->setEnabled(bAlsa);
     InterfaceComboBox->setEnabled(bAlsa);
@@ -282,13 +298,10 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     DitherTextLabel->setEnabled(!bDummy);
     DitherComboBox->setEnabled(!bDummy);
 
-    HWMonCheckBox->setEnabled(bAlsa);
-    HWMeterCheckBox->setEnabled(bAlsa);
-
-    InChannelsTextLabel->setEnabled(bAlsa);
-    InChannelsSpinBox->setEnabled(bAlsa);
-    OutChannelsTextLabel->setEnabled(bAlsa);
-    OutChannelsSpinBox->setEnabled(bAlsa);
+    InChannelsTextLabel->setEnabled(bAlsa || bOss);
+    InChannelsSpinBox->setEnabled(bAlsa || bOss);
+    OutChannelsTextLabel->setEnabled(bAlsa || bOss);
+    OutChannelsSpinBox->setEnabled(bAlsa || bOss);
 
     computeLatency();
 }
@@ -336,7 +349,10 @@ void qjackctlSetupForm::stabilizeForm (void)
 
     TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
     MessagesLimitLinesComboBox->setEnabled(MessagesLimitCheckBox->isChecked());
-    ServerConfigNameComboBox->setEnabled(ServerConfigCheckBox->isChecked());
+
+    bEnabled = ServerConfigCheckBox->isChecked();
+    ServerConfigNameComboBox->setEnabled(bEnabled);
+    ServerConfigTempCheckBox->setEnabled(bEnabled);
 
     changeDriver(DriverComboBox->currentText());
 }
@@ -531,6 +547,7 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->bKeepOnTop              = KeepOnTopCheckBox->isChecked();
     m_pSetup->bServerConfig           = ServerConfigCheckBox->isChecked();
     m_pSetup->sServerConfigName       = ServerConfigNameComboBox->currentText();
+    m_pSetup->bServerConfigTemp       = ServerConfigTempCheckBox->isChecked();
 
     // Save combobox history...
     m_pSetup->saveComboBoxHistory(ServerComboBox);

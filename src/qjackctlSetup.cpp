@@ -68,6 +68,7 @@ qjackctlSetup::qjackctlSetup (void)
     bKeepOnTop              = m_settings.readBoolEntry("/KeepOnTop", true);
     bServerConfig           = m_settings.readBoolEntry("/ServerConfig", true);
     sServerConfigName       = m_settings.readEntry("/ServerConfigName", ".jackdrc");
+    bServerConfigTemp       = m_settings.readBoolEntry("/ServerConfigTemp", false);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -122,6 +123,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
     m_settings.writeEntry("/ServerConfig",            bServerConfig);
     m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
+    m_settings.writeEntry("/ServerConfigTemp",        bServerConfigTemp);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -151,21 +153,26 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     preset.bSoftMode    = m_settings.readBoolEntry("/SoftMode", false);
     preset.bMonitor     = m_settings.readBoolEntry("/Monitor", false);
     preset.bShorts      = m_settings.readBoolEntry("/Shorts", false);
-    preset.iChan        = m_settings.readNumEntry("/Chan", 0);
+    preset.bNoMemLock   = m_settings.readBoolEntry("/NoMemLock", false);
+    preset.bHWMon       = m_settings.readBoolEntry("/HWMon", false);
+    preset.bHWMeter     = m_settings.readBoolEntry("/HWMeter", false);
+    preset.bIgnoreHW    = m_settings.readNumEntry("/IgnoreHW", false);
     preset.iPriority    = m_settings.readNumEntry("/Priority", 0);
     preset.iFrames      = m_settings.readNumEntry("/Frames", 1024);
     preset.iSampleRate  = m_settings.readNumEntry("/SampleRate", 48000);
     preset.iPeriods     = m_settings.readNumEntry("/Periods", 2);
+    preset.iWordLength  = m_settings.readNumEntry("/WordLength", 16);
     preset.iWait        = m_settings.readNumEntry("/Wait", 21333);
+    preset.iChan        = m_settings.readNumEntry("/Chan", 0);
     preset.sDriver      = m_settings.readEntry("/Driver", "alsa");
     preset.sInterface   = m_settings.readEntry("/Interface", "hw:0");
     preset.iAudio       = m_settings.readNumEntry("/Audio", 0);
     preset.iDither      = m_settings.readNumEntry("/Dither", 0);
     preset.iTimeout     = m_settings.readNumEntry("/Timeout", 500);
-    preset.bHWMon       = m_settings.readBoolEntry("/HWMon", false);
-    preset.bHWMeter     = m_settings.readBoolEntry("/HWMeter", false);
     preset.iInChannels  = m_settings.readNumEntry("/InChannels", 0);
     preset.iOutChannels = m_settings.readNumEntry("/OutChannels", 0);
+    preset.sInDevice    = m_settings.readEntry("/InDevice", QString::null);
+    preset.sOutDevice   = m_settings.readEntry("/OutDevice", QString::null);
     preset.iStartDelay  = m_settings.readNumEntry("/StartDelay", 2);
     preset.bVerbose     = m_settings.readBoolEntry("/Verbose", false);
     m_settings.endGroup();
@@ -189,21 +196,26 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
     m_settings.writeEntry("/SoftMode",    preset.bSoftMode);
     m_settings.writeEntry("/Monitor",     preset.bMonitor);
     m_settings.writeEntry("/Shorts",      preset.bShorts);
-    m_settings.writeEntry("/Chan",        preset.iChan);
+    m_settings.writeEntry("/NoMemLock",   preset.bNoMemLock);
+    m_settings.writeEntry("/HWMon",       preset.bHWMon);
+    m_settings.writeEntry("/HWMeter",     preset.bHWMeter);
+    m_settings.writeEntry("/IgnoreHW",    preset.bIgnoreHW);
     m_settings.writeEntry("/Priority",    preset.iPriority);
     m_settings.writeEntry("/Frames",      preset.iFrames);
     m_settings.writeEntry("/SampleRate",  preset.iSampleRate);
     m_settings.writeEntry("/Periods",     preset.iPeriods);
+    m_settings.writeEntry("/WordLength",  preset.iWordLength);
     m_settings.writeEntry("/Wait",        preset.iWait);
+    m_settings.writeEntry("/Chan",        preset.iChan);
     m_settings.writeEntry("/Driver",      preset.sDriver);
     m_settings.writeEntry("/Interface",   preset.sInterface);
     m_settings.writeEntry("/Audio",       preset.iAudio);
     m_settings.writeEntry("/Dither",      preset.iDither);
     m_settings.writeEntry("/Timeout",     preset.iTimeout);
-    m_settings.writeEntry("/HWMon",       preset.bHWMon);
-    m_settings.writeEntry("/HWMeter",     preset.bHWMeter);
     m_settings.writeEntry("/InChannels",  preset.iInChannels);
     m_settings.writeEntry("/OutChannels", preset.iOutChannels);
+    m_settings.writeEntry("/InDevice",    preset.sInDevice);
+    m_settings.writeEntry("/OutDevice",   preset.sOutDevice);
     m_settings.writeEntry("/StartDelay",  preset.iStartDelay);
     m_settings.writeEntry("/Verbose",     preset.bVerbose);
     m_settings.endGroup();
@@ -220,10 +232,37 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
         if (iter == presets.end())
             return false;
         presets.remove(iter);
-        m_settings.removeEntry("/Settings" + sSuffix);
+        deleteKey("/Settings" + sSuffix);
     }
     return true;
 }
+
+
+//---------------------------------------------------------------------------
+// A recursive QSettings key entry remover.
+
+void qjackctlSetup::deleteKey ( const QString& sKey )
+{
+    // First, delete all stand-alone entries...
+    QStringList entries = m_settings.entryList(sKey);
+    for (QStringList::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+        const QString& sEntry = *entry;
+        if (!sEntry.isEmpty())
+            m_settings.removeEntry(sKey + "/" + sEntry);
+    }
+
+    // Then, we'll recurse under sub-keys...
+    QStringList subkeys = m_settings.subkeyList(sKey);
+    for (QStringList::Iterator subkey = subkeys.begin(); subkey != subkeys.end(); ++subkey) {
+        const QString& sSubKey = *subkey;
+        if (!sSubKey.isEmpty())
+            deleteKey(sKey + "/" + sSubKey);
+    }
+
+    // Finally we remove our-selves.
+    m_settings.removeEntry(sKey);
+}
+
 
 //-------------------------------------------------------------------------
 // Command-line argument stuff.

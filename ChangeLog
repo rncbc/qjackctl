@@ -3,13 +3,20 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.7   2004-03-17  User-interface refinements.
+0.2.7   2004-03-22  User-interface refinements and OSS driver support.
 
 - Connections and patchbay windows horizontal layout are now user
   configurable via splitter widgets.
 
 - Refresh on connections window now take effect on both tabs, Audio
   (JACK) and MIDI (ALSA).
+
+- OSS driver support and no-mlock option added to server settings, setup
+  dialog (as of JACK 0.95.7+).
+
+- Temporary server configuration option added, applicable to the auto-start
+  server feature on client applications, whether the server shall exit once
+  all clients are closed.
   
 
 0.2.6   2004-02-29  More work in progress.

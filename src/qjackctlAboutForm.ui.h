@@ -32,7 +32,7 @@ void qjackctlAboutForm::init (void)
 {
     // Stuff the about box...
     QString sText = "<p align=\"center\"><br />\n";
-    sText += "<b>" QJACKCTL_TITLE " - " QJACKCTL_SUBTITLE "</b><br />\n";
+    sText += "<b>" QJACKCTL_TITLE " - " + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
     sText += "<br />\n";
     sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
     sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
