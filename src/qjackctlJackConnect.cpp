@@ -25,16 +25,6 @@
 
 
 // Audio connection pixmaps.
-#include "icons/aclienti.xpm"
-#include "icons/acliento.xpm"
-#include "icons/aportpti.xpm"
-#include "icons/aportpto.xpm"
-#include "icons/aportpni.xpm"
-#include "icons/aportpno.xpm"
-#include "icons/aportlti.xpm"
-#include "icons/aportlto.xpm"
-#include "icons/aportlni.xpm"
-#include "icons/aportlno.xpm"
 
 static int g_iXpmRefCount = 0;
 
@@ -206,16 +196,16 @@ qjackctlJackClientList::qjackctlJackClientList( qjackctlClientListView *pListVie
     : qjackctlClientList(pListView, bReadable)
 {
     if (g_iXpmRefCount == 0) {
-        g_pXpmClientI = new QPixmap((const char **) aclienti_xpm);
-        g_pXpmClientO = new QPixmap((const char **) acliento_xpm);
-        g_pXpmPortPTI = new QPixmap((const char **) aportpti_xpm);
-        g_pXpmPortPTO = new QPixmap((const char **) aportpto_xpm);
-        g_pXpmPortPNI = new QPixmap((const char **) aportpni_xpm);
-        g_pXpmPortPNO = new QPixmap((const char **) aportpno_xpm);
-        g_pXpmPortLTI = new QPixmap((const char **) aportlti_xpm);
-        g_pXpmPortLTO = new QPixmap((const char **) aportlto_xpm);
-        g_pXpmPortLNI = new QPixmap((const char **) aportlni_xpm);
-        g_pXpmPortLNO = new QPixmap((const char **) aportlno_xpm);
+        g_pXpmClientI = new QPixmap(QPixmap::fromMimeSource("aclienti.png"));
+        g_pXpmClientO = new QPixmap(QPixmap::fromMimeSource("acliento.png"));
+        g_pXpmPortPTI = new QPixmap(QPixmap::fromMimeSource("aportpti.png"));
+        g_pXpmPortPTO = new QPixmap(QPixmap::fromMimeSource("aportpto.png"));
+        g_pXpmPortPNI = new QPixmap(QPixmap::fromMimeSource("aportpni.png"));
+        g_pXpmPortPNO = new QPixmap(QPixmap::fromMimeSource("aportpno.png"));
+        g_pXpmPortLTI = new QPixmap(QPixmap::fromMimeSource("aportlti.png"));
+        g_pXpmPortLTO = new QPixmap(QPixmap::fromMimeSource("aportlto.png"));
+        g_pXpmPortLNI = new QPixmap(QPixmap::fromMimeSource("aportlni.png"));
+        g_pXpmPortLNO = new QPixmap(QPixmap::fromMimeSource("aportlno.png"));
     }
     g_iXpmRefCount++;
 

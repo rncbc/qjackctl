@@ -73,7 +73,7 @@
                 <number>2</number>
             </property>
             <property name="pixmap">
-                <pixmap>qjackctl.xpm</pixmap>
+                <pixmap>qjackctl.png</pixmap>
             </property>
             <property name="alignment">
                 <set>AlignCenter</set>

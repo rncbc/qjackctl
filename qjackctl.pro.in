@@ -30,7 +30,7 @@ FORMS    = src/qjackctlMainForm.ui \
            src/qjackctlSetupForm.ui \
            src/qjackctlAboutForm.ui
 
-IMAGES   = icons/qjackctl.xpm \
+IMAGES   = icons/qjackctl.png \
            icons/displaybg1.png \
            icons/start1.png \
            icons/stop1.png \
@@ -59,6 +59,29 @@ IMAGES   = icons/qjackctl.xpm \
            icons/reset1.png \
            icons/refresh1.png \
            icons/socket1.png \
+           icons/aclienti.png \
+           icons/acliento.png \
+           icons/aplugi.png \
+           icons/aplugo.png \
+           icons/aportlni.png \
+           icons/aportlno.png \
+           icons/aportlti.png \
+           icons/aportlto.png \
+           icons/aportpni.png \
+           icons/aportpno.png \
+           icons/aportpti.png \
+           icons/aportpto.png \
+           icons/asocketi.png \
+           icons/asocketo.png \
+           icons/mclienti.png \
+           icons/mcliento.png \
+           icons/mplugi.png \
+           icons/mplugo.png \
+           icons/mporti.png \
+           icons/mporto.png \
+           icons/msocketi.png \
+           icons/msocketo.png \
+           icons/xsocket1.png \
            icons/xstarting1.png \
            icons/xstarted1.png \
            icons/xstopping1.png \

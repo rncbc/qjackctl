@@ -48,7 +48,7 @@
         <string>JACK Audio Connection Kit - Qt GUI Interface</string>
     </property>
     <property name="icon">
-        <pixmap>qjackctl.xpm</pixmap>
+        <pixmap>qjackctl.png</pixmap>
     </property>
     <grid>
         <property name="name">

@@ -21,11 +21,7 @@
 
 #include "qjackctlAlsaConnect.h"
 
-// Local pixmaps.
-#include "icons/mcliento.xpm"
-#include "icons/mclienti.xpm"
-#include "icons/mporto.xpm"
-#include "icons/mporti.xpm"
+// MIDI connection pixmaps.
 
 static int g_iXpmRefCount = 0;
 
@@ -123,10 +119,10 @@ qjackctlAlsaClientList::qjackctlAlsaClientList( qjackctlClientListView *pListVie
     : qjackctlClientList(pListView, bReadable)
 {
     if (g_iXpmRefCount == 0) {
-        g_pXpmClientO = new QPixmap((const char **) mcliento_xpm);
-        g_pXpmClientI = new QPixmap((const char **) mclienti_xpm);
-        g_pXpmPortO   = new QPixmap((const char **) mporto_xpm);
-        g_pXpmPortI   = new QPixmap((const char **) mporti_xpm);
+        g_pXpmClientO = new QPixmap(QPixmap::fromMimeSource("mcliento.png"));
+        g_pXpmClientI = new QPixmap(QPixmap::fromMimeSource("mclienti.png"));
+        g_pXpmPortO   = new QPixmap(QPixmap::fromMimeSource("mporto.png"));
+        g_pXpmPortI   = new QPixmap(QPixmap::fromMimeSource("mporti.png"));
     }
     g_iXpmRefCount++;
 
