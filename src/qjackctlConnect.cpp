@@ -777,8 +777,10 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
     QObject::connect(m_pIListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(contentsMoving(int, int)),   m_pConnectorView, SLOT(contentsMoved(int, int)));
-    
+
+#if QT_VERSION >= 0x030200    
     QSplitter::setChildrenCollapsible(false);
+#endif	
 }
 
 

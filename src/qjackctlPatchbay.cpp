@@ -1101,9 +1101,11 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszNa
     QObject::connect(m_pIListView, SIGNAL(collapsed(QListViewItem *)), m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(contentsMoving(int, int)),   m_pPatchworkView, SLOT(contentsMoved(int, int)));
 
-    QSplitter::setChildrenCollapsible(false);
-
     m_bDirty = false;
+
+#if QT_VERSION >= 0x030200
+    QSplitter::setChildrenCollapsible(false);
+#endif
 }
 
 

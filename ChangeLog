@@ -3,6 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.7a  2004-04-05  Compilation fix for Qt 3.1.
+
+- QSplitter::setChildrenCollapsible call is now conditionally compiled, 
+  applied only on Qt 3.2+.
+
+
 0.2.7   2004-04-04  User-interface refinements and OSS driver support.
 
 - Connections and patchbay windows horizontal layout are now user
