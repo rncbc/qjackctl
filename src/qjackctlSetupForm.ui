@@ -28,7 +28,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>644</width>
+            <width>630</width>
             <height>501</height>
         </rect>
     </property>
@@ -3191,6 +3191,78 @@
                                     <string>The icon size for each item of the connections view</string>
                                 </property>
                             </widget>
+                            <spacer row="0" column="2">
+                                <property name="name">
+                                    <cstring>space44</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>200</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="1" column="0">
+                                <property name="name">
+                                    <cstring>spacer45</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Vertical</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Minimum</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>8</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="5">
+                                <property name="name">
+                                    <cstring>AliasesEditingCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Ena&amp;ble client/port aliases editing (rename)</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+B</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to enable in-place client/port name editing (rename)</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="5">
+                                <property name="name">
+                                    <cstring>AliasesEnabledCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>E&amp;nable client/port aliases</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+N</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to enable client/port name aliases on the connections window</string>
+                                </property>
+                            </widget>
                             <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="5">
                                 <property name="name">
                                     <cstring>BezierLinesCheckBox</cstring>
@@ -3210,40 +3282,6 @@
                                     <string>Whether to draw connection lines as cubic Bezier curves</string>
                                 </property>
                             </widget>
-                            <spacer row="0" column="2">
-                                <property name="name">
-                                    <cstring>space44</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>137</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <spacer row="1" column="0">
-                                <property name="name">
-                                    <cstring>spacer16_2</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Vertical</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Minimum</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>8</width>
-                                        <height>24</height>
-                                    </size>
-                                </property>
-                            </spacer>
                         </grid>
                     </widget>
                 </vbox>
@@ -3259,75 +3297,6 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QGroupBox">
-                        <property name="name">
-                            <cstring>AliasesGroupBox</cstring>
-                        </property>
-                        <property name="font">
-                            <font>
-                                <bold>1</bold>
-                            </font>
-                        </property>
-                        <property name="title">
-                            <string>Aliases</string>
-                        </property>
-                        <property name="flat">
-                            <bool>true</bool>
-                        </property>
-                        <grid>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QLayoutWidget" row="0" column="0" rowspan="2" colspan="1">
-                                <property name="name">
-                                    <cstring>layout41</cstring>
-                                </property>
-                                <vbox>
-                                    <property name="name">
-                                        <cstring>unnamed</cstring>
-                                    </property>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>AliasesEnabledCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>E&amp;nable client/port aliases</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+N</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Whether to enable client/port name aliases on the connections window</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>AliasesEditingCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Ena&amp;ble client/port aliases editing (rename)</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+B</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Whether to enable in-place client/port name editing (rename)</string>
-                                        </property>
-                                    </widget>
-                                </vbox>
-                            </widget>
-                        </grid>
-                    </widget>
                     <widget class="QGroupBox">
                         <property name="name">
                             <cstring>OtherGroupBox</cstring>
@@ -4155,8 +4124,8 @@
     <tabstop>ConnectionsFontPushButton</tabstop>
     <tabstop>ConnectionsIconSizeComboBox</tabstop>
     <tabstop>BezierLinesCheckBox</tabstop>
-    <tabstop>AliasesEditingCheckBox</tabstop>
     <tabstop>AliasesEnabledCheckBox</tabstop>
+    <tabstop>AliasesEditingCheckBox</tabstop>
     <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>KeepOnTopCheckBox</tabstop>
