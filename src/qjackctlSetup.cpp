@@ -201,19 +201,22 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
     if (pWidget) {
         QPoint fpos;
         QSize  fsize;
+        bool bVisible;
         settings.beginGroup("/Geometry/" + QString(pWidget->name()));
         fpos.setX(settings.readNumEntry("/x", -1));
         fpos.setY(settings.readNumEntry("/y", -1));
         fsize.setWidth(settings.readNumEntry("/width", -1));
         fsize.setHeight(settings.readNumEntry("/height", -1));
+        bVisible = settings.readBoolEntry("/visible", false);
         settings.endGroup();
         if (fpos.x() > 0 && fpos.y() > 0)
             pWidget->move(fpos);
-        if (fsize.width() > 0 && fsize.height() > 0) {
+        if (fsize.width() > 0 && fsize.height() > 0)
             pWidget->resize(fsize);
-        } else {
+        else
             pWidget->adjustSize();
-        }
+        if (bVisible)
+            pWidget->show();
     }
 }
 
@@ -223,14 +226,18 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
     // Try to save form window position...
     // (due to X11 window managers ideossincrasies, we better
     // only save the form geometry while its up and visible)
-    if (pWidget && pWidget->isVisible()) {
-        QPoint fpos  = pWidget->pos();
-        QSize  fsize = pWidget->size();
+    if (pWidget) {
         settings.beginGroup("/Geometry/" + QString(pWidget->name()));
-        settings.writeEntry("/x", fpos.x());
-        settings.writeEntry("/y", fpos.y());
-        settings.writeEntry("/width", fsize.width());
-        settings.writeEntry("/height", fsize.height());
+        bool bVisible = pWidget->isVisible();
+        if (bVisible) {
+            QPoint fpos  = pWidget->pos();
+            QSize  fsize = pWidget->size();
+            settings.writeEntry("/x", fpos.x());
+            settings.writeEntry("/y", fpos.y());
+            settings.writeEntry("/width", fsize.width());
+            settings.writeEntry("/height", fsize.height());
+        }
+        settings.writeEntry("/visible", bVisible);
         settings.endGroup();
     }
 }

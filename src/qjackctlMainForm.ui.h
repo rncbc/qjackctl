@@ -39,9 +39,19 @@
 
 #define QJACKCTL_DELAY_TICKS    ((QJACKCTL_DELAY_MSECS / QJACKCTL_TIMER_MSECS) + 1)
 
+// Notification pipes descriptors
+#define QJACKCTL_FDNIL     -1
+#define QJACKCTL_FDREAD     0
+#define QJACKCTL_FDWRITE    1
+
+static int g_fdPort[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+static int g_fdXrun[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+static int g_fdBuff[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+static int g_fdShut[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
 // To have clue about current buffer size (in frames).
 static jack_nframes_t g_nframes = 0;
+
 
 // Kind of constructor.
 void qjackctlMainForm::init (void)
@@ -64,12 +74,11 @@ void qjackctlMainForm::init (void)
     m_iBuffNotify = 0;
     m_iShutNotify = 0;
 
-    // Messages, Status and Connections forms are to be created right now
-    // the other modeless form(s) get done on demand.
+    // All forms are to be created right now.
     m_pMessagesForm    = new qjackctlMessagesForm(this);
     m_pStatusForm      = new qjackctlStatusForm(this);
     m_pConnectionsForm = new qjackctlConnectionsForm(this);
-    m_pPatchbayForm    = NULL;
+    m_pPatchbayForm    = new qjackctlPatchbayForm(this);
 
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const char *,const char*,unsigned int)),
@@ -92,6 +101,10 @@ void qjackctlMainForm::init (void)
     updateMessagesFont();
     updateTimeDisplayToolTips();
     updateActivePatchbay();
+
+    // Load patchbay from default path.
+    if (m_pPatchbayForm && !m_setup.sPatchbayPath.isEmpty())
+        m_pPatchbayForm->loadPatchbayFile(m_setup.sPatchbayPath);
 
     // Try to find if we can start in detached mode (client-only)
     // just in case there's a JACK server already running.
@@ -554,6 +567,18 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
 
 
 // Force update of active patchbay definition profile, if applicable.
+bool qjackctlMainForm::isActivePatchbay ( const QString& sPatchbayPath )
+{
+    bool bActive = false;
+
+    if (m_setup.bActivePatchbay && !m_setup.sActivePatchbayPath.isEmpty())
+        bActive = (m_setup.sActivePatchbayPath == sPatchbayPath);
+
+    return bActive;
+}
+
+
+// Force update of active patchbay definition profile, if applicable.
 void qjackctlMainForm::updateActivePatchbay (void)
 {
     // Time to load the active patchbay rack profiler?
@@ -698,16 +723,6 @@ void qjackctlMainForm::refreshXrunStats (void)
     updateElapsedTimes();
 }
 
-
-// Notification pipes descriptors
-#define QJACKCTL_FDNIL     -1
-#define QJACKCTL_FDREAD     0
-#define QJACKCTL_FDWRITE    1
-
-static int g_fdPort[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
-static int g_fdXrun[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
-static int g_fdBuff[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
-static int g_fdShut[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
 // Jack port registration callback funtion, called
 // whenever a jack port is registered or unregistered.
@@ -1158,12 +1173,6 @@ void qjackctlMainForm::refreshConnections (void)
 // Message log form requester slot.
 void qjackctlMainForm::toggleMessagesForm (void)
 {
-    if (m_pMessagesForm == NULL) {
-        m_pMessagesForm = new qjackctlMessagesForm(this);
-        m_setup.loadWidgetGeometry(m_pMessagesForm);
-        updateMessagesFont();
-    }
-
     if (m_pMessagesForm) {
         m_setup.saveWidgetGeometry(m_pMessagesForm);
         if (m_pMessagesForm->isVisible())
@@ -1177,11 +1186,6 @@ void qjackctlMainForm::toggleMessagesForm (void)
 // Status form requester slot.
 void qjackctlMainForm::toggleStatusForm (void)
 {
-    if (m_pStatusForm == NULL) {
-        m_pStatusForm = new qjackctlStatusForm(this);
-        m_setup.loadWidgetGeometry(m_pStatusForm);
-    }
-    
     if (m_pStatusForm) {
         m_setup.saveWidgetGeometry(m_pStatusForm);
         if (m_pStatusForm->isVisible())
@@ -1195,11 +1199,6 @@ void qjackctlMainForm::toggleStatusForm (void)
 // Connections form requester slot.
 void qjackctlMainForm::toggleConnectionsForm (void)
 {
-    if (m_pConnectionsForm == NULL) {
-        m_pConnectionsForm = new qjackctlConnectionsForm(this);
-        m_setup.loadWidgetGeometry(m_pConnectionsForm);
-    }
-    
     if (m_pConnectionsForm) {
         m_setup.saveWidgetGeometry(m_pConnectionsForm);
         m_pConnectionsForm->setJackClient(m_pJackClient);
@@ -1214,14 +1213,6 @@ void qjackctlMainForm::toggleConnectionsForm (void)
 // Patchbay form requester slot.
 void qjackctlMainForm::togglePatchbayForm (void)
 {
-    if (m_pPatchbayForm == NULL) {
-        m_pPatchbayForm = new qjackctlPatchbayForm(this);
-        m_setup.loadWidgetGeometry(m_pPatchbayForm);
-        // Load patchbay from default path.
-        if (m_pPatchbayForm && !m_setup.sPatchbayPath.isEmpty())
-            m_pPatchbayForm->loadPatchbayFile(m_setup.sPatchbayPath);
-    }
-    
     if (m_pPatchbayForm) {
         m_setup.saveWidgetGeometry(m_pPatchbayForm);
         m_pPatchbayForm->setJackClient(m_pJackClient);

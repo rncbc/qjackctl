@@ -3,6 +3,20 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.1.1   2003-10-28  Minor feature enhancements and bugfixes.
+
+- Main window display items are now made fixed in width, at leats those more
+  prone to change frequently and thus cause some display jitter.
+
+- Messages, status, connections and patchbay module windows are now reopenned
+  automagicaly on startup as they were on previous session.
+  
+- New patchbay definition snapshot option from current actual connections;
+  current active patchbay filename status title indication.
+
+- New icons patchbay editor window and socket dialogs.
+
+
 0.1.0   2003-10-22  Major user interface redesign.
 
 - Main application window complete redesign, now more like a multimedia/LCD

@@ -29,11 +29,14 @@
             <x>0</x>
             <y>0</y>
             <width>387</width>
-            <height>323</height>
+            <height>334</height>
         </rect>
     </property>
     <property name="caption">
         <string>Socket</string>
+    </property>
+    <property name="icon">
+        <pixmap>socket1.png</pixmap>
     </property>
     <grid>
         <property name="name">
@@ -237,6 +240,9 @@
                         <property name="accel">
                             <string>Alt+A</string>
                         </property>
+                        <property name="iconSet">
+                            <iconset>add1.png</iconset>
+                        </property>
                         <property name="toolTip" stdset="0">
                             <string>Add plug to socket plug list</string>
                         </property>
@@ -307,6 +313,9 @@
                         <property name="accel">
                             <string>Alt+E</string>
                         </property>
+                        <property name="iconSet">
+                            <iconset>edit1.png</iconset>
+                        </property>
                         <property name="toolTip" stdset="0">
                             <string>Edit currently selected plug/port</string>
                         </property>
@@ -320,6 +329,9 @@
                         </property>
                         <property name="accel">
                             <string>Alt+R</string>
+                        </property>
+                        <property name="iconSet">
+                            <iconset>remove1.png</iconset>
                         </property>
                         <property name="toolTip" stdset="0">
                             <string>Remove currently selected plug from socket plug list</string>
@@ -442,9 +454,9 @@
     <slot specifier="non virtual">removePlug()</slot>
     <slot specifier="non virtual">moveUpPlug()</slot>
     <slot specifier="non virtual">moveDownPlug()</slot>
+    <slot specifier="non virtual">activateAddPlugMenu(int)</slot>
     <slot specifier="non virtual">contextMenu(QListViewItem *, const QPoint&amp;, int)</slot>
     <slot specifier="non virtual">clientNameChanged()</slot>
-    <slot specifier="non virtual">activateAddPlugMenu(int)</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>

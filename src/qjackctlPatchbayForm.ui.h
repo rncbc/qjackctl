@@ -42,7 +42,7 @@ void qjackctlPatchbayForm::init (void)
     QObject::connect(PatchbayView->OListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->IListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
 
-    newPatchbay();
+    newPatchbayFile(false);
 }
 
 
@@ -118,8 +118,13 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     ActivatePatchbayPushButton->setEnabled(QFileInfo(m_sPatchbayPath).exists());
 
     QString sText = m_sPatchbayName;
-    if (PatchbayView->dirty())
+    if (PatchbayView->dirty()) {
         sText += " [" + tr("modified") + "]";
+    } else {
+        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+        if (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath))
+            sText += " [" + tr("active") + "]";
+    }
     PatchbayTextLabel->setText(sText);
 
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
@@ -158,6 +163,18 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 QString& qjackctlPatchbayForm::patchbayPath (void)
 {
     return m_sPatchbayPath;
+}
+
+
+// Reset patchbay definition from scratch.
+void qjackctlPatchbayForm::newPatchbayFile ( bool bSnapshot )
+{
+    m_pPatchbay->clear();
+    m_sPatchbayPath = QString::null;
+    m_sPatchbayName = tr("Untitled") + QString::number(m_iUntitled++);
+    if (bSnapshot)
+        m_pPatchbay->connectionsSnapshot();
+    stabilizeForm();
 }
 
 
@@ -206,13 +223,23 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 // Create a new patchbay definition from scratch.
 void qjackctlPatchbayForm::newPatchbay()
 {
-    // Check if we can discard safely the current one...
-    if (queryClose()) {
-        m_pPatchbay->clear();
-        m_sPatchbayPath = QString::null;
-        m_sPatchbayName = tr("Untitled") + QString::number(m_iUntitled++);
-        stabilizeForm();
+    // Ask for a snapshot for scratch...
+    bool bSnapshot = false;
+    if (m_pPatchbay->jackClient()) {
+        bSnapshot = (QMessageBox::information(this,
+            tr("New Patchbay definition"),
+            tr("JACK is currently running.") + "\n\n" +
+            tr("Create the new patchbay definition with a") + "\n" +
+            tr("snapshot of all actual client connections?"),
+            tr("Yes"), tr("No")) == 0);
     }
+
+    // Check if we can discard safely the current one...
+    if (!queryClose())
+        return;
+
+    // Reset patchbay editor.
+    newPatchbayFile(bSnapshot);
 }
 
 

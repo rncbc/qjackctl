@@ -371,6 +371,42 @@ void qjackctlSocketList::clear (void)
 }
 
 
+// Client:port snapshot.
+void qjackctlSocketList::clientPortsSnapshot (void)
+{
+    if (m_pJackClient == 0)
+        return;
+
+    const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, m_ulSocketFlags);
+    if (ppszClientPorts) {
+        int iClientPort = 0;
+        while (ppszClientPorts[iClientPort]) {
+            QString sClientPort = ppszClientPorts[iClientPort];
+            qjackctlSocketItem *pSocket = 0;
+            qjackctlPlugItem   *pPlug   = 0;
+            int iColon = sClientPort.find(":");
+            if (iColon >= 0) {
+                QString sClientName = sClientPort.left(iColon);
+                QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
+                pSocket = findSocket(sClientName);
+                if (pSocket)
+                    pPlug = pSocket->findPlug(sPortName);
+                if (pSocket == 0)
+                    pSocket = new qjackctlSocketItem(this, sClientName, sClientName, (qjackctlSocketItem *) m_pListView->lastItem());
+                if (pSocket && pPlug == 0) {
+                    qjackctlPlugItem *pPlugAfter = (qjackctlPlugItem *) pSocket->firstChild();
+                    while (pPlugAfter && pPlugAfter->nextSibling())
+                        pPlugAfter = (qjackctlPlugItem *) pPlugAfter->nextSibling();
+                    pPlug = new qjackctlPlugItem(pSocket, sPortName, m_ulSocketFlags, pPlugAfter);
+                }
+            }
+            iClientPort++;
+        }
+        ::free(ppszClientPorts);
+    }
+}
+
+
 // Return currently selected socket item.
 qjackctlSocketItem *qjackctlSocketList::selectedSocketItem (void)
 {
@@ -1370,11 +1406,61 @@ void qjackctlPatchbay::saveRack ( qjackctlPatchbayRack *pPatchbayRack )
 }
 
 
-// JACK client setlement.
+// JACK client property accessors.
 void qjackctlPatchbay::setJackClient ( jack_client_t *pJackClient )
 {
     m_pOSocketList->setJackClient(pJackClient);
     m_pISocketList->setJackClient(pJackClient);
+}
+
+jack_client_t *qjackctlPatchbay::jackClient (void)
+{
+    return m_pOSocketList->jackClient();
+}
+
+
+// Connections snapshot.
+void qjackctlPatchbay::connectionsSnapshot (void)
+{
+    jack_client_t *pJackClient = m_pOSocketList->jackClient();
+    if (pJackClient == 0)
+        return;
+
+    // Take snapshot of client port list.
+    m_pOSocketList->clientPortsSnapshot();
+    m_pISocketList->clientPortsSnapshot();
+
+    // Then, starting from output sockets, trye to grab the connections...
+    for (qjackctlSocketItem *pOSocket = m_pOSocketList->sockets().first();
+            pOSocket;
+                pOSocket = m_pOSocketList->sockets().next()) {
+        // For each output plug item...
+        for (qjackctlPlugItem *pOPlug = pOSocket->plugs().first();
+                pOPlug;
+                    pOPlug = pOSocket->plugs().next()) {
+            // Get current port connections...
+            QString sOClientPort = pOSocket->socketName() + ":" + pOPlug->plugName();
+            const char **ppszIClientPorts = jack_port_get_all_connections(pJackClient, jack_port_by_name(pJackClient, sOClientPort.latin1()));
+            if (ppszIClientPorts) {
+                // Now, for each input client port...
+                int iIClientPort = 0;
+                while (ppszIClientPorts[iIClientPort]) {
+                    QString sIClientPort = ppszIClientPorts[iIClientPort];
+                    int iColon = sIClientPort.find(":");
+                    if (iColon >= 0) {
+                        qjackctlSocketItem *pISocket = m_pISocketList->findSocket(sIClientPort.left(iColon));
+                        if (pISocket)
+                            connectSockets(pOSocket, pISocket);
+                    }
+                    iIClientPort++;
+                }
+                ::free(ppszIClientPorts);
+            }
+        }
+    }
+
+    // Surely it is kind of tainted.
+    m_pPatchbayView->setDirty(true);
 }
 
 

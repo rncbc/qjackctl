@@ -36,8 +36,11 @@ IMAGES   = icons/qjackctl.xpm \
            icons/save1.png \
            icons/apply1.png \
            icons/add1.png \
+           icons/edit1.png \
+           icons/remove1.png \
            icons/up1.png \
            icons/down1.png \
+           icons/patchbay1.png \
            icons/socket1.png \
            icons/qtlogo.png
 

@@ -175,9 +175,11 @@ public:
     // Socket list cleaner.
     void clear();
 
+    // Client:port snapshot.
+    void clientPortsSnapshot();
+
     // Socket list accessor.
     QPtrList<qjackctlSocketItem>& sockets();
-
 
     // Find the current selected socket item in list.
     qjackctlSocketItem *selectedSocketItem();
@@ -380,8 +382,9 @@ public:
     void loadRack(qjackctlPatchbayRack *pPatchbayRack);
     void saveRack(qjackctlPatchbayRack *pPatchbayRack);
 
-    // JACK client method.
+    // JACK client property accessors.
     void setJackClient(jack_client_t *pJackClient);
+    jack_client_t *jackClient();
 
 public slots:
 
@@ -395,6 +398,9 @@ public slots:
 
     // Complete patchbay clearer.
     void clear();
+    
+    // Do actual and complete connections snapshot.
+    void connectionsSnapshot();
 
 private:
 
@@ -407,7 +413,6 @@ private:
     void disconnectSockets(qjackctlSocketItem *pOSocket, qjackctlSocketItem *pISocket);
 
     // Instance variables.
-    jack_client_t *m_pJackClient;
     qjackctlPatchbayView *m_pPatchbayView;
     qjackctlSocketList *m_pOSocketList;
     qjackctlSocketList *m_pISocketList;
