@@ -752,6 +752,7 @@
     <function access="private" specifier="non virtual">xrunNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">buffNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">shutNotifyEvent( void )</function>
+    <function access="private" specifier="non virtual">stopJackServer( void )</function>
     <function access="private" specifier="non virtual" returnType="bool">startJackClient( bool bDetach )</function>
     <function access="private" specifier="non virtual">stopJackClient( void )</function>
     <function access="private" specifier="non virtual">refreshConnections( void )</function>

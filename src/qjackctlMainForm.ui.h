@@ -126,7 +126,7 @@ void qjackctlMainForm::init (void)
 void qjackctlMainForm::destroy (void)
 {
     // Stop server, if not already...
-    stopJack();
+    stopJackServer();
 
     // Terminate local ALSA sequencer interface.
     if (m_pAlsaNotifier)
@@ -657,7 +657,8 @@ void qjackctlMainForm::startJack (void)
 void qjackctlMainForm::stopJack (void)
 {
 	// Check if we're allowed to stop (shutdown)...
-	if (m_pSetup->bQueryShutdown && m_pJack && m_pJack->isRunning()
+	if (m_pSetup->bQueryShutdown
+	    && m_pJack && m_pJack->isRunning() && !m_bJackSurvive
 	    && m_pConnectionsForm && m_pConnectionsForm->isJackConnected()
         && QMessageBox::warning(this, tr("Warning"),
             tr("Some client audio applications") + "\n" +
@@ -666,12 +667,20 @@ void qjackctlMainForm::stopJack (void)
             tr("Stop"), tr("Cancel")) > 0) {
 		return;
 	}
-	
+
+	// Stop the server unconditionally.
+	stopJackServer();
+}
+
+
+// Stop jack audio server...
+void qjackctlMainForm::stopJackServer (void)
+{
     // Clear timer counters...
     m_iStartDelay  = 0;
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
-    
+
     // Stop client code.
     stopJackClient();
 
@@ -689,8 +698,8 @@ void qjackctlMainForm::stopJack (void)
         t.start();
         while (t.elapsed() < QJACKCTL_TIMER_MSECS)
             QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
-        // Keep on.
-        return;
+        // Keep on, if not exiting for good.
+		return;
      }
 
      // Do final processing anyway.
@@ -1370,7 +1379,7 @@ void qjackctlMainForm::shutNotifyEvent (void)
     // Log this event.
     appendMessagesColor(tr("Shutdown notification."), "#cc9999");
     // Do what has to be done.
-    stopJack();
+    stopJackServer();
     // We're not detached anymore, anyway.
     m_bJackDetach = false;
 

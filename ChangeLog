@@ -5,15 +5,16 @@ ChangeLog
 
 0.2.14   2005-01-04  Work in progress...
 
-- Optional confirmation warning on stopping the audio server, if there's
-  audio clients still connected (as suggested by Sampo Savolainen).
+- Optional confirmation warning on audio server shutdown, if there's some
+  audio clients still active and connected (as suggested by Sampo Savolainen).
 
 - Check for <jack/statistics.h> on configure time (as of JACK 0.99.42+ CVS).
 
 - "Unlock memory" server setup option was added, allowing the release
   of memory used by common toolkit libraries (GTK+, Qt, FLTK, Wine) that
   were being superfluously locked on every GUI JACK client; number of periods
-  has now the minimum allowed value of 2; setup dialog layout slighly changed.
+  has now the minimum allowed value of 2; server start delay widget converted
+  to spinbox; setup dialog layout slighly changed.
 
 - Removed stand-alone usx2y driver support. Since JACK 0.99.41+ CVS, the
   special "rawusb" support on the Tascam US-122/224/428 USB Audio/MIDI
