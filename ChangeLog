@@ -3,6 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.1   2003-12-15  The fix of fixes.
+
+- Messages window fallback fix.
+
+
 0.2.0   2003-12-12  ALSA sequencer patchbay entrance.
 
 - ALSA sequencer subscription patchbay feature, complementing current

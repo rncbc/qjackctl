@@ -24,6 +24,9 @@
 
 #include "qjackctlSetup.h"
 
+// The maximum number of message lines.
+#define QJACKCTL_MESSAGES_MAXLINES  1000
+
 
 // Kind of constructor.
 void qjackctlMessagesForm::init (void)
@@ -83,9 +86,15 @@ void qjackctlMessagesForm::appendMessagesColor( const QString& s, const QString&
 
 void qjackctlMessagesForm::appendMessagesText( const QString& s )
 {
-    while (MessagesTextView->paragraphs() > 1000) {
-        MessagesTextView->removeParagraph(0);
+    int iParagraphs = MessagesTextView->paragraphs();
+    if (iParagraphs > QJACKCTL_MESSAGES_MAXLINES) {
+        MessagesTextView->setUpdatesEnabled(false);
+        while (iParagraphs > QJACKCTL_MESSAGES_MAXLINES) {
+            MessagesTextView->removeParagraph(0);
+            iParagraphs--;
+        }
         MessagesTextView->scrollToBottom();
+        MessagesTextView->setUpdatesEnabled(true);
     }
     MessagesTextView->append(s);
 }
