@@ -3,6 +3,13 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.0.5   2003-09-04  Work in progress.
+
+- Internationalization support added; future qjackctl_${LANG}.qm translation
+  files are located on ${prefix}/share/locale .
+
+- New dummy and portaudio driver support (as of jack release 0.80.0+).
+
 0.0.4   2003-08-29  Minor changes and bugfixes.
 
 - The patchbay port lists are now sorted in a more numerical friendly manner

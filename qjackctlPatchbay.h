@@ -224,6 +224,16 @@ protected:
 
 private:
 
+    // Dunno. But this may avoid some conflicts.
+    bool startExclusive();
+    void endExclusive();
+
+    // Connection methods (unguarded).
+    bool canConnectSelectedEx();
+    bool canDisconnectSelectedEx();
+    void connectSelectedEx();
+    void disconnectSelectedEx();
+
     // Drawing methods.
     void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
     void drawConnections();
@@ -232,6 +242,7 @@ private:
     QHBoxLayout *m_pHBoxLayout;
     qjackctlClientList *m_pOClientList;
     qjackctlClientList *m_pIClientList;
+    int m_iExclusive;
 };
 
 

@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.4"
+#define QJACKCTL_VERSION	"0.0.4.2"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -81,10 +81,12 @@ void qjackctlMainForm::init()
     resetXrunStats();
 
     // Set dialog validators...
+    ChanComboBox->setValidator(new QIntValidator(ChanComboBox));
     PriorityComboBox->setValidator(new QIntValidator(PriorityComboBox));
     FramesComboBox->setValidator(new QIntValidator(FramesComboBox));
     SampleRateComboBox->setValidator(new QIntValidator(SampleRateComboBox));
     PeriodsComboBox->setValidator(new QIntValidator(PeriodsComboBox));
+    WaitComboBox->setValidator(new QIntValidator(WaitComboBox));
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
     TimeRefreshComboBox->setValidator(new QIntValidator(TimeRefreshComboBox));
 
@@ -108,10 +110,13 @@ void qjackctlMainForm::init()
     SoftModeCheckBox->setChecked(m_Settings.readBoolEntry("/SoftMode", false));
     AsioCheckBox->setChecked(m_Settings.readBoolEntry("/Asio", false));
     MonitorCheckBox->setChecked(m_Settings.readBoolEntry("/Monitor", false));
+    ChanComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/Chan", 0)));
     PriorityComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/Priority", 0)));
     FramesComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/Frames", 1024)));
     SampleRateComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/SampleRate", 48000)));
     PeriodsComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/Periods", 2)));
+    WaitComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/Wait", 21333)));
+    DriverComboBox->setCurrentText(m_Settings.readEntry("/Driver", "alsa"));
     InterfaceComboBox->setCurrentText(m_Settings.readEntry("/Interface", "default"));
     AudioComboBox->setCurrentItem(m_Settings.readNumEntry("/Audio", 0));
     DitherComboBox->setCurrentItem(m_Settings.readNumEntry("/Dither", 0));
@@ -170,10 +175,13 @@ void qjackctlMainForm::destroy()
     m_Settings.writeEntry("/SoftMode", SoftModeCheckBox->isChecked());
     m_Settings.writeEntry("/Asio", AsioCheckBox->isChecked());
     m_Settings.writeEntry("/Monitor", MonitorCheckBox->isChecked());
+    m_Settings.writeEntry("/Chan", ChanComboBox->currentText().toInt());
     m_Settings.writeEntry("/Priority", PriorityComboBox->currentText().toInt());
     m_Settings.writeEntry("/Frames", FramesComboBox->currentText().toInt());
     m_Settings.writeEntry("/SampleRate", SampleRateComboBox->currentText().toInt());
     m_Settings.writeEntry("/Periods", PeriodsComboBox->currentText().toInt());
+    m_Settings.writeEntry("/Wait", WaitComboBox->currentText().toInt());
+    m_Settings.writeEntry("/Driver", DriverComboBox->currentText());
     m_Settings.writeEntry("/Interface", InterfaceComboBox->currentText());
     m_Settings.writeEntry("/Audio", AudioComboBox->currentItem());
     m_Settings.writeEntry("/Dither", DitherComboBox->currentItem());
@@ -290,10 +298,20 @@ void qjackctlMainForm::startJack()
         m_pJack->addArgument("-D");
         m_pJack->addArgument(sTemp);
     }
+    sTemp = DriverComboBox->currentText();
     m_pJack->addArgument("-d");
-    m_pJack->addArgument("alsa");
-    m_pJack->addArgument("-d");
-    m_pJack->addArgument(InterfaceComboBox->currentText());
+    m_pJack->addArgument(sTemp);
+    bool bDummy     = (sTemp == "dummy");
+    bool bAlsa      = (sTemp == "alsa");
+    bool bPortaudio = (sTemp == "portaudio");
+    if (bAlsa) {
+        m_pJack->addArgument("-d");
+        m_pJack->addArgument(InterfaceComboBox->currentText());
+    }
+    if (bPortaudio && ChanComboBox->currentText().toInt() > 0) {
+        m_pJack->addArgument("-c");
+        m_pJack->addArgument(ChanComboBox->currentText());
+    }
     if (SampleRateComboBox->currentText().toInt() > 0) {
         m_pJack->addArgument("-r");
         m_pJack->addArgument(SampleRateComboBox->currentText());
@@ -302,14 +320,16 @@ void qjackctlMainForm::startJack()
         m_pJack->addArgument("-p");
         m_pJack->addArgument(FramesComboBox->currentText());
     }
-    if (PeriodsComboBox->currentText().toInt() > 0) {
-        m_pJack->addArgument("-n");
-        m_pJack->addArgument(PeriodsComboBox->currentText());
+    if (bAlsa) {
+        if (PeriodsComboBox->currentText().toInt() > 0) {
+            m_pJack->addArgument("-n");
+            m_pJack->addArgument(PeriodsComboBox->currentText());
+        }
+        if (SoftModeCheckBox->isChecked())
+            m_pJack->addArgument("-s");
+        if (MonitorCheckBox->isChecked())
+            m_pJack->addArgument("-m");
     }
-    if (SoftModeCheckBox->isChecked())
-        m_pJack->addArgument("-s");
-    if (MonitorCheckBox->isChecked())
-        m_pJack->addArgument("-m");
     switch (AudioComboBox->currentItem()) {
     case 0:
     //  m_pJack->addArgument("-D");
@@ -321,24 +341,28 @@ void qjackctlMainForm::startJack()
         m_pJack->addArgument("-P");
         break;
     }
-    switch (DitherComboBox->currentItem()) {
-    case 0:
-    //  m_pJack->addArgument("-z-");
-        break;
-    case 1:
-        m_pJack->addArgument("-zr");
-        break;
-    case 2:
-        m_pJack->addArgument("-zs");
-        break;
-    case 3:
-        m_pJack->addArgument("-zt");
-        break;
+    if (!bDummy) {
+        switch (DitherComboBox->currentItem()) {
+        case 0:
+            //  m_pJack->addArgument("-z-");
+            break;
+        case 1:
+            m_pJack->addArgument("-zr");
+            break;
+        case 2:
+            m_pJack->addArgument("-zs");
+            break;
+        case 3:
+            m_pJack->addArgument("-zt");
+            break;
+        }
     }
-    if (HWMonCheckBox->isChecked())
-        m_pJack->addArgument("-H");
-    if (HWMeterCheckBox->isChecked())
-        m_pJack->addArgument("-M");
+    if (bAlsa) {
+        if (HWMonCheckBox->isChecked())
+            m_pJack->addArgument("-H");
+        if (HWMeterCheckBox->isChecked())
+            m_pJack->addArgument("-M");
+    }
 
     appendMessages(tr("JACK is starting..."));
     QStringList list = m_pJack->arguments();
@@ -493,6 +517,34 @@ void qjackctlMainForm::toggleDetails (void)
     stabilizeForm(true);
 }
 
+void qjackctlMainForm::changeDriver( const QString& sDriver )
+{
+    bool bDummy     = (sDriver == "dummy");
+    bool bAlsa      = (sDriver == "alsa");
+    bool bPortaudio = (sDriver == "portaudio");
+
+    SoftModeCheckBox->setEnabled(bAlsa);
+    MonitorCheckBox->setEnabled(bAlsa);
+
+    ChanTextLabel->setEnabled(bPortaudio);
+    ChanComboBox->setEnabled(bPortaudio);
+
+    PeriodsTextLabel->setEnabled(bAlsa);
+    PeriodsComboBox->setEnabled(bAlsa);
+
+    WaitTextLabel->setEnabled(bDummy);
+    WaitComboBox->setEnabled(bDummy);    
+
+    InterfaceTextLabel->setEnabled(bAlsa);
+    InterfaceComboBox->setEnabled(bAlsa);
+
+    DitherTextLabel->setEnabled(!bDummy);
+    DitherComboBox->setEnabled(!bDummy);
+    
+    HWMonCheckBox->setEnabled(bAlsa);
+    HWMeterCheckBox->setEnabled(bAlsa);
+}
+
 void qjackctlMainForm::stabilizeForm ( bool bSavePosition )
 {
     bool bShowDetails = DetailsCheckBox->isChecked();
@@ -504,6 +556,7 @@ void qjackctlMainForm::stabilizeForm ( bool bSavePosition )
         ForceArtsShellComboBox->setEnabled(ForceArtsCheckBox->isChecked());
         ForceJackShellComboBox->setEnabled(ForceJackCheckBox->isChecked());
         TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
+        changeDriver(DriverComboBox->currentText());
         DetailsTabWidget->show();
     } else {
         DetailsTabWidget->hide();

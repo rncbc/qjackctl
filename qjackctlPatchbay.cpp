@@ -455,6 +455,8 @@ qjackctlPatchbay::qjackctlPatchbay ( QWidget *pParent, QListView *pOListView, QL
 
     m_pOClientList = new qjackctlClientList(pOListView, pJackClient, JackPortIsOutput);
     m_pIClientList = new qjackctlClientList(pIListView, pJackClient, JackPortIsInput);
+    
+    m_iExclusive = 0;
 
     QObject::connect(pOListView, SIGNAL(expanded(QListViewItem *)),  this, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(pOListView, SIGNAL(collapsed(QListViewItem *)), this, SLOT(listViewChanged(QListViewItem *)));
@@ -471,8 +473,14 @@ qjackctlPatchbay::qjackctlPatchbay ( QWidget *pParent, QListView *pOListView, QL
 // Default destructor.
 qjackctlPatchbay::~qjackctlPatchbay (void)
 {
+    // Force end of works here.
+    m_iExclusive++;
+    
     delete m_pOClientList;
     delete m_pIClientList;
+    m_pOClientList = NULL;
+    m_pIClientList = NULL;
+
     delete m_pHBoxLayout;
 }
 
@@ -500,6 +508,9 @@ void qjackctlPatchbay::drawConnectionLine ( QPainter& p, int x1, int y1, int x2,
 // Draw visible port connection relation arrows.
 void qjackctlPatchbay::drawConnections (void)
 {
+    if (!startExclusive())
+        return;
+        
     QPainter p(this);
     QRect r1, r2;
     int   x1, y1, h1, b1;
@@ -562,11 +573,25 @@ void qjackctlPatchbay::drawConnections (void)
             }
         }
     }
+    
+    endExclusive();
 }
 
 
 // Test if selected ports are connectable.
 bool qjackctlPatchbay::canConnectSelected (void)
+{
+    bool bResult = false;
+    
+    if (startExclusive()) {
+        bResult = canConnectSelectedEx();
+        endExclusive();
+    }
+    
+    return bResult;
+}
+
+bool qjackctlPatchbay::canConnectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -602,6 +627,16 @@ bool qjackctlPatchbay::canConnectSelected (void)
 
 // Connect current selected ports.
 void qjackctlPatchbay::connectSelected (void)
+{
+    if (startExclusive()) {
+        connectSelectedEx();
+        endExclusive();
+    }
+
+    QWidget::update();
+}
+
+void qjackctlPatchbay::connectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -648,13 +683,23 @@ void qjackctlPatchbay::connectSelected (void)
             jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
         }
     }
-
-    QWidget::update();
 }
 
 
 // Test if selected ports are disconnectable.
 bool qjackctlPatchbay::canDisconnectSelected (void)
+{
+    bool bResult = false;
+
+    if (startExclusive()) {
+        bResult = canDisconnectSelectedEx();
+        endExclusive();
+    }
+
+    return bResult;
+}
+
+bool qjackctlPatchbay::canDisconnectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -690,6 +735,16 @@ bool qjackctlPatchbay::canDisconnectSelected (void)
 
 // Disconnect current selected ports.
 void qjackctlPatchbay::disconnectSelected (void)
+{
+    if (startExclusive()) {
+        disconnectSelectedEx();
+        endExclusive();
+    }
+
+    QWidget::update();
+}
+
+void qjackctlPatchbay::disconnectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -736,17 +791,35 @@ void qjackctlPatchbay::disconnectSelected (void)
             jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
         }
     }
-
-    QWidget::update();
 }
 
 
 // Complete contents rebuilder.
 void qjackctlPatchbay::refresh (void)
 {
-    m_pOClientList->updateClientPorts();
-    m_pIClientList->updateClientPorts();
+    if (startExclusive()) {
+        m_pOClientList->updateClientPorts();
+        m_pIClientList->updateClientPorts();
+        endExclusive();
+    }
+    
     QWidget::update();
+}
+
+
+// Dunno. But this may avoid some conflicts.
+bool qjackctlPatchbay::startExclusive (void)
+{
+    bool bExclusive = (m_iExclusive == 0);
+    if (bExclusive)
+        m_iExclusive++;
+    return bExclusive;
+}
+
+void qjackctlPatchbay::endExclusive (void)
+{
+    if (m_iExclusive > 0)
+        m_iExclusive--;
 }
 
 

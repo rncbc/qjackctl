@@ -1,4 +1,4 @@
-// main.cpp
+// config.h
 //
 /****************************************************************************
    Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,36 +19,12 @@
 
 *****************************************************************************/
 
-#include <qapplication.h>
-#include <qtextcodec.h>
+#ifndef __config_h
+#define __config_h
 
-#include "qjackctlMainForm.h"
+#define CONFIG_PREFIX   "@ac_prefix@"
 
-#include "config.h"
+#endif  // __config_h
 
-int main ( int argc, char **argv )
-{
-    QApplication app(argc, argv);
-
-    QTranslator translator(0);
-    QString sLocale = QTextCodec::locale();
-    if (sLocale != "C") {
-        QString sLocName = "qjackctl_" + sLocale;
-        if (!translator.load(sLocName, ".")) {
-            QString sLocPath = CONFIG_PREFIX "/share/locale";
-            if (!translator.load(sLocName, sLocPath))
-                fprintf(stderr, "Warning: no locale found: %s/%s.\n", sLocPath.latin1(), sLocName.latin1());
-        }
-        app.installTranslator(&translator);
-    }
-
-    qjackctlMainForm w;
-    w.show();
-    
-    app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
-    
-    return app.exec();
-}
-
-// end of main.cpp
+// end of config.h
 

@@ -111,8 +111,8 @@ AC_C_CONST
 dnl Checks for library functions.
 AC_CHECK_FUNCS(system)
 
-
-AC_OUTPUT(Makefile)
+dnl Finally produce a configure header file and the main makefile.
+AC_OUTPUT(config.h Makefile)
 
 make clean > /dev/null 2>&1
 
