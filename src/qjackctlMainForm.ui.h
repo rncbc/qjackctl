@@ -605,11 +605,6 @@ void qjackctlMainForm::startJack (void)
     sTemp += ").";
     appendMessages(tr("JACK was started") + sTemp);
 
-    sTemp = tr("Started");
-    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".", QJACKCTL_STARTED);
-    updateStatus(STATUS_SERVER_STATE, sTemp);
-    StopPushButton->setEnabled(true);
-
     // Reset (yet again) the timer counters...
     m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
     m_iTimerDelay  = 0;
@@ -967,6 +962,27 @@ void qjackctlMainForm::resetXrunStats (void)
 // Update the XRUN count/callbacks item.
 void qjackctlMainForm::updateXrunCount (void)
 {
+    // We'll change XRUN status colors here!
+    QColor color = (m_pJackClient ? Qt::green : Qt::darkGreen);
+    if ((m_iXrunCount + m_iXrunCallbacks) > 0) {
+        if (m_iXrunCallbacks > 0)
+            color = (m_pJackClient ? Qt::red : Qt::darkRed);
+        else
+            color = (m_pJackClient ? Qt::yellow : Qt::darkYellow);
+        // Change the system tray icon background color!
+        if (m_pSystemTray) {
+            m_pSystemTray->setBackgroundMode(Qt::FixedColor);
+            m_pSystemTray->setPaletteBackgroundColor(color);
+            m_pSystemTray->repaint(true);
+        }
+    }   // Reset the system tray icon background!
+    else if (m_pSystemTray) {
+        m_pSystemTray->setBackgroundMode(Qt::X11ParentRelative);
+        m_pSystemTray->repaint(true);
+    }
+        
+    XrunCountTextLabel->setPaletteForegroundColor(color);
+
     QString sText = QString::number(m_iXrunCount);
     sText += " (";
     sText += QString::number(m_iXrunCallbacks);
@@ -1551,13 +1567,19 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::green);
     TransportTimeTextLabel->setPaletteForegroundColor(Qt::green);
 
-    // If we've started detached, just change active status.
+    // Whether we've started detached, just change active status.
+    QString sTemp;
+    int iState;
     if (m_bJackDetach) {
-        QString sTemp = tr("Active");
-        updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".", QJACKCTL_ACTIVE);
-        updateStatus(STATUS_SERVER_STATE, sTemp);
-        StopPushButton->setEnabled(true);
+        sTemp = tr("Active");
+        iState = QJACKCTL_ACTIVE;
+    } else {
+        sTemp = tr("Started");
+        iState = QJACKCTL_STARTED;
     }
+    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".", iState);
+    updateStatus(STATUS_SERVER_STATE, sTemp);
+    StopPushButton->setEnabled(true);
 
     // Log success here.
     appendMessages(tr("Client activated."));
@@ -1952,18 +1974,8 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
         SampleRateTextLabel->setText(sText);
         break;
       case STATUS_XRUN_COUNT:
-      {
-        QColor fgcolor = (m_pJackClient ? Qt::green : Qt::darkGreen);
-        if ((m_iXrunCount + m_iXrunCallbacks) > 0) {
-            if (m_iXrunCallbacks > 0)
-                fgcolor = (m_pJackClient ? Qt::red : Qt::darkRed);
-            else
-                fgcolor = (m_pJackClient ? Qt::yellow : Qt::darkYellow);
-        }
-        XrunCountTextLabel->setPaletteForegroundColor(fgcolor);
         XrunCountTextLabel->setText(sText);
         break;
-      }
       case STATUS_TRANSPORT_STATE:
         TransportStateTextLabel->setText(sText);
         break;

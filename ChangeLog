@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.8   2004-04-27  System tray icon and menu option.
+0.2.8   2004-04-29  System tray icon and menu option.
 
 - New option for system tray icon and menu, which is known to be effective
   on KDE enabled desktops; support for freedesktop.org's system tray protocol
