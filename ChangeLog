@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.5  2004-02-10  Server survival option and command-line wrapper feature.
+0.2.5  2004-02-11  Server survival option and command-line wrapper feature.
 
 - New option on application exit for leaving the JACK server daemon running,
   surviving the parent process; the confirmation prompt on application close
@@ -25,7 +25,8 @@ ChangeLog
   and smart enough when regarding more than two contiguous decimal digits :)
 
 - Patchbay socket list view ordering is now properly preserved; socket
-  dialog gets plug list handling ehancements.
+  dialog gets plug list handling ehancements; active patchbay gets reloaded
+  when commited and saved to file.
 
   
 0.2.4  2004-02-01  Exclusive patchbay sockets.

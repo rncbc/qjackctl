@@ -230,6 +230,11 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     m_sPatchbayPath = sFileName;
     m_sPatchbayName = QFileInfo(sFileName).baseName();
     stabilizeForm();
+    
+    // Step 4: notify main form if applicable ...
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+    if (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath))
+        pMainForm->updateActivePatchbay();
 }
 
 
