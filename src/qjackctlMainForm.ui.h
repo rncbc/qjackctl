@@ -1286,7 +1286,6 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     refreshConnections();
 
     // Displayes are highlighted from now on.
-    XrunCountTextLabel->setPaletteForegroundColor(Qt::green);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::green);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::green);
@@ -1357,10 +1356,6 @@ void qjackctlMainForm::stopJackClient (void)
     m_iShutNotify = 0;
 
     // Displays are deemed again.
-    QColor fgcolor = Qt::darkGreen;
-    if ((m_iXrunCount + m_iXrunCallbacks) > 0)
-        fgcolor = (m_iXrunCallbacks > 0 ? Qt::darkRed : Qt::darkYellow);
-    XrunCountTextLabel->setPaletteForegroundColor(fgcolor);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::darkGreen);
@@ -1628,9 +1623,13 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
         break;
     case STATUS_XRUN_COUNT:
     {
-        QColor fgcolor = Qt::green;
-        if ((m_iXrunCount + m_iXrunCallbacks) > 0)
-            fgcolor = (m_iXrunCallbacks > 0 ? Qt::red : Qt::yellow);
+        QColor fgcolor = (m_pJackClient ? Qt::green : Qt::darkGreen);
+        if ((m_iXrunCount + m_iXrunCallbacks) > 0) {
+            if (m_iXrunCallbacks > 0)
+                fgcolor = (m_pJackClient ? Qt::red : Qt::darkRed);
+            else
+                fgcolor = (m_pJackClient ? Qt::yellow : Qt::darkYellow);
+        }
         XrunCountTextLabel->setPaletteForegroundColor(fgcolor);
         XrunCountTextLabel->setText(sText);
         break;
