@@ -59,6 +59,8 @@ qjackctlSetup::qjackctlSetup (void)
     iTimeRefresh            = m_settings.readNumEntry("/TimeRefresh", 10);
     iTimeDisplay            = m_settings.readNumEntry("/TimeDisplay", 0);
     sMessagesFont           = m_settings.readEntry("/MessagesFont", QString::null);
+    sDisplayFont1           = m_settings.readEntry("/DisplayFont1", QString::null);
+    sDisplayFont2           = m_settings.readEntry("/DisplayFont2", QString::null);
     bQueryClose             = m_settings.readBoolEntry("/QueryClose", true);
     m_settings.endGroup();
 
@@ -105,6 +107,8 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/TimeRefresh",             iTimeRefresh);
     m_settings.writeEntry("/TimeDisplay",             iTimeDisplay);
     m_settings.writeEntry("/MessagesFont",            sMessagesFont);
+    m_settings.writeEntry("/DisplayFont1",            sDisplayFont1);
+    m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);
     m_settings.writeEntry("/QueryClose",              bQueryClose);
     m_settings.endGroup();
 

@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>qjackctlSetupForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>514</width>
-            <height>400</height>
+            <width>513</width>
+            <height>428</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -2140,75 +2140,282 @@
                         <property name="flat">
                             <bool>true</bool>
                         </property>
-                        <vbox>
+                        <grid>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QRadioButton">
+                            <widget class="QLayoutWidget" row="0" column="0">
                                 <property name="name">
-                                    <cstring>TransportTimeRadioButton</cstring>
+                                    <cstring>layout8</cstring>
                                 </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>Transport &amp;Time (hh:mm:ss.ddd)</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+T</string>
-                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QRadioButton">
+                                        <property name="name">
+                                            <cstring>TransportTimeRadioButton</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Transport &amp;Time (hh:mm:ss.ddd)</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+T</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QRadioButton">
+                                        <property name="name">
+                                            <cstring>TransportBBTRadioButton</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Transport &amp;BBT (bar:beat.ticks)</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+B</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QRadioButton">
+                                        <property name="name">
+                                            <cstring>ElapsedResetRadioButton</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Elapsed time since last &amp;Reset</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+R</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QRadioButton">
+                                        <property name="name">
+                                            <cstring>ElapsedXrunRadioButton</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Elapsed time since last &amp;XRUN</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+X</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
                             </widget>
-                            <widget class="QRadioButton">
+                            <spacer row="0" column="1">
                                 <property name="name">
-                                    <cstring>TransportBBTRadioButton</cstring>
+                                    <cstring>spacer41</cstring>
                                 </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
                                 </property>
-                                <property name="text">
-                                    <string>Transport &amp;BBT (bar:beat.ticks)</string>
+                                <property name="sizeType">
+                                    <enum>Minimum</enum>
                                 </property>
-                                <property name="accel">
-                                    <string>Alt+B</string>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>16</width>
+                                        <height>8</height>
+                                    </size>
                                 </property>
-                            </widget>
-                            <widget class="QRadioButton">
+                            </spacer>
+                            <widget class="QLayoutWidget" row="0" column="2">
                                 <property name="name">
-                                    <cstring>ElapsedResetRadioButton</cstring>
+                                    <cstring>layout11</cstring>
                                 </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>Elapsed time since last &amp;Reset</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+R</string>
-                                </property>
+                                <grid>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLabel" row="3" column="0">
+                                        <property name="name">
+                                            <cstring>DisplayFont2TextLabel</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>3</hsizetype>
+                                                <vsizetype>5</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>120</width>
+                                                <height>0</height>
+                                            </size>
+                                        </property>
+                                        <property name="paletteForegroundColor">
+                                            <color>
+                                                <red>0</red>
+                                                <green>255</green>
+                                                <blue>0</blue>
+                                            </color>
+                                        </property>
+                                        <property name="paletteBackgroundColor">
+                                            <color>
+                                                <red>0</red>
+                                                <green>0</green>
+                                                <blue>0</blue>
+                                            </color>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>LineEditPanel</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Sunken</enum>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignCenter</set>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Sample front panel normal display font</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="1" column="0">
+                                        <property name="name">
+                                            <cstring>DisplayFont1TextLabel</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>3</hsizetype>
+                                                <vsizetype>5</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>120</width>
+                                                <height>0</height>
+                                            </size>
+                                        </property>
+                                        <property name="paletteForegroundColor">
+                                            <color>
+                                                <red>0</red>
+                                                <green>255</green>
+                                                <blue>0</blue>
+                                            </color>
+                                        </property>
+                                        <property name="paletteBackgroundColor">
+                                            <color>
+                                                <red>0</red>
+                                                <green>0</green>
+                                                <blue>0</blue>
+                                            </color>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>LineEditPanel</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Sunken</enum>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignCenter</set>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Sample big time display font</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QPushButton" row="3" column="1">
+                                        <property name="name">
+                                            <cstring>DisplayFont2PushButton</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Font...</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+F</string>
+                                        </property>
+                                        <property name="autoDefault">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Select font for the messages text display</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="2" column="0" rowspan="1" colspan="2">
+                                        <property name="name">
+                                            <cstring>textLabel1_2</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Normal display:</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QPushButton" row="1" column="1">
+                                        <property name="name">
+                                            <cstring>DisplayFont1PushButton</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Font...</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+F</string>
+                                        </property>
+                                        <property name="autoDefault">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Select font for the messages text display</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                                        <property name="name">
+                                            <cstring>textLabel1</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Big Time display:</string>
+                                        </property>
+                                    </widget>
+                                </grid>
                             </widget>
-                            <widget class="QRadioButton">
-                                <property name="name">
-                                    <cstring>ElapsedXrunRadioButton</cstring>
-                                </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>Elapsed time since last &amp;XRUN</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+X</string>
-                                </property>
-                            </widget>
-                        </vbox>
+                        </grid>
                     </widget>
                     <widget class="QGroupBox">
                         <property name="name">
@@ -2293,7 +2500,7 @@
                             </widget>
                             <spacer row="0" column="2">
                                 <property name="name">
-                                    <cstring>space41</cstring>
+                                    <cstring>space42</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -2562,6 +2769,18 @@
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
+        <sender>DisplayFont1PushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>chooseDisplayFont1()</slot>
+    </connection>
+    <connection>
+        <sender>DisplayFont2PushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>chooseDisplayFont2()</slot>
+    </connection>
+    <connection>
         <sender>MessagesFontPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -2630,6 +2849,8 @@
     <tabstop>TransportBBTRadioButton</tabstop>
     <tabstop>ElapsedResetRadioButton</tabstop>
     <tabstop>ElapsedXrunRadioButton</tabstop>
+    <tabstop>DisplayFont1PushButton</tabstop>
+    <tabstop>DisplayFont2PushButton</tabstop>
     <tabstop>MessagesFontPushButton</tabstop>
     <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
@@ -2658,6 +2879,8 @@
     <slot specifier="non virtual">browsePostStartupScript()</slot>
     <slot specifier="non virtual">browseShutdownScript()</slot>
     <slot specifier="non virtual">browseActivePatchbayPath()</slot>
+    <slot specifier="non virtual">chooseDisplayFont1()</slot>
+    <slot specifier="non virtual">chooseDisplayFont2()</slot>
     <slot specifier="non virtual">chooseMessagesFont()</slot>
     <slot specifier="non virtual">accept()</slot>
     <slot specifier="non virtual">reject()</slot>

@@ -3,7 +3,9 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.1   2003-12-16  The fix of fixes.
+0.2.1   2003-12-22  The fix of fixes.
+
+- Front panel status display font can now be customized.
 
 - Some connection graph changes were being silently missed, now fixed.
 

@@ -91,6 +91,8 @@ public:
     int     iTimeRefresh;
     int     iTimeDisplay;
     QString sMessagesFont;
+    QString sDisplayFont1;
+    QString sDisplayFont2;
     bool    bQueryClose;
 
     // Defaults...

@@ -135,6 +135,7 @@ void qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // Set defaults...
     updateMessagesFont();
+    updateTimeDisplayFonts();
     updateTimeDisplayToolTips();
     updateActivePatchbay();
 
@@ -633,6 +634,25 @@ void qjackctlMainForm::updateMessagesFont (void)
         QFont font;
         if (font.fromString(m_pSetup->sMessagesFont))
             m_pMessagesForm->setMessagesFont(font);
+    }
+}
+
+
+// Force update of big time display related fonts.
+void qjackctlMainForm::updateTimeDisplayFonts (void)
+{
+    QFont font;
+    if (!m_pSetup->sDisplayFont1.isEmpty() && font.fromString(m_pSetup->sDisplayFont1))
+        TimeDisplayTextLabel->setFont(font);
+    if (!m_pSetup->sDisplayFont2.isEmpty() && font.fromString(m_pSetup->sDisplayFont2)) {
+        ServerStateTextLabel->setFont(font);
+        CpuLoadTextLabel->setFont(font);
+        SampleRateTextLabel->setFont(font);
+        XrunCountTextLabel->setFont(font);
+        TransportStateTextLabel->setFont(font);
+        TransportBPMTextLabel->setFont(font);
+        font.setBold(true);
+        TransportTimeTextLabel->setFont(font);
     }
 }
 
@@ -1410,8 +1430,17 @@ void qjackctlMainForm::showSetupForm (void)
 {
     qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
     if (pSetupForm) {
+        // Check out some intial nullities(tm)...
+        if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesForm)
+            m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
+        if (m_pSetup->sDisplayFont1.isEmpty())
+            m_pSetup->sDisplayFont1 = TimeDisplayTextLabel->font().toString();
+        if (m_pSetup->sDisplayFont2.isEmpty())
+            m_pSetup->sDisplayFont2 = ServerStateTextLabel->font().toString();
         // To track down immediate changes.
         QString sOldMessagesFont       = m_pSetup->sMessagesFont;
+        QString sOldDisplayFont1       = m_pSetup->sDisplayFont1;
+        QString sOldDisplayFont2       = m_pSetup->sDisplayFont2;
         int     iOldTimeDisplay        = m_pSetup->iTimeDisplay;
         bool    bOldActivePatchbay     = m_pSetup->bActivePatchbay;
         QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
@@ -1422,6 +1451,9 @@ void qjackctlMainForm::showSetupForm (void)
             // Check wheather something immediate has changed.
             if (sOldMessagesFont != m_pSetup->sMessagesFont)
                 updateMessagesFont();
+            if (sOldDisplayFont1 != m_pSetup->sDisplayFont1 ||
+                sOldDisplayFont2 != m_pSetup->sDisplayFont2)
+                updateTimeDisplayFonts();
             if (iOldTimeDisplay |= m_pSetup->iTimeDisplay)
                 updateTimeDisplayToolTips();
             if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||

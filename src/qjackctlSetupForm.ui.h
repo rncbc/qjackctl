@@ -89,13 +89,24 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     AutoRefreshCheckBox->setChecked(m_pSetup->bAutoRefresh);
     TimeRefreshComboBox->setCurrentText(QString::number(m_pSetup->iTimeRefresh));
 
-    // Load Defaults...
+    // Load some other defaults...
     TimeDisplayButtonGroup->setButton(m_pSetup->iTimeDisplay);
+
     QFont font;
     if (m_pSetup->sMessagesFont.isEmpty() || !font.fromString(m_pSetup->sMessagesFont))
         font = QFont("Terminal", 8);
     MessagesFontTextLabel->setFont(font);
     MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+
+    if (m_pSetup->sDisplayFont1.isEmpty() || !font.fromString(m_pSetup->sDisplayFont1))
+        font = QFont("Helvetica", 12, QFont::Bold);
+    DisplayFont1TextLabel->setFont(font);
+    DisplayFont1TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+
+    if (m_pSetup->sDisplayFont2.isEmpty() || !font.fromString(m_pSetup->sDisplayFont2))
+        font = QFont("Helvetica", 8, QFont::Bold);
+    DisplayFont2TextLabel->setFont(font);
+    DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
     // Other misc options...
     StartJackCheckBox->setChecked(m_pSetup->bStartJack);
@@ -430,6 +441,30 @@ void qjackctlSetupForm::browseActivePatchbayPath()
 }
 
 
+// The display font 1 (big time) selection dialog.
+void qjackctlSetupForm::chooseDisplayFont1()
+{
+    bool  bOk  = false;
+    QFont font = QFontDialog::getFont(&bOk, DisplayFont1TextLabel->font(), this);
+    if (bOk) {
+        DisplayFont1TextLabel->setFont(font);
+        DisplayFont1TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+    }
+}
+
+
+// The display font 2 (normal time et al.) selection dialog.
+void qjackctlSetupForm::chooseDisplayFont2()
+{
+    bool  bOk  = false;
+    QFont font = QFontDialog::getFont(&bOk, DisplayFont2TextLabel->font(), this);
+    if (bOk) {
+        DisplayFont2TextLabel->setFont(font);
+        DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+    }
+}
+
+
 // The messages font selection dialog.
 void qjackctlSetupForm::chooseMessagesFont()
 {
@@ -469,6 +504,8 @@ void qjackctlSetupForm::accept (void)
     // Save Defaults...
     m_pSetup->iTimeDisplay   = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
     m_pSetup->sMessagesFont  = MessagesFontTextLabel->font().toString();
+    m_pSetup->sDisplayFont1  = DisplayFont1TextLabel->font().toString();
+    m_pSetup->sDisplayFont2  = DisplayFont2TextLabel->font().toString();
     m_pSetup->bStartJack     = StartJackCheckBox->isChecked();
     m_pSetup->bQueryClose    = QueryCloseCheckBox->isChecked();
 
