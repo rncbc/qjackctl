@@ -660,6 +660,11 @@
                                                 <string>hw:0</string>
                                             </property>
                                         </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hw:1</string>
+                                            </property>
+                                        </item>
                                         <property name="name">
                                             <cstring>InterfaceComboBox</cstring>
                                         </property>
