@@ -225,7 +225,8 @@ void qjackctlSetup::print_usage ( const char *arg0 )
     const QString sEot = "\n\t";
     const QString sEol = "\n\n";
 
-    fprintf(stderr, QObject::tr("Usage") + ": %s [" + QObject::tr("options")    + "]" + sEol, arg0);
+    fprintf(stderr, QObject::tr("Usage") + ": %s [" + QObject::tr("options") + "] [" +
+        QObject::tr("command-and-args") + "]" + sEol, arg0);
     fprintf(stderr, "%s - %s\n\n", QJACKCTL_TITLE, QJACKCTL_SUBTITLE);
     fprintf(stderr, QObject::tr("Options") + ":" + sEol);
     fprintf(stderr, "  -s, --start" + sEot +
@@ -243,8 +244,16 @@ void qjackctlSetup::print_usage ( const char *arg0 )
 bool qjackctlSetup::parse_args ( int argc, char **argv )
 {
     const QString sEol = "\n\n";
+    int iCmdArgs = 0;
 
     for (int i = 1; i < argc; i++) {
+
+        if (iCmdArgs > 0) {
+            sCmdLine += " ";
+            sCmdLine += argv[i];
+            iCmdArgs++;
+            continue;
+        }
 
         QString sArg = argv[i];
         QString sVal = QString::null;
@@ -278,11 +287,15 @@ bool qjackctlSetup::parse_args ( int argc, char **argv )
             return false;
         }
         else {
-            fprintf(stderr, QObject::tr("Unknown option") + " %s" + sEol, argv[i]);
-            print_usage(argv[0]);
-            return false;
+            // Here starts the optional command line...
+            sCmdLine += sArg;
+            iCmdArgs++;
         }
     }
+
+    // HACK: If there's a command line, it must be spawned on background...
+    if (iCmdArgs > 0)
+        sCmdLine += " &";
 
     // Alright with argument parsing.
     return true;

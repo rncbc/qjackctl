@@ -71,6 +71,9 @@ public:
     // Immediate server start option.
     bool bStartJack;
 
+    // User supplied command line.
+    QString sCmdLine;
+
     // Current (default) preset name.
     QString sDefPreset;
     // Available presets list.
@@ -119,20 +122,6 @@ private:
     // Our proper settings profile.
     QSettings m_settings;
 };
-
-
-//---------------------------------------------------------------------------
-// Combo box history persistence helper prototypes.
-
-void qjackctl_add2ComboBoxHistory(QComboBox *pComboBox, const QString& sNewText, int iLimit = 8, int iIndex = -1);
-void qjackctl_loadComboBoxHistory(QSettings *pSettings, QComboBox *pComboBox, int iLimit = 8);
-void qjackctl_saveComboBoxHistory(QSettings *pSettings, QComboBox *pComboBox, int iLimit = 8);
-
-//---------------------------------------------------------------------------
-// Widget geometry persistence helper prototypes.
-
-void qjackctl_saveWidgetGeometry(QSettings *pSettings, QWidget *pWidget);
-void qjackctl_loadWidgetGeometry(QSettings *pSettings, QWidget *pWidget);
 
 
 #endif  // __qjackctlSetup_h

@@ -117,19 +117,11 @@ void qjackctlMainForm::destroy (void)
 
 
 // Make and set a proper setup step.
-void qjackctlMainForm::setup ( qjackctlSetup *pSetup )
+bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 {
     // Finally, fix settings descriptor
     // and stabilize the form.
     m_pSetup = pSetup;
-
-    // Try to restore old window positioning.
-    m_pSetup->loadWidgetGeometry(this);
-    // And for the whole widget gallore...
-    m_pSetup->loadWidgetGeometry(m_pMessagesForm);
-    m_pSetup->loadWidgetGeometry(m_pStatusForm);
-    m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
-    m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
 
     // Set defaults...
     updateMessagesFont();
@@ -177,7 +169,7 @@ void qjackctlMainForm::setup ( qjackctlSetup *pSetup )
             QObject::connect(m_pAlsaNotifier, SIGNAL(activated(int)), this, SLOT(alsaNotifySlot(int)));
         }
     }
-    
+
     // Rather obvious setup.
     if (m_pConnectionsForm)
         m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
@@ -191,16 +183,41 @@ void qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     // Try to find if we can start in detached mode (client-only)
     // just in case there's a JACK server already running.
     m_bJackDetach = startJackClient(true);
+    // Have we a command-line to start away?
+    if (m_bJackDetach && !m_pSetup->sCmdLine.isEmpty()) {
+        // Run it dettached...
+        shellExecute(m_pSetup->sCmdLine, QString::null, QString::null);
+        // And bail out...
+        return false;
+    }
     // Final startup stabilization...
     stabilizeForm();
     processJackExit();
 
-    // Look for immediate startup?...
-    if (m_pSetup->bStartJack)
+    // Look for immediate server startup?...
+    if (m_pSetup->bStartJack || !m_pSetup->sCmdLine.isEmpty())
         startJack();
 
     // Register the first timer slot.
     QTimer::singleShot(QJACKCTL_TIMER_MSECS, this, SLOT(timerSlot()));
+
+    // We're ready to go...
+    return true;
+}
+
+
+// Show up initial widget geometries and visbility state.
+void qjackctlMainForm::setupShow ( qjackctlSetup *pSetup )
+{
+    // Try to restore old window positioning.
+    m_pSetup->loadWidgetGeometry(this);
+    // And for the whole widget gallore...
+    m_pSetup->loadWidgetGeometry(m_pMessagesForm);
+    m_pSetup->loadWidgetGeometry(m_pStatusForm);
+    m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
+    m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
+    // Always make main form visible :)
+    QWidget::show();
 }
 
 
@@ -251,7 +268,7 @@ bool qjackctlMainForm::queryClose (void)
 
 void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
-    if (queryClose())
+    if (m_pSetup && m_pSetup->sCmdLine.isEmpty() && queryClose())
         pCloseEvent->accept();
     else
         pCloseEvent->ignore();
@@ -1376,9 +1393,19 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // Do we have any post-startup scripting?...
     // (only if we're not a detached client)
-    if (!bDetach && !m_bJackDetach && m_pSetup->bPostStartupScript && !m_pSetup->sPostStartupScriptShell.isEmpty())
-        shellExecute(m_pSetup->sPostStartupScriptShell, tr("Post-startup script..."), tr("Post-startup script terminated"));
+    if (!bDetach && !m_bJackDetach) {
+        if (m_pSetup->bPostStartupScript && !m_pSetup->sPostStartupScriptShell.isEmpty())
+            shellExecute(m_pSetup->sPostStartupScriptShell, tr("Post-startup script..."), tr("Post-startup script terminated"));
+        // Have we an initial command-line to start away?
+        if (!m_pSetup->sCmdLine.isEmpty()) {
+            // Run it dettached...
+            shellExecute(m_pSetup->sCmdLine, tr("Command line argument..."), tr("Command line argument started"));
+            // And reset it forever more...
+            m_pSetup->sCmdLine = QString::null;
+        }
+    }
 
+    // OK, we're at it!
     return true;
 }
 
