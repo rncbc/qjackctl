@@ -36,6 +36,7 @@ IMAGES   = icons/qjackctl.xpm \
            icons/add1.png \
            icons/up1.png \
            icons/down1.png \
+           icons/socket1.png \
            icons/qtlogo.png
 
 TEMPLATE = app

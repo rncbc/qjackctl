@@ -188,7 +188,7 @@
     <include location="local" impldecl="in implementation">qjackctlStatusForm.ui.h</include>
 </includes>
 <variables>
-    <variable access="private">QListViewItem *m_apStatus[16];</variable>
+    <variable access="private">QListViewItem *m_apStatus[17];</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">resetXrunStats( void )</slot>

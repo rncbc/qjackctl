@@ -27,18 +27,19 @@
 #define STATUS_CPU_LOAD         1
 #define STATUS_SAMPLE_RATE      2
 #define STATUS_BUFFER_SIZE      3
-#define STATUS_TRANSPORT_STATE  4
-#define STATUS_TRANSPORT_TIME   5
-#define STATUS_TRANSPORT_BBT    6
-#define STATUS_TRANSPORT_BPM    7
-#define STATUS_XRUN_COUNT       8
-#define STATUS_XRUN_TIME        9
-#define STATUS_XRUN_LAST        10
-#define STATUS_XRUN_MAX         11
-#define STATUS_XRUN_MIN         12
-#define STATUS_XRUN_AVG         13
-#define STATUS_XRUN_TOTAL       14
-#define STATUS_RESET_TIME       15
+#define STATUS_REALTIME         4
+#define STATUS_TRANSPORT_STATE  5
+#define STATUS_TRANSPORT_TIME   6
+#define STATUS_TRANSPORT_BBT    7
+#define STATUS_TRANSPORT_BPM    8
+#define STATUS_XRUN_COUNT       9
+#define STATUS_XRUN_TIME        10
+#define STATUS_XRUN_LAST        11
+#define STATUS_XRUN_MAX         12
+#define STATUS_XRUN_MIN         13
+#define STATUS_XRUN_AVG         14
+#define STATUS_XRUN_TOTAL       15
+#define STATUS_RESET_TIME       16
 
 // (Big)Time display identifiers.
 #define DISPLAY_TRANSPORT_TIME  0

@@ -182,7 +182,7 @@
                                 </font>
                             </property>
                             <property name="alignment">
-                                <set>AlignCenter</set>
+                                <set>AlignLeft</set>
                             </property>
                             <property name="toolTip" stdset="0">
                                 <string>CPU Load</string>
@@ -204,7 +204,7 @@
                                 </font>
                             </property>
                             <property name="alignment">
-                                <set>AlignCenter</set>
+                                <set>AlignLeft</set>
                             </property>
                             <property name="toolTip" stdset="0">
                                 <string>Transport BPM</string>
@@ -638,7 +638,6 @@
     <function access="private" specifier="non virtual">updateTimeDisplayToolTips( void )</function>
     <function specifier="non virtual">stabilizeForm( void )</function>
     <function specifier="non virtual">resetXrunStats( void )</function>
-    <function access="private" specifier="non virtual">updateBufferSize( void )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( int iStatusItem, const QTime &amp; t, bool bElapsed )</function>
     <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>

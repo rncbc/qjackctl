@@ -63,15 +63,12 @@ void qjackctlSetup::load (void)
     settings.endGroup();
 
     settings.beginGroup("/Options");
-//  bDetails         = settings.readBoolEntry("/Details", false);
-//  bForceArts       = settings.readBoolEntry("/ForceArts", true);
-//  sForceArtsShell  = settings.readEntry("/ForceArtsShell", "artsshell -q terminate");
-//  bForceJack       = settings.readBoolEntry("/ForceJack", true);
-//  sForceJackShell  = settings.readEntry("/ForceJackShell", "killall -9 jackd");
-    bStartupScript       = settings.readBoolEntry("/StartupScript", false);
-    sStartupScriptShell  = settings.readEntry("/StartupScriptShell", QString::null);
-    bShutdownScript      = settings.readBoolEntry("/ShutdownScript", false);
-    sShutdownScriptShell = settings.readEntry("/ShutdownScriptShell", QString::null);
+    bStartupScript          = settings.readBoolEntry("/StartupScript", true);
+    sStartupScriptShell     = settings.readEntry("/StartupScriptShell", "artsshell -q terminate");
+    bPostStartupScript      = settings.readBoolEntry("/PostStartupScript", false);
+    sPostStartupScriptShell = settings.readEntry("/PostStartupScriptShell", QString::null);
+    bShutdownScript         = settings.readBoolEntry("/ShutdownScript", false);
+    sShutdownScriptShell    = settings.readEntry("/ShutdownScriptShell", QString::null);
     sXrunRegex       = settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs");
     bXrunIgnoreFirst = settings.readBoolEntry("/XrunIgnoreFirst", false);
     bAutoRefresh     = settings.readBoolEntry("/AutoRefresh", false);
@@ -118,15 +115,12 @@ void qjackctlSetup::save (void)
     settings.endGroup();
 
     settings.beginGroup("/Options");
-//  settings.writeEntry("/Details",         bDetails);
-//  settings.writeEntry("/ForceArts",       bForceArts);
-//  settings.writeEntry("/ForceArtsShell",  sForceArtsShell);
-//  settings.writeEntry("/ForceJack",       bForceJack);
-//  settings.writeEntry("/ForceJackShell",  sForceJackShell);
-    settings.writeEntry("/StartupScript",       bStartupScript);
-    settings.writeEntry("/StartupScriptShell",  sStartupScriptShell);
-    settings.writeEntry("/ShutdownScript",      bShutdownScript);
-    settings.writeEntry("/ShutdownScriptShell", sShutdownScriptShell);
+    settings.writeEntry("/StartupScript",           bStartupScript);
+    settings.writeEntry("/StartupScriptShell",      sStartupScriptShell);
+    settings.writeEntry("/PostStartupScript",       bPostStartupScript);
+    settings.writeEntry("/PostStartupScriptShell",  sPostStartupScriptShell);
+    settings.writeEntry("/ShutdownScript",          bShutdownScript);
+    settings.writeEntry("/ShutdownScriptShell",     sShutdownScriptShell);
     settings.writeEntry("/XrunRegex",       sXrunRegex);
     settings.writeEntry("/XrunIgnoreFirst", bXrunIgnoreFirst);
     settings.writeEntry("/AutoRefresh",     bAutoRefresh);

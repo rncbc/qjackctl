@@ -55,6 +55,7 @@ void qjackctlStatusForm::init (void)
     m_apStatus[STATUS_TRANSPORT_BBT]  = new QListViewItem(pViewItem, s + tr("Transport BBT") + c, n);
     m_apStatus[STATUS_TRANSPORT_TIME] = new QListViewItem(pViewItem, s + tr("Transport Timecode") + c, n);
 
+    m_apStatus[STATUS_REALTIME]     = new QListViewItem(StatsListView, s + tr("Realtime Mode") + c, n);
     m_apStatus[STATUS_BUFFER_SIZE]  = new QListViewItem(StatsListView, s + tr("Buffer Size") + c, n);
     m_apStatus[STATUS_SAMPLE_RATE]  = new QListViewItem(StatsListView, s + tr("Sample Rate") + c, n);
     m_apStatus[STATUS_CPU_LOAD]     = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);

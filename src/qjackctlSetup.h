@@ -60,13 +60,10 @@ public:
     bool    bVerbose;
 
     // Options...
-//  bool    bDetails;
-//  bool    bForceArts;
-//  QString sForceArtsShell;
-//  bool    bForceJack;
-//  QString sForceJackShell;
     bool    bStartupScript;
     QString sStartupScriptShell;
+    bool    bPostStartupScript;
+    QString sPostStartupScriptShell;
     bool    bShutdownScript;
     QString sShutdownScriptShell;
     QString sXrunRegex;

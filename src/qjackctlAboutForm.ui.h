@@ -42,6 +42,12 @@ void qjackctlAboutForm::init (void)
     sText += "<br />\n";
     sText += "</font></small>";
 #endif
+#ifndef CONFIG_JACK_REALTIME
+    sText += "<small><font color=\"red\">";
+    sText += tr("Realtime status disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
     sText += "<br />\n";
     sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
     sText += "<br />\n";

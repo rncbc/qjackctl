@@ -120,7 +120,13 @@ if test "x$ac_jack_transport" = "xno"; then
    AC_MSG_WARN([*** JACK 0.80.0 or later may be required.])
    AC_MSG_WARN([*** Transport features will be disabled.])
 else
-   AC_DEFINE(CONFIG_JACK_TRANSPORT, 1, [New JACK transport protocol.])
+   AC_DEFINE(CONFIG_JACK_TRANSPORT, 1, [jack_tranport_query is defined.])
+fi
+
+dnl Check for jack_is_realtime function.
+AC_CHECK_LIB(jack, jack_is_realtime, [ac_jack_realtime="yes"], [ac_jack_realtime="no"])
+if test "x$ac_jack_realtime" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_REALTIME, 1, [jack_is_realtime is defined.])
 fi
 
 dnl Finally produce a configure header file and the main makefile.

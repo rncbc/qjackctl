@@ -227,17 +227,9 @@ void qjackctlMainForm::startJack (void)
     m_iTimerSlot = 0;
     m_iRefresh = 0;
 
-    // If we're not to be the server master...
+    // If we ain't to be the server master...
     if (m_bJackDetach)
         return;
-
-    // Do we force aRts sound server?...
-//  if (m_setup.bForceArts && !m_setup.sForceArtsShell.isEmpty())
-//      shellExecute(m_setup.sForceArtsShell, tr("ARTS is being forced..."), tr("ARTS has been forced"));
-
-    // Do we force stray JACK daemon threads?...
-//  if (m_setup.bForceJack && !m_setup.sForceJackShell.isEmpty())
-//      shellExecute(m_setup.sForceArtsShell, tr("JACK is being forced..."), tr("JACK has been forced"));
 
     // Do we have any startup script?...
     if (m_setup.bStartupScript && !m_setup.sStartupScriptShell.isEmpty())
@@ -377,6 +369,10 @@ void qjackctlMainForm::startJack (void)
     setCaption(QJACKCTL_TITLE " - " + sTemp + ".");
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StopPushButton->setEnabled(true);
+
+    // Reset (yet again) the timer counters...
+    m_iTimerSlot = 0;
+    m_iRefresh = 0;
 }
 
 
@@ -575,13 +571,6 @@ void qjackctlMainForm::resetXrunStats (void)
     refreshXrunStats();
 
     appendMessages(tr("Statistics reset."));
-}
-
-
-// Update the buffer size (nframes) item.
-void qjackctlMainForm::updateBufferSize (void)
-{
-    updateStatus(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
 }
 
 
@@ -797,9 +786,8 @@ void qjackctlMainForm::buffNotifySlot ( int fd )
     // Read from our pipe.
     ::read(fd, &c, sizeof(c));
 
-    // Update the status item directly.
-    updateBufferSize();
-    // Log this event.
+    // Don't need to nothing, it was handled on qjackctl_bufferSizeCallback;
+    // just log this event as routine.
     appendMessagesColor(tr("Buffer size change.") + " (" + QString::number((int) g_nframes) + ")", "#cc9966");
 
     m_iBuffNotify--;
@@ -947,8 +935,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
         return false;
     }
 
-    // Create the jack client handle
-    m_pJackClient = jack_client_new("qjackctl");
+    // Create the jack client handle, using a distinct identifier (PID?)
+    // surely
+    QString sClientName = "qjackctl-" + QString::number((int) ::getpid());
+    m_pJackClient = jack_client_new(sClientName.latin1());
     if (m_pJackClient == NULL) {
         closePipes();
         if (!bDetach)
@@ -994,7 +984,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // Remember to schedule an initial connection refreshment.
     refreshConnections();
     
-    // If we're started detached, just change active status.
+    // If we've started detached, just change active status.
     if (m_bJackDetach) {
         QString sTemp = tr("Active");
         setCaption(QJACKCTL_TITLE " - " + sTemp + ".");
@@ -1004,6 +994,11 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // Log success here.
     appendMessages(tr("Client activated."));
+
+    // Do we have any post-startup scripting?...
+    // (only if we're not a detached client)
+    if (!bDetach && !m_bJackDetach && m_setup.bPostStartupScript && !m_setup.sPostStartupScriptShell.isEmpty())
+        shellExecute(m_setup.sPostStartupScriptShell, tr("Post-startup script..."), tr("Post-startup script terminated"));
 
     return true;
 }
@@ -1209,9 +1204,14 @@ void qjackctlMainForm::refreshStatus (void)
     
     if (m_pJackClient) {
         QString s = " ";
-        updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 3) + s + "%");
+        updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
         updateStatus(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
-        updateBufferSize();
+        updateStatus(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
+#ifdef CONFIG_JACK_REALTIME
+        updateStatus(STATUS_REALTIME, (jack_is_realtime(m_pJackClient) ? tr("Yes") : tr("No")));
+#else
+        updateStatus(STATUS_REALTIME, n);
+#endif
 #ifdef CONFIG_JACK_TRANSPORT
         char    szText[32];
         QString sText = n;
@@ -1271,6 +1271,8 @@ void qjackctlMainForm::refreshStatus (void)
     } else {
         updateStatus(STATUS_CPU_LOAD, n);
         updateStatus(STATUS_SAMPLE_RATE, n);
+        updateStatus(STATUS_BUFFER_SIZE, n);
+        updateStatus(STATUS_REALTIME, n);
         updateStatus(STATUS_TRANSPORT_STATE, n);
         updateStatus(STATUS_TRANSPORT_TIME, t);
         updateStatus(STATUS_TRANSPORT_BBT, b);
@@ -1312,15 +1314,14 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
         if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_TIME)
             TimeDisplayTextLabel->setText(sText);
         else
-        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_BBT)
             TransportTimeTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_BBT:
-        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_TIME)
-            TransportTimeTextLabel->setText(sText);
-        else
         if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_BBT)
             TimeDisplayTextLabel->setText(sText);
+        else
+        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_TIME)
+            TransportTimeTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_BPM:
         TransportBPMTextLabel->setText(sText);

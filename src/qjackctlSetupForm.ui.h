@@ -117,15 +117,21 @@ void qjackctlSetupForm::stabilizeForm (void)
     bool bEnabled = RealtimeCheckBox->isChecked();
     PriorityTextLabel->setEnabled(bEnabled);
     PriorityComboBox->setEnabled(bEnabled);
-//  ForceArtsShellComboBox->setEnabled(ForceArtsCheckBox->isChecked());
-//  ForceJackShellComboBox->setEnabled(ForceJackCheckBox->isChecked());
+    
     bEnabled = StartupScriptCheckBox->isChecked();
     StartupScriptShellComboBox->setEnabled(bEnabled);
     StartupScriptPushButton->setEnabled(bEnabled);
+    
+    bEnabled = PostStartupScriptCheckBox->isChecked();
+    PostStartupScriptShellComboBox->setEnabled(bEnabled);
+    PostStartupScriptPushButton->setEnabled(bEnabled);
+    
     bEnabled = ShutdownScriptCheckBox->isChecked();
     ShutdownScriptShellComboBox->setEnabled(bEnabled);
     ShutdownScriptPushButton->setEnabled(bEnabled);
+    
     TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
+    
     changeDriver(DriverComboBox->currentText());
 }
 
@@ -147,14 +153,19 @@ void qjackctlSetupForm::browseStartupScript()
 }
 
 
-// The messages font selection dialog.
-void qjackctlSetupForm::chooseMessagesFont()
+// Post-startup script browse slot.
+void qjackctlSetupForm::browsePostStartupScript()
 {
-    bool  bOk  = false;
-    QFont font = QFontDialog::getFont(&bOk, MessagesFontTextLabel->font(), this);
-    if (bOk) {
-        MessagesFontTextLabel->setFont(font);
-        MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+    QString sFileName = QFileDialog::getOpenFileName(
+            PostStartupScriptShellComboBox->currentText(),  // Start here.
+            QString::null,                                  // Filter (all files?)
+            this, 0,                                        // Parent and name (none)
+            tr("Post-startup script")				        // Caption.
+    );
+
+    if (!sFileName.isEmpty()) {
+        PostStartupScriptShellComboBox->setCurrentText(sFileName);
+        PostStartupScriptShellComboBox->setFocus();
     }
 }
 
@@ -176,6 +187,18 @@ void qjackctlSetupForm::browseShutdownScript()
 }
 
 
+// The messages font selection dialog.
+void qjackctlSetupForm::chooseMessagesFont()
+{
+    bool  bOk  = false;
+    QFont font = QFontDialog::getFont(&bOk, MessagesFontTextLabel->font(), this);
+    if (bOk) {
+        MessagesFontTextLabel->setFont(font);
+        MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+    }
+}
+
+
 // Populate (load) dialog controls from setup struct members.
 void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
 {
@@ -184,9 +207,8 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     pSetup->loadComboBoxHistory(ServerComboBox);
     pSetup->loadComboBoxHistory(InterfaceComboBox);
     pSetup->loadComboBoxHistory(TempDirComboBox);
-//  qjackctl_loadComboBoxHistory(ForceArtsShellComboBox);
-//  qjackctl_loadComboBoxHistory(ForceJackShellComboBox);
     pSetup->loadComboBoxHistory(StartupScriptShellComboBox);
+    pSetup->loadComboBoxHistory(PostStartupScriptShellComboBox);
     pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
     pSetup->loadComboBoxHistory(XrunRegexComboBox);
     pSetup->settings.endGroup();
@@ -211,16 +233,13 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     HWMonCheckBox->setChecked(pSetup->bHWMon);
     HWMeterCheckBox->setChecked(pSetup->bHWMeter);
     TempDirComboBox->setCurrentText(pSetup->sTempDir);
-    
-    // Load Options...
-//  DetailsCheckBox->setChecked(pSetup->bDetails);
     VerboseCheckBox->setChecked(pSetup->bVerbose);
-//  ForceArtsCheckBox->setChecked(pSetup->bForceArts);
-//  ForceArtsShellComboBox->setCurrentText(pSetup->sForceArtsShell);
-//  ForceJackCheckBox->setChecked(pSetup->bForceJack);
-//  ForceJackShellComboBox->setCurrentText(pSetup->sForceJackShell);
+
+    // Load Options...
     StartupScriptCheckBox->setChecked(pSetup->bStartupScript);
     StartupScriptShellComboBox->setCurrentText(pSetup->sStartupScriptShell);
+    PostStartupScriptCheckBox->setChecked(pSetup->bPostStartupScript);
+    PostStartupScriptShellComboBox->setCurrentText(pSetup->sPostStartupScriptShell);
     ShutdownScriptCheckBox->setChecked(pSetup->bShutdownScript);
     ShutdownScriptShellComboBox->setCurrentText(pSetup->sShutdownScriptShell);
     XrunRegexComboBox->setCurrentText(pSetup->sXrunRegex);
@@ -261,16 +280,13 @@ void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
     pSetup->bHWMon      = HWMonCheckBox->isChecked();
     pSetup->bHWMeter    = HWMeterCheckBox->isChecked();
     pSetup->sTempDir    = TempDirComboBox->currentText();
-    
+    pSetup->bVerbose    = VerboseCheckBox->isChecked();
+
     // Save Options...
-//  pSetup->bDetails            = DetailsCheckBox->isChecked();
-    pSetup->bVerbose            = VerboseCheckBox->isChecked();
-//  pSetup->bForceArts          = ForceArtsCheckBox->isChecked();
-//  pSetup->sForceArtsShell     = ForceArtsShellComboBox->currentText();
-//  pSetup->bForceJack          = ForceJackCheckBox->isChecked();
-//  pSetup->sForceJackShell     = ForceJackShellComboBox->currentText();
     pSetup->bStartupScript          = StartupScriptCheckBox->isChecked();
     pSetup->sStartupScriptShell     = StartupScriptShellComboBox->currentText();
+    pSetup->bPostStartupScript      = PostStartupScriptCheckBox->isChecked();
+    pSetup->sPostStartupScriptShell = PostStartupScriptShellComboBox->currentText();
     pSetup->bShutdownScript         = ShutdownScriptCheckBox->isChecked();
     pSetup->sShutdownScriptShell    = ShutdownScriptShellComboBox->currentText();
     pSetup->sXrunRegex          = XrunRegexComboBox->currentText();
@@ -288,9 +304,8 @@ void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
     pSetup->saveComboBoxHistory(PriorityComboBox);
     pSetup->saveComboBoxHistory(InterfaceComboBox);
     pSetup->saveComboBoxHistory(TempDirComboBox);
-//  pSetup->saveComboBoxHistory(ForceArtsShellComboBox);
-//  pSetup->saveComboBoxHistory(ForceJackShellComboBox);
     pSetup->saveComboBoxHistory(StartupScriptShellComboBox);
+    pSetup->saveComboBoxHistory(PostStartupScriptShellComboBox);
     pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);
     pSetup->saveComboBoxHistory(XrunRegexComboBox);
     pSetup->settings.endGroup();
