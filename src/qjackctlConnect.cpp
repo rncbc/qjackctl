@@ -89,8 +89,8 @@ qjackctlClientItem *qjackctlPortItem::client (void)
 // Client:port set housekeeping marker.
 void qjackctlPortItem::markPort ( int iMark )
 {
+    setHilite(false);
     m_iPortMark = iMark;
-
     if (iMark > 0)
         m_connects.clear();
 }
@@ -116,8 +116,8 @@ void qjackctlPortItem::addConnect( qjackctlPortItem *pPort )
 
 void qjackctlPortItem::removeConnect( qjackctlPortItem *pPort )
 {
-    m_connects.remove(pPort);
     pPort->setHilite(false);
+    m_connects.remove(pPort);
 }
 
 
@@ -262,6 +262,7 @@ bool qjackctlClientItem::isReadable (void)
 // Client:port set housekeeping marker.
 void qjackctlClientItem::markClient ( int iMark )
 {
+    setHilite(false);
     m_iClientMark = iMark;
 }
 
@@ -303,13 +304,11 @@ bool qjackctlClientItem::isHilite (void)
 void qjackctlClientItem::setHilite ( bool bHilite )
 {
     int iHilite = m_iHilite;
-
     if (bHilite)
         m_iHilite++;
     else
     if (m_iHilite > 0)
         m_iHilite--;
-
     // Update the client highlightning if changed...
     if (iHilite == 0 || m_iHilite == 0)
         QListViewItem::repaint();
@@ -401,6 +400,8 @@ bool qjackctlClientList::isReadable (void)
 // Client:port set housekeeping marker.
 void qjackctlClientList::markClientPorts ( int iMark )
 {
+    m_pHiliteItem = 0;
+
     for (qjackctlClientItem *pClient = m_clients.first(); pClient; pClient = m_clients.next())
         pClient->markClientPorts(iMark);
 }
@@ -747,7 +748,7 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
     : QWidget(pParent, pszName)
 {
     QSizePolicy sizepolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    
+
     m_pGridLayout = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
 
     m_pOListView = new qjackctlClientListView(pParent, this);
