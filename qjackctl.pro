@@ -33,6 +33,7 @@ IMAGES   = icons/qjackctl.xpm \
            icons/accept1.png \
            icons/open1.png \
            icons/save1.png \
+           icons/apply1.png \
            icons/add1.png \
            icons/up1.png \
            icons/down1.png \

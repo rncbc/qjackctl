@@ -69,12 +69,14 @@ void qjackctlSetup::load (void)
     sPostStartupScriptShell = settings.readEntry("/PostStartupScriptShell", QString::null);
     bShutdownScript         = settings.readBoolEntry("/ShutdownScript", false);
     sShutdownScriptShell    = settings.readEntry("/ShutdownScriptShell", QString::null);
-    sXrunRegex       = settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs");
-    bXrunIgnoreFirst = settings.readBoolEntry("/XrunIgnoreFirst", false);
-    bAutoRefresh     = settings.readBoolEntry("/AutoRefresh", false);
-    iTimeRefresh     = settings.readNumEntry("/TimeRefresh", 10);
-    iTimeDisplay     = settings.readNumEntry("/TimeDisplay", 0);
-    sMessagesFont    = settings.readEntry("/MessagesFont", QString::null);
+    sXrunRegex              = settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs");
+    bXrunIgnoreFirst        = settings.readBoolEntry("/XrunIgnoreFirst", false);
+    bActivePatchbay         = settings.readBoolEntry("/ActivePatchbay", false);
+    sActivePatchbayPath     = settings.readEntry("/ActivePatchbayPath", QString::null);
+    bAutoRefresh            = settings.readBoolEntry("/AutoRefresh", false);
+    iTimeRefresh            = settings.readNumEntry("/TimeRefresh", 10);
+    iTimeDisplay            = settings.readNumEntry("/TimeDisplay", 0);
+    sMessagesFont           = settings.readEntry("/MessagesFont", QString::null);
     settings.endGroup();
 
     settings.beginGroup("/Defaults");
@@ -121,12 +123,14 @@ void qjackctlSetup::save (void)
     settings.writeEntry("/PostStartupScriptShell",  sPostStartupScriptShell);
     settings.writeEntry("/ShutdownScript",          bShutdownScript);
     settings.writeEntry("/ShutdownScriptShell",     sShutdownScriptShell);
-    settings.writeEntry("/XrunRegex",       sXrunRegex);
-    settings.writeEntry("/XrunIgnoreFirst", bXrunIgnoreFirst);
-    settings.writeEntry("/AutoRefresh",     bAutoRefresh);
-    settings.writeEntry("/TimeRefresh",     iTimeRefresh);
-    settings.writeEntry("/TimeDisplay",     iTimeDisplay);
-    settings.writeEntry("/MessagesFont",    sMessagesFont);
+    settings.writeEntry("/XrunRegex",               sXrunRegex);
+    settings.writeEntry("/XrunIgnoreFirst",         bXrunIgnoreFirst);
+    settings.writeEntry("/ActivePatchbay",          bActivePatchbay);
+    settings.writeEntry("/ActivePatchbayPath",      sActivePatchbayPath);
+    settings.writeEntry("/AutoRefresh",             bAutoRefresh);
+    settings.writeEntry("/TimeRefresh",             iTimeRefresh);
+    settings.writeEntry("/TimeDisplay",             iTimeDisplay);
+    settings.writeEntry("/MessagesFont",            sMessagesFont);
     settings.endGroup();
 
     settings.beginGroup("/Defaults");

@@ -561,6 +561,7 @@
     <include location="local" impldecl="in declaration">qjackctlSetup.h</include>
     <include location="local" impldecl="in declaration">qjackctlConnections.h</include>
     <include location="local" impldecl="in declaration">qjackctlPatchbay.h</include>
+    <include location="local" impldecl="in declaration">qjackctlPatchbayRack.h</include>
     <include location="local" impldecl="in declaration">qjackctlMessagesForm.h</include>
     <include location="local" impldecl="in declaration">qjackctlStatusForm.h</include>
     <include location="local" impldecl="in declaration">qjackctlConnectionsForm.h</include>
@@ -577,6 +578,7 @@
     <variable access="private">QTimer *m_pTimer;</variable>
     <variable access="private">int m_iTimerSlot;</variable>
     <variable access="private">int m_iRefresh;</variable>
+    <variable access="private">int m_iDirtyCount;</variable>
     <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
@@ -594,11 +596,11 @@
     <variable access="private">float m_fXrunLast;</variable>
     <variable access="private">QTime m_tXrunLast;</variable>
     <variable access="private">QTime m_tResetLast;</variable>
-    <variable access="private">qjackctlPatchbay *m_pJackPatchbay;</variable>
     <variable access="private">qjackctlMessagesForm *m_pMessagesForm;</variable>
     <variable access="private">qjackctlStatusForm *m_pStatusForm;</variable>
     <variable access="private">qjackctlConnectionsForm *m_pConnectionsForm;</variable>
     <variable access="private">qjackctlPatchbayForm *m_pPatchbayForm;</variable>
+    <variable access="private">qjackctlPatchbayRack m_patchbayRack;</variable>
 </variables>
 <slots>
     <slot access="protected" specifier="non virtual">reject( void )</slot>
@@ -612,6 +614,7 @@
     <slot specifier="non virtual">buffNotifySlot( int fd )</slot>
     <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">timerSlot( void )</slot>
+    <slot specifier="non virtual">cableConnectSlot(const char *pszOutputPort, const char *pszInputPort, unsigned int ulCableFlags)</slot>
     <slot specifier="non virtual">refreshConnections( void )</slot>
     <slot specifier="non virtual">toggleMessagesForm( void )</slot>
     <slot specifier="non virtual">showSetupForm( void )</slot>
@@ -636,6 +639,8 @@
     <function access="private" specifier="non virtual">appendMessagesError( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">updateMessagesFont( void )</function>
     <function access="private" specifier="non virtual">updateTimeDisplayToolTips( void )</function>
+    <function access="private" specifier="non virtual">updateActivePatchbay( void )</function>
+    <function specifier="non virtual">activatePatchbay( const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">stabilizeForm( void )</function>
     <function specifier="non virtual">resetXrunStats( void )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>

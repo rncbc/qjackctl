@@ -114,7 +114,8 @@ void qjackctlPatchbayForm::refreshForm ( void )
 void qjackctlPatchbayForm::stabilizeForm ( void )
 {
     SavePatchbayPushButton->setEnabled(PatchbayView->dirty());
-    
+    ActivatePatchbayPushButton->setEnabled(QFileInfo(m_sPatchbayPath).exists());
+
     qjackctlSocketItem *pSocketItem;
     
     pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
@@ -237,6 +238,17 @@ void qjackctlPatchbayForm::savePatchbay()
 
     // Save it right away.
     savePatchbayFile(sFileName);
+}
+
+
+// Set current active patchbay definition file.
+void qjackctlPatchbayForm::activatePatchbay()
+{
+    if (queryClose()) {
+        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+        if (pMainForm)
+            pMainForm->activatePatchbay(m_sPatchbayPath);
+    }
 }
 
 

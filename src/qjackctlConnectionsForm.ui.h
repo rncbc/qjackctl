@@ -130,16 +130,20 @@ void qjackctlConnectionsForm::stabilizeForm ( void )
 
 
 // Either rebuild all connections now or notify main form for doing that later.
-void qjackctlConnectionsForm::refresh ( bool bEnabled )
+int qjackctlConnectionsForm::refresh ( bool bEnabled )
 {
+    int iDirtyCount = 0;
+    
     if (m_pJackConnections && bEnabled) {
-        m_pJackConnections->refresh();
+        iDirtyCount += m_pJackConnections->refresh();
         stabilize(true);
     } else {
         qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
         if (pMainForm)
             pMainForm->refreshConnections();
     }
+    
+    return iDirtyCount;
 }
 
 

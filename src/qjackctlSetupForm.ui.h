@@ -129,7 +129,11 @@ void qjackctlSetupForm::stabilizeForm (void)
     bEnabled = ShutdownScriptCheckBox->isChecked();
     ShutdownScriptShellComboBox->setEnabled(bEnabled);
     ShutdownScriptPushButton->setEnabled(bEnabled);
-    
+
+    bEnabled = ActivePatchbayCheckBox->isChecked();
+    ActivePatchbayPathComboBox->setEnabled(bEnabled);
+    ActivePatchbayPathPushButton->setEnabled(bEnabled);
+
     TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
     
     changeDriver(DriverComboBox->currentText());
@@ -187,6 +191,23 @@ void qjackctlSetupForm::browseShutdownScript()
 }
 
 
+// Active Patchbay path browse slot.
+void qjackctlSetupForm::browseActivePatchbayPath()
+{
+    QString sFileName = QFileDialog::getOpenFileName(
+            ActivePatchbayPathComboBox->currentText(),	    // Start here.
+            tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
+            this, 0,                                        // Parent and name (none)
+            tr("Active Patchbay definition")                // Caption.
+    );
+
+    if (!sFileName.isEmpty()) {
+        ActivePatchbayPathComboBox->setCurrentText(sFileName);
+        ActivePatchbayPathComboBox->setFocus();
+    }
+}
+
+
 // The messages font selection dialog.
 void qjackctlSetupForm::chooseMessagesFont()
 {
@@ -211,6 +232,7 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     pSetup->loadComboBoxHistory(PostStartupScriptShellComboBox);
     pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
     pSetup->loadComboBoxHistory(XrunRegexComboBox);
+    pSetup->loadComboBoxHistory(ActivePatchbayPathComboBox);
     pSetup->settings.endGroup();
 
     // Load Settings...
@@ -244,6 +266,8 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     ShutdownScriptShellComboBox->setCurrentText(pSetup->sShutdownScriptShell);
     XrunRegexComboBox->setCurrentText(pSetup->sXrunRegex);
     XrunIgnoreFirstCheckBox->setChecked(pSetup->bXrunIgnoreFirst);
+    ActivePatchbayCheckBox->setChecked(pSetup->bActivePatchbay);
+    ActivePatchbayPathComboBox->setCurrentText(pSetup->sActivePatchbayPath);
     AutoRefreshCheckBox->setChecked(pSetup->bAutoRefresh);
     TimeRefreshComboBox->setCurrentText(QString::number(pSetup->iTimeRefresh));
     
@@ -289,10 +313,12 @@ void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
     pSetup->sPostStartupScriptShell = PostStartupScriptShellComboBox->currentText();
     pSetup->bShutdownScript         = ShutdownScriptCheckBox->isChecked();
     pSetup->sShutdownScriptShell    = ShutdownScriptShellComboBox->currentText();
-    pSetup->sXrunRegex          = XrunRegexComboBox->currentText();
-    pSetup->bXrunIgnoreFirst    = XrunIgnoreFirstCheckBox->isChecked();
-    pSetup->bAutoRefresh        = AutoRefreshCheckBox->isChecked();
-    pSetup->iTimeRefresh        = TimeRefreshComboBox->currentText().toInt();
+    pSetup->sXrunRegex              = XrunRegexComboBox->currentText();
+    pSetup->bXrunIgnoreFirst        = XrunIgnoreFirstCheckBox->isChecked();
+    pSetup->bActivePatchbay         = ActivePatchbayCheckBox->isChecked();
+    pSetup->sActivePatchbayPath     = ActivePatchbayPathComboBox->currentText();
+    pSetup->bAutoRefresh            = AutoRefreshCheckBox->isChecked();
+    pSetup->iTimeRefresh            = TimeRefreshComboBox->currentText().toInt();
 
     // Save Defaults...
     pSetup->iTimeDisplay  = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
@@ -308,6 +334,7 @@ void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
     pSetup->saveComboBoxHistory(PostStartupScriptShellComboBox);
     pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);
     pSetup->saveComboBoxHistory(XrunRegexComboBox);
+    pSetup->saveComboBoxHistory(ActivePatchbayPathComboBox);
     pSetup->settings.endGroup();
 }
 

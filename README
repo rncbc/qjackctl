@@ -47,35 +47,29 @@ Bugs
 ----
 
 Plenty. After all is still alpha stage. To date, qjackctl has been tested
-with JACK release 0.72.4 and beyond, on SuSE 8.1, Mandrake 9.1 and RedHat 9,
-with a custom 2.4.21 kernel with low-latency, preemptible and capabilities
+with JACK release 0.80.0 and beyond, on SuSE 8.1, Mandrake 9.1 and RedHat 9,
+with a custom 2.4.22 kernel with low-latency, preemptible and capabilities
 enabling patches.
 
-It has been found that each case may have some issues regarding JACK running in
-realtime mode. Please be sure to run a capable kernel and play with either
-jackstart or jackd server paths, which shall be root suid anyway, for a better
-realtime experience.
-
-A notable case has been Planet CCRMA based Red Hat installations,
-(http://ccrma-www.stanford.edu/planetccrma/software/), where until recently
-jackstart has failed to initiate on a non root environment, in realtime mode.
-The upgrade to the latest jack-audio-conection-kit package is therefore
-highly recommended, as it probably includes already a Paul Davis'
-(JACK's lead developer) patch that targets this specific issue.
-
-This problem is now officially closed, since JACK 0.75.0 release.
+One misfeature that still bugs everyone who runs qjackctl and watches for
+the messages output window is that stdout/stderr capture from JACK daemon
+seems to be somewhat broken. The evident behaviour is that stdout only shows
+up on server shutdown, while stderr is captured and shown unbuffered as
+expected. This happens regardeless of proper communication settings on the Qt
+class responsible for this precise behaviour (QProcess). To date, this has
+been kept unsolved.
 
 Note:
 
 It has been reported that in some systems qjackctl hangs pretty badly after
 stopping and restarting the JACK audio daemon, without quitting the application.
-That is, each qjackctl running instance may only start and stop JACK only once.
-After that, one have to quit and run it back again. This situation only happens
-in specific systems, although very deterministically.
+That is, each qjackctl running instance may start and stop JACK only once.
+After that, one might have to quit and run it back again. This situation only
+happens in specific systems, although very deterministically.
 
 If you experience this behaviour, or any other you find annoying, please report
 it on the project's page (http://www.sourceforge.net/projects/qjackctl). Remember
-to include a description of your system, namely libc, gcc and qt versions.
+to include a description of your system, namely glibc, gcc and qt versions.
 
 
 Acknowledgments
@@ -90,7 +84,23 @@ Since 2003-08-06, qjackctl has been included in the awesome Planet CCRMA
 (http://ccrma-www.stanford.edu/planetccrma/software/) software collection.
 Thanks a lot Fernando!
 
-Enjoy.
+Here are some people who helped this project in one way or another,
+and in fair and strict alphabetic order:
 
+    Alexandre Prokoudine
+    Austin Acton
+    Dave Phillips
+    Fernando Pablo Lopez-Lezcano
+    Jack O'Quin
+    Kasper Souren
+    Lawrie Abbott
+    Mark Knecht
+    Melanie
+    Paul Davis
+    Robert Jonsson
+    Steve Harris
+
+
+Thanks to you all.
 
 

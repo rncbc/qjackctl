@@ -187,8 +187,8 @@ public:
     void markClientPorts(int iMark);
     void cleanClientPorts(int iMark);
 
-    // Client:port refreshner.
-    void updateClientPorts();
+    // Client:port refreshner (return newest item count).
+    int updateClientPorts();
 
 private:
 
@@ -361,8 +361,8 @@ public:
 
 public slots:
 
-    // Complete contents refreshner.
-    void refresh();
+    // Complete contents refreshner; return dirty status.
+    bool refresh();
 
     // Explicit connection slots.
     bool connectSelected();

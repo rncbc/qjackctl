@@ -7,12 +7,6 @@ TODOs
 
 - Make available some translations, as some has been contributed already;
   I'm missing "volunteers" for French (fr), German (de) and Spanish (es).
-  
-0.0.4 Backlog:
-
-- Devise someway to make patchbay connections persistent, in a profile/preset
-  manner, that will get automagically setup when respective JACK clients are
-  detected on runtime; this will be handy por non-LADCCA aware clients.
 
 0.0.3 Backlog:
 

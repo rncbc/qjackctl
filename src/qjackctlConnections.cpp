@@ -511,11 +511,13 @@ void qjackctlClientList::cleanClientPorts ( int iMark )
 }
 
 // Client:port refreshner.
-void qjackctlClientList::updateClientPorts (void)
+int qjackctlClientList::updateClientPorts (void)
 {
     if (m_pJackClient == 0)
-        return;
+        return 0;
 
+    int iDirtyCount = 0;
+    
     markClientPorts(0);
 
     const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, m_ulJackFlags);
@@ -533,10 +535,14 @@ void qjackctlClientList::updateClientPorts (void)
                 pClient = findClient(sClientName);
                 if (pClient)
                     pPort = pClient->findPort(sPortName);
-                if (pClient == 0)
+                if (pClient == 0) {
                     pClient = new qjackctlClientItem(this, sClientName);
-                if (pClient && pPort == 0)
+                    iDirtyCount++;
+                }
+                if (pClient && pPort == 0) {
                     pPort = new qjackctlPortItem(pClient, sPortName, pJackPort);
+                    iDirtyCount++;
+                }
                 if (pPort)
                     pPort->markClientPort(1);
             }
@@ -546,6 +552,8 @@ void qjackctlClientList::updateClientPorts (void)
     }
 
     cleanClientPorts(0);
+    
+    return iDirtyCount;
 }
 
 
@@ -1370,17 +1378,21 @@ bool qjackctlConnections::disconnectAllEx (void)
 }
 
 
-// Complete contents rebuilder.
-void qjackctlConnections::refresh (void)
+// Complete contents rebuilder; return dirty status.
+bool qjackctlConnections::refresh (void)
 {
+    int iDirtyCount = 0;
+    
     if (startExclusive()) {
-        m_pOClientList->updateClientPorts();
-        m_pIClientList->updateClientPorts();
+        iDirtyCount += m_pOClientList->updateClientPorts();
+        iDirtyCount += m_pIClientList->updateClientPorts();
         updateConnections();
         endExclusive();
     }
 
     (m_pConnectionsView->ConnectorView())->update();
+    
+    return (iDirtyCount > 0);
 }
 
 
@@ -1410,7 +1422,6 @@ qjackctlClientList *qjackctlConnections::IClientList (void)
 {
     return m_pIClientList;
 }
-
 
 // end of qjackctlConnections.cpp
 

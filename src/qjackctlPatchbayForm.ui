@@ -168,6 +168,32 @@
                     <property name="frameShadow">
                         <enum>Sunken</enum>
                     </property>
+                    <property name="alignment">
+                        <set>AlignCenter</set>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>ActivatePatchbayPushButton</cstring>
+                    </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>80</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Activate</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+S</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>apply1.png</iconset>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Activate current patchbay profile</string>
+                    </property>
                 </widget>
             </hbox>
         </widget>
@@ -621,6 +647,12 @@
         <slot>savePatchbay()</slot>
     </connection>
     <connection>
+        <sender>ActivatePatchbayPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlPatchbayForm</receiver>
+        <slot>activatePatchbay()</slot>
+    </connection>
+    <connection>
         <sender>OSocketAddPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlPatchbayForm</receiver>
@@ -708,6 +740,7 @@
 <tabstops>
     <tabstop>LoadPatchbayPushButton</tabstop>
     <tabstop>SavePatchbayPushButton</tabstop>
+    <tabstop>ActivatePatchbayPushButton</tabstop>
     <tabstop>OSocketAddPushButton</tabstop>
     <tabstop>OSocketRemovePushButton</tabstop>
     <tabstop>OSocketPropertiesPushButton</tabstop>
@@ -737,6 +770,7 @@
     <slot specifier="non virtual">stabilizeForm()</slot>
     <slot specifier="non virtual">loadPatchbay()</slot>
     <slot specifier="non virtual">savePatchbay()</slot>
+    <slot specifier="non virtual">activatePatchbay()</slot>
     <slot specifier="non virtual">addOSocket()</slot>
     <slot specifier="non virtual">removeOSocket()</slot>
     <slot specifier="non virtual">propertiesOSocket()</slot>

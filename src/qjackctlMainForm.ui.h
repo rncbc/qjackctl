@@ -30,6 +30,8 @@
 #include "qjackctlStatus.h"
 #include "qjackctlAbout.h"
 
+#include "qjackctlPatchbayFile.h"
+
 
 // Timer constant stuff.
 #define QJACKCTL_TIMER_MSECS    500
@@ -50,6 +52,7 @@ void qjackctlMainForm::init (void)
     m_pTimer      = new QTimer(this);
     m_iTimerSlot  = 0;
     m_iRefresh    = 0;
+    m_iDirtyCount = 0;
 
     m_pPortNotifier = NULL;
     m_pXrunNotifier = NULL;
@@ -61,13 +64,16 @@ void qjackctlMainForm::init (void)
     m_iBuffNotify = 0;
     m_iShutNotify = 0;
 
-    // Messages and Status forms are the only ones
-    // who will be created here and now;
-    // other modeless forms get done on demand.
+    // Messages, Status and Connections forms are to be created right now
+    // the other modeless form(s) get done on demand.
     m_pMessagesForm    = new qjackctlMessagesForm(this);
     m_pStatusForm      = new qjackctlStatusForm(this);
-    m_pConnectionsForm = NULL;
+    m_pConnectionsForm = new qjackctlConnectionsForm(this);
     m_pPatchbayForm    = NULL;
+
+    // Set the patchbay cable connection notification signal/slot.
+    QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const char *,const char*,unsigned int)),
+        this, SLOT(cableConnectSlot(const char *,const char*,unsigned int)));
 
     // Load any saved profile settings and options.
     m_setup.load();
@@ -78,20 +84,22 @@ void qjackctlMainForm::init (void)
     m_setup.loadWidgetGeometry(m_pStatusForm);
     m_setup.loadWidgetGeometry(m_pConnectionsForm);
     m_setup.loadWidgetGeometry(m_pPatchbayForm);
-    
-    // Set default messages font...
-    updateTimeDisplayToolTips();
-    updateMessagesFont();
 
     // Initial XRUN statistics reset.
     resetXrunStats();
+
+    // Set defaults...
+    updateMessagesFont();
+    updateTimeDisplayToolTips();
+    updateActivePatchbay();
+
     // Try to find if we can start in detached mode (client-only)
     // just in case there's a JACK server already running.
     m_bJackDetach = startJackClient(true);
     // Final startup stabilization...
     stabilizeForm();
     processJackExit();
-    
+
     // Register the timer slot.
     QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     // Our timer is standard.
@@ -545,6 +553,31 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
 }
 
 
+// Force update of active patchbay definition profile, if applicable.
+void qjackctlMainForm::updateActivePatchbay (void)
+{
+    // Time to load the active patchbay rack profiler?
+    if (m_setup.bActivePatchbay && !m_setup.sActivePatchbayPath.isEmpty()) {
+        if (qjackctlPatchbayFile::load(&m_patchbayRack, m_setup.sActivePatchbayPath)) {
+            m_iDirtyCount++;
+        } else {
+            appendMessagesError(tr("Could not load active patchbay definition. Disabled."));
+            m_setup.bActivePatchbay = false;
+        }
+    }
+}
+
+// Force active patchbay setting.
+void qjackctlMainForm::activatePatchbay ( const QString& sPatchbayPath )
+{
+    if (!sPatchbayPath.isEmpty()) {
+        m_setup.bActivePatchbay = true;
+        m_setup.sActivePatchbayPath = sPatchbayPath;
+    }
+    updateActivePatchbay();
+}
+
+
 
 // Stabilize current form toggle buttons that may be astray.
 void qjackctlMainForm::stabilizeForm (void)
@@ -830,19 +863,54 @@ void qjackctlMainForm::timerSlot (void)
         return;
     }
 
-    // Shall we refresh connections now and then?
-    if (m_setup.bAutoRefresh && (m_iTimerSlot % m_setup.iTimeRefresh) == 0)
-        refreshConnections();
-
-    // Are we about to refresh it, really?
-    if (m_iRefresh > 0) {
-        m_iRefresh = 0;
-        if (m_pConnectionsForm)
-            m_pConnectionsForm->refresh(true);
+    // Is the connection patchbay dirty enough?
+    if (m_pConnectionsForm) {
+        // Are we about to enforce a connections persistence profile?
+        if (m_setup.bActivePatchbay && m_iDirtyCount > 0) {
+            m_iDirtyCount = 0;
+            m_patchbayRack.connectScan(m_pJackClient);
+            refreshConnections();
+        }
+        // Shall we refresh connections now and then?
+        if (m_setup.bAutoRefresh && (m_iTimerSlot % m_setup.iTimeRefresh) == 0)
+            refreshConnections();
+        // Are we about to refresh it, really?
+        if (m_iRefresh > 0) {
+            m_iRefresh = 0;
+            // Actual refresh; are we about to enforce a connections profile?
+            m_iDirtyCount += m_pConnectionsForm->refresh(true);
+        }
     }
 
     // Update some statistical fields, directly.
     refreshStatus();
+}
+
+
+// Cable connection notification slot.
+void qjackctlMainForm::cableConnectSlot ( const char *pszOutputPort, const char *pszInputPort, unsigned int ulCableFlags )
+{
+    QString sText = QFileInfo(m_setup.sActivePatchbayPath).baseName() + ": ";
+
+    sText += pszOutputPort;
+    sText += " -> ";
+    sText += pszInputPort;
+    sText += ": ";
+
+    switch (ulCableFlags) {
+    case QJACKCTL_CABLE_OK:
+        sText += tr("OK");
+        break;
+    case QJACKCTL_CABLE_CONNECTED:
+        sText += tr("CONNECTED");
+        break;
+    case QJACKCTL_CABLE_FAILED:
+    default:
+        sText += tr("FAILED");
+        break;
+    }
+
+    appendMessagesColor(sText + ".", "#669999");
 }
 
 
@@ -1096,8 +1164,9 @@ void qjackctlMainForm::showSetupForm (void)
         pSetupForm->load(&m_setup);
         if (pSetupForm->exec()) {
             pSetupForm->save(&m_setup);
-            updateTimeDisplayToolTips();
             updateMessagesFont();
+            updateTimeDisplayToolTips();
+            updateActivePatchbay();
         }
         delete pSetupForm;
     }

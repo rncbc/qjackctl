@@ -68,6 +68,8 @@ public:
     QString sShutdownScriptShell;
     QString sXrunRegex;
     bool    bXrunIgnoreFirst;
+    bool    bActivePatchbay;
+    QString sActivePatchbayPath;
     bool    bAutoRefresh;
     int     iTimeRefresh;
     int     iTimeDisplay;

@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.1.0   2003-10-17  Major user interface redesign.
+0.1.0   2003-10-20  Major user interface redesign.
 
 - Main application window complete redesign, now more like a multimedia/LCD
   control panel -- old main window dialog tabs are now splitted in separate
@@ -30,10 +30,20 @@ ChangeLog
   option (as suggested by Kasper Souren).
 
 
+0.0.9a  2003-10-03  Tiny bugfixes.
+
+- Startup/shutdown script options now correctly saved and restored.
+
+- Dummy driver wait parameter is now properly set on startup.
+
+- Confirmation warning on disconnecting all ports (as suggested by Robert
+  Jonsson).
+
+
 0.0.9   2003-09-25  Work in progress.
 
 - New connection port item pixmaps that distinguishes physical from
-  logical ports;
+  logical ports.
   
 - History of most recently used values gets saved for some settings
   and options comboboxes widgets.

@@ -220,10 +220,7 @@ qjackctlPatchbayRack::qjackctlPatchbayRack (void)
 // Default destructor.
 qjackctlPatchbayRack::~qjackctlPatchbayRack (void)
 {
-    m_cablelist.clear();
-    m_slotlist.clear();
-    m_isocketlist.clear();
-    m_osocketlist.clear();
+    clear();
 }
 
 
@@ -381,12 +378,10 @@ const char *qjackctlPatchbayRack::findClientPort ( const char **ppszClientPorts,
         QString sClientPort = ppszClientPorts[iClientPort];
         int iColon = sClientPort.find(":");
         if (iColon >= 0) {
-            // Do we match the client name portion?
-            if (rxClientName.exactMatch(sClientPort.left(iColon))) {
-                if (rxPortName.exactMatch(sClientPort.right(sClientPort.length() - iColon - 1))) {
-                    if (++i > n)
-                        return ppszClientPorts[iClientPort];
-                }
+            if (rxClientName.exactMatch(sClientPort.left(iColon)) &&
+                rxPortName.exactMatch(sClientPort.right(sClientPort.length() - iColon - 1))) {
+                if (++i > n)
+                    return ppszClientPorts[iClientPort];
             }
         }
         iClientPort++;
@@ -428,15 +423,14 @@ void qjackctlPatchbayRack::connectCable ( qjackctlPatchbaySocket *pOutputSocket,
         while ((pszOutputPort = findClientPort(m_ppszOutputPorts, pOutputSocket->clientName(), *iterOutputPlug, iPort)) != NULL) {
             const char *pszInputPort = findClientPort(m_ppszInputPorts, pInputSocket->clientName(), *iterInputPlug, iPort);
             if (pszInputPort) {
-                fprintf(stderr, "connectCable: %s -> %s: ", pszOutputPort, pszInputPort);
+                unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
                 if (isConnected(pszOutputPort, pszInputPort))
-                    fprintf(stderr, "OK.\n");
+                    uiCableFlags = QJACKCTL_CABLE_OK;
                 else if (jack_connect(m_pJackClient, pszOutputPort, pszInputPort) == 0)
-                    fprintf(stderr, "CONNECTED.\n");
-                else
-                    fprintf(stderr, "FAILED.\n");
+                    uiCableFlags = QJACKCTL_CABLE_CONNECTED;
+                emit cableConnected(pszOutputPort, pszInputPort, uiCableFlags);
+                iPort++;
             }
-            iPort++;
         }
         // Get on next plug pair...
         iterOutputPlug++;
@@ -457,6 +451,7 @@ void qjackctlPatchbayRack::connectScan ( jack_client_t *pJackClient )
     m_ppszOutputPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsOutput);
     if (m_ppszOutputPorts == NULL)
         return;
+
     // Cache all current input client-ports...
     m_ppszInputPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsInput);
     if (m_ppszInputPorts) {

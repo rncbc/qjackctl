@@ -22,6 +22,7 @@
 #ifndef __qjackctlPatchbayRack_h
 #define __qjackctlPatchbayRack_h
 
+#include <qobject.h>
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qptrlist.h>
@@ -32,6 +33,11 @@
 #define QJACKCTL_SLOTMODE_OPEN      0
 #define QJACKCTL_SLOTMODE_HALF      1
 #define QJACKCTL_SLOTMODE_FULL      2
+
+// Patchbay change signal flags.
+#define QJACKCTL_CABLE_FAILED       0
+#define QJACKCTL_CABLE_OK           1
+#define QJACKCTL_CABLE_CONNECTED    2
 
 
 // Patchbay socket definition.
@@ -136,8 +142,10 @@ private:
 
 
 // Patchbay rack profile definition.
-class qjackctlPatchbayRack
+class qjackctlPatchbayRack : public QObject
 {
+    Q_OBJECT
+
 public:
 
     // Constructor.
@@ -165,7 +173,7 @@ public:
     qjackctlPatchbayCable *findCable(const QString& sOutputSocket, const QString& sInputSocket);
     qjackctlPatchbayCable *findCable(qjackctlPatchbayCable *pCablePtr);
 
-    // Patckbay cleaner.
+    // Patchbay cleaner.
     void clear();
 
     // Patchbay rack socket list accessors.
@@ -178,6 +186,11 @@ public:
 
     // Connect persistence scan cycle method.
     void connectScan(jack_client_t *pJackClient);
+
+signals:
+
+    // Cable connection change signal.
+    void cableConnected(const char *pszOutputPort, const char *pszInputPort, unsigned int uiCableFlags);
 
 private:
 
