@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.5  2004-02-08  Server survival option and command-line wrapper feature.
+0.2.5  2004-02-09  Server survival option and command-line wrapper feature.
 
 - New option on application exit for leaving the JACK server daemon running,
   surviving the parent process; the confirmation prompt on application close

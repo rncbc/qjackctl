@@ -113,6 +113,12 @@ void qjackctlMainForm::destroy (void)
 
     m_pAlsaNotifier = NULL;
     m_pAlsaSeq = NULL;
+
+    // Finally drop any popup widgets around...
+    delete m_pMessagesForm;
+    delete m_pStatusForm;
+    delete m_pConnectionsForm;
+    delete m_pPatchbayForm;
 }
 
 
@@ -260,6 +266,11 @@ bool qjackctlMainForm::queryClose (void)
         m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
         m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
         m_pSetup->saveWidgetGeometry(this);
+        // Close popup widgets.
+        m_pMessagesForm->close();
+        m_pStatusForm->close();        
+        m_pConnectionsForm->close();        
+        m_pPatchbayForm->close();        
     }
 
     return bQueryClose;
