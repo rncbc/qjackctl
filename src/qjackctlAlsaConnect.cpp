@@ -119,10 +119,10 @@ qjackctlAlsaClientList::qjackctlAlsaClientList( qjackctlClientListView *pListVie
     : qjackctlClientList(pListView, bReadable)
 {
     if (g_iXpmRefCount == 0) {
-        g_pXpmClientO = new QPixmap(QPixmap::fromMimeSource("mcliento.png"));
-        g_pXpmClientI = new QPixmap(QPixmap::fromMimeSource("mclienti.png"));
-        g_pXpmPortO   = new QPixmap(QPixmap::fromMimeSource("mporto.png"));
-        g_pXpmPortI   = new QPixmap(QPixmap::fromMimeSource("mporti.png"));
+        g_pXpmClientO = createPixmap("mcliento", 0);
+        g_pXpmClientI = createPixmap("mclienti", 0);
+        g_pXpmPortO   = createPixmap("mporto",   0);
+        g_pXpmPortI   = createPixmap("mporti",   0);
     }
     g_iXpmRefCount++;
 

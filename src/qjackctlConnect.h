@@ -205,6 +205,9 @@ public:
     // Client:port hilite update stabilization.
     void hiliteClientPorts (void);
 
+    // Common pixmap factory-method.
+    QPixmap *createPixmap (const QString& sName, int iSize);
+    
 private:
 
     // Instance variables.

@@ -450,6 +450,20 @@ void qjackctlClientList::hiliteClientPorts (void)
 }
 
 
+// Common pixmap factory-method.
+QPixmap *qjackctlClientList::createPixmap ( const QString& sName, int iSize )
+{
+    QPixmap *pPixmap;
+    
+    if (iSize > 0)
+        pPixmap = new QPixmap(QPixmap::fromMimeSource(sName + QString("_%1x%1.png").arg(iSize * 32)));
+    else
+        pPixmap = new QPixmap(QPixmap::fromMimeSource(sName + ".png"));
+        
+    return pPixmap;
+}
+
+
 //----------------------------------------------------------------------------
 // qjackctlClientListView -- Client list view, supporting drag-n-drop.
 
