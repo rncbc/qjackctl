@@ -8,7 +8,7 @@ ChangeLog
 - Regression from 0.2.13, of the not so stupid pseudo-mutex guards on the
   connections management framework, after fixing some crash reports from
   Fernando Pablo Lopez-Lezcano and Dave Phillips (thanks!); it pays to be
-  such a paranoid after all :).</li>
+  such a paranoid after all :).
 
 
 0.2.15   2005-02-06  Client/port names aliasing and other minors.
