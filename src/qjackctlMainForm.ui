@@ -606,7 +606,7 @@
         <sender>QuitPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
-        <slot>close()</slot>
+        <slot>quitMainForm()</slot>
     </connection>
     <connection>
         <sender>SetupPushButton</sender>
@@ -735,6 +735,7 @@
     <variable access="private">QString m_sTimeDashes;</variable>
     <variable access="private">QString m_sJackCmdLine;</variable>
     <variable access="private">qjackctlSystemTray *m_pSystemTray;</variable>
+    <variable access="private">bool m_bQuitForce;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack( void )</slot>
@@ -763,6 +764,7 @@
     <slot specifier="non virtual">transportStop()</slot>
     <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
     <slot specifier="non virtual">systemTrayContextMenu( const QPoint &amp; pos )</slot>
+    <slot specifier="non virtual">quitMainForm( void )</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>

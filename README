@@ -47,28 +47,22 @@ file, as it is recreated and rewritten everytime qjackctl is run.
 Bugs
 ----
 
-Plenty. After all is still alpha stage. To date, qjackctl has been tested
-with JACK release 0.80.0 and beyond, on SuSE 8.1, Mandrake 9.1 and RedHat 9,
-with a custom 2.4.22 kernel with low-latency, preemptible and capabilities
-enabling patches.
+Probably plenty still, but qjackctl it's now considered on beta stage already.
+It has been locally tested since JACK release 0.94.0, on SuSE 9.0, Mandrake 10.0
+and Fedora Core 1, with custom 2.4 kernels with low-latency, preemptible and
+capabilities enabling patches. As for 2.6 kernels, the capabilities patch may
+also apply but the emergence of the Realtime Linux Security Module (LSM) it's
+being now recommended for your taking benefit of the realtime and low-latency
+audio pleasure JACK can give.
 
-One misfeature that still bugs some users who runs qjackctl and watches for
-the messages output window is that stdout/stderr capture from JACK daemon
-seems to be somewhat broken. The evident behaviour is that stdout only shows
-up on server shutdown, while stderr is captured and shown unbuffered as
-expected. This issue has been closed with latest JACK 0.90.x release.
 
-Note:
+Support
+-------
 
-It has been reported that in some systems qjackctl hangs pretty badly after
-stopping and restarting the JACK audio daemon, without quitting the application.
-That is, each qjackctl running instance may start and stop JACK only once.
-After that, one might have to quit and run it back again. This situation only
-happens in specific systems, although very deterministically.
-
-If you experience this behaviour, or any other you find annoying, please report
-it on the project's page (http://www.sourceforge.net/projects/qjackctl). Remember
-to include a description of your system, namely glibc, gcc and qt versions.
+Qjackctl is open source free software. For bug reports, feature
+requests, discussion forums, mailling lists, or any other matter related
+to the development of this piece of software, please use the
+Sourceforge project page (http://sourceforge.net/projects/qjackctl).
 
 
 Acknowledgments
@@ -76,8 +70,8 @@ Acknowledgments
 
 Qjackctl's user interface layout (and the whole idea for that matter)
 was partially borrowed from Lawrie Abbott's jacko project
-(http://members.iinet.net.au/~lawrieabbott/pub/jacko),
-which was taken from wxWindow/Python into the Qt/C++ arena.
+(http://members.iinet.net.au/~lawrieabbott/jacko.html), which
+was taken from wxWindow/Python into the Qt/C++ arena.
 
 Since 2003-08-06, qjackctl has been included in the awesome Planet CCRMA
 (http://ccrma-www.stanford.edu/planetccrma/software/) software collection.

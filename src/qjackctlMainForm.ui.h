@@ -105,6 +105,9 @@ void qjackctlMainForm::init (void)
 
     // The eventual system tray widget.
     m_pSystemTray = NULL;
+
+    // We're not quitting so early :)
+    m_bQuitForce = false;
 }
 
 
@@ -257,12 +260,24 @@ bool qjackctlMainForm::queryClose (void)
 {
     bool bQueryClose = true;
 
-    if (m_pJack && m_pJack->isRunning() && m_pSetup->bQueryClose) {
+#ifdef CONFIG_SYSTEM_TRAY
+    // If we're not quitting explicitly and there's an
+    // active system tray icon, then just hide ourselves.
+    if (!m_bQuitForce && isVisible() && m_pSetup->bSystemTray && m_pSystemTray) {
+        m_pSetup->saveWidgetGeometry(this);
+        hide();
+        bQueryClose = false;
+    }
+#endif
+
+    // Check if JACK daemon is currently running...
+    if (bQueryClose && m_pJack && m_pJack->isRunning() && m_pSetup->bQueryClose) {
         switch (QMessageBox::warning(this, tr("Warning"),
             tr("JACK is currently running.") + "\n\n" +
             tr("Do you want to terminate the JACK audio server?"),
             tr("Terminate"), tr("Leave"), tr("Cancel"))) {
         case 0:     // Terminate...
+            m_bJackSurvive = false;
             break;
         case 1:     // Leave...
             m_bJackSurvive = true;
@@ -280,7 +295,7 @@ bool qjackctlMainForm::queryClose (void)
             m_pSetup->sPatchbayPath = m_pPatchbayForm->patchbayPath();
     }
 
-    // Some windows default fonts is here on demeand too.
+    // Some windows default fonts are here on demand too.
     if (bQueryClose && m_pMessagesForm)
         m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
 
@@ -300,9 +315,15 @@ bool qjackctlMainForm::queryClose (void)
             m_pConnectionsForm->close();
         if (m_pPatchbayForm)
             m_pPatchbayForm->close();
+        // And the system tray icon too.
         if (m_pSystemTray)
             m_pSystemTray->close();
     }
+
+#ifdef CONFIG_SYSTEM_TRAY
+    // Whether we're really quitting.
+    m_bQuitForce = bQueryClose;
+#endif
 
     return bQueryClose;
 }
@@ -310,7 +331,7 @@ bool qjackctlMainForm::queryClose (void)
 
 void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
-    if (m_pSetup && m_pSetup->sCmdLine.isEmpty() && queryClose())
+    if (queryClose())
         pCloseEvent->accept();
     else
         pCloseEvent->ignore();
@@ -2058,11 +2079,23 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     pContextMenu->insertSeparator();
 
     pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("quit1.png")),
-        tr("&Quit"), this, SLOT(close()));
+        tr("&Quit"), this, SLOT(quitMainForm()));
 
     pContextMenu->exec(pos);
     
     delete pContextMenu;
+}
+
+
+// Close main form slot.
+void qjackctlMainForm::quitMainForm (void)
+{
+#ifdef CONFIG_SYSTEM_TRAY
+    // Flag that we're quitting explicitly.
+    m_bQuitForce = true;
+#endif
+    // And then, do the closing dance.
+    close();
 }
 
 

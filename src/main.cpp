@@ -61,9 +61,9 @@ int main ( int argc, char **argv )
         jack_client_t *pJackClient = jack_client_new("qjackctl-start");
         if (pJackClient) {
             jack_client_close(pJackClient);
-            ::system(settings.sCmdLine.latin1());
+            int iExitStatus = ::system(settings.sCmdLine.latin1());
             app.quit();
-            return 2;
+            return iExitStatus;
         }
     }
 
