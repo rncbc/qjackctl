@@ -2173,7 +2173,8 @@ void qjackctlMainForm::updateSystemTray (void)
 {
 #ifdef CONFIG_SYSTEM_TRAY
     if (!m_pSetup->bSystemTray && m_pSystemTray) {
-        m_pSystemTray->close();
+	//  Strange enough, this would close the application too.
+    //  m_pSystemTray->close();
         delete m_pSystemTray;
         m_pSystemTray = NULL;
     }
