@@ -44,13 +44,16 @@ int main ( int argc, char **argv )
         app.installTranslator(&translator);
     }
 
+    // Better set our environment for no JACK automagic now.
+    setenv("JACK_NO_START_SERVER", "1", 1);
+    
     // Construct default settings; override with command line arguments.
     qjackctlSetup settings;
     if (!settings.parse_args(app.argc(), app.argv())) {
         app.quit();
         return 1;
     }
-    
+
     // Check if we'll just start an external program...
     if (!settings.sCmdLine.isEmpty()) {
         jack_client_t *pJackClient = jack_client_new("qjackctl-start");
