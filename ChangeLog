@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.6   2004-02-27  More work in progress.
+0.2.6   2004-02-29  More work in progress.
 
 - Message window line limit is now a configurable option on setup, as is
   whether the command-line local configuration file gets saved at all;
