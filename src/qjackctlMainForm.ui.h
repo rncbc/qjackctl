@@ -161,6 +161,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
         this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
+    // To avoid flicker, we'll hide the main display.
+    StatusDisplayFrame->hide();
+
     // Try to restore old window positioning.
     m_pSetup->loadWidgetGeometry(this);
     // And for the whole widget gallore...
@@ -168,6 +171,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     m_pSetup->loadWidgetGeometry(m_pStatusForm);
     m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
     m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
+
+    // Make it final.
+    StatusDisplayFrame->show();
 
     // Set defaults...
     updateMessagesFont();
@@ -247,7 +253,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // Register the first timer slot.
     QTimer::singleShot(QJACKCTL_TIMER_MSECS, this, SLOT(timerSlot()));
-
+    
     // We're ready to go...
     return true;
 }

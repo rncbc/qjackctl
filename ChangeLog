@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.3.0   2004-07-20  Work in progress...
+0.3.0   2004-07-25  Work in progress...
 
 - Context menu reset option is now always enabled (yet another suggestion
   from Sampo Savolainen).
