@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.7   2004-03-29  User-interface refinements and OSS driver support.
+0.2.7   2004-04-04  User-interface refinements and OSS driver support.
 
 - Connections and patchbay windows horizontal layout are now user
   configurable via splitter widgets.
