@@ -45,12 +45,14 @@ public:
 
 signals:
 
+    // Clicked signal.
+    void clicked();
     // Context menu signal.
-    void contextMenuRequested(qjackctlSystemTray *pSystemTray, const QPoint& pos);
+    void contextMenuRequested(const QPoint& pos);
 
 protected:
 
-    // Inherited mouse event.
+    // Overriden mouse event method.
     void mousePressEvent(QMouseEvent *);
 };
 

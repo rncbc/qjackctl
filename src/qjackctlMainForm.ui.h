@@ -1655,6 +1655,17 @@ void qjackctlMainForm::refreshPatchbay (void)
 }
 
 
+// Main form visibility requester slot.
+void qjackctlMainForm::toggleMainForm (void)
+{
+    m_pSetup->saveWidgetGeometry(this);
+    if (isVisible())
+        hide();
+    else
+        show();
+}
+
+
 // Message log form requester slot.
 void qjackctlMainForm::toggleMessagesForm (void)
 {
@@ -1991,27 +2002,29 @@ void qjackctlMainForm::updateTitle ( const QString& sTitle, int iState )
 // System tray master switcher.
 void qjackctlMainForm::updateSystemTray (void)
 {
+#ifdef CONFIG_SYSTEM_TRAY
     if (!m_pSetup->bSystemTray && m_pSystemTray) {
         m_pSystemTray->close();
         delete m_pSystemTray;
         m_pSystemTray = NULL;
     }
-    
     if (m_pSetup->bSystemTray && m_pSystemTray == NULL) {
         m_pSystemTray = new qjackctlSystemTray(this);
         m_pSystemTray->show();
-        QObject::connect(m_pSystemTray, SIGNAL(contextMenuRequested(qjackctlSystemTray *, const QPoint &)),
-            this, SLOT(systemTrayContextMenu(qjackctlSystemTray *, const QPoint &)));
+        QObject::connect(m_pSystemTray, SIGNAL(clicked()), this, SLOT(toggleMainForm()));
+        QObject::connect(m_pSystemTray, SIGNAL(contextMenuRequested(const QPoint &)),
+            this, SLOT(systemTrayContextMenu(const QPoint &)));
     }
+#endif
 }
 
 
 // System tray context menu request slot.
-void qjackctlMainForm::systemTrayContextMenu ( qjackctlSystemTray *, const QPoint& pos )
+void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 {
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
-    int iToggle = pContextMenu->insertItem(isVisible() ? tr("&Hide") : tr("S&how"));
+    pContextMenu->insertItem(isVisible() ? tr("&Hide") : tr("S&how"), this, SLOT(toggleMainForm()));
     pContextMenu->insertSeparator();
 
     if (m_pJackClient == NULL) {
@@ -2044,17 +2057,11 @@ void qjackctlMainForm::systemTrayContextMenu ( qjackctlSystemTray *, const QPoin
 //      tr("Ab&out..."), this, SLOT(showAboutForm()));
     pContextMenu->insertSeparator();
 
-    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("quit1.png")),
+    pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("quit1.png")),
         tr("&Quit"), this, SLOT(close()));
 
-    iItemID = pContextMenu->exec(pos);
-    if (iItemID == iToggle) {
-        if (isVisible())
-            hide();
-        else
-            show();
-    }
-
+    pContextMenu->exec(pos);
+    
     delete pContextMenu;
 }
 

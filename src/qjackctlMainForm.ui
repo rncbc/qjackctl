@@ -752,6 +752,7 @@
     <slot specifier="non virtual">timerSlot( void )</slot>
     <slot specifier="non virtual">jackConnectChanged( void )</slot>
     <slot specifier="non virtual">alsaConnectChanged( void )</slot>
+    <slot specifier="non virtual">toggleMainForm( void )</slot>
     <slot specifier="non virtual">toggleMessagesForm( void )</slot>
     <slot specifier="non virtual">toggleStatusForm( void )</slot>
     <slot specifier="non virtual">toggleConnectionsForm( void )</slot>
@@ -761,7 +762,7 @@
     <slot specifier="non virtual">transportStart()</slot>
     <slot specifier="non virtual">transportStop()</slot>
     <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
-    <slot specifier="non virtual">systemTrayContextMenu( qjackctlSystemTray *pSystemTray, const QPoint &amp; pos )</slot>
+    <slot specifier="non virtual">systemTrayContextMenu( const QPoint &amp; pos )</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>

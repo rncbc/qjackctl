@@ -21,6 +21,7 @@
 
 #include "qjackctlSystemTray.h"
 
+#include <qapplication.h>
 #include <qtooltip.h>
 #include <qbitmap.h>
 #include <qimage.h>
@@ -37,7 +38,6 @@
 #endif
 
 
-
 //----------------------------------------------------------------------------
 // qjackctlSystemTray -- Custom system tray widget.
 
@@ -45,6 +45,7 @@
 qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent , const char *pszName )
     : QLabel(pParent, pszName, WMouseNoMask | WRepaintNoErase | WType_TopLevel | WStyle_Customize | WStyle_NoBorder | WStyle_StaysOnTop)
 {
+    QLabel::setMinimumSize(22, 22);
     QLabel::setBackgroundMode(Qt::X11ParentRelative);
     QLabel::setBackgroundOrigin(QWidget::WindowOrigin);
 
@@ -53,41 +54,42 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent , const char *pszName 
     Display *dpy = qt_xdisplay();
     WId trayWin  = winId();
 
-	// System Tray Protocol Specification.
-	Screen *screen = XDefaultScreenOfDisplay(dpy);
-	int iScreen = XScreenNumberOfScreen(screen);
-	char szAtom[32];
-	snprintf(szAtom, sizeof(szAtom), "_NET_SYSTEM_TRAY_S%d", iScreen);
-	Atom selectionAtom = XInternAtom(dpy, szAtom, false);
-	XGrabServer(dpy);
-	Window managerWin = XGetSelectionOwner(dpy, selectionAtom);
-	if (managerWin != None)
-		XSelectInput(dpy, managerWin, StructureNotifyMask);
-	XUngrabServer(dpy);
-	XFlush(dpy);
-	if (managerWin != None) {
-    	XEvent ev;
-    	memset(&ev, 0, sizeof(ev));
-    	ev.xclient.type = ClientMessage;
-    	ev.xclient.window = managerWin;
-    	ev.xclient.message_type = XInternAtom(dpy, "_NET_SYSTEM_TRAY_OPCODE", false);
-    	ev.xclient.format = 32;
-    	ev.xclient.data.l[0] = CurrentTime;
-    	ev.xclient.data.l[1] = SYSTEM_TRAY_REQUEST_DOCK;
-    	ev.xclient.data.l[2] = trayWin;
-    	ev.xclient.data.l[3] = 0;
-    	ev.xclient.data.l[4] = 0;
-    	XSendEvent(dpy, managerWin, false, NoEventMask, &ev);
-    	XSync(dpy, false);
+    // System Tray Protocol Specification.
+    Screen *screen = XDefaultScreenOfDisplay(dpy);
+    int iScreen = XScreenNumberOfScreen(screen);
+    char szAtom[32];
+    snprintf(szAtom, sizeof(szAtom), "_NET_SYSTEM_TRAY_S%d", iScreen);
+    Atom selectionAtom = XInternAtom(dpy, szAtom, false);
+    XGrabServer(dpy);
+    Window managerWin = XGetSelectionOwner(dpy, selectionAtom);
+    if (managerWin != None)
+        XSelectInput(dpy, managerWin, StructureNotifyMask);
+    XUngrabServer(dpy);
+    XFlush(dpy);
+    if (managerWin != None) {
+        XEvent ev;
+        memset(&ev, 0, sizeof(ev));
+        ev.xclient.type = ClientMessage;
+        ev.xclient.window = managerWin;
+        ev.xclient.message_type = XInternAtom(dpy, "_NET_SYSTEM_TRAY_OPCODE", false);
+        ev.xclient.format = 32;
+        ev.xclient.data.l[0] = CurrentTime;
+        ev.xclient.data.l[1] = SYSTEM_TRAY_REQUEST_DOCK;
+        ev.xclient.data.l[2] = trayWin;
+        ev.xclient.data.l[3] = 0;
+        ev.xclient.data.l[4] = 0;
+        XSendEvent(dpy, managerWin, false, NoEventMask, &ev);
+        XSync(dpy, false);
     }
 
     // Follwing simple KDE specs:
-    WId forWin = pParent ? pParent->topLevelWidget()->winId() : qt_xrootwin();
     Atom trayAtom;
     // For older KDE's (hopefully)...
+    int data = 1;
     trayAtom = XInternAtom(dpy, "KWM_DOCKWINDOW", false);
-    XChangeProperty(dpy, trayWin, trayAtom, trayAtom, 32, PropModeReplace, (unsigned char *) &forWin, 1);
+    XChangeProperty(dpy, trayWin, trayAtom, trayAtom, 32, PropModeReplace, (unsigned char *) &data, 1);
     // For not so older KDE's...
+    WId forWin = pParent ? pParent->topLevelWidget()->winId() : qt_xrootwin();
     trayAtom = XInternAtom(dpy, "_KDE_NET_WM_SYSTEM_TRAY_WINDOW_FOR", false);
     XChangeProperty(dpy, trayWin, trayAtom, XA_WINDOW, 32, PropModeReplace, (unsigned char *) &forWin, 1);
 
@@ -107,37 +109,28 @@ qjackctlSystemTray::~qjackctlSystemTray (void)
 {
 }
 
-
 // Inherited mouse event.
 void qjackctlSystemTray::mousePressEvent ( QMouseEvent *pMouseEvent )
 {
     if (!QLabel::rect().contains(pMouseEvent->pos()))
         return;
 
-    QWidget *pParent = parentWidget();
-    if (pParent == 0)
-        return;
-        
     switch (pMouseEvent->button()) {
 
       case LeftButton:
         // Toggle parent widget visibility.
-        if (pParent->isVisible())
-            pParent->hide();
-        else
-            pParent->show();
+        emit clicked();
         break;
 
       case RightButton:
         // Just signal we're on to context menu.
-        emit contextMenuRequested(this, pMouseEvent->globalPos());
+        emit contextMenuRequested(pMouseEvent->globalPos());
         break;
-        
+
       default:
         break;
     }
 }
-
 
 // Set system tray icon overlay.
 void qjackctlSystemTray::setPixmapOverlay ( const QPixmap& pmOverlay )
