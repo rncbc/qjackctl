@@ -9,6 +9,11 @@ ChangeLog
   on KDE enabled desktops; support for freedesktop.org's system tray protocol
   specification has been included so this maybe also effective on Gnome2.
 
+- Capture or Playback-only optional alternate device interface name may now
+  be specified for the ALSA audio driver server settings.
+  
+- Maximum number of ports setting was added to server setup.
+
 - The hifen is now a legal character for preset names.
 
 

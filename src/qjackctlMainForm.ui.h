@@ -276,13 +276,13 @@ bool qjackctlMainForm::queryClose (void)
             tr("JACK is currently running.") + "\n\n" +
             tr("Do you want to terminate the JACK audio server?"),
             tr("Terminate"), tr("Leave"), tr("Cancel"))) {
-        case 0:     // Terminate...
+          case 0:   // Terminate...
             m_bJackSurvive = false;
             break;
-        case 1:     // Leave...
+          case 1:   // Leave...
             m_bJackSurvive = true;
             break;
-        default:    // Cancel.
+          default:  // Cancel.
             bQueryClose = false;
             break;
         }
@@ -398,10 +398,10 @@ void qjackctlMainForm::startJack (void)
             tr("Could not start JACK.") + "\n\n" +
             tr("Maybe JACK audio server is already started."),
             tr("Stop"), tr("Kill"), tr("Cancel"))) {
-        case 0:
+          case 0:
             m_pJack->tryTerminate();
             break;
-        case 1:
+          case 1:
             m_pJack->kill();
             break;
         }
@@ -484,7 +484,9 @@ void qjackctlMainForm::startJack (void)
         if (m_preset.iPriority > 0)
             m_pJack->addArgument("-P" + QString::number(m_preset.iPriority));
     }
-    if (m_preset.iTimeout > 0)
+    if (m_preset.iPortMax > 0 && m_preset.iPortMax != 128)
+        m_pJack->addArgument("-p" + QString::number(m_preset.iPortMax));
+    if (m_preset.iTimeout > 0 && m_preset.iTimeout != 500)
         m_pJack->addArgument("-t" + QString::number(m_preset.iTimeout));
     if (m_preset.bNoMemLock)
         m_pJack->addArgument("-m");
@@ -532,15 +534,18 @@ void qjackctlMainForm::startJack (void)
         else if (m_preset.iOutChannels > 0)
             m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     } else {
+        sTemp = QString::null;
         switch (m_preset.iAudio) {
-        case QJACKCTL_DUPLEX:
-        //  m_pJack->addArgument("-D");
+          case QJACKCTL_DUPLEX:
+          //m_pJack->addArgument("-D");
             break;
-        case QJACKCTL_CAPTURE:
-            m_pJack->addArgument("-C");
+          case QJACKCTL_CAPTURE:
+            if (bAlsa) sTemp = m_preset.sInDevice;
+            m_pJack->addArgument("-C" + sTemp);
             break;
-        case QJACKCTL_PLAYBACK:
-            m_pJack->addArgument("-P");
+          case QJACKCTL_PLAYBACK:
+            if (bAlsa) sTemp = m_preset.sOutDevice;
+            m_pJack->addArgument("-P" + sTemp);
             break;
         }
         if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
@@ -548,20 +553,20 @@ void qjackctlMainForm::startJack (void)
         if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
             m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     }
-    if (bDummy && m_preset.iWait > 0)
+    if (bDummy && m_preset.iWait > 0 && m_preset.iWait != 21333)
         m_pJack->addArgument("-w" + QString::number(m_preset.iWait));
     if (bAlsa || bPortaudio) {
         switch (m_preset.iDither) {
-        case 0:
-        //  m_pJack->addArgument("-z-");
+          case 0:
+          //m_pJack->addArgument("-z-");
             break;
-        case 1:
+          case 1:
             m_pJack->addArgument("-zr");
             break;
-        case 2:
+          case 2:
             m_pJack->addArgument("-zs");
             break;
-        case 3:
+          case 3:
             m_pJack->addArgument("-zt");
             break;
         }
@@ -591,7 +596,7 @@ void qjackctlMainForm::startJack (void)
     }
 
     // Show startup results...
-    sTemp = " " + tr("with") + " ";
+    sTemp  = " " + tr("with") + " ";
     sTemp += tr("PID");
     sTemp += "=";
     sTemp += QString::number((long) m_pJack->processIdentifier());
@@ -844,17 +849,17 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
     QString sTransportTime = tr("Transport time code");
 
     switch (m_pSetup->iTimeDisplay) {
-    case DISPLAY_TRANSPORT_TIME:
-    {
+      case DISPLAY_TRANSPORT_TIME:
+      {
         QString sTemp  = sTimeDisplay;
         sTimeDisplay   = sTransportTime;
         sTransportTime = sTemp;
         break;
-    }
-    case DISPLAY_RESET_TIME:
+      }
+      case DISPLAY_RESET_TIME:
         sTimeDisplay = tr("Elapsed time since last reset");
         break;
-    case DISPLAY_XRUN_TIME:
+      case DISPLAY_XRUN_TIME:
         sTimeDisplay = tr("Elapsed time since last XRUN");
         break;
     }
@@ -1349,20 +1354,20 @@ void qjackctlMainForm::cableConnectSlot ( const QString& sOutputPort, const QStr
     sText += " ";
 
     switch (ulCableFlags) {
-    case QJACKCTL_CABLE_CHECKED:
+      case QJACKCTL_CABLE_CHECKED:
         sText += tr("checked");
         sColor = "#99cccc";
         break;
-    case QJACKCTL_CABLE_CONNECTED:
+      case QJACKCTL_CABLE_CONNECTED:
         sText += tr("connected");
         sColor = "#669999";
         break;
-    case QJACKCTL_CABLE_DISCONNECTED:
+      case QJACKCTL_CABLE_DISCONNECTED:
         sText += tr("disconnected");
         sColor = "#cc9999";
         break;
-    case QJACKCTL_CABLE_FAILED:
-    default:
+      case QJACKCTL_CABLE_FAILED:
+      default:
         sText += tr("failed");
         sColor = "#cc6699";
         break;
@@ -1877,18 +1882,19 @@ void qjackctlMainForm::refreshStatus (void)
         jack_transport_state_t tstate = jack_transport_query(m_pJackClient, &tpos);
         bool bPlaying = (tstate == JackTransportRolling || tstate == JackTransportLooping);
         switch (tstate) {
-            case JackTransportStopped:
-                sText = sStopped;
-                break;
-            case JackTransportRolling:
-                sText = tr("Rolling");
-                break;
-            case JackTransportLooping:
-                sText = tr("Looping");
-                break;
-            case JackTransportStarting:
-                sText = tr("Starting");
-                break;
+          case JackTransportStarting:
+            sText = tr("Starting");
+            break;
+          case JackTransportRolling:
+            sText = tr("Rolling");
+            break;
+          case JackTransportLooping:
+            sText = tr("Looping");
+            break;
+          case JackTransportStopped:
+          default:
+            sText = sStopped;
+            break;
         }
         updateStatus(STATUS_TRANSPORT_STATE, sText);
         // Transport timecode position.
@@ -1936,17 +1942,17 @@ void qjackctlMainForm::refreshStatus (void)
 void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
 {
     switch (iStatusItem) {
-    case STATUS_SERVER_STATE:
+      case STATUS_SERVER_STATE:
         ServerStateTextLabel->setText(sText);
         break;
-    case STATUS_CPU_LOAD:
+      case STATUS_CPU_LOAD:
         CpuLoadTextLabel->setText(sText);
         break;
-    case STATUS_SAMPLE_RATE:
+      case STATUS_SAMPLE_RATE:
         SampleRateTextLabel->setText(sText);
         break;
-    case STATUS_XRUN_COUNT:
-    {
+      case STATUS_XRUN_COUNT:
+      {
         QColor fgcolor = (m_pJackClient ? Qt::green : Qt::darkGreen);
         if ((m_iXrunCount + m_iXrunCallbacks) > 0) {
             if (m_iXrunCallbacks > 0)
@@ -1957,24 +1963,24 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
         XrunCountTextLabel->setPaletteForegroundColor(fgcolor);
         XrunCountTextLabel->setText(sText);
         break;
-    }
-    case STATUS_TRANSPORT_STATE:
+      }
+      case STATUS_TRANSPORT_STATE:
         TransportStateTextLabel->setText(sText);
         break;
-    case STATUS_TRANSPORT_TIME:
+      case STATUS_TRANSPORT_TIME:
         if (m_pSetup->iTimeDisplay == DISPLAY_TRANSPORT_TIME)
             TimeDisplayTextLabel->setText(sText);
         else
             TransportTimeTextLabel->setText(sText);
         break;
-    case STATUS_TRANSPORT_BBT:
+      case STATUS_TRANSPORT_BBT:
         if (m_pSetup->iTimeDisplay == DISPLAY_TRANSPORT_BBT)
             TimeDisplayTextLabel->setText(sText);
         else
         if (m_pSetup->iTimeDisplay == DISPLAY_TRANSPORT_TIME)
             TransportTimeTextLabel->setText(sText);
         break;
-    case STATUS_TRANSPORT_BPM:
+      case STATUS_TRANSPORT_BPM:
         TransportBPMTextLabel->setText(sText);
         break;
     }

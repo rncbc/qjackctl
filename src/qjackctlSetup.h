@@ -62,6 +62,7 @@ struct qjackctlPreset
     int     iOutChannels;
     int     iStartDelay;
     bool    bVerbose;
+    int     iPortMax;
 };
 
 // Common settings profile class.

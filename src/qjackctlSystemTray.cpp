@@ -21,7 +21,6 @@
 
 #include "qjackctlSystemTray.h"
 
-#include <qapplication.h>
 #include <qtooltip.h>
 #include <qbitmap.h>
 #include <qimage.h>

@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>514</width>
-            <height>452</height>
+            <height>453</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -564,6 +564,112 @@
                                             <string>Whether to give verbose output on messages</string>
                                         </property>
                                     </widget>
+                                    <spacer>
+                                        <property name="name">
+                                            <cstring>spacer26</cstring>
+                                        </property>
+                                        <property name="orientation">
+                                            <enum>Horizontal</enum>
+                                        </property>
+                                        <property name="sizeType">
+                                            <enum>Expanding</enum>
+                                        </property>
+                                        <property name="sizeHint">
+                                            <size>
+                                                <width>8</width>
+                                                <height>8</height>
+                                            </size>
+                                        </property>
+                                    </spacer>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>PortMaxTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Port Ma&amp;ximum:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>PortMaxComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox">
+                                        <item>
+                                            <property name="text">
+                                                <string>64</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>128</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>256</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>512</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>PortMaxComboBox</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>5</hsizetype>
+                                                <vsizetype>0</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>60</width>
+                                                <height>0</height>
+                                            </size>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="currentItem">
+                                            <number>1</number>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Maximum number of ports the JACK server can manage</string>
+                                        </property>
+                                    </widget>
+                                    <spacer>
+                                        <property name="name">
+                                            <cstring>spacer27</cstring>
+                                        </property>
+                                        <property name="orientation">
+                                            <enum>Horizontal</enum>
+                                        </property>
+                                        <property name="sizeType">
+                                            <enum>Expanding</enum>
+                                        </property>
+                                        <property name="sizeHint">
+                                            <size>
+                                                <width>8</width>
+                                                <height>8</height>
+                                            </size>
+                                        </property>
+                                    </spacer>
                                     <widget class="QLabel">
                                         <property name="name">
                                             <cstring>LatencyTextLabel</cstring>
@@ -3402,6 +3508,12 @@
         <slot>settingsChanged()</slot>
     </connection>
     <connection>
+        <sender>PortMaxComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
         <sender>StartupScriptCheckBox</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3596,6 +3708,7 @@
     <tabstop>OutChannelsSpinBox</tabstop>
     <tabstop>StartDelayComboBox</tabstop>
     <tabstop>VerboseCheckBox</tabstop>
+    <tabstop>PortMaxComboBox</tabstop>
     <tabstop>StartupScriptCheckBox</tabstop>
     <tabstop>StartupScriptShellComboBox</tabstop>
     <tabstop>StartupScriptSymbolPushButton</tabstop>
@@ -3676,8 +3789,8 @@
     <function access="private" specifier="non virtual" returnType="bool">savePreset( const QString &amp; sPreset )</function>
     <function access="private" specifier="non virtual" returnType="bool">deletePreset( const QString &amp; sPreset )</function>
     <function access="private" specifier="non virtual">resetPresets()</function>
-    <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
     <function access="private" specifier="non virtual">computeLatency()</function>
+    <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>
     <function access="private" specifier="non virtual">symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButton )</function>
 </functions>
