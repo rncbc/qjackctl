@@ -5,6 +5,10 @@ ChangeLog
 
 0.2.13   2004-11-05  Retouches and minor optimizations.
 
+- Main window is now properly minimized instead of simply hidden when
+  the system tray icon is not available nor opted in (as suggested
+  by Florian Schmidt).
+  
 - Some informational status items are now updated 10 times less frequently
   (e.g. CPU Load, Sample Rate, Buffer Size, Realtime Mode, etc.), lowering
   the CPU burden of most probably redundant status updates.

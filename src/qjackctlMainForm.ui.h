@@ -1690,7 +1690,13 @@ void qjackctlMainForm::toggleMainForm (void)
 {
     m_pSetup->saveWidgetGeometry(this);
     if (isVisible()) {
-        hide();
+        if (m_pSetup->bSystemTray && m_pSystemTray) {
+            // Hide away from sight.
+            hide();
+        } else {
+            // Minimize (iconify) normally.
+            setWindowState(Qt::WindowMinimized);
+        }
     } else {
         show();
         raise();
@@ -2137,7 +2143,9 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     int iItemID;
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
-    pContextMenu->insertItem(isVisible() ? tr("&Hide") : tr("S&how"), this, SLOT(toggleMainForm()));
+    QString sHideMinimize = (m_pSetup->bSystemTray && m_pSystemTray ? tr("&Hide") : tr("Mi&nimize"));
+    QString sShowRestore  = (m_pSetup->bSystemTray && m_pSystemTray ? tr("S&how") : tr("Rest&ore"));
+    pContextMenu->insertItem(isVisible() ? sHideMinimize : sShowRestore, this, SLOT(toggleMainForm()));
     pContextMenu->insertSeparator();
 
     if (m_pJackClient == NULL) {
