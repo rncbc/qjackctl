@@ -133,6 +133,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 
     // The main display shiny effect option.
     DisplayEffectCheckBox->setChecked(m_pSetup->bDisplayEffect);
+    toggleDisplayEffect(m_pSetup->bDisplayEffect);
 
     // Connections view icon size.
     ConnectionsIconSizeComboBox->setCurrentItem(m_pSetup->iConnectionsIconSize);
@@ -684,6 +685,19 @@ void qjackctlSetupForm::chooseDisplayFont2()
         DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
         optionsChanged();
     }
+}
+
+
+// The channel display effect demo changer.
+void qjackctlSetupForm::toggleDisplayEffect ( bool bOn )
+{
+    QPixmap pm;
+    if (bOn)
+        pm = QPixmap::fromMimeSource("displaybg1.png");
+
+    DisplayFont1TextLabel->setPaletteBackgroundPixmap(pm);
+    DisplayFont2TextLabel->setPaletteBackgroundPixmap(pm);
+    optionsChanged();
 }
 
 

@@ -2744,6 +2744,9 @@
                                                 <blue>0</blue>
                                             </color>
                                         </property>
+                                        <property name="paletteBackgroundPixmap">
+                                            <pixmap>displaybg1.png</pixmap>
+                                        </property>
                                         <property name="font">
                                             <font>
                                                 <bold>0</bold>
@@ -2799,6 +2802,9 @@
                                                 <green>0</green>
                                                 <blue>0</blue>
                                             </color>
+                                        </property>
+                                        <property name="paletteBackgroundPixmap">
+                                            <pixmap>displaybg1.png</pixmap>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -3931,9 +3937,9 @@
     </connection>
     <connection>
         <sender>DisplayEffectCheckBox</sender>
-        <signal>stateChanged(int)</signal>
+        <signal>toggled(bool)</signal>
         <receiver>qjackctlSetupForm</receiver>
-        <slot>optionsChanged()</slot>
+        <slot>toggleDisplayEffect(bool)</slot>
     </connection>
     <connection>
         <sender>MessagesLimitCheckBox</sender>
@@ -4111,6 +4117,7 @@
     <slot specifier="non virtual">browseActivePatchbayPath()</slot>
     <slot specifier="non virtual">chooseDisplayFont1()</slot>
     <slot specifier="non virtual">chooseDisplayFont2()</slot>
+    <slot specifier="non virtual">toggleDisplayEffect( bool bOn )</slot>
     <slot specifier="non virtual">chooseMessagesFont()</slot>
     <slot specifier="non virtual">chooseConnectionsFont()</slot>
     <slot specifier="non virtual">settingsChanged()</slot>

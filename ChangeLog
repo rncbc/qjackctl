@@ -9,18 +9,20 @@ ChangeLog
   to jack_port_by_name() (discovered and solved, thanks to Jesse Chappell);
   some other free() and configure fixes were also applied.
 
-- Connection line width follows icon size in discrete proportion.
+- Shiny display effect toggling has immediate feedback on setup dialog.
 
 - Added new usx2y driver support (EXPERIMENTAL).
+
+- New scaled connections/patchbay icons were added; meanwhile, all inline
+  XPM icons were removed and brainlessly converted to PNG format.
 
 - New setup options as for the connections/patchbay view apprearence: larger
   icon sizes and font selection are now possible, to better ease manipulation
   on a touchscreen (feature requested for Lionstracs' Mediastation).
 
-- "Other" setup options moved to a new dialog tab, "Misc".
+- Connection line width follows icon size in discrete proportion.
 
-- New scaled connections/patchbay icons were added; meanwhile, all inline
-  XPM icons were removed and brainlessly converted to PNG format.
+- "Other" setup options moved to a new dialog tab, "Misc".
 
 
 0.2.11   2004-09-10  Shiny display now optional and other fixes.
