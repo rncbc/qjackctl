@@ -408,7 +408,7 @@ public slots:
 
     // Complete patchbay clearer.
     void clear();
-    
+
     // Do actual and complete connections snapshot.
     void connectionsSnapshot();
 
@@ -421,6 +421,10 @@ private:
     // Connect/Disconnection primitives.
     void connectSockets(qjackctlSocketItem *pOSocket, qjackctlSocketItem *pISocket);
     void disconnectSockets(qjackctlSocketItem *pOSocket, qjackctlSocketItem *pISocket);
+
+    // Output socket-plug connection snapshot subroutines.
+    void socketPlugAudioSnapshot(qjackctlSocketItem *pOSocket, qjackctlPlugItem *pOPlug);
+    void socketPlugMidiSnapshot(qjackctlSocketItem *pOSocket, qjackctlPlugItem *pOPlug);
 
     // Instance variables.
     qjackctlPatchbayView *m_pPatchbayView;

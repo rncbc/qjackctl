@@ -1452,7 +1452,7 @@ void qjackctlPatchbay::loadRack ( qjackctlPatchbayRack *pPatchbayRack )
 
     (m_pOSocketList->listView())->setUpdatesEnabled(true);
     (m_pISocketList->listView())->setUpdatesEnabled(true);
-    
+
     (m_pOSocketList->listView())->triggerUpdate();
     (m_pISocketList->listView())->triggerUpdate();
 
@@ -1529,16 +1529,103 @@ snd_seq_t *qjackctlPatchbay::alsaSeq (void)
 }
 
 
+// Audio connections snapshot.
+void qjackctlPatchbay::socketPlugAudioSnapshot ( qjackctlSocketItem *pOSocket, qjackctlPlugItem *pOPlug )
+{
+    // Audio and MIDI engine descriptors...
+    jack_client_t *pJackClient = jackClient();
+
+    // Get current JACK port connections...
+    QString sOClientPort = pOSocket->socketName() + ":" + pOPlug->plugName();
+    const char **ppszIClientPorts = jack_port_get_all_connections(pJackClient, jack_port_by_name(pJackClient, sOClientPort.latin1()));
+    if (ppszIClientPorts) {
+        // Now, for each input client port...
+        int iIClientPort = 0;
+        while (ppszIClientPorts[iIClientPort]) {
+            QString sIClientPort = ppszIClientPorts[iIClientPort];
+            int iColon = sIClientPort.find(":");
+            if (iColon >= 0) {
+                qjackctlSocketItem *pISocket = m_pISocketList->findSocket(sIClientPort.left(iColon));
+                if (pISocket)
+                    connectSockets(pOSocket, pISocket);
+            }
+            iIClientPort++;
+        }
+        ::free(ppszIClientPorts);
+    }
+}
+
+
+// MIDI connections snapshot.
+void qjackctlPatchbay::socketPlugMidiSnapshot ( qjackctlSocketItem *pOSocket, qjackctlPlugItem *pOPlug )
+{
+    // ALSA sequencer descriptors...
+    snd_seq_t *pAlsaSeq = alsaSeq();
+
+    // ALSA subscriber structures.
+    snd_seq_query_subscribe_t *pAlsaSubs;
+    snd_seq_addr_t seq_addr;
+    snd_seq_query_subscribe_alloca(&pAlsaSubs);
+
+    // ALSA readable (output) client ports...
+    snd_seq_client_info_t *pOClientInfo;
+    snd_seq_port_info_t   *pOPortInfo;
+    unsigned int uiOFlags = SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_SUBS_READ;
+
+    snd_seq_client_info_alloca(&pOClientInfo);
+    snd_seq_port_info_alloca(&pOPortInfo);
+
+    // ALSA sequencer writable (input) client ports...
+    snd_seq_client_info_t *pIClientInfo;
+    snd_seq_client_info_alloca(&pIClientInfo);
+
+    // Get current MIDI port connections...
+    snd_seq_client_info_set_client(pOClientInfo, -1);
+    while (snd_seq_query_next_client(pAlsaSeq, pOClientInfo) >= 0) {
+        int iOClient = snd_seq_client_info_get_client(pOClientInfo);
+        if (iOClient > 0) {
+            QString sOClientName = snd_seq_client_info_get_name(pOClientInfo);
+            if (sOClientName == pOSocket->clientName()) {
+                snd_seq_port_info_set_client(pOPortInfo, iOClient);
+                snd_seq_port_info_set_port(pOPortInfo, -1);
+                while (snd_seq_query_next_port(pAlsaSeq, pOPortInfo) >= 0) {
+                    unsigned int uiOCapability = snd_seq_port_info_get_capability(pOPortInfo);
+                    if (((uiOCapability & uiOFlags) == uiOFlags) &&
+                        ((uiOCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
+                        QString sOPortName = snd_seq_port_info_get_name(pOPortInfo);
+                        if (sOPortName == pOPlug->plugName()) {
+                            int iOPort = snd_seq_port_info_get_port(pOPortInfo);
+                            // Now, look for subscribers of his port...
+                            snd_seq_query_subscribe_set_type(pAlsaSubs, SND_SEQ_QUERY_SUBS_READ);
+                            snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
+                            seq_addr.client = iOClient;
+                            seq_addr.port   = iOPort;
+                            snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
+                            while (snd_seq_query_port_subscribers(pAlsaSeq, pAlsaSubs) >= 0) {
+                                seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
+                                if (snd_seq_get_any_client_info(pAlsaSeq, seq_addr.client, pIClientInfo) == 0) {
+                                    QString sIClientName = snd_seq_client_info_get_name(pIClientInfo);
+                                    qjackctlSocketItem *pISocket = m_pISocketList->findSocket(sIClientName);
+                                    if (pISocket)
+                                        connectSockets(pOSocket, pISocket);
+                                }
+                                snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 // Connections snapshot.
 void qjackctlPatchbay::connectionsSnapshot (void)
 {
     // Take snapshot of client port list.
     m_pOSocketList->clientPortsSnapshot();
     m_pISocketList->clientPortsSnapshot();
-
-    // Audio and MIDI engine descriptors...
-    jack_client_t *pJackClient = m_pOSocketList->jackClient();
-    snd_seq_t     *pAlsaSeq    = m_pOSocketList->alsaSeq();
 
     // Then, starting from output sockets, try to grab the connections...
     for (qjackctlSocketItem *pOSocket = m_pOSocketList->sockets().first();
@@ -1554,33 +1641,14 @@ void qjackctlPatchbay::connectionsSnapshot (void)
             switch (pOSocket->socketType()) {
 
               case QJACKCTL_SOCKETTYPE_AUDIO:
-              {
                 // Get current JACK port connections...
-                QString sOClientPort = pOSocket->socketName() + ":" + pOPlug->plugName();
-                const char **ppszIClientPorts = jack_port_get_all_connections(pJackClient, jack_port_by_name(pJackClient, sOClientPort.latin1()));
-                if (ppszIClientPorts) {
-                    // Now, for each input client port...
-                    int iIClientPort = 0;
-                    while (ppszIClientPorts[iIClientPort]) {
-                        QString sIClientPort = ppszIClientPorts[iIClientPort];
-                        int iColon = sIClientPort.find(":");
-                        if (iColon >= 0) {
-                            qjackctlSocketItem *pISocket = m_pISocketList->findSocket(sIClientPort.left(iColon));
-                            if (pISocket)
-                                connectSockets(pOSocket, pISocket);
-                        }
-                        iIClientPort++;
-                    }
-                    ::free(ppszIClientPorts);
-                }
+                socketPlugAudioSnapshot(pOSocket, pOPlug);
                 break;
-              }
 
               case QJACKCTL_SOCKETTYPE_MIDI:
-              {
-                // TODO: Get current MIDI port connections...
+                // Get current MIDI port connections...
+                socketPlugMidiSnapshot(pOSocket, pOPlug);
                 break;
-              }
            }
         }
     }
