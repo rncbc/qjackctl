@@ -477,6 +477,11 @@ void qjackctlMainForm::startJack (void)
 // Stop jack audio server...
 void qjackctlMainForm::stopJack (void)
 {
+    // Clear timer counters...
+    m_iStartDelay  = 0;
+    m_iTimerDelay  = 0;
+    m_iJackRefresh = 0;
+
     // Stop client code.
     stopJackClient();
 
@@ -814,8 +819,7 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem, const QTime& t, b
     // Display time remaining on start delay...
     if (m_iTimerDelay < m_iStartDelay)
         TimeDisplayTextLabel->setText(formatTime((m_iStartDelay - m_iTimerDelay) / 1000));
-    else
-    // Display elapsed time as big time?
+    else // Display elapsed time as big time?
     if ((iStatusItem == STATUS_RESET_TIME && m_pSetup->iTimeDisplay == DISPLAY_RESET_TIME) ||
         (iStatusItem == STATUS_XRUN_TIME  && m_pSetup->iTimeDisplay == DISPLAY_XRUN_TIME)) {
         TimeDisplayTextLabel->setText(sTemp);
@@ -1286,6 +1290,8 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     refreshConnections();
 
     // Displayes are highlighted from now on.
+    ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
+    CpuLoadTextLabel->setPaletteForegroundColor(Qt::yellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::green);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::green);
@@ -1356,6 +1362,8 @@ void qjackctlMainForm::stopJackClient (void)
     m_iShutNotify = 0;
 
     // Displays are deemed again.
+    ServerStateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
+    CpuLoadTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::darkGreen);

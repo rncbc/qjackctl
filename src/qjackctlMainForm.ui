@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>442</width>
-            <height>103</height>
+            <width>500</width>
+            <height>96</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -113,8 +113,8 @@
                             </property>
                             <property name="paletteForegroundColor">
                                 <color>
-                                    <red>255</red>
-                                    <green>255</green>
+                                    <red>170</red>
+                                    <green>170</green>
                                     <blue>0</blue>
                                 </color>
                             </property>
@@ -141,8 +141,8 @@
                             </property>
                             <property name="paletteForegroundColor">
                                 <color>
-                                    <red>255</red>
-                                    <green>255</green>
+                                    <red>170</red>
+                                    <green>170</green>
                                     <blue>0</blue>
                                 </color>
                             </property>
@@ -169,8 +169,8 @@
                             </property>
                             <property name="paletteForegroundColor">
                                 <color>
-                                    <red>255</red>
-                                    <green>192</green>
+                                    <red>170</red>
+                                    <green>170</green>
                                     <blue>0</blue>
                                 </color>
                             </property>
@@ -718,7 +718,6 @@
     <slot specifier="non virtual">timerSlot( void )</slot>
     <slot specifier="non virtual">jackConnectChanged( void )</slot>
     <slot specifier="non virtual">alsaConnectChanged( void )</slot>
-    <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
     <slot specifier="non virtual">toggleMessagesForm( void )</slot>
     <slot specifier="non virtual">toggleStatusForm( void )</slot>
     <slot specifier="non virtual">toggleConnectionsForm( void )</slot>
@@ -727,6 +726,7 @@
     <slot specifier="non virtual">showAboutForm( void )</slot>
     <slot specifier="non virtual">transportStart()</slot>
     <slot specifier="non virtual">transportStop()</slot>
+    <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
