@@ -38,8 +38,9 @@ void qjackctlStatusForm::init (void)
     StatsListView->setSorting(3); // Initially unsorted.
 
     m_apStatus[STATUS_RESET_TIME] = new QListViewItem(StatsListView, s + tr("Time of last reset") + c, n);
+#ifdef CONFIG_JACK_MAX_DELAY
     m_apStatus[STATUS_MAX_DELAY]  = new QListViewItem(StatsListView, s + tr("Maximum scheduling delay") + c, n);
-
+#endif
     pViewItem = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, n);
     m_apStatus[STATUS_XRUN_COUNT] = pViewItem;
     m_apStatus[STATUS_XRUN_TOTAL] = new QListViewItem(pViewItem, s + tr("XRUN total") + c, n);

@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.13   2004-10-22  Work in progress...
+0.2.13   2004-10-26  Work in progress...
 
 - XRUN detection and statistics are being conditionally included if
   jack_get_xrun_delayed_usecs() is available (as of JACK 0.99.7+).
