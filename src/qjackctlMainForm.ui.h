@@ -2253,7 +2253,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("patchbay1.png")),
         tr("Patch&bay"), this, SLOT(togglePatchbayForm()));
     pContextMenu->setItemChecked(iItemID, m_pPatchbayForm && m_pPatchbayForm->isVisible());
-    iItemID = pContextMenu->insertSeparator();
+    pContextMenu->insertSeparator();
 
     pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("setup1.png")),
         tr("S&etup..."), this, SLOT(showSetupForm()));
