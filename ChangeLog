@@ -6,7 +6,9 @@ ChangeLog
 0.2.6   2004-02-27  More work in progress.
 
 - Message window line limit is now a configurable option on setup, as is
-  whether the command-line local configuration file gets saved at all.
+  whether the command-line local configuration file gets saved at all;
+  the first argument of the command-line configuration is stuffed
+  to be the executable server command absolute path, when possible. 
 
 - Warning message issued if ALSA sequencer is not available on startup;
   also if server settings are changed while client is currently active.
@@ -15,7 +17,7 @@ ChangeLog
   variable JACK_NO_START_SERVER at startup; with any luck this will
   maintain qjackctl's behaviour whether the JACK server is already 
   started or not.
-  
+
 - Makefile.cvs makes its late entrance on the build toolset.
 
   

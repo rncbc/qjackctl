@@ -411,8 +411,22 @@ void qjackctlMainForm::startJack (void)
     // The unforgiveable signal communication...
     QObject::connect(m_pJack, SIGNAL(processExited()), this, SLOT(processJackExit()));
 
+    // Look for the executable in the search path;
+    // this enforces the server command to be an 
+    // executable absolute path whenever possible.
+    QString sCommand = m_preset.sServer;
+    if (!sCommand.contains('/')) {
+        QStringList list = QStringList::split(':', ::getenv("PATH"));
+        for (QStringList::Iterator iter = list.begin(); iter != list.end(); ++iter) {
+            QString sDirectory = *iter;
+            QFileInfo fileinfo(sDirectory + "/" + sCommand);
+            if (fileinfo.isExecutable())
+                sCommand = fileinfo.filePath();
+       }
+    }
+    
     // Build process arguments...
-    m_pJack->addArgument(m_preset.sServer);
+    m_pJack->addArgument(sCommand);
     if (m_preset.bVerbose)
         m_pJack->addArgument("-v");
     if (m_preset.bRealtime)
@@ -487,11 +501,10 @@ void qjackctlMainForm::startJack (void)
     }
 
     appendMessages(tr("JACK is starting..."));
-    QStringList list = m_pJack->arguments();
-    QStringList::Iterator iter = list.begin();
+    QStringList args = m_pJack->arguments();    
     m_sJackCmdLine = "";
-    while (iter != list.end()) {
-	    m_sJackCmdLine += *iter++;
+    for (QStringList::Iterator iter = args.begin(); iter != args.end(); ++iter) {
+	    m_sJackCmdLine += *iter;
         m_sJackCmdLine += " ";
     }
     m_sJackCmdLine = m_sJackCmdLine.stripWhiteSpace();
@@ -1415,7 +1428,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
         if (file.open(IO_WriteOnly | IO_Truncate)) {
             QTextStream(&file) << m_sJackCmdLine << endl;
             file.close();
-            appendMessages(tr("Server configuration saved to") + " " + sFilename);
+            appendMessagesColor(tr("Server configuration saved to") + " \"" + sFilename + "\"", "#999933");
         }
     }
     
