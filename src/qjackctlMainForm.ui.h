@@ -2149,7 +2149,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     m_pPresetsMenu->setItemParameter(iItemID, -1);
     QObject::connect(m_pPresetsMenu, SIGNAL(activated(int)), this, SLOT(activatePresetsMenu(int)));
     // Add presets menu to the main context menu...
-    pContextMenu->insertItem(tr("Preset"), m_pPresetsMenu);
+    pContextMenu->insertItem(tr("Presets"), m_pPresetsMenu);
     pContextMenu->insertSeparator();
 
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("messages1.png")),

@@ -9,7 +9,7 @@ qjackctlPatchbayFile format specification
         .
         .
         .
-      </output-socket>
+      </socket>
       .
       .
       .
