@@ -62,6 +62,7 @@ void qjackctlMainForm::init (void)
     m_pJack         = NULL;
     m_pJackClient   = NULL;
     m_bJackDetach   = false;
+    m_bJackSurvive  = false;
     m_pAlsaSeq      = NULL;
     m_iStartDelay   = 0;
     m_iTimerDelay   = 0;
@@ -209,12 +210,21 @@ bool qjackctlMainForm::queryClose (void)
     bool bQueryClose = true;
 
     if (m_pJack && m_pJack->isRunning() && m_pSetup->bQueryClose) {
-        bQueryClose = (QMessageBox::warning(this, tr("Warning"),
+        switch (QMessageBox::warning(this, tr("Warning"),
             tr("JACK is currently running.") + "\n\n" +
-            tr("Closing this application will also terminate the JACK audio server."),
-            tr("OK"), tr("Cancel")) == 0);
+            tr("Do you want to terminate the JACK audio server?"),
+            tr("Terminate"), tr("Leave"), tr("Cancel"))) {
+        case 0:     // Terminate...
+            break;
+        case 1:     // Leave...
+            m_bJackSurvive = true;
+            break;
+        default:    // Cancel.
+            bQueryClose = false;
+            break;
+        }
     }
-    
+
     // Try to save current patchbay default settings.
     if (bQueryClose && m_pPatchbayForm) {
         bQueryClose = m_pPatchbayForm->queryClose();
@@ -491,18 +501,17 @@ void qjackctlMainForm::stopJack (void)
     stopJackClient();
 
     // And try to stop server.
-    if (m_pJack == NULL) {
-        processJackExit();
-    } else {
+    if (m_pJack && !m_bJackSurvive) {
         appendMessages(tr("JACK is stopping..."));
         QString sTemp = tr("Stopping");
         setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
         updateStatus(STATUS_SERVER_STATE, sTemp);
         if (m_pJack->isRunning())
             m_pJack->tryTerminate();
-        else
-            processJackExit();
-    }
+     }
+
+     // Do final processing anyway.
+     processJackExit();
 }
 
 
@@ -551,15 +560,18 @@ void qjackctlMainForm::processJackExit (void)
 
     if (m_pJack) {
         // Force final server shutdown...
-        appendMessages(tr("JACK was stopped") + formatExitStatus(m_pJack->exitStatus()));
-        if (!m_pJack->normalExit())
-            m_pJack->kill();
+        if (!m_bJackSurvive) {
+            appendMessages(tr("JACK was stopped") + formatExitStatus(m_pJack->exitStatus()));
+            if (!m_pJack->normalExit())
+                m_pJack->kill();
+        }
+        // Destroy it.
         delete m_pJack;
+        m_pJack = NULL;
         // Do we have any shutdown script?...
-        if (m_pSetup->bShutdownScript && !m_pSetup->sShutdownScriptShell.isEmpty())
+        if (!m_bJackSurvive && m_pSetup->bShutdownScript && !m_pSetup->sShutdownScriptShell.isEmpty())
             shellExecute(m_pSetup->sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
     }
-    m_pJack = NULL;
 
     QString sTemp;
     if (m_bJackDetach)

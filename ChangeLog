@@ -3,6 +3,13 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.5  2004-02-05  Server survival option.
+
+- New option on application exit for leaving the JACK server daemon running,
+  surviving the parent process; the confirmation prompt on application close
+  now features a "Terminate", "Leave" and "Cancel" button options.
+
+
 0.2.4  2004-02-01  Exclusive patchbay sockets.
 
 - Patchbay definitions may now be configured with exclusive sockets;

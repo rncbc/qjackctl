@@ -666,6 +666,7 @@
     <variable access="private">QProcess *m_pJack;</variable>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">bool m_bJackDetach;</variable>
+    <variable access="private">bool m_bJackSurvive;</variable>
     <variable access="private">snd_seq_t *m_pAlsaSeq;</variable>
     <variable access="private">int m_iStartDelay;</variable>
     <variable access="private">int m_iTimerDelay;</variable>
