@@ -40,6 +40,9 @@
 // Timer constant stuff.
 #define QJACKCTL_TIMER_MSECS    200
 
+// Status refresh cycle (~2 secs)
+#define QJACKCTL_STATUS_CYCLE   10
+
 // Server display enumerated states.
 #define QJACKCTL_INACTIVE       0
 #define QJACKCTL_ACTIVATING     1
@@ -84,6 +87,8 @@ void qjackctlMainForm::init (void)
     m_iAlsaRefresh  = 0;
     m_iJackDirty    = 0;
     m_iAlsaDirty    = 0;
+
+    m_iStatusRefresh = 0;
 
     m_iPatchbayRefresh = 0;
 
@@ -1879,40 +1884,15 @@ void qjackctlMainForm::refreshStatus (void)
     const QString b = "--:--.----";
     const QString sStopped = tr("Stopped");
 
+    m_iStatusRefresh++;
+    
     if (m_pJackClient) {
         const QString s = " ";
-        updateStatusItem(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
-        updateStatusItem(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
-        updateStatusItem(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
-#ifdef CONFIG_JACK_REALTIME
-        bool bRealtime = jack_is_realtime(m_pJackClient);
-        updateStatusItem(STATUS_REALTIME, (bRealtime ? tr("Yes") : tr("No")));
-        ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
-#else
-        updateStatusItem(STATUS_REALTIME, n);
-        ServerModeTextLabel->setText(n);
-#endif  // !CONFIG_JACK_REALTIME
 #ifdef CONFIG_JACK_TRANSPORT
         QString sText = n;
         jack_position_t tpos;
         jack_transport_state_t tstate = jack_transport_query(m_pJackClient, &tpos);
         bool bPlaying = (tstate == JackTransportRolling || tstate == JackTransportLooping);
-        switch (tstate) {
-          case JackTransportStarting:
-            sText = tr("Starting");
-            break;
-          case JackTransportRolling:
-            sText = tr("Rolling");
-            break;
-          case JackTransportLooping:
-            sText = tr("Looping");
-            break;
-          case JackTransportStopped:
-          default:
-            sText = sStopped;
-            break;
-        }
-        updateStatusItem(STATUS_TRANSPORT_STATE, sText);
         // Transport timecode position.
     //  if (bPlaying)
             updateStatusItem(STATUS_TRANSPORT_TIME, formatTime((double) tpos.frame / (double) tpos.frame_rate));
@@ -1926,20 +1906,55 @@ void qjackctlMainForm::refreshStatus (void)
             updateStatusItem(STATUS_TRANSPORT_BBT, b);
             updateStatusItem(STATUS_TRANSPORT_BPM, n);
         }
-        PlayPushButton->setEnabled(tstate == JackTransportStopped);
-        PausePushButton->setEnabled(bPlaying);
-#else   // !CONFIG_JACK_TRANSPORT
-        updateStatusItem(STATUS_TRANSPORT_STATE, n);
-        updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
-        updateStatusItem(STATUS_TRANSPORT_BBT, b);
-        updateStatusItem(STATUS_TRANSPORT_BPM, n);
-        PlayPushButton->setEnabled(false);
-        PausePushButton->setEnabled(false);
-#endif
+#endif  // !CONFIG_JACK_TRANSPORT
+        // Less frequent status items update...
+        if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
+            m_iStatusRefresh = 0;
+            updateStatusItem(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
+            updateStatusItem(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
+            updateStatusItem(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
+#ifdef CONFIG_JACK_REALTIME
+            bool bRealtime = jack_is_realtime(m_pJackClient);
+            updateStatusItem(STATUS_REALTIME, (bRealtime ? tr("Yes") : tr("No")));
+            ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
+#else
+            updateStatusItem(STATUS_REALTIME, n);
+            ServerModeTextLabel->setText(n);
+#endif  // !CONFIG_JACK_REALTIME
+#ifdef CONFIG_JACK_TRANSPORT
+            switch (tstate) {
+              case JackTransportStarting:
+                sText = tr("Starting");
+                break;
+              case JackTransportRolling:
+                sText = tr("Rolling");
+                break;
+              case JackTransportLooping:
+                sText = tr("Looping");
+                break;
+              case JackTransportStopped:
+              default:
+                sText = sStopped;
+                break;
+            }
+            updateStatusItem(STATUS_TRANSPORT_STATE, sText);
+            PlayPushButton->setEnabled(tstate == JackTransportStopped);
+            PausePushButton->setEnabled(bPlaying);
+#else
+            updateStatusItem(STATUS_TRANSPORT_STATE, n);
+            PlayPushButton->setEnabled(false);
+            PausePushButton->setEnabled(false);
+            updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
+            updateStatusItem(STATUS_TRANSPORT_BBT, b);
+            updateStatusItem(STATUS_TRANSPORT_BPM, n);
+#endif  // !CONFIG_JACK_TRANSPORT
 #ifdef CONFIG_JACK_MAX_DELAY
-        updateStatusItem(STATUS_MAX_DELAY, QString::number(0.001 * jack_get_max_delayed_usecs(m_pJackClient)) + " " + tr("msec"));
+            updateStatusItem(STATUS_MAX_DELAY, QString::number(0.001 * jack_get_max_delayed_usecs(m_pJackClient)) + " " + tr("msec"));
 #endif
-    } else {
+        }
+    }   // No need to update often if we're just idle...
+    else if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
+        m_iStatusRefresh = 0;
         updateStatusItem(STATUS_CPU_LOAD, n);
         updateStatusItem(STATUS_SAMPLE_RATE, n);
         updateStatusItem(STATUS_BUFFER_SIZE, n);
@@ -1953,6 +1968,7 @@ void qjackctlMainForm::refreshStatus (void)
         PausePushButton->setEnabled(false);
     }
 
+    // Elapsed times should be rigorous...
     updateElapsedTimes();
 }
 
@@ -2238,5 +2254,6 @@ void qjackctlMainForm::contextMenuEvent( QContextMenuEvent *pEvent )
     // We'll just show up the usual system tray menu.
     systemTrayContextMenu(pEvent->globalPos());
 }
+
 
 // end of qjackctlMainForm.ui.h

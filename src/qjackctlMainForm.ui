@@ -657,6 +657,7 @@
     <variable access="private">int m_iAlsaRefresh;</variable>
     <variable access="private">int m_iJackDirty;</variable>
     <variable access="private">int m_iAlsaDirty;</variable>
+    <variable access="private">int m_iStatusRefresh;</variable>
     <variable access="private">int m_iPatchbayRefresh;</variable>
     <variable access="private">QSocketNotifier *m_pStdoutNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pAlsaNotifier;</variable>
