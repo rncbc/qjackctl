@@ -774,6 +774,22 @@ void qjackctlMainForm::updateXrunCount (void)
     updateStatus(STATUS_XRUN_COUNT, sText);
 }
 
+// Convert whole elapsed seconds to hh:mm:ss time format.
+QString qjackctlMainForm::formatTime ( int iSeconds )
+{
+    int iHours   = 0;
+    int iMinutes = 0;
+    if (iSeconds >= 3600) {
+        iHours = (iSeconds / 3600);
+        iSeconds -= (iHours * 3600);
+    }
+    if (iSeconds >= 60) {
+        iMinutes = (iSeconds / 60);
+        iSeconds -= (iMinutes * 60);
+    }
+    return QTime(iHours, iMinutes, iSeconds).toString();
+}
+
 
 // Update the XRUN last/elapsed time item.
 QString qjackctlMainForm::formatElapsedTime ( int iStatusItem, const QTime& t, bool bElapsed )
@@ -789,22 +805,16 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem, const QTime& t, b
         if (m_pJackClient) {
             int iSeconds = (t.elapsed() / 1000);
             if (bElapsed && iSeconds > 0) {
-                int iHours   = 0;
-                int iMinutes = 0;
-                if (iSeconds >= 3600) {
-                    iHours = (iSeconds / 3600);
-                    iSeconds -= (iHours * 3600);
-                }
-                if (iSeconds >= 60) {
-                    iMinutes = (iSeconds / 60);
-                    iSeconds -= (iMinutes * 60);
-                }
-                sTemp = QTime(iHours, iMinutes, iSeconds).toString();
+                sTemp = formatTime(iSeconds);
                 sText += " (" + sTemp + ")";
             }
         }
     }
 
+    // Display time remaining on start delay...
+    if (m_iTimerDelay < m_iStartDelay)
+        TimeDisplayTextLabel->setText("-" + formatTime((m_iStartDelay - m_iTimerDelay) / 1000));
+    else
     // Display elapsed time as big time?
     if ((iStatusItem == STATUS_RESET_TIME && m_pSetup->iTimeDisplay == DISPLAY_RESET_TIME) ||
         (iStatusItem == STATUS_XRUN_TIME  && m_pSetup->iTimeDisplay == DISPLAY_XRUN_TIME)) {
@@ -1030,8 +1040,11 @@ void qjackctlMainForm::timerSlot (void)
     // Is it the first shot on server start after a few delay?
     if (m_iTimerDelay < m_iStartDelay) {
         m_iTimerDelay += QJACKCTL_TIMER_MSECS;
-        if (m_iTimerDelay >= m_iStartDelay)
-            startJackClient(false);
+        if (m_iTimerDelay >= m_iStartDelay) {
+            // If we cannot start it now, maybe a lil'later ;)
+            if (!startJackClient(false))
+                m_iTimerDelay = 0;
+        }
     }
 
     // Is the connection patchbay dirty enough?
@@ -1272,6 +1285,12 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // Remember to schedule an initial connection refreshment.
     refreshConnections();
 
+    // Displayes are highlighted from now on.
+    TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
+    TransportStateTextLabel->setPaletteForegroundColor(Qt::green);
+    TransportBPMTextLabel->setPaletteForegroundColor(Qt::green);
+    TransportTimeTextLabel->setPaletteForegroundColor(Qt::green);
+
     // If we've started detached, just change active status.
     if (m_bJackDetach) {
         QString sTemp = tr("Active");
@@ -1335,6 +1354,12 @@ void qjackctlMainForm::stopJackClient (void)
         delete m_pShutNotifier;
     m_pShutNotifier = NULL;
     m_iShutNotify = 0;
+
+    // Displays are deemed again.
+    TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
+    TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
+    TransportBPMTextLabel->setPaletteForegroundColor(Qt::darkGreen);
+    TransportTimeTextLabel->setPaletteForegroundColor(Qt::darkGreen);
 
     // Refresh jack client statistics explicitly.
     refreshXrunStats();
@@ -1524,7 +1549,6 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatus(STATUS_REALTIME, n);
 #endif
 #ifdef CONFIG_JACK_TRANSPORT
-        char    szText[32];
         QString sText = n;
         jack_position_t tpos;
         jack_transport_state_t tstate = jack_transport_query(m_pJackClient, &tpos);
@@ -1545,26 +1569,13 @@ void qjackctlMainForm::refreshStatus (void)
         }
         updateStatus(STATUS_TRANSPORT_STATE, sText);
         // Transport timecode position (hh:mm:ss).
-    //  if (bPlaying) {
-            unsigned int hh, mm, ss;
-        //  unsigned int dd;
-            double tt = (double) (tpos.frame / tpos.frame_rate);
-            hh  = (unsigned int) (tt / 3600.0);
-            tt -= (double) (hh * 3600.0);
-            mm  = (unsigned int) (tt / 60.0);
-            tt -= (double) (mm * 60.0);
-            ss  = (unsigned int) tt;
-        //  tt -= (double) ss;
-        //  dd  = (unsigned int) (tt * 100.0);
-            snprintf(szText, sizeof(szText), "%02u:%02u:%02u", hh, mm, ss);
-            updateStatus(STATUS_TRANSPORT_TIME, szText);
-    //  } else {
+    //  if (bPlaying)
+            updateStatus(STATUS_TRANSPORT_TIME, formatTime((int) (tpos.frame / tpos.frame_rate)));
+    //  else
     //      updateStatus(STATUS_TRANSPORT_TIME, t);
-    //  }
         // Transport barcode position (bar:beat.tick)
         if (tpos.valid & JackPositionBBT) {
-            snprintf(szText, sizeof(szText), "%u:%u.%u", tpos.bar, tpos.beat, tpos.tick);
-            updateStatus(STATUS_TRANSPORT_BBT, szText);
+            updateStatus(STATUS_TRANSPORT_BBT, QString::number(tpos.bar) + ":" + QString::number(tpos.beat) + "." + QString::number(tpos.tick));
             updateStatus(STATUS_TRANSPORT_BPM, QString::number(tpos.beats_per_minute));
         } else {
             updateStatus(STATUS_TRANSPORT_BBT, t);
