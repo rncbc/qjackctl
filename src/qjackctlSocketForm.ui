@@ -424,7 +424,7 @@
         <sender>PlugListView</sender>
         <signal>selectionChanged()</signal>
         <receiver>qjackctlSocketForm</receiver>
-        <slot>stabilizeForm()</slot>
+        <slot>selectedPlug()</slot>
     </connection>
     <connection>
         <sender>SocketNameLineEdit</sender>
@@ -511,6 +511,7 @@
     <slot specifier="non virtual">removePlug()</slot>
     <slot specifier="non virtual">moveUpPlug()</slot>
     <slot specifier="non virtual">moveDownPlug()</slot>
+    <slot specifier="non virtual">selectedPlug()</slot>
     <slot specifier="non virtual">activateAddPlugMenu(int)</slot>
     <slot specifier="non virtual">contextMenu(QListViewItem *, const QPoint&amp;, int)</slot>
     <slot specifier="non virtual">socketTypeChanged()</slot>

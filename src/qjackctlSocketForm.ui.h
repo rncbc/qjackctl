@@ -146,7 +146,11 @@ void qjackctlSocketForm::stabilizeForm()
         PlugUpPushButton->setEnabled(false);
         PlugDownPushButton->setEnabled(false);
     }
-    PlugAddPushButton->setEnabled(!PlugNameComboBox->currentText().isEmpty());
+    
+    bool bEnabled = !PlugNameComboBox->currentText().isEmpty();
+    if (bEnabled)
+        bEnabled = (PlugListView->findItem(PlugNameComboBox->currentText(), 0) == NULL);
+    PlugAddPushButton->setEnabled(bEnabled);
 }
 
 
@@ -201,6 +205,7 @@ void qjackctlSocketForm::addPlug()
         PlugNameComboBox->setCurrentText(QString::null);
     }
 
+    clientNameChanged();
     stabilizeForm();
 }
 
@@ -212,6 +217,7 @@ void qjackctlSocketForm::editPlug()
     if (pItem)
         pItem->startRename(0);
 
+    clientNameChanged();
     stabilizeForm();
 }
 
@@ -223,6 +229,7 @@ void qjackctlSocketForm::removePlug()
     if (pItem)
         delete pItem;
 
+    clientNameChanged();
     stabilizeForm();
 }
 
@@ -264,6 +271,16 @@ void qjackctlSocketForm::moveDownPlug()
             PlugListView->setCurrentItem(pItem);
         }
     }
+
+    stabilizeForm();
+}
+
+// Update selected plug one position down
+void qjackctlSocketForm::selectedPlug()
+{
+    QListViewItem *pItem = PlugListView->selectedItem();
+    if (pItem)
+        PlugNameComboBox->setCurrentText(pItem->text(0));
 
     stabilizeForm();
 }
@@ -434,8 +451,11 @@ void qjackctlSocketForm::clientNameChanged()
                 while (ppszClientPorts[iClientPort]) {
                     QString sClientPort = ppszClientPorts[iClientPort];
                     int iColon = sClientPort.find(":");
-                    if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon)))
-                        PlugNameComboBox->insertItem(sClientPort.right(sClientPort.length() - iColon - 1));
+                    if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
+                        QString sPort = sClientPort.right(sClientPort.length() - iColon - 1);
+                        if (PlugListView->findItem(sPort, 0) == NULL)
+                            PlugNameComboBox->insertItem(sPort);
+                    }
                     iClientPort++;
                 }
                 ::free(ppszClientPorts);
@@ -466,7 +486,8 @@ void qjackctlSocketForm::clientNameChanged()
                         if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
                             ((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
                             QString sPort = snd_seq_port_info_get_name(pPortInfo);
-                            PlugNameComboBox->insertItem(sPort);
+                            if (PlugListView->findItem(sPort, 0) == NULL)
+                                PlugNameComboBox->insertItem(sPort);
                         }
                     }
                 }

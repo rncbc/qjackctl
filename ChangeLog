@@ -22,9 +22,10 @@ ChangeLog
 
 - The snapshot option for creating a new patchbay definition from current
   actual connections now takes client and port names as regular expressions
-  and smart enough when regarding more than two contiguous decimal digits;
+  and smart enough when regarding more than two contiguous decimal digits :)
 
-- Patchbay socket list view ordering is now properly preserved.
+- Patchbay socket list view ordering is now properly preserved; socket
+  dialog gets plug list handling ehancements.
 
   
 0.2.4  2004-02-01  Exclusive patchbay sockets.
