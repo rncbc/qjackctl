@@ -28,9 +28,9 @@
 // Kind of constructor.
 void qjackctlSocketForm::init()
 {
-    m_pJackClient = NULL;
-    m_ulSocketFlags = 0;
-    m_pXpmPlug = NULL;
+    m_pJackClient  = NULL;
+    m_bReadable    = false;
+    m_pXpmPlug     = NULL;
     m_pAddPlugMenu = NULL;
 
     PlugListView->setSorting(-1);
@@ -67,17 +67,17 @@ void qjackctlSocketForm::setPlugPixmap ( QPixmap *pXpmPlug )
 
 
 // JACK client accessor.
-void qjackctlSocketForm::setJackClient ( jack_client_t *pJackClient, unsigned long ulSocketFlags )
+void qjackctlSocketForm::setJackClient ( jack_client_t *pJackClient, bool bReadable )
 {
     m_pJackClient = pJackClient;
-    m_ulSocketFlags = ulSocketFlags;
+    m_bReadable   = bReadable;
 
     ClientNameComboBox->clear();
 
     if (m_pJackClient == NULL)
         return;
         
-    const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, m_ulSocketFlags);
+    const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (m_bReadable ? JackPortIsOutput : JackPortIsInput));
     if (ppszClientPorts) {
         int iClientPort = 0;
         while (ppszClientPorts[iClientPort]) {
@@ -323,7 +323,7 @@ void qjackctlSocketForm::clientNameChanged()
         return;
 
     if (!sClientName.isEmpty()) {
-        const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, m_ulSocketFlags);
+        const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (m_bReadable ? JackPortIsOutput : JackPortIsInput));
         if (ppszClientPorts) {
             int iClientPort = 0;
             while (ppszClientPorts[iClientPort]) {

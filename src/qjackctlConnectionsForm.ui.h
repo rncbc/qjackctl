@@ -214,7 +214,10 @@ void qjackctlConnectionsForm::alsaStabilize ( void )
 // Either rebuild all connections now or notify main form for doing that later.
 void qjackctlConnectionsForm::refreshJack ( bool bEnabled )
 {
-    if (m_pJackConnect && bEnabled) {
+    if (m_pJackConnect == NULL)
+        return;
+        
+    if (bEnabled) {
         m_pJackConnect->refresh();
         stabilizeJack(true);
     } else {
@@ -226,7 +229,10 @@ void qjackctlConnectionsForm::refreshJack ( bool bEnabled )
 
 void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled )
 {
-    if (m_pAlsaConnect && bEnabled) {
+    if (m_pAlsaConnect == NULL)
+        return;
+        
+    if (bEnabled) {
         m_pAlsaConnect->refresh();
         stabilizeAlsa(true);
     } else {

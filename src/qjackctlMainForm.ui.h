@@ -69,7 +69,8 @@ void qjackctlMainForm::init (void)
     m_iTimerSlot   = 0;
     m_iJackRefresh = 0;
     m_iAlsaRefresh = 0;
-    m_iDirtyCount  = 0;
+    m_iJackDirty   = 0;
+    m_iAlsaDirty   = 0;
 
     m_pStdoutNotifier = NULL;
 
@@ -131,8 +132,8 @@ void qjackctlMainForm::init (void)
     m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
 
     // Set the patchbay cable connection notification signal/slot.
-    QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const char *,const char*,unsigned int)),
-        this, SLOT(cableConnectSlot(const char *,const char*,unsigned int)));
+    QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),
+        this, SLOT(cableConnectSlot(const QString&,const QString&,unsigned int)));
 
     // Register the timer slot.
     QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
@@ -686,9 +687,12 @@ void qjackctlMainForm::updateActivePatchbay (void)
         if (!qjackctlPatchbayFile::load(&m_patchbayRack, m_pSetup->sActivePatchbayPath)) {
             appendMessagesError(tr("Could not load active patchbay definition. Disabled."));
             m_pSetup->bActivePatchbay = false;
-        }   // If we're up and running, make it dirty :)
-        else if (m_pJackClient) {
-            m_iDirtyCount++;
+        } else {
+            // If we're up and running, make it dirty :)
+            if (m_pJackClient)
+                m_iJackDirty++;
+            if (m_pAlsaSeq)
+                m_iAlsaDirty++;
         }
     }
 }
@@ -985,7 +989,7 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
     // Do what has to be done.
     refreshAlsaConnections();
     // Log some message here.
-    appendMessagesColor(tr("MIDI connection graph change."), "#cc9966");
+    appendMessagesColor(tr("MIDI connection graph change."), "#66cc99");
 
     m_iAlsaNotify--;
 }
@@ -1002,13 +1006,22 @@ void qjackctlMainForm::timerSlot (void)
 
     // Is the connection patchbay dirty enough?
     if (m_pConnectionsForm) {
-        // Are we about to enforce a connections persistence profile?
-        if (m_iDirtyCount > 0) {
-            m_iDirtyCount = 0;
+        // Are we about to enforce an audio connections persistence profile?
+        if (m_iJackDirty > 0) {
+            m_iJackDirty = 0;
             if (m_pSetup->bActivePatchbay) {
-                appendMessagesColor(tr("Active patchbay scan") + "...", "#6699cc");
-                m_patchbayRack.connectScan(m_pJackClient);
-                refreshConnections();
+                appendMessagesColor(tr("Audio active patchbay scan") + "...", "#6699cc");
+                m_patchbayRack.connectAudioScan(m_pJackClient);
+                refreshJackConnections();
+            }
+        }
+        // Or is it from the MIDI field?
+        if (m_iAlsaDirty > 0) {
+            m_iAlsaDirty = 0;
+            if (m_pSetup->bActivePatchbay) {
+                appendMessagesColor(tr("MIDI active patchbay scan") + "...", "#99cc66");
+                m_patchbayRack.connectMidiScan(m_pAlsaSeq);
+                refreshAlsaConnections();
             }
         }
         // Shall we refresh connections now and then?
@@ -1033,32 +1046,30 @@ void qjackctlMainForm::timerSlot (void)
 // JACK connection notification slot.
 void qjackctlMainForm::jackConnectChanged (void)
 {
-    // Just shake the connection status quo.
-    m_iDirtyCount++;
-    
-    appendMessagesColor(tr("Audio connection change") + ".", "#9999cc");
+    // Just shake the audio connections status quo.
+    if (++m_iJackDirty == 1)
+        appendMessagesColor(tr("Audio connection change") + ".", "#9999cc");
 }
 
 
 // ALSA connection notification slot.
 void qjackctlMainForm::alsaConnectChanged (void)
 {
-    // Just shake the connection status quo.
-    m_iDirtyCount++;
-
-    appendMessagesColor(tr("MIDI connection change") + ".", "#9999cc");
+    // Just shake the MIDI connections status quo.
+    if (++m_iAlsaDirty == 1)
+        appendMessagesColor(tr("MIDI connection change") + ".", "#cccc99");
 }
 
 
 // Cable connection notification slot.
-void qjackctlMainForm::cableConnectSlot ( const char *pszOutputPort, const char *pszInputPort, unsigned int ulCableFlags )
+void qjackctlMainForm::cableConnectSlot ( const QString& sOutputPort, const QString& sInputPort, unsigned int ulCableFlags )
 {
     QString sText = QFileInfo(m_pSetup->sActivePatchbayPath).baseName() + ": ";
     QString sColor;
 
-    sText += pszOutputPort;
+    sText += sOutputPort;
     sText += " -> ";
-    sText += pszInputPort;
+    sText += sInputPort;
     sText += " ";
 
     switch (ulCableFlags) {

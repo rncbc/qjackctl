@@ -31,10 +31,11 @@
 //
 
 // Constructor.
-qjackctlPatchbaySocket::qjackctlPatchbaySocket ( const QString& sSocketName, const QString& sClientName )
+qjackctlPatchbaySocket::qjackctlPatchbaySocket ( const QString& sSocketName, const QString& sClientName, int iSocketType )
 {
     m_sSocketName = sSocketName;
     m_sClientName = sClientName;
+    m_iSocketType = iSocketType;
 }
 
 // Default destructor.
@@ -44,7 +45,7 @@ qjackctlPatchbaySocket::~qjackctlPatchbaySocket (void)
 }
 
 
-// Slot property accessors.
+// Socket property accessors.
 const QString& qjackctlPatchbaySocket::name (void)
 {
     return m_sSocketName;
@@ -55,6 +56,10 @@ const QString& qjackctlPatchbaySocket::clientName (void)
     return m_sClientName;
 }
 
+int qjackctlPatchbaySocket::type (void)
+{
+    return m_iSocketType;
+}
 
 // Slot property methods.
 void qjackctlPatchbaySocket::setName ( const QString& sSocketName )
@@ -67,6 +72,10 @@ void qjackctlPatchbaySocket::setClientName ( const QString& sClientName )
     m_sClientName = sClientName;
 }
 
+void qjackctlPatchbaySocket::setType ( int iSocketType )
+{
+    m_iSocketType = iSocketType;
+}
 
 // Plug list primitive methods.
 void qjackctlPatchbaySocket::addPlug ( const QString& sPlugName )
@@ -215,8 +224,13 @@ qjackctlPatchbayRack::qjackctlPatchbayRack (void)
     m_cablelist.setAutoDelete(true);
 
     m_pJackClient = NULL;
-    m_ppszOutputPorts = NULL;
-    m_ppszInputPorts = NULL;
+    m_ppszOAudioPorts = NULL;
+    m_ppszIAudioPorts = NULL;
+    
+    // MIDI connection persistence cache variables.
+    m_omidiports.setAutoDelete(true);
+    m_imidiports.setAutoDelete(true);
+    m_pAlsaSeq = NULL;
 }
 
 // Default destructor.
@@ -369,21 +383,21 @@ QPtrList<qjackctlPatchbayCable>& qjackctlPatchbayRack::cablelist (void)
 
 
 // Lookup for the n-th client port that matches the given regular expression...
-const char *qjackctlPatchbayRack::findClientPort ( const char **ppszClientPorts, const QString& sClientName, const QString& sPortName, int n )
+const char *qjackctlPatchbayRack::findAudioPort ( const char **ppszAudioPorts, const QString& sClientName, const QString& sPortName, int n )
 {
     QRegExp rxClientName(sClientName);
     QRegExp rxPortName(sPortName);
 
     int i = 0;
     int iClientPort = 0;
-    while (ppszClientPorts[iClientPort]) {
-        QString sClientPort = ppszClientPorts[iClientPort];
+    while (ppszAudioPorts[iClientPort]) {
+        QString sClientPort = ppszAudioPorts[iClientPort];
         int iColon = sClientPort.find(":");
         if (iColon >= 0) {
             if (rxClientName.exactMatch(sClientPort.left(iColon)) &&
                 rxPortName.exactMatch(sClientPort.right(sClientPort.length() - iColon - 1))) {
                 if (++i > n)
-                    return ppszClientPorts[iClientPort];
+                    return ppszAudioPorts[iClientPort];
             }
         }
         iClientPort++;
@@ -394,7 +408,7 @@ const char *qjackctlPatchbayRack::findClientPort ( const char **ppszClientPorts,
 
 
 // Check if an output client:port is already connected to yet another one.
-bool qjackctlPatchbayRack::isConnected ( const char *pszOutputPort, const char *pszInputPort )
+bool qjackctlPatchbayRack::isAudioConnected ( const char *pszOutputPort, const char *pszInputPort )
 {
     bool bConnected = false;
 
@@ -409,26 +423,36 @@ bool qjackctlPatchbayRack::isConnected ( const char *pszOutputPort, const char *
 }
 
 
-// Check whether a socket pair is fully connected, and e
-void qjackctlPatchbayRack::connectCable ( qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket )
+// Audio port-pair connection executive.
+bool qjackctlPatchbayRack::connectAudioPorts ( const char *pszOutputPort, const char *pszInputPort )
+{
+    return (jack_connect(m_pJackClient, pszOutputPort, pszInputPort) == 0);
+}
+
+
+// Check and maint whether an audio socket pair is fully connected.
+void qjackctlPatchbayRack::connectAudioCable ( qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket )
 {
     if (pOutputSocket == NULL || pInputSocket == NULL)
         return;
+    if (pOutputSocket->type() != pInputSocket->type() || pOutputSocket->type() != QJACKCTL_SOCKETTYPE_AUDIO)
+        return;
 
+    // Iterate on each corresponding plug...
     QStringList::Iterator iterOutputPlug = pOutputSocket->pluglist().begin();
     QStringList::Iterator iterInputPlug  = pInputSocket->pluglist().begin();
     while (iterOutputPlug != pOutputSocket->pluglist().end() &&
            iterInputPlug  != pInputSocket->pluglist().end()) {
-        // Check port connection sequentially...
+        // Check audio port connection sequentially...
         int iPort = 0;
         const char *pszOutputPort;
-        while ((pszOutputPort = findClientPort(m_ppszOutputPorts, pOutputSocket->clientName(), *iterOutputPlug, iPort)) != NULL) {
-            const char *pszInputPort = findClientPort(m_ppszInputPorts, pInputSocket->clientName(), *iterInputPlug, iPort);
+        while ((pszOutputPort = findAudioPort(m_ppszOAudioPorts, pOutputSocket->clientName(), *iterOutputPlug, iPort)) != NULL) {
+            const char *pszInputPort = findAudioPort(m_ppszIAudioPorts, pInputSocket->clientName(), *iterInputPlug, iPort);
             if (pszInputPort) {
                 unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
-                if (isConnected(pszOutputPort, pszInputPort))
+                if (isAudioConnected(pszOutputPort, pszInputPort))
                     uiCableFlags = QJACKCTL_CABLE_CHECKED;
-                else if (jack_connect(m_pJackClient, pszOutputPort, pszInputPort) == 0)
+                else if (connectAudioPorts(pszOutputPort, pszInputPort))
                     uiCableFlags = QJACKCTL_CABLE_CONNECTED;
                 emit cableConnected(pszOutputPort, pszInputPort, uiCableFlags);
             }
@@ -441,8 +465,8 @@ void qjackctlPatchbayRack::connectCable ( qjackctlPatchbaySocket *pOutputSocket,
 }
 
 
-// Main connect perisistance scan cycle.
-void qjackctlPatchbayRack::connectScan ( jack_client_t *pJackClient )
+// Main audio cable connect persistance scan cycle.
+void qjackctlPatchbayRack::connectAudioScan ( jack_client_t *pJackClient )
 {
     if (pJackClient == NULL || m_pJackClient)
         return;
@@ -450,27 +474,197 @@ void qjackctlPatchbayRack::connectScan ( jack_client_t *pJackClient )
     // Cache client descriptor.
     m_pJackClient = pJackClient;
     // Cache all current output client-ports...
-    m_ppszOutputPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsOutput);
-    if (m_ppszOutputPorts == NULL)
+    m_ppszOAudioPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsOutput);
+    if (m_ppszOAudioPorts == NULL)
         return;
 
     // Cache all current input client-ports...
-    m_ppszInputPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsInput);
-    if (m_ppszInputPorts) {
+    m_ppszIAudioPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsInput);
+    if (m_ppszIAudioPorts) {
         for (qjackctlPatchbayCable *pCable = m_cablelist.first(); pCable; pCable = m_cablelist.next())
-            connectCable(pCable->outputSocket(), pCable->inputSocket());
+            connectAudioCable(pCable->outputSocket(), pCable->inputSocket());
     }
 
     // Free client-ports caches...
-    if (m_ppszOutputPorts)
-        ::free(m_ppszOutputPorts);
-    if (m_ppszInputPorts)
-        ::free(m_ppszInputPorts);
+    if (m_ppszOAudioPorts)
+        ::free(m_ppszOAudioPorts);
+    if (m_ppszIAudioPorts)
+        ::free(m_ppszIAudioPorts);
 
     // Reset cached pointers.
-    m_ppszOutputPorts = NULL;
-    m_ppszInputPorts  = NULL;
+    m_ppszOAudioPorts = NULL;
+    m_ppszIAudioPorts  = NULL;
     m_pJackClient = NULL;
+}
+
+
+// Load all midi available midi ports of a given type.
+void qjackctlPatchbayRack::loadMidiPorts ( QPtrList<qjackctlMidiPort>& midiports, bool bReadable )
+{
+    if (m_pAlsaSeq == NULL)
+        return;
+
+    midiports.clear();
+
+    unsigned int uiAlsaFlags;
+    if (bReadable)
+        uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
+    else
+        uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
+
+    snd_seq_client_info_t *pClientInfo;
+    snd_seq_port_info_t   *pPortInfo;
+
+    snd_seq_client_info_alloca(&pClientInfo);
+    snd_seq_port_info_alloca(&pPortInfo);
+    snd_seq_client_info_set_client(pClientInfo, -1);
+
+    while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
+
+        snd_seq_port_info_set_client(pPortInfo, snd_seq_client_info_get_client(pClientInfo));
+        snd_seq_port_info_set_port(pPortInfo, -1);
+
+        while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
+
+            if (((snd_seq_port_info_get_capability(pPortInfo) & uiAlsaFlags) == uiAlsaFlags) &&
+                !(snd_seq_port_info_get_capability(pPortInfo) & SND_SEQ_PORT_CAP_NO_EXPORT) &&
+                 (snd_seq_client_info_get_client(pClientInfo) > 0)) {
+
+                qjackctlMidiPort *pMidiPort = new qjackctlMidiPort;
+                pMidiPort->sClientName = snd_seq_client_info_get_name(pClientInfo);
+                pMidiPort->iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
+                pMidiPort->sPortName   = snd_seq_port_info_get_name(pPortInfo);
+                pMidiPort->iAlsaPort   = snd_seq_port_info_get_port(pPortInfo);
+                midiports.append(pMidiPort);
+            }
+        }
+    }
+}
+
+
+// Lookup for the n-th MIDI client port that matches the given regular expression...
+qjackctlMidiPort *qjackctlPatchbayRack::findMidiPort ( QPtrList<qjackctlMidiPort>& midiports, const QString& sClientName, const QString& sPortName, int n )
+{
+    QRegExp rxClientName(sClientName);
+    QRegExp rxPortName(sPortName);
+
+    int i = 0;
+    // For each port...
+    for (qjackctlMidiPort *pMidiPort = midiports.first(); pMidiPort; pMidiPort = midiports.next()) {
+        if (rxClientName.exactMatch(pMidiPort->sClientName) &&
+            rxPortName.exactMatch(pMidiPort->sPortName)) {
+            if (++i > n)
+                return pMidiPort;
+        }
+    }
+    return NULL;
+}
+
+
+// Check if an MIDI output client:port is already connected to yet another one.
+bool qjackctlPatchbayRack::isMidiConnected ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
+{
+    bool bConnected = false;
+
+    snd_seq_query_subscribe_t *pAlsaSubs;
+    snd_seq_addr_t seq_addr;
+
+    snd_seq_query_subscribe_alloca(&pAlsaSubs);
+
+    // Get port connections...
+    snd_seq_query_subscribe_set_type(pAlsaSubs, SND_SEQ_QUERY_SUBS_READ);
+    snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
+    seq_addr.client = pOutputPort->iAlsaClient;
+    seq_addr.port   = pOutputPort->iAlsaPort;
+    snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
+
+    while (!bConnected && snd_seq_query_port_subscribers(m_pAlsaSeq, pAlsaSubs) >= 0) {
+        seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
+        bConnected = (seq_addr.client == pInputPort->iAlsaClient && seq_addr.port == pInputPort->iAlsaPort);
+        snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
+    }
+
+    return bConnected;
+}
+
+
+// MIDI port-pair connection executive.
+bool qjackctlPatchbayRack::connectMidiPorts ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
+{
+    snd_seq_port_subscribe_t *pAlsaSubs;
+    snd_seq_addr_t seq_addr;
+
+    snd_seq_port_subscribe_alloca(&pAlsaSubs);
+
+    seq_addr.client = pOutputPort->iAlsaClient;
+    seq_addr.port   = pOutputPort->iAlsaPort;
+    snd_seq_port_subscribe_set_sender(pAlsaSubs, &seq_addr);
+
+    seq_addr.client = pInputPort->iAlsaClient;
+    seq_addr.port   = pInputPort->iAlsaPort;
+    snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
+
+    return (snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs) == 0);
+}
+
+
+// Check and maint whether a MIDI socket pair is fully connected.
+void qjackctlPatchbayRack::connectMidiCable ( qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket )
+{
+    if (pOutputSocket == NULL || pInputSocket == NULL)
+        return;
+    if (pOutputSocket->type() != pInputSocket->type() || pOutputSocket->type() != QJACKCTL_SOCKETTYPE_MIDI)
+        return;
+
+    // Iterate on each corresponding plug...
+    QStringList::Iterator iterOutputPlug = pOutputSocket->pluglist().begin();
+    QStringList::Iterator iterInputPlug  = pInputSocket->pluglist().begin();
+    while (iterOutputPlug != pOutputSocket->pluglist().end() &&
+           iterInputPlug  != pInputSocket->pluglist().end()) {
+        // Check MIDI port connection sequentially...
+        int iPort = 0;
+        qjackctlMidiPort *pOutputPort;
+        while ((pOutputPort = findMidiPort(m_omidiports, pOutputSocket->clientName(), *iterOutputPlug, iPort)) != NULL) {
+            QString sOutputPort = QString::number(pOutputPort->iAlsaClient) + ":" + QString::number(pOutputPort->iAlsaPort) + " " + pOutputPort->sClientName;
+            qjackctlMidiPort *pInputPort = findMidiPort(m_imidiports, pInputSocket->clientName(), *iterInputPlug, iPort);
+            if (pInputPort) {
+                QString sInputPort = QString::number(pInputPort->iAlsaClient) + ":" + QString::number(pInputPort->iAlsaPort) + " " + pInputPort->sClientName;
+                unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
+                if (isMidiConnected(pOutputPort, pInputPort))
+                    uiCableFlags = QJACKCTL_CABLE_CHECKED;
+                else if (connectMidiPorts(pOutputPort, pInputPort))
+                    uiCableFlags = QJACKCTL_CABLE_CONNECTED;
+                emit cableConnected(sOutputPort, sInputPort, uiCableFlags);
+            }
+            iPort++;
+        }
+        // Get on next plug pair...
+        iterOutputPlug++;
+        iterInputPlug++;
+    }
+}
+
+
+// Overloaded MIDI cable connect persistance scan cycle.
+void qjackctlPatchbayRack::connectMidiScan ( snd_seq_t *pAlsaSeq )
+{
+    if (pAlsaSeq == NULL || m_pAlsaSeq)
+        return;
+
+    // Cache sequencer descriptor.
+    m_pAlsaSeq = pAlsaSeq;
+    // Cache all current output client-ports...
+    loadMidiPorts(m_omidiports, true);
+    loadMidiPorts(m_imidiports, false);
+
+    // Run the MIDI cable scan...
+    for (qjackctlPatchbayCable *pCable = m_cablelist.first(); pCable; pCable = m_cablelist.next())
+        connectMidiCable(pCable->outputSocket(), pCable->inputSocket());
+
+    // Free client-ports caches...
+    m_omidiports.clear();
+    m_imidiports.clear();
+    m_pAlsaSeq = NULL;
 }
 
 

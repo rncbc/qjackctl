@@ -28,6 +28,11 @@
 #include <qptrlist.h>
 
 #include <jack/jack.h>
+#include <alsa/asoundlib.h>
+
+// Patchbay socket types.
+#define QJACKCTL_SOCKETTYPE_AUDIO   0
+#define QJACKCTL_SOCKETTYPE_MIDI    1
 
 // Patchbay slot normalization modes.
 #define QJACKCTL_SLOTMODE_OPEN      0
@@ -40,23 +45,34 @@
 #define QJACKCTL_CABLE_CONNECTED    2
 
 
+// Struct name says it all.
+struct qjackctlMidiPort
+{
+    QString sClientName;
+    QString sPortName;
+    int iAlsaClient;
+    int iAlsaPort;
+};
+
 // Patchbay socket definition.
 class qjackctlPatchbaySocket
 {
 public:
 
     // Constructor.
-    qjackctlPatchbaySocket(const QString& sSocketName, const QString& sClientName);
+    qjackctlPatchbaySocket(const QString& sSocketName, const QString& sClientName, int iSocketType);
     // Default destructor.
     ~qjackctlPatchbaySocket();
 
     // Slot property accessors.
     const QString& name();
     const QString& clientName();
+    int type();
 
     // Slot property methods.
     void setName(const QString& sSocketName);
     void setClientName(const QString& sClientName);
+    void setType(int iSocketType);
 
     // Plug list primitive methods.
     void addPlug(const QString& sPlugName);
@@ -70,6 +86,7 @@ private:
     // Properties.
     QString m_sSocketName;
     QString m_sClientName;
+    int m_iSocketType;
 
     // Patchbay socket plug list.
     QStringList m_pluglist;
@@ -184,22 +201,29 @@ public:
     // Patchbay cable connections list accessor.
     QPtrList<qjackctlPatchbayCable>& cablelist();
 
-    // Connect persistence scan cycle method.
-    void connectScan(jack_client_t *pJackClient);
+    // Overloaded cable connection persistence scan cycle methods.
+    void connectAudioScan(jack_client_t *pJackClient);
+    void connectMidiScan(snd_seq_t *pAlsaSeq);
 
 signals:
 
     // Cable connection change signal.
-    void cableConnected(const char *pszOutputPort, const char *pszInputPort, unsigned int uiCableFlags);
+    void cableConnected(const QString& sOutputPort, const QString& sInputPort, unsigned int uiCableFlags);
 
 private:
 
-    // Lookup for the n-th client port that matches the given regular expressions...
-    const char *findClientPort(const char **ppszClientPorts, const QString& sClientName, const QString& sPortName, int n = 0);
-    // Check if an output client:port is already connected to yet another one.
-    bool isConnected(const char *pszOutputPort, const char *pszInputPort);
-    // Check whether a socket pair is fully connected, and e
-    void connectCable(qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket);
+    // Audio connection scan related private methods.
+    const char *findAudioPort(const char **ppszClientPorts, const QString& sClientName, const QString& sPortName, int n = 0);
+    bool isAudioConnected(const char *pszOutputPort, const char *pszInputPort);
+    bool connectAudioPorts(const char *pszOutputPort, const char *pszInputPort);
+    void connectAudioCable(qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket);
+
+    // MIDI connection scan related private methods.
+    void loadMidiPorts(QPtrList<qjackctlMidiPort>& midiports, bool bReadable);
+    qjackctlMidiPort *findMidiPort (QPtrList<qjackctlMidiPort>& midiports, const QString& sClientName, const QString& sPortName, int n);
+    bool isMidiConnected(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
+    bool connectMidiPorts(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
+    void connectMidiCable(qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket);
 
     // Patchbay sockets lists.
     QPtrList<qjackctlPatchbaySocket> m_osocketlist;
@@ -209,10 +233,15 @@ private:
     // Patchbay cable connections list.
     QPtrList<qjackctlPatchbayCable> m_cablelist;
 
-    // Connection peristence cache variables.
+    // Audio connection persistence cache variables.
     jack_client_t *m_pJackClient;
-    const char **m_ppszOutputPorts;
-    const char **m_ppszInputPorts;
+    const char **m_ppszOAudioPorts;
+    const char **m_ppszIAudioPorts;
+
+    // MIDI connection persistence cache variables.
+    snd_seq_t *m_pAlsaSeq;
+    QPtrList<qjackctlMidiPort> m_omidiports;
+    QPtrList<qjackctlMidiPort> m_imidiports;
 };
 
 

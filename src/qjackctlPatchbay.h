@@ -31,8 +31,6 @@
 #include <qpainter.h>
 #include <qpopupmenu.h>
 
-#include <jack/jack.h>
-
 // Our external patchbay models.
 #include "qjackctlPatchbayRack.h"
 
@@ -55,13 +53,13 @@ class qjackctlPlugItem : public QListViewItem
 public:
 
     // Constructor.
-    qjackctlPlugItem(qjackctlSocketItem *pSocket, const QString& sPlugName, unsigned long ulPlugFlags, qjackctlPlugItem *pPlugAfter);
+    qjackctlPlugItem(qjackctlSocketItem *pSocket, const QString& sPlugName, qjackctlPlugItem *pPlugAfter);
     // Default destructor.
     ~qjackctlPlugItem();
 
     // Instance accessors.
-    QString& socketName();
-    QString& plugName();
+    const QString& socketName();
+    const QString& plugName();
 
     // Patchbay socket item accessor.
     qjackctlSocketItem *socket();
@@ -83,19 +81,21 @@ class qjackctlSocketItem : public QListViewItem
 public:
 
     // Constructor.
-    qjackctlSocketItem(qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, qjackctlSocketItem *pSocketAfter);
+    qjackctlSocketItem(qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, int iSocketType, qjackctlSocketItem *pSocketAfter);
     // Default destructor.
     ~qjackctlSocketItem();
 
     // Instance accessors.
-    QString& socketName();
-    QString& clientName();
+    const QString& socketName();
+    const QString& clientName();
+    int socketType();
 
     void setSocketName (const QString& sSocketName);
     void setClientName (const QString& sClientName);
+    void setSocketType (int iSocketType);
 
     // Socket flags accessor.
-    unsigned long flags();
+    bool isReadable();
     
     // Connected plug list primitives.
     void addConnect(qjackctlSocketItem *pSocket);
@@ -129,6 +129,7 @@ private:
     qjackctlSocketList *m_pSocketList;
     QString m_sSocketName;
     QString m_sClientName;
+    int m_iSocketType;
 
     // Plug (port) list.
     QPtrList<qjackctlPlugItem> m_plugs;
@@ -146,7 +147,7 @@ class qjackctlSocketList : public QObject
 public:
 
     // Constructor.
-    qjackctlSocketList(qjackctlSocketListView *pListView, unsigned long ulSocketFlags);
+    qjackctlSocketList(qjackctlSocketListView *pListView, bool bReadable);
     // Default destructor.
     ~qjackctlSocketList();
 
@@ -161,16 +162,18 @@ public:
     qjackctlSocketListView *listView();
 
     // Socket flags accessor.
-    unsigned long flags();
+    bool isReadable();
 
     // Socket aesthetics accessors.
     QString& socketCaption();
-    QPixmap *socketPixmap();
-    QPixmap *plugPixmap();
 
     // JACK client accessors.
     void setJackClient(jack_client_t *pJackClient);
     jack_client_t *jackClient();
+
+    // ALSA sequencer accessors.
+    void setAlsaSeq(snd_seq_t *pAlsaSeq);
+    snd_seq_t *alsaSeq();
 
     // Socket list cleaner.
     void clear();
@@ -198,11 +201,14 @@ private:
 
     // Instance variables.
     qjackctlSocketListView *m_pListView;
-    unsigned long  m_ulSocketFlags;
-    QString m_sSocketCaption;
-    QPixmap *m_pXpmSocket;
-    QPixmap *m_pXpmPlug;
+    bool m_bReadable;
+    QString  m_sSocketCaption;
     jack_client_t *m_pJackClient;
+    QPixmap *m_pXpmASocket;
+    QPixmap *m_pXpmAPlug;
+    snd_seq_t *m_pAlsaSeq;
+    QPixmap *m_pXpmMSocket;
+    QPixmap *m_pXpmMPlug;
 
     QPtrList<qjackctlSocketItem> m_sockets;
 };
@@ -218,7 +224,7 @@ class qjackctlSocketListView : public QListView
 public:
 
     // Constructor.
-    qjackctlSocketListView(QWidget *pParent, qjackctlPatchbayView *pPatchbayView, unsigned long ulSocketFlags);
+    qjackctlSocketListView(QWidget *pParent, qjackctlPatchbayView *pPatchbayView, bool bReadable);
     // Default destructor.
     ~qjackctlSocketListView();
 
@@ -250,7 +256,7 @@ private:
 
     // Bindings.
     qjackctlPatchbayView *m_pPatchbayView;
-    unsigned long m_ulSocketFlags;
+    bool m_bReadable;
 
     // Drag-n-drop stuff.
     QListViewItem *dragDropItem(const QPoint& epos);
@@ -337,7 +343,7 @@ public:
 public slots:
 
     // Common context menu slot.
-    void contextMenu(const QPoint& pos, unsigned long ulSocketFlags);
+    void contextMenu(const QPoint& pos, bool bReadable);
     
 private:
 
@@ -385,6 +391,10 @@ public:
     // JACK client property accessors.
     void setJackClient(jack_client_t *pJackClient);
     jack_client_t *jackClient();
+
+    // ALSA sequencer property accessors.
+    void setAlsaSeq(snd_seq_t *pAlsaSeq);
+    snd_seq_t *alsaSeq();
 
 public slots:
 

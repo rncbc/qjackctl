@@ -38,7 +38,11 @@ static void load_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
         if (eSocket.tagName() == "socket") {
             QString sSocketName = eSocket.attribute("name");
             QString sClientName = eSocket.attribute("client");
-            qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(sSocketName, sClientName);
+            QString sSocketType = eSocket.attribute("type");
+            int iSocketType = QJACKCTL_SOCKETTYPE_AUDIO;
+            if (sSocketType == "midi")
+                iSocketType = QJACKCTL_SOCKETTYPE_MIDI;
+            qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(sSocketName, sClientName, iSocketType);
             // Now's time to handle pluglist...
             for (QDomNode nPlug = eSocket.firstChild(); !nPlug.isNull(); nPlug = nPlug.nextSibling()) {
                 // Convert plug node to element...
@@ -62,6 +66,10 @@ static void save_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
         QDomElement eSocket = doc.createElement("socket");
         eSocket.setAttribute("name", pSocket->name());
         eSocket.setAttribute("client", pSocket->clientName());
+        QString sSocketType = "audio";
+        if (pSocket->type() == QJACKCTL_SOCKETTYPE_MIDI)
+            sSocketType = "midi";
+        eSocket.setAttribute("type", sSocketType);
         QDomElement ePlug;
         for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++) {
             QDomElement ePlug = doc.createElement("plug");
@@ -167,7 +175,7 @@ bool qjackctlPatchbayFile::save ( qjackctlPatchbayRack *pPatchbay, const QString
     QDomDocument doc("patchbay");
     QDomElement eRoot = doc.createElement("patchbay");
     eRoot.setAttribute("name", fi.baseName());
-    eRoot.setAttribute("version", "0.1");
+    eRoot.setAttribute("version", "0.2");
     doc.appendChild(eRoot);
 
     // Save output-sockets spec...

@@ -1,5 +1,5 @@
 /* XPM */
-static const char * socketo_xpm[] = {
+static const char * msocketo_xpm[] = {
 "16 16 156 2",
 "  	c None",
 ". 	c #A39C3D",

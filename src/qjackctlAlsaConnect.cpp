@@ -177,14 +177,6 @@ qjackctlAlsaPort *qjackctlAlsaClientList::findClientPort ( int iAlsaClient, int 
 }
 
 
-// Client port flag permition checker.
-bool qjackctlAlsaClientList::checkAlsaFlags ( snd_seq_port_info_t *pPortInfo, unsigned int uiAlsaFlags )
-{
-    return (((snd_seq_port_info_get_capability(pPortInfo) & uiAlsaFlags) == uiAlsaFlags) &&
-            !(snd_seq_port_info_get_capability(pPortInfo) & SND_SEQ_PORT_CAP_NO_EXPORT));
-}
-
-
 // Client:port refreshner.
 int qjackctlAlsaClientList::updateClientPorts (void)
 {
@@ -197,9 +189,9 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 
     unsigned int uiAlsaFlags;
     if (isReadable())
-        uiAlsaFlags = SND_SEQ_PORT_CAP_READ|SND_SEQ_PORT_CAP_SUBS_READ;
+        uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
     else
-        uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE|SND_SEQ_PORT_CAP_SUBS_WRITE;
+        uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
 
     snd_seq_client_info_t *pClientInfo;
     snd_seq_port_info_t   *pPortInfo;
@@ -216,7 +208,9 @@ int qjackctlAlsaClientList::updateClientPorts (void)
         snd_seq_port_info_set_port(pPortInfo, -1);
 
         while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
-            if (checkAlsaFlags(pPortInfo, uiAlsaFlags) && (snd_seq_client_info_get_client(pClientInfo) > 0)) {
+            if (((snd_seq_port_info_get_capability(pPortInfo) & uiAlsaFlags) == uiAlsaFlags) &&
+                !(snd_seq_port_info_get_capability(pPortInfo) & SND_SEQ_PORT_CAP_NO_EXPORT) &&
+                 (snd_seq_client_info_get_client(pClientInfo) > 0)) {
                 qjackctlAlsaPort *pPort = 0;
                 int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
                 int iAlsaPort   = snd_seq_port_info_get_port(pPortInfo);

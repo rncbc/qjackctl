@@ -442,7 +442,7 @@
 </includes>
 <variables>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
-    <variable access="private">unsigned long m_ulSocketFlags;</variable>
+    <variable access="private">bool m_bReadable;</variable>
     <variable access="private">QPixmap *m_pXpmPlug;</variable>
     <variable access="private">QPopupMenu *m_pAddPlugMenu;</variable>
 </variables>
@@ -464,7 +464,7 @@
     <function specifier="non virtual">setSocketCaption( const QString &amp; sSocketCaption )</function>
     <function specifier="non virtual">setSocketPixmap( QPixmap *pXpmSocket )</function>
     <function specifier="non virtual">setPlugPixmap( QPixmap *pXpmPlug )</function>
-    <function specifier="non virtual">setJackClient( jack_client_t *pJackClient, unsigned long ulSocketFlags )</function>
+    <function specifier="non virtual">setJackClient( jack_client_t *pJackClient, bool bReadable )</function>
     <function specifier="non virtual">load( qjackctlPatchbaySocket * pSocket )</function>
     <function specifier="non virtual">save( qjackctlPatchbaySocket * pSocket )</function>
     <function access="private" specifier="non virtual" returnType="bool">validateForm()</function>

@@ -100,9 +100,6 @@ public:
 
 private:
 
-    // Client port flag permition checker.
-    bool checkAlsaFlags(snd_seq_port_info_t *pPortInfo, unsigned int uiAlsaFlags);
-
     // Instance variables.
     snd_seq_t *m_pAlsaSeq;
 };

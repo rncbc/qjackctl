@@ -672,7 +672,8 @@
     <variable access="private">int m_iTimerSlot;</variable>
     <variable access="private">int m_iJackRefresh;</variable>
     <variable access="private">int m_iAlsaRefresh;</variable>
-    <variable access="private">int m_iDirtyCount;</variable>
+    <variable access="private">int m_iJackDirty;</variable>
+    <variable access="private">int m_iAlsaDirty;</variable>
     <variable access="private">QSocketNotifier *m_pStdoutNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pAlsaNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
@@ -715,7 +716,7 @@
     <slot specifier="non virtual">timerSlot( void )</slot>
     <slot specifier="non virtual">jackConnectChanged( void )</slot>
     <slot specifier="non virtual">alsaConnectChanged( void )</slot>
-    <slot specifier="non virtual">cableConnectSlot(const char *pszOutputPort, const char *pszInputPort, unsigned int ulCableFlags)</slot>
+    <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
     <slot specifier="non virtual">toggleMessagesForm( void )</slot>
     <slot specifier="non virtual">toggleStatusForm( void )</slot>
     <slot specifier="non virtual">toggleConnectionsForm( void )</slot>

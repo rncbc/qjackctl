@@ -32,18 +32,30 @@
 #include "qjackctlPatchbayFile.h"
 
 
-// Local pixmaps.
-#include "icons/socketi.xpm"
-#include "icons/socketo.xpm"
-#include "icons/pluglni.xpm"
-#include "icons/pluglno.xpm"
+// Audio socket/plug pixmaps.
+#include "icons/asocketo.xpm"
+#include "icons/asocketi.xpm"
+#include "icons/aplugo.xpm"
+#include "icons/aplugi.xpm"
+
+// MIDI socket/plug pixmaps.
+#include "icons/msocketi.xpm"
+#include "icons/msocketo.xpm"
+#include "icons/mplugo.xpm"
+#include "icons/mplugi.xpm"
+
 
 static int g_iXpmRefCount = 0;
 
-static QPixmap *g_pXpmSocketI = 0;  // Input socket item pixmap.
-static QPixmap *g_pXpmSocketO = 0;  // Output socket item pixmap.
-static QPixmap *g_pXpmPlugLNI = 0;  // Input plug pixmap.
-static QPixmap *g_pXpmPlugLNO = 0;  // Output plug pixmap.
+static QPixmap *g_pXpmASocketO = 0;  // Audio output socket item pixmap.
+static QPixmap *g_pXpmASocketI = 0;  // Audio input socket item pixmap.
+static QPixmap *g_pXpmAPlugO   = 0;  // Audio output plug pixmap.
+static QPixmap *g_pXpmAPlugI   = 0;  // Audio input plug pixmap.
+
+static QPixmap *g_pXpmMSocketO = 0;  // MIDI output socket item pixmap.
+static QPixmap *g_pXpmMSocketI = 0;  // MIDI input socket item pixmap.
+static QPixmap *g_pXpmMPlugO   = 0;  // MIDI output plug pixmap.
+static QPixmap *g_pXpmMPlugI   = 0;  // MIDI input plug pixmap.
 
 
 //----------------------------------------------------------------------
@@ -51,7 +63,7 @@ static QPixmap *g_pXpmPlugLNO = 0;  // Output plug pixmap.
 //
 
 // Constructor.
-qjackctlPlugItem::qjackctlPlugItem ( qjackctlSocketItem *pSocket, const QString& sPlugName, unsigned long ulPlugFlags, qjackctlPlugItem *pPlugAfter )
+qjackctlPlugItem::qjackctlPlugItem ( qjackctlSocketItem *pSocket, const QString& sPlugName, qjackctlPlugItem *pPlugAfter )
     : QListViewItem(pSocket, pPlugAfter)
 {
     QListViewItem::setText(0, sPlugName);
@@ -61,14 +73,14 @@ qjackctlPlugItem::qjackctlPlugItem ( qjackctlSocketItem *pSocket, const QString&
 
     m_pSocket->plugs().append(this);
 
-    if (ulPlugFlags & JackPortIsInput) {
-        QListViewItem::setPixmap(0, *g_pXpmPlugLNI);
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    } else if (ulPlugFlags & JackPortIsOutput) {
-        QListViewItem::setPixmap(0, *g_pXpmPlugLNO);
+    if (m_pSocket->isReadable()) {
+        QListViewItem::setPixmap(0, pSocket->socketType() == QJACKCTL_SOCKETTYPE_MIDI ? *g_pXpmMPlugO : *g_pXpmAPlugO);
         QListViewItem::setDragEnabled(true);
         QListViewItem::setDropEnabled(false);
+    } else {
+        QListViewItem::setPixmap(0, pSocket->socketType() == QJACKCTL_SOCKETTYPE_MIDI ? *g_pXpmMPlugI : *g_pXpmAPlugI);
+        QListViewItem::setDragEnabled(false);
+        QListViewItem::setDropEnabled(true);
     }
     
     QListViewItem::setSelectable(false);
@@ -82,12 +94,12 @@ qjackctlPlugItem::~qjackctlPlugItem (void)
 
 
 // Instance accessors.
-QString& qjackctlPlugItem::socketName (void)
+const QString& qjackctlPlugItem::socketName (void)
 {
     return m_pSocket->socketName();
 }
 
-QString& qjackctlPlugItem::plugName (void)
+const QString& qjackctlPlugItem::plugName (void)
 {
     return m_sPlugName;
 }
@@ -112,7 +124,7 @@ int qjackctlPlugItem::rtti (void) const
 //
 
 // Constructor.
-qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, qjackctlSocketItem *pSocketAfter )
+qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, int iSocketType, qjackctlSocketItem *pSocketAfter )
     : QListViewItem(pSocketList->listView(), pSocketAfter)
 {
     QListViewItem::setText(0, sSocketName);
@@ -120,20 +132,21 @@ qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList, const 
     m_pSocketList = pSocketList;
     m_sSocketName = sSocketName;
     m_sClientName = sClientName;
+    m_iSocketType = iSocketType;
 
     m_plugs.setAutoDelete(false);
     m_connects.setAutoDelete(false);
 
     m_pSocketList->sockets().append(this);
 
-    if (m_pSocketList->flags() & JackPortIsInput) {
-        QListViewItem::setPixmap(0, *g_pXpmSocketI);
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    } else if (m_pSocketList->flags() & JackPortIsOutput) {
-        QListViewItem::setPixmap(0, *g_pXpmSocketO);
+    if (m_pSocketList->isReadable()) {
+        QListViewItem::setPixmap(0, m_iSocketType == QJACKCTL_SOCKETTYPE_MIDI ? *g_pXpmMSocketO : *g_pXpmASocketO);
         QListViewItem::setDragEnabled(true);
         QListViewItem::setDropEnabled(false);
+    } else {
+        QListViewItem::setPixmap(0, m_iSocketType == QJACKCTL_SOCKETTYPE_MIDI ? *g_pXpmMSocketI : *g_pXpmASocketI);
+        QListViewItem::setDragEnabled(false);
+        QListViewItem::setDropEnabled(true);
     }
 
 }
@@ -149,14 +162,19 @@ qjackctlSocketItem::~qjackctlSocketItem (void)
 
 
 // Instance accessors.
-QString& qjackctlSocketItem::socketName (void)
+const QString& qjackctlSocketItem::socketName (void)
 {
     return m_sSocketName;
 }
 
-QString& qjackctlSocketItem::clientName (void)
+const QString& qjackctlSocketItem::clientName (void)
 {
     return m_sClientName;
+}
+
+int qjackctlSocketItem::socketType (void)
+{
+    return m_iSocketType;
 }
 
 void qjackctlSocketItem::setSocketName ( const QString& sSocketName )
@@ -169,10 +187,16 @@ void qjackctlSocketItem::setClientName ( const QString& sClientName )
     m_sClientName = sClientName;
 }
 
-// Socket flags accessor.
-unsigned long qjackctlSocketItem::flags (void)
+void qjackctlSocketItem::setSocketType ( int iSocketType )
 {
-    return m_pSocketList->flags();
+    m_iSocketType = iSocketType;
+}
+
+
+// Socket flags accessor.
+bool qjackctlSocketItem::isReadable (void)
+{
+    return m_pSocketList->isReadable();
 }
 
 
@@ -249,28 +273,37 @@ void qjackctlSocketItem::clear (void)
 //
 
 // Constructor.
-qjackctlSocketList::qjackctlSocketList( qjackctlSocketListView *pListView, unsigned long ulSocketFlags )
+qjackctlSocketList::qjackctlSocketList( qjackctlSocketListView *pListView, bool bReadable )
 {
     if (g_iXpmRefCount == 0) {
-        g_pXpmSocketI = new QPixmap((const char **) socketi_xpm);
-        g_pXpmSocketO = new QPixmap((const char **) socketo_xpm);
-        g_pXpmPlugLNI = new QPixmap((const char **) pluglni_xpm);
-        g_pXpmPlugLNO = new QPixmap((const char **) pluglno_xpm);
+        g_pXpmASocketO = new QPixmap((const char **) asocketo_xpm);
+        g_pXpmASocketI = new QPixmap((const char **) asocketi_xpm);
+        g_pXpmAPlugO   = new QPixmap((const char **) aplugo_xpm);
+        g_pXpmAPlugI   = new QPixmap((const char **) aplugi_xpm);
+        g_pXpmMSocketO = new QPixmap((const char **) msocketo_xpm);
+        g_pXpmMSocketI = new QPixmap((const char **) msocketi_xpm);
+        g_pXpmMPlugO   = new QPixmap((const char **) mplugo_xpm);
+        g_pXpmMPlugI   = new QPixmap((const char **) mplugi_xpm);
     }
     g_iXpmRefCount++;
 
-    m_pListView = pListView;
-    m_ulSocketFlags = ulSocketFlags;
+    m_pListView   = pListView;
+    m_bReadable   = bReadable;
     m_pJackClient = NULL;
+    m_pAlsaSeq    = NULL;
     
-    if (ulSocketFlags & JackPortIsOutput) {
+    if (bReadable) {
         m_sSocketCaption = tr("Output");
-        m_pXpmSocket = g_pXpmSocketO;
-        m_pXpmPlug   = g_pXpmPlugLNO;
-    } else if (ulSocketFlags & JackPortIsInput) {
+        m_pXpmASocket = g_pXpmASocketO;
+        m_pXpmAPlug   = g_pXpmAPlugO;
+        m_pXpmMSocket = g_pXpmMSocketO;
+        m_pXpmMPlug   = g_pXpmMPlugO;
+    } else {
         m_sSocketCaption = tr("Input");
-        m_pXpmSocket = g_pXpmSocketI;
-        m_pXpmPlug   = g_pXpmPlugLNI;
+        m_pXpmASocket = g_pXpmASocketI;
+        m_pXpmAPlug   = g_pXpmAPlugI;
+        m_pXpmMSocket = g_pXpmMSocketI;
+        m_pXpmMPlug   = g_pXpmMPlugI;
     }
     if (!m_sSocketCaption.isEmpty())
         m_sSocketCaption += " ";
@@ -285,10 +318,14 @@ qjackctlSocketList::~qjackctlSocketList (void)
     clear();
 
     if (--g_iXpmRefCount == 0) {
-        delete g_pXpmSocketI;
-        delete g_pXpmSocketO;
-        delete g_pXpmPlugLNI;
-        delete g_pXpmPlugLNO;
+        delete g_pXpmASocketO;
+        delete g_pXpmASocketI;
+        delete g_pXpmAPlugO;
+        delete g_pXpmAPlugI;
+        delete g_pXpmMSocketO;
+        delete g_pXpmMSocketI;
+        delete g_pXpmMPlugO;
+        delete g_pXpmMPlugI;
     }
 }
 
@@ -319,9 +356,9 @@ qjackctlSocketListView *qjackctlSocketList::listView (void)
 
 
 // Socket flags accessor.
-unsigned long qjackctlSocketList::flags (void)
+bool qjackctlSocketList::isReadable (void)
 {
-    return m_ulSocketFlags;
+    return m_bReadable;
 }
 
 
@@ -329,20 +366,6 @@ unsigned long qjackctlSocketList::flags (void)
 QString& qjackctlSocketList::socketCaption (void)
 {
     return m_sSocketCaption;
-}
-
-
-// Socket pixmap accessor.
-QPixmap *qjackctlSocketList::socketPixmap (void)
-{
-    return m_pXpmSocket;
-}
-
-
-// Socket plug pixmap accessor.
-QPixmap *qjackctlSocketList::plugPixmap (void)
-{
-    return m_pXpmPlug;
 }
 
 
@@ -357,6 +380,17 @@ jack_client_t *qjackctlSocketList::jackClient (void)
     return m_pJackClient;
 }
 
+
+// ALSA sequencer accessors.
+void qjackctlSocketList::setAlsaSeq ( snd_seq_t *pAlsaSeq )
+{
+    m_pAlsaSeq = pAlsaSeq;
+}
+
+snd_seq_t *qjackctlSocketList::alsaSeq (void)
+{
+    return m_pAlsaSeq;
+}
 
 
 // Socket list cleaner.
@@ -374,35 +408,40 @@ void qjackctlSocketList::clear (void)
 // Client:port snapshot.
 void qjackctlSocketList::clientPortsSnapshot (void)
 {
-    if (m_pJackClient == 0)
-        return;
-
-    const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, m_ulSocketFlags);
-    if (ppszClientPorts) {
-        int iClientPort = 0;
-        while (ppszClientPorts[iClientPort]) {
-            QString sClientPort = ppszClientPorts[iClientPort];
-            qjackctlSocketItem *pSocket = 0;
-            qjackctlPlugItem   *pPlug   = 0;
-            int iColon = sClientPort.find(":");
-            if (iColon >= 0) {
-                QString sClientName = sClientPort.left(iColon);
-                QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
-                pSocket = findSocket(sClientName);
-                if (pSocket)
-                    pPlug = pSocket->findPlug(sPortName);
-                if (pSocket == 0)
-                    pSocket = new qjackctlSocketItem(this, sClientName, sClientName, (qjackctlSocketItem *) m_pListView->lastItem());
-                if (pSocket && pPlug == 0) {
-                    qjackctlPlugItem *pPlugAfter = (qjackctlPlugItem *) pSocket->firstChild();
-                    while (pPlugAfter && pPlugAfter->nextSibling())
-                        pPlugAfter = (qjackctlPlugItem *) pPlugAfter->nextSibling();
-                    pPlug = new qjackctlPlugItem(pSocket, sPortName, m_ulSocketFlags, pPlugAfter);
+    // Grab JACK client:port's...
+    if (m_pJackClient) {
+        const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (m_bReadable ? JackPortIsOutput : JackPortIsInput));
+        if (ppszClientPorts) {
+            int iClientPort = 0;
+            while (ppszClientPorts[iClientPort]) {
+                QString sClientPort = ppszClientPorts[iClientPort];
+                qjackctlSocketItem *pSocket = 0;
+                qjackctlPlugItem   *pPlug   = 0;
+                int iColon = sClientPort.find(":");
+                if (iColon >= 0) {
+                    QString sClientName = sClientPort.left(iColon);
+                    QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
+                    pSocket = findSocket(sClientName);
+                    if (pSocket)
+                        pPlug = pSocket->findPlug(sPortName);
+                    if (pSocket == 0)
+                        pSocket = new qjackctlSocketItem(this, sClientName, sClientName, QJACKCTL_SOCKETTYPE_AUDIO, (qjackctlSocketItem *) m_pListView->lastItem());
+                    if (pSocket && pPlug == 0) {
+                        qjackctlPlugItem *pPlugAfter = (qjackctlPlugItem *) pSocket->firstChild();
+                        while (pPlugAfter && pPlugAfter->nextSibling())
+                            pPlugAfter = (qjackctlPlugItem *) pPlugAfter->nextSibling();
+                        pPlug = new qjackctlPlugItem(pSocket, sPortName, pPlugAfter);
+                    }
                 }
+                iClientPort++;
             }
-            iClientPort++;
+            ::free(ppszClientPorts);
         }
-        ::free(ppszClientPorts);
+    }
+    
+    // Grab ALSA subscribers's...
+    if (m_pAlsaSeq) {
+        // TODO: Grab ALSA subscribers's...
     }
 }
 
@@ -436,10 +475,10 @@ bool qjackctlSocketList::addSocketItem (void)
     if (pSocketForm) {
         pSocketForm->setCaption("<" + tr("New") + "> - " + m_sSocketCaption);
         pSocketForm->setSocketCaption(m_sSocketCaption);
-        pSocketForm->setSocketPixmap(m_pXpmSocket);
-        pSocketForm->setPlugPixmap(m_pXpmPlug);
-        pSocketForm->setJackClient(m_pJackClient, m_ulSocketFlags);
-        qjackctlPatchbaySocket socket(m_sSocketCaption + " " + QString::number(m_sockets.count() + 1), QString::null);
+        pSocketForm->setSocketPixmap(m_pXpmASocket);    // TODO: qjackctlSocketForm:
+        pSocketForm->setPlugPixmap(m_pXpmAPlug);        // Set pixmap and descriptor duality.
+        pSocketForm->setJackClient(m_pJackClient, m_bReadable);
+        qjackctlPatchbaySocket socket(m_sSocketCaption + " " + QString::number(m_sockets.count() + 1), QString::null, QJACKCTL_SOCKETTYPE_AUDIO);
         pSocketForm->load(&socket);
         if (pSocketForm->exec()) {
             pSocketForm->save(&socket);
@@ -447,11 +486,11 @@ bool qjackctlSocketList::addSocketItem (void)
         //  m_pListView->setUpdatesEnabled(false);
             if (pSocketItem)
                 pSocketItem->setSelected(false);
-            pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), pSocketItem);
+            pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), pSocketItem);
             if (pSocketItem) {
                 qjackctlPlugItem *pPlugItem = NULL;
                 for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
-                    pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, m_ulSocketFlags, pPlugItem);
+                    pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
                 bResult = true;
             }
             pSocketItem->setSelected(true);
@@ -500,10 +539,10 @@ bool qjackctlSocketList::editSocketItem (void)
         if (pSocketForm) {
             pSocketForm->setCaption(pSocketItem->socketName() + " - " + m_sSocketCaption);
             pSocketForm->setSocketCaption(m_sSocketCaption);
-            pSocketForm->setSocketPixmap(m_pXpmSocket);
-            pSocketForm->setPlugPixmap(m_pXpmPlug);
-            pSocketForm->setJackClient(m_pJackClient, m_ulSocketFlags);
-            qjackctlPatchbaySocket socket(pSocketItem->socketName(), pSocketItem->clientName());
+            pSocketForm->setSocketPixmap(m_pXpmASocket);    // TODO: qjackctlSocketForm:
+            pSocketForm->setPlugPixmap(m_pXpmAPlug);        // Set pixmap and descriptor duality.
+            pSocketForm->setJackClient(m_pJackClient, m_bReadable);
+            qjackctlPatchbaySocket socket(pSocketItem->socketName(), pSocketItem->clientName(), QJACKCTL_SOCKETTYPE_AUDIO);
             for (qjackctlPlugItem *pPlugItem = pSocketItem->plugs().first(); pPlugItem; pPlugItem = pSocketItem->plugs().next())
                 socket.pluglist().append(pPlugItem->plugName());
             pSocketForm->load(&socket);
@@ -514,9 +553,10 @@ bool qjackctlSocketList::editSocketItem (void)
                 pSocketItem->setText(0, socket.name());
                 pSocketItem->setSocketName(socket.name());
                 pSocketItem->setClientName(socket.clientName());
+                pSocketItem->setSocketType(socket.type());
                 qjackctlPlugItem *pPlugItem = NULL;
                 for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
-                    pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pSocketItem->flags(), pPlugItem);
+                    pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
             //  m_pListView->setUpdatesEnabled(true);
             //  m_pListView->triggerUpdate();
                 m_pListView->setDirty(true);
@@ -594,11 +634,11 @@ bool qjackctlSocketList::moveDownSocketItem (void)
 // qjackctlSocketListView -- Socket list view, supporting drag-n-drop.
 
 // Constructor.
-qjackctlSocketListView::qjackctlSocketListView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView, unsigned long ulSocketFlags )
+qjackctlSocketListView::qjackctlSocketListView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView, bool bReadable )
     : QListView(pParent)
 {
     m_pPatchbayView = pPatchbayView;
-    m_ulSocketFlags = ulSocketFlags;
+    m_bReadable     = bReadable;
     
     m_pAutoOpenTimer   = 0;
     m_iAutoOpenTimeout = 0;
@@ -750,7 +790,7 @@ QDragObject *qjackctlSocketListView::dragObject (void)
 // Context menu request event handler.
 void qjackctlSocketListView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-    m_pPatchbayView->contextMenu(pContextMenuEvent->globalPos(), m_ulSocketFlags);
+    m_pPatchbayView->contextMenu(pContextMenuEvent->globalPos(), m_bReadable);
 }
 
 
@@ -882,7 +922,7 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszNa
     
     m_pGridLayout = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
 
-    m_pOListView = new qjackctlSocketListView(pParent, this, JackPortIsOutput);
+    m_pOListView = new qjackctlSocketListView(pParent, this, true);
     m_pOListView->addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
     m_pOListView->header()->setClickEnabled(false);
     m_pOListView->header()->setResizeEnabled(false);
@@ -897,7 +937,7 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszNa
     m_pPatchworkView->setMaximumWidth(120);
     m_pPatchworkView->setSizePolicy(sizepolicy);
 
-    m_pIListView = new qjackctlSocketListView(pParent, this, JackPortIsInput);
+    m_pIListView = new qjackctlSocketListView(pParent, this, false);
     m_pIListView->addColumn(tr("Input Sockets") + " / " + tr("Plugs"));
     m_pIListView->header()->setClickEnabled(false);
     m_pIListView->header()->setResizeEnabled(false);
@@ -937,7 +977,7 @@ qjackctlPatchbayView::~qjackctlPatchbayView (void)
 
 
 // Common context menu slot.
-void qjackctlPatchbayView::contextMenu ( const QPoint& pos, unsigned long ulSocketFlags )
+void qjackctlPatchbayView::contextMenu ( const QPoint& pos, bool bReadable )
 {
     qjackctlPatchbay *pPatchbay = binding();
     if (pPatchbay == 0)
@@ -947,9 +987,9 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, unsigned long ulSock
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
     qjackctlSocketList *pSocketList = NULL;
-    if (ulSocketFlags & JackPortIsOutput)
+    if (bReadable)
         pSocketList = pPatchbay->OSocketList();
-    else if (ulSocketFlags & JackPortIsInput)
+    else
         pSocketList = pPatchbay->ISocketList();
     if (pSocketList) {
         qjackctlSocketItem *pSocketItem = pSocketList->selectedSocketItem();
@@ -1032,8 +1072,8 @@ qjackctlPatchbay::qjackctlPatchbay ( qjackctlPatchbayView *pPatchbayView )
 {
     m_pPatchbayView = pPatchbayView;
     
-    m_pOSocketList = new qjackctlSocketList(m_pPatchbayView->OListView(), JackPortIsOutput);
-    m_pISocketList = new qjackctlSocketList(m_pPatchbayView->IListView(), JackPortIsInput);
+    m_pOSocketList = new qjackctlSocketList(m_pPatchbayView->OListView(), true);
+    m_pISocketList = new qjackctlSocketList(m_pPatchbayView->IListView(), false);
 
     m_pPatchbayView->setBinding(this);
 }
@@ -1105,7 +1145,11 @@ bool qjackctlPatchbay::canConnectSelected (void)
     default:
         return false;
     }
-    
+
+    // Sockets must be of the same type...
+    if (pOSocket->socketType() != pISocket->socketType())
+        return false;
+        
     // One-to-one connection...
     return (pOSocket->findConnectPtr(pISocket) == 0);
 }
@@ -1145,7 +1189,11 @@ bool qjackctlPatchbay::connectSelected (void)
     default:
         return false;
     }
-    
+
+    // Sockets must be of the same type...
+    if (pOSocket->socketType() != pISocket->socketType())
+        return false;
+
     // One-to-one connection...
     connectSockets(pOSocket, pISocket);
 
@@ -1190,7 +1238,11 @@ bool qjackctlPatchbay::canDisconnectSelected (void)
     default:
         return false;
     }
-    
+
+    // Sockets must be of the same type...
+    if (pOSocket->socketType() != pISocket->socketType())
+        return false;
+
     return (pOSocket->findConnectPtr(pISocket) != 0);
 }
 
@@ -1229,7 +1281,11 @@ bool qjackctlPatchbay::disconnectSelected (void)
     default:
         return false;
     }
-    
+
+    // Sockets must be of the same type...
+    if (pOSocket->socketType() != pISocket->socketType())
+        return false;
+
     // One-to-one disconnection...
     disconnectSockets(pOSocket, pISocket);
 
@@ -1321,10 +1377,10 @@ void qjackctlPatchbay::loadRackSockets ( qjackctlSocketList *pSocketList, QPtrLi
     pSocketList->clear();
     qjackctlSocketItem *pSocketItem = NULL;
     for (qjackctlPatchbaySocket *pSocket = socketlist.first(); pSocket; pSocket = socketlist.next()) {
-        pSocketItem = new qjackctlSocketItem(pSocketList, pSocket->name(), pSocket->clientName(), pSocketItem);
+        pSocketItem = new qjackctlSocketItem(pSocketList, pSocket->name(), pSocket->clientName(), pSocket->type(), pSocketItem);
         qjackctlPlugItem *pPlugItem = NULL;
         for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++)
-            pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pSocketList->flags(), pPlugItem);
+            pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
     }
 }
 
@@ -1368,7 +1424,7 @@ void qjackctlPatchbay::saveRackSockets ( qjackctlSocketList *pSocketList, QPtrLi
     socketlist.clear();
 
     for (qjackctlSocketItem *pSocketItem = pSocketList->sockets().first(); pSocketItem; pSocketItem = pSocketList->sockets().next()) {
-        qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(pSocketItem->socketName(), pSocketItem->clientName());
+        qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(pSocketItem->socketName(), pSocketItem->clientName(), pSocketItem->socketType());
         for (qjackctlPlugItem *pPlugItem = pSocketItem->plugs().first(); pPlugItem; pPlugItem = pSocketItem->plugs().next())
             pSocket->pluglist().append(pPlugItem->plugName());
         socketlist.append(pSocket);
@@ -1418,45 +1474,63 @@ jack_client_t *qjackctlPatchbay::jackClient (void)
     return m_pOSocketList->jackClient();
 }
 
+// ALSA sequencer property accessors.
+void qjackctlPatchbay::setAlsaSeq ( snd_seq_t *pAlsaSeq )
+{
+    m_pOSocketList->setAlsaSeq(pAlsaSeq);
+    m_pISocketList->setAlsaSeq(pAlsaSeq);
+}
+
+snd_seq_t *qjackctlPatchbay::alsaSeq (void)
+{
+    return m_pOSocketList->alsaSeq();
+}
+
 
 // Connections snapshot.
 void qjackctlPatchbay::connectionsSnapshot (void)
 {
-    jack_client_t *pJackClient = m_pOSocketList->jackClient();
-    if (pJackClient == 0)
-        return;
-
     // Take snapshot of client port list.
     m_pOSocketList->clientPortsSnapshot();
     m_pISocketList->clientPortsSnapshot();
-
-    // Then, starting from output sockets, trye to grab the connections...
-    for (qjackctlSocketItem *pOSocket = m_pOSocketList->sockets().first();
-            pOSocket;
-                pOSocket = m_pOSocketList->sockets().next()) {
-        // For each output plug item...
-        for (qjackctlPlugItem *pOPlug = pOSocket->plugs().first();
-                pOPlug;
-                    pOPlug = pOSocket->plugs().next()) {
-            // Get current port connections...
-            QString sOClientPort = pOSocket->socketName() + ":" + pOPlug->plugName();
-            const char **ppszIClientPorts = jack_port_get_all_connections(pJackClient, jack_port_by_name(pJackClient, sOClientPort.latin1()));
-            if (ppszIClientPorts) {
-                // Now, for each input client port...
-                int iIClientPort = 0;
-                while (ppszIClientPorts[iIClientPort]) {
-                    QString sIClientPort = ppszIClientPorts[iIClientPort];
-                    int iColon = sIClientPort.find(":");
-                    if (iColon >= 0) {
-                        qjackctlSocketItem *pISocket = m_pISocketList->findSocket(sIClientPort.left(iColon));
-                        if (pISocket)
-                            connectSockets(pOSocket, pISocket);
+    
+    // Grab the JACK connections...
+    jack_client_t *pJackClient = m_pOSocketList->jackClient();
+    if (pJackClient) {
+        // Then, starting from output sockets, trye to grab the connections...
+        for (qjackctlSocketItem *pOSocket = m_pOSocketList->sockets().first();
+                pOSocket;
+                    pOSocket = m_pOSocketList->sockets().next()) {
+            // For each output plug item...
+            for (qjackctlPlugItem *pOPlug = pOSocket->plugs().first();
+                    pOPlug;
+                        pOPlug = pOSocket->plugs().next()) {
+                // Get current port connections...
+                QString sOClientPort = pOSocket->socketName() + ":" + pOPlug->plugName();
+                const char **ppszIClientPorts = jack_port_get_all_connections(pJackClient, jack_port_by_name(pJackClient, sOClientPort.latin1()));
+                if (ppszIClientPorts) {
+                    // Now, for each input client port...
+                    int iIClientPort = 0;
+                    while (ppszIClientPorts[iIClientPort]) {
+                        QString sIClientPort = ppszIClientPorts[iIClientPort];
+                        int iColon = sIClientPort.find(":");
+                        if (iColon >= 0) {
+                            qjackctlSocketItem *pISocket = m_pISocketList->findSocket(sIClientPort.left(iColon));
+                            if (pISocket)
+                                connectSockets(pOSocket, pISocket);
+                        }
+                        iIClientPort++;
                     }
-                    iIClientPort++;
+                    ::free(ppszIClientPorts);
                 }
-                ::free(ppszIClientPorts);
             }
         }
+    }
+
+    // Grab the ALSA subscriptions...
+    snd_seq_t *pAlsaSeq = m_pOSocketList->alsaSeq();
+    if (pAlsaSeq) {
+        // TODO: Grab the ALSA subscriptions...
     }
 
     // Surely it is kind of tainted.
