@@ -861,6 +861,7 @@
     <function specifier="non virtual">loadPatchbayFile( const QString &amp; sFileName )</function>
     <function specifier="non virtual">savePatchbayFile( const QString &amp; sFileName )</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
+    <function specifier="non virtual">setAlsaSeq( snd_seq_t *pAlsaSeq )</function>
     <function specifier="non virtual" returnType="qjackctlSocketItem *">selectedSocketItem( qjackctlSocketList *pSocketList )</function>
     <function specifier="non virtual">addSocketItem ( qjackctlSocketList *pSocketList, const QString &amp; sCaption )</function>
     <function specifier="non virtual">editSocketItem ( qjackctlSocketList *pSocketList, const QString &amp; sCaption )</function>

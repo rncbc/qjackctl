@@ -130,6 +130,7 @@ void qjackctlMainForm::init (void)
     }
     // Rather obvious setup.
     m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
+    m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
 
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),
@@ -1381,6 +1382,7 @@ void qjackctlMainForm::togglePatchbayForm (void)
     if (m_pPatchbayForm) {
         m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
         m_pPatchbayForm->setJackClient(m_pJackClient);
+        m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
         if (m_pPatchbayForm->isVisible())
             m_pPatchbayForm->hide();
         else

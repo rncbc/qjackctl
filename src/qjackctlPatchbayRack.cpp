@@ -520,22 +520,22 @@ void qjackctlPatchbayRack::loadMidiPorts ( QPtrList<qjackctlMidiPort>& midiports
     snd_seq_client_info_set_client(pClientInfo, -1);
 
     while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
-
-        snd_seq_port_info_set_client(pPortInfo, snd_seq_client_info_get_client(pClientInfo));
-        snd_seq_port_info_set_port(pPortInfo, -1);
-
-        while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
-
-            if (((snd_seq_port_info_get_capability(pPortInfo) & uiAlsaFlags) == uiAlsaFlags) &&
-                !(snd_seq_port_info_get_capability(pPortInfo) & SND_SEQ_PORT_CAP_NO_EXPORT) &&
-                 (snd_seq_client_info_get_client(pClientInfo) > 0)) {
-
-                qjackctlMidiPort *pMidiPort = new qjackctlMidiPort;
-                pMidiPort->sClientName = snd_seq_client_info_get_name(pClientInfo);
-                pMidiPort->iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
-                pMidiPort->sPortName   = snd_seq_port_info_get_name(pPortInfo);
-                pMidiPort->iAlsaPort   = snd_seq_port_info_get_port(pPortInfo);
-                midiports.append(pMidiPort);
+        int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
+        if (iAlsaClient > 0) {
+            QString sClientName = snd_seq_client_info_get_name(pClientInfo);
+            snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
+            snd_seq_port_info_set_port(pPortInfo, -1);
+            while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
+                unsigned int uiPortCapability = snd_seq_port_info_get_capability(pPortInfo);
+                if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
+                    ((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
+                    qjackctlMidiPort *pMidiPort = new qjackctlMidiPort;
+                    pMidiPort->sClientName = sClientName;
+                    pMidiPort->iAlsaClient = iAlsaClient;
+                    pMidiPort->sPortName   = snd_seq_port_info_get_name(pPortInfo);
+                    pMidiPort->iAlsaPort   = snd_seq_port_info_get_port(pPortInfo);
+                    midiports.append(pMidiPort);
+                }
             }
         }
     }

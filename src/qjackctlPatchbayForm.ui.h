@@ -312,6 +312,13 @@ void qjackctlPatchbayForm::setJackClient ( jack_client_t *pJackClient )
 }
 
 
+// (Un)Bind a ALSA sequencer to this form.
+void qjackctlPatchbayForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
+{
+    m_pPatchbay->setAlsaSeq(pAlsaSeq);
+}
+
+
 // Output socket list push button handlers gallore...
 
 void qjackctlPatchbayForm::addOSocket()
