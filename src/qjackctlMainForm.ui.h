@@ -1213,7 +1213,7 @@ void qjackctlMainForm::refreshXrunStats (void)
 {
     updateXrunCount();
 
-    if (m_bJackDetach) {
+    if (m_fXrunTotal < 0.001) {
         QString n = "--";
         updateStatusItem(STATUS_XRUN_TOTAL, n);
         updateStatusItem(STATUS_XRUN_MIN, n);

@@ -3,6 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.14   2004-11-25  Work in progress...
+
+- XRUN status items are kept double-dashed if none has been detected.
+
+
 0.2.13   2004-11-21  Retouches and minor optimizations.
 
 - Main window is now properly minimized instead of simply hidden when

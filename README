@@ -31,7 +31,7 @@ and optionally as root:
 This procedure will end installing the following couple of files:
 
     ${prefix}/bin/qjackctl
-    ${prefix}/share/icons/qjackctl.xpm
+    ${prefix}/share/icons/qjackctl.png
 
 Just launch ${prefix}/bin/qjackctl and you're off (hopefully).
 
