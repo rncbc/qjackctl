@@ -151,7 +151,7 @@
                                 </font>
                             </property>
                             <property name="alignment">
-                                <set>AlignVCenter|AlignLeft</set>
+                                <set>AlignVCenter|AlignHCenter</set>
                             </property>
                             <property name="toolTip" stdset="0">
                                 <string>JACK server mode</string>

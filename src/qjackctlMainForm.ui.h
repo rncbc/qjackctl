@@ -462,33 +462,34 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-S");
     }
     if (bOss) {
-        if (m_preset.iWordLength > 0)
-            m_pJack->addArgument("-w" + QString::number(m_preset.iWordLength));
-        if (!m_preset.sInDevice.isEmpty())
-            m_pJack->addArgument("-C" + m_preset.sInDevice);
-        if (!m_preset.sOutDevice.isEmpty())
-            m_pJack->addArgument("-P" + m_preset.sOutDevice);
         if (m_preset.bIgnoreHW)
             m_pJack->addArgument("-b");
+        if (m_preset.iWordLength > 0)
+            m_pJack->addArgument("-w" + QString::number(m_preset.iWordLength));
     }
-    if (bOss || bAlsa) {
-        if (m_preset.iInChannels > 0)
-            m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
-        if (m_preset.iOutChannels > 0)
-            m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
-    }
-    if (!bOss) {
+    if (bAlsa || bDummy) {
         switch (m_preset.iAudio) {
-        case 0:
+        case QJACKCTL_DUPLEX:
         //  m_pJack->addArgument("-D");
             break;
-        case 1:
+        case QJACKCTL_CAPTURE:
             m_pJack->addArgument("-C");
             break;
-        case 2:
+        case QJACKCTL_PLAYBACK:
             m_pJack->addArgument("-P");
             break;
         }
+    } else {
+        if (m_preset.iAudio != QJACKCTL_PLAYBACK)
+            m_pJack->addArgument("-C" + m_preset.sInDevice);
+        if (m_preset.iAudio != QJACKCTL_CAPTURE)
+            m_pJack->addArgument("-P" + m_preset.sOutDevice);
+    }
+    if (bOss || bAlsa) {
+        if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
+            m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
+        if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
+            m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     }
     if (bDummy && m_preset.iWait > 0)
         m_pJack->addArgument("-w" + QString::number(m_preset.iWait));

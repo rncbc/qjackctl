@@ -169,10 +169,10 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     preset.iAudio       = m_settings.readNumEntry("/Audio", 0);
     preset.iDither      = m_settings.readNumEntry("/Dither", 0);
     preset.iTimeout     = m_settings.readNumEntry("/Timeout", 500);
-    preset.iInChannels  = m_settings.readNumEntry("/InChannels", 0);
-    preset.iOutChannels = m_settings.readNumEntry("/OutChannels", 0);
     preset.sInDevice    = m_settings.readEntry("/InDevice", QString::null);
     preset.sOutDevice   = m_settings.readEntry("/OutDevice", QString::null);
+    preset.iInChannels  = m_settings.readNumEntry("/InChannels", 0);
+    preset.iOutChannels = m_settings.readNumEntry("/OutChannels", 0);
     preset.iStartDelay  = m_settings.readNumEntry("/StartDelay", 2);
     preset.bVerbose     = m_settings.readBoolEntry("/Verbose", false);
     m_settings.endGroup();
@@ -212,10 +212,10 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
     m_settings.writeEntry("/Audio",       preset.iAudio);
     m_settings.writeEntry("/Dither",      preset.iDither);
     m_settings.writeEntry("/Timeout",     preset.iTimeout);
-    m_settings.writeEntry("/InChannels",  preset.iInChannels);
-    m_settings.writeEntry("/OutChannels", preset.iOutChannels);
     m_settings.writeEntry("/InDevice",    preset.sInDevice);
     m_settings.writeEntry("/OutDevice",   preset.sOutDevice);
+    m_settings.writeEntry("/InChannels",  preset.iInChannels);
+    m_settings.writeEntry("/OutChannels", preset.iOutChannels);
     m_settings.writeEntry("/StartDelay",  preset.iStartDelay);
     m_settings.writeEntry("/Verbose",     preset.bVerbose);
     m_settings.endGroup();

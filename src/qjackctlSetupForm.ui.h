@@ -71,6 +71,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     // Load combo box history...
     m_pSetup->loadComboBoxHistory(ServerComboBox);
     m_pSetup->loadComboBoxHistory(InterfaceComboBox);
+    m_pSetup->loadComboBoxHistory(InDeviceComboBox);
+    m_pSetup->loadComboBoxHistory(OutDeviceComboBox);
     m_pSetup->loadComboBoxHistory(StartupScriptShellComboBox);
     m_pSetup->loadComboBoxHistory(PostStartupScriptShellComboBox);
     m_pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
@@ -165,6 +167,14 @@ void qjackctlSetupForm::changePreset( const QString& sPreset )
         AudioComboBox->setCurrentItem(preset.iAudio);
         DitherComboBox->setCurrentItem(preset.iDither);
         TimeoutComboBox->setCurrentText(QString::number(preset.iTimeout));
+        if (preset.sInDevice.isEmpty())
+            InDeviceComboBox->setCurrentItem(0);
+        else
+            InDeviceComboBox->setCurrentText(preset.sInDevice);
+        if (preset.sOutDevice.isEmpty())
+            OutDeviceComboBox->setCurrentItem(0);
+        else
+            OutDeviceComboBox->setCurrentText(preset.sOutDevice);
         InChannelsSpinBox->setValue(preset.iInChannels);
         OutChannelsSpinBox->setValue(preset.iOutChannels);
         StartDelayComboBox->setCurrentText(QString::number(preset.iStartDelay));
@@ -203,10 +213,16 @@ void qjackctlSetupForm::savePreset (void)
     preset.iAudio       = AudioComboBox->currentItem();
     preset.iDither      = DitherComboBox->currentItem();
     preset.iTimeout     = TimeoutComboBox->currentText().toInt();
+    preset.sInDevice    = InDeviceComboBox->currentText();
+    preset.sOutDevice   = OutDeviceComboBox->currentText();
     preset.iInChannels  = InChannelsSpinBox->value();
     preset.iOutChannels = OutChannelsSpinBox->value();
     preset.iStartDelay  = StartDelayComboBox->currentText().toInt();
     preset.bVerbose     = VerboseCheckBox->isChecked();
+    if (preset.sInDevice == InDeviceComboBox->text(0))
+        preset.sInDevice = QString::null;
+    if (preset.sOutDevice == OutDeviceComboBox->text(0))
+        preset.sOutDevice = QString::null;
     m_pSetup->savePreset(preset, sPreset);
 
     m_iDirtySetup++;
@@ -265,6 +281,51 @@ void qjackctlSetupForm::computeLatency (void)
         LatencyTextValue->setText(tr("n/a"));
 }
 
+
+void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
+{
+//  bool bDummy     = (sDriver == "dummy");
+    bool bOss       = (sDriver == "oss");
+    bool bAlsa      = (sDriver == "alsa");
+    bool bPortaudio = (sDriver == "portaudio");
+
+    bool bInEnabled  = false;
+    bool bOutEnabled = false;
+    switch (iAudio) {
+    case QJACKCTL_DUPLEX:
+        bInEnabled  = true;
+        bOutEnabled = true;
+        break;
+    case QJACKCTL_CAPTURE:
+        bInEnabled  = true;
+        bOutEnabled = false;
+        break;
+    case QJACKCTL_PLAYBACK:
+        bInEnabled  = false;
+        bOutEnabled = true;
+        break;
+    }
+
+    InDeviceTextLabel->setEnabled(bInEnabled && (bOss || bPortaudio));
+    InDeviceComboBox->setEnabled(bInEnabled && (bOss || bPortaudio));
+    OutDeviceTextLabel->setEnabled(bOutEnabled && (bOss || bPortaudio));
+    OutDeviceComboBox->setEnabled(bOutEnabled && (bOss || bPortaudio));
+
+    InChannelsTextLabel->setEnabled(bInEnabled && (bOss || bAlsa));
+    InChannelsSpinBox->setEnabled(bInEnabled && (bOss || bAlsa));
+    OutChannelsTextLabel->setEnabled(bOutEnabled && (bOss || bAlsa));
+    OutChannelsSpinBox->setEnabled(bOutEnabled && (bOss || bAlsa));
+
+    computeLatency();
+}
+
+
+void qjackctlSetupForm::changeAudio ( int iAudio )
+{
+    changeDriverAudio(DriverComboBox->currentText(), iAudio);
+}
+
+
 void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 {
     bool bDummy     = (sDriver == "dummy");
@@ -295,15 +356,10 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     InterfaceTextLabel->setEnabled(bAlsa);
     InterfaceComboBox->setEnabled(bAlsa);
 
-    DitherTextLabel->setEnabled(!bDummy);
-    DitherComboBox->setEnabled(!bDummy);
+    DitherTextLabel->setEnabled(bAlsa || bPortaudio);
+    DitherComboBox->setEnabled(bAlsa || bPortaudio);
 
-    InChannelsTextLabel->setEnabled(bAlsa || bOss);
-    InChannelsSpinBox->setEnabled(bAlsa || bOss);
-    OutChannelsTextLabel->setEnabled(bAlsa || bOss);
-    OutChannelsSpinBox->setEnabled(bAlsa || bOss);
-
-    computeLatency();
+    changeDriverAudio(sDriver, AudioComboBox->currentItem());
 }
 
 
@@ -553,6 +609,8 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->saveComboBoxHistory(ServerComboBox);
     m_pSetup->saveComboBoxHistory(PriorityComboBox);
     m_pSetup->saveComboBoxHistory(InterfaceComboBox);
+    m_pSetup->saveComboBoxHistory(InDeviceComboBox);
+    m_pSetup->saveComboBoxHistory(OutDeviceComboBox);
     m_pSetup->saveComboBoxHistory(StartupScriptShellComboBox);
     m_pSetup->saveComboBoxHistory(PostStartupScriptShellComboBox);
     m_pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);

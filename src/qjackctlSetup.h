@@ -26,6 +26,12 @@
 #include <qsettings.h>
 #include <qcombobox.h>
 
+// Audio mode combobox item indexes.
+#define QJACKCTL_DUPLEX     0
+#define QJACKCTL_CAPTURE    1
+#define QJACKCTL_PLAYBACK   2
+
+
 // Server settings preset struct.
 struct qjackctlPreset
 {
@@ -50,10 +56,10 @@ struct qjackctlPreset
     int     iAudio;
     int     iDither;
     int     iTimeout;
-    int     iInChannels;
-    int     iOutChannels;
     QString sInDevice;
     QString sOutDevice;
+    int     iInChannels;
+    int     iOutChannels;
     int     iStartDelay;
     bool    bVerbose;
 };
