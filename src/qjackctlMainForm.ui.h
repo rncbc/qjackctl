@@ -105,12 +105,6 @@ void qjackctlMainForm::init (void)
 
     m_pAlsaNotifier = NULL;
 
-    m_iAlsaNotify = 0;
-    m_iPortNotify = 0;
-    m_iXrunNotify = 0;
-    m_iBuffNotify = 0;
-    m_iShutNotify = 0;
-
     // All forms are to be created later on setup.
     m_pMessagesForm    = NULL;
     m_pStatusForm      = NULL;
@@ -794,6 +788,8 @@ void qjackctlMainForm::processJackExit (void)
 // XRUN detection routine.
 QString& qjackctlMainForm::detectXrun ( QString & s )
 {
+	if (m_iXrunSkipped > 0)
+		return s;
     QRegExp rx(m_pSetup->sXrunRegex);
     int iPos = rx.search(s);
     if (iPos >= 0) {
@@ -1117,6 +1113,7 @@ void qjackctlMainForm::resetXrunStats (void)
     m_tXrunLast.setHMS(0, 0, 0);
 
     m_iXrunCallbacks = 0;
+    m_iXrunSkipped   = 0;
 
 #ifdef CONFIG_JACK_MAX_DELAY
     if (m_pJackClient)
@@ -1323,10 +1320,6 @@ static void qjackctl_shutdown ( void *pvData )
 // Jack socket notifier port/graph callback funtion.
 void qjackctlMainForm::portNotifyEvent (void)
 {
-    if (m_iPortNotify > 0)
-        return;
-    m_iPortNotify++;
-
     // Log some message here, if new.
     if (m_iJackRefresh == 0)
         appendMessagesColor(tr("Audio connection graph change."), "#cc9966");
@@ -1334,20 +1327,22 @@ void qjackctlMainForm::portNotifyEvent (void)
     refreshJackConnections();
     // We'll be dirty too...
     m_iJackDirty++;
-
-    m_iPortNotify--;
 }
 
 
 // Jack socket notifier XRUN callback funtion.
 void qjackctlMainForm::xrunNotifyEvent (void)
 {
-    if (m_iXrunNotify > 0)
-        return;
-    m_iXrunNotify++;
-
     // Just increment callback counter.
     m_iXrunCallbacks++;
+
+	// Skip this one, maybe we're under some kind of storm...
+	if (m_tXrunLast.elapsed() < 1000) {
+		m_tXrunLast.restart();
+		m_iXrunSkipped++;
+		return;
+	}
+
 #ifdef CONFIG_JACK_XRUN_DELAY
     // We have an official XRUN delay value (convert usecs to msecs)...
     updateXrunStats(0.001 * jack_get_xrun_delayed_usecs(m_pJackClient));
@@ -1359,52 +1354,34 @@ void qjackctlMainForm::xrunNotifyEvent (void)
 #endif
 
     // Log highlight this event.
-    appendMessagesColor(tr("XRUN callback (%1).").arg(m_iXrunCallbacks), "#cc99cc");
-
-    m_iXrunNotify--;
+    appendMessagesColor(tr("XRUN callback (%1).").arg(m_iXrunCallbacks), "#cc66cc");
 }
 
 
 // Jack buffer size notifier callback funtion.
 void qjackctlMainForm::buffNotifyEvent (void)
 {
-    if (m_iBuffNotify > 0)
-        return;
-    m_iBuffNotify++;
-
     // Don't need to nothing, it was handled on qjackctl_bufferSizeCallback;
     // just log this event as routine.
-    appendMessagesColor(tr("Buffer size change (%1).").arg((int) g_nframes), "#cc9966");
-
-    m_iBuffNotify--;
+    appendMessagesColor(tr("Buffer size change (%1).").arg((int) g_nframes), "#996633");
 }
 
 
 // Jack socket notifier callback funtion.
 void qjackctlMainForm::shutNotifyEvent (void)
 {
-    if (m_iShutNotify > 0)
-        return;
-    m_iShutNotify++;
-
     // Log this event.
-    appendMessagesColor(tr("Shutdown notification."), "#cc9999");
+    appendMessagesColor(tr("Shutdown notification."), "#cc6666");
     // Do what has to be done.
     stopJackServer();
     // We're not detached anymore, anyway.
     m_bJackDetach = false;
-
-    m_iShutNotify--;
 }
 
 
 // ALSA announce slot.
 void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 {
-    if (m_iAlsaNotify > 0)
-        return;
-    m_iAlsaNotify++;
-
     snd_seq_event_t *pAlsaEvent;
 
     snd_seq_event_input(m_pAlsaSeq, &pAlsaEvent);
@@ -1417,8 +1394,6 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
     refreshAlsaConnections();
     // We'll be dirty too...
     m_iAlsaDirty++;
-
-    m_iAlsaNotify--;
 }
 
 
@@ -1679,12 +1654,6 @@ void qjackctlMainForm::stopJackClient (void)
     if (m_pJackClient)
         jack_client_close(m_pJackClient);
     m_pJackClient = NULL;
-
-    // Reset notification counters.
-    m_iPortNotify = 0;
-    m_iXrunNotify = 0;
-    m_iBuffNotify = 0;
-    m_iShutNotify = 0;
 
     // Displays are dimmed again.
     ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);
@@ -2021,6 +1990,12 @@ void qjackctlMainForm::refreshStatus (void)
 #ifdef CONFIG_JACK_MAX_DELAY
             updateStatusItem(STATUS_MAX_DELAY, QString::number(0.001 * jack_get_max_delayed_usecs(m_pJackClient)) + " " + tr("msec"));
 #endif
+			// Check if we're skipping some XRUN callbacks...
+			if (m_iXrunSkipped > 0) {
+				appendMessagesColor(tr("XRUN callback (%1 skipped).").arg(m_iXrunSkipped), "#cc99cc");
+				m_iXrunSkipped = 0;
+				updateXrunCount();
+			}
         }
     }   // No need to update often if we're just idle...
     else if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {

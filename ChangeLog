@@ -3,7 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.14   2005-01-14  Work in progress...
+0.2.14   2005-01-15  Work in progress...
+
+- Put a limit on XRUN callback messages and statistics report rate, preventing
+  the potential hosing of the GUI due to a XRUN cascade storm. The maximum
+  reasonable report rate has been fixed to be one XRUN callback occurrence 
+  per second.
 
 - Set to ignore the SIGPIPE ("Broken pipe") signal, where available, as the
   default handler is usually fatal when a JACK client is zombified abruptly.
@@ -11,8 +16,8 @@ ChangeLog
 - All conection view items are now sorted in natural case insensitive order,
   not just as audio port names as was before.
 
-- Got rid of those nonsense paranoid and rather stupid mutex guards on the
-  connections management framework (nuff said :).
+- Got rid of those nonsense paranoid and rather stupid pseudo-mutex guards on 
+  the connections management framework and event notifications (nuff said :).
 
 - Optional confirmation warning on audio server shutdown, if there's some
   audio clients still active and connected (as suggested by Sampo Savolainen).
