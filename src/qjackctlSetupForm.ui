@@ -1542,7 +1542,7 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Unlock memory</string>
+                                            <string>&amp;Unlock Memory</string>
                                         </property>
                                         <property name="accel">
                                             <string>Alt+U</string>
