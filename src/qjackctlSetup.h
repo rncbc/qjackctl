@@ -91,6 +91,7 @@ public:
     int     iTimeDisplay;
     QString sMessagesFont;
     bool    bQueryClose;
+    bool    bStdoutCapture;
 
     // Defaults...
     QString sPatchbayPath;

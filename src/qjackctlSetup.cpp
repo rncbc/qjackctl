@@ -59,6 +59,7 @@ qjackctlSetup::qjackctlSetup (void)
     iTimeDisplay            = m_settings.readNumEntry("/TimeDisplay", 0);
     sMessagesFont           = m_settings.readEntry("/MessagesFont", QString::null);
     bQueryClose             = m_settings.readBoolEntry("/QueryClose", true);
+    bStdoutCapture          = m_settings.readBoolEntry("/StdoutCapture", true);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -104,6 +105,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/TimeDisplay",             iTimeDisplay);
     m_settings.writeEntry("/MessagesFont",            sMessagesFont);
     m_settings.writeEntry("/QueryClose",              bQueryClose);
+    m_settings.writeEntry("/StdoutCapture",           bStdoutCapture);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");

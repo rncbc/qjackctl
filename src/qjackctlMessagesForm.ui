@@ -82,7 +82,7 @@
                 <bool>false</bool>
             </property>
             <property name="toolTip" stdset="0">
-                <string>JACK service messages log</string>
+                <string>Messages log</string>
             </property>
         </widget>
     </grid>

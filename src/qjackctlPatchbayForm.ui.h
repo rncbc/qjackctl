@@ -227,11 +227,10 @@ void qjackctlPatchbayForm::newPatchbay()
 {
     // Ask for a snapshot for scratch...
     bool bSnapshot = false;
-    if (m_pPatchbay->jackClient()) {
+    if (m_pPatchbay->jackClient() || m_pPatchbay->alsaSeq()) {
         bSnapshot = (QMessageBox::information(this,
             tr("New Patchbay definition"),
-            tr("JACK is currently running.") + "\n\n" +
-            tr("Create patchbay definition as snapshot") + "\n" +
+            tr("Create patchbay definition as a snapshot") + "\n" +
             tr("of all actual client connections?"),
             tr("Yes"), tr("No")) == 0);
     }

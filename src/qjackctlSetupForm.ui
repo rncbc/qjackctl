@@ -2348,6 +2348,25 @@
                                     <string>Whether to ask for confirmation on application exit</string>
                                 </property>
                             </widget>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>StdoutCaptureCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Capture Standard &amp;Output into Messages</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+C</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to capture standard output (stdout/stderr) into messages window</string>
+                                </property>
+                            </widget>
                         </vbox>
                     </widget>
                 </vbox>

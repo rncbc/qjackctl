@@ -20,6 +20,8 @@
 
 *****************************************************************************/
 
+#include <qregexp.h>
+
 #include <stdlib.h>
 
 #include "config.h"
@@ -405,12 +407,12 @@ void qjackctlSocketForm::socketTypeChanged()
 // Update client list if available.
 void qjackctlSocketForm::clientNameChanged()
 {
-    QString sClientName = ClientNameComboBox->currentText();
-
     PlugNameComboBox->clear();
 
+    QString sClientName = ClientNameComboBox->currentText();
     if (sClientName.isEmpty())
         return;
+    QRegExp rxClientName(sClientName);
 
     switch (SocketTypeGroup->id(SocketTypeGroup->selected())) {
       case 0: // QJACKCTL_SOCKETTYPE_AUDIO
@@ -421,7 +423,7 @@ void qjackctlSocketForm::clientNameChanged()
                 while (ppszClientPorts[iClientPort]) {
                     QString sClientPort = ppszClientPorts[iClientPort];
                     int iColon = sClientPort.find(":");
-                    if (iColon >= 0 && sClientName == sClientPort.left(iColon))
+                    if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon)))
                         PlugNameComboBox->insertItem(sClientPort.right(sClientPort.length() - iColon - 1));
                     iClientPort++;
                 }
@@ -445,7 +447,7 @@ void qjackctlSocketForm::clientNameChanged()
             while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
                 int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
                 QString sClient = snd_seq_client_info_get_name(pClientInfo);
-                if (iAlsaClient > 0 && sClient == sClientName) {
+                if (iAlsaClient > 0 && rxClientName.exactMatch(sClient)) {
                     snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
                     snd_seq_port_info_set_port(pPortInfo, -1);
                     while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {

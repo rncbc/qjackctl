@@ -173,7 +173,7 @@
                                     <string>MIDI</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>Audio socket type (JACK)</string>
+                                    <string>MIDI socket type (ALSA)</string>
                                 </property>
                             </widget>
                         </hbox>
@@ -186,7 +186,7 @@
                             <bool>true</bool>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>JACK Client name (regular expression)</string>
+                            <string>Client name (regular expression)</string>
                         </property>
                     </widget>
                     <widget class="QPushButton" row="3" column="2">
@@ -228,7 +228,7 @@
                             <bool>true</bool>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>JACK port short name (regular expression)</string>
+                            <string>Port name (regular expression)</string>
                         </property>
                     </widget>
                     <widget class="QListView" row="4" column="1" rowspan="5" colspan="1">
