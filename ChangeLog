@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.0   2003-12-10  ALSA sequencer patchbay entrance.
+0.2.0   2003-12-12  ALSA sequencer patchbay entrance.
 
 - ALSA sequencer subscription patchbay feature, complementing current
   audio service with a MIDI application connection graph, gracefuly
