@@ -362,12 +362,17 @@ public:
 public slots:
 
     // Complete contents refreshner; return dirty status.
-    bool refresh();
+    void refresh();
 
     // Explicit connection slots.
     bool connectSelected();
     bool disconnectSelected();
     bool disconnectAll();
+
+signals:
+
+    // Connection change signal.
+    void connectChanged();
 
 private:
 

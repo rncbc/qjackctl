@@ -29,7 +29,7 @@
 void qjackctlConnectionsForm::init (void)
 {
     m_pJackClient = NULL;
-    m_pJackConnections = NULL;
+    m_pConnections = NULL;
 
     // Connect it to some UI feedback slot.
     QObject::connect(ConnectionsView->OListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
@@ -73,13 +73,19 @@ void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
 {
     m_pJackClient = pJackClient;
 
-    if (pJackClient == NULL && m_pJackConnections) {
-        delete m_pJackConnections;
-        m_pJackConnections = NULL;
+    if (pJackClient == NULL && m_pConnections) {
+        delete m_pConnections;
+        m_pConnections = NULL;
     }
     
-    if (pJackClient && m_pJackConnections == NULL)
-        m_pJackConnections = new qjackctlConnections(ConnectionsView, pJackClient);
+    if (pJackClient && m_pConnections == NULL) {
+        m_pConnections = new qjackctlConnections(ConnectionsView, pJackClient);
+        if (m_pConnections) {
+            qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+            if (pMainForm)
+                QObject::connect(m_pConnections, SIGNAL(connectChanged()), pMainForm, SLOT(connectChangedSlot()));
+        }
+    }
 
     stabilize(pJackClient != NULL);
 }
@@ -88,8 +94,8 @@ void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
 // Connect current selected ports.
 void qjackctlConnectionsForm::connectSelected (void)
 {
-    if (m_pJackConnections) {
-        if (m_pJackConnections->connectSelected())
+    if (m_pConnections) {
+        if (m_pConnections->connectSelected())
             refresh(false);
     }
 }
@@ -98,8 +104,8 @@ void qjackctlConnectionsForm::connectSelected (void)
 // Disconnect current selected ports.
 void qjackctlConnectionsForm::disconnectSelected (void)
 {
-    if (m_pJackConnections) {
-        if (m_pJackConnections->disconnectSelected())
+    if (m_pConnections) {
+        if (m_pConnections->disconnectSelected())
             refresh(false);
     }
 }
@@ -108,8 +114,8 @@ void qjackctlConnectionsForm::disconnectSelected (void)
 // Disconnect all connected ports.
 void qjackctlConnectionsForm::disconnectAll()
 {
-    if (m_pJackConnections) {
-        if (m_pJackConnections->disconnectAll())
+    if (m_pConnections) {
+        if (m_pConnections->disconnectAll())
             refresh(false);
     }
 }
@@ -130,30 +136,26 @@ void qjackctlConnectionsForm::stabilizeForm ( void )
 
 
 // Either rebuild all connections now or notify main form for doing that later.
-int qjackctlConnectionsForm::refresh ( bool bEnabled )
+void qjackctlConnectionsForm::refresh ( bool bEnabled )
 {
-    int iDirtyCount = 0;
-    
-    if (m_pJackConnections && bEnabled) {
-        iDirtyCount += m_pJackConnections->refresh();
+    if (m_pConnections && bEnabled) {
+        m_pConnections->refresh();
         stabilize(true);
     } else {
         qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
         if (pMainForm)
             pMainForm->refreshConnections();
     }
-    
-    return iDirtyCount;
 }
 
 
 // Proper enablement of connections command controls.
 void qjackctlConnectionsForm::stabilize ( bool bEnabled )
 {
-    if (m_pJackConnections && bEnabled) {
-        ConnectPushButton->setEnabled(m_pJackConnections->canConnectSelected());
-        DisconnectPushButton->setEnabled(m_pJackConnections->canDisconnectSelected());
-        DisconnectAllPushButton->setEnabled(m_pJackConnections->canDisconnectAll());
+    if (m_pConnections && bEnabled) {
+        ConnectPushButton->setEnabled(m_pConnections->canConnectSelected());
+        DisconnectPushButton->setEnabled(m_pConnections->canDisconnectSelected());
+        DisconnectAllPushButton->setEnabled(m_pConnections->canDisconnectAll());
         RefreshPushButton->setEnabled(true);
     } else {
         ConnectPushButton->setEnabled(false);

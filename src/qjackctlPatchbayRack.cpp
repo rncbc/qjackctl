@@ -427,7 +427,7 @@ void qjackctlPatchbayRack::connectCable ( qjackctlPatchbaySocket *pOutputSocket,
             if (pszInputPort) {
                 unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
                 if (isConnected(pszOutputPort, pszInputPort))
-                    uiCableFlags = QJACKCTL_CABLE_OK;
+                    uiCableFlags = QJACKCTL_CABLE_CHECKED;
                 else if (jack_connect(m_pJackClient, pszOutputPort, pszInputPort) == 0)
                     uiCableFlags = QJACKCTL_CABLE_CONNECTED;
                 emit cableConnected(pszOutputPort, pszInputPort, uiCableFlags);

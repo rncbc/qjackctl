@@ -3,10 +3,18 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 TODOs
 
+0.1.1
+
+- Support for some or all of the newest jackd command line options
+  (e.g. --inchannels, --outchannels and --shorts).
+- Having some LADCCA support or awareness may be very welcome.
+
+
 0.0.5 Backlog
 
 - Make available some translations, as some has been contributed already;
   I'm missing "volunteers" for French (fr), German (de) and Spanish (es).
+
 
 0.0.3 Backlog:
 

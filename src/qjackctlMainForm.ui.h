@@ -558,11 +558,12 @@ void qjackctlMainForm::updateActivePatchbay (void)
 {
     // Time to load the active patchbay rack profiler?
     if (m_setup.bActivePatchbay && !m_setup.sActivePatchbayPath.isEmpty()) {
-        if (qjackctlPatchbayFile::load(&m_patchbayRack, m_setup.sActivePatchbayPath)) {
-            m_iDirtyCount++;
-        } else {
+        if (!qjackctlPatchbayFile::load(&m_patchbayRack, m_setup.sActivePatchbayPath)) {
             appendMessagesError(tr("Could not load active patchbay definition. Disabled."));
             m_setup.bActivePatchbay = false;
+        }   // If we're up and running, make it dirty :)
+        else if (m_pJackClient) {
+            m_iDirtyCount++;
         }
     }
 }
@@ -866,10 +867,13 @@ void qjackctlMainForm::timerSlot (void)
     // Is the connection patchbay dirty enough?
     if (m_pConnectionsForm) {
         // Are we about to enforce a connections persistence profile?
-        if (m_setup.bActivePatchbay && m_iDirtyCount > 0) {
+        if (m_iDirtyCount > 0) {
             m_iDirtyCount = 0;
-            m_patchbayRack.connectScan(m_pJackClient);
-            refreshConnections();
+            if (m_setup.bActivePatchbay) {
+                appendMessagesColor(tr("Active patchbay scan") + "...", "#6699cc");
+                m_patchbayRack.connectScan(m_pJackClient);
+                refreshConnections();
+            }
         }
         // Shall we refresh connections now and then?
         if (m_setup.bAutoRefresh && (m_iTimerSlot % m_setup.iTimeRefresh) == 0)
@@ -877,8 +881,7 @@ void qjackctlMainForm::timerSlot (void)
         // Are we about to refresh it, really?
         if (m_iRefresh > 0) {
             m_iRefresh = 0;
-            // Actual refresh; are we about to enforce a connections profile?
-            m_iDirtyCount += m_pConnectionsForm->refresh(true);
+            m_pConnectionsForm->refresh(true);
         }
     }
 
@@ -888,29 +891,43 @@ void qjackctlMainForm::timerSlot (void)
 
 
 // Cable connection notification slot.
+void qjackctlMainForm::connectChangedSlot (void)
+{
+    // Just shake the connection status quo.
+    m_iDirtyCount++;
+    
+    appendMessagesColor(tr("Connections change") + ".", "#9999cc");
+}
+
+
+// Cable connection notification slot.
 void qjackctlMainForm::cableConnectSlot ( const char *pszOutputPort, const char *pszInputPort, unsigned int ulCableFlags )
 {
     QString sText = QFileInfo(m_setup.sActivePatchbayPath).baseName() + ": ";
+    QString sColor;
 
     sText += pszOutputPort;
     sText += " -> ";
     sText += pszInputPort;
-    sText += ": ";
+    sText += " ";
 
     switch (ulCableFlags) {
-    case QJACKCTL_CABLE_OK:
-        sText += tr("OK");
+    case QJACKCTL_CABLE_CHECKED:
+        sText += tr("checked");
+        sColor = "#99cccc";
         break;
     case QJACKCTL_CABLE_CONNECTED:
-        sText += tr("CONNECTED");
+        sText += tr("connected");
+        sColor = "#669999";
         break;
     case QJACKCTL_CABLE_FAILED:
     default:
-        sText += tr("FAILED");
+        sText += tr("failed");
+        sColor = "#cc9999";
         break;
     }
 
-    appendMessagesColor(sText + ".", "#669999");
+    appendMessagesColor(sText + ".", sColor);
 }
 
 
@@ -1148,27 +1165,11 @@ void qjackctlMainForm::toggleMessagesForm (void)
     }
 
     if (m_pMessagesForm) {
+        m_setup.saveWidgetGeometry(m_pMessagesForm);
         if (m_pMessagesForm->isVisible())
             m_pMessagesForm->hide();
         else
             m_pMessagesForm->show();
-    }
-}
-
-
-// Setup dialog requester slot.
-void qjackctlMainForm::showSetupForm (void)
-{
-    qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
-    if (pSetupForm) {
-        pSetupForm->load(&m_setup);
-        if (pSetupForm->exec()) {
-            pSetupForm->save(&m_setup);
-            updateMessagesFont();
-            updateTimeDisplayToolTips();
-            updateActivePatchbay();
-        }
-        delete pSetupForm;
     }
 }
 
@@ -1182,6 +1183,7 @@ void qjackctlMainForm::toggleStatusForm (void)
     }
     
     if (m_pStatusForm) {
+        m_setup.saveWidgetGeometry(m_pStatusForm);
         if (m_pStatusForm->isVisible())
             m_pStatusForm->hide();
         else
@@ -1199,6 +1201,7 @@ void qjackctlMainForm::toggleConnectionsForm (void)
     }
     
     if (m_pConnectionsForm) {
+        m_setup.saveWidgetGeometry(m_pConnectionsForm);
         m_pConnectionsForm->setJackClient(m_pJackClient);
         if (m_pConnectionsForm->isVisible())
             m_pConnectionsForm->hide();
@@ -1220,11 +1223,42 @@ void qjackctlMainForm::togglePatchbayForm (void)
     }
     
     if (m_pPatchbayForm) {
+        m_setup.saveWidgetGeometry(m_pPatchbayForm);
         m_pPatchbayForm->setJackClient(m_pJackClient);
         if (m_pPatchbayForm->isVisible())
             m_pPatchbayForm->hide();
         else
             m_pPatchbayForm->show();
+    }
+}
+
+
+// Setup dialog requester slot.
+void qjackctlMainForm::showSetupForm (void)
+{
+    qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
+    if (pSetupForm) {
+        // To track down immediate changes.
+        QString sOldMessagesFont       = m_setup.sMessagesFont;
+        int     iOldTimeDisplay        = m_setup.iTimeDisplay;
+        bool    bOldActivePatchbay     = m_setup.bActivePatchbay;
+        QString sOldActivePatchbayPath = m_setup.sActivePatchbayPath;
+        // Load the current setup settings.
+        pSetupForm->load(&m_setup);
+        // Show the setup dialog...
+        if (pSetupForm->exec()) {
+            // Save the new setup settings.
+            pSetupForm->save(&m_setup);
+            // Check wheather something immediate has changed.
+            if (sOldMessagesFont != m_setup.sMessagesFont)
+                updateMessagesFont();
+            if (iOldTimeDisplay |= m_setup.iTimeDisplay)
+                updateTimeDisplayToolTips();
+            if ((!bOldActivePatchbay && m_setup.bActivePatchbay) ||
+                (sOldActivePatchbayPath != m_setup.sActivePatchbayPath))
+                updateActivePatchbay();
+        }
+        delete pSetupForm;
     }
 }
 

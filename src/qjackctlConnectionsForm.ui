@@ -221,7 +221,7 @@
 </includes>
 <variables>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
-    <variable access="private">qjackctlConnections *m_pJackConnections;</variable>
+    <variable access="private">qjackctlConnections *m_pConnections;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">connectSelected()</slot>
@@ -236,7 +236,7 @@
     <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
     <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
-    <function specifier="non virtual" returnType="int">refresh( bool bEnabled )</function>
+    <function specifier="non virtual">refresh( bool bEnabled )</function>
     <function specifier="non virtual">stabilize( bool bEnabled )</function>
 </functions>
 <pixmapinproject/>

@@ -614,6 +614,7 @@
     <slot specifier="non virtual">buffNotifySlot( int fd )</slot>
     <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">timerSlot( void )</slot>
+    <slot specifier="non virtual">connectChangedSlot( void )</slot>
     <slot specifier="non virtual">cableConnectSlot(const char *pszOutputPort, const char *pszInputPort, unsigned int ulCableFlags)</slot>
     <slot specifier="non virtual">refreshConnections( void )</slot>
     <slot specifier="non virtual">toggleMessagesForm( void )</slot>

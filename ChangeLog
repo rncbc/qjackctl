@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.1.0   2003-10-20  Major user interface redesign.
+0.1.0   2003-10-22  Major user interface redesign.
 
 - Main application window complete redesign, now more like a multimedia/LCD
   control panel -- old main window dialog tabs are now splitted in separate
@@ -15,11 +15,12 @@ ChangeLog
   generic startup/shutdown script options.
 
 - Seamless support for externally started JACK server, providing a client-only
-  mode of operation; if JACK daemon is already started, qjackctl enters in
-  client detached mode automatically.
+  mode of operation; if the JACK daemon is already started, qjackctl enters in
+  client detached mode automagically.
   
-- Messages window font is configurable and saved across sessions. Some
-  colorization has been introduced to some event messages.
+- Messages window font is configurable and saved across sessions (by Jack
+  O'Quin's humble request). Some colorization has been introduced on some
+  event messages.
 
 - Preliminary patchbay persistence feature is under way. A patchbay definition
   editor is already included, following an alternative socket-plug patchbay

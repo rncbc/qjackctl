@@ -221,7 +221,9 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
 void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
 {
     // Try to save form window position...
-    if (pWidget) {
+    // (due to X11 window managers ideossincrasies, we better
+    // only save the form geometry while its up and visible)
+    if (pWidget && pWidget->isVisible()) {
         QPoint fpos  = pWidget->pos();
         QSize  fsize = pWidget->size();
         settings.beginGroup("/Geometry/" + QString(pWidget->name()));

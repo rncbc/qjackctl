@@ -1119,7 +1119,10 @@ bool qjackctlConnections::connectSelected (void)
         endExclusive();
     }
     m_pConnectionsView->ConnectorView()->update();
-    
+
+    if (bResult)
+        emit connectChanged();
+
     return bResult;
 }
 
@@ -1253,7 +1256,10 @@ bool qjackctlConnections::disconnectSelected (void)
         endExclusive();
     }
     m_pConnectionsView->ConnectorView()->update();
-    
+
+    if (bResult)
+        emit connectChanged();
+
     return bResult;
 }
 
@@ -1356,7 +1362,10 @@ bool qjackctlConnections::disconnectAll (void)
         endExclusive();
     }
     m_pConnectionsView->ConnectorView()->update();
-    
+
+    if (bResult)
+        emit connectChanged();
+        
     return bResult;
 }
 
@@ -1379,7 +1388,7 @@ bool qjackctlConnections::disconnectAllEx (void)
 
 
 // Complete contents rebuilder; return dirty status.
-bool qjackctlConnections::refresh (void)
+void qjackctlConnections::refresh (void)
 {
     int iDirtyCount = 0;
     
@@ -1392,7 +1401,8 @@ bool qjackctlConnections::refresh (void)
 
     (m_pConnectionsView->ConnectorView())->update();
     
-    return (iDirtyCount > 0);
+    if (iDirtyCount > 0)
+        emit connectChanged();
 }
 
 

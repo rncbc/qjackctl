@@ -36,7 +36,7 @@
 
 // Patchbay change signal flags.
 #define QJACKCTL_CABLE_FAILED       0
-#define QJACKCTL_CABLE_OK           1
+#define QJACKCTL_CABLE_CHECKED      1
 #define QJACKCTL_CABLE_CONNECTED    2
 
 
