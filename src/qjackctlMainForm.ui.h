@@ -566,7 +566,7 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
     QToolTip::remove(TransportTimeTextLabel);
 
     QString sTimeDisplay   = tr("Transport BBT (bar:beat.ticks)");
-    QString sTransportTime = tr("Transport time (hh:mm:ss.ddd)");
+    QString sTransportTime = tr("Transport time (hh:mm:ss)");
 
     switch (m_setup.iTimeDisplay) {
     case DISPLAY_TRANSPORT_TIME:
@@ -1319,10 +1319,9 @@ void qjackctlMainForm::transportStop()
 void qjackctlMainForm::refreshStatus (void)
 {
     QString n = "--";
-    QString t = "--:--:--.---";
-    QString b = "--:--.--";
+    QString t = "--:--:--";
     QString sStopped = tr("Stopped");
-    
+
     if (m_pJackClient) {
         QString s = " ";
         updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
@@ -1354,18 +1353,19 @@ void qjackctlMainForm::refreshStatus (void)
                 break;
         }
         updateStatus(STATUS_TRANSPORT_STATE, sText);
-        // Transport timecode position (hh:mm:ss.ddd).
+        // Transport timecode position (hh:mm:ss).
     //  if (bPlaying) {
-            unsigned int hh, mm, ss, dd;
+            unsigned int hh, mm, ss;
+        //  unsigned int dd;
             double tt = (double) (tpos.frame / tpos.frame_rate);
             hh  = (unsigned int) (tt / 3600.0);
             tt -= (double) (hh * 3600.0);
             mm  = (unsigned int) (tt / 60.0);
             tt -= (double) (mm * 60.0);
             ss  = (unsigned int) tt;
-            tt -= (double) ss;
-            dd  = (unsigned int) (tt * 100.0);
-            snprintf(szText, sizeof(szText), "%02u:%02u:%02u.%03u", hh, mm, ss, dd);
+        //  tt -= (double) ss;
+        //  dd  = (unsigned int) (tt * 100.0);
+            snprintf(szText, sizeof(szText), "%02u:%02u:%02u", hh, mm, ss);
             updateStatus(STATUS_TRANSPORT_TIME, szText);
     //  } else {
     //      updateStatus(STATUS_TRANSPORT_TIME, t);
@@ -1376,7 +1376,7 @@ void qjackctlMainForm::refreshStatus (void)
             updateStatus(STATUS_TRANSPORT_BBT, szText);
             updateStatus(STATUS_TRANSPORT_BPM, QString::number(tpos.beats_per_minute));
         } else {
-            updateStatus(STATUS_TRANSPORT_BBT, b);
+            updateStatus(STATUS_TRANSPORT_BBT, t);
             updateStatus(STATUS_TRANSPORT_BPM, n);
         }
         PlayPushButton->setEnabled(tstate == JackTransportStopped);
@@ -1384,7 +1384,7 @@ void qjackctlMainForm::refreshStatus (void)
 #else   // !CONFIG_JACK_TRANSPORT
         updateStatus(STATUS_TRANSPORT_STATE, n);
         updateStatus(STATUS_TRANSPORT_TIME, t);
-        updateStatus(STATUS_TRANSPORT_BBT, b);
+        updateStatus(STATUS_TRANSPORT_BBT, t);
         updateStatus(STATUS_TRANSPORT_BPM, n);
         PlayPushButton->setEnabled(false);
         PausePushButton->setEnabled(false);
@@ -1396,7 +1396,7 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatus(STATUS_REALTIME, n);
         updateStatus(STATUS_TRANSPORT_STATE, n);
         updateStatus(STATUS_TRANSPORT_TIME, t);
-        updateStatus(STATUS_TRANSPORT_BBT, b);
+        updateStatus(STATUS_TRANSPORT_BBT, t);
         updateStatus(STATUS_TRANSPORT_BPM, n);
         PlayPushButton->setEnabled(false);
         PausePushButton->setEnabled(false);

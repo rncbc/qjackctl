@@ -52,13 +52,11 @@ with JACK release 0.80.0 and beyond, on SuSE 8.1, Mandrake 9.1 and RedHat 9,
 with a custom 2.4.22 kernel with low-latency, preemptible and capabilities
 enabling patches.
 
-One misfeature that still bugs everyone who runs qjackctl and watches for
+One misfeature that still bugs some users who runs qjackctl and watches for
 the messages output window is that stdout/stderr capture from JACK daemon
 seems to be somewhat broken. The evident behaviour is that stdout only shows
 up on server shutdown, while stderr is captured and shown unbuffered as
-expected. This happens regardeless of proper communication settings on the Qt
-class responsible for this precise behaviour (QProcess). To date, this has
-been kept unsolved.
+expected. This issue has been closed with latest JACK 0.90.x release.
 
 Note:
 
