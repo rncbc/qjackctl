@@ -758,8 +758,9 @@ void qjackctlConnectorView::drawConnections (void)
             pOClient;
                 pOClient = m_pPatchbayView->OClientList()->clients().next()) {
         // Set new connector color.
-        c += 0x33;
-        rgb[i++] = (c & 0xff);
+        c += 0x39;
+        c &= 0xff;
+        rgb[i++] = c;
         p.setPen(QColor(rgb[2], rgb[1], rgb[0]));
         if (i > 2)
             i = 0;
@@ -972,6 +973,8 @@ qjackctlPatchbay::~qjackctlPatchbay (void)
     delete m_pIClientList;
     m_pOClientList = 0;
     m_pIClientList = 0;
+
+    m_pPatchbayView->ConnectorView()->repaint(true);
 }
 
 

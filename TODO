@@ -5,11 +5,6 @@ TODOs
 
 0.0.5 Backlog
 
-- Change the startup mess of forcing artsd and jackd itself, as seen
-  on options and upgrade to a more generic start/stop script model;
-  this way, one can also include the operation of the LADCCA daemon.
-  (this was nicely suggested on a followup with Kasper Souren).
-  
 - Make available some translations, as some has been contributed already;
   I'm missing "volunteers" for French (fr), German (de) and Spanish (es).
   

@@ -26,13 +26,14 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.8.1"
+#define QJACKCTL_VERSION	"0.0.8.3"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
 #include <qeventloop.h>
 #include <qmessagebox.h>
 #include <qvalidator.h>
+#include <qfiledialog.h>
 
 #include "config.h"
 
@@ -158,6 +159,8 @@ void qjackctlMainForm::init (void)
     loadComboBoxHistory(&m_Settings, TempDirComboBox);
     loadComboBoxHistory(&m_Settings, ForceArtsShellComboBox);
     loadComboBoxHistory(&m_Settings, ForceJackShellComboBox);
+    loadComboBoxHistory(&m_Settings, StartupScriptShellComboBox);
+    loadComboBoxHistory(&m_Settings, ShutdownScriptShellComboBox);
     loadComboBoxHistory(&m_Settings, XrunRegexComboBox);
     m_Settings.endGroup();
 
@@ -190,6 +193,10 @@ void qjackctlMainForm::init (void)
     ForceArtsShellComboBox->setCurrentText(m_Settings.readEntry("/ForceArtsShell", "artsshell -q terminate"));
     ForceJackCheckBox->setChecked(m_Settings.readBoolEntry("/ForceJack", true));
     ForceJackShellComboBox->setCurrentText(m_Settings.readEntry("/ForceJackShell", "killall -9 jackd"));
+    StartupScriptCheckBox->setChecked(m_Settings.readBoolEntry("/StartupScript", false));
+    StartupScriptShellComboBox->setCurrentText(m_Settings.readEntry("/StartupScriptShell", QString::null));
+    ShutdownScriptCheckBox->setChecked(m_Settings.readBoolEntry("/ShutdownScript", false));
+    ShutdownScriptShellComboBox->setCurrentText(m_Settings.readEntry("/ShutdownScriptShell", QString::null));
     XrunRegexComboBox->setCurrentText(m_Settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs"));
     XrunIgnoreFirstCheckBox->setChecked(m_Settings.readBoolEntry("/XrunIgnoreFirst", true));
     AutoRefreshCheckBox->setChecked(m_Settings.readBoolEntry("/AutoRefresh", true));
@@ -256,6 +263,10 @@ void qjackctlMainForm::destroy (void)
     m_Settings.writeEntry("/ForceArtsShell", ForceArtsShellComboBox->currentText());
     m_Settings.writeEntry("/ForceJack", ForceJackCheckBox->isChecked());
     m_Settings.writeEntry("/ForceJackShell", ForceJackShellComboBox->currentText());
+    m_Settings.writeEntry("/StartupScript", StartupScriptCheckBox->isChecked());
+    m_Settings.writeEntry("/StartupScriptShell", StartupScriptShellComboBox->currentText());
+    m_Settings.writeEntry("/ShutdownScript", StartupScriptCheckBox->isChecked());
+    m_Settings.writeEntry("/ShutdownScriptShell", ShutdownScriptShellComboBox->currentText());
     m_Settings.writeEntry("/XrunRegex", XrunRegexComboBox->currentText());
     m_Settings.writeEntry("/XrunIgnoreFirst", XrunIgnoreFirstCheckBox->isChecked());
     m_Settings.writeEntry("/AutoRefresh", AutoRefreshCheckBox->isChecked());
@@ -278,6 +289,8 @@ void qjackctlMainForm::destroy (void)
     saveComboBoxHistory(&m_Settings, TempDirComboBox);
     saveComboBoxHistory(&m_Settings, ForceArtsShellComboBox);
     saveComboBoxHistory(&m_Settings, ForceJackShellComboBox);
+    saveComboBoxHistory(&m_Settings, StartupScriptShellComboBox);
+    saveComboBoxHistory(&m_Settings, ShutdownScriptShellComboBox);
     saveComboBoxHistory(&m_Settings, XrunRegexComboBox);
     m_Settings.endGroup();
 
@@ -315,6 +328,40 @@ void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
 }
 
 
+// Common exit status text formatter...
+QString qjackctlMainForm::formatExitStatus ( int iExitStatus )
+{
+    QString sTemp = " ";
+
+    if (iExitStatus == 0) {
+        sTemp += tr("successfully");
+    } else {
+        sTemp += tr("with exit status");
+        sTemp += "=";
+        sTemp += QString::number(iExitStatus);
+    }
+    sTemp += ".";
+
+    return sTemp;
+}
+
+
+// Common shell executive...
+void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QString& sStartMessage, const QString& sStopMessage )
+{
+    appendMessages(sStartMessage);
+    QString sTemp = "[" + sShellCommand;
+    appendMessages(sTemp.stripWhiteSpace() + "]");
+    QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+    appendMessages(sStopMessage + formatExitStatus(::system(sShellCommand)));
+   // Wait a litle bit (~1 second) before continue...
+    QTime t;
+    t.start();
+    while (t.elapsed() < 1000)
+        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+}
+
+
 // Start jack audio server...
 void qjackctlMainForm::startJack (void)
 {
@@ -338,48 +385,25 @@ void qjackctlMainForm::startJack (void)
     StartPushButton->setEnabled(false);
 
     QString sTemp;
-    int iExitStatus;
 
     // Do we force aRts sound server?...
-    if (ForceArtsCheckBox->isChecked()) {
-        appendMessages(tr("ARTS is being forced..."));
-        sTemp = "[" + ForceArtsShellComboBox->currentText();
-        appendMessages(sTemp.stripWhiteSpace() + "]");
-        iExitStatus = system(ForceArtsShellComboBox->currentText());
-        sTemp  = " " + tr("exit status");
-        sTemp += "=";
-        sTemp += QString::number(iExitStatus);
-        sTemp += ".";
-        appendMessages(tr("ARTS has been forced with") + sTemp);
-        // Wait a litle bit...
-        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
-        system("sleep 1");
-        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
-    }
+    if (ForceArtsCheckBox->isChecked() && !ForceArtsShellComboBox->currentText().isEmpty())
+        shellExecute(ForceArtsShellComboBox->currentText(), tr("ARTS is being forced..."), tr("ARTS has been forced"));
 
     // Do we force stray JACK daemon threads?...
-    if (ForceJackCheckBox->isChecked()) {
-        appendMessages(tr("JACK is being forced..."));
-        sTemp = "[" + ForceJackShellComboBox->currentText();
-        appendMessages(sTemp.stripWhiteSpace() + "]");
-        iExitStatus = system(ForceJackShellComboBox->currentText());
-        sTemp  = " " + tr("exit status");
-        sTemp += "=";
-        sTemp += QString::number(iExitStatus);
-        sTemp += ".";
-        appendMessages(tr("JACK has been forced with") + sTemp);
-        // Wait yet another bit...
-        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
-        system("sleep 1");
-        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
-    }
+    if (ForceJackCheckBox->isChecked() && !ForceJackShellComboBox->currentText().isEmpty())
+        shellExecute(ForceJackShellComboBox->currentText(), tr("JACK is being forced..."), tr("JACK has been forced"));
+
+    // Do we have any startup script?...
+    if (StartupScriptCheckBox->isChecked() && !StartupScriptShellComboBox->currentText().isEmpty())
+        shellExecute(StartupScriptShellComboBox->currentText(), tr("Startup script..."), tr("Startup script terminated"));
 
     // OK. Let's build the startup process...
     m_pJack = new QProcess(this);
 
     // Setup communications...
     m_pJack->setCommunication(QProcess::Stdout | QProcess::Stderr | QProcess::DupStderr);
-    
+
     QObject::connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
     QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
     QObject::connect(m_pJack, SIGNAL(processExited()),   this, SLOT(processJackExit()));
@@ -496,14 +520,14 @@ void qjackctlMainForm::startJack (void)
     }
 
     // Show startup results...
-    sTemp = " ";
+    sTemp = " " + tr("with") + " ";
     sTemp += tr("PID");
     sTemp += "=";
     sTemp += QString::number((long) m_pJack->processIdentifier());
     sTemp += " (0x";
     sTemp += QString::number((long) m_pJack->processIdentifier(), 16);
     sTemp += ").";
-    appendMessages(tr("JACK is started with") + sTemp);
+    appendMessages(tr("JACK was started") + sTemp);
 
     setCaption(QJACKCTL_TITLE " - " + tr("Started."));
     StopPushButton->setEnabled(true);
@@ -563,22 +587,21 @@ void qjackctlMainForm::processJackExit (void)
     stopJackClient();
 
     if (m_pJack) {
-        QString sTemp = " ";
-        sTemp += tr("exit status");
-        sTemp += "=";
-        sTemp += QString::number(m_pJack->exitStatus());
-        sTemp += ".";
-        appendMessages(tr("JACK is stopped with") + sTemp);
+        // Force final server shutdown...
+        appendMessages(tr("JACK was stopped") + formatExitStatus(m_pJack->exitStatus()));
         if (!m_pJack->normalExit())
             m_pJack->kill();
         delete m_pJack;
+        // Do we have any shutdown script?...
+        if (ShutdownScriptCheckBox->isChecked() && !ShutdownScriptShellComboBox->currentText().isEmpty())
+            shellExecute(ShutdownScriptShellComboBox->currentText(), tr("Shutdown script..."), tr("Shutdown script terminated"));
     }
     m_pJack = NULL;
 
     setCaption(QJACKCTL_TITLE " - " + tr("Stopped."));
     StartPushButton->setEnabled(true);
     StopPushButton->setEnabled(false);
-    
+
     TransportStartPushButton->setEnabled(false);
     TransportStopPushButton->setEnabled(false);
 }
@@ -701,6 +724,12 @@ void qjackctlMainForm::stabilizeForm ( bool bSavePosition )
         PriorityComboBox->setEnabled(bEnabled);
         ForceArtsShellComboBox->setEnabled(ForceArtsCheckBox->isChecked());
         ForceJackShellComboBox->setEnabled(ForceJackCheckBox->isChecked());
+        bEnabled = StartupScriptCheckBox->isChecked();
+        StartupScriptShellComboBox->setEnabled(bEnabled);
+        StartupScriptPushButton->setEnabled(bEnabled);
+        bEnabled = ShutdownScriptCheckBox->isChecked();
+        ShutdownScriptShellComboBox->setEnabled(bEnabled);
+        ShutdownScriptPushButton->setEnabled(bEnabled);
         TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
         changeDriver(DriverComboBox->currentText());
         DetailsTabWidget->show();
@@ -1320,6 +1349,39 @@ void qjackctlMainForm::stabilizeConnections (void)
 }
 
 
+// Startup script browse slot.
+void qjackctlMainForm::browseStartupScript()
+{
+    QString sFileName = QFileDialog::getOpenFileName(
+            StartupScriptShellComboBox->currentText(),	// Start here.
+            QString::null, 								// Filter (all files?)
+            this, 0,									// Parent and name (none)
+            tr("Startup script")						// Caption.
+    );
+    
+    if (!sFileName.isEmpty()) {
+        StartupScriptShellComboBox->setCurrentText(sFileName);
+        StartupScriptShellComboBox->setFocus();
+    }
+}
+
+
+// Shutdown script browse slot.
+void qjackctlMainForm::browseShutdownScript()
+{
+    QString sFileName = QFileDialog::getOpenFileName(
+            ShutdownScriptShellComboBox->currentText(),	// Start here.
+            QString::null, 								// Filter (all files?)
+            this, 0,									// Parent and name (none)
+            tr("Startup script")						// Caption.
+    );
+    
+    if (!sFileName.isEmpty()) {
+        ShutdownScriptShellComboBox->setCurrentText(sFileName);
+        ShutdownScriptShellComboBox->setFocus();
+    }
+}
+
 // Transport start (play)
 void qjackctlMainForm::transportStart()
 {
@@ -1405,3 +1467,5 @@ static void saveComboBoxHistory ( QSettings *pSettings, QComboBox *pComboBox, in
 
 
 // end of ui.h
+
+

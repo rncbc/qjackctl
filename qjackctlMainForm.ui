@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>488</width>
-            <height>309</height>
+            <width>471</width>
+            <height>287</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -243,9 +243,6 @@
                                 <property name="editable">
                                     <bool>false</bool>
                                 </property>
-                                <property name="currentItem">
-                                    <number>1</number>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>The software driver to use</string>
                                 </property>
@@ -412,9 +409,6 @@
                                 <property name="editable">
                                     <bool>true</bool>
                                 </property>
-                                <property name="currentItem">
-                                    <number>0</number>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>The ALSA pcm device name to use</string>
                                 </property>
@@ -522,6 +516,11 @@
                                 <item>
                                     <property name="text">
                                         <string>48000</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>88200</string>
                                     </property>
                                 </item>
                                 <item>
@@ -1093,7 +1092,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox" row="6" column="0" rowspan="1" colspan="2">
+                    <widget class="QCheckBox" row="8" column="0" rowspan="1" colspan="2">
                         <property name="name">
                             <cstring>AutoRefreshCheckBox</cstring>
                         </property>
@@ -1104,101 +1103,10 @@
                             <string>Alt+A</string>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>Whether to refresh the connections patchbay automatically.</string>
+                            <string>Whether to refresh the connections patchbay automatically</string>
                         </property>
                     </widget>
-                    <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="3">
-                        <item>
-                            <property name="text">
-                                <string>killall -9 jackd</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>killall -9 jackstart</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>killall -9 jackd-realtime</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>killall -9 jackd jackstart jackd-realtime</string>
-                            </property>
-                        </item>
-                        <property name="name">
-                            <cstring>ForceJackShellComboBox</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="editable">
-                            <bool>true</bool>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Command line used to kill stray JACK daemon threads.</string>
-                        </property>
-                    </widget>
-                    <widget class="QCheckBox" row="4" column="1" rowspan="1" colspan="3">
-                        <property name="name">
-                            <cstring>XrunIgnoreFirstCheckBox</cstring>
-                        </property>
-                        <property name="text">
-                            <string>&amp;Ignore first XRUN ocurrence on statistics</string>
-                        </property>
-                        <property name="accel">
-                            <string>Alt+I</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</string>
-                        </property>
-                    </widget>
-                    <widget class="QLabel" row="3" column="0">
-                        <property name="name">
-                            <cstring>XrunRegexTextLabel</cstring>
-                        </property>
-                        <property name="text">
-                            <string>&amp;XRUN detection regex:</string>
-                        </property>
-                        <property name="alignment">
-                            <set>AlignCenter</set>
-                        </property>
-                        <property name="buddy" stdset="0">
-                            <cstring>XrunRegexComboBox</cstring>
-                        </property>
-                    </widget>
-                    <widget class="QComboBox" row="3" column="1" rowspan="1" colspan="3">
-                        <item>
-                            <property name="text">
-                                <string>xrun of at least ([0-9|\.]+) msecs</string>
-                            </property>
-                        </item>
-                        <property name="name">
-                            <cstring>XrunRegexComboBox</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="editable">
-                            <bool>true</bool>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Regular expresion used to detect XRUNs on server output messages</string>
-                        </property>
-                    </widget>
-                    <widget class="QComboBox" row="1" column="1" rowspan="1" colspan="3">
+                    <widget class="QComboBox" row="1" column="1" rowspan="1" colspan="4">
                         <item>
                             <property name="text">
                                 <string>artsshell -q terminate</string>
@@ -1227,37 +1135,6 @@
                             <string>Command line used to suspend or terminate aRts sound server</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="2" column="0">
-                        <property name="name">
-                            <cstring>ForceJackCheckBox</cstring>
-                        </property>
-                        <property name="text">
-                            <string>Force &amp;JACK on startup with:</string>
-                        </property>
-                        <property name="accel">
-                            <string>Alt+J</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to kill any stray JACK daemon threads.</string>
-                        </property>
-                    </widget>
-                    <spacer row="5" column="0">
-                        <property name="name">
-                            <cstring>spacer31</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
                     <widget class="QCheckBox" row="1" column="0">
                         <property name="name">
                             <cstring>ForceArtsCheckBox</cstring>
@@ -1272,7 +1149,7 @@
                             <string>Whether to terminate or suspend the aRts sound server on JACK startup</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="4">
+                    <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="5">
                         <property name="name">
                             <cstring>VerboseCheckBox</cstring>
                         </property>
@@ -1286,41 +1163,7 @@
                             <string>Whether to give verbose output on messages</string>
                         </property>
                     </widget>
-                    <spacer row="5" column="2">
-                        <property name="name">
-                            <cstring>spacer32</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="6" column="3">
-                        <property name="name">
-                            <cstring>spacer33</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <widget class="QComboBox" row="6" column="2">
+                    <widget class="QComboBox" row="8" column="2">
                         <item>
                             <property name="text">
                                 <string>5</string>
@@ -1366,7 +1209,291 @@
                             <bool>true</bool>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>Time in seconds between each auto-refresh cycle.</string>
+                            <string>Time in seconds between each auto-refresh cycle</string>
+                        </property>
+                    </widget>
+                    <widget class="QCheckBox" row="2" column="0">
+                        <property name="name">
+                            <cstring>ForceJackCheckBox</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Force &amp;JACK on startup with:</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+J</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Whether to kill any stray JACK daemon threads.</string>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="4">
+                        <item>
+                            <property name="text">
+                                <string>killall -9 jackd</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>killall -9 jackstart</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>killall -9 jackd-realtime</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>killall -9 jackd jackstart jackd-realtime</string>
+                            </property>
+                        </item>
+                        <property name="name">
+                            <cstring>ForceJackShellComboBox</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Command line used to kill stray JACK daemon threads</string>
+                        </property>
+                    </widget>
+                    <widget class="QCheckBox" row="6" column="1" rowspan="1" colspan="4">
+                        <property name="name">
+                            <cstring>XrunIgnoreFirstCheckBox</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Ignore first XRUN ocurrence on statistics</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+I</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</string>
+                        </property>
+                    </widget>
+                    <widget class="QLabel" row="5" column="0">
+                        <property name="name">
+                            <cstring>XrunRegexTextLabel</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;XRUN detection regex:</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignCenter</set>
+                        </property>
+                        <property name="buddy" stdset="0">
+                            <cstring>XrunRegexComboBox</cstring>
+                        </property>
+                    </widget>
+                    <spacer row="6" column="0" rowspan="2" colspan="1">
+                        <property name="name">
+                            <cstring>spacer31</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="7" column="2">
+                        <property name="name">
+                            <cstring>spacer32</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="8" column="3" rowspan="1" colspan="2">
+                        <property name="name">
+                            <cstring>spacer33</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>140</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget class="QCheckBox" row="4" column="0">
+                        <property name="name">
+                            <cstring>ShutdownScriptCheckBox</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Execute script on shut&amp;down:</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+D</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Whether to kill any stray JACK daemon threads.</string>
+                        </property>
+                    </widget>
+                    <widget class="QCheckBox" row="3" column="0">
+                        <property name="name">
+                            <cstring>StartupScriptCheckBox</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Execute script on start&amp;up:</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+U</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Whether to execute a custom shell script before starting up the JACK audio server.</string>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" row="4" column="1" rowspan="1" colspan="3">
+                        <property name="name">
+                            <cstring>ShutdownScriptShellComboBox</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Command line to be executed after shutting down the JACK audio server</string>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" row="5" column="1" rowspan="1" colspan="4">
+                        <item>
+                            <property name="text">
+                                <string>xrun of at least ([0-9|\.]+) msecs</string>
+                            </property>
+                        </item>
+                        <property name="name">
+                            <cstring>XrunRegexComboBox</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Regular expresion used to detect XRUNs on server output messages</string>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" row="3" column="1" rowspan="1" colspan="3">
+                        <property name="name">
+                            <cstring>StartupScriptShellComboBox</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Command line to be executed before starting up the JACK audio server</string>
+                        </property>
+                    </widget>
+                    <widget class="QPushButton" row="3" column="4">
+                        <property name="name">
+                            <cstring>StartupScriptPushButton</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>0</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                            <size>
+                                <width>22</width>
+                                <height>22</height>
+                            </size>
+                        </property>
+                        <property name="maximumSize">
+                            <size>
+                                <width>28</width>
+                                <height>28</height>
+                            </size>
+                        </property>
+                        <property name="text">
+                            <string>...</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Browse for script to be executed before starting up the JACK audio server</string>
+                        </property>
+                    </widget>
+                    <widget class="QPushButton" row="4" column="4">
+                        <property name="name">
+                            <cstring>ShutdownScriptPushButton</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>0</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                            <size>
+                                <width>22</width>
+                                <height>22</height>
+                            </size>
+                        </property>
+                        <property name="maximumSize">
+                            <size>
+                                <width>28</width>
+                                <height>28</height>
+                            </size>
+                        </property>
+                        <property name="text">
+                            <string>...</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Browse for script to be executed after shutting down the JACK audio server</string>
                         </property>
                     </widget>
                 </grid>
@@ -1867,6 +1994,42 @@
         <receiver>qjackctlMainForm</receiver>
         <slot>transportStop()</slot>
     </connection>
+    <connection>
+        <sender>StartupScriptCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>StartupScriptShellComboBox</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>StartupScriptCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>StartupScriptPushButton</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ShutdownScriptShellComboBox</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ShutdownScriptPushButton</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>StartupScriptPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>browseStartupScript()</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>browseShutdownScript()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>StartPushButton</tabstop>
@@ -1899,6 +2062,12 @@
     <tabstop>ForceArtsShellComboBox</tabstop>
     <tabstop>ForceJackCheckBox</tabstop>
     <tabstop>ForceJackShellComboBox</tabstop>
+    <tabstop>StartupScriptCheckBox</tabstop>
+    <tabstop>StartupScriptShellComboBox</tabstop>
+    <tabstop>StartupScriptPushButton</tabstop>
+    <tabstop>ShutdownScriptCheckBox</tabstop>
+    <tabstop>ShutdownScriptShellComboBox</tabstop>
+    <tabstop>ShutdownScriptPushButton</tabstop>
     <tabstop>XrunRegexComboBox</tabstop>
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
     <tabstop>AutoRefreshCheckBox</tabstop>
@@ -1973,14 +2142,16 @@
     <slot specifier="non virtual">resetXrunStats( void )</slot>
     <slot specifier="non virtual">portNotifySlot( int fd )</slot>
     <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
-    <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">buffNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">timerSlot( void )</slot>
     <slot specifier="non virtual">connectSelected( void )</slot>
     <slot specifier="non virtual">disconnectSelected( void )</slot>
     <slot specifier="non virtual">disconnectAll()</slot>
     <slot specifier="non virtual">refreshConnections( void )</slot>
     <slot specifier="non virtual">stabilizeConnections( void )</slot>
+    <slot specifier="non virtual">browseStartupScript()</slot>
+    <slot specifier="non virtual">browseShutdownScript()</slot>
     <slot specifier="non virtual">transportStart()</slot>
     <slot specifier="non virtual">transportStop()</slot>
     <slot specifier="non virtual">aboutQt()</slot>
@@ -1988,7 +2159,9 @@
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
-    <function access="private" returnType="bool">queryClose( void )</function>
+    <function access="private" specifier="non virtual" returnType="bool">queryClose( void )</function>
+    <function access="private" specifier="non virtual" returnType="QString">formatExitStatus ( int iExitStatus )</function>
+    <function access="private" specifier="non virtual">shellExecute( const QString &amp; sShellCommand, const QString &amp; sStartMessage, const QString &amp; sStopMessage )</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessagesText( const QString &amp; s )</function>

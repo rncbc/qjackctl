@@ -3,12 +3,18 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.9   2003-09-22  Work in progress.
+0.0.9   2003-09-23  Work in progress.
 
-- New connection port item pixmaps that distinguishes between physical and
+- New connection port item pixmaps that distinguishes physical from
   logical ports;
   
-- History of most recently used values gets saved for some widgets.
+- History of most recently used values gets saved for some settings
+  and options comboboxes widgets.
+
+- New startup and shutdown script options, intended to supersede the
+  mess of forcing artsd and jackd itself, in a near future ;) this way,
+  one can also include the operation of the LADCCA daemon (following a
+  suggestion from Kasper Souren).
 
 
 0.0.8   2003-09-19  Preliminary transport and buffer size status control.
