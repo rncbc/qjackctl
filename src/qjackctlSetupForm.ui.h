@@ -141,6 +141,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 
     // We're clean now.
     m_iDirtySetup--;
+    stabilizeForm();
 }
 
 
@@ -357,7 +358,7 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 //  bool bDummy     = (sDriver == "dummy");
     bool bOss       = (sDriver == "oss");
     bool bAlsa      = (sDriver == "alsa");
-    bool bPortaudio = (sDriver == "portaudio");
+//  bool bPortaudio = (sDriver == "portaudio");
 
     bool bInEnabled  = false;
     bool bOutEnabled = false;
@@ -468,7 +469,7 @@ void qjackctlSetupForm::stabilizeForm (void)
     bEnabled = StdoutCaptureCheckBox->isChecked();
     XrunRegexTextLabel->setEnabled(bEnabled);
     XrunRegexComboBox->setEnabled(bEnabled);
-    XrunIgnoreFirstCheckBox->setChecked(bEnabled);
+    XrunIgnoreFirstCheckBox->setEnabled(bEnabled);
 
     bEnabled = ActivePatchbayCheckBox->isChecked();
     ActivePatchbayPathComboBox->setEnabled(bEnabled);
@@ -671,11 +672,10 @@ void qjackctlSetupForm::optionsChanged (void)
 void qjackctlSetupForm::accept (void)
 {
     if (m_iDirtyOptions > 0) {
-       // Save current preset selection.
+        // Save current preset selection.
         m_pSetup->sDefPreset = PresetComboBox->currentText();
-         // Save current settings...
-        if (m_iDirtySettings > 0)
-            savePreset(m_pSetup->sDefPreset);
+        // Always save current settings...
+        savePreset(m_pSetup->sDefPreset);
         // Save Options...
         m_pSetup->bStartupScript          = StartupScriptCheckBox->isChecked();
         m_pSetup->sStartupScriptShell     = StartupScriptShellComboBox->currentText();

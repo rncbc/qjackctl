@@ -1465,9 +1465,9 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // All displays are highlighted from now on.
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
-//  ServerModeTextLabel->setPaletteForegroundColor(Qt::yellow);
+    ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     CpuLoadTextLabel->setPaletteForegroundColor(Qt::yellow);
-//  SampleRateTextLabel->setPaletteForegroundColor(Qt::yellow);
+    SampleRateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::green);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::green);
@@ -1552,9 +1552,9 @@ void qjackctlMainForm::stopJackClient (void)
     m_iShutNotify = 0;
 
     // Displays are deemed again.
-//  ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);
+    ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     CpuLoadTextLabel->setPaletteForegroundColor(Qt::darkYellow);
-//  SampleRateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
+    SampleRateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::darkGreen);
