@@ -131,11 +131,15 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     // and stabilize the form.
     m_pSetup = pSetup;
 
+    // What style do we create these forms?
+    WFlags wflags = Qt::WType_TopLevel;
+    if (m_pSetup->bKeepOnTop)
+        wflags |= Qt::WStyle_Tool;
     // All forms are to be created right now.
-    m_pMessagesForm    = new qjackctlMessagesForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
-    m_pStatusForm      = new qjackctlStatusForm      (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
-    m_pConnectionsForm = new qjackctlConnectionsForm (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
-    m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+    m_pMessagesForm    = new qjackctlMessagesForm    (this, 0, wflags);
+    m_pStatusForm      = new qjackctlStatusForm      (this, 0, wflags);
+    m_pConnectionsForm = new qjackctlConnectionsForm (this, 0, wflags);
+    m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, wflags);
 
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),
@@ -523,7 +527,7 @@ void qjackctlMainForm::stopJack (void)
     m_iStartDelay  = 0;
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
-
+    
     // Stop client code.
     stopJackClient();
 
@@ -1378,17 +1382,18 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     if (m_pPatchbayForm)
         m_pPatchbayForm->setJackClient(m_pJackClient);
 
-    // Save jackdrc configuration file.
-    QString sFilename = ::getenv("HOME");
-    sFilename += "/.jackdrc";
-    QFile file(sFilename);
-    if (file.open(IO_WriteOnly | IO_Truncate)) {
-        QTextStream ts(&file);
-        ts << m_sJackCmdLine;
-        file.close();
-        appendMessages(tr("Server configuration saved to") + " " + sFilename);
+    // Save .jackdrc configuration file.
+    if (!m_sJackCmdLine.isEmpty()) {
+        QString sFilename = ::getenv("HOME");
+        sFilename += "/.jackdrc";
+        QFile file(sFilename);
+        if (file.open(IO_WriteOnly | IO_Truncate)) {
+            QTextStream(&file) << m_sJackCmdLine;
+            file.close();
+            appendMessages(tr("Server configuration saved to") + " " + sFilename);
+        }
     }
-
+    
     // Do not forget to reset XRUN stats variables.
     if (!bDetach)
         resetXrunStats();
@@ -1452,6 +1457,9 @@ void qjackctlMainForm::stopJackClient (void)
         m_pConnectionsForm->setJackClient(NULL);
     if (m_pPatchbayForm)
         m_pPatchbayForm->setJackClient(NULL);
+
+    // Reset command-line configuration info.
+    m_sJackCmdLine = QString::null;
 
     // Close us as a client...
     if (m_pJackClient)
@@ -1600,7 +1608,7 @@ void qjackctlMainForm::showSetupForm (void)
             m_pSetup->sDisplayFont1 = TimeDisplayTextLabel->font().toString();
         if (m_pSetup->sDisplayFont2.isEmpty())
             m_pSetup->sDisplayFont2 = ServerStateTextLabel->font().toString();
-        // To track down immediate changes.
+        // To track down deferred or immediate changes.
         QString sOldMessagesFont       = m_pSetup->sMessagesFont;
         QString sOldDisplayFont1       = m_pSetup->sDisplayFont1;
         QString sOldDisplayFont2       = m_pSetup->sDisplayFont2;
@@ -1608,10 +1616,21 @@ void qjackctlMainForm::showSetupForm (void)
         int     iOldTimeFormat         = m_pSetup->iTimeFormat;
         bool    bOldActivePatchbay     = m_pSetup->bActivePatchbay;
         QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
+        bool    bStdoutCapture         = m_pSetup->bStdoutCapture;
+        bool    bKeepOnTop             = m_pSetup->bKeepOnTop;
         // Load the current setup settings.
         pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
         if (pSetupForm->exec()) {
+            // Warn if something will be only effective on next run.
+            if (( bStdoutCapture && !m_pSetup->bStdoutCapture) ||
+                (!bStdoutCapture &&  m_pSetup->bStdoutCapture) ||
+                ( bKeepOnTop     && !m_pSetup->bKeepOnTop)     ||
+                (!bKeepOnTop     &&  m_pSetup->bKeepOnTop)) {
+                QMessageBox::information(this, tr("Information"),
+                    tr("Some settings will be only in effect\n"
+                       "the next time you run this program."), tr("OK"));
+            }
             // Check wheather something immediate has changed.
             if (sOldMessagesFont != m_pSetup->sMessagesFont)
                 updateMessagesFont();

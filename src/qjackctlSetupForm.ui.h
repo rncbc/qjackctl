@@ -113,6 +113,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     // Other misc options...
     StartJackCheckBox->setChecked(m_pSetup->bStartJack);
     QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
+    KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
 
     // Finally, load preset list...
     m_iDirtySetup++;
@@ -515,6 +516,7 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->sDisplayFont2  = DisplayFont2TextLabel->font().toString();
     m_pSetup->bStartJack     = StartJackCheckBox->isChecked();
     m_pSetup->bQueryClose    = QueryCloseCheckBox->isChecked();
+    m_pSetup->bKeepOnTop     = KeepOnTopCheckBox->isChecked();
 
     // Save combobox history...
     m_pSetup->saveComboBoxHistory(ServerComboBox);

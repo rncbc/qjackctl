@@ -63,6 +63,7 @@ qjackctlSetup::qjackctlSetup (void)
     sDisplayFont1           = m_settings.readEntry("/DisplayFont1", QString::null);
     sDisplayFont2           = m_settings.readEntry("/DisplayFont2", QString::null);
     bQueryClose             = m_settings.readBoolEntry("/QueryClose", true);
+    bKeepOnTop              = m_settings.readBoolEntry("/KeepOnTop", true);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -112,6 +113,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/DisplayFont1",            sDisplayFont1);
     m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);
     m_settings.writeEntry("/QueryClose",              bQueryClose);
+    m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");

@@ -2757,6 +2757,25 @@
                                     <string>Whether to ask for confirmation on application exit</string>
                                 </property>
                             </widget>
+                            <widget class="QCheckBox">
+                                <property name="name">
+                                    <cstring>KeepOnTopCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Keep child windows always on top</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+K</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to keep all child windows on top of the main window</string>
+                                </property>
+                            </widget>
                         </vbox>
                     </widget>
                 </vbox>
@@ -3039,6 +3058,7 @@
     <tabstop>MessagesFontPushButton</tabstop>
     <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
+    <tabstop>KeepOnTopCheckBox</tabstop>
     <tabstop>OkPushButton</tabstop>
     <tabstop>CancelPushButton</tabstop>
 </tabstops>

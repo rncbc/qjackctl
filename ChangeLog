@@ -26,11 +26,18 @@ ChangeLog
 
 - Patchbay socket list view ordering is now properly preserved; socket
   dialog gets plug list handling ehancements; active patchbay gets reloaded
-  when commited and saved to file.
-  
+  when commited and saved to file; connections redraw on socket removal has
+  been fixed.
+
 - Server literal command-line is now saved into local configuration file
   (~/.jackdrc) for convenience of future auto-start client applications.
 
+- New setup option on wether all child windows are kept on top of the main
+  window, or otherwise floating with probable taskbar entries of their own.
+  
+- Setup changes that are only effective next time the program is run gets
+  an informational message box shown to the user.
+  
   
 0.2.4  2004-02-01  Exclusive patchbay sockets.
 
