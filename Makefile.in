@@ -23,6 +23,5 @@ uninstall:	$(prefix)/bin/$(name)
 clean:	$(name).mak
 	@make -f $(name).mak clean
 	@rm -f $(name) $(name).mak
-	@rm -rf .ui .moc .obj *.cache *.log
-	@rm -f config.*
+	@rm -f *.cache *.log config.*
 

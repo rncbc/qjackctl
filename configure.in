@@ -91,11 +91,19 @@ AC_CHECK_LIB(m, main)
 AC_CHECK_LIB(X11, main)
 AC_CHECK_LIB(Xext, main)
 AC_CHECK_LIB($ac_qtlib, main)
+AC_CHECK_LIB(jack, main, [ac_jack_lib="yes"], [ac_jack_lib="no"])
+if test "x$ac_jack_lib" = "xno"; then
+   AC_MSG_ERROR([JACK library not found.])
+fi
 
 dnl Checks for header files.
 AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(fcntl.h sys/ioctl.h unistd.h)
+AC_CHECK_HEADER(jack/jack.h, [ac_jack_h="yes"], [ac_jack_h="no"])
+if test "x$ac_jack_h" = "xno"; then
+   AC_MSG_ERROR([JACK headers not found.])
+fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST

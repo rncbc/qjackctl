@@ -47,6 +47,13 @@ realtime mode. Please be sure to run a capable kernel and play with either
 jackstart or jackd server paths, which shall be root suid anyway, for a better
 realtime experience.
 
+A notable case has been Planet CCRMA based Red Hat installations,
+(http://ccrma-www.stanford.edu/planetccrma/software/), where until recently
+jackstart has failed to initiate on a non root environment, in realtime mode.
+The upgrade to the latest jack-audio-conection-kit package is therefore
+highly recommended, as it probably includes already a Paul Davis'
+(JACK's lead developer) patch that targets this specific issue.
+
 
 Acknowledgments
 ---------------

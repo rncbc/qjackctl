@@ -6,20 +6,75 @@
 ** init() function in place of a constructor, and a destroy() function in
 ** place of a destructor.
 *****************************************************************************/
+/****************************************************************************
+   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+*****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.1"
+#define QJACKCTL_VERSION	"0.0.2"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
-#include <qvalidator.h>
-#include <qmessagebox.h>
-#include <qlistview.h>
 #include <qapplication.h>
+#include <qmessagebox.h>
+#include <qvalidator.h>
 
+// List view statistics item indexes
+#define STATS_CPU_LOAD      0
+#define STATS_SAMPLE_RATE   1
+#define STATS_XRUN_AVG      2
+#define STATS_XRUN_COUNT    3
+#define STATS_XRUN_LAST     4
+#define STATS_XRUN_MAX      5
+#define STATS_XRUN_MIN      6
+#define STATS_XRUN_TIME     7
+#define STATS_XRUN_TOTAL    8
+
+// Kind of constructor.
 void qjackctlMainForm::init()
 {
-    m_pJack = NULL;
-    
+    m_pJack       = NULL;
+    m_pJackClient = NULL;
+    m_pTimer      = NULL;
+    m_iTimerStart = 0;
+
+    m_pPortNotifier = NULL;
+    m_pXrunNotifier = NULL;
+    m_pShutNotifier = NULL;
+
+    m_iPortNotify = 0;
+    m_iXrunNotify = 0;
+    m_iShutNotify = 0;
+
+    // Create the list view items 'a priori'...
+    QString s = " ";
+    QString c = ":" + s;
+    QString z = "0";
+    QString n = tr("n/a");
+    m_apStats[STATS_CPU_LOAD] = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
+    m_apStats[STATS_SAMPLE_RATE] = new QListViewItem(StatsListView, s + tr("Sample Rate") + c, n);
+    m_apStats[STATS_XRUN_AVG] = new QListViewItem(StatsListView, s + tr("XRUN average") + c, z);
+    m_apStats[STATS_XRUN_COUNT] = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
+    m_apStats[STATS_XRUN_LAST] = new QListViewItem(StatsListView, s + tr("XRUN last") + c, z);
+    m_apStats[STATS_XRUN_MAX] = new QListViewItem(StatsListView, s + tr("XRUN maximum") + c, z);
+    m_apStats[STATS_XRUN_MIN] = new QListViewItem(StatsListView, s + tr("XRUN minimum") + c, z);
+    m_apStats[STATS_XRUN_TIME] = new QListViewItem(StatsListView, s + tr("XRUN last time detected") + c, n);
+    m_apStats[STATS_XRUN_TOTAL] = new QListViewItem(StatsListView, s + tr("XRUN total") + c, z);
+
     resetXrunStats();
 
     // Set dialog validators...
@@ -90,6 +145,7 @@ void qjackctlMainForm::init()
 }
 
 
+// Kind of destructor.
 void qjackctlMainForm::destroy()
 {
     // Stop server, if not already...
@@ -141,6 +197,7 @@ void qjackctlMainForm::destroy()
 }
 
 
+// Start jack audio server...
 void qjackctlMainForm::startJack()
 {
     // Is the server process instance still here?
@@ -308,11 +365,28 @@ void qjackctlMainForm::startJack()
     
     StartPushButton->setEnabled(false);
     StopPushButton->setEnabled(true);
+
+    // Create our timer...
+    m_iTimerStart = 0;
+    m_pTimer = new QTimer(this);
+    connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+    // Let's wait five seconds for client startup?
+    m_pTimer->start(5000, false);
 }
 
 
+// Stop jack audio server...
 void qjackctlMainForm::stopJack()
 {    
+    // Stop timer.
+    if (m_pTimer)
+        delete m_pTimer;
+    m_pTimer = NULL;
+
+    // Stop client code.
+    stopJackClient();
+    
+    // And try to stop server.
     if (m_pJack) {
         appendMessages(tr("JACK is stopping..."));
         if (m_pJack->isRunning())
@@ -323,6 +397,7 @@ void qjackctlMainForm::stopJack()
 }
 
 
+// Stdout handler...
 void qjackctlMainForm::readJackStdout()
 {
     QString s = m_pJack->readStdout();
@@ -330,6 +405,7 @@ void qjackctlMainForm::readJackStdout()
 }
 
 
+// Stderr handler...
 void qjackctlMainForm::readJackStderr()
 {
     QString s = m_pJack->readStderr();
@@ -337,6 +413,7 @@ void qjackctlMainForm::readJackStderr()
 }
 
 
+// Jack audio server cleanup.
 void qjackctlMainForm::processJackExit()
 {
     if (m_pJack) {
@@ -359,6 +436,7 @@ void qjackctlMainForm::processJackExit()
 }
 
 
+// XRUN detection routine.
 QString& qjackctlMainForm::detectXrun( QString & s )
 {
     QRegExp rx(XrunRegexComboBox->currentText());
@@ -375,6 +453,7 @@ QString& qjackctlMainForm::detectXrun( QString & s )
             if (m_fXrunLast > m_fXrunMax || m_iXrunCount == 0)
                 m_fXrunMax = m_fXrunLast;
             m_iXrunCount++;
+            m_tXrunLast.restart();
             refreshXrunStats();
         }
         m_iXrunStats++;
@@ -383,6 +462,7 @@ QString& qjackctlMainForm::detectXrun( QString & s )
 }
 
 
+// Messages widget output method.
 void qjackctlMainForm::appendMessages( const QString & s )
 {
     while (MessagesTextView->paragraphs() > 100) {
@@ -393,7 +473,7 @@ void qjackctlMainForm::appendMessages( const QString & s )
 }
 
 
-
+// User interface stabilization.
 void qjackctlMainForm::stabilizeForm()
 {
     bool bShowDetails = DetailsCheckBox->isChecked();
@@ -432,6 +512,7 @@ void qjackctlMainForm::stabilizeForm()
 }
 
 
+// Reset XRUN cache items.
 void qjackctlMainForm::resetXrunStats()
 {
     m_iXrunStats = 0;
@@ -439,26 +520,333 @@ void qjackctlMainForm::resetXrunStats()
     m_fXrunTotal = 0.0;
     m_fXrunMin   = 0.0;
     m_fXrunMax   = 0.0;
-    m_fXrunLast  = 0.0;    
-    
+    m_fXrunLast  = 0.0;
+
+    m_iXrunCallbacks = 0;
+
     refreshXrunStats();
 }
 
 
+// Update the XRUN count/callbacks item.
+void qjackctlMainForm::updateXrunCount (void)
+{
+    QString sText = QString::number(m_iXrunCount);
+    if (m_pJackClient) {
+        sText += " (";
+        sText += QString::number(m_iXrunCallbacks);
+        sText += ")";
+    }
+    m_apStats[STATS_XRUN_COUNT]->setText(1, sText);
+}
+
+
+// Update the XRUN last/elapsed time item.
+void qjackctlMainForm::updateXrunTime (void)
+{
+    QString sText = m_tXrunLast.toString();
+    int iSeconds = (m_tXrunLast.elapsed() / 1000);
+    if (m_iXrunCount > 0 && iSeconds > 1) {
+        int iHours   = 0;
+        int iMinutes = 0;
+        sText += " (";
+        if (iSeconds >= 3600) {
+            iHours = (iSeconds / 3600);
+            iSeconds -= (iHours * 3600);
+        }
+        if (iSeconds >= 60) {
+            iMinutes = (iSeconds / 60);
+            iSeconds -= (iMinutes * 60);
+        }
+        sText += QTime(iHours, iMinutes, iSeconds).toString() + ")";
+    }
+    m_apStats[STATS_XRUN_TIME]->setText(1, sText);
+}
+
+
+// Update the XRUN list view items.
 void qjackctlMainForm::refreshXrunStats()
 {
-    StatsListView->clear();
     float fXrunAverage = 0.0;
     if (m_iXrunCount > 0)
         fXrunAverage = (m_fXrunTotal / m_iXrunCount);
-    QString s = " ";
-    QString c = ":" + s;
-    new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, QString::number(m_iXrunCount));
-    new QListViewItem(StatsListView, s + tr("XRUN total (msecs)") + c, QString::number(m_fXrunTotal));
-    new QListViewItem(StatsListView, s + tr("XRUN minimum (msecs)") + c, QString::number(m_fXrunMin));
-    new QListViewItem(StatsListView, s + tr("XRUN maximum (msecs)") + c, QString::number(m_fXrunMax));
-    new QListViewItem(StatsListView, s + tr("XRUN average (msecs)") + c, QString::number(fXrunAverage));
-    new QListViewItem(StatsListView, s + tr("XRUN last (msecs)") + c, QString::number(m_fXrunLast));
-    new QListViewItem(StatsListView, s + tr("XRUN last time detected") + c, m_tXrunLast.toString());
+    updateXrunCount();
+    QString s = " " + tr("msec");
+    m_apStats[STATS_XRUN_TOTAL]->setText(1, QString::number(m_fXrunTotal) + s);
+    m_apStats[STATS_XRUN_MIN]->setText(1, QString::number(m_fXrunMin) + s);
+    m_apStats[STATS_XRUN_MAX]->setText(1, QString::number(m_fXrunMax) + s);
+    m_apStats[STATS_XRUN_AVG]->setText(1, QString::number(fXrunAverage) + s);
+    m_apStats[STATS_XRUN_LAST]->setText(1, QString::number(m_fXrunLast) + s);
+    updateXrunTime();
     StatsListView->triggerUpdate();
 }
+
+
+// Notification pipes descriptors
+#define FD_NIL     -1
+#define FD_READ     0
+#define FD_WRITE    1
+
+static int g_fdPort[2] = { FD_NIL, FD_NIL };
+static int g_fdXrun[2] = { FD_NIL, FD_NIL };
+static int g_fdShut[2] = { FD_NIL, FD_NIL };
+
+// Jack port registration callback funtion, called
+// whenever a jack port is registered or unregistered.
+static void qjackctl_portRegistrationCallback ( jack_port_id_t port_id, int n, void *arg )
+{
+    char c = 0;
+
+    ::write(g_fdPort[FD_WRITE], &c, sizeof(c));
+}
+
+
+// Jack graph order callback function, called
+// whenever the processing graph is reordered.
+static int qjackctl_graphOrderCallback ( void *arg )
+{
+    char c = 0;
+
+    ::write(g_fdPort[FD_WRITE], &c, sizeof(c));
+
+    return 0;
+}
+
+
+// Jack XRUN callback function, called
+// whenever there is a xrun.
+static int qjackctl_xrunCallback ( void *arg )
+{
+    char c = 0;
+
+    ::write(g_fdXrun[FD_WRITE], &c, sizeof(c));
+
+    return 0;
+}
+
+// Jack shutdown function, called
+// whenever the server terminates this client.
+static void qjackctl_shutdown ( void *arg )
+{
+    char c = 0;
+
+    ::write(g_fdShut[FD_WRITE], &c, sizeof(c));
+}
+
+
+
+// Jack socket notifier port/graph callback funtion.
+void qjackctlMainForm::portNotifySlot ( int fd )
+{
+    char c = 0;
+
+    if (m_iPortNotify > 0)
+        return;
+    m_iPortNotify++;
+
+    // Read from our pipe.
+    ::read(fd, &c, sizeof(c));
+    // Do what has to be done.
+    // . . .
+
+    m_iPortNotify--;
+}
+
+
+// Jack socket notifier XRUN callback funtion.
+void qjackctlMainForm::xrunNotifySlot ( int fd )
+{
+    char c = 0;
+
+    if (m_iXrunNotify > 0)
+        return;
+    m_iXrunNotify++;
+
+    // Read from our pipe.
+    ::read(fd, &c, sizeof(c));
+
+    // Just increment callback counter.
+    m_iXrunCallbacks++;
+
+    // Update the status item directly.
+    updateXrunCount();
+    StatsListView->triggerUpdate();
+
+    m_iXrunNotify--;
+}
+
+
+// Jack socket notifier callback funtion.
+void qjackctlMainForm::shutNotifySlot ( int fd )
+{
+    char c = 0;
+
+    if (m_iShutNotify > 0)
+        return;
+    m_iShutNotify++;
+
+    // Read from our pipe.
+    ::read(fd, &c, sizeof(c));
+
+    // Do what has to be done.
+    stopJack();
+
+    m_iShutNotify--;
+}
+
+
+// Timer callback funtion.
+void qjackctlMainForm::timerSlot (void)
+{
+    // Is it the first shot on server start?
+    if (m_iTimerStart == 0) {
+        startJackClient();
+        return;
+    }
+
+    // Update some statistical fields, directly.
+    if (m_pJackClient) {
+        QString s = " ";
+        m_apStats[STATS_CPU_LOAD]->setText(1, QString::number(jack_cpu_load(m_pJackClient), 'g', 3) + s + "%");
+        m_apStats[STATS_SAMPLE_RATE]->setText(1, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
+    }
+    updateXrunTime();
+    StatsListView->triggerUpdate();
+
+}
+
+
+// Close notification pipes.
+void qjackctlMainForm::closePipes (void)
+{
+    // Port/Graph notification pipe.
+    if (g_fdPort[FD_READ] != FD_NIL) {
+        ::close(g_fdPort[FD_READ]);
+        g_fdPort[FD_READ] = FD_NIL;
+    }
+    if (g_fdPort[FD_WRITE] != FD_NIL) {
+        ::close(g_fdPort[FD_WRITE]);
+        g_fdPort[FD_WRITE] = FD_NIL;
+    }
+    // XRUN notification pipe.
+    if (g_fdXrun[FD_READ] != FD_NIL) {
+        ::close(g_fdXrun[FD_READ]);
+        g_fdXrun[FD_READ] = FD_NIL;
+    }
+    if (g_fdXrun[FD_WRITE] != FD_NIL) {
+        ::close(g_fdXrun[FD_WRITE]);
+        g_fdXrun[FD_WRITE] = FD_NIL;
+    }
+    // Shutdown notification pipe.
+    if (g_fdShut[FD_READ] != FD_NIL) {
+        ::close(g_fdShut[FD_READ]);
+        g_fdShut[FD_READ] = FD_NIL;
+    }
+    if (g_fdShut[FD_WRITE] != FD_NIL) {
+        ::close(g_fdShut[FD_WRITE]);
+        g_fdShut[FD_WRITE] = FD_NIL;
+    }
+}
+
+
+// Start our jack audio control client...
+void qjackctlMainForm::startJackClient()
+{
+    // Create port notification pipe.
+    if (::pipe(g_fdPort) < 0) {
+        // Error: Could not create port notification pipe.
+        g_fdPort[FD_READ]  = FD_NIL;
+        g_fdPort[FD_WRITE] = FD_NIL;
+        closePipes();
+        return;
+    }
+
+    // Create XRUN notification pipe.
+    if (::pipe(g_fdXrun) < 0) {
+        // Error: Could not create XRUN notification pipe.
+        g_fdXrun[FD_READ]  = FD_NIL;
+        g_fdXrun[FD_WRITE] = FD_NIL;
+        closePipes();
+        return;
+    }
+
+    // Create shutdown notification pipe.
+    if (::pipe(g_fdShut) < 0) {
+        // Error: Could not create XRUN notification pipe.
+        g_fdShut[FD_READ]  = FD_NIL;
+        g_fdShut[FD_WRITE] = FD_NIL;
+        closePipes();
+        return;
+    }
+
+    // Create the jack client handle
+    m_pJackClient = jack_client_new("qjackctl");
+    if (m_pJackClient == NULL) {
+        // "Error: Could not connect to jack server.\n");
+        closePipes();
+        return;
+    }
+
+    // Set notification callbacks.
+    jack_set_graph_order_callback(m_pJackClient, qjackctl_graphOrderCallback, NULL);
+    jack_set_port_registration_callback(m_pJackClient, qjackctl_portRegistrationCallback, NULL);
+    jack_set_xrun_callback(m_pJackClient, qjackctl_xrunCallback, NULL);
+    jack_on_shutdown(m_pJackClient, qjackctl_shutdown, NULL);
+
+    // Create our notification managers.
+    m_pPortNotifier = new QSocketNotifier(g_fdPort[FD_READ], QSocketNotifier::Read);
+    m_pXrunNotifier = new QSocketNotifier(g_fdXrun[FD_READ], QSocketNotifier::Read);
+    m_pShutNotifier = new QSocketNotifier(g_fdShut[FD_READ], QSocketNotifier::Read);
+
+    // And connect it to the proper slots.
+    connect(m_pPortNotifier, SIGNAL(activated(int)), this, SLOT(portNotifySlot(int)));
+    connect(m_pXrunNotifier, SIGNAL(activated(int)), this, SLOT(xrunNotifySlot(int)));
+    connect(m_pShutNotifier, SIGNAL(activated(int)), this, SLOT(shutNotifySlot(int)));
+
+    // Activate us as a client...
+    jack_activate(m_pJackClient);
+
+    // So we're officially started...
+    m_iTimerStart++;
+    // Our timer will get one second standard.
+    m_pTimer->start(1000, false);
+}
+
+
+// Stop jack audio client...
+void qjackctlMainForm::stopJackClient()
+{
+    // Deactivate us as a client...
+    if (m_pJackClient) {
+        jack_deactivate(m_pJackClient);
+        jack_client_close(m_pJackClient);
+    }
+    m_pJackClient = NULL;
+
+    // Close notification pipes.
+    closePipes();
+
+    // Destroy socket notifiers.
+    if (m_pPortNotifier)
+        delete m_pPortNotifier;
+    m_pPortNotifier = NULL;
+    m_iPortNotify = 0;
+
+    if (m_pXrunNotifier)
+        delete m_pXrunNotifier;
+    m_pXrunNotifier = NULL;
+    m_iXrunNotify = 0;
+
+    if (m_pShutNotifier)
+        delete m_pShutNotifier;
+    m_pShutNotifier = NULL;
+    m_iShutNotify = 0;
+
+    // Reset jack client statistics explicitly.
+    QString n = tr("n/a");
+    m_apStats[STATS_CPU_LOAD]->setText(1, n);
+    m_apStats[STATS_SAMPLE_RATE]->setText(1, n);
+    refreshXrunStats();
+}
+
+// end of ui.h

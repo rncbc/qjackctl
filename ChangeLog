@@ -3,5 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.0.2   2003-08-02  Client code features introduced.
+
+- JACK library and header files are checked on configure.
+- Server CPU load, sample rate and time elapsed since last XRUN
+  detected, are now displayed on statistics.
+  
 0.0.1   2003-07-26  Initial release.
 

@@ -1,6 +1,24 @@
 <!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>qjackctlMainForm</class>
-<comment>JACK Audio Connection Kit - Qt GUI Interface.</comment>
+<comment>JACK Audio Connection Kit - Qt GUI Interface.
+
+   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+</comment>
 <author>rncbc aka Rui Nuno Capela</author>
 <widget class="QDialog">
     <property name="name">
@@ -1256,22 +1274,37 @@
 <includes>
     <include location="global" impldecl="in implementation">stdlib.h</include>
     <include location="global" impldecl="in implementation">unistd.h</include>
-    <include location="global" impldecl="in declaration">qprocess.h</include>
     <include location="global" impldecl="in declaration">qsettings.h</include>
+    <include location="global" impldecl="in declaration">qprocess.h</include>
+    <include location="global" impldecl="in declaration">qsocketnotifier.h</include>
+    <include location="global" impldecl="in declaration">qtimer.h</include>
     <include location="global" impldecl="in declaration">qdatetime.h</include>
+    <include location="global" impldecl="in declaration">qlistview.h</include>
+    <include location="global" impldecl="in declaration">jack/jack.h</include>
     <include location="local" impldecl="in implementation">qjackctlMainForm.ui.h</include>
 </includes>
 <variables>
-    <variable access="private">int m_iXrunStats;</variable>
     <variable access="private">QSettings m_Settings;</variable>
     <variable access="private">QProcess *m_pJack;</variable>
+    <variable access="private">jack_client_t *m_pJackClient;</variable>
+    <variable access="private">QTimer *m_pTimer;</variable>
+    <variable access="private">int m_iTimerStart;</variable>
+    <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
+    <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
+    <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
+    <variable access="private">int m_iPortNotify;</variable>
+    <variable access="private">int m_iXrunNotify;</variable>
+    <variable access="private">int m_iShutNotify;</variable>
+    <variable access="private">int m_iXrunCallbacks;</variable>
+    <variable access="private">int m_iXrunStats;</variable>
     <variable access="private">int m_iXrunCount;</variable>
     <variable access="private">float m_fXrunTotal;</variable>
     <variable access="private">float m_fXrunMax;</variable>
     <variable access="private">float m_fXrunMin;</variable>
+    <variable access="private">float m_fXrunLast;</variable>
     <variable access="private">QTime m_tXrunLast;</variable>
+    <variable access="private">QListViewItem *m_apStats[9];</variable>
     <variable access="private">QPoint m_posSave;</variable>
-    <variable>float m_fXrunLast;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack()</slot>
@@ -1280,14 +1313,23 @@
     <slot specifier="non virtual">readJackStderr()</slot>
     <slot specifier="non virtual">processJackExit()</slot>
     <slot specifier="non virtual">stabilizeForm()</slot>
+    <slot specifier="non virtual">portNotifySlot(int)</slot>
+    <slot specifier="non virtual">xrunNotifySlot(int)</slot>
+    <slot specifier="non virtual">shutNotifySlot(int)</slot>
+    <slot specifier="non virtual">timerSlot()</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
+    <function access="private" specifier="non virtual">startJackClient()</function>
+    <function access="private" specifier="non virtual">stopJackClient()</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">resetXrunStats()</function>
     <function access="private" specifier="non virtual">refreshXrunStats()</function>
+    <function access="private" specifier="non virtual">updateXrunCount()</function>
+    <function access="private" specifier="non virtual">updateXrunTime()</function>
+    <function access="private" specifier="non virtual">closePipes()</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>
