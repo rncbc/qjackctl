@@ -375,13 +375,11 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     bool bAlsa       = (sDriver == "alsa");
     bool bInEnabled  = false;
     bool bOutEnabled = false;
-    bool bAlsaDuplex = false;
     
     switch (iAudio) {
       case QJACKCTL_DUPLEX:
         bInEnabled  = (bOss || bAlsa);
         bOutEnabled = (bOss || bAlsa);
-        bAlsaDuplex = bAlsa;
         break;
       case QJACKCTL_CAPTURE:
         bInEnabled  = bOss;
@@ -396,10 +394,10 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     OutDeviceTextLabel->setEnabled(bOutEnabled);
     OutDeviceComboBox->setEnabled(bOutEnabled);
 
-    InChannelsTextLabel->setEnabled(bInEnabled || bAlsaDuplex);
-    InChannelsSpinBox->setEnabled(bInEnabled || bAlsaDuplex);
-    OutChannelsTextLabel->setEnabled(bOutEnabled || bAlsaDuplex);
-    OutChannelsSpinBox->setEnabled(bOutEnabled || bAlsaDuplex);
+    InChannelsTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+    InChannelsSpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+    OutChannelsTextLabel->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
+    OutChannelsSpinBox->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
 
     computeLatency();
 }
