@@ -1711,10 +1711,13 @@ void qjackctlMainForm::refreshPatchbay (void)
 void qjackctlMainForm::toggleMainForm (void)
 {
     m_pSetup->saveWidgetGeometry(this);
-    if (isVisible())
+    if (isVisible()) {
         hide();
-    else
+    } else {
         show();
+        raise();
+        setActiveWindow();
+    }
 }
 
 
@@ -1723,10 +1726,13 @@ void qjackctlMainForm::toggleMessagesForm (void)
 {
     if (m_pMessagesForm) {
         m_pSetup->saveWidgetGeometry(m_pMessagesForm);
-        if (m_pMessagesForm->isVisible())
+        if (m_pMessagesForm->isVisible()) {
             m_pMessagesForm->hide();
-        else
+        } else {
             m_pMessagesForm->show();
+            m_pMessagesForm->raise();
+            m_pMessagesForm->setActiveWindow();
+        }
     }
 }
 
@@ -1736,10 +1742,13 @@ void qjackctlMainForm::toggleStatusForm (void)
 {
     if (m_pStatusForm) {
         m_pSetup->saveWidgetGeometry(m_pStatusForm);
-        if (m_pStatusForm->isVisible())
+        if (m_pStatusForm->isVisible()) {
             m_pStatusForm->hide();
-        else
+        } else {
             m_pStatusForm->show();
+            m_pStatusForm->raise();
+            m_pStatusForm->setActiveWindow();
+        }
     }
 }
 
@@ -1751,10 +1760,13 @@ void qjackctlMainForm::toggleConnectionsForm (void)
         m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
         m_pConnectionsForm->setJackClient(m_pJackClient);
         m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
-        if (m_pConnectionsForm->isVisible())
+        if (m_pConnectionsForm->isVisible()) {
             m_pConnectionsForm->hide();
-        else
+        } else {
             m_pConnectionsForm->show();
+            m_pConnectionsForm->raise();
+            m_pConnectionsForm->setActiveWindow();
+        }
     }
 }
 
@@ -1766,10 +1778,13 @@ void qjackctlMainForm::togglePatchbayForm (void)
         m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
         m_pPatchbayForm->setJackClient(m_pJackClient);
         m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
-        if (m_pPatchbayForm->isVisible())
+        if (m_pPatchbayForm->isVisible()) {
             m_pPatchbayForm->hide();
-        else
+        } else {
             m_pPatchbayForm->show();
+            m_pPatchbayForm->raise();
+            m_pPatchbayForm->setActiveWindow();
+        }
     }
 }
 

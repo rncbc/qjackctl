@@ -1,25 +1,25 @@
 INCLUDEPATH += ./src
 
 SOURCES += src/main.cpp \
-           src/qjackctlSystemTray.cpp \
-           src/qjackctlPatchbay.cpp \
-           src/qjackctlPatchbayRack.cpp \
-           src/qjackctlPatchbayFile.cpp \
-           src/qjackctlJackConnect.cpp \
-           src/qjackctlAlsaConnect.cpp \
+           src/qjackctlSetup.cpp \
            src/qjackctlConnect.cpp \
-           src/qjackctlSetup.cpp
+           src/qjackctlAlsaConnect.cpp \
+           src/qjackctlJackConnect.cpp \
+           src/qjackctlPatchbay.cpp \
+           src/qjackctlPatchbayFile.cpp \
+           src/qjackctlPatchbayRack.cpp \
+           src/qjackctlSystemTray.cpp
 
-HEADERS += src/qjackctlSystemTray.h \
-           src/qjackctlPatchbay.h \
-           src/qjackctlPatchbayRack.h \
-           src/qjackctlPatchbayFile.h \
-           src/qjackctlJackConnect.h \
-           src/qjackctlAlsaConnect.h \
-           src/qjackctlConnect.h \
-           src/qjackctlStatus.h \
+HEADERS += src/qjackctlAbout.h \
            src/qjackctlSetup.h \
-           src/qjackctlAbout.h
+           src/qjackctlStatus.h \
+           src/qjackctlConnect.h \
+           src/qjackctlAlsaConnect.h \
+           src/qjackctlJackConnect.h \
+           src/qjackctlPatchbay.h \
+           src/qjackctlPatchbayFile.h \
+           src/qjackctlPatchbayRack.h \
+           src/qjackctlSystemTray.h
 
 FORMS    = src/qjackctlMainForm.ui \
            src/qjackctlMessagesForm.ui \

@@ -4,15 +4,16 @@ qmake   = @ac_qmake@
 name    = qjackctl
 
 headers = config.h \
-	src/qjackctlStatus.h \
-	src/qjackctlSetup.h \
 	src/qjackctlAbout.h \
+	src/qjackctlSetup.h \
+	src/qjackctlStatus.h \
 	src/qjackctlConnect.h \
-	src/qjackctlJackConnect.h \
 	src/qjackctlAlsaConnect.h \
+	src/qjackctlJackConnect.h \
 	src/qjackctlPatchbay.h \
-	src/qjackctlPatchbayRack.h \
 	src/qjackctlPatchbayFile.h \
+	src/qjackctlPatchbayRack.h \
+	src/qjackctlSystemTray.h \
 	src/qjackctlMainForm.ui.h \
 	src/qjackctlMessagesForm.ui.h \
 	src/qjackctlStatusForm.ui.h \
@@ -24,16 +25,19 @@ headers = config.h \
           
 sources = src/main.cpp \
 	src/qjackctlSetup.cpp \
+	src/qjackctlStatus.cpp \
 	src/qjackctlConnect.cpp \
-	src/qjackctlJackConnect.cpp \
 	src/qjackctlAlsaConnect.cpp \
+	src/qjackctlJackConnect.cpp \
 	src/qjackctlPatchbay.cpp \
-	src/qjackctlPatchbayRack.cpp \
 	src/qjackctlPatchbayFile.cpp \
+	src/qjackctlPatchbayRack.cpp \
+	src/qjackctlSystemTray.cpp \
 	src/qjackctlMainForm.ui \
 	src/qjackctlMessagesForm.ui \
 	src/qjackctlStatusForm.ui \
 	src/qjackctlConnectionsForm.ui \
+	src/qjackctlPatchbayForm.ui \
 	src/qjackctlSocketForm.ui \
 	src/qjackctlSetupForm.ui \
 	src/qjackctlAboutForm.ui

@@ -3,11 +3,14 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.8a  2004-05-01  Sloppy boy fix.
+0.2.9   2004-05-24  Sloppy boy fixes.
 
 - Server stop command button now enabled during client startup interval;
   this makes it possible to stop the server just in case the client 
   can't be activated for any reason.
+  
+- Top level sub-windows are now always raised and set with active focus
+  when shown to visibility.
 
 
 0.2.8   2004-04-30  System tray icon and menu option.
