@@ -70,12 +70,15 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, QString sPortN
             QListViewItem::setPixmap(0, *g_pXpmPortLNO);
         }
     }
+
+    m_connects.setAutoDelete(false);
 }
 
 // Default destructor.
 qjackctlPortItem::~qjackctlPortItem (void)
 {
     m_pClient->ports().remove(this);
+    m_connects.clear();
 }
 
 
@@ -120,6 +123,9 @@ qjackctlClientItem *qjackctlPortItem::client (void)
 void qjackctlPortItem::markPort ( int iMark )
 {
     m_iPortMark = iMark;
+
+    if (iMark > 0)
+        m_connects.clear();
 }
 
 void qjackctlPortItem::markClientPort ( int iMark )
@@ -132,6 +138,46 @@ void qjackctlPortItem::markClientPort ( int iMark )
 int qjackctlPortItem::portMark (void)
 {
     return m_iPortMark;
+}
+
+
+// Connected port list primitives.
+void qjackctlPortItem::addConnect( qjackctlPortItem *pPort )
+{
+    if (findConnectPtr(pPort) == 0)
+        m_connects.append(pPort);
+}
+
+void qjackctlPortItem::removeConnect( qjackctlPortItem *pPort )
+{
+    m_connects.remove(pPort);
+}
+
+
+// Connected port finder.
+qjackctlPortItem *qjackctlPortItem::findConnect ( const QString& sClientPortName )
+{
+    for (qjackctlPortItem *pPort = m_connects.first(); pPort; pPort = m_connects.next()) {
+        if (sClientPortName == pPort->clientPortName())
+            return pPort;
+    }
+    return 0;
+}
+
+qjackctlPortItem *qjackctlPortItem::findConnectPtr ( qjackctlPortItem *pPortPtr )
+{
+    for (qjackctlPortItem *pPort = m_connects.first(); pPort; pPort = m_connects.next()) {
+        if (pPortPtr == pPort)
+            return pPort;
+    }
+    return 0;
+}
+
+
+// Connection cache list accessor.
+QPtrList<qjackctlPortItem>& qjackctlPortItem::connects (void)
+{
+    return m_connects;
 }
 
 
@@ -455,7 +501,7 @@ qjackctlPatchbay::qjackctlPatchbay ( QWidget *pParent, QListView *pOListView, QL
 
     m_pOClientList = new qjackctlClientList(pOListView, pJackClient, JackPortIsOutput);
     m_pIClientList = new qjackctlClientList(pIListView, pJackClient, JackPortIsInput);
-    
+
     m_iExclusive = 0;
 
     QObject::connect(pOListView, SIGNAL(expanded(QListViewItem *)),  this, SLOT(listViewChanged(QListViewItem *)));
@@ -475,13 +521,66 @@ qjackctlPatchbay::~qjackctlPatchbay (void)
 {
     // Force end of works here.
     m_iExclusive++;
-    
+
     delete m_pOClientList;
     delete m_pIClientList;
     m_pOClientList = NULL;
     m_pIClientList = NULL;
 
     delete m_pHBoxLayout;
+}
+
+
+// Connection primitive.
+void qjackctlPatchbay::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+{
+    jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+
+    pOPort->addConnect(pIPort);
+    pIPort->addConnect(pOPort);
+}
+
+// Disconnection primitive.
+void qjackctlPatchbay::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+{
+    jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+
+    pOPort->removeConnect(pIPort);
+    pIPort->removeConnect(pOPort);
+}
+
+
+// Update port connection references.
+void qjackctlPatchbay::updateConnections (void)
+{
+    // For each output client item...
+    for (qjackctlClientItem *pOClient = m_pOClientList->clients().first();
+            pOClient;
+                pOClient = m_pOClientList->clients().next()) {
+        // For each output port item...
+        for (qjackctlPortItem *pOPort = pOClient->ports().first();
+                pOPort;
+                    pOPort = pOClient->ports().next()) {
+            // Are there already any connections?
+            if (pOPort->connects().count() > 0)
+                continue;
+            // Get port connections...
+            const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
+            if (ppszClientPorts) {
+                // Now, for each input client port...
+                int iClientPort = 0;
+                while (ppszClientPorts[iClientPort]) {
+                    qjackctlPortItem *pIPort = m_pIClientList->findClientPort(ppszClientPorts[iClientPort]);
+                    if (pIPort) {
+                        pOPort->addConnect(pIPort);
+                        pIPort->addConnect(pOPort);
+                    }
+                    iClientPort++;
+                }
+                ::free(ppszClientPorts);
+            }
+        }
+    }
 }
 
 
@@ -508,9 +607,6 @@ void qjackctlPatchbay::drawConnectionLine ( QPainter& p, int x1, int y1, int x2,
 // Draw visible port connection relation arrows.
 void qjackctlPatchbay::drawConnections (void)
 {
-    if (!startExclusive())
-        return;
-        
     QPainter p(this);
     QRect r1, r2;
     int   x1, y1, h1, b1;
@@ -540,41 +636,32 @@ void qjackctlPatchbay::drawConnections (void)
                     pOPort = pOClient->ports().next()) {
             // To avoid some unnecessary arrows...
             b1 = b2 = 0;
-            // Get port connections...
-            const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
-            if (ppszClientPorts) {
-                // Get starting connector arrow coordinates.
-                r1 = (m_pOClientList->listView())->itemRect(pOPort);
+            // Get starting connector arrow coordinates.
+            r1 = (m_pOClientList->listView())->itemRect(pOPort);
+            y1 = (r1.top() + r1.bottom()) / 2;
+            // If this item is not visible, don't bother to update it.
+            if (!pOPort->isVisible() || y1 < 1) {
+                r1 = (m_pOClientList->listView())->itemRect(pOPort->client());
                 y1 = (r1.top() + r1.bottom()) / 2;
-                // If this item is not visible, don't bother to update it.
-                if (!pOPort->isVisible() || y1 < 1) {
-                    r1 = (m_pOClientList->listView())->itemRect(pOPort->client());
-                    y1 = (r1.top() + r1.bottom()) / 2;
-                    b1++;
+                b1++;
+            }
+            // Get port connections...
+            for (qjackctlPortItem *pIPort = pOPort->connects().first();
+                    pIPort && b2 == 0;
+                        pIPort = pOPort->connects().next()) {
+                // Obviously, there is a connection from pOPort to pIPort items:
+                r2 = (m_pIClientList->listView())->itemRect(pIPort);
+                y2 = (r2.top() + r2.bottom()) / 2;
+                if (!pIPort->isVisible() || y2 < 1) {
+                    r2 = (m_pIClientList->listView())->itemRect(pIPort->client());
+                    y2 = (r2.top() + r2.bottom()) / 2;
+                    if (b1 > 0)
+                        b2++;
                 }
-                int iClientPort = 0;
-                while (ppszClientPorts[iClientPort] && b2 == 0) {
-                    qjackctlPortItem *pIPort = m_pIClientList->findClientPort(ppszClientPorts[iClientPort]);
-                    if (pIPort) {
-                        // There is a connection from pOPort to pIPort items:
-                        r2 = (m_pIClientList->listView())->itemRect(pIPort);
-                        y2 = (r2.top() + r2.bottom()) / 2;
-                        if (!pIPort->isVisible() || y2 < 1) {
-                            r2 = (m_pIClientList->listView())->itemRect(pIPort->client());
-                            y2 = (r2.top() + r2.bottom()) / 2;
-                            if (b1 > 0)
-                                b2++;
-                        }
-                        drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
-                    }
-                    iClientPort++;
-                }
-                ::free(ppszClientPorts);
+                drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
             }
         }
     }
-    
-    endExclusive();
 }
 
 
@@ -582,12 +669,12 @@ void qjackctlPatchbay::drawConnections (void)
 bool qjackctlPatchbay::canConnectSelected (void)
 {
     bool bResult = false;
-    
+
     if (startExclusive()) {
         bResult = canConnectSelectedEx();
         endExclusive();
     }
-    
+
     return bResult;
 }
 
@@ -601,28 +688,48 @@ bool qjackctlPatchbay::canConnectSelectedEx (void)
     if (!pIItem)
         return false;
 
-    // We're not so kinky when one of the selection is a client item...
-    if (pOItem->rtti() == QJACKCTL_CLIENTITEM || pIItem->rtti() == QJACKCTL_CLIENTITEM)
-        return true;
-
-    // One-to-one connection...
-    qjackctlPortItem *pOPort = (qjackctlPortItem *) pOItem;
-    qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
-    QString sIClientPort = pIPort->clientPortName();
-    // Assume all disconnected.
-    bool bConnected = false;
-    // Get current port connections...
-    const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
-    if (ppszClientPorts) {
-        int iClientPort = 0;
-        while (!bConnected && ppszClientPorts[iClientPort]) {
-            bConnected = (sIClientPort == ppszClientPorts[iClientPort]);
-            iClientPort++;
+    if (pOItem->rtti() == QJACKCTL_CLIENTITEM) {
+        qjackctlClientItem *pOClient = (qjackctlClientItem *) pOItem;
+        if (pIItem->rtti() == QJACKCTL_CLIENTITEM) {
+            // Each-to-each connections...
+            qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
+            qjackctlPortItem *pOPort = pOClient->ports().first();
+            qjackctlPortItem *pIPort = pIClient->ports().first();
+            while (pOPort && pIPort) {
+                if (pOPort->findConnectPtr(pIPort) == 0)
+                    return true;
+                pOPort = pOClient->ports().next();
+                pIPort = pIClient->ports().next();
+            }
+        } else {
+            // Many(all)-to-one connection...
+            qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
+            qjackctlPortItem *pOPort = pOClient->ports().first();
+            while (pOPort) {
+                if (pOPort->findConnectPtr(pIPort) == 0)
+                    return true;
+                pOPort = pOClient->ports().next();
+            }
         }
-        ::free(ppszClientPorts);
+    } else {
+        qjackctlPortItem *pOPort = (qjackctlPortItem *) pOItem;
+        if (pIItem->rtti() == QJACKCTL_CLIENTITEM) {
+            // One-to-many(all) connection...
+            qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
+            qjackctlPortItem *pIPort = pIClient->ports().first();
+            while (pIPort) {
+                if (pOPort->findConnectPtr(pIPort) == 0)
+                    return true;
+                pIPort = pIClient->ports().next();
+            }
+        } else {
+            // One-to-one connection...
+            qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
+            return (pOPort->findConnectPtr(pIPort) == 0);
+        }
     }
-    
-    return !bConnected;
+
+    return false;
 }
 
 
@@ -655,7 +762,7 @@ void qjackctlPatchbay::connectSelectedEx (void)
             qjackctlPortItem *pOPort = pOClient->ports().first();
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pOPort && pIPort) {
-                jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+                connectPorts(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
                 pIPort = pIClient->ports().next();
             }
@@ -664,7 +771,7 @@ void qjackctlPatchbay::connectSelectedEx (void)
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
             qjackctlPortItem *pOPort = pOClient->ports().first();
             while (pOPort) {
-                jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+                connectPorts(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
             }
         }
@@ -675,13 +782,13 @@ void qjackctlPatchbay::connectSelectedEx (void)
             qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pIPort) {
-                jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+                connectPorts(pOPort, pIPort);
                 pIPort = pIClient->ports().next();
             }
         } else {
             // One-to-one connection...
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
-            jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+            connectPorts(pOPort, pIPort);
         }
     }
 }
@@ -710,28 +817,48 @@ bool qjackctlPatchbay::canDisconnectSelectedEx (void)
     if (!pIItem)
         return false;
 
-    // We're not so kinky when one of the selection is a client item...
-    if (pOItem->rtti() == QJACKCTL_CLIENTITEM || pIItem->rtti() == QJACKCTL_CLIENTITEM)
-        return true;
-
-    // One-to-one connection...
-    qjackctlPortItem *pOPort = (qjackctlPortItem *) pOItem;
-    qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
-    QString sIClientPort = pIPort->clientPortName();
-    // Assume all disconnected.
-    bool bConnected = false;
-    // Get current port connections...
-    const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
-    if (ppszClientPorts) {
-        int iClientPort = 0;
-        while (!bConnected && ppszClientPorts[iClientPort]) {
-            bConnected = (sIClientPort == ppszClientPorts[iClientPort]);
-            iClientPort++;
+    if (pOItem->rtti() == QJACKCTL_CLIENTITEM) {
+        qjackctlClientItem *pOClient = (qjackctlClientItem *) pOItem;
+        if (pIItem->rtti() == QJACKCTL_CLIENTITEM) {
+            // Each-to-each connections...
+            qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
+            qjackctlPortItem *pOPort = pOClient->ports().first();
+            qjackctlPortItem *pIPort = pIClient->ports().first();
+            while (pOPort && pIPort) {
+                if (pOPort->findConnectPtr(pIPort) != 0)
+                    return true;
+                pOPort = pOClient->ports().next();
+                pIPort = pIClient->ports().next();
+            }
+        } else {
+            // Many(all)-to-one connection...
+            qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
+            qjackctlPortItem *pOPort = pOClient->ports().first();
+            while (pOPort) {
+                if (pOPort->findConnectPtr(pIPort) != 0)
+                    return true;
+                pOPort = pOClient->ports().next();
+            }
         }
-        ::free(ppszClientPorts);
+    } else {
+        qjackctlPortItem *pOPort = (qjackctlPortItem *) pOItem;
+        if (pIItem->rtti() == QJACKCTL_CLIENTITEM) {
+            // One-to-many(all) connection...
+            qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
+            qjackctlPortItem *pIPort = pIClient->ports().first();
+            while (pIPort) {
+                if (pOPort->findConnectPtr(pIPort) != 0)
+                    return true;
+                pIPort = pIClient->ports().next();
+            }
+        } else {
+            // One-to-one connection...
+            qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
+            return (pOPort->findConnectPtr(pIPort) != 0);
+        }
     }
-    
-    return bConnected;
+
+    return false;
 }
 
 
@@ -764,7 +891,7 @@ void qjackctlPatchbay::disconnectSelectedEx (void)
             qjackctlPortItem *pOPort = pOClient->ports().first();
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pOPort && pIPort) {
-                jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+                disconnectPorts(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
                 pIPort = pIClient->ports().next();
             }
@@ -773,7 +900,7 @@ void qjackctlPatchbay::disconnectSelectedEx (void)
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
             qjackctlPortItem *pOPort = pOClient->ports().first();
             while (pOPort) {
-                jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+                disconnectPorts(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
             }
         }
@@ -784,13 +911,13 @@ void qjackctlPatchbay::disconnectSelectedEx (void)
             qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pIPort) {
-                jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+                disconnectPorts(pOPort, pIPort);
                 pIPort = pIClient->ports().next();
             }
         } else {
             // One-to-one disconnection...
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
-            jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+            disconnectPorts(pOPort, pIPort);
         }
     }
 }
@@ -802,9 +929,10 @@ void qjackctlPatchbay::refresh (void)
     if (startExclusive()) {
         m_pOClientList->updateClientPorts();
         m_pIClientList->updateClientPorts();
+        updateConnections();
         endExclusive();
     }
-    
+
     QWidget::update();
 }
 

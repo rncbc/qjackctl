@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.5"
+#define QJACKCTL_VERSION	"0.0.5.1"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -962,6 +962,8 @@ void qjackctlMainForm::connectSelected()
 {
     if (m_pJackPatchbay)
         m_pJackPatchbay->connectSelected();
+
+    stabilizeConnections();
 }
 
 
@@ -970,6 +972,8 @@ void qjackctlMainForm::disconnectSelected()
 {
     if (m_pJackPatchbay)
         m_pJackPatchbay->disconnectSelected();
+
+    stabilizeConnections();
 }
 
 

@@ -71,6 +71,16 @@ public:
 
     int portMark();
 
+    // Connected port list primitives.
+    void addConnect(qjackctlPortItem *pPort);
+    void removeConnect(qjackctlPortItem *pPort);
+
+    // Connected port finders.
+    qjackctlPortItem *findConnect(const QString& sClientPortName);
+    qjackctlPortItem *findConnectPtr(qjackctlPortItem *pPortPtr);
+    // Connection list accessor.
+    QPtrList<qjackctlPortItem>& connects();
+
     // To virtually distinguish between list view items.
     int rtti() const;
 
@@ -84,6 +94,9 @@ private:
     QString      m_sPortName;
     int          m_iPortMark;
     jack_port_t *m_pJackPort;
+    
+    // Connection cache list.
+    QPtrList<qjackctlPortItem> m_connects;
 };
 
 
@@ -130,7 +143,7 @@ private:
     qjackctlClientList *m_pClientList;
     QString m_sClientName;
     int     m_iClientMark;
-    
+
     QPtrList<qjackctlPortItem> m_ports;
 };
 
@@ -162,7 +175,7 @@ public:
     // Jack client accessors.
     jack_client_t *jackClient();
     unsigned long  jackFlags();
-    
+
     // Client list accessor.
     QPtrList<qjackctlClientItem>& clients();
     
@@ -228,6 +241,13 @@ private:
     bool startExclusive();
     void endExclusive();
 
+    // Update port connection references.
+    void updateConnections();
+
+    // Connect/Disconnection primitives.
+    void connectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+    void disconnectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+
     // Connection methods (unguarded).
     bool canConnectSelectedEx();
     bool canDisconnectSelectedEx();
@@ -249,4 +269,3 @@ private:
 #endif  // __qjackctlPatchbay_h
 
 // end of qjackctlPatchbay.h
-

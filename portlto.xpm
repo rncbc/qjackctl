@@ -1,5 +1,5 @@
 /* XPM */
-static char * portlto_xpm[] = {
+static const char * portlto_xpm[] = {
 "16 16 35 1",
 " 	c None",
 ".	c #AAA8A4",

@@ -1,5 +1,5 @@
 /* XPM */
-static char * D:\Usr\qjackctl\qjackctl_xpm[] = {
+static const char * qjackctl_xpm[] = {
 "32 32 127 2",
 "  	c None",
 ". 	c #575757",

@@ -3,6 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.0.6   2003-09-07  Work in progress.
+
+- Patchbay connections handling has been fairly rewritten.
+
 0.0.5   2003-09-05  Minor feature ehancements and bugfixes.
 
 - Internationalization support added; future qjackctl_${LANG}.qm translation
