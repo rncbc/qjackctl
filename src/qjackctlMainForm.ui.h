@@ -1866,6 +1866,8 @@ void qjackctlMainForm::transportStart()
         updateStatusItem(STATUS_TRANSPORT_STATE, tr("Starting"));
         // Log this here.
         appendMessages(tr("Transport start."));
+        // Make sure all status(es) will be updated ASAP...
+        m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
     }
 #endif
 }
@@ -1879,6 +1881,8 @@ void qjackctlMainForm::transportStop()
         updateStatusItem(STATUS_TRANSPORT_STATE, tr("Stopping"));
         // Log this here.
         appendMessages(tr("Transport stop."));
+        // Make sure all status(es) will be updated ASAP...
+        m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
     }
 #endif
 }

@@ -3,21 +3,22 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.13   2004-11-02  Work in progress...
+0.2.13   2004-11-05  Retouches and minor optimizations.
 
 - Some informational status items are now updated 10 times less frequently
   (e.g. CPU Load, Sample Rate, Buffer Size, Realtime Mode, etc.), lowering
-  the CPU burden of almost probable redundant status updates.
+  the CPU burden of most probably redundant status updates.
 
 - XRUN detection and statistics are being conditionally included if
-  jack_get_xrun_delayed_usecs() is available (as of JACK 0.99.7+).
+  jack_get_xrun_delayed_usecs() is available (as of JACK 0.99.7+ CVS).
 
 - Fixed ancient bug on client shutdown event handling, which was
   invoking the xrun notification handler by mistake.
 
 - Support for maximum scheduling delay status added (EXPERIMENTAL);
-  this relies on jack_get_max_delayed_usecs() function availability.
-  
+  this relies on jack_get_max_delayed_usecs() function availability at
+  configure time, depending on a Lee Revell's non-official JACK patch.
+
 - Preset selection has been added to the context menu.
 
 
