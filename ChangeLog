@@ -3,6 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.12a  2004-10-11  Audio connections now naturally sorted.
+
+- Client port list on audio connections are now hopefully fixed for good;
+  the sort comparison function now takes full natural order into account.
+
+
 0.2.12   2004-10-08  Larger icons and font option on connections/patchbay.
 
 - Fixed some old and slow memory-leak due to redundand and repetitive call

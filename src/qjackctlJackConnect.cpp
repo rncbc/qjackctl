@@ -72,74 +72,61 @@ jack_port_t *qjackctlJackPort::jackPort (void)
 int qjackctlJackPort::compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const
 {
     QString sName1, sName2;
-    QString sPrefix1, sPrefix2;
-    int iSuffix1, iSuffix2;
-    int i, iNumber, iDigits;
-    int iDecade, iFactor;
+    int cchLength1, cchLength2;
+    int ich1, ich2;
 
     sName1 = text(iColumn);
     sName2 = pPortItem->text(iColumn);
 
-    iNumber  = 0;
-    iDigits  = 0;
-    iDecade  = 1;
-    iFactor  = 1;
-    iSuffix1 = 0;
-    for (i = sName1.length() - 1; i >= 0; i--) {
-        QCharRef ch = sName1.at(i);
-        if (ch.isDigit()) {
-            iNumber += ch.digitValue() * iDecade;
-            iDecade *= 10;
-            iDigits++;
-        } else {
-            sPrefix1.insert(0, ch.lower());
-            if (iDigits > 0) {
-                iSuffix1 += iNumber * iFactor;
-                iFactor *= 100;
-                iNumber  = 0;
-                iDigits  = 0;
-                iDecade  = 1;
-            }
-        }
-    }
+    cchLength1 = sName1.length();
+    cchLength2 = sName2.length();
 
-    iNumber  = 0;
-    iDigits  = 0;
-    iDecade  = 1;
-    iFactor  = 1;
-    iSuffix2 = 0;
-    for (i = sName2.length() - 1; i >= 0; i--) {
-        QCharRef ch = sName2.at(i);
-        if (ch.isDigit()) {
-            iNumber += ch.digitValue() * iDecade;
-            iDecade *= 10;
-            iDigits++;
-        } else {
-            sPrefix2.insert(0, ch.lower());
-            if (iDigits > 0) {
-                iSuffix2 += iNumber * iFactor;
-                iFactor *= 100;
-                iNumber  = 0;
-                iDigits  = 0;
-                iDecade  = 1;
-            }
-        }
-    }
+    for (ich1 = ich2 = 0; ich1 < cchLength1 && ich2 < cchLength2; ich1++, ich2++) {
 
-    if (sPrefix1 == sPrefix2) {
-        if (iSuffix1 < iSuffix2)
+        // Skip (white)spaces...
+        while (sName1.at(ich1).isSpace())
+            ich1++;
+        while (sName2.at(ich2).isSpace())
+            ich2++;
+
+        QCharRef ch1 = sName1.at(ich1);
+        QCharRef ch2 = sName2.at(ich2);
+
+        if (ch1.isDigit() && ch2.isDigit()) {
+            // Find the whole length numbers...
+            int iDigits1 = ich1++;
+            while (sName1.at(ich1).isDigit())
+                ich1++;
+            int iDigits2 = ich2++;
+            while (sName2.at(ich2).isDigit())
+                ich2++;
+            // Compare as natural decimal-numbers...
+            int iNumber1 = sName1.mid(iDigits1, ich1 - iDigits1).toInt();
+            int iNumber2 = sName2.mid(iDigits2, ich2 - iDigits2).toInt();
+            if (iNumber1 < iNumber2)
+                return (bAscending ? -1 :  1);
+            else if (iNumber1 > iNumber2)
+                return (bAscending ?  1 : -1);
+            // Go on with this next char...
+            ch1 = sName1.at(ich1);
+            ch2 = sName2.at(ich2);
+        }
+
+        // Compare this char...
+        if (ch1 < ch2)
             return (bAscending ? -1 :  1);
-        else
-        if (iSuffix1 > iSuffix2)
-            return (bAscending ?  1 : -1);
-        else
-            return 0;
-    } else {
-        if (sPrefix1 < sPrefix2)
-            return (bAscending ? -1 :  1);
-        else
+        else if (ch1 > ch2)
             return (bAscending ?  1 : -1);
     }
+
+    // Both strings seem to match, but longer is greater.
+    if (cchLength1 < cchLength2)
+        return (bAscending ? -1 :  1);
+    else if (cchLength1 > cchLength2)
+        return (bAscending ?  1 : -1);
+
+    // Exact match.
+    return 0;
 }
 
 
