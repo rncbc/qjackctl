@@ -208,7 +208,7 @@
                             <property name="paletteForegroundColor">
                                 <color>
                                     <red>0</red>
-                                    <green>255</green>
+                                    <green>170</green>
                                     <blue>0</blue>
                                 </color>
                             </property>
