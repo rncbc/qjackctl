@@ -1373,7 +1373,7 @@ void qjackctlMainForm::browseShutdownScript()
             ShutdownScriptShellComboBox->currentText(),	// Start here.
             QString::null, 								// Filter (all files?)
             this, 0,									// Parent and name (none)
-            tr("Startup script")						// Caption.
+            tr("Shutdown script")						// Caption.
     );
     
     if (!sFileName.isEmpty()) {
@@ -1465,7 +1465,4 @@ static void saveComboBoxHistory ( QSettings *pSettings, QComboBox *pComboBox, in
 }
 
 
-
 // end of ui.h
-
-
