@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.13   2004-11-11  Retouches and minor optimizations.
+0.2.13   2004-11-15  Retouches and minor optimizations.
 
 - Main window is now properly minimized instead of simply hidden when
   the system tray icon is not available nor opted in (as suggested
@@ -25,6 +25,9 @@ ChangeLog
 
 - Patchbay Activate button is now a toggle button widget, allowing the
   deactivation of the current patchbay profile.
+
+- Reset-status icon has been changed to a simple red circle instead of
+  previous one which was much like a power-switch symbol.
 
 - Preset selection has been added to the context menu.
 
