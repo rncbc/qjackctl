@@ -2123,7 +2123,8 @@ void qjackctlMainForm::updateTitleStatus (void)
         sState = tr("Inactive");
         break;
     }
-    setCaption(sTitle + sState + sDots);
+    sTitle += sState + sDots;
+    setCaption(sTitle);
 
     updateStatusItem(STATUS_SERVER_STATE, sState);
 

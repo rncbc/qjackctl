@@ -3,11 +3,13 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.15   2005-01-27  Client/port names aliasing.
+0.2.15   2005-01-29  Client/port names aliasing.
 
 - JACK/ALSA client and port name aliasing (renaming) is now an optional feature
   for the connections window; all client/port aliases are saved on a per preset 
   basis (as proposed for Lionstracs' Mediastation) (EXPERIMENTAL).
+
+- Server state now shown (back gain) on the system tray icon tooltip.
 
 
 0.2.14   2005-01-23  More progressive optimizations.
