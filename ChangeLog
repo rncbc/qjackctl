@@ -3,7 +3,9 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.14   2004-12-31  Work in progress...
+0.2.14   2005-01-01  Work in progress...
+
+- Check for <jack/statistics.h> on configure time (as of JACK 0.99.42+ CVS).
 
 - "Unlock memory" server setup option was added, allowing the release
   of memory used by common toolkit libraries (GTK+, Qt, FLTK, Wine) that

@@ -144,6 +144,12 @@ if test "x$ac_jack_h" = "xno"; then
    AC_MSG_ERROR([JACK headers not found.])
 fi
 
+dnl Check for jack/statistics.h header.
+AC_CHECK_HEADER(jack/statistics.h, [ac_jack_statistics_h="yes"], [ac_jack_statistics_h="no"])
+if test "x$ac_jack_statistics_h" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_STATISTICS, 1, [Define if jack/statistics.h is available.])
+fi
+
 dnl Check for ALSA headers.
 AC_CHECK_HEADER(alsa/asoundlib.h, [ac_alsa_h="yes"], [ac_alsa_h="no"])
 if test "x$ac_alsa_h" = "xno"; then
