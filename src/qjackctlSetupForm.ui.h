@@ -47,6 +47,7 @@ void qjackctlSetupForm::init (void)
     WaitComboBox->setValidator(new QIntValidator(WaitComboBox));
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
     TimeRefreshComboBox->setValidator(new QIntValidator(TimeRefreshComboBox));
+    StartDelayComboBox->setValidator(new QIntValidator(StartDelayComboBox));
 
     // Try to restore old window positioning.
     adjustSize();
@@ -151,6 +152,7 @@ void qjackctlSetupForm::changePreset( const QString& sPreset )
         HWMeterCheckBox->setChecked(preset.bHWMeter);
         InChannelsSpinBox->setValue(preset.iInChannels);
         OutChannelsSpinBox->setValue(preset.iOutChannels);
+        StartDelayComboBox->setCurrentText(QString::number(preset.iStartDelay));
         VerboseCheckBox->setChecked(preset.bVerbose);
     }
     stabilizeForm();
@@ -185,6 +187,7 @@ void qjackctlSetupForm::savePreset (void)
     preset.bHWMeter     = HWMeterCheckBox->isChecked();
     preset.iInChannels  = InChannelsSpinBox->value();
     preset.iOutChannels = OutChannelsSpinBox->value();
+    preset.iStartDelay  = StartDelayComboBox->currentText().toInt();
     preset.bVerbose     = VerboseCheckBox->isChecked();
     m_pSetup->savePreset(preset, sPreset);
 

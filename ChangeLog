@@ -3,7 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.2   2004-01-08  Yet more minor bugfixes.
+0.2.2   2004-01-09  Yet more minor bugfixes.
+
+- Client start delay now configurable on setup; this may be of help for
+  slow machines or unusual long server driver startups (e.g. portaudio).
 
 - Messages color retouching.
 

@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>513</width>
-            <height>428</height>
+            <width>500</width>
+            <height>374</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -1284,7 +1284,7 @@
                             </widget>
                             <spacer row="3" column="2">
                                 <property name="name">
-                                    <cstring>spacer25</cstring>
+                                    <cstring>spacer26</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Vertical</enum>
@@ -1347,11 +1347,11 @@
                                             <enum>Horizontal</enum>
                                         </property>
                                         <property name="sizeType">
-                                            <enum>MinimumExpanding</enum>
+                                            <enum>Minimum</enum>
                                         </property>
                                         <property name="sizeHint">
                                             <size>
-                                                <width>120</width>
+                                                <width>8</width>
                                                 <height>8</height>
                                             </size>
                                         </property>
@@ -1386,6 +1386,107 @@
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Maximum output audio hardware channels to allocate</string>
+                                        </property>
+                                    </widget>
+                                    <spacer>
+                                        <property name="name">
+                                            <cstring>spacer25</cstring>
+                                        </property>
+                                        <property name="orientation">
+                                            <enum>Horizontal</enum>
+                                        </property>
+                                        <property name="sizeType">
+                                            <enum>MinimumExpanding</enum>
+                                        </property>
+                                        <property name="sizeHint">
+                                            <size>
+                                                <width>20</width>
+                                                <height>8</height>
+                                            </size>
+                                        </property>
+                                    </spacer>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>StartDelayTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Start De&amp;lay (secs):</string>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>StartDelayComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox">
+                                        <item>
+                                            <property name="text">
+                                                <string>1</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>2</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>5</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>10</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>20</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>30</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>60</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>StartDelayComboBox</cstring>
+                                        </property>
+                                        <property name="sizePolicy">
+                                            <sizepolicy>
+                                                <hsizetype>5</hsizetype>
+                                                <vsizetype>0</vsizetype>
+                                                <horstretch>0</horstretch>
+                                                <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="minimumSize">
+                                            <size>
+                                                <width>40</width>
+                                                <height>0</height>
+                                            </size>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>true</bool>
+                                        </property>
+                                        <property name="currentItem">
+                                            <number>1</number>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Time in seconds that client is delayed after server startup</string>
                                         </property>
                                     </widget>
                                 </hbox>
@@ -2824,6 +2925,7 @@
     <tabstop>HWMeterCheckBox</tabstop>
     <tabstop>InChannelsSpinBox</tabstop>
     <tabstop>OutChannelsSpinBox</tabstop>
+    <tabstop>StartDelayComboBox</tabstop>
     <tabstop>VerboseCheckBox</tabstop>
     <tabstop>StartupScriptCheckBox</tabstop>
     <tabstop>StartupScriptShellComboBox</tabstop>

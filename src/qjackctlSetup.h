@@ -49,6 +49,7 @@ struct qjackctlPreset
     bool    bHWMeter;
     int     iInChannels;
     int     iOutChannels;
+    int     iStartDelay;
     bool    bVerbose;
 };
 

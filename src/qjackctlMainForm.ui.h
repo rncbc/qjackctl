@@ -38,7 +38,6 @@
 
 // Timer constant stuff.
 #define QJACKCTL_TIMER_MSECS    500
-#define QJACKCTL_DELAY_MSECS    2000
 
 // Notification pipes descriptors
 #define QJACKCTL_FDNIL     -1
@@ -64,6 +63,7 @@ void qjackctlMainForm::init (void)
     m_pJackClient   = NULL;
     m_bJackDetach   = false;
     m_pAlsaSeq      = NULL;
+    m_iStartDelay   = 0;
     m_iTimerDelay   = 0;
     m_iTimerRefresh = 0;
     m_iJackRefresh  = 0;
@@ -325,6 +325,7 @@ void qjackctlMainForm::startJack (void)
     StartPushButton->setEnabled(false);
 
     // Reset our timer counters...
+    m_iStartDelay  = 0;
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 
@@ -467,6 +468,7 @@ void qjackctlMainForm::startJack (void)
     StopPushButton->setEnabled(true);
 
     // Reset (yet again) the timer counters...
+    m_iStartDelay  = m_preset.iStartDelay * 1000;
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 }
@@ -1026,9 +1028,9 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 void qjackctlMainForm::timerSlot (void)
 {
     // Is it the first shot on server start after a few delay?
-    if (m_iTimerDelay < QJACKCTL_DELAY_MSECS) {
+    if (m_iTimerDelay < m_iStartDelay) {
         m_iTimerDelay += QJACKCTL_TIMER_MSECS;
-        if (m_iTimerDelay >= QJACKCTL_DELAY_MSECS)
+        if (m_iTimerDelay >= m_iStartDelay)
             startJackClient(false);
     }
 
@@ -1180,7 +1182,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // Are we about to start detached?
     if (bDetach) {
         // To fool timed client initialization delay.
-        m_iTimerDelay += (QJACKCTL_DELAY_MSECS + 1);
+        m_iTimerDelay += (m_iStartDelay + 1);
         // Refresh status (with dashes?)
         refreshStatus();
     }
