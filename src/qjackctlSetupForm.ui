@@ -28,7 +28,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>587</width>
+            <width>552</width>
             <height>453</height>
         </rect>
     </property>
@@ -978,6 +978,12 @@
                                             <font>
                                                 <bold>0</bold>
                                             </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>NoFrame</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Plain</enum>
                                         </property>
                                         <property name="text">
                                             <string>Dit&amp;her:</string>
@@ -3221,10 +3227,10 @@
                                     </font>
                                 </property>
                                 <property name="text">
-                                    <string>Draw connection and patchbay lines as &amp;Bezier curves</string>
+                                    <string>Draw connection and patchbay lines as Be&amp;zier curves</string>
                                 </property>
                                 <property name="accel">
-                                    <string>Alt+B</string>
+                                    <string>Alt+Z</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Whether to draw connection lines as cubic Bezier curves</string>
