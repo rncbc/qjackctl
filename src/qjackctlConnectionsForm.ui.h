@@ -96,7 +96,9 @@ void qjackctlConnectionsForm::setConnectionsFont ( const QFont & font )
 // Connections view icon size accessor.
 void qjackctlConnectionsForm::setConnectionsIconSize( int iIconSize )
 {
-    // TODO: Set icon sizes of all listviews...
+    // Set icon sizes of all views...
+    JackConnectView->setIconSize(iIconSize);
+    AlsaConnectView->setIconSize(iIconSize);
 }
 
 

@@ -1796,7 +1796,7 @@ void qjackctlMainForm::showSetupForm (void)
             if (( bOldDisplayEffect && !m_pSetup->bDisplayEffect) ||
                 (!bOldDisplayEffect &&  m_pSetup->bDisplayEffect))
                 updateDisplayEffect();
-            if (iOldConnectionsIconSize && !m_pSetup->iConnectionsIconSize)
+            if (iOldConnectionsIconSize != m_pSetup->iConnectionsIconSize)
                 updateConnectionsIconSize();
             if (sOldConnectionsFont != !m_pSetup->sConnectionsFont)
                 updateConnectionsFont();

@@ -21,16 +21,6 @@
 
 #include "qjackctlAlsaConnect.h"
 
-// MIDI connection pixmaps.
-
-static int g_iXpmRefCount = 0;
-
-static QPixmap *g_pXpmClientO = 0;  // Output client item pixmap.
-static QPixmap *g_pXpmClientI = 0;  // Input client item pixmap.
-static QPixmap *g_pXpmPortO   = 0;  // Output port pixmap.
-static QPixmap *g_pXpmPortI   = 0;  // Input port pixmap.
-
-
 //----------------------------------------------------------------------
 // class qjackctlAlsaPort -- Alsa port list item.
 //
@@ -42,9 +32,9 @@ qjackctlAlsaPort::qjackctlAlsaPort ( qjackctlAlsaClient *pClient, const QString&
     m_iAlsaPort = iAlsaPort;
 
     if (pClient->isReadable()) {
-        QListViewItem::setPixmap(0, *g_pXpmPortO);
+        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MPORTO));
     } else {
-        QListViewItem::setPixmap(0, *g_pXpmPortI);
+        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MPORTI));
     }
 }
 
@@ -77,9 +67,9 @@ qjackctlAlsaClient::qjackctlAlsaClient ( qjackctlAlsaClientList *pClientList, co
     m_iAlsaClient = iAlsaClient;
     
     if (pClientList->isReadable()) {
-        QListViewItem::setPixmap(0, *g_pXpmClientO);
+        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MCLIENTO));
     } else {
-        QListViewItem::setPixmap(0, *g_pXpmClientI);
+        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MCLIENTI));
     }
 }
 
@@ -118,26 +108,12 @@ qjackctlAlsaPort *qjackctlAlsaClient::findPort ( int iAlsaPort )
 qjackctlAlsaClientList::qjackctlAlsaClientList( qjackctlClientListView *pListView, snd_seq_t *pAlsaSeq, bool bReadable )
     : qjackctlClientList(pListView, bReadable)
 {
-    if (g_iXpmRefCount == 0) {
-        g_pXpmClientO = qjackctlClientList::createPixmap("mcliento");
-        g_pXpmClientI = qjackctlClientList::createPixmap("mclienti");
-        g_pXpmPortO   = qjackctlClientList::createPixmap("mporto");
-        g_pXpmPortI   = qjackctlClientList::createPixmap("mporti");
-    }
-    g_iXpmRefCount++;
-
-    m_pAlsaSeq  = pAlsaSeq;
+    m_pAlsaSeq = pAlsaSeq;
 }
 
 // Default destructor.
 qjackctlAlsaClientList::~qjackctlAlsaClientList (void)
 {
-    if (--g_iXpmRefCount == 0) {
-        delete g_pXpmClientO;
-        delete g_pXpmClientI;
-        delete g_pXpmPortO;
-        delete g_pXpmPortI;
-    }
 }
 
 
@@ -242,6 +218,8 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 qjackctlAlsaConnect::qjackctlAlsaConnect ( qjackctlConnectView *pConnectView, snd_seq_t *pAlsaSeq )
     : qjackctlConnect(pConnectView)
 {
+    createIconPixmaps();
+    
     setOClientList(new qjackctlAlsaClientList(connectView()->OListView(), pAlsaSeq, true));
     setIClientList(new qjackctlAlsaClientList(connectView()->IListView(), pAlsaSeq, false));
 
@@ -251,6 +229,33 @@ qjackctlAlsaConnect::qjackctlAlsaConnect ( qjackctlConnectView *pConnectView, sn
 // Default destructor.
 qjackctlAlsaConnect::~qjackctlAlsaConnect (void)
 {
+    deleteIconPixmaps();
+}
+
+
+// Common pixmap accessor (static).
+QPixmap& qjackctlAlsaConnect::pixmap ( int iPixmap )
+{
+    return *g_apPixmaps[iPixmap];
+}
+
+
+// Local pixmap-set janitor methods.
+void qjackctlAlsaConnect::createIconPixmaps (void)
+{
+    g_apPixmaps[QJACKCTL_XPM_MCLIENTI] = createIconPixmap("mclienti");
+    g_apPixmaps[QJACKCTL_XPM_MCLIENTO] = createIconPixmap("mcliento");
+    g_apPixmaps[QJACKCTL_XPM_MPORTI]   = createIconPixmap("mporti");
+    g_apPixmaps[QJACKCTL_XPM_MPORTO]   = createIconPixmap("mporto");
+}
+
+void qjackctlAlsaConnect::deleteIconPixmaps (void)
+{
+    for (int i = 0; i < QJACKCTL_XPM_MPIXMAPS; i++) {
+        if (g_apPixmaps[i])
+            delete g_apPixmaps[i];
+        g_apPixmaps[i] = NULL;
+    }
 }
 
 
@@ -351,6 +356,17 @@ void qjackctlAlsaConnect::updateConnections (void)
     }
 }
 
+
+// Update icon size implementation.
+void qjackctlAlsaConnect::updateIconPixmaps (void)
+{
+    deleteIconPixmaps();
+    createIconPixmaps();
+}
+
+
+// Local static pixmap-set array.
+QPixmap *qjackctlAlsaConnect::g_apPixmaps[QJACKCTL_XPM_MPIXMAPS];
 
 // end of qjackctlAlsaConnect.cpp
 

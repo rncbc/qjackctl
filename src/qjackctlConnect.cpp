@@ -318,7 +318,6 @@ void qjackctlClientItem::paintCell( QPainter *p, const QColorGroup& cg, int colu
 //----------------------------------------------------------------------
 // qjackctlClientList -- Client list.
 //
-int qjackctlClientList::g_iPixmapSize = 0;
 
 // Constructor.
 qjackctlClientList::qjackctlClientList( qjackctlClientListView *pListView, bool bReadable )
@@ -448,32 +447,6 @@ void qjackctlClientList::hiliteClientPorts (void)
 
     // Do remember this one, ever.
     m_pHiliteItem = pItem;
-}
-
-
-// Common icon size pixmap accessor (static).
-void qjackctlClientList::setPixmapSize ( int iPixmapSize )
-{
-    g_iPixmapSize = iPixmapSize;
-}
-
-int qjackctlClientList::pixmapSize (void)
-{
-    return g_iPixmapSize;
-}
-
-
-// Common pixmap factory-method (static).
-QPixmap *qjackctlClientList::createPixmap ( const QString& sName )
-{
-    QPixmap *pPixmap;
-    
-    if (g_iPixmapSize > 0)
-        pPixmap = new QPixmap(QPixmap::fromMimeSource(sName + QString("_%1x%1.png").arg(g_iPixmapSize * 32)));
-    else
-        pPixmap = new QPixmap(QPixmap::fromMimeSource(sName + ".png"));
-        
-    return pPixmap;
 }
 
 
@@ -809,6 +782,7 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
     m_pConnect = 0;
     
     m_bBezierLines = false;
+    m_iIconSize    = 0;
     
     QObject::connect(m_pOListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
@@ -895,6 +869,28 @@ void qjackctlConnectView::setBezierLines ( bool bBezierLines )
 bool qjackctlConnectView::isBezierLines (void)
 {
     return m_bBezierLines;
+}
+
+
+// Common icon size methods.
+void qjackctlConnectView::setIconSize ( int iIconSize )
+{
+    // Update only if changed.
+    if (iIconSize == m_iIconSize)
+        return;
+
+    // Go for it...
+    m_iIconSize = iIconSize;
+
+    // Call binding descendant implementation,
+    // and do a complete content reset...
+    if (m_pConnect)
+        m_pConnect->updateContents(true);
+}
+
+int qjackctlConnectView::iconSize (void)
+{
+    return m_iIconSize;
 }
 
 
@@ -1324,12 +1320,19 @@ bool qjackctlConnect::disconnectAllEx (void)
 }
 
 
-// Complete contents rebuilder; return dirty status.
-void qjackctlConnect::refresh (void)
+// Complete/incremental contents rebuilder; check dirty status if incremental.
+void qjackctlConnect::updateContents ( bool bClear )
 {
     int iDirtyCount = 0;
 
     if (startMutex()) {
+        // Do we do a complete rebuild?
+        if (bClear) {
+            (m_pOClientList->listView())->clear();
+            (m_pIClientList->listView())->clear();
+            updateIconPixmaps();
+        }
+        // Add (newer) client:ports and respective connections...
         iDirtyCount += m_pOClientList->updateClientPorts();
         iDirtyCount += m_pIClientList->updateClientPorts();
         updateConnections();
@@ -1338,8 +1341,15 @@ void qjackctlConnect::refresh (void)
 
     (m_pConnectView->ConnectorView())->update();
 
-    if (iDirtyCount > 0)
+    if (!bClear && iDirtyCount > 0)
         emit connectChanged();
+}
+
+
+// Incremental contents rebuilder; check dirty status.
+void qjackctlConnect::refresh (void)
+{
+    updateContents(false);
 }
 
 
@@ -1369,6 +1379,20 @@ qjackctlClientList *qjackctlConnect::IClientList (void)
 {
     return m_pIClientList;
 }
+
+
+// Common pixmap factory-method.
+QPixmap *qjackctlConnect::createIconPixmap ( const QString& sIconName )
+{
+    QString sName = sIconName;
+    int     iSize = m_pConnectView->iconSize() * 32;
+
+    if (iSize > 0)
+        sName += QString("_%1x%2").arg(iSize).arg(iSize);
+
+    return new QPixmap(QPixmap::fromMimeSource(sName + ".png"));
+}
+
 
 // end of qjackctlConnect.cpp
 

@@ -26,12 +26,24 @@
 
 #include <jack/jack.h>
 
-
 // Forward declarations.
 class qjackctlJackPort;
 class qjackctlJackClient;
 class qjackctlJackClientList;
 class qjackctlJackConnect;
+
+// Pixmap-set array indexes.
+#define QJACKCTL_XPM_ACLIENTI   0   // Input client item pixmap.
+#define QJACKCTL_XPM_ACLIENTO   1   // Output client item pixmap.
+#define QJACKCTL_XPM_APORTPTI   2   // Physcal Terminal Input port pixmap.
+#define QJACKCTL_XPM_APORTPTO   3   // Physical Terminal Output port pixmap.
+#define QJACKCTL_XPM_APORTPNI   4   // Physical Non-terminal Input port pixmap.
+#define QJACKCTL_XPM_APORTPNO   5   // Physical Non-terminal Output port pixmap.
+#define QJACKCTL_XPM_APORTLTI   6   // Logical Terminal Input port pixmap.
+#define QJACKCTL_XPM_APORTLTO   7   // Logical Terminal Output port pixmap.
+#define QJACKCTL_XPM_APORTLNI   8   // Logical Non-terminal Input port pixmap.
+#define QJACKCTL_XPM_APORTLNO   9   // Logical Non-terminal Output port pixmap.
+#define QJACKCTL_XPM_APIXMAPS  10   // Number of pixmaps in local array.
 
 // Jack port list item.
 class qjackctlJackPort : public qjackctlPortItem
@@ -107,6 +119,9 @@ public:
     // Default destructor.
     ~qjackctlJackConnect();
 
+    // Common pixmap accessor.
+    static QPixmap& pixmap (int iPixmap);
+    
 protected:
 
     // Virtual Connect/Disconnection primitives.
@@ -116,6 +131,17 @@ protected:
     // Update port connection references.
     void updateConnections();
 
+    // Update icon size implementation.
+    void updateIconPixmaps();
+
+private:
+
+    // Local pixmap-set janitor methods.
+    void createIconPixmaps();
+    void deleteIconPixmaps();
+
+    // Local pixmap-set array.
+    static QPixmap *g_apPixmaps[QJACKCTL_XPM_APIXMAPS];
 };
 
 

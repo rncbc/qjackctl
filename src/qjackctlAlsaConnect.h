@@ -26,12 +26,19 @@
 
 #include <alsa/asoundlib.h>
 
-
 // Forward declarations.
 class qjackctlAlsaPort;
 class qjackctlAlsaClient;
 class qjackctlAlsaClientList;
 class qjackctlAlsaConnect;
+
+// Pixmap-set array indexes.
+#define QJACKCTL_XPM_MCLIENTO  0    // Output client item pixmap.
+#define QJACKCTL_XPM_MCLIENTI  1    // Input client item pixmap.
+#define QJACKCTL_XPM_MPORTO    2    // Output port pixmap.
+#define QJACKCTL_XPM_MPORTI    3    // Input port pixmap.
+#define QJACKCTL_XPM_MPIXMAPS  4    // Number of pixmaps in local array.
+
 
 // Jack port list item.
 class qjackctlAlsaPort : public qjackctlPortItem
@@ -120,6 +127,9 @@ public:
     // Alsa sequencer accessor.
     snd_seq_t *alsaSeq();
 
+    // Common pixmap accessor.
+    static QPixmap& pixmap(int iPixmap);
+
 protected:
 
     // Virtual Connect/Disconnection primitives.
@@ -129,10 +139,20 @@ protected:
     // Update port connection references.
     void updateConnections();
 
+    // Update icon size implementation.
+    void updateIconPixmaps();
+    
 private:
+
+    // Local pixmap-set janitor methods.
+    void createIconPixmaps();
+    void deleteIconPixmaps();
 
     // Instance variables.
     snd_seq_t *m_pAlsaSeq;
+
+    // Local static pixmap-set array.
+    static QPixmap *g_apPixmaps[QJACKCTL_XPM_MPIXMAPS];
 };
 
 

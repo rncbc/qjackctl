@@ -205,13 +205,6 @@ public:
     // Client:port hilite update stabilization.
     void hiliteClientPorts (void);
 
-    // Common pixmap factory-method (static).
-    static QPixmap *createPixmap (const QString& sName);
-
-    // Common icon size pixmap accessors (static).
-    static void setPixmapSize (int iPixmapSize);
-    static int pixmapSize (void);
-
 private:
 
     // Instance variables.
@@ -221,10 +214,6 @@ private:
     QPtrList<qjackctlClientItem> m_clients;
 
     QListViewItem *m_pHiliteItem;
-
-    // Common (static) pixmap icon-size:
-    // 0 = 16x16 (default), 1 = 32x32, 2 = 64x64.
-    static int g_iPixmapSize;
 };
 
 
@@ -348,6 +337,10 @@ public:
     void setBezierLines(bool bBezierLines);
     bool isBezierLines();
     
+    // Common icon size pixmap accessors.
+    void setIconSize (int iIconSize);
+    int iconSize (void);
+
 public slots:
 
     // Common context menu slot.
@@ -365,6 +358,10 @@ private:
     
     // How we'll draw connector lines.
     bool m_bBezierLines;
+
+    // How large will be those icons.
+    // 0 = 16x16 (default), 1 = 32x32, 2 = 64x64.
+    int m_iIconSize;
 };
 
 
@@ -393,13 +390,16 @@ public:
 
 public slots:
 
-    // Complete contents refreshner; return dirty status.
+    // Incremental contents refreshner; check dirty status.
     void refresh();
 
     // Explicit connection slots.
     bool connectSelected();
     bool disconnectSelected();
     bool disconnectAll();
+
+    // Complete/incremental contents rebuilder; check dirty status if incremental.
+    void updateContents (bool bClear);
 
 signals:
 
@@ -420,12 +420,18 @@ protected:
     void setOClientList(qjackctlClientList *pOClientList);
     void setIClientList(qjackctlClientList *pIClientList);
     
+    // Common pixmap factory helper-method.
+    QPixmap *createIconPixmap (const QString& sIconName);
+
+    // Update icon size implementation.
+    virtual void updateIconPixmaps() = 0;
+    
 private:
 
     // Dunno. But this may avoid some conflicts.
     bool startMutex();
     void endMutex();
-
+    
     // Connection methods (unguarded).
     bool canConnectSelectedEx();
     bool canDisconnectSelectedEx();
