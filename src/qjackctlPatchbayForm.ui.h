@@ -323,35 +323,30 @@ void qjackctlPatchbayForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 void qjackctlPatchbayForm::addOSocket()
 {
     (m_pPatchbay->OSocketList())->addSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::removeOSocket()
 {
     (m_pPatchbay->OSocketList())->removeSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::editOSocket()
 {
     (m_pPatchbay->OSocketList())->editSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::moveUpOSocket()
 {
     (m_pPatchbay->OSocketList())->moveUpSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::moveDownOSocket()
 {
     (m_pPatchbay->OSocketList())->moveDownSocketItem();
-    stabilizeForm();
 }
 
 
@@ -360,35 +355,30 @@ void qjackctlPatchbayForm::moveDownOSocket()
 void qjackctlPatchbayForm::addISocket()
 {
     (m_pPatchbay->ISocketList())->addSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::removeISocket()
 {    
     (m_pPatchbay->ISocketList())->removeSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::editISocket()
 {
     (m_pPatchbay->ISocketList())->editSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::moveUpISocket()
 {
     (m_pPatchbay->ISocketList())->moveUpSocketItem();
-    stabilizeForm();
 }
 
 
 void qjackctlPatchbayForm::moveDownISocket()
 {
     (m_pPatchbay->ISocketList())->moveDownSocketItem();
-    stabilizeForm();
 }
 
 
@@ -396,7 +386,6 @@ void qjackctlPatchbayForm::moveDownISocket()
 void qjackctlPatchbayForm::connectSelected (void)
 {
     m_pPatchbay->connectSelected();
-    stabilizeForm();
 }
 
 
@@ -404,7 +393,6 @@ void qjackctlPatchbayForm::connectSelected (void)
 void qjackctlPatchbayForm::disconnectSelected (void)
 {
     m_pPatchbay->disconnectSelected();
-    stabilizeForm();
 }
 
 
@@ -412,7 +400,6 @@ void qjackctlPatchbayForm::disconnectSelected (void)
 void qjackctlPatchbayForm::disconnectAll()
 {
     m_pPatchbay->disconnectAll();
-    stabilizeForm();
 }
 
 

@@ -1,7 +1,7 @@
 // qjackctlPatchbayFile.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -39,20 +39,25 @@ static void load_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
             QString sSocketName = eSocket.attribute("name");
             QString sClientName = eSocket.attribute("client");
             QString sSocketType = eSocket.attribute("type");
+            QString sExclusive  = eSocket.attribute("exclusive");
             int iSocketType = QJACKCTL_SOCKETTYPE_AUDIO;
             if (sSocketType == "midi")
                 iSocketType = QJACKCTL_SOCKETTYPE_MIDI;
+            bool bExclusive = (sExclusive == "on" || sExclusive == "yes" || sExclusive == "1");
             qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(sSocketName, sClientName, iSocketType);
-            // Now's time to handle pluglist...
-            for (QDomNode nPlug = eSocket.firstChild(); !nPlug.isNull(); nPlug = nPlug.nextSibling()) {
-                // Convert plug node to element...
-                QDomElement ePlug = nPlug.toElement();
-                if (ePlug.isNull())
-                    continue;
-                if (ePlug.tagName() == "plug")
-                    pSocket->addPlug(ePlug.text());
+            if (pSocket) {
+                pSocket->setExclusive(bExclusive);
+                // Now's time to handle pluglist...
+                for (QDomNode nPlug = eSocket.firstChild(); !nPlug.isNull(); nPlug = nPlug.nextSibling()) {
+                    // Convert plug node to element...
+                    QDomElement ePlug = nPlug.toElement();
+                    if (ePlug.isNull())
+                        continue;
+                    if (ePlug.tagName() == "plug")
+                        pSocket->addPlug(ePlug.text());
+                }
+                socketlist.append(pSocket);
             }
-            socketlist.append(pSocket);
         }
     }
 }
@@ -70,6 +75,7 @@ static void save_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
         if (pSocket->type() == QJACKCTL_SOCKETTYPE_MIDI)
             sSocketType = "midi";
         eSocket.setAttribute("type", sSocketType);
+        eSocket.setAttribute("exclusive", (pSocket->isExclusive() ? "on" : "off"));
         QDomElement ePlug;
         for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++) {
             QDomElement ePlug = doc.createElement("plug");
@@ -175,7 +181,7 @@ bool qjackctlPatchbayFile::save ( qjackctlPatchbayRack *pPatchbay, const QString
     QDomDocument doc("patchbay");
     QDomElement eRoot = doc.createElement("patchbay");
     eRoot.setAttribute("name", fi.baseName());
-    eRoot.setAttribute("version", "0.2");
+    eRoot.setAttribute("version", "0.2.1");
     doc.appendChild(eRoot);
 
     // Save output-sockets spec...

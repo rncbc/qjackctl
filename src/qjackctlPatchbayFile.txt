@@ -4,7 +4,7 @@ qjackctlPatchbayFile format specification
   <!DOCTYPE patchbay>
   <patchbay name="patchbay-name" version="patchbay-version" >
     <output-sockets>
-      <socket name="socket-name" client="client-name" type="socket-type" >
+      <socket name="socket-name" client="client-name" type="socket-type" exclusive="exclusive-flag" >
         <plug>plug-name</plug>
         .
         .
@@ -48,3 +48,5 @@ qjackctlPatchbayFile format specification
 # slot-mode         := "open" | "half" | "full"
   client-name       := string-regexp (JACK/ALSA client name)
   plug-name         := string-regexp (JACK/ALSA port name)
+  exclusive-flag    := "on" | "off" | "yes" | "no" | "1" | "0"
+

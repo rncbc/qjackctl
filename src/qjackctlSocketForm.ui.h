@@ -94,12 +94,20 @@ void qjackctlSocketForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 }
 
 
+// Exclusive mode enablement.
+void qjackctlSocketForm::enableExclusive ( bool bEnabled )
+{
+    ExclusiveCheckBox->setEnabled(bEnabled);
+}
+
+
 // Load dialog controls from socket properties.
 void qjackctlSocketForm::load( qjackctlPatchbaySocket *pSocket )
 {
     SocketNameLineEdit->setText(pSocket->name());
     SocketTypeGroup->setButton(pSocket->type());
     ClientNameComboBox->setCurrentText(pSocket->clientName());
+    ExclusiveCheckBox->setChecked(pSocket->isExclusive());
 
     PlugListView->clear();
     QListViewItem *pItem = NULL;
@@ -122,6 +130,7 @@ void qjackctlSocketForm::save( qjackctlPatchbaySocket *pSocket )
     pSocket->setName(SocketNameLineEdit->text());
     pSocket->setType(SocketTypeGroup->id(SocketTypeGroup->selected()));
     pSocket->setClientName(ClientNameComboBox->currentText());
+    pSocket->setExclusive(ExclusiveCheckBox->isChecked());
 
     pSocket->pluglist().clear();
     for (QListViewItem *pItem = PlugListView->firstChild(); pItem; pItem = pItem->nextSibling())

@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.h
 //
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -43,6 +43,7 @@
 #define QJACKCTL_CABLE_FAILED       0
 #define QJACKCTL_CABLE_CHECKED      1
 #define QJACKCTL_CABLE_CONNECTED    2
+#define QJACKCTL_CABLE_DISCONNECTED 3
 
 
 // Struct name says it all.
@@ -64,15 +65,17 @@ public:
     // Default destructor.
     ~qjackctlPatchbaySocket();
 
-    // Slot property accessors.
+    // Socket property accessors.
     const QString& name();
     const QString& clientName();
     int type();
+    bool isExclusive();
 
-    // Slot property methods.
+    // Socket property methods.
     void setName(const QString& sSocketName);
     void setClientName(const QString& sClientName);
     void setType(int iSocketType);
+    void setExclusive(bool bExclusive);
 
     // Plug list primitive methods.
     void addPlug(const QString& sPlugName);
@@ -87,6 +90,7 @@ private:
     QString m_sSocketName;
     QString m_sClientName;
     int m_iSocketType;
+    bool m_bExclusive;
 
     // Patchbay socket plug list.
     QStringList m_pluglist;
@@ -214,15 +218,21 @@ private:
 
     // Audio connection scan related private methods.
     const char *findAudioPort(const char **ppszClientPorts, const QString& sClientName, const QString& sPortName, int n = 0);
-    bool isAudioConnected(const char *pszOutputPort, const char *pszInputPort);
-    bool connectAudioPorts(const char *pszOutputPort, const char *pszInputPort);
+    void connectAudioPorts(const char *pszOutputPort, const char *pszInputPort);
+    void disconnectAudioPorts(const char *pszOutputPort, const char *pszInputPort);
+    void checkAudioPorts(const char *pszOutputPort, const char *pszInputPort);
+    void connectAudioSocketPorts(qjackctlPatchbaySocket *pOutputSocket, const char *pszOutputPort, qjackctlPatchbaySocket *pInputSocket, const char *pszInputPort);
     void connectAudioCable(qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket);
 
     // MIDI connection scan related private methods.
     void loadMidiPorts(QPtrList<qjackctlMidiPort>& midiports, bool bReadable);
     qjackctlMidiPort *findMidiPort (QPtrList<qjackctlMidiPort>& midiports, const QString& sClientName, const QString& sPortName, int n);
-    bool isMidiConnected(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
-    bool connectMidiPorts(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
+    QString getMidiPortName(qjackctlMidiPort *pMidiPort);
+    void setMidiPort(qjackctlMidiPort *pMidiPort, int iAlsaClient, int iAlsaPort);
+    void connectMidiPorts(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
+    void disconnectMidiPorts(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
+    void checkMidiPorts(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
+    void connectMidiSocketPorts(qjackctlPatchbaySocket *pOutputSocket, qjackctlMidiPort *pOutputPort, qjackctlPatchbaySocket *pInputSocket, qjackctlMidiPort *pInputPort);
     void connectMidiCable(qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket);
 
     // Patchbay sockets lists.

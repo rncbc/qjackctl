@@ -1,12 +1,12 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright  (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
    as published by the Free Software Foundation; either version 2
-   of the License, or  ( at your option) any later version.
+   of the License, or (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -36,6 +36,7 @@ qjackctlPatchbaySocket::qjackctlPatchbaySocket ( const QString& sSocketName, con
     m_sSocketName = sSocketName;
     m_sClientName = sClientName;
     m_iSocketType = iSocketType;
+    m_bExclusive  = false;
 }
 
 // Default destructor.
@@ -61,6 +62,12 @@ int qjackctlPatchbaySocket::type (void)
     return m_iSocketType;
 }
 
+bool qjackctlPatchbaySocket::isExclusive (void)
+{
+    return m_bExclusive;
+}
+
+
 // Slot property methods.
 void qjackctlPatchbaySocket::setName ( const QString& sSocketName )
 {
@@ -76,6 +83,12 @@ void qjackctlPatchbaySocket::setType ( int iSocketType )
 {
     m_iSocketType = iSocketType;
 }
+
+void qjackctlPatchbaySocket::setExclusive ( bool bExclusive )
+{
+    m_bExclusive = bExclusive;
+}
+
 
 // Plug list primitive methods.
 void qjackctlPatchbaySocket::addPlug ( const QString& sPlugName )
@@ -406,27 +419,74 @@ const char *qjackctlPatchbayRack::findAudioPort ( const char **ppszAudioPorts, c
     return NULL;
 }
 
-
-// Check if an output client:port is already connected to yet another one.
-bool qjackctlPatchbayRack::isAudioConnected ( const char *pszOutputPort, const char *pszInputPort )
+// Audio port-pair connection executive IS DEPRECATED!
+void qjackctlPatchbayRack::connectAudioPorts ( const char *pszOutputPort, const char *pszInputPort )
 {
-    bool bConnected = false;
+    unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
 
-    const char **ppszInputPorts = jack_port_get_all_connections(m_pJackClient, jack_port_by_name(m_pJackClient, pszOutputPort));
-    if (ppszInputPorts) {
-        for (int i = 0 ; ppszInputPorts[i] && !bConnected; i++)
-            bConnected = (strcmp(ppszInputPorts[i], pszInputPort) == 0);
-    }
-    ::free(ppszInputPorts);
+    if (jack_connect(m_pJackClient, pszOutputPort, pszInputPort) == 0)
+        uiCableFlags = QJACKCTL_CABLE_CONNECTED;
 
-    return bConnected;
+    emit cableConnected(pszOutputPort, pszInputPort, uiCableFlags);
 }
 
 
-// Audio port-pair connection executive.
-bool qjackctlPatchbayRack::connectAudioPorts ( const char *pszOutputPort, const char *pszInputPort )
+// Audio port-pair disconnection executive.
+void qjackctlPatchbayRack::disconnectAudioPorts ( const char *pszOutputPort, const char *pszInputPort )
 {
-    return (jack_connect(m_pJackClient, pszOutputPort, pszInputPort) == 0);
+    unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
+
+    if (jack_disconnect(m_pJackClient, pszOutputPort, pszInputPort) == 0)
+        uiCableFlags = QJACKCTL_CABLE_DISCONNECTED;
+
+    emit cableConnected(pszOutputPort, pszInputPort, uiCableFlags);
+}
+
+
+// Audio port-pair connection notifier.
+void qjackctlPatchbayRack::checkAudioPorts ( const char *pszOutputPort, const char *pszInputPort )
+{
+    emit cableConnected(pszOutputPort, pszInputPort, QJACKCTL_CABLE_CHECKED);
+}
+
+
+// Check and enforce if an audio output client:port is connected to one input.
+void qjackctlPatchbayRack::connectAudioSocketPorts ( qjackctlPatchbaySocket *pOutputSocket, const char *pszOutputPort, qjackctlPatchbaySocket *pInputSocket, const char *pszInputPort )
+{
+    bool bConnected = false;
+
+    // Check for inputs from output...
+    const char **ppszInputPorts = jack_port_get_all_connections(m_pJackClient, jack_port_by_name(m_pJackClient, pszOutputPort));
+    if (ppszInputPorts) {
+        for (int i = 0 ; ppszInputPorts[i]; i++) {
+            if (strcmp(ppszInputPorts[i], pszInputPort) == 0)
+                bConnected = true;
+            else if (pOutputSocket->isExclusive())
+                disconnectAudioPorts(pszOutputPort, ppszInputPorts[i]);
+        }
+    }
+    ::free(ppszInputPorts);
+
+    // Check for outputs from input, if the input socket is on exclusive mode...
+    if (pInputSocket->isExclusive()) {
+        const char **ppszOutputPorts = jack_port_get_all_connections(m_pJackClient, jack_port_by_name(m_pJackClient, pszInputPort));
+        if (ppszOutputPorts) {
+            for (int i = 0 ; ppszOutputPorts[i]; i++) {
+                if (strcmp(ppszOutputPorts[i], pszOutputPort) == 0)
+                    bConnected = true;
+                else
+                    disconnectAudioPorts(ppszOutputPorts[i], pszInputPort);
+            }
+        }
+        ::free(ppszOutputPorts);
+    }
+
+    // Finally do the connection?...
+    if (!bConnected) {
+        connectAudioPorts(pszOutputPort, pszInputPort);
+    } else {
+        emit cableConnected(pszOutputPort, pszInputPort, QJACKCTL_CABLE_CHECKED);
+    }
 }
 
 
@@ -448,14 +508,8 @@ void qjackctlPatchbayRack::connectAudioCable ( qjackctlPatchbaySocket *pOutputSo
         const char *pszOutputPort;
         while ((pszOutputPort = findAudioPort(m_ppszOAudioPorts, pOutputSocket->clientName(), *iterOutputPlug, iPort)) != NULL) {
             const char *pszInputPort = findAudioPort(m_ppszIAudioPorts, pInputSocket->clientName(), *iterInputPlug, iPort);
-            if (pszInputPort) {
-                unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
-                if (isAudioConnected(pszOutputPort, pszInputPort))
-                    uiCableFlags = QJACKCTL_CABLE_CHECKED;
-                else if (connectAudioPorts(pszOutputPort, pszInputPort))
-                    uiCableFlags = QJACKCTL_CABLE_CONNECTED;
-                emit cableConnected(pszOutputPort, pszInputPort, uiCableFlags);
-            }
+            if (pszInputPort)
+                connectAudioSocketPorts(pOutputSocket, pszOutputPort, pInputSocket, pszInputPort);
             iPort++;
         }
         // Get on next plug pair...
@@ -561,36 +615,38 @@ qjackctlMidiPort *qjackctlPatchbayRack::findMidiPort ( QPtrList<qjackctlMidiPort
 }
 
 
-// Check if an MIDI output client:port is already connected to yet another one.
-bool qjackctlPatchbayRack::isMidiConnected ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
+// MIDI port-pair name string.
+QString qjackctlPatchbayRack::getMidiPortName ( qjackctlMidiPort *pMidiPort )
 {
-    bool bConnected = false;
+    return QString::number(pMidiPort->iAlsaClient) + ":" + QString::number(pMidiPort->iAlsaPort) + " " + pMidiPort->sClientName;
+}
 
-    snd_seq_query_subscribe_t *pAlsaSubs;
-    snd_seq_addr_t seq_addr;
 
-    snd_seq_query_subscribe_alloca(&pAlsaSubs);
+// MIDI port-pair name string.
+void qjackctlPatchbayRack::setMidiPort ( qjackctlMidiPort *pMidiPort, int iAlsaClient, int iAlsaPort )
+{
+    snd_seq_client_info_t *pClientInfo;
+    snd_seq_port_info_t   *pPortInfo;
 
-    // Get port connections...
-    snd_seq_query_subscribe_set_type(pAlsaSubs, SND_SEQ_QUERY_SUBS_READ);
-    snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
-    seq_addr.client = pOutputPort->iAlsaClient;
-    seq_addr.port   = pOutputPort->iAlsaPort;
-    snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
+    snd_seq_client_info_alloca(&pClientInfo);
+    snd_seq_port_info_alloca(&pPortInfo);
 
-    while (!bConnected && snd_seq_query_port_subscribers(m_pAlsaSeq, pAlsaSubs) >= 0) {
-        seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
-        bConnected = (seq_addr.client == pInputPort->iAlsaClient && seq_addr.port == pInputPort->iAlsaPort);
-        snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
-    }
+    pMidiPort->iAlsaClient = iAlsaClient;
+    pMidiPort->iAlsaPort   = iAlsaPort;
 
-    return bConnected;
+    if (snd_seq_get_any_client_info(m_pAlsaSeq, iAlsaClient, pClientInfo) == 0)
+        pMidiPort->sClientName = snd_seq_client_info_get_name(pClientInfo);
+
+    if (snd_seq_get_any_port_info(m_pAlsaSeq, iAlsaClient, iAlsaPort, pPortInfo) == 0)
+        pMidiPort->sPortName = snd_seq_port_info_get_name(pPortInfo);
 }
 
 
 // MIDI port-pair connection executive.
-bool qjackctlPatchbayRack::connectMidiPorts ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
+void qjackctlPatchbayRack::connectMidiPorts ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
 {
+    unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
+
     snd_seq_port_subscribe_t *pAlsaSubs;
     snd_seq_addr_t seq_addr;
 
@@ -604,7 +660,99 @@ bool qjackctlPatchbayRack::connectMidiPorts ( qjackctlMidiPort *pOutputPort, qja
     seq_addr.port   = pInputPort->iAlsaPort;
     snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
 
-    return (snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs) == 0);
+    if (snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs) == 0)
+        uiCableFlags = QJACKCTL_CABLE_CONNECTED;
+
+    emit cableConnected(getMidiPortName(pOutputPort), getMidiPortName(pInputPort), uiCableFlags);
+}
+
+
+// MIDI port-pair disconnection executive.
+void qjackctlPatchbayRack::disconnectMidiPorts ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
+{
+    unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
+
+    snd_seq_port_subscribe_t *pAlsaSubs;
+    snd_seq_addr_t seq_addr;
+
+    snd_seq_port_subscribe_alloca(&pAlsaSubs);
+
+    seq_addr.client = pOutputPort->iAlsaClient;
+    seq_addr.port   = pOutputPort->iAlsaPort;
+    snd_seq_port_subscribe_set_sender(pAlsaSubs, &seq_addr);
+
+    seq_addr.client = pInputPort->iAlsaClient;
+    seq_addr.port   = pInputPort->iAlsaPort;
+    snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
+
+    if (snd_seq_unsubscribe_port(m_pAlsaSeq, pAlsaSubs) == 0)
+        uiCableFlags = QJACKCTL_CABLE_DISCONNECTED;
+
+    emit cableConnected(getMidiPortName(pOutputPort), getMidiPortName(pInputPort), uiCableFlags);
+}
+
+
+// MIDI port-pair disconnection notifier.
+void qjackctlPatchbayRack::checkMidiPorts ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
+{
+    emit cableConnected(getMidiPortName(pOutputPort), getMidiPortName(pInputPort), QJACKCTL_CABLE_CHECKED);
+}
+
+
+// Check and enforce if a midi output client:port is connected to one input.
+void qjackctlPatchbayRack::connectMidiSocketPorts (  qjackctlPatchbaySocket *pOutputSocket, qjackctlMidiPort *pOutputPort, qjackctlPatchbaySocket *pInputSocket, qjackctlMidiPort *pInputPort )
+{
+    bool bConnected = false;
+
+    snd_seq_query_subscribe_t *pAlsaSubs;
+    snd_seq_addr_t seq_addr;
+
+    snd_seq_query_subscribe_alloca(&pAlsaSubs);
+
+    // Check for inputs from output...
+    snd_seq_query_subscribe_set_type(pAlsaSubs, SND_SEQ_QUERY_SUBS_READ);
+    snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
+    seq_addr.client = pOutputPort->iAlsaClient;
+    seq_addr.port   = pOutputPort->iAlsaPort;
+    snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
+    while (snd_seq_query_port_subscribers(m_pAlsaSeq, pAlsaSubs) >= 0) {
+        seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
+        if (seq_addr.client == pInputPort->iAlsaClient && seq_addr.port == pInputPort->iAlsaPort)
+            bConnected = true;
+        else if (pOutputSocket->isExclusive()) {
+            qjackctlMidiPort iport;
+            setMidiPort(&iport, seq_addr.client, seq_addr.port);
+            disconnectMidiPorts(pOutputPort, &iport);
+        }
+        snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
+    }
+
+    // Check for outputs from input, if the input socket is on exclusive mode...
+    if (pInputSocket->isExclusive()) {
+        snd_seq_query_subscribe_set_type(pAlsaSubs, SND_SEQ_QUERY_SUBS_WRITE);
+        snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
+        seq_addr.client = pInputPort->iAlsaClient;
+        seq_addr.port   = pInputPort->iAlsaPort;
+        snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
+        while (snd_seq_query_port_subscribers(m_pAlsaSeq, pAlsaSubs) >= 0) {
+            seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
+            if (seq_addr.client == pOutputPort->iAlsaClient && seq_addr.port == pOutputPort->iAlsaPort)
+                bConnected = true;
+            else if (pInputSocket->isExclusive()) {
+                qjackctlMidiPort oport;
+                setMidiPort(&oport, seq_addr.client, seq_addr.port);
+                disconnectMidiPorts(&oport, pInputPort);
+            }
+            snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
+        }
+    }
+
+    // Finally do the connection?...
+    if (!bConnected) {
+        connectMidiPorts(pOutputPort, pInputPort);
+    } else {
+        emit cableConnected(getMidiPortName(pOutputPort), getMidiPortName(pInputPort), QJACKCTL_CABLE_CHECKED);
+    }
 }
 
 
@@ -625,17 +773,9 @@ void qjackctlPatchbayRack::connectMidiCable ( qjackctlPatchbaySocket *pOutputSoc
         int iPort = 0;
         qjackctlMidiPort *pOutputPort;
         while ((pOutputPort = findMidiPort(m_omidiports, pOutputSocket->clientName(), *iterOutputPlug, iPort)) != NULL) {
-            QString sOutputPort = QString::number(pOutputPort->iAlsaClient) + ":" + QString::number(pOutputPort->iAlsaPort) + " " + pOutputPort->sClientName;
             qjackctlMidiPort *pInputPort = findMidiPort(m_imidiports, pInputSocket->clientName(), *iterInputPlug, iPort);
-            if (pInputPort) {
-                QString sInputPort = QString::number(pInputPort->iAlsaClient) + ":" + QString::number(pInputPort->iAlsaPort) + " " + pInputPort->sClientName;
-                unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
-                if (isMidiConnected(pOutputPort, pInputPort))
-                    uiCableFlags = QJACKCTL_CABLE_CHECKED;
-                else if (connectMidiPorts(pOutputPort, pInputPort))
-                    uiCableFlags = QJACKCTL_CABLE_CONNECTED;
-                emit cableConnected(sOutputPort, sInputPort, uiCableFlags);
-            }
+            if (pInputPort)
+                connectMidiSocketPorts(pOutputSocket, pOutputPort, pInputSocket, pInputPort);
             iPort++;
         }
         // Get on next plug pair...

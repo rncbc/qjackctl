@@ -89,10 +89,12 @@ public:
     const QString& socketName();
     const QString& clientName();
     int socketType();
+    bool isExclusive();
 
     void setSocketName (const QString& sSocketName);
     void setClientName (const QString& sClientName);
     void setSocketType (int iSocketType);
+    void setExclusive  (bool bExclusive);
 
     // Socket flags accessor.
     bool isReadable();
@@ -130,6 +132,7 @@ private:
     QString m_sSocketName;
     QString m_sClientName;
     int m_iSocketType;
+    bool m_bExclusive;
 
     // Plug (port) list.
     QPtrList<qjackctlPlugItem> m_plugs;

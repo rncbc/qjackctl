@@ -567,7 +567,7 @@ void qjackctlMainForm::processJackExit (void)
     else
         sTemp = tr("Stopped");
     setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
-    ServerStateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
+    ServerStateTextLabel->setPaletteForegroundColor(m_pJackClient == NULL ? Qt::darkYellow : Qt::yellow);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(m_pJackClient == NULL);
     StopPushButton->setEnabled(m_pJackClient != NULL);
@@ -1186,10 +1186,14 @@ void qjackctlMainForm::cableConnectSlot ( const QString& sOutputPort, const QStr
         sText += tr("connected");
         sColor = "#669999";
         break;
+    case QJACKCTL_CABLE_DISCONNECTED:
+        sText += tr("disconnected");
+        sColor = "#cc9999";
+        break;
     case QJACKCTL_CABLE_FAILED:
     default:
         sText += tr("failed");
-        sColor = "#cc9999";
+        sColor = "#cc6699";
         break;
     }
 

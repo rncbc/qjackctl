@@ -3,6 +3,13 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.4  2004-01-22  Exclusive patchbay sockets.
+
+- Patchbay definitions may now be configured with exclusive sockets;
+  this way, only the described connection is to be maintained, being
+  all others eventually disconnected.
+
+
 0.2.3a 2004-01-19  Time format combo-box tooltip fix.
 
 - A qt-designer copy-paste leftover has been fixed; sloppy boy I am ;)
