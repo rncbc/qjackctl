@@ -147,6 +147,10 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     // and stabilize the form.
     m_pSetup = pSetup;
 
+    // To avoid any background flickering,
+    // we'll hide the main display.
+    StatusDisplayFrame->hide();
+
     // What style do we create these forms?
     WFlags wflags = Qt::WType_TopLevel;
     if (m_pSetup->bKeepOnTop)
@@ -161,9 +165,6 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
         this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
-    // To avoid flicker, we'll hide the main display.
-    StatusDisplayFrame->hide();
-
     // Try to restore old window positioning.
     m_pSetup->loadWidgetGeometry(this);
     // And for the whole widget gallore...
@@ -172,7 +173,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
     m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
 
-    // Make it final.
+    // Make it final show...
     StatusDisplayFrame->show();
 
     // Set defaults...
@@ -563,7 +564,15 @@ void qjackctlMainForm::startJack (void)
         sTemp = QString::null;
         switch (m_preset.iAudio) {
           case QJACKCTL_DUPLEX:
-          //m_pJack->addArgument("-D");
+            if (bAlsa) {
+                if (!m_preset.sInDevice.isEmpty() || !m_preset.sOutDevice.isEmpty())
+                    m_pJack->addArgument("-D");
+                if (!m_preset.sInDevice.isEmpty())
+                    m_pJack->addArgument("-C" + m_preset.sInDevice);
+                if (!m_preset.sOutDevice.isEmpty())
+                    m_pJack->addArgument("-P" + m_preset.sOutDevice);
+            }
+          //else m_pJack->addArgument("-D");
             break;
           case QJACKCTL_CAPTURE:
             if (bAlsa) sTemp = m_preset.sInDevice;

@@ -375,8 +375,8 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     
     switch (iAudio) {
       case QJACKCTL_DUPLEX:
-        bInEnabled  = bOss;
-        bOutEnabled = bOss;
+        bInEnabled  = (bOss || bAlsa);
+        bOutEnabled = (bOss || bAlsa);
         bAlsaDuplex = bAlsa;
         break;
       case QJACKCTL_CAPTURE:

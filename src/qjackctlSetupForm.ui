@@ -853,12 +853,12 @@
                                         </item>
                                         <item>
                                             <property name="text">
-                                                <string>Capture</string>
+                                                <string>Capture Only</string>
                                             </property>
                                         </item>
                                         <item>
                                             <property name="text">
-                                                <string>Playback</string>
+                                                <string>Playback Only</string>
                                             </property>
                                         </item>
                                         <property name="name">
