@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.2"
+#define QJACKCTL_VERSION	"0.0.3"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -44,6 +44,7 @@
 #define STATS_XRUN_TIME     7
 #define STATS_XRUN_TOTAL    8
 
+
 // Kind of constructor.
 void qjackctlMainForm::init()
 {
@@ -59,6 +60,8 @@ void qjackctlMainForm::init()
     m_iPortNotify = 0;
     m_iXrunNotify = 0;
     m_iShutNotify = 0;
+
+    m_pJackPatchbay = NULL;
 
     // Create the list view items 'a priori'...
     QString s = " ";
@@ -83,7 +86,7 @@ void qjackctlMainForm::init()
     SampleRateComboBox->setValidator(new QIntValidator(SampleRateComboBox));
     PeriodsComboBox->setValidator(new QIntValidator(PeriodsComboBox));
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
-    
+
     // Stuff the about box...
     QString sText = "<p align=\"center\"><br />\n";
     sText += "<b>" QJACKCTL_TITLE " - " QJACKCTL_SUBTITLE "</b><br />\n";
@@ -97,7 +100,7 @@ void qjackctlMainForm::init()
 
     // Read saved settings and options...
     m_Settings.beginGroup("/qjackctl");
-    
+
     m_Settings.beginGroup("/Settings");
     ServerComboBox->setCurrentText(m_Settings.readEntry("/Server", "jackstart"));
     RealtimeCheckBox->setChecked(m_Settings.readBoolEntry("/Realtime", true));
@@ -111,12 +114,12 @@ void qjackctlMainForm::init()
     InterfaceComboBox->setCurrentText(m_Settings.readEntry("/Interface", "default"));
     AudioComboBox->setCurrentItem(m_Settings.readNumEntry("/Audio", 0));
     DitherComboBox->setCurrentItem(m_Settings.readNumEntry("/Dither", 0));
-    TimeoutComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/Timeout", 500)));    
+    TimeoutComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/Timeout", 500)));
     HWMonCheckBox->setChecked(m_Settings.readBoolEntry("/HWMon", false));
     HWMeterCheckBox->setChecked(m_Settings.readBoolEntry("/HWMeter", false));
     TempDirComboBox->setCurrentText(m_Settings.readEntry("/TempDir", "(default)"));
     m_Settings.endGroup();
-    
+
     m_Settings.beginGroup("/Options");
     DetailsCheckBox->setChecked(m_Settings.readBoolEntry("/Details", false));
     ForceArtsCheckBox->setChecked(m_Settings.readBoolEntry("/ForceArts", true));
@@ -126,19 +129,19 @@ void qjackctlMainForm::init()
     XrunRegexComboBox->setCurrentText(m_Settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs"));
     XrunIgnoreFirstCheckBox->setChecked(m_Settings.readBoolEntry("/XrunIgnoreFirst", true));
     m_Settings.endGroup();
-    
+
     QPoint pt;
     m_Settings.beginGroup("/Position");
     pt.setX(m_Settings.readNumEntry("/x", -1));
     pt.setY(m_Settings.readNumEntry("/y", -1));
     m_Settings.endGroup();
-    
+
     m_Settings.endGroup();
-    
+
     // Try to restore old window position.
     if (pt.x() > 0 && pt.y() > 0)
         move(pt);
-    
+
     // Final startup stabilization...
     stabilizeForm();
     processJackExit();
@@ -150,14 +153,14 @@ void qjackctlMainForm::destroy()
 {
     // Stop server, if not already...
     stopJack();
-    
+
     // Save all settings and options...
     m_Settings.beginGroup("/qjackctl");
-    
+
     m_Settings.beginGroup("/Program");
     m_Settings.writeEntry("/Version", QJACKCTL_VERSION);
     m_Settings.endGroup();
-    
+
     m_Settings.beginGroup("/Settings");
     m_Settings.writeEntry("/Server", ServerComboBox->currentText());
     m_Settings.writeEntry("/Realtime", RealtimeCheckBox->isChecked());
@@ -176,7 +179,7 @@ void qjackctlMainForm::destroy()
     m_Settings.writeEntry("/HWMeter", HWMeterCheckBox->isChecked());
     m_Settings.writeEntry("/TempDir", TempDirComboBox->currentText());
     m_Settings.endGroup();
-    
+
     m_Settings.beginGroup("/Options");
     m_Settings.writeEntry("/Details", DetailsCheckBox->isChecked());
     m_Settings.writeEntry("/ForceArts", ForceArtsCheckBox->isChecked());
@@ -186,7 +189,7 @@ void qjackctlMainForm::destroy()
     m_Settings.writeEntry("/XrunRegex", XrunRegexComboBox->currentText());
     m_Settings.writeEntry("/XrunIgnoreFirst", XrunIgnoreFirstCheckBox->isChecked());
     m_Settings.endGroup();
-    
+
     QPoint pt = pos();
     m_Settings.beginGroup("/Position");
     m_Settings.writeEntry("/x", pt.x());
@@ -203,8 +206,8 @@ void qjackctlMainForm::startJack()
     // Is the server process instance still here?
     if (m_pJack) {
         switch (QMessageBox::warning(this, tr("Warning"),
-                                     tr("Could not start JACK. Maybe already started."),
-                                     tr("Stop"), tr("Kill"), tr("Cancel"))) {
+            tr("Could not start JACK. Maybe already started."),
+            tr("Stop"), tr("Kill"), tr("Cancel"))) {
         case 0:
             m_pJack->tryTerminate();
             break;
@@ -250,14 +253,14 @@ void qjackctlMainForm::startJack()
         system("sleep 1");
     }       
     
-    // OK. Let's build the startup process...    
+    // OK. Let's build the startup process...
     m_pJack = new QProcess(this);
     
     // Setup communications...
-    connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
-    connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
-    connect(m_pJack, SIGNAL(processExited()),   this, SLOT(processJackExit()));
-    
+    QObject::connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
+    QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
+    QObject::connect(m_pJack, SIGNAL(processExited()),   this, SLOT(processJackExit()));
+
     // Build process arguments...
     m_pJack->addArgument(ServerComboBox->currentText());
     if (RealtimeCheckBox->isChecked())
@@ -338,19 +341,19 @@ void qjackctlMainForm::startJack()
         sTemp += " ";
     }
     appendMessages(sTemp.stripWhiteSpace() + "]");
-    
+
     // Do not forget to reset XRUN stats variables.
     resetXrunStats();
-    
+
     // Go jack, go...
     if (!m_pJack->start()) {
         QMessageBox::critical(this, tr("Fatal error"),
-                              tr("Could not start JACK. Sorry."),
-                              QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
+            tr("Could not start JACK. Sorry."),
+            QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
         processJackExit();
         return;
     }
-    
+
     // Show startup results...
     sTemp = " ";
     sTemp += tr("PID");
@@ -362,22 +365,22 @@ void qjackctlMainForm::startJack()
     appendMessages(tr("JACK is started with") + sTemp);
 
     setCaption(QJACKCTL_TITLE " - " + tr("Started."));
-    
+
     StartPushButton->setEnabled(false);
     StopPushButton->setEnabled(true);
 
     // Create our timer...
     m_iTimerStart = 0;
     m_pTimer = new QTimer(this);
-    connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
-    // Let's wait five seconds for client startup?
-    m_pTimer->start(5000, false);
+    QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+    // Let's wait three seconds for client startup?
+    m_pTimer->start(3000, false);
 }
 
 
 // Stop jack audio server...
 void qjackctlMainForm::stopJack()
-{    
+{
     // Stop timer.
     if (m_pTimer)
         delete m_pTimer;
@@ -385,7 +388,7 @@ void qjackctlMainForm::stopJack()
 
     // Stop client code.
     stopJackClient();
-    
+
     // And try to stop server.
     if (m_pJack) {
         appendMessages(tr("JACK is stopping..."));
@@ -506,9 +509,11 @@ void qjackctlMainForm::stabilizeForm()
             m_posSave = curPos;
             move(curPos + delta);
         }
-    } 
+    }
     else if (!m_posSave.isNull())
         move(m_posSave);
+
+    stabilizeConnections();
 }
 
 
@@ -593,7 +598,7 @@ static int g_fdShut[2] = { FD_NIL, FD_NIL };
 
 // Jack port registration callback funtion, called
 // whenever a jack port is registered or unregistered.
-static void qjackctl_portRegistrationCallback ( jack_port_id_t port_id, int n, void *arg )
+static void qjackctl_portRegistrationCallback ( jack_port_id_t, int, void * )
 {
     char c = 0;
 
@@ -603,7 +608,7 @@ static void qjackctl_portRegistrationCallback ( jack_port_id_t port_id, int n, v
 
 // Jack graph order callback function, called
 // whenever the processing graph is reordered.
-static int qjackctl_graphOrderCallback ( void *arg )
+static int qjackctl_graphOrderCallback ( void * )
 {
     char c = 0;
 
@@ -615,7 +620,7 @@ static int qjackctl_graphOrderCallback ( void *arg )
 
 // Jack XRUN callback function, called
 // whenever there is a xrun.
-static int qjackctl_xrunCallback ( void *arg )
+static int qjackctl_xrunCallback ( void * )
 {
     char c = 0;
 
@@ -626,7 +631,7 @@ static int qjackctl_xrunCallback ( void *arg )
 
 // Jack shutdown function, called
 // whenever the server terminates this client.
-static void qjackctl_shutdown ( void *arg )
+static void qjackctl_shutdown ( void * )
 {
     char c = 0;
 
@@ -647,7 +652,7 @@ void qjackctlMainForm::portNotifySlot ( int fd )
     // Read from our pipe.
     ::read(fd, &c, sizeof(c));
     // Do what has to be done.
-    // . . .
+    refreshConnections();
 
     m_iPortNotify--;
 }
@@ -712,7 +717,6 @@ void qjackctlMainForm::timerSlot (void)
     }
     updateXrunTime();
     StatsListView->triggerUpdate();
-
 }
 
 
@@ -754,36 +758,44 @@ void qjackctlMainForm::startJackClient()
 {
     // Create port notification pipe.
     if (::pipe(g_fdPort) < 0) {
-        // Error: Could not create port notification pipe.
         g_fdPort[FD_READ]  = FD_NIL;
         g_fdPort[FD_WRITE] = FD_NIL;
         closePipes();
+        QMessageBox::critical(this, tr("Error"),
+            tr("Could not create port notification pipe."),
+            QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
         return;
     }
 
     // Create XRUN notification pipe.
     if (::pipe(g_fdXrun) < 0) {
-        // Error: Could not create XRUN notification pipe.
         g_fdXrun[FD_READ]  = FD_NIL;
         g_fdXrun[FD_WRITE] = FD_NIL;
         closePipes();
+        QMessageBox::critical(this, tr("Error"),
+            tr("Could not create XRUN notification pipe."),
+            QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
         return;
     }
 
     // Create shutdown notification pipe.
     if (::pipe(g_fdShut) < 0) {
-        // Error: Could not create XRUN notification pipe.
         g_fdShut[FD_READ]  = FD_NIL;
         g_fdShut[FD_WRITE] = FD_NIL;
         closePipes();
+        QMessageBox::critical(this, tr("Error"),
+            tr("Could not create shutdown notification pipe."),
+            QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
         return;
     }
 
     // Create the jack client handle
     m_pJackClient = jack_client_new("qjackctl");
     if (m_pJackClient == NULL) {
-        // "Error: Could not connect to jack server.\n");
         closePipes();
+        QMessageBox::critical(this, tr("Error"),
+            tr("Could not connect to jack server."),
+            QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
         return;
     }
 
@@ -799,12 +811,15 @@ void qjackctlMainForm::startJackClient()
     m_pShutNotifier = new QSocketNotifier(g_fdShut[FD_READ], QSocketNotifier::Read);
 
     // And connect it to the proper slots.
-    connect(m_pPortNotifier, SIGNAL(activated(int)), this, SLOT(portNotifySlot(int)));
-    connect(m_pXrunNotifier, SIGNAL(activated(int)), this, SLOT(xrunNotifySlot(int)));
-    connect(m_pShutNotifier, SIGNAL(activated(int)), this, SLOT(shutNotifySlot(int)));
+    QObject::connect(m_pPortNotifier, SIGNAL(activated(int)), this, SLOT(portNotifySlot(int)));
+    QObject::connect(m_pXrunNotifier, SIGNAL(activated(int)), this, SLOT(xrunNotifySlot(int)));
+    QObject::connect(m_pShutNotifier, SIGNAL(activated(int)), this, SLOT(shutNotifySlot(int)));
 
     // Activate us as a client...
     jack_activate(m_pJackClient);
+
+    // Create our patchbay...
+    m_pJackPatchbay = new qjackctlPatchbay(ConnectorFrame, ReadListView, WriteListView, m_pJackClient);
 
     // So we're officially started...
     m_iTimerStart++;
@@ -817,10 +832,19 @@ void qjackctlMainForm::startJackClient()
 void qjackctlMainForm::stopJackClient()
 {
     // Deactivate us as a client...
-    if (m_pJackClient) {
+    if (m_pJackClient)
         jack_deactivate(m_pJackClient);
+
+    // Destroy our patchbay...
+    if (m_pJackPatchbay)
+        delete m_pJackPatchbay;
+    m_pJackPatchbay = NULL;
+
+    stabilizeConnections();
+
+    // Close us as a client...
+    if (m_pJackClient)
         jack_client_close(m_pJackClient);
-    }
     m_pJackClient = NULL;
 
     // Close notification pipes.
@@ -848,5 +872,47 @@ void qjackctlMainForm::stopJackClient()
     m_apStats[STATS_SAMPLE_RATE]->setText(1, n);
     refreshXrunStats();
 }
+
+
+// Connect current selected ports.
+void qjackctlMainForm::connectSelected()
+{
+    if (m_pJackPatchbay)
+        m_pJackPatchbay->connectSelected();
+}
+
+
+// Disconnect current selected ports.
+void qjackctlMainForm::disconnectSelected()
+{
+    if (m_pJackPatchbay)
+        m_pJackPatchbay->disconnectSelected();
+}
+
+
+// Rebuild all patchbay items.
+void qjackctlMainForm::refreshConnections()
+{
+    if (m_pJackPatchbay)
+        m_pJackPatchbay->refresh();
+
+    stabilizeConnections();
+}
+
+
+// Proper enablement of patchbay command controls.
+void qjackctlMainForm::stabilizeConnections()
+{
+    if (m_pJackPatchbay) {
+        ConnectPushButton->setEnabled(m_pJackPatchbay->canConnectSelected());
+        DisconnectPushButton->setEnabled(m_pJackPatchbay->canDisconnectSelected());
+        RefreshPushButton->setEnabled(true);
+    } else {
+        ConnectPushButton->setEnabled(false);
+        DisconnectPushButton->setEnabled(false);
+        RefreshPushButton->setEnabled(false);
+    }
+}
+
 
 // end of ui.h

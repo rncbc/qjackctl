@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>539</width>
-            <height>276</height>
+            <height>286</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -716,7 +716,7 @@
                         <property name="sizeHint">
                             <size>
                                 <width>4</width>
-                                <height>8</height>
+                                <height>4</height>
                             </size>
                         </property>
                     </spacer>
@@ -733,7 +733,7 @@
                         <property name="sizeHint">
                             <size>
                                 <width>4</width>
-                                <height>8</height>
+                                <height>4</height>
                             </size>
                         </property>
                     </spacer>
@@ -750,7 +750,7 @@
                         <property name="sizeHint">
                             <size>
                                 <width>4</width>
-                                <height>8</height>
+                                <height>4</height>
                             </size>
                         </property>
                     </spacer>
@@ -796,7 +796,7 @@
                         <property name="sizeHint">
                             <size>
                                 <width>4</width>
-                                <height>8</height>
+                                <height>4</height>
                             </size>
                         </property>
                     </spacer>
@@ -872,6 +872,23 @@
                             <string>Directory to use for temporary files</string>
                         </property>
                     </widget>
+                    <spacer row="3" column="3">
+                        <property name="name">
+                            <cstring>spacer6</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>MinimumExpanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </grid>
             </widget>
             <widget class="QWidget">
@@ -952,23 +969,6 @@
                     </widget>
                     <spacer row="4" column="0">
                         <property name="name">
-                            <cstring>spacer6</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>16</width>
-                                <height>80</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="4" column="1">
-                        <property name="name">
                             <cstring>spacer7</cstring>
                         </property>
                         <property name="orientation">
@@ -979,8 +979,25 @@
                         </property>
                         <property name="sizeHint">
                             <size>
-                                <width>16</width>
-                                <height>75</height>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="4" column="1">
+                        <property name="name">
+                            <cstring>spacer8</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
                             </size>
                         </property>
                     </spacer>
@@ -1111,6 +1128,9 @@
                         <property name="selectionMode">
                             <enum>NoSelection</enum>
                         </property>
+                        <property name="allColumnsShowFocus">
+                            <bool>true</bool>
+                        </property>
                         <property name="itemMargin">
                             <number>1</number>
                         </property>
@@ -1120,6 +1140,184 @@
                         <property name="toolTip" stdset="0">
                             <string>Statistics since last server startup</string>
                         </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Connections</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QLayoutWidget" row="1" column="0">
+                        <property name="name">
+                            <cstring>layout13</cstring>
+                        </property>
+                        <hbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>ConnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Connect</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Connect currently selected ports</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>DisconnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Disconnect</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Disconnect currently selected ports</string>
+                                </property>
+                            </widget>
+                            <spacer>
+                                <property name="name">
+                                    <cstring>spacer9</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>4</width>
+                                        <height>4</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>RefreshPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Refresh</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Refresh current patchbay views</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                    <widget class="QLayoutWidget" row="0" column="0">
+                        <property name="name">
+                            <cstring>layout15</cstring>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QListView" row="0" column="0">
+                                <column>
+                                    <property name="text">
+                                        <string>Readable Clients / Output Ports</string>
+                                    </property>
+                                    <property name="clickable">
+                                        <bool>false</bool>
+                                    </property>
+                                    <property name="resizable">
+                                        <bool>false</bool>
+                                    </property>
+                                </column>
+                                <property name="name">
+                                    <cstring>ReadListView</cstring>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>150</width>
+                                        <height>0</height>
+                                    </size>
+                                </property>
+                                <property name="allColumnsShowFocus">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="rootIsDecorated">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="resizeMode">
+                                    <enum>AllColumns</enum>
+                                </property>
+                            </widget>
+                            <widget class="QFrame" row="0" column="1">
+                                <property name="name">
+                                    <cstring>ConnectorFrame</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>7</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>50</width>
+                                        <height>100</height>
+                                    </size>
+                                </property>
+                                <property name="frameShape">
+                                    <enum>NoFrame</enum>
+                                </property>
+                                <property name="frameShadow">
+                                    <enum>Plain</enum>
+                                </property>
+                            </widget>
+                            <widget class="QListView" row="0" column="2">
+                                <column>
+                                    <property name="text">
+                                        <string>Writable Clients / Input Ports</string>
+                                    </property>
+                                    <property name="clickable">
+                                        <bool>false</bool>
+                                    </property>
+                                    <property name="resizable">
+                                        <bool>false</bool>
+                                    </property>
+                                </column>
+                                <property name="name">
+                                    <cstring>WriteListView</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>7</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>150</width>
+                                        <height>0</height>
+                                    </size>
+                                </property>
+                                <property name="allColumnsShowFocus">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="rootIsDecorated">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="resizeMode">
+                                    <enum>AllColumns</enum>
+                                </property>
+                            </widget>
+                        </grid>
                     </widget>
                 </grid>
             </widget>
@@ -1169,7 +1367,7 @@
                     </widget>
                     <spacer row="1" column="0">
                         <property name="name">
-                            <cstring>spacer8</cstring>
+                            <cstring>spacer10</cstring>
                         </property>
                         <property name="orientation">
                             <enum>Vertical</enum>
@@ -1179,8 +1377,8 @@
                         </property>
                         <property name="sizeHint">
                             <size>
-                                <width>16</width>
-                                <height>80</height>
+                                <width>4</width>
+                                <height>4</height>
                             </size>
                         </property>
                     </spacer>
@@ -1238,6 +1436,36 @@
         <receiver>ForceJackShellComboBox</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
+    <connection>
+        <sender>ConnectPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>connectSelected()</slot>
+    </connection>
+    <connection>
+        <sender>DisconnectPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>disconnectSelected()</slot>
+    </connection>
+    <connection>
+        <sender>RefreshPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>refreshConnections()</slot>
+    </connection>
+    <connection>
+        <sender>ReadListView</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>stabilizeConnections()</slot>
+    </connection>
+    <connection>
+        <sender>WriteListView</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>stabilizeConnections()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>StartPushButton</tabstop>
@@ -1269,6 +1497,11 @@
     <tabstop>XrunRegexComboBox</tabstop>
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
     <tabstop>StatsListView</tabstop>
+    <tabstop>ReadListView</tabstop>
+    <tabstop>WriteListView</tabstop>
+    <tabstop>ConnectPushButton</tabstop>
+    <tabstop>DisconnectPushButton</tabstop>
+    <tabstop>RefreshPushButton</tabstop>
     <tabstop>AboutTextView</tabstop>
 </tabstops>
 <includes>
@@ -1281,6 +1514,7 @@
     <include location="global" impldecl="in declaration">qdatetime.h</include>
     <include location="global" impldecl="in declaration">qlistview.h</include>
     <include location="global" impldecl="in declaration">jack/jack.h</include>
+    <include location="local" impldecl="in declaration">qjackctlPatchbay.h</include>
     <include location="local" impldecl="in implementation">qjackctlMainForm.ui.h</include>
 </includes>
 <variables>
@@ -1305,6 +1539,7 @@
     <variable access="private">QTime m_tXrunLast;</variable>
     <variable access="private">QListViewItem *m_apStats[9];</variable>
     <variable access="private">QPoint m_posSave;</variable>
+    <variable access="private">qjackctlPatchbay *m_pJackPatchbay;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack()</slot>
@@ -1313,23 +1548,27 @@
     <slot specifier="non virtual">readJackStderr()</slot>
     <slot specifier="non virtual">processJackExit()</slot>
     <slot specifier="non virtual">stabilizeForm()</slot>
-    <slot specifier="non virtual">portNotifySlot(int)</slot>
-    <slot specifier="non virtual">xrunNotifySlot(int)</slot>
-    <slot specifier="non virtual">shutNotifySlot(int)</slot>
-    <slot specifier="non virtual">timerSlot()</slot>
+    <slot specifier="non virtual">portNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">timerSlot( void )</slot>
+    <slot>connectSelected()</slot>
+    <slot>disconnectSelected()</slot>
+    <slot>refreshConnections()</slot>
+    <slot>stabilizeConnections()</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
-    <function access="private" specifier="non virtual">startJackClient()</function>
-    <function access="private" specifier="non virtual">stopJackClient()</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">resetXrunStats()</function>
+    <function access="private" specifier="non virtual">updateXrunCount( void )</function>
+    <function access="private" specifier="non virtual">updateXrunTime( void )</function>
     <function access="private" specifier="non virtual">refreshXrunStats()</function>
-    <function access="private" specifier="non virtual">updateXrunCount()</function>
-    <function access="private" specifier="non virtual">updateXrunTime()</function>
-    <function access="private" specifier="non virtual">closePipes()</function>
+    <function access="private" specifier="non virtual">closePipes( void )</function>
+    <function access="private" specifier="non virtual">startJackClient()</function>
+    <function access="private" specifier="non virtual">stopJackClient()</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>

@@ -3,12 +3,13 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 TODOs
 
-0.0.3
+0.0.4
 
-- Display and possibly some kind of patchbay for jack port connections,
-  like the greatest Mathias Nagorni's qjackconnect (http://www.suse.de/~mana/).
+- Devise someway to make patchbay connections persistent, in a profile/preset
+  manner, that will get automagically setup when respective jack clients are
+  detected on runtime; this will be handy por non-LADCCA aware clients.
 
-0.0.2 Backlog:
+0.0.3 Backlog:
 
 - Display of current jackd version string.
 - XRUN ticker visual charting.

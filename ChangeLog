@@ -3,6 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.0.3   2003-08-07  Integrated visual patchbay.
+
+- A patchbay for jack port connections is now integrated, much like the
+  greatest Mathias Nagorni's qjackconnect (http://www.suse.de/~mana/jack.html).
+
 0.0.2   2003-08-02  Client code features introduced.
 
 - JACK library and header files are checked on configure.

@@ -35,12 +35,21 @@ This procedure will end installing the following couple of files:
 Just launch ${prefix}/bin/qjackctl and you're off (hopefully).
 
 
+Configuration
+-------------
+
+Qjackctl holds its settings and configuration state per user, in a file
+located as $HOME/.qt/qjackctlrc. Normally, there's no need to edit this
+file, as it is recreated and rewritten everytime qjackctl is run.
+
+
 Bugs
 ----
 
-Plenty. To date, qjackctl has been tested with JACK release 0.72.4, on SuSE 8.1,
-Mandrake 9.1 and RedHat 9, with a custom 2.4.21 kernel with low-latency,
-preemptible and capabilities enabling patches.
+Plenty. After all is still alpha stage. To date, qjackctl has been tested
+with JACK release 0.72.4 and beyond, on SuSE 8.1, Mandrake 9.1 and RedHat 9,
+with a custom 2.4.21 kernel with low-latency, preemptible and capabilities
+enabling patches.
 
 It has been found that each case may have some issues regarding JACK running in
 realtime mode. Please be sure to run a capable kernel and play with either
@@ -54,6 +63,8 @@ The upgrade to the latest jack-audio-conection-kit package is therefore
 highly recommended, as it probably includes already a Paul Davis'
 (JACK's lead developer) patch that targets this specific issue.
 
+This problem is now officially closed, since JACK 0.75.0 release.
+
 
 Acknowledgments
 ---------------
@@ -63,7 +74,11 @@ was partially borrowed from Lawrie Abbott's jacko project
 (http://members.iinet.net.au/~lawrieabbott/pub/jacko),
 which was taken from wxWindow/Python into the Qt/C++ arena.
 
-Nevertheless, it still lacks some features found in that original work.
+Since 2003-08-06, qjackctl has been included in the awesome Planet CCRMA
+(http://ccrma-www.stanford.edu/planetccrma/software/) software collection.
+Thanks a lot Fernando!
 
 Enjoy.
+
+
 
