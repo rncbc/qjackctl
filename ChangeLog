@@ -3,7 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.14   2004-11-25  Work in progress...
+0.2.14   2004-12-21  Work in progress...
+
+- Messages window limit is now enforced only when the line count exceeds
+  in one third the user configured line count maximum.
 
 - XRUN status items are kept double-dashed if none has been detected.
 
