@@ -4325,7 +4325,7 @@
     <function access="private" specifier="non virtual">computeLatency()</function>
     <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>
-    <function access="private" specifier="non virtual">deviceMenu( QLineEdit *pLineEdit, QPushButton *pPushButton, int iStream, bool bAlternate )</function>
+    <function access="private" specifier="non virtual">deviceMenu( QLineEdit *pLineEdit, QPushButton *pPushButton, int iAudio )</function>
     <function access="private" specifier="non virtual">symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButton )</function>
 </functions>
 <pixmapinproject/>

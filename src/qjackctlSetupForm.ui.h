@@ -31,9 +31,6 @@
 
 #include <alsa/asoundlib.h>
 
-#define QJACKCTL_STREAM_PLAYBACK	0
-#define QJACKCTL_STREAM_CAPTURE		1
-
 
 // Kind of constructor.
 void qjackctlSetupForm::init (void)
@@ -534,7 +531,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 // Device selection menu executive.
 void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
-	QPushButton *pPushButton, int iStream, bool bAlternate )
+	QPushButton *pPushButton, int iAudio )
 {
 	// FIXME: Only valid for ALSA devices,
 	// for the time being...
@@ -555,20 +552,23 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	int iCards = 0;
 	int iCard = -1;
 	while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
+		sText = "hw:" + QString::number(iCard);
 		if (snd_ctl_open(&handle, sText.latin1(), 0) >= 0
 			&& snd_ctl_card_info(handle, info) >= 0) {
 			if (iCards > 0)
     			pContextMenu->insertSeparator();
-			sText = QString("hw:%1\t%2")
-				.arg(iCard)
-				.arg(snd_ctl_card_info_get_name(info));
+			sText += '\t';
+			sText += snd_ctl_card_info_get_name(info);
     		pContextMenu->insertItem(sText);
 			int iDevice = -1;
 			while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
 				&& iDevice >= 0) {
 				snd_pcm_info_set_device(pcminfo, iDevice);
 				snd_pcm_info_set_subdevice(pcminfo, 0);
-				snd_pcm_info_set_stream(pcminfo, iStream);
+				snd_pcm_info_set_stream(pcminfo,
+					iAudio == QJACKCTL_CAPTURE ?
+						SND_PCM_STREAM_CAPTURE :
+						SND_PCM_STREAM_PLAYBACK);
 				if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
 					sText = QString("hw:%1,%2\t%3")
 						.arg(iCard)
@@ -583,7 +583,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	}
 	
 	// Maybe this is an alternate settting...
-	if (bAlternate) {
+	if (iAudio != QJACKCTL_DUPLEX) {
 		if (iCards > 0)
 			pContextMenu->insertSeparator();
 		pContextMenu->insertItem(m_pSetup->sDefPresetName);
@@ -609,7 +609,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 void qjackctlSetupForm::selectInterface (void)
 {
     deviceMenu(InterfaceComboBox->lineEdit(), InterfacePushButton,
-		QJACKCTL_STREAM_PLAYBACK, false);
+		QJACKCTL_DUPLEX);
 }
 
 
@@ -617,7 +617,7 @@ void qjackctlSetupForm::selectInterface (void)
 void qjackctlSetupForm::selectInDevice (void)
 {
     deviceMenu(InDeviceComboBox->lineEdit(), InDevicePushButton,
-		QJACKCTL_STREAM_CAPTURE, true);
+		QJACKCTL_CAPTURE);
 }
 
 
@@ -625,7 +625,7 @@ void qjackctlSetupForm::selectInDevice (void)
 void qjackctlSetupForm::selectOutDevice (void)
 {
     deviceMenu(OutDeviceComboBox->lineEdit(), OutDevicePushButton,
-		QJACKCTL_STREAM_PLAYBACK, true);
+		QJACKCTL_PLAYBACK);
 }
 
 
