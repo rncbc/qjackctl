@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -280,7 +280,7 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
     sTemp.replace("%n", QString::number(m_preset.iPeriods));
     
     appendMessages(sStartMessage);
-    appendMessages("[" + sTemp.stripWhiteSpace() + "]");
+    appendMessagesColor(sTemp.stripWhiteSpace(), "#990099");
     QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
     // Execute and set exit status message...
     sTemp = sStopMessage + formatExitStatus(::system(sTemp));
@@ -437,12 +437,12 @@ void qjackctlMainForm::startJack (void)
     appendMessages(tr("JACK is starting..."));
     QStringList list = m_pJack->arguments();
     QStringList::Iterator iter = list.begin();
-    sTemp = "[";
+    sTemp = "";
     while (iter != list.end()) {
 	    sTemp += *iter++;
         sTemp += " ";
     }
-    appendMessages(sTemp.stripWhiteSpace() + "]");
+    appendMessagesColor(sTemp.stripWhiteSpace(), "#990099");
 
     // Go jack, go...
     if (!m_pJack->start()) {

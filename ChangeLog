@@ -3,7 +3,9 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.2   2004-01-06  Yet more minor bugfixes.
+0.2.2   2004-01-08  Yet more minor bugfixes.
+
+- Messages color retouching.
 
 - Popup menus memory leak fixed.
 
