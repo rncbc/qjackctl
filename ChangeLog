@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.14   2005-01-15  Work in progress...
+0.2.14   2005-01-23  More progressive optimizations.
 
 - Put a limit on XRUN callback messages and statistics report rate, preventing
   the potential hosing of the GUI due to a XRUN cascade storm. The maximum
