@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -148,6 +148,17 @@ void qjackctlConnectionsForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 }
 
 
+// Check if there's JACK audio connections.
+bool qjackctlConnectionsForm::isJackConnected (void)
+{
+	bool bIsConnected = false;
+	
+    if (m_pJackConnect)
+        bIsConnected = m_pJackConnect->canDisconnectAll();
+    
+    return bIsConnected;
+}
+
 
 // Connect current selected ports.
 void qjackctlConnectionsForm::jackConnectSelected (void)
@@ -191,6 +202,18 @@ void qjackctlConnectionsForm::jackRefresh ( void )
 void qjackctlConnectionsForm::jackStabilize ( void )
 {
     stabilizeJack(true);
+}
+
+
+// Check if there's ALSA MIDI connections.
+bool qjackctlConnectionsForm::isAlsaConnected (void)
+{
+	bool bIsConnected = false;
+
+    if (m_pAlsaConnect)
+        bIsConnected = m_pAlsaConnect->canDisconnectAll();
+
+    return bIsConnected;
 }
 
 

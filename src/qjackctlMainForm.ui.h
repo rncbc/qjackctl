@@ -656,6 +656,17 @@ void qjackctlMainForm::startJack (void)
 // Stop jack audio server...
 void qjackctlMainForm::stopJack (void)
 {
+	// Check if we're allowed to stop (shutdown)...
+	if (m_pSetup->bQueryShutdown && m_pJack && m_pJack->isRunning()
+	    && m_pConnectionsForm && m_pConnectionsForm->isJackConnected()
+        && QMessageBox::warning(this, tr("Warning"),
+            tr("Some client audio applications") + "\n" +
+			tr("are still active and connected.") + "\n\n" +
+            tr("Do you want to stop the JACK audio server?"),
+            tr("Stop"), tr("Cancel")) > 0) {
+		return;
+	}
+	
     // Clear timer counters...
     m_iStartDelay  = 0;
     m_iTimerDelay  = 0;

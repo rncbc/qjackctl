@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -77,6 +77,7 @@ qjackctlSetup::qjackctlSetup (void)
     bServerConfig            = m_settings.readBoolEntry("/ServerConfig", true);
     sServerConfigName        = m_settings.readEntry("/ServerConfigName", ".jackdrc");
     bServerConfigTemp        = m_settings.readBoolEntry("/ServerConfigTemp", false);
+    bQueryShutdown           = m_settings.readBoolEntry("/QueryShutdown", true);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -139,6 +140,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/ServerConfig",            bServerConfig);
     m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
     m_settings.writeEntry("/ServerConfigTemp",        bServerConfigTemp);
+    m_settings.writeEntry("/QueryShutdown",           bQueryShutdown);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");

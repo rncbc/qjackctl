@@ -2,7 +2,7 @@
 <class>qjackctlConnectionsForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -429,6 +429,8 @@
     <function specifier="non virtual">setConnectionsIconSize( int iIconSize )</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
     <function specifier="non virtual">setAlsaSeq( snd_seq_t * pAlsaSeq )</function>
+    <function specifier="non virtual" returnType="bool">isJackConnected()</function>
+    <function specifier="non virtual" returnType="bool">isAlsaConnected()</function>
     <function specifier="non virtual">refreshJack( bool bEnabled )</function>
     <function specifier="non virtual">refreshAlsa( bool bEnabled )</function>
     <function specifier="non virtual">stabilizeJack( bool bEnabled )</function>

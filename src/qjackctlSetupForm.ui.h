@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -48,7 +48,6 @@ void qjackctlSetupForm::init (void)
     WordLengthComboBox->setValidator(new QIntValidator(WordLengthComboBox));
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
     TimeRefreshComboBox->setValidator(new QIntValidator(TimeRefreshComboBox));
-    StartDelayComboBox->setValidator(new QIntValidator(StartDelayComboBox));
     PortMaxComboBox->setValidator(new QIntValidator(PortMaxComboBox));
     MessagesLimitLinesComboBox->setValidator(new QIntValidator(MessagesLimitLinesComboBox));
 
@@ -150,6 +149,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
     ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
     ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
+    QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
 
 #ifndef CONFIG_SYSTEM_TRAY
     SystemTrayCheckBox->setChecked(false);
@@ -208,7 +208,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
             OutDeviceComboBox->setCurrentText(preset.sOutDevice);
         InChannelsSpinBox->setValue(preset.iInChannels);
         OutChannelsSpinBox->setValue(preset.iOutChannels);
-        StartDelayComboBox->setCurrentText(QString::number(preset.iStartDelay));
+        StartDelaySpinBox->setValue(preset.iStartDelay);
         VerboseCheckBox->setChecked(preset.bVerbose);
         PortMaxComboBox->setCurrentText(QString::number(preset.iPortMax));
         // Reset dirty flag.
@@ -253,7 +253,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.sOutDevice   = OutDeviceComboBox->currentText();
     preset.iInChannels  = InChannelsSpinBox->value();
     preset.iOutChannels = OutChannelsSpinBox->value();
-    preset.iStartDelay  = StartDelayComboBox->currentText().toInt();
+    preset.iStartDelay  = StartDelaySpinBox->value();
     preset.bVerbose     = VerboseCheckBox->isChecked();
     preset.iPortMax     = PortMaxComboBox->currentText().toInt();
     if (preset.sInDevice == m_pSetup->sDefPresetName)
@@ -795,6 +795,7 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->bServerConfig            = ServerConfigCheckBox->isChecked();
         m_pSetup->sServerConfigName        = ServerConfigNameComboBox->currentText();
         m_pSetup->bServerConfigTemp        = ServerConfigTempCheckBox->isChecked();
+        m_pSetup->bQueryShutdown           = QueryShutdownCheckBox->isChecked();
     }
 
     // Save combobox history...
