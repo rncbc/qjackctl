@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.12   2004-10-06  Larger icons and font option on connections/patchbay.
+0.2.12   2004-10-08  Larger icons and font option on connections/patchbay.
 
 - Fixed some old and slow memory-leak due to redundand and repetitive call
   to jack_port_by_name() (discovered and solved, thanks to Jesse Chappell);
@@ -22,7 +22,9 @@ ChangeLog
 
 - Connection line width follows icon size in discrete proportion.
 
-- "Other" setup options moved to a new dialog tab, "Misc".
+- "Other" setup options moved to a new dialog tab, "Misc"; new extreme item
+  values, 32 and 16 frames, added to the drop-down list of the Frames/Buffer
+  setting (as suggested by Mark Knetch).
 
 
 0.2.11   2004-09-10  Shiny display now optional and other fixes.
