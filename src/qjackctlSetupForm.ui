@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>476</width>
-            <height>362</height>
+            <height>374</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -84,6 +84,9 @@
                     </property>
                     <property name="text">
                         <string>OK</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>accept1.png</iconset>
                     </property>
                 </widget>
                 <widget class="QPushButton">

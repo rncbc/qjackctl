@@ -3,6 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.1.1a  2003-11-01  Whatever happened to OK button icons.
+
+- Restored missing OK button icons.
+
+
 0.1.1   2003-10-29  Minor feature enhancements and bugfixes.
 
 - Main window display items are now made fixed in width, at least those more
