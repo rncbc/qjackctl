@@ -3,7 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.9   2004-05-26  Sloppy boy fixes.
+0.2.9   2004-06-09  Sloppy boy fixes and minor featuritis.
+
+- The system tray popup menu is now featured as a context menu on the
+  main application window too.
 
 - The reset status option is now included in the system tray popup menu.
 

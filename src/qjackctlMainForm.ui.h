@@ -2139,4 +2139,11 @@ void qjackctlMainForm::quitMainForm (void)
 }
 
 
+// Context menu event handler.
+void qjackctlMainForm::contextMenuEvent( QContextMenuEvent *pEvent )
+{
+    // We'll just show up the usual system tray menu.
+    systemTrayContextMenu(pEvent->globalPos());
+}
+
 // end of qjackctlMainForm.ui.h
