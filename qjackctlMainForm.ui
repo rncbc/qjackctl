@@ -1962,9 +1962,11 @@
     <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
+    <variable access="private">QSocketNotifier *m_pBuffNotifier;</variable>
     <variable access="private">int m_iPortNotify;</variable>
     <variable access="private">int m_iXrunNotify;</variable>
     <variable access="private">int m_iShutNotify;</variable>
+    <variable access="private">int m_iBuffNotify;</variable>
     <variable access="private">int m_iXrunCallbacks;</variable>
     <variable access="private">int m_iXrunStats;</variable>
     <variable access="private">int m_iXrunCount;</variable>
@@ -1974,7 +1976,7 @@
     <variable access="private">float m_fXrunLast;</variable>
     <variable access="private">QTime m_tXrunLast;</variable>
     <variable access="private">QTime m_tResetLast;</variable>
-    <variable access="private">QListViewItem *m_apStats[14];</variable>
+    <variable access="private">QListViewItem *m_apStats[15];</variable>
     <variable access="private">QPoint m_pos;</variable>
     <variable access="private">QPoint m_pos1;</variable>
     <variable access="private">QSize m_size1;</variable>
@@ -1996,6 +1998,7 @@
     <slot specifier="non virtual">portNotifySlot( int fd )</slot>
     <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
     <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
+    <slot specifier="non virtual">buffNotifySlot( int fd )</slot>
     <slot specifier="non virtual">timerSlot( void )</slot>
     <slot specifier="non virtual">connectSelected( void )</slot>
     <slot specifier="non virtual">disconnectSelected( void )</slot>
@@ -2015,6 +2018,7 @@
     <function access="private" specifier="non virtual">appendMessagesText( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">computeLatency( void )</function>
     <function access="private" specifier="non virtual">stabilizeForm( bool bSavePosition )</function>
+    <function access="private" specifier="non virtual">updateBufferSize( void )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( QTime &amp; t, bool bElapsed )</function>
     <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>

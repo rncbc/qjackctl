@@ -3,10 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.8   2003-09-18  Preliminary transport control.
+0.0.8   2003-09-19  Preliminary transport and buffer size control.
 
 - Transport status and control introduced; statistics tab renamed to status,
   where the transport state info and control buttons are now placed;
+
+- Buffer size status is now yet another item on view.
 
 
 0.0.7   2003-09-15  Minor bugfixes.
