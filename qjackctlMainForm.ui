@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>455</width>
-            <height>268</height>
+            <width>532</width>
+            <height>317</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -197,7 +197,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <spacer row="0" column="4">
+                    <spacer row="0" column="3">
                         <property name="name">
                             <cstring>spacer22</cstring>
                         </property>
@@ -214,7 +214,7 @@
                             </size>
                         </property>
                     </spacer>
-                    <widget class="QLayoutWidget" row="0" column="5">
+                    <widget class="QLayoutWidget" row="0" column="4">
                         <property name="name">
                             <cstring>layout7</cstring>
                         </property>
@@ -281,7 +281,7 @@
                             </size>
                         </property>
                     </spacer>
-                    <spacer row="1" column="4">
+                    <spacer row="1" column="3">
                         <property name="name">
                             <cstring>spacer24</cstring>
                         </property>
@@ -309,7 +309,7 @@
                             <cstring>ServerComboBox</cstring>
                         </property>
                     </widget>
-                    <widget class="QLayoutWidget" row="1" column="5">
+                    <widget class="QLayoutWidget" row="1" column="4">
                         <property name="name">
                             <cstring>layout9</cstring>
                         </property>
@@ -375,10 +375,10 @@
                                     <cstring>HWMonCheckBox</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>&amp;H/W Monitor</string>
+                                    <string>H/W Mo&amp;nitor</string>
                                 </property>
                                 <property name="accel">
-                                    <string>Alt+H</string>
+                                    <string>Alt+N</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Enable hardware monitoring of capture ports</string>
@@ -510,7 +510,7 @@
                             </widget>
                         </grid>
                     </widget>
-                    <widget class="QLayoutWidget" row="1" column="2" rowspan="1" colspan="2">
+                    <widget class="QLayoutWidget" row="1" column="2">
                         <property name="name">
                             <cstring>layout10</cstring>
                         </property>
@@ -807,7 +807,7 @@
                             </size>
                         </property>
                     </spacer>
-                    <widget class="QComboBox" row="0" column="2" rowspan="1" colspan="2">
+                    <widget class="QComboBox" row="0" column="2">
                         <item>
                             <property name="text">
                                 <string>jackstart</string>
@@ -842,84 +842,6 @@
                         </property>
                         <property name="toolTip" stdset="0">
                             <string>The JACK Audio Connection Kit sound server path</string>
-                        </property>
-                    </widget>
-                    <spacer row="3" column="3">
-                        <property name="name">
-                            <cstring>spacer26</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>MinimumExpanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <widget class="QLabel" row="2" column="0" rowspan="1" colspan="3">
-                        <property name="name">
-                            <cstring>TempDirTextLabel</cstring>
-                        </property>
-                        <property name="text">
-                            <string>T&amp;emporary Directory:</string>
-                        </property>
-                        <property name="alignment">
-                            <set>AlignVCenter|AlignRight</set>
-                        </property>
-                        <property name="buddy" stdset="0">
-                            <cstring>TempDirComboBox</cstring>
-                        </property>
-                    </widget>
-                    <widget class="QComboBox" row="2" column="3" rowspan="1" colspan="3">
-                        <item>
-                            <property name="text">
-                                <string>(default)</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>/tmp</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>/tmp/jack</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>/var/tmp</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>/var/tmp/jack</string>
-                            </property>
-                        </item>
-                        <property name="name">
-                            <cstring>TempDirComboBox</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="editable">
-                            <bool>true</bool>
-                        </property>
-                        <property name="currentItem">
-                            <number>0</number>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Directory to use for temporary files</string>
                         </property>
                     </widget>
                     <widget class="QLayoutWidget" row="1" column="0">
@@ -1032,6 +954,84 @@
                                 </property>
                             </widget>
                         </grid>
+                    </widget>
+                    <spacer row="2" column="2">
+                        <property name="name">
+                            <cstring>spacer26</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>MinimumExpanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget class="QComboBox" row="3" column="2" rowspan="1" colspan="3">
+                        <item>
+                            <property name="text">
+                                <string>(default)</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>/tmp</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>/tmp/jack</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>/var/tmp</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>/var/tmp/jack</string>
+                            </property>
+                        </item>
+                        <property name="name">
+                            <cstring>TempDirComboBox</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="currentItem">
+                            <number>0</number>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Directory to use for temporary files</string>
+                        </property>
+                    </widget>
+                    <widget class="QLabel" row="3" column="0" rowspan="1" colspan="2">
+                        <property name="name">
+                            <cstring>TempDirTextLabel</cstring>
+                        </property>
+                        <property name="text">
+                            <string>Temp&amp;orary Directory:</string>
+                        </property>
+                        <property name="alignment">
+                            <set>AlignVCenter</set>
+                        </property>
+                        <property name="buddy" stdset="0">
+                            <cstring>TempDirComboBox</cstring>
+                        </property>
                     </widget>
                 </grid>
             </widget>
