@@ -1855,6 +1855,24 @@
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
+        <sender>StartupScriptPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>browseStartupScript()</slot>
+    </connection>
+    <connection>
+        <sender>PostStartupScriptPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>browsePostStartupScript()</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>browseShutdownScript()</slot>
+    </connection>
+    <connection>
         <sender>AutoRefreshCheckBox</sender>
         <signal>toggled(bool)</signal>
         <receiver>TimeRefreshComboBox</receiver>

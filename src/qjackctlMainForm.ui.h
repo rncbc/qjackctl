@@ -200,6 +200,10 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
 // Start jack audio server...
 void qjackctlMainForm::startJack (void)
 {
+    // If can't be already a client, are we?
+    if (m_pJackClient)
+        return;
+
     // Is the server process instance still here?
     if (m_pJack) {
         switch (QMessageBox::warning(this, tr("Warning"),

@@ -23,6 +23,7 @@
 #include <qtextcodec.h>
 
 #include "qjackctlMainForm.h"
+#include "qjackctlAbout.h"
 
 #include "config.h"
 
@@ -30,6 +31,7 @@ int main ( int argc, char **argv )
 {
     QApplication app(argc, argv);
 
+    // Load translation support.
     QTranslator translator(0);
     QString sLocale = QTextCodec::locale();
     if (sLocale != "C") {
@@ -42,11 +44,45 @@ int main ( int argc, char **argv )
         app.installTranslator(&translator);
     }
 
+    // Parse command line option arguments.
+    bool bStartJack = false;
+    for (int i = 1; i < app.argc(); i++) {
+        QString sArg = app.argv()[i];
+        // Start audio server immediate option.
+        if (sArg == "-s" || sArg == "--start")
+            bStartJack = true;
+        else
+        // Version information.
+        if (sArg == "-v" || sArg == "--version") {
+            fprintf(stderr, "Qt: %s\n", qVersion());
+            fprintf(stderr, "qjackctl: %s\n", QJACKCTL_VERSION);
+            app.quit();
+            return 0;
+        }
+        else {
+            // Help about command line options.
+            fprintf(stderr, QObject::tr("Usage") + ": %s [" + QObject::tr("options") + "]\n\n", app.argv()[0]);
+            fprintf(stderr, "%s - %s\n\n", QJACKCTL_TITLE, QJACKCTL_SUBTITLE);
+            fprintf(stderr, QObject::tr("Options") + ":\n");
+            fprintf(stderr, "  -h, --help\t" + QObject::tr("Show help about command line options") + "\n");
+            fprintf(stderr, "  -s, --start\t" + QObject::tr("Start JACK audio server immediately") + "\n");
+            fprintf(stderr, "  -v, --version\t" + QObject::tr("Show version information") + "\n");
+            app.quit();
+            return (-1);
+        }
+    }
+
+    // Construct and show the main form.
     qjackctlMainForm w;
     w.show();
-    
+
+    // Register the quit signal/slot.
     app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
-    
+
+    // Do we start jack immediately?
+    if (bStartJack)
+        w.startJack();
+        
     return app.exec();
 }
 
