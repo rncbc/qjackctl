@@ -1891,7 +1891,7 @@ void qjackctlMainForm::refreshStatus (void)
 #else
         updateStatusItem(STATUS_REALTIME, n);
         ServerModeTextLabel->setText(n);
-#endif
+#endif  // !CONFIG_JACK_REALTIME
 #ifdef CONFIG_JACK_TRANSPORT
         QString sText = n;
         jack_position_t tpos;
@@ -1940,7 +1940,7 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatusItem(STATUS_MAX_DELAY, QString::number(0.001 * jack_get_max_delayed_usecs(m_pJackClient)) + " " + tr("msec"));
 #else
         updateStatusItem(STATUS_MAX_DELAY, n);
-#endif
+#endif  // !CONFIG_JACK_MAX_DELAY
     } else {
         updateStatusItem(STATUS_CPU_LOAD, n);
         updateStatusItem(STATUS_SAMPLE_RATE, n);
@@ -1953,7 +1953,6 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatusItem(STATUS_TRANSPORT_BPM, n);
         PlayPushButton->setEnabled(false);
         PausePushButton->setEnabled(false);
-        updateStatusItem(STATUS_MAX_DELAY, n);
     }
 
     updateElapsedTimes();
