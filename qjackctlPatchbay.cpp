@@ -22,6 +22,7 @@
 #include "qjackctlPatchbay.h"
 
 #include <qpopupmenu.h>
+#include <qmessagebox.h>
 #include <qtimer.h>
 
 #include <stdlib.h>
@@ -1323,6 +1324,14 @@ bool qjackctlPatchbay::canDisconnectAllEx (void)
 // Disconnect all ports.
 void qjackctlPatchbay::disconnectAll (void)
 {
+    if (QMessageBox::warning(m_pPatchbayView, tr("Warning"),
+        tr("Disconnecting all ports") + "\n" +
+        tr("will suspend sound processing") + "\n" +
+        tr("from all client applications."),
+        tr("OK"), tr("Cancel")) > 0) {
+        return;
+    }
+
     if (startExclusive()) {
         disconnectAllEx();
         endExclusive();

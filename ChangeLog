@@ -9,6 +9,9 @@ ChangeLog
 
 - Dummy driver wait parameter is now properly set on startup.
 
+- Confirmation warning on disconnecting all ports (as suggested
+  by Robert Jonsson).
+
 
 0.0.9   2003-09-25  Work in progress.
 
