@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -31,6 +31,9 @@
 // Kind of constructor.
 void qjackctlMessagesForm::init (void)
 {
+#if QT_VERSION >= 0x030200
+    MessagesTextView->setTextFormat(Qt::LogText);
+#endif
     // Initialize default message limit.
     setMessagesLimit(QJACKCTL_MESSAGES_MAXLINES);
 }
@@ -85,6 +88,9 @@ void qjackctlMessagesForm::setMessagesLimit( int iMessagesLimit )
 {
     m_iMessagesLimit = iMessagesLimit;
     m_iMessagesHigh  = iMessagesLimit + (iMessagesLimit / 3);
+#if QT_VERSION >= 0x030200
+	MessagesTextView->setMaxLogLines(iMessagesLimit);
+#endif
 }
 
 
@@ -101,6 +107,7 @@ void qjackctlMessagesForm::appendMessagesColor( const QString& s, const QString&
 
 void qjackctlMessagesForm::appendMessagesText( const QString& s )
 {
+#if QT_VERSION < 0x030200
     // Check for message line limit...
     if (m_iMessagesLimit > 0) {
         int iParagraphs = MessagesTextView->paragraphs();
@@ -114,6 +121,7 @@ void qjackctlMessagesForm::appendMessagesText( const QString& s )
             MessagesTextView->setUpdatesEnabled(true);
         }
     }
+#endif
     MessagesTextView->append(s);
 }
 

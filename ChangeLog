@@ -30,7 +30,8 @@ ChangeLog
   device name (N = soundcard index of snd-usb-usx2y module).
 
 - Messages window limit is now enforced only when the line count exceeds
-  in one third the user configured line count maximum.
+  in one third the user configured line count maximum; if Qt 3.2.0+ is in use,
+  the QTextView widget is otherwise set to the optimized Qt::LogText format.
 
 - XRUN status items are kept double-dashed if none has been detected.
 
