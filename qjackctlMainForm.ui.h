@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.8.3"
+#define QJACKCTL_VERSION	"0.0.8.5"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -1296,30 +1296,30 @@ void qjackctlMainForm::stopJackClient (void)
 // Connect current selected ports.
 void qjackctlMainForm::connectSelected (void)
 {
-    if (m_pJackPatchbay)
+    if (m_pJackPatchbay) {
         m_pJackPatchbay->connectSelected();
-
-    stabilizeConnections();
+        refreshConnections();
+    }
 }
 
 
 // Disconnect current selected ports.
 void qjackctlMainForm::disconnectSelected (void)
 {
-    if (m_pJackPatchbay)
+    if (m_pJackPatchbay) {
         m_pJackPatchbay->disconnectSelected();
-
-    stabilizeConnections();
+        refreshConnections();
+    }
 }
 
 
 // Disconnect all connected ports.
 void qjackctlMainForm::disconnectAll()
 {
-    if (m_pJackPatchbay)
+    if (m_pJackPatchbay) {
         m_pJackPatchbay->disconnectAll();
-
-    stabilizeConnections();
+        refreshConnections();
+    }
 }
 
 
@@ -1329,13 +1329,16 @@ void qjackctlMainForm::refreshConnections (void)
     // Just increment our intentions; it will be deferred
     // to be executed just on timer slot processing...
     m_iRefresh++;
+    
+    // Hack this as for a while.
+    stabilizeConnections();
 }
 
 
 // Proper enablement of patchbay command controls.
 void qjackctlMainForm::stabilizeConnections (void)
 {
-    if (m_pJackPatchbay) {
+    if (m_pJackPatchbay && m_iRefresh == 0) {
         ConnectPushButton->setEnabled(m_pJackPatchbay->canConnectSelected());
         DisconnectPushButton->setEnabled(m_pJackPatchbay->canDisconnectSelected());
         DisconnectAllPushButton->setEnabled(m_pJackPatchbay->canDisconnectAll());
@@ -1358,7 +1361,7 @@ void qjackctlMainForm::browseStartupScript()
             this, 0,									// Parent and name (none)
             tr("Startup script")						// Caption.
     );
-    
+
     if (!sFileName.isEmpty()) {
         StartupScriptShellComboBox->setCurrentText(sFileName);
         StartupScriptShellComboBox->setFocus();
@@ -1466,3 +1469,4 @@ static void saveComboBoxHistory ( QSettings *pSettings, QComboBox *pComboBox, in
 
 
 // end of ui.h
+

@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.9   2003-09-23  Work in progress.
+0.0.9   2003-09-25  Work in progress.
 
 - New connection port item pixmaps that distinguishes physical from
   logical ports;
