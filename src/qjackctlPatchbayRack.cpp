@@ -23,6 +23,8 @@
 
 #include <qregexp.h>
 
+#include <stdlib.h>
+
 
 //----------------------------------------------------------------------
 // class qjackctlPatchbaySocket -- Patchbay socket implementation.

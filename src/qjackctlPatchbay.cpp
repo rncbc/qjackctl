@@ -26,9 +26,6 @@
 #include <qtimer.h>
 
 #include <stdlib.h>
-#include <math.h>
-
-#include <jack/jack.h>
 
 // Interactivity socket form.
 #include "qjackctlSocketForm.h"
