@@ -53,7 +53,7 @@ void qjackctlConnectionsForm::showEvent ( QShowEvent *pShowEvent )
         pMainForm->stabilizeForm();
 
     refreshForm();
-        
+
     QWidget::showEvent(pShowEvent);
 }
 
@@ -80,7 +80,7 @@ void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
     
     if (pJackClient && m_pJackConnections == NULL)
         m_pJackConnections = new qjackctlConnections(ConnectionsView, pJackClient);
-        
+
     stabilize(pJackClient != NULL);
 }
 

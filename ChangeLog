@@ -3,18 +3,27 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.1.0   2003-10-10  Major user interface redesign.
+0.1.0   2003-10-14  Major user interface redesign.
 
-- Main application window complete restyling, now more like a multimedia
-  control panel--old main window dialog tabs are now splitted in separate
-  pop-up windows/dialogs.
+- Main application window complete redesign, now more like a multimedia/LCD
+  control panel -- old main window dialog tabs are now splitted in separate
+  pop-up windows/dialogs; big time display options.
   
 - Deprecated options for forcing aRTs and jackd daemons are no longer
-  available; this functionality can be officially superceded by the generic
-  startup/shutdown script options.
+  available; this functionality can be officially superceded by the more
+  generic startup/shutdown script options.
 
 - Seamless support for externally started JACK server, providing a client-only
-  mode of operation.
+  mode of operation; if JACK daemon is already started, qjackctl enters in
+  client detached mode automatically.
+  
+- Messages window font is configurable and saved across sessions. Some
+  colorization has been introduced to some event messages.
+
+- Preliminary patchbay persistence feature is under way. A patchbay definition
+  editor is already included, following an alternative socket-plug patchbay
+  model that aliases and is a direct map to the client-port JACK connections
+  model. The patchbay definitions are stored as text/xml files.
 
 
 0.0.9   2003-09-25  Work in progress.

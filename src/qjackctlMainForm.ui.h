@@ -31,8 +31,12 @@
 #include "qjackctlAbout.h"
 
 
-// Time in seconds of client start code delay.
-#define QJACKCTL_START_DELAY    3
+// Timer constant stuff.
+#define QJACKCTL_TIMER_MSECS    500
+#define QJACKCTL_DELAY_MSECS    2000
+
+#define QJACKCTL_DELAY_TICKS    ((QJACKCTL_DELAY_MSECS / QJACKCTL_TIMER_MSECS) + 1)
+
 
 // To have clue about current buffer size (in frames).
 static jack_nframes_t g_nframes = 0;
@@ -65,9 +69,6 @@ void qjackctlMainForm::init (void)
     m_pConnectionsForm = NULL;
     m_pPatchbayForm    = NULL;
 
-    // Register the timer slot.
-    QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
-    
     // Load any saved profile settings and options.
     m_setup.load();
     // Try to restore old window positioning.
@@ -77,6 +78,9 @@ void qjackctlMainForm::init (void)
     m_setup.loadWidgetGeometry(m_pStatusForm);
     m_setup.loadWidgetGeometry(m_pConnectionsForm);
     m_setup.loadWidgetGeometry(m_pPatchbayForm);
+    
+    // Set default messages font...
+    updateMessagesFont();
 
     // Initial XRUN statistics reset.
     resetXrunStats();
@@ -87,8 +91,10 @@ void qjackctlMainForm::init (void)
     stabilizeForm();
     processJackExit();
     
-    // Our timer is one second standard.
-    m_pTimer->start(1000, false);
+    // Register the timer slot.
+    QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+    // Our timer is standard.
+    m_pTimer->start(QJACKCTL_TIMER_MSECS, false);
 }
 
 
@@ -119,13 +125,17 @@ bool qjackctlMainForm::queryClose (void)
     }
     
     // Try to save current patchbay default settings.
-    if (m_pPatchbayForm) {
+    if (bQueryClose && m_pPatchbayForm) {
         bQueryClose = m_pPatchbayForm->queryClose();
         if (bQueryClose && !m_pPatchbayForm->patchbayPath().isEmpty())
             m_setup.sPatchbayPath = m_pPatchbayForm->patchbayPath();
     }
 
-    // Try to save current window positioning.
+    // Some windows default fonts is here on demeand too.
+    if (bQueryClose && m_pMessagesForm)
+        m_setup.sMessagesFont = m_pMessagesForm->messagesFont().toString();
+
+    // Try to save current positioning.
     if (bQueryClose) {
         m_setup.saveWidgetGeometry(m_pMessagesForm);
         m_setup.saveWidgetGeometry(m_pStatusForm);
@@ -489,7 +499,18 @@ void qjackctlMainForm::appendMessagesError( const QString& s )
 {
     appendMessagesColor(s, "#ff0000");
 
-    QMessageBox::critical(this, tr("Error"), s, QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
+    QMessageBox::critical(this, tr("Error"), s, tr("Cancel"));
+}
+
+
+// Force update of the messages font.
+void qjackctlMainForm::updateMessagesFont (void)
+{
+    if (m_pMessagesForm && !m_setup.sMessagesFont.isEmpty()) {
+        QFont font;
+        if (font.fromString(m_setup.sMessagesFont))
+            m_pMessagesForm->setMessagesFont(font);
+    }
 }
 
 
@@ -544,11 +565,14 @@ void qjackctlMainForm::updateXrunCount (void)
 
 
 // Update the XRUN last/elapsed time item.
-QString qjackctlMainForm::formatElapsedTime ( const QTime& t, bool bElapsed )
+QString qjackctlMainForm::formatElapsedTime ( int iStatusItem, const QTime& t, bool bElapsed )
 {
+    QString sTemp = "--:--:--";
     QString sText;
+
+    // Compute and format elapsed time.
     if (t.isNull()) {
-        sText = "--:--:--";
+        sText = sTemp;
     } else {
         sText = t.toString();
         if (m_pJackClient) {
@@ -556,7 +580,6 @@ QString qjackctlMainForm::formatElapsedTime ( const QTime& t, bool bElapsed )
             if (bElapsed && iSeconds > 0) {
                 int iHours   = 0;
                 int iMinutes = 0;
-                sText += " (";
                 if (iSeconds >= 3600) {
                     iHours = (iSeconds / 3600);
                     iSeconds -= (iHours * 3600);
@@ -565,10 +588,18 @@ QString qjackctlMainForm::formatElapsedTime ( const QTime& t, bool bElapsed )
                     iMinutes = (iSeconds / 60);
                     iSeconds -= (iMinutes * 60);
                 }
-                sText += QTime(iHours, iMinutes, iSeconds).toString() + ")";
+                sTemp = QTime(iHours, iMinutes, iSeconds).toString();
+                sText += " (" + sTemp + ")";
             }
         }
     }
+
+    // Display elapsed time as big time?
+    if ((iStatusItem == STATUS_RESET_TIME && m_setup.iTimeDisplay == DISPLAY_RESET_TIME) ||
+        (iStatusItem == STATUS_XRUN_TIME  && m_setup.iTimeDisplay == DISPLAY_XRUN_TIME)) {
+        TimeDisplayTextLabel->setText(sTemp);
+    }
+
     return sText;
 }
 
@@ -576,8 +607,8 @@ QString qjackctlMainForm::formatElapsedTime ( const QTime& t, bool bElapsed )
 // Update the XRUN last/elapsed time item.
 void qjackctlMainForm::updateElapsedTimes (void)
 {
-    updateStatus(STATUS_RESET_TIME, formatElapsedTime(m_tResetLast, true));
-    updateStatus(STATUS_XRUN_TIME, formatElapsedTime(m_tXrunLast, ((m_iXrunCount + m_iXrunCallbacks) > 0)));
+    updateStatus(STATUS_RESET_TIME, formatElapsedTime(STATUS_RESET_TIME, m_tResetLast, true));
+    updateStatus(STATUS_XRUN_TIME, formatElapsedTime(STATUS_XRUN_TIME, m_tXrunLast, ((m_iXrunCount + m_iXrunCallbacks) > 0)));
 }
 
 
@@ -770,7 +801,7 @@ void qjackctlMainForm::shutNotifySlot ( int fd )
 void qjackctlMainForm::timerSlot (void)
 {
     // Is it the first shot on server start after a few delay?
-    if (++m_iTimerSlot == QJACKCTL_START_DELAY) {
+    if (++m_iTimerSlot == QJACKCTL_DELAY_TICKS) {
         startJackClient(false);
         return;
     }
@@ -839,10 +870,15 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // If can't be already started, are we?
     if (m_pJackClient)
         return true;
+
     // Are we about to start detached?
-    if (bDetach)
-        m_iTimerSlot += QJACKCTL_START_DELAY;
-        
+    if (bDetach) {
+        // To fool timed client initialization delay.
+        m_iTimerSlot += QJACKCTL_DELAY_TICKS + 1;
+        // Refresh status (with dashes?)
+        refreshStatus();
+    }
+
     // Create port notification pipe.
     if (::pipe(g_fdPort) < 0) {
         g_fdPort[QJACKCTL_FDREAD]  = QJACKCTL_FDNIL;
@@ -1009,6 +1045,7 @@ void qjackctlMainForm::toggleMessagesForm (void)
     if (m_pMessagesForm == NULL) {
         m_pMessagesForm = new qjackctlMessagesForm(this);
         m_setup.loadWidgetGeometry(m_pMessagesForm);
+        updateMessagesFont();
     }
 
     if (m_pMessagesForm) {
@@ -1026,8 +1063,10 @@ void qjackctlMainForm::showSetupForm (void)
     qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
     if (pSetupForm) {
         pSetupForm->load(&m_setup);
-        if (pSetupForm->exec())
+        if (pSetupForm->exec()) {
             pSetupForm->save(&m_setup);
+            updateMessagesFont();
+        }
         delete pSetupForm;
     }
 }
@@ -1228,7 +1267,7 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
     case STATUS_XRUN_COUNT:
     {
         QColor fgcolor = Qt::green;
-        if (m_iXrunCount > 0 || m_iXrunCallbacks > 0)
+        if ((m_iXrunCount + m_iXrunCallbacks) > 0)
             fgcolor = (m_iXrunCallbacks > 0 ? Qt::red : Qt::yellow);
         XrunCountTextLabel->setPaletteForegroundColor(fgcolor);
         XrunCountTextLabel->setText(sText);
@@ -1238,10 +1277,18 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
         TransportStateTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_TIME:
-        TransportTimeTextLabel->setText(sText);
+        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_TIME)
+            TimeDisplayTextLabel->setText(sText);
+        else
+        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_BBT)
+            TransportTimeTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_BBT:
-        TransportBBTTextLabel->setText(sText);
+        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_TIME)
+            TransportTimeTextLabel->setText(sText);
+        else
+        if (m_setup.iTimeDisplay == DISPLAY_TRANSPORT_BBT)
+            TimeDisplayTextLabel->setText(sText);
         break;
     case STATUS_TRANSPORT_BPM:
         TransportBPMTextLabel->setText(sText);

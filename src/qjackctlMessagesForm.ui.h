@@ -58,6 +58,18 @@ void qjackctlMessagesForm::hideEvent ( QHideEvent *pHideEvent )
 }
 
 
+// Messages view font accessors.
+QFont qjackctlMessagesForm::messagesFont (void)
+{
+    return MessagesTextView->font();
+}
+
+void qjackctlMessagesForm::setMessagesFont ( const QFont & font )
+{
+    MessagesTextView->setFont(font);
+}
+
+
 // Messages widget output method.
 void qjackctlMessagesForm::appendMessages( const QString& s )
 {
@@ -79,6 +91,7 @@ void qjackctlMessagesForm::appendMessagesText( const QString& s )
     }
     MessagesTextView->append(s);
 }
+
 
 // end of qjackctlMessagesForm.ui.h
 

@@ -40,6 +40,12 @@
 #define STATUS_XRUN_TOTAL       14
 #define STATUS_RESET_TIME       15
 
+// (Big)Time display identifiers.
+#define DISPLAY_TRANSPORT_TIME  0
+#define DISPLAY_TRANSPORT_BBT   1
+#define DISPLAY_RESET_TIME      2
+#define DISPLAY_XRUN_TIME       3
+
 #endif  // __qjackctlStatus_h
 
 // end of qjackctlStatus.h

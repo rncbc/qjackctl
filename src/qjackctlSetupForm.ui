@@ -402,6 +402,12 @@
                                 <property name="name">
                                     <cstring>InterfaceTextLabel</cstring>
                                 </property>
+                                <property name="frameShape">
+                                    <enum>NoFrame</enum>
+                                </property>
+                                <property name="frameShadow">
+                                    <enum>Plain</enum>
+                                </property>
                                 <property name="text">
                                     <string>&amp;Interface:</string>
                                 </property>
@@ -1349,6 +1355,187 @@
                     </widget>
                 </grid>
             </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>TabPage</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Display</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QButtonGroup" row="0" column="0">
+                        <property name="name">
+                            <cstring>TimeDisplayButtonGroup</cstring>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
+                        </property>
+                        <property name="margin">
+                            <number>4</number>
+                        </property>
+                        <property name="title">
+                            <string>Big Time Display</string>
+                        </property>
+                        <property name="flat">
+                            <bool>true</bool>
+                        </property>
+                        <vbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QRadioButton">
+                                <property name="name">
+                                    <cstring>TransportTimeRadioButton</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Transport &amp;Time (hh:mm:ss.ddd)</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+T</string>
+                                </property>
+                            </widget>
+                            <widget class="QRadioButton">
+                                <property name="name">
+                                    <cstring>TransportBBTRadioButton</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Transport &amp;BBT (bar:beat.ticks)</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+B</string>
+                                </property>
+                            </widget>
+                            <widget class="QRadioButton">
+                                <property name="name">
+                                    <cstring>ElapsedResetRadioButton</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Elapsed time since last &amp;Reset</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+R</string>
+                                </property>
+                            </widget>
+                            <widget class="QRadioButton">
+                                <property name="name">
+                                    <cstring>ElapsedXrunRadioButton</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Elapsed time since last &amp;XRUN</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+X</string>
+                                </property>
+                            </widget>
+                        </vbox>
+                    </widget>
+                    <widget class="QGroupBox" row="1" column="0">
+                        <property name="name">
+                            <cstring>MessagesGroupBox</cstring>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
+                        </property>
+                        <property name="margin">
+                            <number>4</number>
+                        </property>
+                        <property name="title">
+                            <string>Messages Window</string>
+                        </property>
+                        <property name="flat">
+                            <bool>true</bool>
+                        </property>
+                        <hbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel">
+                                <property name="name">
+                                    <cstring>MessagesFontTextLabel</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="paletteBackgroundColor">
+                                    <color>
+                                        <red>255</red>
+                                        <green>255</green>
+                                        <blue>255</blue>
+                                    </color>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="frameShape">
+                                    <enum>LineEditPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                    <enum>Sunken</enum>
+                                </property>
+                                <property name="alignment">
+                                    <set>AlignCenter</set>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Sample messages text font display</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>MessagesFontPushButton</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Font...</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+F</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Select font for the messages text display</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                </grid>
+            </widget>
         </widget>
     </grid>
 </widget>
@@ -1449,6 +1636,12 @@
         <receiver>qjackctlSetupForm</receiver>
         <slot>reject()</slot>
     </connection>
+    <connection>
+        <sender>MessagesFontPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>chooseMessagesFont()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>DetailsTabWidget</tabstop>
@@ -1482,25 +1675,33 @@
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
     <tabstop>AutoRefreshCheckBox</tabstop>
     <tabstop>TimeRefreshComboBox</tabstop>
+    <tabstop>TransportTimeRadioButton</tabstop>
+    <tabstop>TransportBBTRadioButton</tabstop>
+    <tabstop>ElapsedResetRadioButton</tabstop>
+    <tabstop>ElapsedXrunRadioButton</tabstop>
+    <tabstop>MessagesFontPushButton</tabstop>
+    <tabstop>OkPushButton</tabstop>
+    <tabstop>CancelPushButton</tabstop>
 </tabstops>
 <includes>
     <include location="global" impldecl="in declaration">qjackctlSetup.h</include>
     <include location="local" impldecl="in implementation">qjackctlSetupForm.ui.h</include>
 </includes>
 <slots>
-    <slot specifier="non virtual">toggleAsio( void )</slot>
+    <slot specifier="non virtual">toggleAsio()</slot>
     <slot specifier="non virtual">changeLatency( const QString &amp; )</slot>
     <slot specifier="non virtual">changeDriver( const QString &amp; sDriver )</slot>
     <slot specifier="non virtual">browseStartupScript()</slot>
+    <slot specifier="non virtual">chooseMessagesFont()</slot>
     <slot specifier="non virtual">browseShutdownScript()</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
-    <function access="private" specifier="non virtual">computeLatency( void )</function>
-    <function access="private" specifier="non virtual">stabilizeForm( void )</function>
-    <function specifier="non virtual">load(qjackctlSetup *pSetup)</function>
-    <function specifier="non virtual">save(qjackctlSetup *pSetup)</function>
+    <function access="private" specifier="non virtual">computeLatency()</function>
+    <function access="private" specifier="non virtual">stabilizeForm()</function>
+    <function specifier="non virtual">load( qjackctlSetup * pSetup )</function>
+    <function specifier="non virtual">save( qjackctlSetup * pSetup )</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>

@@ -73,6 +73,10 @@ public:
     bool    bXrunIgnoreFirst;
     bool    bAutoRefresh;
     int     iTimeRefresh;
+    
+    // Defaults...
+    int     iTimeDisplay;
+    QString sMessagesFont;
     QString sPatchbayPath;
 
     // Public I/O methods.

@@ -79,6 +79,8 @@ void qjackctlSetup::load (void)
     settings.endGroup();
 
     settings.beginGroup("/Defaults");
+    iTimeDisplay  = settings.readNumEntry("/TimeDisplay", 0);
+    sMessagesFont = settings.readEntry("/MessagesFont", QString::null);
     sPatchbayPath = settings.readEntry("/PatchbayPath", QString::null);
     settings.endGroup();
 }
@@ -132,6 +134,8 @@ void qjackctlSetup::save (void)
     settings.endGroup();
 
     settings.beginGroup("/Defaults");
+    settings.writeEntry("/TimeDisplay",  iTimeDisplay);
+    settings.writeEntry("/MessagesFont", sMessagesFont);
     settings.writeEntry("/PatchbayPath", sPatchbayPath);
     settings.endGroup();
 }

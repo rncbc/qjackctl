@@ -103,7 +103,7 @@
                         </property>
                         <widget class="QLabel" row="2" column="3">
                             <property name="name">
-                                <cstring>TransportBBTTextLabel</cstring>
+                                <cstring>TransportTimeTextLabel</cstring>
                             </property>
                             <property name="minimumSize">
                                 <size>
@@ -133,12 +133,12 @@
                                 <set>AlignVCenter|AlignRight</set>
                             </property>
                             <property name="toolTip" stdset="0">
-                                <string>Transport BBT (Bar:Beat.Tick)</string>
+                                <string>Transport time</string>
                             </property>
                         </widget>
                         <widget class="QLabel" row="1" column="1" rowspan="1" colspan="3">
                             <property name="name">
-                                <cstring>TransportTimeTextLabel</cstring>
+                                <cstring>TimeDisplayTextLabel</cstring>
                             </property>
                             <property name="paletteForegroundColor">
                                 <color>
@@ -157,7 +157,7 @@
                                 <set>AlignVCenter|AlignRight</set>
                             </property>
                             <property name="toolTip" stdset="0">
-                                <string>Transport timecode (hh:mm:ss.ddd)</string>
+                                <string>Time display</string>
                             </property>
                         </widget>
                         <widget class="QLabel" row="1" column="0">
@@ -666,11 +666,12 @@
     <function access="private" specifier="non virtual">appendMessagesColor( const QString &amp; s, const QString &amp; c )</function>
     <function access="private" specifier="non virtual">appendMessagesText( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessagesError( const QString &amp; s )</function>
+    <function access="private" specifier="non virtual">updateMessagesFont( void )</function>
     <function specifier="non virtual">stabilizeForm( void )</function>
     <function specifier="non virtual">resetXrunStats( void )</function>
     <function access="private" specifier="non virtual">updateBufferSize( void )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
-    <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( const QTime &amp; t, bool bElapsed )</function>
+    <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( int iStatusItem, const QTime &amp; t, bool bElapsed )</function>
     <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>
     <function specifier="non virtual">refreshXrunStats( void )</function>
     <function access="private" specifier="non virtual">closePipes( void )</function>

@@ -22,6 +22,7 @@
 
 #include <qvalidator.h>
 #include <qfiledialog.h>
+#include <qfontdialog.h>
 
 #include "config.h"
 
@@ -146,6 +147,18 @@ void qjackctlSetupForm::browseStartupScript()
 }
 
 
+// The messages font selection dialog.
+void qjackctlSetupForm::chooseMessagesFont()
+{
+    bool  bOk  = false;
+    QFont font = QFontDialog::getFont(&bOk, MessagesFontTextLabel->font(), this);
+    if (bOk) {
+        MessagesFontTextLabel->setFont(font);
+        MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+    }
+}
+
+
 // Shutdown script browse slot.
 void qjackctlSetupForm::browseShutdownScript()
 {
@@ -214,6 +227,14 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     XrunIgnoreFirstCheckBox->setChecked(pSetup->bXrunIgnoreFirst);
     AutoRefreshCheckBox->setChecked(pSetup->bAutoRefresh);
     TimeRefreshComboBox->setCurrentText(QString::number(pSetup->iTimeRefresh));
+    
+    // Load Defaults...
+    TimeDisplayButtonGroup->setButton(pSetup->iTimeDisplay);
+    QFont font;
+    if (pSetup->sMessagesFont.isEmpty() || !font.fromString(pSetup->sMessagesFont))
+        font = QFont("Terminal", 8);
+    MessagesFontTextLabel->setFont(font);
+    MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 }
 
 
@@ -257,6 +278,10 @@ void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
     pSetup->bAutoRefresh        = AutoRefreshCheckBox->isChecked();
     pSetup->iTimeRefresh        = TimeRefreshComboBox->currentText().toInt();
 
+    // Save Defaults...
+    pSetup->iTimeDisplay  = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
+    pSetup->sMessagesFont = MessagesFontTextLabel->font().toString();
+    
     // Save combobox history...
     pSetup->settings.beginGroup("/History");
     pSetup->saveComboBoxHistory(ServerComboBox);
@@ -273,4 +298,3 @@ void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
 
 
 // end of qjackctlSetupForm.ui.h
-
