@@ -121,5 +121,5 @@ TEMPLATE = app
 CONFIG  += qt @ac_thread@ warn_on @ac_debug@
 LANGUAGE = C++
 
-LIBS    += -ljack -lasound
+LIBS    += @ac_libs@
 

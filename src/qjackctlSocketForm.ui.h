@@ -39,6 +39,10 @@ void qjackctlSocketForm::init()
     m_pAddPlugMenu = NULL;
 
     PlugListView->setSorting(-1);
+
+#ifndef CONFIG_ALSA_SEQ
+	MidiRadioButton->setEnabled(false);
+#endif
 }
 
 
@@ -91,6 +95,10 @@ void qjackctlSocketForm::setConnectCount ( int iConnectCount )
 {
     SocketTypeGroup->setEnabled(iConnectCount < 1);
     ExclusiveCheckBox->setEnabled(iConnectCount < 2);
+
+#ifndef CONFIG_ALSA_SEQ
+	MidiRadioButton->setEnabled(false);
+#endif
 }
 
 
@@ -384,6 +392,7 @@ void qjackctlSocketForm::socketTypeChanged()
             pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET];
         SocketTabWidget->setTabIconSet(SocketTabWidget->page(0), QIconSet(*pXpmSocket));
         pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG];
+#ifdef CONFIG_ALSA_SEQ
         if (m_pAlsaSeq) {
             // Readd all subscribers...
             snd_seq_client_info_t *pClientInfo;
@@ -418,6 +427,7 @@ void qjackctlSocketForm::socketTypeChanged()
                 }
             }
         }
+#endif	// CONFIG_ALSA_SEQ
         break;
     }
 
@@ -465,6 +475,7 @@ void qjackctlSocketForm::clientNameChanged()
         }
         break;
       case 1: // QJACKCTL_SOCKETTYPE_MIDI
+#ifdef CONFIG_ALSA_SEQ
         if (m_pAlsaSeq) {
             // Fill sequencer plugs...
             snd_seq_client_info_t *pClientInfo;
@@ -495,6 +506,7 @@ void qjackctlSocketForm::clientNameChanged()
                 }
             }
         }
+#endif	// CONFIG_ALSA_SEQ
         break;
     }
 

@@ -5,6 +5,11 @@ ChangeLog
 
 0.2.16   2005-02-16  OSS device name selection.
 
+- After several Mac OS X user requests, ALSA/MIDI sequencer support is
+  now an option, otherwise detected at configure time and conditionally
+  compiled in if, and only if, ALSA is found available (which has been
+  a primordial assumption on Linux systems:).
+  
 - Actual OSS device selection menu now featured on setup dialog; these
   adds to the device selection button menus for the OSS driver settings.
 

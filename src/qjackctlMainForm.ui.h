@@ -136,10 +136,10 @@ void qjackctlMainForm::destroy (void)
     // Terminate local ALSA sequencer interface.
     if (m_pAlsaNotifier)
         delete m_pAlsaNotifier;
-
+#ifdef CONFIG_ALSA_SEQ
     if (m_pAlsaSeq)
         snd_seq_close(m_pAlsaSeq);
-
+#endif
     m_pAlsaNotifier = NULL;
     m_pAlsaSeq = NULL;
 
@@ -221,7 +221,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
         m_pStdoutNotifier = new QSocketNotifier(g_fdStdout[QJACKCTL_FDREAD], QSocketNotifier::Read, this);
         QObject::connect(m_pStdoutNotifier, SIGNAL(activated(int)), this, SLOT(stdoutNotifySlot(int)));
     }
-
+    
+#ifdef CONFIG_ALSA_SEQ
     // Start our ALSA sequencer interface.
     if (snd_seq_open(&m_pAlsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, 0) < 0)
         m_pAlsaSeq = NULL;
@@ -250,7 +251,6 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
             QObject::connect(m_pAlsaNotifier, SIGNAL(activated(int)), this, SLOT(alsaNotifySlot(int)));
         }
     }
-    
     // Could we start without it?
     if (m_pAlsaSeq == NULL) {
         appendMessagesError(tr("Could not open ALSA sequencer as a client.\n\nMIDI patchbay will be not available."));
@@ -261,7 +261,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
         if (m_pPatchbayForm)
             m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
     }
-    
+#endif
+
     // Load patchbay from default path.
     if (m_pPatchbayForm && !m_pSetup->sPatchbayPath.isEmpty())
         m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
@@ -1393,11 +1394,11 @@ void qjackctlMainForm::shutNotifyEvent (void)
 // ALSA announce slot.
 void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 {
+#ifdef CONFIG_ALSA_SEQ
     snd_seq_event_t *pAlsaEvent;
-
     snd_seq_event_input(m_pAlsaSeq, &pAlsaEvent);
     snd_seq_free_event(pAlsaEvent);
-
+#endif
     // Log some message here, if new.
     if (m_iAlsaRefresh == 0)
         appendMessagesColor(tr("MIDI connection graph change."), "#66cc99");

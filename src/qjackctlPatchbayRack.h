@@ -27,8 +27,15 @@
 #include <qstringlist.h>
 #include <qptrlist.h>
 
+#include "config.h"
+
 #include <jack/jack.h>
+
+#ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
+#else
+typedef void snd_seq_t;
+#endif
 
 // Patchbay socket types.
 #define QJACKCTL_SOCKETTYPE_AUDIO   0

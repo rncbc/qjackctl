@@ -506,6 +506,8 @@ void qjackctlSocketList::clientPortsSnapshot (void)
         }
     }
 
+#ifdef CONFIG_ALSA_SEQ
+
     // Grab ALSA subscribers's...
     if (m_pAlsaSeq) {
         // Grab the ALSA subscriptions...
@@ -553,6 +555,8 @@ void qjackctlSocketList::clientPortsSnapshot (void)
             }
         }
     }
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 
@@ -1719,6 +1723,8 @@ void qjackctlPatchbay::socketPlugAudioSnapshot ( qjackctlSocketItem *pOSocket, q
 // MIDI connections snapshot.
 void qjackctlPatchbay::socketPlugMidiSnapshot ( qjackctlSocketItem *pOSocket, qjackctlPlugItem *pOPlug )
 {
+#ifdef CONFIG_ALSA_SEQ
+
     // ALSA sequencer descriptors...
     snd_seq_t *pAlsaSeq = alsaSeq();
 
@@ -1777,6 +1783,8 @@ void qjackctlPatchbay::socketPlugMidiSnapshot ( qjackctlSocketItem *pOSocket, qj
             }
         }
     }
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 

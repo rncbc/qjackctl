@@ -24,7 +24,13 @@
 
 #include "qjackctlConnect.h"
 
+#include "config.h"
+
+#ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
+#else
+typedef void snd_seq_t;
+#endif
 
 // Forward declarations.
 class qjackctlAlsaPort;

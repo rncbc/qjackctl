@@ -557,6 +557,8 @@ void qjackctlPatchbayRack::loadMidiPorts ( QPtrList<qjackctlMidiPort>& midiports
 
     midiports.clear();
 
+#ifdef CONFIG_ALSA_SEQ
+
     unsigned int uiAlsaFlags;
     if (bReadable)
         uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
@@ -590,6 +592,8 @@ void qjackctlPatchbayRack::loadMidiPorts ( QPtrList<qjackctlMidiPort>& midiports
             }
         }
     }
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 
@@ -622,6 +626,8 @@ QString qjackctlPatchbayRack::getMidiPortName ( qjackctlMidiPort *pMidiPort )
 // MIDI port-pair name string.
 void qjackctlPatchbayRack::setMidiPort ( qjackctlMidiPort *pMidiPort, int iAlsaClient, int iAlsaPort )
 {
+#ifdef CONFIG_ALSA_SEQ
+
     snd_seq_client_info_t *pClientInfo;
     snd_seq_port_info_t   *pPortInfo;
 
@@ -636,12 +642,16 @@ void qjackctlPatchbayRack::setMidiPort ( qjackctlMidiPort *pMidiPort, int iAlsaC
 
     if (snd_seq_get_any_port_info(m_pAlsaSeq, iAlsaClient, iAlsaPort, pPortInfo) == 0)
         pMidiPort->sPortName = snd_seq_port_info_get_name(pPortInfo);
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 
 // MIDI port-pair connection executive.
 void qjackctlPatchbayRack::connectMidiPorts ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
 {
+#ifdef CONFIG_ALSA_SEQ
+
     unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
 
     snd_seq_port_subscribe_t *pAlsaSubs;
@@ -661,12 +671,16 @@ void qjackctlPatchbayRack::connectMidiPorts ( qjackctlMidiPort *pOutputPort, qja
         uiCableFlags = QJACKCTL_CABLE_CONNECTED;
 
     emit cableConnected(getMidiPortName(pOutputPort), getMidiPortName(pInputPort), uiCableFlags);
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 
 // MIDI port-pair disconnection executive.
 void qjackctlPatchbayRack::disconnectMidiPorts ( qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort )
 {
+#ifdef CONFIG_ALSA_SEQ
+
     unsigned int uiCableFlags = QJACKCTL_CABLE_FAILED;
 
     snd_seq_port_subscribe_t *pAlsaSubs;
@@ -686,6 +700,8 @@ void qjackctlPatchbayRack::disconnectMidiPorts ( qjackctlMidiPort *pOutputPort, 
         uiCableFlags = QJACKCTL_CABLE_DISCONNECTED;
 
     emit cableConnected(getMidiPortName(pOutputPort), getMidiPortName(pInputPort), uiCableFlags);
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 
@@ -699,6 +715,8 @@ void qjackctlPatchbayRack::checkMidiPorts ( qjackctlMidiPort *pOutputPort, qjack
 // Check and enforce if a midi output client:port is connected to one input.
 void qjackctlPatchbayRack::connectMidiSocketPorts (  qjackctlPatchbaySocket *pOutputSocket, qjackctlMidiPort *pOutputPort, qjackctlPatchbaySocket *pInputSocket, qjackctlMidiPort *pInputPort )
 {
+#ifdef CONFIG_ALSA_SEQ
+
     bool bConnected = false;
 
     snd_seq_query_subscribe_t *pAlsaSubs;
@@ -750,6 +768,8 @@ void qjackctlPatchbayRack::connectMidiSocketPorts (  qjackctlPatchbaySocket *pOu
     } else {
         emit cableConnected(getMidiPortName(pOutputPort), getMidiPortName(pInputPort), QJACKCTL_CABLE_CHECKED);
     }
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 

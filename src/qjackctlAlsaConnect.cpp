@@ -158,6 +158,8 @@ int qjackctlAlsaClientList::updateClientPorts (void)
     int iDirtyCount = 0;
 
     markClientPorts(0);
+    
+#ifdef CONFIG_ALSA_SEQ
 
     unsigned int uiAlsaFlags;
     if (isReadable())
@@ -203,6 +205,8 @@ int qjackctlAlsaClientList::updateClientPorts (void)
             }
         }
     }
+    
+#endif	// CONFIG_ALSA_SEQ
 
     cleanClientPorts(0);
 
@@ -269,6 +273,8 @@ snd_seq_t *qjackctlAlsaConnect::alsaSeq (void)
 // Connection primitive.
 void qjackctlAlsaConnect::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
+#ifdef CONFIG_ALSA_SEQ
+
     qjackctlAlsaPort *pOAlsa = (qjackctlAlsaPort *) pOPort;
     qjackctlAlsaPort *pIAlsa = (qjackctlAlsaPort *) pIPort;
 
@@ -286,12 +292,16 @@ void qjackctlAlsaConnect::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortI
     snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
 
     snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs);
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 
 // Disconnection primitive.
 void qjackctlAlsaConnect::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
+#ifdef CONFIG_ALSA_SEQ
+
     qjackctlAlsaPort *pOAlsa = (qjackctlAlsaPort *) pOPort;
     qjackctlAlsaPort *pIAlsa = (qjackctlAlsaPort *) pIPort;
 
@@ -309,12 +319,16 @@ void qjackctlAlsaConnect::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPo
     snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
 
     snd_seq_unsubscribe_port(m_pAlsaSeq, pAlsaSubs);
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 
 // Update port connection references.
 void qjackctlAlsaConnect::updateConnections (void)
 {
+#ifdef CONFIG_ALSA_SEQ
+
     snd_seq_query_subscribe_t *pAlsaSubs;
     snd_seq_addr_t seq_addr;
 
@@ -354,6 +368,8 @@ void qjackctlAlsaConnect::updateConnections (void)
             }
         }
     }
+
+#endif	// CONFIG_ALSA_SEQ
 }
 
 

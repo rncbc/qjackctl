@@ -29,8 +29,9 @@
 
 #include "config.h"
 
+#ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
-
+#endif
 
 // Kind of constructor.
 void qjackctlSetupForm::init (void)
@@ -557,6 +558,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 
 	int iCards = 0;
 
+#ifdef CONFIG_ALSA_SEQ
 	if (bAlsa) {
 		// Enumerate the ALSA cards and PCM harfware devices...
 		snd_ctl_t *handle;
@@ -594,7 +596,9 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 			}
 		}
 	}	// Enumerate the OSS Audio devices...
-	else if (bOss) {
+	else
+#endif 	// CONFIG_ALSA_SEQ
+	if (bOss) {
 		QFile file("/dev/sndstat");
 		if (file.open(IO_ReadOnly)) {
 			QTextStream stream(&file);

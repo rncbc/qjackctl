@@ -41,6 +41,10 @@ void qjackctlConnectionsForm::init (void)
 	QObject::connect(JackConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
 	QObject::connect(AlsaConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
 	QObject::connect(AlsaConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
+
+#ifndef CONFIG_ALSA_SEQ
+	ConnectionsTabWidget->setTabEnabled(AlsaConnectTab, false);
+#endif
 }
 
 

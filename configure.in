@@ -32,6 +32,12 @@ if test "x$ac_system_tray" = "xyes"; then
    AC_DEFINE(CONFIG_SYSTEM_TRAY, 1, [Define if system tray is enabled.])
 fi
 
+dnl Disable ALSA sequencer support option.
+AC_ARG_ENABLE(alsa_seq,
+  [  --disable-alsa-seq   disable ALSA/MIDI sequencer support (default=no)],
+  [ac_alsa_seq="no"],
+  [ac_alsa_seq="yes"])
+
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CPP
@@ -126,12 +132,21 @@ AC_CHECK_LIB(jack, main, [ac_jack_lib="yes"], [ac_jack_lib="no"])
 if test "x$ac_jack_lib" = "xno"; then
    AC_MSG_ERROR([JACK library not found.])
 fi
+ac_libs="-ljack"
 
-dnl Check for ALSA libraries.
-AC_CHECK_LIB(asound, main, [ac_alsa_lib="yes"], [ac_alsa_lib="no"])
-if test "x$ac_alsa_lib" = "xno"; then
-   AC_MSG_ERROR([ALSA library not found.])
+dnl Check for ALSA libraries and primarily
+dnl for ALSA/MIDI sequencer support.
+if test "x$ac_alsa_seq" = "xyes"; then
+   AC_CHECK_LIB(asound, main, [ac_alsa_lib="yes"], [ac_alsa_lib="no"])
+   if test "x$ac_alsa_lib" = "xno"; then
+      AC_MSG_WARN([*** ALSA library not found.])
+      ac_alsa_seq="no"
+   else
+      ac_libs="-lasound $ac_libs"
+   fi
 fi
+
+AC_SUBST(ac_libs)
 
 dnl Checks for header files.
 AC_HEADER_STDC
@@ -150,10 +165,16 @@ if test "x$ac_jack_statistics_h" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_STATISTICS, 1, [Define if jack/statistics.h is available.])
 fi
 
-dnl Check for ALSA headers.
-AC_CHECK_HEADER(alsa/asoundlib.h, [ac_alsa_h="yes"], [ac_alsa_h="no"])
-if test "x$ac_alsa_h" = "xno"; then
-   AC_MSG_ERROR([ALSA headers not found.])
+dnl Check for ALSA headers and ultimately
+dnl for ALSA/MIDI sequencer support.
+if test "x$ac_alsa_seq" = "xyes"; then
+   AC_CHECK_HEADER(alsa/asoundlib.h, [ac_alsa_h="yes"], [ac_alsa_h="no"])
+   if test "x$ac_alsa_h" = "xno"; then
+      AC_MSG_ERROR([ALSA headers not found.])
+   fi
+   AC_DEFINE(CONFIG_ALSA_SEQ, 1, [Define if ALSA/MIDI sequencer support is enabled.])
+else
+   AC_MSG_WARN([*** ALSA/MIDI sequencer support will be disabled.])
 fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.
