@@ -80,6 +80,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     m_pSetup->loadComboBoxHistory(StartupScriptShellComboBox);
     m_pSetup->loadComboBoxHistory(PostStartupScriptShellComboBox);
     m_pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
+    m_pSetup->loadComboBoxHistory(PostShutdownScriptShellComboBox);
     m_pSetup->loadComboBoxHistory(XrunRegexComboBox);
     m_pSetup->loadComboBoxHistory(ActivePatchbayPathComboBox);
     m_pSetup->loadComboBoxHistory(ServerConfigNameComboBox);
@@ -91,6 +92,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     PostStartupScriptShellComboBox->setCurrentText(m_pSetup->sPostStartupScriptShell);
     ShutdownScriptCheckBox->setChecked(m_pSetup->bShutdownScript);
     ShutdownScriptShellComboBox->setCurrentText(m_pSetup->sShutdownScriptShell);
+    PostShutdownScriptCheckBox->setChecked(m_pSetup->bPostShutdownScript);
+    PostShutdownScriptShellComboBox->setCurrentText(m_pSetup->sPostShutdownScriptShell);
     StdoutCaptureCheckBox->setChecked(m_pSetup->bStdoutCapture);
     XrunRegexComboBox->setCurrentText(m_pSetup->sXrunRegex);
     XrunIgnoreFirstCheckBox->setChecked(m_pSetup->bXrunIgnoreFirst);
@@ -475,6 +478,11 @@ void qjackctlSetupForm::stabilizeForm (void)
     ShutdownScriptSymbolPushButton->setEnabled(bEnabled);
     ShutdownScriptBrowsePushButton->setEnabled(bEnabled);
 
+    bEnabled = PostShutdownScriptCheckBox->isChecked();
+    PostShutdownScriptShellComboBox->setEnabled(bEnabled);
+    PostShutdownScriptSymbolPushButton->setEnabled(bEnabled);
+    PostShutdownScriptBrowsePushButton->setEnabled(bEnabled);
+
     bEnabled = StdoutCaptureCheckBox->isChecked();
     XrunRegexTextLabel->setEnabled(bEnabled);
     XrunRegexComboBox->setEnabled(bEnabled);
@@ -544,6 +552,12 @@ void qjackctlSetupForm::symbolShutdownScript (void)
     symbolMenu(ShutdownScriptShellComboBox->lineEdit(), ShutdownScriptSymbolPushButton);
 }
 
+// Post-shutdown script meta-symbol button slot.
+void qjackctlSetupForm::symbolPostShutdownScript (void)
+{
+    symbolMenu(PostShutdownScriptShellComboBox->lineEdit(), PostShutdownScriptSymbolPushButton);
+}
+
 
 // Startup script browse slot.
 void qjackctlSetupForm::browseStartupScript()
@@ -594,6 +608,24 @@ void qjackctlSetupForm::browseShutdownScript()
     if (!sFileName.isEmpty()) {
         ShutdownScriptShellComboBox->setCurrentText(sFileName);
         ShutdownScriptShellComboBox->setFocus();
+        optionsChanged();
+    }
+}
+
+
+// Post-shutdown script browse slot.
+void qjackctlSetupForm::browsePostShutdownScript()
+{
+    QString sFileName = QFileDialog::getOpenFileName(
+            PostShutdownScriptShellComboBox->currentText(), // Start here.
+            QString::null,                                  // Filter (all files?)
+            this, 0,                                        // Parent and name (none)
+            tr("Post-shutdown script")                      // Caption.
+    );
+
+    if (!sFileName.isEmpty()) {
+        PostShutdownScriptShellComboBox->setCurrentText(sFileName);
+        PostShutdownScriptShellComboBox->setFocus();
         optionsChanged();
     }
 }
@@ -686,35 +718,37 @@ void qjackctlSetupForm::accept (void)
         // Always save current settings...
         savePreset(m_pSetup->sDefPreset);
         // Save Options...
-        m_pSetup->bStartupScript          = StartupScriptCheckBox->isChecked();
-        m_pSetup->sStartupScriptShell     = StartupScriptShellComboBox->currentText();
-        m_pSetup->bPostStartupScript      = PostStartupScriptCheckBox->isChecked();
-        m_pSetup->sPostStartupScriptShell = PostStartupScriptShellComboBox->currentText();
-        m_pSetup->bShutdownScript         = ShutdownScriptCheckBox->isChecked();
-        m_pSetup->sShutdownScriptShell    = ShutdownScriptShellComboBox->currentText();
-        m_pSetup->bStdoutCapture          = StdoutCaptureCheckBox->isChecked();
-        m_pSetup->sXrunRegex              = XrunRegexComboBox->currentText();
-        m_pSetup->bXrunIgnoreFirst        = XrunIgnoreFirstCheckBox->isChecked();
-        m_pSetup->bActivePatchbay         = ActivePatchbayCheckBox->isChecked();
-        m_pSetup->sActivePatchbayPath     = ActivePatchbayPathComboBox->currentText();
-        m_pSetup->bAutoRefresh            = AutoRefreshCheckBox->isChecked();
-        m_pSetup->iTimeRefresh            = TimeRefreshComboBox->currentText().toInt();
-        m_pSetup->bBezierLines            = BezierLinesCheckBox->isChecked();
+        m_pSetup->bStartupScript           = StartupScriptCheckBox->isChecked();
+        m_pSetup->sStartupScriptShell      = StartupScriptShellComboBox->currentText();
+        m_pSetup->bPostStartupScript       = PostStartupScriptCheckBox->isChecked();
+        m_pSetup->sPostStartupScriptShell  = PostStartupScriptShellComboBox->currentText();
+        m_pSetup->bShutdownScript          = ShutdownScriptCheckBox->isChecked();
+        m_pSetup->sShutdownScriptShell     = ShutdownScriptShellComboBox->currentText();
+        m_pSetup->bPostShutdownScript      = PostShutdownScriptCheckBox->isChecked();
+        m_pSetup->sPostShutdownScriptShell = PostShutdownScriptShellComboBox->currentText();
+        m_pSetup->bStdoutCapture           = StdoutCaptureCheckBox->isChecked();
+        m_pSetup->sXrunRegex               = XrunRegexComboBox->currentText();
+        m_pSetup->bXrunIgnoreFirst         = XrunIgnoreFirstCheckBox->isChecked();
+        m_pSetup->bActivePatchbay          = ActivePatchbayCheckBox->isChecked();
+        m_pSetup->sActivePatchbayPath      = ActivePatchbayPathComboBox->currentText();
+        m_pSetup->bAutoRefresh             = AutoRefreshCheckBox->isChecked();
+        m_pSetup->iTimeRefresh             = TimeRefreshComboBox->currentText().toInt();
+        m_pSetup->bBezierLines             = BezierLinesCheckBox->isChecked();
         // Save Defaults...
-        m_pSetup->iTimeDisplay            = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
-        m_pSetup->iTimeFormat             = TimeFormatComboBox->currentItem();
-        m_pSetup->sMessagesFont           = MessagesFontTextLabel->font().toString();
-        m_pSetup->bMessagesLimit          = MessagesLimitCheckBox->isChecked();
-        m_pSetup->iMessagesLimitLines     = MessagesLimitLinesComboBox->currentText().toInt();
-        m_pSetup->sDisplayFont1           = DisplayFont1TextLabel->font().toString();
-        m_pSetup->sDisplayFont2           = DisplayFont2TextLabel->font().toString();
-        m_pSetup->bStartJack              = StartJackCheckBox->isChecked();
-        m_pSetup->bQueryClose             = QueryCloseCheckBox->isChecked();
-        m_pSetup->bKeepOnTop              = KeepOnTopCheckBox->isChecked();
-        m_pSetup->bSystemTray             = SystemTrayCheckBox->isChecked();
-        m_pSetup->bServerConfig           = ServerConfigCheckBox->isChecked();
-        m_pSetup->sServerConfigName       = ServerConfigNameComboBox->currentText();
-        m_pSetup->bServerConfigTemp       = ServerConfigTempCheckBox->isChecked();
+        m_pSetup->iTimeDisplay             = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
+        m_pSetup->iTimeFormat              = TimeFormatComboBox->currentItem();
+        m_pSetup->sMessagesFont            = MessagesFontTextLabel->font().toString();
+        m_pSetup->bMessagesLimit           = MessagesLimitCheckBox->isChecked();
+        m_pSetup->iMessagesLimitLines      = MessagesLimitLinesComboBox->currentText().toInt();
+        m_pSetup->sDisplayFont1            = DisplayFont1TextLabel->font().toString();
+        m_pSetup->sDisplayFont2            = DisplayFont2TextLabel->font().toString();
+        m_pSetup->bStartJack               = StartJackCheckBox->isChecked();
+        m_pSetup->bQueryClose              = QueryCloseCheckBox->isChecked();
+        m_pSetup->bKeepOnTop               = KeepOnTopCheckBox->isChecked();
+        m_pSetup->bSystemTray              = SystemTrayCheckBox->isChecked();
+        m_pSetup->bServerConfig            = ServerConfigCheckBox->isChecked();
+        m_pSetup->sServerConfigName        = ServerConfigNameComboBox->currentText();
+        m_pSetup->bServerConfigTemp        = ServerConfigTempCheckBox->isChecked();
     }
 
     // Save combobox history...
@@ -725,6 +759,7 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->saveComboBoxHistory(StartupScriptShellComboBox);
     m_pSetup->saveComboBoxHistory(PostStartupScriptShellComboBox);
     m_pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);
+    m_pSetup->saveComboBoxHistory(PostShutdownScriptShellComboBox);
     m_pSetup->saveComboBoxHistory(XrunRegexComboBox);
     m_pSetup->saveComboBoxHistory(ActivePatchbayPathComboBox);
     m_pSetup->saveComboBoxHistory(ServerConfigNameComboBox);

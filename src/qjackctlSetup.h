@@ -101,6 +101,8 @@ public:
     QString sPostStartupScriptShell;
     bool    bShutdownScript;
     QString sShutdownScriptShell;
+    bool    bPostShutdownScript;
+    QString sPostShutdownScriptShell;
     bool    bStdoutCapture;
     QString sXrunRegex;
     bool    bXrunIgnoreFirst;

@@ -1711,13 +1711,13 @@
                                     </font>
                                 </property>
                                 <property name="text">
-                                    <string>Execute script after Shut&amp;down:</string>
+                                    <string>Execute script on Shut&amp;down:</string>
                                 </property>
                                 <property name="accel">
                                     <string>Alt+D</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>Whether to execute a custom shell script after shuting down the JACK audio server.</string>
+                                    <string>Whether to execute a custom shell script before shuting down the JACK audio server.</string>
                                 </property>
                             </widget>
                             <widget class="QComboBox" row="0" column="1">
@@ -1999,12 +1999,133 @@
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>Browse for script to be executed after shutting down the JACK audio server</string>
+                                    <string>Browse for script to be executed before shutting down the JACK audio server</string>
                                 </property>
                             </widget>
                             <widget class="QComboBox" row="2" column="1">
                                 <property name="name">
                                     <cstring>ShutdownScriptShellComboBox</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Command line to be executed before shutting down the JACK audio server</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="3" column="0">
+                                <property name="name">
+                                    <cstring>PostShutdownScriptCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Execute script after Shu&amp;tdown:</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+T</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to execute a custom shell script after shuting down the JACK audio server.</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="3" column="2">
+                                <property name="name">
+                                    <cstring>PostShutdownScriptSymbolPushButton</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>26</width>
+                                        <height>26</height>
+                                    </size>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&gt;</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Scripting argument meta-symbols</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="3" column="3">
+                                <property name="name">
+                                    <cstring>PostShutdownScriptBrowsePushButton</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>26</width>
+                                        <height>26</height>
+                                    </size>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>...</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Browse for script to be executed after shutting down the JACK audio server</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="3" column="1">
+                                <property name="name">
+                                    <cstring>PostShutdownScriptShellComboBox</cstring>
                                 </property>
                                 <property name="sizePolicy">
                                     <sizepolicy>
@@ -3237,6 +3358,12 @@
         <slot>browseShutdownScript()</slot>
     </connection>
     <connection>
+        <sender>PostShutdownScriptBrowsePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>browsePostShutdownScript()</slot>
+    </connection>
+    <connection>
         <sender>StartupScriptSymbolPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3253,6 +3380,12 @@
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>symbolShutdownScript()</slot>
+    </connection>
+    <connection>
+        <sender>PostShutdownScriptSymbolPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>symbolPostShutdownScript()</slot>
     </connection>
     <connection>
         <sender>ActivePatchbayPathPushButton</sender>
@@ -3495,6 +3628,18 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
+        <sender>PostShutdownScriptCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>PostShutdownScriptShellComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
         <sender>StdoutCaptureCheckBox</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3672,6 +3817,10 @@
     <tabstop>ShutdownScriptShellComboBox</tabstop>
     <tabstop>ShutdownScriptSymbolPushButton</tabstop>
     <tabstop>ShutdownScriptBrowsePushButton</tabstop>
+    <tabstop>PostShutdownScriptCheckBox</tabstop>
+    <tabstop>PostShutdownScriptShellComboBox</tabstop>
+    <tabstop>PostShutdownScriptSymbolPushButton</tabstop>
+    <tabstop>PostShutdownScriptBrowsePushButton</tabstop>
     <tabstop>StdoutCaptureCheckBox</tabstop>
     <tabstop>XrunRegexComboBox</tabstop>
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
@@ -3721,9 +3870,11 @@
     <slot specifier="non virtual">symbolStartupScript()</slot>
     <slot specifier="non virtual">symbolPostStartupScript()</slot>
     <slot specifier="non virtual">symbolShutdownScript()</slot>
+    <slot specifier="non virtual">symbolPostShutdownScript()</slot>
     <slot specifier="non virtual">browseStartupScript()</slot>
     <slot specifier="non virtual">browsePostStartupScript()</slot>
     <slot specifier="non virtual">browseShutdownScript()</slot>
+    <slot specifier="non virtual">browsePostShutdownScript()</slot>
     <slot specifier="non virtual">browseActivePatchbayPath()</slot>
     <slot specifier="non virtual">chooseDisplayFont1()</slot>
     <slot specifier="non virtual">chooseDisplayFont2()</slot>

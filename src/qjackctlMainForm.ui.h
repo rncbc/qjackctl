@@ -665,6 +665,10 @@ void qjackctlMainForm::stopJack (void)
         QString sTemp = tr("Stopping");
         updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...", QJACKCTL_STOPPING);
         updateStatus(STATUS_SERVER_STATE, sTemp);
+        // Do we have any pre-shutdown script?...
+        if (m_pSetup->bShutdownScript && !m_pSetup->sShutdownScriptShell.isEmpty())
+            shellExecute(m_pSetup->sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
+        // Now it's the time to real try stopping the server daemon...
         if (m_pJack->isRunning()) {
             m_pJack->tryTerminate();
             return;
@@ -729,9 +733,9 @@ void qjackctlMainForm::processJackExit (void)
         // Destroy it.
         delete m_pJack;
         m_pJack = NULL;
-        // Do we have any shutdown script?...
-        if (!m_bJackSurvive && m_pSetup->bShutdownScript && !m_pSetup->sShutdownScriptShell.isEmpty())
-            shellExecute(m_pSetup->sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
+        // Do we have any post-shutdown script?...
+        if (!m_bJackSurvive && m_pSetup->bPostShutdownScript && !m_pSetup->sPostShutdownScriptShell.isEmpty())
+            shellExecute(m_pSetup->sPostShutdownScriptShell, tr("Post-shutdown script..."), tr("Post-shutdown script terminated"));
     }
 
     QString sTemp;
