@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.4   2003-08-28  Minor changes and bugfixes.
+0.0.4   2003-08-29  Minor changes and bugfixes.
 
 - The patchbay port lists are now sorted in a more numerical friendly manner
   (as suggested by Steve Harris); the sort code has been "borrowed" from
@@ -18,6 +18,10 @@ ChangeLog
 
 - An auto-refresh option for the patchbay connections is now available,
   for those cases when client code just can't handle properly some callbacks.
+
+- Window positioning and sizing is now almost persistent across sessions;
+  as before, position is saved for the minimal view mode; but now, the details
+  dialog view mode gets its position and size independatly saved also.
 
 0.0.3   2003-08-07  Integrated visual patchbay.
 

@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>509</width>
-            <height>275</height>
+            <width>507</width>
+            <height>252</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -1049,7 +1049,7 @@
                             <string>&amp;Auto refresh connections patchbay, every (secs):</string>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>Whether to refresh the connections patchbay.</string>
+                            <string>Whether to refresh the connections patchbay automatically.</string>
                         </property>
                     </widget>
                     <widget class="QComboBox" row="5" column="2">
@@ -1101,7 +1101,7 @@
                             <number>1</number>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>Time in seconds between each refresh cycle.</string>
+                            <string>Time in seconds between each auto-refresh cycle.</string>
                         </property>
                     </widget>
                     <spacer row="4" column="2">
@@ -1117,7 +1117,7 @@
                         <property name="sizeHint">
                             <size>
                                 <width>4</width>
-                                <height>48</height>
+                                <height>4</height>
                             </size>
                         </property>
                     </spacer>
@@ -1134,23 +1134,6 @@
                         <property name="sizeHint">
                             <size>
                                 <width>4</width>
-                                <height>48</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="5" column="3">
-                        <property name="name">
-                            <cstring>spacer9</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>144</width>
                                 <height>4</height>
                             </size>
                         </property>
@@ -1215,7 +1198,7 @@
                             <number>1</number>
                         </property>
                         <property name="resizeMode">
-                            <enum>NoColumn</enum>
+                            <enum>AllColumns</enum>
                         </property>
                         <property name="toolTip" stdset="0">
                             <string>Statistics since last server startup</string>
@@ -1266,7 +1249,7 @@
                             </widget>
                             <spacer>
                                 <property name="name">
-                                    <cstring>spacer10</cstring>
+                                    <cstring>spacer9</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -1447,7 +1430,7 @@
                     </widget>
                     <spacer row="1" column="0">
                         <property name="name">
-                            <cstring>spacer11</cstring>
+                            <cstring>spacer10</cstring>
                         </property>
                         <property name="orientation">
                             <enum>Vertical</enum>
@@ -1490,7 +1473,7 @@
         <sender>DetailsCheckBox</sender>
         <signal>toggled(bool)</signal>
         <receiver>qjackctlMainForm</receiver>
-        <slot>stabilizeForm()</slot>
+        <slot>toggleDetails()</slot>
     </connection>
     <connection>
         <sender>RealtimeCheckBox</sender>
@@ -1626,7 +1609,9 @@
     <variable access="private">float m_fXrunLast;</variable>
     <variable access="private">QTime m_tXrunLast;</variable>
     <variable access="private">QListViewItem *m_apStats[9];</variable>
-    <variable access="private">QPoint m_posSave;</variable>
+    <variable access="private">QPoint m_pos;</variable>
+    <variable access="private">QPoint m_pos1;</variable>
+    <variable access="private">QSize m_size1;</variable>
     <variable access="private">qjackctlPatchbay *m_pJackPatchbay;</variable>
 </variables>
 <slots>
@@ -1635,7 +1620,7 @@
     <slot specifier="non virtual">readJackStdout()</slot>
     <slot specifier="non virtual">readJackStderr()</slot>
     <slot specifier="non virtual">processJackExit()</slot>
-    <slot specifier="non virtual">stabilizeForm()</slot>
+    <slot specifier="non virtual">toggleDetails()</slot>
     <slot specifier="non virtual">portNotifySlot( int fd )</slot>
     <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
     <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
@@ -1650,6 +1635,7 @@
     <function access="private" specifier="non virtual">destroy()</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
+    <function access="private" specifier="non virtual">stabilizeForm( bool bSavePosition )</function>
     <function access="private" specifier="non virtual">resetXrunStats()</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
     <function access="private" specifier="non virtual">updateXrunTime( void )</function>

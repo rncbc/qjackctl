@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.3.4"
+#define QJACKCTL_VERSION	"0.0.4"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -133,20 +133,20 @@ void qjackctlMainForm::init()
     TimeRefreshComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/TimeRefresh", 10)));
     m_Settings.endGroup();
 
-    QPoint pt;
     m_Settings.beginGroup("/Position");
-    pt.setX(m_Settings.readNumEntry("/x", -1));
-    pt.setY(m_Settings.readNumEntry("/y", -1));
+    m_pos.setX(m_Settings.readNumEntry("/x", -1));
+    m_pos.setY(m_Settings.readNumEntry("/y", -1));
+    m_pos1.setX(m_Settings.readNumEntry("/x1", -1));
+    m_pos1.setY(m_Settings.readNumEntry("/y1", -1));
+    m_size1.setWidth(m_Settings.readNumEntry("/width1", -1));
+    m_size1.setHeight(m_Settings.readNumEntry("/height1", -1));
     m_Settings.endGroup();
 
     m_Settings.endGroup();
-
-    // Try to restore old window position.
-    if (pt.x() > 0 && pt.y() > 0)
-        move(pt);
 
     // Final startup stabilization...
-    stabilizeForm();
+    // (try to restore old window positioning)
+    stabilizeForm(false);
     processJackExit();
 }
 
@@ -195,10 +195,13 @@ void qjackctlMainForm::destroy()
     m_Settings.writeEntry("/TimeRefresh", TimeRefreshComboBox->currentText().toInt());
     m_Settings.endGroup();
 
-    QPoint pt = pos();
     m_Settings.beginGroup("/Position");
-    m_Settings.writeEntry("/x", pt.x());
-    m_Settings.writeEntry("/y", pt.y());
+    m_Settings.writeEntry("/x", m_pos.x());
+    m_Settings.writeEntry("/y", m_pos.y());
+    m_Settings.writeEntry("/x1", m_pos1.x());
+    m_Settings.writeEntry("/y1", m_pos1.y());
+    m_Settings.writeEntry("/width1", m_size1.width());
+    m_Settings.writeEntry("/height1", m_size1.height());
     m_Settings.endGroup();
 
     m_Settings.endGroup();
@@ -457,7 +460,7 @@ QString& qjackctlMainForm::detectXrun( QString & s )
             m_fXrunLast   = rx.cap(1).toFloat();
             m_fXrunTotal += m_fXrunLast;
             if (m_fXrunLast < m_fXrunMin || m_iXrunCount == 0)
-                m_fXrunMin = m_fXrunLast;        
+                m_fXrunMin = m_fXrunLast;
             if (m_fXrunLast > m_fXrunMax || m_iXrunCount == 0)
                 m_fXrunMax = m_fXrunLast;
             m_iXrunCount++;
@@ -475,14 +478,19 @@ void qjackctlMainForm::appendMessages( const QString & s )
 {
     while (MessagesTextView->paragraphs() > 100) {
         MessagesTextView->removeParagraph(0);
-        MessagesTextView->scrollToBottom();		
+        MessagesTextView->scrollToBottom();
     }
     MessagesTextView->append(s);
 }
 
 
 // User interface stabilization.
-void qjackctlMainForm::stabilizeForm()
+void qjackctlMainForm::toggleDetails (void)
+{
+    stabilizeForm(true);
+}
+
+void qjackctlMainForm::stabilizeForm ( bool bSavePosition )
 {
     bool bShowDetails = DetailsCheckBox->isChecked();
 
@@ -498,9 +506,13 @@ void qjackctlMainForm::stabilizeForm()
         DetailsTabWidget->hide();
     }
 
-    adjustSize();
-
     if (bShowDetails) {
+        if (bSavePosition)
+            m_pos = pos();
+        if (m_pos1.x() > 0 && m_pos1.y() > 0)
+            move(m_pos1);
+        if (m_size1.width() > 0 && m_size1.height() > 0)
+            resize(m_size1);
         QDesktopWidget *pDesktop = QApplication::desktop();
         QPoint curPos = pos();
         QPoint delta(
@@ -511,14 +523,18 @@ void qjackctlMainForm::stabilizeForm()
             delta.setX(0);
         if (delta.y() > 0)
             delta.setY(0);
-        if (delta.x() < 0 || delta.y() < 0) {
-            m_posSave = curPos;
+        if (delta.x() < 0 || delta.y() < 0)
             move(curPos + delta);
-        }
         stabilizeConnections();
+    } else {
+        if (bSavePosition) {
+            m_pos1 = pos();
+            m_size1 = size();
+        }
+        if (m_pos.x() > 0 && m_pos.y() > 0)
+            move(m_pos);
+        adjustSize();
     }
-    else if (!m_posSave.isNull())
-        move(m_posSave);
 }
 
 
