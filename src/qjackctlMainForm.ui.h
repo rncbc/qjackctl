@@ -86,15 +86,11 @@ void qjackctlMainForm::init (void)
     m_iBuffNotify = 0;
     m_iShutNotify = 0;
 
-    // All forms are to be created right now.
-    m_pMessagesForm    = new qjackctlMessagesForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
-    m_pStatusForm      = new qjackctlStatusForm      (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
-    m_pConnectionsForm = new qjackctlConnectionsForm (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
-    m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
-
-    // Set the patchbay cable connection notification signal/slot.
-    QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),
-        this, SLOT(cableConnectSlot(const QString&,const QString&,unsigned int)));
+    // All forms are to be created later on setup.
+    m_pMessagesForm    = NULL;
+    m_pStatusForm      = NULL;
+    m_pConnectionsForm = NULL;
+    m_pPatchbayForm    = NULL;
 }
 
 
@@ -115,19 +111,52 @@ void qjackctlMainForm::destroy (void)
     m_pAlsaSeq = NULL;
 
     // Finally drop any popup widgets around...
-    delete m_pMessagesForm;
-    delete m_pStatusForm;
-    delete m_pConnectionsForm;
-    delete m_pPatchbayForm;
+    if (m_pMessagesForm)
+        delete m_pMessagesForm;
+    if (m_pStatusForm)
+        delete m_pStatusForm;
+    if (m_pConnectionsForm)
+        delete m_pConnectionsForm;
+    if (m_pPatchbayForm)
+        delete m_pPatchbayForm;
 }
 
 
 // Make and set a proper setup step.
-bool qjackctlMainForm::setupInit ( qjackctlSetup *pSetup )
+bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 {
     // Finally, fix settings descriptor
     // and stabilize the form.
     m_pSetup = pSetup;
+
+    // Try to find if we can start in detached mode (client-only)
+    // just in case there's a JACK server already running.
+    m_bJackDetach = startJackClient(true);
+    // Have we a command-line to start away?
+    if (m_bJackDetach && !m_pSetup->sCmdLine.isEmpty()) {
+        // Run it dettached...
+        shellExecute(m_pSetup->sCmdLine, QString::null, QString::null);
+        // And bail out...
+        return false;
+    }
+
+    // All forms are to be created right now.
+    m_pMessagesForm    = new qjackctlMessagesForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+    m_pStatusForm      = new qjackctlStatusForm      (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+    m_pConnectionsForm = new qjackctlConnectionsForm (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+    m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+
+    // Set the patchbay cable connection notification signal/slot.
+    QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),
+        this, SLOT(cableConnectSlot(const QString&,const QString&,unsigned int)));
+
+    // Try to restore old window positioning.
+    m_pSetup->loadWidgetGeometry(this);
+    // And for the whole widget gallore...
+    m_pSetup->loadWidgetGeometry(m_pMessagesForm);
+    m_pSetup->loadWidgetGeometry(m_pStatusForm);
+    m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
+    m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
 
     // Set defaults...
     updateMessagesFont();
@@ -177,25 +206,19 @@ bool qjackctlMainForm::setupInit ( qjackctlSetup *pSetup )
     }
 
     // Rather obvious setup.
-    if (m_pConnectionsForm)
+    if (m_pConnectionsForm) {
+        m_pConnectionsForm->setJackClient(m_pJackClient);
         m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
-    if (m_pPatchbayForm)
+    }
+    if (m_pPatchbayForm) {
+        m_pPatchbayForm->setJackClient(m_pJackClient);
         m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
+    }
 
     // Load patchbay from default path.
     if (m_pPatchbayForm && !m_pSetup->sPatchbayPath.isEmpty())
         m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
 
-    // Try to find if we can start in detached mode (client-only)
-    // just in case there's a JACK server already running.
-    m_bJackDetach = startJackClient(true);
-    // Have we a command-line to start away?
-    if (m_bJackDetach && !m_pSetup->sCmdLine.isEmpty()) {
-        // Run it dettached...
-        shellExecute(m_pSetup->sCmdLine, QString::null, QString::null);
-        // And bail out...
-        return false;
-    }
     // Final startup stabilization...
     stabilizeForm();
     processJackExit();
@@ -209,21 +232,6 @@ bool qjackctlMainForm::setupInit ( qjackctlSetup *pSetup )
 
     // We're ready to go...
     return true;
-}
-
-
-// Show up initial widget geometries and visbility state.
-void qjackctlMainForm::setupShow (void)
-{
-    // Try to restore old window positioning.
-    m_pSetup->loadWidgetGeometry(this);
-    // And for the whole widget gallore...
-    m_pSetup->loadWidgetGeometry(m_pMessagesForm);
-    m_pSetup->loadWidgetGeometry(m_pStatusForm);
-    m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
-    m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
-    // Always make main form visible :)
-    QWidget::show();
 }
 
 
