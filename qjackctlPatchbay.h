@@ -22,11 +22,11 @@
 #ifndef __qjackctlPatchbay_h
 #define __qjackctlPatchbay_h
 
-#include <qobject.h>
-#include <qptrlist.h>
+#include <qdragobject.h>
 #include <qlistview.h>
 #include <qheader.h>
 #include <qlayout.h>
+#include <qptrlist.h>
 #include <qpixmap.h>
 #include <qpainter.h>
 
@@ -40,6 +40,10 @@
 class qjackctlPortItem;
 class qjackctlClientItem;
 class qjackctlClientList;
+class qjackctlClientListView;
+class qjackctlConnectorView;
+class qjackctlPatchbayView;
+class qjackctlPatchbay;
 
 // Jack port list item.
 class qjackctlPortItem : public QListViewItem
@@ -82,10 +86,10 @@ public:
     QPtrList<qjackctlPortItem>& connects();
 
     // To virtually distinguish between list view items.
-    int rtti() const;
+    virtual int rtti() const;
 
     // Special port name sorting virtual comparator.
-    int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
+    virtual int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
 
 private:
 
@@ -156,7 +160,7 @@ class qjackctlClientList : public QObject
 public:
 
     // Constructor.
-    qjackctlClientList(QListView *pListView, jack_client_t *pJackClient, unsigned long ulJackFlags);
+    qjackctlClientList(qjackctlClientListView *pListView, jack_client_t *pJackClient, unsigned long ulJackFlags);
     // Default destructor.
     ~qjackctlClientList();
 
@@ -170,7 +174,7 @@ public:
     qjackctlPortItem   *findClientPort(QString sClientPort);
 
     // List view accessor.
-    QListView *listView();
+    qjackctlClientListView *listView();
 
     // Jack client accessors.
     jack_client_t *jackClient();
@@ -189,7 +193,7 @@ public:
 private:
 
     // Instance variables.
-    QListView     *m_pListView;
+    qjackctlClientListView *m_pListView;
     jack_client_t *m_pJackClient;
     unsigned long  m_ulJackFlags;
 
@@ -197,25 +201,156 @@ private:
 };
 
 
-// Jack port connector widget.
-class qjackctlPatchbay : public QWidget
+//----------------------------------------------------------------------------
+// qjackctlClientListView -- Client list view, supporting drag-n-drop.
+
+class qjackctlClientListView : public QListView
 {
     Q_OBJECT
 
 public:
 
     // Constructor.
-    qjackctlPatchbay(QWidget *pParent, QListView *pOListView, QListView *pIListView, jack_client_t *pJackClient);
+    qjackctlClientListView(QWidget *pParent, qjackctlPatchbayView *pPatchbayView);
+    // Default destructor.
+    ~qjackctlClientListView();
+
+    // Auto-open timer methods.
+    void setAutoOpenTimeout(int iAutoOpenTimeout);
+    int autoOpenTimeout();
+
+protected slots:
+
+    // Auto-open timeout slot.
+    void timeoutSlot();
+    // Context menu slot.
+    void contextMenuSlot(QListViewItem *, const QPoint&, int);
+
+protected:
+
+    // Drag-n-drop stuff -- reimplemented virtual methods.
+    virtual void dragEnterEvent(QDragEnterEvent *pDragEnterEvent);
+    virtual void dragMoveEvent(QDragMoveEvent *pDragMoveEvent);
+    virtual void dragLeaveEvent(QDragLeaveEvent *);
+    virtual void dropEvent(QDropEvent *pDropEvent);
+    virtual QDragObject *dragObject();
+
+private:
+
+    // Bindings.
+    qjackctlPatchbayView *m_pPatchbayView;
+
+    // Drag-n-drop stuff.
+    QListViewItem *dragDropItem(const QPoint& epos);
+
+    // Auto-open timer.
+    int    m_iAutoOpenTimeout;
+    QTimer *m_pAutoOpenTimer;
+    // Item we'll eventually drop something.
+    QListViewItem *m_pDragDropItem;
+};
+
+
+//----------------------------------------------------------------------------
+// qjackctlConnectorView -- Jack port connector widget.
+
+class qjackctlConnectorView : public QWidget
+{
+    Q_OBJECT
+
+public:
+
+    // Constructor.
+    qjackctlConnectorView(QWidget *pParent, qjackctlPatchbayView *pPatchbayView);
+    // Default destructor.
+    ~qjackctlConnectorView();
+
+public slots:
+
+    // Useful slots (should this be protected?).
+    void listViewChanged(QListViewItem *);
+    void contentsMoved(int, int);
+
+protected:
+
+    // Specific event handlers.
+    virtual void paintEvent(QPaintEvent *);
+    virtual void resizeEvent(QResizeEvent *);
+
+private:
+
+    // Drawing methods.
+    void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
+    void drawConnections();
+    
+    // Local instance variables.
+    qjackctlPatchbayView *m_pPatchbayView;
+};
+
+
+//----------------------------------------------------------------------------
+// qjackctlPatchbayView -- Patchbay integrated widget.
+
+class qjackctlPatchbayView : public QWidget
+{
+    Q_OBJECT
+
+public:
+
+    // Constructor.
+    qjackctlPatchbayView(QWidget *pParent = 0, const char *pszName = 0);
+    // Default destructor.
+    ~qjackctlPatchbayView();
+
+    // Widget accesors.
+    QGridLayout            *GridLayout()    { return m_pGridLayout; }
+    qjackctlClientListView *OListView()     { return m_pOListView; }
+    qjackctlClientListView *IListView()     { return m_pIListView; }
+    qjackctlConnectorView  *ConnectorView() { return m_pConnectorView; }
+
+    // Patchbay object binding methods.
+    void setPatchbay(qjackctlPatchbay *pPatchbay);
+    qjackctlPatchbay *patchbay();
+    
+    // Client list accessors.
+    qjackctlClientList *OClientList();
+    qjackctlClientList *IClientList();
+
+private:
+
+    // Child controls.
+    QGridLayout            *m_pGridLayout;
+    qjackctlClientListView *m_pOListView;
+    qjackctlClientListView *m_pIListView;
+    qjackctlConnectorView  *m_pConnectorView;
+
+    // The main binding object.
+    qjackctlPatchbay *m_pPatchbay;
+};
+
+
+//----------------------------------------------------------------------------
+// qjackctlPatchbay -- Patchbay integrated object.
+
+class qjackctlPatchbay : public QObject
+{
+    Q_OBJECT
+
+public:
+
+    // Constructor.
+    qjackctlPatchbay(qjackctlPatchbayView *pPatchbayView, jack_client_t *pJackClient);
     // Default destructor.
     ~qjackctlPatchbay();
-
-    // Sizing policies.
-    virtual QSizePolicy sizePolicy() const;
 
     // Explicit connection tests.
     bool canConnectSelected();
     bool canDisconnectSelected();
     bool canDisconnectAll();
+
+    // Client list accessors.
+    qjackctlClientList *OClientList();
+    qjackctlClientList *IClientList();
 
 public slots:
 
@@ -226,17 +361,6 @@ public slots:
     void connectSelected();
     void disconnectSelected();
     void disconnectAll();
-
-    // Useful slots (should this be protected?).
-    void listViewChanged(QListViewItem *);
-    void contentsMoved(int, int);
-    void contextMenu(QListViewItem *, const QPoint&, int);
-
-protected:
-
-    // Specific event handlers.
-    virtual void paintEvent(QPaintEvent *);
-    virtual void resizeEvent(QResizeEvent *);
 
 private:
 
@@ -259,12 +383,8 @@ private:
     void disconnectSelectedEx();
     void disconnectAllEx();
 
-    // Drawing methods.
-    void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
-    void drawConnections();
-
     // Instance variables.
-    QHBoxLayout *m_pHBoxLayout;
+    qjackctlPatchbayView *m_pPatchbayView;
     qjackctlClientList *m_pOClientList;
     qjackctlClientList *m_pIClientList;
     int m_iExclusive;

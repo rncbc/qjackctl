@@ -22,6 +22,7 @@
 #include "qjackctlPatchbay.h"
 
 #include <qpopupmenu.h>
+#include <qtimer.h>
 
 #include <stdlib.h>
 #include <math.h>
@@ -65,12 +66,16 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, QString sPortN
         } else {
             QListViewItem::setPixmap(0, *g_pXpmPortLNI);
         }
+        QListViewItem::setDragEnabled(false);
+        QListViewItem::setDropEnabled(true);
     } else if (ulPortFlags & JackPortIsOutput) {
         if (ulPortFlags & JackPortIsTerminal) {
             QListViewItem::setPixmap(0, *g_pXpmPortLTO);
         } else {
             QListViewItem::setPixmap(0, *g_pXpmPortLNO);
         }
+        QListViewItem::setDragEnabled(true);
+        QListViewItem::setDropEnabled(false);
     }
 
     m_connects.setAutoDelete(false);
@@ -283,8 +288,12 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList, QStrin
 
     if (m_pClientList->jackFlags() & JackPortIsInput) {
         QListViewItem::setPixmap(0, *g_pXpmClientI);
+        QListViewItem::setDragEnabled(false);
+        QListViewItem::setDropEnabled(true);
     } else if (m_pClientList->jackFlags() & JackPortIsOutput) {
         QListViewItem::setPixmap(0, *g_pXpmClientO);
+        QListViewItem::setDragEnabled(true);
+        QListViewItem::setDropEnabled(false);
     }
 
 //  QListViewItem::setSelectable(false);
@@ -376,7 +385,7 @@ int qjackctlClientItem::rtti (void) const
 //
 
 // Constructor.
-qjackctlClientList::qjackctlClientList( QListView *pListView, jack_client_t *pJackClient, unsigned long ulJackFlags )
+qjackctlClientList::qjackctlClientList( qjackctlClientListView *pListView, jack_client_t *pJackClient, unsigned long ulJackFlags )
 {
     if (g_iXpmRefCount == 0) {
         g_pXpmClientI = new QPixmap((const char **) clienti_xpm);
@@ -400,7 +409,7 @@ qjackctlClientList::~qjackctlClientList (void)
 {
     qjackctlClientItem *pClient;
 
-    while ((pClient = m_clients.last()) != NULL)
+    while ((pClient = m_clients.last()) != 0)
         delete pClient;
 
     m_clients.clear();
@@ -448,7 +457,7 @@ QPtrList<qjackctlClientItem>& qjackctlClientList::clients (void)
 
 
 // List view accessor.
-QListView *qjackctlClientList::listView (void)
+qjackctlClientListView *qjackctlClientList::listView (void)
 {
     return m_pListView;
 }
@@ -524,34 +533,408 @@ void qjackctlClientList::updateClientPorts (void)
     ::free(ppszClientPorts);
 }
 
+
+//----------------------------------------------------------------------------
+// qjackctlClientListView -- Client list view, supporting drag-n-drop.
+
+// Constructor.
+qjackctlClientListView::qjackctlClientListView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView )
+    : QListView(pParent)
+{
+    m_pPatchbayView = pPatchbayView;
+    
+    m_pAutoOpenTimer   = 0;
+    m_iAutoOpenTimeout = 0;
+    m_pDragDropItem    = 0;
+
+    QObject::connect(this, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint& , int)), this, SLOT(contextMenuSlot(QListViewItem *, const QPoint &, int)));
+}
+
+// Default destructor.
+qjackctlClientListView::~qjackctlClientListView (void)
+{
+    setAutoOpenTimeout(0);
+}
+
+
+// Auto-open timeout method.
+void qjackctlClientListView::setAutoOpenTimeout ( int iAutoOpenTimeout )
+{
+    m_iAutoOpenTimeout = iAutoOpenTimeout;
+
+    if (m_pAutoOpenTimer)
+        delete m_pAutoOpenTimer;
+    m_pAutoOpenTimer = 0;
+
+    if (m_iAutoOpenTimeout > 0) {
+        m_pAutoOpenTimer = new QTimer(this);
+        QObject::connect(m_pAutoOpenTimer, SIGNAL(timeout()), this, SLOT(timeoutSlot()));
+    }
+}
+
+
+// Auto-open timeout accessor.
+int qjackctlClientListView::autoOpenTimeout (void)
+{
+    return m_iAutoOpenTimeout;
+}
+
+
+// Auto-open timer slot.
+void qjackctlClientListView::timeoutSlot (void)
+{
+    if (m_pAutoOpenTimer) {
+        m_pAutoOpenTimer->stop();
+        if (m_pDragDropItem && !m_pDragDropItem->isOpen()) {
+            m_pDragDropItem->setOpen(true);
+            m_pDragDropItem->repaint();
+        }
+    }
+}
+
+// Drag-n-drop stuff.
+QListViewItem *qjackctlClientListView::dragDropItem ( const QPoint& epos )
+{
+    QPoint vpos = QListView::contentsToViewport(epos);
+    vpos.setY(vpos.y() - QListView::header()->sectionRect(0).height());
+    QListViewItem *pItem = QListView::itemAt(vpos);
+    if (pItem) {
+        if (m_pDragDropItem != pItem) {
+            QListView::setSelected(pItem, true);
+            m_pDragDropItem = pItem;
+            if (m_pAutoOpenTimer)
+                m_pAutoOpenTimer->start(m_iAutoOpenTimeout);
+            qjackctlPatchbay *pPatchbay = m_pPatchbayView->patchbay();
+            if (!pItem->dropEnabled() || pPatchbay == 0 || !pPatchbay->canConnectSelected())
+                pItem = 0;
+        }
+    } else {
+        m_pDragDropItem = 0;
+        if (m_pAutoOpenTimer)
+            m_pAutoOpenTimer->stop();
+    }
+    return pItem;
+}
+
+void qjackctlClientListView::dragEnterEvent ( QDragEnterEvent *pDragEnterEvent )
+{
+//  fprintf(stderr, "qjackctlClientListView::dragEnterEvent(%s).\n", QWidget::name());
+
+    if (QTextDrag::canDecode(pDragEnterEvent) && dragDropItem(pDragEnterEvent->pos())) {
+        pDragEnterEvent->accept();
+    } else {
+        pDragEnterEvent->ignore();
+    }
+}
+
+
+void qjackctlClientListView::dragMoveEvent ( QDragMoveEvent *pDragMoveEvent )
+{
+//  fprintf(stderr, "qjackctlClientListView::dragMoveEvent(%s).\n", QWidget::name());
+
+    QListViewItem *pItem = dragDropItem(pDragMoveEvent->pos());
+    if (pItem) {
+        pDragMoveEvent->accept(QListView::itemRect(pItem));
+    } else {
+        pDragMoveEvent->ignore();
+    }
+}
+
+
+void qjackctlClientListView::dragLeaveEvent ( QDragLeaveEvent * )
+{
+//  fprintf(stderr, "qjackctlClientListView::dragLeaveEvent(%s).\n", QWidget::name());
+
+    m_pDragDropItem = 0;
+    if (m_pAutoOpenTimer)
+        m_pAutoOpenTimer->stop();
+}
+
+
+void qjackctlClientListView::dropEvent( QDropEvent *pDropEvent )
+{
+//  fprintf(stderr, "qjackctlClientListViewItem::dropEvent(%s).\n", QWidget::name());
+
+    QString sText;
+    if (QTextDrag::decode(pDropEvent, sText) && dragDropItem(pDropEvent->pos())) {
+        m_pDragDropItem = 0;
+        if (m_pAutoOpenTimer)
+            m_pAutoOpenTimer->stop();
+        qjackctlPatchbay *pPatchbay = m_pPatchbayView->patchbay();
+        if (pPatchbay)
+            pPatchbay->connectSelected();
+    }
+}
+
+QDragObject *qjackctlClientListView::dragObject (void)
+{
+//  fprintf(stderr, "qjackctlClientListView::dragObject(%s).\n", QWidget::name());
+
+    QTextDrag *pTextDrag = 0;
+    if (m_pPatchbayView->patchbay()) {
+        QListViewItem *pItem = QListView::currentItem();
+        if (pItem && pItem->dragEnabled())
+            pTextDrag = new QTextDrag(pItem->text(0), this);
+    }
+    return pTextDrag;
+}
+
+
+// Context menu requester.
+void qjackctlClientListView::contextMenuSlot ( QListViewItem *, const QPoint& pos, int )
+{
+    qjackctlPatchbay *pPatchbay = m_pPatchbayView->patchbay();
+    if (pPatchbay == 0)
+        return;
+        
+    int iItemID;
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+
+    iItemID = pContextMenu->insertItem(tr("&Connect"), pPatchbay, SLOT(connectSelected()), tr("Alt+C", "Connect"));
+    pContextMenu->setItemEnabled(iItemID, pPatchbay->canConnectSelected());
+    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pPatchbay, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
+    pContextMenu->setItemEnabled(iItemID, pPatchbay->canDisconnectSelected());
+    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), m_pPatchbayView->patchbay(), SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
+    pContextMenu->setItemEnabled(iItemID, pPatchbay->canDisconnectAll());
+
+    pContextMenu->insertSeparator();
+    iItemID = pContextMenu->insertItem(tr("&Refresh"), pPatchbay, SLOT(refresh()), tr("Alt+R", "Refresh"));
+
+    pContextMenu->exec(pos);
+}
+
+
 //----------------------------------------------------------------------
-// qjackctlPatchbay -- Output-to-Input client/ports connector widget.
+// qjackctlConnectorView -- Jack port connector widget.
 //
 
 // Constructor.
-qjackctlPatchbay::qjackctlPatchbay ( QWidget *pParent, QListView *pOListView, QListView *pIListView, jack_client_t *pJackClient )
+qjackctlConnectorView::qjackctlConnectorView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView)
     : QWidget(pParent)
 {
-    m_pHBoxLayout = new QHBoxLayout(pParent, 0, 0);
-    m_pHBoxLayout->setAutoAdd(true);
+    m_pPatchbayView = pPatchbayView;
+}
 
-    m_pOClientList = new qjackctlClientList(pOListView, pJackClient, JackPortIsOutput);
-    m_pIClientList = new qjackctlClientList(pIListView, pJackClient, JackPortIsInput);
+// Default destructor.
+qjackctlConnectorView::~qjackctlConnectorView (void)
+{
+}
+
+// Draw visible port connection relation lines
+void qjackctlConnectorView::drawConnectionLine ( QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2 )
+{
+    // Account for list view headers.
+    y1 += h1;
+    y2 += h2;
+
+    // Invisible output ports don't get a connecting dot.
+    if (y1 > h1)
+        p.drawLine(x1, y1, x1 + 4, y1);
+
+    // The connection line, it self.
+    p.drawLine(x1 + 4, y1, x2 - 4, y2);
+
+    // Invisible input ports don't get a connecting dot.
+    if (y2 > h2)
+        p.drawLine(x2 - 4, y2, x2, y2);
+}
+
+
+// Draw visible port connection relation arrows.
+void qjackctlConnectorView::drawConnections (void)
+{
+    if (m_pPatchbayView->OClientList() == 0 || m_pPatchbayView->IClientList() == 0)
+        return;
+    
+    QPainter p(this);
+    QRect r1, r2;
+    int   x1, y1, h1, b1;
+    int   x2, y2, h2, b2;
+    int   i, c, rgb[3];
+
+    // Initialize color changer.
+    i = c = rgb[0] = rgb[1] = rgb[2] = 0;
+    // Almost constants.
+    x1 = 0;
+    x2 = width();
+    h1 = ((m_pPatchbayView->OListView())->header())->sectionRect(0).height();
+    h2 = ((m_pPatchbayView->IListView())->header())->sectionRect(0).height();
+    // For each client item...
+    for (qjackctlClientItem *pOClient = m_pPatchbayView->OClientList()->clients().first();
+            pOClient;
+                pOClient = m_pPatchbayView->OClientList()->clients().next()) {
+        // Set new connector color.
+        c += 0x33;
+        rgb[i++] = (c & 0xff);
+        p.setPen(QColor(rgb[2], rgb[1], rgb[0]));
+        if (i > 2)
+            i = 0;
+        // For each port item
+        for (qjackctlPortItem *pOPort = pOClient->ports().first();
+                pOPort;
+                    pOPort = pOClient->ports().next()) {
+            // To avoid some unnecessary arrows...
+            b1 = b2 = 0;
+            // Get starting connector arrow coordinates.
+            r1 = (m_pPatchbayView->OListView())->itemRect(pOPort);
+            y1 = (r1.top() + r1.bottom()) / 2;
+            // If this item is not visible, don't bother to update it.
+            if (!pOPort->isVisible() || y1 < 1) {
+                r1 = (m_pPatchbayView->OListView())->itemRect(pOPort->client());
+                y1 = (r1.top() + r1.bottom()) / 2;
+                b1++;
+            }
+            // Get port connections...
+            for (qjackctlPortItem *pIPort = pOPort->connects().first();
+                    pIPort && b2 == 0;
+                        pIPort = pOPort->connects().next()) {
+                // Obviously, there is a connection from pOPort to pIPort items:
+                r2 = (m_pPatchbayView->IListView())->itemRect(pIPort);
+                y2 = (r2.top() + r2.bottom()) / 2;
+                if (!pIPort->isVisible() || y2 < 1) {
+                    r2 = (m_pPatchbayView->IListView())->itemRect(pIPort->client());
+                    y2 = (r2.top() + r2.bottom()) / 2;
+                    if (b1 > 0)
+                        b2++;
+                }
+                drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
+            }
+        }
+    }
+}
+
+
+// Widget fuctions...
+
+void qjackctlConnectorView::paintEvent ( QPaintEvent * )
+{
+    drawConnections();
+}
+
+
+void qjackctlConnectorView::resizeEvent ( QResizeEvent * )
+{
+    QWidget::repaint(true);
+}
+
+
+void qjackctlConnectorView::listViewChanged ( QListViewItem * )
+{
+    QWidget::update();
+}
+
+
+void qjackctlConnectorView::contentsMoved ( int, int )
+{
+    QWidget::update();
+}
+
+
+//----------------------------------------------------------------------------
+// qjackctlPatchbayView -- Integrated patchbay widget.
+
+// Constructor.
+qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszName )
+    : QWidget(pParent, pszName)
+{
+    QSizePolicy sizepolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    
+    m_pGridLayout = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
+
+    m_pOListView = new qjackctlClientListView(pParent, this);
+    m_pOListView->addColumn(tr("Readable Clients") + " / " + tr("Output Ports"));
+    m_pOListView->header()->setClickEnabled(false);
+    m_pOListView->header()->setResizeEnabled(false);
+    m_pOListView->setMinimumSize(QSize(152, 60));
+    m_pOListView->setAllColumnsShowFocus(true);
+    m_pOListView->setRootIsDecorated(true);
+    m_pOListView->setResizeMode(QListView::AllColumns);
+    m_pOListView->setSizePolicy(sizepolicy);
+
+    m_pConnectorView = new qjackctlConnectorView(pParent, this);
+    m_pConnectorView->setMinimumSize(QSize(22, 60));
+    m_pConnectorView->setMaximumWidth(120);
+    m_pConnectorView->setSizePolicy(sizepolicy);
+
+    m_pIListView = new qjackctlClientListView(pParent, this);
+    m_pIListView->addColumn(tr("Writable Clients") + " / " + tr("Input Ports"));
+    m_pIListView->header()->setClickEnabled(false);
+    m_pIListView->header()->setResizeEnabled(false);
+    m_pIListView->setMinimumSize(QSize(152, 60));
+    m_pIListView->setAllColumnsShowFocus(true);
+    m_pIListView->setRootIsDecorated(true);
+    m_pIListView->setResizeMode(QListView::AllColumns);
+    m_pIListView->setAcceptDrops(true);
+    m_pIListView->setAutoOpenTimeout(1000);
+    m_pOListView->setSizePolicy(sizepolicy);
+
+    m_pGridLayout->addWidget(m_pOListView,     0, 0);
+    m_pGridLayout->addWidget(m_pConnectorView, 0, 1);
+    m_pGridLayout->addWidget(m_pIListView,     0, 2);
+
+    m_pPatchbay = 0;
+
+    QObject::connect(m_pOListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
+    QObject::connect(m_pOListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
+    QObject::connect(m_pOListView, SIGNAL(contentsMoving(int, int)),   m_pConnectorView, SLOT(contentsMoved(int, int)));
+
+    QObject::connect(m_pIListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
+    QObject::connect(m_pIListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
+    QObject::connect(m_pIListView, SIGNAL(contentsMoving(int, int)),   m_pConnectorView, SLOT(contentsMoved(int, int)));
+}
+
+
+// Default destructor.
+qjackctlPatchbayView::~qjackctlPatchbayView (void)
+{
+}
+
+
+// Patchbay binding methods.
+void qjackctlPatchbayView::setPatchbay ( qjackctlPatchbay *pPatchbay )
+{
+    m_pPatchbay = pPatchbay;
+}
+
+qjackctlPatchbay *qjackctlPatchbayView::patchbay (void)
+{
+    return m_pPatchbay;
+}
+
+
+// Patchbay client list accessors.
+qjackctlClientList *qjackctlPatchbayView::OClientList (void)
+{
+    if (m_pPatchbay)
+        return m_pPatchbay->OClientList();
+    else
+        return 0;
+}
+
+qjackctlClientList *qjackctlPatchbayView::IClientList (void)
+{
+    if (m_pPatchbay)
+        return m_pPatchbay->OClientList();
+    else
+        return 0;
+}
+
+
+//----------------------------------------------------------------------
+// qjackctlPatchbay -- Output-to-Input client/ports connection object.
+//
+
+// Constructor.
+qjackctlPatchbay::qjackctlPatchbay ( qjackctlPatchbayView *pPatchbayView, jack_client_t *pJackClient )
+{
+    m_pPatchbayView = pPatchbayView;
+    
+    m_pOClientList = new qjackctlClientList(m_pPatchbayView->OListView(), pJackClient, JackPortIsOutput);
+    m_pIClientList = new qjackctlClientList(m_pPatchbayView->IListView(), pJackClient, JackPortIsInput);
 
     m_iExclusive = 0;
 
-    QObject::connect(pOListView, SIGNAL(expanded(QListViewItem *)),  this, SLOT(listViewChanged(QListViewItem *)));
-    QObject::connect(pOListView, SIGNAL(collapsed(QListViewItem *)), this, SLOT(listViewChanged(QListViewItem *)));
-    QObject::connect(pOListView, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint& , int)), this, SLOT(contextMenu(QListViewItem *, const QPoint &, int)));
-    QObject::connect(pOListView, SIGNAL(contentsMoving(int, int)),   this, SLOT(contentsMoved(int, int)));
-
-    QObject::connect(pIListView, SIGNAL(expanded(QListViewItem *)),  this, SLOT(listViewChanged(QListViewItem *)));
-    QObject::connect(pIListView, SIGNAL(collapsed(QListViewItem *)), this, SLOT(listViewChanged(QListViewItem *)));
-    QObject::connect(pIListView, SIGNAL(contentsMoving(int, int)),   this, SLOT(contentsMoved(int, int)));
-    QObject::connect(pIListView, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint& , int)), this, SLOT(contextMenu(QListViewItem *, const QPoint &, int)));
-
-    QWidget::raise();
-    QWidget::show();
+    m_pPatchbayView->setPatchbay(this);
 }
 
 // Default destructor.
@@ -560,12 +943,12 @@ qjackctlPatchbay::~qjackctlPatchbay (void)
     // Force end of works here.
     m_iExclusive++;
 
+    m_pPatchbayView->setPatchbay(0);
+
     delete m_pOClientList;
     delete m_pIClientList;
-    m_pOClientList = NULL;
-    m_pIClientList = NULL;
-
-    delete m_pHBoxLayout;
+    m_pOClientList = 0;
+    m_pIClientList = 0;
 }
 
 
@@ -618,87 +1001,6 @@ void qjackctlPatchbay::updateConnections (void)
                     iClientPort++;
                 }
                 ::free(ppszClientPorts);
-            }
-        }
-    }
-}
-
-
-// Draw visible port connection relation lines
-void qjackctlPatchbay::drawConnectionLine ( QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2 )
-{
-    // Account for list view headers.
-    y1 += h1;
-    y2 += h2;
-
-    // Invisible output ports don't get a connecting dot.
-    if (y1 > h1)
-        p.drawLine(x1, y1, x1 + 4, y1);
-
-    // The connection line, it self.
-    p.drawLine(x1 + 4, y1, x2 - 4, y2);
-
-    // Invisible input ports don't get a connecting dot.
-    if (y2 > h2)
-        p.drawLine(x2 - 4, y2, x2, y2);
-}
-
-
-// Draw visible port connection relation arrows.
-void qjackctlPatchbay::drawConnections (void)
-{
-    QPainter p(this);
-    QRect r1, r2;
-    int   x1, y1, h1, b1;
-    int   x2, y2, h2, b2;
-    int   i, c, rgb[3];
-
-    // Initialize color changer.
-    i = c = rgb[0] = rgb[1] = rgb[2] = 0;
-    // Almost constants.
-    x1 = 0;
-    x2 = width();
-    h1 = ((m_pOClientList->listView())->header())->sectionRect(0).height();
-    h2 = ((m_pIClientList->listView())->header())->sectionRect(0).height();
-    // For each client item...
-    for (qjackctlClientItem *pOClient = m_pOClientList->clients().first();
-            pOClient;
-                pOClient = m_pOClientList->clients().next()) {
-        // Set new connector color.
-        c += 0x33;
-        rgb[i++] = (c & 0xff);
-        p.setPen(QColor(rgb[2], rgb[1], rgb[0]));
-        if (i > 2)
-            i = 0;
-        // For each port item
-        for (qjackctlPortItem *pOPort = pOClient->ports().first();
-                pOPort;
-                    pOPort = pOClient->ports().next()) {
-            // To avoid some unnecessary arrows...
-            b1 = b2 = 0;
-            // Get starting connector arrow coordinates.
-            r1 = (m_pOClientList->listView())->itemRect(pOPort);
-            y1 = (r1.top() + r1.bottom()) / 2;
-            // If this item is not visible, don't bother to update it.
-            if (!pOPort->isVisible() || y1 < 1) {
-                r1 = (m_pOClientList->listView())->itemRect(pOPort->client());
-                y1 = (r1.top() + r1.bottom()) / 2;
-                b1++;
-            }
-            // Get port connections...
-            for (qjackctlPortItem *pIPort = pOPort->connects().first();
-                    pIPort && b2 == 0;
-                        pIPort = pOPort->connects().next()) {
-                // Obviously, there is a connection from pOPort to pIPort items:
-                r2 = (m_pIClientList->listView())->itemRect(pIPort);
-                y2 = (r2.top() + r2.bottom()) / 2;
-                if (!pIPort->isVisible() || y2 < 1) {
-                    r2 = (m_pIClientList->listView())->itemRect(pIPort->client());
-                    y2 = (r2.top() + r2.bottom()) / 2;
-                    if (b1 > 0)
-                        b2++;
-                }
-                drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
             }
         }
     }
@@ -781,7 +1083,7 @@ void qjackctlPatchbay::connectSelected (void)
         endExclusive();
     }
 
-    QWidget::update();
+    m_pPatchbayView->ConnectorView()->update();
 }
 
 void qjackctlPatchbay::connectSelectedEx (void)
@@ -910,7 +1212,7 @@ void qjackctlPatchbay::disconnectSelected (void)
         endExclusive();
     }
 
-    QWidget::update();
+    m_pPatchbayView->ConnectorView()->update();
 }
 
 void qjackctlPatchbay::disconnectSelectedEx (void)
@@ -1000,7 +1302,7 @@ void qjackctlPatchbay::disconnectAll (void)
         endExclusive();
     }
 
-    QWidget::update();
+    m_pPatchbayView->ConnectorView()->update();
 }
 
 void qjackctlPatchbay::disconnectAllEx (void)
@@ -1029,7 +1331,7 @@ void qjackctlPatchbay::refresh (void)
         endExclusive();
     }
 
-    QWidget::update();
+    m_pPatchbayView->ConnectorView()->update();
 }
 
 
@@ -1049,56 +1351,17 @@ void qjackctlPatchbay::endExclusive (void)
 }
 
 
-// Widget fuctions...
-
-void qjackctlPatchbay::paintEvent ( QPaintEvent * )
+// Patchbay client list accessors.
+qjackctlClientList *qjackctlPatchbay::OClientList (void)
 {
-    drawConnections();
+    return m_pOClientList;
 }
 
-
-void qjackctlPatchbay::resizeEvent ( QResizeEvent * )
+qjackctlClientList *qjackctlPatchbay::IClientList (void)
 {
-    QWidget::repaint(true);
+    return m_pIClientList;
 }
 
-
-QSizePolicy qjackctlPatchbay::sizePolicy (void) const
-{
-    return QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-}
-
-
-void qjackctlPatchbay::listViewChanged ( QListViewItem * )
-{
-    QWidget::update();
-}
-
-
-void qjackctlPatchbay::contentsMoved ( int, int )
-{
-    QWidget::update();
-}
-
-
-void qjackctlPatchbay::contextMenu ( QListViewItem *, const QPoint& pos, int )
-{
-    int iItemID;
-
-    QPopupMenu* pContextMenu = new QPopupMenu(this);
-
-    iItemID = pContextMenu->insertItem("&Connect", this, SLOT(connectSelected()), ALT+Key_C);
-    pContextMenu->setItemEnabled(iItemID, canConnectSelected());
-    iItemID = pContextMenu->insertItem("&Disconnect", this, SLOT(disconnectSelected()), ALT+Key_D);
-    pContextMenu->setItemEnabled(iItemID, canDisconnectSelected());
-    iItemID = pContextMenu->insertItem("Disconnect &All", this, SLOT(disconnectAll()), ALT+Key_A);
-    pContextMenu->setItemEnabled(iItemID, canDisconnectAll());
-
-    pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem("&Refresh", this, SLOT(refresh()), ALT+Key_R);
-
-    pContextMenu->exec(pos);
-}
 
 // end of qjackctlPatchbay.cpp
 

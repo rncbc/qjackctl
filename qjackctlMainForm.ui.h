@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.5.3"
+#define QJACKCTL_VERSION	"0.0.5.4"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -440,8 +440,8 @@ void qjackctlMainForm::startJack (void)
     m_iRefresh = 0;
     m_pTimer = new QTimer(this);
     QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
-    // Let's wait three seconds for client startup?
-    m_pTimer->start(3000, false);
+    // Let's wait a couple of seconds for client startup?
+    m_pTimer->start(2000, false);
 }
 
 
@@ -556,13 +556,34 @@ void qjackctlMainForm::toggleAsio (void)
     changeDriver(DriverComboBox->currentText());
 }
 
+void qjackctlMainForm::changeLatency ( const QString& )
+{
+    computeLatency();
+}
+
+void qjackctlMainForm::computeLatency (void)
+{
+    float lat = 0.0;
+    int p = FramesComboBox->currentText().toInt();
+    int r = SampleRateComboBox->currentText().toInt();
+    int n = 2;
+    if (!AsioCheckBox->isChecked())
+        n = PeriodsComboBox->currentText().toInt();
+    if (r > 0)
+        lat = (float) (1000.0 * p * n) / (float) r;
+    if (lat > 0.0)
+        LatencyTextValue->setText(QString::number(lat, 'g', 3));
+    else
+        LatencyTextValue->setText(tr("n/a"));
+}
+
 void qjackctlMainForm::changeDriver ( const QString& sDriver )
 {
     bool bDummy     = (sDriver == "dummy");
     bool bAlsa      = (sDriver == "alsa");
     bool bPortaudio = (sDriver == "portaudio");
     bool bAsio      = AsioCheckBox->isChecked();
-    
+
     SoftModeCheckBox->setEnabled(bAlsa);
     MonitorCheckBox->setEnabled(bAlsa);
 
@@ -573,16 +594,18 @@ void qjackctlMainForm::changeDriver ( const QString& sDriver )
     PeriodsComboBox->setEnabled(bAlsa && !bAsio);
 
     WaitTextLabel->setEnabled(bDummy);
-    WaitComboBox->setEnabled(bDummy);    
+    WaitComboBox->setEnabled(bDummy);
 
     InterfaceTextLabel->setEnabled(bAlsa);
     InterfaceComboBox->setEnabled(bAlsa);
 
     DitherTextLabel->setEnabled(!bDummy);
     DitherComboBox->setEnabled(!bDummy);
-    
+
     HWMonCheckBox->setEnabled(bAlsa);
     HWMeterCheckBox->setEnabled(bAlsa);
+
+    computeLatency();
 }
 
 void qjackctlMainForm::stabilizeForm ( bool bSavePosition )
@@ -957,7 +980,7 @@ void qjackctlMainForm::startJackClient (void)
     QObject::connect(m_pShutNotifier, SIGNAL(activated(int)), this, SLOT(shutNotifySlot(int)));
 
     // Create our patchbay...
-    m_pJackPatchbay = new qjackctlPatchbay(ConnectorFrame, ReadListView, WriteListView, m_pJackClient);
+    m_pJackPatchbay = new qjackctlPatchbay(PatchbayView, m_pJackClient);
 
     // Activate us as a client...
     jack_activate(m_pJackClient);
