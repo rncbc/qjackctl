@@ -331,6 +331,10 @@ void qjackctlSetupForm::deleteCurrentPreset (void)
         PresetComboBox->setCurrentItem(iItem);
         changePreset(PresetComboBox->currentText());
         m_iDirtySetup--;
+        // Take care that maybe it was the default one...
+        if (m_pSetup->sDefPreset == sPreset)
+            m_pSetup->sDefPreset = m_sPreset;
+        // Make this stable now.
         optionsChanged();
     }
 }
@@ -671,7 +675,7 @@ void qjackctlSetupForm::optionsChanged (void)
 // Accept settings (OK button slot).
 void qjackctlSetupForm::accept (void)
 {
-    if (m_iDirtyOptions > 0) {
+    if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
         // Save current preset selection.
         m_pSetup->sDefPreset = PresetComboBox->currentText();
         // Always save current settings...
