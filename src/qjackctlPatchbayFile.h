@@ -22,6 +22,9 @@
 #ifndef __qjackctlPatchbayFile_h
 #define __qjackctlPatchbayFile_h
 
+#include <qfile.h>
+#include <qtextstream.h>
+
 #include "qjackctlPatchbayRack.h"
 
 

@@ -22,9 +22,7 @@
 #include "qjackctlPatchbayFile.h"
 
 #include <qdom.h>
-#include <qfile.h>
 #include <qfileinfo.h>
-#include <qtextstream.h>
 
 #include "qjackctlAbout.h"
 

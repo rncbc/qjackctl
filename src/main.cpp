@@ -50,13 +50,21 @@ int main ( int argc, char **argv )
         app.quit();
         return 1;
     }
-    // Construct the main form.
-    qjackctlMainForm w;
-    if (!w.setup(&settings)) {
-        app.quit();
-        return 2;
+    
+    // Check if we'll just start an external program...
+    if (!settings.sCmdLine.isEmpty()) {
+        jack_client_t *pJackClient = jack_client_new("qjackctl-start");
+        if (pJackClient) {
+            jack_client_close(pJackClient);
+            ::system(settings.sCmdLine.latin1());
+            app.quit();
+            return 2;
+        }
     }
-    // Show it to the world.
+
+    // Construct the main form, and show it to the world.
+    qjackctlMainForm w;
+    w.setup(&settings);
     w.show();
 
     // Register the quit signal/slot.

@@ -704,6 +704,7 @@
     <variable access="private">qjackctlPreset m_preset;</variable>
     <variable access="private">QString m_sStdoutBuffer;</variable>
     <variable access="private">QString m_sTimeDashes;</variable>
+    <variable access="private">QString m_sJackCmdLine;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack( void )</slot>

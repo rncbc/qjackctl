@@ -131,17 +131,6 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     // and stabilize the form.
     m_pSetup = pSetup;
 
-    // Try to find if we can start in detached mode (client-only)
-    // just in case there's a JACK server already running.
-    m_bJackDetach = startJackClient(true);
-    // Have we a command-line to start away?
-    if (m_bJackDetach && !m_pSetup->sCmdLine.isEmpty()) {
-        // Run it dettached...
-        shellExecute(m_pSetup->sCmdLine, QString::null, QString::null);
-        // And bail out...
-        return false;
-    }
-
     // All forms are to be created right now.
     m_pMessagesForm    = new qjackctlMessagesForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
     m_pStatusForm      = new qjackctlStatusForm      (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
@@ -208,19 +197,18 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     }
 
     // Rather obvious setup.
-    if (m_pConnectionsForm) {
-        m_pConnectionsForm->setJackClient(m_pJackClient);
+    if (m_pConnectionsForm)
         m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
-    }
-    if (m_pPatchbayForm) {
-        m_pPatchbayForm->setJackClient(m_pJackClient);
+    if (m_pPatchbayForm)
         m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
-    }
 
     // Load patchbay from default path.
     if (m_pPatchbayForm && !m_pSetup->sPatchbayPath.isEmpty())
         m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
 
+    // Try to find if we can start in detached mode (client-only)
+    // just in case there's a JACK server already running.
+    m_bJackDetach = startJackClient(true);
     // Final startup stabilization...
     stabilizeForm();
     processJackExit();
@@ -491,12 +479,13 @@ void qjackctlMainForm::startJack (void)
     appendMessages(tr("JACK is starting..."));
     QStringList list = m_pJack->arguments();
     QStringList::Iterator iter = list.begin();
-    sTemp = "";
+    m_sJackCmdLine = "";
     while (iter != list.end()) {
-	    sTemp += *iter++;
-        sTemp += " ";
+	    m_sJackCmdLine += *iter++;
+        m_sJackCmdLine += " ";
     }
-    appendMessagesColor(sTemp.stripWhiteSpace(), "#990099");
+    m_sJackCmdLine = m_sJackCmdLine.stripWhiteSpace();
+    appendMessagesColor(m_sJackCmdLine, "#990099");
 
     // Go jack, go...
     if (!m_pJack->start()) {
@@ -1144,7 +1133,7 @@ void qjackctlMainForm::timerSlot (void)
         m_iTimerDelay += QJACKCTL_TIMER_MSECS;
         if (m_iTimerDelay >= m_iStartDelay) {
             // If we cannot start it now, maybe a lil'mo'later ;)
-            if (!startJackClient(false)) {
+            if (!startJackClient(false) && m_pJack && m_pJack->isRunning()) {
                 m_iStartDelay += m_iTimerDelay;
                 m_iTimerDelay  = 0;
             }
@@ -1389,6 +1378,17 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     if (m_pPatchbayForm)
         m_pPatchbayForm->setJackClient(m_pJackClient);
 
+    // Save jackdrc configuration file.
+    QString sFilename = ::getenv("HOME");
+    sFilename += "/.jackdrc";
+    QFile file(sFilename);
+    if (file.open(IO_WriteOnly | IO_Truncate)) {
+        QTextStream ts(&file);
+        ts << m_sJackCmdLine;
+        file.close();
+        appendMessages(tr("Server configuration saved to") + " " + sFilename);
+    }
+
     // Do not forget to reset XRUN stats variables.
     if (!bDetach)
         resetXrunStats();
@@ -1423,13 +1423,14 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     if (!bDetach && !m_bJackDetach) {
         if (m_pSetup->bPostStartupScript && !m_pSetup->sPostStartupScriptShell.isEmpty())
             shellExecute(m_pSetup->sPostStartupScriptShell, tr("Post-startup script..."), tr("Post-startup script terminated"));
-        // Have we an initial command-line to start away?
-        if (!m_pSetup->sCmdLine.isEmpty()) {
-            // Run it dettached...
-            shellExecute(m_pSetup->sCmdLine, tr("Command line argument..."), tr("Command line argument started"));
-            // And reset it forever more...
-            m_pSetup->sCmdLine = QString::null;
-        }
+    }
+
+    // Have we an initial command-line to start away?
+    if (!m_pSetup->sCmdLine.isEmpty()) {
+        // Run it dettached...
+        shellExecute(m_pSetup->sCmdLine, tr("Command line argument..."), tr("Command line argument started"));
+        // And reset it forever more...
+        m_pSetup->sCmdLine = QString::null;
     }
 
     // OK, we're at it!

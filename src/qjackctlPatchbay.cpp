@@ -145,6 +145,9 @@ qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList, const 
 // Default destructor.
 qjackctlSocketItem::~qjackctlSocketItem (void)
 {
+    for (qjackctlSocketItem *pSocket = m_connects.first(); pSocket; pSocket = m_connects.next())
+         pSocket->removeConnect(this);
+
     m_connects.clear();
     m_plugs.clear();
 
