@@ -540,7 +540,8 @@ void qjackctlMainForm::startJack (void)
     bool bOss       = (m_preset.sDriver == "oss");
     bool bAlsa      = (m_preset.sDriver == "alsa");
     bool bPortaudio = (m_preset.sDriver == "portaudio");
-    if (bAlsa)
+    if (bAlsa && (m_preset.iAudio != QJACKCTL_DUPLEX ||
+		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty()))
         m_pJack->addArgument("-d" + m_preset.sInterface);
     if (bPortaudio && m_preset.iChan > 0)
         m_pJack->addArgument("-c" + QString::number(m_preset.iChan));
@@ -553,6 +554,26 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-n" + QString::number(m_preset.iPeriods));
     }
     if (bAlsa) {
+        switch (m_preset.iAudio) {
+          case QJACKCTL_DUPLEX:
+            if (!m_preset.sInDevice.isEmpty() || !m_preset.sOutDevice.isEmpty())
+                m_pJack->addArgument("-D");
+            if (!m_preset.sInDevice.isEmpty())
+                m_pJack->addArgument("-C" + m_preset.sInDevice);
+            if (!m_preset.sOutDevice.isEmpty())
+                m_pJack->addArgument("-P" + m_preset.sOutDevice);
+            break;
+          case QJACKCTL_CAPTURE:
+            m_pJack->addArgument("-C" + m_preset.sInDevice);
+            break;
+          case QJACKCTL_PLAYBACK:
+            m_pJack->addArgument("-P" + m_preset.sOutDevice);
+            break;
+        }
+        if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
+            m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
+        if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
+            m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
         if (m_preset.bSoftMode)
             m_pJack->addArgument("-s");
         if (m_preset.bMonitor)
@@ -576,30 +597,6 @@ void qjackctlMainForm::startJack (void)
         if (m_preset.iAudio == QJACKCTL_CAPTURE)
             m_pJack->addArgument("-o0");
         else if (m_preset.iOutChannels > 0)
-            m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
-    } else {
-        switch (m_preset.iAudio) {
-          case QJACKCTL_DUPLEX:
-            if (bAlsa) {
-                if (!m_preset.sInDevice.isEmpty() || !m_preset.sOutDevice.isEmpty())
-                    m_pJack->addArgument("-D");
-                if (!m_preset.sInDevice.isEmpty())
-                    m_pJack->addArgument("-C" + m_preset.sInDevice);
-                if (!m_preset.sOutDevice.isEmpty())
-                    m_pJack->addArgument("-P" + m_preset.sOutDevice);
-            }
-          //else m_pJack->addArgument("-D");
-            break;
-          case QJACKCTL_CAPTURE:
-            m_pJack->addArgument("-C");
-            break;
-          case QJACKCTL_PLAYBACK:
-            m_pJack->addArgument("-P");
-            break;
-        }
-        if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
-            m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
-        if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
             m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     }
     if (bDummy && m_preset.iWait > 0 && m_preset.iWait != 21333)

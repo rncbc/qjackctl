@@ -399,7 +399,7 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     bool bAlsa       = (sDriver == "alsa");
     bool bInEnabled  = false;
     bool bOutEnabled = false;
-    
+
     switch (iAudio) {
       case QJACKCTL_DUPLEX:
         bInEnabled  = (bOss || bAlsa);
@@ -462,14 +462,22 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     ChanTextLabel->setEnabled(bPortaudio);
     ChanSpinBox->setEnabled(bPortaudio);
 
-    InterfaceTextLabel->setEnabled(bAlsa);
-    InterfaceComboBox->setEnabled(bAlsa);
-    InterfacePushButton->setEnabled(bAlsa);
+	int  iAudio   = AudioComboBox->currentItem();
+	bool bEnabled = bAlsa;
+    if (bEnabled && iAudio == QJACKCTL_DUPLEX) {
+        const QString& sInDevice  = InDeviceComboBox->currentText();
+        const QString& sOutDevice = OutDeviceComboBox->currentText();
+		bEnabled = (sInDevice.isEmpty()  || sInDevice  == m_pSetup->sDefPresetName ||
+					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
+	}
+	InterfaceTextLabel->setEnabled(bEnabled);
+	InterfaceComboBox->setEnabled(bEnabled);
+	InterfacePushButton->setEnabled(bEnabled);
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
     DitherComboBox->setEnabled(bAlsa || bPortaudio);
 
-    changeDriverAudio(sDriver, AudioComboBox->currentItem());
+    changeDriverAudio(sDriver, iAudio);
 }
 
 
