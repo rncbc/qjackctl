@@ -53,14 +53,14 @@ public:
 
     // List view accessors.
     QListView *listView();
-    
+
     // Jack handles accessors.
     jack_client_t *jackClient();
     jack_port_t   *jackPort();
 
     // Patchbay client item accessor.
     qjackctlClientItem *client();
-    
+
     // Client port cleanup marker.
     void markPort(int iMark);
     void markClientPort(int iMark);
@@ -68,6 +68,9 @@ public:
     int portMark();
 
 private:
+
+    // Special port name sorting virtual comparator.
+    int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
 
     // Instance variables.
     qjackctlClientItem *m_pClient;

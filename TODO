@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 TODOs
 
-0.0.4
+0.0.4 Backlog:
 
 - Devise someway to make patchbay connections persistent, in a profile/preset
   manner, that will get automagically setup when respective jack clients are

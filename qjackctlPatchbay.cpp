@@ -134,6 +134,48 @@ int qjackctlPortItem::portMark (void)
     return m_iPortMark;
 }
 
+
+// Special port name sorting virtual comparator.
+int qjackctlPortItem::compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const
+{
+    QString sName1, sName2;
+    QString sPrefix1, sPrefix2;
+    int i, iSuffix1, iSuffix2;
+
+    sName1 = text(iColumn);
+    sName2 = pPortItem->text(iColumn);
+
+    for (i = sName1.length() - 1; i > 0; i--) {
+        if (!sName1.at(i).isDigit())
+            break;
+    }
+    sPrefix1 = sName1.left(i + 1);
+
+    for (i = sName2.length() - 1; i > 0; i--) {
+        if (!sName2.at(i).isDigit())
+            break;
+    }
+    sPrefix2 = sName2.left(i + 1);
+
+    if (sPrefix1 == sPrefix2) {
+        iSuffix1 = sName1.right(sName1.length() - i - 1).toInt();
+        iSuffix2 = sName2.right(sName2.length() - i - 1).toInt();
+        if (iSuffix1 < iSuffix2)
+            return (bAscending ? -1 :  1);
+        else
+        if (iSuffix1 > iSuffix2)
+            return (bAscending ?  1 : -1);
+        else
+            return 0;
+    } else {
+        if (sPrefix1 < sPrefix2)
+            return (bAscending ? -1 :  1);
+        else
+            return (bAscending ?  1 : -1);
+    }
+}
+
+
 //----------------------------------------------------------------------
 // class qjackctlClientItem -- Jack client list item.
 //

@@ -63,7 +63,7 @@ AC_CACHE_CHECK([for Qt library version >= 3.0.1],
 ])
 
 dnl A common error message:
-ac_qtdir_errmsg="not found in current PATH. Maybe QTDIR isn't properly set."
+ac_qtdir_errmsg="not found in current PATH. Maybe QT development environment isn't available (qt3-devel)."
 
 dnl Check for Qt qmake utility.
 AC_PATH_PROG(ac_qmake, qmake, [no], $ac_qtdir/bin:${PATH})

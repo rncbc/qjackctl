@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.3"
+#define QJACKCTL_VERSION	"0.0.4"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -68,15 +68,15 @@ void qjackctlMainForm::init()
     QString c = ":" + s;
     QString z = "0";
     QString n = tr("n/a");
-    m_apStats[STATS_CPU_LOAD] = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
+    m_apStats[STATS_CPU_LOAD]    = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
     m_apStats[STATS_SAMPLE_RATE] = new QListViewItem(StatsListView, s + tr("Sample Rate") + c, n);
-    m_apStats[STATS_XRUN_AVG] = new QListViewItem(StatsListView, s + tr("XRUN average") + c, z);
-    m_apStats[STATS_XRUN_COUNT] = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
-    m_apStats[STATS_XRUN_LAST] = new QListViewItem(StatsListView, s + tr("XRUN last") + c, z);
-    m_apStats[STATS_XRUN_MAX] = new QListViewItem(StatsListView, s + tr("XRUN maximum") + c, z);
-    m_apStats[STATS_XRUN_MIN] = new QListViewItem(StatsListView, s + tr("XRUN minimum") + c, z);
-    m_apStats[STATS_XRUN_TIME] = new QListViewItem(StatsListView, s + tr("XRUN last time detected") + c, n);
-    m_apStats[STATS_XRUN_TOTAL] = new QListViewItem(StatsListView, s + tr("XRUN total") + c, z);
+    m_apStats[STATS_XRUN_AVG]    = new QListViewItem(StatsListView, s + tr("XRUN average") + c, z);
+    m_apStats[STATS_XRUN_COUNT]  = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
+    m_apStats[STATS_XRUN_LAST]   = new QListViewItem(StatsListView, s + tr("XRUN last") + c, z);
+    m_apStats[STATS_XRUN_MAX]    = new QListViewItem(StatsListView, s + tr("XRUN maximum") + c, z);
+    m_apStats[STATS_XRUN_MIN]    = new QListViewItem(StatsListView, s + tr("XRUN minimum") + c, z);
+    m_apStats[STATS_XRUN_TIME]   = new QListViewItem(StatsListView, s + tr("XRUN last time detected") + c, n);
+    m_apStats[STATS_XRUN_TOTAL]  = new QListViewItem(StatsListView, s + tr("XRUN total") + c, z);
 
     resetXrunStats();
 
