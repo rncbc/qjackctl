@@ -637,10 +637,14 @@ void qjackctlMainForm::startJack (void)
     // the client will nerver make it...
     StopPushButton->setEnabled(true);
     
+    // Make sure all status(es) will be updated ASAP...
+    m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+
     // Reset (yet again) the timer counters...
     m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
+
 }
 
 
@@ -1497,6 +1501,9 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // If can't be already started, are we?
     if (m_pJackClient)
         return true;
+
+    // Make sure all status(es) will be updated ASAP.
+    m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
 
     // Are we about to start detached?
     if (bDetach) {
