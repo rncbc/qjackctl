@@ -1052,13 +1052,13 @@
                                     <enum>Sunken</enum>
                                 </property>
                                 <property name="text">
-                                    <string>0.0</string>
+                                    <string>0/0</string>
                                 </property>
                                 <property name="alignment">
                                     <set>AlignCenter</set>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>Calculated latency in milliseconds, based on the period, rate and buffer settings</string>
+                                    <string>Output latency in milliseconds, calculated based on the period, rate and buffer settings</string>
                                 </property>
                             </widget>
                             <widget class="QLabel" row="0" column="2">
