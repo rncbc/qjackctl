@@ -15,8 +15,8 @@ Homepage: http://qjackctl.sourceforge.net
 License: GNU General Public License (GPL)
 
 
-Installation Notes
-------------------
+Installation
+------------
 
 The installation procedure follows the standard for source distributions:
 
@@ -64,6 +64,18 @@ highly recommended, as it probably includes already a Paul Davis'
 (JACK's lead developer) patch that targets this specific issue.
 
 This problem is now officially closed, since JACK 0.75.0 release.
+
+Note:
+
+It has been reported that in some systems qjackctl hangs pretty badly after
+stopping and restarting the JACK audio daemon, without quitting the application.
+That is, each qjackctl running instance may only start and stop JACK only once.
+After that, one have to quit and run it back again. This situation only happens
+in specific systems, although very deterministically.
+
+If you experience this behaviour, or any other you find annoying, please report
+it on the project's page (http://www.sourceforge.net/projects/qjackctl). Remember
+to include a description of your system, namely libc, gcc and qt versions.
 
 
 Acknowledgments
