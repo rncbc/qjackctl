@@ -1034,7 +1034,7 @@ void qjackctlMainForm::updateXrunCount (void)
             color = (m_pJackClient ? Qt::yellow : Qt::darkYellow);
         // Change the system tray icon background color!
         if (m_pSystemTray) {
-            m_pSystemTray->setBackgroundMode(Qt::FixedColor);
+            m_pSystemTray->setBackgroundMode(Qt::PaletteBackground);
             m_pSystemTray->setPaletteBackgroundColor(color);
             m_pSystemTray->repaint(true);
         }
