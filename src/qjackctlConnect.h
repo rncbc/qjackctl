@@ -483,6 +483,18 @@ protected:
     
 private:
 
+    // Dunno. But this may avoid some conflicts.
+    bool startMutex();
+    void endMutex();
+    
+    // Connection methods (unguarded).
+    bool canConnectSelectedEx();
+    bool canDisconnectSelectedEx();
+    bool canDisconnectAllEx();
+    bool connectSelectedEx();
+    bool disconnectSelectedEx();
+    bool disconnectAllEx();
+
     // Connect/Disconnection local primitives.
     void connectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
     void disconnectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
@@ -492,6 +504,7 @@ private:
     // These must be created on the descendant constructor.
     qjackctlClientList *m_pOClientList;
     qjackctlClientList *m_pIClientList;
+    int m_iMutex;
 };
 
 

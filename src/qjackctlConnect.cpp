@@ -1146,12 +1146,17 @@ qjackctlConnect::qjackctlConnect ( qjackctlConnectView *pConnectView )
     m_pOClientList = 0;
     m_pIClientList = 0;
 
+    m_iMutex = 0;
+
     m_pConnectView->setBinding(this);
 }
 
 // Default destructor.
 qjackctlConnect::~qjackctlConnect (void)
 {
+    // Force end of works here.
+    m_iMutex++;
+
     m_pConnectView->setBinding(0);
 
     if (m_pOClientList)
@@ -1206,6 +1211,18 @@ void qjackctlConnect::disconnectPortsEx ( qjackctlPortItem *pOPort, qjackctlPort
 
 // Test if selected ports are connectable.
 bool qjackctlConnect::canConnectSelected (void)
+{
+    bool bResult = false;
+
+    if (startMutex()) {
+        bResult = canConnectSelectedEx();
+        endMutex();
+    }
+
+    return bResult;
+}
+
+bool qjackctlConnect::canConnectSelectedEx (void)
 {
     // Take this opportunity to highlight any current selections.
     m_pOClientList->hiliteClientPorts();
@@ -1268,6 +1285,22 @@ bool qjackctlConnect::canConnectSelected (void)
 // Connect current selected ports.
 bool qjackctlConnect::connectSelected (void)
 {
+    bool bResult = false;
+
+    if (startMutex()) {
+        bResult = connectSelectedEx();
+        endMutex();
+    }
+    m_pConnectView->ConnectorView()->update();
+
+    if (bResult)
+        emit connectChanged();
+
+    return bResult;
+}
+
+bool qjackctlConnect::connectSelectedEx (void)
+{
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
         return false;
@@ -1313,9 +1346,6 @@ bool qjackctlConnect::connectSelected (void)
             connectPortsEx(pOPort, pIPort);
         }
     }
-    m_pConnectView->ConnectorView()->update();
-
-    emit connectChanged();
 
     return true;
 }
@@ -1323,6 +1353,18 @@ bool qjackctlConnect::connectSelected (void)
 
 // Test if selected ports are disconnectable.
 bool qjackctlConnect::canDisconnectSelected (void)
+{
+    bool bResult = false;
+
+    if (startMutex()) {
+        bResult = canDisconnectSelectedEx();
+        endMutex();
+    }
+
+    return bResult;
+}
+
+bool qjackctlConnect::canDisconnectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -1380,6 +1422,22 @@ bool qjackctlConnect::canDisconnectSelected (void)
 // Disconnect current selected ports.
 bool qjackctlConnect::disconnectSelected (void)
 {
+    bool bResult = false;
+    
+    if (startMutex()) {
+        bResult = disconnectSelectedEx();
+        endMutex();
+    }
+    m_pConnectView->ConnectorView()->update();
+
+    if (bResult)
+        emit connectChanged();
+
+    return bResult;
+}
+
+bool qjackctlConnect::disconnectSelectedEx (void)
+{
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
         return false;
@@ -1425,9 +1483,6 @@ bool qjackctlConnect::disconnectSelected (void)
             disconnectPortsEx(pOPort, pIPort);
         }
     }
-    m_pConnectView->ConnectorView()->update();
-
-    emit connectChanged();
 
     return true;
 }
@@ -1435,6 +1490,18 @@ bool qjackctlConnect::disconnectSelected (void)
 
 // Test if any port is disconnectable.
 bool qjackctlConnect::canDisconnectAll (void)
+{
+    bool bResult = false;
+    
+    if (startMutex()) {
+        bResult = canDisconnectAllEx();
+        endMutex();
+    }
+
+    return bResult;
+}
+
+bool qjackctlConnect::canDisconnectAllEx (void)
 {
     qjackctlClientItem *pOClient = m_pOClientList->clients().first();
     while (pOClient) {
@@ -1461,6 +1528,22 @@ bool qjackctlConnect::disconnectAll (void)
         return false;
     }
 
+    bool bResult = false;
+
+    if (startMutex()) {
+        bResult = disconnectAllEx();
+        endMutex();
+    }
+    m_pConnectView->ConnectorView()->update();
+
+    if (bResult)
+        emit connectChanged();
+
+    return bResult;
+}
+
+bool qjackctlConnect::disconnectAllEx (void)
+{
     qjackctlClientItem *pOClient = m_pOClientList->clients().first();
     while (pOClient) {
         qjackctlPortItem *pOPort = pOClient->ports().first();
@@ -1472,9 +1555,6 @@ bool qjackctlConnect::disconnectAll (void)
         }
         pOClient = m_pOClientList->clients().next();
     }
-    m_pConnectView->ConnectorView()->update();
-
-    emit connectChanged();
 
     return true;
 }
@@ -1485,6 +1565,7 @@ void qjackctlConnect::updateContents ( bool bClear )
 {
     int iDirtyCount = 0;
 
+    if (startMutex()) {
     // Do we do a complete rebuild?
     if (bClear) {
         (m_pOClientList->listView())->clear();
@@ -1495,6 +1576,8 @@ void qjackctlConnect::updateContents ( bool bClear )
     iDirtyCount += m_pOClientList->updateClientPorts();
     iDirtyCount += m_pIClientList->updateClientPorts();
     updateConnections();
+        endMutex();
+    }
 
     (m_pConnectView->ConnectorView())->update();
 
@@ -1507,6 +1590,22 @@ void qjackctlConnect::updateContents ( bool bClear )
 void qjackctlConnect::refresh (void)
 {
     updateContents(false);
+}
+
+
+// Dunno. But this may avoid some conflicts.
+bool qjackctlConnect::startMutex (void)
+{
+    bool bMutex = (m_iMutex == 0);
+    if (bMutex)
+        m_iMutex++;
+    return bMutex;
+}
+
+void qjackctlConnect::endMutex (void)
+{
+    if (m_iMutex > 0)
+        m_iMutex--;
 }
 
 
