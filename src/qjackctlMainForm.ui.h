@@ -520,12 +520,12 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
 {
     QToolTip::remove(TimeDisplayTextLabel);
     QToolTip::remove(TransportTimeTextLabel);
-    
-    QString sTimeDisplay   = tr("Transport time (hh:mm:ss.ddd)");
-    QString sTransportTime = tr("Transport BBT (bar:beat.ticks)");
+
+    QString sTimeDisplay   = tr("Transport BBT (bar:beat.ticks)");
+    QString sTransportTime = tr("Transport time (hh:mm:ss.ddd)");
 
     switch (m_setup.iTimeDisplay) {
-    case DISPLAY_TRANSPORT_BBT:
+    case DISPLAY_TRANSPORT_TIME:
     {
         QString sTemp  = sTimeDisplay;
         sTimeDisplay   = sTransportTime;
