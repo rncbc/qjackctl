@@ -836,7 +836,7 @@
                                             </font>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Set dither mode</string>
+                                            <string>Set dither mode (alsa, portaudio)</string>
                                         </property>
                                     </widget>
                                     <widget class="QComboBox" row="5" column="1">

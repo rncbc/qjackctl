@@ -493,7 +493,7 @@ void qjackctlMainForm::startJack (void)
     }
     if (bDummy && m_preset.iWait > 0)
         m_pJack->addArgument("-w" + QString::number(m_preset.iWait));
-    if (!bDummy) {
+    if (bAlsa || bPortaudio) {
         switch (m_preset.iDither) {
         case 0:
         //  m_pJack->addArgument("-z-");
