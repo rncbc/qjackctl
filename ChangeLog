@@ -3,6 +3,16 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.3.0   2004-07-12  Work in progress...
+
+- Priority setup control is now a spinbox ranging from 0..89 (as suggested
+  by Florian Schmidt).
+
+- Patchbay connection lines are now drawn correctly when items are
+  scrolled out of view. Additionally, the connection lines can now be
+  drawn as bezier spline curves (big thanks to Wilfried Huss).
+
+
 0.2.9   2004-07-04  Sloppy boy fixes and minor featuritis.
 
 - Patchbay socket dialog client and plug list option items are now

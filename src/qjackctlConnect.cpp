@@ -653,8 +653,13 @@ void qjackctlConnectorView::drawConnectionLine ( QPainter& p, int x1, int y1, in
     if (y1 > h1)
         p.drawLine(x1, y1, x1 + 4, y1);
 
+    // Setup control points
+    QPointArray spline(4);
+    int cp = (int)((double)(x2 - x1 - 8) * 0.4);
+    spline.putPoints(0, 4, x1 + 4, y1, x1 + 4 + cp, y1, x2 - 4 - cp, y2, x2 - 4, y2);
     // The connection line, it self.
-    p.drawLine(x1 + 4, y1, x2 - 4, y2);
+    p.drawCubicBezier(spline);
+//- p.drawLine(x1 + 4, y1, x2 - 4, y2);
 
     // Invisible input ports don't get a connecting dot.
     if (y2 > h2)
@@ -669,7 +674,6 @@ void qjackctlConnectorView::drawConnections (void)
         return;
     
     QPainter p(this);
-    QRect r1, r2;
     int   x1, y1, h1;
     int   x2, y2, h2;
     int   i, c, rgb[3];
@@ -697,23 +701,27 @@ void qjackctlConnectorView::drawConnections (void)
                 pOPort;
                     pOPort = pOClient->ports().next()) {
             // Get starting connector arrow coordinates.
-            r1 = (m_pConnectView->OListView())->itemRect(pOPort);
-            y1 = (r1.top() + r1.bottom()) / 2;
-            // If this item is not visible, don't bother to update it.
-            if (!pOPort->isVisible() || y1 < 1) {
-                r1 = (m_pConnectView->OListView())->itemRect(pOClient);
-                y1 = (r1.top() + r1.bottom()) / 2;
+            QListViewItem* pOParent = pOPort->parent();
+            if (pOParent == 0 || pOParent->isOpen()) {
+                y1 = (m_pConnectView->OListView())->itemPos(pOPort) + 
+                     pOPort->height() / 2 - (m_pConnectView->OListView())->contentsY();
+            } else {
+                y1 = (m_pConnectView->OListView())->itemPos(pOParent) + 
+                     pOParent->height() / 2 - (m_pConnectView->OListView())->contentsY();
             }
+            
             // Get port connections...
             for (qjackctlPortItem *pIPort = pOPort->connects().first();
                     pIPort;
                         pIPort = pOPort->connects().next()) {
                 // Obviously, there is a connection from pOPort to pIPort items:
-                r2 = (m_pConnectView->IListView())->itemRect(pIPort);
-                y2 = (r2.top() + r2.bottom()) / 2;
-                if (!pIPort->isVisible() || y2 < 1) {
-                    r2 = (m_pConnectView->IListView())->itemRect(pIPort->client());
-                    y2 = (r2.top() + r2.bottom()) / 2;
+                QListViewItem* pIParent = pIPort->parent();
+                if (pIParent == 0 || pIParent->isOpen()) {
+                    y2 = (m_pConnectView->IListView())->itemPos(pIPort) + 
+                         pIPort->height() / 2 - (m_pConnectView->IListView())->contentsY();
+                } else {
+                    y2 = (m_pConnectView->IListView())->itemPos(pIParent) + 
+                        pIParent->height() / 2 - (m_pConnectView->IListView())->contentsY();
                 }
                 drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
             }

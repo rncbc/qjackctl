@@ -43,7 +43,6 @@ void qjackctlSetupForm::init (void)
     // Set dialog validators...
     PresetComboBox->setValidator(new QRegExpValidator(QRegExp("[\\w-]+"), PresetComboBox));
     ChanComboBox->setValidator(new QIntValidator(ChanComboBox));
-    PriorityComboBox->setValidator(new QIntValidator(PriorityComboBox));
     FramesComboBox->setValidator(new QIntValidator(FramesComboBox));
     SampleRateComboBox->setValidator(new QIntValidator(SampleRateComboBox));
     PeriodsComboBox->setValidator(new QIntValidator(PeriodsComboBox));
@@ -169,7 +168,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         HWMonCheckBox->setChecked(preset.bHWMon);
         HWMeterCheckBox->setChecked(preset.bHWMeter);
         IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
-        PriorityComboBox->setCurrentText(QString::number(preset.iPriority));
+        PrioritySpinBox->setValue(preset.iPriority);
         FramesComboBox->setCurrentText(QString::number(preset.iFrames));
         SampleRateComboBox->setCurrentText(QString::number(preset.iSampleRate));
         PeriodsComboBox->setCurrentText(QString::number(preset.iPeriods));
@@ -219,7 +218,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.bHWMon       = HWMonCheckBox->isChecked();
     preset.bHWMeter     = HWMeterCheckBox->isChecked();
     preset.bIgnoreHW    = IgnoreHWCheckBox->isChecked();
-    preset.iPriority    = PriorityComboBox->currentText().toInt();
+    preset.iPriority    = PrioritySpinBox->value();
     preset.iFrames      = FramesComboBox->currentText().toInt();
     preset.iSampleRate  = SampleRateComboBox->currentText().toInt();
     preset.iPeriods     = PeriodsComboBox->currentText().toInt();
@@ -460,7 +459,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
     bool bEnabled = RealtimeCheckBox->isChecked();
     PriorityTextLabel->setEnabled(bEnabled);
-    PriorityComboBox->setEnabled(bEnabled);
+    PrioritySpinBox->setEnabled(bEnabled);
 
     bEnabled = StartupScriptCheckBox->isChecked();
     StartupScriptShellComboBox->setEnabled(bEnabled);
