@@ -609,19 +609,20 @@ bool qjackctlPatchbay::canConnectSelectedEx (void)
     qjackctlPortItem *pOPort = (qjackctlPortItem *) pOItem;
     qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
     QString sIClientPort = pIPort->clientPortName();
+    // Assume all disconnected.
+    bool bConnected = false;
     // Get current port connections...
     const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
-    if (!ppszClientPorts)
-        return true;
-    int iClientPort = 0;
-    while (ppszClientPorts[iClientPort]) {
-        if (sIClientPort == ppszClientPorts[iClientPort])
-            return false;
-        iClientPort++;
+    if (ppszClientPorts) {
+        int iClientPort = 0;
+        while (!bConnected && ppszClientPorts[iClientPort]) {
+            bConnected = (sIClientPort == ppszClientPorts[iClientPort]);
+            iClientPort++;
+        }
+        ::free(ppszClientPorts);
     }
-    ::free(ppszClientPorts);
-
-    return true;
+    
+    return !bConnected;
 }
 
 
@@ -717,19 +718,20 @@ bool qjackctlPatchbay::canDisconnectSelectedEx (void)
     qjackctlPortItem *pOPort = (qjackctlPortItem *) pOItem;
     qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
     QString sIClientPort = pIPort->clientPortName();
+    // Assume all disconnected.
+    bool bConnected = false;
     // Get current port connections...
     const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
-    if (!ppszClientPorts)
-        return false;
-    int iClientPort = 0;
-    while (ppszClientPorts[iClientPort]) {
-        if (sIClientPort == ppszClientPorts[iClientPort])
-            return true;
-        iClientPort++;
+    if (ppszClientPorts) {
+        int iClientPort = 0;
+        while (!bConnected && ppszClientPorts[iClientPort]) {
+            bConnected = (sIClientPort == ppszClientPorts[iClientPort]);
+            iClientPort++;
+        }
+        ::free(ppszClientPorts);
     }
-    ::free(ppszClientPorts);
-
-    return false;
+    
+    return bConnected;
 }
 
 
