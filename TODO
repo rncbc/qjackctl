@@ -3,13 +3,6 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 TODOs
 
-0.2.0
-
-- ALSA sequencer subscription patchbay feature, complementing current
-  audio service with a MIDI application connection graph, gracefuly
-  included with the same front-end.
-
-
 0.1.1 Backlog
 
 - Having some LADCCA support or awareness may be very welcome.

@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>374</height>
+            <width>514</width>
+            <height>400</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -44,7 +44,7 @@
         <string>Setup - JACK Audio Connection Kit</string>
     </property>
     <property name="icon">
-        <pixmap>qjackctl.xpm</pixmap>
+        <pixmap>setup1.png</pixmap>
     </property>
     <property name="sizeGripEnabled">
         <bool>true</bool>
@@ -2312,6 +2312,25 @@
                             </property>
                             <widget class="QCheckBox">
                                 <property name="name">
+                                    <cstring>StartJackCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Start JACK audio server on application startup</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+S</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to start JACK audio server immediately on application startup</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox">
+                                <property name="name">
                                     <cstring>QueryCloseCheckBox</cstring>
                                 </property>
                                 <property name="font">
@@ -2574,6 +2593,7 @@
     <tabstop>ElapsedResetRadioButton</tabstop>
     <tabstop>ElapsedXrunRadioButton</tabstop>
     <tabstop>MessagesFontPushButton</tabstop>
+    <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>OkPushButton</tabstop>
     <tabstop>CancelPushButton</tabstop>

@@ -97,6 +97,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
     // Other misc options...
+    StartJackCheckBox->setChecked(m_pSetup->bStartJack);
     QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
 
     // Finally, load preset list...
@@ -461,6 +462,7 @@ void qjackctlSetupForm::accept (void)
     // Save Defaults...
     m_pSetup->iTimeDisplay  = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
     m_pSetup->sMessagesFont = MessagesFontTextLabel->font().toString();
+    m_pSetup->bStartJack    = StartJackCheckBox->isChecked();
     m_pSetup->bQueryClose   = QueryCloseCheckBox->isChecked();
 
     // Save combobox history...

@@ -30,6 +30,13 @@ IMAGES   = icons/qjackctl.xpm \
            icons/quit1.png \
            icons/play1.png \
            icons/pause1.png \
+           icons/messages1.png \
+           icons/status1.png \
+           icons/connections1.png \
+           icons/patchbay1.png \
+           icons/patchbay2.png \
+           icons/setup1.png \
+           icons/about1.png \
            icons/accept1.png \
            icons/new1.png \
            icons/open1.png \
@@ -40,7 +47,6 @@ IMAGES   = icons/qjackctl.xpm \
            icons/remove1.png \
            icons/up1.png \
            icons/down1.png \
-           icons/patchbay1.png \
            icons/socket1.png \
            icons/qtlogo.png
 

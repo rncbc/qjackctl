@@ -142,17 +142,16 @@ void qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     if (m_pPatchbayForm && !m_pSetup->sPatchbayPath.isEmpty())
         m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
 
+    // Try to find if we can start in detached mode (client-only)
+    // just in case there's a JACK server already running.
+    m_bJackDetach = startJackClient(true);
+    // Final startup stabilization...
+    stabilizeForm();
+    processJackExit();
+
     // Look for immediate startup?...
-    if (m_pSetup->bStartJack) {
+    if (m_pSetup->bStartJack)
         startJack();
-    } else {
-        // Try to find if we can start in detached mode (client-only)
-        // just in case there's a JACK server already running.
-        m_bJackDetach = startJackClient(true);
-        // Final startup stabilization...
-        stabilizeForm();
-        processJackExit();
-    }
 }
 
 
@@ -274,7 +273,7 @@ void qjackctlMainForm::startJack (void)
     QString sTemp;
 
     sTemp = (m_bJackDetach ? tr("Activating") : tr("Starting"));
-    setCaption(QJACKCTL_TITLE " - " + sTemp + "...");
+    setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(false);
 
@@ -433,7 +432,7 @@ void qjackctlMainForm::startJack (void)
     appendMessages(tr("JACK was started") + sTemp);
 
     sTemp = tr("Started");
-    setCaption(QJACKCTL_TITLE " - " + sTemp + ".");
+    setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StopPushButton->setEnabled(true);
 
@@ -455,7 +454,7 @@ void qjackctlMainForm::stopJack (void)
     } else {
         appendMessages(tr("JACK is stopping..."));
         QString sTemp = tr("Stopping");
-        setCaption(QJACKCTL_TITLE " - " + sTemp + "...");
+        setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
         updateStatus(STATUS_SERVER_STATE, sTemp);
         if (m_pJack->isRunning())
             m_pJack->tryTerminate();
@@ -505,7 +504,7 @@ void qjackctlMainForm::processJackExit (void)
         sTemp = (m_pJackClient == NULL ? tr("Inactive") : tr("Active"));
     else
         sTemp = tr("Stopped");
-    setCaption(QJACKCTL_TITLE " - " + sTemp + ".");
+    setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(m_pJackClient == NULL);
     StopPushButton->setEnabled(m_pJackClient != NULL);
@@ -1145,7 +1144,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // If we've started detached, just change active status.
     if (m_bJackDetach) {
         QString sTemp = tr("Active");
-        setCaption(QJACKCTL_TITLE " - " + sTemp + ".");
+        setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
         updateStatus(STATUS_SERVER_STATE, sTemp);
         StopPushButton->setEnabled(true);
     }

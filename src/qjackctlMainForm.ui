@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>448</width>
-            <height>105</height>
+            <width>451</width>
+            <height>103</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -458,6 +458,9 @@
             <property name="toggleButton">
                 <bool>true</bool>
             </property>
+            <property name="iconSet">
+                <iconset>status1.png</iconset>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the extended status window</string>
             </property>
@@ -472,6 +475,9 @@
             <property name="accel">
                 <string>Alt+O</string>
             </property>
+            <property name="iconSet">
+                <iconset>about1.png</iconset>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show information about this application</string>
             </property>
@@ -485,6 +491,9 @@
             </property>
             <property name="accel">
                 <string>Alt+E</string>
+            </property>
+            <property name="iconSet">
+                <iconset>setup1.png</iconset>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Show settings and options dialog</string>
@@ -503,6 +512,9 @@
             <property name="toggleButton">
                 <bool>true</bool>
             </property>
+            <property name="iconSet">
+                <iconset>messages1.png</iconset>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the messages log window</string>
             </property>
@@ -520,6 +532,9 @@
             <property name="toggleButton">
                 <bool>true</bool>
             </property>
+            <property name="iconSet">
+                <iconset>patchbay1.png</iconset>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the patchbay editor window</string>
             </property>
@@ -536,6 +551,9 @@
             </property>
             <property name="toggleButton">
                 <bool>true</bool>
+            </property>
+            <property name="iconSet">
+                <iconset>connections1.png</iconset>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the actual connections patchbay window</string>

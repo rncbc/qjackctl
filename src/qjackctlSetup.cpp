@@ -43,6 +43,7 @@ qjackctlSetup::qjackctlSetup (void)
     m_settings.endGroup();
 
     m_settings.beginGroup("/Options");
+    bStartJack              = m_settings.readBoolEntry("/StartJack", false);
     bStartupScript          = m_settings.readBoolEntry("/StartupScript", true);
     sStartupScriptShell     = m_settings.readEntry("/StartupScriptShell", "artsshell -q terminate");
     bPostStartupScript      = m_settings.readBoolEntry("/PostStartupScript", false);
@@ -87,6 +88,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.endGroup();
 
     m_settings.beginGroup("/Options");
+    m_settings.writeEntry("/StartJack",               bStartJack);
     m_settings.writeEntry("/StartupScript",           bStartupScript);
     m_settings.writeEntry("/StartupScriptShell",      sStartupScriptShell);
     m_settings.writeEntry("/PostStartupScript",       bPostStartupScript);
