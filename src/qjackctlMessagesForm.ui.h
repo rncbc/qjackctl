@@ -83,11 +83,9 @@ void qjackctlMessagesForm::appendMessagesColor( const QString& s, const QString&
 
 void qjackctlMessagesForm::appendMessagesText( const QString& s )
 {
-    while (MessagesTextView->paragraphs() > 100) {
-        MessagesTextView->setUpdatesEnabled(false);
+    while (MessagesTextView->paragraphs() > 1000) {
         MessagesTextView->removeParagraph(0);
         MessagesTextView->scrollToBottom();
-        MessagesTextView->setUpdatesEnabled(true);
     }
     MessagesTextView->append(s);
 }
