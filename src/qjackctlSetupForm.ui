@@ -1814,7 +1814,26 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>StdoutCaptureCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Capture standard output</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+C</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to capture standard output (stdout/stderr) into messages window</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="1" column="0">
                                 <property name="name">
                                     <cstring>XrunRegexTextLabel</cstring>
                                 </property>
@@ -1838,7 +1857,7 @@
                                     <cstring>XrunRegexComboBox</cstring>
                                 </property>
                             </widget>
-                            <widget class="QComboBox" row="0" column="1">
+                            <widget class="QComboBox" row="1" column="1">
                                 <item>
                                     <property name="text">
                                         <string>xrun of at least ([0-9|\.]+) msecs</string>
@@ -1867,7 +1886,7 @@
                                     <string>Regular expression used to detect XRUNs on server output messages</string>
                                 </property>
                             </widget>
-                            <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="2">
+                            <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="2">
                                 <property name="name">
                                     <cstring>XrunIgnoreFirstCheckBox</cstring>
                                 </property>
@@ -1877,7 +1896,7 @@
                                     </font>
                                 </property>
                                 <property name="text">
-                                    <string>&amp;Ignore first XRUN ocurrence on statistics</string>
+                                    <string>&amp;Ignore first XRUN occurrence on statistics</string>
                                 </property>
                                 <property name="accel">
                                     <string>Alt+I</string>
@@ -2348,25 +2367,6 @@
                                     <string>Whether to ask for confirmation on application exit</string>
                                 </property>
                             </widget>
-                            <widget class="QCheckBox">
-                                <property name="name">
-                                    <cstring>StdoutCaptureCheckBox</cstring>
-                                </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>Capture Standard &amp;Output into Messages</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+C</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Whether to capture standard output (stdout/stderr) into messages window</string>
-                                </property>
-                            </widget>
                         </vbox>
                     </widget>
                 </vbox>
@@ -2481,6 +2481,24 @@
         <sender>ShutdownScriptCheckBox</sender>
         <signal>toggled(bool)</signal>
         <receiver>ShutdownScriptBrowsePushButton</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>StdoutCaptureCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>XrunRegexTextLabel</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>StdoutCaptureCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>XrunRegexComboBox</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>StdoutCaptureCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>XrunIgnoreFirstCheckBox</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
@@ -2600,6 +2618,7 @@
     <tabstop>ShutdownScriptShellComboBox</tabstop>
     <tabstop>ShutdownScriptSymbolPushButton</tabstop>
     <tabstop>ShutdownScriptBrowsePushButton</tabstop>
+    <tabstop>StdoutCaptureCheckBox</tabstop>
     <tabstop>XrunRegexComboBox</tabstop>
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
     <tabstop>ActivePatchbayCheckBox</tabstop>

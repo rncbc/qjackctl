@@ -81,6 +81,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     PostStartupScriptShellComboBox->setCurrentText(m_pSetup->sPostStartupScriptShell);
     ShutdownScriptCheckBox->setChecked(m_pSetup->bShutdownScript);
     ShutdownScriptShellComboBox->setCurrentText(m_pSetup->sShutdownScriptShell);
+    StdoutCaptureCheckBox->setChecked(m_pSetup->bStdoutCapture);
     XrunRegexComboBox->setCurrentText(m_pSetup->sXrunRegex);
     XrunIgnoreFirstCheckBox->setChecked(m_pSetup->bXrunIgnoreFirst);
     ActivePatchbayCheckBox->setChecked(m_pSetup->bActivePatchbay);
@@ -99,7 +100,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     // Other misc options...
     StartJackCheckBox->setChecked(m_pSetup->bStartJack);
     QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
-    StdoutCaptureCheckBox->setChecked(m_pSetup->bStdoutCapture);
 
     // Finally, load preset list...
     m_iDirtySetup++;
@@ -301,6 +301,11 @@ void qjackctlSetupForm::stabilizeForm (void)
     ShutdownScriptSymbolPushButton->setEnabled(bEnabled);
     ShutdownScriptBrowsePushButton->setEnabled(bEnabled);
 
+    bEnabled = StdoutCaptureCheckBox->isChecked();
+    XrunRegexTextLabel->setEnabled(bEnabled);
+    XrunRegexComboBox->setEnabled(bEnabled);
+    XrunIgnoreFirstCheckBox->setChecked(bEnabled);
+
     bEnabled = ActivePatchbayCheckBox->isChecked();
     ActivePatchbayPathComboBox->setEnabled(bEnabled);
     ActivePatchbayPathPushButton->setEnabled(bEnabled);
@@ -453,6 +458,7 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->sPostStartupScriptShell = PostStartupScriptShellComboBox->currentText();
     m_pSetup->bShutdownScript         = ShutdownScriptCheckBox->isChecked();
     m_pSetup->sShutdownScriptShell    = ShutdownScriptShellComboBox->currentText();
+    m_pSetup->bStdoutCapture          = StdoutCaptureCheckBox->isChecked();
     m_pSetup->sXrunRegex              = XrunRegexComboBox->currentText();
     m_pSetup->bXrunIgnoreFirst        = XrunIgnoreFirstCheckBox->isChecked();
     m_pSetup->bActivePatchbay         = ActivePatchbayCheckBox->isChecked();
@@ -465,7 +471,6 @@ void qjackctlSetupForm::accept (void)
     m_pSetup->sMessagesFont  = MessagesFontTextLabel->font().toString();
     m_pSetup->bStartJack     = StartJackCheckBox->isChecked();
     m_pSetup->bQueryClose    = QueryCloseCheckBox->isChecked();
-    m_pSetup->bStdoutCapture = StdoutCaptureCheckBox->isChecked();
 
     // Save combobox history...
     m_pSetup->saveComboBoxHistory(ServerComboBox);

@@ -355,12 +355,14 @@ void qjackctlMainForm::startJack (void)
     // OK. Let's build the startup process...
     m_pJack = new QProcess(this);
 
-    // Setup communications...
-    m_pJack->setCommunication(QProcess::Stdout | QProcess::Stderr | QProcess::DupStderr);
-
-    QObject::connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
-    QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
-    QObject::connect(m_pJack, SIGNAL(processExited()),   this, SLOT(processJackExit()));
+    // Setup stdout/stderr capture...
+    if (m_pSetup->bStdoutCapture) {
+        m_pJack->setCommunication(QProcess::Stdout | QProcess::Stderr | QProcess::DupStderr);
+        QObject::connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
+        QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
+    }
+    // The unforgiveable signal communication...
+    QObject::connect(m_pJack, SIGNAL(processExited()), this, SLOT(processJackExit()));
 
     // Build process arguments...
     m_pJack->addArgument(m_preset.sServer);

@@ -82,6 +82,7 @@ public:
     QString sPostStartupScriptShell;
     bool    bShutdownScript;
     QString sShutdownScriptShell;
+    bool    bStdoutCapture;
     QString sXrunRegex;
     bool    bXrunIgnoreFirst;
     bool    bActivePatchbay;
@@ -91,7 +92,6 @@ public:
     int     iTimeDisplay;
     QString sMessagesFont;
     bool    bQueryClose;
-    bool    bStdoutCapture;
 
     // Defaults...
     QString sPatchbayPath;
