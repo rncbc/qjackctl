@@ -87,10 +87,10 @@ void qjackctlMainForm::init (void)
     m_iShutNotify = 0;
 
     // All forms are to be created right now.
-    m_pMessagesForm    = new qjackctlMessagesForm(this);
-    m_pStatusForm      = new qjackctlStatusForm(this);
-    m_pConnectionsForm = new qjackctlConnectionsForm(this);
-    m_pPatchbayForm    = new qjackctlPatchbayForm(this);
+    m_pMessagesForm    = new qjackctlMessagesForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+    m_pStatusForm      = new qjackctlStatusForm      (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+    m_pConnectionsForm = new qjackctlConnectionsForm (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
+    m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, Qt::WType_TopLevel | Qt::WStyle_Tool);
 
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),

@@ -13,7 +13,11 @@ ChangeLog
   giving a convenient head start for the JACK audio server as needed
   (as suggested by Fernando Pablo Lopez-Lezcano, of Planet CCRMA fame).
 
+- Messages, Status, Connections and Patchbay pop-up windows are not hinted 
+  as dialogs anymore and thus are not centered relative to parent main window 
+  which has become a strict Qt dialog widget behaviour (as of Qt 3.3+).
 
+  
 0.2.4  2004-02-01  Exclusive patchbay sockets.
 
 - Patchbay definitions may now be configured with exclusive sockets;

@@ -20,7 +20,7 @@
 
 </comment>
 <author>rncbc aka Rui Nuno Capela</author>
-<widget class="QDialog">
+<widget class="QWidget">
     <property name="name">
         <cstring>qjackctlStatusForm</cstring>
     </property>
@@ -49,9 +49,6 @@
     </property>
     <property name="icon">
         <pixmap>status1.png</pixmap>
-    </property>
-    <property name="sizeGripEnabled">
-        <bool>true</bool>
     </property>
     <grid>
         <property name="name">
