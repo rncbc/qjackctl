@@ -68,68 +68,6 @@ jack_port_t *qjackctlJackPort::jackPort (void)
 }
 
 
-// Special port name sorting virtual comparator.
-int qjackctlJackPort::compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const
-{
-    QString sName1, sName2;
-    int cchLength1, cchLength2;
-    int ich1, ich2;
-
-    sName1 = text(iColumn);
-    sName2 = pPortItem->text(iColumn);
-
-    cchLength1 = sName1.length();
-    cchLength2 = sName2.length();
-
-    for (ich1 = ich2 = 0; ich1 < cchLength1 && ich2 < cchLength2; ich1++, ich2++) {
-
-        // Skip (white)spaces...
-        while (sName1.at(ich1).isSpace())
-            ich1++;
-        while (sName2.at(ich2).isSpace())
-            ich2++;
-
-        QCharRef ch1 = sName1.at(ich1);
-        QCharRef ch2 = sName2.at(ich2);
-
-        if (ch1.isDigit() && ch2.isDigit()) {
-            // Find the whole length numbers...
-            int iDigits1 = ich1++;
-            while (sName1.at(ich1).isDigit())
-                ich1++;
-            int iDigits2 = ich2++;
-            while (sName2.at(ich2).isDigit())
-                ich2++;
-            // Compare as natural decimal-numbers...
-            int iNumber1 = sName1.mid(iDigits1, ich1 - iDigits1).toInt();
-            int iNumber2 = sName2.mid(iDigits2, ich2 - iDigits2).toInt();
-            if (iNumber1 < iNumber2)
-                return (bAscending ? -1 :  1);
-            else if (iNumber1 > iNumber2)
-                return (bAscending ?  1 : -1);
-            // Go on with this next char...
-            ch1 = sName1.at(ich1);
-            ch2 = sName2.at(ich2);
-        }
-
-        // Compare this char...
-        if (ch1 < ch2)
-            return (bAscending ? -1 :  1);
-        else if (ch1 > ch2)
-            return (bAscending ?  1 : -1);
-    }
-
-    // Both strings seem to match, but longer is greater.
-    if (cchLength1 < cchLength2)
-        return (bAscending ? -1 :  1);
-    else if (cchLength1 > cchLength2)
-        return (bAscending ?  1 : -1);
-
-    // Exact match.
-    return 0;
-}
-
-
 //----------------------------------------------------------------------
 // class qjackctlJackClient -- Jack client list item.
 //

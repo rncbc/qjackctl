@@ -87,6 +87,9 @@ public:
     bool isHilite();
     void setHilite (bool bHilite);
     
+    // Special port name sorting virtual comparator.
+    virtual int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
+
 protected:
 
     // To highlight current connected ports when complementary-selected.
@@ -147,6 +150,9 @@ public:
     // Connectiopn highlight methods.
     bool isHilite();
     void setHilite (bool bHilite);
+
+    // Special port name sorting virtual comparator.
+    virtual int compare (QListViewItem* pClientItem, int iColumn, bool bAscending) const;
 
 protected:
 
@@ -234,6 +240,9 @@ public:
     // Auto-open timer methods.
     void setAutoOpenTimeout(int iAutoOpenTimeout);
     int autoOpenTimeout();
+
+    // Natural decimal sorting comparator helper.
+    static int compare (const QString& s1, const QString& s2, bool bAscending);
 
 protected slots:
 

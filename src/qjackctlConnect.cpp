@@ -178,6 +178,13 @@ void qjackctlPortItem::paintCell( QPainter *p, const QColorGroup& cg, int column
 }
 
 
+// Special port name sorting virtual comparator.
+int qjackctlPortItem::compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const
+{
+	return qjackctlClientListView::compare(text(iColumn), pPortItem->text(iColumn), bAscending);
+}
+
+
 //----------------------------------------------------------------------
 // class qjackctlClientItem -- Jack client list item.
 //
@@ -312,6 +319,13 @@ void qjackctlClientItem::paintCell( QPainter *p, const QColorGroup& cg, int colu
     if (m_iHilite > 0)
         cgCell.setColor(QColorGroup::Text, Qt::darkBlue);
     QListViewItem::paintCell(p, cgCell, column, width, align);
+}
+
+
+// Special client name sorting virtual comparator.
+int qjackctlClientItem::compare (QListViewItem* pClientItem, int iColumn, bool bAscending) const
+{
+	return qjackctlClientListView::compare(text(iColumn), pClientItem->text(iColumn), bAscending);
 }
 
 
@@ -618,6 +632,63 @@ QDragObject *qjackctlClientListView::dragObject (void)
 void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
     m_pConnectView->contextMenu(pContextMenuEvent->globalPos());
+}
+
+
+// Natural decimal sorting comparator.
+int qjackctlClientListView::compare (const QString& s1, const QString& s2, bool bAscending)
+{
+    int ich1, ich2;
+
+    int cch1 = s1.length();
+    int cch2 = s2.length();
+
+    for (ich1 = ich2 = 0; ich1 < cch1 && ich2 < cch2; ich1++, ich2++) {
+
+        // Skip (white)spaces...
+        while (s1.at(ich1).isSpace())
+            ich1++;
+        while (s2.at(ich2).isSpace())
+            ich2++;
+
+        QChar ch1 = s1.at(ich1);
+        QChar ch2 = s2.at(ich2);
+
+        if (ch1.isDigit() && ch2.isDigit()) {
+            // Find the whole length numbers...
+            int iDigits1 = ich1++;
+            while (s1.at(ich1).isDigit())
+                ich1++;
+            int iDigits2 = ich2++;
+            while (s2.at(ich2).isDigit())
+                ich2++;
+            // Compare as natural decimal-numbers...
+            int iNumber1 = s1.mid(iDigits1, ich1 - iDigits1).toInt();
+            int iNumber2 = s2.mid(iDigits2, ich2 - iDigits2).toInt();
+            if (iNumber1 < iNumber2)
+                return (bAscending ? -1 :  1);
+            else if (iNumber1 > iNumber2)
+                return (bAscending ?  1 : -1);
+            // Go on with this next char...
+            ch1 = s1.at(ich1);
+            ch2 = s2.at(ich2);
+        }
+
+        // Compare this char...
+        if (ch1 < ch2)
+            return (bAscending ? -1 :  1);
+        else if (ch1 > ch2)
+            return (bAscending ?  1 : -1);
+    }
+
+    // Both strings seem to match, but longer is greater.
+    if (cch1 < cch2)
+        return (bAscending ? -1 :  1);
+    else if (cch1 > cch2)
+        return (bAscending ?  1 : -1);
+
+    // Exact match.
+    return 0;
 }
 
 
