@@ -466,8 +466,11 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-b");
         if (m_preset.iWordLength > 0)
             m_pJack->addArgument("-w" + QString::number(m_preset.iWordLength));
-    }
-    if (bAlsa || bDummy) {
+        if (m_preset.iAudio != QJACKCTL_PLAYBACK)
+            m_pJack->addArgument("-C" + m_preset.sInDevice);
+        if (m_preset.iAudio != QJACKCTL_CAPTURE)
+            m_pJack->addArgument("-P" + m_preset.sOutDevice);
+    } else {
         switch (m_preset.iAudio) {
         case QJACKCTL_DUPLEX:
         //  m_pJack->addArgument("-D");
@@ -479,11 +482,6 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-P");
             break;
         }
-    } else {
-        if (m_preset.iAudio != QJACKCTL_PLAYBACK)
-            m_pJack->addArgument("-C" + m_preset.sInDevice);
-        if (m_preset.iAudio != QJACKCTL_CAPTURE)
-            m_pJack->addArgument("-P" + m_preset.sOutDevice);
     }
     if (bOss || bAlsa) {
         if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)

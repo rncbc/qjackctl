@@ -306,10 +306,10 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
         break;
     }
 
-    InDeviceTextLabel->setEnabled(bInEnabled && (bOss || bPortaudio));
-    InDeviceComboBox->setEnabled(bInEnabled && (bOss || bPortaudio));
-    OutDeviceTextLabel->setEnabled(bOutEnabled && (bOss || bPortaudio));
-    OutDeviceComboBox->setEnabled(bOutEnabled && (bOss || bPortaudio));
+    InDeviceTextLabel->setEnabled(bInEnabled && bOss);
+    InDeviceComboBox->setEnabled(bInEnabled && bOss);
+    OutDeviceTextLabel->setEnabled(bOutEnabled && bOss);
+    OutDeviceComboBox->setEnabled(bOutEnabled && bOss);
 
     InChannelsTextLabel->setEnabled(bInEnabled && (bOss || bAlsa));
     InChannelsSpinBox->setEnabled(bInEnabled && (bOss || bAlsa));
