@@ -25,7 +25,6 @@ headers = config.h \
           
 sources = src/main.cpp \
 	src/qjackctlSetup.cpp \
-	src/qjackctlStatus.cpp \
 	src/qjackctlConnect.cpp \
 	src/qjackctlAlsaConnect.cpp \
 	src/qjackctlJackConnect.cpp \
