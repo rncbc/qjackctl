@@ -48,19 +48,19 @@ public:
 	// Client aliasing methods.
 	const QString& clientAlias ();
 	void setClientAlias (const QString& sClientAlias);
-	
+
 	// Port aliasing methods.
 	QString portAlias (const QString& sPortName);
 	void setPortAlias (const QString& sPortName,
 		const QString& sPortAlias);
-	
+
 	// Save client/port aliases definitions.
 	void saveSettings (QSettings& settings, const QString& sClientKey);
-	
+
 	// Escape and format a string as a regular expresion.
 	static QString escapeRegExpDigits (const QString& s,
 		unsigned int iThreshold = 3);
-	
+
 private:
 
 	// Client name regexp.

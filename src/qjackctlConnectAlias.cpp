@@ -165,7 +165,7 @@ qjackctlClientAlias *qjackctlConnectAlias::findClientName ( const QString& sClie
 		if (pClient->matchClientName(sClientName))
 		    return pClient;
 	}
-	
+
 	return NULL;
 }
 

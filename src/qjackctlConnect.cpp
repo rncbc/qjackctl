@@ -573,9 +573,13 @@ void qjackctlClientListView::renamedSlot ( QListViewItem *pItem, int )
 	    if (pItem->rtti() == QJACKCTL_CLIENTITEM) {
 			qjackctlClientItem *pClient = (qjackctlClientItem *) pItem;
 		    m_pAliases->setClientAlias(pClient->clientName(), sText);
+			if (sText.isEmpty())
+				pClient->setText(0, pClient->clientName());
 		} else {
 			qjackctlPortItem *pPort = (qjackctlPortItem *) pItem;
 		    m_pAliases->setPortAlias(pPort->clientName(), pPort->portName(), sText);
+			if (sText.isEmpty())
+				pPort->setText(0, pPort->portName());
 		}
 		m_pConnectView->setDirty(true);
 	}
