@@ -107,6 +107,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     TimeDisplayButtonGroup->setButton(m_pSetup->iTimeDisplay);
     TimeFormatComboBox->setCurrentItem(m_pSetup->iTimeFormat);
 
+    // Load font chooser samples...
     QFont font;
     if (m_pSetup->sMessagesFont.isEmpty() || !font.fromString(m_pSetup->sMessagesFont))
         font = QFont("Terminal", 8);
@@ -123,7 +124,16 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     DisplayFont2TextLabel->setFont(font);
     DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
+    if (m_pSetup->sConnectionsFont.isEmpty() || !font.fromString(m_pSetup->sConnectionsFont))
+        font = QFont("Helvetica", 8);
+    ConnectionsFontTextLabel->setFont(font);
+    ConnectionsFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+
+    // The main display shiny effect option.
     DisplayEffectCheckBox->setChecked(m_pSetup->bDisplayEffect);
+
+    // Connections view icon size.
+    ConnectionsIconSizeComboBox->setCurrentItem(m_pSetup->iConnectionsIconSize);
 
     // Messages limit option.
     MessagesLimitCheckBox->setChecked(m_pSetup->bMessagesLimit);
@@ -688,6 +698,19 @@ void qjackctlSetupForm::chooseMessagesFont()
 }
 
 
+// The connections font selection dialog.
+void qjackctlSetupForm::chooseConnectionsFont()
+{
+    bool  bOk  = false;
+    QFont font = QFontDialog::getFont(&bOk, ConnectionsFontTextLabel->font(), this);
+    if (bOk) {
+        ConnectionsFontTextLabel->setFont(font);
+        ConnectionsFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+        optionsChanged();
+    }
+}
+
+
 // Mark that some server preset settings have changed.
 void qjackctlSetupForm::settingsChanged (void)
 {
@@ -743,6 +766,8 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->sDisplayFont1            = DisplayFont1TextLabel->font().toString();
         m_pSetup->sDisplayFont2            = DisplayFont2TextLabel->font().toString();
         m_pSetup->bDisplayEffect           = DisplayEffectCheckBox->isChecked();
+        m_pSetup->iConnectionsIconSize     = ConnectionsIconSizeComboBox->currentItem();
+        m_pSetup->sConnectionsFont         = ConnectionsFontTextLabel->font().toString();
         m_pSetup->bStartJack               = StartJackCheckBox->isChecked();
         m_pSetup->bQueryClose              = QueryCloseCheckBox->isChecked();
         m_pSetup->bKeepOnTop               = KeepOnTopCheckBox->isChecked();

@@ -28,7 +28,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>520</width>
+            <width>587</width>
             <height>453</height>
         </rect>
     </property>
@@ -2364,7 +2364,7 @@
                                 </property>
                                 <property name="sizeHint">
                                     <size>
-                                        <width>180</width>
+                                        <width>200</width>
                                         <height>8</height>
                                     </size>
                                 </property>
@@ -2470,42 +2470,6 @@
                                     <string>Whether to activate a patchbay definition for connection persistence profile.</string>
                                 </property>
                             </widget>
-                            <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="5">
-                                <property name="name">
-                                    <cstring>BezierLinesCheckBox</cstring>
-                                </property>
-                                <property name="font">
-                                    <font>
-                                        <bold>0</bold>
-                                    </font>
-                                </property>
-                                <property name="text">
-                                    <string>Draw connection and patchbay lines as &amp;Bezier curves</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+B</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Whether to draw connection lines as cubic Bezier curves</string>
-                                </property>
-                            </widget>
-                            <spacer row="2" column="0">
-                                <property name="name">
-                                    <cstring>spacer22</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Vertical</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>8</width>
-                                        <height>30</height>
-                                    </size>
-                                </property>
-                            </spacer>
                         </grid>
                     </widget>
                 </vbox>
@@ -2523,7 +2487,7 @@
                     </property>
                     <widget class="QGroupBox">
                         <property name="name">
-                            <cstring>DisplayGroupBox</cstring>
+                            <cstring>TimeDisplayGroupBox</cstring>
                         </property>
                         <property name="font">
                             <font>
@@ -2701,7 +2665,7 @@
                                 </property>
                                 <property name="sizeHint">
                                     <size>
-                                        <width>16</width>
+                                        <width>24</width>
                                         <height>8</height>
                                     </size>
                                 </property>
@@ -2718,7 +2682,7 @@
                                 </property>
                                 <property name="sizeHint">
                                     <size>
-                                        <width>16</width>
+                                        <width>24</width>
                                         <height>8</height>
                                     </size>
                                 </property>
@@ -2875,7 +2839,7 @@
                                             <bool>false</bool>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Select font for the messages text display</string>
+                                            <string>Select font for front panel normal display</string>
                                         </property>
                                     </widget>
                                     <widget class="QPushButton" row="1" column="1">
@@ -2897,7 +2861,7 @@
                                             <bool>false</bool>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Select font for the messages text display</string>
+                                            <string>Select font for big time display</string>
                                         </property>
                                     </widget>
                                     <widget class="QLabel" row="2" column="0" rowspan="1" colspan="2">
@@ -2938,7 +2902,7 @@
                     </widget>
                     <widget class="QGroupBox">
                         <property name="name">
-                            <cstring>MessagesGroupBox</cstring>
+                            <cstring>MessagesWindowGroupBox</cstring>
                         </property>
                         <property name="font">
                             <font>
@@ -3110,6 +3074,214 @@
                             </widget>
                         </hbox>
                     </widget>
+                    <widget class="QGroupBox">
+                        <property name="name">
+                            <cstring>ConnectionsWindowGroupBox</cstring>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
+                        </property>
+                        <property name="margin">
+                            <number>4</number>
+                        </property>
+                        <property name="title">
+                            <string>Connections / Patchbay Window</string>
+                        </property>
+                        <property name="flat">
+                            <bool>true</bool>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>ConnectionsFontTextLabel</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>180</width>
+                                        <height>0</height>
+                                    </size>
+                                </property>
+                                <property name="paletteBackgroundColor">
+                                    <color>
+                                        <red>255</red>
+                                        <green>255</green>
+                                        <blue>255</blue>
+                                    </color>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="frameShape">
+                                    <enum>LineEditPanel</enum>
+                                </property>
+                                <property name="frameShadow">
+                                    <enum>Sunken</enum>
+                                </property>
+                                <property name="alignment">
+                                    <set>AlignCenter</set>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Sample connections view font</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="0" column="1">
+                                <property name="name">
+                                    <cstring>ConnectionsFontPushButton</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Font...</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+F</string>
+                                </property>
+                                <property name="autoDefault">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Select font for the connections view</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="0" column="3">
+                                <property name="name">
+                                    <cstring>ConnectionsIconSizeTextLabel</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Icon size (pixels):</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>ConnectionsIconSizeComboBox</cstring>
+                                </property>
+                                <property name="accel" stdset="0">
+                                    <string>Alt+I</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="0" column="4">
+                                <item>
+                                    <property name="text">
+                                        <string>16 x 16</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>32 x 32</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>64 x 64</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>ConnectionsIconSizeComboBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="editable">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="currentItem">
+                                    <number>0</number>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>The icon size for each item of the connections view</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="5">
+                                <property name="name">
+                                    <cstring>BezierLinesCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Draw connection and patchbay lines as &amp;Bezier curves</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+B</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to draw connection lines as cubic Bezier curves</string>
+                                </property>
+                            </widget>
+                            <spacer row="0" column="2">
+                                <property name="name">
+                                    <cstring>space44</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>137</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="1" column="0">
+                                <property name="name">
+                                    <cstring>spacer16_2</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Vertical</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Minimum</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>8</width>
+                                        <height>24</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </grid>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>MiscTabPage</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Misc</string>
+                </attribute>
+                <vbox>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
                     <widget class="QGroupBox">
                         <property name="name">
                             <cstring>OtherGroupBox</cstring>
@@ -3444,6 +3616,12 @@
         <slot>chooseMessagesFont()</slot>
     </connection>
     <connection>
+        <sender>ConnectionsFontPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>chooseConnectionsFont()</slot>
+    </connection>
+    <connection>
         <sender>OkPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3714,12 +3892,6 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
-        <sender>BezierLinesCheckBox</sender>
-        <signal>stateChanged(int)</signal>
-        <receiver>qjackctlSetupForm</receiver>
-        <slot>optionsChanged()</slot>
-    </connection>
-    <connection>
         <sender>TransportTimeRadioButton</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3764,6 +3936,12 @@
     <connection>
         <sender>MessagesLimitLinesComboBox</sender>
         <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ConnectionsIconSizeComboBox</sender>
+        <signal>activated(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>optionsChanged()</slot>
     </connection>
@@ -3834,10 +4012,10 @@
     <tabstop>ChanSpinBox</tabstop>
     <tabstop>InterfaceComboBox</tabstop>
     <tabstop>AudioComboBox</tabstop>
-    <tabstop>DitherComboBox</tabstop>
-    <tabstop>TimeoutComboBox</tabstop>
     <tabstop>InDeviceComboBox</tabstop>
     <tabstop>OutDeviceComboBox</tabstop>
+    <tabstop>DitherComboBox</tabstop>
+    <tabstop>TimeoutComboBox</tabstop>
     <tabstop>InChannelsSpinBox</tabstop>
     <tabstop>OutChannelsSpinBox</tabstop>
     <tabstop>StartDelayComboBox</tabstop>
@@ -3867,7 +4045,6 @@
     <tabstop>ActivePatchbayPathPushButton</tabstop>
     <tabstop>AutoRefreshCheckBox</tabstop>
     <tabstop>TimeRefreshComboBox</tabstop>
-    <tabstop>BezierLinesCheckBox</tabstop>
     <tabstop>TransportTimeRadioButton</tabstop>
     <tabstop>TransportBBTRadioButton</tabstop>
     <tabstop>ElapsedResetRadioButton</tabstop>
@@ -3879,6 +4056,9 @@
     <tabstop>MessagesFontPushButton</tabstop>
     <tabstop>MessagesLimitCheckBox</tabstop>
     <tabstop>MessagesLimitLinesComboBox</tabstop>
+    <tabstop>ConnectionsFontPushButton</tabstop>
+    <tabstop>ConnectionsIconSizeComboBox</tabstop>
+    <tabstop>BezierLinesCheckBox</tabstop>
     <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>KeepOnTopCheckBox</tabstop>
@@ -3918,6 +4098,7 @@
     <slot specifier="non virtual">chooseDisplayFont1()</slot>
     <slot specifier="non virtual">chooseDisplayFont2()</slot>
     <slot specifier="non virtual">chooseMessagesFont()</slot>
+    <slot specifier="non virtual">chooseConnectionsFont()</slot>
     <slot specifier="non virtual">settingsChanged()</slot>
     <slot specifier="non virtual">optionsChanged()</slot>
     <slot specifier="non virtual">accept()</slot>

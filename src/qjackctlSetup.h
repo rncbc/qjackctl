@@ -31,6 +31,11 @@
 #define QJACKCTL_CAPTURE    1
 #define QJACKCTL_PLAYBACK   2
 
+// Icon size combobox item indexes.
+#define QJACKCTL_ICON_16X16 0
+#define QJACKCTL_ICON_32X32 1
+#define QJACKCTL_ICON_64X64 2
+
 
 // Server settings preset struct.
 struct qjackctlPreset
@@ -119,6 +124,8 @@ public:
     QString sDisplayFont1;
     QString sDisplayFont2;
     bool    bDisplayEffect;
+    int     iConnectionsIconSize;
+    QString sConnectionsFont;
     bool    bQueryClose;
     bool    bKeepOnTop;
     bool    bSystemTray;

@@ -60,27 +60,55 @@ IMAGES   = icons/qjackctl.png \
            icons/refresh1.png \
            icons/socket1.png \
            icons/aclienti.png \
+           icons/aclienti_32x32.png \
+           icons/aclienti_64x64.png \
            icons/acliento.png \
-           icons/aplugi.png \
-           icons/aplugo.png \
+           icons/acliento_32x32.png \
+           icons/acliento_64x64.png \
            icons/aportlni.png \
+           icons/aportlni_32x32.png \
+           icons/aportlni_64x64.png \
            icons/aportlno.png \
+           icons/aportlno_32x32.png \
+           icons/aportlno_64x64.png \
            icons/aportlti.png \
+           icons/aportlti_32x32.png \
+           icons/aportlti_64x64.png \
            icons/aportlto.png \
+           icons/aportlto_32x32.png \
+           icons/aportlto_64x64.png \
            icons/aportpni.png \
+           icons/aportpni_32x32.png \
+           icons/aportpni_64x64.png \
            icons/aportpno.png \
+           icons/aportpno_32x32.png \
+           icons/aportpno_64x64.png \
            icons/aportpti.png \
+           icons/aportpti_32x32.png \
+           icons/aportpti_64x64.png \
            icons/aportpto.png \
+           icons/aportpto_32x32.png \
+           icons/aportpto_64x64.png \
+           icons/mclienti.png \
+           icons/mclienti_32x32.png \
+           icons/mclienti_64x64.png \
+           icons/mcliento.png \
+           icons/mcliento_32x32.png \
+           icons/mcliento_64x64.png \
+           icons/mporti.png \
+           icons/mporti_32x32.png \
+           icons/mporti_64x64.png \
+           icons/mporto.png \
+           icons/mporto_32x32.png \
+           icons/mporto_64x64.png \
            icons/asocketi.png \
            icons/asocketo.png \
-           icons/mclienti.png \
-           icons/mcliento.png \
-           icons/mplugi.png \
-           icons/mplugo.png \
-           icons/mporti.png \
-           icons/mporto.png \
+           icons/aplugi.png \
+           icons/aplugo.png \
            icons/msocketi.png \
            icons/msocketo.png \
+           icons/mplugi.png \
+           icons/mplugo.png \
            icons/xsocket1.png \
            icons/xstarting1.png \
            icons/xstarted1.png \

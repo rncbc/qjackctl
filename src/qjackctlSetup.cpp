@@ -69,6 +69,8 @@ qjackctlSetup::qjackctlSetup (void)
     sDisplayFont1            = m_settings.readEntry("/DisplayFont1", QString::null);
     sDisplayFont2            = m_settings.readEntry("/DisplayFont2", QString::null);
     bDisplayEffect           = m_settings.readBoolEntry("/DisplayEffect", true);
+    iConnectionsIconSize     = m_settings.readNumEntry("/ConnectionsIconSize", QJACKCTL_ICON_16X16);
+    sConnectionsFont         = m_settings.readEntry("/ConnectionsFont", QString::null);
     bQueryClose              = m_settings.readBoolEntry("/QueryClose", true);
     bKeepOnTop               = m_settings.readBoolEntry("/KeepOnTop", true);
     bSystemTray              = m_settings.readBoolEntry("/SystemTray", false);
@@ -129,6 +131,8 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/DisplayFont1",            sDisplayFont1);
     m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);
     m_settings.writeEntry("/DisplayEffect",           bDisplayEffect);
+    m_settings.writeEntry("/ConnectionsIconSize",     iConnectionsIconSize);
+    m_settings.writeEntry("/ConnectionsFont",         sConnectionsFont);
     m_settings.writeEntry("/QueryClose",              bQueryClose);
     m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
     m_settings.writeEntry("/SystemTray",              bSystemTray);
