@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.9"
+#define QJACKCTL_VERSION	"0.0.9a"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -265,7 +265,7 @@ void qjackctlMainForm::destroy (void)
     m_Settings.writeEntry("/ForceJackShell", ForceJackShellComboBox->currentText());
     m_Settings.writeEntry("/StartupScript", StartupScriptCheckBox->isChecked());
     m_Settings.writeEntry("/StartupScriptShell", StartupScriptShellComboBox->currentText());
-    m_Settings.writeEntry("/ShutdownScript", StartupScriptCheckBox->isChecked());
+    m_Settings.writeEntry("/ShutdownScript", ShutdownScriptCheckBox->isChecked());
     m_Settings.writeEntry("/ShutdownScriptShell", ShutdownScriptShellComboBox->currentText());
     m_Settings.writeEntry("/XrunRegex", XrunRegexComboBox->currentText());
     m_Settings.writeEntry("/XrunIgnoreFirst", XrunIgnoreFirstCheckBox->isChecked());
@@ -473,6 +473,10 @@ void qjackctlMainForm::startJack (void)
     case 2:
         m_pJack->addArgument("-P");
         break;
+    }
+    if (bDummy && WaitComboBox->currentText().toInt() > 0) {
+        m_pJack->addArgument("-w");
+        m_pJack->addArgument(WaitComboBox->currentText());
     }
     if (!bDummy) {
         switch (DitherComboBox->currentItem()) {
