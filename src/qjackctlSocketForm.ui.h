@@ -264,7 +264,7 @@ void qjackctlSocketForm::moveDownPlug()
     stabilizeForm();
 }
 
-#include <qmessagebox.h>
+
 // Add new Plug from context menu.
 void qjackctlSocketForm::activateAddPlugMenu ( int iItemID )
 {

@@ -40,7 +40,7 @@ void qjackctlMessagesForm::destroy (void)
 // Notify our parent that we're emerging.
 void qjackctlMessagesForm::showEvent ( QShowEvent *pShowEvent )
 {
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 
@@ -52,7 +52,7 @@ void qjackctlMessagesForm::hideEvent ( QHideEvent *pHideEvent )
 {
     QWidget::hideEvent(pHideEvent);
 
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 }

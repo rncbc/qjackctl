@@ -48,7 +48,7 @@ void qjackctlConnectionsForm::destroy (void)
 // Notify our parent that we're emerging.
 void qjackctlConnectionsForm::showEvent ( QShowEvent *pShowEvent )
 {
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 
@@ -62,7 +62,7 @@ void qjackctlConnectionsForm::hideEvent ( QHideEvent *pHideEvent )
 {
     QWidget::hideEvent(pHideEvent);
 
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 }
@@ -81,7 +81,7 @@ void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
     if (pJackClient && m_pConnections == NULL) {
         m_pConnections = new qjackctlConnections(ConnectionsView, pJackClient);
         if (m_pConnections) {
-            qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+            qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
             if (pMainForm)
                 QObject::connect(m_pConnections, SIGNAL(connectChanged()), pMainForm, SLOT(connectChangedSlot()));
         }
@@ -142,7 +142,7 @@ void qjackctlConnectionsForm::refresh ( bool bEnabled )
         m_pConnections->refresh();
         stabilize(true);
     } else {
-        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
         if (pMainForm)
             pMainForm->refreshConnections();
     }

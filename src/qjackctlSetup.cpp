@@ -40,26 +40,27 @@ qjackctlSetup::~qjackctlSetup (void)
 void qjackctlSetup::load (void)
 {
     settings.beginGroup("/Settings");
-    sServer     = settings.readEntry("/Server", "jackstart");
-    bRealtime   = settings.readBoolEntry("/Realtime", true);
-    bSoftMode   = settings.readBoolEntry("/SoftMode", false);
-    bAsio       = settings.readBoolEntry("/Asio", false);
-    bMonitor    = settings.readBoolEntry("/Monitor", false);
-    iChan       = settings.readNumEntry("/Chan", 0);
-    iPriority   = settings.readNumEntry("/Priority", 0);
-    iFrames     = settings.readNumEntry("/Frames", 1024);
-    iSampleRate = settings.readNumEntry("/SampleRate", 48000);
-    iPeriods    = settings.readNumEntry("/Periods", 2);
-    iWait       = settings.readNumEntry("/Wait", 21333);
-    sDriver     = settings.readEntry("/Driver", "alsa");
-    sInterface  = settings.readEntry("/Interface", "hw:0");
-    iAudio      = settings.readNumEntry("/Audio", 0);
-    iDither     = settings.readNumEntry("/Dither", 0);
-    iTimeout    = settings.readNumEntry("/Timeout", 500);
-    bHWMon      = settings.readBoolEntry("/HWMon", false);
-    bHWMeter    = settings.readBoolEntry("/HWMeter", false);
-    sTempDir    = settings.readEntry("/TempDir", "(default)");
-    bVerbose    = settings.readBoolEntry("/Verbose", false);
+    sServer      = settings.readEntry("/Server", "jackstart");
+    bRealtime    = settings.readBoolEntry("/Realtime", true);
+    bSoftMode    = settings.readBoolEntry("/SoftMode", false);
+    bMonitor     = settings.readBoolEntry("/Monitor", false);
+    bShorts      = settings.readBoolEntry("/Shorts", false);
+    iChan        = settings.readNumEntry("/Chan", 0);
+    iPriority    = settings.readNumEntry("/Priority", 0);
+    iFrames      = settings.readNumEntry("/Frames", 1024);
+    iSampleRate  = settings.readNumEntry("/SampleRate", 48000);
+    iPeriods     = settings.readNumEntry("/Periods", 2);
+    iWait        = settings.readNumEntry("/Wait", 21333);
+    sDriver      = settings.readEntry("/Driver", "alsa");
+    sInterface   = settings.readEntry("/Interface", "hw:0");
+    iAudio       = settings.readNumEntry("/Audio", 0);
+    iDither      = settings.readNumEntry("/Dither", 0);
+    iTimeout     = settings.readNumEntry("/Timeout", 500);
+    bHWMon       = settings.readBoolEntry("/HWMon", false);
+    bHWMeter     = settings.readBoolEntry("/HWMeter", false);
+    iInChannels  = settings.readNumEntry("/InChannels", 0);
+    iOutChannels = settings.readNumEntry("/OutChannels", 0);
+    bVerbose     = settings.readBoolEntry("/Verbose", false);
     settings.endGroup();
 
     settings.beginGroup("/Options");
@@ -77,6 +78,7 @@ void qjackctlSetup::load (void)
     iTimeRefresh            = settings.readNumEntry("/TimeRefresh", 10);
     iTimeDisplay            = settings.readNumEntry("/TimeDisplay", 0);
     sMessagesFont           = settings.readEntry("/MessagesFont", QString::null);
+    bQueryClose             = settings.readBoolEntry("/QueryClose", true);
     settings.endGroup();
 
     settings.beginGroup("/Defaults");
@@ -94,26 +96,27 @@ void qjackctlSetup::save (void)
     settings.endGroup();
 
     settings.beginGroup("/Settings");
-    settings.writeEntry("/Server",     sServer);
-    settings.writeEntry("/Realtime",   bRealtime);
-    settings.writeEntry("/SoftMode",   bSoftMode);
-    settings.writeEntry("/Asio",       bAsio);
-    settings.writeEntry("/Monitor",    bMonitor);
-    settings.writeEntry("/Chan",       iChan);
-    settings.writeEntry("/Priority",   iPriority);
-    settings.writeEntry("/Frames",     iFrames);
-    settings.writeEntry("/SampleRate", iSampleRate);
-    settings.writeEntry("/Periods",    iPeriods);
-    settings.writeEntry("/Wait",       iWait);
-    settings.writeEntry("/Driver",     sDriver);
-    settings.writeEntry("/Interface",  sInterface);
-    settings.writeEntry("/Audio",      iAudio);
-    settings.writeEntry("/Dither",     iDither);
-    settings.writeEntry("/Timeout",    iTimeout);
-    settings.writeEntry("/HWMon",      bHWMon);
-    settings.writeEntry("/HWMeter",    bHWMeter);
-    settings.writeEntry("/TempDir",    sTempDir);
-    settings.writeEntry("/Verbose",         bVerbose);
+    settings.writeEntry("/Server",      sServer);
+    settings.writeEntry("/Realtime",    bRealtime);
+    settings.writeEntry("/SoftMode",    bSoftMode);
+    settings.writeEntry("/Monitor",     bMonitor);
+    settings.writeEntry("/Shorts",      bShorts);
+    settings.writeEntry("/Chan",        iChan);
+    settings.writeEntry("/Priority",    iPriority);
+    settings.writeEntry("/Frames",      iFrames);
+    settings.writeEntry("/SampleRate",  iSampleRate);
+    settings.writeEntry("/Periods",     iPeriods);
+    settings.writeEntry("/Wait",        iWait);
+    settings.writeEntry("/Driver",      sDriver);
+    settings.writeEntry("/Interface",   sInterface);
+    settings.writeEntry("/Audio",       iAudio);
+    settings.writeEntry("/Dither",      iDither);
+    settings.writeEntry("/Timeout",     iTimeout);
+    settings.writeEntry("/HWMon",       bHWMon);
+    settings.writeEntry("/HWMeter",     bHWMeter);
+    settings.writeEntry("/InChannels",  iInChannels);
+    settings.writeEntry("/OutChannels", iOutChannels);
+    settings.writeEntry("/Verbose",     bVerbose);
     settings.endGroup();
 
     settings.beginGroup("/Options");
@@ -131,6 +134,7 @@ void qjackctlSetup::save (void)
     settings.writeEntry("/TimeRefresh",             iTimeRefresh);
     settings.writeEntry("/TimeDisplay",             iTimeDisplay);
     settings.writeEntry("/MessagesFont",            sMessagesFont);
+    settings.writeEntry("/QueryClose",              bQueryClose);
     settings.endGroup();
 
     settings.beginGroup("/Defaults");

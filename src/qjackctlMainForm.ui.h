@@ -151,7 +151,7 @@ bool qjackctlMainForm::queryClose (void)
 {
     bool bQueryClose = true;
 
-    if (m_pJack && m_pJack->isRunning()) {
+    if (m_pJack && m_pJack->isRunning() && m_setup.bQueryClose) {
         bQueryClose = (QMessageBox::warning(this, tr("Warning"),
             tr("JACK is currently running.") + "\n\n" +
             tr("Closing this application will also terminate the JACK audio server."),
@@ -290,18 +290,9 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument("-P");
         m_pJack->addArgument(QString::number(m_setup.iPriority));
     }
-    if (m_setup.bAsio)
-        m_pJack->addArgument("-a");
     if (m_setup.iTimeout > 0) {
         m_pJack->addArgument("-t");
         m_pJack->addArgument(QString::number(m_setup.iTimeout));
-    }
-    sTemp = m_setup.sTempDir;
-    if (sTemp == "(default)")
-        sTemp = "";
-    if (!sTemp.isEmpty()) {
-        m_pJack->addArgument("-D");
-        m_pJack->addArgument(sTemp);
     }
     sTemp = m_setup.sDriver;
     m_pJack->addArgument("-d");
@@ -326,7 +317,7 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument(QString::number(m_setup.iFrames));
     }
     if (bAlsa) {
-        if (!m_setup.bAsio && m_setup.iPeriods > 0) {
+        if (m_setup.iPeriods > 0) {
             m_pJack->addArgument("-n");
             m_pJack->addArgument(QString::number(m_setup.iPeriods));
         }
@@ -334,6 +325,16 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-s");
         if (m_setup.bMonitor)
             m_pJack->addArgument("-m");
+        if (m_setup.bShorts)
+            m_pJack->addArgument("-S");
+        if (m_setup.iInChannels > 0) {
+            m_pJack->addArgument("-i");
+            m_pJack->addArgument(QString::number(m_setup.iInChannels));
+        }
+        if (m_setup.iOutChannels > 0) {
+            m_pJack->addArgument("-o");
+            m_pJack->addArgument(QString::number(m_setup.iOutChannels));
+        }
     }
     switch (m_setup.iAudio) {
     case 0:

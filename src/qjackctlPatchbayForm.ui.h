@@ -57,7 +57,7 @@ void qjackctlPatchbayForm::destroy (void)
 // Notify our parent that we're emerging.
 void qjackctlPatchbayForm::showEvent ( QShowEvent *pShowEvent )
 {
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 
@@ -72,7 +72,7 @@ void qjackctlPatchbayForm::hideEvent ( QHideEvent *pHideEvent )
 {
     QWidget::hideEvent(pHideEvent);
 
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 }
@@ -121,7 +121,7 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     if (PatchbayView->dirty()) {
         sText += " [" + tr("modified") + "]";
     } else {
-        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
         if (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath))
             sText += " [" + tr("active") + "]";
     }
@@ -297,7 +297,7 @@ void qjackctlPatchbayForm::activatePatchbay()
         return;
 
     // Activate it...
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm) {
         pMainForm->activatePatchbay(m_sPatchbayPath);
         stabilizeForm();

@@ -41,8 +41,8 @@ public:
     QString sServer;
     bool    bRealtime;
     bool    bSoftMode;
-    bool    bAsio;
     bool    bMonitor;
+    bool    bShorts;
     int     iChan;
     int     iPriority;
     int     iFrames;
@@ -56,7 +56,8 @@ public:
     int     iTimeout;
     bool    bHWMon;
     bool    bHWMeter;
-    QString sTempDir;
+    int     iInChannels;
+    int     iOutChannels;
     bool    bVerbose;
 
     // Options...
@@ -74,6 +75,7 @@ public:
     int     iTimeRefresh;
     int     iTimeDisplay;
     QString sMessagesFont;
+    bool    bQueryClose;
 
     // Defaults...
     QString sPatchbayPath;

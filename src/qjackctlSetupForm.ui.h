@@ -54,12 +54,6 @@ void qjackctlSetupForm::destroy (void)
 }
 
 
-// User interface stabilization.
-void qjackctlSetupForm::toggleAsio (void)
-{
-    changeDriver(DriverComboBox->currentText());
-}
-
 void qjackctlSetupForm::changeLatency ( const QString& )
 {
     computeLatency();
@@ -70,9 +64,7 @@ void qjackctlSetupForm::computeLatency (void)
     float lat = 0.0;
     int p = FramesComboBox->currentText().toInt();
     int r = SampleRateComboBox->currentText().toInt();
-    int n = 2;
-    if (!AsioCheckBox->isChecked())
-        n = PeriodsComboBox->currentText().toInt();
+    int n = PeriodsComboBox->currentText().toInt();
     if (r > 0)
         lat = (float) (1000.0 * p * n) / (float) r;
     if (lat > 0.0)
@@ -86,16 +78,16 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     bool bDummy     = (sDriver == "dummy");
     bool bAlsa      = (sDriver == "alsa");
     bool bPortaudio = (sDriver == "portaudio");
-    bool bAsio      = AsioCheckBox->isChecked();
 
     SoftModeCheckBox->setEnabled(bAlsa);
     MonitorCheckBox->setEnabled(bAlsa);
+    ShortsCheckBox->setEnabled(bAlsa);
 
     ChanTextLabel->setEnabled(bPortaudio);
     ChanComboBox->setEnabled(bPortaudio);
 
-    PeriodsTextLabel->setEnabled(bAlsa && !bAsio);
-    PeriodsComboBox->setEnabled(bAlsa && !bAsio);
+    PeriodsTextLabel->setEnabled(bAlsa);
+    PeriodsComboBox->setEnabled(bAlsa);
 
     WaitTextLabel->setEnabled(bDummy);
     WaitComboBox->setEnabled(bDummy);
@@ -108,6 +100,11 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 
     HWMonCheckBox->setEnabled(bAlsa);
     HWMeterCheckBox->setEnabled(bAlsa);
+
+    InChannelsTextLabel->setEnabled(bAlsa);
+    InChannelsSpinBox->setEnabled(bAlsa);
+    OutChannelsTextLabel->setEnabled(bAlsa);
+    OutChannelsSpinBox->setEnabled(bAlsa);
 
     computeLatency();
 }
@@ -227,7 +224,6 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     pSetup->settings.beginGroup("/History");
     pSetup->loadComboBoxHistory(ServerComboBox);
     pSetup->loadComboBoxHistory(InterfaceComboBox);
-    pSetup->loadComboBoxHistory(TempDirComboBox);
     pSetup->loadComboBoxHistory(StartupScriptShellComboBox);
     pSetup->loadComboBoxHistory(PostStartupScriptShellComboBox);
     pSetup->loadComboBoxHistory(ShutdownScriptShellComboBox);
@@ -239,8 +235,8 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     ServerComboBox->setCurrentText(pSetup->sServer);
     RealtimeCheckBox->setChecked(pSetup->bRealtime);
     SoftModeCheckBox->setChecked(pSetup->bSoftMode);
-    AsioCheckBox->setChecked(pSetup->bAsio);
     MonitorCheckBox->setChecked(pSetup->bMonitor);
+    ShortsCheckBox->setChecked(pSetup->bShorts);
     ChanComboBox->setCurrentText(QString::number(pSetup->iChan));
     PriorityComboBox->setCurrentText(QString::number(pSetup->iPriority));
     FramesComboBox->setCurrentText(QString::number(pSetup->iFrames));
@@ -254,7 +250,8 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     TimeoutComboBox->setCurrentText(QString::number(pSetup->iTimeout));
     HWMonCheckBox->setChecked(pSetup->bHWMon);
     HWMeterCheckBox->setChecked(pSetup->bHWMeter);
-    TempDirComboBox->setCurrentText(pSetup->sTempDir);
+    InChannelsSpinBox->setValue(pSetup->iInChannels);
+    OutChannelsSpinBox->setValue(pSetup->iOutChannels);
     VerboseCheckBox->setChecked(pSetup->bVerbose);
 
     // Load Options...
@@ -270,7 +267,7 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
     ActivePatchbayPathComboBox->setCurrentText(pSetup->sActivePatchbayPath);
     AutoRefreshCheckBox->setChecked(pSetup->bAutoRefresh);
     TimeRefreshComboBox->setCurrentText(QString::number(pSetup->iTimeRefresh));
-    
+
     // Load Defaults...
     TimeDisplayButtonGroup->setButton(pSetup->iTimeDisplay);
     QFont font;
@@ -278,6 +275,9 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
         font = QFont("Terminal", 8);
     MessagesFontTextLabel->setFont(font);
     MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
+
+    // Othet options finally...
+    QueryCloseCheckBox->setChecked(pSetup->bQueryClose);
 }
 
 
@@ -285,26 +285,27 @@ void qjackctlSetupForm::load ( qjackctlSetup *pSetup )
 void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
 {
     // Save Settings...
-    pSetup->sServer     = ServerComboBox->currentText();
-    pSetup->bRealtime   = RealtimeCheckBox->isChecked();
-    pSetup->bSoftMode   = SoftModeCheckBox->isChecked();
-    pSetup->bAsio       = AsioCheckBox->isChecked();
-    pSetup->bMonitor    = MonitorCheckBox->isChecked();
-    pSetup->iChan       = ChanComboBox->currentText().toInt();
-    pSetup->iPriority   = PriorityComboBox->currentText().toInt();
-    pSetup->iFrames     = FramesComboBox->currentText().toInt();
-    pSetup->iSampleRate = SampleRateComboBox->currentText().toInt();
-    pSetup->iPeriods    = PeriodsComboBox->currentText().toInt();
-    pSetup->iWait       = WaitComboBox->currentText().toInt();
-    pSetup->sDriver     = DriverComboBox->currentText();
-    pSetup->sInterface  = InterfaceComboBox->currentText();
-    pSetup->iAudio      = AudioComboBox->currentItem();
-    pSetup->iDither     = DitherComboBox->currentItem();
-    pSetup->iTimeout    = TimeoutComboBox->currentText().toInt();
-    pSetup->bHWMon      = HWMonCheckBox->isChecked();
-    pSetup->bHWMeter    = HWMeterCheckBox->isChecked();
-    pSetup->sTempDir    = TempDirComboBox->currentText();
-    pSetup->bVerbose    = VerboseCheckBox->isChecked();
+    pSetup->sServer      = ServerComboBox->currentText();
+    pSetup->bRealtime    = RealtimeCheckBox->isChecked();
+    pSetup->bSoftMode    = SoftModeCheckBox->isChecked();
+    pSetup->bMonitor     = MonitorCheckBox->isChecked();
+    pSetup->bShorts      = ShortsCheckBox->isChecked();
+    pSetup->iChan        = ChanComboBox->currentText().toInt();
+    pSetup->iPriority    = PriorityComboBox->currentText().toInt();
+    pSetup->iFrames      = FramesComboBox->currentText().toInt();
+    pSetup->iSampleRate  = SampleRateComboBox->currentText().toInt();
+    pSetup->iPeriods     = PeriodsComboBox->currentText().toInt();
+    pSetup->iWait        = WaitComboBox->currentText().toInt();
+    pSetup->sDriver      = DriverComboBox->currentText();
+    pSetup->sInterface   = InterfaceComboBox->currentText();
+    pSetup->iAudio       = AudioComboBox->currentItem();
+    pSetup->iDither      = DitherComboBox->currentItem();
+    pSetup->iTimeout     = TimeoutComboBox->currentText().toInt();
+    pSetup->bHWMon       = HWMonCheckBox->isChecked();
+    pSetup->bHWMeter     = HWMeterCheckBox->isChecked();
+    pSetup->iInChannels  = InChannelsSpinBox->value();
+    pSetup->iOutChannels = OutChannelsSpinBox->value();
+    pSetup->bVerbose     = VerboseCheckBox->isChecked();
 
     // Save Options...
     pSetup->bStartupScript          = StartupScriptCheckBox->isChecked();
@@ -323,13 +324,13 @@ void qjackctlSetupForm::save ( qjackctlSetup *pSetup )
     // Save Defaults...
     pSetup->iTimeDisplay  = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
     pSetup->sMessagesFont = MessagesFontTextLabel->font().toString();
-    
+    pSetup->bQueryClose   = QueryCloseCheckBox->isChecked();
+
     // Save combobox history...
     pSetup->settings.beginGroup("/History");
     pSetup->saveComboBoxHistory(ServerComboBox);
     pSetup->saveComboBoxHistory(PriorityComboBox);
     pSetup->saveComboBoxHistory(InterfaceComboBox);
-    pSetup->saveComboBoxHistory(TempDirComboBox);
     pSetup->saveComboBoxHistory(StartupScriptShellComboBox);
     pSetup->saveComboBoxHistory(PostStartupScriptShellComboBox);
     pSetup->saveComboBoxHistory(ShutdownScriptShellComboBox);

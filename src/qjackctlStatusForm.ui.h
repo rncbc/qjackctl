@@ -72,7 +72,7 @@ void qjackctlStatusForm::destroy (void)
 // Notify our parent that we're emerging.
 void qjackctlStatusForm::showEvent ( QShowEvent *pShowEvent )
 {
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 
@@ -84,7 +84,7 @@ void qjackctlStatusForm::hideEvent ( QHideEvent *pHideEvent )
 {
     QWidget::hideEvent(pHideEvent);
 
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
 }
@@ -93,7 +93,7 @@ void qjackctlStatusForm::hideEvent ( QHideEvent *pHideEvent )
 // Ask our parent to reset status.
 void qjackctlStatusForm::resetXrunStats (void)
 {
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->resetXrunStats();
 }
@@ -101,7 +101,7 @@ void qjackctlStatusForm::resetXrunStats (void)
 // Ask our parent to refresh our status.
 void qjackctlStatusForm::refreshXrunStats (void)
 {
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->refreshXrunStats();
 }
