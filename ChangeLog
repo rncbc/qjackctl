@@ -16,6 +16,9 @@ ChangeLog
   one can also include the operation of the LADCCA daemon (following a
   suggestion from Kasper Souren).
 
+- Connections command buttons are now shortly disabled after clicking,
+  avoiding accidental duplicated connections.
+  
 
 0.0.8   2003-09-19  Preliminary transport and buffer size status control.
 

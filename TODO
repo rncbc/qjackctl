@@ -3,6 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 TODOs
 
+0.0.9 Backlog
+
+- Before bumping into 0.1 branch: arrangements for a client-only mode,
+  disabling the service start/stop control mode, for instances where
+  the JACK daemon is already active or started externally.
+
 0.0.5 Backlog
 
 - Make available some translations, as some has been contributed already;
@@ -11,7 +17,7 @@ TODOs
 0.0.4 Backlog:
 
 - Devise someway to make patchbay connections persistent, in a profile/preset
-  manner, that will get automagically setup when respective jack clients are
+  manner, that will get automagically setup when respective JACK clients are
   detected on runtime; this will be handy por non-LADCCA aware clients.
 
 0.0.3 Backlog:
