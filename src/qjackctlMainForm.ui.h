@@ -429,10 +429,11 @@ void qjackctlMainForm::startJack (void)
     m_pJack->addArgument(sCommand);
     if (m_preset.bVerbose)
         m_pJack->addArgument("-v");
-    if (m_preset.bRealtime)
+    if (m_preset.bRealtime) {
         m_pJack->addArgument("-R");
-    if (m_preset.iPriority > 0)
-        m_pJack->addArgument("-P" + QString::number(m_preset.iPriority));
+        if (m_preset.iPriority > 0)
+            m_pJack->addArgument("-P" + QString::number(m_preset.iPriority));
+    }
     if (m_preset.iTimeout > 0)
         m_pJack->addArgument("-t" + QString::number(m_preset.iTimeout));
     if (m_preset.bNoMemLock)
