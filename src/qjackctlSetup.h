@@ -79,6 +79,9 @@ public:
     // Command line usage helper.
     void print_usage(const char *arg0);
 
+    // Default (translated) preset name.
+    QString sDefPresetName;
+    
     // Immediate server start option.
     bool bStartJack;
 

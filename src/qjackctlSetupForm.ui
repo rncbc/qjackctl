@@ -1536,7 +1536,7 @@
                                             <number>0</number>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Chan:</string>
+                                            <string>&amp;Channel:</string>
                                         </property>
                                         <property name="alignment">
                                             <set>AlignVCenter|AlignRight</set>
@@ -3117,31 +3117,19 @@
         <sender>PresetComboBox</sender>
         <signal>textChanged(const QString&amp;)</signal>
         <receiver>qjackctlSetupForm</receiver>
-        <slot>changePreset(const QString&amp;)</slot>
+        <slot>changeCurrentPreset(const QString&amp;)</slot>
     </connection>
     <connection>
         <sender>PresetSavePushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
-        <slot>savePreset()</slot>
+        <slot>saveCurrentPreset()</slot>
     </connection>
     <connection>
         <sender>PresetDeletePushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
-        <slot>deletePreset()</slot>
-    </connection>
-    <connection>
-        <sender>RealtimeCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PriorityTextLabel</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>RealtimeCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PriorityComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
+        <slot>deleteCurrentPreset()</slot>
     </connection>
     <connection>
         <sender>DriverComboBox</sender>
@@ -3150,112 +3138,10 @@
         <slot>changeDriver(const QString&amp;)</slot>
     </connection>
     <connection>
-        <sender>FramesComboBox</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>qjackctlSetupForm</receiver>
-        <slot>changeLatency(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>PeriodsComboBox</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>qjackctlSetupForm</receiver>
-        <slot>changeLatency(const QString&amp;)</slot>
-    </connection>
-    <connection>
-        <sender>SampleRateComboBox</sender>
-        <signal>textChanged(const QString&amp;)</signal>
-        <receiver>qjackctlSetupForm</receiver>
-        <slot>changeLatency(const QString&amp;)</slot>
-    </connection>
-    <connection>
         <sender>AudioComboBox</sender>
         <signal>highlighted(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>changeAudio(int)</slot>
-    </connection>
-    <connection>
-        <sender>StartupScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>StartupScriptShellComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>StartupScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>StartupScriptSymbolPushButton</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>StartupScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>StartupScriptBrowsePushButton</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>PostStartupScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PostStartupScriptShellComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>PostStartupScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PostStartupScriptSymbolPushButton</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>PostStartupScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PostStartupScriptBrowsePushButton</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>ShutdownScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>ShutdownScriptShellComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>ShutdownScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>ShutdownScriptSymbolPushButton</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>ShutdownScriptCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>ShutdownScriptBrowsePushButton</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>StdoutCaptureCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>XrunRegexTextLabel</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>StdoutCaptureCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>XrunRegexComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>StdoutCaptureCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>XrunIgnoreFirstCheckBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>ActivePatchbayCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>ActivePatchbayPathComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>ActivePatchbayCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>ActivePatchbayPathPushButton</receiver>
-        <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
         <sender>StartupScriptBrowsePushButton</sender>
@@ -3300,12 +3186,6 @@
         <slot>browseActivePatchbayPath()</slot>
     </connection>
     <connection>
-        <sender>AutoRefreshCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TimeRefreshComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
         <sender>DisplayFont1PushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3324,24 +3204,6 @@
         <slot>chooseMessagesFont()</slot>
     </connection>
     <connection>
-        <sender>MessagesLimitCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>MessagesLimitLinesComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>ServerConfigCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>ServerConfigNameComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>ServerConfigCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>ServerConfigTempCheckBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
         <sender>OkPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3352,6 +3214,324 @@
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>ServerComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>DriverComboBox</sender>
+        <signal>activated(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>RealtimeCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>NoMemLockCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>SoftModeCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>MonitorCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ShortsCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>HWMonCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>HWMeterCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>IgnoreHWCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>PriorityComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>FramesComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>SampleRateComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>PeriodsComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>WordLengthComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>WaitComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ChanComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>InterfaceComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>AudioComboBox</sender>
+        <signal>activated(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>DitherComboBox</sender>
+        <signal>activated(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>TimeoutComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>InDeviceComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>OutDeviceComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>InChannelsSpinBox</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>OutChannelsSpinBox</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>StartDelayComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>VerboseCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>StartupScriptCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>StartupScriptShellComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>PostStartupScriptCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>PostStartupScriptShellComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ShutdownScriptShellComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>StdoutCaptureCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>XrunRegexComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>XrunIgnoreFirstCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ActivePatchbayCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ActivePatchbayPathComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>AutoRefreshCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>TimeRefreshComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>TransportTimeRadioButton</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>TransportBBTRadioButton</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ElapsedResetRadioButton</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ElapsedXrunRadioButton</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>TimeFormatComboBox</sender>
+        <signal>activated(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>MessagesLimitCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>MessagesLimitLinesComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>StartJackCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>QueryCloseCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>KeepOnTopCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ServerConfigCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ServerConfigNameComboBox</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>ServerConfigTempCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
     </connection>
 </connections>
 <tabstops>
@@ -3432,14 +3612,15 @@
 <variables>
     <variable access="private">qjackctlSetup *m_pSetup;</variable>
     <variable access="private">int m_iDirtySetup;</variable>
+    <variable access="private">int m_iDirtySettings;</variable>
+    <variable access="private">int m_iDirtyOptions;</variable>
+    <variable access="private">QString m_sPreset;</variable>
 </variables>
 <slots>
-    <slot specifier="non virtual">changePreset( const QString&amp; sPreset )</slot>
-    <slot specifier="non virtual">savePreset()</slot>
-    <slot specifier="non virtual">deletePreset()</slot>
-    <slot specifier="non virtual">resetPresets()</slot>
+    <slot specifier="non virtual">changeCurrentPreset( const QString&amp; sPreset )</slot>
+    <slot specifier="non virtual">saveCurrentPreset()</slot>
+    <slot specifier="non virtual">deleteCurrentPreset()</slot>
     <slot specifier="non virtual">changeAudio( int )</slot>
-    <slot specifier="non virtual">changeLatency( const QString &amp; )</slot>
     <slot specifier="non virtual">changeDriver( const QString &amp; )</slot>
     <slot specifier="non virtual">symbolStartupScript()</slot>
     <slot specifier="non virtual">symbolPostStartupScript()</slot>
@@ -3451,6 +3632,8 @@
     <slot specifier="non virtual">chooseDisplayFont1()</slot>
     <slot specifier="non virtual">chooseDisplayFont2()</slot>
     <slot specifier="non virtual">chooseMessagesFont()</slot>
+    <slot specifier="non virtual">settingsChanged()</slot>
+    <slot specifier="non virtual">optionsChanged()</slot>
     <slot specifier="non virtual">accept()</slot>
     <slot specifier="non virtual">reject()</slot>
 </slots>
@@ -3458,6 +3641,10 @@
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
     <function specifier="non virtual">setup( qjackctlSetup *pSetup )</function>
+    <function access="provate" specifier="non virtual">changePreset( const QString&amp; sPreset )</function>
+    <function access="private" specifier="non virtual" returnType="bool">savePreset( const QString &amp; sPreset )</function>
+    <function access="private" specifier="non virtual" returnType="bool">deletePreset( const QString &amp; sPreset )</function>
+    <function access="private" specifier="non virtual">resetPresets()</function>
     <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
     <function access="private" specifier="non virtual">computeLatency()</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>

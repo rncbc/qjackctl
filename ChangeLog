@@ -20,6 +20,11 @@ ChangeLog
 
 - Server mode (RT) status display added.
 
+- Warning messages are now prompted to the user when there are any pending
+  changes not saved nor applied while on the setup dialog.
+
+- Translation support for the default preset name "(default)".
+
 
 0.2.6   2004-02-29  More work in progress.
 

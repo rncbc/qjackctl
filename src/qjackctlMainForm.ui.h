@@ -387,7 +387,7 @@ void qjackctlMainForm::startJack (void)
     // Load primary/default server preset...
     if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
         appendMessagesError(tr("Could not load preset") + " \"" + m_pSetup->sDefPreset + "\". " + tr("Retrying with default."));
-        m_pSetup->sDefPreset = "(default)";
+        m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
         if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
             appendMessagesError(tr("Could not load default preset. Sorry."));
             processJackExit();
