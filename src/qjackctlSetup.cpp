@@ -152,6 +152,63 @@ qjackctlSetup::~qjackctlSetup (void)
 
 
 //---------------------------------------------------------------------------
+// Aliases preset management methods.
+
+bool qjackctlSetup::loadAliases ( const QString& sPreset )
+{
+    QString sSuffix;
+    if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+        sSuffix = "/" + sPreset;
+        // Check if on list.
+        if (presets.find(sPreset) == presets.end())
+            return false;
+    }
+
+	// Load preset aliases...
+	const QString sAliasesKey = "/Aliases" + sSuffix;
+    m_settings.beginGroup(sAliasesKey);
+	  m_settings.beginGroup("/Jack");
+	 	aliasJackOutputs.loadSettings(m_settings, "/Outputs");
+	 	aliasJackInputs.loadSettings(m_settings, "/Inputs");
+	  m_settings.endGroup();
+	  m_settings.beginGroup("/Alsa");
+	 	aliasAlsaOutputs.loadSettings(m_settings, "/Outputs");
+	 	aliasAlsaInputs.loadSettings(m_settings, "/Inputs");
+	  m_settings.endGroup();
+    m_settings.endGroup();
+
+    return true;
+}
+
+bool qjackctlSetup::saveAliases ( const QString& sPreset )
+{
+    QString sSuffix;
+    if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+        sSuffix = "/" + sPreset;
+        // Append to list if not already.
+        if (presets.find(sPreset) == presets.end())
+            presets.prepend(sPreset);
+    }
+
+	// Save preset aliases...
+	const QString sAliasesKey = "/Aliases" + sSuffix;
+	deleteKey(sAliasesKey);
+    m_settings.beginGroup(sAliasesKey);
+	  m_settings.beginGroup("/Jack");
+	 	aliasJackOutputs.saveSettings(m_settings, "/Outputs");
+	 	aliasJackInputs.saveSettings(m_settings, "/Inputs");
+	  m_settings.endGroup();
+	  m_settings.beginGroup("/Alsa");
+	 	aliasAlsaOutputs.saveSettings(m_settings, "/Outputs");
+	 	aliasAlsaInputs.saveSettings(m_settings, "/Inputs");
+	  m_settings.endGroup();
+    m_settings.endGroup();
+
+    return true;
+}
+
+
+//---------------------------------------------------------------------------
 // Preset management methods.
 
 bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset )
@@ -254,6 +311,7 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
             return false;
         presets.remove(iter);
         deleteKey("/Settings" + sSuffix);
+    	deleteKey("/Aliases" + sSuffix);
     }
     return true;
 }

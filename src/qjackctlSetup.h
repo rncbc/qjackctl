@@ -22,9 +22,9 @@
 #ifndef __qjackctlSetup_h
 #define __qjackctlSetup_h
 
-#include <qstring.h>
-#include <qsettings.h>
 #include <qcombobox.h>
+
+#include "qjackctlConnectAlias.h"
 
 // Audio mode combobox item indexes.
 #define QJACKCTL_DUPLEX     0
@@ -137,6 +137,16 @@ public:
 
     // Defaults...
     QString sPatchbayPath;
+
+	// Aliases containers.
+    qjackctlConnectAlias aliasJackOutputs;
+    qjackctlConnectAlias aliasJackInputs;
+    qjackctlConnectAlias aliasAlsaOutputs;
+    qjackctlConnectAlias aliasAlsaInputs;
+
+    // Aliases preset management methods.
+    bool loadAliases(const QString& sPreset);
+    bool saveAliases(const QString& sPreset);
 
     // Preset management methods.
     bool loadPreset(qjackctlPreset& preset, const QString& sPreset);

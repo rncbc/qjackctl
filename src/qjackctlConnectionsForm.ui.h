@@ -20,9 +20,9 @@
 
 *****************************************************************************/
 
-#include "config.h"
+#include <qmessagebox.h>
 
-#include "qjackctlSetup.h"
+#include "config.h"
 
 
 // Kind of constructor.
@@ -34,10 +34,11 @@ void qjackctlConnectionsForm::init (void)
     m_pAlsaSeq     = NULL;
     m_pAlsaConnect = NULL;
 
+	m_pSetup = NULL;
+	
     // Connect it to some UI feedback slots.
     QObject::connect(JackConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
     QObject::connect(JackConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
-
     QObject::connect(AlsaConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
     QObject::connect(AlsaConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
 }
@@ -73,6 +74,66 @@ void qjackctlConnectionsForm::hideEvent ( QHideEvent *pHideEvent )
     qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm)
         pMainForm->stabilizeForm();
+}
+
+
+// Window close event handlers.
+bool qjackctlConnectionsForm::queryClose (void)
+{
+    bool bQueryClose = true;
+
+    if (m_pSetup && (JackConnectView->dirty() || AlsaConnectView->dirty())) {
+        switch (QMessageBox::warning(this, tr("Warning"),
+            tr("The preset aliases have been changed:") + "\n\n" +
+            "\"" + m_sPreset +  "\"\n\n" +
+            tr("Do you want to save the changes?"),
+            tr("Save"), tr("Discard"), tr("Cancel"))) {
+        case 0:     // Save...
+            saveAliases();
+            // Fall thru....
+        case 1:     // Discard
+            break;
+        default:    // Cancel.
+            bQueryClose = false;
+        }
+    }
+
+    return bQueryClose;
+}
+
+
+// Load aliases from current preset.
+bool qjackctlConnectionsForm::loadAliases (void)
+{
+	bool bResult = false;
+	
+	if (m_pSetup && queryClose()) {
+		m_sPreset = m_pSetup->sDefPreset;
+		bResult = m_pSetup->loadAliases(m_sPreset);
+		if (bResult) {
+			JackConnectView->setDirty(false);
+			AlsaConnectView->setDirty(false);
+		}
+	}
+
+	return bResult;
+}
+
+
+// Save aliases to current preset.
+bool qjackctlConnectionsForm::saveAliases (void)
+{
+	bool bResult = false;
+
+	if (m_pSetup) {
+		bResult = m_pSetup->saveAliases(m_sPreset);
+		if (bResult) {
+			JackConnectView->setDirty(false);
+			AlsaConnectView->setDirty(false);
+		}
+	}
+
+	return bResult;
 }
 
 
@@ -323,6 +384,22 @@ void qjackctlConnectionsForm::stabilizeAlsa ( bool bEnabled )
         AlsaDisconnectAllPushButton->setEnabled(false);
         AlsaRefreshPushButton->setEnabled(false);
     }
+}
+
+
+// Set reference to global options, mostly needed for the
+// clint/port aliasing feature.
+void qjackctlConnectionsForm::setupAliases ( qjackctlSetup *pSetup )
+{
+	m_pSetup = pSetup;
+
+    // Set initial alias maps for all listviews...
+    if (pSetup) {
+	    JackConnectView->OListView()->setAliases(&(pSetup->aliasJackOutputs));
+	    JackConnectView->IListView()->setAliases(&(pSetup->aliasJackInputs));
+	    AlsaConnectView->OListView()->setAliases(&(pSetup->aliasAlsaOutputs));
+	    AlsaConnectView->IListView()->setAliases(&(pSetup->aliasAlsaInputs));
+	}
 }
 
 

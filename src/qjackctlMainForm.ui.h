@@ -179,6 +179,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     m_pStatusForm      = new qjackctlStatusForm      (this, 0, wflags);
     m_pConnectionsForm = new qjackctlConnectionsForm (this, 0, wflags);
     m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, wflags);
+	// Setup appropriately...
+	m_pConnectionsForm->setupAliases(m_pSetup);
 
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
@@ -315,6 +317,10 @@ bool qjackctlMainForm::queryClose (void)
             break;
         }
     }
+
+    // Try to save current aliases default settings.
+    if (bQueryClose && m_pConnectionsForm)
+        bQueryClose = m_pConnectionsForm->queryClose();
 
     // Try to save current patchbay default settings.
     if (bQueryClose && m_pPatchbayForm) {
@@ -1522,13 +1528,17 @@ void qjackctlMainForm::cableConnectSlot ( const QString& sOutputPort, const QStr
 // Start our jack audio control client...
 bool qjackctlMainForm::startJackClient ( bool bDetach )
 {
-    // Have it a setup?
-    if (m_pSetup == NULL)
-        return false;
-        
     // If can't be already started, are we?
     if (m_pJackClient)
         return true;
+
+    // Have it a setup?
+    if (m_pSetup == NULL)
+        return false;
+
+	// Time to (re)load current preset aliases?
+	if (m_pConnectionsForm && !m_pConnectionsForm->loadAliases())
+	    return false;
 
     // Make sure all status(es) will be updated ASAP.
     m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
@@ -1584,7 +1594,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
             appendMessagesColor(tr("Server configuration saved to \"%1\".").arg(sFilename), "#999933");
         }
     }
-    
+
     // Do not forget to reset XRUN stats variables.
     if (!bDetach)
         resetXrunStats();
@@ -1810,6 +1820,7 @@ void qjackctlMainForm::showSetupForm (void)
         if (m_pSetup->sConnectionsFont.isEmpty() && m_pConnectionsForm)
             m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
         // To track down deferred or immediate changes.
+        QString sOldDefPreset           = m_pSetup->sDefPreset;
         QString sOldMessagesFont        = m_pSetup->sMessagesFont;
         QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
         QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
@@ -2278,6 +2289,9 @@ void qjackctlMainForm::activatePresetsMenu ( int iItemID )
 {
     if (m_pPresetsMenu == NULL)
         return;
+	if (m_pConnectionsForm && !m_pConnectionsForm->queryClose())
+	    return;
+
     int iIndex = m_pPresetsMenu->itemParameter(iItemID);
     if (iIndex >= 0 && iIndex < (int) m_pSetup->presets.count())
         m_pSetup->sDefPreset = m_pSetup->presets[iIndex];

@@ -1,7 +1,7 @@
 // qjackctlPatchbay.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -208,9 +208,6 @@ public:
 
     // Retrieve a context pixmap.
     QPixmap& pixmap(int iPixmap);
-
-    // Escape and format a string as a regular expresion
-    static QString escapeRegExpDigits(const QString& s, unsigned int iThreshold = 2);
 
 public slots:
 

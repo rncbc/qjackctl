@@ -45,6 +45,13 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, const QString&
     QListViewItem::setDropEnabled(true);
 
     m_connects.setAutoDelete(false);
+
+	// Check aliasing...
+	qjackctlConnectAlias *pAliases = ((pClient->clientList())->listView())->aliases();
+	if (pAliases) {
+	    QListViewItem::setText(0, pAliases->portAlias(pClient->clientName(), sPortName));
+        QListViewItem::setRenameEnabled(0, true);
+	}
 }
 
 // Default destructor.
@@ -206,6 +213,13 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList, const 
     QListViewItem::setDropEnabled(true);
 
 //  QListViewItem::setSelectable(false);
+
+	// Check aliasing...
+	qjackctlConnectAlias *pAliases = (pClientList->listView())->aliases();
+	if (pAliases) {
+	    QListViewItem::setText(0, pAliases->clientAlias(sClientName));
+        QListViewItem::setRenameEnabled(0, true);
+	}
 }
 
 // Default destructor.
@@ -229,7 +243,7 @@ qjackctlPortItem *qjackctlClientItem::findPort (const QString& sPortName)
 
 
 // Client list accessor.
-qjackctlClientList *qjackctlClientItem::clientlist (void)
+qjackctlClientList *qjackctlClientItem::clientList (void)
 {
     return m_pClientList;
 }
@@ -477,6 +491,8 @@ qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectVi
     m_iAutoOpenTimeout = 0;
     m_pDragDropItem    = 0;
     
+    m_pAliases = 0;
+    
     if (bReadable)
         QListView::addColumn(tr("Readable Clients") + " / " + tr("Output Ports"));
     else
@@ -493,6 +509,9 @@ qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectVi
     QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     
     setAutoOpenTimeout(800);
+    
+    QObject::connect(this, SIGNAL(itemRenamed(QListViewItem*,int)),
+		this, SLOT(renamedSlot(QListViewItem*,int)));
 }
 
 // Default destructor.
@@ -522,6 +541,44 @@ void qjackctlClientListView::setAutoOpenTimeout ( int iAutoOpenTimeout )
 int qjackctlClientListView::autoOpenTimeout (void)
 {
     return m_iAutoOpenTimeout;
+}
+
+
+// Aliasing support methods.
+void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases )
+{
+    m_pAliases = pAliases;
+}
+
+qjackctlConnectAlias *qjackctlClientListView::aliases (void)
+{
+    return m_pAliases;
+}
+
+
+// In-place aliasing slot.
+void qjackctlClientListView::startRenameSlot (void)
+{
+	QListViewItem *pItem = selectedItem();
+	if (pItem)
+	    pItem->startRename(0);
+}
+
+
+// In-place aliasing slot.
+void qjackctlClientListView::renamedSlot ( QListViewItem *pItem, int )
+{
+	if (pItem && m_pAliases) {
+		const QString& sText = pItem->text(0);
+	    if (pItem->rtti() == QJACKCTL_CLIENTITEM) {
+			qjackctlClientItem *pClient = (qjackctlClientItem *) pItem;
+		    m_pAliases->setClientAlias(pClient->clientName(), sText);
+		} else {
+			qjackctlPortItem *pPort = (qjackctlPortItem *) pItem;
+		    m_pAliases->setPortAlias(pPort->clientName(), pPort->portName(), sText);
+		}
+		m_pConnectView->setDirty(true);
+	}
 }
 
 
@@ -631,7 +688,30 @@ QDragObject *qjackctlClientListView::dragObject (void)
 // Context menu request event handler.
 void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-    m_pConnectView->contextMenu(pContextMenuEvent->globalPos());
+    qjackctlConnect *pConnect = m_pConnectView->binding();
+    if (pConnect == 0)
+        return;
+
+    int iItemID;
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+
+    iItemID = pContextMenu->insertItem(tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canConnectSelected());
+    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectSelected());
+    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectAll());
+
+    pContextMenu->insertSeparator();
+    iItemID = pContextMenu->insertItem(tr("Re&name"), this, SLOT(startRenameSlot()), tr("Alt+N", "Rename"));
+    pContextMenu->setItemEnabled(iItemID, selectedItem() && selectedItem()->renameEnabled(0));
+
+    pContextMenu->insertSeparator();
+    iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
+
+    pContextMenu->exec(pContextMenuEvent->globalPos());
+
+    delete pContextMenu;
 }
 
 
@@ -827,7 +907,26 @@ void qjackctlConnectorView::resizeEvent ( QResizeEvent * )
 // Context menu request event handler.
 void qjackctlConnectorView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-    m_pConnectView->contextMenu(pContextMenuEvent->globalPos());
+    qjackctlConnect *pConnect = m_pConnectView->binding();
+    if (pConnect == 0)
+        return;
+
+    int iItemID;
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+
+    iItemID = pContextMenu->insertItem(tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canConnectSelected());
+    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectSelected());
+    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectAll());
+
+    pContextMenu->insertSeparator();
+    iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
+
+    pContextMenu->exec(pContextMenuEvent->globalPos());
+
+    delete pContextMenu;
 }
 
 
@@ -869,7 +968,9 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
     QObject::connect(m_pIListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pIListView, SIGNAL(contentsMoving(int, int)),   m_pConnectorView, SLOT(contentsMoved(int, int)));
 
-#if QT_VERSION >= 0x030200    
+    m_bDirty = false;
+
+#if QT_VERSION >= 0x030200
     QSplitter::setChildrenCollapsible(false);
 #endif	
 }
@@ -878,32 +979,6 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
 // Default destructor.
 qjackctlConnectView::~qjackctlConnectView (void)
 {
-}
-
-
-// Common context menu slot.
-void qjackctlConnectView::contextMenu ( const QPoint& pos )
-{
-    qjackctlConnect *pConnect = binding();
-    if (pConnect == 0)
-        return;
-
-    int iItemID;
-    QPopupMenu* pContextMenu = new QPopupMenu(this);
-
-    iItemID = pContextMenu->insertItem(tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
-    pContextMenu->setItemEnabled(iItemID, pConnect->canConnectSelected());
-    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
-    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectSelected());
-    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
-    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectAll());
-
-    pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
-
-    pContextMenu->exec(pos);
-    
-    delete pContextMenu;
 }
 
 
@@ -968,6 +1043,20 @@ void qjackctlConnectView::setIconSize ( int iIconSize )
 int qjackctlConnectView::iconSize (void)
 {
     return m_iIconSize;
+}
+
+
+// Dirty flag methods.
+void qjackctlConnectView::setDirty ( bool bDirty )
+{
+    m_bDirty = bDirty;
+    if (bDirty)
+        emit contentsChanged();
+}
+
+bool qjackctlConnectView::dirty (void)
+{
+    return m_bDirty;
 }
 
 

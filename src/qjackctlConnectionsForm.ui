@@ -396,6 +396,7 @@
     <tabstop>AlsaRefreshPushButton</tabstop>
 </tabstops>
 <includes>
+    <include location="local" impldecl="in declaration">qjackctlSetup.h</include>
     <include location="local" impldecl="in declaration">qjackctlJackConnect.h</include>
     <include location="local" impldecl="in declaration">qjackctlAlsaConnect.h</include>
     <include location="local" impldecl="in implementation">qjackctlMainForm.h</include>
@@ -406,6 +407,8 @@
     <variable access="private">snd_seq_t *m_pAlsaSeq;</variable>
     <variable access="private">qjackctlJackConnect *m_pJackConnect;</variable>
     <variable access="private">qjackctlAlsaConnect *m_pAlsaConnect;</variable>
+    <variable access="private">qjackctlSetup *m_pSetup;</variable>
+    <variable access="private">QString m_sPreset;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">jackConnectSelected()</slot>
@@ -424,6 +427,7 @@
     <function access="private" specifier="non virtual">destroy()</function>
     <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
     <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
+    <function specifier="non virtual" returnType="bool">queryClose()</function>
     <function specifier="non virtual" returnType="QFont">connectionsFont()</function>
     <function specifier="non virtual">setConnectionsFont( const QFont &amp; font )</function>
     <function specifier="non virtual">setConnectionsIconSize( int iIconSize )</function>
@@ -435,6 +439,9 @@
     <function specifier="non virtual">refreshAlsa( bool bEnabled )</function>
     <function specifier="non virtual">stabilizeJack( bool bEnabled )</function>
     <function specifier="non virtual">stabilizeAlsa( bool bEnabled )</function>
+    <function specifier="non virtual">setupAliases( qjackctlSetup *pSetup )</function>
+    <function specifier="non virtual" returnType="bool">loadAliases()</function>
+    <function specifier="non virtual" returnType="bool">saveAliases()</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>

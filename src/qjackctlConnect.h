@@ -30,6 +30,8 @@
 #include <qpixmap.h>
 #include <qpainter.h>
 
+#include "qjackctlConnectAlias.h"
+
 // QListViewItem::rtti return values.
 #define QJACKCTL_CLIENTITEM    1001
 #define QJACKCTL_PORTITEM      1002
@@ -132,7 +134,7 @@ public:
     bool isReadable();
 
     // Client list accessor.
-    qjackctlClientList *clientlist();
+    qjackctlClientList *clientList();
 
     // Port list accessor.
     QPtrList<qjackctlPortItem>& ports();
@@ -233,7 +235,7 @@ class qjackctlClientListView : public QListView
 public:
 
     // Constructor.
-    qjackctlClientListView(qjackctlConnectView *pConnectionsView, bool bReadable);
+    qjackctlClientListView(qjackctlConnectView *pConnectView, bool bReadable);
     // Default destructor.
     ~qjackctlClientListView();
 
@@ -241,11 +243,18 @@ public:
     void setAutoOpenTimeout(int iAutoOpenTimeout);
     int autoOpenTimeout();
 
+	// Aliasing support methods.
+	void setAliases(qjackctlConnectAlias *pAliases);
+	qjackctlConnectAlias *aliases();
+	
     // Natural decimal sorting comparator helper.
     static int compare (const QString& s1, const QString& s2, bool bAscending);
 
 protected slots:
 
+    // In-place aliasing slots.
+    void startRenameSlot();
+    void renamedSlot(QListViewItem *pItem, int);
     // Auto-open timeout slot.
     void timeoutSlot();
 
@@ -273,6 +282,9 @@ private:
     QTimer *m_pAutoOpenTimer;
     // Item we'll eventually drop something.
     QListViewItem *m_pDragDropItem;
+    
+    // Aliasing support.
+    qjackctlConnectAlias *m_pAliases;
 };
 
 
@@ -350,11 +362,15 @@ public:
     void setIconSize (int iIconSize);
     int iconSize (void);
 
-public slots:
+    // Dirty flag accessors.
+    void setDirty (bool bDirty);
+    bool dirty();
 
-    // Common context menu slot.
-    void contextMenu(const QPoint& pos);
-    
+signals:
+
+    // Contents change signal.
+    void contentsChanged();
+
 private:
 
     // Child controls.
@@ -371,6 +387,9 @@ private:
     // How large will be those icons.
     // 0 = 16x16 (default), 1 = 32x32, 2 = 64x64.
     int m_iIconSize;
+
+    // The obnoxious dirty flag.
+    bool m_bDirty;
 };
 
 

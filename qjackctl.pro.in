@@ -3,6 +3,7 @@ INCLUDEPATH += ./src
 SOURCES += src/main.cpp \
            src/qjackctlSetup.cpp \
            src/qjackctlConnect.cpp \
+           src/qjackctlConnectAlias.cpp \
            src/qjackctlAlsaConnect.cpp \
            src/qjackctlJackConnect.cpp \
            src/qjackctlPatchbay.cpp \
@@ -14,6 +15,7 @@ HEADERS += src/qjackctlAbout.h \
            src/qjackctlSetup.h \
            src/qjackctlStatus.h \
            src/qjackctlConnect.h \
+           src/qjackctlConnectAlias.h \
            src/qjackctlAlsaConnect.h \
            src/qjackctlJackConnect.h \
            src/qjackctlPatchbay.h \

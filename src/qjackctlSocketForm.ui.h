@@ -26,6 +26,8 @@
 
 #include "config.h"
 
+#include "qjackctlConnectAlias.h"
+
 
 // Kind of constructor.
 void qjackctlSocketForm::init()
@@ -362,7 +364,7 @@ void qjackctlSocketForm::socketTypeChanged()
                     QString sClientPort = ppszClientPorts[iClientPort];
                     int iColon = sClientPort.find(":");
                     if (iColon >= 0) {
-                        QString sClientName = qjackctlSocketList::escapeRegExpDigits(sClientPort.left(iColon));
+                        QString sClientName = qjackctlClientAlias::escapeRegExpDigits(sClientPort.left(iColon));
                         bool bExists = false;
                         for (int i = 0; i < ClientNameComboBox->count() && !bExists; i++)
                             bExists = (sClientName == ClientNameComboBox->text(i));
@@ -396,7 +398,7 @@ void qjackctlSocketForm::socketTypeChanged()
             snd_seq_client_info_set_client(pClientInfo, -1);
             while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
                 int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
-                QString sClient = qjackctlSocketList::escapeRegExpDigits(snd_seq_client_info_get_name(pClientInfo));
+                QString sClient = qjackctlClientAlias::escapeRegExpDigits(snd_seq_client_info_get_name(pClientInfo));
                 if (iAlsaClient > 0) {
                     bool bExists = false;
                     snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
@@ -452,7 +454,7 @@ void qjackctlSocketForm::clientNameChanged()
                     QString sClientPort = ppszClientPorts[iClientPort];
                     int iColon = sClientPort.find(":");
                     if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
-                        QString sPort = qjackctlSocketList::escapeRegExpDigits(sClientPort.right(sClientPort.length() - iColon - 1));
+                        QString sPort = qjackctlClientAlias::escapeRegExpDigits(sClientPort.right(sClientPort.length() - iColon - 1));
                         if (PlugListView->findItem(sPort, 0) == NULL)
                             PlugNameComboBox->insertItem(sPort);
                     }
@@ -485,7 +487,7 @@ void qjackctlSocketForm::clientNameChanged()
                         unsigned int uiPortCapability = snd_seq_port_info_get_capability(pPortInfo);
                         if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
                             ((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
-                            QString sPort = qjackctlSocketList::escapeRegExpDigits(snd_seq_port_info_get_name(pPortInfo));
+                            QString sPort = qjackctlClientAlias::escapeRegExpDigits(snd_seq_port_info_get_name(pPortInfo));
                             if (PlugListView->findItem(sPort, 0) == NULL)
                                 PlugNameComboBox->insertItem(sPort);
                         }

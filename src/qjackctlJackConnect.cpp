@@ -92,7 +92,7 @@ qjackctlJackClient::~qjackctlJackClient (void)
 // Jack client accessor.
 jack_client_t *qjackctlJackClient::jackClient (void)
 {
-    return ((qjackctlJackClientList *) clientlist())->jackClient();
+    return ((qjackctlJackClientList *) clientList())->jackClient();
 }
 
 
