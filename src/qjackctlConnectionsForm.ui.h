@@ -76,6 +76,30 @@ void qjackctlConnectionsForm::hideEvent ( QHideEvent *pHideEvent )
 }
 
 
+// Connections view font accessors.
+QFont qjackctlConnectionsForm::connectionsFont (void)
+{
+    // Elect one list view to retrieve current font.
+    return JackConnectView->OListView()->font();
+}
+
+void qjackctlConnectionsForm::setConnectionsFont ( const QFont & font )
+{
+    // Set fonts of all listviews...
+    JackConnectView->OListView()->setFont(font);
+    JackConnectView->IListView()->setFont(font);
+    AlsaConnectView->OListView()->setFont(font);
+    AlsaConnectView->IListView()->setFont(font);
+}
+
+
+// Connections view icon size accessor.
+void qjackctlConnectionsForm::setConnectionsIconSize( int iIconSize )
+{
+    // TODO: Set icon sizes of all listviews...
+}
+
+
 // (Un)Bind a JACK client to this form.
 void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
 {

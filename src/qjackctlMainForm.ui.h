@@ -166,27 +166,30 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
         this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
-    // Try to restore old window positioning.
+    // Try to restore old window positioning and appearence.
     m_pSetup->loadWidgetGeometry(this);
+
+    // Make it final show...
+    StatusDisplayFrame->show();
+
+    // Set other defaults...
+    updateDisplayEffect();
+    updateTimeDisplayFonts();
+    updateTimeDisplayToolTips();
+    updateTimeFormat();
+    updateMessagesFont();
+    updateMessagesLimit();
+    updateConnectionsFont();
+    updateConnectionsIconSize();
+    updateBezierLines();
+    updateActivePatchbay();
+    updateSystemTray();
+
     // And for the whole widget gallore...
     m_pSetup->loadWidgetGeometry(m_pMessagesForm);
     m_pSetup->loadWidgetGeometry(m_pStatusForm);
     m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
     m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
-
-    // Make it final show...
-    StatusDisplayFrame->show();
-
-    // Set defaults...
-    updateMessagesFont();
-    updateMessagesLimit();
-    updateBezierLines();
-    updateDisplayEffect();
-    updateTimeDisplayFonts();
-    updateTimeDisplayToolTips();
-    updateTimeFormat();
-    updateActivePatchbay();
-    updateSystemTray();
 
     // Initial XRUN statistics reset.
     resetXrunStats();
@@ -847,6 +850,31 @@ void qjackctlMainForm::updateMessagesLimit (void)
         else
             m_pMessagesForm->setMessagesLimit(0);
     }
+}
+
+
+// Force update of the connections font.
+void qjackctlMainForm::updateConnectionsFont (void)
+{
+    if (m_pSetup == NULL)
+        return;
+
+    if (m_pConnectionsForm && !m_pSetup->sConnectionsFont.isEmpty()) {
+        QFont font;
+        if (font.fromString(m_pSetup->sConnectionsFont))
+            m_pConnectionsForm->setConnectionsFont(font);
+    }
+}
+
+
+// Update of the connections view icon size.
+void qjackctlMainForm::updateConnectionsIconSize (void)
+{
+    if (m_pSetup == NULL)
+        return;
+
+    if (m_pConnectionsForm)
+        m_pConnectionsForm->setConnectionsIconSize(m_pSetup->iConnectionsIconSize);
 }
 
 
@@ -1738,37 +1766,45 @@ void qjackctlMainForm::showSetupForm (void)
             m_pSetup->sDisplayFont1 = TimeDisplayTextLabel->font().toString();
         if (m_pSetup->sDisplayFont2.isEmpty())
             m_pSetup->sDisplayFont2 = ServerStateTextLabel->font().toString();
+        if (m_pSetup->sConnectionsFont.isEmpty() && m_pConnectionsForm)
+            m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
         // To track down deferred or immediate changes.
-        QString sOldMessagesFont       = m_pSetup->sMessagesFont;
-        QString sOldDisplayFont1       = m_pSetup->sDisplayFont1;
-        QString sOldDisplayFont2       = m_pSetup->sDisplayFont2;
-        int     iOldTimeDisplay        = m_pSetup->iTimeDisplay;
-        int     iOldTimeFormat         = m_pSetup->iTimeFormat;
-        bool    bDisplayEffect         = m_pSetup->bDisplayEffect;
-        bool    bOldActivePatchbay     = m_pSetup->bActivePatchbay;
-        QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
-        bool    bStdoutCapture         = m_pSetup->bStdoutCapture;
-        bool    bKeepOnTop             = m_pSetup->bKeepOnTop;
-        bool    bSystemTray            = m_pSetup->bSystemTray;
-        int     bMessagesLimit         = m_pSetup->bMessagesLimit;
-        int     iMessagesLimitLines    = m_pSetup->iMessagesLimitLines;
-        bool    bBezierLines           = m_pSetup->bBezierLines;
+        QString sOldMessagesFont        = m_pSetup->sMessagesFont;
+        QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
+        QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
+        QString sOldConnectionsFont     = m_pSetup->sConnectionsFont;
+        int     iOldConnectionsIconSize = m_pSetup->iConnectionsIconSize;
+        int     iOldTimeDisplay         = m_pSetup->iTimeDisplay;
+        int     iOldTimeFormat          = m_pSetup->iTimeFormat;
+        bool    bOldDisplayEffect       = m_pSetup->bDisplayEffect;
+        bool    bOldActivePatchbay      = m_pSetup->bActivePatchbay;
+        QString sOldActivePatchbayPath  = m_pSetup->sActivePatchbayPath;
+        bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
+        bool    bOldKeepOnTop           = m_pSetup->bKeepOnTop;
+        bool    bOldSystemTray          = m_pSetup->bSystemTray;
+        int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
+        int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
+        bool    bOldBezierLines         = m_pSetup->bBezierLines;
         // Load the current setup settings.
         pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
         if (pSetupForm->exec()) {
             // Check wheather something immediate has changed.
-            if (( bBezierLines && !m_pSetup->bBezierLines) ||
-                (!bBezierLines &&  m_pSetup->bBezierLines))
+            if (( bOldBezierLines && !m_pSetup->bBezierLines) ||
+                (!bOldBezierLines &&  m_pSetup->bBezierLines))
                 updateBezierLines();
-            if (( bDisplayEffect && !m_pSetup->bDisplayEffect) ||
-                (!bDisplayEffect &&  m_pSetup->bDisplayEffect))
+            if (( bOldDisplayEffect && !m_pSetup->bDisplayEffect) ||
+                (!bOldDisplayEffect &&  m_pSetup->bDisplayEffect))
                 updateDisplayEffect();
+            if (iOldConnectionsIconSize && !m_pSetup->iConnectionsIconSize)
+                updateConnectionsIconSize();
+            if (sOldConnectionsFont != !m_pSetup->sConnectionsFont)
+                updateConnectionsFont();
             if (sOldMessagesFont != m_pSetup->sMessagesFont)
                 updateMessagesFont();
-            if (( bMessagesLimit && !m_pSetup->bMessagesLimit) ||
-                (!bMessagesLimit &&  m_pSetup->bMessagesLimit) ||
-                (iMessagesLimitLines !=  m_pSetup->iMessagesLimitLines))
+            if (( bOldMessagesLimit && !m_pSetup->bMessagesLimit) ||
+                (!bOldMessagesLimit &&  m_pSetup->bMessagesLimit) ||
+                (iOldMessagesLimitLines !=  m_pSetup->iMessagesLimitLines))
                 updateMessagesLimit();
             if (sOldDisplayFont1 != m_pSetup->sDisplayFont1 ||
                 sOldDisplayFont2 != m_pSetup->sDisplayFont2)
@@ -1780,14 +1816,14 @@ void qjackctlMainForm::showSetupForm (void)
             if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||
                 (sOldActivePatchbayPath != m_pSetup->sActivePatchbayPath))
                 updateActivePatchbay();
-            if (( bSystemTray && !m_pSetup->bSystemTray) ||
-                (!bSystemTray &&  m_pSetup->bSystemTray))
+            if (( bOldSystemTray && !m_pSetup->bSystemTray) ||
+                (!bOldSystemTray &&  m_pSetup->bSystemTray))
                 updateSystemTray();
             // Warn if something will be only effective on next run.
-            if (( bStdoutCapture && !m_pSetup->bStdoutCapture) ||
-                (!bStdoutCapture &&  m_pSetup->bStdoutCapture) ||
-                ( bKeepOnTop     && !m_pSetup->bKeepOnTop)     ||
-                (!bKeepOnTop     &&  m_pSetup->bKeepOnTop)) {
+            if (( bOldStdoutCapture && !m_pSetup->bStdoutCapture) ||
+                (!bOldStdoutCapture &&  m_pSetup->bStdoutCapture) ||
+                ( bOldKeepOnTop     && !m_pSetup->bKeepOnTop)     ||
+                (!bOldKeepOnTop     &&  m_pSetup->bKeepOnTop)) {
                 QMessageBox::information(this, tr("Information"),
                     tr("Some settings will be only effective\n"
                        "the next time you start this program."), tr("OK"));

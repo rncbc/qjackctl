@@ -424,6 +424,9 @@
     <function access="private" specifier="non virtual">destroy()</function>
     <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
     <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
+    <function specifier="non virtual" returnType="QFont">connectionsFont()</function>
+    <function specifier="non virtual">setConnectionsFont( const QFont &amp; font )</function>
+    <function specifier="non virtual">setConnectionsIconSize( int iIconSize )</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
     <function specifier="non virtual">setAlsaSeq( snd_seq_t * pAlsaSeq )</function>
     <function specifier="non virtual">refreshJack( bool bEnabled )</function>

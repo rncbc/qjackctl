@@ -3171,13 +3171,10 @@
                                     </font>
                                 </property>
                                 <property name="text">
-                                    <string>&amp;Icon size (pixels):</string>
+                                    <string>&amp;Icon size (px):</string>
                                 </property>
                                 <property name="buddy" stdset="0">
                                     <cstring>ConnectionsIconSizeComboBox</cstring>
-                                </property>
-                                <property name="accel" stdset="0">
-                                    <string>Alt+I</string>
                                 </property>
                             </widget>
                             <widget class="QComboBox" row="0" column="4">
@@ -3942,6 +3939,12 @@
     <connection>
         <sender>ConnectionsIconSizeComboBox</sender>
         <signal>activated(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>BezierLinesCheckBox</sender>
+        <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>optionsChanged()</slot>
     </connection>

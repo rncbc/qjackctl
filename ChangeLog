@@ -3,12 +3,14 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.12   2004-09-21  Icons under restructure.
+0.2.12   2004-09-21  Larger icons and font option on connections/patchbay.
 
 - New setup options as for the connections/patchbay view apprearence: larger
   icon sizes and font selection are now possible, to better ease manipulation
   on a touchscreen (feature requested for Lionstracs' Mediastation).
-  
+
+- "Other" setup options moved to a new dialog tab, "Misc".
+
 - New scaled connections/patchbay icons were added; meanwhile, all inline
   XPM icons were removed and brainlessly converted to PNG format.
 
