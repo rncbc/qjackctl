@@ -296,7 +296,7 @@ qjackctlSocketList::qjackctlSocketList( qjackctlSocketListView *pListView, bool 
         m_sSocketCaption = tr("Output");
         m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET]   = new QPixmap(QPixmap::fromMimeSource("asocketo.png"));
         m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X] = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET], *g_pXpmXSocket1);
-        m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(QPixmap::fromMimeSource("aporto.png"));
+        m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(QPixmap::fromMimeSource("aportlno.png"));
         m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET]    = new QPixmap(QPixmap::fromMimeSource("msocketo.png"));
         m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X]  = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET], *g_pXpmXSocket1);
         m_apPixmaps[QJACKCTL_XPM_MIDI_PLUG]      = new QPixmap(QPixmap::fromMimeSource("mporto.png"));
@@ -304,7 +304,7 @@ qjackctlSocketList::qjackctlSocketList( qjackctlSocketListView *pListView, bool 
         m_sSocketCaption = tr("Input");
         m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET]   = new QPixmap(QPixmap::fromMimeSource("asocketi.png"));
         m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X] = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET], *g_pXpmXSocket1);
-        m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(QPixmap::fromMimeSource("aporti.png"));
+        m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(QPixmap::fromMimeSource("aportlni.png"));
         m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET]    = new QPixmap(QPixmap::fromMimeSource("msocketi.png"));
         m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X]  = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET], *g_pXpmXSocket1);
         m_apPixmaps[QJACKCTL_XPM_MIDI_PLUG]      = new QPixmap(QPixmap::fromMimeSource("mporti.png"));

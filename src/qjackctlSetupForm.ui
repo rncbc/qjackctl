@@ -3087,7 +3087,7 @@
                             <number>4</number>
                         </property>
                         <property name="title">
-                            <string>Connections / Patchbay Window</string>
+                            <string>Connections Window</string>
                         </property>
                         <property name="flat">
                             <bool>true</bool>
