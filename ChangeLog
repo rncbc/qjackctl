@@ -3,14 +3,16 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.3.0   2004-08-27  Work in progress...
+0.3.0   2004-08-28  Work in progress...
 
 - New pre-shutdown script setup option, allowing to specify a shell-script
   to be run before the JACK server daemon is shutted-down. This overrides
   any previous shutdown script setting, which should be now moved onto the
   existing post-shutdown script option, as to keep old procedural behaviour.
   
-- Avoid stopping JACK prematurely with QProcess::kill() (oneliner fix).
+- Avoid stopping JACK prematurely with QProcess::kill() (oneliner fix);
+  stopping JACK will now take a little bit longer, but hopefully will take
+  the time to cleanup properly (thanks to Kjetil Matheussen).
 
 - ALSA driver Duplex mode accepts alternate Input or Output device name.
 

@@ -228,7 +228,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     
     // Could we start without it?
     if (m_pAlsaSeq == NULL) {
-        appendMessagesError(tr("Could not open ALSA sequencer as a client; MIDI patchbay will be not available."));
+        appendMessagesError(tr("Could not open ALSA sequencer as a client.\n\nMIDI patchbay will be not available."));
     } else {
         // Rather obvious setup.
         if (m_pConnectionsForm)
@@ -370,16 +370,12 @@ QString qjackctlMainForm::formatExitStatus ( int iExitStatus )
 {
     QString sTemp = " ";
 
-    if (iExitStatus == 0) {
+    if (iExitStatus == 0)
         sTemp += tr("successfully");
-    } else {
-        sTemp += tr("with exit status");
-        sTemp += "=";
-        sTemp += QString::number(iExitStatus);
-    }
-    sTemp += ".";
-
-    return sTemp;
+    else
+        sTemp += tr("with exit status=%1").arg(iExitStatus);
+    
+    return sTemp + ".";
 }
 
 
@@ -463,10 +459,10 @@ void qjackctlMainForm::startJack (void)
 
     // Load primary/default server preset...
     if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
-        appendMessagesError(tr("Could not load preset") + " \"" + m_pSetup->sDefPreset + "\". " + tr("Retrying with default."));
+        appendMessagesError(tr("Could not load preset \"%1\".\n\nRetrying with default.").arg(m_pSetup->sDefPreset));
         m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
         if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
-            appendMessagesError(tr("Could not load default preset. Sorry."));
+            appendMessagesError(tr("Could not load default preset.\n\nSorry."));
             processJackExit();
             return;
         }
@@ -622,20 +618,15 @@ void qjackctlMainForm::startJack (void)
 
     // Go jack, go...
     if (!m_pJack->start()) {
-        appendMessagesError(tr("Could not start JACK. Sorry."));
+        appendMessagesError(tr("Could not start JACK.\n\nSorry."));
         processJackExit();
         return;
     }
 
     // Show startup results...
-    sTemp  = " " + tr("with") + " ";
-    sTemp += tr("PID");
-    sTemp += "=";
-    sTemp += QString::number((long) m_pJack->processIdentifier());
-    sTemp += " (0x";
-    sTemp += QString::number((long) m_pJack->processIdentifier(), 16);
-    sTemp += ").";
-    appendMessages(tr("JACK was started") + sTemp);
+    appendMessages(tr("JACK was started with PID=%1 (0x%2).")
+		.arg((long) m_pJack->processIdentifier())
+		.arg(QString::number((long) m_pJack->processIdentifier(), 16)));
 
     // Sloppy boy fix: may the serve be stopped, just in case
     // the client will nerver make it...
@@ -822,7 +813,7 @@ void qjackctlMainForm::appendMessagesError( const QString& s )
     if (m_pMessagesForm)
         m_pMessagesForm->show();
 
-    appendMessagesColor(s, "#ff0000");
+    appendMessagesColor(s.simplifyWhiteSpace(), "#ff0000");
 
     QMessageBox::critical(this, tr("Error"), s, tr("Cancel"));
 }
@@ -964,7 +955,7 @@ void qjackctlMainForm::updateActivePatchbay (void)
     // Time to load the active patchbay rack profiler?
     if (m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty()) {
         if (!qjackctlPatchbayFile::load(&m_patchbayRack, m_pSetup->sActivePatchbayPath)) {
-            appendMessagesError(tr("Could not load active patchbay definition. Disabled."));
+            appendMessagesError(tr("Could not load active patchbay definition.\n\nDisabled."));
             m_pSetup->bActivePatchbay = false;
         } else {
             // If we're up and running, make it dirty :)
@@ -1242,7 +1233,7 @@ void qjackctlMainForm::xrunNotifyEvent (void)
     // Update the status item directly.
     updateXrunCount();
     // Log highlight this event.
-    appendMessagesColor(tr("XRUN callback.") + " (" + QString::number(m_iXrunCallbacks) + ")", "#cc99cc");
+    appendMessagesColor(tr("XRUN callback (%1).").arg(m_iXrunCallbacks), "#cc99cc");
 
     m_iXrunNotify--;
 }
@@ -1257,7 +1248,7 @@ void qjackctlMainForm::buffNotifyEvent (void)
 
     // Don't need to nothing, it was handled on qjackctl_bufferSizeCallback;
     // just log this event as routine.
-    appendMessagesColor(tr("Buffer size change.") + " (" + QString::number((int) g_nframes) + ")", "#cc9966");
+    appendMessagesColor(tr("Buffer size change (%1).").arg((int) g_nframes), "#cc9966");
 
     m_iBuffNotify--;
 }
@@ -1322,11 +1313,12 @@ void qjackctlMainForm::timerSlot (void)
 
     // Is the connection patchbay dirty enough?
     if (m_pConnectionsForm) {
+        const QString sEllipsis = "...";
         // Are we about to enforce an audio connections persistence profile?
         if (m_iJackDirty > 0) {
             m_iJackDirty = 0;
             if (m_pSetup->bActivePatchbay) {
-                appendMessagesColor(tr("Audio active patchbay scan") + "...", "#6699cc");
+                appendMessagesColor(tr("Audio active patchbay scan") + sEllipsis, "#6699cc");
                 m_patchbayRack.connectAudioScan(m_pJackClient);
             }
             refreshJackConnections();
@@ -1335,7 +1327,7 @@ void qjackctlMainForm::timerSlot (void)
         if (m_iAlsaDirty > 0) {
             m_iAlsaDirty = 0;
             if (m_pSetup->bActivePatchbay) {
-                appendMessagesColor(tr("MIDI active patchbay scan") + "...", "#99cc66");
+                appendMessagesColor(tr("MIDI active patchbay scan") + sEllipsis, "#99cc66");
                 m_patchbayRack.connectMidiScan(m_pAlsaSeq);
             }
             refreshAlsaConnections();
@@ -1378,7 +1370,7 @@ void qjackctlMainForm::jackConnectChanged (void)
 {
     // Just shake the audio connections status quo.
     if (++m_iJackDirty == 1)
-        appendMessagesColor(tr("Audio connection change") + ".", "#9999cc");
+        appendMessagesColor(tr("Audio connection change."), "#9999cc");
 }
 
 
@@ -1387,7 +1379,7 @@ void qjackctlMainForm::alsaConnectChanged (void)
 {
     // Just shake the MIDI connections status quo.
     if (++m_iAlsaDirty == 1)
-        appendMessagesColor(tr("MIDI connection change") + ".", "#cccc99");
+        appendMessagesColor(tr("MIDI connection change."), "#cccc99");
 }
 
 
@@ -1485,7 +1477,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
         if (file.open(IO_WriteOnly | IO_Truncate)) {
             QTextStream(&file) << sJackCmdLine << endl;
             file.close();
-            appendMessagesColor(tr("Server configuration saved to") + " \"" + sFilename + "\"", "#999933");
+            appendMessagesColor(tr("Server configuration saved to \"%1\".").arg(sFilename), "#999933");
         }
     }
     
