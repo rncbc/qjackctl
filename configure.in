@@ -9,7 +9,7 @@ if test "x$ac_prefix" = "xNONE"; then
     ac_prefix=$ac_default_prefix
 fi
 AC_SUBST(ac_prefix)
-AC_DEFINE_UNQUOTED(CONFIG_PREFIX, ["$ac_prefix"])
+AC_DEFINE_UNQUOTED(CONFIG_PREFIX, ["$ac_prefix"], [Default installation prefix.])
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -120,7 +120,7 @@ if test "x$ac_jack_transport" = "xno"; then
    AC_MSG_WARN([*** JACK 0.80.0 or later may be required.])
    AC_MSG_WARN([*** Transport features will be disabled.])
 else
-   AC_DEFINE(CONFIG_JACK_TRANSPORT)
+   AC_DEFINE(CONFIG_JACK_TRANSPORT, 1, [New JACK transport protocol.])
 fi
 
 dnl Finally produce a configure header file and the main makefile.

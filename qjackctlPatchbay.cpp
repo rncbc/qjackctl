@@ -30,6 +30,10 @@
 // Local pixmaps.
 #include "clienti.xpm"
 #include "cliento.xpm"
+#include "portpti.xpm"
+#include "portpto.xpm"
+#include "portpni.xpm"
+#include "portpno.xpm"
 #include "portlti.xpm"
 #include "portlto.xpm"
 #include "portlni.xpm"
@@ -39,6 +43,10 @@ static int g_iXpmRefCount = 0;
 
 static QPixmap *g_pXpmClientI = 0;  // Input client item pixmap.
 static QPixmap *g_pXpmClientO = 0;  // Output client item pixmap.
+static QPixmap *g_pXpmPortPTI = 0;  // Physcal Terminal Input port pixmap.
+static QPixmap *g_pXpmPortPTO = 0;  // Physical Terminal input port pixmap.
+static QPixmap *g_pXpmPortPNI = 0;  // Physical Non-terminal Input port pixmap.
+static QPixmap *g_pXpmPortPNO = 0;  // Physical Non-terminal input port pixmap.
 static QPixmap *g_pXpmPortLTI = 0;  // Logical Terminal Input port pixmap.
 static QPixmap *g_pXpmPortLTO = 0;  // Logical Terminal input port pixmap.
 static QPixmap *g_pXpmPortLNI = 0;  // Logical Non-terminal Input port pixmap.
@@ -63,17 +71,17 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, QString sPortN
     unsigned long ulPortFlags = jack_port_flags(m_pJackPort);
     if (ulPortFlags & JackPortIsInput) {
         if (ulPortFlags & JackPortIsTerminal) {
-            QListViewItem::setPixmap(0, *g_pXpmPortLTI);
+            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPTI : *g_pXpmPortLTI));
         } else {
-            QListViewItem::setPixmap(0, *g_pXpmPortLNI);
+            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPNI : *g_pXpmPortLNI));
         }
         QListViewItem::setDragEnabled(false);
         QListViewItem::setDropEnabled(true);
     } else if (ulPortFlags & JackPortIsOutput) {
         if (ulPortFlags & JackPortIsTerminal) {
-            QListViewItem::setPixmap(0, *g_pXpmPortLTO);
+            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPTO : *g_pXpmPortLTO));
         } else {
-            QListViewItem::setPixmap(0, *g_pXpmPortLNO);
+            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPNO : *g_pXpmPortLNO));
         }
         QListViewItem::setDragEnabled(true);
         QListViewItem::setDropEnabled(false);
@@ -390,6 +398,10 @@ qjackctlClientList::qjackctlClientList( qjackctlClientListView *pListView, jack_
     if (g_iXpmRefCount == 0) {
         g_pXpmClientI = new QPixmap((const char **) clienti_xpm);
         g_pXpmClientO = new QPixmap((const char **) cliento_xpm);
+        g_pXpmPortPTI = new QPixmap((const char **) portpti_xpm);
+        g_pXpmPortPTO = new QPixmap((const char **) portpto_xpm);
+        g_pXpmPortPNI = new QPixmap((const char **) portpni_xpm);
+        g_pXpmPortPNO = new QPixmap((const char **) portpno_xpm);
         g_pXpmPortLTI = new QPixmap((const char **) portlti_xpm);
         g_pXpmPortLTO = new QPixmap((const char **) portlto_xpm);
         g_pXpmPortLNI = new QPixmap((const char **) portlni_xpm);
@@ -417,6 +429,10 @@ qjackctlClientList::~qjackctlClientList (void)
     if (--g_iXpmRefCount == 0) {
         delete g_pXpmClientI;
         delete g_pXpmClientO;
+        delete g_pXpmPortPTI;
+        delete g_pXpmPortPTO;
+        delete g_pXpmPortPNI;
+        delete g_pXpmPortPNO;
         delete g_pXpmPortLTI;
         delete g_pXpmPortLTO;
         delete g_pXpmPortLNI;

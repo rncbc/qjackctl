@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.8"
+#define QJACKCTL_VERSION	"0.0.8.1"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -52,6 +52,14 @@
 #define STATS_XRUN_AVG          12
 #define STATS_XRUN_TOTAL        13
 #define STATS_RESET_TIME        14
+
+//---------------------------------------------------------------------------
+// Combo box history persistence helper prototypes.
+
+static void add2ComboBoxHistory(QComboBox *pComboBox, const QString& sNewText, int iLimit = 8, int iIndex = -1);
+static void loadComboBoxHistory(QSettings *pSettings, QComboBox *pComboBox, int iLimit = 8);
+static void saveComboBoxHistory(QSettings *pSettings, QComboBox *pComboBox, int iLimit = 8);
+
 
 // To have clue about current buffer size (in frames).
 static jack_nframes_t g_nframes = 0;
@@ -125,6 +133,12 @@ void qjackctlMainForm::init (void)
     sText += "<br />\n";
     sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
     sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
+#ifndef CONFIG_JACK_TRANSPORT
+    sText += "<small><font color=\"red\">";
+    sText += tr("Transport status control disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
     sText += "<br />\n";
     sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
     sText += "<br />\n";
@@ -137,6 +151,15 @@ void qjackctlMainForm::init (void)
 
     // Read saved settings and options...
     m_Settings.beginGroup("/qjackctl");
+
+    m_Settings.beginGroup("/History");
+    loadComboBoxHistory(&m_Settings, ServerComboBox);
+    loadComboBoxHistory(&m_Settings, InterfaceComboBox);
+    loadComboBoxHistory(&m_Settings, TempDirComboBox);
+    loadComboBoxHistory(&m_Settings, ForceArtsShellComboBox);
+    loadComboBoxHistory(&m_Settings, ForceJackShellComboBox);
+    loadComboBoxHistory(&m_Settings, XrunRegexComboBox);
+    m_Settings.endGroup();
 
     m_Settings.beginGroup("/Settings");
     ServerComboBox->setCurrentText(m_Settings.readEntry("/Server", "jackstart"));
@@ -248,6 +271,16 @@ void qjackctlMainForm::destroy (void)
     m_Settings.writeEntry("/height1", m_size1.height());
     m_Settings.endGroup();
 
+    m_Settings.beginGroup("/History");
+    saveComboBoxHistory(&m_Settings, ServerComboBox);
+    saveComboBoxHistory(&m_Settings, PriorityComboBox);
+    saveComboBoxHistory(&m_Settings, InterfaceComboBox);
+    saveComboBoxHistory(&m_Settings, TempDirComboBox);
+    saveComboBoxHistory(&m_Settings, ForceArtsShellComboBox);
+    saveComboBoxHistory(&m_Settings, ForceJackShellComboBox);
+    saveComboBoxHistory(&m_Settings, XrunRegexComboBox);
+    m_Settings.endGroup();
+
     m_Settings.endGroup();
 }
 
@@ -256,7 +289,7 @@ void qjackctlMainForm::destroy (void)
 bool qjackctlMainForm::queryClose (void)
 {
     bool bResult = true;
-    
+
     if (m_pJack && m_pJack->isRunning()) {
         bResult = (QMessageBox::warning(this, tr("Warning"),
             tr("JACK is currently running.") + "\n\n" +
@@ -1317,5 +1350,58 @@ void qjackctlMainForm::aboutQt()
 }
 
 
-// end of ui.h
+//---------------------------------------------------------------------------
+// Combo box history persistence helper implementation.
 
+static void add2ComboBoxHistory ( QComboBox *pComboBox, const QString& sNewText, int iLimit, int iIndex )
+{
+    int iCount = pComboBox->count();
+    for (int i = 0; i < iCount; i++) {
+        QString sText = pComboBox->text(i);
+        if (sText == sNewText) {
+            pComboBox->removeItem(i);
+            iCount--;
+            break;
+        }
+    }
+    while (iCount >= iLimit)
+        pComboBox->removeItem(--iCount);
+    pComboBox->insertItem(sNewText, iIndex);
+}
+
+
+static void loadComboBoxHistory ( QSettings *pSettings, QComboBox *pComboBox, int iLimit )
+{
+    pComboBox->setUpdatesEnabled(false);
+    pComboBox->setDuplicatesEnabled(false);
+
+    pSettings->beginGroup("/" + QString(pComboBox->name()));
+    for (int i = 0; i < iLimit; i++) {
+        QString sText = pSettings->readEntry("/Item" + QString::number(i + 1), QString::null);
+        if (sText.isEmpty())
+            break;
+        add2ComboBoxHistory(pComboBox, sText, iLimit);
+    }
+    pSettings->endGroup();
+
+    pComboBox->setUpdatesEnabled(true);
+}
+
+
+static void saveComboBoxHistory ( QSettings *pSettings, QComboBox *pComboBox, int iLimit )
+{
+    add2ComboBoxHistory(pComboBox, pComboBox->currentText(), iLimit, 0);
+
+    pSettings->beginGroup("/" + QString(pComboBox->name()));
+    for (int i = 0; i < iLimit && i < pComboBox->count(); i++) {
+        QString sText = pComboBox->text(i);
+        if (sText.isEmpty())
+            break;
+        pSettings->writeEntry("/Item" + QString::number(i + 1), sText);
+    }
+    pSettings->endGroup();
+}
+
+
+
+// end of ui.h

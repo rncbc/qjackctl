@@ -478,9 +478,6 @@
                                 <property name="editable">
                                     <bool>true</bool>
                                 </property>
-                                <property name="currentItem">
-                                    <number>1</number>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Set client timeout limit in miliseconds</string>
                                 </property>
@@ -537,9 +534,6 @@
                                 </property>
                                 <property name="editable">
                                     <bool>true</bool>
-                                </property>
-                                <property name="currentItem">
-                                    <number>3</number>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Sample rate in frames per second</string>
@@ -618,9 +612,6 @@
                                 <property name="editable">
                                     <bool>true</bool>
                                 </property>
-                                <property name="currentItem">
-                                    <number>0</number>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scheduler priority when running realtime</string>
                                 </property>
@@ -675,9 +666,6 @@
                                 </property>
                                 <property name="editable">
                                     <bool>true</bool>
-                                </property>
-                                <property name="currentItem">
-                                    <number>0</number>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Number of periods in the hardware buffer</string>
@@ -758,9 +746,6 @@
                                 <property name="editable">
                                     <bool>true</bool>
                                 </property>
-                                <property name="currentItem">
-                                    <number>4</number>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Frames per period between process() calls</string>
                                 </property>
@@ -807,9 +792,6 @@
                         </property>
                         <property name="editable">
                             <bool>true</bool>
-                        </property>
-                        <property name="currentItem">
-                            <number>0</number>
                         </property>
                         <property name="toolTip" stdset="0">
                             <string>The JACK Audio Connection Kit sound server path</string>
@@ -1024,9 +1006,6 @@
                                 </property>
                                 <property name="editable">
                                     <bool>true</bool>
-                                </property>
-                                <property name="currentItem">
-                                    <number>0</number>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Directory to use for temporary files</string>
@@ -1385,9 +1364,6 @@
                         </property>
                         <property name="editable">
                             <bool>true</bool>
-                        </property>
-                        <property name="currentItem">
-                            <number>1</number>
                         </property>
                         <property name="toolTip" stdset="0">
                             <string>Time in seconds between each auto-refresh cycle.</string>
