@@ -3,6 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.2   2004-01-06  Yet more minor bugfixes.
+
+- Popup menus memory leak fixed.
+
+
 0.2.1   2003-12-29  The fix of fixes.
 
 - Fixed jackstart/jackd command line parameter argument concatenation.

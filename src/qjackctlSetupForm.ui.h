@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -351,6 +351,8 @@ void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButt
         if (iMetaChar >= 0)
             pLineEdit->insert("%" + sText[iMetaChar + 1]);
     }
+    
+    delete pContextMenu;
 }
 
 

@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -714,6 +714,8 @@ void qjackctlConnectView::contextMenu ( const QPoint& pos )
     iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
 
     pContextMenu->exec(pos);
+    
+    delete pContextMenu;
 }
 
 

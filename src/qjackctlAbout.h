@@ -1,7 +1,7 @@
 // qjackctlAbout.h
 //
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -24,9 +24,9 @@
 
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.2.1"
+#define QJACKCTL_VERSION	"0.2.1.1"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
-#define QJACKCTL_COPYRIGHT	"Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved."
+#define QJACKCTL_COPYRIGHT	"Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved."
 
 #endif  // __qjackctlAbout_h
 

@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -832,7 +832,10 @@ QDragObject *qjackctlSocketListView::dragObject (void)
 // Context menu request event handler.
 void qjackctlSocketListView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-    m_pPatchbayView->contextMenu(pContextMenuEvent->globalPos(), m_bReadable);
+    m_pPatchbayView->contextMenu(
+        pContextMenuEvent->globalPos(),
+        (m_bReadable ? m_pPatchbayView->OSocketList() : m_pPatchbayView->ISocketList())
+    );
 }
 
 
@@ -935,7 +938,7 @@ void qjackctlPatchworkView::resizeEvent ( QResizeEvent * )
 // Context menu request event handler.
 void qjackctlPatchworkView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-    m_pPatchbayView->contextMenu(pContextMenuEvent->globalPos(), 0);
+    m_pPatchbayView->contextMenu(pContextMenuEvent->globalPos(), NULL);
 }
 
 
@@ -1019,7 +1022,7 @@ qjackctlPatchbayView::~qjackctlPatchbayView (void)
 
 
 // Common context menu slot.
-void qjackctlPatchbayView::contextMenu ( const QPoint& pos, bool bReadable )
+void qjackctlPatchbayView::contextMenu ( const QPoint& pos, qjackctlSocketList *pSocketList )
 {
     qjackctlPatchbay *pPatchbay = binding();
     if (pPatchbay == 0)
@@ -1028,11 +1031,6 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, bool bReadable )
     int iItemID;
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
-    qjackctlSocketList *pSocketList = NULL;
-    if (bReadable)
-        pSocketList = pPatchbay->OSocketList();
-    else
-        pSocketList = pPatchbay->ISocketList();
     if (pSocketList) {
         qjackctlSocketItem *pSocketItem = pSocketList->selectedSocketItem();
         bool bEnabled = (pSocketItem != NULL);
@@ -1060,6 +1058,8 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, bool bReadable )
     iItemID = pContextMenu->insertItem(tr("&Refresh"), pPatchbay, SLOT(refresh()), tr("Alt+R", "Refresh"));
 
     pContextMenu->exec(pos);
+    
+    delete pContextMenu;
 }
 
 
@@ -1087,7 +1087,7 @@ qjackctlSocketList *qjackctlPatchbayView::OSocketList (void)
 qjackctlSocketList *qjackctlPatchbayView::ISocketList (void)
 {
     if (m_pPatchbay)
-        return m_pPatchbay->OSocketList();
+        return m_pPatchbay->ISocketList();
     else
         return 0;
 }
