@@ -3,9 +3,22 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.6   2003-09-07  Work in progress.
+0.0.6   2003-09-08  Work in progress.
 
-- Patchbay connections handling has been fairly rewritten.
+- Patchbay connection handling has been fairly rewritten.
+
+- Reset XRUN statistics button added; reset time recorded on statistics;
+  ASIO mode disables Periods/Buffer setting (as suggested by Lawrie Abbott).
+  
+- Context popup menu introduced for port connection handling; includes
+  new command for disconnecting all currently connected ports.
+  
+- Closing the application while JACK is running, is now presented with a
+  warning confirmation message (preventing accidental Esc key press? :).
+
+- Patchbay port lists ordering are now more numerical-friendly than ever,
+  taking account for sub-numbering port names (following yet another
+  suggestion from Lawrie).
 
 0.0.5   2003-09-05  Minor feature ehancements and bugfixes.
 

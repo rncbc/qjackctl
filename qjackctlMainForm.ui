@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>532</width>
-            <height>317</height>
+            <width>556</width>
+            <height>298</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -1298,7 +1298,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QListView" row="0" column="0">
+                    <widget class="QListView" row="0" column="0" rowspan="2" colspan="1">
                         <column>
                             <property name="text">
                                 <string>Description</string>
@@ -1351,6 +1351,37 @@
                             <string>Statistics since last server startup</string>
                         </property>
                     </widget>
+                    <widget class="QPushButton" row="1" column="1">
+                        <property name="name">
+                            <cstring>StatsResetPushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Reset</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+R</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Reset XRUN statistic values</string>
+                        </property>
+                    </widget>
+                    <spacer row="0" column="1">
+                        <property name="name">
+                            <cstring>spacer41</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </grid>
             </widget>
             <widget class="QWidget">
@@ -1364,66 +1395,6 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QLayoutWidget" row="1" column="0">
-                        <property name="name">
-                            <cstring>layout13</cstring>
-                        </property>
-                        <hbox>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>ConnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Connect</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Connect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>DisconnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Disconnect</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Disconnect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <spacer>
-                                <property name="name">
-                                    <cstring>spacer51</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>4</width>
-                                        <height>4</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>RefreshPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Refresh</string>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Refresh current patchbay views</string>
-                                </property>
-                            </widget>
-                        </hbox>
-                    </widget>
                     <widget class="QLayoutWidget" row="0" column="0">
                         <property name="name">
                             <cstring>layout15</cstring>
@@ -1525,6 +1496,86 @@
                                 </property>
                                 <property name="resizeMode">
                                     <enum>AllColumns</enum>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QLayoutWidget" row="1" column="0">
+                        <property name="name">
+                            <cstring>layout8</cstring>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QPushButton" row="0" column="4">
+                                <property name="name">
+                                    <cstring>RefreshPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Refresh</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Refresh current patchbay views</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="0" column="0">
+                                <property name="name">
+                                    <cstring>ConnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Connect</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+C</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Connect currently selected ports</string>
+                                </property>
+                            </widget>
+                            <spacer row="0" column="3">
+                                <property name="name">
+                                    <cstring>spacer51</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>4</width>
+                                        <height>4</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QPushButton" row="0" column="2">
+                                <property name="name">
+                                    <cstring>DisconnectAllPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Disconnect &amp;All</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+A</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Disconnect all currently connected ports</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="0" column="1">
+                                <property name="name">
+                                    <cstring>DisconnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Disconnect</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+D</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Disconnect currently selected ports</string>
                                 </property>
                             </widget>
                         </grid>
@@ -1688,6 +1739,24 @@
         <receiver>qjackctlMainForm</receiver>
         <slot>changeDriver(const QString&amp;)</slot>
     </connection>
+    <connection>
+        <sender>StatsResetPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>resetXrunStats()</slot>
+    </connection>
+    <connection>
+        <sender>AsioCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>toggleAsio()</slot>
+    </connection>
+    <connection>
+        <sender>DisconnectAllPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>disconnectAll()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>StartPushButton</tabstop>
@@ -1724,10 +1793,12 @@
     <tabstop>AutoRefreshCheckBox</tabstop>
     <tabstop>TimeRefreshComboBox</tabstop>
     <tabstop>StatsListView</tabstop>
+    <tabstop>StatsResetPushButton</tabstop>
     <tabstop>ReadListView</tabstop>
     <tabstop>WriteListView</tabstop>
     <tabstop>ConnectPushButton</tabstop>
     <tabstop>DisconnectPushButton</tabstop>
+    <tabstop>DisconnectAllPushButton</tabstop>
     <tabstop>RefreshPushButton</tabstop>
     <tabstop>AboutTextView</tabstop>
 </tabstops>
@@ -1750,6 +1821,7 @@
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">QTimer *m_pTimer;</variable>
     <variable access="private">int m_iTimerSlot;</variable>
+    <variable access="private">int m_iRefresh;</variable>
     <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
@@ -1764,38 +1836,45 @@
     <variable access="private">float m_fXrunMin;</variable>
     <variable access="private">float m_fXrunLast;</variable>
     <variable access="private">QTime m_tXrunLast;</variable>
-    <variable access="private">QListViewItem *m_apStats[9];</variable>
+    <variable access="private">QTime m_tResetLast;</variable>
+    <variable access="private">QListViewItem *m_apStats[10];</variable>
     <variable access="private">QPoint m_pos;</variable>
     <variable access="private">QPoint m_pos1;</variable>
     <variable access="private">QSize m_size1;</variable>
     <variable access="private">qjackctlPatchbay *m_pJackPatchbay;</variable>
 </variables>
 <slots>
+    <slot access="protected" specifier="non virtual">reject( void )</slot>
+    <slot specifier="non virtual">closeEvent( QCloseEvent * pCloseEvent )</slot>
     <slot specifier="non virtual">startJack()</slot>
     <slot specifier="non virtual">stopJack()</slot>
     <slot specifier="non virtual">readJackStdout()</slot>
     <slot specifier="non virtual">readJackStderr()</slot>
     <slot specifier="non virtual">processJackExit()</slot>
     <slot specifier="non virtual">toggleDetails( void )</slot>
+    <slot specifier="non virtual">toggleAsio( void )</slot>
     <slot>changeDriver( const QString &amp; sDriver )</slot>
+    <slot specifier="non virtual">resetXrunStats()</slot>
     <slot specifier="non virtual">portNotifySlot( int fd )</slot>
     <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
     <slot specifier="non virtual">shutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">timerSlot( void )</slot>
-    <slot>connectSelected()</slot>
-    <slot>disconnectSelected()</slot>
-    <slot>refreshConnections()</slot>
-    <slot>stabilizeConnections()</slot>
+    <slot specifier="non virtual">connectSelected()</slot>
+    <slot specifier="non virtual">disconnectSelected()</slot>
+    <slot specifier="non virtual">disconnectAll()</slot>
+    <slot specifier="non virtual">refreshConnections()</slot>
+    <slot specifier="non virtual">stabilizeConnections()</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
+    <function access="private" returnType="bool">queryClose( void )</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">stabilizeForm( bool bSavePosition )</function>
-    <function access="private" specifier="non virtual">resetXrunStats()</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
-    <function access="private" specifier="non virtual">updateXrunTime( void )</function>
+    <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( QTime &amp; t, bool bElapsed )</function>
+    <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>
     <function access="private" specifier="non virtual">refreshXrunStats()</function>
     <function access="private" specifier="non virtual">closePipes( void )</function>
     <function access="private" specifier="non virtual">startJackClient()</function>

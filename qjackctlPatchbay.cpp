@@ -21,6 +21,8 @@
 
 #include "qjackctlPatchbay.h"
 
+#include <qpopupmenu.h>
+
 #include <stdlib.h>
 #include <math.h>
 
@@ -144,8 +146,7 @@ int qjackctlPortItem::portMark (void)
 // Connected port list primitives.
 void qjackctlPortItem::addConnect( qjackctlPortItem *pPort )
 {
-    if (findConnectPtr(pPort) == 0)
-        m_connects.append(pPort);
+    m_connects.append(pPort);
 }
 
 void qjackctlPortItem::removeConnect( qjackctlPortItem *pPort )
@@ -193,26 +194,60 @@ int qjackctlPortItem::compare (QListViewItem* pPortItem, int iColumn, bool bAsce
 {
     QString sName1, sName2;
     QString sPrefix1, sPrefix2;
-    int i, iSuffix1, iSuffix2;
+    int iSuffix1, iSuffix2;
+    int i, iNumber, iDigits;
+    int iDecade, iFactor;
 
     sName1 = text(iColumn);
     sName2 = pPortItem->text(iColumn);
 
-    for (i = sName1.length() - 1; i > 0; i--) {
-        if (!sName1.at(i).isDigit())
-            break;
+    iNumber  = 0;
+    iDigits  = 0;
+    iDecade  = 1;
+    iFactor  = 1;
+    iSuffix1 = 0;
+    for (i = sName1.length() - 1; i >= 0; i--) {
+        QCharRef ch = sName1.at(i);
+        if (ch.isDigit()) {
+            iNumber += ch.digitValue() * iDecade;
+            iDecade *= 10;
+            iDigits++;
+        } else {
+            sPrefix1 += ch;
+            if (iDigits > 0) {
+                iSuffix1 += iNumber * iFactor;
+                iFactor *= 100;
+                iNumber  = 0;
+                iDigits  = 0;
+                iDecade  = 1;
+            }
+        }
     }
-    sPrefix1 = sName1.left(i + 1);
 
-    for (i = sName2.length() - 1; i > 0; i--) {
-        if (!sName2.at(i).isDigit())
-            break;
+    iNumber  = 0;
+    iDigits  = 0;
+    iDecade  = 1;
+    iFactor  = 1;
+    iSuffix2 = 0;
+    for (i = sName2.length() - 1; i >= 0; i--) {
+        QCharRef ch = sName2.at(i);
+        if (ch.isDigit()) {
+            iNumber += ch.digitValue() * iDecade;
+            iDecade *= 10;
+            iDigits++;
+        } else {
+            sPrefix2 += ch;
+            if (iDigits > 0) {
+                iSuffix2 += iNumber * iFactor;
+                iFactor *= 100;
+                iNumber  = 0;
+                iDigits  = 0;
+                iDecade  = 1;
+            }
+        }
     }
-    sPrefix2 = sName2.left(i + 1);
 
     if (sPrefix1 == sPrefix2) {
-        iSuffix1 = sName1.right(sName1.length() - i - 1).toInt();
-        iSuffix2 = sName2.right(sName2.length() - i - 1).toInt();
         if (iSuffix1 < iSuffix2)
             return (bAscending ? -1 :  1);
         else
@@ -221,7 +256,8 @@ int qjackctlPortItem::compare (QListViewItem* pPortItem, int iColumn, bool bAsce
         else
             return 0;
     } else {
-        if (sPrefix1 < sPrefix2)
+        // ATTN: sPrefix(es) are reversed!
+        if (sPrefix1 > sPrefix2)
             return (bAscending ? -1 :  1);
         else
             return (bAscending ?  1 : -1);
@@ -506,11 +542,13 @@ qjackctlPatchbay::qjackctlPatchbay ( QWidget *pParent, QListView *pOListView, QL
 
     QObject::connect(pOListView, SIGNAL(expanded(QListViewItem *)),  this, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(pOListView, SIGNAL(collapsed(QListViewItem *)), this, SLOT(listViewChanged(QListViewItem *)));
+    QObject::connect(pOListView, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint& , int)), this, SLOT(contextMenu(QListViewItem *, const QPoint &, int)));
     QObject::connect(pOListView, SIGNAL(contentsMoving(int, int)),   this, SLOT(contentsMoved(int, int)));
 
     QObject::connect(pIListView, SIGNAL(expanded(QListViewItem *)),  this, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(pIListView, SIGNAL(collapsed(QListViewItem *)), this, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(pIListView, SIGNAL(contentsMoving(int, int)),   this, SLOT(contentsMoved(int, int)));
+    QObject::connect(pIListView, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint& , int)), this, SLOT(contextMenu(QListViewItem *, const QPoint &, int)));
 
     QWidget::raise();
     QWidget::show();
@@ -534,19 +572,21 @@ qjackctlPatchbay::~qjackctlPatchbay (void)
 // Connection primitive.
 void qjackctlPatchbay::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
-    jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
-
-    pOPort->addConnect(pIPort);
-    pIPort->addConnect(pOPort);
+    if (pOPort->findConnectPtr(pIPort) == 0) {
+        jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+        pOPort->addConnect(pIPort);
+        pIPort->addConnect(pOPort);
+    }
 }
 
 // Disconnection primitive.
 void qjackctlPatchbay::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
-    jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
-
-    pOPort->removeConnect(pIPort);
-    pIPort->removeConnect(pOPort);
+    if (pOPort->findConnectPtr(pIPort) != 0) {
+        jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+        pOPort->removeConnect(pIPort);
+        pIPort->removeConnect(pOPort);
+    }
 }
 
 
@@ -923,6 +963,62 @@ void qjackctlPatchbay::disconnectSelectedEx (void)
 }
 
 
+// Test if any port is disconnectable.
+bool qjackctlPatchbay::canDisconnectAll (void)
+{
+    bool bResult = false;
+
+    if (startExclusive()) {
+        bResult = canDisconnectAllEx();
+        endExclusive();
+    }
+
+    return bResult;
+}
+
+bool qjackctlPatchbay::canDisconnectAllEx (void)
+{
+    qjackctlClientItem *pOClient = m_pOClientList->clients().first();
+    while (pOClient) {
+        qjackctlPortItem *pOPort = pOClient->ports().first();
+        while (pOPort) {
+            if (pOPort->connects().count() > 0)
+                return true;
+            pOPort = pOClient->ports().next();
+        }
+        pOClient = m_pOClientList->clients().next();
+    }
+    return false;
+}
+
+
+// Disconnect all ports.
+void qjackctlPatchbay::disconnectAll (void)
+{
+    if (startExclusive()) {
+        disconnectAllEx();
+        endExclusive();
+    }
+
+    QWidget::update();
+}
+
+void qjackctlPatchbay::disconnectAllEx (void)
+{
+    qjackctlClientItem *pOClient = m_pOClientList->clients().first();
+    while (pOClient) {
+        qjackctlPortItem *pOPort = pOClient->ports().first();
+        while (pOPort) {
+            qjackctlPortItem *pIPort;
+            while ((pIPort = pOPort->connects().first()) != 0)
+                disconnectPorts(pOPort, pIPort);
+            pOPort = pOClient->ports().next();
+        }
+        pOClient = m_pOClientList->clients().next();
+    }
+}
+
+
 // Complete contents rebuilder.
 void qjackctlPatchbay::refresh (void)
 {
@@ -984,6 +1080,25 @@ void qjackctlPatchbay::contentsMoved ( int, int )
     QWidget::update();
 }
 
+
+void qjackctlPatchbay::contextMenu ( QListViewItem *, const QPoint& pos, int )
+{
+    int iItemID;
+
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+
+    iItemID = pContextMenu->insertItem("&Connect", this, SLOT(connectSelected()), ALT+Key_C);
+    pContextMenu->setItemEnabled(iItemID, canConnectSelected());
+    iItemID = pContextMenu->insertItem("&Disconnect", this, SLOT(disconnectSelected()), ALT+Key_D);
+    pContextMenu->setItemEnabled(iItemID, canDisconnectSelected());
+    iItemID = pContextMenu->insertItem("Disconnect &All", this, SLOT(disconnectAll()), ALT+Key_A);
+    pContextMenu->setItemEnabled(iItemID, canDisconnectAll());
+
+    pContextMenu->insertSeparator();
+    iItemID = pContextMenu->insertItem("&Refresh", this, SLOT(refresh()), ALT+Key_R);
+
+    pContextMenu->exec(pos);
+}
 
 // end of qjackctlPatchbay.cpp
 

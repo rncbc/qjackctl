@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.5.1"
+#define QJACKCTL_VERSION	"0.0.5.3"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -36,22 +36,24 @@
 // List view statistics item indexes
 #define STATS_CPU_LOAD      0
 #define STATS_SAMPLE_RATE   1
-#define STATS_XRUN_AVG      2
-#define STATS_XRUN_COUNT    3
-#define STATS_XRUN_LAST     4
-#define STATS_XRUN_MAX      5
-#define STATS_XRUN_MIN      6
-#define STATS_XRUN_TIME     7
-#define STATS_XRUN_TOTAL    8
+#define STATS_RESET_TIME    2
+#define STATS_XRUN_AVG      3
+#define STATS_XRUN_COUNT    4
+#define STATS_XRUN_LAST     5
+#define STATS_XRUN_MAX      6
+#define STATS_XRUN_MIN      7
+#define STATS_XRUN_TIME     8
+#define STATS_XRUN_TOTAL    9
 
 
 // Kind of constructor.
-void qjackctlMainForm::init()
+void qjackctlMainForm::init (void)
 {
     m_pJack       = NULL;
     m_pJackClient = NULL;
     m_pTimer      = NULL;
     m_iTimerSlot  = 0;
+    m_iRefresh    = 0;
 
     m_pPortNotifier = NULL;
     m_pXrunNotifier = NULL;
@@ -70,6 +72,7 @@ void qjackctlMainForm::init()
     QString n = tr("n/a");
     m_apStats[STATS_CPU_LOAD]    = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
     m_apStats[STATS_SAMPLE_RATE] = new QListViewItem(StatsListView, s + tr("Sample Rate") + c, n);
+    m_apStats[STATS_RESET_TIME]  = new QListViewItem(StatsListView, s + tr("Time of last reset") + c, z);
     m_apStats[STATS_XRUN_AVG]    = new QListViewItem(StatsListView, s + tr("XRUN average") + c, z);
     m_apStats[STATS_XRUN_COUNT]  = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
     m_apStats[STATS_XRUN_LAST]   = new QListViewItem(StatsListView, s + tr("XRUN last") + c, z);
@@ -157,7 +160,7 @@ void qjackctlMainForm::init()
 
 
 // Kind of destructor.
-void qjackctlMainForm::destroy()
+void qjackctlMainForm::destroy (void)
 {
     // Stop server, if not already...
     stopJack();
@@ -216,13 +219,44 @@ void qjackctlMainForm::destroy()
 }
 
 
+// Window close event handlers.
+bool qjackctlMainForm::queryClose (void)
+{
+    bool bResult = true;
+    
+    if (m_pJack && m_pJack->isRunning()) {
+        bResult = (QMessageBox::warning(this, tr("Warning"),
+            tr("JACK is currently running.") + "\n\n" +
+            tr("Closing this application will also terminate the JACK audio server."),
+            tr("OK"), tr("Cancel")) == 0);
+    }
+
+    return bResult;
+}
+
+void qjackctlMainForm::reject (void)
+{
+    if (queryClose())
+        QDialog::reject();
+}
+
+void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
+{
+    if (queryClose())
+        pCloseEvent->accept();
+    else
+        pCloseEvent->ignore();
+}
+
+
 // Start jack audio server...
-void qjackctlMainForm::startJack()
+void qjackctlMainForm::startJack (void)
 {
     // Is the server process instance still here?
     if (m_pJack) {
         switch (QMessageBox::warning(this, tr("Warning"),
-            tr("Could not start JACK. Maybe already started."),
+            tr("Could not start JACK.") + "\n\n" +
+            tr("Maybe JACK audio server is already started."),
             tr("Stop"), tr("Kill"), tr("Cancel"))) {
         case 0:
             m_pJack->tryTerminate();
@@ -235,6 +269,7 @@ void qjackctlMainForm::startJack()
     }
 
     setCaption(QJACKCTL_TITLE " - " + tr("Starting..."));
+    StartPushButton->setEnabled(false);
 
     QString sTemp;
     int iExitStatus;
@@ -321,7 +356,7 @@ void qjackctlMainForm::startJack()
         m_pJack->addArgument(FramesComboBox->currentText());
     }
     if (bAlsa) {
-        if (PeriodsComboBox->currentText().toInt() > 0) {
+        if (!AsioCheckBox->isChecked() && PeriodsComboBox->currentText().toInt() > 0) {
             m_pJack->addArgument("-n");
             m_pJack->addArgument(PeriodsComboBox->currentText());
         }
@@ -380,7 +415,8 @@ void qjackctlMainForm::startJack()
     // Go jack, go...
     if (!m_pJack->start()) {
         QMessageBox::critical(this, tr("Fatal error"),
-            tr("Could not start JACK. Sorry."),
+            tr("Could not start JACK.") + "\n\n" +
+            tr("Sorry."),
             QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
         processJackExit();
         return;
@@ -397,12 +433,11 @@ void qjackctlMainForm::startJack()
     appendMessages(tr("JACK is started with") + sTemp);
 
     setCaption(QJACKCTL_TITLE " - " + tr("Started."));
-
-    StartPushButton->setEnabled(false);
     StopPushButton->setEnabled(true);
 
     // Create our timer...
     m_iTimerSlot = 0;
+    m_iRefresh = 0;
     m_pTimer = new QTimer(this);
     QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     // Let's wait three seconds for client startup?
@@ -411,7 +446,7 @@ void qjackctlMainForm::startJack()
 
 
 // Stop jack audio server...
-void qjackctlMainForm::stopJack()
+void qjackctlMainForm::stopJack (void)
 {
     // Stop client code.
     stopJackClient();
@@ -433,7 +468,7 @@ void qjackctlMainForm::stopJack()
 
 
 // Stdout handler...
-void qjackctlMainForm::readJackStdout()
+void qjackctlMainForm::readJackStdout (void)
 {
     QString s = m_pJack->readStdout();
     appendMessages(detectXrun(s));
@@ -441,7 +476,7 @@ void qjackctlMainForm::readJackStdout()
 
 
 // Stderr handler...
-void qjackctlMainForm::readJackStderr()
+void qjackctlMainForm::readJackStderr (void)
 {
     QString s = m_pJack->readStderr();
     appendMessages(detectXrun(s));
@@ -449,7 +484,7 @@ void qjackctlMainForm::readJackStderr()
 
 
 // Jack audio server cleanup.
-void qjackctlMainForm::processJackExit()
+void qjackctlMainForm::processJackExit (void)
 {
     // Force client code cleanup.
     stopJackClient();
@@ -468,7 +503,6 @@ void qjackctlMainForm::processJackExit()
     m_pJack = NULL;
 
     setCaption(QJACKCTL_TITLE " - " + tr("Stopped."));
-
     StartPushButton->setEnabled(true);
     StopPushButton->setEnabled(false);
 }
@@ -517,20 +551,26 @@ void qjackctlMainForm::toggleDetails (void)
     stabilizeForm(true);
 }
 
-void qjackctlMainForm::changeDriver( const QString& sDriver )
+void qjackctlMainForm::toggleAsio (void)
+{
+    changeDriver(DriverComboBox->currentText());
+}
+
+void qjackctlMainForm::changeDriver ( const QString& sDriver )
 {
     bool bDummy     = (sDriver == "dummy");
     bool bAlsa      = (sDriver == "alsa");
     bool bPortaudio = (sDriver == "portaudio");
-
+    bool bAsio      = AsioCheckBox->isChecked();
+    
     SoftModeCheckBox->setEnabled(bAlsa);
     MonitorCheckBox->setEnabled(bAlsa);
 
     ChanTextLabel->setEnabled(bPortaudio);
     ChanComboBox->setEnabled(bPortaudio);
 
-    PeriodsTextLabel->setEnabled(bAlsa);
-    PeriodsComboBox->setEnabled(bAlsa);
+    PeriodsTextLabel->setEnabled(bAlsa && !bAsio);
+    PeriodsComboBox->setEnabled(bAlsa && !bAsio);
 
     WaitTextLabel->setEnabled(bDummy);
     WaitComboBox->setEnabled(bDummy);    
@@ -595,14 +635,18 @@ void qjackctlMainForm::stabilizeForm ( bool bSavePosition )
 
 
 // Reset XRUN cache items.
-void qjackctlMainForm::resetXrunStats()
+void qjackctlMainForm::resetXrunStats (void)
 {
+    m_tResetLast = QTime::currentTime();
+
     m_iXrunStats = 0;
     m_iXrunCount = 0;
     m_fXrunTotal = 0.0;
     m_fXrunMin   = 0.0;
     m_fXrunMax   = 0.0;
     m_fXrunLast  = 0.0;
+    
+    m_tXrunLast.setHMS(0, 0, 0);
 
     m_iXrunCallbacks = 0;
 
@@ -624,11 +668,11 @@ void qjackctlMainForm::updateXrunCount (void)
 
 
 // Update the XRUN last/elapsed time item.
-void qjackctlMainForm::updateXrunTime (void)
+QString qjackctlMainForm::formatElapsedTime ( QTime& t, bool bElapsed )
 {
-    QString sText = m_tXrunLast.toString();
-    int iSeconds = (m_tXrunLast.elapsed() / 1000);
-    if (m_iXrunCount > 0 && iSeconds > 1) {
+    QString sText = t.toString();
+    int iSeconds = (t.elapsed() / 1000);
+    if (bElapsed && iSeconds > 1) {
         int iHours   = 0;
         int iMinutes = 0;
         sText += " (";
@@ -642,12 +686,20 @@ void qjackctlMainForm::updateXrunTime (void)
         }
         sText += QTime(iHours, iMinutes, iSeconds).toString() + ")";
     }
-    m_apStats[STATS_XRUN_TIME]->setText(1, sText);
+    return sText;
+}
+
+
+// Update the XRUN last/elapsed time item.
+void qjackctlMainForm::updateElapsedTimes (void)
+{
+    m_apStats[STATS_RESET_TIME]->setText(1, formatElapsedTime(m_tResetLast, true));
+    m_apStats[STATS_XRUN_TIME]->setText(1, formatElapsedTime(m_tXrunLast, (m_iXrunCount > 1)));
 }
 
 
 // Update the XRUN list view items.
-void qjackctlMainForm::refreshXrunStats()
+void qjackctlMainForm::refreshXrunStats (void)
 {
     float fXrunAverage = 0.0;
     if (m_iXrunCount > 0)
@@ -659,7 +711,7 @@ void qjackctlMainForm::refreshXrunStats()
     m_apStats[STATS_XRUN_MAX]->setText(1, QString::number(m_fXrunMax) + s);
     m_apStats[STATS_XRUN_AVG]->setText(1, QString::number(fXrunAverage) + s);
     m_apStats[STATS_XRUN_LAST]->setText(1, QString::number(m_fXrunLast) + s);
-    updateXrunTime();
+    updateElapsedTimes();
     StatsListView->triggerUpdate();
 }
 
@@ -790,13 +842,21 @@ void qjackctlMainForm::timerSlot (void)
     if (AutoRefreshCheckBox->isChecked() && (m_iTimerSlot % TimeRefreshComboBox->currentText().toInt()) == 0)
         refreshConnections();
 
+    // Are we about to refresh it, really?
+    if (m_iRefresh > 0) {
+        m_iRefresh = 0;
+        if (m_pJackPatchbay)
+            m_pJackPatchbay->refresh();
+        stabilizeConnections();
+    }
+
     // Update some statistical fields, directly.
     if (m_pJackClient) {
         QString s = " ";
         m_apStats[STATS_CPU_LOAD]->setText(1, QString::number(jack_cpu_load(m_pJackClient), 'g', 3) + s + "%");
         m_apStats[STATS_SAMPLE_RATE]->setText(1, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
     }
-    updateXrunTime();
+    updateElapsedTimes();
     StatsListView->triggerUpdate();
 }
 
@@ -835,7 +895,7 @@ void qjackctlMainForm::closePipes (void)
 
 
 // Start our jack audio control client...
-void qjackctlMainForm::startJackClient()
+void qjackctlMainForm::startJackClient (void)
 {
     // Create port notification pipe.
     if (::pipe(g_fdPort) < 0) {
@@ -875,7 +935,7 @@ void qjackctlMainForm::startJackClient()
     if (m_pJackClient == NULL) {
         closePipes();
         QMessageBox::critical(this, tr("Error"),
-            tr("Could not connect to jack server."),
+            tr("Could not connect to JACK server."),
             QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
         return;
     }
@@ -904,11 +964,14 @@ void qjackctlMainForm::startJackClient()
 
     // Our timer will now get one second standard.
     m_pTimer->start(1000, false);
+    
+    // Remember to schedule an initial connection refreshment.
+    refreshConnections();
 }
 
 
 // Stop jack audio client...
-void qjackctlMainForm::stopJackClient()
+void qjackctlMainForm::stopJackClient (void)
 {
     // Stop timer.
     if (m_pTimer)
@@ -958,7 +1021,7 @@ void qjackctlMainForm::stopJackClient()
 
 
 // Connect current selected ports.
-void qjackctlMainForm::connectSelected()
+void qjackctlMainForm::connectSelected (void)
 {
     if (m_pJackPatchbay)
         m_pJackPatchbay->connectSelected();
@@ -968,7 +1031,7 @@ void qjackctlMainForm::connectSelected()
 
 
 // Disconnect current selected ports.
-void qjackctlMainForm::disconnectSelected()
+void qjackctlMainForm::disconnectSelected (void)
 {
     if (m_pJackPatchbay)
         m_pJackPatchbay->disconnectSelected();
@@ -977,26 +1040,37 @@ void qjackctlMainForm::disconnectSelected()
 }
 
 
-// Rebuild all patchbay items.
-void qjackctlMainForm::refreshConnections()
+// Disconnect all connected ports.
+void qjackctlMainForm::disconnectAll()
 {
     if (m_pJackPatchbay)
-        m_pJackPatchbay->refresh();
+        m_pJackPatchbay->disconnectAll();
 
     stabilizeConnections();
 }
 
 
+// Rebuild all patchbay items.
+void qjackctlMainForm::refreshConnections (void)
+{
+    // Just increment our intentions; it will be deferred
+    // to be executed just on timer slot processing...
+    m_iRefresh++;
+}
+
+
 // Proper enablement of patchbay command controls.
-void qjackctlMainForm::stabilizeConnections()
+void qjackctlMainForm::stabilizeConnections (void)
 {
     if (m_pJackPatchbay) {
         ConnectPushButton->setEnabled(m_pJackPatchbay->canConnectSelected());
         DisconnectPushButton->setEnabled(m_pJackPatchbay->canDisconnectSelected());
+        DisconnectAllPushButton->setEnabled(m_pJackPatchbay->canDisconnectAll());
         RefreshPushButton->setEnabled(true);
     } else {
         ConnectPushButton->setEnabled(false);
         DisconnectPushButton->setEnabled(false);
+        DisconnectAllPushButton->setEnabled(false);
         RefreshPushButton->setEnabled(false);
     }
 }

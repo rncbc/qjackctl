@@ -209,25 +209,28 @@ public:
     // Default destructor.
     ~qjackctlPatchbay();
 
-    // Complete contents refreshner.
-    void refresh (void);
-
     // Sizing policies.
     virtual QSizePolicy sizePolicy() const;
 
     // Explicit connection tests.
     bool canConnectSelected();
     bool canDisconnectSelected();
+    bool canDisconnectAll();
 
 public slots:
+
+    // Complete contents refreshner.
+    void refresh (void);
 
     // Explicit connection slots.
     void connectSelected();
     void disconnectSelected();
+    void disconnectAll();
 
     // Useful slots (should this be protected?).
     void listViewChanged(QListViewItem *);
     void contentsMoved(int, int);
+    void contextMenu(QListViewItem *, const QPoint&, int);
 
 protected:
 
@@ -251,8 +254,10 @@ private:
     // Connection methods (unguarded).
     bool canConnectSelectedEx();
     bool canDisconnectSelectedEx();
+    bool canDisconnectAllEx();
     void connectSelectedEx();
     void disconnectSelectedEx();
+    void disconnectAllEx();
 
     // Drawing methods.
     void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
