@@ -522,7 +522,7 @@ void qjackctlMainForm::startJack (void)
     m_pJack->addArgument("-d" + m_preset.sDriver);
     bool bDummy     = (m_preset.sDriver == "dummy");
     bool bOss       = (m_preset.sDriver == "oss");
-    bool bAlsa      = (m_preset.sDriver == "alsa" || m_preset.sDriver == "usx2y");
+    bool bAlsa      = (m_preset.sDriver == "alsa");
     bool bPortaudio = (m_preset.sDriver == "portaudio");
     if (bAlsa)
         m_pJack->addArgument("-d" + m_preset.sInterface);

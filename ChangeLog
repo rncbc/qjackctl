@@ -3,7 +3,14 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.14   2004-12-21  Work in progress...
+0.2.14   2004-12-31  Work in progress...
+
+- Removed stand-alone usx2y driver support; since JACK 0.99.41+ CVS, the
+  special "rawusb" support on the Tascam US-122/224/428 USB Audio/MIDI
+  interface controllers have been merged and properly integrated into the
+  regular alsa backend driver. Being still experimental, this special mode
+  of operation is triggered only when "hw:N,2" is specified as the alsa
+  device name (N = soundcard index of snd-usb-usx2y module).
 
 - Messages window limit is now enforced only when the line count exceeds
   in one third the user configured line count maximum.
