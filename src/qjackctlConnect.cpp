@@ -318,6 +318,7 @@ void qjackctlClientItem::paintCell( QPainter *p, const QColorGroup& cg, int colu
 //----------------------------------------------------------------------
 // qjackctlClientList -- Client list.
 //
+int qjackctlClientList::g_iPixmapSize = 0;
 
 // Constructor.
 qjackctlClientList::qjackctlClientList( qjackctlClientListView *pListView, bool bReadable )
@@ -450,13 +451,25 @@ void qjackctlClientList::hiliteClientPorts (void)
 }
 
 
-// Common pixmap factory-method.
-QPixmap *qjackctlClientList::createPixmap ( const QString& sName, int iSize )
+// Common icon size pixmap accessor (static).
+void qjackctlClientList::setPixmapSize ( int iPixmapSize )
+{
+    g_iPixmapSize = iPixmapSize;
+}
+
+int qjackctlClientList::pixmapSize (void)
+{
+    return g_iPixmapSize;
+}
+
+
+// Common pixmap factory-method (static).
+QPixmap *qjackctlClientList::createPixmap ( const QString& sName )
 {
     QPixmap *pPixmap;
     
-    if (iSize > 0)
-        pPixmap = new QPixmap(QPixmap::fromMimeSource(sName + QString("_%1x%1.png").arg(iSize * 32)));
+    if (g_iPixmapSize > 0)
+        pPixmap = new QPixmap(QPixmap::fromMimeSource(sName + QString("_%1x%1.png").arg(g_iPixmapSize * 32)));
     else
         pPixmap = new QPixmap(QPixmap::fromMimeSource(sName + ".png"));
         

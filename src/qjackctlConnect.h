@@ -205,9 +205,13 @@ public:
     // Client:port hilite update stabilization.
     void hiliteClientPorts (void);
 
-    // Common pixmap factory-method.
-    QPixmap *createPixmap (const QString& sName, int iSize);
-    
+    // Common pixmap factory-method (static).
+    static QPixmap *createPixmap (const QString& sName);
+
+    // Common icon size pixmap accessors (static).
+    static void setPixmapSize (int iPixmapSize);
+    static int pixmapSize (void);
+
 private:
 
     // Instance variables.
@@ -217,6 +221,10 @@ private:
     QPtrList<qjackctlClientItem> m_clients;
 
     QListViewItem *m_pHiliteItem;
+
+    // Common (static) pixmap icon-size:
+    // 0 = 16x16 (default), 1 = 32x32, 2 = 64x64.
+    static int g_iPixmapSize;
 };
 
 

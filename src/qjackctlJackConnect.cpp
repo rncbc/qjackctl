@@ -196,16 +196,16 @@ qjackctlJackClientList::qjackctlJackClientList( qjackctlClientListView *pListVie
     : qjackctlClientList(pListView, bReadable)
 {
     if (g_iXpmRefCount == 0) {
-        g_pXpmClientI = createPixmap("aclienti", 0);
-        g_pXpmClientO = createPixmap("acliento", 0);
-        g_pXpmPortPTI = createPixmap("aportpti", 0);
-        g_pXpmPortPTO = createPixmap("aportpto", 0);
-        g_pXpmPortPNI = createPixmap("aportpni", 0);
-        g_pXpmPortPNO = createPixmap("aportpno", 0);
-        g_pXpmPortLTI = createPixmap("aportlti", 0);
-        g_pXpmPortLTO = createPixmap("aportlto", 0);
-        g_pXpmPortLNI = createPixmap("aportlni", 0);
-        g_pXpmPortLNO = createPixmap("aportlno", 0);
+        g_pXpmClientI = qjackctlClientList::createPixmap("aclienti");
+        g_pXpmClientO = qjackctlClientList::createPixmap("acliento");
+        g_pXpmPortPTI = qjackctlClientList::createPixmap("aportpti");
+        g_pXpmPortPTO = qjackctlClientList::createPixmap("aportpto");
+        g_pXpmPortPNI = qjackctlClientList::createPixmap("aportpni");
+        g_pXpmPortPNO = qjackctlClientList::createPixmap("aportpno");
+        g_pXpmPortLTI = qjackctlClientList::createPixmap("aportlti");
+        g_pXpmPortLTO = qjackctlClientList::createPixmap("aportlto");
+        g_pXpmPortLNI = qjackctlClientList::createPixmap("aportlni");
+        g_pXpmPortLNO = qjackctlClientList::createPixmap("aportlno");
     }
     g_iXpmRefCount++;
 
