@@ -679,6 +679,7 @@
     <include location="global" impldecl="in declaration">jack/jack.h</include>
     <include location="global" impldecl="in declaration">alsa/asoundlib.h</include>
     <include location="local" impldecl="in declaration">qjackctlSetup.h</include>
+    <include location="local" impldecl="in declaration">qjackctlSystemTray.h</include>
     <include location="local" impldecl="in declaration">qjackctlPatchbay.h</include>
     <include location="local" impldecl="in declaration">qjackctlPatchbayRack.h</include>
     <include location="local" impldecl="in declaration">qjackctlMessagesForm.h</include>
@@ -733,6 +734,7 @@
     <variable access="private">QString m_sStdoutBuffer;</variable>
     <variable access="private">QString m_sTimeDashes;</variable>
     <variable access="private">QString m_sJackCmdLine;</variable>
+    <variable access="private">qjackctlSystemTray *m_pSystemTray;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack( void )</slot>
@@ -759,6 +761,7 @@
     <slot specifier="non virtual">transportStart()</slot>
     <slot specifier="non virtual">transportStop()</slot>
     <slot specifier="non virtual">cableConnectSlot(const QString &amp; sOutputPort, const QString &amp; sInputPort, unsigned int ulCableFlags)</slot>
+    <slot specifier="non virtual">systemTrayContextMenu( qjackctlSystemTray *pSystemTray, const QPoint &amp; pos )</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>

@@ -2990,6 +2990,25 @@
                                             <string>Whether to keep all child windows on top of the main window</string>
                                         </property>
                                     </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>SystemTrayCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Enable system tray icon</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+E</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to enable the system tray icon (KDE only)</string>
+                                        </property>
+                                    </widget>
                                 </vbox>
                             </widget>
                             <widget class="QLayoutWidget" row="0" column="1">
@@ -3521,6 +3540,12 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
+        <sender>SystemTrayCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
         <sender>ServerConfigCheckBox</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3604,6 +3629,7 @@
     <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>KeepOnTopCheckBox</tabstop>
+    <tabstop>SystemTrayCheckBox</tabstop>
     <tabstop>ServerConfigCheckBox</tabstop>
     <tabstop>ServerConfigNameComboBox</tabstop>
     <tabstop>ServerConfigTempCheckBox</tabstop>

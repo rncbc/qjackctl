@@ -41,7 +41,7 @@ void qjackctlSetupForm::init (void)
     m_iDirtyOptions = 0;
 
     // Set dialog validators...
-    PresetComboBox->setValidator(new QRegExpValidator(QRegExp("[\\w]+"), PresetComboBox));
+    PresetComboBox->setValidator(new QRegExpValidator(QRegExp("[\\w-]+"), PresetComboBox));
     ChanComboBox->setValidator(new QIntValidator(ChanComboBox));
     PriorityComboBox->setValidator(new QIntValidator(PriorityComboBox));
     FramesComboBox->setValidator(new QIntValidator(FramesComboBox));
@@ -129,6 +129,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     StartJackCheckBox->setChecked(m_pSetup->bStartJack);
     QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
     KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
+    SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
     ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
     ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
     ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
@@ -705,6 +706,7 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->bStartJack              = StartJackCheckBox->isChecked();
         m_pSetup->bQueryClose             = QueryCloseCheckBox->isChecked();
         m_pSetup->bKeepOnTop              = KeepOnTopCheckBox->isChecked();
+        m_pSetup->bSystemTray             = SystemTrayCheckBox->isChecked();
         m_pSetup->bServerConfig           = ServerConfigCheckBox->isChecked();
         m_pSetup->sServerConfigName       = ServerConfigNameComboBox->currentText();
         m_pSetup->bServerConfigTemp       = ServerConfigTempCheckBox->isChecked();

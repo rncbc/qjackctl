@@ -93,6 +93,9 @@ void qjackctlMainForm::init (void)
     m_pStatusForm      = NULL;
     m_pConnectionsForm = NULL;
     m_pPatchbayForm    = NULL;
+
+    // The eventual system tray widget.
+    m_pSystemTray = NULL;
 }
 
 
@@ -121,6 +124,10 @@ void qjackctlMainForm::destroy (void)
         delete m_pConnectionsForm;
     if (m_pPatchbayForm)
         delete m_pPatchbayForm;
+
+    // Quit off system tray widget.
+    if (m_pSystemTray)
+        delete m_pSystemTray;
 }
 
 
@@ -142,8 +149,16 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, wflags);
 
     // Set the patchbay cable connection notification signal/slot.
-    QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),
-        this, SLOT(cableConnectSlot(const QString&,const QString&,unsigned int)));
+    QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
+        this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
+
+    // Try to open the system tray widget.
+    m_pSystemTray = new qjackctlSystemTray(this);
+    if (m_pSetup->bSystemTray)
+        m_pSystemTray->show();
+
+    QObject::connect(m_pSystemTray, SIGNAL(contextMenuRequested(qjackctlSystemTray *, const QPoint &)),
+        this, SLOT(systemTrayContextMenu(qjackctlSystemTray *, const QPoint &)));
 
     // Try to restore old window positioning.
     m_pSetup->loadWidgetGeometry(this);
@@ -279,6 +294,7 @@ bool qjackctlMainForm::queryClose (void)
         m_pStatusForm->close();        
         m_pConnectionsForm->close();        
         m_pPatchbayForm->close();        
+        m_pSystemTray->close();
     }
 
     return bQueryClose;
@@ -1695,6 +1711,7 @@ void qjackctlMainForm::showSetupForm (void)
         QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
         bool    bStdoutCapture         = m_pSetup->bStdoutCapture;
         bool    bKeepOnTop             = m_pSetup->bKeepOnTop;
+        bool    bSystemTray            = m_pSetup->bSystemTray;
         int     bMessagesLimit         = m_pSetup->bMessagesLimit;
         int     iMessagesLimitLines    = m_pSetup->iMessagesLimitLines;
         // Load the current setup settings.
@@ -1709,6 +1726,15 @@ void qjackctlMainForm::showSetupForm (void)
                 QMessageBox::information(this, tr("Information"),
                     tr("Some settings will be only effective\n"
                        "the next time you start this program."), tr("OK"));
+            }
+            // The system tray icon maybe already available.
+            if (m_pSystemTray &&
+                ( bSystemTray && !m_pSetup->bSystemTray) ||
+                (!bSystemTray &&  m_pSetup->bSystemTray)) {
+                if (m_pSetup->bSystemTray)
+                    m_pSystemTray->show();
+                else
+                    m_pSystemTray->hide();
             }
             // If server is currently running, prompt user...
             if (m_pJackClient) {
@@ -1907,6 +1933,59 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
 
     if (m_pStatusForm)
         m_pStatusForm->updateStatus(iStatusItem, sText);
+}
+
+
+// System tray context menu request slot.
+void qjackctlMainForm::systemTrayContextMenu ( qjackctlSystemTray *, const QPoint& pos )
+{
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+    
+    int iToggle = pContextMenu->insertItem(isVisible() ? tr("&Hide") : tr("S&how"));
+    pContextMenu->insertSeparator();
+    
+    if (m_pJackClient == NULL) {
+        pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("start1.png")),
+            tr("&Start"), this, SLOT(startJack()));
+    } else {
+        pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("stop1.png")),
+            tr("&Stop"), this, SLOT(stopJack()));
+    }
+    pContextMenu->insertSeparator();
+    
+    int iItemID;
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("messages1.png")),
+        tr("&Messages"), this, SLOT(toggleMessagesForm()));
+    pContextMenu->setItemChecked(iItemID, m_pMessagesForm && m_pMessagesForm->isVisible());
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("status1.png")), 
+        tr("St&atus"), this, SLOT(toggleStatusForm()));
+    pContextMenu->setItemChecked(iItemID, m_pStatusForm && m_pStatusForm->isVisible());
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("connections1.png")), 
+        tr("&Connections"), this, SLOT(toggleConnectionsForm()));
+    pContextMenu->setItemChecked(iItemID, m_pConnectionsForm && m_pConnectionsForm->isVisible());
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("patchbay1.png")), 
+        tr("Patch&bay"), this, SLOT(togglePatchbayForm()));
+    pContextMenu->setItemChecked(iItemID, m_pPatchbayForm && m_pPatchbayForm->isVisible());
+    iItemID = pContextMenu->insertSeparator();
+
+    pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("setup1.png")), 
+        tr("S&etup..."), this, SLOT(showSetupForm()));
+    pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("about1.png")), 
+        tr("Ab&out..."), this, SLOT(showAboutForm()));
+    pContextMenu->insertSeparator();
+    
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("quit1.png")), 
+        tr("&Quit"), this, SLOT(close()));
+    
+    iItemID = pContextMenu->exec(pos);
+    if (iItemID == iToggle) {
+        if (isVisible())
+            hide();
+        else
+            show();
+    }
+
+    delete pContextMenu;
 }
 
 

@@ -67,6 +67,7 @@ qjackctlSetup::qjackctlSetup (void)
     sDisplayFont2           = m_settings.readEntry("/DisplayFont2", QString::null);
     bQueryClose             = m_settings.readBoolEntry("/QueryClose", true);
     bKeepOnTop              = m_settings.readBoolEntry("/KeepOnTop", true);
+    bSystemTray             = m_settings.readBoolEntry("/SystemTray", false);
     bServerConfig           = m_settings.readBoolEntry("/ServerConfig", true);
     sServerConfigName       = m_settings.readEntry("/ServerConfigName", ".jackdrc");
     bServerConfigTemp       = m_settings.readBoolEntry("/ServerConfigTemp", false);
@@ -122,6 +123,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);
     m_settings.writeEntry("/QueryClose",              bQueryClose);
     m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
+    m_settings.writeEntry("/SystemTray",              bSystemTray);
     m_settings.writeEntry("/ServerConfig",            bServerConfig);
     m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
     m_settings.writeEntry("/ServerConfigTemp",        bServerConfigTemp);

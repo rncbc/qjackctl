@@ -1,4 +1,4 @@
-// qjackctlAbout.h
+// qjackctlSystemTray.h
 //
 /****************************************************************************
    Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,15 +19,42 @@
 
 *****************************************************************************/
 
-#ifndef __qjackctlAbout_h
-#define __qjackctlAbout_h
+#ifndef __qjackctlSystemTray_h
+#define __qjackctlSystemTray_h
 
-#define QJACKCTL_TITLE      "JACK Audio Connection Kit"
-#define QJACKCTL_SUBTITLE   "Qt GUI Interface"
-#define QJACKCTL_VERSION    "0.2.7.91"
-#define QJACKCTL_WEBSITE    "http://qjackctl.sourceforge.net"
-#define QJACKCTL_COPYRIGHT  "Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved."
+#include <qpopupmenu.h>
+#include <qlabel.h>
 
-#endif  // __qjackctlAbout_h
 
-// end of qjackctlAbout.h
+//----------------------------------------------------------------------------
+// qjackctlSystemTray -- Custom system tray widget.
+
+class qjackctlSystemTray : public QLabel
+{
+    Q_OBJECT
+
+public:
+
+    // Constructor.
+    qjackctlSystemTray(QWidget *pParent = 0, const char *pszName = 0);
+    // Default destructor.
+    ~qjackctlSystemTray();
+
+signals:
+
+    // Context menu signal.
+    void contextMenuRequested(qjackctlSystemTray *pSystemTray, const QPoint& pos);
+
+protected:
+
+    // Inherited mouse event.
+    void mousePressEvent(QMouseEvent *);
+
+    // Toggle paraent visibility.
+    void toggleParent();
+};
+
+
+#endif  // __qjackctlSystemTray_h
+
+// end of qjackctlSystemTray.h

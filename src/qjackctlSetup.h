@@ -116,6 +116,7 @@ public:
     QString sDisplayFont2;
     bool    bQueryClose;
     bool    bKeepOnTop;
+    bool    bSystemTray;
     bool    bServerConfig;
     QString sServerConfigName;
     bool    bServerConfigTemp;

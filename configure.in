@@ -22,6 +22,16 @@ if test "x$ac_debug" = "xdebug"; then
    AC_DEFINE(CONFIG_DEBUG, 1, [Define if debugging is enabled.])
 fi
 
+dnl Enable KDE systray option.
+AC_ARG_ENABLE(kde,
+  [  --disable-kde           disable KDE system tray (default=no)],
+  [ac_kde="no"],
+  [ac_kde="yes"])
+
+if test "x$ac_kde" = "xyes"; then
+   AC_DEFINE(CONFIG_KDE, 1, [Define if KDE system tray is enabled.])
+fi
+
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CPP
