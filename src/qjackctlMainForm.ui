@@ -656,6 +656,7 @@
     <variable access="private">int m_iTimerSlot;</variable>
     <variable access="private">int m_iRefresh;</variable>
     <variable access="private">int m_iDirtyCount;</variable>
+    <variable access="private">QSocketNotifier *m_pStdoutNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
@@ -686,6 +687,7 @@
     <slot specifier="non virtual">readJackStdout( void )</slot>
     <slot specifier="non virtual">readJackStderr( void )</slot>
     <slot specifier="non virtual">processJackExit( void )</slot>
+    <slot specifier="non virtual">stdoutNotifySlot( int fd )</slot>
     <slot specifier="non virtual">portNotifySlot( int fd )</slot>
     <slot specifier="non virtual">xrunNotifySlot( int fd )</slot>
     <slot specifier="non virtual">buffNotifySlot( int fd )</slot>

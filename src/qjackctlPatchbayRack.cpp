@@ -431,8 +431,8 @@ void qjackctlPatchbayRack::connectCable ( qjackctlPatchbaySocket *pOutputSocket,
                 else if (jack_connect(m_pJackClient, pszOutputPort, pszInputPort) == 0)
                     uiCableFlags = QJACKCTL_CABLE_CONNECTED;
                 emit cableConnected(pszOutputPort, pszInputPort, uiCableFlags);
-                iPort++;
             }
+            iPort++;
         }
         // Get on next plug pair...
         iterOutputPlug++;

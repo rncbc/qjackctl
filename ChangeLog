@@ -3,18 +3,21 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.1.1   2003-10-28  Minor feature enhancements and bugfixes.
+0.1.1   2003-10-29  Minor feature enhancements and bugfixes.
 
 - Main window display items are now made fixed in width, at leats those more
   prone to change frequently and thus cause some display jitter.
 
 - Messages, status, connections and patchbay module windows are now reopenned
   automagicaly on startup as they were on previous session.
-  
+
 - New patchbay definition snapshot option from current actual connections;
   current active patchbay filename status title indication.
 
-- New icons patchbay editor window and socket dialogs.
+- New icons patchbay editor window and socket dialogs; own stdout/stdin is
+  now properly captured and shown on messages log window.
+
+- Fixed an obvious patchbay connection scan freezing bug.
 
 
 0.1.0   2003-10-22  Major user interface redesign.
@@ -23,7 +26,7 @@ ChangeLog
   control panel -- old main window dialog tabs are now splitted in separate
   pop-up windows/dialogs; big time display options. In other words, this sums
   up to a nice complete application rewrite.
-  
+
 - Deprecated options for forcing aRTs and jackd daemons are no longer
   available; this functionality can be officially superceded by the more
   generic startup/shutdown script options.

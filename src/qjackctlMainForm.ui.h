@@ -44,6 +44,8 @@
 #define QJACKCTL_FDREAD     0
 #define QJACKCTL_FDWRITE    1
 
+static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+
 static int g_fdPort[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 static int g_fdXrun[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 static int g_fdBuff[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
@@ -64,6 +66,8 @@ void qjackctlMainForm::init (void)
     m_iRefresh    = 0;
     m_iDirtyCount = 0;
 
+    m_pStdoutNotifier = NULL;
+    
     m_pPortNotifier = NULL;
     m_pXrunNotifier = NULL;
     m_pBuffNotifier = NULL;
@@ -73,6 +77,14 @@ void qjackctlMainForm::init (void)
     m_iXrunNotify = 0;
     m_iBuffNotify = 0;
     m_iShutNotify = 0;
+
+    // Check if we can redirect our own stdout/stderr...
+    if (::pipe(g_fdStdout) == 0) {
+        ::dup2(g_fdStdout[QJACKCTL_FDWRITE], STDOUT_FILENO);
+        ::dup2(g_fdStdout[QJACKCTL_FDWRITE], STDERR_FILENO);
+        m_pStdoutNotifier = new QSocketNotifier(g_fdStdout[QJACKCTL_FDREAD], QSocketNotifier::Read, this);
+        QObject::connect(m_pStdoutNotifier, SIGNAL(activated(int)), this, SLOT(stdoutNotifySlot(int)));
+    }
 
     // All forms are to be created right now.
     m_pMessagesForm    = new qjackctlMessagesForm(this);
@@ -209,12 +221,15 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
     QString sTemp = "[" + sShellCommand;
     appendMessages(sTemp.stripWhiteSpace() + "]");
     QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
-    appendMessages(sStopMessage + formatExitStatus(::system(sShellCommand)));
-   // Wait a litle bit (~1 second) before continue...
+    // Execute and set exit status message...
+    sTemp = sStopMessage + formatExitStatus(::system(sShellCommand));
+   // Wait a litle bit (~half-second) before continue...
     QTime t;
     t.start();
-    while (t.elapsed() < 1000)
+    while (t.elapsed() < 500)
         QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+    // Final log message...
+    appendMessages(sTemp);
 }
 
 
@@ -495,6 +510,18 @@ QString& qjackctlMainForm::detectXrun( QString & s )
         m_iXrunStats++;
     }
     return s;
+}
+
+
+// Own stdout/stderr socket notifier slot.
+void qjackctlMainForm::stdoutNotifySlot ( int fd )
+{
+    char achBuffer[1024];
+    int  cchBuffer = ::read(fd, achBuffer, sizeof(achBuffer) - 1);
+    if (cchBuffer > 0) {
+        achBuffer[cchBuffer] = (char) 0;
+        appendMessagesText(achBuffer);
+    }
 }
 
 

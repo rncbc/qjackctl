@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>549</width>
-            <height>380</height>
+            <width>476</width>
+            <height>362</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -85,9 +85,6 @@
                     <property name="text">
                         <string>OK</string>
                     </property>
-                    <property name="iconSet">
-                        <iconset>accept1.png</iconset>
-                    </property>
                 </widget>
                 <widget class="QPushButton">
                     <property name="name">
@@ -111,7 +108,7 @@
             </property>
             <widget class="QWidget">
                 <property name="name">
-                    <cstring>tab</cstring>
+                    <cstring>SettingsTabPage</cstring>
                 </property>
                 <attribute name="title">
                     <string>Settings</string>
@@ -492,6 +489,12 @@
                                             <font>
                                                 <bold>0</bold>
                                             </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>NoFrame</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Plain</enum>
                                         </property>
                                         <property name="text">
                                             <string>Priorit&amp;y:</string>
@@ -1263,7 +1266,7 @@
             </widget>
             <widget class="QWidget">
                 <property name="name">
-                    <cstring>tab</cstring>
+                    <cstring>OptionsTabPage</cstring>
                 </property>
                 <attribute name="title">
                     <string>Options</string>
@@ -1826,7 +1829,7 @@
             </widget>
             <widget class="QWidget">
                 <property name="name">
-                    <cstring>TabPage</cstring>
+                    <cstring>DisplayTabPage</cstring>
                 </property>
                 <attribute name="title">
                     <string>Display</string>
