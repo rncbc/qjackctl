@@ -605,6 +605,10 @@ void qjackctlMainForm::startJack (void)
     sTemp += ").";
     appendMessages(tr("JACK was started") + sTemp);
 
+    // Sloppy boy fix: may the serve be stopped, just in case
+    // the client will nerver make it...
+    StopPushButton->setEnabled(true);
+    
     // Reset (yet again) the timer counters...
     m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
     m_iTimerDelay  = 0;
