@@ -3,7 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.14   2005-01-12  Work in progress...
+0.2.14   2005-01-14  Work in progress...
+
+- Set to ignore the SIGPIPE ("Broken pipe") signal, where available, as the
+  default handler is usually fatal when a JACK client is zombified abruptly.
 
 - All conection view items are now sorted in natural case insensitive order,
   not just as audio port names as was before.

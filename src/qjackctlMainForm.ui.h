@@ -34,7 +34,13 @@
 
 #include "qjackctlPatchbayFile.h"
 
+#ifdef HAVE_POLL_H
 #include <poll.h>
+#endif
+
+#ifdef HAVE_SIGNAL_H
+#include <signal.h>
+#endif
 
 #ifdef CONFIG_JACK_STATISTICS
 #include <jack/statistics.h>
@@ -119,6 +125,11 @@ void qjackctlMainForm::init (void)
     
     // We're not quitting so early :)
     m_bQuitForce = false;
+
+#ifdef HAVE_SIGNAL_H
+	// Set to ignore any fatal "Broken pipe" signals.
+	signal(SIGPIPE, SIG_IGN);
+#endif
 }
 
 
