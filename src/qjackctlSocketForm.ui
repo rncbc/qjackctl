@@ -439,6 +439,12 @@
         <slot>socketTypeChanged()</slot>
     </connection>
     <connection>
+        <sender>ExclusiveCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>socketTypeChanged()</slot>
+    </connection>
+    <connection>
         <sender>ClientNameComboBox</sender>
         <signal>textChanged(const QString&amp;)</signal>
         <receiver>qjackctlSocketForm</receiver>
@@ -494,10 +500,7 @@
     <variable access="private">bool m_bReadable;</variable>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">snd_seq_t *m_pAlsaSeq;</variable>
-    <variable access="private">QPixmap *m_pXpmASocket;</variable>
-    <variable access="private">QPixmap *m_pXpmMSocket;</variable>
-    <variable access="private">QPixmap *m_pXpmAPlug;</variable>
-    <variable access="private">QPixmap *m_pXpmMPlug;</variable>
+    <variable access="private">QPixmap **m_ppPixmaps;</variable>
     <variable access="private">QPopupMenu *m_pAddPlugMenu;</variable>
 </variables>
 <slots>
@@ -518,11 +521,10 @@
     <function access="private" specifier="non virtual">destroy()</function>
     <function specifier="non virtual">setSocketCaption( const QString &amp; sSocketCaption )</function>
     <function specifier="non virtual">setReadable( bool bReadable )</function>
-    <function specifier="non virtual">setSocketPixmaps( QPixmap *pXpmASocket, QPixmap *pXpmMSocket )</function>
-    <function specifier="non virtual">setPlugPixmaps( QPixmap *pXpmAPlug, QPixmap *pXpmMPlug )</function>
+    <function specifier="non virtual">setPixmaps( QPixmap **ppPixmaps )</function>
     <function specifier="non virtual">setJackClient( jack_client_t *pJackClient )</function>
     <function specifier="non virtual">setAlsaSeq( snd_seq_t *pAlsaSeq )</function>
-    <function specifier="non virtual">enableExclusive( bool bEnabled )</function>
+    <function specifier="non virtual">setConnectCount( int iConnectCount )</function>
     <function specifier="non virtual">load( qjackctlPatchbaySocket * pSocket )</function>
     <function specifier="non virtual">save( qjackctlPatchbaySocket * pSocket )</function>
     <function access="private" specifier="non virtual" returnType="bool">validateForm()</function>

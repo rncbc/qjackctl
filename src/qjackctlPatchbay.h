@@ -47,6 +47,16 @@ class qjackctlPatchworkView;
 class qjackctlPatchbayView;
 class qjackctlPatchbay;
 
+// Pixmap-set indexes.
+#define QJACKCTL_XPM_AUDIO_SOCKET   0
+#define QJACKCTL_XPM_AUDIO_SOCKET_X 1
+#define QJACKCTL_XPM_AUDIO_PLUG     2
+#define QJACKCTL_XPM_MIDI_SOCKET    3
+#define QJACKCTL_XPM_MIDI_SOCKET_X  4
+#define QJACKCTL_XPM_MIDI_PLUG      5
+#define QJACKCTL_XPM_PIXMAPS        6
+
+
 // Patchbay plug (port) list item.
 class qjackctlPlugItem : public QListViewItem
 {
@@ -81,7 +91,7 @@ class qjackctlSocketItem : public QListViewItem
 public:
 
     // Constructor.
-    qjackctlSocketItem(qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, int iSocketType, qjackctlSocketItem *pSocketAfter);
+    qjackctlSocketItem(qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, int iSocketType, bool bExclusive, qjackctlSocketItem *pSocketAfter);
     // Default destructor.
     ~qjackctlSocketItem();
 
@@ -124,6 +134,12 @@ public:
 
     // Plug list cleaner.
     void clear();
+
+    // Retrieve a context pixmap.
+    QPixmap& pixmap(int iPixmap);
+    
+    // Update pixmap to its proper context.
+    void updatePixmap();
 
 private:
 
@@ -190,28 +206,32 @@ public:
     // Find the current selected socket item in list.
     qjackctlSocketItem *selectedSocketItem();
 
+    // Retrieve a context pixmap.
+    QPixmap& pixmap(int iPixmap);
+
 public slots:
 
     // Socket item interactivity methods.
     bool addSocketItem();
     bool removeSocketItem();
     bool editSocketItem();
-
+    bool exclusiveSocketItem();
     bool moveUpSocketItem();
     bool moveDownSocketItem();
 
 private:
+
+    // Merge two pixmaps with union of respective masks.
+    QPixmap *createPixmapMerge(const QPixmap& xpmDst, const QPixmap& xpmSrc);
 
     // Instance variables.
     qjackctlSocketListView *m_pListView;
     bool m_bReadable;
     QString  m_sSocketCaption;
     jack_client_t *m_pJackClient;
-    QPixmap *m_pXpmASocket;
-    QPixmap *m_pXpmAPlug;
     snd_seq_t *m_pAlsaSeq;
-    QPixmap *m_pXpmMSocket;
-    QPixmap *m_pXpmMPlug;
+
+    QPixmap *m_apPixmaps[QJACKCTL_XPM_PIXMAPS];
 
     QPtrList<qjackctlSocketItem> m_sockets;
 };

@@ -6,8 +6,8 @@ ChangeLog
 0.2.4  2004-01-22  Exclusive patchbay sockets.
 
 - Patchbay definitions may now be configured with exclusive sockets;
-  this way, only the described connection is to be maintained, being
-  all others eventually disconnected.
+  this way, only one defined connection is allowed at any one time,
+  being all others immediatelly disconnected whenever attempted.
 
 
 0.2.3a 2004-01-19  Time format combo-box tooltip fix.

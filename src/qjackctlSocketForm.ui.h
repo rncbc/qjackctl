@@ -33,10 +33,7 @@ void qjackctlSocketForm::init()
     m_bReadable    = false;
     m_pJackClient  = NULL;
     m_pAlsaSeq     = NULL;
-    m_pXpmASocket  = NULL;
-    m_pXpmMSocket  = NULL;
-    m_pXpmAPlug    = NULL;
-    m_pXpmMPlug    = NULL;
+    m_ppPixmaps    = NULL;
     m_pAddPlugMenu = NULL;
 
     PlugListView->setSorting(-1);
@@ -67,16 +64,9 @@ void qjackctlSocketForm::setReadable ( bool bReadable )
 
 
 // Pixmap utility methods.
-void qjackctlSocketForm::setSocketPixmaps ( QPixmap *pXpmASocket, QPixmap *pXpmMSocket )
+void qjackctlSocketForm::setPixmaps ( QPixmap **ppPixmaps )
 {
-    m_pXpmASocket = pXpmASocket;
-    m_pXpmMSocket = pXpmMSocket;
-}
-
-void qjackctlSocketForm::setPlugPixmaps ( QPixmap *pXpmAPlug, QPixmap *pXpmMPlug )
-{
-    m_pXpmAPlug = pXpmAPlug;
-    m_pXpmMPlug = pXpmMPlug;
+    m_ppPixmaps= ppPixmaps;
 }
 
 
@@ -94,10 +84,11 @@ void qjackctlSocketForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 }
 
 
-// Exclusive mode enablement.
-void qjackctlSocketForm::enableExclusive ( bool bEnabled )
+// Socket type and exclusiveness editing enablement.
+void qjackctlSocketForm::setConnectCount ( int iConnectCount )
 {
-    ExclusiveCheckBox->setEnabled(bEnabled);
+    SocketTypeGroup->setEnabled(iConnectCount < 1);
+    ExclusiveCheckBox->setEnabled(iConnectCount < 2);
 }
 
 
@@ -196,10 +187,10 @@ void qjackctlSocketForm::addPlug()
             QPixmap *pXpmPlug = NULL;
             switch (SocketTypeGroup->id(SocketTypeGroup->selected())) {
               case 0: // QJACKCTL_SOCKETTYPE_AUDIO
-                pXpmPlug = m_pXpmAPlug;
+                pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG];
                 break;
               case 1: // QJACKCTL_SOCKETTYPE_MIDI
-                pXpmPlug = m_pXpmMPlug;
+                pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG];
                 break;
             }
             if (pXpmPlug)
@@ -334,12 +325,17 @@ void qjackctlSocketForm::socketTypeChanged()
 
     ClientNameComboBox->clear();
 
-    QPixmap *pXpmPlug = NULL;
+    QPixmap *pXpmSocket = NULL;
+    QPixmap *pXpmPlug   = NULL;
 
     switch (SocketTypeGroup->id(SocketTypeGroup->selected())) {
       case 0: // QJACKCTL_SOCKETTYPE_AUDIO
-        SocketTabWidget->setTabIconSet(SocketTabWidget->page(0), QIconSet(*m_pXpmASocket));
-        pXpmPlug = m_pXpmAPlug;
+        if (ExclusiveCheckBox->isChecked())
+            pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X];
+        else
+            pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET];
+        SocketTabWidget->setTabIconSet(SocketTabWidget->page(0), QIconSet(*pXpmSocket));
+        pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG];
         if (m_pJackClient) {
             // Grab all client ports.
             const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (m_bReadable ? JackPortIsOutput : JackPortIsInput));
@@ -363,8 +359,12 @@ void qjackctlSocketForm::socketTypeChanged()
         }
         break;
       case 1: // QJACKCTL_SOCKETTYPE_MIDI
-        SocketTabWidget->setTabIconSet(SocketTabWidget->page(0), QIconSet(*m_pXpmMSocket));
-        pXpmPlug = m_pXpmMPlug;
+        if (ExclusiveCheckBox->isChecked())
+            pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X];
+        else
+            pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET];
+        SocketTabWidget->setTabIconSet(SocketTabWidget->page(0), QIconSet(*pXpmSocket));
+        pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG];
         if (m_pAlsaSeq) {
             // Readd all subscribers...
             snd_seq_client_info_t *pClientInfo;
