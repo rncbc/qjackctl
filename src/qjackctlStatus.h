@@ -40,6 +40,7 @@
 #define STATUS_XRUN_AVG         14
 #define STATUS_XRUN_TOTAL       15
 #define STATUS_RESET_TIME       16
+#define STATUS_MAX_DELAY        17
 
 // (Big)Time display identifiers.
 #define DISPLAY_TRANSPORT_TIME  0

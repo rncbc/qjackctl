@@ -172,6 +172,18 @@ if test "x$ac_jack_realtime" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_REALTIME, 1, [Define if jack_is_realtime is available.])
 fi
 
+dnl Check for jack_get_xrun_delayed_usecs function.
+AC_CHECK_LIB(jack, jack_get_xrun_delayed_usecs, [ac_jack_xrun_delay="yes"], [ac_jack_xrun_delay="no"])
+if test "x$ac_jack_xrun_delay" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_XRUN_DELAY, 1, [Define if jack_get_xrun_delayed_usecs is available.])
+fi
+
+dnl Check for jack_get_max_delayed_usecs function.
+AC_CHECK_LIB(jack, jack_get_max_delayed_usecs, [ac_jack_max_delay="yes"], [ac_jack_max_delay="no"])
+if test "x$ac_jack_max_delay" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_MAX_DELAY, 1, [Define if jack_get_max_delayed_usecs is available.])
+fi
+
 dnl Finally produce a configure header file and the main makefile.
 AC_OUTPUT(Makefile qjackctl.pro)
 
@@ -180,3 +192,4 @@ make clean > /dev/null 2>&1
 echo ""
 echo "Now type 'make', followed by 'make install' as root."
 echo ""
+

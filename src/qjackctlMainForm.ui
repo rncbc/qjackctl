@@ -644,6 +644,7 @@
 </includes>
 <variables>
     <variable access="private">qjackctlSetup *m_pSetup;</variable>
+    <variable access="private">int m_iServerState;</variable>
     <variable access="private">QProcess *m_pJack;</variable>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">bool m_bJackDetach;</variable>
@@ -683,6 +684,7 @@
     <variable access="private">QString m_sTimeDashes;</variable>
     <variable access="private">QString m_sJackCmdLine;</variable>
     <variable access="private">qjackctlSystemTray *m_pSystemTray;</variable>
+    <variable access="private">QPopupMenu *m_pPresetsMenu;</variable>
     <variable access="private">bool m_bQuitForce;</variable>
 </variables>
 <slots>
@@ -708,6 +710,7 @@
     <slot specifier="non virtual">transportStart()</slot>
     <slot specifier="non virtual">transportStop()</slot>
     <slot specifier="non virtual">systemTrayContextMenu( const QPoint &amp; pos )</slot>
+    <slot specifier="non virtual">activatePresetsMenu ( int iItemID )</slot>
     <slot specifier="non virtual">quitMainForm( void )</slot>
 </slots>
 <functions>
@@ -738,6 +741,7 @@
     <function specifier="non virtual">activatePatchbay( const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">stabilizeForm( void )</function>
     <function specifier="non virtual">resetXrunStats( void )</function>
+    <function access="private" specifier="non virtual">updateXrunStats( float fXrunLast )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatTime( double secs )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( int iStatusItem, const QTime &amp; t, bool bElapsed )</function>
@@ -753,9 +757,12 @@
     <function specifier="non virtual">refreshJackConnections( void )</function>
     <function specifier="non virtual">refreshAlsaConnections( void )</function>
     <function specifier="non virtual">refreshPatchbay( void )</function>
+    <function access="private" specifier="non virtual">showDirtySettingsWarning( void )</function>
+    <function access="private" specifier="non virtual">showDirtySetupWarning( void )</function>
     <function access="private" specifier="non virtual">refreshStatus( void )</function>
-    <function access="private" specifier="non virtual">updateStatus( int iStatusItem, const QString &amp; sText )</function>
-    <function access="private" specifier="non virtual">updateTitle( const QString &amp; sTitle, int iState )</function>
+    <function access="private" specifier="non virtual">updateStatusItem( int iStatusItem, const QString &amp; sText )</function>
+    <function access="private" specifier="non virtual">updateTitleStatus( void )</function>
+    <function access="private" specifier="non virtual">updateServerState( int iState )</function>
     <function access="private" specifier="non virtual">updateSystemTray( void )</function>
     <function access="private" specifier="non virtual">contextMenuEvent( QContextMenuEvent *pEvent )</function>
 </functions>

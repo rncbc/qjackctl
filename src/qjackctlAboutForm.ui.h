@@ -60,6 +60,18 @@ void qjackctlAboutForm::init (void)
     sText += "<br />\n";
     sText += "</font></small>";
 #endif
+#ifndef CONFIG_JACK_XRUN_DELAY
+    sText += "<small><font color=\"red\">";
+    sText += tr("XRUN delay status disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
+#ifndef CONFIG_JACK_MAX_DELAY
+    sText += "<small><font color=\"red\">";
+    sText += tr("Maximum delay status disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
     sText += "<br />\n";
     sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
     sText += "<br />\n";

@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@ void qjackctlStatusForm::init (void)
 
     StatsListView->setSorting(3); // Initially unsorted.
 
+    m_apStatus[STATUS_MAX_DELAY]  = new QListViewItem(StatsListView, s + tr("Maximum scheduling delay") + c, n);
     m_apStatus[STATUS_RESET_TIME] = new QListViewItem(StatsListView, s + tr("Time of last reset") + c, z);
 
     pViewItem = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
@@ -60,6 +61,7 @@ void qjackctlStatusForm::init (void)
     m_apStatus[STATUS_SAMPLE_RATE]  = new QListViewItem(StatsListView, s + tr("Sample Rate") + c, n);
     m_apStatus[STATUS_CPU_LOAD]     = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
     m_apStatus[STATUS_SERVER_STATE] = new QListViewItem(StatsListView, s + tr("Server state") + c, n);
+
 }
 
 
@@ -108,7 +110,7 @@ void qjackctlStatusForm::refreshXrunStats (void)
 
 
 // Update one status item value.
-void qjackctlStatusForm::updateStatus ( int iStatusItem, const QString& sText )
+void qjackctlStatusForm::updateStatusItem ( int iStatusItem, const QString& sText )
 {
     m_apStatus[iStatusItem]->setText(1, sText);
 }

@@ -3,6 +3,20 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.13   2004-10-18  Work in progress...
+
+- XRUN detection and statistics are being conditionally included if
+  jack_get_xrun_delayed_usecs() is available (as of JACK 0.99.7+).
+
+- Fixed ancient bug on client shutdown event handling, which was
+  invoking the xrun notification handler by mistake.
+
+- Support for maximum scheduling delay status added (EXPERIMENTAL);
+  this relies on jack_get_max_delayed_usecs() function availability.
+  
+- Preset selection has been added to the context menu.
+
+
 0.2.12a  2004-10-11  Audio connections now naturally sorted.
 
 - Client port list on audio connections are now hopefully fixed for good;
