@@ -21,7 +21,6 @@
 
 #include "qjackctlPatchbay.h"
 
-#include <qpopupmenu.h>
 #include <qmessagebox.h>
 #include <qtimer.h>
 
@@ -920,9 +919,9 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, unsigned long ulSock
         qjackctlSocketItem *pSocketItem = pSocketList->selectedSocketItem();
         bool bEnabled = (pSocketItem != NULL);
         iItemID = pContextMenu->insertItem(tr("Add..."), pSocketList, SLOT(addSocketItem()));
-        iItemID = pContextMenu->insertItem(tr("Remove"), pSocketList, SLOT(removeSocketItem()));
+        iItemID = pContextMenu->insertItem(tr("Edit..."), pSocketList, SLOT(editSocketItem()));
         pContextMenu->setItemEnabled(iItemID, bEnabled);
-        iItemID = pContextMenu->insertItem(tr("Properties..."), pSocketList, SLOT(editSocketItem()));
+        iItemID = pContextMenu->insertItem(tr("Remove"), pSocketList, SLOT(removeSocketItem()));
         pContextMenu->setItemEnabled(iItemID, bEnabled);
         pContextMenu->insertSeparator();
         iItemID = pContextMenu->insertItem(tr("Move Up"), pSocketList, SLOT(moveUpSocketItem()));
@@ -1252,6 +1251,20 @@ void qjackctlPatchbay::refresh (void)
     (m_pPatchbayView->PatchworkView())->update();
 }
 
+
+// Complete contents clearer.
+void qjackctlPatchbay::clear (void)
+{
+    // Clear socket lists.
+    m_pOSocketList->clear();
+    m_pISocketList->clear();
+
+    // Reset dirty flag.
+    m_pPatchbayView->setDirty(false);
+    
+    // May refresh everything.
+    refresh();
+}
 
 
 // Patchbay client list accessors.

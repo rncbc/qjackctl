@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>qjackctlSocketForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>387</width>
-            <height>295</height>
+            <height>323</height>
         </rect>
     </property>
     <property name="caption">
@@ -165,32 +165,35 @@
                             <string>JACK Client name (regular expression)</string>
                         </property>
                     </widget>
-                    <widget class="QListBox" row="3" column="1" rowspan="4" colspan="1">
+                    <widget class="QListView" row="3" column="1" rowspan="5" colspan="1">
+                        <column>
+                            <property name="text">
+                                <string>Socket Plugs / Ports</string>
+                            </property>
+                            <property name="clickable">
+                                <bool>false</bool>
+                            </property>
+                            <property name="resizable">
+                                <bool>false</bool>
+                            </property>
+                        </column>
                         <property name="name">
-                            <cstring>PlugListBox</cstring>
+                            <cstring>PlugListView</cstring>
+                        </property>
+                        <property name="allColumnsShowFocus">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizeMode">
+                            <enum>AllColumns</enum>
+                        </property>
+                        <property name="defaultRenameAction">
+                            <enum>Accept</enum>
                         </property>
                         <property name="toolTip" stdset="0">
                             <string>Socket plug list</string>
                         </property>
                     </widget>
-                    <spacer row="4" column="2">
-                        <property name="name">
-                            <cstring>spacer1</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>16</width>
-                                <height>24</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <widget class="QPushButton" row="6" column="2">
+                    <widget class="QPushButton" row="7" column="2">
                         <property name="name">
                             <cstring>PlugDownPushButton</cstring>
                         </property>
@@ -207,7 +210,7 @@
                             <string>Move down currently selected plug socket plugst</string>
                         </property>
                     </widget>
-                    <widget class="QPushButton" row="5" column="2">
+                    <widget class="QPushButton" row="6" column="2">
                         <property name="name">
                             <cstring>PlugUpPushButton</cstring>
                         </property>
@@ -222,20 +225,6 @@
                         </property>
                         <property name="toolTip" stdset="0">
                             <string>Move up current selected plug socket plugst</string>
-                        </property>
-                    </widget>
-                    <widget class="QPushButton" row="3" column="2">
-                        <property name="name">
-                            <cstring>PlugRemovePushButton</cstring>
-                        </property>
-                        <property name="text">
-                            <string>&amp;Remove</string>
-                        </property>
-                        <property name="accel">
-                            <string>Alt+R</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Remove currently selected plug from socket plug list</string>
                         </property>
                     </widget>
                     <widget class="QPushButton" row="2" column="2">
@@ -291,6 +280,51 @@
                             <set>AlignTop|AlignRight</set>
                         </property>
                     </widget>
+                    <spacer row="5" column="2">
+                        <property name="name">
+                            <cstring>spacer1</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>16</width>
+                                <height>32</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget class="QPushButton" row="3" column="2">
+                        <property name="name">
+                            <cstring>PlugEditPushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Edit</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+E</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Edit currently selected plug/port</string>
+                        </property>
+                    </widget>
+                    <widget class="QPushButton" row="4" column="2">
+                        <property name="name">
+                            <cstring>PlugRemovePushButton</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Remove</string>
+                        </property>
+                        <property name="accel">
+                            <string>Alt+R</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Remove currently selected plug from socket plug list</string>
+                        </property>
+                    </widget>
                 </grid>
             </widget>
         </widget>
@@ -334,7 +368,7 @@
         <slot>moveDownPlug()</slot>
     </connection>
     <connection>
-        <sender>PlugListBox</sender>
+        <sender>PlugListView</sender>
         <signal>selectionChanged()</signal>
         <receiver>qjackctlSocketForm</receiver>
         <slot>stabilizeForm()</slot>
@@ -357,19 +391,38 @@
         <receiver>qjackctlSocketForm</receiver>
         <slot>stabilizeForm()</slot>
     </connection>
+    <connection>
+        <sender>PlugEditPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>editPlug()</slot>
+    </connection>
+    <connection>
+        <sender>PlugListView</sender>
+        <signal>contextMenuRequested(QListViewItem*,const QPoint&amp;,int)</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>contextMenu(QListViewItem*,const QPoint&amp;,int)</slot>
+    </connection>
+    <connection>
+        <sender>PlugListView</sender>
+        <signal>itemRenamed(QListViewItem*,int)</signal>
+        <receiver>qjackctlSocketForm</receiver>
+        <slot>stabilizeForm()</slot>
+    </connection>
 </connections>
 <tabstops>
-    <tabstop>SocketTabWidget</tabstop>
     <tabstop>SocketNameLineEdit</tabstop>
     <tabstop>ClientNameComboBox</tabstop>
     <tabstop>PlugNameComboBox</tabstop>
     <tabstop>PlugAddPushButton</tabstop>
-    <tabstop>PlugListBox</tabstop>
+    <tabstop>PlugListView</tabstop>
+    <tabstop>PlugEditPushButton</tabstop>
     <tabstop>PlugRemovePushButton</tabstop>
     <tabstop>PlugUpPushButton</tabstop>
     <tabstop>PlugDownPushButton</tabstop>
     <tabstop>OkPushButton</tabstop>
     <tabstop>CancelPushButton</tabstop>
+    <tabstop>SocketTabWidget</tabstop>
 </tabstops>
 <includes>
     <include location="global" impldecl="in declaration">qjackctlPatchbay.h</include>
@@ -379,15 +432,19 @@
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">unsigned long m_ulSocketFlags;</variable>
     <variable access="private">QPixmap *m_pXpmPlug;</variable>
+    <variable access="private">QPopupMenu *m_pAddPlugMenu;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">stabilizeForm()</slot>
-    <slot>acceptForm()</slot>
+    <slot specifier="non virtual">acceptForm()</slot>
     <slot specifier="non virtual">addPlug()</slot>
+    <slot specifier="non virtual">editPlug()</slot>
     <slot specifier="non virtual">removePlug()</slot>
     <slot specifier="non virtual">moveUpPlug()</slot>
     <slot specifier="non virtual">moveDownPlug()</slot>
+    <slot specifier="non virtual">contextMenu(QListViewItem *, const QPoint&amp;, int)</slot>
     <slot specifier="non virtual">clientNameChanged()</slot>
+    <slot specifier="non virtual">activateAddPlugMenu(int)</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>

@@ -31,13 +31,18 @@ void qjackctlSocketForm::init()
     m_pJackClient = NULL;
     m_ulSocketFlags = 0;
     m_pXpmPlug = NULL;
+    m_pAddPlugMenu = NULL;
+
+    PlugListView->setSorting(-1);
 }
 
 
 // Kind of destructor.
 void qjackctlSocketForm::destroy()
 {
-
+    if (m_pAddPlugMenu)
+        delete m_pAddPlugMenu;
+    m_pAddPlugMenu = NULL;
 }
 
 
@@ -45,6 +50,7 @@ void qjackctlSocketForm::destroy()
 void qjackctlSocketForm::setSocketCaption ( const QString& sSocketCaption )
 {
     SocketTabWidget->setTabLabel(SocketTabWidget->page(0), sSocketCaption);
+    (PlugListView->header())->setLabel(0, sSocketCaption + " " + tr("Plugs / Ports"), 180);
 }
 
 
@@ -100,12 +106,15 @@ void qjackctlSocketForm::load( qjackctlPatchbaySocket *pSocket )
     SocketNameLineEdit->setText(pSocket->name());
     ClientNameComboBox->setCurrentText(pSocket->clientName());
     
-    PlugListBox->clear();
+    PlugListView->clear();
+    QListViewItem *pItem = NULL;
     for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++) {
-        if (m_pXpmPlug) {
-            PlugListBox->insertItem(*m_pXpmPlug, *iter);
-        } else {
-            PlugListBox->insertItem(*iter);
+        pItem = new QListViewItem(PlugListView, pItem);
+        if (pItem) {
+            pItem->setText(0, *iter);
+            pItem->setRenameEnabled(0, true);
+            if (m_pXpmPlug)
+                pItem->setPixmap(0, *m_pXpmPlug);
         }
     }
 
@@ -120,11 +129,8 @@ void qjackctlSocketForm::save( qjackctlPatchbaySocket *pSocket )
     pSocket->setClientName(ClientNameComboBox->currentText());
     
     pSocket->pluglist().clear();
-    for (int i = 0; i < (int) PlugListBox->count(); i++) {
-        QListBoxItem *pItem = PlugListBox->item(i);
-        if (pItem)
-            pSocket->addPlug(pItem->text());
-    }    
+    for (QListViewItem *pItem = PlugListView->firstChild(); pItem; pItem = pItem->nextSibling())
+        pSocket->addPlug(pItem->text(0));
 }
 
 
@@ -133,12 +139,14 @@ void qjackctlSocketForm::stabilizeForm()
 {
     OkPushButton->setEnabled(validateForm());
     
-    QListBoxItem *pItem = PlugListBox->selectedItem();
+    QListViewItem *pItem = PlugListView->selectedItem();
     if (pItem) {
+        PlugEditPushButton->setEnabled(true);
         PlugRemovePushButton->setEnabled(true);
-        PlugUpPushButton->setEnabled(pItem->prev() != NULL);
-        PlugDownPushButton->setEnabled(pItem->next() != NULL);
+        PlugUpPushButton->setEnabled(pItem->itemAbove() != NULL);
+        PlugDownPushButton->setEnabled(pItem->nextSibling() != NULL);
     } else {
+        PlugEditPushButton->setEnabled(false);
         PlugRemovePushButton->setEnabled(false);
         PlugUpPushButton->setEnabled(false);
         PlugDownPushButton->setEnabled(false);
@@ -154,7 +162,7 @@ bool qjackctlSocketForm::validateForm()
     
     bValid = bValid && !SocketNameLineEdit->text().isEmpty();
     bValid = bValid && !ClientNameComboBox->currentText().isEmpty();
-    bValid = bValid && (PlugListBox->count() > 0);
+    bValid = bValid && (PlugListView->childCount() > 0);
     
     return bValid;
 }
@@ -172,59 +180,135 @@ void qjackctlSocketForm::addPlug()
 {
     QString sPlugName = PlugNameComboBox->currentText();
     if (!sPlugName.isEmpty()) {
-        if (m_pXpmPlug)
-            PlugListBox->insertItem(*m_pXpmPlug, sPlugName);
+        QListViewItem *pItem = PlugListView->selectedItem();
+        if (pItem)
+            pItem->setSelected(false);
         else
-            PlugListBox->insertItem(sPlugName);
+            pItem = PlugListView->lastItem();
+        pItem = new QListViewItem(PlugListView, pItem);
+        if (pItem) {
+            pItem->setText(0, sPlugName);
+            pItem->setRenameEnabled(0, true);
+            if (m_pXpmPlug)
+                pItem->setPixmap(0, *m_pXpmPlug);
+            pItem->setSelected(true);
+            PlugListView->setCurrentItem(pItem);
+        }
         PlugNameComboBox->setCurrentText(QString::null);
     }
+    
+    stabilizeForm();
+}
+
+
+// Rename current selected Plug.
+void qjackctlSocketForm::editPlug()
+{
+    QListViewItem *pItem = PlugListView->selectedItem();
+    if (pItem)
+        pItem->startRename(0);
+
+    stabilizeForm();
 }
 
 
 // Remove current selected Plug.
 void qjackctlSocketForm::removePlug()
 {
-    QListBoxItem *pItem = PlugListBox->selectedItem();
+    QListViewItem *pItem = PlugListView->selectedItem();
     if (pItem)
-        PlugListBox->removeItem(PlugListBox->index(pItem));
+        delete pItem;
+
+    stabilizeForm();
 }
 
 
 // Move current selected Plug one position up.
 void qjackctlSocketForm::moveUpPlug()
 {
-    QListBoxItem *pItem = PlugListBox->selectedItem();
+    QListViewItem *pItem = PlugListView->selectedItem();
     if (pItem) {
-        int iItem = PlugListBox->index(pItem);
-        if (iItem > 0) {
-            PlugListBox->setSelected(pItem, false);
-        //  PlugListBox->setUpdatesEnabled(false);
-            PlugListBox->takeItem(pItem);
-            PlugListBox->insertItem(pItem, iItem - 1);
-        //  PlugListBox->setUpdatesEnabled(true);
-        //  PlugListBox->triggerUpdate(false);
-            PlugListBox->setSelected(pItem, true);
+        QListViewItem *pItemAbove = pItem->itemAbove();
+        if (pItemAbove) {
+            pItem->setSelected(false);
+            pItemAbove = pItemAbove->itemAbove();
+            if (pItemAbove) {
+                pItem->moveItem(pItemAbove);
+            } else {
+                PlugListView->takeItem(pItem);
+                PlugListView->insertItem(pItem);
+            }
+            pItem->setSelected(true);
+            PlugListView->setCurrentItem(pItem);
         }
     }
+
+    stabilizeForm();
 }
 
 
 // Move current selected Plug one position down
 void qjackctlSocketForm::moveDownPlug()
 {
-    QListBoxItem *pItem = PlugListBox->selectedItem();
+    QListViewItem *pItem = PlugListView->selectedItem();
     if (pItem) {
-        int iItem = PlugListBox->index(pItem);
-        if (iItem < (int) PlugListBox->count() - 1) {
-            PlugListBox->setSelected(pItem, false);
-        //  PlugListBox->setUpdatesEnabled(false);
-            PlugListBox->takeItem(pItem);
-            PlugListBox->insertItem(pItem, iItem + 1);
-        //  PlugListBox->setUpdatesEnabled(true);
-        //  PlugListBox->triggerUpdate(false);
-            PlugListBox->setSelected(pItem, true);
+        QListViewItem *pItemBelow = pItem->nextSibling();
+        if (pItemBelow) {
+            pItem->setSelected(false);
+            pItem->moveItem(pItemBelow);
+            pItem->setSelected(true);
+            PlugListView->setCurrentItem(pItem);
         }
     }
+
+    stabilizeForm();
+}
+
+#include <qmessagebox.h>
+// Add new Plug from context menu.
+void qjackctlSocketForm::activateAddPlugMenu ( int iItemID )
+{
+    if (m_pAddPlugMenu == NULL)
+        return;
+    int iIndex = m_pAddPlugMenu->itemParameter(iItemID);
+    if (iIndex >= 0 && iIndex < PlugNameComboBox->count()) {
+        PlugNameComboBox->setCurrentItem(iIndex);
+        addPlug();
+    }
+}
+
+
+// Plug list context menu handler.
+void qjackctlSocketForm::contextMenu( QListViewItem *pItem, const QPoint& pos, int )
+{
+    int iItemID;
+    
+    // (Re)build the add plug sub-menu...
+    if (m_pAddPlugMenu)
+        delete m_pAddPlugMenu;
+    m_pAddPlugMenu = new QPopupMenu(this);
+    for (int iIndex = 0; iIndex < PlugNameComboBox->count(); iIndex++) {
+        iItemID = m_pAddPlugMenu->insertItem(PlugNameComboBox->text(iIndex));
+        m_pAddPlugMenu->setItemParameter(iItemID, iIndex);
+    }
+    QObject::connect(m_pAddPlugMenu, SIGNAL(activated(int)), this, SLOT(activateAddPlugMenu(int)));
+    
+    // Build the plug conext menu...
+    QPopupMenu* pContextMenu = new QPopupMenu(this);
+    
+    bool bEnabled = (pItem != NULL);
+    iItemID = pContextMenu->insertItem(tr("Add Plug"), m_pAddPlugMenu);
+    iItemID = pContextMenu->insertItem(tr("Remove"), this, SLOT(removePlug()));
+    pContextMenu->setItemEnabled(iItemID, bEnabled);
+    iItemID = pContextMenu->insertItem(tr("Edit"), this, SLOT(editPlug()));
+    pContextMenu->setItemEnabled(iItemID, bEnabled);
+    pContextMenu->insertSeparator();
+    iItemID = pContextMenu->insertItem(tr("Move Up"), this, SLOT(moveUpPlug()));
+    pContextMenu->setItemEnabled(iItemID, (bEnabled && pItem->itemAbove() != NULL));
+    iItemID = pContextMenu->insertItem(tr("Move Down"), this, SLOT(moveDownPlug()));
+    pContextMenu->setItemEnabled(iItemID, (bEnabled && pItem->nextSibling() != NULL));
+
+    pContextMenu->exec(pos);
 }
 
 
@@ -258,3 +342,4 @@ void qjackctlSocketForm::clientNameChanged()
 
 
 // end of qjackctlSocketForm.ui.h
+

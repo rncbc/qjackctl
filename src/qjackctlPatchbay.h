@@ -29,6 +29,7 @@
 #include <qptrlist.h>
 #include <qpixmap.h>
 #include <qpainter.h>
+#include <qpopupmenu.h>
 
 #include <jack/jack.h>
 
@@ -391,6 +392,9 @@ public slots:
     bool connectSelected();
     bool disconnectSelected();
     bool disconnectAll();
+
+    // Complete patchbay clearer.
+    void clear();
 
 private:
 

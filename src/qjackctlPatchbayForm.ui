@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>285</height>
+            <width>550</width>
+            <height>309</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -57,41 +57,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <spacer row="0" column="2">
-            <property name="name">
-                <cstring>spacer2</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Fixed</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>80</width>
-                    <height>8</height>
-                </size>
-            </property>
-        </spacer>
-        <spacer row="0" column="0">
-            <property name="name">
-                <cstring>spacer1</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Fixed</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>80</width>
-                    <height>8</height>
-                </size>
-            </property>
-        </spacer>
-        <widget class="QLayoutWidget" row="0" column="1">
+        <widget class="QLayoutWidget" row="0" column="0" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>layout1</cstring>
             </property>
@@ -99,6 +65,35 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>NewPatchbayPushButton</cstring>
+                    </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>80</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property name="text">
+                        <string>&amp;New</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+N</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>false</bool>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>new1.png</iconset>
+                    </property>
+                    <property name="flat">
+                        <bool>true</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Create a new patchbay profile</string>
+                    </property>
+                </widget>
                 <widget class="QPushButton">
                     <property name="name">
                         <cstring>LoadPatchbayPushButton</cstring>
@@ -115,8 +110,14 @@
                     <property name="accel">
                         <string>Alt+L</string>
                     </property>
+                    <property name="autoDefault">
+                        <bool>false</bool>
+                    </property>
                     <property name="iconSet">
                         <iconset>open1.png</iconset>
+                    </property>
+                    <property name="flat">
+                        <bool>true</bool>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Load patchbay profile</string>
@@ -138,8 +139,14 @@
                     <property name="accel">
                         <string>Alt+S</string>
                     </property>
+                    <property name="autoDefault">
+                        <bool>false</bool>
+                    </property>
                     <property name="iconSet">
                         <iconset>save1.png</iconset>
+                    </property>
+                    <property name="flat">
+                        <bool>true</bool>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Save current patchbay profile</string>
@@ -169,7 +176,10 @@
                         <enum>Sunken</enum>
                     </property>
                     <property name="alignment">
-                        <set>AlignCenter</set>
+                        <set>AlignVCenter</set>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Current patchbay profile name</string>
                     </property>
                 </widget>
                 <widget class="QPushButton">
@@ -183,13 +193,19 @@
                         </size>
                     </property>
                     <property name="text">
-                        <string>&amp;Activate</string>
+                        <string>Acti&amp;vate</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+S</string>
+                        <string>Alt+V</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>false</bool>
                     </property>
                     <property name="iconSet">
                         <iconset>apply1.png</iconset>
+                    </property>
+                    <property name="flat">
+                        <bool>true</bool>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Activate current patchbay profile</string>
@@ -197,7 +213,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLayoutWidget" row="2" column="1">
+        <widget class="QLayoutWidget" row="3" column="1">
             <property name="name">
                 <cstring>layout2</cstring>
             </property>
@@ -249,7 +265,7 @@
                 </widget>
                 <spacer>
                     <property name="name">
-                        <cstring>spacer6</cstring>
+                        <cstring>spacer4</cstring>
                     </property>
                     <property name="orientation">
                         <enum>Horizontal</enum>
@@ -274,15 +290,18 @@
                     <property name="accel">
                         <string>Alt+R</string>
                     </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
                     <property name="toolTip" stdset="0">
                         <string>Refresh current patchbay view</string>
                     </property>
                 </widget>
             </hbox>
         </widget>
-        <spacer row="2" column="2">
+        <spacer row="3" column="0">
             <property name="name">
-                <cstring>spacer7</cstring>
+                <cstring>spacer3</cstring>
             </property>
             <property name="orientation">
                 <enum>Horizontal</enum>
@@ -297,24 +316,7 @@
                 </size>
             </property>
         </spacer>
-        <spacer row="2" column="0">
-            <property name="name">
-                <cstring>spacer5</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Fixed</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>80</width>
-                    <height>8</height>
-                </size>
-            </property>
-        </spacer>
-        <widget class="QLayoutWidget" row="1" column="0" rowspan="1" colspan="3">
+        <widget class="QLayoutWidget" row="2" column="0" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>layout3</cstring>
             </property>
@@ -405,7 +407,7 @@
                 </widget>
                 <spacer row="3" column="2">
                     <property name="name">
-                        <cstring>spacer4</cstring>
+                        <cstring>spacer2</cstring>
                     </property>
                     <property name="orientation">
                         <enum>Vertical</enum>
@@ -420,9 +422,9 @@
                         </size>
                     </property>
                 </spacer>
-                <widget class="QPushButton" row="2" column="2">
+                <widget class="QPushButton" row="1" column="2">
                     <property name="name">
-                        <cstring>ISocketPropertiesPushButton</cstring>
+                        <cstring>ISocketEditPushButton</cstring>
                     </property>
                     <property name="maximumSize">
                         <size>
@@ -431,18 +433,18 @@
                         </size>
                     </property>
                     <property name="text">
-                        <string>Properties...</string>
+                        <string>Edit...</string>
                     </property>
                     <property name="accel">
                         <string></string>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string>View or change currently selected input socket properties</string>
+                        <string>Edit currently selected input socket properties</string>
                     </property>
                 </widget>
                 <spacer row="3" column="0">
                     <property name="name">
-                        <cstring>spacer3</cstring>
+                        <cstring>spacer1</cstring>
                     </property>
                     <property name="orientation">
                         <enum>Vertical</enum>
@@ -480,7 +482,7 @@
                         <string>Move currently selected output socket up one position</string>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="1" column="0">
+                <widget class="QPushButton" row="2" column="0">
                     <property name="name">
                         <cstring>OSocketRemovePushButton</cstring>
                     </property>
@@ -523,7 +525,7 @@
                         <string>Move currently selected output socket down one position</string>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="1" column="2">
+                <widget class="QPushButton" row="2" column="2">
                     <property name="name">
                         <cstring>ISocketRemovePushButton</cstring>
                     </property>
@@ -563,9 +565,9 @@
                         <string>Create a new input socket</string>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="2" column="0">
+                <widget class="QPushButton" row="1" column="0">
                     <property name="name">
-                        <cstring>OSocketPropertiesPushButton</cstring>
+                        <cstring>OSocketEditPushButton</cstring>
                     </property>
                     <property name="maximumSize">
                         <size>
@@ -574,13 +576,13 @@
                         </size>
                     </property>
                     <property name="text">
-                        <string>Properties...</string>
+                        <string>Edit...</string>
                     </property>
                     <property name="accel">
                         <string></string>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string>View or change currently selected output socket properties</string>
+                        <string>Edit currently selected output socket properties</string>
                     </property>
                 </widget>
                 <widget class="QPushButton" row="4" column="0">
@@ -608,6 +610,40 @@
                 </widget>
             </grid>
         </widget>
+        <widget class="QFrame" row="1" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>HeaderFrame</cstring>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>8</height>
+                </size>
+            </property>
+            <property name="frameShape">
+                <enum>HLine</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+        </widget>
+        <spacer row="3" column="2">
+            <property name="name">
+                <cstring>spacer5</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Fixed</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>80</width>
+                    <height>8</height>
+                </size>
+            </property>
+        </spacer>
     </grid>
 </widget>
 <customwidgets>
@@ -634,6 +670,12 @@
     </image>
 </images>
 <connections>
+    <connection>
+        <sender>NewPatchbayPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlPatchbayForm</receiver>
+        <slot>newPatchbay()</slot>
+    </connection>
     <connection>
         <sender>LoadPatchbayPushButton</sender>
         <signal>clicked()</signal>
@@ -665,10 +707,10 @@
         <slot>removeOSocket()</slot>
     </connection>
     <connection>
-        <sender>OSocketPropertiesPushButton</sender>
+        <sender>OSocketEditPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlPatchbayForm</receiver>
-        <slot>propertiesOSocket()</slot>
+        <slot>editOSocket()</slot>
     </connection>
     <connection>
         <sender>OSocketMoveUpPushButton</sender>
@@ -695,10 +737,10 @@
         <slot>removeISocket()</slot>
     </connection>
     <connection>
-        <sender>ISocketPropertiesPushButton</sender>
+        <sender>ISocketEditPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlPatchbayForm</receiver>
-        <slot>propertiesISocket()</slot>
+        <slot>editISocket()</slot>
     </connection>
     <connection>
         <sender>ISocketMoveUpPushButton</sender>
@@ -738,16 +780,17 @@
     </connection>
 </connections>
 <tabstops>
+    <tabstop>NewPatchbayPushButton</tabstop>
     <tabstop>LoadPatchbayPushButton</tabstop>
     <tabstop>SavePatchbayPushButton</tabstop>
     <tabstop>ActivatePatchbayPushButton</tabstop>
     <tabstop>OSocketAddPushButton</tabstop>
+    <tabstop>OSocketEditPushButton</tabstop>
     <tabstop>OSocketRemovePushButton</tabstop>
-    <tabstop>OSocketPropertiesPushButton</tabstop>
     <tabstop>PatchbayView</tabstop>
     <tabstop>ISocketAddPushButton</tabstop>
+    <tabstop>ISocketEditPushButton</tabstop>
     <tabstop>ISocketRemovePushButton</tabstop>
-    <tabstop>ISocketPropertiesPushButton</tabstop>
     <tabstop>OSocketMoveUpPushButton</tabstop>
     <tabstop>OSocketMoveDownPushButton</tabstop>
     <tabstop>ISocketMoveUpPushButton</tabstop>
@@ -765,26 +808,29 @@
 <variables>
     <variable access="private">qjackctlPatchbay *m_pPatchbay;</variable>
     <variable access="private">QString m_sPatchbayPath;</variable>
+    <variable access="private">QString m_sPatchbayName;</variable>
+    <variable access="private">int m_iUntitled;</variable>
 </variables>
 <slots>
+    <slot specifier="non virtual">refreshForm()</slot>
     <slot specifier="non virtual">stabilizeForm()</slot>
+    <slot specifier="non virtual">newPatchbay()</slot>
     <slot specifier="non virtual">loadPatchbay()</slot>
     <slot specifier="non virtual">savePatchbay()</slot>
     <slot specifier="non virtual">activatePatchbay()</slot>
     <slot specifier="non virtual">addOSocket()</slot>
     <slot specifier="non virtual">removeOSocket()</slot>
-    <slot specifier="non virtual">propertiesOSocket()</slot>
+    <slot specifier="non virtual">editOSocket()</slot>
     <slot specifier="non virtual">moveUpOSocket()</slot>
     <slot specifier="non virtual">moveDownOSocket()</slot>
     <slot specifier="non virtual">addISocket()</slot>
     <slot specifier="non virtual">removeISocket()</slot>
-    <slot specifier="non virtual">propertiesISocket()</slot>
+    <slot specifier="non virtual">editISocket()</slot>
     <slot specifier="non virtual">moveUpISocket()</slot>
     <slot specifier="non virtual">moveDownISocket()</slot>
     <slot specifier="non virtual">connectSelected()</slot>
     <slot specifier="non virtual">disconnectSelected()</slot>
     <slot specifier="non virtual">disconnectAll()</slot>
-    <slot specifier="non virtual">refreshForm()</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
@@ -798,8 +844,8 @@
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
     <function specifier="non virtual" returnType="qjackctlSocketItem *">selectedSocketItem( qjackctlSocketList *pSocketList )</function>
     <function specifier="non virtual">addSocketItem ( qjackctlSocketList *pSocketList, const QString &amp; sCaption )</function>
+    <function specifier="non virtual">editSocketItem ( qjackctlSocketList *pSocketList, const QString &amp; sCaption )</function>
     <function specifier="non virtual">removeSocketItem ( qjackctlSocketList *pSocketList )</function>
-    <function specifier="non virtual">propertiesSocketItem ( qjackctlSocketList *pSocketList, const QString &amp; sCaption )</function>
     <function specifier="non virtual">moveUpSocketItem( qjackctlSocketList *pSocketList )</function>
     <function specifier="non virtual">moveDownSocketItem( qjackctlSocketList *pSocketList )</function>
 </functions>

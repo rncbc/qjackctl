@@ -40,10 +40,6 @@
             <verstretch>0</verstretch>
         </sizepolicy>
     </property>
-    <property name="font">
-        <font>
-        </font>
-    </property>
     <property name="caption">
         <string>Setup - JACK Audio Connection Kit</string>
     </property>
@@ -944,6 +940,11 @@
                                         </item>
                                         <property name="name">
                                             <cstring>ChanComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
                                         </property>
                                         <property name="acceptDrops">
                                             <bool>false</bool>

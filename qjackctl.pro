@@ -31,6 +31,7 @@ IMAGES   = icons/qjackctl.xpm \
            icons/play1.png \
            icons/pause1.png \
            icons/accept1.png \
+           icons/new1.png \
            icons/open1.png \
            icons/save1.png \
            icons/apply1.png \

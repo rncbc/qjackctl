@@ -34,14 +34,15 @@ void qjackctlPatchbayForm::init (void)
 {
     // Create the patchbay view object.
     m_pPatchbay = new qjackctlPatchbay(PatchbayView);
-
+    m_iUntitled = 0;
+    
     // Connect it to some UI feedback slot.
     QObject::connect(PatchbayView->OListView(), SIGNAL(selectionChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->IListView(), SIGNAL(selectionChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->OListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->IListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
 
-    PatchbayTextLabel->setText("(" + tr("untitled") + ")");
+    newPatchbay();
 }
 
 
@@ -85,7 +86,7 @@ bool qjackctlPatchbayForm::queryClose (void)
     if (PatchbayView->dirty()) {
         switch (QMessageBox::warning(this, tr("Warning"),
             tr("The patchbay definition has been changed:") + "\n\n" +
-            "\"" + m_sPatchbayPath +  "\"\n\n" +
+            "\"" + m_sPatchbayName +  "\"\n\n" +
             tr("Do you want to save the changes?"),
             tr("Save"), tr("Discard"), tr("Cancel"))) {
         case 0:     // Save...
@@ -116,30 +117,33 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     SavePatchbayPushButton->setEnabled(PatchbayView->dirty());
     ActivatePatchbayPushButton->setEnabled(QFileInfo(m_sPatchbayPath).exists());
 
-    qjackctlSocketItem *pSocketItem;
-    
-    pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
+    QString sText = m_sPatchbayName;
+    if (PatchbayView->dirty())
+        sText += " [" + tr("modified") + "]";
+    PatchbayTextLabel->setText(sText);
+
+    qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
+        OSocketEditPushButton->setEnabled(true);
         OSocketRemovePushButton->setEnabled(true);
-        OSocketPropertiesPushButton->setEnabled(true);
         OSocketMoveUpPushButton->setEnabled(pSocketItem->itemAbove() != NULL);
         OSocketMoveDownPushButton->setEnabled(pSocketItem->nextSibling() != NULL);
     } else {
+        OSocketEditPushButton->setEnabled(false);
         OSocketRemovePushButton->setEnabled(false);
-        OSocketPropertiesPushButton->setEnabled(false);
         OSocketMoveUpPushButton->setEnabled(false);
         OSocketMoveDownPushButton->setEnabled(false);
     }
     
     pSocketItem = (m_pPatchbay->ISocketList())->selectedSocketItem();
     if (pSocketItem) {
+        ISocketEditPushButton->setEnabled(true);
         ISocketRemovePushButton->setEnabled(true);
-        ISocketPropertiesPushButton->setEnabled(true);
         ISocketMoveUpPushButton->setEnabled(pSocketItem->itemAbove() != NULL);
         ISocketMoveDownPushButton->setEnabled(pSocketItem->nextSibling() != NULL);
     } else {
+        ISocketEditPushButton->setEnabled(false);
         ISocketRemovePushButton->setEnabled(false);
-        ISocketPropertiesPushButton->setEnabled(false);
         ISocketMoveUpPushButton->setEnabled(false);
         ISocketMoveDownPushButton->setEnabled(false);
     }
@@ -173,7 +177,7 @@ void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
     m_pPatchbay->loadRack(&rack);
     // Step 3: stabilize form...
     m_sPatchbayPath = sFileName;
-    PatchbayTextLabel->setText(QFileInfo(sFileName).baseName());
+    m_sPatchbayName = QFileInfo(sFileName).baseName();
     stabilizeForm();
 }
 
@@ -194,11 +198,22 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     }
     // Step 3: stabilize form...
     m_sPatchbayPath = sFileName;
-    PatchbayTextLabel->setText(QFileInfo(sFileName).baseName());
+    m_sPatchbayName = QFileInfo(sFileName).baseName();
     stabilizeForm();
 }
 
 
+// Create a new patchbay definition from scratch.
+void qjackctlPatchbayForm::newPatchbay()
+{
+    // Check if we can discard safely the current one...
+    if (queryClose()) {
+        m_pPatchbay->clear();
+        m_sPatchbayPath = QString::null;
+        m_sPatchbayName = tr("Untitled") + QString::number(m_iUntitled++);
+        stabilizeForm();
+    }
+}
 
 
 // Load patchbay definitions from file.
@@ -275,7 +290,7 @@ void qjackctlPatchbayForm::removeOSocket()
 }
 
 
-void qjackctlPatchbayForm::propertiesOSocket()
+void qjackctlPatchbayForm::editOSocket()
 {
     (m_pPatchbay->OSocketList())->editSocketItem();
     stabilizeForm();
@@ -312,7 +327,7 @@ void qjackctlPatchbayForm::removeISocket()
 }
 
 
-void qjackctlPatchbayForm::propertiesISocket()
+void qjackctlPatchbayForm::editISocket()
 {
     (m_pPatchbay->ISocketList())->editSocketItem();
     stabilizeForm();
