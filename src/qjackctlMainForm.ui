@@ -648,7 +648,6 @@
     <include location="global" impldecl="in declaration">qsettings.h</include>
     <include location="global" impldecl="in declaration">qprocess.h</include>
     <include location="global" impldecl="in declaration">qsocketnotifier.h</include>
-    <include location="global" impldecl="in declaration">qtimer.h</include>
     <include location="global" impldecl="in declaration">jack/jack.h</include>
     <include location="global" impldecl="in declaration">alsa/asoundlib.h</include>
     <include location="local" impldecl="in declaration">qjackctlSetup.h</include>
@@ -668,8 +667,8 @@
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">bool m_bJackDetach;</variable>
     <variable access="private">snd_seq_t *m_pAlsaSeq;</variable>
-    <variable access="private">QTimer *m_pTimer;</variable>
-    <variable access="private">int m_iTimerSlot;</variable>
+    <variable access="private">int m_iTimerDelay;</variable>
+    <variable access="private">int m_iTimerRefresh;</variable>
     <variable access="private">int m_iJackRefresh;</variable>
     <variable access="private">int m_iAlsaRefresh;</variable>
     <variable access="private">int m_iJackDirty;</variable>

@@ -24,6 +24,7 @@
 #include <qeventloop.h>
 #include <qmessagebox.h>
 #include <qregexp.h>
+#include <qtimer.h>
 
 #include "config.h"
 
@@ -38,8 +39,6 @@
 // Timer constant stuff.
 #define QJACKCTL_TIMER_MSECS    500
 #define QJACKCTL_DELAY_MSECS    2000
-
-#define QJACKCTL_DELAY_TICKS    ((QJACKCTL_DELAY_MSECS / QJACKCTL_TIMER_MSECS) + 1)
 
 // Notification pipes descriptors
 #define QJACKCTL_FDNIL     -1
@@ -61,16 +60,16 @@ void qjackctlMainForm::init (void)
 {
     m_pSetup = NULL;
 
-    m_pJack        = NULL;
-    m_pJackClient  = NULL;
-    m_bJackDetach  = false;
-    m_pAlsaSeq     = NULL;
-    m_pTimer       = new QTimer(this);
-    m_iTimerSlot   = 0;
-    m_iJackRefresh = 0;
-    m_iAlsaRefresh = 0;
-    m_iJackDirty   = 0;
-    m_iAlsaDirty   = 0;
+    m_pJack         = NULL;
+    m_pJackClient   = NULL;
+    m_bJackDetach   = false;
+    m_pAlsaSeq      = NULL;
+    m_iTimerDelay   = 0;
+    m_iTimerRefresh = 0;
+    m_iJackRefresh  = 0;
+    m_iAlsaRefresh  = 0;
+    m_iJackDirty    = 0;
+    m_iAlsaDirty    = 0;
 
     m_pStdoutNotifier = NULL;
 
@@ -95,11 +94,6 @@ void qjackctlMainForm::init (void)
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&,const QString&,unsigned int)),
         this, SLOT(cableConnectSlot(const QString&,const QString&,unsigned int)));
-
-    // Register the timer slot.
-    QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
-    // Our timer is standard.
-    m_pTimer->start(QJACKCTL_TIMER_MSECS, false);
 }
 
 
@@ -109,16 +103,13 @@ void qjackctlMainForm::destroy (void)
     // Stop server, if not already...
     stopJack();
 
-    // Kill timer.
-    delete m_pTimer;
-    
     // Terminate local ALSA sequencer interface.
     if (m_pAlsaNotifier)
         delete m_pAlsaNotifier;
-        
+
     if (m_pAlsaSeq)
         snd_seq_close(m_pAlsaSeq);
-        
+
     m_pAlsaNotifier = NULL;
     m_pAlsaSeq = NULL;
 }
@@ -204,6 +195,9 @@ void qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     // Look for immediate startup?...
     if (m_pSetup->bStartJack)
         startJack();
+
+    // Register the first timer slot.
+    QTimer::singleShot(QJACKCTL_TIMER_MSECS, this, SLOT(timerSlot()));
 }
 
 
@@ -330,7 +324,7 @@ void qjackctlMainForm::startJack (void)
     StartPushButton->setEnabled(false);
 
     // Reset our timer counters...
-    m_iTimerSlot   = 0;
+    m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 
     // If we ain't to be the server master...
@@ -491,7 +485,7 @@ void qjackctlMainForm::startJack (void)
     StopPushButton->setEnabled(true);
 
     // Reset (yet again) the timer counters...
-    m_iTimerSlot  = 0;
+    m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 }
 
@@ -810,7 +804,7 @@ void qjackctlMainForm::updateElapsedTimes (void)
 void qjackctlMainForm::refreshXrunStats (void)
 {
     updateXrunCount();
-    
+
     if (m_bJackDetach) {
         QString n = "--";
         updateStatus(STATUS_XRUN_TOTAL, n);
@@ -1005,9 +999,10 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 void qjackctlMainForm::timerSlot (void)
 {
     // Is it the first shot on server start after a few delay?
-    if (++m_iTimerSlot == QJACKCTL_DELAY_TICKS) {
-        startJackClient(false);
-        return;
+    if (m_iTimerDelay < QJACKCTL_DELAY_MSECS) {
+        m_iTimerDelay += QJACKCTL_TIMER_MSECS;
+        if (m_iTimerDelay >= QJACKCTL_DELAY_MSECS)
+            startJackClient(false);
     }
 
     // Is the connection patchbay dirty enough?
@@ -1031,8 +1026,13 @@ void qjackctlMainForm::timerSlot (void)
             }
         }
         // Shall we refresh connections now and then?
-        if (m_pSetup->bAutoRefresh && (m_iTimerSlot % m_pSetup->iTimeRefresh) == 0)
-            refreshConnections();
+        if (m_pSetup->bAutoRefresh) {
+            m_iTimerRefresh += QJACKCTL_TIMER_MSECS;
+            if (m_iTimerRefresh >= (m_pSetup->iTimeRefresh * 1000)) {
+                m_iTimerRefresh = 0;
+                refreshConnections();
+            }
+        }
         // Are we about to refresh it, really?
         if (m_iJackRefresh > 0) {
             m_iJackRefresh = 0;
@@ -1046,6 +1046,9 @@ void qjackctlMainForm::timerSlot (void)
 
     // Update some statistical fields, directly.
     refreshStatus();
+
+    // Register the next timer slot.
+    QTimer::singleShot(QJACKCTL_TIMER_MSECS, this, SLOT(timerSlot()));
 }
 
 
@@ -1150,7 +1153,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // Are we about to start detached?
     if (bDetach) {
         // To fool timed client initialization delay.
-        m_iTimerSlot += (QJACKCTL_DELAY_TICKS + 1);
+        m_iTimerDelay += (QJACKCTL_DELAY_MSECS + 1);
         // Refresh status (with dashes?)
         refreshStatus();
     }
