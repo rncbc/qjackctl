@@ -678,7 +678,7 @@ void qjackctlMainForm::computeLatency (void)
     if (r > 0)
         lat = (float) (1000.0 * p * n) / (float) r;
     if (lat > 0.0)
-        LatencyTextValue->setText(QString::number(lat, 'g', 3));
+        LatencyTextValue->setText(QString::number(lat, 'g', 3) + " " + tr("msec"));
     else
         LatencyTextValue->setText(tr("n/a"));
 }

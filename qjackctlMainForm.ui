@@ -1024,7 +1024,7 @@
                                 </property>
                                 <property name="minimumSize">
                                     <size>
-                                        <width>50</width>
+                                        <width>72</width>
                                         <height>0</height>
                                     </size>
                                 </property>
@@ -1035,7 +1035,7 @@
                                     <enum>Sunken</enum>
                                 </property>
                                 <property name="text">
-                                    <string>0/0</string>
+                                    <string>0</string>
                                 </property>
                                 <property name="alignment">
                                     <set>AlignCenter</set>
@@ -1057,7 +1057,7 @@
                                     </sizepolicy>
                                 </property>
                                 <property name="text">
-                                    <string>Latency (msec):</string>
+                                    <string>Latency:</string>
                                 </property>
                                 <property name="alignment">
                                     <set>AlignVCenter|AlignRight</set>
@@ -1355,7 +1355,7 @@
                             <string>Alt+D</string>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>Whether to kill any stray JACK daemon threads.</string>
+                            <string>Whether to execute a custom shell script after shuting down the JACK audio server.</string>
                         </property>
                     </widget>
                     <widget class="QCheckBox" row="3" column="0">
@@ -1412,7 +1412,7 @@
                             <bool>true</bool>
                         </property>
                         <property name="toolTip" stdset="0">
-                            <string>Regular expresion used to detect XRUNs on server output messages</string>
+                            <string>Regular expression used to detect XRUNs on server output messages</string>
                         </property>
                     </widget>
                     <widget class="QComboBox" row="3" column="1" rowspan="1" colspan="3">
