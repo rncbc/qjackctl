@@ -34,7 +34,7 @@ fi
 
 dnl Disable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
-  [  --disable-alsa-seq   disable ALSA/MIDI sequencer support (default=no)],
+  [  --disable-alsa-seq      disable ALSA/MIDI sequencer support (default=no)],
   [ac_alsa_seq="no"],
   [ac_alsa_seq="yes"])
 
