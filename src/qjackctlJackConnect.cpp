@@ -209,7 +209,6 @@ int qjackctlJackClientList::updateClientPorts (void)
     if (ppszClientPorts) {
         int iClientPort = 0;
         while (ppszClientPorts[iClientPort]) {
-            jack_port_t *pJackPort = jack_port_by_name(m_pJackClient, ppszClientPorts[iClientPort]);
             QString sClientPort = ppszClientPorts[iClientPort];
             qjackctlJackClient *pClient = 0;
             qjackctlJackPort   *pPort   = 0;
@@ -225,6 +224,7 @@ int qjackctlJackClientList::updateClientPorts (void)
                     iDirtyCount++;
                 }
                 if (pClient && pPort == 0) {
+                    jack_port_t *pJackPort = jack_port_by_name(m_pJackClient, ppszClientPorts[iClientPort]);
                     pPort = new qjackctlJackPort(pClient, sPortName, pJackPort);
                     iDirtyCount++;
                 }

@@ -3,7 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.12   2004-09-26  Larger icons and font option on connections/patchbay.
+0.2.12   2004-09-27  Larger icons and font option on connections/patchbay.
+
+- Fixed some old and slow memory-leak due to redundand and repetitive call
+  to jack_port_by_name() (discovered and solved, thanks to Jesse Chappell);
+  some other free() and configure fixes were also applied.
 
 - Connection line width follows icon size in discrete proportion.
 

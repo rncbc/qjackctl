@@ -464,8 +464,8 @@ void qjackctlPatchbayRack::connectAudioSocketPorts ( qjackctlPatchbaySocket *pOu
             else if (pOutputSocket->isExclusive())
                 disconnectAudioPorts(pszOutputPort, ppszInputPorts[i]);
         }
+        ::free(ppszInputPorts);
     }
-    ::free(ppszInputPorts);
 
     // Check for outputs from input, if the input socket is on exclusive mode...
     if (pInputSocket->isExclusive()) {
@@ -477,8 +477,8 @@ void qjackctlPatchbayRack::connectAudioSocketPorts ( qjackctlPatchbaySocket *pOu
                 else
                     disconnectAudioPorts(ppszOutputPorts[i], pszInputPort);
             }
+            ::free(ppszOutputPorts);
         }
-        ::free(ppszOutputPorts);
     }
 
     // Finally do the connection?...
