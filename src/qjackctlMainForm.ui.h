@@ -181,11 +181,6 @@ bool qjackctlMainForm::queryClose (void)
     return bQueryClose;
 }
 
-void qjackctlMainForm::reject (void)
-{
-    if (queryClose())
-        QDialog::reject();
-}
 
 void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
 {

@@ -20,7 +20,7 @@
 
 </comment>
 <author>rncbc aka Rui Nuno Capela</author>
-<widget class="QDialog">
+<widget class="QWidget">
     <property name="name">
         <cstring>qjackctlMainForm</cstring>
     </property>
@@ -49,9 +49,6 @@
     </property>
     <property name="icon">
         <pixmap>qjackctl.xpm</pixmap>
-    </property>
-    <property name="sizeGripEnabled">
-        <bool>true</bool>
     </property>
     <grid>
         <property name="name">
@@ -681,7 +678,6 @@
     <variable access="private">qjackctlPatchbayRack m_patchbayRack;</variable>
 </variables>
 <slots>
-    <slot access="protected" specifier="non virtual">reject( void )</slot>
     <slot specifier="non virtual">startJack( void )</slot>
     <slot specifier="non virtual">stopJack( void )</slot>
     <slot specifier="non virtual">readJackStdout( void )</slot>
