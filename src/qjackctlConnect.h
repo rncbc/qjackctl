@@ -1,7 +1,7 @@
 // qjackctlConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -428,18 +428,6 @@ protected:
     
 private:
 
-    // Dunno. But this may avoid some conflicts.
-    bool startMutex();
-    void endMutex();
-    
-    // Connection methods (unguarded).
-    bool canConnectSelectedEx();
-    bool canDisconnectSelectedEx();
-    bool canDisconnectAllEx();
-    bool connectSelectedEx();
-    bool disconnectSelectedEx();
-    bool disconnectAllEx();
-
     // Connect/Disconnection local primitives.
     void connectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
     void disconnectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
@@ -449,7 +437,6 @@ private:
     // These must be created on the descendant constructor.
     qjackctlClientList *m_pOClientList;
     qjackctlClientList *m_pIClientList;
-    int m_iMutex;
 };
 
 
