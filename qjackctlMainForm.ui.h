@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.6"
+#define QJACKCTL_VERSION	"0.0.7"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -137,6 +137,7 @@ void qjackctlMainForm::init (void)
 
     m_Settings.beginGroup("/Options");
     DetailsCheckBox->setChecked(m_Settings.readBoolEntry("/Details", false));
+    VerboseCheckBox->setChecked(m_Settings.readBoolEntry("/Verbose", false));
     ForceArtsCheckBox->setChecked(m_Settings.readBoolEntry("/ForceArts", true));
     ForceArtsShellComboBox->setCurrentText(m_Settings.readEntry("/ForceArtsShell", "artsshell -q terminate"));
     ForceJackCheckBox->setChecked(m_Settings.readBoolEntry("/ForceJack", true));
@@ -202,6 +203,7 @@ void qjackctlMainForm::destroy (void)
 
     m_Settings.beginGroup("/Options");
     m_Settings.writeEntry("/Details", DetailsCheckBox->isChecked());
+    m_Settings.writeEntry("/Verbose", VerboseCheckBox->isChecked());
     m_Settings.writeEntry("/ForceArts", ForceArtsCheckBox->isChecked());
     m_Settings.writeEntry("/ForceArtsShell", ForceArtsShellComboBox->currentText());
     m_Settings.writeEntry("/ForceJack", ForceJackCheckBox->isChecked());
@@ -318,12 +320,16 @@ void qjackctlMainForm::startJack (void)
     m_pJack = new QProcess(this);
 
     // Setup communications...
+    m_pJack->setCommunication(QProcess::Stdout | QProcess::Stderr | QProcess::DupStderr);
+    
     QObject::connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
     QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
     QObject::connect(m_pJack, SIGNAL(processExited()),   this, SLOT(processJackExit()));
 
     // Build process arguments...
     m_pJack->addArgument(ServerComboBox->currentText());
+    if (VerboseCheckBox->isChecked())
+        m_pJack->addArgument("-v");
     if (RealtimeCheckBox->isChecked())
         m_pJack->addArgument("-R");
     if (PriorityComboBox->currentText().toInt()) {
@@ -552,8 +558,10 @@ void qjackctlMainForm::appendMessages( const QString& s )
 void qjackctlMainForm::appendMessagesText( const QString& s )
 {
     while (MessagesTextView->paragraphs() > 100) {
+        MessagesTextView->setUpdatesEnabled(false);
         MessagesTextView->removeParagraph(0);
         MessagesTextView->scrollToBottom();
+        MessagesTextView->setUpdatesEnabled(true);
     }
     MessagesTextView->append(s);
 }
@@ -997,6 +1005,10 @@ void qjackctlMainForm::startJackClient (void)
 
     // Create our patchbay...
     m_pJackPatchbay = new qjackctlPatchbay(PatchbayView, m_pJackClient);
+    
+    // Connect it to some UI feedback slot.
+    QObject::connect(PatchbayView->OListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeConnections()));
+    QObject::connect(PatchbayView->IListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeConnections()));
 
     // Activate us as a client...
     jack_activate(m_pJackClient);
@@ -1115,4 +1127,13 @@ void qjackctlMainForm::stabilizeConnections (void)
 }
 
 
+// About Qt request.
+void qjackctlMainForm::aboutQt()
+{
+    QMessageBox::aboutQt(this);
+}
+
+
 // end of ui.h
+
+

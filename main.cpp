@@ -37,7 +37,7 @@ int main ( int argc, char **argv )
         if (!translator.load(sLocName, ".")) {
             QString sLocPath = CONFIG_PREFIX "/share/locale";
             if (!translator.load(sLocName, sLocPath))
-                fprintf(stderr, "Warning: no locale found: %s/%s.\n", sLocPath.latin1(), sLocName.latin1());
+                fprintf(stderr, "Warning: no locale found: %s/%s.qm\n", sLocPath.latin1(), sLocName.latin1());
         }
         app.installTranslator(&translator);
     }

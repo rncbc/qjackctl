@@ -219,7 +219,7 @@ int qjackctlPortItem::compare (QListViewItem* pPortItem, int iColumn, bool bAsce
             iDecade *= 10;
             iDigits++;
         } else {
-            sPrefix1 += ch;
+            sPrefix1.insert(0, ch.lower());
             if (iDigits > 0) {
                 iSuffix1 += iNumber * iFactor;
                 iFactor *= 100;
@@ -242,7 +242,7 @@ int qjackctlPortItem::compare (QListViewItem* pPortItem, int iColumn, bool bAsce
             iDecade *= 10;
             iDigits++;
         } else {
-            sPrefix2 += ch;
+            sPrefix2.insert(0, ch.lower());
             if (iDigits > 0) {
                 iSuffix2 += iNumber * iFactor;
                 iFactor *= 100;
@@ -262,8 +262,7 @@ int qjackctlPortItem::compare (QListViewItem* pPortItem, int iColumn, bool bAsce
         else
             return 0;
     } else {
-        // ATTN: sPrefix(es) are reversed!
-        if (sPrefix1 > sPrefix2)
+        if (sPrefix1 < sPrefix2)
             return (bAscending ? -1 :  1);
         else
             return (bAscending ?  1 : -1);
