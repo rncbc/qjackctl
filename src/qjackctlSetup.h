@@ -57,10 +57,10 @@ public:
     bool    bHWMon;
     bool    bHWMeter;
     QString sTempDir;
+    bool    bVerbose;
 
     // Options...
 //  bool    bDetails;
-    bool    bVerbose;
 //  bool    bForceArts;
 //  QString sForceArtsShell;
 //  bool    bForceJack;
@@ -73,10 +73,10 @@ public:
     bool    bXrunIgnoreFirst;
     bool    bAutoRefresh;
     int     iTimeRefresh;
-    
-    // Defaults...
     int     iTimeDisplay;
     QString sMessagesFont;
+
+    // Defaults...
     QString sPatchbayPath;
 
     // Public I/O methods.

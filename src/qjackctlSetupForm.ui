@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>468</width>
-            <height>290</height>
+            <width>446</width>
+            <height>291</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -171,40 +171,6 @@
                             </widget>
                         </grid>
                     </widget>
-                    <spacer row="1" column="1">
-                        <property name="name">
-                            <cstring>spacer23</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>MinimumExpanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="1" column="3">
-                        <property name="name">
-                            <cstring>spacer24</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>MinimumExpanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
                     <widget class="QLabel" row="0" column="0">
                         <property name="name">
                             <cstring>ServerTextLabel</cstring>
@@ -849,57 +815,20 @@
                             </widget>
                         </grid>
                     </widget>
-                    <spacer row="0" column="3">
+                    <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="5">
                         <property name="name">
-                            <cstring>spacer22</cstring>
+                            <cstring>VerboseCheckBox</cstring>
                         </property>
-                        <property name="orientation">
-                            <enum>Horizontal</enum>
+                        <property name="text">
+                            <string>&amp;Verbose messages output</string>
                         </property>
-                        <property name="sizeType">
-                            <enum>MinimumExpanding</enum>
+                        <property name="accel">
+                            <string>Alt+V</string>
                         </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
+                        <property name="toolTip" stdset="0">
+                            <string>Whether to give verbose output on messages</string>
                         </property>
-                    </spacer>
-                    <spacer row="2" column="2">
-                        <property name="name">
-                            <cstring>spacer25</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>MinimumExpanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="0" column="1">
-                        <property name="name">
-                            <cstring>spacer21</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>MinimumExpanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
+                    </widget>
                     <widget class="QLayoutWidget" row="3" column="0" rowspan="1" colspan="5">
                         <property name="name">
                             <cstring>layout6</cstring>
@@ -1024,6 +953,91 @@
                             </widget>
                         </grid>
                     </widget>
+                    <spacer row="0" column="1">
+                        <property name="name">
+                            <cstring>spacer21</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>MinimumExpanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="0" column="3">
+                        <property name="name">
+                            <cstring>spacer22</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>MinimumExpanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="1" column="1">
+                        <property name="name">
+                            <cstring>spacer23</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>MinimumExpanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="1" column="3">
+                        <property name="name">
+                            <cstring>spacer24</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>MinimumExpanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="2" column="2">
+                        <property name="name">
+                            <cstring>spacer25</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>MinimumExpanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>2</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </grid>
             </widget>
             <widget class="QWidget">
@@ -1033,327 +1047,403 @@
                 <attribute name="title">
                     <string>Options</string>
                 </attribute>
-                <grid>
+                <vbox>
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox" row="6" column="0" rowspan="1" colspan="2">
+                    <widget class="QGroupBox">
                         <property name="name">
-                            <cstring>AutoRefreshCheckBox</cstring>
+                            <cstring>ScriptingGroupBox</cstring>
                         </property>
-                        <property name="text">
-                            <string>&amp;Auto refresh connections patchbay, every (secs):</string>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
                         </property>
-                        <property name="accel">
-                            <string>Alt+A</string>
+                        <property name="margin">
+                            <number>4</number>
                         </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to refresh the connections patchbay automatically</string>
+                        <property name="title">
+                            <string>Scripting</string>
                         </property>
-                    </widget>
-                    <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="5">
-                        <property name="name">
-                            <cstring>VerboseCheckBox</cstring>
-                        </property>
-                        <property name="text">
-                            <string>&amp;Verbose messages output</string>
-                        </property>
-                        <property name="accel">
-                            <string>Alt+V</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to give verbose output on messages</string>
-                        </property>
-                    </widget>
-                    <widget class="QComboBox" row="6" column="2">
-                        <item>
-                            <property name="text">
-                                <string>5</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>10</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>20</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>30</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>60</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property name="text">
-                                <string>120</string>
-                            </property>
-                        </item>
-                        <property name="name">
-                            <cstring>TimeRefreshComboBox</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>5</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="editable">
+                        <property name="flat">
                             <bool>true</bool>
                         </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Time in seconds between each auto-refresh cycle</string>
-                        </property>
-                    </widget>
-                    <widget class="QCheckBox" row="4" column="1" rowspan="1" colspan="4">
-                        <property name="name">
-                            <cstring>XrunIgnoreFirstCheckBox</cstring>
-                        </property>
-                        <property name="text">
-                            <string>&amp;Ignore first XRUN ocurrence on statistics</string>
-                        </property>
-                        <property name="accel">
-                            <string>Alt+I</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</string>
-                        </property>
-                    </widget>
-                    <widget class="QLabel" row="3" column="0">
-                        <property name="name">
-                            <cstring>XrunRegexTextLabel</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>5</hsizetype>
-                                <vsizetype>5</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="text">
-                            <string>&amp;XRUN detection regex:</string>
-                        </property>
-                        <property name="alignment">
-                            <set>AlignCenter</set>
-                        </property>
-                        <property name="buddy" stdset="0">
-                            <cstring>XrunRegexComboBox</cstring>
-                        </property>
-                    </widget>
-                    <spacer row="4" column="0" rowspan="2" colspan="1">
-                        <property name="name">
-                            <cstring>spacer31</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>8</width>
-                                <height>8</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="5" column="2">
-                        <property name="name">
-                            <cstring>spacer32</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>8</width>
-                                <height>8</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="6" column="3" rowspan="1" colspan="2">
-                        <property name="name">
-                            <cstring>spacer33</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>160</width>
-                                <height>8</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <widget class="QCheckBox" row="2" column="0">
-                        <property name="name">
-                            <cstring>ShutdownScriptCheckBox</cstring>
-                        </property>
-                        <property name="text">
-                            <string>Execute script on shut&amp;down:</string>
-                        </property>
-                        <property name="accel">
-                            <string>Alt+D</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to execute a custom shell script after shuting down the JACK audio server.</string>
-                        </property>
-                    </widget>
-                    <widget class="QCheckBox" row="1" column="0">
-                        <property name="name">
-                            <cstring>StartupScriptCheckBox</cstring>
-                        </property>
-                        <property name="text">
-                            <string>Execute script on start&amp;up:</string>
-                        </property>
-                        <property name="accel">
-                            <string>Alt+U</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to execute a custom shell script before starting up the JACK audio server.</string>
-                        </property>
-                    </widget>
-                    <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="3">
-                        <property name="name">
-                            <cstring>ShutdownScriptShellComboBox</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="editable">
-                            <bool>true</bool>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Command line to be executed after shutting down the JACK audio server</string>
-                        </property>
-                    </widget>
-                    <widget class="QComboBox" row="3" column="1" rowspan="1" colspan="4">
-                        <item>
-                            <property name="text">
-                                <string>xrun of at least ([0-9|\.]+) msecs</string>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
                             </property>
-                        </item>
+                            <widget class="QCheckBox" row="0" column="0">
+                                <property name="name">
+                                    <cstring>StartupScriptCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Execute script on Start&amp;up:</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+U</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to execute a custom shell script before starting up the JACK audio server.</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="1" column="0">
+                                <property name="name">
+                                    <cstring>ShutdownScriptCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>Execute script on Shut&amp;down:</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+D</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to execute a custom shell script after shuting down the JACK audio server.</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="0" column="1">
+                                <property name="name">
+                                    <cstring>StartupScriptShellComboBox</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Command line to be executed before starting up the JACK audio server</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="0" column="2">
+                                <property name="name">
+                                    <cstring>StartupScriptPushButton</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>28</width>
+                                        <height>28</height>
+                                    </size>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>...</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Browse for script to be executed before starting up the JACK audio server</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton" row="1" column="2">
+                                <property name="name">
+                                    <cstring>ShutdownScriptPushButton</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>0</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>22</width>
+                                        <height>22</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>28</width>
+                                        <height>28</height>
+                                    </size>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>...</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Browse for script to be executed after shutting down the JACK audio server</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="1" column="1">
+                                <property name="name">
+                                    <cstring>ShutdownScriptShellComboBox</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Command line to be executed after shutting down the JACK audio server</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox">
                         <property name="name">
-                            <cstring>XrunRegexComboBox</cstring>
+                            <cstring>StatisticsGroupBox</cstring>
                         </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
                         </property>
-                        <property name="editable">
+                        <property name="margin">
+                            <number>4</number>
+                        </property>
+                        <property name="title">
+                            <string>Statistics</string>
+                        </property>
+                        <property name="flat">
                             <bool>true</bool>
                         </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Regular expression used to detect XRUNs on server output messages</string>
-                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>XrunRegexTextLabel</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>5</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;XRUN detection regex:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>XrunRegexComboBox</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="0" column="1">
+                                <item>
+                                    <property name="text">
+                                        <string>xrun of at least ([0-9|\.]+) msecs</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>XrunRegexComboBox</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Regular expression used to detect XRUNs on server output messages</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>XrunIgnoreFirstCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Ignore first XRUN ocurrence on statistics</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+I</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</string>
+                                </property>
+                            </widget>
+                        </grid>
                     </widget>
-                    <widget class="QComboBox" row="1" column="1" rowspan="1" colspan="3">
+                    <widget class="QGroupBox">
                         <property name="name">
-                            <cstring>StartupScriptShellComboBox</cstring>
+                            <cstring>ConnectionsGroupBox</cstring>
                         </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
                         </property>
-                        <property name="editable">
+                        <property name="margin">
+                            <number>4</number>
+                        </property>
+                        <property name="title">
+                            <string>Connections</string>
+                        </property>
+                        <property name="flat">
                             <bool>true</bool>
                         </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Command line to be executed before starting up the JACK audio server</string>
-                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QCheckBox" row="0" column="0">
+                                <property name="name">
+                                    <cstring>AutoRefreshCheckBox</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Auto refresh connections patchbay, every (secs):</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+A</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Whether to refresh the connections patchbay automatically</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="0" column="1">
+                                <item>
+                                    <property name="text">
+                                        <string>5</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>10</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>20</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>30</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>60</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>120</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>TimeRefreshComboBox</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>5</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Time in seconds between each auto-refresh cycle</string>
+                                </property>
+                            </widget>
+                            <spacer row="0" column="2">
+                                <property name="name">
+                                    <cstring>spacer31</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>80</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </grid>
                     </widget>
-                    <widget class="QPushButton" row="1" column="4">
-                        <property name="name">
-                            <cstring>StartupScriptPushButton</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>0</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                            <size>
-                                <width>22</width>
-                                <height>22</height>
-                            </size>
-                        </property>
-                        <property name="maximumSize">
-                            <size>
-                                <width>28</width>
-                                <height>28</height>
-                            </size>
-                        </property>
-                        <property name="text">
-                            <string>...</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Browse for script to be executed before starting up the JACK audio server</string>
-                        </property>
-                    </widget>
-                    <widget class="QPushButton" row="2" column="4">
-                        <property name="name">
-                            <cstring>ShutdownScriptPushButton</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>0</hsizetype>
-                                <vsizetype>0</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                            <size>
-                                <width>22</width>
-                                <height>22</height>
-                            </size>
-                        </property>
-                        <property name="maximumSize">
-                            <size>
-                                <width>28</width>
-                                <height>28</height>
-                            </size>
-                        </property>
-                        <property name="text">
-                            <string>...</string>
-                        </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Browse for script to be executed after shutting down the JACK audio server</string>
-                        </property>
-                    </widget>
-                </grid>
+                </vbox>
             </widget>
             <widget class="QWidget">
                 <property name="name">
@@ -1472,11 +1562,11 @@
                         <property name="flat">
                             <bool>true</bool>
                         </property>
-                        <hbox>
+                        <grid>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel">
+                            <widget class="QLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>MessagesFontTextLabel</cstring>
                                 </property>
@@ -1513,7 +1603,7 @@
                                     <string>Sample messages text font display</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton">
+                            <widget class="QPushButton" row="0" column="1">
                                 <property name="name">
                                     <cstring>MessagesFontPushButton</cstring>
                                 </property>
@@ -1532,7 +1622,24 @@
                                     <string>Select font for the messages text display</string>
                                 </property>
                             </widget>
-                        </hbox>
+                            <spacer row="0" column="2">
+                                <property name="name">
+                                    <cstring>space41</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>160</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </grid>
                     </widget>
                 </grid>
             </widget>
@@ -1550,12 +1657,6 @@
         <sender>RealtimeCheckBox</sender>
         <signal>toggled(bool)</signal>
         <receiver>PriorityComboBox</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>AutoRefreshCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TimeRefreshComboBox</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
@@ -1613,16 +1714,16 @@
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
-        <sender>StartupScriptPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlSetupForm</receiver>
-        <slot>browseStartupScript()</slot>
+        <sender>AutoRefreshCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TimeRefreshComboBox</receiver>
+        <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
-        <sender>ShutdownScriptPushButton</sender>
+        <sender>MessagesFontPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
-        <slot>browseShutdownScript()</slot>
+        <slot>chooseMessagesFont()</slot>
     </connection>
     <connection>
         <sender>OkPushButton</sender>
@@ -1635,12 +1736,6 @@
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>reject()</slot>
-    </connection>
-    <connection>
-        <sender>MessagesFontPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlSetupForm</receiver>
-        <slot>chooseMessagesFont()</slot>
     </connection>
 </connections>
 <tabstops>

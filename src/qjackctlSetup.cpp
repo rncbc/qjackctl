@@ -59,11 +59,11 @@ void qjackctlSetup::load (void)
     bHWMon      = settings.readBoolEntry("/HWMon", false);
     bHWMeter    = settings.readBoolEntry("/HWMeter", false);
     sTempDir    = settings.readEntry("/TempDir", "(default)");
+    bVerbose    = settings.readBoolEntry("/Verbose", false);
     settings.endGroup();
 
     settings.beginGroup("/Options");
 //  bDetails         = settings.readBoolEntry("/Details", false);
-    bVerbose         = settings.readBoolEntry("/Verbose", false);
 //  bForceArts       = settings.readBoolEntry("/ForceArts", true);
 //  sForceArtsShell  = settings.readEntry("/ForceArtsShell", "artsshell -q terminate");
 //  bForceJack       = settings.readBoolEntry("/ForceJack", true);
@@ -76,11 +76,11 @@ void qjackctlSetup::load (void)
     bXrunIgnoreFirst = settings.readBoolEntry("/XrunIgnoreFirst", false);
     bAutoRefresh     = settings.readBoolEntry("/AutoRefresh", false);
     iTimeRefresh     = settings.readNumEntry("/TimeRefresh", 10);
+    iTimeDisplay     = settings.readNumEntry("/TimeDisplay", 0);
+    sMessagesFont    = settings.readEntry("/MessagesFont", QString::null);
     settings.endGroup();
 
     settings.beginGroup("/Defaults");
-    iTimeDisplay  = settings.readNumEntry("/TimeDisplay", 0);
-    sMessagesFont = settings.readEntry("/MessagesFont", QString::null);
     sPatchbayPath = settings.readEntry("/PatchbayPath", QString::null);
     settings.endGroup();
 }
@@ -114,11 +114,11 @@ void qjackctlSetup::save (void)
     settings.writeEntry("/HWMon",      bHWMon);
     settings.writeEntry("/HWMeter",    bHWMeter);
     settings.writeEntry("/TempDir",    sTempDir);
+    settings.writeEntry("/Verbose",         bVerbose);
     settings.endGroup();
 
     settings.beginGroup("/Options");
 //  settings.writeEntry("/Details",         bDetails);
-    settings.writeEntry("/Verbose",         bVerbose);
 //  settings.writeEntry("/ForceArts",       bForceArts);
 //  settings.writeEntry("/ForceArtsShell",  sForceArtsShell);
 //  settings.writeEntry("/ForceJack",       bForceJack);
@@ -131,11 +131,11 @@ void qjackctlSetup::save (void)
     settings.writeEntry("/XrunIgnoreFirst", bXrunIgnoreFirst);
     settings.writeEntry("/AutoRefresh",     bAutoRefresh);
     settings.writeEntry("/TimeRefresh",     iTimeRefresh);
+    settings.writeEntry("/TimeDisplay",     iTimeDisplay);
+    settings.writeEntry("/MessagesFont",    sMessagesFont);
     settings.endGroup();
 
     settings.beginGroup("/Defaults");
-    settings.writeEntry("/TimeDisplay",  iTimeDisplay);
-    settings.writeEntry("/MessagesFont", sMessagesFont);
     settings.writeEntry("/PatchbayPath", sPatchbayPath);
     settings.endGroup();
 }

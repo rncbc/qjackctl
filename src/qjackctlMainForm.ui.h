@@ -80,6 +80,7 @@ void qjackctlMainForm::init (void)
     m_setup.loadWidgetGeometry(m_pPatchbayForm);
     
     // Set default messages font...
+    updateTimeDisplayToolTips();
     updateMessagesFont();
 
     // Initial XRUN statistics reset.
@@ -514,6 +515,37 @@ void qjackctlMainForm::updateMessagesFont (void)
 }
 
 
+// Force update of big time display related tooltips.
+void qjackctlMainForm::updateTimeDisplayToolTips (void)
+{
+    QToolTip::remove(TimeDisplayTextLabel);
+    QToolTip::remove(TransportTimeTextLabel);
+    
+    QString sTimeDisplay   = tr("Transport time (hh:mm:ss.ddd)");
+    QString sTransportTime = tr("Transport BBT (bar:beat.ticks)");
+
+    switch (m_setup.iTimeDisplay) {
+    case DISPLAY_TRANSPORT_BBT:
+    {
+        QString sTemp  = sTimeDisplay;
+        sTimeDisplay   = sTransportTime;
+        sTransportTime = sTemp;
+        break;
+    }
+    case DISPLAY_RESET_TIME:
+        sTimeDisplay = tr("Elapsed time since last reset (hh:mm:ss)");
+        break;
+    case DISPLAY_XRUN_TIME:
+        sTimeDisplay = tr("Elapsed time since last XRUN (hh:mm:ss)");
+        break;
+    }
+
+    QToolTip::add(TimeDisplayTextLabel, sTimeDisplay);
+    QToolTip::add(TransportTimeTextLabel, sTransportTime);
+}
+
+
+
 // Stabilize current form toggle buttons that may be astray.
 void qjackctlMainForm::stabilizeForm (void)
 {
@@ -720,10 +752,10 @@ void qjackctlMainForm::portNotifySlot ( int fd )
     // Read from our pipe.
     ::read(fd, &c, sizeof(c));
 
-    // Log some message here.
-    appendMessagesColor(tr("Connection graph change."), "#cc9966");
     // Do what has to be done.
     refreshConnections();
+    // Log some message here.
+    appendMessagesColor(tr("Connection graph change."), "#cc9966");
 
     m_iPortNotify--;
 }
@@ -741,13 +773,13 @@ void qjackctlMainForm::xrunNotifySlot ( int fd )
     // Read from our pipe.
     ::read(fd, &c, sizeof(c));
 
-    // Log highlight this event.
-    appendMessagesColor(tr("XRUN callback."), "#cc99cc");
     // Just increment callback counter.
     m_iXrunCallbacks++;
     m_tXrunLast.restart();
     // Update the status item directly.
     updateXrunCount();
+    // Log highlight this event.
+    appendMessagesColor(tr("XRUN callback.") + " (" + QString::number(m_iXrunCallbacks) + ")", "#cc99cc");
 
     m_iXrunNotify--;
 }
@@ -765,10 +797,10 @@ void qjackctlMainForm::buffNotifySlot ( int fd )
     // Read from our pipe.
     ::read(fd, &c, sizeof(c));
 
-    // Log this event.
-    appendMessagesColor(tr("Buffer size change."), "#cc9966");
     // Update the status item directly.
     updateBufferSize();
+    // Log this event.
+    appendMessagesColor(tr("Buffer size change.") + " (" + QString::number((int) g_nframes) + ")", "#cc9966");
 
     m_iBuffNotify--;
 }
@@ -874,7 +906,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // Are we about to start detached?
     if (bDetach) {
         // To fool timed client initialization delay.
-        m_iTimerSlot += QJACKCTL_DELAY_TICKS + 1;
+        m_iTimerSlot += (QJACKCTL_DELAY_TICKS + 1);
         // Refresh status (with dashes?)
         refreshStatus();
     }
@@ -1065,6 +1097,7 @@ void qjackctlMainForm::showSetupForm (void)
         pSetupForm->load(&m_setup);
         if (pSetupForm->exec()) {
             pSetupForm->save(&m_setup);
+            updateTimeDisplayToolTips();
             updateMessagesFont();
         }
         delete pSetupForm;
@@ -1201,8 +1234,7 @@ void qjackctlMainForm::refreshStatus (void)
         }
         updateStatus(STATUS_TRANSPORT_STATE, sText);
         // Transport timecode position (hh:mm:ss.ddd).
-    //  if (tpos.valid & JackPositionTimecode) {
-        if (bPlaying) {
+    //  if (bPlaying) {
             unsigned int hh, mm, ss, dd;
             double tt = (double) (tpos.frame / tpos.frame_rate);
             hh  = (unsigned int) (tt / 3600.0);
@@ -1216,7 +1248,7 @@ void qjackctlMainForm::refreshStatus (void)
             updateStatus(STATUS_TRANSPORT_TIME, szText);
     //  } else {
     //      updateStatus(STATUS_TRANSPORT_TIME, t);
-        }
+    //  }
         // Transport barcode position (bar:beat.tick)
         if (tpos.valid & JackPositionBBT) {
             snprintf(szText, sizeof(szText), "%u:%u.%u", tpos.bar, tpos.beat, tpos.tick);
