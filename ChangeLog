@@ -3,10 +3,10 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.8   2004-04-20  System tray icon option.
+0.2.8   2004-04-21  System tray icon and menu option.
 
-- New option for system tray icon, which is only effective on KDE
-  enabled desktops.
+- New option for system tray icon and menu, which is only effective
+  on KDE enabled desktops.
 
 - The hifen is now a legal character for preset names.
 

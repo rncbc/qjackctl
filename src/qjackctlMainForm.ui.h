@@ -39,10 +39,19 @@
 // Timer constant stuff.
 #define QJACKCTL_TIMER_MSECS    200
 
+// Server display enumerated states.
+#define QJACKCTL_INACTIVE       0
+#define QJACKCTL_ACTIVATING     1
+#define QJACKCTL_ACTIVE         2
+#define QJACKCTL_STARTING       3
+#define QJACKCTL_STARTED        4
+#define QJACKCTL_STOPPING       5
+#define QJACKCTL_STOPPED        6
+
 // Notification pipes descriptors
-#define QJACKCTL_FDNIL     -1
-#define QJACKCTL_FDREAD     0
-#define QJACKCTL_FDWRITE    1
+#define QJACKCTL_FDNIL         -1
+#define QJACKCTL_FDREAD         0
+#define QJACKCTL_FDWRITE        1
 
 static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
@@ -387,9 +396,15 @@ void qjackctlMainForm::startJack (void)
     }
 
     QString sTemp;
-
-    sTemp = (m_bJackDetach ? tr("Activating") : tr("Starting"));
-    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
+    int iState;
+    if (m_bJackDetach) {
+        sTemp  = tr("Activating");
+        iState = QJACKCTL_ACTIVATING;
+    } else {
+        sTemp  = tr("Starting");
+        iState = QJACKCTL_STARTING;
+    }
+    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...", iState);
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(false);
@@ -573,7 +588,7 @@ void qjackctlMainForm::startJack (void)
     appendMessages(tr("JACK was started") + sTemp);
 
     sTemp = tr("Started");
-    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
+    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".", QJACKCTL_STARTED);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StopPushButton->setEnabled(true);
 
@@ -599,7 +614,7 @@ void qjackctlMainForm::stopJack (void)
     if (m_pJack && !m_bJackSurvive) {
         appendMessages(tr("JACK is stopping..."));
         QString sTemp = tr("Stopping");
-        updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
+        updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...", QJACKCTL_STOPPING);
         updateStatus(STATUS_SERVER_STATE, sTemp);
         if (m_pJack->isRunning())
             m_pJack->tryTerminate();
@@ -669,11 +684,20 @@ void qjackctlMainForm::processJackExit (void)
     }
 
     QString sTemp;
-    if (m_bJackDetach)
-        sTemp = (m_pJackClient == NULL ? tr("Inactive") : tr("Active"));
-    else
-        sTemp = tr("Stopped");
-    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
+    int iState;
+    if (m_bJackDetach) {
+        if (m_pJackClient == NULL) {
+            sTemp  = tr("Inactive");
+            iState = QJACKCTL_INACTIVE;
+        } else {
+            sTemp  = tr("Active");
+            iState = QJACKCTL_ACTIVE;
+        }
+    } else {
+        sTemp  = tr("Stopped");
+        iState = QJACKCTL_STOPPED;
+    }
+    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".", iState);
     ServerStateTextLabel->setPaletteForegroundColor(m_pJackClient == NULL ? Qt::darkYellow : Qt::yellow);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(m_pJackClient == NULL);
@@ -1512,7 +1536,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // If we've started detached, just change active status.
     if (m_bJackDetach) {
         QString sTemp = tr("Active");
-        updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
+        updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".", QJACKCTL_ACTIVE);
         updateStatus(STATUS_SERVER_STATE, sTemp);
         StopPushButton->setEnabled(true);
     }
@@ -1942,13 +1966,39 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
 }
 
 
-// Main window caption title and system tray tooltip update.
-void qjackctlMainForm::updateTitle ( const QString& sTitle )
+// Main window caption title and system tray icon and tooltip update.
+void qjackctlMainForm::updateTitle ( const QString& sTitle, int iState )
 {
     setCaption(sTitle);
-    
-    QToolTip::remove(m_pSystemTray);
-    QToolTip::add(m_pSystemTray, sTitle);
+
+    if (m_pSystemTray) {
+        QToolTip::remove(m_pSystemTray);
+        switch (iState) {
+          case QJACKCTL_STARTING:
+            m_pSystemTray->setPixmapOverlay(QPixmap::fromMimeSource("xstarting1.png"));
+            break;
+          case QJACKCTL_STARTED:
+            m_pSystemTray->setPixmapOverlay(QPixmap::fromMimeSource("xstarted1.png"));
+            break;
+          case QJACKCTL_STOPPING:
+            m_pSystemTray->setPixmapOverlay(QPixmap::fromMimeSource("xstopping1.png"));
+            break;
+          case QJACKCTL_STOPPED:
+            m_pSystemTray->setPixmapOverlay(QPixmap::fromMimeSource("xstopped1.png"));
+            break;
+          case QJACKCTL_ACTIVE:
+            m_pSystemTray->setPixmapOverlay(QPixmap::fromMimeSource("xactive1.png"));
+            break;
+          case QJACKCTL_ACTIVATING:
+            m_pSystemTray->setPixmapOverlay(QPixmap::fromMimeSource("xactivating1.png"));
+            break;
+          case QJACKCTL_INACTIVE:
+          default:
+            m_pSystemTray->setPixmapOverlay(QPixmap::fromMimeSource("xinactive1.png"));
+            break;
+        }
+        QToolTip::add(m_pSystemTray, sTitle);
+    }
 }
 
 

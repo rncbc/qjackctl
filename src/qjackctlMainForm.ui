@@ -800,7 +800,7 @@
     <function specifier="non virtual">refreshPatchbay( void )</function>
     <function access="private" specifier="non virtual">refreshStatus( void )</function>
     <function access="private" specifier="non virtual">updateStatus( int iStatusItem, const QString &amp; sText )</function>
-    <function access="private" specifier="non virtual">updateTitle( const QString &amp; sTitle )</function>
+    <function access="private" specifier="non virtual">updateTitle( const QString &amp; sTitle, int iState )</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>

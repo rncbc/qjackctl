@@ -58,6 +58,13 @@ IMAGES   = icons/qjackctl.xpm \
            icons/reset1.png \
            icons/refresh1.png \
            icons/socket1.png \
+           icons/xstarting1.png \
+           icons/xstarted1.png \
+           icons/xstopping1.png \
+           icons/xstopped1.png \
+           icons/xactivating1.png \
+           icons/xactive1.png \
+           icons/xinactive1.png \
            icons/qtlogo.png
 
 TEMPLATE = app

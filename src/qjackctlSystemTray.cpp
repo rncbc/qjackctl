@@ -22,6 +22,7 @@
 #include "qjackctlSystemTray.h"
 
 #include <qtooltip.h>
+#include <qbitmap.h>
 #include <qimage.h>
 
 #include "config.h"
@@ -76,30 +77,44 @@ void qjackctlSystemTray::mousePressEvent ( QMouseEvent *pMouseEvent )
         return;
         
     switch (pMouseEvent->button()) {
+
       case LeftButton:
-        toggleParent();
+        // Toggle parent widget visibility.
+        if (pParent->isVisible())
+            pParent->hide();
+        else
+            pParent->show();
         break;
-      case MidButton:
+
       case RightButton:
+        // Just signal we're on to context menu.
         emit contextMenuRequested(this, pMouseEvent->globalPos());
         break;
+        
       default:
         break;
     }
 }
 
 
-// Toggle paraent visibility.
-void qjackctlSystemTray::toggleParent (void)
+// Set system tray icon overlay.
+void qjackctlSystemTray::setPixmapOverlay ( const QPixmap& pmOverlay )
 {
     QWidget *pParent = parentWidget();
     if (pParent == 0)
         return;
 
-    if (pParent->isVisible())
-        pParent->hide();
-    else
-        pParent->show();
+    // Get base pixmap from parent widget.
+    QPixmap pm;
+    pm.convertFromImage(pParent->icon()->convertToImage().smoothScale(22, 22), 0);
+
+    // Merge with the overlay pixmap.
+    QBitmap bmMask(*pm.mask());
+    bitBlt(&bmMask, 0, 0, pmOverlay.mask(), 0, 0, -1, -1, Qt::OrROP);
+    pm.setMask(bmMask);
+    bitBlt(&pm, 0, 0, &pmOverlay);
+
+    QLabel::setPixmap(pm);
 }
 
 

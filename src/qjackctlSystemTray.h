@@ -22,8 +22,8 @@
 #ifndef __qjackctlSystemTray_h
 #define __qjackctlSystemTray_h
 
-#include <qpopupmenu.h>
 #include <qlabel.h>
+#include <qpixmap.h>
 
 
 //----------------------------------------------------------------------------
@@ -40,6 +40,9 @@ public:
     // Default destructor.
     ~qjackctlSystemTray();
 
+    // Set system tray icon overlay.
+    void setPixmapOverlay(const QPixmap& pmOverlay);
+
 signals:
 
     // Context menu signal.
@@ -49,9 +52,6 @@ protected:
 
     // Inherited mouse event.
     void mousePressEvent(QMouseEvent *);
-
-    // Toggle paraent visibility.
-    void toggleParent();
 };
 
 
