@@ -2003,7 +2003,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     }
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("reset1.png")),
         tr("&Reset"), m_pStatusForm, SLOT(resetXrunStats()));
-    pContextMenu->setItemEnabled(iItemID, m_pJackClient != NULL);
+//  pContextMenu->setItemEnabled(iItemID, m_pJackClient != NULL);
     pContextMenu->insertSeparator();
 
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("messages1.png")),
