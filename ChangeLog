@@ -3,6 +3,11 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.3a 2004-01-19  Time format combo-box tooltip fix.
+
+- A qt-designer copy-paste leftover has been fixed; sloppy boy I am ;)
+
+
 0.2.3  2004-01-19  Tenths, hundredths, milliseconds, whatever.
 
 - Custom time format setup for all elapsed times, allowing the display

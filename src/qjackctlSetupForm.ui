@@ -2559,7 +2559,7 @@
                                             <bool>false</bool>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>The software driver to use</string>
+                                            <string>The general time format on display</string>
                                         </property>
                                     </widget>
                                 </hbox>
