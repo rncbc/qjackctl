@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>480</width>
-            <height>243</height>
+            <height>246</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -143,6 +143,9 @@
             <property name="accel">
                 <string>Alt+S</string>
             </property>
+            <property name="iconSet">
+                <iconset>reset1.png</iconset>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Reset XRUN statistic values</string>
             </property>
@@ -156,6 +159,9 @@
             </property>
             <property name="accel">
                 <string>Alt+R</string>
+            </property>
+            <property name="iconSet">
+                <iconset>refresh1.png</iconset>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Refresh XRUN statistic values</string>

@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>403</width>
-            <height>247</height>
+            <height>250</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -106,6 +106,9 @@
                                 <property name="accel">
                                     <string>Alt+C</string>
                                 </property>
+                                <property name="iconSet">
+                                    <iconset>connect1.png</iconset>
+                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Connect currently selected ports</string>
                                 </property>
@@ -120,6 +123,9 @@
                                 <property name="accel">
                                     <string>Alt+D</string>
                                 </property>
+                                <property name="iconSet">
+                                    <iconset>disconnect1.png</iconset>
+                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Disconnect currently selected ports</string>
                                 </property>
@@ -133,6 +139,9 @@
                                 </property>
                                 <property name="accel">
                                     <string>Alt+A</string>
+                                </property>
+                                <property name="iconSet">
+                                    <iconset>disconnectall1.png</iconset>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Disconnect all currently connected ports</string>
@@ -164,6 +173,9 @@
                                 </property>
                                 <property name="accel">
                                     <string>Alt+R</string>
+                                </property>
+                                <property name="iconSet">
+                                    <iconset>refresh1.png</iconset>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Refresh current connections view</string>
@@ -218,6 +230,9 @@
                                 <property name="accel">
                                     <string>Alt+C</string>
                                 </property>
+                                <property name="iconSet">
+                                    <iconset>connect1.png</iconset>
+                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Connect currently selected ports</string>
                                 </property>
@@ -232,6 +247,9 @@
                                 <property name="accel">
                                     <string>Alt+D</string>
                                 </property>
+                                <property name="iconSet">
+                                    <iconset>disconnect1.png</iconset>
+                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Disconnect currently selected ports</string>
                                 </property>
@@ -245,6 +263,9 @@
                                 </property>
                                 <property name="accel">
                                     <string>Alt+A</string>
+                                </property>
+                                <property name="iconSet">
+                                    <iconset>disconnectall1.png</iconset>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Disconnect all currently connected ports</string>
@@ -276,6 +297,9 @@
                                 </property>
                                 <property name="accel">
                                     <string>Alt+R</string>
+                                </property>
+                                <property name="iconSet">
+                                    <iconset>refresh1.png</iconset>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Refresh current connections view</string>

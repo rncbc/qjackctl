@@ -50,6 +50,11 @@ IMAGES   = icons/qjackctl.xpm \
            icons/remove1.png \
            icons/up1.png \
            icons/down1.png \
+           icons/connect1.png \
+           icons/disconnect1.png \
+           icons/disconnectall1.png \
+           icons/reset1.png \
+           icons/refresh1.png \
            icons/socket1.png \
            icons/qtlogo.png
 

@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>550</width>
-            <height>315</height>
+            <height>318</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -231,6 +231,9 @@
                     <property name="accel">
                         <string>Alt+C</string>
                     </property>
+                    <property name="iconSet">
+                        <iconset>connect1.png</iconset>
+                    </property>
                     <property name="toolTip" stdset="0">
                         <string>Connect currently selected sockets</string>
                     </property>
@@ -245,6 +248,9 @@
                     <property name="accel">
                         <string>Alt+D</string>
                     </property>
+                    <property name="iconSet">
+                        <iconset>disconnect1.png</iconset>
+                    </property>
                     <property name="toolTip" stdset="0">
                         <string>Disconnect currently selected sockets</string>
                     </property>
@@ -258,6 +264,9 @@
                     </property>
                     <property name="accel">
                         <string>Alt+A</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>disconnectall1.png</iconset>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Disconnect all currently connected sockets</string>
@@ -292,6 +301,9 @@
                     </property>
                     <property name="default">
                         <bool>true</bool>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>refresh1.png</iconset>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Refresh current patchbay view</string>
