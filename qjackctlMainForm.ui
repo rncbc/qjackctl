@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>539</width>
-            <height>286</height>
+            <width>509</width>
+            <height>275</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -913,7 +913,7 @@
                             <string>Whether to terminate or suspend the aRts sound server on JACK startup</string>
                         </property>
                     </widget>
-                    <widget class="QComboBox" row="0" column="1">
+                    <widget class="QComboBox" row="0" column="1" rowspan="1" colspan="3">
                         <item>
                             <property name="text">
                                 <string>artsshell -q terminate</string>
@@ -956,6 +956,41 @@
                             <cstring>XrunRegexComboBox</cstring>
                         </property>
                     </widget>
+                    <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="3">
+                        <item>
+                            <property name="text">
+                                <string>xrun of at least ([0-9|\.]+) msecs</string>
+                            </property>
+                        </item>
+                        <property name="name">
+                            <cstring>XrunRegexComboBox</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="editable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Regular expresion used to detect XRUNs on server output messages</string>
+                        </property>
+                    </widget>
+                    <widget class="QCheckBox" row="3" column="1" rowspan="1" colspan="3">
+                        <property name="name">
+                            <cstring>XrunIgnoreFirstCheckBox</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Ignore first XRUN ocurrence on statistics</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Whether to ignore the first XRUN on server startup (most likely to occur)</string>
+                        </property>
+                    </widget>
                     <widget class="QCheckBox" row="1" column="0">
                         <property name="name">
                             <cstring>ForceJackCheckBox</cstring>
@@ -967,41 +1002,7 @@
                             <string>Whether to kill any stray JACK daemon threads.</string>
                         </property>
                     </widget>
-                    <spacer row="4" column="0">
-                        <property name="name">
-                            <cstring>spacer7</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <spacer row="4" column="1">
-                        <property name="name">
-                            <cstring>spacer8</cstring>
-                        </property>
-                        <property name="orientation">
-                            <enum>Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                            <enum>Expanding</enum>
-                        </property>
-                        <property name="sizeHint">
-                            <size>
-                                <width>4</width>
-                                <height>4</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <widget class="QComboBox" row="1" column="1">
+                    <widget class="QComboBox" row="1" column="1" rowspan="1" colspan="3">
                         <item>
                             <property name="text">
                                 <string>killall -9 jackd</string>
@@ -1040,18 +1041,54 @@
                             <string>Command line used to kill stray JACK daemon threads.</string>
                         </property>
                     </widget>
-                    <widget class="QComboBox" row="2" column="1">
+                    <widget class="QCheckBox" row="5" column="0" rowspan="1" colspan="2">
+                        <property name="name">
+                            <cstring>AutoRefreshCheckBox</cstring>
+                        </property>
+                        <property name="text">
+                            <string>&amp;Auto refresh connections patchbay, every (secs):</string>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Whether to refresh the connections patchbay.</string>
+                        </property>
+                    </widget>
+                    <widget class="QComboBox" row="5" column="2">
                         <item>
                             <property name="text">
-                                <string>xrun of at least ([0-9|\.]+) msecs</string>
+                                <string>5</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>10</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>20</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>30</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>60</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property name="text">
+                                <string>120</string>
                             </property>
                         </item>
                         <property name="name">
-                            <cstring>XrunRegexComboBox</cstring>
+                            <cstring>TimeRefreshComboBox</cstring>
                         </property>
                         <property name="sizePolicy">
                             <sizepolicy>
-                                <hsizetype>7</hsizetype>
+                                <hsizetype>1</hsizetype>
                                 <vsizetype>0</vsizetype>
                                 <horstretch>0</horstretch>
                                 <verstretch>0</verstretch>
@@ -1060,21 +1097,64 @@
                         <property name="editable">
                             <bool>true</bool>
                         </property>
+                        <property name="currentItem">
+                            <number>1</number>
+                        </property>
                         <property name="toolTip" stdset="0">
-                            <string>Regular expresion used to detect XRUNs on server output messages</string>
+                            <string>Time in seconds between each refresh cycle.</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="3" column="1">
+                    <spacer row="4" column="2">
                         <property name="name">
-                            <cstring>XrunIgnoreFirstCheckBox</cstring>
+                            <cstring>spacer8</cstring>
                         </property>
-                        <property name="text">
-                            <string>&amp;Ignore first XRUN ocurrence on statistics</string>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
                         </property>
-                        <property name="toolTip" stdset="0">
-                            <string>Whether to ignore the first XRUN on server startup (most likely to occur)</string>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
                         </property>
-                    </widget>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>48</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="4" column="0">
+                        <property name="name">
+                            <cstring>spacer7</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>4</width>
+                                <height>48</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="5" column="3">
+                        <property name="name">
+                            <cstring>spacer9</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Horizontal</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>144</width>
+                                <height>4</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </grid>
             </widget>
             <widget class="QWidget">
@@ -1186,7 +1266,7 @@
                             </widget>
                             <spacer>
                                 <property name="name">
-                                    <cstring>spacer9</cstring>
+                                    <cstring>spacer10</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -1367,7 +1447,7 @@
                     </widget>
                     <spacer row="1" column="0">
                         <property name="name">
-                            <cstring>spacer10</cstring>
+                            <cstring>spacer11</cstring>
                         </property>
                         <property name="orientation">
                             <enum>Vertical</enum>
@@ -1466,6 +1546,12 @@
         <receiver>qjackctlMainForm</receiver>
         <slot>stabilizeConnections()</slot>
     </connection>
+    <connection>
+        <sender>AutoRefreshCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TimeRefreshComboBox</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>StartPushButton</tabstop>
@@ -1496,6 +1582,8 @@
     <tabstop>ForceJackShellComboBox</tabstop>
     <tabstop>XrunRegexComboBox</tabstop>
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
+    <tabstop>AutoRefreshCheckBox</tabstop>
+    <tabstop>TimeRefreshComboBox</tabstop>
     <tabstop>StatsListView</tabstop>
     <tabstop>ReadListView</tabstop>
     <tabstop>WriteListView</tabstop>

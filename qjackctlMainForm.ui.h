@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.3.3"
+#define QJACKCTL_VERSION	"0.0.3.4"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -86,6 +86,7 @@ void qjackctlMainForm::init()
     SampleRateComboBox->setValidator(new QIntValidator(SampleRateComboBox));
     PeriodsComboBox->setValidator(new QIntValidator(PeriodsComboBox));
     TimeoutComboBox->setValidator(new QIntValidator(TimeoutComboBox));
+    TimeRefreshComboBox->setValidator(new QIntValidator(TimeRefreshComboBox));
 
     // Stuff the about box...
     QString sText = "<p align=\"center\"><br />\n";
@@ -128,6 +129,8 @@ void qjackctlMainForm::init()
     ForceJackShellComboBox->setCurrentText(m_Settings.readEntry("/ForceJackShell", "killall -9 jackd"));
     XrunRegexComboBox->setCurrentText(m_Settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs"));
     XrunIgnoreFirstCheckBox->setChecked(m_Settings.readBoolEntry("/XrunIgnoreFirst", true));
+    AutoRefreshCheckBox->setChecked(m_Settings.readBoolEntry("/AutoRefresh", true));
+    TimeRefreshComboBox->setCurrentText(QString::number(m_Settings.readNumEntry("/TimeRefresh", 10)));
     m_Settings.endGroup();
 
     QPoint pt;
@@ -188,6 +191,8 @@ void qjackctlMainForm::destroy()
     m_Settings.writeEntry("/ForceJackShell", ForceJackShellComboBox->currentText());
     m_Settings.writeEntry("/XrunRegex", XrunRegexComboBox->currentText());
     m_Settings.writeEntry("/XrunIgnoreFirst", XrunIgnoreFirstCheckBox->isChecked());
+    m_Settings.writeEntry("/AutoRefresh", AutoRefreshCheckBox->isChecked());
+    m_Settings.writeEntry("/TimeRefresh", TimeRefreshComboBox->currentText().toInt());
     m_Settings.endGroup();
 
     QPoint pt = pos();
@@ -255,7 +260,7 @@ void qjackctlMainForm::startJack()
     
     // OK. Let's build the startup process...
     m_pJack = new QProcess(this);
-    
+
     // Setup communications...
     QObject::connect(m_pJack, SIGNAL(readyReadStdout()), this, SLOT(readJackStdout()));
     QObject::connect(m_pJack, SIGNAL(readyReadStderr()), this, SLOT(readJackStderr()));
@@ -431,7 +436,7 @@ void qjackctlMainForm::processJackExit()
         delete m_pJack;
     }
     m_pJack = NULL;   
-    
+
     setCaption(QJACKCTL_TITLE " - " + tr("Stopped."));
 
     StartPushButton->setEnabled(true);
@@ -480,20 +485,21 @@ void qjackctlMainForm::appendMessages( const QString & s )
 void qjackctlMainForm::stabilizeForm()
 {
     bool bShowDetails = DetailsCheckBox->isChecked();
-    
+
     if (bShowDetails) {
         bool bEnabled = RealtimeCheckBox->isChecked();
         PriorityTextLabel->setEnabled(bEnabled);
         PriorityComboBox->setEnabled(bEnabled);
         ForceArtsShellComboBox->setEnabled(ForceArtsCheckBox->isChecked());
         ForceJackShellComboBox->setEnabled(ForceJackCheckBox->isChecked());
+        TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
         DetailsTabWidget->show();
     } else {
         DetailsTabWidget->hide();
     }
-    
+
     adjustSize();
-   
+
     if (bShowDetails) {
         QDesktopWidget *pDesktop = QApplication::desktop();
         QPoint curPos = pos();
@@ -509,11 +515,10 @@ void qjackctlMainForm::stabilizeForm()
             m_posSave = curPos;
             move(curPos + delta);
         }
+        stabilizeConnections();
     }
     else if (!m_posSave.isNull())
         move(m_posSave);
-
-    stabilizeConnections();
 }
 
 
@@ -710,7 +715,7 @@ void qjackctlMainForm::timerSlot (void)
         return;
     }
     // Shall we refresh connections now and then?
-    if ((m_iTimerSlot % 10) == 0)
+    if (AutoRefreshCheckBox->isChecked() && (m_iTimerSlot % TimeRefreshComboBox->currentText().toInt()) == 0)
         refreshConnections();
 
     // Update some statistical fields, directly.
