@@ -3,6 +3,13 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.3  2004-01-19  Tenths, hundredths, milliseconds, whatever.
+
+- Custom time format setup for all elapsed times, allowing the display
+  of tenths, hundredths or even milliseconds instead of just hundredths
+  of second for transport time code.
+
+
 0.2.2   2004-01-16  Hundredths are back.
 
 - Transport time is now shown with hundredths of second (hh:mm:ss.dd),

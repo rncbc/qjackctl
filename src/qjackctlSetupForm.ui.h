@@ -92,6 +92,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 
     // Load some other defaults...
     TimeDisplayButtonGroup->setButton(m_pSetup->iTimeDisplay);
+    TimeFormatComboBox->setCurrentItem(m_pSetup->iTimeFormat);
 
     QFont font;
     if (m_pSetup->sMessagesFont.isEmpty() || !font.fromString(m_pSetup->sMessagesFont))
@@ -508,6 +509,7 @@ void qjackctlSetupForm::accept (void)
 
     // Save Defaults...
     m_pSetup->iTimeDisplay   = TimeDisplayButtonGroup->id(TimeDisplayButtonGroup->selected());
+    m_pSetup->iTimeFormat    = TimeFormatComboBox->currentItem();
     m_pSetup->sMessagesFont  = MessagesFontTextLabel->font().toString();
     m_pSetup->sDisplayFont1  = DisplayFont1TextLabel->font().toString();
     m_pSetup->sDisplayFont2  = DisplayFont2TextLabel->font().toString();

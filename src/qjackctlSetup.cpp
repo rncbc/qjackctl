@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -58,6 +58,7 @@ qjackctlSetup::qjackctlSetup (void)
     bAutoRefresh            = m_settings.readBoolEntry("/AutoRefresh", false);
     iTimeRefresh            = m_settings.readNumEntry("/TimeRefresh", 10);
     iTimeDisplay            = m_settings.readNumEntry("/TimeDisplay", 0);
+    iTimeFormat             = m_settings.readNumEntry("/TimeFormat", 0);
     sMessagesFont           = m_settings.readEntry("/MessagesFont", QString::null);
     sDisplayFont1           = m_settings.readEntry("/DisplayFont1", QString::null);
     sDisplayFont2           = m_settings.readEntry("/DisplayFont2", QString::null);
@@ -106,6 +107,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/AutoRefresh",             bAutoRefresh);
     m_settings.writeEntry("/TimeRefresh",             iTimeRefresh);
     m_settings.writeEntry("/TimeDisplay",             iTimeDisplay);
+    m_settings.writeEntry("/TimeFormat",              iTimeFormat);
     m_settings.writeEntry("/MessagesFont",            sMessagesFont);
     m_settings.writeEntry("/DisplayFont1",            sDisplayFont1);
     m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);

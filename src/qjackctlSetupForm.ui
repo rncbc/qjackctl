@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>374</height>
+            <width>564</width>
+            <height>402</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -2236,7 +2236,7 @@
                             <number>4</number>
                         </property>
                         <property name="title">
-                            <string>Big Time Display</string>
+                            <string>Time Display</string>
                         </property>
                         <property name="flat">
                             <bool>true</bool>
@@ -2263,7 +2263,7 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>Transport &amp;Time (hh:mm:ss.dd)</string>
+                                            <string>Transport &amp;Time Code</string>
                                         </property>
                                         <property name="accel">
                                             <string>Alt+T</string>
@@ -2319,23 +2319,6 @@
                                     </widget>
                                 </vbox>
                             </widget>
-                            <spacer row="0" column="1">
-                                <property name="name">
-                                    <cstring>spacer41</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Minimum</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>16</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
                             <widget class="QLayoutWidget" row="0" column="2">
                                 <property name="name">
                                     <cstring>layout11</cstring>
@@ -2516,6 +2499,105 @@
                                     </widget>
                                 </grid>
                             </widget>
+                            <widget class="QLayoutWidget" row="1" column="0">
+                                <property name="name">
+                                    <cstring>layout10</cstring>
+                                </property>
+                                <hbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>TimeFormatTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Time F&amp;ormat:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>TimeFormatComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox">
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss.d</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss.dd</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss.ddd</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>TimeFormatComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>The software driver to use</string>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
+                            <spacer row="1" column="1" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>spacer42</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>120</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="0" column="1">
+                                <property name="name">
+                                    <cstring>spacer41</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Minimum</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>16</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
                         </grid>
                     </widget>
                     <widget class="QGroupBox">
@@ -2601,7 +2683,7 @@
                             </widget>
                             <spacer row="0" column="2">
                                 <property name="name">
-                                    <cstring>space42</cstring>
+                                    <cstring>space43</cstring>
                                 </property>
                                 <property name="orientation">
                                     <enum>Horizontal</enum>
@@ -2951,6 +3033,7 @@
     <tabstop>TransportBBTRadioButton</tabstop>
     <tabstop>ElapsedResetRadioButton</tabstop>
     <tabstop>ElapsedXrunRadioButton</tabstop>
+    <tabstop>TimeFormatComboBox</tabstop>
     <tabstop>DisplayFont1PushButton</tabstop>
     <tabstop>DisplayFont2PushButton</tabstop>
     <tabstop>MessagesFontPushButton</tabstop>

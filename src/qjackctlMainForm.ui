@@ -701,6 +701,7 @@
     <variable access="private">qjackctlPatchbayRack m_patchbayRack;</variable>
     <variable access="private">qjackctlPreset m_preset;</variable>
     <variable access="private">QString m_sStdoutBuffer;</variable>
+    <variable access="private">QString m_sTimeDashes;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack( void )</slot>
@@ -744,13 +745,14 @@
     <function access="private" specifier="non virtual">updateMessagesFont( void )</function>
     <function access="private" specifier="non virtual">updateTimeDisplayFonts( void )</function>
     <function access="private" specifier="non virtual">updateTimeDisplayToolTips( void )</function>
+    <function access="private" specifier="non virtual">updateTimeFormat( void )</function>
     <function specifier="non virtual" returnType="bool">isActivePatchbay( const QString &amp; sPatchbayPath )</function>
     <function access="private" specifier="non virtual">updateActivePatchbay( void )</function>
     <function specifier="non virtual">activatePatchbay( const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">stabilizeForm( void )</function>
     <function specifier="non virtual">resetXrunStats( void )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
-    <function access="private" specifier="non virtual" returnType="QString">formatTime( int iSeconds )</function>
+    <function access="private" specifier="non virtual" returnType="QString">formatTime( double secs )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( int iStatusItem, const QTime &amp; t, bool bElapsed )</function>
     <function access="private" specifier="non virtual">updateElapsedTimes( void )</function>
     <function specifier="non virtual">refreshXrunStats( void )</function>
