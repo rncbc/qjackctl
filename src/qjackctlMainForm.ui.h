@@ -659,6 +659,12 @@ void qjackctlMainForm::stopJack (void)
             shellExecute(m_pSetup->sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
         // Now it's the time to real try stopping the server daemon...
         m_pJack->tryTerminate();
+        // Give it some time to terminate gracefully and stabilize...
+        QTime t;
+        t.start();
+        while (t.elapsed() < QJACKCTL_TIMER_MSECS)
+            QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+        // Keep on.
         return;
      }
 
@@ -743,15 +749,15 @@ void qjackctlMainForm::processJackExit (void)
 // XRUN detection routine.
 QString& qjackctlMainForm::detectXrun ( QString & s )
 {
-#ifndef CONFIG_JACK_XRUN_DELAY
     QRegExp rx(m_pSetup->sXrunRegex);
     int iPos = rx.search(s);
     if (iPos >= 0) {
         s.insert(iPos + rx.matchedLength(), "</font>");
         s.insert(iPos, "<font color=\"#cc0000\">");
+#ifndef CONFIG_JACK_XRUN_DELAY
         updateXrunStats(rx.cap(1).toFloat());
-    }
 #endif
+    }
     return s;
 }
 
@@ -1053,6 +1059,11 @@ void qjackctlMainForm::resetXrunStats (void)
 
     m_iXrunCallbacks = 0;
 
+#ifdef CONFIG_JACK_MAX_DELAY
+    if (m_pJackClient)
+        jack_reset_max_delayed_usecs(m_pJackClient);
+#endif
+
     refreshXrunStats();
 
     appendMessages(tr("Statistics reset."));
@@ -1277,7 +1288,7 @@ void qjackctlMainForm::xrunNotifyEvent (void)
     m_iXrunCallbacks++;
 #ifdef CONFIG_JACK_XRUN_DELAY
     // We have an official XRUN delay value (convert usecs to msecs)...
-    updateXrunStats(0.001 * ::jack_get_xrun_delayed_usecs(m_pJackClient));
+    updateXrunStats(0.001 * jack_get_xrun_delayed_usecs(m_pJackClient));
 #else
     // Reset last occurrence timer.
     m_tXrunLast.restart();
@@ -2123,6 +2134,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
         delete m_pPresetsMenu;
     m_pPresetsMenu = new QPopupMenu(this);
     QStringList presets = m_pSetup->presets;
+    // Assume QStringList iteration follows item index order (0,1,2...)
     int iIndex = 0;
     for (QStringList::Iterator iter = presets.begin(); iter != presets.end(); ++iter) {
         iItemID = m_pPresetsMenu->insertItem(*iter);
@@ -2138,7 +2150,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     m_pPresetsMenu->setItemParameter(iItemID, -1);
     QObject::connect(m_pPresetsMenu, SIGNAL(activated(int)), this, SLOT(activatePresetsMenu(int)));
     // Add presets menu to the main context menu...
-    pContextMenu->insertItem(tr("Presets"), m_pPresetsMenu);
+    pContextMenu->insertItem(tr("Preset"), m_pPresetsMenu);
     pContextMenu->insertSeparator();
 
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("messages1.png")),
@@ -2182,7 +2194,7 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
         QMessageBox::warning(this, tr("Warning"),
             tr("Server settings will be only effective after\n"
                "restarting the JACK audio server."), tr("OK"));
-    }   // Otherwise, it will be just convenient to update status...
+    }   // Otherwise, it will be just as convenient to update status...
     else updateTitleStatus();
 }
 

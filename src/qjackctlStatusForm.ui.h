@@ -32,22 +32,21 @@ void qjackctlStatusForm::init (void)
     // Create the list view items 'a priori'...
     QString s = " ";
     QString c = ":" + s;
-    QString z = "0";
     QString n = "--";
     QListViewItem *pViewItem;
 
     StatsListView->setSorting(3); // Initially unsorted.
 
+    m_apStatus[STATUS_RESET_TIME] = new QListViewItem(StatsListView, s + tr("Time of last reset") + c, n);
     m_apStatus[STATUS_MAX_DELAY]  = new QListViewItem(StatsListView, s + tr("Maximum scheduling delay") + c, n);
-    m_apStatus[STATUS_RESET_TIME] = new QListViewItem(StatsListView, s + tr("Time of last reset") + c, z);
 
-    pViewItem = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, z);
+    pViewItem = new QListViewItem(StatsListView, s + tr("XRUN count since last server startup") + c, n);
     m_apStatus[STATUS_XRUN_COUNT] = pViewItem;
-    m_apStatus[STATUS_XRUN_TOTAL] = new QListViewItem(pViewItem, s + tr("XRUN total") + c, z);
-    m_apStatus[STATUS_XRUN_AVG]   = new QListViewItem(pViewItem, s + tr("XRUN average") + c, z);
-    m_apStatus[STATUS_XRUN_MIN]   = new QListViewItem(pViewItem, s + tr("XRUN minimum") + c, z);
-    m_apStatus[STATUS_XRUN_MAX]   = new QListViewItem(pViewItem, s + tr("XRUN maximum") + c, z);
-    m_apStatus[STATUS_XRUN_LAST]  = new QListViewItem(pViewItem, s + tr("XRUN last") + c, z);
+    m_apStatus[STATUS_XRUN_TOTAL] = new QListViewItem(pViewItem, s + tr("XRUN total") + c, n);
+    m_apStatus[STATUS_XRUN_AVG]   = new QListViewItem(pViewItem, s + tr("XRUN average") + c, n);
+    m_apStatus[STATUS_XRUN_MIN]   = new QListViewItem(pViewItem, s + tr("XRUN minimum") + c, n);
+    m_apStatus[STATUS_XRUN_MAX]   = new QListViewItem(pViewItem, s + tr("XRUN maximum") + c, n);
+    m_apStatus[STATUS_XRUN_LAST]  = new QListViewItem(pViewItem, s + tr("XRUN last") + c, n);
     m_apStatus[STATUS_XRUN_TIME]  = new QListViewItem(pViewItem, s + tr("XRUN last time detected") + c, n);
 
     pViewItem = new QListViewItem(StatsListView, s + tr("Transport state") + c, n);
