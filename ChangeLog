@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.1   2003-12-26  The fix of fixes.
+0.2.1   2003-12-29  The fix of fixes.
 
 - Fixed jackstart/jackd command line parameter argument concatenation.
   
