@@ -9,6 +9,9 @@ ChangeLog
   (as been suggested by Steve Harris); the sort code has been "borrowed" from
   qjackconnect, yet again.
 
+- Patchbay port connection lines are now shown always visible, even if their
+  respective connected port items aren't.
+
 0.0.3   2003-08-07  Integrated visual patchbay.
 
 - A patchbay for jack port connections is now integrated, much like the

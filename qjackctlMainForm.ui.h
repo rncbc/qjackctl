@@ -26,7 +26,7 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.4"
+#define QJACKCTL_VERSION	"0.0.3.2"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
@@ -51,7 +51,7 @@ void qjackctlMainForm::init()
     m_pJack       = NULL;
     m_pJackClient = NULL;
     m_pTimer      = NULL;
-    m_iTimerStart = 0;
+    m_iTimerSlot  = 0;
 
     m_pPortNotifier = NULL;
     m_pXrunNotifier = NULL;
@@ -237,7 +237,7 @@ void qjackctlMainForm::startJack()
         // Wait a litle bit...
         system("sleep 1");
     }
-    
+
     // Do we force stray JACK daemon threads?...
     if (ForceJackCheckBox->isChecked()) {
         appendMessages(tr("JACK is being forced..."));
@@ -370,7 +370,7 @@ void qjackctlMainForm::startJack()
     StopPushButton->setEnabled(true);
 
     // Create our timer...
-    m_iTimerStart = 0;
+    m_iTimerSlot = 0;
     m_pTimer = new QTimer(this);
     QObject::connect(m_pTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
     // Let's wait three seconds for client startup?
@@ -433,7 +433,7 @@ void qjackctlMainForm::processJackExit()
     m_pJack = NULL;   
     
     setCaption(QJACKCTL_TITLE " - " + tr("Stopped."));
-    
+
     StartPushButton->setEnabled(true);
     StopPushButton->setEnabled(false);    
 }
@@ -704,10 +704,14 @@ void qjackctlMainForm::shutNotifySlot ( int fd )
 void qjackctlMainForm::timerSlot (void)
 {
     // Is it the first shot on server start?
-    if (m_iTimerStart == 0) {
+    m_iTimerSlot++;
+    if (m_iTimerSlot == 1) {
         startJackClient();
         return;
     }
+    // Shall we refresh connections now and then?
+    if ((m_iTimerSlot % 10) == 0)
+        refreshConnections();
 
     // Update some statistical fields, directly.
     if (m_pJackClient) {
@@ -821,9 +825,7 @@ void qjackctlMainForm::startJackClient()
     // Create our patchbay...
     m_pJackPatchbay = new qjackctlPatchbay(ConnectorFrame, ReadListView, WriteListView, m_pJackClient);
 
-    // So we're officially started...
-    m_iTimerStart++;
-    // Our timer will get one second standard.
+    // Our timer will now get one second standard.
     m_pTimer->start(1000, false);
 }
 

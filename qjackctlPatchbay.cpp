@@ -469,11 +469,18 @@ qjackctlPatchbay::~qjackctlPatchbay (void)
 
 
 // Draw visible port connection relation lines
-void qjackctlPatchbay::drawConnectionLine ( QPainter& p, int x1, int y1, int x2, int y2 )
+void qjackctlPatchbay::drawConnectionLine ( QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2 )
 {
-    p.drawLine(x1, y1, x1 + 4, y1);
+    y1 += h1;
+    y2 += h2;
+
+    if (y1 > h1)
+        p.drawLine(x1, y1, x1 + 4, y1);
+
     p.drawLine(x1 + 4, y1, x2 - 4, y2);
-    p.drawLine(x2 - 4, y2, x2, y2);
+
+    if (y2 > h2)
+        p.drawLine(x2 - 4, y2, x2, y2);
 }
 
 
@@ -485,7 +492,7 @@ void qjackctlPatchbay::drawConnections (void)
     int   x1, y1, h1, b1;
     int   x2, y2, h2, b2;
     int   i, c, rgb[3];
-    
+
     // Initialize color changer.
     i = c = rgb[0] = rgb[1] = rgb[2] = 0;
     // Almost constants.
@@ -503,12 +510,12 @@ void qjackctlPatchbay::drawConnections (void)
         p.setPen(QColor(rgb[2], rgb[1], rgb[0]));
         if (i > 2)
             i = 0;
-        // To avoid unnecessary arrows...
-        b1 = b2 = 0;
         // For each port item
         for (qjackctlPortItem *pOPort = pOClient->ports().first();
-                pOPort && b1 == 0 && b2 == 0;
+                pOPort;
                     pOPort = pOClient->ports().next()) {
+            // To avoid some unnecessary arrows...
+            b1 = b2 = 0;
             // Get port connections...
             const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
             if (ppszClientPorts) {
@@ -534,14 +541,11 @@ void qjackctlPatchbay::drawConnections (void)
                             if (b1 > 0)
                                 b2++;
                         }
-                        if ((y1 > 0) && (y2 > 0))
-                            drawConnectionLine(p, x1, y1 + h1, x2, y2 + h2);
+                        drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
                     }
                     iClientPort++;
                 }
                 ::free(ppszClientPorts);
-                if (b2 == 0)
-                    b1 = 0;
             }
         }
     }

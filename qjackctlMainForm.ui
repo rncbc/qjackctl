@@ -1522,7 +1522,7 @@
     <variable access="private">QProcess *m_pJack;</variable>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">QTimer *m_pTimer;</variable>
-    <variable access="private">int m_iTimerStart;</variable>
+    <variable access="private">int m_iTimerSlot;</variable>
     <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pXrunNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pShutNotifier;</variable>
