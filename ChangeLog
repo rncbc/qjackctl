@@ -19,6 +19,8 @@ ChangeLog
 - Server path factory default to jackd instead of jackstart; preset setup
   button icons are back.
 
+- Fixed rare connection port item removal/disconnection dangling pointer bug.
+
 
 0.2.14   2005-01-23  More progressive optimizations.
 

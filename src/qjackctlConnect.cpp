@@ -88,6 +88,8 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, const QString&
 qjackctlPortItem::~qjackctlPortItem (void)
 {
     m_pClient->ports().remove(this);
+	for (qjackctlPortItem *pPort = m_connects.first(); pPort; pPort = m_connects.next())
+		pPort->removeConnect(this);
     m_connects.clear();
 }
 
