@@ -17,6 +17,9 @@ ChangeLog
   as dialogs anymore and thus are not centered relative to parent main window 
   which has become a strict Qt dialog widget behaviour (as of Qt 3.3+).
 
+- Patchbay window content changes are now properly updated, without the need
+  for a later manual refresh to redraw stalled connection lines.
+  
   
 0.2.4  2004-02-01  Exclusive patchbay sockets.
 

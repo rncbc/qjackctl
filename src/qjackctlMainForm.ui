@@ -675,6 +675,7 @@
     <variable access="private">int m_iAlsaRefresh;</variable>
     <variable access="private">int m_iJackDirty;</variable>
     <variable access="private">int m_iAlsaDirty;</variable>
+    <variable access="private">int m_iPatchbayRefresh;</variable>
     <variable access="private">QSocketNotifier *m_pStdoutNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pAlsaNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pPortNotifier;</variable>
@@ -763,6 +764,7 @@
     <function access="private" specifier="non virtual">refreshConnections( void )</function>
     <function specifier="non virtual">refreshJackConnections( void )</function>
     <function specifier="non virtual">refreshAlsaConnections( void )</function>
+    <function specifier="non virtual">refreshPatchbay( void )</function>
     <function access="private" specifier="non virtual">refreshStatus( void )</function>
     <function access="private" specifier="non virtual">updateStatus( int iStatusItem, const QString &amp; sText )</function>
 </functions>

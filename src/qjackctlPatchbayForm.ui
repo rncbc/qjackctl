@@ -839,6 +839,7 @@
     <variable access="private">int m_iUntitled;</variable>
 </variables>
 <slots>
+    <slot specifier="non virtual">contentsChanged()</slot>
     <slot specifier="non virtual">refreshForm()</slot>
     <slot specifier="non virtual">stabilizeForm()</slot>
     <slot specifier="non virtual">newPatchbay()</slot>

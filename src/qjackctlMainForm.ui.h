@@ -72,6 +72,8 @@ void qjackctlMainForm::init (void)
     m_iJackDirty    = 0;
     m_iAlsaDirty    = 0;
 
+    m_iPatchbayRefresh = 0;
+
     m_pStdoutNotifier = NULL;
 
     m_pAlsaNotifier = NULL;
@@ -1188,6 +1190,12 @@ void qjackctlMainForm::timerSlot (void)
         }
     }
 
+    // Is the patchbay dirty enough?
+    if (m_pPatchbayForm && m_iPatchbayRefresh > 0) {
+        m_iPatchbayRefresh = 0;
+        m_pPatchbayForm->refreshForm();
+    }
+
     // Update some statistical fields, directly.
     refreshStatus();
 
@@ -1514,6 +1522,13 @@ void qjackctlMainForm::refreshAlsaConnections (void)
     m_iAlsaRefresh++;
 }
 
+
+void qjackctlMainForm::refreshPatchbay (void)
+{
+    // Just increment our intentions; it will be deferred
+    // to be executed just on timer slot processing...
+    m_iPatchbayRefresh++;
+}
 
 
 // Message log form requester slot.

@@ -362,6 +362,11 @@ public:
     void setDirty (bool bDirty);
     bool dirty();
 
+signals:
+
+    // Contents change signal.
+    void contentsChanged();
+
 public slots:
 
     // Common context menu slot.

@@ -776,10 +776,6 @@ qjackctlSocketListView::~qjackctlSocketListView (void)
 void qjackctlSocketListView::setDirty ( bool bDirty )
 {
     m_pPatchbayView->setDirty(bDirty);
-    if (bDirty) {
-        emit selectionChanged(NULL);
-        m_pPatchbayView->PatchworkView()->update();
-    }
 }
 
 bool qjackctlSocketListView::dirty (void)
@@ -1158,6 +1154,8 @@ qjackctlSocketList *qjackctlPatchbayView::ISocketList (void)
 void qjackctlPatchbayView::setDirty ( bool bDirty )
 {
     m_bDirty = bDirty;
+    if (bDirty)
+        emit contentsChanged();
 }
 
 bool qjackctlPatchbayView::dirty (void)

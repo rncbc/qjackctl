@@ -41,6 +41,8 @@ void qjackctlPatchbayForm::init (void)
     QObject::connect(PatchbayView->IListView(), SIGNAL(selectionChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->OListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->IListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
+    // Dirty patchbay dispatcher (stabilization deferral).
+    QObject::connect(PatchbayView, SIGNAL(contentsChanged()), this, SLOT(contentsChanged()));
 
     newPatchbayFile(false);
 }
@@ -100,6 +102,15 @@ bool qjackctlPatchbayForm::queryClose (void)
     }
 
     return bQueryClose;
+}
+
+
+// Contents change deferrrer slot...
+void qjackctlPatchbayForm::contentsChanged (void)
+{
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+    if (pMainForm)
+        pMainForm->refreshPatchbay();
 }
 
 
