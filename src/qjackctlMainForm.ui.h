@@ -840,6 +840,8 @@ void qjackctlMainForm::updateActivePatchbay (void)
                 m_iAlsaDirty++;
         }
     }
+    // Should refresh anyway.
+    m_iPatchbayRefresh++;
 }
 
 // Force active patchbay setting.

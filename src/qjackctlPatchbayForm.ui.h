@@ -313,10 +313,8 @@ void qjackctlPatchbayForm::activatePatchbay()
 
     // Activate it...
     qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-    if (pMainForm) {
+    if (pMainForm)
         pMainForm->activatePatchbay(m_sPatchbayPath);
-        stabilizeForm();
-    }
 }
 
 
