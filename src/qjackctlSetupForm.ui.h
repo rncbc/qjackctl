@@ -280,16 +280,16 @@ void qjackctlSetupForm::changeCurrentPreset( const QString& sPreset )
             m_sPreset + "\n\n" +
             tr("Do you want to save the changes?"),
             tr("Save"), tr("Discard"), tr("Cancel"))) {
-        case 0: // Save...
+          case 0: // Save...
             savePreset(m_sPreset);
             m_iDirtySetup++;
             resetPresets();
             PresetComboBox->setCurrentText(sPreset);
             m_iDirtySetup--;
-        case 1: // Discard...
+          case 1: // Discard...
             m_iDirtySettings = 0;
             break;
-        default:// Cancel...
+          default:// Cancel...
             m_iDirtySetup++;
             resetPresets();
             PresetComboBox->setCurrentText(m_sPreset);
@@ -368,33 +368,35 @@ void qjackctlSetupForm::computeLatency (void)
 
 void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 {
-    bool bOssAlsa    = (sDriver == "oss" || sDriver == "alsa");
+    bool bOss        = (sDriver == "oss");
+    bool bAlsa       = (sDriver == "alsa");
     bool bInEnabled  = false;
     bool bOutEnabled = false;
+    bool bAlsaDuplex = false;
+    
     switch (iAudio) {
-    case QJACKCTL_DUPLEX:
-        bInEnabled  = true;
-        bOutEnabled = true;
+      case QJACKCTL_DUPLEX:
+        bInEnabled  = bOss;
+        bOutEnabled = bOss;
+        bAlsaDuplex = bAlsa;
         break;
-    case QJACKCTL_CAPTURE:
-        bInEnabled  = true;
-        bOutEnabled = false;
+      case QJACKCTL_CAPTURE:
+        bInEnabled  = (bOss || bAlsa);
         break;
-    case QJACKCTL_PLAYBACK:
-        bInEnabled  = false;
-        bOutEnabled = true;
+      case QJACKCTL_PLAYBACK:
+        bOutEnabled = (bOss || bAlsa);
         break;
     }
 
-    InDeviceTextLabel->setEnabled(bInEnabled && (bOssAlsa));
-    InDeviceComboBox->setEnabled(bInEnabled && (bOssAlsa));
-    OutDeviceTextLabel->setEnabled(bOutEnabled && (bOssAlsa));
-    OutDeviceComboBox->setEnabled(bOutEnabled && (bOssAlsa));
+    InDeviceTextLabel->setEnabled(bInEnabled);
+    InDeviceComboBox->setEnabled(bInEnabled);
+    OutDeviceTextLabel->setEnabled(bOutEnabled);
+    OutDeviceComboBox->setEnabled(bOutEnabled);
 
-    InChannelsTextLabel->setEnabled(bInEnabled && (bOssAlsa));
-    InChannelsSpinBox->setEnabled(bInEnabled && (bOssAlsa));
-    OutChannelsTextLabel->setEnabled(bOutEnabled && (bOssAlsa));
-    OutChannelsSpinBox->setEnabled(bOutEnabled && (bOssAlsa));
+    InChannelsTextLabel->setEnabled(bInEnabled || bAlsaDuplex);
+    InChannelsSpinBox->setEnabled(bInEnabled || bAlsaDuplex);
+    OutChannelsTextLabel->setEnabled(bOutEnabled || bAlsaDuplex);
+    OutChannelsSpinBox->setEnabled(bOutEnabled || bAlsaDuplex);
 
     computeLatency();
 }
@@ -744,12 +746,12 @@ void qjackctlSetupForm::reject (void)
             tr("Some settings have been changed.") + "\n\n" +
             tr("Do you want to apply the changes?"),
             tr("Apply"), tr("Discard"), tr("Cancel"))) {
-        case 0:     // Apply...
+          case 0:     // Apply...
             accept();
             return;
-        case 1:     // Discard
+          case 1:     // Discard
             break;
-        default:    // Cancel.
+          default:    // Cancel.
             bReject = false;
         }
     }

@@ -3112,7 +3112,7 @@
                                             <string>Alt+E</string>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Whether to enable the system tray icon (KDE only)</string>
+                                            <string>Whether to enable the system tray icon</string>
                                         </property>
                                     </widget>
                                 </vbox>
