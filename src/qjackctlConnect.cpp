@@ -677,9 +677,10 @@ void qjackctlConnectorView::drawConnections (void)
         return;
     
     QPainter p(this);
-    int   x1, y1, h1;
-    int   x2, y2, h2;
-    int   i, c, rgb[3];
+    int x1, y1, h1;
+    int x2, y2, h2;
+    int i, c, rgb[3];
+    int w;
 
     // Initialize color changer.
     i = c = rgb[0] = rgb[1] = rgb[2] = 0;
@@ -688,6 +689,10 @@ void qjackctlConnectorView::drawConnections (void)
     x2 = width();
     h1 = ((m_pConnectView->OListView())->header())->sectionRect(0).height();
     h2 = ((m_pConnectView->IListView())->header())->sectionRect(0).height();
+    // about some specialty line width...
+    w = m_pConnectView->iconSize() + 1;
+    if (w < 2)
+        w = 0;
     // For each client item...
     for (qjackctlClientItem *pOClient = m_pConnectView->OClientList()->clients().first();
             pOClient;
@@ -696,7 +701,7 @@ void qjackctlConnectorView::drawConnections (void)
         c += 0x39;
         c &= 0xff;
         rgb[i++] = c;
-        p.setPen(QColor(rgb[2], rgb[1], rgb[0]));
+        p.setPen(QPen(QColor(rgb[2], rgb[1], rgb[0]), w));
         if (i > 2)
             i = 0;
         // For each port item
