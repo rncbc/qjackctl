@@ -150,6 +150,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
     ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
     QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
+    AliasesEnabledCheckBox->setChecked(m_pSetup->bAliasesEnabled);
+    AliasesEditingCheckBox->setChecked(m_pSetup->bAliasesEditing);
 
 #ifndef CONFIG_SYSTEM_TRAY
     SystemTrayCheckBox->setChecked(false);
@@ -516,6 +518,8 @@ void qjackctlSetupForm::stabilizeForm (void)
     ServerConfigNameComboBox->setEnabled(bEnabled);
     ServerConfigTempCheckBox->setEnabled(bEnabled);
 
+    AliasesEditingCheckBox->setEnabled(AliasesEnabledCheckBox->isChecked());
+
     changeDriver(DriverComboBox->currentText());
 }
 
@@ -796,6 +800,8 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->sServerConfigName        = ServerConfigNameComboBox->currentText();
         m_pSetup->bServerConfigTemp        = ServerConfigTempCheckBox->isChecked();
         m_pSetup->bQueryShutdown           = QueryShutdownCheckBox->isChecked();
+        m_pSetup->bAliasesEnabled          = AliasesEnabledCheckBox->isChecked();
+        m_pSetup->bAliasesEditing          = AliasesEditingCheckBox->isChecked();
     }
 
     // Save combobox history...

@@ -393,12 +393,23 @@ void qjackctlConnectionsForm::setupAliases ( qjackctlSetup *pSetup )
 {
 	m_pSetup = pSetup;
 	
-	// Set initial alias maps for all listviews...
-	if (pSetup) {
-		JackConnectView->OListView()->setAliases(&(pSetup->aliasJackOutputs));
-		JackConnectView->IListView()->setAliases(&(pSetup->aliasJackInputs));
-		AlsaConnectView->OListView()->setAliases(&(pSetup->aliasAlsaOutputs));
-		AlsaConnectView->IListView()->setAliases(&(pSetup->aliasAlsaInputs));
+	updateAliases();
+}
+
+void qjackctlConnectionsForm::updateAliases (void)
+{
+	// Set alias maps for all listviews...
+	if (m_pSetup && m_pSetup->bAliasesEnabled) {
+		bool bRenameEnabled = m_pSetup->bAliasesEditing;
+		JackConnectView->OListView()->setAliases(&(m_pSetup->aliasJackOutputs), bRenameEnabled);
+		JackConnectView->IListView()->setAliases(&(m_pSetup->aliasJackInputs),  bRenameEnabled);
+		AlsaConnectView->OListView()->setAliases(&(m_pSetup->aliasAlsaOutputs), bRenameEnabled);
+		AlsaConnectView->IListView()->setAliases(&(m_pSetup->aliasAlsaInputs),  bRenameEnabled);
+	} else {
+		JackConnectView->OListView()->setAliases(NULL, false);
+		JackConnectView->IListView()->setAliases(NULL, false);
+		AlsaConnectView->OListView()->setAliases(NULL, false);
+		AlsaConnectView->IListView()->setAliases(NULL, false);
 	}
 }
 

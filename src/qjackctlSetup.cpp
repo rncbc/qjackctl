@@ -78,6 +78,8 @@ qjackctlSetup::qjackctlSetup (void)
     sServerConfigName        = m_settings.readEntry("/ServerConfigName", ".jackdrc");
     bServerConfigTemp        = m_settings.readBoolEntry("/ServerConfigTemp", false);
     bQueryShutdown           = m_settings.readBoolEntry("/QueryShutdown", true);
+    bAliasesEnabled          = m_settings.readBoolEntry("/AliasesEnabled", false);
+    bAliasesEditing          = m_settings.readBoolEntry("/AliasesEditing", false);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -141,6 +143,8 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
     m_settings.writeEntry("/ServerConfigTemp",        bServerConfigTemp);
     m_settings.writeEntry("/QueryShutdown",           bQueryShutdown);
+    m_settings.writeEntry("/AliasesEnabled",          bAliasesEnabled);
+    m_settings.writeEntry("/AliasesEditing",          bAliasesEditing);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");

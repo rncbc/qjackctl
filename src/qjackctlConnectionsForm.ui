@@ -440,6 +440,7 @@
     <function specifier="non virtual">stabilizeJack( bool bEnabled )</function>
     <function specifier="non virtual">stabilizeAlsa( bool bEnabled )</function>
     <function specifier="non virtual">setupAliases( qjackctlSetup *pSetup )</function>
+    <function specifier="non virtual">updateAliases()</function>
     <function specifier="non virtual" returnType="bool">loadAliases()</function>
     <function specifier="non virtual" returnType="bool">saveAliases()</function>
 </functions>

@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>588</width>
-            <height>447</height>
+            <width>644</width>
+            <height>501</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -42,9 +42,6 @@
     </property>
     <property name="caption">
         <string>Setup - JACK Audio Connection Kit</string>
-    </property>
-    <property name="icon">
-        <pixmap>setup1.png</pixmap>
     </property>
     <property name="sizeGripEnabled">
         <bool>true</bool>
@@ -127,9 +124,6 @@
                                 <property name="autoDefault">
                                     <bool>false</bool>
                                 </property>
-                                <property name="iconSet">
-                                    <iconset>save1.png</iconset>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Save settings as current preset name</string>
                                 </property>
@@ -146,9 +140,6 @@
                                 </property>
                                 <property name="autoDefault">
                                     <bool>false</bool>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>remove1.png</iconset>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Delete current settings preset</string>
@@ -2722,9 +2713,6 @@
                                                 <blue>0</blue>
                                             </color>
                                         </property>
-                                        <property name="paletteBackgroundPixmap">
-                                            <pixmap>displaybg1.png</pixmap>
-                                        </property>
                                         <property name="font">
                                             <font>
                                                 <bold>0</bold>
@@ -2780,9 +2768,6 @@
                                                 <green>0</green>
                                                 <blue>0</blue>
                                             </color>
-                                        </property>
-                                        <property name="paletteBackgroundPixmap">
-                                            <pixmap>displaybg1.png</pixmap>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -3276,6 +3261,75 @@
                     </property>
                     <widget class="QGroupBox">
                         <property name="name">
+                            <cstring>AliasesGroupBox</cstring>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
+                        </property>
+                        <property name="title">
+                            <string>Aliases</string>
+                        </property>
+                        <property name="flat">
+                            <bool>true</bool>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLayoutWidget" row="0" column="0" rowspan="2" colspan="1">
+                                <property name="name">
+                                    <cstring>layout41</cstring>
+                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>AliasesEnabledCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>E&amp;nable client/port aliases</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+N</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to enable client/port name aliases on the connections window</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>AliasesEditingCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Ena&amp;ble client/port aliases editing (rename)</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+B</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to enable in-place client/port name editing (rename)</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox">
+                        <property name="name">
                             <cstring>OtherGroupBox</cstring>
                         </property>
                         <property name="font">
@@ -3295,7 +3349,7 @@
                             </property>
                             <widget class="QLayoutWidget" row="0" column="0" rowspan="2" colspan="1">
                                 <property name="name">
-                                    <cstring>layout41</cstring>
+                                    <cstring>layout42</cstring>
                                 </property>
                                 <vbox>
                                     <property name="name">
@@ -3381,7 +3435,7 @@
                             </widget>
                             <widget class="QLayoutWidget" row="0" column="1">
                                 <property name="name">
-                                    <cstring>layout42</cstring>
+                                    <cstring>layout43</cstring>
                                 </property>
                                 <vbox>
                                     <property name="name">
@@ -3969,6 +4023,18 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
+        <sender>AliasesEnabledCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>AliasesEditingCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
         <sender>StartJackCheckBox</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -4089,6 +4155,8 @@
     <tabstop>ConnectionsFontPushButton</tabstop>
     <tabstop>ConnectionsIconSizeComboBox</tabstop>
     <tabstop>BezierLinesCheckBox</tabstop>
+    <tabstop>AliasesEditingCheckBox</tabstop>
+    <tabstop>AliasesEnabledCheckBox</tabstop>
     <tabstop>StartJackCheckBox</tabstop>
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>KeepOnTopCheckBox</tabstop>

@@ -244,9 +244,10 @@ public:
     int autoOpenTimeout();
 
 	// Aliasing support methods.
-	void setAliases(qjackctlConnectAlias *pAliases);
+	void setAliases(qjackctlConnectAlias *pAliases, bool bRenameEnabled);
 	qjackctlConnectAlias *aliases();
-	
+	bool renameEnabled();
+
     // Natural decimal sorting comparator helper.
     static int compare (const QString& s1, const QString& s2, bool bAscending);
 
@@ -283,8 +284,9 @@ private:
     // Item we'll eventually drop something.
     QListViewItem *m_pDragDropItem;
     
-    // Aliasing support.
-    qjackctlConnectAlias *m_pAliases;
+	// Aliasing support.
+	qjackctlConnectAlias *m_pAliases;
+	bool m_bRenameEnabled;
 };
 
 

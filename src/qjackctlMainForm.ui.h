@@ -1036,6 +1036,14 @@ void qjackctlMainForm::updateTimeFormat (void)
 }
 
 
+// Update the connections client/port aliases.
+void qjackctlMainForm::updateAliases (void)
+{
+	if (m_pConnectionsForm)
+		m_pConnectionsForm->updateAliases();
+}
+
+
 // Force update of active patchbay definition profile, if applicable.
 bool qjackctlMainForm::isActivePatchbay ( const QString& sPatchbayPath )
 {
@@ -1820,7 +1828,6 @@ void qjackctlMainForm::showSetupForm (void)
         if (m_pSetup->sConnectionsFont.isEmpty() && m_pConnectionsForm)
             m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
         // To track down deferred or immediate changes.
-        QString sOldDefPreset           = m_pSetup->sDefPreset;
         QString sOldMessagesFont        = m_pSetup->sMessagesFont;
         QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
         QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
@@ -1837,6 +1844,8 @@ void qjackctlMainForm::showSetupForm (void)
         int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
         int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
         bool    bOldBezierLines         = m_pSetup->bBezierLines;
+        bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
+        bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
         // Load the current setup settings.
         pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
@@ -1871,6 +1880,11 @@ void qjackctlMainForm::showSetupForm (void)
             if (( bOldSystemTray && !m_pSetup->bSystemTray) ||
                 (!bOldSystemTray &&  m_pSetup->bSystemTray))
                 updateSystemTray();
+			if (( bOldAliasesEnabled && !m_pSetup->bAliasesEnabled) ||
+				(!bOldAliasesEnabled &&  m_pSetup->bAliasesEnabled) ||
+				( bOldAliasesEditing && !m_pSetup->bAliasesEditing) ||
+				(!bOldAliasesEditing &&  m_pSetup->bAliasesEditing))
+				updateAliases();
             // Warn if something will be only effective on next run.
             if (( bOldStdoutCapture && !m_pSetup->bStdoutCapture) ||
                 (!bOldStdoutCapture &&  m_pSetup->bStdoutCapture) ||

@@ -49,8 +49,8 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, const QString&
 	// Check aliasing...
 	qjackctlConnectAlias *pAliases = ((pClient->clientList())->listView())->aliases();
 	if (pAliases) {
-	    QListViewItem::setText(0, pAliases->portAlias(pClient->clientName(), sPortName));
-        QListViewItem::setRenameEnabled(0, true);
+		QListViewItem::setText(0, pAliases->portAlias(pClient->clientName(), sPortName));
+		QListViewItem::setRenameEnabled(0, ((pClient->clientList())->listView())->renameEnabled());
 	}
 }
 
@@ -218,7 +218,7 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList, const 
 	qjackctlConnectAlias *pAliases = (pClientList->listView())->aliases();
 	if (pAliases) {
 	    QListViewItem::setText(0, pAliases->clientAlias(sClientName));
-        QListViewItem::setRenameEnabled(0, true);
+        QListViewItem::setRenameEnabled(0, (pClientList->listView())->renameEnabled());
 	}
 }
 
@@ -491,7 +491,8 @@ qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectVi
     m_iAutoOpenTimeout = 0;
     m_pDragDropItem    = 0;
     
-    m_pAliases = 0;
+	m_pAliases = 0;
+	m_bRenameEnabled = false;
     
     if (bReadable)
         QListView::addColumn(tr("Readable Clients") + " / " + tr("Output Ports"));
@@ -545,16 +546,47 @@ int qjackctlClientListView::autoOpenTimeout (void)
 
 
 // Aliasing support methods.
-void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases )
+void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool bRenameEnabled )
 {
-    m_pAliases = pAliases;
+	m_pAliases = pAliases;
+	m_bRenameEnabled = bRenameEnabled;
+
+	// Update all current listview items, if any.
+	QListViewItemIterator iter(this);
+	while (iter.current()) {
+		QListViewItem *pItem = iter.current();
+		if (pItem->rtti() == QJACKCTL_CLIENTITEM) {
+			qjackctlClientItem *pClient = (qjackctlClientItem *) pItem;
+			if (m_pAliases) {
+				pClient->setText(0, m_pAliases->clientAlias(pClient->clientName()));
+				pClient->setRenameEnabled(0, m_bRenameEnabled);
+			} else {
+				pClient->setText(0, pClient->clientName());
+				pClient->setRenameEnabled(0, false);
+			}
+		} else {
+			qjackctlPortItem *pPort = (qjackctlPortItem *) pItem;
+			if (m_pAliases) {
+				pPort->setText(0, m_pAliases->portAlias(pPort->clientName(), pPort->portName()));
+				pPort->setRenameEnabled(0, m_bRenameEnabled);
+			} else {
+				pPort->setText(0, pPort->portName());
+				pPort->setRenameEnabled(0, false);
+			}
+		}
+		++iter;
+	}
 }
 
 qjackctlConnectAlias *qjackctlClientListView::aliases (void)
 {
-    return m_pAliases;
+	return m_pAliases;
 }
 
+bool qjackctlClientListView::renameEnabled (void)
+{
+	return m_bRenameEnabled;
+}
 
 // In-place aliasing slot.
 void qjackctlClientListView::startRenameSlot (void)
@@ -705,11 +737,11 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
     pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectSelected());
     iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
     pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectAll());
-
-    pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem(tr("Re&name"), this, SLOT(startRenameSlot()), tr("Alt+N", "Rename"));
-    pContextMenu->setItemEnabled(iItemID, selectedItem() && selectedItem()->renameEnabled(0));
-
+	if (m_bRenameEnabled) {
+		pContextMenu->insertSeparator();
+		iItemID = pContextMenu->insertItem(tr("Re&name"), this, SLOT(startRenameSlot()), tr("Alt+N", "Rename"));
+		pContextMenu->setItemEnabled(iItemID, selectedItem() && selectedItem()->renameEnabled(0));
+	}
     pContextMenu->insertSeparator();
     iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
 

@@ -134,15 +134,17 @@ public:
     QString sServerConfigName;
     bool    bServerConfigTemp;
     bool    bQueryShutdown;
+	bool    bAliasesEnabled;
+	bool    bAliasesEditing;
 
     // Defaults...
     QString sPatchbayPath;
 
 	// Aliases containers.
-    qjackctlConnectAlias aliasJackOutputs;
-    qjackctlConnectAlias aliasJackInputs;
-    qjackctlConnectAlias aliasAlsaOutputs;
-    qjackctlConnectAlias aliasAlsaInputs;
+	qjackctlConnectAlias aliasJackOutputs;
+	qjackctlConnectAlias aliasJackInputs;
+	qjackctlConnectAlias aliasAlsaOutputs;
+	qjackctlConnectAlias aliasAlsaInputs;
 
     // Aliases preset management methods.
     bool loadAliases(const QString& sPreset);
