@@ -26,6 +26,8 @@
 #include <qfileinfo.h>
 #include <qtextstream.h>
 
+#include "qjackctlAbout.h"
+
 //----------------------------------------------------------------------
 // Specific patchbay socket list save (write) subroutine.
 static void load_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDomElement& eSockets )
@@ -181,7 +183,7 @@ bool qjackctlPatchbayFile::save ( qjackctlPatchbayRack *pPatchbay, const QString
     QDomDocument doc("patchbay");
     QDomElement eRoot = doc.createElement("patchbay");
     eRoot.setAttribute("name", fi.baseName());
-    eRoot.setAttribute("version", "0.2.1");
+    eRoot.setAttribute("version", QJACKCTL_VERSION);
     doc.appendChild(eRoot);
 
     // Save output-sockets spec...

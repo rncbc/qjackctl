@@ -130,7 +130,7 @@ public:
 
     // Client list accessor.
     qjackctlClientList *clientlist();
-    
+
     // Port list accessor.
     QPtrList<qjackctlPortItem>& ports();
 
@@ -159,7 +159,7 @@ private:
     qjackctlClientList *m_pClientList;
     QString m_sClientName;
     int     m_iClientMark;
-    bool    m_bHilite;
+    int     m_iHilite;
 
     QPtrList<qjackctlPortItem> m_ports;
 };
@@ -194,7 +194,7 @@ public:
 
     // Client list accessor.
     QPtrList<qjackctlClientItem>& clients();
-    
+
     // Client ports cleanup marker.
     void markClientPorts(int iMark);
     void cleanClientPorts(int iMark);
