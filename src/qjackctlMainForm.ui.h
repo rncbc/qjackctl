@@ -660,7 +660,7 @@ void qjackctlMainForm::stopJack (void)
     stopJackClient();
 
     // And try to stop server.
-    if (m_pJack && !m_bJackSurvive) {
+    if (m_pJack && m_pJack->isRunning() && !m_bJackSurvive) {
         appendMessages(tr("JACK is stopping..."));
         QString sTemp = tr("Stopping");
         updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...", QJACKCTL_STOPPING);
@@ -669,10 +669,8 @@ void qjackctlMainForm::stopJack (void)
         if (m_pSetup->bShutdownScript && !m_pSetup->sShutdownScriptShell.isEmpty())
             shellExecute(m_pSetup->sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
         // Now it's the time to real try stopping the server daemon...
-        if (m_pJack->isRunning()) {
-            m_pJack->tryTerminate();
-            return;
-        }
+        m_pJack->tryTerminate();
+        return;
      }
 
      // Do final processing anyway.
