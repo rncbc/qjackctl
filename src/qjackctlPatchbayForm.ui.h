@@ -188,6 +188,8 @@ void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
         QMessageBox::critical(this, tr("Load error"),
             tr("Could not load patchbay definition file:") + "\n\n\"" + sFileName + "\"",
             tr("Cancel"));
+        // Reset/disable further trials.
+        m_sPatchbayPath = QString::null;
         return;
     }
     // Step 2: load from rack...
@@ -229,8 +231,8 @@ void qjackctlPatchbayForm::newPatchbay()
         bSnapshot = (QMessageBox::information(this,
             tr("New Patchbay definition"),
             tr("JACK is currently running.") + "\n\n" +
-            tr("Create the new patchbay definition with a") + "\n" +
-            tr("snapshot of all actual client connections?"),
+            tr("Create patchbay definition as snapshot") + "\n" +
+            tr("of all actual client connections?"),
             tr("Yes"), tr("No")) == 0);
     }
 
@@ -277,7 +279,11 @@ void qjackctlPatchbayForm::savePatchbay()
     
     if (sFileName.isEmpty())
         return;
-
+        
+    // Enforce .xml extension...
+    if (QFileInfo(sFileName).extension().isEmpty())
+        sFileName += ".xml";
+    
     // Save it right away.
     savePatchbayFile(sFileName);
 }
@@ -286,10 +292,15 @@ void qjackctlPatchbayForm::savePatchbay()
 // Set current active patchbay definition file.
 void qjackctlPatchbayForm::activatePatchbay()
 {
-    if (queryClose()) {
-        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
-        if (pMainForm)
-            pMainForm->activatePatchbay(m_sPatchbayPath);
+    // Check if we're going to discard safely the current one...
+    if (!queryClose())
+        return;
+
+    // Activate it...
+    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parent();
+    if (pMainForm) {
+        pMainForm->activatePatchbay(m_sPatchbayPath);
+        stabilizeForm();
     }
 }
 

@@ -524,7 +524,7 @@
                 <bool>true</bool>
             </property>
             <property name="toolTip" stdset="0">
-                <string>Show/hide the actual patchbay plumbing configuration window</string>
+                <string>Show/hide the patchbay editor window</string>
             </property>
         </widget>
         <widget class="QPushButton" row="2" column="0">

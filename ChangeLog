@@ -5,19 +5,20 @@ ChangeLog
 
 0.1.1   2003-10-29  Minor feature enhancements and bugfixes.
 
-- Main window display items are now made fixed in width, at leats those more
-  prone to change frequently and thus cause some display jitter.
+- Main window display items are now made fixed in width, at least those more
+  prone to change frequently and thus caused some display jitter.
 
-- Messages, status, connections and patchbay module windows are now reopenned
+- Messages, status, connections and patchbay module windows are now reopened
   automagicaly on startup as they were on previous session.
 
 - New patchbay definition snapshot option from current actual connections;
-  current active patchbay filename status title indication.
+  current active patchbay filename status indication on title.
 
 - New icons patchbay editor window and socket dialogs; own stdout/stdin is
   now properly captured and shown on messages log window.
 
-- Fixed an obvious patchbay connection scan freezing bug.
+- Fixed an obvious patchbay connection scan freezing bug; default .xml file
+  extension enforcement on save.
 
 
 0.1.0   2003-10-22  Major user interface redesign.
