@@ -198,7 +198,10 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         WaitComboBox->setCurrentText(QString::number(preset.iWait));
         ChanSpinBox->setValue(preset.iChan);
         DriverComboBox->setCurrentText(preset.sDriver);
-        InterfaceComboBox->setCurrentText(preset.sInterface);
+        if (preset.sInterface.isEmpty())
+            InterfaceComboBox->setCurrentText(m_pSetup->sDefPresetName);
+        else
+            InterfaceComboBox->setCurrentText(preset.sInterface);
         AudioComboBox->setCurrentItem(preset.iAudio);
         DitherComboBox->setCurrentItem(preset.iDither);
         TimeoutComboBox->setCurrentText(QString::number(preset.iTimeout));
@@ -260,6 +263,8 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.iStartDelay  = StartDelaySpinBox->value();
     preset.bVerbose     = VerboseCheckBox->isChecked();
     preset.iPortMax     = PortMaxComboBox->currentText().toInt();
+    if (preset.sInterface == m_pSetup->sDefPresetName || preset.sInterface.isEmpty())
+        preset.sInterface = "hw:0";
     if (preset.sInDevice == m_pSetup->sDefPresetName)
         preset.sInDevice = QString::null;
     if (preset.sOutDevice == m_pSetup->sDefPresetName)
@@ -539,7 +544,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	    return;
 	
     QPopupMenu* pContextMenu = new QPopupMenu(this);
-	QString sText;
+	QString sName, sText;
 
 	// Enumerate just the ALSA cards and PCM harfware devices...
 	snd_ctl_t *handle;
@@ -552,12 +557,12 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	int iCards = 0;
 	int iCard = -1;
 	while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
-		sText = "hw:" + QString::number(iCard);
-		if (snd_ctl_open(&handle, sText.latin1(), 0) >= 0
+		sName = "hw:" + QString::number(iCard);
+		if (snd_ctl_open(&handle, sName.latin1(), 0) >= 0
 			&& snd_ctl_card_info(handle, info) >= 0) {
 			if (iCards > 0)
     			pContextMenu->insertSeparator();
-			sText += '\t';
+			sText  = sName + '\t';
 			sText += snd_ctl_card_info_get_name(info);
     		pContextMenu->insertItem(sText);
 			int iDevice = -1;
@@ -570,10 +575,8 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 						SND_PCM_STREAM_CAPTURE :
 						SND_PCM_STREAM_PLAYBACK);
 				if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
-					sText = QString("hw:%1,%2\t%3")
-						.arg(iCard)
-						.arg(iDevice)
-						.arg(snd_pcm_info_get_name(pcminfo));
+					sText  = sName + ',' + QString::number(iDevice) + '\t';
+					sText += snd_pcm_info_get_name(pcminfo);
     				pContextMenu->insertItem(sText);
 				}
 			}
@@ -582,20 +585,18 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 		}
 	}
 	
-	// Maybe this is an alternate settting...
-	if (iAudio != QJACKCTL_DUPLEX) {
-		if (iCards > 0)
-			pContextMenu->insertSeparator();
-		pContextMenu->insertItem(m_pSetup->sDefPresetName);
-	}
-	
+	// There's always the default device...
+	if (iCards > 0)
+		pContextMenu->insertSeparator();
+	pContextMenu->insertItem(m_pSetup->sDefPresetName);
+
 	// Show the device menu and read selection...
     int iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
     if (iItemID != -1) {
         sText = pContextMenu->text(iItemID);
-        int iLength = sText.find('\t');
-        if (iLength >= 0)
-            pLineEdit->setText(sText.left(iLength));
+        int iTabPos = sText.find('\t');
+        if (iTabPos >= 0)
+            pLineEdit->setText(sText.left(iTabPos));
 		else
             pLineEdit->setText(sText);
     //  settingsChanged();
@@ -609,7 +610,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 void qjackctlSetupForm::selectInterface (void)
 {
     deviceMenu(InterfaceComboBox->lineEdit(), InterfacePushButton,
-		QJACKCTL_DUPLEX);
+		AudioComboBox->currentItem());
 }
 
 

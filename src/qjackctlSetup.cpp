@@ -226,7 +226,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     }
 
     m_settings.beginGroup("/Settings" + sSuffix);
-    preset.sServer      = m_settings.readEntry("/Server", "jackstart");
+    preset.sServer      = m_settings.readEntry("/Server", "jackd");
     preset.bRealtime    = m_settings.readBoolEntry("/Realtime", true);
     preset.bSoftMode    = m_settings.readBoolEntry("/SoftMode", false);
     preset.bMonitor     = m_settings.readBoolEntry("/Monitor", false);

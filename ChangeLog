@@ -15,7 +15,9 @@ ChangeLog
 
 - Actual hardware device selection menu now featured on setup dialog; this
   button menus are only available for the ALSA driver settings.
-  
+
+- Server path factory default to jackd instead of jackstart.
+
 
 0.2.14   2005-01-23  More progressive optimizations.
 
