@@ -175,11 +175,11 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         DitherComboBox->setCurrentItem(preset.iDither);
         TimeoutComboBox->setCurrentText(QString::number(preset.iTimeout));
         if (preset.sInDevice.isEmpty())
-            InDeviceComboBox->setCurrentItem(0);
+            InDeviceComboBox->setCurrentText(m_pSetup->sDefPresetName);
         else
             InDeviceComboBox->setCurrentText(preset.sInDevice);
         if (preset.sOutDevice.isEmpty())
-            OutDeviceComboBox->setCurrentItem(0);
+            OutDeviceComboBox->setCurrentText(m_pSetup->sDefPresetName);
         else
             OutDeviceComboBox->setCurrentText(preset.sOutDevice);
         InChannelsSpinBox->setValue(preset.iInChannels);
@@ -229,9 +229,9 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.iOutChannels = OutChannelsSpinBox->value();
     preset.iStartDelay  = StartDelayComboBox->currentText().toInt();
     preset.bVerbose     = VerboseCheckBox->isChecked();
-    if (preset.sInDevice == InDeviceComboBox->text(0))
+    if (preset.sInDevice == m_pSetup->sDefPresetName)
         preset.sInDevice = QString::null;
-    if (preset.sOutDevice == OutDeviceComboBox->text(0))
+    if (preset.sOutDevice == m_pSetup->sDefPresetName)
         preset.sOutDevice = QString::null;
     m_pSetup->savePreset(preset, sPreset);
 
@@ -416,8 +416,8 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     
     IgnoreHWCheckBox->setEnabled(bOss);
 
-    PeriodsTextLabel->setEnabled(bAlsa);
-    PeriodsComboBox->setEnabled(bAlsa);
+    PeriodsTextLabel->setEnabled(bAlsa || bOss);
+    PeriodsComboBox->setEnabled(bAlsa || bOss);
 
     WordLengthTextLabel->setEnabled(bOss);
     WordLengthComboBox->setEnabled(bOss);

@@ -452,9 +452,11 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument("-r" + QString::number(m_preset.iSampleRate));
     if (m_preset.iFrames > 0)
         m_pJack->addArgument("-p" + QString::number(m_preset.iFrames));
-    if (bAlsa) {
+    if (bAlsa || bOss) {
         if (m_preset.iPeriods > 0)
             m_pJack->addArgument("-n" + QString::number(m_preset.iPeriods));
+    }
+    if (bAlsa) {
         if (m_preset.bSoftMode)
             m_pJack->addArgument("-s");
         if (m_preset.bMonitor)
@@ -467,10 +469,18 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-b");
         if (m_preset.iWordLength > 0)
             m_pJack->addArgument("-w" + QString::number(m_preset.iWordLength));
-        if (m_preset.iAudio != QJACKCTL_PLAYBACK)
+        if (!m_preset.sInDevice.isEmpty()  && m_preset.iAudio != QJACKCTL_PLAYBACK)
             m_pJack->addArgument("-C" + m_preset.sInDevice);
-        if (m_preset.iAudio != QJACKCTL_CAPTURE)
+        if (!m_preset.sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE)
             m_pJack->addArgument("-P" + m_preset.sOutDevice);
+        if (m_preset.iAudio == QJACKCTL_PLAYBACK)
+            m_pJack->addArgument("-i0");
+        else if (m_preset.iInChannels > 0)
+            m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
+        if (m_preset.iAudio == QJACKCTL_CAPTURE)
+            m_pJack->addArgument("-o0");
+        else if (m_preset.iOutChannels > 0)
+            m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     } else {
         switch (m_preset.iAudio) {
         case QJACKCTL_DUPLEX:
@@ -483,8 +493,6 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-P");
             break;
         }
-    }
-    if (bOss || bAlsa) {
         if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
             m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
         if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)

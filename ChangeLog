@@ -3,6 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.7b  2004-04-05  OSS driver setup fix.
+
+- OSS driver halfduplex setup operation is now fixed, thanks to
+  Jussi Laako.
+
+
 0.2.7a  2004-04-05  Compilation fix for Qt 3.1.
 
 - QSplitter::setChildrenCollapsible call is now conditionally compiled, 
