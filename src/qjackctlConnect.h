@@ -227,7 +227,7 @@ class qjackctlClientListView : public QListView
 public:
 
     // Constructor.
-    qjackctlClientListView(QWidget *pParent, qjackctlConnectView *pConnectionsView);
+    qjackctlClientListView(QWidget *pParent, qjackctlConnectView *pConnectionsView, bool bReadable);
     // Default destructor.
     ~qjackctlClientListView();
 

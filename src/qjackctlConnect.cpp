@@ -41,13 +41,8 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, const QString&
 
     m_pClient->ports().append(this);
 
-    if (pClient->isReadable()) {
-        QListViewItem::setDragEnabled(true);
-        QListViewItem::setDropEnabled(false);
-    } else {
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    }
+    QListViewItem::setDragEnabled(true);
+    QListViewItem::setDropEnabled(true);
 
     m_connects.setAutoDelete(false);
 }
@@ -200,13 +195,8 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList, const 
 
     m_pClientList->clients().append(this);
 
-    if (m_pClientList->isReadable()) {
-        QListViewItem::setDragEnabled(true);
-        QListViewItem::setDropEnabled(false);
-    } else {
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    }
+    QListViewItem::setDragEnabled(true);
+    QListViewItem::setDropEnabled(true);
 
 //  QListViewItem::setSelectable(false);
 }
@@ -464,7 +454,7 @@ void qjackctlClientList::hiliteClientPorts (void)
 // qjackctlClientListView -- Client list view, supporting drag-n-drop.
 
 // Constructor.
-qjackctlClientListView::qjackctlClientListView ( QWidget *pParent, qjackctlConnectView *pConnectView )
+qjackctlClientListView::qjackctlClientListView ( QWidget *pParent, qjackctlConnectView *pConnectView, bool bReadable )
     : QListView(pParent)
 {
     m_pConnectView = pConnectView;
@@ -472,6 +462,23 @@ qjackctlClientListView::qjackctlClientListView ( QWidget *pParent, qjackctlConne
     m_pAutoOpenTimer   = 0;
     m_iAutoOpenTimeout = 0;
     m_pDragDropItem    = 0;
+    
+    if (bReadable)
+        QListView::addColumn(tr("Readable Clients") + " / " + tr("Output Ports"));
+    else
+        QListView::addColumn(tr("Writable Clients") + " / " + tr("Input Ports"));
+
+    QListView::header()->setClickEnabled(false);
+    QListView::header()->setResizeEnabled(false);
+    QListView::setMinimumSize(QSize(152, 60));
+    QListView::setAllColumnsShowFocus(true);
+    QListView::setRootIsDecorated(true);
+    QListView::setResizeMode(QListView::AllColumns);
+    QListView::setAcceptDrops(true);
+    QListView::setDragAutoScroll(true);
+    QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    
+    setAutoOpenTimeout(800);
 }
 
 // Default destructor.
@@ -545,7 +552,9 @@ QListViewItem *qjackctlClientListView::dragDropItem ( const QPoint& epos )
 
 void qjackctlClientListView::dragEnterEvent ( QDragEnterEvent *pDragEnterEvent )
 {
-    if (QTextDrag::canDecode(pDragEnterEvent) && dragDropItem(pDragEnterEvent->pos())) {
+    if (pDragEnterEvent->source() != this &&
+        QTextDrag::canDecode(pDragEnterEvent) &&
+        dragDropItem(pDragEnterEvent->pos())) {
         pDragEnterEvent->accept();
     } else {
         pDragEnterEvent->ignore();
@@ -555,7 +564,9 @@ void qjackctlClientListView::dragEnterEvent ( QDragEnterEvent *pDragEnterEvent )
 
 void qjackctlClientListView::dragMoveEvent ( QDragMoveEvent *pDragMoveEvent )
 {
-    QListViewItem *pItem = dragDropItem(pDragMoveEvent->pos());
+    QListViewItem *pItem = 0;
+    if (pDragMoveEvent->source() != this)
+        pItem = dragDropItem(pDragMoveEvent->pos());
     if (pItem) {
         pDragMoveEvent->accept(QListView::itemRect(pItem));
     } else {
@@ -574,15 +585,16 @@ void qjackctlClientListView::dragLeaveEvent ( QDragLeaveEvent * )
 
 void qjackctlClientListView::dropEvent( QDropEvent *pDropEvent )
 {
-    QString sText;
-    if (QTextDrag::decode(pDropEvent, sText) && dragDropItem(pDropEvent->pos())) {
-        m_pDragDropItem = 0;
-        if (m_pAutoOpenTimer)
-            m_pAutoOpenTimer->stop();
-        qjackctlConnect *pConnect = m_pConnectView->binding();
-        if (pConnect)
-            pConnect->connectSelected();
+    if (pDropEvent->source() != this) {
+        QString sText;
+        if (QTextDrag::decode(pDropEvent, sText) && dragDropItem(pDropEvent->pos())) {
+            qjackctlConnect *pConnect = m_pConnectView->binding();
+            if (pConnect)
+                pConnect->connectSelected();
+        }
     }
+    
+    dragLeaveEvent(0);
 }
 
 
@@ -614,16 +626,21 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 //
 
 // Constructor.
-qjackctlConnectorView::qjackctlConnectorView ( QWidget *pParent, qjackctlConnectView *pConnectView)
+qjackctlConnectorView::qjackctlConnectorView ( QWidget *pParent, qjackctlConnectView *pConnectView )
     : QWidget(pParent)
 {
     m_pConnectView = pConnectView;
+
+    QWidget::setMinimumSize(QSize(22, 60));
+    QWidget::setMaximumWidth(120);
+    QWidget::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 }
 
 // Default destructor.
 qjackctlConnectorView::~qjackctlConnectorView (void)
 {
 }
+
 
 // Draw visible port connection relation lines
 void qjackctlConnectorView::drawConnectionLine ( QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2 )
@@ -747,37 +764,11 @@ void qjackctlConnectorView::contentsMoved ( int, int )
 qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName )
     : QWidget(pParent, pszName)
 {
-    QSizePolicy sizepolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_pGridLayout    = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
 
-    m_pGridLayout = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
-
-    m_pOListView = new qjackctlClientListView(pParent, this);
-    m_pOListView->addColumn(tr("Readable Clients") + " / " + tr("Output Ports"));
-    m_pOListView->header()->setClickEnabled(false);
-    m_pOListView->header()->setResizeEnabled(false);
-    m_pOListView->setMinimumSize(QSize(152, 60));
-    m_pOListView->setAllColumnsShowFocus(true);
-    m_pOListView->setRootIsDecorated(true);
-    m_pOListView->setResizeMode(QListView::AllColumns);
-    m_pOListView->setSizePolicy(sizepolicy);
-
+    m_pOListView     = new qjackctlClientListView(pParent, this, true);
     m_pConnectorView = new qjackctlConnectorView(pParent, this);
-    m_pConnectorView->setMinimumSize(QSize(22, 60));
-    m_pConnectorView->setMaximumWidth(120);
-    m_pConnectorView->setSizePolicy(sizepolicy);
-
-    m_pIListView = new qjackctlClientListView(pParent, this);
-    m_pIListView->addColumn(tr("Writable Clients") + " / " + tr("Input Ports"));
-    m_pIListView->header()->setClickEnabled(false);
-    m_pIListView->header()->setResizeEnabled(false);
-    m_pIListView->setMinimumSize(QSize(152, 60));
-    m_pIListView->setAllColumnsShowFocus(true);
-    m_pIListView->setRootIsDecorated(true);
-    m_pIListView->setResizeMode(QListView::AllColumns);
-    m_pIListView->setAcceptDrops(true);
-    m_pIListView->setAutoOpenTimeout(1000);
-    m_pIListView->setDragAutoScroll(true);
-    m_pOListView->setSizePolicy(sizepolicy);
+    m_pIListView     = new qjackctlClientListView(pParent, this, false);
 
     m_pGridLayout->addWidget(m_pOListView,     0, 0);
     m_pGridLayout->addWidget(m_pConnectorView, 0, 1);

@@ -75,14 +75,9 @@ qjackctlPlugItem::qjackctlPlugItem ( qjackctlSocketItem *pSocket, const QString&
         iPixmap = QJACKCTL_XPM_AUDIO_PLUG;
     QListViewItem::setPixmap(0, pSocket->pixmap(iPixmap));
 
-    if (m_pSocket->isReadable()) {
-        QListViewItem::setDragEnabled(true);
-        QListViewItem::setDropEnabled(false);
-    } else {
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    }
-    
+    QListViewItem::setDragEnabled(true);
+    QListViewItem::setDropEnabled(true);
+
     QListViewItem::setSelectable(false);
 }
 
@@ -140,13 +135,8 @@ qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList, const 
 
     m_pSocketList->sockets().append(this);
 
-    if (m_pSocketList->isReadable()) {
-        QListViewItem::setDragEnabled(true);
-        QListViewItem::setDropEnabled(false);
-    } else {
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    }
+    QListViewItem::setDragEnabled(true);
+    QListViewItem::setDropEnabled(true);
 
     updatePixmap();
 }
@@ -756,6 +746,23 @@ qjackctlSocketListView::qjackctlSocketListView ( QWidget *pParent, qjackctlPatch
     m_pDragDropItem    = 0;
     
     QListView::setSorting(-1);
+    
+    if (bReadable)
+        QListView::addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
+    else
+        QListView::addColumn(tr("Input Sockets") + " / " + tr("Plugs"));
+        
+    QListView::header()->setClickEnabled(false);
+    QListView::header()->setResizeEnabled(false);
+    QListView::setMinimumSize(QSize(152, 60));
+    QListView::setAllColumnsShowFocus(true);
+    QListView::setRootIsDecorated(true);
+    QListView::setResizeMode(QListView::AllColumns);
+    QListView::setAcceptDrops(true);
+    QListView::setDragAutoScroll(true);
+    QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    
+    setAutoOpenTimeout(800);
 }
 
 // Default destructor.
@@ -845,7 +852,9 @@ QListViewItem *qjackctlSocketListView::dragDropItem ( const QPoint& epos )
 
 void qjackctlSocketListView::dragEnterEvent ( QDragEnterEvent *pDragEnterEvent )
 {
-    if (QTextDrag::canDecode(pDragEnterEvent) && dragDropItem(pDragEnterEvent->pos())) {
+    if (pDragEnterEvent->source() != this &&
+        QTextDrag::canDecode(pDragEnterEvent) &&
+        dragDropItem(pDragEnterEvent->pos())) {
         pDragEnterEvent->accept();
     } else {
         pDragEnterEvent->ignore();
@@ -855,7 +864,9 @@ void qjackctlSocketListView::dragEnterEvent ( QDragEnterEvent *pDragEnterEvent )
 
 void qjackctlSocketListView::dragMoveEvent ( QDragMoveEvent *pDragMoveEvent )
 {
-    QListViewItem *pItem = dragDropItem(pDragMoveEvent->pos());
+    QListViewItem *pItem = 0;
+    if (pDragMoveEvent->source() != this)
+        pItem = dragDropItem(pDragMoveEvent->pos());
     if (pItem) {
         pDragMoveEvent->accept(QListView::itemRect(pItem));
     } else {
@@ -874,15 +885,16 @@ void qjackctlSocketListView::dragLeaveEvent ( QDragLeaveEvent * )
 
 void qjackctlSocketListView::dropEvent( QDropEvent *pDropEvent )
 {
-    QString sText;
-    if (QTextDrag::decode(pDropEvent, sText) && dragDropItem(pDropEvent->pos())) {
-        m_pDragDropItem = 0;
-        if (m_pAutoOpenTimer)
-            m_pAutoOpenTimer->stop();
-        qjackctlPatchbay *pPatchbay = m_pPatchbayView->binding();
-        if (pPatchbay)
-            pPatchbay->connectSelected();
+    if (pDropEvent->source() != this) {
+        QString sText;
+        if (QTextDrag::decode(pDropEvent, sText) && dragDropItem(pDropEvent->pos())) {
+            qjackctlPatchbay *pPatchbay = m_pPatchbayView->binding();
+            if (pPatchbay)
+                pPatchbay->connectSelected();
+        }
     }
+    
+    dragLeaveEvent(0);
 }
 
 
@@ -917,10 +929,14 @@ void qjackctlSocketListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 //
 
 // Constructor.
-qjackctlPatchworkView::qjackctlPatchworkView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView)
+qjackctlPatchworkView::qjackctlPatchworkView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView )
     : QWidget(pParent)
 {
     m_pPatchbayView = pPatchbayView;
+
+    QWidget::setMinimumSize(QSize(22, 60));
+    QWidget::setMaximumWidth(120);
+    QWidget::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 }
 
 // Default destructor.
@@ -1036,37 +1052,11 @@ void qjackctlPatchworkView::contentsMoved ( int, int )
 qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszName )
     : QWidget(pParent, pszName)
 {
-    QSizePolicy sizepolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    
-    m_pGridLayout = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
+    m_pGridLayout    = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
 
-    m_pOListView = new qjackctlSocketListView(pParent, this, true);
-    m_pOListView->addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
-    m_pOListView->header()->setClickEnabled(false);
-    m_pOListView->header()->setResizeEnabled(false);
-    m_pOListView->setMinimumSize(QSize(152, 60));
-    m_pOListView->setAllColumnsShowFocus(true);
-    m_pOListView->setRootIsDecorated(true);
-    m_pOListView->setResizeMode(QListView::AllColumns);
-    m_pOListView->setSizePolicy(sizepolicy);
-
+    m_pOListView     = new qjackctlSocketListView(pParent, this, true);
     m_pPatchworkView = new qjackctlPatchworkView(pParent, this);
-    m_pPatchworkView->setMinimumSize(QSize(22, 60));
-    m_pPatchworkView->setMaximumWidth(120);
-    m_pPatchworkView->setSizePolicy(sizepolicy);
-
-    m_pIListView = new qjackctlSocketListView(pParent, this, false);
-    m_pIListView->addColumn(tr("Input Sockets") + " / " + tr("Plugs"));
-    m_pIListView->header()->setClickEnabled(false);
-    m_pIListView->header()->setResizeEnabled(false);
-    m_pIListView->setMinimumSize(QSize(152, 60));
-    m_pIListView->setAllColumnsShowFocus(true);
-    m_pIListView->setRootIsDecorated(true);
-    m_pIListView->setResizeMode(QListView::AllColumns);
-    m_pIListView->setAcceptDrops(true);
-    m_pIListView->setAutoOpenTimeout(1000);
-    m_pIListView->setDragAutoScroll(true);
-    m_pOListView->setSizePolicy(sizepolicy);
+    m_pIListView     = new qjackctlSocketListView(pParent, this, false);
 
     m_pGridLayout->addWidget(m_pOListView,     0, 0);
     m_pGridLayout->addWidget(m_pPatchworkView, 0, 1);

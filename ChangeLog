@@ -13,6 +13,9 @@ ChangeLog
   highlighted (blue) whenever a client or port is selected on the opposite
   column (as suggested by Lawrie Abbott).
 
+- Connections and patchbay drag and drop feature is now bilateral; you can
+  now drag and drop an item from right to left to establish the connection.
+
 
 0.2.3a 2004-01-19  Time format combo-box tooltip fix.
 
