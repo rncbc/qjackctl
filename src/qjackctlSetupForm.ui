@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>500</width>
-            <height>436</height>
+            <height>439</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -1159,14 +1159,6 @@
                                         <property name="name">
                                             <cstring>InDevicePushButton</cstring>
                                         </property>
-                                        <property name="sizePolicy">
-                                            <sizepolicy>
-                                                <hsizetype>0</hsizetype>
-                                                <vsizetype>0</vsizetype>
-                                                <horstretch>0</horstretch>
-                                                <verstretch>0</verstretch>
-                                            </sizepolicy>
-                                        </property>
                                         <property name="minimumSize">
                                             <size>
                                                 <width>22</width>
@@ -1175,8 +1167,8 @@
                                         </property>
                                         <property name="maximumSize">
                                             <size>
-                                                <width>22</width>
-                                                <height>22</height>
+                                                <width>24</width>
+                                                <height>24</height>
                                             </size>
                                         </property>
                                         <property name="font">
@@ -1233,14 +1225,6 @@
                                         <property name="name">
                                             <cstring>InterfacePushButton</cstring>
                                         </property>
-                                        <property name="sizePolicy">
-                                            <sizepolicy>
-                                                <hsizetype>0</hsizetype>
-                                                <vsizetype>0</vsizetype>
-                                                <horstretch>0</horstretch>
-                                                <verstretch>0</verstretch>
-                                            </sizepolicy>
-                                        </property>
                                         <property name="minimumSize">
                                             <size>
                                                 <width>22</width>
@@ -1249,8 +1233,8 @@
                                         </property>
                                         <property name="maximumSize">
                                             <size>
-                                                <width>22</width>
-                                                <height>22</height>
+                                                <width>24</width>
+                                                <height>24</height>
                                             </size>
                                         </property>
                                         <property name="font">
@@ -1272,14 +1256,6 @@
                                         <property name="name">
                                             <cstring>OutDevicePushButton</cstring>
                                         </property>
-                                        <property name="sizePolicy">
-                                            <sizepolicy>
-                                                <hsizetype>0</hsizetype>
-                                                <vsizetype>0</vsizetype>
-                                                <horstretch>0</horstretch>
-                                                <verstretch>0</verstretch>
-                                            </sizepolicy>
-                                        </property>
                                         <property name="minimumSize">
                                             <size>
                                                 <width>22</width>
@@ -1288,8 +1264,8 @@
                                         </property>
                                         <property name="maximumSize">
                                             <size>
-                                                <width>22</width>
-                                                <height>22</height>
+                                                <width>24</width>
+                                                <height>24</height>
                                             </size>
                                         </property>
                                         <property name="font">
@@ -1857,14 +1833,6 @@
                                 <property name="name">
                                     <cstring>StartupScriptSymbolPushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -1873,8 +1841,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -1896,14 +1864,6 @@
                                 <property name="name">
                                     <cstring>StartupScriptBrowsePushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -1912,8 +1872,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -1959,14 +1919,6 @@
                                 <property name="name">
                                     <cstring>PostStartupScriptSymbolPushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -1975,8 +1927,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -1998,14 +1950,6 @@
                                 <property name="name">
                                     <cstring>PostStartupScriptBrowsePushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -2014,8 +1958,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -2037,14 +1981,6 @@
                                 <property name="name">
                                     <cstring>ShutdownScriptSymbolPushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -2053,8 +1989,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -2076,14 +2012,6 @@
                                 <property name="name">
                                     <cstring>ShutdownScriptBrowsePushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -2092,8 +2020,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -2158,14 +2086,6 @@
                                 <property name="name">
                                     <cstring>PostShutdownScriptSymbolPushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -2174,8 +2094,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -2197,14 +2117,6 @@
                                 <property name="name">
                                     <cstring>PostShutdownScriptBrowsePushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -2213,8 +2125,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -2500,14 +2412,6 @@
                                 <property name="name">
                                     <cstring>ActivePatchbayPathPushButton</cstring>
                                 </property>
-                                <property name="sizePolicy">
-                                    <sizepolicy>
-                                        <hsizetype>0</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                        <horstretch>0</horstretch>
-                                        <verstretch>0</verstretch>
-                                    </sizepolicy>
-                                </property>
                                 <property name="minimumSize">
                                     <size>
                                         <width>22</width>
@@ -2516,8 +2420,8 @@
                                 </property>
                                 <property name="maximumSize">
                                     <size>
-                                        <width>26</width>
-                                        <height>26</height>
+                                        <width>24</width>
+                                        <height>24</height>
                                     </size>
                                 </property>
                                 <property name="font">
@@ -3344,7 +3248,7 @@
                                 <property name="sizeHint">
                                     <size>
                                         <width>8</width>
-                                        <height>20</height>
+                                        <height>8</height>
                                     </size>
                                 </property>
                             </spacer>

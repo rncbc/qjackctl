@@ -48,12 +48,12 @@ Bugs
 ----
 
 Probably plenty still, but qjackctl it's now considered on beta stage already.
-It has been locally tested since JACK release 0.94.0, on SuSE 9.0, Mandrake 10.0
+It has been locally tested since JACK release 0.98.0, on SuSE 9.1, Mandrake 10.0
 and Fedora Core 1, with custom 2.4 kernels with low-latency, preemptible and
 capabilities enabling patches. As for 2.6 kernels, the capabilities patch may
-also apply but the emergence of the Realtime Linux Security Module (LSM) it's
-being now recommended for your taking benefit of the realtime and low-latency
-audio pleasure JACK can give.
+also apply but the emergence of the Realtime Linux Security Module (LSM) and
+Ingo Molnar's Realtime Preemption kernel patch it's being now recommended for
+your taking benefit of the realtime and low-latency audio pleasure JACK can give.
 
 
 Support
@@ -105,7 +105,7 @@ and in fair and strict alphabetic order:
     Wilfried Huss
 
 Thanks to you all.
-
+--
 rncbc aka Rui Nuno Capela
 rncbc@rncbc.org
 
