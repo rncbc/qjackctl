@@ -182,6 +182,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         MonitorCheckBox->setChecked(preset.bMonitor);
         ShortsCheckBox->setChecked(preset.bShorts);
         NoMemLockCheckBox->setChecked(preset.bNoMemLock);
+        UnlockMemCheckBox->setChecked(preset.bUnlockMem);
         HWMonCheckBox->setChecked(preset.bHWMon);
         HWMeterCheckBox->setChecked(preset.bHWMeter);
         IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
@@ -232,6 +233,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.bMonitor     = MonitorCheckBox->isChecked();
     preset.bShorts      = ShortsCheckBox->isChecked();
     preset.bNoMemLock   = NoMemLockCheckBox->isChecked();
+    preset.bUnlockMem   = UnlockMemCheckBox->isChecked();
     preset.bHWMon       = HWMonCheckBox->isChecked();
     preset.bHWMeter     = HWMeterCheckBox->isChecked();
     preset.bIgnoreHW    = IgnoreHWCheckBox->isChecked();
@@ -471,6 +473,8 @@ void qjackctlSetupForm::stabilizeForm (void)
         PresetSavePushButton->setEnabled(false);
         PresetDeletePushButton->setEnabled(false);
     }
+
+    UnlockMemCheckBox->setEnabled(!NoMemLockCheckBox->isChecked());
 
     bool bEnabled = RealtimeCheckBox->isChecked();
     PriorityTextLabel->setEnabled(bEnabled);

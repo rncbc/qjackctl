@@ -169,6 +169,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     preset.bMonitor     = m_settings.readBoolEntry("/Monitor", false);
     preset.bShorts      = m_settings.readBoolEntry("/Shorts", false);
     preset.bNoMemLock   = m_settings.readBoolEntry("/NoMemLock", false);
+    preset.bUnlockMem   = m_settings.readBoolEntry("/UnlockMem", false);
     preset.bHWMon       = m_settings.readBoolEntry("/HWMon", false);
     preset.bHWMeter     = m_settings.readBoolEntry("/HWMeter", false);
     preset.bIgnoreHW    = m_settings.readBoolEntry("/IgnoreHW", false);
@@ -213,6 +214,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
     m_settings.writeEntry("/Monitor",     preset.bMonitor);
     m_settings.writeEntry("/Shorts",      preset.bShorts);
     m_settings.writeEntry("/NoMemLock",   preset.bNoMemLock);
+    m_settings.writeEntry("/UnlockMem",   preset.bUnlockMem);
     m_settings.writeEntry("/HWMon",       preset.bHWMon);
     m_settings.writeEntry("/HWMeter",     preset.bHWMeter);
     m_settings.writeEntry("/IgnoreHW",    preset.bIgnoreHW);

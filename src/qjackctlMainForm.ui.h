@@ -519,6 +519,8 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument("-t" + QString::number(m_preset.iTimeout));
     if (m_preset.bNoMemLock)
         m_pJack->addArgument("-m");
+    else if (m_preset.bUnlockMem)
+        m_pJack->addArgument("-u");
     m_pJack->addArgument("-d" + m_preset.sDriver);
     bool bDummy     = (m_preset.sDriver == "dummy");
     bool bOss       = (m_preset.sDriver == "oss");

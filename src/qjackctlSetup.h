@@ -46,6 +46,7 @@ struct qjackctlPreset
     bool    bMonitor;
     bool    bShorts;
     bool    bNoMemLock;
+    bool    bUnlockMem;
     bool    bHWMon;
     bool    bHWMeter;
     bool    bIgnoreHW;
