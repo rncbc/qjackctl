@@ -154,6 +154,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // Try to open the system tray widget.
     m_pSystemTray = new qjackctlSystemTray(this);
+
     if (m_pSetup->bSystemTray)
         m_pSystemTray->show();
 
@@ -290,11 +291,16 @@ bool qjackctlMainForm::queryClose (void)
         m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
         m_pSetup->saveWidgetGeometry(this);
         // Close popup widgets.
-        m_pMessagesForm->close();
-        m_pStatusForm->close();        
-        m_pConnectionsForm->close();        
-        m_pPatchbayForm->close();        
-        m_pSystemTray->close();
+        if (m_pMessagesForm)
+            m_pMessagesForm->close();
+        if (m_pStatusForm)
+            m_pStatusForm->close();
+        if (m_pConnectionsForm)
+            m_pConnectionsForm->close();
+        if (m_pPatchbayForm)
+            m_pPatchbayForm->close();
+        if (m_pSystemTray)
+            m_pSystemTray->close();
     }
 
     return bQueryClose;
@@ -347,10 +353,10 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
     QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
     // Execute and set exit status message...
     sTemp = sStopMessage + formatExitStatus(::system(sTemp));
-   // Wait a litle bit (~half-second) before continue...
+   // Wait a litle bit before continue...
     QTime t;
     t.start();
-    while (t.elapsed() < 500)
+    while (t.elapsed() < QJACKCTL_TIMER_MSECS)
         QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
     // Final log message...
     appendMessages(sTemp);
@@ -383,7 +389,7 @@ void qjackctlMainForm::startJack (void)
     QString sTemp;
 
     sTemp = (m_bJackDetach ? tr("Activating") : tr("Starting"));
-    setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
+    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(false);
@@ -567,7 +573,7 @@ void qjackctlMainForm::startJack (void)
     appendMessages(tr("JACK was started") + sTemp);
 
     sTemp = tr("Started");
-    setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
+    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StopPushButton->setEnabled(true);
 
@@ -593,7 +599,7 @@ void qjackctlMainForm::stopJack (void)
     if (m_pJack && !m_bJackSurvive) {
         appendMessages(tr("JACK is stopping..."));
         QString sTemp = tr("Stopping");
-        setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
+        updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...");
         updateStatus(STATUS_SERVER_STATE, sTemp);
         if (m_pJack->isRunning())
             m_pJack->tryTerminate();
@@ -667,7 +673,7 @@ void qjackctlMainForm::processJackExit (void)
         sTemp = (m_pJackClient == NULL ? tr("Inactive") : tr("Active"));
     else
         sTemp = tr("Stopped");
-    setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
+    updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
     ServerStateTextLabel->setPaletteForegroundColor(m_pJackClient == NULL ? Qt::darkYellow : Qt::yellow);
     updateStatus(STATUS_SERVER_STATE, sTemp);
     StartPushButton->setEnabled(m_pJackClient == NULL);
@@ -1506,7 +1512,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // If we've started detached, just change active status.
     if (m_bJackDetach) {
         QString sTemp = tr("Active");
-        setCaption(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
+        updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + ".");
         updateStatus(STATUS_SERVER_STATE, sTemp);
         StopPushButton->setEnabled(true);
     }
@@ -1936,14 +1942,24 @@ void qjackctlMainForm::updateStatus( int iStatusItem, const QString& sText )
 }
 
 
+// Main window caption title and system tray tooltip update.
+void qjackctlMainForm::updateTitle ( const QString& sTitle )
+{
+    setCaption(sTitle);
+    
+    QToolTip::remove(m_pSystemTray);
+    QToolTip::add(m_pSystemTray, sTitle);
+}
+
+
 // System tray context menu request slot.
 void qjackctlMainForm::systemTrayContextMenu ( qjackctlSystemTray *, const QPoint& pos )
 {
     QPopupMenu* pContextMenu = new QPopupMenu(this);
-    
+
     int iToggle = pContextMenu->insertItem(isVisible() ? tr("&Hide") : tr("S&how"));
     pContextMenu->insertSeparator();
-    
+
     if (m_pJackClient == NULL) {
         pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("start1.png")),
             tr("&Start"), this, SLOT(startJack()));
@@ -1952,31 +1968,31 @@ void qjackctlMainForm::systemTrayContextMenu ( qjackctlSystemTray *, const QPoin
             tr("&Stop"), this, SLOT(stopJack()));
     }
     pContextMenu->insertSeparator();
-    
+
     int iItemID;
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("messages1.png")),
         tr("&Messages"), this, SLOT(toggleMessagesForm()));
     pContextMenu->setItemChecked(iItemID, m_pMessagesForm && m_pMessagesForm->isVisible());
-    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("status1.png")), 
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("status1.png")),
         tr("St&atus"), this, SLOT(toggleStatusForm()));
     pContextMenu->setItemChecked(iItemID, m_pStatusForm && m_pStatusForm->isVisible());
-    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("connections1.png")), 
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("connections1.png")),
         tr("&Connections"), this, SLOT(toggleConnectionsForm()));
     pContextMenu->setItemChecked(iItemID, m_pConnectionsForm && m_pConnectionsForm->isVisible());
-    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("patchbay1.png")), 
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("patchbay1.png")),
         tr("Patch&bay"), this, SLOT(togglePatchbayForm()));
     pContextMenu->setItemChecked(iItemID, m_pPatchbayForm && m_pPatchbayForm->isVisible());
     iItemID = pContextMenu->insertSeparator();
 
-    pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("setup1.png")), 
+    pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("setup1.png")),
         tr("S&etup..."), this, SLOT(showSetupForm()));
-    pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("about1.png")), 
-        tr("Ab&out..."), this, SLOT(showAboutForm()));
+//  pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("about1.png")),
+//      tr("Ab&out..."), this, SLOT(showAboutForm()));
     pContextMenu->insertSeparator();
-    
-    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("quit1.png")), 
+
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("quit1.png")),
         tr("&Quit"), this, SLOT(close()));
-    
+
     iItemID = pContextMenu->exec(pos);
     if (iItemID == iToggle) {
         if (isVisible())

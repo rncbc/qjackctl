@@ -134,6 +134,11 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
     ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
 
+#ifndef CONFIG_KDE
+    SystemTrayCheckBox->setChecked(false);
+    SystemTrayCheckBox->setEnabled(false);
+#endif
+
     // Load preset list...
     resetPresets();
     PresetComboBox->setCurrentText(m_pSetup->sDefPreset);

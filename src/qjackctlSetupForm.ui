@@ -3680,7 +3680,7 @@
     <function access="private" specifier="non virtual">computeLatency()</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>
     <function access="private" specifier="non virtual">symbolMenu( QLineEdit *pLineEdit, QPushButton *pPushButton )</function>
-</functions>
+z</functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>
 </UI>
