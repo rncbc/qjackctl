@@ -37,7 +37,7 @@
 
 
 // Timer constant stuff.
-#define QJACKCTL_TIMER_MSECS    500
+#define QJACKCTL_TIMER_MSECS    333
 
 // Notification pipes descriptors
 #define QJACKCTL_FDNIL     -1
