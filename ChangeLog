@@ -3,7 +3,9 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.3.0   2004-07-27  Work in progress...
+0.3.0   2004-08-22  Work in progress...
+
+- Avoid stopping JACK prematurely with QProcess::kill() (oneliner fix).
 
 - ALSA driver Duplex mode accepts alternate Input or Output device name.
 

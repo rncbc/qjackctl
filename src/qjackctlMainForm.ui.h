@@ -665,8 +665,10 @@ void qjackctlMainForm::stopJack (void)
         QString sTemp = tr("Stopping");
         updateTitle(QJACKCTL_TITLE " [" + m_pSetup->sDefPreset + "] " + sTemp + "...", QJACKCTL_STOPPING);
         updateStatus(STATUS_SERVER_STATE, sTemp);
-        if (m_pJack->isRunning())
+        if (m_pJack->isRunning()) {
             m_pJack->tryTerminate();
+            return;
+        }
      }
 
      // Do final processing anyway.
