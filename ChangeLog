@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.3.0   2004-07-12  Work in progress...
+0.3.0   2004-07-14  Work in progress...
 
 - Priority and setup control is now a spinbox ranging from 0..89 (as suggested
   by Florian Schmidt). Same for Periods/Buffer.
