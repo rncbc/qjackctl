@@ -22,10 +22,10 @@
 #include "qjackctlAlsaConnect.h"
 
 // Local pixmaps.
-#include "icons/acliento.xpm"
-#include "icons/aclienti.xpm"
-#include "icons/aporto.xpm"
-#include "icons/aporti.xpm"
+#include "icons/mcliento.xpm"
+#include "icons/mclienti.xpm"
+#include "icons/mporto.xpm"
+#include "icons/mporti.xpm"
 
 static int g_iXpmRefCount = 0;
 
@@ -123,10 +123,10 @@ qjackctlAlsaClientList::qjackctlAlsaClientList( qjackctlClientListView *pListVie
     : qjackctlClientList(pListView, bReadable)
 {
     if (g_iXpmRefCount == 0) {
-        g_pXpmClientO = new QPixmap((const char **) acliento_xpm);
-        g_pXpmClientI = new QPixmap((const char **) aclienti_xpm);
-        g_pXpmPortO   = new QPixmap((const char **) aporto_xpm);
-        g_pXpmPortI   = new QPixmap((const char **) aporti_xpm);
+        g_pXpmClientO = new QPixmap((const char **) mcliento_xpm);
+        g_pXpmClientI = new QPixmap((const char **) mclienti_xpm);
+        g_pXpmPortO   = new QPixmap((const char **) mporto_xpm);
+        g_pXpmPortI   = new QPixmap((const char **) mporti_xpm);
     }
     g_iXpmRefCount++;
 

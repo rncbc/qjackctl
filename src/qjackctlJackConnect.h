@@ -47,6 +47,9 @@ public:
     jack_client_t *jackClient();
     jack_port_t   *jackPort();
 
+    // Special port name sorting virtual comparator.
+    virtual int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
+
 private:
 
     // Instance variables.

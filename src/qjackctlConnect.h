@@ -80,9 +80,6 @@ public:
     // Connection list accessor.
     QPtrList<qjackctlPortItem>& connects();
 
-    // Special port name sorting virtual comparator.
-    virtual int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
-
     // To virtually distinguish between list view items.
     virtual int rtti() const;
 

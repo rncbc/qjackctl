@@ -24,17 +24,17 @@
 #include <stdlib.h>
 
 
-// Local pixmaps.
-#include "icons/clienti.xpm"
-#include "icons/cliento.xpm"
-#include "icons/portpti.xpm"
-#include "icons/portpto.xpm"
-#include "icons/portpni.xpm"
-#include "icons/portpno.xpm"
-#include "icons/portlti.xpm"
-#include "icons/portlto.xpm"
-#include "icons/portlni.xpm"
-#include "icons/portlno.xpm"
+// Audio connection pixmaps.
+#include "icons/aclienti.xpm"
+#include "icons/acliento.xpm"
+#include "icons/aportpti.xpm"
+#include "icons/aportpto.xpm"
+#include "icons/aportpni.xpm"
+#include "icons/aportpno.xpm"
+#include "icons/aportlti.xpm"
+#include "icons/aportlto.xpm"
+#include "icons/aportlni.xpm"
+#include "icons/aportlno.xpm"
 
 static int g_iXpmRefCount = 0;
 
@@ -94,6 +94,81 @@ jack_port_t *qjackctlJackPort::jackPort (void)
 }
 
 
+// Special port name sorting virtual comparator.
+int qjackctlJackPort::compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const
+{
+    QString sName1, sName2;
+    QString sPrefix1, sPrefix2;
+    int iSuffix1, iSuffix2;
+    int i, iNumber, iDigits;
+    int iDecade, iFactor;
+
+    sName1 = text(iColumn);
+    sName2 = pPortItem->text(iColumn);
+
+    iNumber  = 0;
+    iDigits  = 0;
+    iDecade  = 1;
+    iFactor  = 1;
+    iSuffix1 = 0;
+    for (i = sName1.length() - 1; i >= 0; i--) {
+        QCharRef ch = sName1.at(i);
+        if (ch.isDigit()) {
+            iNumber += ch.digitValue() * iDecade;
+            iDecade *= 10;
+            iDigits++;
+        } else {
+            sPrefix1.insert(0, ch.lower());
+            if (iDigits > 0) {
+                iSuffix1 += iNumber * iFactor;
+                iFactor *= 100;
+                iNumber  = 0;
+                iDigits  = 0;
+                iDecade  = 1;
+            }
+        }
+    }
+
+    iNumber  = 0;
+    iDigits  = 0;
+    iDecade  = 1;
+    iFactor  = 1;
+    iSuffix2 = 0;
+    for (i = sName2.length() - 1; i >= 0; i--) {
+        QCharRef ch = sName2.at(i);
+        if (ch.isDigit()) {
+            iNumber += ch.digitValue() * iDecade;
+            iDecade *= 10;
+            iDigits++;
+        } else {
+            sPrefix2.insert(0, ch.lower());
+            if (iDigits > 0) {
+                iSuffix2 += iNumber * iFactor;
+                iFactor *= 100;
+                iNumber  = 0;
+                iDigits  = 0;
+                iDecade  = 1;
+            }
+        }
+    }
+
+    if (sPrefix1 == sPrefix2) {
+        if (iSuffix1 < iSuffix2)
+            return (bAscending ? -1 :  1);
+        else
+        if (iSuffix1 > iSuffix2)
+            return (bAscending ?  1 : -1);
+        else
+            return 0;
+    } else {
+        if (sPrefix1 < sPrefix2)
+            return (bAscending ? -1 :  1);
+        else
+            return (bAscending ?  1 : -1);
+    }
+}
+
+
 //----------------------------------------------------------------------
 // class qjackctlJackClient -- Jack client list item.
 //
@@ -131,16 +206,16 @@ qjackctlJackClientList::qjackctlJackClientList( qjackctlClientListView *pListVie
     : qjackctlClientList(pListView, bReadable)
 {
     if (g_iXpmRefCount == 0) {
-        g_pXpmClientI = new QPixmap((const char **) clienti_xpm);
-        g_pXpmClientO = new QPixmap((const char **) cliento_xpm);
-        g_pXpmPortPTI = new QPixmap((const char **) portpti_xpm);
-        g_pXpmPortPTO = new QPixmap((const char **) portpto_xpm);
-        g_pXpmPortPNI = new QPixmap((const char **) portpni_xpm);
-        g_pXpmPortPNO = new QPixmap((const char **) portpno_xpm);
-        g_pXpmPortLTI = new QPixmap((const char **) portlti_xpm);
-        g_pXpmPortLTO = new QPixmap((const char **) portlto_xpm);
-        g_pXpmPortLNI = new QPixmap((const char **) portlni_xpm);
-        g_pXpmPortLNO = new QPixmap((const char **) portlno_xpm);
+        g_pXpmClientI = new QPixmap((const char **) aclienti_xpm);
+        g_pXpmClientO = new QPixmap((const char **) acliento_xpm);
+        g_pXpmPortPTI = new QPixmap((const char **) aportpti_xpm);
+        g_pXpmPortPTO = new QPixmap((const char **) aportpto_xpm);
+        g_pXpmPortPNI = new QPixmap((const char **) aportpni_xpm);
+        g_pXpmPortPNO = new QPixmap((const char **) aportpno_xpm);
+        g_pXpmPortLTI = new QPixmap((const char **) aportlti_xpm);
+        g_pXpmPortLTO = new QPixmap((const char **) aportlto_xpm);
+        g_pXpmPortLNI = new QPixmap((const char **) aportlni_xpm);
+        g_pXpmPortLNO = new QPixmap((const char **) aportlno_xpm);
     }
     g_iXpmRefCount++;
 
