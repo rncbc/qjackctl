@@ -42,7 +42,6 @@ void qjackctlSetupForm::init (void)
 
     // Set dialog validators...
     PresetComboBox->setValidator(new QRegExpValidator(QRegExp("[\\w-]+"), PresetComboBox));
-    ChanComboBox->setValidator(new QIntValidator(ChanComboBox));
     FramesComboBox->setValidator(new QIntValidator(FramesComboBox));
     SampleRateComboBox->setValidator(new QIntValidator(SampleRateComboBox));
     WaitComboBox->setValidator(new QIntValidator(WaitComboBox));
@@ -174,7 +173,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         PeriodsSpinBox->setValue(preset.iPeriods);
         WordLengthComboBox->setCurrentText(QString::number(preset.iWordLength));
         WaitComboBox->setCurrentText(QString::number(preset.iWait));
-        ChanComboBox->setCurrentText(QString::number(preset.iChan));
+        ChanSpinBox->setValue(preset.iChan);
         DriverComboBox->setCurrentText(preset.sDriver);
         InterfaceComboBox->setCurrentText(preset.sInterface);
         AudioComboBox->setCurrentItem(preset.iAudio);
@@ -224,7 +223,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.iPeriods     = PeriodsSpinBox->value();
     preset.iWordLength  = WordLengthComboBox->currentText().toInt();
     preset.iWait        = WaitComboBox->currentText().toInt();
-    preset.iChan        = ChanComboBox->currentText().toInt();
+    preset.iChan        = ChanSpinBox->value();
     preset.sDriver      = DriverComboBox->currentText();
     preset.sInterface   = InterfaceComboBox->currentText();
     preset.iAudio       = AudioComboBox->currentItem();
@@ -380,10 +379,10 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
         bAlsaDuplex = bAlsa;
         break;
       case QJACKCTL_CAPTURE:
-        bInEnabled  = (bOss || bAlsa);
+        bInEnabled  = bOss;
         break;
       case QJACKCTL_PLAYBACK:
-        bOutEnabled = (bOss || bAlsa);
+        bOutEnabled = bOss;
         break;
     }
 
@@ -432,7 +431,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     WaitComboBox->setEnabled(bDummy);
 
     ChanTextLabel->setEnabled(bPortaudio);
-    ChanComboBox->setEnabled(bPortaudio);
+    ChanSpinBox->setEnabled(bPortaudio);
 
     InterfaceTextLabel->setEnabled(bAlsa);
     InterfaceComboBox->setEnabled(bAlsa);

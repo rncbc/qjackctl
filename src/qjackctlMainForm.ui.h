@@ -561,7 +561,6 @@ void qjackctlMainForm::startJack (void)
         else if (m_preset.iOutChannels > 0)
             m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
     } else {
-        sTemp = QString::null;
         switch (m_preset.iAudio) {
           case QJACKCTL_DUPLEX:
             if (bAlsa) {
@@ -575,12 +574,10 @@ void qjackctlMainForm::startJack (void)
           //else m_pJack->addArgument("-D");
             break;
           case QJACKCTL_CAPTURE:
-            if (bAlsa) sTemp = m_preset.sInDevice;
-            m_pJack->addArgument("-C" + sTemp);
+            m_pJack->addArgument("-C");
             break;
           case QJACKCTL_PLAYBACK:
-            if (bAlsa) sTemp = m_preset.sOutDevice;
-            m_pJack->addArgument("-P" + sTemp);
+            m_pJack->addArgument("-P");
             break;
         }
         if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
