@@ -156,7 +156,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     preset.bNoMemLock   = m_settings.readBoolEntry("/NoMemLock", false);
     preset.bHWMon       = m_settings.readBoolEntry("/HWMon", false);
     preset.bHWMeter     = m_settings.readBoolEntry("/HWMeter", false);
-    preset.bIgnoreHW    = m_settings.readNumEntry("/IgnoreHW", false);
+    preset.bIgnoreHW    = m_settings.readBoolEntry("/IgnoreHW", false);
     preset.iPriority    = m_settings.readNumEntry("/Priority", 0);
     preset.iFrames      = m_settings.readNumEntry("/Frames", 1024);
     preset.iSampleRate  = m_settings.readNumEntry("/SampleRate", 48000);

@@ -1774,8 +1774,8 @@ void qjackctlMainForm::refreshStatus (void)
 
     if (m_pJackClient) {
         const QString s = " ";
-        updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + "%");
-        updateStatus(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + tr("Hz"));
+        updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
+        updateStatus(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
         updateStatus(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
 #ifdef CONFIG_JACK_REALTIME
         bool bRealtime = jack_is_realtime(m_pJackClient);
