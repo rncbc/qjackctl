@@ -898,10 +898,13 @@ void qjackctlMainForm::portNotifySlot ( int fd )
     // Read from our pipe.
     ::read(fd, &c, sizeof(c));
 
+    // Log some message here, if new.
+    if (m_iJackRefresh == 0)
+        appendMessagesColor(tr("Audio connection graph change."), "#cc9966");
     // Do what has to be done.
     refreshJackConnections();
-    // Log some message here.
-    appendMessagesColor(tr("Audio connection graph change."), "#cc9966");
+    // We'll be dirty too...
+    m_iJackDirty++;
 
     m_iPortNotify--;
 }
@@ -986,10 +989,13 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
     snd_seq_event_input(m_pAlsaSeq, &pAlsaEvent);
     snd_seq_free_event(pAlsaEvent);
 
+    // Log some message here, if new.
+    if (m_iAlsaRefresh == 0)
+        appendMessagesColor(tr("MIDI connection graph change."), "#66cc99");
     // Do what has to be done.
     refreshAlsaConnections();
-    // Log some message here.
-    appendMessagesColor(tr("MIDI connection graph change."), "#66cc99");
+    // We'll be dirty too...
+    m_iAlsaDirty++;
 
     m_iAlsaNotify--;
 }

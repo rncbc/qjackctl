@@ -1146,7 +1146,7 @@ bool qjackctlConnect::disconnectAll (void)
 
     if (bResult)
         emit connectChanged();
-        
+
     return bResult;
 }
 
@@ -1163,7 +1163,7 @@ bool qjackctlConnect::disconnectAllEx (void)
         }
         pOClient = m_pOClientList->clients().next();
     }
-    
+
     return true;
 }
 
@@ -1172,7 +1172,7 @@ bool qjackctlConnect::disconnectAllEx (void)
 void qjackctlConnect::refresh (void)
 {
     int iDirtyCount = 0;
-    
+
     if (startExclusive()) {
         iDirtyCount += m_pOClientList->updateClientPorts();
         iDirtyCount += m_pIClientList->updateClientPorts();
@@ -1181,7 +1181,7 @@ void qjackctlConnect::refresh (void)
     }
 
     (m_pConnectView->ConnectorView())->update();
-    
+
     if (iDirtyCount > 0)
         emit connectChanged();
 }

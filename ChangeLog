@@ -3,7 +3,9 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.1   2003-12-15  The fix of fixes.
+0.2.1   2003-12-16  The fix of fixes.
+
+- Some connection graph changes were being silently missed, now fixed.
 
 - Messages window fallback fix.
 
