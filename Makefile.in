@@ -1,0 +1,28 @@
+prefix = @ac_prefix@
+qmake  = @ac_qmake@
+
+name   = qjackctl
+source = qjackctlMainForm.ui.h qjackctlMainForm.ui main.cpp
+
+all:	$(name)
+
+$(name).mak:	$(name).pro
+	@$(qmake) -o $(name).mak $(name).pro
+
+$(name):	$(name).mak $(source)
+	@make -f $(name).mak $(name)
+
+install:	$(name) $(name).xpm
+	@install -vD $(name) $(prefix)/bin/$(name)
+	@install -vD $(name).xpm $(prefix)/share/icons/$(name).xpm
+
+uninstall:	$(prefix)/bin/$(name)
+	@rm -vf $(prefix)/bin/$(name)
+	@rm -vf $(prefix)/share/icons/$(name).xpm
+
+clean:	$(name).mak
+	@make -f $(name).mak clean
+	@rm -f $(name) $(name).mak
+	@rm -rf .ui .moc .obj *.cache *.log
+	@rm -f config.*
+

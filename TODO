@@ -1,0 +1,10 @@
+JACK Audio Connection Kit - Qt GUI Interface
+--------------------------------------------
+
+TODOs
+
+0.0.1
+
+- Display of current jackd version string.
+- XRUN ticker visual charting.
+- Any other feature one can think of ;)

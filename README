@@ -1,0 +1,62 @@
+JACK Audio Connection Kit - Qt GUI Interface
+--------------------------------------------
+
+Qjackctl is a simple Qt application to control the JACK sound server daemon
+(http://jackit.sourceforge.net), for the Linux Audio Desktop infrastructure.
+
+Written in C++ around the Qt3 toolkit for X11, most exclusively using Qt Designer.
+
+Provides a simple GUI dialog for setting several JACK daemon parameters,
+which are properly saved between sessions, and a way control of the status
+of the audio server daemon.
+
+Homepage: http://qjackctl.sourceforge.net
+
+License: GNU General Public License (GPL)
+
+
+Installation Notes
+------------------
+
+The installation procedure follows the standard for source distributions:
+
+    ./configure [--prefix=/usr/local]
+    make
+
+and optionally as root:
+
+    make install
+
+This procedure will end installing the following couple of files:
+
+    ${prefix}/bin/qjackctl
+    ${prefix}/share/icons/qjackctl.xpm
+
+Just launch ${prefix}/bin/qjackctl and you're off (hopefully).
+
+
+Bugs
+----
+
+Plenty. To date, qjackctl has been tested with JACK release 0.72.4, on SuSE 8.1,
+Mandrake 9.1 and RedHat 9, with a custom 2.4.21 kernel with low-latency,
+preemptible and capabilities enabling patches.
+
+It has been found that each case may have some issues regarding JACK running in
+realtime mode. Please be sure to run a capable kernel and play with either
+jackstart or jackd server paths, which shall be root suid anyway, for a better
+realtime experience.
+
+
+Acknowledgments
+---------------
+
+Qjackctl's user interface layout (and the whole idea for that matter)
+was partially borrowed from Lawrie Abbott's jacko project
+(http://members.iinet.net.au/~lawrieabbott/pub/jacko),
+which was taken from wxWindow/Python into the Qt/C++ arena.
+
+Nevertheless, it still lacks some features found in that original work.
+
+Enjoy.
+
