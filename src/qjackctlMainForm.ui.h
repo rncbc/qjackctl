@@ -21,6 +21,7 @@
 *****************************************************************************/
 
 #include <qapplication.h>
+#include <qobjectlist.h>
 #include <qeventloop.h>
 #include <qmessagebox.h>
 #include <qregexp.h>
@@ -180,6 +181,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     updateMessagesFont();
     updateMessagesLimit();
     updateBezierLines();
+    updateDisplayEffect();
     updateTimeDisplayFonts();
     updateTimeDisplayToolTips();
     updateTimeFormat();
@@ -864,6 +866,29 @@ void qjackctlMainForm::updateBezierLines (void)
     if (m_pPatchbayForm) {
         m_pPatchbayForm->PatchbayView->setBezierLines(m_pSetup->bBezierLines);
         m_pPatchbayForm->PatchbayView->PatchworkView()->update();
+    }
+}
+
+
+// Update main display background effect.
+void qjackctlMainForm::updateDisplayEffect (void)
+{
+    if (m_pSetup == NULL)
+        return;
+
+    QPixmap pm;
+    if (m_pSetup->bDisplayEffect)
+        pm = QPixmap::fromMimeSource("displaybg1.png");
+        
+    // Set the main origin...
+    StatusDisplayFrame->setPaletteBackgroundPixmap(pm);
+    
+    // Iterate for every child text label...
+    QObjectList *pList = StatusDisplayFrame->queryList("QLabel");
+    if (pList) {
+        for (QLabel *pLabel = (QLabel *) pList->first(); pLabel; pLabel = (QLabel *) pList->next())
+            pLabel->setPaletteBackgroundPixmap(pm);
+        delete pList;
     }
 }
 
@@ -1719,6 +1744,7 @@ void qjackctlMainForm::showSetupForm (void)
         QString sOldDisplayFont2       = m_pSetup->sDisplayFont2;
         int     iOldTimeDisplay        = m_pSetup->iTimeDisplay;
         int     iOldTimeFormat         = m_pSetup->iTimeFormat;
+        bool    bDisplayEffect         = m_pSetup->bDisplayEffect;
         bool    bOldActivePatchbay     = m_pSetup->bActivePatchbay;
         QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
         bool    bStdoutCapture         = m_pSetup->bStdoutCapture;
@@ -1735,6 +1761,9 @@ void qjackctlMainForm::showSetupForm (void)
             if (( bBezierLines && !m_pSetup->bBezierLines) ||
                 (!bBezierLines &&  m_pSetup->bBezierLines))
                 updateBezierLines();
+            if (( bDisplayEffect && !m_pSetup->bDisplayEffect) ||
+                (!bDisplayEffect &&  m_pSetup->bDisplayEffect))
+                updateDisplayEffect();
             if (sOldMessagesFont != m_pSetup->sMessagesFont)
                 updateMessagesFont();
             if (( bMessagesLimit && !m_pSetup->bMessagesLimit) ||

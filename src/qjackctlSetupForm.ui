@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>647</width>
-            <height>531</height>
+            <width>534</width>
+            <height>453</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -1023,6 +1023,12 @@
                                             <font>
                                                 <bold>0</bold>
                                             </font>
+                                        </property>
+                                        <property name="frameShape">
+                                            <enum>NoFrame</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                            <enum>Plain</enum>
                                         </property>
                                         <property name="text">
                                             <string>&amp;Timeout (msec):</string>
@@ -2611,9 +2617,108 @@
                                     </widget>
                                 </vbox>
                             </widget>
-                            <widget class="QLayoutWidget" row="0" column="2">
+                            <widget class="QLayoutWidget" row="1" column="0">
                                 <property name="name">
-                                    <cstring>layout11</cstring>
+                                    <cstring>layout10</cstring>
+                                </property>
+                                <hbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QLabel">
+                                        <property name="name">
+                                            <cstring>TimeFormatTextLabel</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Time F&amp;ormat:</string>
+                                        </property>
+                                        <property name="alignment">
+                                            <set>AlignVCenter</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>TimeFormatComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox">
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss.d</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss.dd</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>hh:mm:ss.ddd</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>TimeFormatComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>The general time format on display</string>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
+                            <spacer row="0" column="1">
+                                <property name="name">
+                                    <cstring>spacer31</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Minimum</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>16</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="1" column="1">
+                                <property name="name">
+                                    <cstring>spacer32</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Minimum</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>16</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QLayoutWidget" row="0" column="2" rowspan="2" colspan="1">
+                                <property name="name">
+                                    <cstring>layout13</cstring>
                                 </property>
                                 <grid>
                                     <property name="name">
@@ -2731,9 +2836,44 @@
                                             <string>Sample big time display font</string>
                                         </property>
                                     </widget>
+                                    <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                                        <property name="name">
+                                            <cstring>DisplayFont1Label</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Big Time display:</string>
+                                        </property>
+                                    </widget>
                                     <widget class="QPushButton" row="3" column="1">
                                         <property name="name">
                                             <cstring>DisplayFont2PushButton</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Font...</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+F</string>
+                                        </property>
+                                        <property name="autoDefault">
+                                            <bool>false</bool>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Select font for the messages text display</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QPushButton" row="1" column="1">
+                                        <property name="name">
+                                            <cstring>DisplayFont1PushButton</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -2766,9 +2906,9 @@
                                             <string>Normal display:</string>
                                         </property>
                                     </widget>
-                                    <widget class="QPushButton" row="1" column="1">
+                                    <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="2">
                                         <property name="name">
-                                            <cstring>DisplayFont1PushButton</cstring>
+                                            <cstring>DisplayEffectCheckBox</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -2776,132 +2916,17 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Font...</string>
+                                            <string>&amp;Display shiny glass light effect</string>
                                         </property>
                                         <property name="accel">
-                                            <string>Alt+F</string>
-                                        </property>
-                                        <property name="autoDefault">
-                                            <bool>false</bool>
+                                            <string>Alt+D</string>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Select font for the messages text display</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
-                                        <property name="name">
-                                            <cstring>DisplayFont1Label</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Big Time display:</string>
+                                            <string>Whether to enable a shiny glass light effect on the main display</string>
                                         </property>
                                     </widget>
                                 </grid>
                             </widget>
-                            <widget class="QLayoutWidget" row="1" column="0">
-                                <property name="name">
-                                    <cstring>layout10</cstring>
-                                </property>
-                                <hbox>
-                                    <property name="name">
-                                        <cstring>unnamed</cstring>
-                                    </property>
-                                    <widget class="QLabel">
-                                        <property name="name">
-                                            <cstring>TimeFormatTextLabel</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Time F&amp;ormat:</string>
-                                        </property>
-                                        <property name="alignment">
-                                            <set>AlignVCenter</set>
-                                        </property>
-                                        <property name="buddy" stdset="0">
-                                            <cstring>TimeFormatComboBox</cstring>
-                                        </property>
-                                    </widget>
-                                    <widget class="QComboBox">
-                                        <item>
-                                            <property name="text">
-                                                <string>hh:mm:ss</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>hh:mm:ss.d</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>hh:mm:ss.dd</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
-                                                <string>hh:mm:ss.ddd</string>
-                                            </property>
-                                        </item>
-                                        <property name="name">
-                                            <cstring>TimeFormatComboBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="editable">
-                                            <bool>false</bool>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>The general time format on display</string>
-                                        </property>
-                                    </widget>
-                                </hbox>
-                            </widget>
-                            <spacer row="1" column="1" rowspan="1" colspan="2">
-                                <property name="name">
-                                    <cstring>spacer32</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>120</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <spacer row="0" column="1">
-                                <property name="name">
-                                    <cstring>spacer31</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Minimum</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>16</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
                         </grid>
                     </widget>
                     <widget class="QGroupBox">
@@ -3718,6 +3743,12 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
+        <sender>DisplayEffectCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
         <sender>MessagesLimitCheckBox</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -3837,6 +3868,7 @@
     <tabstop>TimeFormatComboBox</tabstop>
     <tabstop>DisplayFont1PushButton</tabstop>
     <tabstop>DisplayFont2PushButton</tabstop>
+    <tabstop>DisplayEffectCheckBox</tabstop>
     <tabstop>MessagesFontPushButton</tabstop>
     <tabstop>MessagesLimitCheckBox</tabstop>
     <tabstop>MessagesLimitLinesComboBox</tabstop>

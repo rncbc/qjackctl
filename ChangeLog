@@ -3,6 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.11   2004-09-06  Shiny display feature now optional.
+
+- After some conservative user complaints this pure cosmetic feature is
+  now made optional ;)
+
+
 0.2.10   2004-09-04  Shiny display and curved connections.
 
 - New pre-shutdown script setup option, allowing to specify a shell-script

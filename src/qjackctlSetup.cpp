@@ -68,6 +68,7 @@ qjackctlSetup::qjackctlSetup (void)
     iMessagesLimitLines      = m_settings.readNumEntry("/MessagesLimitLines", 1000);
     sDisplayFont1            = m_settings.readEntry("/DisplayFont1", QString::null);
     sDisplayFont2            = m_settings.readEntry("/DisplayFont2", QString::null);
+    bDisplayEffect           = m_settings.readBoolEntry("/DisplayEffect", true);
     bQueryClose              = m_settings.readBoolEntry("/QueryClose", true);
     bKeepOnTop               = m_settings.readBoolEntry("/KeepOnTop", true);
     bSystemTray              = m_settings.readBoolEntry("/SystemTray", false);

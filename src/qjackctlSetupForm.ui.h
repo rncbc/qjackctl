@@ -123,6 +123,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     DisplayFont2TextLabel->setFont(font);
     DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
+    DisplayEffectCheckBox->setChecked(m_pSetup->bDisplayEffect);
+
     // Messages limit option.
     MessagesLimitCheckBox->setChecked(m_pSetup->bMessagesLimit);
     MessagesLimitLinesComboBox->setCurrentText(QString::number(m_pSetup->iMessagesLimitLines));
@@ -742,6 +744,7 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->iMessagesLimitLines      = MessagesLimitLinesComboBox->currentText().toInt();
         m_pSetup->sDisplayFont1            = DisplayFont1TextLabel->font().toString();
         m_pSetup->sDisplayFont2            = DisplayFont2TextLabel->font().toString();
+        m_pSetup->bDisplayEffect           = DisplayEffectCheckBox->isChecked();
         m_pSetup->bStartJack               = StartJackCheckBox->isChecked();
         m_pSetup->bQueryClose              = QueryCloseCheckBox->isChecked();
         m_pSetup->bKeepOnTop               = KeepOnTopCheckBox->isChecked();

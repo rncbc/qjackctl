@@ -118,6 +118,7 @@ public:
     int     iMessagesLimitLines;
     QString sDisplayFont1;
     QString sDisplayFont2;
+    bool    bDisplayEffect;
     bool    bQueryClose;
     bool    bKeepOnTop;
     bool    bSystemTray;
