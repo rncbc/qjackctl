@@ -735,8 +735,8 @@ bool qjackctlSocketList::moveDownSocketItem (void)
 // qjackctlSocketListView -- Socket list view, supporting drag-n-drop.
 
 // Constructor.
-qjackctlSocketListView::qjackctlSocketListView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView, bool bReadable )
-    : QListView(pParent)
+qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbayView, bool bReadable )
+    : QListView(pPatchbayView)
 {
     m_pPatchbayView = pPatchbayView;
     m_bReadable     = bReadable;
@@ -929,8 +929,8 @@ void qjackctlSocketListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 //
 
 // Constructor.
-qjackctlPatchworkView::qjackctlPatchworkView ( QWidget *pParent, qjackctlPatchbayView *pPatchbayView )
-    : QWidget(pParent)
+qjackctlPatchworkView::qjackctlPatchworkView ( qjackctlPatchbayView *pPatchbayView )
+    : QWidget(pPatchbayView)
 {
     m_pPatchbayView = pPatchbayView;
 
@@ -1050,17 +1050,11 @@ void qjackctlPatchworkView::contentsMoved ( int, int )
 
 // Constructor.
 qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszName )
-    : QWidget(pParent, pszName)
+    : QHBox(pParent, pszName)
 {
-    m_pGridLayout    = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
-
-    m_pOListView     = new qjackctlSocketListView(pParent, this, true);
-    m_pPatchworkView = new qjackctlPatchworkView(pParent, this);
-    m_pIListView     = new qjackctlSocketListView(pParent, this, false);
-
-    m_pGridLayout->addWidget(m_pOListView,     0, 0);
-    m_pGridLayout->addWidget(m_pPatchworkView, 0, 1);
-    m_pGridLayout->addWidget(m_pIListView,     0, 2);
+    m_pOListView     = new qjackctlSocketListView(this, true);
+    m_pPatchworkView = new qjackctlPatchworkView(this);
+    m_pIListView     = new qjackctlSocketListView(this, false);
 
     m_pPatchbay = 0;
 

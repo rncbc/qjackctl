@@ -454,8 +454,8 @@ void qjackctlClientList::hiliteClientPorts (void)
 // qjackctlClientListView -- Client list view, supporting drag-n-drop.
 
 // Constructor.
-qjackctlClientListView::qjackctlClientListView ( QWidget *pParent, qjackctlConnectView *pConnectView, bool bReadable )
-    : QListView(pParent)
+qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectView, bool bReadable )
+    : QListView(pConnectView)
 {
     m_pConnectView = pConnectView;
     
@@ -626,8 +626,8 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 //
 
 // Constructor.
-qjackctlConnectorView::qjackctlConnectorView ( QWidget *pParent, qjackctlConnectView *pConnectView )
-    : QWidget(pParent)
+qjackctlConnectorView::qjackctlConnectorView ( qjackctlConnectView *pConnectView )
+    : QWidget(pConnectView)
 {
     m_pConnectView = pConnectView;
 
@@ -762,17 +762,11 @@ void qjackctlConnectorView::contentsMoved ( int, int )
 
 // Constructor.
 qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName )
-    : QWidget(pParent, pszName)
+    : QHBox(pParent, pszName)
 {
-    m_pGridLayout    = new QGridLayout(pParent->layout(), 1, 1, 0, 0);
-
-    m_pOListView     = new qjackctlClientListView(pParent, this, true);
-    m_pConnectorView = new qjackctlConnectorView(pParent, this);
-    m_pIListView     = new qjackctlClientListView(pParent, this, false);
-
-    m_pGridLayout->addWidget(m_pOListView,     0, 0);
-    m_pGridLayout->addWidget(m_pConnectorView, 0, 1);
-    m_pGridLayout->addWidget(m_pIListView,     0, 2);
+    m_pOListView     = new qjackctlClientListView(this, true);
+    m_pConnectorView = new qjackctlConnectorView(this);
+    m_pIListView     = new qjackctlClientListView(this, false);
 
     m_pConnect = 0;
 

@@ -25,7 +25,7 @@
 #include <qdragobject.h>
 #include <qlistview.h>
 #include <qheader.h>
-#include <qlayout.h>
+#include <qhbox.h>
 #include <qptrlist.h>
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -227,7 +227,7 @@ class qjackctlClientListView : public QListView
 public:
 
     // Constructor.
-    qjackctlClientListView(QWidget *pParent, qjackctlConnectView *pConnectionsView, bool bReadable);
+    qjackctlClientListView(qjackctlConnectView *pConnectionsView, bool bReadable);
     // Default destructor.
     ~qjackctlClientListView();
 
@@ -277,7 +277,7 @@ class qjackctlConnectorView : public QWidget
 public:
 
     // Constructor.
-    qjackctlConnectorView(QWidget *pParent, qjackctlConnectView *pConnectView);
+    qjackctlConnectorView(qjackctlConnectView *pConnectView);
     // Default destructor.
     ~qjackctlConnectorView();
 
@@ -309,7 +309,7 @@ private:
 //----------------------------------------------------------------------------
 // qjackctlConnectView -- Connections view integrated widget.
 
-class qjackctlConnectView : public QWidget
+class qjackctlConnectView : public QHBox
 {
     Q_OBJECT
 
@@ -321,7 +321,6 @@ public:
     ~qjackctlConnectView();
 
     // Widget accesors.
-    QGridLayout            *GridLayout()    { return m_pGridLayout; }
     qjackctlClientListView *OListView()     { return m_pOListView; }
     qjackctlClientListView *IListView()     { return m_pIListView; }
     qjackctlConnectorView  *ConnectorView() { return m_pConnectorView; }
@@ -342,7 +341,6 @@ public slots:
 private:
 
     // Child controls.
-    QGridLayout            *m_pGridLayout;
     qjackctlClientListView *m_pOListView;
     qjackctlClientListView *m_pIListView;
     qjackctlConnectorView  *m_pConnectorView;

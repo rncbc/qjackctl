@@ -25,7 +25,7 @@
 #include <qdragobject.h>
 #include <qlistview.h>
 #include <qheader.h>
-#include <qlayout.h>
+#include <qhbox.h>
 #include <qptrlist.h>
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -247,7 +247,7 @@ class qjackctlSocketListView : public QListView
 public:
 
     // Constructor.
-    qjackctlSocketListView(QWidget *pParent, qjackctlPatchbayView *pPatchbayView, bool bReadable);
+    qjackctlSocketListView(qjackctlPatchbayView *pPatchbayView, bool bReadable);
     // Default destructor.
     ~qjackctlSocketListView();
 
@@ -302,7 +302,7 @@ class qjackctlPatchworkView : public QWidget
 public:
 
     // Constructor.
-    qjackctlPatchworkView(QWidget *pParent, qjackctlPatchbayView *pPatchbayView);
+    qjackctlPatchworkView(qjackctlPatchbayView *pPatchbayView);
     // Default destructor.
     ~qjackctlPatchworkView();
 
@@ -334,7 +334,7 @@ private:
 //----------------------------------------------------------------------------
 // qjackctlPatchbayView -- Patchbay integrated widget.
 
-class qjackctlPatchbayView : public QWidget
+class qjackctlPatchbayView : public QHBox
 {
     Q_OBJECT
 
@@ -346,7 +346,6 @@ public:
     ~qjackctlPatchbayView();
 
     // Widget accesors.
-    QGridLayout            *GridLayout()    { return m_pGridLayout; }
     qjackctlSocketListView *OListView()     { return m_pOListView; }
     qjackctlSocketListView *IListView()     { return m_pIListView; }
     qjackctlPatchworkView  *PatchworkView() { return m_pPatchworkView; }
@@ -371,7 +370,6 @@ public slots:
 private:
 
     // Child controls.
-    QGridLayout            *m_pGridLayout;
     qjackctlSocketListView *m_pOListView;
     qjackctlSocketListView *m_pIListView;
     qjackctlPatchworkView  *m_pPatchworkView;
