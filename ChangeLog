@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.1.0   2003-10-14  Major user interface redesign.
+0.1.0   2003-10-15  Major user interface redesign.
 
 - Main application window complete redesign, now more like a multimedia/LCD
   control panel -- old main window dialog tabs are now splitted in separate

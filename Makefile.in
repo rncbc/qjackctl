@@ -42,7 +42,7 @@ $(name).mak:	$(name).pro
 $(name):	$(name).mak $(sources) $(headers)
 	@make -f $(name).mak $(name)
 
-install:	$(name) $(name).xpm
+install:	$(name) icons/$(name).xpm
 	@install -vD $(name) $(prefix)/bin/$(name)
 	@install -vD icons/$(name).xpm $(prefix)/share/icons/$(name).xpm
 
