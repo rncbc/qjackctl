@@ -52,7 +52,7 @@ LIBS="-L$QTDIR/lib -L/usr/X11R6/lib"
 AC_CACHE_CHECK([for Qt library version >= 3.0.1],
   ac_qtlib_version, [
   AC_TRY_LINK([#include "qglobal.h"], [
-#if QT_VERSION < 301
+#if QT_VERSION < 0x030001
 #error Qt library 3.0.1 or greater required.
 #endif
     ],

@@ -26,10 +26,11 @@
 *****************************************************************************/
 #define QJACKCTL_TITLE		"JACK Audio Connection Kit"
 #define QJACKCTL_SUBTITLE	"Qt GUI Interface"
-#define QJACKCTL_VERSION	"0.0.5.6"
+#define QJACKCTL_VERSION	"0.0.6"
 #define QJACKCTL_WEBSITE	"http://qjackctl.sourceforge.net"
 
 #include <qapplication.h>
+#include <qeventloop.h>
 #include <qmessagebox.h>
 #include <qvalidator.h>
 
@@ -101,6 +102,11 @@ void qjackctlMainForm::init (void)
     sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
     sText += "<br />\n";
     sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
+    sText += "<br />\n";
+    sText += "<small>";
+    sText += tr("This program is free software; you can redistribute it and/or modify it") + "<br />\n";
+    sText += tr("under the terms of the GNU General Public License version 2 or later.");
+    sText += "</small>";
     sText += "</p>\n";
     AboutTextView->setText(sText);
 
@@ -277,7 +283,7 @@ void qjackctlMainForm::startJack (void)
     // Do we force aRts sound server?...
     if (ForceArtsCheckBox->isChecked()) {
         appendMessages(tr("ARTS is being forced..."));
-        sTemp  = "[" + ForceArtsShellComboBox->currentText();
+        sTemp = "[" + ForceArtsShellComboBox->currentText();
         appendMessages(sTemp.stripWhiteSpace() + "]");
         iExitStatus = system(ForceArtsShellComboBox->currentText());
         sTemp  = " " + tr("exit status");
@@ -286,13 +292,15 @@ void qjackctlMainForm::startJack (void)
         sTemp += ".";
         appendMessages(tr("ARTS has been forced with") + sTemp);
         // Wait a litle bit...
+        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
         system("sleep 1");
+        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
     }
 
     // Do we force stray JACK daemon threads?...
     if (ForceJackCheckBox->isChecked()) {
         appendMessages(tr("JACK is being forced..."));
-        sTemp  = "[" + ForceJackShellComboBox->currentText();
+        sTemp = "[" + ForceJackShellComboBox->currentText();
         appendMessages(sTemp.stripWhiteSpace() + "]");
         iExitStatus = system(ForceJackShellComboBox->currentText());
         sTemp  = " " + tr("exit status");
@@ -301,7 +309,9 @@ void qjackctlMainForm::startJack (void)
         sTemp += ".";
         appendMessages(tr("JACK has been forced with") + sTemp);
         // Wait yet another bit...
+        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
         system("sleep 1");
+        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
     }
 
     // OK. Let's build the startup process...
@@ -415,9 +425,8 @@ void qjackctlMainForm::startJack (void)
     // Go jack, go...
     if (!m_pJack->start()) {
         QMessageBox::critical(this, tr("Fatal error"),
-            tr("Could not start JACK.") + "\n\n" +
-            tr("Sorry."),
-            QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton);
+            tr("Could not start JACK.") + "\n\n" + tr("Sorry."),
+            tr("Cancel"));
         processJackExit();
         return;
     }
@@ -537,7 +546,7 @@ QString& qjackctlMainForm::detectXrun( QString & s )
 // Messages widget output method.
 void qjackctlMainForm::appendMessages( const QString& s )
 {
-    appendMessagesText("<font color=\"gray\">" + s + "</font>");
+    appendMessagesText("<font color=\"gray\">" + QTime::currentTime().toString() + " " + s + "</font>");
 }
 
 void qjackctlMainForm::appendMessagesText( const QString& s )
@@ -680,7 +689,7 @@ void qjackctlMainForm::resetXrunStats (void)
 
     refreshXrunStats();
 
-    appendMessages(tr("Statistics reset") + " (" + m_tResetLast.toString() + ")");
+    appendMessages(tr("Statistics reset") + ".");
 }
 
 

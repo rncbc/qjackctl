@@ -3,7 +3,7 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.0.6   2003-09-11  Drag-n-drop and more feature enhancements and bufixes.
+0.0.6   2003-09-12  Drag-n-drop and more feature enhancements and bufixes.
 
 - Patchbay connection user interface handling has been fairly rewritten;
   (features new bugs while fixing old ones ;-)
@@ -23,6 +23,8 @@ ChangeLog
   suggestion from Lawrie).
 
 - Connection drag-and-drop is now featured after many, many requests.
+
+- Corrected the configure script to properly recognize Qt 3.0.1 or greater.
 
 
 0.0.5   2003-09-05  Minor feature enhancements and bugfixes.
