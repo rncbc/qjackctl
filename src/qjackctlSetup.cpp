@@ -128,6 +128,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/MessagesLimitLines",      iMessagesLimitLines);
     m_settings.writeEntry("/DisplayFont1",            sDisplayFont1);
     m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);
+    m_settings.writeEntry("/DisplayEffect",           bDisplayEffect);
     m_settings.writeEntry("/QueryClose",              bQueryClose);
     m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
     m_settings.writeEntry("/SystemTray",              bSystemTray);

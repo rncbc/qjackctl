@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>534</width>
-            <height>453</height>
+            <width>520</width>
+            <height>471</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -2521,9 +2521,9 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QButtonGroup">
+                    <widget class="QGroupBox">
                         <property name="name">
-                            <cstring>TimeDisplayButtonGroup</cstring>
+                            <cstring>DisplayGroupBox</cstring>
                         </property>
                         <property name="font">
                             <font>
@@ -2543,80 +2543,6 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLayoutWidget" row="0" column="0">
-                                <property name="name">
-                                    <cstring>layout8</cstring>
-                                </property>
-                                <vbox>
-                                    <property name="name">
-                                        <cstring>unnamed</cstring>
-                                    </property>
-                                    <widget class="QRadioButton">
-                                        <property name="name">
-                                            <cstring>TransportTimeRadioButton</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Transport &amp;Time Code</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+T</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QRadioButton">
-                                        <property name="name">
-                                            <cstring>TransportBBTRadioButton</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Transport &amp;BBT (bar:beat.ticks)</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+B</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QRadioButton">
-                                        <property name="name">
-                                            <cstring>ElapsedResetRadioButton</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Elapsed time since last &amp;Reset</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+R</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QRadioButton">
-                                        <property name="name">
-                                            <cstring>ElapsedXrunRadioButton</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Elapsed time since last &amp;XRUN</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+X</string>
-                                        </property>
-                                    </widget>
-                                </vbox>
-                            </widget>
                             <widget class="QLayoutWidget" row="1" column="0">
                                 <property name="name">
                                     <cstring>layout10</cstring>
@@ -2638,7 +2564,7 @@
                                             <string>Time F&amp;ormat:</string>
                                         </property>
                                         <property name="alignment">
-                                            <set>AlignVCenter</set>
+                                            <set>AlignVCenter|AlignRight</set>
                                         </property>
                                         <property name="buddy" stdset="0">
                                             <cstring>TimeFormatComboBox</cstring>
@@ -2681,6 +2607,114 @@
                                         </property>
                                     </widget>
                                 </hbox>
+                            </widget>
+                            <widget class="QButtonGroup" row="0" column="0">
+                                <property name="name">
+                                    <cstring>TimeDisplayButtonGroup</cstring>
+                                </property>
+                                <property name="font">
+                                    <font>
+                                        <bold>0</bold>
+                                    </font>
+                                </property>
+                                <property name="frameShape">
+                                    <enum>NoFrame</enum>
+                                </property>
+                                <property name="title">
+                                    <string></string>
+                                </property>
+                                <widget class="QRadioButton">
+                                    <property name="name">
+                                        <cstring>TransportBBTRadioButton</cstring>
+                                    </property>
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>10</x>
+                                            <y>28</y>
+                                            <width>164</width>
+                                            <height>19</height>
+                                        </rect>
+                                    </property>
+                                    <property name="font">
+                                        <font>
+                                        </font>
+                                    </property>
+                                    <property name="text">
+                                        <string>Transport &amp;BBT (bar:beat.ticks)</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+B</string>
+                                    </property>
+                                </widget>
+                                <widget class="QRadioButton">
+                                    <property name="name">
+                                        <cstring>ElapsedXrunRadioButton</cstring>
+                                    </property>
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>10</x>
+                                            <y>76</y>
+                                            <width>164</width>
+                                            <height>19</height>
+                                        </rect>
+                                    </property>
+                                    <property name="font">
+                                        <font>
+                                        </font>
+                                    </property>
+                                    <property name="text">
+                                        <string>Elapsed time since last &amp;XRUN</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+X</string>
+                                    </property>
+                                </widget>
+                                <widget class="QRadioButton">
+                                    <property name="name">
+                                        <cstring>ElapsedResetRadioButton</cstring>
+                                    </property>
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>10</x>
+                                            <y>52</y>
+                                            <width>164</width>
+                                            <height>19</height>
+                                        </rect>
+                                    </property>
+                                    <property name="font">
+                                        <font>
+                                        </font>
+                                    </property>
+                                    <property name="text">
+                                        <string>Elapsed time since last &amp;Reset</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+R</string>
+                                    </property>
+                                </widget>
+                                <widget class="QRadioButton">
+                                    <property name="name">
+                                        <cstring>TransportTimeRadioButton</cstring>
+                                    </property>
+                                    <property name="geometry">
+                                        <rect>
+                                            <x>10</x>
+                                            <y>4</y>
+                                            <width>164</width>
+                                            <height>19</height>
+                                        </rect>
+                                    </property>
+                                    <property name="font">
+                                        <font>
+                                        </font>
+                                    </property>
+                                    <property name="text">
+                                        <string>Transport &amp;Time Code</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+T</string>
+                                    </property>
+                                </widget>
                             </widget>
                             <spacer row="0" column="1">
                                 <property name="name">
