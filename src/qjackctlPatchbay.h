@@ -209,6 +209,9 @@ public:
     // Retrieve a context pixmap.
     QPixmap& pixmap(int iPixmap);
 
+    // Escape and format a string as a regular expresion
+    QString escapeRegExpDigits(const QString& s, unsigned int iThreshold = 2);
+
 public slots:
 
     // Socket item interactivity methods.

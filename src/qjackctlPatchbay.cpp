@@ -24,6 +24,7 @@
 #include <qmessagebox.h>
 #include <qbitmap.h>
 #include <qtimer.h>
+#include <qregexp.h>
 
 #include <stdlib.h>
 
@@ -442,6 +443,39 @@ QPixmap *qjackctlSocketList::createPixmapMerge ( const QPixmap& xpmDst, const QP
 }
 
 
+// Escape and format a string as a regular expresion
+QString qjackctlSocketList::escapeRegExpDigits ( const QString& s, unsigned int iThreshold )
+{
+    QString sDigits;
+    QString sResult;
+    QString sEscape = QRegExp::escape(s);
+    unsigned int iDigits = 0;
+
+    for (unsigned int i = 0; i < sEscape.length(); i++) {
+        QCharRef ch = sEscape.at(i);
+        if (ch.isDigit()) {
+            if (iDigits < iThreshold)
+                sDigits += ch;
+            else
+                sDigits = "[0-9]+";
+            iDigits++;
+        } else {
+            if (iDigits > 0) {
+                sResult += sDigits;
+                sDigits = QString::null;
+                iDigits = 0;
+            }
+            sResult += ch;
+        }
+    }
+
+    if (iDigits > 0)
+        sResult += sDigits;
+
+    return sResult;
+}
+
+
 // Client:port snapshot.
 void qjackctlSocketList::clientPortsSnapshot (void)
 {
@@ -457,12 +491,12 @@ void qjackctlSocketList::clientPortsSnapshot (void)
                 int iColon = sClientPort.find(":");
                 if (iColon >= 0) {
                     QString sClientName = sClientPort.left(iColon);
-                    QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
+                    QString sPortName   = escapeRegExpDigits(sClientPort.right(sClientPort.length() - iColon - 1));
                     pSocket = findSocket(sClientName);
                     if (pSocket)
                         pPlug = pSocket->findPlug(sPortName);
                     if (pSocket == 0)
-                        pSocket = new qjackctlSocketItem(this, sClientName, sClientName, QJACKCTL_SOCKETTYPE_AUDIO, false, (qjackctlSocketItem *) m_pListView->lastItem());
+                        pSocket = new qjackctlSocketItem(this, sClientName, escapeRegExpDigits(sClientName), QJACKCTL_SOCKETTYPE_AUDIO, false, (qjackctlSocketItem *) m_pListView->lastItem());
                     if (pSocket && pPlug == 0) {
                         qjackctlPlugItem *pPlugAfter = (qjackctlPlugItem *) pSocket->firstChild();
                         while (pPlugAfter && pPlugAfter->nextSibling())
@@ -499,14 +533,14 @@ void qjackctlSocketList::clientPortsSnapshot (void)
                     unsigned int uiPortCapability = snd_seq_port_info_get_capability(pPortInfo);
                     if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
                         ((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
-                        QString sPortName = snd_seq_port_info_get_name(pPortInfo);
+                        QString sPortName = escapeRegExpDigits(snd_seq_port_info_get_name(pPortInfo));
                         qjackctlSocketItem *pSocket = 0;
                         qjackctlPlugItem   *pPlug   = 0;
                         pSocket = findSocket(sClientName);
                         if (pSocket)
                             pPlug = pSocket->findPlug(sPortName);
                         if (pSocket == 0)
-                            pSocket = new qjackctlSocketItem(this, sClientName, sClientName, QJACKCTL_SOCKETTYPE_MIDI, false, (qjackctlSocketItem *) m_pListView->lastItem());
+                            pSocket = new qjackctlSocketItem(this, sClientName, escapeRegExpDigits(sClientName), QJACKCTL_SOCKETTYPE_MIDI, false, (qjackctlSocketItem *) m_pListView->lastItem());
                         if (pSocket && pPlug == 0) {
                             qjackctlPlugItem *pPlugAfter = (qjackctlPlugItem *) pSocket->firstChild();
                             while (pPlugAfter && pPlugAfter->nextSibling())
@@ -745,8 +779,6 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
     m_iAutoOpenTimeout = 0;
     m_pDragDropItem    = 0;
     
-    QListView::setSorting(-1);
-    
     if (bReadable)
         QListView::addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
     else
@@ -762,6 +794,8 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
     QListView::setDragAutoScroll(true);
     QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     
+    QListView::setSorting(-1);
+
     setAutoOpenTimeout(800);
 }
 
@@ -1536,9 +1570,14 @@ void qjackctlPatchbay::loadRack ( qjackctlPatchbayRack *pPatchbayRack )
 // External rack transfer method: copy patchbay structure into master rack model.
 void qjackctlPatchbay::saveRackSockets ( qjackctlSocketList *pSocketList, QPtrList<qjackctlPatchbaySocket>& socketlist )
 {
+    // Take QListView item order into account:
+    qjackctlSocketListView *pListView = pSocketList->listView();
+    if (pListView == NULL)
+        return;
+        
     socketlist.clear();
 
-    for (qjackctlSocketItem *pSocketItem = pSocketList->sockets().first(); pSocketItem; pSocketItem = pSocketList->sockets().next()) {
+    for (qjackctlSocketItem *pSocketItem = (qjackctlSocketItem *) pListView->firstChild(); pSocketItem; pSocketItem = (qjackctlSocketItem *) pSocketItem->nextSibling()) {
         qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(pSocketItem->socketName(), pSocketItem->clientName(), pSocketItem->socketType());
         if (pSocket) {
             if (pSocketItem->isExclusive())
