@@ -3,6 +3,12 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
+0.2.16   2005-02-14  OSS device name selection.
+
+- Actual OSS device selection menu now featured on setup dialog; these
+  adds to the device selection button menus for the OSS driver settings.
+
+
 0.2.15a  2005-02-09  Return of the paranoid.
 
 - Regression from 0.2.13, of the not so stupid pseudo-mutex guards on the

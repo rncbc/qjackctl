@@ -415,10 +415,10 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 
     InDeviceTextLabel->setEnabled(bInEnabled);
     InDeviceComboBox->setEnabled(bInEnabled);
-    InDevicePushButton->setEnabled(bInEnabled && bAlsa);
+    InDevicePushButton->setEnabled(bInEnabled && (bAlsa || bOss));
     OutDeviceTextLabel->setEnabled(bOutEnabled);
     OutDeviceComboBox->setEnabled(bOutEnabled);
-    OutDevicePushButton->setEnabled(bOutEnabled && bAlsa);
+    OutDevicePushButton->setEnabled(bOutEnabled && (bAlsa || bOss));
 
     InChannelsTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
     InChannelsSpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
@@ -546,53 +546,80 @@ void qjackctlSetupForm::stabilizeForm (void)
 void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	QPushButton *pPushButton, int iAudio )
 {
-	// FIXME: Only valid for ALSA devices,
+	// FIXME: Only valid for ALSA and OSS devices,
 	// for the time being...
-	if (DriverComboBox->currentText() != "alsa")
-	    return;
-	
-    QPopupMenu* pContextMenu = new QPopupMenu(this);
+	const QString& sDriver = DriverComboBox->currentText();
+	bool bAlsa = (sDriver == "alsa");
+	bool bOss  = (sDriver == "oss");
+
+	QPopupMenu* pContextMenu = new QPopupMenu(this);
 	QString sName, sText;
 
-	// Enumerate just the ALSA cards and PCM harfware devices...
-	snd_ctl_t *handle;
-	snd_ctl_card_info_t *info;
-	snd_pcm_info_t *pcminfo;
-	
-	snd_ctl_card_info_alloca(&info);
-	snd_pcm_info_alloca(&pcminfo);
-
 	int iCards = 0;
-	int iCard = -1;
-	while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
-		sName = "hw:" + QString::number(iCard);
-		if (snd_ctl_open(&handle, sName.latin1(), 0) >= 0
-			&& snd_ctl_card_info(handle, info) >= 0) {
-			if (iCards > 0)
-    			pContextMenu->insertSeparator();
-			sText  = sName + '\t';
-			sText += snd_ctl_card_info_get_name(info);
-    		pContextMenu->insertItem(sText);
-			int iDevice = -1;
-			while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
-				&& iDevice >= 0) {
-				snd_pcm_info_set_device(pcminfo, iDevice);
-				snd_pcm_info_set_subdevice(pcminfo, 0);
-				snd_pcm_info_set_stream(pcminfo,
-					iAudio == QJACKCTL_CAPTURE ?
-						SND_PCM_STREAM_CAPTURE :
-						SND_PCM_STREAM_PLAYBACK);
-				if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
-					sText  = sName + ',' + QString::number(iDevice) + '\t';
-					sText += snd_pcm_info_get_name(pcminfo);
-    				pContextMenu->insertItem(sText);
+
+	if (bAlsa) {
+		// Enumerate the ALSA cards and PCM harfware devices...
+		snd_ctl_t *handle;
+		snd_ctl_card_info_t *info;
+		snd_pcm_info_t *pcminfo;
+		snd_ctl_card_info_alloca(&info);
+		snd_pcm_info_alloca(&pcminfo);
+		int iCard = -1;
+		while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
+			sName = "hw:" + QString::number(iCard);
+			if (snd_ctl_open(&handle, sName.latin1(), 0) >= 0
+				&& snd_ctl_card_info(handle, info) >= 0) {
+				if (iCards > 0)
+	    			pContextMenu->insertSeparator();
+				sText  = sName + '\t';
+				sText += snd_ctl_card_info_get_name(info);
+	    		pContextMenu->insertItem(sText);
+				int iDevice = -1;
+				while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
+					&& iDevice >= 0) {
+					snd_pcm_info_set_device(pcminfo, iDevice);
+					snd_pcm_info_set_subdevice(pcminfo, 0);
+					snd_pcm_info_set_stream(pcminfo,
+						iAudio == QJACKCTL_CAPTURE ?
+							SND_PCM_STREAM_CAPTURE :
+							SND_PCM_STREAM_PLAYBACK);
+					if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
+						sText  = sName + ',' + QString::number(iDevice) + '\t';
+						sText += snd_pcm_info_get_name(pcminfo);
+	    				pContextMenu->insertItem(sText);
+					}
 				}
+				snd_ctl_close(handle);
+				++iCards;
 			}
-			snd_ctl_close(handle);
-			++iCards;
+		}
+	}	// Enumerate the OSS Audio devices...
+	else if (bOss) {
+		QFile file("/dev/sndstat");
+		if (file.open(IO_ReadOnly)) {
+			QTextStream stream(&file);
+			QString sLine;
+			bool bAudioDevices = false;
+			QRegExp rxHeader("Audio devices.*", false);
+			QRegExp rxDevice("([0-9]+):[ ]+(.*)");
+			while (!stream.atEnd()) {
+				sLine = stream.readLine();
+				if (bAudioDevices) {
+					if (rxDevice.exactMatch(sLine)) {
+						sName = "/dev/dsp" + rxDevice.cap(1);
+						sText = sName + '\t' + rxDevice.cap(2);
+						pContextMenu->insertItem(sText);
+						++iCards;
+					}
+					else break;
+				}
+				else if (rxHeader.exactMatch(sLine))
+					bAudioDevices = true;
+			}
+			file.close();
 		}
 	}
-	
+
 	// There's always the default device...
 	if (iCards > 0)
 		pContextMenu->insertSeparator();
