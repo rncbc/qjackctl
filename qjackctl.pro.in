@@ -103,12 +103,8 @@ IMAGES   = icons/qjackctl.png \
            icons/mporto_64x64.png \
            icons/asocketi.png \
            icons/asocketo.png \
-           icons/aplugi.png \
-           icons/aplugo.png \
            icons/msocketi.png \
            icons/msocketo.png \
-           icons/mplugi.png \
-           icons/mplugo.png \
            icons/xsocket1.png \
            icons/xstarting1.png \
            icons/xstarted1.png \
