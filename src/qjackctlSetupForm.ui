@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>657</width>
-            <height>496</height>
+            <width>500</width>
+            <height>436</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -124,6 +124,9 @@
                                 <property name="autoDefault">
                                     <bool>false</bool>
                                 </property>
+                                <property name="iconSet">
+                                    <iconset>save1.png</iconset>
+                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Save settings as current preset name</string>
                                 </property>
@@ -140,6 +143,9 @@
                                 </property>
                                 <property name="autoDefault">
                                     <bool>false</bool>
+                                </property>
+                                <property name="iconSet">
+                                    <iconset>remove1.png</iconset>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Delete current settings preset</string>
@@ -1533,7 +1539,7 @@
                                     <enum>Vertical</enum>
                                 </property>
                                 <property name="sizeType">
-                                    <enum>Minimum</enum>
+                                    <enum>MinimumExpanding</enum>
                                 </property>
                                 <property name="sizeHint">
                                     <size>
@@ -1550,7 +1556,7 @@
                                     <enum>Vertical</enum>
                                 </property>
                                 <property name="sizeType">
-                                    <enum>Minimum</enum>
+                                    <enum>MinimumExpanding</enum>
                                 </property>
                                 <property name="sizeHint">
                                     <size>
