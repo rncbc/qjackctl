@@ -17,7 +17,9 @@ ChangeLog
 - Temporary server configuration option added, applicable to the auto-start
   server feature on client applications, whether the server shall exit once
   all clients are closed.
-  
+
+- Server mode (RT) status display added.
+
 
 0.2.6   2004-02-29  More work in progress.
 

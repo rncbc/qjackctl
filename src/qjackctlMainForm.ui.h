@@ -752,6 +752,7 @@ void qjackctlMainForm::updateTimeDisplayFonts (void)
         TimeDisplayTextLabel->setFont(font);
     if (!m_pSetup->sDisplayFont2.isEmpty() && font.fromString(m_pSetup->sDisplayFont2)) {
         ServerStateTextLabel->setFont(font);
+        ServerModeTextLabel->setFont(font);
         CpuLoadTextLabel->setFont(font);
         SampleRateTextLabel->setFont(font);
         XrunCountTextLabel->setFont(font);
@@ -1465,7 +1466,9 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // All displays are highlighted from now on.
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
+//  ServerModeTextLabel->setPaletteForegroundColor(Qt::yellow);
     CpuLoadTextLabel->setPaletteForegroundColor(Qt::yellow);
+//  SampleRateTextLabel->setPaletteForegroundColor(Qt::yellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::green);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::green);
@@ -1550,7 +1553,9 @@ void qjackctlMainForm::stopJackClient (void)
     m_iShutNotify = 0;
 
     // Displays are deemed again.
+//  ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     CpuLoadTextLabel->setPaletteForegroundColor(Qt::darkYellow);
+//  SampleRateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportBPMTextLabel->setPaletteForegroundColor(Qt::darkGreen);
@@ -1768,13 +1773,16 @@ void qjackctlMainForm::refreshStatus (void)
 
     if (m_pJackClient) {
         QString s = " ";
-        updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
-        updateStatus(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
+        updateStatus(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + "%");
+        updateStatus(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + tr("Hz"));
         updateStatus(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
 #ifdef CONFIG_JACK_REALTIME
-        updateStatus(STATUS_REALTIME, (jack_is_realtime(m_pJackClient) ? tr("Yes") : tr("No")));
+        bool bRealtime = jack_is_realtime(m_pJackClient);
+        updateStatus(STATUS_REALTIME, (bRealtime ? tr("Yes") : tr("No")));
+        ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
 #else
         updateStatus(STATUS_REALTIME, n);
+        ServerModeTextLabel->setText(n);
 #endif
 #ifdef CONFIG_JACK_TRANSPORT
         QString sText = n;

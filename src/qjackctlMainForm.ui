@@ -131,6 +131,34 @@
                         </widget>
                         <widget class="QLabel">
                             <property name="name">
+                                <cstring>ServerModeTextLabel</cstring>
+                            </property>
+                            <property name="minimumSize">
+                                <size>
+                                    <width>20</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                            <property name="paletteForegroundColor">
+                                <color>
+                                    <red>170</red>
+                                    <green>170</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>JACK server mode</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
                                 <cstring>CpuLoadTextLabel</cstring>
                             </property>
                             <property name="minimumSize">
@@ -163,7 +191,7 @@
                             </property>
                             <property name="minimumSize">
                                 <size>
-                                    <width>60</width>
+                                    <width>50</width>
                                     <height>0</height>
                                 </size>
                             </property>
