@@ -25,9 +25,6 @@
 #include <qmessagebox.h>
 #include <qtimer.h>
 
-#include <stdlib.h>
-#include <math.h>
-
 
 //----------------------------------------------------------------------
 // class qjackctlPortItem -- Port list item.

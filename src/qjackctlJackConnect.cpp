@@ -21,6 +21,9 @@
 
 #include "qjackctlJackConnect.h"
 
+#include <stdlib.h>
+
+
 // Local pixmaps.
 #include "icons/clienti.xpm"
 #include "icons/cliento.xpm"
