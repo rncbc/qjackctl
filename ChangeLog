@@ -3,7 +3,9 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.9   2004-05-24  Sloppy boy fixes.
+0.2.9   2004-05-26  Sloppy boy fixes.
+
+- The reset status option is now included in the system tray popup menu.
 
 - Server stop command button now enabled during client startup interval;
   this makes it possible to stop the server just in case the client 

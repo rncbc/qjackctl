@@ -2080,6 +2080,7 @@ void qjackctlMainForm::updateSystemTray (void)
 // System tray context menu request slot.
 void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 {
+    int iItemID;
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
     pContextMenu->insertItem(isVisible() ? tr("&Hide") : tr("S&how"), this, SLOT(toggleMainForm()));
@@ -2092,9 +2093,11 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
         pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("stop1.png")),
             tr("&Stop"), this, SLOT(stopJack()));
     }
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("reset1.png")),
+        tr("&Reset"), m_pStatusForm, SLOT(resetXrunStats()));
+    pContextMenu->setItemEnabled(iItemID, m_pJackClient != NULL);
     pContextMenu->insertSeparator();
 
-    int iItemID;
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("messages1.png")),
         tr("&Messages"), this, SLOT(toggleMessagesForm()));
     pContextMenu->setItemChecked(iItemID, m_pMessagesForm && m_pMessagesForm->isVisible());
