@@ -1,4 +1,4 @@
-// qjackctlConnections.cpp
+// qjackctlConnect.cpp
 //
 /****************************************************************************
    Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,7 +19,7 @@
 
 *****************************************************************************/
 
-#include "qjackctlConnections.h"
+#include "qjackctlConnect.h"
 
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
@@ -28,64 +28,27 @@
 #include <stdlib.h>
 #include <math.h>
 
-// Local pixmaps.
-#include "icons/clienti.xpm"
-#include "icons/cliento.xpm"
-#include "icons/portpti.xpm"
-#include "icons/portpto.xpm"
-#include "icons/portpni.xpm"
-#include "icons/portpno.xpm"
-#include "icons/portlti.xpm"
-#include "icons/portlto.xpm"
-#include "icons/portlni.xpm"
-#include "icons/portlno.xpm"
-
-static int g_iXpmRefCount = 0;
-
-static QPixmap *g_pXpmClientI = 0;  // Input client item pixmap.
-static QPixmap *g_pXpmClientO = 0;  // Output client item pixmap.
-static QPixmap *g_pXpmPortPTI = 0;  // Physcal Terminal Input port pixmap.
-static QPixmap *g_pXpmPortPTO = 0;  // Physical Terminal Output port pixmap.
-static QPixmap *g_pXpmPortPNI = 0;  // Physical Non-terminal Input port pixmap.
-static QPixmap *g_pXpmPortPNO = 0;  // Physical Non-terminal Output port pixmap.
-static QPixmap *g_pXpmPortLTI = 0;  // Logical Terminal Input port pixmap.
-static QPixmap *g_pXpmPortLTO = 0;  // Logical Terminal Output port pixmap.
-static QPixmap *g_pXpmPortLNI = 0;  // Logical Non-terminal Input port pixmap.
-static QPixmap *g_pXpmPortLNO = 0;  // Logical Non-terminal Output port pixmap.
-
 
 //----------------------------------------------------------------------
-// class qjackctlPortItem -- Jack port list item.
+// class qjackctlPortItem -- Port list item.
 //
 
 // Constructor.
-qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, const QString& sPortName, jack_port_t *pJackPort )
+qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, const QString& sPortName )
     : QListViewItem(pClient, sPortName)
 {
     m_pClient   = pClient;
     m_sPortName = sPortName;
     m_iPortMark = 0;
-    m_pJackPort = pJackPort;
 
     m_pClient->ports().append(this);
 
-    unsigned long ulPortFlags = jack_port_flags(m_pJackPort);
-    if (ulPortFlags & JackPortIsInput) {
-        if (ulPortFlags & JackPortIsTerminal) {
-            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPTI : *g_pXpmPortLTI));
-        } else {
-            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPNI : *g_pXpmPortLNI));
-        }
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    } else if (ulPortFlags & JackPortIsOutput) {
-        if (ulPortFlags & JackPortIsTerminal) {
-            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPTO : *g_pXpmPortLTO));
-        } else {
-            QListViewItem::setPixmap(0, (ulPortFlags & JackPortIsPhysical ? *g_pXpmPortPNO : *g_pXpmPortLNO));
-        }
+    if (pClient->isReadable()) {
         QListViewItem::setDragEnabled(true);
         QListViewItem::setDropEnabled(false);
+    } else {
+        QListViewItem::setDragEnabled(false);
+        QListViewItem::setDropEnabled(true);
     }
 
     m_connects.setAutoDelete(false);
@@ -118,18 +81,7 @@ QString qjackctlPortItem::clientPortName (void)
 }
 
 
-// Jack handles accessors.
-jack_client_t *qjackctlPortItem::jackClient (void)
-{
-    return m_pClient->jackClient();
-}
-
-jack_port_t *qjackctlPortItem::jackPort (void)
-{
-    return m_pJackPort;
-}
-
-// Connections client item accessor.
+// Connect client item accessor.
 qjackctlClientItem *qjackctlPortItem::client (void)
 {
     return m_pClient;
@@ -295,14 +247,12 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList, const 
 
     m_pClientList->clients().append(this);
 
-    if (m_pClientList->jackFlags() & JackPortIsInput) {
-        QListViewItem::setPixmap(0, *g_pXpmClientI);
-        QListViewItem::setDragEnabled(false);
-        QListViewItem::setDropEnabled(true);
-    } else if (m_pClientList->jackFlags() & JackPortIsOutput) {
-        QListViewItem::setPixmap(0, *g_pXpmClientO);
+    if (m_pClientList->isReadable()) {
         QListViewItem::setDragEnabled(true);
         QListViewItem::setDropEnabled(false);
+    } else {
+        QListViewItem::setDragEnabled(false);
+        QListViewItem::setDropEnabled(true);
     }
 
 //  QListViewItem::setSelectable(false);
@@ -328,6 +278,13 @@ qjackctlPortItem *qjackctlClientItem::findPort (const QString& sPortName)
 }
 
 
+// Client list accessor.
+qjackctlClientList *qjackctlClientItem::clientlist (void)
+{
+    return m_pClientList;
+}
+
+
 // Port list accessor.
 QPtrList<qjackctlPortItem>& qjackctlClientItem::ports (void)
 {
@@ -342,15 +299,10 @@ QString& qjackctlClientItem::clientName (void)
 }
 
 
-// Jack client accessor.
-jack_client_t *qjackctlClientItem::jackClient (void)
+// Readable flag client accessor.
+bool qjackctlClientItem::isReadable (void)
 {
-    return m_pClientList->jackClient();
-}
-
-unsigned long qjackctlClientItem::jackFlags (void)
-{
-    return m_pClientList->jackFlags();
+    return m_pClientList->isReadable();
 }
 
 
@@ -390,29 +342,14 @@ int qjackctlClientItem::rtti (void) const
 
 
 //----------------------------------------------------------------------
-// qjackctlClientList -- Jack client list.
+// qjackctlClientList -- Client list.
 //
 
 // Constructor.
-qjackctlClientList::qjackctlClientList( qjackctlClientListView *pListView, jack_client_t *pJackClient, unsigned long ulJackFlags )
+qjackctlClientList::qjackctlClientList( qjackctlClientListView *pListView, bool bReadable )
 {
-    if (g_iXpmRefCount == 0) {
-        g_pXpmClientI = new QPixmap((const char **) clienti_xpm);
-        g_pXpmClientO = new QPixmap((const char **) cliento_xpm);
-        g_pXpmPortPTI = new QPixmap((const char **) portpti_xpm);
-        g_pXpmPortPTO = new QPixmap((const char **) portpto_xpm);
-        g_pXpmPortPNI = new QPixmap((const char **) portpni_xpm);
-        g_pXpmPortPNO = new QPixmap((const char **) portpno_xpm);
-        g_pXpmPortLTI = new QPixmap((const char **) portlti_xpm);
-        g_pXpmPortLTO = new QPixmap((const char **) portlto_xpm);
-        g_pXpmPortLNI = new QPixmap((const char **) portlni_xpm);
-        g_pXpmPortLNO = new QPixmap((const char **) portlno_xpm);
-    }
-    g_iXpmRefCount++;
-
-    m_pListView   = pListView;
-    m_pJackClient = pJackClient;
-    m_ulJackFlags = ulJackFlags;
+    m_pListView = pListView;
+    m_bReadable = bReadable;
 
     m_clients.setAutoDelete(false);
 }
@@ -426,19 +363,6 @@ qjackctlClientList::~qjackctlClientList (void)
         delete pClient;
 
     m_clients.clear();
-
-    if (--g_iXpmRefCount == 0) {
-        delete g_pXpmClientI;
-        delete g_pXpmClientO;
-        delete g_pXpmPortPTI;
-        delete g_pXpmPortPTO;
-        delete g_pXpmPortPNI;
-        delete g_pXpmPortPNO;
-        delete g_pXpmPortLTI;
-        delete g_pXpmPortLTO;
-        delete g_pXpmPortLNI;
-        delete g_pXpmPortLNO;
-    }
 }
 
 
@@ -480,15 +404,10 @@ qjackctlClientListView *qjackctlClientList::listView (void)
 }
 
 
-// Jack client accessor.
-jack_client_t *qjackctlClientList::jackClient (void)
+// Readable flag client accessor.
+bool qjackctlClientList::isReadable (void)
 {
-    return m_pJackClient;
-}
-
-unsigned long qjackctlClientList::jackFlags (void)
-{
-    return m_ulJackFlags;
+    return m_bReadable;
 }
 
 
@@ -510,61 +429,15 @@ void qjackctlClientList::cleanClientPorts ( int iMark )
     }
 }
 
-// Client:port refreshner.
-int qjackctlClientList::updateClientPorts (void)
-{
-    if (m_pJackClient == 0)
-        return 0;
-
-    int iDirtyCount = 0;
-    
-    markClientPorts(0);
-
-    const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, m_ulJackFlags);
-    if (ppszClientPorts) {
-        int iClientPort = 0;
-        while (ppszClientPorts[iClientPort]) {
-            jack_port_t *pJackPort = jack_port_by_name(m_pJackClient, ppszClientPorts[iClientPort]);
-            QString sClientPort = ppszClientPorts[iClientPort];
-            qjackctlClientItem *pClient = 0;
-            qjackctlPortItem   *pPort   = 0;
-            int iColon = sClientPort.find(":");
-            if (iColon >= 0) {
-                QString sClientName = sClientPort.left(iColon);
-                QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
-                pClient = findClient(sClientName);
-                if (pClient)
-                    pPort = pClient->findPort(sPortName);
-                if (pClient == 0) {
-                    pClient = new qjackctlClientItem(this, sClientName);
-                    iDirtyCount++;
-                }
-                if (pClient && pPort == 0) {
-                    pPort = new qjackctlPortItem(pClient, sPortName, pJackPort);
-                    iDirtyCount++;
-                }
-                if (pPort)
-                    pPort->markClientPort(1);
-            }
-            iClientPort++;
-        }
-        ::free(ppszClientPorts);
-    }
-
-    cleanClientPorts(0);
-    
-    return iDirtyCount;
-}
-
 
 //----------------------------------------------------------------------------
 // qjackctlClientListView -- Client list view, supporting drag-n-drop.
 
 // Constructor.
-qjackctlClientListView::qjackctlClientListView ( QWidget *pParent, qjackctlConnectionsView *pConnectionsView )
+qjackctlClientListView::qjackctlClientListView ( QWidget *pParent, qjackctlConnectView *pConnectView )
     : QListView(pParent)
 {
-    m_pConnectionsView = pConnectionsView;
+    m_pConnectView = pConnectView;
     
     m_pAutoOpenTimer   = 0;
     m_iAutoOpenTimeout = 0;
@@ -626,8 +499,8 @@ QListViewItem *qjackctlClientListView::dragDropItem ( const QPoint& epos )
             m_pDragDropItem = pItem;
             if (m_pAutoOpenTimer)
                 m_pAutoOpenTimer->start(m_iAutoOpenTimeout);
-            qjackctlConnections *pConnections = m_pConnectionsView->binding();
-            if (!pItem->dropEnabled() || pConnections == 0 || !pConnections->canConnectSelected())
+            qjackctlConnect *pConnect = m_pConnectView->binding();
+            if (!pItem->dropEnabled() || pConnect == 0 || !pConnect->canConnectSelected())
                 pItem = 0;
         }
     } else {
@@ -676,9 +549,9 @@ void qjackctlClientListView::dropEvent( QDropEvent *pDropEvent )
         m_pDragDropItem = 0;
         if (m_pAutoOpenTimer)
             m_pAutoOpenTimer->stop();
-        qjackctlConnections *pConnections = m_pConnectionsView->binding();
-        if (pConnections)
-            pConnections->connectSelected();
+        qjackctlConnect *pConnect = m_pConnectView->binding();
+        if (pConnect)
+            pConnect->connectSelected();
     }
 }
 
@@ -686,7 +559,7 @@ void qjackctlClientListView::dropEvent( QDropEvent *pDropEvent )
 QDragObject *qjackctlClientListView::dragObject (void)
 {
     QTextDrag *pDragObject = 0;
-    if (m_pConnectionsView->binding()) {
+    if (m_pConnectView->binding()) {
         QListViewItem *pItem = QListView::currentItem();
         if (pItem && pItem->dragEnabled()) {
             pDragObject = new QTextDrag(pItem->text(0), this);
@@ -702,7 +575,7 @@ QDragObject *qjackctlClientListView::dragObject (void)
 // Context menu request event handler.
 void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-    m_pConnectionsView->contextMenu(pContextMenuEvent->globalPos());
+    m_pConnectView->contextMenu(pContextMenuEvent->globalPos());
 }
 
 
@@ -711,10 +584,10 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 //
 
 // Constructor.
-qjackctlConnectorView::qjackctlConnectorView ( QWidget *pParent, qjackctlConnectionsView *pConnectionsView)
+qjackctlConnectorView::qjackctlConnectorView ( QWidget *pParent, qjackctlConnectView *pConnectView)
     : QWidget(pParent)
 {
-    m_pConnectionsView = pConnectionsView;
+    m_pConnectView = pConnectView;
 }
 
 // Default destructor.
@@ -745,7 +618,7 @@ void qjackctlConnectorView::drawConnectionLine ( QPainter& p, int x1, int y1, in
 // Draw visible port connection relation arrows.
 void qjackctlConnectorView::drawConnections (void)
 {
-    if (m_pConnectionsView->OClientList() == 0 || m_pConnectionsView->IClientList() == 0)
+    if (m_pConnectView->OClientList() == 0 || m_pConnectView->IClientList() == 0)
         return;
     
     QPainter p(this);
@@ -759,12 +632,12 @@ void qjackctlConnectorView::drawConnections (void)
     // Almost constants.
     x1 = 0;
     x2 = width();
-    h1 = ((m_pConnectionsView->OListView())->header())->sectionRect(0).height();
-    h2 = ((m_pConnectionsView->IListView())->header())->sectionRect(0).height();
+    h1 = ((m_pConnectView->OListView())->header())->sectionRect(0).height();
+    h2 = ((m_pConnectView->IListView())->header())->sectionRect(0).height();
     // For each client item...
-    for (qjackctlClientItem *pOClient = m_pConnectionsView->OClientList()->clients().first();
+    for (qjackctlClientItem *pOClient = m_pConnectView->OClientList()->clients().first();
             pOClient;
-                pOClient = m_pConnectionsView->OClientList()->clients().next()) {
+                pOClient = m_pConnectView->OClientList()->clients().next()) {
         // Set new connector color.
         c += 0x39;
         c &= 0xff;
@@ -777,11 +650,11 @@ void qjackctlConnectorView::drawConnections (void)
                 pOPort;
                     pOPort = pOClient->ports().next()) {
             // Get starting connector arrow coordinates.
-            r1 = (m_pConnectionsView->OListView())->itemRect(pOPort);
+            r1 = (m_pConnectView->OListView())->itemRect(pOPort);
             y1 = (r1.top() + r1.bottom()) / 2;
             // If this item is not visible, don't bother to update it.
             if (!pOPort->isVisible() || y1 < 1) {
-                r1 = (m_pConnectionsView->OListView())->itemRect(pOClient);
+                r1 = (m_pConnectView->OListView())->itemRect(pOClient);
                 y1 = (r1.top() + r1.bottom()) / 2;
             }
             // Get port connections...
@@ -789,10 +662,10 @@ void qjackctlConnectorView::drawConnections (void)
                     pIPort;
                         pIPort = pOPort->connects().next()) {
                 // Obviously, there is a connection from pOPort to pIPort items:
-                r2 = (m_pConnectionsView->IListView())->itemRect(pIPort);
+                r2 = (m_pConnectView->IListView())->itemRect(pIPort);
                 y2 = (r2.top() + r2.bottom()) / 2;
                 if (!pIPort->isVisible() || y2 < 1) {
-                    r2 = (m_pConnectionsView->IListView())->itemRect(pIPort->client());
+                    r2 = (m_pConnectView->IListView())->itemRect(pIPort->client());
                     y2 = (r2.top() + r2.bottom()) / 2;
                 }
                 drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
@@ -819,7 +692,7 @@ void qjackctlConnectorView::resizeEvent ( QResizeEvent * )
 // Context menu request event handler.
 void qjackctlConnectorView::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-    m_pConnectionsView->contextMenu(pContextMenuEvent->globalPos());
+    m_pConnectView->contextMenu(pContextMenuEvent->globalPos());
 }
 
 
@@ -838,10 +711,10 @@ void qjackctlConnectorView::contentsMoved ( int, int )
 
 
 //----------------------------------------------------------------------------
-// qjackctlConnectionsView -- Integrated connections view widget.
+// qjackctlConnectView -- Integrated connections view widget.
 
 // Constructor.
-qjackctlConnectionsView::qjackctlConnectionsView ( QWidget *pParent, const char *pszName )
+qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName )
     : QWidget(pParent, pszName)
 {
     QSizePolicy sizepolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -880,7 +753,7 @@ qjackctlConnectionsView::qjackctlConnectionsView ( QWidget *pParent, const char 
     m_pGridLayout->addWidget(m_pConnectorView, 0, 1);
     m_pGridLayout->addWidget(m_pIListView,     0, 2);
 
-    m_pConnections = 0;
+    m_pConnect = 0;
 
     QObject::connect(m_pOListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
@@ -893,156 +766,142 @@ qjackctlConnectionsView::qjackctlConnectionsView ( QWidget *pParent, const char 
 
 
 // Default destructor.
-qjackctlConnectionsView::~qjackctlConnectionsView (void)
+qjackctlConnectView::~qjackctlConnectView (void)
 {
 }
 
 
 // Common context menu slot.
-void qjackctlConnectionsView::contextMenu ( const QPoint& pos )
+void qjackctlConnectView::contextMenu ( const QPoint& pos )
 {
-    qjackctlConnections *pConnections = binding();
-    if (pConnections == 0)
+    qjackctlConnect *pConnect = binding();
+    if (pConnect == 0)
         return;
 
     int iItemID;
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
-    iItemID = pContextMenu->insertItem(tr("&Connect"), pConnections, SLOT(connectSelected()), tr("Alt+C", "Connect"));
-    pContextMenu->setItemEnabled(iItemID, pConnections->canConnectSelected());
-    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pConnections, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
-    pContextMenu->setItemEnabled(iItemID, pConnections->canDisconnectSelected());
-    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnections, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
-    pContextMenu->setItemEnabled(iItemID, pConnections->canDisconnectAll());
+    iItemID = pContextMenu->insertItem(tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canConnectSelected());
+    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectSelected());
+    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
+    pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectAll());
 
     pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnections, SLOT(refresh()), tr("Alt+R", "Refresh"));
+    iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
 
     pContextMenu->exec(pos);
 }
 
 
-// Connections binding methods.
-void qjackctlConnectionsView::setBinding ( qjackctlConnections *pConnections )
+// Connect binding methods.
+void qjackctlConnectView::setBinding ( qjackctlConnect *pConnect )
 {
-    m_pConnections = pConnections;
+    m_pConnect = pConnect;
 }
 
-qjackctlConnections *qjackctlConnectionsView::binding (void)
+qjackctlConnect *qjackctlConnectView::binding (void)
 {
-    return m_pConnections;
+    return m_pConnect;
 }
 
 
-// Connections client list accessors.
-qjackctlClientList *qjackctlConnectionsView::OClientList (void)
+// Connect client list accessors.
+qjackctlClientList *qjackctlConnectView::OClientList (void)
 {
-    if (m_pConnections)
-        return m_pConnections->OClientList();
+    if (m_pConnect)
+        return m_pConnect->OClientList();
     else
         return 0;
 }
 
-qjackctlClientList *qjackctlConnectionsView::IClientList (void)
+qjackctlClientList *qjackctlConnectView::IClientList (void)
 {
-    if (m_pConnections)
-        return m_pConnections->OClientList();
+    if (m_pConnect)
+        return m_pConnect->OClientList();
     else
         return 0;
 }
 
 
 //----------------------------------------------------------------------
-// qjackctlConnections -- Output-to-Input client/ports connection object.
+// qjackctlConnect -- Output-to-Input client/ports connection object.
 //
 
 // Constructor.
-qjackctlConnections::qjackctlConnections ( qjackctlConnectionsView *pConnectionsView, jack_client_t *pJackClient )
+qjackctlConnect::qjackctlConnect ( qjackctlConnectView *pConnectView )
 {
-    m_pConnectionsView = pConnectionsView;
+    m_pConnectView = pConnectView;
     
-    m_pOClientList = new qjackctlClientList(m_pConnectionsView->OListView(), pJackClient, JackPortIsOutput);
-    m_pIClientList = new qjackctlClientList(m_pConnectionsView->IListView(), pJackClient, JackPortIsInput);
+    m_pOClientList = 0;
+    m_pIClientList = 0;
 
     m_iExclusive = 0;
 
-    m_pConnectionsView->setBinding(this);
+    m_pConnectView->setBinding(this);
 }
 
 // Default destructor.
-qjackctlConnections::~qjackctlConnections (void)
+qjackctlConnect::~qjackctlConnect (void)
 {
     // Force end of works here.
     m_iExclusive++;
 
-    m_pConnectionsView->setBinding(0);
+    m_pConnectView->setBinding(0);
 
-    delete m_pOClientList;
-    delete m_pIClientList;
+    if (m_pOClientList)
+        delete m_pOClientList;
+    if (m_pIClientList)
+        delete m_pIClientList;
+        
     m_pOClientList = 0;
     m_pIClientList = 0;
 
-    m_pConnectionsView->ConnectorView()->repaint(true);
+    m_pConnectView->ConnectorView()->repaint(true);
+}
+
+
+// These must be accessed by the descendant constructor.
+qjackctlConnectView *qjackctlConnect::connectView (void)
+{
+    return m_pConnectView;
+}
+
+void qjackctlConnect::setOClientList ( qjackctlClientList *pOClientList )
+{
+    m_pOClientList = pOClientList;
+}
+
+void qjackctlConnect::setIClientList ( qjackctlClientList *pIClientList )
+{
+    m_pIClientList = pIClientList;
 }
 
 
 // Connection primitive.
-void qjackctlConnections::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+void qjackctlConnect::connectPortsEx ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
     if (pOPort->findConnectPtr(pIPort) == 0) {
-        jack_connect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+        connectPorts(pOPort, pIPort);
         pOPort->addConnect(pIPort);
         pIPort->addConnect(pOPort);
     }
 }
 
 // Disconnection primitive.
-void qjackctlConnections::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+void qjackctlConnect::disconnectPortsEx ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
     if (pOPort->findConnectPtr(pIPort) != 0) {
-        jack_disconnect(pOPort->jackClient(), pOPort->clientPortName().latin1(), pIPort->clientPortName().latin1());
+        disconnectPorts(pOPort, pIPort);
         pOPort->removeConnect(pIPort);
         pIPort->removeConnect(pOPort);
     }
 }
 
 
-// Update port connection references.
-void qjackctlConnections::updateConnections (void)
-{
-    // For each output client item...
-    for (qjackctlClientItem *pOClient = m_pOClientList->clients().first();
-            pOClient;
-                pOClient = m_pOClientList->clients().next()) {
-        // For each output port item...
-        for (qjackctlPortItem *pOPort = pOClient->ports().first();
-                pOPort;
-                    pOPort = pOClient->ports().next()) {
-            // Are there already any connections?
-            if (pOPort->connects().count() > 0)
-                continue;
-            // Get port connections...
-            const char **ppszClientPorts = jack_port_get_all_connections(m_pOClientList->jackClient(), pOPort->jackPort());
-            if (ppszClientPorts) {
-                // Now, for each input client port...
-                int iClientPort = 0;
-                while (ppszClientPorts[iClientPort]) {
-                    qjackctlPortItem *pIPort = m_pIClientList->findClientPort(ppszClientPorts[iClientPort]);
-                    if (pIPort) {
-                        pOPort->addConnect(pIPort);
-                        pIPort->addConnect(pOPort);
-                    }
-                    iClientPort++;
-                }
-                ::free(ppszClientPorts);
-            }
-        }
-    }
-}
-
-
 // Test if selected ports are connectable.
-bool qjackctlConnections::canConnectSelected (void)
+bool qjackctlConnect::canConnectSelected (void)
 {
     bool bResult = false;
 
@@ -1054,7 +913,7 @@ bool qjackctlConnections::canConnectSelected (void)
     return bResult;
 }
 
-bool qjackctlConnections::canConnectSelectedEx (void)
+bool qjackctlConnect::canConnectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -1110,7 +969,7 @@ bool qjackctlConnections::canConnectSelectedEx (void)
 
 
 // Connect current selected ports.
-bool qjackctlConnections::connectSelected (void)
+bool qjackctlConnect::connectSelected (void)
 {
     bool bResult = false;
     
@@ -1118,7 +977,7 @@ bool qjackctlConnections::connectSelected (void)
         bResult = connectSelectedEx();
         endExclusive();
     }
-    m_pConnectionsView->ConnectorView()->update();
+    m_pConnectView->ConnectorView()->update();
 
     if (bResult)
         emit connectChanged();
@@ -1126,7 +985,7 @@ bool qjackctlConnections::connectSelected (void)
     return bResult;
 }
 
-bool qjackctlConnections::connectSelectedEx (void)
+bool qjackctlConnect::connectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -1144,7 +1003,7 @@ bool qjackctlConnections::connectSelectedEx (void)
             qjackctlPortItem *pOPort = pOClient->ports().first();
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pOPort && pIPort) {
-                connectPorts(pOPort, pIPort);
+                connectPortsEx(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
                 pIPort = pIClient->ports().next();
             }
@@ -1153,7 +1012,7 @@ bool qjackctlConnections::connectSelectedEx (void)
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
             qjackctlPortItem *pOPort = pOClient->ports().first();
             while (pOPort) {
-                connectPorts(pOPort, pIPort);
+                connectPortsEx(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
             }
         }
@@ -1164,13 +1023,13 @@ bool qjackctlConnections::connectSelectedEx (void)
             qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pIPort) {
-                connectPorts(pOPort, pIPort);
+                connectPortsEx(pOPort, pIPort);
                 pIPort = pIClient->ports().next();
             }
         } else {
             // One-to-one connection...
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
-            connectPorts(pOPort, pIPort);
+            connectPortsEx(pOPort, pIPort);
         }
     }
     
@@ -1179,7 +1038,7 @@ bool qjackctlConnections::connectSelectedEx (void)
 
 
 // Test if selected ports are disconnectable.
-bool qjackctlConnections::canDisconnectSelected (void)
+bool qjackctlConnect::canDisconnectSelected (void)
 {
     bool bResult = false;
 
@@ -1191,7 +1050,7 @@ bool qjackctlConnections::canDisconnectSelected (void)
     return bResult;
 }
 
-bool qjackctlConnections::canDisconnectSelectedEx (void)
+bool qjackctlConnect::canDisconnectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -1247,7 +1106,7 @@ bool qjackctlConnections::canDisconnectSelectedEx (void)
 
 
 // Disconnect current selected ports.
-bool qjackctlConnections::disconnectSelected (void)
+bool qjackctlConnect::disconnectSelected (void)
 {
     bool bResult = false;
     
@@ -1255,7 +1114,7 @@ bool qjackctlConnections::disconnectSelected (void)
         bResult = disconnectSelectedEx();
         endExclusive();
     }
-    m_pConnectionsView->ConnectorView()->update();
+    m_pConnectView->ConnectorView()->update();
 
     if (bResult)
         emit connectChanged();
@@ -1263,7 +1122,7 @@ bool qjackctlConnections::disconnectSelected (void)
     return bResult;
 }
 
-bool qjackctlConnections::disconnectSelectedEx (void)
+bool qjackctlConnect::disconnectSelectedEx (void)
 {
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
@@ -1281,7 +1140,7 @@ bool qjackctlConnections::disconnectSelectedEx (void)
             qjackctlPortItem *pOPort = pOClient->ports().first();
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pOPort && pIPort) {
-                disconnectPorts(pOPort, pIPort);
+                disconnectPortsEx(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
                 pIPort = pIClient->ports().next();
             }
@@ -1290,7 +1149,7 @@ bool qjackctlConnections::disconnectSelectedEx (void)
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
             qjackctlPortItem *pOPort = pOClient->ports().first();
             while (pOPort) {
-                disconnectPorts(pOPort, pIPort);
+                disconnectPortsEx(pOPort, pIPort);
                 pOPort = pOClient->ports().next();
             }
         }
@@ -1301,13 +1160,13 @@ bool qjackctlConnections::disconnectSelectedEx (void)
             qjackctlClientItem *pIClient = (qjackctlClientItem *) pIItem;
             qjackctlPortItem *pIPort = pIClient->ports().first();
             while (pIPort) {
-                disconnectPorts(pOPort, pIPort);
+                disconnectPortsEx(pOPort, pIPort);
                 pIPort = pIClient->ports().next();
             }
         } else {
             // One-to-one disconnection...
             qjackctlPortItem *pIPort = (qjackctlPortItem *) pIItem;
-            disconnectPorts(pOPort, pIPort);
+            disconnectPortsEx(pOPort, pIPort);
         }
     }
     
@@ -1316,7 +1175,7 @@ bool qjackctlConnections::disconnectSelectedEx (void)
 
 
 // Test if any port is disconnectable.
-bool qjackctlConnections::canDisconnectAll (void)
+bool qjackctlConnect::canDisconnectAll (void)
 {
     bool bResult = false;
     
@@ -1328,7 +1187,7 @@ bool qjackctlConnections::canDisconnectAll (void)
     return bResult;
 }
 
-bool qjackctlConnections::canDisconnectAllEx (void)
+bool qjackctlConnect::canDisconnectAllEx (void)
 {
     qjackctlClientItem *pOClient = m_pOClientList->clients().first();
     while (pOClient) {
@@ -1345,9 +1204,9 @@ bool qjackctlConnections::canDisconnectAllEx (void)
 
 
 // Disconnect all ports.
-bool qjackctlConnections::disconnectAll (void)
+bool qjackctlConnect::disconnectAll (void)
 {
-    if (QMessageBox::warning(m_pConnectionsView, tr("Warning"),
+    if (QMessageBox::warning(m_pConnectView, tr("Warning"),
         tr("This will suspend sound processing") + "\n" +
         tr("from all client applications.") + "\n\n" +
         tr("Are you sure?"),
@@ -1361,7 +1220,7 @@ bool qjackctlConnections::disconnectAll (void)
         bResult = disconnectAllEx();
         endExclusive();
     }
-    m_pConnectionsView->ConnectorView()->update();
+    m_pConnectView->ConnectorView()->update();
 
     if (bResult)
         emit connectChanged();
@@ -1369,7 +1228,7 @@ bool qjackctlConnections::disconnectAll (void)
     return bResult;
 }
 
-bool qjackctlConnections::disconnectAllEx (void)
+bool qjackctlConnect::disconnectAllEx (void)
 {
     qjackctlClientItem *pOClient = m_pOClientList->clients().first();
     while (pOClient) {
@@ -1377,7 +1236,7 @@ bool qjackctlConnections::disconnectAllEx (void)
         while (pOPort) {
             qjackctlPortItem *pIPort;
             while ((pIPort = pOPort->connects().first()) != 0)
-                disconnectPorts(pOPort, pIPort);
+                disconnectPortsEx(pOPort, pIPort);
             pOPort = pOClient->ports().next();
         }
         pOClient = m_pOClientList->clients().next();
@@ -1388,7 +1247,7 @@ bool qjackctlConnections::disconnectAllEx (void)
 
 
 // Complete contents rebuilder; return dirty status.
-void qjackctlConnections::refresh (void)
+void qjackctlConnect::refresh (void)
 {
     int iDirtyCount = 0;
     
@@ -1399,7 +1258,7 @@ void qjackctlConnections::refresh (void)
         endExclusive();
     }
 
-    (m_pConnectionsView->ConnectorView())->update();
+    (m_pConnectView->ConnectorView())->update();
     
     if (iDirtyCount > 0)
         emit connectChanged();
@@ -1407,7 +1266,7 @@ void qjackctlConnections::refresh (void)
 
 
 // Dunno. But this may avoid some conflicts.
-bool qjackctlConnections::startExclusive (void)
+bool qjackctlConnect::startExclusive (void)
 {
     bool bExclusive = (m_iExclusive == 0);
     if (bExclusive)
@@ -1415,23 +1274,23 @@ bool qjackctlConnections::startExclusive (void)
     return bExclusive;
 }
 
-void qjackctlConnections::endExclusive (void)
+void qjackctlConnect::endExclusive (void)
 {
     if (m_iExclusive > 0)
         m_iExclusive--;
 }
 
 
-// Connections client list accessors.
-qjackctlClientList *qjackctlConnections::OClientList (void)
+// Connect client list accessors.
+qjackctlClientList *qjackctlConnect::OClientList (void)
 {
     return m_pOClientList;
 }
 
-qjackctlClientList *qjackctlConnections::IClientList (void)
+qjackctlClientList *qjackctlConnect::IClientList (void)
 {
     return m_pIClientList;
 }
 
-// end of qjackctlConnections.cpp
+// end of qjackctlConnect.cpp
 

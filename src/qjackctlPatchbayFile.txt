@@ -4,7 +4,7 @@ qjackctlPatchbayFile format specification
   <!DOCTYPE patchbay>
   <patchbay name="patchbay-name" version="patchbay-version" >
     <output-sockets>
-      <socket name="socket-name" client="client-name" >
+      <socket name="socket-name" client="client-name" type="socket-type" >
         <plug>plug-name</plug>
         .
         .
@@ -15,7 +15,7 @@ qjackctlPatchbayFile format specification
       .
     </output-sockets>
     <input-sockets>
-      <socket name="socket-name" client="client-name" >
+      <socket name="socket-name" client="client-name" type="socket-type" >
         <plug>plug-name</plug>
         .
         .
@@ -43,7 +43,8 @@ qjackctlPatchbayFile format specification
   patchbay-name     := string-literal
   patchbay-version  := string-literal
   socket-name       := string-literal
+  socket-type       := "audio" | "midi"
 # slot-name         := string-literal
 # slot-mode         := "open" | "half" | "full"
-  client-name       := string-regexp (JACK client name)
-  plug-name         := string-regexp (JACK port short name)
+  client-name       := string-regexp (JACK/ALSA client name)
+  plug-name         := string-regexp (JACK/ALSA port name)

@@ -32,6 +32,8 @@
 
 #include "qjackctlPatchbayFile.h"
 
+#include <poll.h>
+
 
 // Timer constant stuff.
 #define QJACKCTL_TIMER_MSECS    500
@@ -57,23 +59,27 @@ static jack_nframes_t g_nframes = 0;
 // Kind of constructor.
 void qjackctlMainForm::init (void)
 {
-    m_pSetup      = NULL;
+    m_pSetup = NULL;
 
-    m_pJack       = NULL;
-    m_pJackClient = NULL;
-    m_bJackDetach = false;
-    m_pTimer      = new QTimer(this);
-    m_iTimerSlot  = 0;
-    m_iRefresh    = 0;
-    m_iDirtyCount = 0;
+    m_pJack        = NULL;
+    m_pJackClient  = NULL;
+    m_bJackDetach  = false;
+    m_pAlsaSeq     = NULL;
+    m_pTimer       = new QTimer(this);
+    m_iTimerSlot   = 0;
+    m_iJackRefresh = 0;
+    m_iAlsaRefresh = 0;
+    m_iDirtyCount  = 0;
 
     m_pStdoutNotifier = NULL;
 
+    m_pAlsaNotifier = NULL;
     m_pPortNotifier = NULL;
     m_pXrunNotifier = NULL;
     m_pBuffNotifier = NULL;
     m_pShutNotifier = NULL;
 
+    m_iAlsaNotify = 0;
     m_iPortNotify = 0;
     m_iXrunNotify = 0;
     m_iBuffNotify = 0;
@@ -92,6 +98,37 @@ void qjackctlMainForm::init (void)
     m_pStatusForm      = new qjackctlStatusForm(this);
     m_pConnectionsForm = new qjackctlConnectionsForm(this);
     m_pPatchbayForm    = new qjackctlPatchbayForm(this);
+
+    // Start our ALSA sequencer interface.
+    if (snd_seq_open(&m_pAlsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, 0) < 0)
+        m_pAlsaSeq = NULL;
+    if (m_pAlsaSeq) {
+        snd_seq_port_subscribe_t *pAlsaSubs;
+        snd_seq_addr_t seq_addr;
+        int iPort;
+        struct pollfd pfd[1];
+        iPort = snd_seq_create_simple_port(
+            m_pAlsaSeq,
+            "qjackctl",
+            SND_SEQ_PORT_CAP_WRITE|SND_SEQ_PORT_CAP_SUBS_WRITE|SND_SEQ_PORT_CAP_NO_EXPORT,
+            SND_SEQ_PORT_TYPE_APPLICATION
+        );
+        if (iPort >= 0) {
+            snd_seq_port_subscribe_alloca(&pAlsaSubs);
+            seq_addr.client = SND_SEQ_CLIENT_SYSTEM;
+            seq_addr.port   = SND_SEQ_PORT_SYSTEM_ANNOUNCE;
+            snd_seq_port_subscribe_set_sender(pAlsaSubs, &seq_addr);
+            seq_addr.client = snd_seq_client_id(m_pAlsaSeq);
+            seq_addr.port   = iPort;
+            snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
+            snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs);
+            snd_seq_poll_descriptors(m_pAlsaSeq, pfd, 1, POLLIN);
+            m_pAlsaNotifier = new QSocketNotifier(pfd[0].fd, QSocketNotifier::Read);
+            QObject::connect(m_pAlsaNotifier, SIGNAL(activated(int)), this, SLOT(alsaNotifySlot(int)));
+        }
+    }
+    // Rather obvious setup.
+    m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
 
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const char *,const char*,unsigned int)),
@@ -112,6 +149,16 @@ void qjackctlMainForm::destroy (void)
 
     // Kill timer.
     delete m_pTimer;
+    
+    // Terminate local ALSA sequencer interface.
+    if (m_pAlsaNotifier)
+        delete m_pAlsaNotifier;
+        
+    if (m_pAlsaSeq)
+        snd_seq_close(m_pAlsaSeq);
+        
+    m_pAlsaNotifier = NULL;
+    m_pAlsaSeq = NULL;
 }
 
 
@@ -278,8 +325,8 @@ void qjackctlMainForm::startJack (void)
     StartPushButton->setEnabled(false);
 
     // Reset our timer counters...
-    m_iTimerSlot = 0;
-    m_iRefresh = 0;
+    m_iTimerSlot   = 0;
+    m_iJackRefresh = 0;
 
     // If we ain't to be the server master...
     if (m_bJackDetach)
@@ -437,8 +484,8 @@ void qjackctlMainForm::startJack (void)
     StopPushButton->setEnabled(true);
 
     // Reset (yet again) the timer counters...
-    m_iTimerSlot = 0;
-    m_iRefresh = 0;
+    m_iTimerSlot  = 0;
+    m_iJackRefresh = 0;
 }
 
 
@@ -848,9 +895,9 @@ void qjackctlMainForm::portNotifySlot ( int fd )
     ::read(fd, &c, sizeof(c));
 
     // Do what has to be done.
-    refreshConnections();
+    refreshJackConnections();
     // Log some message here.
-    appendMessagesColor(tr("Connection graph change."), "#cc9966");
+    appendMessagesColor(tr("Audio connection graph change."), "#cc9966");
 
     m_iPortNotify--;
 }
@@ -923,6 +970,27 @@ void qjackctlMainForm::shutNotifySlot ( int fd )
 }
 
 
+// ALSA announce slot.
+void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
+{
+    if (m_iAlsaNotify > 0)
+        return;
+    m_iAlsaNotify++;
+
+    snd_seq_event_t *pAlsaEvent;
+
+    snd_seq_event_input(m_pAlsaSeq, &pAlsaEvent);
+    snd_seq_free_event(pAlsaEvent);
+
+    // Do what has to be done.
+    refreshAlsaConnections();
+    // Log some message here.
+    appendMessagesColor(tr("MIDI connection graph change."), "#cc9966");
+
+    m_iAlsaNotify--;
+}
+
+
 // Timer callback funtion.
 void qjackctlMainForm::timerSlot (void)
 {
@@ -947,9 +1015,13 @@ void qjackctlMainForm::timerSlot (void)
         if (m_pSetup->bAutoRefresh && (m_iTimerSlot % m_pSetup->iTimeRefresh) == 0)
             refreshConnections();
         // Are we about to refresh it, really?
-        if (m_iRefresh > 0) {
-            m_iRefresh = 0;
-            m_pConnectionsForm->refresh(true);
+        if (m_iJackRefresh > 0) {
+            m_iJackRefresh = 0;
+            m_pConnectionsForm->refreshJack(true);
+        }
+        if (m_iAlsaRefresh > 0) {
+            m_iAlsaRefresh = 0;
+            m_pConnectionsForm->refreshAlsa(true);
         }
     }
 
@@ -958,13 +1030,23 @@ void qjackctlMainForm::timerSlot (void)
 }
 
 
-// Cable connection notification slot.
-void qjackctlMainForm::connectChangedSlot (void)
+// JACK connection notification slot.
+void qjackctlMainForm::jackConnectChanged (void)
 {
     // Just shake the connection status quo.
     m_iDirtyCount++;
     
-    appendMessagesColor(tr("Connections change") + ".", "#9999cc");
+    appendMessagesColor(tr("Audio connection change") + ".", "#9999cc");
+}
+
+
+// ALSA connection notification slot.
+void qjackctlMainForm::alsaConnectChanged (void)
+{
+    // Just shake the connection status quo.
+    m_iDirtyCount++;
+
+    appendMessagesColor(tr("MIDI connection change") + ".", "#9999cc");
 }
 
 
@@ -1140,7 +1222,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // Remember to schedule an initial connection refreshment.
     refreshConnections();
-    
+
     // If we've started detached, just change active status.
     if (m_bJackDetach) {
         QString sTemp = tr("Active");
@@ -1213,14 +1295,32 @@ void qjackctlMainForm::stopJackClient (void)
 // Rebuild all patchbay items.
 void qjackctlMainForm::refreshConnections (void)
 {
+    refreshJackConnections();
+    refreshAlsaConnections();
+}
+
+void qjackctlMainForm::refreshJackConnections (void)
+{
     // Hack this as for a while.
     if (m_pConnectionsForm)
-        m_pConnectionsForm->stabilize(false);
+        m_pConnectionsForm->stabilizeJack(false);
 
     // Just increment our intentions; it will be deferred
     // to be executed just on timer slot processing...
-    m_iRefresh++;
+    m_iJackRefresh++;
 }
+
+void qjackctlMainForm::refreshAlsaConnections (void)
+{
+    // Hack this as for a while.
+    if (m_pConnectionsForm)
+        m_pConnectionsForm->stabilizeAlsa(false);
+
+    // Just increment our intentions; it will be deferred
+    // to be executed just on timer slot processing...
+    m_iAlsaRefresh++;
+}
+
 
 
 // Message log form requester slot.
@@ -1255,6 +1355,7 @@ void qjackctlMainForm::toggleConnectionsForm (void)
     if (m_pConnectionsForm) {
         m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
         m_pConnectionsForm->setJackClient(m_pJackClient);
+        m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
         if (m_pConnectionsForm->isVisible())
             m_pConnectionsForm->hide();
         else

@@ -7,7 +7,9 @@ headers = config.h \
 	src/qjackctlStatus.h \
 	src/qjackctlSetup.h \
 	src/qjackctlAbout.h \
-	src/qjackctlConnections.h \
+	src/qjackctlConnect.h \
+	src/qjackctlJackConnect.h \
+	src/qjackctlAlsaConnect.h \
 	src/qjackctlPatchbay.h \
 	src/qjackctlPatchbayRack.h \
 	src/qjackctlPatchbayFile.h \
@@ -22,7 +24,9 @@ headers = config.h \
           
 sources = src/main.cpp \
 	src/qjackctlSetup.cpp \
-	src/qjackctlConnections.cpp \
+	src/qjackctlConnect.cpp \
+	src/qjackctlJackConnect.cpp \
+	src/qjackctlAlsaConnect.cpp \
 	src/qjackctlPatchbay.cpp \
 	src/qjackctlPatchbayRack.cpp \
 	src/qjackctlPatchbayFile.cpp \

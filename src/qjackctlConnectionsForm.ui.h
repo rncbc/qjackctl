@@ -28,12 +28,18 @@
 // Kind of constructor.
 void qjackctlConnectionsForm::init (void)
 {
-    m_pJackClient = NULL;
-    m_pConnections = NULL;
+    m_pJackClient  = NULL;
+    m_pJackConnect = NULL;
 
-    // Connect it to some UI feedback slot.
-    QObject::connect(ConnectionsView->OListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
-    QObject::connect(ConnectionsView->IListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
+    m_pAlsaSeq     = NULL;
+    m_pAlsaConnect = NULL;
+
+    // Connect it to some UI feedback slots.
+    QObject::connect(JackConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
+    QObject::connect(JackConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
+
+    QObject::connect(AlsaConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
+    QObject::connect(AlsaConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
 }
 
 
@@ -42,6 +48,7 @@ void qjackctlConnectionsForm::destroy (void)
 {
     // Destroy our connections view...
     setJackClient(NULL);
+    setAlsaSeq(NULL);
 }
 
 
@@ -52,7 +59,8 @@ void qjackctlConnectionsForm::showEvent ( QShowEvent *pShowEvent )
     if (pMainForm)
         pMainForm->stabilizeForm();
 
-    refreshForm();
+    jackRefresh();
+    alsaRefresh();
 
     QWidget::showEvent(pShowEvent);
 }
@@ -73,95 +81,190 @@ void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
 {
     m_pJackClient = pJackClient;
 
-    if (pJackClient == NULL && m_pConnections) {
-        delete m_pConnections;
-        m_pConnections = NULL;
+    if (pJackClient == NULL && m_pJackConnect) {
+        delete m_pJackConnect;
+        m_pJackConnect = NULL;
     }
     
-    if (pJackClient && m_pConnections == NULL) {
-        m_pConnections = new qjackctlConnections(ConnectionsView, pJackClient);
-        if (m_pConnections) {
+    if (pJackClient && m_pJackConnect == NULL) {
+        m_pJackConnect = new qjackctlJackConnect(JackConnectView, pJackClient);
+        if (m_pJackConnect) {
             qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
             if (pMainForm)
-                QObject::connect(m_pConnections, SIGNAL(connectChanged()), pMainForm, SLOT(connectChangedSlot()));
+                QObject::connect(m_pJackConnect, SIGNAL(connectChanged()), pMainForm, SLOT(jackConnectChanged()));
         }
     }
 
-    stabilize(pJackClient != NULL);
+    stabilizeJack(pJackClient != NULL);
 }
 
 
-// Connect current selected ports.
-void qjackctlConnectionsForm::connectSelected (void)
+// (Un)Bind a ALSA sequencer descriptor to this form.
+void qjackctlConnectionsForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 {
-    if (m_pConnections) {
-        if (m_pConnections->connectSelected())
-            refresh(false);
+    m_pAlsaSeq = pAlsaSeq;
+
+    if (pAlsaSeq == NULL && m_pAlsaConnect) {
+        delete m_pAlsaConnect;
+        m_pAlsaConnect = NULL;
+    }
+
+    if (pAlsaSeq && m_pAlsaConnect == NULL) {
+        m_pAlsaConnect = new qjackctlAlsaConnect(AlsaConnectView, pAlsaSeq);
+        if (m_pAlsaConnect) {
+            qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+            if (pMainForm)
+                QObject::connect(m_pAlsaConnect, SIGNAL(connectChanged()), pMainForm, SLOT(alsaConnectChanged()));
+        }
+    }
+
+    stabilizeAlsa(pAlsaSeq != NULL);
+}
+
+
+
+// Connect current selected ports.
+void qjackctlConnectionsForm::jackConnectSelected (void)
+{
+    if (m_pJackConnect) {
+        if (m_pJackConnect->connectSelected())
+            refreshJack(false);
     }
 }
 
 
 // Disconnect current selected ports.
-void qjackctlConnectionsForm::disconnectSelected (void)
+void qjackctlConnectionsForm::jackDisconnectSelected (void)
 {
-    if (m_pConnections) {
-        if (m_pConnections->disconnectSelected())
-            refresh(false);
+    if (m_pJackConnect) {
+        if (m_pJackConnect->disconnectSelected())
+            refreshJack(false);
     }
 }
 
 
 // Disconnect all connected ports.
-void qjackctlConnectionsForm::disconnectAll()
+void qjackctlConnectionsForm::jackDisconnectAll()
 {
-    if (m_pConnections) {
-        if (m_pConnections->disconnectAll())
-            refresh(false);
+    if (m_pJackConnect) {
+        if (m_pJackConnect->disconnectAll())
+            refreshJack(false);
     }
 }
 
 
 // Refresh complete form by notifying the parent form.
-void qjackctlConnectionsForm::refreshForm ( void )
+void qjackctlConnectionsForm::jackRefresh ( void )
 {
-    refresh(false);
+    refreshJack(false);
 }
 
 
 // A helper stabilization slot.
-void qjackctlConnectionsForm::stabilizeForm ( void )
+void qjackctlConnectionsForm::jackStabilize ( void )
 {
-    stabilize(true);
+    stabilizeJack(true);
+}
+
+
+// Connect current selected ports.
+void qjackctlConnectionsForm::alsaConnectSelected (void)
+{
+    if (m_pAlsaConnect) {
+        if (m_pAlsaConnect->connectSelected())
+            refreshAlsa(false);
+    }
+}
+
+
+// Disconnect current selected ports.
+void qjackctlConnectionsForm::alsaDisconnectSelected (void)
+{
+    if (m_pAlsaConnect) {
+        if (m_pAlsaConnect->disconnectSelected())
+            refreshAlsa(false);
+    }
+}
+
+
+// Disconnect all connected ports.
+void qjackctlConnectionsForm::alsaDisconnectAll()
+{
+    if (m_pAlsaConnect) {
+        if (m_pAlsaConnect->disconnectAll())
+            refreshAlsa(false);
+    }
+}
+
+
+// Refresh complete form by notifying the parent form.
+void qjackctlConnectionsForm::alsaRefresh ( void )
+{
+    refreshAlsa(false);
+}
+
+
+// A helper stabilization slot.
+void qjackctlConnectionsForm::alsaStabilize ( void )
+{
+    stabilizeAlsa(true);
 }
 
 
 // Either rebuild all connections now or notify main form for doing that later.
-void qjackctlConnectionsForm::refresh ( bool bEnabled )
+void qjackctlConnectionsForm::refreshJack ( bool bEnabled )
 {
-    if (m_pConnections && bEnabled) {
-        m_pConnections->refresh();
-        stabilize(true);
+    if (m_pJackConnect && bEnabled) {
+        m_pJackConnect->refresh();
+        stabilizeJack(true);
     } else {
         qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
         if (pMainForm)
-            pMainForm->refreshConnections();
+            pMainForm->refreshJackConnections();
+    }
+}
+
+void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled )
+{
+    if (m_pAlsaConnect && bEnabled) {
+        m_pAlsaConnect->refresh();
+        stabilizeAlsa(true);
+    } else {
+        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+        if (pMainForm)
+            pMainForm->refreshAlsaConnections();
     }
 }
 
 
 // Proper enablement of connections command controls.
-void qjackctlConnectionsForm::stabilize ( bool bEnabled )
+void qjackctlConnectionsForm::stabilizeJack ( bool bEnabled )
 {
-    if (m_pConnections && bEnabled) {
-        ConnectPushButton->setEnabled(m_pConnections->canConnectSelected());
-        DisconnectPushButton->setEnabled(m_pConnections->canDisconnectSelected());
-        DisconnectAllPushButton->setEnabled(m_pConnections->canDisconnectAll());
-        RefreshPushButton->setEnabled(true);
+    if (m_pJackConnect && bEnabled) {
+        JackConnectPushButton->setEnabled(m_pJackConnect->canConnectSelected());
+        JackDisconnectPushButton->setEnabled(m_pJackConnect->canDisconnectSelected());
+        JackDisconnectAllPushButton->setEnabled(m_pJackConnect->canDisconnectAll());
+        JackRefreshPushButton->setEnabled(true);
     } else {
-        ConnectPushButton->setEnabled(false);
-        DisconnectPushButton->setEnabled(false);
-        DisconnectAllPushButton->setEnabled(false);
-        RefreshPushButton->setEnabled(false);
+        JackConnectPushButton->setEnabled(false);
+        JackDisconnectPushButton->setEnabled(false);
+        JackDisconnectAllPushButton->setEnabled(false);
+        JackRefreshPushButton->setEnabled(false);
+    }
+}
+
+void qjackctlConnectionsForm::stabilizeAlsa ( bool bEnabled )
+{
+    if (m_pAlsaConnect && bEnabled) {
+        AlsaConnectPushButton->setEnabled(m_pAlsaConnect->canConnectSelected());
+        AlsaDisconnectPushButton->setEnabled(m_pAlsaConnect->canDisconnectSelected());
+        AlsaDisconnectAllPushButton->setEnabled(m_pAlsaConnect->canDisconnectAll());
+        AlsaRefreshPushButton->setEnabled(true);
+    } else {
+        AlsaConnectPushButton->setEnabled(false);
+        AlsaDisconnectPushButton->setEnabled(false);
+        AlsaDisconnectAllPushButton->setEnabled(false);
+        AlsaRefreshPushButton->setEnabled(false);
     }
 }
 

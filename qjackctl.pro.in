@@ -4,13 +4,17 @@ SOURCES += src/main.cpp \
            src/qjackctlPatchbay.cpp \
            src/qjackctlPatchbayRack.cpp \
            src/qjackctlPatchbayFile.cpp \
-           src/qjackctlConnections.cpp \
+           src/qjackctlJackConnect.cpp \
+           src/qjackctlAlsaConnect.cpp \
+           src/qjackctlConnect.cpp \
            src/qjackctlSetup.cpp
 
 HEADERS += src/qjackctlPatchbay.h \
            src/qjackctlPatchbayRack.h \
            src/qjackctlPatchbayFile.h \
-           src/qjackctlConnections.h \
+           src/qjackctlJackConnect.h \
+           src/qjackctlAlsaConnect.h \
+           src/qjackctlConnect.h \
            src/qjackctlStatus.h \
            src/qjackctlSetup.h \
            src/qjackctlAbout.h
@@ -34,7 +38,6 @@ IMAGES   = icons/qjackctl.xpm \
            icons/status1.png \
            icons/connections1.png \
            icons/patchbay1.png \
-           icons/patchbay2.png \
            icons/setup1.png \
            icons/about1.png \
            icons/accept1.png \
@@ -54,5 +57,5 @@ TEMPLATE = app
 CONFIG  += qt @ac_thread@ warn_on @ac_debug@
 LANGUAGE = C++
 
-LIBS    += -ljack
+LIBS    += -ljack -lasound
 

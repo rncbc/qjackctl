@@ -110,19 +110,34 @@ AC_CHECK_LIB(m, main)
 AC_CHECK_LIB(X11, main)
 AC_CHECK_LIB(Xext, main)
 AC_CHECK_LIB($ac_qtlib, main)
+
+dnl Check for JACK libraries.
 AC_CHECK_LIB(jack, main, [ac_jack_lib="yes"], [ac_jack_lib="no"])
 if test "x$ac_jack_lib" = "xno"; then
    AC_MSG_ERROR([JACK library not found.])
 fi
 
+dnl Check for ALSA libraries.
+AC_CHECK_LIB(asound, main, [ac_alsa_lib="yes"], [ac_alsa_lib="no"])
+if test "x$ac_alsa_lib" = "xno"; then
+   AC_MSG_ERROR([ALSA library not found.])
+fi
+
 dnl Checks for header files.
 AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS(fcntl.h sys/ioctl.h unistd.h)
+AC_CHECK_HEADERS(fcntl.h sys/ioctl.h unistd.h poll.h)
 
+dnl Check for JACK headers.
 AC_CHECK_HEADER(jack/jack.h, [ac_jack_h="yes"], [ac_jack_h="no"])
 if test "x$ac_jack_h" = "xno"; then
    AC_MSG_ERROR([JACK headers not found.])
+fi
+
+dnl Check for ALSA headers.
+AC_CHECK_HEADER(alsa/asoundlib.h, [ac_alsa_h="yes"], [ac_alsa_h="no"])
+if test "x$ac_alsa_h" = "xno"; then
+   AC_MSG_ERROR([ALSA headers not found.])
 fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.

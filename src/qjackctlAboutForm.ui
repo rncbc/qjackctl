@@ -29,7 +29,7 @@
             <x>0</x>
             <y>0</y>
             <width>480</width>
-            <height>240</height>
+            <height>243</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -48,7 +48,7 @@
         <string>About qjackctl</string>
     </property>
     <property name="icon">
-        <pixmap>qjackctl.xpm</pixmap>
+        <pixmap>about1.png</pixmap>
     </property>
     <property name="sizeGripEnabled">
         <bool>true</bool>

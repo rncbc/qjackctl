@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>480</width>
-            <height>243</height>
+            <width>403</width>
+            <height>247</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -57,111 +57,241 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="qjackctlConnectionsView" row="0" column="0">
+        <widget class="QTabWidget" row="0" column="0">
             <property name="name">
-                <cstring>ConnectionsView</cstring>
+                <cstring>ConnectionsTabWidget</cstring>
             </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="focusPolicy">
-                <enum>TabFocus</enum>
-            </property>
-        </widget>
-        <widget class="QLayoutWidget" row="1" column="0">
-            <property name="name">
-                <cstring>layout1</cstring>
-            </property>
-            <hbox>
+            <widget class="QWidget">
                 <property name="name">
-                    <cstring>unnamed</cstring>
+                    <cstring>JackConnectTab</cstring>
                 </property>
-                <widget class="QPushButton">
+                <attribute name="title">
+                    <string>Audio</string>
+                </attribute>
+                <grid>
                     <property name="name">
-                        <cstring>ConnectPushButton</cstring>
+                        <cstring>unnamed</cstring>
                     </property>
-                    <property name="text">
-                        <string>&amp;Connect</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+C</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Connect currently selected ports</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
+                    <widget class="qjackctlConnectView" row="0" column="0">
+                        <property name="name">
+                            <cstring>JackConnectView</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>7</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="focusPolicy">
+                            <enum>TabFocus</enum>
+                        </property>
+                    </widget>
+                    <widget class="QLayoutWidget" row="1" column="0">
+                        <property name="name">
+                            <cstring>JackLayout1</cstring>
+                        </property>
+                        <hbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>JackConnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Connect</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+C</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Connect currently selected ports</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>JackDisconnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Disconnect</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+D</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Disconnect currently selected ports</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>JackDisconnectAllPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Disconnect &amp;All</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+A</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Disconnect all currently connected ports</string>
+                                </property>
+                            </widget>
+                            <spacer>
+                                <property name="name">
+                                    <cstring>JackSpacer1</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>87</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>JackRefreshPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Refresh</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+R</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Refresh current connections view</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>AlsaConnectTab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>MIDI</string>
+                </attribute>
+                <grid>
                     <property name="name">
-                        <cstring>DisconnectPushButton</cstring>
+                        <cstring>unnamed</cstring>
                     </property>
-                    <property name="text">
-                        <string>&amp;Disconnect</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+D</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Disconnect currently selected ports</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>DisconnectAllPushButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Disconnect &amp;All</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+A</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Disconnect all currently connected ports</string>
-                    </property>
-                </widget>
-                <spacer>
-                    <property name="name">
-                        <cstring>spacer1</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>87</width>
-                            <height>8</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>RefreshPushButton</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Refresh</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+R</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Refresh current connections view</string>
-                    </property>
-                </widget>
-            </hbox>
+                    <widget class="qjackctlConnectView" row="0" column="0">
+                        <property name="name">
+                            <cstring>AlsaConnectView</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>7</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="focusPolicy">
+                            <enum>TabFocus</enum>
+                        </property>
+                    </widget>
+                    <widget class="QLayoutWidget" row="1" column="0">
+                        <property name="name">
+                            <cstring>AlsaLayout1</cstring>
+                        </property>
+                        <hbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>AlsaConnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Connect</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+C</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Connect currently selected ports</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>AlsaDisconnectPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Disconnect</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+D</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Disconnect currently selected ports</string>
+                                </property>
+                            </widget>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>AlsaDisconnectAllPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Disconnect &amp;All</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+A</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Disconnect all currently connected ports</string>
+                                </property>
+                            </widget>
+                            <spacer>
+                                <property name="name">
+                                    <cstring>AlsaSpacer1</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>87</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QPushButton">
+                                <property name="name">
+                                    <cstring>AlsaRefreshPushButton</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Refresh</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+R</string>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Refresh current connections view</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                </grid>
+            </widget>
         </widget>
     </grid>
 </widget>
 <customwidgets>
     <customwidget>
-        <class>qjackctlConnectionsView</class>
-        <header location="local">qjackctlConnections.h</header>
+        <class>qjackctlConnectView</class>
+        <header location="local">qjackctlConnect.h</header>
         <sizehint>
             <width>300</width>
             <height>120</height>
@@ -183,52 +313,90 @@
 </images>
 <connections>
     <connection>
-        <sender>ConnectPushButton</sender>
+        <sender>JackConnectPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlConnectionsForm</receiver>
-        <slot>connectSelected()</slot>
+        <slot>jackConnectSelected()</slot>
     </connection>
     <connection>
-        <sender>DisconnectPushButton</sender>
+        <sender>JackDisconnectPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlConnectionsForm</receiver>
-        <slot>disconnectSelected()</slot>
+        <slot>jackDisconnectSelected()</slot>
     </connection>
     <connection>
-        <sender>DisconnectAllPushButton</sender>
+        <sender>JackDisconnectAllPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlConnectionsForm</receiver>
-        <slot>disconnectAll()</slot>
+        <slot>jackDisconnectAll()</slot>
     </connection>
     <connection>
-        <sender>RefreshPushButton</sender>
+        <sender>JackRefreshPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlConnectionsForm</receiver>
-        <slot>refreshForm()</slot>
+        <slot>jackRefresh()</slot>
+    </connection>
+    <connection>
+        <sender>AlsaConnectPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlConnectionsForm</receiver>
+        <slot>alsaConnectSelected()</slot>
+    </connection>
+    <connection>
+        <sender>AlsaDisconnectPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlConnectionsForm</receiver>
+        <slot>alsaDisconnectSelected()</slot>
+    </connection>
+    <connection>
+        <sender>AlsaDisconnectAllPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlConnectionsForm</receiver>
+        <slot>alsaDisconnectAll()</slot>
+    </connection>
+    <connection>
+        <sender>AlsaRefreshPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlConnectionsForm</receiver>
+        <slot>alsaRefresh()</slot>
     </connection>
 </connections>
 <tabstops>
-    <tabstop>ConnectionsView</tabstop>
-    <tabstop>ConnectPushButton</tabstop>
-    <tabstop>DisconnectPushButton</tabstop>
-    <tabstop>DisconnectAllPushButton</tabstop>
-    <tabstop>RefreshPushButton</tabstop>
+    <tabstop>ConnectionsTabWidget</tabstop>
+    <tabstop>JackConnectView</tabstop>
+    <tabstop>JackConnectPushButton</tabstop>
+    <tabstop>JackDisconnectPushButton</tabstop>
+    <tabstop>JackDisconnectAllPushButton</tabstop>
+    <tabstop>JackRefreshPushButton</tabstop>
+    <tabstop>AlsaConnectView</tabstop>
+    <tabstop>AlsaConnectPushButton</tabstop>
+    <tabstop>AlsaDisconnectPushButton</tabstop>
+    <tabstop>AlsaDisconnectAllPushButton</tabstop>
+    <tabstop>AlsaRefreshPushButton</tabstop>
 </tabstops>
 <includes>
-    <include location="local" impldecl="in declaration">qjackctlConnections.h</include>
+    <include location="local" impldecl="in declaration">qjackctlJackConnect.h</include>
+    <include location="local" impldecl="in declaration">qjackctlAlsaConnect.h</include>
     <include location="local" impldecl="in implementation">qjackctlMainForm.h</include>
     <include location="local" impldecl="in implementation">qjackctlConnectionsForm.ui.h</include>
 </includes>
 <variables>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
-    <variable access="private">qjackctlConnections *m_pConnections;</variable>
+    <variable access="private">snd_seq_t *m_pAlsaSeq;</variable>
+    <variable access="private">qjackctlJackConnect *m_pJackConnect;</variable>
+    <variable access="private">qjackctlAlsaConnect *m_pAlsaConnect;</variable>
 </variables>
 <slots>
-    <slot specifier="non virtual">connectSelected()</slot>
-    <slot specifier="non virtual">disconnectSelected()</slot>
-    <slot specifier="non virtual">disconnectAll()</slot>
-    <slot specifier="non virtual">refreshForm()</slot>
-    <slot specifier="non virtual">stabilizeForm()</slot>
+    <slot specifier="non virtual">jackConnectSelected()</slot>
+    <slot specifier="non virtual">jackDisconnectSelected()</slot>
+    <slot specifier="non virtual">jackDisconnectAll()</slot>
+    <slot specifier="non virtual">jackRefresh()</slot>
+    <slot specifier="non virtual">jackStabilize()</slot>
+    <slot specifier="non virtual">alsaConnectSelected()</slot>
+    <slot specifier="non virtual">alsaDisconnectSelected()</slot>
+    <slot specifier="non virtual">alsaDisconnectAll()</slot>
+    <slot specifier="non virtual">alsaRefresh()</slot>
+    <slot specifier="non virtual">alsaStabilize()</slot>
 </slots>
 <functions>
     <function access="private" specifier="non virtual">init()</function>
@@ -236,12 +404,16 @@
     <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
     <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
-    <function specifier="non virtual">refresh( bool bEnabled )</function>
-    <function specifier="non virtual">stabilize( bool bEnabled )</function>
+    <function specifier="non virtual">setAlsaSeq( snd_seq_t * pAlsaSeq )</function>
+    <function specifier="non virtual">refreshJack( bool bEnabled )</function>
+    <function specifier="non virtual">refreshAlsa( bool bEnabled )</function>
+    <function specifier="non virtual">stabilizeJack( bool bEnabled )</function>
+    <function specifier="non virtual">stabilizeAlsa( bool bEnabled )</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>
 <includehints>
-    <includehint>qjackctlconnectionsview.h</includehint>
+    <includehint>qjackctlconnectview.h</includehint>
+    <includehint>qjackctlconnectview.h</includehint>
 </includehints>
 </UI>

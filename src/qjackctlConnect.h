@@ -1,4 +1,4 @@
-// qjackctlConnections.h
+// qjackctlConnect.h
 //
 /****************************************************************************
    Copyright (C) 2003, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,8 +19,8 @@
 
 *****************************************************************************/
 
-#ifndef __qjackctlConnections_h
-#define __qjackctlConnections_h
+#ifndef __qjackctlConnect_h
+#define __qjackctlConnect_h
 
 #include <qdragobject.h>
 #include <qlistview.h>
@@ -30,11 +30,10 @@
 #include <qpixmap.h>
 #include <qpainter.h>
 
-#include <jack/jack.h>
-
 // QListViewItem::rtti return values.
-#define QJACKCTL_CLIENTITEM 1001
-#define QJACKCTL_PORTITEM   1002
+#define QJACKCTL_CLIENTITEM    1001
+#define QJACKCTL_PORTITEM      1002
+
 
 // Forward declarations.
 class qjackctlPortItem;
@@ -42,16 +41,16 @@ class qjackctlClientItem;
 class qjackctlClientList;
 class qjackctlClientListView;
 class qjackctlConnectorView;
-class qjackctlConnectionsView;
-class qjackctlConnections;
+class qjackctlConnectView;
+class qjackctlConnect;
 
-// Jack port list item.
+// Port list item.
 class qjackctlPortItem : public QListViewItem
 {
 public:
 
     // Constructor.
-    qjackctlPortItem(qjackctlClientItem *pClient, const QString& sPortName, jack_port_t *pJackPort);
+    qjackctlPortItem(qjackctlClientItem *pClient, const QString& sPortName);
     // Default destructor.
     ~qjackctlPortItem();
 
@@ -61,10 +60,6 @@ public:
 
     // Complete client:port name helper.
     QString clientPortName();
-
-    // Jack handles accessors.
-    jack_client_t *jackClient();
-    jack_port_t   *jackPort();
 
     // Connections client item accessor.
     qjackctlClientItem *client();
@@ -85,11 +80,11 @@ public:
     // Connection list accessor.
     QPtrList<qjackctlPortItem>& connects();
 
-    // To virtually distinguish between list view items.
-    virtual int rtti() const;
-
     // Special port name sorting virtual comparator.
     virtual int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
+
+    // To virtually distinguish between list view items.
+    virtual int rtti() const;
 
 private:
 
@@ -97,14 +92,13 @@ private:
     qjackctlClientItem *m_pClient;
     QString      m_sPortName;
     int          m_iPortMark;
-    jack_port_t *m_pJackPort;
-    
+
     // Connection cache list.
     QPtrList<qjackctlPortItem> m_connects;
 };
 
 
-// Jack client list item.
+// Client list item.
 class qjackctlClientItem : public QListViewItem
 {
 public:
@@ -124,10 +118,12 @@ public:
     // Instance accessors.
     QString& clientName();
 
-    // Jack client accessors.
-    jack_client_t *jackClient();
-    unsigned long  jackFlags();
+    // Readable flag accessor.
+    bool isReadable();
 
+    // Client list accessor.
+    qjackctlClientList *clientlist();
+    
     // Port list accessor.
     QPtrList<qjackctlPortItem>& ports();
 
@@ -139,7 +135,7 @@ public:
     int clientMark();
 
     // To virtually distinguish between list view items.
-    int rtti() const;
+    virtual int rtti() const;
 
 private:
 
@@ -160,7 +156,7 @@ class qjackctlClientList : public QObject
 public:
 
     // Constructor.
-    qjackctlClientList(qjackctlClientListView *pListView, jack_client_t *pJackClient, unsigned long ulJackFlags);
+    qjackctlClientList(qjackctlClientListView *pListView, bool bReadable);
     // Default destructor.
     ~qjackctlClientList();
 
@@ -176,9 +172,8 @@ public:
     // List view accessor.
     qjackctlClientListView *listView();
 
-    // Jack client accessors.
-    jack_client_t *jackClient();
-    unsigned long  jackFlags();
+    // Readable flag accessor.
+    bool isReadable();
 
     // Client list accessor.
     QPtrList<qjackctlClientItem>& clients();
@@ -188,14 +183,13 @@ public:
     void cleanClientPorts(int iMark);
 
     // Client:port refreshner (return newest item count).
-    int updateClientPorts();
+    virtual int updateClientPorts() = 0;
 
 private:
 
     // Instance variables.
     qjackctlClientListView *m_pListView;
-    jack_client_t *m_pJackClient;
-    unsigned long  m_ulJackFlags;
+    bool m_bReadable;
 
     QPtrList<qjackctlClientItem> m_clients;
 };
@@ -211,7 +205,7 @@ class qjackctlClientListView : public QListView
 public:
 
     // Constructor.
-    qjackctlClientListView(QWidget *pParent, qjackctlConnectionsView *pConnectionsView);
+    qjackctlClientListView(QWidget *pParent, qjackctlConnectView *pConnectionsView);
     // Default destructor.
     ~qjackctlClientListView();
 
@@ -238,13 +232,13 @@ protected:
 private:
 
     // Bindings.
-    qjackctlConnectionsView *m_pConnectionsView;
+    qjackctlConnectView *m_pConnectView;
 
     // Drag-n-drop stuff.
     QListViewItem *dragDropItem(const QPoint& epos);
 
     // Auto-open timer.
-    int    m_iAutoOpenTimeout;
+    int     m_iAutoOpenTimeout;
     QTimer *m_pAutoOpenTimer;
     // Item we'll eventually drop something.
     QListViewItem *m_pDragDropItem;
@@ -261,7 +255,7 @@ class qjackctlConnectorView : public QWidget
 public:
 
     // Constructor.
-    qjackctlConnectorView(QWidget *pParent, qjackctlConnectionsView *pConnectionsView);
+    qjackctlConnectorView(QWidget *pParent, qjackctlConnectView *pConnectView);
     // Default destructor.
     ~qjackctlConnectorView();
 
@@ -286,23 +280,23 @@ private:
     void drawConnections();
     
     // Local instance variables.
-    qjackctlConnectionsView *m_pConnectionsView;
+    qjackctlConnectView *m_pConnectView;
 };
 
 
 //----------------------------------------------------------------------------
-// qjackctlConnectionsView -- Connections view integrated widget.
+// qjackctlConnectView -- Connections view integrated widget.
 
-class qjackctlConnectionsView : public QWidget
+class qjackctlConnectView : public QWidget
 {
     Q_OBJECT
 
 public:
 
     // Constructor.
-    qjackctlConnectionsView(QWidget *pParent = 0, const char *pszName = 0);
+    qjackctlConnectView(QWidget *pParent = 0, const char *pszName = 0);
     // Default destructor.
-    ~qjackctlConnectionsView();
+    ~qjackctlConnectView();
 
     // Widget accesors.
     QGridLayout            *GridLayout()    { return m_pGridLayout; }
@@ -311,8 +305,8 @@ public:
     qjackctlConnectorView  *ConnectorView() { return m_pConnectorView; }
 
     // Connections object binding methods.
-    void setBinding(qjackctlConnections *pConnections);
-    qjackctlConnections *binding();
+    void setBinding(qjackctlConnect *pConnect);
+    qjackctlConnect *binding();
     
     // Client list accessors.
     qjackctlClientList *OClientList();
@@ -332,23 +326,23 @@ private:
     qjackctlConnectorView  *m_pConnectorView;
 
     // The main binding object.
-    qjackctlConnections *m_pConnections;
+    qjackctlConnect *m_pConnect;
 };
 
 
 //----------------------------------------------------------------------------
-// qjackctlConnections -- Connections model integrated object.
+// qjackctlConnect -- Connections model integrated object.
 
-class qjackctlConnections : public QObject
+class qjackctlConnect : public QObject
 {
     Q_OBJECT
 
 public:
 
     // Constructor.
-    qjackctlConnections(qjackctlConnectionsView *pConnectionsView, jack_client_t *pJackClient);
+    qjackctlConnect(qjackctlConnectView *pConnectView);
     // Default destructor.
-    ~qjackctlConnections();
+    ~qjackctlConnect();
 
     // Explicit connection tests.
     bool canConnectSelected();
@@ -374,18 +368,25 @@ signals:
     // Connection change signal.
     void connectChanged();
 
+protected:
+
+    // Connect/Disconnection primitives.
+    virtual void connectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
+    virtual void disconnectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
+
+    // Update port connection references.
+    virtual void updateConnections() = 0;
+
+    // These must be accessed by the descendant constructor.
+    qjackctlConnectView *connectView();
+    void setOClientList(qjackctlClientList *pOClientList);
+    void setIClientList(qjackctlClientList *pIClientList);
+    
 private:
 
     // Dunno. But this may avoid some conflicts.
     bool startExclusive();
     void endExclusive();
-
-    // Update port connection references.
-    void updateConnections();
-
-    // Connect/Disconnection primitives.
-    void connectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
-    void disconnectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
 
     // Connection methods (unguarded).
     bool canConnectSelectedEx();
@@ -395,14 +396,19 @@ private:
     bool disconnectSelectedEx();
     bool disconnectAllEx();
 
+    // Connect/Disconnection local primitives.
+    void connectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+    void disconnectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+
     // Instance variables.
-    qjackctlConnectionsView *m_pConnectionsView;
+    qjackctlConnectView *m_pConnectView;
+    // These must be created on the descendant constructor.
     qjackctlClientList *m_pOClientList;
     qjackctlClientList *m_pIClientList;
     int m_iExclusive;
 };
 
 
-#endif  // __qjackctlConnections_h
+#endif  // __qjackctlConnect_h
 
-// end of qjackctlConnections.h
+// end of qjackctlConnect.h
