@@ -49,9 +49,9 @@ $(name).mak:	$(name).pro
 $(name):	$(name).mak $(sources) $(headers)
 	@make -f $(name).mak $(name)
 
-install:	$(name) icons/$(name).xpm
+install:	$(name) icons/$(name).png
 	@install -vD $(name) $(prefix)/bin/$(name)
-	@install -vD icons/$(name).xpm $(prefix)/share/icons/$(name).png
+	@install -vD icons/$(name).png $(prefix)/share/icons/$(name).png
 
 uninstall:	$(prefix)/bin/$(name)
 	@rm -vf $(prefix)/bin/$(name)
