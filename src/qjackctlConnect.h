@@ -83,12 +83,22 @@ public:
     // To virtually distinguish between list view items.
     virtual int rtti() const;
 
+    // Connectiopn highlight methods.
+    bool isHilite();
+    void setHilite (bool bHilite);
+    
+protected:
+
+    // To highlight current connected ports when complementary-selected.
+    virtual void paintCell(QPainter *p, const QColorGroup& cg, int column, int width, int align);
+
 private:
 
     // Instance variables.
     qjackctlClientItem *m_pClient;
     QString      m_sPortName;
     int          m_iPortMark;
+    bool         m_bHilite;
 
     // Connection cache list.
     QPtrList<qjackctlPortItem> m_connects;
@@ -134,12 +144,22 @@ public:
     // To virtually distinguish between list view items.
     virtual int rtti() const;
 
+    // Connectiopn highlight methods.
+    bool isHilite();
+    void setHilite (bool bHilite);
+
+protected:
+
+    // To highlight current connected ports when complementary-selected.
+    virtual void paintCell(QPainter *p, const QColorGroup& cg, int column, int width, int align);
+
 private:
 
     // Instance variables.
     qjackctlClientList *m_pClientList;
     QString m_sClientName;
     int     m_iClientMark;
+    bool    m_bHilite;
 
     QPtrList<qjackctlPortItem> m_ports;
 };
@@ -182,6 +202,9 @@ public:
     // Client:port refreshner (return newest item count).
     virtual int updateClientPorts() = 0;
 
+    // Client:port hilite update stabilization.
+    void hiliteClientPorts (void);
+
 private:
 
     // Instance variables.
@@ -189,6 +212,8 @@ private:
     bool m_bReadable;
 
     QPtrList<qjackctlClientItem> m_clients;
+
+    QListViewItem *m_pHiliteItem;
 };
 
 
@@ -382,8 +407,8 @@ protected:
 private:
 
     // Dunno. But this may avoid some conflicts.
-    bool startExclusive();
-    void endExclusive();
+    bool startMutex();
+    void endMutex();
 
     // Connection methods (unguarded).
     bool canConnectSelectedEx();
@@ -402,7 +427,7 @@ private:
     // These must be created on the descendant constructor.
     qjackctlClientList *m_pOClientList;
     qjackctlClientList *m_pIClientList;
-    int m_iExclusive;
+    int m_iMutex;
 };
 
 

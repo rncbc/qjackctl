@@ -37,6 +37,7 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient, const QString&
     m_pClient   = pClient;
     m_sPortName = sPortName;
     m_iPortMark = 0;
+    m_bHilite   = false;
 
     m_pClient->ports().append(this);
 
@@ -153,6 +154,34 @@ int qjackctlPortItem::rtti (void) const
 }
 
 
+// Connectiopn highlight methods.
+bool qjackctlPortItem::isHilite (void)
+{
+    return m_bHilite;
+}
+
+void qjackctlPortItem::setHilite ( bool bHilite )
+{
+    // Update the port highlightning if changed...
+    if ((m_bHilite && !bHilite) || (!m_bHilite && bHilite)) {
+        m_bHilite = bHilite;
+        QListViewItem::repaint();
+    }
+    // Propagate this to the parent...
+    m_pClient->setHilite(m_bHilite);
+}
+
+
+// To highlight current connected ports when complementary-selected.
+void qjackctlPortItem::paintCell( QPainter *p, const QColorGroup& cg, int column, int width, int align )
+{
+    QColorGroup cgCell(cg);
+    if (m_bHilite)
+        cgCell.setColor(QColorGroup::Text, Qt::blue);
+    QListViewItem::paintCell(p, cgCell, column, width, align);
+}
+
+
 //----------------------------------------------------------------------
 // class qjackctlClientItem -- Jack client list item.
 //
@@ -164,6 +193,7 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList, const 
     m_pClientList = pClientList;
     m_sClientName = sClientName;
     m_iClientMark = 0;
+    m_bHilite     = false;
 
     m_ports.setAutoDelete(false);
 
@@ -263,6 +293,32 @@ int qjackctlClientItem::rtti (void) const
 }
 
 
+// Connectiopn highlight methods.
+bool qjackctlClientItem::isHilite (void)
+{
+    return m_bHilite;
+}
+
+void qjackctlClientItem::setHilite ( bool bHilite )
+{
+    // Update the client highlightning if changed...
+    if ((m_bHilite && !bHilite) || (!m_bHilite && bHilite)) {
+        m_bHilite = bHilite;
+        QListViewItem::repaint();
+    }
+}
+
+
+// To highlight current connected clients when complementary-selected.
+void qjackctlClientItem::paintCell( QPainter *p, const QColorGroup& cg, int column, int width, int align )
+{
+    QColorGroup cgCell(cg);
+    if (m_bHilite)
+        cgCell.setColor(QColorGroup::Text, Qt::darkBlue);
+    QListViewItem::paintCell(p, cgCell, column, width, align);
+}
+
+
 //----------------------------------------------------------------------
 // qjackctlClientList -- Client list.
 //
@@ -272,6 +328,8 @@ qjackctlClientList::qjackctlClientList( qjackctlClientListView *pListView, bool 
 {
     m_pListView = pListView;
     m_bReadable = bReadable;
+
+    m_pHiliteItem = 0;
 
     m_clients.setAutoDelete(false);
 }
@@ -349,6 +407,48 @@ void qjackctlClientList::cleanClientPorts ( int iMark )
             pClient->cleanClientPorts(iMark);
         }
     }
+}
+
+// Client:port hilite update stabilization.
+void qjackctlClientList::hiliteClientPorts (void)
+{
+    qjackctlClientItem *pClient;
+    qjackctlPortItem *pPort, *p;
+
+    QListViewItem *pItem = m_pListView->selectedItem();
+
+    // Dehilite the previous selected items.
+    if (m_pHiliteItem && pItem != m_pHiliteItem) {
+        if (m_pHiliteItem->rtti() == QJACKCTL_CLIENTITEM) {
+            pClient = (qjackctlClientItem *) m_pHiliteItem;
+            for (pPort = pClient->ports().first(); pPort; pPort = pClient->ports().next()) {
+                for (p = pPort->connects().first(); p; p = pPort->connects().next())
+                    p->setHilite(false);
+            }
+        } else {
+            pPort = (qjackctlPortItem *) m_pHiliteItem;
+            for (p = pPort->connects().first(); p; p = pPort->connects().next())
+                p->setHilite(false);
+        }
+    }
+
+    // Hilite the now current selected items.
+    if (pItem && m_pHiliteItem != pItem) {
+        if (pItem->rtti() == QJACKCTL_CLIENTITEM) {
+            pClient = (qjackctlClientItem *) pItem;
+            for (pPort = pClient->ports().first(); pPort; pPort = pClient->ports().next()) {
+                for (p = pPort->connects().first(); p; p = pPort->connects().next())
+                    p->setHilite(true);
+            }
+        } else {
+            pPort = (qjackctlPortItem *) pItem;
+            for (p = pPort->connects().first(); p; p = pPort->connects().next())
+                p->setHilite(true);
+        }
+    }
+
+    // Do remember this one, ever.
+    m_pHiliteItem = pItem;
 }
 
 
@@ -761,7 +861,7 @@ qjackctlConnect::qjackctlConnect ( qjackctlConnectView *pConnectView )
     m_pOClientList = 0;
     m_pIClientList = 0;
 
-    m_iExclusive = 0;
+    m_iMutex = 0;
 
     m_pConnectView->setBinding(this);
 }
@@ -770,7 +870,7 @@ qjackctlConnect::qjackctlConnect ( qjackctlConnectView *pConnectView )
 qjackctlConnect::~qjackctlConnect (void)
 {
     // Force end of works here.
-    m_iExclusive++;
+    m_iMutex++;
 
     m_pConnectView->setBinding(0);
 
@@ -829,9 +929,9 @@ bool qjackctlConnect::canConnectSelected (void)
 {
     bool bResult = false;
 
-    if (startExclusive()) {
+    if (startMutex()) {
         bResult = canConnectSelectedEx();
-        endExclusive();
+        endMutex();
     }
 
     return bResult;
@@ -839,6 +939,11 @@ bool qjackctlConnect::canConnectSelected (void)
 
 bool qjackctlConnect::canConnectSelectedEx (void)
 {
+    // Take this opportunity to highlight any current selections.
+    m_pOClientList->hiliteClientPorts();
+    m_pIClientList->hiliteClientPorts();
+
+    // Now with our predicate work...
     QListViewItem *pOItem = (m_pOClientList->listView())->selectedItem();
     if (!pOItem)
         return false;
@@ -897,9 +1002,9 @@ bool qjackctlConnect::connectSelected (void)
 {
     bool bResult = false;
     
-    if (startExclusive()) {
+    if (startMutex()) {
         bResult = connectSelectedEx();
-        endExclusive();
+        endMutex();
     }
     m_pConnectView->ConnectorView()->update();
 
@@ -966,9 +1071,9 @@ bool qjackctlConnect::canDisconnectSelected (void)
 {
     bool bResult = false;
 
-    if (startExclusive()) {
+    if (startMutex()) {
         bResult = canDisconnectSelectedEx();
-        endExclusive();
+        endMutex();
     }
 
     return bResult;
@@ -1034,9 +1139,9 @@ bool qjackctlConnect::disconnectSelected (void)
 {
     bool bResult = false;
     
-    if (startExclusive()) {
+    if (startMutex()) {
         bResult = disconnectSelectedEx();
-        endExclusive();
+        endMutex();
     }
     m_pConnectView->ConnectorView()->update();
 
@@ -1103,9 +1208,9 @@ bool qjackctlConnect::canDisconnectAll (void)
 {
     bool bResult = false;
     
-    if (startExclusive()) {
+    if (startMutex()) {
         bResult = canDisconnectAllEx();
-        endExclusive();
+        endMutex();
     }
 
     return bResult;
@@ -1140,9 +1245,9 @@ bool qjackctlConnect::disconnectAll (void)
 
     bool bResult = false;
 
-    if (startExclusive()) {
+    if (startMutex()) {
         bResult = disconnectAllEx();
-        endExclusive();
+        endMutex();
     }
     m_pConnectView->ConnectorView()->update();
 
@@ -1175,11 +1280,11 @@ void qjackctlConnect::refresh (void)
 {
     int iDirtyCount = 0;
 
-    if (startExclusive()) {
+    if (startMutex()) {
         iDirtyCount += m_pOClientList->updateClientPorts();
         iDirtyCount += m_pIClientList->updateClientPorts();
         updateConnections();
-        endExclusive();
+        endMutex();
     }
 
     (m_pConnectView->ConnectorView())->update();
@@ -1190,18 +1295,18 @@ void qjackctlConnect::refresh (void)
 
 
 // Dunno. But this may avoid some conflicts.
-bool qjackctlConnect::startExclusive (void)
+bool qjackctlConnect::startMutex (void)
 {
-    bool bExclusive = (m_iExclusive == 0);
-    if (bExclusive)
-        m_iExclusive++;
-    return bExclusive;
+    bool bMutex = (m_iMutex == 0);
+    if (bMutex)
+        m_iMutex++;
+    return bMutex;
 }
 
-void qjackctlConnect::endExclusive (void)
+void qjackctlConnect::endMutex (void)
 {
-    if (m_iExclusive > 0)
-        m_iExclusive--;
+    if (m_iMutex > 0)
+        m_iMutex--;
 }
 
 

@@ -1109,8 +1109,8 @@ void qjackctlMainForm::timerSlot (void)
             if (m_pSetup->bActivePatchbay) {
                 appendMessagesColor(tr("Audio active patchbay scan") + "...", "#6699cc");
                 m_patchbayRack.connectAudioScan(m_pJackClient);
-                refreshJackConnections();
             }
+            refreshJackConnections();
         }
         // Or is it from the MIDI field?
         if (m_iAlsaDirty > 0) {
@@ -1118,8 +1118,8 @@ void qjackctlMainForm::timerSlot (void)
             if (m_pSetup->bActivePatchbay) {
                 appendMessagesColor(tr("MIDI active patchbay scan") + "...", "#99cc66");
                 m_patchbayRack.connectMidiScan(m_pAlsaSeq);
-                refreshAlsaConnections();
             }
+            refreshAlsaConnections();
         }
         // Shall we refresh connections now and then?
         if (m_pSetup->bAutoRefresh) {
@@ -1437,7 +1437,7 @@ void qjackctlMainForm::refreshConnections (void)
 void qjackctlMainForm::refreshJackConnections (void)
 {
     // Hack this as for a while.
-    if (m_pConnectionsForm)
+    if (m_pConnectionsForm && m_iJackRefresh == 0)
         m_pConnectionsForm->stabilizeJack(false);
 
     // Just increment our intentions; it will be deferred
@@ -1448,7 +1448,7 @@ void qjackctlMainForm::refreshJackConnections (void)
 void qjackctlMainForm::refreshAlsaConnections (void)
 {
     // Hack this as for a while.
-    if (m_pConnectionsForm)
+    if (m_pConnectionsForm && m_iAlsaRefresh == 0)
         m_pConnectionsForm->stabilizeAlsa(false);
 
     // Just increment our intentions; it will be deferred

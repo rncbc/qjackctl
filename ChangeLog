@@ -3,11 +3,15 @@ JACK Audio Connection Kit - Qt GUI Interface
 
 ChangeLog
 
-0.2.4  2004-01-22  Exclusive patchbay sockets.
+0.2.4  2004-01-23  Exclusive patchbay sockets.
 
 - Patchbay definitions may now be configured with exclusive sockets;
   this way, only one defined connection is allowed at any one time,
   being all others immediatelly disconnected whenever attempted.
+  
+- On the connections view, current connected client ports are highlighted
+  whenever a client or port is selected on the opposite column (as suggested
+  by Lawrie Abbott).
 
 
 0.2.3a 2004-01-19  Time format combo-box tooltip fix.
