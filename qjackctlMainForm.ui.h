@@ -227,10 +227,10 @@ void qjackctlMainForm::startJack()
     }
 
     setCaption(QJACKCTL_TITLE " - " + tr("Starting..."));
-    
+
     QString sTemp;
     int iExitStatus;
-    
+
     // Do we force aRts sound server?...
     if (ForceArtsCheckBox->isChecked()) {
         appendMessages(tr("ARTS is being forced..."));
@@ -259,8 +259,8 @@ void qjackctlMainForm::startJack()
         appendMessages(tr("JACK has been forced with") + sTemp);
         // Wait yet another bit...
         system("sleep 1");
-    }       
-    
+    }
+
     // OK. Let's build the startup process...
     m_pJack = new QProcess(this);
 
@@ -339,7 +339,7 @@ void qjackctlMainForm::startJack()
         m_pJack->addArgument("-H");
     if (HWMeterCheckBox->isChecked())
         m_pJack->addArgument("-M");
-	
+
     appendMessages(tr("JACK is starting..."));
     QStringList list = m_pJack->arguments();
     QStringList::Iterator iter = list.begin();
@@ -389,13 +389,13 @@ void qjackctlMainForm::startJack()
 // Stop jack audio server...
 void qjackctlMainForm::stopJack()
 {
-    // Stop timer.
+    // Stop client code.
+    stopJackClient();
+
+    // Kill timer.
     if (m_pTimer)
         delete m_pTimer;
     m_pTimer = NULL;
-
-    // Stop client code.
-    stopJackClient();
 
     // And try to stop server.
     if (m_pJack) {
@@ -427,6 +427,9 @@ void qjackctlMainForm::readJackStderr()
 // Jack audio server cleanup.
 void qjackctlMainForm::processJackExit()
 {
+    // Force client code cleanup.
+    stopJackClient();
+
     if (m_pJack) {
         QString sTemp = " ";
         sTemp += tr("exit status");
@@ -438,12 +441,12 @@ void qjackctlMainForm::processJackExit()
             m_pJack->kill();
         delete m_pJack;
     }
-    m_pJack = NULL;   
+    m_pJack = NULL;
 
     setCaption(QJACKCTL_TITLE " - " + tr("Stopped."));
 
     StartPushButton->setEnabled(true);
-    StopPushButton->setEnabled(false);    
+    StopPushButton->setEnabled(false);
 }
 
 
@@ -840,11 +843,11 @@ void qjackctlMainForm::startJackClient()
     QObject::connect(m_pXrunNotifier, SIGNAL(activated(int)), this, SLOT(xrunNotifySlot(int)));
     QObject::connect(m_pShutNotifier, SIGNAL(activated(int)), this, SLOT(shutNotifySlot(int)));
 
-    // Activate us as a client...
-    jack_activate(m_pJackClient);
-
     // Create our patchbay...
     m_pJackPatchbay = new qjackctlPatchbay(ConnectorFrame, ReadListView, WriteListView, m_pJackClient);
+
+    // Activate us as a client...
+    jack_activate(m_pJackClient);
 
     // Our timer will now get one second standard.
     m_pTimer->start(1000, false);
@@ -854,6 +857,10 @@ void qjackctlMainForm::startJackClient()
 // Stop jack audio client...
 void qjackctlMainForm::stopJackClient()
 {
+    // Stop timer.
+    if (m_pTimer)
+        m_pTimer->stop();
+
     // Deactivate us as a client...
     if (m_pJackClient)
         jack_deactivate(m_pJackClient);

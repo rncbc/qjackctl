@@ -13,15 +13,15 @@ ChangeLog
   respective connected port items aren't.
 
 - Multiple simultaneous port connections can now be handled when a client
-  application item is selected for connection/disconnection (as suggested by
-  Steve Harris), replicating and extending qjackconnect's similar behaviour.
+  application item is selected for connection/disconnection (again, suggested
+  by Steve Harris), replicating and extending qjackconnect's similar behaviour.
 
 - An auto-refresh option for the patchbay connections is now available,
   for those cases when client code just can't handle properly some callbacks.
 
 - Window positioning and sizing is now almost persistent across sessions;
   as before, position is saved for the minimal view mode; but now, the details
-  dialog view mode gets its position and size independatly saved also.
+  dialog view mode gets its position and size independantly saved also.
 
 0.0.3   2003-08-07  Integrated visual patchbay.
 
