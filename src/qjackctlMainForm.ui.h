@@ -677,7 +677,7 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
     QToolTip::remove(TransportTimeTextLabel);
 
     QString sTimeDisplay   = tr("Transport BBT (bar:beat.ticks)");
-    QString sTransportTime = tr("Transport time (hh:mm:ss.ddd)");
+    QString sTransportTime = tr("Transport time (hh:mm:ss.dd)");
 
     switch (m_pSetup->iTimeDisplay) {
     case DISPLAY_TRANSPORT_TIME:
@@ -1548,7 +1548,7 @@ void qjackctlMainForm::refreshStatus (void)
 {
     const QString n = "--";
     const QString t = "--:--:--";
-    const QString tt = t + ".---";
+    const QString tt = t + ".--";
     const QString sStopped = tr("Stopped");
 
     if (m_pJackClient) {
@@ -1581,12 +1581,12 @@ void qjackctlMainForm::refreshStatus (void)
                 break;
         }
         updateStatus(STATUS_TRANSPORT_STATE, sText);
-        // Transport timecode position (hh:mm:ss.ddd).
+        // Transport timecode position (hh:mm:ss.dd).
     //  if (bPlaying) {
     //      updateStatus(STATUS_TRANSPORT_TIME, formatTime((int) (tpos.frame / tpos.frame_rate)));
-            char szText[13];
+            char szText[12];
             unsigned int hh, mm, ss;
-            unsigned int ddd;
+            unsigned int dd;
             double ts = (double) tpos.frame / (double) tpos.frame_rate;
             hh  = (unsigned int) (ts / 3600.0);
             ts -= (double) (hh * 3600.0);
@@ -1594,8 +1594,8 @@ void qjackctlMainForm::refreshStatus (void)
             ts -= (double) (mm * 60.0);
             ss  = (unsigned int) ts;
             ts -= (double) ss;
-            ddd = (unsigned int) (ts * 100.0);
-            snprintf(szText, sizeof(szText), "%02u:%02u:%02u.%03u", hh, mm, ss, ddd);
+            dd  = (unsigned int) (ts * 100.0);
+            snprintf(szText, sizeof(szText), "%02u:%02u:%02u.%02u", hh, mm, ss, dd);
             updateStatus(STATUS_TRANSPORT_TIME, szText);
     //  }
     //  else updateStatus(STATUS_TRANSPORT_TIME, tt);

@@ -2263,7 +2263,7 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>Transport &amp;Time (hh:mm:ss.ddd)</string>
+                                            <string>Transport &amp;Time (hh:mm:ss.dd)</string>
                                         </property>
                                         <property name="accel">
                                             <string>Alt+T</string>

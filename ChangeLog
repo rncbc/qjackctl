@@ -5,7 +5,7 @@ ChangeLog
 
 0.2.2   2004-01-16  Hundredths are back.
 
-- Transport time is now shown with hundredths of second (hh:mm:ss.ddd),
+- Transport time is now shown with hundredths of second (hh:mm:ss.dd),
   as it was once before but not constant zero.
 
 - Client start delay now configurable on setup; this may be of help for
