@@ -9,16 +9,13 @@ ChangeLog
   audio service with a MIDI application connection graph, gracefuly
   included on the same front-end.
 
-- Current preset name is now shown on main window caption title.
+- Current preset name is shown on main window caption title. New button
+  and form icons. Messages window blankness rendering fix.
 
 - Immediate server startup option was made persistent and therefore
   remembered across sessions.
 
-- New front-panel button and form icons.
-
 - Standard output/error stream capture setup option.
-
-- Messages window blank rendering fix.
 
 
 0.1.3   2003-11-26  Server settings profile/preset feature.
