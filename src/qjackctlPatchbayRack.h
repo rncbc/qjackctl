@@ -26,6 +26,8 @@
 #include <qstringlist.h>
 #include <qptrlist.h>
 
+#include <jack/jack.h>
+
 // Patchbay slot normalization modes.
 #define QJACKCTL_SLOTMODE_OPEN      0
 #define QJACKCTL_SLOTMODE_HALF      1
@@ -147,7 +149,6 @@ public:
     void addSocket(QPtrList<qjackctlPatchbaySocket>& socketlist, qjackctlPatchbaySocket *pSocket);
     void removeSocket(QPtrList<qjackctlPatchbaySocket>& socketlist, qjackctlPatchbaySocket *pSocket);
 
-
     // Slot list primitive methods.
     void addSlot(qjackctlPatchbaySlot *pSlot);
     void removeSlot(qjackctlPatchbaySlot *pSlot);
@@ -175,7 +176,17 @@ public:
     // Patchbay cable connections list accessor.
     QPtrList<qjackctlPatchbayCable>& cablelist();
 
+    // Connect persistence scan cycle method.
+    void connectScan(jack_client_t *pJackClient);
+
 private:
+
+    // Lookup for the n-th client port that matches the given regular expressions...
+    const char *findClientPort(const char **ppszClientPorts, const QString& sClientName, const QString& sPortName, int n = 0);
+    // Check if an output client:port is already connected to yet another one.
+    bool isConnected(const char *pszOutputPort, const char *pszInputPort);
+    // Check whether a socket pair is fully connected, and e
+    void connectCable(qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket);
 
     // Patchbay sockets lists.
     QPtrList<qjackctlPatchbaySocket> m_osocketlist;
@@ -184,6 +195,11 @@ private:
     QPtrList<qjackctlPatchbaySlot> m_slotlist;
     // Patchbay cable connections list.
     QPtrList<qjackctlPatchbayCable> m_cablelist;
+
+    // Connection peristence cache variables.
+    jack_client_t *m_pJackClient;
+    const char **m_ppszOutputPorts;
+    const char **m_ppszInputPorts;
 };
 
 

@@ -102,6 +102,7 @@ dnl Checks for header files.
 AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(fcntl.h sys/ioctl.h unistd.h)
+
 AC_CHECK_HEADER(jack/jack.h, [ac_jack_h="yes"], [ac_jack_h="no"])
 if test "x$ac_jack_h" = "xno"; then
    AC_MSG_ERROR([JACK headers not found.])
