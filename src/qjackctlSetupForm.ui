@@ -273,6 +273,11 @@
                                         <string>portaudio</string>
                                     </property>
                                 </item>
+                                <item>
+                                    <property name="text">
+                                        <string>coreaudio</string>
+                                    </property>
+                                </item>
                                 <property name="name">
                                     <cstring>DriverComboBox</cstring>
                                 </property>

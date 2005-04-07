@@ -63,7 +63,8 @@ AC_CACHE_CHECK([for Qt library],
   ac_qtlib, [
   for X in qt-mt qt; do
     if test "x$ac_qtlib" = "x"; then
-      if test -f $QTDIR/lib/lib$X.so -o -f $QTDIR/lib/lib$X.a; then
+      if test -f $QTDIR/lib/lib$X.so -o -f $QTDIR/lib/lib$X.a \
+           -o -f $QTDIR/lib/lib$X.la -o -f $QTDIR/lib/lib$X.dylib; then
         ac_qtlib=$X
       fi
     fi
