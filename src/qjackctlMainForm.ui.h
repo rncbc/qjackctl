@@ -113,10 +113,10 @@ void qjackctlMainForm::init (void)
 
     // The eventual system tray widget.
     m_pSystemTray  = NULL;
-    
+
     // Working presets popup menu.
     m_pPresetsMenu = NULL;
-    
+
     // We're not quitting so early :)
     m_bQuitForce = false;
 
@@ -152,7 +152,7 @@ void qjackctlMainForm::destroy (void)
         delete m_pConnectionsForm;
     if (m_pPatchbayForm)
         delete m_pPatchbayForm;
-        
+
     // Quit off system tray widget.
     if (m_pSystemTray)
         delete m_pSystemTray;
@@ -280,7 +280,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // Register the first timer slot.
     QTimer::singleShot(QJACKCTL_TIMER_MSECS, this, SLOT(timerSlot()));
-    
+
     // We're ready to go...
     return true;
 }
@@ -404,7 +404,7 @@ QString qjackctlMainForm::formatExitStatus ( int iExitStatus )
         sTemp += tr("successfully");
     else
         sTemp += tr("with exit status=%1").arg(iExitStatus);
-    
+
     return sTemp + ".";
 }
 
@@ -518,7 +518,7 @@ void qjackctlMainForm::startJack (void)
                 sCommand = fileinfo.filePath();
        }
     }
-    
+
     // Build process arguments...
     m_pJack->addArgument(sCommand);
     if (m_preset.bVerbose)
@@ -541,11 +541,16 @@ void qjackctlMainForm::startJack (void)
     bool bOss       = (m_preset.sDriver == "oss");
     bool bAlsa      = (m_preset.sDriver == "alsa");
     bool bPortaudio = (m_preset.sDriver == "portaudio");
+	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
     if (bAlsa && (m_preset.iAudio != QJACKCTL_DUPLEX ||
 		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty()))
         m_pJack->addArgument("-d" + m_preset.sInterface);
     if (bPortaudio && m_preset.iChan > 0)
         m_pJack->addArgument("-c" + QString::number(m_preset.iChan));
+	if (bCoreaudio && !m_preset.sInterface.isEmpty())
+		m_pJack->addArgument("-n" + m_preset.sInterface);
+	if (bCoreaudio && m_preset.iChan > 0)
+		m_pJack->addArgument("-I" + QString::number(m_preset.iChan));
     if (m_preset.iSampleRate > 0)
         m_pJack->addArgument("-r" + QString::number(m_preset.iSampleRate));
     if (m_preset.iFrames > 0)
@@ -571,10 +576,6 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-P" + m_preset.sOutDevice);
             break;
         }
-        if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
-            m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
-        if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
-            m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
         if (m_preset.bSoftMode)
             m_pJack->addArgument("-s");
         if (m_preset.bMonitor)
@@ -582,6 +583,12 @@ void qjackctlMainForm::startJack (void)
         if (m_preset.bShorts)
             m_pJack->addArgument("-S");
     }
+	if (bAlsa || bCoreaudio) {
+		if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
+			m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
+		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
+			m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
+	}
     if (bOss) {
         if (m_preset.bIgnoreHW)
             m_pJack->addArgument("-b");
@@ -650,7 +657,7 @@ void qjackctlMainForm::startJack (void)
     // Sloppy boy fix: may the serve be stopped, just in case
     // the client will nerver make it...
     StopPushButton->setEnabled(true);
-    
+
     // Make sure all status(es) will be updated ASAP...
     m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
 
@@ -667,16 +674,16 @@ void qjackctlMainForm::stopJack (void)
 {
 	// Check if we're allowed to stop (shutdown)...
 	if (m_pSetup->bQueryShutdown
-	    && m_pJack && m_pJack->isRunning() && !m_bJackSurvive
-	    && m_pConnectionsForm && m_pConnectionsForm->isJackConnected()
-        && QMessageBox::warning(this, tr("Warning"),
-            tr("Some client audio applications") + "\n" +
+		&& m_pJack && m_pJack->isRunning() && !m_bJackSurvive
+		&& m_pConnectionsForm && m_pConnectionsForm->isJackConnected()
+		&& QMessageBox::warning(this, tr("Warning"),
+			tr("Some client audio applications") + "\n" +
 			tr("are still active and connected.") + "\n\n" +
-            tr("Do you want to stop the JACK audio server?"),
-            tr("Stop"), tr("Cancel")) > 0) {
+			tr("Do you want to stop the JACK audio server?"),
+			tr("Stop"), tr("Cancel")) > 0) {
 		return;
 	}
-
+	
 	// Stop the server unconditionally.
 	stopJackServer();
 }
@@ -727,7 +734,7 @@ void qjackctlMainForm::readJackStdout (void)
 void qjackctlMainForm::appendStdoutBuffer ( const QString& s )
 {
     m_sStdoutBuffer.append(s);
-    
+
     int iLength = m_sStdoutBuffer.findRev('\n') + 1;
     if (iLength > 0) {
         QString sTemp = m_sStdoutBuffer.left(iLength);
@@ -951,10 +958,10 @@ void qjackctlMainForm::updateDisplayEffect (void)
     QPixmap pm;
     if (m_pSetup->bDisplayEffect)
         pm = QPixmap::fromMimeSource("displaybg1.png");
-        
+
     // Set the main origin...
     StatusDisplayFrame->setPaletteBackgroundPixmap(pm);
-    
+
     // Iterate for every child text label...
     QObjectList *pList = StatusDisplayFrame->queryList("QLabel");
     if (pList) {
@@ -1162,7 +1169,7 @@ void qjackctlMainForm::updateXrunCount (void)
         m_pSystemTray->setBackgroundMode(Qt::X11ParentRelative);
         m_pSystemTray->repaint(true);
     }
-        
+
     XrunCountTextLabel->setPaletteForegroundColor(color);
 
     QString sText = QString::number(m_iXrunCount);
@@ -1276,7 +1283,7 @@ void qjackctlMainForm::refreshXrunStats (void)
         updateStatusItem(STATUS_XRUN_AVG, QString::number(fXrunAverage) + s);
         updateStatusItem(STATUS_XRUN_LAST, QString::number(m_fXrunLast) + s);
     }
-    
+
     updateElapsedTimes();
 }
 
@@ -1947,7 +1954,7 @@ void qjackctlMainForm::refreshStatus (void)
     const QString sStopped = tr("Stopped");
 
     m_iStatusRefresh++;
-    
+
     if (m_pJackClient) {
         const QString s = " ";
 #ifdef CONFIG_JACK_TRANSPORT
@@ -2087,7 +2094,7 @@ void qjackctlMainForm::updateStatusItem( int iStatusItem, const QString& sText )
 void qjackctlMainForm::updateTitleStatus (void)
 {
     QString sTitle = QJACKCTL_TITLE " ";
-    
+
     if (m_pSetup)
         sTitle += "[" + m_pSetup->sDefPreset + "] ";
 
@@ -2267,7 +2274,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
         tr("&Quit"), this, SLOT(quitMainForm()));
 
     pContextMenu->exec(pos);
-    
+
     delete pContextMenu;
 
     delete m_pPresetsMenu;

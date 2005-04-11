@@ -70,7 +70,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 {
     // Set reference descriptor.
     m_pSetup = pSetup;
-    
+
     // Avoid dirty this all up.
     m_iDirtySetup++;
 
@@ -222,7 +222,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         // Reset dirty flag.
         m_iDirtySettings = 0;
     }
-    
+
     // Set current preset name..
     m_sPreset = sPreset;
 }
@@ -300,7 +300,7 @@ void qjackctlSetupForm::changeCurrentPreset( const QString& sPreset )
 {
     if (m_iDirtySetup > 0)
         return;
-        
+
     // Check if there's any pending changes...
     if (m_iDirtySettings > 0 && !m_sPreset.isEmpty()) {
         switch (QMessageBox::warning(this, tr("Warning"),
@@ -389,7 +389,7 @@ void qjackctlSetupForm::computeLatency (void)
         LatencyTextValue->setText(QString::number(lat, 'g', 3) + " " + tr("msec"));
     else
         LatencyTextValue->setText(tr("n/a"));
-        
+
     OkPushButton->setEnabled(m_iDirtySettings > 0 || m_iDirtyOptions > 0);
 }
 
@@ -398,27 +398,28 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 {
     bool bOss        = (sDriver == "oss");
     bool bAlsa       = (sDriver == "alsa");
+    bool bCoreaudio  = (sDriver == "coreaudio");
     bool bInEnabled  = false;
     bool bOutEnabled = false;
 
     switch (iAudio) {
       case QJACKCTL_DUPLEX:
-        bInEnabled  = (bOss || bAlsa);
-        bOutEnabled = (bOss || bAlsa);
+        bInEnabled  = (bOss || bAlsa || bCoreaudio);
+        bOutEnabled = (bOss || bAlsa || bCoreaudio);
         break;
       case QJACKCTL_CAPTURE:
-        bInEnabled  = bOss;
+        bInEnabled  = bOss || bCoreaudio;
         break;
       case QJACKCTL_PLAYBACK:
-        bOutEnabled = bOss;
+        bOutEnabled = bOss || bCoreaudio;
         break;
     }
 
-    InDeviceTextLabel->setEnabled(bInEnabled);
-    InDeviceComboBox->setEnabled(bInEnabled);
+    InDeviceTextLabel->setEnabled(bInEnabled && (bAlsa || bOss));
+    InDeviceComboBox->setEnabled(bInEnabled && (bAlsa || bOss));
     InDevicePushButton->setEnabled(bInEnabled && (bAlsa || bOss));
-    OutDeviceTextLabel->setEnabled(bOutEnabled);
-    OutDeviceComboBox->setEnabled(bOutEnabled);
+    OutDeviceTextLabel->setEnabled(bOutEnabled && (bAlsa || bOss));
+    OutDeviceComboBox->setEnabled(bOutEnabled && (bAlsa || bOss));
     OutDevicePushButton->setEnabled(bOutEnabled && (bAlsa || bOss));
 
     InChannelsTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
@@ -442,13 +443,14 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     bool bOss       = (sDriver == "oss");
     bool bAlsa      = (sDriver == "alsa");
     bool bPortaudio = (sDriver == "portaudio");
+	bool bCoreaudio = (sDriver == "coreaudio");
 
     SoftModeCheckBox->setEnabled(bAlsa);
     MonitorCheckBox->setEnabled(bAlsa);
     ShortsCheckBox->setEnabled(bAlsa);
     HWMonCheckBox->setEnabled(bAlsa);
     HWMeterCheckBox->setEnabled(bAlsa);
-    
+
     IgnoreHWCheckBox->setEnabled(bOss);
 
     PeriodsTextLabel->setEnabled(bAlsa || bOss);
@@ -460,19 +462,19 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     WaitTextLabel->setEnabled(bDummy);
     WaitComboBox->setEnabled(bDummy);
 
-    ChanTextLabel->setEnabled(bPortaudio);
-    ChanSpinBox->setEnabled(bPortaudio);
+	ChanTextLabel->setEnabled(bPortaudio || bCoreaudio);
+	ChanSpinBox->setEnabled(bPortaudio || bCoreaudio);
 
 	int  iAudio   = AudioComboBox->currentItem();
 	bool bEnabled = bAlsa;
-    if (bEnabled && iAudio == QJACKCTL_DUPLEX) {
-        const QString& sInDevice  = InDeviceComboBox->currentText();
-        const QString& sOutDevice = OutDeviceComboBox->currentText();
+	if (bEnabled && iAudio == QJACKCTL_DUPLEX) {
+		const QString& sInDevice  = InDeviceComboBox->currentText();
+		const QString& sOutDevice = OutDeviceComboBox->currentText();
 		bEnabled = (sInDevice.isEmpty()  || sInDevice  == m_pSetup->sDefPresetName ||
 					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
 	}
-	InterfaceTextLabel->setEnabled(bEnabled);
-	InterfaceComboBox->setEnabled(bEnabled);
+	InterfaceTextLabel->setEnabled(bEnabled || bCoreaudio);
+	InterfaceComboBox->setEnabled(bEnabled || bCoreaudio);
 	InterfacePushButton->setEnabled(bEnabled);
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
@@ -505,7 +507,7 @@ void qjackctlSetupForm::stabilizeForm (void)
     StartupScriptShellComboBox->setEnabled(bEnabled);
     StartupScriptSymbolPushButton->setEnabled(bEnabled);
     StartupScriptBrowsePushButton->setEnabled(bEnabled);
-    
+
     bEnabled = PostStartupScriptCheckBox->isChecked();
     PostStartupScriptShellComboBox->setEnabled(bEnabled);
     PostStartupScriptSymbolPushButton->setEnabled(bEnabled);
@@ -572,10 +574,10 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 			if (snd_ctl_open(&handle, sName.latin1(), 0) >= 0
 				&& snd_ctl_card_info(handle, info) >= 0) {
 				if (iCards > 0)
-	    			pContextMenu->insertSeparator();
+					pContextMenu->insertSeparator();
 				sText  = sName + '\t';
 				sText += snd_ctl_card_info_get_name(info);
-	    		pContextMenu->insertItem(sText);
+				pContextMenu->insertItem(sText);
 				int iDevice = -1;
 				while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
 					&& iDevice >= 0) {
@@ -588,7 +590,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 					if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
 						sText  = sName + ',' + QString::number(iDevice) + '\t';
 						sText += snd_pcm_info_get_name(pcminfo);
-	    				pContextMenu->insertItem(sText);
+						pContextMenu->insertItem(sText);
 					}
 				}
 				snd_ctl_close(handle);
@@ -630,25 +632,25 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	pContextMenu->insertItem(m_pSetup->sDefPresetName);
 
 	// Show the device menu and read selection...
-    int iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
-    if (iItemID != -1) {
-        sText = pContextMenu->text(iItemID);
-        int iTabPos = sText.find('\t');
-        if (iTabPos >= 0)
-            pLineEdit->setText(sText.left(iTabPos));
+	int iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
+	if (iItemID != -1) {
+		sText = pContextMenu->text(iItemID);
+		int iTabPos = sText.find('\t');
+		if (iTabPos >= 0)
+			pLineEdit->setText(sText.left(iTabPos));
 		else
-            pLineEdit->setText(sText);
-    //  settingsChanged();
-    }
+			pLineEdit->setText(sText);
+	//  settingsChanged();
+	}
 
-    delete pContextMenu;
+	delete pContextMenu;
 }
 
 
 // Interface device selection menu.
 void qjackctlSetupForm::selectInterface (void)
 {
-    deviceMenu(InterfaceComboBox->lineEdit(), InterfacePushButton,
+	deviceMenu(InterfaceComboBox->lineEdit(), InterfacePushButton,
 		AudioComboBox->currentItem());
 }
 
@@ -656,7 +658,7 @@ void qjackctlSetupForm::selectInterface (void)
 // Input device selection menu.
 void qjackctlSetupForm::selectInDevice (void)
 {
-    deviceMenu(InDeviceComboBox->lineEdit(), InDevicePushButton,
+	deviceMenu(InDeviceComboBox->lineEdit(), InDevicePushButton,
 		QJACKCTL_CAPTURE);
 }
 
@@ -664,7 +666,7 @@ void qjackctlSetupForm::selectInDevice (void)
 // Output device selection menu.
 void qjackctlSetupForm::selectOutDevice (void)
 {
-    deviceMenu(OutDeviceComboBox->lineEdit(), OutDevicePushButton,
+	deviceMenu(OutDeviceComboBox->lineEdit(), OutDevicePushButton,
 		QJACKCTL_PLAYBACK);
 }
 
@@ -696,7 +698,7 @@ void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit,
         //  optionsChanged();
         }
     }
-    
+
     delete pContextMenu;
 }
 
