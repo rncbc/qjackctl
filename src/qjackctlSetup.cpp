@@ -22,6 +22,8 @@
 #include "qjackctlSetup.h"
 #include "qjackctlAbout.h"
 
+#include <qtimer.h>
+
 
 // Constructor.
 qjackctlSetup::qjackctlSetup (void)
@@ -74,6 +76,7 @@ qjackctlSetup::qjackctlSetup (void)
     bQueryClose              = m_settings.readBoolEntry("/QueryClose", true);
     bKeepOnTop               = m_settings.readBoolEntry("/KeepOnTop", true);
     bSystemTray              = m_settings.readBoolEntry("/SystemTray", false);
+    bDelayedMove             = m_settings.readBoolEntry("/DelayedMove", false);
     bServerConfig            = m_settings.readBoolEntry("/ServerConfig", true);
     sServerConfigName        = m_settings.readEntry("/ServerConfigName", ".jackdrc");
     bServerConfigTemp        = m_settings.readBoolEntry("/ServerConfigTemp", false);
@@ -139,6 +142,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/QueryClose",              bQueryClose);
     m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
     m_settings.writeEntry("/SystemTray",              bSystemTray);
+    m_settings.writeEntry("/DelayedMove",             bDelayedMove);
     m_settings.writeEntry("/ServerConfig",            bServerConfig);
     m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
     m_settings.writeEntry("/ServerConfigTemp",        bServerConfigTemp);
@@ -492,27 +496,32 @@ void qjackctlSetup::saveComboBoxHistory ( QComboBox *pComboBox, int iLimit )
 
 void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
 {
-    // Try to restore old form window positioning.
-    if (pWidget) {
-        QPoint fpos;
-        QSize  fsize;
-        bool bVisible;
-        m_settings.beginGroup("/Geometry/" + QString(pWidget->name()));
-        fpos.setX(m_settings.readNumEntry("/x", -1));
-        fpos.setY(m_settings.readNumEntry("/y", -1));
-        fsize.setWidth(m_settings.readNumEntry("/width", -1));
-        fsize.setHeight(m_settings.readNumEntry("/height", -1));
-        bVisible = m_settings.readBoolEntry("/visible", false);
-        m_settings.endGroup();
-        if (fpos.x() > 0 && fpos.y() > 0)
-            pWidget->move(fpos);
-        if (fsize.width() > 0 && fsize.height() > 0)
-            pWidget->resize(fsize);
-        else
-            pWidget->adjustSize();
-        if (bVisible)
-            pWidget->show();
-    }
+	// Try to restore old form window positioning.
+	if (pWidget) {
+		QPoint fpos;
+		QSize  fsize;
+		bool bVisible;
+		m_settings.beginGroup("/Geometry/" + QString(pWidget->name()));
+		fpos.setX(m_settings.readNumEntry("/x", -1));
+		fpos.setY(m_settings.readNumEntry("/y", -1));
+		fsize.setWidth(m_settings.readNumEntry("/width", -1));
+		fsize.setHeight(m_settings.readNumEntry("/height", -1));
+		bVisible = m_settings.readBoolEntry("/visible", false);
+		m_settings.endGroup();
+		if (fpos.x() > 0 && fpos.y() > 0) {
+			if (bDelayedMove) {
+				new qjackctlDelayedMove(pWidget, fpos);
+			} else {
+			    pWidget->move(fpos);
+			}
+		}
+		if (fsize.width() > 0 && fsize.height() > 0)
+			pWidget->resize(fsize);
+		else
+			pWidget->adjustSize();
+		if (bVisible)
+			pWidget->show();
+	}
 }
 
 
@@ -535,6 +544,25 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
         m_settings.writeEntry("/visible", bVisible);
         m_settings.endGroup();
     }
+}
+
+
+// Delayed widget move helper class.
+qjackctlDelayedMove::qjackctlDelayedMove ( QWidget *pWidget, QPoint pos )
+  : m_pos(pos)
+{
+    m_pWidget = pWidget;
+    
+    QTimer::singleShot(1000, this, SLOT(move()));
+}
+
+
+void qjackctlDelayedMove::move (void)
+{
+	if (m_pWidget)
+    	m_pWidget->move(m_pos);
+
+    deleteLater();
 }
 
 

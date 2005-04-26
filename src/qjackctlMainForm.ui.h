@@ -1846,6 +1846,7 @@ void qjackctlMainForm::showSetupForm (void)
         bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
         bool    bOldKeepOnTop           = m_pSetup->bKeepOnTop;
         bool    bOldSystemTray          = m_pSetup->bSystemTray;
+        bool    bOldDelayedMove         = m_pSetup->bDelayedMove;
         int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
         int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
         bool    bOldBezierLines         = m_pSetup->bBezierLines;
@@ -1894,7 +1895,9 @@ void qjackctlMainForm::showSetupForm (void)
             if (( bOldStdoutCapture && !m_pSetup->bStdoutCapture) ||
                 (!bOldStdoutCapture &&  m_pSetup->bStdoutCapture) ||
                 ( bOldKeepOnTop     && !m_pSetup->bKeepOnTop)     ||
-                (!bOldKeepOnTop     &&  m_pSetup->bKeepOnTop))
+                (!bOldKeepOnTop     &&  m_pSetup->bKeepOnTop)     ||
+                ( bOldDelayedMove   && !m_pSetup->bDelayedMove)   ||
+                (!bOldDelayedMove   &&  m_pSetup->bDelayedMove))
                 showDirtySetupWarning();
             // If server is currently running, warn user...
             showDirtySettingsWarning();

@@ -130,6 +130,7 @@ public:
     bool    bQueryClose;
     bool    bKeepOnTop;
     bool    bSystemTray;
+    bool    bDelayedMove;
     bool    bServerConfig;
     QString sServerConfigName;
     bool    bServerConfigTemp;
@@ -171,6 +172,27 @@ private:
 
     // Our proper settings profile.
     QSettings m_settings;
+};
+
+
+// Delayed widget move helper class.
+class qjackctlDelayedMove : public QObject
+{
+    Q_OBJECT
+
+public:
+
+     // Constructor.
+     qjackctlDelayedMove(QWidget *pWidget, QPoint pos);
+
+protected slots:
+
+     void move();
+
+private:
+
+     QWidget *m_pWidget;
+     QPoint   m_pos;
 };
 
 

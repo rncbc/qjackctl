@@ -3432,6 +3432,25 @@
                                             <string>Whether to enable the system tray icon</string>
                                         </property>
                                     </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>DelayedMoveCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Delay window positioning at startup</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+D</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to delay window positioning at application startup</string>
+                                        </property>
+                                    </widget>
                                 </vbox>
                             </widget>
                             <widget class="QLayoutWidget" row="0" column="1">
@@ -4078,6 +4097,12 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
+        <sender>DelayedMoveCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
         <sender>ServerConfigCheckBox</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
@@ -4183,6 +4208,7 @@
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>KeepOnTopCheckBox</tabstop>
     <tabstop>SystemTrayCheckBox</tabstop>
+    <tabstop>DelayedMoveCheckBox</tabstop>
     <tabstop>ServerConfigCheckBox</tabstop>
     <tabstop>ServerConfigNameComboBox</tabstop>
     <tabstop>ServerConfigTempCheckBox</tabstop>

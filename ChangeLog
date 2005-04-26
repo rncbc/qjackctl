@@ -14,6 +14,11 @@ ChangeLog
 - Actual OSS device selection menu now featured on setup dialog; these
   adds to the device selection button menus for the OSS driver settings.
 
+- Delayed positioning of windows upon startup was added as an optional
+  workaround to subtle problems due to window decoration information not
+  being available at window creation time on some window managers (as patch
+  proposed by Dirk Jagdmann. Thanks).
+
 - Fixed some minor but rather old bug that was quitting the application
   abruptly, when one switches off the system tray icon while the main
   application widget is hidden.
