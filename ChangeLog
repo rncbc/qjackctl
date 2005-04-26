@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.16   2005-04-12  OSS device name selection.
+0.2.16   2005-04-26  OSS device name selection and Mac OS X breakthrough.
 
 - After several Mac OS X user requests, ALSA/MIDI sequencer support is
   now an option, otherwise detected at configure time and conditionally

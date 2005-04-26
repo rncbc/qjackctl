@@ -445,6 +445,9 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     bool bPortaudio = (sDriver == "portaudio");
 	bool bCoreaudio = (sDriver == "coreaudio");
 
+    NoMemLockCheckBox->setEnabled(!bCoreaudio);
+    UnlockMemCheckBox->setEnabled(!bCoreaudio && !NoMemLockCheckBox->isChecked());
+
     SoftModeCheckBox->setEnabled(bAlsa);
     MonitorCheckBox->setEnabled(bAlsa);
     ShortsCheckBox->setEnabled(bAlsa);
@@ -496,8 +499,6 @@ void qjackctlSetupForm::stabilizeForm (void)
         PresetSavePushButton->setEnabled(false);
         PresetDeletePushButton->setEnabled(false);
     }
-
-    UnlockMemCheckBox->setEnabled(!NoMemLockCheckBox->isChecked());
 
     bool bEnabled = RealtimeCheckBox->isChecked();
     PriorityTextLabel->setEnabled(bEnabled);
