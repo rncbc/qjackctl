@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.16   2005-04-26  OSS device name selection and Mac OS X breakthrough.
+0.2.16   2005-04-27  OSS device name selection and Mac OS X breakthrough.
 
 - After several Mac OS X user requests, ALSA/MIDI sequencer support is
   now an option, otherwise detected at configure time and conditionally
@@ -14,7 +14,7 @@ ChangeLog
 - Actual OSS device selection menu now featured on setup dialog; these
   adds to the device selection button menus for the OSS driver settings.
 
-- Delayed positioning of windows upon startup was added as an optional
+- Delayed geometry setup of windows upon startup was added as an optional
   workaround to subtle problems due to window decoration information not
   being available at window creation time on some window managers (as patch
   proposed by Dirk Jagdmann. Thanks).

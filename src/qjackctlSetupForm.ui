@@ -3434,7 +3434,7 @@
                                     </widget>
                                     <widget class="QCheckBox">
                                         <property name="name">
-                                            <cstring>DelayedMoveCheckBox</cstring>
+                                            <cstring>DelayedSetupCheckBox</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -3448,7 +3448,7 @@
                                             <string>Alt+D</string>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Whether to delay window positioning at application startup</string>
+                                            <string>Whether to window positioning is delayed at application startup</string>
                                         </property>
                                     </widget>
                                 </vbox>
@@ -4097,7 +4097,7 @@
         <slot>optionsChanged()</slot>
     </connection>
     <connection>
-        <sender>DelayedMoveCheckBox</sender>
+        <sender>DelayedSetupCheckBox</sender>
         <signal>stateChanged(int)</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>optionsChanged()</slot>
@@ -4208,7 +4208,7 @@
     <tabstop>QueryCloseCheckBox</tabstop>
     <tabstop>KeepOnTopCheckBox</tabstop>
     <tabstop>SystemTrayCheckBox</tabstop>
-    <tabstop>DelayedMoveCheckBox</tabstop>
+    <tabstop>DelayedSetupCheckBox</tabstop>
     <tabstop>ServerConfigCheckBox</tabstop>
     <tabstop>ServerConfigNameComboBox</tabstop>
     <tabstop>ServerConfigTempCheckBox</tabstop>

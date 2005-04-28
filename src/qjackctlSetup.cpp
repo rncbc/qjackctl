@@ -76,7 +76,7 @@ qjackctlSetup::qjackctlSetup (void)
     bQueryClose              = m_settings.readBoolEntry("/QueryClose", true);
     bKeepOnTop               = m_settings.readBoolEntry("/KeepOnTop", true);
     bSystemTray              = m_settings.readBoolEntry("/SystemTray", false);
-    bDelayedMove             = m_settings.readBoolEntry("/DelayedMove", false);
+    bDelayedSetup            = m_settings.readBoolEntry("/DelayedSetup", false);
     bServerConfig            = m_settings.readBoolEntry("/ServerConfig", true);
     sServerConfigName        = m_settings.readEntry("/ServerConfigName", ".jackdrc");
     bServerConfigTemp        = m_settings.readBoolEntry("/ServerConfigTemp", false);
@@ -142,7 +142,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/QueryClose",              bQueryClose);
     m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
     m_settings.writeEntry("/SystemTray",              bSystemTray);
-    m_settings.writeEntry("/DelayedMove",             bDelayedMove);
+    m_settings.writeEntry("/DelayedSetup",            bDelayedSetup);
     m_settings.writeEntry("/ServerConfig",            bServerConfig);
     m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
     m_settings.writeEntry("/ServerConfigTemp",        bServerConfigTemp);
@@ -508,19 +508,8 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
 		fsize.setHeight(m_settings.readNumEntry("/height", -1));
 		bVisible = m_settings.readBoolEntry("/visible", false);
 		m_settings.endGroup();
-		if (fpos.x() > 0 && fpos.y() > 0) {
-			if (bDelayedMove) {
-				new qjackctlDelayedMove(pWidget, fpos);
-			} else {
-			    pWidget->move(fpos);
-			}
-		}
-		if (fsize.width() > 0 && fsize.height() > 0)
-			pWidget->resize(fsize);
-		else
-			pWidget->adjustSize();
-		if (bVisible)
-			pWidget->show();
+		new qjackctlDelayedSetup(pWidget, fpos, fsize, bVisible,
+			(bDelayedSetup ? 1000 : 0));
 	}
 }
 
@@ -547,22 +536,35 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
 }
 
 
-// Delayed widget move helper class.
-qjackctlDelayedMove::qjackctlDelayedMove ( QWidget *pWidget, QPoint pos )
-  : m_pos(pos)
+// Delayed widget setup helper class.
+qjackctlDelayedSetup::qjackctlDelayedSetup ( QWidget *pWidget,
+	const QPoint& pos, const QSize& size, bool bVisible, int iDelay )
+	: m_pos(pos), m_size(size)
 {
-    m_pWidget = pWidget;
-    
-    QTimer::singleShot(1000, this, SLOT(move()));
+	m_pWidget  = pWidget;
+	m_bVisible = bVisible;
+
+	if (iDelay > 0) {
+		QTimer::singleShot(iDelay, this, SLOT(setup()));
+	} else {
+		setup();
+	}
 }
 
 
-void qjackctlDelayedMove::move (void)
+void qjackctlDelayedSetup::setup (void)
 {
-	if (m_pWidget)
-    	m_pWidget->move(m_pos);
-
-    deleteLater();
+	if (m_pWidget) {
+		if (m_pos.x() > 0 && m_pos.y() > 0)
+			m_pWidget->move(m_pos);
+		if (m_size.width() > 0 && m_size.height() > 0)
+			m_pWidget->resize(m_size);
+		else
+			m_pWidget->adjustSize();
+		if (m_bVisible)
+			m_pWidget->show();
+	}
+	deleteLater();
 }
 
 

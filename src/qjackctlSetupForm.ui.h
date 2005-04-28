@@ -149,7 +149,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
     KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
     SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
-    DelayedMoveCheckBox->setChecked(m_pSetup->bDelayedMove);
+    DelayedSetupCheckBox->setChecked(m_pSetup->bDelayedSetup);
     ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
     ServerConfigNameComboBox->setCurrentText(m_pSetup->sServerConfigName);
     ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
@@ -946,7 +946,7 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->bQueryClose              = QueryCloseCheckBox->isChecked();
         m_pSetup->bKeepOnTop               = KeepOnTopCheckBox->isChecked();
         m_pSetup->bSystemTray              = SystemTrayCheckBox->isChecked();
-        m_pSetup->bDelayedMove             = DelayedMoveCheckBox->isChecked();
+        m_pSetup->bDelayedSetup            = DelayedSetupCheckBox->isChecked();
         m_pSetup->bServerConfig            = ServerConfigCheckBox->isChecked();
         m_pSetup->sServerConfigName        = ServerConfigNameComboBox->currentText();
         m_pSetup->bServerConfigTemp        = ServerConfigTempCheckBox->isChecked();

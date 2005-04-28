@@ -130,7 +130,7 @@ public:
     bool    bQueryClose;
     bool    bKeepOnTop;
     bool    bSystemTray;
-    bool    bDelayedMove;
+    bool    bDelayedSetup;
     bool    bServerConfig;
     QString sServerConfigName;
     bool    bServerConfigTemp;
@@ -175,24 +175,27 @@ private:
 };
 
 
-// Delayed widget move helper class.
-class qjackctlDelayedMove : public QObject
+// Delayed widget setup helper class.
+class qjackctlDelayedSetup : public QObject
 {
     Q_OBJECT
 
 public:
 
-     // Constructor.
-     qjackctlDelayedMove(QWidget *pWidget, QPoint pos);
+    // Constructor.
+    qjackctlDelayedSetup(QWidget *pWidget,
+        const QPoint& pos, const QSize& size, bool bVisible, int iDelay = 0);
 
 protected slots:
 
-     void move();
+     void setup();
 
 private:
 
      QWidget *m_pWidget;
      QPoint   m_pos;
+     QSize    m_size;
+     bool     m_bVisible;
 };
 
 
