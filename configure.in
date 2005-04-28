@@ -13,7 +13,7 @@ AC_DEFINE_UNQUOTED(CONFIG_PREFIX, ["$ac_prefix"], [Default installation prefix.]
 
 dnl Enable debugging argument option.
 AC_ARG_ENABLE(debug,
-  [  --enable-debug          enable debugging (default=no)],
+  AC_HELP_STRING([--enable-debug], [enable debugging (default=no)]),
   [ac_debug="debug"],
   [ac_debug="release"])
 AC_SUBST(ac_debug)
@@ -24,7 +24,7 @@ fi
 
 dnl Disable system tray argument option.
 AC_ARG_ENABLE(system_tray,
-  [  --disable-system-tray   disable system tray (default=no)],
+  AC_HELP_STRING([--disable-system-tray], [disable system tray (default=no)]),
   [ac_system_tray="no"],
   [ac_system_tray="yes"])
 
@@ -34,7 +34,7 @@ fi
 
 dnl Disable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
-  [  --disable-alsa-seq      disable ALSA/MIDI sequencer support (default=no)],
+  AC_HELP_STRING([--disable-alsa-seq], [disable ALSA/MIDI sequencer support (default=no)]),
   [ac_alsa_seq="no"],
   [ac_alsa_seq="yes"])
 
@@ -176,6 +176,12 @@ if test "x$ac_alsa_seq" = "xyes"; then
    AC_DEFINE(CONFIG_ALSA_SEQ, 1, [Define if ALSA/MIDI sequencer support is enabled.])
 else
    AC_MSG_WARN([*** ALSA/MIDI sequencer support will be disabled.])
+fi
+
+dnl Check for CoreAudio/CoreAudio.h header (MacOSX).
+AC_CHECK_HEADER(CoreAudio/CoreAudio.h, [ac_coreaudio="yes"], [ac_coreaudio="no"])
+if test "x$ac_coreaudio" = "xyes"; then
+   AC_DEFINE(CONFIG_COREAUDIO, 1, [Define if CoreAudio/CoreAudio.h is available (Mac OS X).])
 fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.

@@ -29,6 +29,10 @@
 
 #include "config.h"
 
+#ifdef CONFIG_COREAUDIO
+#include <CoreAudio/CoreAudio.h>
+#endif
+
 #ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
 #endif
@@ -466,8 +470,8 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     WaitTextLabel->setEnabled(bDummy);
     WaitComboBox->setEnabled(bDummy);
 
-	ChanTextLabel->setEnabled(bPortaudio || bCoreaudio);
-	ChanSpinBox->setEnabled(bPortaudio || bCoreaudio);
+	ChanTextLabel->setEnabled(bPortaudio);
+	ChanSpinBox->setEnabled(bPortaudio);
 
 	int  iAudio   = AudioComboBox->currentItem();
 	bool bEnabled = bAlsa;
@@ -479,7 +483,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 	}
 	InterfaceTextLabel->setEnabled(bEnabled || bCoreaudio);
 	InterfaceComboBox->setEnabled(bEnabled || bCoreaudio);
-	InterfacePushButton->setEnabled(bEnabled);
+	InterfacePushButton->setEnabled(bEnabled || bCoreaudio);
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
     DitherComboBox->setEnabled(bAlsa || bPortaudio);
@@ -554,8 +558,9 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	// FIXME: Only valid for ALSA and OSS devices,
 	// for the time being...
 	const QString& sDriver = DriverComboBox->currentText();
-	bool bAlsa = (sDriver == "alsa");
-	bool bOss  = (sDriver == "oss");
+	bool bAlsa      = (sDriver == "alsa");
+	bool bOss       = (sDriver == "oss");
+	bool bCoreaudio = (sDriver == "coreaudio");
 
 	QPopupMenu* pContextMenu = new QPopupMenu(this);
 	QString sName, sText;
@@ -627,6 +632,46 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 			file.close();
 		}
 	}
+#ifdef CONFIG_COREAUDIO
+	else if (bCoreaudio) {
+	    // Find out how many Core Audio devices are there, if any...
+	    // (code snippet gently "borrowed" from Stéphane Letz jackdmp;)
+	    OSStatus err;
+	    Boolean isWritable;
+	    UInt32 outSize = sizeof(isWritable);
+	    err = AudioHardwareGetPropertyInfo(kAudioHardwarePropertyDevices,
+	            &outSize, &isWritable);
+	    if (err == noErr) {
+	        // Calculate the number of device available...
+	        int numCoreDevices = outSize / sizeof(AudioDeviceID);
+	        // Make space for the devices we are about to get...
+	        AudioDeviceID *coreDeviceIDs = new AudioDeviceID [numCoreDevices];
+	        err = AudioHardwareGetProperty(kAudioHardwarePropertyDevices,
+	                &outSize, (void *) coreDeviceIDs);
+	        if (err == noErr) {
+	            // Look for the CoreAudio device name...
+	            char coreDeviceName[256];
+	            for (int i = 0; i < numCoreDevices; i++) {
+		            err = AudioDeviceGetPropertyInfo(coreDeviceIDs[i],
+		                    0, true, kAudioDevicePropertyDeviceName,
+		                    &outSize, &isWritable);
+		            if (err == noErr) {
+		                err = AudioDeviceGetProperty(coreDeviceIDs[i],
+		                        0, true, kAudioDevicePropertyDeviceName,
+		                        &outSize, (void *) coreDeviceName);
+		                if (err == noErr) {
+                        	sName = QString::number(coreDeviceIDs[i]);
+							sText = sName + '\t' + coreDeviceName;
+							pContextMenu->insertItem(sText);
+							++iCards;
+		                }
+		            }
+		        }
+	        }
+	        delete [] coreDeviceIDs;
+	    }
+	}
+#endif 	// CONFIG_COREAUDIO
 
 	// There's always the default device...
 	if (iCards > 0)
@@ -638,10 +683,11 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	if (iItemID != -1) {
 		sText = pContextMenu->text(iItemID);
 		int iTabPos = sText.find('\t');
-		if (iTabPos >= 0)
+		if (iTabPos >= 0) {
 			pLineEdit->setText(sText.left(iTabPos));
-		else
+		} else {
 			pLineEdit->setText(sText);
+  		}
 	//  settingsChanged();
 	}
 

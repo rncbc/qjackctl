@@ -547,10 +547,8 @@ void qjackctlMainForm::startJack (void)
         m_pJack->addArgument("-d" + m_preset.sInterface);
     if (bPortaudio && m_preset.iChan > 0)
         m_pJack->addArgument("-c" + QString::number(m_preset.iChan));
-	if (bCoreaudio && !m_preset.sInterface.isEmpty())
-		m_pJack->addArgument("-n" + m_preset.sInterface);
-	if (bCoreaudio && m_preset.iChan > 0)
-		m_pJack->addArgument("-I" + QString::number(m_preset.iChan));
+	if (bCoreaudio)
+		m_pJack->addArgument("-I" + QString::number(m_preset.sInterface.toInt()));
     if (m_preset.iSampleRate > 0)
         m_pJack->addArgument("-r" + QString::number(m_preset.iSampleRate));
     if (m_preset.iFrames > 0)
