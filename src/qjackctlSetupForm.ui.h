@@ -560,7 +560,9 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	const QString& sDriver = DriverComboBox->currentText();
 	bool bAlsa      = (sDriver == "alsa");
 	bool bOss       = (sDriver == "oss");
+#ifdef CONFIG_COREAUDIO
 	bool bCoreaudio = (sDriver == "coreaudio");
+#endif
 
 	QPopupMenu* pContextMenu = new QPopupMenu(this);
 	QString sName, sText;

@@ -269,7 +269,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // Try to find if we can start in detached mode (client-only)
     // just in case there's a JACK server already running.
-    m_bJackDetach = startJackClient(true);
+    startJackClient(true);
     // Final startup stabilization...
     stabilizeForm();
     processJackExit();
@@ -471,10 +471,10 @@ void qjackctlMainForm::startJack (void)
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 
-    // If we ain't to be the server master...
-    if (m_bJackDetach) {
+    // If we ain't to be the server master,  maybe we'll start 
+	// detached as client only (jackd server already running?)
+    if (startJackClient(true)) {
         StopPushButton->setEnabled(true);
-        startJackClient(false);
         return;
     }
 
@@ -1563,7 +1563,6 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     }
 
     // Create the jack client handle, using a distinct identifier (PID?)
-    // surely
     QString sClientName = "qjackctl-" + QString::number((int) ::getpid());
     m_pJackClient = jack_client_new(sClientName.latin1());
     if (m_pJackClient == NULL) {
@@ -1606,9 +1605,11 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
         }
     }
 
-    // Do not forget to reset XRUN stats variables.
+   	// Do not forget to reset XRUN stats variables.
     if (!bDetach)
         resetXrunStats();
+	else // We'll flag that we've been detached!
+    	m_bJackDetach = true;
 
     // Activate us as a client...
     jack_activate(m_pJackClient);
