@@ -37,8 +37,11 @@ IMAGES   = icons/qjackctl.png \
            icons/start1.png \
            icons/stop1.png \
            icons/quit1.png \
+           icons/rewind1.png \
+           icons/backward1.png \
            icons/play1.png \
            icons/pause1.png \
+           icons/forward1.png \
            icons/messages1.png \
            icons/status1.png \
            icons/connections1.png \

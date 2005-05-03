@@ -120,6 +120,9 @@ void qjackctlMainForm::init (void)
     // We're not quitting so early :)
     m_bQuitForce = false;
 
+	// Transport skip accelerate factor.
+	m_fSkipAccel = 1.0;
+
 #ifdef HAVE_SIGNAL_H
 	// Set to ignore any fatal "Broken pipe" signals.
 	signal(SIGPIPE, SIG_IGN);
@@ -789,8 +792,11 @@ void qjackctlMainForm::processJackExit (void)
     ServerStateTextLabel->setPaletteForegroundColor(m_pJackClient == NULL ? Qt::darkYellow : Qt::yellow);
     StartPushButton->setEnabled(m_pJackClient == NULL);
     StopPushButton->setEnabled(m_pJackClient != NULL);
+    RewindPushButton->setEnabled(false);
+    BackwardPushButton->setEnabled(false);
     PlayPushButton->setEnabled(false);
     PausePushButton->setEnabled(false);
+    ForwardPushButton->setEnabled(false);
 }
 
 
@@ -1917,8 +1923,45 @@ void qjackctlMainForm::showAboutForm (void)
 }
 
 
+// Transport rewind.
+void qjackctlMainForm::transportRewind (void)
+{
+#ifdef CONFIG_JACK_TRANSPORT
+	if (m_pJackClient) {
+		jack_transport_locate(m_pJackClient, 0);
+		// Log this here.
+		appendMessages(tr("Transport rewind."));
+		// Make sure all status(es) will be updated ASAP...
+		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+	}
+#endif
+}
+
+// Transport backward.
+void qjackctlMainForm::transportBackward (void)
+{
+#ifdef CONFIG_JACK_TRANSPORT
+	if (m_pJackClient) {
+		jack_position_t tpos;
+		jack_transport_query(m_pJackClient, &tpos);
+		float rate = (float) tpos.frame_rate;
+		float tloc = (((float) tpos.frame / rate) - m_fSkipAccel) * rate;
+		if (tloc < 0.0)	tloc = 0.0;
+		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
+		// Log this here (if on initial toggle).
+		if (m_fSkipAccel < 1.1) 
+			appendMessages(tr("Transport backward."));
+		// Take care of backward acceleration...
+		if (BackwardPushButton->isDown() && m_fSkipAccel < 60.0)
+			m_fSkipAccel *= 1.1;
+		// Make sure all status(es) will be updated ASAP...
+		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+	}
+#endif
+}
+
 // Transport start (play)
-void qjackctlMainForm::transportStart()
+void qjackctlMainForm::transportStart (void)
 {
 #ifdef CONFIG_JACK_TRANSPORT
     if (m_pJackClient) {
@@ -1933,7 +1976,7 @@ void qjackctlMainForm::transportStart()
 }
 
 // Transport stop (pause).
-void qjackctlMainForm::transportStop()
+void qjackctlMainForm::transportStop (void)
 {
 #ifdef CONFIG_JACK_TRANSPORT
     if (m_pJackClient) {
@@ -1944,6 +1987,29 @@ void qjackctlMainForm::transportStop()
         // Make sure all status(es) will be updated ASAP...
         m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
     }
+#endif
+}
+
+// Transport forward.
+void qjackctlMainForm::transportForward (void)
+{
+#ifdef CONFIG_JACK_TRANSPORT
+	if (m_pJackClient) {
+		jack_position_t tpos;
+		jack_transport_query(m_pJackClient, &tpos);
+		float rate = (float) tpos.frame_rate;
+		float tloc = (((float) tpos.frame / rate) + m_fSkipAccel) * rate;
+		if (tloc < 0.0)	tloc = 0.0;
+		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
+		// Log this here.
+		if (m_fSkipAccel < 1.1) 
+			appendMessages(tr("Transport forward."));
+		// Take care of forward acceleration...
+		if (ForwardPushButton->isDown() && m_fSkipAccel < 60.0)
+			m_fSkipAccel *= 1.1;
+		// Make sure all status(es) will be updated ASAP...
+		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+	}
 #endif
 }
 
@@ -2009,12 +2075,20 @@ void qjackctlMainForm::refreshStatus (void)
                 break;
             }
             updateStatusItem(STATUS_TRANSPORT_STATE, sText);
-            PlayPushButton->setEnabled(tstate == JackTransportStopped);
-            PausePushButton->setEnabled(bPlaying);
+			RewindPushButton->setEnabled(tpos.frame > 0);
+			BackwardPushButton->setEnabled(tpos.frame > 0);
+			PlayPushButton->setEnabled(tstate == JackTransportStopped);
+			PausePushButton->setEnabled(bPlaying);
+			ForwardPushButton->setEnabled(true);
+			if (!BackwardPushButton->isDown() && !ForwardPushButton->isDown())
+				m_fSkipAccel = 1.0;
 #else
             updateStatusItem(STATUS_TRANSPORT_STATE, n);
-            PlayPushButton->setEnabled(false);
-            PausePushButton->setEnabled(false);
+			RewindPushButton->setEnabled(false);
+			BackwardPushButton->setEnabled(false);
+			PlayPushButton->setEnabled(false);
+			PausePushButton->setEnabled(false);
+			ForwardPushButton->setEnabled(false);
             updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
             updateStatusItem(STATUS_TRANSPORT_BBT, b);
             updateStatusItem(STATUS_TRANSPORT_BPM, n);
@@ -2041,8 +2115,11 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
         updateStatusItem(STATUS_TRANSPORT_BBT, b);
         updateStatusItem(STATUS_TRANSPORT_BPM, n);
-        PlayPushButton->setEnabled(false);
-        PausePushButton->setEnabled(false);
+		RewindPushButton->setEnabled(false);
+		BackwardPushButton->setEnabled(false);
+		PlayPushButton->setEnabled(false);
+		PausePushButton->setEnabled(false);
+		ForwardPushButton->setEnabled(false);
     }
 
     // Elapsed times should be rigorous...

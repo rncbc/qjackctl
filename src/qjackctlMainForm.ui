@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>438</width>
-            <height>97</height>
+            <width>452</width>
+            <height>111</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -54,7 +54,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QPushButton" row="0" column="4">
+        <widget class="QPushButton" row="0" column="7">
             <property name="name">
                 <cstring>QuitPushButton</cstring>
             </property>
@@ -111,40 +111,6 @@
                 <string>Stop the JACK server</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="2">
-            <property name="name">
-                <cstring>PlayPushButton</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;Play</string>
-            </property>
-            <property name="accel">
-                <string>Alt+P</string>
-            </property>
-            <property name="iconSet">
-                <iconset>play1.png</iconset>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Start transport rolling</string>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="2" column="3">
-            <property name="name">
-                <cstring>PausePushButton</cstring>
-            </property>
-            <property name="text">
-                <string>Pa&amp;use</string>
-            </property>
-            <property name="accel">
-                <string>Alt+U</string>
-            </property>
-            <property name="iconSet">
-                <iconset>pause1.png</iconset>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Stop transport rolling</string>
-            </property>
-        </widget>
         <widget class="QPushButton" row="1" column="1">
             <property name="name">
                 <cstring>StatusPushButton</cstring>
@@ -165,7 +131,7 @@
                 <string>Show/hide the extended status window</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="4">
+        <widget class="QPushButton" row="2" column="7">
             <property name="name">
                 <cstring>AboutPushButton</cstring>
             </property>
@@ -182,7 +148,7 @@
                 <string>Show information about this application</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="1" column="4">
+        <widget class="QPushButton" row="1" column="7">
             <property name="name">
                 <cstring>SetupPushButton</cstring>
             </property>
@@ -259,7 +225,7 @@
                 <string>Show/hide the actual connections patchbay window</string>
             </property>
         </widget>
-        <widget class="QFrame" row="0" column="2" rowspan="2" colspan="2">
+        <widget class="QFrame" row="0" column="2" rowspan="2" colspan="5">
             <property name="name">
                 <cstring>StatusDisplayFrame</cstring>
             </property>
@@ -539,6 +505,97 @@
                 </widget>
             </grid>
         </widget>
+        <widget class="QPushButton" row="2" column="3">
+            <property name="name">
+                <cstring>BackwardPushButton</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="pixmap">
+                <pixmap>backward1.png</pixmap>
+            </property>
+            <property name="accel">
+                <string>Alt+B</string>
+            </property>
+            <property name="autoRepeat">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Backward transport</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="6">
+            <property name="name">
+                <cstring>ForwardPushButton</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="pixmap">
+                <pixmap>forward1.png</pixmap>
+            </property>
+            <property name="accel">
+                <string>Alt+F</string>
+            </property>
+            <property name="autoRepeat">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Forward transport</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="2">
+            <property name="name">
+                <cstring>RewindPushButton</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="pixmap">
+                <pixmap>rewind1.png</pixmap>
+            </property>
+            <property name="accel">
+                <string>Alt+R</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Rewind transport</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="5">
+            <property name="name">
+                <cstring>PausePushButton</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="pixmap">
+                <pixmap>pause1.png</pixmap>
+            </property>
+            <property name="accel">
+                <string>Alt+U</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Stop transport rolling</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="4">
+            <property name="name">
+                <cstring>PlayPushButton</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="pixmap">
+                <pixmap>play1.png</pixmap>
+            </property>
+            <property name="accel">
+                <string>Alt+P</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Start transport rolling</string>
+            </property>
+        </widget>
     </grid>
 </widget>
 <connections>
@@ -597,6 +654,18 @@
         <slot>showAboutForm()</slot>
     </connection>
     <connection>
+        <sender>RewindPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>transportRewind()</slot>
+    </connection>
+    <connection>
+        <sender>BackwardPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>transportBackward()</slot>
+    </connection>
+    <connection>
         <sender>PlayPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
@@ -608,6 +677,12 @@
         <receiver>qjackctlMainForm</receiver>
         <slot>transportStop()</slot>
     </connection>
+    <connection>
+        <sender>ForwardPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>qjackctlMainForm</receiver>
+        <slot>transportForward()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>StartPushButton</tabstop>
@@ -615,11 +690,14 @@
     <tabstop>QuitPushButton</tabstop>
     <tabstop>MessagesPushButton</tabstop>
     <tabstop>StatusPushButton</tabstop>
+    <tabstop>SetupPushButton</tabstop>
     <tabstop>ConnectionsPushButton</tabstop>
     <tabstop>PatchbayPushButton</tabstop>
+    <tabstop>RewindPushButton</tabstop>
+    <tabstop>BackwardPushButton</tabstop>
     <tabstop>PlayPushButton</tabstop>
     <tabstop>PausePushButton</tabstop>
-    <tabstop>SetupPushButton</tabstop>
+    <tabstop>ForwardPushButton</tabstop>
     <tabstop>AboutPushButton</tabstop>
 </tabstops>
 <includes>
@@ -680,6 +758,7 @@
     <variable access="private">qjackctlSystemTray *m_pSystemTray;</variable>
     <variable access="private">QPopupMenu *m_pPresetsMenu;</variable>
     <variable access="private">bool m_bQuitForce;</variable>
+    <variable access="private">float m_fSkipAccel;</variable>
 </variables>
 <slots>
     <slot specifier="non virtual">startJack( void )</slot>
@@ -701,8 +780,11 @@
     <slot specifier="non virtual">togglePatchbayForm( void )</slot>
     <slot specifier="non virtual">showSetupForm( void )</slot>
     <slot specifier="non virtual">showAboutForm( void )</slot>
+    <slot specifier="non virtual">transportRewind()</slot>
+    <slot specifier="non virtual">transportBackward()</slot>
     <slot specifier="non virtual">transportStart()</slot>
     <slot specifier="non virtual">transportStop()</slot>
+    <slot specifier="non virtual">transportForward()</slot>
     <slot specifier="non virtual">systemTrayContextMenu( const QPoint &amp; pos )</slot>
     <slot specifier="non virtual">activatePresetsMenu ( int iItemID )</slot>
     <slot specifier="non virtual">quitMainForm( void )</slot>
@@ -716,7 +798,9 @@
     <function access="private" specifier="non virtual">customEvent( QCustomEvent *pCustomEvent )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatExitStatus ( int iExitStatus )</function>
     <function access="private" specifier="non virtual">shellExecute( const QString &amp; sShellCommand, const QString &amp; sStartMessage, const QString &amp; sStopMessage )</function>
+    <function access="private" specifier="non virtual">stopJackServer( void )</function>
     <function access="private" specifier="non virtual" returnType="QString &amp;">detectXrun( QString &amp; s )</function>
+    <function access="private" specifier="non virtual">updateXrunStats( float fXrunLast )</function>
     <function access="private" specifier="non virtual">appendMessages( const QString &amp; s )</function>
     <function access="private" specifier="non virtual">appendMessagesColor( const QString &amp; s, const QString &amp; c )</function>
     <function access="private" specifier="non virtual">appendMessagesText( const QString &amp; s )</function>
@@ -736,7 +820,6 @@
     <function specifier="non virtual">toggleActivePatchbay( const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">stabilizeForm( void )</function>
     <function specifier="non virtual">resetXrunStats( void )</function>
-    <function access="private" specifier="non virtual">updateXrunStats( float fXrunLast )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatTime( double secs )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatElapsedTime( int iStatusItem, const QTime &amp; t, bool bElapsed )</function>
@@ -746,20 +829,19 @@
     <function access="private" specifier="non virtual">xrunNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">buffNotifyEvent( void )</function>
     <function access="private" specifier="non virtual">shutNotifyEvent( void )</function>
-    <function access="private" specifier="non virtual">stopJackServer( void )</function>
     <function access="private" specifier="non virtual" returnType="bool">startJackClient( bool bDetach )</function>
     <function access="private" specifier="non virtual">stopJackClient( void )</function>
     <function access="private" specifier="non virtual">refreshConnections( void )</function>
     <function specifier="non virtual">refreshJackConnections( void )</function>
     <function specifier="non virtual">refreshAlsaConnections( void )</function>
     <function specifier="non virtual">refreshPatchbay( void )</function>
-    <function access="private" specifier="non virtual">showDirtySettingsWarning( void )</function>
-    <function access="private" specifier="non virtual">showDirtySetupWarning( void )</function>
     <function access="private" specifier="non virtual">refreshStatus( void )</function>
     <function access="private" specifier="non virtual">updateStatusItem( int iStatusItem, const QString &amp; sText )</function>
     <function access="private" specifier="non virtual">updateTitleStatus( void )</function>
     <function access="private" specifier="non virtual">updateServerState( int iState )</function>
     <function access="private" specifier="non virtual">updateSystemTray( void )</function>
+    <function access="private" specifier="non virtual">showDirtySettingsWarning( void )</function>
+    <function access="private" specifier="non virtual">showDirtySetupWarning( void )</function>
     <function access="private" specifier="non virtual">contextMenuEvent( QContextMenuEvent *pEvent )</function>
 </functions>
 <pixmapinproject/>
