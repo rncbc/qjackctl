@@ -1157,32 +1157,41 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, qjackctlSocketList *
     if (pSocketList) {
         qjackctlSocketItem *pSocketItem = pSocketList->selectedSocketItem();
         bool bEnabled = (pSocketItem != NULL);
-        iItemID = pContextMenu->insertItem(tr("Add..."), pSocketList, SLOT(addSocketItem()));
-        iItemID = pContextMenu->insertItem(tr("Edit..."), pSocketList, SLOT(editSocketItem()));
+        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("add1.png")),
+			tr("Add..."), pSocketList, SLOT(addSocketItem()));
+        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("edit1.png")),
+			tr("Edit..."), pSocketList, SLOT(editSocketItem()));
         pContextMenu->setItemEnabled(iItemID, bEnabled);
-        iItemID = pContextMenu->insertItem(tr("Remove"), pSocketList, SLOT(removeSocketItem()));
+        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("remove1.png")),
+			tr("Remove"), pSocketList, SLOT(removeSocketItem()));
         pContextMenu->setItemEnabled(iItemID, bEnabled);
         pContextMenu->insertSeparator();
         iItemID = pContextMenu->insertItem(tr("Exclusive"), pSocketList, SLOT(exclusiveSocketItem()));
         pContextMenu->setItemChecked(iItemID, bEnabled && pSocketItem->isExclusive());
         pContextMenu->setItemEnabled(iItemID, bEnabled && (pSocketItem->connects().count() < 2));
         pContextMenu->insertSeparator();
-        iItemID = pContextMenu->insertItem(tr("Move Up"), pSocketList, SLOT(moveUpSocketItem()));
+        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("up1.png")),
+			tr("Move Up"), pSocketList, SLOT(moveUpSocketItem()));
         pContextMenu->setItemEnabled(iItemID, (bEnabled && pSocketItem->itemAbove() != NULL));
-        iItemID = pContextMenu->insertItem(tr("Move Down"), pSocketList, SLOT(moveDownSocketItem()));
+        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("down1.png")),
+			tr("Move Down"), pSocketList, SLOT(moveDownSocketItem()));
         pContextMenu->setItemEnabled(iItemID, (bEnabled && pSocketItem->nextSibling() != NULL));
         pContextMenu->insertSeparator();
     }
 
-    iItemID = pContextMenu->insertItem(tr("&Connect"), pPatchbay, SLOT(connectSelected()), tr("Alt+C", "Connect"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("connect1.png")),
+		tr("&Connect"), pPatchbay, SLOT(connectSelected()), tr("Alt+C", "Connect"));
     pContextMenu->setItemEnabled(iItemID, pPatchbay->canConnectSelected());
-    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pPatchbay, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("disconnect1.png")),
+		tr("&Disconnect"), pPatchbay, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
     pContextMenu->setItemEnabled(iItemID, pPatchbay->canDisconnectSelected());
-    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pPatchbay, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("disconnectall1.png")),
+		tr("Disconnect &All"), pPatchbay, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
     pContextMenu->setItemEnabled(iItemID, pPatchbay->canDisconnectAll());
 
     pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem(tr("&Refresh"), pPatchbay, SLOT(refresh()), tr("Alt+R", "Refresh"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("refresh1.png")),
+		tr("&Refresh"), pPatchbay, SLOT(refresh()), tr("Alt+R", "Refresh"));
 
     pContextMenu->exec(pos);
     

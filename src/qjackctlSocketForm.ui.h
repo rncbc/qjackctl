@@ -328,15 +328,20 @@ void qjackctlSocketForm::contextMenu( QListViewItem *pItem, const QPoint& pos, i
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
     bool bEnabled = (pItem != NULL);
-    iItemID = pContextMenu->insertItem(tr("Add Plug"), m_pAddPlugMenu);
-    iItemID = pContextMenu->insertItem(tr("Remove"), this, SLOT(removePlug()));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("add1.png")),
+		tr("Add Plug"), m_pAddPlugMenu);
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("remove1.png")),
+		tr("Remove"), this, SLOT(removePlug()));
     pContextMenu->setItemEnabled(iItemID, bEnabled);
-    iItemID = pContextMenu->insertItem(tr("Edit"), this, SLOT(editPlug()));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("edit1.png")),
+		tr("Edit"), this, SLOT(editPlug()));
     pContextMenu->setItemEnabled(iItemID, bEnabled);
     pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem(tr("Move Up"), this, SLOT(moveUpPlug()));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("up1.png")),
+		tr("Move Up"), this, SLOT(moveUpPlug()));
     pContextMenu->setItemEnabled(iItemID, (bEnabled && pItem->itemAbove() != NULL));
-    iItemID = pContextMenu->insertItem(tr("Move Down"), this, SLOT(moveDownPlug()));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("down1.png")),
+		tr("Move Down"), this, SLOT(moveDownPlug()));
     pContextMenu->setItemEnabled(iItemID, (bEnabled && pItem->nextSibling() != NULL));
 
     pContextMenu->exec(pos);

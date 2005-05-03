@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.16   2005-05-02  OSS device name selection and Mac OS X breakthrough.
+0.2.16   2005-05-03  OSS device name selection and Mac OS X breakthrough.
 
 - Do not ever try to start the JACK server if there's one already found
   running, on which case the client-only mode of operation is then activated
@@ -26,6 +26,9 @@ ChangeLog
 - Fixed some minor but rather old bug that was quitting the application
   abruptly, when one switches off the system tray icon while the main
   application widget is hidden.
+
+- Context menus are finally littered with icons.
+
   
 0.2.15a  2005-02-09  Return of the paranoid.
 

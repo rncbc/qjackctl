@@ -769,19 +769,24 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
     int iItemID;
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
-    iItemID = pContextMenu->insertItem(tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("connect1.png")),
+		tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
     pContextMenu->setItemEnabled(iItemID, pConnect->canConnectSelected());
-    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("disconnect1.png")),
+		tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
     pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectSelected());
-    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("disconnectall1.png")),
+		tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
     pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectAll());
 	if (m_bRenameEnabled) {
 		pContextMenu->insertSeparator();
-		iItemID = pContextMenu->insertItem(tr("Re&name"), this, SLOT(startRenameSlot()), tr("Alt+N", "Rename"));
+		iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("edit1.png")),
+			tr("Re&name"), this, SLOT(startRenameSlot()), tr("Alt+N", "Rename"));
 		pContextMenu->setItemEnabled(iItemID, selectedItem() && selectedItem()->renameEnabled(0));
 	}
     pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("refresh1.png")),
+		tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
 
     pContextMenu->exec(pContextMenuEvent->globalPos());
 
@@ -988,15 +993,19 @@ void qjackctlConnectorView::contextMenuEvent ( QContextMenuEvent *pContextMenuEv
     int iItemID;
     QPopupMenu* pContextMenu = new QPopupMenu(this);
 
-    iItemID = pContextMenu->insertItem(tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("connect1.png")),
+		tr("&Connect"), pConnect, SLOT(connectSelected()), tr("Alt+C", "Connect"));
     pContextMenu->setItemEnabled(iItemID, pConnect->canConnectSelected());
-    iItemID = pContextMenu->insertItem(tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("disconnect1.png")),
+		tr("&Disconnect"), pConnect, SLOT(disconnectSelected()), tr("Alt+D", "Disconnect"));
     pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectSelected());
-    iItemID = pContextMenu->insertItem(tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("disconnectall1.png")),
+		tr("Disconnect &All"), pConnect, SLOT(disconnectAll()), tr("Alt+A", "Disconect All"));
     pContextMenu->setItemEnabled(iItemID, pConnect->canDisconnectAll());
 
     pContextMenu->insertSeparator();
-    iItemID = pContextMenu->insertItem(tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
+    iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("refresh1.png")),
+		tr("&Refresh"), pConnect, SLOT(refresh()), tr("Alt+R", "Refresh"));
 
     pContextMenu->exec(pContextMenuEvent->globalPos());
 
