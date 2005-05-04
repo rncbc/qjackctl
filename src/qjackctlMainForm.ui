@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>452</width>
-            <height>111</height>
+            <width>500</width>
+            <height>99</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -509,6 +509,14 @@
             <property name="name">
                 <cstring>BackwardPushButton</cstring>
             </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
             <property name="text">
                 <string></string>
             </property>
@@ -528,6 +536,14 @@
         <widget class="QPushButton" row="2" column="6">
             <property name="name">
                 <cstring>ForwardPushButton</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
             </property>
             <property name="text">
                 <string></string>
@@ -549,6 +565,14 @@
             <property name="name">
                 <cstring>RewindPushButton</cstring>
             </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
             <property name="text">
                 <string></string>
             </property>
@@ -566,6 +590,14 @@
             <property name="name">
                 <cstring>PausePushButton</cstring>
             </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>1</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
             <property name="text">
                 <string></string>
             </property>
@@ -582,6 +614,14 @@
         <widget class="QPushButton" row="2" column="4">
             <property name="name">
                 <cstring>PlayPushButton</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
             </property>
             <property name="text">
                 <string></string>
