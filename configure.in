@@ -182,6 +182,7 @@ dnl Check for CoreAudio/CoreAudio.h header (MacOSX).
 AC_CHECK_HEADER(CoreAudio/CoreAudio.h, [ac_coreaudio="yes"], [ac_coreaudio="no"])
 if test "x$ac_coreaudio" = "xyes"; then
    AC_DEFINE(CONFIG_COREAUDIO, 1, [Define if CoreAudio/CoreAudio.h is available (Mac OS X).])
+   ac_libs="-framework CoreAudio $ac_libs" 
 fi
 
 dnl Checks for typedefs, structures, and compiler characteristics.

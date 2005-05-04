@@ -37,10 +37,8 @@ void qjackctlPatchbayForm::init (void)
     m_iUntitled = 0;
     
     // Connect it to some UI feedback slot.
-    QObject::connect(PatchbayView->OListView(), SIGNAL(selectionChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
-    QObject::connect(PatchbayView->IListView(), SIGNAL(selectionChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
-    QObject::connect(PatchbayView->OListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
-    QObject::connect(PatchbayView->IListView(), SIGNAL(currentChanged(QListViewItem *)), this, SLOT(stabilizeForm()));
+    QObject::connect(PatchbayView->OListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
+    QObject::connect(PatchbayView->IListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
     // Dirty patchbay dispatcher (stabilization deferral).
     QObject::connect(PatchbayView, SIGNAL(contentsChanged()), this, SLOT(contentsChanged()));
 
@@ -144,11 +142,13 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
         OSocketEditPushButton->setEnabled(true);
+        OSocketCopyPushButton->setEnabled(true);
         OSocketRemovePushButton->setEnabled(true);
         OSocketMoveUpPushButton->setEnabled(pSocketItem->itemAbove() != NULL);
         OSocketMoveDownPushButton->setEnabled(pSocketItem->nextSibling() != NULL);
     } else {
         OSocketEditPushButton->setEnabled(false);
+        OSocketCopyPushButton->setEnabled(false);
         OSocketRemovePushButton->setEnabled(false);
         OSocketMoveUpPushButton->setEnabled(false);
         OSocketMoveDownPushButton->setEnabled(false);
@@ -157,11 +157,13 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     pSocketItem = (m_pPatchbay->ISocketList())->selectedSocketItem();
     if (pSocketItem) {
         ISocketEditPushButton->setEnabled(true);
+        ISocketCopyPushButton->setEnabled(true);
         ISocketRemovePushButton->setEnabled(true);
         ISocketMoveUpPushButton->setEnabled(pSocketItem->itemAbove() != NULL);
         ISocketMoveDownPushButton->setEnabled(pSocketItem->nextSibling() != NULL);
     } else {
         ISocketEditPushButton->setEnabled(false);
+        ISocketCopyPushButton->setEnabled(false);
         ISocketRemovePushButton->setEnabled(false);
         ISocketMoveUpPushButton->setEnabled(false);
         ISocketMoveDownPushButton->setEnabled(false);
@@ -355,6 +357,12 @@ void qjackctlPatchbayForm::editOSocket()
 }
 
 
+void qjackctlPatchbayForm::copyOSocket()
+{
+    (m_pPatchbay->OSocketList())->copySocketItem();
+}
+
+
 void qjackctlPatchbayForm::moveUpOSocket()
 {
     (m_pPatchbay->OSocketList())->moveUpSocketItem();
@@ -384,6 +392,12 @@ void qjackctlPatchbayForm::removeISocket()
 void qjackctlPatchbayForm::editISocket()
 {
     (m_pPatchbay->ISocketList())->editSocketItem();
+}
+
+
+void qjackctlPatchbayForm::copyISocket()
+{
+    (m_pPatchbay->ISocketList())->copySocketItem();
 }
 
 

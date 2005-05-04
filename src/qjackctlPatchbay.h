@@ -236,6 +236,7 @@ public slots:
     bool addSocketItem();
     bool removeSocketItem();
     bool editSocketItem();
+    bool copySocketItem();
     bool exclusiveSocketItem();
     bool moveUpSocketItem();
     bool moveDownSocketItem();

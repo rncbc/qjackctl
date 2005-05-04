@@ -687,7 +687,7 @@
                                             <number>0</number>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Channel/Device ID:</string>
+                                            <string>&amp;Channel:</string>
                                         </property>
                                         <property name="alignment">
                                             <set>AlignVCenter|AlignRight</set>
@@ -967,7 +967,7 @@
                                             <number>99</number>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>PCM channel (portaudio) / Device ID (coreaudio)</string>
+                                            <string>PCM channel (portaudio)</string>
                                         </property>
                                     </widget>
                                 </grid>

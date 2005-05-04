@@ -693,6 +693,58 @@ bool qjackctlSocketList::editSocketItem (void)
 }
 
 
+// Duplicate and change the properties of currently selected socket item.
+bool qjackctlSocketList::copySocketItem (void)
+{
+    bool bResult = false;
+
+    qjackctlSocketItem *pSocketItem = selectedSocketItem();
+    if (pSocketItem) {
+        qjackctlSocketForm *pSocketForm = new qjackctlSocketForm(m_pListView);
+        if (pSocketForm) {
+			// Find a new distinguishable socket name, please.
+			QString sSocketName;
+			QString sSkel = pSocketItem->socketName();
+			sSkel.replace(QRegExp("[0-9]+$"), "%1");
+			int iSocketNo = 1;
+			do { sSocketName = sSkel.arg(++iSocketNo); }
+			while (findSocket(sSocketName));
+			// Show up as a new socket...
+            pSocketForm->setCaption(pSocketItem->socketName() + " <" + tr("Copy") + "> - " + m_sSocketCaption);
+            pSocketForm->setSocketCaption(m_sSocketCaption);
+            pSocketForm->setPixmaps(m_apPixmaps);
+            pSocketForm->setReadable(m_bReadable);
+            pSocketForm->setJackClient(m_pJackClient);
+            pSocketForm->setAlsaSeq(m_pAlsaSeq);
+	        qjackctlPatchbaySocket socket(sSocketName, pSocketItem->clientName(), pSocketItem->socketType());
+            if (pSocketItem->isExclusive())
+                socket.setExclusive(true);
+            for (qjackctlPlugItem *pPlugItem = pSocketItem->plugs().first(); pPlugItem; pPlugItem = pSocketItem->plugs().next())
+                socket.pluglist().append(pPlugItem->plugName());
+	        pSocketForm->load(&socket);
+	        if (pSocketForm->exec()) {	        
+	            pSocketForm->save(&socket);
+	            pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), socket.isExclusive(), pSocketItem);
+	            if (pSocketItem) {
+	                qjackctlPlugItem *pPlugItem = NULL;
+	                for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
+	                    pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
+	                bResult = true;
+	            }
+	            m_pListView->setCurrentItem(pSocketItem);
+	            m_pListView->setSelected(pSocketItem, true);
+	        //  m_pListView->setUpdatesEnabled(true);
+	        //  m_pListView->triggerUpdate();
+	            m_pListView->setDirty(true);
+	        }
+	        delete pSocketForm;
+	    }
+	}    
+
+    return bResult;
+}           
+
+
 // Toggle exclusive currently selected socket item.
 bool qjackctlSocketList::exclusiveSocketItem (void)
 {
@@ -1159,6 +1211,9 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, qjackctlSocketList *
         bool bEnabled = (pSocketItem != NULL);
         iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("add1.png")),
 			tr("Add..."), pSocketList, SLOT(addSocketItem()));
+        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("copy1.png")),
+			tr("Copy..."), pSocketList, SLOT(copySocketItem()));
+        pContextMenu->setItemEnabled(iItemID, bEnabled);
         iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("edit1.png")),
 			tr("Edit..."), pSocketList, SLOT(editSocketItem()));
         pContextMenu->setItemEnabled(iItemID, bEnabled);
