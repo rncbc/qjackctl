@@ -1211,11 +1211,11 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, qjackctlSocketList *
         bool bEnabled = (pSocketItem != NULL);
         iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("add1.png")),
 			tr("Add..."), pSocketList, SLOT(addSocketItem()));
-        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("copy1.png")),
-			tr("Copy..."), pSocketList, SLOT(copySocketItem()));
-        pContextMenu->setItemEnabled(iItemID, bEnabled);
         iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("edit1.png")),
 			tr("Edit..."), pSocketList, SLOT(editSocketItem()));
+        pContextMenu->setItemEnabled(iItemID, bEnabled);
+        iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("copy1.png")),
+			tr("Copy..."), pSocketList, SLOT(copySocketItem()));
         pContextMenu->setItemEnabled(iItemID, bEnabled);
         iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("remove1.png")),
 			tr("Remove"), pSocketList, SLOT(removeSocketItem()));
