@@ -49,7 +49,7 @@ $(name).mak:	$(name).pro
 	@$(qmake) -o $(name).mak $(name).pro
 
 $(name):	$(name).mak $(sources) $(headers)
-	@make -f $(name).mak $(name)
+	@make -f $(name).mak
 
 install:	$(name) icons/$(name).png
 	@install -vD $(name) $(prefix)/bin/$(name)

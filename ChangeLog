@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.16   2005-05-04  OSS device name selection and Mac OS X breakthrough.
+0.2.16   2005-05-06  OSS device name selection and Mac OS X breakthrough.
 
 - Long overdue transport buttons (rewind, backward and forward) finally 
   landed onto the main control window, at last :).
