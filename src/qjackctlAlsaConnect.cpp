@@ -187,17 +187,26 @@ int qjackctlAlsaClientList::updateClientPorts (void)
                     ((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
                     qjackctlAlsaPort *pPort = 0;
                     int iAlsaPort = snd_seq_port_info_get_port(pPortInfo);
-                    if (pClient)
-                        pPort = pClient->findPort(iAlsaPort);
+                    QString sClientName = snd_seq_client_info_get_name(pClientInfo);
                     if (pClient == 0) {
-                        QString sClientName = snd_seq_client_info_get_name(pClientInfo);
                         pClient = new qjackctlAlsaClient(this, sClientName, iAlsaClient);
                         iDirtyCount++;
+                    } else {
+                        pPort = pClient->findPort(iAlsaPort);
+                        if (sClientName != pClient->clientName()) {
+                            pClient->setClientName(sClientName);
+                            iDirtyCount++;
+                        }
                     }
-                    if (pClient && pPort == 0) {
+                    if (pClient) {
                         QString sPortName = snd_seq_port_info_get_name(pPortInfo);
-                        pPort = new qjackctlAlsaPort(pClient, sPortName, iAlsaPort);
-                        iDirtyCount++;
+                        if (pPort == 0) {
+                            pPort = new qjackctlAlsaPort(pClient, sPortName, iAlsaPort);
+                            iDirtyCount++;
+                        } else if (sPortName != pPort->portName()) {
+                            pPort->setPortName(sPortName);
+                            iDirtyCount++;
+                        }
                     }
                     if (pPort)
                         pPort->markClientPort(1);

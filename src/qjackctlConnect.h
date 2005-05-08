@@ -79,8 +79,9 @@ public:
     ~qjackctlPortItem();
 
     // Instance accessors.
-    QString& clientName();
-    QString& portName();
+    const QString& clientName();
+    const QString& portName();
+    void setPortName(const QString& sPortName);
 
     // Complete client:port name helper.
     QString clientPortName();
@@ -110,7 +111,7 @@ public:
     // Connectiopn highlight methods.
     bool isHilite();
     void setHilite (bool bHilite);
-    
+
     // Special port name sorting virtual comparator.
     virtual int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
 
@@ -150,7 +151,8 @@ public:
     qjackctlPortItem *findPort(const QString& sPortName);
 
     // Instance accessors.
-    QString& clientName();
+    void setClientName(const QString& sClientName);
+    const QString& clientName();
 
     // Readable flag accessor.
     bool isReadable();

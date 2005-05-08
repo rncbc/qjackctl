@@ -5,6 +5,9 @@ ChangeLog
 
 0.2.16   2005-05-06  OSS device name selection and Mac OS X breakthrough.
 
+- ALSA sequencer client/port name changes are now properly detected on the
+  MIDI connections widget (as noted by Chris Cannam. Thanks).
+
 - Long overdue transport buttons (rewind, backward and forward) finally 
   landed onto the main control window, at last :).
 
@@ -13,7 +16,7 @@ ChangeLog
 - Do not ever try to start the JACK server if there's one already found
   running, on which case the client-only mode of operation is then activated
   (as kindly suggested by Orm Finnendahl, thanks).
-    
+
 - After several Mac OS X user requests, ALSA/MIDI sequencer support is
   now an option, otherwise detected at configure time and conditionally
   compiled in if, and only if, ALSA is found available (which has been
@@ -34,7 +37,7 @@ ChangeLog
 
 - Context menus are finally littered with icons.
 
-  
+
 0.2.15a  2005-02-09  Return of the paranoid.
 
 - Regression from 0.2.13, of the not so stupid pseudo-mutex guards on the
@@ -108,7 +111,7 @@ ChangeLog
 - Main window is now properly minimized instead of simply hidden when
   the system tray icon is not available nor opted in (as suggested
   by Florian Schmidt).
-  
+
 - Some informational status items are now updated 10 times less frequently
   (e.g. CPU Load, Sample Rate, Buffer Size, Realtime Mode, etc.), lowering
   the CPU burden of most probably redundant status updates.
@@ -166,7 +169,7 @@ ChangeLog
 
 - Fixed Input/Output channels settings, being now either enabled when
   the ALSA driver is selected for Capture/Playback only.
-  
+
 - Shiny display effect: after some conservative user complaints this 
   pure cosmetic feature is now made optional ;)
 
@@ -177,7 +180,7 @@ ChangeLog
   to be run before the JACK server daemon is shutted-down. This overrides
   any previous shutdown script setting, which should be now moved onto the
   existing post-shutdown script option, as to keep old procedural behaviour.
-  
+
 - Avoid stopping JACK prematurely with QProcess::kill() (oneliner fix);
   stopping JACK will now take a little bit longer, but hopefully will take
   the time to cleanup properly (thanks to Kjetil Matheussen).
@@ -214,7 +217,7 @@ ChangeLog
 - Server stop command button now enabled during client startup interval;
   this makes it possible to stop the server just in case the client 
   can't be activated for any reason.
-  
+
 - Top level sub-windows are now always raised and set with active focus
   when shown to visibility.
 
@@ -227,7 +230,7 @@ ChangeLog
 
 - Capture or Playback-only optional alternate device interface name may now
   be specified for the ALSA audio driver server settings.
-  
+
 - Maximum number of ports setting was added to server setup.
 
 - The dash (-) is now a legal character for preset names.
@@ -287,7 +290,7 @@ ChangeLog
 
 - Makefile.cvs makes its late entrance on the build toolset.
 
-  
+
 0.2.5  2004-02-16  Server survival option and command-line wrapper feature.
 
 - New option on application exit for leaving the JACK server daemon running,
@@ -319,11 +322,11 @@ ChangeLog
 
 - New setup option on wether all child windows are kept on top of the main
   window, or otherwise floating with probable taskbar entries of their own.
-  
+
 - Setup changes that are only effective next time the program is run gets
   an informational message box shown to the user.
-  
-  
+
+
 0.2.4  2004-02-01  Exclusive patchbay sockets.
 
 - Patchbay definitions may now be configured with exclusive sockets;
@@ -454,7 +457,7 @@ ChangeLog
 - Seamless support for externally started JACK server, providing a client-only
   mode of operation; if the JACK daemon is already started, qjackctl enters in
   client detached mode automagically.
-  
+
 - Messages window font is configurable and saved across sessions (by Jack
   O'Quin's humble request). Some colorization has been introduced on some
   event messages.
@@ -482,7 +485,7 @@ ChangeLog
 
 - New connection port item pixmaps that distinguishes physical from
   logical ports.
-  
+
 - History of most recently used values gets saved for some settings
   and options comboboxes widgets.
 
@@ -493,7 +496,7 @@ ChangeLog
 
 - Connections command buttons are now shortly disabled after clicking,
   avoiding accidental duplicated connections.
-  
+
 
 0.0.8   2003-09-19  Preliminary transport and buffer size status control.
 
@@ -581,7 +584,7 @@ ChangeLog
 - JACK library and header files are checked on configure.
 - Server CPU load, sample rate and time elapsed since last XRUN
   detected, are now displayed on statistics.
-  
-  
+
+
 0.0.1   2003-07-26  Initial release.
 
