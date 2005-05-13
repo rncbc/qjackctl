@@ -35,7 +35,7 @@ void qjackctlPatchbayForm::init (void)
     // Create the patchbay view object.
     m_pPatchbay = new qjackctlPatchbay(PatchbayView);
     m_iUntitled = 0;
-    
+
     // Connect it to some UI feedback slot.
     QObject::connect(PatchbayView->OListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->IListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
@@ -153,7 +153,7 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
         OSocketMoveUpPushButton->setEnabled(false);
         OSocketMoveDownPushButton->setEnabled(false);
     }
-    
+
     pSocketItem = (m_pPatchbay->ISocketList())->selectedSocketItem();
     if (pSocketItem) {
         ISocketEditPushButton->setEnabled(true);
@@ -168,7 +168,7 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
         ISocketMoveUpPushButton->setEnabled(false);
         ISocketMoveDownPushButton->setEnabled(false);
     }
-    
+
     ConnectPushButton->setEnabled(m_pPatchbay->canConnectSelected());
     DisconnectPushButton->setEnabled(m_pPatchbay->canDisconnectSelected());
     DisconnectAllPushButton->setEnabled(m_pPatchbay->canDisconnectAll());
@@ -235,7 +235,7 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     m_sPatchbayPath = sFileName;
     m_sPatchbayName = QFileInfo(sFileName).baseName();
     stabilizeForm();
-    
+
     // Step 4: notify main form if applicable ...
     qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
     if (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath))
@@ -246,15 +246,26 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 // Create a new patchbay definition from scratch.
 void qjackctlPatchbayForm::newPatchbay()
 {
-    // Ask for a snapshot for scratch...
+    // Assume a snapshot from scratch...
     bool bSnapshot = false;
-    if (m_pPatchbay->jackClient() || m_pPatchbay->alsaSeq()) {
-        bSnapshot = (QMessageBox::information(this,
-            tr("New Patchbay definition"),
-            tr("Create patchbay definition as a snapshot") + "\n" +
-            tr("of all actual client connections?"),
-            tr("Yes"), tr("No")) == 0);
-    }
+
+	// Ask user what he/she wants to do...
+	if (m_pPatchbay->jackClient() || m_pPatchbay->alsaSeq()) {
+		switch (QMessageBox::information(this,
+			tr("New Patchbay definition"),
+			tr("Create patchbay definition as a snapshot") + "\n" +
+			tr("of all actual client connections?"),
+			tr("Yes"), tr("No"), tr("Cancel"))) {
+		case 0:		// Yes.
+			bSnapshot = true;
+			break;
+		case 1:		// No.
+			bSnapshot = false;
+			break;
+		default:	// Cancel.
+			return;
+		}
+	}
 
     // Check if we can discard safely the current one...
     if (!queryClose())
@@ -274,7 +285,7 @@ void qjackctlPatchbayForm::loadPatchbay()
             this, 0,                                        // Parent and name (none)
             tr("Load Patchbay Definition")                  // Caption.
     );
-    
+
     if (sFileName.isEmpty())
         return;
 
@@ -296,14 +307,14 @@ void qjackctlPatchbayForm::savePatchbay()
             this, 0,                                        // Parent and name (none)
             tr("Save Patchbay Definition")                  // Caption.
     );
-    
+
     if (sFileName.isEmpty())
         return;
-        
+
     // Enforce .xml extension...
     if (QFileInfo(sFileName).extension().isEmpty())
         sFileName += ".xml";
-    
+
     // Save it right away.
     savePatchbayFile(sFileName);
 }
