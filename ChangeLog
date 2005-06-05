@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.16   2005-06-02  OSS device name selection and Mac OS X breakthrough.
+0.2.16   2005-06-04  OSS device name selection and Mac OS X breakthrough.
 
 - ALSA sequencer client/port name changes are now properly detected on the
   MIDI connections widget (as noted by Chris Cannam. Thanks).
@@ -39,7 +39,9 @@ ChangeLog
 
 - Context menus are finally littered with icons.
 
-- Minor configure fix, a debian specialty.
+* Minor configure fix, a debian specialty. Also, install 
+  does the right thing with target file modes (thanks to
+  Matt Flax for pointing this out).
 
 
 0.2.15a  2005-02-09  Return of the paranoid.

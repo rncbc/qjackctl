@@ -3448,7 +3448,7 @@
                                             <string>Alt+D</string>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Whether to window positioning is delayed at application startup</string>
+                                            <string>Whether to delay window positioning at application startup</string>
                                         </property>
                                     </widget>
                                 </vbox>

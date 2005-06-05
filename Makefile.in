@@ -23,7 +23,7 @@ headers = config.h \
 	src/qjackctlSocketForm.ui.h \
 	src/qjackctlSetupForm.ui.h \
 	src/qjackctlAboutForm.ui.h
-          
+
 sources = src/main.cpp \
 	src/qjackctlSetup.cpp \
 	src/qjackctlConnect.cpp \
@@ -52,8 +52,8 @@ $(name):	$(name).mak $(sources) $(headers)
 	@make -f $(name).mak
 
 install:	$(name) icons/$(name).png
-	@install -vD $(name) $(prefix)/bin/$(name)
-	@install -vD icons/$(name).png $(prefix)/share/icons/$(name).png
+	@install -vD $(name) -m 0755 $(prefix)/bin/$(name)
+	@install -vD icons/$(name).png -m 0644 $(prefix)/share/icons/$(name).png
 
 uninstall:	$(prefix)/bin/$(name)
 	@rm -vf $(prefix)/bin/$(name)
