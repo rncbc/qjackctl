@@ -52,12 +52,14 @@ $(name):	$(name).mak $(sources) $(headers)
 	@make -f $(name).mak
 
 install:	$(name) icons/$(name).png
-	@install -vD $(name) -m 0755 $(prefix)/bin/$(name)
-	@install -vD icons/$(name).png -m 0644 $(prefix)/share/icons/$(name).png
+	@install -v -d -m 0755 $(DESTDIR)$(prefix)/bin
+	@install -v -d -m 0755 $(DESTDIR)$(prefix)/share/icons
+	@install -v $(name) -m 0755 $(DESTDIR)$(prefix)/bin/$(name)
+	@install -v icons/$(name).png -m 0644 $(DESTDIR)$(prefix)/share/icons/$(name).png
 
-uninstall:	$(prefix)/bin/$(name)
-	@rm -vf $(prefix)/bin/$(name)
-	@rm -vf $(prefix)/share/icons/$(name).png
+uninstall:	$(DESTDIR)$(prefix)/bin/$(name)
+	@rm -vf $(DESTDIR)$(prefix)/bin/$(name)
+	@rm -vf $(DESTDIR)$(prefix)/share/icons/$(name).png
 
 clean:	$(name).mak
 	@make -f $(name).mak clean
