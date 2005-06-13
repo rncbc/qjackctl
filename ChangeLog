@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.16   2005-06-12  OSS device name selection and Mac OS X breakthrough.
+0.2.16   2005-06-13  OSS device name selection and Mac OS X breakthrough.
 
 - ALSA sequencer client/port name changes are now properly detected on the
   MIDI connections widget (as noted by Chris Cannam. Thanks).
