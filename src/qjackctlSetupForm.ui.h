@@ -221,6 +221,8 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
             OutDeviceComboBox->setCurrentText(preset.sOutDevice);
         InChannelsSpinBox->setValue(preset.iInChannels);
         OutChannelsSpinBox->setValue(preset.iOutChannels);
+        InLatencySpinBox->setValue(preset.iInLatency);
+        OutLatencySpinBox->setValue(preset.iOutLatency);
         StartDelaySpinBox->setValue(preset.iStartDelay);
         VerboseCheckBox->setChecked(preset.bVerbose);
         PortMaxComboBox->setCurrentText(QString::number(preset.iPortMax));
@@ -266,6 +268,8 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.sOutDevice   = OutDeviceComboBox->currentText();
     preset.iInChannels  = InChannelsSpinBox->value();
     preset.iOutChannels = OutChannelsSpinBox->value();
+    preset.iInLatency   = InLatencySpinBox->value();
+    preset.iOutLatency  = OutLatencySpinBox->value();
     preset.iStartDelay  = StartDelaySpinBox->value();
     preset.bVerbose     = VerboseCheckBox->isChecked();
     preset.iPortMax     = PortMaxComboBox->currentText().toInt();
@@ -431,6 +435,11 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     InChannelsSpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
     OutChannelsTextLabel->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
     OutChannelsSpinBox->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
+
+	InLatencyTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+	InLatencySpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+	OutLatencyTextLabel->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
+	OutLatencySpinBox->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
 
     computeLatency();
 }
@@ -637,7 +646,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 #ifdef CONFIG_COREAUDIO
 	else if (bCoreaudio) {
 	    // Find out how many Core Audio devices are there, if any...
-	    // (code snippet gently "borrowed" from Stéphane Letz jackdmp;)
+	    // (code snippet gently "borrowed" from Stï¿½hane Letz jackdmp;)
 	    OSStatus err;
 	    Boolean isWritable;
 	    UInt32 outSize = sizeof(isWritable);

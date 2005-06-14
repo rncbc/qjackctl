@@ -551,7 +551,7 @@ void qjackctlMainForm::startJack (void)
     if (bPortaudio && m_preset.iChan > 0)
         m_pJack->addArgument("-c" + QString::number(m_preset.iChan));
 	if (bCoreaudio)
-		m_pJack->addArgument("-I" + QString::number(m_preset.sInterface.toInt()));
+		m_pJack->addArgument("-n" + QString::number(m_preset.sInterface.toInt()));
     if (m_preset.iSampleRate > 0)
         m_pJack->addArgument("-r" + QString::number(m_preset.iSampleRate));
     if (m_preset.iFrames > 0)
@@ -632,6 +632,12 @@ void qjackctlMainForm::startJack (void)
         if (m_preset.bHWMeter)
             m_pJack->addArgument("-M");
     }
+	if (bAlsa || bOss || bCoreaudio) {
+		if (m_preset.iInLatency > 0)
+			m_pJack->addArgument("-I" + QString::number(m_preset.iInLatency));
+		if (m_preset.iOutLatency > 0)
+			m_pJack->addArgument("-O" + QString::number(m_preset.iOutLatency));
+	}
 
     appendMessages(tr("JACK is starting..."));
     QStringList args = m_pJack->arguments();    

@@ -3,6 +3,17 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+0.2.17   2005-06-14  Systemic I/O Latency settings.
+
+- Systemic I/O Latency settings are now featured for the alsa, oss and
+  coreaudio backends, letting you specify the known latency of external
+  hardware for client aware compensation purposes (thanks to Wolfgang Woehl,
+  for the reminder).
+
+- Update on last backstage changes to the coreaudio backend options
+  (due to Stéphane Letz. Thanks).
+
+
 0.2.16   2005-06-13  OSS device name selection and Mac OS X breakthrough.
 
 - ALSA sequencer client/port name changes are now properly detected on the

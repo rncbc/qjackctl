@@ -256,6 +256,8 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     preset.sOutDevice   = m_settings.readEntry("/OutDevice", QString::null);
     preset.iInChannels  = m_settings.readNumEntry("/InChannels", 0);
     preset.iOutChannels = m_settings.readNumEntry("/OutChannels", 0);
+    preset.iInLatency   = m_settings.readNumEntry("/InLatency", 0);
+    preset.iOutLatency  = m_settings.readNumEntry("/OutLatency", 0);
     preset.iStartDelay  = m_settings.readNumEntry("/StartDelay", 2);
     preset.bVerbose     = m_settings.readBoolEntry("/Verbose", false);
     preset.iPortMax     = m_settings.readNumEntry("/PortMax", 128);
@@ -301,6 +303,8 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
     m_settings.writeEntry("/OutDevice",   preset.sOutDevice);
     m_settings.writeEntry("/InChannels",  preset.iInChannels);
     m_settings.writeEntry("/OutChannels", preset.iOutChannels);
+    m_settings.writeEntry("/InLatency",   preset.iInLatency);
+    m_settings.writeEntry("/OutLatency",  preset.iOutLatency);
     m_settings.writeEntry("/StartDelay",  preset.iStartDelay);
     m_settings.writeEntry("/Verbose",     preset.bVerbose);
     m_settings.writeEntry("/PortMax",     preset.iPortMax);

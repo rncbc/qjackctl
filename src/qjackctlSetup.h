@@ -66,6 +66,8 @@ struct qjackctlPreset
     QString sOutDevice;
     int     iInChannels;
     int     iOutChannels;
+    int     iInLatency;
+    int     iOutLatency;
     int     iStartDelay;
     bool    bVerbose;
     int     iPortMax;
