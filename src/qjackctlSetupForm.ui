@@ -4316,17 +4316,17 @@
 </variables>
 <slots>
     <slot specifier="non virtual">changeCurrentPreset( const QString &amp; sPreset )</slot>
-    <slot specifier="non virtual">saveCurrentPreset( void )</slot>
-    <slot specifier="non virtual">deleteCurrentPreset( void )</slot>
+    <slot specifier="non virtual">saveCurrentPreset()</slot>
+    <slot specifier="non virtual">deleteCurrentPreset()</slot>
     <slot specifier="non virtual">changeAudio( int iAudio )</slot>
     <slot specifier="non virtual">changeDriver( const QString &amp; sDriver )</slot>
-    <slot specifier="non virtual">selectInterface( void )</slot>
-    <slot specifier="non virtual">selectInDevice( void )</slot>
-    <slot specifier="non virtual">selectOutDevice( void )</slot>
-    <slot specifier="non virtual">symbolStartupScript( void )</slot>
-    <slot specifier="non virtual">symbolPostStartupScript( void )</slot>
-    <slot specifier="non virtual">symbolShutdownScript( void )</slot>
-    <slot specifier="non virtual">symbolPostShutdownScript( void )</slot>
+    <slot specifier="non virtual">selectInterface()</slot>
+    <slot specifier="non virtual">selectInDevice()</slot>
+    <slot specifier="non virtual">selectOutDevice()</slot>
+    <slot specifier="non virtual">symbolStartupScript()</slot>
+    <slot specifier="non virtual">symbolPostStartupScript()</slot>
+    <slot specifier="non virtual">symbolShutdownScript()</slot>
+    <slot specifier="non virtual">symbolPostShutdownScript()</slot>
     <slot specifier="non virtual">browseStartupScript()</slot>
     <slot specifier="non virtual">browsePostStartupScript()</slot>
     <slot specifier="non virtual">browseShutdownScript()</slot>
@@ -4337,22 +4337,22 @@
     <slot specifier="non virtual">toggleDisplayEffect( bool bOn )</slot>
     <slot specifier="non virtual">chooseMessagesFont()</slot>
     <slot specifier="non virtual">chooseConnectionsFont()</slot>
-    <slot specifier="non virtual">settingsChanged( void )</slot>
-    <slot specifier="non virtual">optionsChanged( void )</slot>
-    <slot specifier="non virtual">accept( void )</slot>
-    <slot specifier="non virtual">reject( void )</slot>
+    <slot specifier="non virtual">settingsChanged()</slot>
+    <slot specifier="non virtual">optionsChanged()</slot>
+    <slot specifier="non virtual">accept()</slot>
+    <slot specifier="non virtual">reject()</slot>
 </slots>
 <functions>
-    <function access="private" specifier="non virtual">init( void )</function>
-    <function access="private" specifier="non virtual">destroy( void )</function>
+    <function access="private" specifier="non virtual">init()</function>
+    <function access="private" specifier="non virtual">destroy()</function>
     <function specifier="non virtual">setup( qjackctlSetup * pSetup )</function>
     <function access="provate" specifier="non virtual">changePreset( const QString &amp; sPreset )</function>
     <function access="private" specifier="non virtual" returnType="bool">savePreset( const QString &amp; sPreset )</function>
     <function access="private" specifier="non virtual" returnType="bool">deletePreset( const QString &amp; sPreset )</function>
-    <function access="private" specifier="non virtual">resetPresets( void )</function>
-    <function access="private" specifier="non virtual">computeLatency( void )</function>
+    <function access="private" specifier="non virtual">resetPresets()</function>
+    <function access="private" specifier="non virtual">computeLatency()</function>
     <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
-    <function access="private" specifier="non virtual">stabilizeForm( void )</function>
+    <function access="private" specifier="non virtual">stabilizeForm()</function>
     <function access="private" specifier="non virtual">deviceMenu( QLineEdit * pLineEdit, QPushButton * pPushButton, int iAudio )</function>
     <function access="private" specifier="non virtual">symbolMenu( QLineEdit * pLineEdit, QPushButton * pPushButton )</function>
 </functions>

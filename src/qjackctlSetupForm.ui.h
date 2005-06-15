@@ -645,42 +645,42 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	}
 #ifdef CONFIG_COREAUDIO
 	else if (bCoreaudio) {
-	    // Find out how many Core Audio devices are there, if any...
-	    // (code snippet gently "borrowed" from St�hane Letz jackdmp;)
-	    OSStatus err;
-	    Boolean isWritable;
-	    UInt32 outSize = sizeof(isWritable);
-	    err = AudioHardwareGetPropertyInfo(kAudioHardwarePropertyDevices,
-	            &outSize, &isWritable);
-	    if (err == noErr) {
-	        // Calculate the number of device available...
-	        int numCoreDevices = outSize / sizeof(AudioDeviceID);
-	        // Make space for the devices we are about to get...
-	        AudioDeviceID *coreDeviceIDs = new AudioDeviceID [numCoreDevices];
-	        err = AudioHardwareGetProperty(kAudioHardwarePropertyDevices,
-	                &outSize, (void *) coreDeviceIDs);
-	        if (err == noErr) {
-	            // Look for the CoreAudio device name...
-	            char coreDeviceName[256];
-	            for (int i = 0; i < numCoreDevices; i++) {
-		            err = AudioDeviceGetPropertyInfo(coreDeviceIDs[i],
-		                    0, true, kAudioDevicePropertyDeviceName,
-		                    &outSize, &isWritable);
-		            if (err == noErr) {
-		                err = AudioDeviceGetProperty(coreDeviceIDs[i],
-		                        0, true, kAudioDevicePropertyDeviceName,
-		                        &outSize, (void *) coreDeviceName);
-		                if (err == noErr) {
-                        	sName = QString::number(coreDeviceIDs[i]);
+		// Find out how many Core Audio devices are there, if any...
+		// (code snippet gently "borrowed" from St�hane Letz jackdmp;)
+		OSStatus err;
+		Boolean isWritable;
+		UInt32 outSize = sizeof(isWritable);
+		err = AudioHardwareGetPropertyInfo(kAudioHardwarePropertyDevices,
+				&outSize, &isWritable);
+		if (err == noErr) {
+			// Calculate the number of device available...
+			int numCoreDevices = outSize / sizeof(AudioDeviceID);
+			// Make space for the devices we are about to get...
+			AudioDeviceID *coreDeviceIDs = new AudioDeviceID [numCoreDevices];
+			err = AudioHardwareGetProperty(kAudioHardwarePropertyDevices,
+					&outSize, (void *) coreDeviceIDs);
+			if (err == noErr) {
+				// Look for the CoreAudio device name...
+				char coreDeviceName[256];
+				for (int i = 0; i < numCoreDevices; i++) {
+					err = AudioDeviceGetPropertyInfo(coreDeviceIDs[i],
+							0, true, kAudioDevicePropertyDeviceName,
+							&outSize, &isWritable);
+					if (err == noErr) {
+						err = AudioDeviceGetProperty(coreDeviceIDs[i],
+								0, true, kAudioDevicePropertyDeviceName,
+								&outSize, (void *) coreDeviceName);
+						if (err == noErr) {
+							sName = QString::number(coreDeviceIDs[i]);
 							sText = sName + '\t' + coreDeviceName;
 							pContextMenu->insertItem(sText);
 							++iCards;
-		                }
-		            }
-		        }
-	        }
-	        delete [] coreDeviceIDs;
-	    }
+						}
+					}
+				}
+			}
+			delete [] coreDeviceIDs;
+		}
 	}
 #endif 	// CONFIG_COREAUDIO
 
