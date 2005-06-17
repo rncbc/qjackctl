@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.17   2005-06-15  Systemic I/O Latency settings are in.
+0.2.17   2005-06-17  Systemic I/O Latency settings are in.
 
 - Systemic I/O Latency settings are now featured for the alsa, oss and
   coreaudio backends, letting you specify the known latency of external
