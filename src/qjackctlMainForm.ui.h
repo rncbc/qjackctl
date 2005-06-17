@@ -909,7 +909,7 @@ void qjackctlMainForm::updateMessagesLimit (void)
         if (m_pSetup->bMessagesLimit)
             m_pMessagesForm->setMessagesLimit(m_pSetup->iMessagesLimitLines);
         else
-            m_pMessagesForm->setMessagesLimit(0);
+            m_pMessagesForm->setMessagesLimit(-1);
     }
 }
 

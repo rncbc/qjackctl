@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+0.2.18   2005-06-18  The mantra of bugfixes stays on.
+
+- Fixed output disability when messages limit option is turned off
+  (thanks again to Wolfgang Woehl for spotting this one).
+
+
 0.2.17   2005-06-17  Systemic I/O Latency settings are in.
 
 - Systemic I/O Latency settings are now featured for the alsa, oss and
