@@ -83,7 +83,7 @@ qjackctlPlugItem::qjackctlPlugItem ( qjackctlSocketItem *pSocket, const QString&
     : QListViewItem(pSocket, pPlugAfter)
 {
     QListViewItem::setText(0, sPlugName);
-    
+
     m_pSocket   = pSocket;
     m_sPlugName = sPlugName;
 
@@ -327,7 +327,7 @@ qjackctlSocketList::qjackctlSocketList( qjackctlSocketListView *pListView, bool 
     m_bReadable   = bReadable;
     m_pJackClient = NULL;
     m_pAlsaSeq    = NULL;
-    
+
     if (bReadable) {
         m_sSocketCaption = tr("Output");
         m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET]   = new QPixmap(QPixmap::fromMimeSource("asocketo.png"));
@@ -349,7 +349,7 @@ qjackctlSocketList::qjackctlSocketList( qjackctlSocketListView *pListView, bool 
     if (!m_sSocketCaption.isEmpty())
         m_sSocketCaption += " ";
     m_sSocketCaption += tr("Socket");
-    
+
     m_sockets.setAutoDelete(false);
 }
 
@@ -616,7 +616,7 @@ bool qjackctlSocketList::addSocketItem (void)
         }
         delete pSocketForm;
     }
-    
+
     return bResult;
 }
 
@@ -638,7 +638,7 @@ bool qjackctlSocketList::removeSocketItem (void)
             m_pListView->setDirty(true);
         }
     }
-    
+
     return bResult;
 }
 
@@ -705,7 +705,7 @@ bool qjackctlSocketList::copySocketItem (void)
 			// Find a new distinguishable socket name, please.
 			QString sSocketName;
 			QString sSkel = pSocketItem->socketName();
-			sSkel.replace(QRegExp("[0-9]+$"), "%1");
+			sSkel.remove(QRegExp("[0-9]+$")).append("%1");
 			int iSocketNo = 1;
 			do { sSocketName = sSkel.arg(++iSocketNo); }
 			while (findSocket(sSocketName));
@@ -716,33 +716,33 @@ bool qjackctlSocketList::copySocketItem (void)
             pSocketForm->setReadable(m_bReadable);
             pSocketForm->setJackClient(m_pJackClient);
             pSocketForm->setAlsaSeq(m_pAlsaSeq);
-	        qjackctlPatchbaySocket socket(sSocketName, pSocketItem->clientName(), pSocketItem->socketType());
+			qjackctlPatchbaySocket socket(sSocketName, pSocketItem->clientName(), pSocketItem->socketType());
             if (pSocketItem->isExclusive())
                 socket.setExclusive(true);
             for (qjackctlPlugItem *pPlugItem = pSocketItem->plugs().first(); pPlugItem; pPlugItem = pSocketItem->plugs().next())
                 socket.pluglist().append(pPlugItem->plugName());
-	        pSocketForm->load(&socket);
-	        if (pSocketForm->exec()) {	        
-	            pSocketForm->save(&socket);
-	            pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), socket.isExclusive(), pSocketItem);
-	            if (pSocketItem) {
-	                qjackctlPlugItem *pPlugItem = NULL;
-	                for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
-	                    pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
-	                bResult = true;
-	            }
-	            m_pListView->setCurrentItem(pSocketItem);
-	            m_pListView->setSelected(pSocketItem, true);
-	        //  m_pListView->setUpdatesEnabled(true);
-	        //  m_pListView->triggerUpdate();
-	            m_pListView->setDirty(true);
-	        }
-	        delete pSocketForm;
-	    }
-	}    
+			pSocketForm->load(&socket);
+			if (pSocketForm->exec()) {	        
+				pSocketForm->save(&socket);
+				pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), socket.isExclusive(), pSocketItem);
+				if (pSocketItem) {
+					qjackctlPlugItem *pPlugItem = NULL;
+					for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
+						pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
+					bResult = true;
+				}
+				m_pListView->setCurrentItem(pSocketItem);
+				m_pListView->setSelected(pSocketItem, true);
+			//  m_pListView->setUpdatesEnabled(true);
+			//  m_pListView->triggerUpdate();
+				m_pListView->setDirty(true);
+			}
+			delete pSocketForm;
+		}
+	}
 
     return bResult;
-}           
+}
 
 
 // Toggle exclusive currently selected socket item.
@@ -831,18 +831,18 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
 {
     m_pPatchbayView = pPatchbayView;
     m_bReadable     = bReadable;
-    
+
     m_pAutoOpenTimer   = 0;
     m_iAutoOpenTimeout = 0;
     m_pDragDropItem    = 0;
-    
+
 	m_pToolTip = new qjackctlPatchbayToolTip(this);
 
     if (bReadable)
         QListView::addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
     else
         QListView::addColumn(tr("Input Sockets") + " / " + tr("Plugs"));
-        
+
     QListView::header()->setClickEnabled(false);
     QListView::header()->setResizeEnabled(false);
     QListView::setMinimumSize(QSize(152, 60));
@@ -852,11 +852,11 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
     QListView::setAcceptDrops(true);
     QListView::setDragAutoScroll(true);
     QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    
+
     QListView::setSorting(-1);
 
 	QListView::setShowToolTips(false);
-    
+
     setAutoOpenTimeout(800);
 }
 
@@ -986,7 +986,7 @@ void qjackctlSocketListView::dropEvent( QDropEvent *pDropEvent )
                 pPatchbay->connectSelected();
         }
     }
-    
+
     dragLeaveEvent(0);
 }
 
@@ -1070,7 +1070,7 @@ void qjackctlPatchworkView::drawConnections (void)
 {
     if (m_pPatchbayView->OSocketList() == 0 || m_pPatchbayView->ISocketList() == 0)
         return;
-    
+
     QPainter p(this);
     int   x1, y1, h1;
     int   x2, y2, h2;
@@ -1318,7 +1318,7 @@ bool qjackctlPatchbayView::dirty (void)
 qjackctlPatchbay::qjackctlPatchbay ( qjackctlPatchbayView *pPatchbayView )
 {
     m_pPatchbayView = pPatchbayView;
-    
+
     m_pOSocketList = new qjackctlSocketList(m_pPatchbayView->OListView(), true);
     m_pISocketList = new qjackctlSocketList(m_pPatchbayView->IListView(), false);
 
@@ -1380,7 +1380,7 @@ bool qjackctlPatchbay::canConnectSelected (void)
     default:
         return false;
     }
-    
+
     qjackctlSocketItem *pISocket = NULL;
     switch (pIItem->rtti()) {
     case QJACKCTL_SOCKETITEM:
@@ -1430,7 +1430,7 @@ bool qjackctlPatchbay::connectSelected (void)
     default:
         return false;
     }
-    
+
     qjackctlSocketItem *pISocket = NULL;
     switch (pIItem->rtti()) {
     case QJACKCTL_SOCKETITEM:
@@ -1485,7 +1485,7 @@ bool qjackctlPatchbay::canDisconnectSelected (void)
     default:
         return false;
     }
-    
+
     qjackctlSocketItem *pISocket = NULL;
     switch (pIItem->rtti()) {
     case QJACKCTL_SOCKETITEM:
@@ -1528,7 +1528,7 @@ bool qjackctlPatchbay::disconnectSelected (void)
     default:
         return false;
     }
-    
+
     qjackctlSocketItem *pISocket = NULL;
     switch (pIItem->rtti()) {
     case QJACKCTL_SOCKETITEM:
@@ -1612,7 +1612,7 @@ void qjackctlPatchbay::clear (void)
 
     // Reset dirty flag.
     m_pPatchbayView->setDirty(false);
-    
+
     // May refresh everything.
     refresh();
 }
@@ -1655,7 +1655,7 @@ void qjackctlPatchbay::loadRack ( qjackctlPatchbayRack *pPatchbayRack )
 
     // Load input sockets.
     loadRackSockets(m_pISocketList, pPatchbayRack->isocketlist());
-    
+
     // Now ready to load from cable model.
     for (qjackctlPatchbayCable *pCable = pPatchbayRack->cablelist().first();
             pCable;
@@ -1686,7 +1686,7 @@ void qjackctlPatchbay::saveRackSockets ( qjackctlSocketList *pSocketList, QPtrLi
     qjackctlSocketListView *pListView = pSocketList->listView();
     if (pListView == NULL)
         return;
-        
+
     socketlist.clear();
 
     for (qjackctlSocketItem *pSocketItem = (qjackctlSocketItem *) pListView->firstChild(); pSocketItem; pSocketItem = (qjackctlSocketItem *) pSocketItem->nextSibling()) {
@@ -1891,4 +1891,3 @@ void qjackctlPatchbay::connectionsSnapshot (void)
 
 
 // end of qjackctlPatchbay.cpp
-
