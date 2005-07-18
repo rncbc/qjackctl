@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-0.2.18   2005-07-11  The mantra of bugfixes stays on.
+0.2.18   2005-07-18  The mantra of bugfixes stays on.
 
 - A freezing and endless loop condition on the patchbay socket item
   duplication (copy) has been fixed.
