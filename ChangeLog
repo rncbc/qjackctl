@@ -3,6 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Set to use QApplication::setMainWidget() instead of registering the 
+  traditional lastWindowClosed() signal to quit() slot, just to let
+  the -geometry command line argument have some effect on X11.
+
+
 0.2.18   2005-07-18  The mantra of bugfixes stays on.
 
 - A freezing and endless loop condition on the patchbay socket item

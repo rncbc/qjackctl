@@ -69,13 +69,14 @@ int main ( int argc, char **argv )
 
     // Construct the main form, and show it to the world.
     qjackctlMainForm w;
+	app.setMainWidget(&w);
     w.setup(&settings);
     // If we have a systray icon, we'll skip this.
     if (!settings.bSystemTray)
         w.show();
 
     // Register the quit signal/slot.
-    app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+    // app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 
     return app.exec();
 }
