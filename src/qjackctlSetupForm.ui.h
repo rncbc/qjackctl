@@ -565,16 +565,19 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	QPushButton *pPushButton, int iAudio )
 {
 	// FIXME: Only valid for ALSA and OSS devices,
-	// for the time being...
+	// for the time being... and also CoreAudio ones too.
 	const QString& sDriver = DriverComboBox->currentText();
 	bool bAlsa      = (sDriver == "alsa");
 	bool bOss       = (sDriver == "oss");
 #ifdef CONFIG_COREAUDIO
 	bool bCoreaudio = (sDriver == "coreaudio");
 #endif
-
+	QString sCurName = pLineEdit->text();
+	QString sName, sSubName;
+	QString sText;
+	
 	QPopupMenu* pContextMenu = new QPopupMenu(this);
-	QString sName, sText;
+    int iItemID;
 
 	int iCards = 0;
 
@@ -595,7 +598,8 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 					pContextMenu->insertSeparator();
 				sText  = sName + '\t';
 				sText += snd_ctl_card_info_get_name(info);
-				pContextMenu->insertItem(sText);
+				iItemID = pContextMenu->insertItem(sText);
+				pContextMenu->setItemChecked(iItemID, sCurName == sName);
 				int iDevice = -1;
 				while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
 					&& iDevice >= 0) {
@@ -606,9 +610,12 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 							SND_PCM_STREAM_CAPTURE :
 							SND_PCM_STREAM_PLAYBACK);
 					if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
-						sText  = sName + ',' + QString::number(iDevice) + '\t';
+						sSubName = sName + ',' + QString::number(iDevice);
+						sText  = sSubName + '\t';
 						sText += snd_pcm_info_get_name(pcminfo);
-						pContextMenu->insertItem(sText);
+						iItemID = pContextMenu->insertItem(sText);
+						pContextMenu->setItemChecked(iItemID,
+							sCurName == sSubName);
 					}
 				}
 				snd_ctl_close(handle);
@@ -632,7 +639,9 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 					if (rxDevice.exactMatch(sLine)) {
 						sName = "/dev/dsp" + rxDevice.cap(1);
 						sText = sName + '\t' + rxDevice.cap(2);
-						pContextMenu->insertItem(sText);
+						iItemID = pContextMenu->insertItem(sText);
+						pContextMenu->setItemChecked(iItemID,
+							sCurName == sName);
 						++iCards;
 					}
 					else break;
@@ -673,7 +682,9 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 						if (err == noErr) {
 							sName = QString::number(coreDeviceIDs[i]);
 							sText = sName + '\t' + coreDeviceName;
-							pContextMenu->insertItem(sText);
+							iItemID = pContextMenu->insertItem(sText);
+							pContextMenu->setItemChecked(iItemID,
+								sCurName == sName);
 							++iCards;
 						}
 					}
@@ -687,10 +698,12 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	// There's always the default device...
 	if (iCards > 0)
 		pContextMenu->insertSeparator();
-	pContextMenu->insertItem(m_pSetup->sDefPresetName);
+	iItemID = pContextMenu->insertItem(m_pSetup->sDefPresetName);
+	pContextMenu->setItemChecked(iItemID,
+		sCurName == m_pSetup->sDefPresetName);
 
 	// Show the device menu and read selection...
-	int iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
+	iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
 	if (iItemID != -1) {
 		sText = pContextMenu->text(iItemID);
 		int iTabPos = sText.find('\t');
@@ -698,7 +711,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 			pLineEdit->setText(sText.left(iTabPos));
 		} else {
 			pLineEdit->setText(sText);
-  		}
+		}
 	//  settingsChanged();
 	}
 
