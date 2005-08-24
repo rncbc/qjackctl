@@ -1,0 +1,53 @@
+%define name    @PACKAGE_TARNAME@
+%define version @PACKAGE_VERSION@
+%define release 1
+%define prefix  /usr/local
+
+Summary:	JACK Audio Connection Kit Qt GUI Interface.
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Prefix:		%{prefix}
+Copyright:	GPL
+Group:		Sound
+Source0:	%{name}-%{version}.tar.gz
+URL:		http://qjackctl.sourceforge.net/
+BuildRoot:	/var/tmp/%{name}-%{version}-buildroot
+Requires:	jack >= 0.100.0
+
+%description
+JACK Audio Connection Kit - Qt GUI Interface: A simple Qt application
+to control the JACK server daemon. Written in C++ around the Qt3 toolkit
+for X11, most exclusively using Qt Designer. Provides a simple GUI dialog
+for setting several JACK daemon parameters, which are properly saved
+between sessions, and a way control of the status of the audio server
+daemon. With time, this primordial interface has become richer by 
+including a enhanced patchbay and connection control features.
+
+%prep
+
+%setup
+[ -f Makefile.cvs ] && make -f Makefile.cvs
+
+%build
+export PATH=$QTDIR/bin:$PATH
+./configure --prefix=%{prefix}
+make
+
+%install
+if [ -d $RPM_BUILD_ROOT ]; then rm -rf $RPM_BUILD_ROOT; fi
+mkdir -p $RPM_BUILD_ROOT
+make prefix=$RPM_BUILD_ROOT%{prefix} install
+
+%clean
+if [ -d $RPM_BUILD_ROOT ]; then rm -rf $RPM_BUILD_ROOT; fi
+
+%files
+%defattr(-,root,root)
+%doc AUTHORS COPYING ChangeLog README TODO
+%{prefix}/bin/qjackctl
+%{prefix}/share/icons/qjackctl.png
+
+%changelog
+* Wed Aug 24 2005 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- Created initial qjackctl.spec
