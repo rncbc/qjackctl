@@ -20,9 +20,9 @@
 
 *****************************************************************************/
 
-#include "config.h"
-
+#include "qjackctlAbout.h"
 #include "qjackctlSetup.h"
+
 
 // The maximum number of message lines.
 #define QJACKCTL_MESSAGES_MAXLINES  1000

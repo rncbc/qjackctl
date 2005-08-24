@@ -20,19 +20,17 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
+#include "qjackctlStatus.h"
+
+#include "qjackctlPatchbayFile.h"
+
 #include <qapplication.h>
 #include <qobjectlist.h>
 #include <qeventloop.h>
 #include <qmessagebox.h>
 #include <qregexp.h>
 #include <qtimer.h>
-
-#include "config.h"
-
-#include "qjackctlStatus.h"
-#include "qjackctlAbout.h"
-
-#include "qjackctlPatchbayFile.h"
 
 #ifdef HAVE_POLL_H
 #include <poll.h>

@@ -20,13 +20,12 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
+#include "qjackctlPatchbayFile.h"
+
 #include <qmessagebox.h>
 #include <qfiledialog.h>
 #include <qfileinfo.h>
-
-#include "config.h"
-
-#include "qjackctlPatchbayFile.h"
 
 
 // Kind of constructor.

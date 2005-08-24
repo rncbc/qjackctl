@@ -20,14 +20,14 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
+
 #include <qvalidator.h>
 #include <qmessagebox.h>
 #include <qfiledialog.h>
 #include <qfontdialog.h>
 #include <qpopupmenu.h>
 #include <qlineedit.h>
-
-#include "config.h"
 
 #ifdef CONFIG_COREAUDIO
 #include <CoreAudio/CoreAudio.h>

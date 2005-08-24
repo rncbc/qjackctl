@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Attempt to bring those aging autoconf templates to date; sample SPEC file
+  for RPM build is now being included and generated at configure time.
+
 - The current selected device is now shown with a checkmark on the
   device selection menu(s), while on the settings dialog.
 

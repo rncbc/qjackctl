@@ -22,10 +22,10 @@
 #ifndef __qjackctlPatchbayFile_h
 #define __qjackctlPatchbayFile_h
 
+#include "qjackctlPatchbayRack.h"
+
 #include <qfile.h>
 #include <qtextstream.h>
-
-#include "qjackctlPatchbayRack.h"
 
 
 // Patchbay XML definition.

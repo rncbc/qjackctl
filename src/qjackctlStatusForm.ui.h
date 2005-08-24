@@ -20,10 +20,10 @@
 
 *****************************************************************************/
 
-#include "config.h"
-
+#include "qjackctlAbout.h"
 #include "qjackctlStatus.h"
 #include "qjackctlSetup.h"
+
 
 // Custom tooltip class.
 class qjackctlStatusToolTip : public QToolTip

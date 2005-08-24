@@ -1,6 +1,6 @@
 all:	configure
 
-configure:	 Makefile.in configure.in
+configure:	 Makefile.in configure.ac
 	@autoheader
 	@autoconf
 	@rm -rf *.cache
@@ -8,4 +8,4 @@ configure:	 Makefile.in configure.in
 clean:
 	@if [ -f Makefile ]; then make clean; fi || true
 	@rm -rvf Makefile configure config.*
-	@rm -rvf *.cache *.log *.status *.pro
+	@rm -rvf *.cache *.log *.status *.pro *.spec

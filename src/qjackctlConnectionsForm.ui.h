@@ -20,9 +20,9 @@
 
 *****************************************************************************/
 
-#include <qmessagebox.h>
+#include "qjackctlAbout.h"
 
-#include "config.h"
+#include <qmessagebox.h>
 
 
 // Kind of constructor.

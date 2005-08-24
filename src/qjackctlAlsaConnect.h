@@ -22,9 +22,8 @@
 #ifndef __qjackctlAlsaConnect_h
 #define __qjackctlAlsaConnect_h
 
+#include "qjackctlAbout.h"
 #include "qjackctlConnect.h"
-
-#include "config.h"
 
 #ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>

@@ -19,13 +19,12 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
+#include "qjackctlMainForm.h"
+
 #include <qapplication.h>
 #include <qtextcodec.h>
 
-#include "qjackctlMainForm.h"
-#include "qjackctlAbout.h"
-
-#include "config.h"
 
 int main ( int argc, char **argv )
 {

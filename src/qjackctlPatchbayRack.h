@@ -22,12 +22,12 @@
 #ifndef __qjackctlPatchbayRack_h
 #define __qjackctlPatchbayRack_h
 
+#include "qjackctlAbout.h"
+
 #include <qobject.h>
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qptrlist.h>
-
-#include "config.h"
 
 #include <jack/jack.h>
 

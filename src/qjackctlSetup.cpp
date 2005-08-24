@@ -19,8 +19,8 @@
 
 *****************************************************************************/
 
-#include "qjackctlSetup.h"
 #include "qjackctlAbout.h"
+#include "qjackctlSetup.h"
 
 #include <qtimer.h>
 

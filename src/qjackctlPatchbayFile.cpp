@@ -19,12 +19,12 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
 #include "qjackctlPatchbayFile.h"
 
 #include <qdom.h>
 #include <qfileinfo.h>
 
-#include "qjackctlAbout.h"
 
 //----------------------------------------------------------------------
 // Specific patchbay socket list save (write) subroutine.

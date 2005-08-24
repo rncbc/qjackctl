@@ -20,13 +20,12 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
+#include "qjackctlConnectAlias.h"
+
 #include <qregexp.h>
 
 #include <stdlib.h>
-
-#include "config.h"
-
-#include "qjackctlConnectAlias.h"
 
 
 // Kind of constructor.

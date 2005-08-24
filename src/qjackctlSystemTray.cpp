@@ -19,13 +19,12 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
 #include "qjackctlSystemTray.h"
 
 #include <qtooltip.h>
 #include <qbitmap.h>
 #include <qimage.h>
-
-#include "config.h"
 
 #ifdef CONFIG_SYSTEM_TRAY
 #include <X11/Xatom.h>
