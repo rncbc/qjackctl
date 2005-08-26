@@ -33,7 +33,7 @@
         </rect>
     </property>
     <property name="caption">
-        <string>Socket</string>
+		<string>QjackCtl: Socket</string>
     </property>
     <property name="icon">
         <pixmap>socket1.png</pixmap>

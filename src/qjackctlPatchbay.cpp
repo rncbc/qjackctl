@@ -587,7 +587,9 @@ bool qjackctlSocketList::addSocketItem (void)
 
     qjackctlSocketForm *pSocketForm = new qjackctlSocketForm(m_pListView);
     if (pSocketForm) {
-        pSocketForm->setCaption("<" + tr("New") + "> - " + m_sSocketCaption);
+		pSocketForm->setCaption(QJACKCTL_TITLE ": "
+			"<" + tr("New") + "> "
+			+ m_sSocketCaption);
         pSocketForm->setSocketCaption(m_sSocketCaption);
         pSocketForm->setPixmaps(m_apPixmaps);
         pSocketForm->setReadable(m_bReadable);
@@ -628,7 +630,8 @@ bool qjackctlSocketList::removeSocketItem (void)
 
     qjackctlSocketItem *pSocketItem = selectedSocketItem();
     if (pSocketItem) {
-        if (QMessageBox::warning(m_pListView, tr("Warning"),
+        if (QMessageBox::warning(m_pListView,
+			QJACKCTL_TITLE ": " + tr("Warning"),
             m_sSocketCaption + " " + tr("about to be removed") + ":\n\n" +
             "\"" + pSocketItem->socketName() + "\"\n\n" +
             tr("Are you sure?"),
@@ -652,7 +655,9 @@ bool qjackctlSocketList::editSocketItem (void)
     if (pSocketItem) {
         qjackctlSocketForm *pSocketForm = new qjackctlSocketForm(m_pListView);
         if (pSocketForm) {
-            pSocketForm->setCaption(pSocketItem->socketName() + " - " + m_sSocketCaption);
+			pSocketForm->setCaption(QJACKCTL_TITLE ": "
+				+ pSocketItem->socketName() + " "
+				+ m_sSocketCaption);
             pSocketForm->setSocketCaption(m_sSocketCaption);
             pSocketForm->setPixmaps(m_apPixmaps);
             pSocketForm->setReadable(m_bReadable);
@@ -710,7 +715,9 @@ bool qjackctlSocketList::copySocketItem (void)
 			do { sSocketName = sSkel.arg(++iSocketNo); }
 			while (findSocket(sSocketName));
 			// Show up as a new socket...
-            pSocketForm->setCaption(pSocketItem->socketName() + " <" + tr("Copy") + "> - " + m_sSocketCaption);
+			pSocketForm->setCaption(QJACKCTL_TITLE ": "
+				+ pSocketItem->socketName() + " <" + tr("Copy") + "> "
+				+ m_sSocketCaption);
             pSocketForm->setSocketCaption(m_sSocketCaption);
             pSocketForm->setPixmaps(m_apPixmaps);
             pSocketForm->setReadable(m_bReadable);
@@ -1571,7 +1578,8 @@ bool qjackctlPatchbay::canDisconnectAll (void)
 // Disconnect all plugs.
 bool qjackctlPatchbay::disconnectAll (void)
 {
-    if (QMessageBox::warning(m_pPatchbayView, tr("Warning"),
+    if (QMessageBox::warning(m_pPatchbayView,
+		QJACKCTL_TITLE ": " + tr("Warning"),
         tr("This will disconnect all sockets.") + "\n\n" +
         tr("Are you sure?"),
         tr("Yes"), tr("No")) > 0) {

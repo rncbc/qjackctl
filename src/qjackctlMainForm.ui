@@ -45,7 +45,7 @@
         </font>
     </property>
     <property name="caption">
-        <string>JACK Audio Connection Kit - Qt GUI Interface</string>
+		<string>QjackCtl</string>
     </property>
     <property name="icon">
         <pixmap>qjackctl.png</pixmap>

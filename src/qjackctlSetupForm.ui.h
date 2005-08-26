@@ -312,7 +312,8 @@ void qjackctlSetupForm::changeCurrentPreset( const QString& sPreset )
 
     // Check if there's any pending changes...
     if (m_iDirtySettings > 0 && !m_sPreset.isEmpty()) {
-        switch (QMessageBox::warning(this, tr("Warning"),
+        switch (QMessageBox::warning(this,
+			QJACKCTL_TITLE ": " + tr("Warning"),
             tr("Some settings have been changed:") + "\n\n" +
             m_sPreset + "\n\n" +
             tr("Do you want to save the changes?"),
@@ -361,7 +362,8 @@ void qjackctlSetupForm::deleteCurrentPreset (void)
     const QString sPreset = PresetComboBox->currentText();
 
     // Try to prompt user if he/she really wants this...
-    if (QMessageBox::warning(this, tr("Warning"),
+    if (QMessageBox::warning(this,
+		QJACKCTL_TITLE ": " + tr("Warning"),
         tr("Delete preset:") + "\n\n" +
         sPreset + "\n\n" +
         tr("Are you sure?"),
@@ -804,10 +806,10 @@ void qjackctlSetupForm::symbolPostShutdownScript (void)
 void qjackctlSetupForm::browseStartupScript()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            StartupScriptShellComboBox->currentText(),  // Start here.
-            QString::null,                              // Filter (all files?)
-            this, 0,                                    // Parent and name (none)
-            tr("Startup script")                        // Caption.
+		StartupScriptShellComboBox->currentText(),  // Start here.
+		QString::null,                              // Filter (all files?)
+		this, 0,                                    // Parent and name (none)
+		QJACKCTL_TITLE ": " + tr("Startup script")	// Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -822,10 +824,10 @@ void qjackctlSetupForm::browseStartupScript()
 void qjackctlSetupForm::browsePostStartupScript()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            PostStartupScriptShellComboBox->currentText(),  // Start here.
-            QString::null,                                  // Filter (all files?)
-            this, 0,                                        // Parent and name (none)
-            tr("Post-startup script")                       // Caption.
+		PostStartupScriptShellComboBox->currentText(),  // Start here.
+		QString::null,                                  // Filter (all files?)
+		this, 0,                                        // Parent and name (none)
+		QJACKCTL_TITLE ": " + tr("Post-startup script")	// Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -840,10 +842,10 @@ void qjackctlSetupForm::browsePostStartupScript()
 void qjackctlSetupForm::browseShutdownScript()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            ShutdownScriptShellComboBox->currentText(), // Start here.
-            QString::null,                              // Filter (all files?)
-            this, 0,                                    // Parent and name (none)
-            tr("Shutdown script")                       // Caption.
+		ShutdownScriptShellComboBox->currentText(), // Start here.
+		QString::null,                              // Filter (all files?)
+		this, 0,                                    // Parent and name (none)
+		QJACKCTL_TITLE ": " + tr("Shutdown script")	// Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -858,10 +860,10 @@ void qjackctlSetupForm::browseShutdownScript()
 void qjackctlSetupForm::browsePostShutdownScript()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            PostShutdownScriptShellComboBox->currentText(), // Start here.
-            QString::null,                                  // Filter (all files?)
-            this, 0,                                        // Parent and name (none)
-            tr("Post-shutdown script")                      // Caption.
+		PostShutdownScriptShellComboBox->currentText(), // Start here.
+		QString::null,                                  // Filter (all files?)
+		this, 0,                                        // Parent and name (none)
+		QJACKCTL_TITLE ": " + tr("Post-shutdown script")	// Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -876,10 +878,10 @@ void qjackctlSetupForm::browsePostShutdownScript()
 void qjackctlSetupForm::browseActivePatchbayPath()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            ActivePatchbayPathComboBox->currentText(),	    // Start here.
-            tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
-            this, 0,                                        // Parent and name (none)
-            tr("Active Patchbay definition")                // Caption.
+		ActivePatchbayPathComboBox->currentText(),	    // Start here.
+		tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
+		this, 0,                                        // Parent and name (none)
+		QJACKCTL_TITLE ": " + tr("Active Patchbay definition")	// Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -1050,7 +1052,8 @@ void qjackctlSetupForm::reject (void)
 
     // Check if there's any pending changes...
     if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
-        switch (QMessageBox::warning(this, tr("Warning"),
+        switch (QMessageBox::warning(this,
+			QJACKCTL_TITLE ": " + tr("Warning"),
             tr("Some settings have been changed.") + "\n\n" +
             tr("Do you want to apply the changes?"),
             tr("Apply"), tr("Discard"), tr("Cancel"))) {

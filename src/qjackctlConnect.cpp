@@ -19,6 +19,7 @@
 
 *****************************************************************************/
 
+#include "qjackctlAbout.h"
 #include "qjackctlConnect.h"
 
 #include <qpopupmenu.h>
@@ -1543,7 +1544,8 @@ bool qjackctlConnect::canDisconnectAllEx (void)
 // Disconnect all ports.
 bool qjackctlConnect::disconnectAll (void)
 {
-    if (QMessageBox::warning(m_pConnectView, tr("Warning"),
+    if (QMessageBox::warning(m_pConnectView,
+		QJACKCTL_TITLE ": " + tr("Warning"),
         tr("This will suspend sound processing") + "\n" +
         tr("from all client applications.") + "\n\n" +
         tr("Are you sure?"),

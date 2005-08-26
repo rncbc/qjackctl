@@ -83,7 +83,8 @@ bool qjackctlPatchbayForm::queryClose (void)
     bool bQueryClose = true;
 
     if (PatchbayView->dirty()) {
-        switch (QMessageBox::warning(this, tr("Warning"),
+        switch (QMessageBox::warning(this,
+			QJACKCTL_TITLE ": " + tr("Warning"),
             tr("The patchbay definition has been changed:") + "\n\n" +
             "\"" + m_sPatchbayName +  "\"\n\n" +
             tr("Do you want to save the changes?"),
@@ -200,7 +201,8 @@ void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
     qjackctlPatchbayRack rack;
     // Step 1: load from file...
     if (!qjackctlPatchbayFile::load(&rack, sFileName)) {
-        QMessageBox::critical(this, tr("Load error"),
+        QMessageBox::critical(this,
+			QJACKCTL_TITLE ": " + tr("Load error"),
             tr("Could not load patchbay definition file:") + "\n\n\"" + sFileName + "\"",
             tr("Cancel"));
         // Reset/disable further trials.
@@ -225,7 +227,8 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     m_pPatchbay->saveRack(&rack);
     // Step 2: save to file...
     if (!qjackctlPatchbayFile::save(&rack, sFileName)) {
-        QMessageBox::critical(this, tr("Save error"),
+        QMessageBox::critical(this,
+			QJACKCTL_TITLE ": " + tr("Save error"),
             tr("Could not save patchbay definition file:") + "\n\n\"" + sFileName + "\"",
             tr("Cancel"));
         return;
@@ -251,7 +254,7 @@ void qjackctlPatchbayForm::newPatchbay()
 	// Ask user what he/she wants to do...
 	if (m_pPatchbay->jackClient() || m_pPatchbay->alsaSeq()) {
 		switch (QMessageBox::information(this,
-			tr("New Patchbay definition"),
+			QJACKCTL_TITLE ": " + tr("New Patchbay definition"),
 			tr("Create patchbay definition as a snapshot") + "\n" +
 			tr("of all actual client connections?"),
 			tr("Yes"), tr("No"), tr("Cancel"))) {
@@ -279,10 +282,10 @@ void qjackctlPatchbayForm::newPatchbay()
 void qjackctlPatchbayForm::loadPatchbay()
 {
     QString sFileName = QFileDialog::getOpenFileName(
-            m_sPatchbayPath,                                // Start here.
-            tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
-            this, 0,                                        // Parent and name (none)
-            tr("Load Patchbay Definition")                  // Caption.
+		m_sPatchbayPath,                                // Start here.
+		tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
+		this, 0,                                        // Parent and name (none)
+		QJACKCTL_TITLE ": " + tr("Load Patchbay Definition")	// Caption.
     );
 
     if (sFileName.isEmpty())
@@ -301,10 +304,10 @@ void qjackctlPatchbayForm::loadPatchbay()
 void qjackctlPatchbayForm::savePatchbay()
 {
     QString sFileName = QFileDialog::getSaveFileName(
-            m_sPatchbayPath,                                // Start here.
-            tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
-            this, 0,                                        // Parent and name (none)
-            tr("Save Patchbay Definition")                  // Caption.
+		m_sPatchbayPath,                                // Start here.
+		tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
+		this, 0,                                        // Parent and name (none)
+		QJACKCTL_TITLE ": " + tr("Save Patchbay Definition")	// Caption.
     );
 
     if (sFileName.isEmpty())

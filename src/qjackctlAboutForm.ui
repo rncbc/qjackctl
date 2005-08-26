@@ -45,7 +45,7 @@
         </font>
     </property>
     <property name="caption">
-        <string>About qjackctl</string>
+        <string>About QjackCtl</string>
     </property>
     <property name="icon">
         <pixmap>about1.png</pixmap>
