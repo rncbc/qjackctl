@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Activation toggling feedback on the patchbay widget has been fixed.
+
 - All widget captions changed to include proper application title prefix.
 
 - Attempt to bring those aging autoconf templates to date; sample SPEC file

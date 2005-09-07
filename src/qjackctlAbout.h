@@ -27,7 +27,10 @@
 #define QJACKCTL_TITLE      PACKAGE_NAME
 #define QJACKCTL_VERSION    PACKAGE_VERSION
 
-#define QJACKCTL_SUBTITLE   "JACK Audio Connection Kit Qt GUI Interface"
+#define QJACKCTL_SUBTITLE1  "JACK Audio Connection Kit"
+#define QJACKCTL_SUBTITLE2  "Qt GUI Interface"
+
+#define QJACKCTL_SUBTITLE   QJACKCTL_SUBTITLE1 " " QJACKCTL_SUBTITLE2
 #define QJACKCTL_WEBSITE    "http://qjackctl.sourceforge.net"
 #define QJACKCTL_COPYRIGHT  "Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved."
 

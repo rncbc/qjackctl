@@ -34,6 +34,8 @@ void qjackctlPatchbayForm::init (void)
     // Create the patchbay view object.
     m_pPatchbay = new qjackctlPatchbay(PatchbayView);
     m_iUntitled = 0;
+    
+    m_bActivePatchbay = false;
 
     // Connect it to some UI feedback slot.
     QObject::connect(PatchbayView->OListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
@@ -126,18 +128,18 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     SavePatchbayPushButton->setEnabled(PatchbayView->dirty());
     ActivatePatchbayPushButton->setEnabled(QFileInfo(m_sPatchbayPath).exists());
 
-    bool bActive = false;
+    m_bActivePatchbay = false;
     QString sText = m_sPatchbayName;
     if (PatchbayView->dirty()) {
         sText += " [" + tr("modified") + "]";
     } else {
         qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-        bActive = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
-        if (bActive)
+        m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
+        if (m_bActivePatchbay)
             sText += " [" + tr("active") + "]";
     }
     PatchbayTextLabel->setText(sText);
-    ActivatePatchbayPushButton->setOn(bActive);
+    ActivatePatchbayPushButton->setOn(m_bActivePatchbay);
 
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
@@ -239,9 +241,11 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     stabilizeForm();
 
     // Step 4: notify main form if applicable ...
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-    if (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath))
-        pMainForm->updateActivePatchbay();
+    if (m_bActivePatchbay) {
+		qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+		if (pMainForm)
+			pMainForm->updateActivePatchbay();
+	}
 }
 
 
@@ -331,8 +335,10 @@ void qjackctlPatchbayForm::toggleActivePatchbay()
 
     // Activate it...
     qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-    if (pMainForm)
-        pMainForm->toggleActivePatchbay(m_sPatchbayPath);
+    if (pMainForm) {
+        pMainForm->setActivePatchbay(
+			m_bActivePatchbay ? QString::null : m_sPatchbayPath);
+	}
 }
 
 

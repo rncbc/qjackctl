@@ -1100,20 +1100,18 @@ void qjackctlMainForm::updateActivePatchbay (void)
 }
 
 // Toggle active patchbay setting.
-void qjackctlMainForm::toggleActivePatchbay ( const QString& sPatchbayPath )
+void qjackctlMainForm::setActivePatchbay ( const QString& sPatchbayPath )
 {
     if (m_pSetup == NULL)
         return;
         
-    if (!sPatchbayPath.isEmpty()) {
-        // If already exactly active, deactivate it.
-        if (m_pSetup->bActivePatchbay && m_pSetup->sActivePatchbayPath == sPatchbayPath) {
-            m_pSetup->bActivePatchbay = false;
-        } else {
-            m_pSetup->bActivePatchbay = true;
-            m_pSetup->sActivePatchbayPath = sPatchbayPath;
-        }
-    }
+    if (sPatchbayPath.isEmpty()) {
+        m_pSetup->bActivePatchbay = false;
+	} else {
+		m_pSetup->bActivePatchbay = true;
+		m_pSetup->sActivePatchbayPath = sPatchbayPath;
+	}
+
     updateActivePatchbay();
 }
 
@@ -2180,7 +2178,7 @@ void qjackctlMainForm::updateStatusItem( int iStatusItem, const QString& sText )
 // Main window caption title and system tray icon and tooltip update.
 void qjackctlMainForm::updateTitleStatus (void)
 {
-    QString sTitle = QJACKCTL_TITLE " ";
+    QString sTitle = QJACKCTL_SUBTITLE1 " ";
 
     if (m_pSetup)
         sTitle += "[" + m_pSetup->sDefPreset + "] ";
