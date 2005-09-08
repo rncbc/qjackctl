@@ -156,10 +156,15 @@
                     <property name="sizePolicy">
                         <sizepolicy>
                             <hsizetype>7</hsizetype>
-                            <vsizetype>0</vsizetype>
+                            <vsizetype>5</vsizetype>
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                         </sizepolicy>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <bold>1</bold>
+                        </font>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Current patchbay profile name</string>
@@ -929,8 +934,8 @@
     <function specifier="non virtual" returnType="bool">queryClose()</function>
     <function specifier="non virtual" returnType="QString &amp;">patchbayPath()</function>
     <function specifier="non virtual">newPatchbayFile( bool bSnapshot )</function>
-    <function specifier="non virtual">loadPatchbayFile( const QString &amp; sFileName )</function>
-    <function specifier="non virtual">savePatchbayFile( const QString &amp; sFileName )</function>
+    <function specifier="non virtual" returnType="bool">loadPatchbayFile( const QString &amp; sFileName )</function>
+    <function specifier="non virtual" returnType="bool">savePatchbayFile( const QString &amp; sFileName )</function>
     <function specifier="non virtual">setRecentPatchbays( const QStringList &amp; patchbays )</function>
     <function access="private" specifier="non virtual">updateRecentPatchbays(const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>

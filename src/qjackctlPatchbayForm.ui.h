@@ -132,11 +132,12 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 	m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
     ActivatePatchbayPushButton->setOn(m_bActivePatchbay);
 
-	QString sText;
-    QString sPatchbayName = m_sPatchbayName;
-    if (PatchbayView->dirty())
-        sPatchbayName += " *";
-    setCaption(QJACKCTL_TITLE ": " + tr("Patchbay - [%1]").arg(sPatchbayName));
+    QString sPatchbay = m_sPatchbayPath;
+    if (PatchbayView->dirty()) {
+        PatchbayComboBox->setCurrentText(m_sPatchbayName + " [" + tr("modified") + "]");
+        sPatchbay += " *";
+	}
+    setCaption(QJACKCTL_TITLE ": " + tr("Patchbay - [%1]").arg(sPatchbay));
 
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
@@ -194,11 +195,11 @@ void qjackctlPatchbayForm::newPatchbayFile ( bool bSnapshot )
 
 
 // Load patchbay definitions from specific file path.
-void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
+bool qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
 {
     // Check if we're going to discard safely the current one...
     if (!queryClose())
-        return;
+        return false;
 
     // We'll have a temporary rack...
     qjackctlPatchbayRack rack;
@@ -210,7 +211,7 @@ void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
             tr("Cancel"));
         // Reset/disable further trials.
         m_sPatchbayPath = QString::null;
-        return;
+        return false;
     }
     // Step 2: load from rack...
     m_pPatchbay->loadRack(&rack);
@@ -219,11 +220,13 @@ void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
     m_sPatchbayPath = sFileName;
     m_sPatchbayName = QFileInfo(sFileName).baseName();
     updateRecentPatchbays(m_sPatchbayPath);
+    
+    return true;
 }
 
 
 // Save current patchbay definition to specific file path.
-void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
+bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 {
     // We'll have a temporary rack...
     qjackctlPatchbayRack rack;
@@ -235,7 +238,7 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 			QJACKCTL_TITLE ": " + tr("Save error"),
             tr("Could not save patchbay definition file:") + "\n\n\"" + sFileName + "\"",
             tr("Cancel"));
-        return;
+        return false;
     }
     // Step 3: stabilize form...
     m_sPatchbayPath = sFileName;
@@ -243,11 +246,12 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     updateRecentPatchbays(m_sPatchbayPath);
 
     // Step 4: notify main form if applicable ...
-    if (m_bActivePatchbay) {
-		qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-		if (pMainForm)
-			pMainForm->updateActivePatchbay();
-	}
+	qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+	m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
+	if (m_bActivePatchbay)
+		pMainForm->updateActivePatchbay();
+		
+	return true;
 }
 
 
@@ -327,8 +331,12 @@ void qjackctlPatchbayForm::savePatchbay()
 // A new patchbay has been selected
 void qjackctlPatchbayForm::selectPatchbay ( int iPatchbay )
 {
-	if (iPatchbay >= 0 && iPatchbay < (int) m_recentPatchbays.count())
-    	loadPatchbayFile(m_recentPatchbays[iPatchbay]);
+	// Remember and avoid reloading the previous (first) selected one.
+	if (iPatchbay > 0 && iPatchbay < (int) m_recentPatchbays.count()) {
+		// If we cannot load the new one, backout...
+    	if (!loadPatchbayFile(m_recentPatchbays[iPatchbay]))
+    	    PatchbayComboBox->setCurrentItem(0);
+	}
 }
 
 
