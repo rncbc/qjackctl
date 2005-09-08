@@ -105,7 +105,7 @@ bool qjackctlPatchbayForm::queryClose (void)
 }
 
 
-// Contents change deferrrer slot...
+// Contents change deferrer slot...
 void qjackctlPatchbayForm::contentsChanged (void)
 {
     qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
@@ -128,18 +128,15 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
     SavePatchbayPushButton->setEnabled(PatchbayView->dirty());
     ActivatePatchbayPushButton->setEnabled(QFileInfo(m_sPatchbayPath).exists());
 
-    m_bActivePatchbay = false;
-    QString sText = m_sPatchbayName;
-    if (PatchbayView->dirty()) {
-        sText += " [" + tr("modified") + "]";
-    } else {
-        qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-        m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
-        if (m_bActivePatchbay)
-            sText += " [" + tr("active") + "]";
-    }
-    PatchbayTextLabel->setText(sText);
+	qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+	m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
     ActivatePatchbayPushButton->setOn(m_bActivePatchbay);
+
+	QString sText;
+    QString sPatchbayName = m_sPatchbayName;
+    if (PatchbayView->dirty())
+        sPatchbayName += " *";
+    setCaption(QJACKCTL_TITLE ": " + tr("Patchbay - [%1]").arg(sPatchbayName));
 
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
@@ -199,6 +196,10 @@ void qjackctlPatchbayForm::newPatchbayFile ( bool bSnapshot )
 // Load patchbay definitions from specific file path.
 void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
 {
+    // Check if we're going to discard safely the current one...
+    if (!queryClose())
+        return;
+
     // We'll have a temporary rack...
     qjackctlPatchbayRack rack;
     // Step 1: load from file...
@@ -213,10 +214,11 @@ void qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
     }
     // Step 2: load from rack...
     m_pPatchbay->loadRack(&rack);
+
     // Step 3: stabilize form...
     m_sPatchbayPath = sFileName;
     m_sPatchbayName = QFileInfo(sFileName).baseName();
-    stabilizeForm();
+    updateRecentPatchbays(m_sPatchbayPath);
 }
 
 
@@ -238,7 +240,7 @@ void qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     // Step 3: stabilize form...
     m_sPatchbayPath = sFileName;
     m_sPatchbayName = QFileInfo(sFileName).baseName();
-    stabilizeForm();
+    updateRecentPatchbays(m_sPatchbayPath);
 
     // Step 4: notify main form if applicable ...
     if (m_bActivePatchbay) {
@@ -295,10 +297,6 @@ void qjackctlPatchbayForm::loadPatchbay()
     if (sFileName.isEmpty())
         return;
 
-    // Check if we're going to discard safely the current one...
-    if (!queryClose())
-        return;
-
     // Load it right away.
     loadPatchbayFile(sFileName);
 }
@@ -326,6 +324,14 @@ void qjackctlPatchbayForm::savePatchbay()
 }
 
 
+// A new patchbay has been selected
+void qjackctlPatchbayForm::selectPatchbay ( int iPatchbay )
+{
+	if (iPatchbay >= 0 && iPatchbay < (int) m_recentPatchbays.count())
+    	loadPatchbayFile(m_recentPatchbays[iPatchbay]);
+}
+
+
 // Set current active patchbay definition file.
 void qjackctlPatchbayForm::toggleActivePatchbay()
 {
@@ -339,6 +345,51 @@ void qjackctlPatchbayForm::toggleActivePatchbay()
         pMainForm->setActivePatchbay(
 			m_bActivePatchbay ? QString::null : m_sPatchbayPath);
 	}
+	
+	// Need to force/refresh the patchbay list...
+	updateRecentPatchbays(m_sPatchbayPath);
+}
+
+
+// Set/initialize the MRU patchbay list.
+void qjackctlPatchbayForm::setRecentPatchbays ( const QStringList& patchbays )
+{
+	m_recentPatchbays = patchbays;
+}
+
+
+// Update patchbay MRU variables and widgets.
+void qjackctlPatchbayForm::updateRecentPatchbays ( const QString& sPatchbayPath )
+{
+	// Remove from list if already there (avoid duplicates)...
+	QStringList::Iterator iter = m_recentPatchbays.find(sPatchbayPath);
+	if (iter != m_recentPatchbays.end())
+		m_recentPatchbays.remove(iter);
+	// Put it to front...
+	m_recentPatchbays.push_front(sPatchbayPath);
+
+	// Time to keep the list under limits.
+	while (m_recentPatchbays.count() > 8)
+		m_recentPatchbays.pop_back();
+
+	// Update the main setup list...
+	qjackctlMainForm *pMainForm = (qjackctlMainForm *) parentWidget();
+	if (pMainForm)
+		pMainForm->setRecentPatchbays(m_recentPatchbays);
+
+	// Update the visible combobox...
+	PatchbayComboBox->clear();
+	for (iter = m_recentPatchbays.begin();
+			iter != m_recentPatchbays.end(); ++iter) {
+		QString sText = QFileInfo(*iter).baseName();
+		if (pMainForm && pMainForm->isActivePatchbay(*iter))
+		    sText += " [" + tr("active") + "]";
+		PatchbayComboBox->insertItem(sText);
+	}
+
+	// Sure this one must be currently selected.
+	PatchbayComboBox->setCurrentItem(0);
+    stabilizeForm();
 }
 
 

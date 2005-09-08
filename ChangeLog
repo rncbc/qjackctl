@@ -5,7 +5,10 @@ ChangeLog
 
 CVS HEAD
 
-- Activation toggling feedback on the patchbay widget has been fixed.
+- Activation toggling feedback on the patchbay widget has been fixed;
+  additionally and as found convenient, the most recently used patchbay
+  definitions can now be loaded immediately by selecting from a drop-down
+  list widget, which replaces the old static patchbay name status text.
 
 - All widget captions changed to include proper application title prefix.
 

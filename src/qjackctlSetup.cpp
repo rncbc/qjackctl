@@ -35,10 +35,10 @@ qjackctlSetup::qjackctlSetup (void)
 
     m_settings.beginGroup("/Presets");
     sDefPreset = m_settings.readEntry("/DefPreset", sDefPresetName);
-    const QString sPrefix = "/Preset";
+    QString sPrefix = "/Preset%1";
     int i = 0;
     for (;;) {
-        QString sItem = m_settings.readEntry(sPrefix + QString::number(++i), QString::null);
+        QString sItem = m_settings.readEntry(sPrefix.arg(++i), QString::null);
         if (sItem.isEmpty())
             break;
         presets.append(sItem);
@@ -88,6 +88,18 @@ qjackctlSetup::qjackctlSetup (void)
     m_settings.beginGroup("/Defaults");
     sPatchbayPath = m_settings.readEntry("/PatchbayPath", QString::null);
     m_settings.endGroup();
+
+	// Load recent patchbay list...
+	m_settings.beginGroup("/Patchbays");
+	sPrefix = "/Patchbay%1";
+	i = 0;
+	for (;;) {
+		QString sItem = m_settings.readEntry(sPrefix.arg(++i), QString::null);
+		if (sItem.isEmpty())
+			break;
+		patchbays.append(sItem);
+	}
+	m_settings.endGroup();
 }
 
 
@@ -102,14 +114,15 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.beginGroup("/Presets");
     m_settings.writeEntry("/DefPreset", sDefPreset);
     // Save last preset list.
-    const QString sPrefix = "/Preset";
-    int i = 0;
-    for (QStringList::Iterator iter = presets.begin(); iter != presets.end(); iter++)
-        m_settings.writeEntry(sPrefix + QString::number(++i), *iter);
-    // Cleanup old entries, if any...
-    for (++i; !m_settings.readEntry(sPrefix + QString::number(i)).isEmpty(); i++)
-        m_settings.removeEntry(sPrefix + QString::number(i));
-    m_settings.endGroup();
+	QString sPrefix = "/Preset%1";
+	int i = 0;
+	for (QStringList::Iterator iter = presets.begin();
+		iter != presets.end(); iter++)
+	    m_settings.writeEntry(sPrefix.arg(++i), *iter);
+	// Cleanup old entries, if any...
+	for (++i; !m_settings.readEntry(sPrefix.arg(i)).isEmpty(); i++)
+	    m_settings.removeEntry(sPrefix.arg(i));
+	m_settings.endGroup();
 
     m_settings.beginGroup("/Options");
     m_settings.writeEntry("/StartJack",               bStartJack);
@@ -154,6 +167,18 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.beginGroup("/Defaults");
     m_settings.writeEntry("/PatchbayPath", sPatchbayPath);
     m_settings.endGroup();
+
+	// Save patchbay list...
+	m_settings.beginGroup("/Patchbays");
+	sPrefix = "/Patchbay%1";
+	i = 0;
+	for (QStringList::Iterator iter = patchbays.begin();
+			iter != patchbays.end(); ++iter)
+		m_settings.writeEntry(sPrefix.arg(++i), *iter);
+	// Cleanup old entries, if any...
+	for (++i; !m_settings.readEntry(sPrefix.arg(i)).isEmpty(); i++)
+		m_settings.removeEntry(sPrefix.arg(i));
+	m_settings.endGroup();
 
     m_settings.endGroup();
 }

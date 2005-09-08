@@ -45,7 +45,7 @@
         </font>
     </property>
     <property name="caption">
-		<string>QjackCtl: Patchbay</string>
+        <string>QjackCtl: Patchbay</string>
     </property>
     <property name="icon">
         <pixmap>patchbay1.png</pixmap>
@@ -149,31 +149,17 @@
                         <string>Save current patchbay profile</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="QComboBox">
                     <property name="name">
-                        <cstring>PatchbayTextLabel</cstring>
+                        <cstring>PatchbayComboBox</cstring>
                     </property>
                     <property name="sizePolicy">
                         <sizepolicy>
-                            <hsizetype>3</hsizetype>
-                            <vsizetype>5</vsizetype>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                         </sizepolicy>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <bold>1</bold>
-                        </font>
-                    </property>
-                    <property name="frameShape">
-                        <enum>StyledPanel</enum>
-                    </property>
-                    <property name="frameShadow">
-                        <enum>Sunken</enum>
-                    </property>
-                    <property name="alignment">
-                        <set>AlignVCenter</set>
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Current patchbay profile name</string>
@@ -771,6 +757,12 @@
         <slot>toggleActivePatchbay()</slot>
     </connection>
     <connection>
+        <sender>PatchbayComboBox</sender>
+        <signal>activated(int)</signal>
+        <receiver>qjackctlPatchbayForm</receiver>
+        <slot>selectPatchbay(int)</slot>
+    </connection>
+    <connection>
         <sender>OSocketAddPushButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlPatchbayForm</receiver>
@@ -871,6 +863,7 @@
     <tabstop>NewPatchbayPushButton</tabstop>
     <tabstop>LoadPatchbayPushButton</tabstop>
     <tabstop>SavePatchbayPushButton</tabstop>
+    <tabstop>PatchbayComboBox</tabstop>
     <tabstop>ActivatePatchbayPushButton</tabstop>
     <tabstop>OSocketAddPushButton</tabstop>
     <tabstop>OSocketEditPushButton</tabstop>
@@ -894,13 +887,13 @@
     <include location="local" impldecl="in declaration">qjackctlPatchbay.h</include>
     <include location="local" impldecl="in implementation">qjackctlMainForm.h</include>
     <include location="local" impldecl="in implementation">qjackctlSocketForm.h</include>
-    <include location="local" impldecl="in implementation">qjackctlPatchbayForm.ui.h</include>
 </includes>
 <variables>
+    <variable access="private">int m_iUntitled;</variable>
     <variable access="private">qjackctlPatchbay *m_pPatchbay;</variable>
     <variable access="private">QString m_sPatchbayPath;</variable>
     <variable access="private">QString m_sPatchbayName;</variable>
-    <variable access="private">int m_iUntitled;</variable>
+    <variable access="private">QStringList m_recentPatchbays;</variable>
     <variable access="private">bool m_bActivePatchbay;</variable>
 </variables>
 <slots>
@@ -910,6 +903,7 @@
     <slot specifier="non virtual">newPatchbay()</slot>
     <slot specifier="non virtual">loadPatchbay()</slot>
     <slot specifier="non virtual">savePatchbay()</slot>
+    <slot specifier="non virtual">selectPatchbay( int iPatchbay )</slot>
     <slot specifier="non virtual">toggleActivePatchbay()</slot>
     <slot specifier="non virtual">addOSocket()</slot>
     <slot specifier="non virtual">removeOSocket()</slot>
@@ -937,6 +931,8 @@
     <function specifier="non virtual">newPatchbayFile( bool bSnapshot )</function>
     <function specifier="non virtual">loadPatchbayFile( const QString &amp; sFileName )</function>
     <function specifier="non virtual">savePatchbayFile( const QString &amp; sFileName )</function>
+    <function specifier="non virtual">setRecentPatchbays( const QStringList &amp; patchbays )</function>
+    <function access="private" specifier="non virtual">updateRecentPatchbays(const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
     <function specifier="non virtual">setAlsaSeq( snd_seq_t *pAlsaSeq )</function>
 </functions>

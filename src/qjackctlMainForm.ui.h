@@ -264,10 +264,13 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     }
 #endif
 
-    // Load patchbay from default path.
-    if (m_pPatchbayForm && !m_pSetup->sPatchbayPath.isEmpty())
-        m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
-
+    // Load patchbay form recent paths...
+    if (m_pPatchbayForm) {
+		m_pPatchbayForm->setRecentPatchbays(m_pSetup->patchbays);
+	 	if (!m_pSetup->sPatchbayPath.isEmpty())
+        	m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
+	}
+	
     // Try to find if we can start in detached mode (client-only)
     // just in case there's a JACK server already running.
     startJackClient(true);
@@ -1115,6 +1118,12 @@ void qjackctlMainForm::setActivePatchbay ( const QString& sPatchbayPath )
     updateActivePatchbay();
 }
 
+
+// Reset the MRU patchbay list.
+void qjackctlMainForm::setRecentPatchbays ( const QStringList& patchbays )
+{
+	m_pSetup->patchbays = patchbays;
+}
 
 
 // Stabilize current form toggle buttons that may be astray.
