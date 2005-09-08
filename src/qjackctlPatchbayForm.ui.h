@@ -34,7 +34,7 @@ void qjackctlPatchbayForm::init (void)
     // Create the patchbay view object.
     m_pPatchbay = new qjackctlPatchbay(PatchbayView);
     m_iUntitled = 0;
-    
+
     m_bActivePatchbay = false;
 
     // Connect it to some UI feedback slot.
@@ -132,12 +132,12 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 	m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
     ActivatePatchbayPushButton->setOn(m_bActivePatchbay);
 
-    QString sPatchbay = m_sPatchbayPath;
-    if (PatchbayView->dirty()) {
-        PatchbayComboBox->setCurrentText(m_sPatchbayName + " [" + tr("modified") + "]");
-        sPatchbay += " *";
+	QString sPatchbay = m_sPatchbayPath;
+	if (PatchbayView->dirty()) {
+		PatchbayComboBox->setCurrentText(m_sPatchbayName + " [" + tr("modified") + "]");
+		sPatchbay += " *";
 	}
-    setCaption(QJACKCTL_TITLE ": " + tr("Patchbay - [%1]").arg(sPatchbay));
+	setCaption(QJACKCTL_TITLE ": " + tr("Patchbay - [%1]").arg(sPatchbay));
 
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
@@ -250,7 +250,7 @@ bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 	m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
 	if (m_bActivePatchbay)
 		pMainForm->updateActivePatchbay();
-		
+
 	return true;
 }
 
@@ -334,8 +334,8 @@ void qjackctlPatchbayForm::selectPatchbay ( int iPatchbay )
 	// Remember and avoid reloading the previous (first) selected one.
 	if (iPatchbay > 0 && iPatchbay < (int) m_recentPatchbays.count()) {
 		// If we cannot load the new one, backout...
-    	if (!loadPatchbayFile(m_recentPatchbays[iPatchbay]))
-    	    PatchbayComboBox->setCurrentItem(0);
+		if (!loadPatchbayFile(m_recentPatchbays[iPatchbay]))
+			PatchbayComboBox->setCurrentItem(0);
 	}
 }
 
@@ -347,13 +347,13 @@ void qjackctlPatchbayForm::toggleActivePatchbay()
     if (!queryClose())
         return;
 
-    // Activate it...
-    qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-    if (pMainForm) {
-        pMainForm->setActivePatchbay(
+	// Activate it...
+	qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+	if (pMainForm) {
+		pMainForm->setActivePatchbay(
 			m_bActivePatchbay ? QString::null : m_sPatchbayPath);
 	}
-	
+
 	// Need to force/refresh the patchbay list...
 	updateRecentPatchbays(m_sPatchbayPath);
 }
@@ -386,18 +386,19 @@ void qjackctlPatchbayForm::updateRecentPatchbays ( const QString& sPatchbayPath 
 		pMainForm->setRecentPatchbays(m_recentPatchbays);
 
 	// Update the visible combobox...
+	const QPixmap pixmap = QPixmap::fromMimeSource("patchbay1.png");
 	PatchbayComboBox->clear();
 	for (iter = m_recentPatchbays.begin();
 			iter != m_recentPatchbays.end(); ++iter) {
 		QString sText = QFileInfo(*iter).baseName();
 		if (pMainForm && pMainForm->isActivePatchbay(*iter))
-		    sText += " [" + tr("active") + "]";
-		PatchbayComboBox->insertItem(sText);
+			sText += " [" + tr("active") + "]";
+		PatchbayComboBox->insertItem(pixmap, sText);
 	}
 
 	// Sure this one must be currently selected.
 	PatchbayComboBox->setCurrentItem(0);
-    stabilizeForm();
+	stabilizeForm();
 }
 
 

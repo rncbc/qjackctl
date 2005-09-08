@@ -167,7 +167,7 @@
                         </font>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string>Current patchbay profile name</string>
+                        <string>Current (recent) patchbay profile(s)</string>
                     </property>
                 </widget>
                 <widget class="QPushButton">
