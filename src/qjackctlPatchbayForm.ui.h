@@ -134,7 +134,8 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 
 	QString sPatchbay = m_sPatchbayPath;
 	if (PatchbayView->dirty()) {
-		PatchbayComboBox->setCurrentText(m_sPatchbayName + " [" + tr("modified") + "]");
+		PatchbayComboBox->changeItem(QPixmap::fromMimeSource("patchbay1.png"),
+			m_sPatchbayName + " [" + tr("modified") + "]", 0);
 		sPatchbay += " *";
 	}
 	setCaption(QJACKCTL_TITLE ": " + tr("Patchbay - [%1]").arg(sPatchbay));

@@ -69,8 +69,7 @@ Acknowledgments
 ---------------
 
 QjackCtl's user interface layout (and the whole idea for that matter)
-was partially borrowed from Lawrie Abbott's jacko project
-(http://members.iinet.net.au/~lawrieabbott/jacko.html), which
+was partially borrowed from Lawrie Abbott's jacko project, which
 was taken from wxWindow/Python into the Qt/C++ arena.
 
 Since 2003-08-06, qjackctl has been included in the awesome Planet CCRMA
