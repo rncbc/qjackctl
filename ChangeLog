@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- The connections and patchbay windows are now allowed to have a wider
+  connection lines frame panel (thanks to Filipe Tomás).
+
 - Activation toggling feedback on the patchbay widget has been fixed;
   additionally and as found convenient, the most recently used patchbay
   definitions can now be loaded immediately by selecting from a drop-down

@@ -841,24 +841,26 @@ qjackctlSocketListView::qjackctlSocketListView ( qjackctlPatchbayView *pPatchbay
 
 	m_pToolTip = new qjackctlPatchbayToolTip(this);
 
-    if (bReadable)
-        QListView::addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
-    else
-        QListView::addColumn(tr("Input Sockets") + " / " + tr("Plugs"));
-
     QListView::header()->setClickEnabled(false);
     QListView::header()->setResizeEnabled(false);
-    QListView::setMinimumSize(QSize(152, 60));
+    QListView::setMinimumWidth(120);
     QListView::setAllColumnsShowFocus(true);
+	QListView::setColumnWidthMode(0, QListView::Maximum);
     QListView::setRootIsDecorated(true);
     QListView::setResizeMode(QListView::AllColumns);
     QListView::setAcceptDrops(true);
     QListView::setDragAutoScroll(true);
-    QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+	QListView::setSizePolicy(
+		QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     QListView::setSorting(-1);
 
 	QListView::setShowToolTips(false);
+
+    if (bReadable)
+        QListView::addColumn(tr("Output Sockets") + " / " + tr("Plugs"));
+    else
+        QListView::addColumn(tr("Input Sockets") + " / " + tr("Plugs"));
 
     setAutoOpenTimeout(800);
 }
@@ -1030,9 +1032,10 @@ qjackctlPatchworkView::qjackctlPatchworkView ( qjackctlPatchbayView *pPatchbayVi
 {
     m_pPatchbayView = pPatchbayView;
 
-    QWidget::setMinimumSize(QSize(22, 60));
+    QWidget::setMinimumWidth(20);
     QWidget::setMaximumWidth(120);
-    QWidget::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+	QWidget::setSizePolicy(
+		QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding));
 }
 
 // Default destructor.
@@ -1252,7 +1255,7 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, qjackctlSocketList *
 		tr("&Refresh"), pPatchbay, SLOT(refresh()), tr("Alt+R", "Refresh"));
 
     pContextMenu->exec(pos);
-    
+
     delete pContextMenu;
 }
 

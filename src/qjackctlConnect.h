@@ -307,7 +307,7 @@ private:
     QTimer *m_pAutoOpenTimer;
     // Item we'll eventually drop something.
     QListViewItem *m_pDragDropItem;
-    
+
 	// Aliasing support.
 	qjackctlConnectAlias *m_pAliases;
 	bool m_bRenameEnabled;
@@ -344,13 +344,13 @@ protected:
     virtual void resizeEvent(QResizeEvent *);
     // Context menu request event handler.
     virtual void contextMenuEvent(QContextMenuEvent *);
-    
+
 private:
 
     // Drawing methods.
     void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
     void drawConnections();
-    
+
     // Local instance variables.
     qjackctlConnectView *m_pConnectView;
 };
@@ -378,7 +378,7 @@ public:
     // Connections object binding methods.
     void setBinding(qjackctlConnect *pConnect);
     qjackctlConnect *binding();
-    
+
     // Client list accessors.
     qjackctlClientList *OClientList();
     qjackctlClientList *IClientList();
@@ -386,7 +386,7 @@ public:
     // Connector line style accessors.
     void setBezierLines(bool bBezierLines);
     bool isBezierLines();
-    
+
     // Common icon size pixmap accessors.
     void setIconSize (int iIconSize);
     int iconSize (void);
@@ -409,7 +409,7 @@ private:
 
     // The main binding object.
     qjackctlConnect *m_pConnect;
-    
+
     // How we'll draw connector lines.
     bool m_bBezierLines;
 
@@ -476,19 +476,19 @@ protected:
     qjackctlConnectView *connectView();
     void setOClientList(qjackctlClientList *pOClientList);
     void setIClientList(qjackctlClientList *pIClientList);
-    
+
     // Common pixmap factory helper-method.
     QPixmap *createIconPixmap (const QString& sIconName);
 
     // Update icon size implementation.
     virtual void updateIconPixmaps() = 0;
-    
+
 private:
 
     // Dunno. But this may avoid some conflicts.
     bool startMutex();
     void endMutex();
-    
+
     // Connection methods (unguarded).
     bool canConnectSelectedEx();
     bool canDisconnectSelectedEx();

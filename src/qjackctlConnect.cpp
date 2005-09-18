@@ -257,8 +257,8 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList, const 
 	// Check aliasing...
 	qjackctlConnectAlias *pAliases = (pClientList->listView())->aliases();
 	if (pAliases) {
-	    QListViewItem::setText(0, pAliases->clientAlias(sClientName));
-        QListViewItem::setRenameEnabled(0, (pClientList->listView())->renameEnabled());
+		QListViewItem::setText(0, pAliases->clientAlias(sClientName));
+		QListViewItem::setRenameEnabled(0, (pClientList->listView())->renameEnabled());
 	}
 }
 
@@ -533,35 +533,37 @@ qjackctlClientListView::qjackctlClientListView ( qjackctlConnectView *pConnectVi
     : QListView(pConnectView)
 {
     m_pConnectView = pConnectView;
-    
+
     m_pAutoOpenTimer   = 0;
     m_iAutoOpenTimeout = 0;
     m_pDragDropItem    = 0;
-    
+
 	m_pAliases = 0;
 	m_bRenameEnabled = false;
 
 	m_pToolTip = new qjackctlConnectToolTip(this);
+
+    QListView::header()->setClickEnabled(false);
+    QListView::header()->setResizeEnabled(false);
+    QListView::setMinimumWidth(120);
+    QListView::setAllColumnsShowFocus(true);
+	QListView::setColumnWidthMode(0, QListView::Maximum);
+    QListView::setRootIsDecorated(true);
+    QListView::setResizeMode(QListView::AllColumns);
+    QListView::setAcceptDrops(true);
+    QListView::setDragAutoScroll(true);
+	QListView::setSizePolicy(
+		QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+
+	QListView::setShowToolTips(false);
 
     if (bReadable)
         QListView::addColumn(tr("Readable Clients") + " / " + tr("Output Ports"));
     else
         QListView::addColumn(tr("Writable Clients") + " / " + tr("Input Ports"));
 
-    QListView::header()->setClickEnabled(false);
-    QListView::header()->setResizeEnabled(false);
-    QListView::setMinimumSize(QSize(152, 60));
-    QListView::setAllColumnsShowFocus(true);
-    QListView::setRootIsDecorated(true);
-    QListView::setResizeMode(QListView::AllColumns);
-    QListView::setAcceptDrops(true);
-    QListView::setDragAutoScroll(true);
-    QListView::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-
-	QListView::setShowToolTips(false);
-    
     setAutoOpenTimeout(800);
-    
+
     QObject::connect(this, SIGNAL(itemRenamed(QListViewItem*,int)),
 		this, SLOT(renamedSlot(QListViewItem*,int)));
 }
@@ -655,14 +657,14 @@ void qjackctlClientListView::renamedSlot ( QListViewItem *pItem, int )
 {
 	if (pItem && m_pAliases) {
 		const QString& sText = pItem->text(0);
-	    if (pItem->rtti() == QJACKCTL_CLIENTITEM) {
+		if (pItem->rtti() == QJACKCTL_CLIENTITEM) {
 			qjackctlClientItem *pClient = (qjackctlClientItem *) pItem;
-		    m_pAliases->setClientAlias(pClient->clientName(), sText);
+			m_pAliases->setClientAlias(pClient->clientName(), sText);
 			if (sText.isEmpty())
 				pClient->setText(0, pClient->clientName());
 		} else {
 			qjackctlPortItem *pPort = (qjackctlPortItem *) pItem;
-		    m_pAliases->setPortAlias(pPort->clientName(), pPort->portName(), sText);
+			m_pAliases->setPortAlias(pPort->clientName(), pPort->portName(), sText);
 			if (sText.isEmpty())
 				pPort->setText(0, pPort->portName());
 		}
@@ -753,7 +755,7 @@ void qjackctlClientListView::dropEvent( QDropEvent *pDropEvent )
                 pConnect->connectSelected();
         }
     }
-    
+
     dragLeaveEvent(0);
 }
 
@@ -877,9 +879,10 @@ qjackctlConnectorView::qjackctlConnectorView ( qjackctlConnectView *pConnectView
 {
     m_pConnectView = pConnectView;
 
-    QWidget::setMinimumSize(QSize(22, 60));
-    QWidget::setMaximumWidth(120);
-    QWidget::setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    QWidget::setMinimumWidth(20);
+//  QWidget::setMaximumWidth(120);
+	QWidget::setSizePolicy(
+		QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding));
 }
 
 // Default destructor.
@@ -921,7 +924,7 @@ void qjackctlConnectorView::drawConnections (void)
 {
     if (m_pConnectView->OClientList() == 0 || m_pConnectView->IClientList() == 0)
         return;
-    
+
     QPainter p(this);
     int x1, y1, h1;
     int x2, y2, h2;
@@ -963,7 +966,7 @@ void qjackctlConnectorView::drawConnections (void)
                 y1 = (m_pConnectView->OListView())->itemPos(pOParent) + 
                      pOParent->height() / 2 - (m_pConnectView->OListView())->contentsY();
             }
-            
+
             // Get port connections...
             for (qjackctlPortItem *pIPort = pOPort->connects().first();
                     pIPort;
@@ -1054,10 +1057,10 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent, const char *pszName
     m_pIListView     = new qjackctlClientListView(this, false);
 
     m_pConnect = 0;
-    
+
     m_bBezierLines = false;
     m_iIconSize    = 0;
-    
+
     QObject::connect(m_pOListView, SIGNAL(expanded(QListViewItem *)),  m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(collapsed(QListViewItem *)), m_pConnectorView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(contentsMoving(int, int)),   m_pConnectorView, SLOT(contentsMoved(int, int)));
@@ -1447,7 +1450,7 @@ bool qjackctlConnect::canDisconnectSelectedEx (void)
 bool qjackctlConnect::disconnectSelected (void)
 {
     bool bResult = false;
-    
+
     if (startMutex()) {
         bResult = disconnectSelectedEx();
         endMutex();
@@ -1516,7 +1519,7 @@ bool qjackctlConnect::disconnectSelectedEx (void)
 bool qjackctlConnect::canDisconnectAll (void)
 {
     bool bResult = false;
-    
+
     if (startMutex()) {
         bResult = canDisconnectAllEx();
         endMutex();
@@ -1660,4 +1663,3 @@ QPixmap *qjackctlConnect::createIconPixmap ( const QString& sIconName )
 
 
 // end of qjackctlConnect.cpp
-
