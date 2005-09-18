@@ -809,7 +809,7 @@ void qjackctlSetupForm::browseStartupScript()
 		StartupScriptShellComboBox->currentText(),  // Start here.
 		QString::null,                              // Filter (all files?)
 		this, 0,                                    // Parent and name (none)
-		QJACKCTL_TITLE ": " + tr("Startup script")	// Caption.
+		tr("Startup Script")                        // Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -827,7 +827,7 @@ void qjackctlSetupForm::browsePostStartupScript()
 		PostStartupScriptShellComboBox->currentText(),  // Start here.
 		QString::null,                                  // Filter (all files?)
 		this, 0,                                        // Parent and name (none)
-		QJACKCTL_TITLE ": " + tr("Post-startup script")	// Caption.
+		tr("Post-Startup Script")                       // Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -845,7 +845,7 @@ void qjackctlSetupForm::browseShutdownScript()
 		ShutdownScriptShellComboBox->currentText(), // Start here.
 		QString::null,                              // Filter (all files?)
 		this, 0,                                    // Parent and name (none)
-		QJACKCTL_TITLE ": " + tr("Shutdown script")	// Caption.
+		tr("Shutdown Script")                       // Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -863,7 +863,7 @@ void qjackctlSetupForm::browsePostShutdownScript()
 		PostShutdownScriptShellComboBox->currentText(), // Start here.
 		QString::null,                                  // Filter (all files?)
 		this, 0,                                        // Parent and name (none)
-		QJACKCTL_TITLE ": " + tr("Post-shutdown script")	// Caption.
+		tr("Post-Shutdown Script")                      // Caption.
     );
 
     if (!sFileName.isEmpty()) {
@@ -881,7 +881,7 @@ void qjackctlSetupForm::browseActivePatchbayPath()
 		ActivePatchbayPathComboBox->currentText(),	    // Start here.
 		tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
 		this, 0,                                        // Parent and name (none)
-		QJACKCTL_TITLE ": " + tr("Active Patchbay definition")	// Caption.
+		tr("Active Patchbay Definition")                // Caption.
     );
 
     if (!sFileName.isEmpty()) {

@@ -41,7 +41,7 @@
         </sizepolicy>
     </property>
     <property name="caption">
-		<string>QjackCtl: Setup</string>
+		<string>Setup - JACK Audio Connection Kit</string>
     </property>
     <property name="sizeGripEnabled">
         <bool>true</bool>

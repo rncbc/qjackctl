@@ -132,13 +132,10 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 	m_bActivePatchbay = (pMainForm && pMainForm->isActivePatchbay(m_sPatchbayPath));
     ActivatePatchbayPushButton->setOn(m_bActivePatchbay);
 
-	QString sPatchbay = m_sPatchbayPath;
 	if (PatchbayView->dirty()) {
 		PatchbayComboBox->changeItem(QPixmap::fromMimeSource("patchbay1.png"),
 			m_sPatchbayName + " [" + tr("modified") + "]", 0);
-		sPatchbay += " *";
 	}
-	setCaption(QJACKCTL_TITLE ": " + tr("Patchbay - [%1]").arg(sPatchbay));
 
     qjackctlSocketItem *pSocketItem = (m_pPatchbay->OSocketList())->selectedSocketItem();
     if (pSocketItem) {
@@ -296,7 +293,7 @@ void qjackctlPatchbayForm::loadPatchbay()
 		m_sPatchbayPath,                                // Start here.
 		tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
 		this, 0,                                        // Parent and name (none)
-		QJACKCTL_TITLE ": " + tr("Load Patchbay Definition")	// Caption.
+		tr("Load Patchbay Definition")                  // Caption.
     );
 
     if (sFileName.isEmpty())
@@ -314,7 +311,7 @@ void qjackctlPatchbayForm::savePatchbay()
 		m_sPatchbayPath,                                // Start here.
 		tr("Patchbay Definition files") + " (*.xml)",   // Filter (XML files)
 		this, 0,                                        // Parent and name (none)
-		QJACKCTL_TITLE ": " + tr("Save Patchbay Definition")	// Caption.
+		tr("Save Patchbay Definition")                  // Caption.
     );
 
     if (sFileName.isEmpty())

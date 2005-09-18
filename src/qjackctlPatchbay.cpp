@@ -587,9 +587,7 @@ bool qjackctlSocketList::addSocketItem (void)
 
     qjackctlSocketForm *pSocketForm = new qjackctlSocketForm(m_pListView);
     if (pSocketForm) {
-		pSocketForm->setCaption(QJACKCTL_TITLE ": "
-			"<" + tr("New") + "> "
-			+ m_sSocketCaption);
+		pSocketForm->setCaption("<" + tr("New") + "> - " + m_sSocketCaption);
         pSocketForm->setSocketCaption(m_sSocketCaption);
         pSocketForm->setPixmaps(m_apPixmaps);
         pSocketForm->setReadable(m_bReadable);
@@ -655,9 +653,8 @@ bool qjackctlSocketList::editSocketItem (void)
     if (pSocketItem) {
         qjackctlSocketForm *pSocketForm = new qjackctlSocketForm(m_pListView);
         if (pSocketForm) {
-			pSocketForm->setCaption(QJACKCTL_TITLE ": "
-				+ pSocketItem->socketName() + " "
-				+ m_sSocketCaption);
+			pSocketForm->setCaption(pSocketItem->socketName()
+				+ " - " + m_sSocketCaption);
             pSocketForm->setSocketCaption(m_sSocketCaption);
             pSocketForm->setPixmaps(m_apPixmaps);
             pSocketForm->setReadable(m_bReadable);
@@ -715,9 +712,8 @@ bool qjackctlSocketList::copySocketItem (void)
 			do { sSocketName = sSkel.arg(++iSocketNo); }
 			while (findSocket(sSocketName));
 			// Show up as a new socket...
-			pSocketForm->setCaption(QJACKCTL_TITLE ": "
-				+ pSocketItem->socketName() + " <" + tr("Copy") + "> "
-				+ m_sSocketCaption);
+			pSocketForm->setCaption(pSocketItem->socketName()
+				+ " <" + tr("Copy") + "> - " + m_sSocketCaption);
             pSocketForm->setSocketCaption(m_sSocketCaption);
             pSocketForm->setPixmaps(m_apPixmaps);
             pSocketForm->setReadable(m_bReadable);

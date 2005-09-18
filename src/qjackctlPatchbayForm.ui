@@ -45,7 +45,7 @@
         </font>
     </property>
     <property name="caption">
-        <string>QjackCtl: Patchbay</string>
+        <string>Patchbay - JACK Audio Connection Kit</string>
     </property>
     <property name="icon">
         <pixmap>patchbay1.png</pixmap>

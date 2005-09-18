@@ -45,7 +45,7 @@
         </font>
     </property>
     <property name="caption">
-		<string>QjackCtl: Status</string>
+		<string>Status - JACK Audio Connection Kit</string>
     </property>
     <property name="icon">
         <pixmap>status1.png</pixmap>

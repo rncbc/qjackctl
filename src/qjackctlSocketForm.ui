@@ -33,7 +33,7 @@
         </rect>
     </property>
     <property name="caption">
-		<string>QjackCtl: Socket</string>
+		<string>Socket - JACK Audio Connection Kit</string>
     </property>
     <property name="icon">
         <pixmap>socket1.png</pixmap>
