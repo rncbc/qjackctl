@@ -427,6 +427,7 @@
     <function access="private" specifier="non virtual">destroy()</function>
     <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
     <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
+    <function specifier="non virtual">setup( qjackctlSetup *pSetup )</function>
     <function specifier="non virtual" returnType="bool">queryClose()</function>
     <function specifier="non virtual" returnType="QFont">connectionsFont()</function>
     <function specifier="non virtual">setConnectionsFont( const QFont &amp; font )</function>

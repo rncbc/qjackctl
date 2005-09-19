@@ -181,7 +181,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     m_pConnectionsForm = new qjackctlConnectionsForm (this, 0, wflags);
     m_pPatchbayForm    = new qjackctlPatchbayForm    (this, 0, wflags);
 	// Setup appropriately...
-	m_pConnectionsForm->setupAliases(m_pSetup);
+	m_pConnectionsForm->setup(m_pSetup);
+	m_pPatchbayForm->setup(m_pSetup);
 
     // Set the patchbay cable connection notification signal/slot.
     QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),

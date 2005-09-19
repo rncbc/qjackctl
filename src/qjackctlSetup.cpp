@@ -521,6 +521,43 @@ void qjackctlSetup::saveComboBoxHistory ( QComboBox *pComboBox, int iLimit )
 
 
 //---------------------------------------------------------------------------
+// Splitter widget sizes persistence helper methods.
+
+void qjackctlSetup::loadSplitterSizes ( QSplitter *pSplitter )
+{
+	// Try to restore old splitter sizes...
+	if (pSplitter) {
+		m_settings.beginGroup("/Splitter/" + QString(pSplitter->name()));
+		QValueList<int> sizes;
+		QStringList list = m_settings.readListEntry("/sizes");
+		QStringList::Iterator iter = list.begin();
+		while (iter != list.end())
+		    sizes.append((*iter++).toInt());
+		if (!sizes.isEmpty())
+		    pSplitter->setSizes(sizes);
+        m_settings.endGroup();
+	}
+}
+
+
+void qjackctlSetup::saveSplitterSizes ( QSplitter *pSplitter )
+{
+    // Try to save current splitter sizes...
+    if (pSplitter) {
+        m_settings.beginGroup("/Splitter/" + QString(pSplitter->name()));
+        QStringList list;
+		QValueList<int> sizes = pSplitter->sizes();
+		QValueList<int>::Iterator iter = sizes.begin();
+		while (iter != sizes.end())
+		    list.append(QString::number(*iter++));
+		if (!list.isEmpty())
+	        m_settings.writeEntry("/sizes", list);
+        m_settings.endGroup();
+    }
+}
+
+
+//---------------------------------------------------------------------------
 // Widget geometry persistence helper methods.
 
 void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
@@ -564,6 +601,9 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
     }
 }
 
+
+//---------------------------------------------------------------------------
+// Delayed setup option.
 
 // Delayed widget setup helper class.
 qjackctlDelayedSetup::qjackctlDelayedSetup ( QWidget *pWidget,

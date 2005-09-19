@@ -25,6 +25,7 @@
 #include "qjackctlConnectAlias.h"
 
 #include <qcombobox.h>
+#include <qsplitter.h>
 
 
 // Audio mode combobox item indexes.
@@ -165,6 +166,10 @@ public:
     void add2ComboBoxHistory(QComboBox *pComboBox, const QString& sNewText, int iLimit = 8, int iIndex = -1);
     void loadComboBoxHistory(QComboBox *pComboBox, int iLimit = 8);
     void saveComboBoxHistory(QComboBox *pComboBox, int iLimit = 8);
+
+	// Splitter widget sizes persistence helper methods.
+	void loadSplitterSizes(QSplitter *pSplitter);
+	void saveSplitterSizes(QSplitter *pSplitter);
 
     // Widget geometry persistence helper prototypes.
     void saveWidgetGeometry(QWidget *pWidget);

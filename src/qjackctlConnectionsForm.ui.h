@@ -81,6 +81,24 @@ void qjackctlConnectionsForm::hideEvent ( QHideEvent *pHideEvent )
 }
 
 
+// Set reference to global options, mostly needed for the
+// initial sizes of the main splitter views and those
+// client/port aliasing feature.
+void qjackctlConnectionsForm::setup ( qjackctlSetup *pSetup )
+{
+	m_pSetup = pSetup;
+
+	// Load some splitter sizes...
+	if (m_pSetup) {
+		m_pSetup->loadSplitterSizes(JackConnectView);
+		m_pSetup->loadSplitterSizes(AlsaConnectView);
+	}
+
+	// Update initial client/port aliases...
+	updateAliases();
+}
+
+
 // Window close event handlers.
 bool qjackctlConnectionsForm::queryClose (void)
 {
@@ -101,6 +119,12 @@ bool qjackctlConnectionsForm::queryClose (void)
 		default:    // Cancel.
 			bQueryClose = false;
 		}
+	}
+
+	// Save some splitter sizes...
+	if (m_pSetup && bQueryClose) {
+		m_pSetup->saveSplitterSizes(JackConnectView);
+		m_pSetup->saveSplitterSizes(AlsaConnectView);
 	}
 
 	return bQueryClose;
@@ -392,15 +416,7 @@ void qjackctlConnectionsForm::stabilizeAlsa ( bool bEnabled )
 }
 
 
-// Set reference to global options, mostly needed for the
-// clint/port aliasing feature.
-void qjackctlConnectionsForm::setupAliases ( qjackctlSetup *pSetup )
-{
-	m_pSetup = pSetup;
-	
-	updateAliases();
-}
-
+// Client/port aliasing feature update.
 void qjackctlConnectionsForm::updateAliases (void)
 {
 	// Set alias maps for all listviews...

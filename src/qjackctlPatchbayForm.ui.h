@@ -37,6 +37,8 @@ void qjackctlPatchbayForm::init (void)
 
     m_bActivePatchbay = false;
 
+	m_pSetup = NULL;
+
     // Connect it to some UI feedback slot.
     QObject::connect(PatchbayView->OListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
     QObject::connect(PatchbayView->IListView(), SIGNAL(selectionChanged()), this, SLOT(stabilizeForm()));
@@ -79,6 +81,18 @@ void qjackctlPatchbayForm::hideEvent ( QHideEvent *pHideEvent )
 }
 
 
+// Set reference to global options, mostly needed for the
+// initial sizes of the main splitter views...
+void qjackctlPatchbayForm::setup ( qjackctlSetup *pSetup )
+{
+	m_pSetup = pSetup;
+
+	// Load main splitter sizes...
+	if (m_pSetup)
+		m_pSetup->loadSplitterSizes(PatchbayView);
+}
+
+
 // Window close event handlers.
 bool qjackctlPatchbayForm::queryClose (void)
 {
@@ -100,6 +114,10 @@ bool qjackctlPatchbayForm::queryClose (void)
             bQueryClose = false;
         }
     }
+
+	// Save main splitter sizes...
+	if (m_pSetup && bQueryClose)
+		m_pSetup->saveSplitterSizes(PatchbayView);
 
     return bQueryClose;
 }
