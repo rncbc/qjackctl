@@ -629,7 +629,7 @@ bool qjackctlSocketList::removeSocketItem (void)
     qjackctlSocketItem *pSocketItem = selectedSocketItem();
     if (pSocketItem) {
         if (QMessageBox::warning(m_pListView,
-			QJACKCTL_TITLE ": " + tr("Warning"),
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
             m_sSocketCaption + " " + tr("about to be removed") + ":\n\n" +
             "\"" + pSocketItem->socketName() + "\"\n\n" +
             tr("Are you sure?"),
@@ -1578,7 +1578,7 @@ bool qjackctlPatchbay::canDisconnectAll (void)
 bool qjackctlPatchbay::disconnectAll (void)
 {
     if (QMessageBox::warning(m_pPatchbayView,
-		QJACKCTL_TITLE ": " + tr("Warning"),
+		tr("Warning") + " - " QJACKCTL_SUBTITLE1,
         tr("This will disconnect all sockets.") + "\n\n" +
         tr("Are you sure?"),
         tr("Yes"), tr("No")) > 0) {

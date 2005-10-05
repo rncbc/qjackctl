@@ -100,7 +100,7 @@ bool qjackctlPatchbayForm::queryClose (void)
 
     if (PatchbayView->dirty()) {
         switch (QMessageBox::warning(this,
-			QJACKCTL_TITLE ": " + tr("Warning"),
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
             tr("The patchbay definition has been changed:") + "\n\n" +
             "\"" + m_sPatchbayName +  "\"\n\n" +
             tr("Do you want to save the changes?"),
@@ -222,7 +222,7 @@ bool qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
     // Step 1: load from file...
     if (!qjackctlPatchbayFile::load(&rack, sFileName)) {
         QMessageBox::critical(this,
-			QJACKCTL_TITLE ": " + tr("Load error"),
+			tr("Error") + " - " QJACKCTL_SUBTITLE1,
             tr("Could not load patchbay definition file:") + "\n\n\"" + sFileName + "\"",
             tr("Cancel"));
         // Reset/disable further trials.
@@ -251,7 +251,7 @@ bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     // Step 2: save to file...
     if (!qjackctlPatchbayFile::save(&rack, sFileName)) {
         QMessageBox::critical(this,
-			QJACKCTL_TITLE ": " + tr("Save error"),
+			tr("Error") + " - " QJACKCTL_SUBTITLE1,
             tr("Could not save patchbay definition file:") + "\n\n\"" + sFileName + "\"",
             tr("Cancel"));
         return false;
@@ -280,7 +280,7 @@ void qjackctlPatchbayForm::newPatchbay()
 	// Ask user what he/she wants to do...
 	if (m_pPatchbay->jackClient() || m_pPatchbay->alsaSeq()) {
 		switch (QMessageBox::information(this,
-			QJACKCTL_TITLE ": " + tr("New Patchbay definition"),
+			tr("New Patchbay definition") + " - " QJACKCTL_SUBTITLE1,
 			tr("Create patchbay definition as a snapshot") + "\n" +
 			tr("of all actual client connections?"),
 			tr("Yes"), tr("No"), tr("Cancel"))) {

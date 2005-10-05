@@ -106,7 +106,7 @@ bool qjackctlConnectionsForm::queryClose (void)
 
 	if (m_pSetup && (JackConnectView->dirty() || AlsaConnectView->dirty())) {
 		switch (QMessageBox::warning(this,
-			QJACKCTL_TITLE ": " + tr("Warning"),
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("The preset aliases have been changed:") + "\n\n" +
 			"\"" + m_sPreset +  "\"\n\n" +
 			tr("Do you want to save the changes?"),

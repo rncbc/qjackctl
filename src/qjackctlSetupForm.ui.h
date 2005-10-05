@@ -313,7 +313,7 @@ void qjackctlSetupForm::changeCurrentPreset( const QString& sPreset )
     // Check if there's any pending changes...
     if (m_iDirtySettings > 0 && !m_sPreset.isEmpty()) {
         switch (QMessageBox::warning(this,
-			QJACKCTL_TITLE ": " + tr("Warning"),
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
             tr("Some settings have been changed:") + "\n\n" +
             m_sPreset + "\n\n" +
             tr("Do you want to save the changes?"),
@@ -363,7 +363,7 @@ void qjackctlSetupForm::deleteCurrentPreset (void)
 
     // Try to prompt user if he/she really wants this...
     if (QMessageBox::warning(this,
-		QJACKCTL_TITLE ": " + tr("Warning"),
+		tr("Warning") + " - " QJACKCTL_SUBTITLE1,
         tr("Delete preset:") + "\n\n" +
         sPreset + "\n\n" +
         tr("Are you sure?"),
@@ -1053,7 +1053,7 @@ void qjackctlSetupForm::reject (void)
     // Check if there's any pending changes...
     if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
         switch (QMessageBox::warning(this,
-			QJACKCTL_TITLE ": " + tr("Warning"),
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
             tr("Some settings have been changed.") + "\n\n" +
             tr("Do you want to apply the changes?"),
             tr("Apply"), tr("Discard"), tr("Cancel"))) {

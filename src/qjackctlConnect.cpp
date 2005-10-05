@@ -1548,7 +1548,7 @@ bool qjackctlConnect::canDisconnectAllEx (void)
 bool qjackctlConnect::disconnectAll (void)
 {
     if (QMessageBox::warning(m_pConnectView,
-		QJACKCTL_TITLE ": " + tr("Warning"),
+		tr("Warning") + " - " QJACKCTL_SUBTITLE1,
         tr("This will suspend sound processing") + "\n" +
         tr("from all client applications.") + "\n\n" +
         tr("Are you sure?"),
