@@ -550,11 +550,15 @@ void qjackctlMainForm::startJack (void)
     bool bPortaudio = (m_preset.sDriver == "portaudio");
 	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
     if (bAlsa && (m_preset.iAudio != QJACKCTL_DUPLEX ||
-		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty()))
-        m_pJack->addArgument("-d" + m_preset.sInterface);
+		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
+		QString sInterface = m_preset.sInterface;
+		if (sInterface.isEmpty())
+			sInterface = "hw:0";
+        m_pJack->addArgument("-d" + sInterface);
+	}
     if (bPortaudio && m_preset.iChan > 0)
         m_pJack->addArgument("-c" + QString::number(m_preset.iChan));
-	if (bCoreaudio)
+	if (bCoreaudio && !m_preset.sInterface.isEmpty())
 		m_pJack->addArgument("-n" + QString::number(m_preset.sInterface.toInt()));
     if (m_preset.iSampleRate > 0)
         m_pJack->addArgument("-r" + QString::number(m_preset.iSampleRate));

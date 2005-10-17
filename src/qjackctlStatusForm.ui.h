@@ -33,6 +33,8 @@ public:
 	// Constructor.
 	qjackctlStatusToolTip(QListView *pListView)
 		: QToolTip(pListView->viewport()) { m_pListView = pListView; }
+	// Virtual destructor.
+	virtual ~qjackctlStatusToolTip() {}
 
 protected:
 

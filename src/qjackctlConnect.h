@@ -55,6 +55,8 @@ public:
 
 	// Constructor.
 	qjackctlConnectToolTip(qjackctlClientListView *pListView);
+	// Virtual destructor.
+	virtual ~qjackctlConnectToolTip() {}
 
 protected:
 

@@ -273,8 +273,8 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.iStartDelay  = StartDelaySpinBox->value();
     preset.bVerbose     = VerboseCheckBox->isChecked();
     preset.iPortMax     = PortMaxComboBox->currentText().toInt();
-    if (preset.sInterface == m_pSetup->sDefPresetName || preset.sInterface.isEmpty())
-        preset.sInterface = "hw:0";
+	if (preset.sInterface == m_pSetup->sDefPresetName)
+		preset.sInterface = QString::null;
     if (preset.sInDevice == m_pSetup->sDefPresetName)
         preset.sInDevice = QString::null;
     if (preset.sOutDevice == m_pSetup->sDefPresetName)

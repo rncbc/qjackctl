@@ -273,7 +273,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     preset.iWait        = m_settings.readNumEntry("/Wait", 21333);
     preset.iChan        = m_settings.readNumEntry("/Chan", 0);
     preset.sDriver      = m_settings.readEntry("/Driver", "alsa");
-    preset.sInterface   = m_settings.readEntry("/Interface", "hw:0");
+    preset.sInterface   = m_settings.readEntry("/Interface", QString::null);
     preset.iAudio       = m_settings.readNumEntry("/Audio", 0);
     preset.iDither      = m_settings.readNumEntry("/Dither", 0);
     preset.iTimeout     = m_settings.readNumEntry("/Timeout", 500);

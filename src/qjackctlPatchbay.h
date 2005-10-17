@@ -65,6 +65,8 @@ public:
 
 	// Constructor.
 	qjackctlPatchbayToolTip(qjackctlSocketListView *pListView);
+	// Virtual destructor.
+	virtual ~qjackctlPatchbayToolTip() {}
 
 protected:
 

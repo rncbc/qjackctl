@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Prevent the setting of the coreaudio device id on the jackd command
+  line (-n) whenever the default interface is being selected.
+
 - The connections and patchbay windows are now allowed to have wider
   connection lines frame panel; splitter width sizes are now persistent
   across application sessions (thanks to Filipe Tom·s for the hint).
@@ -45,7 +48,7 @@ CVS HEAD
   for the reminder).
 
 - Update on last backstage changes to the coreaudio backend options
-  (due to St√©phane Letz. Thanks).
+  (due to Stephane Letz. Thanks).
 
 
 0.2.16   2005-06-13  OSS device name selection and Mac OS X breakthrough.
