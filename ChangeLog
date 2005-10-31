@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- Fixed the major issues with selecting an audio interface on Mac OSX;
+  the button the right of the interface combo is now much better
+  looking than it was before; input/output channel counts are also
+  updated automatically now (thanks to Jesse Chappell for the patch).
+
 - Prevent the setting of the coreaudio device id on the jackd command
   line (-n) whenever the default interface is being selected.
 

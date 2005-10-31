@@ -30,7 +30,11 @@
 #include <qlineedit.h>
 
 #ifdef CONFIG_COREAUDIO
+#include <iostream>
+#include <cstring>
+#include <map>
 #include <CoreAudio/CoreAudio.h>
+#include <CoreFoundation/CFString.h>
 #endif
 
 #ifdef CONFIG_ALSA_SEQ
@@ -428,10 +432,10 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 
     InDeviceTextLabel->setEnabled(bInEnabled && (bAlsa || bOss));
     InDeviceComboBox->setEnabled(bInEnabled && (bAlsa || bOss));
-    InDevicePushButton->setEnabled(bInEnabled && (bAlsa || bOss));
+    InDeviceToolButton->setEnabled(bInEnabled && (bAlsa || bOss));
     OutDeviceTextLabel->setEnabled(bOutEnabled && (bAlsa || bOss));
     OutDeviceComboBox->setEnabled(bOutEnabled && (bAlsa || bOss));
-    OutDevicePushButton->setEnabled(bOutEnabled && (bAlsa || bOss));
+    OutDeviceToolButton->setEnabled(bOutEnabled && (bAlsa || bOss));
 
     InChannelsTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
     InChannelsSpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
@@ -494,7 +498,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 	}
 	InterfaceTextLabel->setEnabled(bEnabled || bCoreaudio);
 	InterfaceComboBox->setEnabled(bEnabled || bCoreaudio);
-	InterfacePushButton->setEnabled(bEnabled || bCoreaudio);
+	InterfaceToolButton->setEnabled(bEnabled || bCoreaudio);
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
     DitherComboBox->setEnabled(bAlsa || bPortaudio);
@@ -522,23 +526,23 @@ void qjackctlSetupForm::stabilizeForm (void)
 
     bEnabled = StartupScriptCheckBox->isChecked();
     StartupScriptShellComboBox->setEnabled(bEnabled);
-    StartupScriptSymbolPushButton->setEnabled(bEnabled);
-    StartupScriptBrowsePushButton->setEnabled(bEnabled);
+    StartupScriptSymbolToolButton->setEnabled(bEnabled);
+    StartupScriptBrowseToolButton->setEnabled(bEnabled);
 
     bEnabled = PostStartupScriptCheckBox->isChecked();
     PostStartupScriptShellComboBox->setEnabled(bEnabled);
-    PostStartupScriptSymbolPushButton->setEnabled(bEnabled);
-    PostStartupScriptBrowsePushButton->setEnabled(bEnabled);
+    PostStartupScriptSymbolToolButton->setEnabled(bEnabled);
+    PostStartupScriptBrowseToolButton->setEnabled(bEnabled);
 
     bEnabled = ShutdownScriptCheckBox->isChecked();
     ShutdownScriptShellComboBox->setEnabled(bEnabled);
-    ShutdownScriptSymbolPushButton->setEnabled(bEnabled);
-    ShutdownScriptBrowsePushButton->setEnabled(bEnabled);
+    ShutdownScriptSymbolToolButton->setEnabled(bEnabled);
+    ShutdownScriptBrowseToolButton->setEnabled(bEnabled);
 
     bEnabled = PostShutdownScriptCheckBox->isChecked();
     PostShutdownScriptShellComboBox->setEnabled(bEnabled);
-    PostShutdownScriptSymbolPushButton->setEnabled(bEnabled);
-    PostShutdownScriptBrowsePushButton->setEnabled(bEnabled);
+    PostShutdownScriptSymbolToolButton->setEnabled(bEnabled);
+    PostShutdownScriptBrowseToolButton->setEnabled(bEnabled);
 
     bEnabled = StdoutCaptureCheckBox->isChecked();
     XrunRegexTextLabel->setEnabled(bEnabled);
@@ -547,7 +551,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
     bEnabled = ActivePatchbayCheckBox->isChecked();
     ActivePatchbayPathComboBox->setEnabled(bEnabled);
-    ActivePatchbayPathPushButton->setEnabled(bEnabled);
+    ActivePatchbayPathToolButton->setEnabled(bEnabled);
 
     TimeRefreshComboBox->setEnabled(AutoRefreshCheckBox->isChecked());
     MessagesLimitLinesComboBox->setEnabled(MessagesLimitCheckBox->isChecked());
@@ -562,9 +566,77 @@ void qjackctlSetupForm::stabilizeForm (void)
 }
 
 
+#ifdef CONFIG_COREAUDIO
+// borrowed from jackpilot source
+static OSStatus getTotalChannels( AudioDeviceID device,
+	UInt32* channelCount, Boolean isInput )
+{
+	OSStatus            err = noErr;
+	UInt32              outSize;
+	Boolean             outWritable;
+	AudioBufferList*    bufferList = 0;
+	AudioStreamID*      streamList = 0;
+	size_t              i, numStream;
+    
+	err = AudioDeviceGetPropertyInfo(device, 0, isInput,
+		kAudioDevicePropertyStreams, &outSize, &outWritable);
+	if (err == noErr) {
+		streamList = (AudioStreamID*)malloc(outSize);
+		numStream = outSize/sizeof(AudioStreamID);
+		//JPLog("getTotalChannels device stream number %ld %ld\n", device, numStream);
+		err = AudioDeviceGetProperty(device, 0, isInput,
+			kAudioDevicePropertyStreams, &outSize, streamList);
+		if (err == noErr) {
+			AudioStreamBasicDescription streamDesc;
+			outSize = sizeof(AudioStreamBasicDescription);
+			for (i = 0; i < numStream; i++) {
+				err = AudioStreamGetProperty(streamList[i], 0,
+					kAudioDevicePropertyStreamFormat, &outSize, &streamDesc);
+				//JPLog("getTotalChannels streamDesc mFormatFlags %ld mChannelsPerFrame %ld\n", streamDesc.mFormatFlags, streamDesc.mChannelsPerFrame);
+			}
+		}
+	}
+	
+	*channelCount = 0;
+	err = AudioDeviceGetPropertyInfo(device, 0, isInput,
+		kAudioDevicePropertyStreamConfiguration, &outSize, &outWritable);
+	if (err == noErr) {
+		bufferList = (AudioBufferList*)malloc(outSize);
+		err = AudioDeviceGetProperty(device, 0, isInput,
+			kAudioDevicePropertyStreamConfiguration, &outSize, bufferList);
+		if (err == noErr) {								
+			for (i = 0; i < bufferList->mNumberBuffers; i++) 
+				*channelCount += bufferList->mBuffers[i].mNumberChannels;
+		}
+	}
+	
+	if (streamList) 
+		free(streamList);
+	if (bufferList) 
+		free(bufferList);	
+	
+	return (err);
+}
+
+static OSStatus getDeviceUIDFromID( AudioDeviceID id,
+	char *name, UInt32 nsize )
+{
+	UInt32 size = sizeof(CFStringRef);
+	CFStringRef UI;
+	OSStatus res = AudioDeviceGetProperty(id, 0, false,
+		kAudioDevicePropertyDeviceUID, &size, &UI);
+	if (res == noErr) 
+		CFStringGetCString(UI,name,nsize,CFStringGetSystemEncoding());
+	CFRelease(UI);
+	return res;
+}
+
+#endif // CONFIG_COREAUDIO
+
+
 // Device selection menu executive.
 void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
-	QPushButton *pPushButton, int iAudio )
+	QToolButton *pToolButton, int iAudio )
 {
 	// FIXME: Only valid for ALSA and OSS devices,
 	// for the time being... and also CoreAudio ones too.
@@ -573,6 +645,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	bool bOss       = (sDriver == "oss");
 #ifdef CONFIG_COREAUDIO
 	bool bCoreaudio = (sDriver == "coreaudio");
+	std::map<QString,AudioDeviceID> coreaudioIdMap;
 #endif
 	QString sCurName = pLineEdit->text();
 	QString sName, sSubName;
@@ -673,6 +746,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 			if (err == noErr) {
 				// Look for the CoreAudio device name...
 				char coreDeviceName[256];
+				UInt32 nameSize = 256;
 				for (int i = 0; i < numCoreDevices; i++) {
 					err = AudioDeviceGetPropertyInfo(coreDeviceIDs[i],
 							0, true, kAudioDevicePropertyDeviceName,
@@ -680,10 +754,23 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 					if (err == noErr) {
 						err = AudioDeviceGetProperty(coreDeviceIDs[i],
 								0, true, kAudioDevicePropertyDeviceName,
-								&outSize, (void *) coreDeviceName);
+								&nameSize, (void *) coreDeviceName);
 						if (err == noErr) {
-							sName = QString::number(coreDeviceIDs[i]);
-							sText = sName + '\t' + coreDeviceName;
+							char drivername[128];
+							UInt32 dnsize = 128;
+							// this returns the unique id for the device
+							// that must be used on the commandline for jack
+							if (getDeviceUIDFromID(coreDeviceIDs[i],
+								drivername, dnsize) == noErr) {
+								sName = drivername;
+							} else {
+								sName = "Error";
+							}
+							coreaudioIdMap[sName] = coreDeviceIDs[i];
+							// TODO: hide this ugly ID from the user,
+							// only show human readable name
+							// humanreadable \t UID
+							sText = QString(coreDeviceName) + '\t' + sName;
 							iItemID = pContextMenu->insertItem(sText);
 							pContextMenu->setItemChecked(iItemID,
 								sCurName == sName);
@@ -705,12 +792,34 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 		sCurName == m_pSetup->sDefPresetName);
 
 	// Show the device menu and read selection...
-	iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
+	iItemID = pContextMenu->exec(pToolButton->mapToGlobal(QPoint(0,0)));
 	if (iItemID != -1) {
 		sText = pContextMenu->text(iItemID);
 		int iTabPos = sText.find('\t');
 		if (iTabPos >= 0) {
+#ifndef CONFIG_COREAUDIO
 			pLineEdit->setText(sText.left(iTabPos));
+#else
+			// for OSX, figure out the device's channel counts and set the combos.
+			// this might be too difficult for the user to determine themselves
+			// and jack won't start if the values exceed the actual.
+			// we now use the second tab delimited field as the value to
+			// put in the combo
+			pLineEdit->setText(sText.mid(iTabPos + 1));
+			std::map<QString,AudioDeviceID>::iterator found = coreaudioIdMap.find(sText.mid(iTabPos+1));
+			if (found != coreaudioIdMap.end()) {
+				AudioDeviceID devid = found->second;
+				UInt32 chans;
+				if (getTotalChannels(devid, &chans, true) == noErr) {
+					//InChannelsSpinBox->setMaxValue(chans);
+					InChannelsSpinBox->setValue(chans);
+				}
+				if (getTotalChannels(devid, &chans, false) == noErr) {
+					//OutChannelsSpinBox->setMaxValue(chans);
+					OutChannelsSpinBox->setValue(chans);
+				}
+			}
+#endif
 		} else {
 			pLineEdit->setText(sText);
 		}
@@ -724,7 +833,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 // Interface device selection menu.
 void qjackctlSetupForm::selectInterface (void)
 {
-	deviceMenu(InterfaceComboBox->lineEdit(), InterfacePushButton,
+	deviceMenu(InterfaceComboBox->lineEdit(), InterfaceToolButton,
 		AudioComboBox->currentItem());
 }
 
@@ -732,7 +841,7 @@ void qjackctlSetupForm::selectInterface (void)
 // Input device selection menu.
 void qjackctlSetupForm::selectInDevice (void)
 {
-	deviceMenu(InDeviceComboBox->lineEdit(), InDevicePushButton,
+	deviceMenu(InDeviceComboBox->lineEdit(), InDeviceToolButton,
 		QJACKCTL_CAPTURE);
 }
 
@@ -740,14 +849,14 @@ void qjackctlSetupForm::selectInDevice (void)
 // Output device selection menu.
 void qjackctlSetupForm::selectOutDevice (void)
 {
-	deviceMenu(OutDeviceComboBox->lineEdit(), OutDevicePushButton,
+	deviceMenu(OutDeviceComboBox->lineEdit(), OutDeviceToolButton,
 		QJACKCTL_PLAYBACK);
 }
 
 
 // Meta-symbol menu executive.
 void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit,
-	QPushButton *pPushButton )
+	QToolButton *pToolButton )
 {
     const QString s = "  ";
 
@@ -763,7 +872,7 @@ void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit,
     pContextMenu->insertItem("%p" + s + tr("&Frames/Period"));
     pContextMenu->insertItem("%n" + s + tr("Periods/&Buffer"));
 
-    int iItemID = pContextMenu->exec(pPushButton->mapToGlobal(QPoint(0,0)));
+    int iItemID = pContextMenu->exec(pToolButton->mapToGlobal(QPoint(0,0)));
     if (iItemID != -1) {
         QString sText = pContextMenu->text(iItemID);
         int iMetaChar = sText.find('%');
@@ -780,25 +889,25 @@ void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit,
 // Startup script meta-symbol button slot.
 void qjackctlSetupForm::symbolStartupScript (void)
 {
-    symbolMenu(StartupScriptShellComboBox->lineEdit(), StartupScriptSymbolPushButton);
+    symbolMenu(StartupScriptShellComboBox->lineEdit(), StartupScriptSymbolToolButton);
 }
 
 // Post-startup script meta-symbol button slot.
 void qjackctlSetupForm::symbolPostStartupScript (void)
 {
-    symbolMenu(PostStartupScriptShellComboBox->lineEdit(), PostStartupScriptSymbolPushButton);
+    symbolMenu(PostStartupScriptShellComboBox->lineEdit(), PostStartupScriptSymbolToolButton);
 }
 
 // Shutdown script meta-symbol button slot.
 void qjackctlSetupForm::symbolShutdownScript (void)
 {
-    symbolMenu(ShutdownScriptShellComboBox->lineEdit(), ShutdownScriptSymbolPushButton);
+    symbolMenu(ShutdownScriptShellComboBox->lineEdit(), ShutdownScriptSymbolToolButton);
 }
 
 // Post-shutdown script meta-symbol button slot.
 void qjackctlSetupForm::symbolPostShutdownScript (void)
 {
-    symbolMenu(PostShutdownScriptShellComboBox->lineEdit(), PostShutdownScriptSymbolPushButton);
+    symbolMenu(PostShutdownScriptShellComboBox->lineEdit(), PostShutdownScriptSymbolToolButton);
 }
 
 

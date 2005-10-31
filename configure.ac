@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.2.18.15, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.2.18.16, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui.h)
 AC_CONFIG_HEADERS(config.h)
@@ -185,8 +185,9 @@ fi
 AC_CHECK_HEADER(CoreAudio/CoreAudio.h, [ac_coreaudio="yes"], [ac_coreaudio="no"])
 if test "x$ac_coreaudio" = "xyes"; then
    AC_DEFINE(CONFIG_COREAUDIO, 1, [Define if CoreAudio/CoreAudio.h is available (Mac OS X).])
-   ac_libs="-framework CoreAudio $ac_libs" 
+   ac_libs="-framework CoreAudio -framework CoreFoundation $ac_libs" 
 fi
+
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_C_CONST

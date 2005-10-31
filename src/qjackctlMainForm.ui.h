@@ -558,8 +558,10 @@ void qjackctlMainForm::startJack (void)
 	}
     if (bPortaudio && m_preset.iChan > 0)
         m_pJack->addArgument("-c" + QString::number(m_preset.iChan));
-	if (bCoreaudio && !m_preset.sInterface.isEmpty())
-		m_pJack->addArgument("-n" + QString::number(m_preset.sInterface.toInt()));
+    if (bCoreaudio && !m_preset.sInterface.isEmpty()) {
+	    m_pJack->addArgument("-n");
+	    m_pJack->addArgument(m_preset.sInterface);
+    }
     if (m_preset.iSampleRate > 0)
         m_pJack->addArgument("-r" + QString::number(m_preset.iSampleRate));
     if (m_preset.iFrames > 0)
@@ -593,9 +595,9 @@ void qjackctlMainForm::startJack (void)
             m_pJack->addArgument("-S");
     }
 	if (bAlsa || bCoreaudio) {
-		if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
+		if (m_preset.iInChannels >= 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
 			m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
-		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
+		if (m_preset.iOutChannels >= 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
 			m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
 	}
     if (bOss) {

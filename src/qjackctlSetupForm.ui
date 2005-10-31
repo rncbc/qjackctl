@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>qjackctlSetupForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>622</width>
-            <height>483</height>
+            <width>612</width>
+            <height>486</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -41,7 +41,7 @@
         </sizepolicy>
     </property>
     <property name="caption">
-		<string>Setup - JACK Audio Connection Kit</string>
+        <string>Setup - JACK Audio Connection Kit</string>
     </property>
     <property name="sizeGripEnabled">
         <bool>true</bool>
@@ -1301,9 +1301,9 @@
                                             <string>The PCM device name to use</string>
                                         </property>
                                     </widget>
-                                    <widget class="QPushButton" row="4" column="3">
+                                    <widget class="QToolButton" row="4" column="3">
                                         <property name="name">
-                                            <cstring>OutDevicePushButton</cstring>
+                                            <cstring>OutDeviceToolButton</cstring>
                                         </property>
                                         <property name="minimumSize">
                                             <size>
@@ -1319,14 +1319,13 @@
                                         </property>
                                         <property name="font">
                                             <font>
-                                                <bold>0</bold>
                                             </font>
+                                        </property>
+                                        <property name="focusPolicy">
+                                            <enum>TabFocus</enum>
                                         </property>
                                         <property name="text">
                                             <string>&gt;</string>
-                                        </property>
-                                        <property name="autoDefault">
-                                            <bool>false</bool>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Select output device for playback</string>
@@ -1455,9 +1454,9 @@
                                             <cstring>InChannelsSpinBox</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QPushButton" row="3" column="3">
+                                    <widget class="QToolButton" row="3" column="3">
                                         <property name="name">
-                                            <cstring>InDevicePushButton</cstring>
+                                            <cstring>InDeviceToolButton</cstring>
                                         </property>
                                         <property name="minimumSize">
                                             <size>
@@ -1473,22 +1472,21 @@
                                         </property>
                                         <property name="font">
                                             <font>
-                                                <bold>0</bold>
                                             </font>
+                                        </property>
+                                        <property name="focusPolicy">
+                                            <enum>TabFocus</enum>
                                         </property>
                                         <property name="text">
                                             <string>&gt;</string>
-                                        </property>
-                                        <property name="autoDefault">
-                                            <bool>false</bool>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Select input device for capture</string>
                                         </property>
                                     </widget>
-                                    <widget class="QPushButton" row="0" column="3">
+                                    <widget class="QToolButton" row="0" column="3">
                                         <property name="name">
-                                            <cstring>InterfacePushButton</cstring>
+                                            <cstring>InterfaceToolButton</cstring>
                                         </property>
                                         <property name="minimumSize">
                                             <size>
@@ -1504,14 +1502,13 @@
                                         </property>
                                         <property name="font">
                                             <font>
-                                                <bold>0</bold>
                                             </font>
+                                        </property>
+                                        <property name="focusPolicy">
+                                            <enum>TabFocus</enum>
                                         </property>
                                         <property name="text">
                                             <string>&gt;</string>
-                                        </property>
-                                        <property name="autoDefault">
-                                            <bool>false</bool>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Select PCM device name</string>
@@ -1907,9 +1904,9 @@
                                     <string>Command line to be executed before starting up the JACK audio server</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="0" column="2">
+                            <widget class="QToolButton" row="0" column="2">
                                 <property name="name">
-                                    <cstring>StartupScriptSymbolPushButton</cstring>
+                                    <cstring>StartupScriptSymbolToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -1925,22 +1922,24 @@
                                 </property>
                                 <property name="font">
                                     <font>
-                                        <bold>0</bold>
                                     </font>
+                                </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
                                 </property>
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="0" column="3">
+                            <widget class="QToolButton" row="0" column="3">
                                 <property name="name">
-                                    <cstring>StartupScriptBrowsePushButton</cstring>
+                                    <cstring>StartupScriptBrowseToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -1959,10 +1958,13 @@
                                         <bold>0</bold>
                                     </font>
                                 </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
+                                </property>
                                 <property name="text">
                                     <string>...</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
@@ -1993,9 +1995,9 @@
                                     <string>Command line to be executed after starting up the JACK audio server</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="1" column="2">
+                            <widget class="QToolButton" row="1" column="2">
                                 <property name="name">
-                                    <cstring>PostStartupScriptSymbolPushButton</cstring>
+                                    <cstring>PostStartupScriptSymbolToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -2011,22 +2013,24 @@
                                 </property>
                                 <property name="font">
                                     <font>
-                                        <bold>0</bold>
                                     </font>
+                                </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
                                 </property>
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="1" column="3">
+                            <widget class="QToolButton" row="1" column="3">
                                 <property name="name">
-                                    <cstring>PostStartupScriptBrowsePushButton</cstring>
+                                    <cstring>PostStartupScriptBrowseToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -2045,19 +2049,22 @@
                                         <bold>0</bold>
                                     </font>
                                 </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
+                                </property>
                                 <property name="text">
                                     <string>...</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed after starting up the JACK audio server</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="2" column="2">
+                            <widget class="QToolButton" row="2" column="2">
                                 <property name="name">
-                                    <cstring>ShutdownScriptSymbolPushButton</cstring>
+                                    <cstring>ShutdownScriptSymbolToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -2073,22 +2080,24 @@
                                 </property>
                                 <property name="font">
                                     <font>
-                                        <bold>0</bold>
                                     </font>
+                                </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
                                 </property>
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="2" column="3">
+                            <widget class="QToolButton" row="2" column="3">
                                 <property name="name">
-                                    <cstring>ShutdownScriptBrowsePushButton</cstring>
+                                    <cstring>ShutdownScriptBrowseToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -2107,10 +2116,13 @@
                                         <bold>0</bold>
                                     </font>
                                 </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
+                                </property>
                                 <property name="text">
                                     <string>...</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
@@ -2160,9 +2172,9 @@
                                     <string>Whether to execute a custom shell script after shuting down the JACK audio server.</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="3" column="2">
+                            <widget class="QToolButton" row="3" column="2">
                                 <property name="name">
-                                    <cstring>PostShutdownScriptSymbolPushButton</cstring>
+                                    <cstring>PostShutdownScriptSymbolToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -2178,22 +2190,24 @@
                                 </property>
                                 <property name="font">
                                     <font>
-                                        <bold>0</bold>
                                     </font>
+                                </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
                                 </property>
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="3" column="3">
+                            <widget class="QToolButton" row="3" column="3">
                                 <property name="name">
-                                    <cstring>PostShutdownScriptBrowsePushButton</cstring>
+                                    <cstring>PostShutdownScriptBrowseToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -2212,10 +2226,13 @@
                                         <bold>0</bold>
                                     </font>
                                 </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
+                                </property>
                                 <property name="text">
                                     <string>...</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
@@ -2486,9 +2503,9 @@
                                     <string>Patchbay definition file to be activated as connection persistence profile</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="0" column="4">
+                            <widget class="QToolButton" row="0" column="4">
                                 <property name="name">
-                                    <cstring>ActivePatchbayPathPushButton</cstring>
+                                    <cstring>ActivePatchbayPathToolButton</cstring>
                                 </property>
                                 <property name="minimumSize">
                                     <size>
@@ -2507,10 +2524,13 @@
                                         <bold>0</bold>
                                     </font>
                                 </property>
+                                <property name="focusPolicy">
+                                    <enum>TabFocus</enum>
+                                </property>
                                 <property name="text">
                                     <string>...</string>
                                 </property>
-                                <property name="autoDefault">
+                                <property name="autoDefault" stdset="0">
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
@@ -3696,19 +3716,19 @@
         <slot>changeDriver(const QString&amp;)</slot>
     </connection>
     <connection>
-        <sender>InterfacePushButton</sender>
+        <sender>InterfaceToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>selectInterface()</slot>
     </connection>
     <connection>
-        <sender>InDevicePushButton</sender>
+        <sender>InDeviceToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>selectInDevice()</slot>
     </connection>
     <connection>
-        <sender>OutDevicePushButton</sender>
+        <sender>OutDeviceToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>selectOutDevice()</slot>
@@ -3720,55 +3740,55 @@
         <slot>changeAudio(int)</slot>
     </connection>
     <connection>
-        <sender>StartupScriptBrowsePushButton</sender>
+        <sender>StartupScriptBrowseToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browseStartupScript()</slot>
     </connection>
     <connection>
-        <sender>PostStartupScriptBrowsePushButton</sender>
+        <sender>PostStartupScriptBrowseToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browsePostStartupScript()</slot>
     </connection>
     <connection>
-        <sender>ShutdownScriptBrowsePushButton</sender>
+        <sender>ShutdownScriptBrowseToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browseShutdownScript()</slot>
     </connection>
     <connection>
-        <sender>PostShutdownScriptBrowsePushButton</sender>
+        <sender>PostShutdownScriptBrowseToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browsePostShutdownScript()</slot>
     </connection>
     <connection>
-        <sender>StartupScriptSymbolPushButton</sender>
+        <sender>StartupScriptSymbolToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>symbolStartupScript()</slot>
     </connection>
     <connection>
-        <sender>PostStartupScriptSymbolPushButton</sender>
+        <sender>PostStartupScriptSymbolToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>symbolPostStartupScript()</slot>
     </connection>
     <connection>
-        <sender>ShutdownScriptSymbolPushButton</sender>
+        <sender>ShutdownScriptSymbolToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>symbolShutdownScript()</slot>
     </connection>
     <connection>
-        <sender>PostShutdownScriptSymbolPushButton</sender>
+        <sender>PostShutdownScriptSymbolToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>symbolPostShutdownScript()</slot>
     </connection>
     <connection>
-        <sender>ActivePatchbayPathPushButton</sender>
+        <sender>ActivePatchbayPathToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlSetupForm</receiver>
         <slot>browseActivePatchbayPath()</slot>
@@ -4238,13 +4258,13 @@
     <tabstop>PortMaxComboBox</tabstop>
     <tabstop>TimeoutComboBox</tabstop>
     <tabstop>InterfaceComboBox</tabstop>
-    <tabstop>InterfacePushButton</tabstop>
+    <tabstop>InterfaceToolButton</tabstop>
     <tabstop>DitherComboBox</tabstop>
     <tabstop>AudioComboBox</tabstop>
     <tabstop>InDeviceComboBox</tabstop>
-    <tabstop>InDevicePushButton</tabstop>
+    <tabstop>InDeviceToolButton</tabstop>
     <tabstop>OutDeviceComboBox</tabstop>
-    <tabstop>OutDevicePushButton</tabstop>
+    <tabstop>OutDeviceToolButton</tabstop>
     <tabstop>InChannelsSpinBox</tabstop>
     <tabstop>OutChannelsSpinBox</tabstop>
     <tabstop>InLatencySpinBox</tabstop>
@@ -4253,26 +4273,26 @@
     <tabstop>StartDelaySpinBox</tabstop>
     <tabstop>StartupScriptCheckBox</tabstop>
     <tabstop>StartupScriptShellComboBox</tabstop>
-    <tabstop>StartupScriptSymbolPushButton</tabstop>
-    <tabstop>StartupScriptBrowsePushButton</tabstop>
+    <tabstop>StartupScriptSymbolToolButton</tabstop>
+    <tabstop>StartupScriptBrowseToolButton</tabstop>
     <tabstop>PostStartupScriptCheckBox</tabstop>
     <tabstop>PostStartupScriptShellComboBox</tabstop>
-    <tabstop>PostStartupScriptSymbolPushButton</tabstop>
-    <tabstop>PostStartupScriptBrowsePushButton</tabstop>
+    <tabstop>PostStartupScriptSymbolToolButton</tabstop>
+    <tabstop>PostStartupScriptBrowseToolButton</tabstop>
     <tabstop>ShutdownScriptCheckBox</tabstop>
     <tabstop>ShutdownScriptShellComboBox</tabstop>
-    <tabstop>ShutdownScriptSymbolPushButton</tabstop>
-    <tabstop>ShutdownScriptBrowsePushButton</tabstop>
+    <tabstop>ShutdownScriptSymbolToolButton</tabstop>
+    <tabstop>ShutdownScriptBrowseToolButton</tabstop>
     <tabstop>PostShutdownScriptCheckBox</tabstop>
     <tabstop>PostShutdownScriptShellComboBox</tabstop>
-    <tabstop>PostShutdownScriptSymbolPushButton</tabstop>
-    <tabstop>PostShutdownScriptBrowsePushButton</tabstop>
+    <tabstop>PostShutdownScriptSymbolToolButton</tabstop>
+    <tabstop>PostShutdownScriptBrowseToolButton</tabstop>
     <tabstop>StdoutCaptureCheckBox</tabstop>
     <tabstop>XrunRegexComboBox</tabstop>
     <tabstop>XrunIgnoreFirstCheckBox</tabstop>
     <tabstop>ActivePatchbayCheckBox</tabstop>
     <tabstop>ActivePatchbayPathComboBox</tabstop>
-    <tabstop>ActivePatchbayPathPushButton</tabstop>
+    <tabstop>ActivePatchbayPathToolButton</tabstop>
     <tabstop>AutoRefreshCheckBox</tabstop>
     <tabstop>TimeRefreshComboBox</tabstop>
     <tabstop>TransportTimeRadioButton</tabstop>
@@ -4305,7 +4325,6 @@
 </tabstops>
 <includes>
     <include location="global" impldecl="in declaration">qjackctlSetup.h</include>
-    <include location="local" impldecl="in implementation">qjackctlSetupForm.ui.h</include>
 </includes>
 <variables>
     <variable access="private">qjackctlSetup *m_pSetup;</variable>
@@ -4353,8 +4372,8 @@
     <function access="private" specifier="non virtual">computeLatency()</function>
     <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>
-    <function access="private" specifier="non virtual">deviceMenu( QLineEdit * pLineEdit, QPushButton * pPushButton, int iAudio )</function>
-    <function access="private" specifier="non virtual">symbolMenu( QLineEdit * pLineEdit, QPushButton * pPushButton )</function>
+    <function access="private" specifier="non virtual">deviceMenu( QLineEdit * pLineEdit, QToolButton * pToolButton, int iAudio )</function>
+    <function access="private" specifier="non virtual">symbolMenu( QLineEdit * pLineEdit, QToolButton * pToolButton )</function>
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>
