@@ -448,7 +448,6 @@
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>
 <includehints>
-    <includehint>qjackctlconnectview.h</includehint>
-    <includehint>qjackctlconnectview.h</includehint>
+    <includehint>qjackctlConnectView.h</includehint>
 </includehints>
 </UI>
