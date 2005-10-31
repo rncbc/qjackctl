@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>qjackctlSetupForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
@@ -1319,6 +1319,7 @@
                                         </property>
                                         <property name="font">
                                             <font>
+                                                <bold>0</bold>
                                             </font>
                                         </property>
                                         <property name="focusPolicy">
@@ -1472,6 +1473,7 @@
                                         </property>
                                         <property name="font">
                                             <font>
+                                                <bold>0</bold>
                                             </font>
                                         </property>
                                         <property name="focusPolicy">
@@ -1502,6 +1504,7 @@
                                         </property>
                                         <property name="font">
                                             <font>
+                                                <bold>0</bold>
                                             </font>
                                         </property>
                                         <property name="focusPolicy">
@@ -1922,6 +1925,7 @@
                                 </property>
                                 <property name="font">
                                     <font>
+                                        <bold>0</bold>
                                     </font>
                                 </property>
                                 <property name="focusPolicy">
@@ -2013,6 +2017,7 @@
                                 </property>
                                 <property name="font">
                                     <font>
+                                        <bold>0</bold>
                                     </font>
                                 </property>
                                 <property name="focusPolicy">
@@ -2080,6 +2085,7 @@
                                 </property>
                                 <property name="font">
                                     <font>
+                                        <bold>0</bold>
                                     </font>
                                 </property>
                                 <property name="focusPolicy">
@@ -2190,6 +2196,7 @@
                                 </property>
                                 <property name="font">
                                     <font>
+                                        <bold>0</bold>
                                     </font>
                                 </property>
                                 <property name="focusPolicy">
