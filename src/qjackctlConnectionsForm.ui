@@ -447,7 +447,4 @@
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>
-<includehints>
-    <includehint>qjackctlConnectView.h</includehint>
-</includehints>
 </UI>

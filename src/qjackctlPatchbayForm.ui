@@ -946,7 +946,4 @@
 </functions>
 <pixmapinproject/>
 <layoutdefaults spacing="4" margin="4"/>
-<includehints>
-    <includehint>qjackctlPatchbayView.h</includehint>
-</includehints>
 </UI>
