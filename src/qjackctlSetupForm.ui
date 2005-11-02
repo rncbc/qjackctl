@@ -1934,9 +1934,6 @@
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
@@ -1967,9 +1964,6 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
-                                </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed before starting up the JACK audio server</string>
@@ -2026,9 +2020,6 @@
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
@@ -2059,9 +2050,6 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
-                                </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed after starting up the JACK audio server</string>
@@ -2094,9 +2082,6 @@
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
@@ -2127,9 +2112,6 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
-                                </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed before shutting down the JACK audio server</string>
@@ -2205,9 +2187,6 @@
                                 <property name="text">
                                     <string>&gt;</string>
                                 </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
-                                </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Scripting argument meta-symbols</string>
                                 </property>
@@ -2238,9 +2217,6 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
-                                </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for script to be executed after shutting down the JACK audio server</string>
@@ -2536,9 +2512,6 @@
                                 </property>
                                 <property name="text">
                                     <string>...</string>
-                                </property>
-                                <property name="autoDefault" stdset="0">
-                                    <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Browse for a patchbay definition file to be activated</string>
