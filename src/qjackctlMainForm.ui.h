@@ -1596,8 +1596,11 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     QString sClientName = "qjackctl-" + QString::number((int) ::getpid());
     m_pJackClient = jack_client_new(sClientName.latin1());
     if (m_pJackClient == NULL) {
-        if (!bDetach)
-            appendMessagesError(tr("Could not connect to JACK server as client."));
+        if (!bDetach) {
+            appendMessagesError(
+				tr("Could not connect to JACK server as client.\n\n"
+				"Please check the messages window for more info."));
+		}
         return false;
     }
 

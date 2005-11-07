@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Disabled system tray and ALSA sequencer support on configure time,
+  whenever building for MacOSX as default.
+
 - Fixed the major issues with selecting an audio interface on Mac OSX;
   the button the right of the interface combo is now much better
   looking than it was before; input/output channel counts are also

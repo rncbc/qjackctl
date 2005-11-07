@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.2.18.21, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.2.18.22, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui.h)
 AC_CONFIG_HEADERS(config.h)
@@ -30,10 +30,6 @@ AC_ARG_ENABLE(system_tray,
   AC_HELP_STRING([--disable-system-tray], [disable system tray (default=no)]),
   [ac_system_tray="no"],
   [ac_system_tray="yes"])
-
-if test "x$ac_system_tray" = "xyes"; then
-   AC_DEFINE(CONFIG_SYSTEM_TRAY, 1, [Define if system tray is enabled.])
-fi
 
 # Disable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
@@ -169,6 +165,20 @@ if test "x$ac_jack_statistics_h" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_STATISTICS, 1, [Define if jack/statistics.h is available.])
 fi
 
+# Check for CoreAudio/CoreAudio.h header (MacOSX).
+AC_CHECK_HEADER(CoreAudio/CoreAudio.h, [ac_coreaudio="yes"], [ac_coreaudio="no"])
+if test "x$ac_coreaudio" = "xyes"; then
+   AC_DEFINE(CONFIG_COREAUDIO, 1, [Define if CoreAudio/CoreAudio.h is available (Mac OS X).])
+   ac_system_tray="no"
+   ac_alsa_seq="no"
+   ac_libs="-framework CoreAudio -framework CoreFoundation $ac_libs"
+fi
+
+# Late checks, mostly after coreaudio/MacOSX is detected...
+if test "x$ac_system_tray" = "xyes"; then
+   AC_DEFINE(CONFIG_SYSTEM_TRAY, 1, [Define if system tray is enabled.])
+fi
+
 # Check for ALSA headers and ultimately
 # for ALSA/MIDI sequencer support.
 if test "x$ac_alsa_seq" = "xyes"; then
@@ -180,14 +190,6 @@ if test "x$ac_alsa_seq" = "xyes"; then
 else
    AC_MSG_WARN([*** ALSA/MIDI sequencer support will be disabled.])
 fi
-
-# Check for CoreAudio/CoreAudio.h header (MacOSX).
-AC_CHECK_HEADER(CoreAudio/CoreAudio.h, [ac_coreaudio="yes"], [ac_coreaudio="no"])
-if test "x$ac_coreaudio" = "xyes"; then
-   AC_DEFINE(CONFIG_COREAUDIO, 1, [Define if CoreAudio/CoreAudio.h is available (Mac OS X).])
-   ac_libs="-framework CoreAudio -framework CoreFoundation $ac_libs" 
-fi
-
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_C_CONST
