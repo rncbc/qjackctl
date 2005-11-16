@@ -41,6 +41,9 @@ void qjackctlConnectionsForm::init (void)
 	QObject::connect(JackConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
 	QObject::connect(AlsaConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
 	QObject::connect(AlsaConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
+    // Dirty dispatcher (refresh deferral).
+    QObject::connect(JackConnectView, SIGNAL(contentsChanged()), this, SLOT(jackRefresh()));
+    QObject::connect(AlsaConnectView, SIGNAL(contentsChanged()), this, SLOT(alsaRefresh()));
 
 #ifndef CONFIG_ALSA_SEQ
 	ConnectionsTabWidget->setTabEnabled(AlsaConnectTab, false);
@@ -284,7 +287,7 @@ void qjackctlConnectionsForm::jackDisconnectAll()
 void qjackctlConnectionsForm::jackRefresh ( void )
 {
 	refreshJack(false);
-	refreshAlsa(false);
+//	refreshAlsa(false);
 }
 
 
@@ -341,7 +344,7 @@ void qjackctlConnectionsForm::alsaDisconnectAll()
 void qjackctlConnectionsForm::alsaRefresh ( void )
 {
 	refreshAlsa(false);
-	refreshJack(false);
+//	refreshJack(false);
 }
 
 

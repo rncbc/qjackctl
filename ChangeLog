@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Connections widget views are now properly refreshed after renaming
+  client/ports (aliases).
+
 - Disabled system tray and ALSA sequencer support on configure time,
   whenever building for MacOSX as default.
 
