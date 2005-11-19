@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.2.19   2005-11-19  MRU patchbay selection, Mac OS X and other fixes.
 
 - Connections widget views are now properly refreshed after renaming
   client/ports (aliases).
@@ -19,7 +19,7 @@ CVS HEAD
 - Prevent the setting of the coreaudio device id on the jackd command
   line (-n) whenever the default interface is being selected.
 
-- The connections and patchbay windows are now allowed to have wider
+- The connections and patchbay windows are now allowed to have a wider
   connection lines frame panel; splitter width sizes are now persistent
   across application sessions (thanks to Filipe Tomás for the hint).
 
