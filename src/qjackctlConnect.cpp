@@ -96,6 +96,13 @@ qjackctlPortItem::~qjackctlPortItem (void)
 
 
 // Instance accessors.
+void qjackctlPortItem::setPortName ( const QString& sPortName )
+{
+    QListViewItem::setText(0, sPortName);
+
+    m_sPortName = sPortName;
+}
+
 const QString& qjackctlPortItem::clientName (void)
 {
     return m_pClient->clientName();
@@ -104,13 +111,6 @@ const QString& qjackctlPortItem::clientName (void)
 const QString& qjackctlPortItem::portName (void)
 {
     return m_sPortName;
-}
-
-void qjackctlPortItem::setPortName ( const QString& sPortName )
-{
-    QListViewItem::setText(0, sPortName);
-
-    m_sPortName = sPortName;
 }
 
 
@@ -297,16 +297,16 @@ QPtrList<qjackctlPortItem>& qjackctlClientItem::ports (void)
 
 
 // Instance accessors.
-const QString& qjackctlClientItem::clientName (void)
-{
-    return m_sClientName;
-}
-
 void qjackctlClientItem::setClientName ( const QString& sClientName )
 {
     QListViewItem::setText(0, sClientName);
 
     m_sClientName = sClientName;
+}
+
+const QString& qjackctlClientItem::clientName (void)
+{
+    return m_sClientName;
 }
 
 

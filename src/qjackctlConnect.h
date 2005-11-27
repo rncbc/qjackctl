@@ -81,9 +81,9 @@ public:
     ~qjackctlPortItem();
 
     // Instance accessors.
+    void setPortName(const QString& sPortName);
     const QString& clientName();
     const QString& portName();
-    void setPortName(const QString& sPortName);
 
     // Complete client:port name helper.
     QString clientPortName();

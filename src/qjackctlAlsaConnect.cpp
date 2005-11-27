@@ -27,7 +27,7 @@
 
 // Constructor.
 qjackctlAlsaPort::qjackctlAlsaPort ( qjackctlAlsaClient *pClient, const QString& sPortName, int iAlsaPort )
-    : qjackctlPortItem(pClient, QString::number(iAlsaPort) + ":" + sPortName)
+	: qjackctlPortItem(pClient, /* QString::number(iAlsaPort) + ":" + */ sPortName)
 {
     m_iAlsaPort = iAlsaPort;
 
@@ -62,10 +62,10 @@ int qjackctlAlsaPort::alsaPort (void)
 
 // Constructor.
 qjackctlAlsaClient::qjackctlAlsaClient ( qjackctlAlsaClientList *pClientList, const QString& sClientName, int iAlsaClient )
-    : qjackctlClientItem(pClientList, QString::number(iAlsaClient) + ":" + sClientName)
+	: qjackctlClientItem(pClientList, /* QString::number(iAlsaClient) + ":" + */ sClientName)
 {
     m_iAlsaClient = iAlsaClient;
-    
+
     if (pClientList->isReadable()) {
         QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MCLIENTO));
     } else {
@@ -95,7 +95,7 @@ qjackctlAlsaPort *qjackctlAlsaClient::findPort ( int iAlsaPort )
         if (iAlsaPort == pPort->alsaPort())
             return pPort;
     }
-    
+
     return 0;
 }
 
@@ -133,7 +133,7 @@ qjackctlAlsaClient *qjackctlAlsaClientList::findClient ( int iAlsaClient )
         if (iAlsaClient == pClient->alsaClient())
             return pClient;
     }
-    
+
     return 0;
 }
 
@@ -158,7 +158,7 @@ int qjackctlAlsaClientList::updateClientPorts (void)
     int iDirtyCount = 0;
 
     markClientPorts(0);
-    
+
 #ifdef CONFIG_ALSA_SEQ
 
     unsigned int uiAlsaFlags;
@@ -185,9 +185,10 @@ int qjackctlAlsaClientList::updateClientPorts (void)
                 unsigned int uiPortCapability = snd_seq_port_info_get_capability(pPortInfo);
                 if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
                     ((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
+					QString sClientName = QString::number(iAlsaClient) + ":";
+					sClientName += snd_seq_client_info_get_name(pClientInfo);
                     qjackctlAlsaPort *pPort = 0;
                     int iAlsaPort = snd_seq_port_info_get_port(pPortInfo);
-                    QString sClientName = snd_seq_client_info_get_name(pClientInfo);
                     if (pClient == 0) {
                         pClient = new qjackctlAlsaClient(this, sClientName, iAlsaClient);
                         iDirtyCount++;
@@ -199,7 +200,8 @@ int qjackctlAlsaClientList::updateClientPorts (void)
                         }
                     }
                     if (pClient) {
-                        QString sPortName = snd_seq_port_info_get_name(pPortInfo);
+						QString sPortName = QString::number(iAlsaPort) + ":";
+						sPortName += snd_seq_port_info_get_name(pPortInfo);
                         if (pPort == 0) {
                             pPort = new qjackctlAlsaPort(pClient, sPortName, iAlsaPort);
                             iDirtyCount++;
@@ -214,7 +216,7 @@ int qjackctlAlsaClientList::updateClientPorts (void)
             }
         }
     }
-    
+
 #endif	// CONFIG_ALSA_SEQ
 
     cleanClientPorts(0);
@@ -232,7 +234,7 @@ qjackctlAlsaConnect::qjackctlAlsaConnect ( qjackctlConnectView *pConnectView, sn
     : qjackctlConnect(pConnectView)
 {
     createIconPixmaps();
-    
+
     setOClientList(new qjackctlAlsaClientList(connectView()->OListView(), pAlsaSeq, true));
     setIClientList(new qjackctlAlsaClientList(connectView()->IListView(), pAlsaSeq, false));
 
@@ -346,7 +348,7 @@ void qjackctlAlsaConnect::updateConnections (void)
     // Proper type casts.
     qjackctlAlsaClientList *pOClientList = (qjackctlAlsaClientList *) OClientList();
     qjackctlAlsaClientList *pIClientList = (qjackctlAlsaClientList *) IClientList();
-    
+
     // For each output client item...
     for (qjackctlClientItem *pOClient = pOClientList->clients().first();
             pOClient;
@@ -394,4 +396,3 @@ void qjackctlAlsaConnect::updateIconPixmaps (void)
 QPixmap *qjackctlAlsaConnect::g_apPixmaps[QJACKCTL_XPM_MPIXMAPS];
 
 // end of qjackctlAlsaConnect.cpp
-

@@ -3,6 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+0.2.19a  2005-11-28  MIDI aliases are back in town.
+
+- ALSA sequencer client/port name aliases are functional again; all
+  actual MIDI sequencer client/port numerical identifier prefixes are
+  also back in business.
+
+
 0.2.19   2005-11-19  MRU patchbay selection, Mac OS X and other fixes.
 
 - Connections widget views are now properly refreshed after renaming
@@ -21,7 +28,7 @@ ChangeLog
 
 - The connections and patchbay windows are now allowed to have a wider
   connection lines frame panel; splitter width sizes are now persistent
-  across application sessions (thanks to Filipe Tomás for the hint).
+  across application sessions (thanks to Filipe Tomas for the hint).
 
 - Activation toggling feedback on the patchbay widget has been fixed;
   additionally and as found convenient, the most recently used patchbay

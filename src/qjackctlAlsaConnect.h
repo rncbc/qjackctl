@@ -81,7 +81,7 @@ public:
 
     // Port finder by id.
     qjackctlAlsaPort *findPort(int iAlsaPort);
-    
+
 private:
 
     // Instance variables.
@@ -146,7 +146,7 @@ protected:
 
     // Update icon size implementation.
     void updateIconPixmaps();
-    
+
 private:
 
     // Local pixmap-set janitor methods.
