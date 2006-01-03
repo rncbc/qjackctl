@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Optional specification of alternate JACK and/or ALSA installation
+  paths on configure time (after a patch from Lucas Brasilino, thanks).
+
+  
 0.2.19a  2005-11-28  MIDI aliases are back in town.
 
 - ALSA sequencer client/port name aliases are functional again; all
