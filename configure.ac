@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.2.19.1, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.2.19.2, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui.h)
 AC_CONFIG_HEADERS(config.h)
@@ -155,7 +155,7 @@ AC_CHECK_LIB(jack, main, [ac_jack_lib="yes"], [ac_jack_lib="no"])
 if test "x$ac_jack_lib" = "xno"; then
    AC_MSG_ERROR([JACK library not found.])
 fi
-ac_libs="-ljack"
+ac_libs="$ac_libs -ljack"
 
 # Check for ALSA libraries and primarily
 # for ALSA/MIDI sequencer support.
@@ -165,7 +165,7 @@ if test "x$ac_alsa_seq" = "xyes"; then
       AC_MSG_WARN([*** ALSA library not found.])
       ac_alsa_seq="no"
    else
-      ac_libs="-lasound $ac_libs"
+      ac_libs="$ac_libs -lasound"
    fi
 fi
 
