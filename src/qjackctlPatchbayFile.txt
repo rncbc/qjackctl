@@ -15,7 +15,7 @@ qjackctlPatchbayFile format specification
       .
     </output-sockets>
     <input-sockets>
-      <socket name="socket-name" client="client-name" type="socket-type" >
+      <socket name="socket-name" client="client-name" type="socket-type" exclusive="exclusive-flag" forward="socket-name" >
         <plug>plug-name</plug>
         .
         .

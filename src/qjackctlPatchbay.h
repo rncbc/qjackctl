@@ -1,7 +1,7 @@
 // qjackctlPatchbay.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -114,7 +114,10 @@ class qjackctlSocketItem : public QListViewItem
 public:
 
     // Constructor.
-    qjackctlSocketItem(qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, int iSocketType, bool bExclusive, qjackctlSocketItem *pSocketAfter);
+    qjackctlSocketItem(qjackctlSocketList *pSocketList,
+		const QString& sSocketName, const QString& sClientName,
+		int iSocketType,qjackctlSocketItem *pSocketAfter);
+
     // Default destructor.
     ~qjackctlSocketItem();
 
@@ -123,22 +126,24 @@ public:
     const QString& clientName();
     int socketType();
     bool isExclusive();
+    const QString& forward();
 
     void setSocketName (const QString& sSocketName);
     void setClientName (const QString& sClientName);
     void setSocketType (int iSocketType);
     void setExclusive  (bool bExclusive);
+    void setForward    (const QString& sSocketForward);
 
     // Socket flags accessor.
     bool isReadable();
-    
+
     // Connected plug list primitives.
     void addConnect(qjackctlSocketItem *pSocket);
     void removeConnect(qjackctlSocketItem *pSocket);
 
     // Connected plug  finders.
     qjackctlSocketItem *findConnectPtr(qjackctlSocketItem *pSocketPtr);
-    
+
     // Connection list accessor.
     QPtrList<qjackctlSocketItem>& connects();
 
@@ -160,7 +165,7 @@ public:
 
     // Retrieve a context pixmap.
     QPixmap& pixmap(int iPixmap);
-    
+
     // Update pixmap to its proper context.
     void updatePixmap();
 
@@ -172,6 +177,7 @@ private:
     QString m_sClientName;
     int m_iSocketType;
     bool m_bExclusive;
+    QString m_sSocketForward;
 
     // Plug (port) list.
     QPtrList<qjackctlPlugItem> m_plugs;

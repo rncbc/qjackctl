@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -140,7 +140,9 @@ int qjackctlPlugItem::rtti (void) const
 //
 
 // Constructor.
-qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList, const QString& sSocketName, const QString& sClientName, int iSocketType, bool bExclusive, qjackctlSocketItem *pSocketAfter )
+qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList,
+	const QString& sSocketName, const QString& sClientName,
+	int iSocketType, qjackctlSocketItem *pSocketAfter )
     : QListViewItem(pSocketList->listView(), pSocketAfter)
 {
     QListViewItem::setText(0, sSocketName);
@@ -149,7 +151,8 @@ qjackctlSocketItem::qjackctlSocketItem ( qjackctlSocketList *pSocketList, const 
     m_sSocketName = sSocketName;
     m_sClientName = sClientName;
     m_iSocketType = iSocketType;
-    m_bExclusive  = bExclusive;
+    m_bExclusive  = false;
+	m_sSocketForward = QString::null;
 
     m_plugs.setAutoDelete(false);
     m_connects.setAutoDelete(false);
@@ -196,6 +199,12 @@ bool qjackctlSocketItem::isExclusive (void)
     return m_bExclusive;
 }
 
+const QString& qjackctlSocketItem::forward (void)
+{
+    return m_sSocketForward;
+}
+
+
 void qjackctlSocketItem::setSocketName ( const QString& sSocketName )
 {
     m_sSocketName = sSocketName;
@@ -214,6 +223,11 @@ void qjackctlSocketItem::setSocketType ( int iSocketType )
 void qjackctlSocketItem::setExclusive ( bool bExclusive )
 {
     m_bExclusive = bExclusive;
+}
+
+void qjackctlSocketItem::setForward ( const QString& sSocketForward )
+{
+    m_sSocketForward = sSocketForward;
 }
 
 
@@ -490,7 +504,7 @@ void qjackctlSocketList::clientPortsSnapshot (void)
                     if (pSocket == 0) {
                         pSocket = new qjackctlSocketItem(this, sClientName,
 							qjackctlClientAlias::escapeRegExpDigits(sClientName),
-							QJACKCTL_SOCKETTYPE_AUDIO, false,
+							QJACKCTL_SOCKETTYPE_AUDIO,
 							(qjackctlSocketItem *) m_pListView->lastItem());
 					}
                     if (pSocket && pPlug == 0) {
@@ -541,7 +555,7 @@ void qjackctlSocketList::clientPortsSnapshot (void)
                         if (pSocket == 0) {
                             pSocket = new qjackctlSocketItem(this, sClientName,
 								qjackctlClientAlias::escapeRegExpDigits(sClientName),
-								QJACKCTL_SOCKETTYPE_MIDI, false,
+								QJACKCTL_SOCKETTYPE_MIDI,
 								(qjackctlSocketItem *) m_pListView->lastItem());
 						}
                         if (pSocket && pPlug == 0) {
@@ -590,7 +604,7 @@ bool qjackctlSocketList::addSocketItem (void)
 		pSocketForm->setCaption("<" + tr("New") + "> - " + m_sSocketCaption);
         pSocketForm->setSocketCaption(m_sSocketCaption);
         pSocketForm->setPixmaps(m_apPixmaps);
-        pSocketForm->setReadable(m_bReadable);
+		pSocketForm->setSocketList(this);
         pSocketForm->setJackClient(m_pJackClient);
         pSocketForm->setAlsaSeq(m_pAlsaSeq);
         qjackctlPatchbaySocket socket(m_sSocketCaption + " " + QString::number(m_sockets.count() + 1), QString::null, QJACKCTL_SOCKETTYPE_AUDIO);
@@ -601,8 +615,10 @@ bool qjackctlSocketList::addSocketItem (void)
         //  m_pListView->setUpdatesEnabled(false);
             if (pSocketItem)
                 pSocketItem->setSelected(false);
-            pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), socket.isExclusive(), pSocketItem);
+            pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), pSocketItem);
             if (pSocketItem) {
+				pSocketItem->setExclusive(socket.isExclusive());
+				pSocketItem->setForward(socket.forward());
                 qjackctlPlugItem *pPlugItem = NULL;
                 for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
                     pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
@@ -657,13 +673,13 @@ bool qjackctlSocketList::editSocketItem (void)
 				+ " - " + m_sSocketCaption);
             pSocketForm->setSocketCaption(m_sSocketCaption);
             pSocketForm->setPixmaps(m_apPixmaps);
-            pSocketForm->setReadable(m_bReadable);
+			pSocketForm->setSocketList(this);
             pSocketForm->setJackClient(m_pJackClient);
             pSocketForm->setAlsaSeq(m_pAlsaSeq);
             pSocketForm->setConnectCount(pSocketItem->connects().count());
             qjackctlPatchbaySocket socket(pSocketItem->socketName(), pSocketItem->clientName(), pSocketItem->socketType());
-            if (pSocketItem->isExclusive())
-                socket.setExclusive(true);
+			socket.setExclusive(pSocketItem->isExclusive());
+			socket.setForward(pSocketItem->forward());
             for (qjackctlPlugItem *pPlugItem = pSocketItem->plugs().first(); pPlugItem; pPlugItem = pSocketItem->plugs().next())
                 socket.pluglist().append(pPlugItem->plugName());
             pSocketForm->load(&socket);
@@ -676,6 +692,7 @@ bool qjackctlSocketList::editSocketItem (void)
                 pSocketItem->setClientName(socket.clientName());
                 pSocketItem->setSocketType(socket.type());
                 pSocketItem->setExclusive(socket.isExclusive());
+                pSocketItem->setForward(socket.forward());
                 pSocketItem->updatePixmap();
                 qjackctlPlugItem *pPlugItem = NULL;
                 for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
@@ -716,7 +733,7 @@ bool qjackctlSocketList::copySocketItem (void)
 				+ " <" + tr("Copy") + "> - " + m_sSocketCaption);
             pSocketForm->setSocketCaption(m_sSocketCaption);
             pSocketForm->setPixmaps(m_apPixmaps);
-            pSocketForm->setReadable(m_bReadable);
+			pSocketForm->setSocketList(this);
             pSocketForm->setJackClient(m_pJackClient);
             pSocketForm->setAlsaSeq(m_pAlsaSeq);
 			qjackctlPatchbaySocket socket(sSocketName, pSocketItem->clientName(), pSocketItem->socketType());
@@ -727,8 +744,10 @@ bool qjackctlSocketList::copySocketItem (void)
 			pSocketForm->load(&socket);
 			if (pSocketForm->exec()) {	        
 				pSocketForm->save(&socket);
-				pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), socket.isExclusive(), pSocketItem);
+				pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), pSocketItem);
 				if (pSocketItem) {
+					pSocketItem->setExclusive(socket.isExclusive());
+					pSocketItem->setForward(socket.forward());
 					qjackctlPlugItem *pPlugItem = NULL;
 					for (QStringList::Iterator iter = socket.pluglist().begin(); iter != socket.pluglist().end(); iter++)
 						pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
@@ -1643,8 +1662,10 @@ void qjackctlPatchbay::loadRackSockets ( qjackctlSocketList *pSocketList, QPtrLi
     pSocketList->clear();
     qjackctlSocketItem *pSocketItem = NULL;
     for (qjackctlPatchbaySocket *pSocket = socketlist.first(); pSocket; pSocket = socketlist.next()) {
-        pSocketItem = new qjackctlSocketItem(pSocketList, pSocket->name(), pSocket->clientName(), pSocket->type(), pSocket->isExclusive(), pSocketItem);
+        pSocketItem = new qjackctlSocketItem(pSocketList, pSocket->name(), pSocket->clientName(), pSocket->type(), pSocketItem);
         if (pSocketItem) {
+			pSocketItem->setExclusive(pSocket->isExclusive());
+			pSocketItem->setForward(pSocket->forward());
             qjackctlPlugItem *pPlugItem = NULL;
             for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++)
                 pPlugItem = new qjackctlPlugItem(pSocketItem, *iter, pPlugItem);
@@ -1699,8 +1720,8 @@ void qjackctlPatchbay::saveRackSockets ( qjackctlSocketList *pSocketList, QPtrLi
     for (qjackctlSocketItem *pSocketItem = (qjackctlSocketItem *) pListView->firstChild(); pSocketItem; pSocketItem = (qjackctlSocketItem *) pSocketItem->nextSibling()) {
         qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(pSocketItem->socketName(), pSocketItem->clientName(), pSocketItem->socketType());
         if (pSocket) {
-            if (pSocketItem->isExclusive())
-                pSocket->setExclusive(true);
+			pSocket->setExclusive(pSocketItem->isExclusive());
+			pSocket->setForward(pSocketItem->forward());
             for (qjackctlPlugItem *pPlugItem = pSocketItem->plugs().first(); pPlugItem; pPlugItem = pSocketItem->plugs().next())
                 pSocket->pluglist().append(pPlugItem->plugName());
             socketlist.append(pSocket);
@@ -1731,8 +1752,8 @@ void qjackctlPatchbay::saveRack ( qjackctlPatchbayRack *pPatchbayRack )
             qjackctlPatchbaySocket *pISocket = pPatchbayRack->findSocket(pPatchbayRack->isocketlist(), pISocketItem->socketName());
             if (pOSocket && pISocket)
                 pPatchbayRack->addCable(new qjackctlPatchbayCable(pOSocket, pISocket));             
-        }        
-    }            
+        }
+    }
 
     // Reset dirty flag.
     m_pPatchbayView->setDirty(false);

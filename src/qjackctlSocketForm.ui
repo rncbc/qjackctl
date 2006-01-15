@@ -2,7 +2,7 @@
 <class>qjackctlSocketForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -337,6 +337,31 @@
                             <string>Enforce only one exclusive cable connection</string>
                         </property>
                     </widget>
+					<widget class="QLabel" row="10" column="0">
+						<property name="name">
+							<cstring>SocketForwardTextLabel</cstring>
+						</property>
+						<property name="text">
+							<string>&amp;Forward:</string>
+						</property>
+						<property name="alignment">
+							<set>AlignVCenter|AlignRight</set>
+						</property>
+						<property name="buddy" stdset="0">
+							<cstring>SocketForwardComboBox</cstring>
+						</property>
+					</widget>
+					<widget class="QComboBox" row="10" column="1" colspan="2">
+						<property name="name">
+							<cstring>SocketForwardComboBox</cstring>
+						</property>
+						<property name="editable">
+							<bool>false</bool>
+						</property>
+						<property name="toolTip" stdset="0">
+							<string>Forward (clone) all connections from this socket</string>
+						</property>
+					</widget>
                     <widget class="QButtonGroup" row="1" column="1" rowspan="1" colspan="2">
                         <property name="name">
                             <cstring>SocketTypeGroup</cstring>
@@ -474,6 +499,12 @@
         <receiver>qjackctlSocketForm</receiver>
         <slot>stabilizeForm()</slot>
     </connection>
+	<connection>
+		<sender>SocketForwardComboBox</sender>
+		<signal>activated(int)</signal>
+		<receiver>qjackctlSocketForm</receiver>
+		<slot>stabilizeForm()</slot>
+	</connection>
 </connections>
 <tabstops>
     <tabstop>SocketTabWidget</tabstop>
@@ -489,6 +520,7 @@
     <tabstop>PlugUpPushButton</tabstop>
     <tabstop>PlugDownPushButton</tabstop>
     <tabstop>ExclusiveCheckBox</tabstop>
+	<tabstop>SocketForwardComboBox</tabstop>
     <tabstop>OkPushButton</tabstop>
     <tabstop>CancelPushButton</tabstop>
 </tabstops>
@@ -497,7 +529,7 @@
     <include location="local" impldecl="in implementation">qjackctlSocketForm.ui.h</include>
 </includes>
 <variables>
-    <variable access="private">bool m_bReadable;</variable>
+	<variable access="private">qjackctlSocketList *m_pSocketList;</variable>
     <variable access="private">jack_client_t *m_pJackClient;</variable>
     <variable access="private">snd_seq_t *m_pAlsaSeq;</variable>
     <variable access="private">QPixmap **m_ppPixmaps;</variable>
@@ -521,7 +553,7 @@
     <function access="private" specifier="non virtual">init()</function>
     <function access="private" specifier="non virtual">destroy()</function>
     <function specifier="non virtual">setSocketCaption( const QString &amp; sSocketCaption )</function>
-    <function specifier="non virtual">setReadable( bool bReadable )</function>
+	<function specifier="non virtual">setSocketList( qjackctlSocketList *pSocketList )</function>
     <function specifier="non virtual">setPixmaps( QPixmap **ppPixmaps )</function>
     <function specifier="non virtual">setJackClient( jack_client_t *pJackClient )</function>
     <function specifier="non virtual">setAlsaSeq( snd_seq_t *pAlsaSeq )</function>

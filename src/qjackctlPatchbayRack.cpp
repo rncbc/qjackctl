@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@ qjackctlPatchbaySocket::qjackctlPatchbaySocket ( const QString& sSocketName, con
     m_sClientName = sClientName;
     m_iSocketType = iSocketType;
     m_bExclusive  = false;
+	m_sSocketForward = QString::null;
 }
 
 // Default destructor.
@@ -67,6 +68,11 @@ bool qjackctlPatchbaySocket::isExclusive (void)
     return m_bExclusive;
 }
 
+const QString& qjackctlPatchbaySocket::forward (void)
+{
+    return m_sSocketForward;
+}
+
 
 // Slot property methods.
 void qjackctlPatchbaySocket::setName ( const QString& sSocketName )
@@ -87,6 +93,11 @@ void qjackctlPatchbaySocket::setType ( int iSocketType )
 void qjackctlPatchbaySocket::setExclusive ( bool bExclusive )
 {
     m_bExclusive = bExclusive;
+}
+
+void qjackctlPatchbaySocket::setForward ( const QString& sSocketForward )
+{
+    m_sSocketForward = sSocketForward;
 }
 
 
@@ -239,7 +250,7 @@ qjackctlPatchbayRack::qjackctlPatchbayRack (void)
     m_pJackClient = NULL;
     m_ppszOAudioPorts = NULL;
     m_ppszIAudioPorts = NULL;
-    
+
     // MIDI connection persistence cache variables.
     m_omidiports.setAutoDelete(true);
     m_imidiports.setAutoDelete(true);
@@ -537,6 +548,9 @@ void qjackctlPatchbayRack::connectAudioScan ( jack_client_t *pJackClient )
             connectAudioCable(pCable->outputSocket(), pCable->inputSocket());
     }
 
+	// Forward Audio sockets...
+	connectForwardScan(QJACKCTL_SOCKETTYPE_AUDIO);
+
     // Free client-ports caches...
     if (m_ppszOAudioPorts)
         ::free(m_ppszOAudioPorts);
@@ -592,6 +606,43 @@ void qjackctlPatchbayRack::loadMidiPorts ( QPtrList<qjackctlMidiPort>& midiports
             }
         }
     }
+
+#endif	// CONFIG_ALSA_SEQ
+}
+
+
+// Get current connections from given MIDI port.
+void qjackctlPatchbayRack::loadMidiConnections (
+	QPtrList<qjackctlMidiPort>& midiports,
+	qjackctlMidiPort *pMidiPort, bool bReadable )
+{
+	midiports.clear();
+
+#ifdef CONFIG_ALSA_SEQ
+
+    snd_seq_query_subs_type_t snd_subs_type;
+    if (bReadable)
+        snd_subs_type = SND_SEQ_QUERY_SUBS_READ;
+    else
+        snd_subs_type = SND_SEQ_QUERY_SUBS_WRITE;
+
+    snd_seq_query_subscribe_t *pAlsaSubs;
+    snd_seq_addr_t seq_addr;
+
+    snd_seq_query_subscribe_alloca(&pAlsaSubs);
+
+	snd_seq_query_subscribe_set_type(pAlsaSubs, snd_subs_type);
+	snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
+	seq_addr.client = pMidiPort->iAlsaClient;
+	seq_addr.port   = pMidiPort->iAlsaPort;
+	snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
+	while (snd_seq_query_port_subscribers(m_pAlsaSeq, pAlsaSubs) >= 0) {
+		seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
+		qjackctlMidiPort *pPort = new qjackctlMidiPort;
+		setMidiPort(pPort, seq_addr.client, seq_addr.port);
+		midiports.append(pPort);
+		snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
+	}
 
 #endif	// CONFIG_ALSA_SEQ
 }
@@ -810,6 +861,7 @@ void qjackctlPatchbayRack::connectMidiScan ( snd_seq_t *pAlsaSeq )
 
     // Cache sequencer descriptor.
     m_pAlsaSeq = pAlsaSeq;
+
     // Cache all current output client-ports...
     loadMidiPorts(m_omidiports, true);
     loadMidiPorts(m_imidiports, false);
@@ -818,10 +870,187 @@ void qjackctlPatchbayRack::connectMidiScan ( snd_seq_t *pAlsaSeq )
     for (qjackctlPatchbayCable *pCable = m_cablelist.first(); pCable; pCable = m_cablelist.next())
         connectMidiCable(pCable->outputSocket(), pCable->inputSocket());
 
+	// Forward MIDI sockets...
+	connectForwardScan(QJACKCTL_SOCKETTYPE_MIDI);
+
     // Free client-ports caches...
     m_omidiports.clear();
     m_imidiports.clear();
     m_pAlsaSeq = NULL;
+}
+
+
+// Audio socket/ports forwarding scan...
+void qjackctlPatchbayRack::connectAudioForwardPorts (
+	const char *pszPort, const char *pszPortForward )
+{
+	// Check for outputs from forwarded input...
+	const char **ppszOutputPorts = jack_port_get_all_connections(
+		m_pJackClient, jack_port_by_name(m_pJackClient, pszPortForward));
+	if (ppszOutputPorts) {
+		// Grab current connections of target port...
+		const char **ppszPorts = jack_port_get_all_connections(
+			m_pJackClient, jack_port_by_name(m_pJackClient, pszPort));
+		for (int i = 0 ; ppszOutputPorts[i]; i++) {
+			// Need to lookup if already connected...
+			bool bConnected = false;
+			for (int j = 0; ppszPorts && ppszPorts[j]; j++) {
+				if (strcmp(ppszOutputPorts[i], ppszPorts[j]) == 0) {
+					bConnected = true;
+					break;
+				}
+			}
+			// Make or just report the connection...
+			if (bConnected) {
+				checkAudioPorts(ppszOutputPorts[i], pszPort);
+			} else {
+				connectAudioPorts(ppszOutputPorts[i], pszPort);
+			}
+		}
+		// Free provided arrays...
+		if (ppszPorts)
+			::free(ppszPorts);
+		::free(ppszOutputPorts);
+	}
+}
+
+void qjackctlPatchbayRack::connectAudioForward (
+	qjackctlPatchbaySocket *pSocket, qjackctlPatchbaySocket *pSocketForward )
+{
+	if (pSocket == NULL || pSocketForward == NULL)
+		return;
+	if (pSocket->type() != pSocketForward->type()
+		|| pSocket->type() != QJACKCTL_SOCKETTYPE_AUDIO)
+		return;
+
+	QStringList::Iterator iterPlug = pSocket->pluglist().begin();
+	QStringList::Iterator iterPlugForward = pSocketForward->pluglist().begin();
+	while (iterPlug != pSocket->pluglist().end()
+		&& iterPlugForward != pSocketForward->pluglist().end()) {
+		// Check audio port connection sequentially...
+		const char *pszPortForward = findAudioPort(m_ppszIAudioPorts,
+			pSocketForward->clientName(), *iterPlugForward, 0);
+		if (pszPortForward) {
+			const char *pszPort = findAudioPort(m_ppszIAudioPorts,
+				pSocket->clientName(), *iterPlug, 0);
+			if (pszPort)
+				connectAudioForwardPorts(pszPort, pszPortForward);
+		}
+		// Get on next plug pair...
+		iterPlugForward++;
+		iterPlug++;
+	}
+}
+
+
+// MIDI socket/ports forwarding scan...
+void qjackctlPatchbayRack::connectMidiForwardPorts (
+	qjackctlMidiPort *pPort, qjackctlMidiPort *pPortForward )
+{
+#ifdef CONFIG_ALSA_SEQ
+
+	// Grab current connections of target port...
+	QPtrList<qjackctlMidiPort> midiports;
+	midiports.setAutoDelete(true);
+	loadMidiConnections(midiports, pPort, false);
+
+	snd_seq_query_subscribe_t *pAlsaSubs;
+	snd_seq_addr_t seq_addr;
+	
+	snd_seq_query_subscribe_alloca(&pAlsaSubs);
+	
+	// Check for inputs from output...
+	snd_seq_query_subscribe_set_type(pAlsaSubs, SND_SEQ_QUERY_SUBS_WRITE);
+	snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
+	seq_addr.client = pPortForward->iAlsaClient;
+	seq_addr.port   = pPortForward->iAlsaPort;
+	snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
+	while (snd_seq_query_port_subscribers(m_pAlsaSeq, pAlsaSubs) >= 0) {
+		seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
+		// Need to lookup if already connected...
+		bool bConnected = false;
+		for (qjackctlMidiPort *pMidiPort = midiports.first();
+				pMidiPort; pMidiPort = midiports.next()) {
+			if (pMidiPort->iAlsaClient == seq_addr.client
+				&& pMidiPort->iAlsaPort == seq_addr.port) {
+				bConnected = true;
+				break;
+			}
+		}
+		// Make and/or just report the connection...
+		qjackctlMidiPort oport;
+		setMidiPort(&oport, seq_addr.client, seq_addr.port);
+		if (bConnected) {
+			checkMidiPorts(&oport, pPort);
+		} else {
+			connectMidiPorts(&oport, pPort);
+		}
+		snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
+	}
+
+#endif	// CONFIG_ALSA_SEQ
+}
+
+void qjackctlPatchbayRack::connectMidiForward (
+	qjackctlPatchbaySocket *pSocket, qjackctlPatchbaySocket *pSocketForward )
+{
+	if (pSocket == NULL || pSocketForward == NULL)
+		return;
+	if (pSocket->type() != pSocketForward->type()
+		|| pSocket->type() != QJACKCTL_SOCKETTYPE_MIDI)
+		return;
+
+	QStringList::Iterator iterPlug = pSocket->pluglist().begin();
+	QStringList::Iterator iterPlugForward = pSocketForward->pluglist().begin();
+	while (iterPlug != pSocket->pluglist().end()
+		&& iterPlugForward != pSocketForward->pluglist().end()) {
+		// Check MIDI port connection sequentially...
+		qjackctlMidiPort *pPortForward = findMidiPort(m_imidiports,
+			pSocketForward->clientName(), *iterPlugForward, 0);
+		if (pPortForward) {
+			qjackctlMidiPort *pPort = findMidiPort(m_imidiports,
+				pSocket->clientName(), *iterPlug, 0);
+			if (pPort)
+				connectMidiForwardPorts(pPort, pPortForward);
+		}
+		// Get on next plug pair...
+		iterPlugForward++;
+		iterPlug++;
+	}
+}
+
+
+// Common socket forwrading scan...
+void qjackctlPatchbayRack::connectForwardScan ( int iSocketType )
+{
+	// First, make a copy of a seriously forwarded socket list...
+	QPtrList<qjackctlPatchbaySocket> socketlist;
+	socketlist.setAutoDelete(false);
+	for (qjackctlPatchbaySocket *pSocket = m_isocketlist.first();
+			pSocket; pSocket = m_isocketlist.next()) {
+		if (pSocket->type() != iSocketType)
+			continue;
+		if (pSocket->forward().isEmpty())
+			continue;
+		socketlist.append(pSocket);
+	}
+
+	// Second, scan for input forwarded sockets...
+	for (qjackctlPatchbaySocket *pSocket = socketlist.first();
+			pSocket; pSocket = socketlist.next()) {
+		qjackctlPatchbaySocket *pSocketForward
+			= findSocket(m_isocketlist, pSocket->forward());
+		if (pSocketForward == NULL)
+			continue;
+		switch (iSocketType) {
+		case QJACKCTL_SOCKETTYPE_AUDIO:
+			connectAudioForward(pSocket, pSocketForward);
+			break;
+		case QJACKCTL_SOCKETTYPE_MIDI:
+			connectMidiForward(pSocket, pSocketForward);
+			break;
+		}
+	}
 }
 
 

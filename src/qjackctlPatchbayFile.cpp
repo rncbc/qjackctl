@@ -1,7 +1,7 @@
 // qjackctlPatchbayFile.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -40,6 +40,7 @@ static void load_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
             QString sClientName = eSocket.attribute("client");
             QString sSocketType = eSocket.attribute("type");
             QString sExclusive  = eSocket.attribute("exclusive");
+            QString sSocketForward = eSocket.attribute("forward");
             int iSocketType = QJACKCTL_SOCKETTYPE_AUDIO;
             if (sSocketType == "midi")
                 iSocketType = QJACKCTL_SOCKETTYPE_MIDI;
@@ -47,6 +48,7 @@ static void load_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
             qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(sSocketName, sClientName, iSocketType);
             if (pSocket) {
                 pSocket->setExclusive(bExclusive);
+                pSocket->setForward(sSocketForward);
                 // Now's time to handle pluglist...
                 for (QDomNode nPlug = eSocket.firstChild(); !nPlug.isNull(); nPlug = nPlug.nextSibling()) {
                     // Convert plug node to element...
@@ -76,6 +78,8 @@ static void save_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
             sSocketType = "midi";
         eSocket.setAttribute("type", sSocketType);
         eSocket.setAttribute("exclusive", (pSocket->isExclusive() ? "on" : "off"));
+		if (!pSocket->forward().isEmpty())
+			eSocket.setAttribute("forward", pSocket->forward());
         QDomElement ePlug;
         for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++) {
             QDomElement ePlug = doc.createElement("plug");

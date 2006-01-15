@@ -5,10 +5,15 @@ ChangeLog
 
 CVS HEAD
 
+- New patchbay socket forwarding feature. Any patchbay socket can now
+  be set to have all its connections replicated (i.e. forwarded) to
+  another one, which will behave actively as a clone of the former.
+  (currently experimental, only applicable to input/writable sockets).
+
 - Optional specification of alternate JACK and/or ALSA installation
   paths on configure time (after a patch from Lucas Brasilino, thanks).
 
-  
+
 0.2.19a  2005-11-28  MIDI aliases are back in town.
 
 - ALSA sequencer client/port name aliases are functional again; all

@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -77,12 +77,14 @@ public:
     const QString& clientName();
     int type();
     bool isExclusive();
+    const QString& forward();
 
     // Socket property methods.
     void setName(const QString& sSocketName);
     void setClientName(const QString& sClientName);
     void setType(int iSocketType);
     void setExclusive(bool bExclusive);
+    void setForward(const QString& sSocketForward);
 
     // Plug list primitive methods.
     void addPlug(const QString& sPlugName);
@@ -98,11 +100,11 @@ private:
     QString m_sClientName;
     int m_iSocketType;
     bool m_bExclusive;
+    QString m_sSocketForward;
 
     // Patchbay socket plug list.
     QStringList m_pluglist;
 };
-
 
 
 // Patchbay socket slot definition.
@@ -241,6 +243,24 @@ private:
     void checkMidiPorts(qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
     void connectMidiSocketPorts(qjackctlPatchbaySocket *pOutputSocket, qjackctlMidiPort *pOutputPort, qjackctlPatchbaySocket *pInputSocket, qjackctlMidiPort *pInputPort);
     void connectMidiCable(qjackctlPatchbaySocket *pOutputSocket, qjackctlPatchbaySocket *pInputSocket);
+
+	void loadMidiConnections(QPtrList<qjackctlMidiPort>& midiports,
+		qjackctlMidiPort *pMidiPort, bool bReadable);
+
+	// Audio socket/ports forwarding executive methods.
+	void connectAudioForwardPorts(
+		const char *pszPort, const char *pszPortForward);
+	void connectAudioForward(qjackctlPatchbaySocket *pSocket,
+		qjackctlPatchbaySocket *pSocketForward);
+
+	// MIDI socket/ports forwarding executive methods.
+	void connectMidiForwardPorts(
+		qjackctlMidiPort *pPort, qjackctlMidiPort *pPortForward);
+	void connectMidiForward(qjackctlPatchbaySocket *pSocket,
+		qjackctlPatchbaySocket *pSocketForward);
+
+	// Common socket forwarding scan method.
+	void connectForwardScan(int iSocketType);
 
     // Patchbay sockets lists.
     QPtrList<qjackctlPatchbaySocket> m_osocketlist;

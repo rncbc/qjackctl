@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2004, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "qjackctlAbout.h"
 #include "qjackctlConnectAlias.h"
 
+#include <qlistbox.h>
 #include <qregexp.h>
 
 #include <stdlib.h>
@@ -31,7 +32,7 @@
 // Kind of constructor.
 void qjackctlSocketForm::init()
 {
-    m_bReadable    = false;
+	m_pSocketList  = NULL;
     m_pJackClient  = NULL;
     m_pAlsaSeq     = NULL;
     m_ppPixmaps    = NULL;
@@ -61,10 +62,11 @@ void qjackctlSocketForm::setSocketCaption ( const QString& sSocketCaption )
     (PlugListView->header())->setLabel(0, sSocketCaption + " " + tr("Plugs / Ports"), 180);
 }
 
-// Socket mode accessor.
-void qjackctlSocketForm::setReadable ( bool bReadable )
+
+// Socket list enablement.
+void qjackctlSocketForm::setSocketList ( qjackctlSocketList *pSocketList )
 {
-    m_bReadable = bReadable;
+	m_pSocketList = pSocketList;
 }
 
 
@@ -110,16 +112,26 @@ void qjackctlSocketForm::load( qjackctlPatchbaySocket *pSocket )
     ExclusiveCheckBox->setChecked(pSocket->isExclusive());
 
     PlugListView->clear();
-    QListViewItem *pItem = NULL;
+    QListViewItem *pPlugItem = NULL;
     for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++) {
-        pItem = new QListViewItem(PlugListView, pItem);
-        if (pItem) {
-            pItem->setText(0, *iter);
-            pItem->setRenameEnabled(0, true);
+        pPlugItem = new QListViewItem(PlugListView, pPlugItem);
+        if (pPlugItem) {
+            pPlugItem->setText(0, *iter);
+            pPlugItem->setRenameEnabled(0, true);
         }
     }
 
-    socketTypeChanged();
+	socketTypeChanged();
+
+	int iItemIndex = 0;
+	if (!pSocket->forward().isEmpty()) {
+		QListBoxItem *pItem = SocketForwardComboBox->listBox()->findItem(
+			pSocket->forward(), Qt::ExactMatch | Qt::CaseSensitive);
+		if (pItem)
+			iItemIndex = SocketForwardComboBox->listBox()->index(pItem);
+	}
+	SocketForwardComboBox->setCurrentItem(iItemIndex);
+
     stabilizeForm();
 }
 
@@ -135,6 +147,11 @@ void qjackctlSocketForm::save( qjackctlPatchbaySocket *pSocket )
     pSocket->pluglist().clear();
     for (QListViewItem *pItem = PlugListView->firstChild(); pItem; pItem = pItem->nextSibling())
         pSocket->addPlug(pItem->text(0));
+
+	if (SocketForwardComboBox->currentItem() > 0)
+		pSocket->setForward(SocketForwardComboBox->currentText());
+	else
+		pSocket->setForward(QString::null);
 }
 
 
@@ -155,7 +172,7 @@ void qjackctlSocketForm::stabilizeForm()
         PlugUpPushButton->setEnabled(false);
         PlugDownPushButton->setEnabled(false);
     }
-    
+
     bool bEnabled = !PlugNameComboBox->currentText().isEmpty();
     if (bEnabled)
         bEnabled = (PlugListView->findItem(PlugNameComboBox->currentText(), 0) == NULL);
@@ -344,7 +361,7 @@ void qjackctlSocketForm::contextMenu( QListViewItem *pItem, const QPoint& pos, i
     pContextMenu->setItemEnabled(iItemID, (bEnabled && pItem->nextSibling() != NULL));
 
     pContextMenu->exec(pos);
-    
+
     delete pContextMenu;
 }
 
@@ -352,6 +369,9 @@ void qjackctlSocketForm::contextMenu( QListViewItem *pItem, const QPoint& pos, i
 // Socket type change slot.
 void qjackctlSocketForm::socketTypeChanged()
 {
+	if (m_pSocketList == NULL)
+		return;
+
     QString sOldClientName = ClientNameComboBox->currentText();
 
     ClientNameComboBox->clear();
@@ -359,7 +379,9 @@ void qjackctlSocketForm::socketTypeChanged()
     QPixmap *pXpmSocket = NULL;
     QPixmap *pXpmPlug   = NULL;
 
-    switch (SocketTypeGroup->id(SocketTypeGroup->selected())) {
+	bool bReadable = m_pSocketList->isReadable();
+	int iSocketType = SocketTypeGroup->id(SocketTypeGroup->selected());
+    switch (iSocketType) {
       case 0: // QJACKCTL_SOCKETTYPE_AUDIO
         if (ExclusiveCheckBox->isChecked())
             pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X];
@@ -369,7 +391,7 @@ void qjackctlSocketForm::socketTypeChanged()
         pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG];
         if (m_pJackClient) {
             // Grab all client ports.
-            const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (m_bReadable ? JackPortIsOutput : JackPortIsInput));
+            const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (bReadable ? JackPortIsOutput : JackPortIsInput));
             if (ppszClientPorts) {
                 int iClientPort = 0;
                 while (ppszClientPorts[iClientPort]) {
@@ -402,7 +424,7 @@ void qjackctlSocketForm::socketTypeChanged()
             snd_seq_client_info_t *pClientInfo;
             snd_seq_port_info_t   *pPortInfo;
             unsigned int uiAlsaFlags;
-            if (m_bReadable)
+            if (bReadable)
                 uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
             else
                 uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
@@ -445,12 +467,47 @@ void qjackctlSocketForm::socketTypeChanged()
             pItem = pItem->nextSibling();
         }
     }
+
+	// Now the socket forward list...
+	SocketForwardComboBox->clear();
+	SocketForwardComboBox->insertItem(tr("(None)"));
+	if (!bReadable) {
+		qjackctlSocketItem *pSocketItem = m_pSocketList->sockets().first();
+		while (pSocketItem) {
+			if (pSocketItem->socketType() == iSocketType
+				&& pSocketItem->socketName() != SocketNameLineEdit->text()) {
+				switch (iSocketType) {
+				case 0: // QJACKCTL_SOCKETTYPE_AUDIO
+					if (pSocketItem->isExclusive())
+						pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X];
+					else
+						pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET];
+					break;
+				case 1: // QJACKCTL_SOCKETTYPE_MIDI
+					if (pSocketItem->isExclusive())
+						pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X];
+					else
+						pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET];
+					break;
+				}
+				SocketForwardComboBox->insertItem(*pXpmSocket, pSocketItem->socketName());
+			}
+			pSocketItem = m_pSocketList->sockets().next();
+		}
+	}
+
+	bool bEnabled = (SocketForwardComboBox->count() > 1);
+	SocketForwardTextLabel->setEnabled(bEnabled);
+	SocketForwardComboBox->setEnabled(bEnabled);
 }
 
 
 // Update client list if available.
 void qjackctlSocketForm::clientNameChanged()
 {
+	if (m_pSocketList == NULL)
+		return;
+
     PlugNameComboBox->clear();
 
     QString sClientName = ClientNameComboBox->currentText();
@@ -458,10 +515,12 @@ void qjackctlSocketForm::clientNameChanged()
         return;
     QRegExp rxClientName(sClientName);
 
-    switch (SocketTypeGroup->id(SocketTypeGroup->selected())) {
+	bool bReadable = m_pSocketList->isReadable();
+	int iSocketType = SocketTypeGroup->id(SocketTypeGroup->selected());
+    switch (iSocketType) {
       case 0: // QJACKCTL_SOCKETTYPE_AUDIO
         if (m_pJackClient) {
-            const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (m_bReadable ? JackPortIsOutput : JackPortIsInput));
+            const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (bReadable ? JackPortIsOutput : JackPortIsInput));
             if (ppszClientPorts) {
                 int iClientPort = 0;
                 while (ppszClientPorts[iClientPort]) {
@@ -485,7 +544,7 @@ void qjackctlSocketForm::clientNameChanged()
             snd_seq_client_info_t *pClientInfo;
             snd_seq_port_info_t   *pPortInfo;
             unsigned int uiAlsaFlags;
-            if (m_bReadable)
+            if (bReadable)
                 uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
             else
                 uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
