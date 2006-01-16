@@ -8,6 +8,7 @@ CVS HEAD
 - New patchbay socket forwarding feature. Any patchbay socket can now
   be set to have all its connections replicated (i.e. forwarded) to
   another one, which will behave actively as a clone of the former.
+  Forward connections are shown by vertical directed colored lines.
   (currently experimental, only applicable to input/writable sockets).
 
 - Optional specification of alternate JACK and/or ALSA installation

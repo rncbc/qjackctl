@@ -1199,8 +1199,8 @@ void qjackctlPatchworkView::drawConnections (void)
 		if (i > 2)
 			i = 0;
 		// Get starting connector arrow coordinates.
-		y1 = socketY(pISocket);
-		y2 = socketY(pISocketForward);
+		y1 = socketY(pISocketForward);
+		y2 = socketY(pISocket);
 		drawForwardLine(p, x2, dx, y1, y2, h2);
 		dx += 2;
 	}
