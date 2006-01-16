@@ -356,10 +356,14 @@ protected:
     
 private:
 
+	// Legal socket item position helper.
+	int socketY(qjackctlSocketItem *pSocket) const;
+
     // Drawing methods.
+	void drawForwardLine(QPainter& p, int x, int dx, int y1, int y2, int h);
     void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
     void drawConnections();
-    
+
     // Local instance variables.
     qjackctlPatchbayView *m_pPatchbayView;
 };
