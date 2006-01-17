@@ -353,7 +353,7 @@ protected:
     virtual void resizeEvent(QResizeEvent *);
     // Context menu request event handler.
     virtual void contextMenuEvent(QContextMenuEvent *);
-    
+
 private:
 
 	// Legal socket item position helper.
@@ -391,7 +391,7 @@ public:
     // Patchbay object binding methods.
     void setBinding(qjackctlPatchbay *pPatchbay);
     qjackctlPatchbay *binding();
-    
+
     // Socket list accessors.
     qjackctlSocketList *OSocketList();
     qjackctlSocketList *ISocketList();
@@ -411,9 +411,10 @@ signals:
 
 public slots:
 
-    // Common context menu slot.
+    // Common context menu slots.
     void contextMenu(const QPoint& pos, qjackctlSocketList *pSocketList);
-    
+    void activateForwardMenu(int iItemID);
+
 private:
 
     // Child controls.
@@ -423,9 +424,12 @@ private:
 
     // The main binding object.
     qjackctlPatchbay *m_pPatchbay;
-    
+
     // How we'll draw patchwork lines.
     bool m_bBezierLines;
+
+    // Working forward popup menu.
+    QPopupMenu *m_pForwardMenu;
 
     // The obnoxious dirty flag.
     bool m_bDirty;

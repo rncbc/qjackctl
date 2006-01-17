@@ -95,7 +95,7 @@ void qjackctlSocketForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 void qjackctlSocketForm::setConnectCount ( int iConnectCount )
 {
     SocketTypeGroup->setEnabled(iConnectCount < 1);
-    ExclusiveCheckBox->setEnabled(iConnectCount < 2);
+//	ExclusiveCheckBox->setEnabled(iConnectCount < 2);
 
 #ifndef CONFIG_ALSA_SEQ
 	MidiRadioButton->setEnabled(false);

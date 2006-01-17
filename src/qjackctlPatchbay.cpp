@@ -742,7 +742,7 @@ bool qjackctlSocketList::copySocketItem (void)
             for (qjackctlPlugItem *pPlugItem = pSocketItem->plugs().first(); pPlugItem; pPlugItem = pSocketItem->plugs().next())
                 socket.pluglist().append(pPlugItem->plugName());
 			pSocketForm->load(&socket);
-			if (pSocketForm->exec()) {	        
+			if (pSocketForm->exec()) {
 				pSocketForm->save(&socket);
 				pSocketItem = new qjackctlSocketItem(this, socket.name(), socket.clientName(), socket.type(), pSocketItem);
 				if (pSocketItem) {
@@ -1257,6 +1257,8 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent, const char *pszNa
 
     m_bBezierLines = false;
 
+	m_pForwardMenu = NULL;
+
     QObject::connect(m_pOListView, SIGNAL(currentChanged(QListViewItem *)), m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(expanded(QListViewItem *)),  m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
     QObject::connect(m_pOListView, SIGNAL(collapsed(QListViewItem *)), m_pPatchworkView, SLOT(listViewChanged(QListViewItem *)));
@@ -1308,7 +1310,61 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, qjackctlSocketList *
         pContextMenu->insertSeparator();
         iItemID = pContextMenu->insertItem(tr("Exclusive"), pSocketList, SLOT(exclusiveSocketItem()));
         pContextMenu->setItemChecked(iItemID, bEnabled && pSocketItem->isExclusive());
-        pContextMenu->setItemEnabled(iItemID, bEnabled && (pSocketItem->connects().count() < 2));
+		pContextMenu->setItemEnabled(iItemID, bEnabled /* && (pSocketItem->connects().count() < 2) */);
+		// Construct the forwarding menu,
+		// overriding the last one, if any...
+		if (m_pForwardMenu)
+			delete m_pForwardMenu;
+		m_pForwardMenu = new QPopupMenu(this);
+		// Assume sockets iteration follows item index order (0,1,2...)
+		// and remember that we only do this for input sockets...
+		int iIndex = 0;
+		if (pSocketItem && pSocketList == ISocketList()) {
+			QPtrList<qjackctlSocketItem>& isockets = ISocketList()->sockets();
+			for (qjackctlSocketItem *pISocket = isockets.first();
+					pISocket; pISocket = isockets.next()) {
+				// Must be of same type of target one...
+				int iSocketType = pISocket->socketType();
+				if (iSocketType != pSocketItem->socketType())
+					continue;
+				const QString& sSocketName = pISocket->socketName();
+				if (pSocketItem->socketName() == sSocketName)
+					continue;
+				int iPixmap = 0;
+				switch (iSocketType) {
+				case QJACKCTL_SOCKETTYPE_AUDIO:
+					iPixmap = (pISocket->isExclusive()
+						? QJACKCTL_XPM_AUDIO_SOCKET_X
+						: QJACKCTL_XPM_AUDIO_SOCKET);
+					break;
+				case QJACKCTL_SOCKETTYPE_MIDI:
+					iPixmap = (pISocket->isExclusive()
+						? QJACKCTL_XPM_MIDI_SOCKET_X
+						: QJACKCTL_XPM_MIDI_SOCKET);
+					break;
+				}
+				iItemID = m_pForwardMenu->insertItem(
+					ISocketList()->pixmap(iPixmap), sSocketName);
+				m_pForwardMenu->setItemChecked(iItemID,
+					pSocketItem->forward() == sSocketName);
+				m_pForwardMenu->setItemParameter(iItemID, iIndex);
+				iIndex++;
+			}
+			// Null forward always present,
+			// and has invalid index parameter (-1)...
+			if (iIndex > 0)
+				m_pForwardMenu->insertSeparator();
+			iItemID = m_pForwardMenu->insertItem(tr("(None)"));
+			m_pForwardMenu->setItemChecked(iItemID,
+				pSocketItem->forward().isEmpty());
+			m_pForwardMenu->setItemParameter(iItemID, -1);
+			// We have something here...
+			QObject::connect(m_pForwardMenu, SIGNAL(activated(int)),
+				this, SLOT(activateForwardMenu(int)));
+		}
+		// Add forward menu to the main context menu...
+		iItemID = pContextMenu->insertItem(tr("Forward"), m_pForwardMenu);
+		pContextMenu->setItemEnabled(iItemID, iIndex > 0);
         pContextMenu->insertSeparator();
         iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("up1.png")),
 			tr("Move Up"), pSocketList, SLOT(moveUpSocketItem()));
@@ -1336,6 +1392,47 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos, qjackctlSocketList *
     pContextMenu->exec(pos);
 
     delete pContextMenu;
+
+	delete m_pForwardMenu;
+	m_pForwardMenu = 0;
+}
+
+
+// Select the forwarding socket name from context menu.
+void qjackctlPatchbayView::activateForwardMenu ( int iItemID )
+{
+	if (m_pForwardMenu == NULL)
+		return;
+
+	int iIndex = m_pForwardMenu->itemParameter(iItemID);
+
+	// Get currently input socket (assume its nicely selected)
+	qjackctlSocketItem *pSocketItem = ISocketList()->selectedSocketItem();
+	if (pSocketItem) {
+		// Check first for forward from nil...
+		if (iIndex < 0) {
+			pSocketItem->setForward(QString::null);
+			setDirty(true);
+			return;
+		}
+		// Hopefully, its a real socket about to be forwraded...
+		QPtrList<qjackctlSocketItem>& isockets = ISocketList()->sockets();
+		for (qjackctlSocketItem *pISocket = isockets.first();
+				pISocket; pISocket = isockets.next()) {
+			// Must be of same type of target one...
+			if (pISocket->socketType() != pSocketItem->socketType())
+				continue;
+			const QString& sSocketName = pISocket->socketName();
+			if (pSocketItem->socketName() == sSocketName)
+				continue;
+			if (iIndex == 0) {
+				pSocketItem->setForward(sSocketName);
+				setDirty(true);
+				break;
+			}
+			iIndex--;
+		}
+	}
 }
 
 
