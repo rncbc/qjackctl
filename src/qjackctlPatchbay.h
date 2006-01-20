@@ -357,7 +357,7 @@ protected:
 private:
 
 	// Legal socket item position helper.
-	int socketY(qjackctlSocketItem *pSocket) const;
+	int itemY(QListViewItem *pItem) const;
 
     // Drawing methods.
 	void drawForwardLine(QPainter& p, int x, int dx, int y1, int y2, int h);

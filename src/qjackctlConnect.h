@@ -1,7 +1,7 @@
 // qjackctlConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -348,6 +348,9 @@ protected:
     virtual void contextMenuEvent(QContextMenuEvent *);
 
 private:
+
+	// Legal client/port item position helper.
+	int itemY(QListViewItem *pItem) const;
 
     // Drawing methods.
     void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);

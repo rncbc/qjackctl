@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Connections and patchbay lines coloring has changed just slightly :)
+
 - New patchbay socket forwarding feature. Any patchbay socket can now
   be set to have all its connections replicated (i.e. forwarded) to
   another one, which will behave actively as a clone of the former.

@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -891,6 +891,20 @@ qjackctlConnectorView::~qjackctlConnectorView (void)
 }
 
 
+// Legal client/port item position helper.
+int qjackctlConnectorView::itemY ( QListViewItem *pItem ) const
+{
+	QListViewItem *pParent = pItem->parent();
+	if (pParent == 0 || pParent->isOpen()) {
+		return (pItem->listView())->itemPos(pItem)
+			+ pItem->height() / 2 - (pItem->listView())->contentsY();
+	} else {
+		return (pParent->listView())->itemPos(pParent)
+			+ pParent->height() / 2 - (pParent->listView())->contentsY();
+	}
+}
+
+
 // Draw visible port connection relation lines
 void qjackctlConnectorView::drawConnectionLine ( QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2 )
 {
@@ -928,11 +942,11 @@ void qjackctlConnectorView::drawConnections (void)
     QPainter p(this);
     int x1, y1, h1;
     int x2, y2, h2;
-    int i, c, rgb[3];
+	int i, rgb[3] = { 0x33, 0x66, 0x99 };
     int w;
 
     // Initialize color changer.
-    i = c = rgb[0] = rgb[1] = rgb[2] = 0;
+	i = 0;
     // Almost constants.
     x1 = 0;
     x2 = width();
@@ -943,47 +957,26 @@ void qjackctlConnectorView::drawConnections (void)
     if (w < 2)
         w = 0;
     // For each client item...
-    for (qjackctlClientItem *pOClient = m_pConnectView->OClientList()->clients().first();
-            pOClient;
-                pOClient = m_pConnectView->OClientList()->clients().next()) {
-        // Set new connector color.
-        c += 0x39;
-        c &= 0xff;
-        rgb[i++] = c;
-        p.setPen(QPen(QColor(rgb[2], rgb[1], rgb[0]), w));
-        if (i > 2)
-            i = 0;
-        // For each port item
-        for (qjackctlPortItem *pOPort = pOClient->ports().first();
-                pOPort;
-                    pOPort = pOClient->ports().next()) {
-            // Get starting connector arrow coordinates.
-            QListViewItem* pOParent = pOPort->parent();
-            if (pOParent == 0 || pOParent->isOpen()) {
-                y1 = (m_pConnectView->OListView())->itemPos(pOPort) + 
-                     pOPort->height() / 2 - (m_pConnectView->OListView())->contentsY();
-            } else {
-                y1 = (m_pConnectView->OListView())->itemPos(pOParent) + 
-                     pOParent->height() / 2 - (m_pConnectView->OListView())->contentsY();
-            }
-
-            // Get port connections...
-            for (qjackctlPortItem *pIPort = pOPort->connects().first();
-                    pIPort;
-                        pIPort = pOPort->connects().next()) {
-                // Obviously, there is a connection from pOPort to pIPort items:
-                QListViewItem* pIParent = pIPort->parent();
-                if (pIParent == 0 || pIParent->isOpen()) {
-                    y2 = (m_pConnectView->IListView())->itemPos(pIPort) + 
-                         pIPort->height() / 2 - (m_pConnectView->IListView())->contentsY();
-                } else {
-                    y2 = (m_pConnectView->IListView())->itemPos(pIParent) + 
-                        pIParent->height() / 2 - (m_pConnectView->IListView())->contentsY();
-                }
-                drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
-            }
-        }
-    }
+	QPtrList<qjackctlClientItem>& oclients
+		= m_pConnectView->OClientList()->clients();
+	for (qjackctlClientItem *pOClient = oclients.first();
+			pOClient; pOClient = oclients.next()) {
+		// Set new connector color.
+		++i; p.setPen(QColor(rgb[i % 3], rgb[(i / 3) % 3], rgb[(i / 9) % 3]));
+		// For each port item
+		for (qjackctlPortItem *pOPort = pOClient->ports().first();
+				pOPort; pOPort = pOClient->ports().next()) {
+			// Get starting connector arrow coordinates.
+			y1 = itemY(pOPort);
+			// Get port connections...
+			for (qjackctlPortItem *pIPort = pOPort->connects().first();
+					pIPort; pIPort = pOPort->connects().next()) {
+				// Obviously, there is a connection from pOPort to pIPort items:
+				y2 = itemY(pIPort);
+				drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
+			}
+		}
+	}
 }
 
 

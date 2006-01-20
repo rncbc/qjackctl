@@ -1064,14 +1064,15 @@ qjackctlPatchworkView::~qjackctlPatchworkView (void)
 
 
 // Legal socket item position helper.
-int qjackctlPatchworkView::socketY ( qjackctlSocketItem *pSocket ) const
+int qjackctlPatchworkView::itemY ( QListViewItem *pItem ) const
 {
-	int y = pSocket->height() / 2 - (pSocket->listView())->contentsY();
-	QListViewItem* pParent = pSocket->parent();
+	QListViewItem *pParent = pItem->parent();
 	if (pParent == 0 || pParent->isOpen()) {
-		return (y + (pSocket->listView())->itemPos(pSocket));
+		return (pItem->listView())->itemPos(pItem)
+			+ pItem->height() / 2 - (pItem->listView())->contentsY();
 	} else {
-		return (y + (pSocket->listView())->itemPos(pParent));
+		return (pParent->listView())->itemPos(pParent)
+			+ pParent->height() / 2 - (pParent->listView())->contentsY();
 	}
 }
 
@@ -1140,10 +1141,10 @@ void qjackctlPatchworkView::drawConnections (void)
     QPainter p(this);
     int x1, y1, h1;
     int x2, y2, h2;
-    int i, c, rgb[3];
+	int i, rgb[3] = { 0x99, 0x66, 0x33 };
 
     // Initialize color changer.
-    i = c = rgb[0] = rgb[1] = rgb[2] = 0;
+	i = 0;
     // Almost constants.
     x1 = 0;
     x2 = width();
@@ -1155,19 +1156,14 @@ void qjackctlPatchworkView::drawConnections (void)
 		= m_pPatchbayView->OSocketList()->sockets();
 	for (pOSocket = osockets.first(); pOSocket; pOSocket = osockets.next()) {
         // Set new connector color.
-        c += 0x39;
-        c &= 0xff;
-        rgb[i++] = c;
-        p.setPen(QColor(rgb[2], rgb[1], rgb[0]));
-        if (i > 2)
-            i = 0;
+		++i; p.setPen(QColor(rgb[i % 3], rgb[(i / 3) % 3], rgb[(i / 9) % 3]));
         // Get starting connector arrow coordinates.
-		y1 = socketY(pOSocket);
+		y1 = itemY(pOSocket);
         // Get input socket connections...
         for (pISocket = pOSocket->connects().first();
                 pISocket; pISocket = pOSocket->connects().next()) {
             // Obviously, there is a connection from pOPlug to pIPlug items:
-			y2 = socketY(pISocket);
+			y2 = itemY(pISocket);
             drawConnectionLine(p, x1, y1, x2, y2, h1, h2);
         }
     }
@@ -1184,6 +1180,8 @@ void qjackctlPatchworkView::drawConnections (void)
 		    continue;
 	    iforwards.append(pISocket);
 	}
+    // (Re)initialize color changer.
+    i = 0;
 	// Now traverse those for proper connection drawing...
 	int dx = 0;
 	for (pISocket = iforwards.first(); pISocket; pISocket = iforwards.next()) {
@@ -1192,15 +1190,10 @@ void qjackctlPatchworkView::drawConnections (void)
 		if (pISocketForward == 0)
 			continue;
 		// Set new connector color.
-		c += 0x39;
-		c &= 0xff;
-		rgb[i++] = c;
-		p.setPen(QColor(rgb[2], rgb[1], rgb[0]));
-		if (i > 2)
-			i = 0;
+		++i; p.setPen(QColor(rgb[i % 3], rgb[(i / 3) % 3], rgb[(i / 9) % 3]));
 		// Get starting connector arrow coordinates.
-		y1 = socketY(pISocketForward);
-		y2 = socketY(pISocket);
+		y1 = itemY(pISocketForward);
+		y2 = itemY(pISocket);
 		drawForwardLine(p, x2, dx, y1, y2, h2);
 		dx += 2;
 	}
