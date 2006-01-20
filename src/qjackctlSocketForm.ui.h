@@ -73,7 +73,7 @@ void qjackctlSocketForm::setSocketList ( qjackctlSocketList *pSocketList )
 // Pixmap utility methods.
 void qjackctlSocketForm::setPixmaps ( QPixmap **ppPixmaps )
 {
-    m_ppPixmaps= ppPixmaps;
+    m_ppPixmaps = ppPixmaps;
 }
 
 
@@ -203,6 +203,9 @@ void qjackctlSocketForm::acceptForm()
 // Add new Plug to socket list.
 void qjackctlSocketForm::addPlug()
 {
+	if (m_ppPixmaps == NULL)
+		return;
+
     QString sPlugName = PlugNameComboBox->currentText();
     if (!sPlugName.isEmpty()) {
         QListViewItem *pItem = PlugListView->selectedItem();
@@ -369,6 +372,8 @@ void qjackctlSocketForm::contextMenu( QListViewItem *pItem, const QPoint& pos, i
 // Socket type change slot.
 void qjackctlSocketForm::socketTypeChanged()
 {
+	if (m_ppPixmaps == NULL)
+		return;
 	if (m_pSocketList == NULL)
 		return;
 
@@ -402,8 +407,11 @@ void qjackctlSocketForm::socketTypeChanged()
                         bool bExists = false;
                         for (int i = 0; i < ClientNameComboBox->count() && !bExists; i++)
                             bExists = (sClientName == ClientNameComboBox->text(i));
-                        if (!bExists)
-                            ClientNameComboBox->insertItem(sClientName);
+						if (!bExists) {
+							ClientNameComboBox->insertItem(
+								*m_ppPixmaps[QJACKCTL_XPM_AUDIO_CLIENT],
+								sClientName);
+						}
                     }
                     iClientPort++;
                 }
@@ -445,7 +453,9 @@ void qjackctlSocketForm::socketTypeChanged()
                             for (int i = 0; i < ClientNameComboBox->count() && !bExists; i++)
                                 bExists = (sClient == ClientNameComboBox->text(i));
                             if (!bExists) {
-                                ClientNameComboBox->insertItem(sClient);
+								ClientNameComboBox->insertItem(
+									*m_ppPixmaps[QJACKCTL_XPM_MIDI_CLIENT],
+									sClient);
                                 bExists = true;
                             }
                         }
@@ -505,6 +515,8 @@ void qjackctlSocketForm::socketTypeChanged()
 // Update client list if available.
 void qjackctlSocketForm::clientNameChanged()
 {
+	if (m_ppPixmaps == NULL)
+		return;
 	if (m_pSocketList == NULL)
 		return;
 
@@ -529,7 +541,9 @@ void qjackctlSocketForm::clientNameChanged()
                     if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
                         QString sPort = qjackctlClientAlias::escapeRegExpDigits(sClientPort.right(sClientPort.length() - iColon - 1));
                         if (PlugListView->findItem(sPort, 0) == NULL)
-                            PlugNameComboBox->insertItem(sPort);
+							PlugNameComboBox->insertItem(
+								*m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG],
+								sPort);
                     }
                     iClientPort++;
                 }
@@ -563,7 +577,9 @@ void qjackctlSocketForm::clientNameChanged()
                             ((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
                             QString sPort = qjackctlClientAlias::escapeRegExpDigits(snd_seq_port_info_get_name(pPortInfo));
                             if (PlugListView->findItem(sPort, 0) == NULL)
-                                PlugNameComboBox->insertItem(sPort);
+								PlugNameComboBox->insertItem(
+									*m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG],
+									sPort);
                         }
                     }
                 }

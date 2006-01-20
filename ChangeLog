@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Patchbay socket dialog gets some more eye-candy as icons have been
+  added to the client and plug selection (combobox) widgets.
+
 - Connections and patchbay lines coloring has changed just slightly :)
 
 - New patchbay socket forwarding feature. Any patchbay socket can now

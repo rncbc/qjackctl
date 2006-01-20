@@ -51,11 +51,13 @@ class qjackctlPatchbay;
 // Pixmap-set indexes.
 #define QJACKCTL_XPM_AUDIO_SOCKET   0
 #define QJACKCTL_XPM_AUDIO_SOCKET_X 1
-#define QJACKCTL_XPM_AUDIO_PLUG     2
-#define QJACKCTL_XPM_MIDI_SOCKET    3
-#define QJACKCTL_XPM_MIDI_SOCKET_X  4
-#define QJACKCTL_XPM_MIDI_PLUG      5
-#define QJACKCTL_XPM_PIXMAPS        6
+#define QJACKCTL_XPM_AUDIO_CLIENT   2
+#define QJACKCTL_XPM_AUDIO_PLUG     3
+#define QJACKCTL_XPM_MIDI_SOCKET    4
+#define QJACKCTL_XPM_MIDI_SOCKET_X  5
+#define QJACKCTL_XPM_MIDI_CLIENT    6
+#define QJACKCTL_XPM_MIDI_PLUG      7
+#define QJACKCTL_XPM_PIXMAPS        8
 
 
 // Custom tooltip class.
