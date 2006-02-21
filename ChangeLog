@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- The internal XRUN callback notification statistics and reporting has
+  been changed to be a bit less intrusive.
+
 - Patchbay socket dialog gets some more eye-candy as icons have been
   added to the client and plug selection (combobox) widgets.
 

@@ -2,7 +2,7 @@
 <class>qjackctlMainForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -777,7 +777,7 @@
     <variable access="private">QSocketNotifier *m_pStdoutNotifier;</variable>
     <variable access="private">QSocketNotifier *m_pAlsaNotifier;</variable>
     <variable access="private">int m_iXrunCallbacks;</variable>
-    <variable access="private">int m_iXrunSkipped;</variable>
+    <variable access="private">int m_iXrunSkips;</variable>
     <variable access="private">int m_iXrunStats;</variable>
     <variable access="private">int m_iXrunCount;</variable>
     <variable access="private">float m_fXrunTotal;</variable>

@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -822,7 +822,7 @@ void qjackctlMainForm::processJackExit (void)
 // XRUN detection routine.
 QString& qjackctlMainForm::detectXrun ( QString & s )
 {
-	if (m_iXrunSkipped > 0)
+	if (m_iXrunSkips > 1)
 		return s;
     QRegExp rx(m_pSetup->sXrunRegex);
     int iPos = rx.search(s);
@@ -830,6 +830,7 @@ QString& qjackctlMainForm::detectXrun ( QString & s )
         s.insert(iPos + rx.matchedLength(), "</font>");
         s.insert(iPos, "<font color=\"#cc0000\">");
 #ifndef CONFIG_JACK_XRUN_DELAY
+        m_tXrunLast.restart();
         updateXrunStats(rx.cap(1).toFloat());
 #endif
     }
@@ -841,7 +842,6 @@ QString& qjackctlMainForm::detectXrun ( QString & s )
 void qjackctlMainForm::updateXrunStats ( float fXrunLast )
 {
     if (m_iXrunStats > 0 || !m_pSetup->bXrunIgnoreFirst) {
-        m_tXrunLast   = QTime::currentTime();
         m_fXrunLast   = fXrunLast;
         m_fXrunTotal += m_fXrunLast;
         if (m_fXrunLast < m_fXrunMin || m_iXrunCount == 0)
@@ -849,8 +849,7 @@ void qjackctlMainForm::updateXrunStats ( float fXrunLast )
         if (m_fXrunLast > m_fXrunMax || m_iXrunCount == 0)
             m_fXrunMax = m_fXrunLast;
         m_iXrunCount++;
-        m_tXrunLast.restart();
-        refreshXrunStats();
+	//	refreshXrunStats();
     }
     m_iXrunStats++;
 }
@@ -1160,7 +1159,7 @@ void qjackctlMainForm::resetXrunStats (void)
     m_tXrunLast.setHMS(0, 0, 0);
 
     m_iXrunCallbacks = 0;
-    m_iXrunSkipped   = 0;
+    m_iXrunSkips     = 0;
 
 #ifdef CONFIG_JACK_MAX_DELAY
     if (m_pJackClient)
@@ -1383,24 +1382,19 @@ void qjackctlMainForm::xrunNotifyEvent (void)
     // Just increment callback counter.
     m_iXrunCallbacks++;
 
-	// Skip this one, maybe we're under some kind of storm...
-	if (m_tXrunLast.elapsed() < 1000) {
-		m_tXrunLast.restart();
-		m_iXrunSkipped++;
+	// Skip this one? Maybe we're under some kind of storm...
+	m_iXrunSkips++;
+
+	// Report rate must be under one second...
+	if (m_tXrunLast.restart() < 1000)
 		return;
-	}
 
 #ifdef CONFIG_JACK_XRUN_DELAY
     // We have an official XRUN delay value (convert usecs to msecs)...
     updateXrunStats(0.001 * jack_get_xrun_delayed_usecs(m_pJackClient));
-#else
-    // Reset last occurrence timer.
-    m_tXrunLast.restart();
-    // Update the status item directly.
-    updateXrunCount();
 #endif
 
-    // Log highlight this event.
+    // Just log this single event...
     appendMessagesColor(tr("XRUN callback (%1).").arg(m_iXrunCallbacks), "#cc66cc");
 }
 
@@ -2123,11 +2117,17 @@ void qjackctlMainForm::refreshStatus (void)
 #ifdef CONFIG_JACK_MAX_DELAY
             updateStatusItem(STATUS_MAX_DELAY, QString::number(0.001 * jack_get_max_delayed_usecs(m_pJackClient)) + " " + tr("msec"));
 #endif
-			// Check if we're skipping some XRUN callbacks...
-			if (m_iXrunSkipped > 0) {
-				appendMessagesColor(tr("XRUN callback (%1 skipped).").arg(m_iXrunSkipped), "#cc99cc");
-				m_iXrunSkipped = 0;
-				updateXrunCount();
+			// Check if we're have some XRUNs to report...
+			if (m_iXrunSkips > 0) {
+				// Maybe we've skipped some...
+				if (m_iXrunSkips > 1) {
+					appendMessagesColor(tr("XRUN callback (%1 skipped).")
+						.arg(m_iXrunSkips - 1), "#cc99cc");
+				}
+				// Reset skip count.
+				m_iXrunSkips = 0;
+				// Highlight the (new) status...
+				refreshXrunStats();
 			}
         }
     }   // No need to update often if we're just idle...
