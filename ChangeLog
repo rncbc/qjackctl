@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Server path setting now accepts custom command line parameters
+  (after a kind suggestion from Jussi Laako).
+
 - The internal XRUN callback notification statistics and reporting has
   been changed to be a bit less intrusive.
 

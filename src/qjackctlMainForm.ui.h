@@ -512,10 +512,12 @@ void qjackctlMainForm::startJack (void)
     // The unforgiveable signal communication...
     QObject::connect(m_pJack, SIGNAL(processExited()), this, SLOT(processJackExit()));
 
+	// Split the server path into arguments...
+	QStringList args = QStringList::split(' ', m_preset.sServer);
     // Look for the executable in the search path;
     // this enforces the server command to be an 
     // executable absolute path whenever possible.
-    QString sCommand = m_preset.sServer;
+    QString sCommand = args[0];
     if (!sCommand.contains('/')) {
         QStringList list = QStringList::split(':', ::getenv("PATH"));
         for (QStringList::Iterator iter = list.begin(); iter != list.end(); ++iter) {
@@ -527,7 +529,8 @@ void qjackctlMainForm::startJack (void)
     }
 
     // Build process arguments...
-    m_pJack->addArgument(sCommand);
+    for (QStringList::Iterator iter = args.begin(); iter != args.end(); ++iter)
+		m_pJack->addArgument(*iter);
     if (m_preset.bVerbose)
         m_pJack->addArgument("-v");
     if (m_preset.bRealtime) {
@@ -652,13 +655,7 @@ void qjackctlMainForm::startJack (void)
 	}
 
     appendMessages(tr("JACK is starting..."));
-    QStringList args = m_pJack->arguments();    
-    m_sJackCmdLine = "";
-    for (QStringList::Iterator iter = args.begin(); iter != args.end(); ++iter) {
-	    m_sJackCmdLine += *iter;
-        m_sJackCmdLine += " ";
-    }
-    m_sJackCmdLine = m_sJackCmdLine.stripWhiteSpace();
+    m_sJackCmdLine = m_pJack->arguments().join(" ").stripWhiteSpace();
     appendMessagesColor(m_sJackCmdLine, "#990099");
 
     // Go jack, go...
