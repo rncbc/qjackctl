@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.2.20   2006-03-05  Featuring patchbay socket forwarding.
 
 - Server path setting now accepts custom command line parameters
   (after a kind suggestion from Jussi Laako).
