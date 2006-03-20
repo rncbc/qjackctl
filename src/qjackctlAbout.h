@@ -32,7 +32,7 @@
 
 #define QJACKCTL_SUBTITLE   QJACKCTL_SUBTITLE1 " - " QJACKCTL_SUBTITLE2
 #define QJACKCTL_WEBSITE    "http://qjackctl.sourceforge.net"
-#define QJACKCTL_COPYRIGHT  "Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved."
+#define QJACKCTL_COPYRIGHT  "Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved."
 
 #endif  // __qjackctlAbout_h
 
