@@ -170,6 +170,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     // To avoid any background flickering,
     // we'll hide the main display.
     StatusDisplayFrame->hide();
+	// Get whether buttons are displayed early...
+	updateButtons();
 
     // What style do we create these forms?
     WFlags wflags = Qt::WType_TopLevel;
@@ -496,9 +498,13 @@ void qjackctlMainForm::startJack (void)
         }
     }
 
-    // Do we have any startup script?...
-    if (m_pSetup->bStartupScript && !m_pSetup->sStartupScriptShell.isEmpty())
-        shellExecute(m_pSetup->sStartupScriptShell, tr("Startup script..."), tr("Startup script terminated"));
+	// Do we have any startup script?...
+	if (m_pSetup->bStartupScript
+		&& !m_pSetup->sStartupScriptShell.isEmpty()) {
+		shellExecute(m_pSetup->sStartupScriptShell,
+			tr("Startup script..."),
+			tr("Startup script terminated"));
+	}
 
     // OK. Let's build the startup process...
     m_pJack = new QProcess(this);
@@ -721,9 +727,13 @@ void qjackctlMainForm::stopJackServer (void)
     if (m_pJack && m_pJack->isRunning() && !m_bJackSurvive) {
         appendMessages(tr("JACK is stopping..."));
         updateServerState(QJACKCTL_STOPPING);
-        // Do we have any pre-shutdown script?...
-        if (m_pSetup->bShutdownScript && !m_pSetup->sShutdownScriptShell.isEmpty())
-            shellExecute(m_pSetup->sShutdownScriptShell, tr("Shutdown script..."), tr("Shutdown script terminated"));
+		// Do we have any pre-shutdown script?...
+		if (m_pSetup->bShutdownScript
+			&& !m_pSetup->sShutdownScriptShell.isEmpty()) {
+			shellExecute(m_pSetup->sShutdownScriptShell,
+				tr("Shutdown script..."),
+				tr("Shutdown script terminated"));
+		}
         // Now it's the time to real try stopping the server daemon...
         m_pJack->tryTerminate();
         // Give it some time to terminate gracefully and stabilize...
@@ -734,6 +744,15 @@ void qjackctlMainForm::stopJackServer (void)
         // Keep on, if not exiting for good.
 		return;
      }
+
+	// If we have a post-shutdown script enabled it must be called,
+	// despite we've not started the server before...
+	if (!m_bJackSurvive && m_pSetup->bPostShutdownScript
+		&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
+		shellExecute(m_pSetup->sPostShutdownScriptShell,
+			tr("Post-shutdown script..."),
+			tr("Post-shutdown script terminated"));
+	}
 
      // Do final processing anyway.
      processJackExit();
@@ -793,9 +812,14 @@ void qjackctlMainForm::processJackExit (void)
         // Destroy it.
         delete m_pJack;
         m_pJack = NULL;
-        // Do we have any post-shutdown script?...
-        if (!m_bJackSurvive && m_pSetup->bPostShutdownScript && !m_pSetup->sPostShutdownScriptShell.isEmpty())
-            shellExecute(m_pSetup->sPostShutdownScriptShell, tr("Post-shutdown script..."), tr("Post-shutdown script terminated"));
+		// Do we have any post-shutdown script?...
+		// (this will be always called, despite we've started the server or not)
+		if (!m_bJackSurvive && m_pSetup->bPostShutdownScript
+			&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
+			shellExecute(m_pSetup->sPostShutdownScriptShell,
+				tr("Post-shutdown script..."),
+				tr("Post-shutdown script terminated"));
+		}
     }
 
     // Stabilize final server state...
@@ -1066,6 +1090,60 @@ void qjackctlMainForm::updateAliases (void)
 {
 	if (m_pConnectionsForm)
 		m_pConnectionsForm->updateAliases();
+}
+
+
+// Update the main form buttons display.
+void qjackctlMainForm::updateButtons (void)
+{
+	updateTitleStatus();
+
+	if (m_pSetup->bLeftButtons) {
+		StartPushButton->show();
+		StopPushButton->show();
+		MessagesPushButton->show();
+		StatusPushButton->show();
+		ConnectionsPushButton->show();
+		PatchbayPushButton->show();
+	} else {
+		StartPushButton->hide();
+		StopPushButton->hide();
+		MessagesPushButton->hide();
+		StatusPushButton->hide();
+		ConnectionsPushButton->hide();
+		PatchbayPushButton->hide();
+	}
+
+	if (m_pSetup->bRightButtons) {
+		QuitPushButton->show();
+		SetupPushButton->show();
+	} else {
+		QuitPushButton->hide();
+		SetupPushButton->hide();
+	}
+
+	if (m_pSetup->bRightButtons &&
+		(m_pSetup->bLeftButtons || m_pSetup->bTransportButtons)) {
+		AboutPushButton->show();
+	} else {
+		AboutPushButton->hide();
+	}
+
+	if (m_pSetup->bLeftButtons || m_pSetup->bTransportButtons) {
+		RewindPushButton->show();
+		BackwardPushButton->show();
+		PlayPushButton->show();
+		PausePushButton->show();
+		ForwardPushButton->show();
+	} else {
+		RewindPushButton->hide();
+		BackwardPushButton->hide();
+		PlayPushButton->hide();
+		PausePushButton->hide();
+		ForwardPushButton->hide();
+	}
+
+	adjustSize();
 }
 
 
@@ -1658,20 +1736,26 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // Log success here.
     appendMessages(tr("Client activated."));
 
-    // Do we have any post-startup scripting?...
-    // (only if we're not a detached client)
-    if (!bDetach && !m_bJackDetach) {
-        if (m_pSetup->bPostStartupScript && !m_pSetup->sPostStartupScriptShell.isEmpty())
-            shellExecute(m_pSetup->sPostStartupScriptShell, tr("Post-startup script..."), tr("Post-startup script terminated"));
-    }
+	// Do we have any post-startup scripting?...
+	// (only if we're not a detached client)
+	if (!bDetach && !m_bJackDetach) {
+		if (m_pSetup->bPostStartupScript
+			&& !m_pSetup->sPostStartupScriptShell.isEmpty()) {
+			shellExecute(m_pSetup->sPostStartupScriptShell,
+				tr("Post-startup script..."),
+				tr("Post-startup script terminated"));
+		}
+	}
 
-    // Have we an initial command-line to start away?
-    if (!m_pSetup->sCmdLine.isEmpty()) {
-        // Run it dettached...
-        shellExecute(m_pSetup->sCmdLine, tr("Command line argument..."), tr("Command line argument started"));
-        // And reset it forever more...
-        m_pSetup->sCmdLine = QString::null;
-    }
+	// Have we an initial command-line to start away?
+	if (!m_pSetup->sCmdLine.isEmpty()) {
+		// Run it dettached...
+		shellExecute(m_pSetup->sCmdLine,
+			tr("Command line argument..."),
+			tr("Command line argument started"));
+		// And reset it forever more...
+		m_pSetup->sCmdLine = QString::null;
+	}
 
     // OK, we're at it!
     return true;
@@ -1875,6 +1959,9 @@ void qjackctlMainForm::showSetupForm (void)
         bool    bOldBezierLines         = m_pSetup->bBezierLines;
         bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
         bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
+        bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
+        bool    bOldRightButtons        = m_pSetup->bRightButtons;
+        bool    bOldTransportButtons    = m_pSetup->bTransportButtons;
         // Load the current setup settings.
         pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
@@ -1914,6 +2001,13 @@ void qjackctlMainForm::showSetupForm (void)
 				( bOldAliasesEditing && !m_pSetup->bAliasesEditing) ||
 				(!bOldAliasesEditing &&  m_pSetup->bAliasesEditing))
 				updateAliases();
+            if (( bOldLeftButtons  && !m_pSetup->bLeftButtons)  ||
+                (!bOldLeftButtons  &&  m_pSetup->bLeftButtons)  ||
+                ( bOldRightButtons && !m_pSetup->bRightButtons) ||
+                (!bOldRightButtons &&  m_pSetup->bRightButtons) ||
+                ( bOldTransportButtons && !m_pSetup->bTransportButtons) ||
+                (!bOldTransportButtons &&  m_pSetup->bTransportButtons))
+                updateButtons();
             // Warn if something will be only effective on next run.
             if (( bOldStdoutCapture && !m_pSetup->bStdoutCapture) ||
                 (!bOldStdoutCapture &&  m_pSetup->bStdoutCapture) ||
@@ -2196,10 +2290,14 @@ void qjackctlMainForm::updateStatusItem( int iStatusItem, const QString& sText )
 // Main window caption title and system tray icon and tooltip update.
 void qjackctlMainForm::updateTitleStatus (void)
 {
-    QString sTitle = QJACKCTL_SUBTITLE1 " ";
+    QString sTitle;
 
-    if (m_pSetup)
-        sTitle += "[" + m_pSetup->sDefPreset + "] ";
+	if (!m_pSetup->bLeftButtons || !m_pSetup->bRightButtons)
+		sTitle = QJACKCTL_SUBTITLE0;
+	else
+		sTitle = QJACKCTL_SUBTITLE1;
+
+    sTitle += " [" + m_pSetup->sDefPreset + "] ";
 
     QString sState;
     QString sDots = ".";

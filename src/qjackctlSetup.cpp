@@ -53,8 +53,8 @@ qjackctlSetup::qjackctlSetup (void)
     sPostStartupScriptShell  = m_settings.readEntry("/PostStartupScriptShell", QString::null);
     bShutdownScript          = m_settings.readBoolEntry("/ShutdownScript", false);
     sShutdownScriptShell     = m_settings.readEntry("/ShutdownScriptShell", QString::null);
-    bPostShutdownScript      = m_settings.readBoolEntry("/PostShutdownScript", false);
-    sPostShutdownScriptShell = m_settings.readEntry("/PostShutdownScriptShell", QString::null);
+    bPostShutdownScript      = m_settings.readBoolEntry("/PostShutdownScript", true);
+    sPostShutdownScriptShell = m_settings.readEntry("/PostShutdownScriptShell", "killall jackd");
     bStdoutCapture           = m_settings.readBoolEntry("/StdoutCapture", true);
     sXrunRegex               = m_settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs");
     bXrunIgnoreFirst         = m_settings.readBoolEntry("/XrunIgnoreFirst", false);
@@ -88,6 +88,9 @@ qjackctlSetup::qjackctlSetup (void)
     bQueryShutdown           = m_settings.readBoolEntry("/QueryShutdown", true);
     bAliasesEnabled          = m_settings.readBoolEntry("/AliasesEnabled", false);
     bAliasesEditing          = m_settings.readBoolEntry("/AliasesEditing", false);
+    bLeftButtons             = m_settings.readBoolEntry("/LeftButtons", true);
+    bRightButtons            = m_settings.readBoolEntry("/RightButtons", true);
+    bTransportButtons        = m_settings.readBoolEntry("/TransportButtons", true);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -167,6 +170,9 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/QueryShutdown",           bQueryShutdown);
     m_settings.writeEntry("/AliasesEnabled",          bAliasesEnabled);
     m_settings.writeEntry("/AliasesEditing",          bAliasesEditing);
+    m_settings.writeEntry("/LeftButtons",             bLeftButtons);
+    m_settings.writeEntry("/RightButtons",            bRightButtons);
+    m_settings.writeEntry("/TransportButtons",        bTransportButtons);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");

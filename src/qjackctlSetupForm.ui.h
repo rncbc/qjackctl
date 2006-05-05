@@ -164,6 +164,9 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
     AliasesEnabledCheckBox->setChecked(m_pSetup->bAliasesEnabled);
     AliasesEditingCheckBox->setChecked(m_pSetup->bAliasesEditing);
+    LeftButtonsCheckBox->setChecked(!m_pSetup->bLeftButtons);
+    RightButtonsCheckBox->setChecked(!m_pSetup->bRightButtons);
+    TransportButtonsCheckBox->setChecked(!m_pSetup->bTransportButtons);
 
 #ifndef CONFIG_SYSTEM_TRAY
     SystemTrayCheckBox->setChecked(false);
@@ -561,6 +564,8 @@ void qjackctlSetupForm::stabilizeForm (void)
     ServerConfigTempCheckBox->setEnabled(bEnabled);
 
     AliasesEditingCheckBox->setEnabled(AliasesEnabledCheckBox->isChecked());
+
+	TransportButtonsCheckBox->setEnabled(LeftButtonsCheckBox->isChecked());
 
     changeDriver(DriverComboBox->currentText());
 }
@@ -1134,6 +1139,9 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->bQueryShutdown           = QueryShutdownCheckBox->isChecked();
         m_pSetup->bAliasesEnabled          = AliasesEnabledCheckBox->isChecked();
         m_pSetup->bAliasesEditing          = AliasesEditingCheckBox->isChecked();
+        m_pSetup->bLeftButtons             = !LeftButtonsCheckBox->isChecked();
+        m_pSetup->bRightButtons            = !RightButtonsCheckBox->isChecked();
+        m_pSetup->bTransportButtons        = !TransportButtonsCheckBox->isChecked();
     }
 
     // Save combobox history...

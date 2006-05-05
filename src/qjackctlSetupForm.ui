@@ -3603,15 +3603,113 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>Confirm server shu&amp;tdown</string>
+                                            <string>Confirm server sh&amp;utdown</string>
                                         </property>
                                         <property name="accel">
-                                            <string>Alt+T</string>
+                                            <string>Alt+U</string>
                                         </property>
                                         <property name="toolTip" stdset="0">
                                             <string>Whether to ask for confirmation on JACK audio server shutdown</string>
                                         </property>
                                     </widget>
+                                </vbox>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox">
+                        <property name="name">
+                            <cstring>ButtonsGroupBox</cstring>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <bold>1</bold>
+                            </font>
+                        </property>
+                        <property name="title">
+                            <string>Buttons</string>
+                        </property>
+                        <property name="flat">
+                            <bool>true</bool>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLayoutWidget" row="0" column="0" rowspan="2" colspan="1">
+                                <property name="name">
+                                    <cstring>layout44</cstring>
+                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>LeftButtonsCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Hide main window &amp;Left buttons</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+L</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to hide the left button group on the main window</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>RightButtonsCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Hide main window &amp;Right buttons</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+R</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to hide the right button group on the main window</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>TransportButtonsCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Hide main window &amp;Transport buttons</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+T</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to hide the transport button group on the main window</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                            <widget class="QLayoutWidget" row="0" column="1">
+                                <property name="name">
+                                    <cstring>layout45</cstring>
+                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
                                 </vbox>
                             </widget>
                         </grid>
@@ -4211,6 +4309,24 @@
         <receiver>qjackctlSetupForm</receiver>
         <slot>optionsChanged()</slot>
     </connection>
+    <connection>
+        <sender>LeftButtonsCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>RightButtonsCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
+    <connection>
+        <sender>TransportButtonsCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>SetupTabWidget</tabstop>
@@ -4300,6 +4416,9 @@
     <tabstop>ServerConfigNameComboBox</tabstop>
     <tabstop>ServerConfigTempCheckBox</tabstop>
     <tabstop>QueryShutdownCheckBox</tabstop>
+    <tabstop>LeftButtonsCheckBox</tabstop>
+    <tabstop>RightButtonsCheckBox</tabstop>
+    <tabstop>TransportButtonsCheckBox</tabstop>
     <tabstop>OkPushButton</tabstop>
     <tabstop>CancelPushButton</tabstop>
 </tabstops>

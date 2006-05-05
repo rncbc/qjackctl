@@ -141,6 +141,9 @@ public:
     bool    bQueryShutdown;
 	bool    bAliasesEnabled;
 	bool    bAliasesEditing;
+	bool    bLeftButtons;
+	bool    bRightButtons;
+	bool    bTransportButtons;
 
     // Defaults...
     QString sPatchbayPath;

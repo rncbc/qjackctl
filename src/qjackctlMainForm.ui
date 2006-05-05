@@ -855,6 +855,7 @@
     <function access="private" specifier="non virtual">updateTimeDisplayToolTips( void )</function>
     <function access="private" specifier="non virtual">updateTimeFormat( void )</function>
     <function access="private" specifier="non virtual">updateAliases( void )</function>
+    <function access="private" specifier="non virtual">updateButtons( void )</function>
     <function specifier="non virtual" returnType="bool">isActivePatchbay( const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">updateActivePatchbay( void )</function>
     <function specifier="non virtual">setActivePatchbay( const QString &amp; sPatchbayPath )</function>
