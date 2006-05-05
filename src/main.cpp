@@ -71,8 +71,10 @@ int main ( int argc, char **argv )
 	app.setMainWidget(&w);
     w.setup(&settings);
     // If we have a systray icon, we'll skip this.
-    if (!settings.bSystemTray)
+    if (!settings.bSystemTray) {
         w.show();
+        w.adjustSize();
+    }
 
     // Register the quit signal/slot.
     // app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));

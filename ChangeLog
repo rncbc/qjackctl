@@ -5,6 +5,13 @@ ChangeLog
 
 CVS HEAD
 
+- Closing the main window while not as an active JACK client nor under
+  a server running state will just quit the whole application, even though
+  the system-tray icon option is in effect.
+
+- The most relevant transport commands (Rewind, Play and Pause) are now
+  made available on the main window context menu.
+
 - The post-shutdown script is now also called when using the Stop button,
   whether the jackd server has been started internally or not. The initial
   hard-coded default is now on and set as `killall jackd` (as a workaround

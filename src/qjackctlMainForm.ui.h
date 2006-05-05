@@ -172,9 +172,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // To avoid any background flickering,
     // we'll hide the main display.
-    StatusDisplayFrame->hide();
-	// Get whether buttons are displayed early...
 	updateButtons();
+    // StatusDisplayFrame->hide();
 
     // What style do we create these forms?
     WFlags wflags = Qt::WType_TopLevel;
@@ -197,7 +196,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     m_pSetup->loadWidgetGeometry(this);
 
     // Make it final show...
-    StatusDisplayFrame->show();
+    // StatusDisplayFrame->show();
 
     // Set other defaults...
     updateDisplayEffect();
@@ -228,7 +227,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
         m_pStdoutNotifier = new QSocketNotifier(g_fdStdout[QJACKCTL_FDREAD], QSocketNotifier::Read, this);
         QObject::connect(m_pStdoutNotifier, SIGNAL(activated(int)), this, SLOT(stdoutNotifySlot(int)));
     }
-    
+
 #ifdef CONFIG_ALSA_SEQ
     // Start our ALSA sequencer interface.
     if (snd_seq_open(&m_pAlsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, 0) < 0)
@@ -274,7 +273,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     if (m_pPatchbayForm) {
 		m_pPatchbayForm->setRecentPatchbays(m_pSetup->patchbays);
 	 	if (!m_pSetup->sPatchbayPath.isEmpty())
-        	m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
+			m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
 	}
 	
     // Try to find if we can start in detached mode (client-only)
@@ -304,7 +303,8 @@ bool qjackctlMainForm::queryClose (void)
 #ifdef CONFIG_SYSTEM_TRAY
     // If we're not quitting explicitly and there's an
     // active system tray icon, then just hide ourselves.
-    if (!m_bQuitForce && isVisible() && m_pSetup->bSystemTray && m_pSystemTray) {
+    if (!m_bQuitForce && isVisible()
+    	&& m_pSetup->bSystemTray && m_pSystemTray && m_pJackClient) {
         m_pSetup->saveWidgetGeometry(this);
         hide();
         bQueryClose = false;
@@ -474,7 +474,7 @@ void qjackctlMainForm::startJack (void)
     }
 
     // Stabilize emerging server state...
-    updateServerState(m_bJackDetach ? QJACKCTL_ACTIVATING : QJACKCTL_STARTING);
+    updateServerState(QJACKCTL_ACTIVATING);
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
     StartPushButton->setEnabled(false);
 
@@ -491,6 +491,7 @@ void qjackctlMainForm::startJack (void)
     }
 
     // Now we're sure it ain't detached.
+    updateServerState(QJACKCTL_STARTING);
 	m_bJackDetach = false;
 
     // Load primary/default server preset...
@@ -2455,7 +2456,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     m_pPresetsMenu->setItemParameter(iItemID, -1);
     QObject::connect(m_pPresetsMenu, SIGNAL(activated(int)), this, SLOT(activatePresetsMenu(int)));
     // Add presets menu to the main context menu...
-    pContextMenu->insertItem(tr("Presets"), m_pPresetsMenu);
+    pContextMenu->insertItem(tr("&Presets"), m_pPresetsMenu);
     pContextMenu->insertSeparator();
 
     iItemID = pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("messages1.png")),
@@ -2472,10 +2473,37 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
     pContextMenu->setItemChecked(iItemID, m_pPatchbayForm && m_pPatchbayForm->isVisible());
     pContextMenu->insertSeparator();
 
+	QPopupMenu *pTransportMenu = new QPopupMenu(this);
+	iItemID = pTransportMenu->insertItem(
+		QIconSet(QPixmap::fromMimeSource("rewind1.png")),
+		tr("&Rewind"), this, SLOT(transportRewind()));
+	pTransportMenu->setItemEnabled(iItemID, RewindPushButton->isEnabled());
+//	iItemID = pTransportMenu->insertItem(
+//		QIconSet(QPixmap::fromMimeSource("backward1.png")),
+//		tr("&Backward"), this, SLOT(transportBackward()));
+//	pTransportMenu->setItemEnabled(iItemID, BackwardPushButton->isEnabled());
+	iItemID = pTransportMenu->insertItem(
+		QIconSet(QPixmap::fromMimeSource("play1.png")),
+		tr("&Play"), this, SLOT(transportStart()));
+	pTransportMenu->setItemEnabled(iItemID, PlayPushButton->isEnabled());
+	iItemID = pTransportMenu->insertItem(
+		QIconSet(QPixmap::fromMimeSource("pause1.png")),
+		tr("Pa&use"), this, SLOT(transportStop()));
+	pTransportMenu->setItemEnabled(iItemID, PausePushButton->isEnabled());
+//	iItemID = pTransportMenu->insertItem(
+//		QIconSet(QPixmap::fromMimeSource("forward1.png")),
+//		tr("&Forward"), this, SLOT(transportForward()));
+//	pTransportMenu->setItemEnabled(iItemID, ForwardPushButton->isEnabled());
+	pContextMenu->insertItem(tr("&Transport"), pTransportMenu);
+	pContextMenu->insertSeparator();
+
     pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("setup1.png")),
         tr("S&etup..."), this, SLOT(showSetupForm()));
-//  pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("about1.png")),
-//      tr("Ab&out..."), this, SLOT(showAboutForm()));
+
+	if (!m_pSetup->bRightButtons || !m_pSetup->bTransportButtons) {
+		pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("about1.png")),
+			tr("Ab&out..."), this, SLOT(showAboutForm()));
+	}
     pContextMenu->insertSeparator();
 
     pContextMenu->insertItem(QIconSet(QPixmap::fromMimeSource("quit1.png")),
@@ -2483,10 +2511,14 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 
     pContextMenu->exec(pos);
 
-    delete pContextMenu;
-
     delete m_pPresetsMenu;
     m_pPresetsMenu = NULL;
+
+	if (pTransportMenu)
+		delete pTransportMenu;
+
+    delete pContextMenu;
+
 }
 
 
