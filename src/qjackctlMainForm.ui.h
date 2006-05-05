@@ -131,6 +131,9 @@ void qjackctlMainForm::init (void)
 // Kind of destructor.
 void qjackctlMainForm::destroy (void)
 {
+	if (m_bJackDetach)
+		m_bJackSurvive = true;
+
     // Stop server, if not already...
     stopJackServer();
 
@@ -480,12 +483,15 @@ void qjackctlMainForm::startJack (void)
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 
-    // If we ain't to be the server master,  maybe we'll start 
+	// If we ain't to be the server master, maybe we'll start
 	// detached as client only (jackd server already running?)
     if (startJackClient(true)) {
         StopPushButton->setEnabled(true);
         return;
     }
+
+    // Now we're sure it ain't detached.
+	m_bJackDetach = false;
 
     // Load primary/default server preset...
     if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
@@ -747,7 +753,8 @@ void qjackctlMainForm::stopJackServer (void)
 
 	// If we have a post-shutdown script enabled it must be called,
 	// despite we've not started the server before...
-	if (!m_bJackSurvive && m_pSetup->bPostShutdownScript
+	if (m_bJackDetach && !m_bJackSurvive
+		&& m_pSetup->bPostShutdownScript
 		&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
 		shellExecute(m_pSetup->sPostShutdownScriptShell,
 			tr("Post-shutdown script..."),
@@ -1665,8 +1672,8 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     QString sClientName = "qjackctl-" + QString::number((int) ::getpid());
     m_pJackClient = jack_client_new(sClientName.latin1());
     if (m_pJackClient == NULL) {
-        if (!bDetach) {
-            appendMessagesError(
+		if (!bDetach) {
+			appendMessagesError(
 				tr("Could not connect to JACK server as client.\n\n"
 				"Please check the messages window for more info."));
 		}
@@ -1711,7 +1718,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     if (!bDetach)
         resetXrunStats();
 	else // We'll flag that we've been detached!
-    	m_bJackDetach = true;
+		m_bJackDetach = true;
 
     // Activate us as a client...
     jack_activate(m_pJackClient);
