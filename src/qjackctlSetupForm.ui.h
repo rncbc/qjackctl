@@ -523,7 +523,12 @@ void qjackctlSetupForm::stabilizeForm (void)
         PresetDeletePushButton->setEnabled(false);
     }
 
-    bool bEnabled = RealtimeCheckBox->isChecked();
+	bool bEnabled;
+#ifdef CONFIG_COREAUDIO
+	bEnabled = RealtimeCheckBox->isChecked();
+#else
+	bEnabled = false;
+#endif
     PriorityTextLabel->setEnabled(bEnabled);
     PrioritySpinBox->setEnabled(bEnabled);
 
@@ -582,7 +587,7 @@ static OSStatus getTotalChannels( AudioDeviceID device,
 	AudioBufferList*    bufferList = 0;
 	AudioStreamID*      streamList = 0;
 	size_t              i, numStream;
-    
+
 	err = AudioDeviceGetPropertyInfo(device, 0, isInput,
 		kAudioDevicePropertyStreams, &outSize, &outWritable);
 	if (err == noErr) {
@@ -601,7 +606,7 @@ static OSStatus getTotalChannels( AudioDeviceID device,
 			}
 		}
 	}
-	
+
 	*channelCount = 0;
 	err = AudioDeviceGetPropertyInfo(device, 0, isInput,
 		kAudioDevicePropertyStreamConfiguration, &outSize, &outWritable);
@@ -614,12 +619,12 @@ static OSStatus getTotalChannels( AudioDeviceID device,
 				*channelCount += bufferList->mBuffers[i].mNumberChannels;
 		}
 	}
-	
+
 	if (streamList) 
 		free(streamList);
 	if (bufferList) 
 		free(bufferList);	
-	
+
 	return (err);
 }
 

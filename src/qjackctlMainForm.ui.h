@@ -303,8 +303,8 @@ bool qjackctlMainForm::queryClose (void)
 #ifdef CONFIG_SYSTEM_TRAY
     // If we're not quitting explicitly and there's an
     // active system tray icon, then just hide ourselves.
-    if (!m_bQuitForce && isVisible()
-    	&& m_pSetup->bSystemTray && m_pSystemTray && m_pJackClient) {
+	if (!m_bQuitForce && isVisible()
+		&& m_pSetup->bSystemTray && m_pSystemTray && m_pJackClient) {
         m_pSetup->saveWidgetGeometry(this);
         hide();
         bQueryClose = false;
@@ -312,7 +312,8 @@ bool qjackctlMainForm::queryClose (void)
 #endif
 
     // Check if JACK daemon is currently running...
-    if (bQueryClose && m_pJack && m_pJack->isRunning() && m_pSetup->bQueryClose) {
+	if (bQueryClose && m_pJack && m_pJack->isRunning()
+		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
         switch (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
             tr("JACK is currently running.") + "\n\n" +
@@ -542,13 +543,18 @@ void qjackctlMainForm::startJack (void)
     }
 
     // Build process arguments...
-    for (QStringList::Iterator iter = args.begin(); iter != args.end(); ++iter)
+	bool bDummy     = (m_preset.sDriver == "dummy");
+	bool bOss       = (m_preset.sDriver == "oss");
+	bool bAlsa      = (m_preset.sDriver == "alsa");
+	bool bPortaudio = (m_preset.sDriver == "portaudio");
+	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
+	for (QStringList::Iterator iter = args.begin(); iter != args.end(); ++iter)
 		m_pJack->addArgument(*iter);
     if (m_preset.bVerbose)
         m_pJack->addArgument("-v");
     if (m_preset.bRealtime) {
         m_pJack->addArgument("-R");
-        if (m_preset.iPriority > 0)
+        if (m_preset.iPriority > 0 && !bCoreaudio)
             m_pJack->addArgument("-P" + QString::number(m_preset.iPriority));
     }
     if (m_preset.iPortMax > 0 && m_preset.iPortMax != 128)
@@ -560,11 +566,6 @@ void qjackctlMainForm::startJack (void)
     else if (m_preset.bUnlockMem)
         m_pJack->addArgument("-u");
     m_pJack->addArgument("-d" + m_preset.sDriver);
-    bool bDummy     = (m_preset.sDriver == "dummy");
-    bool bOss       = (m_preset.sDriver == "oss");
-    bool bAlsa      = (m_preset.sDriver == "alsa");
-    bool bPortaudio = (m_preset.sDriver == "portaudio");
-	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
     if (bAlsa && (m_preset.iAudio != QJACKCTL_DUPLEX ||
 		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
 		QString sInterface = m_preset.sInterface;
