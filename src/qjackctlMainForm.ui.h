@@ -172,8 +172,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // To avoid any background flickering,
     // we'll hide the main display.
+    StatusDisplayFrame->hide();
 	updateButtons();
-    // StatusDisplayFrame->hide();
 
     // What style do we create these forms?
     WFlags wflags = Qt::WType_TopLevel;
@@ -196,7 +196,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     m_pSetup->loadWidgetGeometry(this);
 
     // Make it final show...
-    // StatusDisplayFrame->show();
+    StatusDisplayFrame->show();
 
     // Set other defaults...
     updateDisplayEffect();
