@@ -312,7 +312,7 @@ void qjackctlSetupForm::resetPresets (void)
 }
 
 
-void qjackctlSetupForm::changeCurrentPreset( const QString& sPreset )
+void qjackctlSetupForm::changeCurrentPreset ( const QString& sPreset )
 {
     if (m_iDirtySetup > 0)
         return;
@@ -520,7 +520,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 	}
 	InterfaceTextLabel->setEnabled(bEnabled || bCoreaudio || bFreebob);
 	InterfaceComboBox->setEnabled(bEnabled || bCoreaudio || bFreebob);
-	InterfaceToolButton->setEnabled(bEnabled || bCoreaudio || bFreebob);
+	InterfaceToolButton->setEnabled(bEnabled || bCoreaudio);
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
     DitherComboBox->setEnabled(bAlsa || bPortaudio);
