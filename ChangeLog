@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Initial freebob backend driver support (EXPERIMENTAL).
+
 - Closing the main window while not as an active JACK client, nor under
   a server running state, will just quit the whole application, even
   though the system-tray icon option is in effect.
@@ -14,7 +16,7 @@ CVS HEAD
 
 - The post-shutdown script is now also being called when using the Stop
   button, whether the jackd server has been started internally or not.
-  The initial hard-coded default is now on and set as `killall jackd`
+  The initial hard-coded default is now on and set to `killall jackd`
   (as a workaround to an old request from Stephane Letz).
 
 - The main window buttons display is now optional. One can choose

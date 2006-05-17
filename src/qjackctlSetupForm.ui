@@ -278,6 +278,11 @@
                                         <string>coreaudio</string>
                                     </property>
                                 </item>
+                                <item>
+                                    <property name="text">
+                                        <string>freebob</string>
+                                    </property>
+                                </item>
                                 <property name="name">
                                     <cstring>DriverComboBox</cstring>
                                 </property>

@@ -417,19 +417,20 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     bool bOss        = (sDriver == "oss");
     bool bAlsa       = (sDriver == "alsa");
     bool bCoreaudio  = (sDriver == "coreaudio");
+    bool bFreebob    = (sDriver == "freebob");
     bool bInEnabled  = false;
     bool bOutEnabled = false;
 
     switch (iAudio) {
       case QJACKCTL_DUPLEX:
-        bInEnabled  = (bOss || bAlsa || bCoreaudio);
-        bOutEnabled = (bOss || bAlsa || bCoreaudio);
+        bInEnabled  = (bOss || bAlsa || bCoreaudio || bFreebob);
+        bOutEnabled = (bOss || bAlsa || bCoreaudio || bFreebob);
         break;
       case QJACKCTL_CAPTURE:
-        bInEnabled  = bOss || bCoreaudio;
+        bInEnabled  = (bOss || bCoreaudio || bFreebob);
         break;
       case QJACKCTL_PLAYBACK:
-        bOutEnabled = bOss || bCoreaudio;
+        bOutEnabled = (bOss || bCoreaudio || bFreebob);
         break;
     }
 
@@ -440,15 +441,23 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     OutDeviceComboBox->setEnabled(bOutEnabled && (bAlsa || bOss));
     OutDeviceToolButton->setEnabled(bOutEnabled && (bAlsa || bOss));
 
-    InChannelsTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-    InChannelsSpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-    OutChannelsTextLabel->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
-    OutChannelsSpinBox->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
+    InChannelsTextLabel->setEnabled(bInEnabled
+		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+    InChannelsSpinBox->setEnabled(bInEnabled
+		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+    OutChannelsTextLabel->setEnabled(bOutEnabled
+		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
+    OutChannelsSpinBox->setEnabled(bOutEnabled
+		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
 
-	InLatencyTextLabel->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-	InLatencySpinBox->setEnabled(bInEnabled || (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-	OutLatencyTextLabel->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
-	OutLatencySpinBox->setEnabled(bOutEnabled || (bAlsa && iAudio != QJACKCTL_CAPTURE));
+	InLatencyTextLabel->setEnabled((bInEnabled && !bFreebob)
+		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+	InLatencySpinBox->setEnabled((bInEnabled && !bFreebob)
+		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
+	OutLatencyTextLabel->setEnabled((bOutEnabled && !bFreebob)
+		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
+	OutLatencySpinBox->setEnabled((bOutEnabled && !bFreebob)
+		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
 
     computeLatency();
 }
@@ -467,6 +476,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
     bool bAlsa      = (sDriver == "alsa");
     bool bPortaudio = (sDriver == "portaudio");
 	bool bCoreaudio = (sDriver == "coreaudio");
+	bool bFreebob   = (sDriver == "freebob");
 
     NoMemLockCheckBox->setEnabled(!bCoreaudio);
     UnlockMemCheckBox->setEnabled(!bCoreaudio && !NoMemLockCheckBox->isChecked());
@@ -479,8 +489,17 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 
     IgnoreHWCheckBox->setEnabled(bOss);
 
-    PeriodsTextLabel->setEnabled(bAlsa || bOss);
-    PeriodsSpinBox->setEnabled(bAlsa || bOss);
+#ifdef CONFIG_COREAUDIO
+    PriorityTextLabel->setEnabled(false);
+    PrioritySpinBox->setEnabled(false);
+#else
+	bool bPriorityEnabled = RealtimeCheckBox->isChecked() && !bCoreaudio;
+    PriorityTextLabel->setEnabled(bPriorityEnabled);
+    PrioritySpinBox->setEnabled(bPriorityEnabled);
+#endif
+
+    PeriodsTextLabel->setEnabled(bAlsa || bOss || bFreebob);
+    PeriodsSpinBox->setEnabled(bAlsa || bOss || bFreebob);
 
     WordLengthTextLabel->setEnabled(bOss);
     WordLengthComboBox->setEnabled(bOss);
@@ -499,9 +518,9 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 		bEnabled = (sInDevice.isEmpty()  || sInDevice  == m_pSetup->sDefPresetName ||
 					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
 	}
-	InterfaceTextLabel->setEnabled(bEnabled || bCoreaudio);
-	InterfaceComboBox->setEnabled(bEnabled || bCoreaudio);
-	InterfaceToolButton->setEnabled(bEnabled || bCoreaudio);
+	InterfaceTextLabel->setEnabled(bEnabled || bCoreaudio || bFreebob);
+	InterfaceComboBox->setEnabled(bEnabled || bCoreaudio || bFreebob);
+	InterfaceToolButton->setEnabled(bEnabled || bCoreaudio || bFreebob);
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
     DitherComboBox->setEnabled(bAlsa || bPortaudio);
@@ -523,16 +542,7 @@ void qjackctlSetupForm::stabilizeForm (void)
         PresetDeletePushButton->setEnabled(false);
     }
 
-	bool bEnabled;
-#ifdef CONFIG_COREAUDIO
-	bEnabled = RealtimeCheckBox->isChecked();
-#else
-	bEnabled = false;
-#endif
-    PriorityTextLabel->setEnabled(bEnabled);
-    PrioritySpinBox->setEnabled(bEnabled);
-
-    bEnabled = StartupScriptCheckBox->isChecked();
+    bool bEnabled = StartupScriptCheckBox->isChecked();
     StartupScriptShellComboBox->setEnabled(bEnabled);
     StartupScriptSymbolToolButton->setEnabled(bEnabled);
     StartupScriptBrowseToolButton->setEnabled(bEnabled);
