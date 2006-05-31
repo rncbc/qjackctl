@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 1
+%define release 2
 %define prefix  /usr/local
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface.
@@ -8,7 +8,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Prefix:		%{prefix}
-Copyright:	GPL
+License:	GPL
 Group:		Sound
 Source0:	%{name}-%{version}.tar.gz
 URL:		http://qjackctl.sourceforge.net/
@@ -49,5 +49,7 @@ if [ -d $RPM_BUILD_ROOT ]; then rm -rf $RPM_BUILD_ROOT; fi
 %{prefix}/share/icons/qjackctl.png
 
 %changelog
+* Wed May 31 2006 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- Changed copyright to license attribute
 * Wed Aug 24 2005 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Created initial qjackctl.spec

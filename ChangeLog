@@ -5,7 +5,8 @@ ChangeLog
 
 CVS HEAD
 
-- Initial freebob backend driver support (EXPERIMENTAL).
+- Initial freebob backend driver support. Also changed the coreaudio
+  backend driver command line device name/id parameter (EXPERIMENTAL).
 
 - Closing the main window while not as an active JACK client, nor under
   a server running state, will just quit the whole application, even
@@ -19,7 +20,7 @@ CVS HEAD
   The initial hard-coded default is now on and set to `killall jackd`
   (as a workaround to an old request from Stephane Letz).
 
-- The main window buttons display is now optional. One can choose
+- The main window buttons display are now optional. One can choose
   whether the left, right and/or transport buttons are hidden, making
   it for a total of six different modes for the main window presentation
   (after a much simpler suggestion from Paul Davis and Stephane Letz).
