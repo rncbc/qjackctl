@@ -2326,10 +2326,13 @@ void qjackctlMainForm::updateTitleStatus (void)
 {
     QString sTitle;
 
-	if (!m_pSetup->bLeftButtons || !m_pSetup->bRightButtons)
+	if (!m_pSetup->bLeftButtons  ||
+		!m_pSetup->bRightButtons ||
+		!m_pSetup->bTextLabels) {
 		sTitle = QJACKCTL_SUBTITLE0;
-	else
+	} else {
 		sTitle = QJACKCTL_SUBTITLE1;
+	}
 
     sTitle += " [" + m_pSetup->sDefPreset + "] ";
 
