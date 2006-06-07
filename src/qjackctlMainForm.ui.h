@@ -558,7 +558,7 @@ void qjackctlMainForm::startJack (void)
         if (m_preset.iPriority > 0 && !bCoreaudio)
             m_pJack->addArgument("-P" + QString::number(m_preset.iPriority));
     }
-    if (m_preset.iPortMax > 0 && m_preset.iPortMax != 128)
+    if (m_preset.iPortMax > 0 && m_preset.iPortMax != 256)
         m_pJack->addArgument("-p" + QString::number(m_preset.iPortMax));
     if (m_preset.iTimeout > 0 && m_preset.iTimeout != 500)
         m_pJack->addArgument("-t" + QString::number(m_preset.iTimeout));

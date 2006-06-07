@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -296,7 +296,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
     preset.iOutLatency  = m_settings.readNumEntry("/OutLatency", 0);
     preset.iStartDelay  = m_settings.readNumEntry("/StartDelay", 2);
     preset.bVerbose     = m_settings.readBoolEntry("/Verbose", false);
-    preset.iPortMax     = m_settings.readNumEntry("/PortMax", 128);
+    preset.iPortMax     = m_settings.readNumEntry("/PortMax", 256);
     m_settings.endGroup();
 
     return true;

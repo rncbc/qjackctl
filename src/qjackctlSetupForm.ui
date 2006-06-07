@@ -2,7 +2,7 @@
 <class>qjackctlSetupForm</class>
 <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2005, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -701,11 +701,6 @@
                                     <widget class="QComboBox" row="7" column="1">
                                         <item>
                                             <property name="text">
-                                                <string>64</string>
-                                            </property>
-                                        </item>
-                                        <item>
-                                            <property name="text">
                                                 <string>128</string>
                                             </property>
                                         </item>
@@ -717,6 +712,11 @@
                                         <item>
                                             <property name="text">
                                                 <string>512</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>1024</string>
                                             </property>
                                         </item>
                                         <property name="name">

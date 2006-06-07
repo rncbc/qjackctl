@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Increse default maximum number of ports setting from 128 to 256.
+
 - Initial freebob backend driver support. Also changed the coreaudio
   backend driver command line device name/id parameter (EXPERIMENTAL).
 
