@@ -167,6 +167,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     LeftButtonsCheckBox->setChecked(!m_pSetup->bLeftButtons);
     RightButtonsCheckBox->setChecked(!m_pSetup->bRightButtons);
     TransportButtonsCheckBox->setChecked(!m_pSetup->bTransportButtons);
+    TextLabelsCheckBox->setChecked(!m_pSetup->bTextLabels);
 
 #ifndef CONFIG_SYSTEM_TRAY
     SystemTrayCheckBox->setChecked(false);
@@ -1157,6 +1158,7 @@ void qjackctlSetupForm::accept (void)
         m_pSetup->bLeftButtons             = !LeftButtonsCheckBox->isChecked();
         m_pSetup->bRightButtons            = !RightButtonsCheckBox->isChecked();
         m_pSetup->bTransportButtons        = !TransportButtonsCheckBox->isChecked();
+        m_pSetup->bTextLabels              = !TextLabelsCheckBox->isChecked();
     }
 
     // Save combobox history...

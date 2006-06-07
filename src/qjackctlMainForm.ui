@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>99</height>
+            <width>427</width>
+            <height>100</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -45,7 +45,7 @@
         </font>
     </property>
     <property name="caption">
-		<string>QjackCtl</string>
+        <string>QjackCtl</string>
     </property>
     <property name="icon">
         <pixmap>qjackctl.png</pixmap>
@@ -54,12 +54,27 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QPushButton" row="0" column="7">
+        <widget class="QToolButton" row="0" column="7">
             <property name="name">
-                <cstring>QuitPushButton</cstring>
+                <cstring>QuitToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>&amp;Quit</string>
+                <string></string>
             </property>
             <property name="accel">
                 <string>Alt+Q</string>
@@ -67,16 +82,40 @@
             <property name="iconSet">
                 <iconset>quit1.png</iconset>
             </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Quit</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Quit processing and exit</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="0" column="0">
+        <widget class="QToolButton" row="0" column="0">
             <property name="name">
-                <cstring>StartPushButton</cstring>
+                <cstring>StartToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>&amp;Start</string>
+                <string></string>
             </property>
             <property name="accel">
                 <string>Alt+S</string>
@@ -87,16 +126,40 @@
             <property name="iconSet">
                 <iconset>start1.png</iconset>
             </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Start</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Start the JACK server</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="0" column="1">
+        <widget class="QToolButton" row="0" column="1">
             <property name="name">
-                <cstring>StopPushButton</cstring>
+                <cstring>StopToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>S&amp;top</string>
+                <string></string>
             </property>
             <property name="accel">
                 <string>Alt+T</string>
@@ -107,19 +170,43 @@
             <property name="iconSet">
                 <iconset>stop1.png</iconset>
             </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>S&amp;top</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Stop the JACK server</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="1" column="1">
+        <widget class="QToolButton" row="1" column="1">
             <property name="name">
-                <cstring>StatusPushButton</cstring>
+                <cstring>StatusToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>St&amp;atus</string>
+                <string></string>
             </property>
             <property name="accel">
-                <string>Alt+A</string>
+                <string></string>
             </property>
             <property name="toggleButton">
                 <bool>true</bool>
@@ -127,33 +214,81 @@
             <property name="iconSet">
                 <iconset>status1.png</iconset>
             </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>St&amp;atus</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the extended status window</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="7">
+        <widget class="QToolButton" row="2" column="7">
             <property name="name">
-                <cstring>AboutPushButton</cstring>
+                <cstring>AboutToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>Ab&amp;out...</string>
+                <string></string>
             </property>
             <property name="accel">
-                <string>Alt+O</string>
+                <string>Alt+B</string>
             </property>
             <property name="iconSet">
                 <iconset>about1.png</iconset>
+            </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>Ab&amp;out...</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Show information about this application</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="1" column="7">
+        <widget class="QToolButton" row="1" column="7">
             <property name="name">
-                <cstring>SetupPushButton</cstring>
+                <cstring>SetupToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>S&amp;etup...</string>
+                <string></string>
             </property>
             <property name="accel">
                 <string>Alt+E</string>
@@ -161,16 +296,40 @@
             <property name="iconSet">
                 <iconset>setup1.png</iconset>
             </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>S&amp;etup...</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show settings and options dialog</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="1" column="0">
+        <widget class="QToolButton" row="1" column="0">
             <property name="name">
-                <cstring>MessagesPushButton</cstring>
+                <cstring>MessagesToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>&amp;Messages</string>
+                <string></string>
             </property>
             <property name="accel">
                 <string>Alt+M</string>
@@ -181,19 +340,43 @@
             <property name="iconSet">
                 <iconset>messages1.png</iconset>
             </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Messages</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the messages log window</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="1">
+        <widget class="QToolButton" row="2" column="1">
             <property name="name">
-                <cstring>PatchbayPushButton</cstring>
+                <cstring>PatchbayToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>Patch&amp;bay</string>
+                <string></string>
             </property>
             <property name="accel">
-                <string>Alt+B</string>
+                <string></string>
             </property>
             <property name="toggleButton">
                 <bool>true</bool>
@@ -201,16 +384,40 @@
             <property name="iconSet">
                 <iconset>patchbay1.png</iconset>
             </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Patchbay</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the patchbay editor window</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="0">
+        <widget class="QToolButton" row="2" column="0">
             <property name="name">
-                <cstring>ConnectionsPushButton</cstring>
+                <cstring>ConnectionsToolButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
-                <string>&amp;Connect</string>
+                <string></string>
             </property>
             <property name="accel">
                 <string>Alt+C</string>
@@ -220,6 +427,15 @@
             </property>
             <property name="iconSet">
                 <iconset>connections1.png</iconset>
+            </property>
+            <property name="usesTextLabel">
+                <bool>true</bool>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Connect</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Show/hide the actual connections patchbay window</string>
@@ -284,7 +500,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -311,7 +527,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -335,7 +551,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -359,7 +575,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -383,7 +599,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="alignment">
                         <set>AlignVCenter|AlignLeft</set>
@@ -406,7 +622,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -435,7 +651,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -462,7 +678,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -486,7 +702,7 @@
                         </size>
                     </property>
                     <property name="backgroundOrigin">
-                        <enum>ParentOrigin</enum>
+                        <enum>AncestorOrigin</enum>
                     </property>
                     <property name="font">
                         <font>
@@ -505,23 +721,27 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QPushButton" row="2" column="3">
+        <widget class="QToolButton" row="2" column="3">
             <property name="name">
-                <cstring>BackwardPushButton</cstring>
+                <cstring>BackwardToolButton</cstring>
             </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>1</hsizetype>
-                    <vsizetype>5</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>48</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
                 <string></string>
-            </property>
-            <property name="pixmap">
-                <pixmap>backward1.png</pixmap>
             </property>
             <property name="accel">
                 <string>Alt+B</string>
@@ -529,27 +749,40 @@
             <property name="autoRepeat">
                 <bool>true</bool>
             </property>
+            <property name="iconSet">
+                <iconset>backward1.png</iconset>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Backward</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Backward transport</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="6">
+        <widget class="QToolButton" row="2" column="6">
             <property name="name">
-                <cstring>ForwardPushButton</cstring>
+                <cstring>ForwardToolButton</cstring>
             </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>1</hsizetype>
-                    <vsizetype>5</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>48</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
                 <string></string>
-            </property>
-            <property name="pixmap">
-                <pixmap>forward1.png</pixmap>
             </property>
             <property name="accel">
                 <string>Alt+F</string>
@@ -557,38 +790,60 @@
             <property name="autoRepeat">
                 <bool>true</bool>
             </property>
+            <property name="iconSet">
+                <iconset>forward1.png</iconset>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Forward</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Forward transport</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="2">
+        <widget class="QToolButton" row="2" column="2">
             <property name="name">
-                <cstring>RewindPushButton</cstring>
+                <cstring>RewindToolButton</cstring>
             </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>1</hsizetype>
-                    <vsizetype>5</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>48</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
                 <string></string>
             </property>
-            <property name="pixmap">
-                <pixmap>rewind1.png</pixmap>
-            </property>
             <property name="accel">
                 <string>Alt+R</string>
+            </property>
+            <property name="iconSet">
+                <iconset>rewind1.png</iconset>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Rewind</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Rewind transport</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="5">
+        <widget class="QToolButton" row="2" column="5">
             <property name="name">
-                <cstring>PausePushButton</cstring>
+                <cstring>PauseToolButton</cstring>
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
@@ -598,39 +853,73 @@
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>48</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
+            </property>
             <property name="text">
                 <string></string>
             </property>
-            <property name="pixmap">
-                <pixmap>pause1.png</pixmap>
-            </property>
             <property name="accel">
                 <string>Alt+U</string>
+            </property>
+            <property name="iconSet">
+                <iconset>pause1.png</iconset>
+            </property>
+            <property name="textLabel">
+                <string>Pa&amp;use</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Stop transport rolling</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="4">
+        <widget class="QToolButton" row="2" column="4">
             <property name="name">
-                <cstring>PlayPushButton</cstring>
+                <cstring>PlayToolButton</cstring>
             </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>1</hsizetype>
-                    <vsizetype>5</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
+            <property name="minimumSize">
+                <size>
+                    <width>28</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>48</width>
+                    <height>28</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>TabFocus</enum>
             </property>
             <property name="text">
                 <string></string>
             </property>
-            <property name="pixmap">
-                <pixmap>play1.png</pixmap>
-            </property>
             <property name="accel">
                 <string>Alt+P</string>
+            </property>
+            <property name="iconSet">
+                <iconset>play1.png</iconset>
+            </property>
+            <property name="textLabel">
+                <string>&amp;Play</string>
+            </property>
+            <property name="textPosition">
+                <enum>BesideIcon</enum>
             </property>
             <property name="toolTip" stdset="0">
                 <string>Start transport rolling</string>
@@ -640,105 +929,105 @@
 </widget>
 <connections>
     <connection>
-        <sender>StartPushButton</sender>
+        <sender>StartToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>startJack()</slot>
     </connection>
     <connection>
-        <sender>StopPushButton</sender>
+        <sender>StopToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>stopJack()</slot>
     </connection>
     <connection>
-        <sender>QuitPushButton</sender>
+        <sender>QuitToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>quitMainForm()</slot>
     </connection>
     <connection>
-        <sender>SetupPushButton</sender>
+        <sender>SetupToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>showSetupForm()</slot>
     </connection>
     <connection>
-        <sender>StatusPushButton</sender>
+        <sender>StatusToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>toggleStatusForm()</slot>
     </connection>
     <connection>
-        <sender>MessagesPushButton</sender>
+        <sender>MessagesToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>toggleMessagesForm()</slot>
     </connection>
     <connection>
-        <sender>ConnectionsPushButton</sender>
+        <sender>ConnectionsToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>toggleConnectionsForm()</slot>
     </connection>
     <connection>
-        <sender>PatchbayPushButton</sender>
+        <sender>PatchbayToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>togglePatchbayForm()</slot>
     </connection>
     <connection>
-        <sender>AboutPushButton</sender>
+        <sender>AboutToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>showAboutForm()</slot>
     </connection>
     <connection>
-        <sender>RewindPushButton</sender>
+        <sender>RewindToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>transportRewind()</slot>
     </connection>
     <connection>
-        <sender>BackwardPushButton</sender>
+        <sender>BackwardToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>transportBackward()</slot>
     </connection>
     <connection>
-        <sender>PlayPushButton</sender>
+        <sender>PlayToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>transportStart()</slot>
     </connection>
     <connection>
-        <sender>PausePushButton</sender>
+        <sender>PauseToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>transportStop()</slot>
     </connection>
     <connection>
-        <sender>ForwardPushButton</sender>
+        <sender>ForwardToolButton</sender>
         <signal>clicked()</signal>
         <receiver>qjackctlMainForm</receiver>
         <slot>transportForward()</slot>
     </connection>
 </connections>
 <tabstops>
-    <tabstop>StartPushButton</tabstop>
-    <tabstop>StopPushButton</tabstop>
-    <tabstop>QuitPushButton</tabstop>
-    <tabstop>MessagesPushButton</tabstop>
-    <tabstop>StatusPushButton</tabstop>
-    <tabstop>SetupPushButton</tabstop>
-    <tabstop>ConnectionsPushButton</tabstop>
-    <tabstop>PatchbayPushButton</tabstop>
-    <tabstop>RewindPushButton</tabstop>
-    <tabstop>BackwardPushButton</tabstop>
-    <tabstop>PlayPushButton</tabstop>
-    <tabstop>PausePushButton</tabstop>
-    <tabstop>ForwardPushButton</tabstop>
-    <tabstop>AboutPushButton</tabstop>
+    <tabstop>StartToolButton</tabstop>
+    <tabstop>StopToolButton</tabstop>
+    <tabstop>QuitToolButton</tabstop>
+    <tabstop>MessagesToolButton</tabstop>
+    <tabstop>StatusToolButton</tabstop>
+    <tabstop>SetupToolButton</tabstop>
+    <tabstop>ConnectionsToolButton</tabstop>
+    <tabstop>PatchbayToolButton</tabstop>
+    <tabstop>RewindToolButton</tabstop>
+    <tabstop>BackwardToolButton</tabstop>
+    <tabstop>PlayToolButton</tabstop>
+    <tabstop>PauseToolButton</tabstop>
+    <tabstop>ForwardToolButton</tabstop>
+    <tabstop>AboutToolButton</tabstop>
 </tabstops>
 <includes>
     <include location="global" impldecl="in implementation">stdlib.h</include>
@@ -755,7 +1044,6 @@
     <include location="local" impldecl="in declaration">qjackctlPatchbayForm.h</include>
     <include location="local" impldecl="in implementation">qjackctlSetupForm.h</include>
     <include location="local" impldecl="in implementation">qjackctlAboutForm.h</include>
-    <include location="local" impldecl="in implementation">qjackctlMainForm.ui.h</include>
 </includes>
 <variables>
     <variable access="private">qjackctlSetup *m_pSetup;</variable>

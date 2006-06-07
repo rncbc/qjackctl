@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- The main window button text labels are now optional (after a kind
+  suggestion by Geoff Beasley, thanks).
+
 - Increse default maximum number of ports setting from 128 to 256.
 
 - Initial freebob backend driver support. Also changed the coreaudio

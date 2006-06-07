@@ -144,6 +144,7 @@ public:
 	bool    bLeftButtons;
 	bool    bRightButtons;
 	bool    bTransportButtons;
+	bool    bTextLabels;
 
     // Defaults...
     QString sPatchbayPath;

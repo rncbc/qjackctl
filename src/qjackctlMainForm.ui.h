@@ -477,7 +477,7 @@ void qjackctlMainForm::startJack (void)
     // Stabilize emerging server state...
     updateServerState(QJACKCTL_ACTIVATING);
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
-    StartPushButton->setEnabled(false);
+    StartToolButton->setEnabled(false);
 
     // Reset our timer counters...
     m_iStartDelay  = 0;
@@ -487,7 +487,7 @@ void qjackctlMainForm::startJack (void)
 	// If we ain't to be the server master, maybe we'll start
 	// detached as client only (jackd server already running?)
     if (startJackClient(true)) {
-        StopPushButton->setEnabled(true);
+        StopToolButton->setEnabled(true);
         return;
     }
 
@@ -697,7 +697,7 @@ void qjackctlMainForm::startJack (void)
 
     // Sloppy boy fix: may the serve be stopped, just in case
     // the client will nerver make it...
-    StopPushButton->setEnabled(true);
+    StopToolButton->setEnabled(true);
 
     // Make sure all status(es) will be updated ASAP...
     m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
@@ -850,13 +850,13 @@ void qjackctlMainForm::processJackExit (void)
         iServerState = QJACKCTL_STOPPED;
     updateServerState(iServerState);
     ServerStateTextLabel->setPaletteForegroundColor(m_pJackClient == NULL ? Qt::darkYellow : Qt::yellow);
-    StartPushButton->setEnabled(m_pJackClient == NULL);
-    StopPushButton->setEnabled(m_pJackClient != NULL);
-    RewindPushButton->setEnabled(false);
-    BackwardPushButton->setEnabled(false);
-    PlayPushButton->setEnabled(false);
-    PausePushButton->setEnabled(false);
-    ForwardPushButton->setEnabled(false);
+    StartToolButton->setEnabled(m_pJackClient == NULL);
+    StopToolButton->setEnabled(m_pJackClient != NULL);
+    RewindToolButton->setEnabled(false);
+    BackwardToolButton->setEnabled(false);
+    PlayToolButton->setEnabled(false);
+    PauseToolButton->setEnabled(false);
+    ForwardToolButton->setEnabled(false);
 }
 
 
@@ -1119,49 +1119,60 @@ void qjackctlMainForm::updateButtons (void)
 	updateTitleStatus();
 
 	if (m_pSetup->bLeftButtons) {
-		StartPushButton->show();
-		StopPushButton->show();
-		MessagesPushButton->show();
-		StatusPushButton->show();
-		ConnectionsPushButton->show();
-		PatchbayPushButton->show();
+		StartToolButton->show();
+		StopToolButton->show();
+		MessagesToolButton->show();
+		StatusToolButton->show();
+		ConnectionsToolButton->show();
+		PatchbayToolButton->show();
 	} else {
-		StartPushButton->hide();
-		StopPushButton->hide();
-		MessagesPushButton->hide();
-		StatusPushButton->hide();
-		ConnectionsPushButton->hide();
-		PatchbayPushButton->hide();
+		StartToolButton->hide();
+		StopToolButton->hide();
+		MessagesToolButton->hide();
+		StatusToolButton->hide();
+		ConnectionsToolButton->hide();
+		PatchbayToolButton->hide();
 	}
 
 	if (m_pSetup->bRightButtons) {
-		QuitPushButton->show();
-		SetupPushButton->show();
+		QuitToolButton->show();
+		SetupToolButton->show();
 	} else {
-		QuitPushButton->hide();
-		SetupPushButton->hide();
+		QuitToolButton->hide();
+		SetupToolButton->hide();
 	}
 
 	if (m_pSetup->bRightButtons &&
 		(m_pSetup->bLeftButtons || m_pSetup->bTransportButtons)) {
-		AboutPushButton->show();
+		AboutToolButton->show();
 	} else {
-		AboutPushButton->hide();
+		AboutToolButton->hide();
 	}
 
 	if (m_pSetup->bLeftButtons || m_pSetup->bTransportButtons) {
-		RewindPushButton->show();
-		BackwardPushButton->show();
-		PlayPushButton->show();
-		PausePushButton->show();
-		ForwardPushButton->show();
+		RewindToolButton->show();
+		BackwardToolButton->show();
+		PlayToolButton->show();
+		PauseToolButton->show();
+		ForwardToolButton->show();
 	} else {
-		RewindPushButton->hide();
-		BackwardPushButton->hide();
-		PlayPushButton->hide();
-		PausePushButton->hide();
-		ForwardPushButton->hide();
+		RewindToolButton->hide();
+		BackwardToolButton->hide();
+		PlayToolButton->hide();
+		PauseToolButton->hide();
+		ForwardToolButton->hide();
 	}
+
+	bool bTextLabels = m_pSetup->bTextLabels;
+	StartToolButton->setUsesTextLabel(bTextLabels);
+	StopToolButton->setUsesTextLabel(bTextLabels);
+	MessagesToolButton->setUsesTextLabel(bTextLabels);
+	StatusToolButton->setUsesTextLabel(bTextLabels);
+	ConnectionsToolButton->setUsesTextLabel(bTextLabels);
+	PatchbayToolButton->setUsesTextLabel(bTextLabels);
+	QuitToolButton->setUsesTextLabel(bTextLabels);
+	SetupToolButton->setUsesTextLabel(bTextLabels);
+	AboutToolButton->setUsesTextLabel(bTextLabels);
 
 	adjustSize();
 }
@@ -1232,10 +1243,10 @@ void qjackctlMainForm::setRecentPatchbays ( const QStringList& patchbays )
 // Stabilize current form toggle buttons that may be astray.
 void qjackctlMainForm::stabilizeForm (void)
 {
-    MessagesPushButton->setOn(m_pMessagesForm && m_pMessagesForm->isVisible());
-    StatusPushButton->setOn(m_pStatusForm && m_pStatusForm->isVisible());
-    ConnectionsPushButton->setOn(m_pConnectionsForm && m_pConnectionsForm->isVisible());
-    PatchbayPushButton->setOn(m_pPatchbayForm && m_pPatchbayForm->isVisible());
+    MessagesToolButton->setOn(m_pMessagesForm && m_pMessagesForm->isVisible());
+    StatusToolButton->setOn(m_pStatusForm && m_pStatusForm->isVisible());
+    ConnectionsToolButton->setOn(m_pConnectionsForm && m_pConnectionsForm->isVisible());
+    PatchbayToolButton->setOn(m_pPatchbayForm && m_pPatchbayForm->isVisible());
 }
 
 
@@ -1751,7 +1762,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
     // Whether we've started detached, just change active status.
     updateServerState(m_bJackDetach ? QJACKCTL_ACTIVE : QJACKCTL_STARTED);
-    StopPushButton->setEnabled(true);
+    StopToolButton->setEnabled(true);
 
     // Log success here.
     appendMessages(tr("Client activated."));
@@ -1982,6 +1993,7 @@ void qjackctlMainForm::showSetupForm (void)
         bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
         bool    bOldRightButtons        = m_pSetup->bRightButtons;
         bool    bOldTransportButtons    = m_pSetup->bTransportButtons;
+        bool    bOldTextLabels          = m_pSetup->bTextLabels;
         // Load the current setup settings.
         pSetupForm->setup(m_pSetup);
         // Show the setup dialog...
@@ -2026,7 +2038,9 @@ void qjackctlMainForm::showSetupForm (void)
                 ( bOldRightButtons && !m_pSetup->bRightButtons) ||
                 (!bOldRightButtons &&  m_pSetup->bRightButtons) ||
                 ( bOldTransportButtons && !m_pSetup->bTransportButtons) ||
-                (!bOldTransportButtons &&  m_pSetup->bTransportButtons))
+                (!bOldTransportButtons &&  m_pSetup->bTransportButtons) ||
+                ( bOldTextLabels && !m_pSetup->bTextLabels) ||
+                (!bOldTextLabels &&  m_pSetup->bTextLabels))
                 updateButtons();
             // Warn if something will be only effective on next run.
             if (( bOldStdoutCapture && !m_pSetup->bStdoutCapture) ||
@@ -2084,7 +2098,7 @@ void qjackctlMainForm::transportBackward (void)
 		if (m_fSkipAccel < 1.1) 
 			appendMessages(tr("Transport backward."));
 		// Take care of backward acceleration...
-		if (BackwardPushButton->isDown() && m_fSkipAccel < 60.0)
+		if (BackwardToolButton->isDown() && m_fSkipAccel < 60.0)
 			m_fSkipAccel *= 1.1;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
@@ -2137,7 +2151,7 @@ void qjackctlMainForm::transportForward (void)
 		if (m_fSkipAccel < 1.1) 
 			appendMessages(tr("Transport forward."));
 		// Take care of forward acceleration...
-		if (ForwardPushButton->isDown() && m_fSkipAccel < 60.0)
+		if (ForwardToolButton->isDown() && m_fSkipAccel < 60.0)
 			m_fSkipAccel *= 1.1;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
@@ -2207,20 +2221,20 @@ void qjackctlMainForm::refreshStatus (void)
                 break;
             }
             updateStatusItem(STATUS_TRANSPORT_STATE, sText);
-			RewindPushButton->setEnabled(tpos.frame > 0);
-			BackwardPushButton->setEnabled(tpos.frame > 0);
-			PlayPushButton->setEnabled(tstate == JackTransportStopped);
-			PausePushButton->setEnabled(bPlaying);
-			ForwardPushButton->setEnabled(true);
-			if (!BackwardPushButton->isDown() && !ForwardPushButton->isDown())
+			RewindToolButton->setEnabled(tpos.frame > 0);
+			BackwardToolButton->setEnabled(tpos.frame > 0);
+			PlayToolButton->setEnabled(tstate == JackTransportStopped);
+			PauseToolButton->setEnabled(bPlaying);
+			ForwardToolButton->setEnabled(true);
+			if (!BackwardToolButton->isDown() && !ForwardToolButton->isDown())
 				m_fSkipAccel = 1.0;
 #else
             updateStatusItem(STATUS_TRANSPORT_STATE, n);
-			RewindPushButton->setEnabled(false);
-			BackwardPushButton->setEnabled(false);
-			PlayPushButton->setEnabled(false);
-			PausePushButton->setEnabled(false);
-			ForwardPushButton->setEnabled(false);
+			RewindToolButton->setEnabled(false);
+			BackwardToolButton->setEnabled(false);
+			PlayToolButton->setEnabled(false);
+			PauseToolButton->setEnabled(false);
+			ForwardToolButton->setEnabled(false);
             updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
             updateStatusItem(STATUS_TRANSPORT_BBT, b);
             updateStatusItem(STATUS_TRANSPORT_BPM, n);
@@ -2253,11 +2267,11 @@ void qjackctlMainForm::refreshStatus (void)
         updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
         updateStatusItem(STATUS_TRANSPORT_BBT, b);
         updateStatusItem(STATUS_TRANSPORT_BPM, n);
-		RewindPushButton->setEnabled(false);
-		BackwardPushButton->setEnabled(false);
-		PlayPushButton->setEnabled(false);
-		PausePushButton->setEnabled(false);
-		ForwardPushButton->setEnabled(false);
+		RewindToolButton->setEnabled(false);
+		BackwardToolButton->setEnabled(false);
+		PlayToolButton->setEnabled(false);
+		PauseToolButton->setEnabled(false);
+		ForwardToolButton->setEnabled(false);
     }
 
     // Elapsed times should be rigorous...
@@ -2489,23 +2503,23 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 	iItemID = pTransportMenu->insertItem(
 		QIconSet(QPixmap::fromMimeSource("rewind1.png")),
 		tr("&Rewind"), this, SLOT(transportRewind()));
-	pTransportMenu->setItemEnabled(iItemID, RewindPushButton->isEnabled());
+	pTransportMenu->setItemEnabled(iItemID, RewindToolButton->isEnabled());
 //	iItemID = pTransportMenu->insertItem(
 //		QIconSet(QPixmap::fromMimeSource("backward1.png")),
 //		tr("&Backward"), this, SLOT(transportBackward()));
-//	pTransportMenu->setItemEnabled(iItemID, BackwardPushButton->isEnabled());
+//	pTransportMenu->setItemEnabled(iItemID, BackwardToolButton->isEnabled());
 	iItemID = pTransportMenu->insertItem(
 		QIconSet(QPixmap::fromMimeSource("play1.png")),
 		tr("&Play"), this, SLOT(transportStart()));
-	pTransportMenu->setItemEnabled(iItemID, PlayPushButton->isEnabled());
+	pTransportMenu->setItemEnabled(iItemID, PlayToolButton->isEnabled());
 	iItemID = pTransportMenu->insertItem(
 		QIconSet(QPixmap::fromMimeSource("pause1.png")),
 		tr("Pa&use"), this, SLOT(transportStop()));
-	pTransportMenu->setItemEnabled(iItemID, PausePushButton->isEnabled());
+	pTransportMenu->setItemEnabled(iItemID, PauseToolButton->isEnabled());
 //	iItemID = pTransportMenu->insertItem(
 //		QIconSet(QPixmap::fromMimeSource("forward1.png")),
 //		tr("&Forward"), this, SLOT(transportForward()));
-//	pTransportMenu->setItemEnabled(iItemID, ForwardPushButton->isEnabled());
+//	pTransportMenu->setItemEnabled(iItemID, ForwardToolButton->isEnabled());
 	pContextMenu->insertItem(tr("&Transport"), pTransportMenu);
 	pContextMenu->insertSeparator();
 

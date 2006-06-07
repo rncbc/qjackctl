@@ -3705,6 +3705,25 @@
                                             <string>Whether to hide the transport button group on the main window</string>
                                         </property>
                                     </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>TextLabelsCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Hide main window &amp;button text labels</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+B</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to hide the text labels on the main window buttons</string>
+                                        </property>
+                                    </widget>
                                 </vbox>
                             </widget>
                             <widget class="QLayoutWidget" row="0" column="1">
@@ -4332,6 +4351,12 @@
         <receiver>qjackctlSetupForm</receiver>
         <slot>optionsChanged()</slot>
     </connection>
+    <connection>
+        <sender>TextLabelsCheckBox</sender>
+        <signal>stateChanged(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>optionsChanged()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>SetupTabWidget</tabstop>
@@ -4424,6 +4449,7 @@
     <tabstop>LeftButtonsCheckBox</tabstop>
     <tabstop>RightButtonsCheckBox</tabstop>
     <tabstop>TransportButtonsCheckBox</tabstop>
+    <tabstop>TextLabelsCheckBox</tabstop>
     <tabstop>OkPushButton</tabstop>
     <tabstop>CancelPushButton</tabstop>
 </tabstops>

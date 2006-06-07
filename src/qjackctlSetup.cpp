@@ -91,6 +91,7 @@ qjackctlSetup::qjackctlSetup (void)
     bLeftButtons             = m_settings.readBoolEntry("/LeftButtons", true);
     bRightButtons            = m_settings.readBoolEntry("/RightButtons", true);
     bTransportButtons        = m_settings.readBoolEntry("/TransportButtons", true);
+    bTextLabels              = m_settings.readBoolEntry("/TextLabels", true);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
@@ -173,6 +174,7 @@ qjackctlSetup::~qjackctlSetup (void)
     m_settings.writeEntry("/LeftButtons",             bLeftButtons);
     m_settings.writeEntry("/RightButtons",            bRightButtons);
     m_settings.writeEntry("/TransportButtons",        bTransportButtons);
+    m_settings.writeEntry("/TextLabels",              bTextLabels);
     m_settings.endGroup();
 
     m_settings.beginGroup("/Defaults");
