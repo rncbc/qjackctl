@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- For the brave of heart, specially the ones brave enough to try with
+  Stephane Letz's jackdmp, a win32 build is now possible.
+
 - The main window button text labels are now optional (after a kind
   suggestion by Geoff Beasley, thanks).
 

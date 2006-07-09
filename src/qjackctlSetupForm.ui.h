@@ -451,13 +451,13 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     OutChannelsSpinBox->setEnabled(bOutEnabled
 		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
 
-	InLatencyTextLabel->setEnabled((bInEnabled && !bFreebob)
+	InLatencyTextLabel->setEnabled((bInEnabled)
 		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-	InLatencySpinBox->setEnabled((bInEnabled && !bFreebob)
+	InLatencySpinBox->setEnabled((bInEnabled)
 		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-	OutLatencyTextLabel->setEnabled((bOutEnabled && !bFreebob)
+	OutLatencyTextLabel->setEnabled((bOutEnabled)
 		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
-	OutLatencySpinBox->setEnabled((bOutEnabled && !bFreebob)
+	OutLatencySpinBox->setEnabled((bOutEnabled)
 		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
 
     computeLatency();

@@ -672,7 +672,7 @@ void qjackctlMainForm::startJack (void)
         if (m_preset.bHWMeter)
             m_pJack->addArgument("-M");
     }
-	if (bAlsa || bOss || bCoreaudio) {
+	if (bAlsa || bOss || bCoreaudio || bFreebob) {
 		if (m_preset.iInLatency > 0)
 			m_pJack->addArgument("-I" + QString::number(m_preset.iInLatency));
 		if (m_preset.iOutLatency > 0)
