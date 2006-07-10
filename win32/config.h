@@ -6,6 +6,8 @@
 #define CONFIG_PREFIX   "."
 #define CONFIG_DEBUG    1
 
+#define CONFIG_NO_START_SERVER
+
 #undef  CONFIG_SYSTEM_TRAY
 #undef  CONFIG_ALSA_SEQ
 

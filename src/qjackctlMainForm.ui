@@ -1030,11 +1030,6 @@
     <tabstop>AboutToolButton</tabstop>
 </tabstops>
 <includes>
-    <include location="global" impldecl="in implementation">stdlib.h</include>
-    <include location="global" impldecl="in implementation">unistd.h</include>
-    <include location="global" impldecl="in declaration">qsettings.h</include>
-    <include location="global" impldecl="in declaration">qprocess.h</include>
-    <include location="global" impldecl="in declaration">qsocketnotifier.h</include>
     <include location="local" impldecl="in declaration">qjackctlSetup.h</include>
     <include location="local" impldecl="in declaration">qjackctlSystemTray.h</include>
     <include location="local" impldecl="in declaration">qjackctlPatchbay.h</include>
@@ -1045,6 +1040,10 @@
     <include location="local" impldecl="in implementation">qjackctlSetupForm.h</include>
     <include location="local" impldecl="in implementation">qjackctlAboutForm.h</include>
 </includes>
+<forwards>
+    <forward>class QProcess;</forward>
+    <forward>class QSocketNotifier;</forward>
+</forwards>
 <variables>
     <variable access="private">qjackctlSetup *m_pSetup;</variable>
     <variable access="private">int m_iServerState;</variable>

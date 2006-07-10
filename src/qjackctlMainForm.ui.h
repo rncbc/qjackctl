@@ -25,10 +25,12 @@
 
 #include "qjackctlPatchbayFile.h"
 
+#include <qsocketnotifier.h>
 #include <qapplication.h>
 #include <qobjectlist.h>
 #include <qeventloop.h>
 #include <qmessagebox.h>
+#include <qprocess.h>
 #include <qregexp.h>
 #include <qtimer.h>
 
@@ -64,7 +66,13 @@
 #define QJACKCTL_FDREAD         0
 #define QJACKCTL_FDWRITE        1
 
+#if !defined(WIN32)
+#include <unistd.h>
 static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
+#else
+#include <io.h>
+#include <process.h>
+#endif
 
 // Custom event types.
 #define QJACKCTL_PORT_EVENT     1000
@@ -221,13 +229,14 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
     resetXrunStats();
 
     // Check if we can redirect our own stdout/stderr...
+#if !defined(WIN32)
     if (m_pSetup->bStdoutCapture && ::pipe(g_fdStdout) == 0) {
         ::dup2(g_fdStdout[QJACKCTL_FDWRITE], STDOUT_FILENO);
         ::dup2(g_fdStdout[QJACKCTL_FDWRITE], STDERR_FILENO);
         m_pStdoutNotifier = new QSocketNotifier(g_fdStdout[QJACKCTL_FDREAD], QSocketNotifier::Read, this);
         QObject::connect(m_pStdoutNotifier, SIGNAL(activated(int)), this, SLOT(stdoutNotifySlot(int)));
     }
-
+#endif
 #ifdef CONFIG_ALSA_SEQ
     // Start our ALSA sequencer interface.
     if (snd_seq_open(&m_pAlsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, 0) < 0)
