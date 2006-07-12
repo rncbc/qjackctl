@@ -184,9 +184,13 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateButtons();
 
     // What style do we create these forms?
-    WFlags wflags = Qt::WType_TopLevel;
-    if (m_pSetup->bKeepOnTop)
-        wflags |= Qt::WStyle_Tool;
+	WFlags wflags = Qt::WStyle_Customize
+		| Qt::WStyle_Title
+		| Qt::WStyle_SysMenu
+		| Qt::WStyle_MinMax
+		| Qt::WType_TopLevel;
+	if (m_pSetup->bKeepOnTop)
+		wflags |= Qt::WStyle_Tool;
     // All forms are to be created right now.
     m_pMessagesForm    = new qjackctlMessagesForm    (this, 0, wflags);
     m_pStatusForm      = new qjackctlStatusForm      (this, 0, wflags);

@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- All window captions can now be set smaller as tool-widgets. This
+  option takes effect when child windows are kept always on top.
+
 - For the brave of heart, specially the ones brave enough to try with
   Stephane Letz's jackdmp, a win32 build is now possible.
 
@@ -449,7 +452,7 @@ CVS HEAD
 - Server literal command-line is now saved into local configuration file
   (~/.jackdrc) for convenience of future auto-start client applications.
 
-- New setup option on wether all child windows are kept on top of the main
+- New setup option on whether all child windows are kept on top of the main
   window, or otherwise floating with probable taskbar entries of their own.
 
 - Setup changes that are only effective next time the program is run gets
@@ -711,6 +714,7 @@ CVS HEAD
 0.0.2   2003-08-02  Client code features introduced.
 
 - JACK library and header files are checked on configure.
+
 - Server CPU load, sample rate and time elapsed since last XRUN
   detected, are now displayed on statistics.
 

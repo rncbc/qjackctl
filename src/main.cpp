@@ -66,8 +66,16 @@ int main ( int argc, char **argv )
         }
     }
 
-    // Construct the main form, and show it to the world.
-    qjackctlMainForm w;
+	// What style do we create these forms?
+	Qt::WFlags wflags = Qt::WStyle_Customize
+		| Qt::WStyle_Title
+		| Qt::WStyle_SysMenu
+		| Qt::WStyle_MinMax
+		| Qt::WType_TopLevel;
+	if (settings.bKeepOnTop)
+		wflags |= Qt::WStyle_Tool;
+	// Construct the main form, and show it to the world.
+	qjackctlMainForm w(0, 0, wflags);
 	app.setMainWidget(&w);
     w.setup(&settings);
     // If we have a systray icon, we'll skip this.
