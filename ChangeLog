@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- GPL address update.
+
 - All window captions can now be set smaller as tool-widgets. This
   option takes effect when child windows are kept always on top.
 
