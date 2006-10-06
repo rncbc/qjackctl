@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.2.21   2006-10-07  Shrinking on screen real-estate.
 
 - GPL address update.
 
@@ -11,7 +11,7 @@ CVS HEAD
   option takes effect when child windows are kept always on top.
 
 - For the brave of heart, specially the ones brave enough to try with
-  Stephane Letz's jackdmp, a win32 build is now possible.
+  Stephane Letz's jackdmp, a win32 build should be now possible.
 
 - The main window button text labels are now optional (after a kind
   suggestion by Geoff Beasley, thanks).
