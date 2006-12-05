@@ -185,6 +185,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
     // What style do we create these forms?
 	WFlags wflags = Qt::WStyle_Customize
+		| Qt::WStyle_NormalBorder
 		| Qt::WStyle_Title
 		| Qt::WStyle_SysMenu
 		| Qt::WStyle_MinMax
