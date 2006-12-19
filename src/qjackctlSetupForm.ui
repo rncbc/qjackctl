@@ -592,6 +592,11 @@
                                                 <string>96000</string>
                                             </property>
                                         </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>192000</string>
+                                            </property>
+                                        </item>
                                         <property name="name">
                                             <cstring>SampleRateComboBox</cstring>
                                         </property>

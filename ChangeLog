@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Added 192k sample rate to setup settings drop down list (as kindly
+  reminded by Klaus Zimmermann, thanks).
+
 - Most top-level widgets were missing the normal-widget flag, which
   were causing some sticky size behavior on some window managers.
 
