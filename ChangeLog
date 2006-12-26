@@ -5,6 +5,12 @@ ChangeLog
 
 CVS HEAD
 
+- The most recently used patchbay definitions can now be correctly
+  selected in round-robin fashion from its drop-down list widget.
+
+- Avoid mixing JACK MIDI ports with regular audio ports on the
+  Connections and Patchbay widgets; strictly list only audio ports.
+
 - Added 192k sample rate to setup settings drop down list (as kindly
   reminded by Klaus Zimmermann, thanks).
 

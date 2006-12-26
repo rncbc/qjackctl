@@ -539,8 +539,10 @@ void qjackctlPatchbayRack::connectAudioScan ( jack_client_t *pJackClient )
     // Cache client descriptor.
     m_pJackClient = pJackClient;
     // Cache all current client-ports...
-    m_ppszOAudioPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsOutput);
-    m_ppszIAudioPorts = jack_get_ports(m_pJackClient, 0, 0, JackPortIsInput);
+	m_ppszOAudioPorts = jack_get_ports(m_pJackClient,
+		0, JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput);
+	m_ppszIAudioPorts = jack_get_ports(m_pJackClient,
+		0, JACK_DEFAULT_AUDIO_TYPE, JackPortIsInput);
 
     // Start looking for connections...
     if (m_ppszOAudioPorts && m_ppszIAudioPorts) {

@@ -288,6 +288,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		m_pPatchbayForm->setRecentPatchbays(m_pSetup->patchbays);
 	 	if (!m_pSetup->sPatchbayPath.isEmpty())
 			m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
+		m_pPatchbayForm->updateRecentPatchbays();
+		m_pPatchbayForm->stabilizeForm();
 	}
 	
     // Try to find if we can start in detached mode (client-only)

@@ -940,7 +940,7 @@
     <function specifier="non virtual" returnType="bool">loadPatchbayFile( const QString &amp; sFileName )</function>
     <function specifier="non virtual" returnType="bool">savePatchbayFile( const QString &amp; sFileName )</function>
     <function specifier="non virtual">setRecentPatchbays( const QStringList &amp; patchbays )</function>
-    <function access="private" specifier="non virtual">updateRecentPatchbays(const QString &amp; sPatchbayPath )</function>
+    <function specifier="non virtual">updateRecentPatchbays()</function>
     <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
     <function specifier="non virtual">setAlsaSeq( snd_seq_t *pAlsaSeq )</function>
 </functions>

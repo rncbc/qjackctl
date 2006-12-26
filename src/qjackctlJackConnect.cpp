@@ -127,10 +127,12 @@ int qjackctlJackClientList::updateClientPorts (void)
         return 0;
 
     int iDirtyCount = 0;
-    
+
     markClientPorts(0);
 
-    const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, isReadable() ? JackPortIsOutput : JackPortIsInput);
+	const char **ppszClientPorts = jack_get_ports(m_pJackClient,
+		0, JACK_DEFAULT_AUDIO_TYPE,
+		isReadable() ? JackPortIsOutput : JackPortIsInput);
     if (ppszClientPorts) {
         int iClientPort = 0;
         while (ppszClientPorts[iClientPort]) {
@@ -162,7 +164,7 @@ int qjackctlJackClientList::updateClientPorts (void)
     }
 
     cleanClientPorts(0);
-    
+
     return iDirtyCount;
 }
 
@@ -287,4 +289,3 @@ void qjackctlJackConnect::updateIconPixmaps (void)
 QPixmap *qjackctlJackConnect::g_apPixmaps[QJACKCTL_XPM_APIXMAPS];
 
 // end of qjackctlJackConnect.cpp
-

@@ -473,7 +473,8 @@ void qjackctlSocketList::clientPortsSnapshot (void)
 {
     // Grab JACK client:port's...
     if (m_pJackClient) {
-        const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0,
+		const char **ppszClientPorts = jack_get_ports(m_pJackClient,
+			0, JACK_DEFAULT_AUDIO_TYPE,
 			(m_bReadable ? JackPortIsOutput : JackPortIsInput));
         if (ppszClientPorts) {
             int iClientPort = 0;

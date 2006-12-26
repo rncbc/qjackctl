@@ -46,6 +46,7 @@ void qjackctlPatchbayForm::init (void)
     QObject::connect(PatchbayView, SIGNAL(contentsChanged()), this, SLOT(contentsChanged()));
 
     newPatchbayFile(false);
+	stabilizeForm();
 }
 
 
@@ -206,7 +207,7 @@ void qjackctlPatchbayForm::newPatchbayFile ( bool bSnapshot )
     m_sPatchbayName = tr("Untitled") + QString::number(m_iUntitled++);
     if (bSnapshot)
         m_pPatchbay->connectionsSnapshot();
-    stabilizeForm();
+//	stabilizeForm();
 }
 
 
@@ -235,7 +236,7 @@ bool qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
     // Step 3: stabilize form...
     m_sPatchbayPath = sFileName;
     m_sPatchbayName = QFileInfo(sFileName).baseName();
-    updateRecentPatchbays(m_sPatchbayPath);
+//	updateRecentPatchbays();
 
     return true;
 }
@@ -259,7 +260,7 @@ bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
     // Step 3: stabilize form...
     m_sPatchbayPath = sFileName;
     m_sPatchbayName = QFileInfo(sFileName).baseName();
-    updateRecentPatchbays(m_sPatchbayPath);
+//	updateRecentPatchbays();
 
     // Step 4: notify main form if applicable ...
 	qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
@@ -301,6 +302,7 @@ void qjackctlPatchbayForm::newPatchbay()
 
     // Reset patchbay editor.
     newPatchbayFile(bSnapshot);
+	stabilizeForm();
 }
 
 
@@ -317,8 +319,11 @@ void qjackctlPatchbayForm::loadPatchbay()
     if (sFileName.isEmpty())
         return;
 
-    // Load it right away.
-    loadPatchbayFile(sFileName);
+	// Load it right away.
+	if (loadPatchbayFile(sFileName))
+		updateRecentPatchbays();
+
+	stabilizeForm();
 }
 
 
@@ -339,8 +344,11 @@ void qjackctlPatchbayForm::savePatchbay()
     if (QFileInfo(sFileName).extension().isEmpty())
         sFileName += ".xml";
 
-    // Save it right away.
-    savePatchbayFile(sFileName);
+	// Save it right away.
+	if (savePatchbayFile(sFileName))
+		updateRecentPatchbays();
+
+	stabilizeForm();
 }
 
 
@@ -353,6 +361,8 @@ void qjackctlPatchbayForm::selectPatchbay ( int iPatchbay )
 		if (!loadPatchbayFile(m_recentPatchbays[iPatchbay]))
 			PatchbayComboBox->setCurrentItem(0);
 	}
+
+	stabilizeForm();
 }
 
 
@@ -371,7 +381,8 @@ void qjackctlPatchbayForm::toggleActivePatchbay()
 	}
 
 	// Need to force/refresh the patchbay list...
-	updateRecentPatchbays(m_sPatchbayPath);
+	updateRecentPatchbays();
+	stabilizeForm();
 }
 
 
@@ -383,14 +394,14 @@ void qjackctlPatchbayForm::setRecentPatchbays ( const QStringList& patchbays )
 
 
 // Update patchbay MRU variables and widgets.
-void qjackctlPatchbayForm::updateRecentPatchbays ( const QString& sPatchbayPath )
+void qjackctlPatchbayForm::updateRecentPatchbays (void)
 {
 	// Remove from list if already there (avoid duplicates)...
-	QStringList::Iterator iter = m_recentPatchbays.find(sPatchbayPath);
+	QStringList::Iterator iter = m_recentPatchbays.find(m_sPatchbayPath);
 	if (iter != m_recentPatchbays.end())
 		m_recentPatchbays.remove(iter);
 	// Put it to front...
-	m_recentPatchbays.push_front(sPatchbayPath);
+	m_recentPatchbays.push_front(m_sPatchbayPath);
 
 	// Time to keep the list under limits.
 	while (m_recentPatchbays.count() > 8)
@@ -414,7 +425,7 @@ void qjackctlPatchbayForm::updateRecentPatchbays ( const QString& sPatchbayPath 
 
 	// Sure this one must be currently selected.
 	PatchbayComboBox->setCurrentItem(0);
-	stabilizeForm();
+//	stabilizeForm();
 }
 
 

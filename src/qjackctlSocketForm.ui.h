@@ -396,7 +396,9 @@ void qjackctlSocketForm::socketTypeChanged()
         pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG];
         if (m_pJackClient) {
             // Grab all client ports.
-            const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (bReadable ? JackPortIsOutput : JackPortIsInput));
+			const char **ppszClientPorts = jack_get_ports(m_pJackClient,
+				0, JACK_DEFAULT_AUDIO_TYPE,
+				(bReadable ? JackPortIsOutput : JackPortIsInput));
             if (ppszClientPorts) {
                 int iClientPort = 0;
                 while (ppszClientPorts[iClientPort]) {
@@ -532,7 +534,9 @@ void qjackctlSocketForm::clientNameChanged()
     switch (iSocketType) {
       case 0: // QJACKCTL_SOCKETTYPE_AUDIO
         if (m_pJackClient) {
-            const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0, 0, (bReadable ? JackPortIsOutput : JackPortIsInput));
+			const char **ppszClientPorts = jack_get_ports(m_pJackClient,
+				0, JACK_DEFAULT_AUDIO_TYPE,
+				(bReadable ? JackPortIsOutput : JackPortIsInput));
             if (ppszClientPorts) {
                 int iClientPort = 0;
                 while (ppszClientPorts[iClientPort]) {
