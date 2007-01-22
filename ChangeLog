@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- CPU Load status label now says correctly DSP Load.
+
 - The most recently used patchbay definitions can now be correctly
   selected in round-robin fashion from its drop-down list widget.
 

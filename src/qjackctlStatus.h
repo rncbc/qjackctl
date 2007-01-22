@@ -1,7 +1,7 @@
 // qjackctlStatus.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 // List view statistics item indexes
 #define STATUS_SERVER_STATE     0
-#define STATUS_CPU_LOAD         1
+#define STATUS_DSP_LOAD         1
 #define STATUS_SAMPLE_RATE      2
 #define STATUS_BUFFER_SIZE      3
 #define STATUS_REALTIME         4

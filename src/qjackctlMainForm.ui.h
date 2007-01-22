@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1061,7 +1061,7 @@ void qjackctlMainForm::updateTimeDisplayFonts (void)
     if (!m_pSetup->sDisplayFont2.isEmpty() && font.fromString(m_pSetup->sDisplayFont2)) {
         ServerStateTextLabel->setFont(font);
         ServerModeTextLabel->setFont(font);
-        CpuLoadTextLabel->setFont(font);
+        DspLoadTextLabel->setFont(font);
         SampleRateTextLabel->setFont(font);
         XrunCountTextLabel->setFont(font);
         TransportStateTextLabel->setFont(font);
@@ -1769,7 +1769,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
     // All displays are highlighted from now on.
     ServerStateTextLabel->setPaletteForegroundColor(Qt::yellow);
     ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);
-    CpuLoadTextLabel->setPaletteForegroundColor(Qt::yellow);
+    DspLoadTextLabel->setPaletteForegroundColor(Qt::yellow);
     SampleRateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::green);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::green);
@@ -1834,7 +1834,7 @@ void qjackctlMainForm::stopJackClient (void)
 
     // Displays are dimmed again.
     ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);
-    CpuLoadTextLabel->setPaletteForegroundColor(Qt::darkYellow);
+    DspLoadTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     SampleRateTextLabel->setPaletteForegroundColor(Qt::darkYellow);
     TimeDisplayTextLabel->setPaletteForegroundColor(Qt::darkGreen);
     TransportStateTextLabel->setPaletteForegroundColor(Qt::darkGreen);
@@ -2209,7 +2209,7 @@ void qjackctlMainForm::refreshStatus (void)
         // Less frequent status items update...
         if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
             m_iStatusRefresh = 0;
-            updateStatusItem(STATUS_CPU_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
+            updateStatusItem(STATUS_DSP_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
             updateStatusItem(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
             updateStatusItem(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
 #ifdef CONFIG_JACK_REALTIME
@@ -2274,7 +2274,7 @@ void qjackctlMainForm::refreshStatus (void)
     }   // No need to update often if we're just idle...
     else if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
         m_iStatusRefresh = 0;
-        updateStatusItem(STATUS_CPU_LOAD, n);
+        updateStatusItem(STATUS_DSP_LOAD, n);
         updateStatusItem(STATUS_SAMPLE_RATE, n);
         updateStatusItem(STATUS_BUFFER_SIZE, n);
         updateStatusItem(STATUS_REALTIME, n);
@@ -2302,8 +2302,8 @@ void qjackctlMainForm::updateStatusItem( int iStatusItem, const QString& sText )
       case STATUS_SERVER_STATE:
         ServerStateTextLabel->setText(sText);
         break;
-      case STATUS_CPU_LOAD:
-        CpuLoadTextLabel->setText(sText);
+      case STATUS_DSP_LOAD:
+        DspLoadTextLabel->setText(sText);
         break;
       case STATUS_SAMPLE_RATE:
         SampleRateTextLabel->setText(sText);

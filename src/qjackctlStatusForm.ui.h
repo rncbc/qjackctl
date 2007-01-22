@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -89,7 +89,7 @@ void qjackctlStatusForm::init (void)
     m_apStatus[STATUS_REALTIME]     = new QListViewItem(StatsListView, s + tr("Realtime Mode") + c, n);
     m_apStatus[STATUS_BUFFER_SIZE]  = new QListViewItem(StatsListView, s + tr("Buffer Size") + c, n);
     m_apStatus[STATUS_SAMPLE_RATE]  = new QListViewItem(StatsListView, s + tr("Sample Rate") + c, n);
-    m_apStatus[STATUS_CPU_LOAD]     = new QListViewItem(StatsListView, s + tr("CPU Load") + c, n);
+    m_apStatus[STATUS_DSP_LOAD]     = new QListViewItem(StatsListView, s + tr("DSP Load") + c, n);
     m_apStatus[STATUS_SERVER_STATE] = new QListViewItem(StatsListView, s + tr("Server state") + c, n);
 
 	// Create the tooltip handler...
