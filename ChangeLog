@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Fixed default channel number switching for the freebob backend.
+
 - CPU Load status label now says correctly DSP Load.
 
 - The most recently used patchbay definitions can now be correctly

@@ -655,11 +655,11 @@ void qjackctlMainForm::startJack (void)
 			m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
 	}
 	else if (bFreebob) {
-		if (m_preset.iInChannels >= 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
+		if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
 			m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
 		else
 			m_pJack->addArgument("-i0");
-		if (m_preset.iOutChannels >= 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
+		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
 			m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
 		else
 			m_pJack->addArgument("-o0");
