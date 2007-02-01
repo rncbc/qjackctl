@@ -5,7 +5,7 @@ ChangeLog
 
 CVS HEAD
 
-- Fixed default channel number switching for the freebob backend.
+- Fixed default settings for the freebob backend (JACK >= 0.103.0).
 
 - CPU Load status label now says correctly DSP Load.
 
