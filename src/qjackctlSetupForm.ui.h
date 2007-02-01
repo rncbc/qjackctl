@@ -2,7 +2,7 @@
 //
 // ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -424,14 +424,14 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 
     switch (iAudio) {
       case QJACKCTL_DUPLEX:
-        bInEnabled  = (bOss || bAlsa || bCoreaudio || bFreebob);
-        bOutEnabled = (bOss || bAlsa || bCoreaudio || bFreebob);
+        bInEnabled  = (bOss || bAlsa || bCoreaudio);
+        bOutEnabled = (bOss || bAlsa || bCoreaudio);
         break;
       case QJACKCTL_CAPTURE:
-        bInEnabled  = (bOss || bCoreaudio || bFreebob);
+        bInEnabled  = (bOss || bCoreaudio);
         break;
       case QJACKCTL_PLAYBACK:
-        bOutEnabled = (bOss || bCoreaudio || bFreebob);
+        bOutEnabled = (bOss || bCoreaudio);
         break;
     }
 
@@ -451,14 +451,14 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
     OutChannelsSpinBox->setEnabled(bOutEnabled
 		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
 
-	InLatencyTextLabel->setEnabled((bInEnabled)
-		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-	InLatencySpinBox->setEnabled((bInEnabled)
-		|| (bAlsa && iAudio != QJACKCTL_PLAYBACK));
-	OutLatencyTextLabel->setEnabled((bOutEnabled)
-		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
-	OutLatencySpinBox->setEnabled((bOutEnabled)
-		|| (bAlsa && iAudio != QJACKCTL_CAPTURE));
+	InLatencyTextLabel->setEnabled(bInEnabled
+		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_PLAYBACK));
+	InLatencySpinBox->setEnabled(bInEnabled
+		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_PLAYBACK));
+	OutLatencyTextLabel->setEnabled(bOutEnabled
+		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_CAPTURE));
+	OutLatencySpinBox->setEnabled(bOutEnabled
+		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_CAPTURE));
 
     computeLatency();
 }
@@ -471,6 +471,12 @@ void qjackctlSetupForm::changeAudio ( int iAudio )
 
 
 void qjackctlSetupForm::changeDriver ( const QString& sDriver )
+{
+	changeDriverUpdate(sDriver, true);
+}
+
+
+void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdate )
 {
     bool bDummy     = (sDriver == "dummy");
     bool bOss       = (sDriver == "oss");
@@ -501,6 +507,9 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 
     PeriodsTextLabel->setEnabled(bAlsa || bOss || bFreebob);
     PeriodsSpinBox->setEnabled(bAlsa || bOss || bFreebob);
+
+	if (bUpdate && bFreebob && PeriodsSpinBox->value() < 3)
+		PeriodsSpinBox->setValue(3);
 
     WordLengthTextLabel->setEnabled(bOss);
     WordLengthComboBox->setEnabled(bOss);
@@ -583,7 +592,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	TransportButtonsCheckBox->setEnabled(LeftButtonsCheckBox->isChecked());
 
-    changeDriver(DriverComboBox->currentText());
+    changeDriverUpdate(DriverComboBox->currentText(), false);
 }
 
 

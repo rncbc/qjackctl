@@ -656,6 +656,9 @@ void qjackctlMainForm::startJack (void)
 	}
 	else if (bFreebob) {
         switch (m_preset.iAudio) {
+          case QJACKCTL_DUPLEX:
+            m_pJack->addArgument("-D");
+            break;
           case QJACKCTL_CAPTURE:
             m_pJack->addArgument("-C");
             m_pJack->addArgument("-o0");
