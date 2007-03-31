@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.2.22   2007-03-31  Long overdue but better late than never.
 
 - Fixed default settings for the freebob backend (JACK >= 0.103.0).
 
