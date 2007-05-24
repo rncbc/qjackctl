@@ -453,14 +453,13 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
 
     appendMessages(sStartMessage);
     appendMessagesColor(sTemp.stripWhiteSpace(), "#990099");
-    QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+	stabilize(QJACKCTL_TIMER_MSECS);
+
     // Execute and set exit status message...
     sTemp = sStopMessage + formatExitStatus(::system(sTemp));
-   // Wait a litle bit before continue...
-    QTime t;
-    t.start();
-    while (t.elapsed() < QJACKCTL_TIMER_MSECS)
-        QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+
+	// Wait a litle bit before continue...
+	stabilize(QJACKCTL_TIMER_MSECS);
     // Final log message...
     appendMessages(sTemp);
 }
@@ -760,6 +759,9 @@ void qjackctlMainForm::stopJackServer (void)
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 
+	// Wether we've alreadya shutdown in progress...
+	bool bShutdown = (m_pJackClient == NULL);
+
     // Stop client code.
     stopJackClient();
 
@@ -775,14 +777,14 @@ void qjackctlMainForm::stopJackServer (void)
 				tr("Shutdown script terminated"));
 		}
         // Now it's the time to real try stopping the server daemon...
-        m_pJack->tryTerminate();
-        // Give it some time to terminate gracefully and stabilize...
-        QTime t;
-        t.start();
-        while (t.elapsed() < QJACKCTL_TIMER_MSECS)
-            QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
-        // Keep on, if not exiting for good.
-		return;
+		if (!bShutdown) {
+			// Let's try...
+			m_pJack->tryTerminate();
+			// Give it some time to terminate gracefully and stabilize...
+			stabilize(QJACKCTL_TIMER_MSECS);
+			// Keep on, if not exiting for good.
+			return;
+		}
      }
 
 	// If we have a post-shutdown script enabled it must be called,
@@ -1268,6 +1270,16 @@ void qjackctlMainForm::stabilizeForm (void)
     StatusToolButton->setOn(m_pStatusForm && m_pStatusForm->isVisible());
     ConnectionsToolButton->setOn(m_pConnectionsForm && m_pConnectionsForm->isVisible());
     PatchbayToolButton->setOn(m_pPatchbayForm && m_pPatchbayForm->isVisible());
+}
+
+
+// Stabilize current business over the application event loop.
+void qjackctlMainForm::stabilize ( int msecs )
+{
+	QTime t;
+	t.start();
+	while (t.elapsed() < msecs)
+		QApplication::eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
 }
 
 

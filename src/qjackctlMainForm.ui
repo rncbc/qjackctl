@@ -1148,6 +1148,7 @@
     <function specifier="non virtual">setActivePatchbay( const QString &amp; sPatchbayPath )</function>
     <function specifier="non virtual">setRecentPatchbays( const QStringList &amp; patchbays )</function>
     <function specifier="non virtual">stabilizeForm( void )</function>
+    <function specifier="non virtual">stabilize( int msecs )</function>
     <function specifier="non virtual">resetXrunStats( void )</function>
     <function access="private" specifier="non virtual">updateXrunCount( void )</function>
     <function access="private" specifier="non virtual" returnType="QString">formatTime( double secs )</function>
