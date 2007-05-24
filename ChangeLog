@@ -3,6 +3,23 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Invalidation of the JACK client handle is now forced right on 
+  jack_shutdown notification, preventing a most probable fatal
+  crash due to jack_deactivate and/or jack_client_close being
+  called after the jack_watchdog kicks in.
+
+- Default font option names were adjusted to "Sans Serif" and
+  "Monospace", wherever available.
+
+- The "keep child windows always on top" option is not set as
+  default anymore, because window focus behavior gets tricky
+  on some desktop environments (eg. Mac OS X, Gnome).
+
+- Autoconf (configure) scripting gets an update.
+ 
+
 0.2.22   2007-03-31  Long overdue but better late than never.
 
 - Fixed default settings for the freebob backend (JACK >= 0.103.0).

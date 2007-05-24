@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -74,12 +74,7 @@ qjackctlSetup::qjackctlSetup (void)
     iConnectionsIconSize     = m_settings.readNumEntry("/ConnectionsIconSize", QJACKCTL_ICON_16X16);
     sConnectionsFont         = m_settings.readEntry("/ConnectionsFont", QString::null);
     bQueryClose              = m_settings.readBoolEntry("/QueryClose", true);
-    // hack: default keep on top to false for Macs, because window focus looks bad
-#ifdef __APPLE__
     bKeepOnTop               = m_settings.readBoolEntry("/KeepOnTop", false);
-#else
-    bKeepOnTop               = m_settings.readBoolEntry("/KeepOnTop", true);
-#endif
     bSystemTray              = m_settings.readBoolEntry("/SystemTray", false);
     bDelayedSetup            = m_settings.readBoolEntry("/DelayedSetup", false);
     bServerConfig            = m_settings.readBoolEntry("/ServerConfig", true);

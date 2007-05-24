@@ -1540,6 +1540,8 @@ void qjackctlMainForm::shutNotifyEvent (void)
 {
     // Log this event.
     appendMessagesColor(tr("Shutdown notification."), "#cc6666");
+	// WARNING: JACK client handle is not valid anymore...
+	m_pJackClient = NULL;
     // Do what has to be done.
     stopJackServer();
     // We're not detached anymore, anyway.
@@ -1817,25 +1819,23 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 // Stop jack audio client...
 void qjackctlMainForm::stopJackClient (void)
 {
-    // Deactivate us as a client...
-    if (m_pJackClient) {
-        jack_deactivate(m_pJackClient);
-        // Log deactivation here.
-        appendMessages(tr("Client deactivated."));
-    }
-    // Destroy our connections patchbay...
+    // Clear out the connections and patchbays...
     if (m_pConnectionsForm)
         m_pConnectionsForm->setJackClient(NULL);
     if (m_pPatchbayForm)
         m_pPatchbayForm->setJackClient(NULL);
 
+    // Deactivate and close us as a client...
+    if (m_pJackClient) {
+        jack_deactivate(m_pJackClient);
+        jack_client_close(m_pJackClient);
+		m_pJackClient = NULL;
+        // Log deactivation here.
+        appendMessages(tr("Client deactivated."));
+    }
+
     // Reset command-line configuration info.
     m_sJackCmdLine = QString::null;
-
-    // Close us as a client...
-    if (m_pJackClient)
-        jack_client_close(m_pJackClient);
-    m_pJackClient = NULL;
 
     // Displays are dimmed again.
     ServerModeTextLabel->setPaletteForegroundColor(Qt::darkYellow);

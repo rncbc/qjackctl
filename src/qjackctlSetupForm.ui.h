@@ -118,26 +118,26 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     TimeFormatComboBox->setCurrentItem(m_pSetup->iTimeFormat);
 
     // Load font chooser samples...
-    const QString sHelvetica = "Helvetica";
+    const QString sSansSerif = "Sans Serif";
     QFont font;
 
     if (m_pSetup->sMessagesFont.isEmpty() || !font.fromString(m_pSetup->sMessagesFont))
-        font = QFont("Terminal", 8);
+        font = QFont("Monospace", 8);
     MessagesFontTextLabel->setFont(font);
     MessagesFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
     if (m_pSetup->sDisplayFont1.isEmpty() || !font.fromString(m_pSetup->sDisplayFont1))
-        font = QFont(sHelvetica, 12, QFont::Bold);
+        font = QFont(sSansSerif, 12, QFont::Bold);
     DisplayFont1TextLabel->setFont(font);
     DisplayFont1TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
     if (m_pSetup->sDisplayFont2.isEmpty() || !font.fromString(m_pSetup->sDisplayFont2))
-        font = QFont(sHelvetica, 8, QFont::Bold);
+        font = QFont(sSansSerif, 8, QFont::Bold);
     DisplayFont2TextLabel->setFont(font);
     DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
     if (m_pSetup->sConnectionsFont.isEmpty() || !font.fromString(m_pSetup->sConnectionsFont))
-        font = QFont(sHelvetica, 10);
+        font = QFont(sSansSerif, 10);
     ConnectionsFontTextLabel->setFont(font);
     ConnectionsFontTextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 

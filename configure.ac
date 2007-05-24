@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.2.22, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.2.22.1, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui.h)
 AC_CONFIG_HEADERS(config.h)
@@ -17,24 +17,26 @@ AC_DEFINE_UNQUOTED(CONFIG_PREFIX, ["$ac_prefix"], [Default installation prefix.]
 # Enable debugging argument option.
 AC_ARG_ENABLE(debug,
   AC_HELP_STRING([--enable-debug], [enable debugging (default=no)]),
-  [ac_debug="debug"],
-  [ac_debug="release"])
-AC_SUBST(ac_debug)
+  [ac_debug="$enableval"])
 
-if test "x$ac_debug" = "xdebug"; then
+if test "x$ac_debug" = "xyes"; then
    AC_DEFINE(CONFIG_DEBUG, 1, [Define if debugging is enabled.])
+   ac_debug="debug"
+else
+   ac_debug="release"
 fi
+AC_SUBST(ac_debug)
 
 # Disable system tray argument option.
 AC_ARG_ENABLE(system_tray,
-  AC_HELP_STRING([--disable-system-tray], [disable system tray (default=no)]),
-  [ac_system_tray="no"],
+  AC_HELP_STRING([--enable-system-tray], [enable system tray (default=yes)]),
+  [ac_system_tray="$enableval"],
   [ac_system_tray="yes"])
 
 # Disable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
-  AC_HELP_STRING([--disable-alsa-seq], [disable ALSA/MIDI sequencer support (default=no)]),
-  [ac_alsa_seq="no"],
+  AC_HELP_STRING([--enable-alsa-seq], [enable ALSA/MIDI sequencer support (default=yes)]),
+  [ac_alsa_seq="$enableval"],
   [ac_alsa_seq="yes"])
 
 # Set for alternate JACK installation dir.
@@ -58,43 +60,40 @@ AC_PROG_GCC_TRADITIONAL
 AC_LANG_C
 AC_LANG_CPLUSPLUS
 
-# Prepend alternate dependencies paths.
-for X in $ac_with_paths; do
-  if test -d $X/include; then
-    CFLAGS="$CFLAGS -I$X/include"
-    CPPFLAGS="$CPPFLAGS -I$X/include"
-    ac_incpath="$ac_incpath $X/include"
-  fi
-  if test -d $X/lib64; then
-    LIBS="$LIBS -L$X/lib64"
-    ac_libs="$ac_libs -L$X/lib64"
-  fi
-  if test -d $X/lib; then
-    LIBS="$LIBS -L$X/lib"
-    ac_libs="$ac_libs -L$X/lib"
-  fi
-done
-
 # Check for QTDIR environment variable.
 AC_MSG_CHECKING([whether QTDIR environment variable is set])
 if test "x$QTDIR" = "x"; then
   AC_MSG_RESULT([no])
-  AC_MSG_ERROR([QTDIR must be properly set.])
 else
   AC_MSG_RESULT([$QTDIR])
+  ac_with_paths="$ac_with_paths $QTDIR"
 fi
 
-CFLAGS="$CFLAGS -I$QTDIR/include"
-CPPFLAGS="$CPPFLAGS -I$QTDIR/include"
-if test -d $QTDIR/lib64; then
-  LIBS="$LIBS -L$QTDIR/lib64"
-else
-  LIBS="$LIBS -L$QTDIR/lib"
-fi
-for X in qt qt3; do
-  if test -d $QTDIR/include/$X; then
-    CFLAGS="$CFLAGS -I$QTDIR/include/$X"
-    CPPFLAGS="$CPPFLAGS -I$QTDIR/include/$X"
+# Prepend alternate dependencies paths.
+ac_path=$PATH
+for X in $ac_with_paths; do
+  if test -d $X/bin; then
+    ac_path="$X/bin:$ac_path"
+  fi
+  if test -d $X/include; then
+    for Y in qt qt3; do
+      if test -d $X/include/$Y; then
+        CFLAGS="-I$X/include/$Y $CFLAGS"
+        CPPFLAGS="-I$X/include/$Y $CPPFLAGS"
+        ac_incpath="$X/include/$Y $ac_incpath"
+      fi
+    done
+    CFLAGS="-I$X/include $CFLAGS"
+    CPPFLAGS="-I$X/include $CPPFLAGS"
+    ac_incpath="$X/include $ac_incpath"
+  fi
+  if test -d $X/lib64; then
+    LIBS="-L$X/lib64 $LIBS"
+    ac_libs="-L$X/lib64 $ac_libs"
+  fi
+  if test -d $X/lib; then
+    LIBS="-L$X/lib $LIBS"
+    ac_libs="-L$X/lib $ac_libs"
   fi
 done
 
@@ -132,21 +131,21 @@ AC_CACHE_CHECK([for Qt library version >= 3.1.1],
 ac_qtdir_errmsg="not found in current PATH. Maybe QT development environment isn't available (qt3-devel)."
 
 # Check for Qt qmake utility.
-AC_PATH_PROG(ac_qmake, qmake, [no], $QTDIR/bin:${PATH})
+AC_PATH_PROG(ac_qmake, qmake, [no], $ac_path)
 if test "x$ac_qmake" = "xno"; then
    AC_MSG_ERROR([qmake $ac_qtdir_errmsg])
 fi
 AC_SUBST(ac_qmake)
 
 # Check for Qt moc utility.
-AC_PATH_PROG(ac_moc, moc, [no], $QTDIR/bin:${PATH})
+AC_PATH_PROG(ac_moc, moc, [no], $ac_path)
 if test "x$ac_moc" = "xno"; then
    AC_MSG_ERROR([moc $ac_qtdir_errmsg])
 fi
 AC_SUBST(ac_moc)
 
 # Check for Qt uic utility.
-AC_PATH_PROG(ac_uic, uic, [no], $QTDIR/bin:${PATH})
+AC_PATH_PROG(ac_uic, uic, [no], $ac_path)
 if test "x$ac_uic" = "xno"; then
    AC_MSG_ERROR([uic $ac_qtdir_errmsg])
 fi
@@ -260,7 +259,7 @@ fi
 # Finally produce a configure header file and the main makefile.
 AC_OUTPUT
 
-make clean > /dev/null 2>&1
+# make clean > /dev/null 2>&1
 
 echo ""
 echo "Now type 'make', followed by 'make install' as root."
