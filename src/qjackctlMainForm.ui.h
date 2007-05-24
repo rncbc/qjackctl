@@ -94,6 +94,7 @@ void qjackctlMainForm::init (void)
     m_pJackClient   = NULL;
     m_bJackDetach   = false;
     m_bJackSurvive  = false;
+    m_bJackShutdown = false;
     m_pAlsaSeq      = NULL;
     m_iStartDelay   = 0;
     m_iTimerDelay   = 0;
@@ -508,6 +509,7 @@ void qjackctlMainForm::startJack (void)
 
     // Now we're sure it ain't detached.
     updateServerState(QJACKCTL_STARTING);
+	m_bJackShutdown = false;
 	m_bJackDetach = false;
 
     // Load primary/default server preset...
@@ -759,14 +761,11 @@ void qjackctlMainForm::stopJackServer (void)
     m_iTimerDelay  = 0;
     m_iJackRefresh = 0;
 
-	// Wether we've alreadya shutdown in progress...
-	bool bShutdown = (m_pJackClient == NULL);
-
     // Stop client code.
     stopJackClient();
 
     // And try to stop server.
-    if (m_pJack && m_pJack->isRunning() && !m_bJackSurvive) {
+    if (m_pJack && (m_bJackShutdown || m_pJack->isRunning()) && !m_bJackSurvive) {
         appendMessages(tr("JACK is stopping..."));
         updateServerState(QJACKCTL_STOPPING);
 		// Do we have any pre-shutdown script?...
@@ -777,7 +776,7 @@ void qjackctlMainForm::stopJackServer (void)
 				tr("Shutdown script terminated"));
 		}
         // Now it's the time to real try stopping the server daemon...
-		if (!bShutdown) {
+		if (!m_bJackShutdown) {
 			// Let's try...
 			m_pJack->tryTerminate();
 			// Give it some time to terminate gracefully and stabilize...
@@ -847,7 +846,7 @@ void qjackctlMainForm::processJackExit (void)
 
     if (m_pJack) {
         // Force final server shutdown...
-        if (!m_bJackSurvive) {
+        if (!m_bJackShutdown && !m_bJackSurvive) {
             appendMessages(tr("JACK was stopped") + formatExitStatus(m_pJack->exitStatus()));
             if (!m_pJack->normalExit())
                 m_pJack->kill();
@@ -1552,7 +1551,8 @@ void qjackctlMainForm::shutNotifyEvent (void)
 {
     // Log this event.
     appendMessagesColor(tr("Shutdown notification."), "#cc6666");
-	// WARNING: JACK client handle is not valid anymore...
+	// SHUTDOWN: JACK client handle is not valid anymore...
+	m_bJackShutdown = true;
 	m_pJackClient = NULL;
     // Do what has to be done.
     stopJackServer();

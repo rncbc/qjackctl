@@ -132,7 +132,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     DisplayFont1TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
     if (m_pSetup->sDisplayFont2.isEmpty() || !font.fromString(m_pSetup->sDisplayFont2))
-        font = QFont(sSansSerif, 8, QFont::Bold);
+        font = QFont(sSansSerif, 6, QFont::Bold);
     DisplayFont2TextLabel->setFont(font);
     DisplayFont2TextLabel->setText(font.family() + " " + QString::number(font.pointSize()));
 
