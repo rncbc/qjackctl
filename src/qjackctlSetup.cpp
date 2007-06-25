@@ -208,14 +208,18 @@ bool qjackctlSetup::loadAliases ( const QString& sPreset )
 	// Load preset aliases...
 	const QString sAliasesKey = "/Aliases" + sSuffix;
     m_settings.beginGroup(sAliasesKey);
-	  m_settings.beginGroup("/Jack");
-	 	aliasJackOutputs.loadSettings(m_settings, "/Outputs");
-	 	aliasJackInputs.loadSettings(m_settings, "/Inputs");
-	  m_settings.endGroup();
-	  m_settings.beginGroup("/Alsa");
-	 	aliasAlsaOutputs.loadSettings(m_settings, "/Outputs");
-	 	aliasAlsaInputs.loadSettings(m_settings, "/Inputs");
-	  m_settings.endGroup();
+	m_settings.beginGroup("/Jack");	// FIXME: Audio
+	aliasAudioOutputs.loadSettings(m_settings, "/Outputs");
+	aliasAudioInputs.loadSettings(m_settings, "/Inputs");
+	m_settings.endGroup();
+	m_settings.beginGroup("/Midi");
+	aliasMidiOutputs.loadSettings(m_settings, "/Outputs");
+	aliasMidiInputs.loadSettings(m_settings, "/Inputs");
+	m_settings.endGroup();
+	m_settings.beginGroup("/Alsa");
+	aliasAlsaOutputs.loadSettings(m_settings, "/Outputs");
+	aliasAlsaInputs.loadSettings(m_settings, "/Inputs");
+	m_settings.endGroup();
     m_settings.endGroup();
 
     return true;
@@ -235,14 +239,18 @@ bool qjackctlSetup::saveAliases ( const QString& sPreset )
 	const QString sAliasesKey = "/Aliases" + sSuffix;
 	deleteKey(sAliasesKey);
     m_settings.beginGroup(sAliasesKey);
-	  m_settings.beginGroup("/Jack");
-	 	aliasJackOutputs.saveSettings(m_settings, "/Outputs");
-	 	aliasJackInputs.saveSettings(m_settings, "/Inputs");
-	  m_settings.endGroup();
-	  m_settings.beginGroup("/Alsa");
-	 	aliasAlsaOutputs.saveSettings(m_settings, "/Outputs");
-	 	aliasAlsaInputs.saveSettings(m_settings, "/Inputs");
-	  m_settings.endGroup();
+	m_settings.beginGroup("/Jack");	// FIXME: Audio
+	aliasAudioOutputs.saveSettings(m_settings, "/Outputs");
+	aliasAudioInputs.saveSettings(m_settings, "/Inputs");
+	m_settings.endGroup();
+	m_settings.beginGroup("/Midi");
+	aliasMidiOutputs.saveSettings(m_settings, "/Outputs");
+	aliasMidiInputs.saveSettings(m_settings, "/Inputs");
+	m_settings.endGroup();
+	m_settings.beginGroup("/Alsa");
+	aliasAlsaOutputs.saveSettings(m_settings, "/Outputs");
+	aliasAlsaInputs.saveSettings(m_settings, "/Inputs");
+	m_settings.endGroup();
     m_settings.endGroup();
 
     return true;

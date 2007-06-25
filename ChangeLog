@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- JACK MIDI support is now being introduced. Conections window
+  now has a brand new MIDI tab, the older being renamed to ALSA,
+  as for the ALSA/MIDI sequencer conveniency.
+
 - Application icon is now installed to ${prefix}/share/pixmaps;
   application desktop entry file is now included in installation;
   spec file (RPM) is now a bit more openSUSE compliant; initial

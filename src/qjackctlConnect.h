@@ -82,20 +82,20 @@ public:
 
     // Instance accessors.
     void setPortName(const QString& sPortName);
-    const QString& clientName();
-    const QString& portName();
+    const QString& clientName() const;
+    const QString& portName() const;
 
     // Complete client:port name helper.
-    QString clientPortName();
+    QString clientPortName() const;
 
     // Connections client item accessor.
-    qjackctlClientItem *client();
+    qjackctlClientItem *client() const;
 
     // Client port cleanup marker.
     void markPort(int iMark);
     void markClientPort(int iMark);
 
-    int portMark();
+    int portMark() const;
 
     // Connected port list primitives.
     void addConnect(qjackctlPortItem *pPort);
@@ -104,6 +104,7 @@ public:
     // Connected port finders.
     qjackctlPortItem *findConnect(const QString& sClientPortName);
     qjackctlPortItem *findConnectPtr(qjackctlPortItem *pPortPtr);
+
     // Connection list accessor.
     QPtrList<qjackctlPortItem>& connects();
 
@@ -111,7 +112,7 @@ public:
     virtual int rtti() const;
 
     // Connectiopn highlight methods.
-    bool isHilite();
+    bool isHilite() const;
     void setHilite (bool bHilite);
 
     // Special port name sorting virtual comparator.
@@ -154,13 +155,13 @@ public:
 
     // Instance accessors.
     void setClientName(const QString& sClientName);
-    const QString& clientName();
+    const QString& clientName() const;
 
     // Readable flag accessor.
-    bool isReadable();
+    bool isReadable() const;
 
     // Client list accessor.
-    qjackctlClientList *clientList();
+    qjackctlClientList *clientList() const;
 
     // Port list accessor.
     QPtrList<qjackctlPortItem>& ports();
@@ -170,13 +171,13 @@ public:
     void markClientPorts(int iMark);
     void cleanClientPorts(int iMark);
 
-    int clientMark();
+    int clientMark() const;
 
     // To virtually distinguish between list view items.
     virtual int rtti() const;
 
     // Connectiopn highlight methods.
-    bool isHilite();
+    bool isHilite() const;
     void setHilite (bool bHilite);
 
     // Special port name sorting virtual comparator.
@@ -218,13 +219,13 @@ public:
     // Client finder.
     qjackctlClientItem *findClient(const QString& sClientName);
     // Client:port finder.
-    qjackctlPortItem   *findClientPort(const QString& sClientPort);
+    qjackctlPortItem *findClientPort(const QString& sClientPort);
 
     // List view accessor.
-    qjackctlClientListView *listView();
+    qjackctlClientListView *listView() const;
 
     // Readable flag accessor.
-    bool isReadable();
+    bool isReadable() const;
 
     // Client list accessor.
     QPtrList<qjackctlClientItem>& clients();
@@ -267,12 +268,15 @@ public:
 
     // Auto-open timer methods.
     void setAutoOpenTimeout(int iAutoOpenTimeout);
-    int autoOpenTimeout();
+    int autoOpenTimeout() const;
 
 	// Aliasing support methods.
 	void setAliases(qjackctlConnectAlias *pAliases, bool bRenameEnabled);
-	qjackctlConnectAlias *aliases();
+	qjackctlConnectAlias *aliases() const;
 	bool renameEnabled();
+
+	// Binding indirect accessor.
+	qjackctlConnect *binding() const;
 
     // Natural decimal sorting comparator helper.
     static int compare (const QString& s1, const QString& s2, bool bAscending);
@@ -376,29 +380,29 @@ public:
     ~qjackctlConnectView();
 
     // Widget accesors.
-    qjackctlClientListView *OListView()     { return m_pOListView; }
-    qjackctlClientListView *IListView()     { return m_pIListView; }
-    qjackctlConnectorView  *ConnectorView() { return m_pConnectorView; }
+    qjackctlClientListView *OListView()     const{ return m_pOListView; }
+    qjackctlClientListView *IListView()     const { return m_pIListView; }
+    qjackctlConnectorView  *ConnectorView() const { return m_pConnectorView; }
 
     // Connections object binding methods.
     void setBinding(qjackctlConnect *pConnect);
-    qjackctlConnect *binding();
+    qjackctlConnect *binding() const;
 
     // Client list accessors.
-    qjackctlClientList *OClientList();
-    qjackctlClientList *IClientList();
+    qjackctlClientList *OClientList() const;
+    qjackctlClientList *IClientList() const;
 
     // Connector line style accessors.
     void setBezierLines(bool bBezierLines);
-    bool isBezierLines();
+    bool isBezierLines() const;
 
     // Common icon size pixmap accessors.
     void setIconSize (int iIconSize);
-    int iconSize (void);
+    int iconSize (void) const;
 
     // Dirty flag accessors.
     void setDirty (bool bDirty);
-    bool dirty();
+    bool isDirty() const;
 
 signals:
 
@@ -447,8 +451,8 @@ public:
     bool canDisconnectAll();
 
     // Client list accessors.
-    qjackctlClientList *OClientList();
-    qjackctlClientList *IClientList();
+    qjackctlClientList *OClientList() const;
+    qjackctlClientList *IClientList() const;
 
 public slots:
 
@@ -478,7 +482,7 @@ protected:
     virtual void updateConnections() = 0;
 
     // These must be accessed by the descendant constructor.
-    qjackctlConnectView *connectView();
+    qjackctlConnectView *connectView() const;
     void setOClientList(qjackctlClientList *pOClientList);
     void setIClientList(qjackctlClientList *pIClientList);
 

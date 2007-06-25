@@ -28,23 +28,48 @@
 // Kind of constructor.
 void qjackctlConnectionsForm::init (void)
 {
-	m_pJackClient  = NULL;
-	m_pJackConnect = NULL;
+	m_pJackClient   = NULL;
+	m_pAudioConnect = NULL;
+	m_pMidiConnect  = NULL;
 
-	m_pAlsaSeq     = NULL;
-	m_pAlsaConnect = NULL;
+	m_pAlsaSeq      = NULL;
+	m_pAlsaConnect  = NULL;
 
 	m_pSetup = NULL;
 
 	// Connect it to some UI feedback slots.
-	QObject::connect(JackConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
-	QObject::connect(JackConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(jackStabilize()));
-	QObject::connect(AlsaConnectView->OListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
-	QObject::connect(AlsaConnectView->IListView(), SIGNAL(selectionChanged()), this, SLOT(alsaStabilize()));
+	QObject::connect(AudioConnectView->OListView(),
+		SIGNAL(selectionChanged()),
+		SLOT(audioStabilize()));
+	QObject::connect(AudioConnectView->IListView(),
+		SIGNAL(selectionChanged()),
+		SLOT(audioStabilize()));
+	QObject::connect(MidiConnectView->OListView(),
+		SIGNAL(selectionChanged()),
+		SLOT(midiStabilize()));
+	QObject::connect(MidiConnectView->IListView(),
+		SIGNAL(selectionChanged()),
+		SLOT(midiStabilize()));
+	QObject::connect(AlsaConnectView->OListView(),
+		SIGNAL(selectionChanged()),
+		SLOT(alsaStabilize()));
+	QObject::connect(AlsaConnectView->IListView(),
+		SIGNAL(selectionChanged()),
+		SLOT(alsaStabilize()));
     // Dirty dispatcher (refresh deferral).
-    QObject::connect(JackConnectView, SIGNAL(contentsChanged()), this, SLOT(jackRefresh()));
-    QObject::connect(AlsaConnectView, SIGNAL(contentsChanged()), this, SLOT(alsaRefresh()));
+    QObject::connect(AudioConnectView,
+		SIGNAL(contentsChanged()),
+		SLOT(audioRefresh()));
+    QObject::connect(MidiConnectView,
+		SIGNAL(contentsChanged()),
+		SLOT(midiRefresh()));
+    QObject::connect(AlsaConnectView,
+		SIGNAL(contentsChanged()),
+		SLOT(alsaRefresh()));
 
+#ifndef CONFIG_JACK_MIDI
+	ConnectionsTabWidget->setTabEnabled(MidiConnectTab, false);
+#endif
 #ifndef CONFIG_ALSA_SEQ
 	ConnectionsTabWidget->setTabEnabled(AlsaConnectTab, false);
 #endif
@@ -67,7 +92,9 @@ void qjackctlConnectionsForm::showEvent ( QShowEvent *pShowEvent )
 	if (pMainForm)
 		pMainForm->stabilizeForm();
 
-	jackRefresh();
+	audioRefresh();
+	midiRefresh();
+
 	alsaRefresh();
 
 	QWidget::showEvent(pShowEvent);
@@ -93,7 +120,8 @@ void qjackctlConnectionsForm::setup ( qjackctlSetup *pSetup )
 
 	// Load some splitter sizes...
 	if (m_pSetup) {
-		m_pSetup->loadSplitterSizes(JackConnectView);
+		m_pSetup->loadSplitterSizes(AudioConnectView);
+		m_pSetup->loadSplitterSizes(MidiConnectView);
 		m_pSetup->loadSplitterSizes(AlsaConnectView);
 	}
 
@@ -107,7 +135,10 @@ bool qjackctlConnectionsForm::queryClose (void)
 {
 	bool bQueryClose = true;
 
-	if (m_pSetup && (JackConnectView->dirty() || AlsaConnectView->dirty())) {
+	if (m_pSetup
+		&& (AudioConnectView->isDirty() ||
+			MidiConnectView->isDirty()  ||
+			AlsaConnectView->isDirty())) {
 		switch (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("The preset aliases have been changed:") + "\n\n" +
@@ -126,7 +157,8 @@ bool qjackctlConnectionsForm::queryClose (void)
 
 	// Save some splitter sizes...
 	if (m_pSetup && bQueryClose) {
-		m_pSetup->saveSplitterSizes(JackConnectView);
+		m_pSetup->saveSplitterSizes(AudioConnectView);
+		m_pSetup->saveSplitterSizes(MidiConnectView);
 		m_pSetup->saveSplitterSizes(AlsaConnectView);
 	}
 
@@ -143,7 +175,8 @@ bool qjackctlConnectionsForm::loadAliases (void)
 		m_sPreset = m_pSetup->sDefPreset;
 		bResult = m_pSetup->loadAliases(m_sPreset);
 		if (bResult) {
-			JackConnectView->setDirty(false);
+			AudioConnectView->setDirty(false);
+			MidiConnectView->setDirty(false);
 			AlsaConnectView->setDirty(false);
 		}
 	}
@@ -160,7 +193,8 @@ bool qjackctlConnectionsForm::saveAliases (void)
 	if (m_pSetup) {
 		bResult = m_pSetup->saveAliases(m_sPreset);
 		if (bResult) {
-			JackConnectView->setDirty(false);
+			AudioConnectView->setDirty(false);
+			MidiConnectView->setDirty(false);
 			AlsaConnectView->setDirty(false);
 		}
 	}
@@ -173,14 +207,16 @@ bool qjackctlConnectionsForm::saveAliases (void)
 QFont qjackctlConnectionsForm::connectionsFont (void)
 {
 	// Elect one list view to retrieve current font.
-	return JackConnectView->OListView()->font();
+	return AudioConnectView->OListView()->font();
 }
 
 void qjackctlConnectionsForm::setConnectionsFont ( const QFont & font )
 {
 	// Set fonts of all listviews...
-	JackConnectView->OListView()->setFont(font);
-	JackConnectView->IListView()->setFont(font);
+	AudioConnectView->OListView()->setFont(font);
+	AudioConnectView->IListView()->setFont(font);
+	MidiConnectView->OListView()->setFont(font);
+	MidiConnectView->IListView()->setFont(font);
 	AlsaConnectView->OListView()->setFont(font);
 	AlsaConnectView->IListView()->setFont(font);
 }
@@ -190,7 +226,8 @@ void qjackctlConnectionsForm::setConnectionsFont ( const QFont & font )
 void qjackctlConnectionsForm::setConnectionsIconSize( int iIconSize )
 {
 	// Set icon sizes of all views...
-	JackConnectView->setIconSize(iIconSize);
+	AudioConnectView->setIconSize(iIconSize);
+	MidiConnectView->setIconSize(iIconSize);
 	AlsaConnectView->setIconSize(iIconSize);
 }
 
@@ -200,21 +237,35 @@ void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
 {
 	m_pJackClient = pJackClient;
 
-	if (pJackClient == NULL && m_pJackConnect) {
-		delete m_pJackConnect;
-		m_pJackConnect = NULL;
-	}
-
-	if (pJackClient && m_pJackConnect == NULL) {
-		m_pJackConnect = new qjackctlJackConnect(JackConnectView, pJackClient);
-		if (m_pJackConnect) {
-			qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
-			if (pMainForm)
-				QObject::connect(m_pJackConnect, SIGNAL(connectChanged()), pMainForm, SLOT(jackConnectChanged()));
+	if (pJackClient == NULL) {
+		if (m_pAudioConnect) {
+			delete m_pAudioConnect;
+			m_pAudioConnect = NULL;
+		}
+		if (m_pMidiConnect) {
+			delete m_pMidiConnect;
+			m_pMidiConnect = NULL;
 		}
 	}
 
-	stabilizeJack(pJackClient != NULL);
+	if (pJackClient) {
+		qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+		if (m_pAudioConnect == NULL && pMainForm) {
+			m_pAudioConnect = new qjackctlJackConnect(
+				AudioConnectView, pJackClient, QJACKCTL_JACK_AUDIO);
+			QObject::connect(m_pAudioConnect, SIGNAL(connectChanged()),
+				pMainForm, SLOT(jackConnectChanged()));
+		}
+		if (m_pMidiConnect == NULL && pMainForm) {
+			m_pMidiConnect = new qjackctlJackConnect(
+				MidiConnectView, pJackClient, QJACKCTL_JACK_MIDI);
+			QObject::connect(m_pMidiConnect, SIGNAL(connectChanged()),
+				pMainForm, SLOT(jackConnectChanged()));
+		}
+	}
+
+	stabilizeAudio(pJackClient != NULL);
+	stabilizeMidi(pJackClient != NULL);
 }
 
 
@@ -242,59 +293,114 @@ void qjackctlConnectionsForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 
 
 // Check if there's JACK audio connections.
-bool qjackctlConnectionsForm::isJackConnected (void)
+bool qjackctlConnectionsForm::isAudioConnected (void)
 {
-	bool bIsConnected = false;
+	bool bIsAudioConnected = false;
 
-	if (m_pJackConnect)
-		bIsConnected = m_pJackConnect->canDisconnectAll();
+	if (m_pAudioConnect)
+		bIsAudioConnected = m_pAudioConnect->canDisconnectAll();
 
-	return bIsConnected;
+	return bIsAudioConnected;
 }
 
 
-// Connect current selected ports.
-void qjackctlConnectionsForm::jackConnectSelected (void)
+// Connect current selected JACK audio ports.
+void qjackctlConnectionsForm::audioConnectSelected (void)
 {
-	if (m_pJackConnect) {
-		if (m_pJackConnect->connectSelected())
-			refreshJack(false);
+	if (m_pAudioConnect) {
+		if (m_pAudioConnect->connectSelected())
+			refreshAudio(false);
 	}
 }
 
 
-// Disconnect current selected ports.
-void qjackctlConnectionsForm::jackDisconnectSelected (void)
+// Disconnect current selected JACK audio ports.
+void qjackctlConnectionsForm::audioDisconnectSelected (void)
 {
-	if (m_pJackConnect) {
-		if (m_pJackConnect->disconnectSelected())
-			refreshJack(false);
+	if (m_pAudioConnect) {
+		if (m_pAudioConnect->disconnectSelected())
+			refreshAudio(false);
 	}
 }
 
 
-// Disconnect all connected ports.
-void qjackctlConnectionsForm::jackDisconnectAll()
+// Disconnect all connected JACK audio ports.
+void qjackctlConnectionsForm::audioDisconnectAll()
 {
-	if (m_pJackConnect) {
-		if (m_pJackConnect->disconnectAll())
-			refreshJack(false);
+	if (m_pAudioConnect) {
+		if (m_pAudioConnect->disconnectAll())
+			refreshAudio(false);
 	}
 }
 
 
-// Refresh complete form by notifying the parent form.
-void qjackctlConnectionsForm::jackRefresh ( void )
+// Refresh JACK audio form by notifying the parent form.
+void qjackctlConnectionsForm::audioRefresh ( void )
 {
-	refreshJack(false);
-//	refreshAlsa(false);
+	refreshAudio(false);
 }
 
 
-// A helper stabilization slot.
-void qjackctlConnectionsForm::jackStabilize ( void )
+// A JACK audio helper stabilization slot.
+void qjackctlConnectionsForm::audioStabilize ( void )
 {
-	stabilizeJack(true);
+	stabilizeAudio(true);
+}
+
+
+// Connect current selected JACK MIDI ports.
+void qjackctlConnectionsForm::midiConnectSelected (void)
+{
+	if (m_pMidiConnect) {
+		if (m_pMidiConnect->connectSelected())
+			refreshMidi(false);
+	}
+}
+
+
+// Check if there's JACK MIDI connections.
+bool qjackctlConnectionsForm::isMidiConnected (void)
+{
+	bool bIsMidiConnected = false;
+
+	if (m_pMidiConnect)
+		bIsMidiConnected = m_pMidiConnect->canDisconnectAll();
+
+	return bIsMidiConnected;
+}
+
+
+// Disconnect current selected JACK MIDI ports.
+void qjackctlConnectionsForm::midiDisconnectSelected (void)
+{
+	if (m_pMidiConnect) {
+		if (m_pMidiConnect->disconnectSelected())
+			refreshMidi(false);
+	}
+}
+
+
+// Disconnect all connected JACK MIDI ports.
+void qjackctlConnectionsForm::midiDisconnectAll()
+{
+	if (m_pMidiConnect) {
+		if (m_pMidiConnect->disconnectAll())
+			refreshMidi(false);
+	}
+}
+
+
+// Refresh JACK MIDI form by notifying the parent form.
+void qjackctlConnectionsForm::midiRefresh ( void )
+{
+	refreshMidi(false);
+}
+
+
+// A JACK MIDI helper stabilization slot.
+void qjackctlConnectionsForm::midiStabilize ( void )
+{
+	stabilizeMidi(true);
 }
 
 
@@ -344,7 +450,6 @@ void qjackctlConnectionsForm::alsaDisconnectAll()
 void qjackctlConnectionsForm::alsaRefresh ( void )
 {
 	refreshAlsa(false);
-//	refreshJack(false);
 }
 
 
@@ -355,15 +460,31 @@ void qjackctlConnectionsForm::alsaStabilize ( void )
 }
 
 
-// Either rebuild all connections now or notify main form for doing that later.
-void qjackctlConnectionsForm::refreshJack ( bool bEnabled )
+// Either rebuild all connections now
+// or notify main form for doing that later.
+void qjackctlConnectionsForm::refreshAudio ( bool bEnabled )
 {
-	if (m_pJackConnect == NULL)
+	if (m_pAudioConnect == NULL)
 		return;
 
 	if (bEnabled) {
-		m_pJackConnect->refresh();
-		stabilizeJack(true);
+		m_pAudioConnect->refresh();
+		stabilizeAudio(true);
+	} else {
+		qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
+		if (pMainForm)
+			pMainForm->refreshJackConnections();
+	}
+}
+
+void qjackctlConnectionsForm::refreshMidi ( bool bEnabled )
+{
+	if (m_pMidiConnect == NULL)
+		return;
+
+	if (bEnabled) {
+		m_pMidiConnect->refresh();
+		stabilizeMidi(true);
 	} else {
 		qjackctlMainForm *pMainForm = (qjackctlMainForm *) QWidget::parentWidget();
 		if (pMainForm)
@@ -388,18 +509,39 @@ void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled )
 
 
 // Proper enablement of connections command controls.
-void qjackctlConnectionsForm::stabilizeJack ( bool bEnabled )
+void qjackctlConnectionsForm::stabilizeAudio ( bool bEnabled )
 {
-	if (m_pJackConnect && bEnabled) {
-		JackConnectPushButton->setEnabled(m_pJackConnect->canConnectSelected());
-		JackDisconnectPushButton->setEnabled(m_pJackConnect->canDisconnectSelected());
-		JackDisconnectAllPushButton->setEnabled(m_pJackConnect->canDisconnectAll());
-		JackRefreshPushButton->setEnabled(true);
+	if (m_pAudioConnect && bEnabled) {
+		AudioConnectPushButton->setEnabled(
+			m_pAudioConnect->canConnectSelected());
+		AudioDisconnectPushButton->setEnabled(
+			m_pAudioConnect->canDisconnectSelected());
+		AudioDisconnectAllPushButton->setEnabled(
+			m_pAudioConnect->canDisconnectAll());
+		AudioRefreshPushButton->setEnabled(true);
 	} else {
-		JackConnectPushButton->setEnabled(false);
-		JackDisconnectPushButton->setEnabled(false);
-		JackDisconnectAllPushButton->setEnabled(false);
-		JackRefreshPushButton->setEnabled(false);
+		AudioConnectPushButton->setEnabled(false);
+		AudioDisconnectPushButton->setEnabled(false);
+		AudioDisconnectAllPushButton->setEnabled(false);
+		AudioRefreshPushButton->setEnabled(false);
+	}
+}
+
+void qjackctlConnectionsForm::stabilizeMidi ( bool bEnabled )
+{
+	if (m_pMidiConnect && bEnabled) {
+		MidiConnectPushButton->setEnabled(
+			m_pMidiConnect->canConnectSelected());
+		MidiDisconnectPushButton->setEnabled(
+			m_pMidiConnect->canDisconnectSelected());
+		MidiDisconnectAllPushButton->setEnabled(
+			m_pMidiConnect->canDisconnectAll());
+		MidiRefreshPushButton->setEnabled(true);
+	} else {
+		MidiConnectPushButton->setEnabled(false);
+		MidiDisconnectPushButton->setEnabled(false);
+		MidiDisconnectAllPushButton->setEnabled(false);
+		MidiRefreshPushButton->setEnabled(false);
 	}
 }
 
@@ -425,13 +567,23 @@ void qjackctlConnectionsForm::updateAliases (void)
 	// Set alias maps for all listviews...
 	if (m_pSetup && m_pSetup->bAliasesEnabled) {
 		bool bRenameEnabled = m_pSetup->bAliasesEditing;
-		JackConnectView->OListView()->setAliases(&(m_pSetup->aliasJackOutputs), bRenameEnabled);
-		JackConnectView->IListView()->setAliases(&(m_pSetup->aliasJackInputs),  bRenameEnabled);
-		AlsaConnectView->OListView()->setAliases(&(m_pSetup->aliasAlsaOutputs), bRenameEnabled);
-		AlsaConnectView->IListView()->setAliases(&(m_pSetup->aliasAlsaInputs),  bRenameEnabled);
+		AudioConnectView->OListView()->setAliases(
+			&(m_pSetup->aliasAudioOutputs), bRenameEnabled);
+		AudioConnectView->IListView()->setAliases(
+			&(m_pSetup->aliasAudioInputs),  bRenameEnabled);
+		MidiConnectView->OListView()->setAliases(
+			&(m_pSetup->aliasMidiOutputs), bRenameEnabled);
+		MidiConnectView->IListView()->setAliases(
+			&(m_pSetup->aliasMidiInputs),  bRenameEnabled);
+		AlsaConnectView->OListView()->setAliases(
+			&(m_pSetup->aliasAlsaOutputs), bRenameEnabled);
+		AlsaConnectView->IListView()->setAliases(
+			&(m_pSetup->aliasAlsaInputs),  bRenameEnabled);
 	} else {
-		JackConnectView->OListView()->setAliases(NULL, false);
-		JackConnectView->IListView()->setAliases(NULL, false);
+		AudioConnectView->OListView()->setAliases(NULL, false);
+		AudioConnectView->IListView()->setAliases(NULL, false);
+		MidiConnectView->OListView()->setAliases(NULL, false);
+		MidiConnectView->IListView()->setAliases(NULL, false);
 		AlsaConnectView->OListView()->setAliases(NULL, false);
 		AlsaConnectView->IListView()->setAliases(NULL, false);
 	}

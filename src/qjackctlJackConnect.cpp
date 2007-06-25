@@ -34,20 +34,34 @@ qjackctlJackPort::qjackctlJackPort ( qjackctlJackClient *pClient, const QString&
 {
     m_pJackPort = pJackPort;
 
-    unsigned long ulPortFlags = jack_port_flags(m_pJackPort);
-    if (ulPortFlags & JackPortIsInput) {
-        if (ulPortFlags & JackPortIsTerminal) {
-            QListViewItem::setPixmap(0, qjackctlJackConnect::pixmap(ulPortFlags & JackPortIsPhysical ? QJACKCTL_XPM_APORTPTI : QJACKCTL_XPM_APORTLTI));
-        } else {
-            QListViewItem::setPixmap(0, qjackctlJackConnect::pixmap(ulPortFlags & JackPortIsPhysical ? QJACKCTL_XPM_APORTPNI : QJACKCTL_XPM_APORTLNI));
-        }
-    } else if (ulPortFlags & JackPortIsOutput) {
-        if (ulPortFlags & JackPortIsTerminal) {
-            QListViewItem::setPixmap(0, qjackctlJackConnect::pixmap(ulPortFlags & JackPortIsPhysical ? QJACKCTL_XPM_APORTPTO : QJACKCTL_XPM_APORTLTO));
-        } else {
-            QListViewItem::setPixmap(0, qjackctlJackConnect::pixmap(ulPortFlags & JackPortIsPhysical ? QJACKCTL_XPM_APORTPNO : QJACKCTL_XPM_APORTLNO));
-        }
-    }
+	qjackctlJackConnect *pJackConnect
+		= static_cast<qjackctlJackConnect *> (
+			((pClient->clientList())->listView())->binding());
+
+	if (pJackConnect) {
+		unsigned long ulPortFlags = jack_port_flags(m_pJackPort);
+		if (ulPortFlags & JackPortIsInput) {
+			if (ulPortFlags & JackPortIsTerminal) {
+				QListViewItem::setPixmap(0, pJackConnect->pixmap(
+					ulPortFlags & JackPortIsPhysical
+						? QJACKCTL_JACK_PORTPTI : QJACKCTL_JACK_PORTLTI));
+			} else {
+				QListViewItem::setPixmap(0, pJackConnect->pixmap(
+					ulPortFlags & JackPortIsPhysical
+						? QJACKCTL_JACK_PORTPNI : QJACKCTL_JACK_PORTLNI));
+			}
+		} else if (ulPortFlags & JackPortIsOutput) {
+			if (ulPortFlags & JackPortIsTerminal) {
+				QListViewItem::setPixmap(0, pJackConnect->pixmap(
+					ulPortFlags & JackPortIsPhysical
+						? QJACKCTL_JACK_PORTPTO : QJACKCTL_JACK_PORTLTO));
+			} else {
+				QListViewItem::setPixmap(0, pJackConnect->pixmap(
+					ulPortFlags & JackPortIsPhysical
+						? QJACKCTL_JACK_PORTPNO : QJACKCTL_JACK_PORTLNO));
+			}
+		}
+	}
 }
 
 // Default destructor.
@@ -57,12 +71,12 @@ qjackctlJackPort::~qjackctlJackPort (void)
 
 
 // Jack handles accessors.
-jack_client_t *qjackctlJackPort::jackClient (void)
+jack_client_t *qjackctlJackPort::jackClient (void) const
 {
     return ((qjackctlJackClient *) client())->jackClient();
 }
 
-jack_port_t *qjackctlJackPort::jackPort (void)
+jack_port_t *qjackctlJackPort::jackPort (void) const
 {
     return m_pJackPort;
 }
@@ -76,11 +90,19 @@ jack_port_t *qjackctlJackPort::jackPort (void)
 qjackctlJackClient::qjackctlJackClient ( qjackctlJackClientList *pClientList, const QString& sClientName )
     : qjackctlClientItem(pClientList, sClientName)
 {
-    if (pClientList->isReadable()) {
-        QListViewItem::setPixmap(0, qjackctlJackConnect::pixmap(QJACKCTL_XPM_ACLIENTO));
-    } else {
-        QListViewItem::setPixmap(0, qjackctlJackConnect::pixmap(QJACKCTL_XPM_ACLIENTI));
-    }
+	qjackctlJackConnect *pJackConnect
+		= static_cast<qjackctlJackConnect *> (
+			(pClientList->listView())->binding());
+
+	if (pJackConnect) {
+		if (pClientList->isReadable()) {
+			QListViewItem::setPixmap(0,
+				pJackConnect->pixmap(QJACKCTL_JACK_CLIENTO));
+		} else {
+			QListViewItem::setPixmap(0,
+				pJackConnect->pixmap(QJACKCTL_JACK_CLIENTI));
+		}
+	}
 }
 
 // Default destructor.
@@ -90,7 +112,7 @@ qjackctlJackClient::~qjackctlJackClient (void)
 
 
 // Jack client accessor.
-jack_client_t *qjackctlJackClient::jackClient (void)
+jack_client_t *qjackctlJackClient::jackClient (void) const
 {
     return ((qjackctlJackClientList *) clientList())->jackClient();
 }
@@ -114,7 +136,7 @@ qjackctlJackClientList::~qjackctlJackClientList (void)
 
 
 // Jack client accessor.
-jack_client_t *qjackctlJackClientList::jackClient (void)
+jack_client_t *qjackctlJackClientList::jackClient (void) const
 {
     return m_pJackClient;
 }
@@ -126,13 +148,23 @@ int qjackctlJackClientList::updateClientPorts (void)
     if (m_pJackClient == 0)
         return 0;
 
+	qjackctlJackConnect *pJackConnect
+		= static_cast<qjackctlJackConnect *> (listView()->binding());
+	if (pJackConnect == 0)
+		return 0;
+
+	const char *pszJackType = JACK_DEFAULT_AUDIO_TYPE;
+#ifdef CONFIG_JACK_MIDI
+	if (pJackConnect->jackType() == QJACKCTL_JACK_MIDI)
+		pszJackType = JACK_DEFAULT_MIDI_TYPE;
+#endif
+
     int iDirtyCount = 0;
 
     markClientPorts(0);
 
-	const char **ppszClientPorts = jack_get_ports(m_pJackClient,
-		0, JACK_DEFAULT_AUDIO_TYPE,
-		isReadable() ? JackPortIsOutput : JackPortIsInput);
+	const char **ppszClientPorts = jack_get_ports(m_pJackClient, 0,
+		pszJackType, isReadable() ? JackPortIsOutput : JackPortIsInput);
     if (ppszClientPorts) {
         int iClientPort = 0;
         while (ppszClientPorts[iClientPort]) {
@@ -174,9 +206,12 @@ int qjackctlJackClientList::updateClientPorts (void)
 //
 
 // Constructor.
-qjackctlJackConnect::qjackctlJackConnect ( qjackctlConnectView *pConnectView, jack_client_t *pJackClient )
+qjackctlJackConnect::qjackctlJackConnect ( qjackctlConnectView *pConnectView,
+	jack_client_t *pJackClient, int iJackType  )
     : qjackctlConnect(pConnectView)
 {
+	m_iJackType = iJackType;
+
     createIconPixmaps();
 
     setOClientList(new qjackctlJackClientList(connectView()->OListView(), pJackClient, true));
@@ -189,35 +224,60 @@ qjackctlJackConnect::~qjackctlJackConnect (void)
     deleteIconPixmaps();
 }
 
+
+// Connection type accessors.
+int qjackctlJackConnect::jackType (void) const
+{
+	return m_iJackType;
+}
+
+
 // Local pixmap-set janitor methods.
 void qjackctlJackConnect::createIconPixmaps (void)
 {
-    g_apPixmaps[QJACKCTL_XPM_ACLIENTI] = createIconPixmap("aclienti");
-    g_apPixmaps[QJACKCTL_XPM_ACLIENTO] = createIconPixmap("acliento");
-    g_apPixmaps[QJACKCTL_XPM_APORTPTI] = createIconPixmap("aportpti");
-    g_apPixmaps[QJACKCTL_XPM_APORTPTO] = createIconPixmap("aportpto");
-    g_apPixmaps[QJACKCTL_XPM_APORTPNI] = createIconPixmap("aportpni");
-    g_apPixmaps[QJACKCTL_XPM_APORTPNO] = createIconPixmap("aportpno");
-    g_apPixmaps[QJACKCTL_XPM_APORTLTI] = createIconPixmap("aportlti");
-    g_apPixmaps[QJACKCTL_XPM_APORTLTO] = createIconPixmap("aportlto");
-    g_apPixmaps[QJACKCTL_XPM_APORTLNI] = createIconPixmap("aportlni");
-    g_apPixmaps[QJACKCTL_XPM_APORTLNO] = createIconPixmap("aportlno");
+	switch (m_iJackType) {
+	case QJACKCTL_JACK_MIDI:
+		m_apPixmaps[QJACKCTL_JACK_CLIENTI] = createIconPixmap("mclienti");
+		m_apPixmaps[QJACKCTL_JACK_CLIENTO] = createIconPixmap("mcliento");
+		m_apPixmaps[QJACKCTL_JACK_PORTPTI] = createIconPixmap("mporti");
+		m_apPixmaps[QJACKCTL_JACK_PORTPTO] = createIconPixmap("mporto");
+		m_apPixmaps[QJACKCTL_JACK_PORTPNI] = createIconPixmap("mporti");
+		m_apPixmaps[QJACKCTL_JACK_PORTPNO] = createIconPixmap("mporto");
+		m_apPixmaps[QJACKCTL_JACK_PORTLTI] = createIconPixmap("mporti");
+		m_apPixmaps[QJACKCTL_JACK_PORTLTO] = createIconPixmap("mporto");
+		m_apPixmaps[QJACKCTL_JACK_PORTLNI] = createIconPixmap("mporti");
+		m_apPixmaps[QJACKCTL_JACK_PORTLNO] = createIconPixmap("mporto");
+		break;
+	case QJACKCTL_JACK_AUDIO:
+	default:
+		m_apPixmaps[QJACKCTL_JACK_CLIENTI] = createIconPixmap("aclienti");
+		m_apPixmaps[QJACKCTL_JACK_CLIENTO] = createIconPixmap("acliento");
+		m_apPixmaps[QJACKCTL_JACK_PORTPTI] = createIconPixmap("aportpti");
+		m_apPixmaps[QJACKCTL_JACK_PORTPTO] = createIconPixmap("aportpto");
+		m_apPixmaps[QJACKCTL_JACK_PORTPNI] = createIconPixmap("aportpni");
+		m_apPixmaps[QJACKCTL_JACK_PORTPNO] = createIconPixmap("aportpno");
+		m_apPixmaps[QJACKCTL_JACK_PORTLTI] = createIconPixmap("aportlti");
+		m_apPixmaps[QJACKCTL_JACK_PORTLTO] = createIconPixmap("aportlto");
+		m_apPixmaps[QJACKCTL_JACK_PORTLNI] = createIconPixmap("aportlni");
+		m_apPixmaps[QJACKCTL_JACK_PORTLNO] = createIconPixmap("aportlno");
+		break;
+	}
 }
 
 void qjackctlJackConnect::deleteIconPixmaps (void)
 {
-    for (int i = 0; i < QJACKCTL_XPM_APIXMAPS; i++) {
-        if (g_apPixmaps[i])
-            delete g_apPixmaps[i];
-        g_apPixmaps[i] = NULL;
+    for (int i = 0; i < QJACKCTL_JACK_PIXMAPS; i++) {
+        if (m_apPixmaps[i])
+            delete m_apPixmaps[i];
+        m_apPixmaps[i] = NULL;
     }
 }
 
 
 // Common pixmap accessor (static).
-QPixmap& qjackctlJackConnect::pixmap ( int iPixmap )
+QPixmap& qjackctlJackConnect::pixmap ( int iPixmap ) const
 {
-    return *g_apPixmaps[iPixmap];
+    return *m_apPixmaps[iPixmap];
 }
 
 
@@ -284,8 +344,5 @@ void qjackctlJackConnect::updateIconPixmaps (void)
     createIconPixmaps();
 }
 
-
-// Local static pixmap-set array.
-QPixmap *qjackctlJackConnect::g_apPixmaps[QJACKCTL_XPM_APIXMAPS];
 
 // end of qjackctlJackConnect.cpp

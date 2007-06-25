@@ -1,7 +1,7 @@
 // qjackctlJackConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -32,18 +32,23 @@ class qjackctlJackClient;
 class qjackctlJackClientList;
 class qjackctlJackConnect;
 
-// Pixmap-set array indexes.
-#define QJACKCTL_XPM_ACLIENTI   0   // Input client item pixmap.
-#define QJACKCTL_XPM_ACLIENTO   1   // Output client item pixmap.
-#define QJACKCTL_XPM_APORTPTI   2   // Physcal Terminal Input port pixmap.
-#define QJACKCTL_XPM_APORTPTO   3   // Physical Terminal Output port pixmap.
-#define QJACKCTL_XPM_APORTPNI   4   // Physical Non-terminal Input port pixmap.
-#define QJACKCTL_XPM_APORTPNO   5   // Physical Non-terminal Output port pixmap.
-#define QJACKCTL_XPM_APORTLTI   6   // Logical Terminal Input port pixmap.
-#define QJACKCTL_XPM_APORTLTO   7   // Logical Terminal Output port pixmap.
-#define QJACKCTL_XPM_APORTLNI   8   // Logical Non-terminal Input port pixmap.
-#define QJACKCTL_XPM_APORTLNO   9   // Logical Non-terminal Output port pixmap.
-#define QJACKCTL_XPM_APIXMAPS  10   // Number of pixmaps in local array.
+// Connection port type.
+#define QJACKCTL_JACK_AUDIO		0
+#define QJACKCTL_JACK_MIDI		1
+
+// Pixmap-set array indexes/types.
+#define QJACKCTL_JACK_CLIENTI	0	// Input client item pixmap.
+#define QJACKCTL_JACK_CLIENTO	1	// Output client item pixmap.
+#define QJACKCTL_JACK_PORTPTI	2	// Physcal Terminal Input port pixmap.
+#define QJACKCTL_JACK_PORTPTO	3	// Physical Terminal Output port pixmap.
+#define QJACKCTL_JACK_PORTPNI	4	// Physical Non-terminal Input port pixmap.
+#define QJACKCTL_JACK_PORTPNO	5	// Physical Non-terminal Output port pixmap.
+#define QJACKCTL_JACK_PORTLTI	6	// Logical Terminal Input port pixmap.
+#define QJACKCTL_JACK_PORTLTO	7	// Logical Terminal Output port pixmap.
+#define QJACKCTL_JACK_PORTLNI	8	// Logical Non-terminal Input port pixmap.
+#define QJACKCTL_JACK_PORTLNO	9	// Logical Non-terminal Output port pixmap.
+#define QJACKCTL_JACK_PIXMAPS	10	// Number of pixmaps in array.
+
 
 // Jack port list item.
 class qjackctlJackPort : public qjackctlPortItem
@@ -56,8 +61,8 @@ public:
     ~qjackctlJackPort();
 
     // Jack handles accessors.
-    jack_client_t *jackClient();
-    jack_port_t   *jackPort();
+    jack_client_t *jackClient() const;
+    jack_port_t   *jackPort() const;
 
 private:
 
@@ -77,7 +82,7 @@ public:
     ~qjackctlJackClient();
 
     // Jack client accessors.
-    jack_client_t *jackClient();
+    jack_client_t *jackClient() const;
 };
 
 
@@ -92,7 +97,7 @@ public:
     ~qjackctlJackClientList();
 
     // Jack client accessors.
-    jack_client_t *jackClient();
+    jack_client_t *jackClient() const;
 
     // Client:port refreshner (return newest item count).
     int updateClientPorts();
@@ -112,12 +117,16 @@ class qjackctlJackConnect : public qjackctlConnect
 public:
 
     // Constructor.
-    qjackctlJackConnect(qjackctlConnectView *pConnectView, jack_client_t *pJackClient);
+    qjackctlJackConnect(qjackctlConnectView *pConnectView,
+		jack_client_t *pJackClient, int iJackType);
     // Default destructor.
     ~qjackctlJackConnect();
 
+	// Connection type accessors.
+	int jackType() const;
+
     // Common pixmap accessor.
-    static QPixmap& pixmap (int iPixmap);
+    QPixmap& pixmap (int iPixmap) const;
     
 protected:
 
@@ -137,8 +146,11 @@ private:
     void createIconPixmaps();
     void deleteIconPixmaps();
 
+	// Local variables.
+	int m_iJackType;
+
     // Local pixmap-set array.
-    static QPixmap *g_apPixmaps[QJACKCTL_XPM_APIXMAPS];
+    QPixmap *m_apPixmaps[QJACKCTL_JACK_PIXMAPS];
 };
 
 

@@ -31,11 +31,19 @@ qjackctlAlsaPort::qjackctlAlsaPort ( qjackctlAlsaClient *pClient, const QString&
 {
     m_iAlsaPort = iAlsaPort;
 
-    if (pClient->isReadable()) {
-        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MPORTO));
-    } else {
-        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MPORTI));
-    }
+	qjackctlAlsaConnect *pAlsaConnect
+		= static_cast<qjackctlAlsaConnect *> (
+			((pClient->clientList())->listView())->binding());
+
+	if (pAlsaConnect) {
+		if (pClient->isReadable()) {
+			QListViewItem::setPixmap(0,
+				pAlsaConnect->pixmap(QJACKCTL_ALSA_PORTO));
+		} else {
+			QListViewItem::setPixmap(0,
+				pAlsaConnect->pixmap(QJACKCTL_ALSA_PORTI));
+		}
+	}
 }
 
 // Default destructor.
@@ -45,12 +53,12 @@ qjackctlAlsaPort::~qjackctlAlsaPort (void)
 
 
 // Alsa handles accessors.
-int qjackctlAlsaPort::alsaClient (void)
+int qjackctlAlsaPort::alsaClient (void) const
 {
     return ((qjackctlAlsaClient *) client())->alsaClient();
 }
 
-int qjackctlAlsaPort::alsaPort (void)
+int qjackctlAlsaPort::alsaPort (void) const
 {
     return m_iAlsaPort;
 }
@@ -66,11 +74,19 @@ qjackctlAlsaClient::qjackctlAlsaClient ( qjackctlAlsaClientList *pClientList, co
 {
     m_iAlsaClient = iAlsaClient;
 
-    if (pClientList->isReadable()) {
-        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MCLIENTO));
-    } else {
-        QListViewItem::setPixmap(0, qjackctlAlsaConnect::pixmap(QJACKCTL_XPM_MCLIENTI));
-    }
+	qjackctlAlsaConnect *pAlsaConnect
+		= static_cast<qjackctlAlsaConnect *> (
+			(pClientList->listView())->binding());
+
+	if (pAlsaConnect) {
+		if (pClientList->isReadable()) {
+			QListViewItem::setPixmap(0,
+				pAlsaConnect->pixmap(QJACKCTL_ALSA_CLIENTO));
+		} else {
+			QListViewItem::setPixmap(0,
+				pAlsaConnect->pixmap(QJACKCTL_ALSA_CLIENTI));
+		}
+	}
 }
 
 // Default destructor.
@@ -80,7 +96,7 @@ qjackctlAlsaClient::~qjackctlAlsaClient (void)
 
 
 // Jack client accessor.
-int qjackctlAlsaClient::alsaClient (void)
+int qjackctlAlsaClient::alsaClient (void) const
 {
     return m_iAlsaClient;
 }
@@ -118,7 +134,7 @@ qjackctlAlsaClientList::~qjackctlAlsaClientList (void)
 
 
 // Alsa sequencer accessor.
-snd_seq_t *qjackctlAlsaClientList::alsaSeq (void)
+snd_seq_t *qjackctlAlsaClientList::alsaSeq (void) const
 {
     return m_pAlsaSeq;
 }
@@ -249,33 +265,33 @@ qjackctlAlsaConnect::~qjackctlAlsaConnect (void)
 
 
 // Common pixmap accessor (static).
-QPixmap& qjackctlAlsaConnect::pixmap ( int iPixmap )
+QPixmap& qjackctlAlsaConnect::pixmap ( int iPixmap ) const
 {
-    return *g_apPixmaps[iPixmap];
+    return *m_apPixmaps[iPixmap];
 }
 
 
 // Local pixmap-set janitor methods.
 void qjackctlAlsaConnect::createIconPixmaps (void)
 {
-    g_apPixmaps[QJACKCTL_XPM_MCLIENTI] = createIconPixmap("mclienti");
-    g_apPixmaps[QJACKCTL_XPM_MCLIENTO] = createIconPixmap("mcliento");
-    g_apPixmaps[QJACKCTL_XPM_MPORTI]   = createIconPixmap("mporti");
-    g_apPixmaps[QJACKCTL_XPM_MPORTO]   = createIconPixmap("mporto");
+    m_apPixmaps[QJACKCTL_ALSA_CLIENTI] = createIconPixmap("mclienti");
+    m_apPixmaps[QJACKCTL_ALSA_CLIENTO] = createIconPixmap("mcliento");
+    m_apPixmaps[QJACKCTL_ALSA_PORTI]   = createIconPixmap("mporti");
+    m_apPixmaps[QJACKCTL_ALSA_PORTO]   = createIconPixmap("mporto");
 }
 
 void qjackctlAlsaConnect::deleteIconPixmaps (void)
 {
-    for (int i = 0; i < QJACKCTL_XPM_MPIXMAPS; i++) {
-        if (g_apPixmaps[i])
-            delete g_apPixmaps[i];
-        g_apPixmaps[i] = NULL;
+    for (int i = 0; i < QJACKCTL_ALSA_PIXMAPS; i++) {
+        if (m_apPixmaps[i])
+            delete m_apPixmaps[i];
+        m_apPixmaps[i] = NULL;
     }
 }
 
 
 // Alsa sequencer accessor.
-snd_seq_t *qjackctlAlsaConnect::alsaSeq (void)
+snd_seq_t *qjackctlAlsaConnect::alsaSeq (void) const
 {
     return m_pAlsaSeq;
 }
@@ -391,8 +407,5 @@ void qjackctlAlsaConnect::updateIconPixmaps (void)
     createIconPixmaps();
 }
 
-
-// Local static pixmap-set array.
-QPixmap *qjackctlAlsaConnect::g_apPixmaps[QJACKCTL_XPM_MPIXMAPS];
 
 // end of qjackctlAlsaConnect.cpp

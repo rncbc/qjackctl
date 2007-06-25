@@ -38,11 +38,11 @@ class qjackctlAlsaClientList;
 class qjackctlAlsaConnect;
 
 // Pixmap-set array indexes.
-#define QJACKCTL_XPM_MCLIENTO  0    // Output client item pixmap.
-#define QJACKCTL_XPM_MCLIENTI  1    // Input client item pixmap.
-#define QJACKCTL_XPM_MPORTO    2    // Output port pixmap.
-#define QJACKCTL_XPM_MPORTI    3    // Input port pixmap.
-#define QJACKCTL_XPM_MPIXMAPS  4    // Number of pixmaps in local array.
+#define QJACKCTL_ALSA_CLIENTO	0	// Output client item pixmap.
+#define QJACKCTL_ALSA_CLIENTI	1	// Input client item pixmap.
+#define QJACKCTL_ALSA_PORTO		2	// Output port pixmap.
+#define QJACKCTL_ALSA_PORTI		3	// Input port pixmap.
+#define QJACKCTL_ALSA_PIXMAPS	4	// Number of pixmaps in local array.
 
 
 // Jack port list item.
@@ -56,8 +56,8 @@ public:
     ~qjackctlAlsaPort();
 
     // Jack handles accessors.
-    int alsaClient();
-    int alsaPort();
+    int alsaClient() const;
+    int alsaPort() const;
 
 private:
 
@@ -77,7 +77,7 @@ public:
     ~qjackctlAlsaClient();
 
     // Jack client accessors.
-    int alsaClient();
+    int alsaClient() const;
 
     // Port finder by id.
     qjackctlAlsaPort *findPort(int iAlsaPort);
@@ -100,7 +100,7 @@ public:
     ~qjackctlAlsaClientList();
 
     // Alsa sequencer accessor.
-    snd_seq_t *alsaSeq();
+    snd_seq_t *alsaSeq() const;
 
     // Client finder by id.
     qjackctlAlsaClient *findClient(int iAlsaClient);
@@ -130,10 +130,10 @@ public:
     ~qjackctlAlsaConnect();
 
     // Alsa sequencer accessor.
-    snd_seq_t *alsaSeq();
+    snd_seq_t *alsaSeq() const;
 
     // Common pixmap accessor.
-    static QPixmap& pixmap(int iPixmap);
+    QPixmap& pixmap(int iPixmap) const;
 
 protected:
 
@@ -156,8 +156,8 @@ private:
     // Instance variables.
     snd_seq_t *m_pAlsaSeq;
 
-    // Local static pixmap-set array.
-    static QPixmap *g_apPixmaps[QJACKCTL_XPM_MPIXMAPS];
+    // Local pixmap-set array.
+    QPixmap *m_apPixmaps[QJACKCTL_ALSA_PIXMAPS];
 };
 
 

@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 #include <qtimer.h>
+
 
 //----------------------------------------------------------------------
 // class qjackctlConnectToolTip -- custom list view tooltips.
@@ -103,26 +104,26 @@ void qjackctlPortItem::setPortName ( const QString& sPortName )
     m_sPortName = sPortName;
 }
 
-const QString& qjackctlPortItem::clientName (void)
+const QString& qjackctlPortItem::clientName (void) const
 {
     return m_pClient->clientName();
 }
 
-const QString& qjackctlPortItem::portName (void)
+const QString& qjackctlPortItem::portName (void) const
 {
     return m_sPortName;
 }
 
 
 // Complete client:port name helper.
-QString qjackctlPortItem::clientPortName (void)
+QString qjackctlPortItem::clientPortName (void) const
 {
-    return m_pClient->clientName() + ":" + m_sPortName;
+    return m_pClient->clientName() + ':' + m_sPortName;
 }
 
 
 // Connect client item accessor.
-qjackctlClientItem *qjackctlPortItem::client (void)
+qjackctlClientItem *qjackctlPortItem::client (void) const
 {
     return m_pClient;
 }
@@ -144,7 +145,7 @@ void qjackctlPortItem::markClientPort ( int iMark )
     m_pClient->markClient(iMark);
 }
 
-int qjackctlPortItem::portMark (void)
+int qjackctlPortItem::portMark (void) const
 {
     return m_iPortMark;
 }
@@ -198,7 +199,7 @@ int qjackctlPortItem::rtti (void) const
 
 
 // Connectiopn highlight methods.
-bool qjackctlPortItem::isHilite (void)
+bool qjackctlPortItem::isHilite (void) const
 {
     return m_bHilite;
 }
@@ -283,7 +284,7 @@ qjackctlPortItem *qjackctlClientItem::findPort (const QString& sPortName)
 
 
 // Client list accessor.
-qjackctlClientList *qjackctlClientItem::clientList (void)
+qjackctlClientList *qjackctlClientItem::clientList (void) const
 {
     return m_pClientList;
 }
@@ -304,14 +305,14 @@ void qjackctlClientItem::setClientName ( const QString& sClientName )
     m_sClientName = sClientName;
 }
 
-const QString& qjackctlClientItem::clientName (void)
+const QString& qjackctlClientItem::clientName (void) const
 {
     return m_sClientName;
 }
 
 
 // Readable flag client accessor.
-bool qjackctlClientItem::isReadable (void)
+bool qjackctlClientItem::isReadable (void) const
 {
     return m_pClientList->isReadable();
 }
@@ -340,7 +341,7 @@ void qjackctlClientItem::cleanClientPorts ( int iMark )
     }
 }
 
-int qjackctlClientItem::clientMark (void)
+int qjackctlClientItem::clientMark (void) const
 {
     return m_iClientMark;
 }
@@ -354,7 +355,7 @@ int qjackctlClientItem::rtti (void) const
 
 
 // Connectiopn highlight methods.
-bool qjackctlClientItem::isHilite (void)
+bool qjackctlClientItem::isHilite (void) const
 {
     return (m_iHilite > 0);
 }
@@ -449,14 +450,14 @@ QPtrList<qjackctlClientItem>& qjackctlClientList::clients (void)
 
 
 // List view accessor.
-qjackctlClientListView *qjackctlClientList::listView (void)
+qjackctlClientListView *qjackctlClientList::listView (void) const
 {
     return m_pListView;
 }
 
 
 // Readable flag client accessor.
-bool qjackctlClientList::isReadable (void)
+bool qjackctlClientList::isReadable (void) const
 {
     return m_bReadable;
 }
@@ -577,6 +578,13 @@ qjackctlClientListView::~qjackctlClientListView (void)
 }
 
 
+// Binding indirect accessor.
+qjackctlConnect *qjackctlClientListView::binding() const
+{
+	return m_pConnectView->binding();
+}
+
+
 // Auto-open timeout method.
 void qjackctlClientListView::setAutoOpenTimeout ( int iAutoOpenTimeout )
 {
@@ -594,7 +602,7 @@ void qjackctlClientListView::setAutoOpenTimeout ( int iAutoOpenTimeout )
 
 
 // Auto-open timeout accessor.
-int qjackctlClientListView::autoOpenTimeout (void)
+int qjackctlClientListView::autoOpenTimeout (void) const
 {
     return m_iAutoOpenTimeout;
 }
@@ -633,7 +641,7 @@ void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool b
 	}
 }
 
-qjackctlConnectAlias *qjackctlClientListView::aliases (void)
+qjackctlConnectAlias *qjackctlClientListView::aliases (void) const
 {
 	return m_pAliases;
 }
@@ -1082,14 +1090,14 @@ void qjackctlConnectView::setBinding ( qjackctlConnect *pConnect )
     m_pConnect = pConnect;
 }
 
-qjackctlConnect *qjackctlConnectView::binding (void)
+qjackctlConnect *qjackctlConnectView::binding (void) const
 {
     return m_pConnect;
 }
 
 
 // Connect client list accessors.
-qjackctlClientList *qjackctlConnectView::OClientList (void)
+qjackctlClientList *qjackctlConnectView::OClientList (void) const
 {
     if (m_pConnect)
         return m_pConnect->OClientList();
@@ -1097,7 +1105,7 @@ qjackctlClientList *qjackctlConnectView::OClientList (void)
         return 0;
 }
 
-qjackctlClientList *qjackctlConnectView::IClientList (void)
+qjackctlClientList *qjackctlConnectView::IClientList (void) const
 {
     if (m_pConnect)
         return m_pConnect->OClientList();
@@ -1112,7 +1120,7 @@ void qjackctlConnectView::setBezierLines ( bool bBezierLines )
     m_bBezierLines = bBezierLines;
 }
 
-bool qjackctlConnectView::isBezierLines (void)
+bool qjackctlConnectView::isBezierLines (void) const
 {
     return m_bBezierLines;
 }
@@ -1134,7 +1142,7 @@ void qjackctlConnectView::setIconSize ( int iIconSize )
         m_pConnect->updateContents(true);
 }
 
-int qjackctlConnectView::iconSize (void)
+int qjackctlConnectView::iconSize (void) const
 {
     return m_iIconSize;
 }
@@ -1148,7 +1156,7 @@ void qjackctlConnectView::setDirty ( bool bDirty )
         emit contentsChanged();
 }
 
-bool qjackctlConnectView::dirty (void)
+bool qjackctlConnectView::isDirty (void) const
 {
     return m_bDirty;
 }
@@ -1192,7 +1200,7 @@ qjackctlConnect::~qjackctlConnect (void)
 
 
 // These must be accessed by the descendant constructor.
-qjackctlConnectView *qjackctlConnect::connectView (void)
+qjackctlConnectView *qjackctlConnect::connectView (void) const
 {
     return m_pConnectView;
 }
@@ -1631,12 +1639,12 @@ void qjackctlConnect::endMutex (void)
 
 
 // Connect client list accessors.
-qjackctlClientList *qjackctlConnect::OClientList (void)
+qjackctlClientList *qjackctlConnect::OClientList (void) const
 {
     return m_pOClientList;
 }
 
-qjackctlClientList *qjackctlConnect::IClientList (void)
+qjackctlClientList *qjackctlConnect::IClientList (void) const
 {
     return m_pIClientList;
 }

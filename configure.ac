@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.2.22.4, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.2.22.5, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui.h)
 AC_CONFIG_HEADERS(config.h)
@@ -32,6 +32,12 @@ AC_ARG_ENABLE(system_tray,
   AC_HELP_STRING([--enable-system-tray], [enable system tray (default=yes)]),
   [ac_system_tray="$enableval"],
   [ac_system_tray="yes"])
+
+# Disable JACK MIDI support option.
+AC_ARG_ENABLE(jack_midi,
+  AC_HELP_STRING([--enable-jack-midi], [enable JACK MIDI support (default=yes)]),
+  [ac_jack_midi="$enableval"],
+  [ac_jack_midi="yes"])
 
 # Disable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
@@ -210,6 +216,11 @@ if test "x$ac_system_tray" = "xyes"; then
    AC_DEFINE(CONFIG_SYSTEM_TRAY, 1, [Define if system tray is enabled.])
 fi
 
+# Check for some JACK MIDI headers.
+if test "x$ac_jack_midi" = "xyes"; then
+   AC_CHECK_HEADER(jack/midiport.h, [ac_jack_midi="yes"], [ac_jack_midi="no"])
+fi
+
 # Check for ALSA headers and ultimately
 # for ALSA/MIDI sequencer support.
 if test "x$ac_alsa_seq" = "xyes"; then
@@ -254,6 +265,18 @@ fi
 AC_CHECK_LIB(jack, jack_get_max_delayed_usecs, [ac_jack_max_delay="yes"], [ac_jack_max_delay="no"])
 if test "x$ac_jack_max_delay" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_MAX_DELAY, 1, [Define if jack_get_max_delayed_usecs is available.])
+fi
+
+# Check for JACK MIDI library support.
+if test "x$ac_jack_midi" = "xyes"; then
+   AC_CHECK_LIB(jack, jack_midi_event_get, [ac_jack_midi="yes"], [ac_jack_midi="no"])
+	if test "x$ac_jack_midi" = "xno"; then
+	   AC_MSG_WARN([*** jack_midi_event_get: function not found.])
+	   AC_MSG_WARN([*** JACK 0.103.0 or later may be required.])
+	   AC_MSG_WARN([*** JACK MIDI support will be disabled.])
+	else
+	   AC_DEFINE(CONFIG_JACK_MIDI, 1, [Define if JACK MIDI support is available.])
+	fi
 fi
 
 # Finally produce a configure header file and the main makefile.

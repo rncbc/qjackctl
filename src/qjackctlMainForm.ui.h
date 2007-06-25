@@ -737,8 +737,11 @@ void qjackctlMainForm::stopJack (void)
 {
 	// Check if we're allowed to stop (shutdown)...
 	if (m_pSetup->bQueryShutdown
-		&& m_pJack && m_pJack->isRunning() && !m_bJackSurvive
-		&& m_pConnectionsForm && m_pConnectionsForm->isJackConnected()
+		&& m_pJack && m_pJack->isRunning()
+		&& !m_bJackSurvive
+		&& m_pConnectionsForm 
+		&& (m_pConnectionsForm->isAudioConnected() ||
+			m_pConnectionsForm->isMidiConnected())
 		&& QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Some client audio applications") + "\n" +
@@ -1022,9 +1025,11 @@ void qjackctlMainForm::updateBezierLines (void)
         return;
 
     if (m_pConnectionsForm) {
-        m_pConnectionsForm->JackConnectView->setBezierLines(m_pSetup->bBezierLines);
+        m_pConnectionsForm->AudioConnectView->setBezierLines(m_pSetup->bBezierLines);
+        m_pConnectionsForm->MidiConnectView->setBezierLines(m_pSetup->bBezierLines);
         m_pConnectionsForm->AlsaConnectView->setBezierLines(m_pSetup->bBezierLines);
-        m_pConnectionsForm->JackConnectView->ConnectorView()->update();
+        m_pConnectionsForm->AudioConnectView->ConnectorView()->update();
+        m_pConnectionsForm->MidiConnectView->ConnectorView()->update();
         m_pConnectionsForm->AlsaConnectView->ConnectorView()->update();
     }
 
@@ -1506,7 +1511,7 @@ void qjackctlMainForm::portNotifyEvent (void)
 {
     // Log some message here, if new.
     if (m_iJackRefresh == 0)
-        appendMessagesColor(tr("Audio connection graph change."), "#cc9966");
+        appendMessagesColor(tr("JACK connection graph change."), "#cc9966");
     // Do what has to be done.
     refreshJackConnections();
     // We'll be dirty too...
@@ -1571,7 +1576,7 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 #endif
     // Log some message here, if new.
     if (m_iAlsaRefresh == 0)
-        appendMessagesColor(tr("MIDI connection graph change."), "#66cc99");
+        appendMessagesColor(tr("ALSA connection graph change."), "#66cc99");
     // Do what has to be done.
     refreshAlsaConnections();
     // We'll be dirty too...
@@ -1626,7 +1631,8 @@ void qjackctlMainForm::timerSlot (void)
         // Are we about to refresh it, really?
         if (m_iJackRefresh > 0) {
             m_iJackRefresh = 0;
-            m_pConnectionsForm->refreshJack(true);
+            m_pConnectionsForm->refreshAudio(true);
+            m_pConnectionsForm->refreshMidi(true);
         }
         if (m_iAlsaRefresh > 0) {
             m_iAlsaRefresh = 0;
@@ -1653,7 +1659,7 @@ void qjackctlMainForm::jackConnectChanged (void)
 {
     // Just shake the audio connections status quo.
     if (++m_iJackDirty == 1)
-        appendMessagesColor(tr("Audio connection change."), "#9999cc");
+        appendMessagesColor(tr("JACK connection change."), "#9999cc");
 }
 
 
@@ -1662,7 +1668,7 @@ void qjackctlMainForm::alsaConnectChanged (void)
 {
     // Just shake the MIDI connections status quo.
     if (++m_iAlsaDirty == 1)
-        appendMessagesColor(tr("MIDI connection change."), "#cccc99");
+        appendMessagesColor(tr("ALSA connection change."), "#cccc99");
 }
 
 
@@ -1873,8 +1879,10 @@ void qjackctlMainForm::refreshConnections (void)
 void qjackctlMainForm::refreshJackConnections (void)
 {
     // Hack this as for a while.
-    if (m_pConnectionsForm && m_iJackRefresh == 0)
-        m_pConnectionsForm->stabilizeJack(false);
+    if (m_pConnectionsForm && m_iJackRefresh == 0) {
+        m_pConnectionsForm->stabilizeAudio(false);
+        m_pConnectionsForm->stabilizeMidi(false);
+	}
 
     // Just increment our intentions; it will be deferred
     // to be executed just on timer slot processing...

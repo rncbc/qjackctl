@@ -152,8 +152,10 @@ public:
     QStringList patchbays;
 
 	// Aliases containers.
-	qjackctlConnectAlias aliasJackOutputs;
-	qjackctlConnectAlias aliasJackInputs;
+	qjackctlConnectAlias aliasAudioOutputs;
+	qjackctlConnectAlias aliasAudioInputs;
+	qjackctlConnectAlias aliasMidiOutputs;
+	qjackctlConnectAlias aliasMidiInputs;
 	qjackctlConnectAlias aliasAlsaOutputs;
 	qjackctlConnectAlias aliasAlsaInputs;
 

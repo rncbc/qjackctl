@@ -1,6 +1,6 @@
 
 #define PACKAGE_NAME    "QjackCtl"
-#define PACKAGE_VERSION "0.2.22.4"
+#define PACKAGE_VERSION "0.2.22.5"
 
 
 #define CONFIG_PREFIX   "."
@@ -9,6 +9,7 @@
 #define CONFIG_NO_START_SERVER
 
 #undef  CONFIG_SYSTEM_TRAY
+#undef  CONFIG_JACK_MIDI
 #undef  CONFIG_ALSA_SEQ
 
 #undef  CONFIG_ROUND
