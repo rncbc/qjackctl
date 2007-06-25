@@ -1,0 +1,20 @@
+Source: qjackctl
+Section: sound
+Priority: extra
+Maintainer: Rui Nuno Capela <rncbc@rncbc.org>
+Build-Depends: debhelper (>= 5), libjack-dev, libasound-dev
+Standards-Version: 3.7.2
+
+Package: qjackctl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libjack, libasound
+Description: JACK Audio Connection Kit Qt GUI Interface.
+  QjackCtl is a simple Qt application to control the JACK sound server
+  (http://jackit.sourceforge.net), for the Linux Audio infrastructure.
+  Written in C++ around the Qt3 toolkit for X11, most exclusively using
+  Qt Designer. Provides a simple GUI dialog for setting several JACK
+  server parameters, which are properly saved between sessions, and
+  a way control of the status of the audio server. With time, this
+  primordial interface has become richer by including a enhanced
+  patchbay and connection control features.
+

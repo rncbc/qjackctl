@@ -1,0 +1,6 @@
+qjackctl (0.2.23-1) unstable; urgency=low
+
+  * Initial debianization
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Mon, 25 Jun 2007 10:42:40 +0100
+
