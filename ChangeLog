@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- Application icon is now installed to ${prefix}/share/pixmaps;
+  application desktop entry file is now included in installation;
+  spec file (RPM) is now a bit more openSUSE compliant; initial
+  debianization.
+
 - Invalidation of the JACK client handle is now forced right on 
   jack_shutdown notification, preventing a most probable fatal
   crash due to jack_deactivate and/or jack_client_close being

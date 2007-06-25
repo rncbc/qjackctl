@@ -1,15 +1,17 @@
 QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 -----------------------------------------------------
 
-QjackCtl is a simple Qt application to control the JACK sound server daemon
-(http://jackit.sourceforge.net), for the Linux Audio Desktop infrastructure.
+QjackCtl is a simple Qt application to control the JACK sound server
+(http://jackit.sourceforge.net), for the Linux Audio infrastructure.
 
-Written in C++ around the Qt3 toolkit for X11, most exclusively using Qt Designer.
+Written in C++ around the Qt3 toolkit for X11, most exclusively using
+Qt Designer.
 
-Provides a simple GUI dialog for setting several JACK daemon parameters,
-which are properly saved between sessions, and a way control of the status
-of the audio server daemon. With time, this primordial interface has become
-richer by including a enhanced patchbay and connection control features.
+Provides a simple GUI dialog for setting several JACK server parameters,
+which are properly saved between sessions, and a way control of the
+status of the audio server. With time, this primordial interface has
+become richer by including a enhanced patchbay and connection control
+features.
 
 Homepage: http://qjackctl.sourceforge.net
 
@@ -47,21 +49,22 @@ file, as it is recreated and rewritten everytime qjackctl is run.
 Bugs
 ----
 
-Probably plenty still, but qjackctl it's now considered on beta stage already.
-It has been locally tested since JACK release 0.98.0, on SuSE 9.1, Mandrake 10.0
-and Fedora Core 1, with custom 2.4 kernels with low-latency, preemptible and
-capabilities enabling patches. As for 2.6 kernels, the capabilities patch may
-also apply but the emergence of the Realtime Linux Security Module (LSM) and
-Ingo Molnar's Realtime Preemption kernel patch it's being now recommended for
-your taking benefit of the realtime and low-latency audio pleasure JACK can give.
+Probably plenty still, but qjackctl it's now considered on beta stage
+already. It has been locally tested since JACK release 0.98.0, on SuSE 9.1,
+Mandrake 10.0 and Fedora Core 1, with custom 2.4 kernels with low-latency,
+preemptible and capabilities enabling patches. As for 2.6 kernels, the
+capabilities patch may also apply but the emergence of the Realtime Linux
+Security Module (LSM) and Ingo Molnar's Realtime Preemption kernel patch
+it's being now recommended for your taking benefit of the realtime and
+low-latency audio pleasure JACK can give.
 
 
 Support
 -------
 
 QjackCtl is open source free software. For bug reports, feature
-requests, discussion forums, mailling lists, or any other matter related
-to the development of this piece of software, please use the
+requests, discussion forums, mailling lists, or any other matter
+related to the development of this piece of software, please use the
 Sourceforge project page (http://sourceforge.net/projects/qjackctl).
 
 
