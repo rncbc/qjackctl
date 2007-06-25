@@ -22,6 +22,7 @@
 #ifndef __qjackctlJackConnect_h
 #define __qjackctlJackConnect_h
 
+#include "qjackctlAbout.h"
 #include "qjackctlConnect.h"
 
 #include <jack/jack.h>

@@ -5,9 +5,10 @@ ChangeLog
 
 CVS HEAD
 
-- JACK MIDI support is now being introduced. Conections window
+- JACK MIDI support is now being introduced. Connections window
   now has a brand new MIDI tab, the older being renamed to ALSA,
-  as for the ALSA/MIDI sequencer conveniency.
+  as for the ALSA/MIDI sequencer conveniency. The server settings
+  now include the MIDI driver setup option (ALSA backend only).
 
 - Application icon is now installed to ${prefix}/share/pixmaps;
   application desktop entry file is now included in installation;

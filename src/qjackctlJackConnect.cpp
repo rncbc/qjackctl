@@ -21,8 +21,6 @@
 
 #include "qjackctlJackConnect.h"
 
-#include <stdlib.h>
-
 
 //----------------------------------------------------------------------
 // class qjackctlJackPort -- Jack port list item.

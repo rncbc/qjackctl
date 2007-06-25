@@ -28,8 +28,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>612</width>
-            <height>486</height>
+            <width>625</width>
+            <height>477</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -295,7 +295,7 @@
                                     <bool>false</bool>
                                 </property>
                                 <property name="toolTip" stdset="0">
-                                    <string>The software driver to use</string>
+                                    <string>The audio backend driver interface to use</string>
                                 </property>
                             </widget>
                         </hbox>
@@ -322,41 +322,7 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <spacer row="0" column="3">
-                                <property name="name">
-                                    <cstring>spacer12</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>MinimumExpanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>8</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <spacer row="0" column="1">
-                                <property name="name">
-                                    <cstring>spacer11</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>MinimumExpanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>8</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <widget class="QLayoutWidget" row="0" column="2" rowspan="2" colspan="1">
+                            <widget class="QLayoutWidget" row="0" column="2">
                                 <property name="name">
                                     <cstring>layout15</cstring>
                                 </property>
@@ -892,188 +858,7 @@
                                     </widget>
                                 </grid>
                             </widget>
-                            <widget class="QLayoutWidget" row="0" column="0">
-                                <property name="name">
-                                    <cstring>layout12</cstring>
-                                </property>
-                                <vbox>
-                                    <property name="name">
-                                        <cstring>unnamed</cstring>
-                                    </property>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>RealtimeCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Realtime</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+R</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Use realtime scheduling</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>NoMemLockCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>No Memory Loc&amp;k</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+K</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Do not attempt to lock memory, even if in realtime mode</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>UnlockMemCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Unlock Memory</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+U</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Unlock memory of common toolkit libraries (GTK+, QT, FLTK, Wine)</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>SoftModeCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>So&amp;ft Mode</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+F</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Ignore xruns reported by the backend driver</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>MonitorCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Monitor</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+M</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Provide output monitor ports</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>ShortsCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>Force &amp;16bit</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+1</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Force 16bit mode instead of failing over 32bit (default)</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>HWMonCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>H/W M&amp;onitor</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+O</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Enable hardware monitoring of capture ports</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>HWMeterCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>H/&amp;W Meter</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+W</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Enable hardware metering on cards that support it</string>
-                                        </property>
-                                    </widget>
-                                    <widget class="QCheckBox">
-                                        <property name="name">
-                                            <cstring>IgnoreHWCheckBox</cstring>
-                                        </property>
-                                        <property name="font">
-                                            <font>
-                                                <bold>0</bold>
-                                            </font>
-                                        </property>
-                                        <property name="text">
-                                            <string>&amp;Ignore H/W</string>
-                                        </property>
-                                        <property name="accel">
-                                            <string>Alt+I</string>
-                                        </property>
-                                        <property name="toolTip" stdset="0">
-                                            <string>Ignore hardware period/buffer size</string>
-                                        </property>
-                                    </widget>
-                                </vbox>
-                            </widget>
-                            <widget class="QLayoutWidget" row="0" column="4" rowspan="2" colspan="1">
+                            <widget class="QLayoutWidget" row="0" column="4">
                                 <property name="name">
                                     <cstring>layout58</cstring>
                                 </property>
@@ -1578,7 +1363,241 @@
                                     </widget>
                                 </grid>
                             </widget>
-                            <spacer row="2" column="2">
+                            <spacer row="0" column="3">
+                                <property name="name">
+                                    <cstring>spacer12</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>MinimumExpanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>8</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="0" column="1">
+                                <property name="name">
+                                    <cstring>spacer11</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>MinimumExpanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>8</width>
+                                        <height>8</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QLayoutWidget" row="0" column="0">
+                                <property name="name">
+                                    <cstring>layout13</cstring>
+                                </property>
+                                <vbox>
+                                    <property name="name">
+                                        <cstring>unnamed</cstring>
+                                    </property>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>RealtimeCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Realtime</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+R</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Use realtime scheduling</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>NoMemLockCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>No Memory Loc&amp;k</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+K</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Do not attempt to lock memory, even if in realtime mode</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>UnlockMemCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Unlock Memory</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+U</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Unlock memory of common toolkit libraries (GTK+, QT, FLTK, Wine)</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>SoftModeCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>So&amp;ft Mode</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+F</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Ignore xruns reported by the backend driver</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>MonitorCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Monitor</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+M</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Provide output monitor ports</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>ShortsCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>Force &amp;16bit</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+1</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Force 16bit mode instead of failing over 32bit (default)</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>HWMonCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>H/W M&amp;onitor</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+O</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Enable hardware monitoring of capture ports</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>HWMeterCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>H/&amp;W Meter</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+W</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Enable hardware metering on cards that support it</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>IgnoreHWCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Ignore H/W</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+I</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Ignore hardware period/buffer size</string>
+                                        </property>
+                                    </widget>
+                                    <widget class="QCheckBox">
+                                        <property name="name">
+                                            <cstring>VerboseCheckBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="text">
+                                            <string>&amp;Verbose messages</string>
+                                        </property>
+                                        <property name="accel">
+                                            <string>Alt+V</string>
+                                        </property>
+                                        <property name="toolTip" stdset="0">
+                                            <string>Whether to give verbose output on messages</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                            <spacer row="1" column="2">
                                 <property name="name">
                                     <cstring>spacer15</cstring>
                                 </property>
@@ -1595,7 +1614,7 @@
                                     </size>
                                 </property>
                             </spacer>
-                            <spacer row="2" column="4">
+                            <spacer row="1" column="4">
                                 <property name="name">
                                     <cstring>spacer16</cstring>
                                 </property>
@@ -1612,7 +1631,7 @@
                                     </size>
                                 </property>
                             </spacer>
-                            <spacer row="1" column="0" rowspan="2" colspan="1">
+                            <spacer row="1" column="0">
                                 <property name="name">
                                     <cstring>spacer14</cstring>
                                 </property>
@@ -1629,17 +1648,17 @@
                                     </size>
                                 </property>
                             </spacer>
-                            <widget class="QLayoutWidget" row="3" column="0" rowspan="1" colspan="5">
+                            <widget class="QLayoutWidget" row="2" column="0" rowspan="1" colspan="5">
                                 <property name="name">
-                                    <cstring>layout12</cstring>
+                                    <cstring>layout14</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QCheckBox">
+                                    <widget class="QLabel">
                                         <property name="name">
-                                            <cstring>VerboseCheckBox</cstring>
+                                            <cstring>MidiDriverTextLabel</cstring>
                                         </property>
                                         <property name="font">
                                             <font>
@@ -1647,13 +1666,44 @@
                                             </font>
                                         </property>
                                         <property name="text">
-                                            <string>&amp;Verbose messages output</string>
+                                            <string>MIDI Driv&amp;er:</string>
                                         </property>
-                                        <property name="accel">
-                                            <string>Alt+V</string>
+                                        <property name="alignment">
+                                            <set>AlignVCenter|AlignRight</set>
+                                        </property>
+                                        <property name="buddy" stdset="0">
+                                            <cstring>MidiDriverComboBox</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget class="QComboBox">
+                                        <item>
+                                            <property name="text">
+                                                <string>none</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>raw</string>
+                                            </property>
+                                        </item>
+                                        <item>
+                                            <property name="text">
+                                                <string>seq</string>
+                                            </property>
+                                        </item>
+                                        <property name="name">
+                                            <cstring>MidiDriverComboBox</cstring>
+                                        </property>
+                                        <property name="font">
+                                            <font>
+                                                <bold>0</bold>
+                                            </font>
+                                        </property>
+                                        <property name="editable">
+                                            <bool>false</bool>
                                         </property>
                                         <property name="toolTip" stdset="0">
-                                            <string>Whether to give verbose output on messages</string>
+                                            <string>The ALSA MIDI backend driver to use</string>
                                         </property>
                                     </widget>
                                     <spacer>
@@ -1668,7 +1718,7 @@
                                         </property>
                                         <property name="sizeHint">
                                             <size>
-                                                <width>20</width>
+                                                <width>8</width>
                                                 <height>8</height>
                                             </size>
                                         </property>
@@ -1723,7 +1773,7 @@
                                         </property>
                                         <property name="sizeHint">
                                             <size>
-                                                <width>20</width>
+                                                <width>8</width>
                                                 <height>8</height>
                                             </size>
                                         </property>
@@ -4362,6 +4412,12 @@
         <receiver>qjackctlSetupForm</receiver>
         <slot>optionsChanged()</slot>
     </connection>
+    <connection>
+        <sender>MidiDriverComboBox</sender>
+        <signal>activated(int)</signal>
+        <receiver>qjackctlSetupForm</receiver>
+        <slot>settingsChanged()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>SetupTabWidget</tabstop>
@@ -4379,6 +4435,7 @@
     <tabstop>HWMonCheckBox</tabstop>
     <tabstop>HWMeterCheckBox</tabstop>
     <tabstop>IgnoreHWCheckBox</tabstop>
+    <tabstop>VerboseCheckBox</tabstop>
     <tabstop>PrioritySpinBox</tabstop>
     <tabstop>FramesComboBox</tabstop>
     <tabstop>SampleRateComboBox</tabstop>
@@ -4400,7 +4457,7 @@
     <tabstop>OutChannelsSpinBox</tabstop>
     <tabstop>InLatencySpinBox</tabstop>
     <tabstop>OutLatencySpinBox</tabstop>
-    <tabstop>VerboseCheckBox</tabstop>
+    <tabstop>MidiDriverComboBox</tabstop>
     <tabstop>StartDelaySpinBox</tabstop>
     <tabstop>StartupScriptCheckBox</tabstop>
     <tabstop>StartupScriptShellComboBox</tabstop>
@@ -4505,8 +4562,8 @@
     <function access="private" specifier="non virtual" returnType="bool">deletePreset( const QString &amp; sPreset )</function>
     <function access="private" specifier="non virtual">resetPresets()</function>
     <function access="private" specifier="non virtual">computeLatency()</function>
-    <function access="private" specifier="non virtual">changeDriverUpdate( const QString &amp; sDriver, bool bUpdate )</function>
     <function access="private" specifier="non virtual">changeDriverAudio( const QString &amp; sDriver, int iAudio )</function>
+    <function access="private" specifier="non virtual">changeDriverUpdate( const QString &amp; sDriver, bool bUpdate )</function>
     <function access="private" specifier="non virtual">stabilizeForm()</function>
     <function access="private" specifier="non virtual">deviceMenu( QLineEdit * pLineEdit, QToolButton * pToolButton, int iAudio )</function>
     <function access="private" specifier="non virtual">symbolMenu( QLineEdit * pLineEdit, QToolButton * pToolButton )</function>

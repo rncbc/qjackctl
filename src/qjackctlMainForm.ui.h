@@ -630,6 +630,10 @@ void qjackctlMainForm::startJack (void)
 			m_pJack->addArgument("-i" + QString::number(m_preset.iInChannels));
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
 			m_pJack->addArgument("-o" + QString::number(m_preset.iOutChannels));
+#ifdef CONFIG_JACK_MIDI
+		if (!m_preset.sMidiDriver.isEmpty())
+			m_pJack->addArgument("-X" + m_preset.sMidiDriver);
+#endif
     }
     else if (bOss) {
         if (m_preset.bIgnoreHW)

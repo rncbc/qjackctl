@@ -73,6 +73,7 @@ struct qjackctlPreset
     int     iStartDelay;
     bool    bVerbose;
     int     iPortMax;
+	QString sMidiDriver;
 };
 
 // Common settings profile class.

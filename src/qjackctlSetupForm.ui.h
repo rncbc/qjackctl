@@ -173,6 +173,11 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
     SystemTrayCheckBox->setChecked(false);
     SystemTrayCheckBox->setEnabled(false);
 #endif
+#ifndef CONFIG_JACK_MIDI
+    MidiDriverComboBox->setCurrentItem(0);
+    MidiDriverTextLabel->setEnabled(false);
+    MidiDriverComboBox->setEnabled(false);
+#endif
 
     // Load preset list...
     resetPresets();
@@ -234,6 +239,12 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
         StartDelaySpinBox->setValue(preset.iStartDelay);
         VerboseCheckBox->setChecked(preset.bVerbose);
         PortMaxComboBox->setCurrentText(QString::number(preset.iPortMax));
+#ifdef CONFIG_JACK_MIDI
+		if (preset.sMidiDriver.isEmpty())
+			MidiDriverComboBox->setCurrentItem(0);
+		else
+			MidiDriverComboBox->setCurrentText(preset.sMidiDriver);
+#endif
         // Reset dirty flag.
         m_iDirtySettings = 0;
     }
@@ -281,6 +292,12 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
     preset.iStartDelay  = StartDelaySpinBox->value();
     preset.bVerbose     = VerboseCheckBox->isChecked();
     preset.iPortMax     = PortMaxComboBox->currentText().toInt();
+#ifdef CONFIG_JACK_MIDI
+	if (MidiDriverComboBox->currentItem() == 0)
+		preset.sMidiDriver = QString::null;
+	else
+		preset.sMidiDriver = MidiDriverComboBox->currentText();
+#endif
 	if (preset.sInterface == m_pSetup->sDefPresetName)
 		preset.sInterface = QString::null;
     if (preset.sInDevice == m_pSetup->sDefPresetName)
@@ -534,6 +551,11 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 
     DitherTextLabel->setEnabled(bAlsa || bPortaudio);
     DitherComboBox->setEnabled(bAlsa || bPortaudio);
+
+#ifdef CONFIG_JACK_MIDI
+	MidiDriverTextLabel->setEnabled(bAlsa);
+	MidiDriverComboBox->setEnabled(bAlsa);
+#endif
 
     changeDriverAudio(sDriver, iAudio);
 }
