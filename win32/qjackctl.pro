@@ -126,12 +126,12 @@ CONFIG  += qt warn_on debug
 LANGUAGE = C++
 
 win32 {
-CONFIG  += console
-INCLUDEPATH	+= C:\usr\local\include
-LIBS    += C:\usr\local\lib\libjack.lib
+	CONFIG  += console
+	INCLUDEPATH	+= C:\usr\local\include
+	LIBS    += C:\usr\local\lib\libjack.lib
 }
 
 unix {
-LIBS    += -ljack
+	LIBS    += -ljack
 }
 

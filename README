@@ -33,9 +33,15 @@ and optionally as root:
 This procedure will end installing the following couple of files:
 
     ${prefix}/bin/qjackctl
-    ${prefix}/share/icons/qjackctl.png
+    ${prefix}/share/pixmaps/qjackctl.png
+    ${prefix}/share/applications/qjackctl.desktop
 
 Just launch ${prefix}/bin/qjackctl and you're off (hopefully).
+
+If you're checking out from CVS, you'll have to prepare the configure
+script just before you proceed with the above instructions:
+
+   make -f Makefile.cvs
 
 
 Configuration

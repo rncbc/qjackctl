@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.2.22.6, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.2.22.7, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui.h)
 AC_CONFIG_HEADERS(config.h)
