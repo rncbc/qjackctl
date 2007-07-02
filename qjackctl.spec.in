@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 3
+%define release 4
 %define prefix  @ac_prefix@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface.
@@ -9,7 +9,7 @@ Version:	%{version}
 Release:	%{release}
 Prefix:		%{prefix}
 License:	GPL
-Group:		Sound
+Group:		Productivity/Multimedia/Sound/Utilities
 Source0:	%{name}-%{version}.tar.gz
 URL:		http://qjackctl.sourceforge.net/
 
