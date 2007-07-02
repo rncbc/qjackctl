@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.2.23   2007-07-02  JACK MIDI support debut.
 
 - JACK MIDI support is now being introduced. Connections window
   now has a brand new MIDI tab, the older being renamed to ALSA,
