@@ -625,11 +625,8 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 		setComboBoxCurrentText(m_ui.PortMaxComboBox,
 			QString::number(preset.iPortMax));
 #ifdef CONFIG_JACK_MIDI
-		if (preset.sMidiDriver.isEmpty()) {
-			m_ui.MidiDriverComboBox->setCurrentIndex(0);
-		} else {
-			setComboBoxCurrentText(m_ui.MidiDriverComboBox, preset.sMidiDriver);
-		}
+		setComboBoxCurrentText(m_ui.MidiDriverComboBox,
+			preset.sMidiDriver);
 #endif
 		// Reset dirty flag.
 		m_iDirtySettings = 0;
@@ -679,10 +676,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 	preset.bVerbose     = m_ui.VerboseCheckBox->isChecked();
 	preset.iPortMax     = m_ui.PortMaxComboBox->currentText().toInt();
 #ifdef CONFIG_JACK_MIDI
-	if (m_ui.MidiDriverComboBox->currentIndex() == 0)
-		preset.sMidiDriver.clear();
-	else
-		preset.sMidiDriver = m_ui.MidiDriverComboBox->currentText();
+	preset.sMidiDriver  = m_ui.MidiDriverComboBox->currentText();
 #endif
 	if (preset.sInterface == m_pSetup->sDefPresetName)
 		preset.sInterface.clear();

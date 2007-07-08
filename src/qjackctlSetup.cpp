@@ -304,7 +304,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	preset.iStartDelay  = m_settings.value("/StartDelay", 2).toInt();
 	preset.bVerbose     = m_settings.value("/Verbose", false).toBool();
 	preset.iPortMax     = m_settings.value("/PortMax", 256).toInt();
-	preset.sMidiDriver  = m_settings.value("/MidiDriver").toString();
+	preset.sMidiDriver  = m_settings.value("/MidiDriver", "none").toString();
 	m_settings.endGroup();
 
 	return true;

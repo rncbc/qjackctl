@@ -1380,13 +1380,13 @@ void qjackctlMainForm::setRecentPatchbays ( const QStringList& patchbays )
 // Stabilize current form toggle buttons that may be astray.
 void qjackctlMainForm::stabilizeForm (void)
 {
-	m_ui.MessagesToolButton->setDown(
+	m_ui.MessagesToolButton->setChecked(
 		m_pMessagesForm && m_pMessagesForm->isVisible());
-	m_ui.StatusToolButton->setDown(
+	m_ui.StatusToolButton->setChecked(
 		m_pStatusForm && m_pStatusForm->isVisible());
-	m_ui.ConnectionsToolButton->setDown(
+	m_ui.ConnectionsToolButton->setChecked(
 		m_pConnectionsForm && m_pConnectionsForm->isVisible());
-	m_ui.PatchbayToolButton->setDown(
+	m_ui.PatchbayToolButton->setChecked(
 		m_pPatchbayForm && m_pPatchbayForm->isVisible());
 }
 
@@ -1408,10 +1408,10 @@ void qjackctlMainForm::resetXrunStats (void)
 
 	m_iXrunStats = 0;
 	m_iXrunCount = 0;
-	m_fXrunTotal = 0.0;
-	m_fXrunMin   = 0.0;
-	m_fXrunMax   = 0.0;
-	m_fXrunLast  = 0.0;
+	m_fXrunTotal = 0.0f;
+	m_fXrunMin   = 0.0f;
+	m_fXrunMax   = 0.0f;
+	m_fXrunLast  = 0.0f;
 
 	m_tXrunLast.setHMS(0, 0, 0);
 
@@ -1461,34 +1461,37 @@ void qjackctlMainForm::updateXrunCount (void)
 }
 
 // Convert whole elapsed seconds to hh:mm:ss time format.
-QString qjackctlMainForm::formatTime ( double secs ) const
+QString qjackctlMainForm::formatTime ( float secs ) const
 {
 	unsigned int hh, mm, ss;
 
 	hh = mm = ss = 0;
-	if (secs >= 3600.0) {
-		hh    = (unsigned int) (secs / 3600.0);
-		secs -= (double) hh * 3600.0;
+	if (secs >= 3600.0f) {
+		hh    = (unsigned int) (secs / 3600.0f);
+		secs -= (float) hh * 3600.0f;
 	}
-	if (secs >= 60.0) {
-		mm    = (unsigned int) (secs / 60.0);
-		secs -= (double) mm * 60.0;
+	if (secs >= 60.0f) {
+		mm    = (unsigned int) (secs / 60.0f);
+		secs -= (float) mm * 60.0f;
 	}
 	if (secs >= 0.0) {
 		ss    = (unsigned int) secs;
-		secs -= (double) ss;
+		secs -= (float) ss;
 	}
 
 	QString sTemp;
 	switch (m_pSetup->iTimeFormat) {
 	case 1:   // Tenths of second.
-		sTemp.sprintf("%02u:%02u:%02u.%u", hh, mm, ss, (unsigned int) (secs * 10.0));
+		sTemp.sprintf("%02u:%02u:%02u.%u", hh, mm, ss,
+			(unsigned int) (secs * 10.0f));
 		break;
 	case 2:   // Hundredths of second.
-		sTemp.sprintf("%02u:%02u:%02u.%02u", hh, mm, ss, (unsigned int) (secs * 100.0));
+		sTemp.sprintf("%02u:%02u:%02u.%02u", hh, mm, ss,
+			(unsigned int) (secs * 100.0f));
 		break;
 	case 3:   // Raw milliseconds
-		sTemp.sprintf("%02u:%02u:%02u.%03u", hh, mm, ss, (unsigned int) (secs * 1000.0));
+		sTemp.sprintf("%02u:%02u:%02u.%03u", hh, mm, ss,
+			(unsigned int) (secs * 1000.0f));
 		break;
 	default:  // No second decimation.
 		sTemp.sprintf("%02u:%02u:%02u", hh, mm, ss);
@@ -1512,7 +1515,7 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem,
 	} else {
 		sText = t.toString();
 		if (m_pJackClient) {
-			double secs = (double) t.elapsed() / 1000.0;
+			float secs = (float) t.elapsed() / 1000.0f;
 			if (bElapsed && secs > 0) {
 				sTemp = formatTime(secs);
 				sText += " (" + sTemp + ")";
@@ -1521,8 +1524,10 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem,
 	}
 
 	// Display elapsed time as big time?
-	if ((iStatusItem == STATUS_RESET_TIME && m_pSetup->iTimeDisplay == DISPLAY_RESET_TIME) ||
-		(iStatusItem == STATUS_XRUN_TIME  && m_pSetup->iTimeDisplay == DISPLAY_XRUN_TIME)) {
+	if ((iStatusItem == STATUS_RESET_TIME
+			&& m_pSetup->iTimeDisplay == DISPLAY_RESET_TIME) ||
+		(iStatusItem == STATUS_XRUN_TIME
+			&& m_pSetup->iTimeDisplay == DISPLAY_XRUN_TIME)) {
 		m_ui.TimeDisplayTextLabel->setText(sTemp);
 	}
 
@@ -1535,10 +1540,15 @@ void qjackctlMainForm::updateElapsedTimes (void)
 {
 	// Display time remaining on start delay...
 	if (m_iTimerDelay < m_iStartDelay)
-		m_ui.TimeDisplayTextLabel->setText(formatTime((double) (m_iStartDelay - m_iTimerDelay) / 1000.0));
+		m_ui.TimeDisplayTextLabel->setText(formatTime(
+			(float) (m_iStartDelay - m_iTimerDelay) / 1000.0f));
 	else {
-		updateStatusItem(STATUS_RESET_TIME, formatElapsedTime(STATUS_RESET_TIME, m_tResetLast, true));
-		updateStatusItem(STATUS_XRUN_TIME, formatElapsedTime(STATUS_XRUN_TIME, m_tXrunLast, ((m_iXrunCount + m_iXrunCallbacks) > 0)));
+		updateStatusItem(STATUS_RESET_TIME,
+			formatElapsedTime(STATUS_RESET_TIME,
+				m_tResetLast, true));
+		updateStatusItem(STATUS_XRUN_TIME,
+			formatElapsedTime(STATUS_XRUN_TIME,
+				m_tXrunLast, ((m_iXrunCount + m_iXrunCallbacks) > 0)));
 	}
 }
 
@@ -1548,7 +1558,7 @@ void qjackctlMainForm::refreshXrunStats (void)
 {
 	updateXrunCount();
 
-	if (m_fXrunTotal < 0.001) {
+	if (m_fXrunTotal < 0.001f) {
 		QString n = "--";
 		updateStatusItem(STATUS_XRUN_TOTAL, n);
 		updateStatusItem(STATUS_XRUN_MIN, n);
@@ -1556,7 +1566,7 @@ void qjackctlMainForm::refreshXrunStats (void)
 		updateStatusItem(STATUS_XRUN_AVG, n);
 		updateStatusItem(STATUS_XRUN_LAST, n);
 	} else {
-		float fXrunAverage = 0.0;
+		float fXrunAverage = 0.0f;
 		if (m_iXrunCount > 0)
 			fXrunAverage = (m_fXrunTotal / m_iXrunCount);
 		QString s = " " + tr("msec");
@@ -1657,7 +1667,7 @@ void qjackctlMainForm::xrunNotifyEvent (void)
 
 #ifdef CONFIG_JACK_XRUN_DELAY
 	// We have an official XRUN delay value (convert usecs to msecs)...
-	updateXrunStats(0.001 * jack_get_xrun_delayed_usecs(m_pJackClient));
+	updateXrunStats(0.001f * jack_get_xrun_delayed_usecs(m_pJackClient));
 #endif
 
 	// Just log this single event...
@@ -2261,14 +2271,14 @@ void qjackctlMainForm::transportBackward (void)
 		jack_transport_query(m_pJackClient, &tpos);
 		float rate = (float) tpos.frame_rate;
 		float tloc = (((float) tpos.frame / rate) - m_fSkipAccel) * rate;
-		if (tloc < 0.0)	tloc = 0.0;
+		if (tloc < 0.0f) tloc = 0.0f;
 		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
 		// Log this here (if on initial toggle).
-		if (m_fSkipAccel < 1.1) 
+		if (m_fSkipAccel < 1.1f) 
 			appendMessages(tr("Transport backward."));
 		// Take care of backward acceleration...
 		if (m_ui.BackwardToolButton->isDown() && m_fSkipAccel < 60.0)
-			m_fSkipAccel *= 1.1;
+			m_fSkipAccel *= 1.1f;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
 	}
@@ -2314,14 +2324,14 @@ void qjackctlMainForm::transportForward (void)
 		jack_transport_query(m_pJackClient, &tpos);
 		float rate = (float) tpos.frame_rate;
 		float tloc = (((float) tpos.frame / rate) + m_fSkipAccel) * rate;
-		if (tloc < 0.0)	tloc = 0.0;
+		if (tloc < 0.0f) tloc = 0.0f;
 		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
 		// Log this here.
-		if (m_fSkipAccel < 1.1) 
+		if (m_fSkipAccel < 1.1f) 
 			appendMessages(tr("Transport forward."));
 		// Take care of forward acceleration...
-		if (m_ui.ForwardToolButton->isDown() && m_fSkipAccel < 60.0)
-			m_fSkipAccel *= 1.1;
+		if (m_ui.ForwardToolButton->isDown() && m_fSkipAccel < 60.0f)
+			m_fSkipAccel *= 1.1f;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
 	}
@@ -2347,13 +2357,16 @@ void qjackctlMainForm::refreshStatus (void)
 		bool bPlaying = (tstate == JackTransportRolling || tstate == JackTransportLooping);
 		// Transport timecode position.
 	//  if (bPlaying)
-			updateStatusItem(STATUS_TRANSPORT_TIME, formatTime((double) tpos.frame / (double) tpos.frame_rate));
+			updateStatusItem(STATUS_TRANSPORT_TIME,
+				formatTime((float) tpos.frame / (float) tpos.frame_rate));
 	//  else
 	//      updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 		// Transport barcode position (bar:beat.tick)
 		if (tpos.valid & JackPositionBBT) {
-			updateStatusItem(STATUS_TRANSPORT_BBT, QString().sprintf("%u:%u.%04u", tpos.bar, tpos.beat, tpos.tick));
-			updateStatusItem(STATUS_TRANSPORT_BPM, QString::number(tpos.beats_per_minute));
+			updateStatusItem(STATUS_TRANSPORT_BBT,
+				QString().sprintf("%u:%u.%04u", tpos.bar, tpos.beat, tpos.tick));
+			updateStatusItem(STATUS_TRANSPORT_BPM,
+				QString::number(tpos.beats_per_minute));
 		} else {
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
@@ -2362,12 +2375,16 @@ void qjackctlMainForm::refreshStatus (void)
 		// Less frequent status items update...
 		if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 			m_iStatusRefresh = 0;
-			updateStatusItem(STATUS_DSP_LOAD, QString::number(jack_cpu_load(m_pJackClient), 'g', 2) + s + "%");
-			updateStatusItem(STATUS_SAMPLE_RATE, QString::number(jack_get_sample_rate(m_pJackClient)) + s + tr("Hz"));
-			updateStatusItem(STATUS_BUFFER_SIZE, QString::number(g_nframes) + " " + tr("frames"));
+			updateStatusItem(STATUS_DSP_LOAD,
+				tr("%1 %").arg(jack_cpu_load(m_pJackClient), 0, 'g', 2));
+			updateStatusItem(STATUS_SAMPLE_RATE,
+				tr("%1 Hz").arg(jack_get_sample_rate(m_pJackClient)));
+			updateStatusItem(STATUS_BUFFER_SIZE,
+				tr("%1 frames").arg(g_nframes));
 #ifdef CONFIG_JACK_REALTIME
 			bool bRealtime = jack_is_realtime(m_pJackClient);
-			updateStatusItem(STATUS_REALTIME, (bRealtime ? tr("Yes") : tr("No")));
+			updateStatusItem(STATUS_REALTIME,
+				(bRealtime ? tr("Yes") : tr("No")));
 			m_ui.ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
 #else
 			updateStatusItem(STATUS_REALTIME, n);
@@ -2410,7 +2427,8 @@ void qjackctlMainForm::refreshStatus (void)
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
 #endif  // !CONFIG_JACK_TRANSPORT
 #ifdef CONFIG_JACK_MAX_DELAY
-			updateStatusItem(STATUS_MAX_DELAY, QString::number(0.001 * jack_get_max_delayed_usecs(m_pJackClient)) + " " + tr("msec"));
+			updateStatusItem(STATUS_MAX_DELAY, tr("%1 msec")
+				.arg(0.001f * jack_get_max_delayed_usecs(m_pJackClient)));
 #endif
 			// Check if we're have some XRUNs to report...
 			if (m_iXrunSkips > 0) {

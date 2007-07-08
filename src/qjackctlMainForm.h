@@ -153,7 +153,7 @@ protected:
 
 	void updateXrunCount();
 
-	QString formatTime(double secs) const;
+	QString formatTime(float secs) const;
 	QString formatElapsedTime(int iStatusItem, const QTime& t, bool bElapsed) const;
 	void updateElapsedTimes();
 
