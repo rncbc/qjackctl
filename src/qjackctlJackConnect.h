@@ -56,19 +56,20 @@ class qjackctlJackPort : public qjackctlPortItem
 {
 public:
 
-    // Constructor.
-    qjackctlJackPort(qjackctlJackClient *pClient, const QString& sPortName, jack_port_t *pJackPort);
-    // Default destructor.
-    ~qjackctlJackPort();
+	// Constructor.
+	qjackctlJackPort(qjackctlJackClient *pClient,
+		const QString& sPortName, jack_port_t *pJackPort);
+	// Default destructor.
+	~qjackctlJackPort();
 
-    // Jack handles accessors.
-    jack_client_t *jackClient() const;
-    jack_port_t   *jackPort() const;
+	// Jack handles accessors.
+	jack_client_t *jackClient() const;
+	jack_port_t   *jackPort() const;
 
 private:
 
-    // Instance variables.
-    jack_port_t *m_pJackPort;
+	// Instance variables.
+	jack_port_t *m_pJackPort;
 };
 
 
@@ -77,13 +78,14 @@ class qjackctlJackClient : public qjackctlClientItem
 {
 public:
 
-    // Constructor.
-    qjackctlJackClient(qjackctlJackClientList *pClientList, const QString& sClientName);
-    // Default destructor.
-    ~qjackctlJackClient();
+	// Constructor.
+	qjackctlJackClient(qjackctlJackClientList *pClientList,
+		const QString& sClientName);
+	// Default destructor.
+	~qjackctlJackClient();
 
-    // Jack client accessors.
-    jack_client_t *jackClient() const;
+	// Jack client accessors.
+	jack_client_t *jackClient() const;
 };
 
 
@@ -92,21 +94,21 @@ class qjackctlJackClientList : public qjackctlClientList
 {
 public:
 
-    // Constructor.
-    qjackctlJackClientList(qjackctlClientListView *pListView, jack_client_t *pJackClient, bool bReadable);
-    // Default destructor.
-    ~qjackctlJackClientList();
+	// Constructor.
+	qjackctlJackClientList(qjackctlClientListView *pListView, jack_client_t *pJackClient, bool bReadable);
+	// Default destructor.
+	~qjackctlJackClientList();
 
-    // Jack client accessors.
-    jack_client_t *jackClient() const;
+	// Jack client accessors.
+	jack_client_t *jackClient() const;
 
-    // Client:port refreshner (return newest item count).
-    int updateClientPorts();
+	// Client:port refreshner (return newest item count).
+	int updateClientPorts();
 
 private:
 
-    // Instance variables.
-    jack_client_t *m_pJackClient;
+	// Instance variables.
+	jack_client_t *m_pJackClient;
 };
 
 
@@ -117,41 +119,41 @@ class qjackctlJackConnect : public qjackctlConnect
 {
 public:
 
-    // Constructor.
-    qjackctlJackConnect(qjackctlConnectView *pConnectView,
+	// Constructor.
+	qjackctlJackConnect(qjackctlConnectView *pConnectView,
 		jack_client_t *pJackClient, int iJackType);
-    // Default destructor.
-    ~qjackctlJackConnect();
+	// Default destructor.
+	~qjackctlJackConnect();
 
 	// Connection type accessors.
 	int jackType() const;
 
-    // Common pixmap accessor.
-    QPixmap& pixmap (int iPixmap) const;
-    
+	// Common pixmap accessor.
+	QPixmap& pixmap (int iPixmap) const;
+	
 protected:
 
-    // Virtual Connect/Disconnection primitives.
-    void connectPorts    (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
-    void disconnectPorts (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	// Virtual Connect/Disconnection primitives.
+	void connectPorts    (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	void disconnectPorts (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
 
-    // Update port connection references.
-    void updateConnections();
+	// Update port connection references.
+	void updateConnections();
 
-    // Update icon size implementation.
-    void updateIconPixmaps();
+	// Update icon size implementation.
+	void updateIconPixmaps();
 
 private:
 
-    // Local pixmap-set janitor methods.
-    void createIconPixmaps();
-    void deleteIconPixmaps();
+	// Local pixmap-set janitor methods.
+	void createIconPixmaps();
+	void deleteIconPixmaps();
 
 	// Local variables.
 	int m_iJackType;
 
-    // Local pixmap-set array.
-    QPixmap *m_apPixmaps[QJACKCTL_JACK_PIXMAPS];
+	// Local pixmap-set array.
+	QPixmap *m_apPixmaps[QJACKCTL_JACK_PIXMAPS];
 };
 
 

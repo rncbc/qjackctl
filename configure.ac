@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.2.23.1, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.2.90.9, rncbc@rncbc.org, qjackctl)
 
-AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui.h)
+AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_FILES(Makefile qjackctl.pro qjackctl.spec qjackctl.desktop)
 
@@ -55,6 +55,7 @@ AC_ARG_WITH(alsa,
   AC_HELP_STRING([--with-alsa=PATH], [use alternate ALSA install path]),
   [ac_with_paths="$ac_with_paths $withval"])
 
+
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_CPP
@@ -65,15 +66,6 @@ AC_PROG_GCC_TRADITIONAL
 # Checks for languages.
 AC_LANG_C
 AC_LANG_CPLUSPLUS
-
-# Check for QTDIR environment variable.
-AC_MSG_CHECKING([whether QTDIR environment variable is set])
-if test "x$QTDIR" = "x"; then
-  AC_MSG_RESULT([no])
-else
-  AC_MSG_RESULT([$QTDIR])
-  ac_with_paths="$ac_with_paths $QTDIR"
-fi
 
 # Prepend alternate dependencies paths.
 ac_path=$PATH
@@ -103,57 +95,41 @@ for X in $ac_with_paths; do
   fi
 done
 
-# Checks for Qt library.
-for X in qt-mt qt; do
-  if test "x$ac_qtlib" = "x"; then
-     AC_CHECK_LIB($X, main, [ac_qtlib=$X])
-  fi
-done
-if test "x$ac_qtlib" = "x"; then
-  AC_MSG_ERROR([Qt library not found. Maybe QTDIR isn't properly set.])
-fi
-AC_SUBST(ac_qtlib)
-
-# Check for Qt multi-thread support.
-if test "x$ac_qtlib" = "xqt-mt"; then
-  ac_thread="thread"
-fi
-AC_SUBST(ac_thread)
-
-AC_CACHE_CHECK([for Qt library version >= 3.1.1],
+# Check for proper Qt version.
+AC_CACHE_CHECK([for Qt library version >= 4.1],
   ac_qtlib_version, [
-  AC_TRY_LINK([#include "qglobal.h"], [
-#if QT_VERSION < 0x030101
-#error Qt library 3.1.1 or greater required.
+  AC_TRY_LINK([#include "Qt/qglobal.h"], [
+#if QT_VERSION < 0x040100
+#error Qt library 4.1 or greater required.
 #endif
     ],
     ac_qtlib_version="yes", [
-      echo "no; Qt 3.1.1 or greater is required"
+      echo "no; Qt 4.1 or greater is required"
       exit
     ])
 ])
 
 # A common error message:
-ac_qtdir_errmsg="not found in current PATH. Maybe QT development environment isn't available (qt3-devel)."
+ac_errmsg="not found in current PATH. Maybe QT development environment isn't available (qt-devel)."
 
 # Check for Qt qmake utility.
 AC_PATH_PROG(ac_qmake, qmake, [no], $ac_path)
 if test "x$ac_qmake" = "xno"; then
-   AC_MSG_ERROR([qmake $ac_qtdir_errmsg])
+   AC_MSG_ERROR([qmake $ac_errmsg])
 fi
 AC_SUBST(ac_qmake)
 
 # Check for Qt moc utility.
 AC_PATH_PROG(ac_moc, moc, [no], $ac_path)
 if test "x$ac_moc" = "xno"; then
-   AC_MSG_ERROR([moc $ac_qtdir_errmsg])
+   AC_MSG_ERROR([moc $ac_errmsg])
 fi
 AC_SUBST(ac_moc)
 
 # Check for Qt uic utility.
 AC_PATH_PROG(ac_uic, uic, [no], $ac_path)
 if test "x$ac_uic" = "xno"; then
-   AC_MSG_ERROR([uic $ac_qtdir_errmsg])
+   AC_MSG_ERROR([uic $ac_errmsg])
 fi
 AC_SUBST(ac_uic)
 
@@ -161,7 +137,12 @@ AC_SUBST(ac_uic)
 AC_CHECK_LIB(m, main)
 AC_CHECK_LIB(X11, main)
 AC_CHECK_LIB(Xext, main)
-AC_CHECK_LIB($ac_qtlib, main)
+
+# Check for round math function.
+AC_CHECK_LIB(m, lroundf, [ac_round="yes"], [ac_round="no"])
+if test "x$ac_round" = "xyes"; then
+   AC_DEFINE(CONFIG_ROUND, 1, [Define if round is available.])
+fi
 
 # Check for JACK libraries.
 AC_CHECK_LIB(jack, main, [ac_jack_lib="yes"], [ac_jack_lib="no"])

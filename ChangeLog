@@ -3,6 +3,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+0.3.0   2007-07-10  Qt4 migration was complete.
+
+- Qt4 migration was complete.
+
+
 0.2.23   2007-07-02  JACK MIDI support debut.
 
 - JACK MIDI support is now being introduced. Connections window

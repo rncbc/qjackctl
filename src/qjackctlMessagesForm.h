@@ -1,4 +1,4 @@
-// qjackctlSystemTray.h
+// qjackctlMessagesForm.h
 //
 /****************************************************************************
    Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,66 +19,58 @@
 
 *****************************************************************************/
 
-#ifndef __qjackctlSystemTray_h
-#define __qjackctlSystemTray_h
+#ifndef __qjackctlMessagesForm_h
+#define __qjackctlMessagesForm_h
 
-#include <QWidget>
-#include <QPixmap>
+#include "ui_qjackctlMessagesForm.h"
 //Added by qt3to4:
-#include <QPaintEvent>
-#include <QMouseEvent>
+#include <QShowEvent>
+#include <QHideEvent>
 
 
 //----------------------------------------------------------------------------
-// qjackctlSystemTray -- Custom system tray widget.
+// qjackctlMessagesForm -- UI wrapper form.
 
-class qjackctlSystemTray : public QWidget
+class qjackctlMessagesForm : public QWidget
 {
 	Q_OBJECT
 
 public:
 
 	// Constructor.
-	qjackctlSystemTray(QWidget *pParent = 0);
-	// Default destructor.
-	~qjackctlSystemTray();
+	qjackctlMessagesForm(QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
+	// Destructor.
+	~qjackctlMessagesForm();
 
-	// Background mask methods.
-	void setBackground(const QColor& background);
-	const QColor& background() const;
 
-    // Set system tray icon overlay.
-    void setPixmapOverlay(const QPixmap& pmOverlay);
-	const QPixmap& pixmapOverlay() const;
+	QFont messagesFont() const;
+	void setMessagesFont(const QFont& font);
 
-	// System tray icon/pixmaps update method.
-	void updateIcon();
+	int messagesLimit() const;
+	void setMessagesLimit(int iLimit);
 
-signals:
-
-	// Clicked signal.
-	void clicked();
-
-	// Context menu signal.
-	void contextMenuRequested(const QPoint& pos);
+	void appendMessages(const QString& s);
+	void appendMessagesColor(const QString& s, const QString& c);
+	void appendMessagesText(const QString& s);
 
 protected:
 
-	// Self-drawable methods.
-	void paintEvent(QPaintEvent *);
-
-	// Overriden mouse event method.
-	void mousePressEvent(QMouseEvent *);
+	void showEvent(QShowEvent * pShowEvent);
+	void hideEvent(QHideEvent * pHideEvent);
 
 private:
 
-	// Instance pixmap and background color.
-	QPixmap m_pixmap;
-	QPixmap m_pixmapOverlay;
-	QColor  m_background;
+	// The Qt-designer UI struct...
+	Ui::qjackctlMessagesForm m_ui;
+
+	// Instance variables.
+	int m_iMessagesLines;
+	int m_iMessagesLimit;
+	int m_iMessagesHigh;
 };
 
 
-#endif  // __qjackctlSystemTray_h
+#endif	// __qjackctlMessagesForm_h
 
-// end of qjackctlSystemTray.h
+
+// end of qjackctlMessagesForm.h

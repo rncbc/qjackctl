@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 4
+%define release 5
 %define prefix  @ac_prefix@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface.
@@ -15,17 +15,17 @@ URL:		http://qjackctl.sourceforge.net/
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-Requires:	qt3 >= 3.1
+Requires:	qt >= 4.1
 Requires:	jack >= 0.100.0
 Requires:	alsa
 
-BuildRequires:	qt3-devel >= 3.1
+BuildRequires:	qt-devel >= 4.1
 BuildRequires:	jack-devel >= 0.100.0
 BuildRequires:	alsa-devel
 
 %description
 JACK Audio Connection Kit - Qt GUI Interface: A simple Qt application
-to control the JACK server. Written in C++ around the Qt3 toolkit
+to control the JACK server. Written in C++ around the Qt4 toolkit
 for X11, most exclusively using Qt Designer. Provides a simple GUI
 dialog for setting several JACK server parameters, which are properly
 saved between sessions, and a way control of the status of the audio
@@ -37,7 +37,6 @@ including a enhanced patchbay and connection control features.
 [ -f Makefile.cvs ] && %__make -f Makefile.cvs
 
 %build
-export PATH=$QTDIR/bin:$PATH
 %configure
 %__make
 
@@ -55,6 +54,8 @@ export PATH=$QTDIR/bin:$PATH
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Mon Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- Qt4 migration was complete.
 * Mon Jun 25 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Application icon is now installed to (prefix)/share/pixmaps.
 - Declared fundamental build and run-time requirements.

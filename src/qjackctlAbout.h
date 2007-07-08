@@ -35,6 +35,8 @@
 #define QJACKCTL_WEBSITE    "http://qjackctl.sourceforge.net"
 #define QJACKCTL_COPYRIGHT  "Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved."
 
+#define QJACKCTL_DOMAIN     "rncbc.org"
+
 #endif  // __qjackctlAbout_h
 
 // end of qjackctlAbout.h

@@ -22,16 +22,11 @@
 #ifndef __qjackctlConnect_h
 #define __qjackctlConnect_h
 
-#include <qdragobject.h>
-#include <qlistview.h>
-#include <qheader.h>
-#include <qsplitter.h>
-#include <qptrlist.h>
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qtooltip.h>
-
 #include "qjackctlConnectAlias.h"
+
+#include <QTreeWidget>
+#include <QSplitter>
+
 
 // QListViewItem::rtti return values.
 #define QJACKCTL_CLIENTITEM    1001
@@ -48,278 +43,250 @@ class qjackctlConnectView;
 class qjackctlConnect;
 
 
-// Custom tooltip class.
-class qjackctlConnectToolTip : public QToolTip
+// Port list item.
+class qjackctlPortItem : public QTreeWidgetItem
 {
 public:
 
 	// Constructor.
-	qjackctlConnectToolTip(qjackctlClientListView *pListView);
-	// Virtual destructor.
-	virtual ~qjackctlConnectToolTip() {}
+	qjackctlPortItem(qjackctlClientItem *pClient, const QString& sPortName);
+	// Default destructor.
+	~qjackctlPortItem();
 
-protected:
+	// Instance accessors.
+	void setPortName(const QString& sPortName);
+	const QString& clientName() const;
+	const QString& portName() const;
 
-	// Tooltip handler.
-	void maybeTip(const QPoint& pos);
+	// Complete client:port name helper.
+	QString clientPortName() const;
 
-private:
+	// Connections client item accessor.
+	qjackctlClientItem *client() const;
 
-	// The actual parent widget holder.
-	qjackctlClientListView *m_pListView;
-};
+	// Client port cleanup marker.
+	void markPort(int iMark);
+	void markClientPort(int iMark);
 
+	int portMark() const;
 
-// Port list item.
-class qjackctlPortItem : public QListViewItem
-{
-public:
+	// Connected port list primitives.
+	void addConnect(qjackctlPortItem *pPort);
+	void removeConnect(qjackctlPortItem *pPort);
 
-    // Constructor.
-    qjackctlPortItem(qjackctlClientItem *pClient, const QString& sPortName);
-    // Default destructor.
-    ~qjackctlPortItem();
+	// Connected port finders.
+	qjackctlPortItem *findConnect(const QString& sClientPortName);
+	qjackctlPortItem *findConnectPtr(qjackctlPortItem *pPortPtr);
 
-    // Instance accessors.
-    void setPortName(const QString& sPortName);
-    const QString& clientName() const;
-    const QString& portName() const;
+	// Connection list accessor.
+	const QList<qjackctlPortItem *>& connects() const;
 
-    // Complete client:port name helper.
-    QString clientPortName() const;
+	// Connectiopn highlight methods.
+	bool isHilite() const;
+	void setHilite (bool bHilite);
 
-    // Connections client item accessor.
-    qjackctlClientItem *client() const;
-
-    // Client port cleanup marker.
-    void markPort(int iMark);
-    void markClientPort(int iMark);
-
-    int portMark() const;
-
-    // Connected port list primitives.
-    void addConnect(qjackctlPortItem *pPort);
-    void removeConnect(qjackctlPortItem *pPort);
-
-    // Connected port finders.
-    qjackctlPortItem *findConnect(const QString& sClientPortName);
-    qjackctlPortItem *findConnectPtr(qjackctlPortItem *pPortPtr);
-
-    // Connection list accessor.
-    QPtrList<qjackctlPortItem>& connects();
-
-    // To virtually distinguish between list view items.
-    virtual int rtti() const;
-
-    // Connectiopn highlight methods.
-    bool isHilite() const;
-    void setHilite (bool bHilite);
-
-    // Special port name sorting virtual comparator.
-    virtual int compare (QListViewItem* pPortItem, int iColumn, bool bAscending) const;
-
-protected:
-
-    // To highlight current connected ports when complementary-selected.
-    virtual void paintCell(QPainter *p, const QColorGroup& cg, int column, int width, int align);
+	// Proxy sort override method.
+	// - Natural decimal sorting comparator.
+	bool operator< (const QTreeWidgetItem& other) const;
 
 private:
 
-    // Instance variables.
-    qjackctlClientItem *m_pClient;
-    QString      m_sPortName;
-    int          m_iPortMark;
-    bool         m_bHilite;
+	// Instance variables.
+	qjackctlClientItem *m_pClient;
 
-    // Connection cache list.
-    QPtrList<qjackctlPortItem> m_connects;
+	QString m_sPortName;
+	int     m_iPortMark;
+	bool    m_bHilite;
+
+	// Connection cache list.
+	QList<qjackctlPortItem *> m_connects;
 };
 
 
 // Client list item.
-class qjackctlClientItem : public QListViewItem
+class qjackctlClientItem : public QTreeWidgetItem
 {
 public:
 
-    // Constructor.
-    qjackctlClientItem(qjackctlClientList *pClientList, const QString& sClientName);
-    // Default destructor.
-    ~qjackctlClientItem();
+	// Constructor.
+	qjackctlClientItem(qjackctlClientList *pClientList,
+		const QString& sClientName);
+	// Default destructor.
+	~qjackctlClientItem();
 
-    // Port list primitive methods.
-    void addPort(qjackctlPortItem *pPort);
-    void removePort(qjackctlPortItem *pPort);
+	// Port list primitive methods.
+	void addPort(qjackctlPortItem *pPort);
+	void removePort(qjackctlPortItem *pPort);
 
-    // Port finder.
-    qjackctlPortItem *findPort(const QString& sPortName);
+	// Port finder.
+	qjackctlPortItem *findPort(const QString& sPortName);
 
-    // Instance accessors.
-    void setClientName(const QString& sClientName);
-    const QString& clientName() const;
+	// Instance accessors.
+	void setClientName(const QString& sClientName);
+	const QString& clientName() const;
 
-    // Readable flag accessor.
-    bool isReadable() const;
+	// Readable flag accessor.
+	bool isReadable() const;
 
-    // Client list accessor.
-    qjackctlClientList *clientList() const;
+	// Client list accessor.
+	qjackctlClientList *clientList() const;
 
-    // Port list accessor.
-    QPtrList<qjackctlPortItem>& ports();
+	// Port list accessor.
+	QList<qjackctlPortItem *>& ports();
 
-    // Client port cleanup marker.
-    void markClient(int iMark);
-    void markClientPorts(int iMark);
-    void cleanClientPorts(int iMark);
+	// Client port cleanup marker.
+	void markClient(int iMark);
+	void markClientPorts(int iMark);
+	void cleanClientPorts(int iMark);
 
-    int clientMark() const;
+	int clientMark() const;
 
-    // To virtually distinguish between list view items.
-    virtual int rtti() const;
+	// Connectiopn highlight methods.
+	bool isHilite() const;
+	void setHilite (bool bHilite);
 
-    // Connectiopn highlight methods.
-    bool isHilite() const;
-    void setHilite (bool bHilite);
-
-    // Special port name sorting virtual comparator.
-    virtual int compare (QListViewItem* pClientItem, int iColumn, bool bAscending) const;
-
-protected:
-
-    // To highlight current connected ports when complementary-selected.
-    virtual void paintCell(QPainter *p, const QColorGroup& cg, int column, int width, int align);
+	// Client item openness status.
+	void setOpen(bool bOpen);
+	bool isOpen() const;
 
 private:
 
-    // Instance variables.
-    qjackctlClientList *m_pClientList;
-    QString m_sClientName;
-    int     m_iClientMark;
-    int     m_iHilite;
+	// Instance variables.
+	qjackctlClientList *m_pClientList;
 
-    QPtrList<qjackctlPortItem> m_ports;
+	QString m_sClientName;
+	int     m_iClientMark;
+	int     m_iHilite;
+
+	QList<qjackctlPortItem *> m_ports;
 };
 
 
 // Jack client list.
 class qjackctlClientList : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlClientList(qjackctlClientListView *pListView, bool bReadable);
-    // Default destructor.
-    ~qjackctlClientList();
+	// Constructor.
+	qjackctlClientList(qjackctlClientListView *pListView, bool bReadable);
+	// Default destructor.
+	~qjackctlClientList();
 
-    // Client list primitive methods.
-    void addClient(qjackctlClientItem *pClient);
-    void removeClient(qjackctlClientItem *pClient);
+	// Client list primitive methods.
+	void addClient(qjackctlClientItem *pClient);
+	void removeClient(qjackctlClientItem *pClient);
 
-    // Client finder.
-    qjackctlClientItem *findClient(const QString& sClientName);
-    // Client:port finder.
-    qjackctlPortItem *findClientPort(const QString& sClientPort);
+	// Client finder.
+	qjackctlClientItem *findClient(const QString& sClientName);
+	// Client:port finder.
+	qjackctlPortItem *findClientPort(const QString& sClientPort);
 
-    // List view accessor.
-    qjackctlClientListView *listView() const;
+	// List view accessor.
+	qjackctlClientListView *listView() const;
 
-    // Readable flag accessor.
-    bool isReadable() const;
+	// Readable flag accessor.
+	bool isReadable() const;
 
-    // Client list accessor.
-    QPtrList<qjackctlClientItem>& clients();
+	// Client list accessor.
+	QList<qjackctlClientItem *>& clients();
 
-    // Client ports cleanup marker.
-    void markClientPorts(int iMark);
-    void cleanClientPorts(int iMark);
+	// Client ports cleanup marker.
+	void markClientPorts(int iMark);
+	void cleanClientPorts(int iMark);
 
-    // Client:port refreshner (return newest item count).
-    virtual int updateClientPorts() = 0;
+	// Client:port refreshner (return newest item count).
+	virtual int updateClientPorts() = 0;
 
-    // Client:port hilite update stabilization.
-    void hiliteClientPorts (void);
+	// Client:port hilite update stabilization.
+	void hiliteClientPorts (void);
 
 private:
 
-    // Instance variables.
-    qjackctlClientListView *m_pListView;
-    bool m_bReadable;
+	// Instance variables.
+	qjackctlClientListView *m_pListView;
+	bool m_bReadable;
 
-    QPtrList<qjackctlClientItem> m_clients;
+	QList<qjackctlClientItem *> m_clients;
 
-    QListViewItem *m_pHiliteItem;
+	QTreeWidgetItem *m_pHiliteItem;
 };
 
 
 //----------------------------------------------------------------------------
 // qjackctlClientListView -- Client list view, supporting drag-n-drop.
 
-class qjackctlClientListView : public QListView
+class qjackctlClientListView : public QTreeWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlClientListView(qjackctlConnectView *pConnectView, bool bReadable);
-    // Default destructor.
-    ~qjackctlClientListView();
+	// Constructor.
+	qjackctlClientListView(qjackctlConnectView *pConnectView, bool bReadable);
+	// Default destructor.
+	~qjackctlClientListView();
 
-    // Auto-open timer methods.
-    void setAutoOpenTimeout(int iAutoOpenTimeout);
-    int autoOpenTimeout() const;
+	// Auto-open timer methods.
+	void setAutoOpenTimeout(int iAutoOpenTimeout);
+	int autoOpenTimeout() const;
 
 	// Aliasing support methods.
 	void setAliases(qjackctlConnectAlias *pAliases, bool bRenameEnabled);
 	qjackctlConnectAlias *aliases() const;
-	bool renameEnabled();
+	bool renameEnabled() const;
 
 	// Binding indirect accessor.
 	qjackctlConnect *binding() const;
 
-    // Natural decimal sorting comparator helper.
-    static int compare (const QString& s1, const QString& s2, bool bAscending);
-
 protected slots:
 
-    // In-place aliasing slots.
-    void startRenameSlot();
-    void renamedSlot(QListViewItem *pItem, int);
-    // Auto-open timeout slot.
-    void timeoutSlot();
+	// In-place aliasing slots.
+	void startRenameSlot();
+	void renamedSlot();
+	// Auto-open timeout slot.
+	void timeoutSlot();
 
 protected:
 
-    // Drag-n-drop stuff -- reimplemented virtual methods.
-    virtual void dragEnterEvent(QDragEnterEvent *pDragEnterEvent);
-    virtual void dragMoveEvent(QDragMoveEvent *pDragMoveEvent);
-    virtual void dragLeaveEvent(QDragLeaveEvent *);
-    virtual void dropEvent(QDropEvent *pDropEvent);
-    virtual QDragObject *dragObject();
-    // Context menu request event handler.
-    virtual void contextMenuEvent(QContextMenuEvent *);
+	// Trap for help/tool-tip events.
+	bool eventFilter(QObject *pObject, QEvent *pEvent);
+
+	// Drag-n-drop stuff.
+	QTreeWidgetItem *dragDropItem(const QPoint& pos);
+
+	// Drag-n-drop stuff -- reimplemented virtual methods.
+	void dragEnterEvent(QDragEnterEvent *pDragEnterEvent);
+	void dragMoveEvent(QDragMoveEvent *pDragMoveEvent);
+	void dragLeaveEvent(QDragLeaveEvent *);
+	void dropEvent(QDropEvent *pDropEvent);
+
+	// Handle mouse events for drag-and-drop stuff.
+	void mousePressEvent(QMouseEvent *pMouseEvent);
+	void mouseMoveEvent(QMouseEvent *pMouseEvent);
+
+	// Context menu request event handler.
+	void contextMenuEvent(QContextMenuEvent *);
 
 private:
 
-    // Bindings.
-    qjackctlConnectView *m_pConnectView;
+	// Bindings.
+	qjackctlConnectView *m_pConnectView;
 
-    // Drag-n-drop stuff.
-    QListViewItem *dragDropItem(const QPoint& epos);
+	// Auto-open timer.
+	int     m_iAutoOpenTimeout;
+	QTimer *m_pAutoOpenTimer;
 
-    // Auto-open timer.
-    int     m_iAutoOpenTimeout;
-    QTimer *m_pAutoOpenTimer;
-    // Item we'll eventually drop something.
-    QListViewItem *m_pDragDropItem;
+	// Items we'll eventually drop something.
+	QTreeWidgetItem *m_pDragItem;
+	QTreeWidgetItem *m_pDropItem;
+	// The point from where drag started.
+	QPoint m_posDrag;
 
 	// Aliasing support.
 	qjackctlConnectAlias *m_pAliases;
 	bool m_bRenameEnabled;
-
-	// Listview item tooltip.
-	qjackctlConnectToolTip *m_pToolTip;
 };
 
 
@@ -328,40 +295,39 @@ private:
 
 class qjackctlConnectorView : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlConnectorView(qjackctlConnectView *pConnectView);
-    // Default destructor.
-    ~qjackctlConnectorView();
+	// Constructor.
+	qjackctlConnectorView(qjackctlConnectView *pConnectView);
+	// Default destructor.
+	~qjackctlConnectorView();
 
 public slots:
 
-    // Useful slots (should this be protected?).
-    void listViewChanged(QListViewItem *);
-    void contentsMoved(int, int);
+	// Useful slots (should this be protected?).
+	void contentsChanged();
 
 protected:
 
-    // Specific event handlers.
-    virtual void paintEvent(QPaintEvent *);
-    virtual void resizeEvent(QResizeEvent *);
-    // Context menu request event handler.
-    virtual void contextMenuEvent(QContextMenuEvent *);
+	// Draw visible port connection relation arrows.
+	void paintEvent(QPaintEvent *);
+
+	// Context menu request event handler.
+	virtual void contextMenuEvent(QContextMenuEvent *);
 
 private:
 
 	// Legal client/port item position helper.
-	int itemY(QListViewItem *pItem) const;
+	int itemY(QTreeWidgetItem *pItem) const;
 
-    // Drawing methods.
-    void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
-    void drawConnections();
+	// Drawing methods.
+	void drawConnectionLine(QPainter *pPainter,
+		int x1, int y1, int x2, int y2, int h1, int h2);
 
-    // Local instance variables.
-    qjackctlConnectView *m_pConnectView;
+	// Local instance variables.
+	qjackctlConnectView *m_pConnectView;
 };
 
 
@@ -370,64 +336,67 @@ private:
 
 class qjackctlConnectView : public QSplitter
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlConnectView(QWidget *pParent = 0, const char *pszName = 0);
-    // Default destructor.
-    ~qjackctlConnectView();
+	// Constructor.
+	qjackctlConnectView(QWidget *pParent = 0);
+	// Default destructor.
+	~qjackctlConnectView();
 
-    // Widget accesors.
-    qjackctlClientListView *OListView()     const{ return m_pOListView; }
-    qjackctlClientListView *IListView()     const { return m_pIListView; }
-    qjackctlConnectorView  *ConnectorView() const { return m_pConnectorView; }
+	// Widget accesors.
+	qjackctlClientListView *OListView() const
+		{ return m_pOListView; }
+	qjackctlClientListView *IListView() const
+		{ return m_pIListView; }
+	qjackctlConnectorView  *ConnectorView() const
+		{ return m_pConnectorView; }
 
-    // Connections object binding methods.
-    void setBinding(qjackctlConnect *pConnect);
-    qjackctlConnect *binding() const;
+	// Connections object binding methods.
+	void setBinding(qjackctlConnect *pConnect);
+	qjackctlConnect *binding() const;
 
-    // Client list accessors.
-    qjackctlClientList *OClientList() const;
-    qjackctlClientList *IClientList() const;
+	// Client list accessors.
+	qjackctlClientList *OClientList() const;
+	qjackctlClientList *IClientList() const;
 
-    // Connector line style accessors.
-    void setBezierLines(bool bBezierLines);
-    bool isBezierLines() const;
+	// Connector line style accessors.
+	void setBezierLines(bool bBezierLines);
+	bool isBezierLines() const;
 
-    // Common icon size pixmap accessors.
-    void setIconSize (int iIconSize);
-    int iconSize (void) const;
+	// Common icon size pixmap accessors.
+	void setIconSize (int iIconSize);
+	int iconSize (void) const;
 
-    // Dirty flag accessors.
-    void setDirty (bool bDirty);
-    bool isDirty() const;
+	// Dirty flag accessors.
+	void setDirty (bool bDirty);
+	bool isDirty() const;
 
 signals:
 
-    // Contents change signal.
-    void contentsChanged();
+	// Contents change signal.
+	void contentsChanged();
 
 private:
 
-    // Child controls.
-    qjackctlClientListView *m_pOListView;
-    qjackctlClientListView *m_pIListView;
-    qjackctlConnectorView  *m_pConnectorView;
+	// Child controls.
+	qjackctlClientListView *m_pOListView;
+	qjackctlClientListView *m_pIListView;
+	qjackctlConnectorView  *m_pConnectorView;
 
-    // The main binding object.
-    qjackctlConnect *m_pConnect;
+	// The main binding object.
+	qjackctlConnect *m_pConnect;
 
-    // How we'll draw connector lines.
-    bool m_bBezierLines;
+	// How we'll draw connector lines.
+	bool m_bBezierLines;
 
-    // How large will be those icons.
-    // 0 = 16x16 (default), 1 = 32x32, 2 = 64x64.
-    int m_iIconSize;
+	// How large will be those icons.
+	// 0 = 16x16 (default), 1 = 32x32, 2 = 64x64.
+	int m_iIconSize;
 
-    // The obnoxious dirty flag.
-    bool m_bDirty;
+	// The obnoxious dirty flag.
+	bool m_bDirty;
 };
 
 
@@ -436,86 +405,88 @@ private:
 
 class qjackctlConnect : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlConnect(qjackctlConnectView *pConnectView);
-    // Default destructor.
-    ~qjackctlConnect();
+	// Constructor.
+	qjackctlConnect(qjackctlConnectView *pConnectView);
+	// Default destructor.
+	~qjackctlConnect();
 
-    // Explicit connection tests.
-    bool canConnectSelected();
-    bool canDisconnectSelected();
-    bool canDisconnectAll();
+	// Explicit connection tests.
+	bool canConnectSelected();
+	bool canDisconnectSelected();
+	bool canDisconnectAll();
 
-    // Client list accessors.
-    qjackctlClientList *OClientList() const;
-    qjackctlClientList *IClientList() const;
+	// Client list accessors.
+	qjackctlClientList *OClientList() const;
+	qjackctlClientList *IClientList() const;
 
 public slots:
 
-    // Incremental contents refreshner; check dirty status.
-    void refresh();
+	// Incremental contents refreshner; check dirty status.
+	void refresh();
 
-    // Explicit connection slots.
-    bool connectSelected();
-    bool disconnectSelected();
-    bool disconnectAll();
+	// Explicit connection slots.
+	bool connectSelected();
+	bool disconnectSelected();
+	bool disconnectAll();
 
-    // Complete/incremental contents rebuilder; check dirty status if incremental.
-    void updateContents (bool bClear);
+	// Complete/incremental contents rebuilder; check dirty status if incremental.
+	void updateContents(bool bClear);
 
 signals:
 
-    // Connection change signal.
-    void connectChanged();
+	// Connection change signal.
+	void connectChanged();
 
 protected:
 
-    // Connect/Disconnection primitives.
-    virtual void connectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
-    virtual void disconnectPorts(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
+	// Connect/Disconnection primitives.
+	virtual void connectPorts(
+		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
+	virtual void disconnectPorts(
+		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
 
-    // Update port connection references.
-    virtual void updateConnections() = 0;
+	// Update port connection references.
+	virtual void updateConnections() = 0;
 
-    // These must be accessed by the descendant constructor.
-    qjackctlConnectView *connectView() const;
-    void setOClientList(qjackctlClientList *pOClientList);
-    void setIClientList(qjackctlClientList *pIClientList);
+	// These must be accessed by the descendant constructor.
+	qjackctlConnectView *connectView() const;
+	void setOClientList(qjackctlClientList *pOClientList);
+	void setIClientList(qjackctlClientList *pIClientList);
 
-    // Common pixmap factory helper-method.
-    QPixmap *createIconPixmap (const QString& sIconName);
+	// Common pixmap factory helper-method.
+	QPixmap *createIconPixmap (const QString& sIconName);
 
-    // Update icon size implementation.
-    virtual void updateIconPixmaps() = 0;
+	// Update icon size implementation.
+	virtual void updateIconPixmaps() = 0;
 
 private:
 
-    // Dunno. But this may avoid some conflicts.
-    bool startMutex();
-    void endMutex();
+	// Dunno. But this may avoid some conflicts.
+	bool startMutex();
+	void endMutex();
 
-    // Connection methods (unguarded).
-    bool canConnectSelectedEx();
-    bool canDisconnectSelectedEx();
-    bool canDisconnectAllEx();
-    bool connectSelectedEx();
-    bool disconnectSelectedEx();
-    bool disconnectAllEx();
+	// Connection methods (unguarded).
+	bool canConnectSelectedEx();
+	bool canDisconnectSelectedEx();
+	bool canDisconnectAllEx();
+	bool connectSelectedEx();
+	bool disconnectSelectedEx();
+	bool disconnectAllEx();
 
-    // Connect/Disconnection local primitives.
-    void connectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
-    void disconnectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	// Connect/Disconnection local primitives.
+	void connectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	void disconnectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
 
-    // Instance variables.
-    qjackctlConnectView *m_pConnectView;
-    // These must be created on the descendant constructor.
-    qjackctlClientList *m_pOClientList;
-    qjackctlClientList *m_pIClientList;
-    int m_iMutex;
+	// Instance variables.
+	qjackctlConnectView *m_pConnectView;
+	// These must be created on the descendant constructor.
+	qjackctlClientList *m_pOClientList;
+	qjackctlClientList *m_pIClientList;
+	int m_iMutex;
 };
 
 

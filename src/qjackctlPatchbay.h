@@ -1,7 +1,7 @@
 // qjackctlPatchbay.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -22,15 +22,9 @@
 #ifndef __qjackctlPatchbay_h
 #define __qjackctlPatchbay_h
 
-#include <qdragobject.h>
-#include <qlistview.h>
-#include <qheader.h>
-#include <qsplitter.h>
-#include <qptrlist.h>
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qpopupmenu.h>
-#include <qtooltip.h>
+#include <QTreeWidget>
+#include <QSplitter>
+
 
 // Our external patchbay models.
 #include "qjackctlPatchbayRack.h"
@@ -60,271 +54,256 @@ class qjackctlPatchbay;
 #define QJACKCTL_XPM_PIXMAPS        8
 
 
-// Custom tooltip class.
-class qjackctlPatchbayToolTip : public QToolTip
+// Patchbay plug (port) list item.
+class qjackctlPlugItem : public QTreeWidgetItem
 {
 public:
 
 	// Constructor.
-	qjackctlPatchbayToolTip(qjackctlSocketListView *pListView);
-	// Virtual destructor.
-	virtual ~qjackctlPatchbayToolTip() {}
+	qjackctlPlugItem(qjackctlSocketItem *pSocket,
+		const QString& sPlugName, qjackctlPlugItem *pPlugAfter);
+	// Default destructor.
+	~qjackctlPlugItem();
 
-protected:
+	// Instance accessors.
+	const QString& socketName() const;
+	const QString& plugName() const;
 
-	// Tooltip handler.
-	void maybeTip(const QPoint& pos);
-
-private:
-
-	// The actual parent widget holder.
-	qjackctlSocketListView *m_pListView;
-};
-
-
-// Patchbay plug (port) list item.
-class qjackctlPlugItem : public QListViewItem
-{
-public:
-
-    // Constructor.
-    qjackctlPlugItem(qjackctlSocketItem *pSocket, const QString& sPlugName, qjackctlPlugItem *pPlugAfter);
-    // Default destructor.
-    ~qjackctlPlugItem();
-
-    // Instance accessors.
-    const QString& socketName();
-    const QString& plugName();
-
-    // Patchbay socket item accessor.
-    qjackctlSocketItem *socket();
-
-    // To virtually distinguish between list view items.
-    virtual int rtti() const;
+	// Patchbay socket item accessor.
+	qjackctlSocketItem *socket() const;
 
 private:
 
-    // Instance variables.
-    qjackctlSocketItem *m_pSocket;
-    QString m_sPlugName;
+	// Instance variables.
+	qjackctlSocketItem *m_pSocket;
+	QString m_sPlugName;
 };
 
 
 // Patchbay socket (client) list item.
-class qjackctlSocketItem : public QListViewItem
+class qjackctlSocketItem : public QTreeWidgetItem
 {
 public:
 
-    // Constructor.
-    qjackctlSocketItem(qjackctlSocketList *pSocketList,
+	// Constructor.
+	qjackctlSocketItem(qjackctlSocketList *pSocketList,
 		const QString& sSocketName, const QString& sClientName,
 		int iSocketType,qjackctlSocketItem *pSocketAfter);
 
-    // Default destructor.
-    ~qjackctlSocketItem();
+	// Default destructor.
+	~qjackctlSocketItem();
 
-    // Instance accessors.
-    const QString& socketName();
-    const QString& clientName();
-    int socketType();
-    bool isExclusive();
-    const QString& forward();
+	// Instance accessors.
+	const QString& socketName() const;
+	const QString& clientName() const;
+	int socketType() const;
+	bool isExclusive() const;
+	const QString& forward() const;
 
-    void setSocketName (const QString& sSocketName);
-    void setClientName (const QString& sClientName);
-    void setSocketType (int iSocketType);
-    void setExclusive  (bool bExclusive);
-    void setForward    (const QString& sSocketForward);
+	void setSocketName (const QString& sSocketName);
+	void setClientName (const QString& sClientName);
+	void setSocketType (int iSocketType);
+	void setExclusive  (bool bExclusive);
+	void setForward    (const QString& sSocketForward);
 
-    // Socket flags accessor.
-    bool isReadable();
+	// Socket flags accessor.
+	bool isReadable() const;
 
-    // Connected plug list primitives.
-    void addConnect(qjackctlSocketItem *pSocket);
-    void removeConnect(qjackctlSocketItem *pSocket);
+	// Connected plug list primitives.
+	void addConnect(qjackctlSocketItem *pSocket);
+	void removeConnect(qjackctlSocketItem *pSocket);
 
-    // Connected plug  finders.
-    qjackctlSocketItem *findConnectPtr(qjackctlSocketItem *pSocketPtr);
+	// Connected plug  finders.
+	qjackctlSocketItem *findConnectPtr(qjackctlSocketItem *pSocketPtr);
 
-    // Connection list accessor.
-    QPtrList<qjackctlSocketItem>& connects();
+	// Connection list accessor.
+	const QList<qjackctlSocketItem *>& connects() const;
 
-    // Plug list primitive methods.
-    void addPlug(qjackctlPlugItem *pPlug);
-    void removePlug(qjackctlPlugItem *pPlug);
+	// Plug list primitive methods.
+	void addPlug(qjackctlPlugItem *pPlug);
+	void removePlug(qjackctlPlugItem *pPlug);
 
-    // Plug finder.
-    qjackctlPlugItem *findPlug(const QString& sPlugName);
+	// Plug finder.
+	qjackctlPlugItem *findPlug(const QString& sPlugName);
 
-    // Plug list accessor.
-    QPtrList<qjackctlPlugItem>& plugs();
+	// Plug list accessor.
+	QList<qjackctlPlugItem *>& plugs();
 
-    // To virtually distinguish between list view items.
-    int rtti() const;
+	// Plug list cleaner.
+	void clear();
 
-    // Plug list cleaner.
-    void clear();
+	// Retrieve a context pixmap.
+	const QPixmap& pixmap(int iPixmap) const;
 
-    // Retrieve a context pixmap.
-    QPixmap& pixmap(int iPixmap);
+	// Update pixmap to its proper context.
+	void updatePixmap();
 
-    // Update pixmap to its proper context.
-    void updatePixmap();
+	// Client item openness status.
+	void setOpen(bool bOpen);
+	bool isOpen() const;
 
 private:
 
-    // Instance variables.
-    qjackctlSocketList *m_pSocketList;
-    QString m_sSocketName;
-    QString m_sClientName;
-    int m_iSocketType;
-    bool m_bExclusive;
-    QString m_sSocketForward;
+	// Instance variables.
+	qjackctlSocketList *m_pSocketList;
+	QString m_sSocketName;
+	QString m_sClientName;
+	int m_iSocketType;
+	bool m_bExclusive;
+	QString m_sSocketForward;
 
-    // Plug (port) list.
-    QPtrList<qjackctlPlugItem> m_plugs;
+	// Plug (port) list.
+	QList<qjackctlPlugItem *> m_plugs;
 
-    // Connection cache list.
-    QPtrList<qjackctlSocketItem> m_connects;
+	// Connection cache list.
+	QList<qjackctlSocketItem *> m_connects;
 };
 
 
 // Patchbay socket (client) list.
 class qjackctlSocketList : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlSocketList(qjackctlSocketListView *pListView, bool bReadable);
-    // Default destructor.
-    ~qjackctlSocketList();
+	// Constructor.
+	qjackctlSocketList(qjackctlSocketListView *pListView, bool bReadable);
+	// Default destructor.
+	~qjackctlSocketList();
 
-    // Socket list primitive methods.
-    void addSocket(qjackctlSocketItem *pSocket);
-    void removeSocket(qjackctlSocketItem *pSocket);
+	// Socket list primitive methods.
+	void addSocket(qjackctlSocketItem *pSocket);
+	void removeSocket(qjackctlSocketItem *pSocket);
 
-    // Socket finder.
-    qjackctlSocketItem *findSocket(const QString& sSocketName);
+	// Socket finder.
+	qjackctlSocketItem *findSocket(const QString& sSocketName);
 
-    // List view accessor.
-    qjackctlSocketListView *listView();
+	// List view accessor.
+	qjackctlSocketListView *listView() const;
 
-    // Socket flags accessor.
-    bool isReadable();
+	// Socket flags accessor.
+	bool isReadable() const;
 
-    // Socket aesthetics accessors.
-    QString& socketCaption();
+	// Socket aesthetics accessors.
+	const QString& socketCaption() const;
 
-    // JACK client accessors.
-    void setJackClient(jack_client_t *pJackClient);
-    jack_client_t *jackClient();
+	// JACK client accessors.
+	void setJackClient(jack_client_t *pJackClient);
+	jack_client_t *jackClient() const;
 
-    // ALSA sequencer accessors.
-    void setAlsaSeq(snd_seq_t *pAlsaSeq);
-    snd_seq_t *alsaSeq();
+	// ALSA sequencer accessors.
+	void setAlsaSeq(snd_seq_t *pAlsaSeq);
+	snd_seq_t *alsaSeq() const;
 
-    // Socket list cleaner.
-    void clear();
+	// Socket list cleaner.
+	void clear();
 
-    // Client:port snapshot.
-    void clientPortsSnapshot();
+	// Client:port snapshot.
+	void clientPortsSnapshot();
 
-    // Socket list accessor.
-    QPtrList<qjackctlSocketItem>& sockets();
+	// Socket list accessor.
+	QList<qjackctlSocketItem *>& sockets();
 
-    // Find the current selected socket item in list.
-    qjackctlSocketItem *selectedSocketItem();
+	// Find the current selected socket item in list.
+	qjackctlSocketItem *selectedSocketItem() const;
 
-    // Retrieve a context pixmap.
-    QPixmap& pixmap(int iPixmap);
+	// Retrieve a context pixmap.
+	const QPixmap& pixmap(int iPixmap) const;
 
 public slots:
 
-    // Socket item interactivity methods.
-    bool addSocketItem();
-    bool removeSocketItem();
-    bool editSocketItem();
-    bool copySocketItem();
-    bool exclusiveSocketItem();
-    bool moveUpSocketItem();
-    bool moveDownSocketItem();
+	// Socket item interactivity methods.
+	bool addSocketItem();
+	bool removeSocketItem();
+	bool editSocketItem();
+	bool copySocketItem();
+	bool exclusiveSocketItem();
+	bool moveUpSocketItem();
+	bool moveDownSocketItem();
 
 private:
 
-    // Merge two pixmaps with union of respective masks.
-    QPixmap *createPixmapMerge(const QPixmap& xpmDst, const QPixmap& xpmSrc);
+	// Merge two pixmaps with union of respective masks.
+	QPixmap *createPixmapMerge(const QPixmap& xpmDst, const QPixmap& xpmSrc);
 
-    // Instance variables.
-    qjackctlSocketListView *m_pListView;
-    bool m_bReadable;
-    QString  m_sSocketCaption;
-    jack_client_t *m_pJackClient;
-    snd_seq_t *m_pAlsaSeq;
+	// Instance variables.
+	qjackctlSocketListView *m_pListView;
+	bool m_bReadable;
+	QString  m_sSocketCaption;
+	jack_client_t *m_pJackClient;
+	snd_seq_t *m_pAlsaSeq;
 
-    QPixmap *m_apPixmaps[QJACKCTL_XPM_PIXMAPS];
+	QPixmap *m_apPixmaps[QJACKCTL_XPM_PIXMAPS];
 
-    QPtrList<qjackctlSocketItem> m_sockets;
+	QList<qjackctlSocketItem *> m_sockets;
 };
 
 
 //----------------------------------------------------------------------------
 // qjackctlSocketListView -- Socket list view, supporting drag-n-drop.
 
-class qjackctlSocketListView : public QListView
+class qjackctlSocketListView : public QTreeWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlSocketListView(qjackctlPatchbayView *pPatchbayView, bool bReadable);
-    // Default destructor.
-    ~qjackctlSocketListView();
+	// Constructor.
+	qjackctlSocketListView(qjackctlPatchbayView *pPatchbayView, bool bReadable);
+	// Default destructor.
+	~qjackctlSocketListView();
 
-    // Patchbay dirty flag accessors.
-    void setDirty (bool bDirty);
-    bool dirty();
-    
-    // Auto-open timer methods.
-    void setAutoOpenTimeout(int iAutoOpenTimeout);
-    int autoOpenTimeout();
+	// Patchbay dirty flag accessors.
+	void setDirty (bool bDirty);
+	bool dirty() const;
+	
+	// Auto-open timer methods.
+	void setAutoOpenTimeout(int iAutoOpenTimeout);
+	int autoOpenTimeout() const;
 
 protected slots:
 
-    // Auto-open timeout slot.
-    void timeoutSlot();
+	// Auto-open timeout slot.
+	void timeoutSlot();
 
 protected:
 
-    // Drag-n-drop stuff -- reimplemented virtual methods.
-    virtual void dragEnterEvent(QDragEnterEvent *pDragEnterEvent);
-    virtual void dragMoveEvent(QDragMoveEvent *pDragMoveEvent);
-    virtual void dragLeaveEvent(QDragLeaveEvent *);
-    virtual void dropEvent(QDropEvent *pDropEvent);
-    virtual QDragObject *dragObject();
-    // Context menu request event handler.
-    virtual void contextMenuEvent(QContextMenuEvent *);
+	// Trap for help/tool-tip events.
+	bool eventFilter(QObject *pObject, QEvent *pEvent);
+
+	// Drag-n-drop stuff.
+	QTreeWidgetItem *dragDropItem(const QPoint& pos);
+
+	// Drag-n-drop stuff -- reimplemented virtual methods.
+	void dragEnterEvent(QDragEnterEvent *pDragEnterEvent);
+	void dragMoveEvent(QDragMoveEvent *pDragMoveEvent);
+	void dragLeaveEvent(QDragLeaveEvent *);
+	void dropEvent(QDropEvent *pDropEvent);
+
+	// Handle mouse events for drag-and-drop stuff.
+	void mousePressEvent(QMouseEvent *pMouseEvent);
+	void mouseMoveEvent(QMouseEvent *pMouseEvent);
+
+	// Context menu request event handler.
+	void contextMenuEvent(QContextMenuEvent *);
 
 private:
 
-    // Bindings.
-    qjackctlPatchbayView *m_pPatchbayView;
-    bool m_bReadable;
+	// Bindings.
+	qjackctlPatchbayView *m_pPatchbayView;
 
-    // Drag-n-drop stuff.
-    QListViewItem *dragDropItem(const QPoint& epos);
+	bool m_bReadable;
 
-    // Auto-open timer.
-    int    m_iAutoOpenTimeout;
-    QTimer *m_pAutoOpenTimer;
-    // Item we'll eventually drop something.
-    QListViewItem *m_pDragDropItem;
+	// Auto-open timer.
+	int    m_iAutoOpenTimeout;
+	QTimer *m_pAutoOpenTimer;
 
-
-	// Listview item tooltip.
-	qjackctlPatchbayToolTip *m_pToolTip;
+	// Items we'll eventually drop something.
+	QTreeWidgetItem *m_pDragItem;
+	QTreeWidgetItem *m_pDropItem;
+	// The point from where drag started.
+	QPoint m_posDrag;
 };
 
 
@@ -333,41 +312,41 @@ private:
 
 class qjackctlPatchworkView : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlPatchworkView(qjackctlPatchbayView *pPatchbayView);
-    // Default destructor.
-    ~qjackctlPatchworkView();
+	// Constructor.
+	qjackctlPatchworkView(qjackctlPatchbayView *pPatchbayView);
+	// Default destructor.
+	~qjackctlPatchworkView();
 
 public slots:
 
-    // Useful slots (should this be protected?).
-    void listViewChanged(QListViewItem *);
-    void contentsMoved(int, int);
+	// Useful slots (should this be protected?).
+	void contentsChanged();
 
 protected:
 
-    // Specific event handlers.
-    virtual void paintEvent(QPaintEvent *);
-    virtual void resizeEvent(QResizeEvent *);
-    // Context menu request event handler.
-    virtual void contextMenuEvent(QContextMenuEvent *);
+	// Draw visible port connection relation arrows.
+	void paintEvent(QPaintEvent *);
+
+	// Context menu request event handler.
+	void contextMenuEvent(QContextMenuEvent *);
 
 private:
 
 	// Legal socket item position helper.
-	int itemY(QListViewItem *pItem) const;
+	int itemY(QTreeWidgetItem *pItem) const;
 
-    // Drawing methods.
-	void drawForwardLine(QPainter& p, int x, int dx, int y1, int y2, int h);
-    void drawConnectionLine(QPainter& p, int x1, int y1, int x2, int y2, int h1, int h2);
-    void drawConnections();
+	// Drawing methods.
+	void drawForwardLine(QPainter *pPainter,
+		int x, int dx, int y1, int y2, int h);
+	void drawConnectionLine(QPainter *pPainter,
+		int x1, int y1, int x2, int y2, int h1, int h2);
 
-    // Local instance variables.
-    qjackctlPatchbayView *m_pPatchbayView;
+	// Local instance variables.
+	qjackctlPatchbayView *m_pPatchbayView;
 };
 
 
@@ -376,65 +355,62 @@ private:
 
 class qjackctlPatchbayView : public QSplitter
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlPatchbayView(QWidget *pParent = 0, const char *pszName = 0);
-    // Default destructor.
-    ~qjackctlPatchbayView();
+	// Constructor.
+	qjackctlPatchbayView(QWidget *pParent = 0);
+	// Default destructor.
+	~qjackctlPatchbayView();
 
-    // Widget accesors.
-    qjackctlSocketListView *OListView()     { return m_pOListView; }
-    qjackctlSocketListView *IListView()     { return m_pIListView; }
-    qjackctlPatchworkView  *PatchworkView() { return m_pPatchworkView; }
+	// Widget accesors.
+	qjackctlSocketListView *OListView()     { return m_pOListView; }
+	qjackctlSocketListView *IListView()     { return m_pIListView; }
+	qjackctlPatchworkView  *PatchworkView() { return m_pPatchworkView; }
 
-    // Patchbay object binding methods.
-    void setBinding(qjackctlPatchbay *pPatchbay);
-    qjackctlPatchbay *binding();
+	// Patchbay object binding methods.
+	void setBinding(qjackctlPatchbay *pPatchbay);
+	qjackctlPatchbay *binding() const;
 
-    // Socket list accessors.
-    qjackctlSocketList *OSocketList();
-    qjackctlSocketList *ISocketList();
+	// Socket list accessors.
+	qjackctlSocketList *OSocketList() const;
+	qjackctlSocketList *ISocketList() const;
 
-    // Patchwork line style accessors.
-    void setBezierLines(bool bBezierLines);
-    bool isBezierLines();
+	// Patchwork line style accessors.
+	void setBezierLines(bool bBezierLines);
+	bool isBezierLines() const;
 
-    // Patchbay dirty flag accessors.
-    void setDirty (bool bDirty);
-    bool dirty();
+	// Patchbay dirty flag accessors.
+	void setDirty (bool bDirty);
+	bool dirty() const;
 
 signals:
 
-    // Contents change signal.
-    void contentsChanged();
+	// Contents change signal.
+	void contentsChanged();
 
 public slots:
 
-    // Common context menu slots.
-    void contextMenu(const QPoint& pos, qjackctlSocketList *pSocketList);
-    void activateForwardMenu(int iItemID);
+	// Common context menu slots.
+	void contextMenu(const QPoint& pos, qjackctlSocketList *pSocketList);
+	void activateForwardMenu(QAction *);
 
 private:
 
-    // Child controls.
-    qjackctlSocketListView *m_pOListView;
-    qjackctlSocketListView *m_pIListView;
-    qjackctlPatchworkView  *m_pPatchworkView;
+	// Child controls.
+	qjackctlSocketListView *m_pOListView;
+	qjackctlSocketListView *m_pIListView;
+	qjackctlPatchworkView  *m_pPatchworkView;
 
-    // The main binding object.
-    qjackctlPatchbay *m_pPatchbay;
+	// The main binding object.
+	qjackctlPatchbay *m_pPatchbay;
 
-    // How we'll draw patchwork lines.
-    bool m_bBezierLines;
+	// How we'll draw patchwork lines.
+	bool m_bBezierLines;
 
-    // Working forward popup menu.
-    QPopupMenu *m_pForwardMenu;
-
-    // The obnoxious dirty flag.
-    bool m_bDirty;
+	// The obnoxious dirty flag.
+	bool m_bDirty;
 };
 
 
@@ -443,70 +419,76 @@ private:
 
 class qjackctlPatchbay : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlPatchbay(qjackctlPatchbayView *pPatchbayView);
-    // Default destructor.
-    ~qjackctlPatchbay();
+	// Constructor.
+	qjackctlPatchbay(qjackctlPatchbayView *pPatchbayView);
+	// Default destructor.
+	~qjackctlPatchbay();
 
-    // Explicit connection tests.
-    bool canConnectSelected();
-    bool canDisconnectSelected();
-    bool canDisconnectAll();
+	// Explicit connection tests.
+	bool canConnectSelected();
+	bool canDisconnectSelected();
+	bool canDisconnectAll();
 
-    // Socket list accessors.
-    qjackctlSocketList *OSocketList();
-    qjackctlSocketList *ISocketList();
+	// Socket list accessors.
+	qjackctlSocketList *OSocketList() const;
+	qjackctlSocketList *ISocketList() const;
 
-    // External rack transfer methods.
-    void loadRack(qjackctlPatchbayRack *pPatchbayRack);
-    void saveRack(qjackctlPatchbayRack *pPatchbayRack);
+	// External rack transfer methods.
+	void loadRack(qjackctlPatchbayRack *pPatchbayRack);
+	void saveRack(qjackctlPatchbayRack *pPatchbayRack);
 
-    // JACK client property accessors.
-    void setJackClient(jack_client_t *pJackClient);
-    jack_client_t *jackClient();
+	// JACK client property accessors.
+	void setJackClient(jack_client_t *pJackClient);
+	jack_client_t *jackClient() const;
 
-    // ALSA sequencer property accessors.
-    void setAlsaSeq(snd_seq_t *pAlsaSeq);
-    snd_seq_t *alsaSeq();
+	// ALSA sequencer property accessors.
+	void setAlsaSeq(snd_seq_t *pAlsaSeq);
+	snd_seq_t *alsaSeq() const;
 
 public slots:
 
-    // Complete contents refreshner.
-    void refresh();
+	// Complete contents refreshner.
+	void refresh();
 
-    // Explicit connection slots.
-    bool connectSelected();
-    bool disconnectSelected();
-    bool disconnectAll();
+	// Explicit connection slots.
+	bool connectSelected();
+	bool disconnectSelected();
+	bool disconnectAll();
 
-    // Complete patchbay clearer.
-    void clear();
+	// Complete patchbay clearer.
+	void clear();
 
-    // Do actual and complete connections snapshot.
-    void connectionsSnapshot();
+	// Do actual and complete connections snapshot.
+	void connectionsSnapshot();
 
 private:
 
-    // Internal rack transfer methods.
-    void loadRackSockets (qjackctlSocketList *pSocketList, QPtrList<qjackctlPatchbaySocket>& socketlist);
-    void saveRackSockets (qjackctlSocketList *pSocketList, QPtrList<qjackctlPatchbaySocket>& socketlist);
+	// Internal rack transfer methods.
+	void loadRackSockets (qjackctlSocketList *pSocketList,
+		QList<qjackctlPatchbaySocket *>& socketlist);
+	void saveRackSockets (qjackctlSocketList *pSocketList,
+		QList<qjackctlPatchbaySocket *>& socketlist);
 
-    // Connect/Disconnection primitives.
-    void connectSockets(qjackctlSocketItem *pOSocket, qjackctlSocketItem *pISocket);
-    void disconnectSockets(qjackctlSocketItem *pOSocket, qjackctlSocketItem *pISocket);
+	// Connect/Disconnection primitives.
+	void connectSockets(qjackctlSocketItem *pOSocket,
+		qjackctlSocketItem *pISocket);
+	void disconnectSockets(qjackctlSocketItem *pOSocket,
+		qjackctlSocketItem *pISocket);
 
-    // Output socket-plug connection snapshot subroutines.
-    void socketPlugAudioSnapshot(qjackctlSocketItem *pOSocket, qjackctlPlugItem *pOPlug);
-    void socketPlugMidiSnapshot(qjackctlSocketItem *pOSocket, qjackctlPlugItem *pOPlug);
+	// Output socket-plug connection snapshot subroutines.
+	void socketPlugAudioSnapshot(qjackctlSocketItem *pOSocket,
+		qjackctlPlugItem *pOPlug);
+	void socketPlugMidiSnapshot(qjackctlSocketItem *pOSocket,
+		qjackctlPlugItem *pOPlug);
 
-    // Instance variables.
-    qjackctlPatchbayView *m_pPatchbayView;
-    qjackctlSocketList *m_pOSocketList;
-    qjackctlSocketList *m_pISocketList;
+	// Instance variables.
+	qjackctlPatchbayView *m_pPatchbayView;
+	qjackctlSocketList *m_pOSocketList;
+	qjackctlSocketList *m_pISocketList;
 };
 
 

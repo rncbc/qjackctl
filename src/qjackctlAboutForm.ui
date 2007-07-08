@@ -1,8 +1,8 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
-<class>qjackctlAboutForm</class>
-<comment>JACK Audio Connection Kit - Qt GUI Interface.
+<ui version="4.0" >
+ <author>rncbc aka Rui Nuno Capela</author>
+ <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -19,181 +19,129 @@
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 </comment>
-<author>rncbc aka Rui Nuno Capela</author>
-<widget class="QDialog">
-    <property name="name">
-        <cstring>qjackctlAboutForm</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>480</width>
-            <height>260</height>
-        </rect>
-    </property>
-    <property name="sizePolicy">
-        <sizepolicy>
-            <hsizetype>1</hsizetype>
-            <vsizetype>1</vsizetype>
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-        </sizepolicy>
-    </property>
-    <property name="font">
-        <font>
-        </font>
-    </property>
-    <property name="caption">
-        <string>About QjackCtl</string>
-    </property>
-    <property name="icon">
-        <pixmap>about1.png</pixmap>
-    </property>
-    <property name="sizeGripEnabled">
-        <bool>true</bool>
-    </property>
-    <grid>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="QLabel" row="0" column="0">
-            <property name="name">
-                <cstring>IconPixmapLabel</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="margin">
-                <number>2</number>
-            </property>
-            <property name="pixmap">
-                <pixmap>qjackctl.png</pixmap>
-            </property>
-            <property name="alignment">
-                <set>AlignCenter</set>
-            </property>
-        </widget>
-        <widget class="QTextEdit" row="0" column="1" rowspan="2" colspan="2">
-            <property name="name">
-                <cstring>AboutTextView</cstring>
-            </property>
-            <property name="lineWidth">
-                <number>1</number>
-            </property>
-            <property name="readOnly">
-                <bool>true</bool>
-            </property>
-            <property name="undoRedoEnabled">
-                <bool>false</bool>
-            </property>
-        </widget>
-        <spacer row="1" column="0">
-            <property name="name">
-                <cstring>spacer1</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Vertical</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>8</width>
-                    <height>130</height>
-                </size>
-            </property>
-        </spacer>
-        <widget class="QToolButton" row="2" column="0">
-            <property name="name">
-                <cstring>AboutQtButton</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="focusPolicy">
-                <enum>TabFocus</enum>
-            </property>
-            <property name="text">
-                <string></string>
-            </property>
-            <property name="iconSet">
-                <iconset>qtlogo.png</iconset>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>About Qt</string>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="2" column="1">
-            <property name="name">
-                <cstring>ClosePushButton</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;Close</string>
-            </property>
-            <property name="accel">
-                <string>Alt+C</string>
-            </property>
-        </widget>
-        <spacer row="2" column="2">
-            <property name="name">
-                <cstring>spacer2</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>270</width>
-                    <height>8</height>
-                </size>
-            </property>
-        </spacer>
-    </grid>
-</widget>
-<connections>
-    <connection>
-        <sender>AboutQtButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlAboutForm</receiver>
-        <slot>aboutQt()</slot>
-    </connection>
-    <connection>
-        <sender>ClosePushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlAboutForm</receiver>
-        <slot>close()</slot>
-    </connection>
-</connections>
-<tabstops>
-    <tabstop>AboutTextView</tabstop>
-    <tabstop>AboutQtButton</tabstop>
-    <tabstop>ClosePushButton</tabstop>
-</tabstops>
-<includes>
-    <include location="local" impldecl="in implementation">qjackctlAboutForm.ui.h</include>
-</includes>
-<slots>
-    <slot specifier="non virtual">aboutQt()</slot>
-</slots>
-<functions>
-    <function access="private" specifier="non virtual">init()</function>
-    <function access="private" specifier="non virtual">destroy()</function>
-</functions>
-<pixmapinproject/>
-<layoutdefaults spacing="4" margin="4"/>
-</UI>
+ <class>qjackctlAboutForm</class>
+ <widget class="QDialog" name="qjackctlAboutForm" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>520</width>
+    <height>280</height>
+   </rect>
+  </property>
+  <property name="font" >
+   <font/>
+  </property>
+  <property name="windowTitle" >
+   <string>About QjackCtl</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../icons/qjackctl.qrc" >:/icons/about1.png</iconset>
+  </property>
+  <property name="sizeGripEnabled" >
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="margin" >
+    <number>4</number>
+   </property>
+   <property name="spacing" >
+    <number>4</number>
+   </property>
+   <item row="2" column="2" >
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>8</width>
+       <height>8</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1" >
+    <widget class="QPushButton" name="ClosePushButton" >
+     <property name="text" >
+      <string>&amp;Close</string>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+C</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <widget class="QToolButton" name="AboutQtButton" >
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>About Qt</string>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="icon" >
+      <iconset resource="../icons/qjackctl.qrc" >:/icons/qtlogo.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>8</width>
+       <height>8</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item rowspan="2" row="0" column="1" colspan="2" >
+    <widget class="QTextBrowser" name="AboutTextView" >
+     <property name="lineWidth" >
+      <number>1</number>
+     </property>
+     <property name="undoRedoEnabled" >
+      <bool>false</bool>
+     </property>
+     <property name="readOnly" >
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" >
+    <widget class="QLabel" name="IconPixmapLabel" >
+     <property name="pixmap" >
+      <pixmap resource="../icons/qjackctl.qrc" >:/icons/qjackctl.png</pixmap>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+     <property name="margin" >
+      <number>2</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="4" margin="4" />
+ <tabstops>
+  <tabstop>AboutTextView</tabstop>
+  <tabstop>AboutQtButton</tabstop>
+  <tabstop>ClosePushButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../icons/qjackctl.qrc" />
+ </resources>
+ <connections/>
+</ui>

@@ -1,8 +1,7 @@
-// qjackctlAboutForm.ui.h
+// qjackctlAboutForm.cpp
 //
-// ui.h extension file, included from the uic-generated form implementation.
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -21,13 +20,22 @@
 *****************************************************************************/
 
 #include "qjackctlAbout.h"
+#include "qjackctlAboutForm.h"
 
-#include <qmessagebox.h>
+#include <QMessageBox>
 
 
-// Kind of constructor.
-void qjackctlAboutForm::init (void)
+//----------------------------------------------------------------------------
+// qjackctlAboutForm -- UI wrapper form.
+
+// Constructor.
+qjackctlAboutForm::qjackctlAboutForm (
+	QWidget *pParent, Qt::WindowFlags wflags )
+	: QDialog(pParent, wflags)
 {
+	// Setup UI struct...
+	m_ui.setupUi(this);
+
     // Stuff the about box...
     QString sText = "<p align=\"center\"><br />\n";
     sText += "<b>" + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
@@ -86,12 +94,20 @@ void qjackctlAboutForm::init (void)
     sText += tr("under the terms of the GNU General Public License version 2 or later.");
     sText += "</small>";
     sText += "</p>\n";
-    AboutTextView->setText(sText);
+    m_ui.AboutTextView->setText(sText);
+
+	// UI connections...
+	QObject::connect(m_ui.AboutQtButton,
+		SIGNAL(clicked()),
+		SLOT(aboutQt()));
+	QObject::connect(m_ui.ClosePushButton,
+		SIGNAL(clicked()),
+		SLOT(close()));
 }
 
 
-// Kind of destructor.
-void qjackctlAboutForm::destroy (void)
+// Destructor.
+qjackctlAboutForm::~qjackctlAboutForm (void)
 {
 }
 
@@ -99,9 +115,8 @@ void qjackctlAboutForm::destroy (void)
 // About Qt request.
 void qjackctlAboutForm::aboutQt()
 {
-    QMessageBox::aboutQt(this);
+	QMessageBox::aboutQt(this);
 }
 
 
-// end of qjackctlAboutForm.ui.h
-
+// end of qjackctlAboutForm.cpp

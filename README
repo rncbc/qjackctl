@@ -2,9 +2,9 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 -----------------------------------------------------
 
 QjackCtl is a simple Qt application to control the JACK sound server
-(http://jackit.sourceforge.net), for the Linux Audio infrastructure.
+(http://jackaudio.org), for the Linux Audio infrastructure.
 
-Written in C++ around the Qt3 toolkit for X11, most exclusively using
+Written in C++ around the Qt4 toolkit for X11, most exclusively using
 Qt Designer.
 
 Provides a simple GUI dialog for setting several JACK server parameters,
@@ -16,6 +16,26 @@ features.
 Homepage: http://qjackctl.sourceforge.net
 
 License: GNU General Public License (GPL)
+
+
+Requirements
+------------
+
+The software requirements for build and runtime are listed as follows:
+
+  Mandatory:
+
+  - Qt4 (core, gui, xml), C++ class library and tools for
+        crossplatform development and internationalization
+        http://www.trolltech.org/products/qt/
+
+  - JACK Audio Connection Kit
+        http://jackaudio.org/
+
+  Optional (opted-in at build time):
+
+  - ALSA, Advanced Linux Sound Architecture
+        http://www.alsa-project.org/
 
 
 Installation
@@ -48,14 +68,15 @@ Configuration
 -------------
 
 QjackCtl holds its settings and configuration state per user, in a file
-located as $HOME/.qt/qjackctlrc. Normally, there's no need to edit this
-file, as it is recreated and rewritten everytime qjackctl is run.
+located as $HOME/.config/rncbc.org/QjackCtl.conf . Normally, there's no
+need to edit this file, as it is recreated and rewritten everytime
+qjackctl is run.
 
 
 Bugs
 ----
 
-Probably plenty still, but qjackctl it's now considered on beta stage
+Probably plenty still, but QjackCtl it's now considered on beta stage
 already. It has been locally tested since JACK release 0.98.0, on SuSE 9.1,
 Mandrake 10.0 and Fedora Core 1, with custom 2.4 kernels with low-latency,
 preemptible and capabilities enabling patches. As for 2.6 kernels, the
@@ -78,8 +99,8 @@ Acknowledgments
 ---------------
 
 QjackCtl's user interface layout (and the whole idea for that matter)
-was partially borrowed from Lawrie Abbott's jacko project, which
-was taken from wxWindow/Python into the Qt/C++ arena.
+was partially borrowed from origoinal Lawrie Abbott's jacko project,
+which was taken from wxWindow/Python into the Qt/C++ arena.
 
 Since 2003-08-06, qjackctl has been included in the awesome Planet CCRMA
 (http://ccrma-www.stanford.edu/planetccrma/software/) software collection.
@@ -96,7 +117,7 @@ and in fair and strict alphabetic order:
     Dave Phillips                       Mark Knecht
     Dirk Jagdmann                       Matthias Nagorni
     Fernando Pablo Lopez-Lezcano        Melanie
-    Filipe Tomás                        Orm Finnendahl
+    Filipe Tomï¿½s                        Orm Finnendahl
     Florian Schmidt                     Paul Davis
     Fons Adriaensen                     Robert Jonsson
     Geoff Beasley                       Sampo Savolainen
@@ -105,7 +126,7 @@ and in fair and strict alphabetic order:
     Joachim Deguara                     Taybin Rutkin
     Jussi Laako                         Wilfried Huss
     Karsten Wiese                       Wolfgang Woehl
-    
+
 
 Thanks to you all.
 --

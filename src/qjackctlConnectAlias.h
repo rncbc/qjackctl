@@ -1,7 +1,7 @@
 // qjackctlConnectAlias.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -22,10 +22,10 @@
 #ifndef __qjackctlConnectAlias_h
 #define __qjackctlConnectAlias_h
 
-#include <qsettings.h>
-#include <qregexp.h>
-#include <qptrlist.h>
-#include <qmap.h>
+#include <QSettings>
+#include <QRegExp>
+#include <QMap>
+
 
 // Client item alias map.
 class qjackctlClientAlias
@@ -37,29 +37,31 @@ public:
 		const QString& sClientAlias = QString::null);
 	
 	// Default destructor.
-	~qjackctlClientAlias ();
+	~qjackctlClientAlias();
 
 	// Client name accessor.
-	QString clientName ();
+	QString clientName() const;
 
 	// Client name matcher.
-	bool matchClientName (const QString& sClientName);
+	bool matchClientName(const QString& sClientName);
 
 	// Client aliasing methods.
-	const QString& clientAlias ();
-	void setClientAlias (const QString& sClientAlias);
+	const QString& clientAlias() const;
+	void setClientAlias(const QString& sClientAlias);
 
 	// Port aliasing methods.
-	QString portAlias (const QString& sPortName);
+	QString portAlias (const QString& sPortName) const;
 	void setPortAlias (const QString& sPortName,
 		const QString& sPortAlias);
 
 	// Save client/port aliases definitions.
-	void saveSettings (QSettings& settings, const QString& sClientKey);
+	void saveSettings(QSettings& settings, const QString& sClientKey);
+
+	// Need for generid sort.
+	bool operator< (const qjackctlClientAlias& other);
 
 	// Escape and format a string as a regular expresion.
-	static QString escapeRegExpDigits (const QString& s,
-		unsigned int iThreshold = 3);
+	static QString escapeRegExpDigits(const QString& s, int iThreshold = 3);
 
 private:
 
@@ -74,7 +76,7 @@ private:
 
 
 // Client list alias map.
-class qjackctlConnectAlias : public QPtrList<qjackctlClientAlias>
+class qjackctlConnectAlias : public QList<qjackctlClientAlias *>
 {
 public:
 
@@ -95,14 +97,8 @@ public:
 		const QString& sPortName, const QString& sPortAlias);
 
 	// Load/save aliases definitions.
-	void loadSettings (QSettings& settings, const QString& sAliasesKey);
-	void saveSettings (QSettings& settings, const QString& sAliasesKey);
-
-protected:
-
-	// Virtual override function to compare two list items.
-	virtual int compareItems (QPtrCollection::Item pItem1,
-		QPtrCollection::Item pItem2);
+	void loadSettings(QSettings& settings, const QString& sAliasesKey);
+	void saveSettings(QSettings& settings, const QString& sAliasesKey);
 
 private:
 

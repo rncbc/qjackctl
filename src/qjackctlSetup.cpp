@@ -22,83 +22,87 @@
 #include "qjackctlAbout.h"
 #include "qjackctlSetup.h"
 
-#include <qtimer.h>
+#include <QComboBox>
+#include <QSplitter>
+#include <QList>
+
+#include <QTimer>
+#include <QTextStream>
 
 
 // Constructor.
 qjackctlSetup::qjackctlSetup (void)
+	: m_settings(QJACKCTL_DOMAIN, QJACKCTL_TITLE)
 {
-    bStartJack = false;
-    sDefPresetName = QObject::tr("(default)");
+	bStartJack = false;
+	sDefPresetName = QObject::tr("(default)");
 
-    m_settings.beginGroup("/qjackctl");
+	m_settings.beginGroup("/Presets");
+	sDefPreset = m_settings.value("/DefPreset", sDefPresetName).toString();
+	QString sPrefix = "/Preset%1";
+	int i = 0;
+	for (;;) {
+		QString sItem = m_settings.value(sPrefix.arg(++i)).toString();
+		if (sItem.isEmpty())
+			break;
+		presets.append(sItem);
+	}
+	m_settings.endGroup();
 
-    m_settings.beginGroup("/Presets");
-    sDefPreset = m_settings.readEntry("/DefPreset", sDefPresetName);
-    QString sPrefix = "/Preset%1";
-    int i = 0;
-    for (;;) {
-        QString sItem = m_settings.readEntry(sPrefix.arg(++i), QString::null);
-        if (sItem.isEmpty())
-            break;
-        presets.append(sItem);
-    }
-    m_settings.endGroup();
+	m_settings.beginGroup("/Options");
+	bStartJack               = m_settings.value("/StartJack", false).toBool();
+	bStartupScript           = m_settings.value("/StartupScript", true).toBool();
+	sStartupScriptShell      = m_settings.value("/StartupScriptShell", "artsshell -q terminate").toString();
+	bPostStartupScript       = m_settings.value("/PostStartupScript", false).toBool();
+	sPostStartupScriptShell  = m_settings.value("/PostStartupScriptShell").toString();
+	bShutdownScript          = m_settings.value("/ShutdownScript", false).toBool();
+	sShutdownScriptShell     = m_settings.value("/ShutdownScriptShell").toString();
+	bPostShutdownScript      = m_settings.value("/PostShutdownScript", true).toBool();
+	sPostShutdownScriptShell = m_settings.value("/PostShutdownScriptShell", "killall jackd").toString();
+	bStdoutCapture           = m_settings.value("/StdoutCapture", true).toBool();
+	sXrunRegex               = m_settings.value("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs").toString();
+	bXrunIgnoreFirst         = m_settings.value("/XrunIgnoreFirst", false).toBool();
+	bActivePatchbay          = m_settings.value("/ActivePatchbay", false).toBool();
+	sActivePatchbayPath      = m_settings.value("/ActivePatchbayPath").toString();
+	bAutoRefresh             = m_settings.value("/AutoRefresh", false).toBool();
+	iTimeRefresh             = m_settings.value("/TimeRefresh", 10).toInt();
+	bBezierLines             = m_settings.value("/BezierLines", false).toBool();
+	iTimeDisplay             = m_settings.value("/TimeDisplay", 0).toInt();
+	iTimeFormat              = m_settings.value("/TimeFormat", 0).toInt();
+	sMessagesFont            = m_settings.value("/MessagesFont").toString();
+	bMessagesLimit           = m_settings.value("/MessagesLimit", true).toBool();
+	iMessagesLimitLines      = m_settings.value("/MessagesLimitLines", 1000).toInt();
+	sDisplayFont1            = m_settings.value("/DisplayFont1").toString();
+	sDisplayFont2            = m_settings.value("/DisplayFont2").toString();
+	bDisplayEffect           = m_settings.value("/DisplayEffect", true).toBool();
+	iConnectionsIconSize     = m_settings.value("/ConnectionsIconSize", QJACKCTL_ICON_16X16).toInt();
+	sConnectionsFont         = m_settings.value("/ConnectionsFont").toString();
+	bQueryClose              = m_settings.value("/QueryClose", true).toBool();
+	bKeepOnTop               = m_settings.value("/KeepOnTop", false).toBool();
+	bSystemTray              = m_settings.value("/SystemTray", false).toBool();
+	bDelayedSetup            = m_settings.value("/DelayedSetup", false).toBool();
+	bServerConfig            = m_settings.value("/ServerConfig", true).toBool();
+	sServerConfigName        = m_settings.value("/ServerConfigName", ".jackdrc").toString();
+	bServerConfigTemp        = m_settings.value("/ServerConfigTemp", false).toBool();
+	bQueryShutdown           = m_settings.value("/QueryShutdown", true).toBool();
+	bAliasesEnabled          = m_settings.value("/AliasesEnabled", false).toBool();
+	bAliasesEditing          = m_settings.value("/AliasesEditing", false).toBool();
+	bLeftButtons             = m_settings.value("/LeftButtons", true).toBool();
+	bRightButtons            = m_settings.value("/RightButtons", true).toBool();
+	bTransportButtons        = m_settings.value("/TransportButtons", true).toBool();
+	bTextLabels              = m_settings.value("/TextLabels", true).toBool();
+	m_settings.endGroup();
 
-    m_settings.beginGroup("/Options");
-    bStartJack               = m_settings.readBoolEntry("/StartJack", false);
-    bStartupScript           = m_settings.readBoolEntry("/StartupScript", true);
-    sStartupScriptShell      = m_settings.readEntry("/StartupScriptShell", "artsshell -q terminate");
-    bPostStartupScript       = m_settings.readBoolEntry("/PostStartupScript", false);
-    sPostStartupScriptShell  = m_settings.readEntry("/PostStartupScriptShell", QString::null);
-    bShutdownScript          = m_settings.readBoolEntry("/ShutdownScript", false);
-    sShutdownScriptShell     = m_settings.readEntry("/ShutdownScriptShell", QString::null);
-    bPostShutdownScript      = m_settings.readBoolEntry("/PostShutdownScript", true);
-    sPostShutdownScriptShell = m_settings.readEntry("/PostShutdownScriptShell", "killall jackd");
-    bStdoutCapture           = m_settings.readBoolEntry("/StdoutCapture", true);
-    sXrunRegex               = m_settings.readEntry("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs");
-    bXrunIgnoreFirst         = m_settings.readBoolEntry("/XrunIgnoreFirst", false);
-    bActivePatchbay          = m_settings.readBoolEntry("/ActivePatchbay", false);
-    sActivePatchbayPath      = m_settings.readEntry("/ActivePatchbayPath", QString::null);
-    bAutoRefresh             = m_settings.readBoolEntry("/AutoRefresh", false);
-    iTimeRefresh             = m_settings.readNumEntry("/TimeRefresh", 10);
-    bBezierLines             = m_settings.readBoolEntry("/BezierLines", false);
-    iTimeDisplay             = m_settings.readNumEntry("/TimeDisplay", 0);
-    iTimeFormat              = m_settings.readNumEntry("/TimeFormat", 0);
-    sMessagesFont            = m_settings.readEntry("/MessagesFont", QString::null);
-    bMessagesLimit           = m_settings.readBoolEntry("/MessagesLimit", true);
-    iMessagesLimitLines      = m_settings.readNumEntry("/MessagesLimitLines", 1000);
-    sDisplayFont1            = m_settings.readEntry("/DisplayFont1", QString::null);
-    sDisplayFont2            = m_settings.readEntry("/DisplayFont2", QString::null);
-    bDisplayEffect           = m_settings.readBoolEntry("/DisplayEffect", true);
-    iConnectionsIconSize     = m_settings.readNumEntry("/ConnectionsIconSize", QJACKCTL_ICON_16X16);
-    sConnectionsFont         = m_settings.readEntry("/ConnectionsFont", QString::null);
-    bQueryClose              = m_settings.readBoolEntry("/QueryClose", true);
-    bKeepOnTop               = m_settings.readBoolEntry("/KeepOnTop", false);
-    bSystemTray              = m_settings.readBoolEntry("/SystemTray", false);
-    bDelayedSetup            = m_settings.readBoolEntry("/DelayedSetup", false);
-    bServerConfig            = m_settings.readBoolEntry("/ServerConfig", true);
-    sServerConfigName        = m_settings.readEntry("/ServerConfigName", ".jackdrc");
-    bServerConfigTemp        = m_settings.readBoolEntry("/ServerConfigTemp", false);
-    bQueryShutdown           = m_settings.readBoolEntry("/QueryShutdown", true);
-    bAliasesEnabled          = m_settings.readBoolEntry("/AliasesEnabled", false);
-    bAliasesEditing          = m_settings.readBoolEntry("/AliasesEditing", false);
-    bLeftButtons             = m_settings.readBoolEntry("/LeftButtons", true);
-    bRightButtons            = m_settings.readBoolEntry("/RightButtons", true);
-    bTransportButtons        = m_settings.readBoolEntry("/TransportButtons", true);
-    bTextLabels              = m_settings.readBoolEntry("/TextLabels", true);
-    m_settings.endGroup();
-
-    m_settings.beginGroup("/Defaults");
-    sPatchbayPath = m_settings.readEntry("/PatchbayPath", QString::null);
-    m_settings.endGroup();
+	m_settings.beginGroup("/Defaults");
+	sPatchbayPath = m_settings.value("/PatchbayPath").toString();
+	m_settings.endGroup();
 
 	// Load recent patchbay list...
 	m_settings.beginGroup("/Patchbays");
 	sPrefix = "/Patchbay%1";
 	i = 0;
 	for (;;) {
-		QString sItem = m_settings.readEntry(sPrefix.arg(++i), QString::null);
+		QString sItem = m_settings.value(sPrefix.arg(++i)).toString();
 		if (sItem.isEmpty())
 			break;
 		patchbays.append(sItem);
@@ -110,85 +114,83 @@ qjackctlSetup::qjackctlSetup (void)
 // Destructor;
 qjackctlSetup::~qjackctlSetup (void)
 {
-    // Save all settings and options...
-    m_settings.beginGroup("/Program");
-    m_settings.writeEntry("/Version", QJACKCTL_VERSION);
-    m_settings.endGroup();
-
-    m_settings.beginGroup("/Presets");
-    m_settings.writeEntry("/DefPreset", sDefPreset);
-    // Save last preset list.
-	QString sPrefix = "/Preset%1";
-	int i = 0;
-	for (QStringList::Iterator iter = presets.begin();
-		iter != presets.end(); iter++)
-	    m_settings.writeEntry(sPrefix.arg(++i), *iter);
-	// Cleanup old entries, if any...
-	for (++i; !m_settings.readEntry(sPrefix.arg(i)).isEmpty(); i++)
-	    m_settings.removeEntry(sPrefix.arg(i));
+	// Save all settings and options...
+	m_settings.beginGroup("/Program");
+	m_settings.setValue("/Version", QJACKCTL_VERSION);
 	m_settings.endGroup();
 
-    m_settings.beginGroup("/Options");
-    m_settings.writeEntry("/StartJack",               bStartJack);
-    m_settings.writeEntry("/StartupScript",           bStartupScript);
-    m_settings.writeEntry("/StartupScriptShell",      sStartupScriptShell);
-    m_settings.writeEntry("/PostStartupScript",       bPostStartupScript);
-    m_settings.writeEntry("/PostStartupScriptShell",  sPostStartupScriptShell);
-    m_settings.writeEntry("/ShutdownScript",          bShutdownScript);
-    m_settings.writeEntry("/ShutdownScriptShell",     sShutdownScriptShell);
-    m_settings.writeEntry("/PostShutdownScript",      bPostShutdownScript);
-    m_settings.writeEntry("/PostShutdownScriptShell", sPostShutdownScriptShell);
-    m_settings.writeEntry("/StdoutCapture",           bStdoutCapture);
-    m_settings.writeEntry("/XrunRegex",               sXrunRegex);
-    m_settings.writeEntry("/XrunIgnoreFirst",         bXrunIgnoreFirst);
-    m_settings.writeEntry("/ActivePatchbay",          bActivePatchbay);
-    m_settings.writeEntry("/ActivePatchbayPath",      sActivePatchbayPath);
-    m_settings.writeEntry("/AutoRefresh",             bAutoRefresh);
-    m_settings.writeEntry("/TimeRefresh",             iTimeRefresh);
-    m_settings.writeEntry("/BezierLines",             bBezierLines);
-    m_settings.writeEntry("/TimeDisplay",             iTimeDisplay);
-    m_settings.writeEntry("/TimeFormat",              iTimeFormat);
-    m_settings.writeEntry("/MessagesFont",            sMessagesFont);
-    m_settings.writeEntry("/MessagesLimit",           bMessagesLimit);
-    m_settings.writeEntry("/MessagesLimitLines",      iMessagesLimitLines);
-    m_settings.writeEntry("/DisplayFont1",            sDisplayFont1);
-    m_settings.writeEntry("/DisplayFont2",            sDisplayFont2);
-    m_settings.writeEntry("/DisplayEffect",           bDisplayEffect);
-    m_settings.writeEntry("/ConnectionsIconSize",     iConnectionsIconSize);
-    m_settings.writeEntry("/ConnectionsFont",         sConnectionsFont);
-    m_settings.writeEntry("/QueryClose",              bQueryClose);
-    m_settings.writeEntry("/KeepOnTop",               bKeepOnTop);
-    m_settings.writeEntry("/SystemTray",              bSystemTray);
-    m_settings.writeEntry("/DelayedSetup",            bDelayedSetup);
-    m_settings.writeEntry("/ServerConfig",            bServerConfig);
-    m_settings.writeEntry("/ServerConfigName",        sServerConfigName);
-    m_settings.writeEntry("/ServerConfigTemp",        bServerConfigTemp);
-    m_settings.writeEntry("/QueryShutdown",           bQueryShutdown);
-    m_settings.writeEntry("/AliasesEnabled",          bAliasesEnabled);
-    m_settings.writeEntry("/AliasesEditing",          bAliasesEditing);
-    m_settings.writeEntry("/LeftButtons",             bLeftButtons);
-    m_settings.writeEntry("/RightButtons",            bRightButtons);
-    m_settings.writeEntry("/TransportButtons",        bTransportButtons);
-    m_settings.writeEntry("/TextLabels",              bTextLabels);
-    m_settings.endGroup();
+	m_settings.beginGroup("/Presets");
+	m_settings.setValue("/DefPreset", sDefPreset);
+	// Save last preset list.
+	QString sPrefix = "/Preset%1";
+	int i = 0;
+	QStringListIterator iter(presets);
+	while (iter.hasNext())
+		m_settings.setValue(sPrefix.arg(++i), iter.next());
+	// Cleanup old entries, if any...
+	while (!m_settings.value(sPrefix.arg(++i)).toString().isEmpty())
+		m_settings.remove(sPrefix.arg(i));
+	m_settings.endGroup();
 
-    m_settings.beginGroup("/Defaults");
-    m_settings.writeEntry("/PatchbayPath", sPatchbayPath);
-    m_settings.endGroup();
+	m_settings.beginGroup("/Options");
+	m_settings.setValue("/StartJack",               bStartJack);
+	m_settings.setValue("/StartupScript",           bStartupScript);
+	m_settings.setValue("/StartupScriptShell",      sStartupScriptShell);
+	m_settings.setValue("/PostStartupScript",       bPostStartupScript);
+	m_settings.setValue("/PostStartupScriptShell",  sPostStartupScriptShell);
+	m_settings.setValue("/ShutdownScript",          bShutdownScript);
+	m_settings.setValue("/ShutdownScriptShell",     sShutdownScriptShell);
+	m_settings.setValue("/PostShutdownScript",      bPostShutdownScript);
+	m_settings.setValue("/PostShutdownScriptShell", sPostShutdownScriptShell);
+	m_settings.setValue("/StdoutCapture",           bStdoutCapture);
+	m_settings.setValue("/XrunRegex",               sXrunRegex);
+	m_settings.setValue("/XrunIgnoreFirst",         bXrunIgnoreFirst);
+	m_settings.setValue("/ActivePatchbay",          bActivePatchbay);
+	m_settings.setValue("/ActivePatchbayPath",      sActivePatchbayPath);
+	m_settings.setValue("/AutoRefresh",             bAutoRefresh);
+	m_settings.setValue("/TimeRefresh",             iTimeRefresh);
+	m_settings.setValue("/BezierLines",             bBezierLines);
+	m_settings.setValue("/TimeDisplay",             iTimeDisplay);
+	m_settings.setValue("/TimeFormat",              iTimeFormat);
+	m_settings.setValue("/MessagesFont",            sMessagesFont);
+	m_settings.setValue("/MessagesLimit",           bMessagesLimit);
+	m_settings.setValue("/MessagesLimitLines",      iMessagesLimitLines);
+	m_settings.setValue("/DisplayFont1",            sDisplayFont1);
+	m_settings.setValue("/DisplayFont2",            sDisplayFont2);
+	m_settings.setValue("/DisplayEffect",           bDisplayEffect);
+	m_settings.setValue("/ConnectionsIconSize",     iConnectionsIconSize);
+	m_settings.setValue("/ConnectionsFont",         sConnectionsFont);
+	m_settings.setValue("/QueryClose",              bQueryClose);
+	m_settings.setValue("/KeepOnTop",               bKeepOnTop);
+	m_settings.setValue("/SystemTray",              bSystemTray);
+	m_settings.setValue("/DelayedSetup",            bDelayedSetup);
+	m_settings.setValue("/ServerConfig",            bServerConfig);
+	m_settings.setValue("/ServerConfigName",        sServerConfigName);
+	m_settings.setValue("/ServerConfigTemp",        bServerConfigTemp);
+	m_settings.setValue("/QueryShutdown",           bQueryShutdown);
+	m_settings.setValue("/AliasesEnabled",          bAliasesEnabled);
+	m_settings.setValue("/AliasesEditing",          bAliasesEditing);
+	m_settings.setValue("/LeftButtons",             bLeftButtons);
+	m_settings.setValue("/RightButtons",            bRightButtons);
+	m_settings.setValue("/TransportButtons",        bTransportButtons);
+	m_settings.setValue("/TextLabels",              bTextLabels);
+	m_settings.endGroup();
+
+	m_settings.beginGroup("/Defaults");
+	m_settings.setValue("/PatchbayPath", sPatchbayPath);
+	m_settings.endGroup();
 
 	// Save patchbay list...
 	m_settings.beginGroup("/Patchbays");
 	sPrefix = "/Patchbay%1";
 	i = 0;
-	for (QStringList::Iterator iter = patchbays.begin();
-			iter != patchbays.end(); ++iter)
-		m_settings.writeEntry(sPrefix.arg(++i), *iter);
+	QStringListIterator iter2(patchbays);
+	while (iter2.hasNext())
+		m_settings.setValue(sPrefix.arg(++i), iter2.next());
 	// Cleanup old entries, if any...
-	for (++i; !m_settings.readEntry(sPrefix.arg(i)).isEmpty(); i++)
-		m_settings.removeEntry(sPrefix.arg(i));
+	while (!m_settings.value(sPrefix.arg(++i)).toString().isEmpty())
+		m_settings.remove(sPrefix.arg(i));
 	m_settings.endGroup();
-
-    m_settings.endGroup();
 }
 
 
@@ -197,17 +199,17 @@ qjackctlSetup::~qjackctlSetup (void)
 
 bool qjackctlSetup::loadAliases ( const QString& sPreset )
 {
-    QString sSuffix;
-    if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
-        sSuffix = "/" + sPreset;
-        // Check if on list.
-        if (presets.find(sPreset) == presets.end())
-            return false;
-    }
+	QString sSuffix;
+	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+		sSuffix = '/' + sPreset;
+		// Check if on list.
+		if (!presets.contains(sPreset))
+			return false;
+	}
 
 	// Load preset aliases...
 	const QString sAliasesKey = "/Aliases" + sSuffix;
-    m_settings.beginGroup(sAliasesKey);
+	m_settings.beginGroup(sAliasesKey);
 	m_settings.beginGroup("/Jack");	// FIXME: Audio
 	aliasAudioOutputs.loadSettings(m_settings, "/Outputs");
 	aliasAudioInputs.loadSettings(m_settings, "/Inputs");
@@ -220,25 +222,25 @@ bool qjackctlSetup::loadAliases ( const QString& sPreset )
 	aliasAlsaOutputs.loadSettings(m_settings, "/Outputs");
 	aliasAlsaInputs.loadSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
-    m_settings.endGroup();
+	m_settings.endGroup();
 
-    return true;
+	return true;
 }
 
 bool qjackctlSetup::saveAliases ( const QString& sPreset )
 {
-    QString sSuffix;
-    if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
-        sSuffix = "/" + sPreset;
-        // Append to list if not already.
-        if (presets.find(sPreset) == presets.end())
-            presets.prepend(sPreset);
-    }
+	QString sSuffix;
+	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+		sSuffix = "/" + sPreset;
+		// Append to list if not already.
+		if (!presets.contains(sPreset))
+			presets.prepend(sPreset);
+	}
 
 	// Save preset aliases...
 	const QString sAliasesKey = "/Aliases" + sSuffix;
 	deleteKey(sAliasesKey);
-    m_settings.beginGroup(sAliasesKey);
+	m_settings.beginGroup(sAliasesKey);
 	m_settings.beginGroup("/Jack");	// FIXME: Audio
 	aliasAudioOutputs.saveSettings(m_settings, "/Outputs");
 	aliasAudioInputs.saveSettings(m_settings, "/Inputs");
@@ -251,9 +253,9 @@ bool qjackctlSetup::saveAliases ( const QString& sPreset )
 	aliasAlsaOutputs.saveSettings(m_settings, "/Outputs");
 	aliasAlsaInputs.saveSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
-    m_settings.endGroup();
+	m_settings.endGroup();
 
-    return true;
+	return true;
 }
 
 
@@ -262,113 +264,113 @@ bool qjackctlSetup::saveAliases ( const QString& sPreset )
 
 bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset )
 {
-    QString sSuffix;
-    if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
-        sSuffix = "/" + sPreset;
-        // Check if on list.
-        if (presets.find(sPreset) == presets.end())
-            return false;
-    }
+	QString sSuffix;
+	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+		sSuffix = '/' + sPreset;
+		// Check if on list.
+		if (!presets.contains(sPreset))
+			return false;
+	}
 
-    m_settings.beginGroup("/Settings" + sSuffix);
-    preset.sServer      = m_settings.readEntry("/Server", "jackd");
-    preset.bRealtime    = m_settings.readBoolEntry("/Realtime", true);
-    preset.bSoftMode    = m_settings.readBoolEntry("/SoftMode", false);
-    preset.bMonitor     = m_settings.readBoolEntry("/Monitor", false);
-    preset.bShorts      = m_settings.readBoolEntry("/Shorts", false);
-    preset.bNoMemLock   = m_settings.readBoolEntry("/NoMemLock", false);
-    preset.bUnlockMem   = m_settings.readBoolEntry("/UnlockMem", false);
-    preset.bHWMon       = m_settings.readBoolEntry("/HWMon", false);
-    preset.bHWMeter     = m_settings.readBoolEntry("/HWMeter", false);
-    preset.bIgnoreHW    = m_settings.readBoolEntry("/IgnoreHW", false);
-    preset.iPriority    = m_settings.readNumEntry("/Priority", 0);
-    preset.iFrames      = m_settings.readNumEntry("/Frames", 1024);
-    preset.iSampleRate  = m_settings.readNumEntry("/SampleRate", 48000);
-    preset.iPeriods     = m_settings.readNumEntry("/Periods", 2);
-    preset.iWordLength  = m_settings.readNumEntry("/WordLength", 16);
-    preset.iWait        = m_settings.readNumEntry("/Wait", 21333);
-    preset.iChan        = m_settings.readNumEntry("/Chan", 0);
-    preset.sDriver      = m_settings.readEntry("/Driver", "alsa");
-    preset.sInterface   = m_settings.readEntry("/Interface", QString::null);
-    preset.iAudio       = m_settings.readNumEntry("/Audio", 0);
-    preset.iDither      = m_settings.readNumEntry("/Dither", 0);
-    preset.iTimeout     = m_settings.readNumEntry("/Timeout", 500);
-    preset.sInDevice    = m_settings.readEntry("/InDevice", QString::null);
-    preset.sOutDevice   = m_settings.readEntry("/OutDevice", QString::null);
-    preset.iInChannels  = m_settings.readNumEntry("/InChannels", 0);
-    preset.iOutChannels = m_settings.readNumEntry("/OutChannels", 0);
-    preset.iInLatency   = m_settings.readNumEntry("/InLatency", 0);
-    preset.iOutLatency  = m_settings.readNumEntry("/OutLatency", 0);
-    preset.iStartDelay  = m_settings.readNumEntry("/StartDelay", 2);
-    preset.bVerbose     = m_settings.readBoolEntry("/Verbose", false);
-    preset.iPortMax     = m_settings.readNumEntry("/PortMax", 256);
-    preset.sMidiDriver  = m_settings.readEntry("/MidiDriver", QString::null);
-    m_settings.endGroup();
+	m_settings.beginGroup("/Settings" + sSuffix);
+	preset.sServer      = m_settings.value("/Server", "jackd").toString();
+	preset.bRealtime    = m_settings.value("/Realtime", true).toBool();
+	preset.bSoftMode    = m_settings.value("/SoftMode", false).toBool();
+	preset.bMonitor     = m_settings.value("/Monitor", false).toBool();
+	preset.bShorts      = m_settings.value("/Shorts", false).toBool();
+	preset.bNoMemLock   = m_settings.value("/NoMemLock", false).toBool();
+	preset.bUnlockMem   = m_settings.value("/UnlockMem", false).toBool();
+	preset.bHWMon       = m_settings.value("/HWMon", false).toBool();
+	preset.bHWMeter     = m_settings.value("/HWMeter", false).toBool();
+	preset.bIgnoreHW    = m_settings.value("/IgnoreHW", false).toBool();
+	preset.iPriority    = m_settings.value("/Priority", 0).toInt();
+	preset.iFrames      = m_settings.value("/Frames", 1024).toInt();
+	preset.iSampleRate  = m_settings.value("/SampleRate", 48000).toInt();
+	preset.iPeriods     = m_settings.value("/Periods", 2).toInt();
+	preset.iWordLength  = m_settings.value("/WordLength", 16).toInt();
+	preset.iWait        = m_settings.value("/Wait", 21333).toInt();
+	preset.iChan        = m_settings.value("/Chan", 0).toInt();
+	preset.sDriver      = m_settings.value("/Driver", "alsa").toString();
+	preset.sInterface   = m_settings.value("/Interface").toString();
+	preset.iAudio       = m_settings.value("/Audio", 0).toInt();
+	preset.iDither      = m_settings.value("/Dither", 0).toInt();
+	preset.iTimeout     = m_settings.value("/Timeout", 500).toInt();
+	preset.sInDevice    = m_settings.value("/InDevice").toString();
+	preset.sOutDevice   = m_settings.value("/OutDevice").toString();
+	preset.iInChannels  = m_settings.value("/InChannels", 0).toInt();
+	preset.iOutChannels = m_settings.value("/OutChannels", 0).toInt();
+	preset.iInLatency   = m_settings.value("/InLatency", 0).toInt();
+	preset.iOutLatency  = m_settings.value("/OutLatency", 0).toInt();
+	preset.iStartDelay  = m_settings.value("/StartDelay", 2).toInt();
+	preset.bVerbose     = m_settings.value("/Verbose", false).toBool();
+	preset.iPortMax     = m_settings.value("/PortMax", 256).toInt();
+	preset.sMidiDriver  = m_settings.value("/MidiDriver").toString();
+	m_settings.endGroup();
 
-    return true;
+	return true;
 }
 
 bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset )
 {
-    QString sSuffix;
-    if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
-        sSuffix = "/" + sPreset;
-        // Append to list if not already.
-        if (presets.find(sPreset) == presets.end())
-            presets.prepend(sPreset);
-    }
+	QString sSuffix;
+	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+		sSuffix = '/' + sPreset;
+		// Append to list if not already.
+		if (!presets.contains(sPreset))
+			presets.prepend(sPreset);
+	}
 
-    m_settings.beginGroup("/Settings" + sSuffix);
-    m_settings.writeEntry("/Server",      preset.sServer);
-    m_settings.writeEntry("/Realtime",    preset.bRealtime);
-    m_settings.writeEntry("/SoftMode",    preset.bSoftMode);
-    m_settings.writeEntry("/Monitor",     preset.bMonitor);
-    m_settings.writeEntry("/Shorts",      preset.bShorts);
-    m_settings.writeEntry("/NoMemLock",   preset.bNoMemLock);
-    m_settings.writeEntry("/UnlockMem",   preset.bUnlockMem);
-    m_settings.writeEntry("/HWMon",       preset.bHWMon);
-    m_settings.writeEntry("/HWMeter",     preset.bHWMeter);
-    m_settings.writeEntry("/IgnoreHW",    preset.bIgnoreHW);
-    m_settings.writeEntry("/Priority",    preset.iPriority);
-    m_settings.writeEntry("/Frames",      preset.iFrames);
-    m_settings.writeEntry("/SampleRate",  preset.iSampleRate);
-    m_settings.writeEntry("/Periods",     preset.iPeriods);
-    m_settings.writeEntry("/WordLength",  preset.iWordLength);
-    m_settings.writeEntry("/Wait",        preset.iWait);
-    m_settings.writeEntry("/Chan",        preset.iChan);
-    m_settings.writeEntry("/Driver",      preset.sDriver);
-    m_settings.writeEntry("/Interface",   preset.sInterface);
-    m_settings.writeEntry("/Audio",       preset.iAudio);
-    m_settings.writeEntry("/Dither",      preset.iDither);
-    m_settings.writeEntry("/Timeout",     preset.iTimeout);
-    m_settings.writeEntry("/InDevice",    preset.sInDevice);
-    m_settings.writeEntry("/OutDevice",   preset.sOutDevice);
-    m_settings.writeEntry("/InChannels",  preset.iInChannels);
-    m_settings.writeEntry("/OutChannels", preset.iOutChannels);
-    m_settings.writeEntry("/InLatency",   preset.iInLatency);
-    m_settings.writeEntry("/OutLatency",  preset.iOutLatency);
-    m_settings.writeEntry("/StartDelay",  preset.iStartDelay);
-    m_settings.writeEntry("/Verbose",     preset.bVerbose);
-    m_settings.writeEntry("/PortMax",     preset.iPortMax);
-    m_settings.writeEntry("/MidiDriver",  preset.sMidiDriver);
-    m_settings.endGroup();
+	m_settings.beginGroup("/Settings" + sSuffix);
+	m_settings.setValue("/Server",      preset.sServer);
+	m_settings.setValue("/Realtime",    preset.bRealtime);
+	m_settings.setValue("/SoftMode",    preset.bSoftMode);
+	m_settings.setValue("/Monitor",     preset.bMonitor);
+	m_settings.setValue("/Shorts",      preset.bShorts);
+	m_settings.setValue("/NoMemLock",   preset.bNoMemLock);
+	m_settings.setValue("/UnlockMem",   preset.bUnlockMem);
+	m_settings.setValue("/HWMon",       preset.bHWMon);
+	m_settings.setValue("/HWMeter",     preset.bHWMeter);
+	m_settings.setValue("/IgnoreHW",    preset.bIgnoreHW);
+	m_settings.setValue("/Priority",    preset.iPriority);
+	m_settings.setValue("/Frames",      preset.iFrames);
+	m_settings.setValue("/SampleRate",  preset.iSampleRate);
+	m_settings.setValue("/Periods",     preset.iPeriods);
+	m_settings.setValue("/WordLength",  preset.iWordLength);
+	m_settings.setValue("/Wait",        preset.iWait);
+	m_settings.setValue("/Chan",        preset.iChan);
+	m_settings.setValue("/Driver",      preset.sDriver);
+	m_settings.setValue("/Interface",   preset.sInterface);
+	m_settings.setValue("/Audio",       preset.iAudio);
+	m_settings.setValue("/Dither",      preset.iDither);
+	m_settings.setValue("/Timeout",     preset.iTimeout);
+	m_settings.setValue("/InDevice",    preset.sInDevice);
+	m_settings.setValue("/OutDevice",   preset.sOutDevice);
+	m_settings.setValue("/InChannels",  preset.iInChannels);
+	m_settings.setValue("/OutChannels", preset.iOutChannels);
+	m_settings.setValue("/InLatency",   preset.iInLatency);
+	m_settings.setValue("/OutLatency",  preset.iOutLatency);
+	m_settings.setValue("/StartDelay",  preset.iStartDelay);
+	m_settings.setValue("/Verbose",     preset.bVerbose);
+	m_settings.setValue("/PortMax",     preset.iPortMax);
+	m_settings.setValue("/MidiDriver",  preset.sMidiDriver);
+	m_settings.endGroup();
 
-    return true;
+	return true;
 }
 
 bool qjackctlSetup::deletePreset ( const QString& sPreset )
 {
-    QString sSuffix;
-    if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
-        sSuffix = "/" + sPreset;
-        QStringList::Iterator iter = presets.find(sPreset);
-        if (iter == presets.end())
-            return false;
-        presets.remove(iter);
-        deleteKey("/Settings" + sSuffix);
-    	deleteKey("/Aliases" + sSuffix);
-    }
-    return true;
+	QString sSuffix;
+	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+		sSuffix = '/' + sPreset;
+		int iPreset = presets.indexOf(sPreset);
+		if (iPreset < 0)
+			return false;
+		presets.removeAt(iPreset);
+		deleteKey("/Settings" + sSuffix);
+		deleteKey("/Aliases" + sSuffix);
+	}
+	return true;
 }
 
 
@@ -377,24 +379,29 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
 
 void qjackctlSetup::deleteKey ( const QString& sKey )
 {
-    // First, delete all stand-alone entries...
-    QStringList entries = m_settings.entryList(sKey);
-    for (QStringList::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-        const QString& sEntry = *entry;
-        if (!sEntry.isEmpty())
-            m_settings.removeEntry(sKey + "/" + sEntry);
-    }
+#ifdef QJACKCTL_QT3
+	// First, delete all stand-alone entries...
+	QStringList entries = m_settings.entryList(sKey);
+	QStringList::Iterator entry = entries.begin();
+	while (entry != entries.end()) {
+		const QString& sEntry = *entry;
+		if (!sEntry.isEmpty())
+			m_settings.remove(sKey + '/' + sEntry);
+		++entry;
+	}
 
-    // Then, we'll recurse under sub-keys...
-    QStringList subkeys = m_settings.subkeyList(sKey);
-    for (QStringList::Iterator subkey = subkeys.begin(); subkey != subkeys.end(); ++subkey) {
-        const QString& sSubKey = *subkey;
-        if (!sSubKey.isEmpty())
-            deleteKey(sKey + "/" + sSubKey);
-    }
-
-    // Finally we remove our-selves.
-    m_settings.removeEntry(sKey);
+	// Then, we'll recurse under sub-keys...
+	QStringList subkeys = m_settings.subkeyList(sKey);
+	QStringList::Iterator subkey = subkeys.begin();
+	while (subkey != subkeys.end()) {
+		const QString& sSubKey = *subkey;
+		if (!sSubKey.isEmpty())
+			deleteKey(sKey + '/' + sSubKey);
+		++subkey;
+	}
+#endif
+	// Finally we remove our-selves.
+	m_settings.remove(sKey);
 }
 
 
@@ -405,173 +412,178 @@ void qjackctlSetup::deleteKey ( const QString& sKey )
 // Help about command line options.
 void qjackctlSetup::print_usage ( const char *arg0 )
 {
-    const QString sEot = "\n\t";
-    const QString sEol = "\n\n";
+	QTextStream out(stderr);
+	const QString sEot = "\n\t";
+	const QString sEol = "\n\n";
 
-    fprintf(stderr, QObject::tr("Usage") + ": %s [" + QObject::tr("options") + "] [" +
-        QObject::tr("command-and-args") + "]" + sEol, arg0);
-    fprintf(stderr, "%s - %s\n\n", QJACKCTL_TITLE, QJACKCTL_SUBTITLE);
-    fprintf(stderr, QObject::tr("Options") + ":" + sEol);
-    fprintf(stderr, "  -s, --start" + sEot +
-        QObject::tr("Start JACK audio server immediately") + sEol);
-    fprintf(stderr, "  -p, --preset=[label]" + sEot +
-        QObject::tr("Set default setings preset name") + sEol);
-    fprintf(stderr, "  -h, --help" + sEot +
-        QObject::tr("Show help about command line options") + sEol);
-    fprintf(stderr, "  -v, --version" + sEot +
-        QObject::tr("Show version information") + sEol);
+	out << QObject::tr("Usage: %1"
+		" [options] [command-and-args]").arg(arg0) + sEol;
+	out << QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE) + sEol;
+	out << QObject::tr("Options:") + sEol;
+	out << "  -s, --start" + sEot +
+		QObject::tr("Start JACK audio server immediately") + sEol;
+	out << "  -p, --preset=[label]" + sEot +
+		QObject::tr("Set default setings preset name") + sEol;
+	out << "  -h, --help" + sEot +
+		QObject::tr("Show help about command line options") + sEol;
+	out << "  -v, --version" + sEot +
+		QObject::tr("Show version information") + sEol;
 }
 
 
 // Parse command line arguments into m_settings.
 bool qjackctlSetup::parse_args ( int argc, char **argv )
 {
-    const QString sEol = "\n\n";
-    int iCmdArgs = 0;
+	QTextStream out(stderr);
+	const QString sEol = "\n\n";
+	int iCmdArgs = 0;
 
-    for (int i = 1; i < argc; i++) {
+	for (int i = 1; i < argc; i++) {
 
-        if (iCmdArgs > 0) {
-            sCmdLine += " ";
-            sCmdLine += argv[i];
-            iCmdArgs++;
-            continue;
-        }
+		if (iCmdArgs > 0) {
+			sCmdLine += ' ';
+			sCmdLine += argv[i];
+			iCmdArgs++;
+			continue;
+		}
 
-        QString sArg = argv[i];
-        QString sVal = QString::null;
-        int iEqual = sArg.find("=");
-        if (iEqual >= 0) {
-            sVal = sArg.right(sArg.length() - iEqual - 1);
-            sArg = sArg.left(iEqual);
-        }
-        else if (i < argc)
-            sVal = argv[i + 1];
+		QString sArg = argv[i];
+		QString sVal = QString::null;
+		int iEqual = sArg.indexOf('=');
+		if (iEqual >= 0) {
+			sVal = sArg.right(sArg.length() - iEqual - 1);
+			sArg = sArg.left(iEqual);
+		}
+		else if (i < argc)
+			sVal = argv[i + 1];
 
-        if (sArg == "-s" || sArg == "--start") {
-            bStartJack = true;
-        }
-        else if (sArg == "-p" || sArg == "--preset") {
-        	if (sVal.isNull()) {
-                fprintf(stderr, QObject::tr("Option -p requires an argument (preset).") + sEol);
-                return false;
-            }
-            sDefPreset = sVal;
-            if (iEqual < 0)
-                i++;
-        }
-        else if (sArg == "-h" || sArg == "--help") {
-            print_usage(argv[0]);
-            return false;
-        }
-        else if (sArg == "-v" || sArg == "--version") {
-            fprintf(stderr, "Qt: %s\n", qVersion());
-            fprintf(stderr, "qjackctl: %s\n", QJACKCTL_VERSION);
-            return false;
-        }
-        else {
-            // Here starts the optional command line...
-            sCmdLine += sArg;
-            iCmdArgs++;
-        }
-    }
+		if (sArg == "-s" || sArg == "--start") {
+			bStartJack = true;
+		}
+		else if (sArg == "-p" || sArg == "--preset") {
+			if (sVal.isNull()) {
+				out << QObject::tr("Option -p requires an argument (preset).") + sEol;
+				return false;
+			}
+			sDefPreset = sVal;
+			if (iEqual < 0)
+				i++;
+		}
+		else if (sArg == "-h" || sArg == "--help") {
+			print_usage(argv[0]);
+			return false;
+		}
+		else if (sArg == "-v" || sArg == "--version") {
+			out << QObject::tr("Qt: %1\n").arg(qVersion());
+			out << QObject::tr(QJACKCTL_TITLE ": %1\n").arg(QJACKCTL_VERSION);
+			return false;
+		}
+		else {
+			// Here starts the optional command line...
+			sCmdLine += sArg;
+			iCmdArgs++;
+		}
+	}
 
-    // HACK: If there's a command line, it must be spawned on background...
-    if (iCmdArgs > 0)
-        sCmdLine += " &";
+	// HACK: If there's a command line, it must be spawned on background...
+	if (iCmdArgs > 0)
+		sCmdLine += " &";
 
-    // Alright with argument parsing.
-    return true;
+	// Alright with argument parsing.
+	return true;
 }
 
 
 //---------------------------------------------------------------------------
 // Combo box history persistence helper implementation.
 
-void qjackctlSetup::add2ComboBoxHistory ( QComboBox *pComboBox, const QString& sNewText, int iLimit, int iIndex )
-{
-    int iCount = pComboBox->count();
-    for (int i = 0; i < iCount; i++) {
-        QString sText = pComboBox->text(i);
-        if (sText == sNewText) {
-            pComboBox->removeItem(i);
-            iCount--;
-            break;
-        }
-    }
-    while (iCount >= iLimit)
-        pComboBox->removeItem(--iCount);
-    pComboBox->insertItem(sNewText, iIndex);
-}
-
-
 void qjackctlSetup::loadComboBoxHistory ( QComboBox *pComboBox, int iLimit )
 {
-    pComboBox->setUpdatesEnabled(false);
-    pComboBox->setDuplicatesEnabled(false);
+	pComboBox->setUpdatesEnabled(false);
+	pComboBox->setDuplicatesEnabled(false);
+	pComboBox->clear();
 
-    m_settings.beginGroup("/History/" + QString(pComboBox->name()));
-    for (int i = 0; i < iLimit; i++) {
-        QString sText = m_settings.readEntry("/Item" + QString::number(i + 1), QString::null);
-        if (sText.isEmpty())
-            break;
-        add2ComboBoxHistory(pComboBox, sText, iLimit);
-    }
-    m_settings.endGroup();
+	// Load combobox list from configuration settings file...
+	m_settings.beginGroup("/History/" + pComboBox->objectName());
+	for (int i = 0; i < iLimit; i++) {
+		const QString& sText = m_settings.value(
+			"/Item" + QString::number(i + 1)).toString();
+		if (sText.isEmpty())
+			break;
+		pComboBox->addItem(sText);
+	}
+	m_settings.endGroup();
 
-    pComboBox->setUpdatesEnabled(true);
+	pComboBox->setUpdatesEnabled(true);
 }
 
 
 void qjackctlSetup::saveComboBoxHistory ( QComboBox *pComboBox, int iLimit )
 {
-    add2ComboBoxHistory(pComboBox, pComboBox->currentText(), iLimit, 0);
+	// Add current text as latest item...
+	const QString& sCurrentText = pComboBox->currentText();
+	int iCount = pComboBox->count();
+	for (int i = 0; i < iCount; i++) {
+		const QString& sText = pComboBox->itemText(i);
+		if (sText == sCurrentText) {
+			pComboBox->removeItem(i);
+			iCount--;
+			break;
+		}
+	}
+	while (iCount >= iLimit)
+		pComboBox->removeItem(--iCount);
+	pComboBox->insertItem(0, sCurrentText);
+	iCount++;
 
-    m_settings.beginGroup("/History/" + QString(pComboBox->name()));
-    for (int i = 0; i < iLimit && i < pComboBox->count(); i++) {
-        QString sText = pComboBox->text(i);
-        if (sText.isEmpty())
-            break;
-        m_settings.writeEntry("/Item" + QString::number(i + 1), sText);
-    }
-    m_settings.endGroup();
+	// Save combobox list to configuration settings file...
+	m_settings.beginGroup("/History/" + pComboBox->objectName());
+	for (int i = 0; i < iCount; i++) {
+		const QString& sText = pComboBox->itemText(i);
+		if (sText.isEmpty())
+			break;
+		m_settings.setValue("/Item" + QString::number(i + 1), sText);
+	}
+	m_settings.endGroup();
 }
 
 
 //---------------------------------------------------------------------------
 // Splitter widget sizes persistence helper methods.
 
-void qjackctlSetup::loadSplitterSizes ( QSplitter *pSplitter )
+void qjackctlSetup::loadSplitterSizes ( QSplitter *pSplitter,
+	QList<int>& sizes )
 {
 	// Try to restore old splitter sizes...
 	if (pSplitter) {
-		m_settings.beginGroup("/Splitter/" + QString(pSplitter->name()));
-		QValueList<int> sizes;
-		QStringList list = m_settings.readListEntry("/sizes");
-		QStringList::Iterator iter = list.begin();
-		while (iter != list.end())
-		    sizes.append((*iter++).toInt());
-		if (!sizes.isEmpty())
-		    pSplitter->setSizes(sizes);
-        m_settings.endGroup();
+		m_settings.beginGroup("/Splitter/" + pSplitter->objectName());
+		QStringList list = m_settings.value("/sizes").toStringList();
+		if (!list.isEmpty()) {
+			sizes.clear();
+			QStringListIterator iter(list);
+			while (iter.hasNext())
+				sizes.append(iter.next().toInt());
+		}
+		pSplitter->setSizes(sizes);
+		m_settings.endGroup();
 	}
 }
 
 
 void qjackctlSetup::saveSplitterSizes ( QSplitter *pSplitter )
 {
-    // Try to save current splitter sizes...
-    if (pSplitter) {
-        m_settings.beginGroup("/Splitter/" + QString(pSplitter->name()));
-        QStringList list;
-		QValueList<int> sizes = pSplitter->sizes();
-		QValueList<int>::Iterator iter = sizes.begin();
-		while (iter != sizes.end())
-		    list.append(QString::number(*iter++));
+	// Try to save current splitter sizes...
+	if (pSplitter) {
+		m_settings.beginGroup("/Splitter/" + pSplitter->objectName());
+		QStringList list;
+		QList<int> sizes = pSplitter->sizes();
+		QListIterator<int> iter(sizes);
+		while (iter.hasNext())
+			list.append(QString::number(iter.next()));
 		if (!list.isEmpty())
-	        m_settings.writeEntry("/sizes", list);
-        m_settings.endGroup();
-    }
+			m_settings.setValue("/sizes", list);
+		m_settings.endGroup();
+	}
 }
 
 
@@ -585,12 +597,12 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
 		QPoint fpos;
 		QSize  fsize;
 		bool bVisible;
-		m_settings.beginGroup("/Geometry/" + QString(pWidget->name()));
-		fpos.setX(m_settings.readNumEntry("/x", -1));
-		fpos.setY(m_settings.readNumEntry("/y", -1));
-		fsize.setWidth(m_settings.readNumEntry("/width", -1));
-		fsize.setHeight(m_settings.readNumEntry("/height", -1));
-		bVisible = m_settings.readBoolEntry("/visible", false);
+		m_settings.beginGroup("/Geometry/" + pWidget->objectName());
+		fpos.setX(m_settings.value("/x", -1).toInt());
+		fpos.setY(m_settings.value("/y", -1).toInt());
+		fsize.setWidth(m_settings.value("/width", -1).toInt());
+		fsize.setHeight(m_settings.value("/height", -1).toInt());
+		bVisible = m_settings.value("/visible", false).toBool();
 		m_settings.endGroup();
 		new qjackctlDelayedSetup(pWidget, fpos, fsize, bVisible,
 			(bDelayedSetup ? 1000 : 0));
@@ -600,23 +612,23 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
 
 void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
 {
-    // Try to save form window position...
-    // (due to X11 window managers ideossincrasies, we better
-    // only save the form geometry while its up and visible)
-    if (pWidget) {
-        m_settings.beginGroup("/Geometry/" + QString(pWidget->name()));
-        bool bVisible = pWidget->isVisible();
-        if (bVisible) {
-            QPoint fpos  = pWidget->pos();
-            QSize  fsize = pWidget->size();
-            m_settings.writeEntry("/x", fpos.x());
-            m_settings.writeEntry("/y", fpos.y());
-            m_settings.writeEntry("/width", fsize.width());
-            m_settings.writeEntry("/height", fsize.height());
-        }
-        m_settings.writeEntry("/visible", bVisible);
-        m_settings.endGroup();
-    }
+	// Try to save form window position...
+	// (due to X11 window managers ideossincrasies, we better
+	// only save the form geometry while its up and visible)
+	if (pWidget) {
+		m_settings.beginGroup("/Geometry/" + pWidget->objectName());
+		bool bVisible = pWidget->isVisible();
+		if (bVisible) {
+			QPoint fpos  = pWidget->pos();
+			QSize  fsize = pWidget->size();
+			m_settings.setValue("/x", fpos.x());
+			m_settings.setValue("/y", fpos.y());
+			m_settings.setValue("/width", fsize.width());
+			m_settings.setValue("/height", fsize.height());
+		}
+		m_settings.setValue("/visible", bVisible);
+		m_settings.endGroup();
+	}
 }
 
 

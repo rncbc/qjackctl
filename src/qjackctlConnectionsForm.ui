@@ -1,6 +1,6 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
-<class>qjackctlConnectionsForm</class>
-<comment>JACK Audio Connection Kit - Qt GUI Interface.
+<ui version="4.0" >
+ <author>rncbc aka Rui Nuno Capela</author>
+ <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
    Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
@@ -19,589 +19,431 @@
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 </comment>
-<author>rncbc aka Rui Nuno Capela</author>
-<widget class="QWidget">
-    <property name="name">
-        <cstring>qjackctlConnectionsForm</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>403</width>
-            <height>250</height>
-        </rect>
-    </property>
-    <property name="sizePolicy">
-        <sizepolicy>
-            <hsizetype>1</hsizetype>
-            <vsizetype>1</vsizetype>
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-        </sizepolicy>
-    </property>
-    <property name="font">
-        <font>
-        </font>
-    </property>
-    <property name="caption">
-		<string>Connections - JACK Audio Connection Kit</string>
-    </property>
-    <property name="icon">
-        <pixmap>connections1.png</pixmap>
-    </property>
-    <grid>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="QTabWidget" row="0" column="0">
-            <property name="name">
-                <cstring>ConnectionsTabWidget</cstring>
-            </property>
-            <widget class="QWidget">
-                <property name="name">
-                    <cstring>AudioConnectTab</cstring>
-                </property>
-                <attribute name="title">
-                    <string>Audio</string>
-                </attribute>
-                <grid>
-                    <property name="name">
-                        <cstring>unnamed</cstring>
-                    </property>
-                    <widget class="qjackctlConnectView" row="0" column="0">
-                        <property name="name">
-                            <cstring>AudioConnectView</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>7</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="focusPolicy">
-                            <enum>TabFocus</enum>
-                        </property>
-                    </widget>
-                    <widget class="QLayoutWidget" row="1" column="0">
-                        <property name="name">
-                            <cstring>AudioLayout1</cstring>
-                        </property>
-                        <hbox>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AudioConnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Connect</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+C</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>connect1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Connect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AudioDisconnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Disconnect</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+D</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>disconnect1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Disconnect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AudioDisconnectAllPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>Disconnect &amp;All</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+A</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>disconnectall1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Disconnect all currently connected ports</string>
-                                </property>
-                            </widget>
-                            <spacer>
-                                <property name="name">
-                                    <cstring>AudioSpacer1</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>87</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AudioRefreshPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Refresh</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+R</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>refresh1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Refresh current connections view</string>
-                                </property>
-                            </widget>
-                        </hbox>
-                    </widget>
-                </grid>
-            </widget>
-            <widget class="QWidget">
-                <property name="name">
-                    <cstring>MidiConnectTab</cstring>
-                </property>
-                <attribute name="title">
-                    <string>MIDI</string>
-                </attribute>
-                <grid>
-                    <property name="name">
-                        <cstring>unnamed</cstring>
-                    </property>
-                    <widget class="qjackctlConnectView" row="0" column="0">
-                        <property name="name">
-                            <cstring>MidiConnectView</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>7</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="focusPolicy">
-                            <enum>TabFocus</enum>
-                        </property>
-                    </widget>
-                    <widget class="QLayoutWidget" row="1" column="0">
-                        <property name="name">
-                            <cstring>MidiLayout1</cstring>
-                        </property>
-                        <hbox>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>MidiConnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Connect</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+C</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>connect1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Connect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>MidiDisconnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Disconnect</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+D</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>disconnect1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Disconnect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>MidiDisconnectAllPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>Disconnect &amp;All</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+A</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>disconnectall1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Disconnect all currently connected ports</string>
-                                </property>
-                            </widget>
-                            <spacer>
-                                <property name="name">
-                                    <cstring>MidiSpacer1</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>87</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>MidiRefreshPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Refresh</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+R</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>refresh1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Refresh current connections view</string>
-                                </property>
-                            </widget>
-                        </hbox>
-                    </widget>
-                </grid>
-            </widget>
-            <widget class="QWidget">
-                <property name="name">
-                    <cstring>AlsaConnectTab</cstring>
-                </property>
-                <attribute name="title">
-                    <string>ALSA</string>
-                </attribute>
-                <grid>
-                    <property name="name">
-                        <cstring>unnamed</cstring>
-                    </property>
-                    <widget class="qjackctlConnectView" row="0" column="0">
-                        <property name="name">
-                            <cstring>AlsaConnectView</cstring>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>7</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="focusPolicy">
-                            <enum>TabFocus</enum>
-                        </property>
-                    </widget>
-                    <widget class="QLayoutWidget" row="1" column="0">
-                        <property name="name">
-                            <cstring>AlsaLayout1</cstring>
-                        </property>
-                        <hbox>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AlsaConnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Connect</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+C</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>connect1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Connect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AlsaDisconnectPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Disconnect</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+D</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>disconnect1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Disconnect currently selected ports</string>
-                                </property>
-                            </widget>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AlsaDisconnectAllPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>Disconnect &amp;All</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+A</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>disconnectall1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Disconnect all currently connected ports</string>
-                                </property>
-                            </widget>
-                            <spacer>
-                                <property name="name">
-                                    <cstring>AlsaSpacer1</cstring>
-                                </property>
-                                <property name="orientation">
-                                    <enum>Horizontal</enum>
-                                </property>
-                                <property name="sizeType">
-                                    <enum>Expanding</enum>
-                                </property>
-                                <property name="sizeHint">
-                                    <size>
-                                        <width>87</width>
-                                        <height>8</height>
-                                    </size>
-                                </property>
-                            </spacer>
-                            <widget class="QPushButton">
-                                <property name="name">
-                                    <cstring>AlsaRefreshPushButton</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>&amp;Refresh</string>
-                                </property>
-                                <property name="accel">
-                                    <string>Alt+R</string>
-                                </property>
-                                <property name="iconSet">
-                                    <iconset>refresh1.png</iconset>
-                                </property>
-                                <property name="toolTip" stdset="0">
-                                    <string>Refresh current connections view</string>
-                                </property>
-                            </widget>
-                        </hbox>
-                    </widget>
-                </grid>
-            </widget>
+ <class>qjackctlConnectionsForm</class>
+ <widget class="QWidget" name="qjackctlConnectionsForm" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>407</width>
+    <height>250</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy>
+    <hsizetype>1</hsizetype>
+    <vsizetype>1</vsizetype>
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="font" >
+   <font/>
+  </property>
+  <property name="windowTitle" >
+   <string>Connections - JACK Audio Connection Kit</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../icons/qjackctl.qrc" >:/icons/connections1.png</iconset>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="margin" >
+    <number>4</number>
+   </property>
+   <property name="spacing" >
+    <number>4</number>
+   </property>
+   <item row="0" column="0" >
+    <widget class="QTabWidget" name="ConnectionsTabWidget" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="AudioConnectTab" >
+      <attribute name="title" >
+       <string>Audio</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>4</number>
+       </property>
+       <property name="spacing" >
+        <number>4</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="qjackctlConnectView" native="1" name="AudioConnectView" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy" >
+          <enum>Qt::TabFocus</enum>
+         </property>
         </widget>
-    </grid>
-</widget>
-<customwidgets>
-    <customwidget>
-        <class>qjackctlConnectView</class>
-        <header location="local">qjackctlConnect.h</header>
-        <sizehint>
-            <width>300</width>
-            <height>120</height>
-        </sizehint>
-        <container>0</container>
-        <sizepolicy>
-            <hordata>5</hordata>
-            <verdata>5</verdata>
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-        </sizepolicy>
-        <pixmap>image0</pixmap>
-    </customwidget>
-</customwidgets>
-<connections>
-    <connection>
-        <sender>AudioConnectPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>audioConnectSelected()</slot>
-    </connection>
-    <connection>
-        <sender>AudioDisconnectPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>audioDisconnectSelected()</slot>
-    </connection>
-    <connection>
-        <sender>AudioDisconnectAllPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>audioDisconnectAll()</slot>
-    </connection>
-    <connection>
-        <sender>AudioRefreshPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>audioRefresh()</slot>
-    </connection>
-    <connection>
-        <sender>MidiConnectPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>midiConnectSelected()</slot>
-    </connection>
-    <connection>
-        <sender>MidiDisconnectPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>midiDisconnectSelected()</slot>
-    </connection>
-    <connection>
-        <sender>MidiDisconnectAllPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>midiDisconnectAll()</slot>
-    </connection>
-    <connection>
-        <sender>MidiRefreshPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>midiRefresh()</slot>
-    </connection>
-    <connection>
-        <sender>AlsaConnectPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>alsaConnectSelected()</slot>
-    </connection>
-    <connection>
-        <sender>AlsaDisconnectPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>alsaDisconnectSelected()</slot>
-    </connection>
-    <connection>
-        <sender>AlsaDisconnectAllPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>alsaDisconnectAll()</slot>
-    </connection>
-    <connection>
-        <sender>AlsaRefreshPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlConnectionsForm</receiver>
-        <slot>alsaRefresh()</slot>
-    </connection>
-</connections>
-<tabstops>
-    <tabstop>ConnectionsTabWidget</tabstop>
-    <tabstop>AudioConnectView</tabstop>
-    <tabstop>AudioConnectPushButton</tabstop>
-    <tabstop>AudioDisconnectPushButton</tabstop>
-    <tabstop>AudioDisconnectAllPushButton</tabstop>
-    <tabstop>AudioRefreshPushButton</tabstop>
-    <tabstop>MidiConnectView</tabstop>
-    <tabstop>MidiConnectPushButton</tabstop>
-    <tabstop>MidiDisconnectPushButton</tabstop>
-    <tabstop>MidiDisconnectAllPushButton</tabstop>
-    <tabstop>MidiRefreshPushButton</tabstop>
-    <tabstop>AlsaConnectView</tabstop>
-    <tabstop>AlsaConnectPushButton</tabstop>
-    <tabstop>AlsaDisconnectPushButton</tabstop>
-    <tabstop>AlsaDisconnectAllPushButton</tabstop>
-    <tabstop>AlsaRefreshPushButton</tabstop>
-</tabstops>
-<includes>
-    <include location="local" impldecl="in declaration">qjackctlSetup.h</include>
-    <include location="local" impldecl="in declaration">qjackctlJackConnect.h</include>
-    <include location="local" impldecl="in declaration">qjackctlAlsaConnect.h</include>
-    <include location="local" impldecl="in implementation">qjackctlMainForm.h</include>
-    <include location="local" impldecl="in implementation">qjackctlConnectionsForm.ui.h</include>
-</includes>
-<variables>
-    <variable access="private">jack_client_t *m_pJackClient;</variable>
-    <variable access="private">snd_seq_t *m_pAlsaSeq;</variable>
-    <variable access="private">qjackctlJackConnect *m_pAudioConnect;</variable>
-    <variable access="private">qjackctlJackConnect *m_pMidiConnect;</variable>
-    <variable access="private">qjackctlAlsaConnect *m_pAlsaConnect;</variable>
-    <variable access="private">qjackctlSetup *m_pSetup;</variable>
-    <variable access="private">QString m_sPreset;</variable>
-</variables>
-<slots>
-    <slot specifier="non virtual">audioConnectSelected()</slot>
-    <slot specifier="non virtual">audioDisconnectSelected()</slot>
-    <slot specifier="non virtual">audioDisconnectAll()</slot>
-    <slot specifier="non virtual">audioRefresh()</slot>
-    <slot specifier="non virtual">audioStabilize()</slot>
-    <slot specifier="non virtual">midiConnectSelected()</slot>
-    <slot specifier="non virtual">midiDisconnectSelected()</slot>
-    <slot specifier="non virtual">midiDisconnectAll()</slot>
-    <slot specifier="non virtual">midiRefresh()</slot>
-    <slot specifier="non virtual">midiStabilize()</slot>
-    <slot specifier="non virtual">alsaConnectSelected()</slot>
-    <slot specifier="non virtual">alsaDisconnectSelected()</slot>
-    <slot specifier="non virtual">alsaDisconnectAll()</slot>
-    <slot specifier="non virtual">alsaRefresh()</slot>
-    <slot specifier="non virtual">alsaStabilize()</slot>
-</slots>
-<functions>
-    <function access="private" specifier="non virtual">init()</function>
-    <function access="private" specifier="non virtual">destroy()</function>
-    <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
-    <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
-    <function specifier="non virtual">setup( qjackctlSetup *pSetup )</function>
-    <function specifier="non virtual" returnType="bool">queryClose()</function>
-    <function specifier="non virtual" returnType="QFont">connectionsFont()</function>
-    <function specifier="non virtual">setConnectionsFont( const QFont &amp; font )</function>
-    <function specifier="non virtual">setConnectionsIconSize( int iIconSize )</function>
-    <function specifier="non virtual">setJackClient( jack_client_t * pJackClient )</function>
-    <function specifier="non virtual">setAlsaSeq( snd_seq_t * pAlsaSeq )</function>
-    <function specifier="non virtual" returnType="bool">isAudioConnected()</function>
-    <function specifier="non virtual" returnType="bool">isMidiConnected()</function>
-    <function specifier="non virtual" returnType="bool">isAlsaConnected()</function>
-    <function specifier="non virtual">refreshAudio( bool bEnabled )</function>
-    <function specifier="non virtual">refreshMidi( bool bEnabled )</function>
-    <function specifier="non virtual">refreshAlsa( bool bEnabled )</function>
-    <function specifier="non virtual">stabilizeAudio( bool bEnabled )</function>
-    <function specifier="non virtual">stabilizeMidi( bool bEnabled )</function>
-    <function specifier="non virtual">stabilizeAlsa( bool bEnabled )</function>
-    <function specifier="non virtual">setupAliases( qjackctlSetup *pSetup )</function>
-    <function specifier="non virtual">updateAliases()</function>
-    <function specifier="non virtual" returnType="bool">loadAliases()</function>
-    <function specifier="non virtual" returnType="bool">saveAliases()</function>
-</functions>
-<pixmapinproject/>
-<layoutdefaults spacing="4" margin="4"/>
-</UI>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>4</number>
+         </property>
+         <property name="spacing" >
+          <number>4</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="AudioConnectPushButton" >
+           <property name="toolTip" >
+            <string>Connect currently selected ports</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Connect</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/connect1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+C</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AudioDisconnectPushButton" >
+           <property name="toolTip" >
+            <string>Disconnect currently selected ports</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Disconnect</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnect1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+D</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AudioDisconnectAllPushButton" >
+           <property name="toolTip" >
+            <string>Disconnect all currently connected ports</string>
+           </property>
+           <property name="text" >
+            <string>Disconnect &amp;All</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnectall1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+A</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>87</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AudioRefreshPushButton" >
+           <property name="toolTip" >
+            <string>Refresh current connections view</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Refresh</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/refresh1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+R</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="MidiConnectTab" >
+      <attribute name="title" >
+       <string>MIDI</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>4</number>
+       </property>
+       <property name="spacing" >
+        <number>4</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="qjackctlConnectView" native="1" name="MidiConnectView" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy" >
+          <enum>Qt::TabFocus</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>4</number>
+         </property>
+         <property name="spacing" >
+          <number>4</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="MidiConnectPushButton" >
+           <property name="toolTip" >
+            <string>Connect currently selected ports</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Connect</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/connect1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+C</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="MidiDisconnectPushButton" >
+           <property name="toolTip" >
+            <string>Disconnect currently selected ports</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Disconnect</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnect1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+D</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="MidiDisconnectAllPushButton" >
+           <property name="toolTip" >
+            <string>Disconnect all currently connected ports</string>
+           </property>
+           <property name="text" >
+            <string>Disconnect &amp;All</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnectall1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+A</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>87</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="MidiRefreshPushButton" >
+           <property name="toolTip" >
+            <string>Refresh current connections view</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Refresh</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/refresh1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+R</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="AlsaConnectTab" >
+      <attribute name="title" >
+       <string>ALSA</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>4</number>
+       </property>
+       <property name="spacing" >
+        <number>4</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="qjackctlConnectView" native="1" name="AlsaConnectView" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy" >
+          <enum>Qt::TabFocus</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>4</number>
+         </property>
+         <property name="spacing" >
+          <number>4</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="AlsaConnectPushButton" >
+           <property name="toolTip" >
+            <string>Connect currently selected ports</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Connect</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/connect1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+C</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AlsaDisconnectPushButton" >
+           <property name="toolTip" >
+            <string>Disconnect currently selected ports</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Disconnect</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnect1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+D</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AlsaDisconnectAllPushButton" >
+           <property name="toolTip" >
+            <string>Disconnect all currently connected ports</string>
+           </property>
+           <property name="text" >
+            <string>Disconnect &amp;All</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnectall1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+A</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>87</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AlsaRefreshPushButton" >
+           <property name="toolTip" >
+            <string>Refresh current connections view</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Refresh</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="../icons/qjackctl.qrc" >:/icons/refresh1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+R</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="4" margin="4" />
+ <customwidgets>
+  <customwidget>
+   <class>qjackctlConnectView</class>
+   <extends>QWidget</extends>
+   <header>qjackctlConnect.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>ConnectionsTabWidget</tabstop>
+  <tabstop>AudioConnectView</tabstop>
+  <tabstop>AudioConnectPushButton</tabstop>
+  <tabstop>AudioDisconnectPushButton</tabstop>
+  <tabstop>AudioDisconnectAllPushButton</tabstop>
+  <tabstop>AudioRefreshPushButton</tabstop>
+  <tabstop>MidiConnectView</tabstop>
+  <tabstop>MidiConnectPushButton</tabstop>
+  <tabstop>MidiDisconnectPushButton</tabstop>
+  <tabstop>MidiDisconnectAllPushButton</tabstop>
+  <tabstop>MidiRefreshPushButton</tabstop>
+  <tabstop>AlsaConnectView</tabstop>
+  <tabstop>AlsaConnectPushButton</tabstop>
+  <tabstop>AlsaDisconnectPushButton</tabstop>
+  <tabstop>AlsaDisconnectAllPushButton</tabstop>
+  <tabstop>AlsaRefreshPushButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../icons/qjackctl.qrc" />
+ </resources>
+ <connections/>
+</ui>

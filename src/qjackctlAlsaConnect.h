@@ -1,7 +1,7 @@
 // qjackctlAlsaConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -50,19 +50,20 @@ class qjackctlAlsaPort : public qjackctlPortItem
 {
 public:
 
-    // Constructor.
-    qjackctlAlsaPort(qjackctlAlsaClient *pClient, const QString& sPortName, int iAlsaPort);
-    // Default destructor.
-    ~qjackctlAlsaPort();
+	// Constructor.
+	qjackctlAlsaPort(qjackctlAlsaClient *pClient,
+		const QString& sPortName, int iAlsaPort);
+	// Default destructor.
+	~qjackctlAlsaPort();
 
-    // Jack handles accessors.
-    int alsaClient() const;
-    int alsaPort() const;
+	// Jack handles accessors.
+	int alsaClient() const;
+	int alsaPort() const;
 
 private:
 
-    // Instance variables.
-    int m_iAlsaPort;
+	// Instance variables.
+	int m_iAlsaPort;
 };
 
 
@@ -71,21 +72,22 @@ class qjackctlAlsaClient : public qjackctlClientItem
 {
 public:
 
-    // Constructor.
-    qjackctlAlsaClient(qjackctlAlsaClientList *pClientList, const QString& sClientName, int iAlsaClient);
-    // Default destructor.
-    ~qjackctlAlsaClient();
+	// Constructor.
+	qjackctlAlsaClient(qjackctlAlsaClientList *pClientList,
+		const QString& sClientName, int iAlsaClient);
+	// Default destructor.
+	~qjackctlAlsaClient();
 
-    // Jack client accessors.
-    int alsaClient() const;
+	// Jack client accessors.
+	int alsaClient() const;
 
-    // Port finder by id.
-    qjackctlAlsaPort *findPort(int iAlsaPort);
+	// Port finder by id.
+	qjackctlAlsaPort *findPort(int iAlsaPort);
 
 private:
 
-    // Instance variables.
-    int m_iAlsaClient;
+	// Instance variables.
+	int m_iAlsaClient;
 };
 
 
@@ -94,26 +96,27 @@ class qjackctlAlsaClientList : public qjackctlClientList
 {
 public:
 
-    // Constructor.
-    qjackctlAlsaClientList(qjackctlClientListView *pListView, snd_seq_t *pAlsaSeq, bool bReadable);
-    // Default destructor.
-    ~qjackctlAlsaClientList();
+	// Constructor.
+	qjackctlAlsaClientList(qjackctlClientListView *pListView,
+		snd_seq_t *pAlsaSeq, bool bReadable);
+	// Default destructor.
+	~qjackctlAlsaClientList();
 
-    // Alsa sequencer accessor.
-    snd_seq_t *alsaSeq() const;
+	// Alsa sequencer accessor.
+	snd_seq_t *alsaSeq() const;
 
-    // Client finder by id.
-    qjackctlAlsaClient *findClient(int iAlsaClient);
-    // Client port finder by id.
-    qjackctlAlsaPort *findClientPort(int iAlsaClient, int iAlsaPort);
+	// Client finder by id.
+	qjackctlAlsaClient *findClient(int iAlsaClient);
+	// Client port finder by id.
+	qjackctlAlsaPort *findClientPort(int iAlsaClient, int iAlsaPort);
 
-    // Client:port refreshner (return newest item count).
-    int updateClientPorts();
+	// Client:port refreshner (return newest item count).
+	int updateClientPorts();
 
 private:
 
-    // Instance variables.
-    snd_seq_t *m_pAlsaSeq;
+	// Instance variables.
+	snd_seq_t *m_pAlsaSeq;
 };
 
 
@@ -124,40 +127,41 @@ class qjackctlAlsaConnect : public qjackctlConnect
 {
 public:
 
-    // Constructor.
-    qjackctlAlsaConnect(qjackctlConnectView *pConnectView, snd_seq_t *pAlsaSeq);
-    // Default destructor.
-    ~qjackctlAlsaConnect();
+	// Constructor.
+	qjackctlAlsaConnect(qjackctlConnectView *pConnectView,
+		snd_seq_t *pAlsaSeq);
+	// Default destructor.
+	~qjackctlAlsaConnect();
 
-    // Alsa sequencer accessor.
-    snd_seq_t *alsaSeq() const;
+	// Alsa sequencer accessor.
+	snd_seq_t *alsaSeq() const;
 
-    // Common pixmap accessor.
-    QPixmap& pixmap(int iPixmap) const;
+	// Common pixmap accessor.
+	QPixmap& pixmap(int iPixmap) const;
 
 protected:
 
-    // Virtual Connect/Disconnection primitives.
-    void connectPorts    (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
-    void disconnectPorts (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	// Virtual Connect/Disconnection primitives.
+	void connectPorts    (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	void disconnectPorts (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
 
-    // Update port connection references.
-    void updateConnections();
+	// Update port connection references.
+	void updateConnections();
 
-    // Update icon size implementation.
-    void updateIconPixmaps();
+	// Update icon size implementation.
+	void updateIconPixmaps();
 
 private:
 
-    // Local pixmap-set janitor methods.
-    void createIconPixmaps();
-    void deleteIconPixmaps();
+	// Local pixmap-set janitor methods.
+	void createIconPixmaps();
+	void deleteIconPixmaps();
 
-    // Instance variables.
-    snd_seq_t *m_pAlsaSeq;
+	// Instance variables.
+	snd_seq_t *m_pAlsaSeq;
 
-    // Local pixmap-set array.
-    QPixmap *m_apPixmaps[QJACKCTL_ALSA_PIXMAPS];
+	// Local pixmap-set array.
+	QPixmap *m_apPixmaps[QJACKCTL_ALSA_PIXMAPS];
 };
 
 

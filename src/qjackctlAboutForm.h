@@ -1,4 +1,4 @@
-// qjackctlPatchbayFile.h
+// qjackctlAboutForm.h
 //
 /****************************************************************************
    Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,25 +19,38 @@
 
 *****************************************************************************/
 
-#ifndef __qjackctlPatchbayFile_h
-#define __qjackctlPatchbayFile_h
+#ifndef __qjackctlAboutForm_h
+#define __qjackctlAboutForm_h
 
-#include "qjackctlPatchbayRack.h"
+#include "ui_qjackctlAboutForm.h"
 
 
-// Patchbay XML definition.
-class qjackctlPatchbayFile
+//----------------------------------------------------------------------------
+// qjackctlAboutForm -- UI wrapper form.
+
+class qjackctlAboutForm : public QDialog
 {
+	Q_OBJECT
+
 public:
 
-	// Simple patchbay I/O methods.
-	static bool load (qjackctlPatchbayRack *pPatchbay,
-		const QString& sFilename);
-	static bool save (qjackctlPatchbayRack *pPatchbay,
-		const QString& sFilename);
+	// Constructor.
+	qjackctlAboutForm(QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
+	// Destructor.
+	~qjackctlAboutForm();
+
+public slots:
+
+	void aboutQt();
+
+private:
+
+	// The Qt-designer UI struct...
+	Ui::qjackctlAboutForm m_ui;
 };
 
 
-#endif  // __qjackctlPatchbayFile_h
+#endif	// __qjackctlAboutForm_h
 
-// qjackctlPatchbayFile.h
+
+// end of qjackctlAboutForm.h

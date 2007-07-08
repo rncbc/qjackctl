@@ -1,6 +1,6 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
-<class>qjackctlStatusForm</class>
-<comment>JACK Audio Connection Kit - Qt GUI Interface.
+<ui version="4.0" >
+ <author>rncbc aka Rui Nuno Capela</author>
+ <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
    Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
@@ -19,193 +19,149 @@
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 </comment>
-<author>rncbc aka Rui Nuno Capela</author>
-<widget class="QWidget">
-    <property name="name">
-        <cstring>qjackctlStatusForm</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>480</width>
-            <height>246</height>
-        </rect>
-    </property>
-    <property name="sizePolicy">
-        <sizepolicy>
-            <hsizetype>1</hsizetype>
-            <vsizetype>1</vsizetype>
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-        </sizepolicy>
-    </property>
-    <property name="font">
-        <font>
-        </font>
-    </property>
-    <property name="caption">
-		<string>Status - JACK Audio Connection Kit</string>
-    </property>
-    <property name="icon">
-        <pixmap>status1.png</pixmap>
-    </property>
-    <grid>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="QListView" row="0" column="0" rowspan="1" colspan="3">
-            <column>
-                <property name="text">
-                    <string>Description</string>
-                </property>
-                <property name="clickable">
-                    <bool>true</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <column>
-                <property name="text">
-                    <string>Value</string>
-                </property>
-                <property name="clickable">
-                    <bool>true</bool>
-                </property>
-                <property name="resizable">
-                    <bool>true</bool>
-                </property>
-            </column>
-            <property name="name">
-                <cstring>StatsListView</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="resizePolicy">
-                <enum>Manual</enum>
-            </property>
-            <property name="selectionMode">
-                <enum>NoSelection</enum>
-            </property>
-            <property name="allColumnsShowFocus">
-                <bool>true</bool>
-            </property>
-            <property name="showSortIndicator">
-                <bool>true</bool>
-            </property>
-            <property name="itemMargin">
-                <number>1</number>
-            </property>
-            <property name="rootIsDecorated">
-                <bool>true</bool>
-            </property>
-            <property name="resizeMode">
-                <enum>AllColumns</enum>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Statistics since last server startup</string>
-            </property>
-        </widget>
-        <spacer row="1" column="1">
-            <property name="name">
-                <cstring>spacer1</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>192</width>
-                    <height>16</height>
-                </size>
-            </property>
-        </spacer>
-        <widget class="QPushButton" row="1" column="0">
-            <property name="name">
-                <cstring>ResetPushButton</cstring>
-            </property>
-            <property name="text">
-                <string>Re&amp;set</string>
-            </property>
-            <property name="accel">
-                <string>Alt+S</string>
-            </property>
-            <property name="iconSet">
-                <iconset>reset1.png</iconset>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Reset XRUN statistic values</string>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="1" column="2">
-            <property name="name">
-                <cstring>RefreshPushButton</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;Refresh</string>
-            </property>
-            <property name="accel">
-                <string>Alt+R</string>
-            </property>
-            <property name="iconSet">
-                <iconset>refresh1.png</iconset>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Refresh XRUN statistic values</string>
-            </property>
-        </widget>
-    </grid>
-</widget>
-<connections>
-    <connection>
-        <sender>ResetPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlStatusForm</receiver>
-        <slot>resetXrunStats()</slot>
-    </connection>
-    <connection>
-        <sender>RefreshPushButton</sender>
-        <signal>clicked()</signal>
-        <receiver>qjackctlStatusForm</receiver>
-        <slot>refreshXrunStats()</slot>
-    </connection>
-</connections>
-<tabstops>
-    <tabstop>StatsListView</tabstop>
-    <tabstop>ResetPushButton</tabstop>
-</tabstops>
-<includes>
-    <include location="global" impldecl="in declaration">qlistview.h</include>
-    <include location="global" impldecl="in declaration">qtooltip.h</include>
-    <include location="global" impldecl="in declaration">jack/jack.h</include>
-    <include location="local" impldecl="in implementation">qjackctlMainForm.h</include>
-    <include location="local" impldecl="in implementation">qjackctlStatusForm.ui.h</include>
-</includes>
-<variables>
-    <variable access="private">QListViewItem *m_apStatus[18];</variable>
-    <variable access="private">QToolTip *m_pToolTip;</variable>
-</variables>
-<slots>
-    <slot specifier="non virtual">resetXrunStats( void )</slot>
-    <slot specifier="non virtual">refreshXrunStats( void )</slot>
-</slots>
-<functions>
-    <function access="private" specifier="non virtual">init()</function>
-    <function access="private" specifier="non virtual">destroy()</function>
-    <function access="private" specifier="non virtual">showEvent( QShowEvent * pShowEvent )</function>
-    <function access="private" specifier="non virtual">hideEvent( QHideEvent * pHideEvent )</function>
-    <function specifier="non virtual">updateStatusItem( int iStatusItem, const QString &amp; sText )</function>
-</functions>
-<pixmapinproject/>
-<layoutdefaults spacing="4" margin="4"/>
-</UI>
+ <class>qjackctlStatusForm</class>
+ <widget class="QWidget" name="qjackctlStatusForm" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>220</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy>
+    <hsizetype>1</hsizetype>
+    <vsizetype>1</vsizetype>
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="font" >
+   <font/>
+  </property>
+  <property name="windowTitle" >
+   <string>Status - JACK Audio Connection Kit</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../icons/qjackctl.qrc" >:/icons/status1.png</iconset>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="margin" >
+    <number>4</number>
+   </property>
+   <property name="spacing" >
+    <number>4</number>
+   </property>
+   <item row="0" column="0" colspan="3" >
+    <widget class="QTreeWidget" name="StatsListView" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>7</hsizetype>
+       <vsizetype>7</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize" >
+      <size>
+       <width>240</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip" >
+      <string>Statistics since last server startup</string>
+     </property>
+     <property name="showDropIndicator" stdset="0" >
+      <bool>false</bool>
+     </property>
+     <property name="alternatingRowColors" >
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode" >
+      <enum>QAbstractItemView::NoSelection</enum>
+     </property>
+     <property name="rootIsDecorated" >
+      <bool>true</bool>
+     </property>
+     <property name="uniformRowHeights" >
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled" >
+      <bool>false</bool>
+     </property>
+     <property name="allColumnsShowFocus" >
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text" >
+       <string>Description</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Value</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>192</width>
+       <height>16</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QPushButton" name="ResetPushButton" >
+     <property name="toolTip" >
+      <string>Reset XRUN statistic values</string>
+     </property>
+     <property name="text" >
+      <string>Re&amp;set</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="../icons/qjackctl.qrc" >:/icons/reset1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+S</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2" >
+    <widget class="QPushButton" name="RefreshPushButton" >
+     <property name="toolTip" >
+      <string>Refresh XRUN statistic values</string>
+     </property>
+     <property name="text" >
+      <string>&amp;Refresh</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="../icons/qjackctl.qrc" >:/icons/refresh1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+R</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="4" margin="4" />
+ <tabstops>
+  <tabstop>StatsListView</tabstop>
+  <tabstop>ResetPushButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../icons/qjackctl.qrc" />
+ </resources>
+ <connections/>
+</ui>

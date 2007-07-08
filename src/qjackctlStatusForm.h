@@ -1,4 +1,4 @@
-// qjackctlPatchbayFile.h
+// qjackctlStatusForm.h
 //
 /****************************************************************************
    Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,25 +19,52 @@
 
 *****************************************************************************/
 
-#ifndef __qjackctlPatchbayFile_h
-#define __qjackctlPatchbayFile_h
+#ifndef __qjackctlStatusForm_h
+#define __qjackctlStatusForm_h
 
-#include "qjackctlPatchbayRack.h"
+#include "ui_qjackctlStatusForm.h"
+
+// Forward declarations.
+class QTreeWidgetItem;
 
 
-// Patchbay XML definition.
-class qjackctlPatchbayFile
+//----------------------------------------------------------------------------
+// qjackctlStatusForm -- UI wrapper form.
+
+class qjackctlStatusForm : public QWidget
 {
+	Q_OBJECT
+
 public:
 
-	// Simple patchbay I/O methods.
-	static bool load (qjackctlPatchbayRack *pPatchbay,
-		const QString& sFilename);
-	static bool save (qjackctlPatchbayRack *pPatchbay,
-		const QString& sFilename);
+	// Constructor.
+	qjackctlStatusForm(QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
+	// Destructor.
+	~qjackctlStatusForm();
+
+	void updateStatusItem(int iStatusItem, const QString& sText);
+
+public slots:
+
+	void resetXrunStats();
+	void refreshXrunStats();
+
+protected:
+
+	void showEvent(QShowEvent *);
+	void hideEvent(QHideEvent *);
+
+private:
+
+	// The Qt-designer UI struct...
+	Ui::qjackctlStatusForm m_ui;
+
+	// Instance variables.
+	QTreeWidgetItem *m_apStatus[18];
 };
 
 
-#endif  // __qjackctlPatchbayFile_h
+#endif	// __qjackctlStatusForm_h
 
-// qjackctlPatchbayFile.h
+
+// end of qjackctlStatusForm.h

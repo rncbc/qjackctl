@@ -1,7 +1,7 @@
 // qjackctlPatchbayFile.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2006, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -22,73 +22,85 @@
 #include "qjackctlAbout.h"
 #include "qjackctlPatchbayFile.h"
 
-#include <qdom.h>
-#include <qfileinfo.h>
+#include <QDomDocument>
+#include <QTextStream>
+#include <QFileInfo>
 
 
 //----------------------------------------------------------------------
 // Specific patchbay socket list save (write) subroutine.
-static void load_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDomElement& eSockets )
+static void load_socketlist ( QList<qjackctlPatchbaySocket *>& socketlist,
+	QDomElement& eSockets )
 {
-    for (QDomNode nSocket = eSockets.firstChild(); !nSocket.isNull(); nSocket = nSocket.nextSibling()) {
-        // Convert slot node to element...
-        QDomElement eSocket = nSocket.toElement();
-        if (eSocket.isNull())
-            continue;
-        if (eSocket.tagName() == "socket") {
-            QString sSocketName = eSocket.attribute("name");
-            QString sClientName = eSocket.attribute("client");
-            QString sSocketType = eSocket.attribute("type");
-            QString sExclusive  = eSocket.attribute("exclusive");
-            QString sSocketForward = eSocket.attribute("forward");
-            int iSocketType = QJACKCTL_SOCKETTYPE_AUDIO;
-            if (sSocketType == "midi")
-                iSocketType = QJACKCTL_SOCKETTYPE_MIDI;
-            bool bExclusive = (sExclusive == "on" || sExclusive == "yes" || sExclusive == "1");
-            qjackctlPatchbaySocket *pSocket = new qjackctlPatchbaySocket(sSocketName, sClientName, iSocketType);
-            if (pSocket) {
-                pSocket->setExclusive(bExclusive);
-                pSocket->setForward(sSocketForward);
-                // Now's time to handle pluglist...
-                for (QDomNode nPlug = eSocket.firstChild(); !nPlug.isNull(); nPlug = nPlug.nextSibling()) {
-                    // Convert plug node to element...
-                    QDomElement ePlug = nPlug.toElement();
-                    if (ePlug.isNull())
-                        continue;
-                    if (ePlug.tagName() == "plug")
-                        pSocket->addPlug(ePlug.text());
-                }
-                socketlist.append(pSocket);
-            }
-        }
-    }
+	for (QDomNode nSocket = eSockets.firstChild();
+			!nSocket.isNull();
+				nSocket = nSocket.nextSibling()) {
+		// Convert slot node to element...
+		QDomElement eSocket = nSocket.toElement();
+		if (eSocket.isNull())
+			continue;
+		if (eSocket.tagName() == "socket") {
+			QString sSocketName = eSocket.attribute("name");
+			QString sClientName = eSocket.attribute("client");
+			QString sSocketType = eSocket.attribute("type");
+			QString sExclusive  = eSocket.attribute("exclusive");
+			QString sSocketForward = eSocket.attribute("forward");
+			int iSocketType = QJACKCTL_SOCKETTYPE_AUDIO;
+			if (sSocketType == "midi")
+				iSocketType = QJACKCTL_SOCKETTYPE_MIDI;
+			bool bExclusive = (sExclusive == "on" || sExclusive == "yes" || sExclusive == "1");
+			qjackctlPatchbaySocket *pSocket
+				= new qjackctlPatchbaySocket(sSocketName, sClientName, iSocketType);
+			if (pSocket) {
+				pSocket->setExclusive(bExclusive);
+				pSocket->setForward(sSocketForward);
+				// Now's time to handle pluglist...
+				for (QDomNode nPlug = eSocket.firstChild();
+						!nPlug.isNull();
+							nPlug = nPlug.nextSibling()) {
+					// Convert plug node to element...
+					QDomElement ePlug = nPlug.toElement();
+					if (ePlug.isNull())
+						continue;
+					if (ePlug.tagName() == "plug")
+						pSocket->addPlug(ePlug.text());
+				}
+				socketlist.append(pSocket);
+			}
+		}
+	}
 }
 
 
 //----------------------------------------------------------------------
 // Specific patchbay socket list save (write) subroutine.
-static void save_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDomElement& eSockets, QDomDocument& doc )
+static void save_socketlist ( QList<qjackctlPatchbaySocket *>& socketlist,
+	QDomElement& eSockets, QDomDocument& doc )
 {
-    for (qjackctlPatchbaySocket *pSocket = socketlist.first(); pSocket; pSocket = socketlist.next()) {
-        QDomElement eSocket = doc.createElement("socket");
-        eSocket.setAttribute("name", pSocket->name());
-        eSocket.setAttribute("client", pSocket->clientName());
-        QString sSocketType = "audio";
-        if (pSocket->type() == QJACKCTL_SOCKETTYPE_MIDI)
-            sSocketType = "midi";
-        eSocket.setAttribute("type", sSocketType);
-        eSocket.setAttribute("exclusive", (pSocket->isExclusive() ? "on" : "off"));
+	QListIterator<qjackctlPatchbaySocket *> sockit(socketlist);
+	while (sockit.hasNext()) {
+		qjackctlPatchbaySocket *pSocket = sockit.next();
+		QDomElement eSocket = doc.createElement("socket");
+		eSocket.setAttribute("name", pSocket->name());
+		eSocket.setAttribute("client", pSocket->clientName());
+		QString sSocketType = "audio";
+		if (pSocket->type() == QJACKCTL_SOCKETTYPE_MIDI)
+			sSocketType = "midi";
+		eSocket.setAttribute("type", sSocketType);
+		eSocket.setAttribute("exclusive", (pSocket->isExclusive() ? "on" : "off"));
 		if (!pSocket->forward().isEmpty())
 			eSocket.setAttribute("forward", pSocket->forward());
-        QDomElement ePlug;
-        for (QStringList::Iterator iter = pSocket->pluglist().begin(); iter != pSocket->pluglist().end(); iter++) {
-            QDomElement ePlug = doc.createElement("plug");
-            QDomText text = doc.createTextNode(*iter);
-            ePlug.appendChild(text);
-            eSocket.appendChild(ePlug);
-        }
-        eSockets.appendChild(eSocket);
-    }
+		QDomElement ePlug;
+		QStringListIterator iter(pSocket->pluglist());
+		while (iter.hasNext()) {
+			const QString& sPlug = iter.next();
+			QDomElement ePlug = doc.createElement("plug");
+			QDomText text = doc.createTextNode(sPlug);
+			ePlug.appendChild(text);
+			eSocket.appendChild(ePlug);
+		}
+		eSockets.appendChild(eSocket);
+	}
 }
 
 
@@ -97,152 +109,177 @@ static void save_socketlist ( QPtrList<qjackctlPatchbaySocket>& socketlist, QDom
 //
 
 // Specific patchbay load (read) method.
-bool qjackctlPatchbayFile::load ( qjackctlPatchbayRack *pPatchbay, const QString& sFilename )
+bool qjackctlPatchbayFile::load ( qjackctlPatchbayRack *pPatchbay,
+	const QString& sFilename )
 {
-    // Open file...
-    QFile file(sFilename);
-    if (!file.open(IO_ReadOnly))
-        return false;
-    // Parse it a-la-DOM :-)
-    QDomDocument doc("patchbay");
-    if (!doc.setContent(&file)) {
-        file.close();
-        return false;
-    }
-    file.close();
+	// Open file...
+	QFile file(sFilename);
+	if (!file.open(QIODevice::ReadOnly))
+		return false;
+	// Parse it a-la-DOM :-)
+	QDomDocument doc("patchbay");
+	if (!doc.setContent(&file)) {
+		file.close();
+		return false;
+	}
+	file.close();
 
-    // Now e're better reset any old patchbay settings.
-    pPatchbay->clear();
+	// Now e're better reset any old patchbay settings.
+	pPatchbay->clear();
 
-    // Get root element.
-    QDomElement eDoc = doc.documentElement();
+	// Get root element.
+	QDomElement eDoc = doc.documentElement();
 
-    // Now parse for slots, sockets and cables...
-    for (QDomNode nRoot = eDoc.firstChild(); !nRoot.isNull(); nRoot = nRoot.nextSibling()) {
+	// Now parse for slots, sockets and cables...
+	for (QDomNode nRoot = eDoc.firstChild();
+			!nRoot.isNull();
+				nRoot = nRoot.nextSibling()) {
 
-        // Convert node to element, if any.
-        QDomElement eRoot = nRoot.toElement();
-        if (eRoot.isNull())
-            continue;
+		// Convert node to element, if any.
+		QDomElement eRoot = nRoot.toElement();
+		if (eRoot.isNull())
+			continue;
 
-        // Check for output-socket spec lists...
-        if (eRoot.tagName() == "output-sockets")
-            load_socketlist(pPatchbay->osocketlist(), eRoot);
-        else
-        // Check for input-socket spec lists...
-        if (eRoot.tagName() == "input-sockets")
-            load_socketlist(pPatchbay->isocketlist(), eRoot);
-        else
-        // Check for slots spec list...
-        if (eRoot.tagName() == "slots") {
-            for (QDomNode nSlot = eRoot.firstChild(); !nSlot.isNull(); nSlot = nSlot.nextSibling()) {
-                // Convert slot node to element...
-                QDomElement eSlot = nSlot.toElement();
-                if (eSlot.isNull())
-                    continue;
-                if (eSlot.tagName() == "slot") {
-                    QString sSlotName = eSlot.attribute("name");
-                    QString sSlotMode = eSlot.attribute("mode");
-                    int iSlotMode = QJACKCTL_SLOTMODE_OPEN;
-                    if (sSlotMode == "half")
-                        iSlotMode = QJACKCTL_SLOTMODE_HALF;
-                    else if (sSlotMode == "full")
-                        iSlotMode = QJACKCTL_SLOTMODE_FULL;
-                    qjackctlPatchbaySlot *pSlot = new qjackctlPatchbaySlot(sSlotName, iSlotMode);
-                    pSlot->setOutputSocket(pPatchbay->findSocket(pPatchbay->osocketlist(), eSlot.attribute("output")));
-                    pSlot->setInputSocket(pPatchbay->findSocket(pPatchbay->isocketlist(), eSlot.attribute("input")));
-                    pPatchbay->addSlot(pSlot);
-                }
-            }
-        }
-        else
-        // Check for cable spec list...
-        if (eRoot.tagName() == "cables") {
-            for (QDomNode nCable = eRoot.firstChild(); !nCable.isNull(); nCable = nCable.nextSibling()) {
-                // Convert cable node to element...
-                QDomElement eCable = nCable.toElement();
-                if (eCable.isNull())
-                    continue;
-                if (eCable.tagName() == "cable") {
-                    qjackctlPatchbaySocket *pOutputSocket = pPatchbay->findSocket(pPatchbay->osocketlist(), eCable.attribute("output"));
-                    qjackctlPatchbaySocket *pIntputSocket = pPatchbay->findSocket(pPatchbay->isocketlist(), eCable.attribute("input"));
-                    if (pOutputSocket && pIntputSocket)
-                        pPatchbay->addCable(new qjackctlPatchbayCable(pOutputSocket, pIntputSocket));
-                }
-            }
-        }
-    }
+		// Check for output-socket spec lists...
+		if (eRoot.tagName() == "output-sockets")
+			load_socketlist(pPatchbay->osocketlist(), eRoot);
+		else
+		// Check for input-socket spec lists...
+		if (eRoot.tagName() == "input-sockets")
+			load_socketlist(pPatchbay->isocketlist(), eRoot);
+		else
+		// Check for slots spec list...
+		if (eRoot.tagName() == "slots") {
+			for (QDomNode nSlot = eRoot.firstChild();
+					!nSlot.isNull();
+						nSlot = nSlot.nextSibling()) {
+				// Convert slot node to element...
+				QDomElement eSlot = nSlot.toElement();
+				if (eSlot.isNull())
+					continue;
+				if (eSlot.tagName() == "slot") {
+					QString sSlotName = eSlot.attribute("name");
+					QString sSlotMode = eSlot.attribute("mode");
+					int iSlotMode = QJACKCTL_SLOTMODE_OPEN;
+					if (sSlotMode == "half")
+						iSlotMode = QJACKCTL_SLOTMODE_HALF;
+					else if (sSlotMode == "full")
+						iSlotMode = QJACKCTL_SLOTMODE_FULL;
+					qjackctlPatchbaySlot *pSlot
+						= new qjackctlPatchbaySlot(sSlotName, iSlotMode);
+					pSlot->setOutputSocket(
+						pPatchbay->findSocket(pPatchbay->osocketlist(),
+						eSlot.attribute("output")));
+					pSlot->setInputSocket(
+						pPatchbay->findSocket(pPatchbay->isocketlist(),
+						eSlot.attribute("input")));
+					pPatchbay->addSlot(pSlot);
+				}
+			}
+		}
+		else
+		// Check for cable spec list...
+		if (eRoot.tagName() == "cables") {
+			for (QDomNode nCable = eRoot.firstChild();
+				!nCable.isNull();
+					nCable = nCable.nextSibling()) {
+				// Convert cable node to element...
+				QDomElement eCable = nCable.toElement();
+				if (eCable.isNull())
+					continue;
+				if (eCable.tagName() == "cable") {
+					qjackctlPatchbaySocket *pOutputSocket
+						= pPatchbay->findSocket(pPatchbay->osocketlist(),
+							eCable.attribute("output"));
+					qjackctlPatchbaySocket *pIntputSocket
+						= pPatchbay->findSocket(pPatchbay->isocketlist(),
+							eCable.attribute("input"));
+					if (pOutputSocket && pIntputSocket) {
+						pPatchbay->addCable(
+							new qjackctlPatchbayCable(
+								pOutputSocket,
+								pIntputSocket));
+					}
+				}
+			}
+		}
+	}
 
-    return true;
+	return true;
 }
 
 
 // Specific patchbay save (write) method.
-bool qjackctlPatchbayFile::save ( qjackctlPatchbayRack *pPatchbay, const QString& sFilename )
+bool qjackctlPatchbayFile::save ( qjackctlPatchbayRack *pPatchbay,
+	const QString& sFilename )
 {
-    QFileInfo fi(sFilename);
+	QFileInfo fi(sFilename);
 
-    QDomDocument doc("patchbay");
-    QDomElement eRoot = doc.createElement("patchbay");
-    eRoot.setAttribute("name", fi.baseName());
-    eRoot.setAttribute("version", QJACKCTL_VERSION);
-    doc.appendChild(eRoot);
+	QDomDocument doc("patchbay");
+	QDomElement eRoot = doc.createElement("patchbay");
+	eRoot.setAttribute("name", fi.baseName());
+	eRoot.setAttribute("version", QJACKCTL_VERSION);
+	doc.appendChild(eRoot);
 
-    // Save output-sockets spec...
-    QDomElement eOutputSockets = doc.createElement("output-sockets");
-    save_socketlist(pPatchbay->osocketlist(), eOutputSockets, doc);
-    eRoot.appendChild(eOutputSockets);
+	// Save output-sockets spec...
+	QDomElement eOutputSockets = doc.createElement("output-sockets");
+	save_socketlist(pPatchbay->osocketlist(), eOutputSockets, doc);
+	eRoot.appendChild(eOutputSockets);
 
-    // Save input-sockets spec...
-    QDomElement eInputSockets = doc.createElement("input-sockets");
-    save_socketlist(pPatchbay->isocketlist(), eInputSockets, doc);
-    eRoot.appendChild(eInputSockets);
+	// Save input-sockets spec...
+	QDomElement eInputSockets = doc.createElement("input-sockets");
+	save_socketlist(pPatchbay->isocketlist(), eInputSockets, doc);
+	eRoot.appendChild(eInputSockets);
 
-    // Save slots spec...
-    QDomElement eSlots = doc.createElement("slots");
-    for (qjackctlPatchbaySlot *pSlot = pPatchbay->slotlist().first(); pSlot; pSlot = pPatchbay->slotlist().next()) {
-        QDomElement eSlot = doc.createElement("slot");
-        eSlot.setAttribute("name", pSlot->name());
-        QString sSlotMode = "open";
-        switch (pSlot->mode()) {
-            case QJACKCTL_SLOTMODE_HALF:
-                sSlotMode = "half";
-                break;
-            case QJACKCTL_SLOTMODE_FULL:
-                sSlotMode = "full";
-                break;
-        }
-        eSlot.setAttribute("mode", sSlotMode);
-        if (pSlot->outputSocket())
-            eSlot.setAttribute("output", pSlot->outputSocket()->name());
-        if (pSlot->inputSocket())
-            eSlot.setAttribute("input", pSlot->inputSocket()->name());
-        // Add this slot...
-        eSlots.appendChild(eSlot);
-    }
-    eRoot.appendChild(eSlots);
+	// Save slots spec...
+	QDomElement eSlots = doc.createElement("slots");
+	QListIterator<qjackctlPatchbaySlot *> slotit(pPatchbay->slotlist());
+	while (slotit.hasNext()) {
+		qjackctlPatchbaySlot *pSlot = slotit.next();
+		QDomElement eSlot = doc.createElement("slot");
+		eSlot.setAttribute("name", pSlot->name());
+		QString sSlotMode = "open";
+		switch (pSlot->mode()) {
+		case QJACKCTL_SLOTMODE_HALF:
+			sSlotMode = "half";
+			break;
+		case QJACKCTL_SLOTMODE_FULL:
+			sSlotMode = "full";
+			break;
+		}
+		eSlot.setAttribute("mode", sSlotMode);
+		if (pSlot->outputSocket())
+			eSlot.setAttribute("output", pSlot->outputSocket()->name());
+		if (pSlot->inputSocket())
+			eSlot.setAttribute("input", pSlot->inputSocket()->name());
+		// Add this slot...
+		eSlots.appendChild(eSlot);
+	}
+	eRoot.appendChild(eSlots);
 
-    // Save cables spec...
-    QDomElement eCables = doc.createElement("cables");
-    for (qjackctlPatchbayCable *pCable = pPatchbay->cablelist().first(); pCable; pCable = pPatchbay->cablelist().next()) {
-        if (pCable->outputSocket() && pCable->inputSocket()) {
-            QDomElement eCable = doc.createElement("cable");
-            eCable.setAttribute("output", pCable->outputSocket()->name());
-            eCable.setAttribute("input", pCable->inputSocket()->name());
-            eCables.appendChild(eCable);
-        }
-    }
-    eRoot.appendChild(eCables);
+	// Save cables spec...
+	QDomElement eCables = doc.createElement("cables");
+	QListIterator<qjackctlPatchbayCable *> cablit(pPatchbay->cablelist());
+	while (cablit.hasNext()) {
+		qjackctlPatchbayCable *pCable = cablit.next();
+		if (pCable->outputSocket() && pCable->inputSocket()) {
+			QDomElement eCable = doc.createElement("cable");
+			eCable.setAttribute("output", pCable->outputSocket()->name());
+			eCable.setAttribute("input", pCable->inputSocket()->name());
+			eCables.appendChild(eCable);
+		}
+	}
+	eRoot.appendChild(eCables);
 
-    // Finally, we're ready to save to external file.
-    QFile file(sFilename);
-    if (!file.open(IO_WriteOnly | IO_Truncate))
-        return false;
-    QTextStream ts(&file);
-    ts << doc.toString() << endl;
-    file.close();
+	// Finally, we're ready to save to external file.
+	QFile file(sFilename);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+		return false;
+	QTextStream ts(&file);
+	ts << doc.toString() << endl;
+	file.close();
 
-    return true;
+	return true;
 }
 
 

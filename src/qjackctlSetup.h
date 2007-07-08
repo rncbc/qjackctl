@@ -24,8 +24,12 @@
 
 #include "qjackctlConnectAlias.h"
 
-#include <qcombobox.h>
-#include <qsplitter.h>
+#include <QWidget>
+
+
+// Forward declarations.
+class QComboBox;
+class QSplitter;
 
 
 // Audio mode combobox item indexes.
@@ -42,37 +46,37 @@
 // Server settings preset struct.
 struct qjackctlPreset
 {
-    QString sServer;
-    bool    bRealtime;
-    bool    bSoftMode;
-    bool    bMonitor;
-    bool    bShorts;
-    bool    bNoMemLock;
-    bool    bUnlockMem;
-    bool    bHWMon;
-    bool    bHWMeter;
-    bool    bIgnoreHW;
-    int     iPriority;
-    int     iFrames;
-    int     iSampleRate;
-    int     iPeriods;
-    int     iWordLength;
-    int     iWait;
-    int     iChan;
-    QString sDriver;
-    QString sInterface;
-    int     iAudio;
-    int     iDither;
-    int     iTimeout;
-    QString sInDevice;
-    QString sOutDevice;
-    int     iInChannels;
-    int     iOutChannels;
-    int     iInLatency;
-    int     iOutLatency;
-    int     iStartDelay;
-    bool    bVerbose;
-    int     iPortMax;
+	QString sServer;
+	bool    bRealtime;
+	bool    bSoftMode;
+	bool    bMonitor;
+	bool    bShorts;
+	bool    bNoMemLock;
+	bool    bUnlockMem;
+	bool    bHWMon;
+	bool    bHWMeter;
+	bool    bIgnoreHW;
+	int     iPriority;
+	int     iFrames;
+	int     iSampleRate;
+	int     iPeriods;
+	int     iWordLength;
+	int     iWait;
+	int     iChan;
+	QString sDriver;
+	QString sInterface;
+	int     iAudio;
+	int     iDither;
+	int     iTimeout;
+	QString sInDevice;
+	QString sOutDevice;
+	int     iInChannels;
+	int     iOutChannels;
+	int     iInLatency;
+	int     iOutLatency;
+	int     iStartDelay;
+	bool    bVerbose;
+	int     iPortMax;
 	QString sMidiDriver;
 };
 
@@ -81,65 +85,65 @@ class qjackctlSetup
 {
 public:
 
-    // Constructor.
-    qjackctlSetup();
-    // destructor;
-    ~qjackctlSetup();
+	// Constructor.
+	qjackctlSetup();
+	// destructor;
+	~qjackctlSetup();
 
-    // Command line arguments parser.
-    bool parse_args(int argc, char **argv);
-    // Command line usage helper.
-    void print_usage(const char *arg0);
+	// Command line arguments parser.
+	bool parse_args(int argc, char **argv);
+	// Command line usage helper.
+	void print_usage(const char *arg0);
 
-    // Default (translated) preset name.
-    QString sDefPresetName;
-    
-    // Immediate server start option.
-    bool bStartJack;
+	// Default (translated) preset name.
+	QString sDefPresetName;
 
-    // User supplied command line.
-    QString sCmdLine;
+	// Immediate server start option.
+	bool bStartJack;
 
-    // Current (default) preset name.
-    QString sDefPreset;
-    // Available presets list.
-    QStringList presets;
+	// User supplied command line.
+	QString sCmdLine;
 
-    // Options...
-    bool    bStartupScript;
-    QString sStartupScriptShell;
-    bool    bPostStartupScript;
-    QString sPostStartupScriptShell;
-    bool    bShutdownScript;
-    QString sShutdownScriptShell;
-    bool    bPostShutdownScript;
-    QString sPostShutdownScriptShell;
-    bool    bStdoutCapture;
-    QString sXrunRegex;
-    bool    bXrunIgnoreFirst;
-    bool    bActivePatchbay;
-    QString sActivePatchbayPath;
-    bool    bAutoRefresh;
-    int     iTimeRefresh;
-    bool    bBezierLines;
-    int     iTimeDisplay;
-    int     iTimeFormat;
-    QString sMessagesFont;
-    bool    bMessagesLimit;
-    int     iMessagesLimitLines;
-    QString sDisplayFont1;
-    QString sDisplayFont2;
-    bool    bDisplayEffect;
-    int     iConnectionsIconSize;
-    QString sConnectionsFont;
-    bool    bQueryClose;
-    bool    bKeepOnTop;
-    bool    bSystemTray;
-    bool    bDelayedSetup;
-    bool    bServerConfig;
-    QString sServerConfigName;
-    bool    bServerConfigTemp;
-    bool    bQueryShutdown;
+	// Current (default) preset name.
+	QString sDefPreset;
+	// Available presets list.
+	QStringList presets;
+
+	// Options...
+	bool    bStartupScript;
+	QString sStartupScriptShell;
+	bool    bPostStartupScript;
+	QString sPostStartupScriptShell;
+	bool    bShutdownScript;
+	QString sShutdownScriptShell;
+	bool    bPostShutdownScript;
+	QString sPostShutdownScriptShell;
+	bool    bStdoutCapture;
+	QString sXrunRegex;
+	bool    bXrunIgnoreFirst;
+	bool    bActivePatchbay;
+	QString sActivePatchbayPath;
+	bool    bAutoRefresh;
+	int     iTimeRefresh;
+	bool    bBezierLines;
+	int     iTimeDisplay;
+	int     iTimeFormat;
+	QString sMessagesFont;
+	bool    bMessagesLimit;
+	int     iMessagesLimitLines;
+	QString sDisplayFont1;
+	QString sDisplayFont2;
+	bool    bDisplayEffect;
+	int     iConnectionsIconSize;
+	QString sConnectionsFont;
+	bool    bQueryClose;
+	bool    bKeepOnTop;
+	bool    bSystemTray;
+	bool    bDelayedSetup;
+	bool    bServerConfig;
+	QString sServerConfigName;
+	bool    bServerConfigTemp;
+	bool    bQueryShutdown;
 	bool    bAliasesEnabled;
 	bool    bAliasesEditing;
 	bool    bLeftButtons;
@@ -147,10 +151,10 @@ public:
 	bool    bTransportButtons;
 	bool    bTextLabels;
 
-    // Defaults...
-    QString sPatchbayPath;
-    // Recent patchbay listing.
-    QStringList patchbays;
+	// Defaults...
+	QString sPatchbayPath;
+	// Recent patchbay listing.
+	QStringList patchbays;
 
 	// Aliases containers.
 	qjackctlConnectAlias aliasAudioOutputs;
@@ -160,59 +164,57 @@ public:
 	qjackctlConnectAlias aliasAlsaOutputs;
 	qjackctlConnectAlias aliasAlsaInputs;
 
-    // Aliases preset management methods.
-    bool loadAliases(const QString& sPreset);
-    bool saveAliases(const QString& sPreset);
+	// Aliases preset management methods.
+	bool loadAliases(const QString& sPreset);
+	bool saveAliases(const QString& sPreset);
+	// Preset management methods.
+	bool loadPreset(qjackctlPreset& preset, const QString& sPreset);
+	bool savePreset(qjackctlPreset& preset, const QString& sPreset);
+	bool deletePreset(const QString& sPreset);
 
-    // Preset management methods.
-    bool loadPreset(qjackctlPreset& preset, const QString& sPreset);
-    bool savePreset(qjackctlPreset& preset, const QString& sPreset);
-    bool deletePreset(const QString& sPreset);
-
-    // Combo box history persistence helper prototypes.
-    void add2ComboBoxHistory(QComboBox *pComboBox, const QString& sNewText, int iLimit = 8, int iIndex = -1);
-    void loadComboBoxHistory(QComboBox *pComboBox, int iLimit = 8);
-    void saveComboBoxHistory(QComboBox *pComboBox, int iLimit = 8);
+	// Combo box history persistence helper prototypes.
+	void loadComboBoxHistory(QComboBox *pComboBox, int iLimit = 8);
+	void saveComboBoxHistory(QComboBox *pComboBox, int iLimit = 8);
 
 	// Splitter widget sizes persistence helper methods.
-	void loadSplitterSizes(QSplitter *pSplitter);
+	void loadSplitterSizes(QSplitter *pSplitter, QList<int>& sizes);
 	void saveSplitterSizes(QSplitter *pSplitter);
 
-    // Widget geometry persistence helper prototypes.
-    void saveWidgetGeometry(QWidget *pWidget);
-    void loadWidgetGeometry(QWidget *pWidget);
+	// Widget geometry persistence helper prototypes.
+	void saveWidgetGeometry(QWidget *pWidget);
+	void loadWidgetGeometry(QWidget *pWidget);
 
 private:
 
-    // A recursive QSettings key entry remover.
-    void deleteKey(const QString& sKey);
+	// A recursive QSettings key entry remover.
+	void deleteKey(const QString& sKey);
 
-    // Our proper settings profile.
-    QSettings m_settings;
+	// Our proper settings profile.
+	QSettings m_settings;
 };
 
 
 // Delayed widget setup helper class.
 class qjackctlDelayedSetup : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 
-    // Constructor.
-    qjackctlDelayedSetup(QWidget *pWidget,
-        const QPoint& pos, const QSize& size, bool bVisible, int iDelay = 0);
+	// Constructor.
+	qjackctlDelayedSetup(QWidget *pWidget,
+		const QPoint& pos, const QSize& size, bool bVisible, int iDelay = 0);
 
 protected slots:
 
-     void setup();
+	void setup();
 
 private:
 
-     QWidget *m_pWidget;
-     QPoint   m_pos;
-     QSize    m_size;
-     bool     m_bVisible;
+	QWidget *m_pWidget;
+	QPoint   m_pos;
+	QSize    m_size;
+	bool     m_bVisible;
 };
 
 
