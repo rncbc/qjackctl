@@ -25,8 +25,9 @@
 #include "qjackctlPatchbay.h"
 #include "qjackctlConnectAlias.h"
 
-#include <QHeaderView>
+#include <QMessageBox>
 #include <QButtonGroup>
+#include <QHeaderView>
 #include <QRegExp>
 #include <QPixmap>
 #include <QMenu>
@@ -47,6 +48,7 @@ qjackctlSocketForm::qjackctlSocketForm (
 	m_pJackClient  = NULL;
 	m_pAlsaSeq     = NULL;
 	m_ppPixmaps    = NULL;
+	m_iDirtyCount  = 0;
 
 	// Setup time-display radio-button group.
 	m_pSocketTypeButtonGroup = new QButtonGroup(this);
@@ -92,7 +94,7 @@ qjackctlSocketForm::qjackctlSocketForm (
 
 	QObject::connect(m_ui.SocketNameLineEdit,
 		SIGNAL(textChanged(const QString&)),
-		SLOT(stabilizeForm()));
+		SLOT(changed()));
 	QObject::connect(m_ui.AudioRadioButton,
 		SIGNAL(toggled(bool)),
 		SLOT(socketTypeChanged()));
@@ -107,17 +109,17 @@ qjackctlSocketForm::qjackctlSocketForm (
 		SLOT(clientNameChanged()));
 	QObject::connect(m_ui.PlugNameComboBox,
 		SIGNAL(textChanged(const QString&)),
-		SLOT(stabilizeForm()));
+		SLOT(changed()));
 
 	QObject::connect(m_ui.PlugListView,
-		SIGNAL(contextMenuRequested(const QPoint&)),
-		SLOT(contextMenu(const QPoint&)));
-	QObject::connect(m_ui.PlugListView,
-		SIGNAL(itemRenamed()),
-		SLOT(stabilizeForm()));
+		SIGNAL(customContextMenuRequested(const QPoint&)),
+		SLOT(customContextMenu(const QPoint&)));
+	QObject::connect(m_ui.PlugListView->itemDelegate(),
+		SIGNAL(commitData(QWidget*)),
+		SLOT(changed()));
 	QObject::connect(m_ui.SocketForwardComboBox,
 		SIGNAL(activated(int)),
-		SLOT(stabilizeForm()));
+		SLOT(changed()));
 
 	QObject::connect(m_ui.OkPushButton,
 		SIGNAL(clicked()),
@@ -230,6 +232,8 @@ void qjackctlSocketForm::load ( qjackctlPatchbaySocket *pSocket )
 	}
 	m_ui.SocketForwardComboBox->setCurrentIndex(iItemIndex);
 
+	m_iDirtyCount = 0;
+
 	stabilizeForm();
 }
 
@@ -253,6 +257,8 @@ void qjackctlSocketForm::save ( qjackctlPatchbaySocket *pSocket )
 		pSocket->setForward(m_ui.SocketForwardComboBox->currentText());
 	else
 		pSocket->setForward(QString::null);
+
+	m_iDirtyCount = 0;
 }
 
 
@@ -288,7 +294,7 @@ void qjackctlSocketForm::stabilizeForm (void)
 // Validate form fields.
 bool qjackctlSocketForm::validateForm (void)
 {
-	bool bValid = true;
+	bool bValid = (m_iDirtyCount > 0);
 
 	bValid = bValid && !m_ui.SocketNameLineEdit->text().isEmpty();
 	bValid = bValid && !m_ui.ClientNameComboBox->currentText().isEmpty();
@@ -309,7 +315,35 @@ void qjackctlSocketForm::accept (void)
 
 void qjackctlSocketForm::reject (void)
 {
-	QDialog::reject();
+	bool bReject = true;
+
+	// Check if there's any pending changes...
+	if (m_iDirtyCount > 0) {
+		switch (QMessageBox::warning(this,
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Some settings have been changed.\n\n"
+			"Do you want to apply the changes?"),
+			tr("Apply"), tr("Discard"), tr("Cancel"))) {
+		case 0:     // Apply...
+			accept();
+			return;
+		case 1:     // Discard
+			break;
+		default:    // Cancel.
+			bReject = false;
+		}
+	}
+
+	if (bReject)
+		QDialog::reject();
+}
+
+
+// Dirty up the current form.
+void qjackctlSocketForm::changed (void)
+{
+	m_iDirtyCount++;
+	stabilizeForm();
 }
 
 
@@ -346,7 +380,6 @@ void qjackctlSocketForm::addPlug (void)
 	}
 
 	clientNameChanged();
-	stabilizeForm();
 }
 
 
@@ -358,7 +391,6 @@ void qjackctlSocketForm::editPlug (void)
 		m_ui.PlugListView->editItem(pItem, 0);
 
 	clientNameChanged();
-	stabilizeForm();
 }
 
 
@@ -370,7 +402,6 @@ void qjackctlSocketForm::removePlug (void)
 		delete pItem;
 
 	clientNameChanged();
-	stabilizeForm();
 }
 
 
@@ -389,7 +420,7 @@ void qjackctlSocketForm::moveUpPlug (void)
 		}
 	}
 
-	stabilizeForm();
+	changed();
 }
 
 
@@ -409,7 +440,7 @@ void qjackctlSocketForm::moveDownPlug (void)
 		}
 	}
 
-	stabilizeForm();
+	changed();
 }
 
 // Update selected plug one position down
@@ -435,7 +466,7 @@ void qjackctlSocketForm::activateAddPlugMenu ( QAction *pAction )
 
 
 // Plug list context menu handler.
-void qjackctlSocketForm::contextMenu ( const QPoint& pos )
+void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 {
 	int iItem = 0;
 	int iItemCount = 0;
@@ -453,7 +484,8 @@ void qjackctlSocketForm::contextMenu ( const QPoint& pos )
 	// Build the add plug sub-menu...
 	QMenu *pAddPlugMenu = menu.addMenu(
 		QIcon(":/icons/add1.png"), tr("Add Plug"));
-	for (int iIndex = 0; iIndex < m_ui.PlugNameComboBox->count(); iIndex++) {
+	int iIndex = 0;
+	for (iIndex = 0; iIndex < m_ui.PlugNameComboBox->count(); iIndex++) {
 		pAction = pAddPlugMenu->addAction(
 			m_ui.PlugNameComboBox->itemText(iIndex));
 		pAction->setData(iIndex);
@@ -461,13 +493,14 @@ void qjackctlSocketForm::contextMenu ( const QPoint& pos )
 	QObject::connect(pAddPlugMenu,
 		SIGNAL(triggered(QAction*)),
 		SLOT(activateAddPlugMenu(QAction*)));
+	pAddPlugMenu->setEnabled(iIndex > 0);
 	// Build the plug context menu...
 	bool bEnabled = (pItem != NULL);
-	pAction = menu.addAction(QIcon(":/icons/remove1.png"),
-		tr("Remove"), this, SLOT(removePlug()));
-	pAction->setEnabled(bEnabled);
 	pAction = menu.addAction(QIcon(":/icons/edit1.png"),
 		tr("Edit"), this, SLOT(editPlug()));
+	pAction->setEnabled(bEnabled);
+	pAction = menu.addAction(QIcon(":/icons/remove1.png"),
+		tr("Remove"), this, SLOT(removePlug()));
 	pAction->setEnabled(bEnabled);
 	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/icons/up1.png"),
@@ -477,7 +510,7 @@ void qjackctlSocketForm::contextMenu ( const QPoint& pos )
 		tr("Move Down"), this, SLOT(moveDownPlug()));
 	pAction->setEnabled(bEnabled && iItem < iItemCount - 1);
 
-	menu.exec(pos);
+	menu.exec(m_ui.PlugListView->mapToGlobal(pos));
 }
 
 
@@ -719,7 +752,7 @@ void qjackctlSocketForm::clientNameChanged (void)
 		break;
 	}
 
-	stabilizeForm();
+	changed();
 }
 
 

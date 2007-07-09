@@ -81,11 +81,11 @@ qjackctlStatusForm::qjackctlStatusForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-    // Create the list view items 'a priori'...
-    QString s = " ";
-    QString c = ":" + s;
-    QString n = "--";
-    QTreeWidgetItem *pViewItem;
+	// Create the list view items 'a priori'...
+	QString s = " ";
+	QString c = ":" + s;
+	QString n = "--";
+	QTreeWidgetItem *pViewItem;
 
 	// Status list view...
 	QHeaderView *pHeader = m_ui.StatsListView->header();
@@ -95,48 +95,48 @@ qjackctlStatusForm::qjackctlStatusForm (
 	pHeader->setMovable(false);
 	pHeader->setStretchLastSection(true);
 
-    m_apStatus[STATUS_SERVER_STATE] = new QTreeWidgetItem(m_ui.StatsListView,
+	m_apStatus[STATUS_SERVER_STATE] = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Server state") + c << n);
-    m_apStatus[STATUS_DSP_LOAD]     = new QTreeWidgetItem(m_ui.StatsListView,
+	m_apStatus[STATUS_DSP_LOAD]     = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("DSP Load") + c << n);
-    m_apStatus[STATUS_SAMPLE_RATE]  = new QTreeWidgetItem(m_ui.StatsListView,
+	m_apStatus[STATUS_SAMPLE_RATE]  = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Sample Rate") + c << n);
-    m_apStatus[STATUS_BUFFER_SIZE]  = new QTreeWidgetItem(m_ui.StatsListView,
+	m_apStatus[STATUS_BUFFER_SIZE]  = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Buffer Size") + c << n);
-    m_apStatus[STATUS_REALTIME]     = new QTreeWidgetItem(m_ui.StatsListView,
+	m_apStatus[STATUS_REALTIME]     = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Realtime Mode") + c << n);
 
-    pViewItem = new QTreeWidgetItem(m_ui.StatsListView,
+	pViewItem = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Transport state") + c << n);
-    m_apStatus[STATUS_TRANSPORT_STATE] = pViewItem;
-    m_apStatus[STATUS_TRANSPORT_TIME] = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_TRANSPORT_STATE] = pViewItem;
+	m_apStatus[STATUS_TRANSPORT_TIME] = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("Transport Timecode") + c << n);
-    m_apStatus[STATUS_TRANSPORT_BBT]  = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_TRANSPORT_BBT]  = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("Transport BBT") + c << n);
-    m_apStatus[STATUS_TRANSPORT_BPM]  = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_TRANSPORT_BPM]  = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("Transport BPM") + c << n);
 
-    pViewItem = new QTreeWidgetItem(m_ui.StatsListView,
+	pViewItem = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("XRUN count since last server startup") + c << n);
-    m_apStatus[STATUS_XRUN_COUNT] = pViewItem;
-    m_apStatus[STATUS_XRUN_TIME]  = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_XRUN_COUNT] = pViewItem;
+	m_apStatus[STATUS_XRUN_TIME]  = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("XRUN last time detected") + c << n);
-    m_apStatus[STATUS_XRUN_LAST]  = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_XRUN_LAST]  = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("XRUN last") + c << n);
-    m_apStatus[STATUS_XRUN_MAX]   = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_XRUN_MAX]   = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("XRUN maximum") + c << n);
-    m_apStatus[STATUS_XRUN_MIN]   = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_XRUN_MIN]   = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("XRUN minimum") + c << n);
-    m_apStatus[STATUS_XRUN_AVG]   = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_XRUN_AVG]   = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("XRUN average") + c << n);
-    m_apStatus[STATUS_XRUN_TOTAL] = new QTreeWidgetItem(pViewItem,
+	m_apStatus[STATUS_XRUN_TOTAL] = new QTreeWidgetItem(pViewItem,
 		QStringList() << s + tr("XRUN total") + c << n);
 
 #ifdef CONFIG_JACK_MAX_DELAY
-    m_apStatus[STATUS_MAX_DELAY]  = new QTreeWidgetItem(m_ui.StatsListView,
+	m_apStatus[STATUS_MAX_DELAY]  = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Maximum scheduling delay") + c << n);
 #endif
-    m_apStatus[STATUS_RESET_TIME] = new QTreeWidgetItem(m_ui.StatsListView,
+	m_apStatus[STATUS_RESET_TIME] = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Time of last reset") + c << n);
 
 	m_ui.StatsListView->resizeColumnToContents(0);	// Description.
@@ -163,20 +163,20 @@ qjackctlStatusForm::~qjackctlStatusForm (void)
 void qjackctlStatusForm::showEvent ( QShowEvent *pShowEvent )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-    if (pMainForm)
-        pMainForm->stabilizeForm();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
 
-    QWidget::showEvent(pShowEvent);
+	QWidget::showEvent(pShowEvent);
 }
 
 // Notify our parent that we're closing.
 void qjackctlStatusForm::hideEvent ( QHideEvent *pHideEvent )
 {
-    QWidget::hideEvent(pHideEvent);
+	QWidget::hideEvent(pHideEvent);
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-    if (pMainForm)
-        pMainForm->stabilizeForm();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
 }
 
 
@@ -184,16 +184,16 @@ void qjackctlStatusForm::hideEvent ( QHideEvent *pHideEvent )
 void qjackctlStatusForm::resetXrunStats (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-    if (pMainForm)
-        pMainForm->resetXrunStats();
+	if (pMainForm)
+		pMainForm->resetXrunStats();
 }
 
 // Ask our parent to refresh our status.
 void qjackctlStatusForm::refreshXrunStats (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-    if (pMainForm)
-        pMainForm->refreshXrunStats();
+	if (pMainForm)
+		pMainForm->refreshXrunStats();
 }
 
 
@@ -201,7 +201,7 @@ void qjackctlStatusForm::refreshXrunStats (void)
 void qjackctlStatusForm::updateStatusItem ( int iStatusItem,
 	const QString& sText )
 {
-    m_apStatus[iStatusItem]->setText(1, sText);
+	m_apStatus[iStatusItem]->setText(1, sText);
 }
 
 

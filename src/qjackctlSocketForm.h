@@ -65,6 +65,8 @@ public:
 
 public slots:
 
+	void changed();
+
 	void addPlug();
 	void editPlug();
 	void removePlug();
@@ -74,7 +76,7 @@ public slots:
 
 	void activateAddPlugMenu(QAction *);
 
-	void contextMenu(const QPoint&);
+	void customContextMenu(const QPoint&);
 
 	void socketTypeChanged();
 	void clientNameChanged();
@@ -100,8 +102,10 @@ private:
 	jack_client_t      *m_pJackClient;
 	snd_seq_t          *m_pAlsaSeq;
 	QPixmap           **m_ppPixmaps;
+	int                 m_iDirtyCount;
 
 	QButtonGroup       *m_pSocketTypeButtonGroup;
+
 };
 
 

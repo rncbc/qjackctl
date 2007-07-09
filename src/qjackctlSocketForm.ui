@@ -135,6 +135,9 @@
        </item>
        <item rowspan="5" row="4" column="1" >
         <widget class="QTreeWidget" name="PlugListView" >
+         <property name="contextMenuPolicy" >
+          <enum>Qt::CustomContextMenu</enum>
+         </property>
          <property name="toolTip" >
           <string>Socket plug list</string>
          </property>

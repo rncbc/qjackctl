@@ -222,4 +222,3 @@ private:
 
 
 // end of qjackctlSetup.h
-

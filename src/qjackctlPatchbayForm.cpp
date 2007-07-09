@@ -267,6 +267,10 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 			tr("%1 [modified]").arg(m_sPatchbayName));
 	}
 
+	// Take care that IT might be destroyed already...
+	if (m_ui.PatchbayView->binding() == NULL)
+		return;
+
 	qjackctlSocketList *pSocketList;
 	qjackctlSocketItem *pSocketItem;
 
