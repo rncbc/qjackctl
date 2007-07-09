@@ -5,7 +5,10 @@ ChangeLog
 
 0.3.0   2007-07-10  Qt4 migration was complete.
 
-- Qt4 migration was complete.
+- Qt4 migration was complete. Care must be taken with this new
+  configuration file and location: this release starts a new one
+  from scratch and won't reuse any of the previous existing ones,
+  although cut and paste might help if you know what you're doing :)
 
 
 0.2.23   2007-07-02  JACK MIDI support debut.
