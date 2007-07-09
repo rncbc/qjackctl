@@ -214,8 +214,8 @@ qjackctlMainForm::qjackctlMainForm (
 		SIGNAL(clicked()),
 		SLOT(transportBackward()));
 	QObject::connect(m_ui.PlayToolButton,
-		SIGNAL(clicked()),
-		SLOT(transportStart()));
+		SIGNAL(toggled(bool)),
+		SLOT(transportPlay(bool)));
 	QObject::connect(m_ui.PauseToolButton,
 		SIGNAL(clicked()),
 		SLOT(transportStop()));
@@ -557,7 +557,8 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
 	stabilize(QJACKCTL_TIMER_MSECS);
 
 	// Execute and set exit status message...
-	sTemp = sStopMessage + formatExitStatus(QProcess::execute(sTemp));
+	sTemp = sStopMessage + formatExitStatus(
+		::system(sTemp.toUtf8().constData()));
 
 	// Wait a litle bit before continue...
 	stabilize(QJACKCTL_TIMER_MSECS);
@@ -826,9 +827,7 @@ void qjackctlMainForm::startJack (void)
 	}
 
 	// Show startup results...
-	appendMessages(tr("JACK was started with PID=%1 (0x%2).")
-		.arg((long) m_pJack->pid())
-		.arg(QString::number((long) m_pJack->pid(), 16)));
+	appendMessages(tr("JACK was started."));
 
 	// Sloppy boy fix: may the serve be stopped, just in case
 	// the client will nerver make it...
@@ -964,7 +963,8 @@ void qjackctlMainForm::processJackExit (void)
 	if (m_pJack) {
 		// Force final server shutdown...
 		if (!m_bJackShutdown && !m_bJackSurvive) {
-			appendMessages(tr("JACK was stopped") + formatExitStatus(m_pJack->exitStatus()));
+			appendMessages(tr("JACK was stopped")
+				+ formatExitStatus(m_pJack->exitCode()));
 			if (!m_pJack->exitStatus() != QProcess::NormalExit)
 				m_pJack->kill();
 		}
@@ -993,6 +993,7 @@ void qjackctlMainForm::processJackExit (void)
 	m_ui.PlayToolButton->setEnabled(false);
 	m_ui.PauseToolButton->setEnabled(false);
 	m_ui.ForwardToolButton->setEnabled(false);
+	m_ui.PlayToolButton->setChecked(false);
 	int iServerState;
 	if (m_bJackDetach)
 		iServerState = (m_pJackClient ? QJACKCTL_ACTIVE : QJACKCTL_INACTIVE);
@@ -2320,6 +2321,15 @@ void qjackctlMainForm::transportBackward (void)
 #endif
 }
 
+// Transport toggle (start/stop)
+void qjackctlMainForm::transportPlay ( bool bOn )
+{
+	if (bOn)
+		transportStart();
+	else
+		transportStop();
+}
+
 // Transport start (play)
 void qjackctlMainForm::transportStart (void)
 {
@@ -2444,9 +2454,10 @@ void qjackctlMainForm::refreshStatus (void)
 			updateStatusItem(STATUS_TRANSPORT_STATE, sText);
 			m_ui.RewindToolButton->setEnabled(tpos.frame > 0);
 			m_ui.BackwardToolButton->setEnabled(tpos.frame > 0);
-			m_ui.PlayToolButton->setEnabled(tstate == JackTransportStopped);
+			m_ui.PlayToolButton->setEnabled(true);
 			m_ui.PauseToolButton->setEnabled(bPlaying);
 			m_ui.ForwardToolButton->setEnabled(true);
+			m_ui.PlayToolButton->setChecked(bPlaying);
 			if (!m_ui.BackwardToolButton->isDown() &&
 				!m_ui.ForwardToolButton->isDown())
 				m_fSkipAccel = 1.0;
@@ -2457,6 +2468,7 @@ void qjackctlMainForm::refreshStatus (void)
 			m_ui.PlayToolButton->setEnabled(false);
 			m_ui.PauseToolButton->setEnabled(false);
 			m_ui.ForwardToolButton->setEnabled(false);
+			m_ui.PlayToolButton->setChecked(false);
 			updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
@@ -2495,6 +2507,7 @@ void qjackctlMainForm::refreshStatus (void)
 		m_ui.PlayToolButton->setEnabled(false);
 		m_ui.PauseToolButton->setEnabled(false);
 		m_ui.ForwardToolButton->setEnabled(false);
+		m_ui.PlayToolButton->setChecked(false);
 	}
 
 	// Elapsed times should be rigorous...
@@ -2745,7 +2758,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 //	pAction->setEnabled(m_ui.BackwardToolButton->isEnabled());
 	pAction = pTransportMenu->addAction(QIcon(":/icons/play1.png"),
 		tr("&Play"), this, SLOT(transportStart()));
-	pAction->setEnabled(m_ui.PlayToolButton->isEnabled());
+	pAction->setEnabled(!m_ui.PlayToolButton->isChecked());
 	pAction = pTransportMenu->addAction(QIcon(":/icons/pause1.png"),
 		tr("Pa&use"), this, SLOT(transportStop()));
 	pAction->setEnabled(m_ui.PauseToolButton->isEnabled());

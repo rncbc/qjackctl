@@ -108,6 +108,7 @@ public slots:
 
 	void transportRewind();
 	void transportBackward();
+	void transportPlay(bool);
 	void transportStart();
 	void transportStop();
 	void transportForward();
