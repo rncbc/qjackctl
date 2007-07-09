@@ -56,12 +56,11 @@ CONFIG  += qt thread warn_on release
 LANGUAGE = C++
 
 win32 {
-	CONFIG  += console
 	INCPATH += C:\usr\local\include
 	LIBS    += -LC:\usr\local\lib
 }
 
-LIBS += -ljack
+LIBS += -ljackmp
 
 # XML/DOM support
 QT += xml

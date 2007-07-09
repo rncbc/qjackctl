@@ -557,7 +557,7 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
 	stabilize(QJACKCTL_TIMER_MSECS);
 
 	// Execute and set exit status message...
-	sTemp = sStopMessage + formatExitStatus(::system(sTemp.toUtf8().constData()));
+	sTemp = sStopMessage + formatExitStatus(QProcess::execute(sTemp));
 
 	// Wait a litle bit before continue...
 	stabilize(QJACKCTL_TIMER_MSECS);
@@ -1583,7 +1583,7 @@ void qjackctlMainForm::refreshXrunStats (void)
 
 // Jack port registration callback funtion, called
 // whenever a jack port is registered or unregistered.
-static void qjackctl_portRegistrationCallback ( jack_port_id_t, int, void * )
+static void qjackctl_port_registration_callback ( jack_port_id_t, int, void * )
 {
 	QApplication::postEvent(
 		qjackctlMainForm::getInstance(),
@@ -1593,7 +1593,7 @@ static void qjackctl_portRegistrationCallback ( jack_port_id_t, int, void * )
 
 // Jack graph order callback function, called
 // whenever the processing graph is reordered.
-static int qjackctl_graphOrderCallback ( void * )
+static int qjackctl_graph_order_callback ( void * )
 {
 	QApplication::postEvent(
 		qjackctlMainForm::getInstance(),
@@ -1605,7 +1605,7 @@ static int qjackctl_graphOrderCallback ( void * )
 
 // Jack XRUN callback function, called
 // whenever there is a xrun.
-static int qjackctl_xrunCallback ( void * )
+static int qjackctl_xrun_callback ( void * )
 {
 	QApplication::postEvent(
 		qjackctlMainForm::getInstance(),
@@ -1616,7 +1616,7 @@ static int qjackctl_xrunCallback ( void * )
 
 // Jack buffer size function, called
 // whenever the server changes buffer size.
-static int qjackctl_bufferSizeCallback ( jack_nframes_t nframes, void * )
+static int qjackctl_buffer_size_callback ( jack_nframes_t nframes, void * )
 {
 	// Update our global static variable.
 	g_nframes = nframes;
@@ -1631,7 +1631,7 @@ static int qjackctl_bufferSizeCallback ( jack_nframes_t nframes, void * )
 
 // Jack shutdown function, called
 // whenever the server terminates this client.
-static void qjackctl_shutdown ( void * )
+static void qjackctl_on_shutdown ( void * )
 {
 	QApplication::postEvent(
 		qjackctlMainForm::getInstance(),
@@ -1671,16 +1671,18 @@ void qjackctlMainForm::xrunNotifyEvent (void)
 #endif
 
 	// Just log this single event...
-	appendMessagesColor(tr("XRUN callback (%1).").arg(m_iXrunCallbacks), "#cc66cc");
+	appendMessagesColor(tr("XRUN callback (%1).")
+		.arg(m_iXrunCallbacks), "#cc66cc");
 }
 
 
 // Jack buffer size notifier callback funtion.
 void qjackctlMainForm::buffNotifyEvent (void)
 {
-	// Don't need to nothing, it was handled on qjackctl_bufferSizeCallback;
+	// Don't need to nothing, it was handled on qjackctl_buffer_size_callback;
 	// just log this event as routine.
-	appendMessagesColor(tr("Buffer size change (%1).").arg((int) g_nframes), "#996633");
+	appendMessagesColor(tr("Buffer size change (%1).")
+		.arg((int) g_nframes), "#996633");
 }
 
 
@@ -1739,7 +1741,8 @@ void qjackctlMainForm::timerSlot (void)
 		if (m_iJackDirty > 0) {
 			m_iJackDirty = 0;
 			if (m_pSetup->bActivePatchbay) {
-				appendMessagesColor(tr("Audio active patchbay scan") + sEllipsis, "#6699cc");
+				appendMessagesColor(
+					tr("Audio active patchbay scan") + sEllipsis, "#6699cc");
 				m_patchbayRack.connectAudioScan(m_pJackClient);
 			}
 			refreshJackConnections();
@@ -1748,7 +1751,8 @@ void qjackctlMainForm::timerSlot (void)
 		if (m_iAlsaDirty > 0) {
 			m_iAlsaDirty = 0;
 			if (m_pSetup->bActivePatchbay) {
-				appendMessagesColor(tr("MIDI active patchbay scan") + sEllipsis, "#99cc66");
+				appendMessagesColor(
+					tr("MIDI active patchbay scan") + sEllipsis, "#99cc66");
 				m_patchbayRack.connectMidiScan(m_pAlsaSeq);
 			}
 			refreshAlsaConnections();
@@ -1806,7 +1810,9 @@ void qjackctlMainForm::alsaConnectChanged (void)
 
 
 // Cable connection notification slot.
-void qjackctlMainForm::cableConnectSlot ( const QString& sOutputPort, const QString& sInputPort, unsigned int ulCableFlags )
+void qjackctlMainForm::cableConnectSlot (
+	const QString& sOutputPort, const QString& sInputPort,
+	unsigned int ulCableFlags )
 {
 	QString sText = QFileInfo(m_pSetup->sActivePatchbayPath).baseName() + ": ";
 	QString sColor;
@@ -1836,7 +1842,7 @@ void qjackctlMainForm::cableConnectSlot ( const QString& sOutputPort, const QStr
 		break;
 	}
 
-	appendMessagesColor(sText + ".", sColor);
+	appendMessagesColor(sText + '.', sColor);
 }
 
 
@@ -1867,23 +1873,52 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	}
 
 	// Create the jack client handle, using a distinct identifier (PID?)
-	QString sClientName = "qjackctl-" + QString::number((int) ::getpid());
-	m_pJackClient = jack_client_new(sClientName.toUtf8().constData());
+	jack_status_t status = JackFailure;
+	m_pJackClient = jack_client_open("qjackctl", JackNoStartServer, &status);
 	if (m_pJackClient == NULL) {
 		if (!bDetach) {
+			QStringList errs;
+			if (status & JackFailure)
+				errs << tr("Overall operation failed.");
+			if (status & JackInvalidOption)
+				errs << tr("Invalid or unsupported option.");
+			if (status & JackNameNotUnique)
+				errs << tr("Client name not unique.");
+			if (status & JackServerStarted)
+				errs << tr("Server is started.");
+			if (status & JackServerFailed)
+				errs << tr("Unable to connect to server.");
+			if (status & JackServerError)
+				errs << tr("Server communication error.");
+			if (status & JackNoSuchClient)
+				errs << tr("Client does not exist.");
+			if (status & JackLoadFailure)
+				errs << tr("Unable to load internal client.");
+			if (status & JackInitFailure)
+				errs << tr("Unable to initialize client.");
+			if (status & JackShmFailure)
+				errs << tr("Unable to access shared memory.");
+			if (status & JackVersionError)
+				errs << tr("Client protocol version mismatch.");
 			appendMessagesError(
-				tr("Could not connect to JACK server as client.\n\n"
-				"Please check the messages window for more info."));
+				tr("Could not connect to JACK server as client.\n"
+				"- %1\nPlease check the messages window for more info.")
+				.arg(errs.join("\n- ")));
 		}
 		return false;
 	}
 
 	// Set notification callbacks.
-	jack_set_graph_order_callback(m_pJackClient, qjackctl_graphOrderCallback, this);
-	jack_set_port_registration_callback(m_pJackClient, qjackctl_portRegistrationCallback, this);
-	jack_set_xrun_callback(m_pJackClient, qjackctl_xrunCallback, this);
-	jack_set_buffer_size_callback(m_pJackClient, qjackctl_bufferSizeCallback, this);
-	jack_on_shutdown(m_pJackClient, qjackctl_shutdown, this);
+	jack_set_graph_order_callback(m_pJackClient,
+		qjackctl_graph_order_callback, this);
+	jack_set_port_registration_callback(m_pJackClient,
+		qjackctl_port_registration_callback, this);
+	jack_set_xrun_callback(m_pJackClient,
+		qjackctl_xrun_callback, this);
+	jack_set_buffer_size_callback(m_pJackClient,
+		qjackctl_buffer_size_callback, this);
+	jack_on_shutdown(m_pJackClient,
+		qjackctl_on_shutdown, this);
 
 	// First knowledge about buffer size.
 	g_nframes = jack_get_buffer_size(m_pJackClient);
@@ -1903,7 +1938,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 				sJackCmdLine = sJackCmdLine.insert(iPos, " -T");
 		}
 		QString sFilename = ::getenv("HOME");
-		sFilename += "/" + m_pSetup->sServerConfigName;
+		sFilename += '/' + m_pSetup->sServerConfigName;
 		QFile file(sFilename);
 		if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
 			QTextStream(&file) << sJackCmdLine << endl;
@@ -2613,10 +2648,13 @@ void qjackctlMainForm::updateSystemTray (void)
 	}
 	if (m_pSetup->bSystemTray && m_pSystemTray == NULL) {
 		m_pSystemTray = new qjackctlSystemTray(this);
+		QObject::connect(m_pSystemTray,
+			SIGNAL(clicked()),
+			SLOT(toggleMainForm()));
+		QObject::connect(m_pSystemTray,
+			SIGNAL(contextMenuRequested(const QPoint &)),
+			SLOT(systemTrayContextMenu(const QPoint &)));
 		m_pSystemTray->show();
-		QObject::connect(m_pSystemTray, SIGNAL(clicked()), this, SLOT(toggleMainForm()));
-		QObject::connect(m_pSystemTray, SIGNAL(contextMenuRequested(const QPoint &)),
-			this, SLOT(systemTrayContextMenu(const QPoint &)));
 	} else {
 		// Make sure the main widget is visible.
 		show();

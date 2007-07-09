@@ -23,6 +23,8 @@
 #include "qjackctlSetup.h"
 #include "qjackctlMainForm.h"
 
+#include <QProcess>
+
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>
@@ -47,11 +49,6 @@ int main ( int argc, char **argv )
 		app.installTranslator(&translator);
 	}
 
-#ifndef CONFIG_NO_START_SERVER
-    // Better set our environment for no JACK automagic now.
-    setenv("JACK_NO_START_SERVER", "1", 1);
-#endif
-
     // Construct default settings; override with command line arguments.
     qjackctlSetup settings;
     if (!settings.parse_args(app.argc(), app.argv())) {
@@ -61,10 +58,11 @@ int main ( int argc, char **argv )
 
     // Check if we'll just start an external program...
     if (!settings.sCmdLine.isEmpty()) {
-        jack_client_t *pJackClient = jack_client_new("qjackctl-start");
+        jack_client_t *pJackClient
+			= jack_client_open("qjackctl-start", JackNoStartServer, NULL);
         if (pJackClient) {
             jack_client_close(pJackClient);
-            int iExitStatus = ::system(settings.sCmdLine.toUtf8().constData());
+            int iExitStatus = QProcess::execute(settings.sCmdLine);
             app.quit();
             return iExitStatus;
         }
