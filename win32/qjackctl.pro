@@ -46,7 +46,7 @@ FORMS    = ../src/qjackctlAboutForm.ui \
            ../src/qjackctlPatchbayForm.ui \
            ../src/qjackctlSetupForm.ui \
            ../src/qjackctlSocketForm.ui \
-           ../rc/qjackctlStatusForm.ui
+           ../src/qjackctlStatusForm.ui
 
 RESOURCES += ../icons/qjackctl.qrc
 

@@ -552,7 +552,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.SystemTrayCheckBox->setEnabled(false);
 #endif
 #ifndef CONFIG_JACK_MIDI
-	m_ui.MidiDriverComboBox->setCurrentItem(0);
+	m_ui.MidiDriverComboBox->setCurrentIndex(0);
 	m_ui.MidiDriverTextLabel->setEnabled(false);
 	m_ui.MidiDriverComboBox->setEnabled(false);
 #endif

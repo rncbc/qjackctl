@@ -740,7 +740,7 @@ void qjackctlMainForm::startJack (void)
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
 			args.append("-o" + QString::number(m_preset.iOutChannels));
 #ifdef CONFIG_JACK_MIDI
-		if (!m_preset.sMidiDriver.isEmpty())
+		if (!m_preset.sMidiDriver.isEmpty() && m_preset.sMidiDriver != "none")
 			args.append("-X" + m_preset.sMidiDriver);
 #endif
 	}

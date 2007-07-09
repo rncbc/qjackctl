@@ -125,10 +125,11 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SLOT(alsaRefresh()));
 
 #ifndef CONFIG_JACK_MIDI
-	m_ui.ConnectionsTabWidget->setTabEnabled(m_ui.MidiConnectTab, false);
+	m_ui.ConnectionsTabWidget->setTabEnabled(1, false);
 #endif
 #ifndef CONFIG_ALSA_SEQ
-	m_ui.ConnectionsTabWidget->setTabEnabled(m_ui.AlsaConnectTab, false);
+//	m_ui.ConnectionsTabWidget->setTabEnabled(2, false);
+	m_ui.ConnectionsTabWidget->removeTab(2);
 #endif
 }
 
