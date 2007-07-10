@@ -45,6 +45,23 @@ AC_ARG_ENABLE(alsa_seq,
   [ac_alsa_seq="$enableval"],
   [ac_alsa_seq="yes"])
 
+# Standard installation base dirs.
+ac_with_paths="/usr /usr/local"
+
+# Some a-la-debian alternatives...
+for X in /usr/lib /usr/share; do
+  for Y in qt qt4; do
+    if test -d $X/$Y/bin; then
+      ac_with_paths="$ac_with_paths $X/$Y"
+    fi
+  done
+done
+
+# Set for alternate Qt installation dir.
+AC_ARG_WITH(qt,
+  AC_HELP_STRING([--with-qt=PATH], [use alternate Qt install path]),
+  [ac_with_paths="$ac_with_paths $withval"])
+
 # Set for alternate JACK installation dir.
 AC_ARG_WITH(jack,
   AC_HELP_STRING([--with-jack=PATH], [use alternate JACK install path]),
@@ -54,7 +71,6 @@ AC_ARG_WITH(jack,
 AC_ARG_WITH(alsa,
   AC_HELP_STRING([--with-alsa=PATH], [use alternate ALSA install path]),
   [ac_with_paths="$ac_with_paths $withval"])
-
 
 # Checks for programs.
 AC_PROG_CC
