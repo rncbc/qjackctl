@@ -12,8 +12,8 @@ ChangeLog
 
 - On a last-minute addition, the "firewire" audio backend driver
   option has been also included, supporting the ffado.org project
-  which evolves where "freebob" leaves (thanks to Klaus Zimmermann
-  for this one).
+  which is evolving where "freebob" is leaving (thanks to Klaus
+  Zimmermann for this one).</li>
  
 
 0.2.23   2007-07-02  JACK MIDI support debut.
