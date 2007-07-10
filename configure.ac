@@ -74,7 +74,7 @@ for X in $ac_with_paths; do
     ac_path="$X/bin:$ac_path"
   fi
   if test -d $X/include; then
-    for Y in qt qt3; do
+    for Y in qt qt4; do
       if test -d $X/include/$Y; then
         CFLAGS="-I$X/include/$Y $CFLAGS"
         CPPFLAGS="-I$X/include/$Y $CPPFLAGS"
