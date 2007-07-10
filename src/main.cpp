@@ -67,7 +67,8 @@ int main ( int argc, char **argv )
 	}
 
 	// What style do we create these forms?
-	Qt::WindowFlags wflags = Qt::CustomizeWindowHint
+	Qt::WindowFlags wflags = Qt::Window
+		| Qt::CustomizeWindowHint
 		| Qt::WindowTitleHint
 		| Qt::WindowSystemMenuHint
 		| Qt::WindowMinMaxButtonsHint;
