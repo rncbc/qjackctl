@@ -1864,6 +1864,7 @@ void qjackctlPatchbay::loadRackSockets ( qjackctlSocketList *pSocketList,
 		if (pSocketItem) {
 			pSocketItem->setExclusive(pSocket->isExclusive());
 			pSocketItem->setForward(pSocket->forward());
+			pSocketItem->updatePixmap();
 			qjackctlPlugItem *pPlugItem = NULL;
 			QStringListIterator iter(pSocket->pluglist());
 			while (iter.hasNext()) {

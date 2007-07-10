@@ -186,9 +186,6 @@ public:
 
 private:
 
-	// A recursive QSettings key entry remover.
-	void deleteKey(const QString& sKey);
-
 	// Our proper settings profile.
 	QSettings m_settings;
 };

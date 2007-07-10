@@ -510,7 +510,7 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 		tr("Move Down"), this, SLOT(moveDownPlug()));
 	pAction->setEnabled(bEnabled && iItem < iItemCount - 1);
 
-	menu.exec(m_ui.PlugListView->mapToGlobal(pos));
+	menu.exec((m_ui.PlugListView->viewport())->mapToGlobal(pos));
 }
 
 

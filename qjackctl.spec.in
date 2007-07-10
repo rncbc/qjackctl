@@ -54,7 +54,7 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
-* Mon Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Tue Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Qt4 migration was complete.
 * Mon Jun 25 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Application icon is now installed to (prefix)/share/pixmaps.

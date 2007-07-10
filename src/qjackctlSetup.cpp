@@ -239,7 +239,7 @@ bool qjackctlSetup::saveAliases ( const QString& sPreset )
 
 	// Save preset aliases...
 	const QString sAliasesKey = "/Aliases" + sSuffix;
-	deleteKey(sAliasesKey);
+	m_settings.remove(sAliasesKey);
 	m_settings.beginGroup(sAliasesKey);
 	m_settings.beginGroup("/Jack");	// FIXME: Audio
 	aliasAudioOutputs.saveSettings(m_settings, "/Outputs");
@@ -367,41 +367,10 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
 		if (iPreset < 0)
 			return false;
 		presets.removeAt(iPreset);
-		deleteKey("/Settings" + sSuffix);
-		deleteKey("/Aliases" + sSuffix);
+		m_settings.remove("/Settings" + sSuffix);
+		m_settings.remove("/Aliases" + sSuffix);
 	}
 	return true;
-}
-
-
-//---------------------------------------------------------------------------
-// A recursive QSettings key entry remover.
-
-void qjackctlSetup::deleteKey ( const QString& sKey )
-{
-#ifdef QJACKCTL_QT3
-	// First, delete all stand-alone entries...
-	QStringList entries = m_settings.entryList(sKey);
-	QStringList::Iterator entry = entries.begin();
-	while (entry != entries.end()) {
-		const QString& sEntry = *entry;
-		if (!sEntry.isEmpty())
-			m_settings.remove(sKey + '/' + sEntry);
-		++entry;
-	}
-
-	// Then, we'll recurse under sub-keys...
-	QStringList subkeys = m_settings.subkeyList(sKey);
-	QStringList::Iterator subkey = subkeys.begin();
-	while (subkey != subkeys.end()) {
-		const QString& sSubKey = *subkey;
-		if (!sSubKey.isEmpty())
-			deleteKey(sKey + '/' + sSubKey);
-		++subkey;
-	}
-#endif
-	// Finally we remove our-selves.
-	m_settings.remove(sKey);
 }
 
 
