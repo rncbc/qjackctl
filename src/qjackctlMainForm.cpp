@@ -44,6 +44,7 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QFileInfo>
+#include <QDir>
 
 #include <QContextMenuEvent>
 #include <QCustomEvent>
@@ -660,13 +661,23 @@ void qjackctlMainForm::startJack (void)
 	// this enforces the server command to be an
 	// executable absolute path whenever possible.
 	QString sCommand = args[0];
-	if (!sCommand.contains('/')) {
-		QStringListIterator iter(QString(::getenv("PATH")).split(':'));
+	QFileInfo fi(sCommand);
+	if (fi.isRelative()) {
+#if defined(WIN32)
+		const char chPathSep = ';';
+		if (fi.suffix().isEmpty())
+			sCommand += ".exe";
+#else
+		const char chPathSep = ':';
+#endif
+		QStringListIterator iter(QString(::getenv("PATH")).split(chPathSep));
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
-			QFileInfo fi(sDirectory + '/' + sCommand);
-			if (fi.isExecutable())
+			fi.setFile(QDir(sDirectory), sCommand);
+			if (fi.isExecutable()) {
 				sCommand = fi.filePath();
+				break;
+			}
 		}
 	}
 	// Now that we got a command, remove it from args list...
@@ -820,6 +831,12 @@ void qjackctlMainForm::startJack (void)
 	appendMessages(tr("JACK is starting..."));
 	m_sJackCmdLine = sCommand + ' ' + args.join(" ").trimmed();
 	appendMessagesColor(m_sJackCmdLine, "#990099");
+
+#if defined(WIN32)
+	const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath(); 
+	m_pJack->setWorkingDirectory(sCurrentDir);
+	QDir::setCurrent(sCurrentDir);
+#endif
 
 	// Go jack, go...
 	if (!m_pJack->startDetached(sCommand, args)) {

@@ -3,6 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Now that Qt4 is accessible to open-source Windows appplications,
+  there's some experimental stuff sneaking in for jackdmp support
+  on win32 (http://www.grame.fr/~letz/jackdmp.html). 
+
+
 0.3.0   2007-07-10  Qt4 migration was complete.
 
 - Qt4 migration was complete. Care must be taken with this new

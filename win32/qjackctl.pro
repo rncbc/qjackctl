@@ -56,6 +56,7 @@ CONFIG  += qt thread warn_on release
 LANGUAGE = C++
 
 win32 {
+	CONFIG  += console
 	INCPATH += C:\usr\local\include
 	LIBS    += -LC:\usr\local\lib
 }
