@@ -620,16 +620,17 @@ qjackctlClientListView::qjackctlClientListView (
 	QTreeWidget::setMinimumWidth(120);
 	QTreeWidget::setColumnCount(1);
 
-	// Trap for help/tool-tips events.
-	QTreeWidget::viewport()->installEventFilter(this);
-
 	QString sText;
 	if (bReadable)
 		sText = tr("Readable Clients / Output Ports");
 	else
 		sText = tr("Writable Clients / Input Ports");
 	QTreeWidget::headerItem()->setText(0, sText);
+	QTreeWidget::sortItems(0, Qt::AscendingOrder);
 	QTreeWidget::setToolTip(sText);
+
+	// Trap for help/tool-tips events.
+	QTreeWidget::viewport()->installEventFilter(this);
 
 	QObject::connect(QTreeWidget::itemDelegate(),
 		SIGNAL(commitData(QWidget*)),
