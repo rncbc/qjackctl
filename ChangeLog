@@ -10,7 +10,7 @@ CVS HEAD
   on win32 (http://www.grame.fr/~letz/jackdmp.html). 
 
 - Connections list items were initially sorted in descending order
-  by default. Fixed.
+  by default. Fixed. Client items are now naturally sorted, again.
 
 
 0.3.0   2007-07-10  Qt4 migration was complete.

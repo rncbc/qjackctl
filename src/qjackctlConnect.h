@@ -149,6 +149,10 @@ public:
 	void setOpen(bool bOpen);
 	bool isOpen() const;
 
+	// Proxy sort override method.
+	// - Natural decimal sorting comparator.
+	bool operator< (const QTreeWidgetItem& other) const;
+
 private:
 
 	// Instance variables.
@@ -201,6 +205,9 @@ public:
 
 	// Client:port hilite update stabilization.
 	void hiliteClientPorts (void);
+
+	// Natural decimal sorting comparator.
+	static bool lessThan(const QTreeWidgetItem& i1, const QTreeWidgetItem& i2);
 
 private:
 

@@ -212,54 +212,7 @@ void qjackctlPortItem::setHilite ( bool bHilite )
 // - Natural decimal sorting comparator.
 bool qjackctlPortItem::operator< ( const QTreeWidgetItem& other ) const
 {
-	const QString& s1 = text(0);
-	const QString& s2 = other.text(0);
-
-	int ich1, ich2;
-
-	int cch1 = s1.length();
-	int cch2 = s2.length();
-
-	for (ich1 = ich2 = 0; ich1 < cch1 && ich2 < cch2; ich1++, ich2++) {
-
-		// Skip (white)spaces...
-		while (s1.at(ich1).isSpace())
-			ich1++;
-		while (s2.at(ich2).isSpace())
-			ich2++;
-
-		// Normalize (to uppercase) the next characters...
-		QChar ch1 = s1.at(ich1).toUpper();
-		QChar ch2 = s2.at(ich2).toUpper();
-
-		if (ch1.isDigit() && ch2.isDigit()) {
-			// Find the whole length numbers...
-			int iDigits1 = ich1++;
-			while (ich1 < cch1 && s1.at(ich1).isDigit())
-				ich1++;
-			int iDigits2 = ich2++;
-			while (ich2 < cch2 && s2.at(ich2).isDigit())
-				ich2++;
-			// Compare as natural decimal-numbers...
-			int n1 = s1.mid(iDigits1, ich1 - iDigits1).toInt();
-			int n2 = s2.mid(iDigits2, ich2 - iDigits2).toInt();
-			if (n1 != n2)
-				return (n1 < n2);
-			// Never go out of bounds...
-			if (ich1 >= cch1 || ich1 >= cch2)
-				break;
-			// Go on with this next char...
-			ch1 = s1.at(ich1).toUpper();
-			ch2 = s2.at(ich2).toUpper();
-		}
-
-		// Compare this char...
-		if (ch1 != ch2)
-			return (ch1 < ch2);
-	}
-
-	// Probable exact match.
-	return false;
+	return qjackctlClientList::lessThan(*this, other);
 }
 
 
@@ -430,6 +383,14 @@ bool qjackctlClientItem::isOpen (void) const
 }
 
 
+// Proxy sort override method.
+// - Natural decimal sorting comparator.
+bool qjackctlClientItem::operator< ( const QTreeWidgetItem& other ) const
+{
+	return qjackctlClientList::lessThan(*this, other);
+}
+
+
 //----------------------------------------------------------------------
 // qjackctlClientList -- Client list.
 //
@@ -576,6 +537,61 @@ void qjackctlClientList::hiliteClientPorts (void)
 
 	// Do remember this one, ever.
 	m_pHiliteItem = pItem;
+}
+
+
+// Natural decimal sorting comparator.
+bool qjackctlClientList::lessThan (
+	const QTreeWidgetItem& i1, const QTreeWidgetItem& i2 )
+{
+	const QString& s1 = i1.text(0);
+	const QString& s2 = i2.text(0);
+
+	int ich1, ich2;
+
+	int cch1 = s1.length();
+	int cch2 = s2.length();
+
+	for (ich1 = ich2 = 0; ich1 < cch1 && ich2 < cch2; ich1++, ich2++) {
+
+		// Skip (white)spaces...
+		while (s1.at(ich1).isSpace())
+			ich1++;
+		while (s2.at(ich2).isSpace())
+			ich2++;
+
+		// Normalize (to uppercase) the next characters...
+		QChar ch1 = s1.at(ich1).toUpper();
+		QChar ch2 = s2.at(ich2).toUpper();
+
+		if (ch1.isDigit() && ch2.isDigit()) {
+			// Find the whole length numbers...
+			int iDigits1 = ich1++;
+			while (ich1 < cch1 && s1.at(ich1).isDigit())
+				ich1++;
+			int iDigits2 = ich2++;
+			while (ich2 < cch2 && s2.at(ich2).isDigit())
+				ich2++;
+			// Compare as natural decimal-numbers...
+			int n1 = s1.mid(iDigits1, ich1 - iDigits1).toInt();
+			int n2 = s2.mid(iDigits2, ich2 - iDigits2).toInt();
+			if (n1 != n2)
+				return (n1 < n2);
+			// Never go out of bounds...
+			if (ich1 >= cch1 || ich1 >= cch2)
+				break;
+			// Go on with this next char...
+			ch1 = s1.at(ich1).toUpper();
+			ch2 = s2.at(ich2).toUpper();
+		}
+
+		// Compare this char...
+		if (ch1 != ch2)
+			return (ch1 < ch2);
+	}
+
+	// Probable exact match.
+	return false;
 }
 
 
