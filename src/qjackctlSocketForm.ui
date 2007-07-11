@@ -163,7 +163,7 @@
        <item row="4" column="2" >
         <widget class="QPushButton" name="PlugEditPushButton" >
          <property name="toolTip" >
-          <string>Edit currently selected plug/port</string>
+          <string>Edit currently selected plug</string>
          </property>
          <property name="text" >
           <string>&amp;Edit</string>
@@ -211,7 +211,7 @@
        <item row="8" column="2" >
         <widget class="QPushButton" name="PlugDownPushButton" >
          <property name="toolTip" >
-          <string>Move down currently selected plug socket plugst</string>
+          <string>Move down currently selected plug in socket plug list</string>
          </property>
          <property name="text" >
           <string>&amp;Down</string>
@@ -227,7 +227,7 @@
        <item row="7" column="2" >
         <widget class="QPushButton" name="PlugUpPushButton" >
          <property name="toolTip" >
-          <string>Move up current selected plug socket plugst</string>
+          <string>Move up current selected plug in socket plug list</string>
          </property>
          <property name="text" >
           <string>&amp;Up</string>
