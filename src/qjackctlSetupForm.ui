@@ -223,12 +223,17 @@
             </property>
             <item>
              <property name="text" >
-              <string>jackstart</string>
+              <string>jackd</string>
              </property>
             </item>
             <item>
              <property name="text" >
-              <string>jackd</string>
+              <string>jackdmp</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>jackstart</string>
              </property>
             </item>
             <item>

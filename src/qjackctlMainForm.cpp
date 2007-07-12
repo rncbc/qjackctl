@@ -428,7 +428,7 @@ bool qjackctlMainForm::queryClose (void)
 #endif
 
 	// Check if JACK daemon is currently running...
-	if (bQueryClose && m_pJack
+	if (bQueryClose && m_pJack  && m_pJack->state() == QProcess::Running
 		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
 		switch (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
@@ -836,10 +836,12 @@ void qjackctlMainForm::startJack (void)
 	const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath(); 
 	m_pJack->setWorkingDirectory(sCurrentDir);
 	QDir::setCurrent(sCurrentDir);
-#endif
-
+	m_pJack->start(sCommand, args);
+	if (!m_pJack->waitForStarted( 1 + (m_preset.iStartDelay * 1000))) {
+#else
 	// Go jack, go...
 	if (!m_pJack->startDetached(sCommand, args)) {
+#endif
 		appendMessagesError(tr("Could not start JACK.\n\nSorry."));
 		processJackExit();
 		return;
@@ -897,7 +899,8 @@ void qjackctlMainForm::stopJackServer (void)
 	stopJackClient();
 
 	// And try to stop server.
-	if (m_pJack && m_bJackShutdown && !m_bJackSurvive) {
+	if (m_pJack && m_pJack->state() == QProcess::Running
+		&& !m_bJackSurvive) {
 		appendMessages(tr("JACK is stopping..."));
 		updateServerState(QJACKCTL_STOPPING);
 		// Do we have any pre-shutdown script?...
@@ -911,6 +914,9 @@ void qjackctlMainForm::stopJackServer (void)
 		if (!m_bJackShutdown) {
 			// Let's try...
 			m_pJack->terminate();
+#if defined(WIN32)
+			m_pJack->kill();
+#endif
 			// Give it some time to terminate gracefully and stabilize...
 			stabilize(QJACKCTL_TIMER_MSECS);
 			// Keep on, if not exiting for good.
