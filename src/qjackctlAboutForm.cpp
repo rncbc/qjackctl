@@ -78,6 +78,12 @@ qjackctlAboutForm::qjackctlAboutForm (
     sText += "<br />\n";
     sText += "</font></small>";
 #endif
+#ifndef CONFIG_JACK_MIDI
+    sText += "<small><font color=\"red\">";
+    sText += tr("JACK MIDI support disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
 #ifndef CONFIG_ALSA_SEQ
     sText += "<small><font color=\"red\">";
     sText += tr("ALSA/MIDI sequencer support disabled.");

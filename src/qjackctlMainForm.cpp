@@ -211,6 +211,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_iAlsaDirty    = 0;
 
 	m_iStatusRefresh = 0;
+	m_iStatusBlink   = 0;
 
 	m_iPatchbayRefresh = 0;
 
@@ -1037,6 +1038,7 @@ void qjackctlMainForm::jackStarted (void)
 
 	// Make sure all status(es) will be updated ASAP...
 	m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+	m_iStatusBlink = 0;
 
 	// Reset (yet again) the timer counters...
 	m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
@@ -1953,6 +1955,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
 	// Make sure all status(es) will be updated ASAP.
 	m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+	m_iStatusBlink = 0;
 
 	// Are we about to start detached?
 	if (bDetach) {
@@ -2515,6 +2518,11 @@ void qjackctlMainForm::refreshStatus (void)
 				tr("%1 Hz").arg(jack_get_sample_rate(m_pJackClient)));
 			updateStatusItem(STATUS_BUFFER_SIZE,
 				tr("%1 frames").arg(g_nframes));
+			// Blink server mode indicator...
+			QPalette pal;
+			pal.setColor(QPalette::Foreground,
+				(++m_iStatusBlink % 2) ? Qt::darkYellow: Qt::yellow);
+			m_ui.ServerModeTextLabel->setPalette(pal);
 #ifdef CONFIG_JACK_REALTIME
 			bool bRealtime = jack_is_realtime(m_pJackClient);
 			updateStatusItem(STATUS_REALTIME,

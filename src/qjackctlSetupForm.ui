@@ -1028,7 +1028,7 @@
               </property>
               <item>
                <property name="text" >
-                <string>default</string>
+                <string>(default)</string>
                </property>
               </item>
               <item>
@@ -1038,7 +1038,12 @@
               </item>
               <item>
                <property name="text" >
-                <string>hw:1</string>
+                <string>plughw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>/dev/dsp</string>
                </property>
               </item>
              </widget>
@@ -1111,6 +1116,16 @@
               </item>
               <item>
                <property name="text" >
+                <string>hw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>plughw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
                 <string>/dev/dsp</string>
                </property>
               </item>
@@ -1171,6 +1186,16 @@
               <item>
                <property name="text" >
                 <string>(default)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>hw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>plughw:0</string>
                </property>
               </item>
               <item>

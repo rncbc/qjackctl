@@ -11,6 +11,9 @@ CVS HEAD
   are that QjackCtl lost its ability and option to leave the process
   detached upon quitting the application. Too bad.
 
+- A new eye-candy bit has sneaked in: server mode display, that is 
+  the RT indicator, now blinks when server/client is started/active.
+
 - Combo-box setup history has been corrected on restore, which was
   discarding the very initial default (factory) contents.
 

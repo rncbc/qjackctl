@@ -208,6 +208,7 @@ private:
 	int m_iAlsaRefresh;
 	int m_iJackDirty;
 	int m_iAlsaDirty;
+	int m_iStatusBlink;
 	int m_iStatusRefresh;
 	int m_iPatchbayRefresh;
 
