@@ -37,7 +37,6 @@
 #include <QSocketNotifier>
 #include <QMessageBox>
 #include <QTextStream>
-#include <QProcess>
 #include <QRegExp>
 #include <QMenu>
 #include <QTimer>
@@ -96,9 +95,85 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #define QJACKCTL_XRUN_EVENT     QEvent::Type(QEvent::User + 2)
 #define QJACKCTL_BUFF_EVENT     QEvent::Type(QEvent::User + 3)
 #define QJACKCTL_SHUT_EVENT     QEvent::Type(QEvent::User + 4)
+#define QJACKCTL_EXIT_EVENT     QEvent::Type(QEvent::User + 5)
+
+
+//----------------------------------------------------------------------------
+// qjackctl -- Static callback posters.
 
 // To have clue about current buffer size (in frames).
 static jack_nframes_t g_nframes = 0;
+
+static QProcess::ProcessError g_error = QProcess::UnknownError;
+
+// Jack port registration callback funtion, called
+// whenever a jack port is registered or unregistered.
+static void qjackctl_port_registration_callback ( jack_port_id_t, int, void * )
+{
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_PORT_EVENT));
+}
+
+
+// Jack graph order callback function, called
+// whenever the processing graph is reordered.
+static int qjackctl_graph_order_callback ( void * )
+{
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_PORT_EVENT));
+
+	return 0;
+}
+
+
+// Jack XRUN callback function, called
+// whenever there is a xrun.
+static int qjackctl_xrun_callback ( void * )
+{
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_XRUN_EVENT));
+
+	return 0;
+}
+
+// Jack buffer size function, called
+// whenever the server changes buffer size.
+static int qjackctl_buffer_size_callback ( jack_nframes_t nframes, void * )
+{
+	// Update our global static variable.
+	g_nframes = nframes;
+
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_BUFF_EVENT));
+
+	return 0;
+}
+
+
+// Jack shutdown function, called
+// whenever the server terminates this client.
+static void qjackctl_on_shutdown ( void * )
+{
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_SHUT_EVENT));
+}
+
+
+// Jack process exit function, called
+// whenever the server terminates abnormally.
+static void qjackctl_on_error ( QProcess::ProcessError error )
+{
+	g_error = error;
+
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_EXIT_EVENT));
+}
 
 
 //----------------------------------------------------------------------------
@@ -125,7 +200,6 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pJack         = NULL;
 	m_pJackClient   = NULL;
 	m_bJackDetach   = false;
-	m_bJackSurvive  = false;
 	m_bJackShutdown = false;
 	m_pAlsaSeq      = NULL;
 	m_iStartDelay   = 0;
@@ -229,9 +303,6 @@ qjackctlMainForm::qjackctlMainForm (
 // Destructor.
 qjackctlMainForm::~qjackctlMainForm (void)
 {
-	if (m_bJackDetach)
-		m_bJackSurvive = true;
-
 	// Stop server, if not already...
 	stopJackServer();
 
@@ -397,7 +468,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	startJackClient(true);
 	// Final startup stabilization...
 	stabilizeForm();
-	processJackExit();
+	jackCleanup();
 
 	// Look for immediate server startup?...
 	if (m_pSetup->bStartJack || !m_pSetup->sCmdLine.isEmpty())
@@ -430,21 +501,11 @@ bool qjackctlMainForm::queryClose (void)
 	// Check if JACK daemon is currently running...
 	if (bQueryClose && m_pJack  && m_pJack->state() == QProcess::Running
 		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
-		switch (QMessageBox::warning(this,
+		bQueryClose = (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("JACK is currently running.\n\n"
 			"Do you want to terminate the JACK audio server?"),
-			tr("Terminate"), tr("Leave"), tr("Cancel"))) {
-		case 0:   // Terminate...
-			m_bJackSurvive = false;
-			break;
-		case 1:   // Leave...
-			m_bJackSurvive = true;
-			break;
-		default:  // Cancel.
-			bQueryClose = false;
-			break;
-		}
+			tr("Terminate"), tr("Cancel")) == 0);
 	}
 
 	// Try to save current aliases default settings.
@@ -518,6 +579,9 @@ void qjackctlMainForm::customEvent ( QEvent *pEvent )
 		break;
 	case QJACKCTL_SHUT_EVENT:
 		shutNotifyEvent();
+		break;
+	case QJACKCTL_EXIT_EVENT:
+		exitNotifyEvent();
 		break;
 	default:
 		QWidget::customEvent(pEvent);
@@ -623,7 +687,7 @@ void qjackctlMainForm::startJack (void)
 		m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
 		if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
 			appendMessagesError(tr("Could not load default preset.\n\nSorry."));
-			processJackExit();
+			jackCleanup();
 			return;
 		}
 	}
@@ -652,8 +716,14 @@ void qjackctlMainForm::startJack (void)
 
 	// The unforgiveable signal communication...
 	QObject::connect(m_pJack,
+		SIGNAL(started()),
+		SLOT(jackStarted()));
+	QObject::connect(m_pJack,
+		SIGNAL(error(QProcess::ProcessError)),
+		SLOT(jackError(QProcess::ProcessError)));
+	QObject::connect(m_pJack,
 		SIGNAL(finished(int, QProcess::ExitStatus)),
-		SLOT(processJackExit()));
+		SLOT(jackFinished()));
 
 	// Split the server path into arguments...
 	QStringList args = m_preset.sServer.split(' ');
@@ -836,32 +906,10 @@ void qjackctlMainForm::startJack (void)
 	const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath(); 
 	m_pJack->setWorkingDirectory(sCurrentDir);
 	QDir::setCurrent(sCurrentDir);
-	m_pJack->start(sCommand, args);
-	if (!m_pJack->waitForStarted( 1 + (m_preset.iStartDelay * 1000))) {
-#else
-	// Go jack, go...
-	if (!m_pJack->startDetached(sCommand, args)) {
 #endif
-		appendMessagesError(tr("Could not start JACK.\n\nSorry."));
-		processJackExit();
-		return;
-	}
 
-	// Show startup results...
-	appendMessages(tr("JACK was started."));
-
-	// Sloppy boy fix: may the serve be stopped, just in case
-	// the client will nerver make it...
-	m_ui.StopToolButton->setEnabled(true);
-
-	// Make sure all status(es) will be updated ASAP...
-	m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
-
-	// Reset (yet again) the timer counters...
-	m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
-	m_iTimerDelay  = 0;
-	m_iJackRefresh = 0;
-
+	// Go jack, go...
+	m_pJack->start(sCommand, args);
 }
 
 
@@ -869,7 +917,8 @@ void qjackctlMainForm::startJack (void)
 void qjackctlMainForm::stopJack (void)
 {
 	// Check if we're allowed to stop (shutdown)...
-	if (m_pSetup->bQueryShutdown && !m_bJackSurvive && m_pJack
+	if (m_pSetup->bQueryShutdown && m_pJack
+		&& m_pJack->state() == QProcess::Running
 		&& m_pConnectionsForm 
 		&& (m_pConnectionsForm->isAudioConnected() ||
 			m_pConnectionsForm->isMidiConnected())
@@ -899,8 +948,7 @@ void qjackctlMainForm::stopJackServer (void)
 	stopJackClient();
 
 	// And try to stop server.
-	if (m_pJack && m_pJack->state() == QProcess::Running
-		&& !m_bJackSurvive) {
+	if (m_pJack && m_pJack->state() == QProcess::Running) {
 		appendMessages(tr("JACK is stopping..."));
 		updateServerState(QJACKCTL_STOPPING);
 		// Do we have any pre-shutdown script?...
@@ -912,10 +960,12 @@ void qjackctlMainForm::stopJackServer (void)
 		}
 		// Now it's the time to real try stopping the server daemon...
 		if (!m_bJackShutdown) {
-			// Let's try...
-			m_pJack->terminate();
 #if defined(WIN32)
+			// Try harder...
 			m_pJack->kill();
+#else
+			// Try softly...
+			m_pJack->terminate();
 #endif
 			// Give it some time to terminate gracefully and stabilize...
 			stabilize(QJACKCTL_TIMER_MSECS);
@@ -926,8 +976,7 @@ void qjackctlMainForm::stopJackServer (void)
 
 	// If we have a post-shutdown script enabled it must be called,
 	// despite we've not started the server before...
-	if (m_bJackDetach && !m_bJackSurvive
-		&& m_pSetup->bPostShutdownScript
+	if (m_bJackDetach && m_pSetup->bPostShutdownScript
 		&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
 		shellExecute(m_pSetup->sPostShutdownScriptShell,
 			tr("Post-shutdown script..."),
@@ -935,7 +984,7 @@ void qjackctlMainForm::stopJackServer (void)
 	}
 
 	// Do final processing anyway.
-	processJackExit();
+	jackCleanup();
 }
 
 
@@ -975,8 +1024,45 @@ void qjackctlMainForm::flushStdoutBuffer (void)
 }
 
 
+// Jack audio server startup.
+void qjackctlMainForm::jackStarted (void)
+{
+	// Show startup results...
+	appendMessages(tr("JACK was started with PID=%1.")
+		.arg(long(m_pJack->pid())));
+
+	// Sloppy boy fix: may the serve be stopped, just in case
+	// the client will nerver make it...
+	m_ui.StopToolButton->setEnabled(true);
+
+	// Make sure all status(es) will be updated ASAP...
+	m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+
+	// Reset (yet again) the timer counters...
+	m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
+	m_iTimerDelay  = 0;
+	m_iJackRefresh = 0;
+}
+
+
+// Jack audio server got an error.
+void qjackctlMainForm::jackError ( QProcess::ProcessError error )
+{
+	qjackctl_on_error(error);
+}
+
+
+// Jack audio server finish.
+void qjackctlMainForm::jackFinished (void)
+{
+	// Force client code cleanup.
+	if (!m_bJackShutdown)
+		jackCleanup();
+}
+
+
 // Jack audio server cleanup.
-void qjackctlMainForm::processJackExit (void)
+void qjackctlMainForm::jackCleanup (void)
 {
 	// Force client code cleanup.
 	if (!m_bJackDetach)
@@ -986,19 +1072,22 @@ void qjackctlMainForm::processJackExit (void)
 	flushStdoutBuffer();
 
 	if (m_pJack) {
-		// Force final server shutdown...
-		if (!m_bJackShutdown && !m_bJackSurvive) {
-			appendMessages(tr("JACK was stopped")
-				+ formatExitStatus(m_pJack->exitCode()));
-			if (!m_pJack->exitStatus() != QProcess::NormalExit)
-				m_pJack->kill();
+		if (m_pJack->state() != QProcess::NotRunning) {
+			appendMessages(tr("JACK is being forced..."));
+			// Force final server shutdown...
+			m_pJack->kill();
+			// Give it some time to terminate gracefully and stabilize...
+			stabilize(QJACKCTL_TIMER_MSECS);
 		}
+		// Force final server shutdown...
+		appendMessages(tr("JACK was stopped")
+			+ formatExitStatus(m_pJack->exitCode()));
 		// Destroy it.
 		delete m_pJack;
 		m_pJack = NULL;
 		// Do we have any post-shutdown script?...
 		// (this will be always called, despite we've started the server or not)
-		if (!m_bJackSurvive && m_pSetup->bPostShutdownScript
+		if (m_pSetup->bPostShutdownScript
 			&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
 			shellExecute(m_pSetup->sPostShutdownScriptShell,
 				tr("Post-shutdown script..."),
@@ -1607,64 +1696,6 @@ void qjackctlMainForm::refreshXrunStats (void)
 }
 
 
-// Jack port registration callback funtion, called
-// whenever a jack port is registered or unregistered.
-static void qjackctl_port_registration_callback ( jack_port_id_t, int, void * )
-{
-	QApplication::postEvent(
-		qjackctlMainForm::getInstance(),
-		new QEvent(QJACKCTL_PORT_EVENT));
-}
-
-
-// Jack graph order callback function, called
-// whenever the processing graph is reordered.
-static int qjackctl_graph_order_callback ( void * )
-{
-	QApplication::postEvent(
-		qjackctlMainForm::getInstance(),
-		new QEvent(QJACKCTL_PORT_EVENT));
-
-	return 0;
-}
-
-
-// Jack XRUN callback function, called
-// whenever there is a xrun.
-static int qjackctl_xrun_callback ( void * )
-{
-	QApplication::postEvent(
-		qjackctlMainForm::getInstance(),
-		new QEvent(QJACKCTL_XRUN_EVENT));
-
-	return 0;
-}
-
-// Jack buffer size function, called
-// whenever the server changes buffer size.
-static int qjackctl_buffer_size_callback ( jack_nframes_t nframes, void * )
-{
-	// Update our global static variable.
-	g_nframes = nframes;
-
-	QApplication::postEvent(
-		qjackctlMainForm::getInstance(),
-		new QEvent(QJACKCTL_BUFF_EVENT));
-
-	return 0;
-}
-
-
-// Jack shutdown function, called
-// whenever the server terminates this client.
-static void qjackctl_on_shutdown ( void * )
-{
-	QApplication::postEvent(
-		qjackctlMainForm::getInstance(),
-		new QEvent(QJACKCTL_SHUT_EVENT));
-}
-
-
 // Jack socket notifier port/graph callback funtion.
 void qjackctlMainForm::portNotifyEvent (void)
 {
@@ -1724,6 +1755,39 @@ void qjackctlMainForm::shutNotifyEvent (void)
 	stopJackServer();
 	// We're not detached anymore, anyway.
 	m_bJackDetach = false;
+}
+
+
+// Process error slot
+void qjackctlMainForm::exitNotifyEvent (void)
+{
+	// Poor-mans read, copy, update (RCU)
+	QProcess::ProcessError error = g_error;
+	g_error = QProcess::UnknownError;
+
+	switch (error) {
+	case QProcess::FailedToStart:
+		appendMessagesError(tr("Could not start JACK.\n\nSorry."));
+		jackFinished();
+		break;
+	case QProcess::Crashed:
+		appendMessagesColor(tr("JACK has crashed."), "#cc3366");
+		break;
+	case QProcess::Timedout:
+		appendMessagesColor(tr("JACK timed out."), "#cc3366");
+		break;
+	case QProcess::WriteError:
+		appendMessagesColor(tr("JACK write error."), "#cc3366");
+		break;
+	case QProcess::ReadError:
+		appendMessagesColor(tr("JACK read error."), "#cc3366");
+		break;
+	case QProcess::UnknownError:
+	default:
+		appendMessagesColor(tr("Unknown JACK error (%d).")
+			.arg(int(error)), "#990099");
+		break;
+	}
 }
 
 

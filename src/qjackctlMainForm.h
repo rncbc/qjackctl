@@ -27,6 +27,7 @@
 #include "qjackctlSetup.h"
 #include "qjackctlPatchbay.h"
 
+#include <QProcess>
 #include <QDateTime>
 
 // Forward declarations.
@@ -38,7 +39,6 @@ class qjackctlPatchbayForm;
 class qjackctlSystemTray;
 
 class QSocketNotifier;
-class QProcess;
 
 
 //----------------------------------------------------------------------------
@@ -85,7 +85,10 @@ public slots:
 	void appendStdoutBuffer(const QString&);
 	void flushStdoutBuffer();
 
-	void processJackExit();
+	void jackStarted();
+	void jackError(QProcess::ProcessError);
+	void jackFinished();
+	void jackCleanup();
 
 	void stdoutNotifySlot(int);
 	void alsaNotifySlot(int);
@@ -162,6 +165,7 @@ protected:
 	void xrunNotifyEvent();
 	void buffNotifyEvent();
 	void shutNotifyEvent();
+	void exitNotifyEvent();
 
 	bool startJackClient(bool bDetach);
 	void stopJackClient();
@@ -193,7 +197,6 @@ private:
 
 	jack_client_t *m_pJackClient;
 	bool m_bJackDetach;
-	bool m_bJackSurvive;
 	bool m_bJackShutdown;
 
 	snd_seq_t *m_pAlsaSeq;

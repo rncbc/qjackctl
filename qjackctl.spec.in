@@ -54,6 +54,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue Jul 18 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- Shallowed bug-fix release..
 * Tue Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Qt4 migration was complete.
 * Mon Jun 25 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>

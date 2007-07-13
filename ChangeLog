@@ -5,6 +5,15 @@ ChangeLog
 
 CVS HEAD
 
+- Usage of QProcess class has been severely refactored, now using
+  QProcess::start() instead of QProcess::startDetached(), giving
+  much tighter control over the started jackd(mp) process. Drawbacks
+  are that QjackCtl lost its ability and option to leave the process
+  detached upon quitting the application. Too bad.
+
+- Combo-box setup history has been corrected on restore, which was
+  discarding the very initial default (factory) contents.
+
 - Now that Qt4 is accessible to open-source Windows appplications,
   there's some experimental stuff sneaking in for jackdmp support
   on win32 (http://www.grame.fr/~letz/jackdmp.html). 
