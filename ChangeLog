@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- Now using QSystemTrayIcon class facility if available (Qt4 >= 4.2)
+  making the system-tray option available on most platforms, notably
+  on Windows and Mac OS X (UNTESTED).
+
 - Usage of QProcess class has been severely refactored, now using
   QProcess::start() instead of QProcess::startDetached(), giving
   much tighter control over the started jackd(mp) process. Drawbacks

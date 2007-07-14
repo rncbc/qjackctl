@@ -22,21 +22,17 @@
 #include "qjackctlAbout.h"
 #include "qjackctlSystemTray.h"
 
-#include <QPainter>
 #include <QBitmap>
-#include <QIcon>
+#include <QPainter>
 
-#include <QToolTip>
+#if QT_VERSION < 0x040200
 
 #include <QMouseEvent>
-
+#include <QPaintEvent>
 
 #ifdef CONFIG_SYSTEM_TRAY
 
 #include <QX11Info>
-//Added by qt3to4:
-#include <QPixmap>
-#include <QPaintEvent>
 
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
@@ -48,9 +44,61 @@
 
 #endif
 
+#endif
+
 
 //----------------------------------------------------------------------------
 // qjackctlSystemTray -- Custom system tray widget.
+
+#if QT_VERSION >= 0x040200
+
+// Constructor.
+qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
+	: QSystemTrayIcon(pParent)
+{
+	// Set things inherited...
+	if (pParent) {
+		m_icon = pParent->windowIcon();
+		QSystemTrayIcon::setIcon(m_icon);
+		QSystemTrayIcon::setToolTip(pParent->windowTitle());
+	}
+
+	QObject::connect(this,
+		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+		SLOT(activated(QSystemTrayIcon::ActivationReason)));
+
+	setBackground(Qt::transparent);
+
+	QSystemTrayIcon::show();
+}
+
+
+// Redirect to hide.
+void qjackctlSystemTray::close (void)
+{
+	QSystemTrayIcon::hide();
+}
+
+
+// Handle systeam tray activity.
+void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
+{
+	switch (reason) {
+	case QSystemTrayIcon::Context:
+		emit contextMenuRequested(QCursor::pos());
+		break;
+	case QSystemTrayIcon::Trigger:
+		emit clicked();
+		// Fall trhu...
+	case QSystemTrayIcon::MiddleClick:
+	case QSystemTrayIcon::DoubleClick:
+	case QSystemTrayIcon::Unknown:
+	default:
+		break;
+	}
+}
+
+#else
 
 // Constructor.
 qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
@@ -124,6 +172,8 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	setBackground(Qt::transparent);
 }
 
+#endif
+
 
 // Default destructor.
 qjackctlSystemTray::~qjackctlSystemTray (void)
@@ -132,10 +182,14 @@ qjackctlSystemTray::~qjackctlSystemTray (void)
 
 
 // System tray icon/pixmaps update method.
-void qjackctlSystemTray::updateIcon (void)
+void qjackctlSystemTray::updatePixmap (void)
 {
 	// Renitialize icon as fit...
+#if QT_VERSION >= 0x040200
+	m_pixmap = m_icon.pixmap(22, 22);
+#else
 	m_pixmap = QWidget::windowIcon().pixmap(QWidget::size());
+#endif
 
     // Merge with the overlay pixmap...
 	if (!m_pixmapOverlay.mask().isNull()) {
@@ -145,9 +199,22 @@ void qjackctlSystemTray::updateIcon (void)
 		QPainter(&m_pixmap).drawPixmap(0, 0, m_pixmapOverlay);
 	}
 
+#if QT_VERSION >= 0x040200
+
+	if (m_background != Qt::transparent) {
+		QPixmap pixmap(m_pixmap);
+		m_pixmap.fill(m_background);
+		QPainter(&m_pixmap).drawPixmap(0, 0, pixmap);
+	}
+
+    // Setup system tray icon directly...
+	QSystemTrayIcon::setIcon(QIcon(m_pixmap));
+
+#else
+
     // Setup widget drawable pixmap transparency...
 	if (!m_pixmap.mask().isNull() && m_background == Qt::transparent) {
-		QBitmap mask(QWidget::size());
+		QBitmap mask(m_pixmap.size());
 		mask.fill(Qt::color0);
 		QBitmap maskPixmap = m_pixmap.mask();
 		QPainter(&mask).drawPixmap(
@@ -160,6 +227,8 @@ void qjackctlSystemTray::updateIcon (void)
 	}
 
 	QWidget::update();
+
+#endif
 }
 
 
@@ -170,11 +239,15 @@ void qjackctlSystemTray::setBackground ( const QColor& background )
 	// Set background color, now.
 	m_background = background;
 
+#if QT_VERSION < 0x040200
+
 	QPalette pal(QWidget::palette());
 	pal.setColor(QWidget::backgroundRole(), m_background);
 	QWidget::setPalette(pal);
 
-	updateIcon();
+#endif
+
+	updatePixmap();
 }
 
 const QColor& qjackctlSystemTray::background (void) const
@@ -188,7 +261,7 @@ void qjackctlSystemTray::setPixmapOverlay ( const QPixmap& pmOverlay )
 {
 	m_pixmapOverlay = pmOverlay;
 
-	updateIcon();
+	updatePixmap();
 }
 
 const QPixmap& qjackctlSystemTray::pixmapOverlay (void) const
@@ -196,6 +269,8 @@ const QPixmap& qjackctlSystemTray::pixmapOverlay (void) const
 	return m_pixmapOverlay;
 }
 
+
+#if QT_VERSION < 0x040200
 
 // Self-drawable methods.
 void qjackctlSystemTray::paintEvent ( QPaintEvent * )
@@ -232,5 +307,6 @@ void qjackctlSystemTray::mousePressEvent ( QMouseEvent *pMouseEvent )
 	}
 }
 
+#endif
 
 // end of qjackctlSystemTray.cpp
