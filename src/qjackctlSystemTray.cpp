@@ -30,7 +30,7 @@
 #include <QMouseEvent>
 #include <QPaintEvent>
 
-#ifdef CONFIG_SYSTEM_TRAY
+#if defined(Q_WS_X11)
 
 #include <QX11Info>
 
@@ -42,7 +42,7 @@
 #define SYSTEM_TRAY_BEGIN_MESSAGE   1
 #define SYSTEM_TRAY_CANCEL_MESSAGE  2
 
-#endif
+#endif	// Q_WS_X11
 
 #endif
 
@@ -117,7 +117,7 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	QWidget::setFixedSize(22, 22);
 //	QWidget::setMinimumSize(22, 22);
 
-#ifdef CONFIG_SYSTEM_TRAY
+#if defined(Q_WS_X11)
 
 	Display *dpy = QX11Info::display();
 	WId trayWin  = winId();
@@ -161,7 +161,7 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	trayAtom = XInternAtom(dpy, "_KDE_NET_WM_SYSTEM_TRAY_WINDOW_FOR", false);
 	XChangeProperty(dpy, trayWin, trayAtom, XA_WINDOW, 32, PropModeReplace, (unsigned char *) &forWin, 1);
 
-#endif
+#endif	// Q_WS_X11
 
 	// Set things inherited...
 	if (pParent) {

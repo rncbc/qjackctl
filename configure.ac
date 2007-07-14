@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.0.8, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.0.9, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -203,14 +203,8 @@ fi
 AC_CHECK_HEADER(CoreAudio/CoreAudio.h, [ac_coreaudio="yes"], [ac_coreaudio="no"])
 if test "x$ac_coreaudio" = "xyes"; then
    AC_DEFINE(CONFIG_COREAUDIO, 1, [Define if CoreAudio/CoreAudio.h is available (Mac OS X).])
-   ac_system_tray="no"
    ac_alsa_seq="no"
    ac_libs="-framework CoreAudio -framework CoreFoundation $ac_libs"
-fi
-
-# Late checks, mostly after coreaudio/MacOSX is detected...
-if test "x$ac_system_tray" = "xyes"; then
-   AC_DEFINE(CONFIG_SYSTEM_TRAY, 1, [Define if system tray is enabled.])
 fi
 
 # Check for some JACK MIDI headers.
@@ -235,6 +229,11 @@ fi
 
 # Checks for library functions.
 AC_CHECK_FUNCS(system)
+
+# Check for system-tray icon.
+if test "x$ac_system_tray" = "xyes"; then
+   AC_DEFINE(CONFIG_SYSTEM_TRAY, 1, [Define if system tray is enabled.])
+fi
 
 # Check for jack_transport_query function.
 AC_CHECK_LIB(jack, jack_transport_query, [ac_jack_transport="yes"], [ac_jack_transport="no"])
@@ -267,13 +266,13 @@ fi
 # Check for JACK MIDI library support.
 if test "x$ac_jack_midi" = "xyes"; then
    AC_CHECK_LIB(jack, jack_midi_event_get, [ac_jack_midi="yes"], [ac_jack_midi="no"])
-	if test "x$ac_jack_midi" = "xno"; then
-	   AC_MSG_WARN([*** jack_midi_event_get: function not found.])
-	   AC_MSG_WARN([*** JACK 0.103.0 or later may be required.])
-	   AC_MSG_WARN([*** JACK MIDI support will be disabled.])
-	else
-	   AC_DEFINE(CONFIG_JACK_MIDI, 1, [Define if JACK MIDI support is available.])
-	fi
+   if test "x$ac_jack_midi" = "xno"; then
+      AC_MSG_WARN([*** jack_midi_event_get: function not found.])
+      AC_MSG_WARN([*** JACK 0.103.0 or later may be required.])
+      AC_MSG_WARN([*** JACK MIDI support will be disabled.])
+   else
+      AC_DEFINE(CONFIG_JACK_MIDI, 1, [Define if JACK MIDI support is available.])
+   fi
 fi
 
 # Finally produce a configure header file and the main makefile.
@@ -284,4 +283,3 @@ AC_OUTPUT
 echo ""
 echo "Now type 'make', followed by 'make install' as root."
 echo ""
-
