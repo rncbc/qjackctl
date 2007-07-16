@@ -65,4 +65,3 @@ LIBS += -ljackmp
 
 # XML/DOM support
 QT += xml
-

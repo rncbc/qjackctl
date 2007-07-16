@@ -105,10 +105,10 @@ qjackctlSocketForm::qjackctlSocketForm (
 		SIGNAL(toggled(bool)),
 		SLOT(socketTypeChanged()));
 	QObject::connect(m_ui.ClientNameComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(clientNameChanged()));
 	QObject::connect(m_ui.PlugNameComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(changed()));
 
 	QObject::connect(m_ui.PlugListView,

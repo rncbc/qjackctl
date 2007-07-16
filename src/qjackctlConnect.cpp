@@ -812,7 +812,8 @@ void qjackctlClientListView::timeoutSlot (void)
 // Trap for help/tool-tip events.
 bool qjackctlClientListView::eventFilter ( QObject *pObject, QEvent *pEvent )
 {
-	if (static_cast<QWidget *> (pObject) == QTreeWidget::viewport()
+	QWidget *pViewport = QTreeWidget::viewport();
+	if (static_cast<QWidget *> (pObject) == pViewport
 		&& pEvent->type() == QEvent::ToolTip) {
 		QHelpEvent *pHelpEvent = static_cast<QHelpEvent *> (pEvent);
 		if (pHelpEvent) {
@@ -821,8 +822,8 @@ bool qjackctlClientListView::eventFilter ( QObject *pObject, QEvent *pEvent )
 				qjackctlClientItem *pClientItem
 					= static_cast<qjackctlClientItem *> (pItem);
 				if (pClientItem) {
-					QToolTip::showText(
-						pHelpEvent->globalPos(), pClientItem->clientName());
+					QToolTip::showText(pHelpEvent->globalPos(),
+						pClientItem->clientName(), pViewport);
 					return true;
 				}
 			}
@@ -831,8 +832,8 @@ bool qjackctlClientListView::eventFilter ( QObject *pObject, QEvent *pEvent )
 				qjackctlPortItem *pPortItem
 					= static_cast<qjackctlPortItem *> (pItem);
 				if (pPortItem) {
-					QToolTip::showText(
-						pHelpEvent->globalPos(), pPortItem->portName());
+					QToolTip::showText(pHelpEvent->globalPos(),
+						pPortItem->portName(), pViewport);
 					return true;
 				}
 			}

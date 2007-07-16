@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Illusive but nasty Connections/Patchbay item tooltip crash bug has
+  been hopefully fixed (Qt >= 4.3).
+  
 - Now using QSystemTrayIcon class facility if available (Qt4 >= 4.2)
   making the system-tray option available on most platforms, notably
   on Windows and Mac OS X (EXPERIMENTAL).

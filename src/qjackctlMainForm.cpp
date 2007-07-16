@@ -706,7 +706,9 @@ void qjackctlMainForm::startJack (void)
 
 	// Setup stdout/stderr capture...
 	if (m_pSetup->bStdoutCapture) {
+#if QT_VERSION >= 0x040200
 		m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
+#endif
 		QObject::connect(m_pJack,
 			SIGNAL(readyReadStandardOutput()),
 			SLOT(readStdout()));

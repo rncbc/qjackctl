@@ -932,7 +932,8 @@ void qjackctlSocketListView::timeoutSlot (void)
 // Trap for help/tool-tip events.
 bool qjackctlSocketListView::eventFilter ( QObject *pObject, QEvent *pEvent )
 {
-	if (static_cast<QWidget *> (pObject) == QTreeWidget::viewport()
+	QWidget *pViewport = QTreeWidget::viewport();
+	if (static_cast<QWidget *> (pObject) == pViewport
 		&& pEvent->type() == QEvent::ToolTip) {
 		QHelpEvent *pHelpEvent = static_cast<QHelpEvent *> (pEvent);
 		if (pHelpEvent) {
@@ -941,8 +942,8 @@ bool qjackctlSocketListView::eventFilter ( QObject *pObject, QEvent *pEvent )
 				qjackctlSocketItem *pSocketItem
 					= static_cast<qjackctlSocketItem *> (pItem);
 				if (pSocketItem) {
-					QToolTip::showText(
-						pHelpEvent->globalPos(), pSocketItem->clientName());
+					QToolTip::showText(pHelpEvent->globalPos(),
+						pSocketItem->clientName(), pViewport);
 					return true;
 				}
 			}
@@ -951,8 +952,8 @@ bool qjackctlSocketListView::eventFilter ( QObject *pObject, QEvent *pEvent )
 				qjackctlPlugItem *pPlugItem
 					= static_cast<qjackctlPlugItem *> (pItem);
 				if (pPlugItem) {
-					QToolTip::showText(
-						pHelpEvent->globalPos(), pPlugItem->plugName());
+					QToolTip::showText(pHelpEvent->globalPos(),
+						pPlugItem->plugName(), pViewport);
 					return true;
 				}
 			}

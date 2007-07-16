@@ -99,7 +99,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 	// UI connections...
 
 	QObject::connect(m_ui.PresetComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(changeCurrentPreset(const QString&)));
 	QObject::connect(m_ui.PresetSavePushButton,
 		SIGNAL(clicked()),
@@ -124,7 +124,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(highlighted(int)),
 		SLOT(changeAudio(int)));
 	QObject::connect(m_ui.ServerComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.DriverComboBox,
 		SIGNAL(activated(int)),
@@ -163,25 +163,25 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(valueChanged(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.FramesComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.SampleRateComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.PeriodsSpinBox,
 		SIGNAL(valueChanged(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.WordLengthComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.WaitComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.ChanSpinBox,
 		SIGNAL(valueChanged(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.InterfaceComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.AudioComboBox,
 		SIGNAL(activated(int)),
@@ -190,13 +190,13 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(activated(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.TimeoutComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.InDeviceComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.OutDeviceComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.InChannelsSpinBox,
 		SIGNAL(valueChanged(int)),
@@ -217,32 +217,32 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(valueChanged(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.PortMaxComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 
 	QObject::connect(m_ui.StartupScriptCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.StartupScriptShellComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.PostStartupScriptCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.PostStartupScriptShellComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ShutdownScriptCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ShutdownScriptShellComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.PostShutdownScriptCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.PostShutdownScriptShellComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.StartupScriptBrowseToolButton,
 		SIGNAL(clicked()),
@@ -273,7 +273,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.XrunRegexComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(ediTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.XrunIgnoreFirstCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -282,7 +282,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ActivePatchbayPathComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ActivePatchbayPathToolButton,
 		SIGNAL(clicked()),
@@ -292,7 +292,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.TimeRefreshComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 
 	QObject::connect(m_ui.TransportTimeRadioButton,
@@ -329,7 +329,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.MessagesLimitLinesComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ConnectionsIconSizeComboBox,
 		SIGNAL(activated(int)),
@@ -363,7 +363,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ServerConfigNameComboBox,
-		SIGNAL(textChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ServerConfigTempCheckBox,
 		SIGNAL(stateChanged(int)),
