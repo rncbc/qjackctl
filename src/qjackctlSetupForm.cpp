@@ -273,7 +273,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.XrunRegexComboBox,
-		SIGNAL(ediTextChanged(const QString&)),
+		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.XrunIgnoreFirstCheckBox,
 		SIGNAL(stateChanged(int)),
