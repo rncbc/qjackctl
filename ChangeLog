@@ -7,18 +7,18 @@ ChangeLog
 
 - The current DSP load percentage activity is now also displayed on
   the system-tray icon tooltip.
- 
+
 - An illusive but nasty Connections/Patchbay item tooltip crash bug
   has been hopefully fixed (Qt >= 4.3).
-  
+
 - Now using QSystemTrayIcon class facility if available (Qt4 >= 4.2)
   making the system-tray option available on most platforms, notably
   on Windows and Mac OS X (EXPERIMENTAL).
 
 - Usage of QProcess class has been severely refactored, now using
   QProcess::start() instead of QProcess::startDetached(), giving
-  much tighter control over the started jackd(mp) process. Drawbacks
-  are that QjackCtl lost its ability and option to leave the process
+  much tighter control over the started jackd(mp) process. Downside
+  is that QjackCtl lost its ability and option to leave the process
   detached upon quitting the application. Too bad.
 
 - A new eye-candy bit has sneaked in: server mode display, that is 
