@@ -68,17 +68,16 @@
 #define QJACKCTL_STOPPING       5
 #define QJACKCTL_STOPPED        6
 
-// Notification pipes descriptors
-#define QJACKCTL_FDNIL         -1
-#define QJACKCTL_FDREAD         0
-#define QJACKCTL_FDWRITE        1
-
 #if defined(WIN32)
 #include <io.h>
 #undef HAVE_POLL_H
 #undef HAVE_SIGNAL_H
 #else
 #include <unistd.h>
+// Notification pipes descriptors
+#define QJACKCTL_FDNIL         -1
+#define QJACKCTL_FDREAD         0
+#define QJACKCTL_FDWRITE        1
 static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #endif
 
