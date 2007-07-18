@@ -5,6 +5,9 @@ ChangeLog
 
 0.3.1   2007-07-18  Shallowed bug-fix release.
 
+- The current DSP load percentage activity is now also displayed on
+  the system-tray icon tooltip.
+ 
 - An illusive but nasty Connections/Patchbay item tooltip crash bug
   has been hopefully fixed (Qt >= 4.3).
   
