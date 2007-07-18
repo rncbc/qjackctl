@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.3.1   2007-07-18  Shallowed bug-fix release.
 
 - Illusive but nasty Connections/Patchbay item tooltip crash bug has
   been hopefully fixed (Qt >= 4.3).

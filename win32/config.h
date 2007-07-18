@@ -1,6 +1,6 @@
 
 #define PACKAGE_NAME    "QjackCtl"
-#define PACKAGE_VERSION "0.3.0.11"
+#define PACKAGE_VERSION "0.3.0.12"
 
 #define CONFIG_PREFIX   "."
 #define CONFIG_DEBUG    1
@@ -17,7 +17,3 @@
 #undef  CONFIG_ALSA_SEQ
 
 #undef  CONFIG_ROUND
-
-#undef  HAVE_POLL_H
-#undef  HAVE_SIGNAL_H
-

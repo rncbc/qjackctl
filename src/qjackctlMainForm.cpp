@@ -49,15 +49,6 @@
 #include <QCustomEvent>
 #include <QCloseEvent>
 
-
-#ifdef HAVE_POLL_H
-#include <poll.h>
-#endif
-
-#ifdef HAVE_SIGNAL_H
-#include <signal.h>
-#endif
-
 #ifdef CONFIG_JACK_STATISTICS
 #include <jack/statistics.h>
 #endif
@@ -82,13 +73,23 @@
 #define QJACKCTL_FDREAD         0
 #define QJACKCTL_FDWRITE        1
 
-#if !defined(WIN32)
+#if defined(WIN32)
+#include <io.h>
+#undef HAVE_POLL_H
+#undef HAVE_SIGNAL_H
+#else
 #include <unistd.h>
 static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
-#else
-#include <io.h>
-#include <process.h>
 #endif
+
+#ifdef HAVE_POLL_H
+#include <poll.h>
+#endif
+
+#ifdef HAVE_SIGNAL_H
+#include <signal.h>
+#endif
+
 
 // Custom event types.
 #define QJACKCTL_PORT_EVENT     QEvent::Type(QEvent::User + 1)
@@ -743,7 +744,9 @@ void qjackctlMainForm::startJack (void)
 #else
 		const char chPathSep = ':';
 #endif
-		QStringListIterator iter(QString(::getenv("PATH")).split(chPathSep));
+		const QString sPath = ::getenv("PATH");
+		QStringList paths = sPath.split(chPathSep);
+		QStringListIterator iter(paths);
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
 			fi.setFile(QDir(sDirectory), sCommand);
@@ -827,7 +830,7 @@ void qjackctlMainForm::startJack (void)
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
 			args.append("-o" + QString::number(m_preset.iOutChannels));
 #ifdef CONFIG_JACK_MIDI
-		if (!m_preset.sMidiDriver.isEmpty() && m_preset.sMidiDriver != "none")
+		if (!m_preset.sMidiDriver.isEmpty())
 			args.append("-X" + m_preset.sMidiDriver);
 #endif
 	}
@@ -908,7 +911,7 @@ void qjackctlMainForm::startJack (void)
 #if defined(WIN32)
 	const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath(); 
 	m_pJack->setWorkingDirectory(sCurrentDir);
-	QDir::setCurrent(sCurrentDir);
+//	QDir::setCurrent(sCurrentDir);
 #endif
 
 	// Go jack, go...
@@ -1634,7 +1637,7 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem,
 	} else {
 		sText = t.toString();
 		if (m_pJackClient) {
-			float secs = (float) t.elapsed() / 1000.0f;
+			float secs = float(t.elapsed()) / 1000.0f;
 			if (bElapsed && secs > 0) {
 				sTemp = formatTime(secs);
 				sText += " (" + sTemp + ")";
@@ -1660,7 +1663,7 @@ void qjackctlMainForm::updateElapsedTimes (void)
 	// Display time remaining on start delay...
 	if (m_iTimerDelay < m_iStartDelay)
 		m_ui.TimeDisplayTextLabel->setText(formatTime(
-			(float) (m_iStartDelay - m_iTimerDelay) / 1000.0f));
+			float(m_iStartDelay - m_iTimerDelay) / 1000.0f));
 	else {
 		updateStatusItem(STATUS_RESET_TIME,
 			formatElapsedTime(STATUS_RESET_TIME,
@@ -2399,8 +2402,8 @@ void qjackctlMainForm::transportBackward (void)
 	if (m_pJackClient) {
 		jack_position_t tpos;
 		jack_transport_query(m_pJackClient, &tpos);
-		float rate = (float) tpos.frame_rate;
-		float tloc = (((float) tpos.frame / rate) - m_fSkipAccel) * rate;
+		float rate = float(tpos.frame_rate);
+		float tloc = ((float(tpos.frame) / rate) - m_fSkipAccel) * rate;
 		if (tloc < 0.0f) tloc = 0.0f;
 		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
 		// Log this here (if on initial toggle).
@@ -2461,8 +2464,8 @@ void qjackctlMainForm::transportForward (void)
 	if (m_pJackClient) {
 		jack_position_t tpos;
 		jack_transport_query(m_pJackClient, &tpos);
-		float rate = (float) tpos.frame_rate;
-		float tloc = (((float) tpos.frame / rate) + m_fSkipAccel) * rate;
+		float rate = float(tpos.frame_rate);
+		float tloc = ((float(tpos.frame) / rate) + m_fSkipAccel) * rate;
 		if (tloc < 0.0f) tloc = 0.0f;
 		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
 		// Log this here.
@@ -2497,7 +2500,7 @@ void qjackctlMainForm::refreshStatus (void)
 		// Transport timecode position.
 	//  if (bPlaying)
 			updateStatusItem(STATUS_TRANSPORT_TIME,
-				formatTime((float) tpos.frame / (float) tpos.frame_rate));
+				formatTime(float(tpos.frame) / float(tpos.frame_rate)));
 	//  else
 	//      updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 		// Transport barcode position (bar:beat.tick)

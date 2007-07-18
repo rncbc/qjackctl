@@ -85,10 +85,12 @@ qjackctlAboutForm::qjackctlAboutForm (
     sText += "</font></small>";
 #endif
 #ifndef CONFIG_ALSA_SEQ
+#if !defined(WIN32)
     sText += "<small><font color=\"red\">";
     sText += tr("ALSA/MIDI sequencer support disabled.");
     sText += "<br />\n";
     sText += "</font></small>";
+#endif
 #endif
     sText += "<br />\n";
     sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
