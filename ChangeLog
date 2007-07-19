@@ -3,6 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Andreas Persson just sent a patch that makes it possible to compile
+  and run qjackctl with Qt version 4.1. Applied whithout hesitation,
+  thanks.
+
+
 0.3.1a  2007-07-19  System-tray tooltip icon crash fix.
 
 - An immediate showstopper crash upon client start was irradicated,

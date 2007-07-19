@@ -586,7 +586,11 @@ bool qjackctlSocketList::addSocketItem (void)
 		qjackctlSocketItem *pSocketItem = selectedSocketItem();
 	//  m_pListView->setUpdatesEnabled(false);
 		if (pSocketItem)
+#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(false);
+#else
+			m_pListView->setItemSelected(pSocketItem, false);
+#endif
 		pSocketItem = new qjackctlSocketItem(this, socket.name(),
 			socket.clientName(), socket.type(), pSocketItem);
 		if (pSocketItem) {
@@ -600,7 +604,11 @@ bool qjackctlSocketList::addSocketItem (void)
 			}
 			bResult = true;
 		}
+#if QT_VERSION >= 0x040200
 		pSocketItem->setSelected(true);
+#else
+		m_pListView->setItemSelected(pSocketItem, true);
+#endif
 		m_pListView->setCurrentItem(pSocketItem);
 	//  m_pListView->setUpdatesEnabled(true);
 	//  m_pListView->update();
@@ -676,7 +684,11 @@ bool qjackctlSocketList::editSocketItem (void)
 				pPlugItem = new qjackctlPlugItem(
 					pSocketItem, iter.next(), pPlugItem);
 			}
+#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(true);
+#else
+			m_pListView->setItemSelected(pSocketItem, true);
+#endif
 			m_pListView->setCurrentItem(pSocketItem);
 		//  m_pListView->setUpdatesEnabled(true);
 		//  m_pListView->triggerUpdate();
@@ -735,7 +747,11 @@ bool qjackctlSocketList::copySocketItem (void)
 				}
 				bResult = true;
 			}
+#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(true);
+#else
+			m_pListView->setItemSelected(pSocketItem, true);
+#endif
 			m_pListView->setCurrentItem(pSocketItem);
 		//  m_pListView->setUpdatesEnabled(true);
 		//  m_pListView->triggerUpdate();
@@ -776,7 +792,11 @@ bool qjackctlSocketList::moveUpSocketItem (void)
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
 				m_pListView->insertTopLevelItem(iItem - 1, pItem);
+#if QT_VERSION >= 0x040200
 				pSocketItem->setSelected(true);
+#else
+				m_pListView->setItemSelected(pSocketItem, true);
+#endif
 				m_pListView->setCurrentItem(pSocketItem);
 			//  m_pListView->setUpdatesEnabled(true);
 			//  m_pListView->update();
@@ -803,7 +823,11 @@ bool qjackctlSocketList::moveDownSocketItem (void)
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
 				m_pListView->insertTopLevelItem(iItem + 1, pItem);
+#if QT_VERSION >= 0x040200
 				pSocketItem->setSelected(true);
+#else
+				m_pListView->setItemSelected(pSocketItem, true);
+#endif
 				m_pListView->setCurrentItem(pSocketItem);
 			//  m_pListView->setUpdatesEnabled(true);
 			//  m_pListView->update();

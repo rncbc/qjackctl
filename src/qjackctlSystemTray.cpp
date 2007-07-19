@@ -103,12 +103,16 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 // Constructor.
 qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	: QWidget(pParent, Qt::Window
+#if QT_VERSION >= 0x040200
 		| Qt::CustomizeWindowHint
+#endif
 		| Qt::X11BypassWindowManagerHint
 		| Qt::FramelessWindowHint
 		| Qt::WindowStaysOnTopHint)
 {
+#if QT_VERSION >= 0x040200
 	QWidget::setAttribute(Qt::WA_AlwaysShowToolTips);
+#endif
 //	QWidget::setAttribute(Qt::WA_NoSystemBackground);
 
 //	QWidget::setBackgroundRole(QPalette::NoRole);

@@ -22,6 +22,12 @@
 #ifndef __qjackctlSocketForm_h
 #define __qjackctlSocketForm_h
 
+#include <QtGlobal>
+
+#if QT_VERSION < 0x040200
+#define setAllColumnsShowFocus(x) parent()
+#endif
+
 #include "ui_qjackctlSocketForm.h"
 
 #include "qjackctlJackConnect.h"

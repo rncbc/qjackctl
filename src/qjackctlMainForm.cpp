@@ -358,7 +358,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
 	// What style do we create these forms?
 	Qt::WindowFlags wflags = Qt::Window
+#if QT_VERSION >= 0x040200
 		| Qt::CustomizeWindowHint
+#endif
 		| Qt::WindowTitleHint
 		| Qt::WindowSystemMenuHint
 		| Qt::WindowMinMaxButtonsHint;

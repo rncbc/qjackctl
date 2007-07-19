@@ -26,7 +26,8 @@
 
 #include <QDateTime>
 #include <QTextBlock>
-//Added by qt3to4:
+#include <QTextCursor>
+
 #include <QShowEvent>
 #include <QHideEvent>
 

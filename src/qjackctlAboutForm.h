@@ -22,6 +22,12 @@
 #ifndef __qjackctlAboutForm_h
 #define __qjackctlAboutForm_h
 
+#include <QtGlobal>
+
+#if QT_VERSION < 0x040200
+#define setOpenExternalLinks(x) parent()
+#endif
+
 #include "ui_qjackctlAboutForm.h"
 
 

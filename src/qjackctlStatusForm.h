@@ -22,6 +22,12 @@
 #ifndef __qjackctlStatusForm_h
 #define __qjackctlStatusForm_h
 
+#include <QtGlobal>
+
+#if QT_VERSION < 0x040200
+#define setAllColumnsShowFocus(x) parent()
+#endif
+
 #include "ui_qjackctlStatusForm.h"
 
 // Forward declarations.

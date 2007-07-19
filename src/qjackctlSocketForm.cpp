@@ -357,7 +357,11 @@ void qjackctlSocketForm::addPlug (void)
 	if (!sPlugName.isEmpty()) {
 		QTreeWidgetItem *pItem = m_ui.PlugListView->currentItem();
 		if (pItem)
+#if QT_VERSION >= 0x040200
 			pItem->setSelected(false);
+#else
+			m_ui.PlugListView->setItemSelected(pItem, false);
+#endif
 		pItem = new QTreeWidgetItem(m_ui.PlugListView, pItem);
 		if (pItem) {
 			pItem->setText(0, sPlugName);
@@ -373,7 +377,11 @@ void qjackctlSocketForm::addPlug (void)
 			}
 			if (pXpmPlug)
 				pItem->setIcon(0, QIcon(*pXpmPlug));
+#if QT_VERSION >= 0x040200
 			pItem->setSelected(true);
+#else
+			m_ui.PlugListView->setItemSelected(pItem, true);
+#endif
 			m_ui.PlugListView->setCurrentItem(pItem);
 		}
 		m_ui.PlugNameComboBox->setEditText(QString::null);
@@ -412,10 +420,18 @@ void qjackctlSocketForm::moveUpPlug (void)
 	if (pItem) {
 		int iItem = m_ui.PlugListView->indexOfTopLevelItem(pItem);
 		if (iItem > 0) {
+#if QT_VERSION >= 0x040200
 			pItem->setSelected(false);
+#else
+			m_ui.PlugListView->setItemSelected(pItem, false);
+#endif
 			pItem = m_ui.PlugListView->takeTopLevelItem(iItem);
 			m_ui.PlugListView->insertTopLevelItem(iItem - 1, pItem);
+#if QT_VERSION >= 0x040200
 			pItem->setSelected(true);
+#else
+			m_ui.PlugListView->setItemSelected(pItem, true);
+#endif
 			m_ui.PlugListView->setCurrentItem(pItem);
 		}
 	}
@@ -432,10 +448,18 @@ void qjackctlSocketForm::moveDownPlug (void)
 		int iItem = m_ui.PlugListView->indexOfTopLevelItem(pItem);
 		int iItemCount = m_ui.PlugListView->topLevelItemCount();
 		if (iItem < iItemCount - 1) {
+#if QT_VERSION >= 0x040200
 			pItem->setSelected(false);
+#else
+			m_ui.PlugListView->setItemSelected(pItem, false);
+#endif
 			pItem = m_ui.PlugListView->takeTopLevelItem(iItem);
 			m_ui.PlugListView->insertTopLevelItem(iItem + 1, pItem);
+#if QT_VERSION >= 0x040200
 			pItem->setSelected(true);
+#else
+			m_ui.PlugListView->setItemSelected(pItem, true);
+#endif
 			m_ui.PlugListView->setCurrentItem(pItem);
 		}
 	}
