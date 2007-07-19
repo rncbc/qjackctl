@@ -2516,12 +2516,12 @@ void qjackctlMainForm::refreshStatus (void)
 		// Less frequent status items update...
 		if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 			m_iStatusRefresh = 0;
-			const QString& sDspLoad
-				= tr("%1 %").arg(jack_cpu_load(m_pJackClient), 0, 'g', 2);
-#ifdef CONFIG_SYSTEM_TRAY
-			m_pSystemTray->setToolTip(windowTitle() + " (" + sDspLoad + ")");
-#endif			
-			updateStatusItem(STATUS_DSP_LOAD, sDspLoad);
+			float fDspLoad = jack_cpu_load(m_pJackClient);
+			if (m_pSystemTray)
+				m_pSystemTray->setToolTip(
+					tr("%1 (%2%)").arg(windowTitle()).arg(fDspLoad, 0, 'g', 2));
+			updateStatusItem(STATUS_DSP_LOAD,
+				tr("%1 %").arg(fDspLoad, 0, 'g', 2));
 			updateStatusItem(STATUS_SAMPLE_RATE,
 				tr("%1 Hz").arg(jack_get_sample_rate(m_pJackClient)));
 			updateStatusItem(STATUS_BUFFER_SIZE,

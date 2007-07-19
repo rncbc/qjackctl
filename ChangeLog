@@ -3,6 +3,14 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+0.3.1a  2007-07-19  System-tray tooltip icon crash fix.
+
+- An immediate showstopper crash upon client start was irradicated,
+  which was affecting those with the system-tray icon disabled,
+  as is the default (thanks to Ken Ellinwood for first reporting
+  this sloppy one).
+
+
 0.3.1   2007-07-18  Shallowed bug-fix release.
 
 - The current DSP load percentage activity is now also displayed on

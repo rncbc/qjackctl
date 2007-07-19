@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 6
+%define release 7
 %define prefix  @ac_prefix@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface.
@@ -54,6 +54,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Thu Jul 19 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- System-tray tooltip icon crash fix.
 * Wed Jul 18 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Shallowed bug-fix release..
 * Tue Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
