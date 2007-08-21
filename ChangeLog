@@ -5,6 +5,14 @@ ChangeLog
 
 CVS HEAD
 
+- The infamous "Keep child windows always on top" global option is
+  now supposed to behave a little better when disabled, layering
+  child windows as naturally as far the window manager dictates.
+
+- Input/Ouput Channel setting is now allowed to be greater than 32;
+  the special default text is now displayed, also on Input/Output
+  Latency and Priority settings spin-boxes. 
+
 - Andreas Persson just sent a patch that makes it possible to compile
   and run qjackctl with Qt version 4.1. Applied whithout hesitation,
   thanks.

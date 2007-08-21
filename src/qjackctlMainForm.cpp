@@ -357,6 +357,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateButtons();
 
 	// What style do we create these forms?
+	QWidget *pParent = NULL;
 	Qt::WindowFlags wflags = Qt::Window
 #if QT_VERSION >= 0x040200
 		| Qt::CustomizeWindowHint
@@ -364,13 +365,15 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		| Qt::WindowTitleHint
 		| Qt::WindowSystemMenuHint
 		| Qt::WindowMinMaxButtonsHint;
-	if (m_pSetup->bKeepOnTop)
+	if (m_pSetup->bKeepOnTop) {
+		pParent = this;
 		wflags |= Qt::Tool;
+	}
 	// All forms are to be created right now.
-	m_pMessagesForm    = new qjackctlMessagesForm    (this, wflags);
-	m_pStatusForm      = new qjackctlStatusForm      (this, wflags);
-	m_pConnectionsForm = new qjackctlConnectionsForm (this, wflags);
-	m_pPatchbayForm    = new qjackctlPatchbayForm    (this, wflags);
+	m_pMessagesForm    = new qjackctlMessagesForm    (pParent, wflags);
+	m_pStatusForm      = new qjackctlStatusForm      (pParent, wflags);
+	m_pConnectionsForm = new qjackctlConnectionsForm (pParent, wflags);
+	m_pPatchbayForm    = new qjackctlPatchbayForm    (pParent, wflags);
 	// Setup appropriately...
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);

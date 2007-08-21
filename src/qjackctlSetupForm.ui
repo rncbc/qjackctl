@@ -451,7 +451,7 @@
                <string>Time in seconds that client is delayed after server startup</string>
               </property>
               <property name="maximum" >
-               <number>99</number>
+               <number>999</number>
               </property>
               <property name="minimum" >
                <number>0</number>
@@ -857,7 +857,7 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="1" >
+            <item row="5" column="1" colspan="2" >
              <widget class="QSpinBox" name="InChannelsSpinBox" >
               <property name="font" >
                <font>
@@ -869,7 +869,10 @@
                <string>Maximum input audio hardware channels to allocate</string>
               </property>
               <property name="maximum" >
-               <number>32</number>
+               <number>999</number>
+              </property>
+              <property name="specialValueText" >
+               <string>(default)</string>
               </property>
              </widget>
             </item>
@@ -945,7 +948,7 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="1" colspan="2" >
+            <item row="8" column="1" colspan="3" >
              <widget class="QSpinBox" name="OutLatencySpinBox" >
               <property name="font" >
                <font>
@@ -957,7 +960,10 @@
                <string>External output latency (frames)</string>
               </property>
               <property name="maximum" >
-               <number>999999</number>
+               <number>9999999</number>
+              </property>
+              <property name="specialValueText" >
+               <string>(default)</string>
               </property>
              </widget>
             </item>
@@ -1079,7 +1085,7 @@
               </property>
              </widget>
             </item>
-            <item rowspan="2" row="5" column="2" colspan="2" >
+            <item rowspan="2" row="5" column="3" >
              <spacer>
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
@@ -1153,7 +1159,7 @@
               </property>
              </widget>
             </item>
-            <item row="6" column="1" >
+            <item row="6" column="1" colspan="2" >
              <widget class="QSpinBox" name="OutChannelsSpinBox" >
               <property name="font" >
                <font>
@@ -1165,7 +1171,10 @@
                <string>Maximum output audio hardware channels to allocate</string>
               </property>
               <property name="maximum" >
-               <number>32</number>
+               <number>999</number>
+              </property>
+              <property name="specialValueText" >
+               <string>(default)</string>
               </property>
              </widget>
             </item>
@@ -1289,7 +1298,7 @@
               </property>
              </widget>
             </item>
-            <item row="7" column="1" colspan="2" >
+            <item row="7" column="1" colspan="3" >
              <widget class="QSpinBox" name="InLatencySpinBox" >
               <property name="font" >
                <font>
@@ -1301,7 +1310,10 @@
                <string>External input latency (frames)</string>
               </property>
               <property name="maximum" >
-               <number>999999</number>
+               <number>9999999</number>
+              </property>
+              <property name="specialValueText" >
+               <string>(default)</string>
               </property>
              </widget>
             </item>
@@ -1360,7 +1372,7 @@
                <string>Number of periods in the hardware buffer</string>
               </property>
               <property name="maximum" >
-               <number>99</number>
+               <number>999</number>
               </property>
               <property name="minimum" >
                <number>2</number>
@@ -1623,8 +1635,8 @@
               <property name="maximum" >
                <number>89</number>
               </property>
-              <property name="minimum" >
-               <number>0</number>
+              <property name="specialValueText" >
+               <string>(default)</string>
               </property>
              </widget>
             </item>
@@ -1821,7 +1833,7 @@
                <string>PCM channel</string>
               </property>
               <property name="maximum" >
-               <number>99</number>
+               <number>999</number>
               </property>
              </widget>
             </item>
