@@ -390,11 +390,17 @@ qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 
 
 // Cable finder (logical matching by client/port names).
-qjackctlPatchbayCable *qjackctlPatchbayRack::findCable ( 
+qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 	const QString& sOClientName, const QString& sOPortName,
 	const QString& sIClientName, const QString& sIPortName,
 	int iSocketType )
 {
+	// This is a regex prefix needed for ALSA MDII
+	// as client and port names include id-number+colon...
+	QString sPrefix;
+	if (iSocketType == QJACKCTL_SOCKETTYPE_MIDI)
+		sPrefix = "[0-9]+:";
+	
 	// Scan from output-socket list...
 	QListIterator<qjackctlPatchbaySocket *> osocket(m_osocketlist);
 	while (osocket.hasNext()) {
@@ -402,12 +408,14 @@ qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 		if (pOSocket->type() != iSocketType)
 			continue;
 		// Output socket client name match?
-		if (!QRegExp(pOSocket->clientName()).exactMatch(sOClientName))
+		if (!QRegExp(sPrefix + pOSocket->clientName())
+			.exactMatch(sOClientName))
 			continue;
 		// Output plug port names match?
 		QStringListIterator oplug(pOSocket->pluglist());
 		while (oplug.hasNext()) {
-			if (!QRegExp(oplug.next()).exactMatch(sOPortName))
+			if (!QRegExp(sPrefix + oplug.next())
+				.exactMatch(sOPortName))
 				continue;
 			// Scan for output-socket cable...
 			QListIterator<qjackctlPatchbayCable *> cable(m_cablelist);
@@ -417,13 +425,15 @@ qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 					continue;
 				qjackctlPatchbaySocket *pISocket = pCable->inputSocket();
 				// Input socket client name match?
-				if (!QRegExp(pISocket->clientName()).exactMatch(sIClientName))
+				if (!QRegExp(sPrefix + pISocket->clientName())
+					.exactMatch(sIClientName))
 					continue;
 				// Input plug port names match?
 				QStringListIterator iplug(pISocket->pluglist());
 				while (iplug.hasNext()) {
-					// Found it...
-					if (QRegExp(iplug.next()).exactMatch(sIPortName))
+					// Found it?
+					if (QRegExp(sPrefix + iplug.next())
+						.exactMatch(sIPortName))
 						return pCable;
 				}
 			}

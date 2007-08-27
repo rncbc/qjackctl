@@ -1962,12 +1962,12 @@ void qjackctlMainForm::queryDisconnect (
 {
 	if (m_pSetup->bActivePatchbay) {
 		qjackctlPatchbayCable *pCable = m_pPatchbayRack->findCable(
-			pOPort->clientName(), pOPort->portName(), 
+			pOPort->clientName(), pOPort->portName(),
 			pIPort->clientName(), pIPort->portName(), iSocketType); 
 		if (pCable && QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("A patchbay definition is currently active,\n"
-			"which is probable to restore this connection:\n\n"
+			"which is probable to redo this connection:\n\n"
 			"%1 -> %2\n\n"
 			"Do you want to remove the patchbay connection?")
 			.arg(pCable->outputSocket()->name())
