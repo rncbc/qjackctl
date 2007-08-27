@@ -448,6 +448,10 @@ signals:
 	// Connection change signal.
 	void connectChanged();
 
+	// Pre-notification of (dis)connection.
+	void connecting(qjackctlPortItem *, qjackctlPortItem *);
+	void disconnecting(qjackctlPortItem *, qjackctlPortItem *);
+
 protected:
 
 	// Connect/Disconnection primitives.

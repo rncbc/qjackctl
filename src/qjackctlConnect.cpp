@@ -1353,6 +1353,8 @@ bool qjackctlConnect::connectPortsEx (
 	if (pOPort->findConnectPtr(pIPort) != NULL)
 		return false;
 	
+	emit connecting(pOPort, pIPort);
+
 	if (!connectPorts(pOPort, pIPort))
 		return false;
 
@@ -1367,6 +1369,8 @@ bool qjackctlConnect::disconnectPortsEx (
 {
 	if (pOPort->findConnectPtr(pIPort) == NULL)
 		return false;
+
+	emit disconnecting(pOPort, pIPort);
 
 	if (!disconnectPorts(pOPort, pIPort))
 		return false;

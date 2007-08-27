@@ -55,6 +55,8 @@ public:
 	bool loadPatchbayFile(const QString& sFileName);
 	bool savePatchbayFile(const QString& sFileName);
 
+	void loadPatchbayRack(qjackctlPatchbayRack *pRack);
+
 	void setRecentPatchbays(const QStringList& patchbays);
 	void updateRecentPatchbays();
 

@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- A warning is now being issued, asking whether one wants to remove a
+  corresponding Patchbay connection, when client/ports are being
+  disconnected over the Connections window, thus avoiding automatic
+  reconnection annoyance due to normal active Patchbay behavior.
+
 - The infamous "Keep child windows always on top" global option is
   now supposed to behave a little better when disabled, layering
   child windows as naturally as far the window manager dictates.

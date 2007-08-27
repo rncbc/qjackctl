@@ -23,6 +23,8 @@
 #include "qjackctlMainForm.h"
 
 #include "qjackctlStatus.h"
+
+#include "qjackctlPatchbay.h"
 #include "qjackctlPatchbayFile.h"
 
 #include "qjackctlMessagesForm.h"
@@ -1951,6 +1953,32 @@ void qjackctlMainForm::cableConnectSlot (
 	}
 
 	appendMessagesColor(sText + '.', sColor);
+}
+
+
+// Patchbay (dis)connection slot.
+void qjackctlMainForm::queryDisconnect (
+	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType )
+{
+	if (m_pSetup->bActivePatchbay) {
+		qjackctlPatchbayCable *pCable = m_pPatchbayRack->findCable(
+			pOPort->clientName(), pOPort->portName(), 
+			pIPort->clientName(), pIPort->portName(), iSocketType); 
+		if (pCable && QMessageBox::warning(this,
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("A patchbay definition is currently active,\n"
+			"which is probable to restore this connection:\n\n"
+			"%1 -> %2\n\n"
+			"Do you want to remove the patchbay connection?")
+			.arg(pCable->outputSocket()->name())
+			.arg(pCable->inputSocket()->name()),
+			tr("Remove"), tr("Ignore")) == 0) {
+			m_pPatchbayRack->removeCable(pCable);
+			if (m_pPatchbayForm
+				&& isActivePatchbay(m_pPatchbayForm->patchbayPath()))
+				m_pPatchbayForm->loadPatchbayRack(m_pPatchbayRack);
+		}
+	}
 }
 
 

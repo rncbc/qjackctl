@@ -402,6 +402,20 @@ bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 }
 
 
+// Dirty-(re)load patchbay definitions from know rack.
+void qjackctlPatchbayForm::loadPatchbayRack ( qjackctlPatchbayRack *pRack )
+{
+	// Step 1: load from rack...
+	m_pPatchbay->loadRack(pRack);
+
+	// Override dirty flag.
+	m_ui.PatchbayView->setDirty(true);
+
+	// Done.
+	stabilizeForm();
+}
+
+
 // Create a new patchbay definition from scratch.
 void qjackctlPatchbayForm::newPatchbay (void)
 {

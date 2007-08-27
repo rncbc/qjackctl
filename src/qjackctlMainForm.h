@@ -46,6 +46,7 @@ class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
 class qjackctlPatchbayRack;
 class qjackctlSystemTray;
+class qjackctlPortItem;
 
 class QSocketNotifier;
 
@@ -84,6 +85,9 @@ public:
 	void refreshAlsaConnections();
 
 	void refreshPatchbay();
+
+	void queryDisconnect(
+		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType);
 
 public slots:
 

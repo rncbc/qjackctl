@@ -98,6 +98,12 @@ public slots:
 	void alsaRefresh();
 	void alsaStabilize();
 
+protected slots:
+
+	void audioDisconnecting(qjackctlPortItem *, qjackctlPortItem *);
+	void midiDisconnecting(qjackctlPortItem *, qjackctlPortItem *);
+	void alsaDisconnecting(qjackctlPortItem *, qjackctlPortItem *);
+
 protected:
 
 	void showEvent(QShowEvent *);

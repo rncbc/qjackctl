@@ -25,6 +25,7 @@
 #include "qjackctlSetup.h"
 
 #include "qjackctlMainForm.h"
+#include "qjackctlPatchbay.h"
 
 #include <QMessageBox>
 
@@ -334,12 +335,18 @@ void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
 				m_ui.AudioConnectView, pJackClient, QJACKCTL_JACK_AUDIO);
 			QObject::connect(m_pAudioConnect, SIGNAL(connectChanged()),
 				pMainForm, SLOT(jackConnectChanged()));
+			QObject::connect(m_pAudioConnect,
+				SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
+				SLOT(audioDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
 		}
 		if (m_pMidiConnect == NULL && pMainForm) {
 			m_pMidiConnect = new qjackctlJackConnect(
 				m_ui.MidiConnectView, pJackClient, QJACKCTL_JACK_MIDI);
 			QObject::connect(m_pMidiConnect, SIGNAL(connectChanged()),
 				pMainForm, SLOT(jackConnectChanged()));
+			QObject::connect(m_pMidiConnect,
+				SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
+				SLOT(midiDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
 		}
 	}
 
@@ -364,6 +371,9 @@ void qjackctlConnectionsForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 		if (pMainForm) {
 			QObject::connect(m_pAlsaConnect, SIGNAL(connectChanged()),
 				pMainForm, SLOT(alsaConnectChanged()));
+			QObject::connect(m_pAlsaConnect,
+				SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
+				SLOT(alsaDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
 		}
 	}
 
@@ -410,6 +420,16 @@ void qjackctlConnectionsForm::audioDisconnectAll (void)
 		if (m_pAudioConnect->disconnectAll())
 			refreshAudio(false);
 	}
+}
+
+
+// JACK audio ports disconnecting.
+void qjackctlConnectionsForm::audioDisconnecting (
+	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+{
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_AUDIO);
 }
 
 
@@ -469,6 +489,18 @@ void qjackctlConnectionsForm::midiDisconnectAll (void)
 }
 
 
+// JACK MIDI ports disconnecting.
+void qjackctlConnectionsForm::midiDisconnecting (
+	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+{
+	// FIXME: Patchbay may not support JACK MIDI yet!
+	// take it as stub and make it like audio type...
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_AUDIO);
+}
+
+
 // Refresh JACK MIDI form by notifying the parent form.
 void qjackctlConnectionsForm::midiRefresh (void)
 {
@@ -522,6 +554,16 @@ void qjackctlConnectionsForm::alsaDisconnectAll (void)
 		if (m_pAlsaConnect->disconnectAll())
 			refreshAlsa(false);
 	}
+}
+
+
+// ALSA MIDI ports disconnecting.
+void qjackctlConnectionsForm::alsaDisconnecting (
+	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+{
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_MIDI);
 }
 
 
