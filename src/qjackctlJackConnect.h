@@ -129,13 +129,13 @@ public:
 	int jackType() const;
 
 	// Common pixmap accessor.
-	QPixmap& pixmap (int iPixmap) const;
+	const QPixmap& pixmap (int iPixmap) const;
 	
 protected:
 
 	// Virtual Connect/Disconnection primitives.
-	void connectPorts    (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
-	void disconnectPorts (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	bool connectPorts    (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	bool disconnectPorts (qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
 
 	// Update port connection references.
 	void updateConnections();

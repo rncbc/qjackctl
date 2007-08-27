@@ -1347,25 +1347,33 @@ void qjackctlConnect::setIClientList ( qjackctlClientList *pIClientList )
 
 
 // Connection primitive.
-void qjackctlConnect::connectPortsEx (
+bool qjackctlConnect::connectPortsEx (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
-	if (pOPort->findConnectPtr(pIPort) == NULL) {
-		connectPorts(pOPort, pIPort);
-		pOPort->addConnect(pIPort);
-		pIPort->addConnect(pOPort);
-	}
+	if (pOPort->findConnectPtr(pIPort) != NULL)
+		return false;
+	
+	if (!connectPorts(pOPort, pIPort))
+		return false;
+
+	pOPort->addConnect(pIPort);
+	pIPort->addConnect(pOPort);
+	return true;
 }
 
 // Disconnection primitive.
-void qjackctlConnect::disconnectPortsEx (
+bool qjackctlConnect::disconnectPortsEx (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
-	if (pOPort->findConnectPtr(pIPort) != 0) {
-		disconnectPorts(pOPort, pIPort);
-		pOPort->removeConnect(pIPort);
-		pIPort->removeConnect(pOPort);
-	}
+	if (pOPort->findConnectPtr(pIPort) == NULL)
+		return false;
+
+	if (!disconnectPorts(pOPort, pIPort))
+		return false;
+
+	pOPort->removeConnect(pIPort);
+	pIPort->removeConnect(pOPort);
+	return true;
 }
 
 

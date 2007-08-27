@@ -281,7 +281,7 @@ qjackctlAlsaConnect::~qjackctlAlsaConnect (void)
 
 
 // Common pixmap accessor (static).
-QPixmap& qjackctlAlsaConnect::pixmap ( int iPixmap ) const
+const QPixmap& qjackctlAlsaConnect::pixmap ( int iPixmap ) const
 {
 	return *m_apPixmaps[iPixmap];
 }
@@ -314,7 +314,7 @@ snd_seq_t *qjackctlAlsaConnect::alsaSeq (void) const
 
 
 // Connection primitive.
-void qjackctlAlsaConnect::connectPorts (
+bool qjackctlAlsaConnect::connectPorts (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
 #ifdef CONFIG_ALSA_SEQ
@@ -335,14 +335,18 @@ void qjackctlAlsaConnect::connectPorts (
 	seq_addr.port   = pIAlsa->alsaPort();
 	snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
 
-	snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs);
+	return (snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs) >= 0);
+
+#else
+
+	return false;
 
 #endif	// CONFIG_ALSA_SEQ
 }
 
 
 // Disconnection primitive.
-void qjackctlAlsaConnect::disconnectPorts (
+bool qjackctlAlsaConnect::disconnectPorts (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
 #ifdef CONFIG_ALSA_SEQ
@@ -363,7 +367,11 @@ void qjackctlAlsaConnect::disconnectPorts (
 	seq_addr.port   = pIAlsa->alsaPort();
 	snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
 
-	snd_seq_unsubscribe_port(m_pAlsaSeq, pAlsaSubs);
+	return (snd_seq_unsubscribe_port(m_pAlsaSeq, pAlsaSubs) >= 0);
+
+#else
+
+	return false;
 
 #endif	// CONFIG_ALSA_SEQ
 }

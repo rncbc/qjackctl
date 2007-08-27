@@ -25,10 +25,18 @@
 #include "ui_qjackctlMainForm.h"
 
 #include "qjackctlSetup.h"
-#include "qjackctlPatchbay.h"
 
 #include <QProcess>
 #include <QDateTime>
+
+#include <jack/jack.h>
+
+#ifdef CONFIG_ALSA_SEQ
+#include <alsa/asoundlib.h>
+#else
+typedef void snd_seq_t;
+#endif
+
 
 // Forward declarations.
 class qjackctlSetup;
@@ -36,6 +44,7 @@ class qjackctlMessagesForm;
 class qjackctlStatusForm;
 class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
+class qjackctlPatchbayRack;
 class qjackctlSystemTray;
 
 class QSocketNotifier;
@@ -231,7 +240,7 @@ private:
 	qjackctlConnectionsForm *m_pConnectionsForm;
 	qjackctlPatchbayForm    *m_pPatchbayForm;
 
-	qjackctlPatchbayRack m_patchbayRack;
+	qjackctlPatchbayRack *m_pPatchbayRack;
 
 	qjackctlSystemTray *m_pSystemTray;
 

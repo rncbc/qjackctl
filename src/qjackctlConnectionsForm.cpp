@@ -359,11 +359,11 @@ void qjackctlConnectionsForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
 	}
 
 	if (pAlsaSeq && m_pAlsaConnect == NULL) {
+		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 		m_pAlsaConnect = new qjackctlAlsaConnect(m_ui.AlsaConnectView, pAlsaSeq);
-		if (m_pAlsaConnect) {
-			qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-			if (pMainForm)
-				QObject::connect(m_pAlsaConnect, SIGNAL(connectChanged()), pMainForm, SLOT(alsaConnectChanged()));
+		if (pMainForm) {
+			QObject::connect(m_pAlsaConnect, SIGNAL(connectChanged()),
+				pMainForm, SLOT(alsaConnectChanged()));
 		}
 	}
 
@@ -495,7 +495,7 @@ bool qjackctlConnectionsForm::isAlsaConnected (void) const
 }
 
 
-// Connect current selected ports.
+// Connect current selected ALSA MIDI ports.
 void qjackctlConnectionsForm::alsaConnectSelected (void)
 {
 	if (m_pAlsaConnect) {
@@ -505,7 +505,7 @@ void qjackctlConnectionsForm::alsaConnectSelected (void)
 }
 
 
-// Disconnect current selected ports.
+// Disconnect current selected ALSA MIDI ports.
 void qjackctlConnectionsForm::alsaDisconnectSelected (void)
 {
 	if (m_pAlsaConnect) {
@@ -515,7 +515,7 @@ void qjackctlConnectionsForm::alsaDisconnectSelected (void)
 }
 
 
-// Disconnect all connected ports.
+// Disconnect all connected ALSA MIDI ports.
 void qjackctlConnectionsForm::alsaDisconnectAll (void)
 {
 	if (m_pAlsaConnect) {

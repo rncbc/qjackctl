@@ -225,6 +225,9 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pConnectionsForm = NULL;
 	m_pPatchbayForm    = NULL;
 
+	// Patchbay rack can be readily created.
+	m_pPatchbayRack = new qjackctlPatchbayRack();
+
 	// The eventual system tray widget.
 	m_pSystemTray  = NULL;
 
@@ -331,6 +334,10 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	if (m_pSystemTray)
 		delete m_pSystemTray;
 
+	// Patchbay rack is also dead.
+	if (m_pPatchbayRack)
+		delete m_pPatchbayRack;
+
 	// Pseudo-singleton reference shut-down.
 	g_pMainForm = NULL;
 }
@@ -379,7 +386,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pPatchbayForm->setup(m_pSetup);
 
 	// Set the patchbay cable connection notification signal/slot.
-	QObject::connect(&m_patchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
+	QObject::connect(m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
 		this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
 	// Try to restore old window positioning and appearence.
@@ -1461,7 +1468,7 @@ void qjackctlMainForm::updateActivePatchbay (void)
 
 	// Time to load the active patchbay rack profiler?
 	if (m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty()) {
-		if (!qjackctlPatchbayFile::load(&m_patchbayRack, m_pSetup->sActivePatchbayPath)) {
+		if (!qjackctlPatchbayFile::load(m_pPatchbayRack, m_pSetup->sActivePatchbayPath)) {
 			appendMessagesError(tr("Could not load active patchbay definition.\n\nDisabled."));
 			m_pSetup->bActivePatchbay = false;
 		} else {
@@ -1844,7 +1851,7 @@ void qjackctlMainForm::timerSlot (void)
 			if (m_pSetup->bActivePatchbay) {
 				appendMessagesColor(
 					tr("Audio active patchbay scan") + sEllipsis, "#6699cc");
-				m_patchbayRack.connectAudioScan(m_pJackClient);
+				m_pPatchbayRack->connectAudioScan(m_pJackClient);
 			}
 			refreshJackConnections();
 		}
@@ -1854,7 +1861,7 @@ void qjackctlMainForm::timerSlot (void)
 			if (m_pSetup->bActivePatchbay) {
 				appendMessagesColor(
 					tr("MIDI active patchbay scan") + sEllipsis, "#99cc66");
-				m_patchbayRack.connectMidiScan(m_pAlsaSeq);
+				m_pPatchbayRack->connectMidiScan(m_pAlsaSeq);
 			}
 			refreshAlsaConnections();
 		}
@@ -2947,7 +2954,7 @@ void qjackctlMainForm::quitMainForm (void)
 
 
 // Context menu event handler.
-void qjackctlMainForm::contextMenuEvent( QContextMenuEvent *pEvent )
+void qjackctlMainForm::contextMenuEvent ( QContextMenuEvent *pEvent )
 {
 	// We'll just show up the usual system tray menu.
 	systemTrayContextMenu(pEvent->globalPos());

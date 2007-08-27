@@ -25,49 +25,12 @@
 #include "qjackctlStatus.h"
 #include "qjackctlSetup.h"
 
-#include <jack/jack.h>
-
 #include "qjackctlMainForm.h"
 
 #include <QHeaderView>
 
 #include <QShowEvent>
 #include <QHideEvent>
-
-
-#ifdef QJACKCTL_Q3TOOLTIP
-
-// Custom tooltip class.
-class qjackctlStatusToolTip : public QToolTip
-{
-public:
-
-	// Constructor.
-	qjackctlStatusToolTip(Q3ListView *pListView)
-		: QToolTip(pListView->viewport()) { m_pListView = pListView; }
-	// Virtual destructor.
-	virtual ~qjackctlStatusToolTip() {}
-
-protected:
-
-	// Tooltip handler.
-	void maybeTip(const QPoint& pos) 
-	{
-		QTreeWidgetItem *pItem = m_pListView->itemAt(pos);
-		if (pItem) {
-			QRect rect(m_pListView->itemRect(pItem));
-			if (rect.isValid())
-				QToolTip::tip(rect, pItem->text(0).remove(':'));
-		}
-	}
-
-private:
-
-	// The actual parent widget holder.
-	Q3ListView *m_pListView;
-};
-
-#endif
 
 
 //----------------------------------------------------------------------------

@@ -281,33 +281,33 @@ void qjackctlJackConnect::deleteIconPixmaps (void)
 
 
 // Common pixmap accessor (static).
-QPixmap& qjackctlJackConnect::pixmap ( int iPixmap ) const
+const QPixmap& qjackctlJackConnect::pixmap ( int iPixmap ) const
 {
 	return *m_apPixmaps[iPixmap];
 }
 
 
 // Connection primitive.
-void qjackctlJackConnect::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+bool qjackctlJackConnect::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
 	qjackctlJackPort *pOJack = static_cast<qjackctlJackPort *> (pOPort);
 	qjackctlJackPort *pIJack = static_cast<qjackctlJackPort *> (pIPort);
 
-	jack_connect(pOJack->jackClient(),
+	return (jack_connect(pOJack->jackClient(),
 		pOJack->clientPortName().toUtf8().constData(),
-		pIJack->clientPortName().toUtf8().constData());
+		pIJack->clientPortName().toUtf8().constData()) == 0);
 }
 
 
 // Disconnection primitive.
-void qjackctlJackConnect::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
+bool qjackctlJackConnect::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
 	qjackctlJackPort *pOJack = static_cast<qjackctlJackPort *> (pOPort);
 	qjackctlJackPort *pIJack = static_cast<qjackctlJackPort *> (pIPort);
 
-	jack_disconnect(pOJack->jackClient(),
+	return (jack_disconnect(pOJack->jackClient(),
 		pOJack->clientPortName().toUtf8().constData(),
-		pIJack->clientPortName().toUtf8().constData());
+		pIJack->clientPortName().toUtf8().constData()) == 0);
 }
 
 

@@ -354,7 +354,7 @@ qjackctlPatchbaySlot *qjackctlPatchbayRack::findSlot ( const QString& sSlotName 
 }
 
 
-// Cable finder.
+// Cable finders.
 qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 	const QString& sOutputSocket, const QString& sInputSocket )
 {
@@ -386,6 +386,52 @@ qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 		sInputSocket = pCablePtr->inputSocket()->name();
 
 	return findCable(sOutputSocket, sInputSocket);
+}
+
+
+// Cable finder (logical matching by client/port names).
+qjackctlPatchbayCable *qjackctlPatchbayRack::findCable ( 
+	const QString& sOClientName, const QString& sOPortName,
+	const QString& sIClientName, const QString& sIPortName,
+	int iSocketType )
+{
+	// Scan from output-socket list...
+	QListIterator<qjackctlPatchbaySocket *> osocket(m_osocketlist);
+	while (osocket.hasNext()) {
+		qjackctlPatchbaySocket *pOSocket = osocket.next();
+		if (pOSocket->type() != iSocketType)
+			continue;
+		// Output socket client name match?
+		if (!QRegExp(pOSocket->clientName()).exactMatch(sOClientName))
+			continue;
+		// Output plug port names match?
+		QStringListIterator oplug(pOSocket->pluglist());
+		while (oplug.hasNext()) {
+			if (!QRegExp(oplug.next()).exactMatch(sOPortName))
+				continue;
+			// Scan for output-socket cable...
+			QListIterator<qjackctlPatchbayCable *> cable(m_cablelist);
+			while (cable.hasNext()) {
+				qjackctlPatchbayCable *pCable = cable.next();
+				if (pCable->outputSocket() != pOSocket)
+					continue;
+				qjackctlPatchbaySocket *pISocket = pCable->inputSocket();
+				// Input socket client name match?
+				if (!QRegExp(pISocket->clientName()).exactMatch(sIClientName))
+					continue;
+				// Input plug port names match?
+				QStringListIterator iplug(pISocket->pluglist());
+				while (iplug.hasNext()) {
+					// Found it...
+					if (QRegExp(iplug.next()).exactMatch(sIPortName))
+						return pCable;
+				}
+			}
+		}
+	}
+
+	// No matching cable was found.
+	return NULL;
 }
 
 

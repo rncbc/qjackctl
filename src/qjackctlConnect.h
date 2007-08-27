@@ -451,9 +451,9 @@ signals:
 protected:
 
 	// Connect/Disconnection primitives.
-	virtual void connectPorts(
+	virtual bool connectPorts(
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
-	virtual void disconnectPorts(
+	virtual bool disconnectPorts(
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort) = 0;
 
 	// Update port connection references.
@@ -485,8 +485,8 @@ private:
 	bool disconnectAllEx();
 
 	// Connect/Disconnection local primitives.
-	void connectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
-	void disconnectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	bool connectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
+	bool disconnectPortsEx(qjackctlPortItem *pOPort, qjackctlPortItem *pIPort);
 
 	// Instance variables.
 	qjackctlConnectView *m_pConnectView;

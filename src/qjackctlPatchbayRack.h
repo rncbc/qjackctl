@@ -205,6 +205,12 @@ public:
 		const QString& sOutputSocket, const QString& sInputSocket);
 	qjackctlPatchbayCable *findCable(qjackctlPatchbayCable *pCablePtr);
 
+	// Cable finder (logical matching by client/port names).
+	qjackctlPatchbayCable *findCable ( 
+		const QString& sOClientName, const QString& sOPortName,
+		const QString& sIClientName, const QString& sIPortName,
+		int iSocketType);
+
 	// Patchbay cleaner.
 	void clear();
 
