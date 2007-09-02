@@ -78,7 +78,6 @@ public:
 
 	void stabilize(int msecs);
 
-	void resetXrunStats();
 	void refreshXrunStats();
 
 	void refreshJackConnections();
@@ -131,6 +130,8 @@ public slots:
 
 	void systemTrayContextMenu(const QPoint&);
 	void activatePresetsMenu(QAction *);
+
+	void resetXrunStats();
 
 	void quitMainForm();
 
@@ -195,6 +196,7 @@ protected:
 	void showDirtySetupWarning();
 
 	void contextMenuEvent(QContextMenuEvent *);
+	void mousePressEvent(QMouseEvent *pMouseEvent);
 
 private:
 

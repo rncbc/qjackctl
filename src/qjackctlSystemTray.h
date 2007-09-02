@@ -72,6 +72,9 @@ signals:
 	// Clicked signal.
 	void clicked();
 
+	// Xrun reset signal.
+	void middleClicked();
+
 	// Context menu signal.
 	void contextMenuRequested(const QPoint& pos);
 

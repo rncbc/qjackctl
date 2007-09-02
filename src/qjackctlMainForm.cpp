@@ -2810,6 +2810,9 @@ void qjackctlMainForm::updateSystemTray (void)
 			SIGNAL(clicked()),
 			SLOT(toggleMainForm()));
 		QObject::connect(m_pSystemTray,
+			SIGNAL(middleClicked()),
+			SLOT(resetXrunStats()));
+		QObject::connect(m_pSystemTray,
 			SIGNAL(contextMenuRequested(const QPoint &)),
 			SLOT(systemTrayContextMenu(const QPoint &)));
 		m_pSystemTray->show();
@@ -2986,6 +2989,15 @@ void qjackctlMainForm::contextMenuEvent ( QContextMenuEvent *pEvent )
 {
 	// We'll just show up the usual system tray menu.
 	systemTrayContextMenu(pEvent->globalPos());
+}
+
+
+void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
+{
+	if (pMouseEvent->button() == Qt::MidButton &&
+		m_ui.StatusDisplayFrame->geometry().contains(pMouseEvent->pos())) {
+		resetXrunStats();
+	}
 }
 
 

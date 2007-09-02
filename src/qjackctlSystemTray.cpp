@@ -89,8 +89,10 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 		break;
 	case QSystemTrayIcon::Trigger:
 		emit clicked();
-		// Fall trhu...
+		break;
 	case QSystemTrayIcon::MiddleClick:
+		emit middleClicked();
+		break;
 	case QSystemTrayIcon::DoubleClick:
 	case QSystemTrayIcon::Unknown:
 	default:
@@ -299,6 +301,10 @@ void qjackctlSystemTray::mousePressEvent ( QMouseEvent *pMouseEvent )
 	case Qt::LeftButton:
 		// Toggle parent widget visibility.
 		emit clicked();
+		break;
+
+	case Qt::MidButton:
+		emit middleClicked();
 		break;
 
 	case Qt::RightButton:
