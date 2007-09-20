@@ -6,8 +6,11 @@ ChangeLog
 CVS HEAD
 
 - The connections widget is now being properly refreshed, due to
-  some quirk in the QTreeWidget, which was preventing some items,
-  specially the expanded ones, to disapear in the void.
+  some quirk in the QTreeWidget which was preventing some items,
+  specially the expanded ones, to disappear in the void. Meanwhile,
+  with a hand from Stephane Letz, the client/port lookup method was
+  changed to prevent duplicated, missing or worse, crashes due to
+  weird behaved windows applications.
 
 - The xrun count stats can now be reset simply by middle clicking
   on the systray icon or the main window's display area (thanks to

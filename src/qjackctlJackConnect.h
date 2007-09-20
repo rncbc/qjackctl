@@ -86,6 +86,10 @@ public:
 
 	// Jack client accessors.
 	jack_client_t *jackClient() const;
+
+	// Jack port lookup.
+	qjackctlJackPort *findJackPort(
+		const QString& sPortName, jack_port_t *pJackPort);
 };
 
 

@@ -120,6 +120,24 @@ jack_client_t *qjackctlJackClient::jackClient (void) const
 }
 
 
+// Jack port lookup.
+qjackctlJackPort *qjackctlJackClient::findJackPort (
+	const QString& sPortName, jack_port_t *pJackPort )
+{
+	QListIterator<qjackctlPortItem *> iter(ports());
+	while (iter.hasNext()) {
+		qjackctlJackPort *pPort
+			= static_cast<qjackctlJackPort *> (iter.next());
+		if (pPort 
+			&& pPort->portName() == sPortName
+			&& pPort->jackPort() == pJackPort)
+			return pPort;
+	}
+
+	return NULL;
+}
+
+
 //----------------------------------------------------------------------
 // qjackctlJackClientList -- Jack client list.
 //
@@ -175,19 +193,20 @@ int qjackctlJackClientList::updateClientPorts (void)
 			QString sClientPort = ppszClientPorts[iClientPort];
 			qjackctlJackClient *pClient = 0;
 			qjackctlJackPort   *pPort   = 0;
+			jack_port_t *pJackPort = jack_port_by_name(m_pJackClient,
+				ppszClientPorts[iClientPort]);
 			int iColon = sClientPort.indexOf(':');
-			if (iColon >= 0) {
+			if (pJackPort && iColon >= 0) {
 				QString sClientName = sClientPort.left(iColon);
 				QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
 				pClient = (qjackctlJackClient *) findClient(sClientName);
 				if (pClient)
-					pPort = (qjackctlJackPort *) pClient->findPort(sPortName);
+					pPort = pClient->findJackPort(sPortName, pJackPort);
 				if (pClient == 0) {
 					pClient = new qjackctlJackClient(this, sClientName);
 					iDirtyCount++;
 				}
 				if (pClient && pPort == 0) {
-					jack_port_t *pJackPort = jack_port_by_name(m_pJackClient, ppszClientPorts[iClientPort]);
 					pPort = new qjackctlJackPort(pClient, sPortName, pJackPort);
 					iDirtyCount++;
 				}
