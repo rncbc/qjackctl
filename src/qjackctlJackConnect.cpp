@@ -199,7 +199,7 @@ int qjackctlJackClientList::updateClientPorts (void)
 		::free(ppszClientPorts);
 	}
 
-	cleanClientPorts(0);
+	iDirtyCount += cleanClientPorts(0);
 
 	return iDirtyCount;
 }

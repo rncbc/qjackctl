@@ -137,8 +137,7 @@ public:
 	// Client port cleanup marker.
 	void markClient(int iMark);
 	void markClientPorts(int iMark);
-	void cleanClientPorts(int iMark);
-
+	int cleanClientPorts(int iMark);
 	int clientMark() const;
 
 	// Connectiopn highlight methods.
@@ -198,13 +197,16 @@ public:
 
 	// Client ports cleanup marker.
 	void markClientPorts(int iMark);
-	void cleanClientPorts(int iMark);
+	int cleanClientPorts(int iMark);
 
 	// Client:port refreshner (return newest item count).
 	virtual int updateClientPorts() = 0;
 
 	// Client:port hilite update stabilization.
 	void hiliteClientPorts (void);
+
+	// Do proper contents refresh/update.
+	void refresh();
 
 	// Natural decimal sorting comparator.
 	static bool lessThan(const QTreeWidgetItem& i1, const QTreeWidgetItem& i2);

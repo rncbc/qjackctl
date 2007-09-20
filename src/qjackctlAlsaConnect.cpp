@@ -248,7 +248,7 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 
 #endif	// CONFIG_ALSA_SEQ
 
-	cleanClientPorts(0);
+	iDirtyCount += cleanClientPorts(0);
 
 	return iDirtyCount;
 }

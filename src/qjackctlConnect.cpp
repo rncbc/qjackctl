@@ -324,16 +324,21 @@ void qjackctlClientItem::markClientPorts ( int iMark )
 		(iter.next())->markPort(iMark);
 }
 
-void qjackctlClientItem::cleanClientPorts ( int iMark )
+int qjackctlClientItem::cleanClientPorts ( int iMark )
 {
+	int iDirtyCount = 0;
+
 	QMutableListIterator<qjackctlPortItem *> iter(m_ports);
 	while (iter.hasNext()) {
 		qjackctlPortItem *pPort = iter.next();
 		if (pPort->portMark() == iMark) {
 			iter.remove();
 			delete pPort;
+			iDirtyCount++;
 		}
 	}
+	
+	return iDirtyCount;
 }
 
 int qjackctlClientItem::clientMark (void) const
@@ -475,18 +480,23 @@ void qjackctlClientList::markClientPorts ( int iMark )
 		(iter.next())->markClientPorts(iMark);
 }
 
-void qjackctlClientList::cleanClientPorts ( int iMark )
+int qjackctlClientList::cleanClientPorts ( int iMark )
 {
+	int iDirtyCount = 0;
+	
 	QMutableListIterator<qjackctlClientItem *> iter(m_clients);
 	while (iter.hasNext()) {
 		qjackctlClientItem *pClient = iter.next();
 		if (pClient->clientMark() == iMark) {
 			iter.remove();
 			delete pClient;
+			iDirtyCount++;
 		} else {
-			pClient->cleanClientPorts(iMark);
+			iDirtyCount += pClient->cleanClientPorts(iMark);
 		}
 	}
+
+	return iDirtyCount;
 }
 
 // Client:port hilite update stabilization.
@@ -592,6 +602,16 @@ bool qjackctlClientList::lessThan (
 
 	// Probable exact match.
 	return false;
+}
+
+
+// Do proper contents refresh/update.
+void qjackctlClientList::refresh (void)
+{
+	QHeaderView *pHeader = m_pListView->header();
+	m_pListView->sortItems(
+		pHeader->sortIndicatorSection(),
+		pHeader->sortIndicatorOrder());
 }
 
 
@@ -986,6 +1006,7 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 
 	menu.exec(pContextMenuEvent->globalPos());
 }
+
 
 
 //----------------------------------------------------------------------
@@ -1773,8 +1794,14 @@ void qjackctlConnect::updateContents ( bool bClear )
 			updateIconPixmaps();
 		}
 		// Add (newer) client:ports and respective connections...
-		iDirtyCount += m_pOClientList->updateClientPorts();
-		iDirtyCount += m_pIClientList->updateClientPorts();
+		if (m_pOClientList->updateClientPorts() > 0) {
+			m_pOClientList->refresh();
+			iDirtyCount++;
+		}
+		if (m_pIClientList->updateClientPorts() > 0) {
+			m_pIClientList->refresh();
+			iDirtyCount++;
+		}			
 		updateConnections();
 		endMutex();
 	}
