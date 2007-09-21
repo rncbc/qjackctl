@@ -371,6 +371,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.QueryShutdownCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.AlsaSeqEnabledCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 	QObject::connect(m_ui.LeftButtonsCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -540,6 +543,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->sServerConfigName);
 	m_ui.ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
 	m_ui.QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
+	m_ui.AlsaSeqEnabledCheckBox->setChecked(m_pSetup->bAlsaSeqEnabled);
 	m_ui.AliasesEnabledCheckBox->setChecked(m_pSetup->bAliasesEnabled);
 	m_ui.AliasesEditingCheckBox->setChecked(m_pSetup->bAliasesEditing);
 	m_ui.LeftButtonsCheckBox->setChecked(!m_pSetup->bLeftButtons);
@@ -555,6 +559,9 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.MidiDriverComboBox->setCurrentIndex(0);
 	m_ui.MidiDriverTextLabel->setEnabled(false);
 	m_ui.MidiDriverComboBox->setEnabled(false);
+#endif
+#ifndef CONFIG_ALSA_SEQ
+	m_ui.AlsaSeqEnabledCheckBox->setEnabled(false);
 #endif
 
 	// Load preset list...
@@ -1582,6 +1589,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
 		m_pSetup->bServerConfigTemp        = m_ui.ServerConfigTempCheckBox->isChecked();
 		m_pSetup->bQueryShutdown           = m_ui.QueryShutdownCheckBox->isChecked();
+		m_pSetup->bAlsaSeqEnabled          = m_ui.AlsaSeqEnabledCheckBox->isChecked();
 		m_pSetup->bAliasesEnabled          = m_ui.AliasesEnabledCheckBox->isChecked();
 		m_pSetup->bAliasesEditing          = m_ui.AliasesEditingCheckBox->isChecked();
 		m_pSetup->bLeftButtons             = !m_ui.LeftButtonsCheckBox->isChecked();

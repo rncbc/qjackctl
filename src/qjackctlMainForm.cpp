@@ -429,43 +429,50 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	}
 #endif
 #ifdef CONFIG_ALSA_SEQ
-	// Start our ALSA sequencer interface.
-	if (snd_seq_open(&m_pAlsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, 0) < 0)
-		m_pAlsaSeq = NULL;
-	if (m_pAlsaSeq) {
-		snd_seq_port_subscribe_t *pAlsaSubs;
-		snd_seq_addr_t seq_addr;
-		int iPort;
-		struct pollfd pfd[1];
-		iPort = snd_seq_create_simple_port(
-			m_pAlsaSeq,
-			"qjackctl",
-			SND_SEQ_PORT_CAP_WRITE|SND_SEQ_PORT_CAP_SUBS_WRITE|SND_SEQ_PORT_CAP_NO_EXPORT,
-			SND_SEQ_PORT_TYPE_APPLICATION
-		);
-		if (iPort >= 0) {
-			snd_seq_port_subscribe_alloca(&pAlsaSubs);
-			seq_addr.client = SND_SEQ_CLIENT_SYSTEM;
-			seq_addr.port   = SND_SEQ_PORT_SYSTEM_ANNOUNCE;
-			snd_seq_port_subscribe_set_sender(pAlsaSubs, &seq_addr);
-			seq_addr.client = snd_seq_client_id(m_pAlsaSeq);
-			seq_addr.port   = iPort;
-			snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
-			snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs);
-			snd_seq_poll_descriptors(m_pAlsaSeq, pfd, 1, POLLIN);
-			m_pAlsaNotifier = new QSocketNotifier(pfd[0].fd, QSocketNotifier::Read);
-			QObject::connect(m_pAlsaNotifier, SIGNAL(activated(int)), this, SLOT(alsaNotifySlot(int)));
+	if (m_pSetup->bAlsaSeqEnabled) {
+		// Start our ALSA sequencer interface.
+		if (snd_seq_open(&m_pAlsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, 0) < 0)
+			m_pAlsaSeq = NULL;
+		if (m_pAlsaSeq) {
+			snd_seq_port_subscribe_t *pAlsaSubs;
+			snd_seq_addr_t seq_addr;
+			struct pollfd pfd[1];
+			int iPort = snd_seq_create_simple_port(
+				m_pAlsaSeq,	"qjackctl",
+				SND_SEQ_PORT_CAP_WRITE
+				| SND_SEQ_PORT_CAP_SUBS_WRITE
+				| SND_SEQ_PORT_CAP_NO_EXPORT,
+				SND_SEQ_PORT_TYPE_APPLICATION
+			);
+			if (iPort >= 0) {
+				snd_seq_port_subscribe_alloca(&pAlsaSubs);
+				seq_addr.client = SND_SEQ_CLIENT_SYSTEM;
+				seq_addr.port   = SND_SEQ_PORT_SYSTEM_ANNOUNCE;
+				snd_seq_port_subscribe_set_sender(pAlsaSubs, &seq_addr);
+				seq_addr.client = snd_seq_client_id(m_pAlsaSeq);
+				seq_addr.port   = iPort;
+				snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
+				snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs);
+				snd_seq_poll_descriptors(m_pAlsaSeq, pfd, 1, POLLIN);
+				m_pAlsaNotifier
+					= new QSocketNotifier(pfd[0].fd, QSocketNotifier::Read);
+				QObject::connect(m_pAlsaNotifier,
+					SIGNAL(activated(int)),
+					SLOT(alsaNotifySlot(int)));
+			}
 		}
-	}
-	// Could we start without it?
-	if (m_pAlsaSeq == NULL) {
-		appendMessagesError(tr("Could not open ALSA sequencer as a client.\n\nMIDI patchbay will be not available."));
-	} else {
-		// Rather obvious setup.
-		if (m_pConnectionsForm)
-			m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
-		if (m_pPatchbayForm)
-			m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
+		// Could we start without it?
+		if (m_pAlsaSeq) {
+			// Rather obvious setup.
+			if (m_pConnectionsForm)
+				m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
+			if (m_pPatchbayForm)
+				m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
+		} else {
+			appendMessagesError(
+				tr("Could not open ALSA sequencer as a client.\n\n"
+				"ALSA MIDI patchbay will be not available."));
+		}
 	}
 #endif
 
@@ -2343,6 +2350,7 @@ void qjackctlMainForm::showSetupForm (void)
 		int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
 		int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
 		bool    bOldBezierLines         = m_pSetup->bBezierLines;
+		bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
 		bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
 		bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
 		bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
@@ -2398,12 +2406,14 @@ void qjackctlMainForm::showSetupForm (void)
 				(!bOldTextLabels &&  m_pSetup->bTextLabels))
 				updateButtons();
 			// Warn if something will be only effective on next run.
-			if (( bOldStdoutCapture && !m_pSetup->bStdoutCapture) ||
-				(!bOldStdoutCapture &&  m_pSetup->bStdoutCapture) ||
-				( bOldKeepOnTop     && !m_pSetup->bKeepOnTop)     ||
-				(!bOldKeepOnTop     &&  m_pSetup->bKeepOnTop)     ||
-				( bOldDelayedSetup  && !m_pSetup->bDelayedSetup)  ||
-				(!bOldDelayedSetup  &&  m_pSetup->bDelayedSetup))
+			if (( bOldStdoutCapture  && !m_pSetup->bStdoutCapture)  ||
+				(!bOldStdoutCapture  &&  m_pSetup->bStdoutCapture)  ||
+				( bOldKeepOnTop      && !m_pSetup->bKeepOnTop)      ||
+				(!bOldKeepOnTop      &&  m_pSetup->bKeepOnTop)      ||
+				( bOldDelayedSetup   && !m_pSetup->bDelayedSetup)   ||
+				(!bOldDelayedSetup   &&  m_pSetup->bDelayedSetup)   ||
+				( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
+				(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled))
 				showDirtySetupWarning();
 			// If server is currently running, warn user...
 			showDirtySettingsWarning();

@@ -5,6 +5,12 @@ ChangeLog
 
 CVS HEAD
 
+- ALSA Sequencer support is now an optional feature on setup,
+  preventing the annoying "MIDI patchbay will be not available"
+  warning message, ruining window placement on Linux systems
+  where the snd-midi-seq kernel module is not loaded or not
+  favorable (eg. OSS) at startup (by request from Jussi Laako).
+
 - Get configure to try and detect the correct qmake location and
   insert it the search order, so let the qt4 tools take precedence
   when --with-qt option is given and older qt3 ones coexist and

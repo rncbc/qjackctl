@@ -186,6 +186,9 @@ void qjackctlConnectionsForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->loadSplitterSizes(m_ui.AudioConnectView, sizes);
 		m_pSetup->loadSplitterSizes(m_ui.MidiConnectView, sizes);
 		m_pSetup->loadSplitterSizes(m_ui.AlsaConnectView, sizes);
+#ifdef CONFIG_ALSA_SEQ
+		m_ui.ConnectionsTabWidget->setTabEnabled(2, m_pSetup->bAlsaSeqEnabled);
+#endif
 	}
 
 	// Update initial client/port aliases...

@@ -3732,6 +3732,25 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QCheckBox" name="AlsaSeqEnabledCheckBox" >
+              <property name="font" >
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip" >
+               <string>Whether to enable ALSA Sequencer (MIDI) support on startup</string>
+              </property>
+              <property name="text" >
+               <string>E&amp;nable ALSA Sequencer support</string>
+              </property>
+              <property name="shortcut" >
+               <string>Alt+N</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -4005,6 +4024,7 @@
   <tabstop>ServerConfigNameComboBox</tabstop>
   <tabstop>ServerConfigTempCheckBox</tabstop>
   <tabstop>QueryShutdownCheckBox</tabstop>
+  <tabstop>AlsaSeqEnabledCheckBox</tabstop>
   <tabstop>LeftButtonsCheckBox</tabstop>
   <tabstop>RightButtonsCheckBox</tabstop>
   <tabstop>TransportButtonsCheckBox</tabstop>

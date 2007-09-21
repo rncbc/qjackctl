@@ -144,6 +144,7 @@ public:
 	QString sServerConfigName;
 	bool    bServerConfigTemp;
 	bool    bQueryShutdown;
+	bool    bAlsaSeqEnabled;
 	bool    bAliasesEnabled;
 	bool    bAliasesEditing;
 	bool    bLeftButtons;

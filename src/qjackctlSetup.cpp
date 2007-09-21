@@ -85,6 +85,7 @@ qjackctlSetup::qjackctlSetup (void)
 	sServerConfigName        = m_settings.value("/ServerConfigName", ".jackdrc").toString();
 	bServerConfigTemp        = m_settings.value("/ServerConfigTemp", false).toBool();
 	bQueryShutdown           = m_settings.value("/QueryShutdown", true).toBool();
+	bAlsaSeqEnabled          = m_settings.value("/AlsaSeqEnabled", true).toBool();
 	bAliasesEnabled          = m_settings.value("/AliasesEnabled", false).toBool();
 	bAliasesEditing          = m_settings.value("/AliasesEditing", false).toBool();
 	bLeftButtons             = m_settings.value("/LeftButtons", true).toBool();
@@ -168,6 +169,7 @@ qjackctlSetup::~qjackctlSetup (void)
 	m_settings.setValue("/ServerConfigName",        sServerConfigName);
 	m_settings.setValue("/ServerConfigTemp",        bServerConfigTemp);
 	m_settings.setValue("/QueryShutdown",           bQueryShutdown);
+	m_settings.setValue("/AlsaSeqEnabled",          bAlsaSeqEnabled);
 	m_settings.setValue("/AliasesEnabled",          bAliasesEnabled);
 	m_settings.setValue("/AliasesEditing",          bAliasesEditing);
 	m_settings.setValue("/LeftButtons",             bLeftButtons);
