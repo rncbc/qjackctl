@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- Get configure to try and detect the correct qmake location and
+  insert it the search order, so let the qt4 tools take precedence
+  when --with-qt option is given and older qt3 ones coexist and
+  are found located ahead in the PATH.
+
 - The connections widget is now being properly refreshed, due to
   some quirk in the QTreeWidget which was preventing some items,
   specially the expanded ones, to disappear in the void. Meanwhile,

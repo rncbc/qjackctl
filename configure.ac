@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.1.8, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.1.9, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -88,6 +88,9 @@ ac_path=$PATH
 for X in $ac_with_paths; do
   if test -d $X/bin; then
     ac_path="$X/bin:$ac_path"
+  fi
+  if test -x $X/qmake; then
+    ac_path="$X:$ac_path"
   fi
   if test -d $X/include; then
     for Y in qt qt4; do
