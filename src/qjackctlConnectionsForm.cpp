@@ -187,7 +187,10 @@ void qjackctlConnectionsForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->loadSplitterSizes(m_ui.MidiConnectView, sizes);
 		m_pSetup->loadSplitterSizes(m_ui.AlsaConnectView, sizes);
 #ifdef CONFIG_ALSA_SEQ
-		m_ui.ConnectionsTabWidget->setTabEnabled(2, m_pSetup->bAlsaSeqEnabled);
+		if (!m_pSetup->bAlsaSeqEnabled) {
+		//	m_ui.ConnectionsTabWidget->setTabEnabled(2, false);
+			m_ui.ConnectionsTabWidget->removeTab(2);
+		}
 #endif
 	}
 
