@@ -464,7 +464,7 @@ QPixmap *qjackctlSocketList::createPixmapMerge (
 // Client:port snapshot.
 void qjackctlSocketList::clientPortsSnapshot (void)
 {
-	// Grab JACK client:port's...
+	// Grab JACK client:ports...
 	if (m_pJackClient) {
 		const char **ppszClientPorts = jack_get_ports(m_pJackClient,
 			NULL, JACK_DEFAULT_AUDIO_TYPE,
@@ -484,12 +484,23 @@ void qjackctlSocketList::clientPortsSnapshot (void)
 					if (pSocket)
 						pPlug = pSocket->findPlug(sPortName);
 					if (pSocket == NULL) {
+						int iSocketCount = listView()->topLevelItemCount();
+						if (iSocketCount > 0) {
+							pSocket = static_cast<qjackctlSocketItem *> (
+								listView()->topLevelItem(iSocketCount - 1));
+						}
 						pSocket = new qjackctlSocketItem(this, sClientName,
 							qjackctlClientAlias::escapeRegExpDigits(sClientName),
-							QJACKCTL_SOCKETTYPE_AUDIO, NULL);
+							QJACKCTL_SOCKETTYPE_AUDIO, pSocket);
 					}
-					if (pSocket && pPlug == NULL)
-						pPlug = new qjackctlPlugItem(pSocket, sPortName, NULL);
+					if (pSocket && pPlug == NULL) {
+						int iPlugCount = pSocket->childCount();
+						if (iPlugCount > 0) {
+							pPlug = static_cast<qjackctlPlugItem *> (
+								pSocket->child(iPlugCount - 1));
+						}
+						pPlug = new qjackctlPlugItem(pSocket, sPortName, pPlug);
+					}
 				}
 				iClientPort++;
 			}
@@ -499,9 +510,8 @@ void qjackctlSocketList::clientPortsSnapshot (void)
 
 #ifdef CONFIG_ALSA_SEQ
 
-	// Grab ALSA subscribers's...
+	// Grab ALSA subscribers...
 	if (m_pAlsaSeq) {
-		// Grab the ALSA subscriptions...
 		snd_seq_client_info_t *pClientInfo;
 		snd_seq_port_info_t   *pPortInfo;
 		unsigned int uiAlsaFlags;
@@ -531,12 +541,23 @@ void qjackctlSocketList::clientPortsSnapshot (void)
 						if (pSocket)
 							pPlug = pSocket->findPlug(sPortName);
 						if (pSocket == NULL) {
+							int iSocketCount = listView()->topLevelItemCount();
+							if (iSocketCount > 0) {
+								pSocket = static_cast<qjackctlSocketItem *> (
+									listView()->topLevelItem(iSocketCount - 1));
+							}
 							pSocket = new qjackctlSocketItem(this, sClientName,
 								qjackctlClientAlias::escapeRegExpDigits(sClientName),
-								QJACKCTL_SOCKETTYPE_MIDI, NULL);
+								QJACKCTL_SOCKETTYPE_MIDI, pSocket);
 						}
-						if (pSocket && pPlug == NULL)
-							pPlug = new qjackctlPlugItem(pSocket, sPortName, NULL);
+						if (pSocket && pPlug == NULL) {
+							int iPlugCount = pSocket->childCount();
+							if (iPlugCount > 0) {
+								pPlug = static_cast<qjackctlPlugItem *> (
+									pSocket->child(iPlugCount - 1));
+							}
+							pPlug = new qjackctlPlugItem(pSocket, sPortName, pPlug);
+						}
 					}
 				}
 			}

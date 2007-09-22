@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- Simple as it could ever be, the build executive summary report
+  is now given on configure.
+
+- Patchbay snapshot not gets socket and port ordering back.
+
 - ALSA Sequencer support is now an optional feature on setup,
   preventing the annoying "MIDI patchbay will be not available"
   warning message, ruining window placement on Linux systems
@@ -25,7 +30,7 @@ CVS HEAD
 
 - The xrun count stats can now be reset simply by middle clicking
   on the systray icon or the main window's display area (thanks to
-  patch sent by Dominic SacrÃ©).
+  patch sent by Dominic Sacré).
 
 - An improved version of the "shiny" background image was issued.
   The original somehow looked like two different images put together,

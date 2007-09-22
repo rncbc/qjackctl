@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.1.11, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.1.13, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -283,6 +283,23 @@ AC_OUTPUT
 
 # make clean > /dev/null 2>&1
 
-echo ""
+# Output summary message
+
+echo
+echo "  $PACKAGE_TARNAME $PACKAGE_VERSION"
+echo
+echo "  Build target . . . . . . . . . . . . . . . . . . .: $ac_debug"
+echo
+echo "  JACK Audio Connection Kit support  . . . . . . . .: $ac_jack_lib"
+echo "  JACK Realtime support  . . . . . . . . . . . . . .: $ac_jack_realtime"
+echo "  JACK Transport support . . . . . . . . . . . . . .: $ac_jack_transport"
+echo "  JACK XRUN delay support  . . . . . . . . . . . . .: $ac_jack_xrun_delay"
+echo "  JACK Maximum scheduling delay support  . . . . . .: $ac_jack_max_delay"
+echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
+echo "  ALSA MIDI Sequencer support  . . . . . . . . . . .: $ac_alsa_seq"
+echo "  System tray icon support . . . . . . . . . . . . .: $ac_system_tray"
+echo
+echo "  Install prefix . . . . . . . . . . . . . . . . . .: $ac_prefix"
+echo
 echo "Now type 'make', followed by 'make install' as root."
-echo ""
+echo
