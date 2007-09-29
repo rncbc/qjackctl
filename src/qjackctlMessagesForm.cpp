@@ -33,7 +33,7 @@
 
 
 // The maximum number of message lines.
-#define QSYNTH_MESSAGES_MAXLINES  1000
+#define QJACKCTL_MESSAGES_MAXLINES  1000
 
 
 //----------------------------------------------------------------------------
@@ -51,7 +51,7 @@ qjackctlMessagesForm::qjackctlMessagesForm (
 
 	// Initialize default message limit.
 	m_iMessagesLines = 0;
-	setMessagesLimit(QSYNTH_MESSAGES_MAXLINES);
+	setMessagesLimit(QJACKCTL_MESSAGES_MAXLINES);
 }
 
 
@@ -139,6 +139,7 @@ void qjackctlMessagesForm::appendMessagesText( const QString& s )
 	}
 
 	m_ui.MessagesTextView->append(s);
+	m_iMessagesLines++;
 }
 
 

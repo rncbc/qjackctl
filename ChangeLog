@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Messages line limit was not being checked, now honored.
+
 - Simple as it could ever be, the build executive summary report
   is now given on configure.
 
