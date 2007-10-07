@@ -89,8 +89,10 @@ qjackctlSetupForm::qjackctlSetupForm (
 		new QIntValidator(m_ui.WordLengthComboBox));
 	m_ui.TimeoutComboBox->setValidator(
 		new QIntValidator(m_ui.TimeoutComboBox));
+#ifdef CONFIG_AUTO_REFRESH
 	m_ui.TimeRefreshComboBox->setValidator(
 		new QIntValidator(m_ui.TimeRefreshComboBox));
+#endif
 	m_ui.PortMaxComboBox->setValidator(
 		new QIntValidator(m_ui.PortMaxComboBox));
 	m_ui.MessagesLimitLinesComboBox->setValidator(
@@ -287,14 +289,14 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.ActivePatchbayPathToolButton,
 		SIGNAL(clicked()),
 		SLOT(browseActivePatchbayPath()));
-
+#ifdef CONFIG_AUTO_REFRESH
 	QObject::connect(m_ui.AutoRefreshCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.TimeRefreshComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
-
+#endif
 	QObject::connect(m_ui.TransportTimeRadioButton,
 		SIGNAL(toggled(bool)),
 		SLOT(optionsChanged()));
@@ -466,9 +468,14 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.ActivePatchbayCheckBox->setChecked(m_pSetup->bActivePatchbay);
 	setComboBoxCurrentText(m_ui.ActivePatchbayPathComboBox,
 		m_pSetup->sActivePatchbayPath);
+#ifdef CONFIG_AUTO_REFRESH
 	m_ui.AutoRefreshCheckBox->setChecked(m_pSetup->bAutoRefresh);
 	setComboBoxCurrentText(m_ui.TimeRefreshComboBox,
 		QString::number(m_pSetup->iTimeRefresh));
+#else
+	m_ui.AutoRefreshCheckBox->setVisible(false);
+	m_ui.TimeRefreshComboBox->setVisible(false);
+#endif
 	m_ui.BezierLinesCheckBox->setChecked(m_pSetup->bBezierLines);
 
 	// Load some other defaults...
@@ -993,9 +1000,10 @@ void qjackctlSetupForm::stabilizeForm (void)
 	bEnabled = m_ui.ActivePatchbayCheckBox->isChecked();
 	m_ui.ActivePatchbayPathComboBox->setEnabled(bEnabled);
 	m_ui.ActivePatchbayPathToolButton->setEnabled(bEnabled);
-
+#ifdef CONFIG_AUTO_REFRESH
 	m_ui.TimeRefreshComboBox->setEnabled(
 		m_ui.AutoRefreshCheckBox->isChecked());
+#endif
 	m_ui.MessagesLimitLinesComboBox->setEnabled(
 		m_ui.MessagesLimitCheckBox->isChecked());
 
@@ -1566,8 +1574,10 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bXrunIgnoreFirst         = m_ui.XrunIgnoreFirstCheckBox->isChecked();
 		m_pSetup->bActivePatchbay          = m_ui.ActivePatchbayCheckBox->isChecked();
 		m_pSetup->sActivePatchbayPath      = m_ui.ActivePatchbayPathComboBox->currentText();
+#ifdef CONFIG_AUTO_REFRESH
 		m_pSetup->bAutoRefresh             = m_ui.AutoRefreshCheckBox->isChecked();
 		m_pSetup->iTimeRefresh             = m_ui.TimeRefreshComboBox->currentText().toInt();
+#endif
 		m_pSetup->bBezierLines             = m_ui.BezierLinesCheckBox->isChecked();
 		// Save Defaults...
 		m_pSetup->iTimeDisplay             = m_pTimeDisplayButtonGroup->checkedId();

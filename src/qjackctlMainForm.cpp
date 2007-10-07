@@ -1874,6 +1874,7 @@ void qjackctlMainForm::timerSlot (void)
 			}
 			refreshAlsaConnections();
 		}
+#ifdef CONFIG_AUTO_REFRESH
 		// Shall we refresh connections now and then?
 		if (m_pSetup->bAutoRefresh) {
 			m_iTimerRefresh += QJACKCTL_TIMER_MSECS;
@@ -1882,6 +1883,7 @@ void qjackctlMainForm::timerSlot (void)
 				refreshConnections();
 			}
 		}
+#endif
 		// Are we about to refresh it, really?
 		if (m_iJackRefresh > 0) {
 			m_iJackRefresh = 0;

@@ -64,8 +64,10 @@ qjackctlSetup::qjackctlSetup (void)
 	bXrunIgnoreFirst         = m_settings.value("/XrunIgnoreFirst", false).toBool();
 	bActivePatchbay          = m_settings.value("/ActivePatchbay", false).toBool();
 	sActivePatchbayPath      = m_settings.value("/ActivePatchbayPath").toString();
+#ifdef CONFIG_AUTO_REFRESH
 	bAutoRefresh             = m_settings.value("/AutoRefresh", false).toBool();
 	iTimeRefresh             = m_settings.value("/TimeRefresh", 10).toInt();
+#endif
 	bBezierLines             = m_settings.value("/BezierLines", false).toBool();
 	iTimeDisplay             = m_settings.value("/TimeDisplay", 0).toInt();
 	iTimeFormat              = m_settings.value("/TimeFormat", 0).toInt();
@@ -148,8 +150,10 @@ qjackctlSetup::~qjackctlSetup (void)
 	m_settings.setValue("/XrunIgnoreFirst",         bXrunIgnoreFirst);
 	m_settings.setValue("/ActivePatchbay",          bActivePatchbay);
 	m_settings.setValue("/ActivePatchbayPath",      sActivePatchbayPath);
+#ifdef CONFIG_AUTO_REFRESH
 	m_settings.setValue("/AutoRefresh",             bAutoRefresh);
 	m_settings.setValue("/TimeRefresh",             iTimeRefresh);
+#endif
 	m_settings.setValue("/BezierLines",             bBezierLines);
 	m_settings.setValue("/TimeDisplay",             iTimeDisplay);
 	m_settings.setValue("/TimeFormat",              iTimeFormat);

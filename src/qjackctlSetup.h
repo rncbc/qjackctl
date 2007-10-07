@@ -123,8 +123,10 @@ public:
 	bool    bXrunIgnoreFirst;
 	bool    bActivePatchbay;
 	QString sActivePatchbayPath;
+#ifdef CONFIG_AUTO_REFRESH
 	bool    bAutoRefresh;
 	int     iTimeRefresh;
+#endif
 	bool    bBezierLines;
 	int     iTimeDisplay;
 	int     iTimeFormat;
