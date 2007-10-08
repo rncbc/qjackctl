@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.1.15, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.1.16, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -286,7 +286,7 @@ AC_OUTPUT
 # Output summary message
 
 echo
-echo "  $PACKAGE_TARNAME $PACKAGE_VERSION"
+echo "  $PACKAGE_NAME $PACKAGE_VERSION"
 echo
 echo "  Build target . . . . . . . . . . . . . . . . . . .: $ac_debug"
 echo
