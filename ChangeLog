@@ -38,11 +38,11 @@ CVS HEAD
 
 - The xrun count stats can now be reset simply by middle clicking
   on the systray icon or the main window's display area (thanks to
-  patch sent by Dominic Sacré).
+  patch sent by Dominic Sacre).
 
 - An improved version of the "shiny" background image was issued.
   The original somehow looked like two different images put together,
-  probably most apparent on a bright TFT screen (by Dominic SacrÃ©).
+  probably most apparent on a bright TFT screen (by Dominic Sacre).
 
 - A warning is now being issued, asking whether one wants to remove a
   corresponding Patchbay connection, when client/ports are being
