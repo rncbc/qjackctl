@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Tool/child windows position and size preservation fixed.
+
 - The connections/patchbay auto-refresh option has been finally
   removed due to several user requests, although deprecated for
   quite some time now it has been the probable cause of some

@@ -169,6 +169,16 @@ void qjackctlConnectionsForm::hideEvent ( QHideEvent *pHideEvent )
 		pMainForm->stabilizeForm();
 }
 
+// Just about to notify main-window that we're closing.
+void qjackctlConnectionsForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+{
+	QWidget::hide();
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+}
+
 
 // Set reference to global options, mostly needed for the
 // initial sizes of the main splitter views and those

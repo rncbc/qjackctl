@@ -166,11 +166,20 @@ void qjackctlPatchbayForm::showEvent ( QShowEvent *pShowEvent )
 	QWidget::showEvent(pShowEvent);
 }
 
-
 // Notify our parent that we're closing.
 void qjackctlPatchbayForm::hideEvent ( QHideEvent *pHideEvent )
 {
 	QWidget::hideEvent(pHideEvent);
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+}
+
+// Just about to notify main-window that we're closing.
+void qjackctlPatchbayForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+{
+	QWidget::hide();
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)

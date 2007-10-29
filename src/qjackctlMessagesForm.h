@@ -23,9 +23,6 @@
 #define __qjackctlMessagesForm_h
 
 #include "ui_qjackctlMessagesForm.h"
-//Added by qt3to4:
-#include <QShowEvent>
-#include <QHideEvent>
 
 
 //----------------------------------------------------------------------------
@@ -55,8 +52,9 @@ public:
 
 protected:
 
-	void showEvent(QShowEvent * pShowEvent);
-	void hideEvent(QHideEvent * pHideEvent);
+	void showEvent(QShowEvent *);
+	void hideEvent(QHideEvent *);
+	void closeEvent(QCloseEvent *);
 
 private:
 

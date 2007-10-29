@@ -81,6 +81,16 @@ void qjackctlMessagesForm::hideEvent ( QHideEvent *pHideEvent )
 		pMainForm->stabilizeForm();
 }
 
+// Just about to notify main-window that we're closing.
+void qjackctlMessagesForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+{
+	QWidget::hide();
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+}
+
 
 // Messages view font accessors.
 QFont qjackctlMessagesForm::messagesFont (void) const

@@ -142,6 +142,16 @@ void qjackctlStatusForm::hideEvent ( QHideEvent *pHideEvent )
 		pMainForm->stabilizeForm();
 }
 
+// Just about to notify main-window that we're closing.
+void qjackctlStatusForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+{
+	QWidget::hide();
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+}
+
 
 // Ask our parent to reset status.
 void qjackctlStatusForm::resetXrunStats (void)
