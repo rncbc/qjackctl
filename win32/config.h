@@ -1,6 +1,6 @@
 
 #define PACKAGE_NAME    "QjackCtl"
-#define PACKAGE_VERSION "0.3.1.18"
+#define PACKAGE_VERSION "0.3.1.19"
 
 #define CONFIG_PREFIX   "."
 #define CONFIG_DEBUG    1
