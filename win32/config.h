@@ -1,6 +1,6 @@
 
 #define PACKAGE_NAME    "QjackCtl"
-#define PACKAGE_VERSION "0.3.1.19"
+#define PACKAGE_VERSION "0.3.1.20"
 
 #define CONFIG_PREFIX   "."
 #define CONFIG_DEBUG    1
@@ -15,5 +15,4 @@
 
 #undef  CONFIG_JACK_MIDI
 #undef  CONFIG_ALSA_SEQ
-
 #undef  CONFIG_ROUND

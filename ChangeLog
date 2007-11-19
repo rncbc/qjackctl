@@ -10,7 +10,7 @@ CVS HEAD
 - The connections/patchbay auto-refresh option has been finally
   removed due to several user requests, although deprecated for
   quite some time now it has been the probable cause of some
-  periodic XRUN occurrences due to graph-locking in jackd (while
+  periodic xrun occurrences due to graph-locking in jackd (while
   making Geoff Beasley angry in the process:).
 
 - Messages line limit was not being checked, now honored.
@@ -46,8 +46,8 @@ CVS HEAD
   The original somehow looked like two different images put together,
   probably most apparent on a bright TFT screen (by Dominic Sacre).
 
-- A warning is now being issued, asking whether one wants to remove a
-  corresponding Patchbay connection, when client/ports are being
+- A warning is now being issued, asking whether one wants to remove
+  a corresponding Patchbay connection, when client/ports are being
   disconnected over the Connections window, thus avoiding automatic
   reconnection annoyance due to normal active Patchbay behavior.
 
