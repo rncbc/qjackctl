@@ -136,6 +136,7 @@ public:
 	QString sDisplayFont1;
 	QString sDisplayFont2;
 	bool    bDisplayEffect;
+	bool    bDisplayBlink;
 	int     iConnectionsIconSize;
 	QString sConnectionsFont;
 	bool    bQueryClose;

@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- Server mode display blinking, usually shown as the RT indicator,
+  is now an option (Setup/Display/Blink server mode indicator when
+  started). 
+  
 - Tool/child windows position and size preservation fixed.
 
 - The connections/patchbay auto-refresh option has been finally

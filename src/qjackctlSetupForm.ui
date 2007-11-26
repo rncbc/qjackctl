@@ -3087,6 +3087,25 @@
               </property>
              </widget>
             </item>
+            <item row="5" column="0" colspan="2" >
+             <widget class="QCheckBox" name="DisplayBlinkCheckBox" >
+              <property name="font" >
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip" >
+               <string>Whether to enable blinking (flashing) of the server mode (RT) indicator</string>
+              </property>
+              <property name="text" >
+               <string>Blin&amp;k server mode indicator when started</string>
+              </property>
+              <property name="shortcut" >
+               <string>Alt+K</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -4007,6 +4026,7 @@
   <tabstop>DisplayFont1PushButton</tabstop>
   <tabstop>DisplayFont2PushButton</tabstop>
   <tabstop>DisplayEffectCheckBox</tabstop>
+  <tabstop>DisplayBlinkCheckBox</tabstop>
   <tabstop>MessagesFontPushButton</tabstop>
   <tabstop>MessagesLimitCheckBox</tabstop>
   <tabstop>MessagesLimitLinesComboBox</tabstop>

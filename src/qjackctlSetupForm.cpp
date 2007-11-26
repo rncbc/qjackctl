@@ -315,6 +315,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.DisplayEffectCheckBox,
 		SIGNAL(toggled(bool)),
 		SLOT(toggleDisplayEffect(bool)));
+	QObject::connect(m_ui.DisplayBlinkCheckBox,
+		SIGNAL(toggled(bool)),
+		SLOT(optionsChanged()));
 	QObject::connect(m_ui.DisplayFont1PushButton,
 		SIGNAL(clicked()),
 		SLOT(chooseDisplayFont1()));
@@ -528,6 +531,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 
 	// The main display shiny effect option.
 	m_ui.DisplayEffectCheckBox->setChecked(m_pSetup->bDisplayEffect);
+	m_ui.DisplayBlinkCheckBox->setChecked(m_pSetup->bDisplayBlink);
 	toggleDisplayEffect(m_pSetup->bDisplayEffect);
 
 	// Connections view icon size.
@@ -1588,6 +1592,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->sDisplayFont1            = m_ui.DisplayFont1TextLabel->font().toString();
 		m_pSetup->sDisplayFont2            = m_ui.DisplayFont2TextLabel->font().toString();
 		m_pSetup->bDisplayEffect           = m_ui.DisplayEffectCheckBox->isChecked();
+		m_pSetup->bDisplayBlink            = m_ui.DisplayBlinkCheckBox->isChecked();
 		m_pSetup->iConnectionsIconSize     = m_ui.ConnectionsIconSizeComboBox->currentIndex();
 		m_pSetup->sConnectionsFont         = m_ui.ConnectionsFontTextLabel->font().toString();
 		m_pSetup->bStartJack               = m_ui.StartJackCheckBox->isChecked();

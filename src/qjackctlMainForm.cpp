@@ -2112,8 +2112,8 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	pal.setColor(QPalette::Foreground, Qt::yellow);
 	m_ui.ServerStateTextLabel->setPalette(pal);
 	m_ui.DspLoadTextLabel->setPalette(pal);
-	pal.setColor(QPalette::Foreground, Qt::darkYellow);
 	m_ui.ServerModeTextLabel->setPalette(pal);
+	pal.setColor(QPalette::Foreground, Qt::darkYellow);
 	m_ui.SampleRateTextLabel->setPalette(pal);
 	pal.setColor(QPalette::Foreground, Qt::green);
 	m_ui.TimeDisplayTextLabel->setPalette(pal);
@@ -2578,11 +2578,13 @@ void qjackctlMainForm::refreshStatus (void)
 				tr("%1 Hz").arg(jack_get_sample_rate(m_pJackClient)));
 			updateStatusItem(STATUS_BUFFER_SIZE,
 				tr("%1 frames").arg(g_nframes));
-			// Blink server mode indicator...
-			QPalette pal;
-			pal.setColor(QPalette::Foreground,
-				(++m_iStatusBlink % 2) ? Qt::darkYellow: Qt::yellow);
-			m_ui.ServerModeTextLabel->setPalette(pal);
+			// Blink server mode indicator?...
+			if (m_pSetup && m_pSetup->bDisplayBlink) {
+				QPalette pal;
+				pal.setColor(QPalette::Foreground,
+					(++m_iStatusBlink % 2) ? Qt::darkYellow: Qt::yellow);
+				m_ui.ServerModeTextLabel->setPalette(pal);
+			}
 #ifdef CONFIG_JACK_REALTIME
 			bool bRealtime = jack_is_realtime(m_pJackClient);
 			updateStatusItem(STATUS_REALTIME,
