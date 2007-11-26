@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Some portaudio backend settings are now being enabled, specially
+  suited for the jackdmp flavouring.
+
 - Server mode display blinking, usually shown as the RT indicator,
   is now an option (Setup/Display/Blink server mode indicator when
   started). 

@@ -1529,7 +1529,7 @@
                </font>
               </property>
               <property name="text" >
-               <string>&amp;Channel:</string>
+               <string>&amp;Channels:</string>
               </property>
               <property name="alignment" >
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1830,10 +1830,13 @@
                </font>
               </property>
               <property name="toolTip" >
-               <string>PCM channel</string>
+               <string>Maximum number of audio channels to allocate</string>
               </property>
               <property name="maximum" >
                <number>999</number>
+              </property>
+              <property name="specialValueText" >
+               <string>(default)</string>
               </property>
              </widget>
             </item>

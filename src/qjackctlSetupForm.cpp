@@ -833,6 +833,7 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	bool bOss        = (sDriver == "oss");
 	bool bAlsa       = (sDriver == "alsa");
 	bool bCoreaudio  = (sDriver == "coreaudio");
+	bool bPortaudio  = (sDriver == "portaudio");
 	bool bFreebob    = (sDriver == "freebob");
 	bool bFirewire   = (sDriver == "firewire");
 	bool bInEnabled  = false;
@@ -840,14 +841,14 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 
 	switch (iAudio) {
 	case QJACKCTL_DUPLEX:
-		bInEnabled  = (bOss || bAlsa || bCoreaudio);
-		bOutEnabled = (bOss || bAlsa || bCoreaudio);
+		bInEnabled  = (bOss || bAlsa || bCoreaudio || bPortaudio);
+		bOutEnabled = (bOss || bAlsa || bCoreaudio || bPortaudio);
 		break;
 	case QJACKCTL_CAPTURE:
-		bInEnabled  = (bOss || bCoreaudio);
+		bInEnabled  = (bOss || bCoreaudio || bPortaudio);
 		break;
 	case QJACKCTL_PLAYBACK:
-		bOutEnabled = (bOss || bCoreaudio);
+		bOutEnabled = (bOss || bCoreaudio || bPortaudio);
 		break;
 	}
 

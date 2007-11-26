@@ -872,7 +872,7 @@ void qjackctlMainForm::startJack (void)
 		else if (m_preset.iOutChannels > 0)
 			args.append("-o" + QString::number(m_preset.iOutChannels));
 	}
-	else if (bCoreaudio || bFirewire) {
+	else if (bCoreaudio || bPortaudio || bFirewire) {
 		if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
 			args.append("-i" + QString::number(m_preset.iInChannels));
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
@@ -917,7 +917,7 @@ void qjackctlMainForm::startJack (void)
 		if (m_preset.bHWMeter)
 			args.append("-M");
 	}
-	if (bAlsa || bOss || bCoreaudio || bFreebob) {
+	if (bAlsa || bOss || bCoreaudio || bPortaudio || bFreebob) {
 		if (m_preset.iInLatency > 0)
 			args.append("-I" + QString::number(m_preset.iInLatency));
 		if (m_preset.iOutLatency > 0)
