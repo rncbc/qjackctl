@@ -5,13 +5,18 @@ ChangeLog
 
 CVS HEAD
 
+- Regression from QSystemTrayIcon (Qt4 >= 4.2) implementation, at
+  least on X11 environments: while the main application widget was
+  minimized to the system-tray, closing any other top-level widget
+  was causing the immediate and unexpected application shutdown.
+
 - Some portaudio backend settings are now being enabled, specially
   suited for the jackdmp flavouring.
 
 - Server mode display blinking, usually shown as the RT indicator,
   is now an option (Setup/Display/Blink server mode indicator when
   started). 
-  
+
 - Tool/child windows position and size preservation fixed.
 
 - The connections/patchbay auto-refresh option has been finally

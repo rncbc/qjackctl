@@ -513,8 +513,13 @@ bool qjackctlMainForm::queryClose (void)
 	// If we're not quitting explicitly and there's an
 	// active system tray icon, then just hide ourselves.
 	if (!m_bQuitForce && isVisible()
-		&& m_pSetup->bSystemTray && m_pSystemTray && m_pJackClient) {
+		&& m_pSetup->bSystemTray && m_pSystemTray) {
 		m_pSetup->saveWidgetGeometry(this);
+        QMessageBox::information(this,
+			tr("Information") + " - " QJACKCTL_SUBTITLE1,
+			tr("The program will keep running in the system tray.\n\n"
+			"To terminate the program, please choose \"Quit\" "
+			"in the context menu of the system tray entry."));
 		hide();
 		bQueryClose = false;
 	}
@@ -564,6 +569,8 @@ bool qjackctlMainForm::queryClose (void)
 		// And the system tray icon too.
 		if (m_pSystemTray)
 			m_pSystemTray->close();
+		// Stop any service out there...
+		stopJackServer();
 	}
 
 #ifdef CONFIG_SYSTEM_TRAY
