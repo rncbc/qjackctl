@@ -142,6 +142,7 @@ public:
 	bool    bQueryClose;
 	bool    bKeepOnTop;
 	bool    bSystemTray;
+	bool    bStartMinimized;
 	bool    bDelayedSetup;
 	bool    bServerConfig;
 	QString sServerConfigName;

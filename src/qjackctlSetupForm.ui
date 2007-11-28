@@ -3648,6 +3648,25 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="StartMinimizedCheckBox" >
+              <property name="font" >
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip" >
+               <string>Whether to start minimized to system tray</string>
+              </property>
+              <property name="text" >
+               <string>Start minimi&amp;zed to system tray</string>
+              </property>
+              <property name="shortcut" >
+               <string>Alt+Z</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="DelayedSetupCheckBox" >
               <property name="font" >
                <font>
@@ -4042,6 +4061,7 @@
   <tabstop>QueryCloseCheckBox</tabstop>
   <tabstop>KeepOnTopCheckBox</tabstop>
   <tabstop>SystemTrayCheckBox</tabstop>
+  <tabstop>StartMinimizedCheckBox</tabstop>
   <tabstop>DelayedSetupCheckBox</tabstop>
   <tabstop>ServerConfigCheckBox</tabstop>
   <tabstop>ServerConfigNameComboBox</tabstop>

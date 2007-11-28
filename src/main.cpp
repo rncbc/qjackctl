@@ -84,7 +84,8 @@ int main ( int argc, char **argv )
 	if (!settings.bSystemTray) {
 		w.show();
 		w.adjustSize();
-	}
+	} else if (settings.bStartMinimized)
+		w.hide();
 
 	// Register the quit signal/slot.
 	// app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));

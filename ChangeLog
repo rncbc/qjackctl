@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- A new option to start the program minimized when the system tray
+  icon is enabled, is now available from Setup/Misc/Start minimized
+  to system tray (as kindly suggested by Marc-Olivier Barre).
+
 - Regression from QSystemTrayIcon (Qt4 >= 4.2) implementation, at
   least on X11 environments: while the main application widget was
   minimized to the system-tray, closing any other top-level widget

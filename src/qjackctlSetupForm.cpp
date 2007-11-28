@@ -361,6 +361,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.SystemTrayCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.StartMinimizedCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 	QObject::connect(m_ui.DelayedSetupCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -548,6 +551,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
 	m_ui.KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
+	m_ui.StartMinimizedCheckBox->setChecked(m_pSetup->bStartMinimized);
 	m_ui.DelayedSetupCheckBox->setChecked(m_pSetup->bDelayedSetup);
 	m_ui.ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
 	setComboBoxCurrentText(m_ui.ServerConfigNameComboBox,
@@ -565,6 +569,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 #ifndef CONFIG_SYSTEM_TRAY
 	m_ui.SystemTrayCheckBox->setChecked(false);
 	m_ui.SystemTrayCheckBox->setEnabled(false);
+	m_ui.StartMinimizedCheckBox->setChecked(false);
+	m_ui.StartMinimizedCheckBox->setEnabled(false);
 #endif
 #ifndef CONFIG_JACK_MIDI
 	m_ui.MidiDriverComboBox->setCurrentIndex(0);
@@ -1011,6 +1017,9 @@ void qjackctlSetupForm::stabilizeForm (void)
 #endif
 	m_ui.MessagesLimitLinesComboBox->setEnabled(
 		m_ui.MessagesLimitCheckBox->isChecked());
+
+	m_ui.StartMinimizedCheckBox->setEnabled(
+		m_ui.SystemTrayCheckBox->isChecked());
 
 	bEnabled = m_ui.ServerConfigCheckBox->isChecked();
 	m_ui.ServerConfigNameComboBox->setEnabled(bEnabled);
@@ -1600,6 +1609,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bQueryClose              = m_ui.QueryCloseCheckBox->isChecked();
 		m_pSetup->bKeepOnTop               = m_ui.KeepOnTopCheckBox->isChecked();
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();
+		m_pSetup->bStartMinimized          = m_ui.StartMinimizedCheckBox->isChecked();
 		m_pSetup->bDelayedSetup            = m_ui.DelayedSetupCheckBox->isChecked();
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();

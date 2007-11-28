@@ -83,6 +83,7 @@ qjackctlSetup::qjackctlSetup (void)
 	bQueryClose              = m_settings.value("/QueryClose", true).toBool();
 	bKeepOnTop               = m_settings.value("/KeepOnTop", false).toBool();
 	bSystemTray              = m_settings.value("/SystemTray", false).toBool();
+	bStartMinimized          = m_settings.value("/StartMinimized", false).toBool();
 	bDelayedSetup            = m_settings.value("/DelayedSetup", false).toBool();
 	bServerConfig            = m_settings.value("/ServerConfig", true).toBool();
 	sServerConfigName        = m_settings.value("/ServerConfigName", ".jackdrc").toString();
@@ -170,6 +171,7 @@ qjackctlSetup::~qjackctlSetup (void)
 	m_settings.setValue("/QueryClose",              bQueryClose);
 	m_settings.setValue("/KeepOnTop",               bKeepOnTop);
 	m_settings.setValue("/SystemTray",              bSystemTray);
+	m_settings.setValue("/StartMinimized",          bStartMinimized);
 	m_settings.setValue("/DelayedSetup",            bDelayedSetup);
 	m_settings.setValue("/ServerConfig",            bServerConfig);
 	m_settings.setValue("/ServerConfigName",        sServerConfigName);
