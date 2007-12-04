@@ -392,7 +392,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
 	// Try to restore old window positioning and appearence.
-	m_pSetup->loadWidgetGeometry(this);
+	m_pSetup->loadWidgetGeometry(this, m_pSetup->bStartMinimized);
 
 	// Make it final show...
 	m_ui.StatusDisplayFrame->show();

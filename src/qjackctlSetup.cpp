@@ -578,7 +578,7 @@ void qjackctlSetup::saveSplitterSizes ( QSplitter *pSplitter )
 //---------------------------------------------------------------------------
 // Widget geometry persistence helper methods.
 
-void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
+void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bMinimized )
 {
 	// Try to restore old form window positioning.
 	if (pWidget) {
@@ -592,13 +592,13 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget )
 		fsize.setHeight(m_settings.value("/height", -1).toInt());
 		bVisible = m_settings.value("/visible", false).toBool();
 		m_settings.endGroup();
-		new qjackctlDelayedSetup(pWidget, fpos, fsize, bVisible,
+		new qjackctlDelayedSetup(pWidget, fpos, fsize, bVisible && !bMinimized,
 			(bDelayedSetup ? 1000 : 0));
 	}
 }
 
 
-void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
+void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bMinimized )
 {
 	// Try to save form window position...
 	// (due to X11 window managers ideossincrasies, we better
@@ -612,7 +612,7 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget )
 		m_settings.setValue("/y", fpos.y());
 		m_settings.setValue("/width", fsize.width());
 		m_settings.setValue("/height", fsize.height());
-		m_settings.setValue("/visible", bVisible);
+		m_settings.setValue("/visible", bVisible && !bMinimized);
 		m_settings.endGroup();
 	}
 }
