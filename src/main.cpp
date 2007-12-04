@@ -88,6 +88,7 @@ int main ( int argc, char **argv )
 
 	// Register the quit signal/slot.
 	// app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
+	app.setQuitOnLastWindowClosed(false);
 
 	return app.exec();
 }
