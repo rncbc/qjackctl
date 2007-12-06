@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- Patchbay port matching has been slightly extended, this time
+  allowing for the multiple or as many-to-many connections between
+  socket plugs, provided these are specified in proper regex form
+  (after a patch proposed by Dave Moore, thanks).
+
 - A new option to start the program minimized when the system tray
   icon is enabled, is now available from Setup/Misc/Start minimized
   to system tray (as kindly suggested by Marc-Olivier Barre).

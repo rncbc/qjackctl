@@ -617,18 +617,20 @@ void qjackctlPatchbayRack::connectAudioCable (
 		const QString& sOutputPlug = iterOutputPlug.next();
 		const QString& sInputPlug  = iterInputPlug.next();
 		// Check audio port connection sequentially...
-		int iPort = 0;
+		int iOPort = 0;
 		const char *pszOutputPort;
 		while ((pszOutputPort = findAudioPort(m_ppszOAudioPorts,
-			pOutputSocket->clientName(), sOutputPlug, iPort)) != NULL) {
-			const char *pszInputPort = findAudioPort(m_ppszIAudioPorts,
-				pInputSocket->clientName(), sInputPlug, iPort);
-			if (pszInputPort) {
+				pOutputSocket->clientName(), sOutputPlug, iOPort)) != NULL) {
+			int iIPort = 0;
+			const char *pszInputPort;
+			while ((pszInputPort = findAudioPort(m_ppszIAudioPorts,
+					pInputSocket->clientName(), sInputPlug, iIPort)) != NULL) {
 				connectAudioSocketPorts(
-					pOutputSocket, pszOutputPort,
-					pInputSocket, pszInputPort);
+					 pOutputSocket, pszOutputPort,
+					 pInputSocket, pszInputPort);
+				iIPort++;
 			}
-			iPort++;
+			iOPort++;
 		}
 	}
 }
@@ -985,18 +987,20 @@ void qjackctlPatchbayRack::connectMidiCable (
 		const QString& sOutputPlug = iterOutputPlug.next();
 		const QString& sInputPlug  = iterInputPlug.next();
 		// Check MIDI port connection sequentially...
-		int iPort = 0;
+		int iOPort = 0;
 		qjackctlMidiPort *pOutputPort;
 		while ((pOutputPort = findMidiPort(m_omidiports,
-				pOutputSocket->clientName(), sOutputPlug, iPort)) != NULL) {
-			qjackctlMidiPort *pInputPort = findMidiPort(m_imidiports,
-				pInputSocket->clientName(), sInputPlug, iPort);
-			if (pInputPort) {
+				pOutputSocket->clientName(), sOutputPlug, iOPort)) != NULL) {
+			int iIPort = 0;
+			qjackctlMidiPort *pInputPort;
+			while ((pInputPort = findMidiPort(m_imidiports,
+					pInputSocket->clientName(), sInputPlug, iIPort)) != NULL) {
 				connectMidiSocketPorts(
-					pOutputSocket, pOutputPort,
-					pInputSocket, pInputPort);
+					 pOutputSocket, pOutputPort,
+					 pInputSocket, pInputPort);
+				iIPort++;
 			}
-			iPort++;
+			iOPort++;
 		}
 	}
 }
