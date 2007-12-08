@@ -3102,7 +3102,7 @@
                <string>Whether to enable blinking (flashing) of the server mode (RT) indicator</string>
               </property>
               <property name="text" >
-               <string>Blin&amp;k server mode indicator when started</string>
+               <string>Blin&amp;k server mode indicator</string>
               </property>
               <property name="shortcut" >
                <string>Alt+K</string>
