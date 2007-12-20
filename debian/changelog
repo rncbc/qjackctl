@@ -1,3 +1,9 @@
+qjackctl (0.3.2-1) unstable; urgency=low
+
+  * Patchbay heads-up with season greetings. 
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Thu, 20 Dec 2007 10:15:01 +0100
+
 qjackctl (0.3.1a-1) unstable; urgency=low
 
   * System-tray tooltip icon crash fix.

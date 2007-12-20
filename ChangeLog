@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.3.2  2007-12-20  Patchbay heads-up with season greetings.
 
 - Patchbay port matching has been slightly extended, this time
   allowing for the multiple or as many-to-many connections between
@@ -39,7 +39,7 @@ CVS HEAD
 - Simple as it could ever be, the build executive summary report
   is now given on configure.
 
-- Patchbay snapshot not gets socket and port ordering back.
+- Patchbay snapshot ot its socket and port ordering back.
 
 - ALSA Sequencer support is now an optional feature on setup,
   preventing the annoying "MIDI patchbay will be not available"
@@ -56,8 +56,8 @@ CVS HEAD
   some quirk in the QTreeWidget which was preventing some items,
   specially the expanded ones, to disappear in the void. Meanwhile,
   with a hand from Stephane Letz, the client/port lookup method was
-  changed to prevent duplicated, missing or worse, crashes due to
-  weird behaved windows applications.
+  changed to prevent duplicated, missing entries or worse, crashes
+  due to weird behaved windows applications.
 
 - The xrun count stats can now be reset simply by middle clicking
   on the systray icon or the main window's display area (thanks to
@@ -76,12 +76,12 @@ CVS HEAD
   now supposed to behave a little better when disabled, layering
   child windows as naturally as far the window manager dictates.
 
-- Input/Ouput Channel setting is now allowed to be greater than 32;
+- Input/Output Channel setting is now allowed to be greater than 32;
   the special default text is now displayed, also on Input/Output
   Latency and Priority settings spin-boxes. 
 
 - Andreas Persson just sent a patch that makes it possible to compile
-  and run qjackctl with Qt version 4.1. Applied whithout hesitation,
+  and run qjackctl with Qt version 4.1. Applied without hesitation,
   thanks.
 
 
