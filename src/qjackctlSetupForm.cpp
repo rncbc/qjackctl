@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1027,6 +1027,9 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	m_ui.AliasesEditingCheckBox->setEnabled(
 		m_ui.AliasesEnabledCheckBox->isChecked());
+
+	m_ui.DelayedSetupCheckBox->setEnabled(
+		!m_ui.StartMinimizedCheckBox->isChecked());
 
 	m_ui.TransportButtonsCheckBox->setEnabled(
 		m_ui.LeftButtonsCheckBox->isChecked());

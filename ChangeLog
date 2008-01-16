@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Delay window positioning at startup option is now being disabled,
+  on the Setup/Misc tab, when Minimize to system tray is enabled.
+
 - Cosmetic fix: Setup/Settings tab, 'Input Device' text label was
   using a slightly smaller font than the rest of the application
   (bug#1872545, reported by Jouni Rinne).
