@@ -3,6 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Cosmetic fix: Setup/Settings tab, 'Input Device' text label was
+  using a slightly smaller font than the rest of the application
+  (bug#1872545, reported by Jouni Rinne).
+
+
 0.3.2  2007-12-20  Patchbay heads-up with season greetings.
 
 - Patchbay port matching has been slightly extended, this time
