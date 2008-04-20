@@ -836,6 +836,7 @@ void qjackctlSetupForm::computeLatency (void)
 
 void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 {
+	bool bSun        = (sDriver == "sun");
 	bool bOss        = (sDriver == "oss");
 	bool bAlsa       = (sDriver == "alsa");
 	bool bCoreaudio  = (sDriver == "coreaudio");
@@ -847,23 +848,23 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 
 	switch (iAudio) {
 	case QJACKCTL_DUPLEX:
-		bInEnabled  = (bOss || bAlsa || bCoreaudio || bPortaudio);
-		bOutEnabled = (bOss || bAlsa || bCoreaudio || bPortaudio);
+		bInEnabled  = (bSun || bOss || bAlsa || bCoreaudio || bPortaudio);
+		bOutEnabled = (bSun || bOss || bAlsa || bCoreaudio || bPortaudio);
 		break;
 	case QJACKCTL_CAPTURE:
-		bInEnabled  = (bOss || bCoreaudio || bPortaudio);
+		bInEnabled  = (bSun || bOss || bCoreaudio || bPortaudio);
 		break;
 	case QJACKCTL_PLAYBACK:
-		bOutEnabled = (bOss || bCoreaudio || bPortaudio);
+		bOutEnabled = (bSun || bOss || bCoreaudio || bPortaudio);
 		break;
 	}
 
-	m_ui.InDeviceTextLabel->setEnabled(bInEnabled && (bAlsa || bOss));
-	m_ui.InDeviceComboBox->setEnabled(bInEnabled && (bAlsa || bOss));
-	m_ui.InDeviceToolButton->setEnabled(bInEnabled && (bAlsa || bOss));
-	m_ui.OutDeviceTextLabel->setEnabled(bOutEnabled && (bAlsa || bOss));
-	m_ui.OutDeviceComboBox->setEnabled(bOutEnabled && (bAlsa || bOss));
-	m_ui.OutDeviceToolButton->setEnabled(bOutEnabled && (bAlsa || bOss));
+	m_ui.InDeviceTextLabel->setEnabled(bInEnabled && (bAlsa || bSun || bOss));
+	m_ui.InDeviceComboBox->setEnabled(bInEnabled && (bAlsa || bSun || bOss));
+	m_ui.InDeviceToolButton->setEnabled(bInEnabled && (bAlsa || bSun || bOss));
+	m_ui.OutDeviceTextLabel->setEnabled(bOutEnabled && (bAlsa || bSun || bOss));
+	m_ui.OutDeviceComboBox->setEnabled(bOutEnabled && (bAlsa || bSun || bOss));
+	m_ui.OutDeviceToolButton->setEnabled(bOutEnabled && (bAlsa || bSun || bOss));
 
 	m_ui.InChannelsTextLabel->setEnabled(bInEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_PLAYBACK));
@@ -902,6 +903,7 @@ void qjackctlSetupForm::changeDriver ( const QString& sDriver )
 void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdate )
 {
 	bool bDummy     = (sDriver == "dummy");
+	bool bSun       = (sDriver == "sun");
 	bool bOss       = (sDriver == "oss");
 	bool bAlsa      = (sDriver == "alsa");
 	bool bPortaudio = (sDriver == "portaudio");
@@ -919,7 +921,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.HWMonCheckBox->setEnabled(bAlsa);
 	m_ui.HWMeterCheckBox->setEnabled(bAlsa);
 
-	m_ui.IgnoreHWCheckBox->setEnabled(bOss);
+	m_ui.IgnoreHWCheckBox->setEnabled(bSun || bOss);
 
 #ifdef CONFIG_COREAUDIO
 	m_ui.PriorityTextLabel->setEnabled(false);
@@ -930,14 +932,14 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.PrioritySpinBox->setEnabled(bPriorityEnabled);
 #endif
 
-	m_ui.PeriodsTextLabel->setEnabled(bAlsa || bOss || bFreebob || bFirewire);
-	m_ui.PeriodsSpinBox->setEnabled(bAlsa || bOss || bFreebob || bFirewire);
+	m_ui.PeriodsTextLabel->setEnabled(bAlsa || bSun || bOss || bFreebob || bFirewire);
+	m_ui.PeriodsSpinBox->setEnabled(bAlsa || bSun || bOss || bFreebob || bFirewire);
 
 	if (bUpdate && (bFreebob || bFirewire) && m_ui.PeriodsSpinBox->value() < 3)
 		m_ui.PeriodsSpinBox->setValue(3);
 
-	m_ui.WordLengthTextLabel->setEnabled(bOss);
-	m_ui.WordLengthComboBox->setEnabled(bOss);
+	m_ui.WordLengthTextLabel->setEnabled(bSun || bOss);
+	m_ui.WordLengthComboBox->setEnabled(bSun || bOss);
 
 	m_ui.WaitTextLabel->setEnabled(bDummy);
 	m_ui.WaitComboBox->setEnabled(bDummy);
@@ -1110,10 +1112,11 @@ static OSStatus getDeviceUIDFromID( AudioDeviceID id,
 void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	QToolButton *pToolButton, int iAudio )
 {
-	// FIXME: Only valid for ALSA and OSS devices,
+	// FIXME: Only valid for ALSA, Sun and OSS devices,
 	// for the time being... and also CoreAudio ones too.
 	const QString& sDriver = m_ui.DriverComboBox->currentText();
 	bool bAlsa      = (sDriver == "alsa");
+	bool bSun       = (sDriver == "sun");
 	bool bOss       = (sDriver == "oss");
 #ifdef CONFIG_COREAUDIO
 	bool bCoreaudio = (sDriver == "coreaudio");
@@ -1172,6 +1175,27 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 		}
 #endif 	// CONFIG_ALSA_SEQ
 	}	// Enumerate the OSS Audio devices...
+	else
+	if (bSun) {
+		QFile file("/var/run/dmesg.boot");
+		if (file.open(QIODevice::ReadOnly)) {
+			QTextStream stream(&file);
+			QString sLine;
+			QRegExp rxDevice("audio([0-9]) at (.*)");
+			while (!stream.atEnd()) {
+				sLine = stream.readLine();
+				if (rxDevice.exactMatch(sLine)) {
+					sName = "/dev/audio" + rxDevice.cap(1);
+					sText = sName + '\t' + rxDevice.cap(2);
+					pAction = menu.addAction(sText);
+					pAction->setCheckable(true);
+					pAction->setChecked(sCurName == sName);
+					++iCards;
+				}
+			}
+			file.close();
+		}
+	}
 	else
 	if (bOss) {
 		QFile file("/dev/sndstat");

@@ -788,6 +788,7 @@ void qjackctlMainForm::startJack (void)
 
 	// Build process arguments...
 	bool bDummy     = (m_preset.sDriver == "dummy");
+	bool bSun       = (m_preset.sDriver == "sun");
 	bool bOss       = (m_preset.sDriver == "oss");
 	bool bAlsa      = (m_preset.sDriver == "alsa");
 	bool bPortaudio = (m_preset.sDriver == "portaudio");
@@ -825,7 +826,7 @@ void qjackctlMainForm::startJack (void)
 		args.append("-r" + QString::number(m_preset.iSampleRate));
 	if (m_preset.iFrames > 0)
 		args.append("-p" + QString::number(m_preset.iFrames));
-	if (bAlsa || bOss || bFreebob || bFirewire) {
+	if (bAlsa || bSun || bOss || bFreebob || bFirewire) {
 		if (m_preset.iPeriods > 0)
 			args.append("-n" + QString::number(m_preset.iPeriods));
 	}
@@ -861,7 +862,7 @@ void qjackctlMainForm::startJack (void)
 			args.append("-X" + m_preset.sMidiDriver);
 #endif
 	}
-	else if (bOss) {
+	else if (bOss || bSun) {
 		if (m_preset.bIgnoreHW)
 			args.append("-b");
 		if (m_preset.iWordLength > 0)
@@ -924,7 +925,7 @@ void qjackctlMainForm::startJack (void)
 		if (m_preset.bHWMeter)
 			args.append("-M");
 	}
-	if (bAlsa || bOss || bCoreaudio || bPortaudio || bFreebob) {
+	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob) {
 		if (m_preset.iInLatency > 0)
 			args.append("-I" + QString::number(m_preset.iInLatency));
 		if (m_preset.iOutLatency > 0)

@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Sun driver support (by Jacob Meuser).
+
 - Delay window positioning at startup option is now being disabled,
   on the Setup/Misc tab, when Minimize to system tray is enabled.
 

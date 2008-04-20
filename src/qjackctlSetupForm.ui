@@ -286,6 +286,11 @@
             </item>
             <item>
              <property name="text" >
+              <string>sun</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
               <string>oss</string>
              </property>
             </item>
@@ -1048,6 +1053,11 @@
               </item>
               <item>
                <property name="text" >
+                <string>/dev/audio</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
                 <string>/dev/dsp</string>
                </property>
               </item>
@@ -1131,6 +1141,11 @@
               </item>
               <item>
                <property name="text" >
+                <string>/dev/audio</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
                 <string>/dev/dsp</string>
                </property>
               </item>
@@ -1204,6 +1219,11 @@
               <item>
                <property name="text" >
                 <string>plughw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>/dev/audio</string>
                </property>
               </item>
               <item>
