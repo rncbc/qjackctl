@@ -1867,8 +1867,8 @@ void qjackctlMainForm::timerSlot (void)
 			m_iJackDirty = 0;
 			if (m_pSetup->bActivePatchbay) {
 				appendMessagesColor(
-					tr("Audio active patchbay scan") + sEllipsis, "#6699cc");
-				m_pPatchbayRack->connectAudioScan(m_pJackClient);
+					tr("JACK active patchbay scan") + sEllipsis, "#6699cc");
+				m_pPatchbayRack->connectJackScan(m_pJackClient);
 			}
 			refreshJackConnections();
 		}
@@ -1877,8 +1877,8 @@ void qjackctlMainForm::timerSlot (void)
 			m_iAlsaDirty = 0;
 			if (m_pSetup->bActivePatchbay) {
 				appendMessagesColor(
-					tr("MIDI active patchbay scan") + sEllipsis, "#99cc66");
-				m_pPatchbayRack->connectMidiScan(m_pAlsaSeq);
+					tr("ALSA active patchbay scan") + sEllipsis, "#99cc66");
+				m_pPatchbayRack->connectAlsaScan(m_pAlsaSeq);
 			}
 			refreshAlsaConnections();
 		}

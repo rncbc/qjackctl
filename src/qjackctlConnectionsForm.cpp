@@ -445,7 +445,7 @@ void qjackctlConnectionsForm::audioDisconnecting (
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_AUDIO);
+		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_JACK_AUDIO);
 }
 
 
@@ -509,11 +509,9 @@ void qjackctlConnectionsForm::midiDisconnectAll (void)
 void qjackctlConnectionsForm::midiDisconnecting (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
-	// FIXME: Patchbay may not support JACK MIDI yet!
-	// take it as stub and make it like audio type...
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_AUDIO);
+		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_JACK_MIDI);
 }
 
 
@@ -579,7 +577,7 @@ void qjackctlConnectionsForm::alsaDisconnecting (
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_MIDI);
+		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_ALSA_MIDI);
 }
 
 

@@ -222,6 +222,12 @@ public slots:
 	bool moveUpSocketItem();
 	bool moveDownSocketItem();
 
+protected:
+
+	// Specific client:port connections snapshot.
+	void clientJackSnapshot(int iSocketType);
+	void clientAlsaSnapshot(int iSocketType);
+
 private:
 
 	// Merge two pixmaps with union of respective masks.
@@ -480,9 +486,9 @@ private:
 		qjackctlSocketItem *pISocket);
 
 	// Output socket-plug connection snapshot subroutines.
-	void socketPlugAudioSnapshot(qjackctlSocketItem *pOSocket,
+	void socketPlugJackSnapshot(qjackctlSocketItem *pOSocket,
 		qjackctlPlugItem *pOPlug);
-	void socketPlugMidiSnapshot(qjackctlSocketItem *pOSocket,
+	void socketPlugAlsaSnapshot(qjackctlSocketItem *pOSocket,
 		qjackctlPlugItem *pOPlug);
 
 	// Instance variables.

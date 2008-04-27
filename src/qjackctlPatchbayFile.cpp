@@ -1,7 +1,7 @@
 // qjackctlPatchbayFile.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -45,9 +45,12 @@ static void load_socketlist ( QList<qjackctlPatchbaySocket *>& socketlist,
 			QString sSocketType = eSocket.attribute("type");
 			QString sExclusive  = eSocket.attribute("exclusive");
 			QString sSocketForward = eSocket.attribute("forward");
-			int iSocketType = QJACKCTL_SOCKETTYPE_AUDIO;
-			if (sSocketType == "midi")
-				iSocketType = QJACKCTL_SOCKETTYPE_MIDI;
+			int iSocketType = QJACKCTL_SOCKETTYPE_JACK_AUDIO;
+			if (sSocketType == "midi" || sSocketType == "alsa-midi")
+				iSocketType = QJACKCTL_SOCKETTYPE_ALSA_MIDI;
+			else
+			if (sSocketType == "jack-midi")
+				iSocketType = QJACKCTL_SOCKETTYPE_JACK_MIDI;
 			bool bExclusive = (sExclusive == "on" || sExclusive == "yes" || sExclusive == "1");
 			qjackctlPatchbaySocket *pSocket
 				= new qjackctlPatchbaySocket(sSocketName, sClientName, iSocketType);
@@ -83,9 +86,12 @@ static void save_socketlist ( QList<qjackctlPatchbaySocket *>& socketlist,
 		QDomElement eSocket = doc.createElement("socket");
 		eSocket.setAttribute("name", pSocket->name());
 		eSocket.setAttribute("client", pSocket->clientName());
-		QString sSocketType = "audio";
-		if (pSocket->type() == QJACKCTL_SOCKETTYPE_MIDI)
-			sSocketType = "midi";
+		QString sSocketType = "audio";	// FIXME: "jack-audio"
+		if (pSocket->type() == QJACKCTL_SOCKETTYPE_ALSA_MIDI)
+			sSocketType = "midi";		// FIXME: "alsa-midi"
+		else
+		if (pSocket->type() == QJACKCTL_SOCKETTYPE_JACK_MIDI)
+			sSocketType = "jack-midi";
 		eSocket.setAttribute("type", sSocketType);
 		eSocket.setAttribute("exclusive", (pSocket->isExclusive() ? "on" : "off"));
 		if (!pSocket->forward().isEmpty())

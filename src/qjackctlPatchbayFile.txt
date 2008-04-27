@@ -43,7 +43,7 @@ qjackctlPatchbayFile format specification
   patchbay-name     := string-literal
   patchbay-version  := string-literal
   socket-name       := string-literal
-  socket-type       := "audio" | "midi"
+  socket-type       := "audio" | "midi" | "jack-audio" | "jack-midi" | "alsa-midi"
 # slot-name         := string-literal
 # slot-mode         := "open" | "half" | "full"
   client-name       := string-regexp (JACK/ALSA client name)

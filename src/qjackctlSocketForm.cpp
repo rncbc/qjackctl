@@ -1,7 +1,7 @@
 // qjackctlSocketForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -54,6 +54,7 @@ qjackctlSocketForm::qjackctlSocketForm (
 	m_pSocketTypeButtonGroup = new QButtonGroup(this);
 	m_pSocketTypeButtonGroup->addButton(m_ui.AudioRadioButton, 0);
 	m_pSocketTypeButtonGroup->addButton(m_ui.MidiRadioButton,  1);
+	m_pSocketTypeButtonGroup->addButton(m_ui.AlsaRadioButton,  2);
 	m_pSocketTypeButtonGroup->setExclusive(true);
 
 	// Plug list is not sortable.
@@ -67,8 +68,11 @@ qjackctlSocketForm::qjackctlSocketForm (
 	pHeader->setMovable(false);
 	pHeader->setStretchLastSection(true);
 
-#ifndef CONFIG_ALSA_SEQ
+#ifndef CONFIG_JACK_MIDI
 	m_ui.MidiRadioButton->setEnabled(false);
+#endif
+#ifndef CONFIG_ALSA_SEQ
+	m_ui.AlsaRadioButton->setEnabled(false);
 #endif
 
 	// UI connections...
@@ -99,6 +103,9 @@ qjackctlSocketForm::qjackctlSocketForm (
 		SIGNAL(toggled(bool)),
 		SLOT(socketTypeChanged()));
 	QObject::connect(m_ui.MidiRadioButton,
+		SIGNAL(toggled(bool)),
+		SLOT(socketTypeChanged()));
+	QObject::connect(m_ui.AlsaRadioButton,
 		SIGNAL(toggled(bool)),
 		SLOT(socketTypeChanged()));
 	QObject::connect(m_ui.ExclusiveCheckBox,
@@ -180,18 +187,27 @@ void qjackctlSocketForm::setConnectCount ( int iConnectCount )
 //	m_ui.SocketTypeGroupBox->setEnabled(iConnectCount < 1);
 	if (iConnectCount) {
 		switch (m_pSocketTypeButtonGroup->checkedId()) {
-		case 0: // QJACKCTL_SOCKETTYPE_AUDIO
+		case 0: // QJACKCTL_SOCKETTYPE_JACK_AUDIO
 			m_ui.MidiRadioButton->setEnabled(false);
+			m_ui.AlsaRadioButton->setEnabled(false);
 			break;
-		case 1: // QJACKCTL_SOCKETTYPE_MIDI
+		case 1: // QJACKCTL_SOCKETTYPE_JACK_MIDI
 			m_ui.AudioRadioButton->setEnabled(false);
+			m_ui.AlsaRadioButton->setEnabled(false);
+			break;
+		case 2: // QJACKCTL_SOCKETTYPE_ALSA_MIDI
+			m_ui.AudioRadioButton->setEnabled(false);
+			m_ui.MidiRadioButton->setEnabled(false);
 			break;
 		}
 	}
 //	m_ui.ExclusiveCheckBox->setEnabled(iConnectCount < 2);
 
-#ifndef CONFIG_ALSA_SEQ
+#ifndef CONFIG_JACK_MIDI
 	m_ui.MidiRadioButton->setEnabled(false);
+#endif
+#ifndef CONFIG_ALSA_SEQ
+	m_ui.AlsaRadioButton->setEnabled(false);
 #endif
 }
 
@@ -368,10 +384,11 @@ void qjackctlSocketForm::addPlug (void)
 			pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 			QPixmap *pXpmPlug = NULL;
 			switch (m_pSocketTypeButtonGroup->checkedId()) {
-			case 0: // QJACKCTL_SOCKETTYPE_AUDIO
+			case 0: // QJACKCTL_SOCKETTYPE_JACK_AUDIO
 				pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG];
 				break;
-			case 1: // QJACKCTL_SOCKETTYPE_MIDI
+			case 1: // QJACKCTL_SOCKETTYPE_JACK_MIDI
+			case 2: // QJACKCTL_SOCKETTYPE_ALSA_MIDI
 				pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG];
 				break;
 			}
@@ -538,6 +555,105 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 }
 
 
+void qjackctlSocketForm::updateJackClients ( int iSocketType )
+{
+	if (m_pJackClient == NULL)
+		return;
+
+	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
+	int iPixmap = QJACKCTL_XPM_AUDIO_CLIENT;
+#ifdef CONFIG_JACK_MIDI
+	if (iSocketType == QJACKCTL_SOCKETTYPE_JACK_MIDI) {
+		pszJackPortType = JACK_DEFAULT_MIDI_TYPE;
+		iPixmap = QJACKCTL_XPM_MIDI_CLIENT;
+	}
+#endif
+
+	bool bReadable = m_pSocketList->isReadable();
+	const QIcon icon(*m_ppPixmaps[iPixmap]);
+
+	// Grab all client ports.
+	const char **ppszClientPorts = jack_get_ports(m_pJackClient,
+		NULL, pszJackPortType,
+		(bReadable ? JackPortIsOutput : JackPortIsInput));
+	if (ppszClientPorts) {
+		int iClientPort = 0;
+		while (ppszClientPorts[iClientPort]) {
+			QString sClientPort = ppszClientPorts[iClientPort];
+			int iColon = sClientPort.indexOf(':');
+			if (iColon >= 0) {
+				QString sClientName
+					= qjackctlClientAlias::escapeRegExpDigits(
+						sClientPort.left(iColon));
+				bool bExists = false;
+				for (int i = 0;
+					i < m_ui.ClientNameComboBox->count() && !bExists; i++)
+					bExists = (sClientName == m_ui.ClientNameComboBox->itemText(i));
+				if (!bExists) {
+					m_ui.ClientNameComboBox->addItem(icon, sClientName);
+				}
+			}
+			iClientPort++;
+		}
+		::free(ppszClientPorts);
+	}
+}
+
+
+// ALSA client names refreshner.
+void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
+{
+	if (m_pAlsaSeq == NULL)
+		return;
+
+#ifdef CONFIG_ALSA_SEQ
+
+	bool bReadable = m_pSocketList->isReadable();
+	const QIcon icon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_CLIENT]);
+
+	// Readd all subscribers...
+	snd_seq_client_info_t *pClientInfo;
+	snd_seq_port_info_t   *pPortInfo;
+	unsigned int uiAlsaFlags;
+	if (bReadable)
+		uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
+	else
+		uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
+
+	snd_seq_client_info_alloca(&pClientInfo);
+	snd_seq_port_info_alloca(&pPortInfo);
+	snd_seq_client_info_set_client(pClientInfo, -1);
+	while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
+		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
+		QString sClient
+			= qjackctlClientAlias::escapeRegExpDigits(
+				snd_seq_client_info_get_name(pClientInfo));
+		if (iAlsaClient > 0) {
+			bool bExists = false;
+			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
+			snd_seq_port_info_set_port(pPortInfo, -1);
+			while (!bExists
+				&& snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
+				unsigned int uiPortCapability
+					= snd_seq_port_info_get_capability(pPortInfo);
+				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
+					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
+					for (int i = 0;
+						i < m_ui.ClientNameComboBox->count() && !bExists; i++)
+						bExists = (sClient == m_ui.ClientNameComboBox->itemText(i));
+					if (!bExists) {
+						m_ui.ClientNameComboBox->addItem(icon, sClient);
+						bExists = true;
+					}
+				}
+			}
+		}
+	}
+
+#endif	// CONFIG_ALSA_SEQ
+}
+
+
 // Socket type change slot.
 void qjackctlSocketForm::socketTypeChanged (void)
 {
@@ -556,93 +672,32 @@ void qjackctlSocketForm::socketTypeChanged (void)
 	bool bReadable = m_pSocketList->isReadable();
 	int iSocketType = m_pSocketTypeButtonGroup->checkedId();
 	switch (iSocketType) {
-	case 0: // QJACKCTL_SOCKETTYPE_AUDIO
+	case 0: // QJACKCTL_SOCKETTYPE_JACK_AUDIO
 		if (m_ui.ExclusiveCheckBox->isChecked())
 			pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X];
 		else
 			pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET];
 		m_ui.SocketTabWidget->setTabIcon(0, QIcon(*pXpmSocket));
 		pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG];
-		if (m_pJackClient) {
-			// Grab all client ports.
-			const char **ppszClientPorts = jack_get_ports(m_pJackClient,
-				0, JACK_DEFAULT_AUDIO_TYPE,
-				(bReadable ? JackPortIsOutput : JackPortIsInput));
-			if (ppszClientPorts) {
-				int iClientPort = 0;
-				while (ppszClientPorts[iClientPort]) {
-					QString sClientPort = ppszClientPorts[iClientPort];
-					int iColon = sClientPort.indexOf(':');
-					if (iColon >= 0) {
-						QString sClientName
-							= qjackctlClientAlias::escapeRegExpDigits(
-								sClientPort.left(iColon));
-						bool bExists = false;
-						for (int i = 0;
-							i < m_ui.ClientNameComboBox->count() && !bExists; i++)
-							bExists = (sClientName == m_ui.ClientNameComboBox->itemText(i));
-						if (!bExists) {
-							m_ui.ClientNameComboBox->addItem(
-								QIcon(*m_ppPixmaps[QJACKCTL_XPM_AUDIO_CLIENT]),
-								sClientName);
-						}
-					}
-					iClientPort++;
-				}
-				::free(ppszClientPorts);
-			}
-		}
+		updateJackClients(QJACKCTL_SOCKETTYPE_JACK_AUDIO);
 		break;
-	case 1: // QJACKCTL_SOCKETTYPE_MIDI
+	case 1: // QJACKCTL_SOCKETTYPE_JACK_MIDI
 		if (m_ui.ExclusiveCheckBox->isChecked())
 			pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X];
 		else
 			pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET];
 		m_ui.SocketTabWidget->setTabIcon(0, QIcon(*pXpmSocket));
 		pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG];
-#ifdef CONFIG_ALSA_SEQ
-		if (m_pAlsaSeq) {
-			// Readd all subscribers...
-			snd_seq_client_info_t *pClientInfo;
-			snd_seq_port_info_t   *pPortInfo;
-			unsigned int uiAlsaFlags;
-			if (bReadable)
-				uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
-			else
-				uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
-			snd_seq_client_info_alloca(&pClientInfo);
-			snd_seq_port_info_alloca(&pPortInfo);
-			snd_seq_client_info_set_client(pClientInfo, -1);
-			while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
-				int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
-				QString sClient
-					= qjackctlClientAlias::escapeRegExpDigits(
-						snd_seq_client_info_get_name(pClientInfo));
-				if (iAlsaClient > 0) {
-					bool bExists = false;
-					snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
-					snd_seq_port_info_set_port(pPortInfo, -1);
-					while (!bExists
-						&& snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
-						unsigned int uiPortCapability
-							= snd_seq_port_info_get_capability(pPortInfo);
-						if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
-							((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
-							for (int i = 0;
-								i < m_ui.ClientNameComboBox->count() && !bExists; i++)
-								bExists = (sClient == m_ui.ClientNameComboBox->itemText(i));
-							if (!bExists) {
-								m_ui.ClientNameComboBox->addItem(
-									QIcon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_CLIENT]),
-									sClient);
-								bExists = true;
-							}
-						}
-					}
-				}
-			}
-		}
-#endif	// CONFIG_ALSA_SEQ
+		updateJackClients(QJACKCTL_SOCKETTYPE_JACK_MIDI);
+		break;
+	case 2: // QJACKCTL_SOCKETTYPE_ALSA_MIDI
+		if (m_ui.ExclusiveCheckBox->isChecked())
+			pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X];
+		else
+			pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET];
+		m_ui.SocketTabWidget->setTabIcon(0, QIcon(*pXpmSocket));
+		pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG];
+		updateAlsaClients(QJACKCTL_SOCKETTYPE_ALSA_MIDI);
 		break;
 	}
 
@@ -667,13 +722,14 @@ void qjackctlSocketForm::socketTypeChanged (void)
 			if (pSocketItem->socketType() == iSocketType
 				&& pSocketItem->socketName() != m_ui.SocketNameLineEdit->text()) {
 				switch (iSocketType) {
-				case 0: // QJACKCTL_SOCKETTYPE_AUDIO
+				case 0: // QJACKCTL_SOCKETTYPE_JACK_AUDIO
 					if (pSocketItem->isExclusive())
 						pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X];
 					else
 						pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_AUDIO_SOCKET];
 					break;
-				case 1: // QJACKCTL_SOCKETTYPE_MIDI
+				case 1: // QJACKCTL_SOCKETTYPE_JACK_MIDI
+				case 2: // QJACKCTL_SOCKETTYPE_ALSA_MIDI
 					if (pSocketItem->isExclusive())
 						pXpmSocket = m_ppPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X];
 					else
@@ -692,6 +748,105 @@ void qjackctlSocketForm::socketTypeChanged (void)
 }
 
 
+// JACK client plugs refreshner.
+void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
+{
+	if (m_pJackClient == NULL)
+		return;
+
+	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
+	int iPixmap = QJACKCTL_XPM_AUDIO_PLUG;
+#ifdef CONFIG_JACK_MIDI
+	if (iSocketType == QJACKCTL_SOCKETTYPE_JACK_MIDI) {
+		pszJackPortType = JACK_DEFAULT_MIDI_TYPE;
+		iPixmap = QJACKCTL_XPM_MIDI_PLUG;
+	}
+#endif
+
+	QString sClientName = m_ui.ClientNameComboBox->currentText();
+	if (sClientName.isEmpty())
+		return;
+	QRegExp rxClientName(sClientName);
+
+	bool bReadable = m_pSocketList->isReadable();
+	const QIcon icon(*m_ppPixmaps[iPixmap]);
+	const char **ppszClientPorts = jack_get_ports(m_pJackClient,
+		NULL, pszJackPortType,
+		(bReadable ? JackPortIsOutput : JackPortIsInput));
+	if (ppszClientPorts) {
+		int iClientPort = 0;
+		while (ppszClientPorts[iClientPort]) {
+			QString sClientPort = ppszClientPorts[iClientPort];
+			int iColon = sClientPort.indexOf(':');
+			if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
+				QString sPort
+					= qjackctlClientAlias::escapeRegExpDigits(
+						sClientPort.right(sClientPort.length() - iColon - 1));
+				if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
+					m_ui.PlugNameComboBox->addItem(icon, sPort);
+			}
+			iClientPort++;
+		}
+		::free(ppszClientPorts);
+	}
+}
+
+
+// ALSA client plugs refreshner.
+void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
+{
+	if (m_pAlsaSeq == NULL)
+		return;
+	if (iSocketType != QJACKCTL_SOCKETTYPE_ALSA_MIDI)
+		return;
+
+#ifdef CONFIG_ALSA_SEQ
+
+	QString sClientName = m_ui.ClientNameComboBox->currentText();
+	if (sClientName.isEmpty())
+		return;
+	QRegExp rxClientName(sClientName);
+
+	bool bReadable = m_pSocketList->isReadable();
+	const QIcon icon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG]);
+
+	// Fill sequencer plugs...
+	snd_seq_client_info_t *pClientInfo;
+	snd_seq_port_info_t   *pPortInfo;
+	unsigned int uiAlsaFlags;
+	if (bReadable)
+		uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
+	else
+		uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
+
+	snd_seq_client_info_alloca(&pClientInfo);
+	snd_seq_port_info_alloca(&pPortInfo);
+	snd_seq_client_info_set_client(pClientInfo, -1);
+	while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
+		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
+		QString sClient = snd_seq_client_info_get_name(pClientInfo);
+		if (iAlsaClient > 0 && rxClientName.exactMatch(sClient)) {
+			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
+			snd_seq_port_info_set_port(pPortInfo, -1);
+			while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
+				unsigned int uiPortCapability
+					= snd_seq_port_info_get_capability(pPortInfo);
+				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
+					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
+					QString sPort
+						= qjackctlClientAlias::escapeRegExpDigits(
+							snd_seq_port_info_get_name(pPortInfo));
+					if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
+						m_ui.PlugNameComboBox->addItem(icon, sPort);
+				}
+			}
+		}
+	}
+
+#endif	// CONFIG_ALSA_SEQ
+}
+
+
 // Update client list if available.
 void qjackctlSocketForm::clientNameChanged (void)
 {
@@ -702,77 +857,16 @@ void qjackctlSocketForm::clientNameChanged (void)
 
 	m_ui.PlugNameComboBox->clear();
 
-	QString sClientName = m_ui.ClientNameComboBox->currentText();
-	if (sClientName.isEmpty())
-		return;
-	QRegExp rxClientName(sClientName);
-
-	bool bReadable = m_pSocketList->isReadable();
 	int iSocketType = m_pSocketTypeButtonGroup->checkedId();
 	switch (iSocketType) {
-	case 0: // QJACKCTL_SOCKETTYPE_AUDIO
-		if (m_pJackClient) {
-			const char **ppszClientPorts = jack_get_ports(m_pJackClient,
-				0, JACK_DEFAULT_AUDIO_TYPE,
-				(bReadable ? JackPortIsOutput : JackPortIsInput));
-			if (ppszClientPorts) {
-				int iClientPort = 0;
-				while (ppszClientPorts[iClientPort]) {
-					QString sClientPort = ppszClientPorts[iClientPort];
-					int iColon = sClientPort.indexOf(':');
-					if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
-						QString sPort
-							= qjackctlClientAlias::escapeRegExpDigits(
-								sClientPort.right(sClientPort.length() - iColon - 1));
-						if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
-							m_ui.PlugNameComboBox->addItem(
-								QIcon(*m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG]),
-								sPort);
-					}
-					iClientPort++;
-				}
-				::free(ppszClientPorts);
-			}
-		}
+	case 0:
+		updateJackPlugs(QJACKCTL_SOCKETTYPE_JACK_AUDIO);
 		break;
-	case 1: // QJACKCTL_SOCKETTYPE_MIDI
-#ifdef CONFIG_ALSA_SEQ
-		if (m_pAlsaSeq) {
-			// Fill sequencer plugs...
-			snd_seq_client_info_t *pClientInfo;
-			snd_seq_port_info_t   *pPortInfo;
-			unsigned int uiAlsaFlags;
-			if (bReadable)
-				uiAlsaFlags = SND_SEQ_PORT_CAP_READ  | SND_SEQ_PORT_CAP_SUBS_READ;
-			else
-				uiAlsaFlags = SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE;
-			snd_seq_client_info_alloca(&pClientInfo);
-			snd_seq_port_info_alloca(&pPortInfo);
-			snd_seq_client_info_set_client(pClientInfo, -1);
-			while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
-				int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
-				QString sClient = snd_seq_client_info_get_name(pClientInfo);
-				if (iAlsaClient > 0 && rxClientName.exactMatch(sClient)) {
-					snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
-					snd_seq_port_info_set_port(pPortInfo, -1);
-					while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
-						unsigned int uiPortCapability
-							= snd_seq_port_info_get_capability(pPortInfo);
-						if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
-							((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
-							QString sPort
-								= qjackctlClientAlias::escapeRegExpDigits(
-									snd_seq_port_info_get_name(pPortInfo));
-							if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
-								m_ui.PlugNameComboBox->addItem(
-									QIcon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG]),
-									sPort);
-						}
-					}
-				}
-			}
-		}
-#endif	// CONFIG_ALSA_SEQ
+	case 1:
+		updateJackPlugs(QJACKCTL_SOCKETTYPE_JACK_MIDI);
+		break;
+	case 2:
+		updateAlsaPlugs(QJACKCTL_SOCKETTYPE_ALSA_MIDI);
 		break;
 	}
 

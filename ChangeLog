@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- Finally, full JACK MIDI support sneaks into the patchbay; socket
+  types now differ in Audio, MIDI and ALSA, following the very same
+  nomenclature as found on the Connections widget tabs.
+
 - Sun driver support (by Jacob Meuser).
 
 - Delay window positioning at startup option is now being disabled,

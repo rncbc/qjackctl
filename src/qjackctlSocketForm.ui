@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-</comment>
+ </comment>
  <class>qjackctlSocketForm</class>
  <widget class="QDialog" name="qjackctlSocketForm" >
   <property name="geometry" >
@@ -323,13 +323,26 @@
           <item>
            <widget class="QRadioButton" name="MidiRadioButton" >
             <property name="toolTip" >
-             <string>MIDI socket type (ALSA)</string>
+             <string>MIDI socket type (JACK)</string>
             </property>
             <property name="text" >
              <string>&amp;MIDI</string>
             </property>
             <property name="shortcut" >
              <string>Alt+M</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="AlsaRadioButton" >
+            <property name="toolTip" >
+             <string>MIDI socket type (ALSA)</string>
+            </property>
+            <property name="text" >
+             <string>AL&amp;SA</string>
+            </property>
+            <property name="shortcut" >
+             <string>Alt+S</string>
             </property>
            </widget>
           </item>
@@ -403,6 +416,7 @@
   <tabstop>SocketNameLineEdit</tabstop>
   <tabstop>AudioRadioButton</tabstop>
   <tabstop>MidiRadioButton</tabstop>
+  <tabstop>AlsaRadioButton</tabstop>
   <tabstop>ClientNameComboBox</tabstop>
   <tabstop>PlugNameComboBox</tabstop>
   <tabstop>PlugAddPushButton</tabstop>

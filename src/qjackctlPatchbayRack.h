@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -35,23 +35,24 @@ typedef void snd_seq_t;
 #endif
 
 // Patchbay socket types.
-#define QJACKCTL_SOCKETTYPE_AUDIO   0
-#define QJACKCTL_SOCKETTYPE_MIDI    1
+#define QJACKCTL_SOCKETTYPE_JACK_AUDIO  0
+#define QJACKCTL_SOCKETTYPE_JACK_MIDI   1
+#define QJACKCTL_SOCKETTYPE_ALSA_MIDI   2
 
 // Patchbay slot normalization modes.
-#define QJACKCTL_SLOTMODE_OPEN      0
-#define QJACKCTL_SLOTMODE_HALF      1
-#define QJACKCTL_SLOTMODE_FULL      2
+#define QJACKCTL_SLOTMODE_OPEN          0
+#define QJACKCTL_SLOTMODE_HALF          1
+#define QJACKCTL_SLOTMODE_FULL          2
 
 // Patchbay change signal flags.
-#define QJACKCTL_CABLE_FAILED       0
-#define QJACKCTL_CABLE_CHECKED      1
-#define QJACKCTL_CABLE_CONNECTED    2
-#define QJACKCTL_CABLE_DISCONNECTED 3
+#define QJACKCTL_CABLE_FAILED           0
+#define QJACKCTL_CABLE_CHECKED          1
+#define QJACKCTL_CABLE_CONNECTED        2
+#define QJACKCTL_CABLE_DISCONNECTED     3
 
 
 // Struct name says it all.
-struct qjackctlMidiPort
+struct qjackctlAlsaMidiPort
 {
 	QString sClientName;
 	QString sPortName;
@@ -223,8 +224,8 @@ public:
 	QList<qjackctlPatchbayCable *>& cablelist();
 
 	// Overloaded cable connection persistence scan cycle methods.
-	void connectAudioScan(jack_client_t *pJackClient);
-	void connectMidiScan(snd_seq_t *pAlsaSeq);
+	void connectJackScan(jack_client_t *pJackClient);
+	void connectAlsaScan(snd_seq_t *pAlsaSeq);
 
 signals:
 
@@ -235,55 +236,55 @@ signals:
 private:
 
 	// Audio connection scan related private methods.
-	const char *findAudioPort(const char **ppszClientPorts,
+	const char *findJackPort(const char **ppszJackPorts,
 		const QString& sClientName, const QString& sPortName, int n = 0);
-	void connectAudioPorts(
+	void connectJackPorts(
 		const char *pszOutputPort, const char *pszInputPort);
-	void disconnectAudioPorts(
+	void disconnectJackPorts(
 		const char *pszOutputPort, const char *pszInputPort);
-	void checkAudioPorts(
+	void checkJackPorts(
 		const char *pszOutputPort, const char *pszInputPort);
-	void connectAudioSocketPorts(
+	void connectJackSocketPorts(
 		qjackctlPatchbaySocket *pOutputSocket, const char *pszOutputPort,
 		qjackctlPatchbaySocket *pInputSocket, const char *pszInputPort);
-	void connectAudioCable(
+	void connectJackCable(
 		qjackctlPatchbaySocket *pOutputSocket,
 		qjackctlPatchbaySocket *pInputSocket);
 
 	// MIDI connection scan related private methods.
-	void loadMidiPorts(QList<qjackctlMidiPort *>& midiports, bool bReadable);
-	qjackctlMidiPort *findMidiPort (QList<qjackctlMidiPort *>& midiports,
+	void loadAlsaPorts(QList<qjackctlAlsaMidiPort *>& midiports, bool bReadable);
+	qjackctlAlsaMidiPort *findAlsaPort(QList<qjackctlAlsaMidiPort *>& midiports,
 		const QString& sClientName, const QString& sPortName, int n);
-	QString getMidiPortName(qjackctlMidiPort *pMidiPort);
-	void setMidiPort(qjackctlMidiPort *pMidiPort,
+	QString getAlsaPortName(qjackctlAlsaMidiPort *pAlsaPort);
+	void setAlsaPort(qjackctlAlsaMidiPort *pAlsaPort,
 		int iAlsaClient, int iAlsaPort);
-	void connectMidiPorts(
-		qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
-	void disconnectMidiPorts(
-		qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
-	void checkMidiPorts(
-		qjackctlMidiPort *pOutputPort, qjackctlMidiPort *pInputPort);
-	void connectMidiSocketPorts(
-		qjackctlPatchbaySocket *pOutputSocket, qjackctlMidiPort *pOutputPort,
-		qjackctlPatchbaySocket *pInputSocket, qjackctlMidiPort *pInputPort);
-	void connectMidiCable(
+	void connectAlsaPorts(
+		qjackctlAlsaMidiPort *pOutputPort, qjackctlAlsaMidiPort *pInputPort);
+	void disconnectAlsaPorts(
+		qjackctlAlsaMidiPort *pOutputPort, qjackctlAlsaMidiPort *pInputPort);
+	void checkAlsaPorts(
+		qjackctlAlsaMidiPort *pOutputPort, qjackctlAlsaMidiPort *pInputPort);
+	void connectAlsaSocketPorts(
+		qjackctlPatchbaySocket *pOutputSocket, qjackctlAlsaMidiPort *pOutputPort,
+		qjackctlPatchbaySocket *pInputSocket, qjackctlAlsaMidiPort *pInputPort);
+	void connectAlsaCable(
 		qjackctlPatchbaySocket *pOutputSocket,
 		qjackctlPatchbaySocket *pInputSocket);
 
-	void loadMidiConnections(QList<qjackctlMidiPort *>& midiports,
-		qjackctlMidiPort *pMidiPort, bool bReadable);
+	void loadAlsaConnections(QList<qjackctlAlsaMidiPort *>& midiports,
+		qjackctlAlsaMidiPort *pAlsaPort, bool bReadable);
 
 	// Audio socket/ports forwarding executive methods.
-	void connectAudioForwardPorts(
+	void connectJackForwardPorts(
 		const char *pszPort, const char *pszPortForward);
-	void connectAudioForward(
+	void connectJackForward(
 		qjackctlPatchbaySocket *pSocket,
 		qjackctlPatchbaySocket *pSocketForward);
 
 	// MIDI socket/ports forwarding executive methods.
-	void connectMidiForwardPorts(
-		qjackctlMidiPort *pPort, qjackctlMidiPort *pPortForward);
-	void connectMidiForward(
+	void connectAlsaForwardPorts(
+		qjackctlAlsaMidiPort *pPort, qjackctlAlsaMidiPort *pPortForward);
+	void connectAlsaForward(
 		qjackctlPatchbaySocket *pSocket,
 		qjackctlPatchbaySocket *pSocketForward);
 
@@ -302,11 +303,13 @@ private:
 	jack_client_t *m_pJackClient;
 	const char **m_ppszOAudioPorts;
 	const char **m_ppszIAudioPorts;
+	const char **m_ppszOMidiPorts;
+	const char **m_ppszIMidiPorts;
 
 	// MIDI connection persistence cache variables.
 	snd_seq_t *m_pAlsaSeq;
-	QList<qjackctlMidiPort *> m_omidiports;
-	QList<qjackctlMidiPort *> m_imidiports;
+	QList<qjackctlAlsaMidiPort *> m_omidiports;
+	QList<qjackctlAlsaMidiPort *> m_imidiports;
 };
 
 
