@@ -1,7 +1,7 @@
 // main.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -27,6 +27,55 @@
 #include <QTranslator>
 #include <QLocale>
 
+
+//-------------------------------------------------------------------------
+// Single application instance stuff (Qt/X11 only atm.)
+//
+
+#if defined(Q_WS_X11)
+
+#include <QX11Info>
+
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+
+#define QJACKCTL_XUNIQUE "qjackctlMainForm_xunique"
+
+static bool qjackctl_get_xunique (void)
+{
+	Display *pDisplay = QX11Info::display();
+	Atom aSelection = XInternAtom(pDisplay, QJACKCTL_XUNIQUE, false);
+
+	XGrabServer(pDisplay);
+	Window window = XGetSelectionOwner(pDisplay, aSelection);
+	if (window != None)
+		XRaiseWindow(pDisplay, window);
+	XUngrabServer(pDisplay);
+
+//	XFlush(pDisplay);
+
+	return (window != None);
+}
+
+static void qjackctl_set_xunique ( QWidget *pWidget )
+{
+	Display *pDisplay = QX11Info::display();
+	Atom aSelection = XInternAtom(pDisplay, QJACKCTL_XUNIQUE, false);
+
+	XGrabServer(pDisplay);
+	Window window = pWidget->winId();
+	XSetSelectionOwner(pDisplay, aSelection, window, CurrentTime);
+	XUngrabServer(pDisplay);
+
+//	XFlush(pDisplay);
+}
+
+#endif
+
+
+//-------------------------------------------------------------------------
+// main - The main program trunk.
+//
 
 int main ( int argc, char **argv )
 {
@@ -66,6 +115,13 @@ int main ( int argc, char **argv )
 		}
 	}
 
+#if defined(Q_WS_X11)
+	if (qjackctl_get_xunique()) {
+		app.quit();
+		return 2;
+	}
+#endif
+
 	// What style do we create these forms?
 	Qt::WindowFlags wflags = Qt::Window
 #if QT_VERSION >= 0x040200
@@ -85,6 +141,10 @@ int main ( int argc, char **argv )
 		w.show();
 		w.adjustSize();
 	}
+
+#if defined(Q_WS_X11)
+	qjackctl_set_xunique(&w);
+#endif
 
 	// Register the quit signal/slot.
 	// app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
