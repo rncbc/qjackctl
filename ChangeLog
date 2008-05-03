@@ -7,7 +7,7 @@ CVS HEAD
 
 - Only one application instance is now allowed to be up and running,
   with immediate but graceful termination upon startup iif an already
-  running instance is detected (EXPERIMENTAL, Qt/X11 platform only).  
+  running instance is detected (EXPERIMENTAL, Qt/X11 platform only).
 
 - Finally, full JACK MIDI support sneaks into the patchbay; socket
   types now differ in Audio, MIDI and ALSA, following the very same

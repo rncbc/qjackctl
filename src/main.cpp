@@ -48,9 +48,29 @@ static bool qjackctl_get_xunique (void)
 
 	XGrabServer(pDisplay);
 	Window window = XGetSelectionOwner(pDisplay, aSelection);
-	if (window != None)
-		XRaiseWindow(pDisplay, window);
 	XUngrabServer(pDisplay);
+
+	if (window != None) {
+		Screen *pScreen = XDefaultScreenOfDisplay(pDisplay);
+		int iScreen = XScreenNumberOfScreen(pScreen);
+		XEvent ev;
+		memset(&ev, 0, sizeof(ev));
+		ev.xclient.type = ClientMessage;
+		ev.xclient.display = pDisplay;
+		ev.xclient.window = window;
+		ev.xclient.message_type = XInternAtom(pDisplay, "_NET_ACTIVE_WINDOW", false);
+		ev.xclient.format = 32;
+		ev.xclient.data.l[0] = 0; // Source indication.
+		ev.xclient.data.l[1] = 0; // Timestamp.
+		ev.xclient.data.l[2] = 0; // Requestor's currently active window (none)
+		ev.xclient.data.l[3] = 0;
+		ev.xclient.data.l[4] = 0;
+		XSelectInput(pDisplay, window, StructureNotifyMask);
+		XSendEvent(pDisplay, RootWindow(pDisplay, iScreen), false,
+			(SubstructureNotifyMask | SubstructureRedirectMask), &ev);
+		XSync(pDisplay, false);
+		XRaiseWindow(pDisplay, window);
+	}
 
 //	XFlush(pDisplay);
 
