@@ -795,6 +795,7 @@ void qjackctlMainForm::startJack (void)
 	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
 	bool bFreebob   = (m_preset.sDriver == "freebob");
 	bool bFirewire  = (m_preset.sDriver == "firewire");
+	bool bNet       = (m_preset.sDriver == "net");
 	if (m_preset.bVerbose)
 		args.append("-v");
 	if (m_preset.bRealtime) {
@@ -880,7 +881,7 @@ void qjackctlMainForm::startJack (void)
 		else if (m_preset.iOutChannels > 0)
 			args.append("-o" + QString::number(m_preset.iOutChannels));
 	}
-	else if (bCoreaudio || bPortaudio || bFirewire) {
+	else if (bCoreaudio || bPortaudio || bFirewire || bNet) {
 		if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
 			args.append("-i" + QString::number(m_preset.iInChannels));
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)

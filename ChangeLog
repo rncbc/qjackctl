@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Simple support for the "net" backend (aka netjack) has sneaked in.
+
 - Only one application instance is now allowed to be up and running,
   with immediate but graceful termination upon startup iif an already
   running instance is detected (EXPERIMENTAL, Qt/X11 platform only).

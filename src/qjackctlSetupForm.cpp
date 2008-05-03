@@ -843,19 +843,20 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	bool bPortaudio  = (sDriver == "portaudio");
 	bool bFreebob    = (sDriver == "freebob");
 	bool bFirewire   = (sDriver == "firewire");
+	bool bNet        = (sDriver == "net");
 	bool bInEnabled  = false;
 	bool bOutEnabled = false;
 
 	switch (iAudio) {
 	case QJACKCTL_DUPLEX:
-		bInEnabled  = (bSun || bOss || bAlsa || bCoreaudio || bPortaudio);
-		bOutEnabled = (bSun || bOss || bAlsa || bCoreaudio || bPortaudio);
+		bInEnabled  = (bSun || bOss || bAlsa || bCoreaudio || bPortaudio || bNet);
+		bOutEnabled = (bSun || bOss || bAlsa || bCoreaudio || bPortaudio || bNet);
 		break;
 	case QJACKCTL_CAPTURE:
-		bInEnabled  = (bSun || bOss || bCoreaudio || bPortaudio);
+		bInEnabled  = (bSun || bOss || bCoreaudio || bPortaudio || bNet);
 		break;
 	case QJACKCTL_PLAYBACK:
-		bOutEnabled = (bSun || bOss || bCoreaudio || bPortaudio);
+		bOutEnabled = (bSun || bOss || bCoreaudio || bPortaudio || bNet);
 		break;
 	}
 
@@ -875,13 +876,13 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	m_ui.OutChannelsSpinBox->setEnabled(bOutEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_CAPTURE));
 
-	m_ui.InLatencyTextLabel->setEnabled(bInEnabled
+	m_ui.InLatencyTextLabel->setEnabled(bInEnabled && !bNet
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_PLAYBACK));
-	m_ui.InLatencySpinBox->setEnabled(bInEnabled
+	m_ui.InLatencySpinBox->setEnabled(bInEnabled && !bNet
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_PLAYBACK));
-	m_ui.OutLatencyTextLabel->setEnabled(bOutEnabled
+	m_ui.OutLatencyTextLabel->setEnabled(bOutEnabled && !bNet
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_CAPTURE));
-	m_ui.OutLatencySpinBox->setEnabled(bOutEnabled
+	m_ui.OutLatencySpinBox->setEnabled(bOutEnabled && !bNet
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_CAPTURE));
 
 	computeLatency();
@@ -910,6 +911,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	bool bCoreaudio = (sDriver == "coreaudio");
 	bool bFreebob   = (sDriver == "freebob");
 	bool bFirewire  = (sDriver == "firewire");
+//	bool bNet       = (sDriver == "net");
 
 	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio);
 	m_ui.UnlockMemCheckBox->setEnabled(!bCoreaudio
