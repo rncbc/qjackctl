@@ -701,7 +701,7 @@ void qjackctlPatchbayRack::connectJackScan ( jack_client_t *pJackClient )
 	if (m_ppszOMidiPorts)
 		::free(m_ppszOMidiPorts);
 	if (m_ppszIMidiPorts)
-		::free(m_ppszIAudioPorts);
+		::free(m_ppszIMidiPorts);
 #endif
 	// Reset cached pointers.
 	m_ppszOAudioPorts = NULL;
