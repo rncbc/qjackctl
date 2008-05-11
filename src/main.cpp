@@ -30,6 +30,10 @@
 
 #if defined(Q_WS_X11)
 
+//-------------------------------------------------------------------------
+// Single application instance stuff (Qt/X11 only atm.)
+//
+
 #include <QX11Info>
 
 #include <X11/Xatom.h>
@@ -38,10 +42,6 @@
 #define QJACKCTL_XUNIQUE "qjackctlMainForm_xunique"
 
 #endif
-
-//-------------------------------------------------------------------------
-// Single application instance stuff (Qt/X11 only atm.)
-//
 
 class qjackctlApplication : public QApplication
 {
