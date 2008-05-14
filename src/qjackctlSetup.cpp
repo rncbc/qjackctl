@@ -68,6 +68,8 @@ qjackctlSetup::qjackctlSetup (void)
 	bAutoRefresh             = m_settings.value("/AutoRefresh", false).toBool();
 	iTimeRefresh             = m_settings.value("/TimeRefresh", 10).toInt();
 #endif
+	bMessagesLog             = m_settings.value("/MessagesLog", false).toBool();
+	sMessagesLogPath         = m_settings.value("/MessagesLogPath", "qjackctl.log").toString();
 	bBezierLines             = m_settings.value("/BezierLines", false).toBool();
 	iTimeDisplay             = m_settings.value("/TimeDisplay", 0).toInt();
 	iTimeFormat              = m_settings.value("/TimeFormat", 0).toInt();
@@ -156,6 +158,8 @@ qjackctlSetup::~qjackctlSetup (void)
 	m_settings.setValue("/AutoRefresh",             bAutoRefresh);
 	m_settings.setValue("/TimeRefresh",             iTimeRefresh);
 #endif
+	m_settings.setValue("/MessagesLog",             bMessagesLog);
+	m_settings.setValue("/MessagesLogPath",         sMessagesLogPath);
 	m_settings.setValue("/BezierLines",             bBezierLines);
 	m_settings.setValue("/TimeDisplay",             iTimeDisplay);
 	m_settings.setValue("/TimeFormat",              iTimeFormat);

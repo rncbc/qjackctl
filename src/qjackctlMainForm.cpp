@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -384,6 +384,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pConnectionsForm = new qjackctlConnectionsForm (pParent, wflags);
 	m_pPatchbayForm    = new qjackctlPatchbayForm    (pParent, wflags);
 	// Setup appropriately...
+	m_pMessagesForm->setLogging(m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);
 
@@ -2344,6 +2345,8 @@ void qjackctlMainForm::showSetupForm (void)
 		if (m_pSetup->sConnectionsFont.isEmpty() && m_pConnectionsForm)
 			m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
 		// To track down deferred or immediate changes.
+		bool    bOldMessagesLog         = m_pSetup->bMessagesLog; 
+		QString sOldMessagesLogPath     = m_pSetup->sMessagesLogPath;
 		QString sOldMessagesFont        = m_pSetup->sMessagesFont;
 		QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
 		QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
@@ -2373,6 +2376,11 @@ void qjackctlMainForm::showSetupForm (void)
 		// Show the setup dialog...
 		if (pSetupForm->exec()) {
 			// Check wheather something immediate has changed.
+			if (( bOldMessagesLog && !m_pSetup->bMessagesLog) ||
+				(!bOldMessagesLog &&  m_pSetup->bMessagesLog) ||
+				(sOldMessagesLogPath != m_pSetup->sMessagesLogPath))
+				m_pMessagesForm->setLogging(
+					m_pSetup->bMessagesLog,	m_pSetup->sMessagesLogPath);
 			if (( bOldBezierLines && !m_pSetup->bBezierLines) ||
 				(!bOldBezierLines &&  m_pSetup->bBezierLines))
 				updateBezierLines();

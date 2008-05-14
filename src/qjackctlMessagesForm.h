@@ -25,6 +25,9 @@
 #include "ui_qjackctlMessagesForm.h"
 
 
+// Forward declarations.
+class QFile;
+
 //----------------------------------------------------------------------------
 // qjackctlMessagesForm -- UI wrapper form.
 
@@ -39,18 +42,23 @@ public:
 	// Destructor.
 	~qjackctlMessagesForm();
 
-
 	QFont messagesFont() const;
 	void setMessagesFont(const QFont& font);
 
 	int messagesLimit() const;
 	void setMessagesLimit(int iLimit);
 
+	bool isLogging() const;
+	void setLogging(bool bEnabled, const QString& sFilename = QString());
+
 	void appendMessages(const QString& s);
 	void appendMessagesColor(const QString& s, const QString& c);
 	void appendMessagesText(const QString& s);
 
 protected:
+
+	void appendMessagesLine(const QString& s);
+	void appendMessagesLog(const QString& s);
 
 	void showEvent(QShowEvent *);
 	void hideEvent(QHideEvent *);
@@ -65,6 +73,9 @@ private:
 	int m_iMessagesLines;
 	int m_iMessagesLimit;
 	int m_iMessagesHigh;
+
+	// Logging stuff.
+	QFile *m_pMessagesLog;
 };
 
 

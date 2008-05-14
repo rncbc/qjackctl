@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Messages file logging makes its first long overdue appearance,
+  with user configurable settings in Setup/Options/Logging.
+
 - Simple support for the "net" backend (aka netjack) has sneaked in.
 
 - Only one application instance is now allowed to be up and running,

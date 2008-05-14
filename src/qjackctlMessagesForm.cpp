@@ -24,9 +24,11 @@
 
 #include "qjackctlMainForm.h"
 
+#include <QFile>
 #include <QDateTime>
 #include <QTextBlock>
 #include <QTextCursor>
+#include <QTextStream>
 
 #include <QShowEvent>
 #include <QHideEvent>
@@ -52,12 +54,15 @@ qjackctlMessagesForm::qjackctlMessagesForm (
 	// Initialize default message limit.
 	m_iMessagesLines = 0;
 	setMessagesLimit(QJACKCTL_MESSAGES_MAXLINES);
+
+	m_pMessagesLog = NULL;
 }
 
 
 // Destructor.
 qjackctlMessagesForm::~qjackctlMessagesForm (void)
 {
+	setLogging(false);
 }
 
 
@@ -119,18 +124,46 @@ void qjackctlMessagesForm::setMessagesLimit( int iMessagesLimit )
 }
 
 
+// Messages logging stuff.
+bool qjackctlMessagesForm::isLogging (void) const
+{
+	return (m_pMessagesLog != NULL);
+}
+
+void qjackctlMessagesForm::setLogging ( bool bEnabled, const QString& sFilename )
+{
+	if (m_pMessagesLog) {
+		appendMessages(tr("Logging stopped --- %1 ---")
+			.arg(QDateTime::currentDateTime().toString()));
+		m_pMessagesLog->close();
+		delete m_pMessagesLog;
+		m_pMessagesLog = NULL;
+	}
+
+	if (bEnabled) {
+		m_pMessagesLog = new QFile(sFilename);
+		if (m_pMessagesLog->open(QIODevice::Text | QIODevice::Append)) {
+			appendMessages(tr("Logging started --- %1 ---")
+				.arg(QDateTime::currentDateTime().toString()));
+		} else {
+			delete m_pMessagesLog;
+			m_pMessagesLog = NULL;
+		}
+	}
+}
+
+
+// Messages log output method.
+void qjackctlMessagesForm::appendMessagesLog ( const QString& s )
+{
+	if (m_pMessagesLog) {
+		QTextStream(m_pMessagesLog) << s << endl;
+		m_pMessagesLog->flush();
+	}
+}
+
 // Messages widget output method.
-void qjackctlMessagesForm::appendMessages( const QString& s )
-{
-	appendMessagesColor(s, "#999999");
-}
-
-void qjackctlMessagesForm::appendMessagesColor( const QString& s, const QString& c )
-{
-	appendMessagesText("<font color=\"" + c + "\">" + QTime::currentTime().toString("hh:mm:ss.zzz") + " " + s + "</font>");
-}
-
-void qjackctlMessagesForm::appendMessagesText( const QString& s )
+void qjackctlMessagesForm::appendMessagesLine ( const QString& s )
 {
 	// Check for message line limit...
 	if (m_iMessagesLines > m_iMessagesHigh) {
@@ -150,6 +183,26 @@ void qjackctlMessagesForm::appendMessagesText( const QString& s )
 
 	m_ui.MessagesTextView->append(s);
 	m_iMessagesLines++;
+}
+
+
+void qjackctlMessagesForm::appendMessages ( const QString& s )
+{
+	appendMessagesColor(s, "#999999");
+}
+
+void qjackctlMessagesForm::appendMessagesColor ( const QString& s, const QString& c )
+{
+	QString sText = QTime::currentTime().toString("hh:mm:ss.zzz") + ' ' + s;
+	
+	appendMessagesLine("<font color=\"" + c + "\">" + sText + "</font>");
+	appendMessagesLog(sText);
+}
+
+void qjackctlMessagesForm::appendMessagesText ( const QString& s )
+{
+	appendMessagesLine(s);
+	appendMessagesLog(s);
 }
 
 

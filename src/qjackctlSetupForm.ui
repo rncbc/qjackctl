@@ -2708,6 +2708,104 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="LoggingGroupBox" >
+         <property name="font" >
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="title" >
+          <string>Logging</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" >
+          <property name="margin" >
+           <number>8</number>
+          </property>
+          <property name="spacing" >
+           <number>4</number>
+          </property>
+          <item row="0" column="1" colspan="3" >
+           <widget class="QComboBox" name="MessagesLogPathComboBox" >
+            <property name="sizePolicy" >
+             <sizepolicy>
+              <hsizetype>7</hsizetype>
+              <vsizetype>0</vsizetype>
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font" >
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="toolTip" >
+             <string>Messages log file</string>
+            </property>
+            <property name="editable" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4" >
+           <widget class="QToolButton" name="MessagesLogPathToolButton" >
+            <property name="minimumSize" >
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="font" >
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="focusPolicy" >
+             <enum>Qt::TabFocus</enum>
+            </property>
+            <property name="toolTip" >
+             <string>Browse for the messages log file location</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QCheckBox" name="MessagesLogCheckBox" >
+            <property name="font" >
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="toolTip" >
+             <string>Whether to activate a messages logging to file.</string>
+            </property>
+            <property name="text" >
+             <string>&amp;Messages log file:</string>
+            </property>
+            <property name="shortcut" >
+             <string>Alt+M</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -4064,6 +4162,9 @@
   <tabstop>ActivePatchbayPathToolButton</tabstop>
   <tabstop>AutoRefreshCheckBox</tabstop>
   <tabstop>TimeRefreshComboBox</tabstop>
+  <tabstop>MessagesLogCheckBox</tabstop>
+  <tabstop>MessagesLogPathComboBox</tabstop>
+  <tabstop>MessagesLogPathToolButton</tabstop>
   <tabstop>TransportTimeRadioButton</tabstop>
   <tabstop>TransportBBTRadioButton</tabstop>
   <tabstop>ElapsedResetRadioButton</tabstop>

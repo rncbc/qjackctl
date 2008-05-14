@@ -127,6 +127,8 @@ public:
 	bool    bAutoRefresh;
 	int     iTimeRefresh;
 #endif
+	bool    bMessagesLog;
+	QString sMessagesLogPath;
 	bool    bBezierLines;
 	int     iTimeDisplay;
 	int     iTimeFormat;

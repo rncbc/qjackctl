@@ -297,6 +297,15 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 #endif
+	QObject::connect(m_ui.MessagesLogCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
+	QObject::connect(m_ui.MessagesLogPathComboBox,
+		SIGNAL(editTextChanged(const QString&)),
+		SLOT(optionsChanged()));
+	QObject::connect(m_ui.MessagesLogPathToolButton,
+		SIGNAL(clicked()),
+		SLOT(browseMessagesLogPath()));
 	QObject::connect(m_ui.TransportTimeRadioButton,
 		SIGNAL(toggled(bool)),
 		SLOT(optionsChanged()));
@@ -452,6 +461,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_pSetup->loadComboBoxHistory(m_ui.PostShutdownScriptShellComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.XrunRegexComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ActivePatchbayPathComboBox);
+	m_pSetup->loadComboBoxHistory(m_ui.MessagesLogPathComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ServerConfigNameComboBox);
 
 	// Load Options...
@@ -482,6 +492,9 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.AutoRefreshCheckBox->setVisible(false);
 	m_ui.TimeRefreshComboBox->setVisible(false);
 #endif
+	m_ui.MessagesLogCheckBox->setChecked(m_pSetup->bMessagesLog);
+	setComboBoxCurrentText(m_ui.MessagesLogPathComboBox,
+		m_pSetup->sMessagesLogPath);
 	m_ui.BezierLinesCheckBox->setChecked(m_pSetup->bBezierLines);
 
 	// Load some other defaults...
@@ -829,8 +842,6 @@ void qjackctlSetupForm::computeLatency (void)
 		m_ui.LatencyTextValue->setText(QString::number(lat, 'g', 3) + " " + tr("msec"));
 	else
 		m_ui.LatencyTextValue->setText(tr("n/a"));
-
-	m_ui.OkPushButton->setEnabled(m_iDirtySettings > 0 || m_iDirtyOptions > 0);
 }
 
 
@@ -976,6 +987,8 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 // Stabilize current form state.
 void qjackctlSetupForm::stabilizeForm (void)
 {
+	bool bValid = (m_iDirtySettings > 0 || m_iDirtyOptions > 0);
+
 	QString sPreset = m_ui.PresetComboBox->currentText();
 	if (!sPreset.isEmpty()) {
 		bool bPreset = (m_pSetup->presets.contains(sPreset));
@@ -1015,10 +1028,24 @@ void qjackctlSetupForm::stabilizeForm (void)
 	bEnabled = m_ui.ActivePatchbayCheckBox->isChecked();
 	m_ui.ActivePatchbayPathComboBox->setEnabled(bEnabled);
 	m_ui.ActivePatchbayPathToolButton->setEnabled(bEnabled);
+	if (bEnabled && bValid) {
+		const QString& sPath = m_ui.ActivePatchbayPathComboBox->currentText();
+		bValid = (!sPath.isEmpty() && QFileInfo(sPath).exists());
+	}
+
 #ifdef CONFIG_AUTO_REFRESH
 	m_ui.TimeRefreshComboBox->setEnabled(
 		m_ui.AutoRefreshCheckBox->isChecked());
 #endif
+
+	bEnabled = m_ui.MessagesLogCheckBox->isChecked();
+	m_ui.MessagesLogPathComboBox->setEnabled(bEnabled);
+	m_ui.MessagesLogPathToolButton->setEnabled(bEnabled);
+	if (bEnabled && bValid) {
+		const QString& sPath = m_ui.MessagesLogPathComboBox->currentText();
+		bValid = !sPath.isEmpty();
+	}
+
 	m_ui.MessagesLimitLinesComboBox->setEnabled(
 		m_ui.MessagesLimitCheckBox->isChecked());
 
@@ -1039,6 +1066,8 @@ void qjackctlSetupForm::stabilizeForm (void)
 		m_ui.LeftButtonsCheckBox->isChecked());
 
 	changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
+
+	m_ui.OkPushButton->setEnabled(bValid);
 }
 
 
@@ -1497,6 +1526,24 @@ void qjackctlSetupForm::browseActivePatchbayPath()
 }
 
 
+// Messages log path browse slot.
+void qjackctlSetupForm::browseMessagesLogPath()
+{
+	QString sFileName = QFileDialog::getSaveFileName(
+		this,											// Parent.
+		tr("Messages Log"),				                // Caption.
+		m_ui.MessagesLogPathComboBox->currentText(),	// Start here.
+		tr("Log files") + " (*.log)"	                // Filter (log files)
+	);
+
+	if (!sFileName.isEmpty()) {
+		setComboBoxCurrentText(m_ui.MessagesLogPathComboBox, sFileName);
+		m_ui.MessagesLogPathComboBox->setFocus();
+		optionsChanged();
+	}
+}
+
+
 // The display font 1 (big time) selection dialog.
 void qjackctlSetupForm::chooseDisplayFont1()
 {
@@ -1621,6 +1668,8 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bAutoRefresh             = m_ui.AutoRefreshCheckBox->isChecked();
 		m_pSetup->iTimeRefresh             = m_ui.TimeRefreshComboBox->currentText().toInt();
 #endif
+		m_pSetup->bMessagesLog             = m_ui.MessagesLogCheckBox->isChecked();
+		m_pSetup->sMessagesLogPath         = m_ui.MessagesLogPathComboBox->currentText();
 		m_pSetup->bBezierLines             = m_ui.BezierLinesCheckBox->isChecked();
 		// Save Defaults...
 		m_pSetup->iTimeDisplay             = m_pTimeDisplayButtonGroup->checkedId();
@@ -1664,6 +1713,7 @@ void qjackctlSetupForm::accept (void)
 	m_pSetup->saveComboBoxHistory(m_ui.PostShutdownScriptShellComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.XrunRegexComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.ActivePatchbayPathComboBox);
+	m_pSetup->saveComboBoxHistory(m_ui.MessagesLogPathComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.ServerConfigNameComboBox);
 
 	// Just go with dialog acceptance.

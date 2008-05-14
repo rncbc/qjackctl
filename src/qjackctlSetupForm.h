@@ -68,6 +68,7 @@ public slots:
 	void browseShutdownScript();
 	void browsePostShutdownScript();
 	void browseActivePatchbayPath();
+	void browseMessagesLogPath();
 
 	void chooseDisplayFont1();
 	void chooseDisplayFont2();
