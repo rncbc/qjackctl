@@ -2380,7 +2380,7 @@ void qjackctlMainForm::showSetupForm (void)
 				(!bOldMessagesLog &&  m_pSetup->bMessagesLog) ||
 				(sOldMessagesLogPath != m_pSetup->sMessagesLogPath))
 				m_pMessagesForm->setLogging(
-					m_pSetup->bMessagesLog,	m_pSetup->sMessagesLogPath);
+					m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
 			if (( bOldBezierLines && !m_pSetup->bBezierLines) ||
 				(!bOldBezierLines &&  m_pSetup->bBezierLines))
 				updateBezierLines();

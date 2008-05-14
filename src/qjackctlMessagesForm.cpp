@@ -1,7 +1,7 @@
 // qjackctlMessagesForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -115,7 +115,7 @@ int qjackctlMessagesForm::messagesLimit (void) const
 	return m_iMessagesLimit;
 }
 
-void qjackctlMessagesForm::setMessagesLimit( int iMessagesLimit )
+void qjackctlMessagesForm::setMessagesLimit ( int iMessagesLimit )
 {
 	m_iMessagesLimit = iMessagesLimit;
 	m_iMessagesHigh  = iMessagesLimit + (iMessagesLimit / 3);
