@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- Attempt to load Qt's own translation support and get rid of
+  the ever warning startup message, unless built in debug mode.
+  (transaction by Guido Scholz, while on qsynth-devel, thanks).
+
 - Messages file logging makes its first long overdue appearance,
   with user configurable settings in Setup/Options/Logging.
 

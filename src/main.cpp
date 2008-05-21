@@ -24,6 +24,7 @@
 #include "qjackctlMainForm.h"
 
 #include <QApplication>
+#include <QLibraryInfo>
 #include <QTranslator>
 #include <QLocale>
 
@@ -48,9 +49,49 @@ class qjackctlApplication : public QApplication
 public:
 
 	// Constructor.
-	qjackctlApplication(int& argc, char **argv)
-		: QApplication(argc, argv), m_pWidget(0)
+	qjackctlApplication(int& argc, char **argv) : QApplication(argc, argv),
+		m_pQtTranslator(0), m_pMyTranslator(0), m_pWidget(0)	
 	{
+		// Load translation support.
+		QLocale loc;
+		if (loc.language() != QLocale::C) {
+			// Try own Qt translation...
+			m_pQtTranslator = new QTranslator(this);
+			QString sLocName = "qt_" + loc.name();
+			QString sLocPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+			if (m_pQtTranslator->load(sLocName, sLocPath)) {
+				QApplication::installTranslator(m_pQtTranslator);
+			} else {
+				delete m_pQtTranslator;
+				m_pQtTranslator = 0;
+		#ifdef CONFIG_DEBUG
+				qWarning("Warning: no translation found for '%s' locale: %s/%s.qm",
+					loc.name().toUtf8().constData(),
+					sLocPath.toUtf8().constData(),
+					sLocName.toUtf8().constData());
+		#endif
+			}
+			// Try own application translation...
+			m_pMyTranslator = new QTranslator(this);
+			sLocName = "qjackctl_" + loc.name();
+			if (m_pMyTranslator->load(sLocName, sLocPath)) {
+				QApplication::installTranslator(m_pMyTranslator);
+			} else {
+				sLocPath = CONFIG_PREFIX "/share/locale";
+				if (m_pMyTranslator->load(sLocName, sLocPath)) {
+					QApplication::installTranslator(m_pMyTranslator);
+				} else {
+					delete m_pMyTranslator;
+					m_pMyTranslator = 0;
+		#ifdef CONFIG_DEBUG
+					qWarning("Warning: no translation found for '%s' locale: %s/%s.qm",
+						loc.name().toUtf8().constData(),
+						sLocPath.toUtf8().constData(),
+						sLocName.toUtf8().constData());
+		#endif
+				}
+			}
+		}
 	#if defined(Q_WS_X11)
 		m_pDisplay = QX11Info::display();
 		m_aUnique  = XInternAtom(m_pDisplay, QJACKCTL_XUNIQUE, false);
@@ -58,6 +99,13 @@ public:
 		m_wOwner = XGetSelectionOwner(m_pDisplay, m_aUnique);
 		XUngrabServer(m_pDisplay);
 	#endif
+	}
+
+	// Destructor.
+	~qjackctlApplication()
+	{
+		if (m_pMyTranslator) delete m_pMyTranslator;
+		if (m_pQtTranslator) delete m_pQtTranslator;
 	}
 
 	// Main application widget accessors.
@@ -167,6 +215,11 @@ public:
 	
 private:
 
+	// Translation support.
+	QTranslator *m_pQtTranslator;
+	QTranslator *m_pMyTranslator;
+
+	// Instance variables.
 	QWidget *m_pWidget;
 
 #if defined(Q_WS_X11)
@@ -184,21 +237,6 @@ private:
 int main ( int argc, char **argv )
 {
 	qjackctlApplication app(argc, argv);
-
-	// Load translation support.
-	QTranslator translator(0);
-	QLocale loc;
-	if (loc.language() != QLocale::C) {
-		QString sLocName = "qjackctl_" + loc.name();
-		if (!translator.load(sLocName, ".")) {
-			QString sLocPath = CONFIG_PREFIX "/share/locale";
-			if (!translator.load(sLocName, sLocPath))
-				fprintf(stderr, "Warning: no locale found: %s/%s.qm\n",
-					sLocPath.toUtf8().constData(),
-					sLocName.toUtf8().constData());
-		}
-		app.installTranslator(&translator);
-	}
 
 	// Construct default settings; override with command line arguments.
 	qjackctlSetup settings;
