@@ -413,7 +413,7 @@ void qjackctlSetup::print_usage ( const char *arg0 )
 	out << "  -s, --start" + sEot +
 		QObject::tr("Start JACK audio server immediately") + sEol;
 	out << "  -p, --preset=[label]" + sEot +
-		QObject::tr("Set default setings preset name") + sEol;
+		QObject::tr("Set default settings preset name") + sEol;
 	out << "  -h, --help" + sEot +
 		QObject::tr("Show help about command line options") + sEol;
 	out << "  -v, --version" + sEot +
