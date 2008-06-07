@@ -319,11 +319,6 @@
               <string>firewire</string>
              </property>
             </item>
-            <item>
-             <property name="text" >
-              <string>net</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>

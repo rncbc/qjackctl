@@ -12,8 +12,6 @@ CVS HEAD
 - Messages file logging makes its first long overdue appearance,
   with user configurable settings in Setup/Options/Logging.
 
-- Simple support for the "net" backend (aka netjack) has sneaked in.
-
 - Only one application instance is now allowed to be up and running,
   with immediate but graceful termination upon startup iif an already
   running instance is detected, which will see its main widget shown
