@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 8
+%define release 9
 %define prefix  @ac_prefix@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface.
@@ -54,6 +54,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sat Jun 07 2008 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- Patchbay JACK-MIDI, file logging and X11 uniqueness.
 * Thu Dec 20 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Patchbay heads-up with season greetings. 
 * Thu Jul 19 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>

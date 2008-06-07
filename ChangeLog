@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.3.3  2008-06-07  Patchbay JACK-MIDI, file logging and X11 uniqueness.
 
 - Attempt to load Qt's own translation support and get rid of
   the ever warning startup message, unless built in debug mode.
