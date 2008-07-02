@@ -2371,6 +2371,7 @@ void qjackctlMainForm::showSetupForm (void)
 		bool    bOldRightButtons        = m_pSetup->bRightButtons;
 		bool    bOldTransportButtons    = m_pSetup->bTransportButtons;
 		bool    bOldTextLabels          = m_pSetup->bTextLabels;
+		int     iOldBaseFontSize        = m_pSetup->iBaseFontSize;
 		// Load the current setup settings.
 		pSetupForm->setup(m_pSetup);
 		// Show the setup dialog...
@@ -2432,7 +2433,8 @@ void qjackctlMainForm::showSetupForm (void)
 				( bOldDelayedSetup   && !m_pSetup->bDelayedSetup)   ||
 				(!bOldDelayedSetup   &&  m_pSetup->bDelayedSetup)   ||
 				( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
-				(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled))
+				(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled) ||
+				(iOldBaseFontSize    !=  m_pSetup->iBaseFontSize))
 				showDirtySetupWarning();
 			// If server is currently running, warn user...
 			showDirtySettingsWarning();

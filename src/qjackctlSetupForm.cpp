@@ -403,6 +403,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.TextLabelsCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.BaseFontSizeComboBox,
+		SIGNAL(editTextChanged(const QString&)),
+		SLOT(optionsChanged()));
 
 	QObject::connect(m_ui.OkPushButton,
 		SIGNAL(clicked()),
@@ -578,6 +581,10 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.RightButtonsCheckBox->setChecked(!m_pSetup->bRightButtons);
 	m_ui.TransportButtonsCheckBox->setChecked(!m_pSetup->bTransportButtons);
 	m_ui.TextLabelsCheckBox->setChecked(!m_pSetup->bTextLabels);
+	if (m_pSetup->iBaseFontSize > 0)
+		m_ui.BaseFontSizeComboBox->setEditText(QString::number(m_pSetup->iBaseFontSize));
+	else
+		m_ui.BaseFontSizeComboBox->setCurrentIndex(0);
 
 #ifndef CONFIG_SYSTEM_TRAY
 	m_ui.SystemTrayCheckBox->setChecked(false);
@@ -1700,6 +1707,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bRightButtons            = !m_ui.RightButtonsCheckBox->isChecked();
 		m_pSetup->bTransportButtons        = !m_ui.TransportButtonsCheckBox->isChecked();
 		m_pSetup->bTextLabels              = !m_ui.TextLabelsCheckBox->isChecked();
+		m_pSetup->iBaseFontSize            = m_ui.BaseFontSizeComboBox->currentText().toInt();
 	}
 
 	// Save combobox history...

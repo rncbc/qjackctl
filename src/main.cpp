@@ -263,6 +263,10 @@ int main ( int argc, char **argv )
 		return 2;
 	}
 
+	// Set default base font...
+	if (settings.iBaseFontSize > 0)
+		app.setFont(QFont(app.font().family(), settings.iBaseFontSize));
+
 	// What style do we create these forms?
 	Qt::WindowFlags wflags = Qt::Window
 #if QT_VERSION >= 0x040200

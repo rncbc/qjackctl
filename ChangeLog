@@ -3,6 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Due to some trouble with newer Qt >= 4.4 applications regarding font
+  size configuration, a new global user option is now available to the
+  rescue: Setup/Misc/Defaults/Base font size (default is no-op).
+
+
 0.3.3  2008-06-07  Patchbay JACK-MIDI, file logging and X11 uniqueness.
 
 - Attempt to load Qt's own translation support and get rid of

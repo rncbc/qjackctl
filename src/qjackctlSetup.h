@@ -157,6 +157,7 @@ public:
 	bool    bRightButtons;
 	bool    bTransportButtons;
 	bool    bTextLabels;
+	int     iBaseFontSize;
 
 	// Defaults...
 	QString sPatchbayPath;
