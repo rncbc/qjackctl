@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- JACK_DEFAULT_SERVER environment variable is now appended to the X11
+  unique application identifier, allowing for having multiple instances
+  each controlling its own JACK server, besides the default one.
+  
 - Due to some trouble with newer Qt >= 4.4 applications regarding font
   size configuration, a new global user option is now available to the
   rescue: Setup/Misc/Defaults/Base font size (default is no-op).

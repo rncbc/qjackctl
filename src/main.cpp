@@ -40,7 +40,7 @@
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 
-#define QJACKCTL_XUNIQUE "qjackctlMainForm_xunique"
+#define QJACKCTL_XUNIQUE "qjackctlApplication"
 
 #endif
 
@@ -94,7 +94,13 @@ public:
 		}
 	#if defined(Q_WS_X11)
 		m_pDisplay = QX11Info::display();
-		m_aUnique  = XInternAtom(m_pDisplay, QJACKCTL_XUNIQUE, false);
+		QString sUnique = QJACKCTL_XUNIQUE;
+		const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
+		if (pszServerName) {
+			sUnique += '_';
+			sUnique += pszServerName;
+		}
+		m_aUnique = XInternAtom(m_pDisplay, sUnique.toUtf8().constData(), false);
 		XGrabServer(m_pDisplay);
 		m_wOwner = XGetSelectionOwner(m_pDisplay, m_aUnique);
 		XUngrabServer(m_pDisplay);
