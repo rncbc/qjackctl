@@ -177,7 +177,7 @@ public:
 	void removeSocket(qjackctlSocketItem *pSocket);
 
 	// Socket finder.
-	qjackctlSocketItem *findSocket(const QString& sSocketName);
+	qjackctlSocketItem *findSocket(const QString& sSocketName, int iSocketType);
 
 	// List view accessor.
 	qjackctlSocketListView *listView() const;

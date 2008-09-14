@@ -366,12 +366,14 @@ qjackctlSocketList::~qjackctlSocketList (void)
 
 
 // Client finder.
-qjackctlSocketItem *qjackctlSocketList::findSocket ( const QString& sSocketName )
+qjackctlSocketItem *qjackctlSocketList::findSocket (
+	const QString& sSocketName, int iSocketType )
 {
 	QListIterator<qjackctlSocketItem *> iter(m_sockets);
 	while (iter.hasNext()) {
 		qjackctlSocketItem *pSocket = iter.next();
-		if (sSocketName == pSocket->socketName())
+		if (sSocketName == pSocket->socketName() &&
+			iSocketType == pSocket->socketType())
 			return pSocket;
 	}
 
@@ -488,7 +490,7 @@ void qjackctlSocketList::clientJackSnapshot ( int iSocketType )
 				QString sClientName = sClientPort.left(iColon);
 				QString sPortName = qjackctlClientAlias::escapeRegExpDigits(
 					sClientPort.right(sClientPort.length() - iColon - 1));
-				pSocket = findSocket(sClientName);
+				pSocket = findSocket(sClientName, iSocketType);
 				if (pSocket)
 					pPlug = pSocket->findPlug(sPortName);
 				if (pSocket == NULL) {
@@ -551,7 +553,7 @@ void qjackctlSocketList::clientAlsaSnapshot ( int iSocketType )
 						snd_seq_port_info_get_name(pPortInfo));
 					qjackctlSocketItem *pSocket = NULL;
 					qjackctlPlugItem   *pPlug   = NULL;
-					pSocket = findSocket(sClientName);
+					pSocket = findSocket(sClientName, iSocketType);
 					if (pSocket)
 						pPlug = pSocket->findPlug(sPortName);
 					if (pSocket == NULL) {
@@ -761,9 +763,10 @@ bool qjackctlSocketList::copySocketItem (void)
 		QString sSocketName;
 		QString sSkel = pSocketItem->socketName();
 		sSkel.remove(QRegExp("[0-9]+$")).append("%1");
+		int iSocketType = pSocketItem->socketType();
 		int iSocketNo = 1;
 		do { sSocketName = sSkel.arg(++iSocketNo); }
-		while (findSocket(sSocketName));
+		while (findSocket(sSocketName, iSocketType));
 		// Show up as a new socket...
 		socketForm.setWindowTitle(tr("%1 <Copy> - %2")
 			.arg(pSocketItem->socketName()).arg(m_sSocketCaption));
@@ -773,7 +776,7 @@ bool qjackctlSocketList::copySocketItem (void)
 		socketForm.setJackClient(m_pJackClient);
 		socketForm.setAlsaSeq(m_pAlsaSeq);
 		qjackctlPatchbaySocket socket(sSocketName,
-			pSocketItem->clientName(), pSocketItem->socketType());
+			pSocketItem->clientName(), iSocketType);
 		if (pSocketItem->isExclusive())
 			socket.setExclusive(true);
 		QListIterator<qjackctlPlugItem *> iter(pSocketItem->plugs());
@@ -1317,7 +1320,8 @@ void qjackctlPatchworkView::paintEvent ( QPaintEvent * )
 	while (iter.hasNext()) {
 		pISocket = iter.next();
 		qjackctlSocketItem *pISocketForward
-			= m_pPatchbayView->ISocketList()->findSocket(pISocket->forward());
+			= m_pPatchbayView->ISocketList()->findSocket(
+				pISocket->forward(), pISocket->socketType());
 		if (pISocketForward == NULL)
 			continue;
 		// Set new connector color.
@@ -1965,11 +1969,13 @@ void qjackctlPatchbay::loadRack ( qjackctlPatchbayRack *pPatchbayRack )
 	while (iter.hasNext()) {
 		qjackctlPatchbayCable *pCable = iter.next();
 		// Get proper sockets...
-		if (pCable->outputSocket() && pCable->inputSocket()) {
+		qjackctlPatchbaySocket *pOSocket = pCable->outputSocket();
+		qjackctlPatchbaySocket *pISocket = pCable->inputSocket();
+		if (pOSocket && pISocket) {
 			qjackctlSocketItem *pOSocketItem
-				= m_pOSocketList->findSocket((pCable->outputSocket())->name());
+				= m_pOSocketList->findSocket(pOSocket->name(), pOSocket->type());
 			qjackctlSocketItem *pISocketItem
-				= m_pISocketList->findSocket((pCable->inputSocket())->name());
+				= m_pISocketList->findSocket(pISocket->name(), pISocket->type());
 			if (pOSocketItem && pISocketItem)
 				connectSockets(pOSocketItem, pISocketItem);
 		}
@@ -2099,8 +2105,9 @@ void qjackctlPatchbay::socketPlugJackSnapshot (
 			QString sIClientPort = ppszIClientPorts[iIClientPort];
 			int iColon = sIClientPort.indexOf(':');
 			if (iColon >= 0) {
-				qjackctlSocketItem *pISocket = m_pISocketList->findSocket(
-					sIClientPort.left(iColon));
+				qjackctlSocketItem *pISocket
+					= m_pISocketList->findSocket(
+						sIClientPort.left(iColon), pOSocket->socketType());
 				if (pISocket)
 					connectSockets(pOSocket, pISocket);
 			}
@@ -2156,20 +2163,26 @@ void qjackctlPatchbay::socketPlugAlsaSnapshot (
 						if (sOPortName == pOPlug->plugName()) {
 							int iOPort = snd_seq_port_info_get_port(pOPortInfo);
 							// Now, look for subscribers of his port...
-							snd_seq_query_subscribe_set_type(pAlsaSubs,	SND_SEQ_QUERY_SUBS_READ);
+							snd_seq_query_subscribe_set_type(pAlsaSubs,
+								SND_SEQ_QUERY_SUBS_READ);
 							snd_seq_query_subscribe_set_index(pAlsaSubs, 0);
 							seq_addr.client = iOClient;
 							seq_addr.port   = iOPort;
 							snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
 							while (snd_seq_query_port_subscribers(pAlsaSeq, pAlsaSubs) >= 0) {
 								seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
-								if (snd_seq_get_any_client_info(pAlsaSeq, seq_addr.client, pIClientInfo) == 0) {
-									QString sIClientName = snd_seq_client_info_get_name(pIClientInfo);
-									qjackctlSocketItem *pISocket = m_pISocketList->findSocket(sIClientName);
+								if (snd_seq_get_any_client_info(pAlsaSeq,
+										seq_addr.client, pIClientInfo) == 0) {
+									QString sIClientName
+										= snd_seq_client_info_get_name(pIClientInfo);
+									qjackctlSocketItem *pISocket
+										= m_pISocketList->findSocket(
+											sIClientName, pOSocket->socketType());
 									if (pISocket)
 										connectSockets(pOSocket, pISocket);
 								}
-								snd_seq_query_subscribe_set_index(pAlsaSubs, snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
+								snd_seq_query_subscribe_set_index(pAlsaSubs,
+									snd_seq_query_subscribe_get_index(pAlsaSubs) + 1);
 							}
 						}
 					}
