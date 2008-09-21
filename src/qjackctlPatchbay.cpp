@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1271,6 +1271,10 @@ void qjackctlPatchworkView::paintEvent ( QPaintEvent * )
 	int x1, y1, h1;
 	int x2, y2, h2;
 	int i, rgb[3] = { 0x99, 0x66, 0x33 };
+
+	// Inline adaptive to darker background themes...
+	if (QWidget::palette().window().color().value() < 0x7f)
+		for (i = 0; i < 3; ++i) rgb[i] += 0x33;
 
 	// Initialize color changer.
 	i = 0;

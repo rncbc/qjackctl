@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Lighten up the connections line and highlight colors, as seen to fit
+  best on some darker background themes.
+
 - Patchbay snapshot fixed to differentiate socket clients according
   to its type (Audio, MIDI or ALSA-Seq), avoiding the mess and gross
   mistake of hanging disparate type ports under the same client item.
