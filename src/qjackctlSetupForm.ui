@@ -3495,6 +3495,9 @@
             <property name="text" >
              <string>&amp;Icon size:</string>
             </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
             <property name="wordWrap" >
              <bool>false</bool>
             </property>
@@ -3579,6 +3582,9 @@
             </property>
             <property name="text" >
              <string>&amp;JACK client/port aliases:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
             <property name="wordWrap" >
              <bool>false</bool>
