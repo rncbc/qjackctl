@@ -139,6 +139,7 @@ public:
 	QString sDisplayFont2;
 	bool    bDisplayEffect;
 	bool    bDisplayBlink;
+	int     iJackClientPortAlias;
 	int     iConnectionsIconSize;
 	QString sConnectionsFont;
 	bool    bQueryClose;

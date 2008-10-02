@@ -1,7 +1,7 @@
 // qjackctlJackConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -88,8 +88,7 @@ public:
 	jack_client_t *jackClient() const;
 
 	// Jack port lookup.
-	qjackctlJackPort *findJackPort(
-		const QString& sPortName, jack_port_t *pJackPort);
+	qjackctlJackPort *findJackPort(jack_port_t *pJackPort);
 };
 
 
@@ -106,13 +105,23 @@ public:
 	// Jack client accessors.
 	jack_client_t *jackClient() const;
 
+	// Jack port lookup.
+	qjackctlJackPort *findJackClientPort(jack_port_t *pJackPort);
+
 	// Client:port refreshner (return newest item count).
 	int updateClientPorts();
+
+	// Jack client port aliases mode.
+	static void setJackClientPortAlias(int iJackClientPortAlias);
+	static int jackClientPortAlias();
 
 private:
 
 	// Instance variables.
 	jack_client_t *m_pJackClient;
+
+	// Jack client port aliases mode.
+	static int g_iJackClientPortAlias;
 };
 
 
@@ -134,7 +143,7 @@ public:
 
 	// Common pixmap accessor.
 	const QPixmap& pixmap (int iPixmap) const;
-	
+
 protected:
 
 	// Virtual Connect/Disconnection primitives.

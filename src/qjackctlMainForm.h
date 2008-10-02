@@ -161,6 +161,7 @@ protected:
 	void updateMessagesLimit();
 	void updateConnectionsFont();
 	void updateConnectionsIconSize();
+	void updateJackClientPortAlias();
 	void updateBezierLines();
 	void updateDisplayEffect();
 	void updateTimeDisplayFonts();

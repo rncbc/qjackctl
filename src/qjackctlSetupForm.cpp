@@ -357,6 +357,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.AliasesEditingCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.JackClientPortAliasComboBox,
+		SIGNAL(activated(int)),
+		SLOT(optionsChanged()));
 
 	QObject::connect(m_ui.StartJackCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -556,6 +559,9 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	// Connections view icon size.
 	m_ui.ConnectionsIconSizeComboBox->setCurrentIndex(
 		m_pSetup->iConnectionsIconSize);
+	// and this JACK speciality...
+	m_ui.JackClientPortAliasComboBox->setCurrentIndex(
+		m_pSetup->iJackClientPortAlias);
 
 	// Messages limit option.
 	m_ui.MessagesLimitCheckBox->setChecked(m_pSetup->bMessagesLimit);
@@ -1688,6 +1694,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->sDisplayFont2            = m_ui.DisplayFont2TextLabel->font().toString();
 		m_pSetup->bDisplayEffect           = m_ui.DisplayEffectCheckBox->isChecked();
 		m_pSetup->bDisplayBlink            = m_ui.DisplayBlinkCheckBox->isChecked();
+		m_pSetup->iJackClientPortAlias     = m_ui.JackClientPortAliasComboBox->currentIndex();
 		m_pSetup->iConnectionsIconSize     = m_ui.ConnectionsIconSizeComboBox->currentIndex();
 		m_pSetup->sConnectionsFont         = m_ui.ConnectionsFontTextLabel->font().toString();
 		m_pSetup->bStartJack               = m_ui.StartJackCheckBox->isChecked();

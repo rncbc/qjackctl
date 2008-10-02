@@ -407,6 +407,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateMessagesLimit();
 	updateConnectionsFont();
 	updateConnectionsIconSize();
+	updateJackClientPortAlias();
 	updateBezierLines();
 	updateActivePatchbay();
 	updateSystemTray();
@@ -1284,6 +1285,18 @@ void qjackctlMainForm::updateConnectionsIconSize (void)
 
 	if (m_pConnectionsForm)
 		m_pConnectionsForm->setConnectionsIconSize(m_pSetup->iConnectionsIconSize);
+}
+
+
+// Update of JACK client/port alias display mode.
+void qjackctlMainForm::updateJackClientPortAlias (void)
+{
+	if (m_pSetup == NULL)
+		return;
+
+	qjackctlJackClientList::setJackClientPortAlias(m_pSetup->iJackClientPortAlias);
+
+	refreshJackConnections();
 }
 
 
@@ -2352,6 +2365,7 @@ void qjackctlMainForm::showSetupForm (void)
 		QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
 		QString sOldConnectionsFont     = m_pSetup->sConnectionsFont;
 		int     iOldConnectionsIconSize = m_pSetup->iConnectionsIconSize;
+		int     iOldJackClientPortAlias = m_pSetup->iJackClientPortAlias;
 		int     iOldTimeDisplay         = m_pSetup->iTimeDisplay;
 		int     iOldTimeFormat          = m_pSetup->iTimeFormat;
 		bool    bOldDisplayEffect       = m_pSetup->bDisplayEffect;
@@ -2388,6 +2402,8 @@ void qjackctlMainForm::showSetupForm (void)
 			if (( bOldDisplayEffect && !m_pSetup->bDisplayEffect) ||
 				(!bOldDisplayEffect &&  m_pSetup->bDisplayEffect))
 				updateDisplayEffect();
+			if (iOldJackClientPortAlias != m_pSetup->iJackClientPortAlias)
+				updateJackClientPortAlias();
 			if (iOldConnectionsIconSize != m_pSetup->iConnectionsIconSize)
 				updateConnectionsIconSize();
 			if (sOldConnectionsFont != m_pSetup->sConnectionsFont)

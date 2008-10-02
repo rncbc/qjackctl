@@ -117,7 +117,6 @@ private:
 	int                 m_iDirtyCount;
 
 	QButtonGroup       *m_pSocketTypeButtonGroup;
-
 };
 
 

@@ -80,6 +80,7 @@ qjackctlSetup::qjackctlSetup (void)
 	sDisplayFont2            = m_settings.value("/DisplayFont2").toString();
 	bDisplayEffect           = m_settings.value("/DisplayEffect", true).toBool();
 	bDisplayBlink            = m_settings.value("/DisplayBlink", true).toBool();
+	iJackClientPortAlias     = m_settings.value("/JackClientPortAlias", 0).toInt();
 	iConnectionsIconSize     = m_settings.value("/ConnectionsIconSize", QJACKCTL_ICON_16X16).toInt();
 	sConnectionsFont         = m_settings.value("/ConnectionsFont").toString();
 	bQueryClose              = m_settings.value("/QueryClose", true).toBool();
@@ -171,6 +172,7 @@ qjackctlSetup::~qjackctlSetup (void)
 	m_settings.setValue("/DisplayFont2",            sDisplayFont2);
 	m_settings.setValue("/DisplayEffect",           bDisplayEffect);
 	m_settings.setValue("/DisplayBlink",            bDisplayBlink);
+	m_settings.setValue("/JackClientPortAlias",     iJackClientPortAlias);
 	m_settings.setValue("/ConnectionsIconSize",     iConnectionsIconSize);
 	m_settings.setValue("/ConnectionsFont",         sConnectionsFont);
 	m_settings.setValue("/QueryClose",              bQueryClose);

@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- JACK client/port aliases may now be displayed as a global user option
+  (see Setup/Display/Connections/JACK client/port aliases).
+  
 - Lighten up the connections line and highlight colors, as seen to fit
   best on some darker background themes.
 

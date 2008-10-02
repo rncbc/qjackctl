@@ -1,7 +1,7 @@
 // qjackctlJackConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -121,16 +121,13 @@ jack_client_t *qjackctlJackClient::jackClient (void) const
 
 
 // Jack port lookup.
-qjackctlJackPort *qjackctlJackClient::findJackPort (
-	const QString& sPortName, jack_port_t *pJackPort )
+qjackctlJackPort *qjackctlJackClient::findJackPort ( jack_port_t *pJackPort )
 {
 	QListIterator<qjackctlPortItem *> iter(ports());
 	while (iter.hasNext()) {
 		qjackctlJackPort *pPort
 			= static_cast<qjackctlJackPort *> (iter.next());
-		if (pPort 
-			&& pPort->portName() == sPortName
-			&& pPort->jackPort() == pJackPort)
+		if (pPort && pPort->jackPort() == pJackPort)
 			return pPort;
 	}
 
@@ -164,6 +161,24 @@ jack_client_t *qjackctlJackClientList::jackClient (void) const
 }
 
 
+// Jack port lookup.
+qjackctlJackPort *qjackctlJackClientList::findJackClientPort ( jack_port_t *pJackPort )
+{
+	QListIterator<qjackctlClientItem *> iter(clients());
+	while (iter.hasNext()) {
+		qjackctlJackClient *pClient
+			= static_cast<qjackctlJackClient *> (iter.next());
+		if (pClient) {
+			qjackctlJackPort *pPort = pClient->findJackPort(pJackPort);
+			if (pPort)
+				return pPort;
+		}
+	}
+
+	return NULL;
+}
+
+
 // Client:port refreshner.
 int qjackctlJackClientList::updateClientPorts (void)
 {
@@ -181,6 +196,13 @@ int qjackctlJackClientList::updateClientPorts (void)
 		pszJackType = JACK_DEFAULT_MIDI_TYPE;
 #endif
 
+	char *aliases[2];
+	if (g_iJackClientPortAlias > 0) {
+		unsigned short alias_size = jack_port_name_size() + 1;
+		aliases[0] = new char [alias_size];
+		aliases[1] = new char [alias_size];
+	}
+
 	int iDirtyCount = 0;
 
 	markClientPorts(0);
@@ -195,13 +217,16 @@ int qjackctlJackClientList::updateClientPorts (void)
 			qjackctlJackPort   *pPort   = 0;
 			jack_port_t *pJackPort = jack_port_by_name(m_pJackClient,
 				ppszClientPorts[iClientPort]);
+			if (g_iJackClientPortAlias > 0 &&
+				jack_port_get_aliases(pJackPort, aliases) >= g_iJackClientPortAlias)
+				sClientPort = aliases[g_iJackClientPortAlias - 1];
 			int iColon = sClientPort.indexOf(':');
 			if (pJackPort && iColon >= 0) {
 				QString sClientName = sClientPort.left(iColon);
 				QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
-				pClient = (qjackctlJackClient *) findClient(sClientName);
+				pClient = static_cast<qjackctlJackClient *> (findClient(sClientName));
 				if (pClient)
-					pPort = pClient->findJackPort(sPortName, pJackPort);
+					pPort = pClient->findJackPort(pJackPort);
 				if (pClient == 0) {
 					pClient = new qjackctlJackClient(this, sClientName);
 					iDirtyCount++;
@@ -220,7 +245,26 @@ int qjackctlJackClientList::updateClientPorts (void)
 
 	iDirtyCount += cleanClientPorts(0);
 
+	if (g_iJackClientPortAlias > 0) {
+		delete [] aliases[0];
+		delete [] aliases[1];
+	}
+
 	return iDirtyCount;
+}
+
+
+// Jack client port aliases mode.
+int qjackctlJackClientList::g_iJackClientPortAlias = 0;
+
+void qjackctlJackClientList::setJackClientPortAlias ( int iJackClientPortAlias )
+{
+	g_iJackClientPortAlias = iJackClientPortAlias;
+}
+
+int qjackctlJackClientList::jackClientPortAlias (void)
+{
+	return g_iJackClientPortAlias;
 }
 
 
@@ -333,6 +377,11 @@ bool qjackctlJackConnect::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPo
 // Update port connection references.
 void qjackctlJackConnect::updateConnections (void)
 {
+	qjackctlJackClientList *pIClientList
+		= static_cast<qjackctlJackClientList *> (IClientList());
+	if (pIClientList == NULL)
+		return;
+
 	// For each output client item...
 	QListIterator<qjackctlClientItem *> oclient(OClientList()->clients());
 	while (oclient.hasNext()) {
@@ -355,12 +404,15 @@ void qjackctlJackConnect::updateConnections (void)
 				// Now, for each input client port...
 				int iClientPort = 0;
 				while (ppszClientPorts[iClientPort]) {
-					qjackctlPortItem *pIPort
-						= IClientList()->findClientPort(
-							ppszClientPorts[iClientPort]);
-					if (pIPort) {
-						pOPort->addConnect(pIPort);
-						pIPort->addConnect(pOPort);
+					jack_port_t *pJackPort = jack_port_by_name(pOJack->jackClient(),
+						ppszClientPorts[iClientPort]);
+					if (pJackPort) {
+						qjackctlPortItem *pIPort
+							= pIClientList->findJackClientPort(pJackPort);
+						if (pIPort) {
+							pOPort->addConnect(pIPort);
+							pIPort->addConnect(pOPort);
+						}
 					}
 					iClientPort++;
 				}
