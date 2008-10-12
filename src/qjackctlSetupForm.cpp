@@ -1183,6 +1183,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 		snd_pcm_info_t *pcminfo;
 		snd_ctl_card_info_alloca(&info);
 		snd_pcm_info_alloca(&pcminfo);
+		bool bCapture, bPlayback;
 		int iCard = -1;
 		while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
 			sName = "hw:" + QString::number(iCard);
@@ -1198,13 +1199,28 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 				int iDevice = -1;
 				while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
 					&& iDevice >= 0) {
-					snd_pcm_info_set_device(pcminfo, iDevice);
-					snd_pcm_info_set_subdevice(pcminfo, 0);
-					snd_pcm_info_set_stream(pcminfo,
-						iAudio == QJACKCTL_CAPTURE ?
-							SND_PCM_STREAM_CAPTURE :
-							SND_PCM_STREAM_PLAYBACK);
-					if (snd_ctl_pcm_info(handle, pcminfo) >= 0) {
+					// Capture devices..
+					bCapture = false;
+					if (iAudio == QJACKCTL_CAPTURE ||
+						iAudio == QJACKCTL_DUPLEX) {
+						snd_pcm_info_set_device(pcminfo, iDevice);
+						snd_pcm_info_set_subdevice(pcminfo, 0);
+						snd_pcm_info_set_stream(pcminfo, SND_PCM_STREAM_CAPTURE);
+						bCapture = (snd_ctl_pcm_info(handle, pcminfo) >= 0);
+					}
+					// Playback devices..
+					bPlayback = false;
+					if (iAudio == QJACKCTL_PLAYBACK ||
+						iAudio == QJACKCTL_DUPLEX) {
+						snd_pcm_info_set_device(pcminfo, iDevice);
+						snd_pcm_info_set_subdevice(pcminfo, 0);
+						snd_pcm_info_set_stream(pcminfo, SND_PCM_STREAM_PLAYBACK);
+						bPlayback = (snd_ctl_pcm_info(handle, pcminfo) >= 0);
+					}
+					// List iif compliant with the audio mode criteria...
+					if ((iAudio == QJACKCTL_CAPTURE && bCapture && !bPlayback) ||
+						(iAudio == QJACKCTL_PLAYBACK && !bCapture && bPlayback) ||
+						(iAudio == QJACKCTL_DUPLEX && bCapture && bPlayback)) {
 						sSubName = sName + ',' + QString::number(iDevice);
 						sText  = sSubName + '\t';
 						sText += snd_pcm_info_get_name(pcminfo);
