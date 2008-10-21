@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Fait-divers: desktop menu file touched to openSUSE conventions.
+
 - ALSA PCM devices now only listed/enumerated iif strictly compliant
   with the audio mode criteria (Duplex, Capture-only or Playback-only)
   as kindly suggested by Nedko Ardaunov.
