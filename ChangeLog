@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Qt Software logo update.
+
 - Fait-divers: desktop menu file touched to openSUSE conventions.
 
 - ALSA PCM devices now only listed/enumerated iif strictly compliant
