@@ -516,7 +516,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	const QString sSansSerif = "Sans Serif";
 	QFont font;
 	QPalette pal;
-	
+
 	if (m_pSetup->sDisplayFont1.isEmpty()
 		|| !font.fromString(m_pSetup->sDisplayFont1))
 		font = QFont(sSansSerif, 12, QFont::Bold);
@@ -535,7 +535,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 		|| !font.fromString(m_pSetup->sMessagesFont))
 		font = QFont("Monospace", 8);
 	pal = m_ui.MessagesFontTextLabel->palette();
-	pal.setColor(QPalette::Background, Qt::white);
+	pal.setColor(QPalette::Background, pal.base().color());
 	m_ui.MessagesFontTextLabel->setPalette(pal);
 	m_ui.MessagesFontTextLabel->setFont(font);
 	m_ui.MessagesFontTextLabel->setText(
@@ -545,7 +545,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 		|| !font.fromString(m_pSetup->sConnectionsFont))
 		font = QFont(sSansSerif, 10);
 	pal = m_ui.ConnectionsFontTextLabel->palette();
-	pal.setColor(QPalette::Background, Qt::white);
+	pal.setColor(QPalette::Background, pal.base().color());
 	m_ui.ConnectionsFontTextLabel->setPalette(pal);
 	m_ui.ConnectionsFontTextLabel->setFont(font);
 	m_ui.ConnectionsFontTextLabel->setText(

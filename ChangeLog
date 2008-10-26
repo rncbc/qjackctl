@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Grayed/disabled palette color group fix for dark color themes.
+
 - Qt Software logo update.
 
 - Fait-divers: desktop menu file touched to openSUSE conventions.
