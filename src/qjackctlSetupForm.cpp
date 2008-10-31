@@ -870,6 +870,7 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	bool bNet        = (sDriver == "net");
 	bool bInEnabled  = false;
 	bool bOutEnabled = false;
+	bool bEnabled;
 
 	switch (iAudio) {
 	case QJACKCTL_DUPLEX:
@@ -884,17 +885,25 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 		break;
 	}
 
-	m_ui.InDeviceTextLabel->setEnabled(bInEnabled && (bAlsa || bSun || bOss));
-	m_ui.InDeviceComboBox->setEnabled(bInEnabled && (bAlsa || bSun || bOss));
-	m_ui.InDeviceToolButton->setEnabled(bInEnabled && (bAlsa || bSun || bOss));
-	m_ui.OutDeviceTextLabel->setEnabled(bOutEnabled && (bAlsa || bSun || bOss));
-	m_ui.OutDeviceComboBox->setEnabled(bOutEnabled && (bAlsa || bSun || bOss));
-	m_ui.OutDeviceToolButton->setEnabled(bOutEnabled && (bAlsa || bSun || bOss));
+	bEnabled = (bInEnabled && (bAlsa || bSun || bOss));
+	m_ui.InDeviceTextLabel->setEnabled(bEnabled);
+	m_ui.InDeviceComboBox->setEnabled(bEnabled);
+	m_ui.InDeviceToolButton->setEnabled(bEnabled);
+	if (!bEnabled)
+		setComboBoxCurrentText(m_ui.InDeviceComboBox, m_pSetup->sDefPresetName);
+
+	bEnabled = (bOutEnabled && (bAlsa || bSun || bOss));
+	m_ui.OutDeviceTextLabel->setEnabled(bEnabled);
+	m_ui.OutDeviceComboBox->setEnabled(bEnabled);
+	m_ui.OutDeviceToolButton->setEnabled(bEnabled);
+	if (!bEnabled)
+		setComboBoxCurrentText(m_ui.OutDeviceComboBox, m_pSetup->sDefPresetName);
 
 	m_ui.InChannelsTextLabel->setEnabled(bInEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_PLAYBACK));
 	m_ui.InChannelsSpinBox->setEnabled(bInEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_PLAYBACK));
+
 	m_ui.OutChannelsTextLabel->setEnabled(bOutEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_CAPTURE));
 	m_ui.OutChannelsSpinBox->setEnabled(bOutEnabled
@@ -981,9 +990,13 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 		bEnabled = (sInDevice.isEmpty()  || sInDevice  == m_pSetup->sDefPresetName ||
 					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
 	}
-	m_ui.InterfaceTextLabel->setEnabled(bEnabled || bCoreaudio || bFreebob || bFirewire);
-	m_ui.InterfaceComboBox->setEnabled(bEnabled || bCoreaudio || bFreebob || bFirewire);
+
+	bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire);
+	m_ui.InterfaceTextLabel->setEnabled(bInterface);
+	m_ui.InterfaceComboBox->setEnabled(bInterface);
 	m_ui.InterfaceToolButton->setEnabled(bEnabled || bCoreaudio);
+	if (!bInterface)
+		setComboBoxCurrentText(m_ui.InterfaceComboBox, m_pSetup->sDefPresetName);
 
 	m_ui.DitherTextLabel->setEnabled(bAlsa || bPortaudio);
 	m_ui.DitherComboBox->setEnabled(bAlsa || bPortaudio);

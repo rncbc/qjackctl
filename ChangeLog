@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- On Setup/Settings/Parameters dialog, all device selection options
+  are now reset to default when disabled interactively.
+
 - Grayed/disabled palette color group fix for dark color themes.
 
 - Qt Software logo update.
