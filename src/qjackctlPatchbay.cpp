@@ -43,9 +43,6 @@
 // External patchbay loader.
 #include "qjackctlPatchbayFile.h"
 
-// Aliases accessors.
-#include "qjackctlConnectAlias.h"
-
 
 //----------------------------------------------------------------------
 // class qjackctlPlugItem -- Socket plug list item.

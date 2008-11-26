@@ -21,7 +21,9 @@
 
 #include "qjackctlPatchbayRack.h"
 
-#include <QRegExp>
+// Aliases accessors.
+#include "qjackctlConnectAlias.h"
+
 
 //----------------------------------------------------------------------
 // class qjackctlPatchbaySnapshot -- Patchbay snapshot infrastructure.
@@ -69,7 +71,7 @@ public:
 		QListIterator<qjackctlPatchbaySocket *> iter(socketlist);
 		while (iter.hasNext()) {
 			pSocket = iter.next();
-			if (pSocket->clientName() == sClientName
+			if (QRegExp(pSocket->clientName()).exactMatch(sClientName)
 				&& pSocket->type() == iSocketType) {
 				QStringListIterator plug_iter(pSocket->pluglist());
 				QStringListIterator port_iter(ports);
@@ -78,7 +80,7 @@ public:
 					&& plug_iter.hasNext() && port_iter.hasNext()) {
 					const QString& sPlug = plug_iter.next();
 					const QString& sPort = port_iter.next();
-					bMatch = (sPlug == sPort);
+					bMatch = (QRegExp(sPlug).exactMatch(sPort));
 				}
 				if (bMatch)
 					return pSocket;
@@ -90,11 +92,15 @@ public:
 		if (iSocket > 0)
 			sSocketName += ' ' + QString::number(iSocket + 1);
 
-		pSocket = new qjackctlPatchbaySocket(
-			sSocketName, sClientName, iSocketType);
+		pSocket = new qjackctlPatchbaySocket(sSocketName,
+			qjackctlClientAlias::escapeRegExpDigits(sClientName),
+			iSocketType);
 		QStringListIterator port_iter(ports);
-		while (port_iter.hasNext())
-			pSocket->addPlug(port_iter.next());
+		while (port_iter.hasNext()) {
+			pSocket->addPlug(
+				qjackctlClientAlias::escapeRegExpDigits(port_iter.next()));
+		}
+
 		socketlist.append(pSocket);
 
 		return pSocket;
