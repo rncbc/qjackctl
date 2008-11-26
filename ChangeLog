@@ -5,6 +5,12 @@ ChangeLog
 
 CVS HEAD
 
+- At last, after years of retarded procrastination, the old infamous
+  patchbay snapshot feature has been the subject of a almost complete
+  rewrite and it does try to give a way better mapping of all actual
+  and current running client/port connections, both JACK (audio, MIDI)
+  and ALSA MIDI, of course ;)
+
 - On Setup/Settings/Parameters dialog, all device selection options
   are now reset to default when disabled interactively.
 

@@ -227,6 +227,10 @@ public:
 	void connectJackScan(jack_client_t *pJackClient);
 	void connectAlsaScan(snd_seq_t *pAlsaSeq);
 
+	// Patchbay snapshot methods.
+	void connectJackSnapshot(jack_client_t *pJackClient);
+	void connectAlsaSnapshot(snd_seq_t *pAlsaSeq);
+
 signals:
 
 	// Cable connection change signal.
@@ -290,6 +294,9 @@ private:
 
 	// Common socket forwarding scan method.
 	void connectForwardScan(int iSocketType);
+
+	// JACK snapshot executive.
+	void connectJackSnapshotEx(int iSocketType);
 
 	// Patchbay sockets lists.
 	QList<qjackctlPatchbaySocket *> m_osocketlist;

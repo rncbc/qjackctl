@@ -23,6 +23,105 @@
 
 #include <QRegExp>
 
+//----------------------------------------------------------------------
+// class qjackctlPatchbaySnapshot -- Patchbay snapshot infrastructure.
+//
+
+#include <QHash>
+
+class qjackctlPatchbaySnapshot
+{
+public:
+
+	// Constructor.
+	qjackctlPatchbaySnapshot() {};
+
+	// Cleanup.
+	void clear() { m_hash.clear(); }
+
+	// Commit snapshot into patchbay rack.
+	void commit ( qjackctlPatchbayRack *pRack, int iSocketType )
+	{
+		QHash<QString, Ports>::Iterator iter = m_hash.begin();
+		for ( ; iter != m_hash.end(); ++iter) {
+			const QString& sKey = iter.key();
+			const QString& sOClient = sKey.section(':', 0, 0);
+			const QString& sIClient = sKey.section(':', 1, 1);
+			Ports& ports = iter.value();
+			qjackctlPatchbaySocket *pOSocket = get_socket(
+				pRack->osocketlist(), sOClient, ports.outs, iSocketType);
+			qjackctlPatchbaySocket *pISocket = get_socket(
+				pRack->isocketlist(), sIClient, ports.ins, iSocketType);
+			pRack->addCable(new qjackctlPatchbayCable(pOSocket, pISocket));
+		}
+
+		m_hash.clear();
+	}
+
+	// Commit/get client socket into rack (socket list).
+	qjackctlPatchbaySocket *get_socket (
+		QList<qjackctlPatchbaySocket *>& socketlist,
+		const QString& sClientName, const QStringList& ports,
+		int iSocketType )
+	{
+		int iSocket = 0;
+		qjackctlPatchbaySocket *pSocket = NULL;
+		QListIterator<qjackctlPatchbaySocket *> iter(socketlist);
+		while (iter.hasNext()) {
+			pSocket = iter.next();
+			if (pSocket->clientName() == sClientName
+				&& pSocket->type() == iSocketType) {
+				QStringListIterator plug_iter(pSocket->pluglist());
+				QStringListIterator port_iter(ports);
+				bool bMatch = true;
+				while (bMatch
+					&& plug_iter.hasNext() && port_iter.hasNext()) {
+					const QString& sPlug = plug_iter.next();
+					const QString& sPort = port_iter.next();
+					bMatch = (sPlug == sPort);
+				}
+				if (bMatch)
+					return pSocket;
+				iSocket++;
+			}
+		}
+
+		QString sSocketName = sClientName;
+		if (iSocket > 0)
+			sSocketName += ' ' + QString::number(iSocket + 1);
+
+		pSocket = new qjackctlPatchbaySocket(
+			sSocketName, sClientName, iSocketType);
+		QStringListIterator port_iter(ports);
+		while (port_iter.hasNext())
+			pSocket->addPlug(port_iter.next());
+		socketlist.append(pSocket);
+
+		return pSocket;
+	}
+
+	// Prepare/add snapshot connection item.
+	void append (
+		const QString& sOClientName, const QString& sOPortName,
+		const QString& sIClientName, const QString& sIPortName )
+	{
+		Ports& ports = m_hash[sOClientName + ':' + sIClientName];
+		ports.outs.append(sOPortName);
+		ports.ins.append(sIPortName);
+	}
+
+private:
+
+	// Snapshot instance variables.
+	struct Ports
+	{
+		QStringList outs;
+		QStringList ins;
+	};
+
+	QHash<QString, Ports> m_hash;
+};
+
 
 //----------------------------------------------------------------------
 // class qjackctlPatchbaySocket -- Patchbay socket implementation.
@@ -1266,6 +1365,115 @@ void qjackctlPatchbayRack::connectForwardScan ( int iSocketType )
 			break;
 		}
 	}
+}
+
+
+//----------------------------------------------------------------------
+// JACK snapshot.
+
+void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
+{
+	if (m_pJackClient == NULL)
+		return;
+
+	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
+#ifdef CONFIG_JACK_MIDI
+	if (iSocketType == QJACKCTL_SOCKETTYPE_JACK_MIDI)
+		pszJackPortType = JACK_DEFAULT_MIDI_TYPE;
+#endif
+
+	const char **ppszOutputPorts = jack_get_ports(m_pJackClient,
+		0, pszJackPortType, JackPortIsOutput);
+	if (ppszOutputPorts == NULL)
+		return;
+
+	qjackctlPatchbaySnapshot snapshot;
+
+	for (int i = 0; ppszOutputPorts[i]; ++i) {
+		const char *pszOutputPort = ppszOutputPorts[i];
+		const QString sOutputPort = pszOutputPort;
+		const QString& sOClient = sOutputPort.section(':', 0, 0);
+		const QString& sOPort   = sOutputPort.section(':', 1, 1);
+		// Check for inputs from output...
+		const char **ppszInputPorts = jack_port_get_all_connections(
+			m_pJackClient, jack_port_by_name(m_pJackClient, pszOutputPort));
+		if (ppszInputPorts == NULL)
+			continue;
+		for (int j = 0 ; ppszInputPorts[j]; ++j) {
+			const char *pszInputPort = ppszInputPorts[j];
+			const QString sInputPort = pszInputPort;
+			const QString& sIClient = sInputPort.section(':', 0, 0);
+			const QString& sIPort   = sInputPort.section(':', 1, 1);
+			snapshot.append(sOClient, sOPort, sIClient, sIPort);
+		}
+		::free(ppszInputPorts);
+	}
+	::free(ppszOutputPorts);
+
+	snapshot.commit(this, iSocketType);
+}
+
+
+void qjackctlPatchbayRack::connectJackSnapshot ( jack_client_t *pJackClient )
+{
+	if (pJackClient == NULL || m_pJackClient)
+		return;
+
+	// Cache JACK client descriptor.
+	m_pJackClient = pJackClient;
+
+	connectJackSnapshotEx(QJACKCTL_SOCKETTYPE_JACK_AUDIO);
+	connectJackSnapshotEx(QJACKCTL_SOCKETTYPE_JACK_MIDI);
+
+	// Done.
+	m_pJackClient = NULL;
+}
+
+
+//----------------------------------------------------------------------
+// ALSA snapshot.
+
+void qjackctlPatchbayRack::connectAlsaSnapshot ( snd_seq_t *pAlsaSeq )
+{
+	if (pAlsaSeq == NULL || m_pAlsaSeq)
+		return;
+
+	// Cache sequencer descriptor.
+	m_pAlsaSeq = pAlsaSeq;
+
+#ifdef CONFIG_ALSA_SEQ
+
+	qjackctlPatchbaySnapshot snapshot;
+
+	// Grab current connections of target port...
+	QList<qjackctlAlsaMidiPort *> omidiports;
+	loadAlsaPorts(omidiports, true);
+
+	QListIterator<qjackctlAlsaMidiPort *> oport(omidiports);
+	while (oport.hasNext()) {
+		qjackctlAlsaMidiPort *pOPort = oport.next();
+		QList<qjackctlAlsaMidiPort *> imidiports;
+		loadAlsaConnections(imidiports, pOPort, true);
+		QListIterator<qjackctlAlsaMidiPort *> iport(imidiports);
+		while (iport.hasNext()) {
+			qjackctlAlsaMidiPort *pIPort = iport.next();
+			snapshot.append(
+				pOPort->sClientName, pOPort->sPortName,
+				pIPort->sClientName, pIPort->sPortName);
+		}
+		qDeleteAll(imidiports);
+		imidiports.clear();
+	}
+
+	qDeleteAll(omidiports);
+	omidiports.clear();
+
+	snapshot.commit(this, QJACKCTL_SOCKETTYPE_ALSA_MIDI);
+
+#endif
+
+	// Done.
+	m_pAlsaSeq = NULL;
 }
 
 

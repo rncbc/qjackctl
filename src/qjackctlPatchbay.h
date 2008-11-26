@@ -199,9 +199,6 @@ public:
 	// Socket list cleaner.
 	void clear();
 
-	// Client:port snapshot.
-	void clientPortsSnapshot();
-
 	// Socket list accessor.
 	QList<qjackctlSocketItem *>& sockets();
 
@@ -221,12 +218,6 @@ public slots:
 	bool exclusiveSocketItem();
 	bool moveUpSocketItem();
 	bool moveDownSocketItem();
-
-protected:
-
-	// Specific client:port connections snapshot.
-	void clientJackSnapshot(int iSocketType);
-	void clientAlsaSnapshot(int iSocketType);
 
 private:
 
@@ -484,12 +475,6 @@ private:
 		qjackctlSocketItem *pISocket);
 	void disconnectSockets(qjackctlSocketItem *pOSocket,
 		qjackctlSocketItem *pISocket);
-
-	// Output socket-plug connection snapshot subroutines.
-	void socketPlugJackSnapshot(qjackctlSocketItem *pOSocket,
-		qjackctlPlugItem *pOPlug);
-	void socketPlugAlsaSnapshot(qjackctlSocketItem *pOSocket,
-		qjackctlPlugItem *pOPlug);
 
 	// Instance variables.
 	qjackctlPatchbayView *m_pPatchbayView;

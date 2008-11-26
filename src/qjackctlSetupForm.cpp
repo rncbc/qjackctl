@@ -909,13 +909,13 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	m_ui.OutChannelsSpinBox->setEnabled(bOutEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_CAPTURE));
 
-	m_ui.InLatencyTextLabel->setEnabled(bInEnabled && !bNet
+	m_ui.InLatencyTextLabel->setEnabled((bInEnabled && !bNet)
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_PLAYBACK));
-	m_ui.InLatencySpinBox->setEnabled(bInEnabled && !bNet
+	m_ui.InLatencySpinBox->setEnabled((bInEnabled && !bNet)
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_PLAYBACK));
-	m_ui.OutLatencyTextLabel->setEnabled(bOutEnabled && !bNet
+	m_ui.OutLatencyTextLabel->setEnabled((bOutEnabled && !bNet)
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_CAPTURE));
-	m_ui.OutLatencySpinBox->setEnabled(bOutEnabled && !bNet
+	m_ui.OutLatencySpinBox->setEnabled((bOutEnabled && !bNet)
 		|| ((bAlsa || bFreebob) && iAudio != QJACKCTL_CAPTURE));
 
 	computeLatency();
