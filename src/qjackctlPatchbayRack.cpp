@@ -41,6 +41,16 @@ public:
 	// Cleanup.
 	void clear() { m_hash.clear(); }
 
+	// Prepare/add snapshot connection item.
+	void append (
+		const QString& sOClientName, const QString& sOPortName,
+		const QString& sIClientName, const QString& sIPortName )
+	{
+		Ports& ports = m_hash[sOClientName + ':' + sIClientName];
+		ports.outs.append(sOPortName);
+		ports.ins.append(sIPortName);
+	}
+
 	// Commit snapshot into patchbay rack.
 	void commit ( qjackctlPatchbayRack *pRack, int iSocketType )
 	{
@@ -60,8 +70,40 @@ public:
 		m_hash.clear();
 	}
 
-	// Commit/get client socket into rack (socket list).
-	qjackctlPatchbaySocket *get_socket (
+	// Find first existing socket.
+	static qjackctlPatchbaySocket *find_socket (
+		QList<qjackctlPatchbaySocket *>& socketlist,
+		const QString& sClientName, int iSocketType )
+	{
+		QListIterator<qjackctlPatchbaySocket *> iter(socketlist);
+		while (iter.hasNext()) {
+			qjackctlPatchbaySocket *pSocket = iter.next();
+			if (QRegExp(pSocket->clientName()).exactMatch(sClientName)
+				&& pSocket->type() == iSocketType) {
+				return pSocket;
+			}
+		}
+		return NULL;
+	}
+
+	// Add socket plug.
+	static void add_socket ( QList<qjackctlPatchbaySocket *>& socketlist,
+		const QString& sClientName, const QString& sPortName, int iSocketType )
+	{
+		qjackctlPatchbaySocket *pSocket
+			= find_socket(socketlist, sClientName, iSocketType);
+		if (pSocket == NULL) {
+			pSocket = new qjackctlPatchbaySocket(sClientName,
+				qjackctlClientAlias::escapeRegExpDigits(sClientName),
+				iSocketType);
+			socketlist.append(pSocket);
+		}
+		pSocket->addPlug(
+			qjackctlClientAlias::escapeRegExpDigits(sPortName));
+	}
+
+	// Get client socket into rack (socket list).
+	static qjackctlPatchbaySocket *get_socket (
 		QList<qjackctlPatchbaySocket *>& socketlist,
 		const QString& sClientName, const QStringList& ports,
 		int iSocketType )
@@ -104,16 +146,6 @@ public:
 		socketlist.append(pSocket);
 
 		return pSocket;
-	}
-
-	// Prepare/add snapshot connection item.
-	void append (
-		const QString& sOClientName, const QString& sOPortName,
-		const QString& sIClientName, const QString& sIPortName )
-	{
-		Ports& ports = m_hash[sOClientName + ':' + sIClientName];
-		ports.outs.append(sOPortName);
-		ports.ins.append(sIPortName);
 	}
 
 private:
@@ -1388,6 +1420,20 @@ void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
 		pszJackPortType = JACK_DEFAULT_MIDI_TYPE;
 #endif
 
+	const char **ppszInputPorts = jack_get_ports(m_pJackClient,
+		0, pszJackPortType, JackPortIsInput);
+	if (ppszInputPorts) {
+		for (int i = 0; ppszInputPorts[i]; ++i) {
+			const char *pszInputPort = ppszInputPorts[i];
+			const QString sInputPort = pszInputPort;
+			const QString& sIClient = sInputPort.section(':', 0, 0);
+			const QString& sIPort   = sInputPort.section(':', 1, 1);
+			qjackctlPatchbaySnapshot::add_socket(
+				isocketlist(), sIClient, sIPort, iSocketType);
+		}
+		::free(ppszInputPorts);
+	}
+
 	const char **ppszOutputPorts = jack_get_ports(m_pJackClient,
 		0, pszJackPortType, JackPortIsOutput);
 	if (ppszOutputPorts == NULL)
@@ -1400,8 +1446,10 @@ void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
 		const QString sOutputPort = pszOutputPort;
 		const QString& sOClient = sOutputPort.section(':', 0, 0);
 		const QString& sOPort   = sOutputPort.section(':', 1, 1);
+		qjackctlPatchbaySnapshot::add_socket(
+			osocketlist(), sOClient, sOPort, iSocketType);
 		// Check for inputs from output...
-		const char **ppszInputPorts = jack_port_get_all_connections(
+		ppszInputPorts = jack_port_get_all_connections(
 			m_pJackClient, jack_port_by_name(m_pJackClient, pszOutputPort));
 		if (ppszInputPorts == NULL)
 			continue;
@@ -1449,16 +1497,31 @@ void qjackctlPatchbayRack::connectAlsaSnapshot ( snd_seq_t *pAlsaSeq )
 
 #ifdef CONFIG_ALSA_SEQ
 
+	QList<qjackctlAlsaMidiPort *> imidiports;
+	loadAlsaPorts(imidiports, false);
+
+	QListIterator<qjackctlAlsaMidiPort *> iport(imidiports);
+	while (iport.hasNext()) {
+		qjackctlAlsaMidiPort *pIPort = iport.next();
+		qjackctlPatchbaySnapshot::add_socket(
+			isocketlist(), pIPort->sClientName, pIPort->sPortName,
+			QJACKCTL_SOCKETTYPE_ALSA_MIDI);
+	}
+
+	qDeleteAll(imidiports);
+	imidiports.clear();
+
 	qjackctlPatchbaySnapshot snapshot;
 
-	// Grab current connections of target port...
 	QList<qjackctlAlsaMidiPort *> omidiports;
 	loadAlsaPorts(omidiports, true);
 
 	QListIterator<qjackctlAlsaMidiPort *> oport(omidiports);
 	while (oport.hasNext()) {
 		qjackctlAlsaMidiPort *pOPort = oport.next();
-		QList<qjackctlAlsaMidiPort *> imidiports;
+		qjackctlPatchbaySnapshot::add_socket(
+			osocketlist(), pOPort->sClientName, pOPort->sPortName,
+			QJACKCTL_SOCKETTYPE_ALSA_MIDI);
 		loadAlsaConnections(imidiports, pOPort, true);
 		QListIterator<qjackctlAlsaMidiPort *> iport(imidiports);
 		while (iport.hasNext()) {
