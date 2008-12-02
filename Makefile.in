@@ -79,7 +79,7 @@ $(name):	$(name).mak $(sources) $(headers) $(forms)
 %.qm:	%.ts
 	@$(lrelease) -verbose $< -qm $@
 
-install:	$(name) icons/$(name).png
+install:	$(name) icons/$(name).png $(translations_targets)
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/bin
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/pixmaps
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/applications
