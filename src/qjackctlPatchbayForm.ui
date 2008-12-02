@@ -101,12 +101,6 @@
      </item>
      <item row="6" column="2" >
       <widget class="QPushButton" name="ISocketMoveDownPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Move currently selected output socket down one position</string>
        </property>
@@ -123,12 +117,6 @@
      </item>
      <item row="0" column="0" >
       <widget class="QPushButton" name="OSocketAddPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Create a new output socket</string>
        </property>
@@ -161,12 +149,6 @@
      </item>
      <item row="1" column="2" >
       <widget class="QPushButton" name="ISocketEditPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Edit currently selected input socket properties</string>
        </property>
@@ -199,12 +181,6 @@
      </item>
      <item row="5" column="2" >
       <widget class="QPushButton" name="ISocketMoveUpPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Move currently selected output socket up one position</string>
        </property>
@@ -221,12 +197,6 @@
      </item>
      <item row="3" column="0" >
       <widget class="QPushButton" name="OSocketRemovePushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Remove currently selected output socket</string>
        </property>
@@ -243,12 +213,6 @@
      </item>
      <item row="2" column="0" >
       <widget class="QPushButton" name="OSocketCopyPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Duplicate (copy) currently selected output socket</string>
        </property>
@@ -265,12 +229,6 @@
      </item>
      <item row="6" column="0" >
       <widget class="QPushButton" name="OSocketMoveDownPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Move currently selected output socket down one position</string>
        </property>
@@ -287,12 +245,6 @@
      </item>
      <item row="3" column="2" >
       <widget class="QPushButton" name="ISocketRemovePushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Remove currently selected input socket</string>
        </property>
@@ -309,12 +261,6 @@
      </item>
      <item row="2" column="2" >
       <widget class="QPushButton" name="ISocketCopyPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Duplicate (copy) currently selected input socket</string>
        </property>
@@ -331,12 +277,6 @@
      </item>
      <item row="0" column="2" >
       <widget class="QPushButton" name="ISocketAddPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Create a new input socket</string>
        </property>
@@ -353,12 +293,6 @@
      </item>
      <item row="1" column="0" >
       <widget class="QPushButton" name="OSocketEditPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Edit currently selected output socket properties</string>
        </property>
@@ -375,12 +309,6 @@
      </item>
      <item row="5" column="0" >
       <widget class="QPushButton" name="OSocketMoveUpPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Move currently selected output socket up one position</string>
        </property>
@@ -516,12 +444,6 @@
      </property>
      <item>
       <widget class="QPushButton" name="NewPatchbayPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Create a new patchbay profile</string>
        </property>
@@ -541,12 +463,6 @@
      </item>
      <item>
       <widget class="QPushButton" name="LoadPatchbayPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Load patchbay profile</string>
        </property>
@@ -566,12 +482,6 @@
      </item>
      <item>
       <widget class="QPushButton" name="SavePatchbayPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Save current patchbay profile</string>
        </property>
@@ -612,12 +522,6 @@
      </item>
      <item>
       <widget class="QPushButton" name="ActivatePatchbayPushButton" >
-       <property name="maximumSize" >
-        <size>
-         <width>80</width>
-         <height>32767</height>
-        </size>
-       </property>
        <property name="toolTip" >
         <string>Toggle activation of current patchbay profile</string>
        </property>

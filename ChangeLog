@@ -5,8 +5,9 @@ ChangeLog
 
 CVS HEAD
 
-- Introducing the very first and complete translation files in-package:
-  French (fr), Spanish (es) and Russian (ru); see TRANSLATORS.
+- Introducing the very first and complete translations in-package:
+  German (de), Spanish (es), French (fr) and Russian (ru); credits
+  in TRANSLATORS.
 
 - At last, after years of retarded procrastination, the old infamous
   patchbay snapshot feature has been the subject of a almost complete

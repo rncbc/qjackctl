@@ -1533,47 +1533,47 @@ Are you sure?</source>
         <translation>Patchbay - JACK Audio Connection Kit</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="529"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="451"/>
         <source>&amp;New</source>
         <translation>&amp;Новая</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="535"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="457"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="526"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="448"/>
         <source>Create a new patchbay profile</source>
         <translation>Создать новый профиль patchbay</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="554"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="470"/>
         <source>&amp;Load...</source>
         <translation>&amp;Загрузить...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="560"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="476"/>
         <source>Alt+L</source>
         <translation>Alt+L</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="551"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="467"/>
         <source>Load patchbay profile</source>
         <translation>Загрузить профиль patchbay</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="579"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="489"/>
         <source>&amp;Save...</source>
         <translation>&amp;Сохранить...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="585"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="495"/>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="576"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="486"/>
         <source>Save current patchbay profile</source>
         <translation>Сохранить текущий профиль patchbay</translation>
     </message>
@@ -1583,12 +1583,12 @@ Are you sure?</source>
         <translation type="obsolete">Имя текущего профиля patchbay</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="625"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="529"/>
         <source>Acti&amp;vate</source>
         <translation>&amp;Активировать</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="631"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="535"/>
         <source>Alt+V</source>
         <translation>Alt+V</translation>
     </message>
@@ -1598,127 +1598,127 @@ Are you sure?</source>
         <translation type="obsolete">Активировать текущий профиль patchbay</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="430"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="358"/>
         <source>&amp;Connect</source>
         <translation>&amp;Соединить&amp;Соединить</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="436"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="364"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="427"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="355"/>
         <source>Connect currently selected sockets</source>
         <translation>Соединить выбранные сейчас сокеты</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="446"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="374"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Рассоединить</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="452"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="380"/>
         <source>Alt+D</source>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="443"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="371"/>
         <source>Disconnect currently selected sockets</source>
         <translation>Рассоединить выбранные сейчас сокеты</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="462"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="390"/>
         <source>Disconnect &amp;All</source>
         <translation>Рассоединить &amp;все</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="468"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="396"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="459"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="387"/>
         <source>Disconnect all currently connected sockets</source>
         <translation>Рассоединить все соединённые сейчас сокеты</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="494"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="422"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Обновить</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="500"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="428"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="491"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="419"/>
         <source>Refresh current patchbay view</source>
         <translation>Обновить текущий вид patchbay</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="278"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="236"/>
         <source>Down</source>
         <translation>Вниз</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="275"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="233"/>
         <source>Move currently selected output socket down one position</source>
         <translation>Переместить выбранный сейчас сокет вниз на одну позицию</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="344"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="284"/>
         <source>Add...</source>
         <translation>Добавить...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="133"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="121"/>
         <source>Create a new output socket</source>
         <translation>Создать новый сокет выхода</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="366"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="300"/>
         <source>Edit...</source>
         <translation>Изменить...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="171"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="153"/>
         <source>Edit currently selected input socket properties</source>
         <translation>Изменить свойства выбранного сейчас сокета входа</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="388"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="316"/>
         <source>Up</source>
         <translation>Вверх</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="385"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="313"/>
         <source>Move currently selected output socket up one position</source>
         <translation>Переместить выбранный сейчас сокет вверх на одну позицию</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="300"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="252"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="231"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="201"/>
         <source>Remove currently selected output socket</source>
         <translation>Удалить выбранный сейчас сокет выхода</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="297"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="249"/>
         <source>Remove currently selected input socket</source>
         <translation>Удалить выбранный сейчас сокет входа</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="341"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="281"/>
         <source>Create a new input socket</source>
         <translation>Создать новый сокет входа</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="363"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="297"/>
         <source>Edit currently selected output socket properties</source>
         <translation>Изменить свойства выбранного сейчас сокета выхода</translation>
     </message>
@@ -1872,27 +1872,27 @@ of all actual client connections?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="253"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="217"/>
         <source>Duplicate (copy) currently selected output socket</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="322"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="268"/>
         <source>Copy...</source>
         <translation type="unfinished">Скопировать...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="319"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="265"/>
         <source>Duplicate (copy) currently selected input socket</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="609"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="519"/>
         <source>Current (recent) patchbay profile(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="622"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="526"/>
         <source>Toggle activation of current patchbay profile</source>
         <translation type="unfinished"></translation>
     </message>

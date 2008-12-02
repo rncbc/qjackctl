@@ -56,13 +56,15 @@ forms = \
 	src/qjackctlStatusForm.ui
 
 translations_sources = \
-	translations/qjackctl_fr.ts \
+	translations/qjackctl_de.ts \
 	translations/qjackctl_es.ts \
+	translations/qjackctl_fr.ts \
 	translations/qjackctl_ru.ts
 
 translations_targets = \
-	translations/qjackctl_fr.qm \
+	translations/qjackctl_de.qm \
 	translations/qjackctl_es.qm \
+	translations/qjackctl_fr.qm \
 	translations/qjackctl_ru.qm
 
 all:	$(name)

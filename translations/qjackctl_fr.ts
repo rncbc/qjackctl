@@ -1514,207 +1514,207 @@ Are you sure?</source>
         <translation>Baie de brassage - JACK Audio Connection Kit</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="529"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="451"/>
         <source>&amp;New</source>
         <translation>&amp;Nouveau</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="535"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="457"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="526"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="448"/>
         <source>Create a new patchbay profile</source>
         <translation>Créer un nouveau profil de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="554"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="470"/>
         <source>&amp;Load...</source>
         <translation>&amp;Charger...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="560"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="476"/>
         <source>Alt+L</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="551"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="467"/>
         <source>Load patchbay profile</source>
         <translation>Charger un profil de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="579"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="489"/>
         <source>&amp;Save...</source>
         <translation>&amp;Enregistrer...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="585"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="495"/>
         <source>Alt+S</source>
         <translation>Alt+E</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="576"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="486"/>
         <source>Save current patchbay profile</source>
         <translation>Enregistrer le profil actuel de la baie de brassage</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="609"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="519"/>
         <source>Current (recent) patchbay profile(s)</source>
         <translation>Profil(s) actuel(s) (récent(s)) de la baie de brassage</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="625"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="529"/>
         <source>Acti&amp;vate</source>
         <translation>Acti&amp;ver</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="631"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="535"/>
         <source>Alt+V</source>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="622"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="526"/>
         <source>Toggle activation of current patchbay profile</source>
         <translation>Basculer l&apos;activation du profil actuel de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="430"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="358"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connecter</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="436"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="364"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="427"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="355"/>
         <source>Connect currently selected sockets</source>
         <translation>Connecter les prises actuellement sélectionnés</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="446"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="374"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Déconnecter</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="452"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="380"/>
         <source>Alt+D</source>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="443"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="371"/>
         <source>Disconnect currently selected sockets</source>
         <translation>Déconnecter les prises actuellement sélectionnés</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="462"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="390"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Tout déconnecter</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="468"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="396"/>
         <source>Alt+A</source>
         <translation>Alt+T</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="459"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="387"/>
         <source>Disconnect all currently connected sockets</source>
         <translation>Déconnecter les prises actuellement connectées</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="494"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="422"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="500"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="428"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="491"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="419"/>
         <source>Refresh current patchbay view</source>
         <translation>Rafraîchir la vue actuelle de la baie de brassage</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="278"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="236"/>
         <source>Down</source>
         <translation>Vers le Bas</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="275"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="233"/>
         <source>Move currently selected output socket down one position</source>
         <translation>Déplacer d&apos;une position vers le bas la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="344"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="284"/>
         <source>Add...</source>
         <translation>Ajouter...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="133"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="121"/>
         <source>Create a new output socket</source>
         <translation>Créer une nouvelle prise de sortie</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="366"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="300"/>
         <source>Edit...</source>
         <translation>Editer...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="171"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="153"/>
         <source>Edit currently selected input socket properties</source>
         <translation>Editer les propriétés de la prise d&apos;entrée actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="388"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="316"/>
         <source>Up</source>
         <translation>Vers le haut</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="385"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="313"/>
         <source>Move currently selected output socket up one position</source>
         <translation>Déplacer d&apos;une position vers le haut la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="300"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="252"/>
         <source>Remove</source>
         <translation>Enlever</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="231"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="201"/>
         <source>Remove currently selected output socket</source>
         <translation>Enlever la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="322"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="268"/>
         <source>Copy...</source>
         <translation>Copier...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="253"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="217"/>
         <source>Duplicate (copy) currently selected output socket</source>
         <translation>Dupliquer (copier) la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="297"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="249"/>
         <source>Remove currently selected input socket</source>
         <translation>Enlever la prise d&apos;entrée actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="319"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="265"/>
         <source>Duplicate (copy) currently selected input socket</source>
         <translation>Dupliquer (copier) la prise d&apos;entrée actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="341"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="281"/>
         <source>Create a new input socket</source>
         <translation>Créer une nouvelle prise d&apos;entrée</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.ui" line="363"/>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="297"/>
         <source>Edit currently selected output socket properties</source>
         <translation>Editer les propriétés de la prise de sortie actuellement sélectionnée</translation>
     </message>
