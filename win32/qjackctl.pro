@@ -63,5 +63,10 @@ win32 {
 
 LIBS += -ljackmp
 
+TRANSLATIONS = \
+    ../translations/qjackctl_fr.ts \
+    ../translations/qjackctl_es.ts \
+    ../translations/qjackctl_ru.ts
+
 # XML/DOM support
 QT += xml

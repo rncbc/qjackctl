@@ -1,5 +1,7 @@
 prefix  = @ac_prefix@
 qmake   = @ac_qmake@
+lupdate = @ac_lupdate@
+lrelease = @ac_lrelease@
 
 name    = qjackctl
 
@@ -61,21 +63,32 @@ $(name).mak:	$(name).pro
 $(name):	$(name).mak $(sources) $(headers) $(forms)
 	@make -f $(name).mak
 
+%.ts:	$(name).pro $(sources) $(headers) $(forms)
+	@$(lupdate) -verbose $(name).pro
+
+%.qm:	%.ts
+	@$(lrelease) -verbose $< -qm $@
+
 install:	$(name) icons/$(name).png
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/bin
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/pixmaps
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/applications
+	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/locale
 	@install -v -m 0755 $(name) $(DESTDIR)$(prefix)/bin/$(name)
 	@install -v -m 0644 icons/$(name).png $(DESTDIR)$(prefix)/share/pixmaps/$(name).png
 	@install -v -m 0644 $(name).desktop $(DESTDIR)$(prefix)/share/applications/$(name).desktop
+	@install -v -m 0644 $(translations_targets) $(DESTDIR)$(prefix)/share/locale
 
 uninstall:	$(DESTDIR)$(prefix)/bin/$(name)
 	@rm -vf $(DESTDIR)$(prefix)/bin/$(name)
 	@rm -vf $(DESTDIR)$(prefix)/share/pixmaps/$(name).png
 	@rm -vf $(DESTDIR)$(prefix)/share/applications/$(name).desktop
+	@rm -vf $(DESTDIR)$(prefix)/share/locale/$(translations_targets)
+	@for x in $(translations_targets); do \
+		rm -vf $(DESTDIR)$(prefix)/share/locale/`basename $$x`; done
 
 clean:	$(name).mak
 	@make -f $(name).mak clean
 	@rm -f $(name) $(name).mak
-	@rm -rf *.cache *.log *.status
+	@rm -rf *.cache *.log *.status $(translations_targets)
 
