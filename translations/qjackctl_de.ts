@@ -248,7 +248,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="334"/>
         <source>Connect currently selected ports</source>
-        <translation>Aktuell gewählte Ports verbinden</translation>
+        <translation>Ausgewählte Anschlüsse verbinden</translation>
     </message>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="337"/>
@@ -263,7 +263,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="350"/>
         <source>Disconnect currently selected ports</source>
-        <translation>Aktuell verbundene Anschlüsse trennen</translation>
+        <translation>Ausgewählte Anschlüsse trennen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="353"/>
@@ -278,7 +278,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="366"/>
         <source>Disconnect all currently connected ports</source>
-        <translation>Alle gewählten Ports trennen</translation>
+        <translation>Alle verbundenen Anschlüsse trennen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="369"/>
@@ -293,7 +293,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="398"/>
         <source>Refresh current connections view</source>
-        <translation>Aktuelle Ansicht der Verbindungen erneuern</translation>
+        <translation>Ansicht der bestehenden Verbindungen erneuern</translation>
     </message>
     <message>
         <location filename="../src/qjackctlConnectionsForm.ui" line="401"/>
@@ -402,7 +402,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="74"/>
         <source>Quit processing and exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Signalverarbeitung und Programm beenden</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
@@ -502,17 +502,17 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="321"/>
         <source>Show/hide the patchbay editor window</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeldfenster anzeigen/verbergen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="324"/>
         <source>&amp;Patchbay</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Steckfeld...</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="358"/>
         <source>Show/hide the actual connections patchbay window</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige/Verberge das Steckfeldfenster mit den vorhandenen Verbindungen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="361"/>
@@ -557,17 +557,17 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="563"/>
         <source>Transport state</source>
-        <translation>Status Übermittlung</translation>
+        <translation type="unfinished">Status Übermittlung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="588"/>
         <source>Transport BPM</source>
-        <translation>BPM Übermittlung</translation>
+        <translation type="unfinished">BPM Übermittlung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="613"/>
         <source>Transport time</source>
-        <translation>Zeit Übermittlung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="647"/>
@@ -577,22 +577,22 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="650"/>
         <source>&amp;Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rückwärts</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="681"/>
         <source>Forward transport</source>
-        <translation>Übermittlung weiterleiten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="684"/>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Forwärts</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="690"/>
         <source>Alt+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+F</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="715"/>
@@ -602,12 +602,12 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
         <source>&amp;Rewind</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zurückspulen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="724"/>
         <source>Alt+R</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Z</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="754"/>
@@ -632,19 +632,20 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
         <source>&amp;Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Abs&amp;pielen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="794"/>
         <source>Alt+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+P</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="476"/>
         <source>Could not open ALSA sequencer as a client.
 
 ALSA MIDI patchbay will be not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA Sequencer konnte nicht als Client geöffnet werden.
+Das ALSA-MIDI-Steckfeld wird nicht verfügbar sein.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="3002"/>
@@ -691,14 +692,15 @@ Wollen Sie diesen beenden?</translation>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="632"/>
         <source>with exit status=%1</source>
-        <translation type="unfinished"></translation>
+        <translation>mit Rückgabewert = %1</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="679"/>
         <source>Could not start JACK.
 
 Maybe JACK audio server is already started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte JACK nicht starten.
+Möglicheweise läuft der JACK-Server schon.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="967"/>
@@ -715,14 +717,15 @@ Maybe JACK audio server is already started.</source>
         <source>Could not load preset &quot;%1&quot;.
 
 Retrying with default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Einstellung &quot;%1&quot; nicht laden.
+Versuche erneut mit Voreinstellung.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="720"/>
         <source>Could not load default preset.
 
 Sorry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte leider die Voreinstellung nicht laden.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="730"/>
@@ -745,7 +748,9 @@ Sorry.</source>
 are still active and connected.
 
 Do you want to stop the JACK audio server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige Client-Audio-Anwendungen
+sind noch aktiv und verbunden.
+Wollen Sie den JACK-Server anhalten?</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="989"/>
@@ -775,12 +780,12 @@ Do you want to stop the JACK audio server?</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1069"/>
         <source>JACK was started with PID=%1.</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK wurde mit PID = %1 gestartet.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1114"/>
         <source>JACK is being forced...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK wird gezwungen...</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1122"/>
@@ -805,34 +810,35 @@ Do you want to stop the JACK audio server?</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1378"/>
         <source>Elapsed time since last reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Seit dem letzten Zurücksetzen vergangene Zeit</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1381"/>
         <source>Elapsed time since last XRUN</source>
-        <translation type="unfinished"></translation>
+        <translation>Seit dem letzten XRUN vergangene Zeit</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1504"/>
         <source>Could not load active patchbay definition.
 
 Disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte aktive Steckfelddefinition nicht laden.
+Ist deaktiviert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1507"/>
         <source>Patchbay activated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeld aktiviert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1515"/>
         <source>Patchbay deactivated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeld deaktiviert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1593"/>
         <source>Statistics reset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistik zurückgesetzt.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1737"/>
@@ -842,7 +848,7 @@ Disabled.</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1754"/>
         <source>JACK connection graph change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaubild der JACK-Verbindungen geändert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1782"/>
@@ -852,12 +858,12 @@ Disabled.</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1792"/>
         <source>Buffer size change (%1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Puffergröße geändert (%1).</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1800"/>
         <source>Shutdown notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigung zum Herunterfahren.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1820"/>
@@ -869,12 +875,12 @@ Sorry.</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1824"/>
         <source>JACK has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK ist abgestürzt.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1827"/>
         <source>JACK timed out.</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK Zeitüberschreitung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1830"/>
@@ -889,12 +895,12 @@ Sorry.</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1838"/>
         <source>Unknown JACK error (%d).</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter JACK-Fehler</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1854"/>
         <source>ALSA connection graph change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaubild der ALSA-Verbindungen geändert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1885"/>
@@ -909,12 +915,12 @@ Sorry.</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1941"/>
         <source>JACK connection change.</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK-Verbindung geändert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1950"/>
         <source>ALSA connection change.</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA-Verbindung geändert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1969"/>
@@ -964,7 +970,7 @@ Do you want to remove the patchbay connection?</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2053"/>
         <source>Invalid or unsupported option.</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültige oder nicht unterstützte Option.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2055"/>
@@ -979,12 +985,12 @@ Do you want to remove the patchbay connection?</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2059"/>
         <source>Unable to connect to server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsaufnahme zum Server gescheitert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2061"/>
         <source>Server communication error.</source>
-        <translation>Server-Verbindungsfehler.</translation>
+        <translation>Server-Kommunikationsfehler.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2063"/>
@@ -994,34 +1000,35 @@ Do you want to remove the patchbay connection?</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2065"/>
         <source>Unable to load internal client.</source>
-        <translation type="unfinished"></translation>
+        <translation>Interner Client konnte nicht geladen werden.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2067"/>
         <source>Unable to initialize client.</source>
-        <translation type="unfinished"></translation>
+        <translation>Client konnte nicht initialisiert werden.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2069"/>
         <source>Unable to access shared memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Zugriff auf Shared Memory möglich.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2071"/>
         <source>Client protocol version mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unpassende Client-Protokollversion</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2075"/>
         <source>Could not connect to JACK server as client.
 - %1
 Please check the messages window for more info.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Verbindungsaufnahme als Client zum JACK-Server möglich. - %1
+Bitte sehen Sie im Meldungsfenster nach weiteren Informationen.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2117"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverkonfiguration nach &quot;%1&quot; gespeichert.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2152"/>
@@ -1211,7 +1218,7 @@ Please check the messages window for more info.</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2944"/>
         <source>Patch&amp;bay</source>
-        <translation type="unfinished"></translation>
+        <translation>Steck&amp;feld</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2949"/>
@@ -1222,7 +1229,8 @@ Please check the messages window for more info.</source>
         <location filename="../src/qjackctlMainForm.cpp" line="2992"/>
         <source>Server settings will be only effective after
 restarting the JACK audio server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Server-Einstellungen werden erst nach einem
+Neustart des JACK-Servers wirksam.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="3004"/>
@@ -1233,7 +1241,8 @@ restarting the JACK audio server.</source>
         <location filename="../src/qjackctlMainForm.cpp" line="3004"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige Einstellungen werden erst nach
+einem Neustart des Programms wirksam.</translation>
     </message>
 </context>
 <context>
@@ -1271,7 +1280,7 @@ the next time you start this program.</source>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
-        <translation>Diese Aktion wird alle Socket-Verbindungen trennen.
+        <translation>Diese Aktion wird alle Anschlüsse trennen.
 Sind Sie sicher?</translation>
     </message>
     <message>
@@ -1290,12 +1299,12 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="44"/>
         <source>Patchbay - JACK Audio Connection Kit</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeld - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="233"/>
         <source>Move currently selected output socket down one position</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählten Ausgangsanschluß eine Position nach unten verschieben</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="236"/>
@@ -1305,7 +1314,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="121"/>
         <source>Create a new output socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen neuen Ausgangsanschluß anlegen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="284"/>
@@ -1315,7 +1324,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="153"/>
         <source>Edit currently selected input socket properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschaften des gewählten Eingangsanschlusses bearbeiten</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="300"/>
@@ -1325,7 +1334,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="313"/>
         <source>Move currently selected output socket up one position</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählten Ausgangsanschluß eine Position nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="316"/>
@@ -1335,7 +1344,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="201"/>
         <source>Remove currently selected output socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählten Ausgangsanschluss entfernen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="252"/>
@@ -1345,7 +1354,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="217"/>
         <source>Duplicate (copy) currently selected output socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliziere den gewählten Ausgangsanschluss</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="268"/>
@@ -1355,27 +1364,27 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="249"/>
         <source>Remove currently selected input socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählten Eingangsanschluss entfernen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="265"/>
         <source>Duplicate (copy) currently selected input socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliziere den gewählten Eingangsanschluss</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="281"/>
         <source>Create a new input socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen neuen Eingangsanschluß anlegen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="297"/>
         <source>Edit currently selected output socket properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschaften des gewählten Ausgangsanschlusses bearbeiten</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="355"/>
         <source>Connect currently selected sockets</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewählte Anschlüsse miteinander verbinden</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="358"/>
@@ -1390,7 +1399,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="371"/>
         <source>Disconnect currently selected sockets</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung zwischen den gewählten Anschlüssen trennen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="374"/>
@@ -1405,7 +1414,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="387"/>
         <source>Disconnect all currently connected sockets</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle verbundenen Anschlüsse trennen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="390"/>
@@ -1420,7 +1429,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="419"/>
         <source>Refresh current patchbay view</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeldansicht auffrischen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="422"/>
@@ -1435,7 +1444,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="448"/>
         <source>Create a new patchbay profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Steckfeldprofil anlegen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="451"/>
@@ -1450,7 +1459,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="467"/>
         <source>Load patchbay profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeldprofil laden</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="470"/>
@@ -1465,7 +1474,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="486"/>
         <source>Save current patchbay profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelles Steckfeldprofil speichern</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="489"/>
@@ -1480,12 +1489,12 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="519"/>
         <source>Current (recent) patchbay profile(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle (zuletzt verwendete) Steckfeldprofile</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="526"/>
         <source>Toggle activation of current patchbay profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivierung des aktuellen Steckfeldprofils umschalten</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.ui" line="529"/>
@@ -1509,7 +1518,9 @@ Sind Sie sicher?</translation>
 &quot;%1&quot;
 
 Do you want to save the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Steckfelddefinition wurde verändert:
+&quot;%1&quot;
+Wollen Sie die Änderungen übernehmen?</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="225"/>
@@ -1546,25 +1557,28 @@ Do you want to save the changes?</source>
         <source>Could not load patchbay definition file: 
 
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Steckfelddefinitionsdatei nicht laden:
+&quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="394"/>
         <source>Could not save patchbay definition file: 
 
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Steckfelddefinitionsdatei nicht speichern:
+&quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="437"/>
         <source>New Patchbay definition</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Steckfelddefinition</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="439"/>
         <source>Create patchbay definition as a snapshot
 of all actual client connections?</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfelddefinitionsdatei als Schnappschuss
+der aktuell vorhandenen Verbindungen erstellen?</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="440"/>
@@ -1579,17 +1593,17 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="467"/>
         <source>Load Patchbay Definition</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfelddefinition laden</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="489"/>
         <source>Patchbay Definition files</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfelddefinitionsdateien</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="487"/>
         <source>Save Patchbay Definition</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere Steckfelddefinition</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="594"/>
@@ -1680,7 +1694,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlPatchbay.cpp" line="1374"/>
         <source>&amp;Refresh</source>
-        <translation>&amp;Auffrischen</translation>
+        <translation>Auf&amp;frischen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbay.cpp" line="1375"/>
@@ -1704,12 +1718,12 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="86"/>
         <source>Preset &amp;Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Benennung:</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="107"/>
         <source>Settings preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Benennung der Einstellung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4158"/>
@@ -1719,7 +1733,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="122"/>
         <source>Save settings as current preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen mit aktueller Benennung speichern</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="125"/>
@@ -1734,7 +1748,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="141"/>
         <source>Delete current settings preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Einstellung löschen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="144"/>
@@ -1759,7 +1773,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="219"/>
         <source>The JACK Audio Connection Kit sound server path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zum JACK-Server</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="226"/>
@@ -1889,22 +1903,22 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="576"/>
         <source>Use realtime scheduling</source>
-        <translation type="unfinished"></translation>
+        <translation>Echtzeitverarbeitung nutzen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="579"/>
         <source>&amp;Realtime</source>
-        <translation>&amp;Realtime</translation>
+        <translation>Echt&amp;zeit</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4039"/>
         <source>Alt+R</source>
-        <translation>Alt+R</translation>
+        <translation>Alt+Z</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="595"/>
         <source>Do not attempt to lock memory, even if in realtime mode</source>
-        <translation>Keinen Arbeitsspeicher sperren, auch nicht im Realtime-Modus</translation>
+        <translation>Keinen Arbeitsspeicher sperren, auch nicht im Echtzeitmodus</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="598"/>
@@ -1944,7 +1958,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3480"/>
         <source>Alt+F</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alt+F</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="652"/>
@@ -2009,17 +2023,17 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="728"/>
         <source>Ignore hardware period/buffer size</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignoriere Periode/Puffergröße der Hardware</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="731"/>
         <source>&amp;Ignore H/W</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ignoriere H/W</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2513"/>
         <source>Alt+I</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+I</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="747"/>
@@ -2034,12 +2048,12 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="753"/>
         <source>Alt+V</source>
-        <translation type="unfinished">Alt+V</translation>
+        <translation>Alt+F</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="808"/>
         <source>&amp;Output Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;usgabegerät:</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="830"/>
@@ -2074,12 +2088,12 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="965"/>
         <source>External output latency (frames)</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe Ausgangslatenz (Frames)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="984"/>
         <source>&amp;Input Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingangsger&amp;ät</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1006"/>
@@ -2104,7 +2118,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1034"/>
         <source>The PCM device name to use</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des genutzten PCM-Gerätes</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1216"/>
@@ -2329,7 +2343,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1652"/>
         <source>Scheduler priority when running realtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorität für die Echtzeitsteuerung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1671"/>
@@ -2489,7 +2503,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2303"/>
         <source>Whether to execute a custom shell script after shuting down the JACK audio server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Festlegen, ob ein angepasstes Shell-Skript nach dem Herunterfahren des JACK-Servers ausgeführt werden soll</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2306"/>
@@ -2524,7 +2538,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2435"/>
         <source>&amp;Capture standard output</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardausgabe &amp;umleiten</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3783"/>
@@ -2599,42 +2613,42 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2626"/>
         <source>Patchbay definition file to be activated as connection persistence profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfelddefinitionsdatei als beständiges Verbindungsprofil aktivieren</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2657"/>
         <source>Browse for a patchbay definition file to be activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Steckfelddefinitionsdatei zum aktivieren wählen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2673"/>
         <source>Whether to refresh the connections patchbay automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Steckfelddarstellung automatisch aktualisieren</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2676"/>
         <source>&amp;Auto refresh connections Patchbay, every (secs):</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeld &amp;automatisch aktualisieren, je (s):</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3889"/>
         <source>Alt+A</source>
-        <translation type="unfinished">Alt+A</translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2692"/>
         <source>Whether to activate a patchbay definition for connection persistence profile.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein beständiges Verbindungsprofil für das Steckfeld aktivieren.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2695"/>
         <source>Activate &amp;Patchbay persistence:</source>
-        <translation type="unfinished"></translation>
+        <translation>Steck&amp;feldkonfiguration hat Bestand:</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2698"/>
         <source>Alt+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+F</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2714"/>
@@ -2874,27 +2888,27 @@ of all actual client connections?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3640"/>
         <source>Whether to enable in-place client/port name editing (rename)</source>
-        <translation type="unfinished"></translation>
+        <translation>Direktes Bearbeiten der Client/Anschluss-Alternativbezeichnung (Alias) erlauben</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3643"/>
         <source>Ena&amp;ble client/port aliases editing (rename)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bearbeiten von &amp;Deckbezeichnungen für Client/Anschlüsse</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3659"/>
         <source>Whether to enable client/port name aliases on the connections window</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwendung von Deckbezeichnungen (Alias) für Anschlüsse in der Verbindungsübersicht erlauben</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3662"/>
         <source>E&amp;nable client/port aliases</source>
-        <translation type="unfinished"></translation>
+        <translation>Dec&amp;kbezeichnungen (Alias) für Client/Anschlüsse</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3967"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+K</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3678"/>
@@ -3139,7 +3153,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="857"/>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1434"/>
@@ -3149,7 +3163,7 @@ Are you sure?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1436"/>
         <source>&amp;Server Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Serverpfad</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1437"/>
@@ -3169,12 +3183,12 @@ Are you sure?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1441"/>
         <source>&amp;Frames/Period</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Frames/Periode</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1442"/>
         <source>Periods/&amp;Buffer</source>
-        <translation type="unfinished"></translation>
+        <translation>Perioden/&amp;Puffer</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1490"/>
@@ -3199,12 +3213,12 @@ Are you sure?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1558"/>
         <source>Active Patchbay Definition</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktive Steckfelddefinition</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1560"/>
         <source>Patchbay Definition files</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfelddefinitionsdateien</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.cpp" line="1576"/>
@@ -3232,7 +3246,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3584"/>
         <source>&amp;JACK client/port aliases:</source>
-        <translation type="unfinished"></translation>
+        <translation>Deckbezeichnungen bei &amp;JACK-Anschlüssen:</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3606"/>
@@ -3242,17 +3256,17 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3616"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Voreinstellung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3621"/>
         <source>First</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3626"/>
         <source>Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiter</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4095"/>
@@ -3305,12 +3319,12 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="33"/>
         <source>Socket - JACK Audio Connection Kit</source>
-        <translation type="unfinished"></translation>
+        <translation>Anschluss - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="52"/>
         <source>&amp;Socket</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anschluss</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="64"/>
@@ -3320,22 +3334,22 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="80"/>
         <source>Socket name (an alias for client name)</source>
-        <translation type="unfinished"></translation>
+        <translation>Anschlussbenennung (Alias für Name des Clients)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="87"/>
         <source>Client name (regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Clients (Regulärer Ausdruck)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="97"/>
         <source>Add plug to socket plug list</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Anschluss zur Liste hinzu</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="100"/>
         <source>Add P&amp;lug</source>
-        <translation>&amp;Verbinder hinzufügen</translation>
+        <translation>&amp;Anschluss hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="106"/>
@@ -3345,17 +3359,17 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="113"/>
         <source>&amp;Plug:</source>
-        <translation>Ver&amp;binder:</translation>
+        <translation>A&amp;nschluss:</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="129"/>
         <source>Port name (regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Anschlussbezeichnung (Regulärer Ausdruck)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="142"/>
         <source>Socket plug list</source>
-        <translation type="unfinished"></translation>
+        <translation>Anschlussliste</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="158"/>
@@ -3365,7 +3379,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="166"/>
         <source>Edit currently selected plug</source>
-        <translation>Aktuell gewählten Verbinder bearbeiten</translation>
+        <translation>Ausgewählten Anschluss bearbeiten</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="169"/>
@@ -3380,7 +3394,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="182"/>
         <source>Remove currently selected plug from socket plug list</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählten Anschluss von der Liste entfernen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="185"/>
@@ -3400,7 +3414,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="214"/>
         <source>Move down currently selected plug in socket plug list</source>
-        <translation>Aktuell gewählten Verbinder in Liste nach unten schieben</translation>
+        <translation>Ausgewählten Anschluss in Liste nach unten schieben</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="217"/>
@@ -3415,7 +3429,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="230"/>
         <source>Move up current selected plug in socket plug list</source>
-        <translation>Aktuell gewählten Verbinder in Liste nach oben schieben</translation>
+        <translation>Ausgewählten Anschluss in Liste nach oben schieben</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="233"/>
@@ -3450,7 +3464,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="291"/>
         <source>Forward (clone) all connections from this socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Verbindungen dieses Anschlusses weiterleiten (klonen)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="301"/>
@@ -3460,7 +3474,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="313"/>
         <source>Audio socket type (JACK)</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK-Audio-Anbindung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="316"/>
@@ -3475,12 +3489,12 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="326"/>
         <source>MIDI socket type (JACK)</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK-MIDI-Anbindung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="329"/>
         <source>&amp;MIDI</source>
-        <translation>&amp;MIDI</translation>
+        <translation>&amp;JACK-MIDI</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="332"/>
@@ -3490,12 +3504,12 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="339"/>
         <source>MIDI socket type (ALSA)</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA-MIDI-Anbindung</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="342"/>
         <source>AL&amp;SA</source>
-        <translation>AL&amp;SA</translation>
+        <translation>AL&amp;SA-MIDI</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="345"/>
@@ -3515,7 +3529,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.cpp" line="152"/>
         <source>Plugs / Ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Anschlüsse</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.cpp" line="339"/>
@@ -3543,7 +3557,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.cpp" line="527"/>
         <source>Add Plug</source>
-        <translation type="unfinished"></translation>
+        <translation>Anschluss hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.cpp" line="541"/>
@@ -3630,12 +3644,12 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlPatchbay.cpp" line="802"/>
         <source>Output Sockets / Plugs</source>
-        <translation>Socket-Ausgänge/Steckverbindungen</translation>
+        <translation>Ausgangsanschlüsse</translation>
     </message>
     <message>
         <location filename="../src/qjackctlPatchbay.cpp" line="804"/>
         <source>Input Sockets / Plugs</source>
-        <translation>Socket-Eingänge/Steckverbindungen</translation>
+        <translation>Eingangsanschlüsse</translation>
     </message>
 </context>
 <context>
@@ -3683,7 +3697,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../src/qjackctlStatusForm.ui" line="146"/>
         <source>&amp;Refresh</source>
-        <translation>&amp;Auffrischen</translation>
+        <translation>Auf&amp;frischen</translation>
     </message>
     <message>
         <location filename="../src/qjackctlStatusForm.ui" line="152"/>
