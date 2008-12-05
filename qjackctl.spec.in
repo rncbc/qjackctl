@@ -20,7 +20,7 @@ Requires:	jack >= 0.100.0
 Requires:	alsa
 
 BuildRequires:	qt-devel >= 4.1
-BuildRequires:	jack-devel >= 0.100.0
+BuildRequires:	libjack-devel >= 0.100.0
 BuildRequires:	alsa-devel
 
 %description
@@ -52,6 +52,7 @@ including a enhanced patchbay and connection control features.
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
+%{_datadir}/locale/%{name}_*.qm
 
 %changelog
 * Fri Dec 05 2008 Rui Nuno Capela <rncbc@users.sourceforge.net>
