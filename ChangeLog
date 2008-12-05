@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+0.3.4  2008-12-05  Patchbay snapshot revamp.
 
 - Introducing the very first and complete translations in-package:
   German (de), Spanish (es), French (fr) and Russian (ru); credits

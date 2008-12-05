@@ -1,3 +1,9 @@
+qjackctl (0.3.4-1) unstable; urgency=low
+
+  * Patchbay snapshot revamp. 
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Fri, 5 Dec 2008 18:48:00 +0100
+
 qjackctl (0.3.3-1) unstable; urgency=low
 
   * Patchbay JACK-MIDI, file logging and X11 uniqueness. 
