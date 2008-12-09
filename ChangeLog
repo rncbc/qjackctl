@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Alternate icon sizes other than default 16x16, are now effective to
+  the Connections widget (Setup/Dislay/Connections Window/Icon size).
+
+
 0.3.4  2008-12-05  Patchbay snapshot revamp.
 
 - Introducing the very first and complete translations in-package:

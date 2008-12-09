@@ -36,7 +36,6 @@
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 
-
 //----------------------------------------------------------------------
 // class qjackctlPortItem -- Port list item.
 //
@@ -1294,6 +1293,12 @@ void qjackctlConnectView::setIconSize ( int iIconSize )
 
 	// Go for it...
 	m_iIconSize = iIconSize;
+
+	// Update item sizes properly...
+	int px = (16 << m_iIconSize);
+	const QSize iconsize(px, px);
+	m_pOListView->setIconSize(iconsize);
+	m_pIListView->setIconSize(iconsize);
 
 	// Call binding descendant implementation,
 	// and do a complete content reset...
