@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.4.1, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.4.2, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -292,6 +292,12 @@ if test "x$ac_jack_midi" = "xyes"; then
    fi
 fi
 
+# Check for jack_port_get_aliases function.
+AC_CHECK_LIB(jack, jack_port_get_aliases, [ac_jack_port_aliases="yes"], [ac_jack_port_aliases="no"])
+if test "x$ac_jack_port_aliases" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_PORT_ALIASES, 1, [Define if jack_port_get_aliases is available.])
+fi
+
 # Finally produce a configure header file and the main makefile.
 AC_OUTPUT
 
@@ -309,6 +315,7 @@ echo "  JACK Realtime support  . . . . . . . . . . . . . .: $ac_jack_realtime"
 echo "  JACK Transport support . . . . . . . . . . . . . .: $ac_jack_transport"
 echo "  JACK XRUN delay support  . . . . . . . . . . . . .: $ac_jack_xrun_delay"
 echo "  JACK Maximum scheduling delay support  . . . . . .: $ac_jack_max_delay"
+echo "  JACK Port aliases support  . . . . . . . . . . . .: $ac_jack_port_aliases"
 echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
 echo "  ALSA MIDI Sequencer support  . . . . . . . . . . .: $ac_alsa_seq"
 echo "  System tray icon support . . . . . . . . . . . . .: $ac_system_tray"

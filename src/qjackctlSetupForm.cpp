@@ -603,6 +603,11 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.MidiDriverTextLabel->setEnabled(false);
 	m_ui.MidiDriverComboBox->setEnabled(false);
 #endif
+#ifndef CONFIG_JACK_PORT_ALIASES
+	m_ui.JackClientPortAliasComboBox->setCurrentIndex(0);
+	m_ui.JackClientPortAliasTextLabel->setEnabled(false);
+	m_ui.JackClientPortAliasComboBox->setEnabled(false);
+#endif
 #ifndef CONFIG_ALSA_SEQ
 	m_ui.AlsaSeqEnabledCheckBox->setEnabled(false);
 #endif

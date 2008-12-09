@@ -217,9 +217,11 @@ int qjackctlJackClientList::updateClientPorts (void)
 			qjackctlJackPort   *pPort   = 0;
 			jack_port_t *pJackPort = jack_port_by_name(m_pJackClient,
 				ppszClientPorts[iClientPort]);
+		#ifdef CONFIG_JACK_PORT_ALIASES
 			if (g_iJackClientPortAlias > 0 &&
 				jack_port_get_aliases(pJackPort, aliases) >= g_iJackClientPortAlias)
 				sClientPort = aliases[g_iJackClientPortAlias - 1];
+		#endif
 			int iColon = sClientPort.indexOf(':');
 			if (pJackPort && iColon >= 0) {
 				QString sClientName = sClientPort.left(iColon);

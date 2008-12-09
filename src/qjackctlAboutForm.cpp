@@ -1,7 +1,7 @@
 // qjackctlAboutForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -81,6 +81,12 @@ qjackctlAboutForm::qjackctlAboutForm (
 #ifndef CONFIG_JACK_MIDI
     sText += "<small><font color=\"red\">";
     sText += tr("JACK MIDI support disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
+#ifndef CONFIG_JACK_PORT_ALIASES
+    sText += "<small><font color=\"red\">";
+    sText += tr("JACK Port aliases support disabled.");
     sText += "<br />\n";
     sText += "</font></small>";
 #endif
