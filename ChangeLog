@@ -5,7 +5,7 @@ ChangeLog
 
 CVS HEAD
 
-- Conditional build for JACK port aliases support (JACK > 0.109.2).
+- Conditional build for JACK port aliases support (JACK >= 0.109.2).
 
 - Alternate icon sizes other than default 16x16, are now effective to
   the Connections widget (Setup/Dislay/Connections Window/Icon size).
