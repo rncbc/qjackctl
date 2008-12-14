@@ -1619,7 +1619,7 @@ bool qjackctlPatchbay::connectSelected (void)
 	connectSockets(pOSocket, pISocket);
 
 	// Making one list dirty will take care of the rest...
-	(m_pOSocketList->listView())->setDirty(true);
+	m_pPatchbayView->setDirty(true);
 
 	return true;
 }
@@ -1711,7 +1711,7 @@ bool qjackctlPatchbay::disconnectSelected (void)
 	disconnectSockets(pOSocket, pISocket);
 
 	// Making one list dirty will take care of the rest...
-	(m_pOSocketList->listView())->setDirty(true);
+	m_pPatchbayView->setDirty(true);
 
 	return true;
 }
@@ -1751,7 +1751,7 @@ bool qjackctlPatchbay::disconnectAll (void)
 	}
 
 	// Making one list dirty will take care of the rest...
-	(m_pOSocketList->listView())->setDirty(true);
+	m_pPatchbayView->setDirty(true);
 
 	return true;
 }
@@ -1961,6 +1961,9 @@ void qjackctlPatchbay::connectionsSnapshot (void)
 	rack.connectJackSnapshot(jackClient());
 	rack.connectAlsaSnapshot(alsaSeq());
 	loadRack(&rack);
+
+	// Set dirty flag.
+	m_pPatchbayView->setDirty(true);
 }
 
 

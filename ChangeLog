@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- New patchbay snapshot now raises the dirty flag and allows for the
+  immediate salavage of patchbay definition profile.
+
 - Conditional build for JACK port aliases support (JACK >= 0.109.2).
 
 - Alternate icon sizes other than default 16x16, are now effective to

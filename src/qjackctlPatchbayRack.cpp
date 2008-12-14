@@ -24,6 +24,8 @@
 // Aliases accessors.
 #include "qjackctlConnectAlias.h"
 
+#include <stdlib.h>
+
 
 //----------------------------------------------------------------------
 // class qjackctlPatchbaySnapshot -- Patchbay snapshot infrastructure.
