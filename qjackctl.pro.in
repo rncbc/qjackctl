@@ -63,5 +63,9 @@ TRANSLATIONS = \
 LIBS    += @ac_libs@
 INCPATH += @ac_incpath@
 
+OBJECTS_DIR = .obj
+MOC_DIR     = .moc
+UI_DIR      = .ui
+
 # XML/DOM support
 QT += xml

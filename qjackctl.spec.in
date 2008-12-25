@@ -3,7 +3,7 @@
 %define release 10
 %define prefix  @ac_prefix@
 
-Summary:	JACK Audio Connection Kit Qt GUI Interface.
+Summary:	JACK Audio Connection Kit Qt GUI Interface
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
