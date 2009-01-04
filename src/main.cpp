@@ -1,7 +1,7 @@
 // main.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -308,7 +308,6 @@ int main ( int argc, char **argv )
 		wflags |= Qt::Tool;
 	// Construct the main form, and show it to the world.
 	qjackctlMainForm w(0, wflags);
-//	app.setMainWidget(&w);
 	w.setup(&settings);
 	// If we have a systray icon, we'll skip this.
 	if (!settings.bSystemTray) {
@@ -320,7 +319,6 @@ int main ( int argc, char **argv )
 	app.setMainWidget(&w);
 
 	// Register the quit signal/slot.
-	// app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 	app.setQuitOnLastWindowClosed(false);
 
 	return app.exec();
