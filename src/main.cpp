@@ -300,6 +300,9 @@ int main ( int argc, char **argv )
 	Qt::WindowFlags wflags = Qt::Window
 #if QT_VERSION >= 0x040200
 		| Qt::CustomizeWindowHint
+#if QT_VERSION >= 0x040500
+		| Qt::WindowCloseButtonHint
+#endif
 #endif
 		| Qt::WindowTitleHint
 		| Qt::WindowSystemMenuHint
