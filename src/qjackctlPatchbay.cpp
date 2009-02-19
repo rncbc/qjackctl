@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -545,7 +545,7 @@ bool qjackctlSocketList::removeSocketItem (void)
 			"\"%2\"\n\nAre you sure?")
 			.arg(m_sSocketCaption)
 			.arg(pSocketItem->socketName()),
-			tr("Yes"), tr("No")) == 0) {
+			QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
 			delete pSocketItem;
 			bResult = true;
 			m_pListView->setDirty(true);
@@ -1738,7 +1738,7 @@ bool qjackctlPatchbay::disconnectAll (void)
 		tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 		tr("This will disconnect all sockets.\n\n"
 		"Are you sure?"),
-		tr("Yes"), tr("No")) > 0) {
+		QMessageBox::Yes | QMessageBox::No) == QMessageBox::No) {
 		return false;
 	}
 

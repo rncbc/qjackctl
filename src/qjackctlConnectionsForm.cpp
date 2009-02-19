@@ -1,7 +1,7 @@
 // qjackctlConnectionsForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -240,11 +240,13 @@ bool qjackctlConnectionsForm::queryClose (void)
 			tr("The preset aliases have been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
 			.arg(m_sPreset),
-			tr("Save"), tr("Discard"), tr("Cancel"))) {
-		case 0:     // Save...
+			QMessageBox::Save |
+			QMessageBox::Discard |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Save:
 			saveAliases();
 			// Fall thru....
-		case 1:     // Discard
+		case QMessageBox::Discard:
 			break;
 		default:    // Cancel.
 			bQueryClose = false;

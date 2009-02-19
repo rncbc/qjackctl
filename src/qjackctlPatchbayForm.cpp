@@ -1,7 +1,7 @@
 // qjackctlPatchbayForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -222,11 +222,13 @@ bool qjackctlPatchbayForm::queryClose (void)
 			tr("The patchbay definition has been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
 			.arg(m_sPatchbayName),
-			tr("Save"), tr("Discard"), tr("Cancel"))) {
-		case 0:     // Save...
+			QMessageBox::Save |
+			QMessageBox::Discard |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Save:
 			savePatchbay();
 			// Fall thru....
-		case 1:     // Discard
+		case QMessageBox::Discard:
 			break;
 		default:    // Cancel.
 			bQueryClose = false;
@@ -362,7 +364,7 @@ bool qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
 			tr("Error") + " - " QJACKCTL_SUBTITLE1,
 			tr("Could not load patchbay definition file: \n\n\"%1\"")
 			.arg(sFileName),
-			tr("Cancel"));
+			QMessageBox::Cancel);
 		// Reset/disable further trials.
 		m_sPatchbayPath.clear();
 		return false;
@@ -392,7 +394,7 @@ bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 			tr("Error") + " - " QJACKCTL_SUBTITLE1,
 			tr("Could not save patchbay definition file: \n\n\"%1\"")
 			.arg(sFileName),
-			tr("Cancel"));
+			QMessageBox::Cancel);
 		return false;
 	}
 	// Step 3: stabilize form...
@@ -437,11 +439,13 @@ void qjackctlPatchbayForm::newPatchbay (void)
 			tr("New Patchbay definition") + " - " QJACKCTL_SUBTITLE1,
 			tr("Create patchbay definition as a snapshot\n"
 			"of all actual client connections?"),
-			tr("Yes"), tr("No"), tr("Cancel"))) {
-		case 0:		// Yes.
+			QMessageBox::Yes |
+			QMessageBox::No |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Yes:
 			bSnapshot = true;
 			break;
-		case 1:		// No.
+		case QMessageBox::No:
 			bSnapshot = false;
 			break;
 		default:	// Cancel.

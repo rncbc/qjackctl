@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1756,7 +1756,7 @@ bool qjackctlConnect::disconnectAll (void)
 		tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 		tr("This will suspend sound processing\n"
 		"from all client applications.\n\nAre you sure?"),
-		tr("Yes"), tr("No")) > 0) {
+		QMessageBox::Yes | QMessageBox::No) == QMessageBox::No) {
 		return false;
 	}
 

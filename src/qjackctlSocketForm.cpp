@@ -1,7 +1,7 @@
 // qjackctlSocketForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -339,11 +339,13 @@ void qjackctlSocketForm::reject (void)
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Some settings have been changed.\n\n"
 			"Do you want to apply the changes?"),
-			tr("Apply"), tr("Discard"), tr("Cancel"))) {
-		case 0:     // Apply...
+			QMessageBox::Apply |
+			QMessageBox::Discard |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Apply:
 			accept();
 			return;
-		case 1:     // Discard
+		case QMessageBox::Discard:
 			break;
 		default:    // Cancel.
 			bReject = false;

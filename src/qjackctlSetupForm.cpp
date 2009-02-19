@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -777,17 +777,19 @@ void qjackctlSetupForm::changeCurrentPreset ( const QString& sPreset )
 			tr("Some settings have been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
 			.arg(m_sPreset),
-			tr("Save"), tr("Discard"), tr("Cancel"))) {
-		case 0: // Save...
+			QMessageBox::Save |
+			QMessageBox::Discard |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Save:
 			savePreset(m_sPreset);
 			m_iDirtySetup++;
 			resetPresets();
 			setComboBoxCurrentText(m_ui.PresetComboBox, sPreset);
 			m_iDirtySetup--;
-		case 1: // Discard...
+		case QMessageBox::Discard:
 			m_iDirtySettings = 0;
 			break;
-		default:// Cancel...
+		default: // Cancel...
 			m_iDirtySetup++;
 			resetPresets();
 			setComboBoxCurrentText(m_ui.PresetComboBox, m_sPreset);
@@ -827,7 +829,7 @@ void qjackctlSetupForm::deleteCurrentPreset (void)
 		tr("Delete preset:\n\n"
 		"\"%1\"\n\nAre you sure?")
 		.arg(sPreset),
-		tr("OK"), tr("Cancel")) > 0)
+		QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
 		return;
 
 	if (deletePreset(sPreset)) {
@@ -1781,11 +1783,13 @@ void qjackctlSetupForm::reject (void)
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Some settings have been changed.\n\n"
 			"Do you want to apply the changes?"),
-			tr("Apply"), tr("Discard"), tr("Cancel"))) {
-		case 0:     // Apply...
+			QMessageBox::Apply |
+			QMessageBox::Discard |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Apply:
 			accept();
 			return;
-		case 1:     // Discard
+		case QMessageBox::Discard:
 			break;
 		default:    // Cancel.
 			bReject = false;

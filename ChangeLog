@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Converted obsolete QMessageBox forms to standard buttons.
+
 - New patchbay snapshot now raises the dirty flag and allows for the
   immediate salavage of patchbay definition profile.
 

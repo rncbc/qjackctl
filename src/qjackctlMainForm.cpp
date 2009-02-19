@@ -537,7 +537,7 @@ bool qjackctlMainForm::queryClose (void)
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("JACK is currently running.\n\n"
 			"Do you want to terminate the JACK audio server?"),
-			tr("Terminate"), tr("Cancel")) == 0);
+			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
 	}
 
 	// Try to save current aliases default settings.
@@ -676,17 +676,13 @@ void qjackctlMainForm::startJack (void)
 
 	// Is the server process instance still here?
 	if (m_pJack) {
-		switch (QMessageBox::warning(this,
+		if (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Could not start JACK.\n\n"
 			"Maybe JACK audio server is already started."),
-			tr("Stop"), tr("Kill"), tr("Cancel"))) {
-		case 0:
+			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok) {
 			m_pJack->terminate();
-			break;
-		case 1:
 			m_pJack->kill();
-			break;
 		}
 		return;
 	}
@@ -967,7 +963,7 @@ void qjackctlMainForm::stopJack (void)
 			tr("Some client audio applications\n"
 			"are still active and connected.\n\n"
 			"Do you want to stop the JACK audio server?"),
-			tr("Stop"), tr("Cancel")) > 0) {
+			QMessageBox::Yes | QMessageBox::No) == QMessageBox::No) {
 		return;
 	}
 	
@@ -1233,7 +1229,7 @@ void qjackctlMainForm::appendMessagesError( const QString& s )
 	appendMessagesColor(s.simplified(), "#ff0000");
 
 	QMessageBox::critical(this,
-		tr("Error") + " - " QJACKCTL_SUBTITLE1, s, tr("Cancel"));
+		tr("Error") + " - " QJACKCTL_SUBTITLE1, s, QMessageBox::Cancel);
 }
 
 
@@ -2007,7 +2003,7 @@ void qjackctlMainForm::queryDisconnect (
 			"Do you want to remove the patchbay connection?")
 			.arg(pCable->outputSocket()->name())
 			.arg(pCable->inputSocket()->name()),
-			tr("Remove"), tr("Ignore")) == 0) {
+			QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
 			m_pPatchbayRack->removeCable(pCable);
 			if (m_pPatchbayForm
 				&& isActivePatchbay(m_pPatchbayForm->patchbayPath()))
@@ -2992,7 +2988,7 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 		QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Server settings will be only effective after\n"
-			"restarting the JACK audio server."), tr("OK"));
+			"restarting the JACK audio server."));
 	}   // Otherwise, it will be just as convenient to update status...
 	else updateTitleStatus();
 }
@@ -3004,7 +3000,7 @@ void qjackctlMainForm::showDirtySetupWarning (void)
 	QMessageBox::information(this,
 		tr("Information") + " - " QJACKCTL_SUBTITLE1,
 		tr("Some settings will be only effective\n"
-		"the next time you start this program."), tr("OK"));
+		"the next time you start this program."));
 }
 
 
