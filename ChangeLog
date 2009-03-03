@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- Tentative support for netjack (slave) by adding the "net" driver to
+  the existing backend driver options on the Setup/Settings section.
+  (EXPERIMENTAL)
+ 
 - Converted obsolete QMessageBox forms to standard buttons.
 
 - New patchbay snapshot now raises the dirty flag and allows for the
