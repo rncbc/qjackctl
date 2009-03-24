@@ -76,14 +76,12 @@ qjackctl is run.
 Bugs
 ----
 
-Probably plenty still, but QjackCtl it's now considered on beta stage
-already. It has been locally tested since JACK release 0.98.0, on SuSE 9.1,
-Mandrake 10.0 and Fedora Core 1, with custom 2.4 kernels with low-latency,
-preemptible and capabilities enabling patches. As for 2.6 kernels, the
-capabilities patch may also apply but the emergence of the Realtime Linux
-Security Module (LSM) and Ingo Molnar's Realtime Preemption kernel patch
-it's being now recommended for your taking benefit of the realtime and
-low-latency audio pleasure JACK can give.
+Probably plenty still, QjackCtl maybe considered on beta stage already.
+It has been locally tested since JACK release 0.98.0, with custom 2.4
+kernels with low-latency, preemptible and capabilities enabling patches.
+As for 2.6 kernels, the emergence of Ingo Molnar's Realtime Preemption
+kernel patch it's being now recommended for your taking benefit of the
+realtime and low-latency audio pleasure JACK can give.
 
 
 Support
@@ -112,27 +110,27 @@ Thanks a lot Fernando!
 Here are some people who helped this project in one way or another,
 and in fair and strict alphabetic order:
 
-    Alexandre Prokoudine                Kasper Souren
-    Andreas Persson                     Kjetil Matheussen
-    Austin Acton                        Ken Ellinwood
-    Ben Powers                          Lawrie Abbott
-    Chris Cannam                        Lee Revell
-    Dan Nigrin                          Lucas Brasilino
-	Dave Moore                          Marc-Olivier Barre
-    Dave Phillips                       Mark Knecht
-    Dirk Jagdmann                       Matthias Nagorni
-    Dominic Sacre                       Melanie
-    Fernando Pablo Lopez-Lezcano        Nedko Ardaunov
-    Filipe Tomas                        Orm Finnendahl
-    Florian Schmidt                     Paul Davis
-    Fons Adriaensen                     Robert Jonsson
-    Geoff Beasley                       Sampo Savolainen
-    Jack O'Quin                         Stephane Letz
-    Jacob Meuser                        Steve Harris
-    Jesse Chappell                      Taybin Rutkin
-    Joachim Deguara                     Wilfried Huss
+    Alexandre Prokoudine                Karsten Wiese
+    Andreas Persson                     Kasper Souren
+    Austin Acton                        Kjetil Matheussen
+    Ben Powers                          Ken Ellinwood
+    Chris Cannam                        Lawrie Abbott
+    Dan Nigrin                          Lee Revell
+	Dave Moore                          Lucas Brasilino
+    Dave Phillips                       Marc-Olivier Barre
+    Dirk Jagdmann                       Mark Knecht
+    Dominic Sacre                       Matthias Nagorni
+    Fernando Pablo Lopez-Lezcano        Melanie
+    Filipe Tomas                        Nedko Ardaunov
+    Florian Schmidt                     Orm Finnendahl
+    Fons Adriaensen                     Paul Davis
+    Geoff Beasley                       Robert Jonsson
+    Jack O'Quin                         Sampo Savolainen
+    Jacob Meuser                        Stephane Letz
+    Jesse Chappell                      Steve Harris
+    Joachim Deguara                     Taybin Rutkin
+	John Schneiderman                   Wilfried Huss
     Jussi Laako                         Wolfgang Woehl
-    Karsten Wiese
 
 A special mention should go to the translators of QjackCtl (see TRANSLATORS).
 

@@ -5,6 +5,12 @@ ChangeLog
 
 CVS HEAD
 
+- New command line option (-a, --active-patchbay=[path]) to specify
+  and activate a given patchbay definition file (a simple patch sent
+  by John Schneiderman, thanks).
+
+- Added one significant digit to DSP Load percentage status display.
+
 - Tentative support for netjack (slave) by adding the "net" driver to
   the existing backend driver options on the Setup/Settings section.
   (EXPERIMENTAL)

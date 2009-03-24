@@ -2605,9 +2605,9 @@ void qjackctlMainForm::refreshStatus (void)
 			float fDspLoad = jack_cpu_load(m_pJackClient);
 			if (m_pSystemTray)
 				m_pSystemTray->setToolTip(
-					tr("%1 (%2%)").arg(windowTitle()).arg(fDspLoad, 0, 'g', 2));
+					tr("%1 (%2%)").arg(windowTitle()).arg(fDspLoad, 0, 'g', 3));
 			updateStatusItem(STATUS_DSP_LOAD,
-				tr("%1 %").arg(fDspLoad, 0, 'g', 2));
+				tr("%1 %").arg(fDspLoad, 0, 'g', 3));
 			updateStatusItem(STATUS_SAMPLE_RATE,
 				tr("%1 Hz").arg(jack_get_sample_rate(m_pJackClient)));
 			updateStatusItem(STATUS_BUFFER_SIZE,

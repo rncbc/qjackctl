@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -326,7 +326,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	m_settings.endGroup();
 
 #ifdef CONFIG_JACK_MIDI
-	if (!preset.sMidiDriver.isEmpty() && 
+	if (!preset.sMidiDriver.isEmpty() &&
 		preset.sMidiDriver != "raw" &&
 		preset.sMidiDriver != "seq")
 		preset.sMidiDriver.clear();
@@ -418,6 +418,8 @@ void qjackctlSetup::print_usage ( const char *arg0 )
 		QObject::tr("Start JACK audio server immediately") + sEol;
 	out << "  -p, --preset=[label]" + sEot +
 		QObject::tr("Set default settings preset name") + sEol;
+	out << "  -a, --active-patchbay=[path]" + sEot +
+		QObject::tr("Set active patchbay definition file") + sEol;
 	out << "  -h, --help" + sEot +
 		QObject::tr("Show help about command line options") + sEol;
 	out << "  -v, --version" + sEot +
@@ -460,6 +462,16 @@ bool qjackctlSetup::parse_args ( int argc, char **argv )
 				return false;
 			}
 			sDefPreset = sVal;
+			if (iEqual < 0)
+				i++;
+		}
+		else if (sArg == "-a" || sArg == "--active-patchbay") {
+			if (sVal.isNull()) {
+				out << QObject::tr("Option -a requires an argument (path).") + sEol;
+				return false;
+			}
+			bActivePatchbay = true;
+			sActivePatchbayPath = sVal;
 			if (iEqual < 0)
 				i++;
 		}
