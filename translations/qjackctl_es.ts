@@ -28,7 +28,7 @@
         <translation>Mostrar información sobre esta versión</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="461"/>
+        <location filename="../src/qjackctlSetup.cpp" line="462"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>La opción -p nececita un argumento (nombre de un preset).</translation>
     </message>
@@ -48,12 +48,12 @@
         <translation>Establece el preset predeterminado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="470"/>
+        <location filename="../src/qjackctlSetup.cpp" line="471"/>
         <source>Option -a requires an argument (path).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="483"/>
+        <location filename="../src/qjackctlSetup.cpp" line="484"/>
         <source>Qt: %1
 </source>
         <translation>Qt: %1

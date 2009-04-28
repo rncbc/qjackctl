@@ -48,7 +48,7 @@
         <translation>Montrer les informations de version</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="461"/>
+        <location filename="../src/qjackctlSetup.cpp" line="462"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
@@ -68,12 +68,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="470"/>
+        <location filename="../src/qjackctlSetup.cpp" line="471"/>
         <source>Option -a requires an argument (path).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="483"/>
+        <location filename="../src/qjackctlSetup.cpp" line="484"/>
         <source>Qt: %1
 </source>
         <translation>Qt : %1
