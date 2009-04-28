@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.4.9, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.4.10, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -49,7 +49,7 @@ AC_ARG_ENABLE(alsa_seq,
 ac_with_paths="/usr /usr/local"
 
 # Some a-la-debian alternatives...
-for X in /usr/lib /usr/share; do
+for X in /usr/lib /usr/lib64 /usr/share; do
   for Y in qt qt4; do
     if test -d $X/$Y/bin; then
       ac_with_paths="$ac_with_paths $X/$Y"

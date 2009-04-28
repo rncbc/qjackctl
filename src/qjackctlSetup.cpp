@@ -404,7 +404,7 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
 //
 
 // Help about command line options.
-void qjackctlSetup::print_usage ( const char *arg0 )
+void qjackctlSetup::print_usage ( const QString& arg0 )
 {
 	QTextStream out(stderr);
 	const QString sEot = "\n\t";
@@ -428,30 +428,31 @@ void qjackctlSetup::print_usage ( const char *arg0 )
 
 
 // Parse command line arguments into m_settings.
-bool qjackctlSetup::parse_args ( int argc, char **argv )
+bool qjackctlSetup::parse_args ( const QStringList& args )
 {
 	QTextStream out(stderr);
 	const QString sEol = "\n\n";
 	int iCmdArgs = 0;
+	int argc = args.count();
 
 	for (int i = 1; i < argc; i++) {
 
 		if (iCmdArgs > 0) {
 			sCmdLine += ' ';
-			sCmdLine += argv[i];
+			sCmdLine += args.at(i);
 			iCmdArgs++;
 			continue;
 		}
 
-		QString sArg = argv[i];
+		QString sArg = args.at(i);
 		QString sVal = QString::null;
 		int iEqual = sArg.indexOf('=');
 		if (iEqual >= 0) {
 			sVal = sArg.right(sArg.length() - iEqual - 1);
 			sArg = sArg.left(iEqual);
 		}
-		else if (i < argc)
-			sVal = argv[i + 1];
+		else if (i < argc - 1)
+			sVal = args.at(i + 1);
 
 		if (sArg == "-s" || sArg == "--start") {
 			bStartJack = true;
@@ -476,7 +477,7 @@ bool qjackctlSetup::parse_args ( int argc, char **argv )
 				i++;
 		}
 		else if (sArg == "-h" || sArg == "--help") {
-			print_usage(argv[0]);
+			print_usage(args.at(0));
 			return false;
 		}
 		else if (sArg == "-v" || sArg == "--version") {
