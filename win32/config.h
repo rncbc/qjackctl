@@ -16,4 +16,6 @@
 
 #undef  CONFIG_JACK_MIDI
 #undef  CONFIG_ALSA_SEQ
+#undef  CONFIG_DBUS
+
 #undef  CONFIG_ROUND

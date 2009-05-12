@@ -1,7 +1,7 @@
 // qjackctlAboutForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -94,6 +94,14 @@ qjackctlAboutForm::qjackctlAboutForm (
 #if !defined(WIN32)
     sText += "<small><font color=\"red\">";
     sText += tr("ALSA/MIDI sequencer support disabled.");
+    sText += "<br />\n";
+    sText += "</font></small>";
+#endif
+#endif
+#ifndef CONFIG_DBUS
+#if !defined(WIN32)
+    sText += "<small><font color=\"red\">";
+    sText += tr("D-Bus interface support disabled.");
     sText += "<br />\n";
     sText += "</font></small>";
 #endif

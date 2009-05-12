@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.4.10, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.4.11, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -44,6 +44,18 @@ AC_ARG_ENABLE(alsa_seq,
   AC_HELP_STRING([--enable-alsa-seq], [enable ALSA/MIDI sequencer support (default=yes)]),
   [ac_alsa_seq="$enableval"],
   [ac_alsa_seq="yes"])
+
+# Enable D-Bus argument option.
+AC_ARG_ENABLE(dbus,
+  AC_HELP_STRING([--enable-dbus], [enable D-Bus interface (default=yes)]),
+  [ac_dbus="$enableval"],
+  [ac_dbus="yes"])
+
+if test "x$ac_dbus" = "xyes"; then
+   AC_DEFINE(CONFIG_DBUS, 1, [Define if D-Bus interface is enabled.])
+   ac_qdbus="qdbus"
+fi
+AC_SUBST(ac_qdbus)
 
 # Standard installation base dirs.
 ac_with_paths="/usr /usr/local"
@@ -318,6 +330,7 @@ echo "  JACK Port aliases support  . . . . . . . . . . . .: $ac_jack_port_aliase
 echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
 echo "  ALSA MIDI Sequencer support  . . . . . . . . . . .: $ac_alsa_seq"
 echo "  System tray icon support . . . . . . . . . . . . .: $ac_system_tray"
+echo "  D-Bus interface support  . . . . . . . . . . . . .: $ac_dbus"
 echo
 echo "  Install prefix . . . . . . . . . . . . . . . . . .: $ac_prefix"
 echo

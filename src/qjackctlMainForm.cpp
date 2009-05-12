@@ -51,6 +51,10 @@
 #include <QCustomEvent>
 #include <QCloseEvent>
 
+#ifdef CONFIG_DBUS
+#include <QDBusConnection>
+#endif
+
 #ifdef CONFIG_JACK_STATISTICS
 #include <jack/statistics.h>
 #endif
@@ -480,6 +484,18 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		}
 	}
 #endif
+#ifdef CONFIG_DBUS
+	// Register D-Bus service...
+	if (m_pSetup->bDBusEnabled) {
+	//	QDBusConnection dbus = QDBusConnection::sessionBus();
+		QDBusConnection dbus = QDBusConnection::systemBus();
+		dbus.connect("", "", "org.rncbc.qjackctl", "start", 
+			this, SLOT(startJack()));
+		dbus.connect("", "", "org.rncbc.qjackctl", "stop", 
+			this, SLOT(stopJack()));
+	}
+#endif
+
 
 	// Load patchbay form recent paths...
 	if (m_pPatchbayForm) {
@@ -2378,6 +2394,7 @@ void qjackctlMainForm::showSetupForm (void)
 		int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
 		bool    bOldBezierLines         = m_pSetup->bBezierLines;
 		bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
+		bool    bOldDBusEnabled         = m_pSetup->bDBusEnabled;
 		bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
 		bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
 		bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
@@ -2449,6 +2466,8 @@ void qjackctlMainForm::showSetupForm (void)
 				(!bOldDelayedSetup   &&  m_pSetup->bDelayedSetup)   ||
 				( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
 				(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled) ||
+				( bOldDBusEnabled    && !m_pSetup->bDBusEnabled)    ||
+				(!bOldDBusEnabled    &&  m_pSetup->bDBusEnabled)    ||
 				(iOldBaseFontSize    !=  m_pSetup->iBaseFontSize))
 				showDirtySetupWarning();
 			// If server is currently running, warn user...

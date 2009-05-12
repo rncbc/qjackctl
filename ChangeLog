@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- A couple of primitive D-Bus interface slots have been introduced,
+  giving the option to start/stop the jackd server from the system
+  bus eg. via dbus-send --system / org.rncbc.qjackctl.start (stop), 
+  (a nice addition supplied by Robin Gareus, thanks).
+
 - New command line option (-a, --active-patchbay=[path]) to specify
   and activate a given patchbay definition file (a simple patch sent
   by John Schneiderman, thanks).

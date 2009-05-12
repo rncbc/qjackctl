@@ -152,6 +152,7 @@ public:
 	bool    bServerConfigTemp;
 	bool    bQueryShutdown;
 	bool    bAlsaSeqEnabled;
+	bool    bDBusEnabled;
 	bool    bAliasesEnabled;
 	bool    bAliasesEditing;
 	bool    bLeftButtons;

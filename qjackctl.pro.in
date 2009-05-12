@@ -51,7 +51,7 @@ FORMS    = src/qjackctlAboutForm.ui \
 RESOURCES += icons/qjackctl.qrc
 
 TEMPLATE = app
-CONFIG  += qt thread warn_on @ac_debug@
+CONFIG  += qt thread warn_on @ac_debug@ @ac_qdbus@
 LANGUAGE = C++
 
 TRANSLATIONS = \
