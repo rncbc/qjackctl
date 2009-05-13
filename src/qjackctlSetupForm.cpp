@@ -35,13 +35,18 @@
 
 #include <QButtonGroup>
 
-
 #ifdef CONFIG_COREAUDIO
 #include <iostream>
 #include <cstring>
 #include <map>
 #include <CoreAudio/CoreAudio.h>
 #include <CoreFoundation/CFString.h>
+#endif
+
+#ifdef CONFIG_PORTAUDIO
+#include <iostream>
+#include <cstring>
+#include <portaudio.h>
 #endif
 
 #ifdef CONFIG_ALSA_SEQ
@@ -899,14 +904,14 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 		break;
 	}
 
-	bEnabled = (bInEnabled && (bAlsa || bSun || bOss));
+	bEnabled = (bInEnabled && (bAlsa || bSun || bOss || bPortaudio));
 	m_ui.InDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.InDeviceComboBox->setEnabled(bEnabled);
 	m_ui.InDeviceToolButton->setEnabled(bEnabled);
 	if (!bEnabled)
 		setComboBoxCurrentText(m_ui.InDeviceComboBox, m_pSetup->sDefPresetName);
 
-	bEnabled = (bOutEnabled && (bAlsa || bSun || bOss));
+	bEnabled = (bOutEnabled && (bAlsa || bSun || bOss || bPortaudio));
 	m_ui.OutDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.OutDeviceComboBox->setEnabled(bEnabled);
 	m_ui.OutDeviceToolButton->setEnabled(bEnabled);
@@ -972,14 +977,14 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 
 	m_ui.IgnoreHWCheckBox->setEnabled(bSun || bOss);
 
-#ifdef CONFIG_COREAUDIO
-	m_ui.PriorityTextLabel->setEnabled(false);
-	m_ui.PrioritySpinBox->setEnabled(false);
-#else
-	bool bPriorityEnabled = m_ui.RealtimeCheckBox->isChecked() && !bCoreaudio;
-	m_ui.PriorityTextLabel->setEnabled(bPriorityEnabled);
-	m_ui.PrioritySpinBox->setEnabled(bPriorityEnabled);
-#endif
+	if (bCoreaudio || bPortaudio) {
+		m_ui.PriorityTextLabel->setEnabled(false);
+		m_ui.PrioritySpinBox->setEnabled(false);
+	} else {
+		bool bPriorityEnabled = m_ui.RealtimeCheckBox->isChecked();
+		m_ui.PriorityTextLabel->setEnabled(bPriorityEnabled);
+		m_ui.PrioritySpinBox->setEnabled(bPriorityEnabled);
+	}
 
 	m_ui.PeriodsTextLabel->setEnabled(bAlsa || bSun || bOss || bFreebob || bFirewire);
 	m_ui.PeriodsSpinBox->setEnabled(bAlsa || bSun || bOss || bFreebob || bFirewire);
@@ -1005,10 +1010,10 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
 	}
 
-	bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire);
+	bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire || bPortaudio);
 	m_ui.InterfaceTextLabel->setEnabled(bInterface);
 	m_ui.InterfaceComboBox->setEnabled(bInterface);
-	m_ui.InterfaceToolButton->setEnabled(bEnabled || bCoreaudio);
+	m_ui.InterfaceToolButton->setEnabled(bEnabled || bCoreaudio || bPortaudio);
 	if (!bInterface)
 		setComboBoxCurrentText(m_ui.InterfaceComboBox, m_pSetup->sDefPresetName);
 
@@ -1191,7 +1196,10 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	bool bOss       = (sDriver == "oss");
 #ifdef CONFIG_COREAUDIO
 	bool bCoreaudio = (sDriver == "coreaudio");
-	std::map<QString,AudioDeviceID> coreaudioIdMap;
+	std::map<QString, AudioDeviceID> coreaudioIdMap;
+#endif
+#ifdef CONFIG_PORTAUDIO
+	bool bPortaudio = (sDriver == "portaudio");
 #endif
 	QString sCurName = pLineEdit->text();
 	QString sName, sSubName;
@@ -1314,7 +1322,7 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 #ifdef CONFIG_COREAUDIO
 	else if (bCoreaudio) {
 		// Find out how many Core Audio devices are there, if any...
-		// (code snippet gently "borrowed" from St?hane Letz jackdmp;)
+		// (code snippet gently "borrowed" from Stephane Letz jackdmp;)
 		OSStatus err;
 		Boolean isWritable;
 		UInt32 outSize = sizeof(isWritable);
@@ -1367,6 +1375,29 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 		}
 	}
 #endif 	// CONFIG_COREAUDIO
+#ifdef CONFIG_PORTAUDIO
+	else if (bPortaudio) {
+		if (Pa_Initialize() == paNoError) {
+			// Fill hostapi info...
+            PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
+            QString *pHostName = new QString[iNumHostApi];
+            for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
+                pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
+			// Fill device info...
+            PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
+            PaDeviceInfo **ppDeviceInfo = new PaDeviceInfo * [iNumDevice];
+            for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
+            	ppDeviceInfo[i] = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
+				sText = pHostName[ppDeviceInfo[i]->hostApi] + "::" + QString(ppDeviceInfo[i]->name);
+				pAction = menu.addAction(sText);
+				pAction->setCheckable(true);
+				pAction->setChecked(sCurName == sText);
+				++iCards;
+			}
+			Pa_Terminate();
+		}
+	}
+#endif  // CONFIG_PORTAUDIO
 
 	// There's always the default device...
 	if (iCards > 0)

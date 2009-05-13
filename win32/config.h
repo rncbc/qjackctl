@@ -1,6 +1,6 @@
 
 #define PACKAGE_NAME    "QjackCtl"
-#define PACKAGE_VERSION "0.3.4.10"
+#define PACKAGE_VERSION "0.3.4.12"
 
 #define CONFIG_PREFIX   "."
 #define CONFIG_DEBUG    1
@@ -14,6 +14,7 @@
 #define CONFIG_JACK_MAX_DELAY
 #define CONFIG_JACK_PORT_ALIASES
 
+#undef  CONFIG_PORTAUDIO
 #undef  CONFIG_JACK_MIDI
 #undef  CONFIG_ALSA_SEQ
 #undef  CONFIG_DBUS

@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.4.11, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.4.12, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -45,6 +45,12 @@ AC_ARG_ENABLE(alsa_seq,
   [ac_alsa_seq="$enableval"],
   [ac_alsa_seq="yes"])
 
+# Enable PortAudio argument option.
+AC_ARG_ENABLE(portaudio,
+  AC_HELP_STRING([--enable-portaudio], [enable PortAudio interface (default=yes)]),
+  [ac_portaudio="$enableval"],
+  [ac_portaudio="yes"])
+
 # Enable D-Bus argument option.
 AC_ARG_ENABLE(dbus,
   AC_HELP_STRING([--enable-dbus], [enable D-Bus interface (default=yes)]),
@@ -82,6 +88,11 @@ AC_ARG_WITH(jack,
 # Set for alternate ALSA installation dir.
 AC_ARG_WITH(alsa,
   AC_HELP_STRING([--with-alsa=PATH], [use alternate ALSA install path]),
+  [ac_with_paths="$ac_with_paths $withval"])
+
+# Set for alternate PortAudio installation dir.
+AC_ARG_WITH(portaudio,
+  AC_HELP_STRING([--with-portaudio=PATH], [use alternate PortAudio install path]),
   [ac_with_paths="$ac_with_paths $withval"])
 
 # Checks for programs.
@@ -207,6 +218,16 @@ if test "x$ac_alsa_seq" = "xyes"; then
    fi
 fi
 
+if test "x$ac_portaudio" = "xyes"; then
+   AC_CHECK_LIB(portaudio, main, [ac_portaudio_lib="yes"], [ac_portaudio_lib="no"])
+   if test "x$ac_portaudio_lib" = "xno"; then
+      AC_MSG_WARN([*** PortAudio library not found.])
+      ac_potrtaudio="no"
+   else
+      ac_libs="$ac_libs -lportaudio"
+   fi
+fi
+
 AC_SUBST(ac_libs)
 AC_SUBST(ac_incpath)
 
@@ -244,12 +265,25 @@ fi
 # for ALSA/MIDI sequencer support.
 if test "x$ac_alsa_seq" = "xyes"; then
    AC_CHECK_HEADER(alsa/asoundlib.h, [ac_alsa_h="yes"], [ac_alsa_h="no"])
-   if test "x$ac_alsa_h" = "xno"; then
-      AC_MSG_ERROR([ALSA headers not found.])
+   if test "x$ac_alsa_h" = "xyes"; then
+      AC_DEFINE(CONFIG_ALSA_SEQ, 1, [Define if ALSA/MIDI sequencer support is enabled.])
+   else
+      AC_MSG_WARN([*** ALSA headers not found.])
+      AC_MSG_WARN([*** ALSA/MIDI sequencer support will be disabled.])
+      ac_alsa_seq="no"
    fi
-   AC_DEFINE(CONFIG_ALSA_SEQ, 1, [Define if ALSA/MIDI sequencer support is enabled.])
-else
-   AC_MSG_WARN([*** ALSA/MIDI sequencer support will be disabled.])
+fi
+
+# Check for PortAudio headers and library support.
+if test "x$ac_portaudio" = "xyes"; then
+   AC_CHECK_HEADER(portaudio.h, [ac_portaudio_h="yes"], [ac_portaudio_h="no"])
+   if test "x$ac_portaudio_h" = "xyes"; then
+      AC_DEFINE(CONFIG_PORTAUDIO, 1, [Define if PortAudio interface is enabled.])
+   else
+      AC_MSG_WARN([*** PortAudio headers not found.])
+      AC_MSG_WARN([*** PortAudio interface support will be disabled.])
+      ac_portaudio="no"
+   fi
 fi
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -331,6 +365,8 @@ echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
 echo "  ALSA MIDI Sequencer support  . . . . . . . . . . .: $ac_alsa_seq"
 echo "  System tray icon support . . . . . . . . . . . . .: $ac_system_tray"
 echo "  D-Bus interface support  . . . . . . . . . . . . .: $ac_dbus"
+echo "  PortAudio interface support  . . . . . . . . . . .: $ac_portaudio"
+echo "  CoreAudio interface support  . . . . . . . . . . .: $ac_coreaudio"
 echo
 echo "  Install prefix . . . . . . . . . . . . . . . . . .: $ac_prefix"
 echo
