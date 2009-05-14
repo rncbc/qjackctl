@@ -10,7 +10,7 @@ CVS HEAD
 
 - A couple of primitive D-Bus interface slots have been introduced,
   giving the option to start/stop the jackd server from the system
-  bus eg. via dbus-send --system / org.rncbc.qjackctl.start (stop), 
+  bus eg. via dbus-send --system / org.rncbc.qjackctl.start (.stop), 
   (a nice addition supplied by Robin Gareus, thanks).
 
 - New command line option (-a, --active-patchbay=[path]) to specify
@@ -26,7 +26,7 @@ CVS HEAD
 - Converted obsolete QMessageBox forms to standard buttons.
 
 - New patchbay snapshot now raises the dirty flag and allows for the
-  immediate salavage of patchbay definition profile.
+  immediate salvage of patchbay definition profile.
 
 - Conditional build for JACK port aliases support (JACK >= 0.109.2).
 

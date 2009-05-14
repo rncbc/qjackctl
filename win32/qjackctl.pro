@@ -61,7 +61,7 @@ win32 {
 	LIBS    += -LC:\usr\local\lib
 }
 
-LIBS += -ljackmp
+LIBS += -ljackmp -lportaudio
 
 TRANSLATIONS = \
     ../translations/qjackctl_de.ts \
