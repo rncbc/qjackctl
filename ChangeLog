@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Probable fix on the audio connections with regard to client/port
+  (re)name changes (an ancient bug reported by Fons Adriaensen).
+
 - Portaudio device selector is now available (after a patch handed
   by Torben Hohn and Stephane Letz).
 

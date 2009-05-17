@@ -228,7 +228,7 @@ int qjackctlJackClientList::updateClientPorts (void)
 				QString sPortName   = sClientPort.right(sClientPort.length() - iColon - 1);
 				pClient = static_cast<qjackctlJackClient *> (findClient(sClientName));
 				if (pClient)
-					pPort = pClient->findJackPort(pJackPort);
+					pPort = static_cast<qjackctlJackPort *> (pClient->findPort(sPortName));
 				if (pClient == 0) {
 					pClient = new qjackctlJackClient(this, sClientName);
 					iDirtyCount++;
