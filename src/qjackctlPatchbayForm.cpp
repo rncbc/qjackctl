@@ -374,7 +374,7 @@ bool qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
 
 	// Step 3: stabilize form...
 	m_sPatchbayPath = sFileName;
-	m_sPatchbayName = QFileInfo(sFileName).baseName();
+	m_sPatchbayName = QFileInfo(sFileName).completeBaseName();
 //	updateRecentPatchbays();
 
 	return true;
@@ -399,7 +399,7 @@ bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 	}
 	// Step 3: stabilize form...
 	m_sPatchbayPath = sFileName;
-	m_sPatchbayName = QFileInfo(sFileName).baseName();
+	m_sPatchbayName = QFileInfo(sFileName).completeBaseName();
 //	updateRecentPatchbays();
 
 	// Step 4: notify main form if applicable ...
@@ -593,7 +593,7 @@ void qjackctlPatchbayForm::updateRecentPatchbays (void)
 	QStringListIterator iter(m_recentPatchbays);
 	while (iter.hasNext()) {
 		const QString& sPatchbayPath = iter.next();
-		QString sText = QFileInfo(sPatchbayPath).baseName();
+		QString sText = QFileInfo(sPatchbayPath).completeBaseName();
 		if (pMainForm && pMainForm->isActivePatchbay(sPatchbayPath))
 			sText += " [" + tr("active") + "]";
 		m_ui.PatchbayComboBox->addItem(icon, sText);
