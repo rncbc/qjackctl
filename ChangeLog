@@ -5,6 +5,11 @@ ChangeLog
 
 CVS HEAD
 
+- Automatic crash-dump reports, debugger stack-traces (gdb), back-
+  traces, whatever, are being introduced as a brand new configure
+  option (--enable-stacktrace) and default enabled on debug build
+  targets (--enable-debug).
+
 - Probable fix on the audio connections with regard to client/port
   (re)name changes (an ancient bug reported by Fons Adriaensen).
 
