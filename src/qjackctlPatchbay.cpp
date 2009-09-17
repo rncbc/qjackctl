@@ -1292,7 +1292,7 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 			tr("Exclusive"), pSocketList, SLOT(exclusiveSocketItem()));
 		pAction->setCheckable(true);
 		pAction->setChecked(bEnabled && pSocketItem->isExclusive());
-		pAction->setEnabled(bEnabled /* && (pSocketItem->connects().count() < 2) */);
+		pAction->setEnabled(bEnabled && (pSocketItem->connects().count() < 2));
 		// Construct the forwarding menu,
 		// overriding the last one, if any...
 		QMenu *pForwardMenu = menu.addMenu(tr("Forward"));

@@ -5,6 +5,9 @@ ChangeLog
 
 CVS HEAD
 
+- Allow only one single patchbay connection to or from an exclusive
+  socket (mitigating bug #2859119).
+
 - Automatic crash-dump reports, debugger stack-traces (gdb), back-
   traces, whatever, are being introduced as a brand new configure
   option (--enable-stacktrace) and default enabled on debug build

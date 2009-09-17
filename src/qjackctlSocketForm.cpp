@@ -201,7 +201,7 @@ void qjackctlSocketForm::setConnectCount ( int iConnectCount )
 			break;
 		}
 	}
-//	m_ui.ExclusiveCheckBox->setEnabled(iConnectCount < 2);
+	m_ui.ExclusiveCheckBox->setEnabled(iConnectCount < 2);
 
 #ifndef CONFIG_JACK_MIDI
 	m_ui.MidiRadioButton->setEnabled(false);
