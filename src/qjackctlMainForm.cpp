@@ -51,6 +51,16 @@
 #include <QCustomEvent>
 #include <QCloseEvent>
 
+#if QT_VERSION < 0x040500
+namespace Qt {
+const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
+#if QT_VERSION < 0x040200
+const WindowFlags CustomizeWindowHint   = WindowFlags(0x02000000);
+#endif
+}
+#endif
+
+
 #ifdef CONFIG_DBUS
 #include <QDBusConnection>
 #endif
@@ -102,16 +112,6 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #define QJACKCTL_BUFF_EVENT     QEvent::Type(QEvent::User + 3)
 #define QJACKCTL_SHUT_EVENT     QEvent::Type(QEvent::User + 4)
 #define QJACKCTL_EXIT_EVENT     QEvent::Type(QEvent::User + 5)
-
-
-#if QT_VERSION < 0x040500
-namespace Qt {
-	enum { WindowCloseButtonHint = 0x08000000 };
-#if QT_VERSION < 0x040200
-	enum { CustomizeWindowHint   = 0x02000000 };
-#endif
-}
-#endif
 
 
 //----------------------------------------------------------------------------
