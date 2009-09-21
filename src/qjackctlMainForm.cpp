@@ -104,6 +104,16 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #define QJACKCTL_EXIT_EVENT     QEvent::Type(QEvent::User + 5)
 
 
+#if QT_VERSION < 0x040500
+namespace Qt {
+	enum { WindowCloseButtonHint = 0x08000000 };
+#if QT_VERSION < 0x040200
+	enum { CustomizeWindowHint   = 0x02000000 };
+#endif
+}
+#endif
+
+
 //----------------------------------------------------------------------------
 // qjackctl -- Static callback posters.
 
@@ -372,15 +382,11 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	// What style do we create these forms?
 	QWidget *pParent = NULL;
 	Qt::WindowFlags wflags = Qt::Window
-#if QT_VERSION >= 0x040200
 		| Qt::CustomizeWindowHint
-#if QT_VERSION >= 0x040500
-		| Qt::WindowCloseButtonHint
-#endif
-#endif
 		| Qt::WindowTitleHint
 		| Qt::WindowSystemMenuHint
-		| Qt::WindowMinMaxButtonsHint;
+		| Qt::WindowMinMaxButtonsHint
+		| Qt::WindowCloseButtonHint;
 	if (m_pSetup->bKeepOnTop) {
 		pParent = this;
 		wflags |= Qt::Tool;

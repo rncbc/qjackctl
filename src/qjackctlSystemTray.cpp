@@ -1,7 +1,7 @@
 // qjackctlSystemTray.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -24,6 +24,15 @@
 
 #include <QBitmap>
 #include <QPainter>
+
+#if QT_VERSION < 0x040500
+namespace Qt {
+	enum { WindowCloseButtonHint = 0x08000000 };
+#if QT_VERSION < 0x040200
+	enum { CustomizeWindowHint   = 0x02000000 };
+#endif
+}
+#endif
 
 #ifndef QJACKCTL_QT4_SYSTEM_TRAY
 
@@ -105,9 +114,7 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 // Constructor.
 qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	: QWidget(pParent, Qt::Window
-#if QT_VERSION >= 0x040200
 		| Qt::CustomizeWindowHint
-#endif
 		| Qt::X11BypassWindowManagerHint
 		| Qt::FramelessWindowHint
 		| Qt::WindowStaysOnTopHint)

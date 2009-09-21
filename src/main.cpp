@@ -33,6 +33,15 @@
 #define darker(x)	dark(x)
 #endif
 
+#if QT_VERSION < 0x040500
+namespace Qt {
+	enum { WindowCloseButtonHint = 0x08000000 };
+#if QT_VERSION < 0x040200
+	enum { CustomizeWindowHint   = 0x02000000 };
+#endif
+}
+#endif
+
 
 //-------------------------------------------------------------------------
 // Singleton application instance stuff (Qt/X11 only atm.)
@@ -362,15 +371,11 @@ int main ( int argc, char **argv )
 
 	// What style do we create these forms?
 	Qt::WindowFlags wflags = Qt::Window
-#if QT_VERSION >= 0x040200
 		| Qt::CustomizeWindowHint
-#if QT_VERSION >= 0x040500
-		| Qt::WindowCloseButtonHint
-#endif
-#endif
 		| Qt::WindowTitleHint
 		| Qt::WindowSystemMenuHint
-		| Qt::WindowMinMaxButtonsHint;
+		| Qt::WindowMinMaxButtonsHint
+		| Qt::WindowCloseButtonHint;
 	if (settings.bKeepOnTop)
 		wflags |= Qt::Tool;
 	// Construct the main form, and show it to the world.
