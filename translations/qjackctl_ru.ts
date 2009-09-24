@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="ru">
-<defaultcodec></defaultcodec>
 <context>
     <name>QObject</name>
     <message>
@@ -236,10 +235,12 @@
         <translation>Предупреждение</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Да</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Нет</translation>
     </message>
@@ -351,14 +352,17 @@ Do you want to save the changes?</source>
 Вы хотите сохранить изменения?</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Save</source>
         <translation type="obsolete">Сохранить</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Отказаться</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Отменить</translation>
     </message>
@@ -448,14 +452,17 @@ Do you want to save the changes?</source>
         <translation>Остановить сервер и выйти из программы</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Stop</source>
         <translation type="obsolete">Остановка</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Kill</source>
         <translation type="obsolete">Уничтожить</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Отменить</translation>
     </message>
@@ -630,6 +637,7 @@ Do you want to save the changes?</source>
         <translation>Показать/спрятать окно коммутатора с актуальными соединениями</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">ОК</translation>
     </message>
@@ -799,6 +807,7 @@ Do you want to save the changes?</source>
         <translation>рассоединено</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Terminate</source>
         <translation type="obsolete">Завершить</translation>
     </message>
@@ -1049,6 +1058,7 @@ Do you want to remove the patchbay connection?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Remove</source>
         <translation type="obsolete">Удалить</translation>
     </message>
@@ -1293,10 +1303,12 @@ Please check the messages window for more info.</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Да</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Нет</translation>
     </message>
@@ -1503,14 +1515,17 @@ Are you sure?</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Save</source>
         <translation type="obsolete">Сохранить</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Отказаться</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Отменить</translation>
     </message>
@@ -1525,10 +1540,12 @@ Are you sure?</source>
         <translation>Новое описание коммутатора</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Да</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Нет</translation>
     </message>
@@ -2338,17 +2355,17 @@ of all actual client connections?</source>
         <translation>Выберите шрифт для отображения сообщений сервера</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="874"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="878"/>
         <source>msec</source>
         <translation>мс</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="876"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="880"/>
         <source>n/a</source>
         <translation>н/д</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1605"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1609"/>
         <source>Patchbay Definition files</source>
         <translation>Файлы описания коммутатора</translation>
     </message>
@@ -2493,37 +2510,37 @@ of all actual client connections?</source>
         <translation>Спрашивать ли подтверждение на выход из программы</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1479"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1483"/>
         <source>&amp;Preset Name</source>
         <translation>Имя &amp;профиля</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1481"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1485"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Путь к серверу</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1482"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1486"/>
         <source>&amp;Driver</source>
         <translation>&amp;Драйвер</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1483"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1487"/>
         <source>&amp;Interface</source>
         <translation>&amp;Интерфейс</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1485"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1489"/>
         <source>Sample &amp;Rate</source>
         <translation>&amp;Частота сэмпл.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1486"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1490"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Фреймов на период</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1487"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1491"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Периодов на &amp;буфер</translation>
     </message>
@@ -2744,24 +2761,27 @@ of all actual client connections?</source>
         <translation>Завершать ли работу при отсоединении все клиентов</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1822"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1826"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Save</source>
         <translation type="obsolete">Сохранить</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Отказаться</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Apply</source>
         <translation type="obsolete">Учесть</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="791"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="795"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -2774,7 +2794,7 @@ Do you want to save the changes?</source>
 Вы хотите сохранить изменения?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="843"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="847"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -2787,42 +2807,42 @@ Are you sure?</source>
 Вы уверены?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1535"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1539"/>
         <source>Startup Script</source>
         <translation>Сценарий, выполняемый при запуске</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1552"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1556"/>
         <source>Post-Startup Script</source>
         <translation>Сценарий, выполняемый после запуска</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1569"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1573"/>
         <source>Shutdown Script</source>
         <translation>Сценарий, выполняемый при выключении</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1586"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1590"/>
         <source>Post-Shutdown Script</source>
         <translation>Сценарий, выполняемый после выключения</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1603"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1607"/>
         <source>Active Patchbay Definition</source>
         <translation>Активное описание коммутатора</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1621"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1625"/>
         <source>Messages Log</source>
         <translation>Журнал сообщений</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1623"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1627"/>
         <source>Log files</source>
         <translation>Файлы журналов</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1824"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1828"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -3563,10 +3583,12 @@ Do you want to apply the changes?</source>
 Применить эти изменения?</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Apply</source>
         <translation type="obsolete">Учесть</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Отказаться</translation>
     </message>
@@ -3644,10 +3666,12 @@ Do you want to apply the changes?</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Да</translation>
     </message>
     <message>
+        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Нет</translation>
     </message>
