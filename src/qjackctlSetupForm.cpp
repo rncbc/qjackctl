@@ -103,6 +103,10 @@ qjackctlSetupForm::qjackctlSetupForm (
 	m_ui.MessagesLimitLinesComboBox->setValidator(
 		new QIntValidator(m_ui.MessagesLimitLinesComboBox));
 
+#if QT_VERSION >= 0x040200
+	m_ui.PresetComboBox->setCompleter(NULL);
+#endif
+
 	// UI connections...
 
 	QObject::connect(m_ui.PresetComboBox,
