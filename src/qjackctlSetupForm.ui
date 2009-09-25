@@ -1582,7 +1582,7 @@
                <bool>false</bool>
               </property>
               <property name="toolTip" >
-               <string>Number o microseconds to wait between engine processes (dummy)</string>
+               <string>Number of microseconds to wait between engine processes (dummy)</string>
               </property>
               <property name="editable" >
                <bool>true</bool>

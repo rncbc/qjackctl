@@ -2198,7 +2198,7 @@ pour créer une définition de baie de brassage?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
         <source>Number o microseconds to wait between engine processes (dummy)</source>
-        <translation>Nombre de microsecondes à attendre entre les traitements du moteur (factice)</translation>
+        <translation type="obsolete">Nombre de microsecondes à attendre entre les traitements du moteur (factice)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1613"/>
@@ -3674,6 +3674,11 @@ Voulez-vous appliquer les changements?</translation>
         <location filename="../src/qjackctlSetupForm.ui" line="3988"/>
         <source>&amp;Enable D-Bus interface</source>
         <translation>Activ&amp;er l&apos;interface D-Bus</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
+        <source>Number of microseconds to wait between engine processes (dummy)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

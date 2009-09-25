@@ -1943,7 +1943,7 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
         <source>Number o microseconds to wait between engine processes (dummy)</source>
-        <translation>Número de microsegundos a esperar entre procesos (dummy)</translation>
+        <translation type="obsolete">Número de microsegundos a esperar entre procesos (dummy)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1613"/>
@@ -3371,6 +3371,11 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3988"/>
         <source>&amp;Enable D-Bus interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
+        <source>Number of microseconds to wait between engine processes (dummy)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

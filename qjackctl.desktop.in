@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=QjackCtl
 GenericName=JACK Control
-GenericName[ru]=Управление JACK
+GenericName[de]=JACK-Steuerung
 GenericName[fr]=Contrôle JACK
+GenericName[ru]=Управление JACK
 Comment=QjackCtl is a JACK Audio Connection Kit Qt GUI Interface
-Comment[ru]=Программа для управления звуковым сервером JACK
+Comment[de]=Grafisches Werkzeug zur Steuerung des JACK-Audio-Systems
 Comment[fr]=QjackCtl est une interface graphique Qt pour le kit de connexion audio JACK
+Comment[ru]=Программа для управления звуковым сервером JACK
 Exec=@ac_prefix@/bin/qjackctl
 Icon=@ac_prefix@/share/pixmaps/qjackctl.png
 Categories=Audio;AudioVideo;MIDI;JACK;ALSA;Qt;

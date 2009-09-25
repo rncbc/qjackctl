@@ -2600,11 +2600,6 @@ of all actual client connections?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
-        <source>Number o microseconds to wait between engine processes (dummy)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/qjackctlSetupForm.ui" line="2515"/>
         <source>&amp;Ignore first XRUN occurrence on statistics</source>
         <translation>&amp;Игнорировать первую рассинхронизацию в статистике</translation>
@@ -3369,6 +3364,11 @@ Do you want to apply the changes?</source>
         <location filename="../src/qjackctlSetupForm.ui" line="3988"/>
         <source>&amp;Enable D-Bus interface</source>
         <translation>Вклю&amp;чить интерфейс D-Bus</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
+        <source>Number of microseconds to wait between engine processes (dummy)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
