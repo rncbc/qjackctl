@@ -5,6 +5,8 @@ ChangeLog
 
 CVS HEAD
 
+- Late support for UTF-8 encoded client/port names (EXPERIMENTAL).
+
 - Allow only one single patchbay connection to or from an exclusive
   socket (mitigating bug #2859119).
 

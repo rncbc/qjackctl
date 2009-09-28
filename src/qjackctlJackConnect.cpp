@@ -1,7 +1,7 @@
 // qjackctlJackConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -212,7 +212,7 @@ int qjackctlJackClientList::updateClientPorts (void)
 	if (ppszClientPorts) {
 		int iClientPort = 0;
 		while (ppszClientPorts[iClientPort]) {
-			QString sClientPort = ppszClientPorts[iClientPort];
+			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
 			qjackctlJackClient *pClient = 0;
 			qjackctlJackPort   *pPort   = 0;
 			jack_port_t *pJackPort = jack_port_by_name(m_pJackClient,
@@ -220,7 +220,7 @@ int qjackctlJackClientList::updateClientPorts (void)
 		#ifdef CONFIG_JACK_PORT_ALIASES
 			if (g_iJackClientPortAlias > 0 &&
 				jack_port_get_aliases(pJackPort, aliases) >= g_iJackClientPortAlias)
-				sClientPort = aliases[g_iJackClientPortAlias - 1];
+				sClientPort = QString::fromUtf8(aliases[g_iJackClientPortAlias - 1]);
 		#endif
 			int iColon = sClientPort.indexOf(':');
 			if (pJackPort && iColon >= 0) {

@@ -581,7 +581,7 @@ void qjackctlSocketForm::updateJackClients ( int iSocketType )
 	if (ppszClientPorts) {
 		int iClientPort = 0;
 		while (ppszClientPorts[iClientPort]) {
-			QString sClientPort = ppszClientPorts[iClientPort];
+			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
 			int iColon = sClientPort.indexOf(':');
 			if (iColon >= 0) {
 				QString sClientName
@@ -629,7 +629,7 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
 		QString sClient
 			= qjackctlClientAlias::escapeRegExpDigits(
-				snd_seq_client_info_get_name(pClientInfo));
+				QString::fromUtf8(snd_seq_client_info_get_name(pClientInfo)));
 		if (iAlsaClient > 0) {
 			bool bExists = false;
 			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
@@ -778,7 +778,7 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 	if (ppszClientPorts) {
 		int iClientPort = 0;
 		while (ppszClientPorts[iClientPort]) {
-			QString sClientPort = ppszClientPorts[iClientPort];
+			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
 			int iColon = sClientPort.indexOf(':');
 			if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
 				QString sPort
@@ -826,7 +826,8 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 	snd_seq_client_info_set_client(pClientInfo, -1);
 	while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
 		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
-		QString sClient = snd_seq_client_info_get_name(pClientInfo);
+		QString sClient = QString::fromUtf8(
+			snd_seq_client_info_get_name(pClientInfo));
 		if (iAlsaClient > 0 && rxClientName.exactMatch(sClient)) {
 			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
 			snd_seq_port_info_set_port(pPortInfo, -1);
@@ -837,7 +838,7 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
 					QString sPort
 						= qjackctlClientAlias::escapeRegExpDigits(
-							snd_seq_port_info_get_name(pPortInfo));
+							QString::fromUtf8(snd_seq_port_info_get_name(pPortInfo)));
 					if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
 						m_ui.PlugNameComboBox->addItem(icon, sPort);
 				}

@@ -1,7 +1,7 @@
 // qjackctlAlsaConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -213,7 +213,8 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
 					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
 					QString sClientName = QString::number(iAlsaClient) + ':';
-					sClientName += snd_seq_client_info_get_name(pClientInfo);
+					sClientName += QString::fromUtf8(
+						snd_seq_client_info_get_name(pClientInfo));
 					qjackctlAlsaPort *pPort = 0;
 					int iAlsaPort = snd_seq_port_info_get_port(pPortInfo);
 					if (pClient == 0) {
@@ -229,7 +230,8 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 					}
 					if (pClient) {
 						QString sPortName = QString::number(iAlsaPort) + ':';
-						sPortName += snd_seq_port_info_get_name(pPortInfo);
+						sPortName += QString::fromUtf8(
+							snd_seq_port_info_get_name(pPortInfo));
 						if (pPort == 0) {
 							pPort = new qjackctlAlsaPort(pClient,
 								sPortName, iAlsaPort);
