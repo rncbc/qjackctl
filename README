@@ -27,7 +27,7 @@ The software requirements for build and runtime are listed as follows:
 
   - Qt4 (core, gui, xml), C++ class library and tools for
         crossplatform development and internationalization
-        http://www.trolltech.org/products/qt/
+        http://www.qtsoftware.com/qt/
 
   - JACK Audio Connection Kit
         http://jackaudio.org/

@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 10
+%define release 11
 %define prefix  @ac_prefix@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface
@@ -15,11 +15,11 @@ URL:		http://qjackctl.sourceforge.net/
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-Requires:	qt >= 4.1
-Requires:	jack >= 0.100.0
+Requires:	libqt4 >= 4.1
+Requires:	libjack >= 0.100.0
 Requires:	alsa
 
-BuildRequires:	qt-devel >= 4.1
+BuildRequires:	libqt4-devel >= 4.1
 BuildRequires:	libjack-devel >= 0.100.0
 BuildRequires:	alsa-devel
 
@@ -55,6 +55,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/locale/%{name}_*.qm
 
 %changelog
+* Wed Sep 30 2009 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- Slipped away.
 * Fri Dec 05 2008 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Patchbay snapshot revamp.
 * Sat Jun 07 2008 Rui Nuno Capela <rncbc@users.sourceforge.net>

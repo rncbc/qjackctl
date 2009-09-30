@@ -1,3 +1,9 @@
+qjackctl (0.3.5-1) unstable; urgency=low
+
+  * Slipped away!
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Wed, 30 Dec 2008 17:33:02 +0100
+
 qjackctl (0.3.4-1) unstable; urgency=low
 
   * Patchbay snapshot revamp. 

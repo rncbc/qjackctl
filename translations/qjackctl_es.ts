@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="es">
+<!DOCTYPE TS><TS version="1.1">
 <context>
     <name>QObject</name>
     <message>
@@ -15,7 +15,7 @@
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="424"/>
         <source>Set active patchbay definition file</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer el fichero del patchbay activo</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="426"/>
@@ -50,7 +50,7 @@
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="473"/>
         <source>Option -a requires an argument (path).</source>
-        <translation type="unfinished"></translation>
+        <translation>La opción -a requiere un argumento (ruta).</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="486"/>
@@ -150,12 +150,12 @@
     <message>
         <location filename="../src/qjackctlAboutForm.cpp" line="89"/>
         <source>JACK Port aliases support disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soporte para alias de los puertos de JACK deshabilitado.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlAboutForm.cpp" line="104"/>
         <source>D-Bus interface support disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soporte para la interfaz D-Bus deshabilitado.</translation>
     </message>
 </context>
 <context>
@@ -1941,7 +1941,7 @@ una instantánea de las conexiones actuales?</translation>
         <translation>21333</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
+        <location filename="" line="0"/>
         <source>Number o microseconds to wait between engine processes (dummy)</source>
         <translation type="obsolete">Número de microsegundos a esperar entre procesos (dummy)</translation>
     </message>
@@ -3366,17 +3366,17 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3985"/>
         <source>Whether to enable D-Bus interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar la interfaz por D-Bus</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3988"/>
         <source>&amp;Enable D-Bus interface</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Habilitar la interfaz via D-Bus</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
         <source>Number of microseconds to wait between engine processes (dummy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de microsegundos a esperar entre procesamientos (dummy)</translation>
     </message>
 </context>
 <context>
@@ -3648,7 +3648,7 @@ Desea aplicar los cambios?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.ui" line="345"/>
         <source>Alt+S</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

@@ -2291,7 +2291,7 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <translation>&amp;Kanäle:</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
+        <location filename="" line="0"/>
         <source>Number o microseconds to wait between engine processes (dummy)</source>
         <translation type="obsolete">Wartezeit in Mikrosekunden zwischen Verarbeitungsprozessen (dummy)</translation>
     </message>
