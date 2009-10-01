@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+CVS HEAD
+
+- Fixed glitch on configure portaudio support, specially when the
+  library is not detected as available.
+
+
 0.3.5  2009-09-30  Slipped away!
 
 - Late support for UTF-8 encoded client/port names.

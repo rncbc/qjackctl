@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.5, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.5.1, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
 AC_CONFIG_HEADERS(config.h)
@@ -230,7 +230,7 @@ if test "x$ac_portaudio" = "xyes"; then
    AC_CHECK_LIB(portaudio, main, [ac_portaudio_lib="yes"], [ac_portaudio_lib="no"])
    if test "x$ac_portaudio_lib" = "xno"; then
       AC_MSG_WARN([*** PortAudio library not found.])
-      ac_potrtaudio="no"
+      ac_portaudio="no"
    else
       ac_libs="$ac_libs -lportaudio"
    fi
