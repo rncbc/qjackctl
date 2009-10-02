@@ -5,6 +5,10 @@ ChangeLog
 
 CVS HEAD
 
+- Fixed some main window keyboard shortcuts. Escape key now closes
+  Connections, Patchbay, Status and Messages widgets as usual (bug
+  #2871548).
+
 - Fixed glitch on configure portaudio support, specially when the
   library is not detected as available.
 

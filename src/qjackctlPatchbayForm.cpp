@@ -718,4 +718,25 @@ void qjackctlPatchbayForm::disconnectAll (void)
 }
 
 
+// Keyboard event handler.
+void qjackctlPatchbayForm::keyPressEvent ( QKeyEvent *pKeyEvent )
+{
+#ifdef CONFIG_DEBUG_0
+	qDebug("qjackctlPatchbayForm::keyPressEvent(%d)", pKeyEvent->key());
+#endif
+	int iKey = pKeyEvent->key();
+	switch (iKey) {
+	case Qt::Key_Escape:
+		close();
+		break;
+	default:
+		QWidget::keyPressEvent(pKeyEvent);
+		break;
+	}
+
+	// Make sure we've get focus back...
+	QWidget::setFocus();
+}
+
+
 // end of qjackctlPatchbayForm.cpp

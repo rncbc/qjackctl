@@ -100,6 +100,8 @@ protected:
 	void hideEvent(QHideEvent *);
 	void closeEvent(QCloseEvent *);
 
+	void keyPressEvent(QKeyEvent *);
+
 private:
 
 	// The Qt-designer UI struct...

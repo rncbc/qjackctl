@@ -1,7 +1,7 @@
 // qjackctlMessagesForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -203,6 +203,27 @@ void qjackctlMessagesForm::appendMessagesText ( const QString& s )
 {
 	appendMessagesLine(s);
 	appendMessagesLog(s);
+}
+
+
+// Keyboard event handler.
+void qjackctlMessagesForm::keyPressEvent ( QKeyEvent *pKeyEvent )
+{
+#ifdef CONFIG_DEBUG_0
+	qDebug("qjackctlMessagesForm::keyPressEvent(%d)", pKeyEvent->key());
+#endif
+	int iKey = pKeyEvent->key();
+	switch (iKey) {
+	case Qt::Key_Escape:
+		close();
+		break;
+	default:
+		QWidget::keyPressEvent(pKeyEvent);
+		break;
+	}
+
+	// Make sure we've get focus back...
+	QWidget::setFocus();
 }
 
 

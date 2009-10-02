@@ -1,7 +1,7 @@
 // qjackctlStatusForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -175,6 +175,27 @@ void qjackctlStatusForm::updateStatusItem ( int iStatusItem,
 	const QString& sText )
 {
 	m_apStatus[iStatusItem]->setText(1, sText);
+}
+
+
+// Keyboard event handler.
+void qjackctlStatusForm::keyPressEvent ( QKeyEvent *pKeyEvent )
+{
+#ifdef CONFIG_DEBUG_0
+	qDebug("qjackctlStatusForm::keyPressEvent(%d)", pKeyEvent->key());
+#endif
+	int iKey = pKeyEvent->key();
+	switch (iKey) {
+	case Qt::Key_Escape:
+		close();
+		break;
+	default:
+		QWidget::keyPressEvent(pKeyEvent);
+		break;
+	}
+
+	// Make sure we've get focus back...
+	QWidget::setFocus();
 }
 
 

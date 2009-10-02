@@ -185,7 +185,7 @@
       <iconset resource="../icons/qjackctl.qrc" >:/icons/status1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string/>
+      <string>Alt+A</string>
      </property>
      <property name="checkable" >
       <bool>true</bool>
@@ -222,7 +222,7 @@
       <iconset resource="../icons/qjackctl.qrc" >:/icons/about1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string>Alt+B</string>
+      <string>Alt+O</string>
      </property>
      <property name="toolButtonStyle" >
       <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -327,7 +327,7 @@
       <iconset resource="../icons/qjackctl.qrc" >:/icons/patchbay1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string/>
+      <string>Alt+P</string>
      </property>
      <property name="checkable" >
       <bool>true</bool>
@@ -760,7 +760,7 @@
       <iconset resource="../icons/qjackctl.qrc" >:/icons/pause1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string>Alt+U</string>
+      <string>Shift+Space</string>
      </property>
     </widget>
    </item>
@@ -791,7 +791,7 @@
       <iconset resource="../icons/qjackctl.qrc" >:/icons/play1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string>Alt+P</string>
+      <string>Space</string>
      </property>
      <property name="checkable" >
       <bool>true</bool>

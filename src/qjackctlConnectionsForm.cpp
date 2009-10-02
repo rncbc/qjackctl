@@ -727,4 +727,25 @@ void qjackctlConnectionsForm::updateAliases (void)
 }
 
 
+// Keyboard event handler.
+void qjackctlConnectionsForm::keyPressEvent ( QKeyEvent *pKeyEvent )
+{
+#ifdef CONFIG_DEBUG_0
+	qDebug("qjackctlConnectionsForm::keyPressEvent(%d)", pKeyEvent->key());
+#endif
+	int iKey = pKeyEvent->key();
+	switch (iKey) {
+	case Qt::Key_Escape:
+		close();
+		break;
+	default:
+		QWidget::keyPressEvent(pKeyEvent);
+		break;
+	}
+
+	// Make sure we've get focus back...
+	QWidget::setFocus();
+}
+
+
 // end of qjackctlConnectionsForm.cpp
