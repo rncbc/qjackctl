@@ -537,7 +537,7 @@ Do you want to save the changes?</source>
         <translation>&amp;Воспроизвести</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.ui" line="794"/>
+        <location filename="../src/qjackctlMainForm.ui" line="330"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
@@ -554,7 +554,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="763"/>
         <source>Alt+U</source>
-        <translation>Alt+U</translation>
+        <translation type="obsolete">Alt+U</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="754"/>
@@ -1270,6 +1270,26 @@ Please check the messages window for more info.</source>
         <location filename="../src/qjackctlMainForm.ui" line="724"/>
         <source>Alt+R</source>
         <translation>Alt+а</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="188"/>
+        <source>Alt+A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="225"/>
+        <source>Alt+O</source>
+        <translation type="unfinished">Alt+к</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="763"/>
+        <source>Shift+Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="794"/>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

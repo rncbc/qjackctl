@@ -708,7 +708,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="763"/>
         <source>Alt+U</source>
-        <translation>Alt+P</translation>
+        <translation type="obsolete">Alt+P</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
@@ -721,7 +721,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Arrêter le déplacement</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.ui" line="794"/>
+        <location filename="../src/qjackctlMainForm.ui" line="330"/>
         <source>Alt+P</source>
         <translation>Alt+L</translation>
     </message>
@@ -1463,6 +1463,26 @@ Voulez-vous enlever la connexion de la baie de brassage?</translation>
         <location filename="" line="0"/>
         <source>Remove</source>
         <translation type="obsolete">Enlever</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="188"/>
+        <source>Alt+A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="225"/>
+        <source>Alt+O</source>
+        <translation type="unfinished">Alt+O</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="763"/>
+        <source>Shift+Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.ui" line="794"/>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
