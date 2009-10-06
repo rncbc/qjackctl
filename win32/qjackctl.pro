@@ -64,6 +64,7 @@ win32 {
 LIBS += -ljackmp -lportaudio
 
 TRANSLATIONS = \
+    ../translations/qjackctl_cs.ts \
     ../translations/qjackctl_de.ts \
     ../translations/qjackctl_es.ts \
     ../translations/qjackctl_fr.ts \
