@@ -3,7 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-CVS HEAD
+SVN HEAD
+
+- Setup for the netjack (slave) "net" driver has now sample-rate
+  and frames per buffer (period size) settings disabled and/or
+  ignored, as those are pretty much auto-detected by default;
+  also, a new "netone" backend driver option has been introduced
+  (as suggested by Torben Hohn).
 
 - Czech (cs) translation added (by Pavel Fric).
 

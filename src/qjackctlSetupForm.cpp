@@ -890,7 +890,7 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	bool bPortaudio  = (sDriver == "portaudio");
 	bool bFreebob    = (sDriver == "freebob");
 	bool bFirewire   = (sDriver == "firewire");
-	bool bNet        = (sDriver == "net");
+	bool bNet        = (sDriver == "net" || sDriver == "netone");
 	bool bInEnabled  = false;
 	bool bOutEnabled = false;
 	bool bEnabled;
@@ -967,7 +967,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	bool bCoreaudio = (sDriver == "coreaudio");
 	bool bFreebob   = (sDriver == "freebob");
 	bool bFirewire  = (sDriver == "firewire");
-//	bool bNet       = (sDriver == "net");
+	bool bNet       = (sDriver == "net" || sDriver == "netone");
 
 	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio);
 	m_ui.UnlockMemCheckBox->setEnabled(!bCoreaudio
@@ -990,6 +990,12 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 		m_ui.PrioritySpinBox->setEnabled(bPriorityEnabled);
 	}
 
+	m_ui.SampleRateTextLabel->setEnabled(!bNet);
+	m_ui.SampleRateComboBox->setEnabled(!bNet);
+
+	m_ui.FramesTextLabel->setEnabled(!bNet);
+	m_ui.FramesComboBox->setEnabled(!bNet);
+	
 	m_ui.PeriodsTextLabel->setEnabled(bAlsa || bSun || bOss || bFreebob || bFirewire);
 	m_ui.PeriodsSpinBox->setEnabled(bAlsa || bSun || bOss || bFreebob || bFirewire);
 

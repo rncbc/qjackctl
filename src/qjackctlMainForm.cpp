@@ -818,7 +818,7 @@ void qjackctlMainForm::startJack (void)
 	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
 	bool bFreebob   = (m_preset.sDriver == "freebob");
 	bool bFirewire  = (m_preset.sDriver == "firewire");
-	bool bNet       = (m_preset.sDriver == "net");
+	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
 	if (m_preset.bVerbose)
 		args.append("-v");
 	if (m_preset.bRealtime) {
@@ -846,9 +846,9 @@ void qjackctlMainForm::startJack (void)
 		args.append("-c" + QString::number(m_preset.iChan));
 	if ((bCoreaudio || bFreebob || bFirewire) && !m_preset.sInterface.isEmpty())
 		args.append("-d" + m_preset.sInterface);
-	if (m_preset.iSampleRate > 0)
+	if (m_preset.iSampleRate > 0 && !bNet)
 		args.append("-r" + QString::number(m_preset.iSampleRate));
-	if (m_preset.iFrames > 0)
+	if (m_preset.iFrames > 0 && !bNet)
 		args.append("-p" + QString::number(m_preset.iFrames));
 	if (bAlsa || bSun || bOss || bFreebob || bFirewire) {
 		if (m_preset.iPeriods > 0)

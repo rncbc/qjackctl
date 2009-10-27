@@ -324,6 +324,11 @@
               <string>net</string>
              </property>
             </item>
+            <item>
+             <property name="text" >
+              <string>netone</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
