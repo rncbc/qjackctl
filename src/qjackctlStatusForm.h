@@ -69,7 +69,7 @@ private:
 	Ui::qjackctlStatusForm m_ui;
 
 	// Instance variables.
-	QTreeWidgetItem *m_apStatus[18];
+	QTreeWidgetItem *m_apStatus[19];
 };
 
 

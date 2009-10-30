@@ -819,6 +819,8 @@ void qjackctlMainForm::startJack (void)
 	bool bFreebob   = (m_preset.sDriver == "freebob");
 	bool bFirewire  = (m_preset.sDriver == "firewire");
 	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	if (!m_pSetup->sServerName.isEmpty())
+		args.append("-n" + m_pSetup->sServerName);
 	if (m_preset.bVerbose)
 		args.append("-v");
 	if (m_preset.bRealtime) {
@@ -2063,8 +2065,17 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	}
 
 	// Create the jack client handle, using a distinct identifier (PID?)
+	const char *pszClientName = "qjackctl";
 	jack_status_t status = JackFailure;
-	m_pJackClient = jack_client_open("qjackctl", JackNoStartServer, &status);
+	if (m_pSetup->sServerName.isEmpty()) {
+		m_pJackClient = jack_client_open(pszClientName,
+			JackNoStartServer, &status);
+	} else {
+		m_pJackClient = jack_client_open(pszClientName,
+			jack_options_t(JackNoStartServer | JackServerName), &status,
+			m_pSetup->sServerName.toUtf8().constData());
+	}
+
 	if (m_pJackClient == NULL) {
 		if (!bDetach) {
 			QStringList errs;
@@ -2852,6 +2863,13 @@ void qjackctlMainForm::updateTitleStatus (void)
 		}
 		m_pSystemTray->setToolTip(sTitle);
 	}
+
+	sTitle = m_pSetup->sServerName;
+	if (sTitle.isEmpty())
+		sTitle = ::getenv("JACK_DEFAULT_SERVER");
+	if (sTitle.isEmpty())
+		sTitle = m_pSetup->sDefPresetName;
+	updateStatusItem(STATUS_SERVER_NAME, sTitle);
 }
 
 

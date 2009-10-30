@@ -23,24 +23,25 @@
 #define __qjackctlStatus_h
 
 // List view statistics item indexes
-#define STATUS_SERVER_STATE     0
-#define STATUS_DSP_LOAD         1
-#define STATUS_SAMPLE_RATE      2
-#define STATUS_BUFFER_SIZE      3
-#define STATUS_REALTIME         4
-#define STATUS_TRANSPORT_STATE  5
-#define STATUS_TRANSPORT_TIME   6
-#define STATUS_TRANSPORT_BBT    7
-#define STATUS_TRANSPORT_BPM    8
-#define STATUS_XRUN_COUNT       9
-#define STATUS_XRUN_TIME        10
-#define STATUS_XRUN_LAST        11
-#define STATUS_XRUN_MAX         12
-#define STATUS_XRUN_MIN         13
-#define STATUS_XRUN_AVG         14
-#define STATUS_XRUN_TOTAL       15
-#define STATUS_RESET_TIME       16
-#define STATUS_MAX_DELAY        17
+#define STATUS_SERVER_NAME      0
+#define STATUS_SERVER_STATE     1
+#define STATUS_DSP_LOAD         2
+#define STATUS_SAMPLE_RATE      3
+#define STATUS_BUFFER_SIZE      4
+#define STATUS_REALTIME         5
+#define STATUS_TRANSPORT_STATE  6
+#define STATUS_TRANSPORT_TIME   7
+#define STATUS_TRANSPORT_BBT    8
+#define STATUS_TRANSPORT_BPM    9
+#define STATUS_XRUN_COUNT       10
+#define STATUS_XRUN_TIME        11
+#define STATUS_XRUN_LAST        12
+#define STATUS_XRUN_MAX         13
+#define STATUS_XRUN_MIN         14
+#define STATUS_XRUN_AVG         15
+#define STATUS_XRUN_TOTAL       16
+#define STATUS_RESET_TIME       17
+#define STATUS_MAX_DELAY        18
 
 // (Big)Time display identifiers.
 #define DISPLAY_TRANSPORT_TIME  0

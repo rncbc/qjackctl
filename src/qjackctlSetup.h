@@ -110,6 +110,8 @@ public:
 	QStringList presets;
 
 	// Options...
+	bool    bSingleton;
+	QString sServerName;
 	bool    bStartupScript;
 	QString sStartupScriptShell;
 	bool    bPostStartupScript;

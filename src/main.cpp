@@ -107,17 +107,8 @@ public:
 			}
 		}
 	#if defined(Q_WS_X11)
-		m_pDisplay = QX11Info::display();
-		QString sUnique = QJACKCTL_XUNIQUE;
-		const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
-		if (pszServerName) {
-			sUnique += '_';
-			sUnique += pszServerName;
-		}
-		m_aUnique = XInternAtom(m_pDisplay, sUnique.toUtf8().constData(), false);
-		XGrabServer(m_pDisplay);
-		m_wOwner = XGetSelectionOwner(m_pDisplay, m_aUnique);
-		XUngrabServer(m_pDisplay);
+		m_pDisplay = NULL;
+		m_wOwner = None;
 	#endif
 	}
 
@@ -144,9 +135,25 @@ public:
 
 	// Check if another instance is running,
     // and raise its proper main widget...
-	bool setup()
+	bool setup(const QString& sServerName)
 	{
 	#if defined(Q_WS_X11)
+		m_pDisplay = QX11Info::display();
+		QString sUnique = QJACKCTL_XUNIQUE;
+		if (sServerName.isEmpty()) {
+			const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
+			if (pszServerName) {
+				sUnique += '_';
+				sUnique += pszServerName;
+			}
+		} else {
+			sUnique += '_';
+			sUnique += sServerName;
+		}
+		m_aUnique = XInternAtom(m_pDisplay, sUnique.toUtf8().constData(), false);
+		XGrabServer(m_pDisplay);
+		m_wOwner = XGetSelectionOwner(m_pDisplay, m_aUnique);
+		XUngrabServer(m_pDisplay);
 		if (m_wOwner != None) {
 			// First, notify any freedesktop.org WM
 			// that we're about to show the main widget...
@@ -342,9 +349,11 @@ int main ( int argc, char **argv )
 	}
 
 	// Have another instance running?
-	if (app.setup()) {
-		app.quit();
-		return 2;
+	if (settings.bSingleton) {
+		if (app.setup(settings.sServerName)) {
+			app.quit();
+			return 2;
+		}
 	}
 
 	// Dark themes grayed/disabled color group fix...

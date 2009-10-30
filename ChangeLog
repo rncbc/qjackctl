@@ -5,6 +5,10 @@ ChangeLog
 
 SVN HEAD
 
+- Server name command line option added (-n, --server-name).
+
+- Single application instance restriction option added (X11).
+
 - Setup for the netjack (slave) "net" driver has now sample-rate
   and frames per buffer (period size) settings disabled and/or
   ignored, as those are pretty much auto-detected by default;

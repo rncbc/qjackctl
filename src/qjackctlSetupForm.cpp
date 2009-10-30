@@ -388,7 +388,10 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.DelayedSetupCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
-	QObject::connect(m_ui.ServerConfigCheckBox,
+	QObject::connect(m_ui.SingletonCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
+	QObject::connect(m_ui.SingletonCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ServerConfigNameComboBox,
@@ -587,6 +590,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
 	m_ui.StartMinimizedCheckBox->setChecked(m_pSetup->bStartMinimized);
 	m_ui.DelayedSetupCheckBox->setChecked(m_pSetup->bDelayedSetup);
+	m_ui.SingletonCheckBox->setChecked(m_pSetup->bSingleton);
 	m_ui.ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
 	setComboBoxCurrentText(m_ui.ServerConfigNameComboBox,
 		m_pSetup->sServerConfigName);
@@ -1116,6 +1120,10 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	m_ui.DelayedSetupCheckBox->setEnabled(
 		!m_ui.StartMinimizedCheckBox->isChecked());
+
+#if !defined(Q_WS_X11)
+	m_ui.SingletonCheckBox->setEnabled(false);
+#endif
 
 	m_ui.TransportButtonsCheckBox->setEnabled(
 		m_ui.LeftButtonsCheckBox->isChecked());
@@ -1787,6 +1795,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();
 		m_pSetup->bStartMinimized          = m_ui.StartMinimizedCheckBox->isChecked();
 		m_pSetup->bDelayedSetup            = m_ui.DelayedSetupCheckBox->isChecked();
+		m_pSetup->bSingleton               = m_ui.SingletonCheckBox->isChecked();
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
 		m_pSetup->bServerConfigTemp        = m_ui.ServerConfigTempCheckBox->isChecked();

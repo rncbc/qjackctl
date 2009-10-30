@@ -50,6 +50,8 @@ qjackctlSetup::qjackctlSetup (void)
 	m_settings.endGroup();
 
 	m_settings.beginGroup("/Options");
+	bSingleton               = m_settings.value("/Singleton", false).toBool();
+	sServerName              = m_settings.value("/ServerName").toString();
 	bStartJack               = m_settings.value("/StartJack", false).toBool();
 	bStartupScript           = m_settings.value("/StartupScript", true).toBool();
 	sStartupScriptShell      = m_settings.value("/StartupScriptShell", "artsshell -q terminate").toString();
@@ -143,6 +145,8 @@ qjackctlSetup::~qjackctlSetup (void)
 	m_settings.endGroup();
 
 	m_settings.beginGroup("/Options");
+	m_settings.setValue("/Singleton",               bSingleton);
+	m_settings.setValue("/ServerName",              sServerName);
 	m_settings.setValue("/StartJack",               bStartJack);
 	m_settings.setValue("/StartupScript",           bStartupScript);
 	m_settings.setValue("/StartupScriptShell",      sStartupScriptShell);
@@ -422,6 +426,8 @@ void qjackctlSetup::print_usage ( const QString& arg0 )
 		QObject::tr("Set default settings preset name") + sEol;
 	out << "  -a, --active-patchbay=[path]" + sEot +
 		QObject::tr("Set active patchbay definition file") + sEol;
+	out << "  -n, --server-name=[label]" + sEot +
+		QObject::tr("Set default JACK audio server name") + sEol;
 	out << "  -h, --help" + sEot +
 		QObject::tr("Show help about command line options") + sEol;
 	out << "  -v, --version" + sEot +
@@ -475,6 +481,15 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 			}
 			bActivePatchbay = true;
 			sActivePatchbayPath = sVal;
+			if (iEqual < 0)
+				i++;
+		}
+		else if (sArg == "-n" || sArg == "--server-name") {
+			if (sVal.isNull()) {
+				out << QObject::tr("Option -n requires an argument (name).") + sEol;
+				return false;
+			}
+			sServerName = sVal;
 			if (iEqual < 0)
 				i++;
 		}

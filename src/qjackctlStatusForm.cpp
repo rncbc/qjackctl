@@ -58,6 +58,8 @@ qjackctlStatusForm::qjackctlStatusForm (
 	pHeader->setMovable(false);
 	pHeader->setStretchLastSection(true);
 
+	m_apStatus[STATUS_SERVER_NAME] = new QTreeWidgetItem(m_ui.StatsListView,
+		QStringList() << s + tr("Server name") + c << n);
 	m_apStatus[STATUS_SERVER_STATE] = new QTreeWidgetItem(m_ui.StatsListView,
 		QStringList() << s + tr("Server state") + c << n);
 	m_apStatus[STATUS_DSP_LOAD]     = new QTreeWidgetItem(m_ui.StatsListView,
