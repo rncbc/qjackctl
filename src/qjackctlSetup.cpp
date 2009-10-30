@@ -50,7 +50,7 @@ qjackctlSetup::qjackctlSetup (void)
 	m_settings.endGroup();
 
 	m_settings.beginGroup("/Options");
-	bSingleton               = m_settings.value("/Singleton", false).toBool();
+	bSingleton               = m_settings.value("/Singleton", true).toBool();
 	sServerName              = m_settings.value("/ServerName").toString();
 	bStartJack               = m_settings.value("/StartJack", false).toBool();
 	bStartupScript           = m_settings.value("/StartupScript", true).toBool();

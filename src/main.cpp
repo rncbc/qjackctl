@@ -124,10 +124,12 @@ public:
 	{
 		m_pWidget = pWidget;
 	#if defined(Q_WS_X11)
-		XGrabServer(m_pDisplay);
-		m_wOwner = m_pWidget->winId();
-		XSetSelectionOwner(m_pDisplay, m_aUnique, m_wOwner, CurrentTime);
-		XUngrabServer(m_pDisplay);
+		if (m_pDisplay) {
+			XGrabServer(m_pDisplay);
+			m_wOwner = m_pWidget->winId();
+			XSetSelectionOwner(m_pDisplay, m_aUnique, m_wOwner, CurrentTime);
+			XUngrabServer(m_pDisplay);
+		}
 	#endif
 	}
 
