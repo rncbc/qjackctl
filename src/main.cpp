@@ -152,6 +152,11 @@ public:
 			sUnique += '_';
 			sUnique += sServerName;
 		}
+		char szHostName[255];
+		if (::gethostname(szHostName, sizeof(szHostName)) == 0) {
+			sUnique += '@';
+			sUnique += szHostName;
+		}
 		m_aUnique = XInternAtom(m_pDisplay, sUnique.toUtf8().constData(), false);
 		XGrabServer(m_pDisplay);
 		m_wOwner = XGetSelectionOwner(m_pDisplay, m_aUnique);
