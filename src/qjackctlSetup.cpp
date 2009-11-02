@@ -37,6 +37,19 @@ qjackctlSetup::qjackctlSetup (void)
 	bStartJack = false;
 	sDefPresetName = QObject::tr("(default)");
 
+	loadSetup();
+}
+
+// Destructor;
+qjackctlSetup::~qjackctlSetup (void)
+{
+	saveSetup();
+}
+
+
+// Explicit load method.
+void qjackctlSetup::loadSetup (void)
+{
 	m_settings.beginGroup("/Presets");
 	sDefPreset = m_settings.value("/DefPreset", sDefPresetName).toString();
 	QString sPrefix = "/Preset%1";
@@ -51,7 +64,7 @@ qjackctlSetup::qjackctlSetup (void)
 
 	m_settings.beginGroup("/Options");
 	bSingleton               = m_settings.value("/Singleton", true).toBool();
-	sServerName              = m_settings.value("/ServerName").toString();
+//	sServerName              = m_settings.value("/ServerName").toString();
 	bStartJack               = m_settings.value("/StartJack", false).toBool();
 	bStartupScript           = m_settings.value("/StartupScript", true).toBool();
 	sStartupScriptShell      = m_settings.value("/StartupScriptShell", "artsshell -q terminate").toString();
@@ -123,8 +136,8 @@ qjackctlSetup::qjackctlSetup (void)
 }
 
 
-// Destructor;
-qjackctlSetup::~qjackctlSetup (void)
+// Explicit save method.
+void qjackctlSetup::saveSetup (void)
 {
 	// Save all settings and options...
 	m_settings.beginGroup("/Program");
@@ -146,7 +159,7 @@ qjackctlSetup::~qjackctlSetup (void)
 
 	m_settings.beginGroup("/Options");
 	m_settings.setValue("/Singleton",               bSingleton);
-	m_settings.setValue("/ServerName",              sServerName);
+//	m_settings.setValue("/ServerName",              sServerName);
 	m_settings.setValue("/StartJack",               bStartJack);
 	m_settings.setValue("/StartupScript",           bStartupScript);
 	m_settings.setValue("/StartupScriptShell",      sStartupScriptShell);
@@ -215,6 +228,9 @@ qjackctlSetup::~qjackctlSetup (void)
 	while (!m_settings.value(sPrefix.arg(++i)).toString().isEmpty())
 		m_settings.remove(sPrefix.arg(i));
 	m_settings.endGroup();
+
+	// Commit all changes to disk.
+	m_settings.sync();
 }
 
 

@@ -28,7 +28,7 @@
         <translation type="obsolete">Options</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="424"/>
+        <location filename="../src/qjackctlSetup.cpp" line="440"/>
         <source>Start JACK audio server immediately</source>
         <translation>Démarrer immédiatement le serveur audio JACK</translation>
     </message>
@@ -38,59 +38,59 @@
         <translation type="obsolete">Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="432"/>
+        <location filename="../src/qjackctlSetup.cpp" line="448"/>
         <source>Show help about command line options</source>
         <translation>Montrer l&apos;aide à propos des options en ligne de commande</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="434"/>
+        <location filename="../src/qjackctlSetup.cpp" line="450"/>
         <source>Show version information</source>
         <translation>Montrer les informations de version</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="470"/>
+        <location filename="../src/qjackctlSetup.cpp" line="486"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="420"/>
+        <location filename="../src/qjackctlSetup.cpp" line="436"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Utilisation : %1 [options] [commandes-et-args]</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="422"/>
+        <location filename="../src/qjackctlSetup.cpp" line="438"/>
         <source>Options:</source>
         <translation>Options :</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="428"/>
+        <location filename="../src/qjackctlSetup.cpp" line="444"/>
         <source>Set active patchbay definition file</source>
         <translation>Choisir le fichiers de définition de baie de brassage actif</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="479"/>
+        <location filename="../src/qjackctlSetup.cpp" line="495"/>
         <source>Option -a requires an argument (path).</source>
         <translation>L&apos;option -a requiert un argument (chemin).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="501"/>
+        <location filename="../src/qjackctlSetup.cpp" line="517"/>
         <source>Qt: %1
 </source>
         <translation>Qt : %1
 </translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="426"/>
+        <location filename="../src/qjackctlSetup.cpp" line="442"/>
         <source>Set default settings preset name</source>
         <translation>Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="430"/>
+        <location filename="../src/qjackctlSetup.cpp" line="446"/>
         <source>Set default JACK audio server name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="489"/>
+        <location filename="../src/qjackctlSetup.cpp" line="505"/>
         <source>Option -n requires an argument (name).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3326,7 +3326,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1841"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1844"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -3527,7 +3527,7 @@ Are you sure?</source>
 Êtes vous certain?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1843"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1846"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

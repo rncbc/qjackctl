@@ -5,6 +5,9 @@ ChangeLog
 
 SVN HEAD
 
+- Global configuration state is now explicitly saved/committed to
+  disk when Setup dialog changes are accepted and applied.
+
 - Server name command line option added (-n, --server-name).
 
 - Single application instance restriction option added (X11).

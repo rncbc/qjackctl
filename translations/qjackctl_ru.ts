@@ -3,22 +3,22 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="432"/>
+        <location filename="../src/qjackctlSetup.cpp" line="448"/>
         <source>Show help about command line options</source>
         <translation>Показать справку по использованию параметров командной строки</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="424"/>
+        <location filename="../src/qjackctlSetup.cpp" line="440"/>
         <source>Start JACK audio server immediately</source>
         <translation>Немедленно запустить сервер JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="434"/>
+        <location filename="../src/qjackctlSetup.cpp" line="450"/>
         <source>Show version information</source>
         <translation>Показать информацию о версии</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="470"/>
+        <location filename="../src/qjackctlSetup.cpp" line="486"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Ключ -p требует аргумента (пресет).</translation>
     </message>
@@ -28,44 +28,44 @@
         <translation>(как обычно)</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="420"/>
+        <location filename="../src/qjackctlSetup.cpp" line="436"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Использование: %1 [ключи] [команда-и-аргументы]</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="422"/>
+        <location filename="../src/qjackctlSetup.cpp" line="438"/>
         <source>Options:</source>
         <translation>Параметры:</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="426"/>
+        <location filename="../src/qjackctlSetup.cpp" line="442"/>
         <source>Set default settings preset name</source>
         <translation>Указать название профиля с параметрами по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="428"/>
+        <location filename="../src/qjackctlSetup.cpp" line="444"/>
         <source>Set active patchbay definition file</source>
         <translation>Указать файл описания активного коммутатора</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="479"/>
+        <location filename="../src/qjackctlSetup.cpp" line="495"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Ключу -a необходим аргумент (расположение)</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="501"/>
+        <location filename="../src/qjackctlSetup.cpp" line="517"/>
         <source>Qt: %1
 </source>
         <translation>Qt: %1
 </translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="430"/>
+        <location filename="../src/qjackctlSetup.cpp" line="446"/>
         <source>Set default JACK audio server name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="489"/>
+        <location filename="../src/qjackctlSetup.cpp" line="505"/>
         <source>Option -n requires an argument (name).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2786,7 +2786,7 @@ of all actual client connections?</source>
         <translation>Завершать ли работу при отсоединении все клиентов</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1841"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1844"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -2867,7 +2867,7 @@ Are you sure?</source>
         <translation>Файлы журналов</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1843"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1846"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

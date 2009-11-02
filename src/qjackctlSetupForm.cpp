@@ -1825,6 +1825,9 @@ void qjackctlSetupForm::accept (void)
 	m_pSetup->saveComboBoxHistory(m_ui.MessagesLogPathComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.ServerConfigNameComboBox);
 
+	// Save/commit to disk.
+	m_pSetup->saveSetup();
+
 	// Just go with dialog acceptance.
 	QDialog::accept();
 }

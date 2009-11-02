@@ -87,8 +87,12 @@ public:
 
 	// Constructor.
 	qjackctlSetup();
-	// destructor;
+	// Destructor;
 	~qjackctlSetup();
+
+	// Explicit I/O methods.
+	void loadSetup();
+	void saveSetup();
 
 	// Command line arguments parser.
 	bool parse_args(const QStringList& args);

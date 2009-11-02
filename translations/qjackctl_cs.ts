@@ -8,63 +8,63 @@
         <translation>(výchozí)</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="420"/>
+        <location filename="../src/qjackctlSetup.cpp" line="436"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Použití: %1 [volby] [příkazy a argumenty]</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="422"/>
+        <location filename="../src/qjackctlSetup.cpp" line="438"/>
         <source>Options:</source>
         <translation>Volby:</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="424"/>
+        <location filename="../src/qjackctlSetup.cpp" line="440"/>
         <source>Start JACK audio server immediately</source>
         <translation>JACK audioserver spustit okamžitě</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="432"/>
+        <location filename="../src/qjackctlSetup.cpp" line="448"/>
         <source>Show help about command line options</source>
         <translation>Ukázat nápovědu k volbám (argumentům) příkazového řádku</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="434"/>
+        <location filename="../src/qjackctlSetup.cpp" line="450"/>
         <source>Show version information</source>
         <translation>Ukázat informace o verzi</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="470"/>
+        <location filename="../src/qjackctlSetup.cpp" line="486"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Volba -p vyžaduje argument (preset, přednastavení).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="501"/>
+        <location filename="../src/qjackctlSetup.cpp" line="517"/>
         <source>Qt: %1
 </source>
         <translation>Qt: %1</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="426"/>
+        <location filename="../src/qjackctlSetup.cpp" line="442"/>
         <source>Set default settings preset name</source>
         <translation>Určit název přednastavení výchozího nastavení</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="428"/>
+        <location filename="../src/qjackctlSetup.cpp" line="444"/>
         <source>Set active patchbay definition file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="479"/>
+        <location filename="../src/qjackctlSetup.cpp" line="495"/>
         <source>Option -a requires an argument (path).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="430"/>
+        <location filename="../src/qjackctlSetup.cpp" line="446"/>
         <source>Set default JACK audio server name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="489"/>
+        <location filename="../src/qjackctlSetup.cpp" line="505"/>
         <source>Option -n requires an argument (name).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3186,7 +3186,7 @@ všech skutečných klientských spojení?</translation>
         <translation>Zrušit</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1841"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1844"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
@@ -3312,7 +3312,7 @@ Jste si jistý?</translation>
         <translation>Soubory se zápisy</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1843"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1846"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
