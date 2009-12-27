@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="fr">
+<!DOCTYPE TS>
+<TS version="2.0" language="fr">
 <context>
     <name>QObject</name>
     <message>
@@ -8,22 +9,18 @@
         <translation>(par défaut)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Usage</source>
         <translation type="obsolete">Utilisation</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>options</source>
         <translation type="obsolete">options</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>command-and-args</source>
         <translation type="obsolete">commande-et-args</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Options</source>
         <translation type="obsolete">Options</translation>
     </message>
@@ -33,7 +30,6 @@
         <translation>Démarrer immédiatement le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Set default setings preset name</source>
         <translation type="obsolete">Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
@@ -53,7 +49,7 @@
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetup.cpp" line="436"/>
+        <location filename="../src/qjackctlSetup.cpp" line="435"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Utilisation : %1 [options] [commandes-et-args]</translation>
     </message>
@@ -196,22 +192,18 @@
 <context>
     <name>qjackctlClientListView</name>
     <message>
-        <location filename="" line="0"/>
         <source>Readable Clients</source>
         <translation type="obsolete">Clients en lecture</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Output Ports</source>
         <translation type="obsolete">Ports de sortie</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Writable Clients</source>
         <translation type="obsolete">Clients en ecriture</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Input Ports</source>
         <translation type="obsolete">Ports d&apos;entrée</translation>
     </message>
@@ -289,32 +281,27 @@
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>This will suspend sound processing</source>
         <translation type="obsolete">Cela va suspendre le traitement du son</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>from all client applications.</source>
         <translation type="obsolete">de toutes les applications clientes.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Are you sure?</source>
         <translation type="obsolete">Êtes-vous certain?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Oui</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Non</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlConnect.cpp" line="1758"/>
+        <location filename="../src/qjackctlConnect.cpp" line="1757"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -338,61 +325,85 @@ de toutes les applications clientes.
         <translation>Audio</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="101"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="219"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="337"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connecter</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="107"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="225"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="343"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="98"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="216"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="334"/>
         <source>Connect currently selected ports</source>
         <translation>Connecter les ports actuellement sélectionnés</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="117"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="235"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="353"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Déconnecter</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="123"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="241"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="359"/>
         <source>Alt+D</source>
         <translation>Alt+D</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="114"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="232"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="350"/>
         <source>Disconnect currently selected ports</source>
         <translation>Déconnecter les ports actuellement sélectionnés</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="133"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="251"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="369"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Tout déconnecter</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="139"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="257"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="375"/>
         <source>Alt+A</source>
         <translation>Alt+T</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="130"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="248"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="366"/>
         <source>Disconnect all currently connected ports</source>
         <translation>Déconnecter tous les ports actuellement connectés</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="165"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="283"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="401"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Rafraîchir</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="171"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="289"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="407"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="162"/>
+        <location filename="../src/qjackctlConnectionsForm.ui" line="280"/>
         <location filename="../src/qjackctlConnectionsForm.ui" line="398"/>
         <source>Refresh current connections view</source>
         <translation>Rafraîchir la vue actuelle des connexions</translation>
@@ -408,27 +419,22 @@ de toutes les applications clientes.
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The preset aliases have been changed:</source>
         <translation type="obsolete">Les alias de préréglage ont été changés:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Do you want to save the changes?</source>
         <translation type="obsolete">Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save</source>
         <translation type="obsolete">Enregistrer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Ignorer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Annuler</translation>
     </message>
@@ -438,7 +444,7 @@ de toutes les applications clientes.
         <translation>ALSA</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlConnectionsForm.cpp" line="242"/>
+        <location filename="../src/qjackctlConnectionsForm.cpp" line="240"/>
         <source>The preset aliases have been changed:
 
 &quot;%1&quot;
@@ -511,6 +517,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+Q</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="3019"/>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
@@ -526,6 +533,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+D</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2937"/>
         <location filename="../src/qjackctlMainForm.ui" line="111"/>
         <source>&amp;Start</source>
         <translation>&amp;Démarrer</translation>
@@ -551,6 +559,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Arrêter le serveur JACK</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2978"/>
         <location filename="../src/qjackctlMainForm.ui" line="182"/>
         <source>St&amp;atus</source>
         <translation>S&amp;tatut</translation>
@@ -566,6 +575,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+R</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="3014"/>
         <location filename="../src/qjackctlMainForm.ui" line="219"/>
         <source>Ab&amp;out...</source>
         <translation>À propo&amp;s...</translation>
@@ -581,6 +591,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+E</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="3010"/>
         <location filename="../src/qjackctlMainForm.ui" line="253"/>
         <source>S&amp;etup...</source>
         <translation>R&amp;églages...</translation>
@@ -596,6 +607,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+M</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2974"/>
         <location filename="../src/qjackctlMainForm.ui" line="287"/>
         <source>&amp;Messages</source>
         <translation>&amp;Messages</translation>
@@ -641,7 +653,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Mode du serveur JACK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>CPU Load</source>
         <translation type="obsolete">Charge processeur</translation>
     </message>
@@ -651,7 +662,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Fréquence d&apos;échantillonnage</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>XRUN Count</source>
         <translation type="obsolete">Décompte des désynchronisations (XRUN)</translation>
     </message>
@@ -706,6 +716,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+O</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2993"/>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
         <source>&amp;Rewind</source>
         <translation>Remb&amp;obiner</translation>
@@ -716,11 +727,11 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Rembobiner</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.ui" line="763"/>
         <source>Alt+U</source>
         <translation type="obsolete">Alt+P</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="3002"/>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
         <source>Pa&amp;use</source>
         <translation>Pa&amp;use</translation>
@@ -736,6 +747,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+L</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2999"/>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
         <source>&amp;Play</source>
         <translation>&amp;Lecture</translation>
@@ -746,7 +758,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Démarrer le déplacement</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not open ALSA sequencer as a client.
 
 MIDI patchbay will be not available.</source>
@@ -755,32 +766,31 @@ MIDI patchbay will be not available.</source>
 La baie de brassage MIDI ne sera pas disponible.</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="559"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="702"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="986"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2023"/>
         <location filename="../src/qjackctlMainForm.cpp" line="3032"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>JACK is currently running.</source>
         <translation type="obsolete">JACK fonctionne actuellement.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Do you want to terminate the JACK audio server?</source>
         <translation type="obsolete">Voulez-vous arrêter le serveur audio JACK?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Terminate</source>
         <translation type="obsolete">Arrêter</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Leave</source>
         <translation type="obsolete">Laisser</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Annuler</translation>
     </message>
@@ -795,22 +805,18 @@ La baie de brassage MIDI ne sera pas disponible.</translation>
         <translation>avec statut de sortie=%1</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not start JACK.</source>
         <translation type="obsolete">Impossible de démarrer JACK.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Maybe JACK audio server is already started.</source>
         <translation type="obsolete">Peut-être que le serveur audio JACK est déjà démarré.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Stop</source>
         <translation type="obsolete">Arrêter</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Kill</source>
         <translation type="obsolete">Tuer</translation>
     </message>
@@ -857,22 +863,18 @@ Sorry.</source>
 Désolé.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>JACK was started with PID=%1 (0x%2).</source>
         <translation type="obsolete">JACK a été démarrer avec le PID=%1 (0x%2).</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Some client audio applications</source>
         <translation type="obsolete">Certaines applications audio clientes</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>are still active and connected.</source>
         <translation type="obsolete">sont encore actives et connectées.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Do you want to stop the JACK audio server?</source>
         <translation type="obsolete">Voulez-vous arrêter le serveur audio JACK?</translation>
     </message>
@@ -892,17 +894,19 @@ Désolé.</translation>
         <translation>Script d&apos;extinction terminé</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="1042"/>
         <location filename="../src/qjackctlMainForm.cpp" line="1154"/>
         <source>Post-shutdown script...</source>
         <translation>Script post-extinction...</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="1043"/>
         <location filename="../src/qjackctlMainForm.cpp" line="1155"/>
         <source>Post-shutdown script terminated</source>
         <translation>Script post-extinction terminé</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1145"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1144"/>
         <source>JACK was stopped</source>
         <translation>JACK a été arrêté</translation>
     </message>
@@ -961,17 +965,16 @@ Désactivé.</translation>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Audio connection graph change.</source>
         <translation type="obsolete">Changement du graphique des connexions audio.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1805"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1804"/>
         <source>XRUN callback (%1).</source>
         <translation>Récupération désynchronisation (XRUN) (%1).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1815"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1814"/>
         <source>Buffer size change (%1).</source>
         <translation>Changement de la taille du tampon (%1).</translation>
     </message>
@@ -981,27 +984,22 @@ Désactivé.</translation>
         <translation>Notification d&apos;extinction.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>MIDI connection graph change.</source>
         <translation type="obsolete">Changement du graphique des connexions MIDI.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Audio active patchbay scan</source>
         <translation type="obsolete">Balayage de la baie de brassage audio active</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>MIDI active patchbay scan</source>
         <translation type="obsolete">Balayage de la baie de brassage MIDI active</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Audio connection change.</source>
         <translation type="obsolete">Changement des connexions audio.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>MIDI connection change.</source>
         <translation type="obsolete">Changement des connexions MIDI.</translation>
     </message>
@@ -1026,7 +1024,6 @@ Désactivé.</translation>
         <translation>échoué</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not connect to JACK server as client.
 
 Please check the messages window for more info.</source>
@@ -1035,7 +1032,7 @@ Please check the messages window for more info.</source>
 Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2149"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2148"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
         <translation>Configuration du serveur enregistrée dans &quot;%1&quot;.</translation>
     </message>
@@ -1080,6 +1077,8 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation>Déplacement en marche arrière.</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2557"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2670"/>
         <location filename="../src/qjackctlMainForm.cpp" line="2809"/>
         <source>Starting</source>
         <translation>Démarre</translation>
@@ -1090,6 +1089,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation>Déplacement démarré.</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2572"/>
         <location filename="../src/qjackctlMainForm.cpp" line="2816"/>
         <source>Stopping</source>
         <translation>S&apos;arrête</translation>
@@ -1105,17 +1105,16 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation>Déplacement en marche avant.</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="2610"/>
         <location filename="../src/qjackctlMainForm.cpp" line="2820"/>
         <source>Stopped</source>
         <translation>Arrêté</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Hz</source>
         <translation type="obsolete">Hz</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>frames</source>
         <translation type="obsolete">échantillons</translation>
     </message>
@@ -1145,7 +1144,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation>Boucle</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2714"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2713"/>
         <source>XRUN callback (%1 skipped).</source>
         <translation>Récupération de désynchronisation (XRUN) (%1 sauté).</translation>
     </message>
@@ -1220,24 +1219,24 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation>Déplacemen&amp;t</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3034"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3033"/>
         <source>Server settings will be only effective after
 restarting the JACK audio server.</source>
         <translation>Les paramètres du serveur ne seront effectifs
 qu&apos;après avoir redémarré le serveur audio JACK.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>OK</source>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="546"/>
         <location filename="../src/qjackctlMainForm.cpp" line="3044"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3046"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3045"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
         <translation>Certain paramètres ne seront effectifs
@@ -1274,7 +1273,7 @@ qu&apos;au prochain démarrage de ce programme.</translation>
         <translation>Changement des connexions ALSA.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="561"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="560"/>
         <source>JACK is currently running.
 
 Do you want to terminate the JACK audio server?</source>
@@ -1283,7 +1282,7 @@ Do you want to terminate the JACK audio server?</source>
 Voulez-vous arrêter le serveur audio JACK?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="704"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="703"/>
         <source>Could not start JACK.
 
 Maybe JACK audio server is already started.</source>
@@ -1292,7 +1291,7 @@ Maybe JACK audio server is already started.</source>
 Peut-être que le serveur audio JACK est déjà démarré.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="989"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="987"/>
         <source>Some client audio applications
 are still active and connected.
 
@@ -1303,7 +1302,7 @@ sont encore actives et connectées.
 Voulez-vous arrêter le serveur audio JACK?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1092"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1091"/>
         <source>JACK was started with PID=%1.</source>
         <translation>JACK a été démarrer avec le PID=%1.</translation>
     </message>
@@ -1333,7 +1332,7 @@ Voulez-vous arrêter le serveur audio JACK?</translation>
         <translation>Erreur de lecture JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1861"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1860"/>
         <source>Unknown JACK error (%d).</source>
         <translation>Erreur JACK inconnue (%d).</translation>
     </message>
@@ -1393,7 +1392,7 @@ Voulez-vous arrêter le serveur audio JACK?</translation>
         <translation>Mauvaise version du protocole client.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2107"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2105"/>
         <source>Could not connect to JACK server as client.
 - %1
 Please check the messages window for more info.</source>
@@ -1422,12 +1421,12 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation>%1 échantillons</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2707"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2706"/>
         <source>%1 msec</source>
         <translation>%1 ms</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="489"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="488"/>
         <source>Could not open ALSA sequencer as a client.
 
 ALSA MIDI patchbay will be not available.</source>
@@ -1436,7 +1435,7 @@ ALSA MIDI patchbay will be not available.</source>
 La baie de brassage ALSA MIDI ne sera pas disponible.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="549"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="547"/>
         <source>The program will keep running in the system tray.
 
 To terminate the program, please choose &quot;Quit&quot; in the context menu of the system tray entry.</source>
@@ -1455,7 +1454,7 @@ Pour terminer le programme, merci de choisir &quot;Quitter&quot; dans le menu co
         <translation>Balayage de la baie de brassage ALSA active</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2028"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2024"/>
         <source>A patchbay definition is currently active,
 which is probable to redo this connection:
 
@@ -1470,7 +1469,6 @@ il est probable que cela refasse cette connexion :
 Voulez-vous enlever la connexion de la baie de brassage?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Remove</source>
         <translation type="obsolete">Enlever</translation>
     </message>
@@ -1503,7 +1501,6 @@ Voulez-vous enlever la connexion de la baie de brassage?</translation>
         <translation>Messages - Kit de Connexion Audio JACK</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Messages log</source>
         <translation type="obsolete">Messages</translation>
     </message>
@@ -1513,12 +1510,12 @@ Voulez-vous enlever la connexion de la baie de brassage?</translation>
         <translation>Journal des messages de sortie</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMessagesForm.cpp" line="137"/>
+        <location filename="../src/qjackctlMessagesForm.cpp" line="136"/>
         <source>Logging stopped --- %1 ---</source>
         <translation>Journalisation arrêtée --- %1 ---</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMessagesForm.cpp" line="147"/>
+        <location filename="../src/qjackctlMessagesForm.cpp" line="146"/>
         <source>Logging started --- %1 ---</source>
         <translation>Journalisation démarrée --- %1 ---</translation>
     </message>
@@ -1531,27 +1528,23 @@ Voulez-vous enlever la connexion de la baie de brassage?</translation>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>This will disconnect all sockets.</source>
         <translation type="obsolete">Cela va déconnecter toutes les prises.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Are you sure?</source>
         <translation type="obsolete">Êtes vous certain?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Oui</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Non</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbay.cpp" line="1740"/>
+        <location filename="../src/qjackctlPatchbay.cpp" line="1739"/>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
@@ -1693,16 +1686,19 @@ Are you sure?</source>
         <translation>Rafraîchir la vue actuelle de la baie de brassage</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="108"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="236"/>
         <source>Down</source>
         <translation>Vers le Bas</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="105"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="233"/>
         <source>Move currently selected output socket down one position</source>
         <translation>Déplacer d&apos;une position vers le bas la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="124"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="284"/>
         <source>Add...</source>
         <translation>Ajouter...</translation>
@@ -1713,6 +1709,7 @@ Are you sure?</source>
         <translation>Créer une nouvelle prise de sortie</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="156"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="300"/>
         <source>Edit...</source>
         <translation>Editer...</translation>
@@ -1723,16 +1720,19 @@ Are you sure?</source>
         <translation>Editer les propriétés de la prise d&apos;entrée actuellement sélectionnée</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="188"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="316"/>
         <source>Up</source>
         <translation>Vers le haut</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="185"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="313"/>
         <source>Move currently selected output socket up one position</source>
         <translation>Déplacer d&apos;une position vers le haut la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="204"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="252"/>
         <source>Remove</source>
         <translation>Enlever</translation>
@@ -1743,6 +1743,7 @@ Are you sure?</source>
         <translation>Enlever la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.ui" line="220"/>
         <location filename="../src/qjackctlPatchbayForm.ui" line="268"/>
         <source>Copy...</source>
         <translation>Copier...</translation>
@@ -1778,52 +1779,44 @@ Are you sure?</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The patchbay definition has been changed:</source>
         <translation type="obsolete">La définition de baie de brassage a été changée:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Do you want to save the changes?</source>
         <translation type="obsolete">Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save</source>
         <translation type="obsolete">Enregistrer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Ignorer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Cancel</source>
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>modified</source>
         <translation type="obsolete">modifié</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Untitled</source>
         <translation type="obsolete">Sans titre</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.cpp" line="364"/>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="394"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not load patchbay definition file:</source>
         <translation type="obsolete">Impossible de charger le fichier de définition de baie de brassage:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Could not save patchbay definition file:</source>
         <translation type="obsolete">Impossible d&apos;enregistrer le fichier de définition de baie de brassage:</translation>
     </message>
@@ -1833,26 +1826,23 @@ Are you sure?</source>
         <translation>Nouvelle définition de baie de brassage</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Create patchbay definition as a snapshot</source>
         <translation type="obsolete">Prendre un cliché de toutes les connexions clientes actuelles</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>of all actual client connections?</source>
         <translation type="obsolete">pour créer une définition de baie de brassage?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Oui</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Non</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlPatchbayForm.cpp" line="473"/>
         <location filename="../src/qjackctlPatchbayForm.cpp" line="493"/>
         <source>Patchbay Definition files</source>
         <translation>Fichiers de définition de baie de brassage</translation>
@@ -1873,7 +1863,7 @@ Are you sure?</source>
         <translation>actif</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.cpp" line="224"/>
+        <location filename="../src/qjackctlPatchbayForm.cpp" line="222"/>
         <source>The patchbay definition has been changed:
 
 &quot;%1&quot;
@@ -1896,7 +1886,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>SansTitre%1</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.cpp" line="366"/>
+        <location filename="../src/qjackctlPatchbayForm.cpp" line="365"/>
         <source>Could not load patchbay definition file: 
 
 &quot;%1&quot;</source>
@@ -1905,7 +1895,7 @@ Voulez-vous enregistrer les changements?</translation>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.cpp" line="396"/>
+        <location filename="../src/qjackctlPatchbayForm.cpp" line="395"/>
         <source>Could not save patchbay definition file: 
 
 &quot;%1&quot;</source>
@@ -1914,7 +1904,7 @@ Voulez-vous enregistrer les changements?</translation>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbayForm.cpp" line="441"/>
+        <location filename="../src/qjackctlPatchbayForm.cpp" line="440"/>
         <source>Create patchbay definition as a snapshot
 of all actual client connections?</source>
         <translation>Prendre un cliché de toutes les connexions clientes actuelles
@@ -2031,6 +2021,16 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Nom du préréglage :</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="114"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="890"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="981"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1051"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1139"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1201"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1221"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1345"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1668"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1868"/>
         <location filename="../src/qjackctlSetupForm.ui" line="4254"/>
         <source>(default)</source>
         <translation>(par défaut)</translation>
@@ -2046,6 +2046,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Enregistrer</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="131"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2023"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3774"/>
         <source>Alt+S</source>
         <translation>Alt+E</translation>
@@ -2061,6 +2063,9 @@ pour créer une définition de baie de brassage?</translation>
         <translation>E&amp;ffacer</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="150"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2042"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3216"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3870"/>
         <source>Alt+D</source>
         <translation>Alt+F</translation>
@@ -2136,7 +2141,6 @@ pour créer une définition de baie de brassage?</translation>
         <translation>freebob</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>The software driver to use</source>
         <translation type="obsolete">Pilote logiciel à utiliser</translation>
     </message>
@@ -2161,36 +2165,43 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Échantillons/Période :</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1477"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1735"/>
         <source>16</source>
         <translation>16</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1482"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1740"/>
         <source>32</source>
         <translation>32</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1487"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1745"/>
         <source>64</source>
         <translation>64</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1492"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1783"/>
         <source>128</source>
         <translation>128</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1497"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1788"/>
         <source>256</source>
         <translation>256</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1502"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1793"/>
         <source>512</source>
         <translation>512</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1507"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1798"/>
         <source>1024</source>
         <translation>1024</translation>
@@ -2216,7 +2227,6 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Nombre de port ma&amp;ximal :</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Channel:</source>
         <translation type="obsolete">&amp;Canal:</translation>
     </message>
@@ -2226,7 +2236,6 @@ pour créer une définition de baie de brassage?</translation>
         <translation>21333</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Number o microseconds to wait between engine processes (dummy)</source>
         <translation type="obsolete">Nombre de microsecondes à attendre entre les traitements du moteur (factice)</translation>
     </message>
@@ -2306,7 +2315,6 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Fréquence d&apos;échantillonnage (Hz) :</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>PCM channel</source>
         <translation type="obsolete">Canal PCM</translation>
     </message>
@@ -2321,11 +2329,13 @@ pour créer une définition de baie de brassage?</translation>
         <translation>200</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1925"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3391"/>
         <source>500</source>
         <translation>500</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1930"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3396"/>
         <source>1000</source>
         <translation>1000</translation>
@@ -2336,6 +2346,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>2000</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1940"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3406"/>
         <source>5000</source>
         <translation>5000</translation>
@@ -2356,6 +2367,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Temps &amp;réel</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="592"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2983"/>
         <location filename="../src/qjackctlSetupForm.ui" line="4119"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
@@ -2371,6 +2384,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>P&amp;as de verrouillage mémoire</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="611"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3235"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3813"/>
         <source>Alt+K</source>
         <translation>Alt+A</translation>
@@ -2386,6 +2401,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Déverrouiller la mémoire</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="630"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2004"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3977"/>
         <source>Alt+U</source>
         <translation>Alt+D</translation>
@@ -2401,6 +2418,10 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Mode &amp;logiciel</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="649"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3156"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3178"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3320"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3490"/>
         <source>Alt+F</source>
         <translation>Alt+L</translation>
@@ -2416,6 +2437,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Écoute de contrôle</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="668"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2806"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3358"/>
         <source>Alt+M</source>
         <translation>Alt+E</translation>
@@ -2446,6 +2469,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Éc&amp;oute de contrôle matérielle</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="706"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3958"/>
         <source>Alt+O</source>
         <translation>Alt+O</translation>
@@ -2476,6 +2500,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Ignorer matériel</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="744"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2523"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3889"/>
         <source>Alt+I</source>
         <translation>Alt+I</translation>
@@ -2551,17 +2577,17 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Fournir la capture audio, la reproduction audio ou les deux</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>default</source>
         <translation type="obsolete">par défaut</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1056"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1144"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1226"/>
         <source>hw:0</source>
         <translation>hw:0</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>hw:1</source>
         <translation type="obsolete">hw:1</translation>
     </message>
@@ -2571,6 +2597,12 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Nom du périphérique PCM à utiliser</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1103"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1295"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1326"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2097"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2183"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2245"/>
         <location filename="../src/qjackctlSetupForm.ui" line="2350"/>
         <source>&gt;</source>
         <translation>&gt;</translation>
@@ -2581,6 +2613,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Sélectionner le périphérique de sortie pour la reproduction</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1071"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1159"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1241"/>
         <source>/dev/dsp</source>
         <translation>/dev/dsp</translation>
@@ -2651,7 +2685,6 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Régler le mode du bruit de dispersion (dither)</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>&amp;Verbose messages output</source>
         <translation type="obsolete">Sortie de messages ba&amp;varde</translation>
     </message>
@@ -2736,11 +2769,19 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Ligne de commande à exécuter avant de démarrer le serveur audio JACK</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="2094"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2180"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2242"/>
         <location filename="../src/qjackctlSetupForm.ui" line="2347"/>
         <source>Scripting argument meta-symbols</source>
         <translation>Méta-symboles des arguments de script</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="2128"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2214"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2276"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2381"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2670"/>
         <location filename="../src/qjackctlSetupForm.ui" line="2787"/>
         <source>...</source>
         <translation>...</translation>
@@ -2776,6 +2817,8 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Exécuter un script après l&apos;ex&amp;tinction :</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="2319"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="2951"/>
         <location filename="../src/qjackctlSetupForm.ui" line="4138"/>
         <source>Alt+T</source>
         <translation>Alt+T</translation>
@@ -2806,6 +2849,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Capturer la sortie standard</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="2448"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3793"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
@@ -2851,6 +2895,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>5</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="2578"/>
         <location filename="../src/qjackctlSetupForm.ui" line="4279"/>
         <source>10</source>
         <translation>10</translation>
@@ -2896,6 +2941,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Rafraîchir &amp;automatiquement les connexions de la baie de brassage toute les (en s) :</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="2689"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3918"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
@@ -2971,6 +3017,9 @@ pour créer une définition de baie de brassage?</translation>
         <translation>MT&amp;B (mesure:temps.battement) du déplacement</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="2967"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3656"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="4015"/>
         <location filename="../src/qjackctlSetupForm.ui" line="4157"/>
         <source>Alt+B</source>
         <translation>Alt+D</translation>
@@ -3006,6 +3055,9 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Grande horloge :</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="3153"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3175"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="3317"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3487"/>
         <source>&amp;Font...</source>
         <translation>&amp;Police...</translation>
@@ -3136,6 +3188,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Activer les aliases de client/p&amp;ort</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="3675"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3996"/>
         <source>Alt+N</source>
         <translation>Alt+O</translation>
@@ -3151,6 +3204,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Dessiner les lignes de connexion et de baie de brassage en courbes de Be&amp;zier</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="3694"/>
         <location filename="../src/qjackctlSetupForm.ui" line="3851"/>
         <source>Alt+Z</source>
         <translation>Alt+Z</translation>
@@ -3326,37 +3380,33 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Annuler</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.cpp" line="796"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="848"/>
         <location filename="../src/qjackctlSetupForm.cpp" line="1844"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Some settings have been changed:</source>
         <translation type="obsolete">Des paramètres ont été changés:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Do you want to save the changes?</source>
         <translation type="obsolete">Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Save</source>
         <translation type="obsolete">Enregistrer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Ignorer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Delete preset:</source>
         <translation type="obsolete">Effacer préréglage:</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Are you sure?</source>
         <translation type="obsolete">Êtes vous certain?</translation>
     </message>
@@ -3436,17 +3486,14 @@ pour créer une définition de baie de brassage?</translation>
         <translation>Définition de baie de brassage à activer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Some settings have been changed.</source>
         <translation type="obsolete">Des paramètres ont été modifiés.</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Do you want to apply the changes?</source>
         <translation type="obsolete">Voulez-vous appliquer les changements?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Apply</source>
         <translation type="obsolete">Appliquer</translation>
     </message>
@@ -3496,12 +3543,14 @@ pour créer une définition de baie de brassage?</translation>
         <translation>firewire</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1061"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1149"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1231"/>
         <source>plughw:0</source>
         <translation>plughw:0</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="799"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="797"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -3514,7 +3563,7 @@ Do you want to save the changes?</source>
 Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="851"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="849"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -3527,7 +3576,7 @@ Are you sure?</source>
 Êtes vous certain?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSetupForm.cpp" line="1846"/>
+        <location filename="../src/qjackctlSetupForm.cpp" line="1845"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -3551,6 +3600,8 @@ Voulez-vous appliquer les changements?</translation>
         <translation>sun</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="1066"/>
+        <location filename="../src/qjackctlSetupForm.ui" line="1154"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1236"/>
         <source>/dev/audio</source>
         <translation>/dev/audio</translation>
@@ -3809,7 +3860,6 @@ Voulez-vous appliquer les changements?</translation>
         <translation>Alt+E</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Edit currently selected plug/port</source>
         <translation type="obsolete">Éditer la fiche/le port actuellement sélectionné</translation>
     </message>
@@ -3844,7 +3894,6 @@ Voulez-vous appliquer les changements?</translation>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Move down currently selected plug socket plugst</source>
         <translation type="obsolete">Déplacer vers le bas la fiche actuellement sélectionnée dans la liste des prises</translation>
     </message>
@@ -3859,7 +3908,6 @@ Voulez-vous appliquer les changements?</translation>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Move up current selected plug socket plugst</source>
         <translation type="obsolete">Déplacer vers le haut la fiche actuellement sélectionnée dans la liste des prises</translation>
     </message>
@@ -3979,19 +4027,17 @@ Voulez-vous appliquer les changements?</translation>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="341"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="340"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
         <translation>Des paramètres ont été modifiés.Voulez-vous appliquer les changements?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Apply</source>
         <translation type="obsolete">Appliquer</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Discard</source>
         <translation type="obsolete">Ignorer</translation>
     </message>
@@ -4029,7 +4075,6 @@ Do you want to apply the changes?</source>
         <translation>Prise</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>New</source>
         <translation type="obsolete">Nouvelle</translation>
     </message>
@@ -4039,27 +4084,22 @@ Do you want to apply the changes?</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>about to be removed</source>
         <translation type="obsolete">sur le point d&apos;être enlevée</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Are you sure?</source>
         <translation type="obsolete">Êtes-vous certain?</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Yes</source>
         <translation type="obsolete">Oui</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>No</source>
         <translation type="obsolete">Non</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Copy</source>
         <translation type="obsolete">Copie</translation>
     </message>
@@ -4069,7 +4109,7 @@ Do you want to apply the changes?</source>
         <translation>&lt;Nouvelle&gt; - %1</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbay.cpp" line="546"/>
+        <location filename="../src/qjackctlPatchbay.cpp" line="544"/>
         <source>%1 about to be removed:
 
 &quot;%2&quot;
@@ -4081,7 +4121,7 @@ Are you sure?</source>
 Êtes-vous certain?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlPatchbay.cpp" line="635"/>
+        <location filename="../src/qjackctlPatchbay.cpp" line="634"/>
         <source>%1 &lt;Copy&gt; - %2</source>
         <translation>%1 &lt;Copie&gt; - %2</translation>
     </message>
@@ -4089,17 +4129,14 @@ Are you sure?</source>
 <context>
     <name>qjackctlSocketListView</name>
     <message>
-        <location filename="" line="0"/>
         <source>Output Sockets</source>
         <translation type="obsolete">Prises de Sortie</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Plugs</source>
         <translation type="obsolete">Fiches</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>Input Sockets</source>
         <translation type="obsolete">Prises d&apos;Entrée</translation>
     </message>
@@ -4247,7 +4284,6 @@ Are you sure?</source>
         <translation>Fréquence d&apos;échantillonnage</translation>
     </message>
     <message>
-        <location filename="" line="0"/>
         <source>CPU Load</source>
         <translation type="obsolete">Charge processeur</translation>
     </message>
