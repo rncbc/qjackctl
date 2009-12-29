@@ -5,6 +5,12 @@ ChangeLog
 
 SVN HEAD
 
+- D-Bus support, as probided by org.jackaudio.service aka jackdbus,
+  is now being introduced and used wherever available and whenever
+  enabled. Configuring, starting, stopping and logging the JACK
+  back-end server through the "infamous" jackdbus service is now
+  being seamlessly exploited (EXPERIMENTAL).
+
 - Global configuration state is now explicitly saved/committed to
   disk when Setup dialog changes are accepted and applied.
 

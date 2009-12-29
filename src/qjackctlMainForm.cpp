@@ -62,7 +62,8 @@ const WindowFlags CustomizeWindowHint   = WindowFlags(0x02000000);
 
 
 #ifdef CONFIG_DBUS
-#include <QDBusConnection>
+#include <QDBusInterface>
+#include <QThread>
 #endif
 
 #ifdef CONFIG_JACK_STATISTICS
@@ -112,6 +113,10 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #define QJACKCTL_BUFF_EVENT     QEvent::Type(QEvent::User + 3)
 #define QJACKCTL_SHUT_EVENT     QEvent::Type(QEvent::User + 4)
 #define QJACKCTL_EXIT_EVENT     QEvent::Type(QEvent::User + 5)
+
+#ifdef CONFIG_DBUS
+#define QJACKCTL_LINE_EVENT     QEvent::Type(QEvent::User + 6)
+#endif
 
 
 //----------------------------------------------------------------------------
@@ -192,6 +197,82 @@ static void qjackctl_on_error ( QProcess::ProcessError error )
 }
 
 
+#ifdef CONFIG_DBUS
+
+//----------------------------------------------------------------------
+// class qjackctlDBusLogWatcher -- Simple D-BUS log watcher thread.
+//
+
+class qjackctlDBusLogWatcher : public QThread
+{
+public:
+
+	// Constructor.
+	qjackctlDBusLogWatcher(const QString& sFilename) : QThread(),
+		m_sFilename(sFilename), m_bRunState(false) {}
+
+	// Destructor.
+	~qjackctlDBusLogWatcher()
+		{ if (isRunning()) do { m_bRunState = false; } while (!wait(1000)); }
+
+	// Custom log event.
+	class LineEvent : public QEvent
+	{
+	public:
+		// Constructor.
+		LineEvent(QEvent::Type eType, const QString& sLine)
+			: QEvent(eType), m_sLine(sLine) {}
+		// Accessor.
+		const QString& line() const
+			{ return m_sLine; }
+	private:
+		// Custom event data.
+		QString m_sLine;
+	};
+
+protected:
+
+	// The main thread executive.
+	void run()
+	{
+		QFile file(m_sFilename);
+	 
+		m_bRunState = true;
+	
+		while (m_bRunState) {
+			if (file.isOpen()) {
+				char achBuffer[1024];
+				while (file.readLine(achBuffer, sizeof(achBuffer)) > 0) {
+					QApplication::postEvent(
+						qjackctlMainForm::getInstance(),
+						new LineEvent(QJACKCTL_LINE_EVENT, achBuffer)); 
+				}
+				if (file.size()  == file.pos() &&
+					file.error() == QFile::NoError) {
+					msleep(1000);
+				} else {
+					file.close();
+				}
+			}
+			else
+			if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+				file.seek(file.size());
+			}
+		}
+	}
+
+private:
+
+	// The log filename to watch.
+	QString m_sFilename;
+
+	// Whether the thread is logically running.
+	volatile bool m_bRunState;
+};
+
+#endif	// CONFIG_DBUS
+
+
 //----------------------------------------------------------------------------
 // qjackctlMainForm -- UI wrapper form.
 
@@ -218,6 +299,12 @@ qjackctlMainForm::qjackctlMainForm (
 	m_bJackDetach   = false;
 	m_bJackShutdown = false;
 	m_pAlsaSeq      = NULL;
+#ifdef CONFIG_DBUS
+	m_pDBusControl  = NULL;
+	m_pDBusConfig   = NULL;
+	m_pDBusLogWatcher = NULL;
+	m_bDBusStarted  = false;
+#endif	
 	m_iStartDelay   = 0;
 	m_iTimerDelay   = 0;
 	m_iTimerRefresh = 0;
@@ -325,6 +412,19 @@ qjackctlMainForm::~qjackctlMainForm (void)
 {
 	// Stop server, if not already...
 	stopJackServer();
+
+#ifdef CONFIG_DBUS
+	if (m_pDBusLogWatcher)
+		delete m_pDBusLogWatcher;
+	if (m_pDBusConfig)
+		delete m_pDBusConfig;
+	if (m_pDBusControl)
+		delete m_pDBusControl;
+	m_pDBusControl = NULL;
+	m_pDBusConfig  = NULL;
+	m_pDBusLogWatcher = NULL;
+	m_bDBusStarted = false;
+#endif	
 
 	// Terminate local ALSA sequencer interface.
 	if (m_pAlsaNotifier)
@@ -493,15 +593,61 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 #ifdef CONFIG_DBUS
 	// Register D-Bus service...
 	if (m_pSetup->bDBusEnabled) {
-	//	QDBusConnection dbus = QDBusConnection::sessionBus();
 		QDBusConnection dbus = QDBusConnection::systemBus();
 		dbus.connect("", "", "org.rncbc.qjackctl", "start", 
 			this, SLOT(startJack()));
 		dbus.connect("", "", "org.rncbc.qjackctl", "stop", 
 			this, SLOT(stopJack()));
+		// Detect whether jackdbus is avaliable...
+		QDBusConnection dbusc = QDBusConnection::sessionBus();
+		m_pDBusControl = new QDBusInterface(
+			"org.jackaudio.service",		// Service
+			"/org/jackaudio/Controller",	// Path
+			"org.jackaudio.JackControl",	// Interface
+			dbusc);							// Connection
+		QDBusMessage dbusm = m_pDBusControl->call("IsStarted");
+		if (dbusm.type() == QDBusMessage::ReplyMessage) {
+			// Yes, jackdbus is available and/or already started
+			// -- use jackdbus control interface...
+			appendMessages(tr("D-BUS: Service is available (%1 aka jackdbus).")
+				.arg(m_pDBusControl->service()));
+			// Parse reply (should be boolean)
+			m_bDBusStarted = dbusm.arguments().first().toBool();
+			// Register server start/stop notification slots...
+			dbusc.connect(
+				m_pDBusControl->service(),
+				m_pDBusControl->path(),
+				m_pDBusControl->interface(),
+				"ServerStarted", this,
+				SLOT(jackStarted()));
+			dbusc.connect(
+				m_pDBusControl->service(),
+				m_pDBusControl->path(),
+				m_pDBusControl->interface(),
+				"ServerStopped", this,
+				SLOT(jackFinished()));
+			// -- use jackdbus configure interface...
+			m_pDBusConfig = new QDBusInterface(
+				m_pDBusControl->service(),	// Service
+				m_pDBusControl->path(),		// Path
+				"org.jackaudio.Configure",	// Interface
+				m_pDBusControl->connection());	// Connection
+			// Start our log watcher thread...
+			m_pDBusLogWatcher = new qjackctlDBusLogWatcher(
+				QDir::homePath() + "/.log/jack/jackdbus.log");
+			m_pDBusLogWatcher->start();
+			// Ready now.
+		} else {
+			// No, jackdbus is not available, not started
+			// or not even installed -- use classic jackd, BAU...
+			appendMessages(tr("D-BUS: Service not available (%1 aka jackdbus).")
+				.arg(m_pDBusControl->service()));
+			// Destroy tentative jackdbus interface.
+			delete m_pDBusControl;
+			m_pDBusControl = NULL;
+		}
 	}
 #endif
-
 
 	// Load patchbay form recent paths...
 	if (m_pPatchbayForm) {
@@ -639,6 +785,12 @@ void qjackctlMainForm::customEvent ( QEvent *pEvent )
 	case QJACKCTL_EXIT_EVENT:
 		exitNotifyEvent();
 		break;
+#ifdef CONFIG_DBUS
+	case QJACKCTL_LINE_EVENT:
+		appendStdoutBuffer(
+			static_cast<qjackctlDBusLogWatcher::LineEvent *> (pEvent)->line());
+		break;
+#endif
 	default:
 		QWidget::customEvent(pEvent);
 		break;
@@ -752,7 +904,25 @@ void qjackctlMainForm::startJack (void)
 			tr("Startup script terminated"));
 	}
 
-	// OK. Let's build the startup process...
+#ifdef CONFIG_DBUS	
+	// Jack D-BUS server backend configuration...
+	setDBusParameters();
+	// Jack D-BUS server backend startup method...
+	if (m_pDBusControl) {
+		QDBusMessage dbusm = m_pDBusControl->call("StartServer");
+		if (dbusm.type() == QDBusMessage::ReplyMessage) {
+			appendMessages(
+				tr("D-BUS: JACK server is starting..."));
+		} else {
+			appendMessagesError(
+				tr("D-BUS: JACK server could not be started.\n\nSorry"));
+		}
+		// Do nothing else.
+		return;
+	}
+#endif
+
+	// Jack classic server backend startup process...
 	m_pJack = new QProcess(this);
 
 	// Setup stdout/stderr capture...
@@ -977,9 +1147,7 @@ void qjackctlMainForm::startJack (void)
 void qjackctlMainForm::stopJack (void)
 {
 	// Check if we're allowed to stop (shutdown)...
-	if (m_pSetup->bQueryShutdown && m_pJack
-		&& m_pJack->state() == QProcess::Running
-		&& m_pConnectionsForm 
+	if (m_pSetup->bQueryShutdown && m_pConnectionsForm 
 		&& (m_pConnectionsForm->isAudioConnected() ||
 			m_pConnectionsForm->isMidiConnected())
 		&& QMessageBox::warning(this,
@@ -1008,7 +1176,15 @@ void qjackctlMainForm::stopJackServer (void)
 	stopJackClient();
 
 	// And try to stop server.
+#ifdef CONFIG_DBUS	
+	if ((m_pJack && m_pJack->state() == QProcess::Running)
+		|| (m_pDBusControl && m_bDBusStarted)) {
+		if (m_pDBusControl)
+			appendMessages(tr("D-BUS: JACK is stopping..."));
+		if (m_pJack)
+#else
 	if (m_pJack && m_pJack->state() == QProcess::Running) {
+#endif
 		appendMessages(tr("JACK is stopping..."));
 		updateServerState(QJACKCTL_STOPPING);
 		// Do we have any pre-shutdown script?...
@@ -1020,13 +1196,29 @@ void qjackctlMainForm::stopJackServer (void)
 		}
 		// Now it's the time to real try stopping the server daemon...
 		if (!m_bJackShutdown) {
-#if defined(WIN32)
-			// Try harder...
-			m_pJack->kill();
-#else
-			// Try softly...
-			m_pJack->terminate();
-#endif
+			// Jack classic server backend...
+			if (m_pJack) {
+			#if defined(WIN32)
+				// Try harder...
+				m_pJack->kill();
+			#else
+				// Try softly...
+				m_pJack->terminate();
+			#endif
+			}
+		#ifdef CONFIG_DBUS	
+			// Jack D-BUS server backend...
+			if (m_pDBusControl) {
+				QDBusMessage dbusm = m_pDBusControl->call("StopServer");
+				if (dbusm.type() == QDBusMessage::ReplyMessage) {
+					appendMessages(
+						tr("D-BUS: JACK server is stopping..."));
+				} else {
+					appendMessagesError(
+						tr("D-BUS: JACK server could not be stopped.\n\nSorry"));
+				}
+			}
+		#endif
 			// Give it some time to terminate gracefully and stabilize...
 			stabilize(QJACKCTL_TIMER_MSECS);
 			// Keep on, if not exiting for good.
@@ -1088,8 +1280,19 @@ void qjackctlMainForm::flushStdoutBuffer (void)
 void qjackctlMainForm::jackStarted (void)
 {
 	// Show startup results...
-	appendMessages(tr("JACK was started with PID=%1.")
-		.arg(long(m_pJack->pid())));
+	if (m_pJack) {
+		appendMessages(tr("JACK was started with PID=%1.")
+			.arg(long(m_pJack->pid())));
+	}
+
+#ifdef CONFIG_DBUS	
+	// Special for D-BUS control....
+	if (m_pDBusControl) {
+		m_bDBusStarted = true;
+		appendMessages(tr("D-BUS: JACK server was started (%1 aka jackdbus).")
+			.arg(m_pDBusControl->service()));
+	}
+#endif
 
 	// Sloppy boy fix: may the serve be stopped, just in case
 	// the client will nerver make it...
@@ -1131,6 +1334,7 @@ void qjackctlMainForm::jackCleanup (void)
 
 	// Flush anything that maybe pending...
 	flushStdoutBuffer();
+	bool bPostShutdown = false;
 
 	if (m_pJack) {
 		if (m_pJack->state() != QProcess::NotRunning) {
@@ -1146,14 +1350,28 @@ void qjackctlMainForm::jackCleanup (void)
 		// Destroy it.
 		delete m_pJack;
 		m_pJack = NULL;
-		// Do we have any post-shutdown script?...
-		// (this will be always called, despite we've started the server or not)
-		if (m_pSetup->bPostShutdownScript
-			&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
-			shellExecute(m_pSetup->sPostShutdownScriptShell,
-				tr("Post-shutdown script..."),
-				tr("Post-shutdown script terminated"));
-		}
+		// Flag we need a post-shutdown script...
+		bPostShutdown = true;
+	}
+
+#ifdef CONFIG_DBUS
+	// Special for D-BUS control....
+	if (m_pDBusControl && m_bDBusStarted) {
+		m_bDBusStarted = false;
+		appendMessages(tr("D-BUS: JACK server was stopped (%1 aka jackdbus).")
+			.arg(m_pDBusControl->service()));
+		// Flag we need a post-shutdown script...
+		bPostShutdown = true;
+	}
+#endif
+
+	// Do we have any post-shutdown script?...
+	// (this will be always called, despite we've started the server or not)
+	if (bPostShutdown && m_pSetup->bPostShutdownScript
+		&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
+		shellExecute(m_pSetup->sPostShutdownScriptShell,
+			tr("Post-shutdown script..."),
+			tr("Post-shutdown script terminated"));
 	}
 
 	// Stabilize final server state...
@@ -1191,6 +1409,7 @@ QString& qjackctlMainForm::detectXrun ( QString& s )
 #ifndef CONFIG_JACK_XRUN_DELAY
 		m_tXrunLast.restart();
 		updateXrunStats(rx.cap(1).toFloat());
+		refreshXrunStats();
 #endif
 	}
 	return s;
@@ -3090,6 +3309,255 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 		resetXrunStats();
 	}
 }
+
+
+#ifdef CONFIG_DBUS
+
+// D-BUS: Set/reset parameter values from current selected preset options.
+void qjackctlMainForm::setDBusParameters (void)
+{
+	// Set configuration parameters...
+	bool bDummy     = (m_preset.sDriver == "dummy");
+	bool bSun       = (m_preset.sDriver == "sun");
+	bool bOss       = (m_preset.sDriver == "oss");
+	bool bAlsa      = (m_preset.sDriver == "alsa");
+	bool bPortaudio = (m_preset.sDriver == "portaudio");
+	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
+	bool bFreebob   = (m_preset.sDriver == "freebob");
+	bool bFirewire  = (m_preset.sDriver == "firewire");
+	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	setDBusEngineParameter("name",
+		m_pSetup->sServerName,
+		!m_pSetup->sServerName.isEmpty());
+	setDBusEngineParameter("verbose", m_preset.bVerbose);
+	setDBusEngineParameter("realtime", m_preset.bRealtime);
+	setDBusEngineParameter("realtime-priority",
+		m_preset.iPriority,
+		m_preset.bRealtime && m_preset.iPriority > 0);
+//	setDBusEngineParameter("port-max",
+//		m_preset.iPortMax,
+//		m_preset.iPortMax > 0);
+	setDBusEngineParameter("client-timeout",
+		m_preset.iTimeout,
+		m_preset.iTimeout > 0);
+//	setDBusEngineParameter("no-memlock", m_preset.bNoMemLock);
+//	setDBusEngineParameter("unlock-mem",
+//		m_preset.bUnlockMem,
+//		!m_preset.bNoMemLock);
+	setDBusEngineParameter("driver", m_preset.sDriver);
+	if (bAlsa && (m_preset.iAudio != QJACKCTL_DUPLEX ||
+		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
+		QString sInterface = m_preset.sInterface;
+		if (sInterface.isEmpty())
+			sInterface = "hw:0";
+		setDBusDriverParameter("device", sInterface);
+	}
+	if (bPortaudio) {
+		setDBusDriverParameter("channel",
+			(unsigned int) m_preset.iChan,
+			m_preset.iChan > 0);
+	}
+	if (bCoreaudio || bFreebob || bFirewire) {
+		setDBusDriverParameter("device",
+			m_preset.sInterface,
+			!m_preset.sInterface.isEmpty());
+	}
+	if (!bNet) {
+		setDBusDriverParameter("rate",
+			(unsigned int) m_preset.iSampleRate,
+			m_preset.iSampleRate > 0);
+		setDBusDriverParameter("period",
+			(unsigned int) m_preset.iFrames,
+			m_preset.iFrames > 0);
+	}
+	if (bAlsa || bSun || bOss || bFreebob || bFirewire) {
+		setDBusDriverParameter("nperiods",
+			(unsigned int) m_preset.iPeriods,
+			m_preset.iPeriods > 0);
+	}
+	if (bAlsa) {
+		setDBusDriverParameter("duplex",
+			bool(m_preset.iAudio == QJACKCTL_DUPLEX));
+		setDBusDriverParameter("capture",
+			m_preset.sInDevice,
+			!m_preset.sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		setDBusDriverParameter("playback",
+			m_preset.sOutDevice,
+			!m_preset.sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
+		setDBusDriverParameter("softmode", m_preset.bSoftMode);
+		setDBusDriverParameter("monitor", m_preset.bMonitor);
+		setDBusDriverParameter("shorts", m_preset.bShorts);
+		setDBusDriverParameter("inchannels",
+			(unsigned int) m_preset.iInChannels,
+			m_preset.iInChannels > 0 && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		setDBusDriverParameter("outchannels",
+			(unsigned int) m_preset.iOutChannels,
+			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
+#ifdef CONFIG_JACK_MIDI
+		setDBusDriverParameter("midi-driver",
+			m_preset.sMidiDriver,
+			!m_preset.sMidiDriver.isEmpty());
+#endif
+	}
+	else if (bOss || bSun) {
+		setDBusDriverParameter("ignorehw", m_preset.bIgnoreHW);
+		setDBusDriverParameter("wordlength",
+			(unsigned int) m_preset.iWordLength,
+			m_preset.iWordLength > 0);
+		setDBusDriverParameter("capture",
+			m_preset.sInDevice,
+			!m_preset.sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		setDBusDriverParameter("playback",
+			m_preset.sOutDevice,
+			!m_preset.sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
+		setDBusDriverParameter("inchannels",
+			(unsigned int) m_preset.iInChannels,
+			m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		setDBusDriverParameter("outchannels",
+			(unsigned int) m_preset.iOutChannels,
+			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
+	}
+	else if (bCoreaudio || bPortaudio || bFirewire || bNet) {
+		setDBusDriverParameter("inchannels",
+			(unsigned int) m_preset.iInChannels,
+			m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		setDBusDriverParameter("outchannels",
+			(unsigned int) m_preset.iOutChannels,
+			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
+	}
+	else if (bFreebob) {
+		setDBusDriverParameter("duplex",
+			bool(m_preset.iAudio == QJACKCTL_DUPLEX));
+		resetDBusDriverParameter("capture");
+		resetDBusDriverParameter("playback");
+		resetDBusDriverParameter("outchannels");
+		resetDBusDriverParameter("inchannels");
+	}
+	if (bDummy) {
+		setDBusDriverParameter("wait",
+			(unsigned int) m_preset.iWait,
+			m_preset.iWait > 0);
+	}
+	if (bAlsa || bPortaudio) {
+		setDBusDriverParameter("dither",
+			QChar((unsigned char) m_preset.iDither),
+			m_preset.iDither > 0);
+	}
+	if (bAlsa) {
+		setDBusDriverParameter("hwmon", m_preset.bHWMon);
+		setDBusDriverParameter("hwmeter", m_preset.bHWMeter);
+	}
+	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob) {
+		setDBusDriverParameter("input-latency",
+			(unsigned int) m_preset.iInLatency,
+			m_preset.iInLatency > 0);
+		setDBusDriverParameter("output-latency",
+			(unsigned int) m_preset.iOutLatency,
+			m_preset.iOutLatency > 0);
+	}
+}
+
+
+
+// D-BUS: Set parameter values (with reset option).
+bool qjackctlMainForm::setDBusEngineParameter (
+	const QString& param, const QVariant& value, bool bSet )
+{
+	return setDBusParameter(QStringList() << "engine" << param, value, bSet);
+}
+
+bool qjackctlMainForm::setDBusDriverParameter (
+	const QString& param, const QVariant& value, bool bSet )
+{
+	return setDBusParameter(QStringList() << "driver" << param, value, bSet);
+}
+
+bool qjackctlMainForm::setDBusParameter (
+	const QStringList& path, const QVariant& value, bool bSet )
+{
+	if (m_pDBusConfig == NULL)
+		return false;
+
+	if (!bSet) return resetDBusParameter(path); // Reset option.
+
+	QDBusMessage dbusm = m_pDBusConfig->call(
+		"SetParameterValue", path, QVariant::fromValue(QDBusVariant(value)));
+
+	if (dbusm.type() == QDBusMessage::ErrorMessage) {
+		appendMessagesError(
+			tr("D-BUS: SetParameterValue('%1', '%2'):\n\n"
+			"%3.\n(%4)").arg(path.join(":")).arg(value.toString())
+			.arg(dbusm.errorMessage())
+			.arg(dbusm.errorName()));
+		return false;
+	}
+
+	return true;
+}
+
+
+// D-BUS: Reset parameter (to default) values.
+bool qjackctlMainForm::resetDBusEngineParameter ( const QString& param )
+{
+	return resetDBusParameter(QStringList() << "engine" << param);
+}
+
+bool qjackctlMainForm::resetDBusDriverParameter ( const QString& param )
+{
+	return resetDBusParameter(QStringList() << "driver" << param);
+}
+
+bool qjackctlMainForm::resetDBusParameter ( const QStringList& path )
+{
+	if (m_pDBusConfig == NULL)
+		return false;
+
+	QDBusMessage dbusm = m_pDBusConfig->call("ResetParameterValue", path);
+
+	if (dbusm.type() == QDBusMessage::ErrorMessage) {
+		appendMessagesError(
+			tr("D-BUS: ResetParameterValue('%1'):\n\n"
+			"%2.\n(%3)").arg(path.join(":"))
+			.arg(dbusm.errorMessage())
+			.arg(dbusm.errorName()));
+		return false;
+	}
+
+	return true;
+}
+
+
+// D-BUS: Get parameter values.
+QVariant qjackctlMainForm::getDBusEngineParameter ( const QString& param )
+{
+	return getDBusParameter(QStringList() << "engine" << param);
+}
+
+QVariant qjackctlMainForm::getDBusDriverParameter ( const QString& param )
+{
+	return getDBusParameter(QStringList() << "driver" << param);
+}
+
+QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
+{
+	if (m_pDBusConfig == NULL)
+		return QVariant();
+
+	QDBusMessage dbusm = m_pDBusConfig->call("GetParameterValue", path);
+
+	if (dbusm.type() == QDBusMessage::ErrorMessage) {
+		appendMessagesError(
+			tr("D-BUS: GetParameterValue('%1'):\n\n"
+			"%2.\n(%3)").arg(path.join(":"))
+			.arg(dbusm.errorMessage())
+			.arg(dbusm.errorName()));
+		return QVariant();
+	}
+
+	return dbusm.arguments().first();
+}
+
+#endif	// CONFIG_DBUS
 
 
 // end of qjackctlMainForm.cpp

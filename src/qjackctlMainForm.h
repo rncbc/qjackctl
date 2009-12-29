@@ -50,6 +50,11 @@ class qjackctlPortItem;
 
 class QSocketNotifier;
 
+#ifdef CONFIG_DBUS
+class QDBusInterface;
+class qjackctlDBusLogWatcher;
+#endif	
+
 
 //----------------------------------------------------------------------------
 // qjackctlMainForm -- UI wrapper form.
@@ -199,6 +204,32 @@ protected:
 	void contextMenuEvent(QContextMenuEvent *);
 	void mousePressEvent(QMouseEvent *pMouseEvent);
 
+#ifdef CONFIG_DBUS
+
+	// D-BUS: Set/reset parameter values
+	// from current selected preset options.
+	void setDBusParameters();
+
+	// D-BUS: Set parameter values (with reset option).
+	bool setDBusEngineParameter(
+		const QString& param, const QVariant& value, bool bSet = true);
+	bool setDBusDriverParameter(
+		const QString& param, const QVariant& value, bool bSet = true);
+	bool setDBusParameter(
+		const QStringList& path, const QVariant& value, bool bSet = true);
+
+	// D-BUS: Reset parameter (to default) values.
+	bool resetDBusEngineParameter(const QString& param);
+	bool resetDBusDriverParameter(const QString& param);
+	bool resetDBusParameter(const QStringList& path);
+
+	// D-BUS: Set parameter values.
+	QVariant getDBusEngineParameter(const QString& param);
+	QVariant getDBusDriverParameter(const QString& param);
+	QVariant getDBusParameter(const QStringList& path);
+
+#endif
+
 private:
 
 	// The Qt-designer UI struct...
@@ -216,6 +247,13 @@ private:
 	bool m_bJackShutdown;
 
 	snd_seq_t *m_pAlsaSeq;
+
+#ifdef CONFIG_DBUS
+	QDBusInterface *m_pDBusControl;
+	QDBusInterface *m_pDBusConfig;
+	qjackctlDBusLogWatcher *m_pDBusLogWatcher;
+	bool m_bDBusStarted;
+#endif	
 
 	int m_iStartDelay;
 	int m_iTimerDelay;
