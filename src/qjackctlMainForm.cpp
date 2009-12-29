@@ -3312,6 +3312,7 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 
 
 #ifdef CONFIG_DBUS
+						#include <QDBusArgument>
 
 // D-BUS: Set/reset parameter values from current selected preset options.
 void qjackctlMainForm::setDBusParameters (void)
@@ -3439,9 +3440,15 @@ void qjackctlMainForm::setDBusParameters (void)
 			m_preset.iWait > 0);
 	}
 	if (bAlsa || bPortaudio) {
+		unsigned char dither = 0;
+		switch (m_preset.iDither) {
+		case 0: dither = '-'; break;
+		case 1: dither = 'r'; break;
+		case 2: dither = 's'; break;
+		case 3: dither = 't'; break; }
 		setDBusDriverParameter("dither",
-			QChar((unsigned char) m_preset.iDither),
-			m_preset.iDither > 0);
+			QVariant::fromValue(dither),
+			dither > 0);
 	}
 	if (bAlsa) {
 		setDBusDriverParameter("hwmon", m_preset.bHWMon);
@@ -3554,7 +3561,7 @@ QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 		return QVariant();
 	}
 
-	return dbusm.arguments().first();
+	return dbusm.arguments().at(2);
 }
 
 #endif	// CONFIG_DBUS
