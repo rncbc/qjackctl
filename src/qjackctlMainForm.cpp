@@ -258,6 +258,7 @@ protected:
 			if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
 				file.seek(file.size());
 			}
+			else msleep(1000);
 		}
 	}
 
@@ -3442,7 +3443,7 @@ void qjackctlMainForm::setDBusParameters (void)
 	if (bAlsa || bPortaudio) {
 		unsigned char dither = 0;
 		switch (m_preset.iDither) {
-		case 0: dither = '-'; break;
+		case 0: dither = 'n'; break;
 		case 1: dither = 'r'; break;
 		case 2: dither = 's'; break;
 		case 3: dither = 't'; break; }
