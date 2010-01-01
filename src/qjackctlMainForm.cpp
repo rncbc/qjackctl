@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1180,13 +1180,9 @@ void qjackctlMainForm::stopJackServer (void)
 #ifdef CONFIG_DBUS	
 	if ((m_pJack && m_pJack->state() == QProcess::Running)
 		|| (m_pDBusControl && m_bDBusStarted)) {
-		if (m_pDBusControl)
-			appendMessages(tr("D-BUS: JACK is stopping..."));
-		if (m_pJack)
 #else
 	if (m_pJack && m_pJack->state() == QProcess::Running) {
 #endif
-		appendMessages(tr("JACK is stopping..."));
 		updateServerState(QJACKCTL_STOPPING);
 		// Do we have any pre-shutdown script?...
 		if (m_pSetup->bShutdownScript
@@ -1199,6 +1195,7 @@ void qjackctlMainForm::stopJackServer (void)
 		if (!m_bJackShutdown) {
 			// Jack classic server backend...
 			if (m_pJack) {
+				appendMessages(tr("JACK is stopping..."));
 			#if defined(WIN32)
 				// Try harder...
 				m_pJack->kill();
