@@ -5,6 +5,10 @@ ChangeLog
 
 SVN HEAD
 
+- Got rid of a pretty old and never really useful "jackd-realtime"
+  server path option--actually, it was only seen available on the
+  now defunct old Mandrake Linux distro.
+
 - D-Bus support, as probided by org.jackaudio.service aka jackdbus,
   is now being introduced and used wherever available and whenever
   enabled. Configuring, starting, stopping and logging the JACK
