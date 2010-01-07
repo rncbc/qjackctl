@@ -905,51 +905,6 @@ void qjackctlMainForm::startJack (void)
 			tr("Startup script terminated"));
 	}
 
-#ifdef CONFIG_DBUS	
-	// Jack D-BUS server backend configuration...
-	setDBusParameters();
-	// Jack D-BUS server backend startup method...
-	if (m_pDBusControl) {
-		QDBusMessage dbusm = m_pDBusControl->call("StartServer");
-		if (dbusm.type() == QDBusMessage::ReplyMessage) {
-			appendMessages(
-				tr("D-BUS: JACK server is starting..."));
-		} else {
-			appendMessagesError(
-				tr("D-BUS: JACK server could not be started.\n\nSorry"));
-		}
-		// Do nothing else.
-		return;
-	}
-#endif
-
-	// Jack classic server backend startup process...
-	m_pJack = new QProcess(this);
-
-	// Setup stdout/stderr capture...
-	if (m_pSetup->bStdoutCapture) {
-#if QT_VERSION >= 0x040200
-		m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
-#endif
-		QObject::connect(m_pJack,
-			SIGNAL(readyReadStandardOutput()),
-			SLOT(readStdout()));
-		QObject::connect(m_pJack,
-			SIGNAL(readyReadStandardError()),
-			SLOT(readStdout()));
-	}
-
-	// The unforgiveable signal communication...
-	QObject::connect(m_pJack,
-		SIGNAL(started()),
-		SLOT(jackStarted()));
-	QObject::connect(m_pJack,
-		SIGNAL(error(QProcess::ProcessError)),
-		SLOT(jackError(QProcess::ProcessError)));
-	QObject::connect(m_pJack,
-		SIGNAL(finished(int, QProcess::ExitStatus)),
-		SLOT(jackFinished()));
-
 	// Split the server path into arguments...
 	QStringList args = m_preset.sServer.split(' ');
 	// Look for the executable in the search path;
@@ -990,6 +945,7 @@ void qjackctlMainForm::startJack (void)
 	bool bFreebob   = (m_preset.sDriver == "freebob");
 	bool bFirewire  = (m_preset.sDriver == "firewire");
 	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+
 	if (!m_pSetup->sServerName.isEmpty())
 		args.append("-n" + m_pSetup->sServerName);
 	if (m_preset.bVerbose)
@@ -1129,18 +1085,75 @@ void qjackctlMainForm::startJack (void)
 			args.append("-O" + QString::number(m_preset.iOutLatency));
 	}
 
-	appendMessages(tr("JACK is starting..."));
+	// This is emulated jackd command line, for future reference purposes...
 	m_sJackCmdLine = sCommand + ' ' + args.join(" ").trimmed();
-	appendMessagesColor(m_sJackCmdLine, "#990099");
 
-#if defined(WIN32)
-	const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath(); 
-	m_pJack->setWorkingDirectory(sCurrentDir);
-//	QDir::setCurrent(sCurrentDir);
+#ifdef CONFIG_DBUS
+
+	// Jack D-BUS server backend startup method...
+	if (m_pDBusControl) {
+
+		// Jack D-BUS server backend configuration...
+		setDBusParameters();
+
+		QDBusMessage dbusm = m_pDBusControl->call("StartServer");
+		if (dbusm.type() == QDBusMessage::ReplyMessage) {
+			appendMessages(
+				tr("D-BUS: JACK server is starting..."));
+		} else {
+			appendMessagesError(
+				tr("D-BUS: JACK server could not be started.\n\nSorry"));
+		}
+
+		// Delay our control client...
+		startJackClientDelay();
+
+	} else {
+
+#endif	// !CONFIG_DBUS
+
+		// Jack classic server backend startup process...
+		m_pJack = new QProcess(this);
+
+		// Setup stdout/stderr capture...
+		if (m_pSetup->bStdoutCapture) {
+	#if QT_VERSION >= 0x040200
+			m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
+	#endif
+			QObject::connect(m_pJack,
+				SIGNAL(readyReadStandardOutput()),
+				SLOT(readStdout()));
+			QObject::connect(m_pJack,
+				SIGNAL(readyReadStandardError()),
+				SLOT(readStdout()));
+		}
+
+		// The unforgiveable signal communication...
+		QObject::connect(m_pJack,
+			SIGNAL(started()),
+			SLOT(jackStarted()));
+		QObject::connect(m_pJack,
+			SIGNAL(error(QProcess::ProcessError)),
+			SLOT(jackError(QProcess::ProcessError)));
+		QObject::connect(m_pJack,
+			SIGNAL(finished(int, QProcess::ExitStatus)),
+			SLOT(jackFinished()));
+
+		appendMessages(tr("JACK is starting..."));
+		appendMessagesColor(m_sJackCmdLine, "#990099");
+
+	#if defined(WIN32)
+		const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath(); 
+		m_pJack->setWorkingDirectory(sCurrentDir);
+	//	QDir::setCurrent(sCurrentDir);
+	#endif
+
+		// Go jack, go...
+		m_pJack->start(sCommand, args);
+
+#ifdef CONFIG_DBUS	
+	}
 #endif
-
-	// Go jack, go...
-	m_pJack->start(sCommand, args);
 }
 
 
@@ -1292,18 +1305,8 @@ void qjackctlMainForm::jackStarted (void)
 	}
 #endif
 
-	// Sloppy boy fix: may the serve be stopped, just in case
-	// the client will nerver make it...
-	m_ui.StopToolButton->setEnabled(true);
-
-	// Make sure all status(es) will be updated ASAP...
-	m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
-	m_iStatusBlink = 0;
-
-	// Reset (yet again) the timer counters...
-	m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
-	m_iTimerDelay  = 0;
-	m_iJackRefresh = 0;
+	// Delay our control client...
+	startJackClientDelay();
 }
 
 
@@ -2107,7 +2110,7 @@ void qjackctlMainForm::timerSlot (void)
 		m_iTimerDelay += QJACKCTL_TIMER_MSECS;
 		if (m_iTimerDelay >= m_iStartDelay) {
 			// If we cannot start it now, maybe a lil'mo'later ;)
-			if (!startJackClient(false) && m_pJack) {
+			if (!startJackClient(false)) {
 				m_iStartDelay += m_iTimerDelay;
 				m_iTimerDelay  = 0;
 			}
@@ -2251,6 +2254,24 @@ void qjackctlMainForm::queryDisconnect (
 				m_pPatchbayForm->loadPatchbayRack(m_pPatchbayRack);
 		}
 	}
+}
+
+
+// Delay jack control client start...
+void qjackctlMainForm::startJackClientDelay (void)
+{
+	// Sloppy boy fix: may the serve be stopped, just in case
+	// the client will nerver make it...
+	m_ui.StopToolButton->setEnabled(true);
+
+	// Make sure all status(es) will be updated ASAP...
+	m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+	m_iStatusBlink = 0;
+
+	// Reset (yet again) the timer counters...
+	m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
+	m_iTimerDelay  = 0;
+	m_iJackRefresh = 0;
 }
 
 

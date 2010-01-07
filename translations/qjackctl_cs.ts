@@ -459,7 +459,7 @@ Chcete uložit změny?</translation>
         <translation>Ukončit zpracování signálu a ukončit program</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3236"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3257"/>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
         <source>&amp;Quit</source>
         <translation>&amp;Ukončit</translation>
@@ -475,7 +475,7 @@ Chcete uložit změny?</translation>
         <translation>Spustit server JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3154"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3175"/>
         <location filename="../src/qjackctlMainForm.ui" line="111"/>
         <source>&amp;Start</source>
         <translation>&amp;Spustit</translation>
@@ -506,7 +506,7 @@ Chcete uložit změny?</translation>
         <translation>Ukázat/skrýt rozšířené stavové okno</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3195"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3216"/>
         <location filename="../src/qjackctlMainForm.ui" line="182"/>
         <source>St&amp;atus</source>
         <translation>&amp;Stav</translation>
@@ -517,7 +517,7 @@ Chcete uložit změny?</translation>
         <translation>Ukázat informace o této aplikaci</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3231"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3252"/>
         <location filename="../src/qjackctlMainForm.ui" line="219"/>
         <source>Ab&amp;out...</source>
         <translation>&amp;O...</translation>
@@ -533,7 +533,7 @@ Chcete uložit změny?</translation>
         <translation>Ukázat dialogové okno pro nastavení a volby</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3227"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3248"/>
         <location filename="../src/qjackctlMainForm.ui" line="253"/>
         <source>S&amp;etup...</source>
         <translation>&amp;Nastavení...</translation>
@@ -549,7 +549,7 @@ Chcete uložit změny?</translation>
         <translation>Ukázat/skrýt okno se zápisy pro hlášení</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3191"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3212"/>
         <location filename="../src/qjackctlMainForm.ui" line="287"/>
         <source>&amp;Messages</source>
         <translation>&amp;Hlášení</translation>
@@ -660,7 +660,7 @@ Chcete uložit změny?</translation>
         <translation>Předání přetočit zpět</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3210"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3231"/>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
         <source>&amp;Rewind</source>
         <translation>&amp;Přetočit zpět</translation>
@@ -676,7 +676,7 @@ Chcete uložit změny?</translation>
         <translation>Zastavit chod předání</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3219"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3240"/>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
         <source>Pa&amp;use</source>
         <translation>&amp;Pozastavit</translation>
@@ -691,7 +691,7 @@ Chcete uložit změny?</translation>
         <translation>Spustit chod předání</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3216"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3237"/>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
         <source>&amp;Play</source>
         <translation>&amp;Přehrát</translation>
@@ -722,7 +722,7 @@ Zapojovací deska ALSA MIDI nebude dostupná.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="693"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3261"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3282"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
@@ -739,9 +739,9 @@ kroků u symbolu v oznamovací části panelu.</translation>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="706"/>
         <location filename="../src/qjackctlMainForm.cpp" line="855"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="1155"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="2240"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3249"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1168"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2243"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
@@ -818,24 +818,24 @@ Promiňte.</translation>
         <translation>Skript pro spuštění ukončen</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="916"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1102"/>
         <source>D-BUS: JACK server is starting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="919"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1105"/>
         <source>D-BUS: JACK server could not be started.
 
 Sorry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1132"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1142"/>
         <source>JACK is starting...</source>
         <translation>JACK se spouští...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1156"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1169"/>
         <source>Some client audio applications
 are still active and connected.
 
@@ -846,96 +846,96 @@ jsou stále činné a spojené.
 Chcete zastavit zvukový server JACK?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1198"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1211"/>
         <source>JACK is stopping...</source>
         <translation>JACK se zastavuje...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1191"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1204"/>
         <source>Shutdown script...</source>
         <translation>Skript pro zastavení chodu...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1192"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1205"/>
         <source>Shutdown script terminated</source>
         <translation>Skript pro zastavení chodu ukončen</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1213"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1226"/>
         <source>D-BUS: JACK server is stopping...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1216"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1229"/>
         <source>D-BUS: JACK server could not be stopped.
 
 Sorry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1232"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="1371"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1245"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1374"/>
         <source>Post-shutdown script...</source>
         <translation>Skript pro po-zastavení chodu...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1233"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="1372"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1246"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1375"/>
         <source>Post-shutdown script terminated</source>
         <translation>Skript pro po-zastavení chodu ukončen</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1282"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1295"/>
         <source>JACK was started with PID=%1.</source>
         <translation>JACK byl puštěn s PID = %1.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1290"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1303"/>
         <source>D-BUS: JACK server was started (%1 aka jackdbus).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1339"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1342"/>
         <source>JACK is being forced...</source>
         <translation>JACK je nucen...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1346"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1349"/>
         <source>JACK was stopped</source>
         <translation>JACK byl zastaven</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1359"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1362"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1473"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1476"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1606"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1609"/>
         <source>Transport BBT (bar:beat.ticks)</source>
         <translation>Předání BBT (takt:doba.tiknutí - bar:beat.ticks)</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1607"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1610"/>
         <source>Transport time code</source>
         <translation>Předání časového kódu</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1618"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1621"/>
         <source>Elapsed time since last reset</source>
         <translation>Čas uplynulý od posledního znovunastavení</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1621"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1624"/>
         <source>Elapsed time since last XRUN</source>
         <translation>Čas uplynulý od posledního  XRUN</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1744"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1747"/>
         <source>Could not load active patchbay definition.
 
 Disabled.</source>
@@ -944,47 +944,47 @@ Disabled.</source>
 Zakázáno.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1747"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1750"/>
         <source>Patchbay activated.</source>
         <translation>Zapojovací deska uvedena do chodu.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1755"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1758"/>
         <source>Patchbay deactivated.</source>
         <translation>Zapojovací deska vyřazena z provozu.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1833"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1836"/>
         <source>Statistics reset.</source>
         <translation>Nastavit znovu statistiku.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1977"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1980"/>
         <source>msec</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1994"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1997"/>
         <source>JACK connection graph change.</source>
         <translation>Nákres spojení JACK změněn.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2021"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2024"/>
         <source>XRUN callback (%1).</source>
         <translation>Zavolání nazpátek XRUN (%1).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2031"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2034"/>
         <source>Buffer size change (%1).</source>
         <translation>Velikost vyrovnávací paměti změněna (%1).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2040"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2043"/>
         <source>Shutdown notification.</source>
         <translation>Oznámení o zastavení.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2060"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2063"/>
         <source>Could not start JACK.
 
 Sorry.</source>
@@ -993,77 +993,77 @@ Sorry.</source>
 Promiňte.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2064"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2067"/>
         <source>JACK has crashed.</source>
         <translation>JACK spadl.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2067"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2070"/>
         <source>JACK timed out.</source>
         <translation>Překročení času u JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2070"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2073"/>
         <source>JACK write error.</source>
         <translation>Chyba při psaní u JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2073"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2076"/>
         <source>JACK read error.</source>
         <translation>Chyba při čtení u JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2077"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2080"/>
         <source>Unknown JACK error (%d).</source>
         <translation>Neznámá chyba u JACK (%d).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2094"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2097"/>
         <source>ALSA connection graph change.</source>
         <translation>Nákres spojení ALSA změněn.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2125"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2128"/>
         <source>JACK active patchbay scan</source>
         <translation>Prohlédnutí činné zapojovací desky JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2135"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2138"/>
         <source>ALSA active patchbay scan</source>
         <translation>Prohlédnutí činné zapojovací desky ALSA</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2181"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2184"/>
         <source>JACK connection change.</source>
         <translation>Spojení JACK změněno.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2190"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2193"/>
         <source>ALSA connection change.</source>
         <translation>Spojení ALSA změněno.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2209"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2212"/>
         <source>checked</source>
         <translation>přezkoušeno</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2213"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2216"/>
         <source>connected</source>
         <translation>spojeno</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2217"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2220"/>
         <source>disconnected</source>
         <translation>rozpojeno</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2222"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2225"/>
         <source>failed</source>
         <translation>nepodařilo se</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2241"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2244"/>
         <source>A patchbay definition is currently active,
 which is probable to redo this connection:
 
@@ -1086,62 +1086,62 @@ Chcete odstranit spojení zapojovací desky?</translation>
         <translation type="obsolete">Přehlížet</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2300"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2321"/>
         <source>Overall operation failed.</source>
         <translation>Celková operace se nezdařila.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2302"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2323"/>
         <source>Invalid or unsupported option.</source>
         <translation>Neplatná nebo nepodporovaná volba.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2304"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2325"/>
         <source>Client name not unique.</source>
         <translation>Název klienta není jedinečný.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2306"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2327"/>
         <source>Server is started.</source>
         <translation>Server je spuštěn.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2308"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2329"/>
         <source>Unable to connect to server.</source>
         <translation>Nelze se připojit k serveru.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2310"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2331"/>
         <source>Server communication error.</source>
         <translation>Chyba spojení se serverem.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2312"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2333"/>
         <source>Client does not exist.</source>
         <translation>Klient neexistuje.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2314"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2335"/>
         <source>Unable to load internal client.</source>
         <translation>Nepodařilo se nahrát vnitřního klienta.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2316"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2337"/>
         <source>Unable to initialize client.</source>
         <translation>Nepodařilo se inicializovat vnitřního klienta.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2318"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2339"/>
         <source>Unable to access shared memory.</source>
         <translation>Nepodařilo se přistoupit ke sdílené paměti.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2320"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2341"/>
         <source>Client protocol version mismatch.</source>
         <translation>Nevhodná verze klientského protokolu.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2322"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2343"/>
         <source>Could not connect to JACK server as client.
 - %1
 Please check the messages window for more info.</source>
@@ -1149,218 +1149,218 @@ Please check the messages window for more info.</source>
 Další informace hledejte, prosím, v okně s hlášením.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2365"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2386"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
         <translation>Nastavení serveru uloženo do &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2401"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2422"/>
         <source>Client activated.</source>
         <translation>Klient uveden do chodu.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2409"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2430"/>
         <source>Post-startup script...</source>
         <translation>Skript pro po-spuštění...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2410"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2431"/>
         <source>Post-startup script terminated</source>
         <translation>Skript pro po-spuštění ukončen</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2418"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2439"/>
         <source>Command line argument...</source>
         <translation>Argument pro příkazový řádek...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2419"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2440"/>
         <source>Command line argument started</source>
         <translation>Argument pro příkazový řádek spuštěn</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2444"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2465"/>
         <source>Client deactivated.</source>
         <translation>Klient vyřazen z provozu.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2729"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2750"/>
         <source>Transport rewind.</source>
         <translation>Předání přetočit zpět.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2749"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2770"/>
         <source>Transport backward.</source>
         <translation>Předání zpět.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2774"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="2887"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3026"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2795"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2908"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3047"/>
         <source>Starting</source>
         <translation>Spouští se</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2776"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2797"/>
         <source>Transport start.</source>
         <translation>Spustit předání.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2789"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3033"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2810"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3054"/>
         <source>Stopping</source>
         <translation>Zastavuje se</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2791"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2812"/>
         <source>Transport stop.</source>
         <translation>Zastavit předání.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2811"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2832"/>
         <source>Transport forward.</source>
         <translation>Předání dopředu.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2827"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3037"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2848"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3058"/>
         <source>Stopped</source>
         <translation>Zastaveno</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2861"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2882"/>
         <source>%1 (%2%)</source>
         <translation>%1 (%2 %)</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2863"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2884"/>
         <source>%1 %</source>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2865"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2886"/>
         <source>%1 Hz</source>
         <translation>%1 Hz</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2867"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2888"/>
         <source>%1 frames</source>
         <translation>%1 snímků</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2878"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2899"/>
         <source>Yes</source>
         <translation>Ano</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2878"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2899"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2879"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2900"/>
         <source>RT</source>
         <translation>RT</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2890"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2911"/>
         <source>Rolling</source>
         <translation>Jede</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2893"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2914"/>
         <source>Looping</source>
         <translation>Zapíná se do jednoduchého obvodu</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2923"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2944"/>
         <source>%1 msec</source>
         <translation>%1 ms</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2930"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2951"/>
         <source>XRUN callback (%1 skipped).</source>
         <translation>Zavolání nazpátek XRUN (%1 přeskočeno).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3030"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3051"/>
         <source>Started</source>
         <translation>Běží</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3040"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3061"/>
         <source>Active</source>
         <translation>Činný</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3043"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3064"/>
         <source>Activating</source>
         <translation>Uvádí se do chodu</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3048"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3069"/>
         <source>Inactive</source>
         <translation>Nečinný</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3144"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3165"/>
         <source>&amp;Hide</source>
         <translation>&amp;Skrýt</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3144"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3165"/>
         <source>Mi&amp;nimize</source>
         <translation>&amp;Zmenšit</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3146"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3167"/>
         <source>S&amp;how</source>
         <translation>&amp;Ukázat</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3146"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3167"/>
         <source>Rest&amp;ore</source>
         <translation>&amp;Nahrát znovu</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3157"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3178"/>
         <source>&amp;Stop</source>
         <translation>&amp;Zastavit</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3160"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3181"/>
         <source>&amp;Reset</source>
         <translation>&amp;Nastavit znovu</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3166"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3187"/>
         <source>&amp;Presets</source>
         <translation>&amp;Přednastavení</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3199"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3220"/>
         <source>&amp;Connections</source>
         <translation>&amp;Spojení</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3203"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3224"/>
         <source>Patch&amp;bay</source>
         <translation>&amp;Zapojovací deska</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3208"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3229"/>
         <source>&amp;Transport</source>
         <translation>&amp;Předání</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3250"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3271"/>
         <source>Server settings will be only effective after
 restarting the JACK audio server.</source>
         <translation>Nastavení serveru se projeví až po
 novém spuštění serveru JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3493"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3514"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -1368,7 +1368,7 @@ novém spuštění serveru JACK.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3524"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3545"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1376,7 +1376,7 @@ novém spuštění serveru JACK.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3555"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3576"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1388,7 +1388,7 @@ novém spuštění serveru JACK.</translation>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3283"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
         <translation>Některá nastavení se projeví až tehdy,

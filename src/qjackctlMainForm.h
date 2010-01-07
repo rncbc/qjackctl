@@ -187,6 +187,7 @@ protected:
 	void shutNotifyEvent();
 	void exitNotifyEvent();
 
+	void startJackClientDelay();
 	bool startJackClient(bool bDetach);
 	void stopJackClient();
 
