@@ -951,10 +951,11 @@ void qjackctlMainForm::startJack (void)
 	if (m_preset.bVerbose)
 		args.append("-v");
 	if (m_preset.bRealtime) {
-		args.append("-R");
+	//	args.append("-R");
 		if (m_preset.iPriority > 0 && !bCoreaudio)
 			args.append("-P" + QString::number(m_preset.iPriority));
 	}
+	else args.append("-r");
 	if (m_preset.iPortMax > 0 && m_preset.iPortMax != 256)
 		args.append("-p" + QString::number(m_preset.iPortMax));
 	if (m_preset.iTimeout > 0 && m_preset.iTimeout != 500)

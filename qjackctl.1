@@ -47,6 +47,12 @@ Start JACK audio server immediately
 .B \-p, \-\-preset=[label]
 Set default settings preset name
 .TP
+.B \-a, \-\-active\-patchbay=[path]
+Set active patchbay definition file
+.TP
+.B \-n, \-\-server\-name=[label]
+Set default JACK audio server name
+.TP
 .B \-h, \-\-help
 Show help about command line options
 .TP
@@ -57,8 +63,8 @@ Show version information.
 .br
 
 .SH FILES
-Settings for the jack system are stored in ~/.config/rncbc.org/QjackCtl.conf
-and ~/.jackdrc.
+Settings for the JACK system are stored in ~/.config/rncbc.org/QjackCtl.conf
+and optionally in ~/.jackdrc.
 
 .SH AUTHOR
 This manual page was written by Guenter Geiger <geiger@debian.org>,

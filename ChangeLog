@@ -5,6 +5,10 @@ ChangeLog
 
 SVN HEAD
 
+- Comply with jackd >= 0.118.0 which now runs in real-time mode by
+  default; use of -R is now deprecated from the jackd command line
+  interface options; use -r to run in non-real-time-scheduling.
+
 - A man page has beed added.
 
 - Got rid of a pretty old and never really useful "jackd-realtime"
