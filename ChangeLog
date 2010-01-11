@@ -5,6 +5,8 @@ ChangeLog
 
 SVN HEAD
 
+- A man page has beed added.
+
 - Got rid of a pretty old and never really useful "jackd-realtime"
   server path option--actually, it was only seen available on the
   now defunct old Mandrake Linux distro.

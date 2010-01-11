@@ -1,0 +1,65 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH QJACKCTL 1 "January 11, 2010"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+qjackctl \- User interface for controlling JACK (Jack Audio Connection Kit)
+.SH SYNOPSIS
+.B qjackctl 
+.RI [options]
+.SH DESCRIPTION
+This manual page documents briefly the
+.B qjackctl
+command.
+This manual page was written for the Debian distribution
+because the original program does not have a manual page.
+
+.PP
+\fBqjackctl \fP is used for controlling the Jack Audio Connection
+Kit (JACK) and as a patchbay for ALSA MIDI devices. Qjackctl also has
+support for the JACK transport control protocol, so you can use it to 
+start and stop the JACK transport. Once you start qjackctl, you get 
+presented with a single GUI window, the buttons are self-explanatory 
+and have tooltips. 
+
+.SH OPTIONS
+This program follows the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+For a complete description, see the Info files.
+.TP
+.B \-s, \-\-start
+Start JACK audio server immediately
+.TP
+.B \-p, \-\-preset=[label]
+Set default settings preset name
+.TP
+.B \-h, \-\-help
+Show help about command line options
+.TP
+.B \-v, \-\-version
+Show version information.
+.SH SEE ALSO
+.BR jackd(1).
+.br
+
+.SH FILES
+Settings for the jack system are stored in ~/.config/rncbc.org/QjackCtl.conf
+and ~/.jackdrc.
+
+.SH AUTHOR
+This manual page was written by Guenter Geiger <geiger@debian.org>,
+for the Debian project (but may be used by others).

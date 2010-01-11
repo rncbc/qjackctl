@@ -83,15 +83,17 @@ $(name):	$(name).mak $(sources) $(headers) $(forms)
 %.qm:	%.ts
 	@$(lrelease) -verbose $< -qm $@
 
-install:	$(name) icons/$(name).png $(translations_targets)
+install:	$(name) icons/$(name).png $(translations_targets) $(name).1
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/bin
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/pixmaps
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/applications
 	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/locale
+	@install -d -v -m 0755 $(DESTDIR)$(prefix)/share/man/man1
 	@install -v -m 0755 $(name) $(DESTDIR)$(prefix)/bin/$(name)
 	@install -v -m 0644 icons/$(name).png $(DESTDIR)$(prefix)/share/pixmaps/$(name).png
 	@install -v -m 0644 $(name).desktop $(DESTDIR)$(prefix)/share/applications/$(name).desktop
 	@install -v -m 0644 $(translations_targets) $(DESTDIR)$(prefix)/share/locale
+	@install -v -m 0644 $(name).1 $(DESTDIR)$(prefix)/share/man/man1/$(name).1
 
 uninstall:	$(DESTDIR)$(prefix)/bin/$(name)
 	@rm -vf $(DESTDIR)$(prefix)/bin/$(name)
@@ -100,6 +102,7 @@ uninstall:	$(DESTDIR)$(prefix)/bin/$(name)
 	@rm -vf $(DESTDIR)$(prefix)/share/locale/$(translations_targets)
 	@for x in $(translations_targets); do \
 		rm -vf $(DESTDIR)$(prefix)/share/locale/`basename $$x`; done
+	@rm -vf $(DESTDIR)$(prefix)/share/man/man1/$(name).1
 
 clean:	$(name).mak
 	@make -f $(name).mak clean
