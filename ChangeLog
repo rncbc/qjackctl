@@ -5,6 +5,10 @@ ChangeLog
 
 SVN HEAD
 
+- Most modal message dialog boxes (eg. critical errors) are now
+  replaced by system tray icon bubble messages where available
+  (mitigating feature request #2936455).
+
 - Comply with jackd >= 0.118.0 which now runs in real-time mode by
   default; use of -R is now deprecated from the jackd command line
   interface options; use -r to run in non-real-time-scheduling.

@@ -1473,8 +1473,19 @@ void qjackctlMainForm::appendMessagesError( const QString& s )
 
 	appendMessagesColor(s.simplified(), "#ff0000");
 
-	QMessageBox::critical(this,
-		tr("Error") + " - " QJACKCTL_SUBTITLE1, s, QMessageBox::Cancel);
+	const QString& sTitle = tr("Error") + " - " QJACKCTL_SUBTITLE1;
+#ifdef CONFIG_SYSTEM_TRAY
+#ifdef QJACKCTL_QT4_SYSTEM_TRAY
+#if QT_VERSION >= 0x040300
+	if (m_pSetup->bSystemTray && m_pSystemTray
+		&& QSystemTrayIcon::supportsMessages()) {
+		m_pSystemTray->showMessage(sTitle, s, QSystemTrayIcon::Critical);
+	}
+	else
+#endif
+#endif
+#endif
+	QMessageBox::critical(this, sTitle, s, QMessageBox::Cancel);
 }
 
 
@@ -3267,10 +3278,23 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 	// If client service is currently running,
 	// prompt the effective warning...
 	if (m_pJackClient) {
-		QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
-			tr("Server settings will be only effective after\n"
-			"restarting the JACK audio server."));
+		const QString& sTitle
+			= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
+		const QString& sText
+			= tr("Server settings will be only effective after\n"
+				"restarting the JACK audio server.");
+	#ifdef CONFIG_SYSTEM_TRAY
+	#ifdef QJACKCTL_QT4_SYSTEM_TRAY
+	#if QT_VERSION >= 0x040300
+		if (m_pSetup->bSystemTray && m_pSystemTray
+			&& QSystemTrayIcon::supportsMessages()) {
+			m_pSystemTray->showMessage(sTitle, sText, QSystemTrayIcon::Warning);
+		}
+		else
+	#endif
+	#endif
+	#endif
+		QMessageBox::warning(this, sTitle, sText);
 	}   // Otherwise, it will be just as convenient to update status...
 	else updateTitleStatus();
 }
@@ -3279,10 +3303,23 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 // Setup otions change warning.
 void qjackctlMainForm::showDirtySetupWarning (void)
 {
-	QMessageBox::information(this,
-		tr("Information") + " - " QJACKCTL_SUBTITLE1,
-		tr("Some settings will be only effective\n"
-		"the next time you start this program."));
+	const QString& sTitle
+		= tr("Information") + " - " QJACKCTL_SUBTITLE1;
+	const QString& sText
+		= tr("Some settings will be only effective\n"
+			"the next time you start this program.");
+#ifdef CONFIG_SYSTEM_TRAY
+#ifdef QJACKCTL_QT4_SYSTEM_TRAY	
+#if QT_VERSION >= 0x040300
+	if (m_pSetup->bSystemTray && m_pSystemTray
+		&& QSystemTrayIcon::supportsMessages()) {
+		m_pSystemTray->showMessage(sTitle, sText, QSystemTrayIcon::Information);
+	}
+	else
+#endif
+#endif
+#endif
+	QMessageBox::information(this, sTitle, sText);
 }
 
 
