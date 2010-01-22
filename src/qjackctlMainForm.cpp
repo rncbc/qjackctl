@@ -689,11 +689,21 @@ bool qjackctlMainForm::queryClose (void)
 	if (!m_bQuitForce && isVisible()
 		&& m_pSetup->bSystemTray && m_pSystemTray) {
 		m_pSetup->saveWidgetGeometry(this);
-        QMessageBox::information(this,
-			tr("Information") + " - " QJACKCTL_SUBTITLE1,
-			tr("The program will keep running in the system tray.\n\n"
-			"To terminate the program, please choose \"Quit\" "
-			"in the context menu of the system tray entry."));
+		const QString& sTitle = tr("Information") + " - " QJACKCTL_SUBTITLE1;
+		const QString& sText
+			= tr("The program will keep running in the system tray.\n\n"
+				"To terminate the program, please choose \"Quit\" "
+				"in the context menu of the system tray icon.");
+	#ifdef QJACKCTL_QT4_SYSTEM_TRAY
+	#if QT_VERSION >= 0x040300
+		if (QSystemTrayIcon::supportsMessages()) {
+			m_pSystemTray->showMessage(
+				sTitle, sText, QSystemTrayIcon::Information);
+		}
+		else
+	#endif
+	#endif
+		QMessageBox::information(this, sTitle, sText);
 		hide();
 		bQueryClose = false;
 	}
