@@ -450,7 +450,7 @@ Desea guardar los cambios?</translation>
 <context>
     <name>qjackctlMainForm</name>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3269"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
@@ -466,7 +466,7 @@ Desea guardar los cambios?</translation>
         <translation>Terminar procesamiento y salir</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3187"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <location filename="../src/qjackctlMainForm.ui" line="111"/>
         <source>&amp;Start</source>
         <translation>&amp;Iniciar</translation>
@@ -497,7 +497,7 @@ Desea guardar los cambios?</translation>
         <translation>Detener el servidor JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3228"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <location filename="../src/qjackctlMainForm.ui" line="182"/>
         <source>St&amp;atus</source>
         <translation>&amp;Estado</translation>
@@ -508,7 +508,7 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar / ocultar la ventana de estado detallado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3264"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <location filename="../src/qjackctlMainForm.ui" line="219"/>
         <source>Ab&amp;out...</source>
         <translation>Ace&amp;rca...</translation>
@@ -519,7 +519,7 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar información sobre esta aplicación</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3260"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <location filename="../src/qjackctlMainForm.ui" line="253"/>
         <source>S&amp;etup...</source>
         <translation>Se&amp;tup...</translation>
@@ -535,7 +535,7 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar el diálogo de opciones y preferencias</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3224"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <location filename="../src/qjackctlMainForm.ui" line="287"/>
         <source>&amp;Messages</source>
         <translation>&amp;Mensajes</translation>
@@ -551,7 +551,7 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar / ocultar la ventana de mensajes</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3236"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3246"/>
         <source>Patch&amp;bay</source>
         <translation>Patch&amp;bay</translation>
     </message>
@@ -660,11 +660,11 @@ Desea guardar los cambios?</translation>
         <translation>Iniciar el transporte (Alt+N)</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="706"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="855"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="1169"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="2255"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3282"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="716"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="865"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1179"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2265"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3292"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
@@ -677,12 +677,12 @@ Desea guardar los cambios?</translation>
         <translation type="obsolete">Cancelar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="808"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="818"/>
         <source>successfully</source>
         <translation>satisfactoriamente</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="810"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="820"/>
         <source>with exit status=%1</source>
         <translation>con estado %1</translation>
     </message>
@@ -695,7 +695,7 @@ Desea guardar los cambios?</translation>
         <translation type="obsolete">Matar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="891"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="901"/>
         <source>Could not load preset &quot;%1&quot;.
 
 Retrying with default.</source>
@@ -703,7 +703,7 @@ Retrying with default.</source>
 Probando con el predeterminado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="894"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="904"/>
         <source>Could not load default preset.
 
 Sorry.</source>
@@ -711,22 +711,22 @@ Sorry.</source>
 No se pudo cargar el preset predeterminado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="904"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="914"/>
         <source>Startup script...</source>
         <translation>Script de inicio...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="905"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="915"/>
         <source>Startup script terminated</source>
         <translation>El script de inicio finalizó</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1143"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1153"/>
         <source>JACK is starting...</source>
         <translation>JACK está iniciándose...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2075"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2085"/>
         <source>Could not start JACK.
 
 Sorry.</source>
@@ -734,28 +734,36 @@ Sorry.</source>
 No se pudo iniciar JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1212"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1222"/>
         <source>JACK is stopping...</source>
         <translation>JACK está deteniéndose...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1205"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="694"/>
+        <source>The program will keep running in the system tray.
+
+To terminate the program, please choose &quot;Quit&quot;
+in the context menu of the system tray icon.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="1215"/>
         <source>Shutdown script...</source>
         <translation>Script de apagado...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1206"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1216"/>
         <source>Shutdown script terminated</source>
         <translation>El script de apagado finalizó</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1350"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1360"/>
         <source>JACK was stopped</source>
         <translation>JACK ha sido detenido</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1246"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="1375"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1256"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1385"/>
         <source>Post-shutdown script...</source>
         <translation>Script de post - apagado...</translation>
     </message>
@@ -770,72 +778,72 @@ No se pudo iniciar JACK.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1103"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1113"/>
         <source>D-BUS: JACK server is starting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1106"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1116"/>
         <source>D-BUS: JACK server could not be started.
 
 Sorry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1227"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1237"/>
         <source>D-BUS: JACK server is stopping...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1230"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1240"/>
         <source>D-BUS: JACK server could not be stopped.
 
 Sorry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1247"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="1376"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1257"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1386"/>
         <source>Post-shutdown script terminated</source>
         <translation>El script de post - apagado finalizó</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1304"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1314"/>
         <source>D-BUS: JACK server was started (%1 aka jackdbus).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1363"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1373"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1476"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1486"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1621"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1631"/>
         <source>Transport BBT (bar:beat.ticks)</source>
         <translation>BBT del transporte ( bar:beat:ticks )</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1622"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1632"/>
         <source>Transport time code</source>
         <translation>Código de tiempo del transporte</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1633"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1643"/>
         <source>Elapsed time since last reset</source>
         <translation>Tiempo transcurrido desde el último reset</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1636"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1646"/>
         <source>Elapsed time since last XRUN</source>
         <translation>Tiempo transcurrido desde el último XRUN</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1759"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1769"/>
         <source>Could not load active patchbay definition.
 
 Disabled.</source>
@@ -843,233 +851,233 @@ Disabled.</source>
 Deshabilitándolo.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1762"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1772"/>
         <source>Patchbay activated.</source>
         <translation>Patchbay activada.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1770"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1780"/>
         <source>Patchbay deactivated.</source>
         <translation>Patchbay desactivada.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1848"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1858"/>
         <source>Statistics reset.</source>
         <translation>Reiniciar estadísticas.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1992"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2002"/>
         <source>msec</source>
         <translation>mseg</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2036"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2046"/>
         <source>XRUN callback (%1).</source>
         <translation>XRUN callback (%1).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2046"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2056"/>
         <source>Buffer size change (%1).</source>
         <translation>Cambio en el tamaño de buffer (%1).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2055"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2065"/>
         <source>Shutdown notification.</source>
         <translation>Notificación de apagado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2224"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2234"/>
         <source>checked</source>
         <translation>verificado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2228"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2238"/>
         <source>connected</source>
         <translation>conectado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2232"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2242"/>
         <source>disconnected</source>
         <translation>desconectado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2237"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2247"/>
         <source>failed</source>
         <translation>falló</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2398"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2408"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
         <translation>Configuración del servidor salvada en &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2434"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2444"/>
         <source>Client activated.</source>
         <translation>Cliente activado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2442"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2452"/>
         <source>Post-startup script...</source>
         <translation>Script de post - inicio...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2443"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2453"/>
         <source>Post-startup script terminated</source>
         <translation>El script de post - inicio finalizó</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2451"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2461"/>
         <source>Command line argument...</source>
         <translation>Argumento de la línea de comando...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2452"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2462"/>
         <source>Command line argument started</source>
         <translation>Argumento de la línea de comando iniciado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2477"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2487"/>
         <source>Client deactivated.</source>
         <translation>Cliente desactivado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2762"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2772"/>
         <source>Transport rewind.</source>
         <translation>Rebobinar transporte.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2782"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2792"/>
         <source>Transport backward.</source>
         <translation>Retroceder transporte.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2807"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="2920"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3059"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2817"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2930"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3069"/>
         <source>Starting</source>
         <translation>Iniciando</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2809"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2819"/>
         <source>Transport start.</source>
         <translation>Iniciar transporte.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2822"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3066"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2832"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3076"/>
         <source>Stopping</source>
         <translation>Deteniendo</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2824"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2834"/>
         <source>Transport stop.</source>
         <translation>Detener transporte.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2844"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2854"/>
         <source>Transport forward.</source>
         <translation>Avanzar transporte.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2860"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3070"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2870"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3080"/>
         <source>Stopped</source>
         <translation>Detenido</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2911"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2921"/>
         <source>Yes</source>
         <translation>Si</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2911"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2921"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2912"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2922"/>
         <source>RT</source>
         <translation>RT</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2923"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2933"/>
         <source>Rolling</source>
         <translation>Rolling</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2926"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2936"/>
         <source>Looping</source>
         <translation>Looping</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2963"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2973"/>
         <source>XRUN callback (%1 skipped).</source>
         <translation>XRUN callback (%1 omitidos).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3063"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3073"/>
         <source>Started</source>
         <translation>Iniciado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3073"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3083"/>
         <source>Active</source>
         <translation>Activo</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3076"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3086"/>
         <source>Activating</source>
         <translation>Activando</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3081"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3091"/>
         <source>Inactive</source>
         <translation>Inactivo</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3177"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3187"/>
         <source>&amp;Hide</source>
         <translation>&amp;Ocultar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3177"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3187"/>
         <source>Mi&amp;nimize</source>
         <translation>Mi&amp;nimizar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3179"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3189"/>
         <source>S&amp;how</source>
         <translation>&amp;Mostrar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3179"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3189"/>
         <source>Rest&amp;ore</source>
         <translation>&amp;Restablecer</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3190"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3200"/>
         <source>&amp;Stop</source>
         <translation>&amp;Detener</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3193"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3203"/>
         <source>&amp;Reset</source>
         <translation>&amp;Reset</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3232"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3242"/>
         <source>&amp;Connections</source>
         <translation>&amp;Conexiones</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3284"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3294"/>
         <source>Server settings will be only effective after
 restarting the JACK audio server.</source>
         <translation>La configuración sólo se hará efectiva
 reiniciando el servidor JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3552"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3562"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -1077,7 +1085,7 @@ reiniciando el servidor JACK.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3583"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3593"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1085,7 +1093,7 @@ reiniciando el servidor JACK.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3614"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3624"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1097,13 +1105,13 @@ reiniciando el servidor JACK.</translation>
         <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="693"/>
-        <location filename="../src/qjackctlMainForm.cpp" line="3307"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="692"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3317"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3309"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3319"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
         <translation>Algunas configuraciones sólo se aplicarán
@@ -1119,16 +1127,15 @@ ALSA MIDI patchbay will be not available.</source>
 El patchbay MIDI de ALSA no estará disponible.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="694"/>
         <source>The program will keep running in the system tray.
 
 To terminate the program, please choose &quot;Quit&quot; in the context menu of the system tray entry.</source>
-        <translation>El programa seguirá corriendo en la bandeja del sistema.
+        <translation type="obsolete">El programa seguirá corriendo en la bandeja del sistema.
 
 Para terminarlo, por favor seleccione &quot;Salir&quot; en el menú del ítem en la bandeja del sistema.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="707"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="717"/>
         <source>JACK is currently running.
 
 Do you want to terminate the JACK audio server?</source>
@@ -1137,7 +1144,7 @@ Do you want to terminate the JACK audio server?</source>
 Desea terminar el servidor de audio JACK?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="856"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="866"/>
         <source>Could not start JACK.
 
 Maybe JACK audio server is already started.</source>
@@ -1146,7 +1153,7 @@ Maybe JACK audio server is already started.</source>
 Quizás el servidor de audio JACK ya haya sido iniciado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1170"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1180"/>
         <source>Some client audio applications
 are still active and connected.
 
@@ -1157,72 +1164,72 @@ están activas y conectadas.
 Desea detener el servidor de audio JACK?</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1296"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1306"/>
         <source>JACK was started with PID=%1.</source>
         <translation>JACK se inició con PID=%1.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="1343"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="1353"/>
         <source>JACK is being forced...</source>
         <translation>JACK está siendo forzado...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2009"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2019"/>
         <source>JACK connection graph change.</source>
         <translation>Cambió el gráfico de conexiones de JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2079"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2089"/>
         <source>JACK has crashed.</source>
         <translation>JACK ha petado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2082"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2092"/>
         <source>JACK timed out.</source>
         <translation>Tiempo de espera para JACK agotado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2085"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2095"/>
         <source>JACK write error.</source>
         <translation>Error de escritura JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2088"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2098"/>
         <source>JACK read error.</source>
         <translation>Error de lectura JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2092"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2102"/>
         <source>Unknown JACK error (%d).</source>
         <translation>Error JACK desconocido (%d).</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2109"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2119"/>
         <source>ALSA connection graph change.</source>
         <translation>Cambió el gráfico de conexiones ALSA.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2140"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2150"/>
         <source>JACK active patchbay scan</source>
         <translation>Escaneo del patchbay JACK activo</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2150"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2160"/>
         <source>ALSA active patchbay scan</source>
         <translation>Escaneo del patchbay ALSA activo</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2196"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2206"/>
         <source>JACK connection change.</source>
         <translation>Cambios en las conexiones JACK.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2205"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2215"/>
         <source>ALSA connection change.</source>
         <translation>Cambios en las conexiones ALSA.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2256"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2266"/>
         <source>A patchbay definition is currently active,
 which is probable to redo this connection:
 
@@ -1245,62 +1252,62 @@ Desea remover la conexion?</translation>
         <translation type="obsolete">Ignorar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2333"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2343"/>
         <source>Overall operation failed.</source>
         <translation>La operación global falló.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2335"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2345"/>
         <source>Invalid or unsupported option.</source>
         <translation>Opción inválida o no soportada.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2337"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2347"/>
         <source>Client name not unique.</source>
         <translation>El nombre de cliente no es único.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2339"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2349"/>
         <source>Server is started.</source>
         <translation>El servidor está iniciado.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2341"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2351"/>
         <source>Unable to connect to server.</source>
         <translation>No puede conectarse al servidor.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2343"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2353"/>
         <source>Server communication error.</source>
         <translation>Error de comunicación con el servidor.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2345"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2355"/>
         <source>Client does not exist.</source>
         <translation>El cliente no existe.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2347"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2357"/>
         <source>Unable to load internal client.</source>
         <translation>No puede cargarse el cliente interno.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2349"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2359"/>
         <source>Unable to initialize client.</source>
         <translation>No puede inicializarse el cliente.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2351"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2361"/>
         <source>Unable to access shared memory.</source>
         <translation>No puede accederse a la memoria compartida.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2353"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2363"/>
         <source>Client protocol version mismatch.</source>
         <translation>La versión del protocolo cliente no concuerda.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2355"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2365"/>
         <source>Could not connect to JACK server as client.
 - %1
 Please check the messages window for more info.</source>
@@ -1309,54 +1316,54 @@ Please check the messages window for more info.</source>
 Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2894"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2904"/>
         <source>%1 (%2%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2896"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2906"/>
         <source>%1 %</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2898"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2908"/>
         <source>%1 Hz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2900"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2910"/>
         <source>%1 frames</source>
         <translation>%1 cuadros</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="2956"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="2966"/>
         <source>%1 msec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3199"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3209"/>
         <source>&amp;Presets</source>
         <translation>&amp;Presets</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3241"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3251"/>
         <source>&amp;Transport</source>
         <translation>&amp;Transporte</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3243"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
         <source>&amp;Rewind</source>
         <translation>Re&amp;bobinar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3249"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
         <source>&amp;Play</source>
         <translation>&amp;Reproducir</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3252"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
         <source>Pa&amp;use</source>
         <translation>Pa&amp;usa</translation>
