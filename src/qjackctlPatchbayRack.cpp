@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ public:
 		for ( ; iter != m_hash.end(); ++iter) {
 			const QString& sKey = iter.key();
 			const QString& sOClient = sKey.section(':', 0, 0);
-			const QString& sIClient = sKey.section(':', 1, 1);
+			const QString& sIClient = sKey.section(':', 1);
 			Ports& ports = iter.value();
 			qjackctlPatchbaySocket *pOSocket = get_socket(
 				pRack->osocketlist(), sOClient, ports.outs, iSocketType);
@@ -1429,7 +1429,7 @@ void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
 			const char *pszInputPort = ppszInputPorts[i];
 			const QString sInputPort = QString::fromUtf8(pszInputPort);
 			const QString& sIClient = sInputPort.section(':', 0, 0);
-			const QString& sIPort   = sInputPort.section(':', 1, 1);
+			const QString& sIPort   = sInputPort.section(':', 1);
 			qjackctlPatchbaySnapshot::add_socket(
 				isocketlist(), sIClient, sIPort, iSocketType);
 		}
@@ -1447,7 +1447,7 @@ void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
 		const char *pszOutputPort = ppszOutputPorts[i];
 		const QString sOutputPort = QString::fromUtf8(pszOutputPort);
 		const QString& sOClient = sOutputPort.section(':', 0, 0);
-		const QString& sOPort   = sOutputPort.section(':', 1, 1);
+		const QString& sOPort   = sOutputPort.section(':', 1);
 		qjackctlPatchbaySnapshot::add_socket(
 			osocketlist(), sOClient, sOPort, iSocketType);
 		// Check for inputs from output...
@@ -1459,7 +1459,7 @@ void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
 			const char *pszInputPort = ppszInputPorts[j];
 			const QString sInputPort = QString::fromUtf8(pszInputPort);
 			const QString& sIClient = sInputPort.section(':', 0, 0);
-			const QString& sIPort   = sInputPort.section(':', 1, 1);
+			const QString& sIPort   = sInputPort.section(':', 1);
 			snapshot.append(sOClient, sOPort, sIClient, sIPort);
 		}
 		::free(ppszInputPorts);

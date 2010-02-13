@@ -517,8 +517,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+Q</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
     </message>
@@ -533,8 +533,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <location filename="../src/qjackctlMainForm.ui" line="111"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <source>&amp;Start</source>
         <translation>&amp;Démarrer</translation>
     </message>
@@ -559,8 +559,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Arrêter le serveur JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <location filename="../src/qjackctlMainForm.ui" line="182"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <source>St&amp;atus</source>
         <translation>S&amp;tatut</translation>
     </message>
@@ -575,8 +575,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <location filename="../src/qjackctlMainForm.ui" line="219"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <source>Ab&amp;out...</source>
         <translation>À propo&amp;s...</translation>
     </message>
@@ -591,8 +591,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+E</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <location filename="../src/qjackctlMainForm.ui" line="253"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <source>S&amp;etup...</source>
         <translation>R&amp;églages...</translation>
     </message>
@@ -607,8 +607,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+M</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <location filename="../src/qjackctlMainForm.ui" line="287"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <source>&amp;Messages</source>
         <translation>&amp;Messages</translation>
     </message>
@@ -716,8 +716,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+O</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <source>&amp;Rewind</source>
         <translation>Remb&amp;obiner</translation>
     </message>
@@ -731,8 +731,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="obsolete">Alt+P</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <source>Pa&amp;use</source>
         <translation>Pa&amp;use</translation>
     </message>
@@ -747,8 +747,8 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Alt+L</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <source>&amp;Play</source>
         <translation>&amp;Lecture</translation>
     </message>

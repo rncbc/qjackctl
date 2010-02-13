@@ -5,6 +5,11 @@ ChangeLog
 
 SVN HEAD
 
+- Patchbay snapshot now tolerates JACK client port strings that
+  have more than one semi-colon in it, honoring just the first
+  one exactly as everywhere else eg. Connections. (a glitch as
+  reported by Geoff Beasley while using a2jmidid).
+
 - Most modal message dialog boxes (eg. critical errors) are now
   replaced by system tray icon bubble messages where available
   (mitigating feature request #2936455).

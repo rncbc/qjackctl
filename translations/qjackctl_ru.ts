@@ -452,8 +452,8 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlMainForm</name>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <location filename="../src/qjackctlMainForm.ui" line="111"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <source>&amp;Start</source>
         <translation>&amp;Запустить</translation>
     </message>
@@ -473,8 +473,8 @@ Do you want to save the changes?</source>
         <translation>Остановить сервер JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <source>&amp;Quit</source>
         <translation>В&amp;ыход</translation>
     </message>
@@ -561,8 +561,8 @@ Do you want to save the changes?</source>
         <translation>Alt+T</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <source>&amp;Play</source>
         <translation>&amp;Воспроизвести</translation>
     </message>
@@ -577,8 +577,8 @@ Do you want to save the changes?</source>
         <translation>Запустить воспроизведение через транспорт</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <source>Pa&amp;use</source>
         <translation>Пау&amp;за</translation>
     </message>
@@ -592,8 +592,8 @@ Do you want to save the changes?</source>
         <translation>Остановить воспроизведение с транспорта</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <location filename="../src/qjackctlMainForm.ui" line="182"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <source>St&amp;atus</source>
         <translation>С&amp;татус</translation>
     </message>
@@ -603,8 +603,8 @@ Do you want to save the changes?</source>
         <translation>Показать/скрыть расширенное окно статуса</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <location filename="../src/qjackctlMainForm.ui" line="219"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <source>Ab&amp;out...</source>
         <translation>О про&amp;грамме...</translation>
     </message>
@@ -614,8 +614,8 @@ Do you want to save the changes?</source>
         <translation>Показать информацию о приложении</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <location filename="../src/qjackctlMainForm.ui" line="253"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <source>S&amp;etup...</source>
         <translation>&amp;Параметры</translation>
     </message>
@@ -630,8 +630,8 @@ Do you want to save the changes?</source>
         <translation>Показать диалог настройки программы</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <location filename="../src/qjackctlMainForm.ui" line="287"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <source>&amp;Messages</source>
         <translation>С&amp;ообщения</translation>
     </message>
@@ -1319,8 +1319,8 @@ Please check the messages window for more info.</source>
         <translation>&amp;Транспорт</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <source>&amp;Rewind</source>
         <translation>К &amp;началу</translation>
     </message>

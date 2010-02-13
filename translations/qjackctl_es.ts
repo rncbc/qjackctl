@@ -450,8 +450,8 @@ Desea guardar los cambios?</translation>
 <context>
     <name>qjackctlMainForm</name>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
     </message>
@@ -466,8 +466,8 @@ Desea guardar los cambios?</translation>
         <translation>Terminar procesamiento y salir</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <location filename="../src/qjackctlMainForm.ui" line="111"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <source>&amp;Start</source>
         <translation>&amp;Iniciar</translation>
     </message>
@@ -497,8 +497,8 @@ Desea guardar los cambios?</translation>
         <translation>Detener el servidor JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <location filename="../src/qjackctlMainForm.ui" line="182"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <source>St&amp;atus</source>
         <translation>&amp;Estado</translation>
     </message>
@@ -508,8 +508,8 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar / ocultar la ventana de estado detallado</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <location filename="../src/qjackctlMainForm.ui" line="219"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <source>Ab&amp;out...</source>
         <translation>Ace&amp;rca...</translation>
     </message>
@@ -519,8 +519,8 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar información sobre esta aplicación</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <location filename="../src/qjackctlMainForm.ui" line="253"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <source>S&amp;etup...</source>
         <translation>Se&amp;tup...</translation>
     </message>
@@ -535,8 +535,8 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar el diálogo de opciones y preferencias</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <location filename="../src/qjackctlMainForm.ui" line="287"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <source>&amp;Messages</source>
         <translation>&amp;Mensajes</translation>
     </message>
@@ -1351,20 +1351,20 @@ Por favor revise la ventana de mensajes para mas información.</translation>
         <translation>&amp;Transporte</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <source>&amp;Rewind</source>
         <translation>Re&amp;bobinar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <source>&amp;Play</source>
         <translation>&amp;Reproducir</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <source>Pa&amp;use</source>
         <translation>Pa&amp;usa</translation>
     </message>

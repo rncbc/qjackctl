@@ -459,8 +459,8 @@ Chcete uložit změny?</translation>
         <translation>Ukončit zpracování signálu a ukončit program</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <location filename="../src/qjackctlMainForm.ui" line="77"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3279"/>
         <source>&amp;Quit</source>
         <translation>&amp;Ukončit</translation>
     </message>
@@ -475,8 +475,8 @@ Chcete uložit změny?</translation>
         <translation>Spustit server JACK</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <location filename="../src/qjackctlMainForm.ui" line="111"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3197"/>
         <source>&amp;Start</source>
         <translation>&amp;Spustit</translation>
     </message>
@@ -506,8 +506,8 @@ Chcete uložit změny?</translation>
         <translation>Ukázat/skrýt rozšířené stavové okno</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <location filename="../src/qjackctlMainForm.ui" line="182"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3238"/>
         <source>St&amp;atus</source>
         <translation>&amp;Stav</translation>
     </message>
@@ -517,8 +517,8 @@ Chcete uložit změny?</translation>
         <translation>Ukázat informace o této aplikaci</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <location filename="../src/qjackctlMainForm.ui" line="219"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3274"/>
         <source>Ab&amp;out...</source>
         <translation>&amp;O...</translation>
     </message>
@@ -533,8 +533,8 @@ Chcete uložit změny?</translation>
         <translation>Ukázat dialogové okno pro nastavení a volby</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <location filename="../src/qjackctlMainForm.ui" line="253"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3270"/>
         <source>S&amp;etup...</source>
         <translation>&amp;Nastavení...</translation>
     </message>
@@ -549,8 +549,8 @@ Chcete uložit změny?</translation>
         <translation>Ukázat/skrýt okno se zápisy pro hlášení</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <location filename="../src/qjackctlMainForm.ui" line="287"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3234"/>
         <source>&amp;Messages</source>
         <translation>&amp;Hlášení</translation>
     </message>
@@ -660,8 +660,8 @@ Chcete uložit změny?</translation>
         <translation>Předání přetočit zpět</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <location filename="../src/qjackctlMainForm.ui" line="718"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3253"/>
         <source>&amp;Rewind</source>
         <translation>&amp;Přetočit zpět</translation>
     </message>
@@ -676,8 +676,8 @@ Chcete uložit změny?</translation>
         <translation>Zastavit chod předání</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <location filename="../src/qjackctlMainForm.ui" line="757"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3262"/>
         <source>Pa&amp;use</source>
         <translation>&amp;Pozastavit</translation>
     </message>
@@ -691,8 +691,8 @@ Chcete uložit změny?</translation>
         <translation>Spustit chod předání</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <location filename="../src/qjackctlMainForm.ui" line="788"/>
+        <location filename="../src/qjackctlMainForm.cpp" line="3259"/>
         <source>&amp;Play</source>
         <translation>&amp;Přehrát</translation>
     </message>
