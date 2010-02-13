@@ -594,11 +594,39 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 #ifdef CONFIG_DBUS
 	// Register D-Bus service...
 	if (m_pSetup->bDBusEnabled) {
+		const QString s; // Just an empty string.
+		const QString sDBusName("org.rncbc.qjackctl");
 		QDBusConnection dbus = QDBusConnection::systemBus();
-		dbus.connect("", "", "org.rncbc.qjackctl", "start", 
+		dbus.connect(s, s, sDBusName, "start",
 			this, SLOT(startJack()));
-		dbus.connect("", "", "org.rncbc.qjackctl", "stop", 
+		dbus.connect(s, s, sDBusName, "stop",
 			this, SLOT(stopJack()));
+		dbus.connect(s, s, sDBusName, "main",
+			this, SLOT(toggleMainForm()));
+		dbus.connect(s, s, sDBusName, "messages",
+			this, SLOT(toggleMessagesForm()));
+		dbus.connect(s, s, sDBusName, "status",
+			this, SLOT(toggleStatusForm()));
+		dbus.connect(s, s, sDBusName, "reset",
+			this, SLOT(resetXrunStats()));
+		dbus.connect(s, s, sDBusName, "connections",
+			this, SLOT(toggleConnectionsForm()));
+		dbus.connect(s, s, sDBusName, "patchbay",
+			this, SLOT(togglePatchbayForm()));
+		dbus.connect(s, s, sDBusName, "rewind",
+			this, SLOT(transportRewind()));
+		dbus.connect(s, s, sDBusName, "backward",
+			this, SLOT(transportBackward()));
+		dbus.connect(s, s, sDBusName, "play",
+			this, SLOT(transportStart()));
+		dbus.connect(s, s, sDBusName, "pause",
+			this, SLOT(transportStop()));
+		dbus.connect(s, s, sDBusName, "forward",
+			this, SLOT(transportForward()));
+		dbus.connect(s, s, sDBusName, "setup",
+			this, SLOT(showSetupForm()));
+		dbus.connect(s, s, sDBusName, "about",
+			this, SLOT(showAboutForm()));
 		// Detect whether jackdbus is avaliable...
 		QDBusConnection dbusc = QDBusConnection::sessionBus();
 		m_pDBusControl = new QDBusInterface(

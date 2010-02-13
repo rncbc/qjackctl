@@ -5,6 +5,15 @@ ChangeLog
 
 SVN HEAD
 
+- A bunch of primitive D-Bus interface slots have been added,
+  allowing shortcut access to most of main applications actions
+  like toggling Messages, Status, Connections, Patchbay widget
+  pop-ups, reset stats, transport and so on. New bindings are
+  given eg. via dbus-send --system / org.rncbc.qjackctl.(main, 
+  messages, status, connections, patchbay, setup, about, reset,
+  rewind, backward, play, pause, forward). (from an original
+  idea from Sebastian Gutsfeld, thanks).
+
 - Patchbay snapshot now tolerates JACK client port strings that
   have more than one semi-colon in it, honoring just the first
   one exactly as everywhere else eg. Connections. (a glitch as
