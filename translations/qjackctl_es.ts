@@ -3779,37 +3779,47 @@ Do you want to apply the changes?</source>
         <translation>Plugs / Puertos</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="529"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="337"/>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="338"/>
+        <source>A socket named &quot;%1&quot; already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
         <source>Add Plug</source>
         <translation>Añadir Plug</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="563"/>
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="543"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="560"/>
         <source>Edit</source>
         <translation>Editar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="550"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="567"/>
         <source>Move Up</source>
         <translation>Subir</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="553"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="570"/>
         <source>Move Down</source>
         <translation>Bajar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="339"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="356"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="340"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="357"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -3826,7 +3836,7 @@ Desea aplicar los cambios?</translation>
         <translation type="obsolete">Descartar</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="719"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="736"/>
         <source>(None)</source>
         <translation>(Ninguno)</translation>
     </message>

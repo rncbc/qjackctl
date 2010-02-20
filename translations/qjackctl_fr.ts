@@ -4051,32 +4051,42 @@ Voulez-vous appliquer les changements?</translation>
         <translation>Fiches / Ports</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="529"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
         <source>Add Plug</source>
         <translation>Ajouter une Fiche</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="563"/>
         <source>Remove</source>
         <translation>Enlever</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="543"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="560"/>
         <source>Edit</source>
         <translation>Éditer</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="550"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="337"/>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="338"/>
+        <source>A socket named &quot;%1&quot; already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="567"/>
         <source>Move Up</source>
         <translation>Vers le haut</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="553"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="570"/>
         <source>Move Down</source>
         <translation>Vers le bas</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="719"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="736"/>
         <source>(None)</source>
         <translation>(Aucun)</translation>
     </message>
@@ -4096,12 +4106,12 @@ Voulez-vous appliquer les changements?</translation>
         <translation>Déplacer vers le haut la fiche actuellement sélectionnée dans la liste des prises</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="339"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="356"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="340"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="357"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

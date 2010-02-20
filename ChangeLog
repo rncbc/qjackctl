@@ -5,6 +5,9 @@ ChangeLog
 
 SVN HEAD
 
+- Make sure socket names are unique on each side of the Patchbay
+  (another patch from Dominic Sacre, thanks).
+
 - A bunch of primitive D-Bus interface slots have been added,
   allowing shortcut access to most of main applications actions
   like toggling Messages, Status, Connections, Patchbay widget

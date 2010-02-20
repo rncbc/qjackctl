@@ -52,22 +52,22 @@
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="444"/>
         <source>Set active patchbay definition file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit soubor s vymezením činné zapojovací desky</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="495"/>
         <source>Option -a requires an argument (path).</source>
-        <translation type="unfinished"></translation>
+        <translation>Volba -a vyžaduje argument (cesta).</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="446"/>
         <source>Set default JACK audio server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit výchozí název pro zvukový server JACK</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="505"/>
         <source>Option -n requires an argument (name).</source>
-        <translation type="unfinished"></translation>
+        <translation>Volba -n vyžaduje argument (název).</translation>
     </message>
 </context>
 <context>
@@ -160,12 +160,12 @@
     <message>
         <location filename="../src/qjackctlAboutForm.cpp" line="89"/>
         <source>JACK Port aliases support disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpora pro přezdívky přípojek JACK zakázána.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlAboutForm.cpp" line="104"/>
         <source>D-Bus interface support disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpora pro rozhraní D-Bus zakázána.</translation>
     </message>
 </context>
 <context>
@@ -713,12 +713,12 @@ Zapojovací deska ALSA MIDI nebude dostupná.</translation>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="641"/>
         <source>D-BUS: Service is available (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Služba je dostupná (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="672"/>
         <source>D-BUS: Service not available (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Služba není dostupná (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="720"/>
@@ -819,14 +819,16 @@ Promiňte.</translation>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1141"/>
         <source>D-BUS: JACK server is starting...</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Spouští se server JACK...</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1144"/>
         <source>D-BUS: JACK server could not be started.
 
 Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Server JACK se nepodařilo spustit.
+
+Promiňte</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1181"/>
@@ -862,14 +864,16 @@ Chcete zastavit zvukový server JACK?</translation>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1265"/>
         <source>D-BUS: JACK server is stopping...</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Zastavuje se server JACK...</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1268"/>
         <source>D-BUS: JACK server could not be stopped.
 
 Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Server JACK se nepodařilo zastavit.
+
+Promiňte</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1284"/>
@@ -891,7 +895,7 @@ Sorry</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1342"/>
         <source>D-BUS: JACK server was started (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Server JACK byl spuštěn (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1381"/>
@@ -906,7 +910,7 @@ Sorry</source>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1401"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Server JACK byl zastaven (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1514"/>
@@ -1090,7 +1094,11 @@ Chcete odstranit spojení zapojovací desky?</translation>
 
 To terminate the program, please choose &quot;Quit&quot;
 in the context menu of the system tray icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Program poběží dále v oznamovací části panelu.
+
+Pro ukončení programu vyberte, prosím, &quot;Ukončit&quot;
+v související nabídce vyskakující z ikony v oznamovací
+části panelu.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="2371"/>
@@ -1372,7 +1380,11 @@ novém spuštění serveru JACK.</translation>
 
 %3.
 (%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Nastavit hodnotu parametru
+SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
+
+%3.
+(%4)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="3621"/>
@@ -1380,7 +1392,11 @@ novém spuštění serveru JACK.</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Nastavit znovu hodnotu parametru
+ResetParameterValue(&apos;%1&apos;):
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.cpp" line="3652"/>
@@ -1388,7 +1404,11 @@ novém spuštění serveru JACK.</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Získat hodnotu parametru
+GetParameterValue(&apos;%1&apos;):
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1404,22 +1424,22 @@ když příště spustíte tento program.</translation>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="188"/>
         <source>Alt+A</source>
-        <translation type="unfinished">Alt+A</translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="225"/>
         <source>Alt+O</source>
-        <translation type="unfinished">Alt+O</translation>
+        <translation>Alt+O</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="763"/>
         <source>Shift+Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+Mezerník</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="794"/>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Mezerník</translation>
     </message>
 </context>
 <context>
@@ -3535,7 +3555,7 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4186"/>
         <source>Defaults</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4223"/>
@@ -3580,37 +3600,37 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="319"/>
         <source>net</source>
-        <translation type="unfinished"></translation>
+        <translation>síť</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="324"/>
         <source>netone</source>
-        <translation type="unfinished"></translation>
+        <translation>síť_1</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
         <source>Number of microseconds to wait between engine processes (dummy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet mikrosekund, po které se čeká mezi strojovými procesy (dummy)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4004"/>
         <source>Whether to enable D-Bus interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Zda povolit rozhraní D-Bus</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4007"/>
         <source>&amp;Enable D-Bus interface</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Povolit rozhraní D-Bus</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3878"/>
         <source>Whether to restrict to one single application instance (X11)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zda omezit na úroveň jednoho programu (X11)</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3881"/>
         <source>Single application &amp;instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Ú&amp;roveň jednoho programu</translation>
     </message>
 </context>
 <context>
@@ -3831,12 +3851,22 @@ Chcete použít změny?</translation>
         <translation>Zástrčky/Přípojky</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="339"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="337"/>
+        <source>Error</source>
+        <translation type="unfinished">Chyba</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="338"/>
+        <source>A socket named &quot;%1&quot; already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="356"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="340"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="357"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -3853,32 +3883,32 @@ Chcete použít změny?</translation>
         <translation type="obsolete">Odmítnout</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="529"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
         <source>Add Plug</source>
         <translation>Přidat zástrčku</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="543"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="560"/>
         <source>Edit</source>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="563"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="550"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="567"/>
         <source>Move Up</source>
         <translation>Přesunout nahoru</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="553"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="570"/>
         <source>Move Down</source>
         <translation>Přesunout dolů</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="719"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="736"/>
         <source>(None)</source>
         <translation>(Žádný)</translation>
     </message>
@@ -4095,7 +4125,7 @@ Jste si jistý?</translation>
     <message>
         <location filename="../src/qjackctlStatusForm.cpp" line="62"/>
         <source>Server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název serveru</translation>
     </message>
 </context>
 </TS>

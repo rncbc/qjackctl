@@ -3708,27 +3708,37 @@ Do you want to apply the changes?</source>
         <translation>Штепсели / Порты</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="529"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="337"/>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="338"/>
+        <source>A socket named &quot;%1&quot; already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
         <source>Add Plug</source>
         <translation>Добавить штепсель</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="546"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="563"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="543"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="560"/>
         <source>Edit</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="550"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="567"/>
         <source>Move Up</source>
         <translation>Переместить выше</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="553"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="570"/>
         <source>Move Down</source>
         <translation>Переместить ниже</translation>
     </message>
@@ -3798,12 +3808,12 @@ Do you want to apply the changes?</source>
         <translation>Принудительно только одно кабельное соединение</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="339"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="356"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="340"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="357"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -3820,7 +3830,7 @@ Do you want to apply the changes?</source>
         <translation type="obsolete">Отказаться</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlSocketForm.cpp" line="719"/>
+        <location filename="../src/qjackctlSocketForm.cpp" line="736"/>
         <source>(None)</source>
         <translation>(Нет)</translation>
     </message>
