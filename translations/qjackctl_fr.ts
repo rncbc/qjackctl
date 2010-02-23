@@ -64,9 +64,19 @@
         <translation>Choisir le fichiers de définition de baie de brassage actif</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetup.cpp" line="446"/>
+        <source>Set default JACK audio server name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qjackctlSetup.cpp" line="495"/>
         <source>Option -a requires an argument (path).</source>
         <translation>L&apos;option -a requiert un argument (chemin).</translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSetup.cpp" line="505"/>
+        <source>Option -n requires an argument (name).</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetup.cpp" line="517"/>
@@ -79,16 +89,6 @@
         <location filename="../src/qjackctlSetup.cpp" line="442"/>
         <source>Set default settings preset name</source>
         <translation>Régler le nom du préréglage des paramètres par défaut</translation>
-    </message>
-    <message>
-        <location filename="../src/qjackctlSetup.cpp" line="446"/>
-        <source>Set default JACK audio server name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qjackctlSetup.cpp" line="505"/>
-        <source>Option -n requires an argument (name).</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -889,14 +889,6 @@ Désolé.</translation>
         <translation>Script d&apos;extinction...</translation>
     </message>
     <message>
-        <location filename="../src/qjackctlMainForm.cpp" line="722"/>
-        <source>The program will keep running in the system tray.
-
-To terminate the program, please choose &quot;Quit&quot;
-in the context menu of the system tray icon.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/qjackctlMainForm.cpp" line="1244"/>
         <source>Shutdown script terminated</source>
         <translation>Script d&apos;extinction terminé</translation>
@@ -1300,6 +1292,14 @@ Voulez-vous arrêter le serveur audio JACK?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/qjackctlMainForm.cpp" line="722"/>
+        <source>The program will keep running in the system tray.
+
+To terminate the program, please choose &quot;Quit&quot;
+in the context menu of the system tray icon.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qjackctlMainForm.cpp" line="894"/>
         <source>Could not start JACK.
 
@@ -1550,22 +1550,22 @@ Voulez-vous enlever la connexion de la baie de brassage?</translation>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="188"/>
         <source>Alt+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+T</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="225"/>
         <source>Alt+O</source>
-        <translation type="unfinished">Alt+O</translation>
+        <translation>Alt+S</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="763"/>
         <source>Shift+Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+Espace</translation>
     </message>
     <message>
         <location filename="../src/qjackctlMainForm.ui" line="794"/>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Espace</translation>
     </message>
 </context>
 <context>
@@ -3674,6 +3674,11 @@ Voulez-vous appliquer les changements?</translation>
         <translation>sun</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="324"/>
+        <source>netone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1061"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1149"/>
         <location filename="../src/qjackctlSetupForm.ui" line="1231"/>
@@ -3761,6 +3766,16 @@ Voulez-vous appliquer les changements?</translation>
         <translation>Démarrer minimisé dans la &amp;zone de notification système</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="3878"/>
+        <source>Whether to restrict to one single application instance (X11)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/qjackctlSetupForm.ui" line="3881"/>
+        <source>Single application &amp;instance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qjackctlSetupForm.ui" line="3985"/>
         <source>Whether to enable ALSA Sequencer (MIDI) support on startup</source>
         <translation>Activer la prise en charge du séquenceur ALSA (MIDI) au démarrage</translation>
@@ -3773,7 +3788,7 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4186"/>
         <source>Defaults</source>
-        <translation type="unfinished">Par défaut</translation>
+        <translation>Par défaut</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="4223"/>
@@ -3833,22 +3848,7 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../src/qjackctlSetupForm.ui" line="1585"/>
         <source>Number of microseconds to wait between engine processes (dummy)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qjackctlSetupForm.ui" line="324"/>
-        <source>netone</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qjackctlSetupForm.ui" line="3878"/>
-        <source>Whether to restrict to one single application instance (X11)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/qjackctlSetupForm.ui" line="3881"/>
-        <source>Single application &amp;instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de microsecondes à attendre entre les traitements du moteur (factice)</translation>
     </message>
 </context>
 <context>
@@ -4298,6 +4298,11 @@ Are you sure?</source>
         <translation>Délai d&apos;ordonnancement maximal</translation>
     </message>
     <message>
+        <location filename="../src/qjackctlStatusForm.cpp" line="62"/>
+        <source>Server name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/qjackctlStatusForm.cpp" line="85"/>
         <source>XRUN count since last server startup</source>
         <translation>Décompte des désynchronisations (XRUN) depuis le dernier démarrage du serveur</translation>
@@ -4380,11 +4385,6 @@ Are you sure?</source>
         <location filename="../src/qjackctlStatusForm.cpp" line="66"/>
         <source>DSP Load</source>
         <translation>Charge DSP</translation>
-    </message>
-    <message>
-        <location filename="../src/qjackctlStatusForm.cpp" line="62"/>
-        <source>Server name</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
