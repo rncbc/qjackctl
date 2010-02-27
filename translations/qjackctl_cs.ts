@@ -3853,12 +3853,12 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../src/qjackctlSocketForm.cpp" line="337"/>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.cpp" line="338"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zásuvka s názvem &quot;%1&quot; již existuje.</translation>
     </message>
     <message>
         <location filename="../src/qjackctlSocketForm.cpp" line="356"/>
