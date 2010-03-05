@@ -27,7 +27,7 @@ The software requirements for build and runtime are listed as follows:
 
   - Qt4 (core, gui, xml), C++ class library and tools for
         crossplatform development and internationalization
-        http://www.qtsoftware.com/qt/
+        http://qt.nokia.com/products/
 
   - JACK Audio Connection Kit
         http://jackaudio.org/
@@ -60,10 +60,10 @@ This procedure will end installing the following files:
 
 Just launch ${prefix}/bin/qjackctl and you're off (hopefully).
 
-If you're checking out from CVS, you'll have to prepare the configure
-script just before you proceed with the above instructions:
+If you're checking out from Subversion (SVN), you'll have to prepare the
+configure script just before you proceed with the above instructions:
 
-   make -f Makefile.cvs
+   make -f Makefile.svn
 
 
 Configuration
