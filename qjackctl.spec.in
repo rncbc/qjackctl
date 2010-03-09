@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 12
+%define release 13
 %define prefix  @ac_prefix@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface
@@ -56,21 +56,23 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1
 
 %changelog
+* Mon Jan 11 2010 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.6
+- Full D-Busification!
 * Mon Jan 11 2010 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Man page added.
-* Wed Sep 30 2009 Rui Nuno Capela <rncbc@users.sourceforge.net>
-- Slipped away.
-* Fri Dec 05 2008 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Wed Sep 30 2009 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.5
+- Slipped away!
+* Fri Dec 05 2008 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.4
 - Patchbay snapshot revamp.
-* Sat Jun 07 2008 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Sat Jun 07 2008 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.3
 - Patchbay JACK-MIDI, file logging and X11 uniqueness.
-* Thu Dec 20 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Thu Dec 20 2007 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.2
 - Patchbay heads-up with season greetings. 
 * Thu Jul 19 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - System-tray tooltip icon crash fix.
-* Wed Jul 18 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Wed Jul 18 2007 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.1
 - Shallowed bug-fix release..
-* Tue Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Tue Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.0
 - Qt4 migration was complete.
 * Mon Jun 25 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Application icon is now installed to (prefix)/share/pixmaps.

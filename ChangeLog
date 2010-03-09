@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-SVN HEAD
+0.3.6  2010-03-09  Full D-Busification!
 
 - Make sure socket names are unique on each side of the Patchbay
   (another patch from Dominic Sacre, thanks).
@@ -36,11 +36,11 @@ SVN HEAD
   server path option--actually, it was only seen available on the
   now defunct old Mandrake Linux distro.
 
-- D-Bus support, as probided by org.jackaudio.service aka jackdbus,
+- D-Bus support, as provided by org.jackaudio.service aka jackdbus,
   is now being introduced and used wherever available and whenever
   enabled. Configuring, starting, stopping and logging the JACK
   back-end server through the "infamous" jackdbus service is now
-  being seamlessly exploited (EXPERIMENTAL).
+  being seamlessly exploited.
 
 - Global configuration state is now explicitly saved/committed to
   disk when Setup dialog changes are accepted and applied.
