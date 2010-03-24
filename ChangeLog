@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Italian (it) translation added (by Sergio Atzori).
+
 - Post-shutdown script invocation logic slightly refactored in
   attempt to enforce its execution on application quit.
 
