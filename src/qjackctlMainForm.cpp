@@ -762,6 +762,9 @@ bool qjackctlMainForm::queryClose (void)
 	if (bQueryClose && m_pMessagesForm)
 		m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
 
+	// Whether we're really quitting.
+	m_bQuitForce = bQueryClose;
+
 	// Try to save current positioning.
 	if (bQueryClose) {
 		m_pSetup->saveWidgetGeometry(m_pMessagesForm);
@@ -784,11 +787,6 @@ bool qjackctlMainForm::queryClose (void)
 		// Stop any service out there...
 		stopJackServer();
 	}
-
-#ifdef CONFIG_SYSTEM_TRAY
-	// Whether we're really quitting.
-	m_bQuitForce = bQueryClose;
-#endif
 
 	return bQueryClose;
 }
@@ -1272,17 +1270,9 @@ void qjackctlMainForm::stopJackServer (void)
 			// Give it some time to terminate gracefully and stabilize...
 			stabilize(QJACKCTL_TIMER_MSECS);
 			// Keep on, if not exiting for good.
-			return;
+			if (!m_bQuitForce)
+				return;
 		}
-	}
-
-	// If we have a post-shutdown script enabled it must be called,
-	// despite we've not started the server before...
-	if (m_bJackDetach && m_pSetup->bPostShutdownScript
-		&& !m_pSetup->sPostShutdownScriptShell.isEmpty()) {
-		shellExecute(m_pSetup->sPostShutdownScriptShell,
-			tr("Post-shutdown script..."),
-			tr("Post-shutdown script terminated"));
 	}
 
 	// Do final processing anyway.
@@ -1369,13 +1359,14 @@ void qjackctlMainForm::jackFinished (void)
 void qjackctlMainForm::jackCleanup (void)
 {
 	// Force client code cleanup.
-	if (!m_bJackDetach)
+	bool bPostShutdown = m_bJackDetach;
+	if (!bPostShutdown)
 		stopJackClient();
 
 	// Flush anything that maybe pending...
 	flushStdoutBuffer();
-	bool bPostShutdown = false;
 
+	// Classic server control...
 	if (m_pJack) {
 		if (m_pJack->state() != QProcess::NotRunning) {
 			appendMessages(tr("JACK is being forced..."));
@@ -1395,7 +1386,7 @@ void qjackctlMainForm::jackCleanup (void)
 	}
 
 #ifdef CONFIG_DBUS
-	// Special for D-BUS control....
+	// Special for D-BUS control...
 	if (m_pDBusControl && m_bDBusStarted) {
 		m_bDBusStarted = false;
 		appendMessages(tr("D-BUS: JACK server was stopped (%1 aka jackdbus).")
@@ -3380,10 +3371,9 @@ void qjackctlMainForm::activatePresetsMenu ( QAction *pAction )
 // Close main form slot.
 void qjackctlMainForm::quitMainForm (void)
 {
-#ifdef CONFIG_SYSTEM_TRAY
 	// Flag that we're quitting explicitly.
 	m_bQuitForce = true;
-#endif
+
 	// And then, do the closing dance.
 	close();
 }

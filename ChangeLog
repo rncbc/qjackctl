@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+SVN TRUNK
+
+- Post-shutdown script invocation logic slightly refactored in
+  attempt to enforce its execution on application quit.
+
+
 0.3.6  2010-03-09  Full D-Busification!
 
 - Make sure socket names are unique on each side of the Patchbay
