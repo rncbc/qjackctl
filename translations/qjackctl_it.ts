@@ -457,7 +457,7 @@ Salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>S&amp;etup...</source>
-        <translation>&amp;Impostazioni...</translation>
+        <translation type="unfinished">&amp;Impostazioni</translation>
     </message>
     <message>
         <source>Alt+E</source>
@@ -1747,7 +1747,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>Port Ma&amp;ximum:</source>
-        <translation>Portata Mas&amp;sima:</translation>
+        <translation>Numero mas&amp;simo di porte:</translation>
     </message>
     <message>
         <source>21333</source>
@@ -1807,7 +1807,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>&amp;Wait (usec):</source>
-        <translation>&amp;Ritardo (microsec):</translation>
+        <translation>&amp;Attesa massima (microsec):</translation>
     </message>
     <message>
         <source>Sample &amp;Rate:</source>
@@ -1815,7 +1815,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>&amp;Timeout (msec):</source>
-        <translation>&amp;Ritardo (microsec):</translation>
+        <translation>&amp;Attesa massima (msec):</translation>
     </message>
     <message>
         <source>200</source>
@@ -1971,7 +1971,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>&amp;Audio:</source>
-        <translation>&amp;Audio:</translation>
+        <translation>A&amp;udio:</translation>
     </message>
     <message>
         <source>&amp;Input Latency:</source>
@@ -2003,7 +2003,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>Provide either audio capture, playback or both</source>
-        <translation>Proveer de puertos de audio para captura, reproducción o ambos</translation>
+        <translation>Scegli se abilitare l&apos;audio in cattura, in registrazione o entrambi</translation>
     </message>
     <message>
         <source>hw:0</source>
@@ -2035,7 +2035,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>Maximum output audio hardware channels to allocate</source>
-        <translation>Numero massimo di canali hardware d&apos;uscita da allocare</translation>
+        <translation>Numero massimo di canali hardware d&apos;uscita</translation>
     </message>
     <message>
         <source>Alternate output device for playback</source>
@@ -2223,7 +2223,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</source>
-        <translation>Ignora gli XRUN prodotti durante l&apos;avvio del servidor (frequenti nelle versioni pre 0.80.0 del server JACK)</translation>
+        <translation>Ignora gli XRUN prodotti durante l&apos;avvio del server (frequenti nelle versioni pre 0.80.0 del server JACK)</translation>
     </message>
     <message>
         <source>Connections</source>
@@ -2503,7 +2503,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>Whether to ask for confirmation on application exit</source>
-        <translation>Chiedi conferma prima di chiudere l&apos;aaplicazione</translation>
+        <translation type="unfinished">Chiedi conferma prima di chiudere l&apos;applicazione</translation>
     </message>
     <message>
         <source>&amp;Keep child windows always on top</source>
@@ -2515,7 +2515,7 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>&amp;Enable system tray icon</source>
-        <translation>Abilita l&apos;icona nel vassoi si siste&amp;ema</translation>
+        <translation type="unfinished">Abilita l&apos;icona nel vassoio di sist&amp;ema</translation>
     </message>
     <message>
         <source>Alt+E</source>
@@ -2815,7 +2815,7 @@ Vuoi applicare i cambiamenti?</translation>
     </message>
     <message>
         <source>E&amp;nable ALSA Sequencer support</source>
-        <translation>Abilita se&amp;quenzer ALSA</translation>
+        <translation type="unfinished">Abilita se&amp;quencer ALSA</translation>
     </message>
     <message>
         <source>Buttons</source>
@@ -2919,7 +2919,7 @@ Vuoi applicare i cambiamenti?</translation>
     </message>
     <message>
         <source>Single application &amp;instance</source>
-        <translation>Permetti una sola &amp;instanza</translation>
+        <translation type="unfinished">Permetti una sola &amp;istanza</translation>
     </message>
 </context>
 <context>
