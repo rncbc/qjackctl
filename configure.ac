@@ -1,9 +1,9 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.2, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.3, rncbc@rncbc.org, qjackctl)
 
-AC_CONFIG_SRCDIR(src/qjackctlMainForm.ui)
-AC_CONFIG_HEADERS(config.h)
-AC_CONFIG_FILES(Makefile qjackctl.pro qjackctl.spec qjackctl.desktop)
+AC_CONFIG_SRCDIR(src/qjackctl.cpp)
+AC_CONFIG_HEADERS(src/config.h)
+AC_CONFIG_FILES(Makefile qjackctl.spec src/src.pri src/qjackctl.desktop)
 
 # Set default installation prefix.
 AC_PREFIX_DEFAULT(/usr/local)

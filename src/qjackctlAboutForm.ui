@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2008, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
    <string>About QjackCtl</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../icons/qjackctl.qrc" >:/icons/about1.png</iconset>
+   <iconset resource="qjackctl.qrc" >:/images/about1.png</iconset>
   </property>
   <property name="sizeGripEnabled" >
    <bool>true</bool>
@@ -83,7 +83,7 @@
       <string/>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/qtlogo.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/qtlogo.png</iconset>
      </property>
     </widget>
    </item>
@@ -119,7 +119,7 @@
    <item row="0" column="0" >
     <widget class="QLabel" name="IconPixmapLabel" >
      <property name="pixmap" >
-      <pixmap resource="../icons/qjackctl.qrc" >:/icons/qjackctl.png</pixmap>
+      <pixmap resource="qjackctl.qrc" >:/images/qjackctl.png</pixmap>
      </property>
      <property name="alignment" >
       <set>Qt::AlignCenter</set>
@@ -141,7 +141,7 @@
   <tabstop>ClosePushButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../icons/qjackctl.qrc" />
+  <include location="qjackctl.qrc" />
  </resources>
  <connections/>
 </ui>

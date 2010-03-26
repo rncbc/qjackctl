@@ -41,7 +41,7 @@
    <string>Setup - JACK Audio Connection Kit</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../icons/qjackctl.qrc" >:/icons/setup1.png</iconset>
+   <iconset resource="qjackctl.qrc" >:/images/setup1.png</iconset>
   </property>
   <property name="sizeGripEnabled" >
    <bool>true</bool>
@@ -125,7 +125,7 @@
             <string>&amp;Save</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/save1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/save1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+S</string>
@@ -144,7 +144,7 @@
             <string>&amp;Delete</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/remove1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/remove1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+D</string>
@@ -4323,7 +4323,7 @@
         <string>OK</string>
        </property>
        <property name="icon" >
-        <iconset resource="../icons/qjackctl.qrc" >:/icons/accept1.png</iconset>
+        <iconset resource="qjackctl.qrc" >:/images/accept1.png</iconset>
        </property>
       </widget>
      </item>
@@ -4333,7 +4333,7 @@
         <string>Cancel</string>
        </property>
        <property name="icon" >
-        <iconset resource="../icons/qjackctl.qrc" >:/icons/quit1.png</iconset>
+        <iconset resource="qjackctl.qrc" >:/images/quit1.png</iconset>
        </property>
       </widget>
      </item>
@@ -4447,7 +4447,7 @@
   <tabstop>CancelPushButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../icons/qjackctl.qrc" />
+  <include location="qjackctl.qrc" />
  </resources>
  <connections/>
 </ui>

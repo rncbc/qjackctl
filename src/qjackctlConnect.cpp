@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -982,28 +982,28 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 	QMenu menu(this);
 	QAction *pAction;
 
-	pAction = menu.addAction(QIcon(":/icons/connect1.png"),
+	pAction = menu.addAction(QIcon(":/images/connect1.png"),
 		tr("&Connect"), pConnect, SLOT(connectSelected()),
 		tr("Alt+C", "Connect"));
 	pAction->setEnabled(pConnect->canConnectSelected());
-	pAction = menu.addAction(QIcon(":/icons/disconnect1.png"),
+	pAction = menu.addAction(QIcon(":/images/disconnect1.png"),
 		tr("&Disconnect"), pConnect, SLOT(disconnectSelected()),
 		tr("Alt+D", "Disconnect"));
 	pAction->setEnabled(pConnect->canDisconnectSelected());
-	pAction = menu.addAction(QIcon(":/icons/disconnectall1.png"),
+	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
 		tr("Disconnect &All"), pConnect, SLOT(disconnectAll()),
 		tr("Alt+A", "Disconect All"));
 	pAction->setEnabled(pConnect->canDisconnectAll());
 	if (m_bRenameEnabled) {
 		menu.addSeparator();
-		pAction = menu.addAction(QIcon(":/icons/edit1.png"),
+		pAction = menu.addAction(QIcon(":/images/edit1.png"),
 			tr("Re&name"), this, SLOT(startRenameSlot()),
 			tr("Alt+N", "Rename"));
 		QTreeWidgetItem *pItem = QTreeWidget::currentItem();
 		pAction->setEnabled(pItem && (pItem->flags() & Qt::ItemIsEditable));
 	}
 	menu.addSeparator();
-	pAction = menu.addAction(QIcon(":/icons/refresh1.png"),
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
 		tr("&Refresh"), pConnect, SLOT(refresh()),
 		tr("Alt+R", "Refresh"));
 
@@ -1169,21 +1169,21 @@ void qjackctlConnectorView::contextMenuEvent (
 	QMenu menu(this);
 	QAction *pAction;
 
-	pAction = menu.addAction(QIcon(":/icons/connect1.png"),
+	pAction = menu.addAction(QIcon(":/images/connect1.png"),
 		tr("&Connect"), pConnect, SLOT(connectSelected()),
 		tr("Alt+C", "Connect"));
 	pAction->setEnabled(pConnect->canConnectSelected());
-	pAction = menu.addAction(QIcon(":/icons/disconnect1.png"),
+	pAction = menu.addAction(QIcon(":/images/disconnect1.png"),
 		tr("&Disconnect"), pConnect, SLOT(disconnectSelected()),
 		tr("Alt+D", "Disconnect"));
 	pAction->setEnabled(pConnect->canDisconnectSelected());
-	pAction = menu.addAction(QIcon(":/icons/disconnectall1.png"),
+	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
 		tr("Disconnect &All"), pConnect, SLOT(disconnectAll()),
 		tr("Alt+A", "Disconect All"));
 	pAction->setEnabled(pConnect->canDisconnectAll());
 
 	menu.addSeparator();
-	pAction = menu.addAction(QIcon(":/icons/refresh1.png"),
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
 		tr("&Refresh"), pConnect, SLOT(refresh()),
 		tr("Alt+R", "Refresh"));
 
@@ -1870,7 +1870,7 @@ QPixmap *qjackctlConnect::createIconPixmap ( const QString& sIconName )
 	if (iSize > 0)
 		sName += QString("_%1x%2").arg(iSize).arg(iSize);
 
-	return new QPixmap(":/icons/" + sName + ".png");
+	return new QPixmap(":/images/" + sName + ".png");
 }
 
 

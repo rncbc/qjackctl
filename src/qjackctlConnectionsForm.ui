@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2007, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@
    <string>Connections - JACK Audio Connection Kit</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../icons/qjackctl.qrc" >:/icons/connections1.png</iconset>
+   <iconset resource="qjackctl.qrc" >:/images/connections1.png</iconset>
   </property>
   <layout class="QGridLayout" >
    <property name="margin" >
@@ -101,7 +101,7 @@
             <string>&amp;Connect</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/connect1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/connect1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+C</string>
@@ -117,7 +117,7 @@
             <string>&amp;Disconnect</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnect1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+D</string>
@@ -133,7 +133,7 @@
             <string>Disconnect &amp;All</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnectall1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/disconnectall1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+A</string>
@@ -165,7 +165,7 @@
             <string>&amp;Refresh</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/refresh1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/refresh1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+R</string>
@@ -219,7 +219,7 @@
             <string>&amp;Connect</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/connect1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/connect1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+C</string>
@@ -235,7 +235,7 @@
             <string>&amp;Disconnect</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnect1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+D</string>
@@ -251,7 +251,7 @@
             <string>Disconnect &amp;All</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnectall1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/disconnectall1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+A</string>
@@ -283,7 +283,7 @@
             <string>&amp;Refresh</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/refresh1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/refresh1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+R</string>
@@ -337,7 +337,7 @@
             <string>&amp;Connect</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/connect1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/connect1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+C</string>
@@ -353,7 +353,7 @@
             <string>&amp;Disconnect</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnect1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+D</string>
@@ -369,7 +369,7 @@
             <string>Disconnect &amp;All</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/disconnectall1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/disconnectall1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+A</string>
@@ -401,7 +401,7 @@
             <string>&amp;Refresh</string>
            </property>
            <property name="icon" >
-            <iconset resource="../icons/qjackctl.qrc" >:/icons/refresh1.png</iconset>
+            <iconset resource="qjackctl.qrc" >:/images/refresh1.png</iconset>
            </property>
            <property name="shortcut" >
             <string>Alt+R</string>
@@ -443,7 +443,7 @@
   <tabstop>AlsaRefreshPushButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../icons/qjackctl.qrc" />
+  <include location="qjackctl.qrc" />
  </resources>
  <connections/>
 </ui>

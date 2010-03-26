@@ -1615,7 +1615,7 @@ void qjackctlMainForm::updateDisplayEffect (void)
 	// Set the main background...
 	QPalette pal;
 	if (m_pSetup->bDisplayEffect) {
-		QPixmap pm(":/icons/displaybg1.png");
+		QPixmap pm(":/images/displaybg1.png");
 		pal.setBrush(QPalette::Background, QBrush(pm));
 	} else {
 		pal.setColor(QPalette::Background, Qt::black);
@@ -3118,26 +3118,26 @@ void qjackctlMainForm::updateTitleStatus (void)
 	if (m_pSystemTray) {
 		switch (m_iServerState) {
 		case QJACKCTL_STARTING:
-			m_pSystemTray->setPixmapOverlay(QPixmap(":/icons/xstarting1.png"));
+			m_pSystemTray->setPixmapOverlay(QPixmap(":/images/xstarting1.png"));
 			break;
 		case QJACKCTL_STARTED:
-			m_pSystemTray->setPixmapOverlay(QPixmap(":/icons/xstarted1.png"));
+			m_pSystemTray->setPixmapOverlay(QPixmap(":/images/xstarted1.png"));
 			break;
 		case QJACKCTL_STOPPING:
-			m_pSystemTray->setPixmapOverlay(QPixmap(":/icons/xstopping1.png"));
+			m_pSystemTray->setPixmapOverlay(QPixmap(":/images/xstopping1.png"));
 			break;
 		case QJACKCTL_STOPPED:
-			m_pSystemTray->setPixmapOverlay(QPixmap(":/icons/xstopped1.png"));
+			m_pSystemTray->setPixmapOverlay(QPixmap(":/images/xstopped1.png"));
 			break;
 		case QJACKCTL_ACTIVE:
-			m_pSystemTray->setPixmapOverlay(QPixmap(":/icons/xactive1.png"));
+			m_pSystemTray->setPixmapOverlay(QPixmap(":/images/xactive1.png"));
 			break;
 		case QJACKCTL_ACTIVATING:
-			m_pSystemTray->setPixmapOverlay(QPixmap(":/icons/xactivating1.png"));
+			m_pSystemTray->setPixmapOverlay(QPixmap(":/images/xactivating1.png"));
 			break;
 		case QJACKCTL_INACTIVE:
 		default:
-			m_pSystemTray->setPixmapOverlay(QPixmap(":/icons/xinactive1.png"));
+			m_pSystemTray->setPixmapOverlay(QPixmap(":/images/xinactive1.png"));
 			break;
 		}
 		m_pSystemTray->setToolTip(sTitle);
@@ -3212,13 +3212,13 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 	menu.addSeparator();
 
 	if (m_pJackClient == NULL) {
-		pAction = menu.addAction(QIcon(":/icons/start1.png"),
+		pAction = menu.addAction(QIcon(":/images/start1.png"),
 			tr("&Start"), this, SLOT(startJack()));
 	} else {
-		pAction = menu.addAction(QIcon(":/icons/stop1.png"),
+		pAction = menu.addAction(QIcon(":/images/stop1.png"),
 			tr("&Stop"), this, SLOT(stopJack()));
 	}
-	pAction = menu.addAction(QIcon(":/icons/reset1.png"),
+	pAction = menu.addAction(QIcon(":/images/reset1.png"),
 		tr("&Reset"), m_pStatusForm, SLOT(resetXrunStats()));
 //  pAction->setEnabled(m_pJackClient != NULL);
 	menu.addSeparator();
@@ -3249,52 +3249,52 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		SLOT(activatePresetsMenu(QAction*)));
 	menu.addSeparator();
 
-	pAction = menu.addAction(QIcon(":/icons/messages1.png"),
+	pAction = menu.addAction(QIcon(":/images/messages1.png"),
 		tr("&Messages"), this, SLOT(toggleMessagesForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pMessagesForm && m_pMessagesForm->isVisible());
-	pAction = menu.addAction(QIcon(":/icons/status1.png"),
+	pAction = menu.addAction(QIcon(":/images/status1.png"),
 		tr("St&atus"), this, SLOT(toggleStatusForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pStatusForm && m_pStatusForm->isVisible());
-	pAction = menu.addAction(QIcon(":/icons/connections1.png"),
+	pAction = menu.addAction(QIcon(":/images/connections1.png"),
 		tr("&Connections"), this, SLOT(toggleConnectionsForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pConnectionsForm && m_pConnectionsForm->isVisible());
-	pAction = menu.addAction(QIcon(":/icons/patchbay1.png"),
+	pAction = menu.addAction(QIcon(":/images/patchbay1.png"),
 		tr("Patch&bay"), this, SLOT(togglePatchbayForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pPatchbayForm && m_pPatchbayForm->isVisible());
 	menu.addSeparator();
 
 	QMenu *pTransportMenu = menu.addMenu(tr("&Transport"));
-	pAction = pTransportMenu->addAction(QIcon(":/icons/rewind1.png"),
+	pAction = pTransportMenu->addAction(QIcon(":/images/rewind1.png"),
 		tr("&Rewind"), this, SLOT(transportRewind()));
 	pAction->setEnabled(m_ui.RewindToolButton->isEnabled());
-//	pAction = pTransportMenu->addAction(QIcon(":/icons/backward1.png"),
+//	pAction = pTransportMenu->addAction(QIcon(":/images/backward1.png"),
 //		tr("&Backward"), this, SLOT(transportBackward()));
 //	pAction->setEnabled(m_ui.BackwardToolButton->isEnabled());
-	pAction = pTransportMenu->addAction(QIcon(":/icons/play1.png"),
+	pAction = pTransportMenu->addAction(QIcon(":/images/play1.png"),
 		tr("&Play"), this, SLOT(transportStart()));
 	pAction->setEnabled(!m_ui.PlayToolButton->isChecked());
-	pAction = pTransportMenu->addAction(QIcon(":/icons/pause1.png"),
+	pAction = pTransportMenu->addAction(QIcon(":/images/pause1.png"),
 		tr("Pa&use"), this, SLOT(transportStop()));
 	pAction->setEnabled(m_ui.PauseToolButton->isEnabled());
-//	pAction = pTransportMenu->addAction(QIcon(":/icons/forward1.png"),
+//	pAction = pTransportMenu->addAction(QIcon(":/images/forward1.png"),
 //		tr("&Forward"), this, SLOT(transportForward()));
 //	pAction->setEnabled(m_ui.ForwardToolButton->isEnabled());
 	menu.addSeparator();
 
-	pAction = menu.addAction(QIcon(":/icons/setup1.png"),
+	pAction = menu.addAction(QIcon(":/images/setup1.png"),
 		tr("S&etup..."), this, SLOT(showSetupForm()));
 
 	if (!m_pSetup->bRightButtons || !m_pSetup->bTransportButtons) {
-		pAction = menu.addAction(QIcon(":/icons/about1.png"),
+		pAction = menu.addAction(QIcon(":/images/about1.png"),
 			tr("Ab&out..."), this, SLOT(showAboutForm()));
 	}
 	menu.addSeparator();
 
-	pAction = menu.addAction(QIcon(":/icons/quit1.png"),
+	pAction = menu.addAction(QIcon(":/images/quit1.png"),
 		tr("&Quit"), this, SLOT(quitMainForm()));
 
 	menu.exec(pos);

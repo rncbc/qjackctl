@@ -44,7 +44,7 @@
    <string>QjackCtl</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../icons/qjackctl.qrc" >:/icons/qjackctl.png</iconset>
+   <iconset resource="qjackctl.qrc" >:/images/qjackctl.png</iconset>
   </property>
   <layout class="QGridLayout" >
    <property name="margin" >
@@ -77,7 +77,7 @@
       <string>&amp;Quit</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/quit1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/quit1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+Q</string>
@@ -111,7 +111,7 @@
       <string>&amp;Start</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/start1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/start1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+S</string>
@@ -148,7 +148,7 @@
       <string>S&amp;top</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/stop1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/stop1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+T</string>
@@ -182,7 +182,7 @@
       <string>St&amp;atus</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/status1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/status1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+A</string>
@@ -219,7 +219,7 @@
       <string>Ab&amp;out...</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/about1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/about1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+O</string>
@@ -253,7 +253,7 @@
       <string>S&amp;etup...</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/setup1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/setup1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+E</string>
@@ -287,7 +287,7 @@
       <string>&amp;Messages</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/messages1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/messages1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+M</string>
@@ -324,7 +324,7 @@
       <string>&amp;Patchbay</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/patchbay1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/patchbay1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+P</string>
@@ -361,7 +361,7 @@
       <string>&amp;Connect</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/connections1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/connections1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+C</string>
@@ -650,7 +650,7 @@
       <string>&amp;Backward</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/backward1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/backward1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+B</string>
@@ -684,7 +684,7 @@
       <string>&amp;Forward</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/forward1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/forward1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+F</string>
@@ -718,7 +718,7 @@
       <string>&amp;Rewind</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/rewind1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/rewind1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Alt+R</string>
@@ -757,7 +757,7 @@
       <string>Pa&amp;use</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/pause1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/pause1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Shift+Space</string>
@@ -788,7 +788,7 @@
       <string>&amp;Play</string>
      </property>
      <property name="icon" >
-      <iconset resource="../icons/qjackctl.qrc" >:/icons/play1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/play1.png</iconset>
      </property>
      <property name="shortcut" >
       <string>Space</string>
@@ -818,7 +818,7 @@
   <tabstop>AboutToolButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../icons/qjackctl.qrc" />
+  <include location="qjackctl.qrc" />
  </resources>
  <connections/>
 </ui>

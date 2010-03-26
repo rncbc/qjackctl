@@ -1685,7 +1685,7 @@ void qjackctlSetupForm::toggleDisplayEffect ( bool bOn )
 	QPalette pal;
 	pal.setColor(QPalette::Foreground, Qt::green);
 	if (bOn) {
-		QPixmap pm(":/icons/displaybg1.png");
+		QPixmap pm(":/images/displaybg1.png");
 		pal.setBrush(QPalette::Background, QBrush(pm));
 	} else {
 		pal.setColor(QPalette::Background, Qt::black);

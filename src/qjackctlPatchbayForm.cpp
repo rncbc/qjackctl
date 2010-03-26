@@ -1,7 +1,7 @@
 // qjackctlPatchbayForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -566,7 +566,7 @@ void qjackctlPatchbayForm::updateRecentPatchbays (void)
 	m_iUpdate++;
 
 	// Update the visible combobox...
-	const QIcon icon(":/icons/patchbay1.png");
+	const QIcon icon(":/images/patchbay1.png");
 	m_ui.PatchbayComboBox->clear();
 
 	if (m_sPatchbayPath.isEmpty()) {

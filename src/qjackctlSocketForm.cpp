@@ -543,7 +543,7 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 
 	// Build the add plug sub-menu...
 	QMenu *pAddPlugMenu = menu.addMenu(
-		QIcon(":/icons/add1.png"), tr("Add Plug"));
+		QIcon(":/images/add1.png"), tr("Add Plug"));
 	int iIndex = 0;
 	for (iIndex = 0; iIndex < m_ui.PlugNameComboBox->count(); iIndex++) {
 		pAction = pAddPlugMenu->addAction(
@@ -556,17 +556,17 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 	pAddPlugMenu->setEnabled(iIndex > 0);
 	// Build the plug context menu...
 	bool bEnabled = (pItem != NULL);
-	pAction = menu.addAction(QIcon(":/icons/edit1.png"),
+	pAction = menu.addAction(QIcon(":/images/edit1.png"),
 		tr("Edit"), this, SLOT(editPlug()));
 	pAction->setEnabled(bEnabled);
-	pAction = menu.addAction(QIcon(":/icons/remove1.png"),
+	pAction = menu.addAction(QIcon(":/images/remove1.png"),
 		tr("Remove"), this, SLOT(removePlug()));
 	pAction->setEnabled(bEnabled);
 	menu.addSeparator();
-	pAction = menu.addAction(QIcon(":/icons/up1.png"),
+	pAction = menu.addAction(QIcon(":/images/up1.png"),
 		tr("Move Up"), this, SLOT(moveUpPlug()));
 	pAction->setEnabled(bEnabled && iItem > 0);
-	pAction = menu.addAction(QIcon(":/icons/down1.png"),
+	pAction = menu.addAction(QIcon(":/images/down1.png"),
 		tr("Move Down"), this, SLOT(moveDownPlug()));
 	pAction->setEnabled(bEnabled && iItem < iItemCount - 1);
 

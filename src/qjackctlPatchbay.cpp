@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2009, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -318,7 +318,7 @@ bool qjackctlSocketItem::isOpen (void) const
 qjackctlSocketList::qjackctlSocketList (
 	qjackctlSocketListView *pListView, bool bReadable )
 {
-	QPixmap pmXSocket1(":/icons/xsocket1.png");
+	QPixmap pmXSocket1(":/images/xsocket1.png");
 
 	m_pListView   = pListView;
 	m_bReadable   = bReadable;
@@ -327,24 +327,24 @@ qjackctlSocketList::qjackctlSocketList (
 
 	if (bReadable) {
 		m_sSocketCaption = tr("Output");
-		m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET]   = new QPixmap(":/icons/asocketo.png");
+		m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET]   = new QPixmap(":/images/asocketo.png");
 		m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X] = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET], pmXSocket1);
-		m_apPixmaps[QJACKCTL_XPM_AUDIO_CLIENT]   = new QPixmap(":/icons/acliento.png");
-		m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(":/icons/aportlno.png");
-		m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET]    = new QPixmap(":/icons/msocketo.png");
+		m_apPixmaps[QJACKCTL_XPM_AUDIO_CLIENT]   = new QPixmap(":/images/acliento.png");
+		m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(":/images/aportlno.png");
+		m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET]    = new QPixmap(":/images/msocketo.png");
 		m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X]  = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET], pmXSocket1);
-		m_apPixmaps[QJACKCTL_XPM_MIDI_CLIENT]    = new QPixmap(":/icons/mcliento.png");
-		m_apPixmaps[QJACKCTL_XPM_MIDI_PLUG]      = new QPixmap(":/icons/mporto.png");
+		m_apPixmaps[QJACKCTL_XPM_MIDI_CLIENT]    = new QPixmap(":/images/mcliento.png");
+		m_apPixmaps[QJACKCTL_XPM_MIDI_PLUG]      = new QPixmap(":/images/mporto.png");
 	} else {
 		m_sSocketCaption = tr("Input");
-		m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET]   = new QPixmap(":/icons/asocketi.png");
+		m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET]   = new QPixmap(":/images/asocketi.png");
 		m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET_X] = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_AUDIO_SOCKET], pmXSocket1);
-		m_apPixmaps[QJACKCTL_XPM_AUDIO_CLIENT]   = new QPixmap(":/icons/aclienti.png");
-		m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(":/icons/aportlni.png");
-		m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET]    = new QPixmap(":/icons/msocketi.png");
+		m_apPixmaps[QJACKCTL_XPM_AUDIO_CLIENT]   = new QPixmap(":/images/aclienti.png");
+		m_apPixmaps[QJACKCTL_XPM_AUDIO_PLUG]     = new QPixmap(":/images/aportlni.png");
+		m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET]    = new QPixmap(":/images/msocketi.png");
 		m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET_X]  = createPixmapMerge(*m_apPixmaps[QJACKCTL_XPM_MIDI_SOCKET], pmXSocket1);
-		m_apPixmaps[QJACKCTL_XPM_MIDI_CLIENT]    = new QPixmap(":/icons/mclienti.png");
-		m_apPixmaps[QJACKCTL_XPM_MIDI_PLUG]      = new QPixmap(":/icons/mporti.png");
+		m_apPixmaps[QJACKCTL_XPM_MIDI_CLIENT]    = new QPixmap(":/images/mclienti.png");
+		m_apPixmaps[QJACKCTL_XPM_MIDI_PLUG]      = new QPixmap(":/images/mporti.png");
 	}
 
 	if (!m_sSocketCaption.isEmpty())
@@ -1276,15 +1276,15 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 	if (pSocketList) {
 		qjackctlSocketItem *pSocketItem = pSocketList->selectedSocketItem();
 		bool bEnabled = (pSocketItem != NULL);
-		pAction = menu.addAction(QIcon(":/icons/add1.png"),
+		pAction = menu.addAction(QIcon(":/images/add1.png"),
 			tr("Add..."), pSocketList, SLOT(addSocketItem()));
-		pAction = menu.addAction(QIcon(":/icons/edit1.png"),
+		pAction = menu.addAction(QIcon(":/images/edit1.png"),
 			tr("Edit..."), pSocketList, SLOT(editSocketItem()));
 		pAction->setEnabled(bEnabled);
-		pAction = menu.addAction(QIcon(":/icons/copy1.png"),
+		pAction = menu.addAction(QIcon(":/images/copy1.png"),
 			tr("Copy..."), pSocketList, SLOT(copySocketItem()));
 		pAction->setEnabled(bEnabled);
-		pAction = menu.addAction(QIcon(":/icons/remove1.png"),
+		pAction = menu.addAction(QIcon(":/images/remove1.png"),
 			tr("Remove"), pSocketList, SLOT(removeSocketItem()));
 		pAction->setEnabled(bEnabled);
 		menu.addSeparator();
@@ -1347,30 +1347,30 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 		menu.addSeparator();
 		int iItem = (pSocketList->listView())->indexOfTopLevelItem(pSocketItem);
 		int iItemCount = (pSocketList->listView())->topLevelItemCount();
-		pAction = menu.addAction(QIcon(":/icons/up1.png"),
+		pAction = menu.addAction(QIcon(":/images/up1.png"),
 			tr("Move Up"), pSocketList, SLOT(moveUpSocketItem()));
 		pAction->setEnabled(bEnabled && iItem > 0);
-		pAction = menu.addAction(QIcon(":/icons/down1.png"),
+		pAction = menu.addAction(QIcon(":/images/down1.png"),
 			tr("Move Down"), pSocketList, SLOT(moveDownSocketItem()));
 		pAction->setEnabled(bEnabled && iItem < iItemCount - 1);
 		menu.addSeparator();
 	}
 
-	pAction = menu.addAction(QIcon(":/icons/connect1.png"),
+	pAction = menu.addAction(QIcon(":/images/connect1.png"),
 		tr("&Connect"), pPatchbay, SLOT(connectSelected()),
 		tr("Alt+C", "Connect"));
 	pAction->setEnabled(pPatchbay->canConnectSelected());
-	pAction = menu.addAction(QIcon(":/icons/disconnect1.png"),
+	pAction = menu.addAction(QIcon(":/images/disconnect1.png"),
 		tr("&Disconnect"), pPatchbay, SLOT(disconnectSelected()),
 		tr("Alt+D", "Disconnect"));
 	pAction->setEnabled(pPatchbay->canDisconnectSelected());
-	pAction = menu.addAction(QIcon(":/icons/disconnectall1.png"),
+	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
 		tr("Disconnect &All"), pPatchbay, SLOT(disconnectAll()),
 		tr("Alt+A", "Disconect All"));
 	pAction->setEnabled(pPatchbay->canDisconnectAll());
 
 	menu.addSeparator();
-	pAction = menu.addAction(QIcon(":/icons/refresh1.png"),
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
 		tr("&Refresh"), pPatchbay, SLOT(refresh()),
 		tr("Alt+R", "Refresh"));
 

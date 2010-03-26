@@ -1,0 +1,7 @@
+# qjackctl.pri
+#
+PREFIX   = @ac_prefix@
+
+CONFIG  += @ac_debug@
+LIBS    += @ac_libs@
+INCPATH += @ac_incpath@
