@@ -2,6 +2,6 @@
 #
 PREFIX   = @ac_prefix@
 
-CONFIG  += @ac_debug@
+CONFIG  += @ac_debug@ @ac_qdbus@
 LIBS    += @ac_libs@
 INCPATH += @ac_incpath@

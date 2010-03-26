@@ -60,7 +60,7 @@ forms = \
 	src/qjackctlStatusForm.ui
 
 resources = \
-	src/qxgedit.qrc
+	src/qjackctl.qrc
 
  
 translations_sources = \
