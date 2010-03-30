@@ -1016,7 +1016,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.ChanSpinBox->setEnabled(bPortaudio);
 
 	int  iAudio   = m_ui.AudioComboBox->currentIndex();
-	bool bEnabled = bAlsa;
+	bool bEnabled = (bAlsa || bPortaudio);
 	if (bEnabled && iAudio == QJACKCTL_DUPLEX) {
 		const QString& sInDevice  = m_ui.InDeviceComboBox->currentText();
 		const QString& sOutDevice = m_ui.OutDeviceComboBox->currentText();
@@ -1024,10 +1024,10 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
 	}
 
-	bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire || bPortaudio);
+	bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire);
 	m_ui.InterfaceTextLabel->setEnabled(bInterface);
 	m_ui.InterfaceComboBox->setEnabled(bInterface);
-	m_ui.InterfaceToolButton->setEnabled(bEnabled || bCoreaudio || bPortaudio);
+	m_ui.InterfaceToolButton->setEnabled(bEnabled || bCoreaudio);
 	if (!bInterface)
 		setComboBoxCurrentText(m_ui.InterfaceComboBox, m_pSetup->sDefPresetName);
 

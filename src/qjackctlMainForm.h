@@ -231,6 +231,9 @@ protected:
 
 #endif
 
+	// Quotes string with embedded whitespace.
+	QString formatQuoted(const QString& s) const;
+
 	// Guarded transport play/pause toggle.
 	void transportPlayStatus(bool bOn);
 

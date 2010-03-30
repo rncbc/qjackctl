@@ -1004,17 +1004,18 @@ void qjackctlMainForm::startJack (void)
 	else if (m_preset.bUnlockMem)
 		args.append("-u");
 	args.append("-d" + m_preset.sDriver);
-	if (bAlsa && (m_preset.iAudio != QJACKCTL_DUPLEX ||
+	if ((bAlsa || bPortaudio) && (m_preset.iAudio != QJACKCTL_DUPLEX ||
 		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
 		QString sInterface = m_preset.sInterface;
-		if (sInterface.isEmpty())
+		if (bAlsa && sInterface.isEmpty())
 			sInterface = "hw:0";
-		args.append("-d" + sInterface);
+		if (!sInterface.isEmpty())
+			args.append("-d" + formatQuoted(sInterface));
 	}
 	if (bPortaudio && m_preset.iChan > 0)
 		args.append("-c" + QString::number(m_preset.iChan));
 	if ((bCoreaudio || bFreebob || bFirewire) && !m_preset.sInterface.isEmpty())
-		args.append("-d" + m_preset.sInterface);
+		args.append("-d" + formatQuoted(m_preset.sInterface));
 	if (m_preset.iSampleRate > 0 && !bNet)
 		args.append("-r" + QString::number(m_preset.iSampleRate));
 	if (m_preset.iFrames > 0 && !bNet)
@@ -1024,36 +1025,56 @@ void qjackctlMainForm::startJack (void)
 			args.append("-n" + QString::number(m_preset.iPeriods));
 	}
 	if (bAlsa) {
-		switch (m_preset.iAudio) {
-		case QJACKCTL_DUPLEX:
-			if (!m_preset.sInDevice.isEmpty() || !m_preset.sOutDevice.isEmpty())
-				args.append("-D");
-			if (!m_preset.sInDevice.isEmpty())
-				args.append("-C" + m_preset.sInDevice);
-			if (!m_preset.sOutDevice.isEmpty())
-				args.append("-P" + m_preset.sOutDevice);
-			break;
-		case QJACKCTL_CAPTURE:
-			args.append("-C" + m_preset.sInDevice);
-			break;
-		case QJACKCTL_PLAYBACK:
-			args.append("-P" + m_preset.sOutDevice);
-			break;
-		}
 		if (m_preset.bSoftMode)
 			args.append("-s");
 		if (m_preset.bMonitor)
 			args.append("-m");
 		if (m_preset.bShorts)
 			args.append("-S");
+		if (m_preset.bHWMon)
+			args.append("-H");
+		if (m_preset.bHWMeter)
+			args.append("-M");
+	#ifdef CONFIG_JACK_MIDI
+		if (!m_preset.sMidiDriver.isEmpty())
+			args.append("-X" + formatQuoted(m_preset.sMidiDriver));
+	#endif
+	}
+	if (bAlsa || bPortaudio) {
+		switch (m_preset.iAudio) {
+		case QJACKCTL_DUPLEX:
+			if (!m_preset.sInDevice.isEmpty() || !m_preset.sOutDevice.isEmpty())
+				args.append("-D");
+			if (!m_preset.sInDevice.isEmpty())
+				args.append("-C" + formatQuoted(m_preset.sInDevice));
+			if (!m_preset.sOutDevice.isEmpty())
+				args.append("-P" + formatQuoted(m_preset.sOutDevice));
+			break;
+		case QJACKCTL_CAPTURE:
+			args.append("-C" + formatQuoted(m_preset.sInDevice));
+			break;
+		case QJACKCTL_PLAYBACK:
+			args.append("-P" + formatQuoted(m_preset.sOutDevice));
+			break;
+		}
 		if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
 			args.append("-i" + QString::number(m_preset.iInChannels));
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
 			args.append("-o" + QString::number(m_preset.iOutChannels));
-#ifdef CONFIG_JACK_MIDI
-		if (!m_preset.sMidiDriver.isEmpty())
-			args.append("-X" + m_preset.sMidiDriver);
-#endif
+		switch (m_preset.iDither) {
+		case 0:
+		//	args.append("-z-");
+			break;
+		case 1:
+			args.append("-zr");
+			break;
+		case 2:
+			args.append("-zs");
+			break;
+		case 3:
+			args.append("-zt");
+			break;
+		}
 	}
 	else if (bOss || bSun) {
 		if (m_preset.bIgnoreHW)
@@ -1061,9 +1082,9 @@ void qjackctlMainForm::startJack (void)
 		if (m_preset.iWordLength > 0)
 			args.append("-w" + QString::number(m_preset.iWordLength));
 		if (!m_preset.sInDevice.isEmpty()  && m_preset.iAudio != QJACKCTL_PLAYBACK)
-			args.append("-C" + m_preset.sInDevice);
+			args.append("-C" + formatQuoted(m_preset.sInDevice));
 		if (!m_preset.sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE)
-			args.append("-P" + m_preset.sOutDevice);
+			args.append("-P" + formatQuoted(m_preset.sOutDevice));
 		if (m_preset.iAudio == QJACKCTL_PLAYBACK)
 			args.append("-i0");
 		else if (m_preset.iInChannels > 0)
@@ -1073,7 +1094,7 @@ void qjackctlMainForm::startJack (void)
 		else if (m_preset.iOutChannels > 0)
 			args.append("-o" + QString::number(m_preset.iOutChannels));
 	}
-	else if (bCoreaudio || bPortaudio || bFirewire || bNet) {
+	else if (bCoreaudio || bFirewire || bNet) {
 		if (m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK)
 			args.append("-i" + QString::number(m_preset.iInChannels));
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
@@ -1096,28 +1117,6 @@ void qjackctlMainForm::startJack (void)
 	}
 	if (bDummy && m_preset.iWait > 0 && m_preset.iWait != 21333)
 		args.append("-w" + QString::number(m_preset.iWait));
-	if (bAlsa || bPortaudio) {
-		switch (m_preset.iDither) {
-		case 0:
-		//	args.append("-z-");
-			break;
-		case 1:
-			args.append("-zr");
-			break;
-		case 2:
-			args.append("-zs");
-			break;
-		case 3:
-			args.append("-zt");
-			break;
-		}
-	}
-	if (bAlsa) {
-		if (m_preset.bHWMon)
-			args.append("-H");
-		if (m_preset.bHWMeter)
-			args.append("-M");
-	}
 	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob) {
 		if (m_preset.iInLatency > 0)
 			args.append("-I" + QString::number(m_preset.iInLatency));
@@ -3437,10 +3436,10 @@ void qjackctlMainForm::setDBusParameters (void)
 //		m_preset.bUnlockMem,
 //		!m_preset.bNoMemLock);
 	setDBusEngineParameter("driver", m_preset.sDriver);
-	if (bAlsa && (m_preset.iAudio != QJACKCTL_DUPLEX ||
+	if ((bAlsa || bPortaudio) && (m_preset.iAudio != QJACKCTL_DUPLEX ||
 		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
 		QString sInterface = m_preset.sInterface;
-		if (sInterface.isEmpty())
+		if (bAlsa && sInterface.isEmpty())
 			sInterface = "hw:0";
 		setDBusDriverParameter("device", sInterface);
 	}
@@ -3468,6 +3467,18 @@ void qjackctlMainForm::setDBusParameters (void)
 			m_preset.iPeriods > 0);
 	}
 	if (bAlsa) {
+		setDBusDriverParameter("softmode", m_preset.bSoftMode);
+		setDBusDriverParameter("monitor", m_preset.bMonitor);
+		setDBusDriverParameter("shorts", m_preset.bShorts);
+		setDBusDriverParameter("hwmon", m_preset.bHWMon);
+		setDBusDriverParameter("hwmeter", m_preset.bHWMeter);
+	#ifdef CONFIG_JACK_MIDI
+		setDBusDriverParameter("midi-driver",
+			m_preset.sMidiDriver,
+			!m_preset.sMidiDriver.isEmpty());
+	#endif
+	}
+	if (bAlsa || bPortaudio) {
 		setDBusDriverParameter("duplex",
 			bool(m_preset.iAudio == QJACKCTL_DUPLEX));
 		setDBusDriverParameter("capture",
@@ -3476,20 +3487,21 @@ void qjackctlMainForm::setDBusParameters (void)
 		setDBusDriverParameter("playback",
 			m_preset.sOutDevice,
 			!m_preset.sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
-		setDBusDriverParameter("softmode", m_preset.bSoftMode);
-		setDBusDriverParameter("monitor", m_preset.bMonitor);
-		setDBusDriverParameter("shorts", m_preset.bShorts);
 		setDBusDriverParameter("inchannels",
 			(unsigned int) m_preset.iInChannels,
 			m_preset.iInChannels > 0 && m_preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
 			(unsigned int) m_preset.iOutChannels,
 			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
-#ifdef CONFIG_JACK_MIDI
-		setDBusDriverParameter("midi-driver",
-			m_preset.sMidiDriver,
-			!m_preset.sMidiDriver.isEmpty());
-#endif
+		unsigned char dither = 0;
+		switch (m_preset.iDither) {
+		case 0: dither = 'n'; break;
+		case 1: dither = 'r'; break;
+		case 2: dither = 's'; break;
+		case 3: dither = 't'; break; }
+		setDBusDriverParameter("dither",
+			QVariant::fromValue(dither),
+			dither > 0);
 	}
 	else if (bOss || bSun) {
 		setDBusDriverParameter("ignorehw", m_preset.bIgnoreHW);
@@ -3509,7 +3521,7 @@ void qjackctlMainForm::setDBusParameters (void)
 			(unsigned int) m_preset.iOutChannels,
 			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
 	}
-	else if (bCoreaudio || bPortaudio || bFirewire || bNet) {
+	else if (bCoreaudio || bFirewire || bNet) {
 		setDBusDriverParameter("inchannels",
 			(unsigned int) m_preset.iInChannels,
 			m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK);
@@ -3529,21 +3541,6 @@ void qjackctlMainForm::setDBusParameters (void)
 		setDBusDriverParameter("wait",
 			(unsigned int) m_preset.iWait,
 			m_preset.iWait > 0);
-	}
-	if (bAlsa || bPortaudio) {
-		unsigned char dither = 0;
-		switch (m_preset.iDither) {
-		case 0: dither = 'n'; break;
-		case 1: dither = 'r'; break;
-		case 2: dither = 's'; break;
-		case 3: dither = 't'; break; }
-		setDBusDriverParameter("dither",
-			QVariant::fromValue(dither),
-			dither > 0);
-	}
-	if (bAlsa) {
-		setDBusDriverParameter("hwmon", m_preset.bHWMon);
-		setDBusDriverParameter("hwmeter", m_preset.bHWMeter);
 	}
 	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob) {
 		setDBusDriverParameter("input-latency",
@@ -3656,6 +3653,13 @@ QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 }
 
 #endif	// CONFIG_DBUS
+
+
+// Quotes string with embedded whitespace.
+QString qjackctlMainForm::formatQuoted ( const QString& s ) const
+{
+	return (s.contains(' ') ? '"' + s + '"' : s);
+}
 
 
 // Guarded transport play/pause toggle.

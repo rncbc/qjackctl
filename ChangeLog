@@ -5,6 +5,11 @@ ChangeLog
 
 SVN TRUNK
 
+- Double-quotes are now being added to device names which include
+  blank characters and were rendering invalid all command line
+  invocation of the classic JACK server (eg. specially due for
+  Portaudio device names on Windows).
+  
 - Transport play (rolling) status is now being guarded to avoid
   backfiring from extraneous transport state changes.
 
@@ -39,7 +44,7 @@ SVN TRUNK
   replaced by system tray icon bubble messages where available
   (mitigating feature request #2936455).
 
-- Comply with jackd >= 0.118.0 which now runs in real-time mode by
+- Comply with jackd >= 0.118.0 which nowruns in real-time mode by
   default; use of -R is now deprecated from the jackd command line
   interface options; use -r to run in non-real-time-scheduling.
 
