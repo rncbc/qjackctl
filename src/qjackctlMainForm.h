@@ -231,6 +231,9 @@ protected:
 
 #endif
 
+	// Guarded transport play/pause toggle.
+	void transportPlayStatus(bool bOn);
+
 private:
 
 	// The Qt-designer UI struct...
@@ -298,6 +301,8 @@ private:
 
 	bool  m_bQuitForce;
 	float m_fSkipAccel;
+
+	int m_iTransportPlay;
 
 	// Kind-of singleton reference.
 	static qjackctlMainForm *g_pMainForm;

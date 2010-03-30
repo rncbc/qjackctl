@@ -341,6 +341,9 @@ qjackctlMainForm::qjackctlMainForm (
 	// Transport skip accelerate factor.
 	m_fSkipAccel = 1.0;
 
+	// Avoid extra transport toggles (play/stop)
+	m_iTransportPlay = 0;
+
 	// Whether we've Qt::Tool flag (from bKeepOnTop),
 	// this is actually the main last application window...
 	QWidget::setAttribute(Qt::WA_QuitOnClose);
@@ -1417,7 +1420,7 @@ void qjackctlMainForm::jackCleanup (void)
 	m_ui.PlayToolButton->setEnabled(false);
 	m_ui.PauseToolButton->setEnabled(false);
 	m_ui.ForwardToolButton->setEnabled(false);
-	m_ui.PlayToolButton->setChecked(false);
+	transportPlayStatus(false);
 	int iServerState;
 	if (m_bJackDetach)
 		iServerState = (m_pJackClient ? QJACKCTL_ACTIVE : QJACKCTL_INACTIVE);
@@ -2821,6 +2824,9 @@ void qjackctlMainForm::transportBackward (void)
 // Transport toggle (start/stop)
 void qjackctlMainForm::transportPlay ( bool bOn )
 {
+	if (m_iTransportPlay > 0)
+		return;
+
 	if (bOn)
 		transportStart();
 	else
@@ -2965,7 +2971,7 @@ void qjackctlMainForm::refreshStatus (void)
 			m_ui.PlayToolButton->setEnabled(true);
 			m_ui.PauseToolButton->setEnabled(bPlaying);
 			m_ui.ForwardToolButton->setEnabled(true);
-			m_ui.PlayToolButton->setChecked(bPlaying);
+			transportPlayStatus(bPlaying);
 			if (!m_ui.BackwardToolButton->isDown() &&
 				!m_ui.ForwardToolButton->isDown())
 				m_fSkipAccel = 1.0;
@@ -2976,7 +2982,7 @@ void qjackctlMainForm::refreshStatus (void)
 			m_ui.PlayToolButton->setEnabled(false);
 			m_ui.PauseToolButton->setEnabled(false);
 			m_ui.ForwardToolButton->setEnabled(false);
-			m_ui.PlayToolButton->setChecked(false);
+			transportPlayStatus(false);
 			updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
@@ -3015,7 +3021,7 @@ void qjackctlMainForm::refreshStatus (void)
 		m_ui.PlayToolButton->setEnabled(false);
 		m_ui.PauseToolButton->setEnabled(false);
 		m_ui.ForwardToolButton->setEnabled(false);
-		m_ui.PlayToolButton->setChecked(false);
+		transportPlayStatus(false);
 	}
 
 	// Elapsed times should be rigorous...
@@ -3650,6 +3656,17 @@ QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 }
 
 #endif	// CONFIG_DBUS
+
+
+// Guarded transport play/pause toggle.
+void qjackctlMainForm::transportPlayStatus ( bool bOn )
+{
+	++m_iTransportPlay;
+
+	m_ui.PlayToolButton->setChecked(bOn);
+
+	--m_iTransportPlay;
+}
 
 
 // end of qjackctlMainForm.cpp

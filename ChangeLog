@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Transport play (rolling) status is now being guarded to avoid
+  backfiring from extraneous transport state changes.
+
 - General source tree layout and build configuration change.
 
 - Italian (it) translation added (by Sergio Atzori).
