@@ -510,7 +510,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
 	// Try to restore old window positioning and appearence.
-	m_pSetup->loadWidgetGeometry(this, m_pSetup->bStartMinimized);
+	m_pSetup->loadWidgetGeometry(this, true);
 
 	// Make it final show...
 	m_ui.StatusDisplayFrame->show();
@@ -719,7 +719,7 @@ bool qjackctlMainForm::queryClose (void)
 	// active system tray icon, then just hide ourselves.
 	if (!m_bQuitForce && isVisible()
 		&& m_pSetup->bSystemTray && m_pSystemTray) {
-		m_pSetup->saveWidgetGeometry(this);
+		m_pSetup->saveWidgetGeometry(this, true);
 		const QString& sTitle = tr("Information") + " - " QJACKCTL_SUBTITLE1;
 		const QString& sText
 			= tr("The program will keep running in the system tray.\n\n"
@@ -2571,7 +2571,8 @@ void qjackctlMainForm::refreshPatchbay (void)
 // Main form visibility requester slot.
 void qjackctlMainForm::toggleMainForm (void)
 {
-	m_pSetup->saveWidgetGeometry(this);
+	m_pSetup->saveWidgetGeometry(this, true);
+
 	if (isVisible()) {
 		if (m_pSetup->bSystemTray && m_pSystemTray) {
 			// Hide away from sight.

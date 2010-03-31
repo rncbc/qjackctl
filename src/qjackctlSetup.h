@@ -197,8 +197,8 @@ public:
 	void saveSplitterSizes(QSplitter *pSplitter);
 
 	// Widget geometry persistence helper prototypes.
-	void saveWidgetGeometry(QWidget *pWidget, bool bMinimized = false);
-	void loadWidgetGeometry(QWidget *pWidget, bool bMinimized = false);
+	void saveWidgetGeometry(QWidget *pWidget, bool bVisible = false);
+	void loadWidgetGeometry(QWidget *pWidget, bool bVisible = false);
 
 private:
 

@@ -632,41 +632,40 @@ void qjackctlSetup::saveSplitterSizes ( QSplitter *pSplitter )
 //---------------------------------------------------------------------------
 // Widget geometry persistence helper methods.
 
-void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bMinimized )
+void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 {
 	// Try to restore old form window positioning.
 	if (pWidget) {
-		QPoint fpos;
-		QSize  fsize;
-		bool bVisible;
+		QPoint wpos;
+		QSize  wsize;
 		m_settings.beginGroup("/Geometry/" + pWidget->objectName());
-		fpos.setX(m_settings.value("/x", -1).toInt());
-		fpos.setY(m_settings.value("/y", -1).toInt());
-		fsize.setWidth(m_settings.value("/width", -1).toInt());
-		fsize.setHeight(m_settings.value("/height", -1).toInt());
-		bVisible = m_settings.value("/visible", false).toBool();
+		wpos.setX(m_settings.value("/x", -1).toInt());
+		wpos.setY(m_settings.value("/y", -1).toInt());
+		wsize.setWidth(m_settings.value("/width", -1).toInt());
+		wsize.setHeight(m_settings.value("/height", -1).toInt());
+		if (!bVisible) bVisible = m_settings.value("/visible", false).toBool();
 		m_settings.endGroup();
-		new qjackctlDelayedSetup(pWidget, fpos, fsize, bVisible && !bMinimized,
-			(bDelayedSetup ? 1000 : 0));
+		new qjackctlDelayedSetup(pWidget, wpos, wsize,
+			bVisible && !bStartMinimized, (bDelayedSetup ? 1000 : 0));
 	}
 }
 
 
-void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bMinimized )
+void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bVisible )
 {
 	// Try to save form window position...
 	// (due to X11 window managers ideossincrasies, we better
 	// only save the form geometry while its up and visible)
 	if (pWidget) {
 		m_settings.beginGroup("/Geometry/" + pWidget->objectName());
-		bool bVisible = pWidget->isVisible();
-		const QPoint& fpos  = pWidget->pos();
-		const QSize&  fsize = pWidget->size();
-		m_settings.setValue("/x", fpos.x());
-		m_settings.setValue("/y", fpos.y());
-		m_settings.setValue("/width", fsize.width());
-		m_settings.setValue("/height", fsize.height());
-		m_settings.setValue("/visible", bVisible && !bMinimized);
+		const QPoint& wpos  = pWidget->pos();
+		const QSize&  wsize = pWidget->size();
+		if (!bVisible) bVisible = pWidget->isVisible();
+		m_settings.setValue("/x", wpos.x());
+		m_settings.setValue("/y", wpos.y());
+		m_settings.setValue("/width", wsize.width());
+		m_settings.setValue("/height", wsize.height());
+		m_settings.setValue("/visible", bVisible && !bStartMinimized);
 		m_settings.endGroup();
 	}
 }
@@ -703,6 +702,7 @@ void qjackctlDelayedSetup::setup (void)
 		if (m_bVisible)
 			m_pWidget->show();
 	}
+
 	deleteLater();
 }
 

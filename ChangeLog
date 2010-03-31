@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Initial widget geometry and visibility persistence logic has
+  been slightly revised as much to avoid crash failures due to
+  wrong main widget hidden state.
+
 - Double-quotes are now being added to device names which include
   blank characters and were rendering invalid all command line
   invocation of the classic JACK server (eg. specially due for
