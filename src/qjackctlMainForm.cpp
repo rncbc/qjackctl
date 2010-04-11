@@ -2154,6 +2154,15 @@ void qjackctlMainForm::timerSlot (void)
 		if (m_iTimerDelay >= m_iStartDelay) {
 			// If we cannot start it now, maybe a lil'mo'later ;)
 			if (!startJackClient(false)) {
+			#ifdef CONFIG_SYSTEM_TRAY
+			#ifdef QJACKCTL_QT4_SYSTEM_TRAY
+			#if QT_VERSION >= 0x040300
+				if (m_pSetup->bSystemTray && m_pSystemTray
+					&& QSystemTrayIcon::supportsMessages())
+					m_iStartDelay += 60000;
+			#endif
+			#endif
+			#endif
 				m_iStartDelay += m_iTimerDelay;
 				m_iTimerDelay  = 0;
 			}
