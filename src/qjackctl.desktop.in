@@ -1,5 +1,6 @@
 [Desktop Entry]
-Name=QjackCtl
+Name=@PACKAGE_NAME@
+Version=@PACKAGE_VERSION@
 GenericName=JACK Control
 GenericName[de]=JACK-Steuerung
 GenericName[fr]=Contrôle JACK
