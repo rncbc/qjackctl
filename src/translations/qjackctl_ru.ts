@@ -1923,17 +1923,17 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="279"/>
         <source>dummy</source>
-        <translation>псевдо</translation>
+        <translation>dummy</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="294"/>
         <source>alsa</source>
-        <translation>ALSA</translation>
+        <translation>alsa</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="299"/>
         <source>portaudio</source>
-        <translation>PortAudio</translation>
+        <translation>portaudio</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="341"/>
@@ -2740,22 +2740,22 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1504"/>
         <source>&amp;Frames/Period</source>
-        <translation>&amp;Фреймов на период</translation>
+        <translation>&amp;Фреймов/период</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1505"/>
         <source>Periods/&amp;Buffer</source>
-        <translation>Периодов на &amp;буфер</translation>
+        <translation>Периодов/&amp;буфер</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="289"/>
         <source>oss</source>
-        <translation>OSS</translation>
+        <translation>oss</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1526"/>
         <source>Port Ma&amp;ximum:</source>
-        <translation>&amp;Макс. кол-во портов:</translation>
+        <translation>&amp;Макс. портов:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1768"/>
@@ -3198,7 +3198,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1168"/>
         <source>&amp;Output Latency:</source>
-        <translation>Задержка на в&amp;ыходе</translation>
+        <translation>Задержка на в&amp;ыходе:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1190"/>
@@ -3208,7 +3208,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1209"/>
         <source>Alternate output device for playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Альтернативное устройство воспроизведения</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1287"/>
@@ -3585,7 +3585,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="324"/>
         <source>netone</source>
-        <translation type="unfinished"></translation>
+        <translation>netone</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3878"/>
@@ -3708,12 +3708,12 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSocketForm.cpp" line="337"/>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.cpp" line="338"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сокет с именем «%1» уже существует.</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.cpp" line="546"/>
@@ -3865,7 +3865,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="326"/>
         <source>MIDI socket type (JACK)</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип MIDI-сокета (JACK)</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="342"/>
@@ -4090,7 +4090,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlStatusForm.cpp" line="62"/>
         <source>Server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя сервера</translation>
     </message>
 </context>
 </TS>
