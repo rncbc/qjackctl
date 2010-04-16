@@ -44,12 +44,20 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-	m_pJackClient   = NULL;
-	m_pAudioConnect = NULL;
-	m_pMidiConnect  = NULL;
+	m_pAudioConnect = new qjackctlJackConnect(
+		m_ui.AudioConnectView, QJACKCTL_JACK_AUDIO);
+#ifdef CONFIG_JACK_MIDI
+	m_pMidiConnect = new qjackctlJackConnect(
+		m_ui.MidiConnectView, QJACKCTL_JACK_MIDI);
+#else
+	m_pMidiConnect = NULL;
+#endif
 
-	m_pAlsaSeq      = NULL;
-	m_pAlsaConnect  = NULL;
+#ifdef CONFIG_ALSA_SEQ
+	m_pAlsaConnect = new qjackctlAlsaConnect(m_ui.AlsaConnectView);
+#else
+	m_pAlsaConnect = NULL;
+#endif
 
 	m_pSetup = NULL;
 
@@ -125,6 +133,21 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SIGNAL(contentsChanged()),
 		SLOT(alsaRefresh()));
 
+	// Actual connections...
+	QObject::connect(m_pAudioConnect,
+		SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
+		SLOT(audioDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
+#ifdef CONFIG_JACK_MIDI
+	QObject::connect(m_pMidiConnect,
+		SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
+		SLOT(midiDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
+#endif
+#ifdef CONFIG_ALSA_SEQ
+	QObject::connect(m_pAlsaConnect,
+		SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
+		SLOT(alsaDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
+#endif
+
 #ifndef CONFIG_JACK_MIDI
 	m_ui.ConnectionsTabWidget->setTabEnabled(1, false);
 #endif
@@ -139,8 +162,16 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 qjackctlConnectionsForm::~qjackctlConnectionsForm (void)
 {
 	// Destroy our connections view...
-	setJackClient(NULL);
-	setAlsaSeq(NULL);
+	if (m_pAudioConnect)
+		delete m_pAudioConnect;
+#ifdef CONFIG_JACK_MIDI
+	if (m_pMidiConnect)
+		delete m_pMidiConnect;
+#endif
+#ifdef CONFIG_ALSA_SEQ
+	if (m_pAlsaConnect)
+		delete m_pAlsaConnect;
+#endif
 }
 
 
@@ -187,6 +218,20 @@ void qjackctlConnectionsForm::setup ( qjackctlSetup *pSetup )
 {
 	m_pSetup = pSetup;
 
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm) {
+		QObject::connect(m_pAudioConnect, SIGNAL(connectChanged()),
+			pMainForm, SLOT(jackConnectChanged()));
+	#ifdef CONFIG_JACK_MIDI
+		QObject::connect(m_pMidiConnect, SIGNAL(connectChanged()),
+			pMainForm, SLOT(jackConnectChanged()));
+	#endif
+	#ifdef CONFIG_ALSA_SEQ
+		QObject::connect(m_pAlsaConnect, SIGNAL(connectChanged()),
+			pMainForm, SLOT(alsaConnectChanged()));
+	#endif
+	}
+
 	// Load some splitter sizes...
 	if (m_pSetup) {
 		QList<int> sizes;
@@ -196,12 +241,12 @@ void qjackctlConnectionsForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->loadSplitterSizes(m_ui.AudioConnectView, sizes);
 		m_pSetup->loadSplitterSizes(m_ui.MidiConnectView, sizes);
 		m_pSetup->loadSplitterSizes(m_ui.AlsaConnectView, sizes);
-#ifdef CONFIG_ALSA_SEQ
+	#ifdef CONFIG_ALSA_SEQ
 		if (!m_pSetup->bAlsaSeqEnabled) {
 		//	m_ui.ConnectionsTabWidget->setTabEnabled(2, false);
 			m_ui.ConnectionsTabWidget->removeTab(2);
 		}
-#endif
+	#endif
 	}
 
 	// Update initial client/port aliases...
@@ -327,75 +372,6 @@ void qjackctlConnectionsForm::setConnectionsIconSize ( int iIconSize )
 	m_ui.AudioConnectView->setIconSize(iIconSize);
 	m_ui.MidiConnectView->setIconSize(iIconSize);
 	m_ui.AlsaConnectView->setIconSize(iIconSize);
-}
-
-
-// (Un)Bind a JACK client to this form.
-void qjackctlConnectionsForm::setJackClient ( jack_client_t *pJackClient )
-{
-	m_pJackClient = pJackClient;
-
-	if (pJackClient == NULL) {
-		if (m_pAudioConnect) {
-			delete m_pAudioConnect;
-			m_pAudioConnect = NULL;
-		}
-		if (m_pMidiConnect) {
-			delete m_pMidiConnect;
-			m_pMidiConnect = NULL;
-		}
-	}
-
-	if (pJackClient) {
-		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-		if (m_pAudioConnect == NULL && pMainForm) {
-			m_pAudioConnect = new qjackctlJackConnect(
-				m_ui.AudioConnectView, pJackClient, QJACKCTL_JACK_AUDIO);
-			QObject::connect(m_pAudioConnect, SIGNAL(connectChanged()),
-				pMainForm, SLOT(jackConnectChanged()));
-			QObject::connect(m_pAudioConnect,
-				SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
-				SLOT(audioDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
-		}
-		if (m_pMidiConnect == NULL && pMainForm) {
-			m_pMidiConnect = new qjackctlJackConnect(
-				m_ui.MidiConnectView, pJackClient, QJACKCTL_JACK_MIDI);
-			QObject::connect(m_pMidiConnect, SIGNAL(connectChanged()),
-				pMainForm, SLOT(jackConnectChanged()));
-			QObject::connect(m_pMidiConnect,
-				SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
-				SLOT(midiDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
-		}
-	}
-
-	stabilizeAudio(pJackClient != NULL);
-	stabilizeMidi(pJackClient != NULL);
-}
-
-
-// (Un)Bind a ALSA sequencer descriptor to this form.
-void qjackctlConnectionsForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
-{
-	m_pAlsaSeq = pAlsaSeq;
-
-	if (pAlsaSeq == NULL && m_pAlsaConnect) {
-		delete m_pAlsaConnect;
-		m_pAlsaConnect = NULL;
-	}
-
-	if (pAlsaSeq && m_pAlsaConnect == NULL) {
-		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-		m_pAlsaConnect = new qjackctlAlsaConnect(m_ui.AlsaConnectView, pAlsaSeq);
-		if (pMainForm) {
-			QObject::connect(m_pAlsaConnect, SIGNAL(connectChanged()),
-				pMainForm, SLOT(alsaConnectChanged()));
-			QObject::connect(m_pAlsaConnect,
-				SIGNAL(disconnecting(qjackctlPortItem *, qjackctlPortItem *)),
-				SLOT(alsaDisconnecting(qjackctlPortItem *, qjackctlPortItem *)));
-		}
-	}
-
-	stabilizeAlsa(pAlsaSeq != NULL);
 }
 
 

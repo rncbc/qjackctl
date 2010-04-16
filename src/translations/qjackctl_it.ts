@@ -457,11 +457,11 @@ Salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>S&amp;etup...</source>
-        <translation type="unfinished">&amp;Impostazioni</translation>
+        <translation type="obsolete">&amp;Impostazioni</translation>
     </message>
     <message>
         <source>Alt+E</source>
-        <translation>Alt+I</translation>
+        <translation type="obsolete">Alt+I</translation>
     </message>
     <message>
         <source>Show settings and options dialog</source>
@@ -553,7 +553,7 @@ Salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Alt+U</source>
-        <translation type="obsolete">Alt+U</translation>
+        <translation type="unfinished">Alt+U</translation>
     </message>
     <message>
         <source>Stop transport rolling</source>
@@ -1203,6 +1203,30 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
         <source>Space</source>
         <translation>Space</translation>
     </message>
+    <message>
+        <source>Set&amp;up...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;ession</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Load...</source>
+        <translation type="unfinished">&amp;Apri...</translation>
+    </message>
+    <message>
+        <source>&amp;Save...</source>
+        <translation type="unfinished">&amp;Salva...</translation>
+    </message>
+    <message>
+        <source>Save and &amp;Quit...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &amp;Template...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlMessagesForm</name>
@@ -1592,6 +1616,127 @@ dalle connessioni attuali?</translation>
     <message>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>qjackctlSessionForm</name>
+    <message>
+        <source>Session - JACK Audio Connection Kit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Load...</source>
+        <translation type="unfinished">&amp;Apri...</translation>
+    </message>
+    <message>
+        <source>Recent session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Recent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save...</source>
+        <translation type="unfinished">&amp;Salva...</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save and Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Client / Ports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UUID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Session directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>and Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Attenzione</translation>
+    </message>
+    <message>
+        <source>A session could not be found in this folder:
+
+&quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: loading session...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: load session %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A session already exists in this folder:
+
+&quot;%1&quot;
+
+Are you sure to overwrite the existing session?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This folder already exists and is not empty:
+
+&quot;%1&quot;
+
+Are you sure to overwrite the existing folder?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: saving session...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: save session %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -98,12 +98,9 @@ class qjackctlJackClientList : public qjackctlClientList
 public:
 
 	// Constructor.
-	qjackctlJackClientList(qjackctlClientListView *pListView, jack_client_t *pJackClient, bool bReadable);
+	qjackctlJackClientList(qjackctlClientListView *pListView, bool bReadable);
 	// Default destructor.
 	~qjackctlJackClientList();
-
-	// Jack client accessors.
-	jack_client_t *jackClient() const;
 
 	// Jack port lookup.
 	qjackctlJackPort *findJackClientPort(jack_port_t *pJackPort);
@@ -116,9 +113,6 @@ public:
 	static int jackClientPortAlias();
 
 private:
-
-	// Instance variables.
-	jack_client_t *m_pJackClient;
 
 	// Jack client port aliases mode.
 	static int g_iJackClientPortAlias;
@@ -133,8 +127,7 @@ class qjackctlJackConnect : public qjackctlConnect
 public:
 
 	// Constructor.
-	qjackctlJackConnect(qjackctlConnectView *pConnectView,
-		jack_client_t *pJackClient, int iJackType);
+	qjackctlJackConnect(qjackctlConnectView *pConnectView, int iJackType);
 	// Default destructor.
 	~qjackctlJackConnect();
 

@@ -21,6 +21,8 @@
 
 #include "qjackctlPatchbay.h"
 
+#include "qjackctlMainForm.h"
+
 #include <QMessageBox>
 #include <QHeaderView>
 #include <QPainterPath>
@@ -320,10 +322,8 @@ qjackctlSocketList::qjackctlSocketList (
 {
 	QPixmap pmXSocket1(":/images/xsocket1.png");
 
-	m_pListView   = pListView;
-	m_bReadable   = bReadable;
-	m_pJackClient = NULL;
-	m_pAlsaSeq    = NULL;
+	m_pListView = pListView;
+	m_bReadable = bReadable;
 
 	if (bReadable) {
 		m_sSocketCaption = tr("Output");
@@ -406,30 +406,6 @@ const QString& qjackctlSocketList::socketCaption (void) const
 }
 
 
-// JACK client accessors.
-void qjackctlSocketList::setJackClient ( jack_client_t *pJackClient )
-{
-	m_pJackClient = pJackClient;
-}
-
-jack_client_t *qjackctlSocketList::jackClient (void) const
-{
-	return m_pJackClient;
-}
-
-
-// ALSA sequencer accessors.
-void qjackctlSocketList::setAlsaSeq ( snd_seq_t *pAlsaSeq )
-{
-	m_pAlsaSeq = pAlsaSeq;
-}
-
-snd_seq_t *qjackctlSocketList::alsaSeq (void) const
-{
-	return m_pAlsaSeq;
-}
-
-
 // Socket list cleaner.
 void qjackctlSocketList::clear (void)
 {
@@ -488,8 +464,6 @@ bool qjackctlSocketList::addSocketItem (void)
 	socketForm.setSocketCaption(m_sSocketCaption);
 	socketForm.setPixmaps(m_apPixmaps);
 	socketForm.setSocketList(this);
-	socketForm.setJackClient(m_pJackClient);
-	socketForm.setAlsaSeq(m_pAlsaSeq);
 	qjackctlPatchbaySocket socket(m_sSocketCaption
 		+ ' ' + QString::number(m_sockets.count() + 1),
 		QString::null, QJACKCTL_SOCKETTYPE_JACK_AUDIO);
@@ -569,8 +543,6 @@ bool qjackctlSocketList::editSocketItem (void)
 		socketForm.setSocketCaption(m_sSocketCaption);
 		socketForm.setPixmaps(m_apPixmaps);
 		socketForm.setSocketList(this);
-		socketForm.setJackClient(m_pJackClient);
-		socketForm.setAlsaSeq(m_pAlsaSeq);
 		qjackctlPatchbaySocket socket(pSocketItem->socketName(),
 			pSocketItem->clientName(), pSocketItem->socketType());
 		socket.setExclusive(pSocketItem->isExclusive());
@@ -636,8 +608,6 @@ bool qjackctlSocketList::copySocketItem (void)
 		socketForm.setSocketCaption(m_sSocketCaption);
 		socketForm.setPixmaps(m_apPixmaps);
 		socketForm.setSocketList(this);
-		socketForm.setJackClient(m_pJackClient);
-		socketForm.setAlsaSeq(m_pAlsaSeq);
 		qjackctlPatchbaySocket socket(sSocketName,
 			pSocketItem->clientName(), iSocketType);
 		if (pSocketItem->isExclusive())
@@ -1929,37 +1899,16 @@ void qjackctlPatchbay::saveRack ( qjackctlPatchbayRack *pPatchbayRack )
 }
 
 
-// JACK client property accessors.
-void qjackctlPatchbay::setJackClient ( jack_client_t *pJackClient )
-{
-	m_pOSocketList->setJackClient(pJackClient);
-	m_pISocketList->setJackClient(pJackClient);
-}
-
-jack_client_t *qjackctlPatchbay::jackClient (void) const
-{
-	return m_pOSocketList->jackClient();
-}
-
-// ALSA sequencer property accessors.
-void qjackctlPatchbay::setAlsaSeq ( snd_seq_t *pAlsaSeq )
-{
-	m_pOSocketList->setAlsaSeq(pAlsaSeq);
-	m_pISocketList->setAlsaSeq(pAlsaSeq);
-}
-
-snd_seq_t *qjackctlPatchbay::alsaSeq (void) const
-{
-	return m_pOSocketList->alsaSeq();
-}
-
-
 // Connections snapshot.
 void qjackctlPatchbay::connectionsSnapshot (void)
 {
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return;
+
 	qjackctlPatchbayRack rack;
-	rack.connectJackSnapshot(jackClient());
-	rack.connectAlsaSnapshot(alsaSeq());
+	rack.connectJackSnapshot(pMainForm->jackClient());
+	rack.connectAlsaSnapshot(pMainForm->alsaSeq());
 	loadRack(&rack);
 
 	// Set dirty flag.

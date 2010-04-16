@@ -188,14 +188,6 @@ public:
 	// Socket aesthetics accessors.
 	const QString& socketCaption() const;
 
-	// JACK client accessors.
-	void setJackClient(jack_client_t *pJackClient);
-	jack_client_t *jackClient() const;
-
-	// ALSA sequencer accessors.
-	void setAlsaSeq(snd_seq_t *pAlsaSeq);
-	snd_seq_t *alsaSeq() const;
-
 	// Socket list cleaner.
 	void clear();
 
@@ -228,8 +220,6 @@ private:
 	qjackctlSocketListView *m_pListView;
 	bool m_bReadable;
 	QString  m_sSocketCaption;
-	jack_client_t *m_pJackClient;
-	snd_seq_t *m_pAlsaSeq;
 
 	QPixmap *m_apPixmaps[QJACKCTL_XPM_PIXMAPS];
 
@@ -437,14 +427,6 @@ public:
 	// External rack transfer methods.
 	void loadRack(qjackctlPatchbayRack *pPatchbayRack);
 	void saveRack(qjackctlPatchbayRack *pPatchbayRack);
-
-	// JACK client property accessors.
-	void setJackClient(jack_client_t *pJackClient);
-	jack_client_t *jackClient() const;
-
-	// ALSA sequencer property accessors.
-	void setAlsaSeq(snd_seq_t *pAlsaSeq);
-	snd_seq_t *alsaSeq() const;
 
 public slots:
 

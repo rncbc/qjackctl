@@ -21,6 +21,8 @@
 
 #include "qjackctlAlsaConnect.h"
 
+#include "qjackctlMainForm.h"
+
 #include <QPixmap>
 
 
@@ -128,23 +130,14 @@ qjackctlAlsaPort *qjackctlAlsaClient::findPort ( int iAlsaPort )
 
 // Constructor.
 qjackctlAlsaClientList::qjackctlAlsaClientList (
-	qjackctlClientListView *pListView,
-	snd_seq_t *pAlsaSeq, bool bReadable )
+	qjackctlClientListView *pListView, bool bReadable )
 	: qjackctlClientList(pListView, bReadable)
 {
-	m_pAlsaSeq = pAlsaSeq;
 }
 
 // Default destructor.
 qjackctlAlsaClientList::~qjackctlAlsaClientList (void)
 {
-}
-
-
-// Alsa sequencer accessor.
-snd_seq_t *qjackctlAlsaClientList::alsaSeq (void) const
-{
-	return m_pAlsaSeq;
 }
 
 
@@ -178,7 +171,12 @@ qjackctlAlsaPort *qjackctlAlsaClientList::findClientPort ( int iAlsaClient,
 // Client:port refreshner.
 int qjackctlAlsaClientList::updateClientPorts (void)
 {
-	if (m_pAlsaSeq == NULL)
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return 0;
+
+	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
+	if (pAlsaSeq == NULL)
 		return 0;
 
 	int iDirtyCount = 0;
@@ -200,14 +198,14 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 	snd_seq_port_info_alloca(&pPortInfo);
 	snd_seq_client_info_set_client(pClientInfo, -1);
 
-	while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
+	while (snd_seq_query_next_client(pAlsaSeq, pClientInfo) >= 0) {
 
 		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
 		if (iAlsaClient > 0) {
 			qjackctlAlsaClient *pClient = findClient(iAlsaClient);
 			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
 			snd_seq_port_info_set_port(pPortInfo, -1);
-			while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
+			while (snd_seq_query_next_port(pAlsaSeq, pPortInfo) >= 0) {
 				unsigned int uiPortCapability
 					= snd_seq_port_info_get_capability(pPortInfo);
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
@@ -261,18 +259,15 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 //
 
 // Constructor.
-qjackctlAlsaConnect::qjackctlAlsaConnect (
-	qjackctlConnectView *pConnectView, snd_seq_t *pAlsaSeq )
+qjackctlAlsaConnect::qjackctlAlsaConnect ( qjackctlConnectView *pConnectView )
 	: qjackctlConnect(pConnectView)
 {
 	createIconPixmaps();
 
 	setOClientList(new qjackctlAlsaClientList(
-		connectView()->OListView(), pAlsaSeq, true));
+		connectView()->OListView(), true));
 	setIClientList(new qjackctlAlsaClientList(
-		connectView()->IListView(), pAlsaSeq, false));
-
-	m_pAlsaSeq = pAlsaSeq;
+		connectView()->IListView(), false));
 }
 
 // Default destructor.
@@ -308,18 +303,19 @@ void qjackctlAlsaConnect::deleteIconPixmaps (void)
 }
 
 
-// Alsa sequencer accessor.
-snd_seq_t *qjackctlAlsaConnect::alsaSeq (void) const
-{
-	return m_pAlsaSeq;
-}
-
-
 // Connection primitive.
 bool qjackctlAlsaConnect::connectPorts (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
 #ifdef CONFIG_ALSA_SEQ
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return false;
+
+	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
+	if (pAlsaSeq == NULL)
+		return false;
 
 	qjackctlAlsaPort *pOAlsa = static_cast<qjackctlAlsaPort *> (pOPort);
 	qjackctlAlsaPort *pIAlsa = static_cast<qjackctlAlsaPort *> (pIPort);
@@ -337,7 +333,7 @@ bool qjackctlAlsaConnect::connectPorts (
 	seq_addr.port   = pIAlsa->alsaPort();
 	snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
 
-	return (snd_seq_subscribe_port(m_pAlsaSeq, pAlsaSubs) >= 0);
+	return (snd_seq_subscribe_port(pAlsaSeq, pAlsaSubs) >= 0);
 
 #else
 
@@ -353,6 +349,14 @@ bool qjackctlAlsaConnect::disconnectPorts (
 {
 #ifdef CONFIG_ALSA_SEQ
 
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return false;
+
+	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
+	if (pAlsaSeq == NULL)
+		return false;
+
 	qjackctlAlsaPort *pOAlsa = static_cast<qjackctlAlsaPort *> (pOPort);
 	qjackctlAlsaPort *pIAlsa = static_cast<qjackctlAlsaPort *> (pIPort);
 
@@ -369,7 +373,7 @@ bool qjackctlAlsaConnect::disconnectPorts (
 	seq_addr.port   = pIAlsa->alsaPort();
 	snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
 
-	return (snd_seq_unsubscribe_port(m_pAlsaSeq, pAlsaSubs) >= 0);
+	return (snd_seq_unsubscribe_port(pAlsaSeq, pAlsaSubs) >= 0);
 
 #else
 
@@ -383,6 +387,14 @@ bool qjackctlAlsaConnect::disconnectPorts (
 void qjackctlAlsaConnect::updateConnections (void)
 {
 #ifdef CONFIG_ALSA_SEQ
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return;
+
+	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
+	if (pAlsaSeq == NULL)
+		return;
 
 	snd_seq_query_subscribe_t *pAlsaSubs;
 	snd_seq_addr_t seq_addr;
@@ -415,7 +427,7 @@ void qjackctlAlsaConnect::updateConnections (void)
 			seq_addr.client = pOAlsa->alsaClient();
 			seq_addr.port   = pOAlsa->alsaPort();
 			snd_seq_query_subscribe_set_root(pAlsaSubs, &seq_addr);
-			while (snd_seq_query_port_subscribers(m_pAlsaSeq, pAlsaSubs) >= 0) {
+			while (snd_seq_query_port_subscribers(pAlsaSeq, pAlsaSubs) >= 0) {
 				seq_addr = *snd_seq_query_subscribe_get_addr(pAlsaSubs);
 				qjackctlPortItem *pIPort
 					= pIClientList->findClientPort(

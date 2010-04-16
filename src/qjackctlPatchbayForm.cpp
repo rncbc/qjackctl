@@ -434,23 +434,21 @@ void qjackctlPatchbayForm::newPatchbay (void)
 	bool bSnapshot = false;
 
 	// Ask user what he/she wants to do...
-	if (m_pPatchbay->jackClient() || m_pPatchbay->alsaSeq()) {
-		switch (QMessageBox::information(this,
-			tr("New Patchbay definition") + " - " QJACKCTL_SUBTITLE1,
-			tr("Create patchbay definition as a snapshot\n"
-			"of all actual client connections?"),
-			QMessageBox::Yes |
-			QMessageBox::No |
-			QMessageBox::Cancel)) {
-		case QMessageBox::Yes:
-			bSnapshot = true;
-			break;
-		case QMessageBox::No:
-			bSnapshot = false;
-			break;
-		default:	// Cancel.
-			return;
-		}
+	switch (QMessageBox::information(this,
+		tr("New Patchbay definition") + " - " QJACKCTL_SUBTITLE1,
+		tr("Create patchbay definition as a snapshot\n"
+		"of all actual client connections?"),
+		QMessageBox::Yes |
+		QMessageBox::No |
+		QMessageBox::Cancel)) {
+	case QMessageBox::Yes:
+		bSnapshot = true;
+		break;
+	case QMessageBox::No:
+		bSnapshot = false;
+		break;
+	default:	// Cancel.
+		return;
 	}
 
 	// Check if we can discard safely the current one...
@@ -604,20 +602,6 @@ void qjackctlPatchbayForm::updateRecentPatchbays (void)
 //	stabilizeForm();
 
 	m_iUpdate--;
-}
-
-
-// (Un)Bind a JACK client to this form.
-void qjackctlPatchbayForm::setJackClient ( jack_client_t *pJackClient )
-{
-	m_pPatchbay->setJackClient(pJackClient);
-}
-
-
-// (Un)Bind a ALSA sequencer to this form.
-void qjackctlPatchbayForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
-{
-	m_pPatchbay->setAlsaSeq(pAlsaSeq);
 }
 
 

@@ -60,9 +60,6 @@ public:
 	void setRecentPatchbays(const QStringList& patchbays);
 	void updateRecentPatchbays();
 
-	void setJackClient(jack_client_t * pJackClient);
-	void setAlsaSeq(snd_seq_t *pAlsaSeq);
-
 public slots:
 
 	void newPatchbay();

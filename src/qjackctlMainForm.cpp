@@ -591,9 +591,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		if (m_pAlsaSeq) {
 			// Rather obvious setup.
 			if (m_pConnectionsForm)
-				m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
-			if (m_pPatchbayForm)
-				m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
+				m_pConnectionsForm->stabilizeAlsa(true);
 		} else {
 			appendMessagesError(
 				tr("Could not open ALSA sequencer as a client.\n\n"
@@ -2442,10 +2440,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	g_nframes = jack_get_buffer_size(m_pJackClient);
 
 	// Reconstruct our connections patchbay...
-	if (m_pConnectionsForm)
-		m_pConnectionsForm->setJackClient(m_pJackClient);
-	if (m_pPatchbayForm)
-		m_pPatchbayForm->setJackClient(m_pJackClient);
+	if (m_pConnectionsForm) {
+		m_pConnectionsForm->stabilizeAudio(true);
+		m_pConnectionsForm->stabilizeMidi(true);
+	}
 
 	// Save server configuration file.
 	if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
@@ -2530,10 +2528,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 void qjackctlMainForm::stopJackClient (void)
 {
 	// Clear out the connections and patchbays...
-	if (m_pConnectionsForm)
-		m_pConnectionsForm->setJackClient(NULL);
-	if (m_pPatchbayForm)
-		m_pPatchbayForm->setJackClient(NULL);
+	if (m_pConnectionsForm) {
+		m_pConnectionsForm->stabilizeAudio(false);
+		m_pConnectionsForm->stabilizeMidi(false);
+	}
 
 	// Deactivate and close us as a client...
 	if (m_pJackClient) {
@@ -2568,6 +2566,13 @@ void qjackctlMainForm::stopJackClient (void)
 jack_client_t *qjackctlMainForm::jackClient (void) const
 {
 	return m_pJackClient;
+}
+
+
+// ALSA sequencer client accessor.
+snd_seq_t *qjackctlMainForm::alsaSeq (void) const
+{
+	return m_pAlsaSeq;
 }
 
 
@@ -2685,8 +2690,9 @@ void qjackctlMainForm::toggleConnectionsForm (void)
 {
 	if (m_pConnectionsForm) {
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
-		m_pConnectionsForm->setJackClient(m_pJackClient);
-		m_pConnectionsForm->setAlsaSeq(m_pAlsaSeq);
+		m_pConnectionsForm->stabilizeAudio(m_pJackClient != NULL);
+		m_pConnectionsForm->stabilizeMidi(m_pJackClient != NULL);
+		m_pConnectionsForm->stabilizeAlsa(m_pAlsaSeq != NULL);
 		if (m_pConnectionsForm->isVisible()) {
 			m_pConnectionsForm->hide();
 		} else {
@@ -2703,8 +2709,6 @@ void qjackctlMainForm::togglePatchbayForm (void)
 {
 	if (m_pPatchbayForm) {
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
-		m_pPatchbayForm->setJackClient(m_pJackClient);
-		m_pPatchbayForm->setAlsaSeq(m_pAlsaSeq);
 		if (m_pPatchbayForm->isVisible()) {
 			m_pPatchbayForm->hide();
 		} else {

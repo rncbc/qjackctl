@@ -97,13 +97,9 @@ class qjackctlAlsaClientList : public qjackctlClientList
 public:
 
 	// Constructor.
-	qjackctlAlsaClientList(qjackctlClientListView *pListView,
-		snd_seq_t *pAlsaSeq, bool bReadable);
+	qjackctlAlsaClientList(qjackctlClientListView *pListView, bool bReadable);
 	// Default destructor.
 	~qjackctlAlsaClientList();
-
-	// Alsa sequencer accessor.
-	snd_seq_t *alsaSeq() const;
 
 	// Client finder by id.
 	qjackctlAlsaClient *findClient(int iAlsaClient);
@@ -112,11 +108,6 @@ public:
 
 	// Client:port refreshner (return newest item count).
 	int updateClientPorts();
-
-private:
-
-	// Instance variables.
-	snd_seq_t *m_pAlsaSeq;
 };
 
 
@@ -128,13 +119,9 @@ class qjackctlAlsaConnect : public qjackctlConnect
 public:
 
 	// Constructor.
-	qjackctlAlsaConnect(qjackctlConnectView *pConnectView,
-		snd_seq_t *pAlsaSeq);
+	qjackctlAlsaConnect(qjackctlConnectView *pConnectView);
 	// Default destructor.
 	~qjackctlAlsaConnect();
-
-	// Alsa sequencer accessor.
-	snd_seq_t *alsaSeq() const;
 
 	// Common pixmap accessor.
 	const QPixmap& pixmap(int iPixmap) const;
@@ -156,9 +143,6 @@ private:
 	// Local pixmap-set janitor methods.
 	void createIconPixmaps();
 	void deleteIconPixmaps();
-
-	// Instance variables.
-	snd_seq_t *m_pAlsaSeq;
 
 	// Local pixmap-set array.
 	QPixmap *m_apPixmaps[QJACKCTL_ALSA_PIXMAPS];

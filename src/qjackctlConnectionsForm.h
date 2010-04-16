@@ -58,9 +58,6 @@ public:
 
 	void setConnectionsIconSize(int iIconSize);
 
-	void setJackClient(jack_client_t * pJackClient);
-	void setAlsaSeq(snd_seq_t * pAlsaSeq);
-
 	bool isAudioConnected() const;
 	bool isMidiConnected() const;
 	bool isAlsaConnected() const;
@@ -118,8 +115,6 @@ private:
 	Ui::qjackctlConnectionsForm m_ui;
 
 	// Instance variables.
-	jack_client_t       *m_pJackClient;
-	snd_seq_t           *m_pAlsaSeq;
 	qjackctlJackConnect *m_pAudioConnect;
 	qjackctlJackConnect *m_pMidiConnect;
 	qjackctlAlsaConnect *m_pAlsaConnect;

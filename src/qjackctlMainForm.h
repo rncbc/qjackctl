@@ -76,6 +76,7 @@ public:
 	bool setup(qjackctlSetup * pSetup);
 
 	jack_client_t *jackClient() const;
+	snd_seq_t *alsaSeq() const;
 
 	void appendMessages(const QString& s);
 
@@ -100,16 +101,14 @@ public:
 
 public slots:
 
+	void startJack();
+	void stopJack();
+
 	void resetXrunStats();
 
 protected slots:
 
-	void startJack();
-	void stopJack();
-
 	void readStdout();
-	void appendStdoutBuffer(const QString&);
-	void flushStdoutBuffer();
 
 	void jackStarted();
 	void jackError(QProcess::ProcessError);
@@ -154,6 +153,9 @@ protected:
 
 	void closeEvent(QCloseEvent * pCloseEvent);
 	void customEvent(QEvent *pEvent);
+
+	void appendStdoutBuffer(const QString&);
+	void flushStdoutBuffer();
 
 	QString formatExitStatus(int iExitStatus) const;
 
