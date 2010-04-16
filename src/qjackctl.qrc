@@ -38,6 +38,7 @@
         <file>images/asocketi.png</file>
         <file>images/asocketo.png</file>
         <file>images/backward1.png</file>
+        <file>images/client1.png</file>
         <file>images/connect1.png</file>
         <file>images/connections1.png</file>
         <file>images/copy1.png</file>
@@ -67,12 +68,14 @@
         <file>images/patchbay1.png</file>
         <file>images/pause1.png</file>
         <file>images/play1.png</file>
+        <file>images/port1.png</file>
         <file>images/quit1.png</file>
         <file>images/refresh1.png</file>
         <file>images/remove1.png</file>
         <file>images/reset1.png</file>
         <file>images/rewind1.png</file>
         <file>images/save1.png</file>
+        <file>images/session1.png</file>
         <file>images/setup1.png</file>
         <file>images/socket1.png</file>
         <file>images/start1.png</file>

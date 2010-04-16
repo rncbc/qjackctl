@@ -19,6 +19,7 @@ HEADERS += config.h \
 	qjackctlPatchbay.h \
 	qjackctlPatchbayFile.h \
 	qjackctlPatchbayRack.h \
+	qjackctlSession.h \
 	qjackctlSetup.h \
 	qjackctlStatus.h \
 	qjackctlSystemTray.h \
@@ -27,6 +28,7 @@ HEADERS += config.h \
 	qjackctlMainForm.h \
 	qjackctlMessagesForm.h \
 	qjackctlPatchbayForm.h \
+	qjackctlSessionForm.h \
 	qjackctlSetupForm.h \
 	qjackctlSocketForm.h \
 	qjackctlStatusForm.h
@@ -40,6 +42,7 @@ SOURCES += \
 	qjackctlPatchbay.cpp \
 	qjackctlPatchbayFile.cpp \
 	qjackctlPatchbayRack.cpp \
+	qjackctlSession.cpp \
 	qjackctlSetup.cpp \
 	qjackctlSystemTray.cpp \
 	qjackctlAboutForm.cpp \
@@ -47,6 +50,7 @@ SOURCES += \
 	qjackctlMainForm.cpp \
 	qjackctlMessagesForm.cpp \
 	qjackctlPatchbayForm.cpp \
+	qjackctlSessionForm.cpp \
 	qjackctlSetupForm.cpp \
 	qjackctlSocketForm.cpp \
 	qjackctlStatusForm.cpp
@@ -57,6 +61,7 @@ FORMS += \
 	qjackctlMainForm.ui \
 	qjackctlMessagesForm.ui \
 	qjackctlPatchbayForm.ui \
+	qjackctlSessionForm.ui \
 	qjackctlSetupForm.ui \
 	qjackctlSocketForm.ui \
 	qjackctlStatusForm.ui

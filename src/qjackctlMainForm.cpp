@@ -29,6 +29,7 @@
 
 #include "qjackctlMessagesForm.h"
 #include "qjackctlStatusForm.h"
+#include "qjackctlSessionForm.h"
 #include "qjackctlConnectionsForm.h"
 #include "qjackctlPatchbayForm.h"
 #include "qjackctlSetupForm.h"
@@ -326,6 +327,7 @@ qjackctlMainForm::qjackctlMainForm (
 	// All forms are to be created later on setup.
 	m_pMessagesForm    = NULL;
 	m_pStatusForm      = NULL;
+	m_pSessionForm     = NULL;
 	m_pConnectionsForm = NULL;
 	m_pPatchbayForm    = NULL;
 
@@ -445,6 +447,8 @@ qjackctlMainForm::~qjackctlMainForm (void)
 		delete m_pMessagesForm;
 	if (m_pStatusForm)
 		delete m_pStatusForm;
+	if (m_pSessionForm)
+		delete m_pSessionForm;
 	if (m_pConnectionsForm)
 		delete m_pConnectionsForm;
 	if (m_pPatchbayForm)
@@ -498,10 +502,12 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	// All forms are to be created right now.
 	m_pMessagesForm    = new qjackctlMessagesForm    (pParent, wflags);
 	m_pStatusForm      = new qjackctlStatusForm      (pParent, wflags);
+	m_pSessionForm     = new qjackctlSessionForm     (pParent, wflags);
 	m_pConnectionsForm = new qjackctlConnectionsForm (pParent, wflags);
 	m_pPatchbayForm    = new qjackctlPatchbayForm    (pParent, wflags);
 	// Setup appropriately...
 	m_pMessagesForm->setLogging(m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
+	m_pSessionForm->setSessionDirs(m_pSetup->sessionDirs);
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);
 
@@ -532,6 +538,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	// And for the whole widget gallore...
 	m_pSetup->loadWidgetGeometry(m_pMessagesForm);
 	m_pSetup->loadWidgetGeometry(m_pStatusForm);
+	m_pSetup->loadWidgetGeometry(m_pSessionForm);
 	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
 	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
 
@@ -610,8 +617,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(toggleMessagesForm()));
 		dbus.connect(s, s, sDBusName, "status",
 			this, SLOT(toggleStatusForm()));
-		dbus.connect(s, s, sDBusName, "reset",
-			this, SLOT(resetXrunStats()));
+		dbus.connect(s, s, sDBusName, "session",
+			this, SLOT(toggleSessionForm()));
 		dbus.connect(s, s, sDBusName, "connections",
 			this, SLOT(toggleConnectionsForm()));
 		dbus.connect(s, s, sDBusName, "patchbay",
@@ -630,6 +637,19 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(showSetupForm()));
 		dbus.connect(s, s, sDBusName, "about",
 			this, SLOT(showAboutForm()));
+		// Session related slots...
+		if (m_pSessionForm) {
+			dbus.connect(s, s, sDBusName, "load",
+				m_pSessionForm, SLOT(loadSession()));
+		#ifdef CONFIG_JACK_SESSION
+			dbus.connect(s, s, sDBusName, "save",
+				m_pSessionForm, SLOT(saveSessionSave()));
+			dbus.connect(s, s, sDBusName, "savequit",
+				m_pSessionForm, SLOT(saveSessionSaveAndQuit()));
+			dbus.connect(s, s, sDBusName, "savetemplate",
+				m_pSessionForm, SLOT(saveSessionSaveTemplate()));
+		#endif
+		}
 		// Detect whether jackdbus is avaliable...
 		QDBusConnection dbusc = QDBusConnection::sessionBus();
 		m_pDBusControl = new QDBusInterface(
@@ -761,6 +781,10 @@ bool qjackctlMainForm::queryClose (void)
 			m_pSetup->sPatchbayPath = m_pPatchbayForm->patchbayPath();
 	}
 
+	// Try to save current session directories list...
+	if (bQueryClose && m_pSessionForm)
+		m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
+
 	// Some windows default fonts are here on demand too.
 	if (bQueryClose && m_pMessagesForm)
 		m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
@@ -772,6 +796,7 @@ bool qjackctlMainForm::queryClose (void)
 	if (bQueryClose) {
 		m_pSetup->saveWidgetGeometry(m_pMessagesForm);
 		m_pSetup->saveWidgetGeometry(m_pStatusForm);
+		m_pSetup->saveWidgetGeometry(m_pSessionForm);
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
 		m_pSetup->saveWidgetGeometry(this);
@@ -780,6 +805,8 @@ bool qjackctlMainForm::queryClose (void)
 			m_pMessagesForm->close();
 		if (m_pStatusForm)
 			m_pStatusForm->close();
+		if (m_pSessionForm)
+			m_pSessionForm->close();
 		if (m_pConnectionsForm)
 			m_pConnectionsForm->close();
 		if (m_pPatchbayForm)
@@ -2537,6 +2564,13 @@ void qjackctlMainForm::stopJackClient (void)
 }
 
 
+// JACK client accessor.
+jack_client_t *qjackctlMainForm::jackClient (void) const
+{
+	return m_pJackClient;
+}
+
+
 // Rebuild all patchbay items.
 void qjackctlMainForm::refreshConnections (void)
 {
@@ -2625,6 +2659,22 @@ void qjackctlMainForm::toggleStatusForm (void)
 			m_pStatusForm->show();
 			m_pStatusForm->raise();
 			m_pStatusForm->activateWindow();
+		}
+	}
+}
+
+
+// Session form requester slot.
+void qjackctlMainForm::toggleSessionForm (void)
+{
+	if (m_pSessionForm) {
+		m_pSetup->saveWidgetGeometry(m_pSessionForm);
+		if (m_pSessionForm->isVisible()) {
+			m_pSessionForm->hide();
+		} else {
+			m_pSessionForm->show();
+			m_pSessionForm->raise();
+			m_pSessionForm->activateWindow();
 		}
 	}
 }
@@ -3234,7 +3284,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 			tr("&Stop"), this, SLOT(stopJack()));
 	}
 	pAction = menu.addAction(QIcon(":/images/reset1.png"),
-		tr("&Reset"), m_pStatusForm, SLOT(resetXrunStats()));
+		tr("&Reset"), this, SLOT(resetXrunStats()));
 //  pAction->setEnabled(m_pJackClient != NULL);
 	menu.addSeparator();
 
@@ -3263,6 +3313,36 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		SIGNAL(triggered(QAction*)),
 		SLOT(activatePresetsMenu(QAction*)));
 	menu.addSeparator();
+
+	if (m_pSessionForm) {
+		const QString sTitle = tr("S&ession");
+		const QIcon iconSession(":/images/session1.png");
+		QMenu *pSessionMenu = menu.addMenu(sTitle);
+		pSessionMenu->setIcon(iconSession);
+		pSessionMenu->addAction(QIcon(":/images/open1.png"),
+			tr("&Load..."),
+			m_pSessionForm, SLOT(loadSession()));
+		QMenu *pRecentMenu = m_pSessionForm->recentMenu();
+		pAction = pSessionMenu->addMenu(pRecentMenu);
+		pAction->setEnabled(!pRecentMenu->isEmpty());
+	#ifdef CONFIG_JACK_SESSION
+		pSessionMenu->addSeparator();
+		pSessionMenu->addAction(QIcon(":/images/save1.png"),
+			tr("&Save..."),
+			m_pSessionForm, SLOT(saveSessionSave()));
+		pSessionMenu->addAction(
+			tr("Save and &Quit..."),
+			m_pSessionForm, SLOT(saveSessionSaveAndQuit()));
+		pSessionMenu->addAction(
+			tr("Save &Template..."),
+			m_pSessionForm, SLOT(saveSessionSaveTemplate()));
+	#endif
+		pSessionMenu->addSeparator();
+		pAction = pSessionMenu->addAction(iconSession,
+			sTitle, this, SLOT(toggleSessionForm()));
+		pAction->setCheckable(true);
+		pAction->setChecked(m_pSessionForm && m_pSessionForm->isVisible());
+	}
 
 	pAction = menu.addAction(QIcon(":/images/messages1.png"),
 		tr("&Messages"), this, SLOT(toggleMessagesForm()));
@@ -3301,7 +3381,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 	menu.addSeparator();
 
 	pAction = menu.addAction(QIcon(":/images/setup1.png"),
-		tr("S&etup..."), this, SLOT(showSetupForm()));
+		tr("Set&up..."), this, SLOT(showSetupForm()));
 
 	if (!m_pSetup->bRightButtons || !m_pSetup->bTransportButtons) {
 		pAction = menu.addAction(QIcon(":/images/about1.png"),
@@ -3412,7 +3492,6 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 
 
 #ifdef CONFIG_DBUS
-						#include <QDBusArgument>
 
 // D-BUS: Set/reset parameter values from current selected preset options.
 void qjackctlMainForm::setDBusParameters (void)

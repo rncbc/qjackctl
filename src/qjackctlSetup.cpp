@@ -133,6 +133,18 @@ void qjackctlSetup::loadSetup (void)
 		patchbays.append(sItem);
 	}
 	m_settings.endGroup();
+
+	// Load recent session directory list...
+	m_settings.beginGroup("/SessionDirs");
+	sPrefix = "/SessionDir%1";
+	i = 0;
+	for (;;) {
+		QString sItem = m_settings.value(sPrefix.arg(++i)).toString();
+		if (sItem.isEmpty())
+			break;
+		sessionDirs.append(sItem);
+	}
+	m_settings.endGroup();
 }
 
 
@@ -224,6 +236,18 @@ void qjackctlSetup::saveSetup (void)
 	QStringListIterator iter2(patchbays);
 	while (iter2.hasNext())
 		m_settings.setValue(sPrefix.arg(++i), iter2.next());
+	// Cleanup old entries, if any...
+	while (!m_settings.value(sPrefix.arg(++i)).toString().isEmpty())
+		m_settings.remove(sPrefix.arg(i));
+	m_settings.endGroup();
+
+	// Save session directory list...
+	m_settings.beginGroup("/SessionDirs");
+	sPrefix = "/SessionDir%1";
+	i = 0;
+	QStringListIterator iter3(sessionDirs);
+	while (iter3.hasNext())
+		m_settings.setValue(sPrefix.arg(++i), iter3.next());
 	// Cleanup old entries, if any...
 	while (!m_settings.value(sPrefix.arg(++i)).toString().isEmpty())
 		m_settings.remove(sPrefix.arg(i));

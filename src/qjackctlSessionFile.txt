@@ -1,0 +1,19 @@
+qjackctlSession format specification
+------------------------------------
+
+ <!DOCTYPE qjackctlSession>
+ <session name="session-name">
+   <client name="client-name" uuid="client-uuid">
+	 <command>client-command</command>
+	 <port name="port-name">
+	   <connect client="dest-client-name" port="dest-port-name" />
+		.
+		.
+	 </port>
+	  .
+	  .
+   </client>
+    .
+    .
+ </session>
+

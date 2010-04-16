@@ -42,6 +42,7 @@ typedef void snd_seq_t;
 class qjackctlSetup;
 class qjackctlMessagesForm;
 class qjackctlStatusForm;
+class qjackctlSessionForm;
 class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
 class qjackctlPatchbayRack;
@@ -74,6 +75,10 @@ public:
 
 	bool setup(qjackctlSetup * pSetup);
 
+	jack_client_t *jackClient() const;
+
+	void appendMessages(const QString& s);
+
 	bool isActivePatchbay(const QString& sPatchbayPath) const;
 	void updateActivePatchbay();
 	void setActivePatchbay(const QString& sPatchbayPath);
@@ -94,6 +99,10 @@ public:
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType);
 
 public slots:
+
+	void resetXrunStats();
+
+protected slots:
 
 	void startJack();
 	void stopJack();
@@ -120,6 +129,7 @@ public slots:
 	void toggleMainForm();
 	void toggleMessagesForm();
 	void toggleStatusForm();
+	void toggleSessionForm();
 	void toggleConnectionsForm();
 	void togglePatchbayForm();
 
@@ -135,8 +145,6 @@ public slots:
 
 	void systemTrayContextMenu(const QPoint&);
 	void activatePresetsMenu(QAction *);
-
-	void resetXrunStats();
 
 	void quitMainForm();
 
@@ -157,7 +165,6 @@ protected:
 	QString& detectXrun(QString& s);
 	void updateXrunStats(float fXrunLast);
 
-	void appendMessages(const QString& s);
 	void appendMessagesColor(const QString& s, const QString& c);
 	void appendMessagesText(const QString& s);
 	void appendMessagesError(const QString& s);
@@ -289,6 +296,7 @@ private:
 
 	qjackctlMessagesForm    *m_pMessagesForm;
 	qjackctlStatusForm      *m_pStatusForm;
+	qjackctlSessionForm     *m_pSessionForm;
 	qjackctlConnectionsForm *m_pConnectionsForm;
 	qjackctlPatchbayForm    *m_pPatchbayForm;
 

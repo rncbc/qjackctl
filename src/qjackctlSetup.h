@@ -172,6 +172,9 @@ public:
 	// Recent patchbay listing.
 	QStringList patchbays;
 
+	// Recent session directories.
+	QStringList sessionDirs;
+
 	// Aliases containers.
 	qjackctlConnectAlias aliasAudioOutputs;
 	qjackctlConnectAlias aliasAudioInputs;

@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.8, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.9, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -40,6 +40,12 @@ AC_ARG_ENABLE(jack_midi,
   AC_HELP_STRING([--enable-jack-midi], [enable JACK MIDI support (default=yes)]),
   [ac_jack_midi="$enableval"],
   [ac_jack_midi="yes"])
+
+# Enable JACK session support.
+AC_ARG_ENABLE(jack_session,
+  AC_HELP_STRING([--jack-session], [enable JACK session support (default=yes)]),
+  [ac_jack_session="$enableval"],
+  [ac_jack_session="yes"])
 
 # Disable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
@@ -269,6 +275,11 @@ if test "x$ac_jack_midi" = "xyes"; then
    AC_CHECK_HEADER(jack/midiport.h, [ac_jack_midi="yes"], [ac_jack_midi="no"])
 fi
 
+# Check for JACK session headers availability.
+if test "x$ac_jack_session" = "xyes"; then
+   AC_CHECK_HEADER(jack/session.h, [ac_jack_session="yes"], [ac_jack_session="no"])
+fi
+
 # Check for ALSA headers and ultimately
 # for ALSA/MIDI sequencer support.
 if test "x$ac_alsa_seq" = "xyes"; then
@@ -341,6 +352,12 @@ if test "x$ac_jack_max_delay" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_MAX_DELAY, 1, [Define if jack_get_max_delayed_usecs is available.])
 fi
 
+# Check for jack_port_get_aliases function.
+AC_CHECK_LIB(jack, jack_port_get_aliases, [ac_jack_port_aliases="yes"], [ac_jack_port_aliases="no"])
+if test "x$ac_jack_port_aliases" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_PORT_ALIASES, 1, [Define if jack_port_get_aliases is available.])
+fi
+
 # Check for JACK MIDI library support.
 if test "x$ac_jack_midi" = "xyes"; then
    AC_CHECK_LIB(jack, jack_midi_event_get, [ac_jack_midi="yes"], [ac_jack_midi="no"])
@@ -353,10 +370,16 @@ if test "x$ac_jack_midi" = "xyes"; then
    fi
 fi
 
-# Check for jack_port_get_aliases function.
-AC_CHECK_LIB(jack, jack_port_get_aliases, [ac_jack_port_aliases="yes"], [ac_jack_port_aliases="no"])
-if test "x$ac_jack_port_aliases" = "xyes"; then
-   AC_DEFINE(CONFIG_JACK_PORT_ALIASES, 1, [Define if jack_port_get_aliases is available.])
+# Check for JACK session event callback availability.
+if test "x$ac_jack_session" = "xyes"; then
+   AC_CHECK_LIB(jack, jack_session_notify, [ac_jack_session="yes"], [ac_jack_session="no"])
+   if test "x$ac_jack_session" = "xyes"; then
+      AC_DEFINE(CONFIG_JACK_SESSION, 1, [Define if JACK session support is available.])
+   else
+      AC_MSG_WARN([*** jack_session_notify: function not found.])
+      AC_MSG_WARN([*** JACK 0.118.3 or later may be required.])
+      AC_MSG_WARN([*** JACK session support will be disabled.])
+   fi
 fi
 
 # Finally produce a configure header file and the main makefile.
@@ -378,6 +401,7 @@ echo "  JACK XRUN delay support  . . . . . . . . . . . . .: $ac_jack_xrun_delay"
 echo "  JACK Maximum scheduling delay support  . . . . . .: $ac_jack_max_delay"
 echo "  JACK Port aliases support  . . . . . . . . . . . .: $ac_jack_port_aliases"
 echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
+echo "  JACK Session support (EXPERIMENTAL)  . . . . . . .: $ac_jack_session"
 echo "  ALSA MIDI Sequencer support  . . . . . . . . . . .: $ac_alsa_seq"
 echo "  System tray icon support . . . . . . . . . . . . .: $ac_system_tray"
 echo "  D-Bus interface support  . . . . . . . . . . . . .: $ac_dbus"

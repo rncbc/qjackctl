@@ -250,13 +250,13 @@
       <string>Show settings and options dialog</string>
      </property>
      <property name="text" >
-      <string>S&amp;etup...</string>
+	  <string>Set&amp;up...</string>
      </property>
      <property name="icon" >
       <iconset resource="qjackctl.qrc" >:/images/setup1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string>Alt+E</string>
+	  <string>Alt+U</string>
      </property>
      <property name="toolButtonStyle" >
       <enum>Qt::ToolButtonTextBesideIcon</enum>

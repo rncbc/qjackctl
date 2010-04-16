@@ -17,6 +17,7 @@ headers = \
 	src/qjackctlPatchbay.h \
 	src/qjackctlPatchbayFile.h \
 	src/qjackctlPatchbayRack.h \
+	src/qjackctlSession.h \
 	src/qjackctlSetup.h \
 	src/qjackctlStatus.h \
 	src/qjackctlSystemTray.h \
@@ -25,6 +26,7 @@ headers = \
 	src/qjackctlMainForm.h \
 	src/qjackctlMessagesForm.h \
 	src/qjackctlPatchbayForm.h \
+	src/qjackctlSessionForm.h \
 	src/qjackctlSetupForm.h \
 	src/qjackctlSocketForm.h \
 	src/qjackctlStatusForm.h
@@ -38,6 +40,7 @@ sources = \
 	src/qjackctlPatchbay.cpp \
 	src/qjackctlPatchbayFile.cpp \
 	src/qjackctlPatchbayRack.cpp \
+	src/qjackctlSession.cpp \
 	src/qjackctlSetup.cpp \
 	src/qjackctlSystemTray.cpp \
 	src/qjackctlAboutForm.cpp \
@@ -45,6 +48,7 @@ sources = \
 	src/qjackctlMainForm.cpp \
 	src/qjackctlMessagesForm.cpp \
 	src/qjackctlPatchbayForm.cpp \
+	src/qjackctlSessionForm.cpp \
 	src/qjackctlSetupForm.cpp \
 	src/qjackctlSocketForm.cpp \
 	src/qjackctlStatusForm.cpp
@@ -55,6 +59,7 @@ forms = \
 	src/qjackctlMainForm.ui \
 	src/qjackctlMessagesForm.ui \
 	src/qjackctlPatchbayForm.ui \
+	src/qjackctlSessionForm.ui \
 	src/qjackctlSetupForm.ui \
 	src/qjackctlSocketForm.ui \
 	src/qjackctlStatusForm.ui
