@@ -286,9 +286,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.XrunRegexComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
-	QObject::connect(m_ui.XrunIgnoreFirstCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ActivePatchbayCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -501,7 +498,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.StdoutCaptureCheckBox->setChecked(m_pSetup->bStdoutCapture);
 	setComboBoxCurrentText(m_ui.XrunRegexComboBox,
 		m_pSetup->sXrunRegex);
-	m_ui.XrunIgnoreFirstCheckBox->setChecked(m_pSetup->bXrunIgnoreFirst);
 	m_ui.ActivePatchbayCheckBox->setChecked(m_pSetup->bActivePatchbay);
 	setComboBoxCurrentText(m_ui.ActivePatchbayPathComboBox,
 		m_pSetup->sActivePatchbayPath);
@@ -1082,7 +1078,6 @@ void qjackctlSetupForm::stabilizeForm (void)
 	bEnabled = m_ui.StdoutCaptureCheckBox->isChecked();
 	m_ui.XrunRegexTextLabel->setEnabled(bEnabled);
 	m_ui.XrunRegexComboBox->setEnabled(bEnabled);
-	m_ui.XrunIgnoreFirstCheckBox->setEnabled(bEnabled);
 
 	bEnabled = m_ui.ActivePatchbayCheckBox->isChecked();
 	m_ui.ActivePatchbayPathComboBox->setEnabled(bEnabled);
@@ -1766,7 +1761,6 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->sPostShutdownScriptShell = m_ui.PostShutdownScriptShellComboBox->currentText();
 		m_pSetup->bStdoutCapture           = m_ui.StdoutCaptureCheckBox->isChecked();
 		m_pSetup->sXrunRegex               = m_ui.XrunRegexComboBox->currentText();
-		m_pSetup->bXrunIgnoreFirst         = m_ui.XrunIgnoreFirstCheckBox->isChecked();
 		m_pSetup->bActivePatchbay          = m_ui.ActivePatchbayCheckBox->isChecked();
 		m_pSetup->sActivePatchbayPath      = m_ui.ActivePatchbayPathComboBox->currentText();
 #ifdef CONFIG_AUTO_REFRESH

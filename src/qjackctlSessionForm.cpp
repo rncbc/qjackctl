@@ -436,6 +436,17 @@ void qjackctlSessionForm::updateSessionView ( const qjackctlSession& session )
 }
 
 
+
+// Stabilize form status.
+void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
+{
+	m_ui.LoadSessionPushButton->setEnabled(bEnabled);
+	m_ui.RecentSessionPushButton->setEnabled(bEnabled);
+	m_ui.SaveSessionPushButton->setEnabled(bEnabled);
+	m_ui.SaveSessionComboBox->setEnabled(bEnabled);
+}
+
+
 // Keyboard event handler.
 void qjackctlSessionForm::keyPressEvent ( QKeyEvent *pKeyEvent )
 {

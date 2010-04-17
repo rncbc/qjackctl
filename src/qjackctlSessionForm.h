@@ -57,6 +57,8 @@ public:
 	// Recent menu accessor.
 	QMenu *recentMenu() const;
 
+	void stabilizeForm(bool bEnabled);
+
 public slots:
 
 	void loadSession();

@@ -7,6 +7,8 @@ SVN TRUNK
 
 - JACK session support is being introduced. (EXPERIMENTAL)
 
+- Ignore first XRUN occurrence option dropped from statistics.
+
 - Initial widget geometry and visibility persistence logic has
   been slightly revised as much to avoid crash failures due to
   wrong main widget hidden state.

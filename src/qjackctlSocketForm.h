@@ -61,9 +61,6 @@ public:
 
 	void setPixmaps(QPixmap **ppPixmaps);
 
-	void setJackClient(jack_client_t *pJackClient);
-	void setAlsaSeq(snd_seq_t *pAlsaSeq);
-
 	void setConnectCount(int iConnectCount);
 
 	void load(qjackctlPatchbaySocket *pSocket);
@@ -111,8 +108,6 @@ private:
 
 	// Instance variables.
 	qjackctlSocketList *m_pSocketList;
-	jack_client_t      *m_pJackClient;
-	snd_seq_t          *m_pAlsaSeq;
 	QPixmap           **m_ppPixmaps;
 	int                 m_iDirtyCount;
 

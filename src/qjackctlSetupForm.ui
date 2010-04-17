@@ -2500,25 +2500,6 @@
             </item>
            </widget>
           </item>
-          <item row="2" column="0" colspan="2" >
-           <widget class="QCheckBox" name="XrunIgnoreFirstCheckBox" >
-            <property name="font" >
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="toolTip" >
-             <string>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</string>
-            </property>
-            <property name="text" >
-             <string>&amp;Ignore first XRUN occurrence on statistics</string>
-            </property>
-            <property name="shortcut" >
-             <string>Alt+I</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -4400,7 +4381,6 @@
   <tabstop>PostShutdownScriptBrowseToolButton</tabstop>
   <tabstop>StdoutCaptureCheckBox</tabstop>
   <tabstop>XrunRegexComboBox</tabstop>
-  <tabstop>XrunIgnoreFirstCheckBox</tabstop>
   <tabstop>ActivePatchbayCheckBox</tabstop>
   <tabstop>ActivePatchbayPathComboBox</tabstop>
   <tabstop>ActivePatchbayPathToolButton</tabstop>

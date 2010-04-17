@@ -22,6 +22,8 @@
 #include "qjackctlAbout.h"
 #include "qjackctlSocketForm.h"
 
+#include "qjackctlMainForm.h"
+
 #include "qjackctlPatchbay.h"
 #include "qjackctlConnectAlias.h"
 
@@ -45,8 +47,6 @@ qjackctlSocketForm::qjackctlSocketForm (
 	m_ui.setupUi(this);
 
 	m_pSocketList  = NULL;
-	m_pJackClient  = NULL;
-	m_pAlsaSeq     = NULL;
 	m_ppPixmaps    = NULL;
 	m_iDirtyCount  = 0;
 
@@ -164,20 +164,6 @@ void qjackctlSocketForm::setSocketList ( qjackctlSocketList *pSocketList )
 void qjackctlSocketForm::setPixmaps ( QPixmap **ppPixmaps )
 {
 	m_ppPixmaps = ppPixmaps;
-}
-
-
-// JACK client accessor.
-void qjackctlSocketForm::setJackClient ( jack_client_t *pJackClient )
-{
-	m_pJackClient = pJackClient;
-}
-
-
-// ALSA sequencer accessor.
-void qjackctlSocketForm::setAlsaSeq ( snd_seq_t *pAlsaSeq )
-{
-	m_pAlsaSeq = pAlsaSeq;
 }
 
 
@@ -576,7 +562,12 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 
 void qjackctlSocketForm::updateJackClients ( int iSocketType )
 {
-	if (m_pJackClient == NULL)
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return;
+
+	jack_client_t *pJackClient = pMainForm->jackClient();
+	if (pJackClient == NULL)
 		return;
 
 	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
@@ -592,8 +583,8 @@ void qjackctlSocketForm::updateJackClients ( int iSocketType )
 	const QIcon icon(*m_ppPixmaps[iPixmap]);
 
 	// Grab all client ports.
-	const char **ppszClientPorts = jack_get_ports(m_pJackClient,
-		NULL, pszJackPortType,
+	const char **ppszClientPorts = jack_get_ports(
+		pJackClient, NULL, pszJackPortType,
 		(bReadable ? JackPortIsOutput : JackPortIsInput));
 	if (ppszClientPorts) {
 		int iClientPort = 0;
@@ -622,10 +613,18 @@ void qjackctlSocketForm::updateJackClients ( int iSocketType )
 // ALSA client names refreshner.
 void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 {
-	if (m_pAlsaSeq == NULL)
+	if (iSocketType != QJACKCTL_SOCKETTYPE_ALSA_MIDI)
 		return;
 
 #ifdef CONFIG_ALSA_SEQ
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return;
+
+	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
+	if (pAlsaSeq == NULL)
+		return;
 
 	bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_CLIENT]);
@@ -642,7 +641,7 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 	snd_seq_client_info_alloca(&pClientInfo);
 	snd_seq_port_info_alloca(&pPortInfo);
 	snd_seq_client_info_set_client(pClientInfo, -1);
-	while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
+	while (snd_seq_query_next_client(pAlsaSeq, pClientInfo) >= 0) {
 		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
 		QString sClient
 			= qjackctlClientAlias::escapeRegExpDigits(
@@ -652,7 +651,7 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
 			snd_seq_port_info_set_port(pPortInfo, -1);
 			while (!bExists
-				&& snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
+				&& snd_seq_query_next_port(pAlsaSeq, pPortInfo) >= 0) {
 				unsigned int uiPortCapability
 					= snd_seq_port_info_get_capability(pPortInfo);
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
@@ -770,7 +769,12 @@ void qjackctlSocketForm::socketTypeChanged (void)
 // JACK client plugs refreshner.
 void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 {
-	if (m_pJackClient == NULL)
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return;
+
+	jack_client_t *pJackClient = pMainForm->jackClient();
+	if (pJackClient == NULL)
 		return;
 
 	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
@@ -789,8 +793,8 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 
 	bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[iPixmap]);
-	const char **ppszClientPorts = jack_get_ports(m_pJackClient,
-		NULL, pszJackPortType,
+	const char **ppszClientPorts = jack_get_ports(
+		pJackClient, NULL, pszJackPortType,
 		(bReadable ? JackPortIsOutput : JackPortIsInput));
 	if (ppszClientPorts) {
 		int iClientPort = 0;
@@ -814,12 +818,18 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 // ALSA client plugs refreshner.
 void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 {
-	if (m_pAlsaSeq == NULL)
-		return;
 	if (iSocketType != QJACKCTL_SOCKETTYPE_ALSA_MIDI)
 		return;
 
 #ifdef CONFIG_ALSA_SEQ
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return;
+
+	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
+	if (pAlsaSeq == NULL)
+		return;
 
 	QString sClientName = m_ui.ClientNameComboBox->currentText();
 	if (sClientName.isEmpty())
@@ -841,14 +851,14 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 	snd_seq_client_info_alloca(&pClientInfo);
 	snd_seq_port_info_alloca(&pPortInfo);
 	snd_seq_client_info_set_client(pClientInfo, -1);
-	while (snd_seq_query_next_client(m_pAlsaSeq, pClientInfo) >= 0) {
+	while (snd_seq_query_next_client(pAlsaSeq, pClientInfo) >= 0) {
 		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
 		QString sClient = QString::fromUtf8(
 			snd_seq_client_info_get_name(pClientInfo));
 		if (iAlsaClient > 0 && rxClientName.exactMatch(sClient)) {
 			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
 			snd_seq_port_info_set_port(pPortInfo, -1);
-			while (snd_seq_query_next_port(m_pAlsaSeq, pPortInfo) >= 0) {
+			while (snd_seq_query_next_port(pAlsaSeq, pPortInfo) >= 0) {
 				unsigned int uiPortCapability
 					= snd_seq_port_info_get_capability(pPortInfo);
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&

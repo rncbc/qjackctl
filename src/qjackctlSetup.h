@@ -126,7 +126,6 @@ public:
 	QString sPostShutdownScriptShell;
 	bool    bStdoutCapture;
 	QString sXrunRegex;
-	bool    bXrunIgnoreFirst;
 	bool    bActivePatchbay;
 	QString sActivePatchbayPath;
 #ifdef CONFIG_AUTO_REFRESH

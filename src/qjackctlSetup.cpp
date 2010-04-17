@@ -76,7 +76,6 @@ void qjackctlSetup::loadSetup (void)
 	sPostShutdownScriptShell = m_settings.value("/PostShutdownScriptShell", "killall jackd").toString();
 	bStdoutCapture           = m_settings.value("/StdoutCapture", true).toBool();
 	sXrunRegex               = m_settings.value("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs").toString();
-	bXrunIgnoreFirst         = m_settings.value("/XrunIgnoreFirst", false).toBool();
 	bActivePatchbay          = m_settings.value("/ActivePatchbay", false).toBool();
 	sActivePatchbayPath      = m_settings.value("/ActivePatchbayPath").toString();
 #ifdef CONFIG_AUTO_REFRESH
@@ -183,7 +182,6 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/PostShutdownScriptShell", sPostShutdownScriptShell);
 	m_settings.setValue("/StdoutCapture",           bStdoutCapture);
 	m_settings.setValue("/XrunRegex",               sXrunRegex);
-	m_settings.setValue("/XrunIgnoreFirst",         bXrunIgnoreFirst);
 	m_settings.setValue("/ActivePatchbay",          bActivePatchbay);
 	m_settings.setValue("/ActivePatchbayPath",      sActivePatchbayPath);
 #ifdef CONFIG_AUTO_REFRESH

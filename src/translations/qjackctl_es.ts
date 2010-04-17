@@ -2286,11 +2286,11 @@ Are you sure to overwrite the existing folder?</source>
     </message>
     <message>
         <source>&amp;Ignore first XRUN occurrence on statistics</source>
-        <translation>&amp;Ignorar las primeras XRUN en las estadísticas</translation>
+        <translation type="obsolete">&amp;Ignorar las primeras XRUN en las estadísticas</translation>
     </message>
     <message>
         <source>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</source>
-        <translation>Ignorar las XRUN producidas durante el inicio del servidor (suele suceder en versiones anteriores a la 0.80.0 )</translation>
+        <translation type="obsolete">Ignorar las XRUN producidas durante el inicio del servidor (suele suceder en versiones anteriores a la 0.80.0 )</translation>
     </message>
     <message>
         <source>Connections</source>

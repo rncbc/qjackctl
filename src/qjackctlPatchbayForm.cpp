@@ -434,21 +434,24 @@ void qjackctlPatchbayForm::newPatchbay (void)
 	bool bSnapshot = false;
 
 	// Ask user what he/she wants to do...
-	switch (QMessageBox::information(this,
-		tr("New Patchbay definition") + " - " QJACKCTL_SUBTITLE1,
-		tr("Create patchbay definition as a snapshot\n"
-		"of all actual client connections?"),
-		QMessageBox::Yes |
-		QMessageBox::No |
-		QMessageBox::Cancel)) {
-	case QMessageBox::Yes:
-		bSnapshot = true;
-		break;
-	case QMessageBox::No:
-		bSnapshot = false;
-		break;
-	default:	// Cancel.
-		return;
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm && (pMainForm->jackClient() || pMainForm->alsaSeq())) {
+		switch (QMessageBox::information(this,
+			tr("New Patchbay definition") + " - " QJACKCTL_SUBTITLE1,
+			tr("Create patchbay definition as a snapshot\n"
+			"of all actual client connections?"),
+			QMessageBox::Yes |
+			QMessageBox::No |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Yes:
+			bSnapshot = true;
+			break;
+		case QMessageBox::No:
+			bSnapshot = false;
+			break;
+		default:	// Cancel.
+			return;
+		}
 	}
 
 	// Check if we can discard safely the current one...

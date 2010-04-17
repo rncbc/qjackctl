@@ -2364,11 +2364,11 @@ Are you sure to overwrite the existing folder?</source>
     </message>
     <message>
         <source>&amp;Ignore first XRUN occurrence on statistics</source>
-        <translation>&amp;Ignora i primi XRUN nelle statistiche</translation>
+        <translation type="obsolete">&amp;Ignora i primi XRUN nelle statistiche</translation>
     </message>
     <message>
         <source>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</source>
-        <translation>Ignora gli XRUN prodotti durante l&apos;avvio del server (frequenti nelle versioni pre 0.80.0 del server JACK)</translation>
+        <translation type="obsolete">Ignora gli XRUN prodotti durante l&apos;avvio del server (frequenti nelle versioni pre 0.80.0 del server JACK)</translation>
     </message>
     <message>
         <source>Connections</source>

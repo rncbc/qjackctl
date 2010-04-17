@@ -1477,7 +1477,7 @@ QString& qjackctlMainForm::detectXrun ( QString& s )
 // Update the XRUN last delay and immediate statistical values (in msecs).
 void qjackctlMainForm::updateXrunStats ( float fXrunLast )
 {
-	if (m_iXrunStats > 0 || !m_pSetup->bXrunIgnoreFirst) {
+	if (m_iXrunStats > 0) {
 		m_fXrunLast   = fXrunLast;
 		m_fXrunTotal += m_fXrunLast;
 		if (m_fXrunLast < m_fXrunMin || m_iXrunCount == 0)
@@ -2439,11 +2439,13 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	// First knowledge about buffer size.
 	g_nframes = jack_get_buffer_size(m_pJackClient);
 
-	// Reconstruct our connections patchbay...
+	// Reconstruct our connections and session...
 	if (m_pConnectionsForm) {
 		m_pConnectionsForm->stabilizeAudio(true);
 		m_pConnectionsForm->stabilizeMidi(true);
 	}
+	if (m_pSessionForm)
+		m_pSessionForm->stabilizeForm(true);
 
 	// Save server configuration file.
 	if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
@@ -2527,17 +2529,20 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 // Stop jack audio client...
 void qjackctlMainForm::stopJackClient (void)
 {
-	// Clear out the connections and patchbays...
+	// Clear out the connections and session...
 	if (m_pConnectionsForm) {
 		m_pConnectionsForm->stabilizeAudio(false);
 		m_pConnectionsForm->stabilizeMidi(false);
 	}
+	if (m_pSessionForm)
+		m_pSessionForm->stabilizeForm(false);
 
 	// Deactivate and close us as a client...
 	if (m_pJackClient) {
 		jack_deactivate(m_pJackClient);
 		jack_client_close(m_pJackClient);
 		m_pJackClient = NULL;
+		m_bJackDetach = false;
 		// Log deactivation here.
 		appendMessages(tr("Client deactivated."));
 	}
@@ -2674,6 +2679,7 @@ void qjackctlMainForm::toggleSessionForm (void)
 {
 	if (m_pSessionForm) {
 		m_pSetup->saveWidgetGeometry(m_pSessionForm);
+		m_pSessionForm->stabilizeForm(m_pJackClient != NULL);
 		if (m_pSessionForm->isVisible()) {
 			m_pSessionForm->hide();
 		} else {
@@ -3323,23 +3329,27 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		const QIcon iconSession(":/images/session1.png");
 		QMenu *pSessionMenu = menu.addMenu(sTitle);
 		pSessionMenu->setIcon(iconSession);
-		pSessionMenu->addAction(QIcon(":/images/open1.png"),
+		pAction = pSessionMenu->addAction(QIcon(":/images/open1.png"),
 			tr("&Load..."),
 			m_pSessionForm, SLOT(loadSession()));
+		pAction->setEnabled(m_pJackClient != NULL);
 		QMenu *pRecentMenu = m_pSessionForm->recentMenu();
 		pAction = pSessionMenu->addMenu(pRecentMenu);
-		pAction->setEnabled(!pRecentMenu->isEmpty());
+		pAction->setEnabled(m_pJackClient != NULL && !pRecentMenu->isEmpty());
 	#ifdef CONFIG_JACK_SESSION
 		pSessionMenu->addSeparator();
-		pSessionMenu->addAction(QIcon(":/images/save1.png"),
+		pAction = pSessionMenu->addAction(QIcon(":/images/save1.png"),
 			tr("&Save..."),
 			m_pSessionForm, SLOT(saveSessionSave()));
-		pSessionMenu->addAction(
+		pAction->setEnabled(m_pJackClient != NULL);
+		pAction = pSessionMenu->addAction(
 			tr("Save and &Quit..."),
 			m_pSessionForm, SLOT(saveSessionSaveAndQuit()));
-		pSessionMenu->addAction(
+		pAction->setEnabled(m_pJackClient != NULL);
+		pAction = pSessionMenu->addAction(
 			tr("Save &Template..."),
 			m_pSessionForm, SLOT(saveSessionSaveTemplate()));
+		pAction->setEnabled(m_pJackClient != NULL);
 	#endif
 		pSessionMenu->addSeparator();
 		pAction = pSessionMenu->addAction(iconSession,

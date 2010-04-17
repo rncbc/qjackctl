@@ -624,6 +624,9 @@ void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled )
 // Proper enablement of connections command controls.
 void qjackctlConnectionsForm::stabilizeAudio ( bool bEnabled )
 {
+	if (m_pAudioConnect)
+		m_pAudioConnect->updateContents(!bEnabled);
+
 	if (m_pAudioConnect && bEnabled) {
 		m_ui.AudioConnectPushButton->setEnabled(
 			m_pAudioConnect->canConnectSelected());
@@ -642,6 +645,9 @@ void qjackctlConnectionsForm::stabilizeAudio ( bool bEnabled )
 
 void qjackctlConnectionsForm::stabilizeMidi ( bool bEnabled )
 {
+	if (m_pMidiConnect)
+		m_pMidiConnect->updateContents(!bEnabled);
+
 	if (m_pMidiConnect && bEnabled) {
 		m_ui.MidiConnectPushButton->setEnabled(
 			m_pMidiConnect->canConnectSelected());
@@ -660,10 +666,16 @@ void qjackctlConnectionsForm::stabilizeMidi ( bool bEnabled )
 
 void qjackctlConnectionsForm::stabilizeAlsa ( bool bEnabled )
 {
+	if (m_pAlsaConnect)
+		m_pAlsaConnect->updateContents(!bEnabled);
+
 	if (m_pAlsaConnect && bEnabled) {
-		m_ui.AlsaConnectPushButton->setEnabled(m_pAlsaConnect->canConnectSelected());
-		m_ui.AlsaDisconnectPushButton->setEnabled(m_pAlsaConnect->canDisconnectSelected());
-		m_ui.AlsaDisconnectAllPushButton->setEnabled(m_pAlsaConnect->canDisconnectAll());
+		m_ui.AlsaConnectPushButton->setEnabled(
+			m_pAlsaConnect->canConnectSelected());
+		m_ui.AlsaDisconnectPushButton->setEnabled(
+			m_pAlsaConnect->canDisconnectSelected());
+		m_ui.AlsaDisconnectAllPushButton->setEnabled(
+			m_pAlsaConnect->canDisconnectAll());
 		m_ui.AlsaRefreshPushButton->setEnabled(true);
 	} else {
 		m_ui.AlsaConnectPushButton->setEnabled(false);
