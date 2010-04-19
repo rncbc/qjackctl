@@ -45,65 +45,60 @@ qjackctlAboutForm::qjackctlAboutForm (
 #ifdef CONFIG_DEBUG
     sText += "<small><font color=\"red\">";
     sText += tr("Debugging option enabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_SYSTEM_TRAY
     sText += "<small><font color=\"red\">";
     sText += tr("System tray disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_TRANSPORT
     sText += "<small><font color=\"red\">";
     sText += tr("Transport status control disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_REALTIME
     sText += "<small><font color=\"red\">";
     sText += tr("Realtime status disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_XRUN_DELAY
     sText += "<small><font color=\"red\">";
     sText += tr("XRUN delay status disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_MAX_DELAY
     sText += "<small><font color=\"red\">";
     sText += tr("Maximum delay status disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
-#endif
-#ifndef CONFIG_JACK_MIDI
-    sText += "<small><font color=\"red\">";
-    sText += tr("JACK MIDI support disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_PORT_ALIASES
     sText += "<small><font color=\"red\">";
     sText += tr("JACK Port aliases support disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
+#endif
+#ifndef CONFIG_JACK_MIDI
+    sText += "<small><font color=\"red\">";
+    sText += tr("JACK MIDI support disabled.");
+    sText += "</font></small><br />\n";
+#endif
+#ifndef CONFIG_JACK_SESSION
+	sText += "<small><font color=\"red\">";
+	sText += tr("JACK Session support disabled.");
+	sText += "</font></small><br />";
 #endif
 #ifndef CONFIG_ALSA_SEQ
 #if !defined(WIN32)
     sText += "<small><font color=\"red\">";
     sText += tr("ALSA/MIDI sequencer support disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #endif
 #ifndef CONFIG_DBUS
 #if !defined(WIN32)
     sText += "<small><font color=\"red\">";
     sText += tr("D-Bus interface support disabled.");
-    sText += "<br />\n";
-    sText += "</font></small>";
+    sText += "</font></small><br />\n";
 #endif
 #endif
     sText += "<br />\n";
