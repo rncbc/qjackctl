@@ -129,62 +129,67 @@
         <translation>Option de débogage activée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="53"/>
+        <location filename="../qjackctlAboutForm.cpp" line="52"/>
         <source>System tray disabled.</source>
         <translation>Zone de notification système désactivée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="59"/>
+        <location filename="../qjackctlAboutForm.cpp" line="57"/>
         <source>Transport status control disabled.</source>
         <translation>Contrôle du statut du déplacement désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="65"/>
+        <location filename="../qjackctlAboutForm.cpp" line="62"/>
         <source>Realtime status disabled.</source>
         <translation>Statut temps réel désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="71"/>
+        <location filename="../qjackctlAboutForm.cpp" line="67"/>
         <source>XRUN delay status disabled.</source>
         <translation>Statut du délai de désynchronisation (XRUN) désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="77"/>
+        <location filename="../qjackctlAboutForm.cpp" line="72"/>
         <source>Maximum delay status disabled.</source>
         <translation>Statut du délai maximal désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="96"/>
+        <location filename="../qjackctlAboutForm.cpp" line="87"/>
+        <source>JACK Session support disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="93"/>
         <source>ALSA/MIDI sequencer support disabled.</source>
         <translation>Prise en charge du séquenceur ALSA/MIDI désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="110"/>
+        <location filename="../qjackctlAboutForm.cpp" line="105"/>
         <source>Website</source>
         <translation>Site web</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="115"/>
+        <location filename="../qjackctlAboutForm.cpp" line="110"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Ce programme est libre; vous pouvez le redistribuer et/ou le modifier</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="116"/>
+        <location filename="../qjackctlAboutForm.cpp" line="111"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>selon les termes de la Licence Publique Générale GNU version 2 ou ultérieure.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="83"/>
+        <location filename="../qjackctlAboutForm.cpp" line="82"/>
         <source>JACK MIDI support disabled.</source>
         <translation>Prise en charge de JACK MIDI désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="89"/>
+        <location filename="../qjackctlAboutForm.cpp" line="77"/>
         <source>JACK Port aliases support disabled.</source>
         <translation>Prise en charge des alias de port JACK désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="104"/>
+        <location filename="../qjackctlAboutForm.cpp" line="100"/>
         <source>D-Bus interface support disabled.</source>
         <translation>Prise en charge de l&apos;interface D-Bus désactivé.</translation>
     </message>

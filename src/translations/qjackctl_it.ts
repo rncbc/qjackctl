@@ -136,6 +136,10 @@
         <source>D-Bus interface support disabled.</source>
         <translation>Supporto per l&apos;interfaccia D-Bus disabilitato.</translation>
     </message>
+    <message>
+        <source>JACK Session support disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlClientListView</name>
