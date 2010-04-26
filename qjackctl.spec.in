@@ -1,13 +1,13 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 13
-%define prefix  @ac_prefix@
+%define release 14
+
+%define _prefix	@ac_prefix@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Prefix:		%{prefix}
 License:	GPL
 Group:		Productivity/Multimedia/Sound/Utilities
 Source0:	%{name}-%{version}.tar.gz
@@ -37,10 +37,10 @@ including a enhanced patchbay and connection control features.
 %__make
 
 %install
-%makeinstall
+%__make DESTDIR=%{buildroot} install
 
 %clean
-[ -d %{buildroot} -a "%{buildroot}" != "" ] && %__rm -rf  %{buildroot}
+[ -d %{buildroot} -a "%{buildroot}" != "" ] && %__rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
