@@ -2590,12 +2590,13 @@ void qjackctlMainForm::refreshConnections (void)
 
 void qjackctlMainForm::refreshJackConnections (void)
 {
-	// Hack this as for a while.
+#if 0
+	// Hack this as for a while...
 	if (m_pConnectionsForm && m_iJackRefresh == 0) {
 		m_pConnectionsForm->stabilizeAudio(false);
 		m_pConnectionsForm->stabilizeMidi(false);
 	}
-
+#endif
 	// Just increment our intentions; it will be deferred
 	// to be executed just on timer slot processing...
 	m_iJackRefresh++;
@@ -2603,10 +2604,11 @@ void qjackctlMainForm::refreshJackConnections (void)
 
 void qjackctlMainForm::refreshAlsaConnections (void)
 {
-	// Hack this as for a while.
+#if 0
+	// Hack this as for a while...
 	if (m_pConnectionsForm && m_iAlsaRefresh == 0)
 		m_pConnectionsForm->stabilizeAlsa(false);
-
+#endif
 	// Just increment our intentions; it will be deferred
 	// to be executed just on timer slot processing...
 	m_iAlsaRefresh++;

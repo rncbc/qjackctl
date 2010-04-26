@@ -581,7 +581,7 @@ void qjackctlConnectionsForm::refreshAudio ( bool bEnabled )
 		return;
 
 	if (bEnabled) {
-		m_pAudioConnect->refresh();
+	//	m_pAudioConnect->refresh();
 		stabilizeAudio(true);
 	} else {
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
@@ -596,7 +596,7 @@ void qjackctlConnectionsForm::refreshMidi ( bool bEnabled )
 		return;
 
 	if (bEnabled) {
-		m_pMidiConnect->refresh();
+	//	m_pMidiConnect->refresh();
 		stabilizeMidi(true);
 	} else {
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
@@ -611,7 +611,7 @@ void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled )
 		return;
 
 	if (bEnabled) {
-		m_pAlsaConnect->refresh();
+	//	m_pAlsaConnect->refresh();
 		stabilizeAlsa(true);
 	} else {
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
