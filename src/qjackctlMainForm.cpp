@@ -2200,6 +2200,8 @@ void qjackctlMainForm::timerSlot (void)
 		// Are we about to enforce an audio connections persistence profile?
 		if (m_iJackDirty > 0) {
 			m_iJackDirty = 0;
+			if (m_pSessionForm)
+				m_pSessionForm->updateSession();
 			if (m_pSetup->bActivePatchbay) {
 				appendMessagesColor(
 					tr("JACK active patchbay scan") + sEllipsis, "#6699cc");

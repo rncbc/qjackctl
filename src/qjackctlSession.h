@@ -36,7 +36,7 @@ class qjackctlSession
 public:
 
 	// Constructor.
-	qjackctlSession(jack_client_t *pJackClient, const QString& sSessionDir);
+	qjackctlSession();
 
 	// Destructor.
 	~qjackctlSession();
@@ -86,8 +86,8 @@ public:
 	void clear();
 
 	// Critical methods.
-	bool save(int iSessionType = 0);
-	bool load();
+	bool save(const QString& sSessionDir, int iSessionType = 0);
+	bool load(const QString& sSessionDir);
 
 	// Update (re)connections utility method.
 	bool update();

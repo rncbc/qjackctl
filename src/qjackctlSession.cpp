@@ -1,4 +1,4 @@
-// qjackctlSessionm.cpp
+// qjackctlSession.cpp
 //
 /****************************************************************************
    Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -22,6 +22,8 @@
 #include "qjackctlAbout.h"
 #include "qjackctlSession.h"
 
+#include "qjackctlMainForm.h"
+
 #ifdef CONFIG_JACK_SESSION
 #include <jack/session.h>
 #endif
@@ -41,10 +43,7 @@
 // qjackctlSession -- JACK session container.
 
 // Constructor.
-qjackctlSession::qjackctlSession (
-	jack_client_t *pJackClient, const QString& sSessionDir )
-	: m_pJackClient(pJackClient)
-	, m_sSessionDir(QDir(sSessionDir).absolutePath() + '/')
+qjackctlSession::qjackctlSession (void)
 {
 }
 
@@ -72,14 +71,19 @@ void qjackctlSession::clear (void)
 
 
 // Critical methods.
-bool qjackctlSession::save ( int iSessionType )
+bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 {
-	if (m_pJackClient == NULL)
-		return false;
-
 	// We're always best to
 	// reset old session settings.
 	clear();
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return false;
+
+	jack_client_t *pJackClient = pMainForm->jackClient();
+	if (pJackClient == NULL)
+		return false;
 
 #ifdef CONFIG_JACK_SESSION
 
@@ -96,9 +100,10 @@ bool qjackctlSession::save ( int iSessionType )
 		break;
 	}
 
-	const QByteArray aSessionDir = m_sSessionDir.toLocal8Bit();
+	const QString sSessionPath = sSessionDir + '/';
+	const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
 	jack_session_command_t *commands
-		= jack_session_notify(m_pJackClient, NULL, etype, aSessionDir.constData());
+		= jack_session_notify(pJackClient, NULL, etype, aSessionPath.constData());
 	if (commands == NULL)
 		return false;
 
@@ -121,7 +126,7 @@ bool qjackctlSession::save ( int iSessionType )
 		const QString sPorts = pClientItem->client_name + ":.*";
 		const QByteArray aPorts = sPorts.toLocal8Bit();
 		const char **ports
-			= jack_get_ports(m_pJackClient, aPorts.constData(), NULL, 0);
+			= jack_get_ports(pJackClient, aPorts.constData(), NULL, 0);
 		if (ports) {
 			for (int i = 0; ports[i]; ++i) {
 				const char *pszSrcClientPort = ports[i];
@@ -157,14 +162,15 @@ bool qjackctlSession::save ( int iSessionType )
 #endif	// CONFIG_JACK_SESSION
 
 	// Save to file, immediate...
-	return saveFile(m_sSessionDir + "session.xml");	
+	return saveFile(sSessionPath + "session.xml");	
 }
 
 
-bool qjackctlSession::load (void)
+bool qjackctlSession::load ( const QString& sSessionDir )
 {
 	// Load from file, immediate...
-	if (!loadFile(m_sSessionDir + "session.xml"))
+	const QString sSessionPath = sSessionDir + '/';
+	if (!loadFile(sSessionPath + "session.xml"))
 		return false;
 
 	// Start/load clients...
@@ -172,7 +178,7 @@ bool qjackctlSession::load (void)
 	ClientList::ConstIterator iter = m_clients.constBegin();
 	for ( ; iter != m_clients.constEnd(); ++iter) {
 		const ClientItem *pClientItem = iter.value();
-		const QString sClientDir = m_sSessionDir + pClientItem->client_name + '/';
+		const QString sClientDir = sSessionPath + pClientItem->client_name + '/';
 		QString sCommand = pClientItem->client_command;
 		sCommand.replace("${SESSION_DIR}", sClientDir);
 		if (QProcess::startDetached(sCommand))
@@ -193,6 +199,14 @@ bool qjackctlSession::load (void)
 // Update (re)connections utility method.
 bool qjackctlSession::update (void)
 {
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return false;
+
+	jack_client_t *pJackClient = pMainForm->jackClient();
+	if (pJackClient == NULL)
+		return false;
+
 	// We'll count how many connection updates...
 	int iUpdate = 0;
 
@@ -206,7 +220,7 @@ bool qjackctlSession::update (void)
 		const QByteArray aSrcUuid = pClientItem->client_uuid.toLocal8Bit();
 		const char *pszSrcUuid = aSrcUuid.constData(); 
 		const char *pszSrcClient
-			= jack_get_client_name_by_uuid(m_pJackClient, pszSrcUuid);
+			= jack_get_client_name_by_uuid(pJackClient, pszSrcUuid);
 		const QString sSrcClient = (pszSrcClient
 			? QString::fromLocal8Bit(pszSrcClient)
 			: pClientItem->client_name);
@@ -234,7 +248,7 @@ bool qjackctlSession::update (void)
 					const QByteArray aDstUuid = sDstUuid.toLocal8Bit();
 					const char *pszDstUuid = aDstUuid.constData();
 					const char *pszDstClient
-						= jack_get_client_name_by_uuid(m_pJackClient, pszDstUuid);
+						= jack_get_client_name_by_uuid(pJackClient, pszDstUuid);
 					if (pszDstClient)
 						sDstClient = QString::fromLocal8Bit(pszDstClient);
 				}

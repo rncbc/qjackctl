@@ -48,6 +48,9 @@ qjackctlSessionForm::qjackctlSessionForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
+	// Common (sigleton) session object.
+	m_pSession = new qjackctlSession();
+
 	//	Set recent menu stuff...
 	m_pRecentMenu = new QMenu(tr("&Recent"));
 	m_ui.RecentSessionPushButton->setMenu(m_pRecentMenu);
@@ -79,6 +82,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 qjackctlSessionForm::~qjackctlSessionForm (void)
 {
 	delete m_pRecentMenu;
+	delete m_pSession;
 }
 
 
@@ -315,13 +319,11 @@ void qjackctlSessionForm::loadSessionDir ( const QString& sSessionDir )
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	qjackctlSession session(pJackClient, sSessionDir);
-
-	bool bLoadSession = session.load();
+	bool bLoadSession = m_pSession->load(sSessionDir);
 	if (bLoadSession)
 		updateRecent(sessionDir.absolutePath());
 
-	updateSessionView(session);
+	updateSessionView();
 
 	QApplication::restoreOverrideCursor();
 
@@ -373,13 +375,11 @@ void qjackctlSessionForm::saveSessionDir (
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	qjackctlSession session(pJackClient, sSessionDir);
-
-	bool bSaveSession = session.save(iSessionType);
+	bool bSaveSession = m_pSession->save(sSessionDir, iSessionType);
 	if (bSaveSession)
 		updateRecent(sessionDir.absolutePath());
 
-	updateSessionView(session);
+	updateSessionView();
 
 	QApplication::restoreOverrideCursor();
 
@@ -390,7 +390,7 @@ void qjackctlSessionForm::saveSessionDir (
 
 
 // Update/populate session tree view.
-void qjackctlSessionForm::updateSessionView ( const qjackctlSession& session )
+void qjackctlSessionForm::updateSessionView (void)
 {
 	m_ui.SessionTreeView->clear();
 
@@ -401,8 +401,8 @@ void qjackctlSessionForm::updateSessionView ( const qjackctlSession& session )
 	QIcon iconConnect(":/images/connect1.png");
 
 	qjackctlSession::ClientList::ConstIterator iterClient
-		= session.clients().constBegin();
-	for ( ; iterClient != session.clients().constEnd(); ++iterClient) {
+		= m_pSession->clients().constBegin();
+	for ( ; iterClient != m_pSession->clients().constEnd(); ++iterClient) {
 		qjackctlSession::ClientItem *pClientItem = iterClient.value();
 		QTreeWidgetItem *pTopLevelItem = new QTreeWidgetItem();
 		pTopLevelItem->setIcon(0, iconClient);
@@ -435,6 +435,13 @@ void qjackctlSessionForm::updateSessionView ( const qjackctlSession& session )
 	m_ui.SessionTreeView->insertTopLevelItems(0, items);
 }
 
+
+// Update/populate session connections and tree view.
+void qjackctlSessionForm::updateSession (void)
+{
+	m_pSession->update();
+	updateSessionView();
+}
 
 
 // Stabilize form status.

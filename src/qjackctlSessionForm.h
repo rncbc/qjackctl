@@ -68,6 +68,8 @@ public slots:
 	void saveSessionSaveAndQuit();
 	void saveSessionSaveTemplate();
 
+	void updateSession();
+
 protected slots:
 
 	void recentSession();
@@ -89,13 +91,16 @@ protected:
 
 	void updateRecent(const QString& sSessionDir);
 
-	void updateSessionView(const qjackctlSession& session);
+	void updateSessionView();
 
 private:
 
 	// The Qt-designer UI struct...
 	Ui::qjackctlSessionForm m_ui;
 
+	// Common (sigleton) session object.
+	qjackctlSession *m_pSession;
+	
 	// Recent session menu.
 	QMenu *m_pRecentMenu;
 
