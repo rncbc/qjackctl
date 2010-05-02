@@ -101,10 +101,6 @@ protected:
 private:
 
 	// Instance variables.
-	jack_client_t *m_pJackClient;
-
-	QString m_sSessionDir;
-
 	ClientList m_clients;	
 };
 

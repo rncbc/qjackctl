@@ -134,8 +134,8 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 				pPortItem->port_name
 					= QString::fromLocal8Bit(pszSrcClientPort).section(':', 1);
 				const char **connections
-					= jack_port_get_all_connections(m_pJackClient,
-						jack_port_by_name(m_pJackClient, pszSrcClientPort));
+					= jack_port_get_all_connections(pJackClient,
+						jack_port_by_name(pJackClient, pszSrcClientPort));
 				if (connections) {
 					for (int j = 0; connections[j]; ++j) {
 						const QString sDstClientPort
@@ -256,7 +256,7 @@ bool qjackctlSession::update (void)
 				const QString sDstPort = pConnectItem->port_name;
 				const QString sDstClientPort = sDstClient + ':' + sDstPort;
 				const QByteArray aDstClientPort = sDstClientPort.toLocal8Bit();
-				if (jack_connect(m_pJackClient,
+				if (jack_connect(pJackClient,
 						aSrcClientPort.constData(),
 						aDstClientPort.constData()) == 0) {
 					pConnectItem->connected = true;
