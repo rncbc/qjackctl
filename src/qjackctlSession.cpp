@@ -133,9 +133,12 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 				PortItem *pPortItem = new PortItem;
 				pPortItem->port_name
 					= QString::fromLocal8Bit(pszSrcClientPort).section(':', 1);
+				jack_port_t *pJackPort
+					= jack_port_by_name(pJackClient, pszSrcClientPort);
+				pPortItem->port_type
+					= (jack_port_flags(pJackPort) & JackPortIsInput);
 				const char **connections
-					= jack_port_get_all_connections(pJackClient,
-						jack_port_by_name(pJackClient, pszSrcClientPort));
+					= jack_port_get_all_connections(pJackClient, pJackPort);
 				if (connections) {
 					for (int j = 0; connections[j]; ++j) {
 						const QString sDstClientPort
@@ -256,13 +259,38 @@ bool qjackctlSession::update (void)
 				const QString sDstPort = pConnectItem->port_name;
 				const QString sDstClientPort = sDstClient + ':' + sDstPort;
 				const QByteArray aDstClientPort = sDstClientPort.toLocal8Bit();
-				if (jack_connect(pJackClient,
+				if (pPortItem->port_type) {
+					// Input port...
+				#ifdef CONFIG_DEBUG
+					qDebug("qjackctlSession::update() "
+						"jack_connect: \"%s\" => \"%s\"",
+						aDstClientPort.constData(),
+						aSrcClientPort.constData());
+				#endif
+					if (jack_connect(pJackClient,
+							aDstClientPort.constData(),
+							aSrcClientPort.constData()) == 0) {
+						pConnectItem->connected = true;
+						pPortItem->connected--;
+						pClientItem->connected--;
+						iUpdate++;
+					}
+				} else {
+					// Output port...
+				#ifdef CONFIG_DEBUG
+					qDebug("qjackctlSession::update() "
+						"jack_connect: \"%s\" => \"%s\"",
 						aSrcClientPort.constData(),
-						aDstClientPort.constData()) == 0) {
-					pConnectItem->connected = true;
-					pPortItem->connected--;
-					pClientItem->connected--;
-					iUpdate++;
+						aDstClientPort.constData());
+				#endif
+					if (jack_connect(pJackClient,
+							aSrcClientPort.constData(),
+							aDstClientPort.constData()) == 0) {
+						pConnectItem->connected = true;
+						pPortItem->connected--;
+						pClientItem->connected--;
+						iUpdate++;
+					}
 				}
 			}
 		}
@@ -331,6 +359,7 @@ bool qjackctlSession::loadFile ( const QString& sFilename )
 				// Port properties...
 				PortItem *pPortItem = new PortItem;
 				pPortItem->port_name = eChild.attribute("name");
+				pPortItem->port_type = (eChild.attribute("type") == "in");
 				// Connection child element...
 				for (QDomNode nConnect = eChild.firstChild();
 						!nConnect.isNull();
@@ -387,6 +416,7 @@ bool qjackctlSession::saveFile ( const QString& sFilename )
 			const PortItem *pPortItem = iterPort.next();
 			QDomElement ePort = doc.createElement("port");
 			ePort.setAttribute("name", pPortItem->port_name);
+			ePort.setAttribute("type", pPortItem->port_type ? "in" : "out");
 			QListIterator<ConnectItem *> iterConnect(pPortItem->connects);
 			while (iterConnect.hasNext()) {
 				const ConnectItem *pConnectItem = iterConnect.next();

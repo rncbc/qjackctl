@@ -59,6 +59,7 @@ public:
 		~PortItem() { qDeleteAll(connects); }
 
 		QString     port_name;
+		int         port_type;
 		int         connected;
 		ConnectList connects;
 	};
