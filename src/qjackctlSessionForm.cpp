@@ -33,6 +33,9 @@
 #include <QTreeWidget>
 #include <QHeaderView>
 
+#include <QBitmap>
+#include <QPainter>
+
 #include <QShowEvent>
 #include <QHideEvent>
 
@@ -67,6 +70,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 	QObject::connect(m_ui.LoadSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(loadSession()));
+
 #ifdef CONFIG_JACK_SESSION
 	QObject::connect(m_ui.SaveSessionPushButton,
 		SIGNAL(clicked()),
@@ -75,6 +79,10 @@ qjackctlSessionForm::qjackctlSessionForm (
 	m_ui.SaveSessionPushButton->setEnabled(false);
 	m_ui.SaveSessionComboBox->setEnabled(false);
 #endif
+
+	QObject::connect(m_ui.UpdateSessionPushButton,
+		SIGNAL(clicked()),
+		SLOT(updateSession()));
 }
 
 
@@ -389,6 +397,26 @@ void qjackctlSessionForm::saveSessionDir (
 }
 
 
+// Set icon error status according to given flag.
+QIcon qjackctlSessionForm::iconStatus ( const QIcon& icon, bool bStatus )
+{
+	QPixmap pm(icon.pixmap(16, 16));
+
+	// Merge with the overlay pixmap...
+	if (bStatus) {
+		const QPixmap pmOverlay(":/images/error1.png");
+		if (!pmOverlay.mask().isNull()) {
+			QBitmap mask = pm.mask();
+			QPainter(&mask).drawPixmap(0, 0, pmOverlay.mask());
+			pm.setMask(mask);
+			QPainter(&pm).drawPixmap(0, 0, pmOverlay);
+		}
+	}
+
+	return QIcon(pm);
+}
+
+
 // Update/populate session tree view.
 void qjackctlSessionForm::updateSessionView (void)
 {
@@ -405,7 +433,8 @@ void qjackctlSessionForm::updateSessionView (void)
 	for ( ; iterClient != m_pSession->clients().constEnd(); ++iterClient) {
 		qjackctlSession::ClientItem *pClientItem = iterClient.value();
 		QTreeWidgetItem *pTopLevelItem = new QTreeWidgetItem();
-		pTopLevelItem->setIcon(0, iconClient);
+		pTopLevelItem->setIcon(0,
+			iconStatus(iconClient, pClientItem->connected));
 		pTopLevelItem->setText(0, pClientItem->client_name);
 		pTopLevelItem->setText(1, pClientItem->client_uuid);
 		pTopLevelItem->setText(2, pClientItem->client_command);
@@ -415,7 +444,8 @@ void qjackctlSessionForm::updateSessionView (void)
 		while (iterPort.hasNext()) {
 			qjackctlSession::PortItem *pPortItem = iterPort.next();
 			pChildItem = new QTreeWidgetItem(pTopLevelItem, pChildItem);
-			pChildItem->setIcon(0, iconPort);
+			pChildItem->setIcon(0,
+				iconStatus(iconPort, pPortItem->connected));
 			pChildItem->setText(0, pPortItem->port_name);
 			QListIterator<qjackctlSession::ConnectItem *>
 				iterConnect(pPortItem->connects);
@@ -423,7 +453,8 @@ void qjackctlSessionForm::updateSessionView (void)
 			while (iterConnect.hasNext()) {
 				qjackctlSession::ConnectItem *pConnectItem = iterConnect.next();
 				pLeafItem = new QTreeWidgetItem(pChildItem, pLeafItem);
-				pLeafItem->setIcon(0, iconConnect);
+				pLeafItem->setIcon(0,
+					iconStatus(iconConnect, !pConnectItem->connected));
 				pLeafItem->setText(0,
 					pConnectItem->client_name + ':' +
 					pConnectItem->port_name);
@@ -433,6 +464,7 @@ void qjackctlSessionForm::updateSessionView (void)
 	}
 
 	m_ui.SessionTreeView->insertTopLevelItems(0, items);
+	m_ui.SessionTreeView->expandAll();
 }
 
 
@@ -451,6 +483,44 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.RecentSessionPushButton->setEnabled(bEnabled);
 	m_ui.SaveSessionPushButton->setEnabled(bEnabled);
 	m_ui.SaveSessionComboBox->setEnabled(bEnabled);
+}
+
+
+// Context menu event handler.
+void qjackctlSessionForm::contextMenuEvent (
+	QContextMenuEvent *pContextMenuEvent )
+{
+	QMenu menu(this);
+	QAction *pAction;
+
+	bool bEnabled = false;
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		bEnabled = (pMainForm->jackClient() != NULL);
+
+	pAction = menu.addAction(QIcon(":/images/open1.png"),
+		tr("&Load..."), this, SLOT(loadSession()));
+	pAction->setEnabled(bEnabled);
+	QMenu *pRecentMenu = recentMenu();
+	pAction = menu.addMenu(pRecentMenu);
+	pAction->setEnabled(bEnabled && !pRecentMenu->isEmpty());
+#ifdef CONFIG_JACK_SESSION
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/save1.png"),
+		tr("&Save..."), this, SLOT(saveSessionSave()));
+	pAction->setEnabled(bEnabled);
+	pAction = menu.addAction(
+		tr("Save and &Quit..."), this, SLOT(saveSessionSaveAndQuit()));
+	pAction->setEnabled(bEnabled);
+	pAction = menu.addAction(
+		tr("Save &Template..."), this, SLOT(saveSessionSaveTemplate()));
+	pAction->setEnabled(bEnabled);
+#endif
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
+		tr("&Refresh"), this, SLOT(updateSession()));
+
+	menu.exec(pContextMenuEvent->globalPos());
 }
 
 

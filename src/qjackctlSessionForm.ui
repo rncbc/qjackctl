@@ -105,7 +105,20 @@
      </item>
     </widget>
    </item>
-   <item row="1" column="0" colspan="5">
+   <item row="0" column="5">
+    <widget class="QPushButton" name="UpdateSessionPushButton">
+     <property name="toolTip">
+      <string>Update session</string>
+     </property>
+     <property name="text">
+      <string>&amp;Refresh</string>
+     </property>
+     <property name="icon">
+	  <iconset resource="qjackctl.qrc">:/images/refresh1.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="6">
     <widget class="QTreeWidget" name="SessionTreeView">
      <property name="rootIsDecorated">
       <bool>false</bool>
@@ -143,6 +156,7 @@
   <tabstop>RecentSessionPushButton</tabstop>
   <tabstop>SaveSessionPushButton</tabstop>
   <tabstop>SaveSessionComboBox</tabstop>
+  <tabstop>UpdateSessionPushButton</tabstop>
   <tabstop>SessionTreeView</tabstop>
  </tabstops>
  <resources>

@@ -3329,6 +3329,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 	menu.addSeparator();
 
 	if (m_pSessionForm) {
+		bool bEnabled = (m_pJackClient != NULL);
 		const QString sTitle = tr("S&ession");
 		const QIcon iconSession(":/images/session1.png");
 		QMenu *pSessionMenu = menu.addMenu(sTitle);
@@ -3336,7 +3337,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		pAction = pSessionMenu->addAction(QIcon(":/images/open1.png"),
 			tr("&Load..."),
 			m_pSessionForm, SLOT(loadSession()));
-		pAction->setEnabled(m_pJackClient != NULL);
+		pAction->setEnabled(bEnabled);
 		QMenu *pRecentMenu = m_pSessionForm->recentMenu();
 		pAction = pSessionMenu->addMenu(pRecentMenu);
 		pAction->setEnabled(m_pJackClient != NULL && !pRecentMenu->isEmpty());
@@ -3345,16 +3346,21 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		pAction = pSessionMenu->addAction(QIcon(":/images/save1.png"),
 			tr("&Save..."),
 			m_pSessionForm, SLOT(saveSessionSave()));
-		pAction->setEnabled(m_pJackClient != NULL);
+		pAction->setEnabled(bEnabled);
 		pAction = pSessionMenu->addAction(
 			tr("Save and &Quit..."),
 			m_pSessionForm, SLOT(saveSessionSaveAndQuit()));
-		pAction->setEnabled(m_pJackClient != NULL);
+		pAction->setEnabled(bEnabled);
 		pAction = pSessionMenu->addAction(
 			tr("Save &Template..."),
 			m_pSessionForm, SLOT(saveSessionSaveTemplate()));
-		pAction->setEnabled(m_pJackClient != NULL);
+		pAction->setEnabled(bEnabled);
 	#endif
+		pSessionMenu->addSeparator();
+		pAction = pSessionMenu->addAction(QIcon(":/images/refresh1.png"),
+			tr("&Refresh"),
+			m_pSessionForm, SLOT(updateSession()));
+		pAction->setEnabled(bEnabled);
 		pSessionMenu->addSeparator();
 		pAction = pSessionMenu->addAction(iconSession,
 			sTitle, this, SLOT(toggleSessionForm()));

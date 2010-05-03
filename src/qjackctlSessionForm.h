@@ -34,6 +34,7 @@
 class qjackctlSession;
 
 class QMenu;
+class QIcon;
 
 
 //----------------------------------------------------------------------------
@@ -82,6 +83,8 @@ protected:
 	void hideEvent(QHideEvent *);
 	void closeEvent(QCloseEvent *);
 
+	void contextMenuEvent(QContextMenuEvent *);
+
 	void keyPressEvent(QKeyEvent *);
 
 	void saveSessionEx(int iSessionType = 0);
@@ -92,6 +95,8 @@ protected:
 	void updateRecent(const QString& sSessionDir);
 
 	void updateSessionView();
+
+	static QIcon iconStatus(const QIcon& icon, bool bStatus);
 
 private:
 
