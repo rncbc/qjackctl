@@ -150,13 +150,14 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 						ConnectItem *pConnectItem = new ConnectItem;
 						pConnectItem->client_name = sDstClient;
 						pConnectItem->port_name   = sDstPort;
+						pConnectItem->connected = true;
 						pPortItem->connects.append(pConnectItem);
-						pPortItem->connected++;
+					//	pPortItem->connected++;
 					}
 					jack_free(connections);
 				} 
 				pClientItem->ports.append(pPortItem);
-				pClientItem->connected += pPortItem->connected;
+			//	pClientItem->connected += pPortItem->connected;
 			}
 			jack_free(ports);
 		}
@@ -372,6 +373,7 @@ bool qjackctlSession::loadFile ( const QString& sFilename )
 					ConnectItem *pConnectItem = new ConnectItem;
 					pConnectItem->client_name = eConnect.attribute("client");
 					pConnectItem->port_name   = eConnect.attribute("port");
+					pConnectItem->connected   = false;
 					pPortItem->connects.append(pConnectItem);
 					pPortItem->connected++;
 				}

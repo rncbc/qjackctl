@@ -150,7 +150,7 @@ void qjackctlSessionForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 // Open/load session from specific file path.
 void qjackctlSessionForm::loadSession (void)
 {
-#if 0
+#if 1
 	QFileDialog loadDialog(this, tr("Load Session"));
 
 	loadDialog.setAcceptMode(QFileDialog::AcceptOpen);
@@ -223,7 +223,7 @@ void qjackctlSessionForm::saveSessionEx ( int iSessionType )
 		break;
 	}
 
-#if 0
+#if 1
 	QFileDialog saveDialog(this, sTitle);
 
 	saveDialog.setAcceptMode(QFileDialog::AcceptSave);

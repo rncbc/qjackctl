@@ -2109,9 +2109,9 @@ void qjackctlMainForm::shutNotifyEvent (void)
 {
 	// Log this event.
 	appendMessagesColor(tr("Shutdown notification."), "#cc6666");
-	// SHUTDOWN: JACK client handle is not valid anymore...
+	// SHUTDOWN: JACK client handle might not be valid anymore...
 	m_bJackShutdown = true;
-	m_pJackClient = NULL;
+	// m_pJackClient = NULL;
 	// Do what has to be done.
 	stopJackServer();
 	// We're not detached anymore, anyway.
@@ -2541,7 +2541,8 @@ void qjackctlMainForm::stopJackClient (void)
 
 	// Deactivate and close us as a client...
 	if (m_pJackClient) {
-		jack_deactivate(m_pJackClient);
+		if (!m_bJackShutdown)
+			jack_deactivate(m_pJackClient);
 		jack_client_close(m_pJackClient);
 		m_pJackClient = NULL;
 		m_bJackDetach = false;
@@ -2572,7 +2573,7 @@ void qjackctlMainForm::stopJackClient (void)
 // JACK client accessor.
 jack_client_t *qjackctlMainForm::jackClient (void) const
 {
-	return m_pJackClient;
+	return (m_bJackShutdown ? NULL : m_pJackClient);
 }
 
 
