@@ -114,6 +114,7 @@ protected slots:
 	void jackError(QProcess::ProcessError);
 	void jackFinished();
 	void jackCleanup();
+	void jackStabilize();
 
 	void stdoutNotifySlot(int);
 	void alsaNotifySlot(int);

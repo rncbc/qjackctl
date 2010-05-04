@@ -713,7 +713,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	startJackClient(true);
 	// Final startup stabilization...
 	stabilizeForm();
-	jackCleanup();
+	jackStabilize();
 
 	// Look for immediate server startup?...
 	if (m_pSetup->bStartJack || !m_pSetup->sCmdLine.isEmpty())
@@ -1422,6 +1422,9 @@ void qjackctlMainForm::jackCleanup (void)
 		bPostShutdown = true;
 	}
 #endif
+	
+	// Cannot be detached anymore.
+	m_bJackDetach = false;
 
 	// Do we have any post-shutdown script?...
 	// (this will be always called, despite we've started the server or not)
@@ -1433,6 +1436,13 @@ void qjackctlMainForm::jackCleanup (void)
 	}
 
 	// Stabilize final server state...
+	jackStabilize();
+}
+
+
+// Stabilize server state...
+void qjackctlMainForm::jackStabilize (void)
+{
 	QPalette pal;
 	pal.setColor(QPalette::Foreground,
 		m_pJackClient == NULL ? Qt::darkYellow : Qt::yellow);
@@ -2114,8 +2124,6 @@ void qjackctlMainForm::shutNotifyEvent (void)
 	// m_pJackClient = NULL;
 	// Do what has to be done.
 	stopJackServer();
-	// We're not detached anymore, anyway.
-	m_bJackDetach = false;
 }
 
 
@@ -2520,7 +2528,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 			tr("Command line argument..."),
 			tr("Command line argument started"));
 		// And reset it forever more...
-		m_pSetup->sCmdLine = QString::null;
+		m_pSetup->sCmdLine.clear();
 	}
 
 	// OK, we're at it!
@@ -2531,6 +2539,18 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 // Stop jack audio client...
 void qjackctlMainForm::stopJackClient (void)
 {
+	// Deactivate and close us as a client...
+	if (m_pJackClient) {
+		jack_deactivate(m_pJackClient);
+		jack_client_close(m_pJackClient);
+		m_pJackClient = NULL;
+		// Log deactivation here.
+		appendMessages(tr("Client deactivated."));
+	}
+
+	// Reset command-line configuration info.
+	m_sJackCmdLine.clear();
+
 	// Clear out the connections and session...
 	if (m_pConnectionsForm) {
 		m_pConnectionsForm->stabilizeAudio(false);
@@ -2538,20 +2558,6 @@ void qjackctlMainForm::stopJackClient (void)
 	}
 	if (m_pSessionForm)
 		m_pSessionForm->stabilizeForm(false);
-
-	// Deactivate and close us as a client...
-	if (m_pJackClient) {
-		if (!m_bJackShutdown)
-			jack_deactivate(m_pJackClient);
-		jack_client_close(m_pJackClient);
-		m_pJackClient = NULL;
-		m_bJackDetach = false;
-		// Log deactivation here.
-		appendMessages(tr("Client deactivated."));
-	}
-
-	// Reset command-line configuration info.
-	m_sJackCmdLine = QString::null;
 
 	// Displays are dimmed again.
 	QPalette pal;
