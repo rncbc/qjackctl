@@ -5,6 +5,12 @@ ChangeLog
 
 SVN TRUNK
 
+- Slight Connections widget behavioral change: (dis)connecting a
+  client (from) to one single port, (dis)connections will be
+  applied in sequence from (to) all client output ports to (from)
+  as many input ports there are in below, one by one (satisfying
+  a 5 year old request from Yann Orlarey, thanks:).
+
 - JACK session support is being introduced. (EXPERIMENTAL)
 
 - Ignore first XRUN occurrence option dropped from statistics.

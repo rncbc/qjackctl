@@ -281,7 +281,7 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1756"/>
+        <location filename="../qjackctlConnect.cpp" line="1764"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -306,7 +306,7 @@
         <translation type="obsolete">Non</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1757"/>
+        <location filename="../qjackctlConnect.cpp" line="1765"/>
         <source>This will suspend sound processing
 from all client applications.
 

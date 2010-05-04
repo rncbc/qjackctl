@@ -1459,14 +1459,16 @@ bool qjackctlConnect::canConnectSelectedEx (void)
 					return true;
 			}
 		} else {
-			// Many(all)-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
+			// Many(all)-to-one/many connection...
 			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()) {
+			while (oport.hasNext()
+				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
 				qjackctlPortItem *pOPort = oport.next();
+				qjackctlPortItem *pIPort
+					= static_cast<qjackctlPortItem *> (pIItem);
 				if (pOPort->findConnectPtr(pIPort) == NULL)
 					return true;
+				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
 			}
 		}
 	} else {
@@ -1537,13 +1539,15 @@ bool qjackctlConnect::connectSelectedEx (void)
 				connectPortsEx(pOPort, pIPort);
 			}
 		} else {
-			// Many(all)-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
+			// Many(all)-to-one/many connection...
 			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()) {
+			while (oport.hasNext()
+				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
 				qjackctlPortItem *pOPort = oport.next();
+				qjackctlPortItem *pIPort
+					= static_cast<qjackctlPortItem *> (pIItem);
 				connectPortsEx(pOPort, pIPort);
+				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
 			}
 		}
 	} else {
@@ -1609,14 +1613,16 @@ bool qjackctlConnect::canDisconnectSelectedEx (void)
 					return true;
 			}
 		} else {
-			// Many(all)-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
+			// Many(all)-to-one/many connection...
 			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()) {
+			while (oport.hasNext()
+				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
 				qjackctlPortItem *pOPort = oport.next();
+				qjackctlPortItem *pIPort
+					= static_cast<qjackctlPortItem *> (pIItem);
 				if (pOPort->findConnectPtr(pIPort) != NULL)
 					return true;
+				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
 			}
 		}
 	} else {
@@ -1687,13 +1693,15 @@ bool qjackctlConnect::disconnectSelectedEx (void)
 				disconnectPortsEx(pOPort, pIPort);
 			}
 		} else {
-			// Many(all)-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
+			// Many(all)-to-one/many connection...
 			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()) {
+			while (oport.hasNext()
+				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
 				qjackctlPortItem *pOPort = oport.next();
+				qjackctlPortItem *pIPort
+					= static_cast<qjackctlPortItem *> (pIItem);
 				disconnectPortsEx(pOPort, pIPort);
+				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
 			}
 		}
 	} else {
