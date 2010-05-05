@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.16, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.17, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -43,7 +43,7 @@ AC_ARG_ENABLE(jack_midi,
 
 # Enable JACK session support.
 AC_ARG_ENABLE(jack_session,
-  AC_HELP_STRING([--jack-session], [enable JACK session support (default=yes)]),
+  AC_HELP_STRING([--enable-jack-session], [enable JACK session support (default=yes)]),
   [ac_jack_session="$enableval"],
   [ac_jack_session="yes"])
 

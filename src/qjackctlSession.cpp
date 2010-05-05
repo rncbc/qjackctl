@@ -85,6 +85,8 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 	if (pJackClient == NULL)
 		return false;
 
+	const QString sSessionPath = sSessionDir + '/';
+
 #ifdef CONFIG_JACK_SESSION
 
 	if (!jack_session_notify)
@@ -100,7 +102,6 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 		break;
 	}
 
-	const QString sSessionPath = sSessionDir + '/';
 	const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
 	jack_session_command_t *commands
 		= jack_session_notify(pJackClient, NULL, etype, aSessionPath.constData());
