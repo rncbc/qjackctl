@@ -46,12 +46,21 @@ including a enhanced patchbay and connection control features.
 %defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog README TODO
 %{_bindir}/%{name}
+%dir %{_datadir}/applications
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/pixmaps/%{name}.png
+%dir %{_datadir}/icons/hicolor
+%dir %{_datadir}/icons/hicolor/32x32
+%dir %{_datadir}/icons/hicolor/32x32/apps
+%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%dir %{_datadir}/locale
 %{_datadir}/locale/%{name}_*.qm
+%dir %{_datadir}/man
+%dir %{_datadir}/man/man1
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
+* Mon May 17 2010 Rui Nuno Capela <rncbc@users.sourceforge.net>
+- Standard desktop icon fixing. 
 * Mon Jan 11 2010 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.6
 - Full D-Busification!
 * Mon Jan 11 2010 Rui Nuno Capela <rncbc@users.sourceforge.net>
