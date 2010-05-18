@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=@PACKAGE_NAME@
-Version=@PACKAGE_VERSION@
+Version=1.0
 GenericName=JACK Control
 GenericName[de]=JACK-Steuerung
 GenericName[fr]=Contrôle JACK

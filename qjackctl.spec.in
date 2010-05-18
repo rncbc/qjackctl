@@ -46,7 +46,6 @@ including a enhanced patchbay and connection control features.
 %defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog README TODO
 %{_bindir}/%{name}
-%dir %{_datadir}/applications
 %{_datadir}/applications/%{name}.desktop
 %dir %{_datadir}/icons/hicolor
 %dir %{_datadir}/icons/hicolor/32x32
