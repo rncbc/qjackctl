@@ -24,6 +24,10 @@
 
 #include <QMessageBox>
 
+#ifdef CONFIG_JACK_VERSION
+#include <jack/jack.h>
+#endif
+
 
 //----------------------------------------------------------------------------
 // qjackctlAboutForm -- UI wrapper form.
@@ -42,6 +46,11 @@ qjackctlAboutForm::qjackctlAboutForm (
     sText += "<br />\n";
     sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
     sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
+#ifdef CONFIG_JACK_VERSION
+	sText += "<br />\n";
+	sText += tr("Using: JACK %1").arg(jack_get_version_string());
+	sText += "<br />\n";
+#endif
 #ifdef CONFIG_DEBUG
     sText += "<small><font color=\"red\">";
     sText += tr("Debugging option enabled.");

@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- JACK version is now being shown on the About box.
+
 - Slight Connections widget behavioral change: (dis)connecting a
   client (from) to one single port, (dis)connections will be
   applied in sequence from (to) all client output ports to (from)

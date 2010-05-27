@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.19, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.20, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -382,6 +382,12 @@ if test "x$ac_jack_session" = "xyes"; then
    fi
 fi
 
+# Check for jack_get_version_string function.
+AC_CHECK_LIB(jack, jack_get_version_string, [ac_jack_version="yes"], [ac_jack_version="no"])
+if test "x$ac_jack_version" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_VERSION, 1, [Define if jack_get_version_string is available.])
+fi
+
 # Finally produce a configure header file and the main makefile.
 AC_OUTPUT
 
@@ -402,6 +408,7 @@ echo "  JACK Maximum scheduling delay support  . . . . . .: $ac_jack_max_delay"
 echo "  JACK Port aliases support  . . . . . . . . . . . .: $ac_jack_port_aliases"
 echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
 echo "  JACK Session support (EXPERIMENTAL)  . . . . . . .: $ac_jack_session"
+echo "  JACK Version support . . . . . . . . . . . . . . .: $ac_jack_version"
 echo "  ALSA MIDI Sequencer support  . . . . . . . . . . .: $ac_alsa_seq"
 echo "  System tray icon support . . . . . . . . . . . . .: $ac_system_tray"
 echo "  D-Bus interface support  . . . . . . . . . . . . .: $ac_dbus"

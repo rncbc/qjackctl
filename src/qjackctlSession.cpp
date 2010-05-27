@@ -179,7 +179,7 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 		return false;
 
 	// Start/load clients...
-	int msecs = 0;
+	int msecs = 200;
 	ClientList::ConstIterator iter = m_clients.constBegin();
 	for ( ; iter != m_clients.constEnd(); ++iter) {
 		const ClientItem *pClientItem = iter.value();
@@ -217,7 +217,7 @@ bool qjackctlSession::update (void)
 
 	// Now, make the saved connections...
 	ClientList::ConstIterator iter = m_clients.constBegin();
-	for (iter = m_clients.constBegin(); iter != m_clients.constEnd(); ++iter) {
+	for ( ; iter != m_clients.constEnd(); ++iter) {
 		ClientItem *pClientItem = iter.value();
 		if (pClientItem->connected < 1)
 			continue;
@@ -261,38 +261,36 @@ bool qjackctlSession::update (void)
 				const QString sDstPort = pConnectItem->port_name;
 				const QString sDstClientPort = sDstClient + ':' + sDstPort;
 				const QByteArray aDstClientPort = sDstClientPort.toLocal8Bit();
+				int retc;
 				if (pPortItem->port_type) {
 					// Input port...
-				#ifdef CONFIG_DEBUG
-					qDebug("qjackctlSession::update() "
-						"jack_connect: \"%s\" => \"%s\"",
+					retc = jack_connect(pJackClient,
 						aDstClientPort.constData(),
 						aSrcClientPort.constData());
-				#endif
-					if (jack_connect(pJackClient,
-							aDstClientPort.constData(),
-							aSrcClientPort.constData()) == 0) {
-						pConnectItem->connected = true;
-						pPortItem->connected--;
-						pClientItem->connected--;
-						iUpdate++;
-					}
-				} else {
-					// Output port...
 				#ifdef CONFIG_DEBUG
 					qDebug("qjackctlSession::update() "
-						"jack_connect: \"%s\" => \"%s\"",
+						"jack_connect: \"%s\" => \"%s\" (%d)",
+						aDstClientPort.constData(),
+						aSrcClientPort.constData(), retc);
+				#endif
+				} else {
+					// Output port...
+					retc = jack_connect(pJackClient,
 						aSrcClientPort.constData(),
 						aDstClientPort.constData());
+				#ifdef CONFIG_DEBUG
+					qDebug("qjackctlSession::update() "
+						"jack_connect: \"%s\" => \"%s\" (%d)",
+						aSrcClientPort.constData(),
+						aDstClientPort.constData(), retc);
 				#endif
-					if (jack_connect(pJackClient,
-							aSrcClientPort.constData(),
-							aDstClientPort.constData()) == 0) {
-						pConnectItem->connected = true;
-						pPortItem->connected--;
-						pClientItem->connected--;
-						iUpdate++;
-					}
+				}
+				// Comply with connection result...
+				if (retc == 0 || retc == EEXIST) {
+					pConnectItem->connected = true;
+					pPortItem->connected--;
+					pClientItem->connected--;
+					iUpdate++;
 				}
 			}
 		}
