@@ -635,6 +635,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(showSetupForm()));
 		dbus.connect(s, s, sDBusName, "about",
 			this, SLOT(showAboutForm()));
+		dbus.connect(s, s, sDBusName, "quit",
+			this, SLOT(quitMainForm()));
 		// Session related slots...
 		if (m_pSessionForm) {
 			dbus.connect(s, s, sDBusName, "load",

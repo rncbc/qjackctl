@@ -5,8 +5,14 @@ ChangeLog
 
 SVN TRUNK
 
-- Make sure that Patchbay socket names are unique when adding or
-  copying, fixing previous patch by Dominic Sacre.
+- Another D-Bus interface slot makes it through implementation:
+  "quit" (eg. usage: dbus-send --system / org.rncbc.qjackctl.quit).
+  Besides, there's also these new JACK session management actions
+  which were being overlooked as well: "load", "save", "savequit"
+  and "savetemplate" are also available as D-Bus method slots.
+
+- Make sure that Patchbay socket names are unique when adding
+  or copying, fixing previous patch by Dominic Sacre.
 
 - JACK version is now being shown on the About box (jack2).
 
