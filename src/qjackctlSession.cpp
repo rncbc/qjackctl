@@ -197,7 +197,10 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 		QApplication::processEvents(/* QEventLoop::ExcludeUserInputEvents */);
 
 	// Initial reconnection.
-	return update();
+	update();
+
+	// Formerly successful.
+	return true;
 }
 
 

@@ -5,7 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
-- JACK version is now being shown on the About box.
+- Make sure that Patchbay socket names are unique when adding or
+  copying, fixing previous patch by Dominic Sacre.
+
+- JACK version is now being shown on the About box (jack2).
 
 - Slight Connections widget behavioral change: (dis)connecting a
   client (from) to one single port, (dis)connections will be

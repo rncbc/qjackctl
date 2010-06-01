@@ -26,7 +26,6 @@
 #include "qjackctlSetup.h"
 
 #include "qjackctlMainForm.h"
-#include "qjackctlSocketForm.h"
 
 #include <QMessageBox>
 #include <QFileDialog>

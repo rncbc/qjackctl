@@ -464,6 +464,7 @@ bool qjackctlSocketList::addSocketItem (void)
 	socketForm.setSocketCaption(m_sSocketCaption);
 	socketForm.setPixmaps(m_apPixmaps);
 	socketForm.setSocketList(this);
+	socketForm.setSocketNew(true);
 	qjackctlPatchbaySocket socket(m_sSocketCaption
 		+ ' ' + QString::number(m_sockets.count() + 1),
 		QString::null, QJACKCTL_SOCKETTYPE_JACK_AUDIO);
@@ -473,11 +474,11 @@ bool qjackctlSocketList::addSocketItem (void)
 		qjackctlSocketItem *pSocketItem = selectedSocketItem();
 	//  m_pListView->setUpdatesEnabled(false);
 		if (pSocketItem)
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(false);
-#else
+		#else
 			m_pListView->setItemSelected(pSocketItem, false);
-#endif
+		#endif
 		pSocketItem = new qjackctlSocketItem(this, socket.name(),
 			socket.clientName(), socket.type(), pSocketItem);
 		if (pSocketItem) {
@@ -491,11 +492,11 @@ bool qjackctlSocketList::addSocketItem (void)
 			}
 			bResult = true;
 		}
-#if QT_VERSION >= 0x040200
+	#if QT_VERSION >= 0x040200
 		pSocketItem->setSelected(true);
-#else
+	#else
 		m_pListView->setItemSelected(pSocketItem, true);
-#endif
+	#endif
 		m_pListView->setCurrentItem(pSocketItem);
 	//  m_pListView->setUpdatesEnabled(true);
 	//  m_pListView->update();
@@ -543,6 +544,7 @@ bool qjackctlSocketList::editSocketItem (void)
 		socketForm.setSocketCaption(m_sSocketCaption);
 		socketForm.setPixmaps(m_apPixmaps);
 		socketForm.setSocketList(this);
+		socketForm.setSocketNew(false);
 		qjackctlPatchbaySocket socket(pSocketItem->socketName(),
 			pSocketItem->clientName(), pSocketItem->socketType());
 		socket.setExclusive(pSocketItem->isExclusive());
@@ -569,11 +571,11 @@ bool qjackctlSocketList::editSocketItem (void)
 				pPlugItem = new qjackctlPlugItem(
 					pSocketItem, iter.next(), pPlugItem);
 			}
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(true);
-#else
+		#else
 			m_pListView->setItemSelected(pSocketItem, true);
-#endif
+		#endif
 			m_pListView->setCurrentItem(pSocketItem);
 		//  m_pListView->setUpdatesEnabled(true);
 		//  m_pListView->triggerUpdate();
@@ -608,6 +610,7 @@ bool qjackctlSocketList::copySocketItem (void)
 		socketForm.setSocketCaption(m_sSocketCaption);
 		socketForm.setPixmaps(m_apPixmaps);
 		socketForm.setSocketList(this);
+		socketForm.setSocketNew(true);
 		qjackctlPatchbaySocket socket(sSocketName,
 			pSocketItem->clientName(), iSocketType);
 		if (pSocketItem->isExclusive())
@@ -631,11 +634,11 @@ bool qjackctlSocketList::copySocketItem (void)
 				}
 				bResult = true;
 			}
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(true);
-#else
+		#else
 			m_pListView->setItemSelected(pSocketItem, true);
-#endif
+		#endif
 			m_pListView->setCurrentItem(pSocketItem);
 		//  m_pListView->setUpdatesEnabled(true);
 		//  m_pListView->triggerUpdate();
@@ -676,11 +679,11 @@ bool qjackctlSocketList::moveUpSocketItem (void)
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
 				m_pListView->insertTopLevelItem(iItem - 1, pItem);
-#if QT_VERSION >= 0x040200
+			#if QT_VERSION >= 0x040200
 				pSocketItem->setSelected(true);
-#else
+			#else
 				m_pListView->setItemSelected(pSocketItem, true);
-#endif
+			#endif
 				m_pListView->setCurrentItem(pSocketItem);
 			//  m_pListView->setUpdatesEnabled(true);
 			//  m_pListView->update();
@@ -707,11 +710,11 @@ bool qjackctlSocketList::moveDownSocketItem (void)
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
 				m_pListView->insertTopLevelItem(iItem + 1, pItem);
-#if QT_VERSION >= 0x040200
+			#if QT_VERSION >= 0x040200
 				pSocketItem->setSelected(true);
-#else
+			#else
 				m_pListView->setItemSelected(pSocketItem, true);
-#endif
+			#endif
 				m_pListView->setCurrentItem(pSocketItem);
 			//  m_pListView->setUpdatesEnabled(true);
 			//  m_pListView->update();

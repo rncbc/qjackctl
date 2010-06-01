@@ -47,6 +47,7 @@ qjackctlSocketForm::qjackctlSocketForm (
 	m_ui.setupUi(this);
 
 	m_pSocketList  = NULL;
+	m_bSocketNew   = false;
 	m_ppPixmaps    = NULL;
 	m_iDirtyCount  = 0;
 
@@ -157,6 +158,13 @@ void qjackctlSocketForm::setSocketCaption ( const QString& sSocketCaption )
 void qjackctlSocketForm::setSocketList ( qjackctlSocketList *pSocketList )
 {
 	m_pSocketList = pSocketList;
+}
+
+
+// Socket new flag.
+void qjackctlSocketForm::setSocketNew ( bool bSocketNew )
+{
+	m_bSocketNew = bSocketNew;
 }
 
 
@@ -315,16 +323,18 @@ void qjackctlSocketForm::accept (void)
 		return;
 
 	// Check if a socket with the same name already exists...
-	QListIterator<qjackctlSocketItem *> iter(m_pSocketList->sockets());
-	while (iter.hasNext()) {
-		const QString& sSocketName = iter.next()->socketName();
-		if (m_ui.SocketNameLineEdit->text() == sSocketName) {
-			QMessageBox::critical(this,
-				tr("Error") + " - " QJACKCTL_SUBTITLE1,
-				tr("A socket named \"%1\" already exists.")
-				.arg(sSocketName), QMessageBox::Cancel);
-			// Reject.
-			return;
+	if (m_bSocketNew) {
+		QListIterator<qjackctlSocketItem *> iter(m_pSocketList->sockets());
+		while (iter.hasNext()) {
+			const QString& sSocketName = iter.next()->socketName();
+			if (m_ui.SocketNameLineEdit->text() == sSocketName) {
+				QMessageBox::critical(this,
+					tr("Error") + " - " QJACKCTL_SUBTITLE1,
+					tr("A socket named \"%1\" already exists.")
+					.arg(sSocketName), QMessageBox::Cancel);
+				// Reject.
+				return;
+			}
 		}
 	}
 
@@ -378,11 +388,11 @@ void qjackctlSocketForm::addPlug (void)
 	if (!sPlugName.isEmpty()) {
 		QTreeWidgetItem *pItem = m_ui.PlugListView->currentItem();
 		if (pItem)
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pItem->setSelected(false);
-#else
+		#else
 			m_ui.PlugListView->setItemSelected(pItem, false);
-#endif
+		#endif
 		pItem = new QTreeWidgetItem(m_ui.PlugListView, pItem);
 		if (pItem) {
 			pItem->setText(0, sPlugName);
@@ -399,11 +409,11 @@ void qjackctlSocketForm::addPlug (void)
 			}
 			if (pXpmPlug)
 				pItem->setIcon(0, QIcon(*pXpmPlug));
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pItem->setSelected(true);
-#else
+		#else
 			m_ui.PlugListView->setItemSelected(pItem, true);
-#endif
+		#endif
 			m_ui.PlugListView->setCurrentItem(pItem);
 		}
 		m_ui.PlugNameComboBox->setEditText(QString::null);
@@ -442,18 +452,18 @@ void qjackctlSocketForm::moveUpPlug (void)
 	if (pItem) {
 		int iItem = m_ui.PlugListView->indexOfTopLevelItem(pItem);
 		if (iItem > 0) {
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pItem->setSelected(false);
-#else
+		#else
 			m_ui.PlugListView->setItemSelected(pItem, false);
-#endif
+		#endif
 			pItem = m_ui.PlugListView->takeTopLevelItem(iItem);
 			m_ui.PlugListView->insertTopLevelItem(iItem - 1, pItem);
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pItem->setSelected(true);
-#else
+		#else
 			m_ui.PlugListView->setItemSelected(pItem, true);
-#endif
+		#endif
 			m_ui.PlugListView->setCurrentItem(pItem);
 		}
 	}
@@ -470,18 +480,18 @@ void qjackctlSocketForm::moveDownPlug (void)
 		int iItem = m_ui.PlugListView->indexOfTopLevelItem(pItem);
 		int iItemCount = m_ui.PlugListView->topLevelItemCount();
 		if (iItem < iItemCount - 1) {
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pItem->setSelected(false);
-#else
+		#else
 			m_ui.PlugListView->setItemSelected(pItem, false);
-#endif
+		#endif
 			pItem = m_ui.PlugListView->takeTopLevelItem(iItem);
 			m_ui.PlugListView->insertTopLevelItem(iItem + 1, pItem);
-#if QT_VERSION >= 0x040200
+		#if QT_VERSION >= 0x040200
 			pItem->setSelected(true);
-#else
+		#else
 			m_ui.PlugListView->setItemSelected(pItem, true);
-#endif
+		#endif
 			m_ui.PlugListView->setCurrentItem(pItem);
 		}
 	}

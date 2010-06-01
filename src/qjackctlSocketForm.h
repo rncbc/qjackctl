@@ -58,6 +58,7 @@ public:
 
 	void setSocketCaption(const QString& sSocketCaption);
 	void setSocketList(qjackctlSocketList *pSocketList);
+	void setSocketNew(bool bSocketNew);
 
 	void setPixmaps(QPixmap **ppPixmaps);
 
@@ -108,6 +109,7 @@ private:
 
 	// Instance variables.
 	qjackctlSocketList *m_pSocketList;
+	bool                m_bSocketNew;
 	QPixmap           **m_ppPixmaps;
 	int                 m_iDirtyCount;
 
