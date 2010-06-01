@@ -93,82 +93,87 @@
         <translation>Über Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="43"/>
+        <location filename="../qjackctlAboutForm.cpp" line="47"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="44"/>
+        <location filename="../qjackctlAboutForm.cpp" line="48"/>
         <source>Build</source>
         <translation>Build</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="47"/>
+        <location filename="../qjackctlAboutForm.cpp" line="51"/>
+        <source>Using: JACK %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="56"/>
         <source>Debugging option enabled.</source>
         <translation>Debugging-Option aktiviert.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="52"/>
+        <location filename="../qjackctlAboutForm.cpp" line="61"/>
         <source>System tray disabled.</source>
         <translation>Benachrichtigungsfeld deaktiviert.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="57"/>
+        <location filename="../qjackctlAboutForm.cpp" line="66"/>
         <source>Transport status control disabled.</source>
         <translation>Transportstatuskontrolle abgeschaltet.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="62"/>
+        <location filename="../qjackctlAboutForm.cpp" line="71"/>
         <source>Realtime status disabled.</source>
         <translation>Realtime-Status deaktiviert.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="67"/>
+        <location filename="../qjackctlAboutForm.cpp" line="76"/>
         <source>XRUN delay status disabled.</source>
         <translation>XRUN Verzögerungsstatus abgeschaltet.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="72"/>
+        <location filename="../qjackctlAboutForm.cpp" line="81"/>
         <source>Maximum delay status disabled.</source>
         <translation>Status für maximale Verzögerung abgeschaltet.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="82"/>
+        <location filename="../qjackctlAboutForm.cpp" line="91"/>
         <source>JACK MIDI support disabled.</source>
         <translation>JACK MIDI wird nicht unterstütz.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="87"/>
+        <location filename="../qjackctlAboutForm.cpp" line="96"/>
         <source>JACK Session support disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="93"/>
+        <location filename="../qjackctlAboutForm.cpp" line="102"/>
         <source>ALSA/MIDI sequencer support disabled.</source>
         <translation>ALSA/MIDI Sequencer wird nicht unterstütz.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="105"/>
+        <location filename="../qjackctlAboutForm.cpp" line="114"/>
         <source>Website</source>
         <translation>Webseite</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="110"/>
+        <location filename="../qjackctlAboutForm.cpp" line="119"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Dieses Programm ist freie Software; Sie können es gemäß der</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="111"/>
+        <location filename="../qjackctlAboutForm.cpp" line="120"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>GNU General Public License weiterverteilen und/oder modifizieren.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="77"/>
+        <location filename="../qjackctlAboutForm.cpp" line="86"/>
         <source>JACK Port aliases support disabled.</source>
         <translation>Alternativnamen für JACK-Anschlüsse abgeschaltet.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="100"/>
+        <location filename="../qjackctlAboutForm.cpp" line="109"/>
         <source>D-Bus interface support disabled.</source>
         <translation>Unterstützung der D-Bus-Schnittstelle abgeschaltet.</translation>
     </message>
@@ -1450,12 +1455,12 @@ einem Neustart des Programms wirksam.</translation>
 <context>
     <name>qjackctlPatchbay</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1708"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1711"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1709"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1712"/>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
@@ -1692,12 +1697,12 @@ Sind Sie sicher?</translation>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="221"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="220"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="222"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="221"/>
         <source>The patchbay definition has been changed:
 
 &quot;%1&quot;
@@ -1720,23 +1725,23 @@ Wollen Sie die Änderungen übernehmen?</translation>
         <translation type="obsolete">Abbrechen</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="278"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="277"/>
         <source>%1 [modified]</source>
         <translation>%1 [verändert]</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="345"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="344"/>
         <source>Untitled%1</source>
         <translation>Unbenannt%1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="364"/>
-        <location filename="../qjackctlPatchbayForm.cpp" line="394"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="363"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="393"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="365"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="364"/>
         <source>Could not load patchbay definition file: 
 
 &quot;%1&quot;</source>
@@ -1744,7 +1749,7 @@ Wollen Sie die Änderungen übernehmen?</translation>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="395"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="394"/>
         <source>Could not save patchbay definition file: 
 
 &quot;%1&quot;</source>
@@ -1752,12 +1757,12 @@ Wollen Sie die Änderungen übernehmen?</translation>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="440"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="439"/>
         <source>New Patchbay definition</source>
         <translation>Neue Steckfelddefinition</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="441"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="440"/>
         <source>Create patchbay definition as a snapshot
 of all actual client connections?</source>
         <translation>Steckfelddefinitionsdatei als Schnappschuss
@@ -1772,23 +1777,23 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <translation type="obsolete">Nein</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="472"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="471"/>
         <source>Load Patchbay Definition</source>
         <translation>Steckfelddefinition laden</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="474"/>
-        <location filename="../qjackctlPatchbayForm.cpp" line="494"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="473"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="493"/>
         <source>Patchbay Definition files</source>
         <translation>Steckfelddefinitionsdateien</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="492"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="491"/>
         <source>Save Patchbay Definition</source>
         <translation>Speichere Steckfelddefinition</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="599"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="598"/>
         <source>active</source>
         <translation>aktiv</translation>
     </message>
@@ -1796,90 +1801,90 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
 <context>
     <name>qjackctlPatchbayView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1250"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1253"/>
         <source>Add...</source>
         <translation>Hinzufügen...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1252"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1255"/>
         <source>Edit...</source>
         <translation>Bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1255"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1258"/>
         <source>Copy...</source>
         <translation>Kopieren...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1258"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1261"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1262"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1265"/>
         <source>Exclusive</source>
         <translation>Exklusiv</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1268"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1271"/>
         <source>Forward</source>
         <translation>Weiterleiten</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1307"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1310"/>
         <source>(None)</source>
         <translation>(Keine)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1321"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1324"/>
         <source>Move Up</source>
         <translation>Nach oben</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1324"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1327"/>
         <source>Move Down</source>
         <translation>Nach unten</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1330"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1333"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1331"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1334"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1334"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1337"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Trennen</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1335"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1338"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1338"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1341"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Alle trennen</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1339"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1342"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1344"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1347"/>
         <source>&amp;Refresh</source>
         <translation>Auf&amp;frischen</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1345"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1348"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+A</translation>
@@ -3991,27 +3996,27 @@ Wollen Sie diese übernehmen?</translation>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="152"/>
+        <location filename="../qjackctlSocketForm.cpp" line="153"/>
         <source>Plugs / Ports</source>
         <translation>Anschlüsse</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="323"/>
+        <location filename="../qjackctlSocketForm.cpp" line="332"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="324"/>
+        <location filename="../qjackctlSocketForm.cpp" line="333"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="342"/>
+        <location filename="../qjackctlSocketForm.cpp" line="352"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="343"/>
+        <location filename="../qjackctlSocketForm.cpp" line="353"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4027,32 +4032,32 @@ Wollen Sie diese übernehmen?</translation>
         <translation type="obsolete">Verwerfen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="532"/>
+        <location filename="../qjackctlSocketForm.cpp" line="542"/>
         <source>Add Plug</source>
         <translation>Anschluss hinzufügen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="546"/>
+        <location filename="../qjackctlSocketForm.cpp" line="556"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="549"/>
+        <location filename="../qjackctlSocketForm.cpp" line="559"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="553"/>
+        <location filename="../qjackctlSocketForm.cpp" line="563"/>
         <source>Move Up</source>
         <translation>Auf</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="556"/>
+        <location filename="../qjackctlSocketForm.cpp" line="566"/>
         <source>Move Down</source>
         <translation>Ab</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="735"/>
+        <location filename="../qjackctlSocketForm.cpp" line="745"/>
         <source>(None)</source>
         <translation>(Keiner)</translation>
     </message>
@@ -4080,12 +4085,12 @@ Wollen Sie diese übernehmen?</translation>
         <translation>&lt;Neu&gt; %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="517"/>
+        <location filename="../qjackctlPatchbay.cpp" line="518"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="518"/>
+        <location filename="../qjackctlPatchbay.cpp" line="519"/>
         <source>%1 about to be removed:
 
 &quot;%2&quot;
@@ -4104,7 +4109,7 @@ Sind Sie sicher?</translation>
         <translation type="obsolete">Nein</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="606"/>
+        <location filename="../qjackctlPatchbay.cpp" line="608"/>
         <source>%1 &lt;Copy&gt; - %2</source>
         <translation>%1 &lt;Kopieren&gt; - %2</translation>
     </message>
@@ -4112,12 +4117,12 @@ Sind Sie sicher?</translation>
 <context>
     <name>qjackctlSocketListView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="772"/>
+        <location filename="../qjackctlPatchbay.cpp" line="775"/>
         <source>Output Sockets / Plugs</source>
         <translation>Ausgangsanschlüsse</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="774"/>
+        <location filename="../qjackctlPatchbay.cpp" line="777"/>
         <source>Input Sockets / Plugs</source>
         <translation>Eingangsanschlüsse</translation>
     </message>

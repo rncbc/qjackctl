@@ -140,6 +140,10 @@
         <source>JACK Session support disabled.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Using: JACK %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlClientListView</name>
