@@ -87,81 +87,94 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 
 	const QString sSessionPath = sSessionDir + '/';
 
+	// First pass: get all client/port connections, no matter what...
+	const char **ports
+		= jack_get_ports(pJackClient, NULL, NULL, 0);
+	if (ports) {
+		for (int i = 0; ports[i]; ++i) {
+			const char *pszSrcClientPort = ports[i];
+			const QString sSrcClientPort
+				= QString::fromLocal8Bit(pszSrcClientPort);
+			const QString sSrcClient
+				= sSrcClientPort.section(':', 0, 0);
+			ClientItem *pClientItem;
+			if (m_clients.contains(sSrcClient)) {
+				pClientItem = m_clients.value(sSrcClient);
+			} else {
+				pClientItem = new ClientItem;
+				pClientItem->client_name = sSrcClient;
+				m_clients.insert(pClientItem->client_name, pClientItem);
+			}
+			PortItem *pPortItem = new PortItem;
+			pPortItem->port_name = sSrcClientPort.section(':', 1);
+			jack_port_t *pJackPort
+				= jack_port_by_name(pJackClient, pszSrcClientPort);
+			pPortItem->port_type
+				= (jack_port_flags(pJackPort) & JackPortIsInput);
+			const char **connections
+				= jack_port_get_all_connections(pJackClient, pJackPort);
+			if (connections) {
+				for (int j = 0; connections[j]; ++j) {
+					const QString sDstClientPort
+						= QString::fromLocal8Bit(connections[j]);
+					ConnectItem *pConnectItem = new ConnectItem;
+					pConnectItem->client_name
+						= sDstClientPort.section(':', 0, 0);
+					pConnectItem->port_name
+						= sDstClientPort.section(':', 1);
+					pConnectItem->connected = true;
+					pPortItem->connects.append(pConnectItem);
+				//	pPortItem->connected++;
+				}
+				jack_free(connections);
+			} 
+			pClientItem->ports.append(pPortItem);
+		//	pClientItem->connected += pPortItem->connected;
+		}
+		jack_free(ports);
+	}
+
 #ifdef CONFIG_JACK_SESSION
 
-	if (!jack_session_notify)
-		return false;
-
-	jack_session_event_type_t etype = JackSessionSave;
-	switch (iSessionType) {
-	case 1:
-		etype = JackSessionSaveAndQuit;
-		break;
-	case 2:
-		etype = JackSessionSaveTemplate;
-		break;
-	}
-
-	const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
-	jack_session_command_t *commands
-		= jack_session_notify(pJackClient, NULL, etype, aSessionPath.constData());
-	if (commands == NULL)
-		return false;
-
-	// First pass...
-	for (int k = 0; commands[k].uuid; ++k) {
-		jack_session_command_t *pCommand = &commands[k];
-		ClientItem *pClientItem = new ClientItem;
-		pClientItem->client_uuid = QString::fromLocal8Bit(pCommand->uuid);
-		pClientItem->client_name = QString::fromLocal8Bit(pCommand->client_name);
-		pClientItem->client_command = QString::fromLocal8Bit(pCommand->command);
-		m_clients.insert(pClientItem->client_name, pClientItem);
-	}
-
-	jack_session_commands_free(commands);
-
-	// Second pass...
-	ClientList::ConstIterator iter = m_clients.constBegin();
-	for ( ; iter != m_clients.constEnd(); ++iter) {
-		ClientItem *pClientItem = iter.value();
-		const QString sPorts = pClientItem->client_name + ":.*";
-		const QByteArray aPorts = sPorts.toLocal8Bit();
-		const char **ports
-			= jack_get_ports(pJackClient, aPorts.constData(), NULL, 0);
-		if (ports) {
-			for (int i = 0; ports[i]; ++i) {
-				const char *pszSrcClientPort = ports[i];
-				PortItem *pPortItem = new PortItem;
-				pPortItem->port_name
-					= QString::fromLocal8Bit(pszSrcClientPort).section(':', 1);
-				jack_port_t *pJackPort
-					= jack_port_by_name(pJackClient, pszSrcClientPort);
-				pPortItem->port_type
-					= (jack_port_flags(pJackPort) & JackPortIsInput);
-				const char **connections
-					= jack_port_get_all_connections(pJackClient, pJackPort);
-				if (connections) {
-					for (int j = 0; connections[j]; ++j) {
-						const QString sDstClientPort
-							= QString::fromLocal8Bit(connections[j]);
-						const QString sDstPort
-							= sDstClientPort.section(':', 1);
-						const QString sDstClient
-							= sDstClientPort.section(':', 0, 0);
-						ConnectItem *pConnectItem = new ConnectItem;
-						pConnectItem->client_name = sDstClient;
-						pConnectItem->port_name   = sDstPort;
-						pConnectItem->connected = true;
-						pPortItem->connects.append(pConnectItem);
-					//	pPortItem->connected++;
-					}
-					jack_free(connections);
-				} 
-				pClientItem->ports.append(pPortItem);
-			//	pClientItem->connected += pPortItem->connected;
-			}
-			jack_free(ports);
+	if (jack_session_notify) {
+	
+		jack_session_event_type_t etype = JackSessionSave;
+		switch (iSessionType) {
+		case 1:
+			etype = JackSessionSaveAndQuit;
+			break;
+		case 2:
+			etype = JackSessionSaveTemplate;
+			break;
 		}
+	
+		const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
+		const char *pszSessionPath = aSessionPath.constData();
+		jack_session_command_t *commands
+			= jack_session_notify(pJackClient, NULL, etype, pszSessionPath);
+		if (commands == NULL)
+			return false;
+	
+		// Second pass...
+		for (int k = 0; commands[k].uuid; ++k) {
+			jack_session_command_t *pCommand = &commands[k];
+			const QString sClientName
+				= QString::fromLocal8Bit(pCommand->client_name);
+			ClientItem *pClientItem;
+			if (m_clients.contains(sClientName)) {
+				pClientItem = m_clients.value(sClientName);
+			} else {
+				pClientItem = new ClientItem;
+				pClientItem->client_name = sClientName;
+				m_clients.insert(pClientItem->client_name, pClientItem);
+			}
+			pClientItem->client_uuid
+				= QString::fromLocal8Bit(pCommand->uuid);
+			pClientItem->client_command
+				= QString::fromLocal8Bit(pCommand->command);
+		}
+	
+		jack_session_commands_free(commands);
 	}
 
 #endif	// CONFIG_JACK_SESSION
@@ -183,7 +196,10 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 	ClientList::ConstIterator iter = m_clients.constBegin();
 	for ( ; iter != m_clients.constEnd(); ++iter) {
 		const ClientItem *pClientItem = iter.value();
-		const QString sClientDir = sSessionPath + pClientItem->client_name + '/';
+		if (pClientItem->client_command.isEmpty())
+			continue;
+		const QString sClientDir
+			= sSessionPath + pClientItem->client_name + '/';
 		QString sCommand = pClientItem->client_command;
 		sCommand.replace("${SESSION_DIR}", sClientDir);
 		if (QProcess::startDetached(sCommand))
@@ -224,16 +240,17 @@ bool qjackctlSession::update (void)
 		ClientItem *pClientItem = iter.value();
 		if (pClientItem->connected < 1)
 			continue;
+		QString sSrcClient = pClientItem->client_name;
 	#ifdef CONFIG_JACK_SESSION
-		const QByteArray aSrcUuid = pClientItem->client_uuid.toLocal8Bit();
-		const char *pszSrcUuid = aSrcUuid.constData(); 
-		const char *pszSrcClient
-			= jack_get_client_name_by_uuid(pJackClient, pszSrcUuid);
-		const QString sSrcClient = (pszSrcClient
-			? QString::fromLocal8Bit(pszSrcClient)
-			: pClientItem->client_name);
-	#else
-		const QString sSrcClient = pClientItem->client_name;
+		if (!pClientItem->client_uuid.isEmpty()) {
+			const QByteArray aSrcUuid
+				= pClientItem->client_uuid.toLocal8Bit();
+			const char *pszSrcUuid = aSrcUuid.constData(); 
+			const char *pszSrcClient
+				= jack_get_client_name_by_uuid(pJackClient, pszSrcUuid);
+			if (pszSrcClient)
+				sSrcClient = QString::fromLocal8Bit(pszSrcClient);
+		}
 	#endif
 		QListIterator<PortItem *> iterPort(pClientItem->ports);
 		while (iterPort.hasNext()) {
@@ -409,11 +426,15 @@ bool qjackctlSession::saveFile ( const QString& sFilename )
 		const ClientItem *pClientItem = iter.value();
 		QDomElement eClient = doc.createElement("client");
 		eClient.setAttribute("name", pClientItem->client_name);
-		eClient.setAttribute("uuid", pClientItem->client_uuid);
+		
+		if (!pClientItem->client_uuid.isEmpty())
+			eClient.setAttribute("uuid", pClientItem->client_uuid);
 
-		QDomElement eCommand = doc.createElement("command");
-		eCommand.appendChild(doc.createTextNode(pClientItem->client_command));
-		eClient.appendChild(eCommand);
+		if (!pClientItem->client_command.isEmpty()) {
+			QDomElement eCommand = doc.createElement("command");
+			eCommand.appendChild(doc.createTextNode(pClientItem->client_command));
+			eClient.appendChild(eCommand);
+		}
 
 		QListIterator<PortItem *> iterPort(pClientItem->ports);
 		while (iterPort.hasNext()) {

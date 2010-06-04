@@ -483,6 +483,11 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.RecentSessionPushButton->setEnabled(bEnabled);
 	m_ui.SaveSessionPushButton->setEnabled(bEnabled);
 	m_ui.SaveSessionComboBox->setEnabled(bEnabled);
+
+	if (!bEnabled) {
+		m_pSession->clear();
+		m_ui.SessionTreeView->clear();
+	}
 }
 
 
