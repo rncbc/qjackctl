@@ -1964,7 +1964,7 @@ všech skutečných klientských spojení?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="46"/>
-        <location filename="../qjackctlSessionForm.cpp" line="502"/>
+        <location filename="../qjackctlSessionForm.cpp" line="507"/>
         <source>&amp;Load...</source>
         <translation type="unfinished">&amp;Nahrát...</translation>
     </message>
@@ -1986,7 +1986,7 @@ všech skutečných klientských spojení?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="82"/>
-        <location filename="../qjackctlSessionForm.cpp" line="510"/>
+        <location filename="../qjackctlSessionForm.cpp" line="515"/>
         <source>&amp;Save...</source>
         <translation type="unfinished">&amp;Uložit...</translation>
     </message>
@@ -2012,7 +2012,7 @@ všech skutečných klientských spojení?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="114"/>
-        <location filename="../qjackctlSessionForm.cpp" line="521"/>
+        <location filename="../qjackctlSessionForm.cpp" line="526"/>
         <source>&amp;Refresh</source>
         <translation type="unfinished">&amp;Obnovit</translation>
     </message>
@@ -2116,12 +2116,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="513"/>
+        <location filename="../qjackctlSessionForm.cpp" line="518"/>
         <source>Save and &amp;Quit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="516"/>
+        <location filename="../qjackctlSessionForm.cpp" line="521"/>
         <source>Save &amp;Template...</source>
         <translation type="unfinished"></translation>
     </message>
