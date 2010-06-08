@@ -637,6 +637,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(showAboutForm()));
 		dbus.connect(s, s, sDBusName, "quit",
 			this, SLOT(quitMainForm()));
+		dbus.connect(s, s, sDBusName, "preset",
+			this, SLOT(activatePreset(const QString&)));
 		// Session related slots...
 		if (m_pSessionForm) {
 			dbus.connect(s, s, sDBusName, "load",
@@ -3480,13 +3482,26 @@ void qjackctlMainForm::showDirtySetupWarning (void)
 }
 
 
-// Select the current default preset name from context menu.
+// Select the current default preset (by name from context menu).
 void qjackctlMainForm::activatePresetsMenu ( QAction *pAction )
+{
+	activatePreset(pAction->data().toInt());
+}
+
+
+// Select the current default preset (by name).
+void qjackctlMainForm::activatePreset ( const QString& sPreset )
+{
+	activatePreset(m_pSetup->presets.indexOf(sPreset));
+}
+
+
+// Select the current default preset (by index).
+void qjackctlMainForm::activatePreset ( int iPreset )
 {
 	if (m_pConnectionsForm && !m_pConnectionsForm->queryClose())
 		return;
 
-	int iPreset = pAction->data().toInt();
 	if (iPreset >= 0 && iPreset < m_pSetup->presets.count())
 		m_pSetup->sDefPreset = m_pSetup->presets[iPreset];
 	else

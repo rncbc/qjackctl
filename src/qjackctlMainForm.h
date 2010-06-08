@@ -145,6 +145,8 @@ protected slots:
 
 	void systemTrayContextMenu(const QPoint&);
 	void activatePresetsMenu(QAction *);
+	void activatePreset(const QString&);
+	void activatePreset(int);
 
 	void quitMainForm();
 
