@@ -3094,6 +3094,18 @@ Vuoi applicare i cambiamenti?</translation>
         <source>Single application &amp;instance</source>
         <translation type="unfinished">Permetti una sola &amp;istanza</translation>
     </message>
+    <message>
+        <source>&amp;Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The JACK Audio Connection Kit sound server name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Server Name</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlSocketForm</name>

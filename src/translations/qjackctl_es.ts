@@ -3014,6 +3014,18 @@ Do you want to apply the changes?</source>
         <source>Single application &amp;instance</source>
         <translation>Una sola &amp;instancia</translation>
     </message>
+    <message>
+        <source>&amp;Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The JACK Audio Connection Kit sound server name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Server Name</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlSocketForm</name>
