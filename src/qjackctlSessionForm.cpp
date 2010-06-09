@@ -70,15 +70,9 @@ qjackctlSessionForm::qjackctlSessionForm (
 	QObject::connect(m_ui.LoadSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(loadSession()));
-
-#ifdef CONFIG_JACK_SESSION
 	QObject::connect(m_ui.SaveSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(saveSession()));
-#else
-	m_ui.SaveSessionPushButton->setEnabled(false);
-	m_ui.SaveSessionComboBox->setEnabled(false);
-#endif
 
 	QObject::connect(m_ui.UpdateSessionPushButton,
 		SIGNAL(clicked()),
@@ -150,7 +144,13 @@ void qjackctlSessionForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 // Open/load session from specific file path.
 void qjackctlSessionForm::loadSession (void)
 {
-#if 1
+#if 0
+	QString sSessionDir;
+	if (!m_sessionDirs.isEmpty())
+		sSessionDir = m_sessionDirs.first();
+	sSessionDir = QFileDialog::getExistingDirectory(
+		this, tr("Load Session"), sSessionDir);
+#else
 	QFileDialog loadDialog(this, tr("Load Session"));
 
 	loadDialog.setAcceptMode(QFileDialog::AcceptOpen);
@@ -166,12 +166,6 @@ void qjackctlSessionForm::loadSession (void)
 		return;
 
 	QString sSessionDir = loadDialog.selectedFiles().first();
-#else
-	QString sSessionDir;
-	if (!m_sessionDirs.isEmpty())
-		sSessionDir = m_sessionDirs.first();
-	sSessionDir = QFileDialog::getExistingDirectory(
-		this, tr("Load Session"), sSessionDir);
 #endif
 
 	loadSessionDir(sSessionDir);
@@ -223,7 +217,13 @@ void qjackctlSessionForm::saveSessionEx ( int iSessionType )
 		break;
 	}
 
-#if 1
+#if 0
+	QString sSessionDir;
+	if (!m_sessionDirs.isEmpty())
+		sSessionDir = m_sessionDirs.first();
+	sSessionDir = QFileDialog::getExistingDirectory(
+		this, sTitle, sSessionDir);
+#else
 	QFileDialog saveDialog(this, sTitle);
 
 	saveDialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -239,12 +239,6 @@ void qjackctlSessionForm::saveSessionEx ( int iSessionType )
 		return;
 
 	QString sSessionDir = saveDialog.selectedFiles().first();
-#else
-	QString sSessionDir;
-	if (!m_sessionDirs.isEmpty())
-		sSessionDir = m_sessionDirs.first();
-	sSessionDir = QFileDialog::getExistingDirectory(
-		this, sTitle, sSessionDir);
 #endif
 
 	saveSessionDir(sSessionDir, iSessionType);
@@ -509,11 +503,11 @@ void qjackctlSessionForm::contextMenuEvent (
 	QMenu *pRecentMenu = recentMenu();
 	pAction = menu.addMenu(pRecentMenu);
 	pAction->setEnabled(bEnabled && !pRecentMenu->isEmpty());
-#ifdef CONFIG_JACK_SESSION
 	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/images/save1.png"),
 		tr("&Save..."), this, SLOT(saveSessionSave()));
 	pAction->setEnabled(bEnabled);
+#ifdef CONFIG_JACK_SESSION
 	pAction = menu.addAction(
 		tr("Save and &Quit..."), this, SLOT(saveSessionSaveAndQuit()));
 	pAction->setEnabled(bEnabled);

@@ -643,9 +643,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		if (m_pSessionForm) {
 			dbus.connect(s, s, sDBusName, "load",
 				m_pSessionForm, SLOT(loadSession()));
-		#ifdef CONFIG_JACK_SESSION
 			dbus.connect(s, s, sDBusName, "save",
 				m_pSessionForm, SLOT(saveSessionSave()));
+		#ifdef CONFIG_JACK_SESSION
 			dbus.connect(s, s, sDBusName, "savequit",
 				m_pSessionForm, SLOT(saveSessionSaveAndQuit()));
 			dbus.connect(s, s, sDBusName, "savetemplate",
@@ -3369,12 +3369,12 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		QMenu *pRecentMenu = m_pSessionForm->recentMenu();
 		pAction = pSessionMenu->addMenu(pRecentMenu);
 		pAction->setEnabled(m_pJackClient != NULL && !pRecentMenu->isEmpty());
-	#ifdef CONFIG_JACK_SESSION
 		pSessionMenu->addSeparator();
 		pAction = pSessionMenu->addAction(QIcon(":/images/save1.png"),
 			tr("&Save..."),
 			m_pSessionForm, SLOT(saveSessionSave()));
 		pAction->setEnabled(bEnabled);
+	#ifdef CONFIG_JACK_SESSION
 		pAction = pSessionMenu->addAction(
 			tr("Save and &Quit..."),
 			m_pSessionForm, SLOT(saveSessionSaveAndQuit()));

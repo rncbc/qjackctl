@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.25, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.26, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -270,14 +270,28 @@ if test "x$ac_coreaudio" = "xyes"; then
    ac_libs="-framework CoreAudio -framework CoreFoundation $ac_libs"
 fi
 
-# Check for some JACK MIDI headers.
+# Check for JACK MIDI headers availability.
 if test "x$ac_jack_midi" = "xyes"; then
    AC_CHECK_HEADER(jack/midiport.h, [ac_jack_midi="yes"], [ac_jack_midi="no"])
+   if test "x$ac_jack_midi" = "xyes"; then
+	  AC_DEFINE(CONFIG_JACK_MIDI, 1, [Define if JACK MIDI support is available.])
+   else
+	  AC_MSG_WARN([*** jack/midiport.h file not found.])
+	  AC_MSG_WARN([*** JACK 0.103.0 or later may be required.])
+	  AC_MSG_WARN([*** JACK MIDI support will be disabled.])
+   fi
 fi
 
 # Check for JACK session headers availability.
 if test "x$ac_jack_session" = "xyes"; then
    AC_CHECK_HEADER(jack/session.h, [ac_jack_session="yes"], [ac_jack_session="no"])
+   if test "x$ac_jack_session" = "xyes"; then
+	  AC_DEFINE(CONFIG_JACK_SESSION, 1, [Define if JACK session support is available.])
+   else
+	  AC_MSG_WARN([*** jack/session.h file not found.])
+	  AC_MSG_WARN([*** JACK 0.118.3 or later may be required.])
+	  AC_MSG_WARN([*** JACK session support will be disabled.])
+   fi
 fi
 
 # Check for ALSA headers and ultimately
@@ -356,30 +370,6 @@ fi
 AC_CHECK_LIB(jack, jack_port_get_aliases, [ac_jack_port_aliases="yes"], [ac_jack_port_aliases="no"])
 if test "x$ac_jack_port_aliases" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_PORT_ALIASES, 1, [Define if jack_port_get_aliases is available.])
-fi
-
-# Check for JACK MIDI library support.
-if test "x$ac_jack_midi" = "xyes"; then
-   AC_CHECK_LIB(jack, jack_midi_event_get, [ac_jack_midi="yes"], [ac_jack_midi="no"])
-   if test "x$ac_jack_midi" = "xno"; then
-      AC_MSG_WARN([*** jack_midi_event_get: function not found.])
-      AC_MSG_WARN([*** JACK 0.103.0 or later may be required.])
-      AC_MSG_WARN([*** JACK MIDI support will be disabled.])
-   else
-      AC_DEFINE(CONFIG_JACK_MIDI, 1, [Define if JACK MIDI support is available.])
-   fi
-fi
-
-# Check for JACK session event callback availability.
-if test "x$ac_jack_session" = "xyes"; then
-   AC_CHECK_LIB(jack, jack_session_notify, [ac_jack_session="yes"], [ac_jack_session="no"])
-   if test "x$ac_jack_session" = "xyes"; then
-      AC_DEFINE(CONFIG_JACK_SESSION, 1, [Define if JACK session support is available.])
-   else
-      AC_MSG_WARN([*** jack_session_notify: function not found.])
-      AC_MSG_WARN([*** JACK 0.118.3 or later may be required.])
-      AC_MSG_WARN([*** JACK session support will be disabled.])
-   fi
 fi
 
 # Check for jack_get_version_string function.
