@@ -47,6 +47,7 @@ class QSplitter;
 struct qjackctlPreset
 {
 	QString sServer;
+	QString sServerName;
 	bool    bRealtime;
 	bool    bSoftMode;
 	bool    bMonitor;

@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Server name is finally part of the server settings presets,
+  thanks to Fons Adriaensen for the heads-up. (EXPERIMENTAL)
+
 - As a workaround regarding issues switching jack2's backends,
   Robin Gareus sends us yet another D-Bus metho slot: "preset",
   (dbus-send --system / org.rncbc.qjackctl.preset string:PRESET).

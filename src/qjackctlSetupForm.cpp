@@ -137,6 +137,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.ServerComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
+	QObject::connect(m_ui.ServerNameComboBox,
+		SIGNAL(editTextChanged(const QString&)),
+		SLOT(settingsChanged()));
 	QObject::connect(m_ui.DriverComboBox,
 		SIGNAL(activated(int)),
 		SLOT(settingsChanged()));
@@ -470,6 +473,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 
 	// Load combo box history...
 	m_pSetup->loadComboBoxHistory(m_ui.ServerComboBox);
+	m_pSetup->loadComboBoxHistory(m_ui.ServerNameComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.InterfaceComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.InDeviceComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.OutDeviceComboBox);
@@ -650,6 +654,10 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 	qjackctlPreset preset;
 	if (m_pSetup->loadPreset(preset, sPreset)) {
 		setComboBoxCurrentText(m_ui.ServerComboBox, preset.sServer);
+		setComboBoxCurrentText(m_ui.ServerNameComboBox,
+			preset.sServerName.isEmpty()
+			? m_pSetup->sDefPresetName
+			: preset.sServerName);
 		m_ui.RealtimeCheckBox->setChecked(preset.bRealtime);
 		m_ui.SoftModeCheckBox->setChecked(preset.bSoftMode);
 		m_ui.MonitorCheckBox->setChecked(preset.bMonitor);
@@ -716,6 +724,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 	// Unload settings.
 	qjackctlPreset preset;
 	preset.sServer      = m_ui.ServerComboBox->currentText();
+	preset.sServerName  = m_ui.ServerNameComboBox->currentText();
 	preset.bRealtime    = m_ui.RealtimeCheckBox->isChecked();
 	preset.bSoftMode    = m_ui.SoftModeCheckBox->isChecked();
 	preset.bMonitor     = m_ui.MonitorCheckBox->isChecked();
@@ -749,6 +758,8 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 #ifdef CONFIG_JACK_MIDI
 	preset.sMidiDriver  = m_ui.MidiDriverComboBox->currentText();
 #endif
+	if (preset.sServerName == m_pSetup->sDefPresetName)
+		preset.sServerName.clear();
 	if (preset.sInterface == m_pSetup->sDefPresetName)
 		preset.sInterface.clear();
 	if (preset.sInDevice == m_pSetup->sDefPresetName)
@@ -1491,6 +1502,7 @@ void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit,
 
 	menu.addAction("%P" + s + tr("&Preset Name"));
 	menu.addSeparator();
+	menu.addAction("%N" + s + tr("&Server Name"));
 	menu.addAction("%s" + s + tr("&Server Path"));
 	menu.addAction("%d" + s + tr("&Driver"));
 	menu.addAction("%i" + s + tr("&Interface"));
@@ -1807,6 +1819,7 @@ void qjackctlSetupForm::accept (void)
 
 	// Save combobox history...
 	m_pSetup->saveComboBoxHistory(m_ui.ServerComboBox);
+	m_pSetup->saveComboBoxHistory(m_ui.ServerNameComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.InterfaceComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.InDeviceComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.OutDeviceComboBox);

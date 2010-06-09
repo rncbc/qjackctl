@@ -887,7 +887,7 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
 	QString sTemp = sShellCommand;
 
 	sTemp.replace("%P", m_pSetup->sDefPreset);
-
+	sTemp.replace("%N", m_pSetup->sServerName);
 	sTemp.replace("%s", m_preset.sServer);
 	sTemp.replace("%d", m_preset.sDriver);
 	sTemp.replace("%i", m_preset.sInterface);
@@ -950,7 +950,6 @@ void qjackctlMainForm::startJack (void)
 	}
 
 	// Now we're sure it ain't detached.
-	updateServerState(QJACKCTL_STARTING);
 	m_bJackShutdown = false;
 	m_bJackDetach = false;
 
@@ -964,6 +963,21 @@ void qjackctlMainForm::startJack (void)
 			return;
 		}
 	}
+
+	// Override server name now...
+	if (m_pSetup->sServerName.isEmpty())
+		m_pSetup->sServerName = m_preset.sServerName;
+
+#if 0 // defined(__GNUC__) && defined(Q_OS_LINUX)
+	// Take care for the environment as well...
+	if (!m_pSetup->sServerName.isEmpty()) {
+		setenv("JACK_DEFAULT_SERVER",
+			m_pSetup->sServerName.toUtf8().constData(), 1);
+	}
+#endif
+
+	// Say that we're starting...
+	updateServerState(QJACKCTL_STARTING);
 
 	// Do we have any startup script?...
 	if (m_pSetup->bStartupScript
@@ -1438,6 +1452,9 @@ void qjackctlMainForm::jackCleanup (void)
 			tr("Post-shutdown script..."),
 			tr("Post-shutdown script terminated"));
 	}
+
+	// Reset server name.
+	m_pSetup->sServerName.clear();
 
 	// Stabilize final server state...
 	jackStabilize();

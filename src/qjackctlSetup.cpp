@@ -66,14 +66,14 @@ void qjackctlSetup::loadSetup (void)
 	bSingleton               = m_settings.value("/Singleton", true).toBool();
 //	sServerName              = m_settings.value("/ServerName").toString();
 	bStartJack               = m_settings.value("/StartJack", false).toBool();
-	bStartupScript           = m_settings.value("/StartupScript", true).toBool();
-	sStartupScriptShell      = m_settings.value("/StartupScriptShell", "artsshell -q terminate").toString();
+	bStartupScript           = m_settings.value("/StartupScript", false).toBool();
+	sStartupScriptShell      = m_settings.value("/StartupScriptShell").toString();
 	bPostStartupScript       = m_settings.value("/PostStartupScript", false).toBool();
 	sPostStartupScriptShell  = m_settings.value("/PostStartupScriptShell").toString();
 	bShutdownScript          = m_settings.value("/ShutdownScript", false).toBool();
 	sShutdownScriptShell     = m_settings.value("/ShutdownScriptShell").toString();
-	bPostShutdownScript      = m_settings.value("/PostShutdownScript", true).toBool();
-	sPostShutdownScriptShell = m_settings.value("/PostShutdownScriptShell", "killall jackd").toString();
+	bPostShutdownScript      = m_settings.value("/PostShutdownScript", false).toBool();
+	sPostShutdownScriptShell = m_settings.value("/PostShutdownScriptShell").toString();
 	bStdoutCapture           = m_settings.value("/StdoutCapture", true).toBool();
 	sXrunRegex               = m_settings.value("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs").toString();
 	bActivePatchbay          = m_settings.value("/ActivePatchbay", false).toBool();
@@ -336,6 +336,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 
 	m_settings.beginGroup("/Settings" + sSuffix);
 	preset.sServer      = m_settings.value("/Server", "jackd").toString();
+	preset.sServerName  = m_settings.value("/ServerName").toString();
 	preset.bRealtime    = m_settings.value("/Realtime", true).toBool();
 	preset.bSoftMode    = m_settings.value("/SoftMode", false).toBool();
 	preset.bMonitor     = m_settings.value("/Monitor", false).toBool();
@@ -391,6 +392,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 
 	m_settings.beginGroup("/Settings" + sSuffix);
 	m_settings.setValue("/Server",      preset.sServer);
+	m_settings.setValue("/ServerName",  preset.sServerName);
 	m_settings.setValue("/Realtime",    preset.bRealtime);
 	m_settings.setValue("/SoftMode",    preset.bSoftMode);
 	m_settings.setValue("/Monitor",     preset.bMonitor);
