@@ -942,13 +942,6 @@ void qjackctlMainForm::startJack (void)
 	m_iTimerDelay  = 0;
 	m_iJackRefresh = 0;
 
-	// If we ain't to be the server master, maybe we'll start
-	// detached as client only (jackd server already running?)
-	if (startJackClient(true)) {
-		m_ui.StopToolButton->setEnabled(true);
-		return;
-	}
-
 	// Now we're sure it ain't detached.
 	m_bJackShutdown = false;
 	m_bJackDetach = false;
@@ -975,6 +968,13 @@ void qjackctlMainForm::startJack (void)
 			m_pSetup->sServerName.toUtf8().constData(), 1);
 	}
 #endif
+
+	// If we ain't to be the server master, maybe we'll start
+	// detached as client only (jackd server already running?)
+	if (startJackClient(true)) {
+		m_ui.StopToolButton->setEnabled(true);
+		return;
+	}
 
 	// Say that we're starting...
 	updateServerState(QJACKCTL_STARTING);
