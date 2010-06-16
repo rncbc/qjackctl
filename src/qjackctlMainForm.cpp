@@ -995,13 +995,13 @@ void qjackctlMainForm::startJack (void)
 	QString sCommand = args[0];
 	QFileInfo fi(sCommand);
 	if (fi.isRelative()) {
-#if defined(WIN32)
+	#if defined(WIN32)
 		const char chPathSep = ';';
 		if (fi.suffix().isEmpty())
 			sCommand += ".exe";
-#else
+	#else
 		const char chPathSep = ':';
-#endif
+	#endif
 		const QString sPath = ::getenv("PATH");
 		QStringList paths = sPath.split(chPathSep);
 		QStringListIterator iter(paths);
@@ -1495,11 +1495,11 @@ QString& qjackctlMainForm::detectXrun ( QString& s )
 	if (iPos >= 0) {
 		s.insert(iPos + rx.matchedLength(), "</font>");
 		s.insert(iPos, "<font color=\"#cc0000\">");
-#ifndef CONFIG_JACK_XRUN_DELAY
+	#ifndef CONFIG_JACK_XRUN_DELAY
 		m_tXrunLast.restart();
 		updateXrunStats(rx.cap(1).toFloat());
 		refreshXrunStats();
-#endif
+	#endif
 	}
 	return s;
 }
@@ -2208,10 +2208,8 @@ void qjackctlMainForm::timerSlot (void)
 		if (m_iTimerDelay >= m_iStartDelay) {
 			// If we cannot start it now,
 			// maybe we ought to cease & desist...
-			if (!startJackClient(false)) {
-				stopJackServer();
-				return;
-			}
+			if (!startJackClient(false))
+				stopJackServer();			
 		}
 	}
 
@@ -2240,7 +2238,7 @@ void qjackctlMainForm::timerSlot (void)
 			}
 			refreshAlsaConnections();
 		}
-#ifdef CONFIG_AUTO_REFRESH
+	#ifdef CONFIG_AUTO_REFRESH
 		// Shall we refresh connections now and then?
 		if (m_pSetup->bAutoRefresh) {
 			m_iTimerRefresh += QJACKCTL_TIMER_MSECS;
@@ -2249,7 +2247,7 @@ void qjackctlMainForm::timerSlot (void)
 				refreshConnections();
 			}
 		}
-#endif
+	#endif
 		// Are we about to refresh it, really?
 		if (m_iJackRefresh > 0) {
 			m_iJackRefresh = 0;
@@ -2991,7 +2989,7 @@ void qjackctlMainForm::refreshStatus (void)
 
 	if (m_pJackClient) {
 		const QString s = " ";
-#ifdef CONFIG_JACK_TRANSPORT
+	#ifdef CONFIG_JACK_TRANSPORT
 		QString sText = n;
 		jack_position_t tpos;
 		jack_transport_state_t tstate = jack_transport_query(m_pJackClient, &tpos);
@@ -3012,7 +3010,7 @@ void qjackctlMainForm::refreshStatus (void)
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
 		}
-#endif  // !CONFIG_JACK_TRANSPORT
+	#endif  // !CONFIG_JACK_TRANSPORT
 		// Less frequent status items update...
 		if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 			m_iStatusRefresh = 0;
@@ -3033,16 +3031,16 @@ void qjackctlMainForm::refreshStatus (void)
 					(++m_iStatusBlink % 2) ? Qt::darkYellow: Qt::yellow);
 				m_ui.ServerModeTextLabel->setPalette(pal);
 			}
-#ifdef CONFIG_JACK_REALTIME
+		#ifdef CONFIG_JACK_REALTIME
 			bool bRealtime = jack_is_realtime(m_pJackClient);
 			updateStatusItem(STATUS_REALTIME,
 				(bRealtime ? tr("Yes") : tr("No")));
 			m_ui.ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
-#else
+		#else
 			updateStatusItem(STATUS_REALTIME, n);
 			m_ui.ServerModeTextLabel->setText(n);
-#endif  // !CONFIG_JACK_REALTIME
-#ifdef CONFIG_JACK_TRANSPORT
+		#endif  // !CONFIG_JACK_REALTIME
+		#ifdef CONFIG_JACK_TRANSPORT
 			switch (tstate) {
 			case JackTransportStarting:
 				sText = tr("Starting");
@@ -3068,7 +3066,7 @@ void qjackctlMainForm::refreshStatus (void)
 			if (!m_ui.BackwardToolButton->isDown() &&
 				!m_ui.ForwardToolButton->isDown())
 				m_fSkipAccel = 1.0;
-#else
+		#else
 			updateStatusItem(STATUS_TRANSPORT_STATE, n);
 			m_ui.RewindToolButton->setEnabled(false);
 			m_ui.BackwardToolButton->setEnabled(false);
@@ -3079,11 +3077,11 @@ void qjackctlMainForm::refreshStatus (void)
 			updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
-#endif  // !CONFIG_JACK_TRANSPORT
-#ifdef CONFIG_JACK_MAX_DELAY
+		#endif  // !CONFIG_JACK_TRANSPORT
+		#ifdef CONFIG_JACK_MAX_DELAY
 			updateStatusItem(STATUS_MAX_DELAY, tr("%1 msec")
 				.arg(0.001f * jack_get_max_delayed_usecs(m_pJackClient)));
-#endif
+		#endif
 			// Check if we're have some XRUNs to report...
 			if (m_iXrunSkips > 0) {
 				// Maybe we've skipped some...
@@ -3697,7 +3695,6 @@ void qjackctlMainForm::setDBusParameters (void)
 			m_preset.iOutLatency > 0);
 	}
 }
-
 
 
 // D-BUS: Set parameter values (with reset option).
