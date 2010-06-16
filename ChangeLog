@@ -5,6 +5,13 @@ ChangeLog
 
 SVN TRUNK
 
+- Client connection retrial logic scrapped. Being a leftover
+  from early ages, when machines were slower and JACK server
+  startup times were longer... now, if it can't connect first
+  time as client, it will tear down the server whether it's
+  starting up still or not at all. (cf. Setup/Settings/Start
+  Delay for the rescue).
+
 - Server name is finally part of the server settings presets,
   thanks to Fons Adriaensen for the heads-up. (EXPERIMENTAL)
 
