@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Avoid pre-loading a stalled patchbay definition filename
+  and its nagging error on startup (fixes bug #3017078).
+
 - Client connection retrial logic scrapped. Being a leftover
   from early ages, when machines were slower and JACK server
   startup times were longer... now, if it can't connect first

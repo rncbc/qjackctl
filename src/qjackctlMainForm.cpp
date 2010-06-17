@@ -706,7 +706,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	// Load patchbay form recent paths...
 	if (m_pPatchbayForm) {
 		m_pPatchbayForm->setRecentPatchbays(m_pSetup->patchbays);
-		if (!m_pSetup->sPatchbayPath.isEmpty())
+		if (!m_pSetup->sPatchbayPath.isEmpty()
+			&& QFileInfo(m_pSetup->sPatchbayPath).exists())
 			m_pPatchbayForm->loadPatchbayFile(m_pSetup->sPatchbayPath);
 		m_pPatchbayForm->updateRecentPatchbays();
 		m_pPatchbayForm->stabilizeForm();
@@ -1865,7 +1866,7 @@ void qjackctlMainForm::setActivePatchbay ( const QString& sPatchbayPath )
 {
 	if (m_pSetup == NULL)
 		return;
-		
+
 	if (sPatchbayPath.isEmpty()) {
 		m_pSetup->bActivePatchbay = false;
 	} else {
