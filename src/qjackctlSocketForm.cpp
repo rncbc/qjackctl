@@ -129,11 +129,11 @@ qjackctlSocketForm::qjackctlSocketForm (
 		SIGNAL(activated(int)),
 		SLOT(changed()));
 
-	QObject::connect(m_ui.OkPushButton,
-		SIGNAL(clicked()),
+	QObject::connect(m_ui.DialogButtonBox,
+		SIGNAL(accepted()),
 		SLOT(accept()));
-	QObject::connect(m_ui.CancelPushButton,
-		SIGNAL(clicked()),
+	QObject::connect(m_ui.DialogButtonBox,
+		SIGNAL(rejected()),
 		SLOT(reject()));
 }
 
@@ -275,7 +275,8 @@ void qjackctlSocketForm::save ( qjackctlPatchbaySocket *pSocket )
 // Stabilize current state form.
 void qjackctlSocketForm::stabilizeForm (void)
 {
-	m_ui.OkPushButton->setEnabled(validateForm());
+	m_ui.DialogButtonBox->button(
+		QDialogButtonBox::Ok)->setEnabled(validateForm());
 
 	QTreeWidgetItem *pItem = m_ui.PlugListView->currentItem();
 	if (pItem) {

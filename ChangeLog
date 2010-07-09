@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- General standard dialog buttons layout is now in place.
+
 - Avoid pre-loading a stalled patchbay definition filename
   and its nagging error on startup (fixes bug #3017078).
 

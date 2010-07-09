@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.30, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.31, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -152,14 +152,14 @@ for X in $ac_with_paths; do
 done
 
 # Check for proper Qt version.
-AC_CACHE_CHECK([for Qt library version >= 4.1],
+AC_CACHE_CHECK([for Qt library version >= 4.2],
   ac_cv_qtversion, [
   AC_TRY_LINK([#include "Qt/qglobal.h"], [
-#if QT_VERSION < 0x040100
-#error Qt library 4.1 or greater required.
+#if QT_VERSION < 0x040200
+#error Qt library 4.2 or greater required.
 #endif
     ], ac_cv_qtversion="yes", [
-      echo "no; Qt 4.1 or greater is required"
+      echo "no; Qt 4.2 or greater is required"
       exit
     ])
 ])

@@ -3595,14 +3595,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation>Skrýt textové popisky &amp;tlačítek v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4344"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4354"/>
         <source>Cancel</source>
-        <translation>Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="803"/>
@@ -4067,14 +4065,12 @@ Chcete použít změny?</translation>
         <translation>Alt+S</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.ui" line="386"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.ui" line="402"/>
         <source>Cancel</source>
-        <translation>Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.cpp" line="153"/>
@@ -4082,22 +4078,22 @@ Chcete použít změny?</translation>
         <translation>Zástrčky/Přípojky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="332"/>
+        <location filename="../qjackctlSocketForm.cpp" line="333"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="333"/>
+        <location filename="../qjackctlSocketForm.cpp" line="334"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation>Zásuvka s názvem &quot;%1&quot; již existuje.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="352"/>
+        <location filename="../qjackctlSocketForm.cpp" line="353"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="353"/>
+        <location filename="../qjackctlSocketForm.cpp" line="354"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4114,32 +4110,32 @@ Chcete použít změny?</translation>
         <translation type="obsolete">Odmítnout</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="542"/>
+        <location filename="../qjackctlSocketForm.cpp" line="543"/>
         <source>Add Plug</source>
         <translation>Přidat zástrčku</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="556"/>
+        <location filename="../qjackctlSocketForm.cpp" line="557"/>
         <source>Edit</source>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="559"/>
+        <location filename="../qjackctlSocketForm.cpp" line="560"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="563"/>
+        <location filename="../qjackctlSocketForm.cpp" line="564"/>
         <source>Move Up</source>
         <translation>Přesunout nahoru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="566"/>
+        <location filename="../qjackctlSocketForm.cpp" line="567"/>
         <source>Move Down</source>
         <translation>Přesunout dolů</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="745"/>
+        <location filename="../qjackctlSocketForm.cpp" line="746"/>
         <source>(None)</source>
         <translation>(Žádný)</translation>
     </message>

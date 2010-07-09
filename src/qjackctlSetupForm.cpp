@@ -425,11 +425,11 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 
-	QObject::connect(m_ui.OkPushButton,
-		SIGNAL(clicked()),
+	QObject::connect(m_ui.DialogButtonBox,
+		SIGNAL(accepted()),
 		SLOT(accept()));
-	QObject::connect(m_ui.CancelPushButton,
-		SIGNAL(clicked()),
+	QObject::connect(m_ui.DialogButtonBox,
+		SIGNAL(rejected()),
 		SLOT(reject()));
 
 	// Try to restore old window positioning.
@@ -1136,7 +1136,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
 
-	m_ui.OkPushButton->setEnabled(bValid);
+	m_ui.DialogButtonBox->button(QDialogButtonBox::Ok)->setEnabled(bValid);
 }
 
 
