@@ -839,7 +839,7 @@ void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
 
 void qjackctlMainForm::customEvent ( QEvent *pEvent )
 {
-	switch (pEvent->type()) {
+	switch (int(pEvent->type())) {
 	case QJACKCTL_PORT_EVENT:
 		portNotifyEvent();
 		break;
