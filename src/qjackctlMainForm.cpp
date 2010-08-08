@@ -1161,7 +1161,7 @@ void qjackctlMainForm::startJack (void)
 	}
 	if (bDummy && m_preset.iWait > 0 && m_preset.iWait != 21333)
 		args.append("-w" + QString::number(m_preset.iWait));
-	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob) {
+	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob || bFirewire) {
 		if (m_preset.iInLatency > 0)
 			args.append("-I" + QString::number(m_preset.iInLatency));
 		if (m_preset.iOutLatency > 0)
