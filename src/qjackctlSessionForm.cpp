@@ -26,7 +26,6 @@
 #include "qjackctlMainForm.h"
 
 #include <QMenu>
-#include <QFileInfo>
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -335,6 +334,32 @@ void qjackctlSessionForm::loadSessionDir ( const QString& sSessionDir )
 }
 
 
+// Remove specific file path.
+void qjackctlSessionForm::removeDir ( const QString& sDir )
+{
+	QDir dir(sDir);
+
+	qjackctlSessionForm::removeDirList(
+		dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot));
+
+	dir.rmdir(sDir);
+}
+
+void qjackctlSessionForm::removeDirList ( const QList<QFileInfo>& dirlist )
+{
+	QListIterator<QFileInfo> iter(dirlist);
+	while (iter.hasNext()) {
+		const QFileInfo& info = iter.next();
+		const QString& sPath = info.absoluteFilePath();
+		if (info.isDir()) {
+			removeDir(sPath);
+		} else {
+			QDir().remove(sPath);
+		}
+	}
+}
+
+
 // Save current session to specific file path.
 void qjackctlSessionForm::saveSessionDir (
 	const QString& sSessionDir, int iSessionType )
@@ -343,22 +368,25 @@ void qjackctlSessionForm::saveSessionDir (
 		return;
 
 	QDir sessionDir(sSessionDir);
-	if (sessionDir.exists("session.xml")) {
-		if (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
-			tr("A session already exists in this folder:\n\n\"%1\"\n\n"
-			"Are you sure to overwrite the existing session?").arg(sSessionDir),
-			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
-			return;
-	}
-	else
-	if (!sessionDir.entryList(QDir::AllEntries | QDir::NoDotAndDotDot).isEmpty()) {
-		if (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
-			tr("This folder already exists and is not empty:\n\n\"%1\"\n\n"
-			"Are you sure to overwrite the existing folder?").arg(sSessionDir),
-			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
-			return;
+	QList<QFileInfo> dirlist
+		= sessionDir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
+	if (!dirlist.isEmpty()) {
+		if (sessionDir.exists("session.xml")) {
+			if (QMessageBox::warning(this,
+				tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+				tr("A session already exists in this folder:\n\n\"%1\"\n\n"
+				"Are you sure to overwrite the existing session?").arg(sSessionDir),
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
+				return;
+		} else {
+			if (QMessageBox::warning(this,
+				tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+				tr("This folder already exists and is not empty:\n\n\"%1\"\n\n"
+				"Are you sure to overwrite the existing folder?").arg(sSessionDir),
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
+				return;
+		}
+		qjackctlSessionForm::removeDirList(dirlist);
 	}
 	else
 	if (!sessionDir.exists())
