@@ -100,9 +100,6 @@ protected:
 
 	static QIcon iconStatus(const QIcon& icon, bool bStatus);
 
-	static void removeDir(const QString& sDir);
-	static void removeDirList(const QList<QFileInfo>& dirlist);
-
 private:
 
 	// The Qt-designer UI struct...

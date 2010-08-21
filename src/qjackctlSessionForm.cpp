@@ -26,6 +26,7 @@
 #include "qjackctlMainForm.h"
 
 #include <QMenu>
+#include <QFileInfo>
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -37,6 +38,35 @@
 
 #include <QShowEvent>
 #include <QHideEvent>
+
+// Local prototypes.
+static void remove_dir_list(const QList<QFileInfo>& list);
+static void remove_dir(const QString& sDir);
+
+// Remove specific file path.
+static void remove_dir ( const QString& sDir )
+{
+	QDir dir(sDir);
+
+	remove_dir_list(
+		dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot));
+
+	dir.rmdir(sDir);
+}
+
+void remove_dir_list ( const QList<QFileInfo>& list )
+{
+	QListIterator<QFileInfo> iter(list);
+	while (iter.hasNext()) {
+		const QFileInfo& info = iter.next();
+		const QString& sPath = info.absoluteFilePath();
+		if (info.isDir()) {
+			remove_dir(sPath);
+		} else {
+			QFile::remove(sPath);
+		}
+	}
+}
 
 
 //----------------------------------------------------------------------------
@@ -334,32 +364,6 @@ void qjackctlSessionForm::loadSessionDir ( const QString& sSessionDir )
 }
 
 
-// Remove specific file path.
-void qjackctlSessionForm::removeDir ( const QString& sDir )
-{
-	QDir dir(sDir);
-
-	qjackctlSessionForm::removeDirList(
-		dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot));
-
-	dir.rmdir(sDir);
-}
-
-void qjackctlSessionForm::removeDirList ( const QList<QFileInfo>& dirlist )
-{
-	QListIterator<QFileInfo> iter(dirlist);
-	while (iter.hasNext()) {
-		const QFileInfo& info = iter.next();
-		const QString& sPath = info.absoluteFilePath();
-		if (info.isDir()) {
-			removeDir(sPath);
-		} else {
-			QDir().remove(sPath);
-		}
-	}
-}
-
-
 // Save current session to specific file path.
 void qjackctlSessionForm::saveSessionDir (
 	const QString& sSessionDir, int iSessionType )
@@ -368,9 +372,9 @@ void qjackctlSessionForm::saveSessionDir (
 		return;
 
 	QDir sessionDir(sSessionDir);
-	QList<QFileInfo> dirlist
+	QList<QFileInfo> list
 		= sessionDir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
-	if (!dirlist.isEmpty()) {
+	if (!list.isEmpty()) {
 		if (sessionDir.exists("session.xml")) {
 			if (QMessageBox::warning(this,
 				tr("Warning") + " - " QJACKCTL_SUBTITLE1,
@@ -386,7 +390,7 @@ void qjackctlSessionForm::saveSessionDir (
 				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
 				return;
 		}
-		qjackctlSessionForm::removeDirList(dirlist);
+		remove_dir_list(list);
 	}
 	else
 	if (!sessionDir.exists())
