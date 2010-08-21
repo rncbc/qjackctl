@@ -174,14 +174,7 @@ void qjackctlSessionForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 void qjackctlSessionForm::loadSession (void)
 {
 #if 0
-	QString sSessionDir;
-	if (!m_sessionDirs.isEmpty())
-		sSessionDir = m_sessionDirs.first();
-	sSessionDir = QFileDialog::getExistingDirectory(
-		this, tr("Load Session"), sSessionDir);
-#else
 	QFileDialog loadDialog(this, tr("Load Session"));
-
 	loadDialog.setAcceptMode(QFileDialog::AcceptOpen);
 	loadDialog.setFileMode(QFileDialog::Directory);
 	loadDialog.setViewMode(QFileDialog::List);
@@ -190,11 +183,15 @@ void qjackctlSessionForm::loadSession (void)
 	loadDialog.setHistory(m_sessionDirs);
 	if (!m_sessionDirs.isEmpty())
 		loadDialog.setDirectory(m_sessionDirs.first());
-
 	if (!loadDialog.exec())
 		return;
-
 	QString sSessionDir = loadDialog.selectedFiles().first();
+#else
+	QString sSessionDir;
+	if (!m_sessionDirs.isEmpty())
+		sSessionDir = m_sessionDirs.first();
+	sSessionDir = QFileDialog::getExistingDirectory(
+		this, tr("Load Session"), sSessionDir);
 #endif
 
 	loadSessionDir(sSessionDir);
@@ -247,14 +244,7 @@ void qjackctlSessionForm::saveSessionEx ( int iSessionType )
 	}
 
 #if 0
-	QString sSessionDir;
-	if (!m_sessionDirs.isEmpty())
-		sSessionDir = m_sessionDirs.first();
-	sSessionDir = QFileDialog::getExistingDirectory(
-		this, sTitle, sSessionDir);
-#else
 	QFileDialog saveDialog(this, sTitle);
-
 	saveDialog.setAcceptMode(QFileDialog::AcceptSave);
 	saveDialog.setFileMode(QFileDialog::Directory);
 	saveDialog.setViewMode(QFileDialog::List);
@@ -263,11 +253,15 @@ void qjackctlSessionForm::saveSessionEx ( int iSessionType )
 	saveDialog.setHistory(m_sessionDirs);
 	if (!m_sessionDirs.isEmpty())
 		saveDialog.setDirectory(m_sessionDirs.first());
-
 	if (!saveDialog.exec())
 		return;
-
 	QString sSessionDir = saveDialog.selectedFiles().first();
+#else
+	QString sSessionDir;
+	if (!m_sessionDirs.isEmpty())
+		sSessionDir = m_sessionDirs.first();
+	sSessionDir = QFileDialog::getExistingDirectory(
+		this, sTitle, sSessionDir);
 #endif
 
 	saveSessionDir(sSessionDir, iSessionType);
