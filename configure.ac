@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.34, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.35, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -241,6 +241,9 @@ if test "x$ac_portaudio" = "xyes"; then
       ac_libs="$ac_libs -lportaudio"
    fi
 fi
+
+# Some recent distros (eg. fedora, debian) require this.
+ac_libs="$ac_libs -lX11"
 
 AC_SUBST(ac_libs)
 

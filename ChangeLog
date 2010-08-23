@@ -5,6 +5,15 @@ ChangeLog
 
 SVN TRUNK
 
+- A significant UI layout has been made: the Messages and
+  Status widgets were merged into one, giving space to the
+  brand new Session wigdet to be easy accessible from the
+  main panel control window.
+
+- libX11 is now being added explicitly to the build link
+  phase, as seen necessary on some bleeding-edge distros
+  eg. Fedora 13, Debian 6. (closing bug #3050915).
+
 - Input/Output latency options were missing but now finally
   enabled for the firewire back-end.
 

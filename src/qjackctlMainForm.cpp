@@ -27,8 +27,7 @@
 #include "qjackctlPatchbay.h"
 #include "qjackctlPatchbayFile.h"
 
-#include "qjackctlMessagesForm.h"
-#include "qjackctlStatusForm.h"
+#include "qjackctlMessagesStatusForm.h"
 #include "qjackctlSessionForm.h"
 #include "qjackctlConnectionsForm.h"
 #include "qjackctlPatchbayForm.h"
@@ -325,8 +324,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pAlsaNotifier = NULL;
 
 	// All forms are to be created later on setup.
-	m_pMessagesForm    = NULL;
-	m_pStatusForm      = NULL;
+	m_pMessagesStatusForm = NULL;
 	m_pSessionForm     = NULL;
 	m_pConnectionsForm = NULL;
 	m_pPatchbayForm    = NULL;
@@ -372,12 +370,12 @@ qjackctlMainForm::qjackctlMainForm (
 	QObject::connect(m_ui.StopToolButton,
 		SIGNAL(clicked()),
 		SLOT(stopJack()));
-	QObject::connect(m_ui.MessagesToolButton,
+	QObject::connect(m_ui.MessagesStatusToolButton,
 		SIGNAL(clicked()),
-		SLOT(toggleMessagesForm()));
-	QObject::connect(m_ui.StatusToolButton,
+		SLOT(toggleMessagesStatusForm()));
+	QObject::connect(m_ui.SessionToolButton,
 		SIGNAL(clicked()),
-		SLOT(toggleStatusForm()));
+		SLOT(toggleSessionForm()));
 	QObject::connect(m_ui.ConnectionsToolButton,
 		SIGNAL(clicked()),
 		SLOT(toggleConnectionsForm()));
@@ -443,10 +441,8 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	m_pAlsaSeq = NULL;
 
 	// Finally drop any popup widgets around...
-	if (m_pMessagesForm)
-		delete m_pMessagesForm;
-	if (m_pStatusForm)
-		delete m_pStatusForm;
+	if (m_pMessagesStatusForm)
+		delete m_pMessagesStatusForm;
 	if (m_pSessionForm)
 		delete m_pSessionForm;
 	if (m_pConnectionsForm)
@@ -500,13 +496,13 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		wflags |= Qt::Tool;
 	}
 	// All forms are to be created right now.
-	m_pMessagesForm    = new qjackctlMessagesForm    (pParent, wflags);
-	m_pStatusForm      = new qjackctlStatusForm      (pParent, wflags);
+	m_pMessagesStatusForm = new qjackctlMessagesStatusForm (pParent, wflags);
 	m_pSessionForm     = new qjackctlSessionForm     (pParent, wflags);
 	m_pConnectionsForm = new qjackctlConnectionsForm (pParent, wflags);
 	m_pPatchbayForm    = new qjackctlPatchbayForm    (pParent, wflags);
 	// Setup appropriately...
-	m_pMessagesForm->setLogging(m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
+	m_pMessagesStatusForm->setLogging(
+		m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
 	m_pSessionForm->setSessionDirs(m_pSetup->sessionDirs);
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);
@@ -536,8 +532,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateSystemTray();
 
 	// And for the whole widget gallore...
-	m_pSetup->loadWidgetGeometry(m_pMessagesForm);
-	m_pSetup->loadWidgetGeometry(m_pStatusForm);
+	m_pSetup->loadWidgetGeometry(m_pMessagesStatusForm);
 	m_pSetup->loadWidgetGeometry(m_pSessionForm);
 	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
 	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
@@ -789,25 +784,22 @@ bool qjackctlMainForm::queryClose (void)
 		m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
 
 	// Some windows default fonts are here on demand too.
-	if (bQueryClose && m_pMessagesForm)
-		m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
+	if (bQueryClose && m_pMessagesStatusForm)
+		m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
 
 	// Whether we're really quitting.
 	m_bQuitForce = bQueryClose;
 
 	// Try to save current positioning.
 	if (bQueryClose) {
-		m_pSetup->saveWidgetGeometry(m_pMessagesForm);
-		m_pSetup->saveWidgetGeometry(m_pStatusForm);
+		m_pSetup->saveWidgetGeometry(m_pMessagesStatusForm);
 		m_pSetup->saveWidgetGeometry(m_pSessionForm);
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
 		m_pSetup->saveWidgetGeometry(this);
 		// Close popup widgets.
-		if (m_pMessagesForm)
-			m_pMessagesForm->close();
-		if (m_pStatusForm)
-			m_pStatusForm->close();
+		if (m_pMessagesStatusForm)
+			m_pMessagesStatusForm->close();
 		if (m_pSessionForm)
 			m_pSessionForm->close();
 		if (m_pConnectionsForm)
@@ -1536,28 +1528,28 @@ void qjackctlMainForm::stdoutNotifySlot ( int fd )
 
 
 // Messages output methods.
-void qjackctlMainForm::appendMessages( const QString& s )
+void qjackctlMainForm::appendMessages ( const QString& s )
 {
-	if (m_pMessagesForm)
-		m_pMessagesForm->appendMessages(s);
+	if (m_pMessagesStatusForm)
+		m_pMessagesStatusForm->appendMessages(s);
 }
 
-void qjackctlMainForm::appendMessagesColor( const QString& s, const QString& c )
+void qjackctlMainForm::appendMessagesColor ( const QString& s, const QString& c )
 {
-	if (m_pMessagesForm)
-		m_pMessagesForm->appendMessagesColor(s, c);
+	if (m_pMessagesStatusForm)
+		m_pMessagesStatusForm->appendMessagesColor(s, c);
 }
 
-void qjackctlMainForm::appendMessagesText( const QString& s )
+void qjackctlMainForm::appendMessagesText ( const QString& s )
 {
-	if (m_pMessagesForm)
-		m_pMessagesForm->appendMessagesText(s);
+	if (m_pMessagesStatusForm)
+		m_pMessagesStatusForm->appendMessagesText(s);
 }
 
-void qjackctlMainForm::appendMessagesError( const QString& s )
+void qjackctlMainForm::appendMessagesError ( const QString& s )
 {
-	if (m_pMessagesForm)
-		m_pMessagesForm->show();
+	if (m_pMessagesStatusForm)
+		m_pMessagesStatusForm->show();
 
 	appendMessagesColor(s.simplified(), "#ff0000");
 
@@ -1583,10 +1575,10 @@ void qjackctlMainForm::updateMessagesFont (void)
 	if (m_pSetup == NULL)
 		return;
 
-	if (m_pMessagesForm && !m_pSetup->sMessagesFont.isEmpty()) {
+	if (m_pMessagesStatusForm && !m_pSetup->sMessagesFont.isEmpty()) {
 		QFont font;
 		if (font.fromString(m_pSetup->sMessagesFont))
-			m_pMessagesForm->setMessagesFont(font);
+			m_pMessagesStatusForm->setMessagesFont(font);
 	}
 }
 
@@ -1597,11 +1589,11 @@ void qjackctlMainForm::updateMessagesLimit (void)
 	if (m_pSetup == NULL)
 		return;
 
-	if (m_pMessagesForm) {
+	if (m_pMessagesStatusForm) {
 		if (m_pSetup->bMessagesLimit)
-			m_pMessagesForm->setMessagesLimit(m_pSetup->iMessagesLimitLines);
+			m_pMessagesStatusForm->setMessagesLimit(m_pSetup->iMessagesLimitLines);
 		else
-			m_pMessagesForm->setMessagesLimit(-1);
+			m_pMessagesStatusForm->setMessagesLimit(-1);
 	}
 }
 
@@ -1765,15 +1757,15 @@ void qjackctlMainForm::updateButtons (void)
 	if (m_pSetup->bLeftButtons) {
 		m_ui.StartToolButton->show();
 		m_ui.StopToolButton->show();
-		m_ui.MessagesToolButton->show();
-		m_ui.StatusToolButton->show();
+		m_ui.MessagesStatusToolButton->show();
+		m_ui.SessionToolButton->show();
 		m_ui.ConnectionsToolButton->show();
 		m_ui.PatchbayToolButton->show();
 	} else {
 		m_ui.StartToolButton->hide();
 		m_ui.StopToolButton->hide();
-		m_ui.MessagesToolButton->hide();
-		m_ui.StatusToolButton->hide();
+		m_ui.MessagesStatusToolButton->hide();
+		m_ui.SessionToolButton->hide();
 		m_ui.ConnectionsToolButton->hide();
 		m_ui.PatchbayToolButton->hide();
 	}
@@ -1811,8 +1803,8 @@ void qjackctlMainForm::updateButtons (void)
 		? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly);
 	m_ui.StartToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.StopToolButton->setToolButtonStyle(toolButtonStyle);
-	m_ui.MessagesToolButton->setToolButtonStyle(toolButtonStyle);
-	m_ui.StatusToolButton->setToolButtonStyle(toolButtonStyle);
+	m_ui.MessagesStatusToolButton->setToolButtonStyle(toolButtonStyle);
+	m_ui.SessionToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.ConnectionsToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.PatchbayToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.QuitToolButton->setToolButtonStyle(toolButtonStyle);
@@ -1888,10 +1880,10 @@ void qjackctlMainForm::setRecentPatchbays ( const QStringList& patchbays )
 // Stabilize current form toggle buttons that may be astray.
 void qjackctlMainForm::stabilizeForm (void)
 {
-	m_ui.MessagesToolButton->setChecked(
-		m_pMessagesForm && m_pMessagesForm->isVisible());
-	m_ui.StatusToolButton->setChecked(
-		m_pStatusForm && m_pStatusForm->isVisible());
+	m_ui.MessagesStatusToolButton->setChecked(
+		m_pMessagesStatusForm && m_pMessagesStatusForm->isVisible());
+	m_ui.SessionToolButton->setChecked(
+		m_pSessionForm && m_pSessionForm->isVisible());
 	m_ui.ConnectionsToolButton->setChecked(
 		m_pConnectionsForm && m_pConnectionsForm->isVisible());
 	m_ui.PatchbayToolButton->setChecked(
@@ -2665,35 +2657,50 @@ void qjackctlMainForm::toggleMainForm (void)
 }
 
 
-// Message log form requester slot.
-void qjackctlMainForm::toggleMessagesForm (void)
+// Message log/status form requester slot.
+void qjackctlMainForm::toggleMessagesStatusForm (void)
 {
-	if (m_pMessagesForm) {
-		m_pSetup->saveWidgetGeometry(m_pMessagesForm);
-		if (m_pMessagesForm->isVisible()) {
-			m_pMessagesForm->hide();
+	if (m_pMessagesStatusForm) {
+		m_pSetup->saveWidgetGeometry(m_pMessagesStatusForm);
+		if (m_pMessagesStatusForm->isVisible()) {
+			m_pMessagesStatusForm->hide();
 		} else {
-			m_pMessagesForm->show();
-			m_pMessagesForm->raise();
-			m_pMessagesForm->activateWindow();
+			m_pMessagesStatusForm->show();
+			m_pMessagesStatusForm->raise();
+			m_pMessagesStatusForm->activateWindow();
 		}
 	}
 }
 
+void qjackctlMainForm::toggleMessagesForm (void)
+{
+	if (m_pMessagesStatusForm) {
+		qjackctlMessagesStatusForm::TabPage tabpage
+			= m_pMessagesStatusForm->tabPage();
+		m_pMessagesStatusForm->setTabPage(
+			qjackctlMessagesStatusForm::MessagesTab);
+		if (m_pMessagesStatusForm->isVisible()
+			&& tabpage != m_pMessagesStatusForm->tabPage())
+			return;
+	}
 
-// Status form requester slot.
+	toggleMessagesStatusForm();
+}
+
+
 void qjackctlMainForm::toggleStatusForm (void)
 {
-	if (m_pStatusForm) {
-		m_pSetup->saveWidgetGeometry(m_pStatusForm);
-		if (m_pStatusForm->isVisible()) {
-			m_pStatusForm->hide();
-		} else {
-			m_pStatusForm->show();
-			m_pStatusForm->raise();
-			m_pStatusForm->activateWindow();
-		}
+	if (m_pMessagesStatusForm) {
+		qjackctlMessagesStatusForm::TabPage tabpage
+			= m_pMessagesStatusForm->tabPage();
+		m_pMessagesStatusForm->setTabPage(
+			qjackctlMessagesStatusForm::StatusTab);
+		if (m_pMessagesStatusForm->isVisible()
+			&& tabpage != m_pMessagesStatusForm->tabPage())
+			return;
 	}
+
+	toggleMessagesStatusForm();
 }
 
 
@@ -2755,8 +2762,8 @@ void qjackctlMainForm::showSetupForm (void)
 	qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
 	if (pSetupForm) {
 		// Check out some initial nullities(tm)...
-		if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesForm)
-			m_pSetup->sMessagesFont = m_pMessagesForm->messagesFont().toString();
+		if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesStatusForm)
+			m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
 		if (m_pSetup->sDisplayFont1.isEmpty())
 			m_pSetup->sDisplayFont1 = m_ui.TimeDisplayTextLabel->font().toString();
 		if (m_pSetup->sDisplayFont2.isEmpty())
@@ -2801,7 +2808,7 @@ void qjackctlMainForm::showSetupForm (void)
 			if (( bOldMessagesLog && !m_pSetup->bMessagesLog) ||
 				(!bOldMessagesLog &&  m_pSetup->bMessagesLog) ||
 				(sOldMessagesLogPath != m_pSetup->sMessagesLogPath))
-				m_pMessagesForm->setLogging(
+				m_pMessagesStatusForm->setLogging(
 					m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
 			if (( bOldBezierLines && !m_pSetup->bBezierLines) ||
 				(!bOldBezierLines &&  m_pSetup->bBezierLines))
@@ -3158,8 +3165,8 @@ void qjackctlMainForm::updateStatusItem( int iStatusItem, const QString& sText )
 		break;
 	}
 
-	if (m_pStatusForm)
-		m_pStatusForm->updateStatusItem(iStatusItem, sText);
+	if (m_pMessagesStatusForm)
+		m_pMessagesStatusForm->updateStatusItem(iStatusItem, sText);
 }
 
 
@@ -3390,11 +3397,15 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 	pAction = menu.addAction(QIcon(":/images/messages1.png"),
 		tr("&Messages"), this, SLOT(toggleMessagesForm()));
 	pAction->setCheckable(true);
-	pAction->setChecked(m_pMessagesForm && m_pMessagesForm->isVisible());
+	pAction->setChecked(m_pMessagesStatusForm
+		&& m_pMessagesStatusForm->isVisible()
+		&& m_pMessagesStatusForm->tabPage() == qjackctlMessagesStatusForm::MessagesTab);
 	pAction = menu.addAction(QIcon(":/images/status1.png"),
 		tr("St&atus"), this, SLOT(toggleStatusForm()));
 	pAction->setCheckable(true);
-	pAction->setChecked(m_pStatusForm && m_pStatusForm->isVisible());
+	pAction->setChecked(m_pMessagesStatusForm
+		&& m_pMessagesStatusForm->isVisible()
+		&& m_pMessagesStatusForm->tabPage() == qjackctlMessagesStatusForm::StatusTab);
 	pAction = menu.addAction(QIcon(":/images/connections1.png"),
 		tr("&Connections"), this, SLOT(toggleConnectionsForm()));
 	pAction->setCheckable(true);

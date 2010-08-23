@@ -26,12 +26,11 @@ HEADERS += config.h \
 	qjackctlAboutForm.h \
 	qjackctlConnectionsForm.h \
 	qjackctlMainForm.h \
-	qjackctlMessagesForm.h \
+	qjackctlMessagesStatusForm.h \
 	qjackctlPatchbayForm.h \
 	qjackctlSessionForm.h \
 	qjackctlSetupForm.h \
-	qjackctlSocketForm.h \
-	qjackctlStatusForm.h
+	qjackctlSocketForm.h
 
 SOURCES += \
 	qjackctl.cpp \
@@ -48,23 +47,21 @@ SOURCES += \
 	qjackctlAboutForm.cpp \
 	qjackctlConnectionsForm.cpp \
 	qjackctlMainForm.cpp \
-	qjackctlMessagesForm.cpp \
+	qjackctlMessagesStatusForm.cpp \
 	qjackctlPatchbayForm.cpp \
 	qjackctlSessionForm.cpp \
 	qjackctlSetupForm.cpp \
-	qjackctlSocketForm.cpp \
-	qjackctlStatusForm.cpp
+	qjackctlSocketForm.cpp
 
 FORMS += \
 	qjackctlAboutForm.ui \
 	qjackctlConnectionsForm.ui \
 	qjackctlMainForm.ui \
-	qjackctlMessagesForm.ui \
+	qjackctlMessagesStatusForm.ui \
 	qjackctlPatchbayForm.ui \
 	qjackctlSessionForm.ui \
 	qjackctlSetupForm.ui \
-	qjackctlSocketForm.ui \
-	qjackctlStatusForm.ui
+	qjackctlSocketForm.ui
 
 RESOURCES += \
 	qjackctl.qrc

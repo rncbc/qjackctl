@@ -40,8 +40,7 @@ typedef void snd_seq_t;
 
 // Forward declarations.
 class qjackctlSetup;
-class qjackctlMessagesForm;
-class qjackctlStatusForm;
+class qjackctlMessagesStatusForm;
 class qjackctlSessionForm;
 class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
@@ -127,6 +126,7 @@ protected slots:
 	void cableConnectSlot(const QString&, const QString&, unsigned int);
 
 	void toggleMainForm();
+	void toggleMessagesStatusForm();
 	void toggleMessagesForm();
 	void toggleStatusForm();
 	void toggleSessionForm();
@@ -299,8 +299,7 @@ private:
 	QTime m_tXrunLast;
 	QTime m_tResetLast;
 
-	qjackctlMessagesForm    *m_pMessagesForm;
-	qjackctlStatusForm      *m_pStatusForm;
+	qjackctlMessagesStatusForm *m_pMessagesStatusForm;
 	qjackctlSessionForm     *m_pSessionForm;
 	qjackctlConnectionsForm *m_pConnectionsForm;
 	qjackctlPatchbayForm    *m_pPatchbayForm;

@@ -53,40 +53,6 @@
    <property name="spacing" >
     <number>4</number>
    </property>
-   <item row="0" column="7" >
-    <widget class="QToolButton" name="QuitToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>32767</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Quit processing and exit</string>
-     </property>
-     <property name="text" >
-      <string>&amp;Quit</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/quit1.png</iconset>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+Q</string>
-     </property>
-     <property name="toolButtonStyle" >
-      <enum>Qt::ToolButtonTextBesideIcon</enum>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0" >
     <widget class="QToolButton" name="StartToolButton" >
      <property name="minimumSize" >
@@ -158,223 +124,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="QToolButton" name="StatusToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>32767</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Show/hide the extended status window</string>
-     </property>
-     <property name="text" >
-      <string>St&amp;atus</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/status1.png</iconset>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+A</string>
-     </property>
-     <property name="checkable" >
-      <bool>true</bool>
-     </property>
-     <property name="toolButtonStyle" >
-      <enum>Qt::ToolButtonTextBesideIcon</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="7" >
-    <widget class="QToolButton" name="AboutToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>32767</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Show information about this application</string>
-     </property>
-     <property name="text" >
-      <string>Ab&amp;out...</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/about1.png</iconset>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+O</string>
-     </property>
-     <property name="toolButtonStyle" >
-      <enum>Qt::ToolButtonTextBesideIcon</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="7" >
-    <widget class="QToolButton" name="SetupToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>32767</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Show settings and options dialog</string>
-     </property>
-     <property name="text" >
-	  <string>Set&amp;up...</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/setup1.png</iconset>
-     </property>
-     <property name="shortcut" >
-	  <string>Alt+U</string>
-     </property>
-     <property name="toolButtonStyle" >
-      <enum>Qt::ToolButtonTextBesideIcon</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" >
-    <widget class="QToolButton" name="MessagesToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>32767</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Show/hide the messages log window</string>
-     </property>
-     <property name="text" >
-      <string>&amp;Messages</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/messages1.png</iconset>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+M</string>
-     </property>
-     <property name="checkable" >
-      <bool>true</bool>
-     </property>
-     <property name="toolButtonStyle" >
-      <enum>Qt::ToolButtonTextBesideIcon</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" >
-    <widget class="QToolButton" name="PatchbayToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>32767</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Show/hide the patchbay editor window</string>
-     </property>
-     <property name="text" >
-      <string>&amp;Patchbay</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/patchbay1.png</iconset>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+P</string>
-     </property>
-     <property name="checkable" >
-      <bool>true</bool>
-     </property>
-     <property name="toolButtonStyle" >
-      <enum>Qt::ToolButtonTextBesideIcon</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" >
-    <widget class="QToolButton" name="ConnectionsToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>32767</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Show/hide the actual connections patchbay window</string>
-     </property>
-     <property name="text" >
-      <string>&amp;Connect</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/connections1.png</iconset>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+C</string>
-     </property>
-     <property name="checkable" >
-      <bool>true</bool>
-     </property>
-     <property name="toolButtonStyle" >
-      <enum>Qt::ToolButtonTextBesideIcon</enum>
-     </property>
-    </widget>
-   </item>
-   <item rowspan="2" row="0" column="2" colspan="5" >
+   <item row="0" column="2" rowspan="2" colspan="5" >
     <widget class="QFrame" name="StatusDisplayFrame" >
      <property name="sizePolicy" >
       <sizepolicy>
@@ -626,6 +376,253 @@
      </layout>
     </widget>
    </item>
+   <item row="0" column="7" >
+    <widget class="QToolButton" name="QuitToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Quit processing and exit</string>
+     </property>
+     <property name="text" >
+      <string>&amp;Quit</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/quit1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+Q</string>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QToolButton" name="SessionToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Show/hide the session management window</string>
+     </property>
+     <property name="text" >
+      <string>S&amp;ession</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/session1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+E</string>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <widget class="QToolButton" name="MessagesStatusToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Show/hide the messages log/status window</string>
+     </property>
+     <property name="text" >
+      <string>&amp;Messages</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/messagesstatus1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+M</string>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="7" >
+    <widget class="QToolButton" name="SetupToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Show settings and options dialog</string>
+     </property>
+     <property name="text" >
+	  <string>Set&amp;up...</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/setup1.png</iconset>
+     </property>
+     <property name="shortcut" >
+	  <string>Alt+U</string>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <widget class="QToolButton" name="ConnectionsToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Show/hide the actual connections patchbay window</string>
+     </property>
+     <property name="text" >
+      <string>&amp;Connect</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/connections1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+C</string>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" >
+    <widget class="QToolButton" name="PatchbayToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Show/hide the patchbay editor window</string>
+     </property>
+     <property name="text" >
+      <string>&amp;Patchbay</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/patchbay1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+P</string>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2" >
+    <widget class="QToolButton" name="RewindToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>48</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Rewind transport</string>
+     </property>
+     <property name="text" >
+      <string>&amp;Rewind</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/rewind1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+R</string>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="3" >
     <widget class="QToolButton" name="BackwardToolButton" >
      <property name="minimumSize" >
@@ -660,8 +657,8 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="6" >
-    <widget class="QToolButton" name="ForwardToolButton" >
+   <item row="2" column="4" >
+    <widget class="QToolButton" name="PlayToolButton" >
      <property name="minimumSize" >
       <size>
        <width>28</width>
@@ -678,50 +675,19 @@
       <enum>Qt::TabFocus</enum>
      </property>
      <property name="toolTip" >
-      <string>Forward transport</string>
+      <string>Start transport rolling</string>
      </property>
      <property name="text" >
-      <string>&amp;Forward</string>
+      <string>&amp;Play</string>
      </property>
      <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/forward1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/play1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string>Alt+F</string>
+      <string>Space</string>
      </property>
-     <property name="autoRepeat" >
+     <property name="checkable" >
       <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2" >
-    <widget class="QToolButton" name="RewindToolButton" >
-     <property name="minimumSize" >
-      <size>
-       <width>28</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="maximumSize" >
-      <size>
-       <width>48</width>
-       <height>28</height>
-      </size>
-     </property>
-     <property name="focusPolicy" >
-      <enum>Qt::TabFocus</enum>
-     </property>
-     <property name="toolTip" >
-      <string>Rewind transport</string>
-     </property>
-     <property name="text" >
-      <string>&amp;Rewind</string>
-     </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/rewind1.png</iconset>
-     </property>
-     <property name="shortcut" >
-      <string>Alt+R</string>
      </property>
     </widget>
    </item>
@@ -764,8 +730,8 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="4" >
-    <widget class="QToolButton" name="PlayToolButton" >
+   <item row="2" column="6" >
+    <widget class="QToolButton" name="ForwardToolButton" >
      <property name="minimumSize" >
       <size>
        <width>28</width>
@@ -782,19 +748,53 @@
       <enum>Qt::TabFocus</enum>
      </property>
      <property name="toolTip" >
-      <string>Start transport rolling</string>
+      <string>Forward transport</string>
      </property>
      <property name="text" >
-      <string>&amp;Play</string>
+      <string>&amp;Forward</string>
      </property>
      <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/play1.png</iconset>
+      <iconset resource="qjackctl.qrc" >:/images/forward1.png</iconset>
      </property>
      <property name="shortcut" >
-      <string>Space</string>
+      <string>Alt+F</string>
      </property>
-     <property name="checkable" >
+     <property name="autoRepeat" >
       <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="7" >
+    <widget class="QToolButton" name="AboutToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Show information about this application</string>
+     </property>
+     <property name="text" >
+      <string>Ab&amp;out...</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/about1.png</iconset>
+     </property>
+     <property name="shortcut" >
+      <string>Alt+O</string>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
      </property>
     </widget>
    </item>
@@ -805,8 +805,8 @@
   <tabstop>StartToolButton</tabstop>
   <tabstop>StopToolButton</tabstop>
   <tabstop>QuitToolButton</tabstop>
-  <tabstop>MessagesToolButton</tabstop>
-  <tabstop>StatusToolButton</tabstop>
+  <tabstop>MessagesStatusToolButton</tabstop>
+  <tabstop>SessionToolButton</tabstop>
   <tabstop>SetupToolButton</tabstop>
   <tabstop>ConnectionsToolButton</tabstop>
   <tabstop>PatchbayToolButton</tabstop>
