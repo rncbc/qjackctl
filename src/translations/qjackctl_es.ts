@@ -403,7 +403,7 @@ Desea guardar los cambios?</translation>
     </message>
     <message>
         <source>Show/hide the extended status window</source>
-        <translation>Mostrar / ocultar la ventana de estado detallado</translation>
+        <translation type="obsolete">Mostrar / ocultar la ventana de estado detallado</translation>
     </message>
     <message>
         <source>Ab&amp;out...</source>
@@ -419,7 +419,7 @@ Desea guardar los cambios?</translation>
     </message>
     <message>
         <source>Alt+E</source>
-        <translation type="obsolete">Alt+T</translation>
+        <translation type="unfinished">Alt+T</translation>
     </message>
     <message>
         <source>Show settings and options dialog</source>
@@ -435,7 +435,7 @@ Desea guardar los cambios?</translation>
     </message>
     <message>
         <source>Show/hide the messages log window</source>
-        <translation>Mostrar / ocultar la ventana de mensajes</translation>
+        <translation type="obsolete">Mostrar / ocultar la ventana de mensajes</translation>
     </message>
     <message>
         <source>Patch&amp;bay</source>
@@ -1133,10 +1133,6 @@ Por favor revise la ventana de mensajes para mas información.</translation>
         <translation>&amp;Avanzar</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alt+O</source>
         <translation type="unfinished">Alt+O</translation>
     </message>
@@ -1176,24 +1172,179 @@ Por favor revise la ventana de mensajes para mas información.</translation>
         <source>&amp;Refresh</source>
         <translation type="unfinished">&amp;Refrescar</translation>
     </message>
+    <message>
+        <source>Show/hide the session management window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show/hide the messages log/status window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlMessagesForm</name>
     <message>
         <source>Messages - JACK Audio Connection Kit</source>
-        <translation>Mensajes de JACK Audio Connection Kit</translation>
+        <translation type="obsolete">Mensajes de JACK Audio Connection Kit</translation>
     </message>
     <message>
         <source>Logging stopped --- %1 ---</source>
-        <translation>Registro detenido --- %1 ---</translation>
+        <translation type="obsolete">Registro detenido --- %1 ---</translation>
     </message>
     <message>
         <source>Logging started --- %1 ---</source>
-        <translation>Registro iniciado --- %1 ---</translation>
+        <translation type="obsolete">Registro iniciado --- %1 ---</translation>
     </message>
     <message>
         <source>Messages output log</source>
-        <translation>Registro de mensajes</translation>
+        <translation type="obsolete">Registro de mensajes</translation>
+    </message>
+</context>
+<context>
+    <name>qjackctlMessagesStatusForm</name>
+    <message>
+        <source>Messages / Status - JACK Audio Connection Kit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Messages</source>
+        <translation type="unfinished">&amp;Mensajes</translation>
+    </message>
+    <message>
+        <source>Messages log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Messages output log</source>
+        <translation type="unfinished">Registro de mensajes</translation>
+    </message>
+    <message>
+        <source>&amp;Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Statistics since last server startup</source>
+        <translation type="unfinished">Estadísticas desde el último inicio de JACK</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descripción</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valor</translation>
+    </message>
+    <message>
+        <source>Reset XRUN statistic values</source>
+        <translation type="unfinished">Reiniciar estadísticas de XRUN</translation>
+    </message>
+    <message>
+        <source>Re&amp;set</source>
+        <translation type="unfinished">re&amp;Iniciar</translation>
+    </message>
+    <message>
+        <source>Alt+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh XRUN statistic values</source>
+        <translation type="unfinished">Refrescar estadísticas de XRUN</translation>
+    </message>
+    <message>
+        <source>&amp;Refresh</source>
+        <translation type="unfinished">&amp;Refrescar</translation>
+    </message>
+    <message>
+        <source>Alt+R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server name</source>
+        <translation type="unfinished">Nombre del servidor</translation>
+    </message>
+    <message>
+        <source>Server state</source>
+        <translation type="unfinished">Estado del Servidor</translation>
+    </message>
+    <message>
+        <source>DSP Load</source>
+        <translation type="unfinished">Uso de CPU del DSP</translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation type="unfinished">Frecuencia de muestreo</translation>
+    </message>
+    <message>
+        <source>Buffer Size</source>
+        <translation type="unfinished">Tamaño de Buffer</translation>
+    </message>
+    <message>
+        <source>Realtime Mode</source>
+        <translation type="unfinished">Modo Realtime</translation>
+    </message>
+    <message>
+        <source>Transport state</source>
+        <translation type="unfinished">Estado del transporte</translation>
+    </message>
+    <message>
+        <source>Transport Timecode</source>
+        <translation type="unfinished">Código de tiempo del transporte</translation>
+    </message>
+    <message>
+        <source>Transport BBT</source>
+        <translation type="unfinished">BBT del Transporte</translation>
+    </message>
+    <message>
+        <source>Transport BPM</source>
+        <translation type="unfinished">BPM del transporte</translation>
+    </message>
+    <message>
+        <source>XRUN count since last server startup</source>
+        <translation type="unfinished">XRUNs desde el último inicio</translation>
+    </message>
+    <message>
+        <source>XRUN last time detected</source>
+        <translation type="unfinished">Fecha de la última XRUN detectada</translation>
+    </message>
+    <message>
+        <source>XRUN last</source>
+        <translation type="unfinished">Última XRUN</translation>
+    </message>
+    <message>
+        <source>XRUN maximum</source>
+        <translation type="unfinished">Máximo de XRUN</translation>
+    </message>
+    <message>
+        <source>XRUN minimum</source>
+        <translation type="unfinished">Mínimo de XRUN</translation>
+    </message>
+    <message>
+        <source>XRUN average</source>
+        <translation type="unfinished">Promedio de XRUN</translation>
+    </message>
+    <message>
+        <source>XRUN total</source>
+        <translation type="unfinished">Total de XRUN</translation>
+    </message>
+    <message>
+        <source>Maximum scheduling delay</source>
+        <translation type="unfinished">Máximo retardo de programación(scheduling)</translation>
+    </message>
+    <message>
+        <source>Time of last reset</source>
+        <translation type="unfinished">Tiempo desde el último reset</translation>
+    </message>
+    <message>
+        <source>Logging stopped --- %1 ---</source>
+        <translation type="unfinished">Registro detenido --- %1 ---</translation>
+    </message>
+    <message>
+        <source>Logging started --- %1 ---</source>
+        <translation type="unfinished">Registro iniciado --- %1 ---</translation>
     </message>
 </context>
 <context>
@@ -3316,119 +3467,119 @@ Está seguro?</translation>
     <name>qjackctlStatusForm</name>
     <message>
         <source>Status - JACK Audio Connection Kit</source>
-        <translation>Estado - JACK Audio Connection Kit</translation>
+        <translation type="obsolete">Estado - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Descripción</translation>
+        <translation type="obsolete">Descripción</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Valor</translation>
+        <translation type="obsolete">Valor</translation>
     </message>
     <message>
         <source>Statistics since last server startup</source>
-        <translation>Estadísticas desde el último inicio de JACK</translation>
+        <translation type="obsolete">Estadísticas desde el último inicio de JACK</translation>
     </message>
     <message>
         <source>Re&amp;set</source>
-        <translation>re&amp;Iniciar</translation>
+        <translation type="obsolete">re&amp;Iniciar</translation>
     </message>
     <message>
         <source>Alt+S</source>
-        <translation>Alt+I</translation>
+        <translation type="obsolete">Alt+I</translation>
     </message>
     <message>
         <source>Reset XRUN statistic values</source>
-        <translation>Reiniciar estadísticas de XRUN</translation>
+        <translation type="obsolete">Reiniciar estadísticas de XRUN</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation>&amp;Refrescar</translation>
+        <translation type="obsolete">&amp;Refrescar</translation>
     </message>
     <message>
         <source>Alt+R</source>
-        <translation>Alt+R</translation>
+        <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
         <source>Refresh XRUN statistic values</source>
-        <translation>Refrescar estadísticas de XRUN</translation>
+        <translation type="obsolete">Refrescar estadísticas de XRUN</translation>
     </message>
     <message>
         <source>Time of last reset</source>
-        <translation>Tiempo desde el último reset</translation>
+        <translation type="obsolete">Tiempo desde el último reset</translation>
     </message>
     <message>
         <source>Maximum scheduling delay</source>
-        <translation>Máximo retardo de programación(scheduling)</translation>
+        <translation type="obsolete">Máximo retardo de programación(scheduling)</translation>
     </message>
     <message>
         <source>XRUN count since last server startup</source>
-        <translation>XRUNs desde el último inicio</translation>
+        <translation type="obsolete">XRUNs desde el último inicio</translation>
     </message>
     <message>
         <source>XRUN total</source>
-        <translation>Total de XRUN</translation>
+        <translation type="obsolete">Total de XRUN</translation>
     </message>
     <message>
         <source>XRUN average</source>
-        <translation>Promedio de XRUN</translation>
+        <translation type="obsolete">Promedio de XRUN</translation>
     </message>
     <message>
         <source>XRUN minimum</source>
-        <translation>Mínimo de XRUN</translation>
+        <translation type="obsolete">Mínimo de XRUN</translation>
     </message>
     <message>
         <source>XRUN maximum</source>
-        <translation>Máximo de XRUN</translation>
+        <translation type="obsolete">Máximo de XRUN</translation>
     </message>
     <message>
         <source>XRUN last</source>
-        <translation>Última XRUN</translation>
+        <translation type="obsolete">Última XRUN</translation>
     </message>
     <message>
         <source>XRUN last time detected</source>
-        <translation>Fecha de la última XRUN detectada</translation>
+        <translation type="obsolete">Fecha de la última XRUN detectada</translation>
     </message>
     <message>
         <source>Transport state</source>
-        <translation>Estado del transporte</translation>
+        <translation type="obsolete">Estado del transporte</translation>
     </message>
     <message>
         <source>Transport BPM</source>
-        <translation>BPM del transporte</translation>
+        <translation type="obsolete">BPM del transporte</translation>
     </message>
     <message>
         <source>Transport BBT</source>
-        <translation>BBT del Transporte</translation>
+        <translation type="obsolete">BBT del Transporte</translation>
     </message>
     <message>
         <source>Transport Timecode</source>
-        <translation>Código de tiempo del transporte</translation>
+        <translation type="obsolete">Código de tiempo del transporte</translation>
     </message>
     <message>
         <source>Realtime Mode</source>
-        <translation>Modo Realtime</translation>
+        <translation type="obsolete">Modo Realtime</translation>
     </message>
     <message>
         <source>Buffer Size</source>
-        <translation>Tamaño de Buffer</translation>
+        <translation type="obsolete">Tamaño de Buffer</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Frecuencia de muestreo</translation>
+        <translation type="obsolete">Frecuencia de muestreo</translation>
     </message>
     <message>
         <source>Server state</source>
-        <translation>Estado del Servidor</translation>
+        <translation type="obsolete">Estado del Servidor</translation>
     </message>
     <message>
         <source>DSP Load</source>
-        <translation>Uso de CPU del DSP</translation>
+        <translation type="obsolete">Uso de CPU del DSP</translation>
     </message>
     <message>
         <source>Server name</source>
-        <translation>Nombre del servidor</translation>
+        <translation type="obsolete">Nombre del servidor</translation>
     </message>
 </context>
 </TS>

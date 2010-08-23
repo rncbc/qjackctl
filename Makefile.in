@@ -24,7 +24,7 @@ headers = \
 	src/qjackctlAboutForm.h \
 	src/qjackctlConnectionsForm.h \
 	src/qjackctlMainForm.h \
-	src/qjackctlMessagesStausForm.h \
+	src/qjackctlMessagesStatusForm.h \
 	src/qjackctlPatchbayForm.h \
 	src/qjackctlSessionForm.h \
 	src/qjackctlSetupForm.h \
@@ -55,12 +55,11 @@ forms = \
 	src/qjackctlAboutForm.ui \
 	src/qjackctlConnectionsForm.ui \
 	src/qjackctlMainForm.ui \
-	src/qjackctlMessagesForm.ui \
+	src/qjackctlMessagesStatusForm.ui \
 	src/qjackctlPatchbayForm.ui \
 	src/qjackctlSessionForm.ui \
 	src/qjackctlSetupForm.ui \
-	src/qjackctlSocketForm.ui \
-	src/qjackctlStatusForm.ui
+	src/qjackctlSocketForm.ui
 
 resources = \
 	src/qjackctl.qrc
