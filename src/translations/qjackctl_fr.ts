@@ -336,95 +336,116 @@ de toutes les applications clientes.
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="101"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="219"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="337"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="251"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="401"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connecter</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="107"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="225"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="343"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="257"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="407"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="98"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="216"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="334"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="248"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="398"/>
         <source>Connect currently selected ports</source>
         <translation>Connecter les ports actuellement sélectionnés</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="117"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="235"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="353"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="267"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="417"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Déconnecter</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="123"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="241"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="359"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="273"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="423"/>
         <source>Alt+D</source>
         <translation>Alt+D</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="114"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="232"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="350"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="264"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="414"/>
         <source>Disconnect currently selected ports</source>
         <translation>Déconnecter les ports actuellement sélectionnés</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="133"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="251"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="369"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="283"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="433"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Tout déconnecter</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="139"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="257"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="375"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="289"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="439"/>
         <source>Alt+A</source>
         <translation>Alt+T</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="130"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="248"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="366"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="280"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="430"/>
         <source>Disconnect all currently connected ports</source>
         <translation>Déconnecter tous les ports actuellement connectés</translation>
     </message>
     <message>
+        <location filename="../qjackctlConnectionsForm.ui" line="162"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="312"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="462"/>
+        <source>Expand all client ports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlConnectionsForm.ui" line="165"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="283"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="401"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="315"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="465"/>
+        <source>E&amp;xpand All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlConnectionsForm.ui" line="171"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="321"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="471"/>
+        <source>Alt+X</source>
+        <translation type="unfinished">Alt+X</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlConnectionsForm.ui" line="197"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="347"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="497"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.ui" line="171"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="289"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="407"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="203"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="353"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="503"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.ui" line="162"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="280"/>
-        <location filename="../qjackctlConnectionsForm.ui" line="398"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="194"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="344"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="494"/>
         <source>Refresh current connections view</source>
         <translation>Rafraîchir la vue actuelle des connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.ui" line="181"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="213"/>
         <source>MIDI</source>
         <translation>MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="284"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="293"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -449,12 +470,12 @@ de toutes les applications clientes.
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.ui" line="299"/>
+        <location filename="../qjackctlConnectionsForm.ui" line="363"/>
         <source>ALSA</source>
         <translation>ALSA</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="285"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="294"/>
         <source>The preset aliases have been changed:
 
 &quot;%1&quot;
@@ -1865,67 +1886,82 @@ Are you sure?</source>
         <translation>Baie de brassage - Kit de Connexion Audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="451"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="483"/>
         <source>&amp;New</source>
         <translation>&amp;Nouveau</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="457"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="489"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="448"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="480"/>
         <source>Create a new patchbay profile</source>
         <translation>Créer un nouveau profil de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="470"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="502"/>
         <source>&amp;Load...</source>
         <translation>&amp;Charger...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="476"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="508"/>
         <source>Alt+L</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="467"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="499"/>
         <source>Load patchbay profile</source>
         <translation>Charger un profil de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="489"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="521"/>
         <source>&amp;Save...</source>
         <translation>&amp;Enregistrer...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="495"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="527"/>
         <source>Alt+S</source>
         <translation>Alt+E</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="486"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="518"/>
         <source>Save current patchbay profile</source>
         <translation>Enregistrer le profil actuel de la baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="519"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="419"/>
+        <source>Expand all items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlPatchbayForm.ui" line="422"/>
+        <source>E&amp;xpand All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlPatchbayForm.ui" line="428"/>
+        <source>Alt+X</source>
+        <translation type="unfinished">Alt+X</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlPatchbayForm.ui" line="551"/>
         <source>Current (recent) patchbay profile(s)</source>
         <translation>Profil(s) actuel(s) (récent(s)) de la baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="529"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="561"/>
         <source>Acti&amp;vate</source>
         <translation>Acti&amp;ver</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="535"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="567"/>
         <source>Alt+V</source>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="526"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="558"/>
         <source>Toggle activation of current patchbay profile</source>
         <translation>Basculer l&apos;activation du profil actuel de baie de brassage</translation>
     </message>
@@ -1975,17 +2011,17 @@ Are you sure?</source>
         <translation>Déconnecter les prises actuellement connectées</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="422"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="454"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="428"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="460"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.ui" line="419"/>
+        <location filename="../qjackctlPatchbayForm.ui" line="451"/>
         <source>Refresh current patchbay view</source>
         <translation>Rafraîchir la vue actuelle de la baie de brassage</translation>
     </message>
@@ -2078,7 +2114,7 @@ Are you sure?</source>
         <translation>Editer les propriétés de la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="220"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="224"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -2111,8 +2147,8 @@ Are you sure?</source>
         <translation type="obsolete">Sans titre</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="363"/>
-        <location filename="../qjackctlPatchbayForm.cpp" line="393"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="373"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="403"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -2125,7 +2161,7 @@ Are you sure?</source>
         <translation type="obsolete">Impossible d&apos;enregistrer le fichier de définition de baie de brassage:</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="439"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="449"/>
         <source>New Patchbay definition</source>
         <translation>Nouvelle définition de baie de brassage</translation>
     </message>
@@ -2146,28 +2182,28 @@ Are you sure?</source>
         <translation type="obsolete">Non</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="473"/>
-        <location filename="../qjackctlPatchbayForm.cpp" line="493"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="483"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="503"/>
         <source>Patchbay Definition files</source>
         <translation>Fichiers de définition de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="471"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="481"/>
         <source>Load Patchbay Definition</source>
         <translation>Charger une définition de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="491"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="501"/>
         <source>Save Patchbay Definition</source>
         <translation>Enregistrer la définition de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="598"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="608"/>
         <source>active</source>
         <translation>actif</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="221"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="225"/>
         <source>The patchbay definition has been changed:
 
 &quot;%1&quot;
@@ -2180,17 +2216,17 @@ Do you want to save the changes?</source>
 Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="277"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="281"/>
         <source>%1 [modified]</source>
         <translation>%1 [modifié]</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="344"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="354"/>
         <source>Untitled%1</source>
         <translation>SansTitre%1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="364"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="374"/>
         <source>Could not load patchbay definition file: 
 
 &quot;%1&quot;</source>
@@ -2199,7 +2235,7 @@ Voulez-vous enregistrer les changements?</translation>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="394"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="404"/>
         <source>Could not save patchbay definition file: 
 
 &quot;%1&quot;</source>
@@ -2208,7 +2244,7 @@ Voulez-vous enregistrer les changements?</translation>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbayForm.cpp" line="440"/>
+        <location filename="../qjackctlPatchbayForm.cpp" line="450"/>
         <source>Create patchbay definition as a snapshot
 of all actual client connections?</source>
         <translation>Prendre un cliché de toutes les connexions clientes actuelles

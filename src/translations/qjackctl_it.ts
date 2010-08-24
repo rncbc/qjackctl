@@ -345,6 +345,18 @@ Salvare i cambiamenti?</translation>
         <source>ALSA</source>
         <translation>ALSA</translation>
     </message>
+    <message>
+        <source>Expand all client ports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xpand All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+X</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlConnectorView</name>
@@ -1694,6 +1706,18 @@ dalle connessioni attuali?</translation>
     <message>
         <source>Current (recent) patchbay profile(s)</source>
         <translation>Profilo (recente) del Patchbay</translation>
+    </message>
+    <message>
+        <source>Expand all items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xpand All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+X</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
