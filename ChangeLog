@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Connections and Patchbay widgets have been finally given
+  up on an old feature request: an Expand All items button.
+
 - A significant UI layout has been made: the Messages and
   Status widgets were merged into one, giving space to the
   brand new Session wigdet to be easy accessible from the

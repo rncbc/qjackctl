@@ -438,6 +438,9 @@ public slots:
 	bool disconnectSelected();
 	bool disconnectAll();
 
+	// Expand all socket items.
+	void expandAll();
+
 	// Complete patchbay clearer.
 	void clear();
 

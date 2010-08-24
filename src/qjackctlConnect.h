@@ -442,6 +442,9 @@ public slots:
 	bool disconnectSelected();
 	bool disconnectAll();
 
+	// Expand all client ports.
+	void expandAll();
+
 	// Complete/incremental contents rebuilder; check dirty status if incremental.
 	void updateContents(bool bClear);
 

@@ -80,18 +80,21 @@ public slots:
 	void audioConnectSelected();
 	void audioDisconnectSelected();
 	void audioDisconnectAll();
+	void audioExpandAll();
 	void audioRefresh();
 	void audioStabilize();
 
 	void midiConnectSelected();
 	void midiDisconnectSelected();
 	void midiDisconnectAll();
+	void midiExpandAll();
 	void midiRefresh();
 	void midiStabilize();
 
 	void alsaConnectSelected();
 	void alsaDisconnectSelected();
 	void alsaDisconnectAll();
+	void alsaExpandAll();
 	void alsaRefresh();
 	void alsaStabilize();
 

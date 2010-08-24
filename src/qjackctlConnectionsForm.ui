@@ -150,7 +150,39 @@
            </property>
            <property name="sizeHint" >
             <size>
-             <width>87</width>
+             <width>8</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AudioExpandAllPushButton" >
+           <property name="toolTip" >
+            <string>Expand all client ports</string>
+           </property>
+           <property name="text" >
+            <string>E&amp;xpand All</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+X</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>8</width>
              <height>8</height>
             </size>
            </property>
@@ -268,7 +300,39 @@
            </property>
            <property name="sizeHint" >
             <size>
-             <width>87</width>
+             <width>8</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="MidiExpandAllPushButton" >
+           <property name="toolTip" >
+            <string>Expand all client ports</string>
+           </property>
+           <property name="text" >
+            <string>E&amp;xpand All</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+X</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>8</width>
              <height>8</height>
             </size>
            </property>
@@ -386,7 +450,39 @@
            </property>
            <property name="sizeHint" >
             <size>
-             <width>87</width>
+             <width>8</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="AlsaExpandAllPushButton" >
+           <property name="toolTip" >
+            <string>Expand all client ports</string>
+           </property>
+           <property name="text" >
+            <string>E&amp;xpand All</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
+           </property>
+           <property name="shortcut" >
+            <string>Alt+X</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>8</width>
              <height>8</height>
             </size>
            </property>
@@ -430,16 +526,19 @@
   <tabstop>AudioConnectPushButton</tabstop>
   <tabstop>AudioDisconnectPushButton</tabstop>
   <tabstop>AudioDisconnectAllPushButton</tabstop>
+  <tabstop>AudioExpandAllPushButton</tabstop>
   <tabstop>AudioRefreshPushButton</tabstop>
   <tabstop>MidiConnectView</tabstop>
   <tabstop>MidiConnectPushButton</tabstop>
   <tabstop>MidiDisconnectPushButton</tabstop>
   <tabstop>MidiDisconnectAllPushButton</tabstop>
+  <tabstop>MidiExpandAllPushButton</tabstop>
   <tabstop>MidiRefreshPushButton</tabstop>
   <tabstop>AlsaConnectView</tabstop>
   <tabstop>AlsaConnectPushButton</tabstop>
   <tabstop>AlsaDisconnectPushButton</tabstop>
   <tabstop>AlsaDisconnectAllPushButton</tabstop>
+  <tabstop>AlsaExpandAllPushButton</tabstop>
   <tabstop>AlsaRefreshPushButton</tabstop>
  </tabstops>
  <resources>

@@ -123,6 +123,10 @@ qjackctlPatchbayForm::qjackctlPatchbayForm (
 		SIGNAL(clicked()),
 		SLOT(disconnectAll()));
 
+	QObject::connect(m_ui.ExpandAllPushButton,
+		SIGNAL(clicked()),
+		SLOT(expandAll()));
+
 	QObject::connect(m_ui.RefreshPushButton,
 		SIGNAL(clicked()),
 		SLOT(refreshForm()));
@@ -281,14 +285,18 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 	if (m_ui.PatchbayView->binding() == NULL)
 		return;
 
+	bool bExpandAll = false;
+
 	qjackctlSocketList *pSocketList;
 	qjackctlSocketItem *pSocketItem;
+	int iItemCount, iItem;
 
 	pSocketList = m_pPatchbay->OSocketList();
 	pSocketItem = pSocketList->selectedSocketItem();
+	iItemCount  = (pSocketList->listView())->topLevelItemCount();
+	bExpandAll  = bExpandAll || (iItemCount > 0);
 	if (pSocketItem) {
-		int iItem = (pSocketList->listView())->indexOfTopLevelItem(pSocketItem);
-		int iItemCount = (pSocketList->listView())->topLevelItemCount();
+		iItem = (pSocketList->listView())->indexOfTopLevelItem(pSocketItem);
 		m_ui.OSocketEditPushButton->setEnabled(true);
 		m_ui.OSocketCopyPushButton->setEnabled(true);
 		m_ui.OSocketRemovePushButton->setEnabled(true);
@@ -304,9 +312,10 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 
 	pSocketList = m_pPatchbay->ISocketList();
 	pSocketItem = pSocketList->selectedSocketItem();
+	iItemCount  = (pSocketList->listView())->topLevelItemCount();
+	bExpandAll  = bExpandAll || (iItemCount > 0);
 	if (pSocketItem) {
-		int iItem = (pSocketList->listView())->indexOfTopLevelItem(pSocketItem);
-		int iItemCount = (pSocketList->listView())->topLevelItemCount();
+		iItem = (pSocketList->listView())->indexOfTopLevelItem(pSocketItem);
 		m_ui.ISocketEditPushButton->setEnabled(true);
 		m_ui.ISocketCopyPushButton->setEnabled(true);
 		m_ui.ISocketRemovePushButton->setEnabled(true);
@@ -326,6 +335,7 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 		m_pPatchbay->canDisconnectSelected());
 	m_ui.DisconnectAllPushButton->setEnabled(
 		m_pPatchbay->canDisconnectAll());
+	m_ui.ExpandAllPushButton->setEnabled(bExpandAll);
 }
 
 
@@ -701,6 +711,13 @@ void qjackctlPatchbayForm::disconnectSelected (void)
 void qjackctlPatchbayForm::disconnectAll (void)
 {
 	m_pPatchbay->disconnectAll();
+}
+
+
+// Expand all socket items.
+void qjackctlPatchbayForm::expandAll (void)
+{
+	m_pPatchbay->expandAll();
 }
 
 

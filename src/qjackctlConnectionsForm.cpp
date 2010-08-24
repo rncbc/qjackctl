@@ -72,6 +72,9 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 	QObject::connect(m_ui.AudioDisconnectAllPushButton,
 		SIGNAL(clicked()),
 		SLOT(audioDisconnectAll()));
+	QObject::connect(m_ui.AudioExpandAllPushButton,
+		SIGNAL(clicked()),
+		SLOT(audioExpandAll()));
 	QObject::connect(m_ui.AudioRefreshPushButton,
 		SIGNAL(clicked()),
 		SLOT(audioRefresh()));
@@ -85,6 +88,9 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 	QObject::connect(m_ui.MidiDisconnectAllPushButton,
 		SIGNAL(clicked()),
 		SLOT(midiDisconnectAll()));
+	QObject::connect(m_ui.MidiExpandAllPushButton,
+		SIGNAL(clicked()),
+		SLOT(midiExpandAll()));
 	QObject::connect(m_ui.MidiRefreshPushButton,
 		SIGNAL(clicked()),
 		SLOT(midiRefresh()));
@@ -98,6 +104,9 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 	QObject::connect(m_ui.AlsaDisconnectAllPushButton,
 		SIGNAL(clicked()),
 		SLOT(alsaDisconnectAll()));
+	QObject::connect(m_ui.AlsaExpandAllPushButton,
+		SIGNAL(clicked()),
+		SLOT(alsaExpandAll()));
 	QObject::connect(m_ui.AlsaRefreshPushButton,
 		SIGNAL(clicked()),
 		SLOT(alsaRefresh()));
@@ -417,6 +426,16 @@ void qjackctlConnectionsForm::audioDisconnectAll (void)
 }
 
 
+// Expand all JACK audio client ports.
+void qjackctlConnectionsForm::audioExpandAll (void)
+{
+	if (m_pAudioConnect) {
+		m_pAudioConnect->expandAll();
+		stabilizeAudio(true);
+	}
+}
+
+
 // JACK audio ports disconnecting.
 void qjackctlConnectionsForm::audioDisconnecting (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
@@ -483,6 +502,16 @@ void qjackctlConnectionsForm::midiDisconnectAll (void)
 }
 
 
+// Expand all JACK MIDI client ports.
+void qjackctlConnectionsForm::midiExpandAll (void)
+{
+	if (m_pMidiConnect) {
+		m_pMidiConnect->expandAll();
+		stabilizeMidi(true);
+	}
+}
+
+
 // JACK MIDI ports disconnecting.
 void qjackctlConnectionsForm::midiDisconnecting (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
@@ -545,6 +574,16 @@ void qjackctlConnectionsForm::alsaDisconnectAll (void)
 	if (m_pAlsaConnect) {
 		if (m_pAlsaConnect->disconnectAll())
 			refreshAlsa(false);
+	}
+}
+
+
+// Expand all ALSA MIDI client ports.
+void qjackctlConnectionsForm::alsaExpandAll (void)
+{
+	if (m_pAlsaConnect) {
+		m_pAlsaConnect->expandAll();
+		stabilizeAlsa(true);
 	}
 }
 
@@ -634,11 +673,13 @@ void qjackctlConnectionsForm::stabilizeAudio ( bool bEnabled )
 			m_pAudioConnect->canDisconnectSelected());
 		m_ui.AudioDisconnectAllPushButton->setEnabled(
 			m_pAudioConnect->canDisconnectAll());
+		m_ui.AudioExpandAllPushButton->setEnabled(true);
 		m_ui.AudioRefreshPushButton->setEnabled(true);
 	} else {
 		m_ui.AudioConnectPushButton->setEnabled(false);
 		m_ui.AudioDisconnectPushButton->setEnabled(false);
 		m_ui.AudioDisconnectAllPushButton->setEnabled(false);
+		m_ui.AudioExpandAllPushButton->setEnabled(false);
 		m_ui.AudioRefreshPushButton->setEnabled(false);
 	}
 }
@@ -655,11 +696,13 @@ void qjackctlConnectionsForm::stabilizeMidi ( bool bEnabled )
 			m_pMidiConnect->canDisconnectSelected());
 		m_ui.MidiDisconnectAllPushButton->setEnabled(
 			m_pMidiConnect->canDisconnectAll());
+		m_ui.MidiExpandAllPushButton->setEnabled(true);
 		m_ui.MidiRefreshPushButton->setEnabled(true);
 	} else {
 		m_ui.MidiConnectPushButton->setEnabled(false);
 		m_ui.MidiDisconnectPushButton->setEnabled(false);
 		m_ui.MidiDisconnectAllPushButton->setEnabled(false);
+		m_ui.MidiExpandAllPushButton->setEnabled(false);
 		m_ui.MidiRefreshPushButton->setEnabled(false);
 	}
 }
@@ -676,11 +719,13 @@ void qjackctlConnectionsForm::stabilizeAlsa ( bool bEnabled )
 			m_pAlsaConnect->canDisconnectSelected());
 		m_ui.AlsaDisconnectAllPushButton->setEnabled(
 			m_pAlsaConnect->canDisconnectAll());
+		m_ui.AlsaExpandAllPushButton->setEnabled(true);
 		m_ui.AlsaRefreshPushButton->setEnabled(true);
 	} else {
 		m_ui.AlsaConnectPushButton->setEnabled(false);
 		m_ui.AlsaDisconnectPushButton->setEnabled(false);
 		m_ui.AlsaDisconnectAllPushButton->setEnabled(false);
+		m_ui.AlsaExpandAllPushButton->setEnabled(false);
 		m_ui.AlsaRefreshPushButton->setEnabled(false);
 	}
 }

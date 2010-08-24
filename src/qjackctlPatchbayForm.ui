@@ -407,7 +407,39 @@
        </property>
        <property name="sizeHint" >
         <size>
-         <width>87</width>
+         <width>8</width>
+         <height>8</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ExpandAllPushButton" >
+       <property name="toolTip" >
+        <string>Expand all items</string>
+       </property>
+       <property name="text" >
+        <string>E&amp;xpand All</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
+       </property>
+       <property name="shortcut" >
+        <string>Alt+X</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType" >
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>8</width>
          <height>8</height>
         </size>
        </property>
@@ -576,6 +608,7 @@
   <tabstop>ConnectPushButton</tabstop>
   <tabstop>DisconnectPushButton</tabstop>
   <tabstop>DisconnectAllPushButton</tabstop>
+  <tabstop>ExpandAllPushButton</tabstop>
   <tabstop>RefreshPushButton</tabstop>
  </tabstops>
  <resources>

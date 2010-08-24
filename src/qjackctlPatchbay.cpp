@@ -1730,6 +1730,14 @@ bool qjackctlPatchbay::disconnectAll (void)
 }
 
 
+// Expand all socket items.
+void qjackctlPatchbay::expandAll (void)
+{
+	(m_pOSocketList->listView())->expandAll();
+	(m_pISocketList->listView())->expandAll();
+	(m_pPatchbayView->PatchworkView())->update();
+}
+
 
 // Complete contents rebuilder.
 void qjackctlPatchbay::refresh (void)

@@ -1802,6 +1802,15 @@ bool qjackctlConnect::disconnectAllEx (void)
 }
 
 
+// Expand all client ports.
+void qjackctlConnect::expandAll (void)
+{
+	(m_pOClientList->listView())->expandAll();
+	(m_pIClientList->listView())->expandAll();
+	(m_pConnectView->ConnectorView())->update();
+}
+
+
 // Complete/incremental contents rebuilder; check dirty status if incremental.
 void qjackctlConnect::updateContents ( bool bClear )
 {

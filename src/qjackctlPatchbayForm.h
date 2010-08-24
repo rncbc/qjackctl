@@ -86,6 +86,8 @@ public slots:
 	void disconnectSelected();
 	void disconnectAll();
 
+	void expandAll();
+
 	void contentsChanged();
 
 	void refreshForm();
