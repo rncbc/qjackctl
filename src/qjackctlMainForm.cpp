@@ -2242,12 +2242,12 @@ void qjackctlMainForm::timerSlot (void)
 		}
 	#endif
 		// Are we about to refresh it, really?
-		if (m_iJackRefresh > 0) {
+		if (m_iJackRefresh > 0 && m_pJackClient != NULL) {
 			m_iJackRefresh = 0;
 			m_pConnectionsForm->refreshAudio(true);
 			m_pConnectionsForm->refreshMidi(true);
 		}
-		if (m_iAlsaRefresh > 0) {
+		if (m_iAlsaRefresh > 0 && m_pAlsaSeq != NULL) {
 			m_iAlsaRefresh = 0;
 			m_pConnectionsForm->refreshAlsa(true);
 		}
