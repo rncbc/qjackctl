@@ -164,6 +164,11 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 //	m_ui.ConnectionsTabWidget->setTabEnabled(2, false);
 	m_ui.ConnectionsTabWidget->removeTab(2);
 #endif
+
+	// Start disabled.
+	stabilizeAudio(false);
+	stabilizeMidi(false);
+	stabilizeAlsa(false);
 }
 
 

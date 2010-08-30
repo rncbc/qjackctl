@@ -106,6 +106,9 @@ qjackctlSessionForm::qjackctlSessionForm (
 	QObject::connect(m_ui.UpdateSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(updateSession()));
+
+	// Start disabled.
+	stabilizeForm(false);
 }
 
 
@@ -500,9 +503,10 @@ void qjackctlSessionForm::updateSession (void)
 void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 {
 	m_ui.LoadSessionPushButton->setEnabled(bEnabled);
-	m_ui.RecentSessionPushButton->setEnabled(bEnabled);
+	m_ui.RecentSessionPushButton->setEnabled(bEnabled && !m_pRecentMenu->isEmpty());
 	m_ui.SaveSessionPushButton->setEnabled(bEnabled);
 	m_ui.SaveSessionComboBox->setEnabled(bEnabled);
+	m_ui.UpdateSessionPushButton->setEnabled(bEnabled);
 
 	if (!bEnabled) {
 		m_pSession->clear();
@@ -526,9 +530,8 @@ void qjackctlSessionForm::contextMenuEvent (
 	pAction = menu.addAction(QIcon(":/images/open1.png"),
 		tr("&Load..."), this, SLOT(loadSession()));
 	pAction->setEnabled(bEnabled);
-	QMenu *pRecentMenu = recentMenu();
-	pAction = menu.addMenu(pRecentMenu);
-	pAction->setEnabled(bEnabled && !pRecentMenu->isEmpty());
+	pAction = menu.addMenu(m_pRecentMenu);
+	pAction->setEnabled(bEnabled && !m_pRecentMenu->isEmpty());
 	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/images/save1.png"),
 		tr("&Save..."), this, SLOT(saveSessionSave()));
