@@ -501,9 +501,11 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pConnectionsForm = new qjackctlConnectionsForm (pParent, wflags);
 	m_pPatchbayForm    = new qjackctlPatchbayForm    (pParent, wflags);
 	// Setup appropriately...
+	m_pMessagesStatusForm->setTabPage(m_pSetup->iMessagesStatusTabPage);
 	m_pMessagesStatusForm->setLogging(
 		m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
 	m_pSessionForm->setSessionDirs(m_pSetup->sessionDirs);
+	m_pConnectionsForm->setTabPage(m_pSetup->iConnectionsTabPage);
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);
 
@@ -769,8 +771,11 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Try to save current aliases default settings.
-	if (bQueryClose && m_pConnectionsForm)
+	if (bQueryClose && m_pConnectionsForm) {
 		bQueryClose = m_pConnectionsForm->queryClose();
+		if (bQueryClose)
+			m_pSetup->iConnectionsTabPage = m_pConnectionsForm->tabPage();
+	}
 
 	// Try to save current patchbay default settings.
 	if (bQueryClose && m_pPatchbayForm) {
@@ -784,8 +789,10 @@ bool qjackctlMainForm::queryClose (void)
 		m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
 
 	// Some windows default fonts are here on demand too.
-	if (bQueryClose && m_pMessagesStatusForm)
+	if (bQueryClose && m_pMessagesStatusForm) {
 		m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
+		m_pSetup->iMessagesStatusTabPage = m_pMessagesStatusForm->tabPage();
+	}
 
 	// Whether we're really quitting.
 	m_bQuitForce = bQueryClose;
@@ -1548,8 +1555,11 @@ void qjackctlMainForm::appendMessagesText ( const QString& s )
 
 void qjackctlMainForm::appendMessagesError ( const QString& s )
 {
-	if (m_pMessagesStatusForm)
+	if (m_pMessagesStatusForm) {
+		m_pMessagesStatusForm->setTabPage(
+			int(qjackctlMessagesStatusForm::MessagesTab));
 		m_pMessagesStatusForm->show();
+	}
 
 	appendMessagesColor(s.simplified(), "#ff0000");
 
@@ -2675,12 +2685,11 @@ void qjackctlMainForm::toggleMessagesStatusForm (void)
 void qjackctlMainForm::toggleMessagesForm (void)
 {
 	if (m_pMessagesStatusForm) {
-		qjackctlMessagesStatusForm::TabPage tabpage
-			= m_pMessagesStatusForm->tabPage();
+		int iTabPage = m_pMessagesStatusForm->tabPage();
 		m_pMessagesStatusForm->setTabPage(
-			qjackctlMessagesStatusForm::MessagesTab);
+			int(qjackctlMessagesStatusForm::MessagesTab));
 		if (m_pMessagesStatusForm->isVisible()
-			&& tabpage != m_pMessagesStatusForm->tabPage())
+			&& iTabPage != m_pMessagesStatusForm->tabPage())
 			return;
 	}
 
@@ -2691,12 +2700,11 @@ void qjackctlMainForm::toggleMessagesForm (void)
 void qjackctlMainForm::toggleStatusForm (void)
 {
 	if (m_pMessagesStatusForm) {
-		qjackctlMessagesStatusForm::TabPage tabpage
-			= m_pMessagesStatusForm->tabPage();
+		int iTabPage = m_pMessagesStatusForm->tabPage();
 		m_pMessagesStatusForm->setTabPage(
-			qjackctlMessagesStatusForm::StatusTab);
+			int(qjackctlMessagesStatusForm::StatusTab));
 		if (m_pMessagesStatusForm->isVisible()
-			&& tabpage != m_pMessagesStatusForm->tabPage())
+			&& iTabPage != m_pMessagesStatusForm->tabPage())
 			return;
 	}
 

@@ -173,16 +173,15 @@ void qjackctlMessagesStatusForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 }
 
 
-// Tab page accesors
-void qjackctlMessagesStatusForm::setTabPage ( TabPage tabpage )
+// Tab page accessors.
+void qjackctlMessagesStatusForm::setTabPage ( int iTabPage )
 {
-	m_ui.TabWidget->setCurrentIndex(int(tabpage));
+	m_ui.MessagesStatusTabWidget->setCurrentIndex(iTabPage);
 }
 
-qjackctlMessagesStatusForm::TabPage
-qjackctlMessagesStatusForm::tabPage (void) const
+int qjackctlMessagesStatusForm::tabPage (void) const
 {
-	return TabPage(m_ui.TabWidget->currentIndex());
+	return m_ui.MessagesStatusTabWidget->currentIndex();
 }
 
 

@@ -43,7 +43,7 @@
   </property>
   <layout class="QVBoxLayout">
    <item>
-    <widget class="QTabWidget" name="TabWidget">
+    <widget class="QTabWidget" name="MessagesStatusTabWidget">
      <property name="currentIndex">
       <number>0</number>
      </property>

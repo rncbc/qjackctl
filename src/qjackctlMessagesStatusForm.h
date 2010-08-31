@@ -51,8 +51,8 @@ public:
 
 	enum TabPage { MessagesTab = 0, StatusTab = 1 };
 
-	void setTabPage(TabPage tabpage);
-	TabPage tabPage() const;
+	void setTabPage(int iTabPage);
+	int tabPage() const;
 
 	QFont messagesFont() const;
 	void setMessagesFont(const QFont& font);

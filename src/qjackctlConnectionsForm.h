@@ -53,6 +53,11 @@ public:
 
 	bool queryClose();
 
+	enum TabPage { AudioTab = 0, MidiTab = 1, AlsaTab = 2 };
+
+	void setTabPage(int iTabPage);
+	int tabPage() const;
+
 	QFont connectionsFont() const;
 	void setConnectionsFont(const QFont& font);
 

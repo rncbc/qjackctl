@@ -360,6 +360,18 @@ bool qjackctlConnectionsForm::saveAliases (void)
 }
 
 
+// Tab page accessors.
+void qjackctlConnectionsForm::setTabPage ( int iTabPage )
+{
+	m_ui.ConnectionsTabWidget->setCurrentIndex(iTabPage);
+}
+
+int qjackctlConnectionsForm::tabPage (void) const
+{
+	return m_ui.ConnectionsTabWidget->currentIndex();
+}
+
+
 // Connections view font accessors.
 QFont qjackctlConnectionsForm::connectionsFont (void) const
 {

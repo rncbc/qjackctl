@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Connections and the new Messages/Status widgets now have
+  their last open tab preserved across program run-cycles.
+
 - Connections and Patchbay widgets have been finally given
   up on an old feature request: an Expand All items button.
 

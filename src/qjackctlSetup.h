@@ -175,6 +175,10 @@ public:
 	// Recent session directories.
 	QStringList sessionDirs;
 
+	// Last open tab page...
+	int     iMessagesStatusTabPage;
+	int     iConnectionsTabPage;
+
 	// Aliases containers.
 	qjackctlConnectAlias aliasAudioOutputs;
 	qjackctlConnectAlias aliasAudioInputs;
