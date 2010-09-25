@@ -121,6 +121,7 @@ void qjackctlSetup::loadSetup (void)
 	sPatchbayPath = m_settings.value("/PatchbayPath").toString();
 	iMessagesStatusTabPage = m_settings.value("/MessagesStatusTabPage", 0).toInt();
 	iConnectionsTabPage = m_settings.value("/ConnectionsTabPage", 0).toInt();
+	iSessionSaveType = m_settings.value("/SessionSaveType", 0).toInt();
 	m_settings.endGroup();
 
 	// Load recent patchbay list...
@@ -229,6 +230,7 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/PatchbayPath", sPatchbayPath);
 	m_settings.setValue("/MessagesStatusTabPage", iMessagesStatusTabPage);
 	m_settings.setValue("/ConnectionsTabPage", iConnectionsTabPage);
+	m_settings.setValue("/SessionSaveType", iSessionSaveType);
 	m_settings.endGroup();
 
 	// Save patchbay list...

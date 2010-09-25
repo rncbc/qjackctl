@@ -504,7 +504,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pMessagesStatusForm->setTabPage(m_pSetup->iMessagesStatusTabPage);
 	m_pMessagesStatusForm->setLogging(
 		m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
-	m_pSessionForm->setSessionDirs(m_pSetup->sessionDirs);
+	m_pSessionForm->setup(m_pSetup);
 	m_pConnectionsForm->setTabPage(m_pSetup->iConnectionsTabPage);
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);
@@ -785,8 +785,10 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Try to save current session directories list...
-	if (bQueryClose && m_pSessionForm)
+	if (bQueryClose && m_pSessionForm) {
 		m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
+		m_pSetup->iSessionSaveType = m_pSessionForm->sessionSaveType();
+	}
 
 	// Some windows default fonts are here on demand too.
 	if (bQueryClose && m_pMessagesStatusForm) {

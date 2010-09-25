@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Session widget has session save type preserved as well.
+
 - Connections and the new Messages/Status widgets now have
   their last open tab preserved across program run-cycles.
 

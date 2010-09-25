@@ -23,6 +23,8 @@
 #include "qjackctlSessionForm.h"
 #include "qjackctlSession.h"
 
+#include "qjackctlSetup.h"
+
 #include "qjackctlMainForm.h"
 
 #include <QMenu>
@@ -120,17 +122,29 @@ qjackctlSessionForm::~qjackctlSessionForm (void)
 }
 
 
-// Recent session directories accessors.
-void qjackctlSessionForm::setSessionDirs ( const QStringList& sessionDirs )
+// Set reference to global options, mostly needed for
+// the initial session save type and directories.
+void qjackctlSessionForm::setup ( qjackctlSetup *pSetup )
 {
-	m_sessionDirs = sessionDirs;
+	m_ui.SaveSessionComboBox->setCurrentIndex(pSetup->iSessionSaveType);
+
+	m_sessionDirs = pSetup->sessionDirs;
 
 	updateRecentMenu();
 }
 
+
+// Recent session directories accessor.
 const QStringList& qjackctlSessionForm::sessionDirs (void) const
 {
 	return m_sessionDirs;
+}
+
+
+// Recent session save type accessor.
+int qjackctlSessionForm::sessionSaveType (void) const
+{
+	return m_ui.SaveSessionComboBox->currentIndex();
 }
 
 

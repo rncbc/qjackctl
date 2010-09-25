@@ -34,6 +34,7 @@
 
 // Forward declarations.
 class qjackctlSession;
+class qjackctlSetup;
 
 class QMenu;
 class QIcon;
@@ -53,9 +54,12 @@ public:
 	// Destructor.
 	~qjackctlSessionForm();
 
-	// Recent session directories accessors.
-	void setSessionDirs(const QStringList& sessionDirs);
+	// Global setup method.
+	void setup(qjackctlSetup *pSetup);
+
+	// Recent session directories and save type accessors.
 	const QStringList& sessionDirs() const;
+	int sessionSaveType() const;
 
 	// Recent menu accessor.
 	QMenu *recentMenu() const;
