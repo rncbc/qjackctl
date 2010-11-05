@@ -56,7 +56,7 @@ static void remove_dir ( const QString& sDir )
 	dir.rmdir(sDir);
 }
 
-void remove_dir_list ( const QList<QFileInfo>& list )
+static void remove_dir_list ( const QList<QFileInfo>& list )
 {
 	QListIterator<QFileInfo> iter(list);
 	while (iter.hasNext()) {
