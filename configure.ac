@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.6.42, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.6.43, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -379,6 +379,12 @@ fi
 AC_CHECK_LIB(jack, jack_get_version_string, [ac_jack_version="yes"], [ac_jack_version="no"])
 if test "x$ac_jack_version" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_VERSION, 1, [Define if jack_get_version_string is available.])
+fi
+
+# Check for jack_free function.
+AC_CHECK_LIB(jack, jack_free, [ac_jack_free="yes"], [ac_jack_free="no"])
+if test "x$ac_jack_free" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_FREE, 1, [Define if jack_free is available.])
 fi
 
 # Finally produce a configure header file and the main makefile.

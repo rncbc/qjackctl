@@ -126,12 +126,20 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 					pPortItem->connects.append(pConnectItem);
 				//	pPortItem->connected++;
 				}
+#ifdef CONFIG_JACK_FREE
 				jack_free(connections);
+#else
+				free(connections);
+#endif
 			} 
 			pClientItem->ports.append(pPortItem);
 		//	pClientItem->connected += pPortItem->connected;
 		}
+#ifdef CONFIG_JACK_FREE
 		jack_free(ports);
+#else
+		free(ports);
+#endif
 	}
 
 #ifdef CONFIG_JACK_SESSION

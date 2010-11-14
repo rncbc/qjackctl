@@ -138,11 +138,11 @@
     </message>
     <message>
         <source>JACK Session support disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>supporto per le Sessioni di JACK disabilitato.</translation>
     </message>
     <message>
         <source>Using: JACK %1</source>
-        <translation type="unfinished"></translation>
+        <translation>In uso: JACK %1</translation>
     </message>
 </context>
 <context>
@@ -203,27 +203,32 @@
     <message>
         <source>Alt+C</source>
         <comment>Connect</comment>
-        <translation type="unfinished">Alt+C</translation>
+        <translatorcomment>Connetti</translatorcomment>
+        <translation>Alt+C</translation>
     </message>
     <message>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Disconnetti</translatorcomment>
+        <translation>Alt+D</translation>
     </message>
     <message>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Disconnetti Tutto</translatorcomment>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <source>Alt+N</source>
         <comment>Rename</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Rinomina</translatorcomment>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <source>Alt+R</source>
         <comment>Refresh</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Aggiorna</translatorcomment>
+        <translation>Alt+R</translation>
     </message>
 </context>
 <context>
@@ -347,15 +352,15 @@ Salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Expand all client ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Espandi tutte le porte dei clients</translation>
     </message>
     <message>
         <source>E&amp;xpand All</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;spandi tutto</translation>
     </message>
     <message>
         <source>Alt+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+X</translation>
     </message>
 </context>
 <context>
@@ -399,26 +404,30 @@ Salvare i cambiamenti?</translation>
     <message>
         <source>Alt+C</source>
         <comment>Connect</comment>
-        <translation type="unfinished">Alt+C</translation>
+        <translatorcomment>Connetti</translatorcomment>
+        <translation>Alt+C</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>
-        <translation type="unfinished">&amp;Disconnetti</translation>
+        <translation>&amp;Disconnetti</translation>
     </message>
     <message>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Disconnetti</translatorcomment>
+        <translation>Alt+D</translation>
     </message>
     <message>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Disconnetti Tutto</translatorcomment>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <source>Alt+R</source>
         <comment>Refresh</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Aggiorna</translatorcomment>
+        <translation>Alt+R</translation>
     </message>
 </context>
 <context>
@@ -481,7 +490,7 @@ Salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Alt+E</source>
-        <translation type="unfinished">Alt+I</translation>
+        <translation>Alt+I</translation>
     </message>
     <message>
         <source>Show settings and options dialog</source>
@@ -573,7 +582,7 @@ Salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Alt+U</source>
-        <translation type="unfinished">Alt+U</translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <source>Stop transport rolling</source>
@@ -1225,39 +1234,39 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
     </message>
     <message>
         <source>Set&amp;up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Imp&amp;ostazioni...</translation>
     </message>
     <message>
         <source>S&amp;ession</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;essioni</translation>
     </message>
     <message>
         <source>&amp;Load...</source>
-        <translation type="unfinished">&amp;Apri...</translation>
+        <translation>&amp;Apri...</translation>
     </message>
     <message>
         <source>&amp;Save...</source>
-        <translation type="unfinished">&amp;Salva...</translation>
+        <translation>&amp;Salva...</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva ed E&amp;sci...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva &amp;Modello...</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggio&amp;rna</translation>
     </message>
     <message>
         <source>Show/hide the session management window</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra/Nascondi la finestra di gestione delle sessioni</translation>
     </message>
     <message>
         <source>Show/hide the messages log/status window</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra/Nascondi la finestra di stato/log</translation>
     </message>
 </context>
 <context>
@@ -1283,147 +1292,147 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
     <name>qjackctlMessagesStatusForm</name>
     <message>
         <source>Messages / Status - JACK Audio Connection Kit</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggi / Stato -  JACK Audio Connection Kit</translation>
     </message>
     <message>
         <source>&amp;Messages</source>
-        <translation type="unfinished">&amp;Messaggi</translation>
+        <translation>&amp;Messaggi</translation>
     </message>
     <message>
         <source>Messages log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log dei messaggi</translation>
     </message>
     <message>
         <source>Messages output log</source>
-        <translation type="unfinished">Log dei messaggi di output</translation>
+        <translation>Log dei messaggi di output</translation>
     </message>
     <message>
         <source>&amp;Status</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stato</translation>
     </message>
     <message>
         <source>Status information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni sullo Stato</translation>
     </message>
     <message>
         <source>Statistics since last server startup</source>
-        <translation type="unfinished">Statistiche dall&apos;ultimo avvio del server</translation>
+        <translation>Statistiche dall&apos;ultimo avvio del server</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descrizione</translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valore</translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Reset XRUN statistic values</source>
-        <translation type="unfinished">Reimposta le statistiche degli XRUN</translation>
+        <translation>Reimposta le statistiche degli XRUN</translation>
     </message>
     <message>
         <source>Re&amp;set</source>
-        <translation type="unfinished">Reimpo&amp;sta</translation>
+        <translation>Reimpo&amp;sta</translation>
     </message>
     <message>
         <source>Alt+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+S</translation>
     </message>
     <message>
         <source>Refresh XRUN statistic values</source>
-        <translation type="unfinished">Aggiorna le statistiche degli XRUN</translation>
+        <translation>Aggiorna le statistiche degli XRUN</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Refresh</translation>
     </message>
     <message>
         <source>Alt+R</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+R</translation>
     </message>
     <message>
         <source>Server name</source>
-        <translation type="unfinished">Nome del server</translation>
+        <translation>Nome del server</translation>
     </message>
     <message>
         <source>Server state</source>
-        <translation type="unfinished">Stato del server</translation>
+        <translation>Stato del server</translation>
     </message>
     <message>
         <source>DSP Load</source>
-        <translation type="unfinished">Carico DSP</translation>
+        <translation>Carico DSP</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished">Frequenza di campionamento</translation>
+        <translation>Frequenza di campionamento</translation>
     </message>
     <message>
         <source>Buffer Size</source>
-        <translation type="unfinished">Dimensione del buffer</translation>
+        <translation>Dimensione del buffer</translation>
     </message>
     <message>
         <source>Realtime Mode</source>
-        <translation type="unfinished">Modo Realtime</translation>
+        <translation>Modo Realtime</translation>
     </message>
     <message>
         <source>Transport state</source>
-        <translation type="unfinished">Stato del transport</translation>
+        <translation>Stato del transport</translation>
     </message>
     <message>
         <source>Transport Timecode</source>
-        <translation type="unfinished">Codice temporale del transport</translation>
+        <translation>Codice temporale del transport</translation>
     </message>
     <message>
         <source>Transport BBT</source>
-        <translation type="unfinished">BBT del transport</translation>
+        <translation>BBT del transport</translation>
     </message>
     <message>
         <source>Transport BPM</source>
-        <translation type="unfinished">BPM del transport</translation>
+        <translation>BPM del transport</translation>
     </message>
     <message>
         <source>XRUN count since last server startup</source>
-        <translation type="unfinished">Conteggio degli XRUN dall&apos;ultimo avvio del server</translation>
+        <translation>Conteggio degli XRUN dall&apos;ultimo avvio del server</translation>
     </message>
     <message>
         <source>XRUN last time detected</source>
-        <translation type="unfinished">Momento dell&apos;ultimo XRUN</translation>
+        <translation>Momento dell&apos;ultimo XRUN</translation>
     </message>
     <message>
         <source>XRUN last</source>
-        <translation type="unfinished">Ultimo XRUN</translation>
+        <translation>Ultimo XRUN</translation>
     </message>
     <message>
         <source>XRUN maximum</source>
-        <translation type="unfinished">XRUN massimi</translation>
+        <translation>XRUN massimi</translation>
     </message>
     <message>
         <source>XRUN minimum</source>
-        <translation type="unfinished">XRUN minimi</translation>
+        <translation>XRUN minimi</translation>
     </message>
     <message>
         <source>XRUN average</source>
-        <translation type="unfinished">XRUN medi</translation>
+        <translation>XRUN medi</translation>
     </message>
     <message>
         <source>XRUN total</source>
-        <translation type="unfinished">XRUN totali</translation>
+        <translation>XRUN totali</translation>
     </message>
     <message>
         <source>Maximum scheduling delay</source>
-        <translation type="unfinished">Massimo ritardo nello scheduling</translation>
+        <translation>Massimo ritardo nello scheduling</translation>
     </message>
     <message>
         <source>Time of last reset</source>
-        <translation type="unfinished">Tempo dell&apos;ultimo reset</translation>
+        <translation>Tempo dell&apos;ultimo reset</translation>
     </message>
     <message>
         <source>Logging stopped --- %1 ---</source>
-        <translation type="unfinished">Logging fermato --- %1 ---</translation>
+        <translation>Logging fermato --- %1 ---</translation>
     </message>
     <message>
         <source>Logging started --- %1 ---</source>
-        <translation type="unfinished">Logging avviato --- %1 ---</translation>
+        <translation>Logging avviato --- %1 ---</translation>
     </message>
 </context>
 <context>
@@ -1709,15 +1718,15 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>Expand all items</source>
-        <translation type="unfinished"></translation>
+        <translation>Espandi tutti gli elementi</translation>
     </message>
     <message>
         <source>E&amp;xpand All</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;spandi tutto</translation>
     </message>
     <message>
         <source>Alt+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+X</translation>
     </message>
 </context>
 <context>
@@ -1797,114 +1806,119 @@ dalle connessioni attuali?</translation>
     <message>
         <source>Alt+C</source>
         <comment>Connect</comment>
-        <translation type="unfinished">Alt+C</translation>
+        <translatorcomment>Connetti</translatorcomment>
+        <translation>Alt+C</translation>
     </message>
     <message>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Disconnetti</translatorcomment>
+        <translation>Alt+D</translation>
     </message>
     <message>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Disconnetti Tutto</translatorcomment>
+        <translation>Alt+A</translation>
     </message>
 </context>
 <context>
     <name>qjackctlSessionForm</name>
     <message>
         <source>Session - JACK Audio Connection Kit</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessione - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <source>Load session</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica Sessione</translation>
     </message>
     <message>
         <source>&amp;Load...</source>
-        <translation type="unfinished">&amp;Apri...</translation>
+        <translation>&amp;Apri...</translation>
     </message>
     <message>
         <source>Recent session</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessione recente</translation>
     </message>
     <message>
         <source>&amp;Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Recente</translation>
     </message>
     <message>
         <source>Save session</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva sessione</translation>
     </message>
     <message>
         <source>&amp;Save...</source>
-        <translation type="unfinished">&amp;Salva...</translation>
+        <translation>&amp;Salva...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva</translation>
     </message>
     <message>
         <source>Save and Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva ed Esci</translation>
     </message>
     <message>
         <source>Save Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva Modello</translation>
     </message>
     <message>
         <source>Client / Ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Client / Porte</translation>
     </message>
     <message>
         <source>UUID</source>
-        <translation type="unfinished"></translation>
+        <translation>UUID</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Comando</translation>
     </message>
     <message>
         <source>Load Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica Sessione</translation>
     </message>
     <message>
         <source>Session directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartella della Sessione</translation>
     </message>
     <message>
         <source>Save Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva Sessione</translation>
     </message>
     <message>
         <source>and Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>ed Esci</translation>
     </message>
     <message>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modello</translation>
     </message>
     <message>
         <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulis&amp;ci</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Attenzione</translation>
+        <translation>Attenzione</translation>
     </message>
     <message>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>non riesco a trovare una Sessione in questa cartella:
+
+&quot;%1&quot;</translation>
     </message>
     <message>
         <source>%1: loading session...</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: carico la sessione...</translation>
     </message>
     <message>
         <source>%1: load session %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: carico la sessione %2.</translation>
     </message>
     <message>
         <source>A session already exists in this folder:
@@ -1912,7 +1926,11 @@ dalle connessioni attuali?</translation>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing session?</source>
-        <translation type="unfinished"></translation>
+        <translation>Una Sessione esiste già in questa cartella:
+
+&quot;%1&quot;
+
+Sovrascivo la Sessione?</translation>
     </message>
     <message>
         <source>This folder already exists and is not empty:
@@ -1920,31 +1938,35 @@ Are you sure to overwrite the existing session?</source>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa cartella esiste già e non è vuota:
+
+&quot;%1&quot;
+
+Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>%1: saving session...</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: salvo la sessione...</translation>
     </message>
     <message>
         <source>%1: save session %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: salvo la sessione %2.</translation>
     </message>
     <message>
         <source>Update session</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna sessione</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggio&amp;rna</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva ed Es&amp;ci...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva &amp;Modello...</translation>
     </message>
 </context>
 <context>
@@ -2855,7 +2877,7 @@ Are you sure to overwrite the existing folder?</source>
     </message>
     <message>
         <source>Whether to ask for confirmation on application exit</source>
-        <translation type="unfinished">Chiedi conferma prima di chiudere l&apos;applicazione</translation>
+        <translation>Chiedi conferma prima di chiudere l&apos;applicazione</translation>
     </message>
     <message>
         <source>&amp;Keep child windows always on top</source>
@@ -2867,7 +2889,7 @@ Are you sure to overwrite the existing folder?</source>
     </message>
     <message>
         <source>&amp;Enable system tray icon</source>
-        <translation type="unfinished">Abilita l&apos;icona nel vassoio di sist&amp;ema</translation>
+        <translation>Abilita l&apos;icona nel vassoio di sist&amp;ema</translation>
     </message>
     <message>
         <source>Alt+E</source>
@@ -3167,7 +3189,7 @@ Vuoi applicare i cambiamenti?</translation>
     </message>
     <message>
         <source>E&amp;nable ALSA Sequencer support</source>
-        <translation type="unfinished">Abilita se&amp;quencer ALSA</translation>
+        <translation>Abilita se&amp;quencer ALSA</translation>
     </message>
     <message>
         <source>Buttons</source>
@@ -3271,19 +3293,19 @@ Vuoi applicare i cambiamenti?</translation>
     </message>
     <message>
         <source>Single application &amp;instance</source>
-        <translation type="unfinished">Permetti una sola &amp;istanza</translation>
+        <translation>Permetti una sola &amp;istanza</translation>
     </message>
     <message>
         <source>&amp;Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nome:</translation>
     </message>
     <message>
         <source>The JACK Audio Connection Kit sound server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Il nome del server audio Jack</translation>
     </message>
     <message>
         <source>&amp;Server Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome del &amp;Server</translation>
     </message>
 </context>
 <context>
