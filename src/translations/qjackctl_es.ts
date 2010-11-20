@@ -138,11 +138,11 @@
     </message>
     <message>
         <source>JACK Session support disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soporte para sesiones de JACK deshabilitado.</translation>
     </message>
     <message>
         <source>Using: JACK %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Usando: JACK %1</translation>
     </message>
 </context>
 <context>
@@ -321,11 +321,11 @@ Desea guardar los cambios?</translation>
     </message>
     <message>
         <source>Expand all client ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir todos los puertos de los clientes</translation>
     </message>
     <message>
         <source>E&amp;xpand All</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;xpandir Todos</translation>
     </message>
     <message>
         <source>Alt+X</source>
@@ -1162,35 +1162,35 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <source>S&amp;ession</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;esion</translation>
     </message>
     <message>
         <source>&amp;Load...</source>
-        <translation type="unfinished">&amp;Abrir...</translation>
+        <translation>&amp;Abrir...</translation>
     </message>
     <message>
         <source>&amp;Save...</source>
-        <translation type="unfinished">&amp;Salvar...</translation>
+        <translation>&amp;Guardar...</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar y &amp;Salir...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar Plan&amp;tilla...</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished">&amp;Refrescar</translation>
+        <translation>&amp;Refrescar</translation>
     </message>
     <message>
         <source>Show/hide the session management window</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar/ocultar la ventana para administrar sesiones</translation>
     </message>
     <message>
         <source>Show/hide the messages log/status window</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar/ocultar la ventana de estado/log</translation>
     </message>
 </context>
 <context>
@@ -1216,47 +1216,47 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     <name>qjackctlMessagesStatusForm</name>
     <message>
         <source>Messages / Status - JACK Audio Connection Kit</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensajes / Estado - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <source>&amp;Messages</source>
-        <translation type="unfinished">&amp;Mensajes</translation>
+        <translation>&amp;Mensajes</translation>
     </message>
     <message>
         <source>Messages log</source>
-        <translation type="unfinished"></translation>
+        <translation>Registro de mensajes</translation>
     </message>
     <message>
         <source>Messages output log</source>
-        <translation type="unfinished">Registro de mensajes</translation>
+        <translation>Registro de mensajes</translation>
     </message>
     <message>
         <source>&amp;Status</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Estado</translation>
     </message>
     <message>
         <source>Status information</source>
-        <translation type="unfinished"></translation>
+        <translation>Información de estado</translation>
     </message>
     <message>
         <source>Statistics since last server startup</source>
-        <translation type="unfinished">Estadísticas desde el último inicio de JACK</translation>
+        <translation>Estadísticas desde el último inicio de JACK</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valor</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Reset XRUN statistic values</source>
-        <translation type="unfinished">Reiniciar estadísticas de XRUN</translation>
+        <translation>Reiniciar estadísticas de XRUN</translation>
     </message>
     <message>
         <source>Re&amp;set</source>
-        <translation type="unfinished">re&amp;Iniciar</translation>
+        <translation>re&amp;Iniciar</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -1264,11 +1264,11 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <source>Refresh XRUN statistic values</source>
-        <translation type="unfinished">Refrescar estadísticas de XRUN</translation>
+        <translation>Refrescar estadísticas de XRUN</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished">&amp;Refrescar</translation>
+        <translation>&amp;Refrescar</translation>
     </message>
     <message>
         <source>Alt+R</source>
@@ -1276,87 +1276,87 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <source>Server name</source>
-        <translation type="unfinished">Nombre del servidor</translation>
+        <translation>Nombre del servidor</translation>
     </message>
     <message>
         <source>Server state</source>
-        <translation type="unfinished">Estado del Servidor</translation>
+        <translation>Estado del Servidor</translation>
     </message>
     <message>
         <source>DSP Load</source>
-        <translation type="unfinished">Uso de CPU del DSP</translation>
+        <translation>Uso de CPU del DSP</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished">Frecuencia de muestreo</translation>
+        <translation>Frecuencia de muestreo</translation>
     </message>
     <message>
         <source>Buffer Size</source>
-        <translation type="unfinished">Tamaño de Buffer</translation>
+        <translation>Tamaño de Buffer</translation>
     </message>
     <message>
         <source>Realtime Mode</source>
-        <translation type="unfinished">Modo Realtime</translation>
+        <translation>Modo Realtime</translation>
     </message>
     <message>
         <source>Transport state</source>
-        <translation type="unfinished">Estado del transporte</translation>
+        <translation>Estado del transporte</translation>
     </message>
     <message>
         <source>Transport Timecode</source>
-        <translation type="unfinished">Código de tiempo del transporte</translation>
+        <translation>Código de tiempo del transporte</translation>
     </message>
     <message>
         <source>Transport BBT</source>
-        <translation type="unfinished">BBT del Transporte</translation>
+        <translation>BBT del Transporte</translation>
     </message>
     <message>
         <source>Transport BPM</source>
-        <translation type="unfinished">BPM del transporte</translation>
+        <translation>BPM del transporte</translation>
     </message>
     <message>
         <source>XRUN count since last server startup</source>
-        <translation type="unfinished">XRUNs desde el último inicio</translation>
+        <translation>XRUNs desde el último inicio</translation>
     </message>
     <message>
         <source>XRUN last time detected</source>
-        <translation type="unfinished">Fecha de la última XRUN detectada</translation>
+        <translation>Fecha de la última XRUN detectada</translation>
     </message>
     <message>
         <source>XRUN last</source>
-        <translation type="unfinished">Última XRUN</translation>
+        <translation>Última XRUN</translation>
     </message>
     <message>
         <source>XRUN maximum</source>
-        <translation type="unfinished">Máximo de XRUN</translation>
+        <translation>Máximo de XRUN</translation>
     </message>
     <message>
         <source>XRUN minimum</source>
-        <translation type="unfinished">Mínimo de XRUN</translation>
+        <translation>Mínimo de XRUN</translation>
     </message>
     <message>
         <source>XRUN average</source>
-        <translation type="unfinished">Promedio de XRUN</translation>
+        <translation>Promedio de XRUN</translation>
     </message>
     <message>
         <source>XRUN total</source>
-        <translation type="unfinished">Total de XRUN</translation>
+        <translation>Total de XRUN</translation>
     </message>
     <message>
         <source>Maximum scheduling delay</source>
-        <translation type="unfinished">Máximo retardo de programación(scheduling)</translation>
+        <translation>Máximo retardo de programación(scheduling)</translation>
     </message>
     <message>
         <source>Time of last reset</source>
-        <translation type="unfinished">Tiempo desde el último reset</translation>
+        <translation>Tiempo desde el último reset</translation>
     </message>
     <message>
         <source>Logging stopped --- %1 ---</source>
-        <translation type="unfinished">Registro detenido --- %1 ---</translation>
+        <translation>Registro detenido --- %1 ---</translation>
     </message>
     <message>
         <source>Logging started --- %1 ---</source>
-        <translation type="unfinished">Registro iniciado --- %1 ---</translation>
+        <translation>Registro iniciado --- %1 ---</translation>
     </message>
 </context>
 <context>
@@ -1642,11 +1642,11 @@ una instantánea de las conexiones actuales?</translation>
     </message>
     <message>
         <source>Expand all items</source>
-        <translation type="unfinished"></translation>
+        <translation>Expandir todos los elementos</translation>
     </message>
     <message>
         <source>E&amp;xpand All</source>
-        <translation type="unfinished"></translation>
+        <translation>E&amp;xpandir Todos</translation>
     </message>
     <message>
         <source>Alt+X</source>
@@ -1732,47 +1732,47 @@ una instantánea de las conexiones actuales?</translation>
     <name>qjackctlSessionForm</name>
     <message>
         <source>Session - JACK Audio Connection Kit</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <source>Load session</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar sesión</translation>
     </message>
     <message>
         <source>&amp;Load...</source>
-        <translation type="unfinished">&amp;Abrir...</translation>
+        <translation>&amp;Abrir...</translation>
     </message>
     <message>
         <source>Recent session</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión reciente</translation>
     </message>
     <message>
         <source>&amp;Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reciente</translation>
     </message>
     <message>
         <source>Save session</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar sesión</translation>
     </message>
     <message>
         <source>&amp;Save...</source>
-        <translation type="unfinished">&amp;Salvar...</translation>
+        <translation>&amp;Guardar...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Save and Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar y Salir</translation>
     </message>
     <message>
         <source>Save Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar plantilla</translation>
     </message>
     <message>
         <source>Client / Ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliente / Puertos</translation>
     </message>
     <message>
         <source>UUID</source>
@@ -1780,49 +1780,51 @@ una instantánea de las conexiones actuales?</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Comando</translation>
     </message>
     <message>
         <source>Load Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar Sesión</translation>
     </message>
     <message>
         <source>Session directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Directorio de la sesión</translation>
     </message>
     <message>
         <source>Save Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar Sesión</translation>
     </message>
     <message>
         <source>and Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>y Salir</translation>
     </message>
     <message>
         <source>Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Plantilla</translation>
     </message>
     <message>
         <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Limpiar</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Advertencia</translation>
+        <translation>Advertencia</translation>
     </message>
     <message>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se encontró una sesión en esta carpeta:
+
+&quot;%1&quot;</translation>
     </message>
     <message>
         <source>%1: loading session...</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: cargando sesión...</translation>
     </message>
     <message>
         <source>%1: load session %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: cargar sesión %2.</translation>
     </message>
     <message>
         <source>A session already exists in this folder:
@@ -1830,7 +1832,11 @@ una instantánea de las conexiones actuales?</translation>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing session?</source>
-        <translation type="unfinished"></translation>
+        <translation>Una sesión ya existe en esta carpeta:
+
+&quot;%1&quot;
+
+Está seguro de querer sobreescribirla?</translation>
     </message>
     <message>
         <source>This folder already exists and is not empty:
@@ -1838,31 +1844,35 @@ Are you sure to overwrite the existing session?</source>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta carpeta existe y no está vacía:
+
+&quot;%1&quot;
+
+Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>%1: saving session...</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: guardando sesión...</translation>
     </message>
     <message>
         <source>%1: save session %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%: guardar sesión %2.</translation>
     </message>
     <message>
         <source>Update session</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar sesión</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished">&amp;Refrescar</translation>
+        <translation>&amp;Refrescar</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar y &amp;Salir...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar Plan&amp;tilla...</translation>
     </message>
 </context>
 <context>
@@ -3191,15 +3201,15 @@ Do you want to apply the changes?</source>
     </message>
     <message>
         <source>&amp;Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nombre:</translation>
     </message>
     <message>
         <source>The JACK Audio Connection Kit sound server name</source>
-        <translation type="unfinished"></translation>
+        <translation>El nombre del servidor JACK Audio Connection Kit</translation>
     </message>
     <message>
         <source>&amp;Server Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del &amp;Servidor</translation>
     </message>
 </context>
 <context>
