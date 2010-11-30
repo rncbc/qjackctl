@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 15
+%define release 16
 
 %define _prefix	@ac_prefix@
 
@@ -59,6 +59,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
+* Tue Nov 30 2010 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.7
+- JACK Session managerism. 
 * Mon May 17 2010 Rui Nuno Capela <rncbc@users.sourceforge.net>
 - Standard desktop icon fixing. 
 * Mon Jan 11 2010 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.6

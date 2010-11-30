@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-SVN TRUNK
+0.3.7  2010-11-30  JACK Session managerism.
 
 - Session widget has session save type preserved as well.
 
@@ -38,7 +38,7 @@ SVN TRUNK
   Delay for the rescue).
 
 - Server name is finally part of the server settings presets,
-  thanks to Fons Adriaensen for the heads-up. (EXPERIMENTAL)
+  thanks to Fons Adriaensen for the heads-up.
 
 - As a workaround regarding issues switching jack2's backends,
   Robin Gareus sends us yet another D-Bus metho slot: "preset",
@@ -62,7 +62,7 @@ SVN TRUNK
   as many input ports there are in below, one by one (satisfying
   a 5 year old request from Yann Orlarey, thanks:).
 
-- JACK session support is being introduced. (EXPERIMENTAL)
+- JACK session support is being introduced.
 
 - Ignore first XRUN occurrence option dropped from statistics.
 
