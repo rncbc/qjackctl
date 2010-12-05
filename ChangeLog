@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+SVN TRUNK
+
+- Added include "errno.h" alegedly missing for BSD style
+  systems (applying patch for bug #3126091).
+
+
 0.3.7  2010-11-30  JACK Session managerism.
 
 - Session widget has session save type preserved as well.

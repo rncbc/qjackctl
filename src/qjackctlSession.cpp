@@ -25,6 +25,7 @@
 #include "qjackctlMainForm.h"
 
 #ifdef CONFIG_JACK_SESSION
+#include <errno.h>
 #include <jack/session.h>
 #endif
 
