@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Russian (ru) translation updated (by Alexandre Prokoudine).
+
 - Added include "errno.h" alegedly missing for BSD style
   systems (applying patch for bug #3126091).
 
