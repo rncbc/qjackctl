@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Abrupt focus behavior when any of the keyboard modifiers
+  (Shift, Ctrl, Alt, Caps Lock) is hit while on Connections
+  client/port aliases editing (rename) has been fixed.
+
 - Russian (ru) translation updated (by Alexandre Prokoudine).
 
 - Added include "errno.h" alegedly missing for BSD style

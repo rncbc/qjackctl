@@ -736,10 +736,14 @@ void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool b
 		if (m_pAliases) {
 			pClientItem->setText(0,
 				m_pAliases->clientAlias(pClientItem->clientName()));
+		} else {
+			pClientItem->setText(0,
+				pClientItem->clientName());
+		}
+		if (m_pAliases && m_bRenameEnabled) {
 			pClientItem->setFlags(
 				pClientItem->flags() |  Qt::ItemIsEditable);
 		} else {
-			pClientItem->setText(0, pClientItem->clientName());
 			pClientItem->setFlags(
 				pClientItem->flags() & ~Qt::ItemIsEditable);
 		}
@@ -756,10 +760,14 @@ void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool b
 			if (m_pAliases) {
 				pPortItem->setText(0, m_pAliases->portAlias(
 					pPortItem->clientName(), pPortItem->portName()));
-				pPortItem->setFlags(
-					pClientItem->flags() |  Qt::ItemIsEditable);
 			} else {
-				pPortItem->setText(0, pPortItem->portName());
+				pPortItem->setText(0,
+					pPortItem->portName());
+			}
+			if (m_pAliases && m_bRenameEnabled) {
+				pPortItem->setFlags(
+					pPortItem->flags() |  Qt::ItemIsEditable);
+			} else {
 				pPortItem->setFlags(
 					pPortItem->flags() & ~Qt::ItemIsEditable);
 			}
@@ -813,6 +821,7 @@ void qjackctlClientListView::renamedSlot (void)
 		if (sText.isEmpty())
 			pPortItem->setText(0, pPortItem->portName());
 	}
+
 	m_pConnectView->setDirty(true);
 }
 
@@ -1316,6 +1325,7 @@ int qjackctlConnectView::iconSize (void) const
 void qjackctlConnectView::setDirty ( bool bDirty )
 {
 	m_bDirty = bDirty;
+
 	if (bDirty)
 		emit contentsChanged();
 }
