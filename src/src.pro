@@ -72,6 +72,7 @@ TRANSLATIONS += \
 	translations/qjackctl_es.ts \
 	translations/qjackctl_fr.ts \
 	translations/qjackctl_it.ts \
+	translations/qjackctl_nl.ts \
 	translations/qjackctl_ru.ts
 
 unix {

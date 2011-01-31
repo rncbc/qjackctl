@@ -71,6 +71,7 @@ translations_sources = \
 	src/translations/qjackctl_es.ts \
 	src/translations/qjackctl_fr.ts \
 	src/translations/qjackctl_it.ts \
+	src/translations/qjackctl_nl.ts \
 	src/translations/qjackctl_ru.ts
 
 translations_targets = \
@@ -79,6 +80,7 @@ translations_targets = \
 	src/translations/qjackctl_es.qm \
 	src/translations/qjackctl_fr.qm \
 	src/translations/qjackctl_it.qm \
+	src/translations/qjackctl_nl.qm \
 	src/translations/qjackctl_ru.qm
 
 
