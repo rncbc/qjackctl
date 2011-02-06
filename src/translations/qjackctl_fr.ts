@@ -3341,7 +3341,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2129"/>
         <source>Browse for script to be executed before starting up the JACK audio server</source>
-        <translation>Pointer sur le script à éxécuter avant de démarrer le serveur audio JACK</translation>
+        <translation>Pointer sur le script à exécuter avant de démarrer le serveur audio JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2151"/>
@@ -3351,12 +3351,12 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2213"/>
         <source>Browse for script to be executed after starting up the JACK audio server</source>
-        <translation>Pointer sur le script à éxécuter après avoir démarré le serveur audio JACK</translation>
+        <translation>Pointer sur le script à exécuter après avoir démarré le serveur audio JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2275"/>
         <source>Browse for script to be executed before shutting down the JACK audio server</source>
-        <translation>Pointer sur le script à éxécuter avant d&apos;éteindre le serveur audio JACK</translation>
+        <translation>Pointer sur le script à exécuter avant d&apos;éteindre le serveur audio JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2297"/>
@@ -3383,7 +3383,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2378"/>
         <source>Browse for script to be executed after shutting down the JACK audio server</source>
-        <translation>Pointer sur le script à éxécuter après avoir éteint le serveur audio JACK</translation>
+        <translation>Pointer sur le script à exécuter après avoir éteint le serveur audio JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2400"/>
