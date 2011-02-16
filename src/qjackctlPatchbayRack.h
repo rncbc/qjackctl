@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@ typedef void snd_seq_t;
 #endif
 
 // Patchbay socket types.
+#define QJACKCTL_SOCKETTYPE_DEFAULT    -1
 #define QJACKCTL_SOCKETTYPE_JACK_AUDIO  0
 #define QJACKCTL_SOCKETTYPE_JACK_MIDI   1
 #define QJACKCTL_SOCKETTYPE_ALSA_MIDI   2
@@ -90,6 +91,10 @@ public:
 
 	// Plug list accessor.
 	QStringList& pluglist();
+	
+	// Simple socket type methods.
+	static int typeFromText(const QString& sSocketType);
+	static QString textFromType(int iSocketType);
 
 private:
 
@@ -198,9 +203,13 @@ public:
 
 	// Common socket finder.
 	qjackctlPatchbaySocket *findSocket(
-		QList<qjackctlPatchbaySocket *>& socketlist, const QString& sSocketName);
+		QList<qjackctlPatchbaySocket *>& socketlist,
+		const QString& sSocketName,
+		int iSocketType = QJACKCTL_SOCKETTYPE_DEFAULT);
+
 	// Slot finders.
 	qjackctlPatchbaySlot *findSlot(const QString& sSlotName);
+
 	// Cable finder.
 	qjackctlPatchbayCable *findCable(
 		const QString& sOutputSocket, const QString& sInputSocket);

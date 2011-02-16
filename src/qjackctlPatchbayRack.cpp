@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -260,6 +260,45 @@ QStringList& qjackctlPatchbaySocket::pluglist (void)
 }
 
 
+// Simple socket type methods.
+int qjackctlPatchbaySocket::typeFromText ( const QString& sSocketType )
+{
+	int iSocketType = QJACKCTL_SOCKETTYPE_DEFAULT;
+
+	if (sSocketType == "jack-audio" || sSocketType == "audio")
+		iSocketType = QJACKCTL_SOCKETTYPE_JACK_AUDIO;
+	else
+	if (sSocketType == "jack-midi")
+		iSocketType = QJACKCTL_SOCKETTYPE_JACK_MIDI;
+	else
+	if (sSocketType == "alsa-midi" || sSocketType == "midi")
+		iSocketType = QJACKCTL_SOCKETTYPE_ALSA_MIDI;
+
+	return iSocketType;
+}
+
+QString qjackctlPatchbaySocket::textFromType ( int iSocketType )
+{
+	QString sSocketType;
+
+	switch (iSocketType) {
+	case QJACKCTL_SOCKETTYPE_JACK_AUDIO:
+		sSocketType = "jack-audio";
+		break;
+	case QJACKCTL_SOCKETTYPE_JACK_MIDI:
+		sSocketType = "jack-midi";
+		break;
+	case QJACKCTL_SOCKETTYPE_ALSA_MIDI:
+		sSocketType = "alsa-midi";
+		break;
+	default:
+		break;
+	}
+
+	return sSocketType;
+}
+
+
 //----------------------------------------------------------------------
 // class qjackctlPatchbaySlot -- Patchbay socket slot implementation.
 //
@@ -468,12 +507,15 @@ void qjackctlPatchbayRack::removeCable ( qjackctlPatchbayCable *pCable )
 
 // Common socket finders.
 qjackctlPatchbaySocket *qjackctlPatchbayRack::findSocket (
-	QList<qjackctlPatchbaySocket *>& socketlist, const QString& sSocketName )
+	QList<qjackctlPatchbaySocket *>& socketlist,
+	const QString& sSocketName, int iSocketType )
 {
 	QListIterator<qjackctlPatchbaySocket *> iter(socketlist);
 	while (iter.hasNext()) {
 		qjackctlPatchbaySocket *pSocket = iter.next();
-		if (sSocketName == pSocket->name())
+		if (sSocketName == pSocket->name() &&
+			(iSocketType == QJACKCTL_SOCKETTYPE_DEFAULT
+			 || iSocketType == pSocket->type()))
 			return pSocket;
 	}
 
