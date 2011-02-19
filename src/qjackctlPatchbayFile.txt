@@ -32,7 +32,7 @@ qjackctlPatchbayFile format specification
 #      .
 #   </slots>
     <cables>
-      <cable output="socket-name" input="socket-name" />
+      <cable output="socket-name" input="socket-name" type="socket-type" />
        .
        .
        .
