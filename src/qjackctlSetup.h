@@ -1,7 +1,7 @@
 // qjackctlSetup.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -103,14 +103,16 @@ public:
 	// Default (translated) preset name.
 	QString sDefPresetName;
 
-	// Immediate server start option.
+	// Immediate server start options.
 	bool bStartJack;
+	bool bStartJackCmd;
 
 	// User supplied command line.
 	QString sCmdLine;
 
 	// Current (default) preset name.
 	QString sDefPreset;
+
 	// Available presets list.
 	QStringList presets;
 

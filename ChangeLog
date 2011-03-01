@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Command line server start option (-s, --start) is now made
+  independent from configuration setup option (cf. Setup/Misc
+  /Start JACK audio server on application startup).
+
 - Now handling cable socket types properly to let patchbay
   definitions work correctly, whenever having sockets with
   the very same literal name (twisted from patch #3183467,

@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@
 qjackctlSetup::qjackctlSetup (void)
 	: m_settings(QJACKCTL_DOMAIN, QJACKCTL_TITLE)
 {
-	bStartJack = false;
+	bStartJackCmd = false;
 	sDefPresetName = QObject::tr("(default)");
 
 	loadSetup();
@@ -66,6 +66,7 @@ void qjackctlSetup::loadSetup (void)
 	bSingleton               = m_settings.value("/Singleton", true).toBool();
 //	sServerName              = m_settings.value("/ServerName").toString();
 	bStartJack               = m_settings.value("/StartJack", false).toBool();
+//	bStartJackCmd            = m_settings.value("/StartJackCmd", false).toBool();
 	bStartupScript           = m_settings.value("/StartupScript", false).toBool();
 	sStartupScriptShell      = m_settings.value("/StartupScriptShell").toString();
 	bPostStartupScript       = m_settings.value("/PostStartupScript", false).toBool();
@@ -175,6 +176,7 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/Singleton",               bSingleton);
 //	m_settings.setValue("/ServerName",              sServerName);
 	m_settings.setValue("/StartJack",               bStartJack);
+//	m_settings.setValue("/StartJackCmd",            bStartJackCmd);
 	m_settings.setValue("/StartupScript",           bStartupScript);
 	m_settings.setValue("/StartupScriptShell",      sStartupScriptShell);
 	m_settings.setValue("/PostStartupScript",       bPostStartupScript);
@@ -509,7 +511,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 			sVal = args.at(i + 1);
 
 		if (sArg == "-s" || sArg == "--start") {
-			bStartJack = true;
+			bStartJackCmd = true;
 		}
 		else if (sArg == "-p" || sArg == "--preset") {
 			if (sVal.isNull()) {

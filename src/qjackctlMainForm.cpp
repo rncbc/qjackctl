@@ -719,6 +719,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
 	// Look for immediate server startup?...
 	if (m_pSetup->bStartJack || !m_pSetup->sCmdLine.isEmpty())
+		m_pSetup->bStartJackCmd = true;
+	if (m_pSetup->bStartJackCmd)
 		startJack();
 
 	// Register the first timer slot.
