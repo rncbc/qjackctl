@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -416,8 +416,18 @@ qjackctlClientList::qjackctlClientList (
 // Default destructor.
 qjackctlClientList::~qjackctlClientList (void)
 {
+	clear();
+}
+
+
+// Do proper contents cleanup.
+void qjackctlClientList::clear (void)
+{
 	qDeleteAll(m_clients);
 	m_clients.clear();
+
+	if (m_pListView)
+		m_pListView->clear();
 }
 
 
@@ -1829,8 +1839,8 @@ void qjackctlConnect::updateContents ( bool bClear )
 	if (startMutex()) {
 		// Do we do a complete rebuild?
 		if (bClear) {
-			(m_pOClientList->listView())->clear();
-			(m_pIClientList->listView())->clear();
+			m_pOClientList->clear();
+			m_pIClientList->clear();
 			updateIconPixmaps();
 		}
 		// Add (newer) client:ports and respective connections...

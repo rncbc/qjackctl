@@ -1,7 +1,7 @@
 // qjackctlConnectionsForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -77,7 +77,7 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SLOT(audioExpandAll()));
 	QObject::connect(m_ui.AudioRefreshPushButton,
 		SIGNAL(clicked()),
-		SLOT(audioRefresh()));
+		SLOT(audioRefreshClear()));
 
 	QObject::connect(m_ui.MidiConnectPushButton,
 		SIGNAL(clicked()),
@@ -93,7 +93,7 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SLOT(midiExpandAll()));
 	QObject::connect(m_ui.MidiRefreshPushButton,
 		SIGNAL(clicked()),
-		SLOT(midiRefresh()));
+		SLOT(midiRefreshClear()));
 
 	QObject::connect(m_ui.AlsaConnectPushButton,
 		SIGNAL(clicked()),
@@ -109,7 +109,7 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SLOT(alsaExpandAll()));
 	QObject::connect(m_ui.AlsaRefreshPushButton,
 		SIGNAL(clicked()),
-		SLOT(alsaRefresh()));
+		SLOT(alsaRefreshClear()));
 
 	// Connect it to some UI feedback slots.
 	QObject::connect(m_ui.AudioConnectView->OListView(),
@@ -464,11 +464,15 @@ void qjackctlConnectionsForm::audioDisconnecting (
 
 
 // Refresh JACK audio form by notifying the parent form.
+void qjackctlConnectionsForm::audioRefreshClear (void)
+{
+	refreshAudio(true, true);
+}
+
 void qjackctlConnectionsForm::audioRefresh (void)
 {
 	refreshAudio(false);
 }
-
 
 // A JACK audio helper stabilization slot.
 void qjackctlConnectionsForm::audioStabilize (void)
@@ -540,6 +544,11 @@ void qjackctlConnectionsForm::midiDisconnecting (
 
 
 // Refresh JACK MIDI form by notifying the parent form.
+void qjackctlConnectionsForm::midiRefreshClear (void)
+{
+	refreshMidi(true, true);
+}
+
 void qjackctlConnectionsForm::midiRefresh (void)
 {
 	refreshMidi(false);
@@ -616,6 +625,11 @@ void qjackctlConnectionsForm::alsaDisconnecting (
 
 
 // Refresh complete form by notifying the parent form.
+void qjackctlConnectionsForm::alsaRefreshClear (void)
+{
+	refreshAlsa(true, true);
+}
+
 void qjackctlConnectionsForm::alsaRefresh (void)
 {
 	refreshAlsa(false);
@@ -631,14 +645,14 @@ void qjackctlConnectionsForm::alsaStabilize (void)
 
 // Either rebuild all connections now
 // or notify main form for doing that later.
-void qjackctlConnectionsForm::refreshAudio ( bool bEnabled )
+void qjackctlConnectionsForm::refreshAudio ( bool bEnabled, bool bClear )
 {
 	if (m_pAudioConnect == NULL)
 		return;
 
 	if (bEnabled) {
 	//	m_pAudioConnect->refresh();
-		stabilizeAudio(true);
+		stabilizeAudio(bEnabled, bClear);
 	} else {
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 		if (pMainForm)
@@ -646,14 +660,14 @@ void qjackctlConnectionsForm::refreshAudio ( bool bEnabled )
 	}
 }
 
-void qjackctlConnectionsForm::refreshMidi ( bool bEnabled )
+void qjackctlConnectionsForm::refreshMidi ( bool bEnabled, bool bClear )
 {
 	if (m_pMidiConnect == NULL)
 		return;
 
 	if (bEnabled) {
 	//	m_pMidiConnect->refresh();
-		stabilizeMidi(true);
+		stabilizeMidi(bEnabled, bClear);
 	} else {
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 		if (pMainForm)
@@ -661,14 +675,14 @@ void qjackctlConnectionsForm::refreshMidi ( bool bEnabled )
 	}
 }
 
-void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled )
+void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled, bool bClear )
 {
 	if (m_pAlsaConnect == NULL)
 		return;
 
 	if (bEnabled) {
 	//	m_pAlsaConnect->refresh();
-		stabilizeAlsa(true);
+		stabilizeAlsa(bEnabled, bClear);
 	} else {
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 		if (pMainForm)
@@ -678,10 +692,10 @@ void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled )
 
 
 // Proper enablement of connections command controls.
-void qjackctlConnectionsForm::stabilizeAudio ( bool bEnabled )
+void qjackctlConnectionsForm::stabilizeAudio ( bool bEnabled, bool bClear )
 {
 	if (m_pAudioConnect)
-		m_pAudioConnect->updateContents(!bEnabled);
+		m_pAudioConnect->updateContents(!bEnabled || bClear);
 
 	if (m_pAudioConnect && bEnabled) {
 		m_ui.AudioConnectPushButton->setEnabled(
@@ -701,10 +715,10 @@ void qjackctlConnectionsForm::stabilizeAudio ( bool bEnabled )
 	}
 }
 
-void qjackctlConnectionsForm::stabilizeMidi ( bool bEnabled )
+void qjackctlConnectionsForm::stabilizeMidi ( bool bEnabled, bool bClear )
 {
 	if (m_pMidiConnect)
-		m_pMidiConnect->updateContents(!bEnabled);
+		m_pMidiConnect->updateContents(!bEnabled || bClear);
 
 	if (m_pMidiConnect && bEnabled) {
 		m_ui.MidiConnectPushButton->setEnabled(
@@ -724,10 +738,10 @@ void qjackctlConnectionsForm::stabilizeMidi ( bool bEnabled )
 	}
 }
 
-void qjackctlConnectionsForm::stabilizeAlsa ( bool bEnabled )
+void qjackctlConnectionsForm::stabilizeAlsa ( bool bEnabled, bool bClear )
 {
 	if (m_pAlsaConnect)
-		m_pAlsaConnect->updateContents(!bEnabled);
+		m_pAlsaConnect->updateContents(!bEnabled || bClear);
 
 	if (m_pAlsaConnect && bEnabled) {
 		m_ui.AlsaConnectPushButton->setEnabled(

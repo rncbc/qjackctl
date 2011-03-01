@@ -1,7 +1,7 @@
 // qjackctlConnectionsForm.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -67,13 +67,13 @@ public:
 	bool isMidiConnected() const;
 	bool isAlsaConnected() const;
 
-	void refreshAudio(bool bEnabled);
-	void refreshMidi(bool bEnabled);
-	void refreshAlsa(bool bEnabled);
+	void refreshAudio(bool bEnabled, bool bClear = false);
+	void refreshMidi(bool bEnabled, bool bClear = false);
+	void refreshAlsa(bool bEnabled, bool bClear = false);
 
-	void stabilizeAudio(bool bEnabled);
-	void stabilizeMidi(bool bEnabled);
-	void stabilizeAlsa(bool bEnabled);
+	void stabilizeAudio(bool bEnabled, bool bClear = false);
+	void stabilizeMidi(bool bEnabled, bool bClear = false);
+	void stabilizeAlsa(bool bEnabled, bool bClear = false);
 
 	void setupAliases(qjackctlSetup *pSetup);
 	void updateAliases();
@@ -86,6 +86,7 @@ public slots:
 	void audioDisconnectSelected();
 	void audioDisconnectAll();
 	void audioExpandAll();
+	void audioRefreshClear();
 	void audioRefresh();
 	void audioStabilize();
 
@@ -93,6 +94,7 @@ public slots:
 	void midiDisconnectSelected();
 	void midiDisconnectAll();
 	void midiExpandAll();
+	void midiRefreshClear();
 	void midiRefresh();
 	void midiStabilize();
 
@@ -100,6 +102,7 @@ public slots:
 	void alsaDisconnectSelected();
 	void alsaDisconnectAll();
 	void alsaExpandAll();
+	void alsaRefreshClear();
 	void alsaRefresh();
 	void alsaStabilize();
 
