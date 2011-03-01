@@ -8,7 +8,7 @@ SVN TRUNK
 - Connections refresh button now does an immediate and true
   reconstruction of all clients and their respective ports
   and connections, unconditionally.
-  
+
 - Command line server start option (-s, --start) is now made
   independent from configuration setup option (cf. Setup/Misc
   /Start JACK audio server on application startup).
