@@ -758,7 +758,7 @@ Mi dispiace</translation>
         <source>Could not load active patchbay definition.
 
 Disabled.</source>
-        <translation>Non riesco a caricare il Patchbay attivo.
+        <translation type="obsolete">Non riesco a caricare il Patchbay attivo.
         
 Disabilitato.</translation>
     </message>
@@ -1267,6 +1267,14 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
     <message>
         <source>Show/hide the messages log/status window</source>
         <translation>Mostra/Nascondi la finestra di stato/log</translation>
+    </message>
+    <message>
+        <source>Could not load active patchbay definition.
+
+&quot;%1&quot;
+
+Disabled.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

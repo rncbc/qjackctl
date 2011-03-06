@@ -696,7 +696,7 @@ Disculpa</translation>
         <source>Could not load active patchbay definition.
 
 Disabled.</source>
-        <translation>No se puede cargar el archivo con el esquema del patchbay activo.
+        <translation type="obsolete">No se puede cargar el archivo con el esquema del patchbay activo.
 Deshabilitándolo.</translation>
     </message>
     <message>
@@ -1191,6 +1191,14 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     <message>
         <source>Show/hide the messages log/status window</source>
         <translation>Mostrar/ocultar la ventana de estado/log</translation>
+    </message>
+    <message>
+        <source>Could not load active patchbay definition.
+
+&quot;%1&quot;
+
+Disabled.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

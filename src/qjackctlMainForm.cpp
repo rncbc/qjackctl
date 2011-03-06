@@ -1849,8 +1849,13 @@ void qjackctlMainForm::updateActivePatchbay (void)
 
 	// Time to load the active patchbay rack profiler?
 	if (m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty()) {
+		QFileInfo fi(m_pSetup->sActivePatchbayPath);
+		if (fi.isRelative())
+			m_pSetup->sActivePatchbayPath = fi.absoluteFilePath();
 		if (!qjackctlPatchbayFile::load(m_pPatchbayRack, m_pSetup->sActivePatchbayPath)) {
-			appendMessagesError(tr("Could not load active patchbay definition.\n\nDisabled."));
+			appendMessagesError(
+				tr("Could not load active patchbay definition.\n\n\"%1\"\n\nDisabled.")
+				.arg(m_pSetup->sActivePatchbayPath));
 			m_pSetup->bActivePatchbay = false;
 		} else {
 			appendMessages(tr("Patchbay activated."));

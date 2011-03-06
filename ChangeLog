@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Make sure all activated patchbay definition files are in
+  their complete and absolute directory path forms.
+
 - Connections refresh button now does an immediate and true
   reconstruction of all clients and their respective ports
   and connections, unconditionally.
