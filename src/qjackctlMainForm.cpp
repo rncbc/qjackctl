@@ -3845,4 +3845,16 @@ void qjackctlMainForm::transportPlayStatus ( bool bOn )
 }
 
 
+// Session (desktop) shutdown signal handler.
+void qjackctlMainForm::setQuitForce ( bool bQuitForce )
+{
+	m_bQuitForce = bQuitForce;
+}
+
+bool qjackctlMainForm::isQuitForce (void) const
+{
+	return m_bQuitForce;
+}
+
+
 // end of qjackctlMainForm.cpp

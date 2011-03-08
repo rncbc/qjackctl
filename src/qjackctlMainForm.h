@@ -98,6 +98,9 @@ public:
 	void queryDisconnect(
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType);
 
+	void setQuitForce(bool bQuitForce);
+	bool isQuitForce() const;
+
 public slots:
 
 	void startJack();

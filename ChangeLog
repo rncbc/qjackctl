@@ -5,6 +5,12 @@ ChangeLog
 
 SVN TRUNK
 
+- Desktop environment session shutdown (eg. logout) is now
+  tapped for graceful application exit, even though the main
+  window is active (visible) and minimizing to system tray
+  is enabled. Both were causing first shutdown/logout attempt
+  to abort. Not anymore, hopefully ;).
+
 - Make sure all activated patchbay definition files are in
   their complete and absolute directory path forms.
 
