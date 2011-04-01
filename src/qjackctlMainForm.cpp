@@ -3040,11 +3040,13 @@ void qjackctlMainForm::refreshStatus (void)
 		if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 			m_iStatusRefresh = 0;
 			float fDspLoad = jack_cpu_load(m_pJackClient);
+			const char f = (fDspLoad > 0.1f ? 'f' : 'g'); // format
+			const int  p = (fDspLoad > 1.0f ?  1  :  2 ); // precision
 			if (m_pSystemTray)
 				m_pSystemTray->setToolTip(
-					tr("%1 (%2%)").arg(windowTitle()).arg(fDspLoad, 0, 'g', 3));
+					tr("%1 (%2%)").arg(windowTitle()).arg(fDspLoad, 0, f, p));
 			updateStatusItem(STATUS_DSP_LOAD,
-				tr("%1 %").arg(fDspLoad, 0, 'g', 3));
+				tr("%1 %").arg(fDspLoad, 0, f, p));
 			updateStatusItem(STATUS_SAMPLE_RATE,
 				tr("%1 Hz").arg(jack_get_sample_rate(m_pJackClient)));
 			updateStatusItem(STATUS_BUFFER_SIZE,
