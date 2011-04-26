@@ -202,7 +202,11 @@ void qjackctlPortItem::setHilite ( bool bHilite )
 	}
 
 	// Set the new color.
-	const QPalette& pal = QTreeWidgetItem::treeWidget()->palette();
+	QTreeWidget *pTreeWidget = QTreeWidgetItem::treeWidget();
+	if (pTreeWidget == NULL)
+		return;
+
+	const QPalette& pal = pTreeWidget->palette();
 	QTreeWidgetItem::setTextColor(0, m_bHilite
 		? (pal.base().color().value() < 0x7f ? Qt::cyan : Qt::blue)
 		: pal.text().color());
@@ -363,7 +367,11 @@ void qjackctlClientItem::setHilite ( bool bHilite )
 		m_iHilite--;
 
 	// Set the new color.
-	const QPalette& pal = QTreeWidgetItem::treeWidget()->palette();
+	QTreeWidget *pTreeWidget = QTreeWidgetItem::treeWidget();
+	if (pTreeWidget == NULL)
+		return;
+
+	const QPalette& pal = pTreeWidget->palette();
 	QTreeWidgetItem::setTextColor(0, m_iHilite > 0
 		? (pal.base().color().value() < 0x7f ? Qt::darkCyan : Qt::darkBlue)
 		: pal.text().color());
