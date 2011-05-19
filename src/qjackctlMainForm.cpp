@@ -787,10 +787,8 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Try to save current session directories list...
-	if (bQueryClose && m_pSessionForm) {
+	if (bQueryClose && m_pSessionForm)
 		m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
-		m_pSetup->iSessionSaveType = m_pSessionForm->sessionSaveType();
-	}
 
 	// Some windows default fonts are here on demand too.
 	if (bQueryClose && m_pMessagesStatusForm) {
@@ -3379,6 +3377,10 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		const QIcon iconSession(":/images/session1.png");
 		QMenu *pSessionMenu = menu.addMenu(sTitle);
 		pSessionMenu->setIcon(iconSession);
+		pAction = pSessionMenu->addAction(m_pSessionForm->isVisible()
+			? tr("&Hide") : tr("S&how"),
+			this, SLOT(toggleSessionForm()));
+		pSessionMenu->addSeparator();
 		pAction = pSessionMenu->addAction(QIcon(":/images/open1.png"),
 			tr("&Load..."),
 			m_pSessionForm, SLOT(loadSession()));
@@ -3393,7 +3395,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		pAction->setEnabled(bEnabled);
 	#ifdef CONFIG_JACK_SESSION
 		pAction = pSessionMenu->addAction(
-			tr("Save and &Quit..."),
+			tr("Sa&ve and Quit..."),
 			m_pSessionForm, SLOT(saveSessionSaveAndQuit()));
 		pAction->setEnabled(bEnabled);
 		pAction = pSessionMenu->addAction(
@@ -3406,11 +3408,6 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 			tr("&Refresh"),
 			m_pSessionForm, SLOT(updateSession()));
 		pAction->setEnabled(bEnabled);
-		pSessionMenu->addSeparator();
-		pAction = pSessionMenu->addAction(iconSession,
-			sTitle, this, SLOT(toggleSessionForm()));
-		pAction->setCheckable(true);
-		pAction->setChecked(m_pSessionForm && m_pSessionForm->isVisible());
 	}
 
 	pAction = menu.addAction(QIcon(":/images/messages1.png"),

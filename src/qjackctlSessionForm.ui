@@ -3,7 +3,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -87,23 +87,17 @@
     </widget>
    </item>
    <item row="0" column="4">
-    <widget class="QComboBox" name="SaveSessionComboBox">
-     <item>
-      <property name="text">
-       <string>Save</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Save and Quit</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Save Template</string>
-      </property>
-     </item>
-    </widget>
+	<spacer>
+	 <property name="orientation">
+	  <enum>Qt::Horizontal</enum>
+	 </property>
+	 <property name="sizeHint" stdset="0">
+	  <size>
+	   <width>20</width>
+	   <height>20</height>
+	  </size>
+	 </property>
+	</spacer>
    </item>
    <item row="0" column="5">
     <widget class="QPushButton" name="UpdateSessionPushButton">
@@ -155,7 +149,6 @@
   <tabstop>LoadSessionPushButton</tabstop>
   <tabstop>RecentSessionPushButton</tabstop>
   <tabstop>SaveSessionPushButton</tabstop>
-  <tabstop>SaveSessionComboBox</tabstop>
   <tabstop>UpdateSessionPushButton</tabstop>
   <tabstop>SessionTreeView</tabstop>
  </tabstops>

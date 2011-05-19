@@ -1,7 +1,7 @@
 // qjackctlSessionForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -89,6 +89,21 @@ qjackctlSessionForm::qjackctlSessionForm (
 	m_pRecentMenu = new QMenu(tr("&Recent"));
 	m_ui.RecentSessionPushButton->setMenu(m_pRecentMenu);
 
+	m_pSaveMenu = new QMenu(tr("&Save"));
+	m_pSaveMenu->setIcon(QIcon(":/images/save1.png"));
+	m_pSaveMenu->addAction(QIcon(":/images/save1.png"),
+		tr("&Save..."),
+		this, SLOT(saveSessionSave()));
+#ifdef CONFIG_JACK_SESSION
+	m_pSaveMenu->addAction(
+		tr("Sa&ve and Quit..."),
+		this, SLOT(saveSessionSaveAndQuit()));
+	m_pSaveMenu->addAction(
+		tr("Save &Template..."),
+		this, SLOT(saveSessionSaveTemplate()));
+#endif
+	m_ui.SaveSessionPushButton->setMenu(m_pSaveMenu);
+
 	// Session tree view...
 	QHeaderView *pHeader = m_ui.SessionTreeView->header();
 //	pHeader->setResizeMode(QHeaderView::ResizeToContents);
@@ -101,9 +116,6 @@ qjackctlSessionForm::qjackctlSessionForm (
 	QObject::connect(m_ui.LoadSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(loadSession()));
-	QObject::connect(m_ui.SaveSessionPushButton,
-		SIGNAL(clicked()),
-		SLOT(saveSession()));
 
 	QObject::connect(m_ui.UpdateSessionPushButton,
 		SIGNAL(clicked()),
@@ -117,6 +129,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 // Destructor.
 qjackctlSessionForm::~qjackctlSessionForm (void)
 {
+	delete m_pSaveMenu;
 	delete m_pRecentMenu;
 	delete m_pSession;
 }
@@ -126,8 +139,6 @@ qjackctlSessionForm::~qjackctlSessionForm (void)
 // the initial session save type and directories.
 void qjackctlSessionForm::setup ( qjackctlSetup *pSetup )
 {
-	m_ui.SaveSessionComboBox->setCurrentIndex(pSetup->iSessionSaveType);
-
 	m_sessionDirs = pSetup->sessionDirs;
 
 	updateRecentMenu();
@@ -141,17 +152,17 @@ const QStringList& qjackctlSessionForm::sessionDirs (void) const
 }
 
 
-// Recent session save type accessor.
-int qjackctlSessionForm::sessionSaveType (void) const
-{
-	return m_ui.SaveSessionComboBox->currentIndex();
-}
-
-
 // Recent menu accessor.
 QMenu *qjackctlSessionForm::recentMenu (void) const
 {
 	return m_pRecentMenu;
+}
+
+
+// Save menu accessor.
+QMenu *qjackctlSessionForm::saveMenu (void) const
+{
+	return m_pSaveMenu;
 }
 
 
@@ -228,11 +239,6 @@ void qjackctlSessionForm::recentSession (void)
 
 
 // Save current session to specific file path.
-void qjackctlSessionForm::saveSession (void)
-{
-	saveSessionEx(m_ui.SaveSessionComboBox->currentIndex());
-}
-
 void qjackctlSessionForm::saveSessionSave (void)
 {
 	saveSessionEx(0);
@@ -519,7 +525,6 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.LoadSessionPushButton->setEnabled(bEnabled);
 	m_ui.RecentSessionPushButton->setEnabled(bEnabled && !m_pRecentMenu->isEmpty());
 	m_ui.SaveSessionPushButton->setEnabled(bEnabled);
-	m_ui.SaveSessionComboBox->setEnabled(bEnabled);
 	m_ui.UpdateSessionPushButton->setEnabled(bEnabled);
 
 	if (!bEnabled) {
@@ -552,7 +557,7 @@ void qjackctlSessionForm::contextMenuEvent (
 	pAction->setEnabled(bEnabled);
 #ifdef CONFIG_JACK_SESSION
 	pAction = menu.addAction(
-		tr("Save and &Quit..."), this, SLOT(saveSessionSaveAndQuit()));
+		tr("Sa&ve and Quit..."), this, SLOT(saveSessionSaveAndQuit()));
 	pAction->setEnabled(bEnabled);
 	pAction = menu.addAction(
 		tr("Save &Template..."), this, SLOT(saveSessionSaveTemplate()));
