@@ -96,7 +96,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 		this, SLOT(saveSessionSave()));
 #ifdef CONFIG_JACK_SESSION
 	m_pSaveMenu->addAction(
-		tr("Sa&ve and Quit..."),
+		tr("Save and &Quit..."),
 		this, SLOT(saveSessionSaveAndQuit()));
 	m_pSaveMenu->addAction(
 		tr("Save &Template..."),
@@ -388,8 +388,9 @@ void qjackctlSessionForm::saveSessionDir (
 	if (sSessionDir.isEmpty())
 		return;
 
+	bool bSessionDirOld = false;
 	QDir sessionDir(sSessionDir);
-	QList<QFileInfo> list
+	const QList<QFileInfo> list
 		= sessionDir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
 	if (!list.isEmpty()) {
 		if (sessionDir.exists("session.xml")) {
@@ -407,11 +408,9 @@ void qjackctlSessionForm::saveSessionDir (
 				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
 				return;
 		}
-		remove_dir_list(list);
+	//	remove_dir_list(list);
+		bSessionDirOld = true;
 	}
-	else
-	if (!sessionDir.exists())
-		sessionDir.mkpath(sSessionDir);
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm == NULL)
@@ -426,9 +425,31 @@ void qjackctlSessionForm::saveSessionDir (
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	bool bSaveSession = m_pSession->save(sSessionDir, iSessionType);
-	if (bSaveSession)
+	int iSessionNo = 0;
+	const QString sSessionMask = sSessionDir + ".%1";
+	QFileInfo fi(sSessionMask.arg(iSessionNo));
+	while (fi.exists()) fi.setFile(sSessionMask.arg(++iSessionNo));
+	const QString& sSessionDirTemp = fi.absoluteFilePath();
+	sessionDir.mkpath(sSessionDirTemp);
+
+	bool bSaveSession = m_pSession->save(sSessionDirTemp, iSessionType);
+	if (bSaveSession) {
+		if (bSessionDirOld) {
+		#if 0
+			remove_dir(sSessionDir);
+		#else
+			do { fi.setFile(sSessionMask.arg(++iSessionNo)); }
+			while (fi.exists());
+			const QString& sSessionDirOld = fi.absoluteFilePath();
+			sessionDir.rename(sSessionDir, sSessionDirOld);
+		#endif
+		}
+		else
+		if (sessionDir.exists())
+			remove_dir(sSessionDir);			
+		sessionDir.rename(sSessionDirTemp, sSessionDir);
 		updateRecent(sessionDir.absolutePath());
+	}
 
 	updateSessionView();
 
@@ -557,7 +578,7 @@ void qjackctlSessionForm::contextMenuEvent (
 	pAction->setEnabled(bEnabled);
 #ifdef CONFIG_JACK_SESSION
 	pAction = menu.addAction(
-		tr("Sa&ve and Quit..."), this, SLOT(saveSessionSaveAndQuit()));
+		tr("Save and &Quit..."), this, SLOT(saveSessionSaveAndQuit()));
 	pAction->setEnabled(bEnabled);
 	pAction = menu.addAction(
 		tr("Save &Template..."), this, SLOT(saveSessionSaveTemplate()));

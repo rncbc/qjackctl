@@ -1250,7 +1250,7 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation>Salva ed E&amp;sci...</translation>
+        <translation type="unfinished">Salva ed E&amp;sci...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
@@ -1862,15 +1862,15 @@ dalle connessioni attuali?</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Salva</translation>
+        <translation type="obsolete">Salva</translation>
     </message>
     <message>
         <source>Save and Quit</source>
-        <translation>Salva ed Esci</translation>
+        <translation type="obsolete">Salva ed Esci</translation>
     </message>
     <message>
         <source>Save Template</source>
-        <translation>Salva Modello</translation>
+        <translation type="obsolete">Salva Modello</translation>
     </message>
     <message>
         <source>Client / Ports</source>
@@ -1970,11 +1970,15 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation>Salva ed Es&amp;ci...</translation>
+        <translation type="unfinished">Salva ed Es&amp;ci...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
         <translation>Salva &amp;Modello...</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Salva</translation>
     </message>
 </context>
 <context>

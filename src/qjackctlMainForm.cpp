@@ -3395,7 +3395,7 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		pAction->setEnabled(bEnabled);
 	#ifdef CONFIG_JACK_SESSION
 		pAction = pSessionMenu->addAction(
-			tr("Sa&ve and Quit..."),
+			tr("Save and &Quit..."),
 			m_pSessionForm, SLOT(saveSessionSaveAndQuit()));
 		pAction->setEnabled(bEnabled);
 		pAction = pSessionMenu->addAction(

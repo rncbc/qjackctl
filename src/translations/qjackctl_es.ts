@@ -1174,7 +1174,7 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation>Guardar y &amp;Salir...</translation>
+        <translation type="unfinished">Guardar y &amp;Salir...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
@@ -1768,15 +1768,15 @@ una instantánea de las conexiones actuales?</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation type="obsolete">Guardar</translation>
     </message>
     <message>
         <source>Save and Quit</source>
-        <translation>Guardar y Salir</translation>
+        <translation type="obsolete">Guardar y Salir</translation>
     </message>
     <message>
         <source>Save Template</source>
-        <translation>Guardar plantilla</translation>
+        <translation type="obsolete">Guardar plantilla</translation>
     </message>
     <message>
         <source>Client / Ports</source>
@@ -1876,11 +1876,15 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation>Guardar y &amp;Salir...</translation>
+        <translation type="unfinished">Guardar y &amp;Salir...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
         <translation>Guardar Plan&amp;tilla...</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Salvar</translation>
     </message>
 </context>
 <context>

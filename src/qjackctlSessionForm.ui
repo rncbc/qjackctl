@@ -79,7 +79,7 @@
       <string>Save session</string>
      </property>
      <property name="text">
-      <string>&amp;Save...</string>
+      <string>&amp;Save</string>
      </property>
      <property name="icon">
 	  <iconset resource="qjackctl.qrc">:/images/save1.png</iconset>
