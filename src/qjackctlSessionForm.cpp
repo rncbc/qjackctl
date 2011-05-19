@@ -315,7 +315,7 @@ void qjackctlSessionForm::updateRecentMenu (void)
 		const QString& sSessionDir = m_sessionDirs.at(i);
 		if (QDir(sSessionDir).exists()) {
 			QAction *pAction = m_pRecentMenu->addAction(
-				QFileInfo(sSessionDir).completeBaseName(),
+				QFileInfo(sSessionDir).fileName(),
 				this, SLOT(recentSession()));
 			pAction->setData(i);
 		}
