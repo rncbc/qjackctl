@@ -59,6 +59,7 @@ public:
 
 	// Recent session directories and save type accessors.
 	const QStringList& sessionDirs() const;
+	bool isSaveSessionVersion() const;
 
 	// Recent menu accessor.
 	QMenu *recentMenu() const;
@@ -75,6 +76,8 @@ public slots:
 	void saveSessionSave();
 	void saveSessionSaveAndQuit();
 	void saveSessionSaveTemplate();
+
+	void saveSessionVersion(bool);
 
 	void updateSession();
 

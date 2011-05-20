@@ -1258,7 +1258,7 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation>Aggio&amp;rna</translation>
+        <translation type="obsolete">Aggio&amp;rna</translation>
     </message>
     <message>
         <source>Show/hide the session management window</source>
@@ -1274,6 +1274,14 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
 &quot;%1&quot;
 
 Disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Versioning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;fresh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1966,7 +1974,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation>Aggio&amp;rna</translation>
+        <translation type="obsolete">Aggio&amp;rna</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
@@ -1979,6 +1987,18 @@ Sovrascrivo la cartella?</translation>
     <message>
         <source>&amp;Save</source>
         <translation type="unfinished">&amp;Salva</translation>
+    </message>
+    <message>
+        <source>Save session versioning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Versioning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;fresh</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

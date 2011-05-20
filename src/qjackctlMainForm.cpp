@@ -787,8 +787,10 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Try to save current session directories list...
-	if (bQueryClose && m_pSessionForm)
+	if (bQueryClose && m_pSessionForm) {
 		m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
+		m_pSetup->bSessionSaveVersion = m_pSessionForm->isSaveSessionVersion();
+	}
 
 	// Some windows default fonts are here on demand too.
 	if (bQueryClose && m_pMessagesStatusForm) {
@@ -3404,8 +3406,15 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 		pAction->setEnabled(bEnabled);
 	#endif
 		pSessionMenu->addSeparator();
+		pAction = pSessionMenu->addAction(
+			tr("&Versioning"),
+			m_pSessionForm, SLOT(saveSessionVersion(bool)));
+		pAction->setCheckable(true);
+		pAction->setChecked(m_pSessionForm->isSaveSessionVersion());
+		pAction->setEnabled(bEnabled);
+		pSessionMenu->addSeparator();
 		pAction = pSessionMenu->addAction(QIcon(":/images/refresh1.png"),
-			tr("&Refresh"),
+			tr("Re&fresh"),
 			m_pSessionForm, SLOT(updateSession()));
 		pAction->setEnabled(bEnabled);
 	}

@@ -139,6 +139,8 @@ qjackctlSessionForm::~qjackctlSessionForm (void)
 // the initial session save type and directories.
 void qjackctlSessionForm::setup ( qjackctlSetup *pSetup )
 {
+	m_ui.SaveSessionVersionCheckBox->setChecked(pSetup->bSessionSaveVersion);
+
 	m_sessionDirs = pSetup->sessionDirs;
 
 	updateRecentMenu();
@@ -152,6 +154,13 @@ const QStringList& qjackctlSessionForm::sessionDirs (void) const
 }
 
 
+// Session save versioning option.
+bool qjackctlSessionForm::isSaveSessionVersion (void) const
+{
+	return m_ui.SaveSessionVersionCheckBox->isChecked();
+}
+ 
+ 
 // Recent menu accessor.
 QMenu *qjackctlSessionForm::recentMenu (void) const
 {
@@ -288,6 +297,13 @@ void qjackctlSessionForm::saveSessionEx ( int iSessionType )
 #endif
 
 	saveSessionDir(sSessionDir, iSessionType);
+}
+
+
+// Save current session to specific file path.
+void qjackctlSessionForm::saveSessionVersion ( bool bOn )
+{
+	m_ui.SaveSessionVersionCheckBox->setChecked(bOn);
 }
 
 
@@ -431,25 +447,25 @@ void qjackctlSessionForm::saveSessionDir (
 	while (fi.exists()) fi.setFile(sSessionMask.arg(++iSessionNo));
 	const QString& sSessionDirTemp = fi.absoluteFilePath();
 	sessionDir.mkpath(sSessionDirTemp);
+	sessionDir.refresh();
 
 	bool bSaveSession = m_pSession->save(sSessionDirTemp, iSessionType);
 	if (bSaveSession) {
 		if (bSessionDirOld) {
-		#if 0
-			remove_dir(sSessionDir);
-		#else
-			do { fi.setFile(sSessionMask.arg(++iSessionNo)); }
-			while (fi.exists());
-			const QString& sSessionDirOld = fi.absoluteFilePath();
-			sessionDir.rename(sSessionDir, sSessionDirOld);
-		#endif
+			if (isSaveSessionVersion()) {
+				do { fi.setFile(sSessionMask.arg(++iSessionNo)); }
+				while (fi.exists());
+				sessionDir.rename(sSessionDir, fi.absoluteFilePath());
+			}
+			else remove_dir(sSessionDir);
 		}
 		else
 		if (sessionDir.exists())
-			remove_dir(sSessionDir);			
+			sessionDir.rmdir(sSessionDir);
 		sessionDir.rename(sSessionDirTemp, sSessionDir);
-		updateRecent(sessionDir.absolutePath());
+		updateRecent(sSessionDir);
 	}
+	else remove_dir(sSessionDirTemp);
 
 	updateSessionView();
 
@@ -546,6 +562,7 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.LoadSessionPushButton->setEnabled(bEnabled);
 	m_ui.RecentSessionPushButton->setEnabled(bEnabled && !m_pRecentMenu->isEmpty());
 	m_ui.SaveSessionPushButton->setEnabled(bEnabled);
+	m_ui.SaveSessionVersionCheckBox->setEnabled(bEnabled);
 	m_ui.UpdateSessionPushButton->setEnabled(bEnabled);
 
 	if (!bEnabled) {
@@ -585,8 +602,14 @@ void qjackctlSessionForm::contextMenuEvent (
 	pAction->setEnabled(bEnabled);
 #endif
 	menu.addSeparator();
+	pAction = menu.addAction(
+		tr("&Versioning"), this, SLOT(saveSessionVersion(bool)));
+	pAction->setCheckable(true);
+	pAction->setChecked(isSaveSessionVersion());
+	pAction->setEnabled(bEnabled);
+	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
-		tr("&Refresh"), this, SLOT(updateSession()));
+		tr("Re&fresh"), this, SLOT(updateSession()));
 
 	menu.exec(pContextMenuEvent->globalPos());
 }

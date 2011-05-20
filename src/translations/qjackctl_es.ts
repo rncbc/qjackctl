@@ -1182,7 +1182,7 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation>&amp;Refrescar</translation>
+        <translation type="obsolete">&amp;Refrescar</translation>
     </message>
     <message>
         <source>Show/hide the session management window</source>
@@ -1198,6 +1198,14 @@ Por favor revise la ventana de mensajes para mas información.</translation>
 &quot;%1&quot;
 
 Disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Versioning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;fresh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1872,7 +1880,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation>&amp;Refrescar</translation>
+        <translation type="obsolete">&amp;Refrescar</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
@@ -1885,6 +1893,18 @@ Está seguro de sobreescribir esta carpeta?</translation>
     <message>
         <source>&amp;Save</source>
         <translation type="unfinished">&amp;Salvar</translation>
+    </message>
+    <message>
+        <source>Save session versioning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Versioning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re&amp;fresh</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

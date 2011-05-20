@@ -8,7 +8,7 @@ SVN TRUNK
 - Session "Save" button now a drop-down menu, replacing the
   session save type combo-box/drop-down list selection. Also,
   an early session directory versioning/numbering scheme is
-  now in place.
+  now in place, although optional.
 
 - Probable fix to debian bug report #624198 - segfault when
   pressing the stop button (by Grant Adrian Diffey, after a

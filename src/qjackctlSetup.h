@@ -181,6 +181,9 @@ public:
 	int iMessagesStatusTabPage;
 	int iConnectionsTabPage;
 
+	// Last session save type...
+	bool bSessionSaveVersion;
+	
 	// Aliases containers.
 	qjackctlConnectAlias aliasAudioOutputs;
 	qjackctlConnectAlias aliasAudioInputs;
