@@ -1147,7 +1147,11 @@ v související nabídce vyskakující z ikony v oznamovací
 &quot;%1&quot;
 
 Disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se nahrát vymezení aktivní zapojovací desky.
+
+&quot;%1&quot;
+
+Zakázáno.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2431"/>
@@ -1406,12 +1410,12 @@ Další informace hledejte, prosím, v okně s hlášením.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3410"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verzování</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3417"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ob&amp;novit</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="434"/>
@@ -1432,7 +1436,7 @@ Další informace hledejte, prosím, v okně s hlášením.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3400"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Uložit a &amp;ukončit...</translation>
+        <translation>Uložit a &amp;ukončit...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3404"/>
@@ -2229,19 +2233,19 @@ všech skutečných klientských spojení?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="92"/>
         <source>Save session versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit verzování sezení</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="95"/>
         <location filename="../qjackctlSessionForm.cpp" line="606"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verzování</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="118"/>
         <location filename="../qjackctlSessionForm.cpp" line="612"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ob&amp;novit</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
@@ -2289,7 +2293,7 @@ všech skutečných klientských spojení?</translation>
         <location filename="../qjackctlSessionForm.ui" line="82"/>
         <location filename="../qjackctlSessionForm.cpp" line="92"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Uložit</translation>
+        <translation>&amp;Uložit</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="214"/>
@@ -2389,7 +2393,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
         <location filename="../qjackctlSessionForm.cpp" line="598"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Uložit a &amp;ukončit...</translation>
+        <translation>Uložit a &amp;ukončit...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
