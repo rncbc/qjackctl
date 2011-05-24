@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="es">
+<!DOCTYPE TS><TS>
 <context>
     <name>QObject</name>
     <message>
@@ -1158,7 +1156,7 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <source>Set&amp;up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Set&amp;up...</translation>
     </message>
     <message>
         <source>S&amp;ession</source>
@@ -1174,7 +1172,7 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Guardar y &amp;Salir...</translation>
+        <translation>Guardar y &amp;Salir...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
@@ -1198,15 +1196,19 @@ Por favor revise la ventana de mensajes para mas información.</translation>
 &quot;%1&quot;
 
 Disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede cargar el patchbay.
+
+&quot;%1&quot;
+
+Ha sido deshabilitado.</translation>
     </message>
     <message>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Versiones</translation>
     </message>
     <message>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Re&amp;frescar</translation>
     </message>
 </context>
 <context>
@@ -1884,7 +1886,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Guardar y &amp;Salir...</translation>
+        <translation>Guardar y &amp;Salir...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
@@ -1892,19 +1894,19 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Salvar</translation>
+        <translation>&amp;Salvar</translation>
     </message>
     <message>
         <source>Save session versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar las versiones de la sesión</translation>
     </message>
     <message>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Versiones</translation>
     </message>
     <message>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Re&amp;frescar</translation>
     </message>
 </context>
 <context>
