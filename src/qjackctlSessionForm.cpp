@@ -404,7 +404,6 @@ void qjackctlSessionForm::saveSessionDir (
 	if (sSessionDir.isEmpty())
 		return;
 
-	bool bSessionDirOld = false;
 	QDir sessionDir(sSessionDir);
 	const QList<QFileInfo> list
 		= sessionDir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
@@ -425,7 +424,6 @@ void qjackctlSessionForm::saveSessionDir (
 				return;
 		}
 	//	remove_dir_list(list);
-		bSessionDirOld = true;
 	}
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
@@ -441,31 +439,25 @@ void qjackctlSessionForm::saveSessionDir (
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	int iSessionNo = 0;
-	const QString sSessionMask = sSessionDir + ".%1";
-	QFileInfo fi(sSessionMask.arg(iSessionNo));
-	while (fi.exists()) fi.setFile(sSessionMask.arg(++iSessionNo));
-	const QString& sSessionDirTemp = fi.absoluteFilePath();
-	sessionDir.mkpath(sSessionDirTemp);
-	sessionDir.refresh();
-
-	bool bSaveSession = m_pSession->save(sSessionDirTemp, iSessionType);
-	if (bSaveSession) {
-		if (bSessionDirOld) {
-			if (isSaveSessionVersion()) {
-				do { fi.setFile(sSessionMask.arg(++iSessionNo)); }
-				while (fi.exists());
-				sessionDir.rename(sSessionDir, fi.absoluteFilePath());
-			}
-			else remove_dir(sSessionDir);
+	if (!list.isEmpty()) {
+		if (isSaveSessionVersion()) {
+			int iSessionDirNo = 0;
+			const QString sSessionDirMask = sSessionDir + ".%1";
+			QFileInfo fi(sSessionDirMask.arg(++iSessionDirNo));
+			while (fi.exists())
+				fi.setFile(sSessionDirMask.arg(++iSessionDirNo));
+			sessionDir.rename(sSessionDir, fi.absoluteFilePath());
 		}
-		else
-		if (sessionDir.exists())
-			sessionDir.rmdir(sSessionDir);
-		sessionDir.rename(sSessionDirTemp, sSessionDir);
-		updateRecent(sSessionDir);
+		else remove_dir_list(list);
+		sessionDir.refresh();
 	}
-	else remove_dir(sSessionDirTemp);
+
+	if (!sessionDir.exists())
+		sessionDir.mkpath(sSessionDir);
+
+	bool bSaveSession = m_pSession->save(sSessionDir, iSessionType);
+	if (bSaveSession)
+		updateRecent(sSessionDir);
 
 	updateSessionView();
 

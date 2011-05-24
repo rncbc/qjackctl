@@ -2210,7 +2210,7 @@ všech skutečných klientských spojení?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="46"/>
-        <location filename="../qjackctlSessionForm.cpp" line="588"/>
+        <location filename="../qjackctlSessionForm.cpp" line="580"/>
         <source>&amp;Load...</source>
         <translation>&amp;Nahrát...</translation>
     </message>
@@ -2237,19 +2237,19 @@ všech skutečných klientských spojení?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="606"/>
+        <location filename="../qjackctlSessionForm.cpp" line="598"/>
         <source>&amp;Versioning</source>
         <translation>&amp;Verzování</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="118"/>
-        <location filename="../qjackctlSessionForm.cpp" line="612"/>
+        <location filename="../qjackctlSessionForm.cpp" line="604"/>
         <source>Re&amp;fresh</source>
         <translation>Ob&amp;novit</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="594"/>
+        <location filename="../qjackctlSessionForm.cpp" line="586"/>
         <source>&amp;Save...</source>
         <translation>&amp;Uložit...</translation>
     </message>
@@ -2329,8 +2329,8 @@ všech skutečných klientských spojení?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="367"/>
-        <location filename="../qjackctlSessionForm.cpp" line="414"/>
-        <location filename="../qjackctlSessionForm.cpp" line="421"/>
+        <location filename="../qjackctlSessionForm.cpp" line="413"/>
+        <location filename="../qjackctlSessionForm.cpp" line="420"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
@@ -2354,7 +2354,7 @@ všech skutečných klientských spojení?</translation>
         <translation>%1: nahrát sezení %2.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="415"/>
+        <location filename="../qjackctlSessionForm.cpp" line="414"/>
         <source>A session already exists in this folder:
 
 &quot;%1&quot;
@@ -2367,7 +2367,7 @@ Are you sure to overwrite the existing session?</source>
 Jste si jistý, že chcete přepsat stávající sezení?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="422"/>
+        <location filename="../qjackctlSessionForm.cpp" line="421"/>
         <source>This folder already exists and is not empty:
 
 &quot;%1&quot;
@@ -2380,24 +2380,24 @@ Are you sure to overwrite the existing folder?</source>
 Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="440"/>
+        <location filename="../qjackctlSessionForm.cpp" line="438"/>
         <source>%1: saving session...</source>
         <translation>%1: ukládá se sezení...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="475"/>
+        <location filename="../qjackctlSessionForm.cpp" line="467"/>
         <source>%1: save session %2.</source>
         <translation>%1: uložit sezení %2.</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
-        <location filename="../qjackctlSessionForm.cpp" line="598"/>
+        <location filename="../qjackctlSessionForm.cpp" line="590"/>
         <source>Save and &amp;Quit...</source>
         <translation>Uložit a &amp;ukončit...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
-        <location filename="../qjackctlSessionForm.cpp" line="601"/>
+        <location filename="../qjackctlSessionForm.cpp" line="593"/>
         <source>Save &amp;Template...</source>
         <translation>Uložit jako &amp;předlohu...</translation>
     </message>

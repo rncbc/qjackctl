@@ -2393,7 +2393,7 @@ pour créer une définition de baie de brassage?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="46"/>
-        <location filename="../qjackctlSessionForm.cpp" line="588"/>
+        <location filename="../qjackctlSessionForm.cpp" line="580"/>
         <source>&amp;Load...</source>
         <translation>&amp;Charger…</translation>
     </message>
@@ -2420,19 +2420,19 @@ pour créer une définition de baie de brassage?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="606"/>
+        <location filename="../qjackctlSessionForm.cpp" line="598"/>
         <source>&amp;Versioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="118"/>
-        <location filename="../qjackctlSessionForm.cpp" line="612"/>
+        <location filename="../qjackctlSessionForm.cpp" line="604"/>
         <source>Re&amp;fresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="594"/>
+        <location filename="../qjackctlSessionForm.cpp" line="586"/>
         <source>&amp;Save...</source>
         <translation>&amp;Enregistrer…</translation>
     </message>
@@ -2512,8 +2512,8 @@ pour créer une définition de baie de brassage?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="367"/>
-        <location filename="../qjackctlSessionForm.cpp" line="414"/>
-        <location filename="../qjackctlSessionForm.cpp" line="421"/>
+        <location filename="../qjackctlSessionForm.cpp" line="413"/>
+        <location filename="../qjackctlSessionForm.cpp" line="420"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -2537,7 +2537,7 @@ pour créer une définition de baie de brassage?</translation>
         <translation>%1 : charger session %2.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="415"/>
+        <location filename="../qjackctlSessionForm.cpp" line="414"/>
         <source>A session already exists in this folder:
 
 &quot;%1&quot;
@@ -2550,7 +2550,7 @@ Are you sure to overwrite the existing session?</source>
 Êtes-vous certain de vouloir remlplacer la session existante ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="422"/>
+        <location filename="../qjackctlSessionForm.cpp" line="421"/>
         <source>This folder already exists and is not empty:
 
 &quot;%1&quot;
@@ -2563,24 +2563,24 @@ Are you sure to overwrite the existing folder?</source>
 Êtes-vous certain de vouloir remplacer le dossier existant ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="440"/>
+        <location filename="../qjackctlSessionForm.cpp" line="438"/>
         <source>%1: saving session...</source>
         <translation>%1 : enregistrement de la session…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="475"/>
+        <location filename="../qjackctlSessionForm.cpp" line="467"/>
         <source>%1: save session %2.</source>
         <translation>%1 : enregistrer session %2.</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
-        <location filename="../qjackctlSessionForm.cpp" line="598"/>
+        <location filename="../qjackctlSessionForm.cpp" line="590"/>
         <source>Save and &amp;Quit...</source>
         <translation type="unfinished">Enregistrer et &amp;quitter…</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
-        <location filename="../qjackctlSessionForm.cpp" line="601"/>
+        <location filename="../qjackctlSessionForm.cpp" line="593"/>
         <source>Save &amp;Template...</source>
         <translation>Enregistrer &amp;modèle…</translation>
     </message>
