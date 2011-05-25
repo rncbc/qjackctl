@@ -1250,7 +1250,7 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Salva ed E&amp;sci...</translation>
+        <translation>Salva ed E&amp;sci...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
@@ -1274,15 +1274,19 @@ Controlla la finestra dei messaggi per maggiori informazioni.</translation>
 &quot;%1&quot;
 
 Disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non riesco a caricare il file del patchbay attivo.
+
+&quot;%1&quot;
+
+Disabilitato.</translation>
     </message>
     <message>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Versione</translation>
     </message>
     <message>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Agg&amp;iorna</translation>
     </message>
 </context>
 <context>
@@ -1978,7 +1982,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Salva ed Es&amp;ci...</translation>
+        <translation>Salva ed Es&amp;ci...</translation>
     </message>
     <message>
         <source>Save &amp;Template...</source>
@@ -1986,19 +1990,19 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Salva</translation>
+        <translation>&amp;Salva</translation>
     </message>
     <message>
         <source>Save session versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva la versione della sessione</translation>
     </message>
     <message>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Versione</translation>
     </message>
     <message>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Agg&amp;iorna</translation>
     </message>
 </context>
 <context>
