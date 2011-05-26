@@ -1249,12 +1249,12 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3410"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestion de ré&amp;visions</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3417"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ra&amp;fraîchir</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3435"/>
@@ -1430,7 +1430,11 @@ Désolé</translation>
 &quot;%1&quot;
 
 Disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de charger la définition de baie de brassage active.
+
+&quot;%1&quot;
+
+Désactivé.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2176"/>
@@ -1565,7 +1569,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3400"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Enregistrer et &amp;quitter…</translation>
+        <translation>Enregistrer et &amp;Quitter…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3404"/>
@@ -2416,19 +2420,19 @@ pour créer une définition de baie de brassage?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="92"/>
         <source>Save session versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer la session avec gestion de révisions</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="95"/>
         <location filename="../qjackctlSessionForm.cpp" line="598"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestion de ré&amp;visions</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="118"/>
         <location filename="../qjackctlSessionForm.cpp" line="604"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ra&amp;fraîchir</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
@@ -2476,7 +2480,7 @@ pour créer une définition de baie de brassage?</translation>
         <location filename="../qjackctlSessionForm.ui" line="82"/>
         <location filename="../qjackctlSessionForm.cpp" line="92"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Enregistrer</translation>
+        <translation>&amp;Enregistrer</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="214"/>
@@ -2576,7 +2580,7 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
         <location filename="../qjackctlSessionForm.cpp" line="590"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Enregistrer et &amp;quitter…</translation>
+        <translation>Enregistrer et &amp;Quitter…</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
@@ -4112,12 +4116,12 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="439"/>
         <source>raw</source>
-        <translation type="unfinished">raw</translation>
+        <translation>brut</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="444"/>
         <source>seq</source>
-        <translation type="unfinished">seq</translation>
+        <translation>seq</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="427"/>
