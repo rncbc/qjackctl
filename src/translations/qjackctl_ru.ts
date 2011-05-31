@@ -650,7 +650,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="440"/>
         <source>Alt+E</source>
-        <translation type="unfinished">Alt+E</translation>
+        <translation>Alt+п</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="505"/>
@@ -724,10 +724,10 @@ Do you want to save the changes?</source>
 
 To terminate the program, please choose &quot;Quit&quot;
 in the context menu of the system tray icon.</source>
-        <translation type="unfinished">Программа продолжит The program will keep running in the system tray.
+        <translation>Программа продолжит работать в области уведомления.
 
-To terminate the program, please choose &quot;Quit&quot;
-in the context menu of the system tray icon.</translation>
+Для завершения выберите в контекстном меню
+области уведомления пункт «Выход».</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="990"/>
@@ -793,7 +793,11 @@ in the context menu of the system tray icon.</translation>
 &quot;%1&quot;
 
 Disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузиь описание активного коммутатора.
+
+&quot;%1&quot;
+
+Отключено.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1947"/>
@@ -932,7 +936,7 @@ restarting the JACK audio server.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3065"/>
         <source>RT</source>
-        <translation type="unfinished"></translation>
+        <translation>RT</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3330"/>
@@ -956,17 +960,19 @@ restarting the JACK audio server.</source>
         <source>Could not open ALSA sequencer as a client.
 
 ALSA MIDI patchbay will be not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть секвенсер ALSA как клиентское приложение.
+
+Коммутатор ALSA MIDI будет недоступен.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="663"/>
         <source>D-BUS: Service is available (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: служба доступна (%1, известный как jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="694"/>
         <source>D-BUS: Service not available (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: служба недоступна (%1, известный как jackdbus).</translation>
     </message>
     <message>
         <source>The program will keep running in the system tray.
@@ -1013,7 +1019,9 @@ Maybe JACK audio server is already started.</source>
         <source>Could not load preset &quot;%1&quot;.
 
 Retrying with default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить профиль &quot;%1&quot;.
+
+Попытка загрузить используемый по умолчанию профиль.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="958"/>
@@ -1027,14 +1035,16 @@ Sorry.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1188"/>
         <source>D-BUS: JACK server is starting...</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: запускается сервер JACK...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1191"/>
         <source>D-BUS: JACK server could not be started.
 
 Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: не удалось запустить сервер JACK.
+
+Извините.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1255"/>
@@ -1050,14 +1060,16 @@ Do you want to stop the JACK audio server?</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1312"/>
         <source>D-BUS: JACK server is stopping...</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: сервер JACK останавливается...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1315"/>
         <source>D-BUS: JACK server could not be stopped.
 
 Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: не удалось остановить сервер JACK.
+
+Извините.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1456"/>
@@ -1077,7 +1089,7 @@ Sorry</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1381"/>
         <source>D-BUS: JACK server was started (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: сервер JACK был запущен (%1, известный как jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1421"/>
@@ -1087,7 +1099,7 @@ Sorry</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1441"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: сервер JACK был остановлен (%1, известный как jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1861"/>
@@ -1186,12 +1198,12 @@ Do you want to remove the patchbay connection?</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3410"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Версии</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3417"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>О&amp;бновить</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3763"/>
@@ -1374,7 +1386,7 @@ Please check the messages window for more info.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3400"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Сохранить и вы&amp;йти</translation>
+        <translation>Сохранить и вы&amp;йти</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3404"/>
@@ -2190,19 +2202,19 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="92"/>
         <source>Save session versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранять версии сеансов</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="95"/>
         <location filename="../qjackctlSessionForm.cpp" line="598"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Версии</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="118"/>
         <location filename="../qjackctlSessionForm.cpp" line="604"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>О&amp;бновить</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
@@ -2250,7 +2262,7 @@ of all actual client connections?</source>
         <location filename="../qjackctlSessionForm.ui" line="82"/>
         <location filename="../qjackctlSessionForm.cpp" line="92"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Сохранить</translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="214"/>
@@ -2317,7 +2329,11 @@ of all actual client connections?</source>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing session?</source>
-        <translation type="unfinished"></translation>
+        <translation>В этой папке уже есть сеанс:
+
+&quot;%1&quot;
+
+Вы уверены, что хотите перезаписать его?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="421"/>
@@ -2326,7 +2342,11 @@ Are you sure to overwrite the existing session?</source>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта папка уже существует и не пуста:
+
+&quot;%1&quot;
+
+Вы уверены, что хотите перезаписать существующую папку?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="438"/>
@@ -2342,7 +2362,7 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
         <location filename="../qjackctlSessionForm.cpp" line="590"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Сохранить и вы&amp;йти</translation>
+        <translation>Сохранить и вы&amp;йти</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
