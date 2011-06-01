@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Debugging stacktrace now applies to all working threads.
+
 - Session "Save" button now a drop-down menu, replacing the
   session save type combo-box/drop-down list selection. Also,
   an early session directory versioning/numbering scheme is
