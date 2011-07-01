@@ -1,3 +1,9 @@
+qjackctl (0.3.8-1) unstable; urgency=low
+
+  * JACK Session versioning.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Fri, 1 Jul 2011 10:03:40 +0100
+
 qjackctl (0.3.7-1) unstable; urgency=low
 
   * JACK Session managerism.

@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-SVN TRUNK
+0.3.8  2011-07-01  JACK Session versioning.
 
 - Debugging stacktrace now applies to all working threads.
 
