@@ -1212,6 +1212,10 @@ Ha sido deshabilitado.</translation>
         <source>Re&amp;fresh</source>
         <translation>Re&amp;frescar</translation>
     </message>
+    <message>
+        <source>%1 (%2%, %3 xruns)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlMessagesForm</name>

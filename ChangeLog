@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+SVN TRUNK
+
+- Add current xrun count to the system tray icon tooltip, if
+  not zero (after patch #3314633 by Colin Fletcher, thanks).
+
+
 0.3.8  2011-07-01  JACK Session versioning.
 
 - Debugging stacktrace now applies to all working threads.

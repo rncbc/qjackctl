@@ -1288,6 +1288,10 @@ Disabilitato.</translation>
         <source>Re&amp;fresh</source>
         <translation>Agg&amp;iorna</translation>
     </message>
+    <message>
+        <source>%1 (%2%, %3 xruns)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlMessagesForm</name>

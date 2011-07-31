@@ -3042,9 +3042,18 @@ void qjackctlMainForm::refreshStatus (void)
 			float fDspLoad = jack_cpu_load(m_pJackClient);
 			const char f = (fDspLoad > 0.1f ? 'f' : 'g'); // format
 			const int  p = (fDspLoad > 1.0f ?  1  :  2 ); // precision
-			if (m_pSystemTray)
-				m_pSystemTray->setToolTip(
-					tr("%1 (%2%)").arg(windowTitle()).arg(fDspLoad, 0, f, p));
+			if (m_pSystemTray) {
+				if (m_iXrunCount > 0) {
+					m_pSystemTray->setToolTip(tr("%1 (%2%)")
+						.arg(windowTitle())
+						.arg(fDspLoad, 0, f, p));
+				} else {
+					m_pSystemTray->setToolTip(tr("%1 (%2%, %3 xruns)")
+						.arg(windowTitle())
+						.arg(fDspLoad, 0, f, p)
+						.arg(m_iXrunCount));
+				}
+			}
 			updateStatusItem(STATUS_DSP_LOAD,
 				tr("%1 %").arg(fDspLoad, 0, f, p));
 			updateStatusItem(STATUS_SAMPLE_RATE,
