@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Main window is now brought to front and (re)activated when
+  clicking on the system tray icon instead of just hiding it.
+
 - Add current xrun count to the system tray icon tooltip, if
   not zero (after patch #3314633 by Colin Fletcher, thanks).
 

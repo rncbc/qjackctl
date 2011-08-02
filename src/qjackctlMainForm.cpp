@@ -2662,8 +2662,13 @@ void qjackctlMainForm::toggleMainForm (void)
 
 	if (isVisible()) {
 		if (m_pSetup->bSystemTray && m_pSystemTray) {
-			// Hide away from sight.
-			hide();
+			// Hide away from sight, if not active...
+			if (isActiveWindow()) {
+				hide();
+			} else {
+				raise();
+				activateWindow();
+			}
 		} else {
 			// Minimize (iconify) normally.
 			showMinimized();
