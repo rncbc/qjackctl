@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.8.2, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.8.3, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -420,3 +420,4 @@ echo "  Install prefix . . . . . . . . . . . . . . . . . .: $ac_prefix"
 echo
 echo "Now type 'make', followed by 'make install' as root."
 echo
+

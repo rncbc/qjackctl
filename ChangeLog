@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Fixed Makefile.in handling of installation directories to
+  the configure script eg. --bindir, --datadir, --localedir
+  and --mandir (after an original patch from h3xx, thanks).
+
 - Main window is now brought to front and (re)activated when
   clicking on the system tray icon instead of just hiding it.
 

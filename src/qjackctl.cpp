@@ -43,6 +43,22 @@ const WindowFlags CustomizeWindowHint   = WindowFlags(0x02000000);
 #endif
 
 
+#define CONFIG_QUOTE1(x) #x
+#define CONFIG_QUOTED(x) CONFIG_QUOTE1(x)
+
+#if defined(DATADIR)
+#define CONFIG_DATADIR CONFIG_QUOTED(DATADIR)
+#else
+#define CONFIG_DATADIR CONFIG_PREFIX "/share"
+#endif
+
+#if defined(LOCALEDIR)
+#define CONFIG_LOCALEDIR CONFIG_QUOTED(LOCALEDIR)
+#else
+#define CONFIG_LOCALEDIR CONFIG_DATADIR "/locale"
+#endif
+
+
 //-------------------------------------------------------------------------
 // Singleton application instance stuff (Qt/X11 only atm.)
 //
@@ -57,6 +73,7 @@ const WindowFlags CustomizeWindowHint   = WindowFlags(0x02000000);
 #define QJACKCTL_XUNIQUE "qjackctlApplication"
 
 #endif
+
 
 class qjackctlApplication : public QApplication
 {
@@ -91,7 +108,7 @@ public:
 			if (m_pMyTranslator->load(sLocName, sLocPath)) {
 				QApplication::installTranslator(m_pMyTranslator);
 			} else {
-				sLocPath = CONFIG_PREFIX "/share/locale";
+				sLocPath = CONFIG_LOCALEDIR;
 				if (m_pMyTranslator->load(sLocName, sLocPath)) {
 					QApplication::installTranslator(m_pMyTranslator);
 				} else {
