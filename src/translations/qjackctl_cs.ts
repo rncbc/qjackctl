@@ -1475,7 +1475,7 @@ restarting the JACK audio server.</source>
 novém spuštění serveru JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3777"/>
+        <location filename="../qjackctlMainForm.cpp" line="3789"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -1487,7 +1487,7 @@ SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 (%4)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3808"/>
+        <location filename="../qjackctlMainForm.cpp" line="3820"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1499,7 +1499,7 @@ ResetParameterValue(&apos;%1&apos;):
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3839"/>
+        <location filename="../qjackctlMainForm.cpp" line="3851"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.

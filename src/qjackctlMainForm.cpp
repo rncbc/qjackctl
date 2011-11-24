@@ -3676,12 +3676,18 @@ void qjackctlMainForm::setDBusParameters (void)
 	if (bAlsa || bPortaudio) {
 		setDBusDriverParameter("duplex",
 			bool(m_preset.iAudio == QJACKCTL_DUPLEX));
+		QString sInDevice = m_preset.sInDevice;
+		if (sInDevice.isEmpty() && m_preset.iAudio == QJACKCTL_CAPTURE)
+			sInDevice = m_preset.sInterface;
 		setDBusDriverParameter("capture",
-			m_preset.sInDevice,
-			!m_preset.sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
+			sInDevice,
+			!sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		QString sOutDevice = m_preset.sOutDevice;
+		if (sOutDevice.isEmpty() && m_preset.iAudio == QJACKCTL_PLAYBACK)
+			sOutDevice = m_preset.sInterface;
 		setDBusDriverParameter("playback",
-			m_preset.sOutDevice,
-			!m_preset.sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
+			sOutDevice,
+			!sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
 		setDBusDriverParameter("inchannels",
 			(unsigned int) m_preset.iInChannels,
 			m_preset.iInChannels > 0 && m_preset.iAudio != QJACKCTL_PLAYBACK);
@@ -3703,12 +3709,18 @@ void qjackctlMainForm::setDBusParameters (void)
 		setDBusDriverParameter("wordlength",
 			(unsigned int) m_preset.iWordLength,
 			m_preset.iWordLength > 0);
+		QString sInDevice = m_preset.sInDevice;
+		if (sInDevice.isEmpty() && m_preset.iAudio == QJACKCTL_CAPTURE)
+			sInDevice = m_preset.sInterface;
 		setDBusDriverParameter("capture",
-			m_preset.sInDevice,
-			!m_preset.sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
+			sInDevice,
+			!sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		QString sOutDevice = m_preset.sOutDevice;
+		if (sOutDevice.isEmpty() && m_preset.iAudio == QJACKCTL_PLAYBACK)
+			sOutDevice = m_preset.sInterface;
 		setDBusDriverParameter("playback",
-			m_preset.sOutDevice,
-			!m_preset.sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
+			sOutDevice,
+			!sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
 		setDBusDriverParameter("inchannels",
 			(unsigned int) m_preset.iInChannels,
 			m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK);

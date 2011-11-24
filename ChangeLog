@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Fixed D-Bus Input/Output device parameter settings, filled
+  when either interface is selected for Capture/Playback only.
+  (probable fix for bug #3441860).
+
 - Fixed Makefile.in handling of installation directories to
   the configure script eg. --datadir, --localedir, --mandir.
   (after an original patch from h3xx, thanks).
@@ -99,7 +103,7 @@ SVN TRUNK
   thanks to Fons Adriaensen for the heads-up.
 
 - As a workaround regarding issues switching jack2's backends,
-  Robin Gareus sends us yet another D-Bus metho slot: "preset",
+  Robin Gareus sends us yet another D-Bus method slot: "preset",
   (dbus-send --system / org.rncbc.qjackctl.preset string:PRESET).
   Thanks again.
 
