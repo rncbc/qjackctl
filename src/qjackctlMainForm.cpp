@@ -236,16 +236,16 @@ protected:
 	void run()
 	{
 		QFile file(m_sFilename);
-	 
+
 		m_bRunState = true;
-	
+
 		while (m_bRunState) {
 			if (file.isOpen()) {
 				char achBuffer[1024];
 				while (file.readLine(achBuffer, sizeof(achBuffer)) > 0) {
 					QApplication::postEvent(
 						qjackctlMainForm::getInstance(),
-						new LineEvent(QJACKCTL_LINE_EVENT, achBuffer)); 
+						new LineEvent(QJACKCTL_LINE_EVENT, achBuffer));
 				}
 				if (file.size()  == file.pos() &&
 					file.error() == QFile::NoError) {
@@ -305,7 +305,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pDBusConfig   = NULL;
 	m_pDBusLogWatcher = NULL;
 	m_bDBusStarted  = false;
-#endif	
+#endif
 	m_iStartDelay   = 0;
 	m_iTimerDelay   = 0;
 	m_iTimerRefresh = 0;
@@ -428,7 +428,7 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	m_pDBusConfig  = NULL;
 	m_pDBusLogWatcher = NULL;
 	m_bDBusStarted = false;
-#endif	
+#endif
 
 	// Terminate local ALSA sequencer interface.
 	if (m_pAlsaNotifier)
@@ -709,7 +709,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		m_pPatchbayForm->updateRecentPatchbays();
 		m_pPatchbayForm->stabilizeForm();
 	}
-	
+
 	// Try to find if we can start in detached mode (client-only)
 	// just in case there's a JACK server already running.
 	startJackClient(true);
@@ -1229,7 +1229,7 @@ void qjackctlMainForm::startJack (void)
 		appendMessagesColor(m_sJackCmdLine, "#990099");
 
 	#if defined(WIN32)
-		const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath(); 
+		const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath();
 		m_pJack->setWorkingDirectory(sCurrentDir);
 	//	QDir::setCurrent(sCurrentDir);
 	#endif
@@ -1237,7 +1237,7 @@ void qjackctlMainForm::startJack (void)
 		// Go jack, go...
 		m_pJack->start(sCommand, args);
 
-#ifdef CONFIG_DBUS	
+#ifdef CONFIG_DBUS
 	}
 #endif
 }
@@ -1247,7 +1247,7 @@ void qjackctlMainForm::startJack (void)
 void qjackctlMainForm::stopJack (void)
 {
 	// Check if we're allowed to stop (shutdown)...
-	if (m_pSetup->bQueryShutdown && m_pConnectionsForm 
+	if (m_pSetup->bQueryShutdown && m_pConnectionsForm
 		&& (m_pConnectionsForm->isAudioConnected() ||
 			m_pConnectionsForm->isMidiConnected())
 		&& QMessageBox::warning(this,
@@ -1258,7 +1258,7 @@ void qjackctlMainForm::stopJack (void)
 			QMessageBox::Yes | QMessageBox::No) == QMessageBox::No) {
 		return;
 	}
-	
+
 	// Stop the server unconditionally.
 	stopJackServer();
 }
@@ -1276,7 +1276,7 @@ void qjackctlMainForm::stopJackServer (void)
 	stopJackClient();
 
 	// And try to stop server.
-#ifdef CONFIG_DBUS	
+#ifdef CONFIG_DBUS
 	if ((m_pJack && m_pJack->state() == QProcess::Running)
 		|| (m_pDBusControl && m_bDBusStarted)) {
 #else
@@ -1303,7 +1303,7 @@ void qjackctlMainForm::stopJackServer (void)
 				m_pJack->terminate();
 			#endif
 			}
-		#ifdef CONFIG_DBUS	
+		#ifdef CONFIG_DBUS
 			// Jack D-BUS server backend...
 			if (m_pDBusControl) {
 				QDBusMessage dbusm = m_pDBusControl->call("StopServer");
@@ -1374,7 +1374,7 @@ void qjackctlMainForm::jackStarted (void)
 			.arg(long(m_pJack->pid())));
 	}
 
-#ifdef CONFIG_DBUS	
+#ifdef CONFIG_DBUS
 	// Special for D-BUS control....
 	if (m_pDBusControl) {
 		m_bDBusStarted = true;
@@ -1444,7 +1444,7 @@ void qjackctlMainForm::jackCleanup (void)
 		bPostShutdown = true;
 	}
 #endif
-	
+
 	// Cannot be detached anymore.
 	m_bJackDetach = false;
 
@@ -2221,7 +2221,7 @@ void qjackctlMainForm::timerSlot (void)
 			// If we cannot start it now,
 			// maybe we ought to cease & desist...
 			if (!startJackClient(false))
-				stopJackServer();			
+				stopJackServer();
 		}
 	}
 
@@ -2348,7 +2348,7 @@ void qjackctlMainForm::queryDisconnect (
 	if (m_pSetup->bActivePatchbay) {
 		qjackctlPatchbayCable *pCable = m_pPatchbayRack->findCable(
 			pOPort->clientName(), pOPort->portName(),
-			pIPort->clientName(), pIPort->portName(), iSocketType); 
+			pIPort->clientName(), pIPort->portName(), iSocketType);
 		if (pCable && QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("A patchbay definition is currently active,\n"
@@ -2793,7 +2793,7 @@ void qjackctlMainForm::showSetupForm (void)
 		if (m_pSetup->sConnectionsFont.isEmpty() && m_pConnectionsForm)
 			m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
 		// To track down deferred or immediate changes.
-		bool    bOldMessagesLog         = m_pSetup->bMessagesLog; 
+		bool    bOldMessagesLog         = m_pSetup->bMessagesLog;
 		QString sOldMessagesLogPath     = m_pSetup->sMessagesLogPath;
 		QString sOldMessagesFont        = m_pSetup->sMessagesFont;
 		QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
@@ -2931,7 +2931,7 @@ void qjackctlMainForm::transportBackward (void)
 		if (tloc < 0.0f) tloc = 0.0f;
 		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
 		// Log this here (if on initial toggle).
-		if (m_fSkipAccel < 1.1f) 
+		if (m_fSkipAccel < 1.1f)
 			appendMessages(tr("Transport backward."));
 		// Take care of backward acceleration...
 		if (m_ui.BackwardToolButton->isDown() && m_fSkipAccel < 60.0)
@@ -2996,7 +2996,7 @@ void qjackctlMainForm::transportForward (void)
 		if (tloc < 0.0f) tloc = 0.0f;
 		jack_transport_locate(m_pJackClient, (jack_nframes_t) tloc);
 		// Log this here.
-		if (m_fSkipAccel < 1.1f) 
+		if (m_fSkipAccel < 1.1f)
 			appendMessages(tr("Transport forward."));
 		// Take care of forward acceleration...
 		if (m_ui.ForwardToolButton->isDown() && m_fSkipAccel < 60.0f)
@@ -3526,7 +3526,7 @@ void qjackctlMainForm::showDirtySetupWarning (void)
 		= tr("Some settings will be only effective\n"
 			"the next time you start this program.");
 #ifdef CONFIG_SYSTEM_TRAY
-#ifdef QJACKCTL_QT4_SYSTEM_TRAY	
+#ifdef QJACKCTL_QT4_SYSTEM_TRAY
 #if QT_VERSION >= 0x040300
 	if (m_pSetup->bSystemTray && m_pSystemTray
 		&& QSystemTrayIcon::supportsMessages()) {
