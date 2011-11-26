@@ -3674,20 +3674,32 @@ void qjackctlMainForm::setDBusParameters (void)
 	#endif
 	}
 	if (bAlsa || bPortaudio) {
-		setDBusDriverParameter("duplex",
-			bool(m_preset.iAudio == QJACKCTL_DUPLEX));
+		QString sInterface = m_preset.sInterface;
+		if (bAlsa && sInterface.isEmpty())
+			sInterface = "hw:0";
 		QString sInDevice = m_preset.sInDevice;
-		if (sInDevice.isEmpty() && m_preset.iAudio == QJACKCTL_CAPTURE)
-			sInDevice = m_preset.sInterface;
-		setDBusDriverParameter("capture",
-			sInDevice,
-			!sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
+		if (sInDevice.isEmpty())
+			sInDevice = sInterface;
 		QString sOutDevice = m_preset.sOutDevice;
-		if (sOutDevice.isEmpty() && m_preset.iAudio == QJACKCTL_PLAYBACK)
-			sOutDevice = m_preset.sInterface;
-		setDBusDriverParameter("playback",
-			sOutDevice,
-			!sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
+		if (sOutDevice.isEmpty())
+			sOutDevice = sInterface;
+		switch (m_preset.iAudio) {
+		case QJACKCTL_DUPLEX:
+			setDBusDriverParameter("duplex", true);
+			setDBusDriverParameter("capture", sInDevice);
+			setDBusDriverParameter("playback", sOutDevice);
+			break;
+		case QJACKCTL_CAPTURE:
+			resetDBusDriverParameter("duplex");
+			setDBusDriverParameter("capture", sInDevice);
+			resetDBusDriverParameter("playback");
+			break;
+		case QJACKCTL_PLAYBACK:
+			resetDBusDriverParameter("duplex");
+			setDBusDriverParameter("playback", sOutDevice);
+			resetDBusDriverParameter("capture");
+			break;
+		}
 		setDBusDriverParameter("inchannels",
 			(unsigned int) m_preset.iInChannels,
 			m_preset.iInChannels > 0 && m_preset.iAudio != QJACKCTL_PLAYBACK);
