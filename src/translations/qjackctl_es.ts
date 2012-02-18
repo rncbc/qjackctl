@@ -1963,11 +1963,11 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation>Servidor</translation>
+        <translation type="obsolete">Servidor</translation>
     </message>
     <message>
         <source>Server &amp;Path:</source>
-        <translation>&amp;Ruta del servidor:</translation>
+        <translation type="obsolete">&amp;Ruta del servidor:</translation>
     </message>
     <message>
         <source>jackstart</source>
@@ -1983,7 +1983,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>The JACK Audio Connection Kit sound server path</source>
-        <translation>Ruta hacia el servidor de audio JACK</translation>
+        <translation type="obsolete">Ruta hacia el servidor de audio JACK</translation>
     </message>
     <message>
         <source>Driv&amp;er:</source>
@@ -2279,7 +2279,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>&amp;Output Channels:</source>
-        <translation>Númer&amp;o de canales de salida:</translation>
+        <translation type="obsolete">Númer&amp;o de canales de salida:</translation>
     </message>
     <message>
         <source>&amp;Interface:</source>
@@ -2295,7 +2295,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>&amp;Input Latency:</source>
-        <translation>Latenc&amp;ia de la entrada:</translation>
+        <translation type="obsolete">Latenc&amp;ia de la entrada:</translation>
     </message>
     <message>
         <source>Dit&amp;her:</source>
@@ -2351,7 +2351,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>&amp;Output Latency:</source>
-        <translation>Latencia de la sal&amp;ida:</translation>
+        <translation type="obsolete">Latencia de la sal&amp;ida:</translation>
     </message>
     <message>
         <source>Maximum output audio hardware channels to allocate</source>
@@ -2363,7 +2363,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>&amp;Input Channels:</source>
-        <translation>&amp;Canales de entrada:</translation>
+        <translation type="obsolete">&amp;Canales de entrada:</translation>
     </message>
     <message>
         <source>Select input device for capture</source>
@@ -2407,7 +2407,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>Start De&amp;lay (secs):</source>
-        <translation>Retardo Inicia&amp;l (segs):</translation>
+        <translation type="obsolete">Retardo Inicia&amp;l (segs):</translation>
     </message>
     <message>
         <source>Time in seconds that client is delayed after server startup</source>
@@ -2419,7 +2419,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>0</source>
-        <translation>0</translation>
+        <translation type="obsolete">0</translation>
     </message>
     <message>
         <source>Output latency in milliseconds, calculated based on the period, rate and buffer settings</source>
@@ -3250,6 +3250,42 @@ Do you want to apply the changes?</source>
     <message>
         <source>&amp;Server Name</source>
         <translation>Nombre del &amp;Servidor</translation>
+    </message>
+    <message>
+        <source>Server path (command line prefix)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Channels I/O:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Latency I/O:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extra options (server command line suffix)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start De&amp;lay:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> secs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 msecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server Suffi&amp;x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server &amp;Prefix:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -5,6 +5,11 @@ ChangeLog
 
 SVN TRUNK
 
+- A new so called "Server Suffix" parameter option appears
+  to rescue on the situations where QjackCtl falls short on
+  extra, exquisite and/or esoteric command line options eg.
+  (net)jack1/2 differences.
+
 - Fixed D-Bus Input/Output device parameter settings, filled
   when either interface is selected for Capture/Playback only.
   (probable fix for bug #3441860).

@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -343,7 +343,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	}
 
 	m_settings.beginGroup("/Settings" + sSuffix);
-	preset.sServer      = m_settings.value("/Server", "jackd").toString();
+	preset.sServerPrefix = m_settings.value("/Server", "jackd").toString();
 	preset.sServerName  = m_settings.value("/ServerName").toString();
 	preset.bRealtime    = m_settings.value("/Realtime", true).toBool();
 	preset.bSoftMode    = m_settings.value("/SoftMode", false).toBool();
@@ -376,6 +376,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	preset.bVerbose     = m_settings.value("/Verbose", false).toBool();
 	preset.iPortMax     = m_settings.value("/PortMax", 256).toInt();
 	preset.sMidiDriver  = m_settings.value("/MidiDriver").toString();
+	preset.sServerSuffix = m_settings.value("/ServerSuffix").toString();
 	m_settings.endGroup();
 
 #ifdef CONFIG_JACK_MIDI
@@ -399,7 +400,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 	}
 
 	m_settings.beginGroup("/Settings" + sSuffix);
-	m_settings.setValue("/Server",      preset.sServer);
+	m_settings.setValue("/Server",      preset.sServerPrefix);
 	m_settings.setValue("/ServerName",  preset.sServerName);
 	m_settings.setValue("/Realtime",    preset.bRealtime);
 	m_settings.setValue("/SoftMode",    preset.bSoftMode);
@@ -432,6 +433,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 	m_settings.setValue("/Verbose",     preset.bVerbose);
 	m_settings.setValue("/PortMax",     preset.iPortMax);
 	m_settings.setValue("/MidiDriver",  preset.sMidiDriver);
+	m_settings.setValue("/ServerSuffix", preset.sServerSuffix);
 	m_settings.endGroup();
 
 	return true;

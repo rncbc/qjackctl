@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -892,7 +892,7 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QStrin
 
 	sTemp.replace("%P", m_pSetup->sDefPreset);
 	sTemp.replace("%N", m_pSetup->sServerName);
-	sTemp.replace("%s", m_preset.sServer);
+	sTemp.replace("%s", m_preset.sServerPrefix);
 	sTemp.replace("%d", m_preset.sDriver);
 	sTemp.replace("%i", m_preset.sInterface);
 	sTemp.replace("%r", QString::number(m_preset.iSampleRate));
@@ -992,7 +992,8 @@ void qjackctlMainForm::startJack (void)
 	}
 
 	// Split the server path into arguments...
-	QStringList args = m_preset.sServer.split(' ');
+	QStringList args = m_preset.sServerPrefix.split(' ');
+
 	// Look for the executable in the search path;
 	// this enforces the server command to be an
 	// executable absolute path whenever possible.
@@ -1171,6 +1172,10 @@ void qjackctlMainForm::startJack (void)
 			args.append("-O" + QString::number(m_preset.iOutLatency));
 	}
 
+	// Split the server path into arguments...
+	if (!m_preset.sServerSuffix.isEmpty())
+		args.append(m_preset.sServerSuffix.split(' '));
+	
 	// This is emulated jackd command line, for future reference purposes...
 	m_sJackCmdLine = sCommand + ' ' + args.join(" ").trimmed();
 

@@ -2057,11 +2057,11 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation>Server</translation>
+        <translation type="obsolete">Server</translation>
     </message>
     <message>
         <source>Server &amp;Path:</source>
-        <translation>&amp;Indirizzo del server:</translation>
+        <translation type="obsolete">&amp;Indirizzo del server:</translation>
     </message>
     <message>
         <source>jackstart</source>
@@ -2077,7 +2077,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>The JACK Audio Connection Kit sound server path</source>
-        <translation>Indirizzo del server sonoro JACK</translation>
+        <translation type="obsolete">Indirizzo del server sonoro JACK</translation>
     </message>
     <message>
         <source>Driv&amp;er:</source>
@@ -2373,7 +2373,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>&amp;Output Channels:</source>
-        <translation>Numer&amp;o canali d&apos;uscita:</translation>
+        <translation type="obsolete">Numer&amp;o canali d&apos;uscita:</translation>
     </message>
     <message>
         <source>&amp;Interface:</source>
@@ -2389,7 +2389,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>&amp;Input Latency:</source>
-        <translation>Laten&amp;za d&apos;entrata:</translation>
+        <translation type="obsolete">Laten&amp;za d&apos;entrata:</translation>
     </message>
     <message>
         <source>Dit&amp;her:</source>
@@ -2445,7 +2445,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>&amp;Output Latency:</source>
-        <translation>&amp;Latenza in uscita:</translation>
+        <translation type="obsolete">&amp;Latenza in uscita:</translation>
     </message>
     <message>
         <source>Maximum output audio hardware channels to allocate</source>
@@ -2457,7 +2457,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>&amp;Input Channels:</source>
-        <translation>Numero &amp;canali d&apos;entrata:</translation>
+        <translation type="obsolete">Numero &amp;canali d&apos;entrata:</translation>
     </message>
     <message>
         <source>Select input device for capture</source>
@@ -2501,7 +2501,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>Start De&amp;lay (secs):</source>
-        <translation>Ritardo inizia&amp;le (secs):</translation>
+        <translation type="obsolete">Ritardo inizia&amp;le (secs):</translation>
     </message>
     <message>
         <source>Time in seconds that client is delayed after server startup</source>
@@ -2513,7 +2513,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>0</source>
-        <translation>0</translation>
+        <translation type="obsolete">0</translation>
     </message>
     <message>
         <source>Output latency in milliseconds, calculated based on the period, rate and buffer settings</source>
@@ -3346,6 +3346,42 @@ Vuoi applicare i cambiamenti?</translation>
     <message>
         <source>&amp;Server Name</source>
         <translation>Nome del &amp;Server</translation>
+    </message>
+    <message>
+        <source>Server path (command line prefix)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Channels I/O:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Latency I/O:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extra options (server command line suffix)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start De&amp;lay:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> secs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 msecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server Suffi&amp;x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server &amp;Prefix:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

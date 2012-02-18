@@ -1,7 +1,7 @@
 // qjackctlSetup.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ class QSplitter;
 // Server settings preset struct.
 struct qjackctlPreset
 {
-	QString sServer;
+	QString sServerPrefix;
 	QString sServerName;
 	bool    bRealtime;
 	bool    bSoftMode;
@@ -79,6 +79,7 @@ struct qjackctlPreset
 	bool    bVerbose;
 	int     iPortMax;
 	QString sMidiDriver;
+	QString sServerSuffix;
 };
 
 // Common settings profile class.

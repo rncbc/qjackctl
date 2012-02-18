@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -134,7 +134,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.AudioComboBox,
 		SIGNAL(highlighted(int)),
 		SLOT(changeAudio(int)));
-	QObject::connect(m_ui.ServerComboBox,
+	QObject::connect(m_ui.ServerPrefixComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.ServerNameComboBox,
@@ -231,6 +231,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(valueChanged(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.PortMaxComboBox,
+		SIGNAL(editTextChanged(const QString&)),
+		SLOT(settingsChanged()));
+	QObject::connect(m_ui.ServerSuffixComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
 
@@ -472,11 +475,12 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_iDirtySetup++;
 
 	// Load combo box history...
-	m_pSetup->loadComboBoxHistory(m_ui.ServerComboBox);
+	m_pSetup->loadComboBoxHistory(m_ui.ServerPrefixComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ServerNameComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.InterfaceComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.InDeviceComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.OutDeviceComboBox);
+	m_pSetup->loadComboBoxHistory(m_ui.ServerSuffixComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.StartupScriptShellComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.PostStartupScriptShellComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ShutdownScriptShellComboBox);
@@ -653,7 +657,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 	// Load Settings...
 	qjackctlPreset preset;
 	if (m_pSetup->loadPreset(preset, sPreset)) {
-		setComboBoxCurrentText(m_ui.ServerComboBox, preset.sServer);
+		setComboBoxCurrentText(m_ui.ServerPrefixComboBox, preset.sServerPrefix);
 		setComboBoxCurrentText(m_ui.ServerNameComboBox,
 			preset.sServerName.isEmpty()
 			? m_pSetup->sDefPresetName
@@ -707,6 +711,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 		setComboBoxCurrentText(m_ui.MidiDriverComboBox,
 			preset.sMidiDriver);
 #endif
+		setComboBoxCurrentText(m_ui.ServerSuffixComboBox, preset.sServerSuffix);
 		// Reset dirty flag.
 		m_iDirtySettings = 0;
 	}
@@ -723,7 +728,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 
 	// Unload settings.
 	qjackctlPreset preset;
-	preset.sServer      = m_ui.ServerComboBox->currentText();
+	preset.sServerPrefix = m_ui.ServerPrefixComboBox->currentText();
 	preset.sServerName  = m_ui.ServerNameComboBox->currentText();
 	preset.bRealtime    = m_ui.RealtimeCheckBox->isChecked();
 	preset.bSoftMode    = m_ui.SoftModeCheckBox->isChecked();
@@ -758,6 +763,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 #ifdef CONFIG_JACK_MIDI
 	preset.sMidiDriver  = m_ui.MidiDriverComboBox->currentText();
 #endif
+	preset.sServerSuffix = m_ui.ServerSuffixComboBox->currentText();
 	if (preset.sServerName == m_pSetup->sDefPresetName)
 		preset.sServerName.clear();
 	if (preset.sInterface == m_pSetup->sDefPresetName)
@@ -933,22 +939,16 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	if (!bEnabled)
 		setComboBoxCurrentText(m_ui.OutDeviceComboBox, m_pSetup->sDefPresetName);
 
-	m_ui.InChannelsTextLabel->setEnabled(bInEnabled
-		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_PLAYBACK));
+	m_ui.InOutChannelsTextLabel->setEnabled(bInEnabled || (bAlsa || bFirewire));
 	m_ui.InChannelsSpinBox->setEnabled(bInEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_PLAYBACK));
-
-	m_ui.OutChannelsTextLabel->setEnabled(bOutEnabled
-		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_CAPTURE));
 	m_ui.OutChannelsSpinBox->setEnabled(bOutEnabled
 		|| ((bAlsa || bFirewire) && iAudio != QJACKCTL_CAPTURE));
 
-	m_ui.InLatencyTextLabel->setEnabled((bInEnabled && !bNet)
-		|| ((bAlsa || bFreebob || bFirewire) && iAudio != QJACKCTL_PLAYBACK));
+	m_ui.InOutLatencyTextLabel->setEnabled((bInEnabled && !bNet)
+		|| (bAlsa || bFreebob || bFirewire));
 	m_ui.InLatencySpinBox->setEnabled((bInEnabled && !bNet)
 		|| ((bAlsa || bFreebob || bFirewire) && iAudio != QJACKCTL_PLAYBACK));
-	m_ui.OutLatencyTextLabel->setEnabled((bOutEnabled && !bNet)
-		|| ((bAlsa || bFreebob || bFirewire) && iAudio != QJACKCTL_CAPTURE));
 	m_ui.OutLatencySpinBox->setEnabled((bOutEnabled && !bNet)
 		|| ((bAlsa || bFreebob || bFirewire) && iAudio != QJACKCTL_CAPTURE));
 
@@ -1818,11 +1818,12 @@ void qjackctlSetupForm::accept (void)
 	}
 
 	// Save combobox history...
-	m_pSetup->saveComboBoxHistory(m_ui.ServerComboBox);
+	m_pSetup->saveComboBoxHistory(m_ui.ServerPrefixComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.ServerNameComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.InterfaceComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.InDeviceComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.OutDeviceComboBox);
+	m_pSetup->saveComboBoxHistory(m_ui.ServerSuffixComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.StartupScriptShellComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.PostStartupScriptShellComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.ShutdownScriptShellComboBox);

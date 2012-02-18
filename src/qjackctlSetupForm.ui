@@ -3,7 +3,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -26,21 +26,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
-    <height>420</height>
+    <width>675</width>
+    <height>503</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Setup - JACK Audio Connection Kit</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="qjackctl.qrc">:/images/setup1.png</iconset>
+   <iconset resource="qjackctl.qrc">
+    <normaloff>:/images/setup1.png</normaloff>:/images/setup1.png</iconset>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -50,7 +45,7 @@
     <number>4</number>
    </property>
    <property name="margin">
-    <number>4</number>
+    <number>8</number>
    </property>
    <item>
     <widget class="QTabWidget" name="SetupTabWidget">
@@ -65,12 +60,6 @@
        <string>Settings</string>
       </attribute>
       <layout class="QVBoxLayout">
-       <property name="spacing">
-        <number>6</number>
-       </property>
-       <property name="margin">
-        <number>9</number>
-       </property>
        <item>
         <layout class="QHBoxLayout">
          <property name="spacing">
@@ -95,7 +84,7 @@
          <item>
           <widget class="QComboBox" name="PresetComboBox">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -122,7 +111,8 @@
             <string>&amp;Save</string>
            </property>
            <property name="icon">
-            <iconset resource="qjackctl.qrc">:/images/save1.png</iconset>
+            <iconset resource="qjackctl.qrc">
+             <normaloff>:/images/save1.png</normaloff>:/images/save1.png</iconset>
            </property>
            <property name="shortcut">
             <string>Alt+S</string>
@@ -141,7 +131,8 @@
             <string>&amp;Delete</string>
            </property>
            <property name="icon">
-            <iconset resource="qjackctl.qrc">:/images/remove1.png</iconset>
+            <iconset resource="qjackctl.qrc">
+             <normaloff>:/images/remove1.png</normaloff>:/images/remove1.png</iconset>
            </property>
            <property name="shortcut">
             <string>Alt+D</string>
@@ -152,217 +143,6 @@
           </widget>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="ServerGroupBox">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="title">
-          <string>Server</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-         <layout class="QHBoxLayout">
-          <property name="spacing">
-           <number>4</number>
-          </property>
-          <property name="margin">
-           <number>4</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="ServerTextLabel">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Server &amp;Path:</string>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-            <property name="buddy">
-             <cstring>ServerComboBox</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="ServerComboBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>The JACK Audio Connection Kit sound server path</string>
-            </property>
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>jackd</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>jackdmp</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>jackstart</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="ServerNameTextLabel">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>&amp;Name:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-            <property name="buddy">
-             <cstring>ServerNameComboBox</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="ServerNameComboBox">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>The JACK Audio Connection Kit sound server name</string>
-            </property>
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>(default)</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="DriverTextLabel">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Driv&amp;er:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-            <property name="buddy">
-             <cstring>DriverComboBox</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="DriverComboBox">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>The audio backend driver interface to use</string>
-            </property>
-            <property name="editable">
-             <bool>false</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>dummy</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>sun</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>oss</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>alsa</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>portaudio</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>coreaudio</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>freebob</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>firewire</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>net</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>netone</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
        </item>
        <item>
         <widget class="QGroupBox" name="ParametersGroupBox">
@@ -378,23 +158,24 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout">
-          <property name="margin">
-           <number>8</number>
-          </property>
-          <property name="spacing">
-           <number>4</number>
-          </property>
+		 <layout class="QGridLayout">
+          <item row="0" column="0" colspan="5">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+			<property name="sizeHint">
+             <size>
+              <width>8</width>
+              <height>4</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item row="1" column="0" colspan="5">
            <layout class="QHBoxLayout">
-            <property name="spacing">
-             <number>4</number>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
             <item>
-             <widget class="QLabel" name="MidiDriverTextLabel">
+             <widget class="QLabel" name="ServerPrefixTextLabel">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -402,7 +183,63 @@
                </font>
               </property>
               <property name="text">
-               <string>MIDI Driv&amp;er:</string>
+			   <string>Server &amp;Prefix:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>ServerPrefixComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+			 <widget class="QComboBox" name="ServerPrefixComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Server path (command line prefix)</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>jackd</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>jackdmp</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>jackstart</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="ServerNameTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>&amp;Name:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -411,12 +248,12 @@
                <bool>false</bool>
               </property>
               <property name="buddy">
-               <cstring>MidiDriverComboBox</cstring>
+               <cstring>ServerNameComboBox</cstring>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="MidiDriverComboBox">
+             <widget class="QComboBox" name="ServerNameComboBox">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -424,175 +261,122 @@
                </font>
               </property>
               <property name="toolTip">
-               <string>The ALSA MIDI backend driver to use</string>
+               <string>The JACK Audio Connection Kit sound server name</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>(default)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="DriverTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Driv&amp;er:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>DriverComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="DriverComboBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>The audio backend driver interface to use</string>
               </property>
               <property name="editable">
                <bool>false</bool>
               </property>
               <item>
                <property name="text">
-                <string>none</string>
+                <string>dummy</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>raw</string>
+                <string>sun</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>seq</string>
+                <string>oss</string>
                </property>
               </item>
-             </widget>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="sizeHint">
-               <size>
-                <width>8</width>
-                <height>8</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="StartDelayTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Start De&amp;lay (secs):</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>StartDelaySpinBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="StartDelaySpinBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Time in seconds that client is delayed after server startup</string>
-              </property>
-              <property name="minimum">
-               <number>0</number>
-              </property>
-              <property name="maximum">
-               <number>999</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="sizeHint">
-               <size>
-                <width>8</width>
-                <height>8</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="LatencyTextLabel">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
-              <property name="text">
-               <string>Latency:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="LatencyTextValue">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Output latency in milliseconds, calculated based on the period, rate and buffer settings</string>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
+              <item>
+               <property name="text">
+                <string>alsa</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>portaudio</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>coreaudio</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>freebob</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>firewire</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>net</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>netone</string>
+               </property>
+              </item>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="0" column="0">
+          <item row="2" column="0" colspan="5">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+			<property name="sizeHint">
+             <size>
+              <width>8</width>
+              <height>4</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="0">
            <layout class="QVBoxLayout">
             <property name="spacing">
              <number>4</number>
@@ -792,7 +576,7 @@
             </item>
            </layout>
           </item>
-          <item row="0" column="1">
+          <item row="3" column="1">
            <spacer>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -800,598 +584,15 @@
             <property name="sizeType">
              <enum>QSizePolicy::MinimumExpanding</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
-              <width>8</width>
+              <width>4</width>
               <height>8</height>
              </size>
             </property>
            </spacer>
           </item>
-          <item row="0" column="3">
-           <spacer>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::MinimumExpanding</enum>
-            </property>
-            <property name="sizeHint">
-             <size>
-              <width>8</width>
-              <height>8</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="4">
-           <layout class="QGridLayout">
-            <property name="margin">
-             <number>0</number>
-            </property>
-            <property name="spacing">
-             <number>4</number>
-            </property>
-            <item row="4" column="0">
-             <widget class="QLabel" name="OutDeviceTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Output Device:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>OutDeviceComboBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="OutChannelsTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Output Channels:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>OutChannelsSpinBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="InterfaceTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Interface:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>InterfaceComboBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1" colspan="2">
-             <widget class="QSpinBox" name="InChannelsSpinBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Maximum input audio hardware channels to allocate</string>
-              </property>
-              <property name="specialValueText">
-               <string>(default)</string>
-              </property>
-              <property name="maximum">
-               <number>999</number>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="AudioTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Audio:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>AudioComboBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="InLatencyTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Input Latency:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>InLatencySpinBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="DitherTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
-              <property name="text">
-               <string>Dit&amp;her:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>DitherComboBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="1" colspan="3">
-             <widget class="QSpinBox" name="OutLatencySpinBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>External output latency (frames)</string>
-              </property>
-              <property name="specialValueText">
-               <string>(default)</string>
-              </property>
-              <property name="maximum">
-               <number>9999999</number>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="InDeviceTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Input Device:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>InDeviceComboBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1" colspan="3">
-             <widget class="QComboBox" name="AudioComboBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Provide either audio capture, playback or both</string>
-              </property>
-              <item>
-               <property name="text">
-                <string>Duplex</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Capture Only</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Playback Only</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="0" column="1" colspan="2">
-             <widget class="QComboBox" name="InterfaceComboBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>The PCM device name to use</string>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <item>
-               <property name="text">
-                <string>(default)</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>hw:0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>plughw:0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/audio</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/dsp</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QToolButton" name="OutDeviceToolButton">
-              <property name="minimumSize">
-               <size>
-                <width>22</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Select output device for playback</string>
-              </property>
-              <property name="text">
-               <string>&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1" colspan="2">
-             <widget class="QComboBox" name="InDeviceComboBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Alternate input device for capture</string>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <item>
-               <property name="text">
-                <string>(default)</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>hw:0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>plughw:0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/audio</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/dsp</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="OutLatencyTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Output Latency:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>OutLatencySpinBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="1" colspan="2">
-             <widget class="QSpinBox" name="OutChannelsSpinBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Maximum output audio hardware channels to allocate</string>
-              </property>
-              <property name="specialValueText">
-               <string>(default)</string>
-              </property>
-              <property name="maximum">
-               <number>999</number>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1" colspan="2">
-             <widget class="QComboBox" name="OutDeviceComboBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Alternate output device for playback</string>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <item>
-               <property name="text">
-                <string>(default)</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>hw:0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>plughw:0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/audio</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/dsp</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="InChannelsTextLabel">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>&amp;Input Channels:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-              <property name="buddy">
-               <cstring>InChannelsSpinBox</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QToolButton" name="InDeviceToolButton">
-              <property name="minimumSize">
-               <size>
-                <width>22</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Select input device for capture</string>
-              </property>
-              <property name="text">
-               <string>&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QToolButton" name="InterfaceToolButton">
-              <property name="minimumSize">
-               <size>
-                <width>22</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Select PCM device name</string>
-              </property>
-              <property name="text">
-               <string>&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="1" colspan="3">
-             <widget class="QSpinBox" name="InLatencySpinBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>External input latency (frames)</string>
-              </property>
-              <property name="specialValueText">
-               <string>(default)</string>
-              </property>
-              <property name="maximum">
-               <number>9999999</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1" colspan="2">
-             <widget class="QComboBox" name="DitherComboBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Set dither mode</string>
-              </property>
-              <item>
-               <property name="text">
-                <string>None</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Rectangular</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Shaped</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Triangular</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="2">
+          <item row="3" column="2">
            <layout class="QGridLayout">
             <property name="margin">
              <number>0</number>
@@ -1553,12 +754,6 @@
             </item>
             <item row="6" column="0">
              <widget class="QLabel" name="ChanTextLabel">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -1757,12 +952,6 @@
             </item>
             <item row="7" column="1">
              <widget class="QComboBox" name="PortMaxComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="minimumSize">
                <size>
                 <width>60</width>
@@ -1891,7 +1080,7 @@
                <enum>QFrame::Plain</enum>
               </property>
               <property name="text">
-               <string>&amp;Timeout (msec):</string>
+			   <string>&amp;Timeout (msec):</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1955,7 +1144,773 @@
             </item>
            </layout>
           </item>
-         </layout>
+          <item row="3" column="3">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::MinimumExpanding</enum>
+            </property>
+			<property name="sizeHint">
+             <size>
+              <width>4</width>
+              <height>8</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="4">
+           <layout class="QGridLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="InterfaceTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>&amp;Interface:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>InterfaceComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QComboBox" name="InterfaceComboBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>The PCM device name to use</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>(default)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>hw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>plughw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/audio</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/dsp</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QToolButton" name="InterfaceToolButton">
+              <property name="minimumSize">
+               <size>
+                <width>22</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::TabFocus</enum>
+              </property>
+              <property name="toolTip">
+               <string>Select PCM device name</string>
+              </property>
+              <property name="text">
+               <string>&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="DitherTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="text">
+               <string>Dit&amp;her:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>DitherComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="2">
+             <widget class="QComboBox" name="DitherComboBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Set dither mode</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Rectangular</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Shaped</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Triangular</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="AudioTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>&amp;Audio:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>AudioComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="3">
+             <widget class="QComboBox" name="AudioComboBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Provide either audio capture, playback or both</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>Duplex</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Capture Only</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Playback Only</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="InDeviceTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>&amp;Input Device:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>InDeviceComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1" colspan="2">
+             <widget class="QComboBox" name="InDeviceComboBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Alternate input device for capture</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>(default)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>hw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>plughw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/audio</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/dsp</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QToolButton" name="InDeviceToolButton">
+              <property name="minimumSize">
+               <size>
+                <width>22</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::TabFocus</enum>
+              </property>
+              <property name="toolTip">
+               <string>Select input device for capture</string>
+              </property>
+              <property name="text">
+               <string>&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="OutDeviceTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>&amp;Output Device:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>OutDeviceComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1" colspan="2">
+             <widget class="QComboBox" name="OutDeviceComboBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Alternate output device for playback</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>(default)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>hw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>plughw:0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/audio</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/dsp</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QToolButton" name="OutDeviceToolButton">
+              <property name="minimumSize">
+               <size>
+                <width>22</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>24</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::TabFocus</enum>
+              </property>
+              <property name="toolTip">
+               <string>Select output device for playback</string>
+              </property>
+              <property name="text">
+               <string>&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="InOutChannelsTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>&amp;Channels I/O:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>InChannelsSpinBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QSpinBox" name="InChannelsSpinBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Maximum input audio hardware channels to allocate</string>
+              </property>
+              <property name="specialValueText">
+               <string>(default)</string>
+              </property>
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2" colspan="2">
+             <widget class="QSpinBox" name="OutChannelsSpinBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Maximum output audio hardware channels to allocate</string>
+              </property>
+              <property name="specialValueText">
+               <string>(default)</string>
+              </property>
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="InOutLatencyTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>&amp;Latency I/O:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>InLatencySpinBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QSpinBox" name="InLatencySpinBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>External input latency (frames)</string>
+              </property>
+              <property name="specialValueText">
+               <string>(default)</string>
+              </property>
+              <property name="maximum">
+               <number>9999999</number>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="2" colspan="2">
+             <widget class="QSpinBox" name="OutLatencySpinBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>External output latency (frames)</string>
+              </property>
+              <property name="specialValueText">
+               <string>(default)</string>
+              </property>
+              <property name="maximum">
+               <number>9999999</number>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QLabel" name="MidiDriverTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>MIDI Driv&amp;er:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>MidiDriverComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="2" colspan="2">
+             <widget class="QComboBox" name="MidiDriverComboBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>The ALSA MIDI backend driver to use</string>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>none</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>raw</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>seq</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0" colspan="5">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+			<property name="sizeHint">
+             <size>
+              <width>8</width>
+              <height>4</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="5" column="0" colspan="5">
+           <layout class="QHBoxLayout">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="ServerSuffixTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Server Suffi&amp;x:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>ServerSuffixComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="ServerSuffixComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Extra options (server command line suffix)</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="StartDelayTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Start De&amp;lay:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+              <property name="buddy">
+               <cstring>StartDelaySpinBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="StartDelaySpinBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Time in seconds that client is delayed after server startup</string>
+              </property>
+              <property name="suffix">
+               <string> secs</string>
+              </property>
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="LatencyTextLabel">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="text">
+               <string>Latency:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="LatencyTextValue">
+              <property name="minimumSize">
+               <size>
+                <width>72</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Output latency in milliseconds, calculated based on the period, rate and buffer settings</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Sunken</enum>
+              </property>
+              <property name="text">
+               <string>0 msecs</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+		  </item>
+		  <item row="6" column="0" colspan="5">
+		   <spacer>
+			<property name="orientation">
+			 <enum>Qt::Vertical</enum>
+			</property>
+			<property name="sizeHint">
+			 <size>
+			  <width>8</width>
+			  <height>4</height>
+			 </size>
+			</property>
+		   </spacer>
+		  </item>
+		 </layout>
         </widget>
        </item>
       </layout>
@@ -2449,12 +2404,6 @@
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="XrunRegexTextLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
             <property name="font">
              <font>
               <weight>50</weight>
@@ -2517,20 +2466,8 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout">
-          <property name="margin">
-           <number>8</number>
-          </property>
-          <property name="spacing">
-           <number>4</number>
-          </property>
-          <item row="1" column="2">
-           <widget class="QComboBox" name="TimeRefreshComboBox">
-            <property name="minimumSize">
-             <size>
-              <width>40</width>
-              <height>0</height>
-             </size>
-            </property>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="ActivePatchbayCheckBox">
             <property name="font">
              <font>
               <weight>50</weight>
@@ -2538,58 +2475,15 @@
              </font>
             </property>
             <property name="toolTip">
-             <string>Time in seconds between each auto-refresh cycle</string>
+             <string>Whether to activate a patchbay definition for connection persistence profile.</string>
             </property>
-            <property name="editable">
-             <bool>true</bool>
+            <property name="text">
+             <string>Activate &amp;Patchbay persistence:</string>
             </property>
-            <item>
-             <property name="text">
-              <string>5</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>10</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>20</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>30</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>60</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>120</string>
-             </property>
-            </item>
+            <property name="shortcut">
+             <string>Alt+P</string>
+            </property>
            </widget>
-          </item>
-          <item row="1" column="3" colspan="2">
-           <spacer>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint">
-             <size>
-              <width>200</width>
-              <height>8</height>
-             </size>
-            </property>
-           </spacer>
           </item>
           <item row="0" column="1" colspan="3">
            <widget class="QComboBox" name="ActivePatchbayPathComboBox">
@@ -2646,6 +2540,12 @@
           </item>
           <item row="1" column="0" colspan="2">
            <widget class="QCheckBox" name="AutoRefreshCheckBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <weight>50</weight>
@@ -2663,8 +2563,14 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="ActivePatchbayCheckBox">
+          <item row="1" column="2">
+           <widget class="QComboBox" name="TimeRefreshComboBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <weight>50</weight>
@@ -2672,15 +2578,58 @@
              </font>
             </property>
             <property name="toolTip">
-             <string>Whether to activate a patchbay definition for connection persistence profile.</string>
+             <string>Time in seconds between each auto-refresh cycle</string>
             </property>
-            <property name="text">
-             <string>Activate &amp;Patchbay persistence:</string>
+            <property name="editable">
+             <bool>true</bool>
             </property>
-            <property name="shortcut">
-             <string>Alt+P</string>
-            </property>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>30</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>60</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>120</string>
+             </property>
+            </item>
            </widget>
+          </item>
+          <item row="1" column="3" colspan="2">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+			<property name="sizeHint">
+             <size>
+              <width>200</width>
+              <height>8</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -2700,13 +2649,26 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout">
-          <property name="margin">
-           <number>8</number>
-          </property>
-          <property name="spacing">
-           <number>4</number>
-          </property>
-          <item row="0" column="1" colspan="3">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="MessagesLogCheckBox">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Whether to activate a messages logging to file.</string>
+            </property>
+            <property name="text">
+             <string>&amp;Messages log file:</string>
+            </property>
+            <property name="shortcut">
+             <string>Alt+M</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
            <widget class="QComboBox" name="MessagesLogPathComboBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -2728,7 +2690,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
+          <item row="0" column="2">
            <widget class="QToolButton" name="MessagesLogPathToolButton">
             <property name="minimumSize">
              <size>
@@ -2759,25 +2721,6 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="MessagesLogCheckBox">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>Whether to activate a messages logging to file.</string>
-            </property>
-            <property name="text">
-             <string>&amp;Messages log file:</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+M</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -2789,7 +2732,7 @@
          <property name="sizeType">
           <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-         <property name="sizeHint">
+		 <property name="sizeHint">
           <size>
            <width>8</width>
            <height>8</height>
@@ -2981,7 +2924,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Minimum</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>24</width>
               <height>8</height>
@@ -2997,7 +2940,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Minimum</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>24</width>
               <height>8</height>
@@ -3303,7 +3246,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -3467,7 +3410,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -3539,7 +3482,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Minimum</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -3671,7 +3614,7 @@
          <property name="sizeType">
           <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-         <property name="sizeHint">
+		 <property name="sizeHint">
           <size>
            <width>8</width>
            <height>8</height>
@@ -3989,7 +3932,7 @@
               <property name="sizeType">
                <enum>QSizePolicy::Expanding</enum>
               </property>
-              <property name="sizeHint">
+			  <property name="sizeHint">
                <size>
                 <width>8</width>
                 <height>8</height>
@@ -4007,7 +3950,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -4133,7 +4076,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -4173,7 +4116,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-            <property name="sizeHint">
+			<property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -4281,7 +4224,6 @@
   <tabstop>PresetComboBox</tabstop>
   <tabstop>PresetSavePushButton</tabstop>
   <tabstop>PresetDeletePushButton</tabstop>
-  <tabstop>ServerComboBox</tabstop>
   <tabstop>ServerNameComboBox</tabstop>
   <tabstop>DriverComboBox</tabstop>
   <tabstop>RealtimeCheckBox</tabstop>
@@ -4316,6 +4258,7 @@
   <tabstop>InLatencySpinBox</tabstop>
   <tabstop>OutLatencySpinBox</tabstop>
   <tabstop>MidiDriverComboBox</tabstop>
+  <tabstop>ServerSuffixComboBox</tabstop>
   <tabstop>StartDelaySpinBox</tabstop>
   <tabstop>StartupScriptCheckBox</tabstop>
   <tabstop>StartupScriptShellComboBox</tabstop>
@@ -4339,7 +4282,6 @@
   <tabstop>ActivePatchbayPathComboBox</tabstop>
   <tabstop>ActivePatchbayPathToolButton</tabstop>
   <tabstop>AutoRefreshCheckBox</tabstop>
-  <tabstop>TimeRefreshComboBox</tabstop>
   <tabstop>MessagesLogCheckBox</tabstop>
   <tabstop>MessagesLogPathComboBox</tabstop>
   <tabstop>MessagesLogPathToolButton</tabstop>
