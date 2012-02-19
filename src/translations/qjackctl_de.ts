@@ -3027,11 +3027,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1788"/>
-        <source>Extra options (server command line suffix)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="1804"/>
         <source>Start De&amp;lay:</source>
         <translation type="unfinished"></translation>
@@ -3298,6 +3293,11 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="2661"/>
         <source>Whether to activate a messages logging to file.</source>
         <translation>Protokollierung der Meldungen in eine Datei festlegen.</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="1788"/>
+        <source>Extra driver options (command line suffix)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2664"/>

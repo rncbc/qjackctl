@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.8.6, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.8.7, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -46,6 +46,12 @@ AC_ARG_ENABLE(jack_session,
   AC_HELP_STRING([--enable-jack-session], [enable JACK session support (default=yes)]),
   [ac_jack_session="$enableval"],
   [ac_jack_session="yes"])
+
+# Enable JACK version support.
+AC_ARG_ENABLE(jack_version,
+  AC_HELP_STRING([--enable-jack-version], [enable JACK version support (default=no)]),
+  [ac_jack_version="$enableval"],
+  [ac_jack_version="no"])
 
 # Disable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
@@ -376,9 +382,11 @@ if test "x$ac_jack_port_aliases" = "xyes"; then
 fi
 
 # Check for jack_get_version_string function.
-AC_CHECK_LIB(jack, jack_get_version_string, [ac_jack_version="yes"], [ac_jack_version="no"])
 if test "x$ac_jack_version" = "xyes"; then
-   AC_DEFINE(CONFIG_JACK_VERSION, 1, [Define if jack_get_version_string is available.])
+   AC_CHECK_LIB(jack, jack_get_version_string, [ac_jack_version="yes"], [ac_jack_version="no"])
+   if test "x$ac_jack_version" = "xyes"; then
+	  AC_DEFINE(CONFIG_JACK_VERSION, 1, [Define if jack_get_version_string is available.])
+   fi
 fi
 
 # Check for jack_free function.

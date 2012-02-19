@@ -1785,7 +1785,7 @@
                </font>
               </property>
               <property name="toolTip">
-               <string>Extra options (server command line suffix)</string>
+			   <string>Extra driver options (command line suffix)</string>
               </property>
               <property name="editable">
                <bool>true</bool>

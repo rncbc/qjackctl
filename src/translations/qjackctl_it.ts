@@ -3360,10 +3360,6 @@ Vuoi applicare i cambiamenti?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Extra options (server command line suffix)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Start De&amp;lay:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3381,6 +3377,10 @@ Vuoi applicare i cambiamenti?</translation>
     </message>
     <message>
         <source>Server &amp;Prefix:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extra driver options (command line suffix)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

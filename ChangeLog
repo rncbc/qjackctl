@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Currently a JACK2-only feature, the JACK version string
+  display at the About dialog box, must now be explicitly
+  enabled on configure time (--enable-jack-version).
+
 - A new so called "Server Suffix" parameter option appears
   to rescue on the situations where QjackCtl falls short on
   extra, exquisite and/or esoteric command line options eg.
