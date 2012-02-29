@@ -527,7 +527,7 @@ Desea guardar los cambios?</translation>
     </message>
     <message>
         <source>Stop transport rolling</source>
-        <translation>Detener el transporte (Alt+ . [punto])</translation>
+        <translation>Detener el transporte (Shift+Espacio)</translation>
     </message>
     <message>
         <source>Alt+P</source>
@@ -535,7 +535,7 @@ Desea guardar los cambios?</translation>
     </message>
     <message>
         <source>Start transport rolling</source>
-        <translation>Iniciar el transporte (Alt+N)</translation>
+        <translation>Iniciar el transporte (Espacio)</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -3253,39 +3253,39 @@ Do you want to apply the changes?</source>
     </message>
     <message>
         <source>Server path (command line prefix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta del servidor (prefijo de la línea de comando)</translation>
     </message>
     <message>
         <source>&amp;Channels I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Canales de E/S:</translation>
     </message>
     <message>
         <source>&amp;Latency I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Latencia E/S:</translation>
     </message>
     <message>
         <source>Start De&amp;lay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Demora antes de&amp;l inicio:</translation>
     </message>
     <message>
         <source> secs</source>
-        <translation type="unfinished"></translation>
+        <translation>segs</translation>
     </message>
     <message>
         <source>0 msecs</source>
-        <translation type="unfinished"></translation>
+        <translation>0 msegs</translation>
     </message>
     <message>
         <source>Server Suffi&amp;x:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo del &amp;Servidor:</translation>
     </message>
     <message>
         <source>Server &amp;Prefix:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Prefijo del servidor:</translation>
     </message>
     <message>
         <source>Extra driver options (command line suffix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones extra para el driver (sufijo de la línea de comandos)</translation>
     </message>
 </context>
 <context>
