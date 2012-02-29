@@ -1303,7 +1303,7 @@ Další informace hledejte, prosím, v okně s hlášením.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3061"/>
         <source>%1 (%2%, %3 xruns)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2%, %3 xruns)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3068"/>
@@ -3170,32 +3170,32 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1567"/>
         <source>&amp;Channels I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kanály vstup/výstup:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1627"/>
         <source>&amp;Latency I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Prodleva vstup/výstup:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1763"/>
         <source>Server Suffi&amp;x:</source>
-        <translation type="unfinished"></translation>
+        <translation>Příp&amp;ona serveru:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1804"/>
         <source>Start De&amp;lay:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zpoždění spuštění:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1829"/>
         <source> secs</source>
-        <translation type="unfinished"></translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1888"/>
         <source>0 msecs</source>
-        <translation type="unfinished"></translation>
+        <translation>0 ms</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1920"/>
@@ -3461,12 +3461,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="186"/>
         <source>Server &amp;Prefix:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pře&amp;dpona serveru:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1788"/>
         <source>Extra driver options (command line suffix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Další volby pro ovladač (přípona příkazového řádku)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2664"/>
@@ -3723,7 +3723,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="211"/>
         <source>Server path (command line prefix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta k serveru (předpona příkazového řádku)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3505"/>

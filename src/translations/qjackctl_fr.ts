@@ -1533,7 +1533,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3061"/>
         <source>%1 (%2%, %3 xruns)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2%, %3 xruns)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3068"/>
@@ -3598,7 +3598,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1763"/>
         <source>Server Suffi&amp;x:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suffi&amp;xe Serveur :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2862"/>
@@ -4216,7 +4216,7 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="211"/>
         <source>Server path (command line prefix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin serveur (préfixe de ligne de commande)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1057"/>
@@ -4226,12 +4226,12 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1567"/>
         <source>&amp;Channels I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Canaux E/S :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1627"/>
         <source>&amp;Latency I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Latence E/S :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2646"/>
@@ -4256,27 +4256,27 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="186"/>
         <source>Server &amp;Prefix:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Préfixe Serveur :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1788"/>
         <source>Extra driver options (command line suffix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Options supplémentaires du pilote (Suffixe de ligne de commande)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1804"/>
         <source>Start De&amp;lay:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Retard du démarrage :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1829"/>
         <source> secs</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1888"/>
         <source>0 msecs</source>
-        <translation type="unfinished"></translation>
+        <translation>0 ms</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2664"/>
