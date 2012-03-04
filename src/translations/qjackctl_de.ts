@@ -923,20 +923,13 @@ Tut mir leid</translation>
         <translation>Seit dem letzten XRUN vergangene Zeit</translation>
     </message>
     <message>
-        <source>Could not load active patchbay definition.
-
-Disabled.</source>
-        <translation type="obsolete">Konnte aktive Steckfelddefinition nicht laden.
-Ist deaktiviert.</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="1862"/>
         <source>Could not load active patchbay definition.
 
 &quot;%1&quot;
 
 Disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte aktive Steckfelddefinition nicht laden.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1866"/>
@@ -1218,7 +1211,7 @@ Bitte sehen Sie im Meldungsfenster nach weiteren Informationen.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3061"/>
         <source>%1 (%2%, %3 xruns)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2%, %3 xruns)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3068"/>
@@ -1330,12 +1323,12 @@ Bitte sehen Sie im Meldungsfenster nach weiteren Informationen.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3429"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Versionierung</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3436"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Au&amp;ffrischen</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="434"/>
@@ -1356,16 +1349,12 @@ Bitte sehen Sie im Meldungsfenster nach weiteren Informationen.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3419"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Speichern und &amp;beenden...</translation>
+        <translation>Speichern und &amp;beenden...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3423"/>
         <source>Save &amp;Template...</source>
         <translation>&amp;Vorlage speichern...</translation>
-    </message>
-    <message>
-        <source>&amp;Refresh</source>
-        <translation type="obsolete">&amp;Auffrischen</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3454"/>
@@ -2081,19 +2070,19 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="92"/>
         <source>Save session versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>Sitzungsversionierung speichern</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="95"/>
         <location filename="../qjackctlSessionForm.cpp" line="598"/>
         <source>&amp;Versioning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Versionierung</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="118"/>
         <location filename="../qjackctlSessionForm.cpp" line="604"/>
         <source>Re&amp;fresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Au&amp;ffrischen</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
@@ -2102,25 +2091,9 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <translation>&amp;Speichern...</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="obsolete">Speichern</translation>
-    </message>
-    <message>
-        <source>Save and Quit</source>
-        <translation type="obsolete">Speichern und beenden</translation>
-    </message>
-    <message>
-        <source>Save Template</source>
-        <translation type="obsolete">Vorlage speichern</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSessionForm.ui" line="115"/>
         <source>Update session</source>
         <translation>Sitzung aktualisieren</translation>
-    </message>
-    <message>
-        <source>&amp;Refresh</source>
-        <translation type="obsolete">Auf&amp;frischen</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="141"/>
@@ -2141,7 +2114,7 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <location filename="../qjackctlSessionForm.ui" line="82"/>
         <location filename="../qjackctlSessionForm.cpp" line="92"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Speichern</translation>
+        <translation>&amp;Speichern</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="214"/>
@@ -2236,7 +2209,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
         <location filename="../qjackctlSessionForm.cpp" line="590"/>
         <source>Save and &amp;Quit...</source>
-        <translation type="unfinished">Speichern und &amp;beenden...</translation>
+        <translation>Speichern und &amp;beenden...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
@@ -2319,18 +2292,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Alt+L</translation>
     </message>
     <message>
-        <source>Server</source>
-        <translation type="obsolete">Server</translation>
-    </message>
-    <message>
-        <source>Server &amp;Path:</source>
-        <translation type="obsolete">Server-&amp;Pfad:</translation>
-    </message>
-    <message>
-        <source>The JACK Audio Connection Kit sound server path</source>
-        <translation type="obsolete">Pfad zum JACK-Server</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="218"/>
         <source>jackd</source>
         <translation>jackd</translation>
@@ -2344,10 +2305,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="228"/>
         <source>jackstart</source>
         <translation>jackstart</translation>
-    </message>
-    <message>
-        <source>jackd-realtime</source>
-        <translation type="obsolete">jackd-realtime</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="285"/>
@@ -2430,10 +2387,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>seq</translation>
     </message>
     <message>
-        <source>Start De&amp;lay (secs):</source>
-        <translation type="obsolete">Startverz&amp;ögerung (s):</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="1826"/>
         <source>Time in seconds that client is delayed after server startup</source>
         <translation>Zeitverzögerung für den Client nach Start des Servers</translation>
@@ -2447,10 +2400,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1879"/>
         <source>Output latency in milliseconds, calculated based on the period, rate and buffer settings</source>
         <translation>Ausgangslatenz in Millisekunden. Berechnung basiert auf Perioden-, Abtastraten- und Puffereinstellungen</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="396"/>
@@ -2622,10 +2571,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>A&amp;usgabegerät:</translation>
     </message>
     <message>
-        <source>&amp;Output Channels:</source>
-        <translation type="obsolete">Aus&amp;gangskanäle:</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="1174"/>
         <source>&amp;Interface:</source>
         <translation>S&amp;chnittstelle:</translation>
@@ -2639,10 +2584,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1329"/>
         <source>&amp;Audio:</source>
         <translation>&amp;Audio:</translation>
-    </message>
-    <message>
-        <source>&amp;Input Latency:</source>
-        <translation type="obsolete">&amp;Eingangslatenz:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1274"/>
@@ -2734,10 +2675,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Alternativer Geräteeingang für Aufnahme</translation>
     </message>
     <message>
-        <source>&amp;Output Latency:</source>
-        <translation type="obsolete">A&amp;usgangslatenz:</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="1608"/>
         <source>Maximum output audio hardware channels to allocate</source>
         <translation>Maximum der belegbaren Audio-Hardware-Ausgänge</translation>
@@ -2746,10 +2683,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1495"/>
         <source>Alternate output device for playback</source>
         <translation>Alternatives Ausgabegerät für Wiedergabe</translation>
-    </message>
-    <message>
-        <source>&amp;Input Channels:</source>
-        <translation type="obsolete">E&amp;ingangskanäle:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1457"/>
@@ -2804,7 +2737,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="211"/>
         <source>Server path (command line prefix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverpfad (Kommandozeilen Prefix)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="637"/>
@@ -3014,12 +2947,12 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1567"/>
         <source>&amp;Channels I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kanäle I/O:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1627"/>
         <source>&amp;Latency I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Latenz I/O:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1763"/>
@@ -3029,17 +2962,17 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1804"/>
         <source>Start De&amp;lay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Startver&amp;zögerung:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1829"/>
         <source> secs</source>
-        <translation type="unfinished"></translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1888"/>
         <source>0 msecs</source>
-        <translation type="unfinished"></translation>
+        <translation>0 ms</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1920"/>
@@ -3297,7 +3230,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1788"/>
         <source>Extra driver options (command line suffix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonderoptionen für Treiber (Kommandozeilen Prefix)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2664"/>
