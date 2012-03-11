@@ -1290,7 +1290,7 @@ Disabilitato.</translation>
     </message>
     <message>
         <source>%1 (%2%, %3 xruns)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2%, %3 xruns)</translation>
     </message>
 </context>
 <context>
@@ -3349,39 +3349,39 @@ Vuoi applicare i cambiamenti?</translation>
     </message>
     <message>
         <source>Server path (command line prefix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Indirizzo del server (prefisso nella riga di comando)</translation>
     </message>
     <message>
         <source>&amp;Channels I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Canali I/O:</translation>
     </message>
     <message>
         <source>&amp;Latency I/O:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Latenza I/O:</translation>
     </message>
     <message>
         <source>Start De&amp;lay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritardo a&amp;ll&apos;avvio:</translation>
     </message>
     <message>
         <source> secs</source>
-        <translation type="unfinished"></translation>
+        <translation> secondi</translation>
     </message>
     <message>
         <source>0 msecs</source>
-        <translation type="unfinished"></translation>
+        <translation>0 millisecondi</translation>
     </message>
     <message>
         <source>Server Suffi&amp;x:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suffisso per il Ser&amp;ver:</translation>
     </message>
     <message>
         <source>Server &amp;Prefix:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefis&amp;so per il Server:</translation>
     </message>
     <message>
         <source>Extra driver options (command line suffix)</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni extra per il driver (suffisso nella riga di comando)</translation>
     </message>
 </context>
 <context>
