@@ -3684,6 +3684,25 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="StopJackCheckBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Whether to stop JACK audio server on application quit</string>
+              </property>
+              <property name="text">
+               <string>Stop JACK audio server on application &amp;quit</string>
+              </property>
+              <property name="shortcut">
+               <string>Alt+Q</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="QueryCloseCheckBox">
               <property name="font">
                <font>

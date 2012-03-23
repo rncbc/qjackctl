@@ -3287,6 +3287,18 @@ Do you want to apply the changes?</source>
         <source>Extra driver options (command line suffix)</source>
         <translation>Opciones extra para el driver (sufijo de la línea de comandos)</translation>
     </message>
+    <message>
+        <source>Whether to stop JACK audio server on application quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop JACK audio server on application &amp;quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt+Q</source>
+        <translation type="unfinished">Alt+S</translation>
+    </message>
 </context>
 <context>
     <name>qjackctlSocketForm</name>

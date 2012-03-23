@@ -415,7 +415,8 @@ qjackctlMainForm::qjackctlMainForm (
 qjackctlMainForm::~qjackctlMainForm (void)
 {
 	// Stop server, if not already...
-	stopJackServer();
+	if (m_pSetup->bStopJack)
+		stopJackServer();
 
 #ifdef CONFIG_DBUS
 	if (m_pDBusLogWatcher)
@@ -764,6 +765,7 @@ bool qjackctlMainForm::queryClose (void)
 
 	// Check if JACK daemon is currently running...
 	if (bQueryClose && m_pJack  && m_pJack->state() == QProcess::Running
+	    	&& m_pSetup->bStopJack
 		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
 		bQueryClose = (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
@@ -821,7 +823,8 @@ bool qjackctlMainForm::queryClose (void)
 		if (m_pSystemTray)
 			m_pSystemTray->close();
 		// Stop any service out there...
-		stopJackServer();
+		if (m_pSetup->bStopJack)
+			stopJackServer();
 	}
 
 	return bQueryClose;
