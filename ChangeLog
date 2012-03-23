@@ -5,6 +5,12 @@ ChangeLog
 
 SVN TRUNK
 
+- A mis-quoting bug at the command line argument string may
+  have been crippling the (unmaintained) Windows port since
+  ever, leaving its main function to start jackd dead in the
+  water, belly down :) now hopefully fixed (following a mail
+  transaction with Stephane Letz and Mathias Nagorni, thanks).
+
 - Finally, killing the JACK server on exit is now optional,
   cf. Setup/Misc/Stop JACK audio server on application exit.
   (a patch by Roland Mas, many thanks).

@@ -1242,8 +1242,22 @@ void qjackctlMainForm::startJack (void)
 	//	QDir::setCurrent(sCurrentDir);
 	#endif
 
+		// Unquote arguments as necessary...
+		const QChar q = '"';
+		QStringList cmd_args;
+		QStringListIterator iter(args);
+		while (iter.hasNext()) {
+			const QString& arg = iter.next();
+			if (arg.contains(q)) {
+				cmd_args.append(arg.section(q, 0, 0));
+				cmd_args.append(arg.section(q, 1, 1));
+			} else {
+				cmd_args.append(arg);
+			}
+		}
+
 		// Go jack, go...
-		m_pJack->start(sCommand, args);
+		m_pJack->start(sCommand, cmd_args);
 
 #ifdef CONFIG_DBUS
 	}
@@ -3884,7 +3898,10 @@ QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 // Quotes string with embedded whitespace.
 QString qjackctlMainForm::formatQuoted ( const QString& s ) const
 {
-	return (s.contains(' ') ? '"' + s + '"' : s);
+	const QChar b = ' ';
+	const QChar q = '"';
+
+	return (s.contains(b) && !s.contains(q) ? q + s + q : s);
 }
 
 
