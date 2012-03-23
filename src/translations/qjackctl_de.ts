@@ -2448,7 +2448,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="440"/>
         <location filename="../qjackctlSetupForm.ui" line="1965"/>
-        <location filename="../qjackctlSetupForm.ui" line="3904"/>
+        <location filename="../qjackctlSetupForm.ui" line="3885"/>
         <source>Alt+U</source>
         <translation>Alt+P</translation>
     </message>
@@ -2515,7 +2515,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="516"/>
-        <location filename="../qjackctlSetupForm.ui" line="3885"/>
+        <location filename="../qjackctlSetupForm.ui" line="3866"/>
         <source>Alt+O</source>
         <translation>Alt+W</translation>
     </message>
@@ -2546,7 +2546,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="554"/>
-        <location filename="../qjackctlSetupForm.ui" line="3816"/>
+        <location filename="../qjackctlSetupForm.ui" line="3942"/>
         <source>Alt+I</source>
         <translation>Alt+I</translation>
     </message>
@@ -3075,6 +3075,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2274"/>
         <location filename="../qjackctlSetupForm.ui" line="2865"/>
+        <location filename="../qjackctlSetupForm.ui" line="3701"/>
         <location filename="../qjackctlSetupForm.ui" line="4065"/>
         <source>Alt+T</source>
         <translation>Alt+F</translation>
@@ -3188,7 +3189,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2562"/>
-        <location filename="../qjackctlSetupForm.ui" line="3845"/>
+        <location filename="../qjackctlSetupForm.ui" line="3826"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
@@ -3290,7 +3291,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2881"/>
         <location filename="../qjackctlSetupForm.ui" line="3546"/>
-        <location filename="../qjackctlSetupForm.ui" line="3942"/>
+        <location filename="../qjackctlSetupForm.ui" line="3923"/>
         <location filename="../qjackctlSetupForm.ui" line="4084"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
@@ -3475,7 +3476,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3527"/>
-        <location filename="../qjackctlSetupForm.ui" line="3923"/>
+        <location filename="../qjackctlSetupForm.ui" line="3904"/>
         <source>Alt+N</source>
         <translation>Alt+K</translation>
     </message>
@@ -3516,19 +3517,8 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>JACK-&amp;Server bei Anwendungsstart starten</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3695"/>
-        <source>Whether to stop JACK audio server on application quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3698"/>
-        <source>Stop JACK audio server on application &amp;quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3701"/>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+B</translation>
+        <translation type="obsolete">Alt+B</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3714"/>
@@ -3586,52 +3576,52 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Fenster&amp;positionierung beim Start verzögern</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3839"/>
+        <location filename="../qjackctlSetupForm.ui" line="3820"/>
         <source>Whether to save the JACK server command-line configuration into a local file (auto-start)</source>
         <translation>Kommandozeilenkonfiguration zum Starten des JACK-Servers in einer lokalen Datei speichern (auto-start)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3842"/>
+        <location filename="../qjackctlSetupForm.ui" line="3823"/>
         <source>S&amp;ave JACK audio server configuration to:</source>
         <translation>Konfi&amp;guration für JACK-Server speichern unter:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3858"/>
+        <location filename="../qjackctlSetupForm.ui" line="3839"/>
         <source>The server configuration local file name (auto-start)</source>
         <translation>Name der lokal gespeicherten Serverkonfigurationsdatei (auto-start)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3865"/>
+        <location filename="../qjackctlSetupForm.ui" line="3846"/>
         <source>.jackdrc</source>
         <translation>.jackdrc</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3879"/>
+        <location filename="../qjackctlSetupForm.ui" line="3860"/>
         <source>Whether to exit once all clients have closed (auto-start)</source>
         <translation>Programm beenden, wenn alle Client-Verbindungen getrennt sind (auto-start)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3882"/>
+        <location filename="../qjackctlSetupForm.ui" line="3863"/>
         <source>C&amp;onfigure as temporary server</source>
         <translation>Als temporären Ser&amp;ver konfigurieren</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3898"/>
+        <location filename="../qjackctlSetupForm.ui" line="3879"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown</source>
         <translation>Das Herunterfahren des JACK-Servers per Nachfrage bestätigen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3901"/>
+        <location filename="../qjackctlSetupForm.ui" line="3882"/>
         <source>Confirm server sh&amp;utdown</source>
         <translation>Herunter&amp;fahren des Servers bestätigen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3917"/>
+        <location filename="../qjackctlSetupForm.ui" line="3898"/>
         <source>Whether to enable ALSA Sequencer (MIDI) support on startup</source>
         <translation>Unterstützung für den ALSA Sequencer (MIDI) beim Programmstart aktivieren</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3920"/>
+        <location filename="../qjackctlSetupForm.ui" line="3901"/>
         <source>E&amp;nable ALSA Sequencer support</source>
         <translation>Unterstützung für ALSA-Se&amp;quencer bereitstellen</translation>
     </message>
@@ -3838,6 +3828,16 @@ Wollen Sie diese übernehmen?</translation>
         <translation>Zweiter</translation>
     </message>
     <message>
+        <location filename="../qjackctlSetupForm.ui" line="3695"/>
+        <source>Whether to stop JACK audio server on application exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3698"/>
+        <source>S&amp;top JACK audio server on application exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetupForm.ui" line="4118"/>
         <source>Defaults</source>
         <translation>Voreinstellungen</translation>
@@ -3888,12 +3888,12 @@ Wollen Sie diese übernehmen?</translation>
         <translation>net</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3936"/>
+        <location filename="../qjackctlSetupForm.ui" line="3917"/>
         <source>Whether to enable D-Bus interface</source>
         <translation>D-Bus-Schnittstelle aktivieren</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3939"/>
+        <location filename="../qjackctlSetupForm.ui" line="3920"/>
         <source>&amp;Enable D-Bus interface</source>
         <translation>D-Bus-S&amp;chnittstelle aktivieren</translation>
     </message>
@@ -3918,12 +3918,12 @@ Wollen Sie diese übernehmen?</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3810"/>
+        <location filename="../qjackctlSetupForm.ui" line="3936"/>
         <source>Whether to restrict to one single application instance (X11)</source>
         <translation>Festlegen, ob nur eine Anwendungsinstanz (X11) gestartet werden darf</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3813"/>
+        <location filename="../qjackctlSetupForm.ui" line="3939"/>
         <source>Single application &amp;instance</source>
         <translation>Nur eine Anwendungsinstan&amp;z zulassen</translation>
     </message>

@@ -3384,16 +3384,16 @@ Vuoi applicare i cambiamenti?</translation>
         <translation>Opzioni extra per il driver (suffisso nella riga di comando)</translation>
     </message>
     <message>
-        <source>Whether to stop JACK audio server on application quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop JACK audio server on application &amp;quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+E</translation>
+        <translation type="obsolete">Alt+E</translation>
+    </message>
+    <message>
+        <source>Whether to stop JACK audio server on application exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;top JACK audio server on application exit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

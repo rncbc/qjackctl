@@ -158,13 +158,13 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-		 <layout class="QGridLayout">
+         <layout class="QGridLayout">
           <item row="0" column="0" colspan="5">
            <spacer>
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>4</height>
@@ -183,7 +183,7 @@
                </font>
               </property>
               <property name="text">
-			   <string>Server &amp;Prefix:</string>
+               <string>Server &amp;Prefix:</string>
               </property>
               <property name="wordWrap">
                <bool>false</bool>
@@ -194,7 +194,7 @@
              </widget>
             </item>
             <item>
-			 <widget class="QComboBox" name="ServerPrefixComboBox">
+             <widget class="QComboBox" name="ServerPrefixComboBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -368,7 +368,7 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>4</height>
@@ -584,7 +584,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::MinimumExpanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>4</width>
               <height>8</height>
@@ -1080,7 +1080,7 @@
                <enum>QFrame::Plain</enum>
               </property>
               <property name="text">
-			   <string>&amp;Timeout (msec):</string>
+               <string>&amp;Timeout (msec):</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1152,7 +1152,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::MinimumExpanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>4</width>
               <height>8</height>
@@ -1735,7 +1735,7 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>4</height>
@@ -1785,7 +1785,7 @@
                </font>
               </property>
               <property name="toolTip">
-			   <string>Extra driver options (command line suffix)</string>
+               <string>Extra driver options (command line suffix)</string>
               </property>
               <property name="editable">
                <bool>true</bool>
@@ -1896,21 +1896,21 @@
              </widget>
             </item>
            </layout>
-		  </item>
-		  <item row="6" column="0" colspan="5">
-		   <spacer>
-			<property name="orientation">
-			 <enum>Qt::Vertical</enum>
-			</property>
-			<property name="sizeHint">
-			 <size>
-			  <width>8</width>
-			  <height>4</height>
-			 </size>
-			</property>
-		   </spacer>
-		  </item>
-		 </layout>
+          </item>
+          <item row="6" column="0" colspan="5">
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint">
+             <size>
+              <width>8</width>
+              <height>4</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -2623,7 +2623,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>200</width>
               <height>8</height>
@@ -2732,7 +2732,7 @@
          <property name="sizeType">
           <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-		 <property name="sizeHint">
+         <property name="sizeHint">
           <size>
            <width>8</width>
            <height>8</height>
@@ -2924,7 +2924,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Minimum</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>24</width>
               <height>8</height>
@@ -2940,7 +2940,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Minimum</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>24</width>
               <height>8</height>
@@ -3246,7 +3246,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -3410,7 +3410,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -3482,7 +3482,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Minimum</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -3614,7 +3614,7 @@
          <property name="sizeType">
           <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-		 <property name="sizeHint">
+         <property name="sizeHint">
           <size>
            <width>8</width>
            <height>8</height>
@@ -3692,13 +3692,13 @@
                </font>
               </property>
               <property name="toolTip">
-               <string>Whether to stop JACK audio server on application quit</string>
+               <string>Whether to stop JACK audio server on application exit</string>
               </property>
               <property name="text">
-               <string>Stop JACK audio server on application &amp;quit</string>
+               <string>S&amp;top JACK audio server on application exit</string>
               </property>
               <property name="shortcut">
-               <string>Alt+Q</string>
+               <string>Alt+T</string>
               </property>
              </widget>
             </item>
@@ -3795,25 +3795,6 @@
               </property>
               <property name="shortcut">
                <string>Alt+D</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="SingletonCheckBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Whether to restrict to one single application instance (X11)</string>
-              </property>
-              <property name="text">
-               <string>Single application &amp;instance</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+I</string>
               </property>
              </widget>
             </item>
@@ -3944,6 +3925,25 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="SingletonCheckBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Whether to restrict to one single application instance (X11)</string>
+              </property>
+              <property name="text">
+               <string>Single application &amp;instance</string>
+              </property>
+              <property name="shortcut">
+               <string>Alt+I</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer>
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -3951,7 +3951,7 @@
               <property name="sizeType">
                <enum>QSizePolicy::Expanding</enum>
               </property>
-			  <property name="sizeHint">
+              <property name="sizeHint">
                <size>
                 <width>8</width>
                 <height>8</height>
@@ -3969,7 +3969,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -4095,7 +4095,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
@@ -4135,7 +4135,7 @@
             <property name="sizeType">
              <enum>QSizePolicy::Expanding</enum>
             </property>
-			<property name="sizeHint">
+            <property name="sizeHint">
              <size>
               <width>8</width>
               <height>8</height>
