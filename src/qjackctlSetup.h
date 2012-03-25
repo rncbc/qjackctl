@@ -108,9 +108,6 @@ public:
 	bool bStartJack;
 	bool bStartJackCmd;
 
-	// Server stop options.
-	bool bStopJack;
-
 	// User supplied command line.
 	QString sCmdLine;
 

@@ -67,7 +67,6 @@ void qjackctlSetup::loadSetup (void)
 //	sServerName              = m_settings.value("/ServerName").toString();
 	bStartJack               = m_settings.value("/StartJack", false).toBool();
 //	bStartJackCmd            = m_settings.value("/StartJackCmd", false).toBool();
-	bStopJack                = m_settings.value("/StopJack", true).toBool();
 	bStartupScript           = m_settings.value("/StartupScript", false).toBool();
 	sStartupScriptShell      = m_settings.value("/StartupScriptShell").toString();
 	bPostStartupScript       = m_settings.value("/PostStartupScript", false).toBool();
@@ -178,7 +177,6 @@ void qjackctlSetup::saveSetup (void)
 //	m_settings.setValue("/ServerName",              sServerName);
 	m_settings.setValue("/StartJack",               bStartJack);
 //	m_settings.setValue("/StartJackCmd",            bStartJackCmd);
-	m_settings.setValue("/StopJack",                bStopJack);
 	m_settings.setValue("/StartupScript",           bStartupScript);
 	m_settings.setValue("/StartupScriptShell",      sStartupScriptShell);
 	m_settings.setValue("/PostStartupScript",       bPostStartupScript);

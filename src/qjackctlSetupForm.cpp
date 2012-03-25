@@ -376,9 +376,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.StartJackCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
-	QObject::connect(m_ui.StopJackCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
 	QObject::connect(m_ui.QueryCloseCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -592,7 +589,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 
 	// Other misc options...
 	m_ui.StartJackCheckBox->setChecked(m_pSetup->bStartJack);
-	m_ui.StopJackCheckBox->setChecked(m_pSetup->bStopJack);
 	m_ui.QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
 	m_ui.KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
@@ -1800,7 +1796,6 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->iConnectionsIconSize     = m_ui.ConnectionsIconSizeComboBox->currentIndex();
 		m_pSetup->sConnectionsFont         = m_ui.ConnectionsFontTextLabel->font().toString();
 		m_pSetup->bStartJack               = m_ui.StartJackCheckBox->isChecked();
-		m_pSetup->bStopJack                = m_ui.StopJackCheckBox->isChecked();
 		m_pSetup->bQueryClose              = m_ui.QueryCloseCheckBox->isChecked();
 		m_pSetup->bKeepOnTop               = m_ui.KeepOnTopCheckBox->isChecked();
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();

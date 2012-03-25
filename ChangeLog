@@ -11,10 +11,6 @@ SVN TRUNK
   water, belly down :) now hopefully fixed (following a mail
   transaction with Stephane Letz and Mathias Nagorni, thanks).
 
-- Finally, killing the JACK server on exit is now optional,
-  cf. Setup/Misc/Stop JACK audio server on application exit.
-  (a patch by Roland Mas, many thanks).
-
 - Currently a JACK2-only feature, the JACK version string
   display at the About dialog box, must now be explicitly
   enabled on configure time (--enable-jack-version).

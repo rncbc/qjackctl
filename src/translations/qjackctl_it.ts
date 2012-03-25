@@ -3387,14 +3387,6 @@ Vuoi applicare i cambiamenti?</translation>
         <source>Alt+Q</source>
         <translation type="obsolete">Alt+E</translation>
     </message>
-    <message>
-        <source>Whether to stop JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S&amp;top JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>qjackctlSocketForm</name>
