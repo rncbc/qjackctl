@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Make(ing) -jN parallel builds now available for the masses.
+
 - A mis-quoting bug at the command line argument string may
   have been crippling the (unmaintained) Windows port since
   ever, leaving its main function to start jackd dead in the
