@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Added include <unistd.h> to shut up gcc 4.7 build failures.
+
 - Make(ing) -jN parallel builds now available for the masses.
 
 - A mis-quoting bug at the command line argument string may
