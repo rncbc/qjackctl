@@ -3925,6 +3925,25 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="StopJackCheckBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Whether to stop JACK audio server on application exit</string>
+              </property>
+              <property name="text">
+               <string>S&amp;top JACK audio server on application exit</string>
+              </property>
+              <property name="shortcut">
+               <string>Alt+Q</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer>
               <property name="orientation">
                <enum>Qt::Vertical</enum>

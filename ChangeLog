@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Killing D-BUS controlled JACK server is now made optional,
+  cf. Setup/Misc/Stop JACK audio server on application exit.
+  (a patch by Roland Mas, thanks).
+
 - Added include <unistd.h> to shut up gcc 4.7 build failures.
 
 - Make(ing) -jN parallel builds now available for the masses.

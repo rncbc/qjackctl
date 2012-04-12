@@ -415,9 +415,10 @@ qjackctlMainForm::qjackctlMainForm (
 qjackctlMainForm::~qjackctlMainForm (void)
 {
 	// Stop server, if not already...
-	stopJackServer();
 
 #ifdef CONFIG_DBUS
+	if (m_pSetup->bStopJack || !m_pSetup->bDBusEnabled)
+		stopJackServer();
 	if (m_pDBusLogWatcher)
 		delete m_pDBusLogWatcher;
 	if (m_pDBusConfig)
@@ -428,6 +429,8 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	m_pDBusConfig  = NULL;
 	m_pDBusLogWatcher = NULL;
 	m_bDBusStarted = false;
+#else
+	stopJackServer();
 #endif
 
 	// Terminate local ALSA sequencer interface.
@@ -821,7 +824,8 @@ bool qjackctlMainForm::queryClose (void)
 		if (m_pSystemTray)
 			m_pSystemTray->close();
 		// Stop any service out there...
-		stopJackServer();
+		if (m_pSetup->bStopJack)
+			stopJackServer();
 	}
 
 	return bQueryClose;
