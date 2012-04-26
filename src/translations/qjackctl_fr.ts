@@ -4321,7 +4321,7 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3942"/>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+Q</translation>
+        <translation>Alt+Q</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3753"/>
@@ -4356,12 +4356,12 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3936"/>
         <source>Whether to stop JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter le serveur audio JACK lors de la sortie de l&apos;application</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3939"/>
         <source>S&amp;top JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter le &amp;serveur audio JACK lors de la sortie de l&apos;application</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4118"/>
