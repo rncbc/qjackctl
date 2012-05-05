@@ -468,6 +468,7 @@ Do you want to save the changes?</source>
         <translation>Signalverarbeitung und Programm beenden</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3457"/>
         <location filename="../qjackctlMainForm.ui" line="400"/>
         <location filename="../qjackctlMainForm.cpp" line="3509"/>
         <source>&amp;Quit</source>
@@ -484,6 +485,7 @@ Do you want to save the changes?</source>
         <translation>JACK-Server starten</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3331"/>
         <location filename="../qjackctlMainForm.ui" line="77"/>
         <location filename="../qjackctlMainForm.cpp" line="3377"/>
         <source>&amp;Start</source>
@@ -520,12 +522,14 @@ Do you want to save the changes?</source>
         <translation>Informationen über diese Anwendung anzeigen</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3452"/>
         <location filename="../qjackctlMainForm.ui" line="788"/>
         <location filename="../qjackctlMainForm.cpp" line="3504"/>
         <source>Ab&amp;out...</source>
         <translation>&amp;Über...</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3448"/>
         <location filename="../qjackctlMainForm.ui" line="508"/>
         <location filename="../qjackctlMainForm.cpp" line="3500"/>
         <source>Set&amp;up...</source>
@@ -547,6 +551,7 @@ Do you want to save the changes?</source>
         <translation>Alt+I</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3408"/>
         <location filename="../qjackctlMainForm.ui" line="471"/>
         <location filename="../qjackctlMainForm.cpp" line="3460"/>
         <source>&amp;Messages</source>
@@ -668,6 +673,7 @@ Do you want to save the changes?</source>
         <translation>Transport zurückspulen</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3431"/>
         <location filename="../qjackctlMainForm.ui" line="616"/>
         <location filename="../qjackctlMainForm.cpp" line="3483"/>
         <source>&amp;Rewind</source>
@@ -684,6 +690,7 @@ Do you want to save the changes?</source>
         <translation>Transportvorgang anhalten</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3440"/>
         <location filename="../qjackctlMainForm.ui" line="723"/>
         <location filename="../qjackctlMainForm.cpp" line="3492"/>
         <source>Pa&amp;use</source>
@@ -700,6 +707,7 @@ Do you want to save the changes?</source>
         <translation>Transportforgang starten</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="3437"/>
         <location filename="../qjackctlMainForm.ui" line="681"/>
         <location filename="../qjackctlMainForm.cpp" line="3489"/>
         <source>&amp;Play</source>
@@ -2046,6 +2054,7 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <translation>Sitzung laden</translation>
     </message>
     <message>
+        <location filename="../qjackctlSessionForm.cpp" line="545"/>
         <location filename="../qjackctlSessionForm.ui" line="46"/>
         <location filename="../qjackctlSessionForm.cpp" line="580"/>
         <source>&amp;Load...</source>
@@ -2057,8 +2066,8 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <translation>Letzte Sitzung</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.ui" line="59"/>
         <location filename="../qjackctlSessionForm.cpp" line="89"/>
+        <location filename="../qjackctlSessionForm.ui" line="59"/>
         <source>&amp;Recent</source>
         <translation>&amp;Zuletzt</translation>
     </message>
@@ -2732,7 +2741,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="186"/>
         <source>Server &amp;Prefix:</source>
-        <translation type="unfinished"></translation>
+        <translation>Server &amp;Prefix:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="211"/>
@@ -2957,7 +2966,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1763"/>
         <source>Server Suffi&amp;x:</source>
-        <translation type="unfinished"></translation>
+        <translation>Server Suffi&amp;x:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1804"/>
@@ -3518,7 +3527,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3942"/>
         <source>Alt+Q</source>
-        <translation type="unfinished">Alt+B</translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3695"/>
@@ -3830,12 +3839,12 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3936"/>
         <source>Whether to stop JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK Audio-Server bei Programmbeendung anhalten</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3939"/>
         <source>S&amp;top JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK Audio-&amp;Server bei Programmbeendung anhalten</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4118"/>
