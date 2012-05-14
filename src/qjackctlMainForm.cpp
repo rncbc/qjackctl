@@ -3056,7 +3056,7 @@ void qjackctlMainForm::refreshStatus (void)
 		// Transport barcode position (bar:beat.tick)
 		if (tpos.valid & JackPositionBBT) {
 			updateStatusItem(STATUS_TRANSPORT_BBT,
-				QString().sprintf("%u:%u.%04u", tpos.bar, tpos.beat, tpos.tick));
+				QString().sprintf("%u.%u.%04u", tpos.bar, tpos.beat, tpos.tick));
 			updateStatusItem(STATUS_TRANSPORT_BPM,
 				QString::number(tpos.beats_per_minute));
 		} else {
