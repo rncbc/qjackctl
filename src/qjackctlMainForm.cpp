@@ -1735,7 +1735,7 @@ void qjackctlMainForm::updateTimeDisplayFonts (void)
 // Force update of big time display related tooltips.
 void qjackctlMainForm::updateTimeDisplayToolTips (void)
 {
-	QString sTimeDisplay   = tr("Transport BBT (bar:beat.ticks)");
+	QString sTimeDisplay   = tr("Transport BBT (bar.beat.ticks)");
 	QString sTransportTime = tr("Transport time code");
 
 	switch (m_pSetup->iTimeDisplay) {
@@ -3035,7 +3035,7 @@ void qjackctlMainForm::transportForward (void)
 void qjackctlMainForm::refreshStatus (void)
 {
 	const QString n = "--";
-	const QString b = "--:--.----";
+	const QString b = "-.-.---";
 	const QString sStopped = tr("Stopped");
 
 	m_iStatusRefresh++;
@@ -3056,7 +3056,7 @@ void qjackctlMainForm::refreshStatus (void)
 		// Transport barcode position (bar:beat.tick)
 		if (tpos.valid & JackPositionBBT) {
 			updateStatusItem(STATUS_TRANSPORT_BBT,
-				QString().sprintf("%u.%u.%04u", tpos.bar, tpos.beat, tpos.tick));
+				QString().sprintf("%u.%u.%03u", tpos.bar, tpos.beat, tpos.tick));
 			updateStatusItem(STATUS_TRANSPORT_BPM,
 				QString::number(tpos.beats_per_minute));
 		} else {
