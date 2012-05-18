@@ -3,7 +3,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-SVN TRUNK
+0.3.9  2012-05-18  The last of the remnants.
 
 - Killing D-BUS controlled JACK server is now made optional,
   cf. Setup/Misc/Stop JACK audio server on application exit.
