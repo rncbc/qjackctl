@@ -970,9 +970,8 @@ Sorry.</translation>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1738"/>
         <source>Transport BBT (bar:beat.ticks)</source>
-        <translation>Transport MTT (maat:tel.tikken)</translation>
+        <translation type="obsolete">Transport MTT (maat:tel.tikken)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1739"/>
@@ -1435,6 +1434,11 @@ Sorry</translation>
         <location filename="../qjackctlMainForm.cpp" line="1464"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
         <translation>DBUS : JACK server werd gestopt (%1 soit jackdbus).</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlMainForm.cpp" line="1738"/>
+        <source>Transport BBT (bar.beat.ticks)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1880"/>

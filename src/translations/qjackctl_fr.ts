@@ -958,9 +958,8 @@ Désolé.</translation>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1738"/>
         <source>Transport BBT (bar:beat.ticks)</source>
-        <translation>MTB (mesure:temps.battement) du déplacement</translation>
+        <translation type="obsolete">MTB (mesure:temps.battement) du déplacement</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1739"/>
@@ -1422,6 +1421,11 @@ Désolé</translation>
         <location filename="../qjackctlMainForm.cpp" line="1464"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
         <translation>DBUS : le serveur JACK a été arrêté (%1 soit jackdbus).</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlMainForm.cpp" line="1738"/>
+        <source>Transport BBT (bar.beat.ticks)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1880"/>

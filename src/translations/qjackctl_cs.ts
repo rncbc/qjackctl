@@ -959,9 +959,8 @@ Promiňte</translation>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1738"/>
         <source>Transport BBT (bar:beat.ticks)</source>
-        <translation>Předání BBT (takt:doba.tiknutí - bar:beat.ticks)</translation>
+        <translation type="obsolete">Předání BBT (takt:doba.tiknutí - bar:beat.ticks)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1739"/>
@@ -1139,6 +1138,11 @@ in the context menu of the system tray icon.</source>
 Pro ukončení programu vyberte, prosím, &quot;Ukončit&quot;
 v související nabídce vyskakující z ikony v oznamovací
 části panelu.</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlMainForm.cpp" line="1738"/>
+        <source>Transport BBT (bar.beat.ticks)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1880"/>

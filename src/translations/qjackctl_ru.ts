@@ -782,9 +782,8 @@ in the context menu of the system tray icon.</source>
         <translation>Стоп</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1738"/>
         <source>Transport BBT (bar:beat.ticks)</source>
-        <translation>BBT транспорта (такт:доля.тики)</translation>
+        <translation type="obsolete">BBT транспорта (такт:доля.тики)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1880"/>
@@ -1100,6 +1099,11 @@ Sorry</source>
         <location filename="../qjackctlMainForm.cpp" line="1464"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
         <translation>D-BUS: сервер JACK был остановлен (%1, известный как jackdbus).</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlMainForm.cpp" line="1738"/>
+        <source>Transport BBT (bar.beat.ticks)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1884"/>

@@ -740,7 +740,7 @@ Mi dispiace</translation>
     </message>
     <message>
         <source>Transport BBT (bar:beat.ticks)</source>
-        <translation>BBT del transport ( bar:beat:ticks )</translation>
+        <translation type="obsolete">BBT del transport ( bar:beat:ticks )</translation>
     </message>
     <message>
         <source>Transport time code</source>
@@ -1291,6 +1291,10 @@ Disabilitato.</translation>
     <message>
         <source>%1 (%2%, %3 xruns)</source>
         <translation>%1 (%2%, %3 xruns)</translation>
+    </message>
+    <message>
+        <source>Transport BBT (bar.beat.ticks)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
