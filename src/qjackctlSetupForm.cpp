@@ -1252,21 +1252,22 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 		snd_pcm_info_t *pcminfo;
 		snd_ctl_card_info_alloca(&info);
 		snd_pcm_info_alloca(&pcminfo);
+		const QString sPrefix("hw:%1");
 		const QString sSuffix(" (%1)");
+		const QString sSubSuffix("%1,%2");
 		QString sName2, sSubName2;
 		bool bCapture, bPlayback;
 		int iCard = -1;
 		while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
-			sName = "hw:" + QString::number(iCard);
+			sName = sPrefix.arg(iCard);
 			if (snd_ctl_open(&handle, sName.toUtf8().constData(), 0) >= 0
 				&& snd_ctl_card_info(handle, info) >= 0) {
 				if (iCards > 0)
 					menu.addSeparator();
-				sName2  = "hw:";
-				sName2 += snd_ctl_card_info_get_id(info);
-				sText   = sName2 + '\t';
-				sText  += snd_ctl_card_info_get_name(info);
-				sText  += sSuffix.arg(sName);
+				sName2 = sPrefix.arg(snd_ctl_card_info_get_id(info));
+				sText  = sName2 + '\t';
+				sText += snd_ctl_card_info_get_name(info);
+				sText += sSuffix.arg(sName);
 				pAction = menu.addAction(sText);
 				pAction->setCheckable(true);
 				pAction->setChecked(
@@ -1296,8 +1297,8 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 					if ((iAudio == QJACKCTL_CAPTURE && bCapture && !bPlayback) ||
 						(iAudio == QJACKCTL_PLAYBACK && !bCapture && bPlayback) ||
 						(iAudio == QJACKCTL_DUPLEX && bCapture && bPlayback)) {
-						sSubName  = sName  + ',' + QString::number(iDevice);
-						sSubName2 = sName2 + ',' + QString::number(iDevice);
+						sSubName  = sSubSuffix.arg(sName).arg(iDevice);
+						sSubName2 = sSubSuffix.arg(sName2).arg(iDevice);
 						sText  = sSubName2 + '\t';
 						sText += snd_pcm_info_get_name(pcminfo);
 						sText += sSuffix.arg(sSubName);
