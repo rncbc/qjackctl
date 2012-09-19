@@ -1252,6 +1252,8 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 		snd_pcm_info_t *pcminfo;
 		snd_ctl_card_info_alloca(&info);
 		snd_pcm_info_alloca(&pcminfo);
+		const QString sSuffix(" (%1)");
+		QString sName2, sSubName2;
 		bool bCapture, bPlayback;
 		int iCard = -1;
 		while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
@@ -1260,11 +1262,15 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 				&& snd_ctl_card_info(handle, info) >= 0) {
 				if (iCards > 0)
 					menu.addSeparator();
-				sText  = sName + '\t';
-				sText += snd_ctl_card_info_get_name(info);
+				sName2  = "hw:";
+				sName2 += snd_ctl_card_info_get_id(info);
+				sText   = sName2 + '\t';
+				sText  += snd_ctl_card_info_get_name(info);
+				sText  += sSuffix.arg(sName);
 				pAction = menu.addAction(sText);
 				pAction->setCheckable(true);
-				pAction->setChecked(sCurName == sName);
+				pAction->setChecked(
+					sCurName == sName || sCurName == sName2);
 				int iDevice = -1;
 				while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
 					&& iDevice >= 0) {
@@ -1290,12 +1296,15 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 					if ((iAudio == QJACKCTL_CAPTURE && bCapture && !bPlayback) ||
 						(iAudio == QJACKCTL_PLAYBACK && !bCapture && bPlayback) ||
 						(iAudio == QJACKCTL_DUPLEX && bCapture && bPlayback)) {
-						sSubName = sName + ',' + QString::number(iDevice);
-						sText  = sSubName + '\t';
+						sSubName  = sName  + ',' + QString::number(iDevice);
+						sSubName2 = sName2 + ',' + QString::number(iDevice);
+						sText  = sSubName2 + '\t';
 						sText += snd_pcm_info_get_name(pcminfo);
+						sText += sSuffix.arg(sSubName);
 						pAction = menu.addAction(sText);
 						pAction->setCheckable(true);
-						pAction->setChecked(sCurName == sSubName);
+						pAction->setChecked(
+							sCurName == sSubName || sCurName == sSubName2);
 					}
 				}
 				snd_ctl_close(handle);
@@ -1413,15 +1422,15 @@ void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
 	else if (bPortaudio) {
 		if (Pa_Initialize() == paNoError) {
 			// Fill hostapi info...
-            PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
-            QString *pHostName = new QString[iNumHostApi];
-            for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
-                pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
+			PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
+			QString *pHostName = new QString[iNumHostApi];
+			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
+				pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
 			// Fill device info...
-            PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
-            PaDeviceInfo **ppDeviceInfo = new PaDeviceInfo * [iNumDevice];
-            for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
-            	ppDeviceInfo[i] = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
+			PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
+			PaDeviceInfo **ppDeviceInfo = new PaDeviceInfo * [iNumDevice];
+			for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
+				ppDeviceInfo[i] = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
 				sText = pHostName[ppDeviceInfo[i]->hostApi] + "::" + QString(ppDeviceInfo[i]->name);
 				pAction = menu.addAction(sText);
 				pAction->setCheckable(true);

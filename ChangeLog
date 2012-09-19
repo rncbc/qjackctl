@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- List ALSA device card id. string instead of device number,
+  while on setup dialog.
+
 - Japanese (ja) translation added (by Takashi Sakamoto).
 
 
