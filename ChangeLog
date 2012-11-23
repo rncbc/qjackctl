@@ -5,6 +5,11 @@ ChangeLog
 
 SVN TRUNK
 
+- Color-candy (dang old ANSI terminal?) escape sequences are
+  now silently stripped from jackdbus messages captured log
+  (inspired from an awesome patch delivered by Brendan Jones,
+  holy thanks).
+
 - List ALSA device card id. string instead of device number,
   while on setup dialog.
 

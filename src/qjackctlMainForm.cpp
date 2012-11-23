@@ -221,7 +221,8 @@ public:
 	public:
 		// Constructor.
 		LineEvent(QEvent::Type eType, const QString& sLine)
-			: QEvent(eType), m_sLine(sLine) {}
+			: QEvent(eType), m_sLine(sLine)
+			{ m_sLine.remove(QRegExp("\x1B\[[0-9|;]+m")); }
 		// Accessor.
 		const QString& line() const
 			{ return m_sLine; }
