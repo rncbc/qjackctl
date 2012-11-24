@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Transport tempo (BPM) precision display fixed to 4 digits.
+
 - Color-candy (dang old ANSI terminal?) escape sequences are
   now silently stripped from jackdbus messages captured log
   (onliner from original patch by Brendan Jones, thanks).
