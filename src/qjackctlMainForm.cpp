@@ -48,7 +48,6 @@
 #include <QDir>
 
 #include <QContextMenuEvent>
-#include <QCustomEvent>
 #include <QCloseEvent>
 
 #if QT_VERSION < 0x040500

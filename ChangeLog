@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Preparations for Qt5 migration. (TESTING)
+
 - Transport tempo (BPM) precision display fixed to 4 digits.
 
 - Color-candy (dang old ANSI terminal?) escape sequences are

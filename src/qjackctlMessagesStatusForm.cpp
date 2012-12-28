@@ -1,7 +1,7 @@
 // qjackctlMessagesStatusForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -72,7 +72,9 @@ qjackctlMessagesStatusForm::qjackctlMessagesStatusForm (
 //	pHeader->setResizeMode(QHeaderView::Custom);
 	pHeader->setDefaultAlignment(Qt::AlignLeft);
 //	pHeader->setDefaultSectionSize(320);
+#if QT_VERSION < 0x050000
 	pHeader->setMovable(false);
+#endif
 	pHeader->setStretchLastSection(true);
 
 	m_apStatus[STATUS_SERVER_NAME] = new QTreeWidgetItem(m_ui.StatsListView,

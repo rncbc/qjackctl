@@ -111,3 +111,6 @@ unix {
 
 # XML/DOM support
 QT += xml
+
+# QT5 support
+QT += widgets
