@@ -69,10 +69,13 @@ qjackctlMessagesStatusForm::qjackctlMessagesStatusForm (
 
 	// Status list view...
 	QHeaderView *pHeader = m_ui.StatsListView->header();
-//	pHeader->setResizeMode(QHeaderView::Custom);
 	pHeader->setDefaultAlignment(Qt::AlignLeft);
 //	pHeader->setDefaultSectionSize(320);
-#if QT_VERSION < 0x050000
+#if QT_VERSION >= 0x050000
+//	pHeader->setSectionResizeMode(QHeaderView::Custom);
+	pHeader->setSectionsMovable(false);
+#else
+//	pHeader->setResizeMode(QHeaderView::Custom);
 	pHeader->setMovable(false);
 #endif
 	pHeader->setStretchLastSection(true);

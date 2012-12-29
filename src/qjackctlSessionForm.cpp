@@ -106,10 +106,14 @@ qjackctlSessionForm::qjackctlSessionForm (
 
 	// Session tree view...
 	QHeaderView *pHeader = m_ui.SessionTreeView->header();
+//	pHeader->setDefaultAlignment(Qt::AlignLeft);
+#if QT_VERSION >= 0x050000
+//	pHeader->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
 //	pHeader->setResizeMode(QHeaderView::ResizeToContents);
+#endif
 	pHeader->resizeSection(0, 200); // Client/Ports
 	pHeader->resizeSection(1, 40);  // UUID
-//	pHeader->setDefaultAlignment(Qt::AlignLeft);
 	pHeader->setStretchLastSection(true);
 	
 	// UI connections...
