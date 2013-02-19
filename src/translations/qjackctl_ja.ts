@@ -181,66 +181,66 @@
 <context>
     <name>qjackctlClientListView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="682"/>
+        <location filename="../qjackctlConnect.cpp" line="694"/>
         <source>Readable Clients / Output Ports</source>
         <translation>読み込み可能なクライアント / 出力ポート</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="684"/>
+        <location filename="../qjackctlConnect.cpp" line="696"/>
         <source>Writable Clients / Input Ports</source>
         <translation>書き込み可能なクライアント / 入力ポート</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1013"/>
+        <location filename="../qjackctlConnect.cpp" line="1025"/>
         <source>&amp;Connect</source>
         <translation>接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1014"/>
+        <location filename="../qjackctlConnect.cpp" line="1026"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1017"/>
+        <location filename="../qjackctlConnect.cpp" line="1029"/>
         <source>&amp;Disconnect</source>
         <translation>切断(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1018"/>
+        <location filename="../qjackctlConnect.cpp" line="1030"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1021"/>
+        <location filename="../qjackctlConnect.cpp" line="1033"/>
         <source>Disconnect &amp;All</source>
         <translation>すべて切断(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1022"/>
+        <location filename="../qjackctlConnect.cpp" line="1034"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1027"/>
+        <location filename="../qjackctlConnect.cpp" line="1039"/>
         <source>Re&amp;name</source>
         <translation>リネーム(&amp;n)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1028"/>
+        <location filename="../qjackctlConnect.cpp" line="1040"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1034"/>
+        <location filename="../qjackctlConnect.cpp" line="1046"/>
         <source>&amp;Refresh</source>
         <translation>更新(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1035"/>
+        <location filename="../qjackctlConnect.cpp" line="1047"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation></translation>
@@ -249,12 +249,12 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1792"/>
+        <location filename="../qjackctlConnect.cpp" line="1804"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1793"/>
+        <location filename="../qjackctlConnect.cpp" line="1805"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -415,45 +415,45 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1200"/>
+        <location filename="../qjackctlConnect.cpp" line="1212"/>
         <source>&amp;Connect</source>
         <translation>接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1201"/>
+        <location filename="../qjackctlConnect.cpp" line="1213"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1204"/>
+        <location filename="../qjackctlConnect.cpp" line="1216"/>
         <source>&amp;Disconnect</source>
         <translation>切断(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1205"/>
+        <location filename="../qjackctlConnect.cpp" line="1217"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1208"/>
+        <location filename="../qjackctlConnect.cpp" line="1220"/>
         <source>Disconnect &amp;All</source>
         <translation>すべて切断(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1209"/>
+        <location filename="../qjackctlConnect.cpp" line="1221"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1214"/>
+        <location filename="../qjackctlConnect.cpp" line="1226"/>
         <source>&amp;Refresh</source>
         <translation>更新(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1215"/>
+        <location filename="../qjackctlConnect.cpp" line="1227"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation></translation>
@@ -1529,107 +1529,107 @@ the next time you start this program.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="79"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="84"/>
         <source>Server name</source>
         <translation>サーバー名</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="81"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="86"/>
         <source>Server state</source>
         <translation type="unfinished">サーバーの状態</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="83"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="88"/>
         <source>DSP Load</source>
         <translation>DSP負荷</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="85"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="90"/>
         <source>Sample Rate</source>
         <translation>サンプルレート</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="87"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="92"/>
         <source>Buffer Size</source>
         <translation>バッファサイズ</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="89"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="94"/>
         <source>Realtime Mode</source>
         <translation>リアルタイムモード</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="92"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="97"/>
         <source>Transport state</source>
         <translation>トランスポートの状態</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="95"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="100"/>
         <source>Transport Timecode</source>
         <translation>トランスポート タイムコード</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="97"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="102"/>
         <source>Transport BBT</source>
         <translation>トランスポート BBT</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="99"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="104"/>
         <source>Transport BPM</source>
         <translation>トランスポート BPM</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="102"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="107"/>
         <source>XRUN count since last server startup</source>
         <translation type="unfinished">最後にサーバーが開始してからのXRUNの数</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="105"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="110"/>
         <source>XRUN last time detected</source>
         <translation type="unfinished">検出されたXRUNの継続時間</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="107"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="112"/>
         <source>XRUN last</source>
         <translation type="unfinished">XRUNの継続</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="109"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="114"/>
         <source>XRUN maximum</source>
         <translation type="unfinished">XRUNの最大値</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="111"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="116"/>
         <source>XRUN minimum</source>
         <translation type="unfinished">XRUNの最小値</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="113"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="118"/>
         <source>XRUN average</source>
         <translation type="unfinished">XRUNの平均値</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="115"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="120"/>
         <source>XRUN total</source>
         <translation type="unfinished">XRUNの合計</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="119"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="124"/>
         <source>Maximum scheduling delay</source>
         <translation type="unfinished">スケジュールされたディレイの最大値</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="122"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="127"/>
         <source>Time of last reset</source>
         <translation type="unfinished">最後のリセットの時間</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="224"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="229"/>
         <source>Logging stopped --- %1 ---</source>
         <translation type="unfinished">ログの終了 --- %1 ---</translation>
     </message>
     <message>
-        <location filename="../qjackctlMessagesStatusForm.cpp" line="234"/>
+        <location filename="../qjackctlMessagesStatusForm.cpp" line="239"/>
         <source>Logging started --- %1 ---</source>
         <translation type="unfinished">ログの開始 --- %1 ---</translation>
     </message>
@@ -1637,12 +1637,12 @@ the next time you start this program.</source>
 <context>
     <name>qjackctlPatchbay</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1711"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1722"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1712"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1723"/>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
@@ -1975,90 +1975,90 @@ of all actual client connections?</source>
 <context>
     <name>qjackctlPatchbayView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1253"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1264"/>
         <source>Add...</source>
         <translation>追加...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1255"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1266"/>
         <source>Edit...</source>
         <translation>編集...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1258"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1269"/>
         <source>Copy...</source>
         <translation>コピー...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1261"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1272"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1265"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1276"/>
         <source>Exclusive</source>
         <translation>排他的</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1271"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1282"/>
         <source>Forward</source>
         <translation type="unfinished">早送り</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1310"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1321"/>
         <source>(None)</source>
         <translation>(なし)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1324"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1335"/>
         <source>Move Up</source>
         <translation>上へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1327"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1338"/>
         <source>Move Down</source>
         <translation>下へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1333"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1344"/>
         <source>&amp;Connect</source>
         <translation>接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1334"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1345"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1337"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1348"/>
         <source>&amp;Disconnect</source>
         <translation>切断(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1338"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1349"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1341"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1352"/>
         <source>Disconnect &amp;All</source>
         <translation>すべて切断(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1342"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1353"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1347"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1358"/>
         <source>&amp;Refresh</source>
         <translation>更新(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1348"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1359"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation></translation>
@@ -2078,7 +2078,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="46"/>
-        <location filename="../qjackctlSessionForm.cpp" line="580"/>
+        <location filename="../qjackctlSessionForm.cpp" line="584"/>
         <source>&amp;Load...</source>
         <translation>読み込み(&amp;L)...</translation>
     </message>
@@ -2111,7 +2111,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="598"/>
+        <location filename="../qjackctlSessionForm.cpp" line="602"/>
         <source>&amp;Versioning</source>
         <translation type="unfinished">バージョン(&amp;V)</translation>
     </message>
@@ -2122,7 +2122,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="118"/>
-        <location filename="../qjackctlSessionForm.cpp" line="604"/>
+        <location filename="../qjackctlSessionForm.cpp" line="608"/>
         <source>Re&amp;fresh</source>
         <translation type="unfinished">更新(&amp;F)</translation>
     </message>
@@ -2143,63 +2143,63 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="586"/>
+        <location filename="../qjackctlSessionForm.cpp" line="590"/>
         <source>&amp;Save...</source>
         <translation>保存(&amp;S)...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
-        <location filename="../qjackctlSessionForm.cpp" line="590"/>
+        <location filename="../qjackctlSessionForm.cpp" line="594"/>
         <source>Save and &amp;Quit...</source>
         <translation>保存して終了(&amp;Q)...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
-        <location filename="../qjackctlSessionForm.cpp" line="593"/>
+        <location filename="../qjackctlSessionForm.cpp" line="597"/>
         <source>Save &amp;Template...</source>
         <translation>テンプレートを保存(&amp;T)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="214"/>
-        <location filename="../qjackctlSessionForm.cpp" line="231"/>
+        <location filename="../qjackctlSessionForm.cpp" line="218"/>
+        <location filename="../qjackctlSessionForm.cpp" line="235"/>
         <source>Load Session</source>
         <translation>セッションをロード</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="219"/>
-        <location filename="../qjackctlSessionForm.cpp" line="284"/>
+        <location filename="../qjackctlSessionForm.cpp" line="223"/>
+        <location filename="../qjackctlSessionForm.cpp" line="288"/>
         <source>Session directory</source>
         <translation type="unfinished">セッションのディレクトリ</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="268"/>
+        <location filename="../qjackctlSessionForm.cpp" line="272"/>
         <source>Save Session</source>
         <translation type="unfinished">セッションの保存</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="271"/>
+        <location filename="../qjackctlSessionForm.cpp" line="275"/>
         <source>and Quit</source>
         <translation type="unfinished">そして終了</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="274"/>
+        <location filename="../qjackctlSessionForm.cpp" line="278"/>
         <source>Template</source>
         <translation type="unfinished">テンプレート</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="342"/>
+        <location filename="../qjackctlSessionForm.cpp" line="346"/>
         <source>&amp;Clear</source>
         <translation>クリア(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="367"/>
-        <location filename="../qjackctlSessionForm.cpp" line="413"/>
-        <location filename="../qjackctlSessionForm.cpp" line="420"/>
+        <location filename="../qjackctlSessionForm.cpp" line="371"/>
+        <location filename="../qjackctlSessionForm.cpp" line="417"/>
+        <location filename="../qjackctlSessionForm.cpp" line="424"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="368"/>
+        <location filename="../qjackctlSessionForm.cpp" line="372"/>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
@@ -2208,17 +2208,17 @@ of all actual client connections?</source>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="382"/>
+        <location filename="../qjackctlSessionForm.cpp" line="386"/>
         <source>%1: loading session...</source>
         <translation type="unfinished">%1: セッションをロードしています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="395"/>
+        <location filename="../qjackctlSessionForm.cpp" line="399"/>
         <source>%1: load session %2.</source>
         <translation type="unfinished">%1: セッションのロード %2。</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="414"/>
+        <location filename="../qjackctlSessionForm.cpp" line="418"/>
         <source>A session already exists in this folder:
 
 &quot;%1&quot;
@@ -2231,7 +2231,7 @@ Are you sure to overwrite the existing session?</source>
 存在するセッションを上書きしますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="421"/>
+        <location filename="../qjackctlSessionForm.cpp" line="425"/>
         <source>This folder already exists and is not empty:
 
 &quot;%1&quot;
@@ -2244,12 +2244,12 @@ Are you sure to overwrite the existing folder?</source>
 存在するフォルダーを上書きしますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="438"/>
+        <location filename="../qjackctlSessionForm.cpp" line="442"/>
         <source>%1: saving session...</source>
         <translation type="unfinished">%1: セッションを保存しています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="467"/>
+        <location filename="../qjackctlSessionForm.cpp" line="471"/>
         <source>%1: save session %2.</source>
         <translation type="unfinished">%1: セッションの保存 %2。</translation>
     </message>
@@ -3872,7 +3872,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="813"/>
         <location filename="../qjackctlSetupForm.cpp" line="865"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1863"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1873"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3913,87 +3913,87 @@ Are you sure?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1513"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1523"/>
         <source>&amp;Preset Name</source>
         <translation>プリセット名(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1515"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1525"/>
         <source>&amp;Server Name</source>
         <translation>サーバー名(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1516"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1526"/>
         <source>&amp;Server Path</source>
         <translation>サーバーパス(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1517"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1527"/>
         <source>&amp;Driver</source>
         <translation>ドライバー(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1518"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1528"/>
         <source>&amp;Interface</source>
         <translation>インターフェース(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1520"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1530"/>
         <source>Sample &amp;Rate</source>
         <translation>サンプルレート(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1521"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1531"/>
         <source>&amp;Frames/Period</source>
         <translation type="unfinished">フレーム/ピリオド(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1522"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1532"/>
         <source>Periods/&amp;Buffer</source>
         <translation type="unfinished">ピリオド/バッファー(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1570"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1580"/>
         <source>Startup Script</source>
         <translation type="unfinished">スタートアップスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1587"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1597"/>
         <source>Post-Startup Script</source>
         <translation type="unfinished">ポストスタートアップスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1604"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1614"/>
         <source>Shutdown Script</source>
         <translation type="unfinished">シャットダウンスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1621"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1631"/>
         <source>Post-Shutdown Script</source>
         <translation type="unfinished">ポストシャットダウンスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1638"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1648"/>
         <source>Active Patchbay Definition</source>
         <translation type="unfinished">有効なパッチベイ定義</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1640"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1650"/>
         <source>Patchbay Definition files</source>
         <translation type="unfinished">パッチベイ定義ファイル</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1656"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1666"/>
         <source>Messages Log</source>
         <translation type="unfinished">メッセージログ</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1658"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1668"/>
         <source>Log files</source>
         <translation type="unfinished">ログファイル</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1864"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1874"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4205,27 +4205,27 @@ Do you want to apply the changes?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="153"/>
+        <location filename="../qjackctlSocketForm.cpp" line="158"/>
         <source>Plugs / Ports</source>
         <translation>プラグ/ポート</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="333"/>
+        <location filename="../qjackctlSocketForm.cpp" line="338"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="334"/>
+        <location filename="../qjackctlSocketForm.cpp" line="339"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation type="unfinished">ソケット名 &quot;%1&quot; はすでに存在します。</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="353"/>
+        <location filename="../qjackctlSocketForm.cpp" line="358"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="354"/>
+        <location filename="../qjackctlSocketForm.cpp" line="359"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4234,32 +4234,32 @@ Do you want to apply the changes?</source>
 変更を適用しますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="543"/>
+        <location filename="../qjackctlSocketForm.cpp" line="548"/>
         <source>Add Plug</source>
         <translation>プラグを追加</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="557"/>
+        <location filename="../qjackctlSocketForm.cpp" line="562"/>
         <source>Edit</source>
         <translation>編集</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="560"/>
+        <location filename="../qjackctlSocketForm.cpp" line="565"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="564"/>
+        <location filename="../qjackctlSocketForm.cpp" line="569"/>
         <source>Move Up</source>
         <translation>上へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="567"/>
+        <location filename="../qjackctlSocketForm.cpp" line="572"/>
         <source>Move Down</source>
         <translation>下へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="746"/>
+        <location filename="../qjackctlSocketForm.cpp" line="751"/>
         <source>(None)</source>
         <translation>(なし)</translation>
     </message>
@@ -4267,32 +4267,32 @@ Do you want to apply the changes?</source>
 <context>
     <name>qjackctlSocketList</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="329"/>
+        <location filename="../qjackctlPatchbay.cpp" line="334"/>
         <source>Output</source>
         <translation>出力</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="339"/>
+        <location filename="../qjackctlPatchbay.cpp" line="344"/>
         <source>Input</source>
         <translation>入力</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="352"/>
+        <location filename="../qjackctlPatchbay.cpp" line="357"/>
         <source>Socket</source>
         <translation>ソケット</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="463"/>
+        <location filename="../qjackctlPatchbay.cpp" line="468"/>
         <source>&lt;New&gt; - %1</source>
         <translation type="unfinished">&lt;新規&gt; - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="518"/>
+        <location filename="../qjackctlPatchbay.cpp" line="523"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="519"/>
+        <location filename="../qjackctlPatchbay.cpp" line="524"/>
         <source>%1 about to be removed:
 
 &quot;%2&quot;
@@ -4305,7 +4305,7 @@ Are you sure?</source>
 よろしいですか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="608"/>
+        <location filename="../qjackctlPatchbay.cpp" line="613"/>
         <source>%1 &lt;Copy&gt; - %2</source>
         <translation type="unfinished">%1 &lt;コピー&gt; - %2</translation>
     </message>
@@ -4313,12 +4313,12 @@ Are you sure?</source>
 <context>
     <name>qjackctlSocketListView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="775"/>
+        <location filename="../qjackctlPatchbay.cpp" line="786"/>
         <source>Output Sockets / Plugs</source>
         <translation>出力ソケット / プラグ</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="777"/>
+        <location filename="../qjackctlPatchbay.cpp" line="788"/>
         <source>Input Sockets / Plugs</source>
         <translation>入力ソケット / プラグ</translation>
     </message>
