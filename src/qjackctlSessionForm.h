@@ -1,7 +1,7 @@
 // qjackctlSessionForm.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -56,6 +56,9 @@ public:
 
 	// Global setup method.
 	void setup(qjackctlSetup *pSetup);
+
+	// Maybe ask whether we can close.
+	bool queryClose();
 
 	// Recent session directories and save type accessors.
 	const QStringList& sessionDirs() const;
@@ -121,6 +124,9 @@ private:
 
 	// Save session menu.
 	QMenu *m_pSaveMenu;
+
+	// Setup options.
+	qjackctlSetup *m_pSetup;
 
 	// Session directory history.
 	QStringList m_sessionDirs;

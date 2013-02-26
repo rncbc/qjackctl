@@ -1,7 +1,7 @@
 // qjackctlSession.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -52,6 +52,7 @@ qjackctlSession::qjackctlSession (void)
 // Destructor.
 qjackctlSession::~qjackctlSession (void)
 {
+	clearInfraClients();
 	clear();
 }
 
@@ -145,6 +146,7 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 
 #ifdef CONFIG_JACK_SESSION
 
+	// Second pass: get all session client commands...
 	if (jack_session_notify) {
 	
 		jack_session_event_type_t etype = JackSessionSave;
@@ -188,7 +190,21 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 
 #endif	// CONFIG_JACK_SESSION
 
-	// Save to file, immediate...
+	// Third pass: check whether there are registered infra-clients...
+	ClientList::ConstIterator iter = m_clients.constBegin();
+	const ClientList::ConstIterator& iter_end = m_clients.constEnd();
+
+	for (; iter != iter_end; ++iter) {
+		ClientItem *pClientItem = iter.value();
+		if (pClientItem->client_command.isEmpty()) {
+			InfraClientItem *pInfraClientItem
+				= m_infra_clients.value(pClientItem->client_name, NULL);
+			if (pInfraClientItem)
+				pClientItem->client_command = pInfraClientItem->client_command;
+		}
+	}
+
+	// Finally: save to file, immediate...
 	return saveFile(sSessionPath + "session.xml");	
 }
 
@@ -475,6 +491,61 @@ bool qjackctlSession::saveFile ( const QString& sFilename )
 	file.close();
 
 	return true;
+}
+
+
+// Infra-client list accessor (read-only)
+const qjackctlSession::InfraClientList& qjackctlSession::infra_clients (void) const
+{
+	return m_infra_clients;
+}
+
+
+// Load all infra-clients from configuration file.
+void qjackctlSession::loadInfraClients ( QSettings& settings )
+{
+	clearInfraClients();
+
+	settings.beginGroup("/InfraClients");
+	const QStringList& keys = settings.childKeys();
+	QStringListIterator iter(keys);
+	while (iter.hasNext()) {
+		const QString& sKey = iter.next();
+		const QString& sValue = settings.value(sKey).toString();
+		if (!sValue.isEmpty()) {
+			InfraClientItem *pInfraClientItem = new InfraClientItem();
+			pInfraClientItem->client_name = sKey;
+			pInfraClientItem->client_command = sValue;
+			m_infra_clients.insert(sKey, pInfraClientItem);
+		}
+	}
+	settings.endGroup();
+}
+
+
+// Save all infra-clients to configuration file.
+void qjackctlSession::saveInfraClients ( QSettings& settings )
+{
+	settings.beginGroup("/InfraClients");
+	settings.remove(QString()); // Remove all current keys.
+	InfraClientList::ConstIterator iter = m_infra_clients.constBegin();
+	const InfraClientList::ConstIterator& iter_end
+		= m_infra_clients.constEnd();
+	for ( ; iter != iter_end; ++iter) {
+		const QString& sKey = iter.key();
+		const QString& sValue = iter.value()->client_command;
+		if (!sValue.isEmpty())
+			settings.setValue(sKey, sValue);
+	}
+	settings.endGroup();
+}
+
+
+// Clear infra-client table.
+void qjackctlSession::clearInfraClients (void)
+{
+	qDeleteAll(m_infra_clients);
+	m_infra_clients.clear();
 }
 
 

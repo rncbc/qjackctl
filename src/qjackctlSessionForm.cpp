@@ -1,7 +1,7 @@
 // qjackctlSessionForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -116,6 +116,11 @@ qjackctlSessionForm::qjackctlSessionForm (
 	pHeader->resizeSection(1, 40);  // UUID
 	pHeader->setStretchLastSection(true);
 	
+	m_pSetup = NULL;
+
+/*	for the time being
+*/	m_ui.InfraClientWidget->setEnabled(false);
+
 	// UI connections...
 	QObject::connect(m_ui.LoadSessionPushButton,
 		SIGNAL(clicked()),
@@ -143,11 +148,32 @@ qjackctlSessionForm::~qjackctlSessionForm (void)
 // the initial session save type and directories.
 void qjackctlSessionForm::setup ( qjackctlSetup *pSetup )
 {
-	m_ui.SaveSessionVersionCheckBox->setChecked(pSetup->bSessionSaveVersion);
+	m_pSetup = pSetup;
 
-	m_sessionDirs = pSetup->sessionDirs;
+	if (m_pSetup) {
+		m_ui.SaveSessionVersionCheckBox->setChecked(
+			m_pSetup->bSessionSaveVersion);
+		m_sessionDirs = m_pSetup->sessionDirs;
+		QList<int> sizes;
+		sizes.append(320);
+		sizes.append(120);
+		m_pSetup->loadSplitterSizes(m_ui.InfraClientSplitter, sizes);
+	}
 
 	updateRecentMenu();
+}
+
+
+// Maybe ask whether we can close.
+bool qjackctlSessionForm::queryClose (void)
+{
+	bool bQueryClose = true;
+
+	// Maybe just save some splitter sizes...
+	if (m_pSetup && bQueryClose)
+		m_pSetup->saveSplitterSizes(m_ui.InfraClientSplitter);
+
+	return bQueryClose;
 }
 
 

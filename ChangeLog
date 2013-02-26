@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Session infra-client management finally being added. (WIP)
+ 
 - Preparations for Qt5 migration. (TESTING)
 
 - Transport tempo (BPM) precision display fixed to 4 digits.

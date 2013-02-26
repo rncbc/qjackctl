@@ -1918,6 +1918,46 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <source>Re&amp;fresh</source>
         <translation>Re&amp;frescar</translation>
     </message>
+    <message>
+        <source>Session clients / connections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infra-clients / commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infra-client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Infra-command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add infra-client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit infra-client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished">&amp;Editar</translation>
+    </message>
+    <message>
+        <source>Remove infra-client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation type="unfinished">&amp;Remover</translation>
+    </message>
 </context>
 <context>
     <name>qjackctlSetupForm</name>

@@ -3,7 +3,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>240</height>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,125 +36,223 @@
   <property name="windowIcon">
    <iconset resource="qjackctl.qrc">:/images/session1.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QPushButton" name="LoadSessionPushButton">
-     <property name="toolTip">
-      <string>Load session</string>
-     </property>
-     <property name="text">
-      <string>&amp;Load...</string>
-     </property>
-     <property name="icon">
-	  <iconset resource="qjackctl.qrc">:/images/open1.png</iconset>
-     </property>
-    </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="LoadSessionPushButton">
+       <property name="toolTip">
+        <string>Load session</string>
+       </property>
+       <property name="text">
+        <string>&amp;Load...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="qjackctl.qrc">:/images/open1.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="RecentSessionPushButton">
+       <property name="toolTip">
+        <string>Recent session</string>
+       </property>
+       <property name="text">
+        <string>&amp;Recent</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="SaveSessionPushButton">
+       <property name="toolTip">
+        <string>Save session</string>
+       </property>
+       <property name="text">
+        <string>&amp;Save</string>
+       </property>
+       <property name="icon">
+        <iconset resource="qjackctl.qrc">:/images/save1.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="SaveSessionVersionCheckBox">
+       <property name="toolTip">
+        <string>Save session versioning</string>
+       </property>
+       <property name="text">
+        <string>&amp;Versioning</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="UpdateSessionPushButton">
+       <property name="toolTip">
+        <string>Update session</string>
+       </property>
+       <property name="text">
+        <string>Re&amp;fresh</string>
+       </property>
+       <property name="icon">
+        <iconset resource="qjackctl.qrc">:/images/refresh1.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="0" column="1">
-    <widget class="QPushButton" name="RecentSessionPushButton">
-     <property name="toolTip">
-      <string>Recent session</string>
-     </property>
-     <property name="text">
-      <string>&amp;Recent</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <spacer>
+   <item>
+    <widget class="QSplitter" name="InfraClientSplitter">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="3">
-    <widget class="QPushButton" name="SaveSessionPushButton">
-     <property name="toolTip">
-      <string>Save session</string>
-     </property>
-     <property name="text">
-      <string>&amp;Save</string>
-     </property>
-     <property name="icon">
-	  <iconset resource="qjackctl.qrc">:/images/save1.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="4">
-    <widget class="QCheckBox" name="SaveSessionVersionCheckBox">
-     <property name="toolTip">
-      <string>Save session versioning</string>
-     </property>
-     <property name="text">
-      <string>&amp;Versioning</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
-	<spacer>
-	 <property name="orientation">
-	  <enum>Qt::Horizontal</enum>
-	 </property>
-	 <property name="sizeHint" stdset="0">
-	  <size>
-	   <width>20</width>
-	   <height>20</height>
-	  </size>
-	 </property>
-	</spacer>
-   </item>
-   <item row="0" column="6">
-    <widget class="QPushButton" name="UpdateSessionPushButton">
-     <property name="toolTip">
-      <string>Update session</string>
-     </property>
-     <property name="text">
-      <string>Re&amp;fresh</string>
-     </property>
-     <property name="icon">
-	  <iconset resource="qjackctl.qrc">:/images/refresh1.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="7">
-    <widget class="QTreeWidget" name="SessionTreeView">
-     <property name="rootIsDecorated">
-      <bool>false</bool>
-     </property>
-     <property name="uniformRowHeights">
-      <bool>true</bool>
-     </property>
-     <property name="sortingEnabled">
-      <bool>false</bool>
-     </property>
-     <property name="allColumnsShowFocus">
-      <bool>true</bool>
-     </property>
-     <column>
-      <property name="text">
-       <string>Client / Ports</string>
+     <widget class="QTreeWidget" name="SessionTreeView">
+      <property name="toolTip">
+       <string>Session clients / connections</string>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>UUID</string>
+      <property name="rootIsDecorated">
+       <bool>false</bool>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Command</string>
+      <property name="uniformRowHeights">
+       <bool>true</bool>
       </property>
-     </column>
+      <property name="sortingEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="allColumnsShowFocus">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>Client / Ports</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>UUID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Command</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="InfraClientWidget">
+      <layout class="QGridLayout">
+       <item row="0" column="0" rowspan="4">
+        <widget class="QTreeWidget" name="InfraClientListView">
+         <property name="toolTip">
+          <string>Infra-clients / commands</string>
+         </property>
+         <property name="rootIsDecorated">
+          <bool>false</bool>
+         </property>
+         <property name="uniformRowHeights">
+          <bool>true</bool>
+         </property>
+         <property name="sortingEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="allColumnsShowFocus">
+          <bool>true</bool>
+         </property>
+         <column>
+          <property name="text">
+           <string>Infra-client</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Infra-command</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="AddInfraClientPushButton">
+         <property name="toolTip">
+          <string>Add infra-client</string>
+         </property>
+         <property name="text">
+          <string>&amp;Add</string>
+         </property>
+         <property name="icon">
+          <iconset resource="qjackctl.qrc">:/images/add1.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="EditInfraClientPushButton">
+         <property name="toolTip">
+          <string>Edit infra-client</string>
+         </property>
+         <property name="text">
+          <string>&amp;Edit</string>
+         </property>
+         <property name="icon">
+          <iconset resource="qjackctl.qrc">:/images/edit1.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="RemoveInfraClientPushButton">
+         <property name="toolTip">
+          <string>Remove infra-client</string>
+         </property>
+         <property name="text">
+          <string>&amp;Remove</string>
+         </property>
+         <property name="icon">
+          <iconset resource="qjackctl.qrc">:/images/remove1.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>8</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
  </widget>
+ <layoutdefault spacing="4" margin="4" />
  <tabstops>
   <tabstop>LoadSessionPushButton</tabstop>
   <tabstop>RecentSessionPushButton</tabstop>
@@ -162,6 +260,10 @@
   <tabstop>SaveSessionVersionCheckBox</tabstop>
   <tabstop>UpdateSessionPushButton</tabstop>
   <tabstop>SessionTreeView</tabstop>
+  <tabstop>InfraClientListView</tabstop>
+  <tabstop>AddInfraClientPushButton</tabstop>
+  <tabstop>EditInfraClientPushButton</tabstop>
+  <tabstop>RemoveInfraClientPushButton</tabstop>
  </tabstops>
  <resources>
   <include location="qjackctl.qrc"/>

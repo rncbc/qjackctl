@@ -1,7 +1,7 @@
 // qjackctlSession.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -26,6 +26,9 @@
 #include <QHash>
 
 #include <jack/jack.h>
+
+// Forward decls.
+class QSettings;
 
 
 //----------------------------------------------------------------------------
@@ -93,6 +96,25 @@ public:
 	// Update (re)connections utility method.
 	bool update();
 
+	// Infra-client table.
+	struct InfraClientItem
+	{
+		QString  client_name;
+		QString  client_command;
+	};
+
+	typedef QHash<QString, InfraClientItem *> InfraClientList;
+
+	// Infra-client list accessor (read-only)
+	const InfraClientList& infra_clients() const;
+
+	// Load/save all infra-clients from/to configuration file.
+	void loadInfraClients(QSettings& settings);
+	void saveInfraClients(QSettings& settings);
+
+	// Clear infra-client table.
+	void clearInfraClients();
+
 protected:
 
 	// File methods.
@@ -103,6 +125,9 @@ private:
 
 	// Instance variables.
 	ClientList m_clients;	
+
+	// Infra-clients table.
+	InfraClientList m_infra_clients;
 };
 
 

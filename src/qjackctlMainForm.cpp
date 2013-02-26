@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -791,8 +791,11 @@ bool qjackctlMainForm::queryClose (void)
 
 	// Try to save current session directories list...
 	if (bQueryClose && m_pSessionForm) {
-		m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
-		m_pSetup->bSessionSaveVersion = m_pSessionForm->isSaveSessionVersion();
+		bQueryClose = m_pSessionForm->queryClose();
+		if (bQueryClose) {
+			m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
+			m_pSetup->bSessionSaveVersion = m_pSessionForm->isSaveSessionVersion();
+		}
 	}
 
 	// Some windows default fonts are here on demand too.
