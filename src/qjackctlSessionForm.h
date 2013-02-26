@@ -90,6 +90,10 @@ protected slots:
 	void updateRecentMenu();
 	void clearRecentMenu();
 
+	void addInfraClient();
+	void editInfraClient();
+	void removeInfraClient();
+
 protected:
 
 	void showEvent(QShowEvent *);
@@ -108,6 +112,7 @@ protected:
 	void updateRecent(const QString& sSessionDir);
 
 	void updateSessionView();
+	void updateInfraClients();
 
 	static QIcon iconStatus(const QIcon& icon, bool bStatus);
 

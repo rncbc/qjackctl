@@ -118,17 +118,23 @@ qjackctlSessionForm::qjackctlSessionForm (
 	
 	m_pSetup = NULL;
 
-/*	for the time being
-*/	m_ui.InfraClientWidget->setEnabled(false);
-
 	// UI connections...
 	QObject::connect(m_ui.LoadSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(loadSession()));
-
 	QObject::connect(m_ui.UpdateSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(updateSession()));
+
+	QObject::connect(m_ui.AddInfraClientPushButton,
+		SIGNAL(clicked()),
+		SLOT(addInfraClient()));
+	QObject::connect(m_ui.EditInfraClientPushButton,
+		SIGNAL(clicked()),
+		SLOT(editInfraClient()));
+	QObject::connect(m_ui.RemoveInfraClientPushButton,
+		SIGNAL(clicked()),
+		SLOT(removeInfraClient()));
 
 	// Start disabled.
 	stabilizeForm(false);
@@ -154,13 +160,17 @@ void qjackctlSessionForm::setup ( qjackctlSetup *pSetup )
 		m_ui.SaveSessionVersionCheckBox->setChecked(
 			m_pSetup->bSessionSaveVersion);
 		m_sessionDirs = m_pSetup->sessionDirs;
+		// Setup infra-clients table view...
 		QList<int> sizes;
 		sizes.append(320);
 		sizes.append(120);
 		m_pSetup->loadSplitterSizes(m_ui.InfraClientSplitter, sizes);
+		// Load infra-clients table-view...
+		m_pSession->loadInfraClients(m_pSetup->settings());
 	}
 
 	updateRecentMenu();
+	updateInfraClients();
 }
 
 
@@ -170,8 +180,11 @@ bool qjackctlSessionForm::queryClose (void)
 	bool bQueryClose = true;
 
 	// Maybe just save some splitter sizes...
-	if (m_pSetup && bQueryClose)
+	if (m_pSetup && bQueryClose) {
+		// Save infra-clients table-view...
+		m_pSession->saveInfraClients(m_pSetup->settings());
 		m_pSetup->saveSplitterSizes(m_ui.InfraClientSplitter);
+	}
 
 	return bQueryClose;
 }
@@ -578,6 +591,42 @@ void qjackctlSessionForm::updateSession (void)
 }
 
 
+// Update/populate infra-clients commands list view.
+void qjackctlSessionForm::updateInfraClients (void)
+{
+#ifdef CONFIG_DEBUG
+	qDebug("qjackctlSessionForm::updateInfraClients()");
+#endif
+}
+
+
+// Add a new infra-client entry.
+void qjackctlSessionForm::addInfraClient (void)
+{
+#ifdef CONFIG_DEBUG
+	qDebug("qjackctlSessionForm::addInfraClient()");
+#endif
+}
+
+
+// Edit current infra-client entry.
+void qjackctlSessionForm::editInfraClient (void)
+{
+#ifdef CONFIG_DEBUG
+	qDebug("qjackctlSessionForm::editInfraClient()");
+#endif
+}
+
+
+// Remove current infra-client entry.
+void qjackctlSessionForm::removeInfraClient (void)
+{
+#ifdef CONFIG_DEBUG
+	qDebug("qjackctlSessionForm::removeInfraClient()");
+#endif
+}
+
+
 // Stabilize form status.
 void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 {
@@ -587,9 +636,17 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.SaveSessionVersionCheckBox->setEnabled(bEnabled);
 	m_ui.UpdateSessionPushButton->setEnabled(bEnabled);
 
-	if (!bEnabled) {
+	m_ui.InfraClientWidget->setEnabled(bEnabled);
+
+	if (bEnabled) {
+		m_ui.AddInfraClientPushButton->setEnabled(true);
+		m_ui.EditInfraClientPushButton->setEnabled(false);
+		m_ui.RemoveInfraClientPushButton->setEnabled(false);
+	} else {
+		m_pSession->clearInfraClients();
 		m_pSession->clear();
 		m_ui.SessionTreeView->clear();
+		m_ui.InfraClientListView->clear();
 	}
 }
 

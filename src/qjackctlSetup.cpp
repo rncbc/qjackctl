@@ -47,6 +47,13 @@ qjackctlSetup::~qjackctlSetup (void)
 }
 
 
+// Settings accessor.
+QSettings& qjackctlSetup::settings (void)
+{
+	return m_settings;
+}
+
+
 // Explicit load method.
 void qjackctlSetup::loadSetup (void)
 {

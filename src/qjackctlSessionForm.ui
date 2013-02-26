@@ -226,7 +226,7 @@
           <string>Remove infra-client</string>
          </property>
          <property name="text">
-          <string>&amp;Remove</string>
+		  <string>Re&amp;move</string>
          </property>
          <property name="icon">
           <iconset resource="qjackctl.qrc">:/images/remove1.png</iconset>
