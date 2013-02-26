@@ -2050,7 +2050,11 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Rimuovi</translation>
+        <translation type="obsolete">&amp;Rimuovi</translation>
+    </message>
+    <message>
+        <source>Re&amp;move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

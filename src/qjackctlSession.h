@@ -105,8 +105,8 @@ public:
 
 	typedef QHash<QString, InfraClientItem *> InfraClientList;
 
-	// Infra-client list accessor (read-only)
-	const InfraClientList& infra_clients() const;
+	// Infra-client list accessor (read-write)
+	InfraClientList& infra_clients();
 
 	// Load/save all infra-clients from/to configuration file.
 	void loadInfraClients(QSettings& settings);

@@ -94,6 +94,8 @@ protected slots:
 	void editInfraClient();
 	void removeInfraClient();
 
+	void selectInfraClient();
+
 protected:
 
 	void showEvent(QShowEvent *);

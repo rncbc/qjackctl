@@ -495,7 +495,7 @@ bool qjackctlSession::saveFile ( const QString& sFilename )
 
 
 // Infra-client list accessor (read-only)
-const qjackctlSession::InfraClientList& qjackctlSession::infra_clients (void) const
+qjackctlSession::InfraClientList& qjackctlSession::infra_clients (void)
 {
 	return m_infra_clients;
 }

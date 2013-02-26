@@ -1956,7 +1956,11 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Remover</translation>
+        <translation type="obsolete">&amp;Remover</translation>
+    </message>
+    <message>
+        <source>Re&amp;move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

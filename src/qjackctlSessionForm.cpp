@@ -126,6 +126,9 @@ qjackctlSessionForm::qjackctlSessionForm (
 		SIGNAL(clicked()),
 		SLOT(updateSession()));
 
+	QObject::connect(m_ui.InfraClientListView,
+		SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
+		SLOT(selectInfraClient()));
 	QObject::connect(m_ui.AddInfraClientPushButton,
 		SIGNAL(clicked()),
 		SLOT(addInfraClient()));
@@ -597,6 +600,20 @@ void qjackctlSessionForm::updateInfraClients (void)
 #ifdef CONFIG_DEBUG
 	qDebug("qjackctlSessionForm::updateInfraClients()");
 #endif
+
+	m_ui.InfraClientListView->clear();
+
+	QTreeWidgetItem *pItem = NULL;
+	qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
+	qjackctlSession::InfraClientList::ConstIterator iter = list.constBegin();
+	const qjackctlSession::InfraClientList::ConstIterator& iter_end
+		= list.constEnd();
+	for( ; iter != iter_end; ++iter) {
+		qjackctlSession::InfraClientItem *pInfraClientItem = iter.value();
+		pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
+		pItem->setText(0, pInfraClientItem->client_name);
+		pItem->setText(1, pInfraClientItem->client_command);
+	}
 }
 
 
@@ -606,6 +623,10 @@ void qjackctlSessionForm::addInfraClient (void)
 #ifdef CONFIG_DEBUG
 	qDebug("qjackctlSessionForm::addInfraClient()");
 #endif
+
+	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
+	pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
+	pItem->setText(0, tr("New Infra-client"));
 }
 
 
@@ -615,6 +636,8 @@ void qjackctlSessionForm::editInfraClient (void)
 #ifdef CONFIG_DEBUG
 	qDebug("qjackctlSessionForm::editInfraClient()");
 #endif
+
+	// TODO: ...
 }
 
 
@@ -624,6 +647,31 @@ void qjackctlSessionForm::removeInfraClient (void)
 #ifdef CONFIG_DEBUG
 	qDebug("qjackctlSessionForm::removeInfraClient()");
 #endif
+
+	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
+	if (pItem) {
+		const QString& sKey = pItem->text(0);
+		qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
+		qjackctlSession::InfraClientList::Iterator iter	= list.find(sKey);
+		if (iter != list.end())
+			list.erase(iter);
+	}
+
+	updateInfraClients();
+}
+
+
+// Select current infra-client entry.
+void qjackctlSessionForm::selectInfraClient (void)
+{
+#ifdef CONFIG_DEBUG
+	qDebug("qjackctlSessionForm::selectInfraClient()");
+#endif
+
+	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
+	m_ui.AddInfraClientPushButton->setEnabled(true);
+	m_ui.EditInfraClientPushButton->setEnabled(pItem != NULL);
+	m_ui.RemoveInfraClientPushButton->setEnabled(pItem != NULL);
 }
 
 
@@ -639,14 +687,10 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.InfraClientWidget->setEnabled(bEnabled);
 
 	if (bEnabled) {
-		m_ui.AddInfraClientPushButton->setEnabled(true);
-		m_ui.EditInfraClientPushButton->setEnabled(false);
-		m_ui.RemoveInfraClientPushButton->setEnabled(false);
+		selectInfraClient();
 	} else {
-		m_pSession->clearInfraClients();
 		m_pSession->clear();
 		m_ui.SessionTreeView->clear();
-		m_ui.InfraClientListView->clear();
 	}
 }
 

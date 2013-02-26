@@ -25,7 +25,7 @@
         <translation type="obsolete">Options</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="476"/>
+        <location filename="../qjackctlSetup.cpp" line="483"/>
         <source>Start JACK audio server immediately</source>
         <translation>Démarrer immédiatement le serveur audio JACK</translation>
     </message>
@@ -34,59 +34,59 @@
         <translation type="obsolete">Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="484"/>
+        <location filename="../qjackctlSetup.cpp" line="491"/>
         <source>Show help about command line options</source>
         <translation>Montrer l&apos;aide à propos des options en ligne de commande</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="486"/>
+        <location filename="../qjackctlSetup.cpp" line="493"/>
         <source>Show version information</source>
         <translation>Montrer les informations de version</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="522"/>
+        <location filename="../qjackctlSetup.cpp" line="529"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="471"/>
+        <location filename="../qjackctlSetup.cpp" line="478"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Utilisation : %1 [options] [commandes-et-args]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="474"/>
+        <location filename="../qjackctlSetup.cpp" line="481"/>
         <source>Options:</source>
         <translation>Options :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="480"/>
+        <location filename="../qjackctlSetup.cpp" line="487"/>
         <source>Set active patchbay definition file</source>
         <translation>Choisir le fichiers de définition de baie de brassage actif</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="482"/>
+        <location filename="../qjackctlSetup.cpp" line="489"/>
         <source>Set default JACK audio server name</source>
         <translation>Choisir le nom du serveur audio JACK par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="531"/>
+        <location filename="../qjackctlSetup.cpp" line="538"/>
         <source>Option -a requires an argument (path).</source>
         <translation>L&apos;option -a nécessite un argument (chemin).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="541"/>
+        <location filename="../qjackctlSetup.cpp" line="548"/>
         <source>Option -n requires an argument (name).</source>
         <translation>L&apos;option -n nécessite un argument (nom).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="553"/>
+        <location filename="../qjackctlSetup.cpp" line="560"/>
         <source>Qt: %1
 </source>
         <translation>Qt : %1
 </translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="478"/>
+        <location filename="../qjackctlSetup.cpp" line="485"/>
         <source>Set default settings preset name</source>
         <translation>Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
@@ -2406,7 +2406,7 @@ pour créer une définition de baie de brassage?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="48"/>
-        <location filename="../qjackctlSessionForm.cpp" line="610"/>
+        <location filename="../qjackctlSessionForm.cpp" line="667"/>
         <source>&amp;Load...</source>
         <translation>&amp;Charger…</translation>
     </message>
@@ -2433,13 +2433,13 @@ pour créer une définition de baie de brassage?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="97"/>
-        <location filename="../qjackctlSessionForm.cpp" line="628"/>
+        <location filename="../qjackctlSessionForm.cpp" line="685"/>
         <source>&amp;Versioning</source>
         <translation>Gestion de ré&amp;visions</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="120"/>
-        <location filename="../qjackctlSessionForm.cpp" line="634"/>
+        <location filename="../qjackctlSessionForm.cpp" line="691"/>
         <source>Re&amp;fresh</source>
         <translation>Ra&amp;fraîchir</translation>
     </message>
@@ -2490,12 +2490,16 @@ pour créer une définition de baie de brassage?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="229"/>
+        <source>Re&amp;move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">Enleve&amp;r</translation>
+        <translation type="obsolete">Enleve&amp;r</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="616"/>
+        <location filename="../qjackctlSessionForm.cpp" line="673"/>
         <source>&amp;Save...</source>
         <translation>&amp;Enregistrer…</translation>
     </message>
@@ -2542,46 +2546,46 @@ pour créer une définition de baie de brassage?</translation>
         <translation>&amp;Enregistrer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="244"/>
-        <location filename="../qjackctlSessionForm.cpp" line="261"/>
+        <location filename="../qjackctlSessionForm.cpp" line="257"/>
+        <location filename="../qjackctlSessionForm.cpp" line="274"/>
         <source>Load Session</source>
         <translation>Charger session</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="249"/>
-        <location filename="../qjackctlSessionForm.cpp" line="314"/>
+        <location filename="../qjackctlSessionForm.cpp" line="262"/>
+        <location filename="../qjackctlSessionForm.cpp" line="327"/>
         <source>Session directory</source>
         <translation>Répertoire de session</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="298"/>
+        <location filename="../qjackctlSessionForm.cpp" line="311"/>
         <source>Save Session</source>
         <translation>Enregistrer session</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="301"/>
+        <location filename="../qjackctlSessionForm.cpp" line="314"/>
         <source>and Quit</source>
         <translation>et quitter</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="304"/>
+        <location filename="../qjackctlSessionForm.cpp" line="317"/>
         <source>Template</source>
         <translation>Modèle</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="372"/>
+        <location filename="../qjackctlSessionForm.cpp" line="385"/>
         <source>&amp;Clear</source>
         <translation>&amp;Effacer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="397"/>
-        <location filename="../qjackctlSessionForm.cpp" line="443"/>
-        <location filename="../qjackctlSessionForm.cpp" line="450"/>
+        <location filename="../qjackctlSessionForm.cpp" line="410"/>
+        <location filename="../qjackctlSessionForm.cpp" line="456"/>
+        <location filename="../qjackctlSessionForm.cpp" line="463"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="398"/>
+        <location filename="../qjackctlSessionForm.cpp" line="411"/>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
@@ -2590,17 +2594,17 @@ pour créer une définition de baie de brassage?</translation>
 « %1 »</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="412"/>
+        <location filename="../qjackctlSessionForm.cpp" line="425"/>
         <source>%1: loading session...</source>
         <translation>%1 : chargement de la session…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="425"/>
+        <location filename="../qjackctlSessionForm.cpp" line="438"/>
         <source>%1: load session %2.</source>
         <translation>%1 : charger session %2.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="444"/>
+        <location filename="../qjackctlSessionForm.cpp" line="457"/>
         <source>A session already exists in this folder:
 
 &quot;%1&quot;
@@ -2613,7 +2617,7 @@ Are you sure to overwrite the existing session?</source>
 Êtes-vous certain de vouloir remlplacer la session existante ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="451"/>
+        <location filename="../qjackctlSessionForm.cpp" line="464"/>
         <source>This folder already exists and is not empty:
 
 &quot;%1&quot;
@@ -2626,24 +2630,24 @@ Are you sure to overwrite the existing folder?</source>
 Êtes-vous certain de vouloir remplacer le dossier existant ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="468"/>
+        <location filename="../qjackctlSessionForm.cpp" line="481"/>
         <source>%1: saving session...</source>
         <translation>%1 : enregistrement de la session…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="497"/>
+        <location filename="../qjackctlSessionForm.cpp" line="510"/>
         <source>%1: save session %2.</source>
         <translation>%1 : enregistrer session %2.</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
-        <location filename="../qjackctlSessionForm.cpp" line="620"/>
+        <location filename="../qjackctlSessionForm.cpp" line="677"/>
         <source>Save and &amp;Quit...</source>
         <translation>Enregistrer et &amp;Quitter…</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
-        <location filename="../qjackctlSessionForm.cpp" line="623"/>
+        <location filename="../qjackctlSessionForm.cpp" line="680"/>
         <source>Save &amp;Template...</source>
         <translation>Enregistrer &amp;modèle…</translation>
     </message>
