@@ -2056,6 +2056,10 @@ Sovrascrivo la cartella?</translation>
         <source>Re&amp;move</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>(New infra-client)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlSetupForm</name>

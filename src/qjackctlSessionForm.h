@@ -92,6 +92,7 @@ protected slots:
 
 	void addInfraClient();
 	void editInfraClient();
+	void editInfraClientCommit();
 	void removeInfraClient();
 
 	void selectInfraClient();

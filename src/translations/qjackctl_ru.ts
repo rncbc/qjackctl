@@ -2188,7 +2188,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="48"/>
-        <location filename="../qjackctlSessionForm.cpp" line="667"/>
+        <location filename="../qjackctlSessionForm.cpp" line="745"/>
         <source>&amp;Load...</source>
         <translation>&amp;Загрузить</translation>
     </message>
@@ -2215,13 +2215,13 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="97"/>
-        <location filename="../qjackctlSessionForm.cpp" line="685"/>
+        <location filename="../qjackctlSessionForm.cpp" line="763"/>
         <source>&amp;Versioning</source>
         <translation>&amp;Версии</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="120"/>
-        <location filename="../qjackctlSessionForm.cpp" line="691"/>
+        <location filename="../qjackctlSessionForm.cpp" line="769"/>
         <source>Re&amp;fresh</source>
         <translation>О&amp;бновить</translation>
     </message>
@@ -2281,7 +2281,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="673"/>
+        <location filename="../qjackctlSessionForm.cpp" line="751"/>
         <source>&amp;Save...</source>
         <translation>&amp;Сохранить</translation>
     </message>
@@ -2328,46 +2328,46 @@ of all actual client connections?</source>
         <translation>&amp;Сохранить</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="257"/>
-        <location filename="../qjackctlSessionForm.cpp" line="274"/>
+        <location filename="../qjackctlSessionForm.cpp" line="281"/>
+        <location filename="../qjackctlSessionForm.cpp" line="298"/>
         <source>Load Session</source>
         <translation>Загрузить сеанс</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="262"/>
-        <location filename="../qjackctlSessionForm.cpp" line="327"/>
+        <location filename="../qjackctlSessionForm.cpp" line="286"/>
+        <location filename="../qjackctlSessionForm.cpp" line="351"/>
         <source>Session directory</source>
         <translation>Каталог с сеансами</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="311"/>
+        <location filename="../qjackctlSessionForm.cpp" line="335"/>
         <source>Save Session</source>
         <translation>Сохранить сеанс</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="314"/>
+        <location filename="../qjackctlSessionForm.cpp" line="338"/>
         <source>and Quit</source>
         <translation>и выйти</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="317"/>
+        <location filename="../qjackctlSessionForm.cpp" line="341"/>
         <source>Template</source>
         <translation>Шаблон</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="385"/>
+        <location filename="../qjackctlSessionForm.cpp" line="409"/>
         <source>&amp;Clear</source>
         <translation>О&amp;чистить</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="410"/>
-        <location filename="../qjackctlSessionForm.cpp" line="456"/>
-        <location filename="../qjackctlSessionForm.cpp" line="463"/>
+        <location filename="../qjackctlSessionForm.cpp" line="434"/>
+        <location filename="../qjackctlSessionForm.cpp" line="480"/>
+        <location filename="../qjackctlSessionForm.cpp" line="487"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="411"/>
+        <location filename="../qjackctlSessionForm.cpp" line="435"/>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
@@ -2376,17 +2376,17 @@ of all actual client connections?</source>
 «%1»</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="425"/>
+        <location filename="../qjackctlSessionForm.cpp" line="449"/>
         <source>%1: loading session...</source>
         <translation>%1: загружается сеанс...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="438"/>
+        <location filename="../qjackctlSessionForm.cpp" line="462"/>
         <source>%1: load session %2.</source>
         <translation>%1: загрузить сеанс %2.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="457"/>
+        <location filename="../qjackctlSessionForm.cpp" line="481"/>
         <source>A session already exists in this folder:
 
 &quot;%1&quot;
@@ -2399,7 +2399,7 @@ Are you sure to overwrite the existing session?</source>
 Вы уверены, что хотите перезаписать его?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="464"/>
+        <location filename="../qjackctlSessionForm.cpp" line="488"/>
         <source>This folder already exists and is not empty:
 
 &quot;%1&quot;
@@ -2412,24 +2412,29 @@ Are you sure to overwrite the existing folder?</source>
 Вы уверены, что хотите перезаписать существующую папку?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="481"/>
+        <location filename="../qjackctlSessionForm.cpp" line="505"/>
         <source>%1: saving session...</source>
         <translation>%1: сохраняется сеанс...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="510"/>
+        <location filename="../qjackctlSessionForm.cpp" line="534"/>
         <source>%1: save session %2.</source>
         <translation>%1: сохранить сеанс %2.</translation>
     </message>
     <message>
+        <location filename="../qjackctlSessionForm.cpp" line="651"/>
+        <source>(New infra-client)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSessionForm.cpp" line="99"/>
-        <location filename="../qjackctlSessionForm.cpp" line="677"/>
+        <location filename="../qjackctlSessionForm.cpp" line="755"/>
         <source>Save and &amp;Quit...</source>
         <translation>Сохранить и вы&amp;йти</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="102"/>
-        <location filename="../qjackctlSessionForm.cpp" line="680"/>
+        <location filename="../qjackctlSessionForm.cpp" line="758"/>
         <source>Save &amp;Template...</source>
         <translation>Сохранить &amp;шаблон</translation>
     </message>

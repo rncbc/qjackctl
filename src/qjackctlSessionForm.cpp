@@ -138,6 +138,9 @@ qjackctlSessionForm::qjackctlSessionForm (
 	QObject::connect(m_ui.RemoveInfraClientPushButton,
 		SIGNAL(clicked()),
 		SLOT(removeInfraClient()));
+	QObject::connect(m_ui.InfraClientListView->itemDelegate(),
+		SIGNAL(commitData(QWidget *)),
+		SLOT(editInfraClientCommit()));
 
 	// Start disabled.
 	stabilizeForm(false);
@@ -184,6 +187,24 @@ bool qjackctlSessionForm::queryClose (void)
 
 	// Maybe just save some splitter sizes...
 	if (m_pSetup && bQueryClose) {
+		// Rebuild infra-clients list...
+		m_pSession->clearInfraClients();
+		qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
+		int iItemCount = m_ui.InfraClientListView->topLevelItemCount();
+		for (int i = 0; i < iItemCount; ++i) {
+			QTreeWidgetItem *pItem = m_ui.InfraClientListView->topLevelItem(i);
+			if (pItem) {
+				const QString& sKey   = pItem->text(0);
+				const QString& sValue = pItem->text(1);
+				if (!sValue.isEmpty()) {
+					qjackctlSession::InfraClientItem *pInfraClientItem
+						= new qjackctlSession::InfraClientItem();
+					pInfraClientItem->client_name = sKey;
+					pInfraClientItem->client_command = sValue;
+					list.insert(sKey, pInfraClientItem);
+				}
+			}
+		}
 		// Save infra-clients table-view...
 		m_pSession->saveInfraClients(m_pSetup->settings());
 		m_pSetup->saveSplitterSizes(m_ui.InfraClientSplitter);
@@ -613,6 +634,7 @@ void qjackctlSessionForm::updateInfraClients (void)
 		pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
 		pItem->setText(0, pInfraClientItem->client_name);
 		pItem->setText(1, pInfraClientItem->client_command);
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
 	}
 }
 
@@ -626,7 +648,9 @@ void qjackctlSessionForm::addInfraClient (void)
 
 	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
 	pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
-	pItem->setText(0, tr("New Infra-client"));
+	pItem->setText(0, tr("(New infra-client)"));
+	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	m_ui.InfraClientListView->editItem(pItem, 0);
 }
 
 
@@ -635,6 +659,18 @@ void qjackctlSessionForm::editInfraClient (void)
 {
 #ifdef CONFIG_DEBUG
 	qDebug("qjackctlSessionForm::editInfraClient()");
+#endif
+
+	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
+	if (pItem)
+		m_ui.InfraClientListView->editItem(pItem, 1);
+}
+
+
+void qjackctlSessionForm::editInfraClientCommit (void)
+{
+#ifdef CONFIG_DEBUG
+	qDebug("qjackctlSessionForm::editInfraClientCommit()");
 #endif
 
 	// TODO: ...
@@ -684,14 +720,12 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.SaveSessionVersionCheckBox->setEnabled(bEnabled);
 	m_ui.UpdateSessionPushButton->setEnabled(bEnabled);
 
-	m_ui.InfraClientWidget->setEnabled(bEnabled);
-
-	if (bEnabled) {
-		selectInfraClient();
-	} else {
+	if (!bEnabled) {
 		m_pSession->clear();
 		m_ui.SessionTreeView->clear();
 	}
+
+	selectInfraClient();
 }
 
 
