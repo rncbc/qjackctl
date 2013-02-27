@@ -127,7 +127,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QSplitter" name="InfraClientSplitter">
+	<widget class="QSplitter" name="InfraClientSplitter">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
@@ -163,10 +163,10 @@
        </property>
       </column>
      </widget>
-     <widget class="QWidget" name="InfraClientWidget">
+	 <widget class="QWidget" name="InfraClientWidget">
       <layout class="QGridLayout">
        <item row="0" column="0" rowspan="4">
-        <widget class="QTreeWidget" name="InfraClientListView">
+		<widget class="QTreeWidget" name="InfraClientListView">
          <property name="toolTip">
           <string>Infra-clients / commands</string>
          </property>

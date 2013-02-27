@@ -35,6 +35,9 @@
 #include <QTreeWidget>
 #include <QHeaderView>
 
+#include <QLineEdit>
+#include <QToolButton>
+
 #include <QBitmap>
 #include <QPainter>
 
@@ -68,6 +71,142 @@ static void remove_dir_list ( const QList<QFileInfo>& list )
 			QFile::remove(sPath);
 		}
 	}
+}
+
+
+//-------------------------------------------------------------------------
+// qjackctlSessionInfraClientItemEditor
+
+qjackctlSessionInfraClientItemEditor::qjackctlSessionInfraClientItemEditor (
+	QWidget *pParent, const QModelIndex& index )
+	: QWidget(pParent), m_index(index)
+{
+	m_pItemEdit = new QLineEdit(/*this*/);
+	m_pResetButton = new QToolButton(/*this*/);
+	m_pResetButton->setFixedWidth(18);
+	m_pResetButton->setText("X");
+
+	QHBoxLayout *pLayout = new QHBoxLayout();
+	pLayout->setSpacing(0);
+	pLayout->setMargin(0);
+	pLayout->addWidget(m_pItemEdit);
+	pLayout->addWidget(m_pResetButton);
+	QWidget::setLayout(pLayout);
+
+	QWidget::setFocusPolicy(Qt::StrongFocus);
+	QWidget::setFocusProxy(m_pItemEdit);
+
+	QObject::connect(m_pItemEdit,
+		SIGNAL(editingFinished()),
+		SLOT(finish()));
+	QObject::connect(m_pResetButton,
+		SIGNAL(clicked()),
+		SLOT(clear()));
+}
+
+
+// Item text accessors.
+void qjackctlSessionInfraClientItemEditor::setText ( const QString& sText )
+{
+	m_pItemEdit->setText(sText);
+}
+
+
+QString qjackctlSessionInfraClientItemEditor::text (void) const
+{
+	return m_pItemEdit->text();
+}
+
+
+// Item text clear/toggler.
+void qjackctlSessionInfraClientItemEditor::clear (void)
+{
+	if (m_pItemEdit->text() == m_sDefaultText)
+		m_pItemEdit->clear();
+	else
+		m_pItemEdit->setText(m_sDefaultText);
+
+	m_pItemEdit->setFocus();
+}
+
+
+// Item text finish notification.
+void qjackctlSessionInfraClientItemEditor::finish (void)
+{
+	bool bBlockSignals = m_pItemEdit->blockSignals(true);
+	emit editingFinished();
+	m_index = QModelIndex();
+	m_sDefaultText.clear();
+	m_pItemEdit->blockSignals(bBlockSignals);
+}
+
+
+// Item text cancel notification.
+void qjackctlSessionInfraClientItemEditor::cancel (void)
+{
+	bool bBlockSignals = m_pItemEdit->blockSignals(true);
+	m_index = QModelIndex();
+	m_sDefaultText.clear();
+	emit editingFinished();
+	m_pItemEdit->blockSignals(bBlockSignals);
+}
+
+
+//-------------------------------------------------------------------------
+// qjackctlSessionInfraClientItemDelegate
+
+qjackctlSessionInfraClientItemDelegate::qjackctlSessionInfraClientItemDelegate (
+	QObject *pParent ) : QItemDelegate(pParent)
+{
+}
+
+
+QWidget *qjackctlSessionInfraClientItemDelegate::createEditor (
+	QWidget *pParent, const QStyleOptionViewItem& /*option*/,
+	const QModelIndex& index ) const
+{
+	qjackctlSessionInfraClientItemEditor *pItemEditor
+		= new qjackctlSessionInfraClientItemEditor(pParent, index);
+	pItemEditor->setDefaultText(
+		index.model()->data(index, Qt::DisplayRole).toString());
+	QObject::connect(pItemEditor,
+		SIGNAL(editingFinished()),
+		SLOT(commitEditor()));
+	return pItemEditor;
+}
+
+
+void qjackctlSessionInfraClientItemDelegate::setEditorData ( QWidget *pEditor,
+	const QModelIndex& index ) const
+{
+	qjackctlSessionInfraClientItemEditor *pItemEditor
+		= qobject_cast<qjackctlSessionInfraClientItemEditor *> (pEditor);
+	pItemEditor->setText(
+		index.model()->data(index, Qt::DisplayRole).toString());
+}
+
+
+void qjackctlSessionInfraClientItemDelegate::setModelData ( QWidget *pEditor,
+	QAbstractItemModel *pModel, const QModelIndex& index ) const
+{
+	qjackctlSessionInfraClientItemEditor *pItemEditor
+		= qobject_cast<qjackctlSessionInfraClientItemEditor *> (pEditor);
+	pModel->setData(index, pItemEditor->text());
+}
+
+
+void qjackctlSessionInfraClientItemDelegate::commitEditor (void)
+{
+	qjackctlSessionInfraClientItemEditor *pItemEditor
+		= qobject_cast<qjackctlSessionInfraClientItemEditor *> (sender());
+
+	const QString& sText = pItemEditor->text();
+	const QString& sDefaultText = pItemEditor->defaultText();
+
+	if (sText != sDefaultText)
+		emit commitData(pItemEditor);
+
+	emit closeEditor(pItemEditor);
 }
 
 
@@ -129,6 +268,8 @@ qjackctlSessionForm::qjackctlSessionForm (
 	pHeader->resizeSection(0, 120); // Infra-client
 	pHeader->setStretchLastSection(true);
 
+	m_ui.InfraClientListView->setItemDelegate(
+		new qjackctlSessionInfraClientItemDelegate(m_ui.InfraClientListView));
 	m_ui.InfraClientListView->sortItems(0, Qt::AscendingOrder);
 
 	// UI connections...
@@ -631,7 +772,7 @@ void qjackctlSessionForm::updateSession (void)
 // Update/populate infra-clients commands list view.
 void qjackctlSessionForm::updateInfraClients (void)
 {
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlSessionForm::updateInfraClients()");
 #endif
 
@@ -729,8 +870,8 @@ void qjackctlSessionForm::editInfraClientCommit (void)
 				pInfraClientItem = iter.value();
 				pInfraClientItem->client_command = sValue;
 			}
-			pItem->setIcon(0,
-				iconStatus(QIcon(":/images/client1.png"), sValue.isEmpty()));
+			pItem->setIcon(0, iconStatus(QIcon(":/images/client1.png"),
+				pInfraClientItem->client_command.isEmpty()));
 		}
 	}
 }
@@ -748,11 +889,11 @@ void qjackctlSessionForm::removeInfraClient (void)
 		const QString& sKey = pItem->text(0);
 		qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
 		qjackctlSession::InfraClientList::Iterator iter	= list.find(sKey);
-		if (iter != list.end())
+		if (iter != list.end()) {
 			list.erase(iter);
+			updateInfraClients();
+		}
 	}
-
-	updateInfraClients();
 }
 
 

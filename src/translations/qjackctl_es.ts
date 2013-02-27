@@ -1963,7 +1963,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>(New infra-client)</source>
+        <source>New infra-client</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

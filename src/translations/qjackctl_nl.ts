@@ -2419,7 +2419,7 @@ van alle huidige client verbindingen?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="48"/>
-        <location filename="../qjackctlSessionForm.cpp" line="745"/>
+        <location filename="../qjackctlSessionForm.cpp" line="945"/>
         <source>&amp;Load...</source>
         <translation>&amp;Laden…</translation>
     </message>
@@ -2430,7 +2430,7 @@ van alle huidige client verbindingen?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="61"/>
-        <location filename="../qjackctlSessionForm.cpp" line="89"/>
+        <location filename="../qjackctlSessionForm.cpp" line="230"/>
         <source>&amp;Recent</source>
         <translation>Vo&amp;rige</translation>
     </message>
@@ -2446,13 +2446,13 @@ van alle huidige client verbindingen?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="97"/>
-        <location filename="../qjackctlSessionForm.cpp" line="763"/>
+        <location filename="../qjackctlSessionForm.cpp" line="963"/>
         <source>&amp;Versioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="120"/>
-        <location filename="../qjackctlSessionForm.cpp" line="769"/>
+        <location filename="../qjackctlSessionForm.cpp" line="969"/>
         <source>Re&amp;fresh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2511,8 +2511,8 @@ van alle huidige client verbindingen?</translation>
         <translation type="obsolete">&amp;Verwijderen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="751"/>
+        <location filename="../qjackctlSessionForm.cpp" line="236"/>
+        <location filename="../qjackctlSessionForm.cpp" line="951"/>
         <source>&amp;Save...</source>
         <translation>&amp;Bewaar…</translation>
     </message>
@@ -2554,51 +2554,51 @@ van alle huidige client verbindingen?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="84"/>
-        <location filename="../qjackctlSessionForm.cpp" line="92"/>
+        <location filename="../qjackctlSessionForm.cpp" line="233"/>
         <source>&amp;Save</source>
         <translation type="unfinished">&amp;Bewaren</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="281"/>
-        <location filename="../qjackctlSessionForm.cpp" line="298"/>
+        <location filename="../qjackctlSessionForm.cpp" line="435"/>
+        <location filename="../qjackctlSessionForm.cpp" line="452"/>
         <source>Load Session</source>
         <translation>Laad sessie</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="286"/>
-        <location filename="../qjackctlSessionForm.cpp" line="351"/>
+        <location filename="../qjackctlSessionForm.cpp" line="440"/>
+        <location filename="../qjackctlSessionForm.cpp" line="505"/>
         <source>Session directory</source>
         <translation>Sessie map</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="335"/>
+        <location filename="../qjackctlSessionForm.cpp" line="489"/>
         <source>Save Session</source>
         <translation>Bewaar Sessie</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="338"/>
+        <location filename="../qjackctlSessionForm.cpp" line="492"/>
         <source>and Quit</source>
         <translation>en Sluit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="341"/>
+        <location filename="../qjackctlSessionForm.cpp" line="495"/>
         <source>Template</source>
         <translation>Sjabloon</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="409"/>
+        <location filename="../qjackctlSessionForm.cpp" line="563"/>
         <source>&amp;Clear</source>
         <translation>&amp;Wissen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="434"/>
-        <location filename="../qjackctlSessionForm.cpp" line="480"/>
-        <location filename="../qjackctlSessionForm.cpp" line="487"/>
+        <location filename="../qjackctlSessionForm.cpp" line="588"/>
+        <location filename="../qjackctlSessionForm.cpp" line="634"/>
+        <location filename="../qjackctlSessionForm.cpp" line="641"/>
         <source>Warning</source>
         <translation>Opgelet</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="435"/>
+        <location filename="../qjackctlSessionForm.cpp" line="589"/>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
@@ -2607,17 +2607,17 @@ van alle huidige client verbindingen?</translation>
 « %1 »</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="449"/>
+        <location filename="../qjackctlSessionForm.cpp" line="603"/>
         <source>%1: loading session...</source>
         <translation>%1 : sessie laden…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="462"/>
+        <location filename="../qjackctlSessionForm.cpp" line="616"/>
         <source>%1: load session %2.</source>
         <translation>%1: sessie laden %2.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="481"/>
+        <location filename="../qjackctlSessionForm.cpp" line="635"/>
         <source>A session already exists in this folder:
 
 &quot;%1&quot;
@@ -2630,7 +2630,7 @@ Are you sure to overwrite the existing session?</source>
 Bent u zeker dat u deze bestaande sessie wil overschrijven ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="488"/>
+        <location filename="../qjackctlSessionForm.cpp" line="642"/>
         <source>This folder already exists and is not empty:
 
 &quot;%1&quot;
@@ -2643,29 +2643,29 @@ Are you sure to overwrite the existing folder?</source>
 Bent u zeker dat u de bestaande map wil vervangen ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="505"/>
+        <location filename="../qjackctlSessionForm.cpp" line="659"/>
         <source>%1: saving session...</source>
         <translation>%1 : sessie wordt bewaard…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="534"/>
+        <location filename="../qjackctlSessionForm.cpp" line="688"/>
         <source>%1: save session %2.</source>
         <translation>%1 : sessie wordt bewaard %2.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="651"/>
-        <source>(New infra-client)</source>
+        <location filename="../qjackctlSessionForm.cpp" line="816"/>
+        <source>New infra-client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="99"/>
-        <location filename="../qjackctlSessionForm.cpp" line="755"/>
+        <location filename="../qjackctlSessionForm.cpp" line="240"/>
+        <location filename="../qjackctlSessionForm.cpp" line="955"/>
         <source>Save and &amp;Quit...</source>
         <translation type="unfinished">&amp;Bewaren en afsluiten…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="102"/>
-        <location filename="../qjackctlSessionForm.cpp" line="758"/>
+        <location filename="../qjackctlSessionForm.cpp" line="243"/>
+        <location filename="../qjackctlSessionForm.cpp" line="958"/>
         <source>Save &amp;Template...</source>
         <translation>Bewaar S&amp;jabloon…</translation>
     </message>

@@ -2078,7 +2078,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="48"/>
-        <location filename="../qjackctlSessionForm.cpp" line="745"/>
+        <location filename="../qjackctlSessionForm.cpp" line="945"/>
         <source>&amp;Load...</source>
         <translation>読み込み(&amp;L)...</translation>
     </message>
@@ -2089,7 +2089,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="61"/>
-        <location filename="../qjackctlSessionForm.cpp" line="89"/>
+        <location filename="../qjackctlSessionForm.cpp" line="230"/>
         <source>&amp;Recent</source>
         <translation type="unfinished">最近のセッション(&amp;R)</translation>
     </message>
@@ -2100,7 +2100,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="84"/>
-        <location filename="../qjackctlSessionForm.cpp" line="92"/>
+        <location filename="../qjackctlSessionForm.cpp" line="233"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
@@ -2111,7 +2111,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="97"/>
-        <location filename="../qjackctlSessionForm.cpp" line="763"/>
+        <location filename="../qjackctlSessionForm.cpp" line="963"/>
         <source>&amp;Versioning</source>
         <translation type="unfinished">バージョン(&amp;V)</translation>
     </message>
@@ -2122,7 +2122,7 @@ of all actual client connections?</source>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="120"/>
-        <location filename="../qjackctlSessionForm.cpp" line="769"/>
+        <location filename="../qjackctlSessionForm.cpp" line="969"/>
         <source>Re&amp;fresh</source>
         <translation type="unfinished">更新(&amp;F)</translation>
     </message>
@@ -2196,64 +2196,64 @@ of all actual client connections?</source>
         <translation type="obsolete">削除(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="95"/>
-        <location filename="../qjackctlSessionForm.cpp" line="751"/>
+        <location filename="../qjackctlSessionForm.cpp" line="236"/>
+        <location filename="../qjackctlSessionForm.cpp" line="951"/>
         <source>&amp;Save...</source>
         <translation>保存(&amp;S)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="99"/>
-        <location filename="../qjackctlSessionForm.cpp" line="755"/>
+        <location filename="../qjackctlSessionForm.cpp" line="240"/>
+        <location filename="../qjackctlSessionForm.cpp" line="955"/>
         <source>Save and &amp;Quit...</source>
         <translation>保存して終了(&amp;Q)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="102"/>
-        <location filename="../qjackctlSessionForm.cpp" line="758"/>
+        <location filename="../qjackctlSessionForm.cpp" line="243"/>
+        <location filename="../qjackctlSessionForm.cpp" line="958"/>
         <source>Save &amp;Template...</source>
         <translation>テンプレートを保存(&amp;T)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="281"/>
-        <location filename="../qjackctlSessionForm.cpp" line="298"/>
+        <location filename="../qjackctlSessionForm.cpp" line="435"/>
+        <location filename="../qjackctlSessionForm.cpp" line="452"/>
         <source>Load Session</source>
         <translation>セッションをロード</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="286"/>
-        <location filename="../qjackctlSessionForm.cpp" line="351"/>
+        <location filename="../qjackctlSessionForm.cpp" line="440"/>
+        <location filename="../qjackctlSessionForm.cpp" line="505"/>
         <source>Session directory</source>
         <translation type="unfinished">セッションのディレクトリ</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="335"/>
+        <location filename="../qjackctlSessionForm.cpp" line="489"/>
         <source>Save Session</source>
         <translation type="unfinished">セッションの保存</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="338"/>
+        <location filename="../qjackctlSessionForm.cpp" line="492"/>
         <source>and Quit</source>
         <translation type="unfinished">そして終了</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="341"/>
+        <location filename="../qjackctlSessionForm.cpp" line="495"/>
         <source>Template</source>
         <translation type="unfinished">テンプレート</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="409"/>
+        <location filename="../qjackctlSessionForm.cpp" line="563"/>
         <source>&amp;Clear</source>
         <translation>クリア(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="434"/>
-        <location filename="../qjackctlSessionForm.cpp" line="480"/>
-        <location filename="../qjackctlSessionForm.cpp" line="487"/>
+        <location filename="../qjackctlSessionForm.cpp" line="588"/>
+        <location filename="../qjackctlSessionForm.cpp" line="634"/>
+        <location filename="../qjackctlSessionForm.cpp" line="641"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="435"/>
+        <location filename="../qjackctlSessionForm.cpp" line="589"/>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
@@ -2262,17 +2262,17 @@ of all actual client connections?</source>
 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="449"/>
+        <location filename="../qjackctlSessionForm.cpp" line="603"/>
         <source>%1: loading session...</source>
         <translation type="unfinished">%1: セッションをロードしています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="462"/>
+        <location filename="../qjackctlSessionForm.cpp" line="616"/>
         <source>%1: load session %2.</source>
         <translation type="unfinished">%1: セッションのロード %2。</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="481"/>
+        <location filename="../qjackctlSessionForm.cpp" line="635"/>
         <source>A session already exists in this folder:
 
 &quot;%1&quot;
@@ -2285,7 +2285,7 @@ Are you sure to overwrite the existing session?</source>
 存在するセッションを上書きしますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="488"/>
+        <location filename="../qjackctlSessionForm.cpp" line="642"/>
         <source>This folder already exists and is not empty:
 
 &quot;%1&quot;
@@ -2298,18 +2298,18 @@ Are you sure to overwrite the existing folder?</source>
 存在するフォルダーを上書きしますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="505"/>
+        <location filename="../qjackctlSessionForm.cpp" line="659"/>
         <source>%1: saving session...</source>
         <translation type="unfinished">%1: セッションを保存しています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="534"/>
+        <location filename="../qjackctlSessionForm.cpp" line="688"/>
         <source>%1: save session %2.</source>
         <translation type="unfinished">%1: セッションの保存 %2。</translation>
     </message>
     <message>
-        <location filename="../qjackctlSessionForm.cpp" line="651"/>
-        <source>(New infra-client)</source>
+        <location filename="../qjackctlSessionForm.cpp" line="816"/>
+        <source>New infra-client</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
