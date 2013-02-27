@@ -82,6 +82,8 @@ qjackctlSessionForm::qjackctlSessionForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
+	m_pSetup = NULL;
+
 	// Common (sigleton) session object.
 	m_pSession = new qjackctlSession();
 
@@ -115,8 +117,19 @@ qjackctlSessionForm::qjackctlSessionForm (
 	pHeader->resizeSection(0, 200); // Client/Ports
 	pHeader->resizeSection(1, 40);  // UUID
 	pHeader->setStretchLastSection(true);
-	
-	m_pSetup = NULL;
+
+	// Infra-client list view...
+	pHeader = m_ui.InfraClientListView->header();
+//	pHeader->setDefaultAlignment(Qt::AlignLeft);
+#if QT_VERSION >= 0x050000
+//	pHeader->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
+//	pHeader->setResizeMode(QHeaderView::ResizeToContents);
+#endif
+	pHeader->resizeSection(0, 120); // Infra-client
+	pHeader->setStretchLastSection(true);
+
+	m_ui.InfraClientListView->sortItems(0, Qt::AscendingOrder);
 
 	// UI connections...
 	QObject::connect(m_ui.LoadSessionPushButton,
@@ -563,9 +576,9 @@ void qjackctlSessionForm::updateSessionView (void)
 
 	QList<QTreeWidgetItem *> items;
 
-	QIcon iconClient(":/images/client1.png");
-	QIcon iconPort(":/images/port1.png");
-	QIcon iconConnect(":/images/connect1.png");
+	const QIcon iconClient(":/images/client1.png");
+	const QIcon iconPort(":/images/port1.png");
+	const QIcon iconConnect(":/images/connect1.png");
 
 	qjackctlSession::ClientList::ConstIterator iterClient
 		= m_pSession->clients().constBegin();
@@ -622,7 +635,12 @@ void qjackctlSessionForm::updateInfraClients (void)
 	qDebug("qjackctlSessionForm::updateInfraClients()");
 #endif
 
+	int iOldItem = m_ui.InfraClientListView->indexOfTopLevelItem(
+		m_ui.InfraClientListView->currentItem());
+
 	m_ui.InfraClientListView->clear();
+
+	const QIcon iconClient(":/images/client1.png");
 
 	QTreeWidgetItem *pItem = NULL;
 	qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
@@ -632,9 +650,17 @@ void qjackctlSessionForm::updateInfraClients (void)
 	for( ; iter != iter_end; ++iter) {
 		qjackctlSession::InfraClientItem *pInfraClientItem = iter.value();
 		pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
+		pItem->setIcon(0, iconStatus(iconClient,
+			pInfraClientItem->client_command.isEmpty()));
 		pItem->setText(0, pInfraClientItem->client_name);
 		pItem->setText(1, pInfraClientItem->client_command);
 		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	}
+
+	int iItemCount = m_ui.InfraClientListView->topLevelItemCount();
+	if (iOldItem >= 0 && iOldItem < iItemCount) {
+		m_ui.InfraClientListView->setCurrentItem(
+			m_ui.InfraClientListView->topLevelItem(iOldItem));
 	}
 }
 
@@ -642,14 +668,27 @@ void qjackctlSessionForm::updateInfraClients (void)
 // Add a new infra-client entry.
 void qjackctlSessionForm::addInfraClient (void)
 {
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlSessionForm::addInfraClient()");
 #endif
 
-	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
-	pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
-	pItem->setText(0, tr("(New infra-client)"));
-	pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	const QString& sNewInfraClient = tr("New infra-client");
+
+	QTreeWidgetItem *pItem = NULL;
+
+	const QList<QTreeWidgetItem *>& items
+		= m_ui.InfraClientListView->findItems(sNewInfraClient, Qt::MatchExactly);
+	if (items.isEmpty()) {
+		pItem = m_ui.InfraClientListView->currentItem();
+		pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
+		pItem->setIcon(0,
+			iconStatus(QIcon(":/images/client1.png"), true));
+		pItem->setText(0, sNewInfraClient);
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	} else {
+		pItem = items.first();
+	}
+
 	m_ui.InfraClientListView->editItem(pItem, 0);
 }
 
@@ -657,7 +696,7 @@ void qjackctlSessionForm::addInfraClient (void)
 // Edit current infra-client entry.
 void qjackctlSessionForm::editInfraClient (void)
 {
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlSessionForm::editInfraClient()");
 #endif
 
@@ -669,18 +708,38 @@ void qjackctlSessionForm::editInfraClient (void)
 
 void qjackctlSessionForm::editInfraClientCommit (void)
 {
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlSessionForm::editInfraClientCommit()");
 #endif
 
-	// TODO: ...
+	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
+	if (pItem) {
+		const QString& sKey = pItem->text(0);
+		if (!sKey.isEmpty()) {
+			const QString& sValue = pItem->text(1);
+			qjackctlSession::InfraClientItem *pInfraClientItem = NULL;
+			qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
+			qjackctlSession::InfraClientList::Iterator iter	= list.find(sKey);
+			if (iter == list.end()) {
+				pInfraClientItem = new qjackctlSession::InfraClientItem();
+				pInfraClientItem->client_name = sKey;
+				pInfraClientItem->client_command = sValue;
+				list.insert(sKey, pInfraClientItem);
+			} else {
+				pInfraClientItem = iter.value();
+				pInfraClientItem->client_command = sValue;
+			}
+			pItem->setIcon(0,
+				iconStatus(QIcon(":/images/client1.png"), sValue.isEmpty()));
+		}
+	}
 }
 
 
 // Remove current infra-client entry.
 void qjackctlSessionForm::removeInfraClient (void)
 {
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlSessionForm::removeInfraClient()");
 #endif
 
@@ -700,7 +759,7 @@ void qjackctlSessionForm::removeInfraClient (void)
 // Select current infra-client entry.
 void qjackctlSessionForm::selectInfraClient (void)
 {
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlSessionForm::selectInfraClient()");
 #endif
 

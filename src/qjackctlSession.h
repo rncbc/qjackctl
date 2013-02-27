@@ -115,6 +115,9 @@ public:
 	// Clear infra-client table.
 	void clearInfraClients();
 
+	// Check whether a given JACK client name exists...
+	bool isJackClient(const QString& sClientName) const;
+
 protected:
 
 	// File methods.

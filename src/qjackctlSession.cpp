@@ -194,13 +194,20 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 	ClientList::ConstIterator iter = m_clients.constBegin();
 	const ClientList::ConstIterator& iter_end = m_clients.constEnd();
 
-	for (; iter != iter_end; ++iter) {
+	for ( ; iter != iter_end; ++iter) {
 		ClientItem *pClientItem = iter.value();
 		if (pClientItem->client_command.isEmpty()) {
+			const QString& sClientName = pClientItem->client_name;
 			InfraClientItem *pInfraClientItem
-				= m_infra_clients.value(pClientItem->client_name, NULL);
-			if (pInfraClientItem)
+				= m_infra_clients.value(sClientName, NULL);
+			if (pInfraClientItem) {
 				pClientItem->client_command = pInfraClientItem->client_command;
+			} else {
+				pInfraClientItem = new InfraClientItem();
+				pInfraClientItem->client_name = sClientName;
+				pInfraClientItem->client_command = pClientItem->client_command;
+				m_infra_clients.insert(sClientName, pInfraClientItem);
+			}
 		}
 	}
 
@@ -217,25 +224,34 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 		return false;
 
 	// Start/load clients...
-	int msecs = 200;
 	ClientList::ConstIterator iter = m_clients.constBegin();
-	for ( ; iter != m_clients.constEnd(); ++iter) {
-		const ClientItem *pClientItem = iter.value();
-		if (pClientItem->client_command.isEmpty())
-			continue;
-		const QString sClientDir
-			= sSessionPath + pClientItem->client_name + '/';
-		QString sCommand = pClientItem->client_command;
-		sCommand.replace("${SESSION_DIR}", sClientDir);
-		if (QProcess::startDetached(sCommand))
-			msecs += 200;
-	}
+	const ClientList::ConstIterator& iter_end = m_clients.constEnd();
 
-	// Wait a litle bit before continue...
-	QTime t;
-	t.start();
-	while (t.elapsed() < msecs)
-		QApplication::processEvents(/* QEventLoop::ExcludeUserInputEvents */);
+	for ( ; iter != iter_end; ++iter) {
+		const ClientItem *pClientItem = iter.value();
+		const QString& sClientName = pClientItem->client_name;
+		QString sCommand = pClientItem->client_command;
+		if (sCommand.isEmpty()) {
+			// Maybe a registered infra-client command...
+			InfraClientItem *pInfraClientItem
+				= m_infra_clients.value(sClientName, NULL);
+			if (pInfraClientItem && !isJackClient(sClientName))
+				sCommand = pInfraClientItem->client_command;
+		}
+		else
+		if (!pClientItem->client_uuid.isEmpty()){
+			// Sure a legit session-client command...
+			const QString& sClientDir
+				= sSessionPath + pClientItem->client_name + '/';
+			sCommand.replace("${SESSION_DIR}", sClientDir);
+		}
+		// Launch command and wait a litle bit before continue...
+		if (!sCommand.isEmpty() && QProcess::startDetached(sCommand)) {
+			QTime time; time.start();
+			while (time.elapsed() < 200)
+				QApplication::processEvents();
+		}
+	}
 
 	// Initial reconnection.
 	update();
@@ -261,7 +277,9 @@ bool qjackctlSession::update (void)
 
 	// Now, make the saved connections...
 	ClientList::ConstIterator iter = m_clients.constBegin();
-	for ( ; iter != m_clients.constEnd(); ++iter) {
+	const ClientList::ConstIterator& iter_end = m_clients.constEnd();
+
+	for ( ; iter != iter_end; ++iter) {
 		ClientItem *pClientItem = iter.value();
 		if (pClientItem->connected < 1)
 			continue;
@@ -445,8 +463,9 @@ bool qjackctlSession::saveFile ( const QString& sFilename )
 
 	// Save clients spec...
 	ClientList::ConstIterator iter = m_clients.constBegin();
+	const ClientList::ConstIterator& iter_end = m_clients.constEnd();
 
-	for (; iter != m_clients.constEnd(); ++iter) {
+	for ( ; iter != iter_end; ++iter) {
 
 		const ClientItem *pClientItem = iter.value();
 		QDomElement eClient = doc.createElement("client");
@@ -546,6 +565,45 @@ void qjackctlSession::clearInfraClients (void)
 {
 	qDeleteAll(m_infra_clients);
 	m_infra_clients.clear();
+}
+
+
+// Check whether a given JACK client name exists...
+bool qjackctlSession::isJackClient ( const QString& sClientName ) const
+{
+	const QByteArray aClientName = sClientName.toUtf8();
+
+#ifdef CONFIG_JACK_SESSION
+
+	if (jack_get_uuid_for_client_name) {
+
+		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+		if (pMainForm == NULL)
+			return false;
+
+		jack_client_t *pJackClient = pMainForm->jackClient();
+		if (pJackClient == NULL)
+			return false;
+
+		const char *client_uuid = jack_get_uuid_for_client_name(
+			pJackClient, aClientName.constData());
+		if (client_uuid) {
+			jack_free((void *) client_uuid);
+			return true;
+		}
+
+		return false;
+	}
+#endif
+
+	jack_client_t *pJackClient = jack_client_open(aClientName.constData(),
+		jack_options_t(JackNoStartServer | JackUseExactName), NULL);
+	if (pJackClient) {
+		jack_client_close(pJackClient);
+		return true;
+	}
+
+	return false;
 }
 
 
