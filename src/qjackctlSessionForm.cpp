@@ -82,14 +82,22 @@ qjackctlSessionInfraClientItemEditor::qjackctlSessionInfraClientItemEditor (
 	: QWidget(pParent), m_index(index)
 {
 	m_pItemEdit = new QLineEdit(/*this*/);
+	if (index.column() == 1) {
+		m_pBrowseButton = new QToolButton(/*this*/);
+		m_pBrowseButton->setFixedWidth(18);
+		m_pBrowseButton->setText("...");
+	}
+	else m_pBrowseButton = NULL;
 	m_pResetButton = new QToolButton(/*this*/);
 	m_pResetButton->setFixedWidth(18);
-	m_pResetButton->setText("X");
+	m_pResetButton->setText("x");
 
 	QHBoxLayout *pLayout = new QHBoxLayout();
 	pLayout->setSpacing(0);
 	pLayout->setMargin(0);
 	pLayout->addWidget(m_pItemEdit);
+	if (m_pBrowseButton)
+		pLayout->addWidget(m_pBrowseButton);
 	pLayout->addWidget(m_pResetButton);
 	QWidget::setLayout(pLayout);
 
@@ -98,10 +106,16 @@ qjackctlSessionInfraClientItemEditor::qjackctlSessionInfraClientItemEditor (
 
 	QObject::connect(m_pItemEdit,
 		SIGNAL(editingFinished()),
-		SLOT(finish()));
+		SLOT(finishSlot()));
+
+	if (m_pBrowseButton)
+		QObject::connect(m_pBrowseButton,
+			SIGNAL(clicked()),
+			SLOT(browseSlot()));
+
 	QObject::connect(m_pResetButton,
 		SIGNAL(clicked()),
-		SLOT(clear()));
+		SLOT(resetSlot()));
 }
 
 
@@ -118,8 +132,20 @@ QString qjackctlSessionInfraClientItemEditor::text (void) const
 }
 
 
+// Item command browser.
+void qjackctlSessionInfraClientItemEditor::browseSlot (void)
+{
+	bool bBlockSignals = m_pItemEdit->blockSignals(true);
+	const QString& sCommand
+		= QFileDialog::getOpenFileName(parentWidget(), tr("Infra-command"));
+	if (!sCommand.isEmpty())
+		m_pItemEdit->setText(sCommand);
+	m_pItemEdit->blockSignals(bBlockSignals);
+}
+
+
 // Item text clear/toggler.
-void qjackctlSessionInfraClientItemEditor::clear (void)
+void qjackctlSessionInfraClientItemEditor::resetSlot (void)
 {
 	if (m_pItemEdit->text() == m_sDefaultText)
 		m_pItemEdit->clear();
@@ -131,10 +157,10 @@ void qjackctlSessionInfraClientItemEditor::clear (void)
 
 
 // Item text finish notification.
-void qjackctlSessionInfraClientItemEditor::finish (void)
+void qjackctlSessionInfraClientItemEditor::finishSlot (void)
 {
 	bool bBlockSignals = m_pItemEdit->blockSignals(true);
-	emit editingFinished();
+	emit finishSignal();
 	m_index = QModelIndex();
 	m_sDefaultText.clear();
 	m_pItemEdit->blockSignals(bBlockSignals);
@@ -142,12 +168,12 @@ void qjackctlSessionInfraClientItemEditor::finish (void)
 
 
 // Item text cancel notification.
-void qjackctlSessionInfraClientItemEditor::cancel (void)
+void qjackctlSessionInfraClientItemEditor::cancelSlot (void)
 {
 	bool bBlockSignals = m_pItemEdit->blockSignals(true);
 	m_index = QModelIndex();
 	m_sDefaultText.clear();
-	emit editingFinished();
+	emit finishSignal();
 	m_pItemEdit->blockSignals(bBlockSignals);
 }
 
@@ -758,6 +784,9 @@ void qjackctlSessionForm::updateSessionView (void)
 
 	m_ui.SessionTreeView->insertTopLevelItems(0, items);
 	m_ui.SessionTreeView->expandAll();
+
+	// Special regard on this one... o.O
+	updateInfraClients();
 }
 
 
@@ -813,7 +842,7 @@ void qjackctlSessionForm::addInfraClient (void)
 	qDebug("qjackctlSessionForm::addInfraClient()");
 #endif
 
-	const QString& sNewInfraClient = tr("New infra-client");
+	const QString& sNewInfraClient = tr("New Client");
 
 	QTreeWidgetItem *pItem = NULL;
 

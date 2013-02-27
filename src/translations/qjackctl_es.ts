@@ -1963,7 +1963,14 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New infra-client</source>
+        <source>New Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>qjackctlSessionInfraClientItemEditor</name>
+    <message>
+        <source>Infra-command</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

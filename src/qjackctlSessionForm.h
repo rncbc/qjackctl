@@ -71,22 +71,22 @@ public:
 
 signals:
 
-	void editingFinished();
-	void editingCanceled();
-
-public slots:
-
-	void clear();
+	void finishSignal();
+	void cancelSignal();
 
 protected slots:
 
-	void finish();
-	void cancel();
+	void browseSlot();
+	void resetSlot();
+
+	void finishSlot();
+	void cancelSlot();
 
 private:
 
 	// Instance variables.
 	QLineEdit *m_pItemEdit;
+	QToolButton *m_pBrowseButton;
 	QToolButton *m_pResetButton;
 	QString m_sDefaultText;
 	QModelIndex m_index;
