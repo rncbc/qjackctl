@@ -203,7 +203,7 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 			if (pInfraClientItem) {
 				pClientItem->client_command = pInfraClientItem->client_command;
 			} else {
-				pInfraClientItem = new InfraClientItem();
+				pInfraClientItem = new InfraClientItem;
 				pInfraClientItem->client_name = sClientName;
 				pInfraClientItem->client_command = pClientItem->client_command;
 				m_infra_clients.insert(sClientName, pInfraClientItem);
@@ -532,7 +532,7 @@ void qjackctlSession::loadInfraClients ( QSettings& settings )
 		const QString& sKey = iter.next();
 		const QString& sValue = settings.value(sKey).toString();
 		if (!sValue.isEmpty()) {
-			InfraClientItem *pInfraClientItem = new InfraClientItem();
+			InfraClientItem *pInfraClientItem = new InfraClientItem;
 			pInfraClientItem->client_name = sKey;
 			pInfraClientItem->client_command = sValue;
 			m_infra_clients.insert(sKey, pInfraClientItem);

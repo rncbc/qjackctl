@@ -373,11 +373,11 @@ bool qjackctlSessionForm::queryClose (void)
 		for (int i = 0; i < iItemCount; ++i) {
 			QTreeWidgetItem *pItem = m_ui.InfraClientListView->topLevelItem(i);
 			if (pItem) {
-				const QString& sKey   = pItem->text(0);
+				const QString& sKey = pItem->text(0);
 				const QString& sValue = pItem->text(1);
 				if (!sValue.isEmpty()) {
 					qjackctlSession::InfraClientItem *pInfraClientItem
-						= new qjackctlSession::InfraClientItem();
+						= new qjackctlSession::InfraClientItem;
 					pInfraClientItem->client_name = sKey;
 					pInfraClientItem->client_command = sValue;
 					list.insert(sKey, pInfraClientItem);
@@ -893,7 +893,7 @@ void qjackctlSessionForm::editInfraClientCommit (void)
 			qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
 			qjackctlSession::InfraClientList::Iterator iter	= list.find(sKey);
 			if (iter == list.end()) {
-				pInfraClientItem = new qjackctlSession::InfraClientItem();
+				pInfraClientItem = new qjackctlSession::InfraClientItem;
 				pInfraClientItem->client_name = sKey;
 				pInfraClientItem->client_command = sValue;
 				list.insert(sKey, pInfraClientItem);
