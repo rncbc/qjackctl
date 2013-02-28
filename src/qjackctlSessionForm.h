@@ -30,6 +30,7 @@
 
 #include "ui_qjackctlSessionForm.h"
 
+#include <QItemDelegate>
 #include <QFileInfo>
 
 // Forward declarations.
@@ -38,10 +39,6 @@ class qjackctlSetup;
 
 class QMenu;
 class QIcon;
-
-
-#include <QItemDelegate>
-
 class QLineEdit;
 class QToolButton;
 
@@ -57,7 +54,7 @@ public:
 
 	// Constructor.
 	qjackctlSessionInfraClientItemEditor(
-		QWidget *pParent = NULL, const QModelIndex& index = QModelIndex());
+		QWidget *pParent, const QModelIndex& index);
 
 	// Shortcut text accessors.
 	void setText(const QString& sText);
@@ -72,24 +69,23 @@ public:
 signals:
 
 	void finishSignal();
-	void cancelSignal();
 
 protected slots:
 
 	void browseSlot();
 	void resetSlot();
-
 	void finishSlot();
-	void cancelSlot();
 
 private:
 
 	// Instance variables.
-	QLineEdit *m_pItemEdit;
+	QModelIndex m_index;
+
+	QLineEdit   *m_pItemEdit;
 	QToolButton *m_pBrowseButton;
 	QToolButton *m_pResetButton;
+
 	QString m_sDefaultText;
-	QModelIndex m_index;
 };
 
 
@@ -173,20 +169,23 @@ protected slots:
 	void updateRecentMenu();
 	void clearRecentMenu();
 
+	void sessionViewContextMenu(const QPoint& pos);
+
 	void addInfraClient();
 	void editInfraClient();
 	void editInfraClientCommit();
 	void removeInfraClient();
 
 	void selectInfraClient();
+	void updateInfraClients();
+
+	void infraClientContextMenu(const QPoint& pos);
 
 protected:
 
 	void showEvent(QShowEvent *);
 	void hideEvent(QHideEvent *);
 	void closeEvent(QCloseEvent *);
-
-	void contextMenuEvent(QContextMenuEvent *);
 
 	void keyPressEvent(QKeyEvent *);
 
@@ -198,7 +197,6 @@ protected:
 	void updateRecent(const QString& sSessionDir);
 
 	void updateSessionView();
-	void updateInfraClients();
 
 	static QIcon iconStatus(const QIcon& icon, bool bStatus);
 

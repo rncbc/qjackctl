@@ -167,17 +167,6 @@ void qjackctlSessionInfraClientItemEditor::finishSlot (void)
 }
 
 
-// Item text cancel notification.
-void qjackctlSessionInfraClientItemEditor::cancelSlot (void)
-{
-	bool bBlockSignals = m_pItemEdit->blockSignals(true);
-	m_index = QModelIndex();
-	m_sDefaultText.clear();
-	emit finishSignal();
-	m_pItemEdit->blockSignals(bBlockSignals);
-}
-
-
 //-------------------------------------------------------------------------
 // qjackctlSessionInfraClientItemDelegate
 
@@ -196,7 +185,7 @@ QWidget *qjackctlSessionInfraClientItemDelegate::createEditor (
 	pItemEditor->setDefaultText(
 		index.model()->data(index, Qt::DisplayRole).toString());
 	QObject::connect(pItemEditor,
-		SIGNAL(editingFinished()),
+		SIGNAL(finishSignal()),
 		SLOT(commitEditor()));
 	return pItemEditor;
 }
@@ -283,6 +272,8 @@ qjackctlSessionForm::qjackctlSessionForm (
 	pHeader->resizeSection(1, 40);  // UUID
 	pHeader->setStretchLastSection(true);
 
+	m_ui.SessionTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
+
 	// Infra-client list view...
 	pHeader = m_ui.InfraClientListView->header();
 //	pHeader->setDefaultAlignment(Qt::AlignLeft);
@@ -296,6 +287,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 
 	m_ui.InfraClientListView->setItemDelegate(
 		new qjackctlSessionInfraClientItemDelegate(m_ui.InfraClientListView));
+	m_ui.InfraClientListView->setContextMenuPolicy(Qt::CustomContextMenu);
 	m_ui.InfraClientListView->sortItems(0, Qt::AscendingOrder);
 
 	// UI connections...
@@ -305,6 +297,10 @@ qjackctlSessionForm::qjackctlSessionForm (
 	QObject::connect(m_ui.UpdateSessionPushButton,
 		SIGNAL(clicked()),
 		SLOT(updateSession()));
+
+	QObject::connect(m_ui.SessionTreeView,
+		SIGNAL(customContextMenuRequested(const QPoint&)),
+		SLOT(sessionViewContextMenu(const QPoint&)));
 
 	QObject::connect(m_ui.InfraClientListView,
 		SIGNAL(currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)),
@@ -321,6 +317,9 @@ qjackctlSessionForm::qjackctlSessionForm (
 	QObject::connect(m_ui.InfraClientListView->itemDelegate(),
 		SIGNAL(commitData(QWidget *)),
 		SLOT(editInfraClientCommit()));
+	QObject::connect(m_ui.InfraClientListView,
+		SIGNAL(customContextMenuRequested(const QPoint&)),
+		SLOT(infraClientContextMenu(const QPoint&)));
 
 	// Start disabled.
 	stabilizeForm(false);
@@ -784,9 +783,6 @@ void qjackctlSessionForm::updateSessionView (void)
 
 	m_ui.SessionTreeView->insertTopLevelItems(0, items);
 	m_ui.SessionTreeView->expandAll();
-
-	// Special regard on this one... o.O
-	updateInfraClients();
 }
 
 
@@ -795,43 +791,49 @@ void qjackctlSessionForm::updateSession (void)
 {
 	m_pSession->update();
 	updateSessionView();
+	updateInfraClients();
 }
 
 
-// Update/populate infra-clients commands list view.
-void qjackctlSessionForm::updateInfraClients (void)
+// Context menu event handler.
+void qjackctlSessionForm::sessionViewContextMenu ( const QPoint& pos )
 {
-#ifdef CONFIG_DEBUG_0
-	qDebug("qjackctlSessionForm::updateInfraClients()");
+	QMenu menu(this);
+	QAction *pAction;
+
+	bool bEnabled = false;
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		bEnabled = (pMainForm->jackClient() != NULL);
+
+	pAction = menu.addAction(QIcon(":/images/open1.png"),
+		tr("&Load..."), this, SLOT(loadSession()));
+	pAction->setEnabled(bEnabled);
+	pAction = menu.addMenu(m_pRecentMenu);
+	pAction->setEnabled(bEnabled && !m_pRecentMenu->isEmpty());
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/save1.png"),
+		tr("&Save..."), this, SLOT(saveSessionSave()));
+	pAction->setEnabled(bEnabled);
+#ifdef CONFIG_JACK_SESSION
+	pAction = menu.addAction(
+		tr("Save and &Quit..."), this, SLOT(saveSessionSaveAndQuit()));
+	pAction->setEnabled(bEnabled);
+	pAction = menu.addAction(
+		tr("Save &Template..."), this, SLOT(saveSessionSaveTemplate()));
+	pAction->setEnabled(bEnabled);
 #endif
+	menu.addSeparator();
+	pAction = menu.addAction(
+		tr("&Versioning"), this, SLOT(saveSessionVersion(bool)));
+	pAction->setCheckable(true);
+	pAction->setChecked(isSaveSessionVersion());
+	pAction->setEnabled(bEnabled);
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
+		tr("Re&fresh"), this, SLOT(updateSession()));
 
-	int iOldItem = m_ui.InfraClientListView->indexOfTopLevelItem(
-		m_ui.InfraClientListView->currentItem());
-
-	m_ui.InfraClientListView->clear();
-
-	const QIcon iconClient(":/images/client1.png");
-
-	QTreeWidgetItem *pItem = NULL;
-	qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
-	qjackctlSession::InfraClientList::ConstIterator iter = list.constBegin();
-	const qjackctlSession::InfraClientList::ConstIterator& iter_end
-		= list.constEnd();
-	for( ; iter != iter_end; ++iter) {
-		qjackctlSession::InfraClientItem *pInfraClientItem = iter.value();
-		pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
-		pItem->setIcon(0, iconStatus(iconClient,
-			pInfraClientItem->client_command.isEmpty()));
-		pItem->setText(0, pInfraClientItem->client_name);
-		pItem->setText(1, pInfraClientItem->client_command);
-		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-	}
-
-	int iItemCount = m_ui.InfraClientListView->topLevelItemCount();
-	if (iOldItem >= 0 && iOldItem < iItemCount) {
-		m_ui.InfraClientListView->setCurrentItem(
-			m_ui.InfraClientListView->topLevelItem(iOldItem));
-	}
+	menu.exec(m_ui.SessionTreeView->mapToGlobal(pos));
 }
 
 
@@ -940,6 +942,68 @@ void qjackctlSessionForm::selectInfraClient (void)
 }
 
 
+// Update/populate infra-clients commands list view.
+void qjackctlSessionForm::updateInfraClients (void)
+{
+#ifdef CONFIG_DEBUG_0
+	qDebug("qjackctlSessionForm::updateInfraClients()");
+#endif
+
+	int iOldItem = m_ui.InfraClientListView->indexOfTopLevelItem(
+		m_ui.InfraClientListView->currentItem());
+
+	m_ui.InfraClientListView->clear();
+
+	const QIcon iconClient(":/images/client1.png");
+
+	QTreeWidgetItem *pItem = NULL;
+	qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
+	qjackctlSession::InfraClientList::ConstIterator iter = list.constBegin();
+	const qjackctlSession::InfraClientList::ConstIterator& iter_end
+		= list.constEnd();
+	for( ; iter != iter_end; ++iter) {
+		qjackctlSession::InfraClientItem *pInfraClientItem = iter.value();
+		pItem = new QTreeWidgetItem(m_ui.InfraClientListView, pItem);
+		pItem->setIcon(0, iconStatus(iconClient,
+			pInfraClientItem->client_command.isEmpty()));
+		pItem->setText(0, pInfraClientItem->client_name);
+		pItem->setText(1, pInfraClientItem->client_command);
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+	}
+
+	int iItemCount = m_ui.InfraClientListView->topLevelItemCount();
+	if (iOldItem >= 0 && iOldItem < iItemCount) {
+		m_ui.InfraClientListView->setCurrentItem(
+			m_ui.InfraClientListView->topLevelItem(iOldItem));
+	}
+}
+
+
+// Infra-client list context menu.
+void qjackctlSessionForm::infraClientContextMenu ( const QPoint& pos )
+{
+	QMenu menu(this);
+	QAction *pAction;
+
+	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
+	pAction = menu.addAction(QIcon(":/images/add1.png"),
+		tr("&Add"), this, SLOT(addInfraClient()));
+//	pAction->setEnabled(true);
+	pAction = menu.addAction(QIcon(":/images/edit1.png"),
+		tr("&Edit"), this, SLOT(editInfraClient()));
+	pAction->setEnabled(pItem != NULL);
+	pAction = menu.addAction(QIcon(":/images/remove1.png"),
+		tr("Re&move"), this, SLOT(removeInfraClient()));
+	pAction->setEnabled(pItem != NULL);
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
+		tr("Re&fresh"), this, SLOT(updateInfraClients()));
+//	pAction->setEnabled(true);
+
+	menu.exec(m_ui.InfraClientListView->mapToGlobal(pos));
+}
+
+
 // Stabilize form status.
 void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 {
@@ -955,49 +1019,6 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	}
 
 	selectInfraClient();
-}
-
-
-// Context menu event handler.
-void qjackctlSessionForm::contextMenuEvent (
-	QContextMenuEvent *pContextMenuEvent )
-{
-	QMenu menu(this);
-	QAction *pAction;
-
-	bool bEnabled = false;
-	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm)
-		bEnabled = (pMainForm->jackClient() != NULL);
-
-	pAction = menu.addAction(QIcon(":/images/open1.png"),
-		tr("&Load..."), this, SLOT(loadSession()));
-	pAction->setEnabled(bEnabled);
-	pAction = menu.addMenu(m_pRecentMenu);
-	pAction->setEnabled(bEnabled && !m_pRecentMenu->isEmpty());
-	menu.addSeparator();
-	pAction = menu.addAction(QIcon(":/images/save1.png"),
-		tr("&Save..."), this, SLOT(saveSessionSave()));
-	pAction->setEnabled(bEnabled);
-#ifdef CONFIG_JACK_SESSION
-	pAction = menu.addAction(
-		tr("Save and &Quit..."), this, SLOT(saveSessionSaveAndQuit()));
-	pAction->setEnabled(bEnabled);
-	pAction = menu.addAction(
-		tr("Save &Template..."), this, SLOT(saveSessionSaveTemplate()));
-	pAction->setEnabled(bEnabled);
-#endif
-	menu.addSeparator();
-	pAction = menu.addAction(
-		tr("&Versioning"), this, SLOT(saveSessionVersion(bool)));
-	pAction->setCheckable(true);
-	pAction->setChecked(isSaveSessionVersion());
-	pAction->setEnabled(bEnabled);
-	menu.addSeparator();
-	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
-		tr("Re&fresh"), this, SLOT(updateSession()));
-
-	menu.exec(pContextMenuEvent->globalPos());
 }
 
 
