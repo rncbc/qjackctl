@@ -198,6 +198,8 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 		ClientItem *pClientItem = iter.value();
 		if (pClientItem->client_command.isEmpty()) {
 			const QString& sClientName = pClientItem->client_name;
+			if (sClientName == "system")
+				continue;
 			InfraClientItem *pInfraClientItem
 				= m_infra_clients.value(sClientName, NULL);
 			if (pInfraClientItem) {
