@@ -3,10 +3,10 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-SVN TRUNK
+0.3.10  2013-04-01  The singing swan rehersal.
 
-- Session infra-client management finally being added. (TESTING)
- 
+- Session infra-client management finally being added.
+
 - Preparations for Qt5 migration.
 
 - Transport tempo (BPM) precision display fixed to 4 digits.

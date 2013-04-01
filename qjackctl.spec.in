@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 18
+%define release 19
 
 %define _prefix	@ac_prefix@
 
@@ -60,38 +60,40 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
-* Fri May 18 2012 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.9
+* Tue Apr  2 2013 Rui Nuno Capela <rncbc@rncbc.org> 0.3.10
+- The singing swan rehersal.
+* Fri May 18 2012 Rui Nuno Capela <rncbc@rncbc.org> 0.3.9
 - The last of the remnants.
-* Fri Jul  1 2011 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.8
+* Fri Jul  1 2011 Rui Nuno Capela <rncbc@rncbc.org> 0.3.8
 - JACK Session versioning. 
-* Tue Nov 30 2010 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.7
+* Tue Nov 30 2010 Rui Nuno Capela <rncbc@rncbc.org> 0.3.7
 - JACK Session managerism. 
-* Mon May 17 2010 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Mon May 17 2010 Rui Nuno Capela <rncbc@rncbc.org>
 - Standard desktop icon fixing. 
-* Mon Jan 11 2010 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.6
+* Mon Jan 11 2010 Rui Nuno Capela <rncbc@rncbc.org> 0.3.6
 - Full D-Busification!
-* Mon Jan 11 2010 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Mon Jan 11 2010 Rui Nuno Capela <rncbc@rncbc.org>
 - Man page added.
-* Wed Sep 30 2009 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.5
+* Wed Sep 30 2009 Rui Nuno Capela <rncbc@rncbc.org> 0.3.5
 - Slipped away!
-* Fri Dec 05 2008 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.4
+* Fri Dec 05 2008 Rui Nuno Capela <rncbc@rncbc.org> 0.3.4
 - Patchbay snapshot revamp.
-* Sat Jun 07 2008 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.3
+* Sat Jun 07 2008 Rui Nuno Capela <rncbc@rncbc.org> 0.3.3
 - Patchbay JACK-MIDI, file logging and X11 uniqueness.
-* Thu Dec 20 2007 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.2
+* Thu Dec 20 2007 Rui Nuno Capela <rncbc@rncbc.org> 0.3.2
 - Patchbay heads-up with season greetings. 
-* Thu Jul 19 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Thu Jul 19 2007 Rui Nuno Capela <rncbc@rncbc.org>
 - System-tray tooltip icon crash fix.
-* Wed Jul 18 2007 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.1
+* Wed Jul 18 2007 Rui Nuno Capela <rncbc@rncbc.org> 0.3.1
 - Shallowed bug-fix release..
-* Tue Jul 10 2007 Rui Nuno Capela <rncbc@users.sourceforge.net> 0.3.0
+* Tue Jul 10 2007 Rui Nuno Capela <rncbc@rncbc.org> 0.3.0
 - Qt4 migration was complete.
-* Mon Jun 25 2007 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Mon Jun 25 2007 Rui Nuno Capela <rncbc@rncbc.org>
 - Application icon is now installed to (prefix)/share/pixmaps.
 - Declared fundamental build and run-time requirements.
 - Destination install directory prefix is now in spec.
 - Spec is now a bit more openSUSE compliant.
-* Wed May 31 2006 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Wed May 31 2006 Rui Nuno Capela <rncbc@rncbc.org>
 - Changed copyright to license attribute
-* Wed Aug 24 2005 Rui Nuno Capela <rncbc@users.sourceforge.net>
+* Wed Aug 24 2005 Rui Nuno Capela <rncbc@rncbc.org>
 - Created initial qjackctl.spec
