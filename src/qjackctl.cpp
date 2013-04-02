@@ -65,6 +65,8 @@ const WindowFlags CustomizeWindowHint   = WindowFlags(0x02000000);
 
 #if defined(Q_WS_X11)
 
+#include <unistd.h>
+
 #include <QX11Info>
 
 #include <X11/Xatom.h>

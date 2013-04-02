@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+SVN TRUNK
+
+- Added include <unistd.h> to shut up gcc 4.7 build failures
+  (patch by Alexis Ballier, thanks).
+
+
 0.3.10  2013-04-01  The singing swan rehersal.
 
 - Session infra-client management finally being added.
