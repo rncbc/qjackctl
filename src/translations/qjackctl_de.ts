@@ -1396,7 +1396,7 @@ Neustart des JACK-Servers wirksam.</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3889"/>
@@ -1404,7 +1404,7 @@ Neustart des JACK-Servers wirksam.</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3552"/>
@@ -2136,10 +2136,6 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <location filename="../qjackctlSessionForm.cpp" line="996"/>
         <source>Re&amp;move</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Remove</source>
-        <translation type="obsolete">En&amp;tfernen</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="251"/>
