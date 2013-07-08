@@ -53,9 +53,6 @@
 #if QT_VERSION < 0x040500
 namespace Qt {
 const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
-#if QT_VERSION < 0x040200
-const WindowFlags CustomizeWindowHint   = WindowFlags(0x02000000);
-#endif
 }
 #endif
 
@@ -750,15 +747,11 @@ bool qjackctlMainForm::queryClose (void)
 			= tr("The program will keep running in the system tray.\n\n"
 				"To terminate the program, please choose \"Quit\"\n"
 				"in the context menu of the system tray icon.");
-	#ifdef QJACKCTL_QT4_SYSTEM_TRAY
-	#if QT_VERSION >= 0x040300
 		if (QSystemTrayIcon::supportsMessages()) {
 			m_pSystemTray->showMessage(
 				sTitle, sText, QSystemTrayIcon::Information);
 		}
 		else
-	#endif
-	#endif
 		QMessageBox::information(this, sTitle, sText);
 		hide();
 		bQueryClose = false;
@@ -1215,9 +1208,7 @@ void qjackctlMainForm::startJack (void)
 
 		// Setup stdout/stderr capture...
 		if (m_pSetup->bStdoutCapture) {
-	#if QT_VERSION >= 0x040200
 			m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
-	#endif
 			QObject::connect(m_pJack,
 				SIGNAL(readyReadStandardOutput()),
 				SLOT(readStdout()));
@@ -1595,15 +1586,10 @@ void qjackctlMainForm::appendMessagesError ( const QString& s )
 
 	const QString& sTitle = tr("Error") + " - " QJACKCTL_SUBTITLE1;
 #ifdef CONFIG_SYSTEM_TRAY
-#ifdef QJACKCTL_QT4_SYSTEM_TRAY
-#if QT_VERSION >= 0x040300
 	if (m_pSetup->bSystemTray && m_pSystemTray
-		&& QSystemTrayIcon::supportsMessages()) {
+		&& QSystemTrayIcon::supportsMessages())
 		m_pSystemTray->showMessage(sTitle, s, QSystemTrayIcon::Critical);
-	}
 	else
-#endif
-#endif
 #endif
 	QMessageBox::critical(this, sTitle, s, QMessageBox::Cancel);
 }
@@ -3527,15 +3513,11 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 			= tr("Server settings will be only effective after\n"
 				"restarting the JACK audio server.");
 	#ifdef CONFIG_SYSTEM_TRAY
-	#ifdef QJACKCTL_QT4_SYSTEM_TRAY
-	#if QT_VERSION >= 0x040300
 		if (m_pSetup->bSystemTray && m_pSystemTray
 			&& QSystemTrayIcon::supportsMessages()) {
 			m_pSystemTray->showMessage(sTitle, sText, QSystemTrayIcon::Warning);
 		}
 		else
-	#endif
-	#endif
 	#endif
 		QMessageBox::warning(this, sTitle, sText);
 	}   // Otherwise, it will be just as convenient to update status...
@@ -3552,15 +3534,11 @@ void qjackctlMainForm::showDirtySetupWarning (void)
 		= tr("Some settings will be only effective\n"
 			"the next time you start this program.");
 #ifdef CONFIG_SYSTEM_TRAY
-#ifdef QJACKCTL_QT4_SYSTEM_TRAY
-#if QT_VERSION >= 0x040300
 	if (m_pSetup->bSystemTray && m_pSystemTray
 		&& QSystemTrayIcon::supportsMessages()) {
 		m_pSystemTray->showMessage(sTitle, sText, QSystemTrayIcon::Information);
 	}
 	else
-#endif
-#endif
 #endif
 	QMessageBox::information(this, sTitle, sText);
 }

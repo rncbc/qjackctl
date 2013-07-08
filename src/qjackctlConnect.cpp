@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -387,21 +387,13 @@ void qjackctlClientItem::setHilite ( bool bHilite )
 // Socket item openness status.
 void qjackctlClientItem::setOpen ( bool bOpen )
 {
-#if QT_VERSION >= 0x040201
 	QTreeWidgetItem::setExpanded(bOpen);
-#else
-	QTreeWidgetItem::treeWidget()->setItemExpanded(this, bOpen);
-#endif
 }
 
 
 bool qjackctlClientItem::isOpen (void) const
 {
-#if QT_VERSION >= 0x040201
 	return QTreeWidgetItem::isExpanded();
-#else
-	return QTreeWidgetItem::treeWidget()->isItemExpanded(this);
-#endif
 }
 
 

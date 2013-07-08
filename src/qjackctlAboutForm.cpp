@@ -1,7 +1,7 @@
 // qjackctlAboutForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -40,56 +40,56 @@ qjackctlAboutForm::qjackctlAboutForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-    // Stuff the about box...
-    QString sText = "<p align=\"center\"><br />\n";
-    sText += "<b>" + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
-    sText += "<br />\n";
-    sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
-    sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
+	// Stuff the about box...
+	QString sText = "<p align=\"center\"><br />\n";
+	sText += "<b>" + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
+	sText += "<br />\n";
+	sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
+	sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
 #ifdef CONFIG_JACK_VERSION
 	sText += "<br />\n";
 	sText += tr("Using: JACK %1").arg(jack_get_version_string());
 	sText += "<br />\n";
 #endif
 #ifdef CONFIG_DEBUG
-    sText += "<small><font color=\"red\">";
-    sText += tr("Debugging option enabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("Debugging option enabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_SYSTEM_TRAY
-    sText += "<small><font color=\"red\">";
-    sText += tr("System tray disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("System tray disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_TRANSPORT
-    sText += "<small><font color=\"red\">";
-    sText += tr("Transport status control disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("Transport status control disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_REALTIME
-    sText += "<small><font color=\"red\">";
-    sText += tr("Realtime status disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("Realtime status disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_XRUN_DELAY
-    sText += "<small><font color=\"red\">";
-    sText += tr("XRUN delay status disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("XRUN delay status disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_MAX_DELAY
-    sText += "<small><font color=\"red\">";
-    sText += tr("Maximum delay status disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("Maximum delay status disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_PORT_ALIASES
-    sText += "<small><font color=\"red\">";
-    sText += tr("JACK Port aliases support disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("JACK Port aliases support disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_MIDI
-    sText += "<small><font color=\"red\">";
-    sText += tr("JACK MIDI support disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("JACK MIDI support disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #ifndef CONFIG_JACK_SESSION
 	sText += "<small><font color=\"red\">";
@@ -98,33 +98,29 @@ qjackctlAboutForm::qjackctlAboutForm (
 #endif
 #ifndef CONFIG_ALSA_SEQ
 #if !defined(WIN32)
-    sText += "<small><font color=\"red\">";
-    sText += tr("ALSA/MIDI sequencer support disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("ALSA/MIDI sequencer support disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #endif
 #ifndef CONFIG_DBUS
 #if !defined(WIN32)
-    sText += "<small><font color=\"red\">";
-    sText += tr("D-Bus interface support disabled.");
-    sText += "</font></small><br />\n";
+	sText += "<small><font color=\"red\">";
+	sText += tr("D-Bus interface support disabled.");
+	sText += "</font></small><br />\n";
 #endif
 #endif
-    sText += "<br />\n";
-    sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
-    sText += "<br />\n";
-    sText += "<small>";
-    sText += QJACKCTL_COPYRIGHT "<br />\n";
-    sText += "<br />\n";
-    sText += tr("This program is free software; you can redistribute it and/or modify it") + "<br />\n";
-    sText += tr("under the terms of the GNU General Public License version 2 or later.");
-    sText += "</small>";
-    sText += "</p>\n";
-#if QT_VERSION >= 0x040200
-    m_ui.AboutTextView->setText(sText);
-#else
-    m_ui.AboutTextView->setHtml(sText);
-#endif
+	sText += "<br />\n";
+	sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
+	sText += "<br />\n";
+	sText += "<small>";
+	sText += QJACKCTL_COPYRIGHT "<br />\n";
+	sText += "<br />\n";
+	sText += tr("This program is free software; you can redistribute it and/or modify it") + "<br />\n";
+	sText += tr("under the terms of the GNU General Public License version 2 or later.");
+	sText += "</small>";
+	sText += "</p>\n";
+	m_ui.AboutTextView->setText(sText);
 	// UI connections...
 	QObject::connect(m_ui.AboutQtButton,
 		SIGNAL(clicked()),

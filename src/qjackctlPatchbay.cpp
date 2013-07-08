@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -299,21 +299,13 @@ void qjackctlSocketItem::updatePixmap (void)
 // Socket item openness status.
 void qjackctlSocketItem::setOpen ( bool bOpen )
 {
-#if QT_VERSION >= 0x040201
 	QTreeWidgetItem::setExpanded(bOpen);
-#else
-	QTreeWidgetItem::treeWidget()->setItemExpanded(this, bOpen);
-#endif
 }
 
 
 bool qjackctlSocketItem::isOpen (void) const
 {
-#if QT_VERSION >= 0x040201
 	return QTreeWidgetItem::isExpanded();
-#else
-	return QTreeWidgetItem::treeWidget()->isItemExpanded(this);
-#endif
 }
 
 
@@ -479,11 +471,7 @@ bool qjackctlSocketList::addSocketItem (void)
 		qjackctlSocketItem *pSocketItem = selectedSocketItem();
 	//  m_pListView->setUpdatesEnabled(false);
 		if (pSocketItem)
-		#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(false);
-		#else
-			m_pListView->setItemSelected(pSocketItem, false);
-		#endif
 		pSocketItem = new qjackctlSocketItem(this, socket.name(),
 			socket.clientName(), socket.type(), pSocketItem);
 		if (pSocketItem) {
@@ -497,11 +485,7 @@ bool qjackctlSocketList::addSocketItem (void)
 			}
 			bResult = true;
 		}
-	#if QT_VERSION >= 0x040200
 		pSocketItem->setSelected(true);
-	#else
-		m_pListView->setItemSelected(pSocketItem, true);
-	#endif
 		m_pListView->setCurrentItem(pSocketItem);
 	//  m_pListView->setUpdatesEnabled(true);
 	//  m_pListView->update();
@@ -576,11 +560,7 @@ bool qjackctlSocketList::editSocketItem (void)
 				pPlugItem = new qjackctlPlugItem(
 					pSocketItem, iter.next(), pPlugItem);
 			}
-		#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(true);
-		#else
-			m_pListView->setItemSelected(pSocketItem, true);
-		#endif
 			m_pListView->setCurrentItem(pSocketItem);
 		//  m_pListView->setUpdatesEnabled(true);
 		//  m_pListView->triggerUpdate();
@@ -639,11 +619,7 @@ bool qjackctlSocketList::copySocketItem (void)
 				}
 				bResult = true;
 			}
-		#if QT_VERSION >= 0x040200
 			pSocketItem->setSelected(true);
-		#else
-			m_pListView->setItemSelected(pSocketItem, true);
-		#endif
 			m_pListView->setCurrentItem(pSocketItem);
 		//  m_pListView->setUpdatesEnabled(true);
 		//  m_pListView->triggerUpdate();
@@ -684,11 +660,7 @@ bool qjackctlSocketList::moveUpSocketItem (void)
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
 				m_pListView->insertTopLevelItem(iItem - 1, pItem);
-			#if QT_VERSION >= 0x040200
 				pSocketItem->setSelected(true);
-			#else
-				m_pListView->setItemSelected(pSocketItem, true);
-			#endif
 				m_pListView->setCurrentItem(pSocketItem);
 			//  m_pListView->setUpdatesEnabled(true);
 			//  m_pListView->update();
@@ -715,11 +687,7 @@ bool qjackctlSocketList::moveDownSocketItem (void)
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
 				m_pListView->insertTopLevelItem(iItem + 1, pItem);
-			#if QT_VERSION >= 0x040200
 				pSocketItem->setSelected(true);
-			#else
-				m_pListView->setItemSelected(pSocketItem, true);
-			#endif
 				m_pListView->setCurrentItem(pSocketItem);
 			//  m_pListView->setUpdatesEnabled(true);
 			//  m_pListView->update();

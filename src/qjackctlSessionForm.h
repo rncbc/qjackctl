@@ -22,12 +22,6 @@
 #ifndef __qjackctlSessionForm_h
 #define __qjackctlSessionForm_h
 
-#include <QtGlobal>
-
-#if QT_VERSION < 0x040200
-#define setAllColumnsShowFocus(x) parent()
-#endif
-
 #include "ui_qjackctlSessionForm.h"
 
 #include <QItemDelegate>

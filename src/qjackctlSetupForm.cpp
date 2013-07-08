@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2012, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -103,9 +103,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 	m_ui.MessagesLimitLinesComboBox->setValidator(
 		new QIntValidator(m_ui.MessagesLimitLinesComboBox));
 
-#if QT_VERSION >= 0x040200
 	m_ui.PresetComboBox->setCompleter(NULL);
-#endif
 
 	// UI connections...
 
