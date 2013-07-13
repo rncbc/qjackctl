@@ -120,15 +120,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.DriverComboBox,
 		SIGNAL(highlighted(const QString&)),
 		SLOT(changeDriver(const QString&)));
-	QObject::connect(m_ui.InterfaceToolButton,
-		SIGNAL(clicked()),
-		SLOT(selectInterface()));
-	QObject::connect(m_ui.InDeviceToolButton,
-		SIGNAL(clicked()),
-		SLOT(selectInDevice()));
-	QObject::connect(m_ui.OutDeviceToolButton,
-		SIGNAL(clicked()),
-		SLOT(selectOutDevice()));
 	QObject::connect(m_ui.AudioComboBox,
 		SIGNAL(highlighted(int)),
 		SLOT(changeAudio(int)));
@@ -478,9 +469,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	// Load combo box history...
 	m_pSetup->loadComboBoxHistory(m_ui.ServerPrefixComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ServerNameComboBox);
-	m_pSetup->loadComboBoxHistory(m_ui.InterfaceComboBox);
-	m_pSetup->loadComboBoxHistory(m_ui.InDeviceComboBox);
-	m_pSetup->loadComboBoxHistory(m_ui.OutDeviceComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ServerSuffixComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.StartupScriptShellComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.PostStartupScriptShellComboBox);
@@ -490,6 +478,13 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_pSetup->loadComboBoxHistory(m_ui.ActivePatchbayPathComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.MessagesLogPathComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ServerConfigNameComboBox);
+
+	m_ui.InterfaceComboBox->setup(
+		m_ui.DriverComboBox, QJACKCTL_DUPLEX, m_pSetup->sDefPresetName);
+	m_ui.InDeviceComboBox->setup(
+		m_ui.DriverComboBox, QJACKCTL_CAPTURE, m_pSetup->sDefPresetName);
+	m_ui.OutDeviceComboBox->setup(
+		m_ui.DriverComboBox, QJACKCTL_PLAYBACK, m_pSetup->sDefPresetName);
 
 	// Load Options...
 	m_ui.StartupScriptCheckBox->setChecked(m_pSetup->bStartupScript);
@@ -930,14 +925,12 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	bEnabled = (bInEnabled && (bAlsa || bSun || bOss || bPortaudio));
 	m_ui.InDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.InDeviceComboBox->setEnabled(bEnabled);
-	m_ui.InDeviceToolButton->setEnabled(bEnabled);
 	if (!bEnabled)
 		setComboBoxCurrentText(m_ui.InDeviceComboBox, m_pSetup->sDefPresetName);
 
 	bEnabled = (bOutEnabled && (bAlsa || bSun || bOss || bPortaudio));
 	m_ui.OutDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.OutDeviceComboBox->setEnabled(bEnabled);
-	m_ui.OutDeviceToolButton->setEnabled(bEnabled);
 	if (!bEnabled)
 		setComboBoxCurrentText(m_ui.OutDeviceComboBox, m_pSetup->sDefPresetName);
 
@@ -1036,7 +1029,6 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire);
 	m_ui.InterfaceTextLabel->setEnabled(bInterface);
 	m_ui.InterfaceComboBox->setEnabled(bInterface);
-	m_ui.InterfaceToolButton->setEnabled(bEnabled || bCoreaudio);
 	if (!bInterface)
 		setComboBoxCurrentText(m_ui.InterfaceComboBox, m_pSetup->sDefPresetName);
 
@@ -1214,301 +1206,6 @@ static OSStatus getDeviceUIDFromID( AudioDeviceID id,
 }
 
 #endif // CONFIG_COREAUDIO
-
-
-// Device selection menu executive.
-void qjackctlSetupForm::deviceMenu( QLineEdit *pLineEdit,
-	QToolButton *pToolButton, int iAudio )
-{
-	// FIXME: Only valid for ALSA, Sun and OSS devices,
-	// for the time being... and also CoreAudio ones too.
-	const QString& sDriver = m_ui.DriverComboBox->currentText();
-	bool bAlsa      = (sDriver == "alsa");
-	bool bSun       = (sDriver == "sun");
-	bool bOss       = (sDriver == "oss");
-#ifdef CONFIG_COREAUDIO
-	bool bCoreaudio = (sDriver == "coreaudio");
-	std::map<QString, AudioDeviceID> coreaudioIdMap;
-#endif
-#ifdef CONFIG_PORTAUDIO
-	bool bPortaudio = (sDriver == "portaudio");
-#endif
-	QString sCurName = pLineEdit->text();
-	QString sName, sSubName;
-	QString sText;
-	
-	QMenu menu(this);
-	QAction *pAction;
-
-	int iCards = 0;
-
-	if (bAlsa) {
-#ifdef CONFIG_ALSA_SEQ
-		// Enumerate the ALSA cards and PCM harfware devices...
-		snd_ctl_t *handle;
-		snd_ctl_card_info_t *info;
-		snd_pcm_info_t *pcminfo;
-		snd_ctl_card_info_alloca(&info);
-		snd_pcm_info_alloca(&pcminfo);
-		const QString sPrefix("hw:%1");
-		const QString sSuffix(" (%1)");
-		const QString sSubSuffix("%1,%2");
-		QString sName2, sSubName2;
-		bool bCapture, bPlayback;
-		int iCard = -1;
-		while (snd_card_next(&iCard) >= 0 && iCard >= 0) {
-			sName = sPrefix.arg(iCard);
-			if (snd_ctl_open(&handle, sName.toUtf8().constData(), 0) >= 0
-				&& snd_ctl_card_info(handle, info) >= 0) {
-				if (iCards > 0)
-					menu.addSeparator();
-				sName2 = sPrefix.arg(snd_ctl_card_info_get_id(info));
-				sText  = sName2 + '\t';
-				sText += snd_ctl_card_info_get_name(info);
-				sText += sSuffix.arg(sName);
-				pAction = menu.addAction(sText);
-				pAction->setCheckable(true);
-				pAction->setChecked(
-					sCurName == sName || sCurName == sName2);
-				int iDevice = -1;
-				while (snd_ctl_pcm_next_device(handle, &iDevice) >= 0
-					&& iDevice >= 0) {
-					// Capture devices..
-					bCapture = false;
-					if (iAudio == QJACKCTL_CAPTURE ||
-						iAudio == QJACKCTL_DUPLEX) {
-						snd_pcm_info_set_device(pcminfo, iDevice);
-						snd_pcm_info_set_subdevice(pcminfo, 0);
-						snd_pcm_info_set_stream(pcminfo, SND_PCM_STREAM_CAPTURE);
-						bCapture = (snd_ctl_pcm_info(handle, pcminfo) >= 0);
-					}
-					// Playback devices..
-					bPlayback = false;
-					if (iAudio == QJACKCTL_PLAYBACK ||
-						iAudio == QJACKCTL_DUPLEX) {
-						snd_pcm_info_set_device(pcminfo, iDevice);
-						snd_pcm_info_set_subdevice(pcminfo, 0);
-						snd_pcm_info_set_stream(pcminfo, SND_PCM_STREAM_PLAYBACK);
-						bPlayback = (snd_ctl_pcm_info(handle, pcminfo) >= 0);
-					}
-					// List iif compliant with the audio mode criteria...
-					if ((iAudio == QJACKCTL_CAPTURE && bCapture && !bPlayback) ||
-						(iAudio == QJACKCTL_PLAYBACK && !bCapture && bPlayback) ||
-						(iAudio == QJACKCTL_DUPLEX && bCapture && bPlayback)) {
-						sSubName  = sSubSuffix.arg(sName).arg(iDevice);
-						sSubName2 = sSubSuffix.arg(sName2).arg(iDevice);
-						sText  = sSubName2 + '\t';
-						sText += snd_pcm_info_get_name(pcminfo);
-						sText += sSuffix.arg(sSubName);
-						pAction = menu.addAction(sText);
-						pAction->setCheckable(true);
-						pAction->setChecked(
-							sCurName == sSubName || sCurName == sSubName2);
-					}
-				}
-				snd_ctl_close(handle);
-				++iCards;
-			}
-		}
-#endif 	// CONFIG_ALSA_SEQ
-	}	// Enumerate the OSS Audio devices...
-	else
-	if (bSun) {
-		QFile file("/var/run/dmesg.boot");
-		if (file.open(QIODevice::ReadOnly)) {
-			QTextStream stream(&file);
-			QString sLine;
-			QRegExp rxDevice("audio([0-9]) at (.*)");
-			while (!stream.atEnd()) {
-				sLine = stream.readLine();
-				if (rxDevice.exactMatch(sLine)) {
-					sName = "/dev/audio" + rxDevice.cap(1);
-					sText = sName + '\t' + rxDevice.cap(2);
-					pAction = menu.addAction(sText);
-					pAction->setCheckable(true);
-					pAction->setChecked(sCurName == sName);
-					++iCards;
-				}
-			}
-			file.close();
-		}
-	}
-	else
-	if (bOss) {
-		QFile file("/dev/sndstat");
-		if (file.open(QIODevice::ReadOnly)) {
-			QTextStream stream(&file);
-			QString sLine;
-			bool bAudioDevices = false;
-			QRegExp rxHeader("Audio devices.*", Qt::CaseInsensitive);
-			QRegExp rxDevice("([0-9]+):[ ]+(.*)");
-			while (!stream.atEnd()) {
-				sLine = stream.readLine();
-				if (bAudioDevices) {
-					if (rxDevice.exactMatch(sLine)) {
-						sName = "/dev/dsp" + rxDevice.cap(1);
-						sText = sName + '\t' + rxDevice.cap(2);
-						pAction = menu.addAction(sText);
-						pAction->setCheckable(true);
-						pAction->setChecked(sCurName == sName);
-						++iCards;
-					}
-					else break;
-				}
-				else if (rxHeader.exactMatch(sLine))
-					bAudioDevices = true;
-			}
-			file.close();
-		}
-	}
-#ifdef CONFIG_COREAUDIO
-	else if (bCoreaudio) {
-		// Find out how many Core Audio devices are there, if any...
-		// (code snippet gently "borrowed" from Stephane Letz jackdmp;)
-		OSStatus err;
-		Boolean isWritable;
-		UInt32 outSize = sizeof(isWritable);
-		err = AudioHardwareGetPropertyInfo(kAudioHardwarePropertyDevices,
-				&outSize, &isWritable);
-		if (err == noErr) {
-			// Calculate the number of device available...
-			int numCoreDevices = outSize / sizeof(AudioDeviceID);
-			// Make space for the devices we are about to get...
-			AudioDeviceID *coreDeviceIDs = new AudioDeviceID [numCoreDevices];
-			err = AudioHardwareGetProperty(kAudioHardwarePropertyDevices,
-					&outSize, (void *) coreDeviceIDs);
-			if (err == noErr) {
-				// Look for the CoreAudio device name...
-				char coreDeviceName[256];
-				UInt32 nameSize = 256;
-				for (int i = 0; i < numCoreDevices; i++) {
-					err = AudioDeviceGetPropertyInfo(coreDeviceIDs[i],
-							0, true, kAudioDevicePropertyDeviceName,
-							&outSize, &isWritable);
-					if (err == noErr) {
-						err = AudioDeviceGetProperty(coreDeviceIDs[i],
-								0, true, kAudioDevicePropertyDeviceName,
-								&nameSize, (void *) coreDeviceName);
-						if (err == noErr) {
-							char drivername[128];
-							UInt32 dnsize = 128;
-							// this returns the unique id for the device
-							// that must be used on the commandline for jack
-							if (getDeviceUIDFromID(coreDeviceIDs[i],
-								drivername, dnsize) == noErr) {
-								sName = drivername;
-							} else {
-								sName = "Error";
-							}
-							coreaudioIdMap[sName] = coreDeviceIDs[i];
-							// TODO: hide this ugly ID from the user,
-							// only show human readable name
-							// humanreadable \t UID
-							sText = QString(coreDeviceName) + '\t' + sName;
-							pAction = menu.addAction(sText);
-							pAction->setCheckable(true);
-							pAction->setChecked(sCurName == sName);
-							++iCards;
-						}
-					}
-				}
-			}
-			delete [] coreDeviceIDs;
-		}
-	}
-#endif 	// CONFIG_COREAUDIO
-#ifdef CONFIG_PORTAUDIO
-	else if (bPortaudio) {
-		if (Pa_Initialize() == paNoError) {
-			// Fill hostapi info...
-			PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
-			QString *pHostName = new QString[iNumHostApi];
-			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
-				pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
-			// Fill device info...
-			PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
-			PaDeviceInfo **ppDeviceInfo = new PaDeviceInfo * [iNumDevice];
-			for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
-				ppDeviceInfo[i] = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
-				sText = pHostName[ppDeviceInfo[i]->hostApi] + "::" + QString(ppDeviceInfo[i]->name);
-				pAction = menu.addAction(sText);
-				pAction->setCheckable(true);
-				pAction->setChecked(sCurName == sText);
-				++iCards;
-			}
-			Pa_Terminate();
-		}
-	}
-#endif  // CONFIG_PORTAUDIO
-
-	// There's always the default device...
-	if (iCards > 0)
-		menu.addSeparator();
-	pAction = menu.addAction(m_pSetup->sDefPresetName);
-	pAction->setCheckable(true);
-	pAction->setChecked(sCurName == m_pSetup->sDefPresetName);
-
-	// Show the device menu and read selection...
-	pAction = menu.exec(pToolButton->mapToGlobal(QPoint(0,0)));
-	if (pAction) {
-		sText = pAction->text();
-		int iTabPos = sText.indexOf('\t');
-		if (iTabPos >= 0) {
-#ifndef CONFIG_COREAUDIO
-			pLineEdit->setText(sText.left(iTabPos));
-#else
-			// for OSX, figure out the device's channel counts and set the combos.
-			// this might be too difficult for the user to determine themselves
-			// and jack won't start if the values exceed the actual.
-			// we now use the second tab delimited field as the value to
-			// put in the combo
-			pLineEdit->setText(sText.mid(iTabPos + 1));
-			std::map<QString,AudioDeviceID>::iterator found
-				= coreaudioIdMap.find(sText.mid(iTabPos+1));
-			if (found != coreaudioIdMap.end()) {
-				AudioDeviceID devid = found->second;
-				UInt32 chans;
-				if (getTotalChannels(devid, &chans, true) == noErr) {
-					//InChannelsSpinBox->setMaxValue(chans);
-					m_ui.InChannelsSpinBox->setValue(chans);
-				}
-				if (getTotalChannels(devid, &chans, false) == noErr) {
-					//OutChannelsSpinBox->setMaxValue(chans);
-					m_ui.OutChannelsSpinBox->setValue(chans);
-				}
-			}
-#endif
-		} else {
-			pLineEdit->setText(sText);
-		}
-	//  settingsChanged();
-	}
-}
-
-
-// Interface device selection menu.
-void qjackctlSetupForm::selectInterface (void)
-{
-	deviceMenu(m_ui.InterfaceComboBox->lineEdit(),
-		m_ui.InterfaceToolButton, m_ui.AudioComboBox->currentIndex());
-}
-
-
-// Input device selection menu.
-void qjackctlSetupForm::selectInDevice (void)
-{
-	deviceMenu(m_ui.InDeviceComboBox->lineEdit(),
-		m_ui.InDeviceToolButton, QJACKCTL_CAPTURE);
-}
-
-
-// Output device selection menu.
-void qjackctlSetupForm::selectOutDevice (void)
-{
-	deviceMenu(m_ui.OutDeviceComboBox->lineEdit(),
-		m_ui.OutDeviceToolButton, QJACKCTL_PLAYBACK);
-}
-
 
 // Meta-symbol menu executive.
 void qjackctlSetupForm::symbolMenu( QLineEdit *pLineEdit,
@@ -1839,9 +1536,6 @@ void qjackctlSetupForm::accept (void)
 	// Save combobox history...
 	m_pSetup->saveComboBoxHistory(m_ui.ServerPrefixComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.ServerNameComboBox);
-	m_pSetup->saveComboBoxHistory(m_ui.InterfaceComboBox);
-	m_pSetup->saveComboBoxHistory(m_ui.InDeviceComboBox);
-	m_pSetup->saveComboBoxHistory(m_ui.OutDeviceComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.ServerSuffixComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.StartupScriptShellComboBox);
 	m_pSetup->saveComboBoxHistory(m_ui.PostStartupScriptShellComboBox);

@@ -1185,7 +1185,7 @@
              </widget>
             </item>
             <item row="0" column="1" colspan="2">
-             <widget class="QComboBox" name="InterfaceComboBox">
+             <widget class="qjackctlInterfaceComboBox" name="InterfaceComboBox">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -1223,37 +1223,6 @@
                 <string>/dev/dsp</string>
                </property>
               </item>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QToolButton" name="InterfaceToolButton">
-              <property name="minimumSize">
-               <size>
-                <width>22</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Select PCM device name</string>
-              </property>
-              <property name="text">
-               <string>&gt;</string>
-              </property>
              </widget>
             </item>
             <item row="1" column="0">
@@ -1390,7 +1359,7 @@
              </widget>
             </item>
             <item row="3" column="1" colspan="2">
-             <widget class="QComboBox" name="InDeviceComboBox">
+             <widget class="qjackctlInterfaceComboBox" name="InDeviceComboBox">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -1430,37 +1399,6 @@
               </item>
              </widget>
             </item>
-            <item row="3" column="3">
-             <widget class="QToolButton" name="InDeviceToolButton">
-              <property name="minimumSize">
-               <size>
-                <width>22</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Select input device for capture</string>
-              </property>
-              <property name="text">
-               <string>&gt;</string>
-              </property>
-             </widget>
-            </item>
             <item row="4" column="0">
              <widget class="QLabel" name="OutDeviceTextLabel">
               <property name="font">
@@ -1484,7 +1422,7 @@
              </widget>
             </item>
             <item row="4" column="1" colspan="2">
-             <widget class="QComboBox" name="OutDeviceComboBox">
+             <widget class="qjackctlInterfaceComboBox" name="OutDeviceComboBox">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -1522,37 +1460,6 @@
                 <string>/dev/dsp</string>
                </property>
               </item>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QToolButton" name="OutDeviceToolButton">
-              <property name="minimumSize">
-               <size>
-                <width>22</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>24</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::TabFocus</enum>
-              </property>
-              <property name="toolTip">
-               <string>Select output device for playback</string>
-              </property>
-              <property name="text">
-               <string>&gt;</string>
-              </property>
              </widget>
             </item>
             <item row="5" column="0">
@@ -4238,6 +4145,13 @@
   </layout>
  </widget>
  <layoutdefault spacing="4" margin="4"/>
+ <customwidgets>
+  <customwidget>
+   <class>qjackctlInterfaceComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qjackctlInterfaceComboBox.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>SetupTabWidget</tabstop>
   <tabstop>PresetComboBox</tabstop>
@@ -4265,13 +4179,10 @@
   <tabstop>PortMaxComboBox</tabstop>
   <tabstop>TimeoutComboBox</tabstop>
   <tabstop>InterfaceComboBox</tabstop>
-  <tabstop>InterfaceToolButton</tabstop>
   <tabstop>DitherComboBox</tabstop>
   <tabstop>AudioComboBox</tabstop>
   <tabstop>InDeviceComboBox</tabstop>
-  <tabstop>InDeviceToolButton</tabstop>
   <tabstop>OutDeviceComboBox</tabstop>
-  <tabstop>OutDeviceToolButton</tabstop>
   <tabstop>InChannelsSpinBox</tabstop>
   <tabstop>OutChannelsSpinBox</tabstop>
   <tabstop>InLatencySpinBox</tabstop>

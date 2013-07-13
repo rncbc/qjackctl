@@ -5,6 +5,11 @@ ChangeLog
 
 SVN TRUNK
 
+- Interface device selection is now unified, by moving the old 
+  '>' pop-up menu into the customized combo-box drop-down list
+  showing all available card/device names and descriptions (on
+  a patch by Arnout Engelen, thanks).
+
 - Added include <unistd.h> to shut up gcc 4.7 build failures
   (patch by Alexis Ballier, thanks).
 

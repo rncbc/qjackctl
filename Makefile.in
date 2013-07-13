@@ -13,6 +13,7 @@ headers = \
 	src/qjackctlAlsaConnect.h \
 	src/qjackctlConnect.h \
 	src/qjackctlConnectAlias.h \
+	src/qjackctlInterfaceComboBox.h \
 	src/qjackctlJackConnect.h \
 	src/qjackctlPatchbay.h \
 	src/qjackctlPatchbayFile.h \
@@ -35,6 +36,7 @@ sources = \
 	src/qjackctlAlsaConnect.cpp \
 	src/qjackctlConnect.cpp \
 	src/qjackctlConnectAlias.cpp \
+	src/qjackctlInterfaceComboBox.cpp \
 	src/qjackctlJackConnect.cpp \
 	src/qjackctlPatchbay.cpp \
 	src/qjackctlPatchbayFile.cpp \

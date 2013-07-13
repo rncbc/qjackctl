@@ -54,9 +54,6 @@ public slots:
 
 	void changeAudio(int);
 	void changeDriver(const QString&);
-	void selectInterface();
-	void selectInDevice();
-	void selectOutDevice();
 
 	void symbolStartupScript();
 	void symbolPostStartupScript();
@@ -100,7 +97,6 @@ protected:
 	void changeDriverAudio( const QString& sDriver, int iAudio );
 	void changeDriverUpdate( const QString& sDriver, bool bUpdate );
 
-	void deviceMenu(QLineEdit * pLineEdit, QToolButton * pToolButton, int iAudio);
 	void symbolMenu(QLineEdit * pLineEdit, QToolButton * pToolButton );
 
 	void stabilizeForm();
