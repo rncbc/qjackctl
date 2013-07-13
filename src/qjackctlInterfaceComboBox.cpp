@@ -60,6 +60,8 @@ qjackctlInterfaceComboBox::qjackctlInterfaceComboBox ( QWidget *pParent )
 	pTreeView->header()->hide();
 	pTreeView->setRootIsDecorated(false);
 	pTreeView->setAllColumnsShowFocus(true);
+	pTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	pTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
 	pTreeView->setModel(new QStandardItemModel());
 //	pTreeView->setMinimumWidth(320);
 	QComboBox::setView(pTreeView);
@@ -107,6 +109,11 @@ void qjackctlInterfaceComboBox::addCard (
 
 void qjackctlInterfaceComboBox::populateModel (void)
 {
+	bool bBlockSignals = QComboBox::blockSignals(true);
+
+	QComboBox::setUpdatesEnabled(false);
+	QComboBox::setDuplicatesEnabled(false);
+
 	QLineEdit *pLineEdit = QComboBox::lineEdit();
 
 	// FIXME: Only valid for ALSA, Sun and OSS devices,
@@ -128,9 +135,6 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	int iCards = 0;
 
 	clearCards();
-
-	QComboBox::setUpdatesEnabled(false);
-	QComboBox::setDuplicatesEnabled(false);
 
 	int iCurCard = -1;
 
@@ -331,13 +335,12 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	QTreeView *pTreeView = static_cast<QTreeView *> (QComboBox::view());
 	pTreeView->setMinimumWidth(pTreeView->sizeHint().width());
 
-	bool bBlockSignals = QComboBox::blockSignals(true);
-	QComboBox::setCurrentIndex(iCurCard);
-	QComboBox::blockSignals(bBlockSignals);
-
 	pLineEdit->setText(sCurName);
 
+	QComboBox::setCurrentIndex(iCurCard);
+
 	QComboBox::setUpdatesEnabled(true);
+	QComboBox::blockSignals(bBlockSignals);
 }
 
 
