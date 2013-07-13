@@ -2510,13 +2510,13 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <location filename="../qjackctlSetupForm.ui" line="868"/>
         <location filename="../qjackctlSetupForm.ui" line="1060"/>
         <location filename="../qjackctlSetupForm.ui" line="1203"/>
-        <location filename="../qjackctlSetupForm.ui" line="1408"/>
-        <location filename="../qjackctlSetupForm.ui" line="1502"/>
-        <location filename="../qjackctlSetupForm.ui" line="1592"/>
-        <location filename="../qjackctlSetupForm.ui" line="1611"/>
-        <location filename="../qjackctlSetupForm.ui" line="1652"/>
-        <location filename="../qjackctlSetupForm.ui" line="1671"/>
-        <location filename="../qjackctlSetupForm.ui" line="4181"/>
+        <location filename="../qjackctlSetupForm.ui" line="1377"/>
+        <location filename="../qjackctlSetupForm.ui" line="1440"/>
+        <location filename="../qjackctlSetupForm.ui" line="1499"/>
+        <location filename="../qjackctlSetupForm.ui" line="1518"/>
+        <location filename="../qjackctlSetupForm.ui" line="1559"/>
+        <location filename="../qjackctlSetupForm.ui" line="1578"/>
+        <location filename="../qjackctlSetupForm.ui" line="4088"/>
         <source>(default)</source>
         <translation>(výchozí)</translation>
     </message>
@@ -2532,8 +2532,8 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="118"/>
-        <location filename="../qjackctlSetupForm.ui" line="1984"/>
-        <location filename="../qjackctlSetupForm.ui" line="3682"/>
+        <location filename="../qjackctlSetupForm.ui" line="1891"/>
+        <location filename="../qjackctlSetupForm.ui" line="3589"/>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
     </message>
@@ -2549,9 +2549,9 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="138"/>
-        <location filename="../qjackctlSetupForm.ui" line="2003"/>
-        <location filename="../qjackctlSetupForm.ui" line="3130"/>
-        <location filename="../qjackctlSetupForm.ui" line="3778"/>
+        <location filename="../qjackctlSetupForm.ui" line="1910"/>
+        <location filename="../qjackctlSetupForm.ui" line="3037"/>
+        <location filename="../qjackctlSetupForm.ui" line="3685"/>
         <source>Alt+D</source>
         <translation>Alt+D</translation>
     </message>
@@ -2642,27 +2642,27 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>Parametry</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1687"/>
+        <location filename="../qjackctlSetupForm.ui" line="1594"/>
         <source>MIDI Driv&amp;er:</source>
         <translation>Ovla&amp;dač MIDI:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1709"/>
+        <location filename="../qjackctlSetupForm.ui" line="1616"/>
         <source>The ALSA MIDI backend driver to use</source>
         <translation>Ovladač k zadní části ALSA MIDI, který se bude používat</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1716"/>
+        <location filename="../qjackctlSetupForm.ui" line="1623"/>
         <source>none</source>
         <translation>žádný</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1721"/>
+        <location filename="../qjackctlSetupForm.ui" line="1628"/>
         <source>raw</source>
         <translation>raw</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1726"/>
+        <location filename="../qjackctlSetupForm.ui" line="1633"/>
         <source>seq</source>
         <translation>seq</translation>
     </message>
@@ -2671,17 +2671,17 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation type="obsolete">&amp;Zpoždění spuštění (s):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1826"/>
+        <location filename="../qjackctlSetupForm.ui" line="1733"/>
         <source>Time in seconds that client is delayed after server startup</source>
         <translation>Čas v sekundách, o který je klient opožděn po spuštění serveru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1854"/>
+        <location filename="../qjackctlSetupForm.ui" line="1761"/>
         <source>Latency:</source>
         <translation>Prodleva:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1879"/>
+        <location filename="../qjackctlSetupForm.ui" line="1786"/>
         <source>Output latency in milliseconds, calculated based on the period, rate and buffer settings</source>
         <translation>Výstupní prodleva v milisekundách, jejíž výpočet je založen na nastavení údobí (period), rychlosti (snímání) a vyrovnávací paměti</translation>
     </message>
@@ -2701,8 +2701,8 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="402"/>
-        <location filename="../qjackctlSetupForm.ui" line="2897"/>
-        <location filename="../qjackctlSetupForm.ui" line="4046"/>
+        <location filename="../qjackctlSetupForm.ui" line="2804"/>
+        <location filename="../qjackctlSetupForm.ui" line="3953"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
     </message>
@@ -2718,8 +2718,8 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="421"/>
-        <location filename="../qjackctlSetupForm.ui" line="3149"/>
-        <location filename="../qjackctlSetupForm.ui" line="3721"/>
+        <location filename="../qjackctlSetupForm.ui" line="3056"/>
+        <location filename="../qjackctlSetupForm.ui" line="3628"/>
         <source>Alt+K</source>
         <translation>Alt+K</translation>
     </message>
@@ -2735,8 +2735,8 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="440"/>
-        <location filename="../qjackctlSetupForm.ui" line="1965"/>
-        <location filename="../qjackctlSetupForm.ui" line="3885"/>
+        <location filename="../qjackctlSetupForm.ui" line="1872"/>
+        <location filename="../qjackctlSetupForm.ui" line="3792"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
@@ -2752,10 +2752,10 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="459"/>
-        <location filename="../qjackctlSetupForm.ui" line="3070"/>
-        <location filename="../qjackctlSetupForm.ui" line="3092"/>
-        <location filename="../qjackctlSetupForm.ui" line="3234"/>
-        <location filename="../qjackctlSetupForm.ui" line="3398"/>
+        <location filename="../qjackctlSetupForm.ui" line="2977"/>
+        <location filename="../qjackctlSetupForm.ui" line="2999"/>
+        <location filename="../qjackctlSetupForm.ui" line="3141"/>
+        <location filename="../qjackctlSetupForm.ui" line="3305"/>
         <source>Alt+F</source>
         <translation>Alt+F</translation>
     </message>
@@ -2771,8 +2771,8 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="478"/>
-        <location filename="../qjackctlSetupForm.ui" line="2667"/>
-        <location filename="../qjackctlSetupForm.ui" line="3272"/>
+        <location filename="../qjackctlSetupForm.ui" line="2574"/>
+        <location filename="../qjackctlSetupForm.ui" line="3179"/>
         <source>Alt+M</source>
         <translation>Alt+M</translation>
     </message>
@@ -2803,7 +2803,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="516"/>
-        <location filename="../qjackctlSetupForm.ui" line="3866"/>
+        <location filename="../qjackctlSetupForm.ui" line="3773"/>
         <source>Alt+O</source>
         <translation>Alt+O</translation>
     </message>
@@ -2834,7 +2834,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="554"/>
-        <location filename="../qjackctlSetupForm.ui" line="3797"/>
+        <location filename="../qjackctlSetupForm.ui" line="3704"/>
         <source>Alt+I</source>
         <translation>Alt+I</translation>
     </message>
@@ -2854,7 +2854,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1473"/>
+        <location filename="../qjackctlSetupForm.ui" line="1411"/>
         <source>&amp;Output Device:</source>
         <translation>&amp;Výstupní zařízení:</translation>
     </message>
@@ -2868,12 +2868,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>&amp;Rozhraní:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1589"/>
+        <location filename="../qjackctlSetupForm.ui" line="1496"/>
         <source>Maximum input audio hardware channels to allocate</source>
         <translation>Největší množství přidělitelných vstupních zvukových přístrojových kanálů</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1329"/>
+        <location filename="../qjackctlSetupForm.ui" line="1298"/>
         <source>&amp;Audio:</source>
         <translation>&amp;Zvuk:</translation>
     </message>
@@ -2882,37 +2882,37 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation type="obsolete">&amp;Vstupní prodleva:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1274"/>
+        <location filename="../qjackctlSetupForm.ui" line="1243"/>
         <source>Dit&amp;her:</source>
         <translation>&amp;Vložení šumu do signálu (dithering):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1668"/>
+        <location filename="../qjackctlSetupForm.ui" line="1575"/>
         <source>External output latency (frames)</source>
         <translation>Vnější výstupní prodleva (snímky)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1379"/>
+        <location filename="../qjackctlSetupForm.ui" line="1348"/>
         <source>&amp;Input Device:</source>
         <translation>Vstup&amp;ní zařízení:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1351"/>
+        <location filename="../qjackctlSetupForm.ui" line="1320"/>
         <source>Provide either audio capture, playback or both</source>
         <translation>Poskytnout buď zachytávání zvuku, přehrávání nebo obojí</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1355"/>
+        <location filename="../qjackctlSetupForm.ui" line="1324"/>
         <source>Duplex</source>
         <translation>Zdvojený</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1360"/>
+        <location filename="../qjackctlSetupForm.ui" line="1329"/>
         <source>Capture Only</source>
         <translation>Pouze zachytávání</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1365"/>
+        <location filename="../qjackctlSetupForm.ui" line="1334"/>
         <source>Playback Only</source>
         <translation>Pouze přehrávání</translation>
     </message>
@@ -2923,50 +2923,46 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1208"/>
-        <location filename="../qjackctlSetupForm.ui" line="1413"/>
-        <location filename="../qjackctlSetupForm.ui" line="1507"/>
+        <location filename="../qjackctlSetupForm.ui" line="1382"/>
+        <location filename="../qjackctlSetupForm.ui" line="1445"/>
         <source>hw:0</source>
         <translation>hw:0</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1213"/>
-        <location filename="../qjackctlSetupForm.ui" line="1418"/>
-        <location filename="../qjackctlSetupForm.ui" line="1512"/>
+        <location filename="../qjackctlSetupForm.ui" line="1387"/>
+        <location filename="../qjackctlSetupForm.ui" line="1450"/>
         <source>plughw:0</source>
         <translation>plughw:0</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1218"/>
-        <location filename="../qjackctlSetupForm.ui" line="1423"/>
-        <location filename="../qjackctlSetupForm.ui" line="1517"/>
+        <location filename="../qjackctlSetupForm.ui" line="1392"/>
+        <location filename="../qjackctlSetupForm.ui" line="1455"/>
         <source>/dev/audio</source>
         <translation>/dev/audio</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1223"/>
-        <location filename="../qjackctlSetupForm.ui" line="1428"/>
-        <location filename="../qjackctlSetupForm.ui" line="1522"/>
+        <location filename="../qjackctlSetupForm.ui" line="1397"/>
+        <location filename="../qjackctlSetupForm.ui" line="1460"/>
         <source>/dev/dsp</source>
         <translation>/dev/dsp</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1551"/>
         <source>Select output device for playback</source>
-        <translation>Vybrat výstupní zařízení pro přehrávání</translation>
+        <translation type="obsolete">Vybrat výstupní zařízení pro přehrávání</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1255"/>
-        <location filename="../qjackctlSetupForm.ui" line="1460"/>
-        <location filename="../qjackctlSetupForm.ui" line="1554"/>
-        <location filename="../qjackctlSetupForm.ui" line="2056"/>
-        <location filename="../qjackctlSetupForm.ui" line="2140"/>
-        <location filename="../qjackctlSetupForm.ui" line="2202"/>
-        <location filename="../qjackctlSetupForm.ui" line="2305"/>
+        <location filename="../qjackctlSetupForm.ui" line="1963"/>
+        <location filename="../qjackctlSetupForm.ui" line="2047"/>
+        <location filename="../qjackctlSetupForm.ui" line="2109"/>
+        <location filename="../qjackctlSetupForm.ui" line="2212"/>
         <source>&gt;</source>
         <translation>&gt;</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1401"/>
+        <location filename="../qjackctlSetupForm.ui" line="1370"/>
         <source>Alternate input device for capture</source>
         <translation>Střídat vstupní zařízení pro zachytávání</translation>
     </message>
@@ -2975,12 +2971,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation type="obsolete">&amp;Výstupní prodleva:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1608"/>
+        <location filename="../qjackctlSetupForm.ui" line="1515"/>
         <source>Maximum output audio hardware channels to allocate</source>
         <translation>Největší množství přidělitelných výstupních zvukových přístrojových kanálů</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1495"/>
+        <location filename="../qjackctlSetupForm.ui" line="1433"/>
         <source>Alternate output device for playback</source>
         <translation>Střídat výstupní zařízení pro přehrávání</translation>
     </message>
@@ -2989,42 +2985,40 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation type="obsolete">&amp;Vstupní kanály:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1457"/>
         <source>Select input device for capture</source>
-        <translation>Vybrat vstupní zařízení pro zachytávání</translation>
+        <translation type="obsolete">Vybrat vstupní zařízení pro zachytávání</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1252"/>
         <source>Select PCM device name</source>
-        <translation>Vybrat název zařízení PCM</translation>
+        <translation type="obsolete">Vybrat název zařízení PCM</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1649"/>
+        <location filename="../qjackctlSetupForm.ui" line="1556"/>
         <source>External input latency (frames)</source>
         <translation>Vnější vstupní prodleva (snímky)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1296"/>
+        <location filename="../qjackctlSetupForm.ui" line="1265"/>
         <source>Set dither mode</source>
         <translation>Nastavit režim vložení šumu do signálu (dithering)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1300"/>
+        <location filename="../qjackctlSetupForm.ui" line="1269"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1305"/>
+        <location filename="../qjackctlSetupForm.ui" line="1274"/>
         <source>Rectangular</source>
         <translation>Obdélníkový</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1310"/>
+        <location filename="../qjackctlSetupForm.ui" line="1279"/>
         <source>Shaped</source>
         <translation>Obalová křivka</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1315"/>
+        <location filename="../qjackctlSetupForm.ui" line="1284"/>
         <source>Triangular</source>
         <translation>Trojúhelníkový</translation>
     </message>
@@ -3216,13 +3210,13 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1120"/>
-        <location filename="../qjackctlSetupForm.ui" line="3305"/>
+        <location filename="../qjackctlSetupForm.ui" line="3212"/>
         <source>500</source>
         <translation>500</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1125"/>
-        <location filename="../qjackctlSetupForm.ui" line="3310"/>
+        <location filename="../qjackctlSetupForm.ui" line="3217"/>
         <source>1000</source>
         <translation>1000</translation>
     </message>
@@ -3233,7 +3227,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1135"/>
-        <location filename="../qjackctlSetupForm.ui" line="3320"/>
+        <location filename="../qjackctlSetupForm.ui" line="3227"/>
         <source>5000</source>
         <translation>5000</translation>
     </message>
@@ -3243,183 +3237,183 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>10000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1567"/>
+        <location filename="../qjackctlSetupForm.ui" line="1474"/>
         <source>&amp;Channels I/O:</source>
         <translation>&amp;Kanály vstup/výstup:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1627"/>
+        <location filename="../qjackctlSetupForm.ui" line="1534"/>
         <source>&amp;Latency I/O:</source>
         <translation>&amp;Prodleva vstup/výstup:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1763"/>
+        <location filename="../qjackctlSetupForm.ui" line="1670"/>
         <source>Server Suffi&amp;x:</source>
         <translation>Příp&amp;ona serveru:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1804"/>
+        <location filename="../qjackctlSetupForm.ui" line="1711"/>
         <source>Start De&amp;lay:</source>
         <translation>&amp;Zpoždění spuštění:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1829"/>
+        <location filename="../qjackctlSetupForm.ui" line="1736"/>
         <source> secs</source>
         <translation> s</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1888"/>
+        <location filename="../qjackctlSetupForm.ui" line="1795"/>
         <source>0 msecs</source>
         <translation>0 ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1920"/>
+        <location filename="../qjackctlSetupForm.ui" line="1827"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1938"/>
+        <location filename="../qjackctlSetupForm.ui" line="1845"/>
         <source>Scripting</source>
         <translation>Skriptování</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1959"/>
+        <location filename="../qjackctlSetupForm.ui" line="1866"/>
         <source>Whether to execute a custom shell script before starting up the JACK audio server.</source>
         <translation>Provést vlastní shellový skript před spuštěním zvukového serveru JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1962"/>
+        <location filename="../qjackctlSetupForm.ui" line="1869"/>
         <source>Execute script on Start&amp;up:</source>
         <translation>Provést skript při &amp;spuštění:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1978"/>
+        <location filename="../qjackctlSetupForm.ui" line="1885"/>
         <source>Whether to execute a custom shell script after starting up the JACK audio server.</source>
         <translation>Provést vlastní shellový skript po spuštění zvukového serveru JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1981"/>
+        <location filename="../qjackctlSetupForm.ui" line="1888"/>
         <source>Execute script after &amp;Startup:</source>
         <translation>Provést skript &amp;po spuštění:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1997"/>
+        <location filename="../qjackctlSetupForm.ui" line="1904"/>
         <source>Whether to execute a custom shell script before shuting down the JACK audio server.</source>
         <translation>Provést vlastní shellový skript před zastavením zvukového serveru JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2000"/>
+        <location filename="../qjackctlSetupForm.ui" line="1907"/>
         <source>Execute script on Shut&amp;down:</source>
         <translation>Provést skript při zasta&amp;vení:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2022"/>
+        <location filename="../qjackctlSetupForm.ui" line="1929"/>
         <source>Command line to be executed before starting up the JACK audio server</source>
         <translation>Příkazový řádek k provedení před spuštěním zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2053"/>
-        <location filename="../qjackctlSetupForm.ui" line="2137"/>
-        <location filename="../qjackctlSetupForm.ui" line="2199"/>
-        <location filename="../qjackctlSetupForm.ui" line="2302"/>
+        <location filename="../qjackctlSetupForm.ui" line="1960"/>
+        <location filename="../qjackctlSetupForm.ui" line="2044"/>
+        <location filename="../qjackctlSetupForm.ui" line="2106"/>
+        <location filename="../qjackctlSetupForm.ui" line="2209"/>
         <source>Scripting argument meta-symbols</source>
         <translation>Meta symboly pro argument při skriptování</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2084"/>
+        <location filename="../qjackctlSetupForm.ui" line="1991"/>
         <source>Browse for script to be executed before starting up the JACK audio server</source>
         <translation>Vybrat skript, který se provede před spuštěním zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2087"/>
-        <location filename="../qjackctlSetupForm.ui" line="2171"/>
-        <location filename="../qjackctlSetupForm.ui" line="2233"/>
-        <location filename="../qjackctlSetupForm.ui" line="2336"/>
-        <location filename="../qjackctlSetupForm.ui" line="2537"/>
-        <location filename="../qjackctlSetupForm.ui" line="2720"/>
+        <location filename="../qjackctlSetupForm.ui" line="1994"/>
+        <location filename="../qjackctlSetupForm.ui" line="2078"/>
+        <location filename="../qjackctlSetupForm.ui" line="2140"/>
+        <location filename="../qjackctlSetupForm.ui" line="2243"/>
+        <location filename="../qjackctlSetupForm.ui" line="2444"/>
+        <location filename="../qjackctlSetupForm.ui" line="2627"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2106"/>
+        <location filename="../qjackctlSetupForm.ui" line="2013"/>
         <source>Command line to be executed after starting up the JACK audio server</source>
         <translation>Příkazový řádek k provedení po spuštění zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2168"/>
+        <location filename="../qjackctlSetupForm.ui" line="2075"/>
         <source>Browse for script to be executed after starting up the JACK audio server</source>
         <translation>Vybrat skript, který se provede po spuštění zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2230"/>
+        <location filename="../qjackctlSetupForm.ui" line="2137"/>
         <source>Browse for script to be executed before shutting down the JACK audio server</source>
         <translation>Vybrat skript, který se provede před zastavením zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2252"/>
+        <location filename="../qjackctlSetupForm.ui" line="2159"/>
         <source>Command line to be executed before shutting down the JACK audio server</source>
         <translation>Příkazový řádek k provedení před zastavením zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2268"/>
+        <location filename="../qjackctlSetupForm.ui" line="2175"/>
         <source>Whether to execute a custom shell script after shuting down the JACK audio server.</source>
         <translation>Provést vlastní shellový skript po zastavení zvukového serveru JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2271"/>
+        <location filename="../qjackctlSetupForm.ui" line="2178"/>
         <source>Execute script after Shu&amp;tdown:</source>
         <translation>Provést skript po zas&amp;tavení:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2274"/>
-        <location filename="../qjackctlSetupForm.ui" line="2865"/>
-        <location filename="../qjackctlSetupForm.ui" line="4065"/>
+        <location filename="../qjackctlSetupForm.ui" line="2181"/>
+        <location filename="../qjackctlSetupForm.ui" line="2772"/>
+        <location filename="../qjackctlSetupForm.ui" line="3972"/>
         <source>Alt+T</source>
         <translation>ALT+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2333"/>
+        <location filename="../qjackctlSetupForm.ui" line="2240"/>
         <source>Browse for script to be executed after shutting down the JACK audio server</source>
         <translation>Vybrat skript, který se provede po zastavení zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2355"/>
+        <location filename="../qjackctlSetupForm.ui" line="2262"/>
         <source>Command line to be executed after shutting down the JACK audio server</source>
         <translation>Příkazový řádek k provedení po zastavení zvukového serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2374"/>
+        <location filename="../qjackctlSetupForm.ui" line="2281"/>
         <source>Statistics</source>
         <translation>Statistika</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2395"/>
+        <location filename="../qjackctlSetupForm.ui" line="2302"/>
         <source>Whether to capture standard output (stdout/stderr) into messages window</source>
         <translation>Vést obvyklý výstup (stdout/stderr) do okna s hlášeními</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2398"/>
+        <location filename="../qjackctlSetupForm.ui" line="2305"/>
         <source>&amp;Capture standard output</source>
         <translation>&amp;Vést obvyklý výstup</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2401"/>
-        <location filename="../qjackctlSetupForm.ui" line="3701"/>
+        <location filename="../qjackctlSetupForm.ui" line="2308"/>
+        <location filename="../qjackctlSetupForm.ui" line="3608"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2414"/>
+        <location filename="../qjackctlSetupForm.ui" line="2321"/>
         <source>&amp;XRUN detection regex:</source>
         <translation>Pravidelný výraz pro zjištění &amp;XRUN:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2439"/>
+        <location filename="../qjackctlSetupForm.ui" line="2346"/>
         <source>Regular expression used to detect XRUNs on server output messages</source>
         <translation>Pravidelný výraz užitý pro poznání XRUN v hlášeních posílaných serverem</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2446"/>
+        <location filename="../qjackctlSetupForm.ui" line="2353"/>
         <source>xrun of at least ([0-9|\.]+) msecs</source>
         <translation>xrun alespoň ([0-9|\.]+) ms</translation>
     </message>
@@ -3432,104 +3426,104 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation type="obsolete">&amp;Přehlížet výskyt prvního XRUN ve statistice</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2463"/>
+        <location filename="../qjackctlSetupForm.ui" line="2370"/>
         <source>Connections</source>
         <translation>Spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2581"/>
+        <location filename="../qjackctlSetupForm.ui" line="2488"/>
         <source>Time in seconds between each auto-refresh cycle</source>
         <translation>Čas v sekundách mezi každým kolem automatického obnovení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2588"/>
+        <location filename="../qjackctlSetupForm.ui" line="2495"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2593"/>
-        <location filename="../qjackctlSetupForm.ui" line="4206"/>
+        <location filename="../qjackctlSetupForm.ui" line="2500"/>
+        <location filename="../qjackctlSetupForm.ui" line="4113"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2598"/>
+        <location filename="../qjackctlSetupForm.ui" line="2505"/>
         <source>20</source>
         <translation>20</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2603"/>
+        <location filename="../qjackctlSetupForm.ui" line="2510"/>
         <source>30</source>
         <translation>30</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2608"/>
+        <location filename="../qjackctlSetupForm.ui" line="2515"/>
         <source>60</source>
         <translation>60</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2613"/>
+        <location filename="../qjackctlSetupForm.ui" line="2520"/>
         <source>120</source>
         <translation>120</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2503"/>
+        <location filename="../qjackctlSetupForm.ui" line="2410"/>
         <source>Patchbay definition file to be activated as connection persistence profile</source>
         <translation>Spustit soubor s vymezením zapojovací desky jako stálý profil spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2534"/>
+        <location filename="../qjackctlSetupForm.ui" line="2441"/>
         <source>Browse for a patchbay definition file to be activated</source>
         <translation>Vybrat soubor s vymezením zapojovací desky pro spuštění</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2556"/>
+        <location filename="../qjackctlSetupForm.ui" line="2463"/>
         <source>Whether to refresh the connections patchbay automatically</source>
         <translation>Obnovit automaticky pzapojovací desku pro spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2559"/>
+        <location filename="../qjackctlSetupForm.ui" line="2466"/>
         <source>&amp;Auto refresh connections Patchbay, every (secs):</source>
         <translation>Obnovit &amp;automaticky zapojovací desku pro spojení, každých (s):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2562"/>
-        <location filename="../qjackctlSetupForm.ui" line="3826"/>
+        <location filename="../qjackctlSetupForm.ui" line="2469"/>
+        <location filename="../qjackctlSetupForm.ui" line="3733"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2478"/>
+        <location filename="../qjackctlSetupForm.ui" line="2385"/>
         <source>Whether to activate a patchbay definition for connection persistence profile.</source>
         <translation>Spustit stálý profil s vymezením zapojovací desky spojení.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2481"/>
+        <location filename="../qjackctlSetupForm.ui" line="2388"/>
         <source>Activate &amp;Patchbay persistence:</source>
         <translation>Spustit stálý profil se &amp;zapojovací deskou:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2484"/>
+        <location filename="../qjackctlSetupForm.ui" line="2391"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2646"/>
+        <location filename="../qjackctlSetupForm.ui" line="2553"/>
         <source>Logging</source>
         <translation>Provádění zápisu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2686"/>
+        <location filename="../qjackctlSetupForm.ui" line="2593"/>
         <source>Messages log file</source>
         <translation>Soubor se zápisem hlášení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2717"/>
+        <location filename="../qjackctlSetupForm.ui" line="2624"/>
         <source>Browse for the messages log file location</source>
         <translation>Vybrat místo pro umístění souboru se zápisem hlášení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2661"/>
+        <location filename="../qjackctlSetupForm.ui" line="2568"/>
         <source>Whether to activate a messages logging to file.</source>
         <translation>Spustit provádění zápisu hlášení do souboru.</translation>
     </message>
@@ -3539,259 +3533,259 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>Pře&amp;dpona serveru:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1788"/>
+        <location filename="../qjackctlSetupForm.ui" line="1695"/>
         <source>Extra driver options (command line suffix)</source>
         <translation>Další volby pro ovladač (přípona příkazového řádku)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2664"/>
+        <location filename="../qjackctlSetupForm.ui" line="2571"/>
         <source>&amp;Messages log file:</source>
         <translation>&amp;Soubor se zápisem hlášení:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2747"/>
+        <location filename="../qjackctlSetupForm.ui" line="2654"/>
         <source>Display</source>
         <translation>Zobrazit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2765"/>
+        <location filename="../qjackctlSetupForm.ui" line="2672"/>
         <source>Time Display</source>
         <translation>Údaj o čase</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2794"/>
+        <location filename="../qjackctlSetupForm.ui" line="2701"/>
         <source>Time F&amp;ormat:</source>
         <translation>&amp;Formát času:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2816"/>
+        <location filename="../qjackctlSetupForm.ui" line="2723"/>
         <source>The general time format on display</source>
         <translation>Obecný formát času pro zobrazení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2823"/>
+        <location filename="../qjackctlSetupForm.ui" line="2730"/>
         <source>hh:mm:ss</source>
         <translation>hh:mm:ss</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2828"/>
+        <location filename="../qjackctlSetupForm.ui" line="2735"/>
         <source>hh:mm:ss.d</source>
         <translation>hh:mm:ss.d</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2833"/>
+        <location filename="../qjackctlSetupForm.ui" line="2740"/>
         <source>hh:mm:ss.dd</source>
         <translation>hh:mm:ss.dd</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2838"/>
+        <location filename="../qjackctlSetupForm.ui" line="2745"/>
         <source>hh:mm:ss.ddd</source>
         <translation>hh:mm:ss.ddd</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2862"/>
+        <location filename="../qjackctlSetupForm.ui" line="2769"/>
         <source>Transport &amp;Time Code</source>
         <translation>Předání &amp;časového kódu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2878"/>
+        <location filename="../qjackctlSetupForm.ui" line="2785"/>
         <source>Transport &amp;BBT (bar:beat.ticks)</source>
         <translation>Předání &amp;BBT (takt:doba.tiknutí - bar:beat.ticks)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2881"/>
-        <location filename="../qjackctlSetupForm.ui" line="3546"/>
-        <location filename="../qjackctlSetupForm.ui" line="3923"/>
-        <location filename="../qjackctlSetupForm.ui" line="4084"/>
+        <location filename="../qjackctlSetupForm.ui" line="2788"/>
+        <location filename="../qjackctlSetupForm.ui" line="3453"/>
+        <location filename="../qjackctlSetupForm.ui" line="3830"/>
+        <location filename="../qjackctlSetupForm.ui" line="3991"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2894"/>
+        <location filename="../qjackctlSetupForm.ui" line="2801"/>
         <source>Elapsed time since last &amp;Reset</source>
         <translation>Čas uplynulý od posledního &amp;znovunastavení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2910"/>
+        <location filename="../qjackctlSetupForm.ui" line="2817"/>
         <source>Elapsed time since last &amp;XRUN</source>
         <translation>Čas uplynulý od posledního &amp;XRUN</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2913"/>
+        <location filename="../qjackctlSetupForm.ui" line="2820"/>
         <source>Alt+X</source>
         <translation>Alt+X</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2980"/>
+        <location filename="../qjackctlSetupForm.ui" line="2887"/>
         <source>Sample front panel normal display font</source>
         <translation>Předvést písmo pro obvyklé zobrazení na přední straně panelu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3020"/>
+        <location filename="../qjackctlSetupForm.ui" line="2927"/>
         <source>Sample big time display font</source>
         <translation>Předvést písmo pro velké zobrazení údaje o čase</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3048"/>
+        <location filename="../qjackctlSetupForm.ui" line="2955"/>
         <source>Big Time display:</source>
         <translation>Velké zobrazení údaje o čase:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3064"/>
+        <location filename="../qjackctlSetupForm.ui" line="2971"/>
         <source>Select font for front panel normal display</source>
         <translation>Vybrat písmo pro zobrazení písma na přední straně panelu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3067"/>
-        <location filename="../qjackctlSetupForm.ui" line="3089"/>
-        <location filename="../qjackctlSetupForm.ui" line="3231"/>
-        <location filename="../qjackctlSetupForm.ui" line="3395"/>
+        <location filename="../qjackctlSetupForm.ui" line="2974"/>
+        <location filename="../qjackctlSetupForm.ui" line="2996"/>
+        <location filename="../qjackctlSetupForm.ui" line="3138"/>
+        <location filename="../qjackctlSetupForm.ui" line="3302"/>
         <source>&amp;Font...</source>
         <translation>&amp;Písmo...</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3086"/>
+        <location filename="../qjackctlSetupForm.ui" line="2993"/>
         <source>Select font for big time display</source>
         <translation>Vybrat písmo pro velké zobrazení údaje o čase</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3108"/>
+        <location filename="../qjackctlSetupForm.ui" line="3015"/>
         <source>Normal display:</source>
         <translation>Obvyklé zobrazení:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3124"/>
+        <location filename="../qjackctlSetupForm.ui" line="3031"/>
         <source>Whether to enable a shiny glass light effect on the main display</source>
         <translation>Povolit zobrazení údajů s lesklým sklenným světelným efektem</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3127"/>
+        <location filename="../qjackctlSetupForm.ui" line="3034"/>
         <source>&amp;Display shiny glass light effect</source>
         <translation>&amp;Zobrazit údaje s lesklým sklenným světelným efektem</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3143"/>
+        <location filename="../qjackctlSetupForm.ui" line="3050"/>
         <source>Whether to enable blinking (flashing) of the server mode (RT) indicator</source>
         <translation>Povolit mrkání indikátoru serverového režimu (realtime -RT)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3146"/>
+        <location filename="../qjackctlSetupForm.ui" line="3053"/>
         <source>Blin&amp;k server mode indicator</source>
         <translation>Zobrazovat mr&amp;kání indikátoru režimu serveru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3167"/>
+        <location filename="../qjackctlSetupForm.ui" line="3074"/>
         <source>Messages Window</source>
         <translation>Okno s hlášením</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3200"/>
+        <location filename="../qjackctlSetupForm.ui" line="3107"/>
         <source>Sample messages text font display</source>
         <translation>Předvést zobrazení textu v okně s hlášením</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3228"/>
+        <location filename="../qjackctlSetupForm.ui" line="3135"/>
         <source>Select font for the messages text display</source>
         <translation>Vybrat písmo pro zobrazení textu hlášení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3266"/>
+        <location filename="../qjackctlSetupForm.ui" line="3173"/>
         <source>Whether to keep a maximum number of lines in the messages window</source>
         <translation>Určit největší počet řádků zobrazovaných v okně s hlášením</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3269"/>
+        <location filename="../qjackctlSetupForm.ui" line="3176"/>
         <source>&amp;Messages limit:</source>
         <translation>&amp;Největší počet hlášení:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3285"/>
+        <location filename="../qjackctlSetupForm.ui" line="3192"/>
         <source>The maximum number of message lines to keep in view</source>
         <translation>Největší počet řádků zobrazovaných v okně s hlášením</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3295"/>
+        <location filename="../qjackctlSetupForm.ui" line="3202"/>
         <source>100</source>
         <translation>100</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3300"/>
+        <location filename="../qjackctlSetupForm.ui" line="3207"/>
         <source>250</source>
         <translation>250</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3315"/>
+        <location filename="../qjackctlSetupForm.ui" line="3222"/>
         <source>2500</source>
         <translation>2500</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3337"/>
+        <location filename="../qjackctlSetupForm.ui" line="3244"/>
         <source>Connections Window</source>
         <translation>Přehled spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3364"/>
+        <location filename="../qjackctlSetupForm.ui" line="3271"/>
         <source>Sample connections view font</source>
         <translation>Předvést zobrazení písma v přehledu spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3392"/>
+        <location filename="../qjackctlSetupForm.ui" line="3299"/>
         <source>Select font for the connections view</source>
         <translation>Vybrat písmo pro přehled spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3430"/>
+        <location filename="../qjackctlSetupForm.ui" line="3337"/>
         <source>&amp;Icon size:</source>
         <translation>&amp;Velikost ikon:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3452"/>
+        <location filename="../qjackctlSetupForm.ui" line="3359"/>
         <source>The icon size for each item of the connections view</source>
         <translation>Velikost jednotlivých symbolů v přehledu spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3462"/>
+        <location filename="../qjackctlSetupForm.ui" line="3369"/>
         <source>16 x 16</source>
         <translation>16 x 16</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3467"/>
+        <location filename="../qjackctlSetupForm.ui" line="3374"/>
         <source>32 x 32</source>
         <translation>32 x 32</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3472"/>
+        <location filename="../qjackctlSetupForm.ui" line="3379"/>
         <source>64 x 64</source>
         <translation>64 x 64</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3540"/>
+        <location filename="../qjackctlSetupForm.ui" line="3447"/>
         <source>Whether to enable in-place client/port name editing (rename)</source>
         <translation>Povolit úpravu vedlejšího názvu (přezdívka) klienta/přípojky (přejmenování)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3543"/>
+        <location filename="../qjackctlSetupForm.ui" line="3450"/>
         <source>Ena&amp;ble client/port aliases editing (rename)</source>
         <translation>Po&amp;volit úpravu vedlejšího názvu (přezdívka) klienta/přípojky (přejmenování)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3521"/>
+        <location filename="../qjackctlSetupForm.ui" line="3428"/>
         <source>Whether to enable client/port name aliases on the connections window</source>
         <translation>Povolit vedlejší názvy (přezdívky) klienta/přípojky v přehledu spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3524"/>
+        <location filename="../qjackctlSetupForm.ui" line="3431"/>
         <source>E&amp;nable client/port aliases</source>
         <translation>&amp;Povolit vedlejší názvy (přezdívky) klienta/přípojky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3527"/>
-        <location filename="../qjackctlSetupForm.ui" line="3904"/>
+        <location filename="../qjackctlSetupForm.ui" line="3434"/>
+        <location filename="../qjackctlSetupForm.ui" line="3811"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3502"/>
+        <location filename="../qjackctlSetupForm.ui" line="3409"/>
         <source>Whether to draw connection lines as cubic Bezier curves</source>
         <translation>Určit, zda se mají čáry spojení kreslit jako Bézierovy křivky</translation>
     </message>
@@ -3801,193 +3795,193 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>Cesta k serveru (předpona příkazového řádku)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3505"/>
+        <location filename="../qjackctlSetupForm.ui" line="3412"/>
         <source>Draw connection and patchbay lines as Be&amp;zier curves</source>
         <translation>Čáry pro spojení a čáry zapojovací desky kreslit jako &amp;Bézierovy křivky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3508"/>
-        <location filename="../qjackctlSetupForm.ui" line="3759"/>
+        <location filename="../qjackctlSetupForm.ui" line="3415"/>
+        <location filename="../qjackctlSetupForm.ui" line="3666"/>
         <source>Alt+Z</source>
         <translation>Alt+Z</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3629"/>
+        <location filename="../qjackctlSetupForm.ui" line="3536"/>
         <source>Misc</source>
         <translation>Různé</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3647"/>
+        <location filename="../qjackctlSetupForm.ui" line="3554"/>
         <source>Other</source>
         <translation>Další</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3676"/>
+        <location filename="../qjackctlSetupForm.ui" line="3583"/>
         <source>Whether to start JACK audio server immediately on application startup</source>
         <translation>Spustit zvukový server JACK okamžitě při spuštění aplikace</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3679"/>
+        <location filename="../qjackctlSetupForm.ui" line="3586"/>
         <source>&amp;Start JACK audio server on application startup</source>
         <translation>&amp;Spustit zvukový server JACK okamžitě při spuštění aplikace</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3942"/>
+        <location filename="../qjackctlSetupForm.ui" line="3849"/>
         <source>Alt+Q</source>
         <translation type="unfinished">ALT+Q</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3695"/>
+        <location filename="../qjackctlSetupForm.ui" line="3602"/>
         <source>Whether to ask for confirmation on application exit</source>
         <translation>Žádat o potvrzení při ukončení aplikace</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3698"/>
+        <location filename="../qjackctlSetupForm.ui" line="3605"/>
         <source>&amp;Confirm application close</source>
         <translation>&amp;Potvrdit ukončení aplikace</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3715"/>
+        <location filename="../qjackctlSetupForm.ui" line="3622"/>
         <source>Whether to keep all child windows on top of the main window</source>
         <translation>Všechna další okna udržovat nad hlavním oknem</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3718"/>
+        <location filename="../qjackctlSetupForm.ui" line="3625"/>
         <source>&amp;Keep child windows always on top</source>
         <translation>&amp;Všechna další okna udržovat vždy nahoře</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3734"/>
+        <location filename="../qjackctlSetupForm.ui" line="3641"/>
         <source>Whether to enable the system tray icon</source>
         <translation>Ukázat ikonu v systémové části panelu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3737"/>
+        <location filename="../qjackctlSetupForm.ui" line="3644"/>
         <source>&amp;Enable system tray icon</source>
         <translation>Po&amp;volit ikonu v systémové části panelu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3740"/>
+        <location filename="../qjackctlSetupForm.ui" line="3647"/>
         <source>Alt+E</source>
         <translation>Alt+E</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3753"/>
+        <location filename="../qjackctlSetupForm.ui" line="3660"/>
         <source>Whether to start minimized to system tray</source>
         <translation>Spustit program zmenšený do systémové části panelu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3756"/>
+        <location filename="../qjackctlSetupForm.ui" line="3663"/>
         <source>Start minimi&amp;zed to system tray</source>
         <translation>Spustit program &amp;zmenšený do systémové části panelu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3772"/>
+        <location filename="../qjackctlSetupForm.ui" line="3679"/>
         <source>Whether to delay window positioning at application startup</source>
         <translation>Zpozdit umístění okna při spuštění programu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3775"/>
+        <location filename="../qjackctlSetupForm.ui" line="3682"/>
         <source>&amp;Delay window positioning at startup</source>
         <translation>Zpozd&amp;it umístění okna při spuštění programu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3820"/>
+        <location filename="../qjackctlSetupForm.ui" line="3727"/>
         <source>Whether to save the JACK server command-line configuration into a local file (auto-start)</source>
         <translation>Nastavení příkazového řádku ke spuštění serveru JACK-uložit do místního souboru (auto-start)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3823"/>
+        <location filename="../qjackctlSetupForm.ui" line="3730"/>
         <source>S&amp;ave JACK audio server configuration to:</source>
         <translation>Nastavení ke spuštění serveru JACK &amp;uložit jako:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3839"/>
+        <location filename="../qjackctlSetupForm.ui" line="3746"/>
         <source>The server configuration local file name (auto-start)</source>
         <translation>Název místního souboru s nastavením serveru (auto-start)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3846"/>
+        <location filename="../qjackctlSetupForm.ui" line="3753"/>
         <source>.jackdrc</source>
         <translation>.jackdrc</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3860"/>
+        <location filename="../qjackctlSetupForm.ui" line="3767"/>
         <source>Whether to exit once all clients have closed (auto-start)</source>
         <translation>Ukončit program, když jsou rozpojena všechna klientská spojení (auto-start)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3863"/>
+        <location filename="../qjackctlSetupForm.ui" line="3770"/>
         <source>C&amp;onfigure as temporary server</source>
         <translation>Nastavit jako &amp;dočasný server</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3879"/>
+        <location filename="../qjackctlSetupForm.ui" line="3786"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown</source>
         <translation>Žádat o potvrzení při zastavení serveru JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3882"/>
+        <location filename="../qjackctlSetupForm.ui" line="3789"/>
         <source>Confirm server sh&amp;utdown</source>
         <translation>Potvrdit &amp;zastavení serveru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3898"/>
+        <location filename="../qjackctlSetupForm.ui" line="3805"/>
         <source>Whether to enable ALSA Sequencer (MIDI) support on startup</source>
         <translation>Povolit podporu (MIDI) pro řadič (sekvencer) ALSA při spuštění</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3901"/>
+        <location filename="../qjackctlSetupForm.ui" line="3808"/>
         <source>E&amp;nable ALSA Sequencer support</source>
         <translation>P&amp;ovolit podporu (MIDI) pro řadič (sekvencer) ALSA</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3992"/>
+        <location filename="../qjackctlSetupForm.ui" line="3899"/>
         <source>Buttons</source>
         <translation>Tlačítka</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4021"/>
+        <location filename="../qjackctlSetupForm.ui" line="3928"/>
         <source>Whether to hide the left button group on the main window</source>
         <translation>Skrýt skupinu s tlačítky nalevo v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4024"/>
+        <location filename="../qjackctlSetupForm.ui" line="3931"/>
         <source>Hide main window &amp;Left buttons</source>
         <translation>Skrýt &amp;levá tlačítka v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4027"/>
+        <location filename="../qjackctlSetupForm.ui" line="3934"/>
         <source>Alt+L</source>
         <translation>Alt+L</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4040"/>
+        <location filename="../qjackctlSetupForm.ui" line="3947"/>
         <source>Whether to hide the right button group on the main window</source>
         <translation>Skrýt skupinu s tlačítky napravo v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4043"/>
+        <location filename="../qjackctlSetupForm.ui" line="3950"/>
         <source>Hide main window &amp;Right buttons</source>
         <translation>Skrýt &amp;pravá tlačítka v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4059"/>
+        <location filename="../qjackctlSetupForm.ui" line="3966"/>
         <source>Whether to hide the transport button group on the main window</source>
         <translation>Skrýt skupinu s tlačítky pro předání v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4062"/>
+        <location filename="../qjackctlSetupForm.ui" line="3969"/>
         <source>Hide main window &amp;Transport buttons</source>
         <translation>Skrýt &amp;předávací tlačítka v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4078"/>
+        <location filename="../qjackctlSetupForm.ui" line="3985"/>
         <source>Whether to hide the text labels on the main window buttons</source>
         <translation>Skrýt textové popisky tlačítek v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4081"/>
+        <location filename="../qjackctlSetupForm.ui" line="3988"/>
         <source>Hide main window &amp;button text labels</source>
         <translation>Skrýt textové popisky &amp;tlačítek v hlavním okně</translation>
     </message>
@@ -4000,14 +3994,14 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="811"/>
-        <location filename="../qjackctlSetupForm.cpp" line="863"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1871"/>
+        <location filename="../qjackctlSetupForm.cpp" line="806"/>
+        <location filename="../qjackctlSetupForm.cpp" line="858"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1565"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="812"/>
+        <location filename="../qjackctlSetupForm.cpp" line="807"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -4028,7 +4022,7 @@ Chcete uložit změny?</translation>
         <translation type="obsolete">Odmítnout</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="864"/>
+        <location filename="../qjackctlSetupForm.cpp" line="859"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -4041,97 +4035,97 @@ Are you sure?</source>
 Jste si jistý?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="897"/>
+        <location filename="../qjackctlSetupForm.cpp" line="892"/>
         <source>msec</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="899"/>
+        <location filename="../qjackctlSetupForm.cpp" line="894"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1521"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1218"/>
         <source>&amp;Preset Name</source>
         <translation>&amp;Název přednastavení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1523"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1220"/>
         <source>&amp;Server Name</source>
         <translation>&amp;Název serveru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1524"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1221"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Cesta k serveru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1525"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1222"/>
         <source>&amp;Driver</source>
         <translation>&amp;Ovladač</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1526"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1223"/>
         <source>&amp;Interface</source>
         <translation>&amp;Rozhraní</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1528"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1225"/>
         <source>Sample &amp;Rate</source>
         <translation>Vzorkovací &amp;kmitočet</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1529"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1226"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Snímky/Údobí (perioda)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1530"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1227"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Ú&amp;dobí/Vyrovnávací paměť</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1578"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1275"/>
         <source>Startup Script</source>
         <translation>Skript pro spuštění</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1595"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1292"/>
         <source>Post-Startup Script</source>
         <translation>Skript pro po-spuštění</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1612"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1309"/>
         <source>Shutdown Script</source>
         <translation>Skript pro zastavení chodu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1629"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1326"/>
         <source>Post-Shutdown Script</source>
         <translation>Skript pro po-zastavení chodu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1646"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1343"/>
         <source>Active Patchbay Definition</source>
         <translation>Činné vymezení zapojovací desky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1648"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1345"/>
         <source>Patchbay Definition files</source>
         <translation>Soubory s vymezením zapojovací desky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1664"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1361"/>
         <source>Messages Log</source>
         <translation>Zápis s hlášením</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1666"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1363"/>
         <source>Log files</source>
         <translation>Soubory se zápisy</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1872"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1566"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4144,82 +4138,82 @@ Chcete použít změny?</translation>
         <translation type="obsolete">Použít</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3559"/>
+        <location filename="../qjackctlSetupForm.ui" line="3466"/>
         <source>&amp;JACK client/port aliases:</source>
         <translation>Vedlejší názvy (přezdívky) pro klienty/přípojky &amp;JACK:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3581"/>
+        <location filename="../qjackctlSetupForm.ui" line="3488"/>
         <source>JACK client/port aliases display mode</source>
         <translation>Režim zobrazení vedlejších názvů (přezdívek) pro klienty/přípojky JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3591"/>
+        <location filename="../qjackctlSetupForm.ui" line="3498"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3596"/>
+        <location filename="../qjackctlSetupForm.ui" line="3503"/>
         <source>First</source>
         <translation>První</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3601"/>
+        <location filename="../qjackctlSetupForm.ui" line="3508"/>
         <source>Second</source>
         <translation>Druhý</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3936"/>
+        <location filename="../qjackctlSetupForm.ui" line="3843"/>
         <source>Whether to stop JACK audio server on application exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3939"/>
+        <location filename="../qjackctlSetupForm.ui" line="3846"/>
         <source>S&amp;top JACK audio server on application exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4118"/>
+        <location filename="../qjackctlSetupForm.ui" line="4025"/>
         <source>Defaults</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4155"/>
+        <location filename="../qjackctlSetupForm.ui" line="4062"/>
         <source>&amp;Base font size:</source>
         <translation>&amp;Základní velikost písma:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4174"/>
+        <location filename="../qjackctlSetupForm.ui" line="4081"/>
         <source>Base application font size (pt.)</source>
         <translation>Základní velikost písma v aplikaci (pt.)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4186"/>
+        <location filename="../qjackctlSetupForm.ui" line="4093"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4191"/>
+        <location filename="../qjackctlSetupForm.ui" line="4098"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4196"/>
+        <location filename="../qjackctlSetupForm.ui" line="4103"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4201"/>
+        <location filename="../qjackctlSetupForm.ui" line="4108"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4211"/>
+        <location filename="../qjackctlSetupForm.ui" line="4118"/>
         <source>11</source>
         <translation>11</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="4216"/>
+        <location filename="../qjackctlSetupForm.ui" line="4123"/>
         <source>12</source>
         <translation>12</translation>
     </message>
@@ -4249,22 +4243,22 @@ Chcete použít změny?</translation>
         <translation>Počet mikrosekund, po které se čeká mezi strojovými procesy (dummy)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3917"/>
+        <location filename="../qjackctlSetupForm.ui" line="3824"/>
         <source>Whether to enable D-Bus interface</source>
         <translation>Zda povolit rozhraní D-Bus</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3920"/>
+        <location filename="../qjackctlSetupForm.ui" line="3827"/>
         <source>&amp;Enable D-Bus interface</source>
         <translation>&amp;Povolit rozhraní D-Bus</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3791"/>
+        <location filename="../qjackctlSetupForm.ui" line="3698"/>
         <source>Whether to restrict to one single application instance (X11)</source>
         <translation>Zda omezit na úroveň jednoho programu (X11)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3794"/>
+        <location filename="../qjackctlSetupForm.ui" line="3701"/>
         <source>Single application &amp;instance</source>
         <translation>Ú&amp;roveň jednoho programu</translation>
     </message>

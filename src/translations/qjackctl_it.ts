@@ -2492,7 +2492,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>Select output device for playback</source>
-        <translation>Seleziona il dispositivo d&apos;uscita per la riproduzione</translation>
+        <translation type="obsolete">Seleziona il dispositivo d&apos;uscita per la riproduzione</translation>
     </message>
     <message>
         <source>/dev/dsp</source>
@@ -2520,11 +2520,11 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <source>Select input device for capture</source>
-        <translation>Seleziona il dispositivo d&apos;entrata per la cattura</translation>
+        <translation type="obsolete">Seleziona il dispositivo d&apos;entrata per la cattura</translation>
     </message>
     <message>
         <source>Select PCM device name</source>
-        <translation>Seleziona il dispositivo PCM</translation>
+        <translation type="obsolete">Seleziona il dispositivo PCM</translation>
     </message>
     <message>
         <source>External input latency (frames)</source>

@@ -2398,7 +2398,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>Select output device for playback</source>
-        <translation>Seleccionar dispositivo de salida para reproducción</translation>
+        <translation type="obsolete">Seleccionar dispositivo de salida para reproducción</translation>
     </message>
     <message>
         <source>/dev/dsp</source>
@@ -2426,11 +2426,11 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <source>Select input device for capture</source>
-        <translation>Seleccionar dispositivo de entrada para captura</translation>
+        <translation type="obsolete">Seleccionar dispositivo de entrada para captura</translation>
     </message>
     <message>
         <source>Select PCM device name</source>
-        <translation>Seleccionar dispositivo PCM</translation>
+        <translation type="obsolete">Seleccionar dispositivo PCM</translation>
     </message>
     <message>
         <source>External input latency (frames)</source>
