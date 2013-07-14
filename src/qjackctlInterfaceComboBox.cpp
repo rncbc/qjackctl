@@ -335,9 +335,9 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	QTreeView *pTreeView = static_cast<QTreeView *> (QComboBox::view());
 	pTreeView->setMinimumWidth(pTreeView->sizeHint().width());
 
-	pLineEdit->setText(sCurName);
-
 	QComboBox::setCurrentIndex(iCurCard);
+
+	pLineEdit->setText(sCurName);
 
 	QComboBox::setUpdatesEnabled(true);
 	QComboBox::blockSignals(bBlockSignals);
