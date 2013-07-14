@@ -57,7 +57,9 @@ qjackctlInterfaceComboBox::qjackctlInterfaceComboBox ( QWidget *pParent )
 	: QComboBox(pParent)
 {
 	QTreeView *pTreeView = new QTreeView(this);
-	pTreeView->header()->hide();
+	QHeaderView *pHeaderView = pTreeView->header();
+	pHeaderView->hide();
+	pHeaderView->setResizeMode(QHeaderView::ResizeToContents);
 	pTreeView->setRootIsDecorated(false);
 	pTreeView->setAllColumnsShowFocus(true);
 	pTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -101,7 +103,10 @@ void qjackctlInterfaceComboBox::addCard (
 	const QString& sName, const QString& sDescription )
 {
 	QList<QStandardItem *> items;
-	items.append(new QStandardItem(sName));
+	if (sName == m_sDefName || sName.isEmpty())
+		items.append(new QStandardItem(m_sDefName));
+	else
+		items.append(new QStandardItem(QIcon(":/images/device1.png"), sName));
 	items.append(new QStandardItem(sDescription));
 	model()->appendRow(items);
 }
@@ -333,7 +338,8 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	++iCards;
 
 	QTreeView *pTreeView = static_cast<QTreeView *> (QComboBox::view());
-	pTreeView->setMinimumWidth(pTreeView->sizeHint().width());
+	pTreeView->setMinimumWidth(
+		pTreeView->sizeHint().width() + QComboBox::iconSize().width());
 
 	QComboBox::setCurrentIndex(iCurCard);
 
