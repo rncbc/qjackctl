@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- More preparations for Qt5 configure build.
+
 - Interface device selection is now unified, by moving the old 
   '>' pop-up menu into the customized combo-box drop-down list
   showing all available card/device names and descriptions (on

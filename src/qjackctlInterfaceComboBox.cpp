@@ -59,7 +59,9 @@ qjackctlInterfaceComboBox::qjackctlInterfaceComboBox ( QWidget *pParent )
 	QTreeView *pTreeView = new QTreeView(this);
 	QHeaderView *pHeaderView = pTreeView->header();
 	pHeaderView->hide();
+#if QT_VERSION < 0x050000
 	pHeaderView->setResizeMode(QHeaderView::ResizeToContents);
+#endif
 	pTreeView->setRootIsDecorated(false);
 	pTreeView->setAllColumnsShowFocus(true);
 	pTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
