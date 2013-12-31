@@ -1,3 +1,9 @@
+qjackctl (0.3.11-3) unstable; urgency=low
+
+  * A fifth of a Jubilee release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Tue, 31 Dec 2013 12:00:00 +0100
+
 qjackctl (0.3.10-2) unstable; urgency=low
 
   * The singing swan rehersal.

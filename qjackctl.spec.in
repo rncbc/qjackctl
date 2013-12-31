@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 19
+%define release 20
 
 %define _prefix	@ac_prefix@
 
@@ -60,6 +60,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
+* Tue Dec 31 2013 Rui Nuno Capela <rncbc@rncbc.org> 0.3.11
+- A fifth of a Jubilee release.
 * Tue Apr  2 2013 Rui Nuno Capela <rncbc@rncbc.org> 0.3.10
 - The singing swan rehersal.
 * Fri May 18 2012 Rui Nuno Capela <rncbc@rncbc.org> 0.3.9
