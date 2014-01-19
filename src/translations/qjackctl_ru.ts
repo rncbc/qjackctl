@@ -1215,7 +1215,7 @@ Do you want to remove the patchbay connection?</source>
         <translation>О&amp;бновить</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3805"/>
+        <location filename="../qjackctlMainForm.cpp" line="3806"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -1223,7 +1223,7 @@ Do you want to remove the patchbay connection?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3836"/>
+        <location filename="../qjackctlMainForm.cpp" line="3837"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1231,7 +1231,7 @@ Do you want to remove the patchbay connection?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3867"/>
+        <location filename="../qjackctlMainForm.cpp" line="3868"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.

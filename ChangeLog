@@ -3,6 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+SVN TRUNK
+
+- Missing input/output-latency parameter settings now settled
+  for the D-BUS controlled JACK server and firewire back-end
+  driver.
+
+
 0.3.11  2013-12-31  A fifth of a Jubilee.
 
 - More preparations for Qt5 configure build.

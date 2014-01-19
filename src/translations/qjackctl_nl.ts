@@ -1599,7 +1599,7 @@ Gelieve het berichten venster te lezen voor meer info.</translation>
         <translation type="obsolete">Ve&amp;rversen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3805"/>
+        <location filename="../qjackctlMainForm.cpp" line="3806"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -1610,7 +1610,7 @@ Gelieve het berichten venster te lezen voor meer info.</translation>
 (%4)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3836"/>
+        <location filename="../qjackctlMainForm.cpp" line="3837"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1621,7 +1621,7 @@ Gelieve het berichten venster te lezen voor meer info.</translation>
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3867"/>
+        <location filename="../qjackctlMainForm.cpp" line="3868"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.

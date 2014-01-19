@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -3765,7 +3765,8 @@ void qjackctlMainForm::setDBusParameters (void)
 			(unsigned int) m_preset.iWait,
 			m_preset.iWait > 0);
 	}
-	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob) {
+	else
+	if (!bNet) {
 		setDBusDriverParameter("input-latency",
 			(unsigned int) m_preset.iInLatency,
 			m_preset.iInLatency > 0);
