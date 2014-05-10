@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.11.2, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.11.3, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -125,6 +125,12 @@ AC_ARG_WITH(alsa,
 AC_ARG_WITH(portaudio,
   AC_HELP_STRING([--with-portaudio=PATH], [use alternate PortAudio install path]),
   [ac_with_paths="$ac_with_paths $withval"])
+
+
+# Honor user specified flags.
+ac_cflags=$CFLAGS
+ac_ldflags=$LDFLAGS
+
 
 # Checks for programs.
 AC_PROG_CC
@@ -377,6 +383,8 @@ if test "x$ac_stacktrace" = "xyes"; then
 fi
 
 AC_SUBST(ac_incpath)
+AC_SUBST(ac_cflags)
+AC_SUBST(ac_ldflags)
 
 
 # Checks for typedefs, structures, and compiler characteristics.

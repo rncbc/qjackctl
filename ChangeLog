@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Allow the build system to include an user specified LDFLAGS.
+
 - Missing input/output-latency parameter settings now settled
   for the D-BUS controlled JACK server and firewire back-end
   driver.
