@@ -1,7 +1,7 @@
 // qjackctl.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -42,12 +42,6 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 #define CONFIG_DATADIR CONFIG_QUOTED(DATADIR)
 #else
 #define CONFIG_DATADIR CONFIG_PREFIX "/share"
-#endif
-
-#if defined(LOCALEDIR)
-#define CONFIG_LOCALEDIR CONFIG_QUOTED(LOCALEDIR)
-#else
-#define CONFIG_LOCALEDIR CONFIG_DATADIR "/locale"
 #endif
 
 
@@ -102,7 +96,7 @@ public:
 			if (m_pMyTranslator->load(sLocName, sLocPath)) {
 				QApplication::installTranslator(m_pMyTranslator);
 			} else {
-				sLocPath = CONFIG_LOCALEDIR;
+				sLocPath = CONFIG_DATADIR "/qjackctl/translations";
 				if (m_pMyTranslator->load(sLocName, sLocPath)) {
 					QApplication::installTranslator(m_pMyTranslator);
 				} else {

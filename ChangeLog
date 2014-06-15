@@ -5,6 +5,8 @@ ChangeLog
 
 SVN TRUNK
 
+- Translations install directory change. (EXPERIMENTAL)
+
 - Allow the build system to include an user specified LDFLAGS.
 
 - Missing input/output-latency parameter settings now settled
