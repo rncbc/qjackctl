@@ -50,8 +50,8 @@ including a enhanced patchbay and connection control features.
 %dir %{_datadir}/icons/hicolor
 %dir %{_datadir}/icons/hicolor/32x32
 %dir %{_datadir}/icons/hicolor/32x32/apps
-#dir %{_datadir}/%{name}
-#dir %{_datadir}/%{name}/translations
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/translations
 #dir %{_datadir}/man
 #dir %{_datadir}/man/man1
 %{_bindir}/%{name}
