@@ -822,6 +822,8 @@ bool qjackctlMainForm::queryClose (void)
 		// Stop any service out there...
 		if (m_pSetup->bStopJack)
 			stopJackServer();
+		// Finally, save settings.
+		m_pSetup->saveSetup();
 	}
 
 	return bQueryClose;
@@ -1442,8 +1444,7 @@ void qjackctlMainForm::jackCleanup (void)
 			stabilize(QJACKCTL_TIMER_MSECS);
 		}
 		// Force final server shutdown...
-		appendMessages(tr("JACK was stopped")
-			+ formatExitStatus(m_pJack->exitCode()));
+		appendMessages(tr("JACK was stopped"));
 		// Destroy it.
 		delete m_pJack;
 		m_pJack = NULL;
