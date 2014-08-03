@@ -5,6 +5,9 @@ ChangeLog
 
 SVN TRUNK
 
+- Messages standard output capture has been slightly improved
+  as for non-blocking i/o, whenever available. (EXPERIMENTAL)
+
 - Translations install directory change. (EXPERIMENTAL)
 
 - Allow the build system to include an user specified LDFLAGS.
