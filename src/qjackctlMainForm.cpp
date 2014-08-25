@@ -760,8 +760,11 @@ bool qjackctlMainForm::queryClose (void)
 #endif
 
 	// Check if JACK daemon is currently running...
-	if (bQueryClose && m_pJack  && m_pJack->state() == QProcess::Running
+	if (bQueryClose && m_pJack && m_pJack->state() == QProcess::Running
 		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
+		show();
+		raise();
+		activateWindow();
 		bQueryClose = (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("JACK is currently running.\n\n"

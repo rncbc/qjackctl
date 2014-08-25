@@ -5,6 +5,10 @@ ChangeLog
 
 SVN TRUNK
 
+- Application close confirm warning is now raising the main
+  window as visible and active for due top level display,
+  especially applicable when minimized to the system tray.
+
 - Messages standard output capture has been slightly improved
   as for non-blocking i/o, whenever available. (EXPERIMENTAL)
 
