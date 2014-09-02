@@ -462,271 +462,271 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlMainForm</name>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="44"/>
+        <location filename="../qjackctlMainForm.ui" line="41"/>
         <source>QjackCtl</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="74"/>
+        <location filename="../qjackctlMainForm.ui" line="71"/>
         <source>Start the JACK server</source>
         <translation>JACKサーバーを開始</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="77"/>
+        <location filename="../qjackctlMainForm.ui" line="74"/>
         <location filename="../qjackctlMainForm.cpp" line="3386"/>
         <source>&amp;Start</source>
         <translation>開始(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="83"/>
+        <location filename="../qjackctlMainForm.ui" line="80"/>
         <source>Alt+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="111"/>
+        <location filename="../qjackctlMainForm.ui" line="108"/>
         <source>Stop the JACK server</source>
         <translation>JACKサーバを停止</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="114"/>
+        <location filename="../qjackctlMainForm.ui" line="111"/>
         <source>S&amp;top</source>
         <translation type="unfinished">停止(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="120"/>
+        <location filename="../qjackctlMainForm.ui" line="117"/>
         <source>Alt+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="171"/>
+        <location filename="../qjackctlMainForm.ui" line="170"/>
         <source>JACK server state</source>
         <translation>JACKサーバーの状態</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="196"/>
+        <location filename="../qjackctlMainForm.ui" line="197"/>
         <source>JACK server mode</source>
         <translation>JACKサーバーモード</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="218"/>
+        <location filename="../qjackctlMainForm.ui" line="221"/>
         <source>DSP Load</source>
         <translation>DSPの負荷</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="240"/>
+        <location filename="../qjackctlMainForm.ui" line="245"/>
         <source>Sample rate</source>
         <translation>サンプルレート</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="259"/>
+        <location filename="../qjackctlMainForm.ui" line="269"/>
         <source>XRUN Count (notifications)</source>
         <translation>XRUNのカウント(notifications)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="288"/>
+        <location filename="../qjackctlMainForm.ui" line="298"/>
         <source>Time display</source>
         <translation>時間の表示</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="313"/>
+        <location filename="../qjackctlMainForm.ui" line="325"/>
         <source>Transport state</source>
         <translation>トランスポートの状態</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="338"/>
+        <location filename="../qjackctlMainForm.ui" line="352"/>
         <source>Transport BPM</source>
         <translation>トランスポートのBPM</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="363"/>
+        <location filename="../qjackctlMainForm.ui" line="378"/>
         <source>Transport time</source>
         <translation>トランスポートの時間</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="397"/>
+        <location filename="../qjackctlMainForm.ui" line="412"/>
         <source>Quit processing and exit</source>
         <translation>処理を終わらせ終了します</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="400"/>
+        <location filename="../qjackctlMainForm.ui" line="415"/>
         <location filename="../qjackctlMainForm.cpp" line="3518"/>
         <source>&amp;Quit</source>
         <translation>終了(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="406"/>
+        <location filename="../qjackctlMainForm.ui" line="421"/>
         <source>Alt+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="431"/>
+        <location filename="../qjackctlMainForm.ui" line="446"/>
         <source>Show/hide the session management window</source>
         <translation>セッション管理ウィンドウを表示/隠す</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="434"/>
+        <location filename="../qjackctlMainForm.ui" line="449"/>
         <location filename="../qjackctlMainForm.cpp" line="3424"/>
         <source>S&amp;ession</source>
         <translation type="unfinished">セッション(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="440"/>
+        <location filename="../qjackctlMainForm.ui" line="455"/>
         <source>Alt+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="468"/>
+        <location filename="../qjackctlMainForm.ui" line="483"/>
         <source>Show/hide the messages log/status window</source>
         <translation type="unfinished">メッセージログ/状態ウィンドウを表示/隠す</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="471"/>
+        <location filename="../qjackctlMainForm.ui" line="486"/>
         <location filename="../qjackctlMainForm.cpp" line="3469"/>
         <source>&amp;Messages</source>
         <translation>メッセージ(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="477"/>
+        <location filename="../qjackctlMainForm.ui" line="492"/>
         <source>Alt+M</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="505"/>
+        <location filename="../qjackctlMainForm.ui" line="520"/>
         <source>Show settings and options dialog</source>
         <translation>設定とオプションダイアログを表示</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="508"/>
+        <location filename="../qjackctlMainForm.ui" line="523"/>
         <location filename="../qjackctlMainForm.cpp" line="3509"/>
         <source>Set&amp;up...</source>
         <translation type="unfinished">設定(&amp;U)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="514"/>
+        <location filename="../qjackctlMainForm.ui" line="529"/>
         <source>Alt+U</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="539"/>
+        <location filename="../qjackctlMainForm.ui" line="554"/>
         <source>Show/hide the actual connections patchbay window</source>
         <translation>現在接続しているパッチベイウィンドウを表示/隠す</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="542"/>
+        <location filename="../qjackctlMainForm.ui" line="557"/>
         <source>&amp;Connect</source>
         <translation>接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="548"/>
+        <location filename="../qjackctlMainForm.ui" line="563"/>
         <source>Alt+C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="576"/>
+        <location filename="../qjackctlMainForm.ui" line="591"/>
         <source>Show/hide the patchbay editor window</source>
         <translation>パッチベイ編集ウィンドウを表示/隠す</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="579"/>
+        <location filename="../qjackctlMainForm.ui" line="594"/>
         <source>&amp;Patchbay</source>
         <translation>パッチベイ(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="585"/>
+        <location filename="../qjackctlMainForm.ui" line="600"/>
         <source>Alt+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="613"/>
+        <location filename="../qjackctlMainForm.ui" line="628"/>
         <source>Rewind transport</source>
         <translation type="unfinished">トランスポートを先頭に戻す</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="616"/>
+        <location filename="../qjackctlMainForm.ui" line="631"/>
         <location filename="../qjackctlMainForm.cpp" line="3492"/>
         <source>&amp;Rewind</source>
         <translation type="unfinished">先頭に戻す(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="622"/>
+        <location filename="../qjackctlMainForm.ui" line="637"/>
         <source>Alt+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="644"/>
+        <location filename="../qjackctlMainForm.ui" line="659"/>
         <source>Backward transport</source>
         <translation type="unfinished">トランスポートの逆再生</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="647"/>
+        <location filename="../qjackctlMainForm.ui" line="662"/>
         <source>&amp;Backward</source>
         <translation>逆再生(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="653"/>
+        <location filename="../qjackctlMainForm.ui" line="668"/>
         <source>Alt+B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="678"/>
+        <location filename="../qjackctlMainForm.ui" line="693"/>
         <source>Start transport rolling</source>
         <translation>トランスポートのローリングをスタートする</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="681"/>
+        <location filename="../qjackctlMainForm.ui" line="696"/>
         <location filename="../qjackctlMainForm.cpp" line="3498"/>
         <source>&amp;Play</source>
         <translation>再生(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="687"/>
+        <location filename="../qjackctlMainForm.ui" line="702"/>
         <source>Space</source>
         <translation>スペース</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="720"/>
+        <location filename="../qjackctlMainForm.ui" line="735"/>
         <source>Stop transport rolling</source>
         <translation>トランスポートのローリングをストップする</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="723"/>
+        <location filename="../qjackctlMainForm.ui" line="738"/>
         <location filename="../qjackctlMainForm.cpp" line="3501"/>
         <source>Pa&amp;use</source>
         <translation type="unfinished">一時停止(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="729"/>
+        <location filename="../qjackctlMainForm.ui" line="744"/>
         <source>Shift+Space</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="751"/>
+        <location filename="../qjackctlMainForm.ui" line="766"/>
         <source>Forward transport</source>
         <translation type="unfinished">トランスポートを早送りする</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="754"/>
+        <location filename="../qjackctlMainForm.ui" line="769"/>
         <source>&amp;Forward</source>
         <translation type="unfinished">早送り(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="760"/>
+        <location filename="../qjackctlMainForm.ui" line="775"/>
         <source>Alt+F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="785"/>
+        <location filename="../qjackctlMainForm.ui" line="800"/>
         <source>Show information about this application</source>
         <translation>このアプリケーションについての情報を表示します</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="788"/>
+        <location filename="../qjackctlMainForm.ui" line="803"/>
         <location filename="../qjackctlMainForm.cpp" line="3513"/>
         <source>Ab&amp;out...</source>
         <translation type="unfinished">情報(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="794"/>
+        <location filename="../qjackctlMainForm.ui" line="809"/>
         <source>Alt+O</source>
         <translation></translation>
     </message>

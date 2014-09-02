@@ -548,55 +548,55 @@ Wil u deze aanpassingen opslaan?</translation>
 <context>
     <name>qjackctlMainForm</name>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="44"/>
+        <location filename="../qjackctlMainForm.ui" line="41"/>
         <source>QjackCtl</source>
         <translation>QjackCtl</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="406"/>
+        <location filename="../qjackctlMainForm.ui" line="421"/>
         <source>Alt+Q</source>
         <translatorcomment>Sluiten</translatorcomment>
         <translation>Alt+S</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="400"/>
+        <location filename="../qjackctlMainForm.ui" line="415"/>
         <location filename="../qjackctlMainForm.cpp" line="3518"/>
         <source>&amp;Quit</source>
         <translation>&amp;Sluiten</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="397"/>
+        <location filename="../qjackctlMainForm.ui" line="412"/>
         <source>Quit processing and exit</source>
         <translation>Stop proces en sluit af</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="83"/>
+        <location filename="../qjackctlMainForm.ui" line="80"/>
         <source>Alt+S</source>
         <translation>Alt+r</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="77"/>
+        <location filename="../qjackctlMainForm.ui" line="74"/>
         <location filename="../qjackctlMainForm.cpp" line="3386"/>
         <source>&amp;Start</source>
         <translation>Sta&amp;rt</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="74"/>
+        <location filename="../qjackctlMainForm.ui" line="71"/>
         <source>Start the JACK server</source>
         <translation>Start de JACK server</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="120"/>
+        <location filename="../qjackctlMainForm.ui" line="117"/>
         <source>Alt+T</source>
         <translation>Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="114"/>
+        <location filename="../qjackctlMainForm.ui" line="111"/>
         <source>S&amp;top</source>
         <translation>S&amp;top</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="111"/>
+        <location filename="../qjackctlMainForm.ui" line="108"/>
         <source>Stop the JACK server</source>
         <translation>Stop de JACK server</translation>
     </message>
@@ -610,23 +610,23 @@ Wil u deze aanpassingen opslaan?</translation>
         <translation type="obsolete">Montrer/cacher la fenêtre de statut étendu</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="653"/>
+        <location filename="../qjackctlMainForm.ui" line="668"/>
         <source>Alt+B</source>
         <translation>Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="788"/>
+        <location filename="../qjackctlMainForm.ui" line="803"/>
         <location filename="../qjackctlMainForm.cpp" line="3513"/>
         <source>Ab&amp;out...</source>
         <translation>&amp;over…</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="785"/>
+        <location filename="../qjackctlMainForm.ui" line="800"/>
         <source>Show information about this application</source>
         <translation>Toon informatie over deze toepassing</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="440"/>
+        <location filename="../qjackctlMainForm.ui" line="455"/>
         <source>Alt+E</source>
         <translation></translation>
     </message>
@@ -635,17 +635,17 @@ Wil u deze aanpassingen opslaan?</translation>
         <translation type="obsolete">R&amp;églages...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="505"/>
+        <location filename="../qjackctlMainForm.ui" line="520"/>
         <source>Show settings and options dialog</source>
         <translation>Toon instellingen en opties venster</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="477"/>
+        <location filename="../qjackctlMainForm.ui" line="492"/>
         <source>Alt+M</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="471"/>
+        <location filename="../qjackctlMainForm.ui" line="486"/>
         <location filename="../qjackctlMainForm.cpp" line="3469"/>
         <source>&amp;Messages</source>
         <translation>&amp;Berichten</translation>
@@ -655,44 +655,44 @@ Wil u deze aanpassingen opslaan?</translation>
         <translation type="obsolete">Montrer/cacher la fenêtre du journal des messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="579"/>
+        <location filename="../qjackctlMainForm.ui" line="594"/>
         <source>&amp;Patchbay</source>
         <translatorcomment>I don&apos;t know a translation to dutch for the word patchbay</translatorcomment>
         <translation>&amp;Patchbay</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="576"/>
+        <location filename="../qjackctlMainForm.ui" line="591"/>
         <source>Show/hide the patchbay editor window</source>
         <translation>Toon/verberg de patchbay editor</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="548"/>
+        <location filename="../qjackctlMainForm.ui" line="563"/>
         <source>Alt+C</source>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="542"/>
+        <location filename="../qjackctlMainForm.ui" line="557"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbindingen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="508"/>
+        <location filename="../qjackctlMainForm.ui" line="523"/>
         <location filename="../qjackctlMainForm.cpp" line="3509"/>
         <source>Set&amp;up...</source>
         <translation>&amp;Instellingen…</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="539"/>
+        <location filename="../qjackctlMainForm.ui" line="554"/>
         <source>Show/hide the actual connections patchbay window</source>
         <translation>Toon/verberg de huidige verbindingen patchbay</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="171"/>
+        <location filename="../qjackctlMainForm.ui" line="170"/>
         <source>JACK server state</source>
         <translation>JACK server status</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="196"/>
+        <location filename="../qjackctlMainForm.ui" line="197"/>
         <source>JACK server mode</source>
         <translation>JACK server mode</translation>
     </message>
@@ -701,7 +701,7 @@ Wil u deze aanpassingen opslaan?</translation>
         <translation type="obsolete">Charge processeur</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="240"/>
+        <location filename="../qjackctlMainForm.ui" line="245"/>
         <source>Sample rate</source>
         <translatorcomment>No translation known to Dutch</translatorcomment>
         <translation>Sample rate</translation>
@@ -711,105 +711,105 @@ Wil u deze aanpassingen opslaan?</translation>
         <translation type="obsolete">Décompte des désynchronisations (XRUN)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="288"/>
+        <location filename="../qjackctlMainForm.ui" line="298"/>
         <source>Time display</source>
         <translation>Tijd weergave</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="313"/>
+        <location filename="../qjackctlMainForm.ui" line="325"/>
         <source>Transport state</source>
         <translation>Transport status</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="338"/>
+        <location filename="../qjackctlMainForm.ui" line="352"/>
         <source>Transport BPM</source>
         <translation>Transport BPM</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="363"/>
+        <location filename="../qjackctlMainForm.ui" line="378"/>
         <source>Transport time</source>
         <translation>Transport tijd</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="431"/>
+        <location filename="../qjackctlMainForm.ui" line="446"/>
         <source>Show/hide the session management window</source>
         <translation>Toon/verberg het sessie management venster</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="468"/>
+        <location filename="../qjackctlMainForm.ui" line="483"/>
         <source>Show/hide the messages log/status window</source>
         <translation>Toon/verberg het berichten log/status venster</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="647"/>
+        <location filename="../qjackctlMainForm.ui" line="662"/>
         <source>&amp;Backward</source>
         <translation>&amp;Terug</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="644"/>
+        <location filename="../qjackctlMainForm.ui" line="659"/>
         <source>Backward transport</source>
         <translation>Terugwaarts afspelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="760"/>
+        <location filename="../qjackctlMainForm.ui" line="775"/>
         <source>Alt+F</source>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="754"/>
+        <location filename="../qjackctlMainForm.ui" line="769"/>
         <source>&amp;Forward</source>
         <translation>&amp;Voorwaarts</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="751"/>
+        <location filename="../qjackctlMainForm.ui" line="766"/>
         <source>Forward transport</source>
         <translation>Voorwaarts afspelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="622"/>
+        <location filename="../qjackctlMainForm.ui" line="637"/>
         <source>Alt+R</source>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="616"/>
+        <location filename="../qjackctlMainForm.ui" line="631"/>
         <location filename="../qjackctlMainForm.cpp" line="3492"/>
         <source>&amp;Rewind</source>
         <translation>Te&amp;rugspoelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="613"/>
+        <location filename="../qjackctlMainForm.ui" line="628"/>
         <source>Rewind transport</source>
         <translation>Terugspoelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="514"/>
+        <location filename="../qjackctlMainForm.ui" line="529"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="723"/>
+        <location filename="../qjackctlMainForm.ui" line="738"/>
         <location filename="../qjackctlMainForm.cpp" line="3501"/>
         <source>Pa&amp;use</source>
         <translation>Pa&amp;use</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="720"/>
+        <location filename="../qjackctlMainForm.ui" line="735"/>
         <source>Stop transport rolling</source>
         <translation>Stop het afspelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="585"/>
+        <location filename="../qjackctlMainForm.ui" line="600"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="681"/>
+        <location filename="../qjackctlMainForm.ui" line="696"/>
         <location filename="../qjackctlMainForm.cpp" line="3498"/>
         <source>&amp;Play</source>
         <translation>&amp;Spelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="678"/>
+        <location filename="../qjackctlMainForm.ui" line="693"/>
         <source>Start transport rolling</source>
         <translation>Start het afspelen</translation>
     </message>
@@ -1308,12 +1308,12 @@ the next time you start this program.</source>
 nadat u dit programma opnieuw opstart.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="218"/>
+        <location filename="../qjackctlMainForm.ui" line="221"/>
         <source>DSP Load</source>
         <translation>DSP-Verbruik</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="259"/>
+        <location filename="../qjackctlMainForm.ui" line="269"/>
         <source>XRUN Count (notifications)</source>
         <translation>XRUN Telling (meldingen)</translation>
     </message>
@@ -1569,7 +1569,7 @@ Gelieve het berichten venster te lezen voor meer info.</translation>
         <translation>%1 ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="434"/>
+        <location filename="../qjackctlMainForm.ui" line="449"/>
         <location filename="../qjackctlMainForm.cpp" line="3424"/>
         <source>S&amp;ession</source>
         <translation>S&amp;essie</translation>
@@ -1682,17 +1682,17 @@ Wil u de patchbay verbinding verwijderen?</translation>
         <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="794"/>
+        <location filename="../qjackctlMainForm.ui" line="809"/>
         <source>Alt+O</source>
         <translation>Alt+o</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="729"/>
+        <location filename="../qjackctlMainForm.ui" line="744"/>
         <source>Shift+Space</source>
         <translation>Shift+Spatie</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.ui" line="687"/>
+        <location filename="../qjackctlMainForm.ui" line="702"/>
         <source>Space</source>
         <translation>Spatie</translation>
     </message>

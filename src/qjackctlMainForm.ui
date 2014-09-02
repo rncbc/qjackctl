@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
+    <width>300</width>
     <height>100</height>
    </rect>
   </property>
@@ -36,9 +36,6 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="font" >
-   <font/>
   </property>
   <property name="windowTitle" >
    <string>QjackCtl</string>
@@ -165,7 +162,9 @@
          </size>
         </property>
         <property name="font" >
-         <font/>
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="toolTip" >
          <string>JACK server state</string>
@@ -190,7 +189,9 @@
          </size>
         </property>
         <property name="font" >
-         <font/>
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="toolTip" >
          <string>JACK server mode</string>
@@ -212,7 +213,9 @@
          </size>
         </property>
         <property name="font" >
-         <font/>
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="toolTip" >
          <string>DSP Load</string>
@@ -234,7 +237,9 @@
          </size>
         </property>
         <property name="font" >
-         <font/>
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="toolTip" >
          <string>Sample rate</string>
@@ -254,6 +259,11 @@
           <width>30</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="font" >
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="toolTip" >
          <string>XRUN Count (notifications)</string>
@@ -279,7 +289,7 @@
         </property>
         <property name="font" >
          <font>
-          <pointsize>12</pointsize>
+          <pointsize>14</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -307,7 +317,9 @@
          </size>
         </property>
         <property name="font" >
-         <font/>
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="toolTip" >
          <string>Transport state</string>
@@ -324,7 +336,7 @@
        </widget>
       </item>
       <item row="2" column="2" colspan="2" >
-       <widget class="QLabel" name="TransportBPMTextLabel" >
+       <widget class="QLabel" name="TransportBpmTextLabel" >
         <property name="minimumSize" >
          <size>
           <width>30</width>
@@ -332,7 +344,9 @@
          </size>
         </property>
         <property name="font" >
-         <font/>
+         <font>
+          <pointsize>8</pointsize>
+         </font>
         </property>
         <property name="toolTip" >
          <string>Transport BPM</string>
@@ -355,6 +369,7 @@
         </property>
         <property name="font" >
          <font>
+          <pointsize>8</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>

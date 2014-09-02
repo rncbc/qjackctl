@@ -1734,7 +1734,7 @@ void qjackctlMainForm::updateTimeDisplayFonts (void)
 		m_ui.SampleRateTextLabel->setFont(font);
 		m_ui.XrunCountTextLabel->setFont(font);
 		m_ui.TransportStateTextLabel->setFont(font);
-		m_ui.TransportBPMTextLabel->setFont(font);
+		m_ui.TransportBpmTextLabel->setFont(font);
 		font.setBold(true);
 		m_ui.TransportTimeTextLabel->setFont(font);
 	}
@@ -2555,7 +2555,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	pal.setColor(QPalette::Foreground, Qt::green);
 	m_ui.TimeDisplayTextLabel->setPalette(pal);
 	m_ui.TransportStateTextLabel->setPalette(pal);
-	m_ui.TransportBPMTextLabel->setPalette(pal);
+	m_ui.TransportBpmTextLabel->setPalette(pal);
 	m_ui.TransportTimeTextLabel->setPalette(pal);
 
 	// Whether we've started detached, just change active status.
@@ -2623,7 +2623,7 @@ void qjackctlMainForm::stopJackClient (void)
 	pal.setColor(QPalette::Foreground, Qt::darkGreen);
 	m_ui.TimeDisplayTextLabel->setPalette(pal);
 	m_ui.TransportStateTextLabel->setPalette(pal);
-	m_ui.TransportBPMTextLabel->setPalette(pal);
+	m_ui.TransportBpmTextLabel->setPalette(pal);
 	m_ui.TransportTimeTextLabel->setPalette(pal);
 
 	// Refresh jack client statistics explicitly.
@@ -3226,7 +3226,7 @@ void qjackctlMainForm::updateStatusItem( int iStatusItem, const QString& sText )
 			m_ui.TransportTimeTextLabel->setText(sText);
 		break;
 	case STATUS_TRANSPORT_BPM:
-		m_ui.TransportBPMTextLabel->setText(sText);
+		m_ui.TransportBpmTextLabel->setText(sText);
 		break;
 	}
 
