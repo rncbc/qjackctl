@@ -62,7 +62,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="489"/>
         <source>Set default JACK audio server name</source>
-        <translation>Voreingestellten JACK-Audoservername einstellen</translation>
+        <translation>Voreingestellten JACK-Audioservernamen einstellen</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="548"/>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="102"/>
         <source>ALSA/MIDI sequencer support disabled.</source>
-        <translation>ALSA/MIDI Sequencer wird nicht unterstütz.</translation>
+        <translation>ALSA/MIDI Sequencer wird nicht unterstützt.</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="114"/>
@@ -539,7 +539,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="520"/>
         <source>Show settings and options dialog</source>
-        <translation>Dialogfenster für Enstellungen und Optionen anzeigen</translation>
+        <translation>Dialogfenster für Einstellungen und Optionen anzeigen</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="455"/>
@@ -697,7 +697,7 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="693"/>
         <source>Start transport rolling</source>
-        <translation>Transportforgang starten</translation>
+        <translation>Transportvorgang starten</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="696"/>
@@ -767,7 +767,7 @@ Wollen Sie diesen beenden?</translation>
 
 Maybe JACK audio server is already started.</source>
         <translation>Konnte JACK nicht starten.
-Möglicheweise läuft der JACK-Server schon.</translation>
+Möglicherweise läuft der JACK-Server schon.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="961"/>
@@ -806,7 +806,7 @@ Sorry.</source>
 Sorry</source>
         <translation>D-BUS: JACK-Server konnte nicht gestartet werden.
 
-Tut mir leid</translation>
+Tut mir Leid</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1237"/>
@@ -860,7 +860,7 @@ Kontextmenü des Benachrichtigungsfeldsymbols.</translation>
 Sorry</source>
         <translation>D-BUS: JACK-Server konnte nicht angehalten werden.
 
-Tut mir leid</translation>
+Tut mir Leid</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1479"/>
@@ -1639,7 +1639,7 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="105"/>
         <location filename="../qjackctlPatchbayForm.ui" line="233"/>
         <source>Move currently selected output socket down one position</source>
-        <translation>Ausgewählten Ausgangsanschluß eine Position nach unten verschieben</translation>
+        <translation>Ausgewählten Ausgangsanschlus eine Position nach unten verschieben</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="108"/>
@@ -1650,7 +1650,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="121"/>
         <source>Create a new output socket</source>
-        <translation>Einen neuen Ausgangsanschluß anlegen</translation>
+        <translation>Einen neuen Ausgangsanschlus anlegen</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="124"/>
@@ -1673,7 +1673,7 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="185"/>
         <location filename="../qjackctlPatchbayForm.ui" line="313"/>
         <source>Move currently selected output socket up one position</source>
-        <translation>Ausgewählten Ausgangsanschluß eine Position nach oben verschieben</translation>
+        <translation>Ausgewählten Ausgangsanschluss eine Position nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="188"/>
@@ -1716,7 +1716,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="281"/>
         <source>Create a new input socket</source>
-        <translation>Einen neuen Eingangsanschluß anlegen</translation>
+        <translation>Einen neuen Eingangsanschluss anlegen</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="297"/>
@@ -1771,7 +1771,7 @@ Sind Sie sicher?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="419"/>
         <source>Expand all items</source>
-        <translation>Alle Eintäge aufklappen</translation>
+        <translation>Alle Einträge aufklappen</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="422"/>
@@ -2577,7 +2577,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="510"/>
         <source>Enable hardware monitoring of capture ports</source>
-        <translation>Hardware-überwachung der Caspture-Anschlüsse aktivieren</translation>
+        <translation>Hardware-Überwachung der Capture-Anschlüsse aktivieren</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="513"/>
@@ -2797,12 +2797,12 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="186"/>
         <source>Server &amp;Prefix:</source>
-        <translation>Server &amp;Prefix:</translation>
+        <translation>Server &amp;Präfix:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="211"/>
         <source>Server path (command line prefix)</source>
-        <translation>Serverpfad (Kommandozeilen Prefix)</translation>
+        <translation>Serverpfad (Kommandozeilen Präfix)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="637"/>
@@ -3120,7 +3120,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2137"/>
         <source>Browse for script to be executed before shutting down the JACK audio server</source>
-        <translation>Skript auswählen, das vor dem Herunterfahen des JACK-Servers ausgeführt wird</translation>
+        <translation>Skript auswählen, das vor dem Herunterfahren des JACK-Servers ausgeführt wird</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2159"/>
@@ -3147,7 +3147,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2240"/>
         <source>Browse for script to be executed after shutting down the JACK audio server</source>
-        <translation>Skript auswählen, das nach dem Herunterfahen des JACK-Servers ausgeführt wird</translation>
+        <translation>Skript auswählen, das nach dem Herunterfahren des JACK-Servers ausgeführt wird</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2262"/>
@@ -3198,7 +3198,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2488"/>
         <source>Time in seconds between each auto-refresh cycle</source>
-        <translation>Zeit in Sekungen zwischen jedem Auto-Refresch-Zyklus</translation>
+        <translation>Zeit in Sekunden zwischen jedem Auto-Refresch-Zyklus</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2495"/>
@@ -3295,7 +3295,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1695"/>
         <source>Extra driver options (command line suffix)</source>
-        <translation>Sonderoptionen für Treiber (Kommandozeilen Prefix)</translation>
+        <translation>Sonderoptionen für Treiber (Kommandozeilen Präfix)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2571"/>
