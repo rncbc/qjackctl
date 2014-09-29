@@ -155,6 +155,7 @@ public:
 	bool    bDisplayEffect;
 	bool    bDisplayBlink;
 	int     iJackClientPortAlias;
+	bool    bJackClientPortMetadata;
 	int     iConnectionsIconSize;
 	QString sConnectionsFont;
 	bool    bQueryClose;

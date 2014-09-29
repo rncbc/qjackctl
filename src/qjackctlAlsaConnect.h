@@ -1,7 +1,7 @@
 // qjackctlAlsaConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -51,8 +51,7 @@ class qjackctlAlsaPort : public qjackctlPortItem
 public:
 
 	// Constructor.
-	qjackctlAlsaPort(qjackctlAlsaClient *pClient,
-		const QString& sPortName, int iAlsaPort);
+	qjackctlAlsaPort(qjackctlAlsaClient *pClient, int iAlsaPort);
 	// Default destructor.
 	~qjackctlAlsaPort();
 
@@ -73,8 +72,7 @@ class qjackctlAlsaClient : public qjackctlClientItem
 public:
 
 	// Constructor.
-	qjackctlAlsaClient(qjackctlAlsaClientList *pClientList,
-		const QString& sClientName, int iAlsaClient);
+	qjackctlAlsaClient(qjackctlAlsaClientList *pClientList, int iAlsaClient);
 	// Default destructor.
 	~qjackctlAlsaClient();
 

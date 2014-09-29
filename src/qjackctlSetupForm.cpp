@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -361,6 +361,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.JackClientPortAliasComboBox,
 		SIGNAL(activated(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.JackClientPortMetadataCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 
 	QObject::connect(m_ui.StartJackCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -574,9 +577,11 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	// Connections view icon size.
 	m_ui.ConnectionsIconSizeComboBox->setCurrentIndex(
 		m_pSetup->iConnectionsIconSize);
-	// and this JACK speciality...
+	// and this JACK specialities...
 	m_ui.JackClientPortAliasComboBox->setCurrentIndex(
 		m_pSetup->iJackClientPortAlias);
+	m_ui.JackClientPortMetadataCheckBox->setChecked(
+		m_pSetup->bJackClientPortMetadata);
 
 	// Messages limit option.
 	m_ui.MessagesLimitCheckBox->setChecked(m_pSetup->bMessagesLimit);
@@ -625,6 +630,10 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.JackClientPortAliasComboBox->setCurrentIndex(0);
 	m_ui.JackClientPortAliasTextLabel->setEnabled(false);
 	m_ui.JackClientPortAliasComboBox->setEnabled(false);
+#endif
+#ifndef CONFIG_JACK_METADATA
+	m_ui.JackClientPortMetadata->setChecked(false);
+	m_ui.JackClientPortMetadata->setEnabled(false);
 #endif
 #ifndef CONFIG_ALSA_SEQ
 	m_ui.AlsaSeqEnabledCheckBox->setEnabled(false);
@@ -1051,7 +1060,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	QString sPreset = m_ui.PresetComboBox->currentText();
 	if (!sPreset.isEmpty()) {
-		bool bPreset = (m_pSetup->presets.contains(sPreset));
+		const bool bPreset = (m_pSetup->presets.contains(sPreset));
 		m_ui.PresetSavePushButton->setEnabled(m_iDirtySettings > 0
 			|| (!bPreset && sPreset != m_pSetup->sDefPresetName));
 		m_ui.PresetDeletePushButton->setEnabled(bPreset);
@@ -1107,6 +1116,18 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	m_ui.MessagesLimitLinesComboBox->setEnabled(
 		m_ui.MessagesLimitCheckBox->isChecked());
+
+#ifdef CONFIG_JACK_METADATA
+#ifdef CONFIG_JACK_PORT_ALIASES
+	bEnabled = !m_ui.JackClientPortMetadataCheckBox->isChecked();
+	m_ui.JackClientPortAliasTextLabel->setEnabled(bEnabled);
+	m_ui.JackClientPortAliasComboBox->setEnabled(bEnabled);
+	if (bEnabled) {
+		m_ui.JackClientPortMetadataCheckBox->setEnabled(
+			m_ui.JackClientPortAliasComboBox->currentIndex() == 0);
+	}
+#endif
+#endif
 
 	m_ui.StartMinimizedCheckBox->setEnabled(
 		m_ui.SystemTrayCheckBox->isChecked());
@@ -1508,6 +1529,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bDisplayEffect           = m_ui.DisplayEffectCheckBox->isChecked();
 		m_pSetup->bDisplayBlink            = m_ui.DisplayBlinkCheckBox->isChecked();
 		m_pSetup->iJackClientPortAlias     = m_ui.JackClientPortAliasComboBox->currentIndex();
+		m_pSetup->bJackClientPortMetadata  = m_ui.JackClientPortMetadataCheckBox->isChecked();
 		m_pSetup->iConnectionsIconSize     = m_ui.ConnectionsIconSizeComboBox->currentIndex();
 		m_pSetup->sConnectionsFont         = m_ui.ConnectionsFontTextLabel->font().toString();
 		m_pSetup->bStartJack               = m_ui.StartJackCheckBox->isChecked();

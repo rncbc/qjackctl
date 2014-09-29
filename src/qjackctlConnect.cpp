@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -47,31 +47,17 @@
 //
 
 // Constructor.
-qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient,
-	const QString& sPortName )
+qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient )
 	: QTreeWidgetItem(pClient, QJACKCTL_PORTITEM)
 {
 	m_pClient   = pClient;
-	m_sPortName = sPortName;
+//	m_sPortName = sPortName;
 	m_iPortMark = 0;
 	m_bHilite   = false;
 
 	m_pClient->ports().append(this);
-
-	// Check aliasing...
-	qjackctlConnectAlias *pAliases
-		= ((pClient->clientList())->listView())->aliases();
-	if (pAliases) {
-		QTreeWidgetItem::setText(0,
-			pAliases->portAlias(pClient->clientName(), sPortName));
-		if (((pClient->clientList())->listView())->renameEnabled()) {
-			QTreeWidgetItem::setFlags(QTreeWidgetItem::flags()
-				| Qt::ItemIsEditable);
-		}
-	} else {
-		QTreeWidgetItem::setText(0, sPortName);
-	}
 }
+
 
 // Default destructor.
 qjackctlPortItem::~qjackctlPortItem (void)
@@ -91,9 +77,9 @@ qjackctlPortItem::~qjackctlPortItem (void)
 // Instance accessors.
 void qjackctlPortItem::setPortName ( const QString& sPortName )
 {
-	QTreeWidgetItem::setText(0, sPortName);
-
 	m_sPortName = sPortName;
+
+	setPortNameEx(sPortName);
 }
 
 const QString& qjackctlPortItem::clientName (void) const
@@ -104,6 +90,30 @@ const QString& qjackctlPortItem::clientName (void) const
 const QString& qjackctlPortItem::portName (void) const
 {
 	return m_sPortName;
+}
+
+
+// Proto-pretty/display name accessors.
+void qjackctlPortItem::setPortNameEx ( const QString& sPortName )
+{
+	// Check aliasing...
+	qjackctlConnectAlias *pAliases
+		= ((m_pClient->clientList())->listView())->aliases();
+	if (pAliases) {
+		QTreeWidgetItem::setText(0,
+			pAliases->portAlias(m_pClient->clientName(), sPortName));
+		if (((m_pClient->clientList())->listView())->isRenameEnabled()) {
+			QTreeWidgetItem::setFlags(QTreeWidgetItem::flags()
+				| Qt::ItemIsEditable);
+		}
+	} else {
+		QTreeWidgetItem::setText(0, sPortName);
+	}
+}
+
+QString qjackctlPortItem::portNameEx (void) const
+{
+	return QTreeWidgetItem::text(0);
 }
 
 
@@ -153,7 +163,7 @@ void qjackctlPortItem::removeConnect ( qjackctlPortItem *pPort )
 {
 	pPort->setHilite(false);
 
-	int iPort = m_connects.indexOf(pPort);
+	const int iPort = m_connects.indexOf(pPort);
 	if (iPort >= 0)
 		m_connects.removeAt(iPort);
 }
@@ -232,30 +242,15 @@ bool qjackctlPortItem::operator< ( const QTreeWidgetItem& other ) const
 //
 
 // Constructor.
-qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList,
-	const QString& sClientName )
+qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList )
 	: QTreeWidgetItem(pClientList->listView(), QJACKCTL_CLIENTITEM)
 {
 	m_pClientList = pClientList;
-	m_sClientName = sClientName;
+//	m_sClientName = sClientName;
 	m_iClientMark = 0;
 	m_iHilite     = 0;
 
 	m_pClientList->clients().append(this);
-
-	// Check aliasing...
-	qjackctlConnectAlias *pAliases
-		= (pClientList->listView())->aliases();
-	if (pAliases) {
-		QTreeWidgetItem::setText(0,
-			pAliases->clientAlias(sClientName));
-		if ((pClientList->listView())->renameEnabled()) {
-			QTreeWidgetItem::setFlags(QTreeWidgetItem::flags()
-				| Qt::ItemIsEditable);
-		}
-	} else {
-		QTreeWidgetItem::setText(0, sClientName);
-	}
 }
 
 // Default destructor.
@@ -264,7 +259,7 @@ qjackctlClientItem::~qjackctlClientItem (void)
 	qDeleteAll(m_ports);
 	m_ports.clear();
 
-	int iClient = m_pClientList->clients().indexOf(this);
+	const int iClient = m_pClientList->clients().indexOf(this);
 	if (iClient >= 0)
 		m_pClientList->clients().removeAt(iClient);
 }
@@ -301,14 +296,38 @@ QList<qjackctlPortItem *>& qjackctlClientItem::ports (void)
 // Instance accessors.
 void qjackctlClientItem::setClientName ( const QString& sClientName )
 {
-	QTreeWidgetItem::setText(0, sClientName);
-
 	m_sClientName = sClientName;
+
+	setClientNameEx(sClientName);
 }
 
 const QString& qjackctlClientItem::clientName (void) const
 {
 	return m_sClientName;
+}
+
+
+// Proto-pretty/display name accessors.
+void qjackctlClientItem::setClientNameEx ( const QString& sClientName )
+{
+	// Check aliasing...
+	qjackctlConnectAlias *pAliases
+		= (m_pClientList->listView())->aliases();
+	if (pAliases) {
+		QTreeWidgetItem::setText(0,
+			pAliases->clientAlias(sClientName));
+		if ((m_pClientList->listView())->isRenameEnabled()) {
+			QTreeWidgetItem::setFlags(QTreeWidgetItem::flags()
+				| Qt::ItemIsEditable);
+		}
+	} else {
+		QTreeWidgetItem::setText(0, sClientName);
+	}
+}
+
+QString qjackctlClientItem::clientNameEx (void) const
+{
+	return QTreeWidgetItem::text(0);
 }
 
 
@@ -576,10 +595,10 @@ bool qjackctlClientList::lessThan (
 	const QString& s1 = i1.text(0);
 	const QString& s2 = i2.text(0);
 
-	int ich1, ich2;
+	const int cch1 = s1.length();
+	const int cch2 = s2.length();
 
-	int cch1 = s1.length();
-	int cch2 = s2.length();
+	int ich1, ich2;
 
 	for (ich1 = ich2 = 0; ich1 < cch1 && ich2 < cch2; ich1++, ich2++) {
 
@@ -595,15 +614,15 @@ bool qjackctlClientList::lessThan (
 
 		if (ch1.isDigit() && ch2.isDigit()) {
 			// Find the whole length numbers...
-			int iDigits1 = ich1++;
+			const int iDigits1 = ich1++;
 			while (ich1 < cch1 && s1.at(ich1).isDigit())
 				ich1++;
-			int iDigits2 = ich2++;
+			const int iDigits2 = ich2++;
 			while (ich2 < cch2 && s2.at(ich2).isDigit())
 				ich2++;
 			// Compare as natural decimal-numbers...
-			int n1 = s1.mid(iDigits1, ich1 - iDigits1).toInt();
-			int n2 = s2.mid(iDigits2, ich2 - iDigits2).toInt();
+			const int n1 = s1.mid(iDigits1, ich1 - iDigits1).toInt();
+			const int n2 = s2.mid(iDigits2, ich2 - iDigits2).toInt();
 			if (n1 != n2)
 				return (n1 < n2);
 			// Never go out of bounds...
@@ -746,7 +765,7 @@ void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool b
 	m_bRenameEnabled = bRenameEnabled;
 
 	// For each client item, if any.
-	int iItemCount = QTreeWidget::topLevelItemCount();
+	const int iItemCount = QTreeWidget::topLevelItemCount();
 	for (int iItem = 0; iItem < iItemCount; ++iItem) {
 		QTreeWidgetItem *pItem = QTreeWidget::topLevelItem(iItem);
 		if (pItem->type() != QJACKCTL_CLIENTITEM)
@@ -770,7 +789,7 @@ void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool b
 				pClientItem->flags() & ~Qt::ItemIsEditable);
 		}
 		// For each port item...
-		int iChildCount = pClientItem->childCount();
+		const int iChildCount = pClientItem->childCount();
 		for (int iChild = 0; iChild < iChildCount; ++iChild) {
 			QTreeWidgetItem *pChildItem = pClientItem->child(iChild);
 			if (pChildItem->type() != QJACKCTL_PORTITEM)
@@ -802,7 +821,7 @@ qjackctlConnectAlias *qjackctlClientListView::aliases (void) const
 	return m_pAliases;
 }
 
-bool qjackctlClientListView::renameEnabled (void) const
+bool qjackctlClientListView::isRenameEnabled (void) const
 {
 	return m_bRenameEnabled;
 }
@@ -1100,7 +1119,7 @@ void qjackctlConnectorView::drawConnectionLine ( QPainter *pPainter,
 	if (m_pConnectView->isBezierLines()) {
 		// Setup control points
 		QPolygon spline(4);
-		int cp = int(float(x2 - x1 - 8) * 0.4f);
+		const int cp = int(float(x2 - x1 - 8) * 0.4f);
 		spline.putPoints(0, 4,
 			x1 + 4, y1, x1 + 4 + cp, y1, 
 			x2 - 4 - cp, y2, x2 - 4, y2);
@@ -1130,9 +1149,9 @@ void qjackctlConnectorView::paintEvent ( QPaintEvent * )
 	qjackctlClientListView *pOListView = m_pConnectView->OListView();
 	qjackctlClientListView *pIListView = m_pConnectView->IListView();
 
-	int yc = QWidget::pos().y();
-	int yo = pOListView->pos().y();
-	int yi = pIListView->pos().y();
+	const int yc = QWidget::pos().y();
+	const int yo = pOListView->pos().y();
+	const int yi = pIListView->pos().y();
 
 	QPainter painter(this);
 	int x1, y1, h1;
@@ -1151,7 +1170,7 @@ void qjackctlConnectorView::paintEvent ( QPaintEvent * )
 	h1 = (pOListView->header())->sizeHint().height();
 	h2 = (pIListView->header())->sizeHint().height();
 	// For each output client item...
-	int iItemCount = pOListView->topLevelItemCount();
+	const int iItemCount = pOListView->topLevelItemCount();
 	for (int iItem = 0; iItem < iItemCount; ++iItem) {
 		QTreeWidgetItem *pItem = pOListView->topLevelItem(iItem);
 		if (pItem->type() != QJACKCTL_CLIENTITEM)
@@ -1164,7 +1183,7 @@ void qjackctlConnectorView::paintEvent ( QPaintEvent * )
 		++i;
 		painter.setPen(QColor(rgb[i % 3], rgb[(i / 3) % 3], rgb[(i / 9) % 3]));
 		// For each port item
-		int iChildCount = pOClient->childCount();
+		const int iChildCount = pOClient->childCount();
 		for (int iChild = 0; iChild < iChildCount; ++iChild) {
 			QTreeWidgetItem *pChild = pOClient->child(iChild);
 			if (pChild->type() != QJACKCTL_PORTITEM)
@@ -1326,10 +1345,10 @@ void qjackctlConnectView::setIconSize ( int iIconSize )
 	m_iIconSize = iIconSize;
 
 	// Update item sizes properly...
-	int px = (16 << m_iIconSize);
-	const QSize iconsize(px, px);
-	m_pOListView->setIconSize(iconsize);
-	m_pIListView->setIconSize(iconsize);
+	const int px = (16 << m_iIconSize);
+	const QSize iconSize(px, px);
+	m_pOListView->setIconSize(iconSize);
+	m_pIListView->setIconSize(iconSize);
 
 	// Call binding descendant implementation,
 	// and do a complete content reset...
@@ -1885,7 +1904,7 @@ void qjackctlConnect::refresh (void)
 // Dunno. But this may avoid some conflicts.
 bool qjackctlConnect::startMutex (void)
 {
-	bool bMutex = (m_iMutex == 0);
+	const bool bMutex = (m_iMutex == 0);
 	if (bMutex)
 		m_iMutex++;
 	return bMutex;
@@ -1914,8 +1933,8 @@ qjackctlClientList *qjackctlConnect::IClientList (void) const
 QPixmap *qjackctlConnect::createIconPixmap ( const QString& sIconName )
 {
 	QString sName = sIconName;
-	int     iSize = m_pConnectView->iconSize() * 32;
 
+	const int iSize = m_pConnectView->iconSize() * 32;
 	if (iSize > 0)
 		sName += QString("_%1x%2").arg(iSize).arg(iSize);
 

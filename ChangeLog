@@ -5,14 +5,18 @@ ChangeLog
 
 SVN TRUNK
 
+- JACK client/port pretty-name (metadata) support is being
+  introduced (under heavy refactoring; patch by Paul Davis).
+  (EXPERIMENTAL)
+
 - Application close confirm warning is now raising the main
   window as visible and active for due top level display,
   especially applicable when minimized to the system tray.
 
 - Messages standard output capture has been slightly improved
-  as for non-blocking i/o, whenever available. (EXPERIMENTAL)
+  as for non-blocking i/o, whenever available.
 
-- Translations install directory change. (EXPERIMENTAL)
+- Translations install directory change.
 
 - Allow the build system to include an user specified LDFLAGS.
 

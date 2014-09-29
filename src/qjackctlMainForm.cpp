@@ -66,6 +66,10 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 #include <jack/statistics.h>
 #endif
 
+#ifdef CONFIG_JACK_METADATA
+#include <jack/metadata.h>
+#endif
+
 // Timer constant stuff.
 #define QJACKCTL_TIMER_MSECS    200
 
@@ -113,6 +117,10 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
 #ifdef CONFIG_DBUS
 #define QJACKCTL_LINE_EVENT     QEvent::Type(QEvent::User + 6)
+#endif
+
+#ifdef CONFIG_JACK_METADATA
+#define QJACKCTL_PROP_EVENT     QEvent::Type(QEvent::User + 7)
 #endif
 
 
@@ -272,6 +280,23 @@ private:
 #endif	// CONFIG_DBUS
 
 
+#ifdef CONFIG_JACK_METADATA
+// Jack property change function, called
+// whenever metadata is changed
+static void qjackctl_property_change_callback (
+	jack_uuid_t, const char *key, jack_property_change_t, void * )
+{
+	// PRETTY_NAME is the only metadata we are currently interested in...
+	if (qjackctlJackClientList::isJackClientPortMetadata() &&
+		key && (strcmp(key, JACK_METADATA_PRETTY_NAME) == 0)) {
+		QApplication::postEvent(
+			qjackctlMainForm::getInstance(),
+			new QEvent(QJACKCTL_PROP_EVENT));
+	}
+}
+#endif
+
+
 //----------------------------------------------------------------------------
 // qjackctlMainForm -- UI wrapper form.
 
@@ -317,8 +342,11 @@ qjackctlMainForm::qjackctlMainForm (
 
 	m_iPatchbayRefresh = 0;
 
-	m_pStdoutNotifier = NULL;
+#ifdef CONFIG_JACK_METADATA
+	m_iJackPropertyChange = 0;
+#endif
 
+	m_pStdoutNotifier = NULL;
 	m_pAlsaNotifier = NULL;
 
 	// All forms are to be created later on setup.
@@ -530,6 +558,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateConnectionsFont();
 	updateConnectionsIconSize();
 	updateJackClientPortAlias();
+	updateJackClientPortMetadata();
 	updateBezierLines();
 	updateActivePatchbay();
 	updateSystemTray();
@@ -868,6 +897,11 @@ void qjackctlMainForm::customEvent ( QEvent *pEvent )
 	case QJACKCTL_LINE_EVENT:
 		appendStdoutBuffer(
 			static_cast<qjackctlDBusLogWatcher::LineEvent *> (pEvent)->line());
+		break;
+#endif
+#ifdef CONFIG_JACK_METADATA
+	case QJACKCTL_PROP_EVENT:
+		propNotifyEvent();
 		break;
 #endif
 	default:
@@ -1681,6 +1715,18 @@ void qjackctlMainForm::updateJackClientPortAlias (void)
 }
 
 
+// Update of JACK client/port pretty-name (metadata) display mode.
+void qjackctlMainForm::updateJackClientPortMetadata (void)
+{
+	if (m_pSetup == NULL)
+		return;
+
+	qjackctlJackClientList::setJackClientPortMetadata(m_pSetup->bJackClientPortMetadata);
+
+	refreshJackConnections();
+}
+
+
 // Update the connection and patchbay line style.
 void qjackctlMainForm::updateBezierLines (void)
 {
@@ -2132,7 +2178,7 @@ void qjackctlMainForm::refreshXrunStats (void)
 }
 
 
-// Jack socket notifier port/graph callback funtion.
+// Jack port/graph change event notifier.
 void qjackctlMainForm::portNotifyEvent (void)
 {
 	// Log some message here, if new.
@@ -2145,7 +2191,7 @@ void qjackctlMainForm::portNotifyEvent (void)
 }
 
 
-// Jack socket notifier XRUN callback funtion.
+// Jack XRUN event notifier.
 void qjackctlMainForm::xrunNotifyEvent (void)
 {
 	// Just increment callback counter.
@@ -2169,7 +2215,7 @@ void qjackctlMainForm::xrunNotifyEvent (void)
 }
 
 
-// Jack buffer size notifier callback funtion.
+// Jack buffer size event notifier.
 void qjackctlMainForm::buffNotifyEvent (void)
 {
 	// Don't need to nothing, it was handled on qjackctl_buffer_size_callback;
@@ -2179,7 +2225,7 @@ void qjackctlMainForm::buffNotifyEvent (void)
 }
 
 
-// Jack socket notifier callback funtion.
+// Jack shutdown event notifier.
 void qjackctlMainForm::shutNotifyEvent (void)
 {
 	// Log this event.
@@ -2192,7 +2238,7 @@ void qjackctlMainForm::shutNotifyEvent (void)
 }
 
 
-// Process error slot
+// Process exit event notifier.
 void qjackctlMainForm::exitNotifyEvent (void)
 {
 	// Poor-mans read, copy, update (RCU)
@@ -2223,6 +2269,22 @@ void qjackctlMainForm::exitNotifyEvent (void)
 		break;
 	}
 }
+
+#ifdef CONFIG_JACK_METADATA
+// Jack property (metadata) event notifier.
+void qjackctlMainForm::propNotifyEvent (void)
+{
+	// Log some message here, if new.
+	if (m_iJackRefresh == 0)
+		appendMessagesColor(tr("JACK property change."), "#993366");
+	// Special refresh mode...
+	m_iJackPropertyChange++;
+	// Do what has to be done.
+	refreshJackConnections();
+	// We'll be dirty too...
+	m_iJackDirty++;
+}
+#endif
 
 
 // ALSA announce slot.
@@ -2295,8 +2357,15 @@ void qjackctlMainForm::timerSlot (void)
 		// Are we about to refresh it, really?
 		if (m_iJackRefresh > 0 && m_pJackClient != NULL) {
 			m_iJackRefresh = 0;
+		#ifdef CONFIG_JACK_METADATA
+			const bool bClear = (m_iJackPropertyChange > 0);
+			m_iJackPropertyChange = 0;
+			m_pConnectionsForm->refreshAudio(true, bClear);
+			m_pConnectionsForm->refreshMidi(true, bClear);
+		#else
 			m_pConnectionsForm->refreshAudio(true);
 			m_pConnectionsForm->refreshMidi(true);
+		#endif
 		}
 		if (m_iAlsaRefresh > 0 && m_pAlsaSeq != NULL) {
 			m_iAlsaRefresh = 0;
@@ -2500,6 +2569,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		qjackctl_buffer_size_callback, this);
 	jack_on_shutdown(m_pJackClient,
 		qjackctl_on_shutdown, this);
+#ifdef CONFIG_JACK_METADATA
+	jack_set_property_change_callback(m_pJackClient,
+		qjackctl_property_change_callback, this);
+#endif
 
 	// First knowledge about buffer size.
 	g_nframes = jack_get_buffer_size(m_pJackClient);
@@ -2833,6 +2906,7 @@ void qjackctlMainForm::showSetupForm (void)
 		QString sOldConnectionsFont     = m_pSetup->sConnectionsFont;
 		int     iOldConnectionsIconSize = m_pSetup->iConnectionsIconSize;
 		int     iOldJackClientPortAlias = m_pSetup->iJackClientPortAlias;
+		bool    bOldJackClientPortMetadata = m_pSetup->bJackClientPortMetadata;
 		int     iOldTimeDisplay         = m_pSetup->iTimeDisplay;
 		int     iOldTimeFormat          = m_pSetup->iTimeFormat;
 		bool    bOldDisplayEffect       = m_pSetup->bDisplayEffect;
@@ -2872,6 +2946,9 @@ void qjackctlMainForm::showSetupForm (void)
 				updateDisplayEffect();
 			if (iOldJackClientPortAlias != m_pSetup->iJackClientPortAlias)
 				updateJackClientPortAlias();
+			if (( bOldJackClientPortMetadata && !m_pSetup->bJackClientPortMetadata) ||
+				(!bOldJackClientPortMetadata &&  m_pSetup->bJackClientPortMetadata))
+				updateJackClientPortMetadata();
 			if (iOldConnectionsIconSize != m_pSetup->iConnectionsIconSize)
 				updateConnectionsIconSize();
 			if (sOldConnectionsFont != m_pSetup->sConnectionsFont)

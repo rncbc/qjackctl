@@ -1,7 +1,7 @@
 // qjackctlConnectAlias.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ QString qjackctlClientAlias::clientName (void) const
 
 
 // Client name matcher.
-bool qjackctlClientAlias::matchClientName ( const QString& sClientName )
+bool qjackctlClientAlias::matchClientName ( const QString& sClientName ) const
 {
 	return m_rxClientName.exactMatch(sClientName);
 }
@@ -143,7 +143,7 @@ QString qjackctlClientAlias::escapeRegExpDigits ( const QString& s,
 }
 
 
-// Need for generid sort.
+// Need for generic sort.
 bool qjackctlClientAlias::operator< ( const qjackctlClientAlias& other )
 {
 	return (m_sClientAlias < other.clientAlias());

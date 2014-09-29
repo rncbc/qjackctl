@@ -1,7 +1,7 @@
 // qjackctlJackConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2010, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -57,14 +57,17 @@ class qjackctlJackPort : public qjackctlPortItem
 public:
 
 	// Constructor.
-	qjackctlJackPort(qjackctlJackClient *pClient,
-		const QString& sPortName, jack_port_t *pJackPort);
+	qjackctlJackPort(qjackctlJackClient *pClient, jack_port_t *pJackPort);
 	// Default destructor.
 	~qjackctlJackPort();
 
 	// Jack handles accessors.
-	jack_client_t *jackClient() const;
-	jack_port_t   *jackPort() const;
+	jack_port_t *jackPort() const;
+
+protected:
+
+	// Pretty/display name accessors (virtual override).
+	void setPortNameEx(const QString& sPortName);
 
 private:
 
@@ -79,16 +82,17 @@ class qjackctlJackClient : public qjackctlClientItem
 public:
 
 	// Constructor.
-	qjackctlJackClient(qjackctlJackClientList *pClientList,
-		const QString& sClientName);
+	qjackctlJackClient(qjackctlJackClientList *pClientList);
 	// Default destructor.
 	~qjackctlJackClient();
 
-	// Jack client accessors.
-	jack_client_t *jackClient() const;
-
 	// Jack port lookup.
 	qjackctlJackPort *findJackPort(jack_port_t *pJackPort);
+
+protected:
+
+	// Pretty/display name accessors (virtual override).
+	void setClientNameEx(const QString& sClientName);
 };
 
 
@@ -112,10 +116,17 @@ public:
 	static void setJackClientPortAlias(int iJackClientPortAlias);
 	static int jackClientPortAlias();
 
+	// Jack client port pretty-name (metadata) mode.
+	static void setJackClientPortMetadata(bool bJackClientPortMetadata);
+	static bool isJackClientPortMetadata();
+
 private:
 
 	// Jack client port aliases mode.
 	static int g_iJackClientPortAlias;
+
+	// Jack client port pretty-name (metadata) mode.
+	static bool g_bJackClientPortMetadata;
 };
 
 

@@ -182,6 +182,7 @@ protected:
 	void updateConnectionsFont();
 	void updateConnectionsIconSize();
 	void updateJackClientPortAlias();
+	void updateJackClientPortMetadata();
 	void updateBezierLines();
 	void updateDisplayEffect();
 	void updateTimeDisplayFonts();
@@ -201,6 +202,9 @@ protected:
 	void buffNotifyEvent();
 	void shutNotifyEvent();
 	void exitNotifyEvent();
+#ifdef CONFIG_JACK_METADATA
+	void propNotifyEvent();
+#endif
 
 	void startJackClientDelay();
 	bool startJackClient(bool bDetach);
@@ -287,6 +291,10 @@ private:
 	int m_iStatusBlink;
 	int m_iStatusRefresh;
 	int m_iPatchbayRefresh;
+
+#ifdef CONFIG_JACK_METADATA
+	int m_iJackPropertyChange;
+#endif
 
 	QSocketNotifier *m_pStdoutNotifier;
 	QSocketNotifier *m_pAlsaNotifier;

@@ -1,7 +1,7 @@
 // qjackctlConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -49,9 +49,9 @@ class qjackctlPortItem : public QTreeWidgetItem
 public:
 
 	// Constructor.
-	qjackctlPortItem(qjackctlClientItem *pClient, const QString& sPortName);
+	qjackctlPortItem(qjackctlClientItem *pClient);
 	// Default destructor.
-	~qjackctlPortItem();
+	virtual ~qjackctlPortItem();
 
 	// Instance accessors.
 	void setPortName(const QString& sPortName);
@@ -89,6 +89,12 @@ public:
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
 
+protected:
+
+	// Proto-pretty/display name accessors.
+	virtual void setPortNameEx(const QString& sPortName);
+	QString portNameEx() const;
+
 private:
 
 	// Instance variables.
@@ -109,10 +115,9 @@ class qjackctlClientItem : public QTreeWidgetItem
 public:
 
 	// Constructor.
-	qjackctlClientItem(qjackctlClientList *pClientList,
-		const QString& sClientName);
+	qjackctlClientItem(qjackctlClientList *pClientList);
 	// Default destructor.
-	~qjackctlClientItem();
+	virtual ~qjackctlClientItem();
 
 	// Port list primitive methods.
 	void addPort(qjackctlPortItem *pPort);
@@ -151,6 +156,12 @@ public:
 	// Proxy sort override method.
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
+
+protected:
+
+	// The proto-pretty/display name accessors.
+	virtual void setClientNameEx(const QString& sClientName);
+	QString clientNameEx() const;
 
 private:
 
@@ -245,7 +256,7 @@ public:
 	// Aliasing support methods.
 	void setAliases(qjackctlConnectAlias *pAliases, bool bRenameEnabled);
 	qjackctlConnectAlias *aliases() const;
-	bool renameEnabled() const;
+	bool isRenameEnabled() const;
 
 	// Binding indirect accessor.
 	qjackctlConnect *binding() const;

@@ -1,7 +1,7 @@
 // qjackctlConnectionsForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -565,12 +565,12 @@ void qjackctlConnectionsForm::midiStabilize (void)
 // Check if there's ALSA MIDI connections.
 bool qjackctlConnectionsForm::isAlsaConnected (void) const
 {
-	bool bIsConnected = false;
+	bool bIsAlsaConnected = false;
 
 	if (m_pAlsaConnect)
-		bIsConnected = m_pAlsaConnect->canDisconnectAll();
+		bIsAlsaConnected = m_pAlsaConnect->canDisconnectAll();
 
-	return bIsConnected;
+	return bIsAlsaConnected;
 }
 
 
@@ -767,19 +767,19 @@ void qjackctlConnectionsForm::updateAliases (void)
 {
 	// Set alias maps for all listviews...
 	if (m_pSetup && m_pSetup->bAliasesEnabled) {
-		bool bRenameEnabled = m_pSetup->bAliasesEditing;
+		const bool bRenameEnabled = m_pSetup->bAliasesEditing;
 		m_ui.AudioConnectView->OListView()->setAliases(
 			&(m_pSetup->aliasAudioOutputs), bRenameEnabled);
 		m_ui.AudioConnectView->IListView()->setAliases(
-			&(m_pSetup->aliasAudioInputs),  bRenameEnabled);
+			&(m_pSetup->aliasAudioInputs), bRenameEnabled);
 		m_ui.MidiConnectView->OListView()->setAliases(
 			&(m_pSetup->aliasMidiOutputs), bRenameEnabled);
 		m_ui.MidiConnectView->IListView()->setAliases(
-			&(m_pSetup->aliasMidiInputs),  bRenameEnabled);
+			&(m_pSetup->aliasMidiInputs), bRenameEnabled);
 		m_ui.AlsaConnectView->OListView()->setAliases(
 			&(m_pSetup->aliasAlsaOutputs), bRenameEnabled);
 		m_ui.AlsaConnectView->IListView()->setAliases(
-			&(m_pSetup->aliasAlsaInputs),  bRenameEnabled);
+			&(m_pSetup->aliasAlsaInputs), bRenameEnabled);
 	} else {
 		m_ui.AudioConnectView->OListView()->setAliases(NULL, false);
 		m_ui.AudioConnectView->IListView()->setAliases(NULL, false);

@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.3.11.11, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.3.11.12, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -65,6 +65,18 @@ AC_ARG_ENABLE(jack_session,
   AC_HELP_STRING([--enable-jack-session], [enable JACK session support (default=yes)]),
   [ac_jack_session="$enableval"],
   [ac_jack_session="yes"])
+
+# Enable JACK port aliases support.
+AC_ARG_ENABLE(jack_port_aliases,
+  AC_HELP_STRING([--enable-jack-port-aliases], [enable JACK port aliases support (default=yes)]),
+  [ac_jack_port_aliases="$enableval"],
+  [ac_jack_port_aliases="yes"])
+
+# Enable JACK metadata support.
+AC_ARG_ENABLE(jack_metadata,
+  AC_HELP_STRING([--enable-jack-metadata], [enable JACK metadata support (default=yes)]),
+  [ac_jack_metadata="$enableval"],
+  [ac_jack_metadata="yes"])
 
 # Enable JACK version support.
 AC_ARG_ENABLE(jack_version,
@@ -332,11 +344,11 @@ fi
 if test "x$ac_jack_midi" = "xyes"; then
    AC_CHECK_HEADER(jack/midiport.h, [ac_jack_midi="yes"], [ac_jack_midi="no"])
    if test "x$ac_jack_midi" = "xyes"; then
-	  AC_DEFINE(CONFIG_JACK_MIDI, 1, [Define if JACK MIDI support is available.])
+      AC_DEFINE(CONFIG_JACK_MIDI, 1, [Define if JACK MIDI support is available.])
    else
-	  AC_MSG_WARN([*** jack/midiport.h file not found.])
-	  AC_MSG_WARN([*** JACK 0.103.0 or later may be required.])
-	  AC_MSG_WARN([*** JACK MIDI support will be disabled.])
+      AC_MSG_WARN([*** jack/midiport.h file not found.])
+      AC_MSG_WARN([*** JACK 0.103.0 or later may be required.])
+      AC_MSG_WARN([*** JACK MIDI support will be disabled.])
    fi
 fi
 
@@ -344,11 +356,23 @@ fi
 if test "x$ac_jack_session" = "xyes"; then
    AC_CHECK_HEADER(jack/session.h, [ac_jack_session="yes"], [ac_jack_session="no"])
    if test "x$ac_jack_session" = "xyes"; then
-	  AC_DEFINE(CONFIG_JACK_SESSION, 1, [Define if JACK session support is available.])
+      AC_DEFINE(CONFIG_JACK_SESSION, 1, [Define if JACK session support is available.])
    else
-	  AC_MSG_WARN([*** jack/session.h file not found.])
-	  AC_MSG_WARN([*** JACK 0.118.3 or later may be required.])
-	  AC_MSG_WARN([*** JACK session support will be disabled.])
+      AC_MSG_WARN([*** jack/session.h file not found.])
+      AC_MSG_WARN([*** JACK 0.118.3 or later may be required.])
+      AC_MSG_WARN([*** JACK session support will be disabled.])
+   fi
+fi
+
+# Check for JACK metadata headers availability.
+if test "x$ac_jack_metadata" = "xyes"; then
+   AC_CHECK_HEADER(jack/metadata.h, [ac_jack_metadata="yes"], [ac_jack_metadata="no"])
+   if test "x$ac_jack_metadata" = "xyes"; then
+      AC_DEFINE(CONFIG_JACK_METADATA, 1, [Define if JACK metadata support is available.])
+   else
+      AC_MSG_WARN([*** jack/metadata.h file not found.])
+      AC_MSG_WARN([*** JACK 0.124.1 or later may be required.])
+      AC_MSG_WARN([*** JACK metadata support will be disabled.])
    fi
 fi
 
@@ -427,16 +451,18 @@ if test "x$ac_jack_max_delay" = "xyes"; then
 fi
 
 # Check for jack_port_get_aliases function.
-AC_CHECK_LIB(jack, jack_port_get_aliases, [ac_jack_port_aliases="yes"], [ac_jack_port_aliases="no"])
 if test "x$ac_jack_port_aliases" = "xyes"; then
-   AC_DEFINE(CONFIG_JACK_PORT_ALIASES, 1, [Define if jack_port_get_aliases is available.])
+   AC_CHECK_LIB(jack, jack_port_get_aliases, [ac_jack_port_aliases="yes"], [ac_jack_port_aliases="no"])
+   if test "x$ac_jack_port_aliases" = "xyes"; then
+      AC_DEFINE(CONFIG_JACK_PORT_ALIASES, 1, [Define if jack_port_get_aliases is available.])
+   fi
 fi
 
 # Check for jack_get_version_string function.
 if test "x$ac_jack_version" = "xyes"; then
    AC_CHECK_LIB(jack, jack_get_version_string, [ac_jack_version="yes"], [ac_jack_version="no"])
    if test "x$ac_jack_version" = "xyes"; then
-	  AC_DEFINE(CONFIG_JACK_VERSION, 1, [Define if jack_get_version_string is available.])
+      AC_DEFINE(CONFIG_JACK_VERSION, 1, [Define if jack_get_version_string is available.])
    fi
 fi
 
@@ -464,6 +490,7 @@ echo "  JACK Transport support . . . . . . . . . . . . . .: $ac_jack_transport"
 echo "  JACK XRUN delay support  . . . . . . . . . . . . .: $ac_jack_xrun_delay"
 echo "  JACK Maximum scheduling delay support  . . . . . .: $ac_jack_max_delay"
 echo "  JACK Port aliases support  . . . . . . . . . . . .: $ac_jack_port_aliases"
+echo "  JACK Metadata support  . . . . . . . . . . . . . .: $ac_jack_metadata"
 echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
 echo "  JACK Session support . . . . . . . . . . . . . . .: $ac_jack_session"
 echo "  JACK Version support (JACK2) . . . . . . . . . . .: $ac_jack_version"

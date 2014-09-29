@@ -3,7 +3,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -3325,7 +3325,7 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="3">
+          <item row="0" column="4">
            <widget class="QLabel" name="ConnectionsIconSizeTextLabel">
             <property name="font">
              <font>
@@ -3347,7 +3347,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
+          <item row="0" column="5">
            <widget class="QComboBox" name="ConnectionsIconSizeComboBox">
             <property name="font">
              <font>
@@ -3416,7 +3416,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="3" column="0" colspan="3">
            <widget class="QCheckBox" name="AliasesEnabledCheckBox">
             <property name="font">
              <font>
@@ -3435,26 +3435,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0" colspan="2">
-           <widget class="QCheckBox" name="AliasesEditingCheckBox">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>Whether to enable in-place client/port name editing (rename)</string>
-            </property>
-            <property name="text">
-             <string>Ena&amp;ble client/port aliases editing (rename)</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+B</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="3">
+          <item row="3" column="4">
            <widget class="QLabel" name="JackClientPortAliasTextLabel">
             <property name="font">
              <font>
@@ -3476,7 +3457,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="4">
+          <item row="3" column="5">
            <widget class="QComboBox" name="JackClientPortAliasComboBox">
             <property name="font">
              <font>
@@ -3508,6 +3489,44 @@
               <string>Second</string>
              </property>
             </item>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="3">
+           <widget class="QCheckBox" name="AliasesEditingCheckBox">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Whether to enable in-place client/port name editing (rename)</string>
+            </property>
+            <property name="text">
+             <string>Ena&amp;ble client/port aliases editing (rename)</string>
+            </property>
+            <property name="shortcut">
+             <string>Alt+B</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3" colspan="3">
+           <widget class="QCheckBox" name="JackClientPortMetadataCheckBox">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>JACK client/port pretty-name (metadata) display mode</string>
+            </property>
+            <property name="text">
+             <string>Enable JA&amp;CK client/port pretty-names (metadata)</string>
+            </property>
+            <property name="shortcut">
+             <string>Alt+C</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -4232,6 +4251,8 @@
   <tabstop>BezierLinesCheckBox</tabstop>
   <tabstop>AliasesEnabledCheckBox</tabstop>
   <tabstop>AliasesEditingCheckBox</tabstop>
+  <tabstop>JackClientPortAliasComboBox</tabstop>
+  <tabstop>JackClientPortMetadataCheckBox</tabstop>
   <tabstop>StartJackCheckBox</tabstop>
   <tabstop>QueryCloseCheckBox</tabstop>
   <tabstop>KeepOnTopCheckBox</tabstop>
