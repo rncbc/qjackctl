@@ -79,7 +79,7 @@ void qjackctlPortItem::setPortName ( const QString& sPortName )
 {
 	m_sPortName = sPortName;
 
-	setPortNameEx(sPortName);
+	updatePortName();
 }
 
 const QString& qjackctlPortItem::clientName (void) const
@@ -93,11 +93,21 @@ const QString& qjackctlPortItem::portName (void) const
 }
 
 
-// Port name alias accessor.
-QString qjackctlPortItem::portNameAlias (
-	const QString& sPortName, bool *pbRenameEnabled ) const
+// Port name alias accessors.
+void qjackctlPortItem::setPortNameAlias ( const QString& sPortNameAlias )
 {
-	QString sPortNameAlias = sPortName;
+	// Check aliasing...
+	qjackctlConnectAlias *pAliases
+		= ((m_pClient->clientList())->listView())->aliases();
+	if (pAliases) {
+		const QString& sClientName = m_pClient->clientName();
+		pAliases->setPortAlias(sClientName, m_sPortName, sPortNameAlias);
+	}
+}
+
+QString qjackctlPortItem::portNameAlias ( bool *pbRenameEnabled ) const
+{
+	QString sPortNameAlias = m_sPortName;
 	bool bRenameEnabled = false;
 
 	// Check aliasing...
@@ -106,7 +116,8 @@ QString qjackctlPortItem::portNameAlias (
 	qjackctlConnectAlias *pAliases
 		= pClientListView->aliases();
 	if (pAliases) {
-		sPortNameAlias = pAliases->portAlias(m_pClient->clientName(), sPortName);
+		const QString& sClientName = m_pClient->clientName();
+		sPortNameAlias = pAliases->portAlias(sClientName, m_sPortName);
 		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
 
@@ -117,13 +128,11 @@ QString qjackctlPortItem::portNameAlias (
 }
 
 
-// Proto-pretty/alias display name accessor.
-void qjackctlPortItem::setPortNameEx ( const QString& sPortName )
+// Proto-pretty/alias display name method.
+void qjackctlPortItem::updatePortName (void)
 {
 	bool bRenameEnabled = false;
-	const QString& sPortNameEx
-		= portNameAlias(sPortName, &bRenameEnabled);
-
+	const QString& sPortNameEx = portNameAlias(&bRenameEnabled);
 	setPortText(sPortNameEx, bRenameEnabled);
 }
 
@@ -328,7 +337,7 @@ void qjackctlClientItem::setClientName ( const QString& sClientName )
 {
 	m_sClientName = sClientName;
 
-	setClientNameEx(sClientName);
+	updateClientName();
 }
 
 const QString& qjackctlClientItem::clientName (void) const
@@ -337,11 +346,18 @@ const QString& qjackctlClientItem::clientName (void) const
 }
 
 
-// Client name alias accessor.
-QString qjackctlClientItem::clientNameAlias (
-	const QString& sClientName, bool *pbRenameEnabled ) const
+// Client name alias accessors.
+void qjackctlClientItem::setClientNameAlias ( const QString& sClientNameAlias )
 {
-	QString sClientNameAlias = sClientName;
+	qjackctlConnectAlias *pAliases
+		= (m_pClientList->listView())->aliases();
+	if (pAliases)
+		pAliases->setClientAlias(m_sClientName, sClientNameAlias);
+}
+
+QString qjackctlClientItem::clientNameAlias ( bool *pbRenameEnabled ) const
+{
+	QString sClientNameAlias = m_sClientName;
 	bool bRenameEnabled = false;
 
 	// Check aliasing...
@@ -350,7 +366,7 @@ QString qjackctlClientItem::clientNameAlias (
 	qjackctlConnectAlias *pAliases
 		= pClientListView->aliases();
 	if (pAliases) {
-		sClientNameAlias = pAliases->clientAlias(sClientName);
+		sClientNameAlias = pAliases->clientAlias(m_sClientName);
 		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
 
@@ -361,13 +377,11 @@ QString qjackctlClientItem::clientNameAlias (
 }
 
 
-// Proto-pretty/alias display name accessor.
-void qjackctlClientItem::setClientNameEx ( const QString& sClientName )
+// Proto-pretty/alias display name method.
+void qjackctlClientItem::updateClientName (void)
 {
 	bool bRenameEnabled = false;
-	const QString& sClientNameEx
-		= clientNameAlias(sClientName, &bRenameEnabled);
-
+	const QString& sClientNameEx = clientNameAlias(&bRenameEnabled);
 	setClientText(sClientNameEx, bRenameEnabled);
 }
 
@@ -835,7 +849,7 @@ void qjackctlClientListView::setAliases (
 			= static_cast<qjackctlClientItem *> (pItem);
 		if (pClientItem == NULL)
 			continue;
-		pClientItem->setClientNameEx(pClientItem->clientName());
+		pClientItem->updateClientName();
 		// For each port item...
 		const int iChildCount = pClientItem->childCount();
 		for (int iChild = 0; iChild < iChildCount; ++iChild) {
@@ -846,7 +860,7 @@ void qjackctlClientListView::setAliases (
 				= static_cast<qjackctlPortItem *> (pChildItem);
 			if (pPortItem == NULL)
 				continue;
-			pPortItem->setPortNameEx(pPortItem->portName());
+			pPortItem->updatePortName();
 		}
 	}
 }
@@ -885,17 +899,13 @@ void qjackctlClientListView::renamedSlot (void)
 	if (pItem->type() == QJACKCTL_CLIENTITEM) {
 		qjackctlClientItem *pClientItem
 			= static_cast<qjackctlClientItem *> (pItem);
-		m_pAliases->setClientAlias(
-			pClientItem->clientName(), sText);
-		if (sText.isEmpty())
-			pClientItem->setText(0, pClientItem->clientName());
+		pClientItem->setClientNameAlias(sText);
+		pClientItem->updateClientName();
 	} else {
 		qjackctlPortItem *pPortItem
 			= static_cast<qjackctlPortItem *> (pItem);
-		m_pAliases->setPortAlias(
-			pPortItem->clientName(), pPortItem->portName(), sText);
-		if (sText.isEmpty())
-			pPortItem->setText(0, pPortItem->portName());
+		pPortItem->setPortNameAlias(sText);
+		pPortItem->updatePortName();
 	}
 
 	m_pConnectView->setDirty(true);

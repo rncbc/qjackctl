@@ -58,14 +58,17 @@ public:
 	const QString& clientName() const;
 	const QString& portName() const;
 
+	// Port name alias accessors.
+	void setPortNameAlias(const QString& sPortNameAlias);
+	QString portNameAlias(bool *pbRenameEnabled) const;
+
 	// Proto-pretty/display name accessors.
-	virtual void setPortNameEx(const QString& sPortName);
-	QString portNameEx() const;
+	virtual void updatePortName();
 
 	// Complete client:port name helper.
 	QString clientPortName() const;
 
-	// Connections client item accessor.
+	// Connections client item method.
 	qjackctlClientItem *client() const;
 
 	// Client port cleanup marker.
@@ -94,10 +97,6 @@ public:
 	bool operator< (const QTreeWidgetItem& other) const;
 
 protected:
-
-	// Port name alias accessor.
-	QString portNameAlias(
-		const QString& sPortName, bool *pbRenameEnabled = NULL) const;
 
 	// Port name display name accessors.
 	void setPortText(const QString& sPortText, bool bRenameEnabled);
@@ -138,9 +137,12 @@ public:
 	void setClientName(const QString& sClientName);
 	const QString& clientName() const;
 
-	// The proto-pretty/display name accessors.
-	virtual void setClientNameEx(const QString& sClientName);
-	QString clientNameEx() const;
+	// Client name alias accessors.
+	void setClientNameAlias(const QString& sClientNameAlias);
+	QString clientNameAlias(bool *pbRenameEnabled) const;
+
+	// Proto-pretty/display name method.
+	virtual void updateClientName();
 
 	// Readable flag accessor.
 	bool isReadable() const;
@@ -170,10 +172,6 @@ public:
 	bool operator< (const QTreeWidgetItem& other) const;
 
 protected:
-
-	// Client name alias accessor.
-	QString clientNameAlias(
-		const QString& sClientName, bool *pbRenameEnabled = NULL) const;
 
 	// Client name display name accessors.
 	void setClientText(const QString& sClientText, bool bRenameEnabled);

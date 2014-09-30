@@ -218,67 +218,67 @@
         <translation type="obsolete">Ports d&apos;entrée</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1071"/>
+        <location filename="../qjackctlConnect.cpp" line="1081"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1072"/>
+        <location filename="../qjackctlConnect.cpp" line="1082"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1075"/>
+        <location filename="../qjackctlConnect.cpp" line="1085"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Déconnecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1076"/>
+        <location filename="../qjackctlConnect.cpp" line="1086"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1079"/>
+        <location filename="../qjackctlConnect.cpp" line="1089"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Tout déconnecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1080"/>
+        <location filename="../qjackctlConnect.cpp" line="1090"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1085"/>
+        <location filename="../qjackctlConnect.cpp" line="1095"/>
         <source>Re&amp;name</source>
         <translation>Re&amp;nommer</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1086"/>
+        <location filename="../qjackctlConnect.cpp" line="1096"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1092"/>
+        <location filename="../qjackctlConnect.cpp" line="1102"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1093"/>
+        <location filename="../qjackctlConnect.cpp" line="1103"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="765"/>
+        <location filename="../qjackctlConnect.cpp" line="779"/>
         <source>Readable Clients / Output Ports</source>
         <translation>Clients en lecture / Ports de sortie</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="767"/>
+        <location filename="../qjackctlConnect.cpp" line="781"/>
         <source>Writable Clients / Input Ports</source>
         <translation>Clients en ecriture / Ports d&apos;entrée</translation>
     </message>
@@ -286,7 +286,7 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1850"/>
+        <location filename="../qjackctlConnect.cpp" line="1860"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -311,7 +311,7 @@
         <translation type="obsolete">Non</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1851"/>
+        <location filename="../qjackctlConnect.cpp" line="1861"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -492,45 +492,45 @@ Voulez-vous enregistrer les changements?</translation>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1258"/>
+        <location filename="../qjackctlConnect.cpp" line="1268"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1259"/>
+        <location filename="../qjackctlConnect.cpp" line="1269"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1262"/>
+        <location filename="../qjackctlConnect.cpp" line="1272"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Déconnecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1263"/>
+        <location filename="../qjackctlConnect.cpp" line="1273"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1266"/>
+        <location filename="../qjackctlConnect.cpp" line="1276"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Tout déconnecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1267"/>
+        <location filename="../qjackctlConnect.cpp" line="1277"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1272"/>
+        <location filename="../qjackctlConnect.cpp" line="1282"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1273"/>
+        <location filename="../qjackctlConnect.cpp" line="1283"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+R</translation>

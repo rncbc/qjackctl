@@ -219,72 +219,72 @@
         <translation type="obsolete">Ports d&apos;entrée</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1071"/>
+        <location filename="../qjackctlConnect.cpp" line="1081"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1072"/>
+        <location filename="../qjackctlConnect.cpp" line="1082"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translatorcomment>Koppelen</translatorcomment>
         <translation>Alt+K</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1075"/>
+        <location filename="../qjackctlConnect.cpp" line="1085"/>
         <source>&amp;Disconnect</source>
         <translation>Af&amp;Koppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1076"/>
+        <location filename="../qjackctlConnect.cpp" line="1086"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translatorcomment>Afkoppelen</translatorcomment>
         <translation>Alt+K</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1079"/>
+        <location filename="../qjackctlConnect.cpp" line="1089"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Alles afkoppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1080"/>
+        <location filename="../qjackctlConnect.cpp" line="1090"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translatorcomment>Alles afkoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1085"/>
+        <location filename="../qjackctlConnect.cpp" line="1095"/>
         <source>Re&amp;name</source>
         <translation>Her&amp;noemen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1086"/>
+        <location filename="../qjackctlConnect.cpp" line="1096"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
         <translatorcomment>Hernoemen</translatorcomment>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1092"/>
+        <location filename="../qjackctlConnect.cpp" line="1102"/>
         <source>&amp;Refresh</source>
         <translation>Ve&amp;rversen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1093"/>
+        <location filename="../qjackctlConnect.cpp" line="1103"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translatorcomment>Verversen</translatorcomment>
         <translation>Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="765"/>
+        <location filename="../qjackctlConnect.cpp" line="779"/>
         <source>Readable Clients / Output Ports</source>
         <translation>Leesbare clients / Uitgangspoorten</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="767"/>
+        <location filename="../qjackctlConnect.cpp" line="781"/>
         <source>Writable Clients / Input Ports</source>
         <translation>Beschrijfbare clients / ingangspoorten</translation>
     </message>
@@ -292,7 +292,7 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1850"/>
+        <location filename="../qjackctlConnect.cpp" line="1860"/>
         <source>Warning</source>
         <translation>Opgelet</translation>
     </message>
@@ -317,7 +317,7 @@
         <translation type="obsolete">Non</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1851"/>
+        <location filename="../qjackctlConnect.cpp" line="1861"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -497,48 +497,48 @@ Wil u deze aanpassingen opslaan?</translation>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1258"/>
+        <location filename="../qjackctlConnect.cpp" line="1268"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1259"/>
+        <location filename="../qjackctlConnect.cpp" line="1269"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translatorcomment>Verbinden</translatorcomment>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1262"/>
+        <location filename="../qjackctlConnect.cpp" line="1272"/>
         <source>&amp;Disconnect</source>
         <translation>Af&amp;Koppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1263"/>
+        <location filename="../qjackctlConnect.cpp" line="1273"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translatorcomment>Afkoppelen - Knippen</translatorcomment>
         <translation>Alt+K</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1266"/>
+        <location filename="../qjackctlConnect.cpp" line="1276"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Alles afkoppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1267"/>
+        <location filename="../qjackctlConnect.cpp" line="1277"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translatorcomment>Alles afkoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1272"/>
+        <location filename="../qjackctlConnect.cpp" line="1282"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Verversen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1273"/>
+        <location filename="../qjackctlConnect.cpp" line="1283"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translatorcomment>Verversen</translatorcomment>
