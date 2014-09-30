@@ -181,66 +181,66 @@
 <context>
     <name>qjackctlClientListView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="779"/>
+        <location filename="../qjackctlConnect.cpp" line="786"/>
         <source>Readable Clients / Output Ports</source>
         <translation>読み込み可能なクライアント / 出力ポート</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="781"/>
+        <location filename="../qjackctlConnect.cpp" line="788"/>
         <source>Writable Clients / Input Ports</source>
         <translation>書き込み可能なクライアント / 入力ポート</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1081"/>
+        <location filename="../qjackctlConnect.cpp" line="1092"/>
         <source>&amp;Connect</source>
         <translation>接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1082"/>
+        <location filename="../qjackctlConnect.cpp" line="1093"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1085"/>
+        <location filename="../qjackctlConnect.cpp" line="1096"/>
         <source>&amp;Disconnect</source>
         <translation>切断(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1086"/>
+        <location filename="../qjackctlConnect.cpp" line="1097"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1089"/>
+        <location filename="../qjackctlConnect.cpp" line="1100"/>
         <source>Disconnect &amp;All</source>
         <translation>すべて切断(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1090"/>
+        <location filename="../qjackctlConnect.cpp" line="1101"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1095"/>
+        <location filename="../qjackctlConnect.cpp" line="1106"/>
         <source>Re&amp;name</source>
         <translation>リネーム(&amp;n)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1096"/>
+        <location filename="../qjackctlConnect.cpp" line="1107"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1102"/>
+        <location filename="../qjackctlConnect.cpp" line="1113"/>
         <source>&amp;Refresh</source>
         <translation>更新(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1103"/>
+        <location filename="../qjackctlConnect.cpp" line="1114"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation></translation>
@@ -249,12 +249,12 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1860"/>
+        <location filename="../qjackctlConnect.cpp" line="1883"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1861"/>
+        <location filename="../qjackctlConnect.cpp" line="1884"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -415,45 +415,45 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1268"/>
+        <location filename="../qjackctlConnect.cpp" line="1291"/>
         <source>&amp;Connect</source>
         <translation>接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1269"/>
+        <location filename="../qjackctlConnect.cpp" line="1292"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1272"/>
+        <location filename="../qjackctlConnect.cpp" line="1295"/>
         <source>&amp;Disconnect</source>
         <translation>切断(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1273"/>
+        <location filename="../qjackctlConnect.cpp" line="1296"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1276"/>
+        <location filename="../qjackctlConnect.cpp" line="1299"/>
         <source>Disconnect &amp;All</source>
         <translation>すべて切断(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1277"/>
+        <location filename="../qjackctlConnect.cpp" line="1300"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1282"/>
+        <location filename="../qjackctlConnect.cpp" line="1305"/>
         <source>&amp;Refresh</source>
         <translation>更新(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1283"/>
+        <location filename="../qjackctlConnect.cpp" line="1306"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation></translation>

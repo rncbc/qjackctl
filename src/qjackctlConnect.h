@@ -275,6 +275,10 @@ public:
 	// Binding indirect accessor.
 	qjackctlConnect *binding() const;
 
+	// Dirty flag accessors.
+	void setDirty (bool bDirty);
+	bool isDirty() const;
+
 protected slots:
 
 	// In-place aliasing slots.

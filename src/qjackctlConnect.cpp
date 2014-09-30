@@ -97,11 +97,14 @@ const QString& qjackctlPortItem::portName (void) const
 void qjackctlPortItem::setPortNameAlias ( const QString& sPortNameAlias )
 {
 	// Check aliasing...
+	qjackctlClientListView *pClientListView
+		= (m_pClient->clientList())->listView();
 	qjackctlConnectAlias *pAliases
-		= ((m_pClient->clientList())->listView())->aliases();
+		= pClientListView->aliases();
 	if (pAliases) {
 		const QString& sClientName = m_pClient->clientName();
 		pAliases->setPortAlias(sClientName, m_sPortName, sPortNameAlias);
+		pClientListView->setDirty(true);
 	}
 }
 
@@ -349,10 +352,14 @@ const QString& qjackctlClientItem::clientName (void) const
 // Client name alias accessors.
 void qjackctlClientItem::setClientNameAlias ( const QString& sClientNameAlias )
 {
+	qjackctlClientListView *pClientListView
+		= m_pClientList->listView();
 	qjackctlConnectAlias *pAliases
-		= (m_pClientList->listView())->aliases();
-	if (pAliases)
+		= pClientListView->aliases();
+	if (pAliases) {
 		pAliases->setClientAlias(m_sClientName, sClientNameAlias);
+		pClientListView->setDirty(true);
+	}
 }
 
 QString qjackctlClientItem::clientNameAlias ( bool *pbRenameEnabled ) const
@@ -900,15 +907,19 @@ void qjackctlClientListView::renamedSlot (void)
 		qjackctlClientItem *pClientItem
 			= static_cast<qjackctlClientItem *> (pItem);
 		pClientItem->setClientNameAlias(sText);
+		if (sText.isEmpty())
+			pClientItem->setText(0, pClientItem->clientName());
 		pClientItem->updateClientName();
 	} else {
 		qjackctlPortItem *pPortItem
 			= static_cast<qjackctlPortItem *> (pItem);
 		pPortItem->setPortNameAlias(sText);
+		if (sText.isEmpty())
+			pPortItem->setText(0, pPortItem->portName());
 		pPortItem->updatePortName();
 	}
 
-	m_pConnectView->setDirty(true);
+//	m_pConnectView->setDirty(true);
 }
 
 
@@ -1105,6 +1116,18 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 	menu.exec(pContextMenuEvent->globalPos());
 }
 
+
+
+// Dirty flag methods.
+void qjackctlClientListView::setDirty ( bool bDirty )
+{
+	m_pConnectView->setDirty(bDirty);
+}
+
+bool qjackctlClientListView::isDirty (void) const
+{
+	return m_pConnectView->isDirty();
+}
 
 
 //----------------------------------------------------------------------
