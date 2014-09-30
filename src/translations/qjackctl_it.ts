@@ -182,7 +182,7 @@
 <context>
     <name>qjackctlClientListView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1037"/>
+        <location filename="../qjackctlConnect.cpp" line="1025"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connetti</translation>
     </message>
@@ -192,7 +192,7 @@
         <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1041"/>
+        <location filename="../qjackctlConnect.cpp" line="1029"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Disconnetti</translation>
     </message>
@@ -202,7 +202,7 @@
         <translation type="obsolete">Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1045"/>
+        <location filename="../qjackctlConnect.cpp" line="1033"/>
         <source>Disconnect &amp;All</source>
         <translation>Disconnetti &amp;Tutto</translation>
     </message>
@@ -212,7 +212,7 @@
         <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1051"/>
+        <location filename="../qjackctlConnect.cpp" line="1039"/>
         <source>Re&amp;name</source>
         <translation>Ri&amp;omina</translation>
     </message>
@@ -222,7 +222,7 @@
         <translation type="obsolete">Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1058"/>
+        <location filename="../qjackctlConnect.cpp" line="1046"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Aggiorna</translation>
     </message>
@@ -232,45 +232,45 @@
         <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="731"/>
+        <location filename="../qjackctlConnect.cpp" line="719"/>
         <source>Readable Clients / Output Ports</source>
         <translation>Clients leggibili / Porte d&apos;uscita</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="733"/>
+        <location filename="../qjackctlConnect.cpp" line="721"/>
         <source>Writable Clients / Input Ports</source>
         <translation>Clients Scrivibili / Porte d&apos;entrata</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1038"/>
+        <location filename="../qjackctlConnect.cpp" line="1026"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translatorcomment>Connetti</translatorcomment>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1042"/>
+        <location filename="../qjackctlConnect.cpp" line="1030"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translatorcomment>Disconnetti</translatorcomment>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1046"/>
+        <location filename="../qjackctlConnect.cpp" line="1034"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translatorcomment>Disconnetti Tutto</translatorcomment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1052"/>
+        <location filename="../qjackctlConnect.cpp" line="1040"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
         <translatorcomment>Rinomina</translatorcomment>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1059"/>
+        <location filename="../qjackctlConnect.cpp" line="1047"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translatorcomment>Aggiorna</translatorcomment>
@@ -280,7 +280,7 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1816"/>
+        <location filename="../qjackctlConnect.cpp" line="1804"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
@@ -293,7 +293,7 @@
         <translation type="obsolete">No</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1817"/>
+        <location filename="../qjackctlConnect.cpp" line="1805"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -465,7 +465,7 @@ Salvare i cambiamenti?</translation>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1224"/>
+        <location filename="../qjackctlConnect.cpp" line="1212"/>
         <source>&amp;Connect</source>
         <translation>&amp;Connetti</translation>
     </message>
@@ -484,7 +484,7 @@ Salvare i cambiamenti?</translation>
         <translation type="obsolete">Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1232"/>
+        <location filename="../qjackctlConnect.cpp" line="1220"/>
         <source>Disconnect &amp;All</source>
         <translation>Disconnetti &amp;Tutto</translation>
     </message>
@@ -494,7 +494,7 @@ Salvare i cambiamenti?</translation>
         <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1238"/>
+        <location filename="../qjackctlConnect.cpp" line="1226"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Aggiorna</translation>
     </message>
@@ -504,33 +504,33 @@ Salvare i cambiamenti?</translation>
         <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1225"/>
+        <location filename="../qjackctlConnect.cpp" line="1213"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translatorcomment>Connetti</translatorcomment>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1228"/>
+        <location filename="../qjackctlConnect.cpp" line="1216"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Disconnetti</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1229"/>
+        <location filename="../qjackctlConnect.cpp" line="1217"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translatorcomment>Disconnetti</translatorcomment>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1233"/>
+        <location filename="../qjackctlConnect.cpp" line="1221"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translatorcomment>Disconnetti Tutto</translatorcomment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1239"/>
+        <location filename="../qjackctlConnect.cpp" line="1227"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translatorcomment>Aggiorna</translatorcomment>

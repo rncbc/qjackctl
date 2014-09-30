@@ -59,10 +59,8 @@ public:
 	const QString& portName() const;
 
 	// Proto-pretty/display name accessors.
-	virtual void setPortNameEx(const QString& sPortNameEx);
-
-	void setPortText(const QString& sPortText, bool bRenameEnabled = false);
-	QString portText() const;
+	virtual void setPortNameEx(const QString& sPortName);
+	QString portNameEx() const;
 
 	// Complete client:port name helper.
 	QString clientPortName() const;
@@ -131,10 +129,8 @@ public:
 	const QString& clientName() const;
 
 	// The proto-pretty/display name accessors.
-	virtual void setClientNameEx(const QString& sClientNameEx);
-
-	void setClientText(const QString& sClientText, bool bRenameEnabled = false);
-	QString clientText() const;
+	virtual void setClientNameEx(const QString& sClientName);
+	QString clientNameEx() const;
 
 	// Readable flag accessor.
 	bool isReadable() const;

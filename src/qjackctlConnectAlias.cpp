@@ -174,7 +174,7 @@ qjackctlClientAlias *qjackctlConnectAlias::findClientName (
 	while (iter.hasNext()) {
 		qjackctlClientAlias *pClient = iter.next();
 		if (pClient->matchClientName(sClientName))
-		    return pClient;
+			return pClient;
 	}
 
 	return NULL;
