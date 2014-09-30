@@ -110,12 +110,21 @@ jack_port_t *qjackctlJackPort::jackPort (void) const
 // Pretty/display name accessors (virtual override).
 void qjackctlJackPort::setPortNameEx ( const QString& sPortName )
 {
-	QString sPortNameEx = sPortName;
 #ifdef CONFIG_JACK_METADATA
-	if (qjackctlJackClientList::isJackClientPortMetadata())
-		sPortNameEx = prettyName(::jack_port_uuid(m_pJackPort), sPortName);
+	if (qjackctlJackClientList::isJackClientPortMetadata()) {
+		bool bRenameEnabled = false;
+		QString sPortNameEx = portNameAlias(sPortName, &bRenameEnabled);
+		if (sPortNameEx == sPortName) {
+			jack_uuid_t port_uuid
+				= ::jack_port_uuid(m_pJackPort);
+			sPortNameEx = prettyName(port_uuid, sPortName);
+			// TODO: if (sPortNameEx != sPortName) ...
+		}
+		setPortText(sPortNameEx, bRenameEnabled);
+	}
+	else
 #endif
-	qjackctlPortItem::setPortNameEx(sPortNameEx);
+	qjackctlPortItem::setPortNameEx(sPortName);
 }
 
 
@@ -167,27 +176,33 @@ qjackctlJackPort *qjackctlJackClient::findJackPort ( jack_port_t *pJackPort )
 // Pretty/display name accessors (virtual override).
 void qjackctlJackClient::setClientNameEx ( const QString& sClientName )
 {
-	QString sClientNameEx = sClientName;
 #ifdef CONFIG_JACK_METADATA
 	if (qjackctlJackClientList::isJackClientPortMetadata()) {
-		jack_client_t *pJackClient = NULL;
-		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-		if (pMainForm)
-			pJackClient = pMainForm->jackClient();
-		if (pJackClient) {
-			const char *pszClientName
-				= sClientName.toUtf8().constData();
-			const char *pszClientUuid
-				= ::jack_get_uuid_for_client_name(pJackClient, pszClientName);
-			if (pszClientUuid) {
-				jack_uuid_t client_uuid = 0;
-				::jack_uuid_parse(pszClientUuid, &client_uuid);
-				sClientNameEx = prettyName(client_uuid, sClientName);
+		bool bRenameEnabled = false;
+		QString sClientNameEx = clientNameAlias(sClientName, &bRenameEnabled);
+		if (sClientNameEx == sClientName) {
+			jack_client_t *pJackClient = NULL;
+			qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+			if (pMainForm)
+				pJackClient = pMainForm->jackClient();
+			if (pJackClient) {
+				const char *pszClientName
+					= sClientName.toUtf8().constData();
+				const char *pszClientUuid
+					= ::jack_get_uuid_for_client_name(pJackClient, pszClientName);
+				if (pszClientUuid) {
+					jack_uuid_t client_uuid = 0;
+					::jack_uuid_parse(pszClientUuid, &client_uuid);
+					sClientNameEx = prettyName(client_uuid, sClientName);
+					// TODO: if (sClientNameEx != sClientName) ...
+				}
 			}
 		}
+		setClientText(sClientNameEx, bRenameEnabled);
 	}
+	else
 #endif
-	qjackctlClientItem::setClientNameEx(sClientNameEx);
+	qjackctlClientItem::setClientNameEx(sClientName);
 }
 
 
@@ -250,7 +265,7 @@ int qjackctlJackClientList::updateClientPorts (void)
 
 	char *aliases[2];
 	if (g_iJackClientPortAlias > 0) {
-		unsigned short alias_size = jack_port_name_size() + 1;
+		const unsigned short alias_size = jack_port_name_size() + 1;
 		aliases[0] = new char [alias_size];
 		aliases[1] = new char [alias_size];
 	}

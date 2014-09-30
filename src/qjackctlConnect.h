@@ -93,6 +93,16 @@ public:
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
 
+protected:
+
+	// Port name alias accessor.
+	QString portNameAlias(
+		const QString& sPortName, bool *pbRenameEnabled = NULL) const;
+
+	// Port name display name accessors.
+	void setPortText(const QString& sPortText, bool bRenameEnabled);
+	QString portText() const;
+
 private:
 
 	// Instance variables.
@@ -158,6 +168,16 @@ public:
 	// Proxy sort override method.
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
+
+protected:
+
+	// Client name alias accessor.
+	QString clientNameAlias(
+		const QString& sClientName, bool *pbRenameEnabled = NULL) const;
+
+	// Client name display name accessors.
+	void setClientText(const QString& sClientText, bool bRenameEnabled);
+	QString clientText() const;
 
 private:
 

@@ -93,10 +93,11 @@ const QString& qjackctlPortItem::portName (void) const
 }
 
 
-// Proto-pretty/alias display name accessor.
-void qjackctlPortItem::setPortNameEx ( const QString& sPortName )
+// Port name alias accessor.
+QString qjackctlPortItem::portNameAlias (
+	const QString& sPortName, bool *pbRenameEnabled ) const
 {
-	QString sPortNameEx = sPortName;
+	QString sPortNameAlias = sPortName;
 	bool bRenameEnabled = false;
 
 	// Check aliasing...
@@ -105,11 +106,33 @@ void qjackctlPortItem::setPortNameEx ( const QString& sPortName )
 	qjackctlConnectAlias *pAliases
 		= pClientListView->aliases();
 	if (pAliases) {
-		sPortNameEx = pAliases->portAlias(m_pClient->clientName(), sPortName);
+		sPortNameAlias = pAliases->portAlias(m_pClient->clientName(), sPortName);
 		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
 
-	QTreeWidgetItem::setText(0, sPortNameEx);
+	if (pbRenameEnabled)
+		*pbRenameEnabled = bRenameEnabled;
+
+	return sPortNameAlias;
+}
+
+
+// Proto-pretty/alias display name accessor.
+void qjackctlPortItem::setPortNameEx ( const QString& sPortName )
+{
+	bool bRenameEnabled = false;
+	const QString& sPortNameEx
+		= portNameAlias(sPortName, &bRenameEnabled);
+
+	setPortText(sPortNameEx, bRenameEnabled);
+}
+
+
+// Port display name accessors.
+void qjackctlPortItem::setPortText (
+	const QString& sPortText, bool bRenameEnabled )
+{
+	QTreeWidgetItem::setText(0, sPortText);
 
 	const Qt::ItemFlags flags = QTreeWidgetItem::flags();
 	if (bRenameEnabled)
@@ -118,7 +141,7 @@ void qjackctlPortItem::setPortNameEx ( const QString& sPortName )
 		QTreeWidgetItem::setFlags(flags	& ~Qt::ItemIsEditable);
 }
 
-QString qjackctlPortItem::portNameEx (void) const
+QString qjackctlPortItem::portText (void) const
 {
 	return QTreeWidgetItem::text(0);
 }
@@ -314,10 +337,11 @@ const QString& qjackctlClientItem::clientName (void) const
 }
 
 
-// Proto-pretty/alias display name accessor.
-void qjackctlClientItem::setClientNameEx ( const QString& sClientName )
+// Client name alias accessor.
+QString qjackctlClientItem::clientNameAlias (
+	const QString& sClientName, bool *pbRenameEnabled ) const
 {
-	QString sClientNameEx = sClientName;
+	QString sClientNameAlias = sClientName;
 	bool bRenameEnabled = false;
 
 	// Check aliasing...
@@ -326,11 +350,33 @@ void qjackctlClientItem::setClientNameEx ( const QString& sClientName )
 	qjackctlConnectAlias *pAliases
 		= pClientListView->aliases();
 	if (pAliases) {
-		sClientNameEx = pAliases->clientAlias(sClientName);
+		sClientNameAlias = pAliases->clientAlias(sClientName);
 		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
 
-	QTreeWidgetItem::setText(0, sClientNameEx);
+	if (pbRenameEnabled)
+		*pbRenameEnabled = bRenameEnabled;
+
+	return sClientNameAlias;
+}
+
+
+// Proto-pretty/alias display name accessor.
+void qjackctlClientItem::setClientNameEx ( const QString& sClientName )
+{
+	bool bRenameEnabled = false;
+	const QString& sClientNameEx
+		= clientNameAlias(sClientName, &bRenameEnabled);
+
+	setClientText(sClientNameEx, bRenameEnabled);
+}
+
+
+// Client display name accessors.
+void qjackctlClientItem::setClientText (
+	const QString& sClientText, bool bRenameEnabled )
+{
+	QTreeWidgetItem::setText(0, sClientText);
 
 	const Qt::ItemFlags flags = QTreeWidgetItem::flags();
 	if (bRenameEnabled)
@@ -339,7 +385,7 @@ void qjackctlClientItem::setClientNameEx ( const QString& sClientName )
 		QTreeWidgetItem::setFlags(flags	& ~Qt::ItemIsEditable);
 }
 
-QString qjackctlClientItem::clientNameEx (void) const
+QString qjackctlClientItem::clientText (void) const
 {
 	return QTreeWidgetItem::text(0);
 }
