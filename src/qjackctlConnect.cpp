@@ -62,7 +62,7 @@ qjackctlPortItem::qjackctlPortItem ( qjackctlClientItem *pClient )
 // Default destructor.
 qjackctlPortItem::~qjackctlPortItem (void)
 {
-	int iPort = m_pClient->ports().indexOf(this);
+	const int iPort = m_pClient->ports().indexOf(this);
 	if (iPort >= 0)
 		m_pClient->ports().removeAt(iPort);
 
@@ -94,24 +94,37 @@ const QString& qjackctlPortItem::portName (void) const
 
 
 // Proto-pretty/display name accessors.
-void qjackctlPortItem::setPortNameEx ( const QString& sPortName )
+void qjackctlPortItem::setPortNameEx ( const QString& sPortNameEx )
 {
+	QString sPortText = sPortNameEx;
+	bool bRenameEnabled = false;
+
 	// Check aliasing...
+	qjackctlClientListView *pClientListView
+		= (m_pClient->clientList())->listView();
 	qjackctlConnectAlias *pAliases
-		= ((m_pClient->clientList())->listView())->aliases();
+		= pClientListView->aliases();
 	if (pAliases) {
-		QTreeWidgetItem::setText(0,
-			pAliases->portAlias(m_pClient->clientName(), sPortName));
-		if (((m_pClient->clientList())->listView())->isRenameEnabled()) {
-			QTreeWidgetItem::setFlags(QTreeWidgetItem::flags()
-				| Qt::ItemIsEditable);
-		}
-	} else {
-		QTreeWidgetItem::setText(0, sPortName);
+		sPortText = pAliases->portAlias(m_pClient->clientName(), sPortNameEx);
+		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
+
+	setPortText(sPortText, bRenameEnabled);
 }
 
-QString qjackctlPortItem::portNameEx (void) const
+void qjackctlPortItem::setPortText (
+	const QString& sPortText, bool bRenameEnabled )
+{
+	QTreeWidgetItem::setText(0, sPortText);
+
+	const Qt::ItemFlags flags = QTreeWidgetItem::flags();
+	if (bRenameEnabled)
+		QTreeWidgetItem::setFlags(flags |  Qt::ItemIsEditable);
+	else
+		QTreeWidgetItem::setFlags(flags	& ~Qt::ItemIsEditable);
+}
+
+QString qjackctlPortItem::portText (void) const
 {
 	return QTreeWidgetItem::text(0);
 }
@@ -308,24 +321,37 @@ const QString& qjackctlClientItem::clientName (void) const
 
 
 // Proto-pretty/display name accessors.
-void qjackctlClientItem::setClientNameEx ( const QString& sClientName )
+void qjackctlClientItem::setClientNameEx ( const QString& sClientNameEx )
 {
+	QString sClientText = sClientNameEx;
+	bool bRenameEnabled = false;
+
 	// Check aliasing...
+	qjackctlClientListView *pClientListView
+		= m_pClientList->listView();
 	qjackctlConnectAlias *pAliases
-		= (m_pClientList->listView())->aliases();
+		= pClientListView->aliases();
 	if (pAliases) {
-		QTreeWidgetItem::setText(0,
-			pAliases->clientAlias(sClientName));
-		if ((m_pClientList->listView())->isRenameEnabled()) {
-			QTreeWidgetItem::setFlags(QTreeWidgetItem::flags()
-				| Qt::ItemIsEditable);
-		}
-	} else {
-		QTreeWidgetItem::setText(0, sClientName);
+		sClientText = pAliases->clientAlias(sClientNameEx);
+		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
+
+	setClientText(sClientText, bRenameEnabled);
 }
 
-QString qjackctlClientItem::clientNameEx (void) const
+void qjackctlClientItem::setClientText (
+	const QString& sClientText, bool bRenameEnabled )
+{
+	QTreeWidgetItem::setText(0, sClientText);
+
+	const Qt::ItemFlags flags = QTreeWidgetItem::flags();
+	if (bRenameEnabled)
+		QTreeWidgetItem::setFlags(flags |  Qt::ItemIsEditable);
+	else
+		QTreeWidgetItem::setFlags(flags	& ~Qt::ItemIsEditable);
+}
+
+QString qjackctlClientItem::clientText (void) const
 {
 	return QTreeWidgetItem::text(0);
 }
@@ -759,7 +785,8 @@ int qjackctlClientListView::autoOpenTimeout (void) const
 
 
 // Aliasing support methods.
-void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool bRenameEnabled )
+void qjackctlClientListView::setAliases (
+	qjackctlConnectAlias *pAliases, bool bRenameEnabled )
 {
 	m_pAliases = pAliases;
 	m_bRenameEnabled = bRenameEnabled;
@@ -774,20 +801,7 @@ void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool b
 			= static_cast<qjackctlClientItem *> (pItem);
 		if (pClientItem == NULL)
 			continue;
-		if (m_pAliases) {
-			pClientItem->setText(0,
-				m_pAliases->clientAlias(pClientItem->clientName()));
-		} else {
-			pClientItem->setText(0,
-				pClientItem->clientName());
-		}
-		if (m_pAliases && m_bRenameEnabled) {
-			pClientItem->setFlags(
-				pClientItem->flags() |  Qt::ItemIsEditable);
-		} else {
-			pClientItem->setFlags(
-				pClientItem->flags() & ~Qt::ItemIsEditable);
-		}
+		pClientItem->setClientNameEx(pClientItem->clientName());
 		// For each port item...
 		const int iChildCount = pClientItem->childCount();
 		for (int iChild = 0; iChild < iChildCount; ++iChild) {
@@ -798,20 +812,7 @@ void qjackctlClientListView::setAliases ( qjackctlConnectAlias *pAliases, bool b
 				= static_cast<qjackctlPortItem *> (pChildItem);
 			if (pPortItem == NULL)
 				continue;
-			if (m_pAliases) {
-				pPortItem->setText(0, m_pAliases->portAlias(
-					pPortItem->clientName(), pPortItem->portName()));
-			} else {
-				pPortItem->setText(0,
-					pPortItem->portName());
-			}
-			if (m_pAliases && m_bRenameEnabled) {
-				pPortItem->setFlags(
-					pPortItem->flags() |  Qt::ItemIsEditable);
-			} else {
-				pPortItem->setFlags(
-					pPortItem->flags() & ~Qt::ItemIsEditable);
-			}
+			pPortItem->setPortNameEx(pPortItem->portName());
 		}
 	}
 }

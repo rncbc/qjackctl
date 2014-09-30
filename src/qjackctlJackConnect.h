@@ -64,8 +64,6 @@ public:
 	// Jack handles accessors.
 	jack_port_t *jackPort() const;
 
-protected:
-
 	// Pretty/display name accessors (virtual override).
 	void setPortNameEx(const QString& sPortName);
 
@@ -88,8 +86,6 @@ public:
 
 	// Jack port lookup.
 	qjackctlJackPort *findJackPort(jack_port_t *pJackPort);
-
-protected:
 
 	// Pretty/display name accessors (virtual override).
 	void setClientNameEx(const QString& sClientName);

@@ -58,6 +58,12 @@ public:
 	const QString& clientName() const;
 	const QString& portName() const;
 
+	// Proto-pretty/display name accessors.
+	virtual void setPortNameEx(const QString& sPortNameEx);
+
+	void setPortText(const QString& sPortText, bool bRenameEnabled = false);
+	QString portText() const;
+
 	// Complete client:port name helper.
 	QString clientPortName() const;
 
@@ -88,12 +94,6 @@ public:
 	// Proxy sort override method.
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
-
-protected:
-
-	// Proto-pretty/display name accessors.
-	virtual void setPortNameEx(const QString& sPortName);
-	QString portNameEx() const;
 
 private:
 
@@ -130,6 +130,12 @@ public:
 	void setClientName(const QString& sClientName);
 	const QString& clientName() const;
 
+	// The proto-pretty/display name accessors.
+	virtual void setClientNameEx(const QString& sClientNameEx);
+
+	void setClientText(const QString& sClientText, bool bRenameEnabled = false);
+	QString clientText() const;
+
 	// Readable flag accessor.
 	bool isReadable() const;
 
@@ -156,12 +162,6 @@ public:
 	// Proxy sort override method.
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
-
-protected:
-
-	// The proto-pretty/display name accessors.
-	virtual void setClientNameEx(const QString& sClientName);
-	QString clientNameEx() const;
 
 private:
 

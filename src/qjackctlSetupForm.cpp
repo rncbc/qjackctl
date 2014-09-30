@@ -632,8 +632,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.JackClientPortAliasComboBox->setEnabled(false);
 #endif
 #ifndef CONFIG_JACK_METADATA
-	m_ui.JackClientPortMetadata->setChecked(false);
-	m_ui.JackClientPortMetadata->setEnabled(false);
+	m_ui.JackClientPortMetadataCheckBox->setChecked(false);
+	m_ui.JackClientPortMetadataCheckBox->setEnabled(false);
 #endif
 #ifndef CONFIG_ALSA_SEQ
 	m_ui.AlsaSeqEnabledCheckBox->setEnabled(false);
