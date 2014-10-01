@@ -6,8 +6,9 @@ ChangeLog
 SVN TRUNK
 
 - JACK client/port pretty-name (metadata) support is being
-  introduced (under heavy refactoring; patch by Paul Davis).
-  (EXPERIMENTAL)
+  introduced and seamlessly integrated with old Connections
+  client/port aliases editing (rename) (refactored from an
+  original patch by Paul Davis, thanks). (EXPERIMENTAL)
 
 - Application close confirm warning is now raising the main
   window as visible and active for due top level display,

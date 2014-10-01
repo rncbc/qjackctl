@@ -65,7 +65,7 @@ public:
 	jack_port_t *jackPort() const;
 
 	// Pretty/display name method (virtual override).
-	void updatePortName();
+	void updatePortName(bool bRename = false);
 
 private:
 
@@ -88,7 +88,7 @@ public:
 	qjackctlJackPort *findJackPort(jack_port_t *pJackPort);
 
 	// Pretty/display name method (virtual override).
-	void updateClientName();
+	void updateClientName(bool bRename = false);
 };
 
 

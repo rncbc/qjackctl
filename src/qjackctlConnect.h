@@ -63,7 +63,7 @@ public:
 	QString portNameAlias(bool *pbRenameEnabled) const;
 
 	// Proto-pretty/display name accessors.
-	virtual void updatePortName();
+	virtual void updatePortName(bool bRename = false);
 
 	// Complete client:port name helper.
 	QString clientPortName() const;
@@ -142,7 +142,7 @@ public:
 	QString clientNameAlias(bool *pbRenameEnabled) const;
 
 	// Proto-pretty/display name method.
-	virtual void updateClientName();
+	virtual void updateClientName(bool bRename = false);
 
 	// Readable flag accessor.
 	bool isReadable() const;

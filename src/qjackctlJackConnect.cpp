@@ -30,10 +30,9 @@
 #include <jack/metadata.h>
 #include <jack/uuid.h>
 
-static QString prettyName (
-	jack_uuid_t uuid, const QString& sDefaultName )
+static QString prettyName (	jack_uuid_t uuid )
 {
-	QString sPrettyName = sDefaultName;
+	QString sPrettyName;
 
 	char *pszValue = NULL;
 	char *pszType  = NULL;
@@ -51,8 +50,6 @@ static QString prettyName (
 	return sPrettyName;
 }
 
-#ifdef QJACKCTL_SET_PRETTY_NAME
-
 static void setPrettyName (
 	jack_client_t *pJackClient, jack_uuid_t uuid, const QString& sPrettyName )
 {
@@ -67,8 +64,6 @@ static void removePrettyName (
 {
 	::jack_remove_property(pJackClient, uuid, JACK_METADATA_PRETTY_NAME);
 }
-
-#endif
 
 #endif
 
@@ -128,7 +123,7 @@ jack_port_t *qjackctlJackPort::jackPort (void) const
 
 
 // Pretty/display name method (virtual override).
-void qjackctlJackPort::updatePortName (void)
+void qjackctlJackPort::updatePortName ( bool bRename )
 {
 #ifdef CONFIG_JACK_METADATA
 	jack_client_t *pJackClient = NULL;
@@ -140,29 +135,25 @@ void qjackctlJackPort::updatePortName (void)
 		QString sPortNameEx = portNameAlias(&bRenameEnabled);
 		const QString& sPortName = portName();
 		jack_uuid_t port_uuid = ::jack_port_uuid(m_pJackPort);
-		const QString& sPrettyName
-			= prettyName(port_uuid, sPortNameEx);
-	#ifdef QJACKCTL_SET_PRETTY_NAME
-		if (sPortNameEx.isEmpty()) {
-			sPortNameEx = sPortName;
+		const QString& sPrettyName = prettyName(port_uuid);
+		if (sPortNameEx != sPortName && sPortNameEx != sPrettyName) {
+			if (sPrettyName.isEmpty() || bRename) {
+				setPrettyName(pJackClient, port_uuid, sPortNameEx);
+			} else {
+				sPortNameEx = sPrettyName;
+				setPortNameAlias(sPortNameEx);
+			}
+		}
+		else
+		if (sPortNameEx == sPortName
+			&& !sPrettyName.isEmpty() && bRename) {
 			removePrettyName(pJackClient, port_uuid);
 		}
-		else
-	#endif
-		if (sPortNameEx != sPrettyName) {
-			sPortNameEx  = sPrettyName;
-			setPortNameAlias(sPrettyName);
-		}
-	#ifdef QJACKCTL_SET_PRETTY_NAME
-		else
-		if (sPortNameEx != sPortName)
-			setPrettyName(pJackClient, port_uuid, sPortNameEx);
-	#endif
 		setPortText(sPortNameEx, bRenameEnabled);
 	}
 	else
 #endif
-	qjackctlPortItem::updatePortName();
+	qjackctlPortItem::updatePortName(bRename);
 }
 
 
@@ -212,7 +203,7 @@ qjackctlJackPort *qjackctlJackClient::findJackPort ( jack_port_t *pJackPort )
 
 
 // Pretty/display name method (virtual override).
-void qjackctlJackClient::updateClientName (void)
+void qjackctlJackClient::updateClientName ( bool bRename )
 {
 #ifdef CONFIG_JACK_METADATA
 	jack_client_t *pJackClient = NULL;
@@ -230,30 +221,26 @@ void qjackctlJackClient::updateClientName (void)
 		if (pszClientUuid) {
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(pszClientUuid, &client_uuid);
-			const QString& sPrettyName
-				= prettyName(client_uuid, sClientNameEx);
-		#ifdef QJACKCTL_SET_PRETTY_NAME
-			if (sClientNameEx.isEmpty()) {
-				sClientNameEx = sClientName;
+			const QString& sPrettyName = prettyName(client_uuid);
+			if (sClientNameEx != sClientName && sClientNameEx != sPrettyName) {
+				if (sPrettyName.isEmpty() || bRename) {
+					setPrettyName(pJackClient, client_uuid, sClientNameEx);
+				} else {
+					sClientNameEx = sPrettyName;
+					setClientNameAlias(sClientNameEx);
+				}
+			}
+			else
+			if (sClientNameEx == sClientName
+				&& !sPrettyName.isEmpty() && bRename) {
 				removePrettyName(pJackClient, client_uuid);
 			}
-			else
-		#endif
-			if (sClientNameEx != sPrettyName) {
-				sClientNameEx  = sPrettyName:
-				setClientNameAlias(sClientNameEx);
-			}
-		#ifdef QJACKCTL_SET_PRETTY_NAME
-			else
-			if (sClientNameEx != sClientName)
-				setPrettyName(pJackClient, client_uuid, sClientNameEx);
-		#endif
 		}
 		setClientText(sClientNameEx, bRenameEnabled);
 	}
 	else
 #endif
-	qjackctlClientItem::updateClientName();
+	qjackctlClientItem::updateClientName(bRename);
 }
 
 
