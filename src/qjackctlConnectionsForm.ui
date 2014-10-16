@@ -103,9 +103,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/connect1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+C</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -119,9 +116,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+D</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -134,9 +128,6 @@
            </property>
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/disconnectall1.png</iconset>
-           </property>
-           <property name="shortcut" >
-            <string>Alt+A</string>
            </property>
           </widget>
          </item>
@@ -167,9 +158,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+X</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -198,9 +186,6 @@
            </property>
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/refresh1.png</iconset>
-           </property>
-           <property name="shortcut" >
-            <string>Alt+R</string>
            </property>
           </widget>
          </item>
@@ -253,9 +238,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/connect1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+C</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -269,9 +251,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+D</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -284,9 +263,6 @@
            </property>
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/disconnectall1.png</iconset>
-           </property>
-           <property name="shortcut" >
-            <string>Alt+A</string>
            </property>
           </widget>
          </item>
@@ -317,9 +293,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+X</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -348,9 +321,6 @@
            </property>
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/refresh1.png</iconset>
-           </property>
-           <property name="shortcut" >
-            <string>Alt+R</string>
            </property>
           </widget>
          </item>
@@ -403,9 +373,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/connect1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+C</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -419,9 +386,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+D</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -434,9 +398,6 @@
            </property>
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/disconnectall1.png</iconset>
-           </property>
-           <property name="shortcut" >
-            <string>Alt+A</string>
            </property>
           </widget>
          </item>
@@ -467,9 +428,6 @@
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
            </property>
-           <property name="shortcut" >
-            <string>Alt+X</string>
-           </property>
           </widget>
          </item>
          <item>
@@ -498,9 +456,6 @@
            </property>
            <property name="icon" >
             <iconset resource="qjackctl.qrc" >:/images/refresh1.png</iconset>
-           </property>
-           <property name="shortcut" >
-            <string>Alt+R</string>
            </property>
           </widget>
          </item>

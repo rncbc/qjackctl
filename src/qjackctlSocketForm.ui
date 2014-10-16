@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -102,9 +102,6 @@
          <property name="icon" >
           <iconset resource="qjackctl.qrc" >:/images/add1.png</iconset>
          </property>
-         <property name="shortcut" >
-          <string>Alt+L</string>
-         </property>
         </widget>
        </item>
        <item row="3" column="0" >
@@ -171,9 +168,6 @@
          <property name="icon" >
           <iconset resource="qjackctl.qrc" >:/images/edit1.png</iconset>
          </property>
-         <property name="shortcut" >
-          <string>Alt+E</string>
-         </property>
         </widget>
        </item>
        <item row="5" column="2" >
@@ -186,9 +180,6 @@
          </property>
          <property name="icon" >
           <iconset resource="qjackctl.qrc" >:/images/remove1.png</iconset>
-         </property>
-         <property name="shortcut" >
-          <string>Alt+R</string>
          </property>
         </widget>
        </item>
@@ -219,9 +210,6 @@
          <property name="icon" >
           <iconset resource="qjackctl.qrc" >:/images/down1.png</iconset>
          </property>
-         <property name="shortcut" >
-          <string>Alt+D</string>
-         </property>
         </widget>
        </item>
        <item row="7" column="2" >
@@ -234,9 +222,6 @@
          </property>
          <property name="icon" >
           <iconset resource="qjackctl.qrc" >:/images/up1.png</iconset>
-         </property>
-         <property name="shortcut" >
-          <string>Alt+U</string>
          </property>
         </widget>
        </item>
@@ -263,9 +248,6 @@
          </property>
          <property name="text" >
           <string>E&amp;xclusive</string>
-         </property>
-         <property name="shortcut" >
-          <string>Alt+X</string>
          </property>
         </widget>
        </item>
@@ -315,9 +297,6 @@
             <property name="text" >
              <string>&amp;Audio</string>
             </property>
-            <property name="shortcut" >
-             <string>Alt+A</string>
-            </property>
            </widget>
           </item>
           <item>
@@ -328,9 +307,6 @@
             <property name="text" >
              <string>&amp;MIDI</string>
             </property>
-            <property name="shortcut" >
-             <string>Alt+M</string>
-            </property>
            </widget>
           </item>
           <item>
@@ -340,9 +316,6 @@
             </property>
             <property name="text" >
              <string>AL&amp;SA</string>
-            </property>
-            <property name="shortcut" >
-             <string>Alt+S</string>
             </property>
            </widget>
           </item>

@@ -114,9 +114,6 @@
             <iconset resource="qjackctl.qrc">
              <normaloff>:/images/save1.png</normaloff>:/images/save1.png</iconset>
            </property>
-           <property name="shortcut">
-            <string>Alt+S</string>
-           </property>
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -133,9 +130,6 @@
            <property name="icon">
             <iconset resource="qjackctl.qrc">
              <normaloff>:/images/remove1.png</normaloff>:/images/remove1.png</iconset>
-           </property>
-           <property name="shortcut">
-            <string>Alt+D</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -398,9 +392,6 @@
               <property name="text">
                <string>&amp;Realtime</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+R</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -416,9 +407,6 @@
               </property>
               <property name="text">
                <string>No Memory Loc&amp;k</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+K</string>
               </property>
              </widget>
             </item>
@@ -436,9 +424,6 @@
               <property name="text">
                <string>&amp;Unlock Memory</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+U</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -454,9 +439,6 @@
               </property>
               <property name="text">
                <string>So&amp;ft Mode</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+F</string>
               </property>
              </widget>
             </item>
@@ -474,9 +456,6 @@
               <property name="text">
                <string>&amp;Monitor</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+M</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -492,9 +471,6 @@
               </property>
               <property name="text">
                <string>Force &amp;16bit</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+1</string>
               </property>
              </widget>
             </item>
@@ -512,9 +488,6 @@
               <property name="text">
                <string>H/W M&amp;onitor</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+O</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -530,9 +503,6 @@
               </property>
               <property name="text">
                <string>H/&amp;W Meter</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+W</string>
               </property>
              </widget>
             </item>
@@ -550,9 +520,6 @@
               <property name="text">
                <string>&amp;Ignore H/W</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+I</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -568,9 +535,6 @@
               </property>
               <property name="text">
                <string>&amp;Verbose messages</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+V</string>
               </property>
              </widget>
             </item>
@@ -1868,9 +1832,6 @@
             <property name="text">
              <string>Execute script on Start&amp;up:</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+U</string>
-            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -1887,9 +1848,6 @@
             <property name="text">
              <string>Execute script after &amp;Startup:</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+S</string>
-            </property>
            </widget>
           </item>
           <item row="2" column="0">
@@ -1905,9 +1863,6 @@
             </property>
             <property name="text">
              <string>Execute script on Shut&amp;down:</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+D</string>
             </property>
            </widget>
           </item>
@@ -2177,9 +2132,6 @@
             <property name="text">
              <string>Execute script after Shu&amp;tdown:</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+T</string>
-            </property>
            </widget>
           </item>
           <item row="3" column="2">
@@ -2304,9 +2256,6 @@
             <property name="text">
              <string>&amp;Capture standard output</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+C</string>
-            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -2387,9 +2336,6 @@
             <property name="text">
              <string>Activate &amp;Patchbay persistence:</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+P</string>
-            </property>
            </widget>
           </item>
           <item row="0" column="1" colspan="3">
@@ -2464,9 +2410,6 @@
             </property>
             <property name="text">
              <string>&amp;Auto refresh connections Patchbay, every (secs):</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+A</string>
             </property>
            </widget>
           </item>
@@ -2569,9 +2512,6 @@
             </property>
             <property name="text">
              <string>&amp;Messages log file:</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+M</string>
             </property>
            </widget>
           </item>
@@ -2768,9 +2708,6 @@
               <property name="text">
                <string>Transport &amp;Time Code</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+T</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -2783,9 +2720,6 @@
               </property>
               <property name="text">
                <string>Transport &amp;BBT (bar:beat.ticks)</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+B</string>
               </property>
              </widget>
             </item>
@@ -2800,9 +2734,6 @@
               <property name="text">
                <string>Elapsed time since last &amp;Reset</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+R</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -2815,9 +2746,6 @@
               </property>
               <property name="text">
                <string>Elapsed time since last &amp;XRUN</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+X</string>
               </property>
              </widget>
             </item>
@@ -2973,9 +2901,6 @@
               <property name="text">
                <string>&amp;Font...</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+F</string>
-              </property>
               <property name="autoDefault">
                <bool>false</bool>
               </property>
@@ -2994,9 +2919,6 @@
               </property>
               <property name="text">
                <string>&amp;Font...</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+F</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -3033,9 +2955,6 @@
               <property name="text">
                <string>&amp;Display shiny glass light effect</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+D</string>
-              </property>
              </widget>
             </item>
             <item row="5" column="0" colspan="2">
@@ -3051,9 +2970,6 @@
               </property>
               <property name="text">
                <string>Blin&amp;k server mode indicator</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+K</string>
               </property>
              </widget>
             </item>
@@ -3137,9 +3053,6 @@
             <property name="text">
              <string>&amp;Font...</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+F</string>
-            </property>
             <property name="autoDefault">
              <bool>false</bool>
             </property>
@@ -3174,9 +3087,6 @@
             </property>
             <property name="text">
              <string>&amp;Messages limit:</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+M</string>
             </property>
            </widget>
           </item>
@@ -3301,9 +3211,6 @@
             <property name="text">
              <string>&amp;Font...</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+F</string>
-            </property>
             <property name="autoDefault">
              <bool>false</bool>
             </property>
@@ -3411,9 +3318,6 @@
             <property name="text">
              <string>Draw connection and patchbay lines as Be&amp;zier curves</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+Z</string>
-            </property>
            </widget>
           </item>
           <item row="3" column="0" colspan="3">
@@ -3429,9 +3333,6 @@
             </property>
             <property name="text">
              <string>E&amp;nable client/port aliases</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+N</string>
             </property>
            </widget>
           </item>
@@ -3505,9 +3406,6 @@
             <property name="text">
              <string>Ena&amp;ble client/port aliases editing (rename)</string>
             </property>
-            <property name="shortcut">
-             <string>Alt+B</string>
-            </property>
            </widget>
           </item>
           <item row="4" column="3" colspan="3">
@@ -3523,9 +3421,6 @@
             </property>
             <property name="text">
              <string>Enable JA&amp;CK client/port pretty-names (metadata)</string>
-            </property>
-            <property name="shortcut">
-             <string>Alt+C</string>
             </property>
            </widget>
           </item>
@@ -3604,9 +3499,6 @@
               <property name="text">
                <string>&amp;Start JACK audio server on application startup</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+S</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3622,9 +3514,6 @@
               </property>
               <property name="text">
                <string>&amp;Confirm application close</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+C</string>
               </property>
              </widget>
             </item>
@@ -3643,9 +3532,6 @@
               <property name="text">
                <string>&amp;Keep child windows always on top</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+K</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3661,9 +3547,6 @@
               </property>
               <property name="text">
                <string>&amp;Enable system tray icon</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+E</string>
               </property>
              </widget>
             </item>
@@ -3681,9 +3564,6 @@
               <property name="text">
                <string>Start minimi&amp;zed to system tray</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+Z</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3700,9 +3580,6 @@
               <property name="text">
                <string>&amp;Delay window positioning at startup</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+D</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3718,9 +3595,6 @@
               </property>
               <property name="text">
                <string>Single application &amp;instance</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+I</string>
               </property>
              </widget>
             </item>
@@ -3747,9 +3621,6 @@
               </property>
               <property name="text">
                <string>S&amp;ave JACK audio server configuration to:</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+A</string>
               </property>
              </widget>
             </item>
@@ -3788,9 +3659,6 @@
               <property name="text">
                <string>C&amp;onfigure as temporary server</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+O</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3806,9 +3674,6 @@
               </property>
               <property name="text">
                <string>Confirm server sh&amp;utdown</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+U</string>
               </property>
              </widget>
             </item>
@@ -3826,9 +3691,6 @@
               <property name="text">
                <string>E&amp;nable ALSA Sequencer support</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+N</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3845,9 +3707,6 @@
               <property name="text">
                <string>&amp;Enable D-Bus interface</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+B</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3863,9 +3722,6 @@
               </property>
               <property name="text">
                <string>S&amp;top JACK audio server on application exit</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+Q</string>
               </property>
              </widget>
             </item>
@@ -3949,9 +3805,6 @@
               <property name="text">
                <string>Hide main window &amp;Left buttons</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+L</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -3967,9 +3820,6 @@
               </property>
               <property name="text">
                <string>Hide main window &amp;Right buttons</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+R</string>
               </property>
              </widget>
             </item>
@@ -3987,9 +3837,6 @@
               <property name="text">
                <string>Hide main window &amp;Transport buttons</string>
               </property>
-              <property name="shortcut">
-               <string>Alt+T</string>
-              </property>
              </widget>
             </item>
             <item>
@@ -4005,9 +3852,6 @@
               </property>
               <property name="text">
                <string>Hide main window &amp;button text labels</string>
-              </property>
-              <property name="shortcut">
-               <string>Alt+B</string>
               </property>
              </widget>
             </item>

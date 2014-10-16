@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -110,9 +110,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/down1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
       </widget>
      </item>
      <item row="0" column="0" >
@@ -125,9 +122,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/add1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string/>
        </property>
       </widget>
      </item>
@@ -158,9 +152,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/edit1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
       </widget>
      </item>
      <item row="4" column="0" >
@@ -190,9 +181,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/up1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
       </widget>
      </item>
      <item row="3" column="0" >
@@ -205,9 +193,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/remove1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string/>
        </property>
       </widget>
      </item>
@@ -222,9 +207,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/copy1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
       </widget>
      </item>
      <item row="6" column="0" >
@@ -237,9 +219,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/down1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string/>
        </property>
       </widget>
      </item>
@@ -254,9 +233,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/remove1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
       </widget>
      </item>
      <item row="2" column="2" >
@@ -269,9 +245,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/copy1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string/>
        </property>
       </widget>
      </item>
@@ -286,9 +259,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/add1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
       </widget>
      </item>
      <item row="1" column="0" >
@@ -302,9 +272,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/edit1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string/>
-       </property>
       </widget>
      </item>
      <item row="5" column="0" >
@@ -317,9 +284,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/up1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string/>
        </property>
       </widget>
      </item>
@@ -360,9 +324,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/connect1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string>Alt+C</string>
-       </property>
       </widget>
      </item>
      <item>
@@ -376,9 +337,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string>Alt+D</string>
-       </property>
       </widget>
      </item>
      <item>
@@ -391,9 +349,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/disconnect1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>Alt+A</string>
        </property>
       </widget>
      </item>
@@ -424,9 +379,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/expandall1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string>Alt+X</string>
-       </property>
       </widget>
      </item>
      <item>
@@ -456,9 +408,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/refresh1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string>Alt+R</string>
-       </property>
        <property name="default" >
         <bool>true</bool>
        </property>
@@ -485,9 +434,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/new1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string>Alt+N</string>
-       </property>
        <property name="autoDefault" >
         <bool>false</bool>
        </property>
@@ -504,9 +450,6 @@
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/open1.png</iconset>
        </property>
-       <property name="shortcut" >
-        <string>Alt+L</string>
-       </property>
        <property name="autoDefault" >
         <bool>false</bool>
        </property>
@@ -522,9 +465,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/save1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>Alt+S</string>
        </property>
        <property name="autoDefault" >
         <bool>false</bool>
@@ -562,9 +502,6 @@
        </property>
        <property name="icon" >
         <iconset resource="qjackctl.qrc" >:/images/apply1.png</iconset>
-       </property>
-       <property name="shortcut" >
-        <string>Alt+V</string>
        </property>
        <property name="checkable" >
         <bool>true</bool>
