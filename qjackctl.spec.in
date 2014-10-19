@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 20
+%define release 21
 
 %define _prefix	@ac_prefix@
 
@@ -61,6 +61,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
+* Sun Oct 19 2014 Rui Nuno Capela <rncbc@rncbc.org> 0.3.12
+- JACK Pretty-names aliasing.
 * Tue Dec 31 2013 Rui Nuno Capela <rncbc@rncbc.org> 0.3.11
 - A fifth of a Jubilee release.
 * Tue Apr  2 2013 Rui Nuno Capela <rncbc@rncbc.org> 0.3.10

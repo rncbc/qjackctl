@@ -55,7 +55,7 @@ This procedure will end installing the following files:
     ${prefix}/bin/qjackctl
     ${prefix}/share/pixmaps/qjackctl.png
     ${prefix}/share/applications/qjackctl.desktop
-    ${prefix}/share/locale/qjackctl_*.qm
+    ${prefix}/share/qjackctl/translations/qjackctl_*.qm
     ${prefix}/share/man/man1/qjackctl.1
 
 Just launch ${prefix}/bin/qjackctl and you're off (hopefully).
