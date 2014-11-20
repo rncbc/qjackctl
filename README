@@ -63,7 +63,7 @@ Just launch ${prefix}/bin/qjackctl and you're off (hopefully).
 If you're checking out from Subversion (SVN), you'll have to prepare the
 configure script just before you proceed with the above instructions:
 
-   make -f Makefile.svn
+   make -f Makefile.git
 
 
 Configuration

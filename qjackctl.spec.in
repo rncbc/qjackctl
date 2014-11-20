@@ -31,7 +31,7 @@ including a enhanced patchbay and connection control features.
 
 %prep
 %setup
-[ -f Makefile.svn ] && %__make -f Makefile.svn
+[ -f Makefile.git ] && %__make -f Makefile.git
 
 %build
 %configure
