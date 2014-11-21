@@ -8,6 +8,7 @@ configure
 *.qm
 *.o
 *.so
+*.pro.user
 qrc_*.cpp
 .moc
 .obj
