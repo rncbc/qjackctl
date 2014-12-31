@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+GIT HEAD
+
+- Drop missing or non-existent patchbay definition files from
+  the most recent used list.
+
+
 0.3.12  2014-10-19  JACK Pretty-names aliasing.
 
 - JACK client/port pretty-name (metadata) support is being

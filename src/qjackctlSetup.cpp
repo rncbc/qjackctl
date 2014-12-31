@@ -28,6 +28,7 @@
 
 #include <QTimer>
 #include <QTextStream>
+#include <QFileInfo>
 
 
 // Constructor.
@@ -142,7 +143,8 @@ void qjackctlSetup::loadSetup (void)
 		QString sItem = m_settings.value(sPrefix.arg(++i)).toString();
 		if (sItem.isEmpty())
 			break;
-		patchbays.append(sItem);
+		if (QFileInfo(sItem).exists())
+			patchbays.append(sItem);
 	}
 	m_settings.endGroup();
 
@@ -154,7 +156,8 @@ void qjackctlSetup::loadSetup (void)
 		QString sItem = m_settings.value(sPrefix.arg(++i)).toString();
 		if (sItem.isEmpty())
 			break;
-		sessionDirs.append(sItem);
+		if (QFileInfo(sItem).isDir())
+			sessionDirs.append(sItem);
 	}
 	m_settings.endGroup();
 }
