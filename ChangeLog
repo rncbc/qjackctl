@@ -5,6 +5,9 @@ ChangeLog
 
 GIT HEAD
 
+- Connections lines now drawn with anti-aliasing; connections
+  splitter handles width is now reduced.
+
 - Drop missing or non-existent patchbay definition files from
   the most recent used list.
 

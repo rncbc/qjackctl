@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1222,7 +1222,10 @@ void qjackctlConnectorView::paintEvent ( QPaintEvent * )
 	int x2, y2, h2;
 	int i, rgb[3] = { 0x33, 0x66, 0x99 };
 
-	// Inline adaptive to draker background themes...
+	// Draw all lines anti-aliased...
+	painter.setRenderHint(QPainter::Antialiasing);
+
+	// Inline adaptive to darker background themes...
 	if (QWidget::palette().window().color().value() < 0x7f)
 		for (i = 0; i < 3; ++i) rgb[i] += 0x33;
 
@@ -1327,6 +1330,8 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent )
 
 	m_bBezierLines = false;
 	m_iIconSize    = 0;
+
+	QSplitter::setHandleWidth(2);
 
 	QObject::connect(m_pOListView, SIGNAL(itemExpanded(QTreeWidgetItem *)),
 		m_pConnectorView, SLOT(contentsChanged()));
