@@ -4117,6 +4117,7 @@
   <tabstop>QueryCloseCheckBox</tabstop>
   <tabstop>KeepOnTopCheckBox</tabstop>
   <tabstop>SystemTrayCheckBox</tabstop>
+  <tabstop>SystemTrayQueryCloseCheckBox</tabstop>
   <tabstop>StartMinimizedCheckBox</tabstop>
   <tabstop>DelayedSetupCheckBox</tabstop>
   <tabstop>SingletonCheckBox</tabstop>
