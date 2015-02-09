@@ -812,11 +812,30 @@ bool qjackctlMainForm::queryClose (void)
 		show();
 		raise();
 		activateWindow();
-		bQueryClose = (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
-			tr("JACK is currently running.\n\n"
-			"Do you want to terminate the JACK audio server?"),
-			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+		if (m_pSetup->bQueryClose) {
+			const QString& sTitle
+				= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
+			const QString& sText
+				= tr("JACK is currently running.\n\n"
+					"Do you want to terminate the JACK audio server?");
+		#if 0//QJACKCTL_QUERY_CLOSE
+			bQueryClose = (QMessageBox::warning(this, sTitle, sText,
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+		#else
+			QMessageBox mbox(this);
+			mbox.setIcon(QMessageBox::Warning);
+			mbox.setWindowTitle(sTitle);
+			mbox.setText(sText);
+			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+			QCheckBox cbox(tr("Don't ask this question again"));
+			cbox.setChecked(false);
+			cbox.blockSignals(true);
+			mbox.addButton(&cbox, QMessageBox::ActionRole);
+			bQueryClose = (mbox.exec() == QMessageBox::Ok);
+			if (bQueryClose && cbox.isChecked())
+				m_pSetup->bQueryClose = false;
+		#endif
+		}
 	}
 
 	// Try to save current aliases default settings.
@@ -1321,21 +1340,40 @@ void qjackctlMainForm::startJack (void)
 // Stop jack audio server...
 void qjackctlMainForm::stopJack (void)
 {
+	bool bQueryShutdown = true;
+
 	// Check if we're allowed to stop (shutdown)...
 	if (m_pSetup->bQueryShutdown && m_pConnectionsForm
 		&& (m_pConnectionsForm->isAudioConnected() ||
-			m_pConnectionsForm->isMidiConnected())
-		&& QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
-			tr("Some client audio applications\n"
-			"are still active and connected.\n\n"
-			"Do you want to stop the JACK audio server?"),
-			QMessageBox::Yes | QMessageBox::No) == QMessageBox::No) {
-		return;
+			m_pConnectionsForm->isMidiConnected())) {
+		const QString& sTitle
+			= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
+		const QString& sText
+			= tr("Some client audio applications\n"
+				"are still active and connected.\n\n"
+				"Do you want to stop the JACK audio server?");
+		#if 0//QJACKCTL_QUERY_SHUTDOWN
+			bQueryShutdown = (QMessageBox::warning(this, sTitle, sText,
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+		#else
+			QMessageBox mbox(this);
+			mbox.setIcon(QMessageBox::Warning);
+			mbox.setWindowTitle(sTitle);
+			mbox.setText(sText);
+			QCheckBox cbox(tr("Don't ask this question again"));
+			cbox.setChecked(false);
+			cbox.blockSignals(true);
+			mbox.addButton(&cbox, QMessageBox::ActionRole);
+			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+			bQueryShutdown = (mbox.exec() == QMessageBox::Ok);
+			if (bQueryShutdown && cbox.isChecked())
+				m_pSetup->bQueryShutdown = false;
+		#endif
 	}
 
 	// Stop the server unconditionally.
-	stopJackServer();
+	if (bQueryShutdown)
+		stopJackServer();
 }
 
 
