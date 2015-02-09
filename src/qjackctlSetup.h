@@ -1,7 +1,7 @@
 // qjackctlSetup.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -161,6 +161,7 @@ public:
 	bool    bQueryClose;
 	bool    bKeepOnTop;
 	bool    bSystemTray;
+	bool    bSystemTrayQueryClose;
 	bool    bStartMinimized;
 	bool    bDelayedSetup;
 	bool    bServerConfig;
@@ -191,7 +192,7 @@ public:
 
 	// Last session save type...
 	bool bSessionSaveVersion;
-	
+
 	// Aliases containers.
 	qjackctlConnectAlias aliasAudioOutputs;
 	qjackctlConnectAlias aliasAudioInputs;

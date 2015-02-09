@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -380,6 +380,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.SystemTrayCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.SystemTrayQueryCloseCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 	QObject::connect(m_ui.StartMinimizedCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -390,6 +393,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.SingletonCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
+	QObject::connect(m_ui.ServerConfigCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ServerConfigNameComboBox,
@@ -594,6 +600,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
 	m_ui.KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
+	m_ui.SystemTrayQueryCloseCheckBox->setChecked(m_pSetup->bSystemTrayQueryClose);
 	m_ui.StartMinimizedCheckBox->setChecked(m_pSetup->bStartMinimized);
 	m_ui.DelayedSetupCheckBox->setChecked(m_pSetup->bDelayedSetup);
 	m_ui.SingletonCheckBox->setChecked(m_pSetup->bSingleton);
@@ -618,6 +625,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 #ifndef CONFIG_SYSTEM_TRAY
 	m_ui.SystemTrayCheckBox->setChecked(false);
 	m_ui.SystemTrayCheckBox->setEnabled(false);
+	m_ui.ShowSystemTrayMessageCheckBox->setChecked(false);
+	m_ui.ShowSystemTrayMessageCheckBox->setEnabled(false);
 	m_ui.StartMinimizedCheckBox->setChecked(false);
 	m_ui.StartMinimizedCheckBox->setEnabled(false);
 #endif
@@ -1129,8 +1138,9 @@ void qjackctlSetupForm::stabilizeForm (void)
 #endif
 #endif
 
-	m_ui.StartMinimizedCheckBox->setEnabled(
-		m_ui.SystemTrayCheckBox->isChecked());
+	bEnabled = m_ui.SystemTrayCheckBox->isChecked();
+	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(bEnabled);
+	m_ui.StartMinimizedCheckBox->setEnabled(bEnabled);
 
 	m_ui.StopJackCheckBox->setEnabled(
 		m_ui.DBusEnabledCheckBox->isChecked());
@@ -1537,6 +1547,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bQueryClose              = m_ui.QueryCloseCheckBox->isChecked();
 		m_pSetup->bKeepOnTop               = m_ui.KeepOnTopCheckBox->isChecked();
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();
+		m_pSetup->bSystemTrayQueryClose    = m_ui.SystemTrayQueryCloseCheckBox->isChecked();
 		m_pSetup->bStartMinimized          = m_ui.StartMinimizedCheckBox->isChecked();
 		m_pSetup->bDelayedSetup            = m_ui.DelayedSetupCheckBox->isChecked();
 		m_pSetup->bSingleton               = m_ui.SingletonCheckBox->isChecked();

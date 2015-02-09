@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -772,17 +772,35 @@ bool qjackctlMainForm::queryClose (void)
 	if (!m_bQuitForce && isVisible()
 		&& m_pSetup->bSystemTray && m_pSystemTray) {
 		m_pSetup->saveWidgetGeometry(this, true);
-		const QString& sTitle = tr("Information") + " - " QJACKCTL_SUBTITLE1;
-		const QString& sText
-			= tr("The program will keep running in the system tray.\n\n"
-				"To terminate the program, please choose \"Quit\"\n"
-				"in the context menu of the system tray icon.");
-		if (QSystemTrayIcon::supportsMessages()) {
-			m_pSystemTray->showMessage(
-				sTitle, sText, QSystemTrayIcon::Information);
+		if (m_pSetup->bSystemTrayQueryClose) {
+			const QString& sTitle
+				= tr("Information") + " - " QJACKCTL_SUBTITLE1;
+			const QString& sText
+				= tr("The program will keep running in the system tray.\n\n"
+					"To terminate the program, please choose \"Quit\"\n"
+					"in the context menu of the system tray icon.");
+		#if 0//QJACKCTL_SYSTEM_TRAY_QUERY_CLOSE
+			if (QSystemTrayIcon::supportsMessages()) {
+				m_pSystemTray->showMessage(
+					sTitle, sText, QSystemTrayIcon::Information);
+			}
+			else
+			QMessageBox::information(this, sTitle, sText);
+		#else
+			QMessageBox mbox(this);
+			mbox.setIcon(QMessageBox::Information);
+			mbox.setWindowTitle(sTitle);
+			mbox.setText(sText);
+			mbox.setStandardButtons(QMessageBox::Ok);
+			QCheckBox cbox(tr("Don't show this message again"));
+			cbox.setChecked(false);
+			cbox.blockSignals(true);
+			mbox.addButton(&cbox, QMessageBox::ActionRole);
+			mbox.exec();
+			if (cbox.isChecked())
+				m_pSetup->bSystemTrayQueryClose = false;
+		#endif
 		}
-		else
-		QMessageBox::information(this, sTitle, sText);
 		hide();
 		bQueryClose = false;
 	}

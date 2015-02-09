@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -111,6 +111,7 @@ void qjackctlSetup::loadSetup (void)
 	bQueryClose              = m_settings.value("/QueryClose", true).toBool();
 	bKeepOnTop               = m_settings.value("/KeepOnTop", false).toBool();
 	bSystemTray              = m_settings.value("/SystemTray", false).toBool();
+	bSystemTrayQueryClose    = m_settings.value("/SystemTrayQueryClose", true).toBool();
 	bStartMinimized          = m_settings.value("/StartMinimized", false).toBool();
 	bDelayedSetup            = m_settings.value("/DelayedSetup", false).toBool();
 	bServerConfig            = m_settings.value("/ServerConfig", true).toBool();
@@ -225,6 +226,7 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/QueryClose",              bQueryClose);
 	m_settings.setValue("/KeepOnTop",               bKeepOnTop);
 	m_settings.setValue("/SystemTray",              bSystemTray);
+	m_settings.setValue("/SystemTrayQueryClose",    bSystemTrayQueryClose);
 	m_settings.setValue("/StartMinimized",          bStartMinimized);
 	m_settings.setValue("/DelayedSetup",            bDelayedSetup);
 	m_settings.setValue("/ServerConfig",            bServerConfig);

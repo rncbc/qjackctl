@@ -5,6 +5,10 @@ ChangeLog
 
 GIT HEAD
 
+- New user preference option on whether to show the nagging
+  'program will keep running in the system tray' message, on
+  main window close.
+
 - Connections lines now drawn with anti-aliasing; connections
   splitter handles width is now reduced.
 
