@@ -138,6 +138,7 @@ public:
 	QString sXrunRegex;
 	bool    bActivePatchbay;
 	QString sActivePatchbayPath;
+	bool    bActivePatchbayReset;
 #ifdef CONFIG_AUTO_REFRESH
 	bool    bAutoRefresh;
 	int     iTimeRefresh;

@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -240,6 +240,10 @@ public:
 	void connectJackSnapshot(jack_client_t *pJackClient);
 	void connectAlsaSnapshot(snd_seq_t *pAlsaSeq);
 
+	// Patchbay reset/disconnect-all methods.
+	void disconnectAllJackPorts(jack_client_t *pJackClient);
+	void disconnectAllAlsaPorts(snd_seq_t *pAlsaSeq);
+
 signals:
 
 	// Cable connection change signal.
@@ -306,6 +310,9 @@ private:
 
 	// JACK snapshot executive.
 	void connectJackSnapshotEx(int iSocketType);
+
+	// JACK reset/disconnect-all executive.
+	void disconnectAllJackPortsEx(int iSocketType);
 
 	// Patchbay sockets lists.
 	QList<qjackctlPatchbaySocket *> m_osocketlist;

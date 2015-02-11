@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1582,6 +1582,105 @@ void qjackctlPatchbayRack::connectAlsaSnapshot ( snd_seq_t *pAlsaSeq )
 	omidiports.clear();
 
 	snapshot.commit(this, QJACKCTL_SOCKETTYPE_ALSA_MIDI);
+
+#endif
+
+	// Done.
+	m_pAlsaSeq = NULL;
+}
+
+
+//----------------------------------------------------------------------
+// JACK reset/disconnect-all.
+
+void qjackctlPatchbayRack::disconnectAllJackPortsEx ( int iSocketType )
+{
+	if (m_pJackClient == NULL)
+		return;
+
+	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
+#ifdef CONFIG_JACK_MIDI
+	if (iSocketType == QJACKCTL_SOCKETTYPE_JACK_MIDI)
+		pszJackPortType = JACK_DEFAULT_MIDI_TYPE;
+#endif
+
+	const char **ppszOutputPorts = jack_get_ports(m_pJackClient,
+		0, pszJackPortType, JackPortIsOutput);
+	if (ppszOutputPorts) {
+		for (int i = 0; ppszOutputPorts[i]; ++i) {
+			const char *pszOutputPort = ppszOutputPorts[i];
+			const char **ppszInputPorts = jack_port_get_all_connections(
+				m_pJackClient, jack_port_by_name(m_pJackClient, pszOutputPort));
+			if (ppszInputPorts == NULL)
+				continue;
+			for (int j = 0 ; ppszInputPorts[j]; ++j) {
+				const char *pszInputPort = ppszInputPorts[j];
+				jack_disconnect(m_pJackClient, pszOutputPort, pszInputPort);
+			}
+			::free(ppszInputPorts);
+		}
+		::free(ppszOutputPorts);
+	}
+}
+
+
+void qjackctlPatchbayRack::disconnectAllJackPorts ( jack_client_t *pJackClient )
+{
+	if (pJackClient == NULL || m_pJackClient)
+		return;
+
+	// Cache JACK client descriptor.
+	m_pJackClient = pJackClient;
+
+	disconnectAllJackPortsEx(QJACKCTL_SOCKETTYPE_JACK_AUDIO);
+	disconnectAllJackPortsEx(QJACKCTL_SOCKETTYPE_JACK_MIDI);
+
+	// Done.
+	m_pJackClient = NULL;
+}
+
+
+//----------------------------------------------------------------------
+// ALSA reset/disconnect-all.
+
+void qjackctlPatchbayRack::disconnectAllAlsaPorts ( snd_seq_t *pAlsaSeq )
+{
+	if (pAlsaSeq == NULL || m_pAlsaSeq)
+		return;
+
+	// Cache sequencer descriptor.
+	m_pAlsaSeq = pAlsaSeq;
+
+#ifdef CONFIG_ALSA_SEQ
+
+	QList<qjackctlAlsaMidiPort *> omidiports;
+	loadAlsaPorts(omidiports, true);
+
+	QListIterator<qjackctlAlsaMidiPort *> oport(omidiports);
+	while (oport.hasNext()) {
+		qjackctlAlsaMidiPort *pOPort = oport.next();
+		QList<qjackctlAlsaMidiPort *> imidiports;
+		loadAlsaConnections(imidiports, pOPort, true);
+		QListIterator<qjackctlAlsaMidiPort *> iport(imidiports);
+		while (iport.hasNext()) {
+			qjackctlAlsaMidiPort *pIPort = iport.next();
+			snd_seq_port_subscribe_t *pAlsaSubs;
+			snd_seq_addr_t seq_addr;
+			snd_seq_port_subscribe_alloca(&pAlsaSubs);
+			seq_addr.client = pOPort->iAlsaClient;
+			seq_addr.port   = pOPort->iAlsaPort;
+			snd_seq_port_subscribe_set_sender(pAlsaSubs, &seq_addr);
+			seq_addr.client = pIPort->iAlsaClient;
+			seq_addr.port   = pIPort->iAlsaPort;
+			snd_seq_port_subscribe_set_dest(pAlsaSubs, &seq_addr);
+			snd_seq_unsubscribe_port(m_pAlsaSeq, pAlsaSubs);
+		}
+		qDeleteAll(imidiports);
+		imidiports.clear();
+	}
+
+	qDeleteAll(omidiports);
+	omidiports.clear();
 
 #endif
 

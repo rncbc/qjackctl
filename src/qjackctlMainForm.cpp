@@ -1983,7 +1983,20 @@ void qjackctlMainForm::updateActivePatchbay (void)
 
 	// Time to load the active patchbay rack profiler?
 	if (m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty()) {
-		QFileInfo fi(m_pSetup->sActivePatchbayPath);
+		// Check whether to reset/disconect-all on patchbay activation...
+		if (m_pSetup->bActivePatchbayReset) {
+			if (m_pJackClient) {
+				m_pPatchbayRack->disconnectAllJackPorts(m_pJackClient);
+				m_iJackRefresh = 0;
+			}
+			if (m_pAlsaSeq) {
+				m_pPatchbayRack->disconnectAllAlsaPorts(m_pAlsaSeq);
+				m_iAlsaRefresh = 0;
+			}
+			appendMessages(tr("Patchbay reset."));
+		}
+		// Load/activate patchbay-rack...
+		const QFileInfo fi(m_pSetup->sActivePatchbayPath);
 		if (fi.isRelative())
 			m_pSetup->sActivePatchbayPath = fi.absoluteFilePath();
 		if (!qjackctlPatchbayFile::load(m_pPatchbayRack, m_pSetup->sActivePatchbayPath)) {

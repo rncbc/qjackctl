@@ -88,6 +88,7 @@ void qjackctlSetup::loadSetup (void)
 	sXrunRegex               = m_settings.value("/XrunRegex", "xrun of at least ([0-9|\\.]+) msecs").toString();
 	bActivePatchbay          = m_settings.value("/ActivePatchbay", false).toBool();
 	sActivePatchbayPath      = m_settings.value("/ActivePatchbayPath").toString();
+	bActivePatchbayReset     = m_settings.value("/ActivePatchbayReset", false).toBool();
 #ifdef CONFIG_AUTO_REFRESH
 	bAutoRefresh             = m_settings.value("/AutoRefresh", false).toBool();
 	iTimeRefresh             = m_settings.value("/TimeRefresh", 10).toInt();
@@ -203,6 +204,7 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/XrunRegex",               sXrunRegex);
 	m_settings.setValue("/ActivePatchbay",          bActivePatchbay);
 	m_settings.setValue("/ActivePatchbayPath",      sActivePatchbayPath);
+	m_settings.setValue("/ActivePatchbayReset",     bActivePatchbayReset);
 #ifdef CONFIG_AUTO_REFRESH
 	m_settings.setValue("/AutoRefresh",             bAutoRefresh);
 	m_settings.setValue("/TimeRefresh",             iTimeRefresh);
