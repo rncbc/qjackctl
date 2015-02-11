@@ -389,7 +389,7 @@ public:
 		{ return m_pOListView; }
 	qjackctlClientListView *IListView() const
 		{ return m_pIListView; }
-	qjackctlConnectorView  *ConnectorView() const
+	qjackctlConnectorView  *connectorView() const
 		{ return m_pConnectorView; }
 
 	// Connections object binding methods.

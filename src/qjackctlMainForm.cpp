@@ -1793,9 +1793,9 @@ void qjackctlMainForm::updateBezierLines (void)
 		m_pConnectionsForm->audioConnectView()->setBezierLines(m_pSetup->bBezierLines);
 		m_pConnectionsForm->midiConnectView()->setBezierLines(m_pSetup->bBezierLines);
 		m_pConnectionsForm->alsaConnectView()->setBezierLines(m_pSetup->bBezierLines);
-		m_pConnectionsForm->audioConnectView()->ConnectorView()->update();
-		m_pConnectionsForm->midiConnectView()->ConnectorView()->update();
-		m_pConnectionsForm->alsaConnectView()->ConnectorView()->update();
+		m_pConnectionsForm->audioConnectView()->connectorView()->update();
+		m_pConnectionsForm->midiConnectView()->connectorView()->update();
+		m_pConnectionsForm->alsaConnectView()->connectorView()->update();
 	}
 
 	if (m_pPatchbayForm) {

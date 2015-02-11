@@ -1485,7 +1485,7 @@ qjackctlConnect::~qjackctlConnect (void)
 	m_pOClientList = NULL;
 	m_pIClientList = NULL;
 
-	m_pConnectView->ConnectorView()->update();
+	m_pConnectView->connectorView()->update();
 }
 
 
@@ -1559,6 +1559,7 @@ bool qjackctlConnect::canConnectSelectedEx (void)
 	// Take this opportunity to highlight any current selections.
 	m_pOClientList->hiliteClientPorts();
 	m_pIClientList->hiliteClientPorts();
+	m_pConnectView->connectorView()->update();
 
 	// Now with our predicate work...
 	QTreeWidgetItem *pOItem = (m_pOClientList->listView())->currentItem();
@@ -1632,7 +1633,7 @@ bool qjackctlConnect::connectSelected (void)
 		endMutex();
 	}
 
-	m_pConnectView->ConnectorView()->update();
+	m_pConnectView->connectorView()->update();
 
 	if (bResult)
 		emit connectChanged();
@@ -1786,7 +1787,7 @@ bool qjackctlConnect::disconnectSelected (void)
 		endMutex();
 	}
 
-	m_pConnectView->ConnectorView()->update();
+	m_pConnectView->connectorView()->update();
 
 	if (bResult)
 		emit connectChanged();
@@ -1901,7 +1902,7 @@ bool qjackctlConnect::disconnectAll (void)
 		endMutex();
 	}
 
-	m_pConnectView->ConnectorView()->update();
+	m_pConnectView->connectorView()->update();
 
 	if (bResult)
 		emit connectChanged();
@@ -1933,7 +1934,7 @@ void qjackctlConnect::expandAll (void)
 {
 	(m_pOClientList->listView())->expandAll();
 	(m_pIClientList->listView())->expandAll();
-	(m_pConnectView->ConnectorView())->update();
+	(m_pConnectView->connectorView())->update();
 }
 
 
@@ -1962,7 +1963,7 @@ void qjackctlConnect::updateContents ( bool bClear )
 		endMutex();
 	}
 
-	(m_pConnectView->ConnectorView())->update();
+	(m_pConnectView->connectorView())->update();
 
 	if (!bClear && iDirtyCount > 0)
 		emit connectChanged();
