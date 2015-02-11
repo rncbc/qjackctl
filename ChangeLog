@@ -5,6 +5,9 @@ ChangeLog
 
 GIT HEAD
 
+- Current highlighted client/port connections are now drawn
+  with thicker connector lines.
+
 - New user preference option on whether to show the nagging
   'program will keep running in the system tray' message, on
   main window close.

@@ -1169,8 +1169,11 @@ int qjackctlConnectorView::itemY ( QTreeWidgetItem *pItem ) const
 
 // Draw visible port connection relation lines
 void qjackctlConnectorView::drawConnectionLine ( QPainter *pPainter,
-	int x1, int y1, int x2, int y2, int h1, int h2 )
+	int x1, int y1, int x2, int y2, int h1, int h2, const QPen& pen )
 {
+	// Set apropriate pen...
+	pPainter->setPen(pen);
+
 	// Account for list view headers.
 	y1 += h1;
 	y2 += h2;
@@ -1191,7 +1194,7 @@ void qjackctlConnectorView::drawConnectionLine ( QPainter *pPainter,
 		QPainterPath path;
 		path.moveTo(spline.at(0));
 		path.cubicTo(spline.at(1), spline.at(2), spline.at(3));
-		pPainter->strokePath(path, pPainter->pen());
+		pPainter->strokePath(path, pen);
 	}
 	else pPainter->drawLine(x1 + 4, y1, x2 - 4, y2);
 
@@ -1248,7 +1251,7 @@ void qjackctlConnectorView::paintEvent ( QPaintEvent * )
 			continue;
 		// Set new connector color.
 		++i;
-		painter.setPen(QColor(rgb[i % 3], rgb[(i / 3) % 3], rgb[(i / 9) % 3]));
+		QPen pen(QColor(rgb[i % 3], rgb[(i / 3) % 3], rgb[(i / 9) % 3]));
 		// For each port item
 		const int iChildCount = pOClient->childCount();
 		for (int iChild = 0; iChild < iChildCount; ++iChild) {
@@ -1258,6 +1261,8 @@ void qjackctlConnectorView::paintEvent ( QPaintEvent * )
 			qjackctlPortItem *pOPort
 				= static_cast<qjackctlPortItem *> (pChild);
 			if (pOPort) {
+				// Set proposed line width...
+				const int w1 = (pOPort->isHilite() ? 2 : 1);
 				// Get starting connector arrow coordinates.
 				y1 = itemY(pOPort) + (yo - yc);
 				// Get port connections...
@@ -1267,7 +1272,8 @@ void qjackctlConnectorView::paintEvent ( QPaintEvent * )
 					// Obviously, should be a connection
 					// from pOPort to pIPort items:
 					y2 = itemY(pIPort) + (yi - yc);
-					drawConnectionLine(&painter, x1, y1, x2, y2, h1, h2);
+					pen.setWidth(pIPort->isHilite() ? 2 : w1);
+					drawConnectionLine(&painter, x1, y1, x2, y2, h1, h2, pen);
 				}
 			}
 		}

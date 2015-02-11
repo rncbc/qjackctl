@@ -248,12 +248,12 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1884"/>
+        <location filename="../qjackctlConnect.cpp" line="1890"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1885"/>
+        <location filename="../qjackctlConnect.cpp" line="1891"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -395,45 +395,45 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1290"/>
+        <location filename="../qjackctlConnect.cpp" line="1296"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1291"/>
+        <location filename="../qjackctlConnect.cpp" line="1297"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1294"/>
+        <location filename="../qjackctlConnect.cpp" line="1300"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Trennen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1295"/>
+        <location filename="../qjackctlConnect.cpp" line="1301"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1298"/>
+        <location filename="../qjackctlConnect.cpp" line="1304"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Alle trennen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1299"/>
+        <location filename="../qjackctlConnect.cpp" line="1305"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1304"/>
+        <location filename="../qjackctlConnect.cpp" line="1310"/>
         <source>&amp;Refresh</source>
         <translation>Au&amp;ffrischen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1305"/>
+        <location filename="../qjackctlConnect.cpp" line="1311"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+F</translation>
