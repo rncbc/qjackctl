@@ -560,7 +560,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateJackClientPortAlias();
 	updateJackClientPortMetadata();
 	updateBezierLines();
-	updateActivePatchbay();
+//	updateActivePatchbay();
 	updateSystemTray();
 
 	// And for the whole widget gallore...
@@ -1100,15 +1100,15 @@ void qjackctlMainForm::startJack (void)
 	args.removeAt(0);
 
 	// Build process arguments...
-	bool bDummy     = (m_preset.sDriver == "dummy");
-	bool bSun       = (m_preset.sDriver == "sun");
-	bool bOss       = (m_preset.sDriver == "oss");
-	bool bAlsa      = (m_preset.sDriver == "alsa");
-	bool bPortaudio = (m_preset.sDriver == "portaudio");
-	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	bool bFreebob   = (m_preset.sDriver == "freebob");
-	bool bFirewire  = (m_preset.sDriver == "firewire");
-	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	const bool bDummy     = (m_preset.sDriver == "dummy");
+	const bool bSun       = (m_preset.sDriver == "sun");
+	const bool bOss       = (m_preset.sDriver == "oss");
+	const bool bAlsa      = (m_preset.sDriver == "alsa");
+	const bool bPortaudio = (m_preset.sDriver == "portaudio");
+	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
+	const bool bFreebob   = (m_preset.sDriver == "freebob");
+	const bool bFirewire  = (m_preset.sDriver == "firewire");
+	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
 
 	if (!m_pSetup->sServerName.isEmpty())
 		args.append("-n" + m_pSetup->sServerName);
@@ -2515,24 +2515,45 @@ void qjackctlMainForm::cableConnectSlot (
 void qjackctlMainForm::queryDisconnect (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType )
 {
-	if (m_pSetup->bActivePatchbay) {
+	if (m_pSetup->bActivePatchbay && m_pSetup->bQueryDisconnect) {
 		qjackctlPatchbayCable *pCable = m_pPatchbayRack->findCable(
 			pOPort->clientName(), pOPort->portName(),
 			pIPort->clientName(), pIPort->portName(), iSocketType);
-		if (pCable && QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
-			tr("A patchbay definition is currently active,\n"
-			"which is probable to redo this connection:\n\n"
-			"%1 -> %2\n\n"
-			"Do you want to remove the patchbay connection?")
-			.arg(pCable->outputSocket()->name())
-			.arg(pCable->inputSocket()->name()),
-			QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
-			m_pPatchbayRack->removeCable(pCable);
-			if (m_pPatchbayForm
-				&& isActivePatchbay(m_pPatchbayForm->patchbayPath()))
-				m_pPatchbayForm->loadPatchbayRack(m_pPatchbayRack);
+		if (pCable) {
+			bool bQueryDisconnect = true;
+			const QString& sTitle
+				= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
+			const QString& sText
+				= tr("A patchbay definition is currently active,\n"
+					"which is probable to redo this connection:\n\n"
+					"%1 -> %2\n\n"
+					"Do you want to remove the patchbay connection?")
+					.arg(pCable->outputSocket()->name())
+					.arg(pCable->inputSocket()->name());
+		#if 0//QJACKCTL_QUERY_DISCONNECT
+			bQueryDisconnect = (QMessageBox::warning(this, sTitle, Text,
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+		#else
+			QMessageBox mbox(this);
+			mbox.setIcon(QMessageBox::Warning);
+			mbox.setWindowTitle(sTitle);
+			mbox.setText(sText);
+			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+			QCheckBox cbox(tr("Don't ask this question again"));
+			cbox.setChecked(false);
+			cbox.blockSignals(true);
+			mbox.addButton(&cbox, QMessageBox::ActionRole);
+			bQueryDisconnect = (mbox.exec() == QMessageBox::Ok);
+			if (bQueryDisconnect && cbox.isChecked())
+				m_pSetup->bQueryDisconnect = false;
+		#endif
+			if (bQueryDisconnect)
+				m_pPatchbayRack->removeCable(pCable);
 		}
+		// Refresh patchbay form anyway...
+		if (m_pPatchbayForm
+			&& isActivePatchbay(m_pPatchbayForm->patchbayPath()))
+			m_pPatchbayForm->loadPatchbayRack(m_pPatchbayRack);
 	}
 }
 
@@ -2683,9 +2704,6 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	// Activate us as a client...
 	jack_activate(m_pJackClient);
 
-	// Remember to schedule an initial connection refreshment.
-	refreshConnections();
-
 	// All displays are highlighted from now on.
 	QPalette pal;
 	pal.setColor(QPalette::Foreground, Qt::yellow);
@@ -2707,6 +2725,9 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	// Log success here.
 	appendMessages(tr("Client activated."));
 
+	// Formal patchbay activation, if any, is in order...
+	updateActivePatchbay();
+
 	// Do we have any post-startup scripting?...
 	// (only if we're not a detached client)
 	if (!bDetach && !m_bJackDetach) {
@@ -2727,6 +2748,9 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		// And reset it forever more...
 		m_pSetup->sCmdLine.clear();
 	}
+
+	// Remember to schedule an initial connection refreshment.
+	refreshConnections();
 
 	// OK, we're at it!
 	return true;

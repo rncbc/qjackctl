@@ -2391,7 +2391,39 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
+          <item row="1" column="0" colspan="4">
+           <widget class="QCheckBox" name="ActivePatchbayResetCheckBox">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Whether to reset all connections when a patchbay definition is activated.</string>
+            </property>
+            <property name="text">
+             <string>&amp;Reset all connections on patchbay activation</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="4">
+           <widget class="QCheckBox" name="QueryDisconnectCheckBox">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Whether to issue a warning on active patchbay port disconnections.</string>
+            </property>
+            <property name="text">
+             <string>&amp;Warn on active patchbay disconnections</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
            <widget class="QCheckBox" name="AutoRefreshCheckBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2413,7 +2445,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
+          <item row="3" column="2">
            <widget class="QComboBox" name="TimeRefreshComboBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -2464,22 +2496,6 @@
              </property>
             </item>
            </widget>
-          </item>
-          <item row="1" column="3" colspan="2">
-           <spacer>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint">
-             <size>
-              <width>200</width>
-              <height>8</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>
@@ -4090,6 +4106,8 @@
   <tabstop>ActivePatchbayCheckBox</tabstop>
   <tabstop>ActivePatchbayPathComboBox</tabstop>
   <tabstop>ActivePatchbayPathToolButton</tabstop>
+  <tabstop>ActivePatchbayResetCheckBox</tabstop>
+  <tabstop>QueryDisconnectCheckBox</tabstop>
   <tabstop>AutoRefreshCheckBox</tabstop>
   <tabstop>MessagesLogCheckBox</tabstop>
   <tabstop>MessagesLogPathComboBox</tabstop>

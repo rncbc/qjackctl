@@ -290,6 +290,12 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.ActivePatchbayPathToolButton,
 		SIGNAL(clicked()),
 		SLOT(browseActivePatchbayPath()));
+	QObject::connect(m_ui.ActivePatchbayResetCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
+	QObject::connect(m_ui.QueryDisconnectCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 #ifdef CONFIG_AUTO_REFRESH
 	QObject::connect(m_ui.AutoRefreshCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -514,6 +520,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.ActivePatchbayCheckBox->setChecked(m_pSetup->bActivePatchbay);
 	setComboBoxCurrentText(m_ui.ActivePatchbayPathComboBox,
 		m_pSetup->sActivePatchbayPath);
+	m_ui.ActivePatchbayResetCheckBox->setChecked(m_pSetup->bActivePatchbayReset);
+	m_ui.QueryDisconnectCheckBox->setChecked(m_pSetup->bQueryDisconnect);
 #ifdef CONFIG_AUTO_REFRESH
 	m_ui.AutoRefreshCheckBox->setChecked(m_pSetup->bAutoRefresh);
 	setComboBoxCurrentText(m_ui.TimeRefreshComboBox,
@@ -1105,6 +1113,8 @@ void qjackctlSetupForm::stabilizeForm (void)
 	bEnabled = m_ui.ActivePatchbayCheckBox->isChecked();
 	m_ui.ActivePatchbayPathComboBox->setEnabled(bEnabled);
 	m_ui.ActivePatchbayPathToolButton->setEnabled(bEnabled);
+	m_ui.ActivePatchbayResetCheckBox->setEnabled(bEnabled);
+	m_ui.QueryDisconnectCheckBox->setEnabled(bEnabled);
 	if (bEnabled && bValid) {
 		const QString& sPath = m_ui.ActivePatchbayPathComboBox->currentText();
 		bValid = (!sPath.isEmpty() && QFileInfo(sPath).exists());
@@ -1521,6 +1531,8 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->sXrunRegex               = m_ui.XrunRegexComboBox->currentText();
 		m_pSetup->bActivePatchbay          = m_ui.ActivePatchbayCheckBox->isChecked();
 		m_pSetup->sActivePatchbayPath      = m_ui.ActivePatchbayPathComboBox->currentText();
+		m_pSetup->bActivePatchbayReset     = m_ui.ActivePatchbayResetCheckBox->isChecked();
+		m_pSetup->bQueryDisconnect         = m_ui.QueryDisconnectCheckBox->isChecked();
 #ifdef CONFIG_AUTO_REFRESH
 		m_pSetup->bAutoRefresh             = m_ui.AutoRefreshCheckBox->isChecked();
 		m_pSetup->iTimeRefresh             = m_ui.TimeRefreshComboBox->currentText().toInt();

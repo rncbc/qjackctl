@@ -5,6 +5,9 @@ ChangeLog
 
 GIT HEAD
 
+- Introducing brand new active patchbay reset/disconnect-all
+  user preference option. (EXPERIMENTAL)
+
 - Current highlighted client/port connections are now drawn
   with thicker connector lines.
 

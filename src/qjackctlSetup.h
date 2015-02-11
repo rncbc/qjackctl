@@ -139,6 +139,7 @@ public:
 	bool    bActivePatchbay;
 	QString sActivePatchbayPath;
 	bool    bActivePatchbayReset;
+	bool    bQueryDisconnect;
 #ifdef CONFIG_AUTO_REFRESH
 	bool    bAutoRefresh;
 	int     iTimeRefresh;
