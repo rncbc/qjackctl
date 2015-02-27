@@ -26,16 +26,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>675</width>
-    <height>503</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Setup - JACK Audio Connection Kit</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="qjackctl.qrc">
-    <normaloff>:/images/setup1.png</normaloff>:/images/setup1.png</iconset>
+   <iconset resource="qjackctl.qrc">:/images/setup1.png</iconset>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -111,8 +110,7 @@
             <string>&amp;Save</string>
            </property>
            <property name="icon">
-            <iconset resource="qjackctl.qrc">
-             <normaloff>:/images/save1.png</normaloff>:/images/save1.png</iconset>
+            <iconset resource="qjackctl.qrc">:/images/save1.png</iconset>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -128,8 +126,7 @@
             <string>&amp;Delete</string>
            </property>
            <property name="icon">
-            <iconset resource="qjackctl.qrc">
-             <normaloff>:/images/remove1.png</normaloff>:/images/remove1.png</iconset>
+            <iconset resource="qjackctl.qrc">:/images/remove1.png</iconset>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -2592,13 +2589,10 @@
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::MinimumExpanding</enum>
-         </property>
          <property name="sizeHint">
           <size>
            <width>8</width>
-           <height>8</height>
+           <height>4</height>
           </size>
          </property>
         </spacer>
@@ -3309,13 +3303,10 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
-            </property>
             <property name="sizeHint">
              <size>
               <width>8</width>
-              <height>8</height>
+              <height>4</height>
              </size>
             </property>
            </spacer>
@@ -3448,13 +3439,10 @@
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::MinimumExpanding</enum>
-         </property>
          <property name="sizeHint">
           <size>
            <width>8</width>
-           <height>8</height>
+           <height>4</height>
           </size>
          </property>
         </spacer>
@@ -3762,13 +3750,10 @@
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
-              </property>
               <property name="sizeHint">
                <size>
                 <width>8</width>
-                <height>8</height>
+                <height>4</height>
                </size>
               </property>
              </spacer>
@@ -3780,13 +3765,10 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
             <property name="sizeHint">
              <size>
               <width>8</width>
-              <height>8</height>
+              <height>4</height>
              </size>
             </property>
            </spacer>
@@ -3894,13 +3876,10 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
             <property name="sizeHint">
              <size>
               <width>8</width>
-              <height>8</height>
+              <height>4</height>
              </size>
             </property>
            </spacer>
@@ -3934,13 +3913,10 @@
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
             <property name="sizeHint">
              <size>
               <width>8</width>
-              <height>8</height>
+              <height>4</height>
              </size>
             </property>
            </spacer>

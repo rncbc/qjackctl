@@ -1741,4 +1741,37 @@ bool qjackctlSetupForm::queryClose (void)
 }
 
 
+// Notify our parent that we're emerging.
+void qjackctlSetupForm::showEvent ( QShowEvent *pShowEvent )
+{
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+
+	stabilizeForm();
+
+	QDialog::showEvent(pShowEvent);
+}
+
+// Notify our parent that we're closing.
+void qjackctlSetupForm::hideEvent ( QHideEvent *pHideEvent )
+{
+	QDialog::hideEvent(pHideEvent);
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+}
+
+// Just about to notify main-window that we're closing.
+void qjackctlSetupForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+{
+	QDialog::hide();
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+}
+
+
 // end of qjackctlSetupForm.cpp

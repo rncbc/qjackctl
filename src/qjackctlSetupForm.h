@@ -101,6 +101,10 @@ protected:
 
 	void stabilizeForm();
 
+	void showEvent(QShowEvent *);
+	void hideEvent(QHideEvent *);
+	void closeEvent(QCloseEvent *);
+
 private:
 
 	// The Qt-designer UI struct...

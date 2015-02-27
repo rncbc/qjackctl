@@ -529,10 +529,13 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	}
 	// All forms are to be created right now.
 	m_pMessagesStatusForm = new qjackctlMessagesStatusForm (pParent, wflags);
-	m_pSessionForm     = new qjackctlSessionForm     (pParent, wflags);
-	m_pConnectionsForm = new qjackctlConnectionsForm (pParent, wflags);
-	m_pPatchbayForm    = new qjackctlPatchbayForm    (pParent, wflags);
-	m_pSetupForm       = new qjackctlSetupForm       (pParent, wflags);
+	m_pSessionForm        = new qjackctlSessionForm        (pParent, wflags);
+	m_pConnectionsForm    = new qjackctlConnectionsForm    (pParent, wflags);
+	m_pPatchbayForm       = new qjackctlPatchbayForm       (pParent, wflags);
+
+	// Setup form is kind of special (modeless dialog).
+	m_pSetupForm = new qjackctlSetupForm(this);
+
 	// Setup appropriately...
 	m_pMessagesStatusForm->setTabPage(m_pSetup->iMessagesStatusTabPage);
 	m_pMessagesStatusForm->setLogging(
@@ -583,7 +586,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pSetup->loadWidgetGeometry(m_pSessionForm);
 	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
 	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
-	m_pSetup->loadWidgetGeometry(m_pSetupForm);
+//	m_pSetup->loadWidgetGeometry(m_pSetupForm);
 
 	// Initial XRUN statistics reset.
 	resetXrunStats();
@@ -896,7 +899,7 @@ bool qjackctlMainForm::queryClose (void)
 		m_pSetup->saveWidgetGeometry(m_pSessionForm);
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
-		m_pSetup->saveWidgetGeometry(m_pSetupForm);
+	//	m_pSetup->saveWidgetGeometry(m_pSetupForm);
 		m_pSetup->saveWidgetGeometry(this);
 		// Close popup widgets.
 		if (m_pMessagesStatusForm)
@@ -3018,7 +3021,7 @@ void qjackctlMainForm::togglePatchbayForm (void)
 void qjackctlMainForm::showSetupForm (void)
 {
 	if (m_pSetupForm) {
-		m_pSetup->saveWidgetGeometry(m_pSetupForm);
+	//	m_pSetup->saveWidgetGeometry(m_pSetupForm);
 		if (m_pSetupForm->isVisible()) {
 			m_pSetupForm->hide();
 		} else {
