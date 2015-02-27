@@ -510,6 +510,9 @@
      <property name="icon" >
       <iconset resource="qjackctl.qrc" >:/images/setup1.png</iconset>
      </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
      <property name="toolButtonStyle" >
       <enum>Qt::ToolButtonTextBesideIcon</enum>
      </property>

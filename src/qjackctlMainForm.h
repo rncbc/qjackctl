@@ -40,6 +40,7 @@ typedef void snd_seq_t;
 
 // Forward declarations.
 class qjackctlSetup;
+class qjackctlSetupForm;
 class qjackctlMessagesStatusForm;
 class qjackctlSessionForm;
 class qjackctlConnectionsForm;
@@ -100,6 +101,25 @@ public:
 
 	void setQuitForce(bool bQuitForce);
 	bool isQuitForce() const;
+
+	void updateMessagesFont();
+	void updateMessagesLimit();
+	void updateMessagesLogging();
+	void updateConnectionsFont();
+	void updateConnectionsIconSize();
+	void updateJackClientPortAlias();
+	void updateJackClientPortMetadata();
+	void updateBezierLines();
+	void updateDisplayEffect();
+	void updateTimeDisplayFonts();
+	void updateTimeDisplayToolTips();
+	void updateTimeFormat();
+	void updateAliases();
+	void updateButtons();
+	void updateSystemTray();
+
+	void showDirtySettingsWarning();
+	void showDirtySetupWarning();
 
 public slots:
 
@@ -177,20 +197,6 @@ protected:
 	void appendMessagesText(const QString& s);
 	void appendMessagesError(const QString& s);
 
-	void updateMessagesFont();
-	void updateMessagesLimit();
-	void updateConnectionsFont();
-	void updateConnectionsIconSize();
-	void updateJackClientPortAlias();
-	void updateJackClientPortMetadata();
-	void updateBezierLines();
-	void updateDisplayEffect();
-	void updateTimeDisplayFonts();
-	void updateTimeDisplayToolTips();
-	void updateTimeFormat();
-	void updateAliases();
-	void updateButtons();
-
 	void updateXrunCount();
 
 	QString formatTime(float secs) const;
@@ -216,10 +222,6 @@ protected:
 	void updateStatusItem(int iStatusItem, const QString& sText);
 	void updateTitleStatus();
 	void updateServerState(int iState);
-	void updateSystemTray();
-
-	void showDirtySettingsWarning();
-	void showDirtySetupWarning();
 
 	void contextMenuEvent(QContextMenuEvent *);
 	void mousePressEvent(QMouseEvent *pMouseEvent);
@@ -314,6 +316,7 @@ private:
 	qjackctlSessionForm     *m_pSessionForm;
 	qjackctlConnectionsForm *m_pConnectionsForm;
 	qjackctlPatchbayForm    *m_pPatchbayForm;
+	qjackctlSetupForm       *m_pSetupForm;
 
 	qjackctlPatchbayRack *m_pPatchbayRack;
 

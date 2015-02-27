@@ -22,6 +22,8 @@
 #include "qjackctlAbout.h"
 #include "qjackctlSetupForm.h"
 
+#include "qjackctlMainForm.h"
+
 #include "qjackctlSetup.h"
 
 #include <QValidator>
@@ -1513,7 +1515,42 @@ void qjackctlSetupForm::optionsChanged (void)
 // Accept settings (OK button slot).
 void qjackctlSetupForm::accept (void)
 {
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == NULL)
+		return;
+
 	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
+		// To track down deferred or immediate changes.
+		const bool    bOldMessagesLog         = m_pSetup->bMessagesLog;
+		const QString sOldMessagesLogPath     = m_pSetup->sMessagesLogPath;
+		const QString sOldMessagesFont        = m_pSetup->sMessagesFont;
+		const QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
+		const QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
+		const QString sOldConnectionsFont     = m_pSetup->sConnectionsFont;
+		const int     iOldConnectionsIconSize = m_pSetup->iConnectionsIconSize;
+		const int     iOldJackClientPortAlias = m_pSetup->iJackClientPortAlias;
+		const bool    bOldJackClientPortMetadata = m_pSetup->bJackClientPortMetadata;
+		const int     iOldTimeDisplay         = m_pSetup->iTimeDisplay;
+		const int     iOldTimeFormat          = m_pSetup->iTimeFormat;
+		const bool    bOldDisplayEffect       = m_pSetup->bDisplayEffect;
+		const bool    bOldActivePatchbay      = m_pSetup->bActivePatchbay;
+		const QString sOldActivePatchbayPath  = m_pSetup->sActivePatchbayPath;
+		const bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
+		const bool    bOldKeepOnTop           = m_pSetup->bKeepOnTop;
+		const bool    bOldSystemTray          = m_pSetup->bSystemTray;
+		const bool    bOldDelayedSetup        = m_pSetup->bDelayedSetup;
+		const int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
+		const int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
+		const bool    bOldBezierLines         = m_pSetup->bBezierLines;
+		const bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
+		const bool    bOldDBusEnabled         = m_pSetup->bDBusEnabled;
+		const bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
+		const bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
+		const bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
+		const bool    bOldRightButtons        = m_pSetup->bRightButtons;
+		const bool    bOldTransportButtons    = m_pSetup->bTransportButtons;
+		const bool    bOldTextLabels          = m_pSetup->bTextLabels;
+		const int     iOldBaseFontSize        = m_pSetup->iBaseFontSize;
 		// Save current preset selection.
 		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
 		// Always save current settings...
@@ -1576,6 +1613,74 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bTransportButtons        = !m_ui.TransportButtonsCheckBox->isChecked();
 		m_pSetup->bTextLabels              = !m_ui.TextLabelsCheckBox->isChecked();
 		m_pSetup->iBaseFontSize            = m_ui.BaseFontSizeComboBox->currentText().toInt();
+		// Check wheather something immediate has changed.
+		if (( bOldMessagesLog && !m_pSetup->bMessagesLog) ||
+			(!bOldMessagesLog &&  m_pSetup->bMessagesLog) ||
+			(sOldMessagesLogPath != m_pSetup->sMessagesLogPath))
+			pMainForm->updateMessagesLogging();
+		if (( bOldBezierLines && !m_pSetup->bBezierLines) ||
+			(!bOldBezierLines &&  m_pSetup->bBezierLines))
+			pMainForm->updateBezierLines();
+		if (( bOldDisplayEffect && !m_pSetup->bDisplayEffect) ||
+			(!bOldDisplayEffect &&  m_pSetup->bDisplayEffect))
+			pMainForm->updateDisplayEffect();
+		if (iOldJackClientPortAlias != m_pSetup->iJackClientPortAlias)
+			pMainForm->updateJackClientPortAlias();
+		if (( bOldJackClientPortMetadata && !m_pSetup->bJackClientPortMetadata) ||
+			(!bOldJackClientPortMetadata &&  m_pSetup->bJackClientPortMetadata))
+			pMainForm->updateJackClientPortMetadata();
+		if (iOldConnectionsIconSize != m_pSetup->iConnectionsIconSize)
+			pMainForm->updateConnectionsIconSize();
+		if (sOldConnectionsFont != m_pSetup->sConnectionsFont)
+			pMainForm->updateConnectionsFont();
+		if (sOldMessagesFont != m_pSetup->sMessagesFont)
+			pMainForm->updateMessagesFont();
+		if (( bOldMessagesLimit && !m_pSetup->bMessagesLimit) ||
+			(!bOldMessagesLimit &&  m_pSetup->bMessagesLimit) ||
+			(iOldMessagesLimitLines !=  m_pSetup->iMessagesLimitLines))
+			pMainForm->updateMessagesLimit();
+		if (sOldDisplayFont1 != m_pSetup->sDisplayFont1 ||
+			sOldDisplayFont2 != m_pSetup->sDisplayFont2)
+			pMainForm->updateTimeDisplayFonts();
+		if (iOldTimeDisplay != m_pSetup->iTimeDisplay)
+			pMainForm->updateTimeDisplayToolTips();
+		if (iOldTimeFormat != m_pSetup->iTimeFormat)
+			pMainForm->updateTimeFormat();
+		if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||
+			(sOldActivePatchbayPath != m_pSetup->sActivePatchbayPath))
+			pMainForm->updateActivePatchbay();
+		if (( bOldSystemTray && !m_pSetup->bSystemTray) ||
+			(!bOldSystemTray &&  m_pSetup->bSystemTray))
+			pMainForm->updateSystemTray();
+		if (( bOldAliasesEnabled && !m_pSetup->bAliasesEnabled) ||
+			(!bOldAliasesEnabled &&  m_pSetup->bAliasesEnabled) ||
+			( bOldAliasesEditing && !m_pSetup->bAliasesEditing) ||
+			(!bOldAliasesEditing &&  m_pSetup->bAliasesEditing))
+			pMainForm->updateAliases();
+		if (( bOldLeftButtons  && !m_pSetup->bLeftButtons)  ||
+			(!bOldLeftButtons  &&  m_pSetup->bLeftButtons)  ||
+			( bOldRightButtons && !m_pSetup->bRightButtons) ||
+			(!bOldRightButtons &&  m_pSetup->bRightButtons) ||
+			( bOldTransportButtons && !m_pSetup->bTransportButtons) ||
+			(!bOldTransportButtons &&  m_pSetup->bTransportButtons) ||
+			( bOldTextLabels && !m_pSetup->bTextLabels) ||
+			(!bOldTextLabels &&  m_pSetup->bTextLabels))
+			pMainForm->updateButtons();
+		// Warn if something will be only effective on next run.
+		if (( bOldStdoutCapture  && !m_pSetup->bStdoutCapture)  ||
+			(!bOldStdoutCapture  &&  m_pSetup->bStdoutCapture)  ||
+			( bOldKeepOnTop      && !m_pSetup->bKeepOnTop)      ||
+			(!bOldKeepOnTop      &&  m_pSetup->bKeepOnTop)      ||
+			( bOldDelayedSetup   && !m_pSetup->bDelayedSetup)   ||
+			(!bOldDelayedSetup   &&  m_pSetup->bDelayedSetup)   ||
+			( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
+			(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled) ||
+			( bOldDBusEnabled    && !m_pSetup->bDBusEnabled)    ||
+			(!bOldDBusEnabled    &&  m_pSetup->bDBusEnabled)    ||
+			(iOldBaseFontSize    !=  m_pSetup->iBaseFontSize))
+			pMainForm->showDirtySetupWarning();
+		// If server is currently running, warn user...
+		pMainForm->showDirtySettingsWarning();
 	}
 
 	// Save combobox history...
@@ -1602,7 +1707,15 @@ void qjackctlSetupForm::accept (void)
 // Reject settings (Cancel button slot).
 void qjackctlSetupForm::reject (void)
 {
-	bool bReject = true;
+	if (queryClose())
+		QDialog::reject();
+}
+
+
+// Check whether we're clear to close.
+bool qjackctlSetupForm::queryClose (void)
+{
+	bool bQueryClose = true;
 
 	// Check if there's any pending changes...
 	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
@@ -1615,16 +1728,16 @@ void qjackctlSetupForm::reject (void)
 			QMessageBox::Cancel)) {
 		case QMessageBox::Apply:
 			accept();
-			return;
+			// Fall thru...
 		case QMessageBox::Discard:
 			break;
 		default:    // Cancel.
-			bReject = false;
+			bQueryClose = false;
+			break;
 		}
 	}
 
-	if (bReject)
-		QDialog::reject();
+	return bQueryClose;
 }
 
 

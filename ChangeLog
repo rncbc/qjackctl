@@ -5,6 +5,8 @@ ChangeLog
 
 GIT HEAD
 
+- Setup dialog form is now modeless (EXPERIMENTAL).
+
 - Introducing brand new active patchbay reset/disconnect-all
   user preference option. (EXPERIMENTAL)
 

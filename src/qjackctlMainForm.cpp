@@ -354,6 +354,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pSessionForm     = NULL;
 	m_pConnectionsForm = NULL;
 	m_pPatchbayForm    = NULL;
+	m_pSetupForm       = NULL;
 
 	// Patchbay rack can be readily created.
 	m_pPatchbayRack = new qjackctlPatchbayRack();
@@ -478,6 +479,8 @@ qjackctlMainForm::~qjackctlMainForm (void)
 		delete m_pConnectionsForm;
 	if (m_pPatchbayForm)
 		delete m_pPatchbayForm;
+	if (m_pSetupForm)
+		delete m_pSetupForm;
 
 	// Quit off system tray widget.
 	if (m_pSystemTray)
@@ -529,6 +532,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pSessionForm     = new qjackctlSessionForm     (pParent, wflags);
 	m_pConnectionsForm = new qjackctlConnectionsForm (pParent, wflags);
 	m_pPatchbayForm    = new qjackctlPatchbayForm    (pParent, wflags);
+	m_pSetupForm       = new qjackctlSetupForm       (pParent, wflags);
 	// Setup appropriately...
 	m_pMessagesStatusForm->setTabPage(m_pSetup->iMessagesStatusTabPage);
 	m_pMessagesStatusForm->setLogging(
@@ -537,6 +541,17 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pConnectionsForm->setTabPage(m_pSetup->iConnectionsTabPage);
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);
+	m_pSetupForm->setup(m_pSetup);
+
+	// Check out some initial nullities(tm)...
+	if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesStatusForm)
+		m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
+	if (m_pSetup->sDisplayFont1.isEmpty())
+		m_pSetup->sDisplayFont1 = m_ui.TimeDisplayTextLabel->font().toString();
+	if (m_pSetup->sDisplayFont2.isEmpty())
+		m_pSetup->sDisplayFont2 = m_ui.ServerStateTextLabel->font().toString();
+	if (m_pSetup->sConnectionsFont.isEmpty() && m_pConnectionsForm)
+		m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
 
 	// Set the patchbay cable connection notification signal/slot.
 	QObject::connect(m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
@@ -568,6 +583,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pSetup->loadWidgetGeometry(m_pSessionForm);
 	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
 	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
+	m_pSetup->loadWidgetGeometry(m_pSetupForm);
 
 	// Initial XRUN statistics reset.
 	resetXrunStats();
@@ -838,6 +854,10 @@ bool qjackctlMainForm::queryClose (void)
 		}
 	}
 
+	// Try to save current setup settings.
+	if (bQueryClose && m_pSetupForm)
+		bQueryClose = m_pSetupForm->queryClose();
+
 	// Try to save current aliases default settings.
 	if (bQueryClose && m_pConnectionsForm) {
 		bQueryClose = m_pConnectionsForm->queryClose();
@@ -876,6 +896,7 @@ bool qjackctlMainForm::queryClose (void)
 		m_pSetup->saveWidgetGeometry(m_pSessionForm);
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
+		m_pSetup->saveWidgetGeometry(m_pSetupForm);
 		m_pSetup->saveWidgetGeometry(this);
 		// Close popup widgets.
 		if (m_pMessagesStatusForm)
@@ -886,6 +907,8 @@ bool qjackctlMainForm::queryClose (void)
 			m_pConnectionsForm->close();
 		if (m_pPatchbayForm)
 			m_pPatchbayForm->close();
+		if (m_pSetupForm)
+			m_pSetupForm->close();
 		// And the system tray icon too.
 		if (m_pSystemTray)
 			m_pSystemTray->close();
@@ -1734,6 +1757,19 @@ void qjackctlMainForm::updateMessagesLimit (void)
 }
 
 
+// Update messages logging state.
+void qjackctlMainForm::updateMessagesLogging (void)
+{
+	if (m_pSetup == NULL)
+		return;
+
+	if (m_pMessagesStatusForm) {
+		m_pMessagesStatusForm->setLogging(
+			m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
+	}
+}
+
+
 // Force update of the connections font.
 void qjackctlMainForm::updateConnectionsFont (void)
 {
@@ -2054,6 +2090,8 @@ void qjackctlMainForm::stabilizeForm (void)
 		m_pConnectionsForm && m_pConnectionsForm->isVisible());
 	m_ui.PatchbayToolButton->setChecked(
 		m_pPatchbayForm && m_pPatchbayForm->isVisible());
+	m_ui.SetupToolButton->setChecked(
+		m_pSetupForm && m_pSetupForm->isVisible());
 }
 
 
@@ -2979,123 +3017,15 @@ void qjackctlMainForm::togglePatchbayForm (void)
 // Setup dialog requester slot.
 void qjackctlMainForm::showSetupForm (void)
 {
-	qjackctlSetupForm *pSetupForm = new qjackctlSetupForm(this);
-	if (pSetupForm) {
-		// Check out some initial nullities(tm)...
-		if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesStatusForm)
-			m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
-		if (m_pSetup->sDisplayFont1.isEmpty())
-			m_pSetup->sDisplayFont1 = m_ui.TimeDisplayTextLabel->font().toString();
-		if (m_pSetup->sDisplayFont2.isEmpty())
-			m_pSetup->sDisplayFont2 = m_ui.ServerStateTextLabel->font().toString();
-		if (m_pSetup->sConnectionsFont.isEmpty() && m_pConnectionsForm)
-			m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
-		// To track down deferred or immediate changes.
-		bool    bOldMessagesLog         = m_pSetup->bMessagesLog;
-		QString sOldMessagesLogPath     = m_pSetup->sMessagesLogPath;
-		QString sOldMessagesFont        = m_pSetup->sMessagesFont;
-		QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
-		QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
-		QString sOldConnectionsFont     = m_pSetup->sConnectionsFont;
-		int     iOldConnectionsIconSize = m_pSetup->iConnectionsIconSize;
-		int     iOldJackClientPortAlias = m_pSetup->iJackClientPortAlias;
-		bool    bOldJackClientPortMetadata = m_pSetup->bJackClientPortMetadata;
-		int     iOldTimeDisplay         = m_pSetup->iTimeDisplay;
-		int     iOldTimeFormat          = m_pSetup->iTimeFormat;
-		bool    bOldDisplayEffect       = m_pSetup->bDisplayEffect;
-		bool    bOldActivePatchbay      = m_pSetup->bActivePatchbay;
-		QString sOldActivePatchbayPath  = m_pSetup->sActivePatchbayPath;
-		bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
-		bool    bOldKeepOnTop           = m_pSetup->bKeepOnTop;
-		bool    bOldSystemTray          = m_pSetup->bSystemTray;
-		bool    bOldDelayedSetup        = m_pSetup->bDelayedSetup;
-		int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
-		int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
-		bool    bOldBezierLines         = m_pSetup->bBezierLines;
-		bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
-		bool    bOldDBusEnabled         = m_pSetup->bDBusEnabled;
-		bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
-		bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
-		bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
-		bool    bOldRightButtons        = m_pSetup->bRightButtons;
-		bool    bOldTransportButtons    = m_pSetup->bTransportButtons;
-		bool    bOldTextLabels          = m_pSetup->bTextLabels;
-		int     iOldBaseFontSize        = m_pSetup->iBaseFontSize;
-		// Load the current setup settings.
-		pSetupForm->setup(m_pSetup);
-		// Show the setup dialog...
-		if (pSetupForm->exec()) {
-			// Check wheather something immediate has changed.
-			if (( bOldMessagesLog && !m_pSetup->bMessagesLog) ||
-				(!bOldMessagesLog &&  m_pSetup->bMessagesLog) ||
-				(sOldMessagesLogPath != m_pSetup->sMessagesLogPath))
-				m_pMessagesStatusForm->setLogging(
-					m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
-			if (( bOldBezierLines && !m_pSetup->bBezierLines) ||
-				(!bOldBezierLines &&  m_pSetup->bBezierLines))
-				updateBezierLines();
-			if (( bOldDisplayEffect && !m_pSetup->bDisplayEffect) ||
-				(!bOldDisplayEffect &&  m_pSetup->bDisplayEffect))
-				updateDisplayEffect();
-			if (iOldJackClientPortAlias != m_pSetup->iJackClientPortAlias)
-				updateJackClientPortAlias();
-			if (( bOldJackClientPortMetadata && !m_pSetup->bJackClientPortMetadata) ||
-				(!bOldJackClientPortMetadata &&  m_pSetup->bJackClientPortMetadata))
-				updateJackClientPortMetadata();
-			if (iOldConnectionsIconSize != m_pSetup->iConnectionsIconSize)
-				updateConnectionsIconSize();
-			if (sOldConnectionsFont != m_pSetup->sConnectionsFont)
-				updateConnectionsFont();
-			if (sOldMessagesFont != m_pSetup->sMessagesFont)
-				updateMessagesFont();
-			if (( bOldMessagesLimit && !m_pSetup->bMessagesLimit) ||
-				(!bOldMessagesLimit &&  m_pSetup->bMessagesLimit) ||
-				(iOldMessagesLimitLines !=  m_pSetup->iMessagesLimitLines))
-				updateMessagesLimit();
-			if (sOldDisplayFont1 != m_pSetup->sDisplayFont1 ||
-				sOldDisplayFont2 != m_pSetup->sDisplayFont2)
-				updateTimeDisplayFonts();
-			if (iOldTimeDisplay |= m_pSetup->iTimeDisplay)
-				updateTimeDisplayToolTips();
-			if (iOldTimeFormat |= m_pSetup->iTimeFormat)
-				updateTimeFormat();
-			if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||
-				(sOldActivePatchbayPath != m_pSetup->sActivePatchbayPath))
-				updateActivePatchbay();
-			if (( bOldSystemTray && !m_pSetup->bSystemTray) ||
-				(!bOldSystemTray &&  m_pSetup->bSystemTray))
-				updateSystemTray();
-			if (( bOldAliasesEnabled && !m_pSetup->bAliasesEnabled) ||
-				(!bOldAliasesEnabled &&  m_pSetup->bAliasesEnabled) ||
-				( bOldAliasesEditing && !m_pSetup->bAliasesEditing) ||
-				(!bOldAliasesEditing &&  m_pSetup->bAliasesEditing))
-				updateAliases();
-			if (( bOldLeftButtons  && !m_pSetup->bLeftButtons)  ||
-				(!bOldLeftButtons  &&  m_pSetup->bLeftButtons)  ||
-				( bOldRightButtons && !m_pSetup->bRightButtons) ||
-				(!bOldRightButtons &&  m_pSetup->bRightButtons) ||
-				( bOldTransportButtons && !m_pSetup->bTransportButtons) ||
-				(!bOldTransportButtons &&  m_pSetup->bTransportButtons) ||
-				( bOldTextLabels && !m_pSetup->bTextLabels) ||
-				(!bOldTextLabels &&  m_pSetup->bTextLabels))
-				updateButtons();
-			// Warn if something will be only effective on next run.
-			if (( bOldStdoutCapture  && !m_pSetup->bStdoutCapture)  ||
-				(!bOldStdoutCapture  &&  m_pSetup->bStdoutCapture)  ||
-				( bOldKeepOnTop      && !m_pSetup->bKeepOnTop)      ||
-				(!bOldKeepOnTop      &&  m_pSetup->bKeepOnTop)      ||
-				( bOldDelayedSetup   && !m_pSetup->bDelayedSetup)   ||
-				(!bOldDelayedSetup   &&  m_pSetup->bDelayedSetup)   ||
-				( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
-				(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled) ||
-				( bOldDBusEnabled    && !m_pSetup->bDBusEnabled)    ||
-				(!bOldDBusEnabled    &&  m_pSetup->bDBusEnabled)    ||
-				(iOldBaseFontSize    !=  m_pSetup->iBaseFontSize))
-				showDirtySetupWarning();
-			// If server is currently running, warn user...
-			showDirtySettingsWarning();
+	if (m_pSetupForm) {
+		m_pSetup->saveWidgetGeometry(m_pSetupForm);
+		if (m_pSetupForm->isVisible()) {
+			m_pSetupForm->hide();
+		} else {
+			m_pSetupForm->show();
+			m_pSetupForm->raise();
+			m_pSetupForm->activateWindow();
 		}
-		delete pSetupForm;
 	}
 }
 
@@ -3677,6 +3607,8 @@ void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
 
 	pAction = menu.addAction(QIcon(":/images/setup1.png"),
 		tr("Set&up..."), this, SLOT(showSetupForm()));
+	pAction->setCheckable(true);
+	pAction->setChecked(m_pSetupForm && m_pSetupForm->isVisible());
 
 	if (!m_pSetup->bRightButtons || !m_pSetup->bTransportButtons) {
 		pAction = menu.addAction(QIcon(":/images/about1.png"),

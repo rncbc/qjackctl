@@ -44,9 +44,11 @@ public:
 	// Destructor.
 	~qjackctlSetupForm();
 
-	void setup(qjackctlSetup * pSetup);
+	void setup(qjackctlSetup *pSetup);
 
-public slots:
+	bool queryClose();
+
+protected slots:
 
 	void changeCurrentPreset(const QString&);
 	void saveCurrentPreset();
@@ -75,8 +77,6 @@ public slots:
 
 	void settingsChanged();
 	void optionsChanged();
-
-protected slots:
 
 	void accept();
 	void reject();
