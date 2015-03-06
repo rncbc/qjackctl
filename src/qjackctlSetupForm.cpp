@@ -1681,9 +1681,6 @@ void qjackctlSetupForm::accept (void)
 			pMainForm->showDirtySetupWarning();
 		// If server is currently running, warn user...
 		pMainForm->showDirtySettingsWarning();
-		// Reset dirty flags.
-		m_iDirtySettings = 0;
-		m_iDirtyOptions = 0;
 	}
 
 	// Save combobox history...
@@ -1701,6 +1698,10 @@ void qjackctlSetupForm::accept (void)
 
 	// Save/commit to disk.
 	m_pSetup->saveSetup();
+
+	// Reset dirty flags.
+	m_iDirtySettings = 0;
+	m_iDirtyOptions = 0;
 
 	// Just go with dialog acceptance.
 	QDialog::accept();

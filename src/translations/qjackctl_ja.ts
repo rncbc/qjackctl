@@ -3695,7 +3695,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="834"/>
         <location filename="../qjackctlSetupForm.cpp" line="886"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1726"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1727"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -3816,7 +3816,7 @@ Are you sure?</source>
         <translation type="unfinished">ログファイル</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1727"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1728"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
