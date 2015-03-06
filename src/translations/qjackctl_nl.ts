@@ -914,6 +914,13 @@ Sorry.</translation>
         <translation>Afsluit script...</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="849"/>
+        <location filename="../qjackctlMainForm.cpp" line="1389"/>
+        <location filename="../qjackctlMainForm.cpp" line="2583"/>
+        <source>Don&apos;t ask this again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlMainForm.cpp" line="1430"/>
         <source>Shutdown script terminated</source>
         <translation>Afsluit script beëindigd</translation>
@@ -1339,13 +1346,6 @@ in het menu van het systeem balk icoon.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="814"/>
         <source>Don&apos;t show this message again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlMainForm.cpp" line="849"/>
-        <location filename="../qjackctlMainForm.cpp" line="1389"/>
-        <location filename="../qjackctlMainForm.cpp" line="2583"/>
-        <source>Don&apos;t ask this question again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -847,6 +847,13 @@ nel menù del tasto destro sull icona nel vassoio.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="849"/>
+        <location filename="../qjackctlMainForm.cpp" line="1389"/>
+        <location filename="../qjackctlMainForm.cpp" line="2583"/>
+        <source>Don&apos;t ask this again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlMainForm.cpp" line="1296"/>
         <source>D-BUS: JACK server is starting...</source>
         <translation>D-BUS: JACK si sta avviando...</translation>
@@ -1229,13 +1236,6 @@ Do you want to terminate the JACK audio server?</source>
         <translation>JACK è attualmente attivato.
 
 Vuoi arrestare il server JACK?</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlMainForm.cpp" line="849"/>
-        <location filename="../qjackctlMainForm.cpp" line="1389"/>
-        <location filename="../qjackctlMainForm.cpp" line="2583"/>
-        <source>Don&apos;t ask this question again</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1031"/>

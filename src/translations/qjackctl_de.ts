@@ -730,13 +730,6 @@ Do you want to terminate the JACK audio server?</source>
 Wollen Sie diesen beenden?</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="849"/>
-        <location filename="../qjackctlMainForm.cpp" line="1389"/>
-        <location filename="../qjackctlMainForm.cpp" line="2583"/>
-        <source>Don&apos;t ask this question again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="983"/>
         <source>successfully</source>
         <translation>erfolgreich</translation>
@@ -827,6 +820,13 @@ in the context menu of the system tray icon.</source>
         <translation>Programm läuft weiter sichtbar als Symbol im Benachrichtigungsfeld.
 Zum Beenden des Programms, wählen Sie bitte &quot;Beenden&quot; im
 Kontextmenü des Benachrichtigungsfeldsymbols.</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlMainForm.cpp" line="849"/>
+        <location filename="../qjackctlMainForm.cpp" line="1389"/>
+        <location filename="../qjackctlMainForm.cpp" line="2583"/>
+        <source>Don&apos;t ask this again</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1430"/>

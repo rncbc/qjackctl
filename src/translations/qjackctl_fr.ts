@@ -906,6 +906,13 @@ Désolé.</translation>
         <translation>Script d&apos;extinction...</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="849"/>
+        <location filename="../qjackctlMainForm.cpp" line="1389"/>
+        <location filename="../qjackctlMainForm.cpp" line="2583"/>
+        <source>Don&apos;t ask this again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlMainForm.cpp" line="1430"/>
         <source>Shutdown script terminated</source>
         <translation>Script d&apos;extinction terminé</translation>
@@ -1330,13 +1337,6 @@ dans le menu contextuel del&apos;icône de la zone de notification système.</tr
     <message>
         <location filename="../qjackctlMainForm.cpp" line="814"/>
         <source>Don&apos;t show this message again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlMainForm.cpp" line="849"/>
-        <location filename="../qjackctlMainForm.cpp" line="1389"/>
-        <location filename="../qjackctlMainForm.cpp" line="2583"/>
-        <source>Don&apos;t ask this question again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

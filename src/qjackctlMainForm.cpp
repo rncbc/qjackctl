@@ -846,7 +846,7 @@ bool qjackctlMainForm::queryClose (void)
 			mbox.setWindowTitle(sTitle);
 			mbox.setText(sText);
 			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-			QCheckBox cbox(tr("Don't ask this question again"));
+			QCheckBox cbox(tr("Don't ask this again"));
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
@@ -1386,7 +1386,7 @@ void qjackctlMainForm::stopJack (void)
 			mbox.setIcon(QMessageBox::Warning);
 			mbox.setWindowTitle(sTitle);
 			mbox.setText(sText);
-			QCheckBox cbox(tr("Don't ask this question again"));
+			QCheckBox cbox(tr("Don't ask this again"));
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
@@ -2580,7 +2580,7 @@ void qjackctlMainForm::queryDisconnect (
 			mbox.setWindowTitle(sTitle);
 			mbox.setText(sText);
 			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-			QCheckBox cbox(tr("Don't ask this question again"));
+			QCheckBox cbox(tr("Don't ask this again"));
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
