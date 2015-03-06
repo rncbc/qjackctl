@@ -1681,6 +1681,9 @@ void qjackctlSetupForm::accept (void)
 			pMainForm->showDirtySetupWarning();
 		// If server is currently running, warn user...
 		pMainForm->showDirtySettingsWarning();
+		// Reset dirty flags.
+		m_iDirtySettings = 0;
+		m_iDirtyOptions = 0;
 	}
 
 	// Save combobox history...
@@ -1730,6 +1733,9 @@ bool qjackctlSetupForm::queryClose (void)
 			accept();
 			// Fall thru...
 		case QMessageBox::Discard:
+			// Reset dirty flags...
+			m_iDirtySettings = 0;
+			m_iDirtyOptions = 0;
 			break;
 		default:    // Cancel.
 			bQueryClose = false;
