@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2003-2015 Rui Nuno Capela <rncbc@rncbc.org> -->
+<component type="desktop">
+ <id>qjackctl.desktop</id>
+ <metadata_license>GPL-2.0+</metadata_license>
+ <project_license>GPL-2.0+</project_license>
+ <name>QjackCtl</name>
+ <summary>JACK Audio Connection Kit Qt GUI Interface</summary>
+ <description>
+  <p>JACK Audio Connection Kit - Qt GUI Interface: A simple Qt application
+   to control the JACK server. Written in C++ around the Qt4 toolkit
+   for X11, most exclusively using Qt Designer. Provides a simple GUI
+   dialog for setting several JACK server parameters, which are properly
+   saved between sessions, and a way control of the status of the audio
+   server. With time, this primordial interface has become richer by 
+   including a enhanced patchbay and connection control features.</p>
+ </description>
+ <screenshots>
+  <screenshot type="default">
+   <image>http://qjackctl.sourceforge.net/qjackctlMainForm1.png</image>
+   <caption>The main window showing the application in action</caption>
+  </screenshot>
+ </screenshots>
+ <url type="homepage">http://qjackctl.sourceforge.net</url>
+ <updatecontact>rncbc@rncbc.org</updatecontact>
+ <project_group>rncbc.org</project_group>
+</component>

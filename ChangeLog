@@ -3,7 +3,10 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+
 GIT HEAD
+
+- Added application description as freedesktop.org's AppData.
 
 - Setup dialog form is now modeless (EXPERIMENTAL).
 
@@ -1323,4 +1326,3 @@ GIT HEAD
 
 
 0.0.1   2003-07-26  Initial release.
-
