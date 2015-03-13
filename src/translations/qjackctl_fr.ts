@@ -910,7 +910,7 @@ Désolé.</translation>
         <location filename="../qjackctlMainForm.cpp" line="1389"/>
         <location filename="../qjackctlMainForm.cpp" line="2583"/>
         <source>Don&apos;t ask this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas redemander</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1430"/>
@@ -1337,7 +1337,7 @@ dans le menu contextuel del&apos;icône de la zone de notification système.</tr
     <message>
         <location filename="../qjackctlMainForm.cpp" line="814"/>
         <source>Don&apos;t show this message again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas montrer ce message à nouveau</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1031"/>
@@ -1410,12 +1410,12 @@ Désolé</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1888"/>
         <source>Transport BBT (bar.beat.ticks)</source>
-        <translation type="unfinished"></translation>
+        <translation>Transport MTB (mesure temps battement)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2035"/>
         <source>Patchbay reset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialisation de la baie de brassage.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2043"/>
@@ -1458,7 +1458,7 @@ Désactivé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2389"/>
         <source>JACK property change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Changement d&apos;une propriété de JACK.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2663"/>
@@ -2428,55 +2428,55 @@ pour créer une définition de baie de brassage?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="136"/>
         <source>Session clients / connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Clients / connexions de la session</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="171"/>
         <source>Infra-clients / commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Commandes / clients-infra</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="187"/>
         <source>Infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Client-infra</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="192"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande-infra</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="200"/>
         <source>Add infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un client-infra</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="203"/>
         <location filename="../qjackctlSessionForm.cpp" line="990"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ajouter</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="213"/>
         <source>Edit infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier un client-infra</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="216"/>
         <location filename="../qjackctlSessionForm.cpp" line="993"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Éditer</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="226"/>
         <source>Remove infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer un client-infra</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="229"/>
         <location filename="../qjackctlSessionForm.cpp" line="996"/>
         <source>Re&amp;move</source>
-        <translation type="unfinished"></translation>
+        <translation>Suppri&amp;mer</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
@@ -2627,7 +2627,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="847"/>
         <source>New Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau client</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="255"/>
@@ -2647,7 +2647,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="140"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande-infra</translation>
     </message>
 </context>
 <context>
@@ -4330,42 +4330,42 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3427"/>
         <source>JACK client/port pretty-name (metadata) display mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le mode d&apos;affichage « joli-nom » (métadonnées) de client/port JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2400"/>
         <source>Whether to reset all connections when a patchbay definition is activated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser ou non toutes les connexions quand une définition de baie de brassage est activée.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2403"/>
         <source>&amp;Reset all connections on patchbay activation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Réinitialiser toutes les connections à l&apos;activation d&apos;une baie de brassage</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2416"/>
         <source>Whether to issue a warning on active patchbay port disconnections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher ou non une alerte lors des déconnexions de port faisant partie d&apos;une baie de brassage active.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2419"/>
         <source>&amp;Warn on active patchbay disconnections</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;lerter lors des déconnexions sur la baie de brassage active</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3430"/>
         <source>Enable JA&amp;CK client/port pretty-names (metadata)</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer les « jolis-noms » (métadonnées) de client/port JA&amp;CK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3566"/>
         <source>Whether to show system tray message on main window close</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher on non les messages de la zone de notification système lors de la fermeture de la fenêtre principale</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3569"/>
         <source>Sho&amp;w system tray message on close</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;fficher les messages de la zone de notification lors de la fermeture de la fenêtre</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3585"/>
