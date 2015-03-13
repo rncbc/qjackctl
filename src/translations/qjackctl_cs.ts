@@ -877,7 +877,7 @@ Chcete zastavit zvukový server JACK?</translation>
         <location filename="../qjackctlMainForm.cpp" line="1389"/>
         <location filename="../qjackctlMainForm.cpp" line="2583"/>
         <source>Don&apos;t ask this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Neptat se znovu</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1430"/>
@@ -1122,17 +1122,17 @@ v související nabídce vyskakující z ikony v oznamovací
     <message>
         <location filename="../qjackctlMainForm.cpp" line="814"/>
         <source>Don&apos;t show this message again</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto hlášení neukazovat znovu</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1888"/>
         <source>Transport BBT (bar.beat.ticks)</source>
-        <translation type="unfinished"></translation>
+        <translation>Předání BBT (takt:doba.tiknutí - bar:beat.ticks)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2035"/>
         <source>Patchbay reset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uvedení zapojovací desky do výchozího stavu.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2043"/>
@@ -1150,7 +1150,7 @@ Zakázáno.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2389"/>
         <source>JACK property change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnost JACK změněna.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2663"/>
@@ -2241,55 +2241,55 @@ všech skutečných klientských spojení?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="136"/>
         <source>Session clients / connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Klienti sezení/spojení</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="171"/>
         <source>Infra-clients / commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-klienti/Příkazy</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="187"/>
         <source>Infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-klient</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="192"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-příkaz</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="200"/>
         <source>Add infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat infra-klient</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="203"/>
         <location filename="../qjackctlSessionForm.cpp" line="990"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přid&amp;at</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="213"/>
         <source>Edit infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit infra-klient</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="216"/>
         <location filename="../qjackctlSessionForm.cpp" line="993"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Upravit</translation>
+        <translation>&amp;Upravit</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="226"/>
         <source>Remove infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit infra-klient</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="229"/>
         <location filename="../qjackctlSessionForm.cpp" line="996"/>
         <source>Re&amp;move</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Odstranit</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
@@ -2440,7 +2440,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="847"/>
         <source>New Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový klient</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="255"/>
@@ -2460,7 +2460,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="140"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-příkaz</translation>
     </message>
 </context>
 <context>
@@ -3482,22 +3482,22 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2400"/>
         <source>Whether to reset all connections when a patchbay definition is activated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit všechna spojení na výchozí hodnoty, když je zapnuto vymezení zapojovací desky.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2403"/>
         <source>&amp;Reset all connections on patchbay activation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nastavit všechna spojení při zapnutí zapojovací desky na výchozí hodnoty</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2416"/>
         <source>Whether to issue a warning on active patchbay port disconnections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vydat varování při odpojení činných přípojek zapojovací desky.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2419"/>
         <source>&amp;Warn on active patchbay disconnections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Varovat při odpojení činných přípojek zapojovací desky</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2527"/>
@@ -3790,12 +3790,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3427"/>
         <source>JACK client/port pretty-name (metadata) display mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim zobrazení pěkných názvů (popisná data) pro klienty/přípojky JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3430"/>
         <source>Enable JA&amp;CK client/port pretty-names (metadata)</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit pěkné názvy (popisná data) pro klienty/přípojky JA&amp;CK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3520"/>
@@ -4125,22 +4125,22 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3566"/>
         <source>Whether to show system tray message on main window close</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat zprávu v oznamovací oblasti panelu při zavření hlavního okna</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3569"/>
         <source>Sho&amp;w system tray message on close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ukázat zprávu v oznamovací oblasti panelu při zavření</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3741"/>
         <source>Whether to stop JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Zastavit zvukový server JACK při ukončení aplikace</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3744"/>
         <source>S&amp;top JACK audio server on application exit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zastavit zvukový server JACK při ukončení aplikace</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3899"/>
