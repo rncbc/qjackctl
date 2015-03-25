@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 21
+%define release 22
 
 %define _prefix	@ac_prefix@
 
@@ -63,6 +63,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
+* Wed Mar 25 2015 Rui Nuno Capela <rncbc@rncbc.org> 0.3.13
+- Pre-LAC2015 release frenzy.
 * Sun Oct 19 2014 Rui Nuno Capela <rncbc@rncbc.org> 0.3.12
 - JACK Pretty-names aliasing.
 * Tue Dec 31 2013 Rui Nuno Capela <rncbc@rncbc.org> 0.3.11

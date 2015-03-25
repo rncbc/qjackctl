@@ -1,88 +1,94 @@
-qjackctl (0.3.12-4) unstable; urgency=low
+qjackctl (0.3.13-22) unstable; urgency=low
+
+  * Pre-LAC2015 release frenzy.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Wed, 25 Mar 2015 18:30:00 +0100
+
+qjackctl (0.3.12-20) unstable; urgency=low
 
   * JACK Pretty-names aliasing.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Sun, 19 Oct 2014 21:00:00 +0100
 
-qjackctl (0.3.11-3) unstable; urgency=low
+qjackctl (0.3.11-21) unstable; urgency=low
 
   * A fifth of a Jubilee release.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Tue, 31 Dec 2013 12:00:00 +0100
 
-qjackctl (0.3.10-2) unstable; urgency=low
+qjackctl (0.3.10-19) unstable; urgency=low
 
   * The singing swan rehersal.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Mon,  1 Apr 2013 18:54:32 +0100
 
-qjackctl (0.3.9-1) unstable; urgency=low
+qjackctl (0.3.9-18) unstable; urgency=low
 
   * The last of the remnants.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Fri, 18 May 2012 16:32:10 +0100
 
-qjackctl (0.3.8-1) unstable; urgency=low
+qjackctl (0.3.8-17) unstable; urgency=low
 
   * JACK Session versioning.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Fri, 1 Jul 2011 10:03:40 +0100
 
-qjackctl (0.3.7-1) unstable; urgency=low
+qjackctl (0.3.7-16) unstable; urgency=low
 
   * JACK Session managerism.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Tue, 30 Nov 2010 18:49:10 +0100
 
-qjackctl (0.3.6-1) unstable; urgency=low
+qjackctl (0.3.6-15) unstable; urgency=low
 
   * Full D-Busification!
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Tue,  9 Mar 2010 19:00:01 +0100
 
-qjackctl (0.3.5-1) unstable; urgency=low
+qjackctl (0.3.5-14) unstable; urgency=low
 
   * Slipped away!
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Wed, 30 Sep 2009 17:33:02 +0100
 
-qjackctl (0.3.4-1) unstable; urgency=low
+qjackctl (0.3.4-13) unstable; urgency=low
 
   * Patchbay snapshot revamp. 
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Fri, 5 Dec 2008 18:48:00 +0100
 
-qjackctl (0.3.3-1) unstable; urgency=low
+qjackctl (0.3.3-12) unstable; urgency=low
 
   * Patchbay JACK-MIDI, file logging and X11 uniqueness. 
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Sat, 7 Jun 2008 14:51:06 +0100
 
-qjackctl (0.3.2-1) unstable; urgency=low
+qjackctl (0.3.2-11) unstable; urgency=low
 
   * Patchbay heads-up with season greetings. 
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Thu, 20 Dec 2007 10:15:01 +0100
 
-qjackctl (0.3.1a-1) unstable; urgency=low
+qjackctl (0.3.1a-10) unstable; urgency=low
 
   * System-tray tooltip icon crash fix.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Thu, 19 Jul 2007 08:38:05 +0100
 
-qjackctl (0.3.1-1) unstable; urgency=low
+qjackctl (0.3.1-9) unstable; urgency=low
 
   * Shallowed bug-fix release.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Wed, 18 Jul 2007 17:12:03 +0100
 
-qjackctl (0.3.0-1) unstable; urgency=low
+qjackctl (0.3.0-8) unstable; urgency=low
 
   * Qt migration was complete.
 
  -- Rui Nuno Capela <rncbc@rncbc.org>  Tue, 10 Jul 2007 16:01:20 +0100
 
-qjackctl (0.2.23-1) unstable; urgency=low
+qjackctl (0.2.23-7) unstable; urgency=low
 
   * Initial debianization
 

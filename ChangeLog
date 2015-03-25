@@ -4,14 +4,14 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.3.13  2015-03-25  Pre-LAC2015 release frenzy.
 
 - Added application description as freedesktop.org's AppData.
 
-- Setup dialog form is now modeless (EXPERIMENTAL).
+- Setup dialog form is now modeless.
 
 - Introducing brand new active patchbay reset/disconnect-all
-  user preference option. (EXPERIMENTAL)
+  user preference option.
 
 - Current highlighted client/port connections are now drawn
   with thicker connector lines.
