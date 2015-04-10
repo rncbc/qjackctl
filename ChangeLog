@@ -3,6 +3,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+GIT HEAD
+
+- German (de) translation update (by Guido Scholz, thanks).
+
+
 
 0.3.13  2015-03-25  Pre-LAC2015 release frenzy.
 

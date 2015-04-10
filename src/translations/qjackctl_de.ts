@@ -710,7 +710,7 @@ Das ALSA-MIDI-Steckfeld wird nicht verfügbar sein.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="814"/>
         <source>Don&apos;t show this message again</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Meldung nicht mehr anzeigen</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="836"/>
@@ -826,7 +826,7 @@ Kontextmenü des Benachrichtigungsfeldsymbols.</translation>
         <location filename="../qjackctlMainForm.cpp" line="1389"/>
         <location filename="../qjackctlMainForm.cpp" line="2583"/>
         <source>Don&apos;t ask this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht nochmal nachfragen</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1430"/>
@@ -894,7 +894,7 @@ Tut mir Leid</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1888"/>
         <source>Transport BBT (bar.beat.ticks)</source>
-        <translation type="unfinished"></translation>
+        <translation>Transport BBT (bar.beat.ticks)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1889"/>
@@ -914,7 +914,7 @@ Tut mir Leid</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2035"/>
         <source>Patchbay reset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Steckfeld zurückgesetzt.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2043"/>
@@ -1000,7 +1000,7 @@ Sorry.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2389"/>
         <source>JACK property change.</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK-Eigenschaft geändert.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2410"/>
@@ -1173,7 +1173,7 @@ Bitte sehen Sie im Meldungsfenster nach weiteren Informationen.</translation>
         <location filename="../qjackctlMainForm.cpp" line="3222"/>
         <location filename="../qjackctlMainForm.cpp" line="3361"/>
         <source>Starting</source>
-        <translation>Startend</translation>
+        <translation>Startet</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3100"/>
@@ -2094,7 +2094,7 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <location filename="../qjackctlSessionForm.ui" line="203"/>
         <location filename="../qjackctlSessionForm.cpp" line="990"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hinzufügen</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="213"/>
@@ -2105,7 +2105,7 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <location filename="../qjackctlSessionForm.ui" line="216"/>
         <location filename="../qjackctlSessionForm.cpp" line="993"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Bearbeiten</translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="226"/>
@@ -2116,7 +2116,7 @@ der aktuell vorhandenen Verbindungen erstellen?</translation>
         <location filename="../qjackctlSessionForm.ui" line="229"/>
         <location filename="../qjackctlSessionForm.cpp" line="996"/>
         <source>Re&amp;move</source>
-        <translation type="unfinished"></translation>
+        <translation>En&amp;tfernen</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="251"/>
@@ -2247,7 +2247,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="847"/>
         <source>New Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuer Client</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="255"/>
@@ -3242,22 +3242,22 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2400"/>
         <source>Whether to reset all connections when a patchbay definition is activated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Verbindungen zurücksetzen, wenn eine Steckfeldkonfiguration aktiviert wird</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2403"/>
         <source>&amp;Reset all connections on patchbay activation</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle &amp;Verbindungen bei Steckfaktivierung zurücksetzen</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2416"/>
         <source>Whether to issue a warning on active patchbay port disconnections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung anzeigen, wenn eine aktive Verbindung getrennt wird</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2419"/>
         <source>&amp;Warn on active patchbay disconnections</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim &amp;Trennen aktiver Verbindungen warnen</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2527"/>
@@ -3855,12 +3855,12 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3566"/>
         <source>Whether to show system tray message on main window close</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachrichten des Benachrichtigungsfelds beim Schließen des Hauptfensters anzeigen</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3569"/>
         <source>Sho&amp;w system tray message on close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nachrichten des Benachrichtigungsfelds beim Beenden anzeigen</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3741"/>
