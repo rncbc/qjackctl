@@ -582,12 +582,12 @@ bool qjackctlSocketList::copySocketItem (void)
 	if (pSocketItem) {
 		qjackctlSocketForm socketForm(m_pListView);
 		// Find a new distinguishable socket name, please.
-		QString sSocketName;
-		QString sSkel = pSocketItem->socketName();
-		sSkel.remove(QRegExp("[0-9]+$")).append("%1");
-		int iSocketType = pSocketItem->socketType();
 		int iSocketNo = 1;
-		do { sSocketName = sSkel.arg(++iSocketNo); }
+		QString sSocketName = pSocketItem->socketName();;
+		QString sSocketMask = sSocketName;
+		sSocketMask.remove(QRegExp("[ |0-9]+$")).append(" %1");
+		const int iSocketType = pSocketItem->socketType();
+		do { sSocketName = sSocketMask.arg(++iSocketNo); }
 		while (findSocket(sSocketName, iSocketType));
 		// Show up as a new socket...
 		socketForm.setWindowTitle(tr("%1 <Copy> - %2")
@@ -1364,7 +1364,7 @@ void qjackctlPatchbayView::activateForwardMenu ( QAction *pAction )
 				setDirty(true);
 				break;
 			}
-			iIndex--;
+			--iIndex;
 		}
 	}
 }
@@ -1835,7 +1835,7 @@ void qjackctlPatchbay::saveRackSockets ( qjackctlSocketList *pSocketList,
 
 	socketlist.clear();
 
-	int iItemCount = pListView->topLevelItemCount();
+	const int iItemCount = pListView->topLevelItemCount();
 	for (int iItem = 0; iItem < iItemCount; ++iItem) {
 		QTreeWidgetItem *pItem = pListView->topLevelItem(iItem);
 		if (pItem->type() != QJACKCTL_SOCKETITEM)

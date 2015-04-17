@@ -1,7 +1,7 @@
 // qjackctlSocketForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -48,6 +48,7 @@ qjackctlSocketForm::qjackctlSocketForm (
 
 	m_pSocketList  = NULL;
 	m_bSocketNew   = false;
+	m_iSocketNameChanged = 0;
 	m_ppPixmaps    = NULL;
 	m_iDirtyCount  = 0;
 
@@ -104,7 +105,7 @@ qjackctlSocketForm::qjackctlSocketForm (
 
 	QObject::connect(m_ui.SocketNameLineEdit,
 		SIGNAL(textChanged(const QString&)),
-		SLOT(changed()));
+		SLOT(socketNameChanged()));
 	QObject::connect(m_ui.AudioRadioButton,
 		SIGNAL(toggled(bool)),
 		SLOT(socketTypeChanged()));
@@ -241,11 +242,14 @@ void qjackctlSocketForm::load ( qjackctlPatchbaySocket *pSocket )
 
 	int iItemIndex = 0;
 	if (!pSocket->forward().isEmpty()) {
-		int iItem = m_ui.SocketForwardComboBox->findText(pSocket->forward());
+		const int iItem = m_ui.SocketForwardComboBox->findText(pSocket->forward());
 		if (iItem >= 0)
 			iItemIndex = iItem;
 	}
 	m_ui.SocketForwardComboBox->setCurrentIndex(iItemIndex);
+
+	if (m_bSocketNew)
+		m_iSocketNameChanged = 0;
 
 	m_iDirtyCount = 0;
 
@@ -262,7 +266,7 @@ void qjackctlSocketForm::save ( qjackctlPatchbaySocket *pSocket )
 	pSocket->setExclusive(m_ui.ExclusiveCheckBox->isChecked());
 
 	pSocket->pluglist().clear();
-	int iPlugCount = m_ui.PlugListView->topLevelItemCount();
+	const int iPlugCount = m_ui.PlugListView->topLevelItemCount();
 	for (int iPlug = 0; iPlug < iPlugCount; ++iPlug) {
 		QTreeWidgetItem *pItem = m_ui.PlugListView->topLevelItem(iPlug);
 		pSocket->addPlug(pItem->text(0));
@@ -285,8 +289,8 @@ void qjackctlSocketForm::stabilizeForm (void)
 
 	QTreeWidgetItem *pItem = m_ui.PlugListView->currentItem();
 	if (pItem) {
-		int iItem = m_ui.PlugListView->indexOfTopLevelItem(pItem);
-		int iItemCount = m_ui.PlugListView->topLevelItemCount();
+		const int iItem = m_ui.PlugListView->indexOfTopLevelItem(pItem);
+		const int iItemCount = m_ui.PlugListView->topLevelItemCount();
 		m_ui.PlugEditPushButton->setEnabled(true);
 		m_ui.PlugRemovePushButton->setEnabled(true);
 		m_ui.PlugUpPushButton->setEnabled(iItem > 0);
@@ -379,7 +383,8 @@ void qjackctlSocketForm::reject (void)
 // Dirty up the current form.
 void qjackctlSocketForm::changed (void)
 {
-	m_iDirtyCount++;
+	++m_iDirtyCount;
+
 	stabilizeForm();
 }
 
@@ -495,7 +500,7 @@ void qjackctlSocketForm::selectedPlug (void)
 // Add new Plug from context menu.
 void qjackctlSocketForm::activateAddPlugMenu ( QAction *pAction )
 {
-	int iIndex = pAction->data().toInt();
+	const int iIndex = pAction->data().toInt();
 	if (iIndex >= 0 && iIndex < m_ui.PlugNameComboBox->count()) {
 		m_ui.PlugNameComboBox->setCurrentIndex(iIndex);
 		addPlug();
@@ -533,7 +538,7 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 		SLOT(activateAddPlugMenu(QAction*)));
 	pAddPlugMenu->setEnabled(iIndex > 0);
 	// Build the plug context menu...
-	bool bEnabled = (pItem != NULL);
+	const bool bEnabled = (pItem != NULL);
 	pAction = menu.addAction(QIcon(":/images/edit1.png"),
 		tr("Edit"), this, SLOT(editPlug()));
 	pAction->setEnabled(bEnabled);
@@ -571,7 +576,7 @@ void qjackctlSocketForm::updateJackClients ( int iSocketType )
 	}
 #endif
 
-	bool bReadable = m_pSocketList->isReadable();
+	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[iPixmap]);
 
 	// Grab all client ports.
@@ -618,7 +623,7 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 	if (pAlsaSeq == NULL)
 		return;
 
-	bool bReadable = m_pSocketList->isReadable();
+	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_CLIENT]);
 
 	// Readd all subscribers...
@@ -634,7 +639,7 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 	snd_seq_port_info_alloca(&pPortInfo);
 	snd_seq_client_info_set_client(pClientInfo, -1);
 	while (snd_seq_query_next_client(pAlsaSeq, pClientInfo) >= 0) {
-		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
+		const int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
 		QString sClient
 			= qjackctlClientAlias::escapeRegExpDigits(
 				QString::fromUtf8(snd_seq_client_info_get_name(pClientInfo)));
@@ -644,7 +649,7 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 			snd_seq_port_info_set_port(pPortInfo, -1);
 			while (!bExists
 				&& snd_seq_query_next_port(pAlsaSeq, pPortInfo) >= 0) {
-				unsigned int uiPortCapability
+				const unsigned int uiPortCapability
 					= snd_seq_port_info_get_capability(pPortInfo);
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
 					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
@@ -672,15 +677,16 @@ void qjackctlSocketForm::socketTypeChanged (void)
 	if (m_pSocketList == NULL)
 		return;
 
-	QString sOldClientName = m_ui.ClientNameComboBox->currentText();
+	const bool bBlockSignals = m_ui.ClientNameComboBox->blockSignals(true);
+	const QString sOldClientName; // = m_ui.ClientNameComboBox->currentText();
 
 	m_ui.ClientNameComboBox->clear();
 
 	QPixmap *pXpmSocket = NULL;
 	QPixmap *pXpmPlug   = NULL;
 
-	bool bReadable = m_pSocketList->isReadable();
-	int iSocketType = m_pSocketTypeButtonGroup->checkedId();
+	const bool bReadable = m_pSocketList->isReadable();
+	const int iSocketType = m_pSocketTypeButtonGroup->checkedId();
 	switch (iSocketType) {
 	case 0: // QJACKCTL_SOCKETTYPE_JACK_AUDIO
 		if (m_ui.ExclusiveCheckBox->isChecked())
@@ -711,11 +717,13 @@ void qjackctlSocketForm::socketTypeChanged (void)
 		break;
 	}
 
+	const int iOldSocketNameChanged = m_iSocketNameChanged++;
 	m_ui.ClientNameComboBox->setEditText(sOldClientName);
 	clientNameChanged();
+	m_iSocketNameChanged = iOldSocketNameChanged;
 
 	if (pXpmPlug) {
-		int iItemCount = m_ui.PlugListView->topLevelItemCount();
+		const int iItemCount = m_ui.PlugListView->topLevelItemCount();
 		for (int iItem = 0; iItem < iItemCount; ++iItem) {
 			QTreeWidgetItem *pItem = m_ui.PlugListView->topLevelItem(iItem);
 			pItem->setIcon(0, QIcon(*pXpmPlug));
@@ -752,9 +760,20 @@ void qjackctlSocketForm::socketTypeChanged (void)
 		}
 	}
 
-	bool bEnabled = (m_ui.SocketForwardComboBox->count() > 1);
+	const bool bEnabled = (m_ui.SocketForwardComboBox->count() > 1);
 	m_ui.SocketForwardTextLabel->setEnabled(bEnabled);
 	m_ui.SocketForwardComboBox->setEnabled(bEnabled);
+
+	m_ui.ClientNameComboBox->blockSignals(bBlockSignals);
+}
+
+
+// Socket name change slot.
+void qjackctlSocketForm::socketNameChanged (void)
+{
+	++m_iSocketNameChanged;
+
+	changed();
 }
 
 
@@ -778,12 +797,12 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 	}
 #endif
 
-	QString sClientName = m_ui.ClientNameComboBox->currentText();
+	const QString sClientName = m_ui.ClientNameComboBox->currentText();
 	if (sClientName.isEmpty())
 		return;
 	QRegExp rxClientName(sClientName);
 
-	bool bReadable = m_pSocketList->isReadable();
+	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[iPixmap]);
 	const char **ppszClientPorts = jack_get_ports(
 		pJackClient, NULL, pszJackPortType,
@@ -792,7 +811,7 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 		int iClientPort = 0;
 		while (ppszClientPorts[iClientPort]) {
 			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
-			int iColon = sClientPort.indexOf(':');
+			const int iColon = sClientPort.indexOf(':');
 			if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
 				QString sPort
 					= qjackctlClientAlias::escapeRegExpDigits(
@@ -823,12 +842,12 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 	if (pAlsaSeq == NULL)
 		return;
 
-	QString sClientName = m_ui.ClientNameComboBox->currentText();
+	const QString sClientName = m_ui.ClientNameComboBox->currentText();
 	if (sClientName.isEmpty())
 		return;
 	QRegExp rxClientName(sClientName);
 
-	bool bReadable = m_pSocketList->isReadable();
+	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG]);
 
 	// Fill sequencer plugs...
@@ -844,14 +863,14 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 	snd_seq_port_info_alloca(&pPortInfo);
 	snd_seq_client_info_set_client(pClientInfo, -1);
 	while (snd_seq_query_next_client(pAlsaSeq, pClientInfo) >= 0) {
-		int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
+		const int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
 		QString sClient = QString::fromUtf8(
 			snd_seq_client_info_get_name(pClientInfo));
 		if (iAlsaClient > 0 && rxClientName.exactMatch(sClient)) {
 			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
 			snd_seq_port_info_set_port(pPortInfo, -1);
 			while (snd_seq_query_next_port(pAlsaSeq, pPortInfo) >= 0) {
-				unsigned int uiPortCapability
+				const unsigned int uiPortCapability
 					= snd_seq_port_info_get_capability(pPortInfo);
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
 					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
@@ -879,7 +898,7 @@ void qjackctlSocketForm::clientNameChanged (void)
 
 	m_ui.PlugNameComboBox->clear();
 
-	int iSocketType = m_pSocketTypeButtonGroup->checkedId();
+	const int iSocketType = m_pSocketTypeButtonGroup->checkedId();
 	switch (iSocketType) {
 	case 0:
 		updateJackPlugs(QJACKCTL_SOCKETTYPE_JACK_AUDIO);
@@ -890,6 +909,20 @@ void qjackctlSocketForm::clientNameChanged (void)
 	case 2:
 		updateAlsaPlugs(QJACKCTL_SOCKETTYPE_ALSA_MIDI);
 		break;
+	}
+
+	if (m_iSocketNameChanged < 1) {
+		// Find a new distinguishable socket name, please.
+		QString sSocketName = m_ui.ClientNameComboBox->currentText();
+		if (!sSocketName.isEmpty()) {
+			int iSocketNo = 0;
+			QString sSocketMask = sSocketName;
+			sSocketMask.remove(QRegExp("[ |0-9]+$")).append(" %1");
+			do { sSocketName = sSocketMask.arg(++iSocketNo); }
+			while (m_pSocketList->findSocket(sSocketName, iSocketType));
+			m_ui.SocketNameLineEdit->setText(sSocketName);
+			m_iSocketNameChanged = 0;
+		}
 	}
 
 	changed();

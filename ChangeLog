@@ -3,12 +3,15 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+
 GIT HEAD
+
+- New socket names are now automatically inferred from selected
+  client names while on the Patchbay widget, Socket dialog.
 
 - Fixed for some strict tests for Qt4 vs. Qt5 configure builds.
 
 - German (de) translation update (by Guido Scholz, thanks).
-
 
 
 0.3.13  2015-03-25  Pre-LAC2015 release frenzy.
