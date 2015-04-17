@@ -4463,52 +4463,52 @@ Vuoi applicare i cambiamenti?</translation>
         <translation>Socket di tipo MIDI (ALSA)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="158"/>
+        <location filename="../qjackctlSocketForm.cpp" line="159"/>
         <source>Plugs / Ports</source>
         <translation>Prese / Porte</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="338"/>
+        <location filename="../qjackctlSocketForm.cpp" line="342"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="339"/>
+        <location filename="../qjackctlSocketForm.cpp" line="343"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation>Un socket chiamato &quot;%1&quot; esiste già.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="524"/>
+        <location filename="../qjackctlSocketForm.cpp" line="529"/>
         <source>Add Plug</source>
         <translation>Aggiungi presa</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="541"/>
+        <location filename="../qjackctlSocketForm.cpp" line="546"/>
         <source>Remove</source>
         <translation>Rimuovi</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="538"/>
+        <location filename="../qjackctlSocketForm.cpp" line="543"/>
         <source>Edit</source>
         <translation>Modifica</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="545"/>
+        <location filename="../qjackctlSocketForm.cpp" line="550"/>
         <source>Move Up</source>
         <translation>Sposta Su</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="548"/>
+        <location filename="../qjackctlSocketForm.cpp" line="553"/>
         <source>Move Down</source>
         <translation>Sposta Giù</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="358"/>
+        <location filename="../qjackctlSocketForm.cpp" line="362"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="359"/>
+        <location filename="../qjackctlSocketForm.cpp" line="363"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4525,7 +4525,7 @@ Applicare le modifiche ora?</translation>
         <translation type="obsolete">Descartar</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="727"/>
+        <location filename="../qjackctlSocketForm.cpp" line="735"/>
         <source>(None)</source>
         <translation>(Nessuno)</translation>
     </message>

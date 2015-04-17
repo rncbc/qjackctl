@@ -3983,27 +3983,27 @@ Do you want to apply the changes?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="158"/>
+        <location filename="../qjackctlSocketForm.cpp" line="159"/>
         <source>Plugs / Ports</source>
         <translation>プラグ/ポート</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="338"/>
+        <location filename="../qjackctlSocketForm.cpp" line="342"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="339"/>
+        <location filename="../qjackctlSocketForm.cpp" line="343"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation type="unfinished">ソケット名 &quot;%1&quot; はすでに存在します。</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="358"/>
+        <location filename="../qjackctlSocketForm.cpp" line="362"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="359"/>
+        <location filename="../qjackctlSocketForm.cpp" line="363"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4012,32 +4012,32 @@ Do you want to apply the changes?</source>
 変更を適用しますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="524"/>
+        <location filename="../qjackctlSocketForm.cpp" line="529"/>
         <source>Add Plug</source>
         <translation>プラグを追加</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="538"/>
+        <location filename="../qjackctlSocketForm.cpp" line="543"/>
         <source>Edit</source>
         <translation>編集</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="541"/>
+        <location filename="../qjackctlSocketForm.cpp" line="546"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="545"/>
+        <location filename="../qjackctlSocketForm.cpp" line="550"/>
         <source>Move Up</source>
         <translation>上へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="548"/>
+        <location filename="../qjackctlSocketForm.cpp" line="553"/>
         <source>Move Down</source>
         <translation>下へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="727"/>
+        <location filename="../qjackctlSocketForm.cpp" line="735"/>
         <source>(None)</source>
         <translation>(なし)</translation>
     </message>

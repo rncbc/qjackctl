@@ -678,7 +678,7 @@ void qjackctlSocketForm::socketTypeChanged (void)
 		return;
 
 	const bool bBlockSignals = m_ui.ClientNameComboBox->blockSignals(true);
-	const QString sOldClientName; // = m_ui.ClientNameComboBox->currentText();
+	const QString sOldClientName = m_ui.ClientNameComboBox->currentText();
 
 	m_ui.ClientNameComboBox->clear();
 
