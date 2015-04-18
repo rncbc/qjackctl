@@ -1,7 +1,7 @@
 // qjackctlJackConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -235,6 +235,7 @@ void qjackctlJackClient::updateClientName ( bool bRename )
 				&& !sPrettyName.isEmpty() && bRename) {
 				removePrettyName(pJackClient, client_uuid);
 			}
+			::jack_free((void *) pszClientUuid);
 		}
 		setClientText(sClientNameEx, bRenameEnabled);
 	}

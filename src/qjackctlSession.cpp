@@ -1,7 +1,7 @@
 // qjackctlSession.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -91,7 +91,7 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 
 	// First pass: get all client/port connections, no matter what...
 	const char **ports
-		= jack_get_ports(pJackClient, NULL, NULL, 0);
+		= ::jack_get_ports(pJackClient, NULL, NULL, 0);
 	if (ports) {
 		for (int i = 0; ports[i]; ++i) {
 			const char *pszSrcClientPort = ports[i];
@@ -110,11 +110,11 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 			PortItem *pPortItem = new PortItem;
 			pPortItem->port_name = sSrcClientPort.section(':', 1);
 			jack_port_t *pJackPort
-				= jack_port_by_name(pJackClient, pszSrcClientPort);
+				= ::jack_port_by_name(pJackClient, pszSrcClientPort);
 			pPortItem->port_type
-				= (jack_port_flags(pJackPort) & JackPortIsInput);
+				= (::jack_port_flags(pJackPort) & JackPortIsInput);
 			const char **connections
-				= jack_port_get_all_connections(pJackClient, pJackPort);
+				= ::jack_port_get_all_connections(pJackClient, pJackPort);
 			if (connections) {
 				for (int j = 0; connections[j]; ++j) {
 					const QString sDstClientPort
@@ -128,26 +128,18 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 					pPortItem->connects.append(pConnectItem);
 				//	pPortItem->connected++;
 				}
-#ifdef CONFIG_JACK_FREE
-				jack_free(connections);
-#else
-				free(connections);
-#endif
+				::jack_free(connections);
 			} 
 			pClientItem->ports.append(pPortItem);
 		//	pClientItem->connected += pPortItem->connected;
 		}
-#ifdef CONFIG_JACK_FREE
-		jack_free(ports);
-#else
-		free(ports);
-#endif
+		::jack_free(ports);
 	}
 
 #ifdef CONFIG_JACK_SESSION
 
 	// Second pass: get all session client commands...
-	if (jack_session_notify) {
+	if (::jack_session_notify) {
 	
 		jack_session_event_type_t etype = JackSessionSave;
 		switch (iSessionType) {
@@ -162,7 +154,7 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 		const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
 		const char *pszSessionPath = aSessionPath.constData();
 		jack_session_command_t *commands
-			= jack_session_notify(pJackClient, NULL, etype, pszSessionPath);
+			= ::jack_session_notify(pJackClient, NULL, etype, pszSessionPath);
 		if (commands == NULL)
 			return false;
 	
@@ -185,7 +177,7 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 				= QString::fromLocal8Bit(pCommand->command);
 		}
 	
-		jack_session_commands_free(commands);
+		::jack_session_commands_free(commands);
 	}
 
 #endif	// CONFIG_JACK_SESSION
@@ -292,9 +284,11 @@ bool qjackctlSession::update (void)
 				= pClientItem->client_uuid.toLocal8Bit();
 			const char *pszSrcUuid = aSrcUuid.constData(); 
 			const char *pszSrcClient
-				= jack_get_client_name_by_uuid(pJackClient, pszSrcUuid);
-			if (pszSrcClient)
+				= ::jack_get_client_name_by_uuid(pJackClient, pszSrcUuid);
+			if (pszSrcClient) {
 				sSrcClient = QString::fromLocal8Bit(pszSrcClient);
+				::jack_free((void *) pszSrcClient);
+			}
 		}
 	#endif
 		QListIterator<PortItem *> iterPort(pClientItem->ports);
@@ -318,9 +312,11 @@ bool qjackctlSession::update (void)
 					const QByteArray aDstUuid = sDstUuid.toLocal8Bit();
 					const char *pszDstUuid = aDstUuid.constData();
 					const char *pszDstClient
-						= jack_get_client_name_by_uuid(pJackClient, pszDstUuid);
-					if (pszDstClient)
+						= ::jack_get_client_name_by_uuid(pJackClient, pszDstUuid);
+					if (pszDstClient) {
 						sDstClient = QString::fromLocal8Bit(pszDstClient);
+						::jack_free((void *) pszDstClient);
+					}
 				}
 			#endif
 				const QString sDstPort = pConnectItem->port_name;
@@ -329,7 +325,7 @@ bool qjackctlSession::update (void)
 				int retc;
 				if (pPortItem->port_type) {
 					// Input port...
-					retc = jack_connect(pJackClient,
+					retc = ::jack_connect(pJackClient,
 						aDstClientPort.constData(),
 						aSrcClientPort.constData());
 				#ifdef CONFIG_DEBUG
@@ -340,7 +336,7 @@ bool qjackctlSession::update (void)
 				#endif
 				} else {
 					// Output port...
-					retc = jack_connect(pJackClient,
+					retc = ::jack_connect(pJackClient,
 						aSrcClientPort.constData(),
 						aDstClientPort.constData());
 				#ifdef CONFIG_DEBUG
@@ -577,7 +573,7 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
 
 #ifdef CONFIG_JACK_SESSION
 
-	if (jack_get_uuid_for_client_name) {
+	if (::jack_get_uuid_for_client_name) {
 
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 		if (pMainForm == NULL)
@@ -587,10 +583,10 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
 		if (pJackClient == NULL)
 			return false;
 
-		const char *client_uuid = jack_get_uuid_for_client_name(
+		const char *client_uuid = ::jack_get_uuid_for_client_name(
 			pJackClient, aClientName.constData());
 		if (client_uuid) {
-			jack_free((void *) client_uuid);
+			::jack_free((void *) client_uuid);
 			return true;
 		}
 
@@ -598,7 +594,7 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
 	}
 #endif
 
-	jack_client_t *pJackClient = jack_client_open(aClientName.constData(),
+	jack_client_t *pJackClient = ::jack_client_open(aClientName.constData(),
 		jack_options_t(JackNoStartServer | JackUseExactName), NULL);
 	if (pJackClient) {
 		jack_client_close(pJackClient);
