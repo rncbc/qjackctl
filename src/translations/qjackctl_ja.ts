@@ -2211,8 +2211,8 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="99"/>
         <location filename="../qjackctlSetupForm.ui" line="249"/>
-        <location filename="../qjackctlSetupForm.ui" line="813"/>
-        <location filename="../qjackctlSetupForm.ui" line="1005"/>
+        <location filename="../qjackctlSetupForm.ui" line="791"/>
+        <location filename="../qjackctlSetupForm.ui" line="938"/>
         <location filename="../qjackctlSetupForm.ui" line="1145"/>
         <location filename="../qjackctlSetupForm.ui" line="1319"/>
         <location filename="../qjackctlSetupForm.ui" line="1382"/>
@@ -2666,169 +2666,169 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="unfinished">ハードウェアバッファーのピリオド数</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="582"/>
+        <location filename="../qjackctlSetupForm.ui" line="766"/>
         <source>Priorit&amp;y:</source>
         <translation type="unfinished">優先度(&amp;y):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="604"/>
+        <location filename="../qjackctlSetupForm.ui" line="655"/>
         <source>&amp;Frames/Period:</source>
         <translation type="unfinished">フレーム/ピリオド(&amp;F):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="626"/>
+        <location filename="../qjackctlSetupForm.ui" line="677"/>
         <source>Frames per period between process() calls</source>
         <translation type="unfinished">process()コール間のピリオド毎のフレーム数</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="633"/>
-        <location filename="../qjackctlSetupForm.ui" line="883"/>
+        <location filename="../qjackctlSetupForm.ui" line="684"/>
+        <location filename="../qjackctlSetupForm.ui" line="839"/>
         <source>16</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="638"/>
-        <location filename="../qjackctlSetupForm.ui" line="888"/>
+        <location filename="../qjackctlSetupForm.ui" line="689"/>
+        <location filename="../qjackctlSetupForm.ui" line="844"/>
         <source>32</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="643"/>
-        <location filename="../qjackctlSetupForm.ui" line="893"/>
+        <location filename="../qjackctlSetupForm.ui" line="694"/>
+        <location filename="../qjackctlSetupForm.ui" line="849"/>
         <source>64</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="648"/>
-        <location filename="../qjackctlSetupForm.ui" line="923"/>
+        <location filename="../qjackctlSetupForm.ui" line="699"/>
+        <location filename="../qjackctlSetupForm.ui" line="992"/>
         <source>128</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="653"/>
-        <location filename="../qjackctlSetupForm.ui" line="928"/>
+        <location filename="../qjackctlSetupForm.ui" line="704"/>
+        <location filename="../qjackctlSetupForm.ui" line="997"/>
         <source>256</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="658"/>
-        <location filename="../qjackctlSetupForm.ui" line="933"/>
+        <location filename="../qjackctlSetupForm.ui" line="709"/>
+        <location filename="../qjackctlSetupForm.ui" line="1002"/>
         <source>512</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="663"/>
-        <location filename="../qjackctlSetupForm.ui" line="938"/>
+        <location filename="../qjackctlSetupForm.ui" line="714"/>
+        <location filename="../qjackctlSetupForm.ui" line="1007"/>
         <source>1024</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="668"/>
+        <location filename="../qjackctlSetupForm.ui" line="719"/>
         <source>2048</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="673"/>
+        <location filename="../qjackctlSetupForm.ui" line="724"/>
         <source>4096</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="687"/>
+        <location filename="../qjackctlSetupForm.ui" line="954"/>
         <source>Port Ma&amp;ximum:</source>
         <translation>最大ポート数(&amp;x):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="709"/>
+        <location filename="../qjackctlSetupForm.ui" line="910"/>
         <source>&amp;Channels:</source>
         <translation>チャンネル(&amp;C):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="738"/>
+        <location filename="../qjackctlSetupForm.ui" line="889"/>
         <source>Number of microseconds to wait between engine processes (dummy)</source>
         <translation type="unfinished">エンジンプロセス間の待ち時間をマイクロ秒で指定します(dummy)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="745"/>
+        <location filename="../qjackctlSetupForm.ui" line="896"/>
         <source>21333</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="759"/>
+        <location filename="../qjackctlSetupForm.ui" line="604"/>
         <source>Sample rate in frames per second</source>
         <translation type="unfinished">サンプリングレートを1秒あたりのフレーム数で指定します</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="766"/>
+        <location filename="../qjackctlSetupForm.ui" line="611"/>
         <source>22050</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="771"/>
+        <location filename="../qjackctlSetupForm.ui" line="616"/>
         <source>32000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="776"/>
+        <location filename="../qjackctlSetupForm.ui" line="621"/>
         <source>44100</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="781"/>
+        <location filename="../qjackctlSetupForm.ui" line="626"/>
         <source>48000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="786"/>
+        <location filename="../qjackctlSetupForm.ui" line="631"/>
         <source>88200</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="791"/>
+        <location filename="../qjackctlSetupForm.ui" line="636"/>
         <source>96000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="796"/>
+        <location filename="../qjackctlSetupForm.ui" line="641"/>
         <source>192000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="810"/>
+        <location filename="../qjackctlSetupForm.ui" line="788"/>
         <source>Scheduler priority when running realtime</source>
         <translation type="unfinished">リアルタイムモードで稼動している場合のスケジューラーにおける優先度を設定します</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="829"/>
+        <location filename="../qjackctlSetupForm.ui" line="807"/>
         <source>&amp;Word Length:</source>
         <translation type="unfinished">ワード長(&amp;W):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="851"/>
+        <location filename="../qjackctlSetupForm.ui" line="738"/>
         <source>Periods/&amp;Buffer:</source>
         <translation type="unfinished">ピリオド/バッファー(&amp;B):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="876"/>
+        <location filename="../qjackctlSetupForm.ui" line="832"/>
         <source>Word length</source>
         <translation type="unfinished">ワード長</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="913"/>
+        <location filename="../qjackctlSetupForm.ui" line="982"/>
         <source>Maximum number of ports the JACK server can manage</source>
         <translation type="unfinished">JACKサーバーが管理するポートの最大数</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="952"/>
+        <location filename="../qjackctlSetupForm.ui" line="863"/>
         <source>&amp;Wait (usec):</source>
         <translation type="unfinished">待ち時間(マイクロ秒)(&amp;W):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="980"/>
+        <location filename="../qjackctlSetupForm.ui" line="582"/>
         <source>Sample &amp;Rate:</source>
         <translation>サンプルレート(&amp;R):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1002"/>
+        <location filename="../qjackctlSetupForm.ui" line="935"/>
         <source>Maximum number of audio channels to allocate</source>
         <translation type="unfinished">割り当てるオーディオチャンネルの最大値</translation>
     </message>

@@ -2555,8 +2555,8 @@ Sovrascrivo la cartella?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="99"/>
         <location filename="../qjackctlSetupForm.ui" line="249"/>
-        <location filename="../qjackctlSetupForm.ui" line="813"/>
-        <location filename="../qjackctlSetupForm.ui" line="1005"/>
+        <location filename="../qjackctlSetupForm.ui" line="791"/>
+        <location filename="../qjackctlSetupForm.ui" line="938"/>
         <location filename="../qjackctlSetupForm.ui" line="1145"/>
         <location filename="../qjackctlSetupForm.ui" line="1319"/>
         <location filename="../qjackctlSetupForm.ui" line="1382"/>
@@ -2668,79 +2668,79 @@ Sovrascrivo la cartella?</translation>
         <translation>Numero di periodi nel buffer hardware</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="582"/>
+        <location filename="../qjackctlSetupForm.ui" line="766"/>
         <source>Priorit&amp;y:</source>
         <translation>&amp;Priorità:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="604"/>
+        <location filename="../qjackctlSetupForm.ui" line="655"/>
         <source>&amp;Frames/Period:</source>
         <translation>&amp;Fotogrammi/Periodo:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="633"/>
-        <location filename="../qjackctlSetupForm.ui" line="883"/>
+        <location filename="../qjackctlSetupForm.ui" line="684"/>
+        <location filename="../qjackctlSetupForm.ui" line="839"/>
         <source>16</source>
         <translation>16</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="638"/>
-        <location filename="../qjackctlSetupForm.ui" line="888"/>
+        <location filename="../qjackctlSetupForm.ui" line="689"/>
+        <location filename="../qjackctlSetupForm.ui" line="844"/>
         <source>32</source>
         <translation>32</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="643"/>
-        <location filename="../qjackctlSetupForm.ui" line="893"/>
+        <location filename="../qjackctlSetupForm.ui" line="694"/>
+        <location filename="../qjackctlSetupForm.ui" line="849"/>
         <source>64</source>
         <translation>64</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="648"/>
-        <location filename="../qjackctlSetupForm.ui" line="923"/>
+        <location filename="../qjackctlSetupForm.ui" line="699"/>
+        <location filename="../qjackctlSetupForm.ui" line="992"/>
         <source>128</source>
         <translation>128</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="653"/>
-        <location filename="../qjackctlSetupForm.ui" line="928"/>
+        <location filename="../qjackctlSetupForm.ui" line="704"/>
+        <location filename="../qjackctlSetupForm.ui" line="997"/>
         <source>256</source>
         <translation>256</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="658"/>
-        <location filename="../qjackctlSetupForm.ui" line="933"/>
+        <location filename="../qjackctlSetupForm.ui" line="709"/>
+        <location filename="../qjackctlSetupForm.ui" line="1002"/>
         <source>512</source>
         <translation>512</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="663"/>
-        <location filename="../qjackctlSetupForm.ui" line="938"/>
+        <location filename="../qjackctlSetupForm.ui" line="714"/>
+        <location filename="../qjackctlSetupForm.ui" line="1007"/>
         <source>1024</source>
         <translation>1024</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="668"/>
+        <location filename="../qjackctlSetupForm.ui" line="719"/>
         <source>2048</source>
         <translation>2048</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="673"/>
+        <location filename="../qjackctlSetupForm.ui" line="724"/>
         <source>4096</source>
         <translation>4096</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="626"/>
+        <location filename="../qjackctlSetupForm.ui" line="677"/>
         <source>Frames per period between process() calls</source>
         <translation>Fotogrammi per periodo tra chiamate a process()</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="687"/>
+        <location filename="../qjackctlSetupForm.ui" line="954"/>
         <source>Port Ma&amp;ximum:</source>
         <translation>Numero mas&amp;simo di porte:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="745"/>
+        <location filename="../qjackctlSetupForm.ui" line="896"/>
         <source>21333</source>
         <translation>21333</translation>
     </message>
@@ -2749,72 +2749,72 @@ Sovrascrivo la cartella?</translation>
         <translation type="obsolete">Numero dei microsecondi di attesa fra i processi del motore (dummy)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="766"/>
+        <location filename="../qjackctlSetupForm.ui" line="611"/>
         <source>22050</source>
         <translation>22050</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="771"/>
+        <location filename="../qjackctlSetupForm.ui" line="616"/>
         <source>32000</source>
         <translation>32000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="776"/>
+        <location filename="../qjackctlSetupForm.ui" line="621"/>
         <source>44100</source>
         <translation>44100</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="781"/>
+        <location filename="../qjackctlSetupForm.ui" line="626"/>
         <source>48000</source>
         <translation>48000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="786"/>
+        <location filename="../qjackctlSetupForm.ui" line="631"/>
         <source>88200</source>
         <translation>88200</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="791"/>
+        <location filename="../qjackctlSetupForm.ui" line="636"/>
         <source>96000</source>
         <translation>96000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="759"/>
+        <location filename="../qjackctlSetupForm.ui" line="604"/>
         <source>Sample rate in frames per second</source>
         <translation>Frequenza di campionamento in fotogrammi al secondo</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="810"/>
+        <location filename="../qjackctlSetupForm.ui" line="788"/>
         <source>Scheduler priority when running realtime</source>
         <translation>Priorità dello scheduler quando eseguito in realtime</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="829"/>
+        <location filename="../qjackctlSetupForm.ui" line="807"/>
         <source>&amp;Word Length:</source>
         <translation>&amp;Lunghezza delle parole:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="851"/>
+        <location filename="../qjackctlSetupForm.ui" line="738"/>
         <source>Periods/&amp;Buffer:</source>
         <translation>Periodi/&amp;Buffer:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="876"/>
+        <location filename="../qjackctlSetupForm.ui" line="832"/>
         <source>Word length</source>
         <translation>Lunghezza delle parole</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="913"/>
+        <location filename="../qjackctlSetupForm.ui" line="982"/>
         <source>Maximum number of ports the JACK server can manage</source>
         <translation>Numero massimo di porte che JACK può gestire</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="952"/>
+        <location filename="../qjackctlSetupForm.ui" line="863"/>
         <source>&amp;Wait (usec):</source>
         <translation>&amp;Attesa massima (microsec):</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="980"/>
+        <location filename="../qjackctlSetupForm.ui" line="582"/>
         <source>Sample &amp;Rate:</source>
         <translation>&amp;Campionamento:</translation>
     </message>
@@ -3953,17 +3953,17 @@ Vuoi applicare i cambiamenti?</translation>
         <translation>/dev/audio</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="709"/>
+        <location filename="../qjackctlSetupForm.ui" line="910"/>
         <source>&amp;Channels:</source>
         <translation>&amp;Canali:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="796"/>
+        <location filename="../qjackctlSetupForm.ui" line="641"/>
         <source>192000</source>
         <translation>192000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1002"/>
+        <location filename="../qjackctlSetupForm.ui" line="935"/>
         <source>Maximum number of audio channels to allocate</source>
         <translation>Massimo numero di canali audio allocabili</translation>
     </message>
@@ -4202,7 +4202,7 @@ Vuoi applicare i cambiamenti?</translation>
         <translation>&amp;Abilita l&apos;interfaccia D-Bus</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="738"/>
+        <location filename="../qjackctlSetupForm.ui" line="889"/>
         <source>Number of microseconds to wait between engine processes (dummy)</source>
         <translation>Microsecondi d&apos;attesa fra i processi del motore (dummy)</translation>
     </message>
