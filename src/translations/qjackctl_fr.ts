@@ -25,7 +25,7 @@
         <translation type="obsolete">Options</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="494"/>
+        <location filename="../qjackctlSetup.cpp" line="486"/>
         <source>Start JACK audio server immediately</source>
         <translation>Démarrer immédiatement le serveur audio JACK</translation>
     </message>
@@ -34,59 +34,59 @@
         <translation type="obsolete">Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="502"/>
+        <location filename="../qjackctlSetup.cpp" line="494"/>
         <source>Show help about command line options</source>
         <translation>Montrer l&apos;aide à propos des options en ligne de commande</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="504"/>
+        <location filename="../qjackctlSetup.cpp" line="496"/>
         <source>Show version information</source>
         <translation>Montrer les informations de version</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="540"/>
+        <location filename="../qjackctlSetup.cpp" line="532"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="489"/>
+        <location filename="../qjackctlSetup.cpp" line="481"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Utilisation : %1 [options] [commandes-et-args]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="492"/>
+        <location filename="../qjackctlSetup.cpp" line="484"/>
         <source>Options:</source>
         <translation>Options :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="498"/>
+        <location filename="../qjackctlSetup.cpp" line="490"/>
         <source>Set active patchbay definition file</source>
         <translation>Choisir le fichiers de définition de baie de brassage actif</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="500"/>
+        <location filename="../qjackctlSetup.cpp" line="492"/>
         <source>Set default JACK audio server name</source>
         <translation>Choisir le nom du serveur audio JACK par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="549"/>
+        <location filename="../qjackctlSetup.cpp" line="541"/>
         <source>Option -a requires an argument (path).</source>
         <translation>L&apos;option -a nécessite un argument (chemin).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="559"/>
+        <location filename="../qjackctlSetup.cpp" line="551"/>
         <source>Option -n requires an argument (name).</source>
         <translation>L&apos;option -n nécessite un argument (nom).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="571"/>
+        <location filename="../qjackctlSetup.cpp" line="563"/>
         <source>Qt: %1
 </source>
         <translation>Qt : %1
 </translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="496"/>
+        <location filename="../qjackctlSetup.cpp" line="488"/>
         <source>Set default settings preset name</source>
         <translation>Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
@@ -533,7 +533,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="409"/>
-        <location filename="../qjackctlMainForm.cpp" line="3623"/>
+        <location filename="../qjackctlMainForm.cpp" line="3613"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
     </message>
@@ -548,7 +548,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="74"/>
-        <location filename="../qjackctlMainForm.cpp" line="3489"/>
+        <location filename="../qjackctlMainForm.cpp" line="3479"/>
         <source>&amp;Start</source>
         <translation>&amp;Démarrer</translation>
     </message>
@@ -572,7 +572,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Arrêter le serveur JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3578"/>
+        <location filename="../qjackctlMainForm.cpp" line="3568"/>
         <source>St&amp;atus</source>
         <translation>S&amp;tatut</translation>
     </message>
@@ -586,7 +586,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="767"/>
-        <location filename="../qjackctlMainForm.cpp" line="3618"/>
+        <location filename="../qjackctlMainForm.cpp" line="3608"/>
         <source>Ab&amp;out...</source>
         <translation>À pr&amp;opos…</translation>
     </message>
@@ -614,7 +614,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="474"/>
-        <location filename="../qjackctlMainForm.cpp" line="3572"/>
+        <location filename="../qjackctlMainForm.cpp" line="3562"/>
         <source>&amp;Messages</source>
         <translation>&amp;Messages</translation>
     </message>
@@ -643,7 +643,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="508"/>
-        <location filename="../qjackctlMainForm.cpp" line="3612"/>
+        <location filename="../qjackctlMainForm.cpp" line="3602"/>
         <source>Set&amp;up...</source>
         <translation>R&amp;églages…</translation>
     </message>
@@ -735,7 +735,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="610"/>
-        <location filename="../qjackctlMainForm.cpp" line="3595"/>
+        <location filename="../qjackctlMainForm.cpp" line="3585"/>
         <source>&amp;Rewind</source>
         <translation>Remb&amp;obiner</translation>
     </message>
@@ -750,7 +750,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="708"/>
-        <location filename="../qjackctlMainForm.cpp" line="3604"/>
+        <location filename="../qjackctlMainForm.cpp" line="3594"/>
         <source>Pa&amp;use</source>
         <translation>Pa&amp;use</translation>
     </message>
@@ -765,7 +765,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="669"/>
-        <location filename="../qjackctlMainForm.cpp" line="3601"/>
+        <location filename="../qjackctlMainForm.cpp" line="3591"/>
         <source>&amp;Play</source>
         <translation>&amp;Lecture</translation>
     </message>
@@ -786,8 +786,8 @@ La baie de brassage MIDI ne sera pas disponible.</translation>
         <location filename="../qjackctlMainForm.cpp" line="836"/>
         <location filename="../qjackctlMainForm.cpp" line="1030"/>
         <location filename="../qjackctlMainForm.cpp" line="1376"/>
-        <location filename="../qjackctlMainForm.cpp" line="2566"/>
-        <location filename="../qjackctlMainForm.cpp" line="3636"/>
+        <location filename="../qjackctlMainForm.cpp" line="2556"/>
+        <location filename="../qjackctlMainForm.cpp" line="3626"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -908,7 +908,7 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="849"/>
         <location filename="../qjackctlMainForm.cpp" line="1389"/>
-        <location filename="../qjackctlMainForm.cpp" line="2583"/>
+        <location filename="../qjackctlMainForm.cpp" line="2573"/>
         <source>Don&apos;t ask this again</source>
         <translation>Ne pas redemander</translation>
     </message>
@@ -1024,22 +1024,22 @@ Désactivé.</translation>
         <translation type="obsolete">Changement des connexions MIDI.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2533"/>
+        <location filename="../qjackctlMainForm.cpp" line="2523"/>
         <source>checked</source>
         <translation>vérifié</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2537"/>
+        <location filename="../qjackctlMainForm.cpp" line="2527"/>
         <source>connected</source>
         <translation>connecté</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2541"/>
+        <location filename="../qjackctlMainForm.cpp" line="2531"/>
         <source>disconnected</source>
         <translation>déconnecté</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2546"/>
+        <location filename="../qjackctlMainForm.cpp" line="2536"/>
         <source>failed</source>
         <translation>échoué</translation>
     </message>
@@ -1052,81 +1052,81 @@ Please check the messages window for more info.</source>
 Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2734"/>
+        <location filename="../qjackctlMainForm.cpp" line="2724"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
         <translation>Configuration du serveur enregistrée dans « %1 ».</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2767"/>
+        <location filename="../qjackctlMainForm.cpp" line="2757"/>
         <source>Client activated.</source>
         <translation>Client activé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2778"/>
+        <location filename="../qjackctlMainForm.cpp" line="2768"/>
         <source>Post-startup script...</source>
         <translation>Script post-démarrage...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2779"/>
+        <location filename="../qjackctlMainForm.cpp" line="2769"/>
         <source>Post-startup script terminated</source>
         <translation>Script post-démarrage terminé</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2787"/>
+        <location filename="../qjackctlMainForm.cpp" line="2777"/>
         <source>Command line argument...</source>
         <translation>Argument de ligne de commande...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2788"/>
+        <location filename="../qjackctlMainForm.cpp" line="2778"/>
         <source>Command line argument started</source>
         <translation>Argument de ligne de commande démarré</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2810"/>
+        <location filename="../qjackctlMainForm.cpp" line="2800"/>
         <source>Client deactivated.</source>
         <translation>Client désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3050"/>
+        <location filename="../qjackctlMainForm.cpp" line="3040"/>
         <source>Transport rewind.</source>
         <translation>Déplacement en rembobinage.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3070"/>
+        <location filename="../qjackctlMainForm.cpp" line="3060"/>
         <source>Transport backward.</source>
         <translation>Déplacement en marche arrière.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3098"/>
-        <location filename="../qjackctlMainForm.cpp" line="3222"/>
-        <location filename="../qjackctlMainForm.cpp" line="3361"/>
+        <location filename="../qjackctlMainForm.cpp" line="3088"/>
+        <location filename="../qjackctlMainForm.cpp" line="3212"/>
+        <location filename="../qjackctlMainForm.cpp" line="3351"/>
         <source>Starting</source>
         <translation>Démarre</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3100"/>
+        <location filename="../qjackctlMainForm.cpp" line="3090"/>
         <source>Transport start.</source>
         <translation>Déplacement démarré.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3113"/>
-        <location filename="../qjackctlMainForm.cpp" line="3368"/>
+        <location filename="../qjackctlMainForm.cpp" line="3103"/>
+        <location filename="../qjackctlMainForm.cpp" line="3358"/>
         <source>Stopping</source>
         <translation>S&apos;arrête</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3115"/>
+        <location filename="../qjackctlMainForm.cpp" line="3105"/>
         <source>Transport stop.</source>
         <translation>Déplacement arrêté.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3135"/>
+        <location filename="../qjackctlMainForm.cpp" line="3125"/>
         <source>Transport forward.</source>
         <translation>Déplacement en marche avant.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3151"/>
-        <location filename="../qjackctlMainForm.cpp" line="3372"/>
+        <location filename="../qjackctlMainForm.cpp" line="3141"/>
+        <location filename="../qjackctlMainForm.cpp" line="3362"/>
         <source>Stopped</source>
         <translation>Arrêté</translation>
     </message>
@@ -1139,119 +1139,119 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation type="obsolete">échantillons</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3213"/>
+        <location filename="../qjackctlMainForm.cpp" line="3203"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3213"/>
+        <location filename="../qjackctlMainForm.cpp" line="3203"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3214"/>
+        <location filename="../qjackctlMainForm.cpp" line="3204"/>
         <source>RT</source>
         <translation>TR</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3225"/>
+        <location filename="../qjackctlMainForm.cpp" line="3215"/>
         <source>Rolling</source>
         <translation>Défile</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3228"/>
+        <location filename="../qjackctlMainForm.cpp" line="3218"/>
         <source>Looping</source>
         <translation>Boucle</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3265"/>
+        <location filename="../qjackctlMainForm.cpp" line="3255"/>
         <source>XRUN callback (%1 skipped).</source>
         <translation>Récupération de désynchronisation (XRUN) (%1 sauté).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3365"/>
+        <location filename="../qjackctlMainForm.cpp" line="3355"/>
         <source>Started</source>
         <translation>Démarré</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3375"/>
+        <location filename="../qjackctlMainForm.cpp" line="3365"/>
         <source>Active</source>
         <translation>Actif</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3378"/>
+        <location filename="../qjackctlMainForm.cpp" line="3368"/>
         <source>Activating</source>
         <translation>Activation</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3383"/>
+        <location filename="../qjackctlMainForm.cpp" line="3373"/>
         <source>Inactive</source>
         <translation>Inactif</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3479"/>
-        <location filename="../qjackctlMainForm.cpp" line="3532"/>
+        <location filename="../qjackctlMainForm.cpp" line="3469"/>
+        <location filename="../qjackctlMainForm.cpp" line="3522"/>
         <source>&amp;Hide</source>
         <translation>Cac&amp;her</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3479"/>
+        <location filename="../qjackctlMainForm.cpp" line="3469"/>
         <source>Mi&amp;nimize</source>
         <translation>Mi&amp;nimiser</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3481"/>
-        <location filename="../qjackctlMainForm.cpp" line="3532"/>
+        <location filename="../qjackctlMainForm.cpp" line="3471"/>
+        <location filename="../qjackctlMainForm.cpp" line="3522"/>
         <source>S&amp;how</source>
         <translation>M&amp;ontrer</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3481"/>
+        <location filename="../qjackctlMainForm.cpp" line="3471"/>
         <source>Rest&amp;ore</source>
         <translation>R&amp;estaurer</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3492"/>
+        <location filename="../qjackctlMainForm.cpp" line="3482"/>
         <source>&amp;Stop</source>
         <translation>&amp;Arrêter</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3495"/>
+        <location filename="../qjackctlMainForm.cpp" line="3485"/>
         <source>&amp;Reset</source>
         <translation>Ré&amp;initialiser</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3501"/>
+        <location filename="../qjackctlMainForm.cpp" line="3491"/>
         <source>&amp;Presets</source>
         <translation>&amp;Préréglages</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3559"/>
+        <location filename="../qjackctlMainForm.cpp" line="3549"/>
         <source>&amp;Versioning</source>
         <translation>Gestion de ré&amp;visions</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3566"/>
+        <location filename="../qjackctlMainForm.cpp" line="3556"/>
         <source>Re&amp;fresh</source>
         <translation>Ra&amp;fraîchir</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3584"/>
+        <location filename="../qjackctlMainForm.cpp" line="3574"/>
         <source>&amp;Connections</source>
         <translation>&amp;Connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3588"/>
+        <location filename="../qjackctlMainForm.cpp" line="3578"/>
         <source>Patch&amp;bay</source>
         <translation>&amp;Brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3593"/>
+        <location filename="../qjackctlMainForm.cpp" line="3583"/>
         <source>&amp;Transport</source>
         <translation>Déplacemen&amp;t</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3638"/>
+        <location filename="../qjackctlMainForm.cpp" line="3628"/>
         <source>Server settings will be only effective after
 restarting the JACK audio server.</source>
         <translation>Les paramètres du serveur ne seront effectifs
@@ -1263,12 +1263,12 @@ qu&apos;après avoir redémarré le serveur audio JACK.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="796"/>
-        <location filename="../qjackctlMainForm.cpp" line="3657"/>
+        <location filename="../qjackctlMainForm.cpp" line="3647"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3659"/>
+        <location filename="../qjackctlMainForm.cpp" line="3649"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
         <translation>Certain paramètres ne seront effectifs
@@ -1295,12 +1295,12 @@ qu&apos;au prochain démarrage de ce programme.</translation>
         <translation>Changement du graphique des connexions ALSA.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2505"/>
+        <location filename="../qjackctlMainForm.cpp" line="2495"/>
         <source>JACK connection change.</source>
         <translation>Changement des connexions JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2514"/>
+        <location filename="../qjackctlMainForm.cpp" line="2504"/>
         <source>ALSA connection change.</source>
         <translation>Changement des connexions ALSA.</translation>
     </message>
@@ -1461,62 +1461,62 @@ Désactivé.</translation>
         <translation>Changement d&apos;une propriété de JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2663"/>
+        <location filename="../qjackctlMainForm.cpp" line="2653"/>
         <source>Overall operation failed.</source>
         <translation>L&apos;opération a échoué.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2665"/>
+        <location filename="../qjackctlMainForm.cpp" line="2655"/>
         <source>Invalid or unsupported option.</source>
         <translation>Option invalide ou non prise en charge.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2667"/>
+        <location filename="../qjackctlMainForm.cpp" line="2657"/>
         <source>Client name not unique.</source>
         <translation>Nom de client non unique.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2669"/>
+        <location filename="../qjackctlMainForm.cpp" line="2659"/>
         <source>Server is started.</source>
         <translation>Le serveur est démarré.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2671"/>
+        <location filename="../qjackctlMainForm.cpp" line="2661"/>
         <source>Unable to connect to server.</source>
         <translation>Incapable de se connecter au serveur.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2673"/>
+        <location filename="../qjackctlMainForm.cpp" line="2663"/>
         <source>Server communication error.</source>
         <translation>Erreur de communication serveur.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2675"/>
+        <location filename="../qjackctlMainForm.cpp" line="2665"/>
         <source>Client does not exist.</source>
         <translation>Le client n&apos;existe pas.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2677"/>
+        <location filename="../qjackctlMainForm.cpp" line="2667"/>
         <source>Unable to load internal client.</source>
         <translation>Incapable de charger le client interne.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2679"/>
+        <location filename="../qjackctlMainForm.cpp" line="2669"/>
         <source>Unable to initialize client.</source>
         <translation>Incapable d&apos;initialiser le client.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2681"/>
+        <location filename="../qjackctlMainForm.cpp" line="2671"/>
         <source>Unable to access shared memory.</source>
         <translation>Incapable d&apos;accéder à la mémoire partagée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2683"/>
+        <location filename="../qjackctlMainForm.cpp" line="2673"/>
         <source>Client protocol version mismatch.</source>
         <translation>Mauvaise version du protocole client.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2685"/>
+        <location filename="../qjackctlMainForm.cpp" line="2675"/>
         <source>Could not connect to JACK server as client.
 - %1
 Please check the messages window for more info.</source>
@@ -1525,58 +1525,58 @@ Please check the messages window for more info.</source>
 Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3187"/>
+        <location filename="../qjackctlMainForm.cpp" line="3177"/>
         <source>%1 (%2%)</source>
         <translation>%1 (%2%)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3191"/>
+        <location filename="../qjackctlMainForm.cpp" line="3181"/>
         <source>%1 (%2%, %3 xruns)</source>
         <translation>%1 (%2%, %3 xruns)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3198"/>
+        <location filename="../qjackctlMainForm.cpp" line="3188"/>
         <source>%1 %</source>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3200"/>
+        <location filename="../qjackctlMainForm.cpp" line="3190"/>
         <source>%1 Hz</source>
         <translation>%1 Hz</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3202"/>
+        <location filename="../qjackctlMainForm.cpp" line="3192"/>
         <source>%1 frames</source>
         <translation>%1 échantillons</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3258"/>
+        <location filename="../qjackctlMainForm.cpp" line="3248"/>
         <source>%1 msec</source>
         <translation>%1 ms</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="440"/>
-        <location filename="../qjackctlMainForm.cpp" line="3527"/>
+        <location filename="../qjackctlMainForm.cpp" line="3517"/>
         <source>S&amp;ession</source>
         <translation>S&amp;ession</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3536"/>
+        <location filename="../qjackctlMainForm.cpp" line="3526"/>
         <source>&amp;Load...</source>
         <translation>&amp;Charger…</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3544"/>
+        <location filename="../qjackctlMainForm.cpp" line="3534"/>
         <source>&amp;Save...</source>
         <translation>&amp;Enregistrer…</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3549"/>
+        <location filename="../qjackctlMainForm.cpp" line="3539"/>
         <source>Save and &amp;Quit...</source>
         <translation>Enregistrer et &amp;Quitter…</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3553"/>
+        <location filename="../qjackctlMainForm.cpp" line="3543"/>
         <source>Save &amp;Template...</source>
         <translation>Enregistrer &amp;modèle…</translation>
     </message>
@@ -1585,7 +1585,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation type="obsolete">&amp;Rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3931"/>
+        <location filename="../qjackctlMainForm.cpp" line="3921"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -1596,7 +1596,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
 (%4)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3962"/>
+        <location filename="../qjackctlMainForm.cpp" line="3952"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1607,7 +1607,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3993"/>
+        <location filename="../qjackctlMainForm.cpp" line="3983"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1645,7 +1645,7 @@ Pour terminer le programme, merci de choisir &quot;Quitter&quot; dans le menu co
         <translation>Balayage de la baie de brassage ALSA active</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2568"/>
+        <location filename="../qjackctlMainForm.cpp" line="2558"/>
         <source>A patchbay definition is currently active,
 which is probable to redo this connection:
 
@@ -2669,17 +2669,17 @@ Are you sure to overwrite the existing folder?</source>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="99"/>
-        <location filename="../qjackctlSetupForm.ui" line="262"/>
-        <location filename="../qjackctlSetupForm.ui" line="829"/>
-        <location filename="../qjackctlSetupForm.ui" line="1021"/>
-        <location filename="../qjackctlSetupForm.ui" line="1164"/>
-        <location filename="../qjackctlSetupForm.ui" line="1338"/>
-        <location filename="../qjackctlSetupForm.ui" line="1401"/>
+        <location filename="../qjackctlSetupForm.ui" line="249"/>
+        <location filename="../qjackctlSetupForm.ui" line="813"/>
+        <location filename="../qjackctlSetupForm.ui" line="1005"/>
+        <location filename="../qjackctlSetupForm.ui" line="1145"/>
+        <location filename="../qjackctlSetupForm.ui" line="1319"/>
+        <location filename="../qjackctlSetupForm.ui" line="1382"/>
+        <location filename="../qjackctlSetupForm.ui" line="1441"/>
         <location filename="../qjackctlSetupForm.ui" line="1460"/>
-        <location filename="../qjackctlSetupForm.ui" line="1479"/>
+        <location filename="../qjackctlSetupForm.ui" line="1501"/>
         <location filename="../qjackctlSetupForm.ui" line="1520"/>
-        <location filename="../qjackctlSetupForm.ui" line="1539"/>
-        <location filename="../qjackctlSetupForm.ui" line="3959"/>
+        <location filename="../qjackctlSetupForm.ui" line="3810"/>
         <source>(default)</source>
         <translation>(par défaut)</translation>
     </message>
@@ -2725,12 +2725,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">&amp;Chemin du serveur :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="219"/>
+        <location filename="../qjackctlSetupForm.ui" line="206"/>
         <source>jackstart</source>
         <translation>jackstart</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="209"/>
+        <location filename="../qjackctlSetupForm.ui" line="196"/>
         <source>jackd</source>
         <translation>jackd</translation>
     </message>
@@ -2743,37 +2743,37 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Chemin du serveur de son du Kit de Connexion Audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="276"/>
+        <location filename="../qjackctlSetupForm.ui" line="263"/>
         <source>Driv&amp;er:</source>
         <translation>Pilot&amp;e :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="305"/>
+        <location filename="../qjackctlSetupForm.ui" line="292"/>
         <source>dummy</source>
         <translation>factice</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="315"/>
+        <location filename="../qjackctlSetupForm.ui" line="302"/>
         <source>oss</source>
         <translation>oss</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="320"/>
+        <location filename="../qjackctlSetupForm.ui" line="307"/>
         <source>alsa</source>
         <translation>alsa</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="325"/>
+        <location filename="../qjackctlSetupForm.ui" line="312"/>
         <source>portaudio</source>
         <translation>portaudio</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="330"/>
+        <location filename="../qjackctlSetupForm.ui" line="317"/>
         <source>coreaudio</source>
         <translation>coreaudio</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="335"/>
+        <location filename="../qjackctlSetupForm.ui" line="322"/>
         <source>freebob</source>
         <translation>freebob</translation>
     </message>
@@ -2787,79 +2787,79 @@ Are you sure to overwrite the existing folder?</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="573"/>
+        <location filename="../qjackctlSetupForm.ui" line="557"/>
         <source>Number of periods in the hardware buffer</source>
         <translation>Nombre de périodes dans le tampon matériel</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="598"/>
+        <location filename="../qjackctlSetupForm.ui" line="582"/>
         <source>Priorit&amp;y:</source>
         <translation>Pri&amp;orité :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="620"/>
+        <location filename="../qjackctlSetupForm.ui" line="604"/>
         <source>&amp;Frames/Period:</source>
         <translation>&amp;Échantillons/Période :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="649"/>
-        <location filename="../qjackctlSetupForm.ui" line="899"/>
+        <location filename="../qjackctlSetupForm.ui" line="633"/>
+        <location filename="../qjackctlSetupForm.ui" line="883"/>
         <source>16</source>
         <translation>16</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="654"/>
-        <location filename="../qjackctlSetupForm.ui" line="904"/>
+        <location filename="../qjackctlSetupForm.ui" line="638"/>
+        <location filename="../qjackctlSetupForm.ui" line="888"/>
         <source>32</source>
         <translation>32</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="659"/>
-        <location filename="../qjackctlSetupForm.ui" line="909"/>
+        <location filename="../qjackctlSetupForm.ui" line="643"/>
+        <location filename="../qjackctlSetupForm.ui" line="893"/>
         <source>64</source>
         <translation>64</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="664"/>
-        <location filename="../qjackctlSetupForm.ui" line="939"/>
+        <location filename="../qjackctlSetupForm.ui" line="648"/>
+        <location filename="../qjackctlSetupForm.ui" line="923"/>
         <source>128</source>
         <translation>128</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="669"/>
-        <location filename="../qjackctlSetupForm.ui" line="944"/>
+        <location filename="../qjackctlSetupForm.ui" line="653"/>
+        <location filename="../qjackctlSetupForm.ui" line="928"/>
         <source>256</source>
         <translation>256</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="674"/>
-        <location filename="../qjackctlSetupForm.ui" line="949"/>
+        <location filename="../qjackctlSetupForm.ui" line="658"/>
+        <location filename="../qjackctlSetupForm.ui" line="933"/>
         <source>512</source>
         <translation>512</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="679"/>
-        <location filename="../qjackctlSetupForm.ui" line="954"/>
+        <location filename="../qjackctlSetupForm.ui" line="663"/>
+        <location filename="../qjackctlSetupForm.ui" line="938"/>
         <source>1024</source>
         <translation>1024</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="684"/>
+        <location filename="../qjackctlSetupForm.ui" line="668"/>
         <source>2048</source>
         <translation>2048</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="689"/>
+        <location filename="../qjackctlSetupForm.ui" line="673"/>
         <source>4096</source>
         <translation>4096</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="642"/>
+        <location filename="../qjackctlSetupForm.ui" line="626"/>
         <source>Frames per period between process() calls</source>
         <translation>Échantillons par période entre appels de process()</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="703"/>
+        <location filename="../qjackctlSetupForm.ui" line="687"/>
         <source>Port Ma&amp;ximum:</source>
         <translation>Nombre de port ma&amp;ximal :</translation>
     </message>
@@ -2868,7 +2868,7 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">&amp;Canal:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="761"/>
+        <location filename="../qjackctlSetupForm.ui" line="745"/>
         <source>21333</source>
         <translation>21333</translation>
     </message>
@@ -2877,77 +2877,77 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Nombre de microsecondes à attendre entre les traitements du moteur (factice)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="782"/>
+        <location filename="../qjackctlSetupForm.ui" line="766"/>
         <source>22050</source>
         <translation>22050</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="787"/>
+        <location filename="../qjackctlSetupForm.ui" line="771"/>
         <source>32000</source>
         <translation>32000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="792"/>
+        <location filename="../qjackctlSetupForm.ui" line="776"/>
         <source>44100</source>
         <translation>44100</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="797"/>
+        <location filename="../qjackctlSetupForm.ui" line="781"/>
         <source>48000</source>
         <translation>48000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="802"/>
+        <location filename="../qjackctlSetupForm.ui" line="786"/>
         <source>88200</source>
         <translation>88200</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="807"/>
+        <location filename="../qjackctlSetupForm.ui" line="791"/>
         <source>96000</source>
         <translation>96000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="812"/>
+        <location filename="../qjackctlSetupForm.ui" line="796"/>
         <source>192000</source>
         <translation>192000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="775"/>
+        <location filename="../qjackctlSetupForm.ui" line="759"/>
         <source>Sample rate in frames per second</source>
         <translation>Fréquence d&apos;échantillonage en échantillons par seconde</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="826"/>
+        <location filename="../qjackctlSetupForm.ui" line="810"/>
         <source>Scheduler priority when running realtime</source>
         <translation>Priorité de l&apos;ordonnanceur quand fonctionne en temps réel</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="845"/>
+        <location filename="../qjackctlSetupForm.ui" line="829"/>
         <source>&amp;Word Length:</source>
         <translation>&amp;Résolution (bit) :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="867"/>
+        <location filename="../qjackctlSetupForm.ui" line="851"/>
         <source>Periods/&amp;Buffer:</source>
         <translation>Périodes/&amp;Tampon :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="892"/>
+        <location filename="../qjackctlSetupForm.ui" line="876"/>
         <source>Word length</source>
         <translation>Résolution</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="929"/>
+        <location filename="../qjackctlSetupForm.ui" line="913"/>
         <source>Maximum number of ports the JACK server can manage</source>
         <translation>Nombre maximal de ports que peut gérer le serveur JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="968"/>
+        <location filename="../qjackctlSetupForm.ui" line="952"/>
         <source>&amp;Wait (usec):</source>
         <translation>&amp;Attente (en µs) :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="996"/>
+        <location filename="../qjackctlSetupForm.ui" line="980"/>
         <source>Sample &amp;Rate:</source>
         <translation>&amp;Fréquence d&apos;échantillonnage (Hz) :</translation>
     </message>
@@ -2956,50 +2956,50 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Canal PCM</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1044"/>
+        <location filename="../qjackctlSetupForm.ui" line="1028"/>
         <source>&amp;Timeout (msec):</source>
         <translation>&amp;Décompte (en ms) :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1076"/>
+        <location filename="../qjackctlSetupForm.ui" line="1060"/>
         <source>200</source>
         <translation>200</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1081"/>
-        <location filename="../qjackctlSetupForm.ui" line="3132"/>
+        <location filename="../qjackctlSetupForm.ui" line="1065"/>
+        <location filename="../qjackctlSetupForm.ui" line="2986"/>
         <source>500</source>
         <translation>500</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1086"/>
-        <location filename="../qjackctlSetupForm.ui" line="3137"/>
+        <location filename="../qjackctlSetupForm.ui" line="1070"/>
+        <location filename="../qjackctlSetupForm.ui" line="2991"/>
         <source>1000</source>
         <translation>1000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1091"/>
+        <location filename="../qjackctlSetupForm.ui" line="1075"/>
         <source>2000</source>
         <translation>2000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1096"/>
-        <location filename="../qjackctlSetupForm.ui" line="3147"/>
+        <location filename="../qjackctlSetupForm.ui" line="1080"/>
+        <location filename="../qjackctlSetupForm.ui" line="3001"/>
         <source>5000</source>
         <translation>5000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1101"/>
+        <location filename="../qjackctlSetupForm.ui" line="1085"/>
         <source>10000</source>
         <translation>10000</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1066"/>
+        <location filename="../qjackctlSetupForm.ui" line="1050"/>
         <source>Set client timeout limit in miliseconds</source>
         <translation>Régler le limite du décompte client en millisecondes</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="390"/>
+        <location filename="../qjackctlSetupForm.ui" line="377"/>
         <source>&amp;Realtime</source>
         <translation>Temps &amp;réel</translation>
     </message>
@@ -3008,12 +3008,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="387"/>
+        <location filename="../qjackctlSetupForm.ui" line="374"/>
         <source>Use realtime scheduling</source>
         <translation>Utiliser ordonnancement temps réel</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="406"/>
+        <location filename="../qjackctlSetupForm.ui" line="393"/>
         <source>No Memory Loc&amp;k</source>
         <translation>P&amp;as de verrouillage mémoire</translation>
     </message>
@@ -3022,12 +3022,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="403"/>
+        <location filename="../qjackctlSetupForm.ui" line="390"/>
         <source>Do not attempt to lock memory, even if in realtime mode</source>
         <translation>Ne pas essayer de verrouiller la mémoire même en mode temps-réel</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="422"/>
+        <location filename="../qjackctlSetupForm.ui" line="409"/>
         <source>&amp;Unlock Memory</source>
         <translation>&amp;Déverrouiller la mémoire</translation>
     </message>
@@ -3036,12 +3036,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="419"/>
+        <location filename="../qjackctlSetupForm.ui" line="406"/>
         <source>Unlock memory of common toolkit libraries (GTK+, QT, FLTK, Wine)</source>
         <translation>Déverrouiller la mémoire des librairies d&apos;interface communes (GTK+, QT, FLTK, Wine)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="438"/>
+        <location filename="../qjackctlSetupForm.ui" line="425"/>
         <source>So&amp;ft Mode</source>
         <translation>Mode &amp;logiciel</translation>
     </message>
@@ -3050,12 +3050,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+L</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="435"/>
+        <location filename="../qjackctlSetupForm.ui" line="422"/>
         <source>Ignore xruns reported by the backend driver</source>
         <translation>Ignorer les désynchronisations (XRUN) rapportées par le pilote principal</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="454"/>
+        <location filename="../qjackctlSetupForm.ui" line="441"/>
         <source>&amp;Monitor</source>
         <translation>&amp;Écoute de contrôle</translation>
     </message>
@@ -3064,12 +3064,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+E</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="451"/>
+        <location filename="../qjackctlSetupForm.ui" line="438"/>
         <source>Provide output monitor ports</source>
         <translation>Fournir des ports de sortie d&apos;écoute de contrôle</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="470"/>
+        <location filename="../qjackctlSetupForm.ui" line="457"/>
         <source>Force &amp;16bit</source>
         <translation>Forcer &amp;16bit</translation>
     </message>
@@ -3078,12 +3078,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+1</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="467"/>
+        <location filename="../qjackctlSetupForm.ui" line="454"/>
         <source>Force 16bit mode instead of failing over 32bit (default)</source>
         <translation>Forcer mode 16bit au lieu d&apos;échouer sur 32bit (par défaut)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="486"/>
+        <location filename="../qjackctlSetupForm.ui" line="473"/>
         <source>H/W M&amp;onitor</source>
         <translation>Éc&amp;oute de contrôle matérielle</translation>
     </message>
@@ -3092,12 +3092,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="483"/>
+        <location filename="../qjackctlSetupForm.ui" line="470"/>
         <source>Enable hardware monitoring of capture ports</source>
         <translation>Activer l&apos;écoute de contrôle matérielle des ports de capture</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="502"/>
+        <location filename="../qjackctlSetupForm.ui" line="489"/>
         <source>H/&amp;W Meter</source>
         <translation>Mes&amp;ure matérielle</translation>
     </message>
@@ -3106,12 +3106,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+U</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="499"/>
+        <location filename="../qjackctlSetupForm.ui" line="486"/>
         <source>Enable hardware metering on cards that support it</source>
         <translation>Activer la mesure matérielle sur les cartes qui la prennent en charge</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="518"/>
+        <location filename="../qjackctlSetupForm.ui" line="505"/>
         <source>&amp;Ignore H/W</source>
         <translation>&amp;Ignorer matériel</translation>
     </message>
@@ -3120,12 +3120,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+I</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="515"/>
+        <location filename="../qjackctlSetupForm.ui" line="502"/>
         <source>Ignore hardware period/buffer size</source>
         <translation>Ignore la taille des période/tampon matériels</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1372"/>
+        <location filename="../qjackctlSetupForm.ui" line="1353"/>
         <source>&amp;Output Device:</source>
         <translation>Périphérique de s&amp;ortie :</translation>
     </message>
@@ -3134,17 +3134,17 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Canaux de s&amp;ortie :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1135"/>
+        <location filename="../qjackctlSetupForm.ui" line="1116"/>
         <source>&amp;Interface:</source>
         <translation>&amp;Interface :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1457"/>
+        <location filename="../qjackctlSetupForm.ui" line="1438"/>
         <source>Maximum input audio hardware channels to allocate</source>
         <translation>Nombre maximal de canaux d&apos;entrée audio matériels à allouer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1259"/>
+        <location filename="../qjackctlSetupForm.ui" line="1240"/>
         <source>&amp;Audio:</source>
         <translation>&amp;Audio :</translation>
     </message>
@@ -3153,37 +3153,37 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Laten&amp;ce d&apos;entrée :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1204"/>
+        <location filename="../qjackctlSetupForm.ui" line="1185"/>
         <source>Dit&amp;her:</source>
         <translation>Bruit de dispertion (dit&amp;her) :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1536"/>
+        <location filename="../qjackctlSetupForm.ui" line="1517"/>
         <source>External output latency (frames)</source>
         <translation>Latence de sortie externe (en échantillons)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1309"/>
+        <location filename="../qjackctlSetupForm.ui" line="1290"/>
         <source>&amp;Input Device:</source>
         <translation>Pér&amp;iphérique d&apos;entrée :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1285"/>
+        <location filename="../qjackctlSetupForm.ui" line="1266"/>
         <source>Duplex</source>
         <translation>Duplex</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1290"/>
+        <location filename="../qjackctlSetupForm.ui" line="1271"/>
         <source>Capture Only</source>
         <translation>Capture seulement</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1295"/>
+        <location filename="../qjackctlSetupForm.ui" line="1276"/>
         <source>Playback Only</source>
         <translation>Reproduction seulement</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1281"/>
+        <location filename="../qjackctlSetupForm.ui" line="1262"/>
         <source>Provide either audio capture, playback or both</source>
         <translation>Fournir la capture audio, la reproduction audio ou les deux</translation>
     </message>
@@ -3192,9 +3192,9 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1169"/>
-        <location filename="../qjackctlSetupForm.ui" line="1343"/>
-        <location filename="../qjackctlSetupForm.ui" line="1406"/>
+        <location filename="../qjackctlSetupForm.ui" line="1150"/>
+        <location filename="../qjackctlSetupForm.ui" line="1324"/>
+        <location filename="../qjackctlSetupForm.ui" line="1387"/>
         <source>hw:0</source>
         <translation>hw:0</translation>
     </message>
@@ -3203,15 +3203,15 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">hw:1</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1157"/>
+        <location filename="../qjackctlSetupForm.ui" line="1138"/>
         <source>The PCM device name to use</source>
         <translation>Nom du périphérique PCM à utiliser</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1915"/>
-        <location filename="../qjackctlSetupForm.ui" line="1999"/>
-        <location filename="../qjackctlSetupForm.ui" line="2061"/>
-        <location filename="../qjackctlSetupForm.ui" line="2161"/>
+        <location filename="../qjackctlSetupForm.ui" line="1877"/>
+        <location filename="../qjackctlSetupForm.ui" line="1961"/>
+        <location filename="../qjackctlSetupForm.ui" line="2023"/>
+        <location filename="../qjackctlSetupForm.ui" line="2123"/>
         <source>&gt;</source>
         <translation>&gt;</translation>
     </message>
@@ -3220,24 +3220,24 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Sélectionner le périphérique de sortie pour la reproduction</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="233"/>
+        <location filename="../qjackctlSetupForm.ui" line="220"/>
         <source>&amp;Name:</source>
         <translation>&amp;Nom :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="255"/>
+        <location filename="../qjackctlSetupForm.ui" line="242"/>
         <source>The JACK Audio Connection Kit sound server name</source>
         <translation>Le nom du serveur de son du Kit de Connexion Audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1184"/>
-        <location filename="../qjackctlSetupForm.ui" line="1358"/>
-        <location filename="../qjackctlSetupForm.ui" line="1421"/>
+        <location filename="../qjackctlSetupForm.ui" line="1165"/>
+        <location filename="../qjackctlSetupForm.ui" line="1339"/>
+        <location filename="../qjackctlSetupForm.ui" line="1402"/>
         <source>/dev/dsp</source>
         <translation>/dev/dsp</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1331"/>
+        <location filename="../qjackctlSetupForm.ui" line="1312"/>
         <source>Alternate input device for capture</source>
         <translation>Périphérique d&apos;entrée alternatif pour la capture</translation>
     </message>
@@ -3246,12 +3246,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Laten&amp;ce de sortie :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1476"/>
+        <location filename="../qjackctlSetupForm.ui" line="1457"/>
         <source>Maximum output audio hardware channels to allocate</source>
         <translation>Nombre maximal de canaux de sortie audio matériels à allouer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1394"/>
+        <location filename="../qjackctlSetupForm.ui" line="1375"/>
         <source>Alternate output device for playback</source>
         <translation>Périphérique de sortie alternatif pour la reproduction</translation>
     </message>
@@ -3268,32 +3268,32 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Sélectionner le nom du périphérique PCM</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1517"/>
+        <location filename="../qjackctlSetupForm.ui" line="1498"/>
         <source>External input latency (frames)</source>
         <translation>Latence d&apos;entrée externe (en échantillons)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1230"/>
+        <location filename="../qjackctlSetupForm.ui" line="1211"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1235"/>
+        <location filename="../qjackctlSetupForm.ui" line="1216"/>
         <source>Rectangular</source>
         <translation>Rectangulaire</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1240"/>
+        <location filename="../qjackctlSetupForm.ui" line="1221"/>
         <source>Shaped</source>
         <translation>Sinusoïdal</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1245"/>
+        <location filename="../qjackctlSetupForm.ui" line="1226"/>
         <source>Triangular</source>
         <translation>Triangulaire</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1226"/>
+        <location filename="../qjackctlSetupForm.ui" line="1207"/>
         <source>Set dither mode</source>
         <translation>Régler le mode du bruit de dispersion (dither)</translation>
     </message>
@@ -3306,7 +3306,7 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="531"/>
+        <location filename="../qjackctlSetupForm.ui" line="518"/>
         <source>Whether to give verbose output on messages</source>
         <translation>Donner une sortie bavarde sur les messages</translation>
     </message>
@@ -3315,12 +3315,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">&amp;Retard du démarrage (en s) :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1694"/>
+        <location filename="../qjackctlSetupForm.ui" line="1675"/>
         <source>Time in seconds that client is delayed after server startup</source>
         <translation>Temps en secondes dont le client est retardé après le démarrage du serveur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1722"/>
+        <location filename="../qjackctlSetupForm.ui" line="1703"/>
         <source>Latency:</source>
         <translation>Latence :</translation>
     </message>
@@ -3329,100 +3329,100 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">0</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1747"/>
+        <location filename="../qjackctlSetupForm.ui" line="1728"/>
         <source>Output latency in milliseconds, calculated based on the period, rate and buffer settings</source>
         <translation>Latence de sortie en millisecondes calculée à partir des réglages de la période, de la fréquence d&apos;échantillonnage et du tampon</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1788"/>
+        <location filename="../qjackctlSetupForm.ui" line="1756"/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1806"/>
+        <location filename="../qjackctlSetupForm.ui" line="1768"/>
         <source>Scripting</source>
         <translation>Scripts</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1830"/>
+        <location filename="../qjackctlSetupForm.ui" line="1792"/>
         <source>Execute script on Start&amp;up:</source>
         <translation>Exéc&amp;uter un script au démarrage :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1827"/>
+        <location filename="../qjackctlSetupForm.ui" line="1789"/>
         <source>Whether to execute a custom shell script before starting up the JACK audio server.</source>
         <translation>Exécuter un script de commande personnalisé avant de démarrer le serveur audio JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1846"/>
+        <location filename="../qjackctlSetupForm.ui" line="1808"/>
         <source>Execute script after &amp;Startup:</source>
         <translation>Exécuter un &amp;script après le démarrage :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1843"/>
+        <location filename="../qjackctlSetupForm.ui" line="1805"/>
         <source>Whether to execute a custom shell script after starting up the JACK audio server.</source>
         <translation>Exécuter un script de commande personnalisé après avoir démarré le serveur audio JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1862"/>
+        <location filename="../qjackctlSetupForm.ui" line="1824"/>
         <source>Execute script on Shut&amp;down:</source>
         <translation>Exécuter un script à l&apos;extinctio&amp;n :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1859"/>
+        <location filename="../qjackctlSetupForm.ui" line="1821"/>
         <source>Whether to execute a custom shell script before shuting down the JACK audio server.</source>
         <translation>Exécuter un script de commande personnalisé avant d&apos;éteindre le serveur audio JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1881"/>
+        <location filename="../qjackctlSetupForm.ui" line="1843"/>
         <source>Command line to be executed before starting up the JACK audio server</source>
         <translation>Ligne de commande à exécuter avant de démarrer le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1912"/>
-        <location filename="../qjackctlSetupForm.ui" line="1996"/>
-        <location filename="../qjackctlSetupForm.ui" line="2058"/>
-        <location filename="../qjackctlSetupForm.ui" line="2158"/>
+        <location filename="../qjackctlSetupForm.ui" line="1874"/>
+        <location filename="../qjackctlSetupForm.ui" line="1958"/>
+        <location filename="../qjackctlSetupForm.ui" line="2020"/>
+        <location filename="../qjackctlSetupForm.ui" line="2120"/>
         <source>Scripting argument meta-symbols</source>
         <translation>Méta-symboles des arguments de script</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1946"/>
-        <location filename="../qjackctlSetupForm.ui" line="2030"/>
-        <location filename="../qjackctlSetupForm.ui" line="2092"/>
-        <location filename="../qjackctlSetupForm.ui" line="2192"/>
-        <location filename="../qjackctlSetupForm.ui" line="2387"/>
-        <location filename="../qjackctlSetupForm.ui" line="2580"/>
+        <location filename="../qjackctlSetupForm.ui" line="1908"/>
+        <location filename="../qjackctlSetupForm.ui" line="1992"/>
+        <location filename="../qjackctlSetupForm.ui" line="2054"/>
+        <location filename="../qjackctlSetupForm.ui" line="2154"/>
+        <location filename="../qjackctlSetupForm.ui" line="2349"/>
+        <location filename="../qjackctlSetupForm.ui" line="2481"/>
         <source>...</source>
         <translation>…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1943"/>
+        <location filename="../qjackctlSetupForm.ui" line="1905"/>
         <source>Browse for script to be executed before starting up the JACK audio server</source>
         <translation>Pointer sur le script à exécuter avant de démarrer le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1965"/>
+        <location filename="../qjackctlSetupForm.ui" line="1927"/>
         <source>Command line to be executed after starting up the JACK audio server</source>
         <translation>Ligne de commande à exécuter après avoir démarré le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2027"/>
+        <location filename="../qjackctlSetupForm.ui" line="1989"/>
         <source>Browse for script to be executed after starting up the JACK audio server</source>
         <translation>Pointer sur le script à exécuter après avoir démarré le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2089"/>
+        <location filename="../qjackctlSetupForm.ui" line="2051"/>
         <source>Browse for script to be executed before shutting down the JACK audio server</source>
         <translation>Pointer sur le script à exécuter avant d&apos;éteindre le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2111"/>
+        <location filename="../qjackctlSetupForm.ui" line="2073"/>
         <source>Command line to be executed before shutting down the JACK audio server</source>
         <translation>Ligne de commande à exécuter avant d&apos;éteindre le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2130"/>
+        <location filename="../qjackctlSetupForm.ui" line="2092"/>
         <source>Execute script after Shu&amp;tdown:</source>
         <translation>Exécuter un script après l&apos;ex&amp;tinction :</translation>
     </message>
@@ -3431,27 +3431,27 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2127"/>
+        <location filename="../qjackctlSetupForm.ui" line="2089"/>
         <source>Whether to execute a custom shell script after shuting down the JACK audio server.</source>
         <translation>Exécuter un script de commande personnalisé après avoir éteint le serveur audio JACK.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2189"/>
+        <location filename="../qjackctlSetupForm.ui" line="2151"/>
         <source>Browse for script to be executed after shutting down the JACK audio server</source>
         <translation>Pointer sur le script à exécuter après avoir éteint le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2211"/>
+        <location filename="../qjackctlSetupForm.ui" line="2173"/>
         <source>Command line to be executed after shutting down the JACK audio server</source>
         <translation>Ligne de commande à exécuter après avoir éteint le serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2230"/>
+        <location filename="../qjackctlSetupForm.ui" line="2192"/>
         <source>Statistics</source>
         <translation>Statistiques</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2254"/>
+        <location filename="../qjackctlSetupForm.ui" line="2216"/>
         <source>&amp;Capture standard output</source>
         <translation>&amp;Capturer la sortie standard</translation>
     </message>
@@ -3460,22 +3460,22 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2251"/>
+        <location filename="../qjackctlSetupForm.ui" line="2213"/>
         <source>Whether to capture standard output (stdout/stderr) into messages window</source>
         <translation>Capturer la sortie standard (stdout/stderr) dans la fenêtre de messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2267"/>
+        <location filename="../qjackctlSetupForm.ui" line="2229"/>
         <source>&amp;XRUN detection regex:</source>
         <translation>Regex de détection des désynchronisations (&amp;XRUN) :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2299"/>
+        <location filename="../qjackctlSetupForm.ui" line="2261"/>
         <source>xrun of at least ([0-9|\.]+) msecs</source>
         <translation>désynchronisation (XRUN) d&apos;au moins ([0-9|\.]+) ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2292"/>
+        <location filename="../qjackctlSetupForm.ui" line="2254"/>
         <source>Regular expression used to detect XRUNs on server output messages</source>
         <translation>Expression régulière utilisée pour détecter les désynchronisations (XRUN) dans les messages de sortie du serveur</translation>
     </message>
@@ -3488,72 +3488,63 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Ignorer la première désynchronisation (XRUN) au démarrage du serveur (susceptible de se produire sur les serveurs pre-0.80.0)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2316"/>
+        <location filename="../qjackctlSetupForm.ui" line="2278"/>
         <source>Connections</source>
         <translation>Connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2467"/>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2472"/>
-        <location filename="../qjackctlSetupForm.ui" line="3984"/>
+        <location filename="../qjackctlSetupForm.ui" line="3835"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2477"/>
         <source>20</source>
-        <translation>20</translation>
+        <translation type="obsolete">20</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2482"/>
         <source>30</source>
-        <translation>30</translation>
+        <translation type="obsolete">30</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2487"/>
         <source>60</source>
-        <translation>60</translation>
+        <translation type="obsolete">60</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2492"/>
         <source>120</source>
-        <translation>120</translation>
+        <translation type="obsolete">120</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2460"/>
         <source>Time in seconds between each auto-refresh cycle</source>
-        <translation>Temps en secondes entre chaque cycle de rafraîchissement automatique</translation>
+        <translation type="obsolete">Temps en secondes entre chaque cycle de rafraîchissement automatique</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2353"/>
+        <location filename="../qjackctlSetupForm.ui" line="2315"/>
         <source>Patchbay definition file to be activated as connection persistence profile</source>
         <translation>Fichier de définition de baie de brassage à activer comme profil de persistance de connexion</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2384"/>
+        <location filename="../qjackctlSetupForm.ui" line="2346"/>
         <source>Browse for a patchbay definition file to be activated</source>
         <translation>Pointer sur un fichier de définition de baie de brassage à activer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2441"/>
         <source>&amp;Auto refresh connections Patchbay, every (secs):</source>
-        <translation>Rafraîchir &amp;automatiquement les connexions de la baie de brassage toute les (en s) :</translation>
+        <translation type="obsolete">Rafraîchir &amp;automatiquement les connexions de la baie de brassage toute les (en s) :</translation>
     </message>
     <message>
         <source>Alt+A</source>
         <translation type="obsolete">Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2438"/>
         <source>Whether to refresh the connections patchbay automatically</source>
-        <translation>Rafraîchir automatiquement les connexions de la baie de brassage</translation>
+        <translation type="obsolete">Rafraîchir automatiquement les connexions de la baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2334"/>
+        <location filename="../qjackctlSetupForm.ui" line="2296"/>
         <source>Activate &amp;Patchbay persistence:</source>
         <translation>Activer la &amp;persistance de baie de brassage :</translation>
     </message>
@@ -3562,62 +3553,62 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+L</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2331"/>
+        <location filename="../qjackctlSetupForm.ui" line="2293"/>
         <source>Whether to activate a patchbay definition for connection persistence profile.</source>
         <translation>Activer une définition de baie de brassage pour le profil de persistance de connexion.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2604"/>
+        <location filename="../qjackctlSetupForm.ui" line="2492"/>
         <source>Display</source>
         <translation>Affichage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2622"/>
+        <location filename="../qjackctlSetupForm.ui" line="2504"/>
         <source>Time Display</source>
         <translation>Horloge</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2651"/>
+        <location filename="../qjackctlSetupForm.ui" line="2794"/>
         <source>Time F&amp;ormat:</source>
         <translation>F&amp;ormat du temps :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2680"/>
+        <location filename="../qjackctlSetupForm.ui" line="2823"/>
         <source>hh:mm:ss</source>
         <translation>hh:mm:ss</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2685"/>
+        <location filename="../qjackctlSetupForm.ui" line="2828"/>
         <source>hh:mm:ss.d</source>
         <translation>hh:mm:ss.d</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2690"/>
+        <location filename="../qjackctlSetupForm.ui" line="2833"/>
         <source>hh:mm:ss.dd</source>
         <translation>hh:mm:ss.dd</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2695"/>
+        <location filename="../qjackctlSetupForm.ui" line="2838"/>
         <source>hh:mm:ss.ddd</source>
         <translation>hh:mm:ss.ddd</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2673"/>
+        <location filename="../qjackctlSetupForm.ui" line="2816"/>
         <source>The general time format on display</source>
         <translation>Format général du temps affiché</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1631"/>
+        <location filename="../qjackctlSetupForm.ui" line="1612"/>
         <source>Server Suffi&amp;x:</source>
         <translation>Suffi&amp;xe Serveur :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2719"/>
+        <location filename="../qjackctlSetupForm.ui" line="2527"/>
         <source>Transport &amp;Time Code</source>
         <translation>Code &amp;temporel (Timecode) du déplacement</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2732"/>
+        <location filename="../qjackctlSetupForm.ui" line="2540"/>
         <source>Transport &amp;BBT (bar:beat.ticks)</source>
         <translation>MT&amp;B (mesure:temps.battement) du déplacement</translation>
     </message>
@@ -3626,12 +3617,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2745"/>
+        <location filename="../qjackctlSetupForm.ui" line="2553"/>
         <source>Elapsed time since last &amp;Reset</source>
         <translation>Temps écoulé depuis la dernière &amp;réinitialisation</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2758"/>
+        <location filename="../qjackctlSetupForm.ui" line="2566"/>
         <source>Elapsed time since last &amp;XRUN</source>
         <translation>Temps écoulé depuis la dernière désynchronisation (&amp;XRUN)</translation>
     </message>
@@ -3640,150 +3631,150 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+X</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2825"/>
+        <location filename="../qjackctlSetupForm.ui" line="2614"/>
         <source>Sample front panel normal display font</source>
         <translation>Aperçu de l&apos;affichage normal</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2865"/>
+        <location filename="../qjackctlSetupForm.ui" line="2654"/>
         <source>Sample big time display font</source>
         <translation>Aperçu de la grande horloge</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2893"/>
+        <location filename="../qjackctlSetupForm.ui" line="2682"/>
         <source>Big Time display:</source>
         <translation>Grande horloge :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2912"/>
-        <location filename="../qjackctlSetupForm.ui" line="2931"/>
-        <location filename="../qjackctlSetupForm.ui" line="3064"/>
-        <location filename="../qjackctlSetupForm.ui" line="3222"/>
+        <location filename="../qjackctlSetupForm.ui" line="2701"/>
+        <location filename="../qjackctlSetupForm.ui" line="2720"/>
+        <location filename="../qjackctlSetupForm.ui" line="2921"/>
+        <location filename="../qjackctlSetupForm.ui" line="3089"/>
         <source>&amp;Font...</source>
         <translation>&amp;Police…</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2909"/>
+        <location filename="../qjackctlSetupForm.ui" line="2698"/>
         <source>Select font for front panel normal display</source>
         <translation>Sélectionner la police pour l&apos;affichage normal</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2928"/>
+        <location filename="../qjackctlSetupForm.ui" line="2717"/>
         <source>Select font for big time display</source>
         <translation>Sélectionner la police pour la grande horloge</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2947"/>
+        <location filename="../qjackctlSetupForm.ui" line="2736"/>
         <source>Normal display:</source>
         <translation>Affichage normal :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2966"/>
+        <location filename="../qjackctlSetupForm.ui" line="2755"/>
         <source>&amp;Display shiny glass light effect</source>
         <translation>&amp;Afficher un effet de vitre éclairée brillante</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2963"/>
+        <location filename="../qjackctlSetupForm.ui" line="2752"/>
         <source>Whether to enable a shiny glass light effect on the main display</source>
         <translation>Activer un effet de vitre éclairée brillante sur l&apos;affichage principal</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3000"/>
+        <location filename="../qjackctlSetupForm.ui" line="2857"/>
         <source>Messages Window</source>
         <translation>Fenêtre de messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3033"/>
+        <location filename="../qjackctlSetupForm.ui" line="2890"/>
         <source>Sample messages text font display</source>
         <translation>Aperçu de la police du texte des messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3061"/>
+        <location filename="../qjackctlSetupForm.ui" line="2918"/>
         <source>Select font for the messages text display</source>
         <translation>Sélectionner la police pour le texte des messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3099"/>
+        <location filename="../qjackctlSetupForm.ui" line="2953"/>
         <source>&amp;Messages limit:</source>
         <translation>Limite des &amp;messages :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3096"/>
+        <location filename="../qjackctlSetupForm.ui" line="2950"/>
         <source>Whether to keep a maximum number of lines in the messages window</source>
         <translation>Garder un nombre maximal de lignes dans la fenêtre de messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3122"/>
+        <location filename="../qjackctlSetupForm.ui" line="2976"/>
         <source>100</source>
         <translation>100</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3127"/>
+        <location filename="../qjackctlSetupForm.ui" line="2981"/>
         <source>250</source>
         <translation>250</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3142"/>
+        <location filename="../qjackctlSetupForm.ui" line="2996"/>
         <source>2500</source>
         <translation>2500</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3112"/>
+        <location filename="../qjackctlSetupForm.ui" line="2966"/>
         <source>The maximum number of message lines to keep in view</source>
         <translation>Nombre maximal de ligne de messages à garder dans la vue</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3164"/>
+        <location filename="../qjackctlSetupForm.ui" line="3031"/>
         <source>Connections Window</source>
         <translation>Fenêtre de connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3191"/>
+        <location filename="../qjackctlSetupForm.ui" line="3058"/>
         <source>Sample connections view font</source>
         <translation>Aperçu de la police de la vue des connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3219"/>
+        <location filename="../qjackctlSetupForm.ui" line="3086"/>
         <source>Select font for the connections view</source>
         <translation>Sélectionner la police pour la vue des connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3254"/>
+        <location filename="../qjackctlSetupForm.ui" line="3118"/>
         <source>&amp;Icon size:</source>
         <translation>Taille des &amp;icônes :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3286"/>
+        <location filename="../qjackctlSetupForm.ui" line="3150"/>
         <source>16 x 16</source>
         <translation>16 x 16</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3291"/>
+        <location filename="../qjackctlSetupForm.ui" line="3155"/>
         <source>32 x 32</source>
         <translation>32 x 32</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3296"/>
+        <location filename="../qjackctlSetupForm.ui" line="3160"/>
         <source>64 x 64</source>
         <translation>64 x 64</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3276"/>
+        <location filename="../qjackctlSetupForm.ui" line="3140"/>
         <source>The icon size for each item of the connections view</source>
         <translation>Taille de l&apos;icône pour chaque élément de la vue des connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3414"/>
+        <location filename="../qjackctlSetupForm.ui" line="3278"/>
         <source>Ena&amp;ble client/port aliases editing (rename)</source>
         <translation>Activer l&apos;é&amp;dition (renommage) des aliases de client/port</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3411"/>
+        <location filename="../qjackctlSetupForm.ui" line="3275"/>
         <source>Whether to enable in-place client/port name editing (rename)</source>
         <translation>Activer l&apos;édition (renommage)  en place des aliases de client/port</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3342"/>
+        <location filename="../qjackctlSetupForm.ui" line="3206"/>
         <source>E&amp;nable client/port aliases</source>
         <translation>Activer les aliases de client/p&amp;ort</translation>
     </message>
@@ -3792,12 +3783,12 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3339"/>
+        <location filename="../qjackctlSetupForm.ui" line="3203"/>
         <source>Whether to enable client/port name aliases on the connections window</source>
         <translation>Activer les aliases de client/port dans la fenêtre de connexions</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3326"/>
+        <location filename="../qjackctlSetupForm.ui" line="3190"/>
         <source>Draw connection and patchbay lines as Be&amp;zier curves</source>
         <translation>Dessiner les lignes de connexion et de baie de brassage en courbes de Be&amp;zier</translation>
     </message>
@@ -3806,52 +3797,52 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+Z</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3323"/>
+        <location filename="../qjackctlSetupForm.ui" line="3187"/>
         <source>Whether to draw connection lines as cubic Bezier curves</source>
         <translation>Dessiner les lignes de connexion et de baie de brassage en courbes de Bezier cubiques</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3454"/>
+        <location filename="../qjackctlSetupForm.ui" line="3305"/>
         <source>Misc</source>
         <translation>Divers</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3472"/>
+        <location filename="../qjackctlSetupForm.ui" line="3323"/>
         <source>Other</source>
         <translation>Autres</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3504"/>
+        <location filename="../qjackctlSetupForm.ui" line="3355"/>
         <source>&amp;Start JACK audio server on application startup</source>
         <translation>&amp;Démarrer le serveur audio JACK au démarrage de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3501"/>
+        <location filename="../qjackctlSetupForm.ui" line="3352"/>
         <source>Whether to start JACK audio server immediately on application startup</source>
         <translation>Démarrer le serveur audio JACK immédiatement au démarrage de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3520"/>
+        <location filename="../qjackctlSetupForm.ui" line="3371"/>
         <source>&amp;Confirm application close</source>
         <translation>&amp;Confirmer la fermeture de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3517"/>
+        <location filename="../qjackctlSetupForm.ui" line="3368"/>
         <source>Whether to ask for confirmation on application exit</source>
         <translation>Demander une confimation lors de la sortie de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3537"/>
+        <location filename="../qjackctlSetupForm.ui" line="3388"/>
         <source>&amp;Keep child windows always on top</source>
         <translation>&amp;Garder les fenêtres filles au premier plan</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3534"/>
+        <location filename="../qjackctlSetupForm.ui" line="3385"/>
         <source>Whether to keep all child windows on top of the main window</source>
         <translation>Garder les fenêtres filles au dessus de la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3553"/>
+        <location filename="../qjackctlSetupForm.ui" line="3404"/>
         <source>&amp;Enable system tray icon</source>
         <translation>Activ&amp;er l&apos;icône de notification système</translation>
     </message>
@@ -3860,67 +3851,67 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+E</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3550"/>
+        <location filename="../qjackctlSetupForm.ui" line="3401"/>
         <source>Whether to enable the system tray icon</source>
         <translation>Activer l&apos;icône de notification système</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3601"/>
+        <location filename="../qjackctlSetupForm.ui" line="3452"/>
         <source>&amp;Delay window positioning at startup</source>
         <translation>&amp;Retarder le positionnement de la fenêtre au démarrage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3598"/>
+        <location filename="../qjackctlSetupForm.ui" line="3449"/>
         <source>Whether to delay window positioning at application startup</source>
         <translation>Retarder le positionnement de la fenêtre au démarrage de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3643"/>
+        <location filename="../qjackctlSetupForm.ui" line="3494"/>
         <source>S&amp;ave JACK audio server configuration to:</source>
         <translation>&amp;Enregistrer la configuration du serveur audio JACK dans :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3640"/>
+        <location filename="../qjackctlSetupForm.ui" line="3491"/>
         <source>Whether to save the JACK server command-line configuration into a local file (auto-start)</source>
         <translation>Enregistrer la configuration en ligne de commande du serveur JACK dans un fichier local (démarrage automatique)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3663"/>
+        <location filename="../qjackctlSetupForm.ui" line="3514"/>
         <source>.jackdrc</source>
         <translation>.jackdrc</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3656"/>
+        <location filename="../qjackctlSetupForm.ui" line="3507"/>
         <source>The server configuration local file name (auto-start)</source>
         <translation>Nom du fichier local de configuration du serveur (démarrage automatique)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3680"/>
+        <location filename="../qjackctlSetupForm.ui" line="3531"/>
         <source>C&amp;onfigure as temporary server</source>
         <translation>C&amp;onfigurer comme serveur temporaire</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3677"/>
+        <location filename="../qjackctlSetupForm.ui" line="3528"/>
         <source>Whether to exit once all clients have closed (auto-start)</source>
         <translation>Sortir dès que tous les clients ont fermé (démarrage automatique)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3696"/>
+        <location filename="../qjackctlSetupForm.ui" line="3547"/>
         <source>Confirm server sh&amp;utdown</source>
         <translation>Confirmer l&apos;e&amp;xtinction du serveur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3693"/>
+        <location filename="../qjackctlSetupForm.ui" line="3544"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown</source>
         <translation>Demander un confirmation à l&apos;extinction du serveur audio JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3788"/>
+        <location filename="../qjackctlSetupForm.ui" line="3639"/>
         <source>Buttons</source>
         <translation>Boutons</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3820"/>
+        <location filename="../qjackctlSetupForm.ui" line="3671"/>
         <source>Hide main window &amp;Left buttons</source>
         <translation>Cacher les boutons de &amp;gauche de la fenêtre principale</translation>
     </message>
@@ -3929,37 +3920,37 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Alt+G</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3817"/>
+        <location filename="../qjackctlSetupForm.ui" line="3668"/>
         <source>Whether to hide the left button group on the main window</source>
         <translation>Cacher le groupe de bouton de gauche sur la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3836"/>
+        <location filename="../qjackctlSetupForm.ui" line="3687"/>
         <source>Hide main window &amp;Right buttons</source>
         <translation>Cacher les boutons de &amp;droite de la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3833"/>
+        <location filename="../qjackctlSetupForm.ui" line="3684"/>
         <source>Whether to hide the right button group on the main window</source>
         <translation>Cacher le groupe de bouton de droite sur la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3852"/>
+        <location filename="../qjackctlSetupForm.ui" line="3703"/>
         <source>Hide main window &amp;Transport buttons</source>
         <translation>Cacher les boutons de &amp;déplacement de la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3849"/>
+        <location filename="../qjackctlSetupForm.ui" line="3700"/>
         <source>Whether to hide the transport button group on the main window</source>
         <translation>Cacher le groupe de bouton de déplacement sur la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3868"/>
+        <location filename="../qjackctlSetupForm.ui" line="3719"/>
         <source>Hide main window &amp;button text labels</source>
         <translation>Cacher le texte des &amp;boutons de la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3865"/>
+        <location filename="../qjackctlSetupForm.ui" line="3716"/>
         <source>Whether to hide the text labels on the main window buttons</source>
         <translation>Cacher le texte des boutons sur la fenêtre principale</translation>
     </message>
@@ -3972,9 +3963,9 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="834"/>
-        <location filename="../qjackctlSetupForm.cpp" line="886"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1727"/>
+        <location filename="../qjackctlSetupForm.cpp" line="814"/>
+        <location filename="../qjackctlSetupForm.cpp" line="866"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1698"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -4003,82 +3994,82 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Êtes vous certain?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="920"/>
+        <location filename="../qjackctlSetupForm.cpp" line="900"/>
         <source>msec</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="922"/>
+        <location filename="../qjackctlSetupForm.cpp" line="902"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1261"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1236"/>
         <source>&amp;Preset Name</source>
         <translation>&amp;Nom du préréglage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1263"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1238"/>
         <source>&amp;Server Name</source>
         <translation>Nom du &amp;serveur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1264"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1239"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Chemin du serveur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1265"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1240"/>
         <source>&amp;Driver</source>
         <translation>Pilot&amp;e</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1266"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1241"/>
         <source>&amp;Interface</source>
         <translation>&amp;Interface</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1268"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1243"/>
         <source>Sample &amp;Rate</source>
         <translation>&amp;Fréquence d&apos;échantillonnage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1269"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1244"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Échantillons/Période</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1270"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1245"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Périodes/&amp;Tampon</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1318"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1293"/>
         <source>Startup Script</source>
         <translation>Script de démarrage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1335"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1310"/>
         <source>Post-Startup Script</source>
         <translation>Script post-démarrage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1352"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1327"/>
         <source>Shutdown Script</source>
         <translation>Script d&apos;extinction</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1369"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1344"/>
         <source>Post-Shutdown Script</source>
         <translation>Script post-extinction</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1388"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1363"/>
         <source>Patchbay Definition files</source>
         <translation>Fichiers de définition de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1386"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1361"/>
         <source>Active Patchbay Definition</source>
         <translation>Définition de baie de brassage à activer</translation>
     </message>
@@ -4095,59 +4086,59 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="obsolete">Appliquer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="298"/>
+        <location filename="../qjackctlSetupForm.ui" line="285"/>
         <source>The audio backend driver interface to use</source>
         <translation>Le pilote d&apos;interface audio à utiliser</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="534"/>
+        <location filename="../qjackctlSetupForm.ui" line="521"/>
         <source>&amp;Verbose messages</source>
         <translation>Messages ba&amp;vards</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1555"/>
+        <location filename="../qjackctlSetupForm.ui" line="1536"/>
         <source>MIDI Driv&amp;er:</source>
         <translation>Pilot&amp;e MIDI :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1584"/>
+        <location filename="../qjackctlSetupForm.ui" line="1565"/>
         <source>none</source>
         <translation>aucun</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1589"/>
+        <location filename="../qjackctlSetupForm.ui" line="1570"/>
         <source>raw</source>
         <translation>brut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1594"/>
+        <location filename="../qjackctlSetupForm.ui" line="1575"/>
         <source>seq</source>
         <translation>seq</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1577"/>
+        <location filename="../qjackctlSetupForm.ui" line="1558"/>
         <source>The ALSA MIDI backend driver to use</source>
         <translation>Le pilote ALSA MIDI à utiliser</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="214"/>
+        <location filename="../qjackctlSetupForm.ui" line="201"/>
         <source>jackdmp</source>
         <translation>jackdmp</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="340"/>
+        <location filename="../qjackctlSetupForm.ui" line="327"/>
         <source>firewire</source>
         <translation>firewire</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1174"/>
-        <location filename="../qjackctlSetupForm.ui" line="1348"/>
-        <location filename="../qjackctlSetupForm.ui" line="1411"/>
+        <location filename="../qjackctlSetupForm.ui" line="1155"/>
+        <location filename="../qjackctlSetupForm.ui" line="1329"/>
+        <location filename="../qjackctlSetupForm.ui" line="1392"/>
         <source>plughw:0</source>
         <translation>plughw:0</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="835"/>
+        <location filename="../qjackctlSetupForm.cpp" line="815"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -4160,7 +4151,7 @@ Do you want to save the changes?</source>
 Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="887"/>
+        <location filename="../qjackctlSetupForm.cpp" line="867"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -4173,7 +4164,7 @@ Are you sure?</source>
 Êtes-vous certain?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1728"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1699"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4182,139 +4173,139 @@ Do you want to apply the changes?</source>
 Voulez-vous appliquer les changements?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1404"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1379"/>
         <source>Messages Log</source>
         <translation>Journal des messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1406"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1381"/>
         <source>Log files</source>
         <translation>Fichiers du journal</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="310"/>
+        <location filename="../qjackctlSetupForm.ui" line="297"/>
         <source>sun</source>
         <translation>sun</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="350"/>
+        <location filename="../qjackctlSetupForm.ui" line="337"/>
         <source>netone</source>
         <translation>netone</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1179"/>
-        <location filename="../qjackctlSetupForm.ui" line="1353"/>
-        <location filename="../qjackctlSetupForm.ui" line="1416"/>
+        <location filename="../qjackctlSetupForm.ui" line="1160"/>
+        <location filename="../qjackctlSetupForm.ui" line="1334"/>
+        <location filename="../qjackctlSetupForm.ui" line="1397"/>
         <source>/dev/audio</source>
         <translation>/dev/audio</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="725"/>
+        <location filename="../qjackctlSetupForm.ui" line="709"/>
         <source>&amp;Channels:</source>
         <translation>&amp;Canaux :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="202"/>
+        <location filename="../qjackctlSetupForm.ui" line="189"/>
         <source>Server path (command line prefix)</source>
         <translation>Chemin serveur (préfixe de ligne de commande)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1018"/>
+        <location filename="../qjackctlSetupForm.ui" line="1002"/>
         <source>Maximum number of audio channels to allocate</source>
         <translation>Nombre maximal de canaux audio à allouer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1435"/>
+        <location filename="../qjackctlSetupForm.ui" line="1416"/>
         <source>&amp;Channels I/O:</source>
         <translation>&amp;Canaux E/S :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1495"/>
+        <location filename="../qjackctlSetupForm.ui" line="1476"/>
         <source>&amp;Latency I/O:</source>
         <translation>&amp;Latence E/S :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2509"/>
+        <location filename="../qjackctlSetupForm.ui" line="2410"/>
         <source>Logging</source>
         <translation>Journalisation</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2546"/>
+        <location filename="../qjackctlSetupForm.ui" line="2447"/>
         <source>Messages log file</source>
         <translation>Fichier de journal des messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2577"/>
+        <location filename="../qjackctlSetupForm.ui" line="2478"/>
         <source>Browse for the messages log file location</source>
         <translation>Pointer sur l&apos;emplacement du fichier de journal des messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2524"/>
+        <location filename="../qjackctlSetupForm.ui" line="2425"/>
         <source>Whether to activate a messages logging to file.</source>
         <translation>Activer la journalisation des messages dans un fichier.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="177"/>
+        <location filename="../qjackctlSetupForm.ui" line="164"/>
         <source>Server &amp;Prefix:</source>
         <translation>&amp;Préfixe Serveur :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1656"/>
+        <location filename="../qjackctlSetupForm.ui" line="1637"/>
         <source>Extra driver options (command line suffix)</source>
         <translation>Options supplémentaires du pilote (Suffixe de ligne de commande)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1672"/>
+        <location filename="../qjackctlSetupForm.ui" line="1653"/>
         <source>Start De&amp;lay:</source>
         <translation>&amp;Retard du démarrage :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1697"/>
+        <location filename="../qjackctlSetupForm.ui" line="1678"/>
         <source> secs</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1756"/>
+        <location filename="../qjackctlSetupForm.ui" line="1737"/>
         <source>0 msecs</source>
         <translation>0 ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2527"/>
+        <location filename="../qjackctlSetupForm.ui" line="2428"/>
         <source>&amp;Messages log file:</source>
         <translation>Fichier de journal des &amp;messages :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2979"/>
+        <location filename="../qjackctlSetupForm.ui" line="2768"/>
         <source>Whether to enable blinking (flashing) of the server mode (RT) indicator</source>
         <translation>Activer le clignotement de l&apos;indicateur de mode serveur (TR)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2982"/>
+        <location filename="../qjackctlSetupForm.ui" line="2771"/>
         <source>Blin&amp;k server mode indicator</source>
         <translation>&amp;Clignotement de l&apos;indicateur de mode serveur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3355"/>
+        <location filename="../qjackctlSetupForm.ui" line="3219"/>
         <source>&amp;JACK client/port aliases:</source>
         <translation>Alias de client/port &amp;JACK :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3377"/>
+        <location filename="../qjackctlSetupForm.ui" line="3241"/>
         <source>JACK client/port aliases display mode</source>
         <translation>Mode d&apos;affichage des alias de client/port JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3387"/>
+        <location filename="../qjackctlSetupForm.ui" line="3251"/>
         <source>Default</source>
         <translation>Par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3392"/>
+        <location filename="../qjackctlSetupForm.ui" line="3256"/>
         <source>First</source>
         <translation>Premier</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3397"/>
+        <location filename="../qjackctlSetupForm.ui" line="3261"/>
         <source>Second</source>
         <translation>Deuxième</translation>
     </message>
@@ -4323,147 +4314,147 @@ Voulez-vous appliquer les changements?</translation>
         <translation type="obsolete">Alt+Q</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3582"/>
+        <location filename="../qjackctlSetupForm.ui" line="3433"/>
         <source>Whether to start minimized to system tray</source>
         <translation>Démarrer minimisé dans la zone de notification système</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3427"/>
+        <location filename="../qjackctlSetupForm.ui" line="3291"/>
         <source>JACK client/port pretty-name (metadata) display mode</source>
         <translation>Activer le mode d&apos;affichage « joli-nom » (métadonnées) de client/port JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2400"/>
+        <location filename="../qjackctlSetupForm.ui" line="2362"/>
         <source>Whether to reset all connections when a patchbay definition is activated.</source>
         <translation>Réinitialiser ou non toutes les connexions quand une définition de baie de brassage est activée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2403"/>
+        <location filename="../qjackctlSetupForm.ui" line="2365"/>
         <source>&amp;Reset all connections on patchbay activation</source>
         <translation>&amp;Réinitialiser toutes les connections à l&apos;activation d&apos;une baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2416"/>
+        <location filename="../qjackctlSetupForm.ui" line="2378"/>
         <source>Whether to issue a warning on active patchbay port disconnections.</source>
         <translation>Afficher ou non une alerte lors des déconnexions de port faisant partie d&apos;une baie de brassage active.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2419"/>
+        <location filename="../qjackctlSetupForm.ui" line="2381"/>
         <source>&amp;Warn on active patchbay disconnections</source>
         <translation>A&amp;lerter lors des déconnexions sur la baie de brassage active</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3430"/>
+        <location filename="../qjackctlSetupForm.ui" line="3294"/>
         <source>Enable JA&amp;CK client/port pretty-names (metadata)</source>
         <translation>Activer les « jolis-noms » (métadonnées) de client/port JA&amp;CK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3566"/>
+        <location filename="../qjackctlSetupForm.ui" line="3417"/>
         <source>Whether to show system tray message on main window close</source>
         <translation>Afficher on non les messages de la zone de notification système lors de la fermeture de la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3569"/>
+        <location filename="../qjackctlSetupForm.ui" line="3420"/>
         <source>Sho&amp;w system tray message on close</source>
         <translation>A&amp;fficher les messages de la zone de notification lors de la fermeture de la fenêtre</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3585"/>
+        <location filename="../qjackctlSetupForm.ui" line="3436"/>
         <source>Start minimi&amp;zed to system tray</source>
         <translation>Démarrer minimisé dans la &amp;zone de notification système</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3614"/>
+        <location filename="../qjackctlSetupForm.ui" line="3465"/>
         <source>Whether to restrict to one single application instance (X11)</source>
         <translation>Restreindre à une seule instance de l&apos;application (X11)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3617"/>
+        <location filename="../qjackctlSetupForm.ui" line="3468"/>
         <source>Single application &amp;instance</source>
         <translation>&amp;Instance d&apos;application unique</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3709"/>
+        <location filename="../qjackctlSetupForm.ui" line="3560"/>
         <source>Whether to enable ALSA Sequencer (MIDI) support on startup</source>
         <translation>Activer la prise en charge du séquenceur ALSA (MIDI) au démarrage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3712"/>
+        <location filename="../qjackctlSetupForm.ui" line="3563"/>
         <source>E&amp;nable ALSA Sequencer support</source>
         <translation>Activer la prise e&amp;n charge du séquenceur ALSA</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3741"/>
+        <location filename="../qjackctlSetupForm.ui" line="3592"/>
         <source>Whether to stop JACK audio server on application exit</source>
         <translation>Arrêter le serveur audio JACK lors de la sortie de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3744"/>
+        <location filename="../qjackctlSetupForm.ui" line="3595"/>
         <source>S&amp;top JACK audio server on application exit</source>
         <translation>Arrêter le &amp;serveur audio JACK lors de la sortie de l&apos;application</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3899"/>
+        <location filename="../qjackctlSetupForm.ui" line="3750"/>
         <source>Defaults</source>
         <translation>Par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3933"/>
+        <location filename="../qjackctlSetupForm.ui" line="3784"/>
         <source>&amp;Base font size:</source>
         <translation>Taille de police de &amp;base :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3952"/>
+        <location filename="../qjackctlSetupForm.ui" line="3803"/>
         <source>Base application font size (pt.)</source>
         <translation>Taille de base de police de l&apos;application (pt.)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3964"/>
+        <location filename="../qjackctlSetupForm.ui" line="3815"/>
         <source>6</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3969"/>
+        <location filename="../qjackctlSetupForm.ui" line="3820"/>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3974"/>
+        <location filename="../qjackctlSetupForm.ui" line="3825"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3979"/>
+        <location filename="../qjackctlSetupForm.ui" line="3830"/>
         <source>9</source>
         <translation>9</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3989"/>
+        <location filename="../qjackctlSetupForm.ui" line="3840"/>
         <source>11</source>
         <translation>11</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3994"/>
+        <location filename="../qjackctlSetupForm.ui" line="3845"/>
         <source>12</source>
         <translation>12</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="345"/>
+        <location filename="../qjackctlSetupForm.ui" line="332"/>
         <source>net</source>
         <translation>net</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3725"/>
+        <location filename="../qjackctlSetupForm.ui" line="3576"/>
         <source>Whether to enable D-Bus interface</source>
         <translation>Activer l&apos;interface D-Bus</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3728"/>
+        <location filename="../qjackctlSetupForm.ui" line="3579"/>
         <source>&amp;Enable D-Bus interface</source>
         <translation>Activ&amp;er l&apos;interface D-Bus</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="754"/>
+        <location filename="../qjackctlSetupForm.ui" line="738"/>
         <source>Number of microseconds to wait between engine processes (dummy)</source>
         <translation>Nombre de microsecondes à attendre entre les traitements du moteur (factice)</translation>
     </message>

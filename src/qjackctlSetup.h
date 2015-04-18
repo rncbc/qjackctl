@@ -140,10 +140,6 @@ public:
 	QString sActivePatchbayPath;
 	bool    bActivePatchbayReset;
 	bool    bQueryDisconnect;
-#ifdef CONFIG_AUTO_REFRESH
-	bool    bAutoRefresh;
-	int     iTimeRefresh;
-#endif
 	bool    bMessagesLog;
 	QString sMessagesLogPath;
 	bool    bBezierLines;

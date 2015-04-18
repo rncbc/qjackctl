@@ -96,10 +96,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 		new QIntValidator(m_ui.WordLengthComboBox));
 	m_ui.TimeoutComboBox->setValidator(
 		new QIntValidator(m_ui.TimeoutComboBox));
-#ifdef CONFIG_AUTO_REFRESH
-	m_ui.TimeRefreshComboBox->setValidator(
-		new QIntValidator(m_ui.TimeRefreshComboBox));
-#endif
 	m_ui.PortMaxComboBox->setValidator(
 		new QIntValidator(m_ui.PortMaxComboBox));
 	m_ui.MessagesLimitLinesComboBox->setValidator(
@@ -298,14 +294,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.QueryDisconnectCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
-#ifdef CONFIG_AUTO_REFRESH
-	QObject::connect(m_ui.AutoRefreshCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
-	QObject::connect(m_ui.TimeRefreshComboBox,
-		SIGNAL(editTextChanged(const QString&)),
-		SLOT(optionsChanged()));
-#endif
 	QObject::connect(m_ui.MessagesLogCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -524,14 +512,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->sActivePatchbayPath);
 	m_ui.ActivePatchbayResetCheckBox->setChecked(m_pSetup->bActivePatchbayReset);
 	m_ui.QueryDisconnectCheckBox->setChecked(m_pSetup->bQueryDisconnect);
-#ifdef CONFIG_AUTO_REFRESH
-	m_ui.AutoRefreshCheckBox->setChecked(m_pSetup->bAutoRefresh);
-	setComboBoxCurrentText(m_ui.TimeRefreshComboBox,
-		QString::number(m_pSetup->iTimeRefresh));
-#else
-	m_ui.AutoRefreshCheckBox->setVisible(false);
-	m_ui.TimeRefreshComboBox->setVisible(false);
-#endif
 	m_ui.MessagesLogCheckBox->setChecked(m_pSetup->bMessagesLog);
 	setComboBoxCurrentText(m_ui.MessagesLogPathComboBox,
 		m_pSetup->sMessagesLogPath);
@@ -1122,11 +1102,6 @@ void qjackctlSetupForm::stabilizeForm (void)
 		bValid = (!sPath.isEmpty() && QFileInfo(sPath).exists());
 	}
 
-#ifdef CONFIG_AUTO_REFRESH
-	m_ui.TimeRefreshComboBox->setEnabled(
-		m_ui.AutoRefreshCheckBox->isChecked());
-#endif
-
 	bEnabled = m_ui.MessagesLogCheckBox->isChecked();
 	m_ui.MessagesLogPathComboBox->setEnabled(bEnabled);
 	m_ui.MessagesLogPathToolButton->setEnabled(bEnabled);
@@ -1570,10 +1545,6 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->sActivePatchbayPath      = m_ui.ActivePatchbayPathComboBox->currentText();
 		m_pSetup->bActivePatchbayReset     = m_ui.ActivePatchbayResetCheckBox->isChecked();
 		m_pSetup->bQueryDisconnect         = m_ui.QueryDisconnectCheckBox->isChecked();
-#ifdef CONFIG_AUTO_REFRESH
-		m_pSetup->bAutoRefresh             = m_ui.AutoRefreshCheckBox->isChecked();
-		m_pSetup->iTimeRefresh             = m_ui.TimeRefreshComboBox->currentText().toInt();
-#endif
 		m_pSetup->bMessagesLog             = m_ui.MessagesLogCheckBox->isChecked();
 		m_pSetup->sMessagesLogPath         = m_ui.MessagesLogPathComboBox->currentText();
 		m_pSetup->bBezierLines             = m_ui.BezierLinesCheckBox->isChecked();
