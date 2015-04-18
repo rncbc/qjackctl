@@ -6,7 +6,9 @@ ChangeLog
 
 GIT HEAD
 
-- Got rid of old patchbay auto-refresh cruft, already disabled.
+- Setup/settings dialog tab is going into some layout changes;
+  also rid of old patchbay auto-refresh timer cruft, previously
+  hidden/disabled.
 
 - New socket names are now automatically inferred from selected
   client names while on the Patchbay widget, Socket dialog.
