@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 QjackCtl is a simple Qt application to control the JACK sound server
 (http://jackaudio.org), for the Linux Audio infrastructure.
 
-Written in C++ around the Qt4 toolkit for X11, most exclusively using
+Written in C++ around the Qt framework for X11, most exclusively using
 Qt Designer.
 
 Provides a simple GUI dialog for setting several JACK server parameters,
@@ -25,9 +25,9 @@ The software requirements for build and runtime are listed as follows:
 
   Mandatory:
 
-  - Qt4 (core, gui, xml), C++ class library and tools for
-        crossplatform development and internationalization
-        http://qt-project.org/
+  - Qt framework, C++ class library and tools for
+        cross-platform application and UI development
+        http://qt.io/
 
   - JACK Audio Connection Kit
         http://jackaudio.org/
