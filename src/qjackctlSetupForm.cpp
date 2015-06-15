@@ -382,9 +382,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.StartMinimizedCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
-	QObject::connect(m_ui.DelayedSetupCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
 	QObject::connect(m_ui.SingletonCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -592,7 +589,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
 	m_ui.SystemTrayQueryCloseCheckBox->setChecked(m_pSetup->bSystemTrayQueryClose);
 	m_ui.StartMinimizedCheckBox->setChecked(m_pSetup->bStartMinimized);
-	m_ui.DelayedSetupCheckBox->setChecked(m_pSetup->bDelayedSetup);
 	m_ui.SingletonCheckBox->setChecked(m_pSetup->bSingleton);
 	m_ui.ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
 	setComboBoxCurrentText(m_ui.ServerConfigNameComboBox,
@@ -1142,9 +1138,6 @@ void qjackctlSetupForm::stabilizeForm (void)
 	m_ui.AliasesEditingCheckBox->setEnabled(
 		m_ui.AliasesEnabledCheckBox->isChecked());
 
-	m_ui.DelayedSetupCheckBox->setEnabled(
-		!m_ui.StartMinimizedCheckBox->isChecked());
-
 #if !defined(Q_WS_X11)
 	m_ui.SingletonCheckBox->setEnabled(false);
 #endif
@@ -1513,7 +1506,6 @@ void qjackctlSetupForm::accept (void)
 		const bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
 		const bool    bOldKeepOnTop           = m_pSetup->bKeepOnTop;
 		const bool    bOldSystemTray          = m_pSetup->bSystemTray;
-		const bool    bOldDelayedSetup        = m_pSetup->bDelayedSetup;
 		const int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
 		const int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
 		const bool    bOldBezierLines         = m_pSetup->bBezierLines;
@@ -1569,7 +1561,6 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();
 		m_pSetup->bSystemTrayQueryClose    = m_ui.SystemTrayQueryCloseCheckBox->isChecked();
 		m_pSetup->bStartMinimized          = m_ui.StartMinimizedCheckBox->isChecked();
-		m_pSetup->bDelayedSetup            = m_ui.DelayedSetupCheckBox->isChecked();
 		m_pSetup->bSingleton               = m_ui.SingletonCheckBox->isChecked();
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
@@ -1642,8 +1633,6 @@ void qjackctlSetupForm::accept (void)
 			(!bOldStdoutCapture  &&  m_pSetup->bStdoutCapture)  ||
 			( bOldKeepOnTop      && !m_pSetup->bKeepOnTop)      ||
 			(!bOldKeepOnTop      &&  m_pSetup->bKeepOnTop)      ||
-			( bOldDelayedSetup   && !m_pSetup->bDelayedSetup)   ||
-			(!bOldDelayedSetup   &&  m_pSetup->bDelayedSetup)   ||
 			( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
 			(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled) ||
 			( bOldDBusEnabled    && !m_pSetup->bDBusEnabled)    ||

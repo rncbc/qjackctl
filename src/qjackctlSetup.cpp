@@ -111,7 +111,6 @@ void qjackctlSetup::loadSetup (void)
 	bSystemTray              = m_settings.value("/SystemTray", false).toBool();
 	bSystemTrayQueryClose    = m_settings.value("/SystemTrayQueryClose", true).toBool();
 	bStartMinimized          = m_settings.value("/StartMinimized", false).toBool();
-	bDelayedSetup            = m_settings.value("/DelayedSetup", false).toBool();
 	bServerConfig            = m_settings.value("/ServerConfig", true).toBool();
 	sServerConfigName        = m_settings.value("/ServerConfigName", ".jackdrc").toString();
 	bServerConfigTemp        = m_settings.value("/ServerConfigTemp", false).toBool();
@@ -224,7 +223,6 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/SystemTray",              bSystemTray);
 	m_settings.setValue("/SystemTrayQueryClose",    bSystemTrayQueryClose);
 	m_settings.setValue("/StartMinimized",          bStartMinimized);
-	m_settings.setValue("/DelayedSetup",            bDelayedSetup);
 	m_settings.setValue("/ServerConfig",            bServerConfig);
 	m_settings.setValue("/ServerConfigName",        sServerConfigName);
 	m_settings.setValue("/ServerConfigTemp",        bServerConfigTemp);
@@ -691,17 +689,34 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 {
 	// Try to restore old form window positioning.
 	if (pWidget) {
-		QPoint wpos;
-		QSize  wsize;
 		m_settings.beginGroup("/Geometry/" + pWidget->objectName());
-		wpos.setX(m_settings.value("/x", -1).toInt());
-		wpos.setY(m_settings.value("/y", -1).toInt());
-		wsize.setWidth(m_settings.value("/width", -1).toInt());
-		wsize.setHeight(m_settings.value("/height", -1).toInt());
-		if (!bVisible) bVisible = m_settings.value("/visible", false).toBool();
+		const QByteArray& geometry
+			= m_settings.value("/geometry").toByteArray();
+		if (!geometry.isEmpty()) {
+			pWidget->restoreGeometry(geometry);
+		} else {
+		#if 1//--LOAD_OLD_GEOMETRY
+			QPoint wpos;
+			QSize  wsize;
+			wpos.setX(m_settings.value("/x", -1).toInt());
+			wpos.setY(m_settings.value("/y", -1).toInt());
+			wsize.setWidth(m_settings.value("/width", -1).toInt());
+			wsize.setHeight(m_settings.value("/height", -1).toInt());
+			if (wpos.x() > 0 && wpos.y() > 0)
+				pWidget->move(wpos);
+			if (wsize.width() > 0 && wsize.height() > 0)
+				pWidget->resize(wsize);
+			else
+		#endif
+			pWidget->adjustSize();
+		}
+		if (!bVisible)
+			bVisible = m_settings.value("/visible", false).toBool();
+		if (bVisible && !bStartMinimized)
+			pWidget->show();
+		else
+			pWidget->hide();
 		m_settings.endGroup();
-		new qjackctlDelayedSetup(pWidget, wpos, wsize,
-			bVisible && !bStartMinimized, (bDelayedSetup ? 1000 : 0));
 	}
 }
 
@@ -713,52 +728,19 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bVisible )
 	// only save the form geometry while its up and visible)
 	if (pWidget) {
 		m_settings.beginGroup("/Geometry/" + pWidget->objectName());
+	#if 0//--SAVE_OLD_GEOMETRY
 		const QPoint& wpos  = pWidget->pos();
 		const QSize&  wsize = pWidget->size();
-		if (!bVisible) bVisible = pWidget->isVisible();
 		m_settings.setValue("/x", wpos.x());
 		m_settings.setValue("/y", wpos.y());
 		m_settings.setValue("/width", wsize.width());
 		m_settings.setValue("/height", wsize.height());
+	#endif
+		m_settings.setValue("/geometry", pWidget->saveGeometry());
+		if (!bVisible) bVisible = pWidget->isVisible();
 		m_settings.setValue("/visible", bVisible && !bStartMinimized);
 		m_settings.endGroup();
 	}
-}
-
-
-//---------------------------------------------------------------------------
-// Delayed setup option.
-
-// Delayed widget setup helper class.
-qjackctlDelayedSetup::qjackctlDelayedSetup ( QWidget *pWidget,
-	const QPoint& pos, const QSize& size, bool bVisible, int iDelay )
-	: m_pos(pos), m_size(size)
-{
-	m_pWidget  = pWidget;
-	m_bVisible = bVisible;
-
-	if (iDelay > 0) {
-		QTimer::singleShot(iDelay, this, SLOT(setup()));
-	} else {
-		setup();
-	}
-}
-
-
-void qjackctlDelayedSetup::setup (void)
-{
-	if (m_pWidget) {
-		if (m_pos.x() > 0 && m_pos.y() > 0)
-			m_pWidget->move(m_pos);
-		if (m_size.width() > 0 && m_size.height() > 0)
-			m_pWidget->resize(m_size);
-		else
-			m_pWidget->adjustSize();
-		if (m_bVisible)
-			m_pWidget->show();
-	}
-
-	deleteLater();
 }
 
 

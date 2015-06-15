@@ -6,6 +6,12 @@ ChangeLog
 
 GIT HEAD
 
+- A new top-level widget window geometry state save and restore
+  sub-routine is now in effect (EXPERIMENTAL).
+
+- Delayed geometry setup for widget windows upon startup has
+  been deprecated and scrapped altogether.
+
 - Setup/settings dialog tab is going into some layout changes;
   also got rid of old patchbay auto-refresh timer cruft, which
   was previously hidden/disabled.

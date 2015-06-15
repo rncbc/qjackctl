@@ -3438,22 +3438,6 @@
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="DelayedSetupCheckBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Whether to delay window positioning at application startup</string>
-              </property>
-              <property name="text">
-               <string>&amp;Delay window positioning at startup</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QCheckBox" name="SingletonCheckBox">
               <property name="font">
                <font>
@@ -3963,7 +3947,6 @@
   <tabstop>SystemTrayCheckBox</tabstop>
   <tabstop>SystemTrayQueryCloseCheckBox</tabstop>
   <tabstop>StartMinimizedCheckBox</tabstop>
-  <tabstop>DelayedSetupCheckBox</tabstop>
   <tabstop>SingletonCheckBox</tabstop>
   <tabstop>ServerConfigCheckBox</tabstop>
   <tabstop>ServerConfigNameComboBox</tabstop>

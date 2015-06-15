@@ -24,10 +24,11 @@
 
 #include "qjackctlConnectAlias.h"
 
-#include <QWidget>
+#include <QStringList>
 
 
 // Forward declarations.
+class QWidget;
 class QComboBox;
 class QSplitter;
 
@@ -161,7 +162,6 @@ public:
 	bool    bSystemTray;
 	bool    bSystemTrayQueryClose;
 	bool    bStartMinimized;
-	bool    bDelayedSetup;
 	bool    bServerConfig;
 	QString sServerConfigName;
 	bool    bServerConfigTemp;
@@ -223,30 +223,6 @@ private:
 
 	// Our proper settings profile.
 	QSettings m_settings;
-};
-
-
-// Delayed widget setup helper class.
-class qjackctlDelayedSetup : public QObject
-{
-	Q_OBJECT
-
-public:
-
-	// Constructor.
-	qjackctlDelayedSetup(QWidget *pWidget,
-		const QPoint& pos, const QSize& size, bool bVisible, int iDelay = 0);
-
-protected slots:
-
-	void setup();
-
-private:
-
-	QWidget *m_pWidget;
-	QPoint   m_pos;
-	QSize    m_size;
-	bool     m_bVisible;
 };
 
 
