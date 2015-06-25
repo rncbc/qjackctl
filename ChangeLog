@@ -7,7 +7,7 @@ ChangeLog
 GIT HEAD
 
 - Most advanced Setup/Settings are moved into new Setup/Advanced
-  settings tab (patch by Robin Gareus, thanks).
+  settings tab (after a patch by Robin Gareus, thanks).
 
 - A new top-level widget window geometry state save and restore
   sub-routine is now in effect (EXPERIMENTAL).

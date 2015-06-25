@@ -116,10 +116,10 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SLOT(deleteCurrentPreset()));
 
 	QObject::connect(m_ui.DriverComboBox,
-		SIGNAL(highlighted(const QString&)),
-		SLOT(changeDriver(const QString&)));
+		SIGNAL(activated(int)),
+		SLOT(changeDriver(int)));
 	QObject::connect(m_ui.AudioComboBox,
-		SIGNAL(highlighted(int)),
+		SIGNAL(activated(int)),
 		SLOT(changeAudio(int)));
 	QObject::connect(m_ui.ServerPrefixComboBox,
 		SIGNAL(editTextChanged(const QString&)),
@@ -961,9 +961,9 @@ void qjackctlSetupForm::changeAudio ( int iAudio )
 }
 
 
-void qjackctlSetupForm::changeDriver ( const QString& sDriver )
+void qjackctlSetupForm::changeDriver ( int iDriver )
 {
-	changeDriverUpdate(sDriver, true);
+	changeDriverUpdate(m_ui.DriverComboBox->itemText(iDriver), true);
 }
 
 

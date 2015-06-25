@@ -55,7 +55,7 @@ protected slots:
 	void deleteCurrentPreset();
 
 	void changeAudio(int);
-	void changeDriver(const QString&);
+	void changeDriver(int);
 
 	void symbolStartupScript();
 	void symbolPostStartupScript();
