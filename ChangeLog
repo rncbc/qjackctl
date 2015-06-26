@@ -7,7 +7,9 @@ ChangeLog
 GIT HEAD
 
 - Most advanced Setup/Settings are moved into new Setup/Advanced
-  settings tab (after a patch by Robin Gareus, thanks).
+  settings tab; limit range for the real-time priority setting,
+  now having 6 as absolute minimum valid value (after patches by
+  Robin Gareus, thanks).
 
 - A new top-level widget window geometry state save and restore
   sub-routine is now in effect (EXPERIMENTAL).

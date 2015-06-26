@@ -1142,7 +1142,7 @@ void qjackctlMainForm::startJack (void)
 		args.append("-v");
 	if (m_preset.bRealtime) {
 	//	args.append("-R");
-		if (m_preset.iPriority > 0 && !bCoreaudio)
+		if (m_preset.iPriority > 5 && !bCoreaudio)
 			args.append("-P" + QString::number(m_preset.iPriority));
 	}
 	else args.append("-r");
@@ -3738,7 +3738,7 @@ void qjackctlMainForm::setDBusParameters (void)
 	setDBusEngineParameter("realtime", m_preset.bRealtime);
 	setDBusEngineParameter("realtime-priority",
 		m_preset.iPriority,
-		m_preset.bRealtime && m_preset.iPriority > 0);
+		m_preset.bRealtime && m_preset.iPriority > 5);
 //	setDBusEngineParameter("port-max",
 //		m_preset.iPortMax,
 //		m_preset.iPortMax > 0);
