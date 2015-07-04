@@ -1,0 +1,8 @@
+
+cd portaudio
+
+mingw32-configure --without-alsa --without-jack --with-asiodir=/home/kjetil/SDKs/ASIOSDK2.3 --with-winapi=wmme,directx,asio,wmme,wdmks
+# (wasapi doesn't compile)
+
+mingw32-make
+
