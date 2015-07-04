@@ -13,13 +13,13 @@ if [ ! -f is_configured ] ; then
 
     if [ ! -f is_patched ] ; then
         patch -p1 <mingw32/diff.diff
+        touch is_patched
     fi
-    touch is_patched
 
     if [ ! -f is_autogenned ] ; then
         ./autogen.sh
+        touch is_autogenned
     fi
-    touch is_autogenned
 
     if ! grep "CONFIG+=static" src/src.pro ; then
         echo "CONFIG+=static" >>src/src.pro
@@ -27,8 +27,9 @@ if [ ! -f is_configured ] ; then
 
     mingw32-qmake-qt4
 
+    touch is_configured
+
 fi
-touch is_configured
 
 
 
