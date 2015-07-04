@@ -33,9 +33,8 @@ touch is_configured
 ####################################
 
 EXTRAFLAGS="-I../mingw32/weakjack -I../mingw32/include -I../mingw32/portaudio/include  -DNO_JACK_METADATA -DUSE_WEAK_JACK"
-EXTRALIBS="../mingw32/weak_libjack.o ../mingw32/portaudio/portaudio.dll"
 
-mingw32-make CC="i686-w64-mingw32-gcc $EXTRAFLAGS" CXX="i686-w64-mingw32-gcc $EXTRAFLAGS" LINK="i686-w64-mingw32-g++ $EXTRALIBS" 
+mingw32-make CC="i686-w64-mingw32-gcc $EXTRAFLAGS" CXX="i686-w64-mingw32-gcc $EXTRAFLAGS" LINK="../mingw32/linker.sh"
 
 
 
@@ -49,7 +48,6 @@ rm -fr release
 mkdir release
 
 cp src/release/qjackctl.exe release/
-cp mingw32/portaudio/portaudio.dll release/
 
 cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtCore4.dll release/
 cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtGui4.dll release/
