@@ -1,16 +1,30 @@
 #!/bin/sh
 
+set -e
+set -x
+
 
 ########## CONFIGURE
 ###################################3
 
-cp mingw32/mingw32_config.h src/config.h
+if [ ! -f is_configured ] ; then
 
-patch -p1 <mingw32/diff.diff
+    cp mingw32/mingw32_config.h src/config.h
 
-./autogen.sh
+    if [ ! -f is_patched ] ; then
+        patch -p1 <mingw32/diff.diff
+    fi
+    touch is_patched
 
-mingw32-qmake-qt4
+    if [ ! -f is_autogenned ] ; then
+        ./autogen.sh
+    fi
+    touch is_autogenned
+
+    mingw32-qmake-qt4
+
+fi
+touch is_configured
 
 
 
