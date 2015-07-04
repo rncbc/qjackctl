@@ -53,6 +53,7 @@ rm -fr release
 mkdir release
 
 cp src/release/qjackctl.exe release/
+mingw-strip release/qjackctl.exe
 
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtCore4.dll release/
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtGui4.dll release/
