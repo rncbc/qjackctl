@@ -21,6 +21,10 @@ if [ ! -f is_configured ] ; then
     fi
     touch is_autogenned
 
+    if ! grep "CONFIG+=static" src/src.pro ; then
+        echo "CONFIG+=static" >>src/src.pro
+    fi
+
     mingw32-qmake-qt4
 
 fi
@@ -51,12 +55,12 @@ mkdir release
 cp src/release/qjackctl.exe release/
 cp mingw32/portaudio/portaudio.dll release/
 
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtCore4.dll release/
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtGui4.dll release/
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtXml4.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtCore4.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtGui4.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtXml4.dll release/
 
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libgcc_s_sjlj-1.dll release/
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libstdc++-6.dll release/
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/zlib1.dll release/
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libwinpthread-1.dll release/
-cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libpng16-16.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libgcc_s_sjlj-1.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libstdc++-6.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/zlib1.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libwinpthread-1.dll release/
+#cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libpng16-16.dll release/
