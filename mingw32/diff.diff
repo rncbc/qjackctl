@@ -1,0 +1,121 @@
+diff --git a/src/qjackctlAboutForm.cpp b/src/qjackctlAboutForm.cpp
+index 91c74bd..2bf0b99 100644
+--- a/src/qjackctlAboutForm.cpp
++++ b/src/qjackctlAboutForm.cpp
+@@ -25,7 +25,7 @@
+ #include <QMessageBox>
+ 
+ #ifdef CONFIG_JACK_VERSION
+-#include <jack/jack.h>
++#include <weak-jack.h>
+ #endif
+ 
+ 
+diff --git a/src/qjackctlJackConnect.h b/src/qjackctlJackConnect.h
+index 2d2fec6..fc7f807 100644
+--- a/src/qjackctlJackConnect.h
++++ b/src/qjackctlJackConnect.h
+@@ -25,7 +25,7 @@
+ #include "qjackctlAbout.h"
+ #include "qjackctlConnect.h"
+ 
+-#include <jack/jack.h>
++#include <weak_libjack.h>
+ 
+ // Forward declarations.
+ class qjackctlJackPort;
+diff --git a/src/qjackctlMainForm.h b/src/qjackctlMainForm.h
+index 45f2e92..4821480 100644
+--- a/src/qjackctlMainForm.h
++++ b/src/qjackctlMainForm.h
+@@ -29,7 +29,7 @@
+ #include <QProcess>
+ #include <QDateTime>
+ 
+-#include <jack/jack.h>
++#include <weak_libjack.h>
+ 
+ #ifdef CONFIG_ALSA_SEQ
+ #include <alsa/asoundlib.h>
+diff --git a/src/qjackctlPatchbayRack.h b/src/qjackctlPatchbayRack.h
+index 11fa709..3e90142 100644
+--- a/src/qjackctlPatchbayRack.h
++++ b/src/qjackctlPatchbayRack.h
+@@ -26,7 +26,7 @@
+ 
+ #include <QStringList>
+ 
+-#include <jack/jack.h>
++#include <weak_libjack.h>
+ 
+ #ifdef CONFIG_ALSA_SEQ
+ #include <alsa/asoundlib.h>
+diff --git a/src/qjackctlSession.cpp b/src/qjackctlSession.cpp
+index 23ee0c9..22c96ac 100644
+--- a/src/qjackctlSession.cpp
++++ b/src/qjackctlSession.cpp
+@@ -594,7 +594,7 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
+ 	}
+ #endif
+ 
+-	jack_client_t *pJackClient = ::jack_client_open(aClientName.constData(),
++	jack_client_t *pJackClient = jack_client_open(aClientName.constData(),
+ 		jack_options_t(JackNoStartServer | JackUseExactName), NULL);
+ 	if (pJackClient) {
+ 		jack_client_close(pJackClient);
+diff --git a/src/qjackctlSession.h b/src/qjackctlSession.h
+index f89a98a..bb1b66a 100644
+--- a/src/qjackctlSession.h
++++ b/src/qjackctlSession.h
+@@ -22,11 +22,11 @@
+ #ifndef __qjackctlSession_h
+ #define __qjackctlSession_h
+ 
++#include <weak_libjack.h>
++
+ #include <QString>
+ #include <QHash>
+ 
+-#include <jack/jack.h>
+-
+ // Forward decls.
+ class QSettings;
+ 
+diff --git a/src/qjackctlSetup.cpp b/src/qjackctlSetup.cpp
+index 6bccece..57776bb 100644
+--- a/src/qjackctlSetup.cpp
++++ b/src/qjackctlSetup.cpp
+@@ -353,7 +353,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset
+ 	}
+ 
+ 	m_settings.beginGroup("/Settings" + sSuffix);
+-	preset.sServerPrefix = m_settings.value("/Server", "jackd").toString();
++	preset.sServerPrefix = m_settings.value("/Server", "jackd -S").toString();
+ 	preset.sServerName  = m_settings.value("/ServerName").toString();
+ 	preset.bRealtime    = m_settings.value("/Realtime", true).toBool();
+ 	preset.bSoftMode    = m_settings.value("/SoftMode", false).toBool();
+diff --git a/src/qjackctlSetupForm.ui b/src/qjackctlSetupForm.ui
+index 3b6b229..6682e27 100644
+--- a/src/qjackctlSetupForm.ui
++++ b/src/qjackctlSetupForm.ui
+@@ -782,17 +782,17 @@
+                </property>
+                <item>
+                 <property name="text">
+-                 <string>jackd</string>
++                 <string>jackd -S</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+-                 <string>jackdmp</string>
++                 <string>jackdmp -S</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+-                 <string>jackstart</string>
++                 <string>jackstart -S</string>
+                 </property>
+                </item>
+               </widget>
