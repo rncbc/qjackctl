@@ -34,7 +34,7 @@ touch is_configured
 
 EXTRAFLAGS="-I../mingw32/weakjack -I../mingw32/include -I../mingw32/portaudio/include  -DNO_JACK_METADATA -DUSE_WEAK_JACK"
 
-mingw32-make CC="i686-w64-mingw32-gcc $EXTRAFLAGS" CXX="i686-w64-mingw32-gcc $EXTRAFLAGS" LINK="../mingw32/linker.sh"
+mingw32-make -j8 CC="i686-w64-mingw32-gcc $EXTRAFLAGS" CXX="i686-w64-mingw32-gcc $EXTRAFLAGS" LINK="../mingw32/linker.sh"
 
 
 
