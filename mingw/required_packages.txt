@@ -1,11 +1,20 @@
 These are the required packages on fedora:
 
 mingw32-qt
-mingw32-headers
 mingw32-qt-tools
-mingw32-filesystem
 mingw32-gcc-c++
 mingw32-pkg-config
 mingw32-qt-qmake
-mingw32-gcc
 mingw32-qt-static
+mingw32-filesystem
+
+mingw64-qt
+mingw64-qt-tools
+mingw64-gcc-c++
+mingw64-pkg-config
+mingw64-qt-qmake
+mingw64-qt-static
+mingw64-filesystem
+
+mingw-binutils-generic
+

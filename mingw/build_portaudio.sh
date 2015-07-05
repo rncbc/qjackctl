@@ -9,7 +9,7 @@ fi
 if [[ $1 == "64" ]] ; then
    MINGW=mingw64
    CC=x86_64-w64-mingw32-gcc
-   CXX=x86_64-w64-mingw32-gcc
+   CXX=x86_64-w64-mingw32-g++
 fi
 
 if [ -z $MINGW ] ; then
