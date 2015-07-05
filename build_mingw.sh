@@ -25,8 +25,10 @@ function clean_and_configure {
     echo "*** Cleaning and configuring"
     
     rm -f is_configured
-    
-    $MINGW-make clean
+   
+    if [ -f Makefile ] ;  then
+        $MINGW-make clean
+    fi
     
     make -f Makefile.git clean
     ./autogen.sh
