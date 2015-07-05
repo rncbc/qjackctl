@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Some windows fixes added (patch by Kjetil Matheussen, thanks).
+
 - Most advanced Setup/Settings are moved into new Setup/Advanced
   settings tab; limit range for the real-time priority setting,
   now having 6 as absolute minimum valid value (after patches by

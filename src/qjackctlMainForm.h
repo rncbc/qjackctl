@@ -273,6 +273,7 @@ private:
 	jack_client_t *m_pJackClient;
 	bool m_bJackDetach;
 	bool m_bJackShutdown;
+	bool m_bJackStopped;
 
 	snd_seq_t *m_pAlsaSeq;
 

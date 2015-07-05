@@ -50,6 +50,8 @@
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 
+
+
 #if QT_VERSION < 0x040500
 namespace Qt {
 const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
@@ -322,6 +324,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pJackClient   = NULL;
 	m_bJackDetach   = false;
 	m_bJackShutdown = false;
+	m_bJackStopped  = false;
 	m_pAlsaSeq      = NULL;
 #ifdef CONFIG_DBUS
 	m_pDBusControl  = NULL;
@@ -1116,7 +1119,7 @@ void qjackctlMainForm::startJack (void)
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
 			fi.setFile(QDir(sDirectory), sCommand);
-			if (fi.isExecutable()) {
+			if (fi.exists() && fi.isExecutable()) {
 				sCommand = fi.filePath();
 				break;
 			}
@@ -1311,8 +1314,13 @@ void qjackctlMainForm::startJack (void)
 
 		// Setup stdout/stderr capture...
 		if (m_pSetup->bStdoutCapture) {
+		#if defined(WIN32)
+			// QProcess::ForwardedChannels doesn't seem to work in windows.
+			m_pJack->setProcessChannelMode(QProcess::MergedChannels);
+		#else
 			m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
-			QObject::connect(m_pJack,
+		#endif
+ 			QObject::connect(m_pJack,
 				SIGNAL(readyReadStandardOutput()),
 				SLOT(readStdout()));
 			QObject::connect(m_pJack,
@@ -1434,6 +1442,7 @@ void qjackctlMainForm::stopJackServer (void)
 			// Jack classic server backend...
 			if (m_pJack) {
 				appendMessages(tr("JACK is stopping..."));
+				m_bJackStopped = true;
 			#if defined(WIN32)
 				// Try harder...
 				m_pJack->kill();
@@ -1489,7 +1498,11 @@ void qjackctlMainForm::appendStdoutBuffer ( const QString& s )
 		while (iter.hasNext()) {
 			sTemp = iter.next();
 			if (!sTemp.isEmpty())
+			#if defined(WIN32)
+				appendMessagesText(detectXrun(sTemp).trimmed());
+			#else
 				appendMessagesText(detectXrun(sTemp));
+			#endif
 		}
 	}
 }
@@ -1511,7 +1524,7 @@ void qjackctlMainForm::jackStarted (void)
 	// Show startup results...
 	if (m_pJack) {
 		appendMessages(tr("JACK was started with PID=%1.")
-			.arg(long(m_pJack->pid())));
+			.arg(quint64(m_pJack->pid())));
 	}
 
 #ifdef CONFIG_DBUS
@@ -2361,6 +2374,9 @@ void qjackctlMainForm::exitNotifyEvent (void)
 		jackFinished();
 		break;
 	case QProcess::Crashed:
+	#if defined(WIN32)
+		if (!m_bJackStopped)
+	#endif
 		appendMessagesColor(tr("JACK has crashed."), "#cc3366");
 		break;
 	case QProcess::Timedout:

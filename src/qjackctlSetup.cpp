@@ -31,6 +31,13 @@
 #include <QFileInfo>
 
 
+#if defined(WIN32)
+#define DEFAULT_DRIVER "portaudio"
+#else
+#define DEFAULT_DRIVER "alsa"
+#endif
+
+
 // Constructor.
 qjackctlSetup::qjackctlSetup (void)
 	: m_settings(QJACKCTL_DOMAIN, QJACKCTL_TITLE)
@@ -371,7 +378,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	preset.iWordLength  = m_settings.value("/WordLength", 16).toInt();
 	preset.iWait        = m_settings.value("/Wait", 21333).toInt();
 	preset.iChan        = m_settings.value("/Chan", 0).toInt();
-	preset.sDriver      = m_settings.value("/Driver", "alsa").toString();
+	preset.sDriver      = m_settings.value("/Driver", DEFAULT_DRIVER).toString();
 	preset.sInterface   = m_settings.value("/Interface").toString();
 	preset.iAudio       = m_settings.value("/Audio", 0).toInt();
 	preset.iDither      = m_settings.value("/Dither", 0).toInt();
