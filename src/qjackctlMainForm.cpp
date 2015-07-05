@@ -1511,7 +1511,7 @@ void qjackctlMainForm::jackStarted (void)
 	// Show startup results...
 	if (m_pJack) {
 		appendMessages(tr("JACK was started with PID=%1.")
-			.arg(long(m_pJack->pid())));
+			.arg(uint64_t(m_pJack->pid())));
 	}
 
 #ifdef CONFIG_DBUS
