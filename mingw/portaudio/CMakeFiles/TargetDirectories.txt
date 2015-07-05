@@ -1,2 +1,0 @@
-/home/kjetil/qjackctl/temp/qjackctl/mingw32/portaudio/CMakeFiles/portaudio_static.dir
-/home/kjetil/qjackctl/temp/qjackctl/mingw32/portaudio/CMakeFiles/portaudio.dir
