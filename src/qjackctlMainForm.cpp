@@ -322,6 +322,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pJackClient   = NULL;
 	m_bJackDetach   = false;
 	m_bJackShutdown = false;
+        m_bJackStopped  = false;
 	m_pAlsaSeq      = NULL;
 #ifdef CONFIG_DBUS
 	m_pDBusControl  = NULL;
@@ -1434,6 +1435,7 @@ void qjackctlMainForm::stopJackServer (void)
 			// Jack classic server backend...
 			if (m_pJack) {
 				appendMessages(tr("JACK is stopping..."));
+				m_bJackStopped = true;                                
 			#if defined(WIN32)
 				// Try harder...
 				m_pJack->kill();
@@ -2361,7 +2363,10 @@ void qjackctlMainForm::exitNotifyEvent (void)
 		jackFinished();
 		break;
 	case QProcess::Crashed:
-		appendMessagesColor(tr("JACK has crashed."), "#cc3366");
+		#if defined(WIN32)
+			if (!m_bJackStopped)
+		#endif
+		appendMessagesColor(tr("JACK has crashed3."), "#cc3366");
 		break;
 	case QProcess::Timedout:
 		appendMessagesColor(tr("JACK timed out."), "#cc3366");
