@@ -18,3 +18,6 @@ mingw64-filesystem
 
 mingw-binutils-generic
 
+qt5:
+mingw64-qt5-qmake
+mingw64-qt5-qtbase-static
