@@ -48,17 +48,20 @@ mingw32-make -j8 CC="i686-w64-mingw32-gcc $EXTRAFLAGS" CXX="i686-w64-mingw32-gcc
 ######### DIST
 ###################################
 
-rm -fr release
+cp src/release/qjackctl.exe mingw32/
+mingw-strip mingw32/qjackctl.exe
 
-mkdir release
 
-cp src/release/qjackctl.exe release/
-mingw-strip release/qjackctl.exe
-
+#rm -fr release
+#mkdir release
+#
+#cp src/release/qjackctl.exe release/
+#mingw-strip release/qjackctl.exe
+#
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtCore4.dll release/
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtGui4.dll release/
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/QtXml4.dll release/
-
+#
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libgcc_s_sjlj-1.dll release/
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/libstdc++-6.dll release/
 #cp /usr/i686-w64-mingw32/sys-root/mingw/bin/zlib1.dll release/
