@@ -46,9 +46,14 @@
 #include <QPixmap>
 #include <QFileInfo>
 #include <QDir>
+#ifdef WIN32
+#include <QPlastiqueStyle>
+#endif
 
 #include <QContextMenuEvent>
 #include <QCloseEvent>
+
+
 
 #if QT_VERSION < 0x040500
 namespace Qt {
@@ -308,6 +313,9 @@ qjackctlMainForm::qjackctlMainForm (
 	QWidget *pParent, Qt::WindowFlags wflags )
 	: QWidget(pParent, wflags)
 {
+#ifdef WIN32
+        QApplication::setStyle( new QPlastiqueStyle());
+#endif
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
