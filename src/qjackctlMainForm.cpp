@@ -1499,7 +1499,7 @@ void qjackctlMainForm::appendStdoutBuffer ( const QString& s )
 				appendMessagesText(detectXrun(sTemp).trimmed());
 			#else
 				appendMessagesText(detectXrun(sTemp));
-			#else
+			#endif
 		}
 	}
 }
