@@ -1116,7 +1116,7 @@ void qjackctlMainForm::startJack (void)
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
 			fi.setFile(QDir(sDirectory), sCommand);
-			if (fi.isExecutable()) {
+			if (fi.exists() && fi.isExecutable()) {
 				sCommand = fi.filePath();
 				break;
 			}
