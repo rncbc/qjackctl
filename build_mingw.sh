@@ -54,6 +54,10 @@ if ! grep "CONFIG+=static" src/src.pro ; then
     echo "CONFIG+=static" >>src/src.pro
 fi
 
+if ! grep "RC_FILE = ../mingw/icon/resfile.rc" src/src.pro ; then
+    echo "RC_FILE = ../mingw/icon/resfile.rc" >>src/src.pro
+fi
+
 
 
 
