@@ -1312,8 +1312,12 @@ void qjackctlMainForm::startJack (void)
 
 		// Setup stdout/stderr capture...
 		if (m_pSetup->bStdoutCapture) {
-			m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
-			QObject::connect(m_pJack,
+			#if defined(WIN32)
+				m_pJack->setProcessChannelMode(QProcess::MergedChannels); // QProcess::ForwardedChannels doesn't seem to work in windows
+			#else
+				m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
+			#endif
+ 			QObject::connect(m_pJack,
 				SIGNAL(readyReadStandardOutput()),
 				SLOT(readStdout()));
 			QObject::connect(m_pJack,
@@ -1491,7 +1495,11 @@ void qjackctlMainForm::appendStdoutBuffer ( const QString& s )
 		while (iter.hasNext()) {
 			sTemp = iter.next();
 			if (!sTemp.isEmpty())
+			#if defined(WIN32)
+				appendMessagesText(detectXrun(sTemp).trimmed());
+			#else
 				appendMessagesText(detectXrun(sTemp));
+			#else
 		}
 	}
 }
