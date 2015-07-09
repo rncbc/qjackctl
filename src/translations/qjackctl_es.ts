@@ -2448,12 +2448,12 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="844"/>
         <location filename="../qjackctlSetupForm.ui" line="1023"/>
         <location filename="../qjackctlSetupForm.ui" line="1343"/>
-        <location filename="../qjackctlSetupForm.ui" line="1431"/>
-        <location filename="../qjackctlSetupForm.ui" line="1506"/>
-        <location filename="../qjackctlSetupForm.ui" line="1529"/>
-        <location filename="../qjackctlSetupForm.ui" line="1578"/>
-        <location filename="../qjackctlSetupForm.ui" line="1645"/>
-        <location filename="../qjackctlSetupForm.ui" line="1694"/>
+        <location filename="../qjackctlSetupForm.ui" line="1534"/>
+        <location filename="../qjackctlSetupForm.ui" line="1597"/>
+        <location filename="../qjackctlSetupForm.ui" line="1668"/>
+        <location filename="../qjackctlSetupForm.ui" line="1699"/>
+        <location filename="../qjackctlSetupForm.ui" line="1752"/>
+        <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3947"/>
         <source>(default)</source>
         <translation></translation>
@@ -2878,7 +2878,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Ignorar el tamaño de bufer / período del hardware</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1710"/>
+        <location filename="../qjackctlSetupForm.ui" line="1505"/>
         <source>&amp;Output Device:</source>
         <translation>Dispositiv&amp;o de salida:</translation>
     </message>
@@ -2892,12 +2892,12 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;Interfaz:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1428"/>
+        <location filename="../qjackctlSetupForm.ui" line="1665"/>
         <source>Maximum input audio hardware channels to allocate</source>
         <translation>Máximo número de canales de entrada por hardware a establecer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1616"/>
+        <location filename="../qjackctlSetupForm.ui" line="1382"/>
         <source>&amp;Audio:</source>
         <translation>&amp;Audio:</translation>
     </message>
@@ -2906,44 +2906,44 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation type="obsolete">Latenc&amp;ia de la entrada:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1738"/>
+        <location filename="../qjackctlSetupForm.ui" line="1444"/>
         <source>Dit&amp;her:</source>
         <translation>&amp;Suavizado:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1691"/>
+        <location filename="../qjackctlSetupForm.ui" line="1780"/>
         <source>External output latency (frames)</source>
         <translation>Latencia de la salida externa (cuadros)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1469"/>
+        <location filename="../qjackctlSetupForm.ui" line="1568"/>
         <source>&amp;Input Device:</source>
         <translation>D&amp;ispositivo de entrada:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1392"/>
+        <location filename="../qjackctlSetupForm.ui" line="1414"/>
         <source>Duplex</source>
         <translation>Duplex</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1397"/>
+        <location filename="../qjackctlSetupForm.ui" line="1419"/>
         <source>Capture Only</source>
         <translation>Sólo Captura</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1402"/>
+        <location filename="../qjackctlSetupForm.ui" line="1424"/>
         <source>Playback Only</source>
         <translation>Sólo Reproducción</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1388"/>
+        <location filename="../qjackctlSetupForm.ui" line="1410"/>
         <source>Provide either audio capture, playback or both</source>
         <translation>Proveer de puertos de audio para captura, reproducción o ambos</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="294"/>
-        <location filename="../qjackctlSetupForm.ui" line="1534"/>
-        <location filename="../qjackctlSetupForm.ui" line="1650"/>
+        <location filename="../qjackctlSetupForm.ui" line="1539"/>
+        <location filename="../qjackctlSetupForm.ui" line="1602"/>
         <source>hw:0</source>
         <translation></translation>
     </message>
@@ -2966,13 +2966,13 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="309"/>
-        <location filename="../qjackctlSetupForm.ui" line="1549"/>
-        <location filename="../qjackctlSetupForm.ui" line="1665"/>
+        <location filename="../qjackctlSetupForm.ui" line="1554"/>
+        <location filename="../qjackctlSetupForm.ui" line="1617"/>
         <source>/dev/dsp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1638"/>
+        <location filename="../qjackctlSetupForm.ui" line="1590"/>
         <source>Alternate input device for capture</source>
         <translation>Dispositivo de entrada alternativo para captura</translation>
     </message>
@@ -2981,12 +2981,12 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation type="obsolete">Latencia de la sal&amp;ida:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1503"/>
+        <location filename="../qjackctlSetupForm.ui" line="1696"/>
         <source>Maximum output audio hardware channels to allocate</source>
         <translation>Máximo número de canales de salida por hardware a establecer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1522"/>
+        <location filename="../qjackctlSetupForm.ui" line="1527"/>
         <source>Alternate output device for playback</source>
         <translation>Dispositivo de salida alternativo para reproducción</translation>
     </message>
@@ -3003,32 +3003,32 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation type="obsolete">Seleccionar dispositivo PCM</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1575"/>
+        <location filename="../qjackctlSetupForm.ui" line="1749"/>
         <source>External input latency (frames)</source>
         <translation>Latencia de la entrada externa (cuadros)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1770"/>
+        <location filename="../qjackctlSetupForm.ui" line="1476"/>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1775"/>
+        <location filename="../qjackctlSetupForm.ui" line="1481"/>
         <source>Rectangular</source>
         <translation>Rectangular</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1780"/>
+        <location filename="../qjackctlSetupForm.ui" line="1486"/>
         <source>Shaped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1785"/>
+        <location filename="../qjackctlSetupForm.ui" line="1491"/>
         <source>Triangular</source>
         <translation>Triangular</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1766"/>
+        <location filename="../qjackctlSetupForm.ui" line="1472"/>
         <source>Set dither mode</source>
         <translation>Establecer método de suavizado</translation>
     </message>
@@ -3831,15 +3831,15 @@ Do you want to apply the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="299"/>
-        <location filename="../qjackctlSetupForm.ui" line="1539"/>
-        <location filename="../qjackctlSetupForm.ui" line="1655"/>
+        <location filename="../qjackctlSetupForm.ui" line="1544"/>
+        <location filename="../qjackctlSetupForm.ui" line="1607"/>
         <source>plughw:0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="304"/>
-        <location filename="../qjackctlSetupForm.ui" line="1544"/>
-        <location filename="../qjackctlSetupForm.ui" line="1660"/>
+        <location filename="../qjackctlSetupForm.ui" line="1549"/>
+        <location filename="../qjackctlSetupForm.ui" line="1612"/>
         <source>/dev/audio</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4134,12 +4134,12 @@ Do you want to apply the changes?</source>
         <translation>Ruta del servidor (prefijo de la línea de comando)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1594"/>
+        <location filename="../qjackctlSetupForm.ui" line="1631"/>
         <source>&amp;Channels I/O:</source>
         <translation>&amp;Canales de E/S:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1447"/>
+        <location filename="../qjackctlSetupForm.ui" line="1715"/>
         <source>&amp;Latency I/O:</source>
         <translation>&amp;Latencia E/S:</translation>
     </message>

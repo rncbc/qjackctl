@@ -2682,12 +2682,12 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <location filename="../qjackctlSetupForm.ui" line="844"/>
         <location filename="../qjackctlSetupForm.ui" line="1023"/>
         <location filename="../qjackctlSetupForm.ui" line="1343"/>
-        <location filename="../qjackctlSetupForm.ui" line="1431"/>
-        <location filename="../qjackctlSetupForm.ui" line="1506"/>
-        <location filename="../qjackctlSetupForm.ui" line="1529"/>
-        <location filename="../qjackctlSetupForm.ui" line="1578"/>
-        <location filename="../qjackctlSetupForm.ui" line="1645"/>
-        <location filename="../qjackctlSetupForm.ui" line="1694"/>
+        <location filename="../qjackctlSetupForm.ui" line="1534"/>
+        <location filename="../qjackctlSetupForm.ui" line="1597"/>
+        <location filename="../qjackctlSetupForm.ui" line="1668"/>
+        <location filename="../qjackctlSetupForm.ui" line="1699"/>
+        <location filename="../qjackctlSetupForm.ui" line="1752"/>
+        <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3947"/>
         <source>(default)</source>
         <translation>(standaard)</translation>
@@ -3134,7 +3134,7 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <translation>Negeer hardware period/buffer grootte</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1710"/>
+        <location filename="../qjackctlSetupForm.ui" line="1505"/>
         <source>&amp;Output Device:</source>
         <translation>&amp;Output Apparaat:</translation>
     </message>
@@ -3148,12 +3148,12 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <translation>&amp;Interface :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1428"/>
+        <location filename="../qjackctlSetupForm.ui" line="1665"/>
         <source>Maximum input audio hardware channels to allocate</source>
         <translation>Maximum bruikbare input audio hardware kanalen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1616"/>
+        <location filename="../qjackctlSetupForm.ui" line="1382"/>
         <source>&amp;Audio:</source>
         <translation>&amp;Audio:</translation>
     </message>
@@ -3162,37 +3162,37 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <translation type="obsolete">&amp;Input Latency:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1738"/>
+        <location filename="../qjackctlSetupForm.ui" line="1444"/>
         <source>Dit&amp;her:</source>
         <translation>Dit&amp;her:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1691"/>
+        <location filename="../qjackctlSetupForm.ui" line="1780"/>
         <source>External output latency (frames)</source>
         <translation>Externe output vertraging (in frames)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1469"/>
+        <location filename="../qjackctlSetupForm.ui" line="1568"/>
         <source>&amp;Input Device:</source>
         <translation>&amp;Input Apparaat :</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1392"/>
+        <location filename="../qjackctlSetupForm.ui" line="1414"/>
         <source>Duplex</source>
         <translation>Duplex</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1397"/>
+        <location filename="../qjackctlSetupForm.ui" line="1419"/>
         <source>Capture Only</source>
         <translation>Enkel opnemen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1402"/>
+        <location filename="../qjackctlSetupForm.ui" line="1424"/>
         <source>Playback Only</source>
         <translation>Enkel afspelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1388"/>
+        <location filename="../qjackctlSetupForm.ui" line="1410"/>
         <source>Provide either audio capture, playback or both</source>
         <translation>Voorzie audio opname, afspelen of beide</translation>
     </message>
@@ -3202,8 +3202,8 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="294"/>
-        <location filename="../qjackctlSetupForm.ui" line="1534"/>
-        <location filename="../qjackctlSetupForm.ui" line="1650"/>
+        <location filename="../qjackctlSetupForm.ui" line="1539"/>
+        <location filename="../qjackctlSetupForm.ui" line="1602"/>
         <source>hw:0</source>
         <translation>hw:0</translation>
     </message>
@@ -3240,13 +3240,13 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="309"/>
-        <location filename="../qjackctlSetupForm.ui" line="1549"/>
-        <location filename="../qjackctlSetupForm.ui" line="1665"/>
+        <location filename="../qjackctlSetupForm.ui" line="1554"/>
+        <location filename="../qjackctlSetupForm.ui" line="1617"/>
         <source>/dev/dsp</source>
         <translation>/dev/dsp</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1638"/>
+        <location filename="../qjackctlSetupForm.ui" line="1590"/>
         <source>Alternate input device for capture</source>
         <translation>Alternatief input apparaat voor opname</translation>
     </message>
@@ -3255,12 +3255,12 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <translation type="obsolete">&amp;Output Vertraging:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1503"/>
+        <location filename="../qjackctlSetupForm.ui" line="1696"/>
         <source>Maximum output audio hardware channels to allocate</source>
         <translation>Maximum bruikbare output audio hardware kanalen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1522"/>
+        <location filename="../qjackctlSetupForm.ui" line="1527"/>
         <source>Alternate output device for playback</source>
         <translation>Alternatief output apparaat voor afspelen</translation>
     </message>
@@ -3277,32 +3277,32 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <translation type="obsolete">Kies PCM apparaatsnaam</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1575"/>
+        <location filename="../qjackctlSetupForm.ui" line="1749"/>
         <source>External input latency (frames)</source>
         <translation>Externe input vertraging (in frames)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1770"/>
+        <location filename="../qjackctlSetupForm.ui" line="1476"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1775"/>
+        <location filename="../qjackctlSetupForm.ui" line="1481"/>
         <source>Rectangular</source>
         <translation>Blok</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1780"/>
+        <location filename="../qjackctlSetupForm.ui" line="1486"/>
         <source>Shaped</source>
         <translation>Sinus</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1785"/>
+        <location filename="../qjackctlSetupForm.ui" line="1491"/>
         <source>Triangular</source>
         <translation>Driehoek</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1766"/>
+        <location filename="../qjackctlSetupForm.ui" line="1472"/>
         <source>Set dither mode</source>
         <translation>Kies dither modus</translation>
     </message>
@@ -4139,8 +4139,8 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="299"/>
-        <location filename="../qjackctlSetupForm.ui" line="1539"/>
-        <location filename="../qjackctlSetupForm.ui" line="1655"/>
+        <location filename="../qjackctlSetupForm.ui" line="1544"/>
+        <location filename="../qjackctlSetupForm.ui" line="1607"/>
         <source>plughw:0</source>
         <translation>plughw:0</translation>
     </message>
@@ -4201,8 +4201,8 @@ Wil u de veranderingen toepassen?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="304"/>
-        <location filename="../qjackctlSetupForm.ui" line="1544"/>
-        <location filename="../qjackctlSetupForm.ui" line="1660"/>
+        <location filename="../qjackctlSetupForm.ui" line="1549"/>
+        <location filename="../qjackctlSetupForm.ui" line="1612"/>
         <source>/dev/audio</source>
         <translation>/dev/audio</translation>
     </message>
@@ -4222,12 +4222,12 @@ Wil u de veranderingen toepassen?</translation>
         <translation>Maximum aantal te gebruiken audio sporen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1594"/>
+        <location filename="../qjackctlSetupForm.ui" line="1631"/>
         <source>&amp;Channels I/O:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="1447"/>
+        <location filename="../qjackctlSetupForm.ui" line="1715"/>
         <source>&amp;Latency I/O:</source>
         <translation type="unfinished"></translation>
     </message>
