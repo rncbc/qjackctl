@@ -53,6 +53,8 @@
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 
+
+
 #if QT_VERSION < 0x040500
 namespace Qt {
 const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
@@ -314,7 +316,7 @@ qjackctlMainForm::qjackctlMainForm (
 #ifdef WIN32
         QApplication::setStyle( new QPlastiqueStyle());
 #endif
-
+        
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
@@ -1121,9 +1123,9 @@ void qjackctlMainForm::startJack (void)
 		const QString sPath = ::getenv("PATH");
 		QStringList paths = sPath.split(chPathSep);
 #if defined (_WIN64)
-                paths = paths << "C:\\Program Files (x86)\\Jack";
+                paths = paths << "C:\\Program Files (x86)\\Jack" << "C:\\Program Files\\Jack";
 #else
-                paths = paths << "C:\\Program Files\\Jack";
+                paths = paths << "C:\\Program Files\\Jack" << "C:\\Program Files (x86)\\Jack";
 #endif
 		QStringListIterator iter(paths);
 		while (iter.hasNext()) {

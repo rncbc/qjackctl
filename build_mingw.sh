@@ -25,13 +25,16 @@ function clean_and_configure {
     echo "*** Cleaning and configuring"
     
     rm -f is_configured
-    
-    $MINGW-make clean
+   
+    if [ -f Makefile ] ;  then
+        $MINGW-make clean
+    fi
     
     make -f Makefile.git clean
     ./autogen.sh
 
     $MINGW-qmake-qt4
+#    $MINGW-qmake-qt5 # It compiles, but complains about missing windows plugin.
 
     cp mingw/mingw_config.h src/config.h
 
@@ -92,13 +95,10 @@ fi
 
 EXTRAFLAGS="-I`pwd`/mingw/weakjack -I`pwd`/mingw/include -I`pwd`/mingw/$1/portaudio/include -DNO_JACK_METADATA -DUSE_WEAK_JACK"
 
-rm -fr $MINGW
-mkdir $MINGW
-
 $CC $EXTRAFLAGS mingw/weakjack/weak_libjack.c -Wall -c -O2 -o weak_libjack.o
 cp mingw/$1/portaudio/lib/.libs/libportaudio.a .
 
-$MINGW-make -j8 CC="$CC $EXTRAFLAGS" CXX="$CXX $EXTRAFLAGS" LINK="../mingw/linker.sh $CXX"
+$MINGW-make -j8 CC="$CC $EXTRAFLAGS" CXX="$CXX $EXTRAFLAGS" LINK="../mingw/linker.sh $CXX" LINKER="../mingw/linker.sh $CXX"
 
 
 
@@ -106,6 +106,9 @@ $MINGW-make -j8 CC="$CC $EXTRAFLAGS" CXX="$CXX $EXTRAFLAGS" LINK="../mingw/linke
 
 ######### DIST
 ###################################
+
+rm -fr $MINGW
+mkdir $MINGW
 
 cp src/release/qjackctl.exe $MINGW/
 mingw-strip $MINGW/qjackctl.exe
