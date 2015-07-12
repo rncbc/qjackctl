@@ -46,6 +46,9 @@
 #include <QPixmap>
 #include <QFileInfo>
 #include <QDir>
+#ifdef WIN32
+#include <QPlastiqueStyle>
+#endif
 
 #include <QContextMenuEvent>
 #include <QCloseEvent>
@@ -308,6 +311,10 @@ qjackctlMainForm::qjackctlMainForm (
 	QWidget *pParent, Qt::WindowFlags wflags )
 	: QWidget(pParent, wflags)
 {
+#ifdef WIN32
+        QApplication::setStyle( new QPlastiqueStyle());
+#endif
+
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
@@ -1106,17 +1113,28 @@ void qjackctlMainForm::startJack (void)
 	if (fi.isRelative()) {
 	#if defined(WIN32)
 		const char chPathSep = ';';
-		if (fi.suffix().isEmpty())
-			sCommand += ".exe";
+                if (fi.suffix().isEmpty())
+                  sCommand += ".exe";
 	#else
 		const char chPathSep = ':';
 	#endif
 		const QString sPath = ::getenv("PATH");
 		QStringList paths = sPath.split(chPathSep);
+#if defined (_WIN64)
+                paths = paths << "C:\\Program Files (x86)\\Jack";
+#else
+                paths = paths << "C:\\Program Files\\Jack";
+#endif
 		QStringListIterator iter(paths);
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
 			fi.setFile(QDir(sDirectory), sCommand);
+                        printf("\n\n\n\n abs_path: -%s-\ndir: -%s-\nsCommand: -%s-\nexists: %d, executable: %d\n\n",
+                               fi.absolutePath().toUtf8().constData(),
+                               sDirectory.toUtf8().constData(),
+                               sCommand.toUtf8().constData(),
+                               fi.exists(), fi.isExecutable()
+                               );
 			if (fi.exists() && fi.isExecutable()) {
 				sCommand = fi.filePath();
 				break;

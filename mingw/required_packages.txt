@@ -8,13 +8,7 @@ mingw32-qt-qmake
 mingw32-qt-static
 mingw32-filesystem
 
-mingw64-qt
-mingw64-qt-tools
-mingw64-gcc-c++
-mingw64-pkg-config
-mingw64-qt-qmake
-mingw64-qt-static
-mingw64-filesystem
+mingw64-qt mingw64-qt-tools mingw64-gcc-c++ mingw64-pkg-config mingw64-qt-qmake mingw64-qt-static mingw64-filesystem
 
 mingw-binutils-generic
 
