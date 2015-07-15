@@ -3,6 +3,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 TODOs
 
+0.4.0 Backlog
+
+- Having parameter settings obey/depend on jackctl API.
+
+...
+
 0.1.1 Backlog
 
 - Having some LADCCA support or awareness may be very welcome.

@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.4.0  2015-07-15  Summer'15 release frenzy.
 
 - Some windows fixes added (patch by Kjetil Matheussen, thanks).
 
