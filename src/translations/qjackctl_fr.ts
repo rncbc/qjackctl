@@ -3222,7 +3222,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="809"/>
         <source>&amp;Name:</source>
-        <translation type="unfinished">&amp;Nom :</translation>
+        <translation>&amp;Nom :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="837"/>
@@ -4270,7 +4270,7 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="735"/>
         <source>Please do not touch these settings unless you know what you are doing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez ne pas toucher ces réglages si vous ne savez pas ce que vous faites.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2587"/>
@@ -4329,7 +4329,7 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="729"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancé</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2521"/>
