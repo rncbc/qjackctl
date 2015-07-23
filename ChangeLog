@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Complete rewrite of Qt4 vs. Qt5 configure builds. (TESTING)
+
 - French (fr) translation update (by Olivier Humbert, thanks).
 
 
