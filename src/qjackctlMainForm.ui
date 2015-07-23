@@ -781,8 +781,8 @@
   <tabstop>StartToolButton</tabstop>
   <tabstop>StopToolButton</tabstop>
   <tabstop>QuitToolButton</tabstop>
-  <tabstop>SessionToolButton</tabstop>
   <tabstop>MessagesStatusToolButton</tabstop>
+  <tabstop>SessionToolButton</tabstop>
   <tabstop>SetupToolButton</tabstop>
   <tabstop>ConnectionsToolButton</tabstop>
   <tabstop>PatchbayToolButton</tabstop>
