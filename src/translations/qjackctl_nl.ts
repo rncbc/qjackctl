@@ -90,6 +90,11 @@
         <source>Set default settings preset name</source>
         <translation>Kies standaard instellingen preset naam</translation>
     </message>
+    <message>
+        <location filename="../qjackctlJackConnect.cpp" line="173"/>
+        <source>%1 (%2 frames)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlAboutForm</name>
@@ -527,17 +532,6 @@ Wil u deze aanpassingen opslaan?</translation>
         <comment>Refresh</comment>
         <translatorcomment>Verversen</translatorcomment>
         <translation>Alt+V</translation>
-    </message>
-</context>
-<context>
-    <name>qjackctlJackConnect</name>
-    <message>
-        <location filename="../qjackctlJackConnect.cpp" line="174"/>
-        <source>&lt;p&gt;&lt;strong&gt;%1&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Playback latency: %3 frames&lt;br /&gt;
-Capture latency: %4 frames&lt;/p&gt;
-</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

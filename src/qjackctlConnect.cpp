@@ -141,7 +141,7 @@ void qjackctlPortItem::updatePortName ( bool /*bRename*/ )
 
 
 // Tooltip text builder.
-QString qjackctlPortItem::tooltip () const
+QString qjackctlPortItem::tooltip (void) const
 {
 	return portName();
 }

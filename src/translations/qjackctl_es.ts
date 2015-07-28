@@ -70,6 +70,11 @@
         <source>Option -n requires an argument (name).</source>
         <translation>La opción -n necesita un argumento (nombre).</translation>
     </message>
+    <message>
+        <location filename="../qjackctlJackConnect.cpp" line="173"/>
+        <source>%1 (%2 frames)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlAboutForm</name>
@@ -460,17 +465,6 @@ Desea guardar los cambios?</translation>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+R</translation>
-    </message>
-</context>
-<context>
-    <name>qjackctlJackConnect</name>
-    <message>
-        <location filename="../qjackctlJackConnect.cpp" line="174"/>
-        <source>&lt;p&gt;&lt;strong&gt;%1&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Playback latency: %3 frames&lt;br /&gt;
-Capture latency: %4 frames&lt;/p&gt;
-</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

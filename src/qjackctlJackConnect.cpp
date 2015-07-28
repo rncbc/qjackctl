@@ -158,24 +158,19 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 
 
 // Tooltip text builder (virtual override).
-QString latencyRangeToString(jack_latency_range_t& range)
+QString qjackctlJackPort::tooltip (void) const
 {
-	if (range.max == range.min)
-		return QString::number(range.max);
-	return QString::number(range.min) + "&ndash;" + QString::number(range.max);
-}
+	jack_latency_range_t latency_range;
 
-QString qjackctlJackPort::tooltip() const
-{
-	jack_latency_range_t playback, capture;
-	jack_port_get_latency_range(m_pJackPort, JackPlaybackLatency, &playback);
-	jack_port_get_latency_range(m_pJackPort, JackCaptureLatency, &capture);
+	jack_port_get_latency_range(m_pJackPort,
+		client()->isReadable() ? JackCaptureLatency : JackPlaybackLatency,
+		&latency_range);
 
-	return QApplication::translate("qjackctlJackConnect",
-		"<p><strong>%1</strong></p>\n"
-		"<p>Playback latency: %3 frames<br />\n"
-		"Capture latency: %4 frames</p>\n",
-	0).arg(portName(), latencyRangeToString(playback), latencyRangeToString(capture));
+	QString sLatency = QString::number(latency_range.min);
+	if (latency_range.max > latency_range.min)
+		sLatency +=  '-' + QString::number(latency_range.max);
+
+	return QObject::tr("%1 (%2 frames)").arg(portName()).arg(sLatency);
 }
 
 
