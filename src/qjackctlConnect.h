@@ -65,6 +65,9 @@ public:
 	// Proto-pretty/display name accessors.
 	virtual void updatePortName(bool bRename = false);
 
+	// Tooltip text building.
+	virtual QString tooltip() const;
+
 	// Complete client:port name helper.
 	QString clientPortName() const;
 

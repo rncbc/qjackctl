@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Overrideable tooltips with latency info (re. Connections JACK
+  client/ports: patch by Xavier Mendez, thanks).
+
 - Complete rewrite of Qt4 vs. Qt5 configure builds. (TESTING)
 
 - French (fr) translation update (by Olivier Humbert, thanks).
