@@ -93,15 +93,18 @@ qjackctlSystemTray::~qjackctlSystemTray (void)
 // System tray icon/pixmaps update method.
 void qjackctlSystemTray::updatePixmap (void)
 {
+  // Get the default systray icon size...
+  QRect dimension = QSystemTrayIcon::geometry();
 	// Renitialize icon as fit...
-	m_pixmap = m_icon.pixmap(22, 22);
+	m_pixmap = m_icon.pixmap(dimension.width(), dimension.height());
 
     // Merge with the overlay pixmap...
 	if (!m_pixmapOverlay.mask().isNull()) {
 		QBitmap mask = m_pixmap.mask();
 		QPainter(&mask).drawPixmap(0, 0, m_pixmapOverlay.mask());
 		m_pixmap.setMask(mask);
-		QPainter(&m_pixmap).drawPixmap(0, 0, m_pixmapOverlay);
+    // paint the status symbol in the bottom left...
+		QPainter(&m_pixmap).drawPixmap(0, dimension.height() - m_pixmapOverlay.height(), m_pixmapOverlay);
 	}
 
 	if (m_background != Qt::transparent) {

@@ -25,7 +25,7 @@
 #include <QWidget>
 
 #include <QSystemTrayIcon>
-
+#include <QDesktopWidget>
 
 //----------------------------------------------------------------------------
 // qjackctlSystemTray -- Custom system tray widget.
