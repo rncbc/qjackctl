@@ -3,7 +3,6 @@
 TARGET = qjackctl
 
 TEMPLATE = app
-DEPENDPATH += .
 INCLUDEPATH += .
 
 include(src.pri)
@@ -68,6 +67,7 @@ FORMS += \
 RESOURCES += \
 	qjackctl.qrc
 
+
 TRANSLATIONS += \
 	translations/qjackctl_cs.ts \
 	translations/qjackctl_de.ts \
@@ -77,6 +77,7 @@ TRANSLATIONS += \
 	translations/qjackctl_ja.ts \
 	translations/qjackctl_nl.ts \
 	translations/qjackctl_ru.ts
+
 
 unix {
 
@@ -111,7 +112,6 @@ unix {
 
 # XML/DOM support
 QT += xml
-
 
 # QT5 support
 !lessThan(QT_MAJOR_VERSION, 5) {
