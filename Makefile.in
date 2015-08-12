@@ -105,8 +105,8 @@ $(name).mak:	$(name).pro
 	@$(qmake) -o $(name).mak $(name).pro
 
 
-translations_lupdate:	src/src.pro
-	@$(lupdate) -verbose src/src.pro
+translations_lupdate:	$(name).pro
+	@$(lupdate) -verbose $(name).pro
 
 translations_lrelease:	translations_lupdate $(translations_targets)
 
