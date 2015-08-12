@@ -14,7 +14,7 @@ HEADERS += config.h \
 	qjackctlAlsaConnect.h \
 	qjackctlConnect.h \
 	qjackctlConnectAlias.h \
-	qjackctlJackInterfaceComboBox.h \
+	qjackctlInterfaceComboBox.h \
 	qjackctlJackConnect.h \
 	qjackctlPatchbay.h \
 	qjackctlPatchbayFile.h \
