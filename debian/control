@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Rui Nuno Capela <rncbc@rncbc.org>
 Build-Depends: debhelper (>= 5), automake, pkg-config, qtbase5-dev (>= 5.1),
   qtbase5-dev-tools (>= 5.1), qttools5-dev-tools (>= 5.1), qtchooser,
-  libjack-dev, libasound2-dev, libx11-dev, x11proto-core-dev
+  libjack-dev, libasound2-dev, libx11-dev, x11proto-core-dev, libqt5x11extras5-dev (>= 5.1)
 Standards-Version: 3.7.2
 
 Package: qjackctl
