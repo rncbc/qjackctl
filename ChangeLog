@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Single/unique application instance control adapted to Qt5/X11.
+  (EXPERIMENTAL)
+
 - Prefer Qt5 over Qt4 by default with configure script.
 
 - Overrideable tooltips with latency info (re. Connections JACK

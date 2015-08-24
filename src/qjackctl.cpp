@@ -49,7 +49,13 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 // Singleton application instance stuff (Qt/X11 only atm.)
 //
 
+#if QT_VERSION < 0x050000
 #if defined(Q_WS_X11)
+#define CONFIG_XUNIQUE
+#endif
+#endif
+
+#ifdef CONFIG_XUNIQUE
 
 #include <unistd.h>
 
@@ -60,6 +66,29 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #define QJACKCTL_XUNIQUE "qjackctlApplication"
 
+#if QT_VERSION >= 0x050100
+#include <xcb/xproto.h>
+#include <QAbstractNativeEventFilter>
+class qjackctlApplication;
+
+class qjackctlX11EventFilter : public QAbstractNativeEventFilter
+{
+public:
+
+	// Constructor.
+	qjackctlX11EventFilter(qjackctlApplication *pApp)
+		: QAbstractNativeEventFilter(), m_pApp(pApp) {}
+
+	// Virtual processor.
+	bool nativeEventFilter(const QByteArray& eventType, void *message, long *);
+
+private:
+
+	// Instance variable.
+	qjackctlApplication *m_pApp;
+};
+#endif
+
 #endif
 
 
@@ -69,7 +98,7 @@ public:
 
 	// Constructor.
 	qjackctlApplication(int& argc, char **argv) : QApplication(argc, argv),
-		m_pQtTranslator(0), m_pMyTranslator(0), m_pWidget(0)	
+		m_pQtTranslator(0), m_pMyTranslator(0), m_pWidget(0)
 	{
 		// Load translation support.
 		QLocale loc;
@@ -111,15 +140,25 @@ public:
 				}
 			}
 		}
-	#if defined(Q_WS_X11)
+	#ifdef CONFIG_XUNIQUE
 		m_pDisplay = NULL;
 		m_wOwner = None;
+	#if QT_VERSION >= 0x050100
+		m_pX11EventFilter = new qjackctlX11EventFilter(this);
+		installNativeEventFilter(m_pX11EventFilter);
+	#endif
 	#endif
 	}
 
 	// Destructor.
 	~qjackctlApplication()
 	{
+	#ifdef CONFIG_XUNIQUE
+	#if QT_VERSION >= 0x050100
+		removeNativeEventFilter(m_pX11EventFilter);
+		delete m_pX11EventFilter;
+	#endif
+	#endif
 		if (m_pMyTranslator) delete m_pMyTranslator;
 		if (m_pQtTranslator) delete m_pQtTranslator;
 	}
@@ -128,7 +167,7 @@ public:
 	void setMainWidget(QWidget *pWidget)
 	{
 		m_pWidget = pWidget;
-	#if defined(Q_WS_X11)
+	#ifdef CONFIG_XUNIQUE
 		if (m_pDisplay) {
 			XGrabServer(m_pDisplay);
 			m_wOwner = m_pWidget->winId();
@@ -144,7 +183,7 @@ public:
     // and raise its proper main widget...
 	bool setup(const QString& sServerName)
 	{
-	#if defined(Q_WS_X11)
+	#ifdef CONFIG_XUNIQUE
 		m_pDisplay = QX11Info::display();
 		QString sUnique = QJACKCTL_XUNIQUE;
 		if (sServerName.isEmpty()) {
@@ -206,13 +245,10 @@ public:
 		return false;
 	}
 
-#if defined(Q_WS_X11)
-	bool x11EventFilter(XEvent *pEv)
+#ifdef CONFIG_XUNIQUE
+	void x11PropertyNotify(Window w)
 	{
-		if (m_pWidget && m_wOwner != None
-			&& pEv->type == PropertyNotify
-			&& pEv->xproperty.window == m_wOwner
-			&& pEv->xproperty.state == PropertyNewValue) {
+		if (m_pWidget && m_wOwner == w) {
 			// Always check whether our property-flag is still around...
 			Atom aType;
 			int iFormat = 0;
@@ -248,8 +284,16 @@ public:
 			if (iItems > 0 && pData)
 				XFree(pData);
 		}
+	}
+#if QT_VERSION < 0x050000
+	bool x11EventFilter(XEvent *pEv)
+	{
+		if (pEv->type == PropertyNotify
+			&& pEv->xproperty.state == PropertyNewValue)
+			x11PropertyNotify(pEv->xproperty.window);
 		return QApplication::x11EventFilter(pEv);
 	}
+#endif
 #endif
 
 	// Session shutdown handler.
@@ -272,12 +316,32 @@ private:
 	// Instance variables.
 	QWidget *m_pWidget;
 
-#if defined(Q_WS_X11)
+#ifdef CONFIG_XUNIQUE
 	Display *m_pDisplay;
 	Atom     m_aUnique;
 	Window   m_wOwner;
+#if QT_VERSION >= 0x050100
+	qjackctlX11EventFilter *m_pX11EventFilter;
+#endif
 #endif
 };
+
+
+#if QT_VERSION >= 0x050100
+// Virtual processor.
+bool qjackctlX11EventFilter::nativeEventFilter (
+	const QByteArray& eventType, void *message, long * )
+{
+	if (eventType == "xcb_generic_event_t") {
+		xcb_property_notify_event_t *pEv
+			= static_cast<xcb_property_notify_event_t *> (message);
+		if ((pEv->response_type & ~0x80) == XCB_PROPERTY_NOTIFY
+			&& pEv->state == XCB_PROPERTY_NEW_VALUE)
+			m_pApp->x11PropertyNotify(pEv->window);
+	}
+	return false;
+}
+#endif
 
 
 //-------------------------------------------------------------------------
