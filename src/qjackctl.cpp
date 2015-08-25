@@ -51,20 +51,17 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #if QT_VERSION < 0x050000
 #if defined(Q_WS_X11)
-#ifdef  CONFIG_XUNIQUE
 #define CONFIG_X11
 #endif
+#else
+#if defined(QT_X11EXTRAS_LIB)
+#define CONFIG_X11
 #endif
-#endif
-
-#ifndef CONFIG_XUNIQUE
-#undef  CONFIG_X11
 #endif
 
 
 #ifdef CONFIG_X11
-
-#include <unistd.h>
+#ifdef CONFIG_XUNIQUE
 
 #include <QX11Info>
 
@@ -100,6 +97,8 @@ private:
 };
 
 #endif
+
+#endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
 
 
@@ -152,23 +151,27 @@ public:
 			}
 		}
 	#ifdef CONFIG_X11
+	#ifdef CONFIG_XUNIQUE
 		m_pDisplay = NULL;
 		m_wOwner = None;
 	#if QT_VERSION >= 0x050100
 		m_pXcbEventFilter = new qjackctlXcbEventFilter(this);
 		installNativeEventFilter(m_pXcbEventFilter);
 	#endif
-	#endif	// CONFIG_X11	
+	#endif	// CONFIG_XUNIQUE
+	#endif	// CONFIG_X11
 	}
 
 	// Destructor.
 	~qjackctlApplication()
 	{
 	#ifdef CONFIG_X11
+	#ifdef CONFIG_XUNIQUE
 	#if QT_VERSION >= 0x050100
 		removeNativeEventFilter(m_pXcbEventFilter);
 		delete m_pXcbEventFilter;
 	#endif
+	#endif	// CONFIG_XUNIQUE
 	#endif	// CONFIG_X11
 		if (m_pMyTranslator) delete m_pMyTranslator;
 		if (m_pQtTranslator) delete m_pQtTranslator;
@@ -179,13 +182,15 @@ public:
 	{
 		m_pWidget = pWidget;
 	#ifdef CONFIG_X11
+	#ifdef CONFIG_XUNIQUE
 		if (m_pDisplay) {
 			XGrabServer(m_pDisplay);
 			m_wOwner = m_pWidget->winId();
 			XSetSelectionOwner(m_pDisplay, m_aUnique, m_wOwner, CurrentTime);
 			XUngrabServer(m_pDisplay);
 		}
-	#endif
+	#endif	// CONFIG_XUNIQUE
+	#endif	// CONFIG_X11
 	}
 
 	QWidget *mainWidget() const { return m_pWidget; }
@@ -195,6 +200,7 @@ public:
 	bool setup(const QString& sServerName)
 	{
 	#ifdef CONFIG_X11
+	#ifdef CONFIG_XUNIQUE
 		m_pDisplay = QX11Info::display();
 		QString sUnique = QJACKCTL_XUNIQUE;
 		if (sServerName.isEmpty()) {
@@ -240,7 +246,7 @@ public:
 			XRaiseWindow(m_pDisplay, m_wOwner);
 			// And then, let it get caught on destination
 			// by QApplication::native/x11EventFilter...
-			QByteArray value = QJACKCTL_XUNIQUE;
+			const QByteArray value = QJACKCTL_XUNIQUE;
 			XChangeProperty(
 				m_pDisplay,
 				m_wOwner,
@@ -252,11 +258,13 @@ public:
 			// Done.
 			return true;
 		}
-	#endif
+	#endif	// CONFIG_XUNIQUE
+	#endif	// CONFIG_X11
 		return false;
 	}
 
 #ifdef CONFIG_X11
+#ifdef CONFIG_XUNIQUE
 	void x11PropertyNotify(Window w)
 	{
 		if (m_pWidget && m_wOwner == w) {
@@ -305,6 +313,7 @@ public:
 		return QApplication::x11EventFilter(pEv);
 	}
 #endif
+#endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
 
 	// Session shutdown handler.
@@ -328,17 +337,20 @@ private:
 	QWidget *m_pWidget;
 
 #ifdef CONFIG_X11
+#ifdef CONFIG_XUNIQUE
 	Display *m_pDisplay;
 	Atom     m_aUnique;
 	Window   m_wOwner;
 #if QT_VERSION >= 0x050100
 	qjackctlXcbEventFilter *m_pXcbEventFilter;
 #endif
+#endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
 };
 
 
 #ifdef CONFIG_X11
+#ifdef CONFIG_XUNIQUE
 #if QT_VERSION >= 0x050100
 // XCB Event filter (virtual processor).
 bool qjackctlXcbEventFilter::nativeEventFilter (
@@ -354,6 +366,7 @@ bool qjackctlXcbEventFilter::nativeEventFilter (
 	return false;
 }
 #endif
+#endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
 
 
