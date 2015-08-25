@@ -94,13 +94,13 @@ public:
 	bool nativeEventFilter(const QByteArray& eventType, void *message, long *);
 
 private:
+
 	// Instance variable.
 	qjackctlApplication *m_pApp;
 };
 
 #endif
-
-#endif
+#endif	// CONFIG_X11
 
 
 class qjackctlApplication : public QApplication
@@ -158,7 +158,7 @@ public:
 		m_pXcbEventFilter = new qjackctlXcbEventFilter(this);
 		installNativeEventFilter(m_pXcbEventFilter);
 	#endif
-	#endif
+	#endif	// CONFIG_X11	
 	}
 
 	// Destructor.
@@ -169,7 +169,7 @@ public:
 		removeNativeEventFilter(m_pXcbEventFilter);
 		delete m_pXcbEventFilter;
 	#endif
-	#endif
+	#endif	// CONFIG_X11
 		if (m_pMyTranslator) delete m_pMyTranslator;
 		if (m_pQtTranslator) delete m_pQtTranslator;
 	}
@@ -305,7 +305,7 @@ public:
 		return QApplication::x11EventFilter(pEv);
 	}
 #endif
-#endif
+#endif	// CONFIG_X11
 
 	// Session shutdown handler.
 	void commitData(QSessionManager& sm)
@@ -334,7 +334,7 @@ private:
 #if QT_VERSION >= 0x050100
 	qjackctlXcbEventFilter *m_pXcbEventFilter;
 #endif
-#endif
+#endif	// CONFIG_X11
 };
 
 
@@ -354,7 +354,7 @@ bool qjackctlXcbEventFilter::nativeEventFilter (
 	return false;
 }
 #endif
-#endif
+#endif	// CONFIG_X11
 
 
 //-------------------------------------------------------------------------
