@@ -67,26 +67,30 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 #define QJACKCTL_XUNIQUE "qjackctlApplication"
 
 #if QT_VERSION >= 0x050100
+
+#include <xcb/xcb.h>
 #include <xcb/xproto.h>
+
 #include <QAbstractNativeEventFilter>
+
 class qjackctlApplication;
 
-class qjackctlX11EventFilter : public QAbstractNativeEventFilter
+class qjackctlXcbEventFilter : public QAbstractNativeEventFilter
 {
 public:
 
 	// Constructor.
-	qjackctlX11EventFilter(qjackctlApplication *pApp)
+	qjackctlXcbEventFilter(qjackctlApplication *pApp)
 		: QAbstractNativeEventFilter(), m_pApp(pApp) {}
 
-	// Virtual processor.
+	// XCB event filter (virtual processor).
 	bool nativeEventFilter(const QByteArray& eventType, void *message, long *);
 
 private:
-
 	// Instance variable.
 	qjackctlApplication *m_pApp;
 };
+
 #endif
 
 #endif
@@ -144,8 +148,8 @@ public:
 		m_pDisplay = NULL;
 		m_wOwner = None;
 	#if QT_VERSION >= 0x050100
-		m_pX11EventFilter = new qjackctlX11EventFilter(this);
-		installNativeEventFilter(m_pX11EventFilter);
+		m_pXcbEventFilter = new qjackctlXcbEventFilter(this);
+		installNativeEventFilter(m_pXcbEventFilter);
 	#endif
 	#endif
 	}
@@ -155,8 +159,8 @@ public:
 	{
 	#ifdef CONFIG_XUNIQUE
 	#if QT_VERSION >= 0x050100
-		removeNativeEventFilter(m_pX11EventFilter);
-		delete m_pX11EventFilter;
+		removeNativeEventFilter(m_pXcbEventFilter);
+		delete m_pXcbEventFilter;
 	#endif
 	#endif
 		if (m_pMyTranslator) delete m_pMyTranslator;
@@ -228,7 +232,7 @@ public:
 			XSync(m_pDisplay, false);
 			XRaiseWindow(m_pDisplay, m_wOwner);
 			// And then, let it get caught on destination
-			// by QApplication::x11EventFilter...
+			// by QApplication::native/x11EventFilter...
 			QByteArray value = QJACKCTL_XUNIQUE;
 			XChangeProperty(
 				m_pDisplay,
@@ -321,15 +325,16 @@ private:
 	Atom     m_aUnique;
 	Window   m_wOwner;
 #if QT_VERSION >= 0x050100
-	qjackctlX11EventFilter *m_pX11EventFilter;
+	qjackctlXcbEventFilter *m_pXcbEventFilter;
 #endif
 #endif
 };
 
 
+#ifdef CONFIG_XUNIQUE
 #if QT_VERSION >= 0x050100
-// Virtual processor.
-bool qjackctlX11EventFilter::nativeEventFilter (
+// XCB Event filter (virtual processor).
+bool qjackctlXcbEventFilter::nativeEventFilter (
 	const QByteArray& eventType, void *message, long * )
 {
 	if (eventType == "xcb_generic_event_t") {
@@ -341,6 +346,7 @@ bool qjackctlX11EventFilter::nativeEventFilter (
 	}
 	return false;
 }
+#endif
 #endif
 
 
