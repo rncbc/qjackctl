@@ -51,11 +51,18 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #if QT_VERSION < 0x050000
 #if defined(Q_WS_X11)
-#define CONFIG_XUNIQUE
+#ifdef  CONFIG_XUNIQUE
+#define CONFIG_X11
+#endif
 #endif
 #endif
 
-#ifdef CONFIG_XUNIQUE
+#ifndef CONFIG_XUNIQUE
+#undef  CONFIG_X11
+#endif
+
+
+#ifdef CONFIG_X11
 
 #include <unistd.h>
 
@@ -144,7 +151,7 @@ public:
 				}
 			}
 		}
-	#ifdef CONFIG_XUNIQUE
+	#ifdef CONFIG_X11
 		m_pDisplay = NULL;
 		m_wOwner = None;
 	#if QT_VERSION >= 0x050100
@@ -157,7 +164,7 @@ public:
 	// Destructor.
 	~qjackctlApplication()
 	{
-	#ifdef CONFIG_XUNIQUE
+	#ifdef CONFIG_X11
 	#if QT_VERSION >= 0x050100
 		removeNativeEventFilter(m_pXcbEventFilter);
 		delete m_pXcbEventFilter;
@@ -171,7 +178,7 @@ public:
 	void setMainWidget(QWidget *pWidget)
 	{
 		m_pWidget = pWidget;
-	#ifdef CONFIG_XUNIQUE
+	#ifdef CONFIG_X11
 		if (m_pDisplay) {
 			XGrabServer(m_pDisplay);
 			m_wOwner = m_pWidget->winId();
@@ -187,7 +194,7 @@ public:
     // and raise its proper main widget...
 	bool setup(const QString& sServerName)
 	{
-	#ifdef CONFIG_XUNIQUE
+	#ifdef CONFIG_X11
 		m_pDisplay = QX11Info::display();
 		QString sUnique = QJACKCTL_XUNIQUE;
 		if (sServerName.isEmpty()) {
@@ -249,7 +256,7 @@ public:
 		return false;
 	}
 
-#ifdef CONFIG_XUNIQUE
+#ifdef CONFIG_X11
 	void x11PropertyNotify(Window w)
 	{
 		if (m_pWidget && m_wOwner == w) {
@@ -320,7 +327,7 @@ private:
 	// Instance variables.
 	QWidget *m_pWidget;
 
-#ifdef CONFIG_XUNIQUE
+#ifdef CONFIG_X11
 	Display *m_pDisplay;
 	Atom     m_aUnique;
 	Window   m_wOwner;
@@ -331,7 +338,7 @@ private:
 };
 
 
-#ifdef CONFIG_XUNIQUE
+#ifdef CONFIG_X11
 #if QT_VERSION >= 0x050100
 // XCB Event filter (virtual processor).
 bool qjackctlXcbEventFilter::nativeEventFilter (

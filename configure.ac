@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.4.0.9, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.4.0.10, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -102,11 +102,16 @@ if test "x$ac_dbus" = "xyes"; then
 fi
 AC_SUBST(ac_qdbus)
 
+# Enable X11 unique/single instance.
+AC_ARG_ENABLE(xunique,
+  AC_HELP_STRING([--enable-xunique], [enable X11 unique/single instance (default=yes)]),
+  [ac_xunique="$enableval"],
+  [ac_xunique="yes"])
+
 # Enable debugger stack-trace option (assumes --enable-debug).
 AC_ARG_ENABLE(stacktrace,
   AC_HELP_STRING([--enable-stacktrace], [enable debugger stack-trace (default=no)]),
   [ac_stacktrace="$enableval"])
-
 
 
 # Standard installation base dirs.
@@ -447,6 +452,11 @@ if test "x$ac_portaudio" = "xyes"; then
    fi
 fi
 
+# Check for X11 unique/single instance.
+if test "x$ac_xunique" = "xyes"; then
+   AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
+fi
+
 # Check for debugging stack-trace.
 if test "x$ac_stacktrace" = "xyes"; then
    AC_DEFINE(CONFIG_STACKTRACE, 1, [Define if debugger stack-trace is enabled.])
@@ -546,6 +556,7 @@ echo "  D-Bus interface support  . . . . . . . . . . . . .: $ac_dbus"
 echo "  PortAudio interface support  . . . . . . . . . . .: $ac_portaudio"
 echo "  CoreAudio interface support  . . . . . . . . . . .: $ac_coreaudio"
 echo
+echo "  X11 Unique/Single instance . . . . . . . . . . . .: $ac_xunique"
 echo "  Debugger stack-trace (gdb) . . . . . . . . . . . .: $ac_stacktrace"
 echo
 echo "  Install prefix . . . . . . . . . . . . . . . . . .: $ac_prefix"
