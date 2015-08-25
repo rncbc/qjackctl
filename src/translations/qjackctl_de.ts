@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.0" language="de">
 <context>
     <name>QObject</name>
     <message>
@@ -86,10 +86,6 @@
         <location filename="../qjackctlAboutForm.ui" line="67"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
-    </message>
-    <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+S</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.ui" line="77"/>
@@ -295,10 +291,6 @@ Sind Sie sicher?</translation>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+V</translation>
-    </message>
-    <message>
         <location filename="../qjackctlConnectionsForm.ui" line="111"/>
         <location filename="../qjackctlConnectionsForm.ui" line="246"/>
         <location filename="../qjackctlConnectionsForm.ui" line="381"/>
@@ -311,10 +303,6 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlConnectionsForm.ui" line="384"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Trennen</translation>
-    </message>
-    <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="124"/>
@@ -331,10 +319,6 @@ Sind Sie sicher?</translation>
         <translation>&amp;Alle trennen</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+A</translation>
-    </message>
-    <message>
         <location filename="../qjackctlConnectionsForm.ui" line="153"/>
         <location filename="../qjackctlConnectionsForm.ui" line="288"/>
         <location filename="../qjackctlConnectionsForm.ui" line="423"/>
@@ -349,10 +333,6 @@ Sind Sie sicher?</translation>
         <translation>Alle auf&amp;klappen</translation>
     </message>
     <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+K</translation>
-    </message>
-    <message>
         <location filename="../qjackctlConnectionsForm.ui" line="182"/>
         <location filename="../qjackctlConnectionsForm.ui" line="317"/>
         <location filename="../qjackctlConnectionsForm.ui" line="452"/>
@@ -365,10 +345,6 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlConnectionsForm.ui" line="455"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Auffrischen</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+A</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="198"/>
@@ -463,10 +439,6 @@ Do you want to save the changes?</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <source>Alt+Q</source>
-        <translation type="obsolete">Alt+B</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="71"/>
         <source>Start the JACK server</source>
         <translation>JACK-Server starten</translation>
@@ -478,10 +450,6 @@ Do you want to save the changes?</source>
         <translation>&amp;Start</translation>
     </message>
     <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="105"/>
         <source>Stop the JACK server</source>
         <translation>JACK-Server beenden</translation>
@@ -490,10 +458,6 @@ Do you want to save the changes?</source>
         <location filename="../qjackctlMainForm.ui" line="108"/>
         <source>S&amp;top</source>
         <translation>S&amp;topp</translation>
-    </message>
-    <message>
-        <source>Alt+T</source>
-        <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3584"/>
@@ -518,27 +482,15 @@ Do you want to save the changes?</source>
         <translation>&amp;Einstellungen...</translation>
     </message>
     <message>
-        <source>Alt+B</source>
-        <translation type="obsolete">Alt+Ü</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="505"/>
         <source>Show settings and options dialog</source>
         <translation>Dialogfenster für Einstellungen und Optionen anzeigen</translation>
-    </message>
-    <message>
-        <source>Alt+E</source>
-        <translation type="obsolete">Alt+I</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="474"/>
         <location filename="../qjackctlMainForm.cpp" line="3578"/>
         <source>&amp;Messages</source>
         <translation>&amp;Meldungen...</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="573"/>
@@ -559,10 +511,6 @@ Do you want to save the changes?</source>
         <location filename="../qjackctlMainForm.ui" line="542"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden...</translation>
-    </message>
-    <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+V</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="164"/>
@@ -640,10 +588,6 @@ Do you want to save the changes?</source>
         <translation>&amp;Vorwärts</translation>
     </message>
     <message>
-        <source>Alt+F</source>
-        <translation type="obsolete">Alt+V</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="607"/>
         <source>Rewind transport</source>
         <translation>Transport zurückspulen</translation>
@@ -653,10 +597,6 @@ Do you want to save the changes?</source>
         <location filename="../qjackctlMainForm.cpp" line="3601"/>
         <source>&amp;Rewind</source>
         <translation>&amp;Zurückspulen</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+Z</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="705"/>
@@ -670,10 +610,6 @@ Do you want to save the changes?</source>
         <translation>Pa&amp;usieren</translation>
     </message>
     <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+K</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="666"/>
         <source>Start transport rolling</source>
         <translation>Transportvorgang starten</translation>
@@ -683,10 +619,6 @@ Do you want to save the changes?</source>
         <location filename="../qjackctlMainForm.cpp" line="3607"/>
         <source>&amp;Play</source>
         <translation>Abs&amp;pielen</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation type="obsolete">Alt+P</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="646"/>
@@ -891,10 +823,6 @@ Tut mir Leid</translation>
         <location filename="../qjackctlMainForm.cpp" line="1736"/>
         <source>Error</source>
         <translation>Fehler</translation>
-    </message>
-    <message>
-        <source>Transport BBT (bar:beat.ticks)</source>
-        <translation type="obsolete">Transport BBT (bar:beat.ticks)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1901"/>
@@ -1413,18 +1341,6 @@ the next time you start this program.</source>
         <translation>Einige Einstellungen werden erst nach
 einem Neustart des Programms wirksam.</translation>
     </message>
-    <message>
-        <source>Alt+O</source>
-        <translation type="obsolete">Alt+Ü</translation>
-    </message>
-    <message>
-        <source>Shift+Space</source>
-        <translation type="obsolete">Umschalt+Leertaste</translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="obsolete">Leertaste</translation>
-    </message>
 </context>
 <context>
     <name>qjackctlMessagesStatusForm</name>
@@ -1484,10 +1400,6 @@ einem Neustart des Programms wirksam.</translation>
         <translation>&amp;Zurücksetzen</translation>
     </message>
     <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+Z</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="175"/>
         <source>Refresh XRUN statistic values</source>
         <translation>Daten der XRUN-Statistik erneuern</translation>
@@ -1496,10 +1408,6 @@ einem Neustart des Programms wirksam.</translation>
         <location filename="../qjackctlMessagesStatusForm.ui" line="178"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Auffrischen</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+A</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="84"/>
@@ -1729,10 +1637,6 @@ Sind Sie sicher?</translation>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+V</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="332"/>
         <source>Disconnect currently selected sockets</source>
         <translation>Verbindung zwischen den gewählten Anschlüssen trennen</translation>
@@ -1741,10 +1645,6 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="335"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Trennen</translation>
-    </message>
-    <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="345"/>
@@ -1757,10 +1657,6 @@ Sind Sie sicher?</translation>
         <translation>&amp;Alle trennen</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+A</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="374"/>
         <source>Expand all items</source>
         <translation>Alle Einträge aufklappen</translation>
@@ -1769,10 +1665,6 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="377"/>
         <source>E&amp;xpand All</source>
         <translation>Alle auf&amp;klappen</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+K</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="403"/>
@@ -1785,10 +1677,6 @@ Sind Sie sicher?</translation>
         <translation>Auf&amp;frischen</translation>
     </message>
     <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+F</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="429"/>
         <source>Create a new patchbay profile</source>
         <translation>Neues Steckfeldprofil anlegen</translation>
@@ -1797,10 +1685,6 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="432"/>
         <source>&amp;New</source>
         <translation>&amp;Neu</translation>
-    </message>
-    <message>
-        <source>Alt+N</source>
-        <translation type="obsolete">Alt+N</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="445"/>
@@ -1813,10 +1697,6 @@ Sind Sie sicher?</translation>
         <translation>&amp;Laden...</translation>
     </message>
     <message>
-        <source>Alt+L</source>
-        <translation type="obsolete">Alt+L</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="461"/>
         <source>Save current patchbay profile</source>
         <translation>Aktuelles Steckfeldprofil speichern</translation>
@@ -1825,10 +1705,6 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="464"/>
         <source>&amp;Save...</source>
         <translation>&amp;Speichern...</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="491"/>
@@ -1844,10 +1720,6 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="501"/>
         <source>Acti&amp;vate</source>
         <translation>A&amp;ktivieren</translation>
-    </message>
-    <message>
-        <source>Alt+V</source>
-        <translation type="obsolete">Alt+V</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="224"/>
@@ -2324,10 +2196,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="117"/>
         <source>Delete current settings preset</source>
         <translation>Aktuelle Einstellung löschen</translation>
@@ -2336,10 +2204,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="120"/>
         <source>&amp;Delete</source>
         <translation>&amp;Löschen</translation>
-    </message>
-    <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+L</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="785"/>
@@ -2462,10 +2326,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Echt&amp;zeit</translation>
     </message>
     <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+Z</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="875"/>
         <source>Do not attempt to lock memory, even if in realtime mode</source>
         <translation>Keinen Arbeitsspeicher sperren, auch nicht im Echtzeitmodus</translation>
@@ -2474,10 +2334,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="878"/>
         <source>No Memory Loc&amp;k</source>
         <translation>Spei&amp;cher nicht sperren</translation>
-    </message>
-    <message>
-        <source>Alt+K</source>
-        <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="891"/>
@@ -2490,10 +2346,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>S&amp;peicher entsperren</translation>
     </message>
     <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+P</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="939"/>
         <source>Ignore xruns reported by the backend driver</source>
         <translation>Xruns des Schnittstellentreibers ignorieren</translation>
@@ -2502,10 +2354,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="942"/>
         <source>So&amp;ft Mode</source>
         <translation>So&amp;ft-Modus</translation>
-    </message>
-    <message>
-        <source>Alt+F</source>
-        <translation type="obsolete">Alt+F</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="923"/>
@@ -2518,10 +2366,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>&amp;Überwachung</translation>
     </message>
     <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+Ü</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="971"/>
         <source>Force 16bit mode instead of failing over 32bit (default)</source>
         <translation>16-Bit-Modus erzwingen statt versuchsweiser Aktivierung des 32-Bit-Modus (voreingestellt)</translation>
@@ -2530,10 +2374,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="974"/>
         <source>Force &amp;16bit</source>
         <translation>&amp;16 Bit erzwingen</translation>
-    </message>
-    <message>
-        <source>Alt+1</source>
-        <translation type="obsolete">Alt+1</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="955"/>
@@ -2546,10 +2386,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>H/W Über&amp;wachung</translation>
     </message>
     <message>
-        <source>Alt+O</source>
-        <translation type="obsolete">Alt+W</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="907"/>
         <source>Enable hardware metering on cards that support it</source>
         <translation>Hardware-Messung bei Karten aktivieren, die diese unterstützen</translation>
@@ -2558,10 +2394,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="910"/>
         <source>H/&amp;W Meter</source>
         <translation>H/W &amp;Messung</translation>
-    </message>
-    <message>
-        <source>Alt+W</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="987"/>
@@ -2574,10 +2406,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>&amp;Ignoriere H/W</translation>
     </message>
     <message>
-        <source>Alt+I</source>
-        <translation type="obsolete">Alt+I</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="644"/>
         <source>Whether to give verbose output on messages</source>
         <translation>Ausführliche Meldungen anzeigen</translation>
@@ -2586,10 +2414,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="647"/>
         <source>&amp;Verbose messages</source>
         <translation>Aus&amp;führliche Meldungen</translation>
-    </message>
-    <message>
-        <source>Alt+V</source>
-        <translation type="obsolete">Alt+F</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1505"/>
@@ -2680,10 +2504,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>/dev/dsp</translation>
     </message>
     <message>
-        <source>Select output device for playback</source>
-        <translation type="obsolete">Ausgabegerät für Wiedergabe auswählen</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2036"/>
         <location filename="../qjackctlSetupForm.ui" line="2120"/>
         <location filename="../qjackctlSetupForm.ui" line="2182"/>
@@ -2705,14 +2525,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1527"/>
         <source>Alternate output device for playback</source>
         <translation>Alternatives Ausgabegerät für Wiedergabe</translation>
-    </message>
-    <message>
-        <source>Select input device for capture</source>
-        <translation type="obsolete">Eingangsgerät zum Aufnehmen wählen</translation>
-    </message>
-    <message>
-        <source>Select PCM device name</source>
-        <translation type="obsolete">Name des PCM-Gerätes wählen</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1749"/>
@@ -3098,10 +2910,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Skript nach dem Herunter&amp;fahren ausführen:</translation>
     </message>
     <message>
-        <source>Alt+T</source>
-        <translation type="obsolete">Alt+F</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2310"/>
         <source>Browse for script to be executed after shutting down the JACK audio server</source>
         <translation>Skript auswählen, das nach dem Herunterfahren des JACK-Servers ausgeführt wird</translation>
@@ -3127,10 +2935,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Standardausgabe &amp;umleiten</translation>
     </message>
     <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+U</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2388"/>
         <source>&amp;XRUN detection regex:</source>
         <translation></translation>
@@ -3151,33 +2955,9 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Verbindungen</translation>
     </message>
     <message>
-        <source>Time in seconds between each auto-refresh cycle</source>
-        <translation type="obsolete">Zeit in Sekunden zwischen jedem Auto-Refresch-Zyklus</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3972"/>
         <source>10</source>
         <translation>10</translation>
-    </message>
-    <message>
-        <source>20</source>
-        <translation type="obsolete">20</translation>
-    </message>
-    <message>
-        <source>30</source>
-        <translation type="obsolete">30</translation>
-    </message>
-    <message>
-        <source>60</source>
-        <translation type="obsolete">60</translation>
-    </message>
-    <message>
-        <source>120</source>
-        <translation type="obsolete">120</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2474"/>
@@ -3190,18 +2970,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Eine Steckfelddefinitionsdatei zum aktivieren wählen</translation>
     </message>
     <message>
-        <source>Whether to refresh the connections patchbay automatically</source>
-        <translation type="obsolete">Die Steckfelddarstellung automatisch aktualisieren</translation>
-    </message>
-    <message>
-        <source>&amp;Auto refresh connections Patchbay, every (secs):</source>
-        <translation type="obsolete">Steckfeld &amp;automatisch aktualisieren, je (s):</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+A</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2452"/>
         <source>Whether to activate a patchbay definition for connection persistence profile.</source>
         <translation>Ein beständiges Verbindungsprofil für das Steckfeld aktivieren.</translation>
@@ -3210,10 +2978,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="2455"/>
         <source>Activate &amp;Patchbay persistence:</source>
         <translation>Steck&amp;feldkonfiguration hat Bestand:</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation type="obsolete">Alt+F</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2569"/>
@@ -3321,10 +3085,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Alt+B</source>
-        <translation type="obsolete">Alt+B</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2712"/>
         <source>Elapsed time since last &amp;Reset</source>
         <translation>Seit dem letzten &amp;Zurücksetzen verstrichene Zeit</translation>
@@ -3333,10 +3093,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="2725"/>
         <source>Elapsed time since last &amp;XRUN</source>
         <translation>Seit dem letzten &amp;XRUN verstrichene Zeit</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+X</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2773"/>
@@ -3502,10 +3258,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Dec&amp;kbezeichnungen (Alias) für Client/Anschlüsse</translation>
     </message>
     <message>
-        <source>Alt+N</source>
-        <translation type="obsolete">Alt+K</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3346"/>
         <source>Whether to draw connection lines as cubic Bezier curves</source>
         <translation>Festlegen, ob Verbindungslinien als Bezier-Kurven gezeichnet werden sollen</translation>
@@ -3514,10 +3266,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="3349"/>
         <source>Draw connection and patchbay lines as Be&amp;zier curves</source>
         <translation>Verbindungslinien als Be&amp;zier-Kurven zeichen</translation>
-    </message>
-    <message>
-        <source>Alt+Z</source>
-        <translation type="obsolete">Alt+Z</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3464"/>
@@ -3538,10 +3286,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="3514"/>
         <source>&amp;Start JACK audio server on application startup</source>
         <translation>JACK-&amp;Server bei Anwendungsstart starten</translation>
-    </message>
-    <message>
-        <source>Alt+Q</source>
-        <translation type="obsolete">Alt+B</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3527"/>
@@ -3584,10 +3328,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>S&amp;ymbol im Benachrichtigungsfeld anzeigen</translation>
     </message>
     <message>
-        <source>Alt+E</source>
-        <translation type="obsolete">Alt+Y</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3592"/>
         <source>Whether to start minimized to system tray</source>
         <translation>Anwendung minimiert als Symbol im Benachrichtigungsfeld starten</translation>
@@ -3596,14 +3336,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="3595"/>
         <source>Start minimi&amp;zed to system tray</source>
         <translation>Minimiert im &amp;Benachrichtigungsfeld starten</translation>
-    </message>
-    <message>
-        <source>Whether to delay window positioning at application startup</source>
-        <translation type="obsolete">Verzögerung der Fensterpositionierung beim Anwendugsstart festlegen</translation>
-    </message>
-    <message>
-        <source>&amp;Delay window positioning at startup</source>
-        <translation type="obsolete">Fenster&amp;positionierung beim Start verzögern</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3634"/>
@@ -3669,10 +3401,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="3808"/>
         <source>Hide main window &amp;Left buttons</source>
         <translation>&amp;Linke Schaltflächen des Hauptfensters verbergen</translation>
-    </message>
-    <message>
-        <source>Alt+L</source>
-        <translation type="obsolete">Alt+L</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3821"/>
@@ -4005,10 +3733,6 @@ Wollen Sie diese übernehmen?</translation>
         <translation>&amp;Anschluss hinzufügen</translation>
     </message>
     <message>
-        <source>Alt+L</source>
-        <translation type="obsolete">Alt+A</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="110"/>
         <source>&amp;Plug:</source>
         <translation>A&amp;nschluss:</translation>
@@ -4039,10 +3763,6 @@ Wollen Sie diese übernehmen?</translation>
         <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <source>Alt+E</source>
-        <translation type="obsolete">Alt+B</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="176"/>
         <source>Remove currently selected plug from socket plug list</source>
         <translation>Ausgewählten Anschluss von der Liste entfernen</translation>
@@ -4051,10 +3771,6 @@ Wollen Sie diese übernehmen?</translation>
         <location filename="../qjackctlSocketForm.ui" line="179"/>
         <source>&amp;Remove</source>
         <translation>En&amp;tfernen</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="189"/>
@@ -4072,10 +3788,6 @@ Wollen Sie diese übernehmen?</translation>
         <translation>A&amp;b</translation>
     </message>
     <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+B</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="218"/>
         <source>Move up current selected plug in socket plug list</source>
         <translation>Ausgewählten Anschluss in Liste nach oben schieben</translation>
@@ -4086,10 +3798,6 @@ Wollen Sie diese übernehmen?</translation>
         <translation>Au&amp;f</translation>
     </message>
     <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+F</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="247"/>
         <source>Enforce only one exclusive cable connection</source>
         <translation>Erzwinge eine singuläre Kabelverbindung</translation>
@@ -4098,10 +3806,6 @@ Wollen Sie diese übernehmen?</translation>
         <location filename="../qjackctlSocketForm.ui" line="250"/>
         <source>E&amp;xclusive</source>
         <translation>E&amp;xklusiv</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+X</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="257"/>
@@ -4129,10 +3833,6 @@ Wollen Sie diese übernehmen?</translation>
         <translation>JACK-&amp;Audio</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+A</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="305"/>
         <source>MIDI socket type (JACK)</source>
         <translation>JACK-MIDI-Anbindung</translation>
@@ -4143,10 +3843,6 @@ Wollen Sie diese übernehmen?</translation>
         <translation>JACK-&amp;MIDI</translation>
     </message>
     <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="315"/>
         <source>MIDI socket type (ALSA)</source>
         <translation>ALSA-MIDI-Anbindung</translation>
@@ -4155,10 +3851,6 @@ Wollen Sie diese übernehmen?</translation>
         <location filename="../qjackctlSocketForm.ui" line="318"/>
         <source>AL&amp;SA</source>
         <translation>AL&amp;SA-MIDI</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.cpp" line="159"/>

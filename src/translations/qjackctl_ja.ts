@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ja_JP">
+<TS version="2.0" language="ja_JP">
 <context>
     <name>QObject</name>
     <message>
@@ -594,10 +594,6 @@ Do you want to save the changes?</source>
         <translation>再生(&amp;P)</translation>
     </message>
     <message>
-        <source>Space</source>
-        <translation type="obsolete">スペース</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="705"/>
         <source>Stop transport rolling</source>
         <translation>トランスポートのローリングをストップする</translation>
@@ -834,10 +830,6 @@ Sorry</source>
         <location filename="../qjackctlMainForm.cpp" line="1736"/>
         <source>Error</source>
         <translation type="unfinished">エラー</translation>
-    </message>
-    <message>
-        <source>Transport BBT (bar:beat.ticks)</source>
-        <translation type="obsolete">トランスポートBBT (bar:beat.ticks)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="852"/>
@@ -2062,10 +2054,6 @@ of all actual client connections?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Remove</source>
-        <translation type="obsolete">削除(&amp;R)</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSessionForm.cpp" line="251"/>
         <location filename="../qjackctlSessionForm.cpp" line="816"/>
         <source>&amp;Save...</source>
@@ -2251,18 +2239,6 @@ Are you sure to overwrite the existing folder?</source>
         <translation>削除(&amp;D)</translation>
     </message>
     <message>
-        <source>Server</source>
-        <translation type="obsolete">サーバー</translation>
-    </message>
-    <message>
-        <source>Server &amp;Path:</source>
-        <translation type="obsolete">サーバーのパス(&amp;P):</translation>
-    </message>
-    <message>
-        <source>The JACK Audio Connection Kit sound server path</source>
-        <translation type="obsolete">JACK Audio Connection Kitサウンドサーバーのパス</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="785"/>
         <source>jackd</source>
         <translation></translation>
@@ -2376,10 +2352,6 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="381"/>
         <source>seq</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Start De&amp;lay (secs):</source>
-        <translation type="obsolete">開始時の遅延時間(秒)(&amp;l):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1892"/>
@@ -2502,10 +2474,6 @@ Are you sure to overwrite the existing folder?</source>
         <translation>出力デバイス(&amp;O):</translation>
     </message>
     <message>
-        <source>&amp;Output Channels:</source>
-        <translation type="obsolete">出力チャンネル(&amp;O):</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="254"/>
         <source>&amp;Interface:</source>
         <translation>インターフェース(&amp;I):</translation>
@@ -2519,10 +2487,6 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="1382"/>
         <source>&amp;Audio:</source>
         <translation>オーディオ(&amp;A):</translation>
-    </message>
-    <message>
-        <source>&amp;Input Latency:</source>
-        <translation type="obsolete">入力レイテンシー(&amp;I):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1444"/>
@@ -2593,10 +2557,6 @@ Are you sure to overwrite the existing folder?</source>
         <translation></translation>
     </message>
     <message>
-        <source>Select output device for playback</source>
-        <translation type="obsolete">再生のための出力デバイスを選択</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2036"/>
         <location filename="../qjackctlSetupForm.ui" line="2120"/>
         <location filename="../qjackctlSetupForm.ui" line="2182"/>
@@ -2610,10 +2570,6 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="unfinished">録音のための入力デバイスを選択</translation>
     </message>
     <message>
-        <source>&amp;Output Latency:</source>
-        <translation type="obsolete">出力レイテンシー(&amp;O):</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="1696"/>
         <source>Maximum output audio hardware channels to allocate</source>
         <translation type="unfinished">割り当てるオーディオ出力ハードウェアチャンネルの最大値</translation>
@@ -2622,18 +2578,6 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="1527"/>
         <source>Alternate output device for playback</source>
         <translation type="unfinished">再生のための出力デバイス</translation>
-    </message>
-    <message>
-        <source>&amp;Input Channels:</source>
-        <translation type="obsolete">入力チャンネル(&amp;I):</translation>
-    </message>
-    <message>
-        <source>Select input device for capture</source>
-        <translation type="obsolete">録音のための入力デバイスを選択</translation>
-    </message>
-    <message>
-        <source>Select PCM device name</source>
-        <translation type="obsolete">PCMデバイス名</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1749"/>
@@ -3049,10 +2993,6 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Time in seconds between each auto-refresh cycle</source>
-        <translation type="obsolete">オーディオ更新サイクル時間を秒で指定します</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3972"/>
         <source>10</source>
         <translation></translation>
@@ -3066,14 +3006,6 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="2505"/>
         <source>Browse for a patchbay definition file to be activated</source>
         <translation type="unfinished">有効にするパッチベイ定義の参照</translation>
-    </message>
-    <message>
-        <source>Whether to refresh the connections patchbay automatically</source>
-        <translation type="obsolete">接続パッチベイを自動的に更新するかどうか</translation>
-    </message>
-    <message>
-        <source>&amp;Auto refresh connections Patchbay, every (secs):</source>
-        <translation type="obsolete">接続パッチベイを自動更新する周期(秒)(&amp;A):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2452"/>

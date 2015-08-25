@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0">
 <context>
     <name>QObject</name>
     <message>
@@ -87,10 +87,6 @@
         <location filename="../qjackctlAboutForm.ui" line="67"/>
         <source>&amp;Close</source>
         <translation>&amp;Cerrar</translation>
-    </message>
-    <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="47"/>
@@ -259,14 +255,6 @@
         <translation>Advertencia</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">Si</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-    <message>
         <location filename="../qjackctlConnect.cpp" line="1899"/>
         <source>This will suspend sound processing
 from all client applications.
@@ -297,10 +285,6 @@ Está seguro?</translation>
         <translation>&amp;Conectar</translation>
     </message>
     <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+C</translation>
-    </message>
-    <message>
         <location filename="../qjackctlConnectionsForm.ui" line="98"/>
         <location filename="../qjackctlConnectionsForm.ui" line="233"/>
         <location filename="../qjackctlConnectionsForm.ui" line="368"/>
@@ -313,10 +297,6 @@ Está seguro?</translation>
         <location filename="../qjackctlConnectionsForm.ui" line="384"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Desconectar</translation>
-    </message>
-    <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+D</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="111"/>
@@ -333,10 +313,6 @@ Está seguro?</translation>
         <translation>Desconectar &amp;Todo</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+T</translation>
-    </message>
-    <message>
         <location filename="../qjackctlConnectionsForm.ui" line="124"/>
         <location filename="../qjackctlConnectionsForm.ui" line="259"/>
         <location filename="../qjackctlConnectionsForm.ui" line="394"/>
@@ -349,10 +325,6 @@ Está seguro?</translation>
         <location filename="../qjackctlConnectionsForm.ui" line="455"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Refrescar</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="182"/>
@@ -370,18 +342,6 @@ Está seguro?</translation>
         <location filename="../qjackctlConnectionsForm.cpp" line="298"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Guardar</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation type="obsolete">Descartar cambios</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.cpp" line="299"/>
@@ -414,10 +374,6 @@ Desea guardar los cambios?</translation>
         <location filename="../qjackctlConnectionsForm.ui" line="426"/>
         <source>E&amp;xpand All</source>
         <translation>E&amp;xpandir Todos</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+X</translation>
     </message>
 </context>
 <context>
@@ -476,10 +432,6 @@ Desea guardar los cambios?</translation>
         <translation>&amp;Salir</translation>
     </message>
     <message>
-        <source>Alt+Q</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="406"/>
         <source>Quit processing and exit</source>
         <translation>Terminar procesamiento y salir</translation>
@@ -489,10 +441,6 @@ Desea guardar los cambios?</translation>
         <location filename="../qjackctlMainForm.cpp" line="3495"/>
         <source>&amp;Start</source>
         <translation>&amp;Iniciar</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+I</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="71"/>
@@ -505,10 +453,6 @@ Desea guardar los cambios?</translation>
         <translation>&amp;Detener</translation>
     </message>
     <message>
-        <source>Alt+T</source>
-        <translation type="obsolete">Alt+D</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="105"/>
         <source>Stop the JACK server</source>
         <translation>Detener el servidor JACK</translation>
@@ -517,10 +461,6 @@ Desea guardar los cambios?</translation>
         <location filename="../qjackctlMainForm.cpp" line="3584"/>
         <source>St&amp;atus</source>
         <translation>&amp;Estado</translation>
-    </message>
-    <message>
-        <source>Show/hide the extended status window</source>
-        <translation type="obsolete">Mostrar / ocultar la ventana de estado detallado</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="767"/>
@@ -534,14 +474,6 @@ Desea guardar los cambios?</translation>
         <translation>Mostrar información sobre esta aplicación</translation>
     </message>
     <message>
-        <source>S&amp;etup...</source>
-        <translation type="obsolete">Se&amp;tup...</translation>
-    </message>
-    <message>
-        <source>Alt+E</source>
-        <translation type="obsolete">Alt+T</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="505"/>
         <source>Show settings and options dialog</source>
         <translation>Mostrar el diálogo de opciones y preferencias</translation>
@@ -553,21 +485,9 @@ Desea guardar los cambios?</translation>
         <translation>&amp;Mensajes</translation>
     </message>
     <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
-    </message>
-    <message>
-        <source>Show/hide the messages log window</source>
-        <translation type="obsolete">Mostrar / ocultar la ventana de mensajes</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="3594"/>
         <source>Patch&amp;bay</source>
         <translation>Patch&amp;bay</translation>
-    </message>
-    <message>
-        <source>Alt+B</source>
-        <translation type="obsolete">Alt+B</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="573"/>
@@ -578,10 +498,6 @@ Desea guardar los cambios?</translation>
         <location filename="../qjackctlMainForm.ui" line="542"/>
         <source>&amp;Connect</source>
         <translation>&amp;Conexiones</translation>
-    </message>
-    <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
@@ -629,17 +545,9 @@ Desea guardar los cambios?</translation>
         <translation>Retroceder transporte</translation>
     </message>
     <message>
-        <source>Alt+F</source>
-        <translation type="obsolete">Alt+L</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="733"/>
         <source>Forward transport</source>
         <translation>Avanzar transporte (Alt+L)</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+K</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="607"/>
@@ -647,17 +555,9 @@ Desea guardar los cambios?</translation>
         <translation>Rebobinar transporte (Alt+K)</translation>
     </message>
     <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+.</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="705"/>
         <source>Stop transport rolling</source>
         <translation>Detener el transporte (Shift+Espacio)</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation type="obsolete">Alt+N</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="666"/>
@@ -674,14 +574,6 @@ Desea guardar los cambios?</translation>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <source>Terminate</source>
-        <translation type="obsolete">Terminar</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="986"/>
         <source>successfully</source>
         <translation>satisfactoriamente</translation>
@@ -690,14 +582,6 @@ Desea guardar los cambios?</translation>
         <location filename="../qjackctlMainForm.cpp" line="988"/>
         <source>with exit status=%1</source>
         <translation>con estado %1</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="obsolete">Detener</translation>
-    </message>
-    <message>
-        <source>Kill</source>
-        <translation type="obsolete">Matar</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1061"/>
@@ -845,10 +729,6 @@ Disculpa</translation>
         <translation>Error</translation>
     </message>
     <message>
-        <source>Transport BBT (bar:beat.ticks)</source>
-        <translation type="obsolete">BBT del transporte ( bar:beat:ticks )</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="1902"/>
         <source>Transport time code</source>
         <translation>Código de tiempo del transporte</translation>
@@ -862,13 +742,6 @@ Disculpa</translation>
         <location filename="../qjackctlMainForm.cpp" line="1916"/>
         <source>Elapsed time since last XRUN</source>
         <translation>Tiempo transcurrido desde el último XRUN</translation>
-    </message>
-    <message>
-        <source>Could not load active patchbay definition.
-
-Disabled.</source>
-        <translation type="obsolete">No se puede cargar el archivo con el esquema del patchbay activo.
-Deshabilitándolo.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2060"/>
@@ -1128,10 +1001,6 @@ reiniciando el servidor JACK.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="799"/>
         <location filename="../qjackctlMainForm.cpp" line="3663"/>
         <source>Information</source>
@@ -1152,14 +1021,6 @@ ALSA MIDI patchbay will be not available.</source>
         <translation>No se puede abrir el secuenciador ALSA como cliente
 
 El patchbay MIDI de ALSA no estará disponible.</translation>
-    </message>
-    <message>
-        <source>The program will keep running in the system tray.
-
-To terminate the program, please choose &quot;Quit&quot; in the context menu of the system tray entry.</source>
-        <translation type="obsolete">El programa seguirá corriendo en la bandeja del sistema.
-
-Para terminarlo, por favor seleccione &quot;Salir&quot; en el menú del ítem en la bandeja del sistema.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="841"/>
@@ -1274,14 +1135,6 @@ y es probable rehacer esta conexion:
 %1 -&gt; %2
 
 Desea remover la conexion?</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">Remover</translation>
-    </message>
-    <message>
-        <source>Ignore</source>
-        <translation type="obsolete">Ignorar</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2669"/>
@@ -1431,10 +1284,6 @@ Por favor revise la ventana de mensajes para mas información.</translation>
         <translation>&amp;Avanzar</translation>
     </message>
     <message>
-        <source>Alt+O</source>
-        <translation type="obsolete">Alt+O</translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.ui" line="508"/>
         <location filename="../qjackctlMainForm.cpp" line="3618"/>
         <source>Set&amp;up...</source>
@@ -1465,10 +1314,6 @@ Por favor revise la ventana de mensajes para mas información.</translation>
         <location filename="../qjackctlMainForm.cpp" line="3559"/>
         <source>Save &amp;Template...</source>
         <translation>Guardar Plan&amp;tilla...</translation>
-    </message>
-    <message>
-        <source>&amp;Refresh</source>
-        <translation type="obsolete">&amp;Refrescar</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="437"/>
@@ -1512,25 +1357,6 @@ Ha sido deshabilitado.</translation>
         <location filename="../qjackctlMainForm.cpp" line="1901"/>
         <source>Transport BBT (bar.beat.ticks)</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>qjackctlMessagesForm</name>
-    <message>
-        <source>Messages - JACK Audio Connection Kit</source>
-        <translation type="obsolete">Mensajes de JACK Audio Connection Kit</translation>
-    </message>
-    <message>
-        <source>Logging stopped --- %1 ---</source>
-        <translation type="obsolete">Registro detenido --- %1 ---</translation>
-    </message>
-    <message>
-        <source>Logging started --- %1 ---</source>
-        <translation type="obsolete">Registro iniciado --- %1 ---</translation>
-    </message>
-    <message>
-        <source>Messages output log</source>
-        <translation type="obsolete">Registro de mensajes</translation>
     </message>
 </context>
 <context>
@@ -1714,14 +1540,6 @@ Ha sido deshabilitado.</translation>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">Si</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbay.cpp" line="1696"/>
         <source>This will disconnect all sockets.
 
@@ -1744,10 +1562,6 @@ Está seguro?</translation>
         <translation>&amp;Nueva</translation>
     </message>
     <message>
-        <source>Alt+N</source>
-        <translation type="obsolete">Alt+N</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="429"/>
         <source>Create a new patchbay profile</source>
         <translation></translation>
@@ -1756,10 +1570,6 @@ Está seguro?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="448"/>
         <source>&amp;Load...</source>
         <translation>&amp;Abrir...</translation>
-    </message>
-    <message>
-        <source>Alt+L</source>
-        <translation type="obsolete">Alt+A</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="445"/>
@@ -1772,10 +1582,6 @@ Está seguro?</translation>
         <translation>&amp;Salvar...</translation>
     </message>
     <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="461"/>
         <source>Save current patchbay profile</source>
         <translation>Salvar el perfil actual del patchbay</translation>
@@ -1784,10 +1590,6 @@ Está seguro?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="501"/>
         <source>Acti&amp;vate</source>
         <translation>Acti&amp;var</translation>
-    </message>
-    <message>
-        <source>Alt+V</source>
-        <translation type="obsolete">Alt+V</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="498"/>
@@ -1800,10 +1602,6 @@ Está seguro?</translation>
         <translation>&amp;Conectar</translation>
     </message>
     <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+C</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="319"/>
         <source>Connect currently selected sockets</source>
         <translation>Conectar los puertos seleccionados</translation>
@@ -1812,10 +1610,6 @@ Está seguro?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="335"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Desconectar</translation>
-    </message>
-    <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+D</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="332"/>
@@ -1828,10 +1622,6 @@ Está seguro?</translation>
         <translation>Desconectar &amp;Todo</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+T</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.ui" line="345"/>
         <source>Disconnect all currently connected sockets</source>
         <translation>Desconectar los socket seleccionados</translation>
@@ -1840,10 +1630,6 @@ Está seguro?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="406"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Refrescar</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="403"/>
@@ -1944,18 +1730,6 @@ Está seguro?</translation>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="obsolete">Salvar</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation type="obsolete">Descartar cambios</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="608"/>
         <source>active</source>
         <translation>activa</translation>
@@ -1964,14 +1738,6 @@ Está seguro?</translation>
         <location filename="../qjackctlPatchbayForm.cpp" line="449"/>
         <source>New Patchbay definition</source>
         <translation>Nuevo esquema de patchbay</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Si</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="483"/>
@@ -2055,10 +1821,6 @@ una instantánea de las conexiones actuales?</translation>
         <location filename="../qjackctlPatchbayForm.ui" line="377"/>
         <source>E&amp;xpand All</source>
         <translation>E&amp;xpandir Todos</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+X</translation>
     </message>
 </context>
 <context>
@@ -2194,18 +1956,6 @@ una instantánea de las conexiones actuales?</translation>
         <translation>&amp;Guardar...</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="obsolete">Guardar</translation>
-    </message>
-    <message>
-        <source>Save and Quit</source>
-        <translation type="obsolete">Guardar y Salir</translation>
-    </message>
-    <message>
-        <source>Save Template</source>
-        <translation type="obsolete">Guardar plantilla</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSessionForm.ui" line="152"/>
         <source>Client / Ports</source>
         <translation>Cliente / Puertos</translation>
@@ -2320,10 +2070,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Actualizar sesión</translation>
     </message>
     <message>
-        <source>&amp;Refresh</source>
-        <translation type="obsolete">&amp;Refrescar</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSessionForm.cpp" line="255"/>
         <location filename="../qjackctlSessionForm.cpp" line="820"/>
         <source>Save and &amp;Quit...</source>
@@ -2407,10 +2153,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Remove</source>
-        <translation type="obsolete">&amp;Remover</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSessionForm.ui" line="229"/>
         <location filename="../qjackctlSessionForm.cpp" line="996"/>
         <source>Re&amp;move</source>
@@ -2474,10 +2216,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;Salvar</translation>
     </message>
     <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Save settings as current preset name</source>
         <translation>Salvar configuraciones en el preset actual</translation>
@@ -2488,21 +2226,9 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;Eliminar</translation>
     </message>
     <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+E</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="117"/>
         <source>Delete current settings preset</source>
         <translation>Eliminar el preset con la configuración actual</translation>
-    </message>
-    <message>
-        <source>Server</source>
-        <translation type="obsolete">Servidor</translation>
-    </message>
-    <message>
-        <source>Server &amp;Path:</source>
-        <translation type="obsolete">&amp;Ruta del servidor:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="795"/>
@@ -2513,14 +2239,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="785"/>
         <source>jackd</source>
         <translation>jackd</translation>
-    </message>
-    <message>
-        <source>jackd-realtime</source>
-        <translation type="obsolete">jackd-realtime</translation>
-    </message>
-    <message>
-        <source>The JACK Audio Connection Kit sound server path</source>
-        <translation type="obsolete">Ruta hacia el servidor de audio JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="153"/>
@@ -2638,10 +2356,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1050"/>
         <source>21333</source>
         <translation>21333</translation>
-    </message>
-    <message>
-        <source>Number o microseconds to wait between engine processes (dummy)</source>
-        <translation type="obsolete">Número de microsegundos a esperar entre procesos (dummy)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="446"/>
@@ -2762,10 +2476,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Tiempo &amp;Real</translation>
     </message>
     <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+R</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="395"/>
         <source>Use realtime scheduling</source>
         <translation>Usar prioridad(scheduling) de tiempo real</translation>
@@ -2774,10 +2484,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="878"/>
         <source>No Memory Loc&amp;k</source>
         <translation>No b&amp;loquear memoria</translation>
-    </message>
-    <message>
-        <source>Alt+K</source>
-        <translation type="obsolete">Alt+L</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="875"/>
@@ -2790,10 +2496,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;Desbloquear Memoria</translation>
     </message>
     <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+D</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="891"/>
         <source>Unlock memory of common toolkit libraries (GTK+, QT, FLTK, Wine)</source>
         <translation>No bloquear memoria de las librerías comunes (GTK+, QT, FLTK, Wine)</translation>
@@ -2802,10 +2504,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="942"/>
         <source>So&amp;ft Mode</source>
         <translation>Modo &amp;Tolerante</translation>
-    </message>
-    <message>
-        <source>Alt+F</source>
-        <translation type="obsolete">Alt+T</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="939"/>
@@ -2818,10 +2516,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;Monitorear</translation>
     </message>
     <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="923"/>
         <source>Provide output monitor ports</source>
         <translation>Proveer puertos para monitoreo de la salida</translation>
@@ -2830,10 +2524,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="974"/>
         <source>Force &amp;16bit</source>
         <translation>Forzar &amp;16bit</translation>
-    </message>
-    <message>
-        <source>Alt+1</source>
-        <translation type="obsolete">Alt+1</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="971"/>
@@ -2846,10 +2536,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>M&amp;onitoreo por Hardware</translation>
     </message>
     <message>
-        <source>Alt+O</source>
-        <translation type="obsolete">Alt+O</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="955"/>
         <source>Enable hardware monitoring of capture ports</source>
         <translation>Habilitar monitoreo por hardware de los puertos de captura</translation>
@@ -2858,10 +2544,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="910"/>
         <source>H/&amp;W Meter</source>
         <translation>Monitoreo por H/&amp;W</translation>
-    </message>
-    <message>
-        <source>Alt+W</source>
-        <translation type="obsolete">Alt+W</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="907"/>
@@ -2874,10 +2556,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;Ignorar H/W</translation>
     </message>
     <message>
-        <source>Alt+I</source>
-        <translation type="obsolete">Alt+I</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="987"/>
         <source>Ignore hardware period/buffer size</source>
         <translation>Ignorar el tamaño de bufer / período del hardware</translation>
@@ -2886,10 +2564,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1505"/>
         <source>&amp;Output Device:</source>
         <translation>Dispositiv&amp;o de salida:</translation>
-    </message>
-    <message>
-        <source>&amp;Output Channels:</source>
-        <translation type="obsolete">Númer&amp;o de canales de salida:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="254"/>
@@ -2905,10 +2579,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1382"/>
         <source>&amp;Audio:</source>
         <translation>&amp;Audio:</translation>
-    </message>
-    <message>
-        <source>&amp;Input Latency:</source>
-        <translation type="obsolete">Latenc&amp;ia de la entrada:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1444"/>
@@ -2966,10 +2636,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&gt;</translation>
     </message>
     <message>
-        <source>Select output device for playback</source>
-        <translation type="obsolete">Seleccionar dispositivo de salida para reproducción</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="309"/>
         <location filename="../qjackctlSetupForm.ui" line="1554"/>
         <location filename="../qjackctlSetupForm.ui" line="1617"/>
@@ -2982,10 +2648,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Dispositivo de entrada alternativo para captura</translation>
     </message>
     <message>
-        <source>&amp;Output Latency:</source>
-        <translation type="obsolete">Latencia de la sal&amp;ida:</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="1696"/>
         <source>Maximum output audio hardware channels to allocate</source>
         <translation>Máximo número de canales de salida por hardware a establecer</translation>
@@ -2994,18 +2656,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1527"/>
         <source>Alternate output device for playback</source>
         <translation>Dispositivo de salida alternativo para reproducción</translation>
-    </message>
-    <message>
-        <source>&amp;Input Channels:</source>
-        <translation type="obsolete">&amp;Canales de entrada:</translation>
-    </message>
-    <message>
-        <source>Select input device for capture</source>
-        <translation type="obsolete">Seleccionar dispositivo de entrada para captura</translation>
-    </message>
-    <message>
-        <source>Select PCM device name</source>
-        <translation type="obsolete">Seleccionar dispositivo PCM</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1749"/>
@@ -3038,17 +2688,9 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Establecer método de suavizado</translation>
     </message>
     <message>
-        <source>Alt+V</source>
-        <translation type="obsolete">Alt+V</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="644"/>
         <source>Whether to give verbose output on messages</source>
         <translation>Mostrar información mas detallada en los mensajes</translation>
-    </message>
-    <message>
-        <source>Start De&amp;lay (secs):</source>
-        <translation type="obsolete">Retardo Inicia&amp;l (segs):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1892"/>
@@ -3059,10 +2701,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="679"/>
         <source>Latency:</source>
         <translation>Latencia:</translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="obsolete">0</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="704"/>
@@ -3163,10 +2801,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Script a ejecutar luego de &amp;Terminar:</translation>
     </message>
     <message>
-        <source>Alt+T</source>
-        <translation type="obsolete">Alt+T</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2248"/>
         <source>Whether to execute a custom shell script after shuting down the JACK audio server.</source>
         <translation>Ejecutar un script personalizado después de terminar el servidor JACK.</translation>
@@ -3192,10 +2826,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;Capturar salida estándar</translation>
     </message>
     <message>
-        <source>Alt+C</source>
-        <translation type="obsolete">Alt+C</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2372"/>
         <source>Whether to capture standard output (stdout/stderr) into messages window</source>
         <translation>Capturar la salida estándar de JACK en la ventana de mensajes</translation>
@@ -3216,46 +2846,14 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Expresión regular usada para detectar XRUNs en los mensajes del servidor</translation>
     </message>
     <message>
-        <source>&amp;Ignore first XRUN occurrence on statistics</source>
-        <translation type="obsolete">&amp;Ignorar las primeras XRUN en las estadísticas</translation>
-    </message>
-    <message>
-        <source>Whether to ignore the first XRUN on server startup (most likely to occur on pre-0.80.0 servers)</source>
-        <translation type="obsolete">Ignorar las XRUN producidas durante el inicio del servidor (suele suceder en versiones anteriores a la 0.80.0 )</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2437"/>
         <source>Connections</source>
         <translation>Conexiones</translation>
     </message>
     <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3972"/>
         <source>10</source>
         <translation>10</translation>
-    </message>
-    <message>
-        <source>20</source>
-        <translation type="obsolete">20</translation>
-    </message>
-    <message>
-        <source>30</source>
-        <translation type="obsolete">30</translation>
-    </message>
-    <message>
-        <source>60</source>
-        <translation type="obsolete">60</translation>
-    </message>
-    <message>
-        <source>120</source>
-        <translation type="obsolete">120</translation>
-    </message>
-    <message>
-        <source>Time in seconds between each auto-refresh cycle</source>
-        <translation type="obsolete">Tiempo en segundos entre cada ciclo de auto - refresco</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2474"/>
@@ -3268,25 +2866,9 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Buscar el esquema de patchbay para activar</translation>
     </message>
     <message>
-        <source>&amp;Auto refresh connections Patchbay, every (secs):</source>
-        <translation type="obsolete">&amp;Auto refrescar las conexiones del Patchbay, cada (segs):</translation>
-    </message>
-    <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+A</translation>
-    </message>
-    <message>
-        <source>Whether to refresh the connections patchbay automatically</source>
-        <translation type="obsolete">Automáticamente refresca el patchbay de conexiones</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2455"/>
         <source>Activate &amp;Patchbay persistence:</source>
         <translation>Activar &amp;Persistencia del patchbay:</translation>
-    </message>
-    <message>
-        <source>Alt+P</source>
-        <translation type="obsolete">Alt+P</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2452"/>
@@ -3344,10 +2926,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>&amp;BBT del Transporte (bar:beat:ticks)</translation>
     </message>
     <message>
-        <source>Alt+B</source>
-        <translation type="obsolete">Alt+B</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="2712"/>
         <source>Elapsed time since last &amp;Reset</source>
         <translation>Tiempo transcurrido desde el último &amp;Reset</translation>
@@ -3356,10 +2934,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="2725"/>
         <source>Elapsed time since last &amp;XRUN</source>
         <translation>Tiempo transcurrido desde la última &amp;XRUN</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+X</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2773"/>
@@ -3515,10 +3089,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Habilitar alias para los nombres de &amp;puertos / clientes</translation>
     </message>
     <message>
-        <source>Alt+N</source>
-        <translation type="obsolete">Alt+P</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3362"/>
         <source>Whether to enable client/port name aliases on the connections window</source>
         <translation>Permitir alias para los puertos / clientes en la ventana de conexiones</translation>
@@ -3527,10 +3097,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.ui" line="3349"/>
         <source>Draw connection and patchbay lines as Be&amp;zier curves</source>
         <translation>Dibujar líneas en el Patchbay y ventana de conexiones como curvas Bé&amp;zier</translation>
-    </message>
-    <message>
-        <source>Alt+Z</source>
-        <translation type="obsolete">Alt+Z</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3346"/>
@@ -3583,21 +3149,9 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Habilitar ícono en band&amp;eja del sistema</translation>
     </message>
     <message>
-        <source>Alt+E</source>
-        <translation type="obsolete">Alt+E</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3560"/>
         <source>Whether to enable the system tray icon</source>
         <translation>Permitir íconos en la bandeja del sistema</translation>
-    </message>
-    <message>
-        <source>&amp;Delay window positioning at startup</source>
-        <translation type="obsolete">D&amp;emorar la reubicación de las ventanas al iniciar</translation>
-    </message>
-    <message>
-        <source>Whether to delay window positioning at application startup</source>
-        <translation type="obsolete">Esperar antes de ubicar las ventanas en su última posición al iniciar la aplicación</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3637"/>
@@ -3635,27 +3189,11 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Preguntar antes de detener JACK</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.cpp" line="810"/>
         <location filename="../qjackctlSetupForm.cpp" line="862"/>
         <location filename="../qjackctlSetupForm.cpp" line="1687"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Salvar</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation type="obsolete">Descartar cambios</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="896"/>
@@ -3706,10 +3244,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSetupForm.cpp" line="1356"/>
         <source>Patchbay Definition files</source>
         <translation>Archivos de esquema de patchbay</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="811"/>
@@ -4179,10 +3713,6 @@ Do you want to apply the changes?</source>
         <translation>Opciones extra para el driver (sufijo de la línea de comandos)</translation>
     </message>
     <message>
-        <source>Alt+Q</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3735"/>
         <source>Whether to stop JACK audio server on application exit</source>
         <translation type="unfinished"></translation>
@@ -4195,14 +3725,6 @@ Do you want to apply the changes?</source>
 </context>
 <context>
     <name>qjackctlSocketForm</name>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="52"/>
         <source>&amp;Socket</source>
@@ -4227,10 +3749,6 @@ Do you want to apply the changes?</source>
         <location filename="../qjackctlSocketForm.ui" line="100"/>
         <source>Add P&amp;lug</source>
         <translation>Añadir p&amp;Lug</translation>
-    </message>
-    <message>
-        <source>Alt+L</source>
-        <translation type="obsolete">Alt+L</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="97"/>
@@ -4263,17 +3781,9 @@ Do you want to apply the changes?</source>
         <translation>&amp;Editar</translation>
     </message>
     <message>
-        <source>Alt+E</source>
-        <translation type="obsolete">Alt+E</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="179"/>
         <source>&amp;Remove</source>
         <translation>&amp;Remover</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+R</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="176"/>
@@ -4291,26 +3801,14 @@ Do you want to apply the changes?</source>
         <translation>&amp;Bajar</translation>
     </message>
     <message>
-        <source>Alt+D</source>
-        <translation type="obsolete">Alt+B</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="221"/>
         <source>&amp;Up</source>
         <translation>&amp;Subir</translation>
     </message>
     <message>
-        <source>Alt+U</source>
-        <translation type="obsolete">Alt+S</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="250"/>
         <source>E&amp;xclusive</source>
         <translation>E&amp;xclusivo</translation>
-    </message>
-    <message>
-        <source>Alt+X</source>
-        <translation type="obsolete">Alt+X</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="247"/>
@@ -4328,10 +3826,6 @@ Do you want to apply the changes?</source>
         <translation>A&amp;udio</translation>
     </message>
     <message>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+U</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSocketForm.ui" line="295"/>
         <source>Audio socket type (JACK)</source>
         <translation>Socket tipo audio (JACK)</translation>
@@ -4340,10 +3834,6 @@ Do you want to apply the changes?</source>
         <location filename="../qjackctlSocketForm.ui" line="308"/>
         <source>&amp;MIDI</source>
         <translation>&amp;MIDI</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="315"/>
@@ -4403,14 +3893,6 @@ Do you want to apply the changes?</source>
         <translation>Algunas configuraciones han cambiado.
 
 Desea aplicar los cambios?</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
-    </message>
-    <message>
-        <source>Discard</source>
-        <translation type="obsolete">Descartar</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.cpp" line="735"/>
@@ -4481,14 +3963,6 @@ Desea aplicar los cambios?</translation>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">Si</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-    <message>
         <location filename="../qjackctlPatchbay.cpp" line="460"/>
         <source>&lt;New&gt; - %1</source>
         <translation>&lt;Nuevo&gt; - %1</translation>
@@ -4523,125 +3997,6 @@ Está seguro?</translation>
         <location filename="../qjackctlPatchbay.cpp" line="756"/>
         <source>Input Sockets / Plugs</source>
         <translation>Sockets de Entrada / Plugs</translation>
-    </message>
-</context>
-<context>
-    <name>qjackctlStatusForm</name>
-    <message>
-        <source>Status - JACK Audio Connection Kit</source>
-        <translation type="obsolete">Estado - JACK Audio Connection Kit</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Descripción</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="obsolete">Valor</translation>
-    </message>
-    <message>
-        <source>Statistics since last server startup</source>
-        <translation type="obsolete">Estadísticas desde el último inicio de JACK</translation>
-    </message>
-    <message>
-        <source>Re&amp;set</source>
-        <translation type="obsolete">re&amp;Iniciar</translation>
-    </message>
-    <message>
-        <source>Alt+S</source>
-        <translation type="obsolete">Alt+I</translation>
-    </message>
-    <message>
-        <source>Reset XRUN statistic values</source>
-        <translation type="obsolete">Reiniciar estadísticas de XRUN</translation>
-    </message>
-    <message>
-        <source>&amp;Refresh</source>
-        <translation type="obsolete">&amp;Refrescar</translation>
-    </message>
-    <message>
-        <source>Alt+R</source>
-        <translation type="obsolete">Alt+R</translation>
-    </message>
-    <message>
-        <source>Refresh XRUN statistic values</source>
-        <translation type="obsolete">Refrescar estadísticas de XRUN</translation>
-    </message>
-    <message>
-        <source>Time of last reset</source>
-        <translation type="obsolete">Tiempo desde el último reset</translation>
-    </message>
-    <message>
-        <source>Maximum scheduling delay</source>
-        <translation type="obsolete">Máximo retardo de programación(scheduling)</translation>
-    </message>
-    <message>
-        <source>XRUN count since last server startup</source>
-        <translation type="obsolete">XRUNs desde el último inicio</translation>
-    </message>
-    <message>
-        <source>XRUN total</source>
-        <translation type="obsolete">Total de XRUN</translation>
-    </message>
-    <message>
-        <source>XRUN average</source>
-        <translation type="obsolete">Promedio de XRUN</translation>
-    </message>
-    <message>
-        <source>XRUN minimum</source>
-        <translation type="obsolete">Mínimo de XRUN</translation>
-    </message>
-    <message>
-        <source>XRUN maximum</source>
-        <translation type="obsolete">Máximo de XRUN</translation>
-    </message>
-    <message>
-        <source>XRUN last</source>
-        <translation type="obsolete">Última XRUN</translation>
-    </message>
-    <message>
-        <source>XRUN last time detected</source>
-        <translation type="obsolete">Fecha de la última XRUN detectada</translation>
-    </message>
-    <message>
-        <source>Transport state</source>
-        <translation type="obsolete">Estado del transporte</translation>
-    </message>
-    <message>
-        <source>Transport BPM</source>
-        <translation type="obsolete">BPM del transporte</translation>
-    </message>
-    <message>
-        <source>Transport BBT</source>
-        <translation type="obsolete">BBT del Transporte</translation>
-    </message>
-    <message>
-        <source>Transport Timecode</source>
-        <translation type="obsolete">Código de tiempo del transporte</translation>
-    </message>
-    <message>
-        <source>Realtime Mode</source>
-        <translation type="obsolete">Modo Realtime</translation>
-    </message>
-    <message>
-        <source>Buffer Size</source>
-        <translation type="obsolete">Tamaño de Buffer</translation>
-    </message>
-    <message>
-        <source>Sample Rate</source>
-        <translation type="obsolete">Frecuencia de muestreo</translation>
-    </message>
-    <message>
-        <source>Server state</source>
-        <translation type="obsolete">Estado del Servidor</translation>
-    </message>
-    <message>
-        <source>DSP Load</source>
-        <translation type="obsolete">Uso de CPU del DSP</translation>
-    </message>
-    <message>
-        <source>Server name</source>
-        <translation type="obsolete">Nombre del servidor</translation>
     </message>
 </context>
 </TS>
