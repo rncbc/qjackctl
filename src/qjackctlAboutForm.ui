@@ -1,4 +1,5 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
@@ -20,8 +21,8 @@
 
  </comment>
  <class>qjackctlAboutForm</class>
- <widget class="QDialog" name="qjackctlAboutForm" >
-  <property name="geometry" >
+ <widget class="QDialog" name="qjackctlAboutForm">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -29,31 +30,41 @@
     <height>280</height>
    </rect>
   </property>
-  <property name="font" >
+  <property name="font">
    <font/>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>About QjackCtl</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="qjackctl.qrc" >:/images/about1.png</iconset>
+  <property name="windowIcon">
+   <iconset resource="qjackctl.qrc">
+    <normaloff>:/images/about1.png</normaloff>:/images/about1.png</iconset>
   </property>
-  <property name="sizeGripEnabled" >
+  <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" >
-   <property name="margin" >
+  <layout class="QGridLayout">
+   <property name="leftMargin">
     <number>4</number>
    </property>
-   <property name="spacing" >
+   <property name="topMargin">
     <number>4</number>
    </property>
-   <item row="2" column="2" >
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
+    <number>4</number>
+   </property>
+   <property name="spacing">
+    <number>4</number>
+   </property>
+   <item row="2" column="2">
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>8</width>
        <height>8</height>
@@ -61,35 +72,36 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="1" >
-    <widget class="QPushButton" name="ClosePushButton" >
-     <property name="text" >
+   <item row="2" column="1">
+    <widget class="QPushButton" name="ClosePushButton">
+     <property name="text">
       <string>&amp;Close</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" >
-    <widget class="QToolButton" name="AboutQtButton" >
-     <property name="focusPolicy" >
+   <item row="2" column="0">
+    <widget class="QToolButton" name="AboutQtButton">
+     <property name="focusPolicy">
       <enum>Qt::TabFocus</enum>
      </property>
-     <property name="toolTip" >
+     <property name="toolTip">
       <string>About Qt</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string/>
      </property>
-     <property name="icon" >
-      <iconset resource="qjackctl.qrc" >:/images/qtlogo.png</iconset>
+     <property name="icon">
+      <iconset resource="qjackctl.qrc">
+       <normaloff>:/images/qtlogo.png</normaloff>:/images/qtlogo.png</iconset>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
+   <item row="1" column="0">
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>8</width>
        <height>8</height>
@@ -97,48 +109,66 @@
      </property>
     </spacer>
    </item>
-   <item rowspan="2" row="0" column="1" colspan="2" >
-    <widget class="QTextBrowser" name="AboutTextView" >
-     <property name="lineWidth" >
+   <item row="0" column="1" rowspan="2" colspan="2">
+    <widget class="QTextBrowser" name="AboutTextView">
+     <property name="lineWidth">
       <number>1</number>
      </property>
-     <property name="undoRedoEnabled" >
+     <property name="undoRedoEnabled">
       <bool>false</bool>
      </property>
-     <property name="readOnly" >
+     <property name="readOnly">
       <bool>true</bool>
      </property>
-     <property name="openExternalLinks" >
+     <property name="openExternalLinks">
       <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" >
-    <widget class="QLabel" name="IconPixmapLabel" >
-     <property name="pixmap" >
-      <pixmap resource="qjackctl.qrc" >:/images/qjackctl.png</pixmap>
+   <item row="0" column="0">
+    <widget class="QLabel" name="IconPixmapLabel">
+     <property name="maximumSize">
+      <size>
+       <width>64</width>
+       <height>64</height>
+      </size>
      </property>
-     <property name="alignment" >
+     <property name="baseSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="qjackctl.qrc">:/images/qjackctl.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
-     <property name="wordWrap" >
+     <property name="wordWrap">
       <bool>false</bool>
      </property>
-     <property name="margin" >
+     <property name="margin">
       <number>2</number>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="4" margin="4" />
+ <layoutdefault spacing="4" margin="4"/>
  <tabstops>
   <tabstop>AboutTextView</tabstop>
   <tabstop>AboutQtButton</tabstop>
   <tabstop>ClosePushButton</tabstop>
  </tabstops>
  <resources>
-  <include location="qjackctl.qrc" />
+  <include location="qjackctl.qrc"/>
  </resources>
  <connections/>
 </ui>
