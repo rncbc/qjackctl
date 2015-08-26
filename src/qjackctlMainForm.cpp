@@ -560,7 +560,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
 
 	// Set the patchbay cable connection notification signal/slot.
-	QObject::connect(m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
+	QObject::connect(
+		m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
 		this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
 	// Try to restore old window positioning and appearence.
@@ -3738,15 +3739,16 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 void qjackctlMainForm::setDBusParameters (void)
 {
 	// Set configuration parameters...
-	bool bDummy     = (m_preset.sDriver == "dummy");
-	bool bSun       = (m_preset.sDriver == "sun");
-	bool bOss       = (m_preset.sDriver == "oss");
-	bool bAlsa      = (m_preset.sDriver == "alsa");
-	bool bPortaudio = (m_preset.sDriver == "portaudio");
-	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	bool bFreebob   = (m_preset.sDriver == "freebob");
-	bool bFirewire  = (m_preset.sDriver == "firewire");
-	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	const bool bDummy     = (m_preset.sDriver == "dummy");
+	const bool bSun       = (m_preset.sDriver == "sun");
+	const bool bOss       = (m_preset.sDriver == "oss");
+	const bool bAlsa      = (m_preset.sDriver == "alsa");
+	const bool bPortaudio = (m_preset.sDriver == "portaudio");
+	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
+	const bool bFreebob   = (m_preset.sDriver == "freebob");
+	const bool bFirewire  = (m_preset.sDriver == "firewire");
+	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+
 	setDBusEngineParameter("name",
 		m_pSetup->sServerName,
 		!m_pSetup->sServerName.isEmpty());

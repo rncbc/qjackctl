@@ -531,7 +531,8 @@ int main ( int argc, char **argv )
 	// Settle session manager shutdown (eg. logoff)...
 	QObject::connect(
 		&app, SIGNAL(commitDataRequest(QSessionManager&)),
-		&w, SLOT(commitData(QSessionManager&)));
+		&w, SLOT(commitData(QSessionManager&)),
+		Qt::DirectConnection);
 #endif
 
 	// Register the quit signal/slot.
