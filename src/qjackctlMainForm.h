@@ -29,6 +29,8 @@
 #include <QProcess>
 #include <QDateTime>
 
+#include <QSessionManager>
+
 #include <jack/jack.h>
 
 #ifdef CONFIG_ALSA_SEQ
@@ -50,6 +52,7 @@ class qjackctlSystemTray;
 class qjackctlPortItem;
 
 class QSocketNotifier;
+class QSessionManager;
 
 #ifdef CONFIG_DBUS
 class QDBusInterface;
@@ -128,9 +131,7 @@ public slots:
 
 	void resetXrunStats();
 
-#if QT_VERSION >= 0x050000
-	void commitData(QSessionManager&);
-#endif
+	void commitData(QSessionManager& sm);
 
 protected slots:
 

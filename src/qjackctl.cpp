@@ -28,6 +28,8 @@
 #include <QTranslator>
 #include <QLocale>
 
+#include <QSessionManager>
+
 #if QT_VERSION < 0x040500
 namespace Qt {
 const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
@@ -316,17 +318,6 @@ public:
 #endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
 
-#if QT_VERSION < 0x050000
-	// Session shutdown handler.
-	void commitData(QSessionManager& sm)
-	{
-		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-		if (pMainForm)
-			pMainForm->setQuitForce(true);
-		QApplication::commitData(sm);
-	}
-#endif
-
 private:
 
 	// Translation support.
@@ -527,13 +518,11 @@ int main ( int argc, char **argv )
 	// Settle this one as application main widget...
 	app.setMainWidget(&w);
 
-#if QT_VERSION >= 0x050000
 	// Settle session manager shutdown (eg. logoff)...
 	QObject::connect(
 		&app, SIGNAL(commitDataRequest(QSessionManager&)),
 		&w, SLOT(commitData(QSessionManager&)),
 		Qt::DirectConnection);
-#endif
 
 	// Register the quit signal/slot.
 	app.setQuitOnLastWindowClosed(false);
