@@ -3,7 +3,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -37,8 +37,7 @@
    <string>About QjackCtl</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="qjackctl.qrc">
-    <normaloff>:/images/about1.png</normaloff>:/images/about1.png</iconset>
+   <iconset resource="qjackctl.qrc">:/images/about1.png</iconset>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -91,8 +90,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="qjackctl.qrc">
-       <normaloff>:/images/qtlogo.png</normaloff>:/images/qtlogo.png</iconset>
+      <iconset resource="qjackctl.qrc">:/images/qtlogo.png</iconset>
      </property>
     </widget>
    </item>
@@ -128,12 +126,6 @@
    <item row="0" column="0">
     <widget class="QLabel" name="IconPixmapLabel">
      <property name="maximumSize">
-      <size>
-       <width>64</width>
-       <height>64</height>
-      </size>
-     </property>
-     <property name="baseSize">
       <size>
        <width>32</width>
        <height>32</height>

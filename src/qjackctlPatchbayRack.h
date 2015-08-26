@@ -24,7 +24,7 @@
 
 #include "qjackctlAbout.h"
 
-#include <QtWidgets>
+#include <QObject>
 #include <QStringList>
 
 #include <jack/jack.h>

@@ -1,7 +1,7 @@
 // qjackctlSystemTray.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -41,17 +41,15 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 {
 	// Set things inherited...
 	if (pParent) {
-		this->m_icon = pParent->windowIcon();
-	  this->setBackground(Qt::transparent); // also updates m_pixmap
-		QSystemTrayIcon::setIcon(this->m_icon);
+		m_icon = pParent->windowIcon();
+		setBackground(Qt::transparent); // also updates m_pixmap
+		QSystemTrayIcon::setIcon(m_icon);
 		QSystemTrayIcon::setToolTip(pParent->windowTitle());
 	}
 
 	QObject::connect(this,
 		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 		SLOT(activated(QSystemTrayIcon::ActivationReason)));
-
-
 
 	QSystemTrayIcon::show();
 }
@@ -94,8 +92,9 @@ qjackctlSystemTray::~qjackctlSystemTray (void)
 // System tray icon/pixmaps update method.
 void qjackctlSystemTray::updatePixmap (void)
 {
-  // Get the default systray icon size...
-  QRect dimension = QSystemTrayIcon::geometry();
+	// Get the default systray icon size...
+	const QRect& dimension = QSystemTrayIcon::geometry();
+
 	// Renitialize icon as fit...
 	m_pixmap = m_icon.pixmap(dimension.width(), dimension.height());
 
@@ -104,8 +103,9 @@ void qjackctlSystemTray::updatePixmap (void)
 		QBitmap mask = m_pixmap.mask();
 		QPainter(&mask).drawPixmap(0, 0, m_pixmapOverlay.mask());
 		m_pixmap.setMask(mask);
-    // paint the status symbol in the bottom left...
-		QPainter(&m_pixmap).drawPixmap(0, dimension.height() - m_pixmapOverlay.height(), m_pixmapOverlay);
+		// Paint the status symbol in the bottom left...
+		const int dy = dimension.height() - m_pixmapOverlay.height();
+		QPainter(&m_pixmap).drawPixmap(0, 0, m_pixmapOverlay);
 	}
 
 	if (m_background != Qt::transparent) {
