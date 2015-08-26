@@ -41,8 +41,9 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 {
 	// Set things inherited...
 	if (pParent) {
-		m_icon = pParent->windowIcon();
-		QSystemTrayIcon::setIcon(m_icon);
+		this->m_icon = pParent->windowIcon();
+	  this->setBackground(Qt::transparent); // also updates m_pixmap
+		QSystemTrayIcon::setIcon(this->m_icon);
 		QSystemTrayIcon::setToolTip(pParent->windowTitle());
 	}
 
@@ -50,7 +51,7 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 		SLOT(activated(QSystemTrayIcon::ActivationReason)));
 
-	setBackground(Qt::transparent);
+
 
 	QSystemTrayIcon::show();
 }
