@@ -4042,4 +4042,12 @@ bool qjackctlMainForm::isQuitForce (void) const
 }
 
 
+#if QT_VERSION >= 0x050000
+void qjackctlMainForm::commitData ( QSessionManager& )
+{
+	setQuitForce(true);
+}
+#endif
+
+
 // end of qjackctlMainForm.cpp

@@ -128,6 +128,10 @@ public slots:
 
 	void resetXrunStats();
 
+#if QT_VERSION >= 0x050000
+	void commitData(QSessionManager&);
+#endif
+
 protected slots:
 
 	void readStdout();
