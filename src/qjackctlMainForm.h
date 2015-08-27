@@ -29,6 +29,8 @@
 #include <QProcess>
 #include <QDateTime>
 
+#include <QSessionManager>
+
 #include <jack/jack.h>
 
 #ifdef CONFIG_ALSA_SEQ
@@ -50,6 +52,7 @@ class qjackctlSystemTray;
 class qjackctlPortItem;
 
 class QSocketNotifier;
+class QSessionManager;
 
 #ifdef CONFIG_DBUS
 class QDBusInterface;
@@ -99,9 +102,6 @@ public:
 	void queryDisconnect(
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType);
 
-	void setQuitForce(bool bQuitForce);
-	bool isQuitForce() const;
-
 	void updateMessagesFont();
 	void updateMessagesLimit();
 	void updateMessagesLogging();
@@ -127,6 +127,8 @@ public slots:
 	void stopJack();
 
 	void resetXrunStats();
+
+	void commitData(QSessionManager& sm);
 
 protected slots:
 
@@ -329,6 +331,7 @@ private:
 	QString m_sTimeDashes;
 	QString m_sJackCmdLine;
 
+	bool  m_bQuitClose;
 	bool  m_bQuitForce;
 	float m_fSkipAccel;
 

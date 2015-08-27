@@ -366,6 +366,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pSystemTray  = NULL;
 
 	// We're not quitting so early :)
+	m_bQuitClose = false;
 	m_bQuitForce = false;
 
 	// Transport skip accelerate factor.
@@ -560,7 +561,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
 
 	// Set the patchbay cable connection notification signal/slot.
-	QObject::connect(m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
+	QObject::connect(
+		m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
 		this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
 	// Try to restore old window positioning and appearence.
@@ -791,7 +793,7 @@ bool qjackctlMainForm::queryClose (void)
 #ifdef CONFIG_SYSTEM_TRAY
 	// If we're not quitting explicitly and there's an
 	// active system tray icon, then just hide ourselves.
-	if (!m_bQuitForce && isVisible()
+	if (!m_bQuitClose && !m_bQuitForce && isVisible()
 		&& m_pSetup->bSystemTray && m_pSystemTray) {
 		m_pSetup->saveWidgetGeometry(this, true);
 		if (m_pSetup->bSystemTrayQueryClose) {
@@ -829,7 +831,8 @@ bool qjackctlMainForm::queryClose (void)
 #endif
 
 	// Check if JACK daemon is currently running...
-	if (bQueryClose && m_pJack && m_pJack->state() == QProcess::Running
+	if (bQueryClose && !m_bQuitForce
+		&& m_pJack && m_pJack->state() == QProcess::Running
 		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
 		show();
 		raise();
@@ -861,26 +864,29 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Try to save current setup settings.
-	if (bQueryClose && m_pSetupForm)
+	if (bQueryClose && m_pSetupForm && !m_bQuitForce)
 		bQueryClose = m_pSetupForm->queryClose();
 
 	// Try to save current aliases default settings.
 	if (bQueryClose && m_pConnectionsForm) {
-		bQueryClose = m_pConnectionsForm->queryClose();
+		if (!m_bQuitForce)
+			bQueryClose = m_pConnectionsForm->queryClose();
 		if (bQueryClose)
 			m_pSetup->iConnectionsTabPage = m_pConnectionsForm->tabPage();
 	}
 
 	// Try to save current patchbay default settings.
 	if (bQueryClose && m_pPatchbayForm) {
-		bQueryClose = m_pPatchbayForm->queryClose();
+		if (!m_bQuitForce)
+			bQueryClose = m_pPatchbayForm->queryClose();
 		if (bQueryClose && !m_pPatchbayForm->patchbayPath().isEmpty())
 			m_pSetup->sPatchbayPath = m_pPatchbayForm->patchbayPath();
 	}
 
 	// Try to save current session directories list...
 	if (bQueryClose && m_pSessionForm) {
-		bQueryClose = m_pSessionForm->queryClose();
+		if (!m_bQuitForce)
+			bQueryClose = m_pSessionForm->queryClose();
 		if (bQueryClose) {
 			m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
 			m_pSetup->bSessionSaveVersion = m_pSessionForm->isSaveSessionVersion();
@@ -894,6 +900,7 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Whether we're really quitting.
+	m_bQuitClose = bQueryClose;
 	m_bQuitForce = bQueryClose;
 
 	// Try to save current positioning.
@@ -1467,7 +1474,7 @@ void qjackctlMainForm::stopJackServer (void)
 			// Give it some time to terminate gracefully and stabilize...
 			stabilize(QJACKCTL_TIMER_MSECS);
 			// Keep on, if not exiting for good.
-			if (!m_bQuitForce)
+			if (!m_bQuitClose && !m_bQuitForce)
 				return;
 		}
 	}
@@ -3708,7 +3715,7 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 void qjackctlMainForm::quitMainForm (void)
 {
 	// Flag that we're quitting explicitly.
-	m_bQuitForce = true;
+	m_bQuitClose = true;
 
 	// And then, do the closing dance.
 	close();
@@ -3738,15 +3745,16 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 void qjackctlMainForm::setDBusParameters (void)
 {
 	// Set configuration parameters...
-	bool bDummy     = (m_preset.sDriver == "dummy");
-	bool bSun       = (m_preset.sDriver == "sun");
-	bool bOss       = (m_preset.sDriver == "oss");
-	bool bAlsa      = (m_preset.sDriver == "alsa");
-	bool bPortaudio = (m_preset.sDriver == "portaudio");
-	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	bool bFreebob   = (m_preset.sDriver == "freebob");
-	bool bFirewire  = (m_preset.sDriver == "firewire");
-	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	const bool bDummy     = (m_preset.sDriver == "dummy");
+	const bool bSun       = (m_preset.sDriver == "sun");
+	const bool bOss       = (m_preset.sDriver == "oss");
+	const bool bAlsa      = (m_preset.sDriver == "alsa");
+	const bool bPortaudio = (m_preset.sDriver == "portaudio");
+	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
+	const bool bFreebob   = (m_preset.sDriver == "freebob");
+	const bool bFirewire  = (m_preset.sDriver == "firewire");
+	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+
 	setDBusEngineParameter("name",
 		m_pSetup->sServerName,
 		!m_pSetup->sServerName.isEmpty());
@@ -4030,15 +4038,12 @@ void qjackctlMainForm::transportPlayStatus ( bool bOn )
 }
 
 
-// Session (desktop) shutdown signal handler.
-void qjackctlMainForm::setQuitForce ( bool bQuitForce )
+void qjackctlMainForm::commitData ( QSessionManager& sm )
 {
-	m_bQuitForce = bQuitForce;
-}
+	sm.release();
 
-bool qjackctlMainForm::isQuitForce (void) const
-{
-	return m_bQuitForce;
+	m_bQuitClose = true;
+	m_bQuitForce = true;
 }
 
 

@@ -42,7 +42,7 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	// Set things inherited...
 	if (pParent) {
 		m_icon = pParent->windowIcon();
-		setBackground(Qt::transparent); // also updates m_pixmap
+		setBackground(Qt::transparent); // also updates pixmap.
 		QSystemTrayIcon::setIcon(m_icon);
 		QSystemTrayIcon::setToolTip(pParent->windowTitle());
 	}
@@ -103,8 +103,6 @@ void qjackctlSystemTray::updatePixmap (void)
 		QBitmap mask = m_pixmap.mask();
 		QPainter(&mask).drawPixmap(0, 0, m_pixmapOverlay.mask());
 		m_pixmap.setMask(mask);
-		// Paint the status symbol in the bottom left...
-		const int dy = dimension.height() - m_pixmapOverlay.height();
 		QPainter(&m_pixmap).drawPixmap(0, 0, m_pixmapOverlay);
 	}
 

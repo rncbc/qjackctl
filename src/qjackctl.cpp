@@ -1,7 +1,7 @@
 // qjackctl.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -27,6 +27,8 @@
 #include <QLibraryInfo>
 #include <QTranslator>
 #include <QLocale>
+
+#include <QSessionManager>
 
 #if QT_VERSION < 0x040500
 namespace Qt {
@@ -316,17 +318,6 @@ public:
 #endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
 
-	// Session shutdown handler.
-	void commitData(QSessionManager& sm)
-	{
-		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-		if (pMainForm)
-			pMainForm->setQuitForce(true);
-	#if QT_VERSION < 0x050000
-		QApplication::commitData(sm);
-	#endif
-	}
-
 private:
 
 	// Translation support.
@@ -526,6 +517,12 @@ int main ( int argc, char **argv )
 
 	// Settle this one as application main widget...
 	app.setMainWidget(&w);
+
+	// Settle session manager shutdown (eg. logoff)...
+	QObject::connect(
+		&app, SIGNAL(commitDataRequest(QSessionManager&)),
+		&w, SLOT(commitData(QSessionManager&)),
+		Qt::DirectConnection);
 
 	// Register the quit signal/slot.
 	app.setQuitOnLastWindowClosed(false);

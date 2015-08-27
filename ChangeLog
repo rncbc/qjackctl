@@ -9,6 +9,9 @@ GIT HEAD
 - New hi-res application icon (by Uttrup Renzel, Max Christian
   Pohle, thanks). (EXPERIMENTAL)
 
+- Desktop environment session shutdown/logout management has been
+  also adapted to Qt5 framework. (EXPERIMENTAL)
+
 - Single/unique application instance control adapted to Qt5/X11.
   (EXPERIMENTAL)
 
