@@ -102,9 +102,6 @@ public:
 	void queryDisconnect(
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType);
 
-	void setQuitForce(bool bQuitForce);
-	bool isQuitForce() const;
-
 	void updateMessagesFont();
 	void updateMessagesLimit();
 	void updateMessagesLogging();
@@ -334,6 +331,7 @@ private:
 	QString m_sTimeDashes;
 	QString m_sJackCmdLine;
 
+	bool  m_bQuitClose;
 	bool  m_bQuitForce;
 	float m_fSkipAccel;
 
