@@ -33,7 +33,10 @@
 #include "qjackctlPatchbayForm.h"
 #include "qjackctlSetupForm.h"
 #include "qjackctlAboutForm.h"
+
+#ifdef CONFIG_SYSTEM_TRAY
 #include "qjackctlSystemTray.h"
+#endif
 
 #include <QApplication>
 #include <QSocketNotifier>
@@ -362,11 +365,13 @@ qjackctlMainForm::qjackctlMainForm (
 	// Patchbay rack can be readily created.
 	m_pPatchbayRack = new qjackctlPatchbayRack();
 
+#ifdef CONFIG_SYSTEM_TRAY
 	// The eventual system tray widget.
 	m_pSystemTray  = NULL;
+	m_bQuitClose = false;
+#endif
 
 	// We're not quitting so early :)
-	m_bQuitClose = false;
 	m_bQuitForce = false;
 
 	// Transport skip accelerate factor.
@@ -485,11 +490,11 @@ qjackctlMainForm::~qjackctlMainForm (void)
 		delete m_pPatchbayForm;
 	if (m_pSetupForm)
 		delete m_pSetupForm;
-
+#ifdef CONFIG_SYSTEM_TRAY
 	// Quit off system tray widget.
 	if (m_pSystemTray)
 		delete m_pSystemTray;
-
+#endif
 	// Patchbay rack is also dead.
 	if (m_pPatchbayRack)
 		delete m_pPatchbayRack;
@@ -584,8 +589,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateJackClientPortMetadata();
 	updateBezierLines();
 //	updateActivePatchbay();
+#ifdef CONFIG_SYSTEM_TRAY
 	updateSystemTray();
-
+#endif
 	// And for the whole widget gallore...
 	m_pSetup->loadWidgetGeometry(m_pMessagesStatusForm);
 	m_pSetup->loadWidgetGeometry(m_pSessionForm);
@@ -900,7 +906,9 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Whether we're really quitting.
+#ifdef CONFIG_SYSTEM_TRAY
 	m_bQuitClose = bQueryClose;
+#endif
 	m_bQuitForce = bQueryClose;
 
 	// Try to save current positioning.
@@ -922,9 +930,11 @@ bool qjackctlMainForm::queryClose (void)
 			m_pPatchbayForm->close();
 		if (m_pSetupForm)
 			m_pSetupForm->close();
+	#ifdef CONFIG_SYSTEM_TRAY
 		// And the system tray icon too.
 		if (m_pSystemTray)
 			m_pSystemTray->close();
+	#endif
 		// Stop any service out there...
 		if (m_pSetup->bStopJack)
 			stopJackServer();
@@ -1474,7 +1484,7 @@ void qjackctlMainForm::stopJackServer (void)
 			// Give it some time to terminate gracefully and stabilize...
 			stabilize(QJACKCTL_TIMER_MSECS);
 			// Keep on, if not exiting for good.
-			if (!m_bQuitClose && !m_bQuitForce)
+			if (!m_bQuitForce)
 				return;
 		}
 	}
@@ -2169,12 +2179,16 @@ void qjackctlMainForm::updateXrunCount (void)
 			color = (m_pJackClient ? Qt::red : Qt::darkRed);
 		else
 			color = (m_pJackClient ? Qt::yellow : Qt::darkYellow);
+	#ifdef CONFIG_SYSTEM_TRAY
 		// Change the system tray icon background color!
 		if (m_pSystemTray)
 			m_pSystemTray->setBackground(color);
 	}   // Reset the system tray icon background!
 	else if (m_pSystemTray)
 		m_pSystemTray->setBackground(Qt::transparent);
+	#else
+	}
+	#endif
 
 	QPalette pal;
 	pal.setColor(QPalette::Foreground, color);
@@ -2913,6 +2927,7 @@ void qjackctlMainForm::toggleMainForm (void)
 	m_pSetup->saveWidgetGeometry(this, true);
 
 	if (isVisible()) {
+	#ifdef CONFIG_SYSTEM_TRAY
 		if (m_pSetup->bSystemTray && m_pSystemTray) {
 			// Hide away from sight, if not active...
 			if (isActiveWindow()) {
@@ -2921,10 +2936,11 @@ void qjackctlMainForm::toggleMainForm (void)
 				raise();
 				activateWindow();
 			}
-		} else {
-			// Minimize (iconify) normally.
-			showMinimized();
 		}
+		else
+	#endif
+		// Minimize (iconify) normally.
+		showMinimized();
 	} else {
 		show();
 		raise();
@@ -3195,6 +3211,7 @@ void qjackctlMainForm::refreshStatus (void)
 			float fDspLoad = jack_cpu_load(m_pJackClient);
 			const char f = (fDspLoad > 0.1f ? 'f' : 'g'); // format
 			const int  p = (fDspLoad > 1.0f ?  1  :  2 ); // precision
+		#ifdef CONFIG_SYSTEM_TRAY
 			if (m_pSystemTray) {
 				if (m_iXrunCount > 0) {
 					m_pSystemTray->setToolTip(tr("%1 (%2%)")
@@ -3207,6 +3224,7 @@ void qjackctlMainForm::refreshStatus (void)
 						.arg(m_iXrunCount));
 				}
 			}
+		#endif
 			updateStatusItem(STATUS_DSP_LOAD,
 				tr("%1 %").arg(fDspLoad, 0, f, p));
 			updateStatusItem(STATUS_SAMPLE_RATE,
@@ -3401,6 +3419,7 @@ void qjackctlMainForm::updateTitleStatus (void)
 
 	updateStatusItem(STATUS_SERVER_STATE, sState);
 
+#ifdef CONFIG_SYSTEM_TRAY
 	if (m_pSystemTray) {
 		switch (m_iServerState) {
 		case QJACKCTL_STARTING:
@@ -3428,6 +3447,7 @@ void qjackctlMainForm::updateTitleStatus (void)
 		}
 		m_pSystemTray->setToolTip(sTitle);
 	}
+#endif
 
 	sTitle = m_pSetup->sServerName;
 	if (sTitle.isEmpty())
@@ -3450,10 +3470,11 @@ void qjackctlMainForm::updateServerState ( int iServerState )
 }
 
 
+#ifdef CONFIG_SYSTEM_TRAY
+
 // System tray master switcher.
 void qjackctlMainForm::updateSystemTray (void)
 {
-#ifdef CONFIG_SYSTEM_TRAY
 	if (!m_pSetup->bSystemTray && m_pSystemTray) {
 	//  Strange enough, this would close the application too.
 	//  m_pSystemTray->close();
@@ -3470,7 +3491,7 @@ void qjackctlMainForm::updateSystemTray (void)
 			SLOT(resetXrunStats()));
 		QObject::connect(m_pSystemTray,
 			SIGNAL(contextMenuRequested(const QPoint &)),
-			SLOT(systemTrayContextMenu(const QPoint &)));
+			SLOT(contextMenu(const QPoint &)));
 		m_pSystemTray->show();
 	} else {
 		// Make sure the main widget is visible.
@@ -3478,21 +3499,25 @@ void qjackctlMainForm::updateSystemTray (void)
 		raise();
 		activateWindow();
 	}
-#endif
 }
+
+#endif
 
 
 // System tray context menu request slot.
-void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
+void qjackctlMainForm::contextMenu ( const QPoint& pos )
 {
 	QMenu menu(this);
 	QAction *pAction;
 
-	QString sHideMinimize = (m_pSetup->bSystemTray && m_pSystemTray
-		? tr("&Hide") : tr("Mi&nimize"));
-	QString sShowRestore  = (m_pSetup->bSystemTray && m_pSystemTray
-		? tr("S&how") : tr("Rest&ore"));
-
+	QString sHideMinimize = tr("Mi&nimize");
+	QString sShowRestore  = tr("Rest&ore");
+#ifdef CONFIG_SYSTEM_TRAY
+	if (m_pSetup->bSystemTray && m_pSystemTray) {
+		sHideMinimize = tr("&Hide");
+		sShowRestore  = tr("S&how");
+	}
+#endif
 	pAction = menu.addAction(isVisible()
 		? sHideMinimize : sShowRestore, this, SLOT(toggleMainForm()));
 	menu.addSeparator();
@@ -3714,9 +3739,10 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 // Close main form slot.
 void qjackctlMainForm::quitMainForm (void)
 {
+#ifdef CONFIG_SYSTEM_TRAY
 	// Flag that we're quitting explicitly.
 	m_bQuitClose = true;
-
+#endif
 	// And then, do the closing dance.
 	close();
 }
@@ -3726,7 +3752,7 @@ void qjackctlMainForm::quitMainForm (void)
 void qjackctlMainForm::contextMenuEvent ( QContextMenuEvent *pEvent )
 {
 	// We'll just show up the usual system tray menu.
-	systemTrayContextMenu(pEvent->globalPos());
+	contextMenu(pEvent->globalPos());
 }
 
 
@@ -4042,7 +4068,9 @@ void qjackctlMainForm::commitData ( QSessionManager& sm )
 {
 	sm.release();
 
+#ifdef CONFIG_SYSTEM_TRAY
 	m_bQuitClose = true;
+#endif
 	m_bQuitForce = true;
 }
 
