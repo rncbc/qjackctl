@@ -438,7 +438,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="74"/>
-        <location filename="../qjackctlMainForm.cpp" line="3496"/>
+        <location filename="../qjackctlMainForm.cpp" line="3527"/>
         <source>&amp;Start</source>
         <translation>開始(&amp;S)</translation>
     </message>
@@ -504,7 +504,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="409"/>
-        <location filename="../qjackctlMainForm.cpp" line="3630"/>
+        <location filename="../qjackctlMainForm.cpp" line="3661"/>
         <source>&amp;Quit</source>
         <translation>終了(&amp;Q)</translation>
     </message>
@@ -515,7 +515,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="440"/>
-        <location filename="../qjackctlMainForm.cpp" line="3534"/>
+        <location filename="../qjackctlMainForm.cpp" line="3565"/>
         <source>S&amp;ession</source>
         <translation type="unfinished">セッション(&amp;E)</translation>
     </message>
@@ -526,7 +526,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="474"/>
-        <location filename="../qjackctlMainForm.cpp" line="3579"/>
+        <location filename="../qjackctlMainForm.cpp" line="3610"/>
         <source>&amp;Messages</source>
         <translation>メッセージ(&amp;M)</translation>
     </message>
@@ -537,7 +537,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="508"/>
-        <location filename="../qjackctlMainForm.cpp" line="3619"/>
+        <location filename="../qjackctlMainForm.cpp" line="3650"/>
         <source>Set&amp;up...</source>
         <translation type="unfinished">設定(&amp;U)...</translation>
     </message>
@@ -568,7 +568,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="610"/>
-        <location filename="../qjackctlMainForm.cpp" line="3602"/>
+        <location filename="../qjackctlMainForm.cpp" line="3633"/>
         <source>&amp;Rewind</source>
         <translation type="unfinished">先頭に戻す(&amp;R)</translation>
     </message>
@@ -589,7 +589,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="669"/>
-        <location filename="../qjackctlMainForm.cpp" line="3608"/>
+        <location filename="../qjackctlMainForm.cpp" line="3639"/>
         <source>&amp;Play</source>
         <translation>再生(&amp;P)</translation>
     </message>
@@ -600,7 +600,7 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="708"/>
-        <location filename="../qjackctlMainForm.cpp" line="3611"/>
+        <location filename="../qjackctlMainForm.cpp" line="3642"/>
         <source>Pa&amp;use</source>
         <translation type="unfinished">一時停止(&amp;U)</translation>
     </message>
@@ -621,12 +621,12 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="767"/>
-        <location filename="../qjackctlMainForm.cpp" line="3625"/>
+        <location filename="../qjackctlMainForm.cpp" line="3656"/>
         <source>Ab&amp;out...</source>
         <translation type="unfinished">情報(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="647"/>
+        <location filename="../qjackctlMainForm.cpp" line="654"/>
         <source>Could not open ALSA sequencer as a client.
 
 ALSA MIDI patchbay will be not available.</source>
@@ -635,23 +635,23 @@ ALSA MIDI patchbay will be not available.</source>
 ALSA MIDIパッチベイは利用できません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="716"/>
+        <location filename="../qjackctlMainForm.cpp" line="723"/>
         <source>D-BUS: Service is available (%1 aka jackdbus).</source>
         <translation type="unfinished">D-BUS: サービスを利用できます (%1 すなわちjackdbus)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="747"/>
+        <location filename="../qjackctlMainForm.cpp" line="754"/>
         <source>D-BUS: Service not available (%1 aka jackdbus).</source>
         <translation type="unfinished">D-BUS: サービスを利用できません (%1 すなわちjackdbus)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="800"/>
-        <location filename="../qjackctlMainForm.cpp" line="3664"/>
+        <location filename="../qjackctlMainForm.cpp" line="807"/>
+        <location filename="../qjackctlMainForm.cpp" line="3695"/>
         <source>Information</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="802"/>
+        <location filename="../qjackctlMainForm.cpp" line="809"/>
         <source>The program will keep running in the system tray.
 
 To terminate the program, please choose &quot;Quit&quot;
@@ -663,21 +663,21 @@ in the context menu of the system tray icon.</source>
 </translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="818"/>
+        <location filename="../qjackctlMainForm.cpp" line="825"/>
         <source>Don&apos;t show this message again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="840"/>
-        <location filename="../qjackctlMainForm.cpp" line="1034"/>
-        <location filename="../qjackctlMainForm.cpp" line="1385"/>
-        <location filename="../qjackctlMainForm.cpp" line="2573"/>
-        <location filename="../qjackctlMainForm.cpp" line="3643"/>
+        <location filename="../qjackctlMainForm.cpp" line="848"/>
+        <location filename="../qjackctlMainForm.cpp" line="1050"/>
+        <location filename="../qjackctlMainForm.cpp" line="1401"/>
+        <location filename="../qjackctlMainForm.cpp" line="2593"/>
+        <location filename="../qjackctlMainForm.cpp" line="3674"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="842"/>
+        <location filename="../qjackctlMainForm.cpp" line="850"/>
         <source>JACK is currently running.
 
 Do you want to terminate the JACK audio server?</source>
@@ -686,17 +686,17 @@ Do you want to terminate the JACK audio server?</source>
 JACKオーディオサーバーを終了しますか？</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="987"/>
+        <location filename="../qjackctlMainForm.cpp" line="1003"/>
         <source>successfully</source>
         <translation type="unfinished">成功</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="989"/>
+        <location filename="../qjackctlMainForm.cpp" line="1005"/>
         <source>with exit status=%1</source>
         <translation type="unfinished">終了ステータス = %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1035"/>
+        <location filename="../qjackctlMainForm.cpp" line="1051"/>
         <source>Could not start JACK.
 
 Maybe JACK audio server is already started.</source>
@@ -705,7 +705,7 @@ Maybe JACK audio server is already started.</source>
 おそらくもうJACKサウンドサーバーが開始されています。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1062"/>
+        <location filename="../qjackctlMainForm.cpp" line="1078"/>
         <source>Could not load preset &quot;%1&quot;.
 
 Retrying with default.</source>
@@ -714,7 +714,7 @@ Retrying with default.</source>
 既定の設定でリトライします。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1065"/>
+        <location filename="../qjackctlMainForm.cpp" line="1081"/>
         <source>Could not load default preset.
 
 Sorry.</source>
@@ -723,22 +723,22 @@ Sorry.</source>
 ごめんなさい。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1097"/>
+        <location filename="../qjackctlMainForm.cpp" line="1113"/>
         <source>Startup script...</source>
         <translation type="unfinished">スタートアップスクリプト...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1098"/>
+        <location filename="../qjackctlMainForm.cpp" line="1114"/>
         <source>Startup script terminated</source>
         <translation type="unfinished">スタートアップスクリプトは終了しました</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1300"/>
+        <location filename="../qjackctlMainForm.cpp" line="1316"/>
         <source>D-BUS: JACK server is starting...</source>
         <translation type="unfinished">D-BUS: JACKサーバーを開始しています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1303"/>
+        <location filename="../qjackctlMainForm.cpp" line="1319"/>
         <source>D-BUS: JACK server could not be started.
 
 Sorry</source>
@@ -747,12 +747,12 @@ Sorry</source>
 ごめんなさい</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1343"/>
+        <location filename="../qjackctlMainForm.cpp" line="1359"/>
         <source>JACK is starting...</source>
         <translation type="unfinished">JACKを開始しています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1387"/>
+        <location filename="../qjackctlMainForm.cpp" line="1403"/>
         <source>Some client audio applications
 are still active and connected.
 
@@ -763,27 +763,27 @@ Do you want to stop the JACK audio server?</source>
 それでもJACKオーディオサーバーを終了しますか？</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1438"/>
+        <location filename="../qjackctlMainForm.cpp" line="1454"/>
         <source>Shutdown script...</source>
         <translation type="unfinished">シャットダウンスクリプト...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1439"/>
+        <location filename="../qjackctlMainForm.cpp" line="1455"/>
         <source>Shutdown script terminated</source>
         <translation type="unfinished">シャットダウンスクリプトは終了しました</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1445"/>
+        <location filename="../qjackctlMainForm.cpp" line="1461"/>
         <source>JACK is stopping...</source>
         <translation type="unfinished">JACKを終了しています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1461"/>
+        <location filename="../qjackctlMainForm.cpp" line="1477"/>
         <source>D-BUS: JACK server is stopping...</source>
         <translation type="unfinished">D-BUS: JACKサーバーを終了しています...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1464"/>
+        <location filename="../qjackctlMainForm.cpp" line="1480"/>
         <source>D-BUS: JACK server could not be stopped.
 
 Sorry</source>
@@ -792,79 +792,79 @@ Sorry</source>
 ごめんなさい</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1527"/>
+        <location filename="../qjackctlMainForm.cpp" line="1543"/>
         <source>JACK was started with PID=%1.</source>
         <translation type="unfinished">JACKはプロセスID=%1で開始しました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1535"/>
+        <location filename="../qjackctlMainForm.cpp" line="1551"/>
         <source>D-BUS: JACK server was started (%1 aka jackdbus).</source>
         <translation type="unfinished">D-BUS: JACKサーバーはスタートしました (%1 すなわちjackdbus)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1575"/>
+        <location filename="../qjackctlMainForm.cpp" line="1591"/>
         <source>JACK is being forced...</source>
         <translation type="unfinished">JACKは強制終了します...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1582"/>
+        <location filename="../qjackctlMainForm.cpp" line="1598"/>
         <source>JACK was stopped</source>
         <translation type="unfinished">JACKは終了しました</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1594"/>
+        <location filename="../qjackctlMainForm.cpp" line="1610"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
         <translation type="unfinished">D-BUS: JACKサーバーは終了しました (%1 すなわちjackdbus)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1609"/>
+        <location filename="../qjackctlMainForm.cpp" line="1625"/>
         <source>Post-shutdown script...</source>
         <translation type="unfinished">ポストシャットダウンスクリプト...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1610"/>
+        <location filename="../qjackctlMainForm.cpp" line="1626"/>
         <source>Post-shutdown script terminated</source>
         <translation type="unfinished">ポストシャットダウンスクリプトは終了しました</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1737"/>
+        <location filename="../qjackctlMainForm.cpp" line="1753"/>
         <source>Error</source>
         <translation type="unfinished">エラー</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="853"/>
-        <location filename="../qjackctlMainForm.cpp" line="1398"/>
-        <location filename="../qjackctlMainForm.cpp" line="2590"/>
+        <location filename="../qjackctlMainForm.cpp" line="861"/>
+        <location filename="../qjackctlMainForm.cpp" line="1414"/>
+        <location filename="../qjackctlMainForm.cpp" line="2610"/>
         <source>Don&apos;t ask this again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1902"/>
+        <location filename="../qjackctlMainForm.cpp" line="1918"/>
         <source>Transport BBT (bar.beat.ticks)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1903"/>
+        <location filename="../qjackctlMainForm.cpp" line="1919"/>
         <source>Transport time code</source>
         <translation type="unfinished">トランスポートのタイムコード</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1914"/>
+        <location filename="../qjackctlMainForm.cpp" line="1930"/>
         <source>Elapsed time since last reset</source>
         <translation type="unfinished">最後のリセットからの経過時間</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1917"/>
+        <location filename="../qjackctlMainForm.cpp" line="1933"/>
         <source>Elapsed time since last XRUN</source>
         <translation type="unfinished">最後のXRUNからの経過時間</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2049"/>
+        <location filename="../qjackctlMainForm.cpp" line="2065"/>
         <source>Patchbay reset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2057"/>
+        <location filename="../qjackctlMainForm.cpp" line="2073"/>
         <source>Could not load active patchbay definition.
 
 &quot;%1&quot;
@@ -877,47 +877,47 @@ Disabled.</source>
 無効にしました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2061"/>
+        <location filename="../qjackctlMainForm.cpp" line="2077"/>
         <source>Patchbay activated.</source>
         <translation type="unfinished">パッチベイを有効にしました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2069"/>
+        <location filename="../qjackctlMainForm.cpp" line="2085"/>
         <source>Patchbay deactivated.</source>
         <translation type="unfinished">パッチベイを無効にしました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2149"/>
+        <location filename="../qjackctlMainForm.cpp" line="2165"/>
         <source>Statistics reset.</source>
         <translation type="unfinished">統計のリセット。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2293"/>
+        <location filename="../qjackctlMainForm.cpp" line="2313"/>
         <source>msec</source>
         <translation type="unfinished">ミリ秒</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2310"/>
+        <location filename="../qjackctlMainForm.cpp" line="2330"/>
         <source>JACK connection graph change.</source>
         <translation type="unfinished">JACK接続グラフは変更されました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2337"/>
+        <location filename="../qjackctlMainForm.cpp" line="2357"/>
         <source>XRUN callback (%1).</source>
         <translation type="unfinished">XRUNコールバック (%1)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2347"/>
+        <location filename="../qjackctlMainForm.cpp" line="2367"/>
         <source>Buffer size change (%1).</source>
         <translation type="unfinished">バッファサイズを変更しました (%1)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2356"/>
+        <location filename="../qjackctlMainForm.cpp" line="2376"/>
         <source>Shutdown notification.</source>
         <translation type="unfinished">シャットダウンの通知。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2374"/>
+        <location filename="../qjackctlMainForm.cpp" line="2394"/>
         <source>Could not start JACK.
 
 Sorry.</source>
@@ -926,82 +926,82 @@ Sorry.</source>
 ごめんなさい。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2381"/>
+        <location filename="../qjackctlMainForm.cpp" line="2401"/>
         <source>JACK has crashed.</source>
         <translation type="unfinished">JACKはクラッシュしました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2384"/>
+        <location filename="../qjackctlMainForm.cpp" line="2404"/>
         <source>JACK timed out.</source>
         <translation type="unfinished">JACKはタイムアウトしました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2387"/>
+        <location filename="../qjackctlMainForm.cpp" line="2407"/>
         <source>JACK write error.</source>
         <translation type="unfinished">JACK writeエラー。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2390"/>
+        <location filename="../qjackctlMainForm.cpp" line="2410"/>
         <source>JACK read error.</source>
         <translation type="unfinished">JACK readエラー。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2394"/>
+        <location filename="../qjackctlMainForm.cpp" line="2414"/>
         <source>Unknown JACK error (%d).</source>
         <translation type="unfinished">不明なJACKエラー (%d)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2406"/>
+        <location filename="../qjackctlMainForm.cpp" line="2426"/>
         <source>JACK property change.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2427"/>
+        <location filename="../qjackctlMainForm.cpp" line="2447"/>
         <source>ALSA connection graph change.</source>
         <translation type="unfinished">ALSA接続グラフは変更されました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2459"/>
+        <location filename="../qjackctlMainForm.cpp" line="2479"/>
         <source>JACK active patchbay scan</source>
         <translation type="unfinished">JACKのアクティブなパッチベイのスキャン</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2469"/>
+        <location filename="../qjackctlMainForm.cpp" line="2489"/>
         <source>ALSA active patchbay scan</source>
         <translation type="unfinished">ALSAのアクティブなパッチベイのスキャン</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2512"/>
+        <location filename="../qjackctlMainForm.cpp" line="2532"/>
         <source>JACK connection change.</source>
         <translation type="unfinished">JACKの接続は変更されました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2521"/>
+        <location filename="../qjackctlMainForm.cpp" line="2541"/>
         <source>ALSA connection change.</source>
         <translation type="unfinished">ALSAのコネクションは変更されました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2540"/>
+        <location filename="../qjackctlMainForm.cpp" line="2560"/>
         <source>checked</source>
         <translation type="unfinished">確認済み</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2544"/>
+        <location filename="../qjackctlMainForm.cpp" line="2564"/>
         <source>connected</source>
         <translation type="unfinished">接続中</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2548"/>
+        <location filename="../qjackctlMainForm.cpp" line="2568"/>
         <source>disconnected</source>
         <translation type="unfinished">接続なし</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2553"/>
+        <location filename="../qjackctlMainForm.cpp" line="2573"/>
         <source>failed</source>
         <translation type="unfinished">失敗</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2575"/>
+        <location filename="../qjackctlMainForm.cpp" line="2595"/>
         <source>A patchbay definition is currently active,
 which is probable to redo this connection:
 
@@ -1016,62 +1016,62 @@ Do you want to remove the patchbay connection?</source>
 パッチベイ接続を取り除きますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2670"/>
+        <location filename="../qjackctlMainForm.cpp" line="2690"/>
         <source>Overall operation failed.</source>
         <translation type="unfinished">操作全体が失敗しました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2672"/>
+        <location filename="../qjackctlMainForm.cpp" line="2692"/>
         <source>Invalid or unsupported option.</source>
         <translation type="unfinished">不正なオプションか、サポートされていないオプションです。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2674"/>
+        <location filename="../qjackctlMainForm.cpp" line="2694"/>
         <source>Client name not unique.</source>
         <translation type="unfinished">固有のクライアント名ではありません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2676"/>
+        <location filename="../qjackctlMainForm.cpp" line="2696"/>
         <source>Server is started.</source>
         <translation type="unfinished">サーバーを開始しました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2678"/>
+        <location filename="../qjackctlMainForm.cpp" line="2698"/>
         <source>Unable to connect to server.</source>
         <translation type="unfinished">サーバーに接続することができません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2680"/>
+        <location filename="../qjackctlMainForm.cpp" line="2700"/>
         <source>Server communication error.</source>
         <translation type="unfinished">サーバーとのコミュニケーションエラーです。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2682"/>
+        <location filename="../qjackctlMainForm.cpp" line="2702"/>
         <source>Client does not exist.</source>
         <translation type="unfinished">クライアントが存在しません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2684"/>
+        <location filename="../qjackctlMainForm.cpp" line="2704"/>
         <source>Unable to load internal client.</source>
         <translation type="unfinished">内部クライアントをロードすることができません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2686"/>
+        <location filename="../qjackctlMainForm.cpp" line="2706"/>
         <source>Unable to initialize client.</source>
         <translation type="unfinished">クライアントを初期化することができません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2688"/>
+        <location filename="../qjackctlMainForm.cpp" line="2708"/>
         <source>Unable to access shared memory.</source>
         <translation type="unfinished">共有メモリーへアクセスすることができません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2690"/>
+        <location filename="../qjackctlMainForm.cpp" line="2710"/>
         <source>Client protocol version mismatch.</source>
         <translation type="unfinished">クライアントのプロトコルバージョンが一致しません。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2692"/>
+        <location filename="../qjackctlMainForm.cpp" line="2712"/>
         <source>Could not connect to JACK server as client.
 - %1
 Please check the messages window for more info.</source>
@@ -1080,267 +1080,267 @@ Please check the messages window for more info.</source>
 メッセージウィンドウで詳細な情報を確認して下さい。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2741"/>
+        <location filename="../qjackctlMainForm.cpp" line="2761"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
         <translation type="unfinished">サーバー設定を &quot;%1&quot; に保存しました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2774"/>
+        <location filename="../qjackctlMainForm.cpp" line="2794"/>
         <source>Client activated.</source>
         <translation type="unfinished">クライアントは有効となりました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2785"/>
+        <location filename="../qjackctlMainForm.cpp" line="2805"/>
         <source>Post-startup script...</source>
         <translation type="unfinished">ポストスタートアップスクリプト...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2786"/>
+        <location filename="../qjackctlMainForm.cpp" line="2806"/>
         <source>Post-startup script terminated</source>
         <translation type="unfinished">ポストスタートアップスクリプトの終了</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2794"/>
+        <location filename="../qjackctlMainForm.cpp" line="2814"/>
         <source>Command line argument...</source>
         <translation type="unfinished">コマンドライン引数...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2795"/>
+        <location filename="../qjackctlMainForm.cpp" line="2815"/>
         <source>Command line argument started</source>
         <translation type="unfinished">コマンドライン引数の開始</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2817"/>
+        <location filename="../qjackctlMainForm.cpp" line="2837"/>
         <source>Client deactivated.</source>
         <translation type="unfinished">クライアントは無効となりました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3057"/>
+        <location filename="../qjackctlMainForm.cpp" line="3079"/>
         <source>Transport rewind.</source>
         <translation type="unfinished">トランスポートを開始まで戻します。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3077"/>
+        <location filename="../qjackctlMainForm.cpp" line="3099"/>
         <source>Transport backward.</source>
         <translation type="unfinished">トランスポートを逆再生します。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3105"/>
-        <location filename="../qjackctlMainForm.cpp" line="3229"/>
-        <location filename="../qjackctlMainForm.cpp" line="3368"/>
+        <location filename="../qjackctlMainForm.cpp" line="3127"/>
+        <location filename="../qjackctlMainForm.cpp" line="3253"/>
+        <location filename="../qjackctlMainForm.cpp" line="3392"/>
         <source>Starting</source>
         <translation type="unfinished">開始</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3107"/>
+        <location filename="../qjackctlMainForm.cpp" line="3129"/>
         <source>Transport start.</source>
         <translation type="unfinished">トランスポートの開始。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3120"/>
-        <location filename="../qjackctlMainForm.cpp" line="3375"/>
+        <location filename="../qjackctlMainForm.cpp" line="3142"/>
+        <location filename="../qjackctlMainForm.cpp" line="3399"/>
         <source>Stopping</source>
         <translation type="unfinished">停止</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3122"/>
+        <location filename="../qjackctlMainForm.cpp" line="3144"/>
         <source>Transport stop.</source>
         <translation type="unfinished">トランスポートを停止しました。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3142"/>
+        <location filename="../qjackctlMainForm.cpp" line="3164"/>
         <source>Transport forward.</source>
         <translation type="unfinished">トランスポートを早送りします。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3158"/>
-        <location filename="../qjackctlMainForm.cpp" line="3379"/>
+        <location filename="../qjackctlMainForm.cpp" line="3180"/>
+        <location filename="../qjackctlMainForm.cpp" line="3403"/>
         <source>Stopped</source>
         <translation type="unfinished">停止</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3194"/>
+        <location filename="../qjackctlMainForm.cpp" line="3217"/>
         <source>%1 (%2%)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3198"/>
+        <location filename="../qjackctlMainForm.cpp" line="3221"/>
         <source>%1 (%2%, %3 xruns)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3205"/>
+        <location filename="../qjackctlMainForm.cpp" line="3229"/>
         <source>%1 %</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3207"/>
+        <location filename="../qjackctlMainForm.cpp" line="3231"/>
         <source>%1 Hz</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3209"/>
+        <location filename="../qjackctlMainForm.cpp" line="3233"/>
         <source>%1 frames</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3220"/>
+        <location filename="../qjackctlMainForm.cpp" line="3244"/>
         <source>Yes</source>
         <translation>はい</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3220"/>
+        <location filename="../qjackctlMainForm.cpp" line="3244"/>
         <source>No</source>
         <translation>いいえ</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3221"/>
+        <location filename="../qjackctlMainForm.cpp" line="3245"/>
         <source>RT</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3232"/>
+        <location filename="../qjackctlMainForm.cpp" line="3256"/>
         <source>Rolling</source>
         <translation type="unfinished">ローリング</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3235"/>
+        <location filename="../qjackctlMainForm.cpp" line="3259"/>
         <source>Looping</source>
         <translation type="unfinished">ループ</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3265"/>
+        <location filename="../qjackctlMainForm.cpp" line="3289"/>
         <source>%1 msec</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3272"/>
+        <location filename="../qjackctlMainForm.cpp" line="3296"/>
         <source>XRUN callback (%1 skipped).</source>
         <translation type="unfinished">XRUNコールバック (%1 をスキップ)。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3372"/>
+        <location filename="../qjackctlMainForm.cpp" line="3396"/>
         <source>Started</source>
         <translation type="unfinished">開始</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3382"/>
+        <location filename="../qjackctlMainForm.cpp" line="3406"/>
         <source>Active</source>
         <translation type="unfinished">有効</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3385"/>
+        <location filename="../qjackctlMainForm.cpp" line="3409"/>
         <source>Activating</source>
         <translation type="unfinished">有効化</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3390"/>
+        <location filename="../qjackctlMainForm.cpp" line="3414"/>
         <source>Inactive</source>
         <translation type="unfinished">無効</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3486"/>
-        <location filename="../qjackctlMainForm.cpp" line="3539"/>
+        <location filename="../qjackctlMainForm.cpp" line="3517"/>
+        <location filename="../qjackctlMainForm.cpp" line="3570"/>
         <source>&amp;Hide</source>
         <translation type="unfinished">非表示(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3486"/>
+        <location filename="../qjackctlMainForm.cpp" line="3513"/>
         <source>Mi&amp;nimize</source>
         <translation type="unfinished">最小化(&amp;n)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3488"/>
-        <location filename="../qjackctlMainForm.cpp" line="3539"/>
+        <location filename="../qjackctlMainForm.cpp" line="3518"/>
+        <location filename="../qjackctlMainForm.cpp" line="3570"/>
         <source>S&amp;how</source>
         <translation type="unfinished">表示(&amp;h)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3488"/>
+        <location filename="../qjackctlMainForm.cpp" line="3514"/>
         <source>Rest&amp;ore</source>
         <translation type="unfinished">元に戻す(&amp;o)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3499"/>
+        <location filename="../qjackctlMainForm.cpp" line="3530"/>
         <source>&amp;Stop</source>
         <translation type="unfinished">停止(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3502"/>
+        <location filename="../qjackctlMainForm.cpp" line="3533"/>
         <source>&amp;Reset</source>
         <translation type="unfinished">リセット(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3508"/>
+        <location filename="../qjackctlMainForm.cpp" line="3539"/>
         <source>&amp;Presets</source>
         <translation type="unfinished">プリセット(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3543"/>
+        <location filename="../qjackctlMainForm.cpp" line="3574"/>
         <source>&amp;Load...</source>
         <translation type="unfinished">読み込み(&amp;L)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3551"/>
+        <location filename="../qjackctlMainForm.cpp" line="3582"/>
         <source>&amp;Save...</source>
         <translation type="unfinished">保存(&amp;S)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3556"/>
+        <location filename="../qjackctlMainForm.cpp" line="3587"/>
         <source>Save and &amp;Quit...</source>
         <translation>保存して終了(&amp;Q)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3560"/>
+        <location filename="../qjackctlMainForm.cpp" line="3591"/>
         <source>Save &amp;Template...</source>
         <translation type="unfinished">テンプレートを保存(&amp;T)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3566"/>
+        <location filename="../qjackctlMainForm.cpp" line="3597"/>
         <source>&amp;Versioning</source>
         <translation type="unfinished">バージョン(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3573"/>
+        <location filename="../qjackctlMainForm.cpp" line="3604"/>
         <source>Re&amp;fresh</source>
         <translation type="unfinished">更新(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3585"/>
+        <location filename="../qjackctlMainForm.cpp" line="3616"/>
         <source>St&amp;atus</source>
         <translation type="unfinished">状態(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3591"/>
+        <location filename="../qjackctlMainForm.cpp" line="3622"/>
         <source>&amp;Connections</source>
         <translation type="unfinished">接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3595"/>
+        <location filename="../qjackctlMainForm.cpp" line="3626"/>
         <source>Patch&amp;bay</source>
         <translation type="unfinished">パッチベイ(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3600"/>
+        <location filename="../qjackctlMainForm.cpp" line="3631"/>
         <source>&amp;Transport</source>
         <translation type="unfinished">トランスポート(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3645"/>
+        <location filename="../qjackctlMainForm.cpp" line="3676"/>
         <source>Server settings will be only effective after
 restarting the JACK audio server.</source>
         <translation type="unfinished">サーバー設定はJACKオーディオサーバーを再起動後にのみ
 有効となります。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3666"/>
+        <location filename="../qjackctlMainForm.cpp" line="3697"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
         <translation type="unfinished">いくつかの設定は次回にこのプログラムを起動した際にのみ
 有効となります。</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3939"/>
+        <location filename="../qjackctlMainForm.cpp" line="3971"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -1348,7 +1348,7 @@ the next time you start this program.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3970"/>
+        <location filename="../qjackctlMainForm.cpp" line="4002"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -1356,7 +1356,7 @@ the next time you start this program.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4001"/>
+        <location filename="../qjackctlMainForm.cpp" line="4033"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -3601,14 +3601,24 @@ Are you sure to overwrite the existing folder?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="810"/>
-        <location filename="../qjackctlSetupForm.cpp" line="862"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1687"/>
+        <location filename="../qjackctlSetupForm.cpp" line="376"/>
+        <source>Mi&amp;nimize</source>
+        <translation type="unfinished">最小化(&amp;n)</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.cpp" line="377"/>
+        <source>Rest&amp;ore</source>
+        <translation type="unfinished">元に戻す(&amp;o)</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.cpp" line="816"/>
+        <location filename="../qjackctlSetupForm.cpp" line="868"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1701"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="811"/>
+        <location filename="../qjackctlSetupForm.cpp" line="817"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -3621,7 +3631,7 @@ Do you want to save the changes?</source>
 変更を保存しますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="863"/>
+        <location filename="../qjackctlSetupForm.cpp" line="869"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -3634,97 +3644,97 @@ Are you sure?</source>
 よろしいですか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="896"/>
+        <location filename="../qjackctlSetupForm.cpp" line="902"/>
         <source>msec</source>
         <translation type="unfinished">ミリ秒</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="898"/>
+        <location filename="../qjackctlSetupForm.cpp" line="904"/>
         <source>n/a</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1229"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1237"/>
         <source>&amp;Preset Name</source>
         <translation>プリセット名(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1231"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1239"/>
         <source>&amp;Server Name</source>
         <translation>サーバー名(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1232"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1240"/>
         <source>&amp;Server Path</source>
         <translation>サーバーパス(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1233"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1241"/>
         <source>&amp;Driver</source>
         <translation>ドライバー(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1234"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1242"/>
         <source>&amp;Interface</source>
         <translation>インターフェース(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1236"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1244"/>
         <source>Sample &amp;Rate</source>
         <translation>サンプルレート(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1237"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1245"/>
         <source>&amp;Frames/Period</source>
         <translation type="unfinished">フレーム/ピリオド(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1238"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1246"/>
         <source>Periods/&amp;Buffer</source>
         <translation type="unfinished">ピリオド/バッファー(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1286"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1294"/>
         <source>Startup Script</source>
         <translation type="unfinished">スタートアップスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1303"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1311"/>
         <source>Post-Startup Script</source>
         <translation type="unfinished">ポストスタートアップスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1320"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1328"/>
         <source>Shutdown Script</source>
         <translation type="unfinished">シャットダウンスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1337"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1345"/>
         <source>Post-Shutdown Script</source>
         <translation type="unfinished">ポストシャットダウンスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1354"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1362"/>
         <source>Active Patchbay Definition</source>
         <translation type="unfinished">有効なパッチベイ定義</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1356"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1364"/>
         <source>Patchbay Definition files</source>
         <translation type="unfinished">パッチベイ定義ファイル</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1372"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1380"/>
         <source>Messages Log</source>
         <translation type="unfinished">メッセージログ</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1374"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1382"/>
         <source>Log files</source>
         <translation type="unfinished">ログファイル</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1688"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1702"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

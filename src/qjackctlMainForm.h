@@ -48,8 +48,11 @@ class qjackctlSessionForm;
 class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
 class qjackctlPatchbayRack;
-class qjackctlSystemTray;
 class qjackctlPortItem;
+
+#ifdef CONFIG_SYSTEM_TRAY
+class qjackctlSystemTray;
+#endif
 
 class QSocketNotifier;
 class QSessionManager;
@@ -116,8 +119,9 @@ public:
 	void updateTimeFormat();
 	void updateAliases();
 	void updateButtons();
+#ifdef CONFIG_SYSTEM_TRAY
 	void updateSystemTray();
-
+#endif
 	void showDirtySettingsWarning();
 	void showDirtySetupWarning();
 
@@ -168,7 +172,8 @@ protected slots:
 	void transportStop();
 	void transportForward();
 
-	void systemTrayContextMenu(const QPoint&);
+	void contextMenu(const QPoint&);
+
 	void activatePresetsMenu(QAction *);
 	void activatePreset(const QString&);
 	void activatePreset(int);
@@ -323,15 +328,17 @@ private:
 
 	qjackctlPatchbayRack *m_pPatchbayRack;
 
-	qjackctlSystemTray *m_pSystemTray;
-
 	qjackctlPreset m_preset;
 
 	QString m_sStdoutBuffer;
 	QString m_sTimeDashes;
 	QString m_sJackCmdLine;
 
-	bool  m_bQuitClose;
+#ifdef CONFIG_SYSTEM_TRAY
+	qjackctlSystemTray *m_pSystemTray;
+	bool m_bQuitClose;
+#endif
+
 	bool  m_bQuitForce;
 	float m_fSkipAccel;
 
