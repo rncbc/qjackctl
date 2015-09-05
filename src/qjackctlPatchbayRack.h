@@ -24,6 +24,7 @@
 
 #include "qjackctlAbout.h"
 
+#include <QObject>
 #include <QStringList>
 
 #include <jack/jack.h>
