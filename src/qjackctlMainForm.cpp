@@ -3305,7 +3305,15 @@ void qjackctlMainForm::refreshStatus (void)
 			}
 		}
 	#ifdef CONFIG_SYSTEM_TRAY
-		updateSystemTrayXrunFx();
+		// XRUN: blink the system-tray icon backgroung...
+		if (m_pSystemTray && m_iXrunCallbacks > 0) {
+			const int iElapsed = m_tXrunLast.elapsed();
+			if (iElapsed > 0x7ff) { // T=2048ms.
+				QColor color(m_pSystemTray->background());
+				color.setAlpha(0x0ff - ((iElapsed & 0x3ff) >> 3));
+				m_pSystemTray->setBackground(color);
+			}
+		}
 	#endif
 	}   // No need to update often if we're just idle...
 	else if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
@@ -3504,20 +3512,6 @@ void qjackctlMainForm::updateSystemTray (void)
 		raise();
 		activateWindow();
 	}
-}
-
-void qjackctlMainForm::updateSystemTrayXrunFx (void)
-{
-	if (m_pSystemTray == NULL)
-		return;
-
-	if (m_iXrunCallbacks < 1)
-		return;
-
-	QColor color(m_pSystemTray->background());
-	const int i = (m_tXrunLast.elapsed() & 0x3ff);
-	color.setAlpha(255 - (i >> 3));
-	m_pSystemTray->setBackground(color);
 }
 
 #endif
