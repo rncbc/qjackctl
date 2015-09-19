@@ -121,6 +121,7 @@ public:
 	void updateButtons();
 #ifdef CONFIG_SYSTEM_TRAY
 	void updateSystemTray();
+	void updateSystemTrayXrunFx();
 #endif
 	void showDirtySettingsWarning();
 	void showDirtySetupWarning();
