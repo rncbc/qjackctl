@@ -3474,24 +3474,24 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>Skrýt textové popisky &amp;tlačítek v hlavním okně</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="376"/>
+        <location filename="../qjackctlSetupForm.cpp" line="380"/>
         <source>Mi&amp;nimize</source>
         <translation type="unfinished">&amp;Zmenšit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="377"/>
+        <location filename="../qjackctlSetupForm.cpp" line="381"/>
         <source>Rest&amp;ore</source>
         <translation type="unfinished">&amp;Nahrát znovu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="816"/>
-        <location filename="../qjackctlSetupForm.cpp" line="868"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1701"/>
+        <location filename="../qjackctlSetupForm.cpp" line="820"/>
+        <location filename="../qjackctlSetupForm.cpp" line="872"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1705"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="817"/>
+        <location filename="../qjackctlSetupForm.cpp" line="821"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -3504,7 +3504,7 @@ Do you want to save the changes?</source>
 Chcete uložit změny?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="869"/>
+        <location filename="../qjackctlSetupForm.cpp" line="873"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -3517,97 +3517,97 @@ Are you sure?</source>
 Jste si jistý?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="902"/>
+        <location filename="../qjackctlSetupForm.cpp" line="906"/>
         <source>msec</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="904"/>
+        <location filename="../qjackctlSetupForm.cpp" line="908"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1237"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1241"/>
         <source>&amp;Preset Name</source>
         <translation>&amp;Název přednastavení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1239"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1243"/>
         <source>&amp;Server Name</source>
         <translation>&amp;Název serveru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1240"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1244"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Cesta k serveru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1241"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1245"/>
         <source>&amp;Driver</source>
         <translation>&amp;Ovladač</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1242"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1246"/>
         <source>&amp;Interface</source>
         <translation>&amp;Rozhraní</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1244"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1248"/>
         <source>Sample &amp;Rate</source>
         <translation>Vzorkovací &amp;kmitočet</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1245"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1249"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Snímky/Údobí (perioda)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1246"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1250"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Ú&amp;dobí/Vyrovnávací paměť</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1294"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1298"/>
         <source>Startup Script</source>
         <translation>Skript pro spuštění</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1311"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1315"/>
         <source>Post-Startup Script</source>
         <translation>Skript pro po-spuštění</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1328"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1332"/>
         <source>Shutdown Script</source>
         <translation>Skript pro zastavení chodu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1345"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1349"/>
         <source>Post-Shutdown Script</source>
         <translation>Skript pro po-zastavení chodu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1362"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1366"/>
         <source>Active Patchbay Definition</source>
         <translation>Činné vymezení zapojovací desky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1364"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1368"/>
         <source>Patchbay Definition files</source>
         <translation>Soubory s vymezením zapojovací desky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1380"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1384"/>
         <source>Messages Log</source>
         <translation>Zápis s hlášením</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1382"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1386"/>
         <source>Log files</source>
         <translation>Soubory se zápisy</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1702"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1706"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

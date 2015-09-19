@@ -103,6 +103,10 @@ qjackctlSetupForm::qjackctlSetupForm (
 
 	m_ui.PresetComboBox->setCompleter(NULL);
 
+	m_ui.ServerNameComboBox->setCompleter(NULL);
+	m_ui.ServerPrefixComboBox->setCompleter(NULL);
+	m_ui.ServerSuffixComboBox->setCompleter(NULL);
+
 	// UI connections...
 
 	QObject::connect(m_ui.PresetComboBox,
