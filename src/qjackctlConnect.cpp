@@ -140,6 +140,13 @@ void qjackctlPortItem::updatePortName ( bool /*bRename*/ )
 }
 
 
+// Tooltip text builder.
+QString qjackctlPortItem::tooltip (void) const
+{
+	return portName();
+}
+
+
 // Port display name accessors.
 void qjackctlPortItem::setPortText (
 	const QString& sPortText, bool bRenameEnabled )
@@ -958,7 +965,7 @@ bool qjackctlClientListView::eventFilter ( QObject *pObject, QEvent *pEvent )
 					= static_cast<qjackctlPortItem *> (pItem);
 				if (pPortItem) {
 					QToolTip::showText(pHelpEvent->globalPos(),
-						pPortItem->portName(), pViewport);
+						pPortItem->tooltip(), pViewport);
 					return true;
 				}
 			}

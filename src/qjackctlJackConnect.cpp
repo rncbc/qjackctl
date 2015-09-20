@@ -157,6 +157,23 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 }
 
 
+// Tooltip text builder (virtual override).
+QString qjackctlJackPort::tooltip (void) const
+{
+	jack_latency_range_t latency_range;
+
+	jack_port_get_latency_range(m_pJackPort,
+		client()->isReadable() ? JackCaptureLatency : JackPlaybackLatency,
+		&latency_range);
+
+	QString sLatency = QString::number(latency_range.min);
+	if (latency_range.max > latency_range.min)
+		sLatency +=  '-' + QString::number(latency_range.max);
+
+	return QObject::tr("%1 (%2 frames)").arg(portName()).arg(sLatency);
+}
+
+
 //----------------------------------------------------------------------
 // class qjackctlJackClient -- Jack client list item.
 //

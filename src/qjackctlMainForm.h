@@ -31,6 +31,8 @@
 
 #include <weak_libjack.h>
 
+#include <QSessionManager>
+
 #ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
 #else
@@ -46,10 +48,14 @@ class qjackctlSessionForm;
 class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
 class qjackctlPatchbayRack;
-class qjackctlSystemTray;
 class qjackctlPortItem;
 
+#ifdef CONFIG_SYSTEM_TRAY
+class qjackctlSystemTray;
+#endif
+
 class QSocketNotifier;
+class QSessionManager;
 
 #ifdef CONFIG_DBUS
 class QDBusInterface;
@@ -99,9 +105,6 @@ public:
 	void queryDisconnect(
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType);
 
-	void setQuitForce(bool bQuitForce);
-	bool isQuitForce() const;
-
 	void updateMessagesFont();
 	void updateMessagesLimit();
 	void updateMessagesLogging();
@@ -116,8 +119,9 @@ public:
 	void updateTimeFormat();
 	void updateAliases();
 	void updateButtons();
+#ifdef CONFIG_SYSTEM_TRAY
 	void updateSystemTray();
-
+#endif
 	void showDirtySettingsWarning();
 	void showDirtySetupWarning();
 
@@ -127,6 +131,8 @@ public slots:
 	void stopJack();
 
 	void resetXrunStats();
+
+	void commitData(QSessionManager& sm);
 
 protected slots:
 
@@ -166,7 +172,8 @@ protected slots:
 	void transportStop();
 	void transportForward();
 
-	void systemTrayContextMenu(const QPoint&);
+	void contextMenu(const QPoint&);
+
 	void activatePresetsMenu(QAction *);
 	void activatePreset(const QString&);
 	void activatePreset(int);
@@ -321,13 +328,16 @@ private:
 
 	qjackctlPatchbayRack *m_pPatchbayRack;
 
-	qjackctlSystemTray *m_pSystemTray;
-
 	qjackctlPreset m_preset;
 
 	QString m_sStdoutBuffer;
 	QString m_sTimeDashes;
 	QString m_sJackCmdLine;
+
+#ifdef CONFIG_SYSTEM_TRAY
+	qjackctlSystemTray *m_pSystemTray;
+	bool m_bQuitClose;
+#endif
 
 	bool  m_bQuitForce;
 	float m_fSkipAccel;

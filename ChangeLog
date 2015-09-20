@@ -6,6 +6,26 @@ ChangeLog
 
 GIT HEAD
 
+- Desktop environment session shutdown/logout management has been
+  also adapted to Qt5 framework. (EXPERIMENTAL)
+
+- Single/unique application instance control adapted to Qt5/X11.
+  (EXPERIMENTAL)
+
+- Prefer Qt5 over Qt4 by default with configure script.
+
+- Overrideable tooltips with latency info (re. Connections JACK
+  client/ports: patch by Xavier Mendez, thanks).
+
+- Complete rewrite of Qt4 vs. Qt5 configure builds. (TESTING)
+
+- French (fr) translation update (by Olivier Humbert, thanks).
+
+
+0.4.0  2015-07-15  Summer'15 release frenzy.
+
+- Some windows fixes added (patch by Kjetil Matheussen, thanks).
+
 - Most advanced Setup/Settings are moved into new Setup/Advanced
   settings tab; limit range for the real-time priority setting,
   now having 6 as absolute minimum valid value (after patches by

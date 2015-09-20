@@ -67,6 +67,9 @@ public:
 	// Pretty/display name method (virtual override).
 	void updatePortName(bool bRename = false);
 
+	// Tooltip text builder (virtual override).
+	QString tooltip() const;
+
 private:
 
 	// Instance variables.

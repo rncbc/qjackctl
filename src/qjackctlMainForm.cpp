@@ -33,7 +33,10 @@
 #include "qjackctlPatchbayForm.h"
 #include "qjackctlSetupForm.h"
 #include "qjackctlAboutForm.h"
+
+#ifdef CONFIG_SYSTEM_TRAY
 #include "qjackctlSystemTray.h"
+#endif
 
 #include <QApplication>
 #include <QSocketNotifier>
@@ -331,7 +334,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pJackClient   = NULL;
 	m_bJackDetach   = false;
 	m_bJackShutdown = false;
-        m_bJackStopped  = false;
+	m_bJackStopped  = false;
 	m_pAlsaSeq      = NULL;
 #ifdef CONFIG_DBUS
 	m_pDBusControl  = NULL;
@@ -369,8 +372,11 @@ qjackctlMainForm::qjackctlMainForm (
 	// Patchbay rack can be readily created.
 	m_pPatchbayRack = new qjackctlPatchbayRack();
 
+#ifdef CONFIG_SYSTEM_TRAY
 	// The eventual system tray widget.
 	m_pSystemTray  = NULL;
+	m_bQuitClose = false;
+#endif
 
 	// We're not quitting so early :)
 	m_bQuitForce = false;
@@ -491,11 +497,11 @@ qjackctlMainForm::~qjackctlMainForm (void)
 		delete m_pPatchbayForm;
 	if (m_pSetupForm)
 		delete m_pSetupForm;
-
+#ifdef CONFIG_SYSTEM_TRAY
 	// Quit off system tray widget.
 	if (m_pSystemTray)
 		delete m_pSystemTray;
-
+#endif
 	// Patchbay rack is also dead.
 	if (m_pPatchbayRack)
 		delete m_pPatchbayRack;
@@ -567,7 +573,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
 
 	// Set the patchbay cable connection notification signal/slot.
-	QObject::connect(m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
+	QObject::connect(
+		m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
 		this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
 	// Try to restore old window positioning and appearence.
@@ -589,8 +596,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateJackClientPortMetadata();
 	updateBezierLines();
 //	updateActivePatchbay();
+#ifdef CONFIG_SYSTEM_TRAY
 	updateSystemTray();
-
+#endif
 	// And for the whole widget gallore...
 	m_pSetup->loadWidgetGeometry(m_pMessagesStatusForm);
 	m_pSetup->loadWidgetGeometry(m_pSessionForm);
@@ -798,7 +806,7 @@ bool qjackctlMainForm::queryClose (void)
 #ifdef CONFIG_SYSTEM_TRAY
 	// If we're not quitting explicitly and there's an
 	// active system tray icon, then just hide ourselves.
-	if (!m_bQuitForce && isVisible()
+	if (!m_bQuitClose && !m_bQuitForce && isVisible()
 		&& m_pSetup->bSystemTray && m_pSystemTray) {
 		m_pSetup->saveWidgetGeometry(this, true);
 		if (m_pSetup->bSystemTrayQueryClose) {
@@ -836,7 +844,8 @@ bool qjackctlMainForm::queryClose (void)
 #endif
 
 	// Check if JACK daemon is currently running...
-	if (bQueryClose && m_pJack && m_pJack->state() == QProcess::Running
+	if (bQueryClose && !m_bQuitForce
+		&& m_pJack && m_pJack->state() == QProcess::Running
 		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
 		show();
 		raise();
@@ -868,26 +877,29 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Try to save current setup settings.
-	if (bQueryClose && m_pSetupForm)
+	if (bQueryClose && m_pSetupForm && !m_bQuitForce)
 		bQueryClose = m_pSetupForm->queryClose();
 
 	// Try to save current aliases default settings.
 	if (bQueryClose && m_pConnectionsForm) {
-		bQueryClose = m_pConnectionsForm->queryClose();
+		if (!m_bQuitForce)
+			bQueryClose = m_pConnectionsForm->queryClose();
 		if (bQueryClose)
 			m_pSetup->iConnectionsTabPage = m_pConnectionsForm->tabPage();
 	}
 
 	// Try to save current patchbay default settings.
 	if (bQueryClose && m_pPatchbayForm) {
-		bQueryClose = m_pPatchbayForm->queryClose();
+		if (!m_bQuitForce)
+			bQueryClose = m_pPatchbayForm->queryClose();
 		if (bQueryClose && !m_pPatchbayForm->patchbayPath().isEmpty())
 			m_pSetup->sPatchbayPath = m_pPatchbayForm->patchbayPath();
 	}
 
 	// Try to save current session directories list...
 	if (bQueryClose && m_pSessionForm) {
-		bQueryClose = m_pSessionForm->queryClose();
+		if (!m_bQuitForce)
+			bQueryClose = m_pSessionForm->queryClose();
 		if (bQueryClose) {
 			m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
 			m_pSetup->bSessionSaveVersion = m_pSessionForm->isSaveSessionVersion();
@@ -901,6 +913,9 @@ bool qjackctlMainForm::queryClose (void)
 	}
 
 	// Whether we're really quitting.
+#ifdef CONFIG_SYSTEM_TRAY
+	m_bQuitClose = bQueryClose;
+#endif
 	m_bQuitForce = bQueryClose;
 
 	// Try to save current positioning.
@@ -922,9 +937,11 @@ bool qjackctlMainForm::queryClose (void)
 			m_pPatchbayForm->close();
 		if (m_pSetupForm)
 			m_pSetupForm->close();
+	#ifdef CONFIG_SYSTEM_TRAY
 		// And the system tray icon too.
 		if (m_pSystemTray)
 			m_pSystemTray->close();
+	#endif
 		// Stop any service out there...
 		if (m_pSetup->bStopJack)
 			stopJackServer();
@@ -1332,11 +1349,12 @@ void qjackctlMainForm::startJack (void)
 
 		// Setup stdout/stderr capture...
 		if (m_pSetup->bStdoutCapture) {
-			#if defined(WIN32)
-				m_pJack->setProcessChannelMode(QProcess::MergedChannels); // QProcess::ForwardedChannels doesn't seem to work in windows
-			#else
-				m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
-			#endif
+		#if defined(WIN32)
+			// QProcess::ForwardedChannels doesn't seem to work in windows.
+			m_pJack->setProcessChannelMode(QProcess::MergedChannels);
+		#else
+			m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
+		#endif
  			QObject::connect(m_pJack,
 				SIGNAL(readyReadStandardOutput()),
 				SLOT(readStdout()));
@@ -1459,7 +1477,7 @@ void qjackctlMainForm::stopJackServer (void)
 			// Jack classic server backend...
 			if (m_pJack) {
 				appendMessages(tr("JACK is stopping..."));
-				m_bJackStopped = true;                                
+				m_bJackStopped = true;
 			#if defined(WIN32)
 				// Try harder...
 				m_pJack->kill();
@@ -2179,12 +2197,16 @@ void qjackctlMainForm::updateXrunCount (void)
 			color = (m_pJackClient ? Qt::red : Qt::darkRed);
 		else
 			color = (m_pJackClient ? Qt::yellow : Qt::darkYellow);
+	#ifdef CONFIG_SYSTEM_TRAY
 		// Change the system tray icon background color!
 		if (m_pSystemTray)
 			m_pSystemTray->setBackground(color);
 	}   // Reset the system tray icon background!
 	else if (m_pSystemTray)
 		m_pSystemTray->setBackground(Qt::transparent);
+	#else
+	}
+	#endif
 
 	QPalette pal;
 	pal.setColor(QPalette::Foreground, color);
@@ -2391,10 +2413,10 @@ void qjackctlMainForm::exitNotifyEvent (void)
 		jackFinished();
 		break;
 	case QProcess::Crashed:
-		#if defined(WIN32)
-			if (!m_bJackStopped)
-		#endif
-		appendMessagesColor(tr("JACK has crashed3."), "#cc3366");
+	#if defined(WIN32)
+		if (!m_bJackStopped)
+	#endif
+		appendMessagesColor(tr("JACK has crashed."), "#cc3366");
 		break;
 	case QProcess::Timedout:
 		appendMessagesColor(tr("JACK timed out."), "#cc3366");
@@ -2923,6 +2945,7 @@ void qjackctlMainForm::toggleMainForm (void)
 	m_pSetup->saveWidgetGeometry(this, true);
 
 	if (isVisible()) {
+	#ifdef CONFIG_SYSTEM_TRAY
 		if (m_pSetup->bSystemTray && m_pSystemTray) {
 			// Hide away from sight, if not active...
 			if (isActiveWindow()) {
@@ -2931,10 +2954,11 @@ void qjackctlMainForm::toggleMainForm (void)
 				raise();
 				activateWindow();
 			}
-		} else {
-			// Minimize (iconify) normally.
-			showMinimized();
 		}
+		else
+	#endif
+		// Minimize (iconify) normally.
+		showMinimized();
 	} else {
 		show();
 		raise();
@@ -3205,6 +3229,7 @@ void qjackctlMainForm::refreshStatus (void)
 			float fDspLoad = jack_cpu_load(m_pJackClient);
 			const char f = (fDspLoad > 0.1f ? 'f' : 'g'); // format
 			const int  p = (fDspLoad > 1.0f ?  1  :  2 ); // precision
+		#ifdef CONFIG_SYSTEM_TRAY
 			if (m_pSystemTray) {
 				if (m_iXrunCount > 0) {
 					m_pSystemTray->setToolTip(tr("%1 (%2%)")
@@ -3217,6 +3242,7 @@ void qjackctlMainForm::refreshStatus (void)
 						.arg(m_iXrunCount));
 				}
 			}
+		#endif
 			updateStatusItem(STATUS_DSP_LOAD,
 				tr("%1 %").arg(fDspLoad, 0, f, p));
 			updateStatusItem(STATUS_SAMPLE_RATE,
@@ -3411,6 +3437,7 @@ void qjackctlMainForm::updateTitleStatus (void)
 
 	updateStatusItem(STATUS_SERVER_STATE, sState);
 
+#ifdef CONFIG_SYSTEM_TRAY
 	if (m_pSystemTray) {
 		switch (m_iServerState) {
 		case QJACKCTL_STARTING:
@@ -3438,6 +3465,7 @@ void qjackctlMainForm::updateTitleStatus (void)
 		}
 		m_pSystemTray->setToolTip(sTitle);
 	}
+#endif
 
 	sTitle = m_pSetup->sServerName;
 	if (sTitle.isEmpty())
@@ -3460,10 +3488,11 @@ void qjackctlMainForm::updateServerState ( int iServerState )
 }
 
 
+#ifdef CONFIG_SYSTEM_TRAY
+
 // System tray master switcher.
 void qjackctlMainForm::updateSystemTray (void)
 {
-#ifdef CONFIG_SYSTEM_TRAY
 	if (!m_pSetup->bSystemTray && m_pSystemTray) {
 	//  Strange enough, this would close the application too.
 	//  m_pSystemTray->close();
@@ -3480,7 +3509,7 @@ void qjackctlMainForm::updateSystemTray (void)
 			SLOT(resetXrunStats()));
 		QObject::connect(m_pSystemTray,
 			SIGNAL(contextMenuRequested(const QPoint &)),
-			SLOT(systemTrayContextMenu(const QPoint &)));
+			SLOT(contextMenu(const QPoint &)));
 		m_pSystemTray->show();
 	} else {
 		// Make sure the main widget is visible.
@@ -3488,21 +3517,25 @@ void qjackctlMainForm::updateSystemTray (void)
 		raise();
 		activateWindow();
 	}
-#endif
 }
+
+#endif
 
 
 // System tray context menu request slot.
-void qjackctlMainForm::systemTrayContextMenu ( const QPoint& pos )
+void qjackctlMainForm::contextMenu ( const QPoint& pos )
 {
 	QMenu menu(this);
 	QAction *pAction;
 
-	QString sHideMinimize = (m_pSetup->bSystemTray && m_pSystemTray
-		? tr("&Hide") : tr("Mi&nimize"));
-	QString sShowRestore  = (m_pSetup->bSystemTray && m_pSystemTray
-		? tr("S&how") : tr("Rest&ore"));
-
+	QString sHideMinimize = tr("Mi&nimize");
+	QString sShowRestore  = tr("Rest&ore");
+#ifdef CONFIG_SYSTEM_TRAY
+	if (m_pSetup->bSystemTray && m_pSystemTray) {
+		sHideMinimize = tr("&Hide");
+		sShowRestore  = tr("S&how");
+	}
+#endif
 	pAction = menu.addAction(isVisible()
 		? sHideMinimize : sShowRestore, this, SLOT(toggleMainForm()));
 	menu.addSeparator();
@@ -3724,9 +3757,10 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 // Close main form slot.
 void qjackctlMainForm::quitMainForm (void)
 {
+#ifdef CONFIG_SYSTEM_TRAY
 	// Flag that we're quitting explicitly.
-	m_bQuitForce = true;
-
+	m_bQuitClose = true;
+#endif
 	// And then, do the closing dance.
 	close();
 }
@@ -3736,7 +3770,7 @@ void qjackctlMainForm::quitMainForm (void)
 void qjackctlMainForm::contextMenuEvent ( QContextMenuEvent *pEvent )
 {
 	// We'll just show up the usual system tray menu.
-	systemTrayContextMenu(pEvent->globalPos());
+	contextMenu(pEvent->globalPos());
 }
 
 
@@ -3755,15 +3789,16 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 void qjackctlMainForm::setDBusParameters (void)
 {
 	// Set configuration parameters...
-	bool bDummy     = (m_preset.sDriver == "dummy");
-	bool bSun       = (m_preset.sDriver == "sun");
-	bool bOss       = (m_preset.sDriver == "oss");
-	bool bAlsa      = (m_preset.sDriver == "alsa");
-	bool bPortaudio = (m_preset.sDriver == "portaudio");
-	bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	bool bFreebob   = (m_preset.sDriver == "freebob");
-	bool bFirewire  = (m_preset.sDriver == "firewire");
-	bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	const bool bDummy     = (m_preset.sDriver == "dummy");
+	const bool bSun       = (m_preset.sDriver == "sun");
+	const bool bOss       = (m_preset.sDriver == "oss");
+	const bool bAlsa      = (m_preset.sDriver == "alsa");
+	const bool bPortaudio = (m_preset.sDriver == "portaudio");
+	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
+	const bool bFreebob   = (m_preset.sDriver == "freebob");
+	const bool bFirewire  = (m_preset.sDriver == "firewire");
+	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+
 	setDBusEngineParameter("name",
 		m_pSetup->sServerName,
 		!m_pSetup->sServerName.isEmpty());
@@ -4047,15 +4082,14 @@ void qjackctlMainForm::transportPlayStatus ( bool bOn )
 }
 
 
-// Session (desktop) shutdown signal handler.
-void qjackctlMainForm::setQuitForce ( bool bQuitForce )
+void qjackctlMainForm::commitData ( QSessionManager& sm )
 {
-	m_bQuitForce = bQuitForce;
-}
+	sm.release();
 
-bool qjackctlMainForm::isQuitForce (void) const
-{
-	return m_bQuitForce;
+#ifdef CONFIG_SYSTEM_TRAY
+	m_bQuitClose = true;
+#endif
+	m_bQuitForce = true;
 }
 
 

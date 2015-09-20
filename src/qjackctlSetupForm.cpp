@@ -103,6 +103,10 @@ qjackctlSetupForm::qjackctlSetupForm (
 
 	m_ui.PresetComboBox->setCompleter(NULL);
 
+	m_ui.ServerNameComboBox->setCompleter(NULL);
+	m_ui.ServerPrefixComboBox->setCompleter(NULL);
+	m_ui.ServerSuffixComboBox->setCompleter(NULL);
+
 	// UI connections...
 
 	QObject::connect(m_ui.PresetComboBox,
@@ -373,6 +377,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.KeepOnTopCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QString sHideMinimize = tr("Mi&nimize");
+	QString sShowRestore  = tr("Rest&ore");
+#ifdef CONFIG_SYSTEM_TRAY
 	QObject::connect(m_ui.SystemTrayCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -382,6 +389,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.StartMinimizedCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+#endif
 	QObject::connect(m_ui.SingletonCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -586,9 +594,11 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.StopJackCheckBox->setChecked(m_pSetup->bStopJack);
 	m_ui.QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
 	m_ui.KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
+#ifdef CONFIG_SYSTEM_TRAY
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
 	m_ui.SystemTrayQueryCloseCheckBox->setChecked(m_pSetup->bSystemTrayQueryClose);
 	m_ui.StartMinimizedCheckBox->setChecked(m_pSetup->bStartMinimized);
+#endif
 	m_ui.SingletonCheckBox->setChecked(m_pSetup->bSingleton);
 	m_ui.ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
 	setComboBoxCurrentText(m_ui.ServerConfigNameComboBox,
@@ -611,8 +621,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 #ifndef CONFIG_SYSTEM_TRAY
 	m_ui.SystemTrayCheckBox->setChecked(false);
 	m_ui.SystemTrayCheckBox->setEnabled(false);
-	m_ui.ShowSystemTrayMessageCheckBox->setChecked(false);
-	m_ui.ShowSystemTrayMessageCheckBox->setEnabled(false);
+	m_ui.SystemTrayQueryCloseCheckBox->setChecked(false);
+	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(false);
 	m_ui.StartMinimizedCheckBox->setChecked(false);
 	m_ui.StartMinimizedCheckBox->setEnabled(false);
 #endif
@@ -1121,9 +1131,11 @@ void qjackctlSetupForm::stabilizeForm (void)
 #endif
 #endif
 
+#ifdef CONFIG_SYSTEM_TRAY
 	bEnabled = m_ui.SystemTrayCheckBox->isChecked();
 	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(bEnabled);
 	m_ui.StartMinimizedCheckBox->setEnabled(bEnabled);
+#endif
 
 	m_ui.StopJackCheckBox->setEnabled(
 		m_ui.DBusEnabledCheckBox->isChecked());
@@ -1505,7 +1517,9 @@ void qjackctlSetupForm::accept (void)
 		const QString sOldActivePatchbayPath  = m_pSetup->sActivePatchbayPath;
 		const bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
 		const bool    bOldKeepOnTop           = m_pSetup->bKeepOnTop;
+	#ifdef CONFIG_SYSTEM_TRAY
 		const bool    bOldSystemTray          = m_pSetup->bSystemTray;
+	#endif
 		const int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
 		const int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
 		const bool    bOldBezierLines         = m_pSetup->bBezierLines;
@@ -1558,9 +1572,11 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bStopJack                = m_ui.StopJackCheckBox->isChecked();
 		m_pSetup->bQueryClose              = m_ui.QueryCloseCheckBox->isChecked();
 		m_pSetup->bKeepOnTop               = m_ui.KeepOnTopCheckBox->isChecked();
+	#ifdef CONFIG_SYSTEM_TRAY
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();
 		m_pSetup->bSystemTrayQueryClose    = m_ui.SystemTrayQueryCloseCheckBox->isChecked();
 		m_pSetup->bStartMinimized          = m_ui.StartMinimizedCheckBox->isChecked();
+	#endif
 		m_pSetup->bSingleton               = m_ui.SingletonCheckBox->isChecked();
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
@@ -1611,9 +1627,11 @@ void qjackctlSetupForm::accept (void)
 		if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||
 			(sOldActivePatchbayPath != m_pSetup->sActivePatchbayPath))
 			pMainForm->updateActivePatchbay();
+	#ifdef CONFIG_SYSTEM_TRAY
 		if (( bOldSystemTray && !m_pSetup->bSystemTray) ||
 			(!bOldSystemTray &&  m_pSetup->bSystemTray))
 			pMainForm->updateSystemTray();
+	#endif
 		if (( bOldAliasesEnabled && !m_pSetup->bAliasesEnabled) ||
 			(!bOldAliasesEnabled &&  m_pSetup->bAliasesEnabled) ||
 			( bOldAliasesEditing && !m_pSetup->bAliasesEditing) ||

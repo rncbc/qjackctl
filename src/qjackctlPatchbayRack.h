@@ -24,6 +24,7 @@
 
 #include "qjackctlAbout.h"
 
+#include <QObject>
 #include <QStringList>
 
 #include <weak_libjack.h>

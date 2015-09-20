@@ -3,7 +3,6 @@
 TARGET = qjackctl
 
 TEMPLATE = app
-DEPENDPATH += .
 INCLUDEPATH += .
 
 include(src.pri)
@@ -15,7 +14,7 @@ HEADERS += config.h \
 	qjackctlAlsaConnect.h \
 	qjackctlConnect.h \
 	qjackctlConnectAlias.h \
-	qjackctlJackInterfaceComboBox.h \
+	qjackctlInterfaceComboBox.h \
 	qjackctlJackConnect.h \
 	qjackctlPatchbay.h \
 	qjackctlPatchbayFile.h \
@@ -68,6 +67,7 @@ FORMS += \
 RESOURCES += \
 	qjackctl.qrc
 
+
 TRANSLATIONS += \
 	translations/qjackctl_cs.ts \
 	translations/qjackctl_de.ts \
@@ -77,6 +77,7 @@ TRANSLATIONS += \
 	translations/qjackctl_ja.ts \
 	translations/qjackctl_nl.ts \
 	translations/qjackctl_ru.ts
+
 
 unix {
 
@@ -112,10 +113,12 @@ unix {
 # XML/DOM support
 QT += xml
 
-
 # QT5 support
 !lessThan(QT_MAJOR_VERSION, 5) {
 	QT += widgets
+	unix {
+		QT += x11extras
+	}
 }
 CONFIG+=static
 RC_FILE = ../mingw/icon/resfile.rc
