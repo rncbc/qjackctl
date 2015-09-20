@@ -46,19 +46,15 @@ function clean_and_configure {
 ########## PATCH
 ###################################
 
-if [ ! -f is_patched ] ; then
-    echo "*** Patching source"
-    patch -p1 <mingw/diff.diff
-    touch is_patched
-fi
-
-
 if ! grep "CONFIG+=static" src/src.pro ; then
-    echo "CONFIG+=static" >>src/src.pro
+    echo "Can not find CONFIG+=static in src/src.pro"
+    exit -1
+
 fi
 
 if ! grep "RC_FILE = ../mingw/icon/resfile.rc" src/src.pro ; then
-    echo "RC_FILE = ../mingw/icon/resfile.rc" >>src/src.pro
+    echo "Can not find RC_FILE = ../mingw/icon/resfile.rc in  src/src.pro"
+    exit -1
 fi
 
 
