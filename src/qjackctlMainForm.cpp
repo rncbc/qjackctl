@@ -2201,6 +2201,7 @@ void qjackctlMainForm::updateXrunCount (void)
 	updateStatusItem(STATUS_XRUN_COUNT, sText);
 }
 
+
 // Convert whole elapsed seconds to hh:mm:ss time format.
 QString qjackctlMainForm::formatTime ( float secs ) const
 {
@@ -2300,7 +2301,7 @@ void qjackctlMainForm::refreshXrunStats (void)
 	updateXrunCount();
 
 	if (m_fXrunTotal < 0.001f) {
-		QString n = "--";
+		const QString n = "--";
 		updateStatusItem(STATUS_XRUN_TOTAL, n);
 		updateStatusItem(STATUS_XRUN_MIN, n);
 		updateStatusItem(STATUS_XRUN_MAX, n);
@@ -2310,7 +2311,7 @@ void qjackctlMainForm::refreshXrunStats (void)
 		float fXrunAverage = 0.0f;
 		if (m_iXrunCount > 0)
 			fXrunAverage = (m_fXrunTotal / m_iXrunCount);
-		QString s = " " + tr("msec");
+		const QString s = " " + tr("msec");
 		updateStatusItem(STATUS_XRUN_TOTAL, QString::number(m_fXrunTotal) + s);
 		updateStatusItem(STATUS_XRUN_MIN, QString::number(m_fXrunMin) + s);
 		updateStatusItem(STATUS_XRUN_MAX, QString::number(m_fXrunMax) + s);
@@ -3187,7 +3188,8 @@ void qjackctlMainForm::refreshStatus (void)
 		QString sText = n;
 		jack_position_t tpos;
 		jack_transport_state_t tstate = jack_transport_query(m_pJackClient, &tpos);
-		bool bPlaying = (tstate == JackTransportRolling || tstate == JackTransportLooping);
+		const bool bPlaying
+			= (tstate == JackTransportRolling || tstate == JackTransportLooping);
 		// Transport timecode position.
 	//  if (bPlaying)
 			updateStatusItem(STATUS_TRANSPORT_TIME,
@@ -3208,7 +3210,7 @@ void qjackctlMainForm::refreshStatus (void)
 		// Less frequent status items update...
 		if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 			m_iStatusRefresh = 0;
-			float fDspLoad = jack_cpu_load(m_pJackClient);
+			const float fDspLoad = jack_cpu_load(m_pJackClient);
 			const char f = (fDspLoad > 0.1f ? 'f' : 'g'); // format
 			const int  p = (fDspLoad > 1.0f ?  1  :  2 ); // precision
 		#ifdef CONFIG_SYSTEM_TRAY
@@ -3239,7 +3241,7 @@ void qjackctlMainForm::refreshStatus (void)
 				m_ui.ServerModeTextLabel->setPalette(pal);
 			}
 		#ifdef CONFIG_JACK_REALTIME
-			bool bRealtime = jack_is_realtime(m_pJackClient);
+			const bool bRealtime = jack_is_realtime(m_pJackClient);
 			updateStatusItem(STATUS_REALTIME,
 				(bRealtime ? tr("Yes") : tr("No")));
 			m_ui.ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
@@ -3302,6 +3304,17 @@ void qjackctlMainForm::refreshStatus (void)
 				refreshXrunStats();
 			}
 		}
+	#ifdef CONFIG_SYSTEM_TRAY
+		// XRUN: blink the system-tray icon backgroung...
+		if (m_pSystemTray && m_iXrunCallbacks > 0) {
+			const int iElapsed = m_tXrunLast.elapsed();
+			if (iElapsed > 0x7ff) { // T=2048ms.
+				QColor color(m_pSystemTray->background());
+				color.setAlpha(0x0ff - ((iElapsed & 0x3ff) >> 3));
+				m_pSystemTray->setBackground(color);
+			}
+		}
+	#endif
 	}   // No need to update often if we're just idle...
 	else if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 		m_iStatusRefresh = 0;
