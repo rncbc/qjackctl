@@ -1139,11 +1139,10 @@ void qjackctlMainForm::startJack (void)
 	#endif
 		const QString sPath = ::getenv("PATH");
 		QStringList paths = sPath.split(chPathSep);
-#if defined (_WIN64)
-                paths = paths << "C:\\Program Files (x86)\\Jack" << "C:\\Program Files\\Jack";
-#else
-                paths = paths << "C:\\Program Files\\Jack" << "C:\\Program Files (x86)\\Jack";
-#endif
+	#if defined(WIN32)
+		paths = paths << "C:\\Program Files (x86)\\Jack" << "C:\\Program Files\\Jack";
+		paths = paths << "C:\\Program Files\\Jack" << "C:\\Program Files (x86)\\Jack";
+	#endif
 		QStringListIterator iter(paths);
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
