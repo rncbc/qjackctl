@@ -8,5 +8,5 @@ Description: Portable audio I/O
 Requires:
 Version: 19
 
-Libs: -L${libdir} -lportaudio  -lwinmm -lm -ldsound -lole32 -lwinmm -lm -lole32 -luuid -lwinmm -lm -luuid -lsetupapi -lole32 -lwinmm -lm -lole32 -luuid
+Libs: -L${libdir} -lportaudio  -lwinmm -lm -ldsound -lole32 -lwinmm -lm -lole32 -luuid -lwinmm -lm -lole32 -luuid
 Cflags: -I${includedir} -mthreads

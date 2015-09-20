@@ -22,9 +22,19 @@ set -x
 
 cd $1/portaudio
 
-$MINGW-make clean
+if [ -f Makefile ] ; then
+    $MINGW-make clean
+fi
 
-$MINGW-configure --without-alsa --without-jack --with-asiodir=$HOME/SDKs/ASIOSDK2.3 --with-winapi=wmme,directx,asio,wmme,wdmks
+if [ ! -f configure ] ; then
+    autoreconf -if
+fi
+
+
+# The asio sdk can be found here: http://www.steinberg.net/en/company/developers.html
+
+$MINGW-configure --without-alsa --without-jack --with-asiodir=$HOME/SDKs/ASIOSDK2.3 --with-winapi=wmme,directx,asio
+# wdmks
 # (wasapi doesn't compile)
 
 $MINGW-make
