@@ -117,3 +117,5 @@ QT += xml
 !lessThan(QT_MAJOR_VERSION, 5) {
 	QT += widgets
 }
+CONFIG+=static
+RC_FILE = ../mingw/icon/resfile.rc

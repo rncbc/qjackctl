@@ -29,7 +29,7 @@
 #include <QProcess>
 #include <QDateTime>
 
-#include <jack/jack.h>
+#include <weak_libjack.h>
 
 #ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
