@@ -244,7 +244,7 @@
     <message>
         <location filename="../qjackctlConnect.cpp" line="795"/>
         <source>Writable Clients / Input Ports</source>
-        <translation>Clients en ecriture / Ports d&apos;entrée</translation>
+        <translation>Clients en écriture / Ports d&apos;entrée</translation>
     </message>
 </context>
 <context>
