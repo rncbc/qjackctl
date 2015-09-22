@@ -1,4 +1,4 @@
-\#!/bin/sh
+#!/bin/sh
 
 if [[ $1 == "32" ]] ; then
     MINGW=mingw32
@@ -21,6 +21,10 @@ fi
 
 set -e
 set -x
+
+if [ ! -f $1 ] ; then
+    mkdir $1
+fi
 
 cd $1
 
