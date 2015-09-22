@@ -27,7 +27,7 @@
 #include <QObject>
 #include <QStringList>
 
-#include <weak_libjack.h>
+#include <jack/jack.h>
 
 #ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>

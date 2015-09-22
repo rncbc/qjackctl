@@ -25,7 +25,7 @@
 #include "qjackctlAbout.h"
 #include "qjackctlConnect.h"
 
-#include <weak_libjack.h>
+#include <jack/jack.h>
 
 // Forward declarations.
 class qjackctlJackPort;

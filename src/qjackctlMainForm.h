@@ -29,9 +29,9 @@
 #include <QProcess>
 #include <QDateTime>
 
-#include <weak_libjack.h>
-
 #include <QSessionManager>
+
+#include <jack/jack.h>
 
 #ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
