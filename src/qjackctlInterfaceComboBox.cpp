@@ -114,6 +114,120 @@ void qjackctlInterfaceComboBox::addCard (
 }
 
 
+#ifdef CONFIG_PORTAUDIO
+
+#include <QCoreApplication>
+#include <QThread>
+#include <QMutex>
+#include <QMessageBox>
+
+namespace{
+
+class PortAudioProber : public QThread
+{
+public:
+
+        QList<QString> getNames(QWidget *parent){
+		{
+			QMutexLocker locker(&PortAudioProber::mutex);
+			if ( ! PortAudioProber::names.isEmpty() )
+				return PortAudioProber::names;
+		}
+          
+		QMessageBox messageBox(
+				QMessageBox::Information,
+				"Probing...",
+				"Please wait, Portaudio is probing audio hardware",
+				QMessageBox::Abort,
+				parent
+		);
+            
+		messageBox.setWindowModality(Qt::WindowModal); // Make it impossible to start another PortAudioProber while waiting.
+              
+		start();
+
+		bool timedOut = true;
+          
+		for (int i=0 ; i<100 ; i++) {
+			if (messageBox.isVisible())
+				QCoreApplication::processEvents();
+
+			QThread::msleep(50);
+
+			if (i == 10) // wait 1/2 second before showing message box
+				messageBox.show();
+
+			if (messageBox.clickedButton() != NULL) {
+				timedOut = false;
+				break;
+			}
+
+#if 1
+			if (isFinished()) {
+				timedOut = false;
+				break;
+			}
+#endif
+		}
+
+		if (timedOut)
+			QMessageBox::warning(parent, "Warning", "Audio hardware probing timed out");
+
+		{
+			QMutexLocker locker(&PortAudioProber::mutex);
+			return names;
+		}
+	}
+
+	void close(void){
+		if ( ! isRunning() ) // If the user pressed "abort", the thread might still be running.
+			delete this;
+	}
+
+
+private:
+
+	// must call close() instead
+	~PortAudioProber(){
+	}
+  
+	static QMutex mutex;
+	static QList<QString> names;
+
+	void run(void){
+		if (Pa_Initialize() == paNoError) {
+                  
+			// Fill hostapi info...
+			PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
+			QString pHostName[iNumHostApi];
+			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
+				pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
+                        
+			// Fill device info...
+			PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
+
+			{
+				QMutexLocker locker(&PortAudioProber::mutex);
+				if (PortAudioProber::names.size() == 0) {
+					for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
+						PaDeviceInfo *ppDeviceInfo = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
+						QString sName = pHostName[ppDeviceInfo->hostApi] + "::" + QString(ppDeviceInfo->name);
+						PortAudioProber::names.push_back(sName);
+					}
+				}
+			}
+
+			Pa_Terminate();
+		}
+	}    
+};
+
+QMutex PortAudioProber::mutex;
+QList<QString> PortAudioProber::names;
+}
+#endif  // CONFIG_PORTAUDIO
+
+
 void qjackctlInterfaceComboBox::populateModel (void)
 {
 	bool bBlockSignals = QComboBox::blockSignals(true);
@@ -312,25 +426,21 @@ void qjackctlInterfaceComboBox::populateModel (void)
 #endif 	// CONFIG_COREAUDIO
 #ifdef CONFIG_PORTAUDIO
 	else if (bPortaudio) {
-		if (Pa_Initialize() == paNoError) {
-			// Fill hostapi info...
-			PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
-			QString *pHostName = new QString[iNumHostApi];
-			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
-				pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
-			// Fill device info...
-			PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
-			PaDeviceInfo **ppDeviceInfo = new PaDeviceInfo * [iNumDevice];
-			for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
-				ppDeviceInfo[i] = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
-				sName = pHostName[ppDeviceInfo[i]->hostApi] + "::" + QString(ppDeviceInfo[i]->name);
-				addCard(sName, QString());
-				if (sCurName == sName)
-					iCurCard = iCards;
-				++iCards;
-			}
-			Pa_Terminate();
+
+		PortAudioProber *pab = new PortAudioProber;
+          
+		QList<QString> names = pab->getNames(this);
+                
+		iCards = names.size();
+          
+		for (int i = 0; i < iCards; ++i) {
+			QString sName = names[i];
+			if (sCurName == sName)
+				iCurCard = iCards;
+			addCard(sName, QString());
 		}
+
+		pab->close();
 	}
 #endif  // CONFIG_PORTAUDIO
 
