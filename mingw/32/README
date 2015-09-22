@@ -1,0 +1,7 @@
+The file libportaudio_x86.a is copied directly from the jack2 source repository, and is used for building the 32 bit version of qjackctl.
+
+The corresponding file libportaudio_x86_64.a is not used in the 64 bit build because of exceptions type mismatch.
+
+
+
+

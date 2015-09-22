@@ -94,7 +94,7 @@ EXTRAFLAGS="-I`pwd`/mingw/weakjack -I`pwd`/mingw/include -I`pwd`/mingw/$1/portau
 $CC $EXTRAFLAGS mingw/weakjack/weak_libjack.c -Wall -c -O2 -o weak_libjack.o
 cp mingw/$1/portaudio/lib/.libs/libportaudio.a .
 
-$MINGW-make -j8 CC="$CC $EXTRAFLAGS" CXX="$CXX $EXTRAFLAGS" LINK="../mingw/linker.sh $CXX" LINKER="../mingw/linker.sh $CXX"
+$MINGW-make -j8 CC="$CC $EXTRAFLAGS" CXX="$CXX $EXTRAFLAGS" LINK="../mingw/linker$1.sh $CXX" LINKER="../mingw/linker$1.sh $CXX"
 
 
 

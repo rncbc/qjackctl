@@ -1,9 +1,11 @@
-#!/bin/sh
+\#!/bin/sh
 
 if [[ $1 == "32" ]] ; then
     MINGW=mingw32
     CC=i686-w64-mingw32-gcc
     CXX=i686-w64-mingw32-g++
+    echo "It is not necessary to build a 32 bit version of portaudio."
+    exit -1
 fi
 
 if [[ $1 == "64" ]] ; then
@@ -20,7 +22,13 @@ fi
 set -e
 set -x
 
-cd $1/portaudio
+cd $1
+
+if [ ! -f portaudio ] ; then
+    tar xvzf ../pa_stable_v19_20140130.tgz
+fi
+
+cd portaudio
 
 if [ -f Makefile ] ; then
     $MINGW-make clean

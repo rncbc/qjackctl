@@ -1,3 +1,0 @@
-/usr/bin/cmake -E remove -f CMakeFiles/portaudio.dir/objects.a
-/usr/bin/i686-w64-mingw32-ar cr CMakeFiles/portaudio.dir/objects.a @CMakeFiles/portaudio.dir/objects1.rsp
-/usr/bin/i686-w64-mingw32-gcc    portaudio_cmake.def -shared -o libportaudio_x86.dll -Wl,--out-implib,libportaudio_x86.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles/portaudio.dir/objects.a -Wl,--no-whole-archive @CMakeFiles/portaudio.dir/linklibs.rsp
