@@ -79,17 +79,17 @@
 <context>
     <name>qjackctlAboutForm</name>
     <message>
-        <location filename="../qjackctlAboutForm.ui" line="36"/>
+        <location filename="../qjackctlAboutForm.ui" line="37"/>
         <source>About QjackCtl</source>
         <translation>Over QjackCtl</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.ui" line="77"/>
+        <location filename="../qjackctlAboutForm.ui" line="87"/>
         <source>About Qt</source>
         <translation>Over Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.ui" line="67"/>
+        <location filename="../qjackctlAboutForm.ui" line="77"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluiten</translation>
     </message>

@@ -79,12 +79,12 @@
 <context>
     <name>qjackctlAboutForm</name>
     <message>
-        <location filename="../qjackctlAboutForm.ui" line="77"/>
+        <location filename="../qjackctlAboutForm.ui" line="87"/>
         <source>About Qt</source>
         <translation>Info su QT</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.ui" line="67"/>
+        <location filename="../qjackctlAboutForm.ui" line="77"/>
         <source>&amp;Close</source>
         <translation>&amp;Chiudi</translation>
     </message>
@@ -154,7 +154,7 @@
         <translation>Supporto del MIDI di Jack disabilitato.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.ui" line="36"/>
+        <location filename="../qjackctlAboutForm.ui" line="37"/>
         <source>About QjackCtl</source>
         <translation>Info su QjackCtl</translation>
     </message>
