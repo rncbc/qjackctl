@@ -1,7 +1,7 @@
 // qjackctlSystemTray.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	// Set things inherited...
 	if (pParent) {
 		m_icon = pParent->windowIcon();
+		setBackground(Qt::transparent); // also updates pixmap.
 		QSystemTrayIcon::setIcon(m_icon);
 		QSystemTrayIcon::setToolTip(pParent->windowTitle());
 	}
@@ -49,8 +50,6 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	QObject::connect(this,
 		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 		SLOT(activated(QSystemTrayIcon::ActivationReason)));
-
-	setBackground(Qt::transparent);
 
 	QSystemTrayIcon::show();
 }
@@ -93,8 +92,11 @@ qjackctlSystemTray::~qjackctlSystemTray (void)
 // System tray icon/pixmaps update method.
 void qjackctlSystemTray::updatePixmap (void)
 {
+	// Get the default systray icon size...
+	const QRect& dimension = QSystemTrayIcon::geometry();
+
 	// Renitialize icon as fit...
-	m_pixmap = m_icon.pixmap(22, 22);
+	m_pixmap = m_icon.pixmap(dimension.width(), dimension.height());
 
     // Merge with the overlay pixmap...
 	if (!m_pixmapOverlay.mask().isNull()) {

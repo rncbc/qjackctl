@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- New hi-res application icon (by Uttrup Renzel, Max Christian
+  Pohle, thanks). (EXPERIMENTAL)
+
 - System tray icon red background now blinks when a XRUN occurs.
 
 - Desktop environment session shutdown/logout management has been
