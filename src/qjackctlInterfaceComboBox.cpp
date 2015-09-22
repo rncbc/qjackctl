@@ -127,13 +127,13 @@ class PortAudioProber : public QThread
 {
 public:
 
-        QList<QString> getNames(QWidget *parent){
+	static QList<QString> getNames(QWidget *parent){
 		{
 			QMutexLocker locker(&PortAudioProber::mutex);
 			if ( ! PortAudioProber::names.isEmpty() )
 				return PortAudioProber::names;
 		}
-          
+
 		QMessageBox messageBox(
 				QMessageBox::Information,
 				"Probing...",
@@ -141,13 +141,15 @@ public:
 				QMessageBox::Abort,
 				parent
 		);
-            
+
 		messageBox.setWindowModality(Qt::WindowModal); // Make it impossible to start another PortAudioProber while waiting.
-              
-		start();
+
+		PortAudioProber *pab = new PortAudioProber;
+
+		pab->start();
 
 		bool timedOut = true;
-          
+
 		for (int i=0 ; i<100 ; i++) {
 			if (messageBox.isVisible())
 				QCoreApplication::processEvents();
@@ -163,7 +165,7 @@ public:
 			}
 
 #if 1
-			if (isFinished()) {
+			if (pab->isFinished()) {
 				timedOut = false;
 				break;
 			}
@@ -179,15 +181,11 @@ public:
 		}
 	}
 
-	void close(void){
-		if ( ! isRunning() ) // If the user pressed "abort", the thread might still be running.
-			delete this;
-	}
-
-
 private:
 
-	// must call close() instead
+	PortAudioProber(){
+	}
+
 	~PortAudioProber(){
 	}
   
@@ -208,7 +206,7 @@ private:
 
 			{
 				QMutexLocker locker(&PortAudioProber::mutex);
-				if (PortAudioProber::names.size() == 0) {
+				if (PortAudioProber::names.isEmpty()) {
 					for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
 						PaDeviceInfo *ppDeviceInfo = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
 						QString sName = pHostName[ppDeviceInfo->hostApi] + "::" + QString(ppDeviceInfo->name);
@@ -219,12 +217,13 @@ private:
 
 			Pa_Terminate();
 		}
-	}    
+	}
 };
 
 QMutex PortAudioProber::mutex;
 QList<QString> PortAudioProber::names;
 }
+
 #endif  // CONFIG_PORTAUDIO
 
 
@@ -427,20 +426,16 @@ void qjackctlInterfaceComboBox::populateModel (void)
 #ifdef CONFIG_PORTAUDIO
 	else if (bPortaudio) {
 
-		PortAudioProber *pab = new PortAudioProber;
-          
-		QList<QString> names = pab->getNames(this);
-                
+		QList<QString> names = PortAudioProber::getNames(this);
+
 		iCards = names.size();
-          
+
 		for (int i = 0; i < iCards; ++i) {
 			QString sName = names[i];
 			if (sCurName == sName)
 				iCurCard = iCards;
 			addCard(sName, QString());
 		}
-
-		pab->close();
 	}
 #endif  // CONFIG_PORTAUDIO
 
