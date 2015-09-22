@@ -22,10 +22,10 @@
 #ifndef __qjackctlSession_h
 #define __qjackctlSession_h
 
+#include <weak_libjack.h>
+
 #include <QString>
 #include <QHash>
-
-#include <jack/jack.h>
 
 // Forward decls.
 class QSettings;

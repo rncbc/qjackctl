@@ -360,7 +360,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	}
 
 	m_settings.beginGroup("/Settings" + sSuffix);
-	preset.sServerPrefix = m_settings.value("/Server", "jackd").toString();
+	preset.sServerPrefix = m_settings.value("/Server", "jackd -S").toString();
 	preset.sServerName  = m_settings.value("/ServerName").toString();
 	preset.bRealtime    = m_settings.value("/Realtime", true).toBool();
 	preset.bSoftMode    = m_settings.value("/SoftMode", false).toBool();

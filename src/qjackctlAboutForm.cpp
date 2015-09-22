@@ -25,7 +25,7 @@
 #include <QMessageBox>
 
 #ifdef CONFIG_JACK_VERSION
-#include <jack/jack.h>
+#include <weak-jack.h>
 #endif
 
 

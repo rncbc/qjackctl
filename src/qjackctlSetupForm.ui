@@ -782,17 +782,17 @@
                </property>
                <item>
                 <property name="text">
-                 <string>jackd</string>
+                 <string>jackd -S</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>jackdmp</string>
+                 <string>jackdmp -S</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>jackstart</string>
+                 <string>jackstart -S</string>
                 </property>
                </item>
               </widget>
