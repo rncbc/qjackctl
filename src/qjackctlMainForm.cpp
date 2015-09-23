@@ -49,13 +49,13 @@
 #include <QPixmap>
 #include <QFileInfo>
 #include <QDir>
-#ifdef WIN32
-#include <QPlastiqueStyle>
-#endif
 
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 
+#if defined(WIN32)
+#include <QPlastiqueStyle>
+#endif
 
 
 #if QT_VERSION < 0x040500
@@ -316,10 +316,10 @@ qjackctlMainForm::qjackctlMainForm (
 	QWidget *pParent, Qt::WindowFlags wflags )
 	: QWidget(pParent, wflags)
 {
-#ifdef WIN32
-        QApplication::setStyle( new QPlastiqueStyle());
+#if defined(WIN32)
+	QApplication::setStyle(new QPlastiqueStyle());
 #endif
-        
+
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
@@ -1132,8 +1132,8 @@ void qjackctlMainForm::startJack (void)
 	if (fi.isRelative()) {
 	#if defined(WIN32)
 		const char chPathSep = ';';
-                if (fi.suffix().isEmpty())
-                  sCommand += ".exe";
+		if (fi.suffix().isEmpty())
+			sCommand += ".exe";
 	#else
 		const char chPathSep = ':';
 	#endif
@@ -1146,12 +1146,14 @@ void qjackctlMainForm::startJack (void)
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
 			fi.setFile(QDir(sDirectory), sCommand);
-                        printf("\n\n\n\n abs_path: -%s-\ndir: -%s-\nsCommand: -%s-\nexists: %d, executable: %d\n\n",
-                               fi.absolutePath().toUtf8().constData(),
-                               sDirectory.toUtf8().constData(),
-                               sCommand.toUtf8().constData(),
-                               fi.exists(), fi.isExecutable()
-                               );
+		#if defined(WIN32)
+			printf("\n\n\n\n abs_path: -%s-\ndir: -%s-\nsCommand: -%s-\nexists: %d, executable: %d\n\n",
+				   fi.absolutePath().toUtf8().constData(),
+				   sDirectory.toUtf8().constData(),
+				   sCommand.toUtf8().constData(),
+				   fi.exists(), fi.isExecutable()
+			);
+		#endif
 			if (fi.exists() && fi.isExecutable()) {
 				sCommand = fi.filePath();
 				break;
@@ -1557,7 +1559,7 @@ void qjackctlMainForm::jackStarted (void)
 	// Show startup results...
 	if (m_pJack) {
 		appendMessages(tr("JACK was started with PID=%1.")
-			.arg(uint64_t(m_pJack->pid())));
+			.arg(quint64(m_pJack->pid())));
 	}
 
 #ifdef CONFIG_DBUS

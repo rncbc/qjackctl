@@ -120,5 +120,8 @@ QT += xml
 		QT += x11extras
 	}
 }
-CONFIG+=static
-RC_FILE = ../mingw/icon/resfile.rc
+
+win32 {
+	CONFIG += static
+	RC_FILE = ../mingw/icon/resfile.rc
+}

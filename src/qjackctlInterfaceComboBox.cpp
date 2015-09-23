@@ -121,13 +121,14 @@ void qjackctlInterfaceComboBox::addCard (
 #include <QMutex>
 #include <QMessageBox>
 
-namespace{
+namespace {
 
 class PortAudioProber : public QThread
 {
 public:
 
-	static QList<QString> getNames(QWidget *parent){
+	static QList<QString> getNames(QWidget *parent)
+	{
 		{
 			QMutexLocker locker(&PortAudioProber::mutex);
 			if ( ! PortAudioProber::names.isEmpty() )
@@ -150,7 +151,8 @@ public:
 
 		bool timedOut = true;
 
-		for (int i=0 ; i<100 ; i++) {
+		for (int i = 0; i < 100; ++i) {
+
 			if (messageBox.isVisible())
 				QCoreApplication::processEvents();
 
@@ -164,12 +166,12 @@ public:
 				break;
 			}
 
-#if 1
+		#if 1
 			if (pab->isFinished()) {
 				timedOut = false;
 				break;
 			}
-#endif
+		#endif
 		}
 
 		if (timedOut)
@@ -183,24 +185,22 @@ public:
 
 private:
 
-	PortAudioProber(){
-	}
-
-	~PortAudioProber(){
-	}
+	PortAudioProber() {}
+	~PortAudioProber() {}
   
 	static QMutex mutex;
 	static QList<QString> names;
 
-	void run(void){
+	void run(void)
+	{
 		if (Pa_Initialize() == paNoError) {
-                  
+
 			// Fill hostapi info...
 			PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
 			QString pHostName[iNumHostApi];
 			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
 				pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
-                        
+
 			// Fill device info...
 			PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
 
@@ -222,7 +222,8 @@ private:
 
 QMutex PortAudioProber::mutex;
 QList<QString> PortAudioProber::names;
-}
+
+} // namespace
 
 #endif  // CONFIG_PORTAUDIO
 
