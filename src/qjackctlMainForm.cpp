@@ -918,7 +918,7 @@ bool qjackctlMainForm::queryClose (void)
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
 	//	m_pSetup->saveWidgetGeometry(m_pSetupForm);
-		m_pSetup->saveWidgetGeometry(this);
+		m_pSetup->saveWidgetGeometry(this, true);
 		// Close popup widgets.
 		if (m_pMessagesStatusForm)
 			m_pMessagesStatusForm->close();
