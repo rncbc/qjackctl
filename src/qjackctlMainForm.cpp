@@ -573,6 +573,13 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	// Try to restore old window positioning and appearence.
 	m_pSetup->loadWidgetGeometry(this, true);
 
+	// And for the whole widget gallore...
+	m_pSetup->loadWidgetGeometry(m_pMessagesStatusForm);
+	m_pSetup->loadWidgetGeometry(m_pSessionForm);
+	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
+	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
+//	m_pSetup->loadWidgetGeometry(m_pSetupForm);
+
 	// Make it final show...
 	m_ui.StatusDisplayFrame->show();
 
@@ -592,12 +599,6 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 #ifdef CONFIG_SYSTEM_TRAY
 	updateSystemTray();
 #endif
-	// And for the whole widget gallore...
-	m_pSetup->loadWidgetGeometry(m_pMessagesStatusForm);
-	m_pSetup->loadWidgetGeometry(m_pSessionForm);
-	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
-	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
-//	m_pSetup->loadWidgetGeometry(m_pSetupForm);
 
 	// Initial XRUN statistics reset.
 	resetXrunStats();
