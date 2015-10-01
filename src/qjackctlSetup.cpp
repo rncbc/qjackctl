@@ -700,7 +700,7 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 {
 	// Try to restore old form window positioning.
 	if (pWidget) {
-		if (bVisible) pWidget->show(); // Force initial exposure!
+	//	if (bVisible) pWidget->show(); -- force initial exposure?
 		m_settings.beginGroup("/Geometry/" + pWidget->objectName());
 	#if QT_VERSION >= 0x050000
 		const QByteArray& geometry
