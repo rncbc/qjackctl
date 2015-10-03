@@ -190,6 +190,8 @@ protected:
 	void appendStdoutBuffer(const QString&);
 	void flushStdoutBuffer();
 
+	bool stdoutBlock(int fd, bool bBlock) const;
+
 	QString formatExitStatus(int iExitStatus) const;
 
 	void shellExecute(const QString& sShellCommand,
