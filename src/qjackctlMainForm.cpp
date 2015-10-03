@@ -608,8 +608,12 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	if (m_pSetup->bStdoutCapture && ::pipe(g_fdStdout) == 0) {
 		::dup2(g_fdStdout[QJACKCTL_FDWRITE], STDOUT_FILENO);
 		::dup2(g_fdStdout[QJACKCTL_FDWRITE], STDERR_FILENO);
-		m_pStdoutNotifier = new QSocketNotifier(g_fdStdout[QJACKCTL_FDREAD], QSocketNotifier::Read, this);
-		QObject::connect(m_pStdoutNotifier, SIGNAL(activated(int)), this, SLOT(stdoutNotifySlot(int)));
+		stdoutBlock(g_fdStdout[QJACKCTL_FDWRITE], false);
+		m_pStdoutNotifier = new QSocketNotifier(
+			g_fdStdout[QJACKCTL_FDREAD], QSocketNotifier::Read, this);
+		QObject::connect(m_pStdoutNotifier,
+			SIGNAL(activated(int)),
+			SLOT(stdoutNotifySlot(int)));
 	}
 #endif
 #ifdef CONFIG_ALSA_SEQ
@@ -1696,15 +1700,28 @@ void qjackctlMainForm::updateXrunStats ( float fXrunLast )
 }
 
 
+// Set stdout/stderr blocking mode.
+bool qjackctlMainForm::stdoutBlock ( int fd, bool bBlock ) const
+{
+#if !defined(WIN32)
+	const int iFlags = ::fcntl(fd, F_GETFL, 0);
+	const bool bNonBlock = bool(iFlags & O_NONBLOCK);
+	if (bBlock && bNonBlock)
+		bBlock = (::fcntl(fd, F_SETFL, iFlags & ~O_NONBLOCK) == 0);
+	else
+	if (!bBlock && !bNonBlock)
+		bBlock = (::fcntl(fd, F_SETFL, iFlags |  O_NONBLOCK) != 0);
+#endif
+	return bBlock;
+}
+
+
 // Own stdout/stderr socket notifier slot.
 void qjackctlMainForm::stdoutNotifySlot ( int fd )
 {
  #if !defined(WIN32)
 	// Set non-blocking reads, if not already...
-	const int iFlags = ::fcntl(fd, F_GETFL, 0);
-	int iBlock = ((iFlags & O_NONBLOCK) == 0);
-	if (iBlock)
-		iBlock = ::fcntl(fd, F_SETFL, iFlags | O_NONBLOCK);
+	const bool bBlock = stdoutBlock(fd, false);
 	// Read as much as is available...
 	QString sTemp;
 	char achBuffer[1024];
@@ -1713,7 +1730,7 @@ void qjackctlMainForm::stdoutNotifySlot ( int fd )
 	while (cchRead > 0) {
 		achBuffer[cchRead] = (char) 0;
 		sTemp.append(achBuffer);
-		cchRead = (iBlock ? 0 : ::read(fd, achBuffer, cchBuffer));
+		cchRead = (bBlock ? 0 : ::read(fd, achBuffer, cchBuffer));
 	}
 	// Needs to be non-empty...
 	if (!sTemp.isEmpty())
