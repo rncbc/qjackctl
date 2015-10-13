@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Probing portaudio audio device in a separate thread (by Kjetil
+  Matheussen, thanks).
+
 - Messages standard output capture has been improved again, now
   in both ways a non-blocking pipe may get. (EXPERIMENTAL)
 

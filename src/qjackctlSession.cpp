@@ -594,10 +594,10 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
 	}
 #endif
 
-	jack_client_t *pJackClient = jack_client_open(aClientName.constData(),
+	jack_client_t *pJackClient = ::jack_client_open(aClientName.constData(),
 		jack_options_t(JackNoStartServer | JackUseExactName), NULL);
 	if (pJackClient) {
-		jack_client_close(pJackClient);
+		::jack_client_close(pJackClient);
 		return true;
 	}
 

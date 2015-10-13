@@ -123,5 +123,4 @@ QT += xml
 
 win32 {
 	CONFIG += static
-	RC_FILE = ../mingw/icon/resfile.rc
 }

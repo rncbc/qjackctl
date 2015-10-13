@@ -2,7 +2,8 @@
 //
 /****************************************************************************
    Copyright (C) 2013, Arnout Engelen. All rights reserved.
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2015, Kjetil Matheussen. (portaudio_probe_thread)
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -127,20 +128,20 @@ class PortAudioProber : public QThread
 {
 public:
 
-	static QList<QString> getNames(QWidget *parent)
+	static QStringList getNames(QWidget *pParent)
 	{
 		{
 			QMutexLocker locker(&PortAudioProber::mutex);
-			if ( ! PortAudioProber::names.isEmpty() )
+			if (!PortAudioProber::names.isEmpty())
 				return PortAudioProber::names;
 		}
 
 		QMessageBox messageBox(
-				QMessageBox::Information,
-				"Probing...",
-				"Please wait, Portaudio is probing audio hardware",
-				QMessageBox::Abort,
-				parent
+			QMessageBox::Information,
+			"Probing...",
+			"Please wait, Portaudio is probing audio hardware",
+			QMessageBox::Abort,
+			pParent
 		);
 
 		messageBox.setWindowModality(Qt::WindowModal); // Make it impossible to start another PortAudioProber while waiting.
@@ -149,7 +150,7 @@ public:
 
 		pab->start();
 
-		bool timedOut = true;
+		bool bTimedOut = true;
 
 		for (int i = 0; i < 100; ++i) {
 
@@ -162,20 +163,20 @@ public:
 				messageBox.show();
 
 			if (messageBox.clickedButton() != NULL) {
-				timedOut = false;
+				bTimedOut = false;
 				break;
 			}
 
 		#if 1
 			if (pab->isFinished()) {
-				timedOut = false;
+				bTimedOut = false;
 				break;
 			}
 		#endif
 		}
 
-		if (timedOut)
-			QMessageBox::warning(parent, "Warning", "Audio hardware probing timed out");
+		if (bTimedOut)
+			QMessageBox::warning(pParent, "Warning", "Audio hardware probing timed out");
 
 		{
 			QMutexLocker locker(&PortAudioProber::mutex);
@@ -189,27 +190,27 @@ private:
 	~PortAudioProber() {}
   
 	static QMutex mutex;
-	static QList<QString> names;
+	static QStringList names;
 
 	void run(void)
 	{
 		if (Pa_Initialize() == paNoError) {
 
 			// Fill hostapi info...
-			PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
-			QString pHostName[iNumHostApi];
+			const PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
+			QString hostNames[iNumHostApi];
 			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
-				pHostName[i] = QString(Pa_GetHostApiInfo(i)->name);
+				hostNames[i] = QString(Pa_GetHostApiInfo(i)->name);
 
 			// Fill device info...
-			PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
+			const PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
 
 			{
 				QMutexLocker locker(&PortAudioProber::mutex);
 				if (PortAudioProber::names.isEmpty()) {
 					for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
-						PaDeviceInfo *ppDeviceInfo = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
-						QString sName = pHostName[ppDeviceInfo->hostApi] + "::" + QString(ppDeviceInfo->name);
+						PaDeviceInfo *pDeviceInfo = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
+						const QString sName = hostNames[pDeviceInfo->hostApi] + "::" + QString(pDeviceInfo->name);
 						PortAudioProber::names.push_back(sName);
 					}
 				}
@@ -221,7 +222,7 @@ private:
 };
 
 QMutex PortAudioProber::mutex;
-QList<QString> PortAudioProber::names;
+QStringList PortAudioProber::names;
 
 } // namespace
 
@@ -230,7 +231,7 @@ QList<QString> PortAudioProber::names;
 
 void qjackctlInterfaceComboBox::populateModel (void)
 {
-	bool bBlockSignals = QComboBox::blockSignals(true);
+	const bool bBlockSignals = QComboBox::blockSignals(true);
 
 	QComboBox::setUpdatesEnabled(false);
 	QComboBox::setDuplicatesEnabled(false);
@@ -240,15 +241,15 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	// FIXME: Only valid for ALSA, Sun and OSS devices,
 	// for the time being... and also CoreAudio ones too.
 	const QString& sDriver = m_pDriverComboBox->currentText();
-	bool bAlsa      = (sDriver == "alsa");
-	bool bSun       = (sDriver == "sun");
-	bool bOss       = (sDriver == "oss");
+	const bool bAlsa      = (sDriver == "alsa");
+	const bool bSun       = (sDriver == "sun");
+	const bool bOss       = (sDriver == "oss");
 #ifdef CONFIG_COREAUDIO
-	bool bCoreaudio = (sDriver == "coreaudio");
+	const bool bCoreaudio = (sDriver == "coreaudio");
 	std::map<QString, AudioDeviceID> coreaudioIdMap;
 #endif
 #ifdef CONFIG_PORTAUDIO
-	bool bPortaudio = (sDriver == "portaudio");
+	const bool bPortaudio = (sDriver == "portaudio");
 #endif
 	QString sCurName = pLineEdit->text();
 	QString sName, sSubName;
@@ -426,13 +427,10 @@ void qjackctlInterfaceComboBox::populateModel (void)
 #endif 	// CONFIG_COREAUDIO
 #ifdef CONFIG_PORTAUDIO
 	else if (bPortaudio) {
-
-		QList<QString> names = PortAudioProber::getNames(this);
-
-		iCards = names.size();
-
+		QStringList names = PortAudioProber::getNames(this);
+		const int iCards = names.size();
 		for (int i = 0; i < iCards; ++i) {
-			QString sName = names[i];
+			const QString& sName = names[i];
 			if (sCurName == sName)
 				iCurCard = iCards;
 			addCard(sName, QString());

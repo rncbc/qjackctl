@@ -1152,12 +1152,14 @@ void qjackctlMainForm::startJack (void)
 			const QString& sDirectory = iter.next();
 			fi.setFile(QDir(sDirectory), sCommand);
 		#if defined(WIN32)
+		#ifdef CONFIG_DEBUG
 			printf("\n\n\n\n abs_path: -%s-\ndir: -%s-\nsCommand: -%s-\nexists: %d, executable: %d\n\n",
 				   fi.absolutePath().toUtf8().constData(),
 				   sDirectory.toUtf8().constData(),
 				   sCommand.toUtf8().constData(),
 				   fi.exists(), fi.isExecutable()
 			);
+		#endif
 		#endif
 			if (fi.exists() && fi.isExecutable()) {
 				sCommand = fi.filePath();
