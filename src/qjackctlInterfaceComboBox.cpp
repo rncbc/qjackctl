@@ -58,11 +58,7 @@ qjackctlInterfaceComboBox::qjackctlInterfaceComboBox ( QWidget *pParent )
 	: QComboBox(pParent)
 {
 	QTreeView *pTreeView = new QTreeView(this);
-	QHeaderView *pHeaderView = pTreeView->header();
-	pHeaderView->hide();
-#if QT_VERSION < 0x050000
-	pHeaderView->setResizeMode(QHeaderView::ResizeToContents);
-#endif
+	pTreeView->header()->hide();
 	pTreeView->setRootIsDecorated(false);
 	pTreeView->setAllColumnsShowFocus(true);
 	pTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -444,6 +440,11 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	++iCards;
 
 	QTreeView *pTreeView = static_cast<QTreeView *> (QComboBox::view());
+#if QT_VERSION < 0x050000
+	pTreeView->header()->setResizeMode(QHeaderView::ResizeToContents);
+#else
+	pTreeView->header()->resizeSections(QHeaderView::ResizeToContents);
+#endif
 	pTreeView->setMinimumWidth(
 		pTreeView->sizeHint().width() + QComboBox::iconSize().width());
 
