@@ -2,6 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="it_IT" sourcelanguage="en">
 <context>
+    <name>PortAudioProber</name>
+    <message>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="135"/>
+        <source>Probing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="136"/>
+        <source>Please wait, PortAudio is probing audio hardware.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="170"/>
+        <source>Warning</source>
+        <translation type="unfinished">Attenzione</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="171"/>
+        <source>Audio hardware probing timed out.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../qjackctlSetup.cpp" line="46"/>

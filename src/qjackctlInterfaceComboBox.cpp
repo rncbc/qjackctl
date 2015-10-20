@@ -113,7 +113,7 @@ void qjackctlInterfaceComboBox::addCard (
 
 #ifdef CONFIG_PORTAUDIO
 
-#include <QCoreApplication>
+#include <QApplication>
 #include <QThread>
 #include <QMutex>
 #include <QMessageBox>
@@ -132,15 +132,12 @@ public:
 				return PortAudioProber::names;
 		}
 
-		QMessageBox messageBox(
-			QMessageBox::Information,
-			"Probing...",
-			"Please wait, Portaudio is probing audio hardware",
-			QMessageBox::Abort,
-			pParent
-		);
+		QMessageBox mbox(QMessageBox::Information, tr("Probing..."),
+			tr("Please wait, PortAudio is probing audio hardware."),
+			QMessageBox::Abort, pParent);
 
-		messageBox.setWindowModality(Qt::WindowModal); // Make it impossible to start another PortAudioProber while waiting.
+		// Make it impossible to start another PortAudioProber while waiting.
+		mbox.setWindowModality(Qt::WindowModal);
 
 		PortAudioProber *pab = new PortAudioProber;
 
@@ -150,29 +147,29 @@ public:
 
 		for (int i = 0; i < 100; ++i) {
 
-			if (messageBox.isVisible())
-				QCoreApplication::processEvents();
+			if (mbox.isVisible())
+				QApplication::processEvents();
 
 			QThread::msleep(50);
 
 			if (i == 10) // wait 1/2 second before showing message box
-				messageBox.show();
+				mbox.show();
 
-			if (messageBox.clickedButton() != NULL) {
+			if (mbox.clickedButton() != NULL) {
 				bTimedOut = false;
 				break;
 			}
 
-		#if 1
 			if (pab->isFinished()) {
 				bTimedOut = false;
 				break;
 			}
-		#endif
 		}
 
-		if (bTimedOut)
-			QMessageBox::warning(pParent, "Warning", "Audio hardware probing timed out");
+		if (bTimedOut) {
+			QMessageBox::warning(pParent, tr("Warning"),
+				tr("Audio hardware probing timed out."));
+		}
 
 		{
 			QMutexLocker locker(&PortAudioProber::mutex);
@@ -184,15 +181,15 @@ private:
 
 	PortAudioProber() {}
 	~PortAudioProber() {}
-  
+
 	static QMutex mutex;
 	static QStringList names;
 
-	void run(void)
+	void run()
 	{
 		if (Pa_Initialize() == paNoError) {
 
-			// Fill hostapi info...
+			// Fill HostApi info...
 			const PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
 			QString hostNames[iNumHostApi];
 			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
@@ -423,7 +420,7 @@ void qjackctlInterfaceComboBox::populateModel (void)
 #endif 	// CONFIG_COREAUDIO
 #ifdef CONFIG_PORTAUDIO
 	else if (bPortaudio) {
-		QStringList names = PortAudioProber::getNames(this);
+		const QStringList& names = PortAudioProber::getNames(this);
 		const int iCards = names.size();
 		for (int i = 0; i < iCards; ++i) {
 			const QString& sName = names[i];
