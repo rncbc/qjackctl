@@ -6,22 +6,22 @@
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="135"/>
         <source>Probing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Détection…</translation>
     </message>
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="136"/>
         <source>Please wait, PortAudio is probing audio hardware.</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de patienter, PortAudio détecte le matériel audio.</translation>
     </message>
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="170"/>
         <source>Warning</source>
-        <translation type="unfinished">Attention</translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="171"/>
         <source>Audio hardware probing timed out.</source>
-        <translation type="unfinished"></translation>
+        <translation>La détection du matériel audio a échoué.</translation>
     </message>
 </context>
 <context>
@@ -96,7 +96,7 @@
     <message>
         <location filename="../qjackctlJackConnect.cpp" line="173"/>
         <source>%1 (%2 frames)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 échantillons)</translation>
     </message>
 </context>
 <context>
@@ -3478,12 +3478,12 @@ Voulez-vous appliquer les changements?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="380"/>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished">Mi&amp;nimiser</translation>
+        <translation>Mi&amp;nimiser</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="381"/>
         <source>Rest&amp;ore</source>
-        <translation type="unfinished">R&amp;estaurer</translation>
+        <translation>R&amp;estaurer</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1386"/>
