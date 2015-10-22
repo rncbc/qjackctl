@@ -64,7 +64,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="499"/>
         <source>Set active patchbay definition file</source>
-        <translation>Choisir le fichiers de définition de baie de brassage actif</translation>
+        <translation>Choisir le fichier de définition de baie de brassage actif</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="501"/>
@@ -286,7 +286,7 @@ Are you sure?</source>
         <translation>Cela va suspendre le traitement du son
 de toutes les applications clientes.
 
-Êtes-vous certain?</translation>
+Êtes-vous certain ?</translation>
     </message>
 </context>
 <context>
@@ -516,7 +516,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="576"/>
         <source>&amp;Patchbay</source>
-        <translation>&amp;Brassage</translation>
+        <translation>&amp;Baie de brassage</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="573"/>
@@ -994,7 +994,7 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3677"/>
         <source>Patch&amp;bay</source>
-        <translation>&amp;Brassage</translation>
+        <translation>&amp;Baie de brassage</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3682"/>
@@ -1018,7 +1018,7 @@ qu&apos;après avoir redémarré le serveur audio JACK.</translation>
         <location filename="../qjackctlMainForm.cpp" line="3748"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
-        <translation>Certain paramètres ne seront effectifs
+        <translation>Certains paramètres ne seront effectifs
 qu&apos;au prochain démarrage de ce programme.</translation>
     </message>
     <message>
@@ -1029,7 +1029,7 @@ qu&apos;au prochain démarrage de ce programme.</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="263"/>
         <source>XRUN Count (notifications)</source>
-        <translation>Décompte des désynchronisations (notification XRUN)</translation>
+        <translation>Décompte des désynchronisations (notifications XRUN)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2369"/>
@@ -1058,7 +1058,7 @@ qu&apos;au prochain démarrage de ce programme.</translation>
 Do you want to terminate the JACK audio server?</source>
         <translation>JACK fonctionne actuellement.
 
-Voulez-vous arrêter le serveur audio JACK?</translation>
+Voulez-vous arrêter le serveur audio JACK ?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="735"/>
@@ -1079,7 +1079,7 @@ in the context menu of the system tray icon.</source>
         <translation>Le programme continuera de s&apos;exécuter dans la zone de notification système.
 
 Pour terminer le programme, merci de choisir « Quitter »
-dans le menu contextuel del&apos;icône de la zone de notification système.</translation>
+dans le menu contextuel de l&apos;icône de la zone de notification système.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="837"/>
@@ -1118,7 +1118,7 @@ Do you want to stop the JACK audio server?</source>
         <translation>Certaines applications audio clientes
 sont encore actives et connectées.
 
-Voulez-vous arrêter le serveur audio JACK?</translation>
+Voulez-vous arrêter le serveur audio JACK ?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1502"/>
@@ -1137,7 +1137,7 @@ Désolé</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1568"/>
         <source>JACK was started with PID=%1.</source>
-        <translation>JACK a été démarrer avec le PID=%1.</translation>
+        <translation>JACK a été démarré avec le PID=%1.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1576"/>
@@ -1392,7 +1392,7 @@ il est probable que cela refasse cette connexion :
 
 %1 -&gt; %2
 
-Voulez-vous enlever la connexion de la baie de brassage?</translation>
+Voulez-vous enlever la connexion de la baie de brassage ?</translation>
     </message>
 </context>
 <context>
@@ -1582,7 +1582,7 @@ Voulez-vous enlever la connexion de la baie de brassage?</translation>
 Are you sure?</source>
         <translation>Cela va déconnecter toutes les prises.
 
-Êtes-vous certain?</translation>
+Êtes-vous certain ?</translation>
     </message>
 </context>
 <context>
@@ -1665,7 +1665,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="332"/>
         <source>Disconnect currently selected sockets</source>
-        <translation>Déconnecter les prises actuellement sélectionnés</translation>
+        <translation>Déconnecter les prises actuellement sélectionnées</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="348"/>
@@ -1823,7 +1823,7 @@ Do you want to save the changes?</source>
 
 « %1 »
 
-Voulez-vous enregistrer les changements?</translation>
+Voulez-vous enregistrer les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="281"/>
@@ -1858,7 +1858,7 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Create patchbay definition as a snapshot
 of all actual client connections?</source>
         <translation>Prendre un cliché de toutes les connexions clientes actuelles
-pour créer une définition de baie de brassage?</translation>
+pour créer une définition de baie de brassage ?</translation>
     </message>
 </context>
 <context>
@@ -2546,7 +2546,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="891"/>
         <source>Unlock memory of common toolkit libraries (GTK+, QT, FLTK, Wine)</source>
-        <translation>Déverrouiller la mémoire des librairies d&apos;interface communes (GTK+, QT, FLTK, Wine)</translation>
+        <translation>Déverrouiller la mémoire des bibliothèques d&apos;interface communes (GTK+, QT, FLTK, Wine)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="942"/>
@@ -3089,7 +3089,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3125"/>
         <source>The maximum number of message lines to keep in view</source>
-        <translation>Nombre maximal de ligne de messages à garder dans la vue</translation>
+        <translation>Nombre maximal de ligne de messages à garder visibles</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3190"/>
@@ -3139,7 +3139,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3434"/>
         <source>Whether to enable in-place client/port name editing (rename)</source>
-        <translation>Activer l&apos;édition (renommage)  en place des aliases de client/port</translation>
+        <translation>Activer l&apos;édition (renommage) en place des aliases de client/port</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3365"/>
@@ -3189,7 +3189,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3527"/>
         <source>Whether to ask for confirmation on application exit</source>
-        <translation>Demander une confimation lors de la sortie de l&apos;application</translation>
+        <translation>Demander une confirmation lors de la sortie de l&apos;application</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3547"/>
@@ -3249,7 +3249,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3687"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown</source>
-        <translation>Demander un confirmation à l&apos;extinction du serveur audio JACK</translation>
+        <translation>Demander une confirmation à l&apos;extinction du serveur audio JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3782"/>
@@ -3446,7 +3446,7 @@ Do you want to save the changes?</source>
 
 « %1 »
 
-Voulez-vous enregistrer les changements?</translation>
+Voulez-vous enregistrer les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="873"/>
@@ -3459,7 +3459,7 @@ Are you sure?</source>
 
 « %1 »
 
-Êtes-vous certain?</translation>
+Êtes-vous certain ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1706"/>
@@ -3468,7 +3468,7 @@ Are you sure?</source>
 Do you want to apply the changes?</source>
         <translation>Des paramètres ont été modifiés.
 
-Voulez-vous appliquer les changements?</translation>
+Voulez-vous appliquer les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1384"/>
@@ -3975,12 +3975,14 @@ Voulez-vous appliquer les changements?</translation>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
-        <translation>Des paramètres ont été modifiés.Voulez-vous appliquer les changements?</translation>
+        <translation>Des paramètres ont été modifiés.
+
+Voulez-vous appliquer les changements? </translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="305"/>
         <source>MIDI socket type (JACK)</source>
-        <translation>Type de prise midi (JACK)</translation>
+        <translation>Type de prise MIDI (JACK)</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="318"/>
@@ -4025,7 +4027,7 @@ Are you sure?</source>
         <translation>%1 est sur le point d&apos;être enlevée :
 
 « %2 »
-Êtes-vous certain?</translation>
+Êtes-vous certain ?</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="593"/>
