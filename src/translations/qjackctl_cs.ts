@@ -6,22 +6,22 @@
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="135"/>
         <source>Probing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zjišťuje se...</translation>
     </message>
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="136"/>
         <source>Please wait, PortAudio is probing audio hardware.</source>
-        <translation type="unfinished"></translation>
+        <translation>Počkejte, prosím, PortAudio zjišťuje zvukový hardware.</translation>
     </message>
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="170"/>
         <source>Warning</source>
-        <translation type="unfinished">Varování</translation>
+        <translation>Varování</translation>
     </message>
     <message>
         <location filename="../qjackctlInterfaceComboBox.cpp" line="171"/>
         <source>Audio hardware probing timed out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Došlo k překročení času při zjišťování zvukového hardware.</translation>
     </message>
 </context>
 <context>
@@ -95,7 +95,7 @@
     <message>
         <location filename="../qjackctlJackConnect.cpp" line="173"/>
         <source>%1 (%2 frames)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 snímků)</translation>
     </message>
 </context>
 <context>
@@ -2863,7 +2863,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="729"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokročilé</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1915"/>
@@ -3056,7 +3056,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="735"/>
         <source>Please do not touch these settings unless you know what you are doing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedotýkejte se, prosím, těchto nastavení, pokud nevíte, co děláte.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="753"/>
@@ -3499,12 +3499,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="380"/>
         <source>Mi&amp;nimize</source>
-        <translation type="unfinished">&amp;Zmenšit</translation>
+        <translation>&amp;Zmenšit</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="381"/>
         <source>Rest&amp;ore</source>
-        <translation type="unfinished">&amp;Nahrát znovu</translation>
+        <translation>&amp;Obnovit</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="820"/>
@@ -3736,7 +3736,7 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="809"/>
         <source>&amp;Name:</source>
-        <translation type="unfinished">&amp;Název:</translation>
+        <translation>&amp;Název:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="837"/>
