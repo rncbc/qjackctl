@@ -1,3 +1,9 @@
+qjackctl (0.4.1-24) unstable; urgency=low
+
+  * A Fall'15 release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Wed, 28 Oct 2015 19:00:00 +0000
+
 qjackctl (0.4.0-23) unstable; urgency=low
 
   * Summer'15 release frenzy.

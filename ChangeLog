@@ -4,34 +4,33 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.4.1  2015-10-28  A Fall'15 release.
 
 - Probing portaudio audio device in a separate thread (by Kjetil
   Matheussen, thanks).
 
 - Messages standard output capture has been improved again, now
-  in both ways a non-blocking pipe may get. (EXPERIMENTAL)
+  in both ways a non-blocking pipe may get.
 
 - Regression fix for invalid system-tray icon dimensions reported
   by some desktop environment frameworks.
 
 - New hi-res application icon (by Uttrup Renzel, Max Christian
-  Pohle, thanks). (EXPERIMENTAL)
+  Pohle, thanks).
 
 - System tray icon red background now blinks when a XRUN occurs.
 
 - Desktop environment session shutdown/logout management has been
-  also adapted to Qt5 framework. (EXPERIMENTAL)
+  also adapted to Qt5 framework.
 
 - Single/unique application instance control adapted to Qt5/X11.
-  (EXPERIMENTAL)
 
 - Prefer Qt5 over Qt4 by default with configure script.
 
 - Overrideable tooltips with latency info (re. Connections JACK
   client/ports: patch by Xavier Mendez, thanks).
 
-- Complete rewrite of Qt4 vs. Qt5 configure builds. (TESTING)
+- Complete rewrite of Qt4 vs. Qt5 configure builds.
 
 - French (fr) translation update (by Olivier Humbert, thanks).
 
