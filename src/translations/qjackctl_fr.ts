@@ -397,7 +397,7 @@ Do you want to save the changes?</source>
 
 « %1 »
 
-Voulez-vous enregistrer les changements?</translation>
+Voulez-vous enregistrer les changements ?</translation>
     </message>
 </context>
 <context>
@@ -3977,7 +3977,7 @@ Voulez-vous appliquer les changements ?</translation>
 Do you want to apply the changes?</source>
         <translation>Des paramètres ont été modifiés.
 
-Voulez-vous appliquer les changements? </translation>
+Voulez-vous appliquer les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="305"/>
