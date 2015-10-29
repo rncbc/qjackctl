@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2003-2015 Rui Nuno Capela <rncbc@rncbc.org> -->
+<!-- Copyright 2015 Olivier Humbert <trebmuh@tuxfamily.org> for the FR translation-->
 <component type="desktop">
  <id>qjackctl.desktop</id>
  <metadata_license>GPL-2.0+</metadata_license>
  <project_license>GPL-2.0+</project_license>
  <name>QjackCtl</name>
  <summary>JACK Audio Connection Kit Qt GUI Interface</summary>
+ <summary xml:lang="fr">Interface graphique Qt pour ke kit de connexion audio JACK</summary>
  <description>
   <p>JACK Audio Connection Kit - Qt GUI Interface: A simple Qt application
    to control the JACK server. Written in C++ around the Qt4 toolkit
@@ -14,11 +16,21 @@
    saved between sessions, and a way control of the status of the audio
    server. With time, this primordial interface has become richer by 
    including a enhanced patchbay and connection control features.</p>
+  <p xml:lang="fr">Interface graphique Qt pour le kit de connexion audio Jack :
+   une application Qt simple pour contrôler le server Jack. Écrite en c++
+    utour du kit de développement Qt4 pour X11, presque exclusivement en
+    utilisant Qt Deisgner. Fourni une interface graphique simple de dialogue
+    pour plusieurs paramètres du serveur JACK, qui sont sauvegardés proprement
+    entre les sessions, et un moyen de contrôle du status du serveur audio.
+    Avec le temps, cette interface primoridiale est devenue plus riche en
+    incluant une baie de brassage améliorée et des fonctionnalités de contrôle
+    de connexion.</p>
  </description>
  <screenshots>
   <screenshot type="default">
    <image>http://qjackctl.sourceforge.net/qjackctlMainForm1.png</image>
    <caption>The main window showing the application in action</caption>
+   <caption xml:lang="fr">La fenêtre principale montrant l'application en action</caption>
   </screenshot>
  </screenshots>
  <url type="homepage">http://qjackctl.sourceforge.net</url>
