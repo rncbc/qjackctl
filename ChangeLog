@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Late French (fr) translation update (by Olivier Humbert, thanks).
+
+
 0.4.1  2015-10-28  A Fall'15 release.
 
 - Probing portaudio audio device in a separate thread (by Kjetil
