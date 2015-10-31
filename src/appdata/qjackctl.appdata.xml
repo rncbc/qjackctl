@@ -18,13 +18,13 @@
    including a enhanced patchbay and connection control features.</p>
   <p xml:lang="fr">Interface graphique Qt pour le kit de connexion audio Jack :
    une application Qt simple pour contrôler le server Jack. Écrite en c++
-    utour du kit de développement Qt4 pour X11, presque exclusivement en
-    utilisant Qt Deisgner. Fourni une interface graphique simple de dialogue
-    pour plusieurs paramètres du serveur JACK, qui sont sauvegardés proprement
-    entre les sessions, et un moyen de contrôle du status du serveur audio.
-    Avec le temps, cette interface primoridiale est devenue plus riche en
-    incluant une baie de brassage améliorée et des fonctionnalités de contrôle
-    de connexion.</p>
+   autour du kit de développement Qt4 pour X11, presque exclusivement en
+   utilisant Qt Designer. Fourni une interface graphique simple de dialogue
+   pour plusieurs paramètres du serveur JACK qui sont sauvegardés proprement
+   entre les sessions, et un moyen de contrôle du status du serveur audio.
+   Avec le temps, cette interface primordiale est devenue plus riche en
+   incluant une baie de brassage améliorée et des fonctionnalités de contrôle
+   de connexion.</p>
  </description>
  <screenshots>
   <screenshot type="default">
