@@ -6,7 +6,7 @@ ChangeLog
 
 GIT HEAD
 
-- Prevent the x11extras module on non-X11/Unix plaforms.
+- Prevent x11extras module from use on non-X11/Unix plaforms.
 
 - Late French (fr) translation update (by Olivier Humbert, thanks).
 
