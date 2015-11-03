@@ -4,22 +4,22 @@
 <context>
     <name>PortAudioProber</name>
     <message>
-        <location filename="../qjackctlInterfaceComboBox.cpp" line="135"/>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="154"/>
         <source>Probing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlInterfaceComboBox.cpp" line="136"/>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="155"/>
         <source>Please wait, PortAudio is probing audio hardware.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlInterfaceComboBox.cpp" line="170"/>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="189"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../qjackctlInterfaceComboBox.cpp" line="171"/>
+        <location filename="../qjackctlInterfaceComboBox.cpp" line="190"/>
         <source>Audio hardware probing timed out.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2712,7 +2712,7 @@ Are you sure to overwrite the existing folder?</source>
         <translation>н/д</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1368"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1301"/>
         <source>Patchbay Definition files</source>
         <translation>Файлы описания коммутатора</translation>
     </message>
@@ -2828,37 +2828,37 @@ Are you sure to overwrite the existing folder?</source>
         <translation>Спрашивать ли подтверждение на выход из программы</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1241"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1174"/>
         <source>&amp;Preset Name</source>
         <translation>Имя &amp;профиля</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1244"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1177"/>
         <source>&amp;Server Path</source>
         <translation>За&amp;пуск сервера</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1245"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1178"/>
         <source>&amp;Driver</source>
         <translation>&amp;Драйвер</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1246"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1179"/>
         <source>&amp;Interface</source>
         <translation>&amp;Интерфейс</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1248"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1181"/>
         <source>Sample &amp;Rate</source>
         <translation>&amp;Частота дискр.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1249"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1182"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Фреймов/период</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1250"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1183"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Периодов/&amp;буфер</translation>
     </message>
@@ -3073,7 +3073,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="820"/>
         <location filename="../qjackctlSetupForm.cpp" line="872"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1705"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1638"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -3104,47 +3104,47 @@ Are you sure?</source>
 Вы уверены?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1243"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1176"/>
         <source>&amp;Server Name</source>
         <translation>&amp;Имя сервера</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1298"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1231"/>
         <source>Startup Script</source>
         <translation>Сценарий, выполняемый при запуске</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1315"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1248"/>
         <source>Post-Startup Script</source>
         <translation>Сценарий, выполняемый после запуска</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1332"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1265"/>
         <source>Shutdown Script</source>
         <translation>Сценарий, выполняемый при выключении</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1349"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1282"/>
         <source>Post-Shutdown Script</source>
         <translation>Сценарий, выполняемый после выключения</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1366"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1299"/>
         <source>Active Patchbay Definition</source>
         <translation>Активное описание коммутатора</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1384"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1317"/>
         <source>Messages Log</source>
         <translation>Журнал сообщений</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1386"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1319"/>
         <source>Log files</source>
         <translation>Файлы журналов</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1706"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1639"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

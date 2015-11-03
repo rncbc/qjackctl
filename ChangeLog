@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Blind fix to a FTBFS on macosx/coreaudio platforms, a leftover
+  from the unified interface device selection combo-box inception,
+  almost two years ago. (TESTING)
+
 - Prevent x11extras module from use on non-X11/Unix plaforms.
 
 - Late French (fr) translation update (by Olivier Humbert, thanks).

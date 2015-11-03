@@ -111,6 +111,25 @@ void qjackctlInterfaceComboBox::addCard (
 }
 
 
+#ifdef CONFIG_COREAUDIO
+
+// borrowed from jackpilot source
+static OSStatus getDeviceUIDFromID( AudioDeviceID id,
+	char *name, UInt32 nsize )
+{
+	UInt32 size = sizeof(CFStringRef);
+	CFStringRef UI;
+	OSStatus res = AudioDeviceGetProperty(id, 0, false,
+		kAudioDevicePropertyDeviceUID, &size, &UI);
+	if (res == noErr) 
+		CFStringGetCString(UI,name,nsize,CFStringGetSystemEncoding());
+	CFRelease(UI);
+	return res;
+}
+
+#endif // CONFIG_COREAUDIO
+
+
 #ifdef CONFIG_PORTAUDIO
 
 #include <QApplication>
