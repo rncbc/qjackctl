@@ -425,7 +425,7 @@ void qjackctlInterfaceComboBox::populateModel (void)
 							// only show human readable name
 							// humanreadable \t UID
 							sSubName = QString(coreDeviceName);
-							addCard(sSubName, sName);
+							addCard(sName, sSubName);
 							if (sCurName == sName || sCurName == sSubName)
 								iCurCard = iCards;
 							++iCards;
