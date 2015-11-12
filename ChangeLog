@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Switched column entries in the unified interface device combo-
+  box to make it work for macosx/coreaudio again. (TESTING)
+
 - Blind fix to a FTBFS on macosx/coreaudio platforms, a leftover
   from the unified interface device selection combo-box inception,
   almost two years ago. (TESTING)
