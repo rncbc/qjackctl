@@ -1773,7 +1773,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="267"/>
         <source>Edit currently selected output socket properties</source>
-        <translationÉditer les propriétés de la prise de sortie actuellement sélectionnée</translation>
+        <translation></translation>Éditer les propriétés de la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="224"/>
