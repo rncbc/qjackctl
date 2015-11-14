@@ -1655,7 +1655,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="319"/>
         <source>Connect currently selected sockets</source>
-        <translation>Connecter les prises actuellement sélectionnés</translation>
+        <translation>Connecter les prises actuellement sélectionnées</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="335"/>
@@ -1719,7 +1719,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="147"/>
         <source>Edit currently selected input socket properties</source>
-        <translation>Editer les propriétés de la prise d&apos;entrée actuellement sélectionnée</translation>
+        <translation>Éditer les propriétés de la prise d&apos;entrée actuellement sélectionnée</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="179"/>
@@ -1773,7 +1773,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="267"/>
         <source>Edit currently selected output socket properties</source>
-        <translation>Editer les propriétés de la prise de sortie actuellement sélectionnée</translation>
+        <translation></translation>Éditer les propriétés de la prise de sortie actuellement sélectionnée</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="224"/>
@@ -4040,12 +4040,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="754"/>
         <source>Output Sockets / Plugs</source>
-        <translation>Prises de Sortie / Fiches</translation>
+        <translation>Prises/Fiches de Sortie</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="756"/>
         <source>Input Sockets / Plugs</source>
-        <translation>Prises d&apos;Entrée / Fiches</translation>
+        <translation>Prises/Fiches d&apos;Entrée</translation>
     </message>
 </context>
 </TS>
