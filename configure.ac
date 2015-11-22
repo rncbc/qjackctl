@@ -360,9 +360,6 @@ if test "x$ac_portaudio" = "xyes"; then
    fi
 fi
 
-# Some recent distros (eg. fedora, debian) require this.
-ac_libs="$ac_libs -lX11"
-
 AC_SUBST(ac_libs)
 
 
@@ -455,6 +452,10 @@ fi
 # Check for X11 unique/single instance.
 if test "x$ac_xunique" = "xyes"; then
    AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
+
+  # Some recent distros (eg. fedora, debian) require this.
+  ac_libs="$ac_libs -lX11"
+
 fi
 
 # Check for debugging stack-trace.
