@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.4.1.6, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.4.1.7, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -452,10 +452,8 @@ fi
 # Check for X11 unique/single instance.
 if test "x$ac_xunique" = "xyes"; then
    AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
-
-  # Some recent distros (eg. fedora, debian) require this.
-  ac_libs="$ac_libs -lX11"
-
+   # Some recent distros (eg. fedora, debian) require this.
+   ac_libs="$ac_libs -lX11"
 fi
 
 # Check for debugging stack-trace.
