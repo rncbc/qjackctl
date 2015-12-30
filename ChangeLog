@@ -6,8 +6,11 @@ ChangeLog
 
 GIT HEAD
 
+- System-tray icon context menu has been fixed/hacked to show up
+  again on Plasma 5 (aka. KDE5) notifications area. (EXPERIMENTAL)
+
 - Switched column entries in the unified interface device combo-
-  box to make it work for macosx/coreaudio again. (TESTING)
+  box to make it work for macosx/coreaudio again.
 
 - Blind fix to a FTBFS on macosx/coreaudio platforms, a leftover
   from the unified interface device selection combo-box inception,

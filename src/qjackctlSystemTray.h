@@ -23,9 +23,10 @@
 #define __qjackctlSystemTray_h
 
 #include <QWidget>
+#include <QDesktopWidget>
 
 #include <QSystemTrayIcon>
-#include <QDesktopWidget>
+#include <QMenu>
 
 
 //----------------------------------------------------------------------------
@@ -72,10 +73,14 @@ protected slots:
 	// Handle systeam tray activity.
 	void activated(QSystemTrayIcon::ActivationReason);
 
+	// Context menu slot.
+	void contextMenuRequested();
+
 private:
 
 	// Instance pixmap and background color.
 	QIcon   m_icon;
+	QMenu   m_menu;
 	QPixmap m_pixmap;
 	QPixmap m_pixmapOverlay;
 	QColor  m_background;
