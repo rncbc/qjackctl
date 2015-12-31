@@ -23,7 +23,6 @@
 #define __qjackctlSystemTray_h
 
 #include <QWidget>
-#include <QDesktopWidget>
 
 #include <QSystemTrayIcon>
 #include <QMenu>
