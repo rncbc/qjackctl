@@ -129,6 +129,7 @@ public slots:
 
 	void startJack();
 	void stopJack();
+	void toggleJack();
 
 	void resetXrunStats();
 

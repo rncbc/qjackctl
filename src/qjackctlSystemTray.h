@@ -61,6 +61,9 @@ signals:
 	// Clicked signal.
 	void clicked();
 
+	// Toggle Start/Stop server.
+	void doubleClicked();
+
 	// Xrun reset signal.
 	void middleClicked();
 
