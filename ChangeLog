@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Add double-click action (toggle start/stop) to systray (a pull
+  request by Joel Moberg, thanks).
+
 - Added application keywords to freedesktop.org's AppData.
 
 - System-tray icon context menu has been fixed/hacked to show up
