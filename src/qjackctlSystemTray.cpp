@@ -85,6 +85,8 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 		emit middleClicked();
 		break;
 	case QSystemTrayIcon::DoubleClick:
+		emit doubleClicked();
+		break;
 	case QSystemTrayIcon::Unknown:
 	default:
 		break;

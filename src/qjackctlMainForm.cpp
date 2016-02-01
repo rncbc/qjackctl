@@ -1519,6 +1519,15 @@ void qjackctlMainForm::stopJackServer (void)
 }
 
 
+void qjackctlMainForm::toggleJack (void)
+{
+	if (m_pJackClient)
+		stopJack();
+	else
+		startJack();
+}
+
+
 // Stdout handler...
 void qjackctlMainForm::readStdout (void)
 {
@@ -3540,6 +3549,9 @@ void qjackctlMainForm::updateSystemTray (void)
 		QObject::connect(m_pSystemTray,
 			SIGNAL(middleClicked()),
 			SLOT(resetXrunStats()));
+		QObject::connect(m_pSystemTray,
+			SIGNAL(doubleClicked()),
+			SLOT(toggleJack()));
 		QObject::connect(m_pSystemTray,
 			SIGNAL(contextMenuRequested(const QPoint &)),
 			SLOT(contextMenu(const QPoint &)));
