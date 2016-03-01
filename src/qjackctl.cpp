@@ -65,6 +65,8 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 #ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
 
+#include <unistd.h> /* for gethostname() */
+
 #include <QX11Info>
 
 #include <X11/Xatom.h>
