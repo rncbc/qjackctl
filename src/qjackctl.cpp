@@ -187,9 +187,9 @@ public:
 		m_pWidget = pWidget;
 	#ifdef CONFIG_X11
 	#ifdef CONFIG_XUNIQUE
-		if (m_pDisplay) {
+		m_wOwner = m_pWidget->winId();
+		if (m_pDisplay && m_wOwner) {
 			XGrabServer(m_pDisplay);
-			m_wOwner = m_pWidget->winId();
 			XSetSelectionOwner(m_pDisplay, m_aUnique, m_wOwner, CurrentTime);
 			XUngrabServer(m_pDisplay);
 		}

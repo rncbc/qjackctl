@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Dropped old "Start minimized to system tray option" from setup.
+
 - Add double-click action (toggle start/stop) to systray (a pull
   request by Joel Moberg, thanks).
 

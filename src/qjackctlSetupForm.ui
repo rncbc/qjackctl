@@ -3,7 +3,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2016, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -3532,6 +3532,22 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="QueryShutdownCheckBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Whether to ask for confirmation on JACK audio server shutdown</string>
+              </property>
+              <property name="text">
+               <string>Confirm server sh&amp;utdown</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="KeepOnTopCheckBox">
               <property name="font">
                <font>
@@ -3577,22 +3593,6 @@
               </property>
               <property name="text">
                <string>Sho&amp;w system tray message on close</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="StartMinimizedCheckBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Whether to start minimized to system tray</string>
-              </property>
-              <property name="text">
-               <string>Start minimi&amp;zed to system tray</string>
               </property>
              </widget>
             </item>
@@ -3672,22 +3672,6 @@
               </property>
               <property name="text">
                <string>C&amp;onfigure as temporary server</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="QueryShutdownCheckBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Whether to ask for confirmation on JACK audio server shutdown</string>
-              </property>
-              <property name="text">
-               <string>Confirm server sh&amp;utdown</string>
               </property>
              </widget>
             </item>
@@ -4098,15 +4082,14 @@
   <tabstop>JackClientPortMetadataCheckBox</tabstop>
   <tabstop>StartJackCheckBox</tabstop>
   <tabstop>QueryCloseCheckBox</tabstop>
+  <tabstop>QueryShutdownCheckBox</tabstop>
   <tabstop>KeepOnTopCheckBox</tabstop>
   <tabstop>SystemTrayCheckBox</tabstop>
   <tabstop>SystemTrayQueryCloseCheckBox</tabstop>
-  <tabstop>StartMinimizedCheckBox</tabstop>
   <tabstop>SingletonCheckBox</tabstop>
   <tabstop>ServerConfigCheckBox</tabstop>
   <tabstop>ServerConfigNameComboBox</tabstop>
   <tabstop>ServerConfigTempCheckBox</tabstop>
-  <tabstop>QueryShutdownCheckBox</tabstop>
   <tabstop>AlsaSeqEnabledCheckBox</tabstop>
   <tabstop>DBusEnabledCheckBox</tabstop>
   <tabstop>StopJackCheckBox</tabstop>

@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2016, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -374,6 +374,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.QueryCloseCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.QueryShutdownCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 	QObject::connect(m_ui.KeepOnTopCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -386,13 +389,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.SystemTrayQueryCloseCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
-	QObject::connect(m_ui.StartMinimizedCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
 #endif
-	QObject::connect(m_ui.SingletonCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
 	QObject::connect(m_ui.SingletonCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -403,9 +400,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ServerConfigTempCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
-	QObject::connect(m_ui.QueryShutdownCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.AlsaSeqEnabledCheckBox,
@@ -593,18 +587,17 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.StartJackCheckBox->setChecked(m_pSetup->bStartJack);
 	m_ui.StopJackCheckBox->setChecked(m_pSetup->bStopJack);
 	m_ui.QueryCloseCheckBox->setChecked(m_pSetup->bQueryClose);
+	m_ui.QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
 	m_ui.KeepOnTopCheckBox->setChecked(m_pSetup->bKeepOnTop);
 #ifdef CONFIG_SYSTEM_TRAY
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
 	m_ui.SystemTrayQueryCloseCheckBox->setChecked(m_pSetup->bSystemTrayQueryClose);
-	m_ui.StartMinimizedCheckBox->setChecked(m_pSetup->bStartMinimized);
 #endif
 	m_ui.SingletonCheckBox->setChecked(m_pSetup->bSingleton);
 	m_ui.ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
 	setComboBoxCurrentText(m_ui.ServerConfigNameComboBox,
 		m_pSetup->sServerConfigName);
 	m_ui.ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
-	m_ui.QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
 	m_ui.AlsaSeqEnabledCheckBox->setChecked(m_pSetup->bAlsaSeqEnabled);
 	m_ui.DBusEnabledCheckBox->setChecked(m_pSetup->bDBusEnabled);
 	m_ui.AliasesEnabledCheckBox->setChecked(m_pSetup->bAliasesEnabled);
@@ -1132,9 +1125,8 @@ void qjackctlSetupForm::stabilizeForm (void)
 #endif
 
 #ifdef CONFIG_SYSTEM_TRAY
-	bEnabled = m_ui.SystemTrayCheckBox->isChecked();
-	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(bEnabled);
-	m_ui.StartMinimizedCheckBox->setEnabled(bEnabled);
+	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(
+		m_ui.SystemTrayCheckBox->isChecked());
 #endif
 
 	m_ui.StopJackCheckBox->setEnabled(
@@ -1150,7 +1142,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 	m_ui.AliasesEditingCheckBox->setEnabled(
 		m_ui.AliasesEnabledCheckBox->isChecked());
 
-#if !defined(Q_WS_X11)
+#ifndef CONFIG_XUNIQUE
 	m_ui.SingletonCheckBox->setEnabled(false);
 #endif
 
@@ -1504,17 +1496,16 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bStartJack               = m_ui.StartJackCheckBox->isChecked();
 		m_pSetup->bStopJack                = m_ui.StopJackCheckBox->isChecked();
 		m_pSetup->bQueryClose              = m_ui.QueryCloseCheckBox->isChecked();
+		m_pSetup->bQueryShutdown           = m_ui.QueryShutdownCheckBox->isChecked();
 		m_pSetup->bKeepOnTop               = m_ui.KeepOnTopCheckBox->isChecked();
 	#ifdef CONFIG_SYSTEM_TRAY
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();
 		m_pSetup->bSystemTrayQueryClose    = m_ui.SystemTrayQueryCloseCheckBox->isChecked();
-		m_pSetup->bStartMinimized          = m_ui.StartMinimizedCheckBox->isChecked();
 	#endif
 		m_pSetup->bSingleton               = m_ui.SingletonCheckBox->isChecked();
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
 		m_pSetup->bServerConfigTemp        = m_ui.ServerConfigTempCheckBox->isChecked();
-		m_pSetup->bQueryShutdown           = m_ui.QueryShutdownCheckBox->isChecked();
 		m_pSetup->bAlsaSeqEnabled          = m_ui.AlsaSeqEnabledCheckBox->isChecked();
 		m_pSetup->bDBusEnabled             = m_ui.DBusEnabledCheckBox->isChecked();
 		m_pSetup->bAliasesEnabled          = m_ui.AliasesEnabledCheckBox->isChecked();

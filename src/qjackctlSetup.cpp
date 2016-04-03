@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2016, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -114,14 +114,13 @@ void qjackctlSetup::loadSetup (void)
 	iConnectionsIconSize     = m_settings.value("/ConnectionsIconSize", QJACKCTL_ICON_16X16).toInt();
 	sConnectionsFont         = m_settings.value("/ConnectionsFont").toString();
 	bQueryClose              = m_settings.value("/QueryClose", true).toBool();
+	bQueryShutdown           = m_settings.value("/QueryShutdown", true).toBool();
 	bKeepOnTop               = m_settings.value("/KeepOnTop", false).toBool();
 	bSystemTray              = m_settings.value("/SystemTray", false).toBool();
 	bSystemTrayQueryClose    = m_settings.value("/SystemTrayQueryClose", true).toBool();
-	bStartMinimized          = m_settings.value("/StartMinimized", false).toBool();
 	bServerConfig            = m_settings.value("/ServerConfig", true).toBool();
 	sServerConfigName        = m_settings.value("/ServerConfigName", ".jackdrc").toString();
 	bServerConfigTemp        = m_settings.value("/ServerConfigTemp", false).toBool();
-	bQueryShutdown           = m_settings.value("/QueryShutdown", true).toBool();
 	bAlsaSeqEnabled          = m_settings.value("/AlsaSeqEnabled", true).toBool();
 	bDBusEnabled             = m_settings.value("/DBusEnabled", false).toBool();
 	bAliasesEnabled          = m_settings.value("/AliasesEnabled", false).toBool();
@@ -226,14 +225,13 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/ConnectionsIconSize",     iConnectionsIconSize);
 	m_settings.setValue("/ConnectionsFont",         sConnectionsFont);
 	m_settings.setValue("/QueryClose",              bQueryClose);
+	m_settings.setValue("/QueryShutdown",           bQueryShutdown);
 	m_settings.setValue("/KeepOnTop",               bKeepOnTop);
 	m_settings.setValue("/SystemTray",              bSystemTray);
 	m_settings.setValue("/SystemTrayQueryClose",    bSystemTrayQueryClose);
-	m_settings.setValue("/StartMinimized",          bStartMinimized);
 	m_settings.setValue("/ServerConfig",            bServerConfig);
 	m_settings.setValue("/ServerConfigName",        sServerConfigName);
 	m_settings.setValue("/ServerConfigTemp",        bServerConfigTemp);
-	m_settings.setValue("/QueryShutdown",           bQueryShutdown);
 	m_settings.setValue("/AlsaSeqEnabled",          bAlsaSeqEnabled);
 	m_settings.setValue("/DBusEnabled",             bDBusEnabled);
 	m_settings.setValue("/AliasesEnabled",          bAliasesEnabled);
@@ -724,7 +722,7 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 		pWidget->adjustSize();
 		if (!bVisible)
 			bVisible = m_settings.value("/visible", false).toBool();
-		if (bVisible && !bStartMinimized)
+		if (bVisible)
 			pWidget->show();
 		else
 			pWidget->hide();
@@ -751,7 +749,7 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bVisible )
 		m_settings.setValue("/height", wsize.height());
 	#endif
 		if (!bVisible) bVisible = pWidget->isVisible();
-		m_settings.setValue("/visible", bVisible && !bStartMinimized);
+		m_settings.setValue("/visible", bVisible);
 		m_settings.endGroup();
 	}
 }
