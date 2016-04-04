@@ -167,6 +167,7 @@ public:
 	bool    bServerConfigTemp;
 	bool    bAlsaSeqEnabled;
 	bool    bDBusEnabled;
+	bool    bJackDBusEnabled;
 	bool    bAliasesEnabled;
 	bool    bAliasesEditing;
 	bool    bLeftButtons;

@@ -460,7 +460,7 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	// Stop server, if not already...
 
 #ifdef CONFIG_DBUS
-	if (m_pSetup->bStopJack || !m_pSetup->bDBusEnabled)
+	if (m_pSetup->bStopJack || !m_pSetup->bJackDBusEnabled)
 		stopJackServer();
 	if (m_pDBusLogWatcher)
 		delete m_pDBusLogWatcher;
@@ -721,6 +721,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 				m_pSessionForm, SLOT(saveSessionSaveTemplate()));
 		#endif
 		}
+	}
+	// Register JACK D-Bus service...
+	if (m_pSetup->bJackDBusEnabled) {
 		// Detect whether jackdbus is avaliable...
 		QDBusConnection dbusc = QDBusConnection::sessionBus();
 		m_pDBusControl = new QDBusInterface(

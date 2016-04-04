@@ -3708,6 +3708,22 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="JackDBusEnabledCheckBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Whether to enable JACK D-Bus interface</string>
+              </property>
+              <property name="text">
+               <string>&amp;Enable JACK D-Bus interface</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="StopJackCheckBox">
               <property name="font">
                <font>
@@ -4092,6 +4108,7 @@
   <tabstop>ServerConfigTempCheckBox</tabstop>
   <tabstop>AlsaSeqEnabledCheckBox</tabstop>
   <tabstop>DBusEnabledCheckBox</tabstop>
+  <tabstop>JackDBusEnabledCheckBox</tabstop>
   <tabstop>StopJackCheckBox</tabstop>
   <tabstop>LeftButtonsCheckBox</tabstop>
   <tabstop>RightButtonsCheckBox</tabstop>

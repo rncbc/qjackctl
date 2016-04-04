@@ -215,9 +215,11 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.OutLatencySpinBox,
 		SIGNAL(valueChanged(int)),
 		SLOT(settingsChanged()));
+#ifdef CONFIG_JACK_MIDI
 	QObject::connect(m_ui.MidiDriverComboBox,
 		SIGNAL(activated(int)),
 		SLOT(settingsChanged()));
+#endif
 	QObject::connect(m_ui.StartDelaySpinBox,
 		SIGNAL(valueChanged(int)),
 		SLOT(settingsChanged()));
@@ -358,13 +360,14 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.AliasesEditingCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+#ifdef CONFIG_JACK_PORT_ALIASES
 	QObject::connect(m_ui.JackClientPortAliasComboBox,
 		SIGNAL(activated(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.JackClientPortMetadataCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
-
+#endif
 	QObject::connect(m_ui.StartJackCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -380,8 +383,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.KeepOnTopCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
-	QString sHideMinimize = tr("Mi&nimize");
-	QString sShowRestore  = tr("Rest&ore");
 #ifdef CONFIG_SYSTEM_TRAY
 	QObject::connect(m_ui.SystemTrayCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -390,9 +391,11 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 #endif
+#ifdef CONFIG_XUNIQUE
 	QObject::connect(m_ui.SingletonCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+#endif
 	QObject::connect(m_ui.ServerConfigCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -402,12 +405,19 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.ServerConfigTempCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+#ifdef CONFIG_ALSA_SEQ
 	QObject::connect(m_ui.AlsaSeqEnabledCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+#endif
+#ifdef CONFIG_DBUS
 	QObject::connect(m_ui.DBusEnabledCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.JackDBusEnabledCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
+#endif
 	QObject::connect(m_ui.LeftButtonsCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
@@ -600,6 +610,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
 	m_ui.AlsaSeqEnabledCheckBox->setChecked(m_pSetup->bAlsaSeqEnabled);
 	m_ui.DBusEnabledCheckBox->setChecked(m_pSetup->bDBusEnabled);
+	m_ui.JackDBusEnabledCheckBox->setChecked(m_pSetup->bJackDBusEnabled);
 	m_ui.AliasesEnabledCheckBox->setChecked(m_pSetup->bAliasesEnabled);
 	m_ui.AliasesEditingCheckBox->setChecked(m_pSetup->bAliasesEditing);
 	m_ui.LeftButtonsCheckBox->setChecked(!m_pSetup->bLeftButtons);
@@ -616,8 +627,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.SystemTrayCheckBox->setEnabled(false);
 	m_ui.SystemTrayQueryCloseCheckBox->setChecked(false);
 	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(false);
-	m_ui.StartMinimizedCheckBox->setChecked(false);
-	m_ui.StartMinimizedCheckBox->setEnabled(false);
 #endif
 #ifndef CONFIG_JACK_MIDI
 	m_ui.MidiDriverComboBox->setCurrentIndex(0);
@@ -638,6 +647,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 #endif
 #ifndef CONFIG_DBUS
 	m_ui.DBusEnabledCheckBox->setEnabled(false);
+	m_ui.JackDBusEnabledCheckBox->setEnabled(false);
 #endif
 
 	// Load preset list...
@@ -1130,8 +1140,8 @@ void qjackctlSetupForm::stabilizeForm (void)
 #endif
 
 	m_ui.StopJackCheckBox->setEnabled(
-		m_ui.DBusEnabledCheckBox->isChecked());
-	if (!m_ui.DBusEnabledCheckBox->isChecked()) {
+		m_ui.JackDBusEnabledCheckBox->isChecked());
+	if (!m_ui.JackDBusEnabledCheckBox->isChecked()) {
 		m_ui.StopJackCheckBox->setChecked(true);
 	}
 
@@ -1450,6 +1460,7 @@ void qjackctlSetupForm::accept (void)
 		const bool    bOldBezierLines         = m_pSetup->bBezierLines;
 		const bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
 		const bool    bOldDBusEnabled         = m_pSetup->bDBusEnabled;
+		const bool    bOldJackDBusEnabled     = m_pSetup->bJackDBusEnabled;
 		const bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
 		const bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
 		const bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
@@ -1508,6 +1519,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bServerConfigTemp        = m_ui.ServerConfigTempCheckBox->isChecked();
 		m_pSetup->bAlsaSeqEnabled          = m_ui.AlsaSeqEnabledCheckBox->isChecked();
 		m_pSetup->bDBusEnabled             = m_ui.DBusEnabledCheckBox->isChecked();
+		m_pSetup->bJackDBusEnabled         = m_ui.JackDBusEnabledCheckBox->isChecked();
 		m_pSetup->bAliasesEnabled          = m_ui.AliasesEnabledCheckBox->isChecked();
 		m_pSetup->bAliasesEditing          = m_ui.AliasesEditingCheckBox->isChecked();
 		m_pSetup->bLeftButtons             = !m_ui.LeftButtonsCheckBox->isChecked();
@@ -1571,15 +1583,17 @@ void qjackctlSetupForm::accept (void)
 			(!bOldTextLabels &&  m_pSetup->bTextLabels))
 			pMainForm->updateButtons();
 		// Warn if something will be only effective on next run.
-		if (( bOldStdoutCapture  && !m_pSetup->bStdoutCapture)  ||
-			(!bOldStdoutCapture  &&  m_pSetup->bStdoutCapture)  ||
-			( bOldKeepOnTop      && !m_pSetup->bKeepOnTop)      ||
-			(!bOldKeepOnTop      &&  m_pSetup->bKeepOnTop)      ||
-			( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
-			(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled) ||
-			( bOldDBusEnabled    && !m_pSetup->bDBusEnabled)    ||
-			(!bOldDBusEnabled    &&  m_pSetup->bDBusEnabled)    ||
-			(iOldBaseFontSize    !=  m_pSetup->iBaseFontSize))
+		if (( bOldStdoutCapture   && !m_pSetup->bStdoutCapture)   ||
+			(!bOldStdoutCapture   &&  m_pSetup->bStdoutCapture)   ||
+			( bOldKeepOnTop       && !m_pSetup->bKeepOnTop)       ||
+			(!bOldKeepOnTop       &&  m_pSetup->bKeepOnTop)       ||
+			( bOldAlsaSeqEnabled  && !m_pSetup->bAlsaSeqEnabled)  ||
+			(!bOldAlsaSeqEnabled  &&  m_pSetup->bAlsaSeqEnabled)  ||
+			( bOldDBusEnabled     && !m_pSetup->bDBusEnabled)     ||
+			(!bOldDBusEnabled     &&  m_pSetup->bDBusEnabled)     ||
+			( bOldJackDBusEnabled && !m_pSetup->bJackDBusEnabled) ||
+			(!bOldJackDBusEnabled &&  m_pSetup->bJackDBusEnabled) ||
+			(iOldBaseFontSize     !=  m_pSetup->iBaseFontSize))
 			pMainForm->showDirtySetupWarning();
 		// If server is currently running, warn user...
 		pMainForm->showDirtySettingsWarning();

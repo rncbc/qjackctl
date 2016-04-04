@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Added a brand new "Enable JACK D-BUS interface" option, split
+  from the old common "Enable D-BUS interface" setup option which
+  now refers to its own self D-BUS interface exclusively.
+
 - Dropped old "Start minimized to system tray" option from setup.
 
 - Add double-click action (toggle start/stop) to systray (a pull
