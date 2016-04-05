@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 24
+%define release 25
 
 %define _prefix	@ac_prefix@
 
@@ -70,6 +70,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
+* Tue Apr  5 2016 Rui Nuno Capela <rncbc@rncbc.org> 0.4.2
+- Spring'16 release frenzy.
 * Wed Oct 28 2015 Rui Nuno Capela <rncbc@rncbc.org> 0.4.1
 - A Fall'15 release.
 * Wed Jul 15 2015 Rui Nuno Capela <rncbc@rncbc.org> 0.4.0

@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.4.2  2016-04-05  Spring'16 release frenzy.
 
 - Added a brand new "Enable JACK D-BUS interface" option, split
   from the old common "Enable D-BUS interface" setup option which
@@ -25,7 +25,7 @@ GIT HEAD
 
 - Blind fix to a FTBFS on macosx/coreaudio platforms, a leftover
   from the unified interface device selection combo-box inception,
-  almost two years ago. (TESTING)
+  almost two years ago.
 
 - Prevent x11extras module from use on non-X11/Unix plaforms.
 
