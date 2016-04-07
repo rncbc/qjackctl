@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Late again French (fr) translation update (by Olivier Humbert
+  aka. trebmuh, thanks).
+
+
 0.4.2  2016-04-05  Spring'16 release frenzy.
 
 - Added a brand new "Enable JACK D-BUS interface" option, split

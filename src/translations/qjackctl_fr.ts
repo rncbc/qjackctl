@@ -3680,12 +3680,12 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3719"/>
         <source>Whether to enable JACK D-Bus interface</source>
-        <translation>Activation ou non de l'interface JACK D-Bus</translation>
+        <translation>Activation ou non de l&apos;interface JACK D-Bus</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3722"/>
         <source>&amp;Enable JACK D-Bus interface</source>
-        <translation>Activ&amp;er l'interface JACK D-Bus</translation>
+        <translation>Activ&amp;er l&apos;interface JACK D-Bus</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3735"/>
