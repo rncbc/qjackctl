@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.4.2.2, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.4.2.3, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -34,8 +34,7 @@ AC_SUBST(ac_debug)
 AC_ARG_ENABLE(qt4,
   AC_HELP_STRING([--enable-qt4], [enable Qt4 build (default=no)]),
   [ac_qt4="$enableval"],
-  [ac_qt5="yes"])
-
+  [ac_qt4="no"])
 
 # Disable system tray argument option.
 AC_ARG_ENABLE(system_tray,
@@ -128,14 +127,7 @@ fi
 
 if test "x$ac_qt5_path" != "xno"; then
    ac_with_paths="$ac_with_paths $ac_qt5_path"
-   ac_qt5="yes"
-fi
-
-if test "x$ac_qt5" = "xno"; then
-   ac_qt4="yes"
-fi
-if test "x$ac_qt4" = "xyes"; then
-   ac_qt5="no"
+   ac_qt4="no"
 fi
 
 # Set for alternate JACK installation dir.
@@ -206,8 +198,7 @@ ac_errmsg="not found in current PATH. Maybe QT development environment isn't ava
 
 if test "x$ac_qt4" = "xyes"; then
    AC_PATH_PROG(ac_qmake, qmake-qt4, [no], $ac_path)
-fi
-if test "x$ac_qt5" = "xyes"; then
+else
    AC_PATH_PROG(ac_qmake, qmake-qt5, [no], $ac_path)
 fi
 if test "x$ac_qmake" = "xno"; then
@@ -220,11 +211,14 @@ fi
 
 # Check for proper Qt4/5 major version.
 ac_qt_version_major=`$ac_qmake -query QT_VERSION | cut -d. -f1`
-if test "x$ac_qt4" = "xyes" -a "x$ac_qt_version_major" != "x4"; then
-   AC_MSG_ERROR([qmake-qt4 $ac_errmsg (qt4-devel)])
-fi
-if test "x$ac_qt5" = "xyes" -a "x$ac_qt_version_major" != "x5"; then
-   AC_MSG_ERROR([qmake-qt5 $ac_errmsg (qt5-devel)])
+if test "x$ac_qt4" = "xyes"; then
+   if test "x$ac_qt_version_major" != "x4"; then
+      AC_MSG_ERROR([qmake-qt4 $ac_errmsg (qt4-devel)])
+   fi
+else
+   if test "x$ac_qt_version_major" != "x5"; then
+      AC_MSG_ERROR([qmake-qt5 $ac_errmsg (qt5-devel)])
+   fi
 fi
 
 ac_qt_install_bins=`$ac_qmake -query QT_INSTALL_BINS`
@@ -267,9 +261,7 @@ if test "x$ac_qt4" = "xyes"; then
          exit 1
       ])
    ])
-fi
- 
-if test "x$ac_qt5" = "xyes"; then
+else
    AC_CACHE_CHECK([for Qt library version >= 5.1],
       ac_cv_qtversion, [
       AC_TRY_COMPILE([#include "QtCore/qglobal.h"], [
