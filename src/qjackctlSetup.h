@@ -162,6 +162,7 @@ public:
 	bool    bKeepOnTop;
 	bool    bSystemTray;
 	bool    bSystemTrayQueryClose;
+	bool    bStartMinimized;
 	bool    bServerConfig;
 	QString sServerConfigName;
 	bool    bServerConfigTemp;

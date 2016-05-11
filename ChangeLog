@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Old "Start minimized to system tray" option returns to setup.
+
 - Dropped the --enable-qt5 from configure as found redundant
   given that's the build default anyway (suggestion by Guido
   Scholz, while for Qtractor, thanks).

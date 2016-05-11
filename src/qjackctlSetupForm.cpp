@@ -390,6 +390,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.SystemTrayQueryCloseCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.StartMinimizedCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 #endif
 #ifdef CONFIG_XUNIQUE
 	QObject::connect(m_ui.SingletonCheckBox,
@@ -602,6 +605,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 #ifdef CONFIG_SYSTEM_TRAY
 	m_ui.SystemTrayCheckBox->setChecked(m_pSetup->bSystemTray);
 	m_ui.SystemTrayQueryCloseCheckBox->setChecked(m_pSetup->bSystemTrayQueryClose);
+	m_ui.StartMinimizedCheckBox->setChecked(m_pSetup->bStartMinimized);
 #endif
 	m_ui.SingletonCheckBox->setChecked(m_pSetup->bSingleton);
 	m_ui.ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
@@ -1135,8 +1139,9 @@ void qjackctlSetupForm::stabilizeForm (void)
 #endif
 
 #ifdef CONFIG_SYSTEM_TRAY
-	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(
-		m_ui.SystemTrayCheckBox->isChecked());
+	bEnabled = m_ui.SystemTrayCheckBox->isChecked();
+	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(bEnabled);
+	m_ui.StartMinimizedCheckBox->setEnabled(bEnabled);
 #endif
 
 	m_ui.StopJackCheckBox->setEnabled(
@@ -1512,6 +1517,7 @@ void qjackctlSetupForm::accept (void)
 	#ifdef CONFIG_SYSTEM_TRAY
 		m_pSetup->bSystemTray              = m_ui.SystemTrayCheckBox->isChecked();
 		m_pSetup->bSystemTrayQueryClose    = m_ui.SystemTrayQueryCloseCheckBox->isChecked();
+		m_pSetup->bStartMinimized          = m_ui.StartMinimizedCheckBox->isChecked();
 	#endif
 		m_pSetup->bSingleton               = m_ui.SingletonCheckBox->isChecked();
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();

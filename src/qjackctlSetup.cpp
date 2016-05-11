@@ -118,6 +118,7 @@ void qjackctlSetup::loadSetup (void)
 	bKeepOnTop               = m_settings.value("/KeepOnTop", false).toBool();
 	bSystemTray              = m_settings.value("/SystemTray", false).toBool();
 	bSystemTrayQueryClose    = m_settings.value("/SystemTrayQueryClose", true).toBool();
+	bStartMinimized          = m_settings.value("/StartMinimized", false).toBool();
 	bServerConfig            = m_settings.value("/ServerConfig", true).toBool();
 	sServerConfigName        = m_settings.value("/ServerConfigName", ".jackdrc").toString();
 	bServerConfigTemp        = m_settings.value("/ServerConfigTemp", false).toBool();
@@ -230,6 +231,7 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/KeepOnTop",               bKeepOnTop);
 	m_settings.setValue("/SystemTray",              bSystemTray);
 	m_settings.setValue("/SystemTrayQueryClose",    bSystemTrayQueryClose);
+	m_settings.setValue("/StartMinimized",          bStartMinimized);
 	m_settings.setValue("/ServerConfig",            bServerConfig);
 	m_settings.setValue("/ServerConfigName",        sServerConfigName);
 	m_settings.setValue("/ServerConfigTemp",        bServerConfigTemp);
@@ -724,7 +726,7 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 		pWidget->adjustSize();
 		if (!bVisible)
 			bVisible = m_settings.value("/visible", false).toBool();
-		if (bVisible)
+		if (bVisible && !bStartMinimized)
 			pWidget->show();
 		else
 			pWidget->hide();
@@ -751,7 +753,7 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bVisible )
 		m_settings.setValue("/height", wsize.height());
 	#endif
 		if (!bVisible) bVisible = pWidget->isVisible();
-		m_settings.setValue("/visible", bVisible);
+		m_settings.setValue("/visible", bVisible && !bStartMinimized);
 		m_settings.endGroup();
 	}
 }
