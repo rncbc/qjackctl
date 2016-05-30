@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.4.2.5, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.4.2.6, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -109,7 +109,7 @@ AC_ARG_ENABLE(stacktrace,
 
 
 # Standard installation base dirs.
-ac_with_paths="/usr /usr/local"
+ac_with_paths=""
 
 # Set for alternate Qt4/5 installation dir.
 AC_ARG_WITH(qt4,
