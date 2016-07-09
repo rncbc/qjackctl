@@ -29,7 +29,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="46"/>
         <source>(default)</source>
-        <translation>(voreingestellt)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="492"/>
@@ -2206,7 +2206,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3963"/>
         <source>(default)</source>
-        <translation>(voreinst.)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>

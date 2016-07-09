@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Translation (not) fix for the default server name "(default)".
+
 - Old "Start minimized to system tray" option returns to setup.
 
 - Dropped the --enable-qt5 from configure as found redundant

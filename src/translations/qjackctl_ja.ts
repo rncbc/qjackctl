@@ -29,7 +29,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="46"/>
         <source>(default)</source>
-        <translation type="unfinished">(既定)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="492"/>

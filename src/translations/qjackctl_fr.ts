@@ -29,7 +29,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="46"/>
         <source>(default)</source>
-        <translation>(par défaut)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="497"/>
@@ -2241,7 +2241,7 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3963"/>
         <source>(default)</source>
-        <translation>(par défaut)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="86"/>

@@ -29,7 +29,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="46"/>
         <source>(default)</source>
-        <translation>(standaard)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="497"/>
@@ -2254,7 +2254,7 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3963"/>
         <source>(default)</source>
-        <translation>(standaard)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="86"/>
