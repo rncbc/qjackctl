@@ -2490,7 +2490,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1092"/>
-        <source>Set client timeout limit in miliseconds</source>
+        <source>Set client timeout limit in milliseconds</source>
         <translation>Establece el límite de tiempo de los clientes en milisegundos</translation>
     </message>
     <message>

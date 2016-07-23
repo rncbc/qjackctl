@@ -2528,7 +2528,7 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1092"/>
-        <source>Set client timeout limit in miliseconds</source>
+        <source>Set client timeout limit in milliseconds</source>
         <translation>Zet client timeout limiet in milisecondes</translation>
     </message>
     <message>

@@ -2515,7 +2515,7 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1092"/>
-        <source>Set client timeout limit in miliseconds</source>
+        <source>Set client timeout limit in milliseconds</source>
         <translation>Imposta il limite di tempo di attesa per il client, in msec</translation>
     </message>
     <message>

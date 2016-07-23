@@ -1089,7 +1089,7 @@
                 </font>
                </property>
                <property name="toolTip">
-                <string>Set client timeout limit in miliseconds</string>
+                <string>Set client timeout limit in milliseconds</string>
                </property>
                <property name="editable">
                 <bool>true</bool>

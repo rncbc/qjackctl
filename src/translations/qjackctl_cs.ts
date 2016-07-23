@@ -2794,7 +2794,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1092"/>
-        <source>Set client timeout limit in miliseconds</source>
+        <source>Set client timeout limit in milliseconds</source>
         <translation>Nastavit mez pro překročení času u klienta; údaj v milisekundách</translation>
     </message>
     <message>

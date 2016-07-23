@@ -2763,7 +2763,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1092"/>
-        <source>Set client timeout limit in miliseconds</source>
+        <source>Set client timeout limit in milliseconds</source>
         <translation>Timeout-Limitierung für Clients festlegen; Angabe in Millisekunden</translation>
     </message>
     <message>
