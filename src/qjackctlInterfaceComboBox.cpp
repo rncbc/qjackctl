@@ -210,7 +210,7 @@ private:
 
 			// Fill HostApi info...
 			const PaHostApiIndex iNumHostApi = Pa_GetHostApiCount();
-			QString hostNames[iNumHostApi];
+			QString *hostNames = new QString[iNumHostApi];
 			for (PaHostApiIndex i = 0; i < iNumHostApi; ++i)
 				hostNames[i] = QString(Pa_GetHostApiInfo(i)->name);
 
@@ -228,6 +228,7 @@ private:
 				}
 			}
 
+			delete [] hostNames;
 			Pa_Terminate();
 		}
 	}
