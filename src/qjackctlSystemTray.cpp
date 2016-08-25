@@ -110,23 +110,21 @@ qjackctlSystemTray::~qjackctlSystemTray (void)
 void qjackctlSystemTray::updatePixmap (void)
 {
 	// Renitialize icon as fit...
-	m_pixmap = m_icon.pixmap(48, 48);
-
-	const int x = 0;
-	const int y = m_pixmap.height() - m_pixmapOverlay.height();
+	m_pixmap = m_icon.pixmap(32, 32);
 
 	// Merge with the overlay pixmap...
 	if (!m_pixmapOverlay.mask().isNull()) {
+		const int y = m_pixmap.height() - m_pixmapOverlay.height();
 		QBitmap mask = m_pixmap.mask();
-		QPainter(&mask).drawPixmap(x, y, m_pixmapOverlay.mask());
+		QPainter(&mask).drawPixmap(0, y, m_pixmapOverlay.mask());
 		m_pixmap.setMask(mask);
-		QPainter(&m_pixmap).drawPixmap(x, y, m_pixmapOverlay);
+		QPainter(&m_pixmap).drawPixmap(0, y, m_pixmapOverlay);
 	}
 
 	if (m_background != Qt::transparent) {
 		QPixmap pixmap(m_pixmap);
 		m_pixmap.fill(m_background);
-		QPainter(&m_pixmap).drawPixmap(x, y, pixmap);
+		QPainter(&m_pixmap).drawPixmap(0, 0, pixmap);
 	}
 
     // Setup system tray icon directly...
