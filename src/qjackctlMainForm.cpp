@@ -3360,7 +3360,7 @@ void qjackctlMainForm::refreshStatus (void)
 			const int iElapsed = m_tXrunLast.elapsed();
 			if (iElapsed > 0x7ff) { // T=2048ms.
 				QColor color(m_pSystemTray->background());
-				color.setAlpha(0x0ff - ((iElapsed & 0x3ff) >> 3));
+				color.setAlpha(0x0ff - ((iElapsed >> 3) & 0x0ff));
 				m_pSystemTray->setBackground(color);
 			}
 		}
