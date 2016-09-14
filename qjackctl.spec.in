@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 25
+%define release 26
 
 %define _prefix	@ac_prefix@
 
@@ -53,10 +53,10 @@ including a enhanced patchbay and connection control features.
 %__make %{?_smp_mflags}
 
 %install
-%__make DESTDIR=%{buildroot} install
+%__make DESTDIR="%{buildroot}" install
 
 %clean
-[ -d %{buildroot} -a "%{buildroot}" != "" ] && %__rm -rf %{buildroot}
+[ -d "%{buildroot}" -a "%{buildroot}" != "" ] && %__rm -rf "%{buildroot}"
 
 %files
 %defattr(-,root,root)
@@ -78,6 +78,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}.1.gz
 
 %changelog
+* Wed Sep 14 2016 Rui Nuno Capela <rncbc@rncbc.org> 0.4.3
+- End of Summer'16 release.
 * Tue Apr  5 2016 Rui Nuno Capela <rncbc@rncbc.org> 0.4.2
 - Spring'16 release frenzy.
 * Wed Oct 28 2015 Rui Nuno Capela <rncbc@rncbc.org> 0.4.1
