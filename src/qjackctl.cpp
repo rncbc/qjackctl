@@ -37,16 +37,6 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 #endif
 
 
-#define CONFIG_QUOTE1(x) #x
-#define CONFIG_QUOTED(x) CONFIG_QUOTE1(x)
-
-#if defined(DATADIR)
-#define CONFIG_DATADIR CONFIG_QUOTED(DATADIR)
-#else
-#define CONFIG_DATADIR CONFIG_PREFIX "/share"
-#endif
-
-
 //-------------------------------------------------------------------------
 // Singleton application instance stuff (Qt/X11 only atm.)
 //

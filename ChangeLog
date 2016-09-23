@@ -4,6 +4,14 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Almost complete overhaul on the configure script command
+  line options, wrt. installation directories specification,
+  eg. --prefix, --bindir, --libdir, --datadir and --mandir.
+  (EXPERIMENTAL)
+
+
 0.4.3  2016-09-14  End of Summer'16 release.
 
 - Fix build error caused by variable length array.

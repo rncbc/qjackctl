@@ -90,20 +90,25 @@ unix {
 		PREFIX = /usr/local
 	}
 
-	BINDIR = $$PREFIX/bin
-	DATADIR = $$PREFIX/share
+	isEmpty(BINDIR) {
+		BINDIR = $${PREFIX}/bin
+	}
 
-	DEFINES += DATADIR=\"$$DATADIR\"
+	isEmpty(DATADIR) {
+		DATADIR = $${PREFIX}/share
+	}
+
+	#DEFINES += DATADIR=\"$${DATADIR}\"
 
 	# make install
 	INSTALLS += target desktop icon appdata
 
-	target.path = $$BINDIR
+	target.path = $${BINDIR}
 
-	desktop.path = $$DATADIR/applications
+	desktop.path = $${DATADIR}/applications
 	desktop.files += $${TARGET}.desktop
 
-	icon.path = $$DATADIR/icons/hicolor/32x32/apps
+	icon.path = $${DATADIR}/icons/hicolor/32x32/apps
 	icon.files += images/$${TARGET}.png 
 
 	appdata.path = $${DATADIR}/appdata
