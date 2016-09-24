@@ -2,10 +2,11 @@ language: cpp
 
 before_install:
 - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-- sudo add-apt-repository --yes ppa:beineri/opt-qt57-trusty
+- sudo add-apt-repository --yes ppa:beineri/opt-qt561-trusty
 - sudo apt-get update -qq
-- sudo apt-get install qt57base qt57tools qt57x11extras
+- sudo apt-get install qt56base qt56tools qt56x11extras
 - sudo apt-get install libjack-dev libasound2-dev
 
 before_script:
+- /opt/qt56/bin/qt56-env.sh
 - ./autogen.sh
