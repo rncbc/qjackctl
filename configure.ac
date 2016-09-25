@@ -344,7 +344,7 @@ if test "x$ac_round" = "xyes"; then
 fi
 
 # Check for JACK libraries.
-PKG_CHECK_MODULES([JACK], [jack >= 0.80.0], [ac_jack_lib="yes"], [ac_jack_lib="no"])
+PKG_CHECK_MODULES([JACK], [jack >= 0.100.0], [ac_jack_lib="yes"], [ac_jack_lib="no"])
 if test "x$ac_jack_lib" = "xyes"; then
    AC_DEFINE(CONFIG_JACK, 1, [Define if JACK library is available.])
    ac_cflags="$ac_cflags $JACK_CFLAGS"
