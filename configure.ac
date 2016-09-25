@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.4.3.2, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.4.3.3, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -185,6 +185,8 @@ AC_PROG_CXXCPP
 # Checks for languages.
 AC_LANG_CPLUSPLUS
 
+# Check for pkg-config.
+PKG_PROG_PKG_CONFIG
 
 # Check for proper flags.
 ac_arch=`uname -m`
@@ -342,47 +344,44 @@ if test "x$ac_round" = "xyes"; then
 fi
 
 # Check for JACK libraries.
-AC_CHECK_LIB(jack, main, [ac_jack_lib="yes"], [ac_jack_lib="no"])
-if test "x$ac_jack_lib" = "xno"; then
-   AC_MSG_ERROR([JACK library not found.])
+PKG_CHECK_MODULES([JACK], [jack >= 0.80.0], [ac_jack_lib="yes"], [ac_jack_lib="no"])
+if test "x$ac_jack_lib" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK, 1, [Define if JACK library is available.])
+   ac_cflags="$ac_cflags $JACK_CFLAGS"
+   ac_libs="$ac_libs $JACK_LIBS"
+else
+   AC_MSG_ERROR([*** JACK library not found.])
 fi
-ac_libs="$ac_libs -ljack"
 
 # Check for ALSA libraries and primarily
 # for ALSA/MIDI sequencer support.
 if test "x$ac_alsa_seq" = "xyes"; then
-   AC_CHECK_LIB(asound, main, [ac_alsa_lib="yes"], [ac_alsa_lib="no"])
-   if test "x$ac_alsa_lib" = "xno"; then
-      AC_MSG_WARN([*** ALSA library not found.])
-      ac_alsa_seq="no"
-   else
-      ac_libs="$ac_libs -lasound"
-   fi
+   PKG_CHECK_MODULES([ALSA], [alsa], [ac_alsa_seq="yes"], [ac_alsa_seq="no"])
+fi
+if test "x$ac_alsa_seq" = "xyes"; then
+   AC_DEFINE(CONFIG_ALSA_SEQ, 1, [Define if ALSA library is available.])
+   ac_cflags="$ac_cflags $ALSA_CFLAGS"
+   ac_libs="$ac_libs $ALSA_LIBS"
+else
+   AC_MSG_WARN([*** ALSA library not found.])
 fi
 
 if test "x$ac_portaudio" = "xyes"; then
-   AC_CHECK_LIB(portaudio, main, [ac_portaudio_lib="yes"], [ac_portaudio_lib="no"])
-   if test "x$ac_portaudio_lib" = "xno"; then
-      AC_MSG_WARN([*** PortAudio library not found.])
-      ac_portaudio="no"
-   else
-      ac_libs="$ac_libs -lportaudio"
-   fi
+   PKG_CHECK_MODULES([PORTAUDIO], [portaudio-2.0], [ac_portaudio="yes"], [ac_portaudio="no"])
 fi
-
-AC_SUBST(ac_libs)
+if test "x$ac_portaudio" = "xyes"; then
+   AC_DEFINE(CONFIG_PORTAUDIO 1, [Define if PORTAUDIO library is available.])
+   ac_cflags="$ac_cflags $PORTAUDIO_CFLAGS"
+   ac_libs="$ac_libs $PORTAUDIO_LIBS"
+else
+   AC_MSG_WARN([*** PORTAUDIO library not found.])
+fi
 
 
 # Checks for header files.
 AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(fcntl.h sys/ioctl.h unistd.h poll.h signal.h)
-
-# Check for JACK headers.
-AC_CHECK_HEADER(jack/jack.h, [ac_jack_h="yes"], [ac_jack_h="no"])
-if test "x$ac_jack_h" = "xno"; then
-   AC_MSG_ERROR([JACK headers not found.])
-fi
 
 # Check for jack/statistics.h header.
 AC_CHECK_HEADER(jack/statistics.h, [ac_jack_statistics_h="yes"], [ac_jack_statistics_h="no"])
@@ -434,31 +433,6 @@ if test "x$ac_jack_metadata" = "xyes"; then
    fi
 fi
 
-# Check for ALSA headers and ultimately
-# for ALSA/MIDI sequencer support.
-if test "x$ac_alsa_seq" = "xyes"; then
-   AC_CHECK_HEADER(alsa/asoundlib.h, [ac_alsa_h="yes"], [ac_alsa_h="no"])
-   if test "x$ac_alsa_h" = "xyes"; then
-      AC_DEFINE(CONFIG_ALSA_SEQ, 1, [Define if ALSA/MIDI sequencer support is enabled.])
-   else
-      AC_MSG_WARN([*** ALSA headers not found.])
-      AC_MSG_WARN([*** ALSA/MIDI sequencer support will be disabled.])
-      ac_alsa_seq="no"
-   fi
-fi
-
-# Check for PortAudio headers and library support.
-if test "x$ac_portaudio" = "xyes"; then
-   AC_CHECK_HEADER(portaudio.h, [ac_portaudio_h="yes"], [ac_portaudio_h="no"])
-   if test "x$ac_portaudio_h" = "xyes"; then
-      AC_DEFINE(CONFIG_PORTAUDIO, 1, [Define if PortAudio interface is enabled.])
-   else
-      AC_MSG_WARN([*** PortAudio headers not found.])
-      AC_MSG_WARN([*** PortAudio interface support will be disabled.])
-      ac_portaudio="no"
-   fi
-fi
-
 # Check for X11 unique/single instance.
 if test "x$ac_xunique" = "xyes"; then
    AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
@@ -471,9 +445,10 @@ if test "x$ac_stacktrace" = "xyes"; then
    AC_DEFINE(CONFIG_STACKTRACE, 1, [Define if debugger stack-trace is enabled.])
 fi
 
-AC_SUBST(ac_incpath)
 AC_SUBST(ac_cflags)
 AC_SUBST(ac_ldflags)
+AC_SUBST(ac_incpath)
+AC_SUBST(ac_libs)
 
 
 # Checks for typedefs, structures, and compiler characteristics.

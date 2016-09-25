@@ -1,6 +1,7 @@
 Makefile
 config.*
 configure
+*.m4
 *.mak
 *.spec
 *.desktop
