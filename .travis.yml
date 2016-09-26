@@ -19,7 +19,7 @@ before_install:
 - sudo apt-get update -qq
 
 install:
-- sudo apt-get install libqt4-dev libjack-dev libasound2-dev
+- sudo apt-get install -qq libqt4-dev libjack-dev libasound2-dev
 
 before_script:
 - ./autogen.sh
