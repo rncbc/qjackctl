@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Fixed an early crash when the singleton/unique application
+  instance setup option is turned off.
+
 - Almost complete overhaul on the configure script command
   line options, wrt. installation directories specification,
   eg. --prefix, --bindir, --libdir, --datadir and --mandir.

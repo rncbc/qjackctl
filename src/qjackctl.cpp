@@ -269,7 +269,7 @@ public:
 #ifdef CONFIG_XUNIQUE
 	void x11PropertyNotify(Window w)
 	{
-		if (m_pWidget && m_wOwner == w) {
+		if (m_pDisplay && m_pWidget && m_wOwner == w) {
 			// Always check whether our property-flag is still around...
 			Atom aType;
 			int iFormat = 0;
