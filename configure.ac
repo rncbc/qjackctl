@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.4.3.5, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.4.3.6, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -115,12 +115,6 @@ AC_ARG_ENABLE(dbus,
   AC_HELP_STRING([--enable-dbus], [enable D-Bus interface (default=yes)]),
   [ac_dbus="$enableval"],
   [ac_dbus="yes"])
-
-if test "x$ac_dbus" = "xyes"; then
-   AC_DEFINE(CONFIG_DBUS, 1, [Define if D-Bus interface is enabled.])
-   ac_qdbus="qdbus"
-fi
-AC_SUBST(ac_qdbus)
 
 # Enable X11 unique/single instance.
 AC_ARG_ENABLE(xunique,
@@ -433,14 +427,25 @@ if test "x$ac_jack_metadata" = "xyes"; then
    fi
 fi
 
+# Check D-Bus interface support.
+if test "x$ac_dbus" = "xyes"; then
+   AC_DEFINE(CONFIG_DBUS, 1, [Define if D-Bus interface is enabled.])
+   ac_qdbus="dbus"
+fi
+AC_SUBST(ac_qdbus)
+
 # Check for X11 unique/single instance.
 if test "x$ac_xunique" = "xyes"; then
    AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
+   if test "x$ac_qt4" = "xno"; then
+      ac_qx11extras="x11extras"
+   fi
    # Some recent distros (eg. fedora, debian) require this.
    if test "x$ac_cv_lib_X11_main" = "xyes"; then
       ac_libs="$ac_libs -lX11"
    fi
 fi
+AC_SUBST(ac_qx11extras)
 
 # Check for debugging stack-trace.
 if test "x$ac_stacktrace" = "xyes"; then
