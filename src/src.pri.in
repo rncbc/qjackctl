@@ -16,18 +16,16 @@ LIBS += @ac_libs@
 QMAKE_CXXFLAGS += @ac_cflags@
 QMAKE_LFLAGS += @ac_ldflags@
 
+# D-BUS support
+QDBUS = @ac_qdbus@
+!isEmpty(QDBUS) {
+	QT += dbus
+}
 
+# X11 support
 unix:!macx {
-
-	# X11 support
 	QX11EXTRAS = @ac_qx11extras@
 	!isEmpty(QX11EXTRAS) {
 		QT += x11extras
-	}
-
-	# D-BUS support
-	QDBUS = @ac_qdbus@
-	!isEmpty(QDBUS) {
-		QT += dbus
 	}
 }
