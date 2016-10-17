@@ -571,8 +571,16 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 			return false;
 		}
 		else if (sArg == "-v" || sArg == "--version") {
-			out << QObject::tr("Qt: %1\n").arg(qVersion());
-			out << QObject::tr(QJACKCTL_TITLE ": %1\n").arg(QJACKCTL_VERSION);
+			out << QObject::tr("Qt: %1\n")
+				.arg(qVersion());
+			out << QObject::tr("%1: %2  (%3)\n")
+				.arg(QJACKCTL_TITLE)
+				.arg(QJACKCTL_VERSION)
+				.arg(CONFIG_BUILD_DATE);
+		#ifdef CONFIG_JACK_VERSION
+			out << QObject::tr("JACK: %1\n")
+				.arg(jack_get_version_string());
+		#endif
 			return false;
 		}	// FIXME: Avoid auto-start jackd stuffed args!
 		else if (sArg != "-T" && sArg != "-ndefault") {

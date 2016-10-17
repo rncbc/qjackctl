@@ -1,7 +1,7 @@
 // qjackctlAboutForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2016, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ qjackctlAboutForm::qjackctlAboutForm (
 	sText += "<b>" + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
 	sText += "<br />\n";
 	sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
-	sText += tr("Build") + ": " __DATE__ " " __TIME__ "<br />\n";
+	sText += "<small>" + tr("Build") + ": " CONFIG_BUILD_DATE "<small><br />\n";
 #ifdef CONFIG_JACK_VERSION
 	sText += "<br />\n";
 	sText += tr("Using: JACK %1").arg(jack_get_version_string());

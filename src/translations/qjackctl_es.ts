@@ -57,6 +57,24 @@
         <translation>La opción -p nececita un argumento (nombre de un preset).</translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="574"/>
+        <source>Qt: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="576"/>
+        <source>%1: %2  (%3)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="581"/>
+        <source>JACK: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetup.cpp" line="492"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Uso: %1 [opciones] [comandos-y-argumentos]</translation>
@@ -75,13 +93,6 @@
         <location filename="../qjackctlSetup.cpp" line="552"/>
         <source>Option -a requires an argument (path).</source>
         <translation>La opción -a requiere un argumento (ruta).</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="574"/>
-        <source>Qt: %1
-</source>
-        <translation>Qt: %1
-</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="503"/>

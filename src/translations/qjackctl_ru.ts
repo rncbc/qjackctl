@@ -80,8 +80,19 @@
         <location filename="../qjackctlSetup.cpp" line="574"/>
         <source>Qt: %1
 </source>
-        <translation>Qt: %1
-</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="576"/>
+        <source>%1: %2  (%3)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="581"/>
+        <source>JACK: %1
+</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="503"/>
