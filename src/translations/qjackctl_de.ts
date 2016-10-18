@@ -27,80 +27,80 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="46"/>
+        <location filename="../qjackctlSetup.cpp" line="49"/>
         <source>(default)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="492"/>
+        <location filename="../qjackctlSetup.cpp" line="495"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Benutzung: %1 [Optionen] [Kommandos und Argumente]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="495"/>
+        <location filename="../qjackctlSetup.cpp" line="498"/>
         <source>Options:</source>
         <translation>Optionen:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="497"/>
+        <location filename="../qjackctlSetup.cpp" line="500"/>
         <source>Start JACK audio server immediately</source>
         <translation>JACK Audioserver sofort starten</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="501"/>
+        <location filename="../qjackctlSetup.cpp" line="504"/>
         <source>Set active patchbay definition file</source>
         <translation>Steckfeldkonfigurationsdatei festlegen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="505"/>
+        <location filename="../qjackctlSetup.cpp" line="508"/>
         <source>Show help about command line options</source>
         <translation>Zeige Hilfe zu Kommandozeilenargumenten an</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="507"/>
+        <location filename="../qjackctlSetup.cpp" line="510"/>
         <source>Show version information</source>
         <translation>Zeige Versionsinformation an</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="543"/>
+        <location filename="../qjackctlSetup.cpp" line="546"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Option -p benötigt ein Argument (Preset).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="552"/>
+        <location filename="../qjackctlSetup.cpp" line="555"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Option -a benötigt ein Argument (Pfad).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="574"/>
+        <location filename="../qjackctlSetup.cpp" line="577"/>
         <source>Qt: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="576"/>
+        <location filename="../qjackctlSetup.cpp" line="579"/>
         <source>%1: %2  (%3)
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="581"/>
+        <location filename="../qjackctlSetup.cpp" line="584"/>
         <source>JACK: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="499"/>
+        <location filename="../qjackctlSetup.cpp" line="502"/>
         <source>Set default settings preset name</source>
         <translation>Name für die Voreinstellungen festlegen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="503"/>
+        <location filename="../qjackctlSetup.cpp" line="506"/>
         <source>Set default JACK audio server name</source>
         <translation>Voreingestellten JACK-Audioservernamen einstellen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="562"/>
+        <location filename="../qjackctlSetup.cpp" line="565"/>
         <source>Option -n requires an argument (name).</source>
         <translation>Option -n benötigt ein Argument (Name).</translation>
     </message>

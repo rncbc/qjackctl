@@ -30,6 +30,9 @@
 #include <QTextStream>
 #include <QFileInfo>
 
+#ifdef CONFIG_JACK_VERSION
+#include <jack/jack.h>
+#endif
 
 #if defined(WIN32)
 #define DEFAULT_DRIVER "portaudio"

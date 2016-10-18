@@ -27,80 +27,80 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="46"/>
+        <location filename="../qjackctlSetup.cpp" line="49"/>
         <source>(default)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="492"/>
+        <location filename="../qjackctlSetup.cpp" line="495"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Použití: %1 [volby] [příkazy a argumenty]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="495"/>
+        <location filename="../qjackctlSetup.cpp" line="498"/>
         <source>Options:</source>
         <translation>Volby:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="497"/>
+        <location filename="../qjackctlSetup.cpp" line="500"/>
         <source>Start JACK audio server immediately</source>
         <translation>JACK audioserver spustit okamžitě</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="505"/>
+        <location filename="../qjackctlSetup.cpp" line="508"/>
         <source>Show help about command line options</source>
         <translation>Ukázat nápovědu k volbám (argumentům) příkazového řádku</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="507"/>
+        <location filename="../qjackctlSetup.cpp" line="510"/>
         <source>Show version information</source>
         <translation>Ukázat informace o verzi</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="543"/>
+        <location filename="../qjackctlSetup.cpp" line="546"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Volba -p vyžaduje argument (preset, přednastavení).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="574"/>
+        <location filename="../qjackctlSetup.cpp" line="577"/>
         <source>Qt: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="576"/>
+        <location filename="../qjackctlSetup.cpp" line="579"/>
         <source>%1: %2  (%3)
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="581"/>
+        <location filename="../qjackctlSetup.cpp" line="584"/>
         <source>JACK: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="499"/>
+        <location filename="../qjackctlSetup.cpp" line="502"/>
         <source>Set default settings preset name</source>
         <translation>Určit název přednastavení výchozího nastavení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="501"/>
+        <location filename="../qjackctlSetup.cpp" line="504"/>
         <source>Set active patchbay definition file</source>
         <translation>Nastavit soubor s vymezením činné zapojovací desky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="552"/>
+        <location filename="../qjackctlSetup.cpp" line="555"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Volba -a vyžaduje argument (cesta).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="503"/>
+        <location filename="../qjackctlSetup.cpp" line="506"/>
         <source>Set default JACK audio server name</source>
         <translation>Nastavit výchozí název pro zvukový server JACK</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="562"/>
+        <location filename="../qjackctlSetup.cpp" line="565"/>
         <source>Option -n requires an argument (name).</source>
         <translation>Volba -n vyžaduje argument (název).</translation>
     </message>
