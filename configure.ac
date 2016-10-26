@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.4.3.10, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.4.3.11, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -12,9 +12,9 @@ ac_build_date="$ac_cv_build_date"
 AC_DEFINE_UNQUOTED(CONFIG_BUILD_DATE, ["$ac_build_date"], [Build date and time.])
 
 # Sanitize version string.
-AC_CACHE_VAL([ac_cv_version], [
-   ac_cv_version=$(echo $PACKAGE_VERSION | sed -r 's/^([[0-9|\.]]+).*$/\1/')])
-ac_version="$ac_cv_version"
+AC_CACHE_VAL([ac_cv_build_version],
+   [ac_cv_build_version=$(echo $PACKAGE_VERSION | sed -r 's/^([[0-9|\.]]+).*$/\1/')])
+ac_version="$ac_cv_build_version"
 AC_SUBST(ac_version)
 
 # Set default installation prefix.
