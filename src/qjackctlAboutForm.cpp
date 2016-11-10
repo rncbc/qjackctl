@@ -44,7 +44,7 @@ qjackctlAboutForm::qjackctlAboutForm (
 	QString sText = "<p align=\"center\"><br />\n";
 	sText += "<b>" + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
 	sText += "<br />\n";
-	sText += tr("Version") + ": <b>" QJACKCTL_VERSION "</b><br />\n";
+	sText += tr("Version") + ": <b>" CONFIG_BUILD_VERSION "</b><br />\n";
 	sText += "<small>" + tr("Build") + ": " CONFIG_BUILD_DATE "<small><br />\n";
 #ifdef CONFIG_JACK_VERSION
 	sText += "<br />\n";

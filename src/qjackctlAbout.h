@@ -25,7 +25,6 @@
 #include "config.h"
 
 #define QJACKCTL_TITLE      PACKAGE_NAME
-#define QJACKCTL_VERSION    PACKAGE_VERSION
 
 #define QJACKCTL_SUBTITLE0  "JACK"
 #define QJACKCTL_SUBTITLE1  QJACKCTL_SUBTITLE0 " Audio Connection Kit"

@@ -1,7 +1,7 @@
 // qjackctlPatchbayFile.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2016, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -217,7 +217,7 @@ bool qjackctlPatchbayFile::save ( qjackctlPatchbayRack *pPatchbay,
 	QDomDocument doc("patchbay");
 	QDomElement eRoot = doc.createElement("patchbay");
 	eRoot.setAttribute("name", fi.baseName());
-	eRoot.setAttribute("version", QJACKCTL_VERSION);
+	eRoot.setAttribute("version", CONFIG_BUILD_VERSION);
 	doc.appendChild(eRoot);
 
 	// Save output-sockets spec...

@@ -177,7 +177,7 @@ void qjackctlSetup::saveSetup (void)
 {
 	// Save all settings and options...
 	m_settings.beginGroup("/Program");
-	m_settings.setValue("/Version", QJACKCTL_VERSION);
+	m_settings.setValue("/Version", CONFIG_BUILD_VERSION);
 	m_settings.endGroup();
 
 	m_settings.beginGroup("/Presets");
@@ -578,7 +578,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 				.arg(qVersion());
 			out << QObject::tr("%1: %2  (%3)\n")
 				.arg(QJACKCTL_TITLE)
-				.arg(QJACKCTL_VERSION)
+				.arg(CONFIG_BUILD_VERSION)
 				.arg(CONFIG_BUILD_DATE);
 		#ifdef CONFIG_JACK_VERSION
 			out << QObject::tr("JACK: %1\n")
