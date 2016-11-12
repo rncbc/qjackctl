@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.4.4  2016-11-14  A Fall'16 release.
 
 - Fixed an early crash when the singleton/unique application
   instance setup option is turned off.
@@ -12,7 +12,6 @@ GIT HEAD
 - Almost complete overhaul on the configure script command
   line options, wrt. installation directories specification,
   eg. --prefix, --bindir, --libdir, --datadir and --mandir.
-  (EXPERIMENTAL)
 
 
 0.4.3  2016-09-14  End of Summer'16 release.
@@ -102,7 +101,7 @@ GIT HEAD
   Robin Gareus, thanks).
 
 - A new top-level widget window geometry state save and restore
-  sub-routine is now in effect (EXPERIMENTAL).
+  sub-routine is now in effect.
 
 - Delayed geometry setup for widget windows upon startup has
   been deprecated and scrapped altogether.
@@ -147,7 +146,7 @@ GIT HEAD
 - JACK client/port pretty-name (metadata) support is being
   introduced and seamlessly integrated with old Connections
   client/port aliases editing (rename) (refactored from an
-  original patch by Paul Davis, thanks). (EXPERIMENTAL)
+  original patch by Paul Davis, thanks).
 
 - Application close confirm warning is now raising the main
   window as visible and active for due top level display,
