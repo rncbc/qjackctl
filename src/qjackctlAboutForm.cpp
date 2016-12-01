@@ -81,7 +81,7 @@ qjackctlAboutForm::qjackctlAboutForm (
 
 	// Stuff the about box...
 	QString sText = "<p align=\"center\"><br />\n";
-	sText += "<b>" + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
+	sText += "<b>" QJACKCTL_TITLE " - " + tr(QJACKCTL_SUBTITLE) + "</b><br />\n";
 	sText += "<br />\n";
 	sText += tr("Version") + ": <b>" CONFIG_BUILD_VERSION "</b><br />\n";
 //	sText += "<small>" + tr("Build") + ": " CONFIG_BUILD_DATE "<small><br />\n";
@@ -89,8 +89,8 @@ qjackctlAboutForm::qjackctlAboutForm (
 	sText += "<br />\n";
 	sText += tr("Using: JACK %1").arg(jack_get_version_string());
 #endif
-	sText += "<br />\n";
 	if (!list.isEmpty()) {
+		sText += "<br />\n";
 		sText += "<small><font color=\"red\">";
 		sText += list.join("<br />\n");
 		sText += "</font></small><br />\n";
