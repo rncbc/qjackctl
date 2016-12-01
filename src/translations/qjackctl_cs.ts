@@ -62,24 +62,6 @@
         <translation>Volba -p vyžaduje argument (preset, přednastavení).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="577"/>
-        <source>Qt: %1
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="579"/>
-        <source>%1: %2  (%3)
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="584"/>
-        <source>JACK: %1
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetup.cpp" line="502"/>
         <source>Set default settings preset name</source>
         <translation>Určit název přednastavení výchozího nastavení</translation>
@@ -128,87 +110,82 @@
         <translation>O Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="47"/>
+        <location filename="../qjackctlAboutForm.cpp" line="86"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="48"/>
-        <source>Build</source>
-        <translation>Sestavení</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlAboutForm.cpp" line="51"/>
+        <location filename="../qjackctlAboutForm.cpp" line="90"/>
         <source>Using: JACK %1</source>
         <translation>Používá se: JACK %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="56"/>
+        <location filename="../qjackctlAboutForm.cpp" line="45"/>
         <source>Debugging option enabled.</source>
         <translation>Povolena volba pro ladění.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="61"/>
+        <location filename="../qjackctlAboutForm.cpp" line="48"/>
         <source>System tray disabled.</source>
         <translation>Zakázána oznamovací oblast.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="66"/>
+        <location filename="../qjackctlAboutForm.cpp" line="51"/>
         <source>Transport status control disabled.</source>
         <translation>Zakázáno ovládání stavu předání.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="71"/>
+        <location filename="../qjackctlAboutForm.cpp" line="54"/>
         <source>Realtime status disabled.</source>
         <translation>Zakázán stav provádění ve skutečném čase.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="76"/>
+        <location filename="../qjackctlAboutForm.cpp" line="57"/>
         <source>XRUN delay status disabled.</source>
         <translation>Zakázán stav zpoždění XRUN.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="81"/>
+        <location filename="../qjackctlAboutForm.cpp" line="60"/>
         <source>Maximum delay status disabled.</source>
         <translation>Zakázán stav největšího zpoždění.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="91"/>
+        <location filename="../qjackctlAboutForm.cpp" line="66"/>
         <source>JACK MIDI support disabled.</source>
         <translation>JACK MIDI není podporován.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="96"/>
+        <location filename="../qjackctlAboutForm.cpp" line="69"/>
         <source>JACK Session support disabled.</source>
         <translation>Podpora pro sezení JACK byla zakázána.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="102"/>
+        <location filename="../qjackctlAboutForm.cpp" line="73"/>
         <source>ALSA/MIDI sequencer support disabled.</source>
         <translation>ALSA/MIDI řadič (sequencer) není podporován.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="114"/>
+        <location filename="../qjackctlAboutForm.cpp" line="99"/>
         <source>Website</source>
         <translation>Stránky</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="119"/>
+        <location filename="../qjackctlAboutForm.cpp" line="104"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Tento program je svobodným programem. Můžete jej šířit a/nebo upravit</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="120"/>
+        <location filename="../qjackctlAboutForm.cpp" line="105"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>za podmínek GNU General Public License ve verzi 2 nebo pozdější.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="86"/>
+        <location filename="../qjackctlAboutForm.cpp" line="63"/>
         <source>JACK Port aliases support disabled.</source>
         <translation>Podpora pro přezdívky přípojek JACK zakázána.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="109"/>
+        <location filename="../qjackctlAboutForm.cpp" line="78"/>
         <source>D-Bus interface support disabled.</source>
         <translation>Podpora pro rozhraní D-Bus zakázána.</translation>
     </message>

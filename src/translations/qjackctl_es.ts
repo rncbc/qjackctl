@@ -57,24 +57,6 @@
         <translation>La opción -p nececita un argumento (nombre de un preset).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="577"/>
-        <source>Qt: %1
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="579"/>
-        <source>%1: %2  (%3)
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="584"/>
-        <source>JACK: %1
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetup.cpp" line="495"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Uso: %1 [opciones] [comandos-y-argumentos]</translation>
@@ -123,67 +105,62 @@
         <translation>&amp;Cerrar</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="47"/>
+        <location filename="../qjackctlAboutForm.cpp" line="86"/>
         <source>Version</source>
         <translation>Versión</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="48"/>
-        <source>Build</source>
-        <translation>Build</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlAboutForm.cpp" line="56"/>
+        <location filename="../qjackctlAboutForm.cpp" line="45"/>
         <source>Debugging option enabled.</source>
         <translation>Depuración habilitada.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="61"/>
+        <location filename="../qjackctlAboutForm.cpp" line="48"/>
         <source>System tray disabled.</source>
         <translation>Bandeja del sistema deshabilitada.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="66"/>
+        <location filename="../qjackctlAboutForm.cpp" line="51"/>
         <source>Transport status control disabled.</source>
         <translation>Reporte del estado de transporte deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="71"/>
+        <location filename="../qjackctlAboutForm.cpp" line="54"/>
         <source>Realtime status disabled.</source>
         <translation>Estado de Realtime deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="76"/>
+        <location filename="../qjackctlAboutForm.cpp" line="57"/>
         <source>XRUN delay status disabled.</source>
         <translation>Reporte del retardo de XRUN deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="81"/>
+        <location filename="../qjackctlAboutForm.cpp" line="60"/>
         <source>Maximum delay status disabled.</source>
         <translation>Reporte del retardo máximo deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="102"/>
+        <location filename="../qjackctlAboutForm.cpp" line="73"/>
         <source>ALSA/MIDI sequencer support disabled.</source>
         <translation>Soporte para secuenciador ALSA/MIDI deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="114"/>
+        <location filename="../qjackctlAboutForm.cpp" line="99"/>
         <source>Website</source>
         <translation>Website</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="119"/>
+        <location filename="../qjackctlAboutForm.cpp" line="104"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Este programa es software libre; Usted puede redistribuirlo y/o modificarlo</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="120"/>
+        <location filename="../qjackctlAboutForm.cpp" line="105"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>bajo los términos de la Licencia Pública General GNU versión 2 o posterior.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="91"/>
+        <location filename="../qjackctlAboutForm.cpp" line="66"/>
         <source>JACK MIDI support disabled.</source>
         <translation>Soporte MIDI en JACK deshabilitado.</translation>
     </message>
@@ -193,22 +170,22 @@
         <translation>Acerca de QjackCtl</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="86"/>
+        <location filename="../qjackctlAboutForm.cpp" line="63"/>
         <source>JACK Port aliases support disabled.</source>
         <translation>Soporte para alias de los puertos de JACK deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="109"/>
+        <location filename="../qjackctlAboutForm.cpp" line="78"/>
         <source>D-Bus interface support disabled.</source>
         <translation>Soporte para la interfaz D-Bus deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="96"/>
+        <location filename="../qjackctlAboutForm.cpp" line="69"/>
         <source>JACK Session support disabled.</source>
         <translation>Soporte para sesiones de JACK deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="51"/>
+        <location filename="../qjackctlAboutForm.cpp" line="90"/>
         <source>Using: JACK %1</source>
         <translation>Usando: JACK %1</translation>
     </message>
