@@ -85,16 +85,16 @@ qjackctlAboutForm::qjackctlAboutForm (
 	sText += "<br />\n";
 	sText += tr("Version") + ": <b>" CONFIG_BUILD_VERSION "</b><br />\n";
 //	sText += "<small>" + tr("Build") + ": " CONFIG_BUILD_DATE "<small><br />\n";
-#ifdef CONFIG_JACK_VERSION
-	sText += "<br />\n";
-	sText += tr("Using: JACK %1").arg(jack_get_version_string());
-#endif
 	if (!list.isEmpty()) {
-		sText += "<br />\n";
 		sText += "<small><font color=\"red\">";
 		sText += list.join("<br />\n");
-		sText += "</font></small><br />\n";
+		sText += "</font></small>";
 	}
+	sText += "<br />\n";
+#ifdef CONFIG_JACK_VERSION
+	sText += tr("Using: JACK %1").arg(jack_get_version_string());
+	sText += "<br />\n";
+#endif
 	sText += "<br />\n";
 	sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
 	sText += "<br />\n";
