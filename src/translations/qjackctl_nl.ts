@@ -115,7 +115,7 @@
         <translation>Versie</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="90"/>
+        <location filename="../qjackctlAboutForm.cpp" line="95"/>
         <source>Using: JACK %1</source>
         <translation>Gebruikt : JACK %1</translation>
     </message>
