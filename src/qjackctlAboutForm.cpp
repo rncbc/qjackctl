@@ -90,8 +90,8 @@ qjackctlAboutForm::qjackctlAboutForm (
 		sText += list.join("<br />\n");
 		sText += "</font></small>";
 	}
-	sText += "<br />\n";
 #ifdef CONFIG_JACK_VERSION
+	sText += "<br />\n";
 	sText += tr("Using: JACK %1").arg(jack_get_version_string());
 	sText += "<br />\n";
 #endif
