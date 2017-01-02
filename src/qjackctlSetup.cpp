@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2016, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -719,7 +719,6 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 			= m_settings.value("/geometry").toByteArray();
 		if (!geometry.isEmpty())
 			pWidget->restoreGeometry(geometry);
-		else
 	#else//--LOAD_OLD_GEOMETRY
 		QPoint wpos;
 		QSize  wsize;
@@ -731,9 +730,9 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 			pWidget->move(wpos);
 		if (wsize.width() > 0 && wsize.height() > 0)
 			pWidget->resize(wsize);
-		else
 	#endif
-		pWidget->adjustSize();
+	//	else
+	//	pWidget->adjustSize();
 		if (!bVisible)
 			bVisible = m_settings.value("/visible", false).toBool();
 		if (bVisible && !bStartMinimized)
@@ -770,3 +769,4 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bVisible )
 
 
 // end of qjackctlSetup.cpp
+
