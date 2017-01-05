@@ -1,0 +1,57 @@
+.TH QJACKCTL 1 "Juin 17, 2014"
+.SH NOM
+qjackctl \- interface utilisateur pour contrôler JACK (Jack Audio Connection Kit)
+.SH SYNOPSIS
+.B qjackctl 
+[\fIoptions\fR]
+.SH DESCRIPTION
+Ce manuel décrit rapidement la commande
+.B qjackctl
+.
+.PP
+
+.PP
+\fBQjackCtl\fP est utilisé pour contrôler le kit de connexion audio Jack (JACK)
+ainsi qu'en tant que baie de brassage pour les périphériques ALSA MIDI et JACK
+MIDI. \fBQjackCtl\fP possède également un support pour le protocole de transport
+JACK, et vous pouvez donc l'utiliser pour démarrer et arrêter le transport JACK.
+Lorsque vous démarrez qjackctl, une fenêtre d'interface graphique unique vous
+est présentée, dont les boutons sont simples à comprendre et possèdent des
+info-bulles.
+.SH OPTIONS
+.HP
+\fB\-s\fR, \fB\-\-start\fR
+.IP
+Démarre le serveur audio JACK immédiatemment
+.HP
+\fB\-p\fR, \fB\-\-preset\fR=[\fIétiquette\fR]
+.IP
+Paramètre le nom du pré-réglage de paramètres par défaut
+.HP
+\fB\-a\fR, \fB\-\-active\-patchbay\fR=[\fIchemin\fR]
+.IP
+Paramètre le fichier de définition de la baie de brassage active
+.HP
+\fB\-n\fR, \fB\-\-server\-name\fR=[\fIétiquette\fR]
+.IP
+Paramètre le nom du serveur audio JACK par défaut
+.HP
+\fB\-h\fR, \fB\-\-help\fR
+.IP
+Affiche de l'aide à propos des options de ligne de commande
+.HP
+\fB\-v\fR, \fB\-\-version\fR
+.IP
+Affiche des informations de version.
+.SH VOIR ÉGALEMENT
+.BR jackd (1)
+.SH FICHIER
+Les paramètres de configuration sont stockés dans ~/.config/rncbc.org/QjackCtl.conf
+.SH AUTEUR
+QjackCtl a été écrit pas Rui Nuno Capela.
+.PP
+Cette page de manuel a été écrite par Guenter Geiger <geiger@debian.org>, pour
+le projet Debian (mais peut être utilisée par d'autres).
+.PP
+La version française a été traduite par Olivier Humbert <trebmuh@tuxfamily.org>,
+pour le projet LibraZiK (mais peut être utilisée par d'autres).
