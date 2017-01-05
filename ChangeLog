@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Added French man page (by Olivier Humbert, thanks).
+
 - Make builds reproducible byte for byte, by getting rid of
   the configure build date and time stamps.
 
