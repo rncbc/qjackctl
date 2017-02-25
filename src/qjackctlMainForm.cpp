@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -3356,7 +3356,8 @@ void qjackctlMainForm::refreshStatus (void)
 		}
 	#ifdef CONFIG_SYSTEM_TRAY
 		// XRUN: blink the system-tray icon backgroung...
-		if (m_pSystemTray && m_iXrunCallbacks > 0) {
+		if (m_pSystemTray && m_iXrunCallbacks > 0
+			&& m_pSetup && m_pSetup->bDisplayBlink) {
 			const int iElapsed = m_tXrunLast.elapsed();
 			if (iElapsed > 0x7ff) { // T=2048ms.
 				QColor color(m_pSystemTray->background());

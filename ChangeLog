@@ -6,6 +6,11 @@ ChangeLog
 
 GIT HEAD
 
+- On some desktop-shells, the system tray icon blinking on
+  XRUN ocurrences, have been found responsible to excessive
+  CPU usage, an "eye-candy" effect which is now optional as
+  far as Setup/Display/Blink server mode indicator goes.
+
 - Added French man page (by Olivier Humbert, thanks).
 
 - Make builds reproducible byte for byte, by getting rid of
