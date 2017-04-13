@@ -877,7 +877,7 @@ bool qjackctlMainForm::queryClose (void)
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
-			bQueryClose = (mbox.exec() == QMessageBox::Ok);
+			bQueryClose = (mbox.exec() == QDialog::Accepted);
 			if (bQueryClose && cbox.isChecked())
 				m_pSetup->bQueryClose = false;
 		#endif
@@ -1444,7 +1444,7 @@ void qjackctlMainForm::stopJack (void)
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
 			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-			bQueryShutdown = (mbox.exec() == QMessageBox::Ok);
+			bQueryShutdown = (mbox.exec() == QDialog::Accepted);
 			if (bQueryShutdown && cbox.isChecked())
 				m_pSetup->bQueryShutdown = false;
 		#endif
@@ -2662,7 +2662,7 @@ void qjackctlMainForm::queryDisconnect (
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
-			bQueryDisconnect = (mbox.exec() == QMessageBox::Ok);
+			bQueryDisconnect = (mbox.exec() == QDialog::Accepted);
 			if (bQueryDisconnect && cbox.isChecked())
 				m_pSetup->bQueryDisconnect = false;
 		#endif

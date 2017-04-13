@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -466,7 +466,7 @@ bool qjackctlSocketList::addSocketItem (void)
 		+ ' ' + QString::number(m_sockets.count() + 1),
 		QString::null, QJACKCTL_SOCKETTYPE_JACK_AUDIO);
 	socketForm.load(&socket);
-	if (socketForm.exec()) {
+	if (socketForm.exec() == QDialog::Accepted) {
 		socketForm.save(&socket);
 		qjackctlSocketItem *pSocketItem = selectedSocketItem();
 	//  m_pListView->setUpdatesEnabled(false);
@@ -543,7 +543,7 @@ bool qjackctlSocketList::editSocketItem (void)
 			socket.pluglist().append((iter.next())->plugName());
 		socketForm.load(&socket);
 		socketForm.setConnectCount(pSocketItem->connects().count());
-		if (socketForm.exec()) {
+		if (socketForm.exec() == QDialog::Accepted) {
 			socketForm.save(&socket);
 		//  m_pListView->setUpdatesEnabled(false);
 			pSocketItem->clear();
@@ -604,7 +604,7 @@ bool qjackctlSocketList::copySocketItem (void)
 		while (iter.hasNext())
 			socket.pluglist().append((iter.next())->plugName());
 		socketForm.load(&socket);
-		if (socketForm.exec()) {
+		if (socketForm.exec() == QDialog::Accepted) {
 			socketForm.save(&socket);
 			pSocketItem = new qjackctlSocketItem(this, socket.name(),
 				socket.clientName(), socket.type(), pSocketItem);

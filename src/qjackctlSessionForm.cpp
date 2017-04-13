@@ -1,7 +1,7 @@
 // qjackctlSessionForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -466,7 +466,7 @@ void qjackctlSessionForm::loadSession (void)
 	loadDialog.setHistory(m_sessionDirs);
 	if (!m_sessionDirs.isEmpty())
 		loadDialog.setDirectory(m_sessionDirs.first());
-	if (!loadDialog.exec())
+	if (loadDialog.exec() == QDialog::Rejected)
 		return;
 	QString sSessionDir = loadDialog.selectedFiles().first();
 #else
@@ -531,7 +531,7 @@ void qjackctlSessionForm::saveSessionEx ( int iSessionType )
 	saveDialog.setHistory(m_sessionDirs);
 	if (!m_sessionDirs.isEmpty())
 		saveDialog.setDirectory(m_sessionDirs.first());
-	if (!saveDialog.exec())
+	if (saveDialog.exec() == QDialog::Rejected)
 		return;
 	QString sSessionDir = saveDialog.selectedFiles().first();
 #else
