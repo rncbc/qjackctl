@@ -195,7 +195,7 @@
      </widget>
      <widget class="QWidget" name="MidiConnectTab" >
       <attribute name="title" >
-       <string>MIDI</string>
+       <string>MIDI-JACK</string>
       </attribute>
       <layout class="QGridLayout" >
        <property name="margin" >
@@ -330,7 +330,7 @@
      </widget>
      <widget class="QWidget" name="AlsaConnectTab" >
       <attribute name="title" >
-       <string>ALSA</string>
+       <string>MIDI-ALSA</string>
       </attribute>
       <layout class="QGridLayout" >
        <property name="margin" >
