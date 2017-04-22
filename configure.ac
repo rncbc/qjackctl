@@ -9,9 +9,13 @@ AC_CONFIG_FILES(Makefile qjackctl.spec src/src.pri src/qjackctl.desktop)
 AC_CACHE_VAL([ac_cv_build_version], [
    ac_cv_build_version=$(git describe --tags --dirty --abbrev=6 2>/dev/null)
    if test -n "$ac_cv_build_version"; then
-      ac_cv_build_version=$(echo $ac_cv_build_version | sed -r 's/^[[^_]]+_//')
+      ac_cv_build_version=$(echo $ac_cv_build_version | sed -r 's/^[^_]*[_v]//i')
       ac_cv_build_version=$(echo $ac_cv_build_version | sed -r 's/-g/git./')
       ac_cv_build_version=$(echo $ac_cv_build_version | sed -r 's/[[_|-]]+/./g')
+      ac_cv_build_version_extra=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+      if test "x$ac_cv_build_version_extra" != "xmaster"; then
+         ac_cv_build_version="$ac_cv_build_version [[$ac_cv_build_version_extra]]"
+      fi
    else
       ac_cv_build_version=$PACKAGE_VERSION
    fi
