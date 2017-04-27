@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.4.5  2017-04-27  Pre-LAC2017 release frenzy.
 
 - On some desktop-shells, the system tray icon blinking on
   XRUN ocurrences, have been found responsible to excessive

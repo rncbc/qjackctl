@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 27
+%define release 28
 
 %define _prefix	@ac_prefix@
 
@@ -55,7 +55,7 @@ including a enhanced patchbay and connection control features.
 %__make DESTDIR="%{buildroot}" install
 
 %clean
-[ -d "%{buildroot}" -a "%{buildroot}" != "" ] && %__rm -rf "%{buildroot}"
+[ -d "%{buildroot}" -a "%{buildroot}" != "/" ] && %__rm -rf "%{buildroot}"
 
 %files
 %defattr(-,root,root)
@@ -77,6 +77,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}*.1.gz
 
 %changelog
+* Thu Apr 27 2017 Rui Nuno Capela <rncbc@rncbc.org> 0.4.5
+- Pre-LAC2017 release frenzy.
 * Mon Nov 14 2016 Rui Nuno Capela <rncbc@rncbc.org> 0.4.4
 - A Fall'16 release.
 * Wed Sep 14 2016 Rui Nuno Capela <rncbc@rncbc.org> 0.4.3
