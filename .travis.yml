@@ -20,12 +20,12 @@ env:
 
 before_install:
 - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-- if [[ "$QT_SELECT" = "5" ]]; then sudo add-apt-repository --yes ppa:beineri/opt-qt571-trusty; fi
+- if [[ "$QT_SELECT" = "5" ]]; then sudo add-apt-repository --yes ppa:beineri/opt-qt59-trusty; fi
 - sudo apt-get update -qq
 
 install:
 - if [[ "$QT_SELECT" = "4" ]]; then sudo apt-get install -qq libqt4-dev; fi
-- if [[ "$QT_SELECT" = "5" ]]; then sudo apt-get install -qq qt57base; source /opt/qt*/bin/qt*-env.sh; fi
+- if [[ "$QT_SELECT" = "5" ]]; then sudo apt-get install -qq qt59base; source /opt/qt*/bin/qt*-env.sh; fi
 - sudo apt-get install -qq libjack-dev libasound2-dev
 
 before_script:
@@ -34,5 +34,5 @@ before_script:
 
 script:
 - if [ "$QT_SELECT" = "4" ]; then ./configure --enable-qt4; fi
-- if [ "$QT_SELECT" = "5" ]; then ./configure; fi
+- if [ "$QT_SELECT" = "5" ]; then ./configure; cat config.log; fi
 - make && sudo make install
