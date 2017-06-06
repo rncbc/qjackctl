@@ -14,18 +14,25 @@ branches:
   only:
   - master
 
+env:
+- QT_SELECT=4
+- QT_SELECT=5
+
 before_install:
 - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+- if [[ "$QT_SELECT" = "5" ]]; then sudo add-apt-repository --yes ppa:beineri/opt-qt59-trusty; fi
 - sudo apt-get update -qq
 
 install:
-- sudo apt-get install -qq libqt4-dev libjack-dev libasound2-dev
+- if [[ "$QT_SELECT" = "4" ]]; then sudo apt-get install -qq libqt4-dev; fi
+- if [[ "$QT_SELECT" = "5" ]]; then sudo apt-get install -qq qt59base; fi
+- sudo apt-get install -qq libjack-dev libasound2-dev
 
 before_script:
 - git fetch --unshallow --tags -q
 - ./autogen.sh
 
 script:
-- ./configure --enable-qt4
-  && make
-  && sudo make install
+- if [ "$QT_SELECT" = "4" ]; then ./configure --enable-qt4; fi
+- if [ "$QT_SELECT" = "5" ]; then ./configure; fi
+- make && sudo make install
