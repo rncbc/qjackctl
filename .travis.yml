@@ -25,7 +25,7 @@ before_install:
 
 install:
 - if [[ "$QT_SELECT" = "4" ]]; then sudo apt-get install -qq libqt4-dev; fi
-- if [[ "$QT_SELECT" = "5" ]]; then sudo apt-get install -qq qt59base qt59translations qt59x11extras; fi
+- if [[ "$QT_SELECT" = "5" ]]; then sudo apt-get install -qq qt59base qt59translations qt59x11extras; source /opt/qt*/bin/qt*-env.sh; fi
 - sudo apt-get install -qq libjack-dev libasound2-dev
 
 before_script:
@@ -34,5 +34,5 @@ before_script:
 
 script:
 - if [ "$QT_SELECT" = "4" ]; then ./configure --enable-qt4; fi
-- if [ "$QT_SELECT" = "5" ]; then ./configure; cat config.log; fi
+- if [ "$QT_SELECT" = "5" ]; then ./configure; fi
 - make && sudo make install
