@@ -26,7 +26,7 @@ before_install:
 install:
 - if [[ "$QT_SELECT" = "4" ]]; then sudo apt-get install -qq libqt4-dev; fi
 - if [[ "$QT_SELECT" = "5" ]]; then sudo apt-get install -qq qt59base qt59tools qt59x11extras; source /opt/qt*/bin/qt*-env.sh; fi
-- sudo apt-get install -qq libjack-dev libasound2-dev
+- sudo apt-get install -qq libjack-dev libasound2-dev portaudio19-dev
 
 before_script:
 - git fetch --unshallow --tags -q
