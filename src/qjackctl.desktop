@@ -17,4 +17,6 @@ Categories=Audio;AudioVideo;Midi;X-Alsa;X-Jack;Qt;
 Keywords=Audio;MIDI;ALSA;JACK;LV2;Qt;
 Terminal=false
 Type=Application
+StartupWMClass=qjackctl
+X-Window-Icon=qjackctl
 X-SuSE-translate=true
