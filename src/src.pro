@@ -111,7 +111,7 @@ unix {
 	icon.path = $${DATADIR}/icons/hicolor/32x32/apps
 	icon.files += images/$${TARGET}.png 
 
-	appdata.path = $${DATADIR}/appdata
+	appdata.path = $${DATADIR}/metainfo
 	appdata.files += appdata/$${TARGET}.appdata.xml
 }
 

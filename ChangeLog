@@ -4,6 +4,15 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Desktop entry specification file is now finally independent
+  from build/configure template chains.
+
+- Updated target path for freedesktop.org's AppStream metainfo
+  file (formerly AppData).
+
+
 0.4.5  2017-04-27  Pre-LAC2017 release frenzy.
 
 - On some desktop-shells, the system tray icon blinking on

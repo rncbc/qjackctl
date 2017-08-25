@@ -3,7 +3,7 @@ AC_INIT(QjackCtl, 0.4.6, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
-AC_CONFIG_FILES(Makefile qjackctl.spec src/src.pri src/qjackctl.desktop)
+AC_CONFIG_FILES(Makefile qjackctl.spec src/src.pri)
 
 # Build version string.
 AC_CACHE_VAL([ac_cv_build_version], [
