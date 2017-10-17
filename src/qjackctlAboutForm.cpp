@@ -69,12 +69,12 @@ qjackctlAboutForm::qjackctlAboutForm (
 	list << tr("JACK Session support disabled.");
 #endif
 #ifndef CONFIG_ALSA_SEQ
-#if !defined(WIN32)
+#if !defined(_WIN32)
 	list << tr("ALSA/MIDI sequencer support disabled.");
 #endif
 #endif
 #ifndef CONFIG_DBUS
-#if !defined(WIN32)
+#if !defined(_WIN32)
 	list << tr("D-Bus interface support disabled.");
 #endif
 #endif
