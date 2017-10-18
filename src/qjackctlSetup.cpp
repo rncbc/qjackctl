@@ -34,7 +34,7 @@
 #include <jack/jack.h>
 #endif
 
-#if defined(_WIN32)
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 #define DEFAULT_DRIVER "portaudio"
 #else
 #define DEFAULT_DRIVER "alsa"
@@ -365,7 +365,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	}
 
 	m_settings.beginGroup("/Settings" + sSuffix);
-#if defined(_WIN32)
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 	preset.sServerPrefix = m_settings.value("/Server", "jackd -S").toString();
 #else
 	preset.sServerPrefix = m_settings.value("/Server", "jackd").toString();
