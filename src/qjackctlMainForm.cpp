@@ -945,7 +945,7 @@ bool qjackctlMainForm::queryClose (void)
 			m_pPatchbayForm->close();
 		if (m_pSetupForm)
 			m_pSetupForm->close();
-	#ifdef CONFIG_SYSTEM_TRAY
+	#if 0//CONFIG_SYSTEM_TRAY
 		// And the system tray icon too.
 		if (m_pSystemTray)
 			m_pSystemTray->close();

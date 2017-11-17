@@ -1,7 +1,7 @@
 // qjackctlSystemTray.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2016, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -46,8 +46,8 @@ public:
 	void setBackground(const QColor& background);
 	const QColor& background() const;
 
-    // Set system tray icon overlay.
-    void setPixmapOverlay(const QPixmap& pmOverlay);
+	// Set system tray icon overlay.
+	void setPixmapOverlay(const QPixmap& pmOverlay);
 	const QPixmap& pixmapOverlay() const;
 
 	// System tray icon/pixmaps update method.
@@ -82,7 +82,6 @@ private:
 
 	// Instance pixmap and background color.
 	QIcon   m_icon;
-	QMenu   m_menu;
 	QPixmap m_pixmap;
 	QPixmap m_pixmapOverlay;
 	QColor  m_background;
