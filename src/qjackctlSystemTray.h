@@ -25,6 +25,7 @@
 #include <QWidget>
 
 #include <QSystemTrayIcon>
+#include <QMenu>
 
 
 //----------------------------------------------------------------------------
@@ -81,6 +82,7 @@ private:
 
 	// Instance pixmap and background color.
 	QIcon   m_icon;
+	QMenu   m_menu;
 	QPixmap m_pixmap;
 	QPixmap m_pixmapOverlay;
 	QColor  m_background;
