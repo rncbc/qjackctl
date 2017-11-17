@@ -25,7 +25,6 @@
 #include <QWidget>
 
 #include <QSystemTrayIcon>
-#include <QMenu>
 
 
 //----------------------------------------------------------------------------
