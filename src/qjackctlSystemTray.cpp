@@ -96,6 +96,10 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 
 void qjackctlSystemTray::contextMenuRequested (void)
 {
+	// Don't show dummy menu box, ever...
+	if (qobject_cast<QMenu *> (sender()) == &m_menu)
+		m_menu.hide();
+
 	emit contextMenuRequested(QCursor::pos());
 }
 
