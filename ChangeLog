@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Current preset is always taken into account if ever changes
+  while the Setup dialog is hidden (eg. via context menu).
+
 - Desktop entry specification file is now finally independent
   from build/configure template chains.
 
