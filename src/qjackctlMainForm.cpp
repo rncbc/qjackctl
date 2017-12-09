@@ -3799,6 +3799,10 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 	else
 		m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
 
+	// Have current preset changed anyhow?
+	if (m_pSetupForm)
+		m_pSetupForm->updateCurrentPreset();
+
 	showDirtySettingsWarning();
 }
 

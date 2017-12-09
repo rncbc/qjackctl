@@ -656,10 +656,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 
 	// Load preset list...
 	resetPresets();
-	setComboBoxCurrentText(m_ui.PresetComboBox,
-		m_pSetup->sDefPreset);
-	// Finally, load default settings...
-	changePreset(m_ui.PresetComboBox->currentText());
+	updateCurrentPreset();
 
 	// We're clean now.
 	--m_iDirtySetup;
@@ -813,6 +810,18 @@ void qjackctlSetupForm::resetPresets (void)
 	m_ui.PresetComboBox->clear();
 	m_ui.PresetComboBox->addItems(m_pSetup->presets);
 	m_ui.PresetComboBox->addItem(m_pSetup->sDefPresetName);
+}
+
+
+void qjackctlSetupForm::updateCurrentPreset (void)
+{
+   // Have current preset changed anyhow?
+   if (m_pSetup && m_pSetup->sDefPreset != m_sPreset) {
+	   ++m_iDirtySetup;
+	   setComboBoxCurrentText(m_ui.PresetComboBox, m_pSetup->sDefPreset);
+	   changePreset(m_ui.PresetComboBox->currentText());
+	   --m_iDirtySetup;
+   }
 }
 
 
@@ -1677,15 +1686,6 @@ void qjackctlSetupForm::showEvent ( QShowEvent *pShowEvent )
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pMainForm->stabilizeForm();
-
-	// Have current preset changed anyhow?
-	if (m_pSetup && m_pSetup->sDefPreset != m_sPreset) {
-		++m_iDirtySetup;
-		setComboBoxCurrentText(m_ui.PresetComboBox, m_pSetup->sDefPreset);
-		changePreset(m_ui.PresetComboBox->currentText());
-		--m_iDirtySetup;
-
-	}
 
 	stabilizeForm();
 

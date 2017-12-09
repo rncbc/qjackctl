@@ -45,7 +45,7 @@ public:
 	~qjackctlSetupForm();
 
 	void setup(qjackctlSetup *pSetup);
-
+	void updateCurrentPreset();
 	bool queryClose();
 
 protected slots:
