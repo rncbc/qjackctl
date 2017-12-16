@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.0  2017-12-16  End of Autum'17 release.
 
 - Current preset is always taken into account if ever changes
   while the Setup dialog is hidden (eg. via context menu).
