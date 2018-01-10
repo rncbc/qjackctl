@@ -130,7 +130,7 @@ uninstall:	$(DESTDIR)$(prefix)/bin/$(name)
 
 
 clean:	$(name).mak
-	@$(MAKE) -f $(name).mak distclean
+	@$(MAKE) -f $(name).mak distclean || true
 	@rm -f $(target) $(target).mak $(name).mak
 	@rm -rf *.cache *.log *.status $(translations_targets)
 
