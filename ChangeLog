@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- A little hardening on the configure (autoconf) macro side.
+
+
 0.5.0  2017-12-16  End of Autum'17 release.
 
 - Current preset is always taken into account if ever changes
