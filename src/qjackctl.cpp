@@ -1,7 +1,7 @@
 // qjackctl.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -155,7 +155,8 @@ public:
 	#ifdef CONFIG_X11
 	#ifdef CONFIG_XUNIQUE
 		m_pDisplay = NULL;
-		m_wOwner = None;
+		m_aUnique = 0;
+		m_wOwner = 0;
 	#if QT_VERSION >= 0x050100
 		m_pXcbEventFilter = new qjackctlXcbEventFilter(this);
 		installNativeEventFilter(m_pXcbEventFilter);
@@ -203,6 +204,10 @@ public:
 	{
 	#ifdef CONFIG_X11
 	#ifdef CONFIG_XUNIQUE
+	#if QT_VERSION >= 0x050100
+		if (!QX11Info::isPlatformX11())
+			return false;
+	#endif
 		m_pDisplay = QX11Info::display();
 		QString sUnique = QJACKCTL_XUNIQUE;
 		if (sServerName.isEmpty()) {

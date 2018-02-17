@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Disable singleton/unique application instance setup logic
+  when the display server platform is not X11. (EXPERIMENTAL)
+
 - A little hardening on the configure (autoconf) macro side.
 
 
