@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -3852,24 +3852,24 @@ void qjackctlMainForm::setDBusParameters (void)
 	const bool bFirewire  = (m_preset.sDriver == "firewire");
 	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
 
-	setDBusEngineParameter("name",
-		m_pSetup->sServerName,
-		!m_pSetup->sServerName.isEmpty());
+//	setDBusEngineParameter("name",
+//		m_pSetup->sServerName,
+//		!m_pSetup->sServerName.isEmpty());
 	setDBusEngineParameter("verbose", m_preset.bVerbose);
 	setDBusEngineParameter("realtime", m_preset.bRealtime);
 	setDBusEngineParameter("realtime-priority",
 		m_preset.iPriority,
 		m_preset.bRealtime && m_preset.iPriority > 5);
-//	setDBusEngineParameter("port-max",
-//		m_preset.iPortMax,
-//		m_preset.iPortMax > 0);
+	setDBusEngineParameter("port-max",
+		m_preset.iPortMax,
+		m_preset.iPortMax > 0 && m_preset.iPortMax != 256);
 	setDBusEngineParameter("client-timeout",
 		m_preset.iTimeout,
-		m_preset.iTimeout > 0);
-//	setDBusEngineParameter("no-memlock", m_preset.bNoMemLock);
-//	setDBusEngineParameter("unlock-mem",
-//		m_preset.bUnlockMem,
-//		!m_preset.bNoMemLock);
+		m_preset.iTimeout > 0 && m_preset.iTimeout != 500);
+	setDBusEngineParameter("no-mem-lock", m_preset.bNoMemLock);
+	setDBusEngineParameter("libs-unlock",
+		m_preset.bUnlockMem,
+		!m_preset.bNoMemLock);
 	setDBusEngineParameter("driver", m_preset.sDriver);
 	if ((bAlsa || bPortaudio) && (m_preset.iAudio != QJACKCTL_DUPLEX ||
 		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
@@ -3908,7 +3908,7 @@ void qjackctlMainForm::setDBusParameters (void)
 		setDBusDriverParameter("hwmon", m_preset.bHWMon);
 		setDBusDriverParameter("hwmeter", m_preset.bHWMeter);
 	#ifdef CONFIG_JACK_MIDI
-		setDBusDriverParameter("midi-driver",
+		setDBusDriverParameter("midi",
 			m_preset.sMidiDriver,
 			!m_preset.sMidiDriver.isEmpty());
 	#endif
