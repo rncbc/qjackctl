@@ -1,7 +1,7 @@
 // qjackctlConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -238,7 +238,8 @@ public:
 	void refresh();
 
 	// Natural decimal sorting comparator.
-	static bool lessThan(const QTreeWidgetItem& i1, const QTreeWidgetItem& i2);
+	static bool lessThan(
+		const QTreeWidgetItem& item1, const QTreeWidgetItem& item2);
 
 private:
 
