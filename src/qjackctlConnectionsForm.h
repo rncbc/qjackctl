@@ -1,7 +1,7 @@
 // qjackctlConnectionsForm.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -86,7 +86,6 @@ public slots:
 	void audioDisconnectSelected();
 	void audioDisconnectAll();
 	void audioExpandAll();
-	void audioRefreshClear();
 	void audioRefresh();
 	void audioStabilize();
 
@@ -94,7 +93,6 @@ public slots:
 	void midiDisconnectSelected();
 	void midiDisconnectAll();
 	void midiExpandAll();
-	void midiRefreshClear();
 	void midiRefresh();
 	void midiStabilize();
 
@@ -102,7 +100,6 @@ public slots:
 	void alsaDisconnectSelected();
 	void alsaDisconnectAll();
 	void alsaExpandAll();
-	void alsaRefreshClear();
 	void alsaRefresh();
 	void alsaStabilize();
 

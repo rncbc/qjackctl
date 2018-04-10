@@ -1,7 +1,7 @@
 // qjackctlAlsaConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -51,18 +51,13 @@ class qjackctlAlsaPort : public qjackctlPortItem
 public:
 
 	// Constructor.
-	qjackctlAlsaPort(qjackctlAlsaClient *pClient, int iAlsaPort);
+	qjackctlAlsaPort(qjackctlAlsaClient *pClient);
 	// Default destructor.
 	~qjackctlAlsaPort();
 
 	// Jack handles accessors.
 	int alsaClient() const;
-	int alsaPort() const;
-
-private:
-
-	// Instance variables.
-	int m_iAlsaPort;
+	int alsaPort()   const;
 };
 
 
@@ -72,7 +67,7 @@ class qjackctlAlsaClient : public qjackctlClientItem
 public:
 
 	// Constructor.
-	qjackctlAlsaClient(qjackctlAlsaClientList *pClientList, int iAlsaClient);
+	qjackctlAlsaClient(qjackctlAlsaClientList *pClientList);
 	// Default destructor.
 	~qjackctlAlsaClient();
 
@@ -81,11 +76,6 @@ public:
 
 	// Port finder by id.
 	qjackctlAlsaPort *findPort(int iAlsaPort);
-
-private:
-
-	// Instance variables.
-	int m_iAlsaClient;
 };
 
 

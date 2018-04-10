@@ -87,7 +87,7 @@
         <translation type="unfinished">nオプションは引数として名前を必要とします。</translation>
     </message>
     <message>
-        <location filename="../qjackctlJackConnect.cpp" line="173"/>
+        <location filename="../qjackctlJackConnect.cpp" line="178"/>
         <source>%1 (%2 frames)</source>
         <translation type="unfinished"></translation>
     </message>

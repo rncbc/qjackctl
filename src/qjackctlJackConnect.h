@@ -1,7 +1,7 @@
 // qjackctlJackConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -57,23 +57,15 @@ class qjackctlJackPort : public qjackctlPortItem
 public:
 
 	// Constructor.
-	qjackctlJackPort(qjackctlJackClient *pClient, jack_port_t *pJackPort);
+	qjackctlJackPort(qjackctlJackClient *pClient, unsigned long ulPortFlags);
 	// Default destructor.
 	~qjackctlJackPort();
-
-	// Jack handles accessors.
-	jack_port_t *jackPort() const;
 
 	// Pretty/display name method (virtual override).
 	void updatePortName(bool bRename = false);
 
 	// Tooltip text builder (virtual override).
 	QString tooltip() const;
-
-private:
-
-	// Instance variables.
-	jack_port_t *m_pJackPort;
 };
 
 
@@ -88,7 +80,7 @@ public:
 	~qjackctlJackClient();
 
 	// Jack port lookup.
-	qjackctlJackPort *findJackPort(jack_port_t *pJackPort);
+	qjackctlJackPort *findJackPort(const QString& sPortName);
 
 	// Pretty/display name method (virtual override).
 	void updateClientName(bool bRename = false);
@@ -106,7 +98,7 @@ public:
 	~qjackctlJackClientList();
 
 	// Jack port lookup.
-	qjackctlJackPort *findJackClientPort(jack_port_t *pJackPort);
+	qjackctlJackPort *findJackClientPort(const QString& sClientPort);
 
 	// Client:port refreshner (return newest item count).
 	int updateClientPorts();

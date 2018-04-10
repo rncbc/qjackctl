@@ -1,7 +1,7 @@
 // qjackctlConnectionsForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -77,7 +77,7 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SLOT(audioExpandAll()));
 	QObject::connect(m_ui.AudioRefreshPushButton,
 		SIGNAL(clicked()),
-		SLOT(audioRefreshClear()));
+		SLOT(audioRefresh()));
 
 	QObject::connect(m_ui.MidiConnectPushButton,
 		SIGNAL(clicked()),
@@ -93,7 +93,7 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SLOT(midiExpandAll()));
 	QObject::connect(m_ui.MidiRefreshPushButton,
 		SIGNAL(clicked()),
-		SLOT(midiRefreshClear()));
+		SLOT(midiRefresh()));
 
 	QObject::connect(m_ui.AlsaConnectPushButton,
 		SIGNAL(clicked()),
@@ -109,7 +109,7 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 		SLOT(alsaExpandAll()));
 	QObject::connect(m_ui.AlsaRefreshPushButton,
 		SIGNAL(clicked()),
-		SLOT(alsaRefreshClear()));
+		SLOT(alsaRefresh()));
 
 	// Connect it to some UI feedback slots.
 	QObject::connect(m_ui.AudioConnectView->OListView(),
@@ -464,11 +464,6 @@ void qjackctlConnectionsForm::audioDisconnecting (
 
 
 // Refresh JACK audio form by notifying the parent form.
-void qjackctlConnectionsForm::audioRefreshClear (void)
-{
-	refreshAudio(true, true);
-}
-
 void qjackctlConnectionsForm::audioRefresh (void)
 {
 	refreshAudio(false);
@@ -544,11 +539,6 @@ void qjackctlConnectionsForm::midiDisconnecting (
 
 
 // Refresh JACK MIDI form by notifying the parent form.
-void qjackctlConnectionsForm::midiRefreshClear (void)
-{
-	refreshMidi(true, true);
-}
-
 void qjackctlConnectionsForm::midiRefresh (void)
 {
 	refreshMidi(false);
@@ -625,11 +615,6 @@ void qjackctlConnectionsForm::alsaDisconnecting (
 
 
 // Refresh complete form by notifying the parent form.
-void qjackctlConnectionsForm::alsaRefreshClear (void)
-{
-	refreshAlsa(true, true);
-}
-
 void qjackctlConnectionsForm::alsaRefresh (void)
 {
 	refreshAlsa(false);

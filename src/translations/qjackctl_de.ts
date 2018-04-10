@@ -87,7 +87,7 @@
         <translation>Option -n benötigt ein Argument (Name).</translation>
     </message>
     <message>
-        <location filename="../qjackctlJackConnect.cpp" line="173"/>
+        <location filename="../qjackctlJackConnect.cpp" line="178"/>
         <source>%1 (%2 frames)</source>
         <translation type="unfinished"></translation>
     </message>

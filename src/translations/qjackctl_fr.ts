@@ -87,7 +87,7 @@
         <translation>Régler le nom du préréglage des paramètres par défaut</translation>
     </message>
     <message>
-        <location filename="../qjackctlJackConnect.cpp" line="173"/>
+        <location filename="../qjackctlJackConnect.cpp" line="178"/>
         <source>%1 (%2 frames)</source>
         <translation>%1 (%2 échantillons)</translation>
     </message>

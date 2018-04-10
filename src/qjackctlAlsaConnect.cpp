@@ -1,7 +1,7 @@
 // qjackctlAlsaConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2014, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -31,12 +31,9 @@
 //
 
 // Constructor.
-qjackctlAlsaPort::qjackctlAlsaPort (
-	qjackctlAlsaClient *pClient, int iAlsaPort )
+qjackctlAlsaPort::qjackctlAlsaPort ( qjackctlAlsaClient *pClient )
 	: qjackctlPortItem(pClient)
 {
-	m_iAlsaPort = iAlsaPort;
-
 	qjackctlAlsaConnect *pAlsaConnect
 		= static_cast<qjackctlAlsaConnect *> (
 			((pClient->clientList())->listView())->binding());
@@ -66,7 +63,7 @@ int qjackctlAlsaPort::alsaClient (void) const
 
 int qjackctlAlsaPort::alsaPort (void) const
 {
-	return m_iAlsaPort;
+	return portName().section(':', 0, 0).toInt();
 }
 
 
@@ -75,12 +72,9 @@ int qjackctlAlsaPort::alsaPort (void) const
 //
 
 // Constructor.
-qjackctlAlsaClient::qjackctlAlsaClient (
-	qjackctlAlsaClientList *pClientList, int iAlsaClient )
+qjackctlAlsaClient::qjackctlAlsaClient ( qjackctlAlsaClientList *pClientList )
 	: qjackctlClientItem(pClientList)
 {
-	m_iAlsaClient = iAlsaClient;
-
 	qjackctlAlsaConnect *pAlsaConnect
 		= static_cast<qjackctlAlsaConnect *> (
 			(pClientList->listView())->binding());
@@ -105,7 +99,7 @@ qjackctlAlsaClient::~qjackctlAlsaClient (void)
 // Jack client accessor.
 int qjackctlAlsaClient::alsaClient (void) const
 {
-	return m_iAlsaClient;
+	return clientName().section(':', 0, 0).toInt();
 }
 
 
@@ -216,7 +210,7 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 					qjackctlAlsaPort *pPort = 0;
 					const int iAlsaPort = snd_seq_port_info_get_port(pPortInfo);
 					if (pClient == 0) {
-						pClient = new qjackctlAlsaClient(this, iAlsaClient);
+						pClient = new qjackctlAlsaClient(this);
 						pClient->setClientName(sClientName);
 						iDirtyCount++;
 					} else {
@@ -231,7 +225,7 @@ int qjackctlAlsaClientList::updateClientPorts (void)
 						sPortName += QString::fromUtf8(
 							snd_seq_port_info_get_name(pPortInfo));
 						if (pPort == 0) {
-							pPort = new qjackctlAlsaPort(pClient, iAlsaPort);
+							pPort = new qjackctlAlsaPort(pClient);
 							pPort->setPortName(sPortName);
 							iDirtyCount++;
 						} else if (sPortName != pPort->portName()) {
