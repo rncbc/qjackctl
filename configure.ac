@@ -576,6 +576,12 @@ if test "x$ac_jack_max_delay" = "xyes"; then
    AC_DEFINE(CONFIG_JACK_MAX_DELAY, 1, [Define if jack_get_max_delayed_usecs is available.])
 fi
 
+# Check for jack_set_port_rename_callback
+AC_CHECK_LIB(jack, jack_set_port_rename_callback, [ac_jack_port_rename="yes"], [ac_jack_port_rename="no"])
+if test "x$ac_jack_port_rename" = "xyes"; then
+   AC_DEFINE(CONFIG_JACK_PORT_RENAME, 1, [Define if jack_set_port_rename_callback is available.])
+fi
+
 # Check for jack_port_get_aliases function.
 if test "x$ac_jack_port_aliases" = "xyes"; then
    AC_CHECK_LIB(jack, jack_port_get_aliases, [ac_jack_port_aliases="yes"], [ac_jack_port_aliases="no"])

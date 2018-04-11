@@ -187,6 +187,8 @@ static int qjackctl_graph_order_callback ( void * )
 }
 
 
+#ifdef CONFIG_JACK_PORT_RENAME
+
 // Jack port rename callback funtion, called
 // whenever a jack port is renamed.
 static void qjackctl_port_rename_callback (
@@ -196,6 +198,8 @@ static void qjackctl_port_rename_callback (
 		qjackctlMainForm::getInstance(),
 		new QEvent(QJACKCTL_PORT_EVENT));
 }
+
+#endif
 
 
 // Jack XRUN callback function, called
@@ -2812,8 +2816,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		qjackctl_port_registration_callback, this);
 	jack_set_port_connect_callback(m_pJackClient,
 		qjackctl_port_connect_callback, this);
+#ifdef CONFIG_JACK_PORT_RENAME
 	jack_set_port_rename_callback(m_pJackClient,
 		qjackctl_port_rename_callback, this);
+#endif
 	jack_set_xrun_callback(m_pJackClient,
 		qjackctl_xrun_callback, this);
 	jack_set_buffer_size_callback(m_pJackClient,
