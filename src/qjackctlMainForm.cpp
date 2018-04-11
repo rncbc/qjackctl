@@ -140,9 +140,34 @@ static jack_nframes_t g_nframes = 0;
 
 static QProcess::ProcessError g_error = QProcess::UnknownError;
 
+
+// Jack client registration callback funtion, called
+// whenever a jack client is registered or unregistered.
+static void qjackctl_client_registration_callback (
+	const char *, int, void * )
+{
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_PORT_EVENT));
+}
+
+
+
 // Jack port registration callback funtion, called
 // whenever a jack port is registered or unregistered.
-static void qjackctl_port_registration_callback ( jack_port_id_t, int, void * )
+static void qjackctl_port_registration_callback (
+	jack_port_id_t, int, void * )
+{
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_PORT_EVENT));
+}
+
+
+// Jack port (dis)connection callback funtion, called
+// whenever a jack port is connected or disconnected.
+static void qjackctl_port_connect_callback (
+	jack_port_id_t, jack_port_id_t, int, void * )
 {
 	QApplication::postEvent(
 		qjackctlMainForm::getInstance(),
@@ -159,6 +184,17 @@ static int qjackctl_graph_order_callback ( void * )
 		new QEvent(QJACKCTL_PORT_EVENT));
 
 	return 0;
+}
+
+
+// Jack port rename callback funtion, called
+// whenever a jack port is renamed.
+static void qjackctl_port_rename_callback (
+	jack_port_id_t, const char *, const char *, void * )
+{
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_PORT_EVENT));
 }
 
 
@@ -2770,8 +2806,14 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	// Set notification callbacks.
 	jack_set_graph_order_callback(m_pJackClient,
 		qjackctl_graph_order_callback, this);
+	jack_set_client_registration_callback(m_pJackClient,
+		qjackctl_client_registration_callback, this);
 	jack_set_port_registration_callback(m_pJackClient,
 		qjackctl_port_registration_callback, this);
+	jack_set_port_connect_callback(m_pJackClient,
+		qjackctl_port_connect_callback, this);
+	jack_set_port_rename_callback(m_pJackClient,
+		qjackctl_port_rename_callback, this);
 	jack_set_xrun_callback(m_pJackClient,
 		qjackctl_xrun_callback, this);
 	jack_set_buffer_size_callback(m_pJackClient,
