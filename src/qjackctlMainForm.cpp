@@ -672,7 +672,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			snd_seq_port_subscribe_t *pAlsaSubs;
 			snd_seq_addr_t seq_addr;
 			struct pollfd pfd[1];
-			int iPort = snd_seq_create_simple_port(
+			const int iPort = snd_seq_create_simple_port(
 				m_pAlsaSeq,	"qjackctl",
 				SND_SEQ_PORT_CAP_WRITE
 				| SND_SEQ_PORT_CAP_SUBS_WRITE
@@ -2529,9 +2529,12 @@ void qjackctlMainForm::propNotifyEvent (void)
 void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 {
 #ifdef CONFIG_ALSA_SEQ
-	snd_seq_event_t *pAlsaEvent;
-	snd_seq_event_input(m_pAlsaSeq, &pAlsaEvent);
-	snd_seq_free_event(pAlsaEvent);
+	do {
+		snd_seq_event_t *pAlsaEvent;
+		snd_seq_event_input(m_pAlsaSeq, &pAlsaEvent);
+		snd_seq_free_event(pAlsaEvent);
+	}
+	while (snd_seq_event_input_pending(m_pAlsaSeq, 0) > 0);
 #endif
 	// Log some message here, if new.
 	if (m_iAlsaRefresh == 0)
