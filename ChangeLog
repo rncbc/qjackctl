@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Extended multi-selection is now supported on all Connections
+  client/port lists, allowing for multiple (dis)connections at
+  once. (EXPERIMENTAL)
+
 - Disable singleton/unique application instance setup logic
   when the display server platform is not X11. (EXPERIMENTAL)
 

@@ -261,12 +261,12 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1898"/>
+        <location filename="../qjackctlConnect.cpp" line="1954"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1899"/>
+        <location filename="../qjackctlConnect.cpp" line="1955"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -371,12 +371,12 @@ Are you sure?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="298"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="317"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="299"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="318"/>
         <source>The preset aliases have been changed:
 
 &quot;%1&quot;

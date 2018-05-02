@@ -113,6 +113,25 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 
 	// Connect it to some UI feedback slots.
 	QObject::connect(m_ui.AudioConnectView->OListView(),
+		SIGNAL(itemSelectionChanged()),
+		SLOT(audioStabilize()));
+	QObject::connect(m_ui.AudioConnectView->IListView(),
+		SIGNAL(itemSelectionChanged()),
+		SLOT(audioStabilize()));
+	QObject::connect(m_ui.MidiConnectView->OListView(),
+		SIGNAL(itemSelectionChanged()),
+		SLOT(midiStabilize()));
+	QObject::connect(m_ui.MidiConnectView->IListView(),
+		SIGNAL(itemSelectionChanged()),
+		SLOT(midiStabilize()));
+	QObject::connect(m_ui.AlsaConnectView->OListView(),
+		SIGNAL(itemSelectionChanged()),
+		SLOT(alsaStabilize()));
+	QObject::connect(m_ui.AlsaConnectView->IListView(),
+		SIGNAL(itemSelectionChanged()),
+		SLOT(alsaStabilize()));
+
+	QObject::connect(m_ui.AudioConnectView->OListView(),
 		SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		SLOT(audioStabilize()));
 	QObject::connect(m_ui.AudioConnectView->IListView(),

@@ -781,7 +781,7 @@ qjackctlClientListView::qjackctlClientListView (
 	QTreeWidget::setAcceptDrops(true);
 	QTreeWidget::setDropIndicatorShown(true);
 	QTreeWidget::setAutoScroll(true);
-	QTreeWidget::setSelectionMode(QAbstractItemView::SingleSelection);
+	QTreeWidget::setSelectionMode(QAbstractItemView::ExtendedSelection);
 	QTreeWidget::setSizePolicy(
 		QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 	QTreeWidget::setSortingEnabled(true);
@@ -1569,60 +1569,74 @@ bool qjackctlConnect::canConnectSelectedEx (void)
 	m_pConnectView->connectorView()->update();
 
 	// Now with our predicate work...
-	QTreeWidgetItem *pOItem = (m_pOClientList->listView())->currentItem();
-	if (pOItem == NULL)
+	const QList<QTreeWidgetItem *> oitems
+		= (m_pOClientList->listView())->selectedItems();
+	const QList<QTreeWidgetItem *> iitems
+		= (m_pIClientList->listView())->selectedItems();
+
+	if (oitems.isEmpty() || iitems.isEmpty())
 		return false;
 
-	QTreeWidgetItem *pIItem = (m_pIClientList->listView())->currentItem();
-	if (pIItem == NULL)
-		return false;
+	QListIterator<QTreeWidgetItem *> oiter(oitems);
+	QListIterator<QTreeWidgetItem *> iiter(iitems);
 
-	if (pOItem->type() == QJACKCTL_CLIENTITEM) {
-		qjackctlClientItem *pOClient
-			= static_cast<qjackctlClientItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// Each-to-each connections...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (oport.hasNext() && iport.hasNext()) {
-				qjackctlPortItem *pOPort = oport.next();
-				qjackctlPortItem *pIPort = iport.next();
-				if (pOPort->findConnectPtr(pIPort) == NULL)
-					return true;
+	const int iNumItems
+		= qMax(oitems.count(), iitems.count());
+
+	for (int i = 0; i < iNumItems; ++i) {
+		if (!oiter.hasNext())
+			oiter.toFront();
+		if (!iiter.hasNext())
+			iiter.toFront();
+		QTreeWidgetItem *pOItem = oiter.next();
+		QTreeWidgetItem *pIItem = iiter.next();
+		if (pOItem->type() == QJACKCTL_CLIENTITEM) {
+			qjackctlClientItem *pOClient
+				= static_cast<qjackctlClientItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// Each-to-each connections...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (oport.hasNext() && iport.hasNext()) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort = iport.next();
+					if (pOPort->findConnectPtr(pIPort) == NULL)
+						return true;
+				}
+			} else {
+				// Many(all)-to-one/many connection...
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				while (oport.hasNext()
+					&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort
+						= static_cast<qjackctlPortItem *> (pIItem);
+					if (pOPort->findConnectPtr(pIPort) == NULL)
+						return true;
+					pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
+				}
 			}
 		} else {
-			// Many(all)-to-one/many connection...
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()
-				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
-				qjackctlPortItem *pOPort = oport.next();
+			qjackctlPortItem *pOPort
+				= static_cast<qjackctlPortItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// One-to-many(all) connection...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (iport.hasNext()) {
+					qjackctlPortItem *pIPort = iport.next();
+					if (pOPort->findConnectPtr(pIPort) == NULL)
+						return true;
+				}
+			} else {
+				// One-to-one connection...
 				qjackctlPortItem *pIPort
 					= static_cast<qjackctlPortItem *> (pIItem);
-				if (pOPort->findConnectPtr(pIPort) == NULL)
-					return true;
-				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
+				return (pOPort->findConnectPtr(pIPort) == NULL);
 			}
-		}
-	} else {
-		qjackctlPortItem *pOPort
-			= static_cast<qjackctlPortItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// One-to-many(all) connection...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (iport.hasNext()) {
-				qjackctlPortItem *pIPort = iport.next();
-				if (pOPort->findConnectPtr(pIPort) == NULL)
-					return true;
-			}
-		} else {
-			// One-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
-			return (pOPort->findConnectPtr(pIPort) == NULL);
 		}
 	}
 
@@ -1650,57 +1664,71 @@ bool qjackctlConnect::connectSelected (void)
 
 bool qjackctlConnect::connectSelectedEx (void)
 {
-	QTreeWidgetItem *pOItem = (m_pOClientList->listView())->currentItem();
-	if (pOItem == NULL)
+	const QList<QTreeWidgetItem *> oitems
+		= (m_pOClientList->listView())->selectedItems();
+	const QList<QTreeWidgetItem *> iitems
+		= (m_pIClientList->listView())->selectedItems();
+
+	if (oitems.isEmpty() || iitems.isEmpty())
 		return false;
 
-	QTreeWidgetItem *pIItem = (m_pIClientList->listView())->currentItem();
-	if (pIItem == NULL)
-		return false;
+	QListIterator<QTreeWidgetItem *> oiter(oitems);
+	QListIterator<QTreeWidgetItem *> iiter(iitems);
 
-	if (pOItem->type() == QJACKCTL_CLIENTITEM) {
-		qjackctlClientItem *pOClient
-			= static_cast<qjackctlClientItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// Each-to-each connections...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (oport.hasNext() && iport.hasNext()) {
-				qjackctlPortItem *pOPort = oport.next();
-				qjackctlPortItem *pIPort = iport.next();
-				connectPortsEx(pOPort, pIPort);
+	const int iNumItems
+		= qMax(oitems.count(), iitems.count());
+
+	for (int i = 0; i < iNumItems; ++i) {
+		if (!oiter.hasNext())
+			oiter.toFront();
+		if (!iiter.hasNext())
+			iiter.toFront();
+		QTreeWidgetItem *pOItem = oiter.next();
+		QTreeWidgetItem *pIItem = iiter.next();
+		if (pOItem->type() == QJACKCTL_CLIENTITEM) {
+			qjackctlClientItem *pOClient
+				= static_cast<qjackctlClientItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// Each-to-each connections...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (oport.hasNext() && iport.hasNext()) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort = iport.next();
+					connectPortsEx(pOPort, pIPort);
+				}
+			} else {
+				// Many(all)-to-one/many connection...
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				while (oport.hasNext()
+					&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort
+						= static_cast<qjackctlPortItem *> (pIItem);
+					connectPortsEx(pOPort, pIPort);
+					pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
+				}
 			}
 		} else {
-			// Many(all)-to-one/many connection...
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()
-				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
-				qjackctlPortItem *pOPort = oport.next();
+			qjackctlPortItem *pOPort
+				= static_cast<qjackctlPortItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// One-to-many(all) connection...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (iport.hasNext()) {
+					qjackctlPortItem *pIPort = iport.next();
+					connectPortsEx(pOPort, pIPort);
+				}
+			} else {
+				// One-to-one connection...
 				qjackctlPortItem *pIPort
 					= static_cast<qjackctlPortItem *> (pIItem);
 				connectPortsEx(pOPort, pIPort);
-				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
 			}
-		}
-	} else {
-		qjackctlPortItem *pOPort
-			= static_cast<qjackctlPortItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// One-to-many(all) connection...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (iport.hasNext()) {
-				qjackctlPortItem *pIPort = iport.next();
-				connectPortsEx(pOPort, pIPort);
-			}
-		} else {
-			// One-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
-			connectPortsEx(pOPort, pIPort);
 		}
 	}
 
@@ -1723,60 +1751,74 @@ bool qjackctlConnect::canDisconnectSelected (void)
 
 bool qjackctlConnect::canDisconnectSelectedEx (void)
 {
-	QTreeWidgetItem *pOItem = (m_pOClientList->listView())->currentItem();
-	if (!pOItem)
+	const QList<QTreeWidgetItem *> oitems
+		= (m_pOClientList->listView())->selectedItems();
+	const QList<QTreeWidgetItem *> iitems
+		= (m_pIClientList->listView())->selectedItems();
+
+	if (oitems.isEmpty() || iitems.isEmpty())
 		return false;
 
-	QTreeWidgetItem *pIItem = (m_pIClientList->listView())->currentItem();
-	if (!pIItem)
-		return false;
+	QListIterator<QTreeWidgetItem *> oiter(oitems);
+	QListIterator<QTreeWidgetItem *> iiter(iitems);
 
-	if (pOItem->type() == QJACKCTL_CLIENTITEM) {
-		qjackctlClientItem *pOClient
-			= static_cast<qjackctlClientItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// Each-to-each connections...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (oport.hasNext() && iport.hasNext()) {
-				qjackctlPortItem *pOPort = oport.next();
-				qjackctlPortItem *pIPort = iport.next();
-				if (pOPort->findConnectPtr(pIPort) != NULL)
-					return true;
+	const int iNumItems
+		= qMax(oitems.count(), iitems.count());
+
+	for (int i = 0; i < iNumItems; ++i) {
+		if (!oiter.hasNext())
+			oiter.toFront();
+		if (!iiter.hasNext())
+			iiter.toFront();
+		QTreeWidgetItem *pOItem = oiter.next();
+		QTreeWidgetItem *pIItem = iiter.next();
+		if (pOItem->type() == QJACKCTL_CLIENTITEM) {
+			qjackctlClientItem *pOClient
+				= static_cast<qjackctlClientItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// Each-to-each connections...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (oport.hasNext() && iport.hasNext()) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort = iport.next();
+					if (pOPort->findConnectPtr(pIPort) != NULL)
+						return true;
+				}
+			} else {
+				// Many(all)-to-one/many connection...
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				while (oport.hasNext()
+					&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort
+						= static_cast<qjackctlPortItem *> (pIItem);
+					if (pOPort->findConnectPtr(pIPort) != NULL)
+						return true;
+					pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
+				}
 			}
 		} else {
-			// Many(all)-to-one/many connection...
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()
-				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
-				qjackctlPortItem *pOPort = oport.next();
+			qjackctlPortItem *pOPort
+				= static_cast<qjackctlPortItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// One-to-many(all) connection...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (iport.hasNext()) {
+					qjackctlPortItem *pIPort = iport.next();
+					if (pOPort->findConnectPtr(pIPort) != NULL)
+						return true;
+				}
+			} else {
+				// One-to-one connection...
 				qjackctlPortItem *pIPort
 					= static_cast<qjackctlPortItem *> (pIItem);
-				if (pOPort->findConnectPtr(pIPort) != NULL)
-					return true;
-				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
+				return (pOPort->findConnectPtr(pIPort) != NULL);
 			}
-		}
-	} else {
-		qjackctlPortItem *pOPort
-			= static_cast<qjackctlPortItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// One-to-many(all) connection...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (iport.hasNext()) {
-				qjackctlPortItem *pIPort = iport.next();
-				if (pOPort->findConnectPtr(pIPort) != NULL)
-					return true;
-			}
-		} else {
-			// One-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
-			return (pOPort->findConnectPtr(pIPort) != NULL);
 		}
 	}
 
@@ -1804,57 +1846,71 @@ bool qjackctlConnect::disconnectSelected (void)
 
 bool qjackctlConnect::disconnectSelectedEx (void)
 {
-	QTreeWidgetItem *pOItem = (m_pOClientList->listView())->currentItem();
-	if (pOItem == NULL)
+	const QList<QTreeWidgetItem *> oitems
+		= (m_pOClientList->listView())->selectedItems();
+	const QList<QTreeWidgetItem *> iitems
+		= (m_pIClientList->listView())->selectedItems();
+
+	if (oitems.isEmpty() || iitems.isEmpty())
 		return false;
 
-	QTreeWidgetItem *pIItem = (m_pIClientList->listView())->currentItem();
-	if (pIItem == NULL)
-		return false;
+	QListIterator<QTreeWidgetItem *> oiter(oitems);
+	QListIterator<QTreeWidgetItem *> iiter(iitems);
 
-	if (pOItem->type() == QJACKCTL_CLIENTITEM) {
-		qjackctlClientItem *pOClient
-			= static_cast<qjackctlClientItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// Each-to-each connections...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (oport.hasNext() && iport.hasNext()) {
-				qjackctlPortItem *pOPort = oport.next();
-				qjackctlPortItem *pIPort = iport.next();
-				disconnectPortsEx(pOPort, pIPort);
+	const int iNumItems
+		= qMax(oitems.count(), iitems.count());
+
+	for (int i = 0; i < iNumItems; ++i) {
+		if (!oiter.hasNext())
+			oiter.toFront();
+		if (!iiter.hasNext())
+			iiter.toFront();
+		QTreeWidgetItem *pOItem = oiter.next();
+		QTreeWidgetItem *pIItem = iiter.next();
+		if (pOItem->type() == QJACKCTL_CLIENTITEM) {
+			qjackctlClientItem *pOClient
+				= static_cast<qjackctlClientItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// Each-to-each connections...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (oport.hasNext() && iport.hasNext()) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort = iport.next();
+					disconnectPortsEx(pOPort, pIPort);
+				}
+			} else {
+				// Many(all)-to-one/many connection...
+				QListIterator<qjackctlPortItem *> oport(pOClient->ports());
+				while (oport.hasNext()
+					&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
+					qjackctlPortItem *pOPort = oport.next();
+					qjackctlPortItem *pIPort
+						= static_cast<qjackctlPortItem *> (pIItem);
+					disconnectPortsEx(pOPort, pIPort);
+					pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
+				}
 			}
 		} else {
-			// Many(all)-to-one/many connection...
-			QListIterator<qjackctlPortItem *> oport(pOClient->ports());
-			while (oport.hasNext()
-				&& pIItem && pIItem->type() == QJACKCTL_PORTITEM) {
-				qjackctlPortItem *pOPort = oport.next();
+			qjackctlPortItem *pOPort
+				= static_cast<qjackctlPortItem *> (pOItem);
+			if (pIItem->type() == QJACKCTL_CLIENTITEM) {
+				// One-to-many(all) connection...
+				qjackctlClientItem *pIClient
+					= static_cast<qjackctlClientItem *> (pIItem);
+				QListIterator<qjackctlPortItem *> iport(pIClient->ports());
+				while (iport.hasNext()) {
+					qjackctlPortItem *pIPort = iport.next();
+					disconnectPortsEx(pOPort, pIPort);
+				}
+			} else {
+				// One-to-one connection...
 				qjackctlPortItem *pIPort
 					= static_cast<qjackctlPortItem *> (pIItem);
 				disconnectPortsEx(pOPort, pIPort);
-				pIItem = (m_pIClientList->listView())->itemBelow(pIItem);
 			}
-		}
-	} else {
-		qjackctlPortItem *pOPort
-			= static_cast<qjackctlPortItem *> (pOItem);
-		if (pIItem->type() == QJACKCTL_CLIENTITEM) {
-			// One-to-many(all) connection...
-			qjackctlClientItem *pIClient
-				= static_cast<qjackctlClientItem *> (pIItem);
-			QListIterator<qjackctlPortItem *> iport(pIClient->ports());
-			while (iport.hasNext()) {
-				qjackctlPortItem *pIPort = iport.next();
-				disconnectPortsEx(pOPort, pIPort);
-			}
-		} else {
-			// One-to-one connection...
-			qjackctlPortItem *pIPort
-				= static_cast<qjackctlPortItem *> (pIItem);
-			disconnectPortsEx(pOPort, pIPort);
 		}
 	}
 
