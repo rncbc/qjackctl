@@ -8,10 +8,13 @@ headers = \
 	src/config.h \
 	src/qjackctlAbout.h \
 	src/qjackctlAlsaConnect.h \
+	src/qjackctlAlsaGraph.h \
 	src/qjackctlConnect.h \
 	src/qjackctlConnectAlias.h \
+	src/qjackctlGraph.h \
 	src/qjackctlInterfaceComboBox.h \
 	src/qjackctlJackConnect.h \
+	src/qjackctlJackGraph.h \
 	src/qjackctlPatchbay.h \
 	src/qjackctlPatchbayFile.h \
 	src/qjackctlPatchbayRack.h \
@@ -21,6 +24,7 @@ headers = \
 	src/qjackctlSystemTray.h \
 	src/qjackctlAboutForm.h \
 	src/qjackctlConnectionsForm.h \
+	src/qjackctlGraphForm.h \
 	src/qjackctlMainForm.h \
 	src/qjackctlMessagesStatusForm.h \
 	src/qjackctlPatchbayForm.h \
@@ -31,10 +35,13 @@ headers = \
 sources = \
 	src/qjackctl.cpp \
 	src/qjackctlAlsaConnect.cpp \
+	src/qjackctlAlsaGraph.cpp \
 	src/qjackctlConnect.cpp \
 	src/qjackctlConnectAlias.cpp \
+	src/qjackctlGraph.cpp \
 	src/qjackctlInterfaceComboBox.cpp \
 	src/qjackctlJackConnect.cpp \
+	src/qjackctlJackGraph.cpp \
 	src/qjackctlPatchbay.cpp \
 	src/qjackctlPatchbayFile.cpp \
 	src/qjackctlPatchbayRack.cpp \
@@ -43,6 +50,7 @@ sources = \
 	src/qjackctlSystemTray.cpp \
 	src/qjackctlAboutForm.cpp \
 	src/qjackctlConnectionsForm.cpp \
+	src/qjackctlGraphForm.cpp \
 	src/qjackctlMainForm.cpp \
 	src/qjackctlMessagesStatusForm.cpp \
 	src/qjackctlPatchbayForm.cpp \
@@ -53,6 +61,7 @@ sources = \
 forms = \
 	src/qjackctlAboutForm.ui \
 	src/qjackctlConnectionsForm.ui \
+	src/qjackctlGraphForm.ui \
 	src/qjackctlMainForm.ui \
 	src/qjackctlMessagesStatusForm.ui \
 	src/qjackctlPatchbayForm.ui \

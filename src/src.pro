@@ -12,10 +12,13 @@ include(src.pri)
 HEADERS += config.h \
 	qjackctlAbout.h \
 	qjackctlAlsaConnect.h \
+	qjackctlAlsaGraph.h \
 	qjackctlConnect.h \
 	qjackctlConnectAlias.h \
+	qjackctlGraph.h \
 	qjackctlInterfaceComboBox.h \
 	qjackctlJackConnect.h \
+	qjackctlJackGraph.h \
 	qjackctlPatchbay.h \
 	qjackctlPatchbayFile.h \
 	qjackctlPatchbayRack.h \
@@ -25,6 +28,7 @@ HEADERS += config.h \
 	qjackctlSystemTray.h \
 	qjackctlAboutForm.h \
 	qjackctlConnectionsForm.h \
+	qjackctlGraphForm.h \
 	qjackctlMainForm.h \
 	qjackctlMessagesStatusForm.h \
 	qjackctlPatchbayForm.h \
@@ -35,10 +39,13 @@ HEADERS += config.h \
 SOURCES += \
 	qjackctl.cpp \
 	qjackctlAlsaConnect.cpp \
+	qjackctlAlsaGraph.cpp \
 	qjackctlConnect.cpp \
 	qjackctlConnectAlias.cpp \
+	qjackctlGraph.cpp \
 	qjackctlInterfaceComboBox.cpp \
 	qjackctlJackConnect.cpp \
+	qjackctlJackGraph.cpp \
 	qjackctlPatchbay.cpp \
 	qjackctlPatchbayFile.cpp \
 	qjackctlPatchbayRack.cpp \
@@ -47,6 +54,7 @@ SOURCES += \
 	qjackctlSystemTray.cpp \
 	qjackctlAboutForm.cpp \
 	qjackctlConnectionsForm.cpp \
+	qjackctlGraphForm.cpp \
 	qjackctlMainForm.cpp \
 	qjackctlMessagesStatusForm.cpp \
 	qjackctlPatchbayForm.cpp \
@@ -57,6 +65,7 @@ SOURCES += \
 FORMS += \
 	qjackctlAboutForm.ui \
 	qjackctlConnectionsForm.ui \
+	qjackctlGraphForm.ui \
 	qjackctlMainForm.ui \
 	qjackctlMessagesStatusForm.ui \
 	qjackctlPatchbayForm.ui \

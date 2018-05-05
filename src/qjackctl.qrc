@@ -48,9 +48,22 @@
   <file>images/displaybg1.png</file>
   <file>images/down1.png</file>
   <file>images/edit1.png</file>
+  <file>images/error1.png</file>
   <file>images/expandall1.png</file>
   <file>images/forward1.png</file>
-  <file>images/error1.png</file>
+  <file>images/graph1.png</file>
+  <file>images/graphAlsa.png</file>
+  <file>images/graphCenter.png</file>
+  <file>images/graphConnect.png</file>
+  <file>images/graphDisconnect.png</file>
+  <file>images/graphJack.png</file>
+  <file>images/graphRedo.png</file>
+  <file>images/graphUndo.png</file>
+  <file>images/graphZoomFit.png</file>
+  <file>images/graphZoomIn.png</file>
+  <file>images/graphZoomOut.png</file>
+  <file>images/graphZoomReset.png</file>
+  <file>images/graphZoomTool.png</file>
   <file>images/mclienti.png</file>
   <file>images/mclienti_32x32.png</file>
   <file>images/mclienti_64x64.png</file>
