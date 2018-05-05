@@ -380,11 +380,13 @@ void qjackctlGraphForm::connected (
 		m_jack->connectPorts(port1, port2, true);
 		jack_changed();
 	}
+#ifdef CONFIG_ALSA_SEQ
 	else
 	if (qjackctlAlsaGraph::isPortType(port1->portType())) {
 		m_alsa->connectPorts(port1, port2, true);
 		alsa_changed();
 	}
+#endif
 
 	stabilize();
 }
@@ -397,11 +399,13 @@ void qjackctlGraphForm::disconnected (
 		m_jack->connectPorts(port1, port2, false);
 		jack_changed();
 	}
+#ifdef CONFIG_ALSA_SEQ
 	else
 	if (qjackctlAlsaGraph::isPortType(port1->portType())) {
 		m_alsa->connectPorts(port1, port2, false);
 		alsa_changed();
 	}
+#endif
 
 	stabilize();
 }
