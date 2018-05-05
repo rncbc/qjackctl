@@ -57,6 +57,13 @@ public:
 	// Destructor.
 	~qjackctlGraphForm();
 
+public slots:
+
+	// Graph section slots.
+	void jack_shutdown();
+	void jack_changed();
+	void alsa_changed();
+
 protected slots:
 
 	// Node life-cycle slots
@@ -66,11 +73,6 @@ protected slots:
 	// Port (dis)connection slots.
 	void connected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void disconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
-
-	// Graph section slots.
-	void jack_shutdown();
-	void jack_changed();
-	void alsa_changed();
 
 	// Pseudo-asynchronous timed refreshner.
 	void refresh();
