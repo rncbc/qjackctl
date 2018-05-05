@@ -25,6 +25,23 @@
 #include "ui_qjackctlGraphForm.h"
 
 
+// Forward decls.
+class qjackctlGraphConfig;
+
+class qjackctlAlsaGraph;
+class qjackctlJackGraph;
+
+class qjackctlGraphPort;
+
+class QResizeEvent;
+class QCloseEvent;
+
+
+// Forwards decls.
+class QSettings;
+class QMainWindow;
+
+
 //----------------------------------------------------------------------------
 // qjackctlGraphForm -- UI wrapper form.
 
@@ -35,14 +52,124 @@ class qjackctlGraphForm : public QMainWindow
 public:
 
 	// Constructor.
-	qjackctlGraphForm(QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
+	qjackctlGraphForm(QWidget *parent = 0, Qt::WindowFlags wflags = 0);
+
 	// Destructor.
 	~qjackctlGraphForm();
+
+protected slots:
+
+	// Node life-cycle slots
+	void added(qjackctlGraphNode *node);
+	void removed(qjackctlGraphNode *node);
+
+	// Port (dis)connection slots.
+	void connected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
+	void disconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
+
+	// Graph section slots.
+	void jack_shutdown();
+	void jack_changed();
+	void alsa_changed();
+
+	// Pseudo-asynchronous timed refreshner.
+	void refresh();
+
+	// Graph selection change slot.
+	void stabilize();
+
+	// Tool-bar orientation change slot.
+	void orientationChanged(Qt::Orientation orientation);
+
+	// Main menu slots.
+	void graphExit();
+
+	void viewMenubar(bool on);
+	void viewToolbar(bool on);
+	void viewStatusbar(bool on);
+
+	void viewTextBesideIcons(bool on);
+
+	void viewCenter();
+	void viewRefresh();
+
+	void helpAbout();
+	void helpAboutQt();
+
+protected:
+
+	// Context-menu event handler.
+	void contextMenuEvent(QContextMenuEvent *pContextMenuEvent);
+
+	// Widget resize event handler.
+	void resizeEvent(QResizeEvent *pResizeEvent);
+
+	// Widget close event handler.
+	void closeEvent(QCloseEvent *pCloseEvent);
 
 private:
 
 	// The Qt-designer UI struct...
 	Ui::qjackctlGraphForm m_ui;
+
+	// Instance variables.
+	qjackctlGraphConfig *m_config;
+
+	// Instance variables.
+	qjackctlJackGraph *m_jack;
+	qjackctlAlsaGraph *m_alsa;
+
+	int m_jack_changed;
+	int m_alsa_changed;
+
+	int m_ins, m_mids, m_outs;
+};
+
+
+//----------------------------------------------------------------------------
+// qjackctlGraphConfig --  Canvas state memento.
+
+class qjackctlGraphConfig
+{
+public:
+
+	// Constructor.
+	qjackctlGraphConfig(QSettings *settings, bool owner = false);
+	qjackctlGraphConfig(const QString& org_name, const QString& app_name);
+
+	// Destructor.
+	~qjackctlGraphConfig();
+
+	// Accessors.
+	void setSettings(QSettings *settings, bool owner = false);
+	QSettings *settings() const;
+
+	void setMenubar(bool menubar);
+	bool isMenubar() const;
+
+	void setToolbar(bool toolbar);
+	bool isToolbar() const;
+
+	void setStatusbar(bool statusbar);
+	bool isStatusbar() const;
+
+	void setTextBesideIcons(bool texticons);
+	bool isTextBesideIcons() const;
+
+	// Graph main-widget state methods.
+	bool restoreState(QMainWindow *widget);
+	bool saveState(QMainWindow *widget) const;
+
+private:
+
+	// Instance variables.
+	QSettings *m_settings;
+	bool       m_owner;
+
+	bool       m_menubar;
+	bool       m_toolbar;
+	bool       m_statusbar;
+	bool       m_texticons;
 };
 
 

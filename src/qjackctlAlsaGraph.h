@@ -25,7 +25,58 @@
 #include "qjackctlAbout.h"
 #include "qjackctlGraph.h"
 
-//...
+
+#ifdef CONFIG_ALSA_SEQ
+
+#include <alsa/asoundlib.h>
+
+#include <QMutex>
+
+
+//----------------------------------------------------------------------------
+// qjackctlAlsaGraph -- ALSA graph driver
+
+class qjackctlAlsaGraph : public qjackctlGraphSect
+{
+public:
+
+	// Constructor.
+	qjackctlAlsaGraph(qjackctlGraphCanvas *canvas);
+
+	// ALSA port (dis)connection.
+	void connectPorts(
+		qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect);
+
+	// ALSA graph updaters.
+	void updateItems();
+	void clearItems();
+
+	// ALSA node type inquirer.
+	static bool isNodeType(int node_type);
+	// ALSA node type.
+	static int nodeType();
+
+	// ALSA port type inquirer.
+	static bool isPortType(int port_type);
+	// ALSA port type.
+	static int portType();
+
+protected:
+
+	// ALSA client:port finder and creator if not existing.
+	bool findClientPort(snd_seq_client_info_t *client_info,
+		snd_seq_port_info_t *port_info, qjackctlGraphItem::Mode port_mode,
+		qjackctlGraphNode **node, qjackctlGraphPort **port, bool add_new);
+
+private:
+
+	// Notifier sanity mutex.
+	static QMutex g_mutex;
+};
+
+
+#endif	// CONFIG_ALSA_SEQ
+
 
 #endif  // __qjackctlAlsaGraph_h
 

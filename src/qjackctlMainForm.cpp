@@ -846,6 +846,13 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 }
 
 
+// Setup accessor.
+qjackctlSetup *qjackctlMainForm::setup (void) const
+{
+	return m_pSetup;
+}
+
+
 // Window close event handlers.
 bool qjackctlMainForm::queryClose (void)
 {

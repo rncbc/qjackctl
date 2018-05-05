@@ -25,7 +25,53 @@
 #include "qjackctlAbout.h"
 #include "qjackctlGraph.h"
 
-//...
+#include <jack/jack.h>
+
+#include <QMutex>
+
+
+//----------------------------------------------------------------------------
+// qjackctlJackGraph -- JACK graph driver
+
+class qjackctlJackGraph : public qjackctlGraphSect
+{
+public:
+
+	// Constructor.
+	qjackctlJackGraph(qjackctlGraphCanvas *canvas);
+
+	// JACK port (dis)connection.
+	void connectPorts(
+		qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect);
+
+	// JACK graph updaters.
+	void updateItems();
+	void clearItems();
+
+	// JACK node type inquirer.
+	static bool isNodeType(int node_type);
+	// JACK node type.
+	static int nodeType();
+
+	// JACK port type(s) inquirer.
+	static bool isPortType(int port_type);
+
+	static bool isAudioPortType(int port_type);
+	static bool isMidiPortType(int port_type);
+
+protected:
+
+	// JACK client:port finder and creator if not existing.
+	bool findClientPort(jack_client_t *client,
+		const char *client_port, qjackctlGraphItem::Mode port_mode,
+		qjackctlGraphNode **node, qjackctlGraphPort **port, bool add_new);
+
+private:
+
+	// Callback sanity mutex.
+	static QMutex g_mutex;
+};
+
 
 #endif  // __qjackctlJackGraph_h
 

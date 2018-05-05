@@ -79,7 +79,8 @@ public:
 
 	static qjackctlMainForm *getInstance();
 
-	bool setup(qjackctlSetup * pSetup);
+	bool setup(qjackctlSetup *pSetup);
+	qjackctlSetup *setup() const;
 
 	jack_client_t *jackClient() const;
 	snd_seq_t *alsaSeq() const;
@@ -131,6 +132,9 @@ public slots:
 	void stopJack();
 	void toggleJack();
 
+	void showSetupForm();
+	void showAboutForm();
+
 	void resetXrunStats();
 
 	void commitData(QSessionManager& sm);
@@ -162,9 +166,6 @@ protected slots:
 	void toggleSessionForm();
 	void toggleConnectionsForm();
 	void togglePatchbayForm();
-
-	void showSetupForm();
-	void showAboutForm();
 
 	void transportRewind();
 	void transportBackward();
