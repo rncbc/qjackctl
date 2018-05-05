@@ -44,6 +44,7 @@ typedef void snd_seq_t;
 class qjackctlSetup;
 class qjackctlSetupForm;
 class qjackctlMessagesStatusForm;
+class qjackctlGraphForm;
 class qjackctlSessionForm;
 class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
@@ -163,6 +164,7 @@ protected slots:
 	void toggleMessagesStatusForm();
 	void toggleMessagesForm();
 	void toggleStatusForm();
+	void toggleGraphForm();
 	void toggleSessionForm();
 	void toggleConnectionsForm();
 	void togglePatchbayForm();
@@ -325,6 +327,8 @@ private:
 	QTime m_tResetLast;
 
 	qjackctlMessagesStatusForm *m_pMessagesStatusForm;
+
+	qjackctlGraphForm       *m_pGraphForm;
 	qjackctlSessionForm     *m_pSessionForm;
 	qjackctlConnectionsForm *m_pConnectionsForm;
 	qjackctlPatchbayForm    *m_pPatchbayForm;

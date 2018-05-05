@@ -25,11 +25,13 @@
 #include "qjackctlJackGraph.h"
 #include "qjackctlAlsaGraph.h"
 
+#include "qjackctlSetup.h"
+
 #include "qjackctlMainForm.h"
 
 #include "qjackctlSetup.h"
 
-#include <QTimer>
+//#include <QTimer>
 #include <QMenu>
 
 #include <QMessageBox>
@@ -46,26 +48,14 @@
 // Constructor.
 qjackctlGraphForm::qjackctlGraphForm (
 	QWidget *parent, Qt::WindowFlags wflags )
-	: QMainWindow(parent, wflags), m_config(NULL)
+	: QMainWindow(parent, wflags), m_config(NULL), m_jack(NULL), m_alsa(NULL)
 {
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm) {
-		qjackctlSetup *pSetup = pMainForm->setup();
-		if (pSetup)
-			m_config = new qjackctlGraphConfig(&pSetup->settings());
-	}
-
-	if (m_config)
-		m_ui.graphCanvas->setSettings(m_config->settings());
-
 	m_jack = new qjackctlJackGraph(m_ui.graphCanvas);
 #ifdef CONFIG_ALSA_SEQ
 	m_alsa = new qjackctlAlsaGraph(m_ui.graphCanvas);
-#else
-	m_alsa = NULL;
 #endif
 
 	m_jack_changed = 0;
@@ -85,15 +75,15 @@ qjackctlGraphForm::qjackctlGraphForm (
     redo_action->setStatusTip(tr("Redo last (dis)connection"));
     redo_action->setShortcuts(QKeySequence::Redo);
 
-	QAction *before = m_ui.editSelectAllAction;
-	m_ui.editMenu->insertAction(before, undo_action);
-	m_ui.editMenu->insertAction(before, redo_action);
-	m_ui.editMenu->insertSeparator(before);
+	QAction *before_action = m_ui.editSelectAllAction;
+	m_ui.editMenu->insertAction(before_action, undo_action);
+	m_ui.editMenu->insertAction(before_action, redo_action);
+	m_ui.editMenu->insertSeparator(before_action);
 
-	before = m_ui.viewCenterAction;
-	m_ui.ToolBar->insertAction(before, undo_action);
-	m_ui.ToolBar->insertAction(before, redo_action);
-	m_ui.ToolBar->insertSeparator(before);
+	before_action = m_ui.viewCenterAction;
+	m_ui.ToolBar->insertAction(before_action, undo_action);
+	m_ui.ToolBar->insertAction(before_action, redo_action);
+	m_ui.ToolBar->insertSeparator(before_action);
 
 	QObject::connect(m_ui.graphCanvas,
 		SIGNAL(added(qjackctlGraphNode *)),
@@ -182,6 +172,31 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QObject::connect(m_ui.ToolBar,
 		SIGNAL(orientationChanged(Qt::Orientation)),
 		SLOT(orientationChanged(Qt::Orientation)));
+}
+
+
+// Destructor.
+qjackctlGraphForm::~qjackctlGraphForm (void)
+{
+	if (m_jack)
+		delete m_jack;
+#ifdef CONFIG_ALSA_SEQ
+	if (m_alsa)
+		delete m_alsa;
+#endif
+	if (m_config)
+		delete m_config;
+}
+
+
+// Set reference to global options, mostly needed for the
+// initial sizes of the main splitter views and those
+// client/port aliasing feature.
+void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
+{
+	m_config = new qjackctlGraphConfig(&pSetup->settings());
+
+	m_ui.graphCanvas->setSettings(m_config->settings());
 
 	m_config->restoreState(this);
 
@@ -208,18 +223,7 @@ qjackctlGraphForm::qjackctlGraphForm (
 	jack_changed();
 	alsa_changed();
 
-	QTimer::singleShot(300, this, SLOT(refresh()));
-}
-
-
-// Destructor.
-qjackctlGraphForm::~qjackctlGraphForm (void)
-{
-	delete m_jack;
-#ifdef CONFIG_ALSA_SEQ
-	delete m_alsa;
-#endif
-	delete m_config;
+//	QTimer::singleShot(300, this, SLOT(refresh()));
 }
 
 
@@ -292,7 +296,8 @@ void qjackctlGraphForm::helpAboutQt (void)
 
 
 // Context-menu event handler.
-void qjackctlGraphForm::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
+void qjackctlGraphForm::contextMenuEvent (
+	QContextMenuEvent *pContextMenuEvent )
 {
 	QMenu menu(this);
 	menu.addAction(m_ui.graphConnectAction);
@@ -432,7 +437,7 @@ void qjackctlGraphForm::alsa_changed (void)
 }
 
 
-// Pseudo-asyncronous timed refreshner.
+// Graph refreshner.
 void qjackctlGraphForm::refresh (void)
 {
 	if (m_jack_changed > 0) {
@@ -447,7 +452,7 @@ void qjackctlGraphForm::refresh (void)
 		stabilize();
 	}
 
-	QTimer::singleShot(300, this, SLOT(refresh()));
+//	QTimer::singleShot(300, this, SLOT(refresh()));
 }
 
 
@@ -482,7 +487,8 @@ void qjackctlGraphForm::stabilize (void)
 // Tool-bar orientation change slot.
 void qjackctlGraphForm::orientationChanged ( Qt::Orientation orientation )
 {
-	if (m_config->isTextBesideIcons() && orientation == Qt::Horizontal) {
+	if (m_config && m_config->isTextBesideIcons()
+		&& orientation == Qt::Horizontal) {
 		m_ui.ToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 	} else {
 		m_ui.ToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
@@ -504,13 +510,13 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
 	m_ui.graphCanvas->saveState();
 
-	m_config->setTextBesideIcons(m_ui.viewTextBesideIconsAction->isChecked());
-
-	m_config->setStatusbar(m_ui.StatusBar->isVisible());
-	m_config->setToolbar(m_ui.ToolBar->isVisible());
-	m_config->setMenubar(m_ui.MenuBar->isVisible());
-
-	m_config->saveState(this);
+	if (m_config && QMainWindow::isVisible()) {
+		m_config->setTextBesideIcons(m_ui.viewTextBesideIconsAction->isChecked());
+		m_config->setStatusbar(m_ui.StatusBar->isVisible());
+		m_config->setToolbar(m_ui.ToolBar->isVisible());
+		m_config->setMenubar(m_ui.MenuBar->isVisible());
+		m_config->saveState(this);
+	}
 
 	QMainWindow::closeEvent(pCloseEvent);
 }
@@ -520,7 +526,6 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 // qjackctlGraphConfig --  Canvas state memento.
 
 // Local constants.
-static const char *GeometryGroup    = "/GraphGeometry";
 static const char *LayoutGroup      = "/GraphLayout";
 static const char *ViewGroup        = "/GraphView";
 static const char *ViewMenubarKey   = "/Menubar";
@@ -530,35 +535,10 @@ static const char *ViewTextBesideIconsKey = "/TextBesideIcons";
 
 
 // Constructors.
-qjackctlGraphConfig::qjackctlGraphConfig ( QSettings *settings, bool owner )
-	: m_settings(settings), m_owner(owner),
-		m_menubar(false), m_toolbar(false), m_statusbar(false), m_texticons(false)
+qjackctlGraphConfig::qjackctlGraphConfig ( QSettings *settings )
+	: m_settings(settings), m_menubar(false),
+		m_toolbar(false), m_statusbar(false), m_texticons(false)
 {
-}
-
-
-qjackctlGraphConfig::qjackctlGraphConfig ( const QString& org_name, const QString& app_name )
-	: m_settings(new QSettings(org_name, app_name)), m_owner(true),
-		m_menubar(false), m_toolbar(false), m_statusbar(false), m_texticons(false)
-{
-}
-
-
-// Destructor.
-qjackctlGraphConfig::~qjackctlGraphConfig (void)
-{
-	setSettings(NULL);
-}
-
-
-// Accessors.
-void qjackctlGraphConfig::setSettings ( QSettings *settings, bool owner )
-{
-	if (m_settings && m_owner)
-		delete m_settings;
-
-	m_settings = settings;
-	m_owner = owner;
 }
 
 
@@ -625,25 +605,13 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 	m_texticons = m_settings->value(ViewTextBesideIconsKey, true).toBool();
 	m_settings->endGroup();
 
-	m_settings->beginGroup(GeometryGroup);
-	const QByteArray& geometry_state
-		= m_settings->value('/' + widget->objectName()).toByteArray();
-	m_settings->endGroup();
-
-	if (geometry_state.isEmpty() || geometry_state.isNull())
-		return false;
-
-	widget->restoreGeometry(geometry_state);
-
 	m_settings->beginGroup(LayoutGroup);
 	const QByteArray& layout_state
 		= m_settings->value('/' + widget->objectName()).toByteArray();
 	m_settings->endGroup();
 
-	if (layout_state.isEmpty() || layout_state.isNull())
-		return false;
-
-	widget->restoreState(layout_state);
+	if (!layout_state.isEmpty())
+		widget->restoreState(layout_state);
 
 	return true;
 }
@@ -659,11 +627,6 @@ bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 	m_settings->setValue(ViewToolbarKey, m_toolbar);
 	m_settings->setValue(ViewStatusbarKey, m_statusbar);
 	m_settings->setValue(ViewTextBesideIconsKey, m_texticons);
-	m_settings->endGroup();
-
-	m_settings->beginGroup(GeometryGroup);
-	const QByteArray& geometry_state = widget->saveGeometry();
-	m_settings->setValue('/' + widget->objectName(), geometry_state);
 	m_settings->endGroup();
 
 	m_settings->beginGroup(LayoutGroup);

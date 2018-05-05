@@ -28,6 +28,8 @@
 #include "qjackctlPatchbayFile.h"
 
 #include "qjackctlMessagesStatusForm.h"
+
+#include "qjackctlGraphForm.h"
 #include "qjackctlSessionForm.h"
 #include "qjackctlConnectionsForm.h"
 #include "qjackctlPatchbayForm.h"
@@ -404,6 +406,8 @@ qjackctlMainForm::qjackctlMainForm (
 
 	// All forms are to be created later on setup.
 	m_pMessagesStatusForm = NULL;
+
+	m_pGraphForm       = NULL;
 	m_pSessionForm     = NULL;
 	m_pConnectionsForm = NULL;
 	m_pPatchbayForm    = NULL;
@@ -529,6 +533,9 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	// Finally drop any popup widgets around...
 	if (m_pMessagesStatusForm)
 		delete m_pMessagesStatusForm;
+
+	if (m_pGraphForm)
+		delete m_pGraphForm;
 	if (m_pSessionForm)
 		delete m_pSessionForm;
 	if (m_pConnectionsForm)
@@ -537,11 +544,13 @@ qjackctlMainForm::~qjackctlMainForm (void)
 		delete m_pPatchbayForm;
 	if (m_pSetupForm)
 		delete m_pSetupForm;
+
 #ifdef CONFIG_SYSTEM_TRAY
 	// Quit off system tray widget.
 	if (m_pSystemTray)
 		delete m_pSystemTray;
 #endif
+
 	// Patchbay rack is also dead.
 	if (m_pPatchbayRack)
 		delete m_pPatchbayRack;
@@ -585,6 +594,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	}
 	// All forms are to be created right now.
 	m_pMessagesStatusForm = new qjackctlMessagesStatusForm (pParent, wflags);
+	m_pGraphForm          = new qjackctlGraphForm          (pParent, wflags);
 	m_pSessionForm        = new qjackctlSessionForm        (pParent, wflags);
 	m_pConnectionsForm    = new qjackctlConnectionsForm    (pParent, wflags);
 	m_pPatchbayForm       = new qjackctlPatchbayForm       (pParent, wflags);
@@ -596,6 +606,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pMessagesStatusForm->setTabPage(m_pSetup->iMessagesStatusTabPage);
 	m_pMessagesStatusForm->setLogging(
 		m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
+	m_pGraphForm->setup(m_pSetup);
 	m_pSessionForm->setup(m_pSetup);
 	m_pConnectionsForm->setTabPage(m_pSetup->iConnectionsTabPage);
 	m_pConnectionsForm->setup(m_pSetup);
@@ -622,6 +633,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
 	// And for the whole widget gallore...
 	m_pSetup->loadWidgetGeometry(m_pMessagesStatusForm);
+	m_pSetup->loadWidgetGeometry(m_pGraphForm);
 	m_pSetup->loadWidgetGeometry(m_pSessionForm);
 	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
 	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
@@ -701,6 +713,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			// Rather obvious setup.
 			if (m_pConnectionsForm)
 				m_pConnectionsForm->stabilizeAlsa(true);
+			if (m_pGraphForm)
+				m_pGraphForm->alsa_changed();
 		} else {
 			appendMessagesError(
 				tr("Could not open ALSA sequencer as a client.\n\n"
@@ -724,6 +738,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(toggleMessagesForm()));
 		dbus.connect(s, s, sDBusName, "status",
 			this, SLOT(toggleStatusForm()));
+		dbus.connect(s, s, sDBusName, "graph",
+			this, SLOT(toggleGraphForm()));
 		dbus.connect(s, s, sDBusName, "session",
 			this, SLOT(toggleSessionForm()));
 		dbus.connect(s, s, sDBusName, "connections",
@@ -976,6 +992,7 @@ bool qjackctlMainForm::queryClose (void)
 	// Try to save current positioning.
 	if (bQueryClose) {
 		m_pSetup->saveWidgetGeometry(m_pMessagesStatusForm);
+		m_pSetup->saveWidgetGeometry(m_pGraphForm);
 		m_pSetup->saveWidgetGeometry(m_pSessionForm);
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
@@ -984,6 +1001,8 @@ bool qjackctlMainForm::queryClose (void)
 		// Close popup widgets.
 		if (m_pMessagesStatusForm)
 			m_pMessagesStatusForm->close();
+		if (m_pGraphForm)
+			m_pGraphForm->close();
 		if (m_pSessionForm)
 			m_pSessionForm->close();
 		if (m_pConnectionsForm)
@@ -2617,6 +2636,10 @@ void qjackctlMainForm::timerSlot (void)
 		m_pPatchbayForm->refreshForm();
 	}
 
+	// Is the graph dirty enough?
+	if (m_pGraphForm)
+		m_pGraphForm->refresh();
+
 	// Update some statistical fields, directly.
 	refreshStatus();
 
@@ -2954,8 +2977,11 @@ void qjackctlMainForm::stopJackClient (void)
 		m_pConnectionsForm->stabilizeAudio(false);
 		m_pConnectionsForm->stabilizeMidi(false);
 	}
+
 	if (m_pSessionForm)
 		m_pSessionForm->stabilizeForm(false);
+	if (m_pGraphForm)
+		m_pGraphForm->jack_shutdown();
 
 	// Displays are dimmed again.
 	QPalette pal;
@@ -2997,8 +3023,10 @@ void qjackctlMainForm::refreshConnections (void)
 
 void qjackctlMainForm::refreshJackConnections (void)
 {
-#if 0
 	// Hack this as for a while...
+	if (m_pGraphForm)
+		m_pGraphForm->jack_changed();
+#if 0
 	if (m_pConnectionsForm && m_iJackRefresh == 0) {
 		m_pConnectionsForm->stabilizeAudio(false);
 		m_pConnectionsForm->stabilizeMidi(false);
@@ -3011,8 +3039,10 @@ void qjackctlMainForm::refreshJackConnections (void)
 
 void qjackctlMainForm::refreshAlsaConnections (void)
 {
-#if 0
 	// Hack this as for a while...
+	if (m_pGraphForm)
+		m_pGraphForm->alsa_changed();
+#if 0
 	if (m_pConnectionsForm && m_iAlsaRefresh == 0)
 		m_pConnectionsForm->stabilizeAlsa(false);
 #endif
@@ -3100,6 +3130,22 @@ void qjackctlMainForm::toggleStatusForm (void)
 	}
 
 	toggleMessagesStatusForm();
+}
+
+
+// Graph form requester slot.
+void qjackctlMainForm::toggleGraphForm (void)
+{
+	if (m_pGraphForm) {
+		m_pSetup->saveWidgetGeometry(m_pGraphForm);
+		if (m_pGraphForm->isVisible()) {
+			m_pGraphForm->hide();
+		} else {
+			m_pGraphForm->show();
+			m_pGraphForm->raise();
+			m_pGraphForm->activateWindow();
+		}
+	}
 }
 
 
@@ -3743,6 +3789,10 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 	pAction->setChecked(m_pMessagesStatusForm
 		&& m_pMessagesStatusForm->isVisible()
 		&& m_pMessagesStatusForm->tabPage() == qjackctlMessagesStatusForm::StatusTab);
+	pAction = menu.addAction(QIcon(":/images/graph1.png"),
+		tr("&Graph"), this, SLOT(toggleGraphForm()));
+	pAction->setCheckable(true);
+	pAction->setChecked(m_pGraphForm && m_pGraphForm->isVisible());
 	pAction = menu.addAction(QIcon(":/images/connections1.png"),
 		tr("&Connections"), this, SLOT(toggleConnectionsForm()));
 	pAction->setCheckable(true);

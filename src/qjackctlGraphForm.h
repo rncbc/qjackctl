@@ -33,6 +33,8 @@ class qjackctlJackGraph;
 
 class qjackctlGraphPort;
 
+class qjackctlSetup;
+
 class QResizeEvent;
 class QCloseEvent;
 
@@ -57,12 +59,18 @@ public:
 	// Destructor.
 	~qjackctlGraphForm();
 
+	// Initializer.
+	void setup(qjackctlSetup *pSetup);
+
 public slots:
 
 	// Graph section slots.
 	void jack_shutdown();
 	void jack_changed();
 	void alsa_changed();
+
+	// Graph refreshner.
+	void refresh();
 
 protected slots:
 
@@ -73,9 +81,6 @@ protected slots:
 	// Port (dis)connection slots.
 	void connected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void disconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
-
-	// Pseudo-asynchronous timed refreshner.
-	void refresh();
 
 	// Graph selection change slot.
 	void stabilize();
@@ -136,14 +141,9 @@ class qjackctlGraphConfig
 public:
 
 	// Constructor.
-	qjackctlGraphConfig(QSettings *settings, bool owner = false);
-	qjackctlGraphConfig(const QString& org_name, const QString& app_name);
-
-	// Destructor.
-	~qjackctlGraphConfig();
+	qjackctlGraphConfig(QSettings *settings);
 
 	// Accessors.
-	void setSettings(QSettings *settings, bool owner = false);
 	QSettings *settings() const;
 
 	void setMenubar(bool menubar);
@@ -166,7 +166,6 @@ private:
 
 	// Instance variables.
 	QSettings *m_settings;
-	bool       m_owner;
 
 	bool       m_menubar;
 	bool       m_toolbar;
