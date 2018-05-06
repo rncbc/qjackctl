@@ -44,11 +44,12 @@ typedef void snd_seq_t;
 class qjackctlSetup;
 class qjackctlSetupForm;
 class qjackctlMessagesStatusForm;
-class qjackctlGraphForm;
 class qjackctlSessionForm;
 class qjackctlConnectionsForm;
 class qjackctlPatchbayForm;
 class qjackctlPatchbayRack;
+class qjackctlGraphForm;
+class qjackctlGraphPort;
 class qjackctlPortItem;
 
 #ifdef CONFIG_SYSTEM_TRAY
@@ -104,6 +105,8 @@ public:
 
 	void refreshPatchbay();
 
+	void queryDisconnect(
+		qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void queryDisconnect(
 		qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType);
 
@@ -164,10 +167,10 @@ protected slots:
 	void toggleMessagesStatusForm();
 	void toggleMessagesForm();
 	void toggleStatusForm();
-	void toggleGraphForm();
 	void toggleSessionForm();
 	void toggleConnectionsForm();
 	void togglePatchbayForm();
+	void toggleGraphForm();
 
 	void transportRewind();
 	void transportBackward();
@@ -238,6 +241,11 @@ protected:
 
 	void contextMenuEvent(QContextMenuEvent *);
 	void mousePressEvent(QMouseEvent *pMouseEvent);
+
+	void queryDisconnect(
+		const QString& sOClientName, const QString& sOPortName,
+		const QString& sIClientName, const QString& sIPortName,
+		int iSocketType);
 
 #ifdef CONFIG_DBUS
 
@@ -327,11 +335,10 @@ private:
 	QTime m_tResetLast;
 
 	qjackctlMessagesStatusForm *m_pMessagesStatusForm;
-
-	qjackctlGraphForm       *m_pGraphForm;
 	qjackctlSessionForm     *m_pSessionForm;
 	qjackctlConnectionsForm *m_pConnectionsForm;
 	qjackctlPatchbayForm    *m_pPatchbayForm;
+	qjackctlGraphForm       *m_pGraphForm;
 	qjackctlSetupForm       *m_pSetupForm;
 
 	qjackctlPatchbayRack *m_pPatchbayRack;

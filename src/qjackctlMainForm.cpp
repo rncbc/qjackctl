@@ -29,12 +29,17 @@
 
 #include "qjackctlMessagesStatusForm.h"
 
-#include "qjackctlGraphForm.h"
 #include "qjackctlSessionForm.h"
 #include "qjackctlConnectionsForm.h"
 #include "qjackctlPatchbayForm.h"
+#include "qjackctlGraphForm.h"
 #include "qjackctlSetupForm.h"
 #include "qjackctlAboutForm.h"
+
+#include "qjackctlJackGraph.h"
+#ifdef CONFIG_ALSA_SEQ
+#include "qjackctlAlsaGraph.h"
+#endif
 
 #ifdef CONFIG_SYSTEM_TRAY
 #include "qjackctlSystemTray.h"
@@ -406,11 +411,10 @@ qjackctlMainForm::qjackctlMainForm (
 
 	// All forms are to be created later on setup.
 	m_pMessagesStatusForm = NULL;
-
-	m_pGraphForm       = NULL;
 	m_pSessionForm     = NULL;
 	m_pConnectionsForm = NULL;
 	m_pPatchbayForm    = NULL;
+	m_pGraphForm       = NULL;
 	m_pSetupForm       = NULL;
 
 	// Patchbay rack can be readily created.
@@ -533,15 +537,14 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	// Finally drop any popup widgets around...
 	if (m_pMessagesStatusForm)
 		delete m_pMessagesStatusForm;
-
-	if (m_pGraphForm)
-		delete m_pGraphForm;
 	if (m_pSessionForm)
 		delete m_pSessionForm;
 	if (m_pConnectionsForm)
 		delete m_pConnectionsForm;
 	if (m_pPatchbayForm)
 		delete m_pPatchbayForm;
+	if (m_pGraphForm)
+		delete m_pGraphForm;
 	if (m_pSetupForm)
 		delete m_pSetupForm;
 
@@ -594,10 +597,12 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	}
 	// All forms are to be created right now.
 	m_pMessagesStatusForm = new qjackctlMessagesStatusForm (pParent, wflags);
-	m_pGraphForm          = new qjackctlGraphForm          (pParent, wflags);
 	m_pSessionForm        = new qjackctlSessionForm        (pParent, wflags);
 	m_pConnectionsForm    = new qjackctlConnectionsForm    (pParent, wflags);
 	m_pPatchbayForm       = new qjackctlPatchbayForm       (pParent, wflags);
+
+	// Graph form should be a full-blown top-level window...
+	m_pGraphForm = new qjackctlGraphForm(this);
 
 	// Setup form is kind of special (modeless dialog).
 	m_pSetupForm = new qjackctlSetupForm(this);
@@ -606,11 +611,11 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pMessagesStatusForm->setTabPage(m_pSetup->iMessagesStatusTabPage);
 	m_pMessagesStatusForm->setLogging(
 		m_pSetup->bMessagesLog, m_pSetup->sMessagesLogPath);
-	m_pGraphForm->setup(m_pSetup);
 	m_pSessionForm->setup(m_pSetup);
 	m_pConnectionsForm->setTabPage(m_pSetup->iConnectionsTabPage);
 	m_pConnectionsForm->setup(m_pSetup);
 	m_pPatchbayForm->setup(m_pSetup);
+	m_pGraphForm->setup(m_pSetup);
 	m_pSetupForm->setup(m_pSetup);
 
 	// Check out some initial nullities(tm)...
@@ -633,10 +638,10 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
 	// And for the whole widget gallore...
 	m_pSetup->loadWidgetGeometry(m_pMessagesStatusForm);
-	m_pSetup->loadWidgetGeometry(m_pGraphForm);
 	m_pSetup->loadWidgetGeometry(m_pSessionForm);
 	m_pSetup->loadWidgetGeometry(m_pConnectionsForm);
 	m_pSetup->loadWidgetGeometry(m_pPatchbayForm);
+	m_pSetup->loadWidgetGeometry(m_pGraphForm);
 //	m_pSetup->loadWidgetGeometry(m_pSetupForm);
 
 	// Make it final show...
@@ -738,14 +743,14 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(toggleMessagesForm()));
 		dbus.connect(s, s, sDBusName, "status",
 			this, SLOT(toggleStatusForm()));
-		dbus.connect(s, s, sDBusName, "graph",
-			this, SLOT(toggleGraphForm()));
 		dbus.connect(s, s, sDBusName, "session",
 			this, SLOT(toggleSessionForm()));
 		dbus.connect(s, s, sDBusName, "connections",
 			this, SLOT(toggleConnectionsForm()));
 		dbus.connect(s, s, sDBusName, "patchbay",
 			this, SLOT(togglePatchbayForm()));
+		dbus.connect(s, s, sDBusName, "graph",
+			this, SLOT(toggleGraphForm()));
 		dbus.connect(s, s, sDBusName, "rewind",
 			this, SLOT(transportRewind()));
 		dbus.connect(s, s, sDBusName, "backward",
@@ -992,23 +997,23 @@ bool qjackctlMainForm::queryClose (void)
 	// Try to save current positioning.
 	if (bQueryClose) {
 		m_pSetup->saveWidgetGeometry(m_pMessagesStatusForm);
-		m_pSetup->saveWidgetGeometry(m_pGraphForm);
 		m_pSetup->saveWidgetGeometry(m_pSessionForm);
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
 		m_pSetup->saveWidgetGeometry(m_pPatchbayForm);
+		m_pSetup->saveWidgetGeometry(m_pGraphForm);
 	//	m_pSetup->saveWidgetGeometry(m_pSetupForm);
 		m_pSetup->saveWidgetGeometry(this, true);
 		// Close popup widgets.
 		if (m_pMessagesStatusForm)
 			m_pMessagesStatusForm->close();
-		if (m_pGraphForm)
-			m_pGraphForm->close();
 		if (m_pSessionForm)
 			m_pSessionForm->close();
 		if (m_pConnectionsForm)
 			m_pConnectionsForm->close();
 		if (m_pPatchbayForm)
 			m_pPatchbayForm->close();
+		if (m_pGraphForm)
+			m_pGraphForm->close();
 		if (m_pSetupForm)
 			m_pSetupForm->close();
 	#if 0//CONFIG_SYSTEM_TRAY
@@ -2707,10 +2712,47 @@ void qjackctlMainForm::cableConnectSlot (
 void qjackctlMainForm::queryDisconnect (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort, int iSocketType )
 {
+	queryDisconnect(
+		pOPort->clientName(), pOPort->portName(),
+		pIPort->clientName(), pIPort->portName(), iSocketType);
+}
+
+
+void qjackctlMainForm::queryDisconnect (
+	qjackctlGraphPort *port1, qjackctlGraphPort *port2 )
+{
+	qjackctlGraphNode *node1 = port1->portNode();
+	qjackctlGraphNode *node2 = port2->portNode();
+
+	if (node1 == NULL || node2 == NULL)
+		return;
+
+	int iSocketType = QJACKCTL_SOCKETTYPE_DEFAULT;
+	if (qjackctlJackGraph::isAudioPortType(port1->portType()))
+		iSocketType = QJACKCTL_SOCKETTYPE_JACK_AUDIO;
+	else
+	if (qjackctlJackGraph::isMidiPortType(port1->portType()))
+		iSocketType = QJACKCTL_SOCKETTYPE_JACK_MIDI;
+#ifdef CONFIG_ALSA_SEQ
+	else
+	if (qjackctlAlsaGraph::isPortType(port1->portType()))
+		iSocketType = QJACKCTL_SOCKETTYPE_ALSA_MIDI;
+#endif
+
+	queryDisconnect(
+		node1->nodeName(), port1->portName(),
+		node2->nodeName(), port2->portName(), iSocketType);
+}
+
+
+void qjackctlMainForm::queryDisconnect (
+	const QString& sOClientName, const QString& sOPortName,
+	const QString& sIClientName, const QString& sIPortName,
+	int iSocketType )
+{
 	if (m_pSetup->bActivePatchbay && m_pSetup->bQueryDisconnect) {
 		qjackctlPatchbayCable *pCable = m_pPatchbayRack->findCable(
-			pOPort->clientName(), pOPort->portName(),
-			pIPort->clientName(), pIPort->portName(), iSocketType);
+			sOClientName, sOPortName, sIClientName, sIPortName, iSocketType);
 		if (pCable) {
 			bool bQueryDisconnect = true;
 			const QString& sTitle
@@ -3133,22 +3175,6 @@ void qjackctlMainForm::toggleStatusForm (void)
 }
 
 
-// Graph form requester slot.
-void qjackctlMainForm::toggleGraphForm (void)
-{
-	if (m_pGraphForm) {
-		m_pSetup->saveWidgetGeometry(m_pGraphForm);
-		if (m_pGraphForm->isVisible()) {
-			m_pGraphForm->hide();
-		} else {
-			m_pGraphForm->show();
-			m_pGraphForm->raise();
-			m_pGraphForm->activateWindow();
-		}
-	}
-}
-
-
 // Session form requester slot.
 void qjackctlMainForm::toggleSessionForm (void)
 {
@@ -3196,6 +3222,22 @@ void qjackctlMainForm::togglePatchbayForm (void)
 			m_pPatchbayForm->show();
 			m_pPatchbayForm->raise();
 			m_pPatchbayForm->activateWindow();
+		}
+	}
+}
+
+
+// Graph form requester slot.
+void qjackctlMainForm::toggleGraphForm (void)
+{
+	if (m_pGraphForm) {
+		m_pSetup->saveWidgetGeometry(m_pGraphForm);
+		if (m_pGraphForm->isVisible()) {
+			m_pGraphForm->hide();
+		} else {
+			m_pGraphForm->show();
+			m_pGraphForm->raise();
+			m_pGraphForm->activateWindow();
 		}
 	}
 }
@@ -3789,10 +3831,6 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 	pAction->setChecked(m_pMessagesStatusForm
 		&& m_pMessagesStatusForm->isVisible()
 		&& m_pMessagesStatusForm->tabPage() == qjackctlMessagesStatusForm::StatusTab);
-	pAction = menu.addAction(QIcon(":/images/graph1.png"),
-		tr("&Graph"), this, SLOT(toggleGraphForm()));
-	pAction->setCheckable(true);
-	pAction->setChecked(m_pGraphForm && m_pGraphForm->isVisible());
 	pAction = menu.addAction(QIcon(":/images/connections1.png"),
 		tr("&Connections"), this, SLOT(toggleConnectionsForm()));
 	pAction->setCheckable(true);
@@ -3801,6 +3839,10 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 		tr("Patch&bay"), this, SLOT(togglePatchbayForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pPatchbayForm && m_pPatchbayForm->isVisible());
+	pAction = menu.addAction(QIcon(":/images/graph1.png"),
+		tr("&Graph"), this, SLOT(toggleGraphForm()));
+	pAction->setCheckable(true);
+	pAction->setChecked(m_pGraphForm && m_pGraphForm->isVisible());
 	menu.addSeparator();
 
 	QMenu *pTransportMenu = menu.addMenu(tr("&Transport"));

@@ -400,6 +400,10 @@ void qjackctlGraphForm::connected (
 void qjackctlGraphForm::disconnected (
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2 )
 {
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->queryDisconnect(port1, port2);
+
 	if (qjackctlJackGraph::isPortType(port1->portType())) {
 		m_jack->connectPorts(port1, port2, false);
 		jack_changed();
