@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- A brand new and way long overdue connections Graph widget
+  is finally introduced, only to be accessible through the
+  context menu at this time. (EXPERIMENTAL)
+
 - Extended multi-selection is now supported on all Connections
   client/port lists, allowing for multiple (dis)connections at
   once. (EXPERIMENTAL)
