@@ -117,11 +117,8 @@ public:
 	void updateConnectionsIconSize();
 	void updateJackClientPortAlias();
 	void updateJackClientPortMetadata();
-	void updateBezierLines();
-	void updateDisplayEffect();
 	void updateTimeDisplayFonts();
 	void updateTimeDisplayToolTips();
-	void updateTimeFormat();
 	void updateAliases();
 	void updateButtons();
 #ifdef CONFIG_SYSTEM_TRAY
@@ -346,7 +343,6 @@ private:
 	qjackctlPreset m_preset;
 
 	QString m_sStdoutBuffer;
-	QString m_sTimeDashes;
 	QString m_sJackCmdLine;
 
 #ifdef CONFIG_SYSTEM_TRAY

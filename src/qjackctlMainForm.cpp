@@ -139,6 +139,10 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #endif
 
 
+// Time dashes format helper.
+static const char *c_szTimeDashes = "--:--:--.---";
+
+
 //----------------------------------------------------------------------------
 // qjackctl -- Static callback posters.
 
@@ -435,6 +439,13 @@ qjackctlMainForm::qjackctlMainForm (
 	// Avoid extra transport toggles (play/stop)
 	m_iTransportPlay = 0;
 
+	// Shiny display effect is now for good...
+	QPalette pal = m_ui.StatusDisplayFrame->palette();
+//	pal.setColor(QPalette::Background, Qt::black);
+	pal.setBrush(QPalette::Background,
+		QBrush(QPixmap(":/images/displaybg1.png")));
+	m_ui.StatusDisplayFrame->setPalette(pal);
+
 	// Whether we've Qt::Tool flag (from bKeepOnTop),
 	// this is actually the main last application window...
 	QWidget::setAttribute(Qt::WA_QuitOnClose);
@@ -648,17 +659,14 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_ui.StatusDisplayFrame->show();
 
 	// Set other defaults...
-	updateDisplayEffect();
 	updateTimeDisplayFonts();
 	updateTimeDisplayToolTips();
-	updateTimeFormat();
 	updateMessagesFont();
 	updateMessagesLimit();
 	updateConnectionsFont();
 	updateConnectionsIconSize();
 	updateJackClientPortAlias();
 	updateJackClientPortMetadata();
-	updateBezierLines();
 //	updateActivePatchbay();
 #ifdef CONFIG_SYSTEM_TRAY
 	updateSystemTray();
@@ -1973,46 +1981,6 @@ void qjackctlMainForm::updateJackClientPortMetadata (void)
 }
 
 
-// Update the connection and patchbay line style.
-void qjackctlMainForm::updateBezierLines (void)
-{
-	if (m_pSetup == NULL)
-		return;
-
-	if (m_pConnectionsForm) {
-		m_pConnectionsForm->audioConnectView()->setBezierLines(m_pSetup->bBezierLines);
-		m_pConnectionsForm->midiConnectView()->setBezierLines(m_pSetup->bBezierLines);
-		m_pConnectionsForm->alsaConnectView()->setBezierLines(m_pSetup->bBezierLines);
-		m_pConnectionsForm->audioConnectView()->connectorView()->update();
-		m_pConnectionsForm->midiConnectView()->connectorView()->update();
-		m_pConnectionsForm->alsaConnectView()->connectorView()->update();
-	}
-
-	if (m_pPatchbayForm) {
-		m_pPatchbayForm->patchbayView()->setBezierLines(m_pSetup->bBezierLines);
-		m_pPatchbayForm->patchbayView()->PatchworkView()->update();
-	}
-}
-
-
-// Update main display background effect.
-void qjackctlMainForm::updateDisplayEffect (void)
-{
-	if (m_pSetup == NULL)
-		return;
-
-	// Set the main background...
-	QPalette pal;
-	if (m_pSetup->bDisplayEffect) {
-		QPixmap pm(":/images/displaybg1.png");
-		pal.setBrush(QPalette::Background, QBrush(pm));
-	} else {
-		pal.setColor(QPalette::Background, Qt::black);
-	}
-	m_ui.StatusDisplayFrame->setPalette(pal);
-}
-
-
 // Force update of big time display related fonts.
 void qjackctlMainForm::updateTimeDisplayFonts (void)
 {
@@ -2057,25 +2025,6 @@ void qjackctlMainForm::updateTimeDisplayToolTips (void)
 
 	m_ui.TimeDisplayTextLabel->setToolTip(sTimeDisplay);
 	m_ui.TransportTimeTextLabel->setToolTip(sTransportTime);
-}
-
-
-// Force update of time format dependant stuff.
-void qjackctlMainForm::updateTimeFormat (void)
-{
-	// Time dashes format helper.
-	m_sTimeDashes = "--:--:--";
-	switch (m_pSetup->iTimeFormat) {
-	case 1:   // Tenths of second.
-		m_sTimeDashes += ".-";
-		break;
-	case 2:   // Hundredths of second.
-		m_sTimeDashes += ".--";
-		break;
-	case 3:   // Raw milliseconds
-		m_sTimeDashes += ".---";
-		break;
-	}
 }
 
 
@@ -2342,24 +2291,11 @@ QString qjackctlMainForm::formatTime ( float secs ) const
 		secs -= (float) ss;
 	}
 
+	// Raw milliseconds
 	QString sTemp;
-	switch (m_pSetup->iTimeFormat) {
-	case 1:   // Tenths of second.
-		sTemp.sprintf("%02u:%02u:%02u.%u", hh, mm, ss,
-			(unsigned int) (secs * 10.0f));
-		break;
-	case 2:   // Hundredths of second.
-		sTemp.sprintf("%02u:%02u:%02u.%02u", hh, mm, ss,
-			(unsigned int) (secs * 100.0f));
-		break;
-	case 3:   // Raw milliseconds
-		sTemp.sprintf("%02u:%02u:%02u.%03u", hh, mm, ss,
-			(unsigned int) (secs * 1000.0f));
-		break;
-	default:  // No second decimation.
-		sTemp.sprintf("%02u:%02u:%02u", hh, mm, ss);
-		break;
-	}
+
+	sTemp.sprintf("%02u:%02u:%02u.%03u",
+		hh, mm, ss, (unsigned int) (secs * 1000.0f));
 
 	return sTemp;
 }
@@ -2369,7 +2305,7 @@ QString qjackctlMainForm::formatTime ( float secs ) const
 QString qjackctlMainForm::formatElapsedTime ( int iStatusItem,
 	const QTime& t, bool bElapsed ) const
 {
-	QString sTemp = m_sTimeDashes;
+	QString sTemp = c_szTimeDashes;
 	QString sText;
 
 	// Compute and format elapsed time.
@@ -2919,17 +2855,11 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
 	// Save server configuration file.
 	if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
-		QString sJackCmdLine = m_sJackCmdLine;
-		if (m_pSetup->bServerConfigTemp) {
-			int iPos = sJackCmdLine.indexOf(' ');
-			if (iPos > 0)
-				sJackCmdLine = sJackCmdLine.insert(iPos, " -T");
-		}
-		QString sFilename = ::getenv("HOME");
-		sFilename += '/' + m_pSetup->sServerConfigName;
+		const QString sFilename
+			= ::getenv("HOME") + '/' + m_pSetup->sServerConfigName;
 		QFile file(sFilename);
 		if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-			QTextStream(&file) << sJackCmdLine << endl;
+			QTextStream(&file) << m_sJackCmdLine << endl;
 			file.close();
 			appendMessagesColor(
 				tr("Server configuration saved to \"%1\".")
@@ -3521,7 +3451,7 @@ void qjackctlMainForm::refreshStatus (void)
 		updateStatusItem(STATUS_REALTIME, n);
 		m_ui.ServerModeTextLabel->setText(n);
 		updateStatusItem(STATUS_TRANSPORT_STATE, n);
-		updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
+		updateStatusItem(STATUS_TRANSPORT_TIME, c_szTimeDashes);
 		updateStatusItem(STATUS_TRANSPORT_BBT, b);
 		updateStatusItem(STATUS_TRANSPORT_BPM, n);
 		m_ui.RewindToolButton->setEnabled(false);

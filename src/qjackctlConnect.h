@@ -404,10 +404,6 @@ public:
 	qjackctlClientList *OClientList() const;
 	qjackctlClientList *IClientList() const;
 
-	// Connector line style accessors.
-	void setBezierLines(bool bBezierLines);
-	bool isBezierLines() const;
-
 	// Common icon size pixmap accessors.
 	void setIconSize (int iIconSize);
 	int iconSize (void) const;
@@ -430,9 +426,6 @@ private:
 
 	// The main binding object.
 	qjackctlConnect *m_pConnect;
-
-	// How we'll draw connector lines.
-	bool m_bBezierLines;
 
 	// How large will be those icons.
 	// 0 = 16x16 (default), 1 = 32x32, 2 = 64x64.
