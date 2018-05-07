@@ -1189,21 +1189,17 @@ void qjackctlConnectorView::drawConnectionLine ( QPainter *pPainter,
 	if (y1 > h1)
 		pPainter->drawLine(x1, y1, x1 + 4, y1);
 
-	// How do we'll draw it?
-	if (m_pConnectView->isBezierLines()) {
-		// Setup control points
-		QPolygon spline(4);
-		const int cp = int(float(x2 - x1 - 8) * 0.4f);
-		spline.putPoints(0, 4,
-			x1 + 4, y1, x1 + 4 + cp, y1, 
-			x2 - 4 - cp, y2, x2 - 4, y2);
-		// The connection line, it self.
-		QPainterPath path;
-		path.moveTo(spline.at(0));
-		path.cubicTo(spline.at(1), spline.at(2), spline.at(3));
-		pPainter->strokePath(path, pen);
-	}
-	else pPainter->drawLine(x1 + 4, y1, x2 - 4, y2);
+	// Setup control points
+	QPolygon spline(4);
+	const int cp = int(float(x2 - x1 - 8) * 0.4f);
+	spline.putPoints(0, 4,
+		x1 + 4, y1, x1 + 4 + cp, y1,
+		x2 - 4 - cp, y2, x2 - 4, y2);
+	// The connection line, it self.
+	QPainterPath path;
+	path.moveTo(spline.at(0));
+	path.cubicTo(spline.at(1), spline.at(2), spline.at(3));
+	pPainter->strokePath(path, pen);
 
 	// Invisible input ports don't get a connecting dot.
 	if (y2 > h2)
@@ -1341,8 +1337,7 @@ qjackctlConnectView::qjackctlConnectView ( QWidget *pParent )
 
 	m_pConnect = NULL;
 
-	m_bBezierLines = false;
-	m_iIconSize    = 0;
+	m_iIconSize = 0;
 
 	QSplitter::setHandleWidth(2);
 
@@ -1401,18 +1396,6 @@ qjackctlClientList *qjackctlConnectView::IClientList (void) const
 		return m_pConnect->OClientList();
 	else
 		return NULL;
-}
-
-
-// Connector line style accessors.
-void qjackctlConnectView::setBezierLines ( bool bBezierLines )
-{
-	m_bBezierLines = bBezierLines;
-}
-
-bool qjackctlConnectView::isBezierLines (void) const
-{
-	return m_bBezierLines;
 }
 
 

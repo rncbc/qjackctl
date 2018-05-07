@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -102,9 +102,7 @@ void qjackctlSetup::loadSetup (void)
 	bQueryDisconnect         = m_settings.value("/QueryDisconnect", true).toBool();
 	bMessagesLog             = m_settings.value("/MessagesLog", false).toBool();
 	sMessagesLogPath         = m_settings.value("/MessagesLogPath", "qjackctl.log").toString();
-	bBezierLines             = m_settings.value("/BezierLines", false).toBool();
 	iTimeDisplay             = m_settings.value("/TimeDisplay", 0).toInt();
-	iTimeFormat              = m_settings.value("/TimeFormat", 0).toInt();
 	sMessagesFont            = m_settings.value("/MessagesFont").toString();
 	bMessagesLimit           = m_settings.value("/MessagesLimit", true).toBool();
 	iMessagesLimitLines      = m_settings.value("/MessagesLimitLines", 1000).toInt();
@@ -124,7 +122,6 @@ void qjackctlSetup::loadSetup (void)
 	bStartMinimized          = m_settings.value("/StartMinimized", false).toBool();
 	bServerConfig            = m_settings.value("/ServerConfig", true).toBool();
 	sServerConfigName        = m_settings.value("/ServerConfigName", ".jackdrc").toString();
-	bServerConfigTemp        = m_settings.value("/ServerConfigTemp", false).toBool();
 	bAlsaSeqEnabled          = m_settings.value("/AlsaSeqEnabled", true).toBool();
 	bDBusEnabled             = m_settings.value("/DBusEnabled", false).toBool();
 	bJackDBusEnabled         = m_settings.value("/JackDBusEnabled", false).toBool();
@@ -215,9 +212,7 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/QueryDisconnect",         bQueryDisconnect);
 	m_settings.setValue("/MessagesLog",             bMessagesLog);
 	m_settings.setValue("/MessagesLogPath",         sMessagesLogPath);
-	m_settings.setValue("/BezierLines",             bBezierLines);
 	m_settings.setValue("/TimeDisplay",             iTimeDisplay);
-	m_settings.setValue("/TimeFormat",              iTimeFormat);
 	m_settings.setValue("/MessagesFont",            sMessagesFont);
 	m_settings.setValue("/MessagesLimit",           bMessagesLimit);
 	m_settings.setValue("/MessagesLimitLines",      iMessagesLimitLines);
@@ -237,7 +232,6 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/StartMinimized",          bStartMinimized);
 	m_settings.setValue("/ServerConfig",            bServerConfig);
 	m_settings.setValue("/ServerConfigName",        sServerConfigName);
-	m_settings.setValue("/ServerConfigTemp",        bServerConfigTemp);
 	m_settings.setValue("/AlsaSeqEnabled",          bAlsaSeqEnabled);
 	m_settings.setValue("/DBusEnabled",             bDBusEnabled);
 	m_settings.setValue("/JackDBusEnabled",         bJackDBusEnabled);

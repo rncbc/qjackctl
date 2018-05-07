@@ -6,6 +6,12 @@ ChangeLog
 
 GIT HEAD
 
+- Some rather old, better said "Cambric explosion era", user
+  preference options have been ditched altogether: Display /
+  Time Format; Display / Shiny glass light effect; Display /
+  Connections/Draw connections and patchbay lines as Bezier
+  curves; Misc/Configure as temporary server.
+
 - A brand new and way long overdue connections Graph widget
   is finally introduced, only to be accessible through the
   context menu at this time. (EXPERIMENTAL)

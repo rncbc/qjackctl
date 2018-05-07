@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -321,12 +321,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.ElapsedXrunRadioButton,
 		SIGNAL(toggled(bool)),
 		SLOT(optionsChanged()));
-	QObject::connect(m_ui.TimeFormatComboBox,
-		SIGNAL(activated(int)),
-		SLOT(optionsChanged()));
-	QObject::connect(m_ui.DisplayEffectCheckBox,
-		SIGNAL(toggled(bool)),
-		SLOT(toggleDisplayEffect(bool)));
 	QObject::connect(m_ui.DisplayBlinkCheckBox,
 		SIGNAL(toggled(bool)),
 		SLOT(optionsChanged()));
@@ -350,9 +344,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ConnectionsIconSizeComboBox,
 		SIGNAL(activated(int)),
-		SLOT(optionsChanged()));
-	QObject::connect(m_ui.BezierLinesCheckBox,
-		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.AliasesEnabledCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -404,9 +395,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.ServerConfigNameComboBox,
 		SIGNAL(editTextChanged(const QString&)),
-		SLOT(optionsChanged()));
-	QObject::connect(m_ui.ServerConfigTempCheckBox,
-		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 #ifdef CONFIG_ALSA_SEQ
 	QObject::connect(m_ui.AlsaSeqEnabledCheckBox,
@@ -527,7 +515,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.MessagesLogCheckBox->setChecked(m_pSetup->bMessagesLog);
 	setComboBoxCurrentText(m_ui.MessagesLogPathComboBox,
 		m_pSetup->sMessagesLogPath);
-	m_ui.BezierLinesCheckBox->setChecked(m_pSetup->bBezierLines);
 
 	// Load some other defaults...
 	QRadioButton *pRadioButton
@@ -535,8 +522,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 			m_pTimeDisplayButtonGroup->button(m_pSetup->iTimeDisplay));
 	if (pRadioButton)
 		pRadioButton->setChecked(true);
-
-	m_ui.TimeFormatComboBox->setCurrentIndex(m_pSetup->iTimeFormat);
 
 	// Load font chooser samples...
 	const QString sSansSerif = "Sans Serif";
@@ -578,7 +563,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 		font.family() + ' ' + QString::number(font.pointSize()));
 
 	// The main display shiny effect option.
-	m_ui.DisplayEffectCheckBox->setChecked(m_pSetup->bDisplayEffect);
 	m_ui.DisplayBlinkCheckBox->setChecked(m_pSetup->bDisplayBlink);
 	toggleDisplayEffect(m_pSetup->bDisplayEffect);
 
@@ -611,7 +595,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.ServerConfigCheckBox->setChecked(m_pSetup->bServerConfig);
 	setComboBoxCurrentText(m_ui.ServerConfigNameComboBox,
 		m_pSetup->sServerConfigName);
-	m_ui.ServerConfigTempCheckBox->setChecked(m_pSetup->bServerConfigTemp);
 	m_ui.AlsaSeqEnabledCheckBox->setChecked(m_pSetup->bAlsaSeqEnabled);
 	m_ui.DBusEnabledCheckBox->setChecked(m_pSetup->bDBusEnabled);
 	m_ui.JackDBusEnabledCheckBox->setChecked(m_pSetup->bJackDBusEnabled);
@@ -1162,7 +1145,6 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	bEnabled = m_ui.ServerConfigCheckBox->isChecked();
 	m_ui.ServerConfigNameComboBox->setEnabled(bEnabled);
-	m_ui.ServerConfigTempCheckBox->setEnabled(bEnabled);
 
 	m_ui.AliasesEditingCheckBox->setEnabled(
 		m_ui.AliasesEnabledCheckBox->isChecked());
@@ -1461,8 +1443,6 @@ void qjackctlSetupForm::accept (void)
 		const int     iOldJackClientPortAlias = m_pSetup->iJackClientPortAlias;
 		const bool    bOldJackClientPortMetadata = m_pSetup->bJackClientPortMetadata;
 		const int     iOldTimeDisplay         = m_pSetup->iTimeDisplay;
-		const int     iOldTimeFormat          = m_pSetup->iTimeFormat;
-		const bool    bOldDisplayEffect       = m_pSetup->bDisplayEffect;
 		const bool    bOldActivePatchbay      = m_pSetup->bActivePatchbay;
 		const QString sOldActivePatchbayPath  = m_pSetup->sActivePatchbayPath;
 		const bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
@@ -1472,7 +1452,6 @@ void qjackctlSetupForm::accept (void)
 	#endif
 		const int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
 		const int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
-		const bool    bOldBezierLines         = m_pSetup->bBezierLines;
 		const bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
 		const bool    bOldDBusEnabled         = m_pSetup->bDBusEnabled;
 		const bool    bOldJackDBusEnabled     = m_pSetup->bJackDBusEnabled;
@@ -1504,16 +1483,13 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bQueryDisconnect         = m_ui.QueryDisconnectCheckBox->isChecked();
 		m_pSetup->bMessagesLog             = m_ui.MessagesLogCheckBox->isChecked();
 		m_pSetup->sMessagesLogPath         = m_ui.MessagesLogPathComboBox->currentText();
-		m_pSetup->bBezierLines             = m_ui.BezierLinesCheckBox->isChecked();
 		// Save Defaults...
 		m_pSetup->iTimeDisplay             = m_pTimeDisplayButtonGroup->checkedId();
-		m_pSetup->iTimeFormat              = m_ui.TimeFormatComboBox->currentIndex();
 		m_pSetup->sMessagesFont            = m_ui.MessagesFontTextLabel->font().toString();
 		m_pSetup->bMessagesLimit           = m_ui.MessagesLimitCheckBox->isChecked();
 		m_pSetup->iMessagesLimitLines      = m_ui.MessagesLimitLinesComboBox->currentText().toInt();
 		m_pSetup->sDisplayFont1            = m_ui.DisplayFont1TextLabel->font().toString();
 		m_pSetup->sDisplayFont2            = m_ui.DisplayFont2TextLabel->font().toString();
-		m_pSetup->bDisplayEffect           = m_ui.DisplayEffectCheckBox->isChecked();
 		m_pSetup->bDisplayBlink            = m_ui.DisplayBlinkCheckBox->isChecked();
 		m_pSetup->iJackClientPortAlias     = m_ui.JackClientPortAliasComboBox->currentIndex();
 		m_pSetup->bJackClientPortMetadata  = m_ui.JackClientPortMetadataCheckBox->isChecked();
@@ -1532,7 +1508,6 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bSingleton               = m_ui.SingletonCheckBox->isChecked();
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
-		m_pSetup->bServerConfigTemp        = m_ui.ServerConfigTempCheckBox->isChecked();
 		m_pSetup->bAlsaSeqEnabled          = m_ui.AlsaSeqEnabledCheckBox->isChecked();
 		m_pSetup->bDBusEnabled             = m_ui.DBusEnabledCheckBox->isChecked();
 		m_pSetup->bJackDBusEnabled         = m_ui.JackDBusEnabledCheckBox->isChecked();
@@ -1548,12 +1523,6 @@ void qjackctlSetupForm::accept (void)
 			(!bOldMessagesLog &&  m_pSetup->bMessagesLog) ||
 			(sOldMessagesLogPath != m_pSetup->sMessagesLogPath))
 			pMainForm->updateMessagesLogging();
-		if (( bOldBezierLines && !m_pSetup->bBezierLines) ||
-			(!bOldBezierLines &&  m_pSetup->bBezierLines))
-			pMainForm->updateBezierLines();
-		if (( bOldDisplayEffect && !m_pSetup->bDisplayEffect) ||
-			(!bOldDisplayEffect &&  m_pSetup->bDisplayEffect))
-			pMainForm->updateDisplayEffect();
 		if (iOldJackClientPortAlias != m_pSetup->iJackClientPortAlias)
 			pMainForm->updateJackClientPortAlias();
 		if (( bOldJackClientPortMetadata && !m_pSetup->bJackClientPortMetadata) ||
@@ -1574,8 +1543,6 @@ void qjackctlSetupForm::accept (void)
 			pMainForm->updateTimeDisplayFonts();
 		if (iOldTimeDisplay != m_pSetup->iTimeDisplay)
 			pMainForm->updateTimeDisplayToolTips();
-		if (iOldTimeFormat != m_pSetup->iTimeFormat)
-			pMainForm->updateTimeFormat();
 		if ((!bOldActivePatchbay && m_pSetup->bActivePatchbay) ||
 			(sOldActivePatchbayPath != m_pSetup->sActivePatchbayPath))
 			pMainForm->updateActivePatchbay();
