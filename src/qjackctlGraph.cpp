@@ -1198,23 +1198,15 @@ void qjackctlGraphCanvas::connectPorts (
 // Mouse event handlers.
 void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 {
+	m_state = DragNone;
+	m_item = NULL;
+
 	if (event->button() == Qt::LeftButton) {
 		m_state = DragStart;
 		m_pos = QGraphicsView::mapToScene(event->pos());
 		qjackctlGraphItem *item = itemAt(m_pos);
 		if (item && item->type() >= QGraphicsItem::UserType) {
-			if ((event->modifiers()
-				& (Qt::ShiftModifier | Qt::ControlModifier)) == 0)
-				m_scene->clearSelection();
-			if (event->modifiers() & Qt::ControlModifier)
-				item->setSelected(!item->isSelected());
-			else
-				item->setSelected(true);
-			if (item->isSelected())
-				m_item = static_cast<qjackctlGraphItem *> (item);
-			else
-				m_state = DragNone;
-			emit changed();
+			m_item = static_cast<qjackctlGraphItem *> (item);
 		}
 	}
 
@@ -1229,6 +1221,8 @@ void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 
 void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 {
+	int nchanged = 0;
+
 	const QPointF& pos
 		= QGraphicsView::mapToScene(event->pos());
 
@@ -1237,6 +1231,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 		if ((pos - m_pos).manhattanLength() > 8.0) {
 			m_state = DragMove;
 			if (m_item) {
+				// Start new connection line...
 				if (m_item->type() == qjackctlGraphPort::Type) {
 					qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (m_item);
 					if (port) {
@@ -1247,18 +1242,24 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 						m_connect->setSelected(true);
 						m_scene->addItem(m_connect);
 						m_item = NULL;
-						emit changed();
+						++nchanged;
 					}
 				}
 				else
-				if (m_item->isSelected()
-					&& m_item->type() == qjackctlGraphNode::Type) {
+				// Start moving nodes around...
+				if (m_item->type() == qjackctlGraphNode::Type
+					&& (m_item->isSelected() ||
+						m_scene->selectedItems().isEmpty())) {
 					QGraphicsView::setCursor(Qt::SizeAllCursor);
+					if (!m_item->isSelected()) {
+						m_item->setSelected(true);
+						++nchanged;
+					}
 				}
 				else m_item = NULL;
 			}
-			else
-			if (m_rubberband == NULL) {
+			// Otherwise start lasso rubber-banding...
+			if (m_rubberband == NULL && m_item == NULL && m_connect == NULL) {
 				QGraphicsView::setCursor(Qt::CrossCursor);
 				m_rubberband = new QRubberBand(QRubberBand::Rectangle, this);
 			}
@@ -1276,7 +1277,6 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 				QGraphicsView::mapFromScene(pos));
 			m_rubberband->setGeometry(rect.normalized());
 			m_rubberband->show();
-			int nchanged = 0;
 			if ((event->modifiers()
 				& (Qt::ControlModifier | Qt::ShiftModifier)) == 0) {
 				m_scene->clearSelection();
@@ -1289,8 +1289,6 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					++nchanged;
 				}
 			}
-			if (nchanged > 0)
-				emit changed();
 		}
 		// Move current selected nodes...
 		if (m_item && m_item->type() == qjackctlGraphNode::Type) {
@@ -1313,13 +1311,32 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 		QGraphicsView::mouseMoveEvent(event);
 		break;
 	}
+
+	if (nchanged > 0)
+		emit changed();
 }
 
 
 void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 {
+	int nchanged = 0;
+
 	switch (m_state) {
 	case DragStart:
+		// Make individual item (de)selections...
+		if ((event->modifiers()
+			& (Qt::ShiftModifier | Qt::ControlModifier)) == 0) {
+			m_scene->clearSelection();
+			++nchanged;
+		}
+		if (m_item) {
+			if (event->modifiers() & Qt::ControlModifier)
+				m_item->setSelected(!m_item->isSelected());
+			else
+				m_item->setSelected(true);
+			++nchanged;
+		}
+		// Fall thru...
 	case DragMove:
 		// Close new connection line...
 		if (m_connect) {
@@ -1358,12 +1375,6 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 			delete m_rubberband;
 			m_rubberband = NULL;
 		}
-		else
-		if (m_item == NULL && (event->modifiers()
-			& (Qt::ControlModifier | Qt::ShiftModifier)) == 0) {
-			m_scene->clearSelection();
-			emit changed();
-		}
 		break;
 	case DragScroll:
 	default:
@@ -1377,6 +1388,9 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 
 	// Reset cursor...
 	QGraphicsView::setCursor(Qt::ArrowCursor);
+
+	if (nchanged > 0)
+		emit changed();
 }
 
 
