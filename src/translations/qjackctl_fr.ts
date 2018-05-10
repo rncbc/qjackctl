@@ -505,13 +505,13 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="168"/>
         <source>&amp;Disconnect</source>
-        <translatio>&amp;Déconnecter</translation>
+        <translation>&amp;Déconnecter</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="171"/>
         <location filename="../qjackctlGraphForm.ui" line="174"/>
         <source>Disconnect</source>
-        <translatio>Déconnecter</translation>
+        <translation>Déconnecter</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="177"/>
@@ -625,7 +625,7 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="285"/>
         <source>Show/hide main program window file toolbar</source>
-        <translation>Afficher/cacher la barre d'&apos;outils du fichier de la fenêtre principale du programme</translation>
+        <translation>Afficher/cacher la barre d&apos;&apos;outils du fichier de la fenêtre principale du programme</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="293"/>
@@ -750,14 +750,14 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="427"/>
         <source>Zoom &amp;Reset</source>
-        <translation>&amp;Réinitialiser le zoom>/translation>
+        <translation>&amp;Réinitialiser le zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="430"/>
         <location filename="../qjackctlGraphForm.ui" line="433"/>
         <location filename="../qjackctlGraphForm.ui" line="436"/>
         <source>Zoom Reset</source>
-        <translation>Réinitialiser le zoom>/translation>
+        <translation>Réinitialiser le zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="439"/>
