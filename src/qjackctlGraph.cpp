@@ -1247,11 +1247,12 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 				}
 				else
 				// Start moving nodes around...
-				if (m_item->type() == qjackctlGraphNode::Type
-					&& (m_item->isSelected() ||
-						m_scene->selectedItems().isEmpty())) {
+				if (m_item->type() == qjackctlGraphNode::Type) {
 					QGraphicsView::setCursor(Qt::SizeAllCursor);
 					if (!m_item->isSelected()) {
+						if ((event->modifiers()
+							& (Qt::ShiftModifier | Qt::ControlModifier)) == 0)
+							m_scene->clearSelection();
 						m_item->setSelected(true);
 						++nchanged;
 					}
