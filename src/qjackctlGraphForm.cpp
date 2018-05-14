@@ -324,8 +324,8 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 	const QRectF& rect
 		= canvas->mapToScene(canvas->viewport()->rect()).boundingRect();
 	const QPointF& pos = rect.center();
-	const qreal w = 0.3 * rect.width();
-	const qreal h = 0.3 * rect.height();
+	const qreal w = 0.3 * qMax(rect.width(),  800.0);
+	const qreal h = 0.3 * qMax(rect.height(), 600.0);
 
 	qreal x = pos.x();
 	qreal y = pos.y();
