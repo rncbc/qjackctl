@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Half a decade later, recent new custom entries may now get
+  removed from Session Infra-client list. (EXPERIMENTAL)
+
 - Some rather old, better said "Cambric explosion era", user
   preference options have been ditched altogether: Display /
   Time Format; Display / Shiny glass light effect; Display /

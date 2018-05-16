@@ -1,7 +1,7 @@
 // qjackctlSessionForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -135,7 +135,7 @@ QString qjackctlSessionInfraClientItemEditor::text (void) const
 // Item command browser.
 void qjackctlSessionInfraClientItemEditor::browseSlot (void)
 {
-	bool bBlockSignals = m_pItemEdit->blockSignals(true);
+	const bool bBlockSignals = m_pItemEdit->blockSignals(true);
 	const QString& sCommand
 		= QFileDialog::getOpenFileName(parentWidget(), tr("Infra-command"));
 	if (!sCommand.isEmpty())
@@ -159,7 +159,7 @@ void qjackctlSessionInfraClientItemEditor::resetSlot (void)
 // Item text finish notification.
 void qjackctlSessionInfraClientItemEditor::finishSlot (void)
 {
-	bool bBlockSignals = m_pItemEdit->blockSignals(true);
+	const bool bBlockSignals = m_pItemEdit->blockSignals(true);
 	emit finishSignal();
 	m_index = QModelIndex();
 	m_sDefaultText.clear();
@@ -369,7 +369,7 @@ bool qjackctlSessionForm::queryClose (void)
 		// Rebuild infra-clients list...
 		m_pSession->clearInfraClients();
 		qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
-		int iItemCount = m_ui.InfraClientListView->topLevelItemCount();
+		const int iItemCount = m_ui.InfraClientListView->topLevelItemCount();
 		for (int i = 0; i < iItemCount; ++i) {
 			QTreeWidgetItem *pItem = m_ui.InfraClientListView->topLevelItem(i);
 			if (pItem) {
@@ -486,7 +486,7 @@ void qjackctlSessionForm::recentSession (void)
 {
 	QAction *pAction = qobject_cast<QAction *> (sender());
 	if (pAction) {
-		int i = pAction->data().toInt();
+		const int i = pAction->data().toInt();
 		if (i >= 0 && i < m_sessionDirs.count())
 			loadSessionDir(m_sessionDirs.at(i));
 	}
@@ -556,7 +556,7 @@ void qjackctlSessionForm::saveSessionVersion ( bool bOn )
 // Update the recent session list and menu.
 void qjackctlSessionForm::updateRecent ( const QString& sSessionDir )
 {
-	int i = m_sessionDirs.indexOf(sSessionDir);
+	const int i = m_sessionDirs.indexOf(sSessionDir);
 	if (i >= 0)
 		m_sessionDirs.removeAt(i);
 	m_sessionDirs.prepend(sSessionDir);
@@ -629,7 +629,7 @@ void qjackctlSessionForm::loadSessionDir ( const QString& sSessionDir )
 
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-	bool bLoadSession = m_pSession->load(sSessionDir);
+	const bool bLoadSession = m_pSession->load(sSessionDir);
 	if (bLoadSession)
 		updateRecent(sessionDir.absolutePath());
 
@@ -920,10 +920,10 @@ void qjackctlSessionForm::removeInfraClient (void)
 		const QString& sKey = pItem->text(0);
 		qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
 		qjackctlSession::InfraClientList::Iterator iter	= list.find(sKey);
-		if (iter != list.end()) {
+		if (iter != list.end())
 			list.erase(iter);
-			updateInfraClients();
-		}
+		delete pItem;
+		updateInfraClients();
 	}
 }
 
@@ -949,7 +949,7 @@ void qjackctlSessionForm::updateInfraClients (void)
 	qDebug("qjackctlSessionForm::updateInfraClients()");
 #endif
 
-	int iOldItem = m_ui.InfraClientListView->indexOfTopLevelItem(
+	const int iOldItem = m_ui.InfraClientListView->indexOfTopLevelItem(
 		m_ui.InfraClientListView->currentItem());
 
 	m_ui.InfraClientListView->clear();
@@ -1028,7 +1028,7 @@ void qjackctlSessionForm::keyPressEvent ( QKeyEvent *pKeyEvent )
 #ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlSessionForm::keyPressEvent(%d)", pKeyEvent->key());
 #endif
-	int iKey = pKeyEvent->key();
+	const int iKey = pKeyEvent->key();
 	switch (iKey) {
 	case Qt::Key_Escape:
 		close();
