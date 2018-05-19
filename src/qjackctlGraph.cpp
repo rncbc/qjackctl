@@ -1364,6 +1364,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 					m_commands->beginMacro(tr("Connect"));
 					connectPorts(port1, port2, true);
 					m_commands->endMacro();
+					++nchanged;
 				}
 			}
 			if (m_connect) {
@@ -1371,6 +1372,9 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 				m_connect = NULL;
 			}
 		}
+		// Maybe some node(s) were moved...
+		if (m_item && m_item->type() == qjackctlGraphNode::Type)
+			++nchanged;
 		// Close rubber-band lasso...
 		if (m_rubberband) {
 			delete m_rubberband;

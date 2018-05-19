@@ -472,19 +472,25 @@ void qjackctlGraphForm::stabilize (void)
 	m_ui.editSelectNoneAction->setEnabled(
 		!canvas->scene()->selectedItems().isEmpty());
 
+#if 0
 	const QRectF& outter_rect
 		= canvas->scene()->sceneRect().adjusted(-2.0, -2.0, +2.0, +2.0);
 	const QRectF& inner_rect
 		= canvas->mapToScene(canvas->viewport()->rect()).boundingRect();
 	const bool is_contained
-		= outter_rect.contains(inner_rect);
+		= outter_rect.contains(inner_rect) ||
+			canvas->horizontalScrollBar()->isVisible() ||
+			canvas->verticalScrollBar()->isVisible();
+#else
+	const bool is_contained = true;
+#endif
 	const qreal zoom = canvas->zoom();
 
+	m_ui.viewCenterAction->setEnabled(is_contained);
 	m_ui.viewZoomInAction->setEnabled(1.9 >= zoom);
 	m_ui.viewZoomOutAction->setEnabled(zoom >= 0.2);
 	m_ui.viewZoomFitAction->setEnabled(is_contained);
 	m_ui.viewZoomResetAction->setEnabled(zoom != 1.0);
-	m_ui.viewCenterAction->setEnabled(is_contained);
 }
 
 
