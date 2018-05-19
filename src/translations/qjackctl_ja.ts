@@ -439,12 +439,12 @@ Do you want to save the changes?</source>
     <name>qjackctlGraphCanvas</name>
     <message>
         <location filename="../qjackctlGraph.cpp" line="1364"/>
-        <location filename="../qjackctlGraph.cpp" line="1474"/>
+        <location filename="../qjackctlGraph.cpp" line="1478"/>
         <source>Connect</source>
         <translation>接続</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1509"/>
+        <location filename="../qjackctlGraph.cpp" line="1513"/>
         <source>Disconnect</source>
         <translation>切断</translation>
     </message>
