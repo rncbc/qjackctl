@@ -4,10 +4,10 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.1  2018-05-21  Pre-LAC2018 release frenzy.
 
 - Half a decade later, recent new custom entries may now get
-  removed from Session Infra-client list. (EXPERIMENTAL)
+  removed from Session Infra-client list.
 
 - Some rather old, better said "Cambric explosion era", user
   preference options have been ditched altogether: Display /
@@ -17,14 +17,14 @@ GIT HEAD
 
 - A brand new and way long overdue connections Graph widget
   is finally introduced, only to be accessible through the
-  context menu at this time. (EXPERIMENTAL)
+  context menu at this time.
 
 - Extended multi-selection is now supported on all Connections
   client/port lists, allowing for multiple (dis)connections at
-  once. (EXPERIMENTAL)
+  once.
 
 - Disable singleton/unique application instance setup logic
-  when the display server platform is not X11. (EXPERIMENTAL)
+  when the display server platform is not X11.
 
 - A little hardening on the configure (autoconf) macro side.
 

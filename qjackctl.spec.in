@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 29
+%define release 30
 
 %define _prefix	@ac_prefix@
 
@@ -77,6 +77,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}*.1.gz
 
 %changelog
+* Mon May 21 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.1
+- Pre-LAC2018 release frenzy.
 * Sat Dec 16 2017 Rui Nuno Capela <rncbc@rncbc.org> 0.5.0
 - End of Autumn'17 release.
 * Thu Apr 27 2017 Rui Nuno Capela <rncbc@rncbc.org> 0.4.5
