@@ -449,13 +449,14 @@ void qjackctlGraphForm::refresh (void)
 		m_jack->updateItems();
 		stabilize();
 	}
+#ifdef CONFIG_ALSA_SEQ
 	else
 	if (m_alsa_changed > 0) {
 		m_alsa_changed = 0;
 		m_alsa->updateItems();
 		stabilize();
 	}
-
+#endif
 //	QTimer::singleShot(300, this, SLOT(refresh()));
 }
 

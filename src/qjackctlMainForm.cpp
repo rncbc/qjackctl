@@ -1224,7 +1224,7 @@ void qjackctlMainForm::startJack (void)
 	#else
 		const char chPathSep = ':';
 	#endif
-		const QString sPath = ::getenv("PATH");
+		const QString sPath = QString::fromUtf8(::getenv("PATH"));
 		QStringList paths = sPath.split(chPathSep);
 	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 		paths = paths << "C:\\Program Files\\Jack" << "C:\\Program Files (x86)\\Jack";
@@ -2856,7 +2856,8 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	// Save server configuration file.
 	if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
 		const QString sFilename
-			= ::getenv("HOME") + '/' + m_pSetup->sServerConfigName;
+			= QString::fromUtf8(::getenv("HOME"))
+			+ '/' + m_pSetup->sServerConfigName;
 		QFile file(sFilename);
 		if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
 			QTextStream(&file) << m_sJackCmdLine << endl;
@@ -3591,7 +3592,7 @@ void qjackctlMainForm::updateTitleStatus (void)
 
 	sTitle = m_pSetup->sServerName;
 	if (sTitle.isEmpty())
-		sTitle = ::getenv("JACK_DEFAULT_SERVER");
+		sTitle = QString::fromUtf8(::getenv("JACK_DEFAULT_SERVER"));
 	if (sTitle.isEmpty())
 		sTitle = m_pSetup->sDefPresetName;
 	updateStatusItem(STATUS_SERVER_NAME, sTitle);
