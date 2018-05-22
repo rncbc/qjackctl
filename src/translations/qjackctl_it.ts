@@ -613,7 +613,7 @@ Salvare i cambiamenti?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="265"/>
         <source>Show/hide the main program window menubar</source>
-		<translation>Mostra/nascondi la barra del menu della finestra principale del programma</translation>
+        <translation>Mostra/nascondi la barra del menu della finestra principale del programma</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="268"/>
@@ -634,7 +634,7 @@ Salvare i cambiamenti?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="285"/>
         <source>Show/hide main program window file toolbar</source>
-		<translation>Mostra/nascondi la barra degli strumenti della finestra principale del programma</translation>
+        <translation>Mostra/nascondi la barra degli strumenti della finestra principale del programma</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="293"/>
@@ -650,7 +650,7 @@ Salvare i cambiamenti?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="302"/>
         <source>Show/hide the main program window statusbar</source>
-		<translation>Mostra/nascondi la barra di stato della finestra principale del programma</translation>
+        <translation>Mostra/nascondi la barra di stato della finestra principale del programma</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="313"/>
@@ -666,7 +666,7 @@ Salvare i cambiamenti?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="322"/>
         <source>Show/hide text beside icons</source>
-		<translation>Mostra/nasconi testo dietro le icone</translation>
+        <translation>Mostra/nasconi testo dietro le icone</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="330"/>
@@ -2544,12 +2544,12 @@ Sovrascrivo la cartella?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="136"/>
         <source>Session clients / connections</source>
-		<translation>Clients / connessioni della sessione</translation>
+        <translation>Clients / connessioni della sessione</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="171"/>
         <source>Infra-clients / commands</source>
-		<translation>Comandi / infra-clients</translation>
+        <translation>Comandi / infra-clients</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="187"/>
@@ -3863,12 +3863,12 @@ Vuoi applicare i cambiamenti?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3350"/>
         <source>JACK client/port pretty-name (metadata) display mode</source>
-		<translation>Modo di visualizzazione « bel-nome » (metadati) di client/porta JACK</translation>
+        <translation>Modo di visualizzazione « bel-nome » (metadati) di client/porta JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3353"/>
         <source>Enable JA&amp;CK client/port pretty-names (metadata)</source>
-		<translation>Attiva i «bei-nomi» (metadati) di client/porta JA&amp;CK</translation>
+        <translation>Attiva i «bei-nomi» (metadati) di client/porta JA&amp;CK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3492"/>
