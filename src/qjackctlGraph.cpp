@@ -958,7 +958,8 @@ static const char *NodePosGroup  = "/GraphNodePos";
 // Constructor.
 qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 	: QGraphicsView(parent), m_state(DragNone), m_item(NULL),
-		m_connect(NULL), m_rubberband(NULL), m_zoom(1.0),
+		m_connect(NULL), m_rubberband(NULL),
+		m_zoom(1.0), m_zoomrange(false),
 		m_commands(NULL), m_settings(NULL)
 {
 	m_scene = new QGraphicsScene();
@@ -1092,8 +1093,11 @@ bool qjackctlGraphCanvas::canDisconnect (void) const
 // Zooming methods.
 void qjackctlGraphCanvas::setZoom ( qreal zoom )
 {
-	if (zoom < 0.1 || zoom > 2.0)
-		return;
+	if (zoom < 0.1)
+		zoom = 0.1;
+	else
+	if (zoom > 2.0)
+		zoom = 2.0;
 
 	const qreal scale = zoom / m_zoom;
 	QGraphicsView::scale(scale, scale);
@@ -1106,6 +1110,18 @@ void qjackctlGraphCanvas::setZoom ( qreal zoom )
 qreal qjackctlGraphCanvas::zoom (void) const
 {
 	return m_zoom;
+}
+
+
+void qjackctlGraphCanvas::setZoomRange ( bool zoomrange )
+{
+	m_zoomrange = zoomrange;
+}
+
+
+bool qjackctlGraphCanvas::isZoomRange (void) const
+{
+	return m_zoomrange;
 }
 
 
@@ -1278,16 +1294,19 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 				QGraphicsView::mapFromScene(pos));
 			m_rubberband->setGeometry(rect.normalized());
 			m_rubberband->show();
-			if ((event->modifiers()
-				& (Qt::ControlModifier | Qt::ShiftModifier)) == 0) {
-				m_scene->clearSelection();
-				++nchanged;
-			}
-			const QRectF scene_rect(m_pos, pos);
-			foreach (QGraphicsItem *item, m_scene->items(scene_rect.normalized())) {
-				if (item->type() >= QGraphicsItem::UserType) {
-					item->setSelected(true);
+			if (!m_zoomrange) {
+				if ((event->modifiers()
+					& (Qt::ControlModifier | Qt::ShiftModifier)) == 0) {
+					m_scene->clearSelection();
 					++nchanged;
+				}
+				const QRectF range_rect(m_pos, pos);
+				foreach (QGraphicsItem *item,
+						m_scene->items(range_rect.normalized())) {
+					if (item->type() >= QGraphicsItem::UserType) {
+						item->setSelected(true);
+						++nchanged;
+					}
 				}
 			}
 		}
@@ -1379,6 +1398,13 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 		if (m_rubberband) {
 			delete m_rubberband;
 			m_rubberband = NULL;
+			// Zooming in range?...
+			if (m_zoomrange) {
+				const QRectF range_rect(m_pos,
+					QGraphicsView::mapToScene(event->pos()));
+				zoomFitRange(range_rect);
+				nchanged = 0;
+			}
 		}
 		break;
 	case DragScroll:
@@ -1570,21 +1596,41 @@ void qjackctlGraphCanvas::zoomOut (void)
 
 void qjackctlGraphCanvas::zoomFit (void)
 {
-	QGraphicsView::fitInView(
-		m_scene->itemsBoundingRect(), Qt::KeepAspectRatio);
-
-	const QTransform& transform
-		= QGraphicsView::transform();
-	if (transform.isScaling())
-		m_zoom = transform.m11();
-
-	emit changed();
+	zoomFitRange(m_scene->itemsBoundingRect());
 }
 
 
 void qjackctlGraphCanvas::zoomReset (void)
 {
 	setZoom(1.0);
+}
+
+
+// Zoom in rectangle range.
+void qjackctlGraphCanvas::zoomFitRange ( const QRectF& range_rect )
+{
+	QGraphicsView::fitInView(
+		range_rect, Qt::KeepAspectRatio);
+
+	const QTransform& transform
+		= QGraphicsView::transform();
+	if (transform.isScaling()) {
+		qreal zoom = transform.m11();
+		if (zoom < 0.1) {
+			const qreal scale = 0.1 / zoom;
+			QGraphicsView::scale(scale, scale);
+			zoom = 0.1;
+		}
+		else
+		if (zoom > 2.0) {
+			const qreal scale = 2.0 / zoom;
+			QGraphicsView::scale(scale, scale);
+			zoom = 2.0;
+		}
+		m_zoom = zoom;
+	}
+
+	emit changed();
 }
 
 
@@ -1633,8 +1679,8 @@ bool qjackctlGraphCanvas::restoreState (void)
 
 	if (rect.isValid())
 		QGraphicsView::setSceneRect(rect);
-	if (zoom >= 0.1 && 2.0 >= zoom)
-		setZoom(zoom);
+
+	setZoom(zoom);
 
 	return true;
 }

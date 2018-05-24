@@ -503,6 +503,9 @@ public:
 	void setZoom(qreal zoom);
 	qreal zoom() const;
 
+	void setZoomRange(bool zoomrange);
+	bool isZoomRange() const;
+
 	// Clean-up all un-marked nodes...
 	void resetNodes(int node_type);
 	void clearNodes(int node_type);
@@ -576,6 +579,9 @@ protected:
 	// Graph node key helper.
 	QString nodeKey(qjackctlGraphNode *node) const;
 
+	// Zoom in rectangle range.
+	void zoomFitRange(const QRectF& range_rect);
+
 private:
 
 	// Mouse pointer dragging states.
@@ -589,6 +595,7 @@ private:
 	qjackctlGraphConnect *m_connect;
 	QRubberBand          *m_rubberband;
 	qreal                 m_zoom;
+	bool                  m_zoomrange;
 
 	qjackctlGraphNode::Nodes m_nodes;
 

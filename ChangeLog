@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Added View/Zoom Range mode option to Graph tool.
+
+
 0.5.1  2018-05-21  Pre-LAC2018 release frenzy.
 
 - Half a decade later, recent new custom entries may now get

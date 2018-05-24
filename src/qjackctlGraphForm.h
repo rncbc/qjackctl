@@ -100,6 +100,8 @@ protected slots:
 	void viewCenter();
 	void viewRefresh();
 
+	void viewZoomRange(bool on);
+
 	void helpAbout();
 	void helpAboutQt();
 
@@ -158,6 +160,9 @@ public:
 	void setTextBesideIcons(bool texticons);
 	bool isTextBesideIcons() const;
 
+	void setZoomRange(bool zoomrange);
+	bool isZoomRange() const;
+
 	// Graph main-widget state methods.
 	bool restoreState(QMainWindow *widget);
 	bool saveState(QMainWindow *widget) const;
@@ -171,6 +176,7 @@ private:
 	bool       m_toolbar;
 	bool       m_statusbar;
 	bool       m_texticons;
+	bool       m_zoomrange;
 };
 
 

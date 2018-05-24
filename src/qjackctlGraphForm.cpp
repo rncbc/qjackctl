@@ -162,6 +162,10 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SIGNAL(triggered(bool)),
 		m_ui.graphCanvas, SLOT(zoomReset()));
 
+	QObject::connect(m_ui.viewZoomRangeAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewZoomRange(bool)));
+
 	QObject::connect(m_ui.helpAboutAction,
 		SIGNAL(triggered(bool)),
 		SLOT(helpAbout()));
@@ -205,12 +209,14 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	m_ui.viewStatusbarAction->setChecked(m_config->isStatusbar());
 
 	m_ui.viewTextBesideIconsAction->setChecked(m_config->isTextBesideIcons());
+	m_ui.viewZoomRangeAction->setChecked(m_config->isZoomRange());
 
 	viewMenubar(m_config->isMenubar());
 	viewToolbar(m_config->isToolbar());
 	viewStatusbar(m_config->isStatusbar());
 
 	viewTextBesideIcons(m_config->isTextBesideIcons());
+	viewZoomRange(m_config->isZoomRange());
 
 	m_ui.graphCanvas->restoreState();
 
@@ -278,6 +284,12 @@ void qjackctlGraphForm::viewRefresh (void)
 	alsa_changed();
 
 	refresh();
+}
+
+
+void qjackctlGraphForm::viewZoomRange ( bool on )
+{
+	m_ui.graphCanvas->setZoomRange(on);
 }
 
 
@@ -488,8 +500,8 @@ void qjackctlGraphForm::stabilize (void)
 	const qreal zoom = canvas->zoom();
 
 	m_ui.viewCenterAction->setEnabled(is_contained);
-	m_ui.viewZoomInAction->setEnabled(1.9 >= zoom);
-	m_ui.viewZoomOutAction->setEnabled(zoom >= 0.2);
+	m_ui.viewZoomInAction->setEnabled(zoom < 2.0);
+	m_ui.viewZoomOutAction->setEnabled(zoom > 0.1);
 	m_ui.viewZoomFitAction->setEnabled(is_contained);
 	m_ui.viewZoomResetAction->setEnabled(zoom != 1.0);
 }
@@ -523,6 +535,7 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 
 	if (m_config && QMainWindow::isVisible()) {
 		m_config->setTextBesideIcons(m_ui.viewTextBesideIconsAction->isChecked());
+		m_config->setZoomRange(m_ui.viewZoomRangeAction->isChecked());
 		m_config->setStatusbar(m_ui.StatusBar->isVisible());
 		m_config->setToolbar(m_ui.ToolBar->isVisible());
 		m_config->setMenubar(m_ui.MenuBar->isVisible());
@@ -543,12 +556,14 @@ static const char *ViewMenubarKey   = "/Menubar";
 static const char *ViewToolbarKey   = "/Toolbar";
 static const char *ViewStatusbarKey = "/Statusbar";
 static const char *ViewTextBesideIconsKey = "/TextBesideIcons";
+static const char *ViewZoomRangeKey = "/ZoomRange";
 
 
 // Constructors.
 qjackctlGraphConfig::qjackctlGraphConfig ( QSettings *settings )
 	: m_settings(settings), m_menubar(false),
-		m_toolbar(false), m_statusbar(false), m_texticons(false)
+		m_toolbar(false), m_statusbar(false),
+		m_texticons(false), m_zoomrange(false)
 {
 }
 
@@ -603,6 +618,17 @@ bool qjackctlGraphConfig::isTextBesideIcons (void) const
 }
 
 
+void qjackctlGraphConfig::setZoomRange ( bool zoomrange )
+{
+	m_zoomrange = zoomrange;
+}
+
+bool qjackctlGraphConfig::isZoomRange (void) const
+{
+	return m_zoomrange;
+}
+
+
 // Graph main-widget state methods.
 bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 {
@@ -614,6 +640,7 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 	m_toolbar = m_settings->value(ViewToolbarKey, true).toBool();
 	m_statusbar = m_settings->value(ViewStatusbarKey, true).toBool();
 	m_texticons = m_settings->value(ViewTextBesideIconsKey, true).toBool();
+	m_zoomrange = m_settings->value(ViewZoomRangeKey, false).toBool();
 	m_settings->endGroup();
 
 	m_settings->beginGroup(LayoutGroup);
@@ -638,6 +665,7 @@ bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 	m_settings->setValue(ViewToolbarKey, m_toolbar);
 	m_settings->setValue(ViewStatusbarKey, m_statusbar);
 	m_settings->setValue(ViewTextBesideIconsKey, m_texticons);
+	m_settings->setValue(ViewZoomRangeKey, m_zoomrange);
 	m_settings->endGroup();
 
 	m_settings->beginGroup(LayoutGroup);

@@ -78,7 +78,7 @@
       <string>&amp;Zoom</string>
      </property>
      <property name="icon">
-      <iconset resource="qjackctl.qrc">:/images/viewZoomTool.png</iconset>
+      <iconset resource="qjackctl.qrc">:/images/graphZoomTool.png</iconset>
      </property>
      <addaction name="viewZoomInAction"/>
      <addaction name="viewZoomOutAction"/>
@@ -94,6 +94,7 @@
     <addaction name="separator"/>
     <addaction name="viewCenterAction"/>
     <addaction name="viewZoomMenu"/>
+    <addaction name="viewZoomRangeAction"/>
     <addaction name="separator"/>
     <addaction name="viewRefreshAction"/>
    </widget>
@@ -139,6 +140,8 @@
    <addaction name="separator"/>
    <addaction name="viewZoomFitAction"/>
    <addaction name="viewZoomResetAction"/>
+   <addaction name="separator"/>
+   <addaction name="viewZoomRangeAction"/>
   </widget>
   <action name="graphConnectAction">
    <property name="icon">
@@ -437,6 +440,29 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+1</string>
+   </property>
+  </action>
+  <action name="viewZoomRangeAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="qjackctl.qrc">:/images/graphZoomRange.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Zoom Range</string>
+   </property>
+   <property name="iconText">
+    <string>Zoom Range</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom Range</string>
+   </property>
+   <property name="statusTip">
+    <string>Zoom Range</string>
+   </property>
+   <property name="shortcut">
+    <string/>
    </property>
   </action>
   <action name="helpAboutAction">
