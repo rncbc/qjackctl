@@ -158,17 +158,20 @@ bool qjackctlAlsaGraph::findClientPort (
 		= QString::number(port_id) + ':'
 		+ QString::fromUtf8(snd_seq_port_info_get_name(port_info));
 
-	qjackctlGraphItem::Mode node_mode = port_mode;
-	if (client_id >= 128)
-		node_mode = qjackctlGraphItem::Duplex;
-
 	const int node_type
 		= qjackctlAlsaGraph::nodeType();
 	const int port_type
 		= qjackctlAlsaGraph::portType();
 
+	qjackctlGraphItem::Mode node_mode = port_mode;
+
 	*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
 	*port = NULL;
+
+	if (*node == NULL && client_id >= 128) {
+		node_mode = qjackctlGraphItem::Duplex;
+		*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
+	}
 
 	if (*node)
 		*port = (*node)->findPort(port_name, port_mode, port_type);

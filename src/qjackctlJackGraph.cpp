@@ -179,13 +179,6 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	const QString& port_name
 		= client_port_name.right(client_port_name.length() - colon - 1);
 
-	const unsigned long port_flags
-		= ::jack_port_flags(jack_port);
-
-	qjackctlGraphItem::Mode node_mode = port_mode;
-	if ((port_flags & JackPortIsTerminal) == 0)
-		node_mode = qjackctlGraphItem::Duplex;
-
 	const int node_type
 		= qjackctlJackGraph::nodeType();
 	const char *port_type_name
@@ -193,8 +186,18 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	const int port_type
 		= qjackctlGraphItem::itemType(port_type_name);
 
+	qjackctlGraphItem::Mode node_mode = port_mode;
+
 	*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
 	*port = NULL;
+
+	if (*node == NULL) {
+		const unsigned long port_flags = ::jack_port_flags(jack_port);
+		if ((port_flags & (JackPortIsPhysical | JackPortIsTerminal)) == 0) {
+			node_mode = qjackctlGraphItem::Duplex;
+			*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
+		}
+	}
 
 	if (*node)
 		*port = (*node)->findPort(port_name, port_mode, port_type);

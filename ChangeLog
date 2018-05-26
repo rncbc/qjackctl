@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Fixed the automatic aggregation of new Graph client nodes
+  that are split as either input or output only (ie. system,
+  terminal, physical or otherwise non-duplex nodes).
+
 - Added View/Zoom Range mode option to Graph tool.
 
 
