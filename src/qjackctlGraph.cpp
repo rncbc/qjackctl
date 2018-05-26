@@ -507,7 +507,8 @@ qjackctlGraphPort *qjackctlGraphNode::addPort (
 {
 	qjackctlGraphPort *port = new qjackctlGraphPort(this, name, mode, type);
 
-	m_ports.insert(qjackctlGraphPort::PortKey(port), port);
+	m_ports.append(port);
+	m_portkeys.insert(qjackctlGraphPort::PortKey(port), port);
 
 	updatePath();
 
@@ -529,7 +530,8 @@ qjackctlGraphPort *qjackctlGraphNode::addOutputPort ( const QString& name, int t
 
 void qjackctlGraphNode::removePort ( qjackctlGraphPort *port )
 {
-	m_ports.remove(qjackctlGraphPort::PortKey(port));
+	m_portkeys.remove(qjackctlGraphPort::PortKey(port));
+	m_ports.removeAll(port);
 
 	updatePath();
 }
@@ -544,6 +546,7 @@ void qjackctlGraphNode::removePorts (void)
 	//
 	//qDeleteAll(m_ports);
 	m_ports.clear();
+	m_portkeys.clear();
 }
 
 
@@ -551,7 +554,7 @@ void qjackctlGraphNode::removePorts (void)
 qjackctlGraphPort *qjackctlGraphNode::findPort (
 	const QString& name, qjackctlGraphItem::Mode mode, int type )
 {
-	return m_ports.value(qjackctlGraphPort::PortKey(name, mode, type), NULL);
+	return m_portkeys.value(qjackctlGraphPort::PortKey(name, mode, type), NULL);
 }
 
 
@@ -1017,7 +1020,8 @@ void qjackctlGraphCanvas::addItem ( qjackctlGraphItem *item )
 	if (item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 		if (node) {
-			m_nodes.insert(qjackctlGraphNode::NodeKey(node), node);
+			m_nodes.append(node);
+			m_nodekeys.insert(qjackctlGraphNode::NodeKey(node), node);
 			if (!restoreNodePos(node))
 				emit added(node);
 		}
@@ -1032,7 +1036,8 @@ void qjackctlGraphCanvas::removeItem ( qjackctlGraphItem *item )
 		if (node) {
 			emit removed(node);
 			node->removePorts();
-			m_nodes.remove(qjackctlGraphNode::NodeKey(node));
+			m_nodekeys.remove(qjackctlGraphNode::NodeKey(node));
+			m_nodes.removeAll(node);
 		}
 	}
 
@@ -1152,7 +1157,8 @@ void qjackctlGraphCanvas::clearNodes ( int node_type )
 
 	foreach (qjackctlGraphNode *node, m_nodes) {
 		if (node->nodeType() == node_type) {
-			m_nodes.remove(qjackctlGraphNode::NodeKey(node));
+			m_nodekeys.remove(qjackctlGraphNode::NodeKey(node));
+			m_nodes.removeAll(node);
 			nodes.append(node);
 		}
 	}
@@ -1165,7 +1171,7 @@ void qjackctlGraphCanvas::clearNodes ( int node_type )
 qjackctlGraphNode *qjackctlGraphCanvas::findNode (
 	const QString& name, qjackctlGraphItem::Mode mode, int type ) const
 {
-	return m_nodes.value(qjackctlGraphNode::NodeKey(name, mode, type), NULL);
+	return m_nodekeys.value(qjackctlGraphNode::NodeKey(name, mode, type), NULL);
 }
 
 

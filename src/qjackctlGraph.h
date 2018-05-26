@@ -99,6 +99,14 @@ public:
 		int type() const
 			{ return m_type; }
 
+		// Hash/map key comparators.
+		bool operator== (const ItemKey& key) const
+		{
+			return ItemKey::type() == key.type()
+				&& ItemKey::mode() == key.mode()
+				&& ItemKey::name() == key.name();
+		}
+
 	private:
 
 		// Key fields.
@@ -118,6 +126,13 @@ private:
 
 	bool m_marked;
 };
+
+
+// Item hash function.
+inline uint qHash ( const qjackctlGraphItem::ItemKey& key )
+{
+	return qHash(key.name()) ^ qHash(uint(key.mode())) ^ qHash(key.type());
+}
 
 
 //----------------------------------------------------------------------------
@@ -173,7 +188,6 @@ public:
 	class PortKey : public ItemKey
 	{
 	public:
-
 		// Constructors.
 		PortKey (const QString& name, Mode mode, int type = 0)
 			: ItemKey(name, mode, type) {}
@@ -192,7 +206,7 @@ public:
 		}
 	};
 
-	typedef QMap<PortKey, qjackctlGraphPort *> Ports;
+	typedef QMap<PortKey, qjackctlGraphPort *> PortKeys;
 
 	// Port sorting comparator (visual sort).
 	struct Compare
@@ -289,23 +303,14 @@ public:
 	class NodeKey : public ItemKey
 	{
 	public:
-
 		// Constructors.
 		NodeKey(const QString& name, Mode mode, int type = 0)
 			: ItemKey(name, mode, type) {}
 		NodeKey(qjackctlGraphNode *node)
 			: ItemKey(node->nodeName(), node->nodeMode(), node->nodeType()) {}
-
-		// Hash/map key comparators.
-		bool operator== (const ItemKey& key) const
-		{
-			return ItemKey::type() == key.type()
-				&& ItemKey::mode() == key.mode()
-				&& ItemKey::name() == key.name();
-		}
 	};
 
-	typedef QHash<NodeKey, qjackctlGraphNode *> Nodes;
+	typedef QHash<NodeKey, qjackctlGraphNode *> NodeKeys;
 
 protected:
 
@@ -326,17 +331,11 @@ private:
 	QGraphicsPixmapItem *m_pixmap;
 	QGraphicsTextItem   *m_text;
 
-	qjackctlGraphPort::Ports m_ports;
+	qjackctlGraphPort::PortKeys m_portkeys;
+	QList<qjackctlGraphPort *>  m_ports;
 
 	int m_selectx;
 };
-
-
-// Item hash function.
-inline uint qHash ( const qjackctlGraphNode::NodeKey& key )
-{
-	return qHash(key.name()) ^ qHash(uint(key.mode())) ^ qHash(key.type());
-}
 
 
 //----------------------------------------------------------------------------
@@ -597,7 +596,8 @@ private:
 	qreal                 m_zoom;
 	bool                  m_zoomrange;
 
-	qjackctlGraphNode::Nodes m_nodes;
+	qjackctlGraphNode::NodeKeys m_nodekeys;
+	QList<qjackctlGraphNode *>  m_nodes;
 
 	QUndoStack *m_commands;
 	QSettings  *m_settings;
