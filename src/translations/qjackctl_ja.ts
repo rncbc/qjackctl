@@ -817,27 +817,27 @@ Do you want to save the changes?</source>
         <translation>Qtツールキットについての情報を表示します</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="68"/>
+        <location filename="../qjackctlGraphForm.cpp" line="63"/>
         <source>&amp;Undo</source>
         <translation>元に戻す(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="70"/>
+        <location filename="../qjackctlGraphForm.cpp" line="65"/>
         <source>Undo last (dis)connection</source>
         <translation>最後の接続あるいは切断を元に戻します</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="73"/>
+        <location filename="../qjackctlGraphForm.cpp" line="68"/>
         <source>&amp;Redo</source>
         <translation>やり直す(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="75"/>
+        <location filename="../qjackctlGraphForm.cpp" line="70"/>
         <source>Redo last (dis)connection</source>
         <translation>最後の接続あるいは切断をやり直します</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="226"/>
+        <location filename="../qjackctlGraphForm.cpp" line="228"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>

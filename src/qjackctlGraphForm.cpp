@@ -53,11 +53,6 @@ qjackctlGraphForm::qjackctlGraphForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-	m_jack = new qjackctlJackGraph(m_ui.graphCanvas);
-#ifdef CONFIG_ALSA_SEQ
-	m_alsa = new qjackctlAlsaGraph(m_ui.graphCanvas);
-#endif
-
 	m_jack_changed = 0;
 	m_alsa_changed = 0;
 
@@ -203,6 +198,13 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	m_ui.graphCanvas->setSettings(m_config->settings());
 
 	m_config->restoreState(this);
+
+	// Raise the operational sects...
+	m_jack = new qjackctlJackGraph(m_ui.graphCanvas);
+#ifdef CONFIG_ALSA_SEQ
+	if (pSetup->bAlsaSeqEnabled)
+		m_alsa = new qjackctlAlsaGraph(m_ui.graphCanvas);
+#endif
 
 	m_ui.viewMenubarAction->setChecked(m_config->isMenubar());
 	m_ui.viewToolbarAction->setChecked(m_config->isToolbar());
@@ -394,13 +396,15 @@ void qjackctlGraphForm::connected (
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2 )
 {
 	if (qjackctlJackGraph::isPortType(port1->portType())) {
-		m_jack->connectPorts(port1, port2, true);
+		if (m_jack)
+			m_jack->connectPorts(port1, port2, true);
 		jack_changed();
 	}
 #ifdef CONFIG_ALSA_SEQ
 	else
 	if (qjackctlAlsaGraph::isPortType(port1->portType())) {
-		m_alsa->connectPorts(port1, port2, true);
+		if (m_alsa)
+			m_alsa->connectPorts(port1, port2, true);
 		alsa_changed();
 	}
 #endif
@@ -417,13 +421,15 @@ void qjackctlGraphForm::disconnected (
 		pMainForm->queryDisconnect(port1, port2);
 
 	if (qjackctlJackGraph::isPortType(port1->portType())) {
-		m_jack->connectPorts(port1, port2, false);
+		if (m_jack)
+			m_jack->connectPorts(port1, port2, false);
 		jack_changed();
 	}
 #ifdef CONFIG_ALSA_SEQ
 	else
 	if (qjackctlAlsaGraph::isPortType(port1->portType())) {
-		m_alsa->connectPorts(port1, port2, false);
+		if (m_alsa)
+			m_alsa->connectPorts(port1, port2, false);
 		alsa_changed();
 	}
 #endif
@@ -436,7 +442,9 @@ void qjackctlGraphForm::disconnected (
 void qjackctlGraphForm::jack_shutdown (void)
 {
 	m_jack_changed = 0;
-	m_jack->clearItems();
+
+	if (m_jack)
+		m_jack->clearItems();
 
 	stabilize();
 }
@@ -458,14 +466,16 @@ void qjackctlGraphForm::refresh (void)
 {
 	if (m_jack_changed > 0) {
 		m_jack_changed = 0;
-		m_jack->updateItems();
+		if (m_jack)
+			m_jack->updateItems();
 		stabilize();
 	}
 #ifdef CONFIG_ALSA_SEQ
 	else
 	if (m_alsa_changed > 0) {
 		m_alsa_changed = 0;
-		m_alsa->updateItems();
+		if (m_alsa)
+			m_alsa->updateItems();
 		stabilize();
 	}
 #endif

@@ -817,27 +817,27 @@ Voulez-vous enregistrer les changements ?</translation>
         <translation>Afficher les informations à propos de la boîte à outils Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="68"/>
+        <location filename="../qjackctlGraphForm.cpp" line="63"/>
         <source>&amp;Undo</source>
         <translation>&amp;Défaire</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="70"/>
+        <location filename="../qjackctlGraphForm.cpp" line="65"/>
         <source>Undo last (dis)connection</source>
         <translation>Défaire la dernière (dé)connexion</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="73"/>
+        <location filename="../qjackctlGraphForm.cpp" line="68"/>
         <source>&amp;Redo</source>
         <translation>&amp;Refaire</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="75"/>
+        <location filename="../qjackctlGraphForm.cpp" line="70"/>
         <source>Redo last (dis)connection</source>
         <translation>refaire la dernière (dé)connexion</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="226"/>
+        <location filename="../qjackctlGraphForm.cpp" line="228"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
