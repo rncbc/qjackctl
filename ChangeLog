@@ -4,7 +4,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.2  2018-05-27  Pre-LAC2018 release frenzy hotfix.
+
+- Respect ALSA Sequencer support option also on Graph view.
+
+- Regression to new Graph node/ports sorting comparator;
+  also fixed multiple and many port removals, most probably
+  causing it to crash due to double-free/delete potential.
 
 - Fixed the automatic aggregation of new Graph client nodes
   that are split as either input or output only (ie. system,
