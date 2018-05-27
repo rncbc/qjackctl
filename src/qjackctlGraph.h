@@ -31,7 +31,6 @@
 
 #include <QList>
 #include <QHash>
-#include <QMap>
 
 #include <QUndoCommand>
 
@@ -115,6 +114,8 @@ public:
 		int     m_type;
 	};
 
+	typedef QHash<ItemKey, qjackctlGraphItem *> ItemKeys;
+
 	// Item-type hash (static)
 	static int itemType(const QByteArray& type_name);
 
@@ -189,36 +190,23 @@ public:
 	{
 	public:
 		// Constructors.
-		PortKey (const QString& name, Mode mode, int type = 0)
-			: ItemKey(name, mode, type) {}
 		PortKey(qjackctlGraphPort *port)
 			: ItemKey(port->portName(), port->portMode(), port->portType()) {}
-
-		// Hash/map key comparators.
-		bool operator< (const ItemKey& key) const
-		{
-			if (ItemKey::type() < key.type())
-				return true;
-			if (ItemKey::mode() < key.mode())
-				return true;
-
-			return qjackctlGraphPort::lessThan(ItemKey::name(), key.name());
-		}
 	};
 
-	typedef QMap<PortKey, qjackctlGraphPort *> PortKeys;
-
-	// Port sorting comparator (visual sort).
-	struct Compare
-	{
+	// Port sorting comparators.
+	struct Compare {
 		bool operator()(qjackctlGraphPort *port1, qjackctlGraphPort *port2) const
-		{
-			return (port1->scenePos().y() < port2->scenePos().y());
-		}
+			{ return qjackctlGraphPort::lessThan(port1, port2); }
+	};
+
+	struct ComparePos {
+		bool operator()(qjackctlGraphPort *port1, qjackctlGraphPort *port2) const
+			{ return (port1->scenePos().y() < port2->scenePos().y()); }
 	};
 
 	// Natural decimal sorting comparator.
-	static bool lessThan(const QString& s1, const QString& s2);
+	static bool lessThan(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 
 protected:
 
@@ -304,13 +292,9 @@ public:
 	{
 	public:
 		// Constructors.
-		NodeKey(const QString& name, Mode mode, int type = 0)
-			: ItemKey(name, mode, type) {}
 		NodeKey(qjackctlGraphNode *node)
 			: ItemKey(node->nodeName(), node->nodeMode(), node->nodeType()) {}
 	};
-
-	typedef QHash<NodeKey, qjackctlGraphNode *> NodeKeys;
 
 protected:
 
@@ -331,7 +315,7 @@ private:
 	QGraphicsPixmapItem *m_pixmap;
 	QGraphicsTextItem   *m_text;
 
-	qjackctlGraphPort::PortKeys m_portkeys;
+	qjackctlGraphPort::ItemKeys m_portkeys;
 	QList<qjackctlGraphPort *>  m_ports;
 
 	int m_selectx;
@@ -596,7 +580,7 @@ private:
 	qreal                 m_zoom;
 	bool                  m_zoomrange;
 
-	qjackctlGraphNode::NodeKeys m_nodekeys;
+	qjackctlGraphNode::ItemKeys m_nodekeys;
 	QList<qjackctlGraphNode *>  m_nodes;
 
 	QUndoStack *m_commands;

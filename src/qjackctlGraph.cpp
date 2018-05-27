@@ -334,8 +334,16 @@ void qjackctlGraphPort::setSelectedEx ( bool is_selected )
 
 
 // Natural decimal sorting comparator (static)
-bool qjackctlGraphPort::lessThan ( const QString& s1, const QString& s2 )
+bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *port2 )
 {
+	const int port_type_diff
+		= port1->portType() - port2->portType();
+	if (port_type_diff)
+		return (port_type_diff > 0);
+
+	const QString& s1 = port1->portName();
+	const QString& s2 = port2->portName();
+
 	const int n1 = s1.length();
 	const int n2 = s2.length();
 
@@ -554,7 +562,8 @@ void qjackctlGraphNode::removePorts (void)
 qjackctlGraphPort *qjackctlGraphNode::findPort (
 	const QString& name, qjackctlGraphItem::Mode mode, int type )
 {
-	return m_portkeys.value(qjackctlGraphPort::PortKey(name, mode, type), NULL);
+	return static_cast<qjackctlGraphPort *> (
+		m_portkeys.value(qjackctlGraphPort::ItemKey(name, mode, type), NULL));
 }
 
 
@@ -595,6 +604,8 @@ void qjackctlGraphNode::updatePath (void)
 		}
 	}
 	width = wi + wo;
+
+	std::sort(m_ports.begin(), m_ports.end(), qjackctlGraphPort::Compare());
 
 	int height = rect.height() + 6;
 	int type = 0;
@@ -1171,7 +1182,8 @@ void qjackctlGraphCanvas::clearNodes ( int node_type )
 qjackctlGraphNode *qjackctlGraphCanvas::findNode (
 	const QString& name, qjackctlGraphItem::Mode mode, int type ) const
 {
-	return m_nodekeys.value(qjackctlGraphNode::NodeKey(name, mode, type), NULL);
+	return static_cast<qjackctlGraphNode *> (
+		m_nodekeys.value(qjackctlGraphNode::ItemKey(name, mode, type), NULL));
 }
 
 
@@ -1501,8 +1513,8 @@ void qjackctlGraphCanvas::connectItems (void)
 
 	m_scene->clearSelection();
 
-	std::sort(outs.begin(), outs.end(), qjackctlGraphPort::Compare());
-	std::sort(ins.begin(),  ins.end(),  qjackctlGraphPort::Compare());
+	std::sort(outs.begin(), outs.end(), qjackctlGraphPort::ComparePos());
+	std::sort(ins.begin(),  ins.end(),  qjackctlGraphPort::ComparePos());
 
 	QListIterator<qjackctlGraphPort *> iter1(outs);
 	QListIterator<qjackctlGraphPort *> iter2(ins);
