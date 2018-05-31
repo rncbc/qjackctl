@@ -826,27 +826,32 @@ Salvare i cambiamenti?</translation>
         <translation>Mostra informazioni a proposito del kit di strumenti Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="63"/>
+        <location filename="../qjackctlGraphForm.cpp" line="68"/>
         <source>&amp;Undo</source>
         <translation>&amp;Annulla</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="65"/>
+        <location filename="../qjackctlGraphForm.cpp" line="70"/>
         <source>Undo last (dis)connection</source>
         <translation>Annulla l&apos;ultima (dis)connessione</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="68"/>
+        <location filename="../qjackctlGraphForm.cpp" line="73"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ripeti</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="70"/>
+        <location filename="../qjackctlGraphForm.cpp" line="75"/>
         <source>Redo last (dis)connection</source>
         <translation>Ripeti l&apos;ultima (dis)connessione</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="228"/>
+        <location filename="../qjackctlGraphForm.cpp" line="91"/>
+        <source>Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.cpp" line="278"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>

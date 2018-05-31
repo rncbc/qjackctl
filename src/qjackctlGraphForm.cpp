@@ -36,6 +36,11 @@
 
 #include <QMessageBox>
 
+#include <QHBoxLayout>
+#include <QToolButton>
+#include <QSlider>
+#include <QSpinBox>
+
 #include <QResizeEvent>
 #include <QCloseEvent>
 
@@ -79,6 +84,51 @@ qjackctlGraphForm::qjackctlGraphForm (
 	m_ui.ToolBar->insertAction(before_action, undo_action);
 	m_ui.ToolBar->insertAction(before_action, redo_action);
 	m_ui.ToolBar->insertSeparator(before_action);
+
+	// Special zoom composite widget...
+	QWidget *zoom_widget = new QWidget();
+	zoom_widget->setMaximumWidth(240);
+	zoom_widget->setToolTip(tr("Zoom"));
+
+	QHBoxLayout *zoom_layout = new QHBoxLayout();
+	zoom_layout->setMargin(0);
+	zoom_layout->setSpacing(0);
+
+	QToolButton *zoom_out = new QToolButton();
+	zoom_out->setDefaultAction(m_ui.viewZoomOutAction);
+	zoom_out->setFixedSize(22, 22);
+	zoom_layout->addWidget(zoom_out);
+
+	m_zoom_slider = new QSlider(Qt::Horizontal);
+	m_zoom_slider->setFixedHeight(22);
+	m_zoom_slider->setMinimum(10);
+	m_zoom_slider->setMaximum(200);
+	m_zoom_slider->setTickInterval(100);
+	m_zoom_slider->setTickPosition(QSlider::TicksBothSides);
+	zoom_layout->addWidget(m_zoom_slider);
+
+	QToolButton *zoom_in = new QToolButton();
+	zoom_in->setDefaultAction(m_ui.viewZoomInAction);
+	zoom_in->setFixedSize(22, 22);
+	zoom_layout->addWidget(zoom_in);
+
+	m_zoom_spinbox = new QSpinBox();
+	m_zoom_spinbox->setFixedHeight(22);
+	m_zoom_spinbox->setAlignment(Qt::AlignCenter);
+	m_zoom_spinbox->setMinimum(10);
+	m_zoom_spinbox->setMaximum(200);
+	m_zoom_spinbox->setSuffix(" %");
+	zoom_layout->addWidget(m_zoom_spinbox);
+
+	zoom_widget->setLayout(zoom_layout);
+	m_ui.StatusBar->addPermanentWidget(zoom_widget);
+
+	QObject::connect(m_zoom_spinbox,
+		SIGNAL(valueChanged(int)),
+		SLOT(zoomValueChanged(int)));
+	QObject::connect(m_zoom_slider,
+		SIGNAL(valueChanged(int)),
+		SLOT(zoomValueChanged(int)));
 
 	QObject::connect(m_ui.graphCanvas,
 		SIGNAL(added(qjackctlGraphNode *)),
@@ -309,6 +359,13 @@ void qjackctlGraphForm::helpAboutQt (void)
 }
 
 
+void qjackctlGraphForm::zoomValueChanged ( int zoom_value )
+{
+	m_ui.graphCanvas->setZoom(0.01 * qreal(zoom_value));
+}
+
+
+
 // Context-menu event handler.
 void qjackctlGraphForm::contextMenuEvent (
 	QContextMenuEvent *pContextMenuEvent )
@@ -508,12 +565,19 @@ void qjackctlGraphForm::stabilize (void)
 	const bool is_contained = true;
 #endif
 	const qreal zoom = canvas->zoom();
-
 	m_ui.viewCenterAction->setEnabled(is_contained);
 	m_ui.viewZoomInAction->setEnabled(zoom < 2.0);
 	m_ui.viewZoomOutAction->setEnabled(zoom > 0.1);
 	m_ui.viewZoomFitAction->setEnabled(is_contained);
 	m_ui.viewZoomResetAction->setEnabled(zoom != 1.0);
+
+	const int zoom_value = int(100.0f * zoom);
+	const bool is_spinbox_blocked = m_zoom_spinbox->blockSignals(true);
+	const bool is_slider_blocked = m_zoom_slider->blockSignals(true);
+	m_zoom_spinbox->setValue(zoom_value);
+	m_zoom_slider->setValue(zoom_value);
+	m_zoom_spinbox->blockSignals(is_spinbox_blocked);
+	m_zoom_slider->blockSignals(is_slider_blocked);
 }
 
 

@@ -816,27 +816,32 @@ Desea guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="63"/>
+        <location filename="../qjackctlGraphForm.cpp" line="68"/>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="65"/>
+        <location filename="../qjackctlGraphForm.cpp" line="70"/>
         <source>Undo last (dis)connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="68"/>
+        <location filename="../qjackctlGraphForm.cpp" line="73"/>
         <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="70"/>
+        <location filename="../qjackctlGraphForm.cpp" line="75"/>
         <source>Redo last (dis)connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="228"/>
+        <location filename="../qjackctlGraphForm.cpp" line="91"/>
+        <source>Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.cpp" line="278"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>

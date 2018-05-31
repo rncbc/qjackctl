@@ -38,6 +38,9 @@ class qjackctlSetup;
 class QResizeEvent;
 class QCloseEvent;
 
+class QSlider;
+class QSpinBox;
+
 
 // Forwards decls.
 class QSettings;
@@ -105,6 +108,8 @@ protected slots:
 	void helpAbout();
 	void helpAboutQt();
 
+	void zoomValueChanged(int zoom_value);
+
 protected:
 
 	// Context-menu event handler.
@@ -132,6 +137,9 @@ private:
 	int m_alsa_changed;
 
 	int m_ins, m_mids, m_outs;
+
+	QSlider  *m_zoom_slider;
+	QSpinBox *m_zoom_spinbox;
 };
 
 
