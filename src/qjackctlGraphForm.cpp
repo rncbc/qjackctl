@@ -159,9 +159,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SIGNAL(triggered(bool)),
 		m_ui.graphCanvas, SLOT(disconnectItems()));
 
-	QObject::connect(m_ui.graphExitAction,
+	QObject::connect(m_ui.graphCloseAction,
 		SIGNAL(triggered(bool)),
-		SLOT(graphExit()));
+		SLOT(close()));
 
 	QObject::connect(m_ui.editSelectAllAction,
 		SIGNAL(triggered(bool)),
@@ -286,12 +286,6 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 
 
 // Main menu slots.
-void qjackctlGraphForm::graphExit (void)
-{
-	close();
-}
-
-
 void qjackctlGraphForm::viewMenubar ( bool on )
 {
 	m_ui.MenuBar->setVisible(on);

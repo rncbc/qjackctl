@@ -92,8 +92,6 @@ protected slots:
 	void orientationChanged(Qt::Orientation orientation);
 
 	// Main menu slots.
-	void graphExit();
-
 	void viewMenubar(bool on);
 	void viewToolbar(bool on);
 	void viewStatusbar(bool on);
