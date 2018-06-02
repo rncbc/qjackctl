@@ -525,19 +525,19 @@ Voulez-vous enregistrer les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="188"/>
-        <source>E&amp;xit</source>
-        <translation>&amp;Quitter</translation>
+        <source>Cl&amp;ose</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="191"/>
         <location filename="../qjackctlGraphForm.ui" line="194"/>
-        <source>Exit</source>
-        <translation>Quitter</translation>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="197"/>
-        <source>Exit this application program</source>
-        <translation>Quitter ce programme applicatif</translation>
+        <source>Close this application window</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="205"/>

@@ -524,19 +524,19 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="188"/>
-        <source>E&amp;xit</source>
-        <translation>&amp;Ukončit</translation>
+        <source>Cl&amp;ose</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="191"/>
         <location filename="../qjackctlGraphForm.ui" line="194"/>
-        <source>Exit</source>
-        <translation>Ukončit</translation>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="197"/>
-        <source>Exit this application program</source>
-        <translation>Ukončit program</translation>
+        <source>Close this application window</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="205"/>

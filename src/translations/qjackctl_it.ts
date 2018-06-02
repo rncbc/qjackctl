@@ -534,19 +534,19 @@ Salvare i cambiamenti?</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="188"/>
-        <source>E&amp;xit</source>
-        <translation>E&amp;sci</translation>
+        <source>Cl&amp;ose</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="191"/>
         <location filename="../qjackctlGraphForm.ui" line="194"/>
-        <source>Exit</source>
-        <translation>Esci</translation>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="197"/>
-        <source>Exit this application program</source>
-        <translation>Esci da questo programma applicativo</translation>
+        <source>Close this application window</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="205"/>

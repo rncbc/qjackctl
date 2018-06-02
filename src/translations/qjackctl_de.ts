@@ -522,18 +522,18 @@ Do you want to save the changes?</source>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="188"/>
-        <source>E&amp;xit</source>
+        <source>Cl&amp;ose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="191"/>
         <location filename="../qjackctlGraphForm.ui" line="194"/>
-        <source>Exit</source>
+        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="197"/>
-        <source>Exit this application program</source>
+        <source>Close this application window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
