@@ -92,7 +92,7 @@ qjackctlGraphForm::qjackctlGraphForm (
 
 	QHBoxLayout *zoom_layout = new QHBoxLayout();
 	zoom_layout->setMargin(0);
-	zoom_layout->setSpacing(0);
+	zoom_layout->setSpacing(2);
 
 	QToolButton *zoom_out = new QToolButton();
 	zoom_out->setDefaultAction(m_ui.viewZoomOutAction);
