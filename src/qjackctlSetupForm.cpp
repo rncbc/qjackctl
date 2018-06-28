@@ -421,6 +421,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.TextLabelsCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.GraphButtonCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(optionsChanged()));
 	QObject::connect(m_ui.BaseFontSizeComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
@@ -604,6 +607,7 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_ui.RightButtonsCheckBox->setChecked(!m_pSetup->bRightButtons);
 	m_ui.TransportButtonsCheckBox->setChecked(!m_pSetup->bTransportButtons);
 	m_ui.TextLabelsCheckBox->setChecked(!m_pSetup->bTextLabels);
+	m_ui.GraphButtonCheckBox->setChecked(m_pSetup->bGraphButton);
 	if (m_pSetup->iBaseFontSize > 0)
 		m_ui.BaseFontSizeComboBox->setEditText(QString::number(m_pSetup->iBaseFontSize));
 	else
@@ -1155,6 +1159,8 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	m_ui.TransportButtonsCheckBox->setEnabled(
 		m_ui.LeftButtonsCheckBox->isChecked());
+	m_ui.GraphButtonCheckBox->setEnabled(
+		!m_ui.LeftButtonsCheckBox->isChecked());
 
 	changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
 
@@ -1461,6 +1467,7 @@ void qjackctlSetupForm::accept (void)
 		const bool    bOldRightButtons        = m_pSetup->bRightButtons;
 		const bool    bOldTransportButtons    = m_pSetup->bTransportButtons;
 		const bool    bOldTextLabels          = m_pSetup->bTextLabels;
+		const bool    bOldGraphButton         = m_pSetup->bGraphButton;
 		const int     iOldBaseFontSize        = m_pSetup->iBaseFontSize;
 		// Save current preset selection.
 		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
@@ -1517,6 +1524,7 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bRightButtons            = !m_ui.RightButtonsCheckBox->isChecked();
 		m_pSetup->bTransportButtons        = !m_ui.TransportButtonsCheckBox->isChecked();
 		m_pSetup->bTextLabels              = !m_ui.TextLabelsCheckBox->isChecked();
+		m_pSetup->bGraphButton             = m_ui.GraphButtonCheckBox->isChecked();
 		m_pSetup->iBaseFontSize            = m_ui.BaseFontSizeComboBox->currentText().toInt();
 		// Check wheather something immediate has changed.
 		if (( bOldMessagesLog && !m_pSetup->bMessagesLog) ||
@@ -1562,8 +1570,10 @@ void qjackctlSetupForm::accept (void)
 			(!bOldRightButtons &&  m_pSetup->bRightButtons) ||
 			( bOldTransportButtons && !m_pSetup->bTransportButtons) ||
 			(!bOldTransportButtons &&  m_pSetup->bTransportButtons) ||
-			( bOldTextLabels && !m_pSetup->bTextLabels) ||
-			(!bOldTextLabels &&  m_pSetup->bTextLabels))
+			( bOldTextLabels   && !m_pSetup->bTextLabels)   ||
+			(!bOldTextLabels   &&  m_pSetup->bTextLabels)   ||
+			( bOldGraphButton  && !m_pSetup->bGraphButton)  ||
+			(!bOldGraphButton  &&  m_pSetup->bGraphButton))
 			pMainForm->updateButtons();
 		// Warn if something will be only effective on next run.
 		if (( bOldStdoutCapture   && !m_pSetup->bStdoutCapture)   ||

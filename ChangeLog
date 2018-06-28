@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Added user preference option: Setup / Misc / Buttons /
+  Replace Connections with Graph button (on main window).
+
 - Added a zoom slider control to the Graph view status bar.
 
 

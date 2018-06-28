@@ -519,6 +519,40 @@
     </widget>
    </item>
    <item row="2" column="0" >
+    <widget class="QToolButton" name="GraphToolButton" >
+     <property name="minimumSize" >
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>32767</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Show/hide the graph window</string>
+     </property>
+     <property name="text" >
+      <string>&amp;Graph</string>
+     </property>
+     <property name="icon" >
+      <iconset resource="qjackctl.qrc" >:/images/graph1.png</iconset>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <property name="toolButtonStyle" >
+      <enum>Qt::ToolButtonTextBesideIcon</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
     <widget class="QToolButton" name="ConnectionsToolButton" >
      <property name="minimumSize" >
       <size>
@@ -536,7 +570,7 @@
       <enum>Qt::TabFocus</enum>
      </property>
      <property name="toolTip" >
-      <string>Show/hide the actual connections patchbay window</string>
+      <string>Show/hide the connections window</string>
      </property>
      <property name="text" >
       <string>&amp;Connect</string>
@@ -784,6 +818,7 @@
   <tabstop>MessagesStatusToolButton</tabstop>
   <tabstop>SessionToolButton</tabstop>
   <tabstop>SetupToolButton</tabstop>
+  <tabstop>GraphToolButton</tabstop>
   <tabstop>ConnectionsToolButton</tabstop>
   <tabstop>PatchbayToolButton</tabstop>
   <tabstop>RewindToolButton</tabstop>

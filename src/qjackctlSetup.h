@@ -172,6 +172,7 @@ public:
 	bool    bRightButtons;
 	bool    bTransportButtons;
 	bool    bTextLabels;
+	bool    bGraphButton;
 	int     iBaseFontSize;
 
 	// Defaults...

@@ -478,6 +478,9 @@ qjackctlMainForm::qjackctlMainForm (
 	QObject::connect(m_ui.SessionToolButton,
 		SIGNAL(clicked()),
 		SLOT(toggleSessionForm()));
+	QObject::connect(m_ui.GraphToolButton,
+		SIGNAL(clicked()),
+		SLOT(toggleGraphForm()));
 	QObject::connect(m_ui.ConnectionsToolButton,
 		SIGNAL(clicked()),
 		SLOT(toggleConnectionsForm()));
@@ -2046,13 +2049,15 @@ void qjackctlMainForm::updateButtons (void)
 		m_ui.StopToolButton->show();
 		m_ui.MessagesStatusToolButton->show();
 		m_ui.SessionToolButton->show();
-		m_ui.ConnectionsToolButton->show();
+		m_ui.ConnectionsToolButton->setVisible(!m_pSetup->bGraphButton);
+		m_ui.GraphToolButton->setVisible(m_pSetup->bGraphButton);
 		m_ui.PatchbayToolButton->show();
 	} else {
 		m_ui.StartToolButton->hide();
 		m_ui.StopToolButton->hide();
 		m_ui.MessagesStatusToolButton->hide();
 		m_ui.SessionToolButton->hide();
+		m_ui.GraphToolButton->hide();
 		m_ui.ConnectionsToolButton->hide();
 		m_ui.PatchbayToolButton->hide();
 	}
@@ -2093,6 +2098,7 @@ void qjackctlMainForm::updateButtons (void)
 	m_ui.MessagesStatusToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.SessionToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.ConnectionsToolButton->setToolButtonStyle(toolButtonStyle);
+	m_ui.GraphToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.PatchbayToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.QuitToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.SetupToolButton->setToolButtonStyle(toolButtonStyle);
@@ -2189,6 +2195,8 @@ void qjackctlMainForm::stabilizeForm (void)
 		m_pMessagesStatusForm && m_pMessagesStatusForm->isVisible());
 	m_ui.SessionToolButton->setChecked(
 		m_pSessionForm && m_pSessionForm->isVisible());
+	m_ui.GraphToolButton->setChecked(
+		m_pGraphForm && m_pGraphForm->isVisible());
 	m_ui.ConnectionsToolButton->setChecked(
 		m_pConnectionsForm && m_pConnectionsForm->isVisible());
 	m_ui.PatchbayToolButton->setChecked(

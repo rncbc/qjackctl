@@ -131,6 +131,7 @@ void qjackctlSetup::loadSetup (void)
 	bRightButtons            = m_settings.value("/RightButtons", true).toBool();
 	bTransportButtons        = m_settings.value("/TransportButtons", true).toBool();
 	bTextLabels              = m_settings.value("/TextLabels", true).toBool();
+	bGraphButton             = m_settings.value("/GraphButton", false).toBool();
 	iBaseFontSize            = m_settings.value("/BaseFontSize", 0).toInt();
 	m_settings.endGroup();
 
@@ -241,6 +242,7 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/RightButtons",            bRightButtons);
 	m_settings.setValue("/TransportButtons",        bTransportButtons);
 	m_settings.setValue("/TextLabels",              bTextLabels);
+	m_settings.setValue("/GraphButton",             bGraphButton);
 	m_settings.setValue("/BaseFontSize",            iBaseFontSize);
 	m_settings.endGroup();
 
