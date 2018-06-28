@@ -356,12 +356,12 @@ Sei sicuro?</translation>
         <translation>MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="317"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="319"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="318"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="320"/>
         <source>The preset aliases have been changed:
 
 &quot;%1&quot;
@@ -826,32 +826,32 @@ Salvare i cambiamenti?</translation>
         <translation>Mostra informazioni a proposito del kit di strumenti Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="68"/>
+        <location filename="../qjackctlGraphForm.cpp" line="70"/>
         <source>&amp;Undo</source>
         <translation>&amp;Annulla</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="70"/>
+        <location filename="../qjackctlGraphForm.cpp" line="72"/>
         <source>Undo last (dis)connection</source>
         <translation>Annulla l&apos;ultima (dis)connessione</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="73"/>
+        <location filename="../qjackctlGraphForm.cpp" line="75"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ripeti</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="75"/>
+        <location filename="../qjackctlGraphForm.cpp" line="77"/>
         <source>Redo last (dis)connection</source>
         <translation>Ripeti l&apos;ultima (dis)connessione</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="91"/>
+        <location filename="../qjackctlGraphForm.cpp" line="93"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="278"/>
+        <location filename="../qjackctlGraphForm.cpp" line="280"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>

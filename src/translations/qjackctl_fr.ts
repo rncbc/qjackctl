@@ -366,7 +366,7 @@ de toutes les applications clientes.
         <translation>MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="317"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="319"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -376,7 +376,7 @@ de toutes les applications clientes.
         <translation>ALSA</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnectionsForm.cpp" line="318"/>
+        <location filename="../qjackctlConnectionsForm.cpp" line="320"/>
         <source>The preset aliases have been changed:
 
 &quot;%1&quot;
@@ -818,32 +818,32 @@ Voulez-vous enregistrer les changements ?</translation>
         <translation>Afficher les informations à propos de la boîte à outils Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="68"/>
+        <location filename="../qjackctlGraphForm.cpp" line="70"/>
         <source>&amp;Undo</source>
         <translation>&amp;Défaire</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="70"/>
+        <location filename="../qjackctlGraphForm.cpp" line="72"/>
         <source>Undo last (dis)connection</source>
         <translation>Défaire la dernière (dé)connexion</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="73"/>
+        <location filename="../qjackctlGraphForm.cpp" line="75"/>
         <source>&amp;Redo</source>
         <translation>&amp;Refaire</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="75"/>
+        <location filename="../qjackctlGraphForm.cpp" line="77"/>
         <source>Redo last (dis)connection</source>
         <translation>refaire la dernière (dé)connexion</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="91"/>
+        <location filename="../qjackctlGraphForm.cpp" line="93"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="278"/>
+        <location filename="../qjackctlGraphForm.cpp" line="280"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>

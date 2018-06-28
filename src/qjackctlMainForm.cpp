@@ -3087,7 +3087,7 @@ void qjackctlMainForm::toggleMessagesStatusForm (void)
 void qjackctlMainForm::toggleMessagesForm (void)
 {
 	if (m_pMessagesStatusForm) {
-		int iTabPage = m_pMessagesStatusForm->tabPage();
+		const int iTabPage = m_pMessagesStatusForm->tabPage();
 		m_pMessagesStatusForm->setTabPage(
 			int(qjackctlMessagesStatusForm::MessagesTab));
 		if (m_pMessagesStatusForm->isVisible()
@@ -3102,7 +3102,7 @@ void qjackctlMainForm::toggleMessagesForm (void)
 void qjackctlMainForm::toggleStatusForm (void)
 {
 	if (m_pMessagesStatusForm) {
-		int iTabPage = m_pMessagesStatusForm->tabPage();
+		const int iTabPage = m_pMessagesStatusForm->tabPage();
 		m_pMessagesStatusForm->setTabPage(
 			int(qjackctlMessagesStatusForm::StatusTab));
 		if (m_pMessagesStatusForm->isVisible()

@@ -42,6 +42,8 @@
 #include <QSpinBox>
 
 #include <QResizeEvent>
+#include <QShowEvent>
+#include <QHideEvent>
 #include <QCloseEvent>
 
 #include <math.h>
@@ -593,6 +595,28 @@ void qjackctlGraphForm::resizeEvent ( QResizeEvent *pResizeEvent )
 	QMainWindow::resizeEvent(pResizeEvent);
 
 	stabilize();
+}
+
+
+// Notify our parent that we're emerging.
+void qjackctlGraphForm::showEvent ( QShowEvent *pShowEvent )
+{
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
+
+	QWidget::showEvent(pShowEvent);
+}
+
+
+// Notify our parent that we're closing.
+void qjackctlGraphForm::hideEvent ( QHideEvent *pHideEvent )
+{
+	QWidget::hideEvent(pHideEvent);
+
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm)
+		pMainForm->stabilizeForm();
 }
 
 

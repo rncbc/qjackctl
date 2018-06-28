@@ -116,7 +116,9 @@ protected:
 	// Widget resize event handler.
 	void resizeEvent(QResizeEvent *pResizeEvent);
 
-	// Widget close event handler.
+	// Widget show/hide/close event handlers.
+	void showEvent(QShowEvent *pShowEvent);
+	void hideEvent(QHideEvent *pHideEvent);
 	void closeEvent(QCloseEvent *pCloseEvent);
 
 private:
