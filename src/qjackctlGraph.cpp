@@ -1320,11 +1320,21 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					& (Qt::ControlModifier | Qt::ShiftModifier)) == 0) {
 					m_scene->clearSelection();
 					++nchanged;
+				} else {
+					foreach (QGraphicsItem *item, m_selected) {
+						item->setSelected(false);
+						++nchanged;
+					}
+					m_selected.clear();
 				}
 				const QRectF range_rect(m_pos, pos);
 				foreach (QGraphicsItem *item,
 						m_scene->items(range_rect.normalized())) {
-					if (item->type() >= QGraphicsItem::UserType) {
+					if (item->type() >= QGraphicsItem::UserType
+							&& !item->isSelected()) {
+						if (event->modifiers()
+							& (Qt::ControlModifier | Qt::ShiftModifier))
+							m_selected.append(item);
 						item->setSelected(true);
 						++nchanged;
 					}
@@ -1419,6 +1429,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 		if (m_rubberband) {
 			delete m_rubberband;
 			m_rubberband = NULL;
+			m_selected.clear();
 			// Zooming in range?...
 			if (m_zoomrange) {
 				const QRectF range_rect(m_pos,
@@ -1477,6 +1488,7 @@ void qjackctlGraphCanvas::keyPressEvent ( QKeyEvent *event )
 		if (m_rubberband) {
 			delete m_rubberband;
 			m_rubberband = NULL;
+			m_selected.clear();
 		}
 		if (m_connect) {
 			delete m_connect;

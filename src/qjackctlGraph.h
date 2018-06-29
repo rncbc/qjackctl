@@ -585,6 +585,8 @@ private:
 
 	QUndoStack *m_commands;
 	QSettings  *m_settings;
+
+	QList<QGraphicsItem *> m_selected;
 };
 
 
