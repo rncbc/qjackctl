@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Improved Graph rubberband add (Shift) and toggle (Ctrl)
+  multiple (de)selections. (EXPERIMENTAL)
+
 - Added user preference option: Setup / Misc / Buttons /
   Replace Connections with Graph button (on main window).
 
