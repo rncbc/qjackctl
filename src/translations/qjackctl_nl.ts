@@ -447,13 +447,13 @@ Wil u deze aanpassingen opslaan?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1414"/>
-        <location filename="../qjackctlGraph.cpp" line="1537"/>
+        <location filename="../qjackctlGraph.cpp" line="1421"/>
+        <location filename="../qjackctlGraph.cpp" line="1544"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1572"/>
+        <location filename="../qjackctlGraph.cpp" line="1579"/>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>

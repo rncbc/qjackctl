@@ -1248,7 +1248,8 @@ void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 	}
 
 	if (m_state == DragStart && m_item == NULL
-		&& (event->modifiers() & Qt::ControlModifier)) {
+		&& (event->modifiers() & Qt::ControlModifier)
+		&& m_scene->selectedItems().isEmpty()) {
 		QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
 		QGraphicsView::mousePressEvent(event);
 		m_state = DragScroll;
@@ -1322,7 +1323,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					++nchanged;
 				} else {
 					foreach (QGraphicsItem *item, m_selected) {
-						item->setSelected(false);
+						item->setSelected(!item->isSelected());
 						++nchanged;
 					}
 					m_selected.clear();
@@ -1330,12 +1331,18 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 				const QRectF range_rect(m_pos, pos);
 				foreach (QGraphicsItem *item,
 						m_scene->items(range_rect.normalized())) {
-					if (item->type() >= QGraphicsItem::UserType
-							&& !item->isSelected()) {
-						if (event->modifiers()
-							& (Qt::ControlModifier | Qt::ShiftModifier))
+					if (item->type() >= QGraphicsItem::UserType) {
+						const bool is_selected = item->isSelected();
+						if (event->modifiers() & Qt::ControlModifier) {
+							item->setSelected(!is_selected);
 							m_selected.append(item);
-						item->setSelected(true);
+						}
+						else
+						if (!is_selected) {
+							if (event->modifiers() & Qt::ShiftModifier)
+								m_selected.append(item);
+							item->setSelected(true);
+						}
 						++nchanged;
 					}
 				}
