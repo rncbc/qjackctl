@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- AppData/AppStream metadata is now settled under an all
+  permisssive license (FSFAP).
+
 - Improved Graph rubberband add (Shift) and toggle (Ctrl)
   multiple (de)selections. (EXPERIMENTAL)
 

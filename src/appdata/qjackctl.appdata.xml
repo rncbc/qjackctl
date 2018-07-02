@@ -3,7 +3,7 @@
 <!-- Copyright 2015 Olivier Humbert <trebmuh@tuxfamily.org> for the FR translation-->
 <component type="desktop">
  <id>qjackctl.desktop</id>
- <metadata_license>GPL-2.0+</metadata_license>
+ <metadata_license>FSFAP</metadata_license>
  <project_license>GPL-2.0+</project_license>
  <name>QjackCtl</name>
  <summary>JACK Audio Connection Kit Qt GUI Interface</summary>
@@ -40,7 +40,7 @@
   <keyword>JACK</keyword>
   <keyword>Qt</keyword>
  </keywords>
- <url type="homepage">http://qjackctl.sourceforge.net</url>
+ <url type="homepage">https://qjackctl.sourceforge.io</url>
  <updatecontact>rncbc@rncbc.org</updatecontact>
  <project_group>rncbc.org</project_group>
  <kudos>
