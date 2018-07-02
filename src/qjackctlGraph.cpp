@@ -1317,25 +1317,26 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 			m_rubberband->setGeometry(rect.normalized());
 			m_rubberband->show();
 			if (!m_zoomrange) {
-				if ((event->modifiers()
-					& (Qt::ControlModifier | Qt::ShiftModifier)) == 0) {
-					m_scene->clearSelection();
-					++nchanged;
-				} else {
+				if (event->modifiers()
+					& (Qt::ControlModifier | Qt::ShiftModifier)) {
 					foreach (QGraphicsItem *item, m_selected) {
 						item->setSelected(!item->isSelected());
 						++nchanged;
 					}
 					m_selected.clear();
+				} else {
+					m_scene->clearSelection();
+					++nchanged;
 				}
 				const QRectF range_rect(m_pos, pos);
 				foreach (QGraphicsItem *item,
 						m_scene->items(range_rect.normalized())) {
-					if (item->type() >= QGraphicsItem::UserType) {
+					if (item->type() >= QGraphicsItem::UserType
+						&& item->type() != qjackctlGraphNode::Type) {
 						const bool is_selected = item->isSelected();
 						if (event->modifiers() & Qt::ControlModifier) {
-							item->setSelected(!is_selected);
 							m_selected.append(item);
+							item->setSelected(!is_selected);
 						}
 						else
 						if (!is_selected) {
