@@ -1328,11 +1328,16 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					m_scene->clearSelection();
 					++nchanged;
 				}
+				int selected_nodes = 0;
 				const QRectF range_rect(m_pos, pos);
 				foreach (QGraphicsItem *item,
 						m_scene->items(range_rect.normalized())) {
-					if (item->type() >= QGraphicsItem::UserType
-						&& item->type() != qjackctlGraphNode::Type) {
+					if (item->type() >= QGraphicsItem::UserType) {
+						if (item->type() != qjackctlGraphNode::Type)
+							++selected_nodes;
+						else
+						if (selected_nodes > 0)
+							continue;
 						const bool is_selected = item->isSelected();
 						if (event->modifiers() & Qt::ControlModifier) {
 							m_selected.append(item);
