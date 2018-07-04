@@ -678,62 +678,62 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="350"/>
         <source>&amp;Refresh</source>
-        <translation type="unfinished">&amp;Refrescar</translation>
+        <translation>&amp;Atualizar</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="353"/>
         <location filename="../qjackctlGraphForm.ui" line="356"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Atualizar</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="359"/>
         <source>Refresh view</source>
-        <translation type="unfinished"></translation>
+        <translation>Atualizar visualização</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="362"/>
         <source>F5</source>
-        <translation type="unfinished"></translation>
+        <translation>F5</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="370"/>
         <source>Zoom &amp;In</source>
-        <translation type="unfinished"></translation>
+        <translation>Ampli&amp;ar</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="373"/>
         <location filename="../qjackctlGraphForm.ui" line="376"/>
         <location filename="../qjackctlGraphForm.ui" line="379"/>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Ampliar</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="382"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl++</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="390"/>
         <source>Zoom &amp;Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminu&amp;ir</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="393"/>
         <location filename="../qjackctlGraphForm.ui" line="396"/>
         <location filename="../qjackctlGraphForm.ui" line="399"/>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuir</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="402"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+-</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="410"/>
         <source>Zoom &amp;Fit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="413"/>
