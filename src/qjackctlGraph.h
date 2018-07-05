@@ -587,6 +587,7 @@ private:
 	QSettings  *m_settings;
 
 	QList<QGraphicsItem *> m_selected;
+	int m_selected_nodes;
 };
 
 

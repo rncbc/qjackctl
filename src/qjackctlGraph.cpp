@@ -977,7 +977,8 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 	: QGraphicsView(parent), m_state(DragNone), m_item(NULL),
 		m_connect(NULL), m_rubberband(NULL),
 		m_zoom(1.0), m_zoomrange(false),
-		m_commands(NULL), m_settings(NULL)
+		m_commands(NULL), m_settings(NULL),
+		m_selected_nodes(0)
 {
 	m_scene = new QGraphicsScene();
 
@@ -1274,12 +1275,14 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (m_item);
 					if (port) {
 						QGraphicsView::setCursor(Qt::DragLinkCursor);
+						m_selected_nodes = 0;
 						m_scene->clearSelection();
 						m_connect = new qjackctlGraphConnect();
 						m_connect->setPort1(port);
 						m_connect->setSelected(true);
 						m_scene->addItem(m_connect);
 						m_item = NULL;
+						++m_selected_nodes;
 						++nchanged;
 					}
 				}
@@ -1289,8 +1292,10 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					QGraphicsView::setCursor(Qt::SizeAllCursor);
 					if (!m_item->isSelected()) {
 						if ((event->modifiers()
-							& (Qt::ShiftModifier | Qt::ControlModifier)) == 0)
+							 & (Qt::ShiftModifier | Qt::ControlModifier)) == 0) {
+							m_selected_nodes = 0;
 							m_scene->clearSelection();
+						}
 						m_item->setSelected(true);
 						++nchanged;
 					}
@@ -1325,18 +1330,18 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					}
 					m_selected.clear();
 				} else {
+					m_selected_nodes = 0;
 					m_scene->clearSelection();
 					++nchanged;
 				}
-				int selected_nodes = 0;
 				const QRectF range_rect(m_pos, pos);
 				foreach (QGraphicsItem *item,
 						m_scene->items(range_rect.normalized())) {
 					if (item->type() >= QGraphicsItem::UserType) {
 						if (item->type() != qjackctlGraphNode::Type)
-							++selected_nodes;
+							++m_selected_nodes;
 						else
-						if (selected_nodes > 0)
+						if (m_selected_nodes > 0)
 							continue;
 						const bool is_selected = item->isSelected();
 						if (event->modifiers() & Qt::ControlModifier) {
@@ -1390,14 +1395,17 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 		// Make individual item (de)selections...
 		if ((event->modifiers()
 			& (Qt::ShiftModifier | Qt::ControlModifier)) == 0) {
+			m_selected_nodes = 0;
 			m_scene->clearSelection();
 			++nchanged;
 		}
 		if (m_item) {
+			bool is_selected = true;
 			if (event->modifiers() & Qt::ControlModifier)
-				m_item->setSelected(!m_item->isSelected());
-			else
-				m_item->setSelected(true);
+				is_selected = !m_item->isSelected();
+			m_item->setSelected(is_selected);
+			if (m_item->type() != qjackctlGraphNode::Type && is_selected)
+				++m_selected_nodes;
 			++nchanged;
 		}
 		// Fall thru...
@@ -1420,7 +1428,9 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 					m_connect->setPort2(port2);
 					m_connect->updatePathTo(port2->portPos());
 					m_connect = NULL;
+					++m_selected_nodes;
 				#else
+					m_selected_nodes = 0;
 					m_scene->clearSelection();
 				#endif
 					// Submit command; notify eventual observers...
@@ -1497,6 +1507,7 @@ void qjackctlGraphCanvas::wheelEvent ( QWheelEvent *event )
 void qjackctlGraphCanvas::keyPressEvent ( QKeyEvent *event )
 {
 	if (event->key() == Qt::Key_Escape) {
+		m_selected_nodes = 0;
 		m_scene->clearSelection();
 		if (m_rubberband) {
 			delete m_rubberband;
@@ -1539,6 +1550,7 @@ void qjackctlGraphCanvas::connectItems (void)
 	if (outs.isEmpty() || ins.isEmpty())
 		return;
 
+	m_selected_nodes = 0;
 	m_scene->clearSelection();
 
 	std::sort(outs.begin(), outs.end(), qjackctlGraphPort::ComparePos());
@@ -1580,6 +1592,7 @@ void qjackctlGraphCanvas::disconnectItems (void)
 		}
 	}
 
+	m_selected_nodes = 0;
 	m_scene->clearSelection();
 
 	m_commands->beginMacro(tr("Disconnect"));
@@ -1602,6 +1615,8 @@ void qjackctlGraphCanvas::selectAll (void)
 	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphNode::Type)
 			item->setSelected(true);
+		else
+			++m_selected_nodes;
 	}
 
 	emit changed();
@@ -1610,6 +1625,7 @@ void qjackctlGraphCanvas::selectAll (void)
 
 void qjackctlGraphCanvas::selectNone (void)
 {
+	m_selected_nodes = 0;
 	m_scene->clearSelection();
 
 	emit changed();
@@ -1621,6 +1637,8 @@ void qjackctlGraphCanvas::selectInvert (void)
 	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphNode::Type)
 			item->setSelected(!item->isSelected());
+		else
+			++m_selected_nodes;
 	}
 
 	emit changed();
