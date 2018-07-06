@@ -733,118 +733,118 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="410"/>
         <source>Zoom &amp;Fit</source>
-        <translation></translation>
+        <translation>Ajuste de &amp;Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="413"/>
         <location filename="../qjackctlGraphForm.ui" line="416"/>
         <location filename="../qjackctlGraphForm.ui" line="419"/>
         <source>Zoom Fit</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuste de Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="422"/>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+0</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="430"/>
         <source>Zoom &amp;Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir &amp;Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="433"/>
         <location filename="../qjackctlGraphForm.ui" line="436"/>
         <location filename="../qjackctlGraphForm.ui" line="439"/>
         <source>Zoom Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="442"/>
         <source>Ctrl+1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+1</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="453"/>
         <source>&amp;Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Faixa de Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="456"/>
         <location filename="../qjackctlGraphForm.ui" line="459"/>
         <location filename="../qjackctlGraphForm.ui" line="462"/>
         <source>Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Faixa de Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="470"/>
         <source>&amp;About...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="473"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="476"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="479"/>
         <source>Show information about this application program</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar informações sobre este aplicativo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="487"/>
         <source>About &amp;Qt...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre &amp;Qt...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="490"/>
         <source>About Qt...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre Qt...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="493"/>
         <source>About Qt</source>
-        <translation type="unfinished">Acerca de QT</translation>
+        <translation>Sobre Qt</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="496"/>
         <source>Show information about the Qt toolkit</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar informações sobre as ferramentas do Qt</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="68"/>
         <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Desfazer</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="70"/>
         <source>Undo last (dis)connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfazer última (des)conexão</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="73"/>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Refazer</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="75"/>
         <source>Redo last (dis)connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Refazer última (des)conexão</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="91"/>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="278"/>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Pronto</translation>
     </message>
 </context>
 <context>
@@ -853,12 +853,12 @@ Deseja salvar as alterações??</translation>
         <location filename="../qjackctlMainForm.ui" line="409"/>
         <location filename="../qjackctlMainForm.cpp" line="3809"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Salir</translation>
+        <translation>&amp;Sair</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="406"/>
         <source>Quit processing and exit</source>
-        <translation>Terminar procesamiento y salir</translation>
+        <translation>Terminar processamento e sair</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="74"/>
@@ -869,44 +869,44 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="71"/>
         <source>Start the JACK server</source>
-        <translation>Iniciar el servidor JACK</translation>
+        <translation>Iniciar servidor JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="108"/>
         <source>S&amp;top</source>
-        <translation>&amp;Detener</translation>
+        <translation>P&amp;arar</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="105"/>
         <source>Stop the JACK server</source>
-        <translation>Detener el servidor JACK</translation>
+        <translation>Parar servidor JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3760"/>
         <source>St&amp;atus</source>
-        <translation>&amp;Estado</translation>
+        <translation>E&amp;stado</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="767"/>
         <location filename="../qjackctlMainForm.cpp" line="3804"/>
         <source>Ab&amp;out...</source>
-        <translation>Ace&amp;rca...</translation>
+        <translation>So&amp;bre...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="764"/>
         <source>Show information about this application</source>
-        <translation>Mostrar información sobre esta aplicación</translation>
+        <translation>Mostrar informação sobre esta aplicación</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="505"/>
         <source>Show settings and options dialog</source>
-        <translation>Mostrar el diálogo de opciones y preferencias</translation>
+        <translation>Mostrar opções e preferências</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="474"/>
         <location filename="../qjackctlMainForm.cpp" line="3754"/>
         <source>&amp;Messages</source>
-        <translation>&amp;Mensajes</translation>
+        <translation>&amp;Mensagens</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3770"/>
@@ -916,52 +916,52 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="573"/>
         <source>Show/hide the patchbay editor window</source>
-        <translation>Mostrar / ocultar el editor de patchbay</translation>
+        <translation>Mostrar/ocultar o editor de patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="542"/>
         <source>&amp;Connect</source>
-        <translation>&amp;Conexiones</translation>
+        <translation>&amp;Conexões</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
         <source>Show/hide the actual connections patchbay window</source>
-        <translation>Mostrar / ocultar el patchbay con las conexiones actuales</translation>
+        <translation>Mostrar/ocultar o patchbay com as conexões atuais</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="164"/>
         <source>JACK server state</source>
-        <translation>Estado del servidor JACK</translation>
+        <translation>Estado do servidor JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="191"/>
         <source>JACK server mode</source>
-        <translation>Modo del servidor JACK</translation>
+        <translation>Modo do servidor JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="239"/>
         <source>Sample rate</source>
-        <translation>Frecuencia de muestreo</translation>
+        <translation>Taxa de amostragem</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="292"/>
         <source>Time display</source>
-        <translation>Visor de tiempo</translation>
+        <translation>Visor do tempo/translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="319"/>
         <source>Transport state</source>
-        <translation>Estado del transporte</translation>
+        <translation>Estado do transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="346"/>
         <source>Transport BPM</source>
-        <translation>BPM del transporte</translation>
+        <translation>BPM do transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="372"/>
         <source>Transport time</source>
-        <translation>Tiempo del transporte</translation>
+        <translation>Tempo do transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="635"/>
@@ -971,22 +971,22 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="733"/>
         <source>Forward transport</source>
-        <translation>Avanzar transporte (Alt+L)</translation>
+        <translation>Avançar transporte (Alt+L)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="607"/>
         <source>Rewind transport</source>
-        <translation>Rebobinar transporte (Alt+K)</translation>
+        <translation>Rebobinar transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="705"/>
         <source>Stop transport rolling</source>
-        <translation>Detener el transporte (Shift+Espacio)</translation>
+        <translation>Parar transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="666"/>
         <source>Start transport rolling</source>
-        <translation>Iniciar el transporte (Espacio)</translation>
+        <translation>Iniciar transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="939"/>
@@ -995,33 +995,35 @@ Deseja salvar as alterações??</translation>
         <location filename="../qjackctlMainForm.cpp" line="2695"/>
         <location filename="../qjackctlMainForm.cpp" line="3822"/>
         <source>Warning</source>
-        <translation>Advertencia</translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1097"/>
         <source>successfully</source>
-        <translation>satisfactoriamente</translation>
+        <translation>satisfatoriamente</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1099"/>
         <source>with exit status=%1</source>
-        <translation>con estado %1</translation>
+        <translation>com saída estado %1</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1172"/>
         <source>Could not load preset &quot;%1&quot;.
 
 Retrying with default.</source>
-        <translation>No se pudo cargar el preset &quot;%1&quot;.
-Probando con el predeterminado.</translation>
+        <translation>Não foi possível carregar predefinição &quot;%1&quot;.
+
+Tentando com a predefinição padrão.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1175"/>
         <source>Could not load default preset.
 
 Sorry.</source>
-        <translation>Lo siento.
-No se pudo cargar el preset predeterminado.</translation>
+        <translation>Não foi possível carregar predefinição
+
+Desculpe.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1207"/>
