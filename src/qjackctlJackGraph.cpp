@@ -233,6 +233,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 		(*port)->setPortTitle(
 			qjackctlJackGraph_pretty_name(
 				::jack_port_uuid(jack_port), port_name));
+		(*node)->updatePath();
 	#endif
 
 	}
