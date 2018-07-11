@@ -767,14 +767,14 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="453"/>
         <source>&amp;Zoom Range</source>
-        <translation>&amp;Faixa de Zoom</translation>
+        <translation>&amp;Alcance de Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="456"/>
         <location filename="../qjackctlGraphForm.ui" line="459"/>
         <location filename="../qjackctlGraphForm.ui" line="462"/>
         <source>Zoom Range</source>
-        <translation>Faixa de Zoom</translation>
+        <translation>Alcance de Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="470"/>
@@ -895,7 +895,7 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="764"/>
         <source>Show information about this application</source>
-        <translation>Mostrar informação sobre esta aplicación</translation>
+        <translation>Mostrar informações sobre esta aplicação</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="505"/>
@@ -946,7 +946,7 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="292"/>
         <source>Time display</source>
-        <translation>Visor do tempo/translation>
+        <translation>Visor do tempo</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="319"/>
@@ -1028,30 +1028,31 @@ Desculpe.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1207"/>
         <source>Startup script...</source>
-        <translation>Script de inicio...</translation>
+        <translation>Script de início...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1208"/>
         <source>Startup script terminated</source>
-        <translation>El script de inicio finalizó</translation>
+        <translation>O script de início finalizou</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1466"/>
         <source>JACK is starting...</source>
-        <translation>JACK está iniciándose...</translation>
+        <translation>JACK está iniciando...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2452"/>
         <source>Could not start JACK.
 
 Sorry.</source>
-        <translation>Lo siento.
-No se pudo iniciar JACK.</translation>
+        <translation>Não foi possível iniciar o JACK.
+
+Desculpe.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1568"/>
         <source>JACK is stopping...</source>
-        <translation>JACK está deteniéndose...</translation>
+        <translation>JACK está parando...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="900"/>
@@ -1059,52 +1060,52 @@ No se pudo iniciar JACK.</translation>
 
 To terminate the program, please choose &quot;Quit&quot;
 in the context menu of the system tray icon.</source>
-        <translation>El programa seguirá corriendo en la bandeja del sistema.
+        <translation>O programa seguirá rodando na bandeja do sistema.
 
-Para terminarlo, por favor eljia &quot;Salir&quot;
-en el menú contextual del ícono en la bandeja del sistema.</translation>
+Para terminá-lo, por favor escolha &quot;Sair&quot;
+no menu contextual do ícone na bandeja de sistema.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1561"/>
         <source>Shutdown script...</source>
-        <translation>Script de apagado...</translation>
+        <translation>Script de desligamento...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1562"/>
         <source>Shutdown script terminated</source>
-        <translation>El script de apagado finalizó</translation>
+        <translation>O script de desligamento finalizou</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1714"/>
         <source>JACK was stopped</source>
-        <translation>JACK ha sido detenido</translation>
+        <translation>JACK foi parado</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1741"/>
         <source>Post-shutdown script...</source>
-        <translation>Script de post - apagado...</translation>
+        <translation>Script pós-desligamento...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="807"/>
         <source>D-BUS: Service is available (%1 aka jackdbus).</source>
-        <translation>D-BUS: Disponible (%1 aka jackdbus).</translation>
+        <translation>D-BUS: Disponível (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="838"/>
         <source>D-BUS: Service not available (%1 aka jackdbus).</source>
-        <translation>D-BUS: No disponible (%1 aka jackdbus).</translation>
+        <translation>D-BUS: Indisponível (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="916"/>
         <source>Don&apos;t show this message again</source>
-        <translation type="unfinished"></translation>
+        <translation>Não mostrar esta mensagem novamente</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="952"/>
         <location filename="../qjackctlMainForm.cpp" line="1521"/>
         <location filename="../qjackctlMainForm.cpp" line="2712"/>
         <source>Don&apos;t ask this again</source>
-        <translation type="unfinished"></translation>
+        <translation>Não perguntar novamente</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1423"/>
@@ -1116,58 +1117,58 @@ en el menú contextual del ícono en la bandeja del sistema.</translation>
         <source>D-BUS: JACK server could not be started.
 
 Sorry</source>
-        <translation>D-BUS: El servidor JACK no puede iniciarse.
+        <translation>D-BUS: O servidor JACK não pode ser iniciado.
 
-Disculpa</translation>
+Desculpe</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1584"/>
         <source>D-BUS: JACK server is stopping...</source>
-        <translation>D-BUS: Deteniendo el servidor JACK...</translation>
+        <translation>D-BUS: Parando o servidor JACK...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1587"/>
         <source>D-BUS: JACK server could not be stopped.
 
 Sorry</source>
-        <translation>D-BUS: El servidor JACK no puede detenerse.
+        <translation>D-BUS: O servidor JACK não pôde detenerse.
 
-Disculpa</translation>
+Desculpe</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1742"/>
         <source>Post-shutdown script terminated</source>
-        <translation>El script de post - apagado finalizó</translation>
+        <translation>O script pós-desligamento finalizou</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1667"/>
         <source>D-BUS: JACK server was started (%1 aka jackdbus).</source>
-        <translation>D-BUS: El servidor JACK se ha iniciado (%1 aka jackdbus).</translation>
+        <translation>D-BUS: O servidor JACK foi iniciado (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1726"/>
         <source>D-BUS: JACK server was stopped (%1 aka jackdbus).</source>
-        <translation>D-BUS: El servidor JACK se ha detenido (%1 aka jackdbus).</translation>
+        <translation>D-BUS: O servidor JACK foi parado (%1 aka jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1882"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2008"/>
         <source>Transport time code</source>
-        <translation>Código de tiempo del transporte</translation>
+        <translation>Código de tempo de transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2019"/>
         <source>Elapsed time since last reset</source>
-        <translation>Tiempo transcurrido desde el último reset</translation>
+        <translation>Tempo transcorrido desde o último reset</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2022"/>
         <source>Elapsed time since last XRUN</source>
-        <translation>Tiempo transcurrido desde el último XRUN</translation>
+        <translation>Tempo transcurrido desde el último XRUN</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2147"/>
