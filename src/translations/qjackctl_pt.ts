@@ -1028,12 +1028,12 @@ Desculpe.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1207"/>
         <source>Startup script...</source>
-        <translation>Script de início...</translation>
+        <translation>Script de inicialização...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1208"/>
         <source>Startup script terminated</source>
-        <translation>O script de início finalizou</translation>
+        <translation>O script de inicialização finalizou</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1466"/>
@@ -1168,22 +1168,22 @@ Desculpe</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2022"/>
         <source>Elapsed time since last XRUN</source>
-        <translation>Tempo transcurrido desde el último XRUN</translation>
+        <translation>Tempo transcorrido desde o último XRUN</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2147"/>
         <source>Patchbay activated.</source>
-        <translation>Patchbay activada.</translation>
+        <translation>Patchbay ativado.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2155"/>
         <source>Patchbay deactivated.</source>
-        <translation>Patchbay desactivada.</translation>
+        <translation>Patchbay desativado.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2235"/>
         <source>Statistics reset.</source>
-        <translation>Reiniciar estadísticas.</translation>
+        <translation>Reiniciar estatísticas.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2371"/>
@@ -1198,17 +1198,17 @@ Desculpe</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2425"/>
         <source>Buffer size change (%1).</source>
-        <translation>Cambio en el tamaño de buffer (%1).</translation>
+        <translation>Mudança de tamanho de  buffer (%1).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2434"/>
         <source>Shutdown notification.</source>
-        <translation>Notificación de apagado.</translation>
+        <translation>Notificação de desligamento.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2484"/>
         <source>JACK property change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriedades do JACK mudaram</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2625"/>
@@ -1228,42 +1228,42 @@ Desculpe</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2638"/>
         <source>failed</source>
-        <translation>falló</translation>
+        <translation>falhou</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2866"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
-        <translation>Configuración del servidor salvada en &quot;%1&quot;.</translation>
+        <translation>Configuração do servidor salva em &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2899"/>
         <source>Client activated.</source>
-        <translation>Cliente activado.</translation>
+        <translation>Cliente ativado.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2910"/>
         <source>Post-startup script...</source>
-        <translation>Script de post - inicio...</translation>
+        <translation>Script de pós-inicialização...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2911"/>
         <source>Post-startup script terminated</source>
-        <translation>El script de post - inicio finalizó</translation>
+        <translation>O script de pós-inicialização finalizou</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2919"/>
         <source>Command line argument...</source>
-        <translation>Argumento de la línea de comando...</translation>
+        <translation>Argumento da linha de comando...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2920"/>
         <source>Command line argument started</source>
-        <translation>Argumento de la línea de comando iniciado</translation>
+        <translation>Argumento da linha de comando iniciado</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2942"/>
         <source>Client deactivated.</source>
-        <translation>Cliente desactivado.</translation>
+        <translation>Cliente desativado.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3207"/>
@@ -1291,7 +1291,7 @@ Desculpe</translation>
         <location filename="../qjackctlMainForm.cpp" line="3270"/>
         <location filename="../qjackctlMainForm.cpp" line="3540"/>
         <source>Stopping</source>
-        <translation>Deteniendo</translation>
+        <translation>Parando</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3272"/>
