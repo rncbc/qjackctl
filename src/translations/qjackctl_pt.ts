@@ -1851,37 +1851,37 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="175"/>
         <source>Refresh XRUN statistic values</source>
-        <translation>Refrescar estadísticas de XRUN</translation>
+        <translation>Atualizar estatísticas de XRUN</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="178"/>
         <source>&amp;Refresh</source>
-        <translation>&amp;Refrescar</translation>
+        <translation>&amp;Atualizar</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="84"/>
         <source>Server name</source>
-        <translation>Nombre del servidor</translation>
+        <translation>Nome do servidor</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="86"/>
         <source>Server state</source>
-        <translation>Estado del Servidor</translation>
+        <translation>Estado do servidor</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="88"/>
         <source>DSP Load</source>
-        <translation>Uso de CPU del DSP</translation>
+        <translation>Uso de CPU do DSP</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="90"/>
         <source>Sample Rate</source>
-        <translation>Frecuencia de muestreo</translation>
+        <translation>Taxa de amostragem</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="92"/>
         <source>Buffer Size</source>
-        <translation>Tamaño de Buffer</translation>
+        <translation>Tamanho do Buffer</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="94"/>
@@ -1891,37 +1891,37 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="97"/>
         <source>Transport state</source>
-        <translation>Estado del transporte</translation>
+        <translation>Estado do transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="100"/>
         <source>Transport Timecode</source>
-        <translation>Código de tiempo del transporte</translation>
+        <translation>Código de tempo do transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="102"/>
         <source>Transport BBT</source>
-        <translation>BBT del Transporte</translation>
+        <translation>BBT do Transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="104"/>
         <source>Transport BPM</source>
-        <translation>BPM del transporte</translation>
+        <translation>BPM do transporte</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="107"/>
         <source>XRUN count since last server startup</source>
-        <translation>XRUNs desde el último inicio</translation>
+        <translation>XRUNs desde a última inicialização</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="110"/>
         <source>XRUN last time detected</source>
-        <translation>Fecha de la última XRUN detectada</translation>
+        <translation>XRUN detectado última vez</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="112"/>
         <source>XRUN last</source>
-        <translation>Última XRUN</translation>
+        <translation>Último XRUN</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="114"/>
@@ -1936,7 +1936,7 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="118"/>
         <source>XRUN average</source>
-        <translation>Promedio de XRUN</translation>
+        <translation>Média de XRUN</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="120"/>
@@ -1946,17 +1946,17 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="124"/>
         <source>Maximum scheduling delay</source>
-        <translation>Máximo retardo de programación(scheduling)</translation>
+        <translation>Atraso máximo de agendamento (scheduling)</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="127"/>
         <source>Time of last reset</source>
-        <translation>Tiempo desde el último reset</translation>
+        <translation>Hora da última reinicialização</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="229"/>
         <source>Logging stopped --- %1 ---</source>
-        <translation>Registro detenido --- %1 ---</translation>
+        <translation>Registro parado --- %1 ---</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="239"/>
@@ -1969,16 +1969,16 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1695"/>
         <source>Warning</source>
-        <translation>Advertencia</translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1696"/>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
-        <translation>Esto desconectará todos los sockets.
+        <translation>Isso desconectará todos os soquetes.
 
-Está seguro?</translation>
+Está certo disto?</translation>
     </message>
 </context>
 <context>
