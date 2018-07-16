@@ -1991,12 +1991,12 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="432"/>
         <source>&amp;New</source>
-        <translation>&amp;Nueva</translation>
+        <translation>&amp;Novo</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="429"/>
         <source>Create a new patchbay profile</source>
-        <translation></translation>
+        <translation>Crie um novo perfil de patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="448"/>
@@ -2006,7 +2006,7 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="445"/>
         <source>Load patchbay profile</source>
-        <translation>Cargar perfil de patchbay</translation>
+        <translation>Carregar perfil de patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="464"/>
@@ -2016,17 +2016,17 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="461"/>
         <source>Save current patchbay profile</source>
-        <translation>Salvar el perfil actual del patchbay</translation>
+        <translation>Salvar o perfil atual do patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="501"/>
         <source>Acti&amp;vate</source>
-        <translation>Acti&amp;var</translation>
+        <translation>Ati&amp;var</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="498"/>
         <source>Toggle activation of current patchbay profile</source>
-        <translation>Conmutar la activación del esquema actual</translation>
+        <translation>Ativar/desativar perfil atual do patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="322"/>
@@ -2036,7 +2036,7 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="319"/>
         <source>Connect currently selected sockets</source>
-        <translation>Conectar los puertos seleccionados</translation>
+        <translation>Conecte os soquetes atualmente selecionados</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="335"/>
@@ -2046,50 +2046,50 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="332"/>
         <source>Disconnect currently selected sockets</source>
-        <translation>Desconectar los puertos seleccionados</translation>
+        <translation>Desconectar soquetes selecionados no momento</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="348"/>
         <source>Disconnect &amp;All</source>
-        <translation>Desconectar &amp;Todo</translation>
+        <translation>Desconectar &amp;Tudo</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="345"/>
         <source>Disconnect all currently connected sockets</source>
-        <translation>Desconectar los socket seleccionados</translation>
+        <translation>Desconecte todos os soquetes conectados no momento</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="406"/>
         <source>&amp;Refresh</source>
-        <translation>&amp;Refrescar</translation>
+        <translation>&amp;Atualizar</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="403"/>
         <source>Refresh current patchbay view</source>
-        <translation>Refrescar la vista actual</translation>
+        <translation>Atualizar a exibição atual do patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="108"/>
         <location filename="../qjackctlPatchbayForm.ui" line="218"/>
         <source>Down</source>
-        <translation>Bajar</translation>
+        <translation>Baixar</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="105"/>
         <location filename="../qjackctlPatchbayForm.ui" line="215"/>
         <source>Move currently selected output socket down one position</source>
-        <translation>Mover el socket de salida seleccionado una posición hacia abajo</translation>
+        <translation>Mover o soquete de saída selecionado para uma posição abaixo</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="121"/>
         <location filename="../qjackctlPatchbayForm.ui" line="257"/>
         <source>Add...</source>
-        <translation>Añadir...</translation>
+        <translation>Adicionar...</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="118"/>
         <source>Create a new output socket</source>
-        <translation>Crear un nuevo socket de salida</translation>
+        <translation>Criar um novo soquete de saída</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="150"/>
@@ -2100,19 +2100,19 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="147"/>
         <source>Edit currently selected input socket properties</source>
-        <translation>Editar las propiedades del socket de entrada seleccionado</translation>
+        <translation>Editar propriedades do soquete de entrada selecionadas</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="179"/>
         <location filename="../qjackctlPatchbayForm.ui" line="283"/>
         <source>Up</source>
-        <translation>Subir</translation>
+        <translation>Acima</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="176"/>
         <location filename="../qjackctlPatchbayForm.ui" line="280"/>
         <source>Move currently selected output socket up one position</source>
-        <translation>Mover el socket de salida seleccionado una posición hacia arriba</translation>
+        <translation>Mover o soquete de saída selecionado atualmente para cima uma posição</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="192"/>
@@ -2123,7 +2123,7 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="189"/>
         <source>Remove currently selected output socket</source>
-        <translation>Remover el socket de salida seleccionado</translation>
+        <translation>Remover soquete de saída selecionado no momento</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="205"/>
@@ -2134,58 +2134,58 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="202"/>
         <source>Duplicate (copy) currently selected output socket</source>
-        <translation>Duplicar (copiar) el socket de salida seleccionado</translation>
+        <translation>Duplicar (copiar) o soquete de saída selecionado</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="228"/>
         <source>Remove currently selected input socket</source>
-        <translation>Remover el socket de entrada seleccionado</translation>
+        <translation>Remover o soquete de entrada selecionado</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="241"/>
         <source>Duplicate (copy) currently selected input socket</source>
-        <translation>Duplicar (copiar) el socket de entrada seleccionado</translation>
+        <translation>Duplicar (copiar) o soquete de entrada selecionado</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="254"/>
         <source>Create a new input socket</source>
-        <translation>Crear un nuevo socket de entrada</translation>
+        <translation>Criar um novo soquete de entrada</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="267"/>
         <source>Edit currently selected output socket properties</source>
-        <translation>Editar las propiedades del socket de salida seleccionado</translation>
+        <translation>Editar as propriedades do soquete de saída selecionado</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="224"/>
         <source>Warning</source>
-        <translation>Advertencia</translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="608"/>
         <source>active</source>
-        <translation>activa</translation>
+        <translation>Ativo</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="449"/>
         <source>New Patchbay definition</source>
-        <translation>Nuevo esquema de patchbay</translation>
+        <translation>Nova definição de patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="483"/>
         <location filename="../qjackctlPatchbayForm.cpp" line="503"/>
         <source>Patchbay Definition files</source>
-        <translation>Archivos de esquemas de patchbay</translation>
+        <translation>Arquivos de definições de patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="481"/>
         <source>Load Patchbay Definition</source>
-        <translation>Cargar esquema de patchbay</translation>
+        <translation>Carregar definição de patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="501"/>
         <source>Save Patchbay Definition</source>
-        <translation>Salvar esquema de patchbay</translation>
+        <translation>Salvar definição de patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="225"/>
@@ -2194,11 +2194,11 @@ Está certo disto?</translation>
 &quot;%1&quot;
 
 Do you want to save the changes?</source>
-        <translation>La definición del patchbay ha cambiado:
+        <translation>A definição de patchbay foi alterada:
 
 &quot;%1&quot;
 
-Desea guardar los cambios?</translation>
+Você quer salvar as alterações??</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="281"/>
@@ -2208,20 +2208,20 @@ Desea guardar los cambios?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="354"/>
         <source>Untitled%1</source>
-        <translation>SinNombre%1</translation>
+        <translation>Sem Título%1</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="373"/>
         <location filename="../qjackctlPatchbayForm.cpp" line="403"/>
         <source>Error</source>
-        <translation>Error</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="374"/>
         <source>Could not load patchbay definition file: 
 
 &quot;%1&quot;</source>
-        <translation>No se puede cargar el archivo con el esquema del patchbay: 
+        <translation>Não foi possível carregar o arquivo de definição do patchbay: 
 
 &quot;%1&quot;</translation>
     </message>
