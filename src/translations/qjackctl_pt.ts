@@ -2230,24 +2230,26 @@ Você quer salvar as alterações??</translation>
         <source>Could not save patchbay definition file: 
 
 &quot;%1&quot;</source>
-        <translation>No se puede guardar el archivo con el esquema del patchbay: &quot;%1&quot;</translation>
+        <translation>Não foi possível salvar o arquivo de definição do patchbay: 
+
+&quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="450"/>
         <source>Create patchbay definition as a snapshot
 of all actual client connections?</source>
-        <translation>Crear un esquema del patchbay en base a
-una instantánea de las conexiones actuales?</translation>
+        <translation>Criar definição de patchbay como um snapshot
+de todas as conexões atuais do cliente??</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="491"/>
         <source>Current (recent) patchbay profile(s)</source>
-        <translation>Perfil actual (reciente) de patchbay</translation>
+        <translation>Perfil(is) atual(is) (recente(s)) do patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="374"/>
         <source>Expand all items</source>
-        <translation>Expandir todos los elementos</translation>
+        <translation>Expandir todos os elementos</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="377"/>
@@ -2260,7 +2262,7 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1237"/>
         <source>Add...</source>
-        <translation>Añadir...</translation>
+        <translation>Adicionar...</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1239"/>
@@ -2290,7 +2292,7 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1311"/>
         <source>Move Down</source>
-        <translation>Bajar</translation>
+        <translation>Abaixar</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1317"/>
@@ -2317,7 +2319,7 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1325"/>
         <source>Disconnect &amp;All</source>
-        <translation>Desconectar &amp;Todo</translation>
+        <translation>Desconectar &amp;Tudo</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1326"/>
@@ -2328,7 +2330,7 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1331"/>
         <source>&amp;Refresh</source>
-        <translation>&amp;Refrescar</translation>
+        <translation>&amp;Atualizar</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1332"/>
@@ -2339,12 +2341,12 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1255"/>
         <source>Forward</source>
-        <translation>Avanzar</translation>
+        <translation>Avançar</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1294"/>
         <source>(None)</source>
-        <translation>(Ninguno)</translation>
+        <translation>(Nenhum)</translation>
     </message>
 </context>
 <context>
@@ -2352,12 +2354,12 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="34"/>
         <source>Session - JACK Audio Connection Kit</source>
-        <translation>Sesión - JACK Audio Connection Kit</translation>
+        <translation>Sessão - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="45"/>
         <source>Load session</source>
-        <translation>Cargar sesión</translation>
+        <translation>Carregar sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="48"/>
@@ -2368,34 +2370,34 @@ una instantánea de las conexiones actuales?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="58"/>
         <source>Recent session</source>
-        <translation>Sesión reciente</translation>
+        <translation>Sessão recente</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="61"/>
         <location filename="../qjackctlSessionForm.cpp" line="245"/>
         <source>&amp;Recent</source>
-        <translation>&amp;Reciente</translation>
+        <translation>&amp;Recente</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="81"/>
         <source>Save session</source>
-        <translation>Guardar sesión</translation>
+        <translation>Salvar sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="251"/>
         <location filename="../qjackctlSessionForm.cpp" line="816"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Guardar...</translation>
+        <translation>&amp;Salvar...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="152"/>
         <source>Client / Ports</source>
-        <translation>Cliente / Puertos</translation>
+        <translation>Cliente/Portas</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="157"/>
         <source>UUID</source>
-        <translation type="unfinished"></translation>
+        <translation>UUID</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="162"/>
@@ -2406,59 +2408,59 @@ una instantánea de las conexiones actuales?</translation>
         <location filename="../qjackctlSessionForm.cpp" line="460"/>
         <location filename="../qjackctlSessionForm.cpp" line="477"/>
         <source>Load Session</source>
-        <translation>Cargar Sesión</translation>
+        <translation>Carregar Sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="465"/>
         <location filename="../qjackctlSessionForm.cpp" line="530"/>
         <source>Session directory</source>
-        <translation>Directorio de la sesión</translation>
+        <translation>Diretório da sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="514"/>
         <source>Save Session</source>
-        <translation>Guardar Sesión</translation>
+        <translation>Salvar Sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="517"/>
         <source>and Quit</source>
-        <translation>y Salir</translation>
+        <translation>e Sair</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="520"/>
         <source>Template</source>
-        <translation>Plantilla</translation>
+        <translation>Modelo</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="588"/>
         <source>&amp;Clear</source>
-        <translation>&amp;Limpiar</translation>
+        <translation>&amp;Limpar</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="613"/>
         <location filename="../qjackctlSessionForm.cpp" line="659"/>
         <location filename="../qjackctlSessionForm.cpp" line="666"/>
         <source>Warning</source>
-        <translation>Advertencia</translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="614"/>
         <source>A session could not be found in this folder:
 
 &quot;%1&quot;</source>
-        <translation>No se encontró una sesión en esta carpeta:
+        <translation>Não foi possível encontrar uma sessão nesta pasta:
 
 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="628"/>
         <source>%1: loading session...</source>
-        <translation>%1: cargando sesión...</translation>
+        <translation>%1: carregando sessão...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="641"/>
         <source>%1: load session %2.</source>
-        <translation>%1: cargar sesión %2.</translation>
+        <translation>%1: carregar sessão %2.</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="660"/>
@@ -2467,11 +2469,11 @@ una instantánea de las conexiones actuales?</translation>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing session?</source>
-        <translation>Una sesión ya existe en esta carpeta:
+        <translation>Uma sessão já existe nesta pasta:
 
 &quot;%1&quot;
 
-Está seguro de querer sobreescribirla?</translation>
+Você tem certeza de sobrescrever a sessão existente?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="667"/>
