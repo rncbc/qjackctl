@@ -525,18 +525,18 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="188"/>
         <source>Cl&amp;ose</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="191"/>
         <location filename="../qjackctlGraphForm.ui" line="194"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="197"/>
         <source>Close this application window</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít okno tohoto programu</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="205"/>
@@ -766,14 +766,14 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="453"/>
         <source>&amp;Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozsah &amp;zvětšení</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="456"/>
         <location filename="../qjackctlGraphForm.ui" line="459"/>
         <location filename="../qjackctlGraphForm.ui" line="462"/>
         <source>Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozsah zvětšení</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="470"/>
@@ -838,7 +838,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="93"/>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvětšení</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="280"/>
@@ -991,12 +991,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
         <source>Show/hide the graph window</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat/Skrýt okno s grafem</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="573"/>
         <source>Show/hide the connections window</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat/Skrýt okno s obsahem</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="669"/>
@@ -3433,12 +3433,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3782"/>
         <source>Whether to replace Connections with Graph button on the main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit v hlavním okně Spojení tlačítkem pro graf</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3785"/>
         <source>Replace Connections with &amp;Graph button</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit Spojení tlačítkem pro &amp;graf</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3888"/>
