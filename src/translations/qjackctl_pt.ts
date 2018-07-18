@@ -2482,38 +2482,38 @@ Você tem certeza de sobrescrever a sessão existente?</translation>
 &quot;%1&quot;
 
 Are you sure to overwrite the existing folder?</source>
-        <translation>Esta carpeta existe y no está vacía:
+        <translation>Esta pasta já existe e não está vazia:
 
 &quot;%1&quot;
 
-Está seguro de sobreescribir esta carpeta?</translation>
+Está certo de sobrescrever a pasta existente?</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="684"/>
         <source>%1: saving session...</source>
-        <translation>%1: guardando sesión...</translation>
+        <translation>%1: salvando sessão...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="713"/>
         <source>%1: save session %2.</source>
-        <translation>%: guardar sesión %2.</translation>
+        <translation>%: salvar sessão %2.</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="117"/>
         <source>Update session</source>
-        <translation>Actualizar sesión</translation>
+        <translation>Atualizar sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="255"/>
         <location filename="../qjackctlSessionForm.cpp" line="820"/>
         <source>Save and &amp;Quit...</source>
-        <translation>Guardar y &amp;Salir...</translation>
+        <translation>Salvar e &amp;Sair...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="258"/>
         <location filename="../qjackctlSessionForm.cpp" line="823"/>
         <source>Save &amp;Template...</source>
-        <translation>Guardar Plan&amp;tilla...</translation>
+        <translation>Salvar &amp;Modelo...</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="84"/>
@@ -2524,51 +2524,51 @@ Está seguro de sobreescribir esta carpeta?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="94"/>
         <source>Save session versioning</source>
-        <translation>Guardar las versiones de la sesión</translation>
+        <translation>Salvar versionamento da sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="97"/>
         <location filename="../qjackctlSessionForm.cpp" line="828"/>
         <source>&amp;Versioning</source>
-        <translation>&amp;Versiones</translation>
+        <translation>&amp;Versionamento</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="120"/>
         <location filename="../qjackctlSessionForm.cpp" line="834"/>
         <location filename="../qjackctlSessionForm.cpp" line="1000"/>
         <source>Re&amp;fresh</source>
-        <translation>Re&amp;frescar</translation>
+        <translation>At&amp;ualizar</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="136"/>
         <source>Session clients / connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexões/clientes da sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="171"/>
         <source>Infra-clients / commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-clientes</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="187"/>
         <source>Infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-cliente</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="192"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-comando</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="200"/>
         <source>Add infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar infra-cliente</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="203"/>
         <location filename="../qjackctlSessionForm.cpp" line="990"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Adicionar</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="213"/>
@@ -2579,23 +2579,23 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <location filename="../qjackctlSessionForm.ui" line="216"/>
         <location filename="../qjackctlSessionForm.cpp" line="993"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Editar</translation>
+        <translation>&amp;Editar</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="226"/>
         <source>Remove infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover infra-cliente</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="229"/>
         <location filename="../qjackctlSessionForm.cpp" line="996"/>
         <source>Re&amp;move</source>
-        <translation type="unfinished"></translation>
+        <translation>Re&amp;mover</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="847"/>
         <source>New Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo Cliente</translation>
     </message>
 </context>
 <context>
@@ -2603,7 +2603,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="140"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>Infra-comando</translation>
     </message>
 </context>
 <context>
@@ -2611,12 +2611,12 @@ Está seguro de sobreescribir esta carpeta?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="34"/>
         <source>Setup - JACK Audio Connection Kit</source>
-        <translation>Configuración - JACK Audio Connection Kit</translation>
+        <translation>Configuração - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="53"/>
         <source>Settings</source>
-        <translation>Configuraciones</translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="67"/>
