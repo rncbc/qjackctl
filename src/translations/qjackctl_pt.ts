@@ -4114,7 +4114,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="52"/>
         <source>&amp;Socket</source>
-        <translation>&amp;Tomadas</translation>
+        <translation>&amp;Soquetes</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="64"/>
@@ -4139,12 +4139,12 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="97"/>
         <source>Add plug to socket plug list</source>
-        <translation>Adicionar ficha à lista de fichas de tomadas</translation>
+        <translation>Adicionar plugue à lista de plugues de soquetes</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="110"/>
         <source>&amp;Plug:</source>
-        <translation>&amp;Plug:</translation>
+        <translation>&amp;Plugue:</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="126"/>
@@ -4154,12 +4154,12 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="155"/>
         <source>Socket Plugs / Ports</source>
-        <translation>Socket Plugs/Portas</translation>
+        <translation>Soquetes Plugues/Portas</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="139"/>
         <source>Socket plug list</source>
-        <translation>Lista de tomadas tipo plug</translation>
+        <translation>Lista de soquetes tipo plugue</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="166"/>
@@ -4288,7 +4288,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="33"/>
         <source>Socket - JACK Audio Connection Kit</source>
-        <translation>Sockets - JACK Audio Connection Kit</translation>
+        <translation>Soquetes - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="163"/>
@@ -4377,12 +4377,12 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="754"/>
         <source>Output Sockets / Plugs</source>
-        <translation>Soquetes de Saída/Plugs</translation>
+        <translation>Soquetes de Saída/Plugues</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="756"/>
         <source>Input Sockets / Plugs</source>
-        <translation>Soquetes de Entrada/Plugs</translation>
+        <translation>Soquetes de Entrada/Plugues</translation>
     </message>
 </context>
 </TS>
