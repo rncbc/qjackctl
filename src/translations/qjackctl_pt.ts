@@ -2621,7 +2621,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="67"/>
         <source>Preset &amp;Name:</source>
-        <translation>&amp;Nombre del Preset:</translation>
+        <translation>Nome do &amp;Preset:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="93"/>
@@ -2637,12 +2637,12 @@ Está certo de sobrescrever a pasta existente?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3847"/>
         <source>(default)</source>
-        <translation></translation>
+        <translation>(padrão)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="86"/>
         <source>Settings preset name</source>
-        <translation>Preset con las configuraciones</translation>
+        <translation>Nome do preset de configurações</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="104"/>
@@ -2652,17 +2652,17 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Save settings as current preset name</source>
-        <translation>Salvar configuraciones en el preset actual</translation>
+        <translation>Salvar configurações como nome do preset atual</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="120"/>
         <source>&amp;Delete</source>
-        <translation>&amp;Eliminar</translation>
+        <translation>&amp;Deletar</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="117"/>
         <source>Delete current settings preset</source>
-        <translation>Eliminar el preset con la configuración actual</translation>
+        <translation>Excluir configurações atuais predefinidas</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="795"/>
@@ -2707,22 +2707,22 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="139"/>
         <source>Parameters</source>
-        <translation>Parámetros</translation>
+        <translation>Parâmetros</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="608"/>
         <source>Number of periods in the hardware buffer</source>
-        <translation>Número de períodos en el buffer de hardware</translation>
+        <translation>Número de períodos no buffer de hardware</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1070"/>
         <source>Priorit&amp;y:</source>
-        <translation>&amp;Prioridad:</translation>
+        <translation>Prioridad&amp;e:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="503"/>
         <source>&amp;Frames/Period:</source>
-        <translation>&amp;Cuadros / Período:</translation>
+        <translation>&amp;Quadros/Período:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="532"/>
@@ -2779,12 +2779,12 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="525"/>
         <source>Frames per period between process() calls</source>
-        <translation>Cuadros por período entre llamadas a process()</translation>
+        <translation>Quadros por período entre as chamadas() de processo</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1141"/>
         <source>Port Ma&amp;ximum:</source>
-        <translation>Má&amp;ximos Puertos:</translation>
+        <translation>Portas Má&amp;ximas:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1050"/>
@@ -2824,17 +2824,17 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="439"/>
         <source>Sample rate in frames per second</source>
-        <translation>Frecuencia de muestreo en cuadros por segundo</translation>
+        <translation>Taxa de amostragem em quadros por segundo</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1340"/>
         <source>Scheduler priority when running realtime</source>
-        <translation>Prioridad del scheduler cuando se ejecuta en tiempo real</translation>
+        <translation>Prioridade do agendador ao executar em tempo real</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1318"/>
         <source>&amp;Word Length:</source>
-        <translation>&amp;Largo de palabra:</translation>
+        <translation>&amp;Tamanho da palavra:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="586"/>
@@ -2844,12 +2844,12 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1191"/>
         <source>Word length</source>
-        <translation>Tamaño de palabra</translation>
+        <translation>Tamanho da palavra</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1279"/>
         <source>Maximum number of ports the JACK server can manage</source>
-        <translation>Máximo número de puertos que podrá manejar el servidor JACK</translation>
+        <translation>Número máximo de portas que o servidor JACK pode gerenciar</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1222"/>
