@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Portuguese (pt) translation added (by Heitor Rocha).
+
 - AppData/AppStream metadata is now settled under an all
   permisssive license (FSFAP).
 
