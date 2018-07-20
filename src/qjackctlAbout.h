@@ -31,7 +31,7 @@
 #define QJACKCTL_SUBTITLE2  "Qt GUI Interface"
 
 #define QJACKCTL_SUBTITLE   QJACKCTL_SUBTITLE1 " - " QJACKCTL_SUBTITLE2
-#define QJACKCTL_WEBSITE    "http://qjackctl.sourceforge.net"
+#define QJACKCTL_WEBSITE    "https://qjackctl.sourceforge.io"
 #define QJACKCTL_COPYRIGHT  "Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved."
 
 #define QJACKCTL_DOMAIN     "rncbc.org"
