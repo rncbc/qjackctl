@@ -465,7 +465,7 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="66"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Editar</translation>
+        <translation>&amp;Editar</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="74"/>
@@ -1137,7 +1137,7 @@ Desculpe</translation>
         <source>D-BUS: JACK server could not be stopped.
 
 Sorry</source>
-        <translation>D-BUS: O servidor JACK não pôde detenerse.
+        <translation>D-BUS: O servidor JACK não pôde ser parado.
 
 Desculpe</translation>
     </message>
@@ -1380,12 +1380,12 @@ Desculpe</translation>
         <location filename="../qjackctlMainForm.cpp" line="3670"/>
         <location filename="../qjackctlMainForm.cpp" line="3722"/>
         <source>S&amp;how</source>
-        <translation>&amp;Mostrar</translation>
+        <translation>M&amp;ostrar</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3666"/>
         <source>Rest&amp;ore</source>
-        <translation>&amp;Restaurar</translation>
+        <translation>Rest&amp;aurar</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3682"/>
@@ -1636,17 +1636,17 @@ Por favor, verifique a janela de mensagens para mais informações.</translation
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3354"/>
         <source>%1 (%2%)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2%)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3366"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3368"/>
         <source>%1 Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Hz</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3370"/>
@@ -1705,7 +1705,7 @@ Por favor, verifique a janela de mensagens para mais informações.</translation
     <message>
         <location filename="../qjackctlMainForm.ui" line="215"/>
         <source>DSP Load</source>
-        <translation>Uso de CPU del DSP</translation>
+        <translation>Uso de CPU do DSP</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="263"/>
@@ -1780,7 +1780,7 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3749"/>
         <source>&amp;Versioning</source>
-        <translation>&amp;Versões</translation>
+        <translation>&amp;Versionamento</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3756"/>
@@ -1790,7 +1790,7 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3358"/>
         <source>%1 (%2%, %3 xruns)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2%, %3 xruns)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2010"/>
@@ -2847,7 +2847,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="586"/>
         <source>Periods/&amp;Buffer:</source>
-        <translation>Períodos / &amp;Buffer:</translation>
+        <translation>Períodos/&amp;Buffer:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1191"/>
@@ -2862,12 +2862,12 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1222"/>
         <source>&amp;Wait (usec):</source>
-        <translation>&amp;Retardo (microseg):</translation>
+        <translation>&amp;Espera (microseg):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="417"/>
         <source>Sample &amp;Rate:</source>
-        <translation>&amp;Taxa de amostragem:</translation>
+        <translation>Taxa de &amp;amostragem:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1251"/>
@@ -2915,7 +2915,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="398"/>
         <source>&amp;Realtime</source>
-        <translation>Tempo &amp;Real</translation>
+        <translation>&amp;Tempo Real</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="395"/>
@@ -2930,7 +2930,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="875"/>
         <source>Do not attempt to lock memory, even if in realtime mode</source>
-        <translation>Não tente bloquear a memória, mesmo se no modo de tempo real</translation>
+        <translation>Não tente bloquear a memória, mesmo no modo de tempo real</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="894"/>
@@ -3005,7 +3005,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1505"/>
         <source>&amp;Output Device:</source>
-        <translation>Dispositiv&amp;o de saída:</translation>
+        <translation>&amp;Dispositivo de saída:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="254"/>
@@ -3025,7 +3025,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1444"/>
         <source>Dit&amp;her:</source>
-        <translation>&amp;Suavizado:</translation>
+        <translation>Sua&amp;vizado:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1780"/>
@@ -3035,7 +3035,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1568"/>
         <source>&amp;Input Device:</source>
-        <translation>D&amp;ispositivo de entrada:</translation>
+        <translation>&amp;Dispositivo de entrada:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1414"/>
@@ -3050,7 +3050,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1424"/>
         <source>Playback Only</source>
-        <translation>Ssomente Reprodução</translation>
+        <translation>Somente Reprodução</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1410"/>
@@ -3693,7 +3693,7 @@ Está certo disto?</translation>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
-        <translation>AAlgumas configurações foram alteradas.
+        <translation>Algumas configurações foram alteradas.
 
 Você quer aplicar as mudanças?</translation>
     </message>
@@ -3784,7 +3784,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2569"/>
         <source>Logging</source>
-        <translation>Registro</translation>
+        <translation>Registrando</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2606"/>
@@ -3839,7 +3839,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2914"/>
         <source>Blin&amp;k server mode indicator</source>
-        <translation>&amp;Piscar o modo do servidor</translation>
+        <translation>Pisc&amp;ar o modo do servidor</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3278"/>
@@ -4114,7 +4114,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1854"/>
         <source>Extra driver options (command line suffix)</source>
-        <translation>Opciones extras para o driver (sufixo da linha de comando)</translation>
+        <translation>Opções extras para o driver (sufixo da linha de comando)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3635"/>
@@ -4232,7 +4232,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="295"/>
         <source>Audio socket type (JACK)</source>
-        <translation>Soquete tipo audio (JACK)</translation>
+        <translation>Soquete tipo áudio (JACK)</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="308"/>
