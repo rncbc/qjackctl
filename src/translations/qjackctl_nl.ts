@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl">
+<TS version="2.1" language="nl" sourcelanguage="en">
 <context>
     <name>PortAudioProber</name>
     <message>
@@ -29,6 +29,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="49"/>
         <source>(default)</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2664,6 +2665,7 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3863"/>
         <source>(default)</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
         <translation></translation>
     </message>
     <message>

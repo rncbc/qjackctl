@@ -29,6 +29,7 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="49"/>
         <source>(default)</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
         <translation></translation>
     </message>
     <message>
@@ -2662,6 +2663,7 @@ Sovrascrivo la cartella?</translation>
         <location filename="../qjackctlSetupForm.ui" line="1783"/>
         <location filename="../qjackctlSetupForm.ui" line="3863"/>
         <source>(default)</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
         <translation></translation>
     </message>
     <message>
