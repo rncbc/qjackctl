@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.3  2018-07-22  A Summer'18 Release.
 
 - Portuguese (pt) translation added (by Heitor Rocha).
 
@@ -12,7 +12,7 @@ GIT HEAD
   permisssive license (FSFAP).
 
 - Improved Graph rubberband add (Shift) and toggle (Ctrl)
-  multiple (de)selections. (EXPERIMENTAL)
+  multiple (de)selections.
 
 - Added user preference option: Setup / Misc / Buttons /
   Replace Connections with Graph button (on main window).

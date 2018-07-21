@@ -1,3 +1,9 @@
+qjackctl (0.5.3-32) unstable; urgency=low
+
+  * Summer'18 release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Sun, 22 Jul 2018 20:00:00 +0100
+
 qjackctl (0.5.2-31) unstable; urgency=low
 
   * Pre-LAC2018 release frenzy hotfix.
