@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Fixed JACK D-Bus settings for MIDI driver parameter.
+
+
 0.5.3  2018-07-22  A Summer'18 Release.
 
 - Portuguese (pt) translation added (by Heitor Rocha).

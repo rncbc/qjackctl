@@ -3955,10 +3955,10 @@ void qjackctlMainForm::setDBusParameters (void)
 	setDBusEngineParameter("client-timeout",
 		m_preset.iTimeout,
 		m_preset.iTimeout > 0 && m_preset.iTimeout != 500);
-	setDBusEngineParameter("no-mem-lock", m_preset.bNoMemLock);
-	setDBusEngineParameter("libs-unlock",
-		m_preset.bUnlockMem,
-		!m_preset.bNoMemLock);
+//	setDBusEngineParameter("no-mem-lock", m_preset.bNoMemLock);
+//	setDBusEngineParameter("libs-unlock",
+//		m_preset.bUnlockMem,
+//		!m_preset.bNoMemLock);
 	setDBusEngineParameter("driver", m_preset.sDriver);
 	if ((bAlsa || bPortaudio) && (m_preset.iAudio != QJACKCTL_DUPLEX ||
 		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
@@ -3997,7 +3997,7 @@ void qjackctlMainForm::setDBusParameters (void)
 		setDBusDriverParameter("hwmon", m_preset.bHWMon);
 		setDBusDriverParameter("hwmeter", m_preset.bHWMeter);
 	#ifdef CONFIG_JACK_MIDI
-		setDBusDriverParameter("midi",
+		setDBusDriverParameter("midi-driver",
 			m_preset.sMidiDriver,
 			!m_preset.sMidiDriver.isEmpty());
 	#endif
