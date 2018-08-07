@@ -527,18 +527,18 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="188"/>
         <source>Cl&amp;ose</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="191"/>
         <location filename="../qjackctlGraphForm.ui" line="194"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="197"/>
         <source>Close this application window</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer cette fenêtre d&apos;application</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="205"/>
@@ -768,14 +768,14 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="453"/>
         <source>&amp;Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Gamme de &amp;zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="456"/>
         <location filename="../qjackctlGraphForm.ui" line="459"/>
         <location filename="../qjackctlGraphForm.ui" line="462"/>
         <source>Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Gamme de zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="470"/>
@@ -840,7 +840,7 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="93"/>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="280"/>
@@ -983,12 +983,12 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
         <source>Show/hide the graph window</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher/cacher la fenêtre de graph</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="573"/>
         <source>Show/hide the connections window</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher/cacher la fenêtre des connexions</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="672"/>
@@ -4063,12 +4063,12 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3782"/>
         <source>Whether to replace Connections with Graph button on the main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Si on remplace les connexions avec un bouton de graph dans la fenêtre principale</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3785"/>
         <source>Replace Connections with &amp;Graph button</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer les connexions par un bouton de graph</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3803"/>
@@ -4403,12 +4403,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="754"/>
         <source>Output Sockets / Plugs</source>
-        <translation>Prises/Fiches de Sortie</translation>
+        <translation>Prises/fiches de sortie</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="756"/>
         <source>Input Sockets / Plugs</source>
-        <translation>Prises/Fiches d&apos;Entrée</translation>
+        <translation>Prises/fiches d&apos;entrée</translation>
     </message>
 </context>
 </TS>
