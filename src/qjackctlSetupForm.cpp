@@ -1589,7 +1589,8 @@ void qjackctlSetupForm::accept (void)
 			(iOldBaseFontSize     !=  m_pSetup->iBaseFontSize))
 			pMainForm->showDirtySetupWarning();
 		// If server is currently running, warn user...
-		pMainForm->showDirtySettingsWarning();
+		if (m_iDirtySettings > 0)
+			pMainForm->showDirtySettingsWarning();
 	}
 
 	// Save combobox history...

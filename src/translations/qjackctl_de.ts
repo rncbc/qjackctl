@@ -3832,7 +3832,7 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="823"/>
         <location filename="../qjackctlSetupForm.cpp" line="876"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1636"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1637"/>
         <source>Warning</source>
         <translation>Warnung</translation>
     </message>
@@ -3949,7 +3949,7 @@ Sind Sie sicher?</translation>
         <translation>Protokolldateien</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1637"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1638"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
