@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Avoid showing setup warning when no server settings have
+  changed.
+
 - Fixed JACK D-Bus settings for MIDI driver parameter.
 
 

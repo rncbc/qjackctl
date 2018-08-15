@@ -391,26 +391,26 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 	const QRectF& rect
 		= canvas->mapToScene(canvas->viewport()->rect()).boundingRect();
 	const QPointF& pos = rect.center();
-	const qreal w = 0.3 * qMax(rect.width(),  800.0);
-	const qreal h = 0.3 * qMax(rect.height(), 600.0);
+	const qreal w = 0.33 * qMax(rect.width(),  800.0);
+	const qreal h = 0.33 * qMax(rect.height(), 600.0);
 
 	qreal x = pos.x();
 	qreal y = pos.y();
 
 	switch (node->nodeMode()) {
 	case qjackctlGraphItem::Input:
-		x += w;
-		y += h * int(0.5 * (m_ins  + 1) * (m_ins  & 1 ? -1 : +1));
 		++m_ins;
+		x += w;
+		y += 0.5 * h * (m_ins & 1 ? +m_ins : -m_ins);
 		break;
 	case qjackctlGraphItem::Output:
-		x -= w;
-		y += h * int(0.5 * (m_outs + 1) * (m_outs & 1 ? -1 : +1));
 		++m_outs;
+		x -= w;
+		y += 0.5 * h * (m_outs & 1 ? +m_outs : -m_outs);
 		break;
 	default:
-		y += h * int(0.5 * (m_mids + 1) * (m_mids & 1 ? -1 : +1));
 		++m_mids;
+		y += 0.25 * h * (m_mids & 1 ? +m_mids : -m_mids);
 		break;
 	}
 
