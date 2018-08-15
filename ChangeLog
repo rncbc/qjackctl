@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Graph auto-layout improvement for brand new node clients.
+
 - Avoid showing setup warning when no server settings have
   changed.
 

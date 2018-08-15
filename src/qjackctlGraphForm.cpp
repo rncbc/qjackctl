@@ -408,11 +408,20 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 		x -= w;
 		y += 0.5 * h * (m_outs & 1 ? +m_outs : -m_outs);
 		break;
-	default:
+	default: {
+		int dx = 0;
+		int dy = 0;
+		for (int i = 0; i < m_mids; ++i) {
+			if (qAbs(dx) <= qAbs(dy) && (dx != dy || dx >= 0))
+				dx += (dy >= 0 ? +1 : -1);
+			else
+				dy += (dx >= 0 ? -1 : +1);
+		}
+		x += 0.5 * w * qreal(dx) - qreal(::rand() % 24);
+		y += 0.5 * h * qreal(dy) - qreal(::rand() % 24);
 		++m_mids;
-		y += 0.25 * h * (m_mids & 1 ? +m_mids : -m_mids);
 		break;
-	}
+	}}
 
 	x = 4.0 * ::round(0.25 * x);
 	y = 4.0 * ::round(0.25 * y);
