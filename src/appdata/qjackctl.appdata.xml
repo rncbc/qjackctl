@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2003-2015 Rui Nuno Capela <rncbc@rncbc.org> -->
+<!-- Copyright 2003-2018 Rui Nuno Capela <rncbc@rncbc.org> -->
 <!-- Copyright 2015 Olivier Humbert <trebmuh@tuxfamily.org> for the FR translation-->
 <component type="desktop">
- <id>qjackctl.desktop</id>
+ <id>org.rncbc.qjackctl</id>
  <metadata_license>FSFAP</metadata_license>
  <project_license>GPL-2.0+</project_license>
  <name>QjackCtl</name>
@@ -26,6 +26,10 @@
    incluant une baie de brassage améliorée et des fonctionnalités de contrôle
    de connexion.</p>
  </description>
+ <launchable type="desktop-id">qjackctl.desktop</launchable>
+ <provides>
+​  <binary>qjackctl</binary>
+​ </provides>
  <screenshots>
   <screenshot type="default">
    <image>http://qjackctl.sourceforge.net/qjackctlMainForm1.png</image>
@@ -41,10 +45,7 @@
   <keyword>Qt</keyword>
  </keywords>
  <url type="homepage">https://qjackctl.sourceforge.io</url>
- <updatecontact>rncbc@rncbc.org</updatecontact>
  <project_group>rncbc.org</project_group>
- <kudos>
-  <kudo>HiDpiIcon</kudo>
-  <kudo>ModernToolkit</kudo>
- </kudos>
+ <developer_name>rncbc aka. Rui Nuno Capela</developer_name>
+ <update_contact>rncbc@rncbc.org</update_contact>
 </component>

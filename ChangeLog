@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- AppStream metadata updated to be the most compliant with
+  latest freedesktop.org specification and recommendation.
+
 - Graph auto-layout improvement for brand new node clients.
 
 - Avoid showing setup warning when no server settings have
