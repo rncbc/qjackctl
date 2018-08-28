@@ -1974,12 +1974,12 @@ the next time you start this program.</source>
 <context>
     <name>qjackctlPatchbay</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1695"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1677"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1696"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1678"/>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
@@ -2267,90 +2267,90 @@ of all actual client connections?</source>
 <context>
     <name>qjackctlPatchbayView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1237"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1231"/>
         <source>Add...</source>
         <translation>追加...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1239"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1233"/>
         <source>Edit...</source>
         <translation>編集...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1242"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1236"/>
         <source>Copy...</source>
         <translation>コピー...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1245"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1239"/>
         <source>Remove</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1249"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1243"/>
         <source>Exclusive</source>
         <translation>排他的</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1255"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1249"/>
         <source>Forward</source>
         <translation>早送り</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1294"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1288"/>
         <source>(None)</source>
         <translation>(なし)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1308"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1302"/>
         <source>Move Up</source>
         <translation>上へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1311"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1305"/>
         <source>Move Down</source>
         <translation>下へ移動</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1317"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1311"/>
         <source>&amp;Connect</source>
         <translation>接続(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1318"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1312"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1321"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1315"/>
         <source>&amp;Disconnect</source>
         <translation>切断(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1322"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1316"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1325"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1319"/>
         <source>Disconnect &amp;All</source>
         <translation>すべて切断(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1326"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1320"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1331"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1325"/>
         <source>&amp;Refresh</source>
         <translation>更新(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1332"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1326"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation type="unfinished"></translation>

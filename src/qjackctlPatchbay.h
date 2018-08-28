@@ -1,7 +1,7 @@
 // qjackctlPatchbay.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -364,10 +364,6 @@ public:
 	qjackctlSocketList *OSocketList() const;
 	qjackctlSocketList *ISocketList() const;
 
-	// Patchwork line style accessors.
-	void setBezierLines(bool bBezierLines);
-	bool isBezierLines() const;
-
 	// Patchbay dirty flag accessors.
 	void setDirty (bool bDirty);
 	bool dirty() const;
@@ -392,9 +388,6 @@ private:
 
 	// The main binding object.
 	qjackctlPatchbay *m_pPatchbay;
-
-	// How we'll draw patchwork lines.
-	bool m_bBezierLines;
 
 	// The obnoxious dirty flag.
 	bool m_bDirty;

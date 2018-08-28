@@ -6,6 +6,11 @@ ChangeLog
 
 GIT HEAD
 
+- Drawing patchbay connector lines as (bezier) curves is
+  now a difinitive and fixed feature (as long as no more
+  remains from the so called "Cambric explosion era" are
+  still lurking in there).
+
 - AppStream metadata updated to be the most compliant with
   latest freedesktop.org specification and recommendation.
 

@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1025,21 +1025,17 @@ void qjackctlPatchworkView::drawConnectionLine ( QPainter *pPainter,
 	if (y1 > h1)
 		pPainter->drawLine(x1, y1, x1 + 4, y1);
 
-	// How do we'll draw it?
-	if (m_pPatchbayView->isBezierLines()) {
-		// Setup control points
-		QPolygon spline(4);
-		int cp = int(float(x2 - x1 - 8) * 0.4f);
-		spline.putPoints(0, 4,
-			x1 + 4, y1, x1 + 4 + cp, y1, 
-			x2 - 4 - cp, y2, x2 - 4, y2);
-		// The connection line, it self.
-		QPainterPath path;
-		path.moveTo(spline.at(0));
-		path.cubicTo(spline.at(1), spline.at(2), spline.at(3));
-		pPainter->strokePath(path, pPainter->pen());
-	}   // Old style...
-	else pPainter->drawLine(x1 + 4, y1, x2 - 4, y2);
+	// Setup control points
+	QPolygon spline(4);
+	const int cp = int(float(x2 - x1 - 8) * 0.4f);
+	spline.putPoints(0, 4,
+		x1 + 4, y1, x1 + 4 + cp, y1,
+		x2 - 4 - cp, y2, x2 - 4, y2);
+	// The connection line, it self.
+	QPainterPath path;
+	path.moveTo(spline.at(0));
+	path.cubicTo(spline.at(1), spline.at(2), spline.at(3));
+	pPainter->strokePath(path, pPainter->pen());
 
 	// Invisible input plugs don't get a connecting dot.
 	if (y2 > h2)
@@ -1186,8 +1182,6 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent )
 	m_pIListView = new qjackctlSocketListView(this, false);
 
 	m_pPatchbay = NULL;
-
-	m_bBezierLines = false;
 
 	QSplitter::setHandleWidth(2);
 
@@ -1397,18 +1391,6 @@ qjackctlSocketList *qjackctlPatchbayView::ISocketList (void) const
 		return m_pPatchbay->ISocketList();
 	else
 		return NULL;
-}
-
-
-// Patchwork line style accessors.
-void qjackctlPatchbayView::setBezierLines ( bool bBezierLines )
-{
-	m_bBezierLines = bBezierLines;
-}
-
-bool qjackctlPatchbayView::isBezierLines (void) const
-{
-	return m_bBezierLines;
 }
 
 
