@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Make Graph nodes (ie. client boxes) transparent for yet
+  some eye-candiness ;) (EXPERIMENTAL)
+
 - Drawing patchbay connector lines as (bezier) curves is
   now a difinitive and fixed feature (as long as no more
   remains from the so called "Cambric explosion era" are

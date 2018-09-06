@@ -404,8 +404,21 @@ qjackctlGraphNode::qjackctlGraphNode (
 	QGraphicsPathItem::setZValue(0);
 
 	const QPalette pal;
-	qjackctlGraphItem::setForeground(pal.text().color().darker());
-	qjackctlGraphItem::setBackground(pal.window().color());
+	const int base_value = pal.base().color().value();
+	const bool is_dark = (base_value < 128);
+
+	const QColor& text_color = pal.text().color();
+	QColor foreground_color(is_dark
+		? text_color.darker()
+		: text_color.lighter());
+	qjackctlGraphItem::setForeground(foreground_color);
+
+	const QColor& window_color = pal.window().color();
+	QColor background_color(is_dark
+		? window_color.lighter()
+		: window_color.darker());
+	background_color.setAlpha(160);
+	qjackctlGraphItem::setBackground(background_color);
 
 	m_pixmap = new QGraphicsPixmapItem(this);
 	m_text = new QGraphicsTextItem(this);
@@ -416,14 +429,14 @@ qjackctlGraphNode::qjackctlGraphNode (
 	QGraphicsPathItem::setToolTip(m_name);
 	setNodeTitle(m_name);
 
-	const bool is_dark = (pal.base().color().value() < 24);
-	QColor shadow_color = (is_dark ? Qt::white : Qt::black);
+	const bool is_darker = (base_value < 24);
+	QColor shadow_color = (is_darker ? Qt::white : Qt::black);
 	shadow_color.setAlpha(180);
 
 	QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
 	effect->setColor(shadow_color);
-	effect->setBlurRadius(is_dark ? 8 : 16);
-	effect->setOffset(is_dark ? 0 : 2);
+	effect->setBlurRadius(is_darker ? 8 : 16);
+	effect->setOffset(is_darker ? 0 : 2);
 	QGraphicsPathItem::setGraphicsEffect(effect);
 }
 
@@ -644,9 +657,12 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 {
 	if (QGraphicsPathItem::isSelected()) {
 		const QPalette& pal = option->palette;
-		m_text->setDefaultTextColor(pal.highlightedText().color());
-		painter->setPen(pal.highlightedText().color());
-		painter->setBrush(pal.highlight().color());
+		const QColor& hilitetext_color = pal.highlightedText().color();
+		m_text->setDefaultTextColor(hilitetext_color);
+		painter->setPen(hilitetext_color);
+		QColor hilite_color(pal.highlight().color());
+		hilite_color.setAlpha(180);
+		painter->setBrush(hilite_color);
 	} else {
 		const QColor& foreground
 			= qjackctlGraphItem::foreground();
