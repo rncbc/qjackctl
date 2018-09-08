@@ -272,8 +272,9 @@ qjackctlGraphConnect *qjackctlGraphPort::findConnect ( qjackctlGraphPort *port )
 void qjackctlGraphPort::paint ( QPainter *painter,
 	const QStyleOptionGraphicsItem *option, QWidget */*widget*/ )
 {
+	const QPalette& pal = option->palette;
+
 	if (QGraphicsPathItem::isSelected()) {
-		const QPalette& pal = option->palette;
 		m_text->setDefaultTextColor(pal.highlightedText().color());
 		painter->setPen(pal.highlightedText().color());
 		painter->setBrush(pal.highlight().color());
@@ -283,7 +284,7 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 		const QColor& background
 			= qjackctlGraphItem::background();
 		const bool is_dark
-			= (background.value() < 192);
+			= (pal.base().color().value() < 128);
 		m_text->setDefaultTextColor(is_dark
 			? foreground.lighter()
 			: foreground.darker());
@@ -429,14 +430,14 @@ qjackctlGraphNode::qjackctlGraphNode (
 	QGraphicsPathItem::setToolTip(m_name);
 	setNodeTitle(m_name);
 
-	const bool is_darker = (base_value < 24);
-	QColor shadow_color = (is_darker ? Qt::white : Qt::black);
+	const bool is_darkest = (base_value < 24);
+	QColor shadow_color = (is_darkest ? Qt::white : Qt::black);
 	shadow_color.setAlpha(180);
 
 	QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
 	effect->setColor(shadow_color);
-	effect->setBlurRadius(is_darker ? 8 : 16);
-	effect->setOffset(is_darker ? 0 : 2);
+	effect->setBlurRadius(is_darkest ? 8 : 16);
+	effect->setOffset(is_darkest ? 0 : 2);
 	QGraphicsPathItem::setGraphicsEffect(effect);
 }
 
@@ -655,8 +656,9 @@ void qjackctlGraphNode::updatePath (void)
 void qjackctlGraphNode::paint ( QPainter *painter,
 	const QStyleOptionGraphicsItem *option, QWidget */*widget*/ )
 {
+	const QPalette& pal = option->palette;
+
 	if (QGraphicsPathItem::isSelected()) {
-		const QPalette& pal = option->palette;
 		const QColor& hilitetext_color = pal.highlightedText().color();
 		m_text->setDefaultTextColor(hilitetext_color);
 		painter->setPen(hilitetext_color);
@@ -669,7 +671,7 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 		const QColor& background
 			= qjackctlGraphItem::background();
 		const bool is_dark
-			= (background.value() < 192);
+			= (pal.base().color().value() < 128);
 		m_text->setDefaultTextColor(is_dark
 			? foreground.lighter()
 			: foreground.darker());
@@ -727,14 +729,14 @@ qjackctlGraphConnect::qjackctlGraphConnect (void)
 	qjackctlGraphItem::setBackground(qjackctlGraphItem::foreground());
 
 	const QPalette pal;
-	const bool is_dark = (pal.base().color().value() < 24);
-	QColor shadow_color = (is_dark ? Qt::white : Qt::black);
+	const bool is_darkest = (pal.base().color().value() < 24);
+	QColor shadow_color = (is_darkest ? Qt::white : Qt::black);
 	shadow_color.setAlpha(220);
 
 	QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
 	effect->setColor(shadow_color);
-	effect->setBlurRadius(is_dark ? 4 : 8);
-	effect->setOffset(is_dark ? 0 : 1);
+	effect->setBlurRadius(is_darkest ? 4 : 8);
+	effect->setOffset(is_darkest ? 0 : 1);
 	QGraphicsPathItem::setGraphicsEffect(effect);
 
 	QGraphicsPathItem::setAcceptHoverEvents(true);
@@ -765,6 +767,9 @@ void qjackctlGraphConnect::setPort1 ( qjackctlGraphPort *port )
 
 	if (m_port1)
 		m_port1->appendConnect(this);
+
+	if (m_port1 && m_port1->isSelected())
+		setSelectedEx(m_port1, true);
 }
 
 
@@ -783,6 +788,9 @@ void qjackctlGraphConnect::setPort2 ( qjackctlGraphPort *port )
 
 	if (m_port2)
 		m_port2->appendConnect(this);
+
+	if (m_port2 && m_port2->isSelected())
+		setSelectedEx(m_port2, true);
 }
 
 
@@ -1439,15 +1447,15 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 					&& port1->portMode() != port2->portMode()
 					&& port1->portType() == port2->portType()
 					&& port1->findConnect(port2) == NULL) {
-				#if 0 // Sure the sect will commit to this instead...
 					port2->setSelected(true);
+				#if 0 // Sure the sect will commit to this instead...
 					m_connect->setPort2(port2);
 					m_connect->updatePathTo(port2->portPos());
 					m_connect = NULL;
 					++m_selected_nodes;
 				#else
-					m_selected_nodes = 0;
-					m_scene->clearSelection();
+				//	m_selected_nodes = 0;
+				//	m_scene->clearSelection();
 				#endif
 					// Submit command; notify eventual observers...
 					m_commands->beginMacro(tr("Connect"));
@@ -1566,8 +1574,8 @@ void qjackctlGraphCanvas::connectItems (void)
 	if (outs.isEmpty() || ins.isEmpty())
 		return;
 
-	m_selected_nodes = 0;
-	m_scene->clearSelection();
+//	m_selected_nodes = 0;
+//	m_scene->clearSelection();
 
 	std::sort(outs.begin(), outs.end(), qjackctlGraphPort::ComparePos());
 	std::sort(ins.begin(),  ins.end(),  qjackctlGraphPort::ComparePos());
@@ -1608,8 +1616,8 @@ void qjackctlGraphCanvas::disconnectItems (void)
 		}
 	}
 
-	m_selected_nodes = 0;
-	m_scene->clearSelection();
+//	m_selected_nodes = 0;
+//	m_scene->clearSelection();
 
 	m_commands->beginMacro(tr("Disconnect"));
 
