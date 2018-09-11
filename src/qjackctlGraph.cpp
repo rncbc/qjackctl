@@ -284,7 +284,7 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 		const QColor& background
 			= qjackctlGraphItem::background();
 		const bool is_dark
-			= (pal.base().color().value() < 128);
+			= (background.value() < 192);
 		m_text->setDefaultTextColor(is_dark
 			? foreground.lighter()
 			: foreground.darker());
@@ -411,13 +411,13 @@ qjackctlGraphNode::qjackctlGraphNode (
 	const QColor& text_color = pal.text().color();
 	QColor foreground_color(is_dark
 		? text_color.darker()
-		: text_color.lighter());
+		: text_color);
 	qjackctlGraphItem::setForeground(foreground_color);
 
 	const QColor& window_color = pal.window().color();
 	QColor background_color(is_dark
 		? window_color.lighter()
-		: window_color.darker());
+		: window_color);
 	background_color.setAlpha(160);
 	qjackctlGraphItem::setBackground(background_color);
 
@@ -671,7 +671,7 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 		const QColor& background
 			= qjackctlGraphItem::background();
 		const bool is_dark
-			= (pal.base().color().value() < 128);
+			= (background.value() < 192);
 		m_text->setDefaultTextColor(is_dark
 			? foreground.lighter()
 			: foreground.darker());
