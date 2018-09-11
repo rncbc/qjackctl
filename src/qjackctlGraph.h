@@ -35,7 +35,11 @@
 #include <QUndoCommand>
 
 
+#include <QHash>
+
+
 // Forward decls.
+class qjackctlGraphCanvas;
 class qjackctlGraphNode;
 class qjackctlGraphPort;
 class qjackctlGraphConnect;
@@ -184,6 +188,9 @@ public:
 
 	// Selection propagation method...
 	void setSelectedEx(bool is_selected);
+
+	// Special port-type color business.
+	void updatePortTypeColors(qjackctlGraphCanvas *canvas);
 
 	// Port hash/map key.
 	class PortKey : public ItemKey
@@ -354,6 +361,9 @@ public:
 	// Selection propagation method...
 	void setSelectedEx(qjackctlGraphPort *port, bool is_selected);
 
+	// Special port-type color business.
+	void updatePortTypeColors();
+
 protected:
 
 	void paint(QPainter *painter,
@@ -509,6 +519,12 @@ public:
 	bool restoreState();
 	bool saveState() const;
 
+	// Graph colors management.
+	void setPortTypeColor(int port_type, const QColor& color);
+	const QColor& portTypeColor(int port_type);
+	void updatePortTypeColors(int port_type = 0);
+	void clearPortTypeColors();
+
 signals:
 
 	// Node factory notifications.
@@ -588,6 +604,9 @@ private:
 
 	QList<QGraphicsItem *> m_selected;
 	int m_selected_nodes;
+
+	// Graph port colors.
+	QHash<int, QColor> m_port_colors;
 };
 
 

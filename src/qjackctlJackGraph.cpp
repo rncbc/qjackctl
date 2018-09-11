@@ -67,6 +67,7 @@ QString qjackctlJackGraph_pretty_name ( jack_uuid_t uuid, const QString& name )
 qjackctlJackGraph::qjackctlJackGraph ( qjackctlGraphCanvas *canvas )
 	: qjackctlGraphSect(canvas)
 {
+		resetPortTypeColors();
 }
 
 
@@ -135,27 +136,27 @@ int qjackctlJackGraph::nodeType (void)
 // JACK port type(s) inquirer. (static)
 bool qjackctlJackGraph::isPortType ( int port_type )
 {
-	return (isAudioPortType(port_type) || isMidiPortType(port_type));
+	return (port_type == audioPortType() || port_type == midiPortType());
 }
 
 
-bool qjackctlJackGraph::isAudioPortType ( int port_type )
+int qjackctlJackGraph::audioPortType (void)
 {
 	static
 	const int JackAudioPortType
 		= qjackctlGraphItem::itemType(JACK_DEFAULT_AUDIO_TYPE);
 
-	return (port_type == JackAudioPortType);
+	return JackAudioPortType;
 }
 
 
-bool qjackctlJackGraph::isMidiPortType ( int port_type )
+int qjackctlJackGraph::midiPortType (void)
 {
 	static
 	const int JackMidiPortType
 		= qjackctlGraphItem::itemType(JACK_DEFAULT_MIDI_TYPE);
 
-	return (port_type == JackMidiPortType);
+	return JackMidiPortType;
 }
 
 
@@ -222,13 +223,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 
 	if (add_new && *port == NULL && *node) {
 		*port = (*node)->addPort(port_name, port_mode, port_type);
-		if (isAudioPortType(port_type)) {
-			(*port)->setForeground(QColor(Qt::green).darker(120));
-			(*port)->setBackground(QColor(Qt::darkGreen).darker(120));
-		} else {
-			(*port)->setForeground(QColor(Qt::red).darker(120));
-			(*port)->setBackground(QColor(Qt::darkRed).darker(120));
-		}
+		(*port)->updatePortTypeColors(canvas());
 	#ifdef CONFIG_JACK_METADATA
 		(*port)->setPortTitle(
 			qjackctlJackGraph_pretty_name(
@@ -321,10 +316,7 @@ void qjackctlJackGraph::updateItems (void)
 							connect = new qjackctlGraphConnect();
 							connect->setPort1(port1);
 							connect->setPort2(port2);
-							const QColor& color
-								= port1->background().lighter();
-							connect->setForeground(color);
-							connect->setBackground(color);
+							connect->updatePortTypeColors();
 							connect->updatePath();
 							qjackctlGraphSect::addItem(connect);
 						}
@@ -354,6 +346,21 @@ void qjackctlJackGraph::clearItems (void)
 #endif
 
 	qjackctlGraphSect::clearItems(qjackctlJackGraph::nodeType());
+}
+
+
+// Special port-type colors defaults (virtual).
+void qjackctlJackGraph::resetPortTypeColors (void)
+{
+	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
+	if (canvas) {
+		canvas->setPortTypeColor(
+			qjackctlJackGraph::audioPortType(),
+			QColor(Qt::darkGreen).darker(120));
+		canvas->setPortTypeColor(
+			qjackctlJackGraph::midiPortType(),
+			QColor(Qt::darkRed).darker(120));
+	}
 }
 
 

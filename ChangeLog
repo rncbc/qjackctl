@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph port-type colors are now configurable (cf. menu
+  View > Colors. (EXPERIMENTAL)
+
 - Make Graph nodes (ie. client boxes) transparent for yet
   some eye-candiness ;). Also keep the (Graph) current
   selection across port (dis)connections. (EXPERIMENTAL)

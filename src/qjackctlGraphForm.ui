@@ -86,6 +86,19 @@
      <addaction name="viewZoomFitAction"/>
      <addaction name="viewZoomResetAction"/>
     </widget>
+    <widget class="QMenu" name="viewColorsMenu">
+     <property name="title">
+      <string>Co&amp;lors</string>
+     </property>
+     <property name="icon">
+      <iconset resource="qjackctl.qrc">:/images/graphColors.png</iconset>
+     </property>
+     <addaction name="viewJackAudioColorAction"/>
+     <addaction name="viewJackMidiColorAction"/>
+     <addaction name="viewAlsaMidiColorAction"/>
+     <addaction name="separator"/>
+     <addaction name="viewResetColorsAction"/>
+    </widget>
     <addaction name="viewMenubarAction"/>
     <addaction name="viewStatusbarAction"/>
     <addaction name="viewToolbarAction"/>
@@ -95,6 +108,8 @@
     <addaction name="viewCenterAction"/>
     <addaction name="viewZoomMenu"/>
     <addaction name="viewZoomRangeAction"/>
+    <addaction name="separator"/>
+    <addaction name="viewColorsMenu"/>
     <addaction name="separator"/>
     <addaction name="viewRefreshAction"/>
    </widget>
@@ -460,6 +475,74 @@
    </property>
    <property name="statusTip">
     <string>Zoom Range</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewJackAudioColorAction">
+   <property name="text">
+    <string>JACK &amp;Audio...</string>
+   </property>
+   <property name="iconText">
+    <string>JACK Audio color</string>
+   </property>
+   <property name="toolTip">
+    <string>JACK Audio color</string>
+   </property>
+   <property name="statusTip">
+    <string>JACK Audio color</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewJackMidiColorAction">
+   <property name="text">
+    <string>JACK &amp;MIDI...</string>
+   </property>
+   <property name="iconText">
+    <string>JACK MIDI</string>
+   </property>
+   <property name="toolTip">
+    <string>JACK MIDI color</string>
+   </property>
+   <property name="statusTip">
+    <string>JACK MIDI color</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewAlsaMidiColorAction">
+   <property name="text">
+    <string>&amp;ALSA MIDI...</string>
+   </property>
+   <property name="iconText">
+    <string>ALSA MIDI</string>
+   </property>
+   <property name="toolTip">
+    <string>ALSA MIDI color</string>
+   </property>
+   <property name="statusTip">
+    <string>ALSA MIDI color</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewResetColorsAction">
+   <property name="text">
+    <string>&amp;Reset</string>
+   </property>
+   <property name="iconText">
+    <string>Reset colors</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset colors</string>
+   </property>
+   <property name="statusTip">
+    <string>Reset colors</string>
    </property>
    <property name="shortcut">
     <string/>

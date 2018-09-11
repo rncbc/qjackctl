@@ -284,7 +284,7 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 		const QColor& background
 			= qjackctlGraphItem::background();
 		const bool is_dark
-			= (background.value() < 192);
+			= (background.value() < 128);
 		m_text->setDefaultTextColor(is_dark
 			? foreground.lighter()
 			: foreground.darker());
@@ -331,6 +331,28 @@ void qjackctlGraphPort::setSelectedEx ( bool is_selected )
 		QGraphicsPathItem::setSelected(is_selected);
 
 	--m_selectx;
+}
+
+
+// Special port-type color business.
+void qjackctlGraphPort::updatePortTypeColors ( qjackctlGraphCanvas *canvas )
+{
+	if (canvas) {
+		const QColor& color = canvas->portTypeColor(m_type);
+		if (color.isValid()) {
+			const bool is_dark = (color.value() < 128);
+			qjackctlGraphItem::setForeground(is_dark
+				? color.lighter(180)
+				: color.darker());
+			qjackctlGraphItem::setBackground(color);
+			if (m_mode & Output) {
+				foreach (qjackctlGraphConnect *connect, m_connects) {
+					connect->updatePortTypeColors();
+					connect->update();
+				}
+			}
+		}
+	}
 }
 
 
@@ -900,6 +922,18 @@ void qjackctlGraphConnect::setSelectedEx ( qjackctlGraphPort *port, bool is_sele
 }
 
 
+// Special port-type color business.
+void qjackctlGraphConnect::updatePortTypeColors (void)
+{
+	if (m_port1) {
+		const QColor& color
+			= m_port1->background().lighter();
+		qjackctlGraphItem::setForeground(color);
+		qjackctlGraphItem::setBackground(color);
+	}
+}
+
+
 //----------------------------------------------------------------------------
 // qjackctlGraphCommand -- Generic graph command pattern
 
@@ -994,6 +1028,8 @@ static const char *CanvasRectKey = "/CanvasRect";
 static const char *CanvasZoomKey = "/CanvasZoom";
 
 static const char *NodePosGroup  = "/GraphNodePos";
+
+static const char *ColorsGroup      = "/GraphColors";
 
 
 // Constructor.
@@ -1759,6 +1795,21 @@ bool qjackctlGraphCanvas::restoreState (void)
 	if (m_settings == NULL)
 		return false;
 
+	m_settings->beginGroup(ColorsGroup);
+	const QRegExp rx("^0x");
+	QStringListIterator key(m_settings->childKeys());
+	while (key.hasNext()) {
+		const QString& sKey = key.next();
+		const QColor& color = QString(m_settings->value(sKey).toString());
+		if (color.isValid()) {
+			QString sx(sKey);
+			bool ok = false;
+			const int port_type = sx.remove(rx).toUInt(&ok, 16);
+			if (ok) m_port_colors.insert(port_type, color);
+		}
+	}
+	m_settings->endGroup();
+
 	m_settings->beginGroup(CanvasGroup);
 	m_settings->setValue(CanvasRectKey, QGraphicsView::sceneRect());
 	const QRectF& rect = m_settings->value(CanvasRectKey).toRectF();
@@ -1795,6 +1846,18 @@ bool qjackctlGraphCanvas::saveState (void) const
 	m_settings->setValue(CanvasRectKey, QGraphicsView::sceneRect());
 	m_settings->endGroup();
 
+	m_settings->beginGroup(ColorsGroup);
+	QStringListIterator key(m_settings->childKeys());
+	while (key.hasNext()) m_settings->remove(key.next());
+	QHash<int, QColor>::ConstIterator iter = m_port_colors.constBegin();
+	const QHash<int, QColor>::ConstIterator& iter_end = m_port_colors.constEnd();
+	for ( ; iter != iter_end; ++iter) {
+		const uint port_type = iter.key();
+		const QColor& color = iter.value();
+		m_settings->setValue("0x" + QString::number(port_type, 16), color.name());
+	}
+	m_settings->endGroup();
+
 	return true;
 }
 
@@ -1816,6 +1879,40 @@ QString qjackctlGraphCanvas::nodeKey ( qjackctlGraphNode *node ) const
 	}
 
 	return node_key;
+}
+
+
+// Graph port colors management.
+void qjackctlGraphCanvas::setPortTypeColor (
+	int port_type, const QColor& port_color )
+{
+	m_port_colors.insert(port_type, port_color);
+}
+
+
+const QColor& qjackctlGraphCanvas::portTypeColor ( int port_type )
+{
+	return m_port_colors[port_type];
+}
+
+
+void qjackctlGraphCanvas::updatePortTypeColors ( int port_type )
+{
+	foreach (QGraphicsItem *item, m_scene->items()) {
+		if (item->type() == qjackctlGraphPort::Type) {
+			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+			if (port && (0 >= port_type || port->portType() == port_type)) {
+				port->updatePortTypeColors(this);
+				port->update();
+			}
+		}
+	}
+}
+
+
+void qjackctlGraphCanvas::clearPortTypeColors (void)
+{
+	m_port_colors.clear();
 }
 
 

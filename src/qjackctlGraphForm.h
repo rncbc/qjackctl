@@ -103,6 +103,11 @@ protected slots:
 
 	void viewZoomRange(bool on);
 
+	void viewJackAudioColor();
+	void viewJackMidiColor();
+	void viewAlsaMidiColor();
+	void viewResetColors();
+
 	void helpAbout();
 	void helpAboutQt();
 

@@ -48,6 +48,9 @@ public:
 	void updateItems();
 	void clearItems();
 
+	// Special port-type colors defaults (virtual).
+	void resetPortTypeColors();
+
 	// JACK node type inquirer.
 	static bool isNodeType(int node_type);
 	// JACK node type.
@@ -55,9 +58,9 @@ public:
 
 	// JACK port type(s) inquirer.
 	static bool isPortType(int port_type);
-
-	static bool isAudioPortType(int port_type);
-	static bool isMidiPortType(int port_type);
+	// JACK port types.
+	static int audioPortType();
+	static int midiPortType();
 
 protected:
 

@@ -39,6 +39,7 @@ QMutex qjackctlAlsaGraph::g_mutex;
 qjackctlAlsaGraph::qjackctlAlsaGraph ( qjackctlGraphCanvas *canvas )
 	: qjackctlGraphSect(canvas)
 {
+	resetPortTypeColors();
 }
 
 
@@ -122,16 +123,16 @@ int qjackctlAlsaGraph::nodeType (void)
 // ALSA port type inquirer. (static)
 bool qjackctlAlsaGraph::isPortType ( int port_type )
 {
-	return (port_type == qjackctlAlsaGraph::portType());
+	return (port_type == qjackctlAlsaGraph::midiPortType());
 }
 
 
 // ALSA port type.
-int qjackctlAlsaGraph::portType (void)
+int qjackctlAlsaGraph::midiPortType (void)
 {
 	static
 	const int AlsaMidiPortType
-		= qjackctlGraphItem::itemType("ALSA_MIDI_PORT_TYPE");
+		= qjackctlGraphItem::itemType("ALSA_PORT_TYPE");
 
 	return AlsaMidiPortType;
 }
@@ -161,7 +162,7 @@ bool qjackctlAlsaGraph::findClientPort (
 	const int node_type
 		= qjackctlAlsaGraph::nodeType();
 	const int port_type
-		= qjackctlAlsaGraph::portType();
+		= qjackctlAlsaGraph::midiPortType();
 
 	qjackctlGraphItem::Mode node_mode = port_mode;
 
@@ -184,8 +185,7 @@ bool qjackctlAlsaGraph::findClientPort (
 
 	if (add_new && *port == NULL && *node) {
 		*port = (*node)->addPort(port_name, port_mode, port_type);
-		(*port)->setForeground(QColor(Qt::magenta).darker(120));
-		(*port)->setBackground(QColor(Qt::darkMagenta).darker(120));
+		(*port)->updatePortTypeColors(canvas());
 	}
 
 	return (*node && *port);
@@ -316,10 +316,7 @@ void qjackctlAlsaGraph::updateItems (void)
 								connect = new qjackctlGraphConnect();
 								connect->setPort1(port1);
 								connect->setPort2(port2);
-								const QColor& color
-									= port1->background().lighter();
-								connect->setForeground(color);
-								connect->setBackground(color);
+								connect->updatePortTypeColors();
 								connect->updatePath();
 								qjackctlGraphSect::addItem(connect);
 							}
@@ -353,6 +350,18 @@ void qjackctlAlsaGraph::clearItems (void)
 
 
 #endif	// CONFIG_ALSA_SEQ
+
+
+// Special port-type colors defaults (virtual).
+void qjackctlAlsaGraph::resetPortTypeColors (void)
+{
+	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
+	if (canvas) {
+		canvas->setPortTypeColor(
+			qjackctlAlsaGraph::midiPortType(),
+			QColor(Qt::darkMagenta).darker(120));
+	}
+}
 
 
 // end of qjackctlAlsaGraph.cpp

@@ -51,6 +51,9 @@ public:
 	void updateItems();
 	void clearItems();
 
+	// Special port-type colors defaults (virtual).
+	void resetPortTypeColors();
+
 	// ALSA node type inquirer.
 	static bool isNodeType(int node_type);
 	// ALSA node type.
@@ -59,7 +62,7 @@ public:
 	// ALSA port type inquirer.
 	static bool isPortType(int port_type);
 	// ALSA port type.
-	static int portType();
+	static int midiPortType();
 
 protected:
 

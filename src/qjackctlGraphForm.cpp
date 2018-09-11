@@ -41,6 +41,8 @@
 #include <QSlider>
 #include <QSpinBox>
 
+#include <QColorDialog>
+
 #include <QResizeEvent>
 #include <QShowEvent>
 #include <QHideEvent>
@@ -213,6 +215,19 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SIGNAL(triggered(bool)),
 		SLOT(viewZoomRange(bool)));
 
+	QObject::connect(m_ui.viewJackAudioColorAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewJackAudioColor()));
+	QObject::connect(m_ui.viewJackMidiColorAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewJackMidiColor()));
+	QObject::connect(m_ui.viewAlsaMidiColorAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewAlsaMidiColor()));
+	QObject::connect(m_ui.viewResetColorsAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewResetColors()));
+
 	QObject::connect(m_ui.helpAboutAction,
 		SIGNAL(triggered(bool)),
 		SLOT(helpAbout()));
@@ -338,6 +353,56 @@ void qjackctlGraphForm::viewRefresh (void)
 void qjackctlGraphForm::viewZoomRange ( bool on )
 {
 	m_ui.graphCanvas->setZoomRange(on);
+}
+
+
+void qjackctlGraphForm::viewJackAudioColor (void)
+{
+	const int port_type
+		= qjackctlGraphItem::itemType(JACK_DEFAULT_AUDIO_TYPE);
+	const QColor& color = QColorDialog::getColor(
+		m_ui.graphCanvas->portTypeColor(port_type),
+		this, tr("JACK Audio Color"));
+	if (color.isValid()) {
+		m_ui.graphCanvas->setPortTypeColor(port_type, color);
+		m_ui.graphCanvas->updatePortTypeColors(port_type);
+	}
+}
+
+
+void qjackctlGraphForm::viewJackMidiColor (void)
+{
+	const int port_type
+		= qjackctlGraphItem::itemType(JACK_DEFAULT_MIDI_TYPE);
+	const QColor& color = QColorDialog::getColor(
+		m_ui.graphCanvas->portTypeColor(port_type),
+		this, tr("JACK MIDI Color"));
+	if (color.isValid()) {
+		m_ui.graphCanvas->setPortTypeColor(port_type, color);
+		m_ui.graphCanvas->updatePortTypeColors(port_type);
+	}
+}
+
+
+void qjackctlGraphForm::viewAlsaMidiColor (void)
+{
+	const int port_type = qjackctlAlsaGraph::midiPortType();
+	const QColor& color = QColorDialog::getColor(
+		m_ui.graphCanvas->portTypeColor(port_type),
+		this, tr("ALSA MIDI Color"));
+	if (color.isValid()) {
+		m_ui.graphCanvas->setPortTypeColor(port_type, color);
+		m_ui.graphCanvas->updatePortTypeColors(port_type);
+	}
+}
+
+
+void qjackctlGraphForm::viewResetColors (void)
+{
+	m_ui.graphCanvas->clearPortTypeColors();
+	m_jack->resetPortTypeColors();
+	m_alsa->resetPortTypeColors();
+	m_ui.graphCanvas->updatePortTypeColors();
 }
 
 

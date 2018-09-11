@@ -2672,14 +2672,14 @@ void qjackctlMainForm::queryDisconnect (
 		return;
 
 	int iSocketType = QJACKCTL_SOCKETTYPE_DEFAULT;
-	if (qjackctlJackGraph::isAudioPortType(port1->portType()))
+	if (qjackctlJackGraph::audioPortType() == port1->portType())
 		iSocketType = QJACKCTL_SOCKETTYPE_JACK_AUDIO;
 	else
-	if (qjackctlJackGraph::isMidiPortType(port1->portType()))
+	if (qjackctlJackGraph::midiPortType() == port1->portType())
 		iSocketType = QJACKCTL_SOCKETTYPE_JACK_MIDI;
 #ifdef CONFIG_ALSA_SEQ
 	else
-	if (qjackctlAlsaGraph::isPortType(port1->portType()))
+	if (qjackctlAlsaGraph::midiPortType() == port1->portType())
 		iSocketType = QJACKCTL_SOCKETTYPE_ALSA_MIDI;
 #endif
 
