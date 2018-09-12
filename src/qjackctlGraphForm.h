@@ -103,10 +103,8 @@ protected slots:
 
 	void viewZoomRange(bool on);
 
-	void viewJackAudioColor();
-	void viewJackMidiColor();
-	void viewAlsaMidiColor();
-	void viewResetColors();
+	void viewColorsAction();
+	void viewColorsReset();
 
 	void helpAbout();
 	void helpAboutQt();
@@ -125,6 +123,10 @@ protected:
 	void showEvent(QShowEvent *pShowEvent);
 	void hideEvent(QHideEvent *pHideEvent);
 	void closeEvent(QCloseEvent *pCloseEvent);
+
+	// Special port-type color method.
+	void updateViewColorsAction(QAction *action);
+	void updateViewColors();
 
 private:
 

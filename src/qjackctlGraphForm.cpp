@@ -215,18 +215,22 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SIGNAL(triggered(bool)),
 		SLOT(viewZoomRange(bool)));
 
-	QObject::connect(m_ui.viewJackAudioColorAction,
+	m_ui.viewColorsJackAudioAction->setData(qjackctlJackGraph::audioPortType());
+	m_ui.viewColorsJackMidiAction->setData(qjackctlJackGraph::midiPortType());
+	m_ui.viewColorsAlsaMidiAction->setData(qjackctlAlsaGraph::midiPortType());
+
+	QObject::connect(m_ui.viewColorsJackAudioAction,
 		SIGNAL(triggered(bool)),
-		SLOT(viewJackAudioColor()));
-	QObject::connect(m_ui.viewJackMidiColorAction,
+		SLOT(viewColorsAction()));
+	QObject::connect(m_ui.viewColorsJackMidiAction,
 		SIGNAL(triggered(bool)),
-		SLOT(viewJackMidiColor()));
-	QObject::connect(m_ui.viewAlsaMidiColorAction,
+		SLOT(viewColorsAction()));
+	QObject::connect(m_ui.viewColorsAlsaMidiAction,
 		SIGNAL(triggered(bool)),
-		SLOT(viewAlsaMidiColor()));
-	QObject::connect(m_ui.viewResetColorsAction,
+		SLOT(viewColorsAction()));
+	QObject::connect(m_ui.viewColorsResetAction,
 		SIGNAL(triggered(bool)),
-		SLOT(viewResetColors()));
+		SLOT(viewColorsReset()));
 
 	QObject::connect(m_ui.helpAboutAction,
 		SIGNAL(triggered(bool)),
@@ -288,6 +292,8 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	viewZoomRange(m_config->isZoomRange());
 
 	m_ui.graphCanvas->restoreState();
+
+	updateViewColors();
 
 	stabilize();
 
@@ -356,53 +362,35 @@ void qjackctlGraphForm::viewZoomRange ( bool on )
 }
 
 
-void qjackctlGraphForm::viewJackAudioColor (void)
+void qjackctlGraphForm::viewColorsAction (void)
 {
-	const int port_type
-		= qjackctlGraphItem::itemType(JACK_DEFAULT_AUDIO_TYPE);
+	QAction *action = qobject_cast<QAction *> (sender());
+	if (action == NULL)
+		return;
+
+	const uint port_type = action->data().toUInt();
+	if (0 >= port_type)
+		return;
+
 	const QColor& color = QColorDialog::getColor(
-		m_ui.graphCanvas->portTypeColor(port_type),
-		this, tr("JACK Audio Color"));
+		m_ui.graphCanvas->portTypeColor(port_type), this,
+		tr("Colors - %1").arg(action->text().remove('&')));
 	if (color.isValid()) {
 		m_ui.graphCanvas->setPortTypeColor(port_type, color);
 		m_ui.graphCanvas->updatePortTypeColors(port_type);
+		updateViewColorsAction(action);
 	}
 }
 
 
-void qjackctlGraphForm::viewJackMidiColor (void)
-{
-	const int port_type
-		= qjackctlGraphItem::itemType(JACK_DEFAULT_MIDI_TYPE);
-	const QColor& color = QColorDialog::getColor(
-		m_ui.graphCanvas->portTypeColor(port_type),
-		this, tr("JACK MIDI Color"));
-	if (color.isValid()) {
-		m_ui.graphCanvas->setPortTypeColor(port_type, color);
-		m_ui.graphCanvas->updatePortTypeColors(port_type);
-	}
-}
-
-
-void qjackctlGraphForm::viewAlsaMidiColor (void)
-{
-	const int port_type = qjackctlAlsaGraph::midiPortType();
-	const QColor& color = QColorDialog::getColor(
-		m_ui.graphCanvas->portTypeColor(port_type),
-		this, tr("ALSA MIDI Color"));
-	if (color.isValid()) {
-		m_ui.graphCanvas->setPortTypeColor(port_type, color);
-		m_ui.graphCanvas->updatePortTypeColors(port_type);
-	}
-}
-
-
-void qjackctlGraphForm::viewResetColors (void)
+void qjackctlGraphForm::viewColorsReset (void)
 {
 	m_ui.graphCanvas->clearPortTypeColors();
 	m_jack->resetPortTypeColors();
 	m_alsa->resetPortTypeColors();
 	m_ui.graphCanvas->updatePortTypeColors();
+
+	updateViewColors();
 }
 
 
@@ -423,25 +411,6 @@ void qjackctlGraphForm::helpAboutQt (void)
 void qjackctlGraphForm::zoomValueChanged ( int zoom_value )
 {
 	m_ui.graphCanvas->setZoom(0.01 * qreal(zoom_value));
-}
-
-
-
-// Context-menu event handler.
-void qjackctlGraphForm::contextMenuEvent (
-	QContextMenuEvent *pContextMenuEvent )
-{
-	QMenu menu(this);
-	menu.addAction(m_ui.graphConnectAction);
-	menu.addAction(m_ui.graphDisconnectAction);
-	menu.addSeparator();
-	menu.addActions(m_ui.editMenu->actions());
-	menu.addSeparator();
-	menu.addMenu(m_ui.viewZoomMenu);
-
-	menu.exec(pContextMenuEvent->globalPos());
-
-	stabilize();
 }
 
 
@@ -663,6 +632,23 @@ void qjackctlGraphForm::orientationChanged ( Qt::Orientation orientation )
 }
 
 
+// Context-menu event handler.
+void qjackctlGraphForm::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
+{
+	QMenu menu(this);
+	menu.addAction(m_ui.graphConnectAction);
+	menu.addAction(m_ui.graphDisconnectAction);
+	menu.addSeparator();
+	menu.addActions(m_ui.editMenu->actions());
+	menu.addSeparator();
+	menu.addMenu(m_ui.viewZoomMenu);
+
+	menu.exec(pContextMenuEvent->globalPos());
+
+	stabilize();
+}
+
+
 // Widget resize event handler.
 void qjackctlGraphForm::resizeEvent ( QResizeEvent *pResizeEvent )
 {
@@ -709,6 +695,32 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 	}
 
 	QMainWindow::closeEvent(pCloseEvent);
+}
+
+
+
+// Special port-type color methods.
+void qjackctlGraphForm::updateViewColorsAction ( QAction *action  )
+{
+	const uint port_type = action->data().toUInt();
+	if (0 >= port_type)
+		return;
+
+	const QColor& color = m_ui.graphCanvas->portTypeColor(port_type);
+	if (!color.isValid())
+		return;
+
+	QPixmap pm(22, 22);
+	QPainter(&pm).fillRect(0, 0, pm.width(), pm.height(), color);
+	action->setIcon(QIcon(pm));
+}
+
+
+void qjackctlGraphForm::updateViewColors (void)
+{
+	updateViewColorsAction(m_ui.viewColorsJackAudioAction);
+	updateViewColorsAction(m_ui.viewColorsJackMidiAction);
+	updateViewColorsAction(m_ui.viewColorsAlsaMidiAction);
 }
 
 

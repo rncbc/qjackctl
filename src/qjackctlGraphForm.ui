@@ -93,23 +93,22 @@
      <property name="icon">
       <iconset resource="qjackctl.qrc">:/images/graphColors.png</iconset>
      </property>
-     <addaction name="viewJackAudioColorAction"/>
-     <addaction name="viewJackMidiColorAction"/>
-     <addaction name="viewAlsaMidiColorAction"/>
+     <addaction name="viewColorsJackAudioAction"/>
+     <addaction name="viewColorsJackMidiAction"/>
+     <addaction name="viewColorsAlsaMidiAction"/>
      <addaction name="separator"/>
-     <addaction name="viewResetColorsAction"/>
+     <addaction name="viewColorsResetAction"/>
     </widget>
     <addaction name="viewMenubarAction"/>
     <addaction name="viewStatusbarAction"/>
     <addaction name="viewToolbarAction"/>
     <addaction name="separator"/>
     <addaction name="viewTextBesideIconsAction"/>
+    <addaction name="viewColorsMenu"/>
     <addaction name="separator"/>
     <addaction name="viewCenterAction"/>
     <addaction name="viewZoomMenu"/>
     <addaction name="viewZoomRangeAction"/>
-    <addaction name="separator"/>
-    <addaction name="viewColorsMenu"/>
     <addaction name="separator"/>
     <addaction name="viewRefreshAction"/>
    </widget>
@@ -480,7 +479,7 @@
     <string/>
    </property>
   </action>
-  <action name="viewJackAudioColorAction">
+  <action name="viewColorsJackAudioAction">
    <property name="text">
     <string>JACK &amp;Audio...</string>
    </property>
@@ -497,7 +496,7 @@
     <string/>
    </property>
   </action>
-  <action name="viewJackMidiColorAction">
+  <action name="viewColorsJackMidiAction">
    <property name="text">
     <string>JACK &amp;MIDI...</string>
    </property>
@@ -514,7 +513,7 @@
     <string/>
    </property>
   </action>
-  <action name="viewAlsaMidiColorAction">
+  <action name="viewColorsAlsaMidiAction">
    <property name="text">
     <string>&amp;ALSA MIDI...</string>
    </property>
@@ -531,7 +530,7 @@
     <string/>
    </property>
   </action>
-  <action name="viewResetColorsAction">
+  <action name="viewColorsResetAction">
    <property name="text">
     <string>&amp;Reset</string>
    </property>
