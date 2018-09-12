@@ -480,7 +480,7 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="91"/>
         <source>Co&amp;lors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cou&amp;leurs</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="117"/>
@@ -785,58 +785,58 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="484"/>
         <source>JACK &amp;Audio...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;audio...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="487"/>
         <location filename="../qjackctlGraphForm.ui" line="490"/>
         <location filename="../qjackctlGraphForm.ui" line="493"/>
         <source>JACK Audio color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur JACK audio</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="501"/>
         <source>JACK &amp;MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;MIDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="504"/>
         <source>JACK MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="507"/>
         <location filename="../qjackctlGraphForm.ui" line="510"/>
         <source>JACK MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur JACK MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="518"/>
         <source>&amp;ALSA MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ALSA MIDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="521"/>
         <source>ALSA MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="524"/>
         <location filename="../qjackctlGraphForm.ui" line="527"/>
         <source>ALSA MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur ALSA MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="535"/>
         <source>&amp;Reset</source>
-        <translation type="unfinished">Ré&amp;initialiser</translation>
+        <translation>&amp;Réinitialiser</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="538"/>
         <location filename="../qjackctlGraphForm.ui" line="541"/>
         <location filename="../qjackctlGraphForm.ui" line="544"/>
         <source>Reset colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser les couleurs</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="552"/>
@@ -911,7 +911,7 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="377"/>
         <source>Colors - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleurs - %1</translation>
     </message>
 </context>
 <context>
