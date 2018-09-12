@@ -1813,7 +1813,7 @@ bool qjackctlGraphCanvas::restoreState (void)
 	m_settings->beginGroup(CanvasGroup);
 	m_settings->setValue(CanvasRectKey, QGraphicsView::sceneRect());
 	const QRectF& rect = m_settings->value(CanvasRectKey).toRectF();
-	const qreal zoom = m_settings->value(CanvasZoomKey).toReal();
+	const qreal zoom = m_settings->value(CanvasZoomKey, 1.0).toReal();
 	m_settings->endGroup();
 
 	if (rect.isValid())
