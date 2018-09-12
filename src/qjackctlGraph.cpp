@@ -1286,6 +1286,12 @@ qjackctlGraphItem *qjackctlGraphCanvas::itemAt ( const QPointF& pos ) const
 void qjackctlGraphCanvas::connectPorts (
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect )
 {
+	const bool is_connected // already connected?
+		= (port1->findConnect(port2) != NULL);
+	if (( is_connect &&  is_connected) ||
+		(!is_connect && !is_connected))
+		return;
+
 	if (port1->isOutput())
 		m_commands->push(new qjackctlGraphCommand(this, port1, port2, is_connect));
 	else
