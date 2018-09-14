@@ -1108,7 +1108,7 @@ void qjackctlGraphCanvas::removeItem ( qjackctlGraphItem *item )
 {
 	if (item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
-		if (node) {
+		if (node && saveNodePos(node)) {
 			emit removed(node);
 			node->removePorts();
 			m_nodekeys.remove(qjackctlGraphNode::NodeKey(node));

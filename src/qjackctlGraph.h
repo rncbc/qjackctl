@@ -511,10 +511,6 @@ public:
 	void emitConnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void emitDisconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 
-	// Graph node position state methods.
-	bool restoreNodePos(qjackctlGraphNode *node);
-	bool saveNodePos(qjackctlGraphNode *node) const;
-
 	// Graph canvas state methods.
 	bool restoreState();
 	bool saveState() const;
@@ -580,6 +576,10 @@ protected:
 
 	// Zoom in rectangle range.
 	void zoomFitRange(const QRectF& range_rect);
+
+	// Graph node position state methods.
+	bool restoreNodePos(qjackctlGraphNode *node);
+	bool saveNodePos(qjackctlGraphNode *node) const;
 
 private:
 

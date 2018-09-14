@@ -414,12 +414,9 @@ void qjackctlGraphForm::zoomValueChanged ( int zoom_value )
 }
 
 
-// Node life-cycle slots
+// Node life-cycle slots.
 void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 {
-	if (m_ui.graphCanvas->restoreNodePos(node))
-		return;
-
 	const qjackctlGraphCanvas *canvas
 		= m_ui.graphCanvas;
 	const QRectF& rect
@@ -435,12 +432,12 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 	case qjackctlGraphItem::Input:
 		++m_ins;
 		x += w;
-		y += 0.5 * h * (m_ins & 1 ? +m_ins : -m_ins);
+		y += 0.33 * h * (m_ins & 1 ? +m_ins : -m_ins);
 		break;
 	case qjackctlGraphItem::Output:
 		++m_outs;
 		x -= w;
-		y += 0.5 * h * (m_outs & 1 ? +m_outs : -m_outs);
+		y += 0.33 * h * (m_outs & 1 ? +m_outs : -m_outs);
 		break;
 	default: {
 		int dx = 0;
@@ -451,14 +448,14 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 			else
 				dx += (dy < 0 ? -1 : +1);
 		}
-		x += 0.5 * w * qreal(dx) - qreal(::rand() & 0x1f);
-		y += 0.5 * h * qreal(dy) - qreal(::rand() & 0x1f);
+		x += 0.33 * w * qreal(dx);
+		y += 0.33 * h * qreal(dy);
 		++m_mids;
 		break;
 	}}
 
-	x = 4.0 * ::round(0.25 * x);
-	y = 4.0 * ::round(0.25 * y);
+	x = 4.0 * ::round(0.25 * (x - qreal(::rand() & 0x1f)));
+	y = 4.0 * ::round(0.25 * (y - qreal(::rand() & 0x1f)));
 
 	node->setPos(x, y);
 
@@ -466,10 +463,10 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 }
 
 
-void qjackctlGraphForm::removed ( qjackctlGraphNode *node )
+void qjackctlGraphForm::removed ( qjackctlGraphNode */*node*/ )
 {
-	if (node) { // FIXME: DANGEROUS! Node might have been deleted by now...
-		m_ui.graphCanvas->saveNodePos(node);
+#if 0// FIXME: DANGEROUS! Node might have been deleted by now...
+	if (node) {
 		switch (node->nodeMode()) {
 		case qjackctlGraphItem::Input:
 			--m_ins;
@@ -482,8 +479,7 @@ void qjackctlGraphForm::removed ( qjackctlGraphNode *node )
 			break;
 		}
 	}
-
-	stabilize();
+#endif
 }
 
 
