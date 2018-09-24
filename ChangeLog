@@ -4,14 +4,14 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.4  2018-09-24  An Early Autumn'18 Release.
 
 - Graph port-type colors are now configurable (cf. menu
-  View > Colors. (EXPERIMENTAL)
+  View > Colors.
 
 - Make Graph nodes (ie. client boxes) transparent for yet
   some eye-candiness ;). Also keep the (Graph) current
-  selection across port (dis)connections. (EXPERIMENTAL)
+  selection across port (dis)connections.
 
 - Drawing patchbay connector lines as (bezier) curves is
   now a difinitive and fixed feature (as long as no more
