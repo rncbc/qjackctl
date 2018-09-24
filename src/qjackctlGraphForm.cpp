@@ -217,7 +217,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 
 	m_ui.viewColorsJackAudioAction->setData(qjackctlJackGraph::audioPortType());
 	m_ui.viewColorsJackMidiAction->setData(qjackctlJackGraph::midiPortType());
+#ifdef CONFIG_ALSA_SEQ
 	m_ui.viewColorsAlsaMidiAction->setData(qjackctlAlsaGraph::midiPortType());
+#endif
 
 	QObject::connect(m_ui.viewColorsJackAudioAction,
 		SIGNAL(triggered(bool)),
@@ -387,7 +389,9 @@ void qjackctlGraphForm::viewColorsReset (void)
 {
 	m_ui.graphCanvas->clearPortTypeColors();
 	m_jack->resetPortTypeColors();
+#ifdef CONFIG_ALSA_SEQ
 	m_alsa->resetPortTypeColors();
+#endif
 	m_ui.graphCanvas->updatePortTypeColors();
 
 	updateViewColors();

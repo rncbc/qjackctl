@@ -903,12 +903,12 @@ Chcete uložit změny?</translation>
         <translation>Zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="301"/>
+        <location filename="../qjackctlGraphForm.cpp" line="303"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="377"/>
+        <location filename="../qjackctlGraphForm.cpp" line="379"/>
         <source>Colors - %1</source>
         <translation type="unfinished"></translation>
     </message>

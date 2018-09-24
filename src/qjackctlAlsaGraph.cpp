@@ -349,9 +349,6 @@ void qjackctlAlsaGraph::clearItems (void)
 }
 
 
-#endif	// CONFIG_ALSA_SEQ
-
-
 // Special port-type colors defaults (virtual).
 void qjackctlAlsaGraph::resetPortTypeColors (void)
 {
@@ -362,6 +359,9 @@ void qjackctlAlsaGraph::resetPortTypeColors (void)
 			QColor(Qt::darkMagenta).darker(120));
 	}
 }
+
+
+#endif	// CONFIG_ALSA_SEQ
 
 
 // end of qjackctlAlsaGraph.cpp

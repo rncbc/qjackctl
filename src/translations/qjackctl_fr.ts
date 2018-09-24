@@ -904,12 +904,12 @@ Voulez-vous enregistrer les changements ?</translation>
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="301"/>
+        <location filename="../qjackctlGraphForm.cpp" line="303"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="377"/>
+        <location filename="../qjackctlGraphForm.cpp" line="379"/>
         <source>Colors - %1</source>
         <translation>Couleurs - %1</translation>
     </message>
