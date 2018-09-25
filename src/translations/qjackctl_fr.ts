@@ -455,12 +455,12 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="33"/>
         <source>Graph - JACK Audio Connection Kit</source>
-        <translation>Graph - JACK Audio Connection Kit</translation>
+        <translation>Graphe - JACK Audio Connection Kit</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="57"/>
         <source>&amp;Graph</source>
-        <translation>&amp;Graph</translation>
+        <translation>&amp;Graphe</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="66"/>
@@ -1049,7 +1049,7 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
         <source>Show/hide the graph window</source>
-        <translation>Afficher/cacher la fenêtre de graph</translation>
+        <translation>Afficher/cacher la fenêtre de graphe</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="573"/>
@@ -1472,7 +1472,7 @@ Désolé.</translation>
         <location filename="../qjackctlMainForm.ui" line="542"/>
         <location filename="../qjackctlMainForm.cpp" line="3782"/>
         <source>&amp;Graph</source>
-        <translation>&amp;Graph</translation>
+        <translation>&amp;Graphe</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3787"/>
@@ -1512,12 +1512,12 @@ qu&apos;au prochain démarrage de ce programme.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2396"/>
         <source>JACK connection graph change.</source>
-        <translation>Changement du graphique des connexions JACK.</translation>
+        <translation>Changement du graphe des connexions JACK.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2516"/>
         <source>ALSA connection graph change.</source>
-        <translation>Changement du graphique des connexions ALSA.</translation>
+        <translation>Changement du graphe des connexions ALSA.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2605"/>
@@ -4129,12 +4129,12 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3782"/>
         <source>Whether to replace Connections with Graph button on the main window</source>
-        <translation>Si on remplace les connexions avec un bouton de graph dans la fenêtre principale</translation>
+        <translation>Si on remplace les connexions avec un bouton de graphe dans la fenêtre principale</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3785"/>
         <source>Replace Connections with &amp;Graph button</source>
-        <translation>Remplacer les connexions par un bouton de graph</translation>
+        <translation>Remplacer les connexions par un bouton de graphe</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3803"/>
