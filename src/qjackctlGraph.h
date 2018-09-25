@@ -78,6 +78,10 @@ public:
 	void setMarked(bool marked);
 	bool isMarked() const;
 
+	// Highlighting methods.
+	void setHighlight(bool hilite);
+	bool isHighlight() const;
+
 	// Item modes.
 	enum Mode { None = 0,
 		Input = 1, Output = 2,
@@ -130,6 +134,7 @@ private:
 	QColor m_background;
 
 	bool m_marked;
+	bool m_hilite;
 };
 
 
@@ -189,6 +194,9 @@ public:
 	// Selection propagation method...
 	void setSelectedEx(bool is_selected);
 
+	// Highlighting propagation method...
+	void setHighlightEx(bool is_highlight);
+
 	// Special port-type color business.
 	void updatePortTypeColors(qjackctlGraphCanvas *canvas);
 
@@ -236,6 +244,7 @@ private:
 	QList<qjackctlGraphConnect *> m_connects;
 
 	int m_selectx;
+	int m_hilitex;
 };
 
 
@@ -360,6 +369,9 @@ public:
 
 	// Selection propagation method...
 	void setSelectedEx(qjackctlGraphPort *port, bool is_selected);
+
+	// Highlighting propagation method...
+	void setHighlightEx(qjackctlGraphPort *port, bool is_highlight);
 
 	// Special port-type color business.
 	void updatePortTypeColors();

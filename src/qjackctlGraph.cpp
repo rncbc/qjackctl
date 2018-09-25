@@ -50,7 +50,7 @@
 
 // Constructor.
 qjackctlGraphItem::qjackctlGraphItem ( QGraphicsItem *parent )
-	: QGraphicsPathItem(parent), m_marked(false)
+	: QGraphicsPathItem(parent), m_marked(false), m_hilite(false)
 {
 	const QPalette pal;
 	m_foreground = pal.buttonText().color();
@@ -94,6 +94,21 @@ bool qjackctlGraphItem::isMarked (void) const
 }
 
 
+// Highlighting methods.
+void qjackctlGraphItem::setHighlight ( bool hilite )
+{
+	m_hilite = hilite;
+
+	QGraphicsPathItem::update();
+}
+
+
+bool qjackctlGraphItem::isHighlight (void) const
+{
+	return (m_hilite > 0);
+}
+
+
 // Item-type hash (static)
 int qjackctlGraphItem::itemType ( const QByteArray& type_name )
 {
@@ -108,7 +123,7 @@ int qjackctlGraphItem::itemType ( const QByteArray& type_name )
 qjackctlGraphPort::qjackctlGraphPort ( qjackctlGraphNode *node,
 	const QString& name, qjackctlGraphItem::Mode mode, int type )
 	: qjackctlGraphItem(node), m_node(node),
-		m_name(name), m_mode(mode), m_type(type), m_selectx(0)
+		m_name(name), m_mode(mode), m_type(type), m_selectx(0), m_hilitex(0)
 {
 	QGraphicsPathItem::setZValue(+1);
 
@@ -288,7 +303,7 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 		m_text->setDefaultTextColor(is_dark
 			? foreground.lighter()
 			: foreground.darker());
-		if (QGraphicsPathItem::isUnderMouse()) {
+		if (qjackctlGraphItem::isHighlight() || QGraphicsPathItem::isUnderMouse()) {
 			painter->setPen(foreground.lighter());
 			painter->setBrush(background.lighter());
 		} else {
@@ -312,6 +327,7 @@ QVariant qjackctlGraphPort::itemChange (
 	else
 	if (change == QGraphicsItem::ItemSelectedHasChanged && m_selectx < 1) {
 		const bool is_selected = value.toBool();
+		setHighlightEx(is_selected);
 		foreach (qjackctlGraphConnect *connect, m_connects)
 			connect->setSelectedEx(this, is_selected);
 		if (!is_selected)
@@ -327,10 +343,29 @@ void qjackctlGraphPort::setSelectedEx ( bool is_selected )
 {
 	++m_selectx;
 
+	setHighlightEx(is_selected);
+
 	if (QGraphicsPathItem::isSelected() != is_selected)
 		QGraphicsPathItem::setSelected(is_selected);
 
 	--m_selectx;
+}
+
+
+// Highlighting propagation method...
+void qjackctlGraphPort::setHighlightEx ( bool is_highlight )
+{
+	if (m_hilitex > 0)
+		return;
+
+	++m_hilitex;
+
+	qjackctlGraphItem::setHighlight(is_highlight);
+
+	foreach (qjackctlGraphConnect *connect, m_connects)
+		connect->setHighlightEx(this, is_highlight);
+
+	--m_hilitex;
 }
 
 
@@ -883,12 +918,12 @@ void qjackctlGraphConnect::paint ( QPainter *painter,
 	} else {
 		const QColor& color
 			= qjackctlGraphItem::foreground();
-		if (QGraphicsPathItem::isUnderMouse())
+		if (qjackctlGraphItem::isHighlight() || QGraphicsPathItem::isUnderMouse())
 			painter->setPen(color.lighter());
 		else
 			painter->setPen(color);
+		painter->setBrush(qjackctlGraphItem::background());
 	}
-	painter->setBrush(qjackctlGraphItem::background());
 
 	painter->drawPath(QGraphicsPathItem::path());
 }
@@ -899,6 +934,7 @@ QVariant qjackctlGraphConnect::itemChange (
 {
 	if (change == QGraphicsItem::ItemSelectedHasChanged) {
 		const bool is_selected = value.toBool();
+		qjackctlGraphItem::setHighlight(is_selected);
 		if (m_port1)
 			m_port1->setSelectedEx(is_selected);
 		if (m_port2)
@@ -912,6 +948,8 @@ QVariant qjackctlGraphConnect::itemChange (
 // Selection propagation method...
 void qjackctlGraphConnect::setSelectedEx ( qjackctlGraphPort *port, bool is_selected )
 {
+	setHighlightEx(port, is_selected);
+
 	if (QGraphicsPathItem::isSelected() != is_selected) {
 		QGraphicsPathItem::setSelected(is_selected);
 		if (m_port1 && m_port1 != port)
@@ -919,6 +957,17 @@ void qjackctlGraphConnect::setSelectedEx ( qjackctlGraphPort *port, bool is_sele
 		if (m_port2 && m_port2 != port)
 			m_port2->setSelectedEx(is_selected);
 	}
+}
+
+// Highlighting propagation method...
+void qjackctlGraphConnect::setHighlightEx ( qjackctlGraphPort *port, bool is_highlight )
+{
+	qjackctlGraphItem::setHighlight(is_highlight);
+
+	if (m_port1 && m_port1 != port)
+		m_port1->setHighlight(is_highlight);
+	if (m_port2 && m_port2 != port)
+		m_port2->setHighlight(is_highlight);
 }
 
 
