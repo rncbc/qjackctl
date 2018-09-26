@@ -341,6 +341,12 @@ QVariant qjackctlGraphPort::itemChange (
 // Selection propagation method...
 void qjackctlGraphPort::setSelectedEx ( bool is_selected )
 {
+	if (!is_selected) {
+		foreach (qjackctlGraphConnect *connect, m_connects)
+			if (connect->isSelected())
+				return;
+	}
+
 	++m_selectx;
 
 	setHighlightEx(is_selected);
@@ -952,10 +958,12 @@ void qjackctlGraphConnect::setSelectedEx ( qjackctlGraphPort *port, bool is_sele
 
 	if (QGraphicsPathItem::isSelected() != is_selected) {
 		QGraphicsPathItem::setSelected(is_selected);
-		if (m_port1 && m_port1 != port)
-			m_port1->setSelectedEx(is_selected);
-		if (m_port2 && m_port2 != port)
-			m_port2->setSelectedEx(is_selected);
+		if (is_selected) {
+			if (m_port1 && m_port1 != port)
+				m_port1->setSelectedEx(is_selected);
+			if (m_port2 && m_port2 != port)
+				m_port2->setSelectedEx(is_selected);
+		}
 	}
 }
 
