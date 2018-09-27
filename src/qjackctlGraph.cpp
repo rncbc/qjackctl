@@ -105,7 +105,7 @@ void qjackctlGraphItem::setHighlight ( bool hilite )
 
 bool qjackctlGraphItem::isHighlight (void) const
 {
-	return (m_hilite > 0);
+	return m_hilite;
 }
 
 
@@ -330,8 +330,8 @@ QVariant qjackctlGraphPort::itemChange (
 		setHighlightEx(is_selected);
 		foreach (qjackctlGraphConnect *connect, m_connects)
 			connect->setSelectedEx(this, is_selected);
-		if (!is_selected)
-			m_node->setSelectedEx(false);
+		if (!is_selected && m_node->isSelected())
+			m_node->setSelected(false);
 	}
 
 	return value;
@@ -342,9 +342,12 @@ QVariant qjackctlGraphPort::itemChange (
 void qjackctlGraphPort::setSelectedEx ( bool is_selected )
 {
 	if (!is_selected) {
-		foreach (qjackctlGraphConnect *connect, m_connects)
-			if (connect->isSelected())
+		foreach (qjackctlGraphConnect *connect, m_connects) {
+			if (connect->isSelected()) {
+				setHighlightEx(true);
 				return;
+			}
+		}
 	}
 
 	++m_selectx;
@@ -463,7 +466,7 @@ bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *
 qjackctlGraphNode::qjackctlGraphNode (
 	const QString& name, qjackctlGraphItem::Mode mode, int type )
 	: qjackctlGraphItem(NULL),
-		m_name(name), m_mode(mode), m_type(type), m_selectx(0)
+		m_name(name), m_mode(mode), m_type(type)
 {
 	QGraphicsPathItem::setZValue(0);
 
@@ -755,25 +758,13 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 QVariant qjackctlGraphNode::itemChange (
 	GraphicsItemChange change, const QVariant& value )
 {
-	if (change == QGraphicsItem::ItemSelectedHasChanged && m_selectx < 1) {
+	if (change == QGraphicsItem::ItemSelectedHasChanged) {
 		const bool is_selected = value.toBool();
 		foreach (qjackctlGraphPort *port, m_ports)
 			port->setSelected(is_selected);
 	}
 
 	return value;
-}
-
-
-// Selection propagation method...
-void qjackctlGraphNode::setSelectedEx ( bool is_selected )
-{
-	++m_selectx;
-
-	if (QGraphicsPathItem::isSelected() != is_selected)
-		QGraphicsPathItem::setSelected(is_selected);
-
-	--m_selectx;
 }
 
 
@@ -957,6 +948,7 @@ void qjackctlGraphConnect::setSelectedEx ( qjackctlGraphPort *port, bool is_sele
 	setHighlightEx(port, is_selected);
 
 	if (QGraphicsPathItem::isSelected() != is_selected) {
+	#if 0//OLD_SELECT_BEHAVIOR
 		QGraphicsPathItem::setSelected(is_selected);
 		if (is_selected) {
 			if (m_port1 && m_port1 != port)
@@ -964,6 +956,12 @@ void qjackctlGraphConnect::setSelectedEx ( qjackctlGraphPort *port, bool is_sele
 			if (m_port2 && m_port2 != port)
 				m_port2->setSelectedEx(is_selected);
 		}
+	#else
+		if (!is_selected || (m_port1 && m_port2
+			&& m_port1->isSelected() && m_port2->isSelected())) {
+			QGraphicsPathItem::setSelected(is_selected);
+		}
+	#endif
 	}
 }
 

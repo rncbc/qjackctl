@@ -300,9 +300,6 @@ public:
 	// Path/shape updater.
 	void updatePath();
 
-	// Selection propagation method...
-	void setSelectedEx(bool is_selected);
-
 	// Node hash key.
 	class NodeKey : public ItemKey
 	{
@@ -333,8 +330,6 @@ private:
 
 	qjackctlGraphPort::ItemKeys m_portkeys;
 	QList<qjackctlGraphPort *>  m_ports;
-
-	int m_selectx;
 };
 
 
