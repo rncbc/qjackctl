@@ -330,8 +330,6 @@ QVariant qjackctlGraphPort::itemChange (
 		setHighlightEx(is_selected);
 		foreach (qjackctlGraphConnect *connect, m_connects)
 			connect->setSelectedEx(this, is_selected);
-		if (!is_selected && m_node->isSelected())
-			m_node->setSelected(false);
 	}
 
 	return value;
