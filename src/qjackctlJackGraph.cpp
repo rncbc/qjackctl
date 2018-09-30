@@ -116,17 +116,17 @@ void qjackctlJackGraph::connectPorts (
 
 
 // JACK node type inquirer. (static)
-bool qjackctlJackGraph::isNodeType ( int node_type )
+bool qjackctlJackGraph::isNodeType ( uint node_type )
 {
 	return (node_type == qjackctlJackGraph::nodeType());
 }
 
 
 // JACK node type.
-int qjackctlJackGraph::nodeType (void)
+uint qjackctlJackGraph::nodeType (void)
 {
 	static
-	const int JackNodeType
+	const uint JackNodeType
 		= qjackctlGraphItem::itemType("JACK_NODE_TYPE");
 
 	return JackNodeType;
@@ -134,26 +134,26 @@ int qjackctlJackGraph::nodeType (void)
 
 
 // JACK port type(s) inquirer. (static)
-bool qjackctlJackGraph::isPortType ( int port_type )
+bool qjackctlJackGraph::isPortType ( uint port_type )
 {
 	return (port_type == audioPortType() || port_type == midiPortType());
 }
 
 
-int qjackctlJackGraph::audioPortType (void)
+uint qjackctlJackGraph::audioPortType (void)
 {
 	static
-	const int JackAudioPortType
+	const uint JackAudioPortType
 		= qjackctlGraphItem::itemType(JACK_DEFAULT_AUDIO_TYPE);
 
 	return JackAudioPortType;
 }
 
 
-int qjackctlJackGraph::midiPortType (void)
+uint qjackctlJackGraph::midiPortType (void)
 {
 	static
-	const int JackMidiPortType
+	const uint JackMidiPortType
 		= qjackctlGraphItem::itemType(JACK_DEFAULT_MIDI_TYPE);
 
 	return JackMidiPortType;
@@ -180,11 +180,11 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	const QString& port_name
 		= client_port_name.right(client_port_name.length() - colon - 1);
 
-	const int node_type
+	const uint node_type
 		= qjackctlJackGraph::nodeType();
 	const char *port_type_name
 		= ::jack_port_type(jack_port);
-	const int port_type
+	const uint port_type
 		= qjackctlGraphItem::itemType(port_type_name);
 
 	qjackctlGraphItem::Mode node_mode = port_mode;

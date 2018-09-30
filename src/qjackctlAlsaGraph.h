@@ -55,14 +55,14 @@ public:
 	void resetPortTypeColors();
 
 	// ALSA node type inquirer.
-	static bool isNodeType(int node_type);
+	static bool isNodeType(uint node_type);
 	// ALSA node type.
-	static int nodeType();
+	static uint nodeType();
 
 	// ALSA port type inquirer.
-	static bool isPortType(int port_type);
+	static bool isPortType(uint port_type);
 	// ALSA port type.
-	static int midiPortType();
+	static uint midiPortType();
 
 protected:
 

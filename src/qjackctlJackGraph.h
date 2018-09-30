@@ -52,15 +52,15 @@ public:
 	void resetPortTypeColors();
 
 	// JACK node type inquirer.
-	static bool isNodeType(int node_type);
+	static bool isNodeType(uint node_type);
 	// JACK node type.
-	static int nodeType();
+	static uint nodeType();
 
 	// JACK port type(s) inquirer.
-	static bool isPortType(int port_type);
+	static bool isPortType(uint port_type);
 	// JACK port types.
-	static int audioPortType();
-	static int midiPortType();
+	static uint audioPortType();
+	static uint midiPortType();
 
 protected:
 

@@ -103,17 +103,17 @@ void qjackctlAlsaGraph::connectPorts (
 
 
 // ALSA node type inquirer. (static)
-bool qjackctlAlsaGraph::isNodeType ( int node_type )
+bool qjackctlAlsaGraph::isNodeType ( uint node_type )
 {
 	return (node_type == qjackctlAlsaGraph::nodeType());
 }
 
 
 // ALSA node type.
-int qjackctlAlsaGraph::nodeType (void)
+uint qjackctlAlsaGraph::nodeType (void)
 {
 	static
-	const int AlsaNodeType
+	const uint AlsaNodeType
 		= qjackctlGraphItem::itemType("ALSA_NODE_TYPE");
 
 	return AlsaNodeType;
@@ -121,17 +121,17 @@ int qjackctlAlsaGraph::nodeType (void)
 
 
 // ALSA port type inquirer. (static)
-bool qjackctlAlsaGraph::isPortType ( int port_type )
+bool qjackctlAlsaGraph::isPortType ( uint port_type )
 {
 	return (port_type == qjackctlAlsaGraph::midiPortType());
 }
 
 
 // ALSA port type.
-int qjackctlAlsaGraph::midiPortType (void)
+uint qjackctlAlsaGraph::midiPortType (void)
 {
 	static
-	const int AlsaMidiPortType
+	const uint AlsaMidiPortType
 		= qjackctlGraphItem::itemType("ALSA_PORT_TYPE");
 
 	return AlsaMidiPortType;
@@ -159,9 +159,9 @@ bool qjackctlAlsaGraph::findClientPort (
 		= QString::number(port_id) + ':'
 		+ QString::fromUtf8(snd_seq_port_info_get_name(port_info));
 
-	const int node_type
+	const uint node_type
 		= qjackctlAlsaGraph::nodeType();
-	const int port_type
+	const uint port_type
 		= qjackctlAlsaGraph::midiPortType();
 
 	qjackctlGraphItem::Mode node_mode = port_mode;

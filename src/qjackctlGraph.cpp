@@ -110,7 +110,7 @@ bool qjackctlGraphItem::isHighlight (void) const
 
 
 // Item-type hash (static)
-int qjackctlGraphItem::itemType ( const QByteArray& type_name )
+uint qjackctlGraphItem::itemType ( const QByteArray& type_name )
 {
 	return qHash(type_name);
 }
@@ -121,7 +121,7 @@ int qjackctlGraphItem::itemType ( const QByteArray& type_name )
 
 // Constructor.
 qjackctlGraphPort::qjackctlGraphPort ( qjackctlGraphNode *node,
-	const QString& name, qjackctlGraphItem::Mode mode, int type )
+	const QString& name, qjackctlGraphItem::Mode mode, uint type )
 	: qjackctlGraphItem(node), m_node(node),
 		m_name(name), m_mode(mode), m_type(type), m_selectx(0), m_hilitex(0)
 {
@@ -200,13 +200,13 @@ bool qjackctlGraphPort::isOutput (void) const
 }
 
 
-void qjackctlGraphPort::setPortType ( int type )
+void qjackctlGraphPort::setPortType ( uint type )
 {
 	m_type = type;
 }
 
 
-int qjackctlGraphPort::portType (void) const
+uint qjackctlGraphPort::portType (void) const
 {
 	return m_type;
 }
@@ -402,7 +402,7 @@ void qjackctlGraphPort::updatePortTypeColors ( qjackctlGraphCanvas *canvas )
 bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *port2 )
 {
 	const int port_type_diff
-		= port1->portType() - port2->portType();
+		= int(port1->portType()) - int(port2->portType());
 	if (port_type_diff)
 		return (port_type_diff > 0);
 
@@ -462,7 +462,7 @@ bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *
 
 // Constructor.
 qjackctlGraphNode::qjackctlGraphNode (
-	const QString& name, qjackctlGraphItem::Mode mode, int type )
+	const QString& name, qjackctlGraphItem::Mode mode, uint type )
 	: qjackctlGraphItem(NULL),
 		m_name(name), m_mode(mode), m_type(type)
 {
@@ -547,13 +547,13 @@ qjackctlGraphItem::Mode qjackctlGraphNode::nodeMode (void) const
 }
 
 
-void qjackctlGraphNode::setNodeType ( int type )
+void qjackctlGraphNode::setNodeType ( uint type )
 {
 	m_type = type;
 }
 
 
-int qjackctlGraphNode::nodeType (void) const
+uint qjackctlGraphNode::nodeType (void) const
 {
 	return m_type;
 }
@@ -638,7 +638,7 @@ void qjackctlGraphNode::removePorts (void)
 
 // Port finder (by name, mode and type)
 qjackctlGraphPort *qjackctlGraphNode::findPort (
-	const QString& name, qjackctlGraphItem::Mode mode, int type )
+	const QString& name, qjackctlGraphItem::Mode mode, uint type )
 {
 	return static_cast<qjackctlGraphPort *> (
 		m_portkeys.value(qjackctlGraphPort::ItemKey(name, mode, type), NULL));
@@ -1259,7 +1259,7 @@ bool qjackctlGraphCanvas::isZoomRange (void) const
 
 
 // Clean-up all un-marked nodes...
-void qjackctlGraphCanvas::resetNodes ( int node_type )
+void qjackctlGraphCanvas::resetNodes ( uint node_type )
 {
 	QList<qjackctlGraphNode *> nodes;
 
@@ -1279,7 +1279,7 @@ void qjackctlGraphCanvas::resetNodes ( int node_type )
 }
 
 
-void qjackctlGraphCanvas::clearNodes ( int node_type )
+void qjackctlGraphCanvas::clearNodes ( uint node_type )
 {
 	QList<qjackctlGraphNode *> nodes;
 
@@ -1297,7 +1297,7 @@ void qjackctlGraphCanvas::clearNodes ( int node_type )
 
 // Special node finder.
 qjackctlGraphNode *qjackctlGraphCanvas::findNode (
-	const QString& name, qjackctlGraphItem::Mode mode, int type ) const
+	const QString& name, qjackctlGraphItem::Mode mode, uint type ) const
 {
 	return static_cast<qjackctlGraphNode *> (
 		m_nodekeys.value(qjackctlGraphNode::ItemKey(name, mode, type), NULL));
@@ -1863,7 +1863,7 @@ bool qjackctlGraphCanvas::restoreState (void)
 		if (color.isValid()) {
 			QString sx(sKey);
 			bool ok = false;
-			const int port_type = sx.remove(rx).toUInt(&ok, 16);
+			const uint port_type = sx.remove(rx).toUInt(&ok, 16);
 			if (ok) m_port_colors.insert(port_type, color);
 		}
 	}
@@ -1908,8 +1908,8 @@ bool qjackctlGraphCanvas::saveState (void) const
 	m_settings->beginGroup(ColorsGroup);
 	QStringListIterator key(m_settings->childKeys());
 	while (key.hasNext()) m_settings->remove(key.next());
-	QHash<int, QColor>::ConstIterator iter = m_port_colors.constBegin();
-	const QHash<int, QColor>::ConstIterator& iter_end = m_port_colors.constEnd();
+	QHash<uint, QColor>::ConstIterator iter = m_port_colors.constBegin();
+	const QHash<uint, QColor>::ConstIterator& iter_end = m_port_colors.constEnd();
 	for ( ; iter != iter_end; ++iter) {
 		const uint port_type = iter.key();
 		const QColor& color = iter.value();
@@ -1932,7 +1932,7 @@ QString qjackctlGraphCanvas::nodeKey ( qjackctlGraphNode *node ) const
 		break;
 	case qjackctlGraphItem::Output:
 		node_key += ":Output";
-		// Fall thru...
+		break;
 	default:
 		break;
 	}
@@ -1943,19 +1943,19 @@ QString qjackctlGraphCanvas::nodeKey ( qjackctlGraphNode *node ) const
 
 // Graph port colors management.
 void qjackctlGraphCanvas::setPortTypeColor (
-	int port_type, const QColor& port_color )
+	uint port_type, const QColor& port_color )
 {
 	m_port_colors.insert(port_type, port_color);
 }
 
 
-const QColor& qjackctlGraphCanvas::portTypeColor ( int port_type )
+const QColor& qjackctlGraphCanvas::portTypeColor ( uint port_type )
 {
 	return m_port_colors[port_type];
 }
 
 
-void qjackctlGraphCanvas::updatePortTypeColors ( int port_type )
+void qjackctlGraphCanvas::updatePortTypeColors ( uint port_type )
 {
 	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphPort::Type) {

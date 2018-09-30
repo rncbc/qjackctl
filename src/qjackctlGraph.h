@@ -93,7 +93,7 @@ public:
 	public:
 
 		// Constructors.
-		ItemKey (const QString& name, Mode mode, int type = 0)
+		ItemKey (const QString& name, Mode mode, uint type = 0)
 			: m_name(name), m_mode(mode), m_type(type) {}
 		ItemKey (const ItemKey& key)
 			: m_name(key.name()), m_mode(key.mode()), m_type(key.type()) {}
@@ -103,7 +103,7 @@ public:
 			{ return m_name; }
 		Mode mode() const
 			{ return m_mode; }
-		int type() const
+		uint type() const
 			{ return m_type; }
 
 		// Hash/map key comparators.
@@ -119,13 +119,13 @@ public:
 		// Key fields.
 		QString m_name;
 		Mode    m_mode;
-		int     m_type;
+		uint    m_type;
 	};
 
 	typedef QHash<ItemKey, qjackctlGraphItem *> ItemKeys;
 
 	// Item-type hash (static)
-	static int itemType(const QByteArray& type_name);
+	static uint itemType(const QByteArray& type_name);
 
 private:
 
@@ -154,7 +154,7 @@ public:
 
 	// Constructor.
 	qjackctlGraphPort(qjackctlGraphNode *node,
-		const QString& name, Mode mode, int type = 0);
+		const QString& name, Mode mode, uint type = 0);
 
 	// Destructor.
 	~qjackctlGraphPort();
@@ -176,8 +176,8 @@ public:
 	bool isInput() const;
 	bool isOutput() const;
 
-	void setPortType(int type);
-	int portType() const;
+	void setPortType(uint type);
+	uint portType() const;
 
 	void setPortTitle(const QString& title);
 	QString portTitle() const;
@@ -256,7 +256,7 @@ class qjackctlGraphNode : public qjackctlGraphItem
 public:
 
 	// Constructor.
-	qjackctlGraphNode(const QString& name, Mode mode, int type = 0);
+	qjackctlGraphNode(const QString& name, Mode mode, uint type = 0);
 
 	// Destructor..
 	~qjackctlGraphNode();
@@ -273,8 +273,8 @@ public:
 	void setNodeMode(Mode mode);
 	Mode nodeMode() const;
 
-	void setNodeType(int type);
-	int nodeType() const;
+	void setNodeType(uint type);
+	uint nodeType() const;
 
 	void setNodeIcon(const QIcon& icon);
 	const QIcon& nodeIcon() const;
@@ -292,7 +292,7 @@ public:
 	void removePorts();
 
 	// Port finder (by name, mode and type)
-	qjackctlGraphPort *findPort(const QString& name, Mode mode, int type = 0);
+	qjackctlGraphPort *findPort(const QString& name, Mode mode, uint type = 0);
 
 	// Reset port markings, destroy if unmarked.
 	void resetMarkedPorts();
@@ -321,7 +321,7 @@ private:
 	// Instance variables.
 	QString m_name;
 	Mode    m_mode;
-	int     m_type;
+	uint    m_type;
 
 	QIcon   m_icon;
 
@@ -426,9 +426,9 @@ protected:
 		}
 		// Member fields.
 		QString node_name;
-		int     node_type;
+		uint    node_type;
 		QString port_name;
-		int     port_type;
+		uint    port_type;
 	};
 
 	// Command item descriptor
@@ -507,12 +507,12 @@ public:
 	bool isZoomRange() const;
 
 	// Clean-up all un-marked nodes...
-	void resetNodes(int node_type);
-	void clearNodes(int node_type);
+	void resetNodes(uint node_type);
+	void clearNodes(uint node_type);
 
 	// Special node finder.
 	qjackctlGraphNode *findNode(
-		const QString& name, qjackctlGraphItem::Mode mode, int type = 0) const;
+		const QString& name, qjackctlGraphItem::Mode mode, uint type = 0) const;
 
 	// Port (dis)connections notifiers.
 	void emitConnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
@@ -523,9 +523,9 @@ public:
 	bool saveState() const;
 
 	// Graph colors management.
-	void setPortTypeColor(int port_type, const QColor& color);
-	const QColor& portTypeColor(int port_type);
-	void updatePortTypeColors(int port_type = 0);
+	void setPortTypeColor(uint port_type, const QColor& color);
+	const QColor& portTypeColor(uint port_type);
+	void updatePortTypeColors(uint port_type = 0);
 	void clearPortTypeColors();
 
 signals:
@@ -613,7 +613,7 @@ private:
 	int m_selected_nodes;
 
 	// Graph port colors.
-	QHash<int, QColor> m_port_colors;
+	QHash<uint, QColor> m_port_colors;
 };
 
 
