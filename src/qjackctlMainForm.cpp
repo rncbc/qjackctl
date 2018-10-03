@@ -1312,8 +1312,6 @@ void qjackctlMainForm::startJack (void)
 			args.append("-m");
 		if (m_preset.bShorts)
 			args.append("-S");
-		if (m_preset.bHWMon)
-			args.append("-H");
 		if (m_preset.bHWMeter)
 			args.append("-M");
 	#ifdef CONFIG_JACK_MIDI
@@ -3994,7 +3992,6 @@ void qjackctlMainForm::setDBusParameters (void)
 		setDBusDriverParameter("softmode", m_preset.bSoftMode);
 		setDBusDriverParameter("monitor", m_preset.bMonitor);
 		setDBusDriverParameter("shorts", m_preset.bShorts);
-		setDBusDriverParameter("hwmon", m_preset.bHWMon);
 		setDBusDriverParameter("hwmeter", m_preset.bHWMeter);
 	#ifdef CONFIG_JACK_MIDI
 		setDBusDriverParameter("midi-driver",

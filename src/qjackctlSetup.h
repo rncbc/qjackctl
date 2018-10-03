@@ -55,7 +55,6 @@ struct qjackctlPreset
 	bool    bShorts;
 	bool    bNoMemLock;
 	bool    bUnlockMem;
-	bool    bHWMon;
 	bool    bHWMeter;
 	bool    bIgnoreHW;
 	int     iPriority;

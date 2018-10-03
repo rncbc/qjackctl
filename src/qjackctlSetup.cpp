@@ -373,7 +373,6 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	preset.bShorts      = m_settings.value("/Shorts", false).toBool();
 	preset.bNoMemLock   = m_settings.value("/NoMemLock", false).toBool();
 	preset.bUnlockMem   = m_settings.value("/UnlockMem", false).toBool();
-	preset.bHWMon       = m_settings.value("/HWMon", false).toBool();
 	preset.bHWMeter     = m_settings.value("/HWMeter", false).toBool();
 	preset.bIgnoreHW    = m_settings.value("/IgnoreHW", false).toBool();
 	preset.iPriority    = m_settings.value("/Priority", 0).toInt();
@@ -430,7 +429,6 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 	m_settings.setValue("/Shorts",      preset.bShorts);
 	m_settings.setValue("/NoMemLock",   preset.bNoMemLock);
 	m_settings.setValue("/UnlockMem",   preset.bUnlockMem);
-	m_settings.setValue("/HWMon",       preset.bHWMon);
 	m_settings.setValue("/HWMeter",     preset.bHWMeter);
 	m_settings.setValue("/IgnoreHW",    preset.bIgnoreHW);
 	m_settings.setValue("/Priority",    preset.iPriority);

@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Marked as probably useless anyway, old "H/W Monitor"
+  option (-H) is now being ditched from Setup / Settings
+  / Advanced tab.
+
 - Graph port/connections highlighting. (EXPERIMENTAL)
 
 

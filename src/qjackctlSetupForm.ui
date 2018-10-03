@@ -944,22 +944,6 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="HWMonCheckBox">
-               <property name="font">
-                <font>
-                 <weight>50</weight>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="toolTip">
-                <string>Enable hardware monitoring of capture ports</string>
-               </property>
-               <property name="text">
-                <string>H/W M&amp;onitor</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QCheckBox" name="ShortsCheckBox">
                <property name="font">
                 <font>
@@ -3512,22 +3496,6 @@
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QCheckBox" name="SingletonCheckBox">
-              <property name="font">
-               <font>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Whether to restrict to one single application instance (X11)</string>
-              </property>
-              <property name="text">
-               <string>Single application &amp;instance</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
           <item row="0" column="1">
@@ -3640,17 +3608,20 @@
              </widget>
             </item>
             <item>
-             <spacer>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+             <widget class="QCheckBox" name="SingletonCheckBox">
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
               </property>
-              <property name="sizeHint">
-               <size>
-                <width>20</width>
-                <height>8</height>
-               </size>
+              <property name="toolTip">
+               <string>Whether to restrict to one single application instance (X11)</string>
               </property>
-             </spacer>
+              <property name="text">
+               <string>Single application &amp;instance</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -3948,7 +3919,6 @@
   <tabstop>HWMeterCheckBox</tabstop>
   <tabstop>MonitorCheckBox</tabstop>
   <tabstop>SoftModeCheckBox</tabstop>
-  <tabstop>HWMonCheckBox</tabstop>
   <tabstop>ShortsCheckBox</tabstop>
   <tabstop>IgnoreHWCheckBox</tabstop>
   <tabstop>PrioritySpinBox</tabstop>
@@ -4016,13 +3986,13 @@
   <tabstop>SystemTrayCheckBox</tabstop>
   <tabstop>SystemTrayQueryCloseCheckBox</tabstop>
   <tabstop>StartMinimizedCheckBox</tabstop>
-  <tabstop>SingletonCheckBox</tabstop>
   <tabstop>ServerConfigCheckBox</tabstop>
   <tabstop>ServerConfigNameComboBox</tabstop>
   <tabstop>AlsaSeqEnabledCheckBox</tabstop>
   <tabstop>DBusEnabledCheckBox</tabstop>
   <tabstop>JackDBusEnabledCheckBox</tabstop>
   <tabstop>StopJackCheckBox</tabstop>
+  <tabstop>SingletonCheckBox</tabstop>
   <tabstop>LeftButtonsCheckBox</tabstop>
   <tabstop>RightButtonsCheckBox</tabstop>
   <tabstop>TransportButtonsCheckBox</tabstop>

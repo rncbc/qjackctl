@@ -149,9 +149,6 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.ShortsCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(settingsChanged()));
-	QObject::connect(m_ui.HWMonCheckBox,
-		SIGNAL(stateChanged(int)),
-		SLOT(settingsChanged()));
 	QObject::connect(m_ui.HWMeterCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(settingsChanged()));
@@ -670,7 +667,6 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 		m_ui.ShortsCheckBox->setChecked(preset.bShorts);
 		m_ui.NoMemLockCheckBox->setChecked(preset.bNoMemLock);
 		m_ui.UnlockMemCheckBox->setChecked(preset.bUnlockMem);
-		m_ui.HWMonCheckBox->setChecked(preset.bHWMon);
 		m_ui.HWMeterCheckBox->setChecked(preset.bHWMeter);
 		m_ui.IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
 		m_ui.PrioritySpinBox->setValue(preset.iPriority);
@@ -738,7 +734,6 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 	preset.bShorts      = m_ui.ShortsCheckBox->isChecked();
 	preset.bNoMemLock   = m_ui.NoMemLockCheckBox->isChecked();
 	preset.bUnlockMem   = m_ui.UnlockMemCheckBox->isChecked();
-	preset.bHWMon       = m_ui.HWMonCheckBox->isChecked();
 	preset.bHWMeter     = m_ui.HWMeterCheckBox->isChecked();
 	preset.bIgnoreHW    = m_ui.IgnoreHWCheckBox->isChecked();
 	preset.iPriority    = m_ui.PrioritySpinBox->value();
@@ -1000,7 +995,6 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.SoftModeCheckBox->setEnabled(bAlsa);
 	m_ui.MonitorCheckBox->setEnabled(bAlsa);
 	m_ui.ShortsCheckBox->setEnabled(bAlsa);
-	m_ui.HWMonCheckBox->setEnabled(bAlsa);
 	m_ui.HWMeterCheckBox->setEnabled(bAlsa);
 
 	m_ui.IgnoreHWCheckBox->setEnabled(bSun || bOss);
