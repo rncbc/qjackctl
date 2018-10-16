@@ -121,6 +121,9 @@ public:
 	void updateTimeDisplayToolTips();
 	void updateAliases();
 	void updateButtons();
+#ifdef CONFIG_DBUS
+	void updateJackDBus();
+#endif
 #ifdef CONFIG_SYSTEM_TRAY
 	void updateSystemTray();
 #endif

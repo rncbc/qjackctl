@@ -1510,8 +1510,10 @@ void qjackctlSetupForm::accept (void)
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
 		m_pSetup->bAlsaSeqEnabled          = m_ui.AlsaSeqEnabledCheckBox->isChecked();
+	#if CONFIG_DBUS
 		m_pSetup->bDBusEnabled             = m_ui.DBusEnabledCheckBox->isChecked();
 		m_pSetup->bJackDBusEnabled         = m_ui.JackDBusEnabledCheckBox->isChecked();
+	#endif
 		m_pSetup->bAliasesEnabled          = m_ui.AliasesEnabledCheckBox->isChecked();
 		m_pSetup->bAliasesEditing          = m_ui.AliasesEditingCheckBox->isChecked();
 		m_pSetup->bLeftButtons             = !m_ui.LeftButtonsCheckBox->isChecked();
@@ -1569,17 +1571,22 @@ void qjackctlSetupForm::accept (void)
 			( bOldGraphButton  && !m_pSetup->bGraphButton)  ||
 			(!bOldGraphButton  &&  m_pSetup->bGraphButton))
 			pMainForm->updateButtons();
+	#ifdef CONFIG_DBUS
+		if (( bOldJackDBusEnabled && !m_pSetup->bJackDBusEnabled) ||
+			(!bOldJackDBusEnabled &&  m_pSetup->bJackDBusEnabled))
+			pMainForm->updateJackDBus();
+	#endif
 		// Warn if something will be only effective on next run.
-		if (( bOldStdoutCapture   && !m_pSetup->bStdoutCapture)   ||
-			(!bOldStdoutCapture   &&  m_pSetup->bStdoutCapture)   ||
-			( bOldKeepOnTop       && !m_pSetup->bKeepOnTop)       ||
-			(!bOldKeepOnTop       &&  m_pSetup->bKeepOnTop)       ||
-			( bOldAlsaSeqEnabled  && !m_pSetup->bAlsaSeqEnabled)  ||
-			(!bOldAlsaSeqEnabled  &&  m_pSetup->bAlsaSeqEnabled)  ||
-			( bOldDBusEnabled     && !m_pSetup->bDBusEnabled)     ||
-			(!bOldDBusEnabled     &&  m_pSetup->bDBusEnabled)     ||
-			( bOldJackDBusEnabled && !m_pSetup->bJackDBusEnabled) ||
-			(!bOldJackDBusEnabled &&  m_pSetup->bJackDBusEnabled) ||
+		if (( bOldStdoutCapture   && !m_pSetup->bStdoutCapture)  ||
+			(!bOldStdoutCapture   &&  m_pSetup->bStdoutCapture)  ||
+			( bOldKeepOnTop       && !m_pSetup->bKeepOnTop)      ||
+			(!bOldKeepOnTop       &&  m_pSetup->bKeepOnTop)      ||
+			( bOldAlsaSeqEnabled  && !m_pSetup->bAlsaSeqEnabled) ||
+			(!bOldAlsaSeqEnabled  &&  m_pSetup->bAlsaSeqEnabled) ||
+		#ifdef CONFIG_DBUS
+			( bOldDBusEnabled     && !m_pSetup->bDBusEnabled)    ||
+			(!bOldDBusEnabled     &&  m_pSetup->bDBusEnabled)    ||
+		#endif
 			(iOldBaseFontSize     !=  m_pSetup->iBaseFontSize))
 			pMainForm->showDirtySetupWarning();
 		// If server is currently running, warn user...

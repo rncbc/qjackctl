@@ -795,56 +795,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		}
 	}
 	// Register JACK D-Bus service...
-	if (m_pSetup->bJackDBusEnabled) {
-		// Detect whether jackdbus is avaliable...
-		QDBusConnection dbusc = QDBusConnection::sessionBus();
-		m_pDBusControl = new QDBusInterface(
-			"org.jackaudio.service",		// Service
-			"/org/jackaudio/Controller",	// Path
-			"org.jackaudio.JackControl",	// Interface
-			dbusc);							// Connection
-		QDBusMessage dbusm = m_pDBusControl->call("IsStarted");
-		if (dbusm.type() == QDBusMessage::ReplyMessage) {
-			// Yes, jackdbus is available and/or already started
-			// -- use jackdbus control interface...
-			appendMessages(tr("D-BUS: Service is available (%1 aka jackdbus).")
-				.arg(m_pDBusControl->service()));
-			// Parse reply (should be boolean)
-			m_bDBusStarted = dbusm.arguments().first().toBool();
-			// Register server start/stop notification slots...
-			dbusc.connect(
-				m_pDBusControl->service(),
-				m_pDBusControl->path(),
-				m_pDBusControl->interface(),
-				"ServerStarted", this,
-				SLOT(jackStarted()));
-			dbusc.connect(
-				m_pDBusControl->service(),
-				m_pDBusControl->path(),
-				m_pDBusControl->interface(),
-				"ServerStopped", this,
-				SLOT(jackFinished()));
-			// -- use jackdbus configure interface...
-			m_pDBusConfig = new QDBusInterface(
-				m_pDBusControl->service(),	// Service
-				m_pDBusControl->path(),		// Path
-				"org.jackaudio.Configure",	// Interface
-				m_pDBusControl->connection());	// Connection
-			// Start our log watcher thread...
-			m_pDBusLogWatcher = new qjackctlDBusLogWatcher(
-				QDir::homePath() + "/.log/jack/jackdbus.log");
-			m_pDBusLogWatcher->start();
-			// Ready now.
-		} else {
-			// No, jackdbus is not available, not started
-			// or not even installed -- use classic jackd, BAU...
-			appendMessages(tr("D-BUS: Service not available (%1 aka jackdbus).")
-				.arg(m_pDBusControl->service()));
-			// Destroy tentative jackdbus interface.
-			delete m_pDBusControl;
-			m_pDBusControl = NULL;
-		}
-	}
+	updateJackDBus();
 #endif
 
 	// Load patchbay form recent paths...
@@ -2104,6 +2055,80 @@ void qjackctlMainForm::updateButtons (void)
 
 	adjustSize();
 }
+
+
+#ifdef CONFIG_DBUS
+
+void qjackctlMainForm::updateJackDBus (void)
+{
+	// Unregister JACK D-Bus service controller...
+	if (m_pDBusLogWatcher) {
+		delete m_pDBusLogWatcher;
+		m_pDBusLogWatcher = NULL;
+	}
+	if (m_pDBusConfig) {
+		delete m_pDBusConfig;
+		m_pDBusConfig = NULL;
+	}
+	if (m_pDBusControl) {
+		delete m_pDBusControl;
+		m_pDBusControl = NULL;
+	}
+
+	// Register JACK D-Bus service...
+	if (m_pSetup->bJackDBusEnabled) {
+		// Detect whether jackdbus is avaliable...
+		QDBusConnection dbusc = QDBusConnection::sessionBus();
+		m_pDBusControl = new QDBusInterface(
+			"org.jackaudio.service",		// Service
+			"/org/jackaudio/Controller",	// Path
+			"org.jackaudio.JackControl",	// Interface
+			dbusc);							// Connection
+		QDBusMessage dbusm = m_pDBusControl->call("IsStarted");
+		if (dbusm.type() == QDBusMessage::ReplyMessage) {
+			// Yes, jackdbus is available and/or already started
+			// -- use jackdbus control interface...
+			appendMessages(tr("D-BUS: Service is available (%1 aka jackdbus).")
+				.arg(m_pDBusControl->service()));
+			// Parse reply (should be boolean)
+			m_bDBusStarted = dbusm.arguments().first().toBool();
+			// Register server start/stop notification slots...
+			dbusc.connect(
+				m_pDBusControl->service(),
+				m_pDBusControl->path(),
+				m_pDBusControl->interface(),
+				"ServerStarted", this,
+				SLOT(jackStarted()));
+			dbusc.connect(
+				m_pDBusControl->service(),
+				m_pDBusControl->path(),
+				m_pDBusControl->interface(),
+				"ServerStopped", this,
+				SLOT(jackFinished()));
+			// -- use jackdbus configure interface...
+			m_pDBusConfig = new QDBusInterface(
+				m_pDBusControl->service(),	// Service
+				m_pDBusControl->path(),		// Path
+				"org.jackaudio.Configure",	// Interface
+				m_pDBusControl->connection());	// Connection
+			// Start our log watcher thread...
+			m_pDBusLogWatcher = new qjackctlDBusLogWatcher(
+				QDir::homePath() + "/.log/jack/jackdbus.log");
+			m_pDBusLogWatcher->start();
+			// Ready now.
+		} else {
+			// No, jackdbus is not available, not started
+			// or not even installed -- use classic jackd, BAU...
+			appendMessages(tr("D-BUS: Service not available (%1 aka jackdbus).")
+				.arg(m_pDBusControl->service()));
+			// Destroy tentative jackdbus interface.
+			delete m_pDBusControl;
+			m_pDBusControl = NULL;
+		}
+	}
+}
+
+#endif
 
 
 // Force update of active patchbay definition profile, if applicable.
