@@ -1453,8 +1453,10 @@ void qjackctlSetupForm::accept (void)
 		const int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
 		const int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
 		const bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
+	#ifdef CONFIG_DBUS
 		const bool    bOldDBusEnabled         = m_pSetup->bDBusEnabled;
 		const bool    bOldJackDBusEnabled     = m_pSetup->bJackDBusEnabled;
+	#endif
 		const bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
 		const bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
 		const bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
