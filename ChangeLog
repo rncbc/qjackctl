@@ -6,7 +6,10 @@ ChangeLog
 
 GIT HEAD
 
-- Attempt to power-cycle JACK D-Bus service on demand.
+- Disable some Setup / Settings / Advanced parameters 
+  when JACK D-Bus interface is enabled and vice-versa.
+
+- Attempt to power-cycle JACK D-Bus service on demand;
 
 - Marked as probably useless anyway, old "H/W Monitor"
   option (-H) is now being ditched from Setup / Settings

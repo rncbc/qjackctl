@@ -4068,10 +4068,6 @@ void qjackctlMainForm::setDBusParameters (void)
 			dither > 0);
 	}
 	else if (bOss || bSun) {
-		setDBusDriverParameter("ignorehw", m_preset.bIgnoreHW);
-		setDBusDriverParameter("wordlength",
-			(unsigned int) m_preset.iWordLength,
-			m_preset.iWordLength > 0);
 		QString sInDevice = m_preset.sInDevice;
 		if (sInDevice.isEmpty() && m_preset.iAudio == QJACKCTL_CAPTURE)
 			sInDevice = m_preset.sInterface;

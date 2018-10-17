@@ -895,13 +895,13 @@ void qjackctlSetupForm::deleteCurrentPreset (void)
 
 void qjackctlSetupForm::computeLatency (void)
 {
-	float lat = 0.0;
-	int p = m_ui.FramesComboBox->currentText().toInt();
-	int r = m_ui.SampleRateComboBox->currentText().toInt();
-	int n = m_ui.PeriodsSpinBox->value();
+	const int p = m_ui.FramesComboBox->currentText().toInt();
+	const int r = m_ui.SampleRateComboBox->currentText().toInt();
+	const int n = m_ui.PeriodsSpinBox->value();
+	float lat = 0.0f;
 	if (r > 0)
-		lat = (float) (1000.0 * p * n) / (float) r;
-	if (lat > 0.0)
+		lat = float(1000.0f * p * n) / float(r);
+	if (lat > 0.0f)
 		m_ui.LatencyTextValue->setText(QString::number(lat, 'g', 3) + " " + tr("msec"));
 	else
 		m_ui.LatencyTextValue->setText(tr("n/a"));
@@ -910,17 +910,18 @@ void qjackctlSetupForm::computeLatency (void)
 
 void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 {
-	bool bSun        = (sDriver == "sun");
-	bool bOss        = (sDriver == "oss");
-	bool bAlsa       = (sDriver == "alsa");
-	bool bCoreaudio  = (sDriver == "coreaudio");
-	bool bPortaudio  = (sDriver == "portaudio");
-	bool bFreebob    = (sDriver == "freebob");
-	bool bFirewire   = (sDriver == "firewire");
-	bool bNet        = (sDriver == "net" || sDriver == "netone");
+	const bool bSun        = (sDriver == "sun");
+	const bool bOss        = (sDriver == "oss");
+	const bool bAlsa       = (sDriver == "alsa");
+	const bool bCoreaudio  = (sDriver == "coreaudio");
+	const bool bPortaudio  = (sDriver == "portaudio");
+	const bool bFreebob    = (sDriver == "freebob");
+	const bool bFirewire   = (sDriver == "firewire");
+	const bool bNet        = (sDriver == "net" || sDriver == "netone");
+
 	bool bInEnabled  = false;
 	bool bOutEnabled = false;
-	bool bEnabled;
+	bool bEnabled    = false;;
 
 	switch (iAudio) {
 	case QJACKCTL_DUPLEX:
@@ -978,18 +979,24 @@ void qjackctlSetupForm::changeDriver ( int iDriver )
 
 void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdate )
 {
-	bool bDummy     = (sDriver == "dummy");
-	bool bSun       = (sDriver == "sun");
-	bool bOss       = (sDriver == "oss");
-	bool bAlsa      = (sDriver == "alsa");
-	bool bPortaudio = (sDriver == "portaudio");
-	bool bCoreaudio = (sDriver == "coreaudio");
-	bool bFreebob   = (sDriver == "freebob");
-	bool bFirewire  = (sDriver == "firewire");
-	bool bNet       = (sDriver == "net" || sDriver == "netone");
+	const bool bDummy     = (sDriver == "dummy");
+	const bool bSun       = (sDriver == "sun");
+	const bool bOss       = (sDriver == "oss");
+	const bool bAlsa      = (sDriver == "alsa");
+	const bool bPortaudio = (sDriver == "portaudio");
+	const bool bCoreaudio = (sDriver == "coreaudio");
+	const bool bFreebob   = (sDriver == "freebob");
+	const bool bFirewire  = (sDriver == "firewire");
+	const bool bNet       = (sDriver == "net" || sDriver == "netone");
 
-	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio);
-	m_ui.UnlockMemCheckBox->setEnabled(!bCoreaudio
+#ifdef CONFIG_DBUS
+	const bool bJackDBus  = m_ui.JackDBusEnabledCheckBox->isChecked();
+#else
+	const bool bJackDBus  = false;
+#endif
+
+	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio && !bJackDBus);
+	m_ui.UnlockMemCheckBox->setEnabled(!bCoreaudio && !bJackDBus
 		&& !m_ui.NoMemLockCheckBox->isChecked());
 
 	m_ui.SoftModeCheckBox->setEnabled(bAlsa);
@@ -997,13 +1004,13 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.ShortsCheckBox->setEnabled(bAlsa);
 	m_ui.HWMeterCheckBox->setEnabled(bAlsa);
 
-	m_ui.IgnoreHWCheckBox->setEnabled(bSun || bOss);
+	m_ui.IgnoreHWCheckBox->setEnabled((bSun || bOss) && !bJackDBus);
 
 	if (bCoreaudio || bPortaudio) {
 		m_ui.PriorityTextLabel->setEnabled(false);
 		m_ui.PrioritySpinBox->setEnabled(false);
 	} else {
-		bool bPriorityEnabled = m_ui.RealtimeCheckBox->isChecked();
+		const bool bPriorityEnabled = m_ui.RealtimeCheckBox->isChecked();
 		m_ui.PriorityTextLabel->setEnabled(bPriorityEnabled);
 		m_ui.PrioritySpinBox->setEnabled(bPriorityEnabled);
 	}
@@ -1020,8 +1027,8 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	if (bUpdate && (bFreebob || bFirewire) && m_ui.PeriodsSpinBox->value() < 3)
 		m_ui.PeriodsSpinBox->setValue(3);
 
-	m_ui.WordLengthTextLabel->setEnabled(bSun || bOss);
-	m_ui.WordLengthComboBox->setEnabled(bSun || bOss);
+	m_ui.WordLengthTextLabel->setEnabled((bSun || bOss) && !bJackDBus);
+	m_ui.WordLengthComboBox->setEnabled((bSun || bOss) && !bJackDBus);
 
 	m_ui.WaitTextLabel->setEnabled(bDummy);
 	m_ui.WaitComboBox->setEnabled(bDummy);
@@ -1029,7 +1036,8 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.ChanTextLabel->setEnabled(bPortaudio);
 	m_ui.ChanSpinBox->setEnabled(bPortaudio);
 
-	int  iAudio   = m_ui.AudioComboBox->currentIndex();
+	const int iAudio
+		= m_ui.AudioComboBox->currentIndex();
 	bool bEnabled = (bAlsa || bPortaudio);
 	if (bEnabled && iAudio == QJACKCTL_DUPLEX) {
 		const QString& sInDevice  = m_ui.InDeviceComboBox->currentText();
@@ -1038,7 +1046,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
 	}
 
-	bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire);
+	const bool bInterface = (bEnabled || bCoreaudio || bFreebob || bFirewire);
 	m_ui.InterfaceTextLabel->setEnabled(bInterface);
 	m_ui.InterfaceComboBox->setEnabled(bInterface);
 	if (!bInterface)
@@ -1051,6 +1059,13 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.MidiDriverTextLabel->setEnabled(bAlsa);
 	m_ui.MidiDriverComboBox->setEnabled(bAlsa);
 #endif
+
+	m_ui.ServerNameTextLabel->setEnabled(!bJackDBus);
+	m_ui.ServerNameComboBox->setEnabled(!bJackDBus);
+	m_ui.ServerPrefixTextLabel->setEnabled(!bJackDBus);
+	m_ui.ServerPrefixComboBox->setEnabled(!bJackDBus);
+	m_ui.ServerSuffixTextLabel->setEnabled(!bJackDBus);
+	m_ui.ServerSuffixComboBox->setEnabled(!bJackDBus);
 
 	changeDriverAudio(sDriver, iAudio);
 }
