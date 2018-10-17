@@ -3967,6 +3967,7 @@ void qjackctlMainForm::setDBusParameters (void)
 //	setDBusEngineParameter("name",
 //		m_pSetup->sServerName,
 //		!m_pSetup->sServerName.isEmpty());
+	setDBusEngineParameter("sync", m_preset.bSync);
 	setDBusEngineParameter("verbose", m_preset.bVerbose);
 	setDBusEngineParameter("realtime", m_preset.bRealtime);
 	setDBusEngineParameter("realtime-priority",

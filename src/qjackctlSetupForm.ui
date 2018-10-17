@@ -631,6 +631,22 @@
             </spacer>
            </item>
            <item>
+            <widget class="QCheckBox" name="SyncCheckBox">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Whether to use server synchronous mode</string>
+             </property>
+             <property name="text">
+              <string>&amp;Use server synchronous mode</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <layout class="QHBoxLayout">
              <item>
               <widget class="QCheckBox" name="VerboseCheckBox">
@@ -3911,6 +3927,7 @@
   <tabstop>FramesComboBox</tabstop>
   <tabstop>PeriodsSpinBox</tabstop>
   <tabstop>MidiDriverComboBox</tabstop>
+  <tabstop>SyncCheckBox</tabstop>
   <tabstop>VerboseCheckBox</tabstop>
   <tabstop>ServerPrefixComboBox</tabstop>
   <tabstop>ServerNameComboBox</tabstop>

@@ -394,6 +394,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	preset.iInLatency   = m_settings.value("/InLatency", 0).toInt();
 	preset.iOutLatency  = m_settings.value("/OutLatency", 0).toInt();
 	preset.iStartDelay  = m_settings.value("/StartDelay", 2).toInt();
+	preset.bSync        = m_settings.value("/Sync", false).toBool();
 	preset.bVerbose     = m_settings.value("/Verbose", false).toBool();
 	preset.iPortMax     = m_settings.value("/PortMax", 256).toInt();
 	preset.sMidiDriver  = m_settings.value("/MidiDriver").toString();
@@ -450,6 +451,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 	m_settings.setValue("/InLatency",   preset.iInLatency);
 	m_settings.setValue("/OutLatency",  preset.iOutLatency);
 	m_settings.setValue("/StartDelay",  preset.iStartDelay);
+	m_settings.setValue("/Sync",        preset.bSync);
 	m_settings.setValue("/Verbose",     preset.bVerbose);
 	m_settings.setValue("/PortMax",     preset.iPortMax);
 	m_settings.setValue("/MidiDriver",  preset.sMidiDriver);

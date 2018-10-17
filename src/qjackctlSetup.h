@@ -76,6 +76,7 @@ struct qjackctlPreset
 	int     iInLatency;
 	int     iOutLatency;
 	int     iStartDelay;
+	bool    bSync;
 	bool    bVerbose;
 	int     iPortMax;
 	QString sMidiDriver;

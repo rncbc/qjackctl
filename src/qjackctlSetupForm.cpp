@@ -158,6 +158,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.UnlockMemCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(settingsChanged()));
+	QObject::connect(m_ui.SyncCheckBox,
+		SIGNAL(stateChanged(int)),
+		SLOT(settingsChanged()));
 	QObject::connect(m_ui.VerboseCheckBox,
 		SIGNAL(stateChanged(int)),
 		SLOT(settingsChanged()));
@@ -702,6 +705,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 		m_ui.InLatencySpinBox->setValue(preset.iInLatency);
 		m_ui.OutLatencySpinBox->setValue(preset.iOutLatency);
 		m_ui.StartDelaySpinBox->setValue(preset.iStartDelay);
+		m_ui.SyncCheckBox->setChecked(preset.bSync);
 		m_ui.VerboseCheckBox->setChecked(preset.bVerbose);
 		setComboBoxCurrentText(m_ui.PortMaxComboBox,
 			QString::number(preset.iPortMax));
@@ -755,6 +759,7 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 	preset.iInLatency   = m_ui.InLatencySpinBox->value();
 	preset.iOutLatency  = m_ui.OutLatencySpinBox->value();
 	preset.iStartDelay  = m_ui.StartDelaySpinBox->value();
+	preset.bSync        = m_ui.SyncCheckBox->isChecked();
 	preset.bVerbose     = m_ui.VerboseCheckBox->isChecked();
 	preset.iPortMax     = m_ui.PortMaxComboBox->currentText().toInt();
 #ifdef CONFIG_JACK_MIDI
@@ -994,6 +999,8 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 #else
 	const bool bJackDBus  = false;
 #endif
+
+	m_ui.SyncCheckBox->setEnabled(bJackDBus);
 
 	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio && !bJackDBus);
 	m_ui.UnlockMemCheckBox->setEnabled(!bCoreaudio && !bJackDBus

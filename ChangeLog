@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Whether to use server synchronous mode option added
+  to Setup / Settings / Parameters (only applied when
+  JACK D-BUS interface is enabled). (EXPERIMENTAL)
+
 - Disable some Setup / Settings / Advanced parameters 
   when JACK D-Bus interface is enabled and vice-versa.
 
