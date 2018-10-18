@@ -199,7 +199,7 @@ public:
 	QWidget *mainWidget() const { return m_pWidget; }
 
 	// Check if another instance is running,
-    // and raise its proper main widget...
+	// and raise its proper main widget...
 	bool setup(const QString& sServerName)
 	{
 	#ifdef CONFIG_X11
@@ -212,9 +212,9 @@ public:
 		QString sUnique = QJACKCTL_XUNIQUE;
 		if (sServerName.isEmpty()) {
 			const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
-			if (pszServerName) {
+			if (pszServerName && ::strcmp("default", pszServerName)) {
 				sUnique += '_';
-				sUnique += pszServerName;
+				sUnique += QString::fromUtf8(pszServerName);
 			}
 		} else {
 			sUnique += '_';

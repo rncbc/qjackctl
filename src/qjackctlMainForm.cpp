@@ -1136,13 +1136,15 @@ void qjackctlMainForm::startJack (void)
 	if (m_pSetup->sServerName.isEmpty())
 		m_pSetup->sServerName = m_preset.sServerName;
 
-#if 0 // defined(__GNUC__) && defined(Q_OS_LINUX)
 	// Take care for the environment as well...
-	if (!m_pSetup->sServerName.isEmpty()) {
-		setenv("JACK_DEFAULT_SERVER",
-			m_pSetup->sServerName.toUtf8().constData(), 1);
+	if (m_pSetup->sServerName.isEmpty()) {
+		const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
+		if (pszServerName && strcmp("default", pszServerName))
+			m_pSetup->sServerName = QString::fromUtf8(pszServerName);
 	}
-#endif
+
+	// No JACK Classic command line to start with, yet...
+	m_sJackCmdLine.clear();
 
 	// If we ain't to be the server master, maybe we'll start
 	// detached as client only (jackd server already running?)
@@ -1161,6 +1163,32 @@ void qjackctlMainForm::startJack (void)
 			tr("Startup script..."),
 			tr("Startup script terminated"));
 	}
+
+#ifdef CONFIG_DBUS
+
+	// Jack D-BUS server backend startup method...
+	if (m_pDBusControl) {
+
+		// Jack D-BUS server backend configuration...
+		setDBusParameters();
+
+		QDBusMessage dbusm = m_pDBusControl->call("StartServer");
+		if (dbusm.type() == QDBusMessage::ReplyMessage) {
+			appendMessages(
+				tr("D-BUS: JACK server is starting..."));
+		} else {
+			appendMessagesError(
+				tr("D-BUS: JACK server could not be started.\n\nSorry"));
+		}
+
+		// Delay our control client...
+		startJackClientDelay();
+
+		// JACK D-BUS startup is done.
+		return;
+	}
+
+#endif	// !CONFIG_DBUS
 
 	// Split the server path into arguments...
 	QStringList args = m_preset.sServerPrefix.split(' ');
@@ -1187,16 +1215,6 @@ void qjackctlMainForm::startJack (void)
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
 			fi.setFile(QDir(sDirectory), sCommand);
-		#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-		#ifdef CONFIG_DEBUG
-			printf("\n\n\n\n abs_path: -%s-\ndir: -%s-\nsCommand: -%s-\nexists: %d, executable: %d\n\n",
-				   fi.absolutePath().toUtf8().constData(),
-				   sDirectory.toUtf8().constData(),
-				   sCommand.toUtf8().constData(),
-				   fi.exists(), fi.isExecutable()
-			);
-		#endif
-		#endif
 			if (fi.exists() && fi.isExecutable()) {
 				sCommand = fi.filePath();
 				break;
@@ -1361,89 +1379,61 @@ void qjackctlMainForm::startJack (void)
 	// This is emulated jackd command line, for future reference purposes...
 	m_sJackCmdLine = sCommand + ' ' + args.join(" ").trimmed();
 
-#ifdef CONFIG_DBUS
+	// JACK Classic server backend startup process...
+	m_pJack = new QProcess(this);
 
-	// Jack D-BUS server backend startup method...
-	if (m_pDBusControl) {
-
-		// Jack D-BUS server backend configuration...
-		setDBusParameters();
-
-		QDBusMessage dbusm = m_pDBusControl->call("StartServer");
-		if (dbusm.type() == QDBusMessage::ReplyMessage) {
-			appendMessages(
-				tr("D-BUS: JACK server is starting..."));
-		} else {
-			appendMessagesError(
-				tr("D-BUS: JACK server could not be started.\n\nSorry"));
-		}
-
-		// Delay our control client...
-		startJackClientDelay();
-
-	} else {
-
-#endif	// !CONFIG_DBUS
-
-		// Jack classic server backend startup process...
-		m_pJack = new QProcess(this);
-
-		// Setup stdout/stderr capture...
-		if (m_pSetup->bStdoutCapture) {
-		#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-			// QProcess::ForwardedChannels doesn't seem to work in windows.
-			m_pJack->setProcessChannelMode(QProcess::MergedChannels);
-		#else
-			m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
-		#endif
- 			QObject::connect(m_pJack,
-				SIGNAL(readyReadStandardOutput()),
-				SLOT(readStdout()));
-			QObject::connect(m_pJack,
-				SIGNAL(readyReadStandardError()),
-				SLOT(readStdout()));
-		}
-
-		// The unforgiveable signal communication...
-		QObject::connect(m_pJack,
-			SIGNAL(started()),
-			SLOT(jackStarted()));
-		QObject::connect(m_pJack,
-			SIGNAL(error(QProcess::ProcessError)),
-			SLOT(jackError(QProcess::ProcessError)));
-		QObject::connect(m_pJack,
-			SIGNAL(finished(int, QProcess::ExitStatus)),
-			SLOT(jackFinished()));
-
-		appendMessages(tr("JACK is starting..."));
-		appendMessagesColor(m_sJackCmdLine, "#990099");
-
+	// Setup stdout/stderr capture...
+	if (m_pSetup->bStdoutCapture) {
 	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-		const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath();
-		m_pJack->setWorkingDirectory(sCurrentDir);
-	//	QDir::setCurrent(sCurrentDir);
+		// QProcess::ForwardedChannels doesn't seem to work in windows.
+		m_pJack->setProcessChannelMode(QProcess::MergedChannels);
+	#else
+		m_pJack->setProcessChannelMode(QProcess::ForwardedChannels);
 	#endif
-
-		// Unquote arguments as necessary...
-		const QChar q = '"';
-		QStringList cmd_args;
-		QStringListIterator iter(args);
-		while (iter.hasNext()) {
-			const QString& arg = iter.next();
-			if (arg.contains(q)) {
-				cmd_args.append(arg.section(q, 0, 0));
-				cmd_args.append(arg.section(q, 1, 1));
-			} else {
-				cmd_args.append(arg);
-			}
-		}
-
-		// Go jack, go...
-		m_pJack->start(sCommand, cmd_args);
-
-#ifdef CONFIG_DBUS
+		QObject::connect(m_pJack,
+			SIGNAL(readyReadStandardOutput()),
+			SLOT(readStdout()));
+		QObject::connect(m_pJack,
+			SIGNAL(readyReadStandardError()),
+			SLOT(readStdout()));
 	}
+
+	// The unforgiveable signal communication...
+	QObject::connect(m_pJack,
+		SIGNAL(started()),
+		SLOT(jackStarted()));
+	QObject::connect(m_pJack,
+		SIGNAL(error(QProcess::ProcessError)),
+		SLOT(jackError(QProcess::ProcessError)));
+	QObject::connect(m_pJack,
+		SIGNAL(finished(int, QProcess::ExitStatus)),
+		SLOT(jackFinished()));
+
+	appendMessages(tr("JACK is starting..."));
+	appendMessagesColor(m_sJackCmdLine, "#990099");
+
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+	const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath();
+	m_pJack->setWorkingDirectory(sCurrentDir);
+//	QDir::setCurrent(sCurrentDir);
 #endif
+
+	// Unquote arguments as necessary...
+	const QChar q = '"';
+	QStringList cmd_args;
+	QStringListIterator iter(args);
+	while (iter.hasNext()) {
+		const QString& arg = iter.next();
+		if (arg.contains(q)) {
+			cmd_args.append(arg.section(q, 0, 0));
+			cmd_args.append(arg.section(q, 1, 1));
+		} else {
+			cmd_args.append(arg);
+		}
+	}
+
+	// Go JACK, go...
+	m_pJack->start(sCommand, cmd_args);
 }
 
 

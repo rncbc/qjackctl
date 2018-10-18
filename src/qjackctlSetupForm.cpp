@@ -1163,7 +1163,10 @@ void qjackctlSetupForm::stabilizeForm (void)
 		m_ui.StopJackCheckBox->setChecked(true);
 	}
 
-	bEnabled = m_ui.ServerConfigCheckBox->isChecked();
+	bEnabled = !m_ui.JackDBusEnabledCheckBox->isChecked();
+	m_ui.ServerConfigCheckBox->setEnabled(bEnabled);
+	if (bEnabled)
+		bEnabled = m_ui.ServerConfigCheckBox->isChecked();
 	m_ui.ServerConfigNameComboBox->setEnabled(bEnabled);
 
 	m_ui.AliasesEditingCheckBox->setEnabled(

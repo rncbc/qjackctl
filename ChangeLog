@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Also disable Setup / Misc / Other / Save JACK server
+  configuration to (.jackdrc) when JACK D-Bus interface
+  is enabled. (EXPERIMENTAL)
+
 - Whether to use server synchronous mode option added
   to Setup / Settings / Parameters (only applied when
   JACK D-BUS interface is enabled). (EXPERIMENTAL)
