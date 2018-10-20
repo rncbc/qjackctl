@@ -206,32 +206,45 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	if (add_new && *node == NULL) {
 		*node = new qjackctlGraphNode(client_name, node_mode, node_type);
 		(*node)->setNodeIcon(QIcon(":/images/graphJack.png"));
-	#ifdef CONFIG_JACK_METADATA
-		const char *client_uuid_name
-			= ::jack_get_uuid_for_client_name(client,
-				client_name.toUtf8().constData());
-		if (client_uuid_name) {
-			jack_uuid_t client_uuid = 0;
-			::jack_uuid_parse(client_uuid_name, &client_uuid);
-			(*node)->setNodeTitle(
-				qjackctlJackGraph_pretty_name(client_uuid, client_name));
-			::jack_free((void *) client_uuid_name);
-		}
-	#endif
 		qjackctlGraphSect::addItem(*node);
 	}
 
 	if (add_new && *port == NULL && *node) {
 		*port = (*node)->addPort(port_name, port_mode, port_type);
 		(*port)->updatePortTypeColors(canvas());
-	#ifdef CONFIG_JACK_METADATA
-		(*port)->setPortTitle(
-			qjackctlJackGraph_pretty_name(
-				::jack_port_uuid(jack_port), port_name));
-		(*node)->updatePath();
-	#endif
-
 	}
+
+#ifdef CONFIG_JACK_METADATA
+	if (*node) {
+		int nchanged = 0;
+		const char *client_uuid_name
+			= ::jack_get_uuid_for_client_name(client,
+				client_name.toUtf8().constData());
+		if (client_uuid_name) {
+			jack_uuid_t client_uuid = 0;
+			::jack_uuid_parse(client_uuid_name, &client_uuid);
+			const QString& sNodeTitle
+				= qjackctlJackGraph_pretty_name(client_uuid, client_name);
+			if ((*node)->nodeTitle() != sNodeTitle) {
+				(*node)->setNodeTitle(sNodeTitle);
+				++nchanged;
+			}
+			::jack_free((void *) client_uuid_name);
+		}
+		if (*port) {
+			const jack_uuid_t port_uuid
+				= ::jack_port_uuid(jack_port);
+			const QString& sPortTitle
+				= qjackctlJackGraph_pretty_name(port_uuid, port_name);
+			if ((*port)->portTitle() != sPortTitle) {
+				(*port)->setPortTitle(sPortTitle);
+				++nchanged;
+			}
+		}
+		if (nchanged > 0)
+			(*node)->updatePath();
+	}
+#endif
 
 	return (*node && *port);
 }
