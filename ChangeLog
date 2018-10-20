@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- System tray options now subject to current desktop
+  environment availability. (EXPERIMENTAL)
+ 
 - Also disable Setup / Misc / Other / Save JACK server
   configuration to (.jackdrc) when JACK D-Bus interface
   is enabled. (EXPERIMENTAL)

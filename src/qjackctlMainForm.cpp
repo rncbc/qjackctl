@@ -3637,12 +3637,16 @@ void qjackctlMainForm::updateServerState ( int iServerState )
 // System tray master switcher.
 void qjackctlMainForm::updateSystemTray (void)
 {
+	if (!QSystemTrayIcon::isSystemTrayAvailable())
+		return;
+
 	if (!m_pSetup->bSystemTray && m_pSystemTray) {
 	//  Strange enough, this would close the application too.
 	//  m_pSystemTray->close();
 		delete m_pSystemTray;
 		m_pSystemTray = NULL;
 	}
+
 	if (m_pSetup->bSystemTray && m_pSystemTray == NULL) {
 		m_pSystemTray = new qjackctlSystemTray(this);
 		QObject::connect(m_pSystemTray,

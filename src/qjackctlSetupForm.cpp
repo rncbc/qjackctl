@@ -37,6 +37,10 @@
 
 #include <QButtonGroup>
 
+#ifdef CONFIG_SYSTEM_TRAY
+#include <QSystemTrayIcon>
+#endif
+
 #ifdef CONFIG_COREAUDIO
 #include <iostream>
 #include <cstring>
@@ -613,12 +617,19 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	else
 		m_ui.BaseFontSizeComboBox->setCurrentIndex(0);
 
-#ifndef CONFIG_SYSTEM_TRAY
-	m_ui.SystemTrayCheckBox->setChecked(false);
-	m_ui.SystemTrayCheckBox->setEnabled(false);
-	m_ui.SystemTrayQueryCloseCheckBox->setChecked(false);
-	m_ui.SystemTrayQueryCloseCheckBox->setEnabled(false);
+#ifdef CONFIG_SYSTEM_TRAY
+	const bool bSystemTray = QSystemTrayIcon::isSystemTrayAvailable();
+#else
+	const bool bSystemTray = false;
 #endif
+	if (!bSystemTray) {
+		m_ui.SystemTrayCheckBox->setChecked(false);
+		m_ui.SystemTrayCheckBox->setEnabled(false);
+		m_ui.SystemTrayQueryCloseCheckBox->setChecked(false);
+		m_ui.SystemTrayQueryCloseCheckBox->setEnabled(false);
+		m_ui.StartMinimizedCheckBox->setChecked(false);
+		m_ui.StartMinimizedCheckBox->setEnabled(false);
+	}
 #ifndef CONFIG_JACK_MIDI
 	m_ui.MidiDriverComboBox->setCurrentIndex(0);
 	m_ui.MidiDriverTextLabel->setEnabled(false);
