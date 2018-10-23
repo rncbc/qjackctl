@@ -99,12 +99,23 @@
      <addaction name="separator"/>
      <addaction name="viewColorsResetAction"/>
     </widget>
+    <widget class="QMenu" name="viewSortMenu">
+     <property name="title">
+      <string>S&amp;ort</string>
+     </property>
+     <addaction name="viewSortPortNameAction"/>
+     <addaction name="viewSortPortTitleAction"/>
+     <addaction name="separator"/>
+     <addaction name="viewSortAscendingAction"/>
+     <addaction name="viewSortDescendingAction"/>
+    </widget>
     <addaction name="viewMenubarAction"/>
     <addaction name="viewStatusbarAction"/>
     <addaction name="viewToolbarAction"/>
     <addaction name="separator"/>
     <addaction name="viewTextBesideIconsAction"/>
     <addaction name="viewColorsMenu"/>
+    <addaction name="viewSortMenu"/>
     <addaction name="separator"/>
     <addaction name="viewCenterAction"/>
     <addaction name="viewZoomMenu"/>
@@ -542,6 +553,74 @@
    </property>
    <property name="statusTip">
     <string>Reset colors</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewSortPortNameAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Port &amp;Name</string>
+   </property>
+   <property name="toolTip">
+    <string>Port name</string>
+   </property>
+   <property name="statusTip">
+    <string>Sort by port name</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewSortPortTitleAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Port &amp;Title</string>
+   </property>
+   <property name="toolTip">
+    <string>Port title</string>
+   </property>
+   <property name="statusTip">
+    <string>sort by port title</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewSortAscendingAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Ascending</string>
+   </property>
+   <property name="toolTip">
+    <string>Ascending</string>
+   </property>
+   <property name="statusTip">
+    <string>Ascending sort order</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewSortDescendingAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Descending</string>
+   </property>
+   <property name="toolTip">
+    <string>Descending</string>
+   </property>
+   <property name="statusTip">
+    <string>Descending sort order</string>
    </property>
    <property name="shortcut">
     <string/>

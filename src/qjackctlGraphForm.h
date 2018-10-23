@@ -41,6 +41,8 @@ class QCloseEvent;
 class QSlider;
 class QSpinBox;
 
+class QActionGroup;
+
 
 // Forwards decls.
 class QSettings;
@@ -103,6 +105,9 @@ protected slots:
 
 	void viewZoomRange(bool on);
 
+	void viewSortTypeAction();
+	void viewSortOrderAction();
+
 	void viewColorsAction();
 	void viewColorsReset();
 
@@ -147,6 +152,9 @@ private:
 
 	QSlider  *m_zoom_slider;
 	QSpinBox *m_zoom_spinbox;
+
+	QActionGroup *m_sort_type;
+	QActionGroup *m_sort_order;
 };
 
 
@@ -178,6 +186,12 @@ public:
 	void setZoomRange(bool zoomrange);
 	bool isZoomRange() const;
 
+	void setSortType(int sorttype);
+	int sortType() const;
+
+	void setSortOrder(int sortorder);
+	int sortOrder() const;
+
 	// Graph main-widget state methods.
 	bool restoreState(QMainWindow *widget);
 	bool saveState(QMainWindow *widget) const;
@@ -192,6 +206,8 @@ private:
 	bool       m_statusbar;
 	bool       m_texticons;
 	bool       m_zoomrange;
+	int        m_sorttype;
+	int        m_sortorder;
 };
 
 

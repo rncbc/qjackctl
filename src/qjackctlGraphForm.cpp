@@ -43,6 +43,8 @@
 
 #include <QColorDialog>
 
+#include <QActionGroup>
+
 #include <QResizeEvent>
 #include <QShowEvent>
 #include <QHideEvent>
@@ -234,6 +236,36 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SIGNAL(triggered(bool)),
 		SLOT(viewColorsReset()));
 
+	m_sort_type = new QActionGroup(this);
+	m_sort_type->setExclusive(true);
+	m_sort_type->addAction(m_ui.viewSortPortNameAction);
+	m_sort_type->addAction(m_ui.viewSortPortTitleAction);
+
+	m_ui.viewSortPortNameAction->setData(qjackctlGraphPort::PortName);
+	m_ui.viewSortPortTitleAction->setData(qjackctlGraphPort::PortTitle);
+
+	QObject::connect(m_ui.viewSortPortNameAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewSortTypeAction()));
+	QObject::connect(m_ui.viewSortPortTitleAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewSortTypeAction()));
+
+	m_sort_order = new QActionGroup(this);
+	m_sort_order->setExclusive(true);
+	m_sort_order->addAction(m_ui.viewSortAscendingAction);
+	m_sort_order->addAction(m_ui.viewSortDescendingAction);
+
+	m_ui.viewSortAscendingAction->setData(qjackctlGraphPort::Ascending);
+	m_ui.viewSortDescendingAction->setData(qjackctlGraphPort::Descending);
+
+	QObject::connect(m_ui.viewSortAscendingAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewSortOrderAction()));
+	QObject::connect(m_ui.viewSortDescendingAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewSortOrderAction()));
+
 	QObject::connect(m_ui.helpAboutAction,
 		SIGNAL(triggered(bool)),
 		SLOT(helpAbout()));
@@ -250,6 +282,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 // Destructor.
 qjackctlGraphForm::~qjackctlGraphForm (void)
 {
+	delete m_sort_order;
+	delete m_sort_type;
+
 	if (m_jack)
 		delete m_jack;
 #ifdef CONFIG_ALSA_SEQ
@@ -285,6 +320,32 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 
 	m_ui.viewTextBesideIconsAction->setChecked(m_config->isTextBesideIcons());
 	m_ui.viewZoomRangeAction->setChecked(m_config->isZoomRange());
+
+	const qjackctlGraphPort::SortType sort_type
+		= qjackctlGraphPort::SortType(m_config->sortType());
+	qjackctlGraphPort::setSortType(sort_type);
+	switch (sort_type) {
+	case qjackctlGraphPort::PortTitle:
+		m_ui.viewSortPortTitleAction->setChecked(true);
+		break;
+	case qjackctlGraphPort::PortName:
+	default:
+		m_ui.viewSortPortNameAction->setChecked(true);
+		break;
+	}
+
+	const qjackctlGraphPort::SortOrder sort_order
+		= qjackctlGraphPort::SortOrder(m_config->sortOrder());
+	qjackctlGraphPort::setSortOrder(sort_order);
+	switch (sort_order) {
+	case qjackctlGraphPort::Descending:
+		m_ui.viewSortDescendingAction->setChecked(true);
+		break;
+	case qjackctlGraphPort::Ascending:
+	default:
+		m_ui.viewSortAscendingAction->setChecked(true);
+		break;
+	}
 
 	viewMenubar(m_config->isMenubar());
 	viewToolbar(m_config->isToolbar());
@@ -395,6 +456,34 @@ void qjackctlGraphForm::viewColorsReset (void)
 	m_ui.graphCanvas->updatePortTypeColors();
 
 	updateViewColors();
+}
+
+
+void qjackctlGraphForm::viewSortTypeAction (void)
+{
+	QAction *action = qobject_cast<QAction *> (sender());
+	if (action == NULL)
+		return;
+
+	const qjackctlGraphPort::SortType sort_type
+		= qjackctlGraphPort::SortType(action->data().toInt());
+	qjackctlGraphPort::setSortType(sort_type);
+
+	m_ui.graphCanvas->updateNodes();
+}
+
+
+void qjackctlGraphForm::viewSortOrderAction (void)
+{
+	QAction *action = qobject_cast<QAction *> (sender());
+	if (action == NULL)
+		return;
+
+	const qjackctlGraphPort::SortOrder sort_order
+		= qjackctlGraphPort::SortOrder(action->data().toInt());
+	qjackctlGraphPort::setSortOrder(sort_order);
+
+	m_ui.graphCanvas->updateNodes();
 }
 
 
@@ -686,6 +775,8 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 	m_ui.graphCanvas->saveState();
 
 	if (m_config && QMainWindow::isVisible()) {
+		m_config->setSortOrder(int(qjackctlGraphPort::sortOrder()));
+		m_config->setSortType(int(qjackctlGraphPort::sortType()));
 		m_config->setTextBesideIcons(m_ui.viewTextBesideIconsAction->isChecked());
 		m_config->setZoomRange(m_ui.viewZoomRangeAction->isChecked());
 		m_config->setStatusbar(m_ui.StatusBar->isVisible());
@@ -735,13 +826,16 @@ static const char *ViewToolbarKey   = "/Toolbar";
 static const char *ViewStatusbarKey = "/Statusbar";
 static const char *ViewTextBesideIconsKey = "/TextBesideIcons";
 static const char *ViewZoomRangeKey = "/ZoomRange";
+static const char *ViewSortTypeKey  = "/SortType";
+static const char *ViewSortOrderKey = "/SortOrder";
 
 
 // Constructors.
 qjackctlGraphConfig::qjackctlGraphConfig ( QSettings *settings )
 	: m_settings(settings), m_menubar(false),
 		m_toolbar(false), m_statusbar(false),
-		m_texticons(false), m_zoomrange(false)
+		m_texticons(false), m_zoomrange(false),
+		m_sorttype(0), m_sortorder(0)
 {
 }
 
@@ -807,6 +901,28 @@ bool qjackctlGraphConfig::isZoomRange (void) const
 }
 
 
+void qjackctlGraphConfig::setSortType ( int sorttype )
+{
+	m_sorttype = sorttype;
+}
+
+int qjackctlGraphConfig::sortType (void) const
+{
+	return m_sorttype;
+}
+
+
+void qjackctlGraphConfig::setSortOrder ( int sortorder )
+{
+	m_sortorder = sortorder;
+}
+
+int qjackctlGraphConfig::sortOrder (void) const
+{
+	return m_sortorder;
+}
+
+
 // Graph main-widget state methods.
 bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 {
@@ -819,6 +935,8 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 	m_statusbar = m_settings->value(ViewStatusbarKey, true).toBool();
 	m_texticons = m_settings->value(ViewTextBesideIconsKey, true).toBool();
 	m_zoomrange = m_settings->value(ViewZoomRangeKey, false).toBool();
+	m_sorttype  = m_settings->value(ViewSortTypeKey, 0).toInt();
+	m_sortorder = m_settings->value(ViewSortOrderKey, 0).toInt();
 	m_settings->endGroup();
 
 	m_settings->beginGroup(LayoutGroup);
@@ -844,6 +962,8 @@ bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 	m_settings->setValue(ViewStatusbarKey, m_statusbar);
 	m_settings->setValue(ViewTextBesideIconsKey, m_texticons);
 	m_settings->setValue(ViewZoomRangeKey, m_zoomrange);
+	m_settings->setValue(ViewSortTypeKey, m_sorttype);
+	m_settings->setValue(ViewSortOrderKey, m_sortorder);
 	m_settings->endGroup();
 
 	m_settings->beginGroup(LayoutGroup);

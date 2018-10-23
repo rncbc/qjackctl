@@ -209,6 +209,18 @@ public:
 			: ItemKey(port->portName(), port->portMode(), port->portType()) {}
 	};
 
+	// Port sorting type.
+	enum SortType { PortName = 0, PortTitle };
+
+	static void setSortType(SortType sort_type);
+	static SortType sortType();
+
+	// Port sorting order.
+	enum SortOrder { Ascending = 0, Descending };
+
+	static void setSortOrder(SortOrder sort_order);
+	static SortOrder sortOrder();
+
 	// Port sorting comparators.
 	struct Compare {
 		bool operator()(qjackctlGraphPort *port1, qjackctlGraphPort *port2) const
@@ -220,15 +232,16 @@ public:
 			{ return (port1->scenePos().y() < port2->scenePos().y()); }
 	};
 
-	// Natural decimal sorting comparator.
-	static bool lessThan(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
-
 protected:
 
 	void paint(QPainter *painter,
 		const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	QVariant itemChange(GraphicsItemChange change, const QVariant& value);
+
+	// Natural decimal sorting comparators.
+	static bool lessThan(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
+	static bool lessThan(const QString& s1, const QString& s2);
 
 private:
 
@@ -245,6 +258,9 @@ private:
 
 	int m_selectx;
 	int m_hilitex;
+
+	static SortType  g_sort_type;
+	static SortOrder g_sort_order;
 };
 
 
@@ -557,6 +573,9 @@ public slots:
 	void zoomOut();
 	void zoomFit();
 	void zoomReset();
+
+	// Update all nodes.
+	void updateNodes();
 
 protected:
 

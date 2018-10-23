@@ -398,6 +398,35 @@ void qjackctlGraphPort::updatePortTypeColors ( qjackctlGraphCanvas *canvas )
 }
 
 
+
+// Port sorting type.
+qjackctlGraphPort::SortType  qjackctlGraphPort::g_sort_type  = qjackctlGraphPort::PortName;
+
+void qjackctlGraphPort::setSortType ( SortType sort_type )
+{
+	g_sort_type = sort_type;
+}
+
+qjackctlGraphPort::SortType qjackctlGraphPort::sortType (void)
+{
+	return g_sort_type;
+}
+
+
+// Port sorting order.
+qjackctlGraphPort::SortOrder qjackctlGraphPort::g_sort_order = qjackctlGraphPort::Ascending;
+
+void qjackctlGraphPort::setSortOrder( SortOrder sort_order )
+{
+	g_sort_order = sort_order;
+}
+
+qjackctlGraphPort::SortOrder qjackctlGraphPort::sortOrder (void)
+{
+	return g_sort_order;
+}
+
+
 // Natural decimal sorting comparator (static)
 bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *port2 )
 {
@@ -406,9 +435,23 @@ bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *
 	if (port_type_diff)
 		return (port_type_diff > 0);
 
-	const QString& s1 = port1->portName();
-	const QString& s2 = port2->portName();
+	if (g_sort_order == Descending) {
+		qjackctlGraphPort *port = port1;
+		port1 = port2;
+		port2 = port;
+	}
 
+	switch (g_sort_type) {
+	case PortTitle:
+		return qjackctlGraphPort::lessThan(port1->portTitle(), port2->portTitle());
+	case PortName:
+	default:
+		return qjackctlGraphPort::lessThan(port1->portName(), port2->portName());
+	}
+}
+
+bool qjackctlGraphPort::lessThan ( const QString& s1, const QString& s2 )
+{
 	const int n1 = s1.length();
 	const int n2 = s2.length();
 
@@ -1786,6 +1829,19 @@ void qjackctlGraphCanvas::zoomFit (void)
 void qjackctlGraphCanvas::zoomReset (void)
 {
 	setZoom(1.0);
+}
+
+
+// Update all nodes.
+void qjackctlGraphCanvas::updateNodes (void)
+{
+	foreach (QGraphicsItem *item, m_scene->items()) {
+		if (item->type() == qjackctlGraphNode::Type) {
+			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+			if (node)
+				node->updatePath();
+		}
+	}
 }
 
 
