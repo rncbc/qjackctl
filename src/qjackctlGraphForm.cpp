@@ -240,14 +240,19 @@ qjackctlGraphForm::qjackctlGraphForm (
 	m_sort_type->setExclusive(true);
 	m_sort_type->addAction(m_ui.viewSortPortNameAction);
 	m_sort_type->addAction(m_ui.viewSortPortTitleAction);
+	m_sort_type->addAction(m_ui.viewSortPortIndexAction);
 
 	m_ui.viewSortPortNameAction->setData(qjackctlGraphPort::PortName);
 	m_ui.viewSortPortTitleAction->setData(qjackctlGraphPort::PortTitle);
+	m_ui.viewSortPortIndexAction->setData(qjackctlGraphPort::PortIndex);
 
 	QObject::connect(m_ui.viewSortPortNameAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewSortTypeAction()));
 	QObject::connect(m_ui.viewSortPortTitleAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewSortTypeAction()));
+	QObject::connect(m_ui.viewSortPortIndexAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewSortTypeAction()));
 
@@ -325,6 +330,9 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 		= qjackctlGraphPort::SortType(m_config->sortType());
 	qjackctlGraphPort::setSortType(sort_type);
 	switch (sort_type) {
+	case qjackctlGraphPort::PortIndex:
+		m_ui.viewSortPortIndexAction->setChecked(true);
+		break;
 	case qjackctlGraphPort::PortTitle:
 		m_ui.viewSortPortTitleAction->setChecked(true);
 		break;

@@ -180,7 +180,10 @@ public:
 	uint portType() const;
 
 	void setPortTitle(const QString& title);
-	QString portTitle() const;
+	const QString& portTitle() const;
+
+	void setPortIndex(int index);
+	int portIndex() const;
 
 	QPointF portPos() const;
 
@@ -210,7 +213,7 @@ public:
 	};
 
 	// Port sorting type.
-	enum SortType { PortName = 0, PortTitle };
+	enum SortType { PortName = 0, PortTitle, PortIndex };
 
 	static void setSortType(SortType sort_type);
 	static SortType sortType();
@@ -250,7 +253,10 @@ private:
 
 	QString m_name;
 	Mode    m_mode;
-	int     m_type;
+	uint    m_type;
+
+	QString m_title;
+	int     m_index;
 
 	QGraphicsTextItem *m_text;
 

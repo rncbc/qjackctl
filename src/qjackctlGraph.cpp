@@ -123,7 +123,8 @@ uint qjackctlGraphItem::itemType ( const QByteArray& type_name )
 qjackctlGraphPort::qjackctlGraphPort ( qjackctlGraphNode *node,
 	const QString& name, qjackctlGraphItem::Mode mode, uint type )
 	: qjackctlGraphItem(node), m_node(node),
-		m_name(name), m_mode(mode), m_type(type), m_selectx(0), m_hilitex(0)
+		m_name(name), m_mode(mode), m_type(type), m_index(0),
+		m_selectx(0), m_hilitex(0)
 {
 	QGraphicsPathItem::setZValue(+1);
 
@@ -214,7 +215,9 @@ uint qjackctlGraphPort::portType (void) const
 
 void qjackctlGraphPort::setPortTitle ( const QString& title )
 {
-	m_text->setPlainText(title);
+	m_title = title;
+
+	m_text->setPlainText(m_title);
 
 	QPainterPath path;
 	const QRectF& rect
@@ -224,9 +227,21 @@ void qjackctlGraphPort::setPortTitle ( const QString& title )
 }
 
 
-QString qjackctlGraphPort::portTitle (void) const
+const QString& qjackctlGraphPort::portTitle (void) const
 {
-	return m_text->toPlainText();
+	return m_title;
+}
+
+
+void qjackctlGraphPort::setPortIndex ( int index )
+{
+	m_index = index;
+}
+
+
+int qjackctlGraphPort::portIndex (void) const
+{
+	return m_index;
 }
 
 
@@ -440,6 +455,9 @@ bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *
 		port1 = port2;
 		port2 = port;
 	}
+
+	if (g_sort_type == PortIndex && port1->portIndex() < port2->portIndex())
+		return true;
 
 	switch (g_sort_type) {
 	case PortTitle:
