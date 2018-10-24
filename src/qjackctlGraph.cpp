@@ -456,8 +456,12 @@ bool qjackctlGraphPort::lessThan ( qjackctlGraphPort *port1, qjackctlGraphPort *
 		port2 = port;
 	}
 
-	if (g_sort_type == PortIndex && port1->portIndex() < port2->portIndex())
-		return true;
+	if (g_sort_type == PortIndex) {
+		const int port_index_diff
+			= port1->portIndex() - port2->portIndex();
+		if (port_index_diff)
+			return (port_index_diff < 0);
+	}
 
 	switch (g_sort_type) {
 	case PortTitle:
