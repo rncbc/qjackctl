@@ -78,12 +78,6 @@ fi
 AC_SUBST(ac_debug)
 
 
-# Enable Qt4/5 availability.
-AC_ARG_ENABLE(qt4,
-  AS_HELP_STRING([--enable-qt4], [enable Qt4 build (default=no)]),
-  [ac_qt4="$enableval"],
-  [ac_qt4="no"])
-
 # Disable system tray argument option.
 AC_ARG_ENABLE(system_tray,
   AS_HELP_STRING([--enable-system-tray], [enable system tray (default=yes)]),
@@ -154,31 +148,13 @@ AC_ARG_ENABLE(stacktrace,
 ac_path=$PATH
 ac_with_paths=""
 
-# Set for alternate Qt4/5 installation dir.
+# Set for alternate Qt installation dir.
 AC_ARG_WITH(qt,
   AS_HELP_STRING([--with-qt=PATH], [use alternate Qt install path]),
   [ac_qt_path="$withval"], [ac_qt_path="no"])
 
-AC_ARG_WITH(qt4,
-  AS_HELP_STRING([--with-qt4=PATH], [use alternate Qt4 install path]),
-  [ac_qt4_path="$withval"], [ac_qt4_path="no"])
-
-AC_ARG_WITH(qt5,
-  AS_HELP_STRING([--with-qt5=PATH], [use alternate Qt5 install path]),
-  [ac_qt5_path="$withval"], [ac_qt5_path="no"])
-
 if test "x$ac_qt_path" != "xno"; then
    ac_path="$ac_qt_path/bin:$ac_path"
-fi
-
-if test "x$ac_qt4_path" != "xno"; then
-   ac_path="$ac_qt4_path/bin:$ac_path"
-   ac_qt4="yes"
-fi
-
-if test "x$ac_qt5_path" != "xno"; then
-   ac_path="$ac_qt5_path/bin:$ac_path"
-   ac_qt4="no"
 fi
 
 # Set for alternate JACK installation dir.
@@ -262,15 +238,9 @@ ac_errmsg="not found in current PATH. Maybe QT development environment isn't ava
 
 # Check for proper qmake path/version alternatives.
 AC_PATH_TOOL(ac_qmake, qmake, [no], $ac_path)
-
 if test "x$ac_qmake" = "xno"; then
-   if test "x$ac_qt4" = "xyes"; then
-      AC_PATH_TOOL(ac_cv_qmake, qmake-qt4, [no], $ac_path)
-      ac_qmake=$ac_cv_qmake
-   else
-      AC_PATH_TOOL(ac_cv_qmake, qmake-qt5, [no], $ac_path)
-      ac_qmake=$ac_cv_qmake
-   fi
+   AC_PATH_TOOL(ac_cv_qmake, qmake-qt5, [no], $ac_path)
+   ac_qmake=$ac_cv_qmake
 fi
 
 # Check for proper Qt major version.
@@ -279,24 +249,13 @@ AC_CACHE_CHECK([for Qt major version], [ac_cv_qt_version_major], [
    ac_cv_qt_version_major=$(($ac_cv_qt_version_major + 0))
 ])
 ac_qt_version_major=$ac_cv_qt_version_major
-if test "x$ac_qt4" = "xyes"; then
-   if test $ac_qt_version_major -ne 4; then
-      AC_PATH_TOOL(ac_cv_qmake, qmake-qt4, [no], $ac_path)
-      ac_qmake=$ac_cv_qmake
-   fi
-else
-   if test $ac_qt_version_major -ne 5; then
-      AC_PATH_TOOL(ac_cv_qmake, qmake-qt5, [no], $ac_path)
-      ac_qmake=$ac_cv_qmake
-   fi
+if test $ac_qt_version_major -ne 5; then
+	AC_PATH_TOOL(ac_cv_qmake, qmake-qt5, [no], $ac_path)
+	ac_qmake=$ac_cv_qmake
 fi
 
 if test "x$ac_qmake" = "xno"; then
-   if test "x$ac_qt4" = "xyes"; then
-      AC_MSG_ERROR([qmake-qt4 $ac_errmsg (qt4-devel)])
-   else
-      AC_MSG_ERROR([qmake-qt5 $ac_errmsg (qt5-devel)])
-   fi
+   AC_MSG_ERROR([qmake-qt5 $ac_errmsg (qt5-devel)])
 fi
 
 # Check for proper Qt install path.
@@ -336,32 +295,18 @@ if test -d $ac_qt_install_libs; then
    ac_libs="-L$ac_qt_install_libs $ac_libs"
 fi
 
-# Finally, check for proper Qt4/5 version.
-if test "x$ac_qt4" = "xyes"; then
-   AC_CACHE_CHECK([for Qt library version >= 4.4],
-      ac_cv_qtversion, [
-      AC_TRY_COMPILE([#include "QtCore/qglobal.h"], [
-         #if QT_VERSION < 0x040400 || QT_VERSION >= 0x050000
-         #error Qt library 4.4 or greater required.
-         #endif
-      ], ac_cv_qtversion="yes", [
-         echo "no; Qt 4.4 or greater is required"
-         exit 1
-      ])
+# Finally, check for proper Qt version.
+AC_CACHE_CHECK([for Qt library version >= 5.1],
+   ac_cv_qtversion, [
+   AC_TRY_COMPILE([#include "QtCore/qglobal.h"], [
+      #if QT_VERSION < 0x050100
+      #error Qt library 5.1 or greater required.
+      #endif
+   ], ac_cv_qtversion="yes", [
+      echo "no; Qt 5.1 or greater is required"
+      exit 1
    ])
-else
-   AC_CACHE_CHECK([for Qt library version >= 5.1],
-      ac_cv_qtversion, [
-      AC_TRY_COMPILE([#include "QtCore/qglobal.h"], [
-         #if QT_VERSION < 0x050100 || QT_VERSION >= 0x060000
-         #error Qt library 5.1 or greater required.
-         #endif
-      ], ac_cv_qtversion="yes", [
-         echo "no; Qt 5.1 or greater is required"
-         exit 1
-      ])
-   ])
-fi
+])
 
 # Check for Qt moc utility.
 AC_PATH_TOOL(ac_moc, moc, [no], $ac_path)
@@ -498,11 +443,7 @@ fi
 
 # Check D-Bus interface support.
 if test "x$ac_dbus" = "xyes"; then
-   if test "x$ac_qt4" = "xno"; then
-      PKG_CHECK_MODULES([QT5DBUS], [Qt5DBus], [ac_dbus="yes"], [ac_dbus="no"])
-   else
-      PKG_CHECK_MODULES([QT4DBUS], [QtDBus],  [ac_dbus="yes"], [ac_dbus="no"])
-   fi
+   PKG_CHECK_MODULES([QT5DBUS], [Qt5DBus], [ac_dbus="yes"], [ac_dbus="no"])
 fi
 if test "x$ac_dbus" = "xyes"; then
    AC_DEFINE(CONFIG_DBUS, 1, [Define if D-Bus interface is enabled.])
@@ -511,14 +452,12 @@ fi
 AC_SUBST(ac_qdbus)
 
 # Check for X11 unique/single instance.
-if test "x$ac_xunique" = "xyes" -a "x$ac_qt4" = "xno"; then
+if test "x$ac_xunique" = "xyes"; then
    PKG_CHECK_MODULES([QT5X11EXTRAS], [Qt5X11Extras], [ac_xunique="yes"], [ac_xunique="no"])
 fi
 if test "x$ac_xunique" = "xyes"; then
    AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
-   if test "x$ac_qt4" = "xno"; then
-      ac_qx11extras="x11extras"
-   fi
+   ac_qx11extras="x11extras"
    # Some recent distros (eg. fedora, debian) require this.
    if test "x$ac_cv_lib_X11_main" = "xyes"; then
       ac_libs="$ac_libs -lX11"

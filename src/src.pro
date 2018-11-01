@@ -126,12 +126,7 @@ unix {
 }
 
 # XML/DOM support
-QT += xml
-
-# QT5 support
-!lessThan(QT_MAJOR_VERSION, 5) {
-	QT += widgets
-}
+QT += widgets xml
 
 win32 {
 	CONFIG += static
