@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Old deprecated Qt4 build support is no more.
+
 - Graph port sort options added as View / Sort menu.
 
 - System tray options now subject to current desktop
