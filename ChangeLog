@@ -4,22 +4,22 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.5  2018-11-23  A Black-Friday'18 Release!
 
 - Old deprecated Qt4 build support is no more.
 
 - Graph port sort options added as View / Sort menu.
 
 - System tray options now subject to current desktop
-  environment availability. (EXPERIMENTAL)
- 
+  environment availability.
+
 - Also disable Setup / Misc / Other / Save JACK server
   configuration to (.jackdrc) when JACK D-Bus interface
-  is enabled. (EXPERIMENTAL)
+  is enabled.
 
 - Whether to use server synchronous mode option added
   to Setup / Settings / Parameters (only applied when
-  JACK D-BUS interface is enabled). (EXPERIMENTAL)
+  JACK D-BUS interface is enabled).
 
 - Disable some Setup / Settings / Advanced parameters 
   when JACK D-Bus interface is enabled and vice-versa.
@@ -30,7 +30,7 @@ GIT HEAD
   option (-H) is now being ditched from Setup / Settings
   / Advanced tab.
 
-- Graph port/connections highlighting. (EXPERIMENTAL)
+- Graph port/connections highlighting.
 
 
 0.5.4  2018-09-24  An Early Autumn'18 Release.

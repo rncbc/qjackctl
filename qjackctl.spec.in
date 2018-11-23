@@ -78,6 +78,8 @@ including a enhanced patchbay and connection control features.
 
 %changelog
 
+* Fri Nov 23 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.5
+- Black-Friday'18 Release.
 * Mon Sep 24 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.4
 - Early Autumn'18 Release.
 * Sun Jul 22 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.3
