@@ -485,7 +485,7 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="104"/>
         <source>S&amp;ort</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Trier</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="129"/>
@@ -846,77 +846,77 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="567"/>
         <source>Port &amp;Name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nom de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="570"/>
         <source>Port name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="573"/>
         <source>Sort by port name</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier par nom de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="584"/>
         <source>Port &amp;Title</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Titre de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="587"/>
         <source>Port title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="590"/>
         <source>Sort by port title</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier par titre de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="601"/>
         <source>Port &amp;Index</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Index de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="604"/>
         <source>Port index</source>
-        <translation type="unfinished"></translation>
+        <translation>Index de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="607"/>
         <source>Sort by port index</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier par index de port</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="618"/>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ascendant</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="621"/>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascendant</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="624"/>
         <source>Ascending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordre de tri ascendant</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="635"/>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Descendant</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="638"/>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Descendant</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="641"/>
         <source>Descending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordre de tri descendant</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="649"/>
@@ -4174,12 +4174,12 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="642"/>
         <source>Whether to use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l&apos;on utilise le mode synchrone de serveur</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="645"/>
         <source>&amp;Use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Utiliser le mode synchrone de serveur</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3574"/>
