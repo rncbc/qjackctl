@@ -1,7 +1,7 @@
 // qjackctlGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1557,6 +1557,11 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 				}
 			}
 			m_pos = pos2;
+		} else {
+			// Hovering ports highlighting...
+			QGraphicsItem *item = itemAt(pos);
+			if (item && item->type() == qjackctlGraphPort::Type)
+				item->update();
 		}
 		break;
 	case DragScroll:
