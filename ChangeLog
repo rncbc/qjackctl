@@ -5,7 +5,9 @@ ChangeLog
 
 GIT HEAD
 
-- Graph port temporary highlighting while hovering.
+- Graph port temporary highlighting while hovering,
+  if and only if connecting ports of same type and
+  complementary modes.
 
 - Bumped copyright headers into the New Year (2019).
 

@@ -438,13 +438,13 @@ Chcete uložit změny?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1626"/>
-        <location filename="../qjackctlGraph.cpp" line="1751"/>
+        <location filename="../qjackctlGraph.cpp" line="1635"/>
+        <location filename="../qjackctlGraph.cpp" line="1760"/>
         <source>Connect</source>
         <translation>Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1787"/>
+        <location filename="../qjackctlGraph.cpp" line="1796"/>
         <source>Disconnect</source>
         <translation>Rozpojit</translation>
     </message>

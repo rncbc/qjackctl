@@ -1557,11 +1557,20 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 				}
 			}
 			m_pos = pos2;
-		} else {
-			// Hovering ports highlighting...
+		}
+		else
+		if (m_connect) {
+			// Hovering ports high-lighting...
 			QGraphicsItem *item = itemAt(pos);
-			if (item && item->type() == qjackctlGraphPort::Type)
-				item->update();
+			if (item && item->type() == qjackctlGraphPort::Type) {
+				qjackctlGraphPort *port1 = m_connect->port1();
+				qjackctlGraphPort *port2 = static_cast<qjackctlGraphPort *> (item);
+				if (port1 && port2 &&
+					port1->portType() == port2->portType() &&
+					port1->portMode() != port2->portMode()) {
+					port2->update();
+				}
+			}
 		}
 		break;
 	case DragScroll:
