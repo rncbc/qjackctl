@@ -453,10 +453,12 @@ AC_SUBST(ac_qdbus)
 
 # Check for X11 unique/single instance.
 if test "x$ac_xunique" = "xyes"; then
-   PKG_CHECK_MODULES([QT5X11EXTRAS], [Qt5X11Extras], [ac_xunique="yes"], [ac_xunique="no"])
+   PKG_CHECK_MODULES([QT5X11EXTRAS], [Qt5X11Extras], [ac_x11extras="yes"], [ac_x11extras="no"])
 fi
-if test "x$ac_xunique" = "xyes"; then
-   AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
+if test "x$ac_x11extras" = "xyes"; then
+   if test "x$ac_xunique" = "xyes"; then
+      AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if X11 unique/single instance is enabled.])
+   fi
    ac_qx11extras="x11extras"
    # Some recent distros (eg. fedora, debian) require this.
    if test "x$ac_cv_lib_X11_main" = "xyes"; then
