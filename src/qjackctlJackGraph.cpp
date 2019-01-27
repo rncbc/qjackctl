@@ -219,7 +219,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 
 	if (*node == NULL) {
 		const unsigned long port_flags = ::jack_port_flags(jack_port);
-		if ((port_flags & (JackPortIsPhysical | JackPortIsTerminal)) == 0) {
+		if ((port_flags & (JackPortIsPhysical | JackPortIsTerminal)) != (JackPortIsPhysical | JackPortIsTerminal)) {
 			node_mode = qjackctlGraphItem::Duplex;
 			*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
 		}
