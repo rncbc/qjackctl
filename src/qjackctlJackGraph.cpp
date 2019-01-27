@@ -1,7 +1,7 @@
 // qjackctlJackGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -219,7 +219,9 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 
 	if (*node == NULL) {
 		const unsigned long port_flags = ::jack_port_flags(jack_port);
-		if ((port_flags & (JackPortIsPhysical | JackPortIsTerminal)) != (JackPortIsPhysical | JackPortIsTerminal)) {
+		const unsigned long port_flags_mask
+			= (JackPortIsPhysical | JackPortIsTerminal);
+		if ((port_flags & port_flags_mask) != port_flags_mask) {
 			node_mode = qjackctlGraphItem::Duplex;
 			*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
 		}
