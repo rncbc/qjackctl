@@ -1,7 +1,7 @@
 // qjackctl.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -441,7 +441,9 @@ int main ( int argc, char **argv )
 #endif
 #endif
 	qjackctlApplication app(argc, argv);
-
+#if QT_VERSION >= 0x050600
+	app.setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 	// Construct default settings; override with command line arguments.
 	qjackctlSetup settings;
 	if (!settings.parse_args(app.arguments())) {

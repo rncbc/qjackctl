@@ -5,6 +5,8 @@ ChangeLog
 
 GIT HEAD
 
+- HiDPI display screen support (Qt >= 5.6). (EXPERIMENTAL)
+
 - Graph port temporary highlighting while hovering,
   if and only if connecting ports of same type and
   complementary modes.
