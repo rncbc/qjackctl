@@ -2828,14 +2828,22 @@ Are you sure to overwrite the existing folder?</source>
         <translation>Effacer le préréglage des paramètres actuel</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="811"/>
-        <source>jackstart</source>
-        <translation>jackstart</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="801"/>
         <source>jackd</source>
-        <translation>jackd</translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="806"/>
+        <source>jackdmp</source>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="811"/>
+        <source>jackstart</source>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="153"/>
@@ -2845,32 +2853,44 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="182"/>
         <source>dummy</source>
-        <translation>factice</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="187"/>
+        <source>sun</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="192"/>
         <source>oss</source>
-        <translation>oss</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="197"/>
         <source>alsa</source>
-        <translation>alsa</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="202"/>
         <source>portaudio</source>
-        <translation>portaudio</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="207"/>
         <source>coreaudio</source>
-        <translation>coreaudio</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="212"/>
-        <source>freebob</source>
-        <translation>freebob</translation>
+        <location filename="../qjackctlSetupForm.ui" line="217"/>
+        <source>firewire</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="139"/>
@@ -3895,27 +3915,19 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="376"/>
         <source>raw</source>
-        <translation>brut</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="381"/>
         <source>seq</source>
-        <translation>seq</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="364"/>
         <source>The ALSA MIDI backend driver to use</source>
         <translation>Le pilote ALSA MIDI à utiliser</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="806"/>
-        <source>jackdmp</source>
-        <translation>jackdmp</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="217"/>
-        <source>firewire</source>
-        <translation>firewire</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="299"/>
@@ -3970,14 +3982,10 @@ Voulez-vous appliquer les changements ?</translation>
         <translation>Fichiers du journal</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="187"/>
-        <source>sun</source>
-        <translation>sun</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="227"/>
         <source>netone</source>
-        <translation>netone</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="304"/>
@@ -4172,6 +4180,11 @@ Voulez-vous appliquer les changements ?</translation>
         <translation>Activer la prise en charge du séquenceur ALSA (MIDI) au démarrage</translation>
     </message>
     <message>
+        <location filename="../qjackctlSetupForm.ui" line="212"/>
+        <source>freebob</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetupForm.ui" line="642"/>
         <source>Whether to use server synchronous mode</source>
         <translation>Si l&apos;on utilise le mode synchrone de serveur</translation>
@@ -4264,7 +4277,8 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="222"/>
         <source>net</source>
-        <translation>net</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3587"/>

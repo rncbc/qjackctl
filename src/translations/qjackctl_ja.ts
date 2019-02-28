@@ -2821,17 +2821,20 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="801"/>
         <source>jackd</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="806"/>
         <source>jackdmp</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="811"/>
         <source>jackstart</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="825"/>
@@ -2856,52 +2859,56 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="182"/>
         <source>dummy</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="187"/>
         <source>sun</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="192"/>
         <source>oss</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="197"/>
         <source>alsa</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="202"/>
         <source>portaudio</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="207"/>
         <source>coreaudio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="212"/>
-        <source>freebob</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="217"/>
         <source>firewire</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="222"/>
         <source>net</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="227"/>
         <source>netone</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="139"/>
@@ -2926,12 +2933,14 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="376"/>
         <source>raw</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="381"/>
         <source>seq</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1892"/>
@@ -3360,6 +3369,11 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="1092"/>
         <source>Set client timeout limit in milliseconds</source>
         <translation>クライアントのタイムアウトの最大値をミリ秒で指定します</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="212"/>
+        <source>freebob</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="642"/>

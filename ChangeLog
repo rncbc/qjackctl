@@ -5,6 +5,8 @@ ChangeLog
 
 GIT HEAD
 
+- Removed old pre-FFADO 'freebob' driver support.
+
 - HiDPI display screen support (Qt >= 5.6). (EXPERIMENTAL)
 
 - Graph port temporary highlighting while hovering,

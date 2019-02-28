@@ -2813,14 +2813,22 @@ Está seguro de sobreescribir esta carpeta?</translation>
         <translation>Eliminar el preset con la configuración actual</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="811"/>
-        <source>jackstart</source>
-        <translation>jackstart</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="801"/>
         <source>jackd</source>
-        <translation>jackd</translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="806"/>
+        <source>jackdmp</source>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="811"/>
+        <source>jackstart</source>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="153"/>
@@ -2830,27 +2838,44 @@ Está seguro de sobreescribir esta carpeta?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="182"/>
         <source>dummy</source>
-        <translation>dummy</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="187"/>
+        <source>sun</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="192"/>
         <source>oss</source>
-        <translation>oss</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="197"/>
         <source>alsa</source>
-        <translation>alsa</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="202"/>
         <source>portaudio</source>
-        <translation>portaudio</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="207"/>
         <source>coreaudio</source>
-        <translation>coreaudio</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="217"/>
+        <source>firewire</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="139"/>
@@ -3826,29 +3851,9 @@ Do you want to apply the changes?</source>
         <translation>Algunas configuraciones han cambiado.Desea aplicar los cambios?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="806"/>
-        <source>jackdmp</source>
-        <translation>jackdmp</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="175"/>
         <source>The audio backend driver interface to use</source>
         <translation>El driver de audio a utilizar</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="187"/>
-        <source>sun</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="212"/>
-        <source>freebob</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="217"/>
-        <source>firewire</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="336"/>
@@ -3868,12 +3873,14 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="376"/>
         <source>raw</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="381"/>
         <source>seq</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="663"/>
@@ -4030,6 +4037,11 @@ Do you want to apply the changes?</source>
         <translation>Confirmar apa&amp;gado del servidor</translation>
     </message>
     <message>
+        <location filename="../qjackctlSetupForm.ui" line="212"/>
+        <source>freebob</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetupForm.ui" line="642"/>
         <source>Whether to use server synchronous mode</source>
         <translation type="unfinished"></translation>
@@ -4162,7 +4174,8 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="222"/>
         <source>net</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3587"/>
@@ -4182,7 +4195,8 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="227"/>
         <source>netone</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3635"/>

@@ -2791,17 +2791,20 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="801"/>
         <source>jackd</source>
-        <translation>jackd</translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="806"/>
         <source>jackdmp</source>
-        <translation>jackdmp</translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="811"/>
         <source>jackstart</source>
-        <translation>jackstart</translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="153"/>
@@ -2816,42 +2819,44 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="182"/>
         <source>dummy</source>
-        <translation>dummy</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="187"/>
         <source>sun</source>
-        <translation>sun</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="192"/>
         <source>oss</source>
-        <translation>oss</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="197"/>
         <source>alsa</source>
-        <translation>alsa</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="202"/>
         <source>portaudio</source>
-        <translation>portaudio</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="207"/>
         <source>coreaudio</source>
-        <translation>coreaudio</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="212"/>
-        <source>freebob</source>
-        <translation>freebob</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="217"/>
         <source>firewire</source>
-        <translation>firewire</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="139"/>
@@ -2876,12 +2881,14 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="376"/>
         <source>raw</source>
-        <translation>raw</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="381"/>
         <source>seq</source>
-        <translation>seq</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1892"/>
@@ -3593,6 +3600,11 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
         <translation>Protokollierung der Meldungen in eine Datei festlegen.</translation>
     </message>
     <message>
+        <location filename="../qjackctlSetupForm.ui" line="212"/>
+        <source>freebob</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetupForm.ui" line="642"/>
         <source>Whether to use server synchronous mode</source>
         <translation type="unfinished"></translation>
@@ -4195,7 +4207,8 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="222"/>
         <source>net</source>
-        <translation>net</translation>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3587"/>
@@ -4225,6 +4238,7 @@ Wollen Sie diese übernehmen?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="227"/>
         <source>netone</source>
+        <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
         <translation></translation>
     </message>
     <message>
