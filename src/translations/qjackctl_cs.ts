@@ -4241,7 +4241,7 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="222"/>
         <source>net</source>
-        <translation>síť</translation>
+        <translation>net</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="825"/>
@@ -4256,7 +4256,7 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="227"/>
         <source>netone</source>
-        <translation>síť_1</translation>
+        <translation>netone</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1043"/>
