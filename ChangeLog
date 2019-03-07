@@ -5,6 +5,10 @@ ChangeLog
 
 GIT HEAD
 
+- At last, JACK freewheel mode is now being detected
+  as to postpone any active patchbay scans as much as
+  possible. (EXPERIMENTAL)
+  
 - Removed old pre-FFADO 'freebob' driver support.
 
 - HiDPI display screen support (Qt >= 5.6). (EXPERIMENTAL)

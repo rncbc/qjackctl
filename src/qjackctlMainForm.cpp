@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -127,19 +127,20 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #define QJACKCTL_PORT_EVENT     QEvent::Type(QEvent::User + 1)
 #define QJACKCTL_XRUN_EVENT     QEvent::Type(QEvent::User + 2)
 #define QJACKCTL_BUFF_EVENT     QEvent::Type(QEvent::User + 3)
-#define QJACKCTL_SHUT_EVENT     QEvent::Type(QEvent::User + 4)
-#define QJACKCTL_EXIT_EVENT     QEvent::Type(QEvent::User + 5)
+#define QJACKCTL_FREE_EVENT     QEvent::Type(QEvent::User + 4)
+#define QJACKCTL_SHUT_EVENT     QEvent::Type(QEvent::User + 5)
+#define QJACKCTL_EXIT_EVENT     QEvent::Type(QEvent::User + 6)
 
 #ifdef CONFIG_DBUS
-#define QJACKCTL_LINE_EVENT     QEvent::Type(QEvent::User + 6)
+#define QJACKCTL_LINE_EVENT     QEvent::Type(QEvent::User + 7)
 #endif
 
 #ifdef CONFIG_JACK_METADATA
-#define QJACKCTL_PROP_EVENT     QEvent::Type(QEvent::User + 7)
+#define QJACKCTL_PROP_EVENT     QEvent::Type(QEvent::User + 8)
 #endif
 
 
-// Time dashes format helper.
+// Time dashes format helper.^
 static const char *c_szTimeDashes = "--:--:--.---";
 
 
@@ -147,8 +148,12 @@ static const char *c_szTimeDashes = "--:--:--.---";
 // qjackctl -- Static callback posters.
 
 // To have clue about current buffer size (in frames).
-static jack_nframes_t g_nframes = 0;
+static jack_nframes_t g_buffsize = 0;
 
+// Current freewheel running state.
+static int g_freewheel = 0;
+
+// Current server error state.
 static QProcess::ProcessError g_error = QProcess::UnknownError;
 
 
@@ -224,18 +229,32 @@ static int qjackctl_xrun_callback ( void * )
 	return 0;
 }
 
+
 // Jack buffer size function, called
 // whenever the server changes buffer size.
 static int qjackctl_buffer_size_callback ( jack_nframes_t nframes, void * )
 {
 	// Update our global static variable.
-	g_nframes = nframes;
+	g_buffsize = nframes;
 
 	QApplication::postEvent(
 		qjackctlMainForm::getInstance(),
 		new QEvent(QJACKCTL_BUFF_EVENT));
 
 	return 0;
+}
+
+
+// Jack freewheel callback function, called
+// whenever the server enters/exits freewheel mode.
+static void qjackctl_freewheel_callback ( int starting, void * )
+{
+	// Update our global static variable.
+	g_freewheel = starting;
+
+	QApplication::postEvent(
+		qjackctlMainForm::getInstance(),
+		new QEvent(QJACKCTL_FREE_EVENT));
 }
 
 
@@ -1017,6 +1036,9 @@ void qjackctlMainForm::customEvent ( QEvent *pEvent )
 		break;
 	case QJACKCTL_BUFF_EVENT:
 		buffNotifyEvent();
+		break;
+	case QJACKCTL_FREE_EVENT:
+		freeNotifyEvent();
 		break;
 	case QJACKCTL_SHUT_EVENT:
 		shutNotifyEvent();
@@ -2444,7 +2466,7 @@ void qjackctlMainForm::buffNotifyEvent (void)
 	// Don't need to nothing, it was handled on qjackctl_buffer_size_callback;
 	// just log this event as routine.
 	appendMessagesColor(tr("Buffer size change (%1).")
-		.arg((int) g_nframes), "#996633");
+		.arg((int) g_buffsize), "#996633");
 }
 
 
@@ -2458,6 +2480,16 @@ void qjackctlMainForm::shutNotifyEvent (void)
 	// m_pJackClient = NULL;
 	// Do what has to be done.
 	stopJackServer();
+}
+
+
+// Jack freewheel event notifier.
+void qjackctlMainForm::freeNotifyEvent (void)
+{
+	// Log this event.
+	appendMessagesColor(g_freewheel
+		? tr("Freewheel started...")
+		: tr("Freewheel exited."), "#996633");
 }
 
 
@@ -2549,7 +2581,7 @@ void qjackctlMainForm::timerSlot (void)
 	}
 
 	// Is the connection patchbay dirty enough?
-	if (m_pConnectionsForm) {
+	if (m_pConnectionsForm && !g_freewheel) {
 		const QString sEllipsis = "...";
 		// Are we about to enforce an audio connections persistence profile?
 		if (m_iJackDirty > 0) {
@@ -2856,6 +2888,8 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		qjackctl_xrun_callback, this);
 	jack_set_buffer_size_callback(m_pJackClient,
 		qjackctl_buffer_size_callback, this);
+	jack_set_freewheel_callback(m_pJackClient,
+		qjackctl_freewheel_callback, this);
 	jack_on_shutdown(m_pJackClient,
 		qjackctl_on_shutdown, this);
 #ifdef CONFIG_JACK_METADATA
@@ -2864,7 +2898,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 #endif
 
 	// First knowledge about buffer size.
-	g_nframes = jack_get_buffer_size(m_pJackClient);
+	g_buffsize = jack_get_buffer_size(m_pJackClient);
+
+	// Sure we're not freewheeling at this point...
+	g_freewheel = 0;
 
 	// Reconstruct our connections and session...
 	if (m_pConnectionsForm) {
@@ -3354,7 +3391,7 @@ void qjackctlMainForm::refreshStatus (void)
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
 		}
-	#endif  // !CONFIG_JACK_TRANSPORT
+	#endif // !CONFIG_JACK_TRANSPORT
 		// Less frequent status items update...
 		if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 			m_iStatusRefresh = 0;
@@ -3374,13 +3411,13 @@ void qjackctlMainForm::refreshStatus (void)
 						.arg(m_iXrunCount));
 				}
 			}
-		#endif
+		#endif // !CONFIG_SYSTEM_TRAY
 			updateStatusItem(STATUS_DSP_LOAD,
 				tr("%1 %").arg(fDspLoad, 0, f, p));
 			updateStatusItem(STATUS_SAMPLE_RATE,
 				tr("%1 Hz").arg(jack_get_sample_rate(m_pJackClient)));
 			updateStatusItem(STATUS_BUFFER_SIZE,
-				tr("%1 frames").arg(g_nframes));
+				tr("%1 frames").arg(g_buffsize));
 			// Blink server mode indicator?...
 			if (m_pSetup && m_pSetup->bDisplayBlink) {
 				QPalette pal;
@@ -3392,11 +3429,17 @@ void qjackctlMainForm::refreshStatus (void)
 			const bool bRealtime = jack_is_realtime(m_pJackClient);
 			updateStatusItem(STATUS_REALTIME,
 				(bRealtime ? tr("Yes") : tr("No")));
-			m_ui.ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
 		#else
 			updateStatusItem(STATUS_REALTIME, n);
+		#endif // !CONFIG_JACK_REALTIME
+			if (g_freewheel)
+				m_ui.ServerModeTextLabel->setText(tr("FW"));
+			else
+		#ifdef CONFIG_JACK_REALTIME
+			m_ui.ServerModeTextLabel->setText(bRealtime ? tr("RT") : n);
+		#else
 			m_ui.ServerModeTextLabel->setText(n);
-		#endif  // !CONFIG_JACK_REALTIME
+		#endif // !CONFIG_JACK_REALTIME
 		#ifdef CONFIG_JACK_TRANSPORT
 			switch (tstate) {
 			case JackTransportStarting:
@@ -3434,11 +3477,11 @@ void qjackctlMainForm::refreshStatus (void)
 			updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
-		#endif  // !CONFIG_JACK_TRANSPORT
+		#endif // !CONFIG_JACK_TRANSPORT
 		#ifdef CONFIG_JACK_MAX_DELAY
 			updateStatusItem(STATUS_MAX_DELAY, tr("%1 msec")
 				.arg(0.001f * jack_get_max_delayed_usecs(m_pJackClient)));
-		#endif
+		#endif // !CONFIG_JACK_MAX_DELAY
 			// Check if we're have some XRUNs to report...
 			if (m_iXrunSkips > 0) {
 				// Maybe we've skipped some...
@@ -3463,8 +3506,8 @@ void qjackctlMainForm::refreshStatus (void)
 				m_pSystemTray->setBackground(color);
 			}
 		}
-	#endif
-	}   // No need to update often if we're just idle...
+	#endif // !CONFIG_SYSTEM_TRAY
+	} // No need to update often if we're just idle...
 	else if (m_iStatusRefresh >= QJACKCTL_STATUS_CYCLE) {
 		m_iStatusRefresh = 0;
 		updateStatusItem(STATUS_DSP_LOAD, n);

@@ -1,7 +1,7 @@
 // qjackctlMainForm.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -223,6 +223,7 @@ protected:
 	void xrunNotifyEvent();
 	void buffNotifyEvent();
 	void shutNotifyEvent();
+	void freeNotifyEvent();
 	void exitNotifyEvent();
 #ifdef CONFIG_JACK_METADATA
 	void propNotifyEvent();
