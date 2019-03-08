@@ -1345,12 +1345,12 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2491"/>
         <source>Freewheel started...</source>
-        <translation type="unfinished"></translation>
+        <translation>Roue libre démarrée…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2492"/>
         <source>Freewheel exited.</source>
-        <translation type="unfinished"></translation>
+        <translation>Roue libre quittée.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2678"/>
@@ -1464,7 +1464,7 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3436"/>
         <source>FW</source>
-        <translation type="unfinished"></translation>
+        <translation>RL</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3439"/>
