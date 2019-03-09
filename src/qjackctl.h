@@ -44,12 +44,10 @@ class QTranslator;
 #ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
 
-#include <unistd.h> /* for gethostname() */
-
 #include <QX11Info>
 
-#include <X11/Xatom.h>
-#include <X11/Xlib.h>
+typedef unsigned long Window;
+typedef unsigned long Atom;
 
 #if QT_VERSION >= 0x050100
 class qjackctlXcbEventFilter;

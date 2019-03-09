@@ -54,6 +54,11 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #define QJACKCTL_XUNIQUE "qjackctlApplication"
 
+#include <unistd.h> /* for gethostname() */
+
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+
 #if QT_VERSION >= 0x050100
 
 #include <xcb/xcb.h>
@@ -197,61 +202,63 @@ bool qjackctlApplication::setup ( const QString& sServerName )
 		return false;
 #endif
 	m_pDisplay = QX11Info::display();
-	QString sUnique = QJACKCTL_XUNIQUE;
-	if (sServerName.isEmpty()) {
-		const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
-		if (pszServerName && ::strcmp("default", pszServerName)) {
+	if (m_pDisplay) {
+		QString sUnique = QJACKCTL_XUNIQUE;
+		if (sServerName.isEmpty()) {
+			const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
+			if (pszServerName && ::strcmp("default", pszServerName)) {
+				sUnique += '_';
+				sUnique += QString::fromUtf8(pszServerName);
+			}
+		} else {
 			sUnique += '_';
-			sUnique += QString::fromUtf8(pszServerName);
+			sUnique += sServerName;
 		}
-	} else {
-		sUnique += '_';
-		sUnique += sServerName;
-	}
-	char szHostName[255];
-	if (::gethostname(szHostName, sizeof(szHostName)) == 0) {
-		sUnique += '@';
-		sUnique += szHostName;
-	}
-	m_aUnique = XInternAtom(m_pDisplay, sUnique.toUtf8().constData(), false);
-	XGrabServer(m_pDisplay);
-	m_wOwner = XGetSelectionOwner(m_pDisplay, m_aUnique);
-	XUngrabServer(m_pDisplay);
-	if (m_wOwner != None) {
-		// First, notify any freedesktop.org WM
-		// that we're about to show the main widget...
-		Screen *pScreen = XDefaultScreenOfDisplay(m_pDisplay);
-		int iScreen = XScreenNumberOfScreen(pScreen);
-		XEvent ev;
-		memset(&ev, 0, sizeof(ev));
-		ev.xclient.type = ClientMessage;
-		ev.xclient.display = m_pDisplay;
-		ev.xclient.window = m_wOwner;
-		ev.xclient.message_type = XInternAtom(m_pDisplay, "_NET_ACTIVE_WINDOW", false);
-		ev.xclient.format = 32;
-		ev.xclient.data.l[0] = 0; // Source indication.
-		ev.xclient.data.l[1] = 0; // Timestamp.
-		ev.xclient.data.l[2] = 0; // Requestor's currently active window (none)
-		ev.xclient.data.l[3] = 0;
-		ev.xclient.data.l[4] = 0;
-		XSelectInput(m_pDisplay, m_wOwner, StructureNotifyMask);
-		XSendEvent(m_pDisplay, RootWindow(m_pDisplay, iScreen), false,
-			(SubstructureNotifyMask | SubstructureRedirectMask), &ev);
-		XSync(m_pDisplay, false);
-		XRaiseWindow(m_pDisplay, m_wOwner);
-		// And then, let it get caught on destination
-		// by QApplication::native/x11EventFilter...
-		const QByteArray value = QJACKCTL_XUNIQUE;
-		XChangeProperty(
-			m_pDisplay,
-			m_wOwner,
-			m_aUnique,
-			m_aUnique, 8,
-			PropModeReplace,
-			(unsigned char *) value.data(),
-			value.length());
-		// Done.
-		return true;
+		char szHostName[255];
+		if (::gethostname(szHostName, sizeof(szHostName)) == 0) {
+			sUnique += '@';
+			sUnique += szHostName;
+		}
+		m_aUnique = XInternAtom(m_pDisplay, sUnique.toUtf8().constData(), false);
+		XGrabServer(m_pDisplay);
+		m_wOwner = XGetSelectionOwner(m_pDisplay, m_aUnique);
+		XUngrabServer(m_pDisplay);
+		if (m_wOwner != None) {
+			// First, notify any freedesktop.org WM
+			// that we're about to show the main widget...
+			Screen *pScreen = XDefaultScreenOfDisplay(m_pDisplay);
+			int iScreen = XScreenNumberOfScreen(pScreen);
+			XEvent ev;
+			memset(&ev, 0, sizeof(ev));
+			ev.xclient.type = ClientMessage;
+			ev.xclient.display = m_pDisplay;
+			ev.xclient.window = m_wOwner;
+			ev.xclient.message_type = XInternAtom(m_pDisplay, "_NET_ACTIVE_WINDOW", false);
+			ev.xclient.format = 32;
+			ev.xclient.data.l[0] = 0; // Source indication.
+			ev.xclient.data.l[1] = 0; // Timestamp.
+			ev.xclient.data.l[2] = 0; // Requestor's currently active window (none)
+			ev.xclient.data.l[3] = 0;
+			ev.xclient.data.l[4] = 0;
+			XSelectInput(m_pDisplay, m_wOwner, StructureNotifyMask);
+			XSendEvent(m_pDisplay, RootWindow(m_pDisplay, iScreen), false,
+				(SubstructureNotifyMask | SubstructureRedirectMask), &ev);
+			XSync(m_pDisplay, false);
+			XRaiseWindow(m_pDisplay, m_wOwner);
+			// And then, let it get caught on destination
+			// by QApplication::native/x11EventFilter...
+			const QByteArray value = QJACKCTL_XUNIQUE;
+			XChangeProperty(
+				m_pDisplay,
+				m_wOwner,
+				m_aUnique,
+				m_aUnique, 8,
+				PropModeReplace,
+				(unsigned char *) value.data(),
+				value.length());
+			// Done.
+			return true;
+		}
 	}
 #endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
