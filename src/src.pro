@@ -10,6 +10,7 @@ include(src.pri)
 #DEFINES += DEBUG
 
 HEADERS += config.h \
+	qjackctl.h \
 	qjackctlAbout.h \
 	qjackctlAlsaConnect.h \
 	qjackctlAlsaGraph.h \

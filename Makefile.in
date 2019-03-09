@@ -6,6 +6,7 @@ target  = src/$(name)
 
 headers = \
 	src/config.h \
+	src/qjackctl.h \
 	src/qjackctlAbout.h \
 	src/qjackctlAlsaConnect.h \
 	src/qjackctlAlsaGraph.h \
