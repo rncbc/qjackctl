@@ -5,6 +5,9 @@ ChangeLog
 
 GIT HEAD
 
+- Refactored all singleton/unique application instance
+  setup logic away from X11/Xcb hackery. (EXPERIMENTAL)
+
 - At last, JACK freewheel mode is now being detected
   as to postpone any active patchbay scans as much as
   possible. (EXPERIMENTAL)

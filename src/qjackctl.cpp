@@ -49,54 +49,24 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 // Singleton application instance stuff (Qt/X11 only atm.)
 //
 
-#ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
 
 #define QJACKCTL_XUNIQUE "qjackctlApplication"
 
+#if QT_VERSION < 0x050000
+#ifdef CONFIG_X11
 #include <unistd.h> /* for gethostname() */
-
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
-
-#if QT_VERSION >= 0x050100
-
-#include <xcb/xcb.h>
-#include <xcb/xproto.h>
-
-#include <QAbstractNativeEventFilter>
-
-class qjackctlXcbEventFilter : public QAbstractNativeEventFilter
-{
-public:
-
-	// Constructor.
-	qjackctlXcbEventFilter(qjackctlApplication *pApp)
-		: QAbstractNativeEventFilter(), m_pApp(pApp) {}
-
-	// XCB event filter (virtual processor).
-	bool nativeEventFilter(const QByteArray& eventType, void *message, long *)
-	{
-		if (eventType == "xcb_generic_event_t") {
-			xcb_property_notify_event_t *pEv
-				= static_cast<xcb_property_notify_event_t *> (message);
-			if ((pEv->response_type & ~0x80) == XCB_PROPERTY_NOTIFY
-				&& pEv->state == XCB_PROPERTY_NEW_VALUE)
-				m_pApp->x11PropertyNotify(pEv->window);
-		}
-		return false;
-	}
-
-private:
-
-	// Instance variable.
-	qjackctlApplication *m_pApp;
-};
-
+#endif	// CONFIG_X11
+#else
+#include <QSharedMemory>
+#include <QLocalServer>
+#include <QLocalSocket>
+#include <QHostInfo>
 #endif
 
 #endif	// CONFIG_XUNIQUE
-#endif	// CONFIG_X11
 
 
 // Constructor.
@@ -144,31 +114,37 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 			}
 		}
 	}
-#ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
+#if QT_VERSION < 0x050000
+#ifdef CONFIG_X11
 	m_pDisplay = NULL;
 	m_aUnique = 0;
 	m_wOwner = 0;
-#if QT_VERSION >= 0x050100
-	m_pXcbEventFilter = new qjackctlXcbEventFilter(this);
-	installNativeEventFilter(m_pXcbEventFilter);
+#endif	// CONFIG_X11
+#else
+	m_pMemory = NULL;
+	m_pServer = NULL;
 #endif
 #endif	// CONFIG_XUNIQUE
-#endif	// CONFIG_X11
 }
 
 
 // Destructor.
 qjackctlApplication::~qjackctlApplication (void)
 {
-#ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
-#if QT_VERSION >= 0x050100
-	removeNativeEventFilter(m_pXcbEventFilter);
-	delete m_pXcbEventFilter;
+#if QT_VERSION >= 0x050000
+	if (m_pServer) {
+		m_pServer->close();
+		delete m_pServer;
+		m_pServer = NULL;
+	}
+	if (m_pMemory) {
+		delete m_pMemory;
+		m_pMemory = NULL;
+	}
 #endif
 #endif	// CONFIG_XUNIQUE
-#endif	// CONFIG_X11
 	if (m_pMyTranslator) delete m_pMyTranslator;
 	if (m_pQtTranslator) delete m_pQtTranslator;
 }
@@ -178,16 +154,18 @@ qjackctlApplication::~qjackctlApplication (void)
 void qjackctlApplication::setMainWidget ( QWidget *pWidget )
 {
 	m_pWidget = pWidget;
-#ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
+#if QT_VERSION < 0x050000
+#ifdef CONFIG_X11
 	m_wOwner = m_pWidget->winId();
 	if (m_pDisplay && m_wOwner) {
 		XGrabServer(m_pDisplay);
 		XSetSelectionOwner(m_pDisplay, m_aUnique, m_wOwner, CurrentTime);
 		XUngrabServer(m_pDisplay);
 	}
-#endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
+#endif
+#endif	// CONFIG_XUNIQUE
 }
 
 
@@ -195,12 +173,11 @@ void qjackctlApplication::setMainWidget ( QWidget *pWidget )
 // and raise its proper main widget...
 bool qjackctlApplication::setup ( const QString& sServerName )
 {
-#ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
-#if QT_VERSION >= 0x050100
+#if QT_VERSION < 0x050000
+#ifdef CONFIG_X11
 	if (!QX11Info::isPlatformX11())
 		return false;
-#endif
 	m_pDisplay = QX11Info::display();
 	if (m_pDisplay) {
 		QString sUnique = QJACKCTL_XUNIQUE;
@@ -260,14 +237,71 @@ bool qjackctlApplication::setup ( const QString& sServerName )
 			return true;
 		}
 	}
-#endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
 	return false;
+#else
+	m_sUnique = QCoreApplication::applicationName();
+	if (!sServerName.isEmpty()) {
+		m_sUnique += '-';
+		m_sUnique += sServerName;
+	}
+	m_sUnique += '@';
+	m_sUnique += QHostInfo::localHostName();
+#ifdef Q_OS_UNIX
+	m_pMemory = new QSharedMemory(m_sUnique);
+	m_pMemory->attach();
+	delete m_pMemory;
+#endif
+	m_pMemory = new QSharedMemory(m_sUnique);
+	bool bServer = false;
+	const qint64 pid = QCoreApplication::applicationPid();
+	struct Data { qint64 pid; };
+	if (m_pMemory->create(sizeof(Data))) {
+		m_pMemory->lock();
+		Data *pData = static_cast<Data *> (m_pMemory->data());
+		if (pData) {
+			pData->pid = pid;
+			bServer = true;
+		}
+		m_pMemory->unlock();
+	}
+	else
+	if (m_pMemory->attach()) {
+		m_pMemory->lock(); // maybe not necessary?
+		Data *pData = static_cast<Data *> (m_pMemory->data());
+		if (pData)
+			bServer = (pData->pid == pid);
+		m_pMemory->unlock();
+	}
+	if (bServer) {
+		QLocalServer::removeServer(m_sUnique);
+		m_pServer = new QLocalServer();
+		m_pServer->setSocketOptions(QLocalServer::UserAccessOption);
+		m_pServer->listen(m_sUnique);
+		QObject::connect(m_pServer,
+			SIGNAL(newConnection()),
+			SLOT(newConnectionSlot()));
+	} else {
+		QLocalSocket socket;
+		socket.connectToServer(m_sUnique);
+		if (socket.state() == QLocalSocket::ConnectingState)
+			socket.waitForConnected(200);
+		if (socket.state() == QLocalSocket::ConnectedState) {
+			socket.write(QCoreApplication::arguments().join(' ').toUtf8());
+			socket.flush();
+			socket.waitForBytesWritten(200);
+		}
+	}
+	return !bServer;
+#endif
+#endif	// CONFIG_XUNIQUE
 }
 
 
-#ifdef CONFIG_X11
 #ifdef CONFIG_XUNIQUE
+#if QT_VERSION < 0x050000
+#ifdef CONFIG_X11
+
 void qjackctlApplication::x11PropertyNotify ( Window w )
 {
 	if (m_pDisplay && m_pWidget && m_wOwner == w) {
@@ -308,7 +342,6 @@ void qjackctlApplication::x11PropertyNotify ( Window w )
 	}
 }
 
-#if QT_VERSION < 0x050000
 bool qjackctlApplication::x11EventFilter ( XEvent *pEv )
 {
 	if (pEv->type == PropertyNotify
@@ -316,10 +349,43 @@ bool qjackctlApplication::x11EventFilter ( XEvent *pEv )
 		x11PropertyNotify(pEv->xproperty.window);
 	return QApplication::x11EventFilter(pEv);
 }
-#endif
 
-#endif	// CONFIG_XUNIQUE
 #endif	// CONFIG_X11
+#else
+
+// Local server conection slot.
+void qjackctlApplication::newConnectionSlot (void)
+{
+	QLocalSocket *pSocket = m_pServer->nextPendingConnection();
+	QObject::connect(pSocket,
+		SIGNAL(readyRead()),
+		SLOT(readyReadSlot()));
+}
+
+// Local server data-ready slot.
+void qjackctlApplication::readyReadSlot (void)
+{
+	QLocalSocket *pSocket = qobject_cast<QLocalSocket *> (sender());
+	if (pSocket) {
+		const qint64 nread = pSocket->bytesAvailable();
+		if (nread > 0) {
+			QByteArray data = pSocket->read(nread);
+			// Just make it always shows up fine...
+			m_pWidget->hide();
+			m_pWidget->show();
+			m_pWidget->raise();
+			m_pWidget->activateWindow();
+			// FIXME: Do our best speciality, although it should be
+			// done iif configuration says so, we'll do it anyway!
+			qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+			if (pMainForm)
+				pMainForm->startJack();
+		}
+	}
+}
+
+#endif
+#endif	// CONFIG_XUNIQUE
 
 
 //-------------------------------------------------------------------------
