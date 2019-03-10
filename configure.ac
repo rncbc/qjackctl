@@ -576,7 +576,7 @@ echo "  D-Bus interface support  . . . . . . . . . . . . .: $ac_dbus"
 echo "  PortAudio interface support  . . . . . . . . . . .: $ac_portaudio"
 echo "  CoreAudio interface support  . . . . . . . . . . .: $ac_coreaudio"
 echo
-echo "  X11 Unique/Single instance . . . . . . . . . . . .: $ac_xunique"
+echo "  Unique/Single instance support . . . . . . . . . .: $ac_xunique"
 echo "  Debugger stack-trace (gdb) . . . . . . . . . . . .: $ac_stacktrace"
 echo
 echo "  Install prefix . . . . . . . . . . . . . . . . . .: $ac_prefix"
