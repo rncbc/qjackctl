@@ -451,16 +451,13 @@ if test "x$ac_dbus" = "xyes"; then
 fi
 AC_SUBST(ac_qdbus)
 
-# Check for unique/single instance.
+# Check for unique/single instance support.
 if test "x$ac_xunique" = "xyes"; then
    PKG_CHECK_MODULES([QT5NETWORK], [Qt5Network], [ac_qt5network="yes"], [ac_qt5network="no"])
-fi
-if test "x$ac_qt5network" = "xyes"; then
-   if test "x$ac_xunique" = "xyes"; then
+   if test "x$ac_qt5network" = "xyes"; then
       AC_DEFINE(CONFIG_XUNIQUE, 1, [Define if unique/single instance is enabled.])
+      ac_qnetwork="network"
    fi
-   ac_qnetwork="network"
-   # Some recent distros (eg. fedora, debian) require this.
 fi
 AC_SUBST(ac_qnetwork)
 

@@ -86,6 +86,7 @@ public:
 #ifdef CONFIG_XUNIQUE
 #ifdef CONFIG_X11
 	void x11PropertyNotify(Window w);
+	bool x11EventFilter(XEvent *pEv)
 #endif	// CONFIG_X11
 #endif	// CONFIG_XUNIQUE
 #else

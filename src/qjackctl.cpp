@@ -176,8 +176,6 @@ bool qjackctlApplication::setup ( const QString& sServerName )
 #ifdef CONFIG_XUNIQUE
 #if QT_VERSION < 0x050000
 #ifdef CONFIG_X11
-	if (!QX11Info::isPlatformX11())
-		return false;
 	m_pDisplay = QX11Info::display();
 	if (m_pDisplay) {
 		QString sUnique = QJACKCTL_XUNIQUE;
@@ -294,7 +292,9 @@ bool qjackctlApplication::setup ( const QString& sServerName )
 	}
 	return !bServer;
 #endif
-#endif	// CONFIG_XUNIQUE
+#else
+	return false;
+#endif	// !CONFIG_XUNIQUE
 }
 
 
