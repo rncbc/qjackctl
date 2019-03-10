@@ -479,12 +479,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="91"/>
         <source>Co&amp;lors</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Barvy</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="104"/>
         <source>S&amp;ort</source>
-        <translation type="unfinished"></translation>
+        <translation>Ř&amp;adit</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="129"/>
@@ -789,133 +789,133 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="496"/>
         <source>JACK &amp;Audio...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;Audio...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="499"/>
         <location filename="../qjackctlGraphForm.ui" line="502"/>
         <location filename="../qjackctlGraphForm.ui" line="505"/>
         <source>JACK Audio color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva JACK Audio</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="513"/>
         <source>JACK &amp;MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;MIDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="516"/>
         <source>JACK MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="519"/>
         <location filename="../qjackctlGraphForm.ui" line="522"/>
         <source>JACK MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva JACK MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="530"/>
         <source>&amp;ALSA MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ALSA MIDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="533"/>
         <source>ALSA MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="536"/>
         <location filename="../qjackctlGraphForm.ui" line="539"/>
         <source>ALSA MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva ALSA MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="547"/>
         <source>&amp;Reset</source>
-        <translation type="unfinished">&amp;Nastavit znovu</translation>
+        <translation>&amp;Obnovit výchozí</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="550"/>
         <location filename="../qjackctlGraphForm.ui" line="553"/>
         <location filename="../qjackctlGraphForm.ui" line="556"/>
         <source>Reset colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit výchozí barvy</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="567"/>
         <source>Port &amp;Name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Název přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="570"/>
         <source>Port name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="573"/>
         <source>Sort by port name</source>
-        <translation type="unfinished"></translation>
+        <translation>Řadit podle názvu přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="584"/>
         <source>Port &amp;Title</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Titulek přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="587"/>
         <source>Port title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titulek přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="590"/>
         <source>Sort by port title</source>
-        <translation type="unfinished"></translation>
+        <translation>Řadit podle titulku přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="601"/>
         <source>Port &amp;Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Čí&amp;slo přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="604"/>
         <source>Port index</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="607"/>
         <source>Sort by port index</source>
-        <translation type="unfinished"></translation>
+        <translation>Řadit podle čísla přípojky (port)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="618"/>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vzestupně</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="621"/>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzestupně</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="624"/>
         <source>Ascending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzestupné pořadí řazení</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="635"/>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sestupně</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="638"/>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestupně</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="641"/>
         <source>Descending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestupné pořadí řazení</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="649"/>
@@ -990,7 +990,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="448"/>
         <source>Colors - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Barvy - %1</translation>
     </message>
 </context>
 <context>
@@ -1402,7 +1402,7 @@ Promiňte</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1983"/>
         <source>Elapsed time since last reset</source>
-        <translation>Čas uplynulý od posledního znovunastavení</translation>
+        <translation>Čas uplynulý od posledního obnovení výchozího nastavení</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1986"/>
@@ -1422,7 +1422,7 @@ Promiňte</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2278"/>
         <source>Statistics reset.</source>
-        <translation>Nastavit znovu statistiku.</translation>
+        <translation>Obnovení vychozího nastavení statistiky.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2414"/>
@@ -1586,12 +1586,12 @@ Zakázáno.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2491"/>
         <source>Freewheel started...</source>
-        <translation type="unfinished"></translation>
+        <translation>Volnoběh spuštěn...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2492"/>
         <source>Freewheel exited.</source>
-        <translation type="unfinished"></translation>
+        <translation>Volnoběh ukončen.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2537"/>
@@ -1778,7 +1778,7 @@ Další informace hledejte, prosím, v okně s hlášením.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3436"/>
         <source>FW</source>
-        <translation type="unfinished"></translation>
+        <translation>FW</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3439"/>
@@ -1855,7 +1855,7 @@ Další informace hledejte, prosím, v okně s hlášením.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3745"/>
         <source>&amp;Reset</source>
-        <translation>&amp;Nastavit znovu</translation>
+        <translation>&amp;Obnovit výchozí</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3751"/>
@@ -2020,12 +2020,12 @@ když příště spustíte tento program.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="146"/>
         <source>Reset XRUN statistic values</source>
-        <translation>Nastavit znovu údaje ve statistice XRUN</translation>
+        <translation>Obnovit výchozí hodnoty údajů ve statistice XRUN</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="149"/>
         <source>Re&amp;set</source>
-        <translation>&amp;Nastavit znovu</translation>
+        <translation>&amp;Obnovit výchozí</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="175"/>
@@ -2130,7 +2130,7 @@ když příště spustíte tento program.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="127"/>
         <source>Time of last reset</source>
-        <translation>Čas posledního znovunastavení</translation>
+        <translation>Čas od posledního obnovení výchozího nastavení</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="229"/>
@@ -3648,12 +3648,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="637"/>
         <source>Whether to use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Zda použít synchronizační režim serveru</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="640"/>
         <source>&amp;Use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Použít synchronizační režim serveru</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="746"/>
@@ -3718,7 +3718,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2707"/>
         <source>Elapsed time since last &amp;Reset</source>
-        <translation>Čas uplynulý od posledního &amp;znovunastavení</translation>
+        <translation>Čas uplynulý od posledního &amp;obnovení výchozího nastavení</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2720"/>
