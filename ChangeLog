@@ -3,18 +3,19 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-GIT HEAD
+
+0.5.6  2019-03-11  Pre-LAC2019 Release Frenzy.
 
 - Refactored all singleton/unique application instance
-  setup logic away from X11/Xcb hackery. (EXPERIMENTAL)
+  setup logic away from X11/Xcb hackery.
 
 - At last, JACK freewheel mode is now being detected
   as to postpone any active patchbay scans as much as
-  possible. (EXPERIMENTAL)
+  possible.
   
 - Removed old pre-FFADO 'freebob' driver support.
 
-- HiDPI display screen support (Qt >= 5.6). (EXPERIMENTAL)
+- HiDPI display screen support (Qt >= 5.6).
 
 - Graph port temporary highlighting while hovering,
   if and only if connecting ports of same type and

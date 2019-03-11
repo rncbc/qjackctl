@@ -1,3 +1,9 @@
+qjackctl (0.5.6-35) unstable; urgency=low
+
+  * Pre-LAC2019 release frenzy.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Mon, 11 Mar 2019 19:00:00 +0000
+
 qjackctl (0.5.5-34) unstable; urgency=low
 
   * Black-Friday'18 release.
