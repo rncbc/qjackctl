@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Post-LAC2019 development cycle started (towards v0.5.7)...
+
+
 0.5.6  2019-03-11  Pre-LAC2019 Release Frenzy.
 
 - Refactored all singleton/unique application instance
