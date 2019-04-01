@@ -517,9 +517,15 @@ public:
 	void addItem(qjackctlGraphItem *item);
 	void removeItem(qjackctlGraphItem *item);
 
+	// Current item accessor.
+	qjackctlGraphItem *currentItem() const;
+
 	// Connection predicates.
 	bool canConnect() const;
 	bool canDisconnect() const;
+
+	// Edit predicates.
+	bool canRenameItem() const;
 
 	// Zooming methods.
 	void setZoom(qreal zoom);
@@ -573,6 +579,9 @@ public slots:
 	void selectAll();
 	void selectNone();
 	void selectInvert();
+
+	// Edit actions.
+	void renameItem();
 
 	// Discrete zooming actions.
 	void zoomIn();

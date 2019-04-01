@@ -1241,6 +1241,22 @@ void qjackctlGraphCanvas::removeItem ( qjackctlGraphItem *item )
 }
 
 
+// Current item accessor.
+qjackctlGraphItem *qjackctlGraphCanvas::currentItem (void) const
+{
+	qjackctlGraphItem *item = m_item;
+
+	if (item == NULL) {
+		const QList<QGraphicsItem *>& list
+			= m_scene->selectedItems();
+		if (!list.isEmpty())
+			item = static_cast<qjackctlGraphItem *> (list.first());
+	}
+
+	return item;
+}
+
+
 // Connection predicates.
 bool qjackctlGraphCanvas::canConnect (void) const
 {
@@ -1285,6 +1301,14 @@ bool qjackctlGraphCanvas::canDisconnect (void) const
 	}
 
 	return false;
+}
+
+
+// Edit predicates.
+bool qjackctlGraphCanvas::canRenameItem (void) const
+{
+	qjackctlGraphItem *item = currentItem();
+	return (item && item->type() == qjackctlGraphPort::Type);
 }
 
 
@@ -1422,15 +1446,14 @@ void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 {
 	m_state = DragNone;
 	m_item = NULL;
+	m_pos = QGraphicsView::mapToScene(event->pos());
 
-	if (event->button() == Qt::LeftButton) {
+	qjackctlGraphItem *item = itemAt(m_pos);
+	if (item && item->type() >= QGraphicsItem::UserType)
+		m_item = static_cast<qjackctlGraphItem *> (item);
+
+	if (event->button() == Qt::LeftButton)
 		m_state = DragStart;
-		m_pos = QGraphicsView::mapToScene(event->pos());
-		qjackctlGraphItem *item = itemAt(m_pos);
-		if (item && item->type() >= QGraphicsItem::UserType) {
-			m_item = static_cast<qjackctlGraphItem *> (item);
-		}
-	}
 
 	if (m_state == DragStart && m_item == NULL
 		&& (event->modifiers() & Qt::ControlModifier)
@@ -1840,6 +1863,19 @@ void qjackctlGraphCanvas::selectInvert (void)
 	}
 
 	emit changed();
+}
+
+
+// Edit actions.
+void qjackctlGraphCanvas::renameItem (void)
+{
+	qjackctlGraphItem *item = currentItem();
+	if (item && item->type() == qjackctlGraphPort::Type) {
+		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+		if (port) {
+			// TODO: edit/rename port...
+		}
+	}
 }
 
 

@@ -1,7 +1,7 @@
 // qjackctlGraphForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -72,14 +72,14 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QUndoStack *commands = m_ui.graphCanvas->commands();
 
 	QAction *undo_action = commands->createUndoAction(this, tr("&Undo"));
-    undo_action->setIcon(QIcon(":/images/graphUndo.png"));
-    undo_action->setStatusTip(tr("Undo last (dis)connection"));
-    undo_action->setShortcuts(QKeySequence::Undo);
+	undo_action->setIcon(QIcon(":/images/graphUndo.png"));
+	undo_action->setStatusTip(tr("Undo last (dis)connection"));
+	undo_action->setShortcuts(QKeySequence::Undo);
 
 	QAction *redo_action = commands->createRedoAction(this, tr("&Redo"));
-    redo_action->setIcon(QIcon(":/images/graphRedo.png"));
-    redo_action->setStatusTip(tr("Redo last (dis)connection"));
-    redo_action->setShortcuts(QKeySequence::Redo);
+	redo_action->setIcon(QIcon(":/images/graphRedo.png"));
+	redo_action->setStatusTip(tr("Redo last (dis)connection"));
+	redo_action->setShortcuts(QKeySequence::Redo);
 
 	QAction *before_action = m_ui.editSelectAllAction;
 	m_ui.editMenu->insertAction(before_action, undo_action);
@@ -178,6 +178,10 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QObject::connect(m_ui.editSelectInvertAction,
 		SIGNAL(triggered(bool)),
 		m_ui.graphCanvas, SLOT(selectInvert()));
+
+	QObject::connect(m_ui.editRenameItemAction,
+		SIGNAL(triggered(bool)),
+		m_ui.graphCanvas, SLOT(renameItem()));
 
 	QObject::connect(m_ui.viewMenubarAction,
 		SIGNAL(triggered(bool)),
@@ -687,6 +691,8 @@ void qjackctlGraphForm::stabilize (void)
 
 	m_ui.editSelectNoneAction->setEnabled(
 		!canvas->scene()->selectedItems().isEmpty());
+	m_ui.editRenameItemAction->setEnabled(
+		canvas->canRenameItem());
 
 #if 0
 	const QRectF& outter_rect
@@ -732,6 +738,8 @@ void qjackctlGraphForm::orientationChanged ( Qt::Orientation orientation )
 // Context-menu event handler.
 void qjackctlGraphForm::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
+	stabilize();
+
 	QMenu menu(this);
 	menu.addAction(m_ui.graphConnectAction);
 	menu.addAction(m_ui.graphDisconnectAction);
