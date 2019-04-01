@@ -154,6 +154,7 @@ protected slots:
 	void jackStabilize();
 
 	void stdoutNotifySlot(int);
+	void sigtermNotifySlot(int);
 	void alsaNotifySlot(int);
 
 	void timerSlot();
@@ -322,6 +323,7 @@ private:
 #endif
 
 	QSocketNotifier *m_pStdoutNotifier;
+	QSocketNotifier *m_pSigtermNotifier;
 	QSocketNotifier *m_pAlsaNotifier;
 
 	int   m_iXrunCallbacks;

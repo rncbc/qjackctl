@@ -118,10 +118,6 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 #include <poll.h>
 #endif
 
-#ifdef HAVE_SIGNAL_H
-#include <signal.h>
-#endif
-
 
 // Custom event types.
 #define QJACKCTL_PORT_EVENT     QEvent::Type(QEvent::User + 1)
@@ -142,6 +138,30 @@ static int g_fdStdout[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
 // Time dashes format helper.^
 static const char *c_szTimeDashes = "--:--:--.---";
+
+
+//-------------------------------------------------------------------------
+// UNIX Signal handling support stuff.
+
+#ifdef HAVE_SIGNAL_H
+
+#include <sys/types.h>
+#include <sys/socket.h>
+
+#include <signal.h>
+
+// File descriptor for SIGTERM notifier.
+static int g_fdSigterm[2];
+
+// Unix SIGTERM signal handler.
+static void qjackctl_sigterm_handler ( int /* signo */ )
+{
+	char c = 1;
+
+	(::write(g_fdSigterm[0], &c, sizeof(c)) > 0);
+}
+
+#endif	// HAVE_SIGNAL_H
 
 
 //----------------------------------------------------------------------------
@@ -470,9 +490,40 @@ qjackctlMainForm::qjackctlMainForm (
 	QWidget::setAttribute(Qt::WA_QuitOnClose);
 
 #ifdef HAVE_SIGNAL_H
+
 	// Set to ignore any fatal "Broken pipe" signals.
-	signal(SIGPIPE, SIG_IGN);
-#endif
+	::signal(SIGPIPE, SIG_IGN);
+
+	// Initialize file descriptors for SIGTERM socket notifier.
+	::socketpair(AF_UNIX, SOCK_STREAM, 0, g_fdSigterm);
+	m_pSigtermNotifier
+		= new QSocketNotifier(g_fdSigterm[1], QSocketNotifier::Read, this);
+
+	QObject::connect(m_pSigtermNotifier,
+		SIGNAL(activated(int)),
+		SLOT(sigtermNotifySlot(int)));
+
+	// Install SIGTERM signal handler.
+	struct sigaction sigterm;
+	sigterm.sa_handler = qjackctl_sigterm_handler;
+	::sigemptyset(&sigterm.sa_mask);
+	sigterm.sa_flags = 0;
+	sigterm.sa_flags |= SA_RESTART;
+	::sigaction(SIGTERM, &sigterm, NULL);
+	::sigaction(SIGQUIT, &sigterm, NULL);
+
+	// Ignore SIGHUP/SIGINT signals.
+	::signal(SIGHUP, SIG_IGN);
+	::signal(SIGINT, SIG_IGN);
+
+	// Also ignore SIGUSR1 (LADISH Level 1).
+	::signal(SIGUSR1, SIG_IGN);
+
+#else	// HAVE_SIGNAL_H
+
+	m_pSigtermNotifier = NULL;
+
+#endif	// !HAVE_SIGNAL_H
 
 #if 0
 	// FIXME: Iterate for every child text label...
@@ -538,8 +589,12 @@ qjackctlMainForm::qjackctlMainForm (
 // Destructor.
 qjackctlMainForm::~qjackctlMainForm (void)
 {
-	// Stop server, if not already...
+#ifdef HAVE_SIGNAL_H
+	if (m_pSigtermNotifier)
+		delete m_pSigtermNotifier;
+#endif
 
+	// Stop server, if not already...
 #ifdef CONFIG_DBUS
 	if (m_pSetup->bStopJack || !m_pSetup->bJackDBusEnabled)
 		stopJackServer();
@@ -1772,6 +1827,20 @@ void qjackctlMainForm::updateXrunStats ( float fXrunLast )
 	//	refreshXrunStats();
 	}
 	m_iXrunStats++;
+}
+
+
+// SIGTERM signal handler...
+void qjackctlMainForm::sigtermNotifySlot ( int /* fd */ )
+{
+#ifdef HAVE_SIGNAL_H
+
+	char c;
+
+	if (::read(g_fdSigterm[1], &c, sizeof(c)) > 0)
+		quitMainForm();
+
+#endif
 }
 
 

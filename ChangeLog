@@ -6,7 +6,8 @@ ChangeLog
 
 GIT HEAD
 
-- Post-LAC2019 development cycle started (towards v0.5.7)...
+- Re-defined all main application UNIX signal handling.
+  (EXPERIMENTAL)
 
 
 0.5.6  2019-03-11  Pre-LAC2019 Release Frenzy.
