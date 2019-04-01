@@ -2103,6 +2103,15 @@ void qjackctlGraphCanvas::clearPortTypeColors (void)
 }
 
 
+// Clear all selection.
+void qjackctlGraphCanvas::clearSelection (void)
+{
+	m_item = NULL;
+	m_selected_nodes = 0;
+	m_scene->clearSelection();
+}
+
+
 //----------------------------------------------------------------------------
 // qjackctlGraphSect -- Generic graph driver
 

@@ -461,9 +461,11 @@ void qjackctlGraphForm::viewColorsAction (void)
 void qjackctlGraphForm::viewColorsReset (void)
 {
 	m_ui.graphCanvas->clearPortTypeColors();
-	m_jack->resetPortTypeColors();
+	if (m_jack)
+		m_jack->resetPortTypeColors();
 #ifdef CONFIG_ALSA_SEQ
-	m_alsa->resetPortTypeColors();
+	if (m_alsa)
+		m_alsa->resetPortTypeColors();
 #endif
 	m_ui.graphCanvas->updatePortTypeColors();
 
@@ -638,6 +640,8 @@ void qjackctlGraphForm::disconnected (
 // Graph section slots.
 void qjackctlGraphForm::jack_shutdown (void)
 {
+	m_ui.graphCanvas->clearSelection();
+
 	m_jack_changed = 0;
 
 	if (m_jack)

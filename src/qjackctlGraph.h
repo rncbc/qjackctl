@@ -556,6 +556,9 @@ public:
 	void updatePortTypeColors(uint port_type = 0);
 	void clearPortTypeColors();
 
+	// Clear all selection.
+	void clearSelection();
+
 signals:
 
 	// Node factory notifications.
