@@ -151,6 +151,10 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SLOT(disconnected(qjackctlGraphPort *, qjackctlGraphPort *)));
 
 	QObject::connect(m_ui.graphCanvas,
+		SIGNAL(renamed(qjackctlGraphItem *, const QString&)),
+		SLOT(renamed(qjackctlGraphItem *, const QString&)));
+
+	QObject::connect(m_ui.graphCanvas,
 		SIGNAL(changed()),
 		SLOT(stabilize()));
 
@@ -683,6 +687,32 @@ void qjackctlGraphForm::refresh (void)
 //	QTimer::singleShot(300, this, SLOT(refresh()));
 }
 
+
+
+// Item renaming slot.
+void qjackctlGraphForm::renamed ( qjackctlGraphItem *item, const QString& name )
+{
+	// FIXME: do proper client/node, port title/name aliases...
+	//
+	qjackctlGraphNode *node = NULL;
+
+	if (item->type() == qjackctlGraphNode::Type) {
+		node = static_cast<qjackctlGraphNode *> (item);
+		if (node)
+			node->setNodeTitle(name);
+	}
+	else
+	if (item->type() == qjackctlGraphPort::Type) {
+		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+		if (port) {
+			port->setPortTitle(name);
+			node = port->portNode();
+		}
+	}
+
+	if (node)
+		node->updatePath();
+}
 
 
 // Graph selection change slot.

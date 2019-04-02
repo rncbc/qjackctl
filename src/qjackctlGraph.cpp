@@ -36,6 +36,9 @@
 #include <QPainter>
 #include <QPalette>
 
+#include <QGraphicsProxyWidget>
+#include <QLineEdit>
+
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QKeyEvent>
@@ -113,6 +116,13 @@ bool qjackctlGraphItem::isHighlight (void) const
 uint qjackctlGraphItem::itemType ( const QByteArray& type_name )
 {
 	return qHash(type_name);
+}
+
+
+// Rectangular editor extents (virtual)
+QRectF qjackctlGraphItem::editorRect (void) const
+{
+	return QRectF();
 }
 
 
@@ -522,6 +532,13 @@ bool qjackctlGraphPort::lessThan ( const QString& s1, const QString& s2 )
 }
 
 
+// Rectangular editor extents.
+QRectF qjackctlGraphPort::editorRect (void) const
+{
+	return QGraphicsPathItem::sceneBoundingRect();
+}
+
+
 //----------------------------------------------------------------------------
 // qjackctlGraphNode -- Node graphics item.
 
@@ -830,6 +847,12 @@ QVariant qjackctlGraphNode::itemChange (
 	return value;
 }
 
+
+// Rectangular editor extents.
+QRectF qjackctlGraphNode::editorRect (void) const
+{
+	return m_text->sceneBoundingRect();
+}
 
 
 //----------------------------------------------------------------------------
@@ -1156,7 +1179,8 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 		m_connect(NULL), m_rubberband(NULL),
 		m_zoom(1.0), m_zoomrange(false),
 		m_commands(NULL), m_settings(NULL),
-		m_selected_nodes(0)
+		m_selected_nodes(0), m_edit_item(NULL),
+		m_editor(NULL), m_edited(0)
 {
 	m_scene = new QGraphicsScene();
 
@@ -1169,12 +1193,27 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 
 	QGraphicsView::setResizeAnchor(QGraphicsView::NoAnchor);
 	QGraphicsView::setDragMode(QGraphicsView::NoDrag);
+
+	m_editor = new QLineEdit(this);
+	m_editor->setFrame(false);
+	m_editor->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
+
+	QObject::connect(m_editor,
+		SIGNAL(textChanged(const QString&)),
+		SLOT(textChanged(const QString&)));
+	QObject::connect(m_editor,
+		SIGNAL(editingFinished()),
+		SLOT(editingFinished()));
+
+	m_editor->setEnabled(false);
+	m_editor->hide();
 }
 
 
 // Destructor.
 qjackctlGraphCanvas::~qjackctlGraphCanvas (void)
 {
+	delete m_editor;
 	delete m_commands;
 	delete m_scene;
 }
@@ -1308,7 +1347,10 @@ bool qjackctlGraphCanvas::canDisconnect (void) const
 bool qjackctlGraphCanvas::canRenameItem (void) const
 {
 	qjackctlGraphItem *item = currentItem();
-	return (item && item->type() == qjackctlGraphPort::Type);
+
+	return (item && (
+		item->type() == qjackctlGraphNode::Type ||
+		item->type() == qjackctlGraphPort::Type));
 }
 
 
@@ -1323,6 +1365,12 @@ void qjackctlGraphCanvas::setZoom ( qreal zoom )
 
 	const qreal scale = zoom / m_zoom;
 	QGraphicsView::scale(scale, scale);
+
+	QFont font = m_editor->font();
+	font.setPointSizeF(scale * font.pointSizeF());
+	m_editor->setFont(font);
+	updateEditorGeometry();
+
 	m_zoom = zoom;
 
 	emit changed();
@@ -1703,9 +1751,14 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 
 void qjackctlGraphCanvas::mouseDoubleClickEvent ( QMouseEvent *event )
 {
-	const QPointF& pos
-		= QGraphicsView::mapToScene(event->pos());
-	QGraphicsView::centerOn(pos);
+	m_pos  = QGraphicsView::mapToScene(event->pos());
+	m_item = itemAt(m_pos);
+
+	if (m_item && canRenameItem()) {
+		renameItem();
+	} else {
+		QGraphicsView::centerOn(m_pos);
+	}
 }
 
 
@@ -1743,6 +1796,10 @@ void qjackctlGraphCanvas::keyPressEvent ( QKeyEvent *event )
 			QGraphicsView::setDragMode(QGraphicsView::NoDrag);
 		m_state = DragNone;
 		m_item = NULL;
+		m_edit_item = NULL;
+		m_editor->setEnabled(false);
+		m_editor->hide();
+		m_edited = 0;
 		emit changed();
 		// Reset cursor...
 		QGraphicsView::setCursor(Qt::ArrowCursor);
@@ -1870,11 +1927,78 @@ void qjackctlGraphCanvas::selectInvert (void)
 void qjackctlGraphCanvas::renameItem (void)
 {
 	qjackctlGraphItem *item = currentItem();
+
+	if (item && item->type() == qjackctlGraphNode::Type) {
+		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+		if (node) {
+			QPalette pal = m_editor->palette();
+			const QColor& foreground
+				= node->foreground();
+			QColor background = node->background();
+			const bool is_dark
+				= (background.value() < 192);
+			pal.setColor(QPalette::Text, is_dark
+				? foreground.lighter()
+				: foreground.darker());
+			background.setAlpha(255);
+			pal.setColor(QPalette::Base, background);
+			m_editor->setPalette(pal);
+			QFont font = m_editor->font();
+			font.setBold(true);
+			m_editor->setFont(font);
+			m_editor->setText(node->nodeTitle());
+		}
+	}
+	else
 	if (item && item->type() == qjackctlGraphPort::Type) {
 		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
 		if (port) {
-			// TODO: edit/rename port...
+			QPalette pal = m_editor->palette();
+			const QColor& foreground
+				= port->foreground();
+			const QColor& background
+				= port->background();
+			const bool is_dark
+				= (background.value() < 128);
+			pal.setColor(QPalette::Text, is_dark
+				? foreground.lighter()
+				: foreground.darker());
+			pal.setColor(QPalette::Base, background.lighter());
+			m_editor->setPalette(pal);
+			QFont font = m_editor->font();
+			font.setBold(false);
+			m_editor->setFont(font);
+			m_editor->setText(port->portTitle());
 		}
+	}
+	else return;
+
+	m_editor->show();
+	m_editor->setEnabled(true);
+	m_editor->selectAll();
+	m_editor->setFocus();
+	m_edited = 0;
+
+	m_edit_item = item;
+
+	updateEditorGeometry();
+}
+
+
+// Renaming editor position and size updater.
+void qjackctlGraphCanvas::updateEditorGeometry (void)
+{
+	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible()) {
+		const QRectF& rect
+			= m_edit_item->editorRect().adjusted(+2.0, +2.0, -1.0, -2.0);
+		const QPoint& pos1
+			= QGraphicsView::mapFromScene(rect.topLeft());
+		const QPoint& pos2
+			= QGraphicsView::mapFromScene(rect.bottomRight());
+		m_editor->setGeometry(
+			pos1.x(),  pos1.y(),
+			pos2.x() - pos1.x(),
+			pos2.y() - pos1.y());
 	}
 }
 
@@ -2109,6 +2233,37 @@ void qjackctlGraphCanvas::clearSelection (void)
 	m_item = NULL;
 	m_selected_nodes = 0;
 	m_scene->clearSelection();
+
+	m_edit_item = NULL;
+	m_editor->setEnabled(false);
+	m_editor->hide();
+	m_edited = 0;
+}
+
+
+// Rename item slots.
+void qjackctlGraphCanvas::textChanged ( const QString& /* text */)
+{
+	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible())
+		++m_edited;
+}
+
+
+void qjackctlGraphCanvas::editingFinished (void)
+{
+	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible()) {
+		// If changed then notify...
+		if (m_edited > 0) {
+			const QString& name = m_editor->text();
+			if (!name.isEmpty())
+				emit renamed(m_edit_item, name);
+		}
+		// Reset all renaming stuff...
+		m_edit_item = NULL;
+		m_editor->setEnabled(false);
+		m_editor->hide();
+		m_edited = 0;
+	}
 }
 
 

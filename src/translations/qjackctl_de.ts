@@ -436,13 +436,13 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1658"/>
-        <location filename="../qjackctlGraph.cpp" line="1783"/>
+        <location filename="../qjackctlGraph.cpp" line="1706"/>
+        <location filename="../qjackctlGraph.cpp" line="1840"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1819"/>
+        <location filename="../qjackctlGraph.cpp" line="1876"/>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -997,12 +997,12 @@ Do you want to save the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="376"/>
+        <location filename="../qjackctlGraphForm.cpp" line="380"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="452"/>
+        <location filename="../qjackctlGraphForm.cpp" line="456"/>
         <source>Colors - %1</source>
         <translation type="unfinished"></translation>
     </message>

@@ -87,6 +87,9 @@ protected slots:
 	void connected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void disconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 
+	// Item renaming slot.
+	void renamed(qjackctlGraphItem *item, const QString& name);
+
 	// Graph selection change slot.
 	void stabilize();
 

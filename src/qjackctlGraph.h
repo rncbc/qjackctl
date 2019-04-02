@@ -52,6 +52,9 @@ class QRubberBand;
 class QUndoStack;
 class QSettings;
 
+class QGraphicsProxyWidget;
+class QLineEdit;
+
 class QMouseEvent;
 class QWheelEvent;
 class QKeyEvent;
@@ -126,6 +129,9 @@ public:
 
 	// Item-type hash (static)
 	static uint itemType(const QByteArray& type_name);
+
+	// Rectangular editor extents.
+	virtual QRectF editorRect() const;
 
 private:
 
@@ -235,6 +241,9 @@ public:
 			{ return (port1->scenePos().y() < port2->scenePos().y()); }
 	};
 
+	// Rectangular editor extents.
+	QRectF editorRect() const;
+
 protected:
 
 	void paint(QPainter *painter,
@@ -330,6 +339,9 @@ public:
 		NodeKey(qjackctlGraphNode *node)
 			: ItemKey(node->nodeName(), node->nodeMode(), node->nodeType()) {}
 	};
+
+	// Rectangular editor extents.
+	QRectF editorRect() const;
 
 protected:
 
@@ -572,6 +584,9 @@ signals:
 	// Generic change notification.
 	void changed();
 
+	// Rename notification.
+	void renamed(qjackctlGraphItem *item, const QString& name);
+
 public slots:
 
 	// Dis/connect selected items.
@@ -594,6 +609,12 @@ public slots:
 
 	// Update all nodes.
 	void updateNodes();
+
+protected slots:
+
+	// Rename item slots.
+	void textChanged(const QString&);
+	void editingFinished();
 
 protected:
 
@@ -625,6 +646,9 @@ protected:
 	bool restoreNodePos(qjackctlGraphNode *node);
 	bool saveNodePos(qjackctlGraphNode *node) const;
 
+	// Renaming editor position and size updater.
+	void updateEditorGeometry();
+
 private:
 
 	// Mouse pointer dragging states.
@@ -651,6 +675,11 @@ private:
 
 	// Graph port colors.
 	QHash<uint, QColor> m_port_colors;
+
+	// Item renaming stuff.
+	qjackctlGraphItem *m_edit_item;
+	QLineEdit    *m_editor;
+	int           m_edited;
 };
 
 
