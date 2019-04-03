@@ -152,14 +152,14 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 
 	// Dirty dispatcher (refresh deferral).
 	QObject::connect(m_ui.AudioConnectView,
-		SIGNAL(contentsChanged()),
-		SLOT(audioRefresh()));
+		SIGNAL(aliasesChanged()),
+		SLOT(audioAliasesChanged()));
 	QObject::connect(m_ui.MidiConnectView,
-		SIGNAL(contentsChanged()),
-		SLOT(midiRefresh()));
+		SIGNAL(aliasesChanged()),
+		SLOT(midiAliasesChanged()));
 	QObject::connect(m_ui.AlsaConnectView,
-		SIGNAL(contentsChanged()),
-		SLOT(alsaRefresh()));
+		SIGNAL(aliasesChanged()),
+		SLOT(alsaAliasesChanged()));
 
 	// Actual connections...
 	QObject::connect(m_pAudioConnect,
@@ -311,10 +311,7 @@ bool qjackctlConnectionsForm::queryClose (void)
 {
 	bool bQueryClose = true;
 
-	if (m_pSetup
-		&& (m_ui.AudioConnectView->isDirty() ||
-			m_ui.MidiConnectView->isDirty()  ||
-			m_ui.AlsaConnectView->isDirty())) {
+	if (m_pSetup && m_pSetup->aliases.isDirty()) {
 		switch (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("The preset aliases have been changed:\n\n"
@@ -324,7 +321,7 @@ bool qjackctlConnectionsForm::queryClose (void)
 			QMessageBox::Discard |
 			QMessageBox::Cancel)) {
 		case QMessageBox::Save:
-			saveAliases();
+			m_pSetup->saveAliases();
 			// Fall thru....
 		case QMessageBox::Discard:
 			break;
@@ -341,47 +338,6 @@ bool qjackctlConnectionsForm::queryClose (void)
 	}
 
 	return bQueryClose;
-}
-
-
-// Load aliases from current preset.
-bool qjackctlConnectionsForm::loadAliases (void)
-{
-	bool bResult = false;
-	
-	if (m_pSetup && queryClose()) {
-		const QString& sPreset
-			= m_pSetup->sDefPreset;
-		m_pSetup->aliases.setPreset(sPreset);
-		bResult = m_pSetup->loadAliases(sPreset);
-		if (bResult) {
-			m_ui.AudioConnectView->setDirty(false);
-			m_ui.MidiConnectView->setDirty(false);
-			m_ui.AlsaConnectView->setDirty(false);
-		}
-	}
-
-	return bResult;
-}
-
-
-// Save aliases to current preset.
-bool qjackctlConnectionsForm::saveAliases (void)
-{
-	bool bResult = false;
-
-	if (m_pSetup) {
-		const QString& sPreset
-			= m_pSetup->aliases.preset();
-		bResult = m_pSetup->saveAliases(sPreset);
-		if (bResult) {
-			m_ui.AudioConnectView->setDirty(false);
-			m_ui.MidiConnectView->setDirty(false);
-			m_ui.AlsaConnectView->setDirty(false);
-		}
-	}
-
-	return bResult;
 }
 
 
@@ -488,6 +444,16 @@ void qjackctlConnectionsForm::audioDisconnecting (
 }
 
 
+// JACK audio client/port aliases have changed.
+void qjackctlConnectionsForm::audioAliasesChanged (void)
+{
+	if (m_pSetup)
+		m_pSetup->aliases.setDirty(true);
+
+	audioRefresh();
+}
+
+
 // Refresh JACK audio form by notifying the parent form.
 void qjackctlConnectionsForm::audioRefresh (void)
 {
@@ -560,6 +526,16 @@ void qjackctlConnectionsForm::midiDisconnecting (
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_JACK_MIDI);
+}
+
+
+// JACK MIDI client/port aliases have changed.
+void qjackctlConnectionsForm::midiAliasesChanged (void)
+{
+	if (m_pSetup)
+		m_pSetup->aliases.setDirty(true);
+
+	midiRefresh();
 }
 
 
@@ -636,6 +612,16 @@ void qjackctlConnectionsForm::alsaDisconnecting (
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pMainForm->queryDisconnect(pOPort, pIPort, QJACKCTL_SOCKETTYPE_ALSA_MIDI);
+}
+
+
+// ALSA MIDI client/port aliases have changed.
+void qjackctlConnectionsForm::alsaAliasesChanged (void)
+{
+	if (m_pSetup)
+		m_pSetup->aliases.setDirty(true);
+
+	alsaRefresh();
 }
 
 

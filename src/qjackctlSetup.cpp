@@ -285,8 +285,10 @@ void qjackctlSetup::saveSetup (void)
 //---------------------------------------------------------------------------
 // Aliases preset management methods.
 
-bool qjackctlSetup::loadAliases ( const QString& sPreset )
+bool qjackctlSetup::loadAliases (void)
 {
+	QString sPreset = sDefPreset;
+
 	QString sSuffix;
 	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
 		sSuffix = '/' + sPreset;
@@ -312,11 +314,16 @@ bool qjackctlSetup::loadAliases ( const QString& sPreset )
 	m_settings.endGroup();
 	m_settings.endGroup();
 
+	aliases.setPreset(sPreset);
+	aliases.setDirty(false);
+
 	return true;
 }
 
-bool qjackctlSetup::saveAliases ( const QString& sPreset )
+bool qjackctlSetup::saveAliases (void)
 {
+	const QString& sPreset = aliases.preset();
+
 	QString sSuffix;
 	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
 		sSuffix = "/" + sPreset;
@@ -342,6 +349,8 @@ bool qjackctlSetup::saveAliases ( const QString& sPreset )
 	aliases.alsaInputs.saveSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
 	m_settings.endGroup();
+
+	aliases.setDirty(false);
 
 	return true;
 }

@@ -195,7 +195,7 @@ public:
 	{
 	public:
 
-		Aliases() {}
+		Aliases() : m_bDirty(false) {}
 
 		qjackctlConnectAlias audioOutputs;
 		qjackctlConnectAlias audioInputs;
@@ -222,8 +222,8 @@ public:
 	} aliases;
 
 	// Aliases preset management methods.
-	bool loadAliases(const QString& sPreset);
-	bool saveAliases(const QString& sPreset);
+	bool loadAliases();
+	bool saveAliases();
 
 	// Preset management methods.
 	bool loadPreset(qjackctlPreset& preset, const QString& sPreset);

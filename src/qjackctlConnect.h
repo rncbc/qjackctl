@@ -1,7 +1,7 @@
 // qjackctlConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -279,9 +279,8 @@ public:
 	// Binding indirect accessor.
 	qjackctlConnect *binding() const;
 
-	// Dirty flag accessors.
-	void setDirty (bool bDirty);
-	bool isDirty() const;
+	// Dirty aliases notification.
+	void emitAliasesChanged();
 
 protected slots:
 
@@ -408,14 +407,13 @@ public:
 	void setIconSize (int iIconSize);
 	int iconSize (void) const;
 
-	// Dirty flag accessors.
-	void setDirty (bool bDirty);
-	bool isDirty() const;
+	// Dirty aliases notification.
+	void emitAliasesChanged();
 
 signals:
 
 	// Contents change signal.
-	void contentsChanged();
+	void aliasesChanged();
 
 private:
 

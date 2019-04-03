@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -104,7 +104,7 @@ void qjackctlPortItem::setPortNameAlias ( const QString& sPortNameAlias )
 	if (pAliases) {
 		const QString& sClientName = m_pClient->clientName();
 		pAliases->setPortAlias(sClientName, m_sPortName, sPortNameAlias);
-		pClientListView->setDirty(true);
+		pClientListView->emitAliasesChanged();
 	}
 }
 
@@ -365,7 +365,7 @@ void qjackctlClientItem::setClientNameAlias ( const QString& sClientNameAlias )
 		= pClientListView->aliases();
 	if (pAliases) {
 		pAliases->setClientAlias(m_sClientName, sClientNameAlias);
-		pClientListView->setDirty(true);
+		pClientListView->emitAliasesChanged();
 	}
 }
 
@@ -1121,15 +1121,10 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 
 
 
-// Dirty flag methods.
-void qjackctlClientListView::setDirty ( bool bDirty )
+// Dirty aliases notification.
+void qjackctlClientListView::emitAliasesChanged (void)
 {
-	m_pConnectView->setDirty(bDirty);
-}
-
-bool qjackctlClientListView::isDirty (void) const
-{
-	return m_pConnectView->isDirty();
+	m_pConnectView->emitAliasesChanged();
 }
 
 
@@ -1427,18 +1422,10 @@ int qjackctlConnectView::iconSize (void) const
 }
 
 
-// Dirty flag methods.
-void qjackctlConnectView::setDirty ( bool bDirty )
+// Dirty aliases notification.
+void qjackctlConnectView::emitAliasesChanged (void)
 {
-	m_bDirty = bDirty;
-
-	if (bDirty)
-		emit contentsChanged();
-}
-
-bool qjackctlConnectView::isDirty (void) const
-{
-	return m_bDirty;
+	emit aliasesChanged();
 }
 
 

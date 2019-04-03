@@ -706,6 +706,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pGraphForm->setup(m_pSetup);
 	m_pSetupForm->setup(m_pSetup);
 
+	// Maybe time to load default preset aliases?
+	m_pSetup->loadAliases();
+
 	// Check out some initial nullities(tm)...
 	if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesStatusForm)
 		m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
@@ -2880,7 +2883,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		return false;
 
 	// Time to (re)load current preset aliases?
-	if (m_pConnectionsForm && !m_pConnectionsForm->loadAliases())
+	if (!m_pSetup->loadAliases())
 		return false;
 
 	// Make sure all status(es) will be updated ASAP.

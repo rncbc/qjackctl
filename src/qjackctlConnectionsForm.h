@@ -75,10 +75,7 @@ public:
 	void stabilizeMidi(bool bEnabled, bool bClear = false);
 	void stabilizeAlsa(bool bEnabled, bool bClear = false);
 
-	void setupAliases(qjackctlSetup *pSetup);
 	void updateAliases();
-	bool loadAliases();
-	bool saveAliases();
 
 public slots:
 
@@ -86,6 +83,7 @@ public slots:
 	void audioDisconnectSelected();
 	void audioDisconnectAll();
 	void audioExpandAll();
+	void audioAliasesChanged();
 	void audioRefresh();
 	void audioStabilize();
 
@@ -93,6 +91,7 @@ public slots:
 	void midiDisconnectSelected();
 	void midiDisconnectAll();
 	void midiExpandAll();
+	void midiAliasesChanged();
 	void midiRefresh();
 	void midiStabilize();
 
@@ -100,6 +99,7 @@ public slots:
 	void alsaDisconnectSelected();
 	void alsaDisconnectAll();
 	void alsaExpandAll();
+	void alsaAliasesChanged();
 	void alsaRefresh();
 	void alsaStabilize();
 
