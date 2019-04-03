@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -299,16 +299,16 @@ bool qjackctlSetup::loadAliases ( const QString& sPreset )
 	const QString sAliasesKey = "/Aliases" + sSuffix;
 	m_settings.beginGroup(sAliasesKey);
 	m_settings.beginGroup("/Jack");	// FIXME: Audio
-	aliasAudioOutputs.loadSettings(m_settings, "/Outputs");
-	aliasAudioInputs.loadSettings(m_settings, "/Inputs");
+	aliases.audioOutputs.loadSettings(m_settings, "/Outputs");
+	aliases.audioInputs.loadSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
 	m_settings.beginGroup("/Midi");
-	aliasMidiOutputs.loadSettings(m_settings, "/Outputs");
-	aliasMidiInputs.loadSettings(m_settings, "/Inputs");
+	aliases.midiOutputs.loadSettings(m_settings, "/Outputs");
+	aliases.midiInputs.loadSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
 	m_settings.beginGroup("/Alsa");
-	aliasAlsaOutputs.loadSettings(m_settings, "/Outputs");
-	aliasAlsaInputs.loadSettings(m_settings, "/Inputs");
+	aliases.alsaOutputs.loadSettings(m_settings, "/Outputs");
+	aliases.alsaInputs.loadSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
 	m_settings.endGroup();
 
@@ -330,16 +330,16 @@ bool qjackctlSetup::saveAliases ( const QString& sPreset )
 	m_settings.remove(sAliasesKey);
 	m_settings.beginGroup(sAliasesKey);
 	m_settings.beginGroup("/Jack");	// FIXME: Audio
-	aliasAudioOutputs.saveSettings(m_settings, "/Outputs");
-	aliasAudioInputs.saveSettings(m_settings, "/Inputs");
+	aliases.audioOutputs.saveSettings(m_settings, "/Outputs");
+	aliases.audioInputs.saveSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
 	m_settings.beginGroup("/Midi");
-	aliasMidiOutputs.saveSettings(m_settings, "/Outputs");
-	aliasMidiInputs.saveSettings(m_settings, "/Inputs");
+	aliases.midiOutputs.saveSettings(m_settings, "/Outputs");
+	aliases.midiInputs.saveSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
 	m_settings.beginGroup("/Alsa");
-	aliasAlsaOutputs.saveSettings(m_settings, "/Outputs");
-	aliasAlsaInputs.saveSettings(m_settings, "/Inputs");
+	aliases.alsaOutputs.saveSettings(m_settings, "/Outputs");
+	aliases.alsaInputs.saveSettings(m_settings, "/Inputs");
 	m_settings.endGroup();
 	m_settings.endGroup();
 
@@ -765,4 +765,3 @@ void qjackctlSetup::saveWidgetGeometry ( QWidget *pWidget, bool bVisible )
 
 
 // end of qjackctlSetup.cpp
-

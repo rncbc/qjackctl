@@ -1,7 +1,7 @@
 // qjackctlConnectionsForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -319,7 +319,7 @@ bool qjackctlConnectionsForm::queryClose (void)
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("The preset aliases have been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
-			.arg(m_sPreset),
+			.arg(m_pSetup->aliases.preset()),
 			QMessageBox::Save |
 			QMessageBox::Discard |
 			QMessageBox::Cancel)) {
@@ -350,8 +350,10 @@ bool qjackctlConnectionsForm::loadAliases (void)
 	bool bResult = false;
 	
 	if (m_pSetup && queryClose()) {
-		m_sPreset = m_pSetup->sDefPreset;
-		bResult = m_pSetup->loadAliases(m_sPreset);
+		const QString& sPreset
+			= m_pSetup->sDefPreset;
+		m_pSetup->aliases.setPreset(sPreset);
+		bResult = m_pSetup->loadAliases(sPreset);
 		if (bResult) {
 			m_ui.AudioConnectView->setDirty(false);
 			m_ui.MidiConnectView->setDirty(false);
@@ -369,7 +371,9 @@ bool qjackctlConnectionsForm::saveAliases (void)
 	bool bResult = false;
 
 	if (m_pSetup) {
-		bResult = m_pSetup->saveAliases(m_sPreset);
+		const QString& sPreset
+			= m_pSetup->aliases.preset();
+		bResult = m_pSetup->saveAliases(sPreset);
 		if (bResult) {
 			m_ui.AudioConnectView->setDirty(false);
 			m_ui.MidiConnectView->setDirty(false);
@@ -775,17 +779,17 @@ void qjackctlConnectionsForm::updateAliases (void)
 	if (m_pSetup && m_pSetup->bAliasesEnabled) {
 		const bool bRenameEnabled = m_pSetup->bAliasesEditing;
 		m_ui.AudioConnectView->OListView()->setAliases(
-			&(m_pSetup->aliasAudioOutputs), bRenameEnabled);
+			&(m_pSetup->aliases.audioOutputs), bRenameEnabled);
 		m_ui.AudioConnectView->IListView()->setAliases(
-			&(m_pSetup->aliasAudioInputs), bRenameEnabled);
+			&(m_pSetup->aliases.audioInputs), bRenameEnabled);
 		m_ui.MidiConnectView->OListView()->setAliases(
-			&(m_pSetup->aliasMidiOutputs), bRenameEnabled);
+			&(m_pSetup->aliases.midiOutputs), bRenameEnabled);
 		m_ui.MidiConnectView->IListView()->setAliases(
-			&(m_pSetup->aliasMidiInputs), bRenameEnabled);
+			&(m_pSetup->aliases.midiInputs), bRenameEnabled);
 		m_ui.AlsaConnectView->OListView()->setAliases(
-			&(m_pSetup->aliasAlsaOutputs), bRenameEnabled);
+			&(m_pSetup->aliases.alsaOutputs), bRenameEnabled);
 		m_ui.AlsaConnectView->IListView()->setAliases(
-			&(m_pSetup->aliasAlsaInputs), bRenameEnabled);
+			&(m_pSetup->aliases.alsaInputs), bRenameEnabled);
 	} else {
 		m_ui.AudioConnectView->OListView()->setAliases(NULL, false);
 		m_ui.AudioConnectView->IListView()->setAliases(NULL, false);

@@ -1,7 +1,7 @@
 // qjackctlSetup.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -191,16 +191,40 @@ public:
 	bool bSessionSaveVersion;
 
 	// Aliases containers.
-	qjackctlConnectAlias aliasAudioOutputs;
-	qjackctlConnectAlias aliasAudioInputs;
-	qjackctlConnectAlias aliasMidiOutputs;
-	qjackctlConnectAlias aliasMidiInputs;
-	qjackctlConnectAlias aliasAlsaOutputs;
-	qjackctlConnectAlias aliasAlsaInputs;
+	class Aliases
+	{
+	public:
+
+		Aliases() {}
+
+		qjackctlConnectAlias audioOutputs;
+		qjackctlConnectAlias audioInputs;
+		qjackctlConnectAlias midiOutputs;
+		qjackctlConnectAlias midiInputs;
+		qjackctlConnectAlias alsaOutputs;
+		qjackctlConnectAlias alsaInputs;
+
+		void setDirty(bool bDirty)
+			{ m_bDirty = bDirty; }
+		bool isDirty() const
+			{ return m_bDirty; }
+
+		void setPreset(const QString& sPreset)
+			{ m_sPreset = sPreset; }
+		const QString& preset() const
+			{ return m_sPreset; }
+
+	private:
+
+		QString m_sPreset;
+		bool    m_bDirty;
+
+	} aliases;
 
 	// Aliases preset management methods.
 	bool loadAliases(const QString& sPreset);
 	bool saveAliases(const QString& sPreset);
+
 	// Preset management methods.
 	bool loadPreset(qjackctlPreset& preset, const QString& sPreset);
 	bool savePreset(qjackctlPreset& preset, const QString& sPreset);
