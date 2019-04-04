@@ -99,11 +99,11 @@ void qjackctlPortItem::setPortNameAlias ( const QString& sPortNameAlias )
 	// Check aliasing...
 	qjackctlClientListView *pClientListView
 		= (m_pClient->clientList())->listView();
-	qjackctlConnectAlias *pAliases
-		= pClientListView->aliases();
-	if (pAliases) {
+	qjackctlAliasList *pAliasList
+		= pClientListView->aliasList();
+	if (pAliasList) {
 		const QString& sClientName = m_pClient->clientName();
-		pAliases->setPortAlias(sClientName, m_sPortName, sPortNameAlias);
+		pAliasList->setPortAlias(sClientName, m_sPortName, sPortNameAlias);
 		pClientListView->emitAliasesChanged();
 	}
 }
@@ -116,11 +116,11 @@ QString qjackctlPortItem::portNameAlias ( bool *pbRenameEnabled ) const
 	// Check aliasing...
 	qjackctlClientListView *pClientListView
 		= (m_pClient->clientList())->listView();
-	qjackctlConnectAlias *pAliases
-		= pClientListView->aliases();
-	if (pAliases) {
+	qjackctlAliasList *pAliasList
+		= pClientListView->aliasList();
+	if (pAliasList) {
 		const QString& sClientName = m_pClient->clientName();
-		sPortNameAlias = pAliases->portAlias(sClientName, m_sPortName);
+		sPortNameAlias = pAliasList->portAlias(sClientName, m_sPortName);
 		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
 
@@ -361,10 +361,10 @@ void qjackctlClientItem::setClientNameAlias ( const QString& sClientNameAlias )
 {
 	qjackctlClientListView *pClientListView
 		= m_pClientList->listView();
-	qjackctlConnectAlias *pAliases
-		= pClientListView->aliases();
-	if (pAliases) {
-		pAliases->setClientAlias(m_sClientName, sClientNameAlias);
+	qjackctlAliasList *pAliasList
+		= pClientListView->aliasList();
+	if (pAliasList) {
+		pAliasList->setClientAlias(m_sClientName, sClientNameAlias);
 		pClientListView->emitAliasesChanged();
 	}
 }
@@ -377,10 +377,10 @@ QString qjackctlClientItem::clientNameAlias ( bool *pbRenameEnabled ) const
 	// Check aliasing...
 	qjackctlClientListView *pClientListView
 		= m_pClientList->listView();
-	qjackctlConnectAlias *pAliases
-		= pClientListView->aliases();
-	if (pAliases) {
-		sClientNameAlias = pAliases->clientAlias(m_sClientName);
+	qjackctlAliasList *pAliasList
+		= pClientListView->aliasList();
+	if (pAliasList) {
+		sClientNameAlias = pAliasList->clientAlias(m_sClientName);
 		bRenameEnabled = pClientListView->isRenameEnabled();
 	}
 
@@ -757,7 +757,7 @@ qjackctlClientListView::qjackctlClientListView (
 	m_pDragItem = NULL;
 	m_pDragItem = NULL;
 
-	m_pAliases = NULL;
+	m_pAliasList = NULL;
 	m_bRenameEnabled = false;
 
 	QHeaderView *pHeader = QTreeWidget::header();
@@ -847,10 +847,10 @@ int qjackctlClientListView::autoOpenTimeout (void) const
 
 
 // Aliasing support methods.
-void qjackctlClientListView::setAliases (
-	qjackctlConnectAlias *pAliases, bool bRenameEnabled )
+void qjackctlClientListView::setAliasList (
+	qjackctlAliasList *pAliasList, bool bRenameEnabled )
 {
-	m_pAliases = pAliases;
+	m_pAliasList = pAliasList;
 	m_bRenameEnabled = bRenameEnabled;
 
 	// For each client item, if any.
@@ -879,9 +879,9 @@ void qjackctlClientListView::setAliases (
 	}
 }
 
-qjackctlConnectAlias *qjackctlClientListView::aliases (void) const
+qjackctlAliasList *qjackctlClientListView::aliasList (void) const
 {
-	return m_pAliases;
+	return m_pAliasList;
 }
 
 bool qjackctlClientListView::isRenameEnabled (void) const
@@ -902,7 +902,7 @@ void qjackctlClientListView::startRenameSlot (void)
 // In-place aliasing slot.
 void qjackctlClientListView::renamedSlot (void)
 {
-	if (m_pAliases == NULL)
+	if (m_pAliasList == NULL)
 		return;
 
 	QTreeWidgetItem *pItem = QTreeWidget::currentItem();

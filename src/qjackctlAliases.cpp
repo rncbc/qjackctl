@@ -1,4 +1,4 @@
-// qjackctlConnectAlias.cpp
+// qjackctlAliases.cpp
 //
 /****************************************************************************
    Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,16 +19,16 @@
 
 *****************************************************************************/
 
-#include "qjackctlConnectAlias.h"
+#include "qjackctlAliases.h"
 
 #include <QStringList>
 
 
 //----------------------------------------------------------------------
-// class qjackctlClientAlias -- Client item alias map.
+// class qjackctlAliasItem -- Client/port item alias map.
 
 // Constructor.
-qjackctlClientAlias::qjackctlClientAlias (
+qjackctlAliasItem::qjackctlAliasItem (
 	const QString& sClientName, const QString& sClientAlias )
 {
 	if (sClientAlias.isEmpty()) {
@@ -41,41 +41,41 @@ qjackctlClientAlias::qjackctlClientAlias (
 }
 
 // Default destructor.
-qjackctlClientAlias::~qjackctlClientAlias (void)
+qjackctlAliasItem::~qjackctlAliasItem (void)
 {
 	m_ports.clear();
 }
 
 
 // Client name method.
-QString qjackctlClientAlias::clientName (void) const
+QString qjackctlAliasItem::clientName (void) const
 {
 	return m_rxClientName.pattern();
 }
 
 
 // Client name matcher.
-bool qjackctlClientAlias::matchClientName ( const QString& sClientName ) const
+bool qjackctlAliasItem::matchClientName ( const QString& sClientName ) const
 {
 	return m_rxClientName.exactMatch(sClientName);
 }
 
 
 // Client aliasing methods.
-const QString& qjackctlClientAlias::clientAlias (void) const
+const QString& qjackctlAliasItem::clientAlias (void) const
 {
 	return m_sClientAlias;
 }
 
 
-void qjackctlClientAlias::setClientAlias ( const QString& sClientAlias )
+void qjackctlAliasItem::setClientAlias ( const QString& sClientAlias )
 {
 	m_sClientAlias = sClientAlias;
 }
 
 
 // Port aliasing methods.
-QString qjackctlClientAlias::portAlias ( const QString& sPortName ) const
+QString qjackctlAliasItem::portAlias ( const QString& sPortName ) const
 {
 	QString sPortAlias = m_ports[sPortName];
 	if (sPortAlias.isEmpty())
@@ -84,7 +84,7 @@ QString qjackctlClientAlias::portAlias ( const QString& sPortName ) const
 }
 
 
-void qjackctlClientAlias::setPortAlias (
+void qjackctlAliasItem::setPortAlias (
 	const QString& sPortName, const QString& sPortAlias )
 {
 	m_ports[sPortName] = sPortAlias;
@@ -92,7 +92,7 @@ void qjackctlClientAlias::setPortAlias (
 
 
 // Save client/port aliases definitions.
-void qjackctlClientAlias::saveSettings (
+void qjackctlAliasItem::saveSettings (
 	QSettings& settings, const QString& sClientKey )
 {
 	settings.beginGroup(sClientKey);
@@ -112,7 +112,7 @@ void qjackctlClientAlias::saveSettings (
 
 
 // Escape and format a string as a regular expresion.
-QString qjackctlClientAlias::escapeRegExpDigits ( const QString& s,
+QString qjackctlAliasItem::escapeRegExpDigits ( const QString& s,
 	int iThreshold )
 {
 	QString sDigits;
@@ -146,22 +146,22 @@ QString qjackctlClientAlias::escapeRegExpDigits ( const QString& s,
 
 
 // Need for generic sort.
-bool qjackctlClientAlias::operator< ( const qjackctlClientAlias& other )
+bool qjackctlAliasItem::operator< ( const qjackctlAliasItem& other )
 {
 	return (m_sClientAlias < other.clientAlias());
 }
 
 
 //----------------------------------------------------------------------
-// class qjackctlConnectAlias -- Client list alias map.
+// class qjackctlAliasList -- Client/port list alias map.
 
 // Constructor.
-qjackctlConnectAlias::qjackctlConnectAlias (void)
+qjackctlAliasList::qjackctlAliasList (void)
 {
 }
 
 // Default destructor.
-qjackctlConnectAlias::~qjackctlConnectAlias (void)
+qjackctlAliasList::~qjackctlAliasList (void)
 {
 	qDeleteAll(*this);
 	clear();
@@ -169,12 +169,12 @@ qjackctlConnectAlias::~qjackctlConnectAlias (void)
 
 
 // Client finders.
-qjackctlClientAlias *qjackctlConnectAlias::findClientName (
+qjackctlAliasItem *qjackctlAliasList::findClientName (
 	const QString& sClientName )
 {
-	QListIterator<qjackctlClientAlias *> iter(*this);
+	QListIterator<qjackctlAliasItem *> iter(*this);
 	while (iter.hasNext()) {
-		qjackctlClientAlias *pClient = iter.next();
+		qjackctlAliasItem *pClient = iter.next();
 		if (pClient->matchClientName(sClientName))
 			return pClient;
 	}
@@ -184,21 +184,21 @@ qjackctlClientAlias *qjackctlConnectAlias::findClientName (
 
 
 // Client aliasing methods.
-void qjackctlConnectAlias::setClientAlias (
+void qjackctlAliasList::setClientAlias (
 	const QString& sClientName, const QString& sClientAlias )
 {
-	qjackctlClientAlias *pClient = findClientName(sClientName);
+	qjackctlAliasItem *pClient = findClientName(sClientName);
 	if (pClient == NULL) {
-		pClient = new qjackctlClientAlias(sClientName);
+		pClient = new qjackctlAliasItem(sClientName);
 		append(pClient);
 	}
 	pClient->setClientAlias(sClientAlias);
 }
 
 
-QString qjackctlConnectAlias::clientAlias ( const QString& sClientName )
+QString qjackctlAliasList::clientAlias ( const QString& sClientName )
 {
-	qjackctlClientAlias *pClient = findClientName(sClientName);
+	qjackctlAliasItem *pClient = findClientName(sClientName);
 	if (pClient == NULL)
 		return sClientName;
 
@@ -207,22 +207,22 @@ QString qjackctlConnectAlias::clientAlias ( const QString& sClientName )
 
 
 // Client/port aliasing methods.
-void qjackctlConnectAlias::setPortAlias ( const QString& sClientName,
+void qjackctlAliasList::setPortAlias ( const QString& sClientName,
 	const QString& sPortName, const QString& sPortAlias )
 {
-	qjackctlClientAlias *pClient = findClientName(sClientName);
+	qjackctlAliasItem *pClient = findClientName(sClientName);
 	if (pClient == NULL) {
-		pClient = new qjackctlClientAlias(sClientName);
+		pClient = new qjackctlAliasItem(sClientName);
 		append(pClient);
 	}
 	pClient->setPortAlias(sPortName, sPortAlias);
 }
 
 
-QString qjackctlConnectAlias::portAlias (
+QString qjackctlAliasList::portAlias (
 	const QString& sClientName, const QString& sPortName )
 {
-	qjackctlClientAlias *pClient = findClientName(sClientName);
+	qjackctlAliasItem *pClient = findClientName(sClientName);
 	if (pClient == NULL)
 		return sPortName;
 
@@ -231,7 +231,7 @@ QString qjackctlConnectAlias::portAlias (
 
 
 // Load/save aliases definitions.
-void qjackctlConnectAlias::loadSettings (
+void qjackctlAliasList::loadSettings (
 	QSettings& settings, const QString& sAliasesKey )
 {
 	clear();
@@ -243,8 +243,8 @@ void qjackctlConnectAlias::loadSettings (
 		QString sClientName  = settings.value(sClientKey + "/Name").toString();
 		QString sClientAlias = settings.value(sClientKey + "/Alias").toString();
 		if (!sClientName.isEmpty() && !sClientAlias.isEmpty()) {
-			qjackctlClientAlias *pClient =
-				new qjackctlClientAlias(sClientName, sClientAlias);
+			qjackctlAliasItem *pClient =
+				new qjackctlAliasItem(sClientName, sClientAlias);
 			append(pClient);
 			settings.beginGroup(sClientKey);
 			QStringListIterator it(settings.childGroups());
@@ -262,14 +262,14 @@ void qjackctlConnectAlias::loadSettings (
 }
 
 
-void qjackctlConnectAlias::saveSettings (
+void qjackctlAliasList::saveSettings (
 	QSettings& settings, const QString& sAliasesKey )
 {
 	qSort(*this);
 
 	settings.beginGroup(sAliasesKey);
 	int iClient = 0;
-	QListIterator<qjackctlClientAlias *> iter(*this);
+	QListIterator<qjackctlAliasItem *> iter(*this);
 	while (iter.hasNext()) {
 		(iter.next())->saveSettings(settings,
 			"Client" + QString::number(++iClient));
@@ -278,4 +278,4 @@ void qjackctlConnectAlias::saveSettings (
 }
 
 
-// end of qjackctlConnectAlias.cpp
+// end of qjackctlAliases.cpp

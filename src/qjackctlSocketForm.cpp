@@ -1,7 +1,7 @@
 // qjackctlSocketForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include "qjackctlMainForm.h"
 
 #include "qjackctlPatchbay.h"
-#include "qjackctlConnectAlias.h"
+#include "qjackctlAliases.h"
 
 #include <QMessageBox>
 #include <QButtonGroup>
@@ -590,7 +590,7 @@ void qjackctlSocketForm::updateJackClients ( int iSocketType )
 			int iColon = sClientPort.indexOf(':');
 			if (iColon >= 0) {
 				QString sClientName
-					= qjackctlClientAlias::escapeRegExpDigits(
+					= qjackctlAliasItem::escapeRegExpDigits(
 						sClientPort.left(iColon));
 				bool bExists = false;
 				for (int i = 0;
@@ -641,7 +641,7 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 	while (snd_seq_query_next_client(pAlsaSeq, pClientInfo) >= 0) {
 		const int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
 		QString sClient
-			= qjackctlClientAlias::escapeRegExpDigits(
+			= qjackctlAliasItem::escapeRegExpDigits(
 				QString::fromUtf8(snd_seq_client_info_get_name(pClientInfo)));
 		if (iAlsaClient > 0) {
 			bool bExists = false;
@@ -814,7 +814,7 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 			const int iColon = sClientPort.indexOf(':');
 			if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
 				QString sPort
-					= qjackctlClientAlias::escapeRegExpDigits(
+					= qjackctlAliasItem::escapeRegExpDigits(
 						sClientPort.right(sClientPort.length() - iColon - 1));
 				if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
 					m_ui.PlugNameComboBox->addItem(icon, sPort);
@@ -875,7 +875,7 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
 					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
 					QString sPort
-						= qjackctlClientAlias::escapeRegExpDigits(
+						= qjackctlAliasItem::escapeRegExpDigits(
 							QString::fromUtf8(snd_seq_port_info_get_name(pPortInfo)));
 					if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
 						m_ui.PlugNameComboBox->addItem(icon, sPort);

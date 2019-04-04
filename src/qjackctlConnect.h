@@ -22,7 +22,7 @@
 #ifndef __qjackctlConnect_h
 #define __qjackctlConnect_h
 
-#include "qjackctlConnectAlias.h"
+#include "qjackctlAliases.h"
 
 #include <QTreeWidget>
 #include <QSplitter>
@@ -272,8 +272,8 @@ public:
 	int autoOpenTimeout() const;
 
 	// Aliasing support methods.
-	void setAliases(qjackctlConnectAlias *pAliases, bool bRenameEnabled);
-	qjackctlConnectAlias *aliases() const;
+	void setAliasList(qjackctlAliasList *pAliasList, bool bRenameEnabled);
+	qjackctlAliasList *aliasList() const;
 	bool isRenameEnabled() const;
 
 	// Binding indirect accessor.
@@ -327,7 +327,7 @@ private:
 	QPoint m_posDrag;
 
 	// Aliasing support.
-	qjackctlConnectAlias *m_pAliases;
+	qjackctlAliasList *m_pAliasList;
 	bool m_bRenameEnabled;
 };
 

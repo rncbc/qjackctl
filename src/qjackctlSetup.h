@@ -22,7 +22,7 @@
 #ifndef __qjackctlSetup_h
 #define __qjackctlSetup_h
 
-#include "qjackctlConnectAlias.h"
+#include "qjackctlAliases.h"
 
 #include <QStringList>
 
@@ -191,21 +191,7 @@ public:
 	bool bSessionSaveVersion;
 
 	// Aliases containers.
-	struct Aliases
-	{
-		Aliases() : dirty(false) {}
-
-		qjackctlConnectAlias audioOutputs;
-		qjackctlConnectAlias audioInputs;
-		qjackctlConnectAlias midiOutputs;
-		qjackctlConnectAlias midiInputs;
-		qjackctlConnectAlias alsaOutputs;
-		qjackctlConnectAlias alsaInputs;
-
-		bool    dirty;
-		QString key;
-
-	} aliases;
+	qjackctlAliases aliases;
 
 	// Aliases preset management methods.
 	bool loadAliases();

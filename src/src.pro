@@ -15,7 +15,7 @@ HEADERS += config.h \
 	qjackctlAlsaConnect.h \
 	qjackctlAlsaGraph.h \
 	qjackctlConnect.h \
-	qjackctlConnectAlias.h \
+	qjackctlAliases.h \
 	qjackctlGraph.h \
 	qjackctlInterfaceComboBox.h \
 	qjackctlJackConnect.h \
@@ -42,7 +42,7 @@ SOURCES += \
 	qjackctlAlsaConnect.cpp \
 	qjackctlAlsaGraph.cpp \
 	qjackctlConnect.cpp \
-	qjackctlConnectAlias.cpp \
+	qjackctlAliases.cpp \
 	qjackctlGraph.cpp \
 	qjackctlInterfaceComboBox.cpp \
 	qjackctlJackConnect.cpp \

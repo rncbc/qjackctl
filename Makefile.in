@@ -11,7 +11,7 @@ headers = \
 	src/qjackctlAlsaConnect.h \
 	src/qjackctlAlsaGraph.h \
 	src/qjackctlConnect.h \
-	src/qjackctlConnectAlias.h \
+	src/qjackctlAliases.h \
 	src/qjackctlGraph.h \
 	src/qjackctlInterfaceComboBox.h \
 	src/qjackctlJackConnect.h \
@@ -38,7 +38,7 @@ sources = \
 	src/qjackctlAlsaConnect.cpp \
 	src/qjackctlAlsaGraph.cpp \
 	src/qjackctlConnect.cpp \
-	src/qjackctlConnectAlias.cpp \
+	src/qjackctlAliases.cpp \
 	src/qjackctlGraph.cpp \
 	src/qjackctlInterfaceComboBox.cpp \
 	src/qjackctlJackConnect.cpp \
