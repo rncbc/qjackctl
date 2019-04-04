@@ -191,11 +191,9 @@ public:
 	bool bSessionSaveVersion;
 
 	// Aliases containers.
-	class Aliases
+	struct Aliases
 	{
-	public:
-
-		Aliases() : m_bDirty(false) {}
+		Aliases() : dirty(false) {}
 
 		qjackctlConnectAlias audioOutputs;
 		qjackctlConnectAlias audioInputs;
@@ -204,20 +202,8 @@ public:
 		qjackctlConnectAlias alsaOutputs;
 		qjackctlConnectAlias alsaInputs;
 
-		void setDirty(bool bDirty)
-			{ m_bDirty = bDirty; }
-		bool isDirty() const
-			{ return m_bDirty; }
-
-		void setPreset(const QString& sPreset)
-			{ m_sPreset = sPreset; }
-		const QString& preset() const
-			{ return m_sPreset; }
-
-	private:
-
-		QString m_sPreset;
-		bool    m_bDirty;
+		bool    dirty;
+		QString key;
 
 	} aliases;
 

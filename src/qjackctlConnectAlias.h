@@ -34,8 +34,8 @@ public:
 
 	// Constructor.
 	qjackctlClientAlias (const QString& sClientName,
-		const QString& sClientAlias = QString::null);
-	
+		const QString& sClientAlias = QString());
+
 	// Default destructor.
 	~qjackctlClientAlias();
 
@@ -51,8 +51,7 @@ public:
 
 	// Port aliasing methods.
 	QString portAlias (const QString& sPortName) const;
-	void setPortAlias (const QString& sPortName,
-		const QString& sPortAlias);
+	void setPortAlias (const QString& sPortName, const QString& sPortAlias);
 
 	// Save client/port aliases definitions.
 	void saveSettings(QSettings& settings, const QString& sClientKey);
@@ -94,7 +93,7 @@ public:
 	QString portAlias (const QString& sClientName,
 		const QString& sPortName);
 	void setPortAlias (const QString& sClientName,
-		const QString& sPortName, const QString& sPortAlias);
+		const QString& sPortName,const QString& sPortAlias);
 
 	// Load/save aliases definitions.
 	void loadSettings(QSettings& settings, const QString& sAliasesKey);

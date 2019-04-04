@@ -28,8 +28,8 @@
 // class qjackctlClientAlias -- Client item alias map.
 
 // Constructor.
-qjackctlClientAlias::qjackctlClientAlias ( const QString& sClientName,
-	const QString& sClientAlias )
+qjackctlClientAlias::qjackctlClientAlias (
+	const QString& sClientName, const QString& sClientAlias )
 {
 	if (sClientAlias.isEmpty()) {
 		m_rxClientName.setPattern(escapeRegExpDigits(sClientName));
@@ -67,6 +67,7 @@ const QString& qjackctlClientAlias::clientAlias (void) const
 	return m_sClientAlias;
 }
 
+
 void qjackctlClientAlias::setClientAlias ( const QString& sClientAlias )
 {
 	m_sClientAlias = sClientAlias;
@@ -82,16 +83,17 @@ QString qjackctlClientAlias::portAlias ( const QString& sPortName ) const
 	return sPortAlias;
 }
 
-void qjackctlClientAlias::setPortAlias ( const QString& sPortName,
-	const QString& sPortAlias )
+
+void qjackctlClientAlias::setPortAlias (
+	const QString& sPortName, const QString& sPortAlias )
 {
 	m_ports[sPortName] = sPortAlias;
 }
 
 
 // Save client/port aliases definitions.
-void qjackctlClientAlias::saveSettings ( QSettings& settings,
-	const QString& sClientKey )
+void qjackctlClientAlias::saveSettings (
+	QSettings& settings, const QString& sClientKey )
 {
 	settings.beginGroup(sClientKey);
 	settings.setValue("/Name", m_rxClientName.pattern());
@@ -180,9 +182,10 @@ qjackctlClientAlias *qjackctlConnectAlias::findClientName (
 	return NULL;
 }
 
+
 // Client aliasing methods.
-void qjackctlConnectAlias::setClientAlias ( const QString& sClientName,
-	const QString& sClientAlias )
+void qjackctlConnectAlias::setClientAlias (
+	const QString& sClientName, const QString& sClientAlias )
 {
 	qjackctlClientAlias *pClient = findClientName(sClientName);
 	if (pClient == NULL) {
@@ -191,6 +194,7 @@ void qjackctlConnectAlias::setClientAlias ( const QString& sClientName,
 	}
 	pClient->setClientAlias(sClientAlias);
 }
+
 
 QString qjackctlConnectAlias::clientAlias ( const QString& sClientName )
 {
@@ -214,8 +218,9 @@ void qjackctlConnectAlias::setPortAlias ( const QString& sClientName,
 	pClient->setPortAlias(sPortName, sPortAlias);
 }
 
-QString qjackctlConnectAlias::portAlias ( const QString& sClientName,
-	const QString& sPortName )
+
+QString qjackctlConnectAlias::portAlias (
+	const QString& sClientName, const QString& sPortName )
 {
 	qjackctlClientAlias *pClient = findClientName(sClientName);
 	if (pClient == NULL)
@@ -226,8 +231,8 @@ QString qjackctlConnectAlias::portAlias ( const QString& sClientName,
 
 
 // Load/save aliases definitions.
-void qjackctlConnectAlias::loadSettings ( QSettings& settings,
-	const QString& sAliasesKey )
+void qjackctlConnectAlias::loadSettings (
+	QSettings& settings, const QString& sAliasesKey )
 {
 	clear();
 
@@ -256,8 +261,9 @@ void qjackctlConnectAlias::loadSettings ( QSettings& settings,
 	settings.endGroup();
 }
 
-void qjackctlConnectAlias::saveSettings ( QSettings& settings,
-	const QString& sAliasesKey )
+
+void qjackctlConnectAlias::saveSettings (
+	QSettings& settings, const QString& sAliasesKey )
 {
 	qSort(*this);
 

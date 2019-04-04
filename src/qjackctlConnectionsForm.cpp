@@ -311,12 +311,12 @@ bool qjackctlConnectionsForm::queryClose (void)
 {
 	bool bQueryClose = true;
 
-	if (m_pSetup && m_pSetup->aliases.isDirty()) {
+	if (m_pSetup && m_pSetup->aliases.dirty) {
 		switch (QMessageBox::warning(this,
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("The preset aliases have been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
-			.arg(m_pSetup->aliases.preset()),
+			.arg(m_pSetup->aliases.key),
 			QMessageBox::Save |
 			QMessageBox::Discard |
 			QMessageBox::Cancel)) {
@@ -448,7 +448,7 @@ void qjackctlConnectionsForm::audioDisconnecting (
 void qjackctlConnectionsForm::audioAliasesChanged (void)
 {
 	if (m_pSetup)
-		m_pSetup->aliases.setDirty(true);
+		m_pSetup->aliases.dirty = true;
 
 	audioRefresh();
 }
@@ -533,7 +533,7 @@ void qjackctlConnectionsForm::midiDisconnecting (
 void qjackctlConnectionsForm::midiAliasesChanged (void)
 {
 	if (m_pSetup)
-		m_pSetup->aliases.setDirty(true);
+		m_pSetup->aliases.dirty = true;
 
 	midiRefresh();
 }
@@ -619,7 +619,7 @@ void qjackctlConnectionsForm::alsaDisconnecting (
 void qjackctlConnectionsForm::alsaAliasesChanged (void)
 {
 	if (m_pSetup)
-		m_pSetup->aliases.setDirty(true);
+		m_pSetup->aliases.dirty = true;
 
 	alsaRefresh();
 }

@@ -433,8 +433,8 @@ public:
 		bool is_connect, QUndoCommand *parent = NULL);
 
 	// Command methods.
-    void undo();
-    void redo();
+	void undo();
+	void redo();
 
 protected:
 
