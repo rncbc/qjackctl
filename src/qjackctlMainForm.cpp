@@ -151,7 +151,7 @@ static const char *c_szTimeDashes = "--:--:--.---";
 #include <signal.h>
 
 // File descriptor for SIGTERM notifier.
-static int g_fdSigterm[2];
+static int g_fdSigterm[2] = { QJACKCTL_FDNIL, QJACKCTL_FDNIL };
 
 // Unix SIGTERM signal handler.
 static void qjackctl_sigterm_handler ( int /* signo */ )
