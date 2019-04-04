@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 #include "qjackctlPatchbayRack.h"
 
 // Aliases accessors.
-#include "qjackctlConnectAlias.h"
+#include "qjackctlAliases.h"
 
 #include <stdlib.h>
 
@@ -38,7 +38,7 @@ class qjackctlPatchbaySnapshot
 public:
 
 	// Constructor.
-	qjackctlPatchbaySnapshot() {};
+	qjackctlPatchbaySnapshot() {}
 
 	// Cleanup.
 	void clear() { m_hash.clear(); }
@@ -96,12 +96,12 @@ public:
 			= find_socket(socketlist, sClientName, iSocketType);
 		if (pSocket == NULL) {
 			pSocket = new qjackctlPatchbaySocket(sClientName,
-				qjackctlClientAlias::escapeRegExpDigits(sClientName),
+				qjackctlAliasItem::escapeRegExpDigits(sClientName),
 				iSocketType);
 			socketlist.append(pSocket);
 		}
 		pSocket->addPlug(
-			qjackctlClientAlias::escapeRegExpDigits(sPortName));
+			qjackctlAliasItem::escapeRegExpDigits(sPortName));
 	}
 
 	// Get client socket into rack (socket list).
@@ -137,12 +137,12 @@ public:
 			sSocketName += ' ' + QString::number(iSocket + 1);
 
 		pSocket = new qjackctlPatchbaySocket(sSocketName,
-			qjackctlClientAlias::escapeRegExpDigits(sClientName),
+			qjackctlAliasItem::escapeRegExpDigits(sClientName),
 			iSocketType);
 		QStringListIterator port_iter(ports);
 		while (port_iter.hasNext()) {
 			pSocket->addPlug(
-				qjackctlClientAlias::escapeRegExpDigits(port_iter.next()));
+				qjackctlAliasItem::escapeRegExpDigits(port_iter.next()));
 		}
 
 		socketlist.append(pSocket);

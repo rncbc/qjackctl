@@ -317,6 +317,7 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	m_config = new qjackctlGraphConfig(&pSetup->settings());
 
 	m_ui.graphCanvas->setSettings(m_config->settings());
+	m_ui.graphCanvas->setAliases(&(pSetup->aliases));
 
 	m_config->restoreState(this);
 

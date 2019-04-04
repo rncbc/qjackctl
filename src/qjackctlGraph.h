@@ -46,6 +46,9 @@ class qjackctlGraphConnect;
 class qjackctlGraphCommand;
 class qjackctlGraphCanvas;
 
+class qjackctlAliases;
+class qjackctlAliasList;
+
 class QStyleOptionGraphicsItem;
 
 class QRubberBand;
@@ -433,8 +436,8 @@ public:
 		bool is_connect, QUndoCommand *parent = NULL);
 
 	// Command methods.
-    void undo();
-    void redo();
+	void undo();
+	void redo();
 
 protected:
 
@@ -571,6 +574,10 @@ public:
 	// Clear all selection.
 	void clearSelection();
 
+	// Client/port aliases accessors.
+	void setAliases(qjackctlAliases *aliases);
+	qjackctlAliases *aliases() const;
+
 signals:
 
 	// Node factory notifications.
@@ -680,6 +687,8 @@ private:
 	qjackctlGraphItem *m_edit_item;
 	QLineEdit    *m_editor;
 	int           m_edited;
+
+	qjackctlAliases *m_aliases;
 };
 
 
@@ -692,6 +701,9 @@ public:
 
 	// Constructor.
 	qjackctlGraphSect(qjackctlGraphCanvas *canvas);
+
+	// Destructor (virtual)
+	virtual ~qjackctlGraphSect() {}
 
 	// Accessors.
 	qjackctlGraphCanvas *canvas() const;
@@ -707,6 +719,12 @@ public:
 	// Special node finder.
 	qjackctlGraphNode *findNode(
 		const QString& name, qjackctlGraphItem::Mode mode, int type = 0) const;
+
+protected:
+
+	// Client/port item aliases accessor.
+	virtual QList<qjackctlAliasList *> item_aliases(
+		qjackctlGraphItem *item) const = 0;
 
 private:
 

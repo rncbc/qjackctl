@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ" sourcelanguage="en">
+<TS version="2.1" language="cs_CZ" sourcelanguage="en">
 <context>
     <name>PortAudioProber</name>
     <message>
@@ -438,13 +438,13 @@ Chcete uložit změny?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1706"/>
-        <location filename="../qjackctlGraph.cpp" line="1840"/>
+        <location filename="../qjackctlGraph.cpp" line="1709"/>
+        <location filename="../qjackctlGraph.cpp" line="1843"/>
         <source>Connect</source>
         <translation>Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1876"/>
+        <location filename="../qjackctlGraph.cpp" line="1879"/>
         <source>Disconnect</source>
         <translation>Rozpojit</translation>
     </message>
@@ -999,12 +999,12 @@ Chcete uložit změny?</translation>
         <translation>Zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="380"/>
+        <location filename="../qjackctlGraphForm.cpp" line="381"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="456"/>
+        <location filename="../qjackctlGraphForm.cpp" line="457"/>
         <source>Colors - %1</source>
         <translation>Barvy - %1</translation>
     </message>

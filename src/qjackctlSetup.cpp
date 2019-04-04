@@ -314,15 +314,15 @@ bool qjackctlSetup::loadAliases (void)
 	m_settings.endGroup();
 	m_settings.endGroup();
 
-	aliases.setPreset(sPreset);
-	aliases.setDirty(false);
+	aliases.dirty = false;
+	aliases.key = sPreset;
 
 	return true;
 }
 
 bool qjackctlSetup::saveAliases (void)
 {
-	const QString& sPreset = aliases.preset();
+	const QString& sPreset = aliases.key;
 
 	QString sSuffix;
 	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
@@ -350,7 +350,7 @@ bool qjackctlSetup::saveAliases (void)
 	m_settings.endGroup();
 	m_settings.endGroup();
 
-	aliases.setDirty(false);
+	aliases.dirty = false;
 
 	return true;
 }

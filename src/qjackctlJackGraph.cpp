@@ -410,4 +410,59 @@ void qjackctlJackGraph::resetPortTypeColors (void)
 }
 
 
+// Client/port item aliases accessor.
+QList<qjackctlAliasList *> qjackctlJackGraph::item_aliases (
+	qjackctlGraphItem *item ) const
+{
+	QList<qjackctlAliasList *> alist;
+
+	qjackctlAliases *aliases = NULL;
+	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
+	if (canvas)
+		aliases = canvas->aliases();
+	if (aliases == NULL)
+		return alist; // empty!
+
+	uint item_type = 0;
+	qjackctlGraphItem::Mode item_mode = qjackctlGraphItem::None;
+
+	if (item->type() == qjackctlGraphNode::Type) {
+		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+		if (node) {
+			item_type = node->nodeType();
+			item_mode = node->nodeMode();
+		}
+	}
+	else
+	if (item->type() == qjackctlGraphPort::Type) {
+		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+		if (port) {
+			item_type = port->portType();
+			item_mode = port->portMode();
+		}
+	}
+
+	if (!item_type || !item_mode)
+		return alist; // empty again!
+
+	if (item_type == qjackctlJackGraph::audioPortType()) {
+		// JACK audio type...
+		if (item_mode & qjackctlGraphItem::Input)
+			alist.append(&(aliases->audioInputs));
+		if (item_mode & qjackctlGraphItem::Output)
+			alist.append(&(aliases->audioOutputs));
+	}
+	else
+	if (item_type == qjackctlJackGraph::midiPortType()) {
+		// JACK MIDI type...
+		if (item_mode & qjackctlGraphItem::Input)
+			alist.append(&(aliases->midiInputs));
+		if (item_mode & qjackctlGraphItem::Output)
+			alist.append(&(aliases->midiOutputs));
+	}
+
+	return alist; // hopefully non empty!
+}
+
+
 // end of qjackctlJackGraph.cpp

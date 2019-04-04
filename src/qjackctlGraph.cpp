@@ -22,6 +22,8 @@
 #include "qjackctlAbout.h"
 #include "qjackctlGraph.h"
 
+#include "qjackctlAliases.h"
+
 #include <QGraphicsScene>
 
 #include <QGraphicsDropShadowEffect>
@@ -1180,7 +1182,8 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 		m_zoom(1.0), m_zoomrange(false),
 		m_commands(NULL), m_settings(NULL),
 		m_selected_nodes(0), m_edit_item(NULL),
-		m_editor(NULL), m_edited(0)
+		m_editor(NULL), m_edited(0),
+		m_aliases(NULL)
 {
 	m_scene = new QGraphicsScene();
 
@@ -2264,6 +2267,19 @@ void qjackctlGraphCanvas::editingFinished (void)
 		m_editor->hide();
 		m_edited = 0;
 	}
+}
+
+
+// Client/port aliases accessors.
+void qjackctlGraphCanvas::setAliases ( qjackctlAliases *aliases )
+{
+	m_aliases = aliases;
+}
+
+
+qjackctlAliases *qjackctlGraphCanvas::aliases (void) const
+{
+	return m_aliases;
 }
 
 

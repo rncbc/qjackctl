@@ -1,4 +1,4 @@
-// qjackctlConnectAlias.h
+// qjackctlAliases.h
 //
 /****************************************************************************
    Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -19,25 +19,25 @@
 
 *****************************************************************************/
 
-#ifndef __qjackctlConnectAlias_h
-#define __qjackctlConnectAlias_h
+#ifndef __qjackctlAliases_h
+#define __qjackctlAliases_h
 
 #include <QSettings>
 #include <QRegExp>
 #include <QMap>
 
 
-// Client item alias map.
-class qjackctlClientAlias
+// Client/port item alias map.
+class qjackctlAliasItem
 {
 public:
 
 	// Constructor.
-	qjackctlClientAlias (const QString& sClientName,
-		const QString& sClientAlias = QString::null);
-	
+	qjackctlAliasItem(const QString& sClientName,
+		const QString& sClientAlias = QString());
+
 	// Default destructor.
-	~qjackctlClientAlias();
+	~qjackctlAliasItem();
 
 	// Client name accessor.
 	QString clientName() const;
@@ -50,15 +50,14 @@ public:
 	void setClientAlias(const QString& sClientAlias);
 
 	// Port aliasing methods.
-	QString portAlias (const QString& sPortName) const;
-	void setPortAlias (const QString& sPortName,
-		const QString& sPortAlias);
+	QString portAlias(const QString& sPortName) const;
+	void setPortAlias(const QString& sPortName, const QString& sPortAlias);
 
 	// Save client/port aliases definitions.
 	void saveSettings(QSettings& settings, const QString& sClientKey);
 
 	// Need for generid sort.
-	bool operator< (const qjackctlClientAlias& other);
+	bool operator< (const qjackctlAliasItem& other);
 
 	// Escape and format a string as a regular expresion.
 	static QString escapeRegExpDigits(const QString& s, int iThreshold = 3);
@@ -75,26 +74,26 @@ private:
 };
 
 
-// Client list alias map.
-class qjackctlConnectAlias : public QList<qjackctlClientAlias *>
+// Client/port list alias map.
+class qjackctlAliasList : public QList<qjackctlAliasItem *>
 {
 public:
 
 	// Constructor.
-	qjackctlConnectAlias ();
+	qjackctlAliasList();
 	// Default destructor.
-	~qjackctlConnectAlias ();
+	~qjackctlAliasList();
 
 	// Client aliasing methods.
-	QString clientAlias (const QString& sClientName);
-	void setClientAlias (const QString& sClientName,
+	QString clientAlias(const QString& sClientName);
+	void setClientAlias(const QString& sClientName,
 		const QString& sClientAlias);
 
 	// Port aliasing methods.
-	QString portAlias (const QString& sClientName,
+	QString portAlias(const QString& sClientName,
 		const QString& sPortName);
-	void setPortAlias (const QString& sClientName,
-		const QString& sPortName, const QString& sPortAlias);
+	void setPortAlias(const QString& sClientName,
+		const QString& sPortName,const QString& sPortAlias);
 
 	// Load/save aliases definitions.
 	void loadSettings(QSettings& settings, const QString& sAliasesKey);
@@ -103,10 +102,30 @@ public:
 private:
 
 	// Client item finder.
-	qjackctlClientAlias *findClientName (const QString& sClientName);
+	qjackctlAliasItem *findClientName (const QString& sClientName);
 };
 
 
-#endif  // __qjackctlConnectAlias_h
+// Client/port alias map.
+class qjackctlAliases
+{
+public:
 
-// end of qjackctlConnectAlias.h
+	// Constructor.
+	qjackctlAliases() : dirty(false) {}
+
+	qjackctlAliasList audioOutputs;
+	qjackctlAliasList audioInputs;
+	qjackctlAliasList midiOutputs;
+	qjackctlAliasList midiInputs;
+	qjackctlAliasList alsaOutputs;
+	qjackctlAliasList alsaInputs;
+
+	QString key;
+	bool    dirty;
+};
+
+
+#endif  // __qjackctlAliases_h
+
+// end of qjackctlAliases.h
