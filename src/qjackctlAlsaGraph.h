@@ -1,7 +1,7 @@
 // qjackctlAlsaGraph.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -70,6 +70,9 @@ protected:
 	bool findClientPort(snd_seq_client_info_t *client_info,
 		snd_seq_port_info_t *port_info, qjackctlGraphItem::Mode port_mode,
 		qjackctlGraphNode **node, qjackctlGraphPort **port, bool add_new);
+
+	// Client/port item aliases accessor.
+	QList<qjackctlAliasList *> item_aliases(qjackctlGraphItem *item) const;
 
 private:
 

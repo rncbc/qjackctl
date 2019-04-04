@@ -1,7 +1,7 @@
 // qjackctlAlsaGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -358,6 +358,53 @@ void qjackctlAlsaGraph::resetPortTypeColors (void)
 			qjackctlAlsaGraph::midiPortType(),
 			QColor(Qt::darkMagenta).darker(120));
 	}
+}
+
+
+// Client/port item aliases accessor.
+QList<qjackctlAliasList *> qjackctlAlsaGraph::item_aliases (
+	qjackctlGraphItem *item ) const
+{
+	QList<qjackctlAliasList *> alist;
+
+	qjackctlAliases *aliases = NULL;
+	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
+	if (canvas)
+		aliases = canvas->aliases();
+	if (aliases == NULL)
+		return alist; // empty!
+
+	uint item_type = 0;
+	qjackctlGraphItem::Mode item_mode = qjackctlGraphItem::None;
+
+	if (item->type() == qjackctlGraphNode::Type) {
+		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+		if (node) {
+			item_type = node->nodeType();
+			item_mode = node->nodeMode();
+		}
+	}
+	else
+	if (item->type() == qjackctlGraphPort::Type) {
+		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+		if (port) {
+			item_type = port->portType();
+			item_mode = port->portMode();
+		}
+	}
+
+	if (!item_type || !item_mode)
+		return alist; // empty again!
+
+	if (item_type == qjackctlAlsaGraph::midiPortType()) {
+		// ALSA MIDI type...
+		if (item_mode & qjackctlGraphItem::Input)
+			alist.append(&(aliases->alsaInputs));
+		if (item_mode & qjackctlGraphItem::Output)
+			alist.append(&(aliases->alsaOutputs));
+	}
+
+	return alist; // hopefully non empty!
 }
 
 

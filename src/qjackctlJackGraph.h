@@ -69,6 +69,9 @@ protected:
 		const char *client_port, qjackctlGraphItem::Mode port_mode,
 		qjackctlGraphNode **node, qjackctlGraphPort **port, bool add_new);
 
+	// Client/port item aliases accessor.
+	QList<qjackctlAliasList *> item_aliases(qjackctlGraphItem *item) const;
+
 private:
 
 	// Callback sanity mutex.
