@@ -40,7 +40,7 @@ QMutex qjackctlJackGraph::g_mutex;
 #include <jack/uuid.h>
 
 static
-QString qjackctlJackGraph_pretty_name ( jack_uuid_t uuid, const QString& name )
+QString qjackctlJackGraph_prettyName ( jack_uuid_t uuid, const QString& name )
 {
 	QString pretty_name = name;
 
@@ -60,12 +60,29 @@ QString qjackctlJackGraph_pretty_name ( jack_uuid_t uuid, const QString& name )
 	return pretty_name;
 }
 
+static
+void qjackctlJackGraph_setPrettyName (
+	jack_client_t *client, jack_uuid_t uuid, const QString& pretty_name )
+{
+	const char *value = pretty_name.toUtf8().constData();
+
+	::jack_set_property(client, uuid,
+		JACK_METADATA_PRETTY_NAME, value, NULL);
+}
+
+static void qjackctlJackGraph_removePrettyName (
+	jack_client_t *client, jack_uuid_t uuid )
+{
+	::jack_remove_property(client, uuid, JACK_METADATA_PRETTY_NAME);
+}
+
+
 #ifndef JACKEY_ORDER
 #define JACKEY_ORDER "http://jackaudio.org/metadata/order"
 #endif
 
 static
-int qjackctlJackGraph_port_index ( jack_uuid_t uuid, int index )
+int qjackctlJackGraph_portIndex ( jack_uuid_t uuid, int index )
 {
 	int port_index = index;
 
@@ -85,7 +102,23 @@ int qjackctlJackGraph_port_index ( jack_uuid_t uuid, int index )
 	return port_index;
 }
 
-#endif
+static
+void qjackctlJackGraph_setPortIndex (
+	jack_client_t *client, jack_uuid_t uuid, const int port_index )
+{
+	const char *value = QString::number(port_index).toUtf8().constData();
+
+	::jack_set_property(client, uuid,
+		JACKEY_ORDER, value, NULL);
+}
+
+static void qjackctlJackGraph_removePortIndex (
+	jack_client_t *client, jack_uuid_t uuid )
+{
+	::jack_remove_property(client, uuid, JACKEY_ORDER);
+}
+
+#endif	// CONFIG_JACK_METADATA
 
 
 // Constructor.
@@ -241,43 +274,49 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 		(*port)->updatePortTypeColors(canvas());
 	}
 
-#ifdef CONFIG_JACK_METADATA
-	if (*node) {
+	if (add_new && *node) {
 		int nchanged = 0;
+		QString node_title = (*node)->nodeTitle();
+		foreach (qjackctlAliasList *node_aliases, item_aliases(*node))
+			node_title = node_aliases->clientAlias(client_name);
+	#ifdef CONFIG_JACK_METADATA
 		const char *client_uuid_name
 			= ::jack_get_uuid_for_client_name(client,
 				client_name.toUtf8().constData());
 		if (client_uuid_name) {
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(client_uuid_name, &client_uuid);
-			const QString& node_title
-				= qjackctlJackGraph_pretty_name(client_uuid, client_name);
-			if ((*node)->nodeTitle() != node_title) {
-				(*node)->setNodeTitle(node_title);
-				++nchanged;
-			}
+			node_title = qjackctlJackGraph_prettyName(client_uuid, client_name);
 			::jack_free((void *) client_uuid_name);
 		}
+	#endif	// CONFIG_JACK_METADATA
+		if ((*node)->nodeTitle() != node_title) {
+			(*node)->setNodeTitle(node_title);
+			++nchanged;
+		}
 		if (*port) {
+			QString port_title = (*port)->portTitle();
+			foreach (qjackctlAliasList *port_aliases, item_aliases(*port))
+				port_title = port_aliases->portAlias(client_name, port_name);
+		#ifdef CONFIG_JACK_METADATA
 			const jack_uuid_t port_uuid
 				= ::jack_port_uuid(jack_port);
-			const QString& port_title
-				= qjackctlJackGraph_pretty_name(port_uuid, port_name);
-			if ((*port)->portTitle() != port_title) {
-				(*port)->setPortTitle(port_title);
-				++nchanged;
-			}
+			port_title = qjackctlJackGraph_prettyName(port_uuid, port_name);
 			const int port_index
-				= qjackctlJackGraph_port_index(port_uuid, 0);
+				= qjackctlJackGraph_portIndex(port_uuid, 0);
 			if ((*port)->portIndex() != port_index) {
 				(*port)->setPortIndex(port_index);
+				++nchanged;
+			}
+		#endif	// CONFIG_JACK_METADATA
+			if ((*port)->portTitle() != port_title) {
+				(*port)->setPortTitle(port_title);
 				++nchanged;
 			}
 		}
 		if (nchanged > 0)
 			(*node)->updatePath();
 	}
-#endif
 
 	return (*node && *port);
 }

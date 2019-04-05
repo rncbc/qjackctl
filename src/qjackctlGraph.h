@@ -294,7 +294,6 @@ public:
 
 	// Destructor..
 	~qjackctlGraphNode();
-
 	// Graphics item type.
 	enum { Type = QGraphicsItem::UserType + 1 };
 
@@ -719,6 +718,9 @@ public:
 	// Special node finder.
 	qjackctlGraphNode *findNode(
 		const QString& name, qjackctlGraphItem::Mode mode, int type = 0) const;
+
+	// Client/port renaming method.
+	virtual void renameItem(qjackctlGraphItem *item, const QString& name);
 
 protected:
 

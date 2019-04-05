@@ -693,26 +693,9 @@ void qjackctlGraphForm::refresh (void)
 // Item renaming slot.
 void qjackctlGraphForm::renamed ( qjackctlGraphItem *item, const QString& name )
 {
-	// FIXME: do proper client/node, port title/name aliases...
-	//
-	qjackctlGraphNode *node = NULL;
-
-	if (item->type() == qjackctlGraphNode::Type) {
-		node = static_cast<qjackctlGraphNode *> (item);
-		if (node)
-			node->setNodeTitle(name);
-	}
-	else
-	if (item->type() == qjackctlGraphPort::Type) {
-		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
-		if (port) {
-			port->setPortTitle(name);
-			node = port->portNode();
-		}
-	}
-
-	if (node)
-		node->updatePath();
+	qjackctlGraphSect *sect = item_sect(item);
+	if (sect)
+		sect->renameItem(item, name);
 }
 
 
@@ -863,6 +846,35 @@ void qjackctlGraphForm::updateViewColors (void)
 	updateViewColorsAction(m_ui.viewColorsJackAudioAction);
 	updateViewColorsAction(m_ui.viewColorsJackMidiAction);
 	updateViewColorsAction(m_ui.viewColorsAlsaMidiAction);
+}
+
+
+// Item sect predicate.
+qjackctlGraphSect *qjackctlGraphForm::item_sect ( qjackctlGraphItem *item ) const
+{
+	if (item->type() == qjackctlGraphNode::Type) {
+		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+		if (node && qjackctlJackGraph::isNodeType(node->nodeType()))
+			return m_jack;
+	#ifdef CONFIG_ALSA_SEQ
+		else
+		if (node && qjackctlAlsaGraph::isNodeType(node->nodeType()))
+			return m_alsa;
+	#endif
+	}
+	else
+	if (item->type() == qjackctlGraphPort::Type) {
+		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+		if (port && qjackctlJackGraph::isPortType(port->portType()))
+			return m_jack;
+	#ifdef CONFIG_ALSA_SEQ
+		else
+		if (port && qjackctlAlsaGraph::isPortType(port->portType()))
+			return m_alsa;
+	#endif
+	}
+
+	return NULL; // No deal!
 }
 
 

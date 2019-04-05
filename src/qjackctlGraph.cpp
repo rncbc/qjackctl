@@ -227,7 +227,7 @@ uint qjackctlGraphPort::portType (void) const
 
 void qjackctlGraphPort::setPortTitle ( const QString& title )
 {
-	m_title = title;
+	m_title = (title.isEmpty() ? m_name : title);
 
 	m_text->setPlainText(m_title);
 
@@ -661,7 +661,7 @@ void qjackctlGraphNode::setNodeTitle ( const QString& title )
 {
 	const QFont& font = m_text->font();
 	m_text->setFont(QFont(font.family(), font.pointSize(), QFont::Bold));
-	m_text->setPlainText(title);
+	m_text->setPlainText(title.isEmpty() ? m_name : title);
 }
 
 
@@ -2256,11 +2256,8 @@ void qjackctlGraphCanvas::editingFinished (void)
 {
 	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible()) {
 		// If changed then notify...
-		if (m_edited > 0) {
-			const QString& name = m_editor->text();
-			if (!name.isEmpty())
-				emit renamed(m_edit_item, name);
-		}
+		if (m_edited > 0)
+			emit renamed(m_edit_item, m_editor->text());
 		// Reset all renaming stuff...
 		m_edit_item = NULL;
 		m_editor->setEnabled(false);
@@ -2359,6 +2356,52 @@ qjackctlGraphNode *qjackctlGraphSect::findNode (
 	const QString& name, qjackctlGraphItem::Mode mode, int type ) const
 {
 	return m_canvas->findNode(name, mode, type);
+}
+
+
+// Client/port renaming methods.
+void qjackctlGraphSect::renameItem (
+	qjackctlGraphItem *item, const QString& name )
+{
+	int nchanged = 0;
+
+	qjackctlGraphNode *node = NULL;
+
+	if (item->type() == qjackctlGraphNode::Type) {
+		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+		if (node) {
+			node->setNodeTitle(name);
+			foreach (qjackctlAliasList *node_aliases, item_aliases(item)) {
+				node_aliases->setClientAlias(node->nodeName(), name);
+				++nchanged;
+			}
+		}
+	}
+	else
+	if (item->type() == qjackctlGraphPort::Type) {
+		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+		if (port)
+			node = port->portNode();
+		if (port && node) {
+			port->setPortTitle(name);
+			foreach (qjackctlAliasList *port_aliases, item_aliases(item)) {
+				port_aliases->setPortAlias(
+					node->nodeName(), port->portName(), name);
+				++nchanged;
+			}
+		}
+	}
+
+	if (node)
+		node->updatePath();
+
+	if (nchanged > 0) {
+		qjackctlAliases *aliases = NULL;
+		if (m_canvas)
+			aliases = m_canvas->aliases();
+		if (aliases)
+			aliases->dirty = true;
+	}
 }
 
 

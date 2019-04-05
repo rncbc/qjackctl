@@ -188,6 +188,28 @@ bool qjackctlAlsaGraph::findClientPort (
 		(*port)->updatePortTypeColors(canvas());
 	}
 
+	if (add_new && *node) {
+		int nchanged = 0;
+		QString node_title = (*node)->nodeTitle();
+		foreach (qjackctlAliasList *node_aliases, item_aliases(*node))
+			node_title = node_aliases->clientAlias(client_name);
+		if ((*node)->nodeTitle() != node_title) {
+			(*node)->setNodeTitle(node_title);
+			++nchanged;
+		}
+		if (*port) {
+			QString port_title = (*port)->portTitle();
+			foreach (qjackctlAliasList *port_aliases, item_aliases(*port))
+				port_title = port_aliases->portAlias(client_name, port_name);
+			if ((*port)->portTitle() != port_title) {
+				(*port)->setPortTitle(port_title);
+				++nchanged;
+			}
+		}
+		if (nchanged > 0)
+			(*node)->updatePath();
+	}
+
 	return (*node && *port);
 }
 

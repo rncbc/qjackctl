@@ -28,6 +28,7 @@
 // Forward decls.
 class qjackctlGraphConfig;
 
+class qjackctlGraphSect;
 class qjackctlAlsaGraph;
 class qjackctlJackGraph;
 
@@ -135,6 +136,9 @@ protected:
 	// Special port-type color method.
 	void updateViewColorsAction(QAction *action);
 	void updateViewColors();
+
+	// Item sect predicate.
+	qjackctlGraphSect *item_sect(qjackctlGraphItem *item) const;
 
 private:
 
