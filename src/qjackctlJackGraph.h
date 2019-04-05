@@ -62,6 +62,9 @@ public:
 	static uint audioPortType();
 	static uint midiPortType();
 
+	// Client/port renaming method.
+	void renameItem(qjackctlGraphItem *item, const QString& name);
+
 protected:
 
 	// JACK client:port finder and creator if not existing.

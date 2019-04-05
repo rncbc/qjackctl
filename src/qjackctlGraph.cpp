@@ -2359,7 +2359,7 @@ qjackctlGraphNode *qjackctlGraphSect::findNode (
 }
 
 
-// Client/port renaming methods.
+// Client/port renaming method.
 void qjackctlGraphSect::renameItem (
 	qjackctlGraphItem *item, const QString& name )
 {

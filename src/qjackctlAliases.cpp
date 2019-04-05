@@ -77,17 +77,17 @@ void qjackctlAliasItem::setClientAlias ( const QString& sClientAlias )
 // Port aliasing methods.
 QString qjackctlAliasItem::portAlias ( const QString& sPortName ) const
 {
-	QString sPortAlias = m_ports[sPortName];
-	if (sPortAlias.isEmpty())
-		sPortAlias = sPortName;
-	return sPortAlias;
+	return m_ports.value(sPortName, sPortName);
 }
 
 
 void qjackctlAliasItem::setPortAlias (
 	const QString& sPortName, const QString& sPortAlias )
 {
-	m_ports[sPortName] = sPortAlias;
+	if (sPortAlias.isEmpty())
+		m_ports.remove(sPortName);
+	else
+		m_ports.insert(sPortName, sPortAlias);
 }
 
 
@@ -99,25 +99,34 @@ void qjackctlAliasItem::saveSettings (
 	settings.setValue("/Name", m_rxClientName.pattern());
 	settings.setValue("/Alias", m_sClientAlias);
 	int iPort = 0;
-	QMap<QString, QString>::ConstIterator iter = m_ports.begin();
-	while (iter != m_ports.end()) {
-		settings.beginGroup("/Port" + QString::number(++iPort));
-		settings.setValue("/Name", iter.key());
-		settings.setValue("/Alias", iter.value());
-		settings.endGroup();
-		++iter;
+	QMap<QString, QString>::ConstIterator iter = m_ports.constBegin();
+	const QMap<QString, QString>::ConstIterator& iter_end
+		= m_ports.constBegin();
+	for ( ; iter != iter_end; ++iter) {
+		const QString& sPortName
+			= iter.key();
+		const QString& sPortAlias
+			= iter.value();
+		if (!sPortName.isEmpty() && !sPortAlias.isEmpty()) {
+			settings.beginGroup("/Port" + QString::number(++iPort));
+			settings.setValue("/Name", sPortName);
+			settings.setValue("/Alias", sPortAlias);
+			settings.endGroup();
+		}
 	}
 	settings.endGroup();
 }
 
 
 // Escape and format a string as a regular expresion.
-QString qjackctlAliasItem::escapeRegExpDigits ( const QString& s,
-	int iThreshold )
+QString qjackctlAliasItem::escapeRegExpDigits (
+	const QString& s, int iThreshold )
 {
+	const QString& sEscape
+		= QRegExp::escape(s);
+
 	QString sDigits;
 	QString sResult;
-	QString sEscape = QRegExp::escape(s);
 	int iDigits = 0;
 
 	for (int i = 0; i < sEscape.length(); i++) {
@@ -131,7 +140,7 @@ QString qjackctlAliasItem::escapeRegExpDigits ( const QString& s,
 		} else {
 			if (iDigits > 0) {
 				sResult += sDigits;
-				sDigits = QString::null;
+				sDigits.clear();
 				iDigits = 0;
 			}
 			sResult += ch;
@@ -237,21 +246,27 @@ void qjackctlAliasList::loadSettings (
 	clear();
 
 	settings.beginGroup(sAliasesKey);
-	QStringListIterator iter(settings.childGroups());
-	while (iter.hasNext()) {
-		QString sClientKey   = iter.next();
-		QString sClientName  = settings.value(sClientKey + "/Name").toString();
-		QString sClientAlias = settings.value(sClientKey + "/Alias").toString();
+	QStringListIterator client_iter(settings.childGroups());
+	while (client_iter.hasNext()) {
+		const QString& sClientKey
+			= client_iter.next();
+		const QString& sClientName
+			= settings.value(sClientKey + "/Name").toString();
+		const QString& sClientAlias
+			= settings.value(sClientKey + "/Alias").toString();
 		if (!sClientName.isEmpty() && !sClientAlias.isEmpty()) {
 			qjackctlAliasItem *pClient =
 				new qjackctlAliasItem(sClientName, sClientAlias);
 			append(pClient);
 			settings.beginGroup(sClientKey);
-			QStringListIterator it(settings.childGroups());
-			while (it.hasNext()) {
-				QString sPortKey   = it.next();
-				QString sPortName  = settings.value(sPortKey + "/Name").toString();
-				QString sPortAlias = settings.value(sPortKey + "/Alias").toString();
+			QStringListIterator port_iter(settings.childGroups());
+			while (port_iter.hasNext()) {
+				const QString& sPortKey
+					= port_iter.next();
+				const QString& sPortName
+					= settings.value(sPortKey + "/Name").toString();
+				const QString& sPortAlias
+					= settings.value(sPortKey + "/Alias").toString();
 				if (!sPortName.isEmpty() && !sPortAlias.isEmpty())
 					pClient->setPortAlias(sPortName, sPortAlias);
 			}
