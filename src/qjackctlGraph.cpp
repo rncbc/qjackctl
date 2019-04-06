@@ -1082,9 +1082,8 @@ void qjackctlGraphConnect::updatePortTypeColors (void)
 
 // Constructor.
 qjackctlGraphCommand::qjackctlGraphCommand ( qjackctlGraphCanvas *canvas,
-	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect,
 	QUndoCommand *parent ) : QUndoCommand(parent),
-		m_canvas(canvas), m_item(port1, port2, is_connect)
+		m_canvas(canvas)
 {
 }
 
@@ -1102,8 +1101,20 @@ void qjackctlGraphCommand::redo (void)
 }
 
 
+//----------------------------------------------------------------------------
+// qjackctlGraphConnectCommand -- Connect graph command pattern
+
+// Constructor.
+qjackctlGraphConnectCommand::qjackctlGraphConnectCommand ( qjackctlGraphCanvas *canvas,
+	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect,
+	qjackctlGraphCommand *parent ) : qjackctlGraphCommand(canvas, parent),
+		m_item(port1, port2, is_connect)
+{
+}
+
+
 // Command executive
-bool qjackctlGraphCommand::execute ( bool is_undo )
+bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 {
 	qjackctlGraphCanvas *canvas = qjackctlGraphCommand::canvas();
 	if (canvas == NULL)
@@ -1485,10 +1496,13 @@ void qjackctlGraphCanvas::connectPorts (
 		(!is_connect && !is_connected))
 		return;
 
-	if (port1->isOutput())
-		m_commands->push(new qjackctlGraphCommand(this, port1, port2, is_connect));
-	else
-		m_commands->push(new qjackctlGraphCommand(this, port2, port1, is_connect));
+	if (port1->isOutput()) {
+		m_commands->push(
+			new qjackctlGraphConnectCommand(this, port1, port2, is_connect));
+	} else {
+		m_commands->push(
+			new qjackctlGraphConnectCommand(this, port2, port1, is_connect));
+	}
 }
 
 
@@ -2323,7 +2337,7 @@ void qjackctlGraphSect::removeItem ( qjackctlGraphItem *item )
 
 
 // Clean-up all un-marked items...
-void qjackctlGraphSect::resetItems ( int node_type )
+void qjackctlGraphSect::resetItems ( uint node_type )
 {
 	const QList<qjackctlGraphConnect *> connects(m_connects);
 
@@ -2340,7 +2354,7 @@ void qjackctlGraphSect::resetItems ( int node_type )
 }
 
 
-void qjackctlGraphSect::clearItems ( int node_type )
+void qjackctlGraphSect::clearItems ( uint node_type )
 {
 	qjackctlGraphSect::resetItems(node_type);
 

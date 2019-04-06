@@ -430,9 +430,7 @@ class qjackctlGraphCommand : public QUndoCommand
 public:
 
 	// Constructor.
-	qjackctlGraphCommand(qjackctlGraphCanvas *canvas,
-		qjackctlGraphPort *port1, qjackctlGraphPort *port2,
-		bool is_connect, QUndoCommand *parent = NULL);
+	qjackctlGraphCommand(qjackctlGraphCanvas *canvas, QUndoCommand *parent = NULL);
 
 	// Accessors.
 	qjackctlGraphCanvas *canvas() const
@@ -441,6 +439,30 @@ public:
 	// Command methods.
 	void undo();
 	void redo();
+
+protected:
+
+	// Command executive method.
+	virtual bool execute(bool is_undo = false) = 0;
+
+private:
+
+	// Command arguments.
+	qjackctlGraphCanvas *m_canvas;
+};
+
+
+//----------------------------------------------------------------------------
+// qjackctlGraphConnectCommand -- Connect graph command
+
+class qjackctlGraphConnectCommand : public qjackctlGraphCommand
+{
+public:
+
+	// Constructor.
+	qjackctlGraphConnectCommand(qjackctlGraphCanvas *canvas,
+		qjackctlGraphPort *port1, qjackctlGraphPort *port2,
+		bool is_connect, qjackctlGraphCommand *parent = NULL);
 
 protected:
 
@@ -496,13 +518,11 @@ protected:
 	};
 
 	// Command executive method.
-	bool execute(bool is_undo = false);
+	bool execute(bool is_undo);
 
 private:
 
 	// Command arguments.
-	qjackctlGraphCanvas *m_canvas;
-
 	Item m_item;
 };
 
@@ -714,8 +734,8 @@ public:
 	void removeItem(qjackctlGraphItem *item);
 
 	// Clean-up all un-marked items...
-	void resetItems(int node_type);
-	void clearItems(int node_type);
+	void resetItems(uint node_type);
+	void clearItems(uint node_type);
 
 	// Special node finder.
 	qjackctlGraphNode *findNode(
