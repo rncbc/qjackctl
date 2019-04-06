@@ -101,7 +101,7 @@ void qjackctlAliasItem::saveSettings (
 	int iPort = 0;
 	QMap<QString, QString>::ConstIterator iter = m_ports.constBegin();
 	const QMap<QString, QString>::ConstIterator& iter_end
-		= m_ports.constBegin();
+		= m_ports.constEnd();
 	for ( ; iter != iter_end; ++iter) {
 		const QString& sPortName
 			= iter.key();

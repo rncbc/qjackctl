@@ -642,6 +642,15 @@ void qjackctlGraphForm::disconnected (
 }
 
 
+// Item renaming slot.
+void qjackctlGraphForm::renamed ( qjackctlGraphItem *item, const QString& name )
+{
+	qjackctlGraphSect *sect = item_sect(item);
+	if (sect)
+		sect->renameItem(item, name);
+}
+
+
 // Graph section slots.
 void qjackctlGraphForm::jack_shutdown (void)
 {
@@ -686,16 +695,6 @@ void qjackctlGraphForm::refresh (void)
 	}
 #endif
 //	QTimer::singleShot(300, this, SLOT(refresh()));
-}
-
-
-
-// Item renaming slot.
-void qjackctlGraphForm::renamed ( qjackctlGraphItem *item, const QString& name )
-{
-	qjackctlGraphSect *sect = item_sect(item);
-	if (sect)
-		sect->renameItem(item, name);
 }
 
 

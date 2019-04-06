@@ -62,7 +62,7 @@ public:
 	static uint audioPortType();
 	static uint midiPortType();
 
-	// Client/port renaming method.
+	// Client/port renaming method (virtual override).
 	void renameItem(qjackctlGraphItem *item, const QString& name);
 
 protected:

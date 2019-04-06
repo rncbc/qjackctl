@@ -1084,7 +1084,7 @@ void qjackctlGraphConnect::updatePortTypeColors (void)
 qjackctlGraphCommand::qjackctlGraphCommand ( qjackctlGraphCanvas *canvas,
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect,
 	QUndoCommand *parent ) : QUndoCommand(parent),
-		m_item(canvas, port1, port2, is_connect)
+		m_canvas(canvas), m_item(port1, port2, is_connect)
 {
 }
 
@@ -1105,7 +1105,7 @@ void qjackctlGraphCommand::redo (void)
 // Command executive
 bool qjackctlGraphCommand::execute ( bool is_undo )
 {
-	qjackctlGraphCanvas *canvas = m_item.canvas();
+	qjackctlGraphCanvas *canvas = qjackctlGraphCommand::canvas();
 	if (canvas == NULL)
 		return false;
 

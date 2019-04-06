@@ -434,6 +434,10 @@ public:
 		qjackctlGraphPort *port1, qjackctlGraphPort *port2,
 		bool is_connect, QUndoCommand *parent = NULL);
 
+	// Accessors.
+	qjackctlGraphCanvas *canvas() const
+		{ return m_canvas; }
+
 	// Command methods.
 	void undo();
 	void redo();
@@ -471,16 +475,13 @@ protected:
 	struct Item
 	{
 		// Constructor.
-		Item(qjackctlGraphCanvas *canvas,
-			 qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect)
-			: addr1(port1), addr2(port2), m_canvas(canvas), m_connect(is_connect) {}
+		Item(qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect)
+			: addr1(port1), addr2(port2), m_connect(is_connect) {}
 		// Copy constructor.
 		Item(const Item& item) : addr1(item.addr1), addr2(item.addr2),
-			m_canvas(item.canvas()), m_connect(item.is_connect()) {}
+			m_connect(item.is_connect()) {}
 
 		// Accessors.
-		qjackctlGraphCanvas *canvas() const
-			{ return m_canvas; }
 		bool is_connect() const
 			{ return m_connect; }
 
@@ -491,7 +492,6 @@ protected:
 	private:
 
 		// Private member fields.
-		qjackctlGraphCanvas *m_canvas;
 		bool m_connect;
 	};
 
@@ -501,6 +501,8 @@ protected:
 private:
 
 	// Command arguments.
+	qjackctlGraphCanvas *m_canvas;
+
 	Item m_item;
 };
 

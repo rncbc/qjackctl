@@ -40,7 +40,8 @@ QMutex qjackctlJackGraph::g_mutex;
 #include <jack/uuid.h>
 
 static
-QString qjackctlJackGraph_prettyName ( jack_uuid_t uuid, const QString& name )
+QString qjackctlJackGraph_prettyName (
+	jack_uuid_t uuid, const QString& name )
 {
 	QString pretty_name = name;
 
@@ -70,7 +71,8 @@ void qjackctlJackGraph_setPrettyName (
 		JACK_METADATA_PRETTY_NAME, value, NULL);
 }
 
-static void qjackctlJackGraph_removePrettyName (
+static
+void qjackctlJackGraph_removePrettyName (
 	jack_client_t *client, jack_uuid_t uuid )
 {
 	::jack_remove_property(client, uuid, JACK_METADATA_PRETTY_NAME);
@@ -270,7 +272,10 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 		if (client_uuid_name) {
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(client_uuid_name, &client_uuid);
-			node_title = qjackctlJackGraph_prettyName(client_uuid, client_name);
+			const QString& pretty_name
+				= qjackctlJackGraph_prettyName(client_uuid, client_name);
+			if (!pretty_name.isEmpty())
+				node_title = pretty_name;
 			::jack_free((void *) client_uuid_name);
 		}
 	#endif	// CONFIG_JACK_METADATA
@@ -285,7 +290,10 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 		#ifdef CONFIG_JACK_METADATA
 			const jack_uuid_t port_uuid
 				= ::jack_port_uuid(jack_port);
-			port_title = qjackctlJackGraph_prettyName(port_uuid, port_name);
+			const QString& pretty_name
+				= qjackctlJackGraph_prettyName(port_uuid, port_name);
+			if (!pretty_name.isEmpty())
+				port_title = pretty_name;
 			const int port_index
 				= qjackctlJackGraph_portIndex(port_uuid, 0);
 			if ((*port)->portIndex() != port_index) {
@@ -488,7 +496,7 @@ QList<qjackctlAliasList *> qjackctlJackGraph::item_aliases (
 }
 
 
-// Client/port renaming method.
+// Client/port renaming method (virtual override).
 void qjackctlJackGraph::renameItem (
 	qjackctlGraphItem *item, const QString& name )
 {
