@@ -6,6 +6,13 @@ ChangeLog
 
 GIT HEAD
 
+- Graph client and port title in-place renaming is now
+  integrated to native aliases and JACK metadata (aka.
+  pretty-names). (EXPERIMENTAL)
+  
+- Refactored all native client/port name aliases.
+  (EXPERIMENTAL)
+
 - Re-defined all main application UNIX signal handling.
   (EXPERIMENTAL)
 
