@@ -309,9 +309,9 @@ qjackctlGraphForm::~qjackctlGraphForm (void)
 }
 
 
-// Set reference to global options, mostly needed for the
-// initial sizes of the main splitter views and those
-// client/port aliasing feature.
+// Set reference to global options, mostly needed for
+// the initial state of the main dockable views and
+// those client/port aliasing feature.
 void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 {
 	m_config = new qjackctlGraphConfig(&pSetup->settings());
