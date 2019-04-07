@@ -548,9 +548,9 @@ protected:
 	// Command item descriptor
 	struct Item
 	{
-		QString            node_name;
+		QString node_name;
 		qjackctlGraphItem::Mode node_mode;
-		uint               node_type;
+		uint node_type;
 	};
 
 	// Command executive method.
@@ -565,6 +565,43 @@ private:
 	QPointF m_pos2;
 
 	int m_nexec;
+};
+
+
+//----------------------------------------------------------------------------
+// qjackctlGraphRenameCommand -- Rename (item) graph command
+
+class qjackctlGraphRenameCommand : public qjackctlGraphCommand
+{
+public:
+
+	// Constructor.
+	qjackctlGraphRenameCommand(qjackctlGraphCanvas *canvas,
+		qjackctlGraphItem *item, const QString& name,
+		qjackctlGraphCommand *parent = NULL);
+
+protected:
+
+	// Command item descriptor
+	struct Item
+	{
+		int item_type;
+		QString node_name;
+		qjackctlGraphItem::Mode node_mode;
+		uint node_type;
+		QString port_name;
+		qjackctlGraphItem::Mode port_mode;
+		uint port_type;
+	};
+
+	// Command executive method.
+	bool execute(bool is_undo);
+
+private:
+
+	// Command arguments.
+	Item    m_item;
+	QString m_name;
 };
 
 
@@ -622,6 +659,9 @@ public:
 	// Port (dis)connections notifiers.
 	void emitConnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void emitDisconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
+
+	// Rename notifiers.
+	void emitRenamed(qjackctlGraphItem *item, const QString& name);
 
 	// Graph canvas state methods.
 	bool restoreState();

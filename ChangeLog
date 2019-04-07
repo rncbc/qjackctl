@@ -6,8 +6,8 @@ ChangeLog
 
 GIT HEAD
 
-- Graph nodes position changes are now undo/redo-able.
-  (EXPERIMENTAL)
+- Graph node and port title renaming and nodes position
+  move changes are now undo/redo-able. (EXPERIMENTAL)
 
 - Graph client and port title in-place renaming is now
   integrated to native aliases and JACK metadata (aka.

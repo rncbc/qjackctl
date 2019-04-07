@@ -1226,6 +1226,78 @@ bool qjackctlGraphMoveCommand::execute ( bool /* is_undo */ )
 
 
 //----------------------------------------------------------------------------
+// qjackctlGraphRenameCommand -- Rename (item) graph command
+
+// Constructor.
+qjackctlGraphRenameCommand::qjackctlGraphRenameCommand ( qjackctlGraphCanvas *canvas,
+	qjackctlGraphItem *item, const QString& name, qjackctlGraphCommand *parent )
+	: qjackctlGraphCommand(canvas, parent), m_name(name)
+{
+	m_item.item_type = item->type();
+
+	qjackctlGraphNode *node = NULL;
+	qjackctlGraphPort *port = NULL;
+
+	if (m_item.item_type == qjackctlGraphNode::Type)
+		node = static_cast<qjackctlGraphNode *> (item);
+	else
+	if (m_item.item_type == qjackctlGraphPort::Type)
+		port = static_cast<qjackctlGraphPort *> (item);
+
+	if (port)
+		node = port->portNode();
+
+	if (node) {
+		m_item.node_name = node->nodeName();
+		m_item.node_mode = node->nodeMode();
+		m_item.node_type = node->nodeType();
+	}
+
+	if (port) {
+		m_item.port_name = port->portName();
+		m_item.port_mode = port->portMode();
+		m_item.port_type = port->portType();
+	}
+}
+
+
+// Command executive method.
+bool qjackctlGraphRenameCommand::execute ( bool /*is_undo*/ )
+{
+	qjackctlGraphCanvas *canvas = qjackctlGraphCommand::canvas();
+	if (canvas == NULL)
+		return false;
+
+	QString name = m_name;
+	qjackctlGraphItem *item = NULL;
+
+	qjackctlGraphNode *node = canvas->findNode(
+		m_item.node_name, m_item.node_mode, m_item.node_type);
+
+	if (m_item.item_type == qjackctlGraphNode::Type && node) {
+		m_name = node->nodeTitle();
+		item = node;
+	}
+	else
+	if (m_item.item_type == qjackctlGraphPort::Type && node) {
+		qjackctlGraphPort *port = node->findPort(
+			m_item.port_name, m_item.port_mode, m_item.port_type);
+		if (port) {
+			m_name = port->portTitle();
+			item = port;
+		}
+	}
+
+	if (item == NULL)
+		return false;
+
+	canvas->emitRenamed(item, name);
+	return true;
+}
+
+
+
+//----------------------------------------------------------------------------
 // qjackctlGraphCanvas -- Canvas graphics scene/view.
 
 // Local constants.
@@ -1520,6 +1592,13 @@ void qjackctlGraphCanvas::emitDisconnected (
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2 )
 {
 	emit disconnected(port1, port2);
+}
+
+
+// Rename notifiers.
+void qjackctlGraphCanvas::emitRenamed ( qjackctlGraphItem *item, const QString& name )
+{
+	emit renamed(item, name);
 }
 
 
@@ -2339,8 +2418,11 @@ void qjackctlGraphCanvas::editingFinished (void)
 {
 	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible()) {
 		// If changed then notify...
-		if (m_edited > 0)
-			emit renamed(m_edit_item, m_editor->text());
+		if (m_edited > 0) {
+			m_commands->push(
+				new qjackctlGraphRenameCommand(this,
+					m_edit_item, m_editor->text()));
+		}
 		// Reset all renaming stuff...
 		m_edit_item = NULL;
 		m_editor->setEnabled(false);
