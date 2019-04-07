@@ -1174,6 +1174,58 @@ bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 
 
 //----------------------------------------------------------------------------
+// qjackctlGraphMoveCommand -- Move (node) graph command
+
+// Constructor.
+qjackctlGraphMoveCommand::qjackctlGraphMoveCommand ( qjackctlGraphCanvas *canvas,
+	const QList<qjackctlGraphNode *>& nodes, const QPointF& pos1, const QPointF& pos2,
+	qjackctlGraphCommand *parent ) : qjackctlGraphCommand(canvas, parent),
+		m_pos1(pos1), m_pos2(pos2), m_nexec(0)
+{
+	foreach (qjackctlGraphNode *node, nodes) {
+		Item *item = new Item;
+		item->node_name = node->nodeName();
+		item->node_mode = node->nodeMode();
+		item->node_type = node->nodeType();
+		m_items.append(item);
+	}
+}
+
+
+// Destructor.
+qjackctlGraphMoveCommand::~qjackctlGraphMoveCommand (void)
+{
+	qDeleteAll(m_items);
+	m_items.clear();
+}
+
+
+// Command executive method.
+bool qjackctlGraphMoveCommand::execute ( bool /* is_undo */ )
+{
+	qjackctlGraphCanvas *canvas = qjackctlGraphCommand::canvas();
+	if (canvas == NULL)
+		return false;
+
+	if (++m_nexec > 1) {
+		const QPointF delta = (m_pos2 - m_pos1);
+		foreach (Item *item, m_items) {
+			qjackctlGraphNode *node = canvas->findNode(
+				item->node_name, item->node_mode, item->node_type);
+			if (node)
+				node->setPos(node->pos() + delta);
+		}
+	}
+
+	QPointF pos2 = m_pos2;
+	m_pos2 = m_pos1;
+	m_pos1 = pos2;
+
+	return true;
+}
+
+
+//----------------------------------------------------------------------------
 // qjackctlGraphCanvas -- Canvas graphics scene/view.
 
 // Local constants.
@@ -1571,6 +1623,11 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 						m_item->setSelected(true);
 						++nchanged;
 					}
+					// Original node position (for move command)...
+					QPointF pos1 = m_pos;
+					pos1.setX(4.0 * ::round(0.25 * pos1.x()));
+					pos1.setY(4.0 * ::round(0.25 * pos1.y()));
+					m_pos1 = pos1;
 				}
 				else m_item = NULL;
 			}
@@ -1732,8 +1789,20 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 			}
 		}
 		// Maybe some node(s) were moved...
-		if (m_item && m_item->type() == qjackctlGraphNode::Type)
-			++nchanged;
+		if (m_item && m_item->type() == qjackctlGraphNode::Type) {
+			const QPointF& pos
+				= QGraphicsView::mapToScene(event->pos());
+			QList<qjackctlGraphNode *> nodes;
+			foreach (QGraphicsItem *item, m_scene->selectedItems()) {
+				if (item->type() == qjackctlGraphNode::Type) {
+					qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+					if (node)
+						nodes.append(node);
+				}
+			}
+			m_commands->push(
+				new qjackctlGraphMoveCommand(this, nodes, m_pos1, pos));
+		}
 		// Close rubber-band lasso...
 		if (m_rubberband) {
 			delete m_rubberband;

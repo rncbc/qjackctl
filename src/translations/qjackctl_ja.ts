@@ -439,13 +439,13 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1723"/>
-        <location filename="../qjackctlGraph.cpp" line="1857"/>
+        <location filename="../qjackctlGraph.cpp" line="1780"/>
+        <location filename="../qjackctlGraph.cpp" line="1926"/>
         <source>Connect</source>
         <translation>接続</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1893"/>
+        <location filename="../qjackctlGraph.cpp" line="1962"/>
         <source>Disconnect</source>
         <translation>切断</translation>
     </message>
@@ -980,19 +980,19 @@ Do you want to save the changes?</source>
         <translation>元に戻す(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="76"/>
-        <source>Undo last (dis)connection</source>
-        <translation>最後の接続あるいは切断を元に戻します</translation>
-    </message>
-    <message>
         <location filename="../qjackctlGraphForm.cpp" line="79"/>
         <source>&amp;Redo</source>
         <translation>やり直す(&amp;R)</translation>
     </message>
     <message>
+        <location filename="../qjackctlGraphForm.cpp" line="76"/>
+        <source>Undo last edit action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlGraphForm.cpp" line="81"/>
-        <source>Redo last (dis)connection</source>
-        <translation>最後の接続あるいは切断をやり直します</translation>
+        <source>Redo last edit action</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="97"/>

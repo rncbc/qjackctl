@@ -438,13 +438,13 @@ Chcete uložit změny?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1723"/>
-        <location filename="../qjackctlGraph.cpp" line="1857"/>
+        <location filename="../qjackctlGraph.cpp" line="1780"/>
+        <location filename="../qjackctlGraph.cpp" line="1926"/>
         <source>Connect</source>
         <translation>Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1893"/>
+        <location filename="../qjackctlGraph.cpp" line="1962"/>
         <source>Disconnect</source>
         <translation>Rozpojit</translation>
     </message>
@@ -979,19 +979,19 @@ Chcete uložit změny?</translation>
         <translation>&amp;Zpět</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="76"/>
-        <source>Undo last (dis)connection</source>
-        <translation>Zpět poslední (roz)pojení</translation>
-    </message>
-    <message>
         <location filename="../qjackctlGraphForm.cpp" line="79"/>
         <source>&amp;Redo</source>
         <translation>&amp;Znovu</translation>
     </message>
     <message>
+        <location filename="../qjackctlGraphForm.cpp" line="76"/>
+        <source>Undo last edit action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlGraphForm.cpp" line="81"/>
-        <source>Redo last (dis)connection</source>
-        <translation>Znovu poslední (roz)pojení</translation>
+        <source>Redo last edit action</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="97"/>

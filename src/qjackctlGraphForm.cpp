@@ -73,12 +73,12 @@ qjackctlGraphForm::qjackctlGraphForm (
 
 	QAction *undo_action = commands->createUndoAction(this, tr("&Undo"));
 	undo_action->setIcon(QIcon(":/images/graphUndo.png"));
-	undo_action->setStatusTip(tr("Undo last (dis)connection"));
+	undo_action->setStatusTip(tr("Undo last edit action"));
 	undo_action->setShortcuts(QKeySequence::Undo);
 
 	QAction *redo_action = commands->createRedoAction(this, tr("&Redo"));
 	redo_action->setIcon(QIcon(":/images/graphRedo.png"));
-	redo_action->setStatusTip(tr("Redo last (dis)connection"));
+	redo_action->setStatusTip(tr("Redo last edit action"));
 	redo_action->setShortcuts(QKeySequence::Redo);
 
 	QAction *before_action = m_ui.editSelectAllAction;

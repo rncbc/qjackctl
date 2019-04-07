@@ -448,13 +448,13 @@ Salvare i cambiamenti?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1723"/>
-        <location filename="../qjackctlGraph.cpp" line="1857"/>
+        <location filename="../qjackctlGraph.cpp" line="1780"/>
+        <location filename="../qjackctlGraph.cpp" line="1926"/>
         <source>Connect</source>
         <translation>Connetti</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1893"/>
+        <location filename="../qjackctlGraph.cpp" line="1962"/>
         <source>Disconnect</source>
         <translation>Disconnetti</translation>
     </message>
@@ -989,19 +989,19 @@ Salvare i cambiamenti?</translation>
         <translation>&amp;Annulla</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="76"/>
-        <source>Undo last (dis)connection</source>
-        <translation>Annulla l&apos;ultima (dis)connessione</translation>
-    </message>
-    <message>
         <location filename="../qjackctlGraphForm.cpp" line="79"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ripeti</translation>
     </message>
     <message>
+        <location filename="../qjackctlGraphForm.cpp" line="76"/>
+        <source>Undo last edit action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlGraphForm.cpp" line="81"/>
-        <source>Redo last (dis)connection</source>
-        <translation>Ripeti l&apos;ultima (dis)connessione</translation>
+        <source>Redo last edit action</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="97"/>

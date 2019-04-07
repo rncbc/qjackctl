@@ -528,6 +528,47 @@ private:
 
 
 //----------------------------------------------------------------------------
+// qjackctlGraphMoveCommand -- Move (node) graph command
+
+class qjackctlGraphMoveCommand : public qjackctlGraphCommand
+{
+public:
+
+	// Constructor.
+	qjackctlGraphMoveCommand(qjackctlGraphCanvas *canvas,
+		const QList<qjackctlGraphNode *>& nodes,
+		const QPointF& pos1, const QPointF& pos2,
+		qjackctlGraphCommand *parent = NULL);
+
+	// Destructor.
+	~qjackctlGraphMoveCommand();
+
+protected:
+
+	// Command item descriptor
+	struct Item
+	{
+		QString            node_name;
+		qjackctlGraphItem::Mode node_mode;
+		uint               node_type;
+	};
+
+	// Command executive method.
+	bool execute(bool is_undo);
+
+private:
+
+	// Command arguments.
+	QList<Item *> m_items;
+
+	QPointF m_pos1;
+	QPointF m_pos2;
+
+	int m_nexec;
+};
+
+
+//----------------------------------------------------------------------------
 // qjackctlGraphCanvas -- Canvas graphics scene/view.
 
 class qjackctlGraphCanvas : public QGraphicsView
@@ -709,6 +750,10 @@ private:
 	QLineEdit    *m_editor;
 	int           m_edited;
 
+	// Original node position (for move command).
+	QPointF m_pos1;
+
+	// Client/port aliases database.
 	qjackctlAliases *m_aliases;
 };
 
