@@ -191,8 +191,9 @@ protected slots:
 protected:
 
 	bool queryClose();
+	bool queryClosePreset();
 
-	void closeEvent(QCloseEvent * pCloseEvent);
+	void closeEvent(QCloseEvent *pCloseEvent);
 	void customEvent(QEvent *pEvent);
 
 	void appendStdoutBuffer(const QString&);

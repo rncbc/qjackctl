@@ -1,7 +1,7 @@
 // qjackctlSessionForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -442,9 +442,15 @@ void qjackctlSessionForm::hideEvent ( QHideEvent *pHideEvent )
 		pMainForm->stabilizeForm();
 }
 
+
 // Just about to notify main-window that we're closing.
 void qjackctlSessionForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 {
+	if (m_pSetup) {
+		m_pSetup->sessionDirs = sessionDirs();
+		m_pSetup->bSessionSaveVersion = isSaveSessionVersion();
+	}
+
 	QWidget::hide();
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();

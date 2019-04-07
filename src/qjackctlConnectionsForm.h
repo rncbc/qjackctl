@@ -51,8 +51,6 @@ public:
 	qjackctlConnectView *midiConnectView() const;
 	qjackctlConnectView *alsaConnectView() const;
 
-	bool queryClose();
-
 	enum TabPage { AudioTab = 0, MidiTab = 1, AlsaTab = 2 };
 
 	void setTabPage(int iTabPage);

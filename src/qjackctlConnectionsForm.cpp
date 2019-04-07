@@ -238,6 +238,14 @@ void qjackctlConnectionsForm::hideEvent ( QHideEvent *pHideEvent )
 // Just about to notify main-window that we're closing.
 void qjackctlConnectionsForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 {
+	// Save current tab page and splitter sizes...
+	if (m_pSetup) {
+		m_pSetup->iConnectionsTabPage = tabPage();
+		m_pSetup->saveSplitterSizes(m_ui.AudioConnectView);
+		m_pSetup->saveSplitterSizes(m_ui.MidiConnectView);
+		m_pSetup->saveSplitterSizes(m_ui.AlsaConnectView);
+	}
+
 	QWidget::hide();
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
@@ -306,39 +314,6 @@ qjackctlConnectView *qjackctlConnectionsForm::alsaConnectView (void) const
 }
 
 
-// Window close event handlers.
-bool qjackctlConnectionsForm::queryClose (void)
-{
-	bool bQueryClose = true;
-
-	if (m_pSetup && m_pSetup->aliases.dirty) {
-		switch (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
-			tr("The preset aliases have been changed:\n\n"
-			"\"%1\"\n\nDo you want to save the changes?")
-			.arg(m_pSetup->aliases.key),
-			QMessageBox::Save |
-			QMessageBox::Discard |
-			QMessageBox::Cancel)) {
-		case QMessageBox::Save:
-			m_pSetup->saveAliases();
-			// Fall thru....
-		case QMessageBox::Discard:
-			break;
-		default:    // Cancel.
-			bQueryClose = false;
-		}
-	}
-
-	// Save some splitter sizes...
-	if (m_pSetup && bQueryClose) {
-		m_pSetup->saveSplitterSizes(m_ui.AudioConnectView);
-		m_pSetup->saveSplitterSizes(m_ui.MidiConnectView);
-		m_pSetup->saveSplitterSizes(m_ui.AlsaConnectView);
-	}
-
-	return bQueryClose;
-}
 
 
 // Tab page accessors.

@@ -918,6 +918,9 @@ bool qjackctlMainForm::queryClose (void)
 {
 	bool bQueryClose = true;
 
+	if (m_pSetup == NULL)
+		return bQueryClose;
+
 #ifdef CONFIG_SYSTEM_TRAY
 	// If we're not quitting explicitly and there's an
 	// active system tray icon, then just hide ourselves.
@@ -991,35 +994,21 @@ bool qjackctlMainForm::queryClose (void)
 		}
 	}
 
+	// Try to save current aliases default settings.
+	if (bQueryClose && !m_bQuitForce)
+		bQueryClose = queryClosePreset();
+
 	// Try to save current setup settings.
 	if (bQueryClose && m_pSetupForm && !m_bQuitForce)
 		bQueryClose = m_pSetupForm->queryClose();
 
-	// Try to save current aliases default settings.
-	if (bQueryClose && m_pConnectionsForm) {
-		if (!m_bQuitForce)
-			bQueryClose = m_pConnectionsForm->queryClose();
-		if (bQueryClose)
-			m_pSetup->iConnectionsTabPage = m_pConnectionsForm->tabPage();
-	}
-
 	// Try to save current patchbay default settings.
-	if (bQueryClose && m_pPatchbayForm) {
-		if (!m_bQuitForce)
-			bQueryClose = m_pPatchbayForm->queryClose();
-		if (bQueryClose && !m_pPatchbayForm->patchbayPath().isEmpty())
-			m_pSetup->sPatchbayPath = m_pPatchbayForm->patchbayPath();
-	}
+	if (bQueryClose && !m_bQuitForce && m_pPatchbayForm)
+		bQueryClose = m_pPatchbayForm->queryClose();
 
 	// Try to save current session directories list...
-	if (bQueryClose && m_pSessionForm) {
-		if (!m_bQuitForce)
-			bQueryClose = m_pSessionForm->queryClose();
-		if (bQueryClose) {
-			m_pSetup->sessionDirs = m_pSessionForm->sessionDirs();
-			m_pSetup->bSessionSaveVersion = m_pSessionForm->isSaveSessionVersion();
-		}
-	}
+	if (bQueryClose && !m_bQuitForce && m_pSessionForm)
+		bQueryClose = m_pSessionForm->queryClose();
 
 	// Some windows default fonts are here on demand too.
 	if (bQueryClose && m_pMessagesStatusForm) {
@@ -1065,6 +1054,35 @@ bool qjackctlMainForm::queryClose (void)
 			stopJackServer();
 		// Finally, save settings.
 		m_pSetup->saveSetup();
+	}
+
+	return bQueryClose;
+}
+
+
+// Query whether current preset can be closed.
+bool qjackctlMainForm::queryClosePreset (void)
+{
+	bool bQueryClose = true;
+
+	if (m_pSetup->aliases.dirty) {
+		switch (QMessageBox::warning(this,
+			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("The preset aliases have been changed:\n\n"
+			"\"%1\"\n\nDo you want to save the changes?")
+			.arg(m_pSetup->aliases.key),
+			QMessageBox::Save |
+			QMessageBox::Discard |
+			QMessageBox::Cancel)) {
+		case QMessageBox::Save:
+			m_pSetup->saveAliases();
+			// Fall thru....
+		case QMessageBox::Discard:
+			break;
+		default:    // Cancel.
+			bQueryClose = false;
+			break;
+		}
 	}
 
 	return bQueryClose;
@@ -4012,7 +4030,7 @@ void qjackctlMainForm::activatePreset ( const QString& sPreset )
 // Select the current default preset (by index).
 void qjackctlMainForm::activatePreset ( int iPreset )
 {
-	if (m_pConnectionsForm && !m_pConnectionsForm->queryClose())
+	if (!queryClosePreset())
 		return;
 
 	if (iPreset >= 0 && iPreset < m_pSetup->presets.count())

@@ -1,7 +1,7 @@
 // qjackctlPatchbayForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2011, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -169,6 +169,7 @@ void qjackctlPatchbayForm::showEvent ( QShowEvent *pShowEvent )
 	QWidget::showEvent(pShowEvent);
 }
 
+
 // Notify our parent that we're closing.
 void qjackctlPatchbayForm::hideEvent ( QHideEvent *pHideEvent )
 {
@@ -179,9 +180,16 @@ void qjackctlPatchbayForm::hideEvent ( QHideEvent *pHideEvent )
 		pMainForm->stabilizeForm();
 }
 
+
 // Just about to notify main-window that we're closing.
 void qjackctlPatchbayForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 {
+	if (m_pSetup) {
+		const QString& sPatchbayPath = patchbayPath();
+		if (!sPatchbayPath.isEmpty())
+			m_pSetup->sPatchbayPath = sPatchbayPath;
+	}
+
 	QWidget::hide();
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
