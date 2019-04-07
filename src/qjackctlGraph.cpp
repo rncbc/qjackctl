@@ -1828,6 +1828,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 			m_item->setSelected(is_selected);
 			if (m_item->type() != qjackctlGraphNode::Type && is_selected)
 				++m_selected_nodes;
+			m_item = NULL; // Not needed anymore!
 			++nchanged;
 		}
 		// Fall thru...

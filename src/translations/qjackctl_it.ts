@@ -448,13 +448,13 @@ Salvare i cambiamenti?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1859"/>
-        <location filename="../qjackctlGraph.cpp" line="2005"/>
+        <location filename="../qjackctlGraph.cpp" line="1860"/>
+        <location filename="../qjackctlGraph.cpp" line="2006"/>
         <source>Connect</source>
         <translation>Connetti</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2041"/>
+        <location filename="../qjackctlGraph.cpp" line="2042"/>
         <source>Disconnect</source>
         <translation>Disconnetti</translation>
     </message>
