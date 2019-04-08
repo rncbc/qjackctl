@@ -1334,7 +1334,7 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 
 	m_editor = new QLineEdit(this);
 	m_editor->setFrame(false);
-	m_editor->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
+//	m_editor->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
 	QObject::connect(m_editor,
 		SIGNAL(textChanged(const QString&)),
@@ -2097,7 +2097,7 @@ void qjackctlGraphCanvas::renameItem (void)
 	if (item && item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 		if (node) {
-			QPalette pal = m_editor->palette();
+			QPalette pal;
 			const QColor& foreground
 				= node->foreground();
 			QColor background = node->background();
@@ -2112,6 +2112,7 @@ void qjackctlGraphCanvas::renameItem (void)
 			QFont font = m_editor->font();
 			font.setBold(true);
 			m_editor->setFont(font);
+			m_editor->setPlaceholderText(node->nodeName());
 			m_editor->setText(node->nodeTitle());
 		}
 	}
@@ -2119,7 +2120,7 @@ void qjackctlGraphCanvas::renameItem (void)
 	if (item && item->type() == qjackctlGraphPort::Type) {
 		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
 		if (port) {
-			QPalette pal = m_editor->palette();
+			QPalette pal;
 			const QColor& foreground
 				= port->foreground();
 			const QColor& background
@@ -2134,6 +2135,7 @@ void qjackctlGraphCanvas::renameItem (void)
 			QFont font = m_editor->font();
 			font.setBold(false);
 			m_editor->setFont(font);
+			m_editor->setPlaceholderText(port->portName());
 			m_editor->setText(port->portTitle());
 		}
 	}
@@ -2156,7 +2158,7 @@ void qjackctlGraphCanvas::updateEditorGeometry (void)
 {
 	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible()) {
 		const QRectF& rect
-			= m_edit_item->editorRect().adjusted(+2.0, +2.0, -1.0, -2.0);
+			= m_edit_item->editorRect().adjusted(+2.0, +2.0, -2.0, -2.0);
 		const QPoint& pos1
 			= QGraphicsView::mapFromScene(rect.topLeft());
 		const QPoint& pos2
@@ -2534,11 +2536,12 @@ void qjackctlGraphSect::renameItem (
 	qjackctlGraphNode *node = NULL;
 
 	if (item->type() == qjackctlGraphNode::Type) {
-		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+		node = static_cast<qjackctlGraphNode *> (item);
 		if (node) {
 			node->setNodeTitle(name);
+			const QString& node_title = node->nodeTitle();
 			foreach (qjackctlAliasList *node_aliases, item_aliases(item)) {
-				node_aliases->setClientAlias(node->nodeName(), name);
+				node_aliases->setClientAlias(node->nodeName(), node_title);
 				++nchanged;
 			}
 		}
