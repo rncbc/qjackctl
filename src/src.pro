@@ -17,6 +17,7 @@ HEADERS += config.h \
 	qjackctlConnect.h \
 	qjackctlAliases.h \
 	qjackctlGraph.h \
+	qjackctlGraphCommand.h \
 	qjackctlInterfaceComboBox.h \
 	qjackctlJackConnect.h \
 	qjackctlJackGraph.h \
@@ -44,6 +45,7 @@ SOURCES += \
 	qjackctlConnect.cpp \
 	qjackctlAliases.cpp \
 	qjackctlGraph.cpp \
+	qjackctlGraphCommand.cpp \
 	qjackctlInterfaceComboBox.cpp \
 	qjackctlJackConnect.cpp \
 	qjackctlJackGraph.cpp \

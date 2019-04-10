@@ -92,6 +92,16 @@
         <source>%1 (%2 frames)</source>
         <translation>%1 (%2 snímků)</translation>
     </message>
+    <message>
+        <location filename="../qjackctlGraphCommand.cpp" line="131"/>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphCommand.cpp" line="184"/>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>qjackctlAboutForm</name>
@@ -421,13 +431,13 @@ Jste si jistý?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1860"/>
-        <location filename="../qjackctlGraph.cpp" line="2006"/>
+        <location filename="../qjackctlGraph.cpp" line="1642"/>
+        <location filename="../qjackctlGraph.cpp" line="1788"/>
         <source>Connect</source>
         <translation>Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2042"/>
+        <location filename="../qjackctlGraph.cpp" line="1824"/>
         <source>Disconnect</source>
         <translation>Rozpojit</translation>
     </message>

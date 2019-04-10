@@ -13,6 +13,7 @@ headers = \
 	src/qjackctlConnect.h \
 	src/qjackctlAliases.h \
 	src/qjackctlGraph.h \
+	src/qjackctlGraphCommand.h \
 	src/qjackctlInterfaceComboBox.h \
 	src/qjackctlJackConnect.h \
 	src/qjackctlJackGraph.h \
@@ -40,6 +41,7 @@ sources = \
 	src/qjackctlConnect.cpp \
 	src/qjackctlAliases.cpp \
 	src/qjackctlGraph.cpp \
+	src/qjackctlGraphCommand.cpp \
 	src/qjackctlInterfaceComboBox.cpp \
 	src/qjackctlJackConnect.cpp \
 	src/qjackctlJackGraph.cpp \

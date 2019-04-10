@@ -42,8 +42,8 @@
 #include <QSpinBox>
 
 #include <QColorDialog>
-
 #include <QActionGroup>
+#include <QUndoStack>
 
 #include <QResizeEvent>
 #include <QShowEvent>
