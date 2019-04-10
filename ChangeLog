@@ -4,20 +4,18 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.7  2019-03-11  A Spring-Break'19 Release.
 
 - Graph node and port title renaming and nodes position
-  move changes are now undo/redo-able. (EXPERIMENTAL)
+  move changes are now undo/redo-able.
 
 - Graph client and port title in-place renaming is now
   integrated to native aliases and JACK metadata (aka.
-  pretty-names). (EXPERIMENTAL)
+  pretty-names).
   
 - Refactored all native client/port name aliases.
-  (EXPERIMENTAL)
 
 - Re-defined all main application UNIX signal handling.
-  (EXPERIMENTAL)
 
 
 0.5.6  2019-03-11  Pre-LAC2019 Release Frenzy.
