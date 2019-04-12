@@ -95,12 +95,12 @@
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="131"/>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="184"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat</translation>
     </message>
 </context>
 <context>
@@ -596,18 +596,18 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="287"/>
         <source>&amp;Rename...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Přejmenovat...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="290"/>
         <source>Rename item</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat položku</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="293"/>
         <location filename="../qjackctlGraphForm.ui" line="296"/>
         <source>Rename Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat položku</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="307"/>
@@ -979,12 +979,12 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="76"/>
         <source>Undo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrátit poslední úpravu zpět</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="81"/>
         <source>Redo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>Provést poslední úpravu znovu</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="97"/>
@@ -1577,7 +1577,8 @@ v související nabídce vyskakující z ikony v oznamovací
 &quot;%1&quot;
 
 Do you want to save the changes?</source>
-        <translation type="unfinished">Přezdívky pro přednastavení byly změněny:
+        <translation>Přezdívky pro přednastavení byly změněny:
+
 &quot;%1&quot;
 
 Chcete uložit změny?</translation>
