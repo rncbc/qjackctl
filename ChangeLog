@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Removed all the remaining leftovers of old pre-FFADO
+  'freebob' driver support.
+
+
 0.5.7  2019-03-11  A Spring-Break'19 Release.
 
 - Graph node and port title renaming and nodes position

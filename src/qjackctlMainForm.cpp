@@ -1329,7 +1329,6 @@ void qjackctlMainForm::startJack (void)
 	const bool bAlsa      = (m_preset.sDriver == "alsa");
 	const bool bPortaudio = (m_preset.sDriver == "portaudio");
 	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	const bool bFreebob   = (m_preset.sDriver == "freebob");
 	const bool bFirewire  = (m_preset.sDriver == "firewire");
 	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
 
@@ -1362,13 +1361,13 @@ void qjackctlMainForm::startJack (void)
 	}
 	if (bPortaudio && m_preset.iChan > 0)
 		args.append("-c" + QString::number(m_preset.iChan));
-	if ((bCoreaudio || bFreebob || bFirewire) && !m_preset.sInterface.isEmpty())
+	if ((bCoreaudio || bFirewire) && !m_preset.sInterface.isEmpty())
 		args.append("-d" + formatQuoted(m_preset.sInterface));
 	if (m_preset.iSampleRate > 0 && !bNet)
 		args.append("-r" + QString::number(m_preset.iSampleRate));
 	if (m_preset.iFrames > 0 && !bNet)
 		args.append("-p" + QString::number(m_preset.iFrames));
-	if (bAlsa || bSun || bOss || bFreebob || bFirewire) {
+	if (bAlsa || bSun || bOss || bFirewire) {
 		if (m_preset.iPeriods > 0)
 			args.append("-n" + QString::number(m_preset.iPeriods));
 	}
@@ -1446,24 +1445,9 @@ void qjackctlMainForm::startJack (void)
 		if (m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE)
 			args.append("-o" + QString::number(m_preset.iOutChannels));
 	}
-	else if (bFreebob) {
-		switch (m_preset.iAudio) {
-		case QJACKCTL_DUPLEX:
-			args.append("-D");
-			break;
-		case QJACKCTL_CAPTURE:
-			args.append("-C");
-			args.append("-o0");
-			break;
-		case QJACKCTL_PLAYBACK:
-			args.append("-P");
-			args.append("-i0");
-			break;
-		}
-	}
 	if (bDummy && m_preset.iWait > 0 && m_preset.iWait != 21333)
 		args.append("-w" + QString::number(m_preset.iWait));
-	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFreebob || bFirewire) {
+	if (bAlsa || bSun || bOss || bCoreaudio || bPortaudio || bFirewire) {
 		if (m_preset.iInLatency > 0)
 			args.append("-I" + QString::number(m_preset.iInLatency));
 		if (m_preset.iOutLatency > 0)
@@ -4087,7 +4071,6 @@ void qjackctlMainForm::setDBusParameters (void)
 	const bool bAlsa      = (m_preset.sDriver == "alsa");
 	const bool bPortaudio = (m_preset.sDriver == "portaudio");
 	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	const bool bFreebob   = (m_preset.sDriver == "freebob");
 	const bool bFirewire  = (m_preset.sDriver == "firewire");
 	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
 
@@ -4123,7 +4106,7 @@ void qjackctlMainForm::setDBusParameters (void)
 			(unsigned int) m_preset.iChan,
 			m_preset.iChan > 0);
 	}
-	if (bCoreaudio || bFreebob || bFirewire) {
+	if (bCoreaudio || bFirewire) {
 		setDBusDriverParameter("device",
 			m_preset.sInterface,
 			!m_preset.sInterface.isEmpty());
@@ -4136,7 +4119,7 @@ void qjackctlMainForm::setDBusParameters (void)
 			(unsigned int) m_preset.iFrames,
 			m_preset.iFrames > 0);
 	}
-	if (bAlsa || bSun || bOss || bFreebob || bFirewire) {
+	if (bAlsa || bSun || bOss || bFirewire) {
 		setDBusDriverParameter("nperiods",
 			(unsigned int) m_preset.iPeriods,
 			m_preset.iPeriods > 0);
@@ -4222,14 +4205,6 @@ void qjackctlMainForm::setDBusParameters (void)
 		setDBusDriverParameter("outchannels",
 			(unsigned int) m_preset.iOutChannels,
 			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
-	}
-	else if (bFreebob) {
-		setDBusDriverParameter("duplex",
-			bool(m_preset.iAudio == QJACKCTL_DUPLEX));
-		resetDBusDriverParameter("capture");
-		resetDBusDriverParameter("playback");
-		resetDBusDriverParameter("outchannels");
-		resetDBusDriverParameter("inchannels");
 	}
 	if (bDummy) {
 		setDBusDriverParameter("wait",
