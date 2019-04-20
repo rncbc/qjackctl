@@ -95,12 +95,12 @@
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="131"/>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="184"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer</translation>
     </message>
 </context>
 <context>
@@ -596,18 +596,18 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="287"/>
         <source>&amp;Rename...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Renommer...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="290"/>
         <source>Rename item</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer l&apos;élément</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="293"/>
         <location filename="../qjackctlGraphForm.ui" line="296"/>
         <source>Rename Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer l&apos;élément</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="307"/>
@@ -979,12 +979,12 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="76"/>
         <source>Undo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>Défaire la dernière action d&apos;édition</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="81"/>
         <source>Redo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>Refaire la dernière action d&apos;édition</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="97"/>
@@ -1303,11 +1303,11 @@ Désolé.</translation>
 &quot;%1&quot;
 
 Do you want to save the changes?</source>
-        <translation type="unfinished">Les alias de préréglage ont été changés :
+        <translation>Les alias de préréglage ont été changés :
 
-« %1 »
+&quot;%1&quot;
 
-Voulez-vous enregistrer les changements ?</translation>
+Voulez-vous sauvegarder les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1920"/>
@@ -1397,7 +1397,7 @@ Voulez-vous enregistrer les changements ?</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2998"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
-        <translation>Configuration du serveur enregistrée dans « %1 ».</translation>
+        <translation>Configuration du serveur sauvegardée dans &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3031"/>
@@ -1910,17 +1910,17 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3868"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Enregistrer…</translation>
+        <translation>&amp;Sauvegarder…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3873"/>
         <source>Save and &amp;Quit...</source>
-        <translation>Enregistrer et &amp;Quitter…</translation>
+        <translation>Sauvegarder et &amp;Quitter…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3877"/>
         <source>Save &amp;Template...</source>
-        <translation>Enregistrer &amp;modèle…</translation>
+        <translation>Sauvegarder &amp;modèle…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4252"/>
@@ -2210,12 +2210,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="464"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Enregistrer…</translation>
+        <translation>&amp;Sauvegarder…</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="461"/>
         <source>Save current patchbay profile</source>
-        <translation>Enregistrer le profil actuel de la baie de brassage</translation>
+        <translation>Sauvegarder le profil actuel de la baie de brassage</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="374"/>
@@ -2400,7 +2400,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="509"/>
         <source>Save Patchbay Definition</source>
-        <translation>Enregistrer la définition de baie de brassage</translation>
+        <translation>Sauvegarder la définition de baie de brassage</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="616"/>
@@ -2418,7 +2418,7 @@ Do you want to save the changes?</source>
 
 « %1 »
 
-Voulez-vous enregistrer les changements ?</translation>
+Voulez-vous sauvegarder les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.cpp" line="289"/>
@@ -2444,7 +2444,7 @@ Voulez-vous enregistrer les changements ?</translation>
         <source>Could not save patchbay definition file: 
 
 &quot;%1&quot;</source>
-        <translation>Impossible d&apos;enregistrer le fichier de définition de baie de brassage :
+        <translation>Impossible de sauvegarder le fichier de définition de baie de brassage :
 
 « %1 »</translation>
     </message>
@@ -2580,12 +2580,12 @@ pour créer une définition de baie de brassage ?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="81"/>
         <source>Save session</source>
-        <translation>Enregistrer session</translation>
+        <translation>Sauvegarder session</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="94"/>
         <source>Save session versioning</source>
-        <translation>Enregistrer la session avec gestion de révisions</translation>
+        <translation>Sauvegarder la session avec gestion de révisions</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="97"/>
@@ -2657,7 +2657,7 @@ pour créer une définition de baie de brassage ?</translation>
         <location filename="../qjackctlSessionForm.cpp" line="251"/>
         <location filename="../qjackctlSessionForm.cpp" line="822"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Enregistrer…</translation>
+        <translation>&amp;Sauvegarder…</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="117"/>
@@ -2683,7 +2683,7 @@ pour créer une définition de baie de brassage ?</translation>
         <location filename="../qjackctlSessionForm.ui" line="84"/>
         <location filename="../qjackctlSessionForm.cpp" line="248"/>
         <source>&amp;Save</source>
-        <translation>&amp;Enregistrer</translation>
+        <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="466"/>
@@ -2700,7 +2700,7 @@ pour créer une définition de baie de brassage ?</translation>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="520"/>
         <source>Save Session</source>
-        <translation>Enregistrer session</translation>
+        <translation>Sauvegarder session</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="523"/>
@@ -2772,12 +2772,12 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="690"/>
         <source>%1: saving session...</source>
-        <translation>%1 : enregistrement de la session…</translation>
+        <translation>%1 : sauvegarde de la session…</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="719"/>
         <source>%1: save session %2.</source>
-        <translation>%1 : enregistrer session %2.</translation>
+        <translation>%1 : sauvegarder session %2.</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="853"/>
@@ -2788,13 +2788,13 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSessionForm.cpp" line="255"/>
         <location filename="../qjackctlSessionForm.cpp" line="826"/>
         <source>Save and &amp;Quit...</source>
-        <translation>Enregistrer et &amp;Quitter…</translation>
+        <translation>Sauvegarder et &amp;Quitter…</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="258"/>
         <location filename="../qjackctlSessionForm.cpp" line="829"/>
         <source>Save &amp;Template...</source>
-        <translation>Enregistrer &amp;modèle…</translation>
+        <translation>Sauvegarder &amp;modèle…</translation>
     </message>
 </context>
 <context>
@@ -2847,12 +2847,12 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="104"/>
         <source>&amp;Save</source>
-        <translation>&amp;Enregistrer</translation>
+        <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Save settings as current preset name</source>
-        <translation>Enregistrer les paramètres sous le nom du préréglage actuel</translation>
+        <translation>Sauvegarder les paramètres sous le nom du préréglage actuel</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="120"/>
@@ -3770,12 +3770,12 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3532"/>
         <source>S&amp;ave JACK audio server configuration to:</source>
-        <translation>&amp;Enregistrer la configuration du serveur audio JACK dans :</translation>
+        <translation>&amp;Sauvegarder la configuration du serveur audio JACK dans :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3529"/>
         <source>Whether to save the JACK server command-line configuration into a local file (auto-start)</source>
-        <translation>Enregistrer la configuration en ligne de commande du serveur JACK dans un fichier local (démarrage automatique)</translation>
+        <translation>Sauvegarder la configuration en ligne de commande du serveur JACK dans un fichier local (démarrage automatique)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3552"/>
@@ -3984,7 +3984,7 @@ Do you want to save the changes?</source>
 
 « %1 »
 
-Voulez-vous enregistrer les changements ?</translation>
+Voulez-vous sauvegarder les changements ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="888"/>
