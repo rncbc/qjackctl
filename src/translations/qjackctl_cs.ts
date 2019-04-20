@@ -1974,7 +1974,7 @@ ResetParameterValue(&apos;%1&apos;):
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4314"/>
+        <location filename="../qjackctlMainForm.cpp" line="4485"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.

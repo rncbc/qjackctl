@@ -1953,7 +1953,7 @@ Gelieve het berichten venster te lezen voor meer info.</translation>
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4314"/>
+        <location filename="../qjackctlMainForm.cpp" line="4485"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.

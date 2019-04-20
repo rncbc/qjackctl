@@ -269,6 +269,10 @@ protected:
 	bool resetDBusDriverParameter(const QString& param);
 	bool resetDBusParameter(const QStringList& path);
 
+	// D-BUS: Get preset options
+	// from current parameter values.
+	void getDBusParameters();
+
 	// D-BUS: Set parameter values.
 	QVariant getDBusEngineParameter(const QString& param);
 	QVariant getDBusDriverParameter(const QString& param);

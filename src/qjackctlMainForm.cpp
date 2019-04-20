@@ -4291,6 +4291,177 @@ bool qjackctlMainForm::resetDBusParameter ( const QStringList& path )
 }
 
 
+// D-BUS: Get preset options from current parameter values.
+void qjackctlMainForm::getDBusParameters (void)
+{
+	// Get configuration parameters...
+	QVariant var;
+
+	m_pSetup->sServerName.clear();
+//	var = getDBusEngineParameter("name");
+//  if (var.isValid())
+//		m_pSetup->sServerName = var.toString();
+	var = getDBusEngineParameter("sync");
+	if (var.isValid())
+		m_preset.bSync = var.toBool();
+	var = getDBusEngineParameter("verbose");
+	if (var.isValid())
+		m_preset.bVerbose = var.toBool();
+	var = getDBusEngineParameter("realtime");
+	if (var.isValid())
+		m_preset.bRealtime = var.toBool();
+	var = getDBusEngineParameter("realtime-priority");
+	if (var.isValid())
+		m_preset.iPriority = var.toInt();
+	var = getDBusEngineParameter("port-max");
+	if (var.isValid())
+		m_preset.iPortMax = var.toInt();
+	var = getDBusEngineParameter("client-timeout");
+	if (var.isValid())
+		m_preset.iTimeout = var.toInt();
+//	var = getDBusEngineParameter("no-mem-lock");
+//	if (var.isValid())
+//		m_preset.bNoMemLock = var.ToBool();
+//	var = getDBusEngineParameter("libs-unlock",
+//		m_preset.bUnlockMem = var.toBool();
+	var = getDBusEngineParameter("driver");
+	if (var.isValid())
+		m_preset.sDriver = var.toString();
+
+	const bool bDummy     = (m_preset.sDriver == "dummy");
+	const bool bSun       = (m_preset.sDriver == "sun");
+	const bool bOss       = (m_preset.sDriver == "oss");
+	const bool bAlsa      = (m_preset.sDriver == "alsa");
+	const bool bPortaudio = (m_preset.sDriver == "portaudio");
+	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
+	const bool bFirewire  = (m_preset.sDriver == "firewire");
+	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+
+	m_preset.sInterface.clear();
+	if (bAlsa || bPortaudio || bCoreaudio || bFirewire) {
+		var = getDBusDriverParameter("device");
+		if (var.isValid())
+			m_preset.sInterface = var.toString();
+	}
+
+	m_preset.iChan = 0;
+	if (bPortaudio) {
+		var = getDBusDriverParameter("channel");
+		if (var.isValid())
+			m_preset.iChan = var.toInt();
+	}
+
+	m_preset.iSampleRate = 0;
+	m_preset.iFrames = 0;
+	if (!bNet) {
+		var = getDBusDriverParameter("rate");
+		if (var.isValid())
+			m_preset.iSampleRate = var.toInt();
+		var = getDBusDriverParameter("period");
+		if (var.isValid())
+			m_preset.iFrames = var.toInt();
+	}
+
+	m_preset.iPeriods = 0;
+	if (bAlsa || bSun || bOss || bFirewire) {
+		var = getDBusDriverParameter("nperiods");
+		if (var.isValid())
+			m_preset.iPeriods = var.toInt();
+	}
+
+	m_preset.bSoftMode = false;
+	m_preset.bMonitor = false;
+	m_preset.bShorts = false;
+	m_preset.bHWMeter = false;
+	m_preset.sMidiDriver.clear();
+	if (bAlsa) {
+		var = getDBusDriverParameter("softmode");
+		if (var.isValid())
+			m_preset.bSoftMode = var.toBool();
+		var = getDBusDriverParameter("monitor");
+		if (var.isValid())
+			m_preset.bMonitor = var.toBool();
+		var = getDBusDriverParameter("shorts");
+		if (var.isValid())
+			m_preset.bShorts = var.toBool();
+		var = getDBusDriverParameter("hwmeter");
+		if (var.isValid())
+			m_preset.bHWMeter = var.toBool();
+	#ifdef CONFIG_JACK_MIDI
+		var = getDBusDriverParameter("midi-driver");
+		if (var.isValid())
+			m_preset.sMidiDriver = var.toString();
+	#endif
+	}
+
+	m_preset.iAudio = QJACKCTL_DUPLEX;
+	m_preset.sInDevice.clear();
+	m_preset.sOutDevice.clear();
+	if (bAlsa || bPortaudio || bOss || bSun) {
+		bool bDuplex = false;
+		var = getDBusDriverParameter("duplex");
+		if (var.isValid())
+			bDuplex = var.toBool();
+		var = getDBusDriverParameter("capture");
+		if (var.isValid())
+			m_preset.sInDevice = var.toString();
+		var = getDBusDriverParameter("playback");
+		if (var.isValid())
+			m_preset.sOutDevice = var.toString();
+		if (!bDuplex && !m_preset.sInDevice.isEmpty())
+			m_preset.iAudio = QJACKCTL_CAPTURE;
+		if (!bDuplex && !m_preset.sOutDevice.isEmpty())
+			m_preset.iAudio = QJACKCTL_PLAYBACK;
+	}
+
+	m_preset.iInChannels = 0;
+	m_preset.iOutChannels = 0;
+	if (bAlsa || bPortaudio || bOss || bSun || bCoreaudio || bFirewire || bNet) {
+		if (m_preset.iAudio != QJACKCTL_PLAYBACK) {
+			var = getDBusDriverParameter("inchannels");
+			if (var.isValid())
+				m_preset.iInChannels = var.toInt();
+		}
+		if (m_preset.iAudio != QJACKCTL_CAPTURE) {
+			var = getDBusDriverParameter("outchannels");
+			if (var.isValid())
+				m_preset.iOutChannels = var.toInt();
+		}
+	}
+
+	m_preset.iDither = 0;
+	if (bAlsa || bPortaudio) {
+		unsigned char dither = 'n';
+		var = getDBusDriverParameter("dither");
+		if (var.isValid())
+			dither = var.toChar().cell();
+		switch (dither) {
+		case 'n': m_preset.iDither = 0; break;
+		case 'r': m_preset.iDither = 1; break;
+		case 's': m_preset.iDither = 2; break;
+		case 't': m_preset.iDither = 3; break; }
+	}
+
+	m_preset.iWait = 0;
+	m_preset.iInLatency = 0;
+	m_preset.iOutLatency = 0;
+	if (bDummy) {
+		var = getDBusDriverParameter("wait");
+		if (var.isValid())
+			m_preset.iWait = var.toInt();
+	}
+	else
+	if (!bNet) {
+		var = getDBusDriverParameter("input-latency");
+		if (var.isValid())
+			m_preset.iInLatency = var.toInt();
+		var = getDBusDriverParameter("output-latency");
+		if (var.isValid())
+			m_preset.iOutLatency = var.toInt();
+	}
+}
+
+
 // D-BUS: Get parameter values.
 QVariant qjackctlMainForm::getDBusEngineParameter ( const QString& param )
 {

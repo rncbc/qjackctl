@@ -1609,7 +1609,7 @@ após a reinicialização do servidor de áudio JACK.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4314"/>
+        <location filename="../qjackctlMainForm.cpp" line="4485"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.
