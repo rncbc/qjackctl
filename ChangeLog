@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Minor update to Debian packaging control file.
+
 - Removed all the remaining leftovers of old pre-FFADO
   'freebob' driver support.
 
