@@ -2460,10 +2460,10 @@ QString qjackctlMainForm::formatElapsedTime ( int iStatusItem,
 void qjackctlMainForm::updateElapsedTimes (void)
 {
 	// Display time remaining on start delay...
-	if (m_iTimerDelay < m_iStartDelay)
+	if (m_iTimerDelay < m_iStartDelay) {
 		m_ui.TimeDisplayTextLabel->setText(formatTime(
 			float(m_iStartDelay - m_iTimerDelay) / 1000.0f));
-	else {
+	} else {
 		updateStatusItem(STATUS_RESET_TIME,
 			formatElapsedTime(STATUS_RESET_TIME,
 				m_tResetLast, true));
@@ -2875,6 +2875,7 @@ void qjackctlMainForm::startJackClientDelay (void)
 	m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
 	m_iTimerDelay  = 0;
 	m_iJackRefresh = 0;
+qDebug("DEBUG> m_iStartDelay=%d (%d)", m_iStartDelay, m_preset.iStartDelay);
 }
 
 
@@ -2993,8 +2994,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 #ifdef CONFIG_DBUS
 	// Current D-BUS configuration makes it the default preset always...
 	if (m_pSetup->bJackDBusEnabled && !m_bDBusDetach) {
-		if (getDBusParameters(m_preset)) {
-			m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
+		const QString& sPreset = m_pSetup->sDefPresetName;
+		if (m_pSetup->loadPreset(m_preset, sPreset)
+			&& getDBusParameters(m_preset)) {
+			m_pSetup->sDefPreset = sPreset;
 			// Have current preset changed anyhow?
 			if (m_pSetupForm)
 				m_pSetupForm->updateCurrentPreset(m_preset);
@@ -4104,7 +4107,7 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 		preset.iPriority,
 		preset.bRealtime && preset.iPriority > 5);
 	setDBusEngineParameter("port-max",
-		preset.iPortMax,
+		(unsigned int) preset.iPortMax,
 		preset.iPortMax > 0 && preset.iPortMax != 256);
 	setDBusEngineParameter("client-timeout",
 		preset.iTimeout,
@@ -4323,10 +4326,11 @@ bool qjackctlMainForm::getDBusParameters ( qjackctlPreset& preset )
 	// Get configuration parameters...
 	QVariant var;
 
-	m_pSetup->sServerName.clear();
+//	m_pSetup->sServerName.clear();
 //	var = getDBusEngineParameter("name");
 //  if (var.isValid())
 //		m_pSetup->sServerName = var.toString();
+
 	preset.bSync = false;
 	var = getDBusEngineParameter("sync");
 	if (var.isValid())
@@ -4337,7 +4341,7 @@ bool qjackctlMainForm::getDBusParameters ( qjackctlPreset& preset )
 	if (var.isValid())
 		preset.bVerbose = var.toBool();
 
-	preset.bRealtime = false;
+	preset.bRealtime = true;
 	var = getDBusEngineParameter("realtime");
 	if (var.isValid())
 		preset.bRealtime = var.toBool();
