@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- When enabled the current default preset settings are
+  now read from the last known JACK D-BUS configuration.
+  (EXPERIMENTAL)
+
 - Minor update to Debian packaging control file.
 
 - Removed all the remaining leftovers of old pre-FFADO

@@ -254,7 +254,7 @@ protected:
 
 	// D-BUS: Set/reset parameter values
 	// from current selected preset options.
-	void setDBusParameters();
+	void setDBusParameters(const qjackctlPreset& preset);
 
 	// D-BUS: Set parameter values (with reset option).
 	bool setDBusEngineParameter(
@@ -271,7 +271,7 @@ protected:
 
 	// D-BUS: Get preset options
 	// from current parameter values.
-	void getDBusParameters();
+	bool getDBusParameters(qjackctlPreset& preset);
 
 	// D-BUS: Set parameter values.
 	QVariant getDBusEngineParameter(const QString& param);
@@ -310,7 +310,8 @@ private:
 	QDBusInterface *m_pDBusConfig;
 	qjackctlDBusLogWatcher *m_pDBusLogWatcher;
 	bool m_bDBusStarted;
-#endif	
+	bool m_bDBusDetach;
+#endif
 
 	int m_iStartDelay;
 	int m_iTimerDelay;

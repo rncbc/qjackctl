@@ -26,6 +26,7 @@
 
 // Forward declarations.
 class qjackctlSetup;
+class qjackctlPreset;
 
 class QButtonGroup;
 
@@ -45,6 +46,7 @@ public:
 	~qjackctlSetupForm();
 
 	void setup(qjackctlSetup *pSetup);
+	void updateCurrentPreset(const qjackctlPreset& preset);
 	void updateCurrentPreset();
 	bool queryClose();
 
@@ -86,6 +88,9 @@ protected:
 	// A combo-box text item setter helper.
 	void setComboBoxCurrentText (
 		QComboBox *pComboBox, const QString& sText ) const;
+
+	void setCurrentPreset(const qjackctlPreset& preset);
+	bool getCurrentPreset(qjackctlPreset& preset);
 
 	void changePreset(const QString& sPreset);
 	bool savePreset(const QString& sPreset);

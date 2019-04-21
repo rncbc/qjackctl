@@ -479,7 +479,8 @@ int main ( int argc, char **argv )
 			= jack_client_open("qjackctl-start", JackNoStartServer, NULL);
 		if (pJackClient) {
 			jack_client_close(pJackClient);
-			int iExitStatus = ::system(settings.sCmdLine.toUtf8().constData());
+			const int iExitStatus
+				= ::system(settings.sCmdLine.toUtf8().constData());
 			app.quit();
 			return iExitStatus;
 		}

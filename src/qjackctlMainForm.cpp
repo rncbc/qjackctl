@@ -431,6 +431,7 @@ qjackctlMainForm::qjackctlMainForm (
 	m_pDBusConfig   = NULL;
 	m_pDBusLogWatcher = NULL;
 	m_bDBusStarted  = false;
+	m_bDBusDetach   = false;
 #endif
 	m_iStartDelay   = 0;
 	m_iTimerDelay   = 0;
@@ -608,6 +609,7 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	m_pDBusConfig  = NULL;
 	m_pDBusLogWatcher = NULL;
 	m_bDBusStarted = false;
+	m_bDBusDetach  = false;
 #else
 	stopJackServer();
 #endif
@@ -1155,7 +1157,8 @@ QString qjackctlMainForm::formatExitStatus ( int iExitStatus ) const
 
 
 // Common shell script executive, with placeholder substitution...
-void qjackctlMainForm::shellExecute ( const QString& sShellCommand, const QString& sStartMessage, const QString& sStopMessage )
+void qjackctlMainForm::shellExecute ( const QString& sShellCommand,
+	const QString& sStartMessage, const QString& sStopMessage )
 {
 	QString sTemp = sShellCommand;
 
@@ -1268,10 +1271,11 @@ void qjackctlMainForm::startJack (void)
 	if (m_pDBusControl) {
 
 		// Jack D-BUS server backend configuration...
-		setDBusParameters();
+		setDBusParameters(m_preset);
 
 		QDBusMessage dbusm = m_pDBusControl->call("StartServer");
 		if (dbusm.type() == QDBusMessage::ReplyMessage) {
+			m_bDBusDetach = true;
 			appendMessages(
 				tr("D-BUS: JACK server is starting..."));
 		} else {
@@ -1747,6 +1751,7 @@ void qjackctlMainForm::jackCleanup (void)
 	// Special for D-BUS control...
 	if (m_pDBusControl && m_bDBusStarted) {
 		m_bDBusStarted = false;
+		m_bDBusDetach  = false;
 		appendMessages(tr("D-BUS: JACK server was stopped (%1 aka jackdbus).")
 			.arg(m_pDBusControl->service()));
 		// Flag we need a post-shutdown script...
@@ -2985,6 +2990,18 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	if (m_pSessionForm)
 		m_pSessionForm->stabilizeForm(true);
 
+#ifdef CONFIG_DBUS
+	// Current D-BUS configuration makes it the default preset always...
+	if (m_pSetup->bJackDBusEnabled && !m_bDBusDetach) {
+		if (getDBusParameters(m_preset)) {
+			m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
+			// Have current preset changed anyhow?
+			if (m_pSetupForm)
+				m_pSetupForm->updateCurrentPreset(m_preset);
+		}
+	}
+#endif
+
 	// Save server configuration file.
 	if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
 		const QString sFilename
@@ -3000,11 +3017,11 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		}
 	}
 
-	// Do not forget to reset XRUN stats variables.
-	if (!bDetach)
-		resetXrunStats();
-	else // We'll flag that we've been detached!
+	 // We'll flag that we've been detached!
+	if (bDetach)
 		m_bJackDetach = true;
+	else // Do not forget to reset XRUN stats variables...
+		resetXrunStats();
 
 	// Activate us as a client...
 	jack_activate(m_pJackClient);
@@ -4018,7 +4035,7 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 		return;
 
 	if (iPreset >= 0 && iPreset < m_pSetup->presets.count())
-		m_pSetup->sDefPreset = m_pSetup->presets[iPreset];
+		m_pSetup->sDefPreset = m_pSetup->presets.at(iPreset);
 	else
 		m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
 
@@ -4062,90 +4079,93 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 #ifdef CONFIG_DBUS
 
 // D-BUS: Set/reset parameter values from current selected preset options.
-void qjackctlMainForm::setDBusParameters (void)
+void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 {
+	if (m_pDBusConfig == NULL)
+		return;
+
 	// Set configuration parameters...
-	const bool bDummy     = (m_preset.sDriver == "dummy");
-	const bool bSun       = (m_preset.sDriver == "sun");
-	const bool bOss       = (m_preset.sDriver == "oss");
-	const bool bAlsa      = (m_preset.sDriver == "alsa");
-	const bool bPortaudio = (m_preset.sDriver == "portaudio");
-	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	const bool bFirewire  = (m_preset.sDriver == "firewire");
-	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	const bool bDummy     = (preset.sDriver == "dummy");
+	const bool bSun       = (preset.sDriver == "sun");
+	const bool bOss       = (preset.sDriver == "oss");
+	const bool bAlsa      = (preset.sDriver == "alsa");
+	const bool bPortaudio = (preset.sDriver == "portaudio");
+	const bool bCoreaudio = (preset.sDriver == "coreaudio");
+	const bool bFirewire  = (preset.sDriver == "firewire");
+	const bool bNet       = (preset.sDriver == "net" || m_preset.sDriver == "netone");
 
 //	setDBusEngineParameter("name",
 //		m_pSetup->sServerName,
 //		!m_pSetup->sServerName.isEmpty());
-	setDBusEngineParameter("sync", m_preset.bSync);
-	setDBusEngineParameter("verbose", m_preset.bVerbose);
-	setDBusEngineParameter("realtime", m_preset.bRealtime);
+	setDBusEngineParameter("sync", preset.bSync);
+	setDBusEngineParameter("verbose", preset.bVerbose);
+	setDBusEngineParameter("realtime", preset.bRealtime);
 	setDBusEngineParameter("realtime-priority",
-		m_preset.iPriority,
-		m_preset.bRealtime && m_preset.iPriority > 5);
+		preset.iPriority,
+		preset.bRealtime && preset.iPriority > 5);
 	setDBusEngineParameter("port-max",
-		m_preset.iPortMax,
-		m_preset.iPortMax > 0 && m_preset.iPortMax != 256);
+		preset.iPortMax,
+		preset.iPortMax > 0 && preset.iPortMax != 256);
 	setDBusEngineParameter("client-timeout",
-		m_preset.iTimeout,
-		m_preset.iTimeout > 0 && m_preset.iTimeout != 500);
-//	setDBusEngineParameter("no-mem-lock", m_preset.bNoMemLock);
+		preset.iTimeout,
+		preset.iTimeout > 0 && preset.iTimeout != 500);
+//	setDBusEngineParameter("no-mem-lock", preset.bNoMemLock);
 //	setDBusEngineParameter("libs-unlock",
-//		m_preset.bUnlockMem,
-//		!m_preset.bNoMemLock);
-	setDBusEngineParameter("driver", m_preset.sDriver);
-	if ((bAlsa || bPortaudio) && (m_preset.iAudio != QJACKCTL_DUPLEX ||
-		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
-		QString sInterface = m_preset.sInterface;
+//		preset.bUnlockMem,
+//		!preset.bNoMemLock);
+	setDBusEngineParameter("driver", preset.sDriver);
+	if ((bAlsa || bPortaudio) && (preset.iAudio != QJACKCTL_DUPLEX ||
+		preset.sInDevice.isEmpty() || preset.sOutDevice.isEmpty())) {
+		QString sInterface = preset.sInterface;
 		if (bAlsa && sInterface.isEmpty())
 			sInterface = "hw:0";
 		setDBusDriverParameter("device", sInterface);
 	}
 	if (bPortaudio) {
 		setDBusDriverParameter("channel",
-			(unsigned int) m_preset.iChan,
-			m_preset.iChan > 0);
+			(unsigned int) preset.iChan,
+			preset.iChan > 0);
 	}
 	if (bCoreaudio || bFirewire) {
 		setDBusDriverParameter("device",
-			m_preset.sInterface,
-			!m_preset.sInterface.isEmpty());
+			preset.sInterface,
+			!preset.sInterface.isEmpty());
 	}
 	if (!bNet) {
 		setDBusDriverParameter("rate",
-			(unsigned int) m_preset.iSampleRate,
-			m_preset.iSampleRate > 0);
+			(unsigned int) preset.iSampleRate,
+			preset.iSampleRate > 0);
 		setDBusDriverParameter("period",
-			(unsigned int) m_preset.iFrames,
-			m_preset.iFrames > 0);
+			(unsigned int) preset.iFrames,
+			preset.iFrames > 0);
 	}
 	if (bAlsa || bSun || bOss || bFirewire) {
 		setDBusDriverParameter("nperiods",
-			(unsigned int) m_preset.iPeriods,
-			m_preset.iPeriods > 0);
+			(unsigned int) preset.iPeriods,
+			preset.iPeriods > 0);
 	}
 	if (bAlsa) {
-		setDBusDriverParameter("softmode", m_preset.bSoftMode);
-		setDBusDriverParameter("monitor", m_preset.bMonitor);
-		setDBusDriverParameter("shorts", m_preset.bShorts);
-		setDBusDriverParameter("hwmeter", m_preset.bHWMeter);
+		setDBusDriverParameter("softmode", preset.bSoftMode);
+		setDBusDriverParameter("monitor", preset.bMonitor);
+		setDBusDriverParameter("shorts", preset.bShorts);
+		setDBusDriverParameter("hwmeter", preset.bHWMeter);
 	#ifdef CONFIG_JACK_MIDI
 		setDBusDriverParameter("midi-driver",
-			m_preset.sMidiDriver,
-			!m_preset.sMidiDriver.isEmpty());
+			preset.sMidiDriver,
+			!preset.sMidiDriver.isEmpty());
 	#endif
 	}
 	if (bAlsa || bPortaudio) {
-		QString sInterface = m_preset.sInterface;
+		QString sInterface = preset.sInterface;
 		if (bAlsa && sInterface.isEmpty())
 			sInterface = "hw:0";
-		QString sInDevice = m_preset.sInDevice;
+		QString sInDevice = preset.sInDevice;
 		if (sInDevice.isEmpty())
 			sInDevice = sInterface;
-		QString sOutDevice = m_preset.sOutDevice;
+		QString sOutDevice = preset.sOutDevice;
 		if (sOutDevice.isEmpty())
 			sOutDevice = sInterface;
-		switch (m_preset.iAudio) {
+		switch (preset.iAudio) {
 		case QJACKCTL_DUPLEX:
 			setDBusDriverParameter("duplex", true);
 			setDBusDriverParameter("capture", sInDevice);
@@ -4163,13 +4183,13 @@ void qjackctlMainForm::setDBusParameters (void)
 			break;
 		}
 		setDBusDriverParameter("inchannels",
-			(unsigned int) m_preset.iInChannels,
-			m_preset.iInChannels > 0 && m_preset.iAudio != QJACKCTL_PLAYBACK);
+			(unsigned int) preset.iInChannels,
+			preset.iInChannels > 0 && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
-			(unsigned int) m_preset.iOutChannels,
-			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
+			(unsigned int) preset.iOutChannels,
+			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
 		unsigned char dither = 0;
-		switch (m_preset.iDither) {
+		switch (preset.iDither) {
 		case 0: dither = 'n'; break;
 		case 1: dither = 'r'; break;
 		case 2: dither = 's'; break;
@@ -4179,46 +4199,46 @@ void qjackctlMainForm::setDBusParameters (void)
 			dither > 0);
 	}
 	else if (bOss || bSun) {
-		QString sInDevice = m_preset.sInDevice;
-		if (sInDevice.isEmpty() && m_preset.iAudio == QJACKCTL_CAPTURE)
-			sInDevice = m_preset.sInterface;
+		QString sInDevice = preset.sInDevice;
+		if (sInDevice.isEmpty() && preset.iAudio == QJACKCTL_CAPTURE)
+			sInDevice = preset.sInterface;
 		setDBusDriverParameter("capture",
 			sInDevice,
-			!sInDevice.isEmpty() && m_preset.iAudio != QJACKCTL_PLAYBACK);
-		QString sOutDevice = m_preset.sOutDevice;
-		if (sOutDevice.isEmpty() && m_preset.iAudio == QJACKCTL_PLAYBACK)
-			sOutDevice = m_preset.sInterface;
+			!sInDevice.isEmpty() && preset.iAudio != QJACKCTL_PLAYBACK);
+		QString sOutDevice = preset.sOutDevice;
+		if (sOutDevice.isEmpty() && preset.iAudio == QJACKCTL_PLAYBACK)
+			sOutDevice = preset.sInterface;
 		setDBusDriverParameter("playback",
 			sOutDevice,
-			!sOutDevice.isEmpty() && m_preset.iAudio != QJACKCTL_CAPTURE);
+			!sOutDevice.isEmpty() && preset.iAudio != QJACKCTL_CAPTURE);
 		setDBusDriverParameter("inchannels",
-			(unsigned int) m_preset.iInChannels,
-			m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK);
+			(unsigned int) preset.iInChannels,
+			preset.iInChannels > 0  && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
-			(unsigned int) m_preset.iOutChannels,
-			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
+			(unsigned int) preset.iOutChannels,
+			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
 	}
 	else if (bCoreaudio || bFirewire || bNet) {
 		setDBusDriverParameter("inchannels",
-			(unsigned int) m_preset.iInChannels,
-			m_preset.iInChannels > 0  && m_preset.iAudio != QJACKCTL_PLAYBACK);
+			(unsigned int) preset.iInChannels,
+			preset.iInChannels > 0  && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
-			(unsigned int) m_preset.iOutChannels,
-			m_preset.iOutChannels > 0 && m_preset.iAudio != QJACKCTL_CAPTURE);
+			(unsigned int) preset.iOutChannels,
+			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
 	}
 	if (bDummy) {
 		setDBusDriverParameter("wait",
-			(unsigned int) m_preset.iWait,
-			m_preset.iWait > 0);
+			(unsigned int) preset.iWait,
+			preset.iWait > 0);
 	}
 	else
 	if (!bNet) {
 		setDBusDriverParameter("input-latency",
-			(unsigned int) m_preset.iInLatency,
-			m_preset.iInLatency > 0);
+			(unsigned int) preset.iInLatency,
+			preset.iInLatency > 0);
 		setDBusDriverParameter("output-latency",
-			(unsigned int) m_preset.iOutLatency,
-			m_preset.iOutLatency > 0);
+			(unsigned int) preset.iOutLatency,
+			preset.iOutLatency > 0);
 	}
 }
 
@@ -4292,8 +4312,14 @@ bool qjackctlMainForm::resetDBusParameter ( const QStringList& path )
 
 
 // D-BUS: Get preset options from current parameter values.
-void qjackctlMainForm::getDBusParameters (void)
+bool qjackctlMainForm::getDBusParameters ( qjackctlPreset& preset )
 {
+	if (m_pSetup == NULL)
+		return false;
+
+	if (m_pDBusConfig == NULL)
+		return false;
+
 	// Get configuration parameters...
 	QVariant var;
 
@@ -4301,164 +4327,185 @@ void qjackctlMainForm::getDBusParameters (void)
 //	var = getDBusEngineParameter("name");
 //  if (var.isValid())
 //		m_pSetup->sServerName = var.toString();
+	preset.bSync = false;
 	var = getDBusEngineParameter("sync");
 	if (var.isValid())
-		m_preset.bSync = var.toBool();
+		preset.bSync = var.toBool();
+
+	preset.bVerbose = false;
 	var = getDBusEngineParameter("verbose");
 	if (var.isValid())
-		m_preset.bVerbose = var.toBool();
+		preset.bVerbose = var.toBool();
+
+	preset.bRealtime = false;
 	var = getDBusEngineParameter("realtime");
 	if (var.isValid())
-		m_preset.bRealtime = var.toBool();
+		preset.bRealtime = var.toBool();
+
+	preset.iPriority = 0;
 	var = getDBusEngineParameter("realtime-priority");
 	if (var.isValid())
-		m_preset.iPriority = var.toInt();
+		preset.iPriority = var.toInt();
+
+	preset.iPortMax = 0;
 	var = getDBusEngineParameter("port-max");
 	if (var.isValid())
-		m_preset.iPortMax = var.toInt();
+		preset.iPortMax = var.toInt();
+
+	preset.iTimeout = 0;
 	var = getDBusEngineParameter("client-timeout");
 	if (var.isValid())
-		m_preset.iTimeout = var.toInt();
+		preset.iTimeout = var.toInt();
+
+	preset.bNoMemLock = false;
 //	var = getDBusEngineParameter("no-mem-lock");
 //	if (var.isValid())
-//		m_preset.bNoMemLock = var.ToBool();
+//		preset.bNoMemLock = var.ToBool();
+
+	preset.bUnlockMem = false;
 //	var = getDBusEngineParameter("libs-unlock",
-//		m_preset.bUnlockMem = var.toBool();
+//		preset.bUnlockMem = var.toBool();
+
+	preset.sDriver.clear();
 	var = getDBusEngineParameter("driver");
 	if (var.isValid())
-		m_preset.sDriver = var.toString();
+		preset.sDriver = var.toString();
 
-	const bool bDummy     = (m_preset.sDriver == "dummy");
-	const bool bSun       = (m_preset.sDriver == "sun");
-	const bool bOss       = (m_preset.sDriver == "oss");
-	const bool bAlsa      = (m_preset.sDriver == "alsa");
-	const bool bPortaudio = (m_preset.sDriver == "portaudio");
-	const bool bCoreaudio = (m_preset.sDriver == "coreaudio");
-	const bool bFirewire  = (m_preset.sDriver == "firewire");
-	const bool bNet       = (m_preset.sDriver == "net" || m_preset.sDriver == "netone");
+	const bool bDummy     = (preset.sDriver == "dummy");
+	const bool bSun       = (preset.sDriver == "sun");
+	const bool bOss       = (preset.sDriver == "oss");
+	const bool bAlsa      = (preset.sDriver == "alsa");
+	const bool bPortaudio = (preset.sDriver == "portaudio");
+	const bool bCoreaudio = (preset.sDriver == "coreaudio");
+	const bool bFirewire  = (preset.sDriver == "firewire");
+	const bool bNet       = (preset.sDriver == "net" || preset.sDriver == "netone");
 
-	m_preset.sInterface.clear();
+	preset.sInterface.clear();
 	if (bAlsa || bPortaudio || bCoreaudio || bFirewire) {
 		var = getDBusDriverParameter("device");
 		if (var.isValid())
-			m_preset.sInterface = var.toString();
+			preset.sInterface = var.toString();
 	}
 
-	m_preset.iChan = 0;
+	preset.iChan = 0;
 	if (bPortaudio) {
 		var = getDBusDriverParameter("channel");
 		if (var.isValid())
-			m_preset.iChan = var.toInt();
+			preset.iChan = var.toInt();
 	}
 
-	m_preset.iSampleRate = 0;
-	m_preset.iFrames = 0;
+	preset.iSampleRate = 0;
+	preset.iFrames = 0;
 	if (!bNet) {
 		var = getDBusDriverParameter("rate");
 		if (var.isValid())
-			m_preset.iSampleRate = var.toInt();
+			preset.iSampleRate = var.toInt();
 		var = getDBusDriverParameter("period");
 		if (var.isValid())
-			m_preset.iFrames = var.toInt();
+			preset.iFrames = var.toInt();
 	}
 
-	m_preset.iPeriods = 0;
+	preset.iPeriods = 0;
 	if (bAlsa || bSun || bOss || bFirewire) {
 		var = getDBusDriverParameter("nperiods");
 		if (var.isValid())
-			m_preset.iPeriods = var.toInt();
+			preset.iPeriods = var.toInt();
 	}
 
-	m_preset.bSoftMode = false;
-	m_preset.bMonitor = false;
-	m_preset.bShorts = false;
-	m_preset.bHWMeter = false;
-	m_preset.sMidiDriver.clear();
+	preset.bSoftMode = false;
+	preset.bMonitor = false;
+	preset.bShorts = false;
+	preset.bHWMeter = false;
+	preset.sMidiDriver.clear();
 	if (bAlsa) {
 		var = getDBusDriverParameter("softmode");
 		if (var.isValid())
-			m_preset.bSoftMode = var.toBool();
+			preset.bSoftMode = var.toBool();
 		var = getDBusDriverParameter("monitor");
 		if (var.isValid())
-			m_preset.bMonitor = var.toBool();
+			preset.bMonitor = var.toBool();
 		var = getDBusDriverParameter("shorts");
 		if (var.isValid())
-			m_preset.bShorts = var.toBool();
+			preset.bShorts = var.toBool();
 		var = getDBusDriverParameter("hwmeter");
 		if (var.isValid())
-			m_preset.bHWMeter = var.toBool();
+			preset.bHWMeter = var.toBool();
 	#ifdef CONFIG_JACK_MIDI
 		var = getDBusDriverParameter("midi-driver");
 		if (var.isValid())
-			m_preset.sMidiDriver = var.toString();
+			preset.sMidiDriver = var.toString();
 	#endif
 	}
 
-	m_preset.iAudio = QJACKCTL_DUPLEX;
-	m_preset.sInDevice.clear();
-	m_preset.sOutDevice.clear();
+	preset.iAudio = QJACKCTL_DUPLEX;
+	preset.sInDevice.clear();
+	preset.sOutDevice.clear();
 	if (bAlsa || bPortaudio || bOss || bSun) {
 		bool bDuplex = false;
 		var = getDBusDriverParameter("duplex");
 		if (var.isValid())
 			bDuplex = var.toBool();
-		var = getDBusDriverParameter("capture");
-		if (var.isValid())
-			m_preset.sInDevice = var.toString();
-		var = getDBusDriverParameter("playback");
-		if (var.isValid())
-			m_preset.sOutDevice = var.toString();
-		if (!bDuplex && !m_preset.sInDevice.isEmpty())
-			m_preset.iAudio = QJACKCTL_CAPTURE;
-		if (!bDuplex && !m_preset.sOutDevice.isEmpty())
-			m_preset.iAudio = QJACKCTL_PLAYBACK;
+		if (!bDuplex) {
+			var = getDBusDriverParameter("capture");
+			if (var.isValid())
+				preset.sInDevice = var.toString();
+			var = getDBusDriverParameter("playback");
+			if (var.isValid())
+				preset.sOutDevice = var.toString();
+			if (!preset.sInDevice.isEmpty())
+				preset.iAudio = QJACKCTL_CAPTURE;
+			if (!preset.sOutDevice.isEmpty())
+				preset.iAudio = QJACKCTL_PLAYBACK;
+		}
 	}
 
-	m_preset.iInChannels = 0;
-	m_preset.iOutChannels = 0;
+	preset.iInChannels = 0;
+	preset.iOutChannels = 0;
 	if (bAlsa || bPortaudio || bOss || bSun || bCoreaudio || bFirewire || bNet) {
-		if (m_preset.iAudio != QJACKCTL_PLAYBACK) {
+		if (preset.iAudio != QJACKCTL_PLAYBACK) {
 			var = getDBusDriverParameter("inchannels");
 			if (var.isValid())
-				m_preset.iInChannels = var.toInt();
+				preset.iInChannels = var.toInt();
 		}
-		if (m_preset.iAudio != QJACKCTL_CAPTURE) {
+		if (preset.iAudio != QJACKCTL_CAPTURE) {
 			var = getDBusDriverParameter("outchannels");
 			if (var.isValid())
-				m_preset.iOutChannels = var.toInt();
+				preset.iOutChannels = var.toInt();
 		}
 	}
 
-	m_preset.iDither = 0;
+	preset.iDither = 0;
 	if (bAlsa || bPortaudio) {
 		unsigned char dither = 'n';
 		var = getDBusDriverParameter("dither");
 		if (var.isValid())
 			dither = var.toChar().cell();
 		switch (dither) {
-		case 'n': m_preset.iDither = 0; break;
-		case 'r': m_preset.iDither = 1; break;
-		case 's': m_preset.iDither = 2; break;
-		case 't': m_preset.iDither = 3; break; }
+		case 'n': preset.iDither = 0; break;
+		case 'r': preset.iDither = 1; break;
+		case 's': preset.iDither = 2; break;
+		case 't': preset.iDither = 3; break; }
 	}
 
-	m_preset.iWait = 0;
-	m_preset.iInLatency = 0;
-	m_preset.iOutLatency = 0;
+	preset.iWait = 0;
+	preset.iInLatency = 0;
+	preset.iOutLatency = 0;
 	if (bDummy) {
 		var = getDBusDriverParameter("wait");
 		if (var.isValid())
-			m_preset.iWait = var.toInt();
+			preset.iWait = var.toInt();
 	}
 	else
 	if (!bNet) {
 		var = getDBusDriverParameter("input-latency");
 		if (var.isValid())
-			m_preset.iInLatency = var.toInt();
+			preset.iInLatency = var.toInt();
 		var = getDBusDriverParameter("output-latency");
 		if (var.isValid())
-			m_preset.iOutLatency = var.toInt();
+			preset.iOutLatency = var.toInt();
 	}
+
+	return true;
 }
 
 
@@ -4489,7 +4536,9 @@ QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 		return QVariant();
 	}
 
-	return dbusm.arguments().at(2);
+	const QDBusVariant& dbusv
+		= qvariant_cast<QDBusVariant> (dbusm.arguments().at(2));
+	return dbusv.variant();
 }
 
 #endif	// CONFIG_DBUS

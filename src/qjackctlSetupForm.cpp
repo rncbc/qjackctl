@@ -662,85 +662,71 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 }
 
 
-void qjackctlSetupForm::changePreset ( const QString& sPreset )
+// Set form widgets from preset values...
+void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 {
-	if (sPreset.isEmpty())
-		return;
-
-	// Load Settings...
-	qjackctlPreset preset;
-	if (m_pSetup->loadPreset(preset, sPreset)) {
-		setComboBoxCurrentText(m_ui.ServerPrefixComboBox, preset.sServerPrefix);
-		setComboBoxCurrentText(m_ui.ServerNameComboBox,
-			preset.sServerName.isEmpty()
+	setComboBoxCurrentText(m_ui.ServerPrefixComboBox,
+		preset.sServerPrefix);
+	setComboBoxCurrentText(m_ui.ServerNameComboBox,
+		preset.sServerName.isEmpty()
+		? m_pSetup->sDefPresetName
+		: preset.sServerName);
+	m_ui.RealtimeCheckBox->setChecked(preset.bRealtime);
+	m_ui.SoftModeCheckBox->setChecked(preset.bSoftMode);
+	m_ui.MonitorCheckBox->setChecked(preset.bMonitor);
+	m_ui.ShortsCheckBox->setChecked(preset.bShorts);
+	m_ui.NoMemLockCheckBox->setChecked(preset.bNoMemLock);
+	m_ui.UnlockMemCheckBox->setChecked(preset.bUnlockMem);
+	m_ui.HWMeterCheckBox->setChecked(preset.bHWMeter);
+	m_ui.IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
+	m_ui.PrioritySpinBox->setValue(preset.iPriority);
+	setComboBoxCurrentText(m_ui.FramesComboBox,
+		QString::number(preset.iFrames));
+	setComboBoxCurrentText(m_ui.SampleRateComboBox,
+		QString::number(preset.iSampleRate));
+	m_ui.PeriodsSpinBox->setValue(preset.iPeriods);
+	setComboBoxCurrentText(m_ui.WordLengthComboBox,
+		QString::number(preset.iWordLength));
+	setComboBoxCurrentText(m_ui.WaitComboBox,
+	QString::number(preset.iWait));
+	m_ui.ChanSpinBox->setValue(preset.iChan);
+	setComboBoxCurrentText(m_ui.DriverComboBox, preset.sDriver);
+	setComboBoxCurrentText(m_ui.InterfaceComboBox,
+		preset.sInterface.isEmpty()
 			? m_pSetup->sDefPresetName
-			: preset.sServerName);
-		m_ui.RealtimeCheckBox->setChecked(preset.bRealtime);
-		m_ui.SoftModeCheckBox->setChecked(preset.bSoftMode);
-		m_ui.MonitorCheckBox->setChecked(preset.bMonitor);
-		m_ui.ShortsCheckBox->setChecked(preset.bShorts);
-		m_ui.NoMemLockCheckBox->setChecked(preset.bNoMemLock);
-		m_ui.UnlockMemCheckBox->setChecked(preset.bUnlockMem);
-		m_ui.HWMeterCheckBox->setChecked(preset.bHWMeter);
-		m_ui.IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
-		m_ui.PrioritySpinBox->setValue(preset.iPriority);
-		setComboBoxCurrentText(m_ui.FramesComboBox,
-			QString::number(preset.iFrames));
-		setComboBoxCurrentText(m_ui.SampleRateComboBox,
-			QString::number(preset.iSampleRate));
-		m_ui.PeriodsSpinBox->setValue(preset.iPeriods);
-		setComboBoxCurrentText(m_ui.WordLengthComboBox,
-			QString::number(preset.iWordLength));
-		setComboBoxCurrentText(m_ui.WaitComboBox,
-		QString::number(preset.iWait));
-		m_ui.ChanSpinBox->setValue(preset.iChan);
-		setComboBoxCurrentText(m_ui.DriverComboBox, preset.sDriver);
-		setComboBoxCurrentText(m_ui.InterfaceComboBox,
-			preset.sInterface.isEmpty()
-				? m_pSetup->sDefPresetName
-				: preset.sInterface);
-		m_ui.AudioComboBox->setCurrentIndex(preset.iAudio);
-		m_ui.DitherComboBox->setCurrentIndex(preset.iDither);
-		setComboBoxCurrentText(m_ui.TimeoutComboBox,
-			QString::number(preset.iTimeout));
-		setComboBoxCurrentText(m_ui.InDeviceComboBox,
-			preset.sInDevice.isEmpty()
-				? m_pSetup->sDefPresetName
-				: preset.sInDevice);
-		setComboBoxCurrentText(m_ui.OutDeviceComboBox,
-			preset.sOutDevice.isEmpty()
-				? m_pSetup->sDefPresetName
-				: preset.sOutDevice);
-		m_ui.InChannelsSpinBox->setValue(preset.iInChannels);
-		m_ui.OutChannelsSpinBox->setValue(preset.iOutChannels);
-		m_ui.InLatencySpinBox->setValue(preset.iInLatency);
-		m_ui.OutLatencySpinBox->setValue(preset.iOutLatency);
-		m_ui.StartDelaySpinBox->setValue(preset.iStartDelay);
-		m_ui.SyncCheckBox->setChecked(preset.bSync);
-		m_ui.VerboseCheckBox->setChecked(preset.bVerbose);
-		setComboBoxCurrentText(m_ui.PortMaxComboBox,
-			QString::number(preset.iPortMax));
+			: preset.sInterface);
+	m_ui.AudioComboBox->setCurrentIndex(preset.iAudio);
+	m_ui.DitherComboBox->setCurrentIndex(preset.iDither);
+	setComboBoxCurrentText(m_ui.TimeoutComboBox,
+		QString::number(preset.iTimeout));
+	setComboBoxCurrentText(m_ui.InDeviceComboBox,
+		preset.sInDevice.isEmpty()
+			? m_pSetup->sDefPresetName
+			: preset.sInDevice);
+	setComboBoxCurrentText(m_ui.OutDeviceComboBox,
+		preset.sOutDevice.isEmpty()
+			? m_pSetup->sDefPresetName
+			: preset.sOutDevice);
+	m_ui.InChannelsSpinBox->setValue(preset.iInChannels);
+	m_ui.OutChannelsSpinBox->setValue(preset.iOutChannels);
+	m_ui.InLatencySpinBox->setValue(preset.iInLatency);
+	m_ui.OutLatencySpinBox->setValue(preset.iOutLatency);
+	m_ui.StartDelaySpinBox->setValue(preset.iStartDelay);
+	m_ui.SyncCheckBox->setChecked(preset.bSync);
+	m_ui.VerboseCheckBox->setChecked(preset.bVerbose);
+	setComboBoxCurrentText(m_ui.PortMaxComboBox,
+		QString::number(preset.iPortMax));
 #ifdef CONFIG_JACK_MIDI
-		setComboBoxCurrentText(m_ui.MidiDriverComboBox,
-			preset.sMidiDriver);
+	setComboBoxCurrentText(m_ui.MidiDriverComboBox,
+		preset.sMidiDriver);
 #endif
-		setComboBoxCurrentText(m_ui.ServerSuffixComboBox, preset.sServerSuffix);
-		// Reset dirty flag.
-		m_iDirtySettings = 0;
-	}
-
-	// Set current preset name..
-	m_sPreset = sPreset;
+	setComboBoxCurrentText(m_ui.ServerSuffixComboBox, preset.sServerSuffix);
 }
 
 
-bool qjackctlSetupForm::savePreset ( const QString& sPreset )
+// Get preset values from form widgets...
+bool qjackctlSetupForm::getCurrentPreset ( qjackctlPreset& preset )
 {
-	if (sPreset.isEmpty())
-		return false;
-
-	// Unload settings.
-	qjackctlPreset preset;
 	preset.sServerPrefix = m_ui.ServerPrefixComboBox->currentText();
 	preset.sServerName  = m_ui.ServerNameComboBox->currentText();
 	preset.bRealtime    = m_ui.RealtimeCheckBox->isChecked();
@@ -785,7 +771,38 @@ bool qjackctlSetupForm::savePreset ( const QString& sPreset )
 		preset.sInDevice.clear();
 	if (preset.sOutDevice == m_pSetup->sDefPresetName)
 		preset.sOutDevice.clear();
-	m_pSetup->savePreset(preset, sPreset);
+
+	return true;
+}
+
+
+void qjackctlSetupForm::changePreset ( const QString& sPreset )
+{
+	if (sPreset.isEmpty())
+		return;
+
+	// Load settings...
+	qjackctlPreset preset;
+	if (m_pSetup->loadPreset(preset, sPreset)) {
+		setCurrentPreset(preset);
+		// Reset dirty flag.
+		m_iDirtySettings = 0;
+	}
+
+	// Set current preset name..
+	m_sPreset = sPreset;
+}
+
+
+bool qjackctlSetupForm::savePreset ( const QString& sPreset )
+{
+	if (sPreset.isEmpty())
+		return false;
+
+	// Unload settings.
+	qjackctlPreset preset;
+	if (getCurrentPreset(preset))
+		m_pSetup->savePreset(preset, sPreset);
 
 	return true;
 }
@@ -811,15 +828,31 @@ void qjackctlSetupForm::resetPresets (void)
 }
 
 
+void qjackctlSetupForm::updateCurrentPreset ( const qjackctlPreset& preset )
+{
+	// Current preset changed for sure...
+	if (m_pSetup) {
+		++m_iDirtySetup;
+		setComboBoxCurrentText(m_ui.PresetComboBox, m_pSetup->sDefPreset);
+		setCurrentPreset(preset);
+		--m_iDirtySetup;
+		// Set current preset name..
+		m_sPreset = m_ui.PresetComboBox->currentText();
+		// Set dirty flag anyway...
+		++m_iDirtySettings;
+	}
+}
+
+
 void qjackctlSetupForm::updateCurrentPreset (void)
 {
-   // Have current preset changed anyhow?
-   if (m_pSetup && m_pSetup->sDefPreset != m_sPreset) {
-	   ++m_iDirtySetup;
-	   setComboBoxCurrentText(m_ui.PresetComboBox, m_pSetup->sDefPreset);
-	   changePreset(m_ui.PresetComboBox->currentText());
-	   --m_iDirtySetup;
-   }
+	// Have current preset changed anyhow?
+	if (m_pSetup && m_pSetup->sDefPreset != m_sPreset) {
+		++m_iDirtySetup;
+		setComboBoxCurrentText(m_ui.PresetComboBox, m_pSetup->sDefPreset);
+		changePreset(m_ui.PresetComboBox->currentText());
+		--m_iDirtySetup;
+	}
 }
 
 
