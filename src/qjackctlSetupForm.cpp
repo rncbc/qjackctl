@@ -863,7 +863,7 @@ void qjackctlSetupForm::changeCurrentPreset ( const QString& sPreset )
 
 	// Check if there's any pending changes...
 	if (m_iDirtySettings > 0 && !m_sPreset.isEmpty()) {
-		switch (QMessageBox::warning(this,
+		switch (QMessageBox::warning(isVisible() ? this : parentWidget(),
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Some settings have been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
@@ -916,7 +916,7 @@ void qjackctlSetupForm::deleteCurrentPreset (void)
 	const QString sPreset = m_ui.PresetComboBox->currentText();
 
 	// Try to prompt user if he/she really wants this...
-	if (QMessageBox::warning(this,
+	if (QMessageBox::warning(isVisible() ? this : parentWidget(),
 		tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 		tr("Delete preset:\n\n"
 		"\"%1\"\n\nAre you sure?")
@@ -1703,7 +1703,7 @@ bool qjackctlSetupForm::queryClose (void)
 
 	// Check if there's any pending changes...
 	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
-		switch (QMessageBox::warning(this,
+		switch (QMessageBox::warning(isVisible() ? this : parentWidget(),
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Some settings have been changed.\n\n"
 			"Do you want to apply the changes?"),

@@ -325,7 +325,7 @@ public:
 		// Constructor.
 		LineEvent(QEvent::Type eType, const QString& sLine)
 			: QEvent(eType), m_sLine(sLine)
-			{ m_sLine.remove(QRegExp("\x1B\[[0-9|;]+m")); }
+			{ m_sLine.remove(QRegExp("\\x1B\\[[0-9|;]+m")); }
 		// Accessor.
 		const QString& line() const
 			{ return m_sLine; }
@@ -1682,6 +1682,12 @@ void qjackctlMainForm::flushStdoutBuffer (void)
 // Jack audio server startup.
 void qjackctlMainForm::jackStarted (void)
 {
+	// Sure we're over any previous shutdown...
+	m_bJackShutdown = false;
+
+	// We're still starting...
+	updateServerState(QJACKCTL_STARTING);
+
 	// Show startup results...
 	if (m_pJack) {
 		appendMessages(tr("JACK was started with PID=%1.")
@@ -1794,12 +1800,15 @@ void qjackctlMainForm::jackStabilize (void)
 	m_ui.PauseToolButton->setEnabled(false);
 	m_ui.ForwardToolButton->setEnabled(false);
 	transportPlayStatus(false);
-	int iServerState;
-	if (m_bJackDetach)
-		iServerState = (m_pJackClient ? QJACKCTL_ACTIVE : QJACKCTL_INACTIVE);
+#ifdef CONFIG_DBUS
+	if (m_pDBusConfig && m_bDBusStarted)
+		updateServerState(m_pJackClient ? QJACKCTL_STARTED : QJACKCTL_STOPPED);
 	else
-		iServerState = QJACKCTL_STOPPED;
-	updateServerState(iServerState);
+#endif
+	if (m_bJackDetach)
+		updateServerState(m_pJackClient ? QJACKCTL_ACTIVE : QJACKCTL_INACTIVE);
+	else
+		updateServerState(QJACKCTL_STOPPED);
 }
 
 
@@ -2875,7 +2884,6 @@ void qjackctlMainForm::startJackClientDelay (void)
 	m_iStartDelay  = 1 + (m_preset.iStartDelay * 1000);
 	m_iTimerDelay  = 0;
 	m_iJackRefresh = 0;
-qDebug("DEBUG> m_iStartDelay=%d (%d)", m_iStartDelay, m_preset.iStartDelay);
 }
 
 
@@ -2993,7 +3001,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
 #ifdef CONFIG_DBUS
 	// Current D-BUS configuration makes it the default preset always...
-	if (m_pSetup->bJackDBusEnabled && !m_bDBusDetach) {
+	if (m_pDBusConfig && !m_bDBusDetach) {
 		const QString& sPreset = m_pSetup->sDefPresetName;
 		if (m_pSetup->loadPreset(m_preset, sPreset)
 			&& getDBusParameters(m_preset)) {
@@ -3044,7 +3052,11 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	m_ui.TransportTimeTextLabel->setPalette(pal);
 
 	// Whether we've started detached, just change active status.
-	updateServerState(m_bJackDetach ? QJACKCTL_ACTIVE : QJACKCTL_STARTED);
+	updateServerState(m_bJackDetach
+	#ifdef CONFIG_DBUS
+		&& !(m_pDBusConfig && m_bDBusStarted)
+	#endif
+		? QJACKCTL_ACTIVE : QJACKCTL_STARTED);
 	m_ui.StopToolButton->setEnabled(true);
 
 	// Log success here.
@@ -3146,6 +3158,7 @@ void qjackctlMainForm::refreshConnections (void)
 	refreshAlsaConnections();
 }
 
+
 void qjackctlMainForm::refreshJackConnections (void)
 {
 	// Hack this as for a while...
@@ -3161,6 +3174,7 @@ void qjackctlMainForm::refreshJackConnections (void)
 	// to be executed just on timer slot processing...
 	m_iJackRefresh++;
 }
+
 
 void qjackctlMainForm::refreshAlsaConnections (void)
 {
