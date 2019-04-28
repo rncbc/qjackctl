@@ -235,7 +235,7 @@ void qjackctlGraphPort::setPortTitle ( const QString& title )
 
 	QPainterPath path;
 	const QRectF& rect
-		= m_text->boundingRect();
+		= m_text->boundingRect().adjusted(0, +2, 0, -2);
 	path.addRoundedRect(rect, 5, 5);
 	QGraphicsPathItem::setPath(path);
 }
@@ -771,17 +771,17 @@ void qjackctlGraphNode::updatePath (void)
 
 	std::sort(m_ports.begin(), m_ports.end(), qjackctlGraphPort::Compare());
 
-	int height = rect.height() + 6;
+	int height = rect.height() + 2;
 	int type = 0;
 	int yi, yo;
 	yi = yo = height;
 	foreach (qjackctlGraphPort *port, m_ports) {
 		const QRectF& port_rect = port->boundingRect();
 		const int w = port_rect.width();
-		const int h = port_rect.height() + 2;
+		const int h = port_rect.height() + 1;
 		if (type - port->portType()) {
 			type = port->portType();
-			height += 4;
+			height += 2;
 			yi = yo = height;
 		}
 		if (port->isOutput()) {
