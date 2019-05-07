@@ -1183,6 +1183,8 @@ void qjackctlGraphCanvas::addItem ( qjackctlGraphItem *item )
 
 void qjackctlGraphCanvas::removeItem ( qjackctlGraphItem *item )
 {
+	clearSelection();
+
 	if (item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 		if (node && saveNodePos(node)) {
