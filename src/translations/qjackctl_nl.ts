@@ -440,13 +440,13 @@ Bent u zeker?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1642"/>
-        <location filename="../qjackctlGraph.cpp" line="1788"/>
+        <location filename="../qjackctlGraph.cpp" line="1644"/>
+        <location filename="../qjackctlGraph.cpp" line="1790"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1824"/>
+        <location filename="../qjackctlGraph.cpp" line="1826"/>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
