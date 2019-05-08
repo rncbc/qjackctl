@@ -241,9 +241,8 @@ void qjackctlJackClient::updateClientName ( bool bRename )
 		QString sClientNameEx = clientNameAlias(&bRenameEnabled);
 		const QString& sClientName = clientName();
 		const QByteArray aClientName = sClientName.toUtf8();
-		const char *pszClientName = aClientName.constData();
 		const char *pszClientUuid
-			= ::jack_get_uuid_for_client_name(pJackClient, pszClientName);
+			= ::jack_get_uuid_for_client_name(pJackClient, aClientName.constData());
 		if (pszClientUuid) {
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(pszClientUuid, &client_uuid);
