@@ -65,10 +65,10 @@ static
 void qjackctlJackGraph_setPrettyName (
 	jack_client_t *client, jack_uuid_t uuid, const QString& pretty_name )
 {
-	const char *value = pretty_name.toUtf8().constData();
+	const QByteArray value = pretty_name.toUtf8();
 
 	::jack_set_property(client, uuid,
-		JACK_METADATA_PRETTY_NAME, value, NULL);
+		JACK_METADATA_PRETTY_NAME, value.constData(), NULL);
 }
 
 static
@@ -515,10 +515,10 @@ void qjackctlJackGraph::renameItem (
 		if (node) {
 			const QString& node_name
 				= node->nodeName();
-			const char *client_name
-				= node_name.toUtf8().constData();
+			const QByteArray client_name
+				= node_name.toUtf8();
 			const char *client_uuid_name
-				= ::jack_get_uuid_for_client_name(client, client_name);
+				= ::jack_get_uuid_for_client_name(client, client_name.constData());
 			if (client_uuid_name) {
 				jack_uuid_t client_uuid = 0;
 				::jack_uuid_parse(client_uuid_name, &client_uuid);
@@ -540,8 +540,10 @@ void qjackctlJackGraph::renameItem (
 				= port->portName();
 			const QString& client_port
 				= node->nodeName() + ':' + port_name;
-			const char *client_port_name = client_port.toUtf8().constData();
-			jack_port_t *jack_port = ::jack_port_by_name(client, client_port_name);
+			const QByteArray client_port_name
+				= client_port.toUtf8();
+			jack_port_t *jack_port
+				= ::jack_port_by_name(client, client_port_name.constData());
 			if (jack_port) {
 				jack_uuid_t port_uuid = ::jack_port_uuid(jack_port);
 				if (name.isEmpty())

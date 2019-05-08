@@ -1,7 +1,7 @@
 // qjackctlJackConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -53,10 +53,10 @@ static QString prettyName (	jack_uuid_t uuid )
 static void setPrettyName (
 	jack_client_t *pJackClient, jack_uuid_t uuid, const QString& sPrettyName )
 {
-	const char *pszValue = sPrettyName.toUtf8().constData();
+	const QByteArray aPrettyName = sPrettyName.toUtf8();
 
 	::jack_set_property(pJackClient, uuid,
-		JACK_METADATA_PRETTY_NAME, pszValue, NULL);
+		JACK_METADATA_PRETTY_NAME, aPrettyName.constData(), NULL);
 }
 
 static void removePrettyName (
@@ -125,7 +125,7 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 		QString sPortNameEx = portNameAlias(&bRenameEnabled);
 		const QString& sPortName = portName();
 		const QString& sClientPort = clientName() + ':' + sPortName;
-		const QByteArray& aClientPort = sClientPort.toUtf8();
+		const QByteArray aClientPort = sClientPort.toUtf8();
 		const char *pszClientPort = aClientPort.constData();
 		jack_port_t *pJackPort = jack_port_by_name(pJackClient, pszClientPort);
 		if (pJackPort) {
@@ -164,7 +164,7 @@ QString qjackctlJackPort::tooltip (void) const
 	if (pJackClient) {
 		const QString& sPortName = portName();
 		const QString& sClientPort = clientName() + ':' + sPortName;
-		const QByteArray& aClientPort = sClientPort.toUtf8();
+		const QByteArray aClientPort = sClientPort.toUtf8();
 		const char *pszClientPort = aClientPort.constData();
 		jack_port_t *pJackPort = jack_port_by_name(pJackClient, pszClientPort);
 		if (pJackPort) {
@@ -240,8 +240,8 @@ void qjackctlJackClient::updateClientName ( bool bRename )
 		bool bRenameEnabled = false;
 		QString sClientNameEx = clientNameAlias(&bRenameEnabled);
 		const QString& sClientName = clientName();
-		const char *pszClientName
-			= sClientName.toUtf8().constData();
+		const QByteArray aClientName = sClientName.toUtf8();
+		const char *pszClientName = aClientName.constData();
 		const char *pszClientUuid
 			= ::jack_get_uuid_for_client_name(pJackClient, pszClientName);
 		if (pszClientUuid) {
@@ -587,7 +587,7 @@ void qjackctlJackConnect::updateConnections (void)
 			// Get port connections...
 			const QString& sClientPort
 				= pOJack->clientName() + ':' + pOJack->portName();
-			const QByteArray& aClientPort = sClientPort.toUtf8();
+			const QByteArray aClientPort = sClientPort.toUtf8();
 			const char *pszClientPort = aClientPort.constData();
 			jack_port_t *pJackPort
 				= jack_port_by_name(pJackClient, pszClientPort);
