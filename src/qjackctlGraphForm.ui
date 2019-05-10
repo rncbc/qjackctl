@@ -37,6 +37,12 @@
   </property>
   <widget class="QWidget" name="MainCentralWidget">
    <layout class="QVBoxLayout">
+    <property name="margin" >
+     <number>0</number>
+    </property>
+    <property name="spacing" >
+     <number>0</number>
+    </property>
     <item>
      <widget class="qjackctlGraphCanvas" name="graphCanvas"/>
     </item>

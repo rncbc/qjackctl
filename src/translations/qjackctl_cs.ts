@@ -450,519 +450,519 @@ Jste si jistý?</translation>
         <translation>Graf - JACK Audio Connection Kit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="57"/>
+        <location filename="../qjackctlGraphForm.ui" line="63"/>
         <source>&amp;Graph</source>
         <translation>&amp;Graf</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="66"/>
+        <location filename="../qjackctlGraphForm.ui" line="72"/>
         <source>&amp;Edit</source>
         <translation>Úp&amp;ravy</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="76"/>
+        <location filename="../qjackctlGraphForm.ui" line="82"/>
         <source>&amp;View</source>
         <translation>&amp;Pohled</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="80"/>
+        <location filename="../qjackctlGraphForm.ui" line="86"/>
         <source>&amp;Zoom</source>
         <translation>&amp;Zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="93"/>
+        <location filename="../qjackctlGraphForm.ui" line="99"/>
         <source>Co&amp;lors</source>
         <translation>&amp;Barvy</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="106"/>
+        <location filename="../qjackctlGraphForm.ui" line="112"/>
         <source>S&amp;ort</source>
         <translation>Ř&amp;adit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="131"/>
+        <location filename="../qjackctlGraphForm.ui" line="137"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="179"/>
+        <location filename="../qjackctlGraphForm.ui" line="185"/>
         <source>&amp;Connect</source>
         <translation>&amp;Spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="182"/>
-        <location filename="../qjackctlGraphForm.ui" line="185"/>
+        <location filename="../qjackctlGraphForm.ui" line="188"/>
+        <location filename="../qjackctlGraphForm.ui" line="191"/>
         <source>Connect</source>
         <translation>Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="188"/>
+        <location filename="../qjackctlGraphForm.ui" line="194"/>
         <source>Connect selected ports</source>
         <translation>Spojit vybrané přípojky</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="191"/>
+        <location filename="../qjackctlGraphForm.ui" line="197"/>
         <source>Ins</source>
         <translation>Ins</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="199"/>
+        <location filename="../qjackctlGraphForm.ui" line="205"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Rozpojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="202"/>
-        <location filename="../qjackctlGraphForm.ui" line="205"/>
+        <location filename="../qjackctlGraphForm.ui" line="208"/>
+        <location filename="../qjackctlGraphForm.ui" line="211"/>
         <source>Disconnect</source>
         <translation>Rozpojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="208"/>
+        <location filename="../qjackctlGraphForm.ui" line="214"/>
         <source>Disconnect selected ports</source>
         <translation>Rozpojit vybrané přípojky</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="211"/>
+        <location filename="../qjackctlGraphForm.ui" line="217"/>
         <source>Del</source>
         <translation>Del</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="216"/>
+        <location filename="../qjackctlGraphForm.ui" line="222"/>
         <source>Cl&amp;ose</source>
         <translation>&amp;Zavřít</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="219"/>
-        <location filename="../qjackctlGraphForm.ui" line="222"/>
+        <location filename="../qjackctlGraphForm.ui" line="225"/>
+        <location filename="../qjackctlGraphForm.ui" line="228"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="225"/>
+        <location filename="../qjackctlGraphForm.ui" line="231"/>
         <source>Close this application window</source>
         <translation>Zavřít okno tohoto programu</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="233"/>
+        <location filename="../qjackctlGraphForm.ui" line="239"/>
         <source>Select &amp;All</source>
         <translation>Vybrat &amp;vše</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="236"/>
-        <location filename="../qjackctlGraphForm.ui" line="239"/>
         <location filename="../qjackctlGraphForm.ui" line="242"/>
+        <location filename="../qjackctlGraphForm.ui" line="245"/>
+        <location filename="../qjackctlGraphForm.ui" line="248"/>
         <source>Select All</source>
         <translation>Vybrat vše</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="245"/>
+        <location filename="../qjackctlGraphForm.ui" line="251"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="250"/>
+        <location filename="../qjackctlGraphForm.ui" line="256"/>
         <source>Select &amp;None</source>
         <translation>Nevybrat &amp;nic</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="253"/>
-        <location filename="../qjackctlGraphForm.ui" line="256"/>
         <location filename="../qjackctlGraphForm.ui" line="259"/>
+        <location filename="../qjackctlGraphForm.ui" line="262"/>
+        <location filename="../qjackctlGraphForm.ui" line="265"/>
         <source>Select None</source>
         <translation>Nevybrat nic</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="262"/>
+        <location filename="../qjackctlGraphForm.ui" line="268"/>
         <source>Ctrl+Shift+A</source>
         <translation>Ctrl+Shift+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="267"/>
+        <location filename="../qjackctlGraphForm.ui" line="273"/>
         <source>Select &amp;Invert</source>
         <translation>Obrátit &amp;výběr</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="270"/>
-        <location filename="../qjackctlGraphForm.ui" line="273"/>
         <location filename="../qjackctlGraphForm.ui" line="276"/>
+        <location filename="../qjackctlGraphForm.ui" line="279"/>
+        <location filename="../qjackctlGraphForm.ui" line="282"/>
         <source>Select Invert</source>
         <translation>Obrátit výběr</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="279"/>
+        <location filename="../qjackctlGraphForm.ui" line="285"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="287"/>
+        <location filename="../qjackctlGraphForm.ui" line="293"/>
         <source>&amp;Rename...</source>
         <translation>&amp;Přejmenovat...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="290"/>
+        <location filename="../qjackctlGraphForm.ui" line="296"/>
         <source>Rename item</source>
         <translation>Přejmenovat položku</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="293"/>
-        <location filename="../qjackctlGraphForm.ui" line="296"/>
+        <location filename="../qjackctlGraphForm.ui" line="299"/>
+        <location filename="../qjackctlGraphForm.ui" line="302"/>
         <source>Rename Item</source>
         <translation>Přejmenovat položku</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="307"/>
+        <location filename="../qjackctlGraphForm.ui" line="313"/>
         <source>&amp;Menubar</source>
         <translation>Pruh s &amp;nabídkou</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="310"/>
-        <location filename="../qjackctlGraphForm.ui" line="313"/>
+        <location filename="../qjackctlGraphForm.ui" line="316"/>
+        <location filename="../qjackctlGraphForm.ui" line="319"/>
         <source>Menubar</source>
         <translation>Pruh s nabídkou</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="316"/>
+        <location filename="../qjackctlGraphForm.ui" line="322"/>
         <source>Show/hide the main program window menubar</source>
         <translation>Ukázat/Skrýt hlavní okno programu s nabídkovým pruhem</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="319"/>
+        <location filename="../qjackctlGraphForm.ui" line="325"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="327"/>
+        <location filename="../qjackctlGraphForm.ui" line="333"/>
         <source>&amp;Toolbar</source>
         <translation>Pruh s &amp;nástroji</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="330"/>
-        <location filename="../qjackctlGraphForm.ui" line="333"/>
+        <location filename="../qjackctlGraphForm.ui" line="336"/>
+        <location filename="../qjackctlGraphForm.ui" line="339"/>
         <source>Toolbar</source>
         <translation>Pruh s nástroji</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="336"/>
+        <location filename="../qjackctlGraphForm.ui" line="342"/>
         <source>Show/hide main program window file toolbar</source>
         <translation>Ukázat/Skrýt hlavní okno programu s nástrojovým pruhem</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="344"/>
+        <location filename="../qjackctlGraphForm.ui" line="350"/>
         <source>&amp;Statusbar</source>
         <translation>&amp;Stavový řádek</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="347"/>
-        <location filename="../qjackctlGraphForm.ui" line="350"/>
+        <location filename="../qjackctlGraphForm.ui" line="353"/>
+        <location filename="../qjackctlGraphForm.ui" line="356"/>
         <source>Statusbar</source>
         <translation>Stavový řádek</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="353"/>
+        <location filename="../qjackctlGraphForm.ui" line="359"/>
         <source>Show/hide the main program window statusbar</source>
         <translation>Ukázat/Skrýt stavový řádek hlavního okna programu</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="364"/>
+        <location filename="../qjackctlGraphForm.ui" line="370"/>
         <source>Text Beside &amp;Icons</source>
         <translation>Text &amp;vedle ikon</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="367"/>
-        <location filename="../qjackctlGraphForm.ui" line="370"/>
+        <location filename="../qjackctlGraphForm.ui" line="373"/>
+        <location filename="../qjackctlGraphForm.ui" line="376"/>
         <source>Text beside icons</source>
         <translation>Text vedle ikon</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="373"/>
+        <location filename="../qjackctlGraphForm.ui" line="379"/>
         <source>Show/hide text beside icons</source>
         <translation>Ukázat/Skrýt text vedle ikon</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="381"/>
+        <location filename="../qjackctlGraphForm.ui" line="387"/>
         <source>&amp;Center</source>
         <translation>&amp;Vystředit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="384"/>
-        <location filename="../qjackctlGraphForm.ui" line="387"/>
+        <location filename="../qjackctlGraphForm.ui" line="390"/>
+        <location filename="../qjackctlGraphForm.ui" line="393"/>
         <source>Center</source>
         <translation>Vystředit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="390"/>
+        <location filename="../qjackctlGraphForm.ui" line="396"/>
         <source>Center view</source>
         <translation>Vystředit pohled</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="398"/>
+        <location filename="../qjackctlGraphForm.ui" line="404"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Obnovit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="401"/>
-        <location filename="../qjackctlGraphForm.ui" line="404"/>
+        <location filename="../qjackctlGraphForm.ui" line="407"/>
+        <location filename="../qjackctlGraphForm.ui" line="410"/>
         <source>Refresh</source>
         <translation>Obnovit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="407"/>
+        <location filename="../qjackctlGraphForm.ui" line="413"/>
         <source>Refresh view</source>
         <translation>Obnovit pohled</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="410"/>
+        <location filename="../qjackctlGraphForm.ui" line="416"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="418"/>
+        <location filename="../qjackctlGraphForm.ui" line="424"/>
         <source>Zoom &amp;In</source>
         <translation>&amp;Přiblížit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="421"/>
-        <location filename="../qjackctlGraphForm.ui" line="424"/>
         <location filename="../qjackctlGraphForm.ui" line="427"/>
+        <location filename="../qjackctlGraphForm.ui" line="430"/>
+        <location filename="../qjackctlGraphForm.ui" line="433"/>
         <source>Zoom In</source>
         <translation>Přiblížit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="430"/>
+        <location filename="../qjackctlGraphForm.ui" line="436"/>
         <source>Ctrl++</source>
         <translation>Ctrl++</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="438"/>
+        <location filename="../qjackctlGraphForm.ui" line="444"/>
         <source>Zoom &amp;Out</source>
         <translation>&amp;Oddálit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="441"/>
-        <location filename="../qjackctlGraphForm.ui" line="444"/>
         <location filename="../qjackctlGraphForm.ui" line="447"/>
+        <location filename="../qjackctlGraphForm.ui" line="450"/>
+        <location filename="../qjackctlGraphForm.ui" line="453"/>
         <source>Zoom Out</source>
         <translation>Oddálit</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="450"/>
+        <location filename="../qjackctlGraphForm.ui" line="456"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="458"/>
+        <location filename="../qjackctlGraphForm.ui" line="464"/>
         <source>Zoom &amp;Fit</source>
         <translation>&amp;Přizpůsobit zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="461"/>
-        <location filename="../qjackctlGraphForm.ui" line="464"/>
         <location filename="../qjackctlGraphForm.ui" line="467"/>
+        <location filename="../qjackctlGraphForm.ui" line="470"/>
+        <location filename="../qjackctlGraphForm.ui" line="473"/>
         <source>Zoom Fit</source>
         <translation>Přizpůsobit zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="470"/>
+        <location filename="../qjackctlGraphForm.ui" line="476"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="478"/>
+        <location filename="../qjackctlGraphForm.ui" line="484"/>
         <source>Zoom &amp;Reset</source>
         <translation>&amp;Vrátit zvětšení na výchozí</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="481"/>
-        <location filename="../qjackctlGraphForm.ui" line="484"/>
         <location filename="../qjackctlGraphForm.ui" line="487"/>
+        <location filename="../qjackctlGraphForm.ui" line="490"/>
+        <location filename="../qjackctlGraphForm.ui" line="493"/>
         <source>Zoom Reset</source>
         <translation>Vrátit zvětšení na výchozí</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="490"/>
+        <location filename="../qjackctlGraphForm.ui" line="496"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="501"/>
+        <location filename="../qjackctlGraphForm.ui" line="507"/>
         <source>&amp;Zoom Range</source>
         <translation>Rozsah &amp;zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="504"/>
-        <location filename="../qjackctlGraphForm.ui" line="507"/>
         <location filename="../qjackctlGraphForm.ui" line="510"/>
+        <location filename="../qjackctlGraphForm.ui" line="513"/>
+        <location filename="../qjackctlGraphForm.ui" line="516"/>
         <source>Zoom Range</source>
         <translation>Rozsah zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="518"/>
+        <location filename="../qjackctlGraphForm.ui" line="524"/>
         <source>JACK &amp;Audio...</source>
         <translation>JACK &amp;Audio...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="521"/>
-        <location filename="../qjackctlGraphForm.ui" line="524"/>
         <location filename="../qjackctlGraphForm.ui" line="527"/>
+        <location filename="../qjackctlGraphForm.ui" line="530"/>
+        <location filename="../qjackctlGraphForm.ui" line="533"/>
         <source>JACK Audio color</source>
         <translation>Barva JACK Audio</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="535"/>
+        <location filename="../qjackctlGraphForm.ui" line="541"/>
         <source>JACK &amp;MIDI...</source>
         <translation>JACK &amp;MIDI...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="538"/>
+        <location filename="../qjackctlGraphForm.ui" line="544"/>
         <source>JACK MIDI</source>
         <translation>JACK MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="541"/>
-        <location filename="../qjackctlGraphForm.ui" line="544"/>
+        <location filename="../qjackctlGraphForm.ui" line="547"/>
+        <location filename="../qjackctlGraphForm.ui" line="550"/>
         <source>JACK MIDI color</source>
         <translation>Barva JACK MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="552"/>
+        <location filename="../qjackctlGraphForm.ui" line="558"/>
         <source>&amp;ALSA MIDI...</source>
         <translation>&amp;ALSA MIDI...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="555"/>
+        <location filename="../qjackctlGraphForm.ui" line="561"/>
         <source>ALSA MIDI</source>
         <translation>ALSA MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="558"/>
-        <location filename="../qjackctlGraphForm.ui" line="561"/>
+        <location filename="../qjackctlGraphForm.ui" line="564"/>
+        <location filename="../qjackctlGraphForm.ui" line="567"/>
         <source>ALSA MIDI color</source>
         <translation>Barva ALSA MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="569"/>
+        <location filename="../qjackctlGraphForm.ui" line="575"/>
         <source>&amp;Reset</source>
         <translation>&amp;Obnovit výchozí</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="572"/>
-        <location filename="../qjackctlGraphForm.ui" line="575"/>
         <location filename="../qjackctlGraphForm.ui" line="578"/>
+        <location filename="../qjackctlGraphForm.ui" line="581"/>
+        <location filename="../qjackctlGraphForm.ui" line="584"/>
         <source>Reset colors</source>
         <translation>Obnovit výchozí barvy</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="589"/>
+        <location filename="../qjackctlGraphForm.ui" line="595"/>
         <source>Port &amp;Name</source>
         <translation>&amp;Název přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="592"/>
+        <location filename="../qjackctlGraphForm.ui" line="598"/>
         <source>Port name</source>
         <translation>Název přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="595"/>
+        <location filename="../qjackctlGraphForm.ui" line="601"/>
         <source>Sort by port name</source>
         <translation>Řadit podle názvu přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="606"/>
+        <location filename="../qjackctlGraphForm.ui" line="612"/>
         <source>Port &amp;Title</source>
         <translation>&amp;Titulek přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="609"/>
+        <location filename="../qjackctlGraphForm.ui" line="615"/>
         <source>Port title</source>
         <translation>Titulek přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="612"/>
+        <location filename="../qjackctlGraphForm.ui" line="618"/>
         <source>Sort by port title</source>
         <translation>Řadit podle titulku přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="623"/>
+        <location filename="../qjackctlGraphForm.ui" line="629"/>
         <source>Port &amp;Index</source>
         <translation>Čí&amp;slo přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="626"/>
+        <location filename="../qjackctlGraphForm.ui" line="632"/>
         <source>Port index</source>
         <translation>Číslo přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="629"/>
+        <location filename="../qjackctlGraphForm.ui" line="635"/>
         <source>Sort by port index</source>
         <translation>Řadit podle čísla přípojky (port)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="640"/>
+        <location filename="../qjackctlGraphForm.ui" line="646"/>
         <source>&amp;Ascending</source>
         <translation>&amp;Vzestupně</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="643"/>
+        <location filename="../qjackctlGraphForm.ui" line="649"/>
         <source>Ascending</source>
         <translation>Vzestupně</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="646"/>
+        <location filename="../qjackctlGraphForm.ui" line="652"/>
         <source>Ascending sort order</source>
         <translation>Vzestupné pořadí řazení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="657"/>
+        <location filename="../qjackctlGraphForm.ui" line="663"/>
         <source>&amp;Descending</source>
         <translation>&amp;Sestupně</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="660"/>
+        <location filename="../qjackctlGraphForm.ui" line="666"/>
         <source>Descending</source>
         <translation>Sestupně</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="663"/>
+        <location filename="../qjackctlGraphForm.ui" line="669"/>
         <source>Descending sort order</source>
         <translation>Sestupné pořadí řazení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="671"/>
+        <location filename="../qjackctlGraphForm.ui" line="677"/>
         <source>&amp;About...</source>
         <translation>&amp;O programu...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="674"/>
+        <location filename="../qjackctlGraphForm.ui" line="680"/>
         <source>About...</source>
         <translation>O programu...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="677"/>
+        <location filename="../qjackctlGraphForm.ui" line="683"/>
         <source>About</source>
         <translation>O programu</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="680"/>
+        <location filename="../qjackctlGraphForm.ui" line="686"/>
         <source>Show information about this application program</source>
         <translation>Ukázat informace o tomto programu</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="688"/>
+        <location filename="../qjackctlGraphForm.ui" line="694"/>
         <source>About &amp;Qt...</source>
         <translation>O &amp;Qt...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="691"/>
+        <location filename="../qjackctlGraphForm.ui" line="697"/>
         <source>About Qt...</source>
         <translation>O Qt...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="694"/>
+        <location filename="../qjackctlGraphForm.ui" line="700"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="697"/>
+        <location filename="../qjackctlGraphForm.ui" line="703"/>
         <source>Show information about the Qt toolkit</source>
         <translation>Ukázat informace o sadě nástrojů prostředí Qt</translation>
     </message>
