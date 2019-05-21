@@ -117,6 +117,7 @@ public:
 	void updateConnectionsIconSize();
 	void updateJackClientPortAlias();
 	void updateJackClientPortMetadata();
+	void updateDisplayEffect();
 	void updateTimeDisplayFonts();
 	void updateTimeDisplayToolTips();
 	void updateAliases();

@@ -479,13 +479,6 @@ qjackctlMainForm::qjackctlMainForm (
 	// Avoid extra transport toggles (play/stop)
 	m_iTransportPlay = 0;
 
-	// Shiny display effect is now for good...
-	QPalette pal = m_ui.StatusDisplayFrame->palette();
-//	pal.setColor(QPalette::Background, Qt::black);
-	pal.setBrush(QPalette::Background,
-		QBrush(QPixmap(":/images/displaybg1.png")));
-	m_ui.StatusDisplayFrame->setPalette(pal);
-
 	// Whether we've Qt::Tool flag (from bKeepOnTop),
 	// this is actually the main last application window...
 	QWidget::setAttribute(Qt::WA_QuitOnClose);
@@ -741,6 +734,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_ui.StatusDisplayFrame->show();
 
 	// Set other defaults...
+	updateDisplayEffect();
 	updateTimeDisplayFonts();
 	updateTimeDisplayToolTips();
 	updateMessagesFont();
@@ -2030,6 +2024,24 @@ void qjackctlMainForm::updateJackClientPortMetadata (void)
 	qjackctlJackClientList::setJackClientPortMetadata(m_pSetup->bJackClientPortMetadata);
 
 	refreshJackConnections();
+}
+
+
+// Update main display background effect.
+void qjackctlMainForm::updateDisplayEffect (void)
+{
+	if (m_pSetup == NULL)
+		return;
+
+	// Set the main background...
+	QPalette pal;
+	if (m_pSetup->bDisplayEffect) {
+		QPixmap pm(":/images/displaybg1.png");
+		pal.setBrush(QPalette::Background, QBrush(pm));
+	} else {
+		pal.setColor(QPalette::Background, Qt::black);
+	}
+	m_ui.StatusDisplayFrame->setPalette(pal);
 }
 
 
