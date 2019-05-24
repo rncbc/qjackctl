@@ -1,6 +1,6 @@
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 36
+%define release 37
 
 %define _prefix	@ac_prefix@
 
@@ -78,16 +78,18 @@ including a enhanced patchbay and connection control features.
 
 %changelog
 
+* Sat May 25 2019 Rui Nuno Capela <rncbc@rncbc.org> 0.5.8
+- Spring'19 release.
 * Thu Apr 11 2019 Rui Nuno Capela <rncbc@rncbc.org> 0.5.7
 - Spring-Break'19 release.
 * Mon Mar 11 2019 Rui Nuno Capela <rncbc@rncbc.org> 0.5.6
 - Pre-LAC2019 release frenzy.
 * Fri Nov 23 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.5
-- Black-Friday'18 Release.
+- Black-Friday'18 release.
 * Mon Sep 24 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.4
-- Early Autumn'18 Release.
+- Early Autumn'18 release.
 * Sun Jul 22 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.3
-- Summer'18 Release.
+- Summer'18 release.
 * Sun May 27 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.2
 - Pre-LAC2018 release frenzy hotfix.
 * Mon May 21 2018 Rui Nuno Capela <rncbc@rncbc.org> 0.5.1

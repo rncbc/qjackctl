@@ -4,11 +4,10 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.5.8  2019-05-25  A Spring'19 Release.
 
 - When enabled the current default preset settings are
   now read from the last known JACK D-BUS configuration.
-  (EXPERIMENTAL)
 
 - Minor update to Debian packaging control file.
 
