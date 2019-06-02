@@ -20,16 +20,13 @@ URL:		http://qjackctl.sourceforge.net/
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-#BuildRequires:	libqt4-devel >= 4.4
 %if %{defined fedora}
 BuildRequires:	pkgconfig
 BuildRequires:	qt5-qtbase-devel >= 5.1, qt5-linguist
-BuildRequires:	qt5-qtx11extras-devel >= 5.1
 BuildRequires:	alsa-lib-devel
 %else
 BuildRequires:	pkg-config
 BuildRequires:	libqt5-qtbase-devel >= 5.1, libqt5-linguist
-BuildRequires:	libqt5-qtx11extras-devel >= 5.1
 BuildRequires:	alsa-devel
 %endif
 BuildRequires:	libjack2-devel, libjack2
