@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Configure updated to check for qtchooser availability.
+
+
+
 0.5.8  2019-05-25  A Spring'19 Release.
 
 - When enabled the current default preset settings are

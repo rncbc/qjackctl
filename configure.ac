@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(QjackCtl, 0.5.8, rncbc@rncbc.org, qjackctl)
+AC_INIT(QjackCtl, 0.5.9, rncbc@rncbc.org, qjackctl)
 
 AC_CONFIG_SRCDIR(src/qjackctl.cpp)
 AC_CONFIG_HEADERS(src/config.h)
@@ -235,6 +235,12 @@ done
 
 # A common error message:
 ac_errmsg="not found in current PATH. Maybe QT development environment isn't available."
+
+# Check for qtchooser availability.
+AC_PATH_TOOL(ac_qtchooser, qtchooser, [no], $ac_path)
+if test -x $ac_qtchooser; then
+   export QT_SELECT=5
+fi
 
 # Check for proper qmake path/version alternatives.
 AC_PATH_TOOL(ac_qmake, qmake, [no], $ac_path)
