@@ -23,6 +23,8 @@
 
 #include <QStringList>
 
+#include <algorithm>
+
 
 //----------------------------------------------------------------------
 // class qjackctlAliasItem -- Client/port item alias map.
@@ -280,7 +282,7 @@ void qjackctlAliasList::loadSettings (
 void qjackctlAliasList::saveSettings (
 	QSettings& settings, const QString& sAliasesKey )
 {
-	qSort(*this);
+	std::sort(begin(), end());
 
 	settings.beginGroup(sAliasesKey);
 	int iClient = 0;

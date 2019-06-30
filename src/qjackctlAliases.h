@@ -56,7 +56,7 @@ public:
 	// Save client/port aliases definitions.
 	void saveSettings(QSettings& settings, const QString& sClientKey);
 
-	// Need for generid sort.
+	// Need for generic sort.
 	bool operator< (const qjackctlAliasItem& other);
 
 	// Escape and format a string as a regular expresion.

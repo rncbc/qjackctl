@@ -272,7 +272,7 @@ void qjackctlPortItem::setHilite ( bool bHilite )
 		return;
 
 	const QPalette& pal = pTreeWidget->palette();
-	QTreeWidgetItem::setTextColor(0, m_bHilite
+	QTreeWidgetItem::setForeground(0, m_bHilite
 		? (pal.base().color().value() < 0x7f ? Qt::cyan : Qt::blue)
 		: pal.text().color());
 }
@@ -485,7 +485,7 @@ void qjackctlClientItem::setHilite ( bool bHilite )
 		return;
 
 	const QPalette& pal = pTreeWidget->palette();
-	QTreeWidgetItem::setTextColor(0, m_iHilite > 0
+	QTreeWidgetItem::setForeground(0, m_iHilite > 0
 		? (pal.base().color().value() < 0x7f ? Qt::darkCyan : Qt::darkBlue)
 		: pal.text().color());
 }
@@ -1074,7 +1074,7 @@ void qjackctlClientListView::mouseMoveEvent ( QMouseEvent *pMouseEvent )
 		pDrag->setMimeData(pMimeData);
 		pDrag->setPixmap(m_pDragItem->icon(0).pixmap(16));
 		pDrag->setHotSpot(QPoint(-4, -12));
-		pDrag->start(Qt::LinkAction);
+		pDrag->exec(Qt::LinkAction);
 		// We've dragged and maybe dropped it by now...
 		m_pDragItem = NULL;
 	}

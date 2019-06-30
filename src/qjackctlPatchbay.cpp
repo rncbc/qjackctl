@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -464,7 +464,7 @@ bool qjackctlSocketList::addSocketItem (void)
 	socketForm.setSocketNew(true);
 	qjackctlPatchbaySocket socket(m_sSocketCaption
 		+ ' ' + QString::number(m_sockets.count() + 1),
-		QString::null, QJACKCTL_SOCKETTYPE_JACK_AUDIO);
+		QString(), QJACKCTL_SOCKETTYPE_JACK_AUDIO);
 	socketForm.load(&socket);
 	if (socketForm.exec()) {
 		socketForm.save(&socket);
@@ -952,7 +952,7 @@ void qjackctlSocketListView::mouseMoveEvent ( QMouseEvent *pMouseEvent )
 		pDrag->setMimeData(pMimeData);
 		pDrag->setPixmap(m_pDragItem->icon(0).pixmap(16));
 		pDrag->setHotSpot(QPoint(-4, -12));
-		pDrag->start(Qt::LinkAction);
+		pDrag->exec(Qt::LinkAction);
 		// We've dragged and maybe dropped it by now...
 		m_pDragItem = NULL;
 	}
@@ -1339,7 +1339,7 @@ void qjackctlPatchbayView::activateForwardMenu ( QAction *pAction )
 	if (pSocketItem) {
 		// Check first for forward from nil...
 		if (iIndex < 0) {
-			pSocketItem->setForward(QString::null);
+			pSocketItem->setForward(QString());
 			setDirty(true);
 			return;
 		}

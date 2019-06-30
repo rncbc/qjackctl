@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Updated for the newer Qt5 translation tools (>= 5.13).
+
 - Configure updated to check for qtchooser availability.
 
 

@@ -275,7 +275,7 @@ void qjackctlSocketForm::save ( qjackctlPatchbaySocket *pSocket )
 	if (m_ui.SocketForwardComboBox->currentIndex() > 0)
 		pSocket->setForward(m_ui.SocketForwardComboBox->currentText());
 	else
-		pSocket->setForward(QString::null);
+		pSocket->setForward(QString());
 
 	m_iDirtyCount = 0;
 }
@@ -419,7 +419,7 @@ void qjackctlSocketForm::addPlug (void)
 			pItem->setSelected(true);
 			m_ui.PlugListView->setCurrentItem(pItem);
 		}
-		m_ui.PlugNameComboBox->setEditText(QString::null);
+		m_ui.PlugNameComboBox->setEditText(QString());
 	}
 
 	clientNameChanged();

@@ -558,7 +558,7 @@ void qjackctlPatchbayForm::toggleActivePatchbay (void)
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm) {
 		pMainForm->setActivePatchbay(
-			m_bActivePatchbay ? QString::null : m_sPatchbayPath);
+			m_bActivePatchbay ? QString() : m_sPatchbayPath);
 	}
 
 	// Need to force/refresh the patchbay list...
