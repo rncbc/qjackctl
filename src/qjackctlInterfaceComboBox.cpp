@@ -457,7 +457,7 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	++iCards;
 
 	QTreeView *pTreeView = static_cast<QTreeView *> (QComboBox::view());
-#if QT_VERSION < 0x050000
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 	pTreeView->header()->setResizeMode(QHeaderView::ResizeToContents);
 #else
 	pTreeView->header()->resizeSections(QHeaderView::ResizeToContents);

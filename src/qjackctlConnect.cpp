@@ -36,7 +36,7 @@
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QMimeData>
 #include <QDrag>
 #endif
@@ -763,7 +763,7 @@ qjackctlClientListView::qjackctlClientListView (
 	QHeaderView *pHeader = QTreeWidget::header();
 	pHeader->setDefaultAlignment(Qt::AlignLeft);
 //	pHeader->setDefaultSectionSize(120);
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 //	pHeader->setSectionResizeMode(QHeaderView::Custom);
 	pHeader->setSectionsMovable(false);
 	pHeader->setSectionsClickable(true);

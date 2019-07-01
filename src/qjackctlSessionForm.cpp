@@ -263,7 +263,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 	// Session tree view...
 	QHeaderView *pHeader = m_ui.SessionTreeView->header();
 //	pHeader->setDefaultAlignment(Qt::AlignLeft);
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 //	pHeader->setSectionResizeMode(QHeaderView::ResizeToContents);
 #else
 //	pHeader->setResizeMode(QHeaderView::ResizeToContents);
@@ -277,7 +277,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 	// Infra-client list view...
 	pHeader = m_ui.InfraClientListView->header();
 //	pHeader->setDefaultAlignment(Qt::AlignLeft);
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 //	pHeader->setSectionResizeMode(QHeaderView::ResizeToContents);
 #else
 //	pHeader->setResizeMode(QHeaderView::ResizeToContents);
