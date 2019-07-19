@@ -47,13 +47,6 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 		QSystemTrayIcon::setToolTip(pParent->windowTitle());
 	}
 
-	// Set proper context menu, even though it's empty...
-	QSystemTrayIcon::setContextMenu(&m_menu);
-
-	QObject::connect(&m_menu,
-		SIGNAL(aboutToShow()),
-		SLOT(contextMenuRequested()));
-
 	QObject::connect(this,
 		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 		SLOT(activated(QSystemTrayIcon::ActivationReason)));
@@ -73,11 +66,9 @@ void qjackctlSystemTray::close (void)
 void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 {
 	switch (reason) {
-#if 0
 	case QSystemTrayIcon::Context:
 		contextMenuRequested();
 		break;
-#endif
 	case QSystemTrayIcon::Trigger:
 		emit clicked();
 		break;
@@ -96,10 +87,6 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 
 void qjackctlSystemTray::contextMenuRequested (void)
 {
-	// Don't show dummy menu box, ever...
-	if (qobject_cast<QMenu *> (sender()) == &m_menu)
-		m_menu.hide();
-
 	emit contextMenuRequested(QCursor::pos());
 }
 
