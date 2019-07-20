@@ -404,7 +404,7 @@ qjackctlMainForm *qjackctlMainForm::g_pMainForm = NULL;
 // Constructor.
 qjackctlMainForm::qjackctlMainForm (
 	QWidget *pParent, Qt::WindowFlags wflags )
-	: QWidget(pParent, wflags)
+	: QWidget(pParent, wflags), m_menu(this)
 {
 #if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 	QApplication::setStyle(new QPlastiqueStyle());
@@ -953,6 +953,7 @@ bool qjackctlMainForm::queryClose (void)
 		#endif
 		}
 		hide();
+		updateContextMenu();
 		bQueryClose = false;
 	}
 #endif
@@ -964,6 +965,7 @@ bool qjackctlMainForm::queryClose (void)
 		show();
 		raise();
 		activateWindow();
+		updateContextMenu();
 		if (m_pSetup->bQueryClose) {
 			const QString& sTitle
 				= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
@@ -3236,6 +3238,8 @@ void qjackctlMainForm::toggleMainForm (void)
 		raise();
 		activateWindow();
 	}
+
+	updateContextMenu();
 }
 
 
@@ -3792,6 +3796,9 @@ void qjackctlMainForm::updateServerState ( int iServerState )
 	// Now's time to update main window
 	// caption title and status immediately.
 	updateTitleStatus();
+
+	// Update context menu...
+	updateContextMenu();
 }
 
 
@@ -3812,6 +3819,7 @@ void qjackctlMainForm::updateSystemTray (void)
 
 	if (m_pSetup->bSystemTray && m_pSystemTray == NULL) {
 		m_pSystemTray = new qjackctlSystemTray(this);
+		m_pSystemTray->setContextMenu(&m_menu);
 		QObject::connect(m_pSystemTray,
 			SIGNAL(clicked()),
 			SLOT(toggleMainForm()));
@@ -3821,9 +3829,6 @@ void qjackctlMainForm::updateSystemTray (void)
 		QObject::connect(m_pSystemTray,
 			SIGNAL(doubleClicked()),
 			SLOT(toggleJack()));
-		QObject::connect(m_pSystemTray,
-			SIGNAL(contextMenuRequested(const QPoint &)),
-			SLOT(contextMenu(const QPoint &)));
 		m_pSystemTray->show();
 	} else {
 		// Make sure the main widget is visible.
@@ -3836,15 +3841,8 @@ void qjackctlMainForm::updateSystemTray (void)
 #endif
 
 
-// Common context menu accessor.
-QMenu *qjackctlMainForm::contextMenu (void)
-{
-	return &m_menu;
-}
-
-
-// System tray context menu request slot.
-void qjackctlMainForm::contextMenu ( const QPoint& pos )
+// Common context menu request slots.
+void qjackctlMainForm::updateContextMenu (void)
 {
 	m_menu.clear();
 
@@ -4003,8 +4001,6 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 
 	pAction = m_menu.addAction(QIcon(":/images/quit1.png"),
 		tr("&Quit"), this, SLOT(quitMainForm()));
-
-	m_menu.exec(pos);
 }
 
 
@@ -4099,8 +4095,7 @@ void qjackctlMainForm::quitMainForm (void)
 // Context menu event handler.
 void qjackctlMainForm::contextMenuEvent ( QContextMenuEvent *pEvent )
 {
-	// We'll just show up the usual system tray menu.
-	contextMenu(pEvent->globalPos());
+	m_menu.exec(pEvent->globalPos());
 }
 
 

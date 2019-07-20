@@ -38,17 +38,16 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 // qjackctlSystemTray -- Custom system tray widget.
 
 // Constructor.
-qjackctlSystemTray::qjackctlSystemTray ( qjackctlMainForm *pParent )
+qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 	: QSystemTrayIcon(pParent)
 {
 	// Set things inherited...
-	m_icon = pParent->windowIcon();
-	setBackground(Qt::transparent); // also updates pixmap.
-	QSystemTrayIcon::setIcon(m_icon);
-	QSystemTrayIcon::setToolTip(pParent->windowTitle());
-
-	// Set proper context menu...
-	QSystemTrayIcon::setContextMenu(pParent->contextMenu());
+	if (pParent) {
+		m_icon = pParent->windowIcon();
+		setBackground(Qt::transparent); // also updates pixmap.
+		QSystemTrayIcon::setIcon(m_icon);
+		QSystemTrayIcon::setToolTip(pParent->windowTitle());
+	}
 
 	QObject::connect(this,
 		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -70,7 +69,7 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 {
 	switch (reason) {
 	case QSystemTrayIcon::Context:
-		emit contextMenuRequested(QCursor::pos());
+		qDebug("DEBUG> QSystemTrayIcon::Context");
 		break;
 	case QSystemTrayIcon::Trigger:
 		emit clicked();

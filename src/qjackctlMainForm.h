@@ -132,8 +132,6 @@ public:
 	void showDirtySettingsWarning();
 	void showDirtySetupWarning();
 
-	QMenu *contextMenu();
-
 public slots:
 
 	void startJack();
@@ -184,8 +182,6 @@ protected slots:
 	void transportStop();
 	void transportForward();
 
-	void contextMenu(const QPoint&);
-
 	void activatePresetsMenu(QAction *);
 	void activatePreset(const QString&);
 	void activatePreset(int);
@@ -224,6 +220,8 @@ protected:
 	QString formatTime(float secs) const;
 	QString formatElapsedTime(int iStatusItem, const QTime& t, bool bElapsed) const;
 	void updateElapsedTimes();
+
+	void updateContextMenu();
 
 	void portNotifyEvent();
 	void xrunNotifyEvent();

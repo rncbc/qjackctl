@@ -40,7 +40,7 @@ class qjackctlSystemTray : public QSystemTrayIcon
 public:
 
 	// Constructor.
-	qjackctlSystemTray(qjackctlMainForm *pParent);
+	qjackctlSystemTray(QWidget *pParent);
 	// Default destructor.
 	~qjackctlSystemTray();
 
@@ -68,9 +68,6 @@ signals:
 
 	// Xrun reset signal.
 	void middleClicked();
-
-	// Context menu signal.
-	void contextMenuRequested(const QPoint& pos);
 
 protected slots:
 
