@@ -3836,6 +3836,8 @@ void qjackctlMainForm::updateSystemTray (void)
 		raise();
 		activateWindow();
 	}
+
+	updateContextMenu();
 }
 
 #endif
