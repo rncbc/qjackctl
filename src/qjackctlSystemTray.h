@@ -26,10 +26,6 @@
 #include <QSystemTrayIcon>
 
 
-// Forward decls.
-class qjackctlMainForm;
-
-
 //----------------------------------------------------------------------------
 // qjackctlSystemTray -- Custom system tray widget.
 

@@ -22,8 +22,6 @@
 #include "qjackctlAbout.h"
 #include "qjackctlSystemTray.h"
 
-#include "qjackctlMainForm.h"
-
 #include <QBitmap>
 #include <QPainter>
 
