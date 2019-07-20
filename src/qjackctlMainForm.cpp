@@ -3836,10 +3836,18 @@ void qjackctlMainForm::updateSystemTray (void)
 #endif
 
 
+// Common context menu accessor.
+QMenu *qjackctlMainForm::contextMenu (void)
+{
+	return &m_menu;
+}
+
+
 // System tray context menu request slot.
 void qjackctlMainForm::contextMenu ( const QPoint& pos )
 {
-	QMenu menu(this);
+	m_menu.clear();
+
 	QAction *pAction;
 
 	QString sHideMinimize = tr("Mi&nimize");
@@ -3850,25 +3858,25 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 		sShowRestore  = tr("S&how");
 	}
 #endif
-	pAction = menu.addAction(isVisible()
+	pAction = m_menu.addAction(isVisible()
 		? sHideMinimize : sShowRestore, this, SLOT(toggleMainForm()));
-	menu.addSeparator();
+	m_menu.addSeparator();
 
 	if (m_pJackClient == NULL) {
-		pAction = menu.addAction(QIcon(":/images/start1.png"),
+		pAction = m_menu.addAction(QIcon(":/images/start1.png"),
 			tr("&Start"), this, SLOT(startJack()));
 	} else {
-		pAction = menu.addAction(QIcon(":/images/stop1.png"),
+		pAction = m_menu.addAction(QIcon(":/images/stop1.png"),
 			tr("&Stop"), this, SLOT(stopJack()));
 	}
-	pAction = menu.addAction(QIcon(":/images/reset1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/reset1.png"),
 		tr("&Reset"), this, SLOT(resetXrunStats()));
 //  pAction->setEnabled(m_pJackClient != NULL);
-	menu.addSeparator();
+	m_menu.addSeparator();
 
 	// Construct the actual presets menu,
 	// overriding the last one, if any...
-	QMenu *pPresetsMenu = menu.addMenu(tr("&Presets"));
+	QMenu *pPresetsMenu = m_menu.addMenu(tr("&Presets"));
 	// Assume QStringList iteration follows item index order (0,1,2...)
 	int iPreset = 0;
 	QStringListIterator iter(m_pSetup->presets);
@@ -3878,7 +3886,7 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 		pAction->setCheckable(true);
 		pAction->setChecked(sPreset == m_pSetup->sDefPreset);
 		pAction->setData(iPreset);
-		iPreset++;
+		++iPreset;
 	}
 	// Default preset always present, and has invalid index parameter (-1)...
 	if (iPreset > 0)
@@ -3890,13 +3898,13 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 	QObject::connect(pPresetsMenu,
 		SIGNAL(triggered(QAction*)),
 		SLOT(activatePresetsMenu(QAction*)));
-	menu.addSeparator();
+	m_menu.addSeparator();
 
 	if (m_pSessionForm) {
-		bool bEnabled = (m_pJackClient != NULL);
+		const bool bEnabled = (m_pJackClient != NULL);
 		const QString sTitle = tr("S&ession");
 		const QIcon iconSession(":/images/session1.png");
-		QMenu *pSessionMenu = menu.addMenu(sTitle);
+		QMenu *pSessionMenu = m_menu.addMenu(sTitle);
 		pSessionMenu->setIcon(iconSession);
 		pAction = pSessionMenu->addAction(m_pSessionForm->isVisible()
 			? tr("&Hide") : tr("S&how"),
@@ -3938,33 +3946,33 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 		pAction->setEnabled(bEnabled);
 	}
 
-	pAction = menu.addAction(QIcon(":/images/messages1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/messages1.png"),
 		tr("&Messages"), this, SLOT(toggleMessagesForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pMessagesStatusForm
 		&& m_pMessagesStatusForm->isVisible()
 		&& m_pMessagesStatusForm->tabPage() == qjackctlMessagesStatusForm::MessagesTab);
-	pAction = menu.addAction(QIcon(":/images/status1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/status1.png"),
 		tr("St&atus"), this, SLOT(toggleStatusForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pMessagesStatusForm
 		&& m_pMessagesStatusForm->isVisible()
 		&& m_pMessagesStatusForm->tabPage() == qjackctlMessagesStatusForm::StatusTab);
-	pAction = menu.addAction(QIcon(":/images/connections1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/connections1.png"),
 		tr("&Connections"), this, SLOT(toggleConnectionsForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pConnectionsForm && m_pConnectionsForm->isVisible());
-	pAction = menu.addAction(QIcon(":/images/patchbay1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/patchbay1.png"),
 		tr("Patch&bay"), this, SLOT(togglePatchbayForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pPatchbayForm && m_pPatchbayForm->isVisible());
-	pAction = menu.addAction(QIcon(":/images/graph1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/graph1.png"),
 		tr("&Graph"), this, SLOT(toggleGraphForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pGraphForm && m_pGraphForm->isVisible());
-	menu.addSeparator();
+	m_menu.addSeparator();
 
-	QMenu *pTransportMenu = menu.addMenu(tr("&Transport"));
+	QMenu *pTransportMenu = m_menu.addMenu(tr("&Transport"));
 	pAction = pTransportMenu->addAction(QIcon(":/images/rewind1.png"),
 		tr("&Rewind"), this, SLOT(transportRewind()));
 	pAction->setEnabled(m_ui.RewindToolButton->isEnabled());
@@ -3980,23 +3988,23 @@ void qjackctlMainForm::contextMenu ( const QPoint& pos )
 //	pAction = pTransportMenu->addAction(QIcon(":/images/forward1.png"),
 //		tr("&Forward"), this, SLOT(transportForward()));
 //	pAction->setEnabled(m_ui.ForwardToolButton->isEnabled());
-	menu.addSeparator();
+	m_menu.addSeparator();
 
-	pAction = menu.addAction(QIcon(":/images/setup1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/setup1.png"),
 		tr("Set&up..."), this, SLOT(showSetupForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pSetupForm && m_pSetupForm->isVisible());
 
 	if (!m_pSetup->bRightButtons || !m_pSetup->bTransportButtons) {
-		pAction = menu.addAction(QIcon(":/images/about1.png"),
+		pAction = m_menu.addAction(QIcon(":/images/about1.png"),
 			tr("Ab&out..."), this, SLOT(showAboutForm()));
 	}
-	menu.addSeparator();
+	m_menu.addSeparator();
 
-	pAction = menu.addAction(QIcon(":/images/quit1.png"),
+	pAction = m_menu.addAction(QIcon(":/images/quit1.png"),
 		tr("&Quit"), this, SLOT(quitMainForm()));
 
-	menu.exec(pos);
+	m_menu.exec(pos);
 }
 
 

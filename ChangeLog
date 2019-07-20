@@ -4,6 +4,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- System-tray icon context menu has been refactored to
+  be exactly the same as the main-window context menu
+  that is re-instantiated on demand. (EXPERIMENTAL)
+
+
 0.5.9  2019-07-12  A Summer'19 Release.
 
 - Updated for the newer Qt5 translation tools (>= 5.13).

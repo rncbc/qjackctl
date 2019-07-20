@@ -1,7 +1,7 @@
 // qjackctlSystemTray.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #include "qjackctlAbout.h"
 #include "qjackctlSystemTray.h"
 
+#include "qjackctlMainForm.h"
+
 #include <QBitmap>
 #include <QPainter>
 
@@ -36,23 +38,17 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 // qjackctlSystemTray -- Custom system tray widget.
 
 // Constructor.
-qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
+qjackctlSystemTray::qjackctlSystemTray ( qjackctlMainForm *pParent )
 	: QSystemTrayIcon(pParent)
 {
 	// Set things inherited...
-	if (pParent) {
-		m_icon = pParent->windowIcon();
-		setBackground(Qt::transparent); // also updates pixmap.
-		QSystemTrayIcon::setIcon(m_icon);
-		QSystemTrayIcon::setToolTip(pParent->windowTitle());
-	}
+	m_icon = pParent->windowIcon();
+	setBackground(Qt::transparent); // also updates pixmap.
+	QSystemTrayIcon::setIcon(m_icon);
+	QSystemTrayIcon::setToolTip(pParent->windowTitle());
 
-	// Set proper context menu, even though it's empty...
-	QSystemTrayIcon::setContextMenu(&m_menu);
-
-	QObject::connect(&m_menu,
-		SIGNAL(aboutToShow()),
-		SLOT(contextMenuRequested()));
+	// Set proper context menu...
+	QSystemTrayIcon::setContextMenu(pParent->contextMenu());
 
 	QObject::connect(this,
 		SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -73,11 +69,9 @@ void qjackctlSystemTray::close (void)
 void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 {
 	switch (reason) {
-#if 0
 	case QSystemTrayIcon::Context:
-		contextMenuRequested();
+		emit contextMenuRequested(QCursor::pos());
 		break;
-#endif
 	case QSystemTrayIcon::Trigger:
 		emit clicked();
 		break;
@@ -91,16 +85,6 @@ void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 	default:
 		break;
 	}
-}
-
-
-void qjackctlSystemTray::contextMenuRequested (void)
-{
-	// Don't show dummy menu box, ever...
-	if (qobject_cast<QMenu *> (sender()) == &m_menu)
-		m_menu.hide();
-
-	emit contextMenuRequested(QCursor::pos());
 }
 
 

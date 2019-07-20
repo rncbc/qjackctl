@@ -28,6 +28,7 @@
 
 #include <QProcess>
 #include <QDateTime>
+#include <QMenu>
 
 #include <QSessionManager>
 
@@ -130,6 +131,8 @@ public:
 #endif
 	void showDirtySettingsWarning();
 	void showDirtySetupWarning();
+
+	QMenu *contextMenu();
 
 public slots:
 
@@ -367,6 +370,9 @@ private:
 	float m_fSkipAccel;
 
 	int m_iTransportPlay;
+
+	// Common context menu.
+	QMenu m_menu;
 
 	// Kind-of singleton reference.
 	static qjackctlMainForm *g_pMainForm;

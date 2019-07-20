@@ -1,7 +1,7 @@
 // qjackctlSystemTray.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2017, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -23,9 +23,11 @@
 #define __qjackctlSystemTray_h
 
 #include <QWidget>
-
 #include <QSystemTrayIcon>
-#include <QMenu>
+
+
+// Forward decls.
+class qjackctlMainForm;
 
 
 //----------------------------------------------------------------------------
@@ -38,7 +40,7 @@ class qjackctlSystemTray : public QSystemTrayIcon
 public:
 
 	// Constructor.
-	qjackctlSystemTray(QWidget *pParent = 0);
+	qjackctlSystemTray(qjackctlMainForm *pParent);
 	// Default destructor.
 	~qjackctlSystemTray();
 
@@ -75,14 +77,10 @@ protected slots:
 	// Handle systeam tray activity.
 	void activated(QSystemTrayIcon::ActivationReason);
 
-	// Context menu slot.
-	void contextMenuRequested();
-
 private:
 
 	// Instance pixmap and background color.
 	QIcon   m_icon;
-	QMenu   m_menu;
 	QPixmap m_pixmap;
 	QPixmap m_pixmapOverlay;
 	QColor  m_background;
