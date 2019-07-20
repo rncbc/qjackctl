@@ -66,9 +66,6 @@ void qjackctlSystemTray::close (void)
 void qjackctlSystemTray::activated ( QSystemTrayIcon::ActivationReason reason )
 {
 	switch (reason) {
-	case QSystemTrayIcon::Context:
-		qDebug("DEBUG> QSystemTrayIcon::Context");
-		break;
 	case QSystemTrayIcon::Trigger:
 		emit clicked();
 		break;

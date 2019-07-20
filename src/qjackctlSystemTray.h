@@ -36,7 +36,7 @@ class qjackctlSystemTray : public QSystemTrayIcon
 public:
 
 	// Constructor.
-	qjackctlSystemTray(QWidget *pParent);
+	qjackctlSystemTray(QWidget *pParent = 0);
 	// Default destructor.
 	~qjackctlSystemTray();
 
