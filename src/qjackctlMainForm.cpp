@@ -3256,6 +3256,8 @@ void qjackctlMainForm::toggleMessagesStatusForm (void)
 			m_pMessagesStatusForm->activateWindow();
 		}
 	}
+
+	updateContextMenu();
 }
 
 void qjackctlMainForm::toggleMessagesForm (void)
@@ -3302,6 +3304,8 @@ void qjackctlMainForm::toggleSessionForm (void)
 			m_pSessionForm->activateWindow();
 		}
 	}
+
+	updateContextMenu();
 }
 
 
@@ -3321,6 +3325,8 @@ void qjackctlMainForm::toggleConnectionsForm (void)
 			m_pConnectionsForm->activateWindow();
 		}
 	}
+
+	updateContextMenu();
 }
 
 
@@ -3337,6 +3343,8 @@ void qjackctlMainForm::togglePatchbayForm (void)
 			m_pPatchbayForm->activateWindow();
 		}
 	}
+
+	updateContextMenu();
 }
 
 
@@ -3353,6 +3361,8 @@ void qjackctlMainForm::toggleGraphForm (void)
 			m_pGraphForm->activateWindow();
 		}
 	}
+
+	updateContextMenu();
 }
 
 
@@ -3369,6 +3379,8 @@ void qjackctlMainForm::showSetupForm (void)
 			m_pSetupForm->activateWindow();
 		}
 	}
+
+	updateContextMenu();
 }
 
 
@@ -3489,7 +3501,7 @@ void qjackctlMainForm::refreshStatus (void)
 	const QString b = "-.-.---";
 	const QString sStopped = tr("Stopped");
 
-	m_iStatusRefresh++;
+	++m_iStatusRefresh;
 
 	if (m_pJackClient) {
 		const QString s = " ";
@@ -3500,11 +3512,11 @@ void qjackctlMainForm::refreshStatus (void)
 		const bool bPlaying
 			= (tstate == JackTransportRolling || tstate == JackTransportLooping);
 		// Transport timecode position.
-	//  if (bPlaying)
+	//	if (bPlaying)
 			updateStatusItem(STATUS_TRANSPORT_TIME,
 				formatTime(float(tpos.frame) / float(tpos.frame_rate)));
-	//  else
-	//      updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
+	//	else
+	//		updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 		// Transport barcode position (bar:beat.tick)
 		if (tpos.valid & JackPositionBBT) {
 			updateStatusItem(STATUS_TRANSPORT_BBT,
@@ -3797,7 +3809,7 @@ void qjackctlMainForm::updateServerState ( int iServerState )
 	// caption title and status immediately.
 	updateTitleStatus();
 
-	// Update context menu...
+	// Update context-menu for sure...
 	updateContextMenu();
 }
 
@@ -4027,6 +4039,8 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 		QMessageBox::warning(this, sTitle, sText);
 	}   // Otherwise, it will be just as convenient to update status...
 	else updateTitleStatus();
+
+	updateContextMenu();
 }
 
 
