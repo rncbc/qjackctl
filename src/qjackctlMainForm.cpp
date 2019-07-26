@@ -500,7 +500,7 @@ qjackctlMainForm::qjackctlMainForm (
 	// Install SIGTERM signal handler.
 	struct sigaction sigterm;
 	sigterm.sa_handler = qjackctl_sigterm_handler;
-	::sigemptyset(&sigterm.sa_mask);
+	sigemptyset(&sigterm.sa_mask);
 	sigterm.sa_flags = 0;
 	sigterm.sa_flags |= SA_RESTART;
 	::sigaction(SIGTERM, &sigterm, NULL);
