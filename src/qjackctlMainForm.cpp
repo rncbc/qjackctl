@@ -420,12 +420,13 @@ qjackctlMainForm::qjackctlMainForm (
 
 	m_iServerState = QJACKCTL_INACTIVE;
 
-	m_pJack         = NULL;
-	m_pJackClient   = NULL;
-	m_bJackDetach   = false;
-	m_bJackShutdown = false;
-	m_bJackStopped  = false;
-	m_pAlsaSeq      = NULL;
+	m_pJack           = NULL;
+	m_pJackClient     = NULL;
+	m_bJackDetach     = false;
+	m_bJackShutdown   = false;
+	m_bJackStopped    = false;
+	m_bStatUpdateMenu = false;
+	m_pAlsaSeq        = NULL;
 #ifdef CONFIG_DBUS
 	m_pDBusControl  = NULL;
 	m_pDBusConfig   = NULL;
@@ -3401,6 +3402,7 @@ void qjackctlMainForm::transportRewind (void)
 		appendMessages(tr("Transport rewind."));
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+		m_bStatUpdateMenu = true;
 	}
 #endif
 }
@@ -3424,6 +3426,7 @@ void qjackctlMainForm::transportBackward (void)
 			m_fSkipAccel *= 1.1f;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+		m_bStatUpdateMenu = true;
 	}
 #endif
 }
@@ -3451,6 +3454,7 @@ void qjackctlMainForm::transportStart (void)
 		appendMessages(tr("Transport start."));
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+		m_bStatUpdateMenu = true;
 	}
 #endif
 }
@@ -3466,6 +3470,7 @@ void qjackctlMainForm::transportStop (void)
 		appendMessages(tr("Transport stop."));
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+		m_bStatUpdateMenu = true;
 	}
 #endif
 }
@@ -3489,6 +3494,7 @@ void qjackctlMainForm::transportForward (void)
 			m_fSkipAccel *= 1.1f;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
+		m_bStatUpdateMenu = true;
 	}
 #endif
 }
@@ -3665,6 +3671,12 @@ void qjackctlMainForm::refreshStatus (void)
 
 	// Elapsed times should be rigorous...
 	updateElapsedTimes();
+
+	if (m_bStatUpdateMenu)
+	{
+		m_bStatUpdateMenu = false;
+		updateContextMenu();
+	}
 }
 
 

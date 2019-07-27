@@ -304,6 +304,7 @@ private:
 	bool m_bJackDetach;
 	bool m_bJackShutdown;
 	bool m_bJackStopped;
+	bool m_bStatUpdateMenu;
 
 	snd_seq_t *m_pAlsaSeq;
 
