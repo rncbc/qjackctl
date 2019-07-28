@@ -425,7 +425,6 @@ qjackctlMainForm::qjackctlMainForm (
 	m_bJackDetach     = false;
 	m_bJackShutdown   = false;
 	m_bJackStopped    = false;
-	m_bStatUpdateMenu = false;
 	m_pAlsaSeq        = NULL;
 #ifdef CONFIG_DBUS
 	m_pDBusControl  = NULL;
@@ -479,6 +478,9 @@ qjackctlMainForm::qjackctlMainForm (
 
 	// Avoid extra transport toggles (play/stop)
 	m_iTransportPlay = 0;
+
+	// Whether to update conext menu on next status refresh.
+	m_iMenuRefresh = 0;
 
 	// Whether we've Qt::Tool flag (from bKeepOnTop),
 	// this is actually the main last application window...
@@ -3402,7 +3404,7 @@ void qjackctlMainForm::transportRewind (void)
 		appendMessages(tr("Transport rewind."));
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
-		m_bStatUpdateMenu = true;
+		++m_iMenuRefresh;
 	}
 #endif
 }
@@ -3426,7 +3428,7 @@ void qjackctlMainForm::transportBackward (void)
 			m_fSkipAccel *= 1.1f;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
-		m_bStatUpdateMenu = true;
+		++m_iMenuRefresh;
 	}
 #endif
 }
@@ -3454,7 +3456,7 @@ void qjackctlMainForm::transportStart (void)
 		appendMessages(tr("Transport start."));
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
-		m_bStatUpdateMenu = true;
+		++m_iMenuRefresh;
 	}
 #endif
 }
@@ -3470,7 +3472,7 @@ void qjackctlMainForm::transportStop (void)
 		appendMessages(tr("Transport stop."));
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
-		m_bStatUpdateMenu = true;
+		++m_iMenuRefresh;
 	}
 #endif
 }
@@ -3494,7 +3496,7 @@ void qjackctlMainForm::transportForward (void)
 			m_fSkipAccel *= 1.1f;
 		// Make sure all status(es) will be updated ASAP...
 		m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
-		m_bStatUpdateMenu = true;
+		++m_iMenuRefresh;
 	}
 #endif
 }
@@ -3672,9 +3674,8 @@ void qjackctlMainForm::refreshStatus (void)
 	// Elapsed times should be rigorous...
 	updateElapsedTimes();
 
-	if (m_bStatUpdateMenu)
-	{
-		m_bStatUpdateMenu = false;
+	if (m_iMenuRefresh > 0) {
+		m_iMenuRefresh = 0;
 		updateContextMenu();
 	}
 }

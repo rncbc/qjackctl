@@ -304,7 +304,6 @@ private:
 	bool m_bJackDetach;
 	bool m_bJackShutdown;
 	bool m_bJackStopped;
-	bool m_bStatUpdateMenu;
 
 	snd_seq_t *m_pAlsaSeq;
 
@@ -326,7 +325,7 @@ private:
 	int m_iStatusBlink;
 	int m_iStatusRefresh;
 	int m_iPatchbayRefresh;
-
+	
 #ifdef CONFIG_JACK_METADATA
 	int m_iJackPropertyChange;
 #endif
@@ -372,6 +371,8 @@ private:
 
 	// Common context menu.
 	QMenu m_menu;
+
+	int m_iMenuRefresh;
 
 	// Kind-of singleton reference.
 	static qjackctlMainForm *g_pMainForm;
