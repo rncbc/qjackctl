@@ -60,10 +60,6 @@
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 
-#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-#include <QPlastiqueStyle>
-#endif
-
 
 #if QT_VERSION < QT_VERSION_CHECK(4, 5, 0)
 namespace Qt {
@@ -406,10 +402,6 @@ qjackctlMainForm::qjackctlMainForm (
 	QWidget *pParent, Qt::WindowFlags wflags )
 	: QWidget(pParent, wflags), m_menu(this)
 {
-#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-	QApplication::setStyle(new QPlastiqueStyle());
-#endif
-
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
