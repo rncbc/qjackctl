@@ -688,7 +688,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	m_pPatchbayForm       = new qjackctlPatchbayForm       (pParent, wflags);
 
 	// Graph form should be a full-blown top-level window...
-	m_pGraphForm = new qjackctlGraphForm(this);
+	m_pGraphForm = new qjackctlGraphForm(pParent, wflags);
 
 	// Setup form is kind of special (modeless dialog).
 	m_pSetupForm = new qjackctlSetupForm(this);
