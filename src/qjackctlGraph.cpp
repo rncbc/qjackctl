@@ -309,7 +309,7 @@ qjackctlGraphConnect *qjackctlGraphPort::findConnect ( qjackctlGraphPort *port )
 			return connect;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -549,7 +549,7 @@ QRectF qjackctlGraphPort::editorRect (void) const
 // Constructor.
 qjackctlGraphNode::qjackctlGraphNode (
 	const QString& name, qjackctlGraphItem::Mode mode, uint type )
-	: qjackctlGraphItem(NULL),
+	: qjackctlGraphItem(nullptr),
 		m_name(name), m_mode(mode), m_type(type)
 {
 	QGraphicsPathItem::setZValue(0);
@@ -727,7 +727,7 @@ qjackctlGraphPort *qjackctlGraphNode::findPort (
 	const QString& name, qjackctlGraphItem::Mode mode, uint type )
 {
 	return static_cast<qjackctlGraphPort *> (
-		m_portkeys.value(qjackctlGraphPort::ItemKey(name, mode, type), NULL));
+		m_portkeys.value(qjackctlGraphPort::ItemKey(name, mode, type), nullptr));
 }
 
 
@@ -864,7 +864,7 @@ QRectF qjackctlGraphNode::editorRect (void) const
 
 // Constructor.
 qjackctlGraphConnect::qjackctlGraphConnect (void)
-	: qjackctlGraphItem(NULL), m_port1(NULL), m_port2(NULL)
+	: qjackctlGraphItem(nullptr), m_port1(nullptr), m_port2(nullptr)
 {
 	QGraphicsPathItem::setZValue(-1);
 
@@ -1094,13 +1094,13 @@ static const char *ColorsGroup      = "/GraphColors";
 
 // Constructor.
 qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
-	: QGraphicsView(parent), m_state(DragNone), m_item(NULL),
-		m_connect(NULL), m_rubberband(NULL),
+	: QGraphicsView(parent), m_state(DragNone), m_item(nullptr),
+		m_connect(nullptr), m_rubberband(nullptr),
 		m_zoom(1.0), m_zoomrange(false),
-		m_commands(NULL), m_settings(NULL),
-		m_selected_nodes(0), m_edit_item(NULL),
-		m_editor(NULL), m_edited(0),
-		m_aliases(NULL)
+		m_commands(nullptr), m_settings(nullptr),
+		m_selected_nodes(0), m_edit_item(nullptr),
+		m_editor(nullptr), m_edited(0),
+		m_aliases(nullptr)
 {
 	m_scene = new QGraphicsScene();
 
@@ -1207,7 +1207,7 @@ qjackctlGraphItem *qjackctlGraphCanvas::currentItem (void) const
 {
 	qjackctlGraphItem *item = m_item;
 
-	if (item == NULL) {
+	if (item == nullptr) {
 		const QList<QGraphicsItem *>& list
 			= m_scene->selectedItems();
 		if (!list.isEmpty())
@@ -1359,7 +1359,7 @@ qjackctlGraphNode *qjackctlGraphCanvas::findNode (
 	const QString& name, qjackctlGraphItem::Mode mode, uint type ) const
 {
 	return static_cast<qjackctlGraphNode *> (
-		m_nodekeys.value(qjackctlGraphNode::ItemKey(name, mode, type), NULL));
+		m_nodekeys.value(qjackctlGraphNode::ItemKey(name, mode, type), nullptr));
 }
 
 
@@ -1397,7 +1397,7 @@ qjackctlGraphItem *qjackctlGraphCanvas::itemAt ( const QPointF& pos ) const
 			return static_cast<qjackctlGraphItem *> (item);
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -1406,7 +1406,7 @@ void qjackctlGraphCanvas::connectPorts (
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect )
 {
 	const bool is_connected // already connected?
-		= (port1->findConnect(port2) != NULL);
+		= (port1->findConnect(port2) != nullptr);
 	if (( is_connect &&  is_connected) ||
 		(!is_connect && !is_connected))
 		return;
@@ -1425,7 +1425,7 @@ void qjackctlGraphCanvas::connectPorts (
 void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 {
 	m_state = DragNone;
-	m_item = NULL;
+	m_item = nullptr;
 	m_pos = QGraphicsView::mapToScene(event->pos());
 
 	qjackctlGraphItem *item = itemAt(m_pos);
@@ -1435,7 +1435,7 @@ void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 	if (event->button() == Qt::LeftButton)
 		m_state = DragStart;
 
-	if (m_state == DragStart && m_item == NULL
+	if (m_state == DragStart && m_item == nullptr
 		&& (event->modifiers() & Qt::ControlModifier)
 		&& m_scene->selectedItems().isEmpty()) {
 		QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
@@ -1468,7 +1468,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 						m_connect->setPort1(port);
 						m_connect->setSelected(true);
 						m_scene->addItem(m_connect);
-						m_item = NULL;
+						m_item = nullptr;
 						++m_selected_nodes;
 						++nchanged;
 					}
@@ -1492,10 +1492,10 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					pos1.setY(4.0 * ::round(0.25 * pos1.y()));
 					m_pos1 = pos1;
 				}
-				else m_item = NULL;
+				else m_item = nullptr;
 			}
 			// Otherwise start lasso rubber-banding...
-			if (m_rubberband == NULL && m_item == NULL && m_connect == NULL) {
+			if (m_rubberband == nullptr && m_item == nullptr && m_connect == nullptr) {
 				QGraphicsView::setCursor(Qt::CrossCursor);
 				m_rubberband = new QRubberBand(QRubberBand::Rectangle, this);
 			}
@@ -1612,7 +1612,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 			m_item->setSelected(is_selected);
 			if (m_item->type() != qjackctlGraphNode::Type && is_selected)
 				++m_selected_nodes;
-			m_item = NULL; // Not needed anymore!
+			m_item = nullptr; // Not needed anymore!
 			++nchanged;
 		}
 		// Fall thru...
@@ -1629,12 +1629,12 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 				//	&& port1->portNode() != port2->portNode()
 					&& port1->portMode() != port2->portMode()
 					&& port1->portType() == port2->portType()
-					&& port1->findConnect(port2) == NULL) {
+					&& port1->findConnect(port2) == nullptr) {
 					port2->setSelected(true);
 				#if 0 // Sure the sect will commit to this instead...
 					m_connect->setPort2(port2);
 					m_connect->updatePathTo(port2->portPos());
-					m_connect = NULL;
+					m_connect = nullptr;
 					++m_selected_nodes;
 				#else
 				//	m_selected_nodes = 0;
@@ -1649,7 +1649,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 			}
 			if (m_connect) {
 				delete m_connect;
-				m_connect = NULL;
+				m_connect = nullptr;
 			}
 		}
 		// Maybe some node(s) were moved...
@@ -1670,7 +1670,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 		// Close rubber-band lasso...
 		if (m_rubberband) {
 			delete m_rubberband;
-			m_rubberband = NULL;
+			m_rubberband = nullptr;
 			m_selected.clear();
 			// Zooming in range?...
 			if (m_zoomrange) {
@@ -1689,7 +1689,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 	}
 
 	m_state = DragNone;
-	m_item = NULL;
+	m_item = nullptr;
 
 	// Reset cursor...
 	QGraphicsView::setCursor(Qt::ArrowCursor);
@@ -1735,18 +1735,18 @@ void qjackctlGraphCanvas::keyPressEvent ( QKeyEvent *event )
 		m_scene->clearSelection();
 		if (m_rubberband) {
 			delete m_rubberband;
-			m_rubberband = NULL;
+			m_rubberband = nullptr;
 			m_selected.clear();
 		}
 		if (m_connect) {
 			delete m_connect;
-			m_connect = NULL;
+			m_connect = nullptr;
 		}
 		if (m_state == DragScroll)
 			QGraphicsView::setDragMode(QGraphicsView::NoDrag);
 		m_state = DragNone;
-		m_item = NULL;
-		m_edit_item = NULL;
+		m_item = nullptr;
+		m_edit_item = nullptr;
 		m_editor->setEnabled(false);
 		m_editor->hide();
 		m_edited = 0;
@@ -2024,7 +2024,7 @@ void qjackctlGraphCanvas::zoomFitRange ( const QRectF& range_rect )
 // Graph node position methods.
 bool qjackctlGraphCanvas::restoreNodePos ( qjackctlGraphNode *node )
 {
-	if (m_settings == NULL || node == NULL)
+	if (m_settings == nullptr || node == nullptr)
 		return false;
 
 	m_settings->beginGroup(NodePosGroup);
@@ -2042,7 +2042,7 @@ bool qjackctlGraphCanvas::restoreNodePos ( qjackctlGraphNode *node )
 
 bool qjackctlGraphCanvas::saveNodePos ( qjackctlGraphNode *node ) const
 {
-	if (m_settings == NULL || node == NULL)
+	if (m_settings == nullptr || node == nullptr)
 		return false;
 
 	m_settings->beginGroup(NodePosGroup);
@@ -2055,7 +2055,7 @@ bool qjackctlGraphCanvas::saveNodePos ( qjackctlGraphNode *node ) const
 
 bool qjackctlGraphCanvas::restoreState (void)
 {
-	if (m_settings == NULL)
+	if (m_settings == nullptr)
 		return false;
 
 	m_settings->beginGroup(ColorsGroup);
@@ -2090,7 +2090,7 @@ bool qjackctlGraphCanvas::restoreState (void)
 
 bool qjackctlGraphCanvas::saveState (void) const
 {
-	if (m_settings == NULL)
+	if (m_settings == nullptr)
 		return false;
 
 	m_settings->beginGroup(NodePosGroup);
@@ -2182,11 +2182,11 @@ void qjackctlGraphCanvas::clearPortTypeColors (void)
 // Clear all selection.
 void qjackctlGraphCanvas::clearSelection (void)
 {
-	m_item = NULL;
+	m_item = nullptr;
 	m_selected_nodes = 0;
 	m_scene->clearSelection();
 
-	m_edit_item = NULL;
+	m_edit_item = nullptr;
 	m_editor->setEnabled(false);
 	m_editor->hide();
 	m_edited = 0;
@@ -2211,7 +2211,7 @@ void qjackctlGraphCanvas::editingFinished (void)
 					m_edit_item, m_editor->text()));
 		}
 		// Reset all renaming stuff...
-		m_edit_item = NULL;
+		m_edit_item = nullptr;
 		m_editor->setEnabled(false);
 		m_editor->hide();
 		m_edited = 0;
@@ -2317,7 +2317,7 @@ void qjackctlGraphSect::renameItem (
 {
 	int nchanged = 0;
 
-	qjackctlGraphNode *node = NULL;
+	qjackctlGraphNode *node = nullptr;
 
 	if (item->type() == qjackctlGraphNode::Type) {
 		node = static_cast<qjackctlGraphNode *> (item);
@@ -2349,7 +2349,7 @@ void qjackctlGraphSect::renameItem (
 		node->updatePath();
 
 	if (nchanged > 0) {
-		qjackctlAliases *aliases = NULL;
+		qjackctlAliases *aliases = nullptr;
 		if (m_canvas)
 			aliases = m_canvas->aliases();
 		if (aliases)

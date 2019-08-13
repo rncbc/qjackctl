@@ -216,7 +216,7 @@ qjackctlPlugItem *qjackctlSocketItem::findPlug ( const QString& sPlugName )
 			return pPlug;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -253,7 +253,7 @@ qjackctlSocketItem *qjackctlSocketItem::findConnectPtr (
 			return pSocket;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -371,7 +371,7 @@ qjackctlSocketItem *qjackctlSocketList::findSocket (
 			return pSocket;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -436,7 +436,7 @@ QPixmap *qjackctlSocketList::createPixmapMerge (
 // Return currently selected socket item.
 qjackctlSocketItem *qjackctlSocketList::selectedSocketItem (void) const
 {
-	qjackctlSocketItem *pSocketItem = NULL;
+	qjackctlSocketItem *pSocketItem = nullptr;
 
 	QTreeWidgetItem *pItem = m_pListView->currentItem();
 	if (pItem) {
@@ -477,7 +477,7 @@ bool qjackctlSocketList::addSocketItem (void)
 		if (pSocketItem) {
 			pSocketItem->setExclusive(socket.isExclusive());
 			pSocketItem->setForward(socket.forward());
-			qjackctlPlugItem *pPlugItem = NULL;
+			qjackctlPlugItem *pPlugItem = nullptr;
 			QStringListIterator iter(socket.pluglist());
 			while (iter.hasNext()) {
 				pPlugItem = new qjackctlPlugItem(
@@ -554,7 +554,7 @@ bool qjackctlSocketList::editSocketItem (void)
 			pSocketItem->setExclusive(socket.isExclusive());
 			pSocketItem->setForward(socket.forward());
 			pSocketItem->updatePixmap();
-			qjackctlPlugItem *pPlugItem = NULL;
+			qjackctlPlugItem *pPlugItem = nullptr;
 			QStringListIterator iter(socket.pluglist());
 			while (iter.hasNext()) {
 				pPlugItem = new qjackctlPlugItem(
@@ -611,7 +611,7 @@ bool qjackctlSocketList::copySocketItem (void)
 			if (pSocketItem) {
 				pSocketItem->setExclusive(socket.isExclusive());
 				pSocketItem->setForward(socket.forward());
-				qjackctlPlugItem *pPlugItem = NULL;
+				qjackctlPlugItem *pPlugItem = nullptr;
 				QStringListIterator iter(socket.pluglist());
 				while (iter.hasNext()) {
 					pPlugItem = new qjackctlPlugItem(
@@ -715,8 +715,8 @@ qjackctlSocketListView::qjackctlSocketListView (
 	m_pAutoOpenTimer   = 0;
 	m_iAutoOpenTimeout = 0;
 
-	m_pDragItem = NULL;
-	m_pDropItem = NULL;
+	m_pDragItem = nullptr;
+	m_pDropItem = nullptr;
 
 	QHeaderView *pHeader = QTreeWidget::header();
 //	pHeader->setDefaultAlignment(Qt::AlignLeft);
@@ -786,7 +786,7 @@ void qjackctlSocketListView::setAutoOpenTimeout ( int iAutoOpenTimeout )
 
 	if (m_pAutoOpenTimer)
 		delete m_pAutoOpenTimer;
-	m_pAutoOpenTimer = NULL;
+	m_pAutoOpenTimer = nullptr;
 
 	if (m_iAutoOpenTimeout > 0) {
 		m_pAutoOpenTimer = new QTimer(this);
@@ -867,11 +867,11 @@ QTreeWidgetItem *qjackctlSocketListView::dragDropItem ( const QPoint& pos )
 				m_pAutoOpenTimer->start(m_iAutoOpenTimeout);
 			qjackctlPatchbay *pPatchbay = m_pPatchbayView->binding();
 			if ((pItem->flags() & Qt::ItemIsDropEnabled) == 0
-				|| pPatchbay == NULL || !pPatchbay->canConnectSelected())
-				pItem = NULL;
+				|| pPatchbay == nullptr || !pPatchbay->canConnectSelected())
+				pItem = nullptr;
 		}
 	} else {
-		m_pDropItem = NULL;
+		m_pDropItem = nullptr;
 		if (m_pAutoOpenTimer)
 			m_pAutoOpenTimer->stop();
 	}
@@ -922,7 +922,7 @@ void qjackctlSocketListView::dropEvent ( QDropEvent *pDropEvent )
 			pPatchbay->connectSelected();
 	}
 
-	dragLeaveEvent(NULL);
+	dragLeaveEvent(nullptr);
 }
 
 
@@ -954,7 +954,7 @@ void qjackctlSocketListView::mouseMoveEvent ( QMouseEvent *pMouseEvent )
 		pDrag->setHotSpot(QPoint(-4, -12));
 		pDrag->exec(Qt::LinkAction);
 		// We've dragged and maybe dropped it by now...
-		m_pDragItem = NULL;
+		m_pDragItem = nullptr;
 	}
 }
 
@@ -1001,7 +1001,7 @@ int qjackctlPatchworkView::itemY ( QTreeWidgetItem *pItem ) const
 	QRect rect;
 	QTreeWidget *pList = pItem->treeWidget();
 	QTreeWidgetItem *pParent = pItem->parent();
-	qjackctlSocketItem *pSocketItem = NULL;
+	qjackctlSocketItem *pSocketItem = nullptr;
 	if (pParent && pParent->type() == QJACKCTL_SOCKETITEM)
 		pSocketItem = static_cast<qjackctlSocketItem *> (pParent);
 	if (pSocketItem && !pSocketItem->isOpen()) {
@@ -1074,8 +1074,8 @@ void qjackctlPatchworkView::drawForwardLine ( QPainter *pPainter,
 // Draw visible socket connection relation arrows.
 void qjackctlPatchworkView::paintEvent ( QPaintEvent * )
 {
-	if (m_pPatchbayView->OSocketList() == NULL ||
-		m_pPatchbayView->ISocketList() == NULL)
+	if (m_pPatchbayView->OSocketList() == nullptr ||
+		m_pPatchbayView->ISocketList() == nullptr)
 		return;
 
 	QPainter painter(this);
@@ -1140,7 +1140,7 @@ void qjackctlPatchworkView::paintEvent ( QPaintEvent * )
 		qjackctlSocketItem *pISocketForward
 			= m_pPatchbayView->ISocketList()->findSocket(
 				pISocket->forward(), pISocket->socketType());
-		if (pISocketForward == NULL)
+		if (pISocketForward == nullptr)
 			continue;
 		// Set new connector color.
 		++i;
@@ -1158,7 +1158,7 @@ void qjackctlPatchworkView::paintEvent ( QPaintEvent * )
 void qjackctlPatchworkView::contextMenuEvent (
 	QContextMenuEvent *pContextMenuEvent )
 {
-	m_pPatchbayView->contextMenu(pContextMenuEvent->globalPos(), NULL);
+	m_pPatchbayView->contextMenu(pContextMenuEvent->globalPos(), nullptr);
 }
 
 
@@ -1181,7 +1181,7 @@ qjackctlPatchbayView::qjackctlPatchbayView ( QWidget *pParent )
 	m_pPatchworkView = new qjackctlPatchworkView(this);
 	m_pIListView = new qjackctlSocketListView(this, false);
 
-	m_pPatchbay = NULL;
+	m_pPatchbay = nullptr;
 
 	QSplitter::setHandleWidth(2);
 
@@ -1218,7 +1218,7 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 	qjackctlSocketList *pSocketList )
 {
 	qjackctlPatchbay *pPatchbay = binding();
-	if (pPatchbay == NULL)
+	if (pPatchbay == nullptr)
 		return;
 
 	QMenu menu(this);
@@ -1226,7 +1226,7 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 
 	if (pSocketList) {
 		qjackctlSocketItem *pSocketItem = pSocketList->selectedSocketItem();
-		bool bEnabled = (pSocketItem != NULL);
+		bool bEnabled = (pSocketItem != nullptr);
 		pAction = menu.addAction(QIcon(":/images/add1.png"),
 			tr("Add..."), pSocketList, SLOT(addSocketItem()));
 		pAction = menu.addAction(QIcon(":/images/edit1.png"),
@@ -1281,7 +1281,7 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 				pAction->setData(iIndex);
 				iIndex++;
 			}
-			// Null forward always present,
+			// nullptr forward always present,
 			// and has invalid index parameter (-1)...
 			if (iIndex > 0)
 				pForwardMenu->addSeparator();
@@ -1382,7 +1382,7 @@ qjackctlSocketList *qjackctlPatchbayView::OSocketList (void) const
 	if (m_pPatchbay)
 		return m_pPatchbay->OSocketList();
 	else
-		return NULL;
+		return nullptr;
 }
 
 qjackctlSocketList *qjackctlPatchbayView::ISocketList (void) const
@@ -1390,7 +1390,7 @@ qjackctlSocketList *qjackctlPatchbayView::ISocketList (void) const
 	if (m_pPatchbay)
 		return m_pPatchbay->ISocketList();
 	else
-		return NULL;
+		return nullptr;
 }
 
 
@@ -1426,13 +1426,13 @@ qjackctlPatchbay::qjackctlPatchbay ( qjackctlPatchbayView *pPatchbayView )
 // Default destructor.
 qjackctlPatchbay::~qjackctlPatchbay (void)
 {
-	m_pPatchbayView->setBinding(NULL);
+	m_pPatchbayView->setBinding(nullptr);
 
 	delete m_pOSocketList;
-	m_pOSocketList = NULL;
+	m_pOSocketList = nullptr;
 
 	delete m_pISocketList;
-	m_pISocketList = NULL;
+	m_pISocketList = nullptr;
 
 	(m_pPatchbayView->PatchworkView())->update();
 }
@@ -1442,7 +1442,7 @@ qjackctlPatchbay::~qjackctlPatchbay (void)
 void qjackctlPatchbay::connectSockets ( qjackctlSocketItem *pOSocket,
 	qjackctlSocketItem *pISocket )
 {
-	if (pOSocket->findConnectPtr(pISocket) == NULL) {
+	if (pOSocket->findConnectPtr(pISocket) == nullptr) {
 		pOSocket->addConnect(pISocket);
 		pISocket->addConnect(pOSocket);
 	}
@@ -1452,7 +1452,7 @@ void qjackctlPatchbay::connectSockets ( qjackctlSocketItem *pOSocket,
 void qjackctlPatchbay::disconnectSockets ( qjackctlSocketItem *pOSocket,
 	qjackctlSocketItem *pISocket )
 {
-	if (pOSocket->findConnectPtr(pISocket) != NULL) {
+	if (pOSocket->findConnectPtr(pISocket) != nullptr) {
 		pOSocket->removeConnect(pISocket);
 		pISocket->removeConnect(pOSocket);
 	}
@@ -1463,14 +1463,14 @@ void qjackctlPatchbay::disconnectSockets ( qjackctlSocketItem *pOSocket,
 bool qjackctlPatchbay::canConnectSelected (void)
 {
 	QTreeWidgetItem *pOItem = (m_pOSocketList->listView())->currentItem();
-	if (pOItem == NULL)
+	if (pOItem == nullptr)
 		return false;
 
 	QTreeWidgetItem *pIItem = (m_pISocketList->listView())->currentItem();
-	if (pIItem == NULL)
+	if (pIItem == nullptr)
 		return false;
 
-	qjackctlSocketItem *pOSocket = NULL;
+	qjackctlSocketItem *pOSocket = nullptr;
 	switch (pOItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pOSocket = static_cast<qjackctlSocketItem *> (pOItem);
@@ -1482,7 +1482,7 @@ bool qjackctlPatchbay::canConnectSelected (void)
 		return false;
 	}
 
-	qjackctlSocketItem *pISocket = NULL;
+	qjackctlSocketItem *pISocket = nullptr;
 	switch (pIItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pISocket = static_cast<qjackctlSocketItem *> (pIItem);
@@ -1505,7 +1505,7 @@ bool qjackctlPatchbay::canConnectSelected (void)
 		return false;
 
 	// One-to-one connection...
-	return (pOSocket->findConnectPtr(pISocket) == NULL);
+	return (pOSocket->findConnectPtr(pISocket) == nullptr);
 }
 
 
@@ -1513,14 +1513,14 @@ bool qjackctlPatchbay::canConnectSelected (void)
 bool qjackctlPatchbay::connectSelected (void)
 {
 	QTreeWidgetItem *pOItem = (m_pOSocketList->listView())->currentItem();
-	if (pOItem == NULL)
+	if (pOItem == nullptr)
 		return false;
 
 	QTreeWidgetItem *pIItem = (m_pISocketList->listView())->currentItem();
-	if (pIItem == NULL)
+	if (pIItem == nullptr)
 		return false;
 
-	qjackctlSocketItem *pOSocket = NULL;
+	qjackctlSocketItem *pOSocket = nullptr;
 	switch (pOItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pOSocket = static_cast<qjackctlSocketItem *> (pOItem);
@@ -1532,7 +1532,7 @@ bool qjackctlPatchbay::connectSelected (void)
 		return false;
 	}
 
-	qjackctlSocketItem *pISocket = NULL;
+	qjackctlSocketItem *pISocket = nullptr;
 	switch (pIItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pISocket = static_cast<qjackctlSocketItem *> (pIItem);
@@ -1568,14 +1568,14 @@ bool qjackctlPatchbay::connectSelected (void)
 bool qjackctlPatchbay::canDisconnectSelected (void)
 {
 	QTreeWidgetItem *pOItem = (m_pOSocketList->listView())->currentItem();
-	if (pOItem == NULL)
+	if (pOItem == nullptr)
 		return false;
 
 	QTreeWidgetItem *pIItem = (m_pISocketList->listView())->currentItem();
-	if (pIItem == NULL)
+	if (pIItem == nullptr)
 		return false;
 
-	qjackctlSocketItem *pOSocket = NULL;
+	qjackctlSocketItem *pOSocket = nullptr;
 	switch (pOItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pOSocket = static_cast<qjackctlSocketItem *> (pOItem);
@@ -1587,7 +1587,7 @@ bool qjackctlPatchbay::canDisconnectSelected (void)
 		return false;
 	}
 
-	qjackctlSocketItem *pISocket = NULL;
+	qjackctlSocketItem *pISocket = nullptr;
 	switch (pIItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pISocket = static_cast<qjackctlSocketItem *> (pIItem);
@@ -1618,7 +1618,7 @@ bool qjackctlPatchbay::disconnectSelected (void)
 	if (!pIItem)
 		return false;
 
-	qjackctlSocketItem *pOSocket = NULL;
+	qjackctlSocketItem *pOSocket = nullptr;
 	switch (pOItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pOSocket = static_cast<qjackctlSocketItem *> (pOItem);
@@ -1630,7 +1630,7 @@ bool qjackctlPatchbay::disconnectSelected (void)
 		return false;
 	}
 
-	qjackctlSocketItem *pISocket = NULL;
+	qjackctlSocketItem *pISocket = nullptr;
 	switch (pIItem->type()) {
 	case QJACKCTL_SOCKETITEM:
 		pISocket = static_cast<qjackctlSocketItem *> (pIItem);
@@ -1746,7 +1746,7 @@ void qjackctlPatchbay::loadRackSockets ( qjackctlSocketList *pSocketList,
 	QList<qjackctlPatchbaySocket *>& socketlist )
 {
 	pSocketList->clear();
-	qjackctlSocketItem *pSocketItem = NULL;
+	qjackctlSocketItem *pSocketItem = nullptr;
 
 	QListIterator<qjackctlPatchbaySocket *> sockit(socketlist);
 	while (sockit.hasNext()) {
@@ -1757,7 +1757,7 @@ void qjackctlPatchbay::loadRackSockets ( qjackctlSocketList *pSocketList,
 			pSocketItem->setExclusive(pSocket->isExclusive());
 			pSocketItem->setForward(pSocket->forward());
 			pSocketItem->updatePixmap();
-			qjackctlPlugItem *pPlugItem = NULL;
+			qjackctlPlugItem *pPlugItem = nullptr;
 			QStringListIterator iter(pSocket->pluglist());
 			while (iter.hasNext()) {
 				pPlugItem = new qjackctlPlugItem(
@@ -1812,7 +1812,7 @@ void qjackctlPatchbay::saveRackSockets ( qjackctlSocketList *pSocketList,
 {
 	// Have QTreeWidget item order into account:
 	qjackctlSocketListView *pListView = pSocketList->listView();
-	if (pListView == NULL)
+	if (pListView == nullptr)
 		return;
 
 	socketlist.clear();
@@ -1824,7 +1824,7 @@ void qjackctlPatchbay::saveRackSockets ( qjackctlSocketList *pSocketList,
 			continue;
 		qjackctlSocketItem *pSocketItem
 			= static_cast<qjackctlSocketItem *> (pItem);
-		if (pSocketItem == NULL)
+		if (pSocketItem == nullptr)
 			continue;
 		qjackctlPatchbaySocket *pSocket
 			= new qjackctlPatchbaySocket(pSocketItem->socketName(),
@@ -1880,7 +1880,7 @@ void qjackctlPatchbay::saveRack ( qjackctlPatchbayRack *pPatchbayRack )
 void qjackctlPatchbay::connectionsSnapshot (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	qjackctlPatchbayRack rack;

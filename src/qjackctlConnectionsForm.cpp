@@ -50,16 +50,16 @@ qjackctlConnectionsForm::qjackctlConnectionsForm (
 	m_pMidiConnect = new qjackctlJackConnect(
 		m_ui.MidiConnectView, QJACKCTL_JACK_MIDI);
 #else
-	m_pMidiConnect = NULL;
+	m_pMidiConnect = nullptr;
 #endif
 
 #ifdef CONFIG_ALSA_SEQ
 	m_pAlsaConnect = new qjackctlAlsaConnect(m_ui.AlsaConnectView);
 #else
-	m_pAlsaConnect = NULL;
+	m_pAlsaConnect = nullptr;
 #endif
 
-	m_pSetup = NULL;
+	m_pSetup = nullptr;
 
 	// UI connections...
 
@@ -618,7 +618,7 @@ void qjackctlConnectionsForm::alsaStabilize (void)
 // or notify main form for doing that later.
 void qjackctlConnectionsForm::refreshAudio ( bool bEnabled, bool bClear )
 {
-	if (m_pAudioConnect == NULL)
+	if (m_pAudioConnect == nullptr)
 		return;
 
 	if (bEnabled) {
@@ -633,7 +633,7 @@ void qjackctlConnectionsForm::refreshAudio ( bool bEnabled, bool bClear )
 
 void qjackctlConnectionsForm::refreshMidi ( bool bEnabled, bool bClear )
 {
-	if (m_pMidiConnect == NULL)
+	if (m_pMidiConnect == nullptr)
 		return;
 
 	if (bEnabled) {
@@ -648,7 +648,7 @@ void qjackctlConnectionsForm::refreshMidi ( bool bEnabled, bool bClear )
 
 void qjackctlConnectionsForm::refreshAlsa ( bool bEnabled, bool bClear )
 {
-	if (m_pAlsaConnect == NULL)
+	if (m_pAlsaConnect == nullptr)
 		return;
 
 	if (bEnabled) {
@@ -752,12 +752,12 @@ void qjackctlConnectionsForm::updateAliases (void)
 		m_ui.AlsaConnectView->IListView()->setAliasList(
 			&(m_pSetup->aliases.alsaInputs), bRenameEnabled);
 	} else {
-		m_ui.AudioConnectView->OListView()->setAliasList(NULL, false);
-		m_ui.AudioConnectView->IListView()->setAliasList(NULL, false);
-		m_ui.MidiConnectView->OListView()->setAliasList(NULL, false);
-		m_ui.MidiConnectView->IListView()->setAliasList(NULL, false);
-		m_ui.AlsaConnectView->OListView()->setAliasList(NULL, false);
-		m_ui.AlsaConnectView->IListView()->setAliasList(NULL, false);
+		m_ui.AudioConnectView->OListView()->setAliasList(nullptr, false);
+		m_ui.AudioConnectView->IListView()->setAliasList(nullptr, false);
+		m_ui.MidiConnectView->OListView()->setAliasList(nullptr, false);
+		m_ui.MidiConnectView->IListView()->setAliasList(nullptr, false);
+		m_ui.AlsaConnectView->OListView()->setAliasList(nullptr, false);
+		m_ui.AlsaConnectView->IListView()->setAliasList(nullptr, false);
 	}
 }
 

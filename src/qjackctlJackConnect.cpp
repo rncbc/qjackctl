@@ -34,8 +34,8 @@ static QString prettyName (	jack_uuid_t uuid )
 {
 	QString sPrettyName;
 
-	char *pszValue = NULL;
-	char *pszType  = NULL;
+	char *pszValue = nullptr;
+	char *pszType  = nullptr;
 
 	if (::jack_get_property(uuid,
 			JACK_METADATA_PRETTY_NAME, &pszValue, &pszType) == 0) {
@@ -56,7 +56,7 @@ static void setPrettyName (
 	const QByteArray aPrettyName = sPrettyName.toUtf8();
 
 	::jack_set_property(pJackClient, uuid,
-		JACK_METADATA_PRETTY_NAME, aPrettyName.constData(), NULL);
+		JACK_METADATA_PRETTY_NAME, aPrettyName.constData(), nullptr);
 }
 
 static void removePrettyName (
@@ -116,7 +116,7 @@ qjackctlJackPort::~qjackctlJackPort (void)
 void qjackctlJackPort::updatePortName ( bool bRename )
 {
 #ifdef CONFIG_JACK_METADATA
-	jack_client_t *pJackClient = NULL;
+	jack_client_t *pJackClient = nullptr;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pJackClient = pMainForm->jackClient();
@@ -157,7 +157,7 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 QString qjackctlJackPort::tooltip (void) const
 {
 
-	jack_client_t *pJackClient = NULL;
+	jack_client_t *pJackClient = nullptr;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pJackClient = pMainForm->jackClient();
@@ -224,7 +224,7 @@ qjackctlJackPort *qjackctlJackClient::findJackPort ( const QString& sPortName )
 			return pPort;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -232,7 +232,7 @@ qjackctlJackPort *qjackctlJackClient::findJackPort ( const QString& sPortName )
 void qjackctlJackClient::updateClientName ( bool bRename )
 {
 #ifdef CONFIG_JACK_METADATA
-	jack_client_t *pJackClient = NULL;
+	jack_client_t *pJackClient = nullptr;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pJackClient = pMainForm->jackClient();
@@ -293,7 +293,7 @@ qjackctlJackPort *qjackctlJackClientList::findJackClientPort (
 {
 	const int iColon = sClientPort.indexOf(':');
 	if (iColon < 0)
-		return NULL;
+		return nullptr;
 
 	const QString& sClientName
 		= sClientPort.left(iColon);
@@ -311,7 +311,7 @@ qjackctlJackPort *qjackctlJackClientList::findJackClientPort (
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -319,16 +319,16 @@ qjackctlJackPort *qjackctlJackClientList::findJackClientPort (
 int qjackctlJackClientList::updateClientPorts (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return 0;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return 0;
 
 	qjackctlJackConnect *pJackConnect
 		= static_cast<qjackctlJackConnect *> (listView()->binding());
-	if (pJackConnect == NULL)
+	if (pJackConnect == nullptr)
 		return 0;
 
 	const char *pszJackType = JACK_DEFAULT_AUDIO_TYPE;
@@ -353,8 +353,8 @@ int qjackctlJackClientList::updateClientPorts (void)
 	if (ppszClientPorts) {
 		for (int iClientPort = 0; ppszClientPorts[iClientPort]; ++iClientPort) {
 			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
-			qjackctlJackClient *pClient = NULL;
-			qjackctlJackPort *pPort = NULL;
+			qjackctlJackClient *pClient = nullptr;
+			qjackctlJackPort *pPort = nullptr;
 			jack_port_t *pJackPort = jack_port_by_name(pJackClient,
 				ppszClientPorts[iClientPort]);
 		#ifdef CONFIG_JACK_PORT_ALIASES
@@ -501,7 +501,7 @@ void qjackctlJackConnect::deleteIconPixmaps (void)
 	for (int i = 0; i < QJACKCTL_JACK_PIXMAPS; i++) {
 		if (m_apPixmaps[i])
 			delete m_apPixmaps[i];
-		m_apPixmaps[i] = NULL;
+		m_apPixmaps[i] = nullptr;
 	}
 }
 
@@ -517,11 +517,11 @@ const QPixmap& qjackctlJackConnect::pixmap ( int iPixmap ) const
 bool qjackctlJackConnect::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return false;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return false;
 
 	qjackctlJackPort *pOJack = static_cast<qjackctlJackPort *> (pOPort);
@@ -537,11 +537,11 @@ bool qjackctlJackConnect::connectPorts ( qjackctlPortItem *pOPort, qjackctlPortI
 bool qjackctlJackConnect::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return false;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return false;
 
 	qjackctlJackPort *pOJack = static_cast<qjackctlJackPort *> (pOPort);
@@ -557,16 +557,16 @@ bool qjackctlJackConnect::disconnectPorts ( qjackctlPortItem *pOPort, qjackctlPo
 void qjackctlJackConnect::updateConnections (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return;
 
 	qjackctlJackClientList *pIClientList
 		= static_cast<qjackctlJackClientList *> (IClientList());
-	if (pIClientList == NULL)
+	if (pIClientList == nullptr)
 		return;
 
 	// For each output client item...

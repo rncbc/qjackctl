@@ -93,7 +93,7 @@ class qjackctlSessionInfraClientItemDelegate : public QItemDelegate
 public:
 
 	// Constructor.
-	qjackctlSessionInfraClientItemDelegate(QObject *pParent = NULL);
+	qjackctlSessionInfraClientItemDelegate(QObject *pParent = nullptr);
 
 protected:
 

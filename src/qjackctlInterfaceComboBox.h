@@ -1,9 +1,9 @@
 // qjackctlInterfaceComboBox.h
 //
 /****************************************************************************
-   Copyright (C) 2013, Arnout Engelen. All rights reserved.
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
    Copyright (C) 2015, Kjetil Matheussen. (portaudio_probe_thread)
+   Copyright (C) 2013, Arnout Engelen. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License

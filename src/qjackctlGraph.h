@@ -66,7 +66,7 @@ class qjackctlGraphItem : public QGraphicsPathItem
 public:
 
 	// Constructor.
-	qjackctlGraphItem(QGraphicsItem *parent = NULL);
+	qjackctlGraphItem(QGraphicsItem *parent = nullptr);
 
 	// Basic color accessors.
 	void setForeground(const QColor& color);
@@ -427,7 +427,7 @@ class qjackctlGraphCanvas : public QGraphicsView
 public:
 
 	// Constructor.
-	qjackctlGraphCanvas(QWidget *parent = NULL);
+	qjackctlGraphCanvas(QWidget *parent = nullptr);
 
 	// Destructor.
 	~qjackctlGraphCanvas();

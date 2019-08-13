@@ -87,7 +87,7 @@ qjackctlSessionInfraClientItemEditor::qjackctlSessionInfraClientItemEditor (
 		m_pBrowseButton->setFixedWidth(18);
 		m_pBrowseButton->setText("...");
 	}
-	else m_pBrowseButton = NULL;
+	else m_pBrowseButton = nullptr;
 	m_pResetButton = new QToolButton(/*this*/);
 	m_pResetButton->setFixedWidth(18);
 	m_pResetButton->setText("x");
@@ -236,7 +236,7 @@ qjackctlSessionForm::qjackctlSessionForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-	m_pSetup = NULL;
+	m_pSetup = nullptr;
 
 	// Common (sigleton) session object.
 	m_pSession = new qjackctlSession();
@@ -623,11 +623,11 @@ void qjackctlSessionForm::loadSessionDir ( const QString& sSessionDir )
 	}
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return;
 
 	pMainForm->appendMessages(
@@ -679,11 +679,11 @@ void qjackctlSessionForm::saveSessionDir (
 	}
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return;
 
 	pMainForm->appendMessages(
@@ -764,7 +764,7 @@ void qjackctlSessionForm::updateSessionView (void)
 		pTopLevelItem->setText(2, pClientItem->client_command);
 		QListIterator<qjackctlSession::PortItem *>
 			iterPort(pClientItem->ports);
-		QTreeWidgetItem *pChildItem = NULL;
+		QTreeWidgetItem *pChildItem = nullptr;
 		while (iterPort.hasNext()) {
 			qjackctlSession::PortItem *pPortItem = iterPort.next();
 			pChildItem = new QTreeWidgetItem(pTopLevelItem, pChildItem);
@@ -773,7 +773,7 @@ void qjackctlSessionForm::updateSessionView (void)
 			pChildItem->setText(0, pPortItem->port_name);
 			QListIterator<qjackctlSession::ConnectItem *>
 				iterConnect(pPortItem->connects);
-			QTreeWidgetItem *pLeafItem = NULL;
+			QTreeWidgetItem *pLeafItem = nullptr;
 			while (iterConnect.hasNext()) {
 				qjackctlSession::ConnectItem *pConnectItem = iterConnect.next();
 				pLeafItem = new QTreeWidgetItem(pChildItem, pLeafItem);
@@ -810,7 +810,7 @@ void qjackctlSessionForm::sessionViewContextMenu ( const QPoint& pos )
 	bool bEnabled = false;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		bEnabled = (pMainForm->jackClient() != NULL);
+		bEnabled = (pMainForm->jackClient() != nullptr);
 
 	pAction = menu.addAction(QIcon(":/images/open1.png"),
 		tr("&Load..."), this, SLOT(loadSession()));
@@ -852,7 +852,7 @@ void qjackctlSessionForm::addInfraClient (void)
 
 	const QString& sNewInfraClient = tr("New Client");
 
-	QTreeWidgetItem *pItem = NULL;
+	QTreeWidgetItem *pItem = nullptr;
 
 	const QList<QTreeWidgetItem *>& items
 		= m_ui.InfraClientListView->findItems(sNewInfraClient, Qt::MatchExactly);
@@ -895,7 +895,7 @@ void qjackctlSessionForm::editInfraClientCommit (void)
 		const QString& sKey = pItem->text(0);
 		if (!sKey.isEmpty()) {
 			const QString& sValue = pItem->text(1);
-			qjackctlSession::InfraClientItem *pInfraClientItem = NULL;
+			qjackctlSession::InfraClientItem *pInfraClientItem = nullptr;
 			qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
 			qjackctlSession::InfraClientList::Iterator iter	= list.find(sKey);
 			if (iter == list.end()) {
@@ -943,8 +943,8 @@ void qjackctlSessionForm::selectInfraClient (void)
 
 	QTreeWidgetItem *pItem = m_ui.InfraClientListView->currentItem();
 	m_ui.AddInfraClientPushButton->setEnabled(true);
-	m_ui.EditInfraClientPushButton->setEnabled(pItem != NULL);
-	m_ui.RemoveInfraClientPushButton->setEnabled(pItem != NULL);
+	m_ui.EditInfraClientPushButton->setEnabled(pItem != nullptr);
+	m_ui.RemoveInfraClientPushButton->setEnabled(pItem != nullptr);
 }
 
 
@@ -962,7 +962,7 @@ void qjackctlSessionForm::updateInfraClients (void)
 
 	const QIcon iconClient(":/images/client1.png");
 
-	QTreeWidgetItem *pItem = NULL;
+	QTreeWidgetItem *pItem = nullptr;
 	qjackctlSession::InfraClientList& list = m_pSession->infra_clients();
 	qjackctlSession::InfraClientList::ConstIterator iter = list.constBegin();
 	const qjackctlSession::InfraClientList::ConstIterator& iter_end
@@ -997,10 +997,10 @@ void qjackctlSessionForm::infraClientContextMenu ( const QPoint& pos )
 //	pAction->setEnabled(true);
 	pAction = menu.addAction(QIcon(":/images/edit1.png"),
 		tr("&Edit"), this, SLOT(editInfraClient()));
-	pAction->setEnabled(pItem != NULL);
+	pAction->setEnabled(pItem != nullptr);
 	pAction = menu.addAction(QIcon(":/images/remove1.png"),
 		tr("Re&move"), this, SLOT(removeInfraClient()));
-	pAction->setEnabled(pItem != NULL);
+	pAction->setEnabled(pItem != nullptr);
 	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
 		tr("Re&fresh"), this, SLOT(updateInfraClients()));

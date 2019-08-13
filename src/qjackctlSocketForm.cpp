@@ -46,10 +46,10 @@ qjackctlSocketForm::qjackctlSocketForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-	m_pSocketList  = NULL;
+	m_pSocketList  = nullptr;
 	m_bSocketNew   = false;
 	m_iSocketNameChanged = 0;
-	m_ppPixmaps    = NULL;
+	m_ppPixmaps    = nullptr;
 	m_iDirtyCount  = 0;
 
 	// Setup time-display radio-button group.
@@ -227,7 +227,7 @@ void qjackctlSocketForm::load ( qjackctlPatchbaySocket *pSocket )
 	m_ui.ExclusiveCheckBox->setChecked(pSocket->isExclusive());
 
 	m_ui.PlugListView->clear();
-	QTreeWidgetItem *pPlugItem = NULL;
+	QTreeWidgetItem *pPlugItem = nullptr;
 	QStringListIterator iter(pSocket->pluglist());
 	while (iter.hasNext()) {
 		const QString& sPlugName = iter.next();
@@ -326,7 +326,7 @@ bool qjackctlSocketForm::validateForm (void)
 // Validate form fields and accept it valid.
 void qjackctlSocketForm::accept (void)
 {
-	if (m_pSocketList == NULL)
+	if (m_pSocketList == nullptr)
 		return;
 
 	if (!validateForm())
@@ -392,7 +392,7 @@ void qjackctlSocketForm::changed (void)
 // Add new Plug to socket list.
 void qjackctlSocketForm::addPlug (void)
 {
-	if (m_ppPixmaps == NULL)
+	if (m_ppPixmaps == nullptr)
 		return;
 
 	QString sPlugName = m_ui.PlugNameComboBox->currentText();
@@ -404,7 +404,7 @@ void qjackctlSocketForm::addPlug (void)
 		if (pItem) {
 			pItem->setText(0, sPlugName);
 			pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
-			QPixmap *pXpmPlug = NULL;
+			QPixmap *pXpmPlug = nullptr;
 			switch (m_pSocketTypeButtonGroup->checkedId()) {
 			case 0: // QJACKCTL_SOCKETTYPE_JACK_AUDIO
 				pXpmPlug = m_ppPixmaps[QJACKCTL_XPM_AUDIO_PLUG];
@@ -514,7 +514,7 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 	int iItem = 0;
 	int iItemCount = 0;
 	QTreeWidgetItem *pItem = m_ui.PlugListView->itemAt(pos);
-	if (pItem == NULL)
+	if (pItem == nullptr)
 		pItem = m_ui.PlugListView->currentItem();
 	if (pItem) {
 		iItem = m_ui.PlugListView->indexOfTopLevelItem(pItem);
@@ -538,7 +538,7 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 		SLOT(activateAddPlugMenu(QAction*)));
 	pAddPlugMenu->setEnabled(iIndex > 0);
 	// Build the plug context menu...
-	const bool bEnabled = (pItem != NULL);
+	const bool bEnabled = (pItem != nullptr);
 	pAction = menu.addAction(QIcon(":/images/edit1.png"),
 		tr("Edit"), this, SLOT(editPlug()));
 	pAction->setEnabled(bEnabled);
@@ -560,11 +560,11 @@ void qjackctlSocketForm::customContextMenu ( const QPoint& pos )
 void qjackctlSocketForm::updateJackClients ( int iSocketType )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return;
 
 	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
@@ -581,7 +581,7 @@ void qjackctlSocketForm::updateJackClients ( int iSocketType )
 
 	// Grab all client ports.
 	const char **ppszClientPorts = jack_get_ports(
-		pJackClient, NULL, pszJackPortType,
+		pJackClient, nullptr, pszJackPortType,
 		(bReadable ? JackPortIsOutput : JackPortIsInput));
 	if (ppszClientPorts) {
 		int iClientPort = 0;
@@ -616,11 +616,11 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 #ifdef CONFIG_ALSA_SEQ
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
-	if (pAlsaSeq == NULL)
+	if (pAlsaSeq == nullptr)
 		return;
 
 	const bool bReadable = m_pSocketList->isReadable();
@@ -672,9 +672,9 @@ void qjackctlSocketForm::updateAlsaClients ( int iSocketType )
 // Socket type change slot.
 void qjackctlSocketForm::socketTypeChanged (void)
 {
-	if (m_ppPixmaps == NULL)
+	if (m_ppPixmaps == nullptr)
 		return;
-	if (m_pSocketList == NULL)
+	if (m_pSocketList == nullptr)
 		return;
 
 	const bool bBlockSignals = m_ui.ClientNameComboBox->blockSignals(true);
@@ -682,8 +682,8 @@ void qjackctlSocketForm::socketTypeChanged (void)
 
 	m_ui.ClientNameComboBox->clear();
 
-	QPixmap *pXpmSocket = NULL;
-	QPixmap *pXpmPlug   = NULL;
+	QPixmap *pXpmSocket = nullptr;
+	QPixmap *pXpmPlug   = nullptr;
 
 	const bool bReadable = m_pSocketList->isReadable();
 	const int iSocketType = m_pSocketTypeButtonGroup->checkedId();
@@ -781,11 +781,11 @@ void qjackctlSocketForm::socketNameChanged (void)
 void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return;
 
 	const char *pszJackPortType = JACK_DEFAULT_AUDIO_TYPE;
@@ -805,7 +805,7 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[iPixmap]);
 	const char **ppszClientPorts = jack_get_ports(
-		pJackClient, NULL, pszJackPortType,
+		pJackClient, nullptr, pszJackPortType,
 		(bReadable ? JackPortIsOutput : JackPortIsInput));
 	if (ppszClientPorts) {
 		int iClientPort = 0;
@@ -835,11 +835,11 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 #ifdef CONFIG_ALSA_SEQ
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
-	if (pAlsaSeq == NULL)
+	if (pAlsaSeq == nullptr)
 		return;
 
 	const QString sClientName = m_ui.ClientNameComboBox->currentText();
@@ -891,9 +891,9 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 // Update client list if available.
 void qjackctlSocketForm::clientNameChanged (void)
 {
-	if (m_ppPixmaps == NULL)
+	if (m_ppPixmaps == nullptr)
 		return;
-	if (m_pSocketList == NULL)
+	if (m_pSocketList == nullptr)
 		return;
 
 	m_ui.PlugNameComboBox->clear();

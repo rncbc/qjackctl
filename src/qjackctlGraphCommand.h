@@ -38,7 +38,7 @@ class qjackctlGraphCommand : public QUndoCommand
 public:
 
 	// Constructor.
-	qjackctlGraphCommand(qjackctlGraphCanvas *canvas, QUndoCommand *parent = NULL);
+	qjackctlGraphCommand(qjackctlGraphCanvas *canvas, QUndoCommand *parent = nullptr);
 
 	// Accessors.
 	qjackctlGraphCanvas *canvas() const
@@ -70,7 +70,7 @@ public:
 	// Constructor.
 	qjackctlGraphConnectCommand(qjackctlGraphCanvas *canvas,
 		qjackctlGraphPort *port1, qjackctlGraphPort *port2,
-		bool is_connect, qjackctlGraphCommand *parent = NULL);
+		bool is_connect, qjackctlGraphCommand *parent = nullptr);
 
 protected:
 
@@ -146,7 +146,7 @@ public:
 	qjackctlGraphMoveCommand(qjackctlGraphCanvas *canvas,
 		const QList<qjackctlGraphNode *>& nodes,
 		const QPointF& pos1, const QPointF& pos2,
-		qjackctlGraphCommand *parent = NULL);
+		qjackctlGraphCommand *parent = nullptr);
 
 	// Destructor.
 	~qjackctlGraphMoveCommand();
@@ -186,7 +186,7 @@ public:
 	// Constructor.
 	qjackctlGraphRenameCommand(qjackctlGraphCanvas *canvas,
 		qjackctlGraphItem *item, const QString& name,
-		qjackctlGraphCommand *parent = NULL);
+		qjackctlGraphCommand *parent = nullptr);
 
 protected:
 

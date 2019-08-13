@@ -395,7 +395,7 @@ static void qjackctl_property_change_callback (
 // qjackctlMainForm -- UI wrapper form.
 
 // Kind of singleton reference.
-qjackctlMainForm *qjackctlMainForm::g_pMainForm = NULL;
+qjackctlMainForm *qjackctlMainForm::g_pMainForm = nullptr;
 
 // Constructor.
 qjackctlMainForm::qjackctlMainForm (
@@ -408,20 +408,20 @@ qjackctlMainForm::qjackctlMainForm (
 	// Pseudo-singleton reference setup.
 	g_pMainForm = this;
 
-	m_pSetup = NULL;
+	m_pSetup = nullptr;
 
 	m_iServerState = QJACKCTL_INACTIVE;
 
-	m_pJack           = NULL;
-	m_pJackClient     = NULL;
+	m_pJack           = nullptr;
+	m_pJackClient     = nullptr;
 	m_bJackDetach     = false;
 	m_bJackShutdown   = false;
 	m_bJackStopped    = false;
-	m_pAlsaSeq        = NULL;
+	m_pAlsaSeq        = nullptr;
 #ifdef CONFIG_DBUS
-	m_pDBusControl  = NULL;
-	m_pDBusConfig   = NULL;
-	m_pDBusLogWatcher = NULL;
+	m_pDBusControl  = nullptr;
+	m_pDBusConfig   = nullptr;
+	m_pDBusLogWatcher = nullptr;
 	m_bDBusStarted  = false;
 	m_bDBusDetach   = false;
 #endif
@@ -442,23 +442,23 @@ qjackctlMainForm::qjackctlMainForm (
 	m_iJackPropertyChange = 0;
 #endif
 
-	m_pStdoutNotifier = NULL;
-	m_pAlsaNotifier = NULL;
+	m_pStdoutNotifier = nullptr;
+	m_pAlsaNotifier = nullptr;
 
 	// All forms are to be created later on setup.
-	m_pMessagesStatusForm = NULL;
-	m_pSessionForm     = NULL;
-	m_pConnectionsForm = NULL;
-	m_pPatchbayForm    = NULL;
-	m_pGraphForm       = NULL;
-	m_pSetupForm       = NULL;
+	m_pMessagesStatusForm = nullptr;
+	m_pSessionForm     = nullptr;
+	m_pConnectionsForm = nullptr;
+	m_pPatchbayForm    = nullptr;
+	m_pGraphForm       = nullptr;
+	m_pSetupForm       = nullptr;
 
 	// Patchbay rack can be readily created.
 	m_pPatchbayRack = new qjackctlPatchbayRack();
 
 #ifdef CONFIG_SYSTEM_TRAY
 	// The eventual system tray widget.
-	m_pSystemTray  = NULL;
+	m_pSystemTray  = nullptr;
 	m_bQuitClose = false;
 #endif
 
@@ -498,8 +498,8 @@ qjackctlMainForm::qjackctlMainForm (
 	sigemptyset(&sigterm.sa_mask);
 	sigterm.sa_flags = 0;
 	sigterm.sa_flags |= SA_RESTART;
-	::sigaction(SIGTERM, &sigterm, NULL);
-	::sigaction(SIGQUIT, &sigterm, NULL);
+	::sigaction(SIGTERM, &sigterm, nullptr);
+	::sigaction(SIGQUIT, &sigterm, nullptr);
 
 	// Ignore SIGHUP/SIGINT signals.
 	::signal(SIGHUP, SIG_IGN);
@@ -510,7 +510,7 @@ qjackctlMainForm::qjackctlMainForm (
 
 #else	// HAVE_SIGNAL_H
 
-	m_pSigtermNotifier = NULL;
+	m_pSigtermNotifier = nullptr;
 
 #endif	// !HAVE_SIGNAL_H
 
@@ -593,9 +593,9 @@ qjackctlMainForm::~qjackctlMainForm (void)
 		delete m_pDBusConfig;
 	if (m_pDBusControl)
 		delete m_pDBusControl;
-	m_pDBusControl = NULL;
-	m_pDBusConfig  = NULL;
-	m_pDBusLogWatcher = NULL;
+	m_pDBusControl = nullptr;
+	m_pDBusConfig  = nullptr;
+	m_pDBusLogWatcher = nullptr;
 	m_bDBusStarted = false;
 	m_bDBusDetach  = false;
 #else
@@ -609,8 +609,8 @@ qjackctlMainForm::~qjackctlMainForm (void)
 	if (m_pAlsaSeq)
 		snd_seq_close(m_pAlsaSeq);
 #endif
-	m_pAlsaNotifier = NULL;
-	m_pAlsaSeq = NULL;
+	m_pAlsaNotifier = nullptr;
+	m_pAlsaSeq = nullptr;
 
 	// Finally drop any popup widgets around...
 	if (m_pMessagesStatusForm)
@@ -637,7 +637,7 @@ qjackctlMainForm::~qjackctlMainForm (void)
 		delete m_pPatchbayRack;
 
 	// Pseudo-singleton reference shut-down.
-	g_pMainForm = NULL;
+	g_pMainForm = nullptr;
 }
 
 
@@ -662,7 +662,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	updateButtons();
 
 	// What style do we create these forms?
-	QWidget *pParent = NULL;
+	QWidget *pParent = nullptr;
 	Qt::WindowFlags wflags = Qt::Window
 		| Qt::CustomizeWindowHint
 		| Qt::WindowTitleHint
@@ -699,7 +699,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	// Maybe time to load default preset aliases?
 	m_pSetup->loadAliases();
 
-	// Check out some initial nullities(tm)...
+	// Check out some initial nullptrities(tm)...
 	if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesStatusForm)
 		m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
 	if (m_pSetup->sDisplayFont1.isEmpty())
@@ -763,7 +763,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	if (m_pSetup->bAlsaSeqEnabled) {
 		// Start our ALSA sequencer interface.
 		if (snd_seq_open(&m_pAlsaSeq, "hw", SND_SEQ_OPEN_DUPLEX, 0) < 0)
-			m_pAlsaSeq = NULL;
+			m_pAlsaSeq = nullptr;
 		if (m_pAlsaSeq) {
 			snd_seq_port_subscribe_t *pAlsaSubs;
 			snd_seq_addr_t seq_addr;
@@ -909,7 +909,7 @@ bool qjackctlMainForm::queryClose (void)
 {
 	bool bQueryClose = true;
 
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return bQueryClose;
 
 #ifdef CONFIG_SYSTEM_TRAY
@@ -1739,7 +1739,7 @@ void qjackctlMainForm::jackCleanup (void)
 		appendMessages(tr("JACK was stopped"));
 		// Destroy it.
 		delete m_pJack;
-		m_pJack = NULL;
+		m_pJack = nullptr;
 		// Flag we need a post-shutdown script...
 		bPostShutdown = true;
 	}
@@ -1781,10 +1781,10 @@ void qjackctlMainForm::jackStabilize (void)
 {
 	QPalette pal;
 	pal.setColor(QPalette::Foreground,
-		m_pJackClient == NULL ? Qt::darkYellow : Qt::yellow);
+		m_pJackClient == nullptr ? Qt::darkYellow : Qt::yellow);
 	m_ui.ServerStateTextLabel->setPalette(pal);
-	m_ui.StartToolButton->setEnabled(m_pJackClient == NULL);
-	m_ui.StopToolButton->setEnabled(m_pJackClient != NULL);
+	m_ui.StartToolButton->setEnabled(m_pJackClient == nullptr);
+	m_ui.StopToolButton->setEnabled(m_pJackClient != nullptr);
 	m_ui.RewindToolButton->setEnabled(false);
 	m_ui.BackwardToolButton->setEnabled(false);
 	m_ui.PlayToolButton->setEnabled(false);
@@ -1936,7 +1936,7 @@ void qjackctlMainForm::appendMessagesError ( const QString& s )
 // Force update of the messages font.
 void qjackctlMainForm::updateMessagesFont (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	if (m_pMessagesStatusForm && !m_pSetup->sMessagesFont.isEmpty()) {
@@ -1950,7 +1950,7 @@ void qjackctlMainForm::updateMessagesFont (void)
 // Update messages window line limit.
 void qjackctlMainForm::updateMessagesLimit (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	if (m_pMessagesStatusForm) {
@@ -1965,7 +1965,7 @@ void qjackctlMainForm::updateMessagesLimit (void)
 // Update messages logging state.
 void qjackctlMainForm::updateMessagesLogging (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	if (m_pMessagesStatusForm) {
@@ -1978,7 +1978,7 @@ void qjackctlMainForm::updateMessagesLogging (void)
 // Force update of the connections font.
 void qjackctlMainForm::updateConnectionsFont (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	if (m_pConnectionsForm && !m_pSetup->sConnectionsFont.isEmpty()) {
@@ -1992,7 +1992,7 @@ void qjackctlMainForm::updateConnectionsFont (void)
 // Update of the connections view icon size.
 void qjackctlMainForm::updateConnectionsIconSize (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	if (m_pConnectionsForm)
@@ -2003,7 +2003,7 @@ void qjackctlMainForm::updateConnectionsIconSize (void)
 // Update of JACK client/port alias display mode.
 void qjackctlMainForm::updateJackClientPortAlias (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	qjackctlJackClientList::setJackClientPortAlias(m_pSetup->iJackClientPortAlias);
@@ -2015,7 +2015,7 @@ void qjackctlMainForm::updateJackClientPortAlias (void)
 // Update of JACK client/port pretty-name (metadata) display mode.
 void qjackctlMainForm::updateJackClientPortMetadata (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	qjackctlJackClientList::setJackClientPortMetadata(m_pSetup->bJackClientPortMetadata);
@@ -2027,7 +2027,7 @@ void qjackctlMainForm::updateJackClientPortMetadata (void)
 // Update main display background effect.
 void qjackctlMainForm::updateDisplayEffect (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	// Set the main background...
@@ -2173,15 +2173,15 @@ void qjackctlMainForm::updateJackDBus (void)
 	// Unregister JACK D-Bus service controller...
 	if (m_pDBusLogWatcher) {
 		delete m_pDBusLogWatcher;
-		m_pDBusLogWatcher = NULL;
+		m_pDBusLogWatcher = nullptr;
 	}
 	if (m_pDBusConfig) {
 		delete m_pDBusConfig;
-		m_pDBusConfig = NULL;
+		m_pDBusConfig = nullptr;
 	}
 	if (m_pDBusControl) {
 		delete m_pDBusControl;
-		m_pDBusControl = NULL;
+		m_pDBusControl = nullptr;
 	}
 
 	// Register JACK D-Bus service...
@@ -2232,7 +2232,7 @@ void qjackctlMainForm::updateJackDBus (void)
 				.arg(m_pDBusControl->service()));
 			// Destroy tentative jackdbus interface.
 			delete m_pDBusControl;
-			m_pDBusControl = NULL;
+			m_pDBusControl = nullptr;
 		}
 	}
 }
@@ -2255,7 +2255,7 @@ bool qjackctlMainForm::isActivePatchbay ( const QString& sPatchbayPath ) const
 // Force update of active patchbay definition profile, if applicable.
 void qjackctlMainForm::updateActivePatchbay (void)
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	// Time to load the active patchbay rack profiler?
@@ -2299,7 +2299,7 @@ void qjackctlMainForm::updateActivePatchbay (void)
 // Toggle active patchbay setting.
 void qjackctlMainForm::setActivePatchbay ( const QString& sPatchbayPath )
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return;
 
 	if (sPatchbayPath.isEmpty()) {
@@ -2574,7 +2574,7 @@ void qjackctlMainForm::shutNotifyEvent (void)
 	appendMessagesColor(tr("Shutdown notification."), "#cc6666");
 	// SHUTDOWN: JACK client handle might not be valid anymore...
 	m_bJackShutdown = true;
-	// m_pJackClient = NULL;
+	// m_pJackClient = nullptr;
 	// Do what has to be done.
 	stopJackServer();
 }
@@ -2703,7 +2703,7 @@ void qjackctlMainForm::timerSlot (void)
 			refreshAlsaConnections();
 		}
 		// Are we about to refresh it, really?
-		if (m_iJackRefresh > 0 && m_pJackClient != NULL) {
+		if (m_iJackRefresh > 0 && m_pJackClient != nullptr) {
 			m_iJackRefresh = 0;
 		#ifdef CONFIG_JACK_METADATA
 			const bool bClear = (m_iJackPropertyChange > 0);
@@ -2715,7 +2715,7 @@ void qjackctlMainForm::timerSlot (void)
 			m_pConnectionsForm->refreshMidi(true);
 		#endif
 		}
-		if (m_iAlsaRefresh > 0 && m_pAlsaSeq != NULL) {
+		if (m_iAlsaRefresh > 0 && m_pAlsaSeq != nullptr) {
 			m_iAlsaRefresh = 0;
 			m_pConnectionsForm->refreshAlsa(true);
 		}
@@ -2810,7 +2810,7 @@ void qjackctlMainForm::queryDisconnect (
 	qjackctlGraphNode *node1 = port1->portNode();
 	qjackctlGraphNode *node2 = port2->portNode();
 
-	if (node1 == NULL || node2 == NULL)
+	if (node1 == nullptr || node2 == nullptr)
 		return;
 
 	int iSocketType = QJACKCTL_SOCKETTYPE_DEFAULT;
@@ -2904,7 +2904,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		return true;
 
 	// Have it a setup?
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return false;
 
 	// Time to (re)load current preset aliases?
@@ -2935,7 +2935,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 			m_pSetup->sServerName.toUtf8().constData());
 	}
 
-	if (m_pJackClient == NULL) {
+	if (m_pJackClient == nullptr) {
 		if (!bDetach) {
 			QStringList errs;
 			if (status & JackFailure)
@@ -3110,7 +3110,7 @@ void qjackctlMainForm::stopJackClient (void)
 	if (m_pJackClient) {
 		jack_deactivate(m_pJackClient);
 		jack_client_close(m_pJackClient);
-		m_pJackClient = NULL;
+		m_pJackClient = nullptr;
 		// Log deactivation here.
 		appendMessages(tr("Client deactivated."));
 	}
@@ -3149,7 +3149,7 @@ void qjackctlMainForm::stopJackClient (void)
 // JACK client accessor.
 jack_client_t *qjackctlMainForm::jackClient (void) const
 {
-	return (m_bJackShutdown ? NULL : m_pJackClient);
+	return (m_bJackShutdown ? nullptr : m_pJackClient);
 }
 
 
@@ -3290,7 +3290,7 @@ void qjackctlMainForm::toggleSessionForm (void)
 {
 	if (m_pSessionForm) {
 		m_pSetup->saveWidgetGeometry(m_pSessionForm);
-		m_pSessionForm->stabilizeForm(m_pJackClient != NULL);
+		m_pSessionForm->stabilizeForm(m_pJackClient != nullptr);
 		if (m_pSessionForm->isVisible()) {
 			m_pSessionForm->hide();
 		} else {
@@ -3309,9 +3309,9 @@ void qjackctlMainForm::toggleConnectionsForm (void)
 {
 	if (m_pConnectionsForm) {
 		m_pSetup->saveWidgetGeometry(m_pConnectionsForm);
-		m_pConnectionsForm->stabilizeAudio(m_pJackClient != NULL);
-		m_pConnectionsForm->stabilizeMidi(m_pJackClient != NULL);
-		m_pConnectionsForm->stabilizeAlsa(m_pAlsaSeq != NULL);
+		m_pConnectionsForm->stabilizeAudio(m_pJackClient != nullptr);
+		m_pConnectionsForm->stabilizeMidi(m_pJackClient != nullptr);
+		m_pConnectionsForm->stabilizeAlsa(m_pAlsaSeq != nullptr);
 		if (m_pConnectionsForm->isVisible()) {
 			m_pConnectionsForm->hide();
 		} else {
@@ -3831,10 +3831,10 @@ void qjackctlMainForm::updateSystemTray (void)
 	//  Strange enough, this would close the application too.
 	//  m_pSystemTray->close();
 		delete m_pSystemTray;
-		m_pSystemTray = NULL;
+		m_pSystemTray = nullptr;
 	}
 
-	if (m_pSetup->bSystemTray && m_pSystemTray == NULL) {
+	if (m_pSetup->bSystemTray && m_pSystemTray == nullptr) {
 		m_pSystemTray = new qjackctlSystemTray(this);
 		m_pSystemTray->setContextMenu(&m_menu);
 		QObject::connect(m_pSystemTray,
@@ -3879,7 +3879,7 @@ void qjackctlMainForm::updateContextMenu (void)
 		? sHideMinimize : sShowRestore, this, SLOT(toggleMainForm()));
 	m_menu.addSeparator();
 
-	if (m_pJackClient == NULL) {
+	if (m_pJackClient == nullptr) {
 		pAction = m_menu.addAction(QIcon(":/images/start1.png"),
 			tr("&Start"), this, SLOT(startJack()));
 	} else {
@@ -3888,7 +3888,7 @@ void qjackctlMainForm::updateContextMenu (void)
 	}
 	pAction = m_menu.addAction(QIcon(":/images/reset1.png"),
 		tr("&Reset"), this, SLOT(resetXrunStats()));
-//  pAction->setEnabled(m_pJackClient != NULL);
+//  pAction->setEnabled(m_pJackClient != nullptr);
 	m_menu.addSeparator();
 
 	// Construct the actual presets menu,
@@ -3918,7 +3918,7 @@ void qjackctlMainForm::updateContextMenu (void)
 	m_menu.addSeparator();
 
 	if (m_pSessionForm) {
-		const bool bEnabled = (m_pJackClient != NULL);
+		const bool bEnabled = (m_pJackClient != nullptr);
 		const QString sTitle = tr("S&ession");
 		const QIcon iconSession(":/images/session1.png");
 		QMenu *pSessionMenu = m_menu.addMenu(sTitle);
@@ -3933,7 +3933,7 @@ void qjackctlMainForm::updateContextMenu (void)
 		pAction->setEnabled(bEnabled);
 		QMenu *pRecentMenu = m_pSessionForm->recentMenu();
 		pAction = pSessionMenu->addMenu(pRecentMenu);
-		pAction->setEnabled(m_pJackClient != NULL && !pRecentMenu->isEmpty());
+		pAction->setEnabled(m_pJackClient != nullptr && !pRecentMenu->isEmpty());
 		pSessionMenu->addSeparator();
 		pAction = pSessionMenu->addAction(QIcon(":/images/save1.png"),
 			tr("&Save..."),
@@ -4134,7 +4134,7 @@ void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 // D-BUS: Set/reset parameter values from current selected preset options.
 void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 {
-	if (m_pDBusConfig == NULL)
+	if (m_pDBusConfig == nullptr)
 		return;
 
 	// Set configuration parameters...
@@ -4312,7 +4312,7 @@ bool qjackctlMainForm::setDBusDriverParameter (
 bool qjackctlMainForm::setDBusParameter (
 	const QStringList& path, const QVariant& value, bool bSet )
 {
-	if (m_pDBusConfig == NULL)
+	if (m_pDBusConfig == nullptr)
 		return false;
 
 	if (!bSet) return resetDBusParameter(path); // Reset option.
@@ -4346,7 +4346,7 @@ bool qjackctlMainForm::resetDBusDriverParameter ( const QString& param )
 
 bool qjackctlMainForm::resetDBusParameter ( const QStringList& path )
 {
-	if (m_pDBusConfig == NULL)
+	if (m_pDBusConfig == nullptr)
 		return false;
 
 	QDBusMessage dbusm = m_pDBusConfig->call("ResetParameterValue", path);
@@ -4367,10 +4367,10 @@ bool qjackctlMainForm::resetDBusParameter ( const QStringList& path )
 // D-BUS: Get preset options from current parameter values.
 bool qjackctlMainForm::getDBusParameters ( qjackctlPreset& preset )
 {
-	if (m_pSetup == NULL)
+	if (m_pSetup == nullptr)
 		return false;
 
-	if (m_pDBusConfig == NULL)
+	if (m_pDBusConfig == nullptr)
 		return false;
 
 	// Get configuration parameters...
@@ -4576,7 +4576,7 @@ QVariant qjackctlMainForm::getDBusDriverParameter ( const QString& param )
 
 QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 {
-	if (m_pDBusConfig == NULL)
+	if (m_pDBusConfig == nullptr)
 		return QVariant();
 
 	QDBusMessage dbusm = m_pDBusConfig->call("GetParameterValue", path);

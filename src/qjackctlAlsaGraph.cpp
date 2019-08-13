@@ -48,20 +48,20 @@ void qjackctlAlsaGraph::connectPorts (
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	snd_seq_t *seq = pMainForm->alsaSeq();
-	if (seq == NULL)
+	if (seq == nullptr)
 		return;
 
-	if (port1 == NULL || port2 == NULL)
+	if (port1 == nullptr || port2 == nullptr)
 		return;
 
 	const qjackctlGraphNode *node1 = port1->portNode();
 	const qjackctlGraphNode *node2 = port2->portNode();
 
-	if (node1 == NULL || node2 == NULL)
+	if (node1 == nullptr || node2 == nullptr)
 		return;
 
 	QMutexLocker locker(&g_mutex);
@@ -167,9 +167,9 @@ bool qjackctlAlsaGraph::findClientPort (
 	qjackctlGraphItem::Mode node_mode = port_mode;
 
 	*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
-	*port = NULL;
+	*port = nullptr;
 
-	if (*node == NULL && client_id >= 128) {
+	if (*node == nullptr && client_id >= 128) {
 		node_mode = qjackctlGraphItem::Duplex;
 		*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
 	}
@@ -177,13 +177,13 @@ bool qjackctlAlsaGraph::findClientPort (
 	if (*node)
 		*port = (*node)->findPort(port_name, port_mode, port_type);
 
-	if (add_new && *node == NULL) {
+	if (add_new && *node == nullptr) {
 		*node = new qjackctlGraphNode(client_name, node_mode, node_type);
 		(*node)->setNodeIcon(QIcon(":/images/graphAlsa.png"));
 		qjackctlGraphSect::addItem(*node);
 	}
 
-	if (add_new && *port == NULL && *node) {
+	if (add_new && *port == nullptr && *node) {
 		*port = (*node)->addPort(port_name, port_mode, port_type);
 		(*port)->updatePortTypeColors(canvas());
 	}
@@ -220,11 +220,11 @@ void qjackctlAlsaGraph::updateItems (void)
 	QMutexLocker locker(&g_mutex);
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	snd_seq_t *seq = pMainForm->alsaSeq();
-	if (seq == NULL)
+	if (seq == nullptr)
 		return;
 
 #ifdef CONFIG_DEBUG
@@ -258,8 +258,8 @@ void qjackctlAlsaGraph::updateItems (void)
 				= (SND_SEQ_PORT_CAP_WRITE | SND_SEQ_PORT_CAP_SUBS_WRITE);
 			if ((port_caps1 & port_is_input) == port_is_input) {
 				port_mode1 = qjackctlGraphItem::Input;
-				qjackctlGraphNode *node1 = NULL;
-				qjackctlGraphPort *port1 = NULL;
+				qjackctlGraphNode *node1 = nullptr;
+				qjackctlGraphPort *port1 = nullptr;
 				if (findClientPort(client_info1, port_info1,
 						port_mode1, &node1, &port1, true)) {
 					node1->setMarked(true);
@@ -270,8 +270,8 @@ void qjackctlAlsaGraph::updateItems (void)
 				= (SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_SUBS_READ);
 			if ((port_caps1 & port_is_output) == port_is_output) {
 				port_mode1 = qjackctlGraphItem::Output;
-				qjackctlGraphNode *node1 = NULL;
-				qjackctlGraphPort *port1 = NULL;
+				qjackctlGraphNode *node1 = nullptr;
+				qjackctlGraphPort *port1 = nullptr;
 				if (findClientPort(client_info1, port_info1,
 						port_mode1, &node1, &port1, true)) {
 					node1->setMarked(true);
@@ -311,8 +311,8 @@ void qjackctlAlsaGraph::updateItems (void)
 			if (port_caps1 & (SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_SUBS_READ)) {
 				const qjackctlGraphItem::Mode port_mode1
 					= qjackctlGraphItem::Output;
-				qjackctlGraphNode *node1 = NULL;
-				qjackctlGraphPort *port1 = NULL;
+				qjackctlGraphNode *node1 = nullptr;
+				qjackctlGraphPort *port1 = nullptr;
 				if (!findClientPort(client_info1, port_info1,
 						port_mode1, &node1, &port1, false))
 					continue;
@@ -329,12 +329,12 @@ void qjackctlAlsaGraph::updateItems (void)
 							seq_addr.client, seq_addr.port, port_info2) >= 0) {
 						const qjackctlGraphItem::Mode port_mode2
 							= qjackctlGraphItem::Input;
-						qjackctlGraphNode *node2 = NULL;
-						qjackctlGraphPort *port2 = NULL;
+						qjackctlGraphNode *node2 = nullptr;
+						qjackctlGraphPort *port2 = nullptr;
 						if (findClientPort(client_info2, port_info2,
 								port_mode2, &node2, &port2, false)) {
 							qjackctlGraphConnect *connect = port1->findConnect(port2);
-							if (connect == NULL) {
+							if (connect == nullptr) {
 								connect = new qjackctlGraphConnect();
 								connect->setPort1(port1);
 								connect->setPort2(port2);
@@ -389,11 +389,11 @@ QList<qjackctlAliasList *> qjackctlAlsaGraph::item_aliases (
 {
 	QList<qjackctlAliasList *> alist;
 
-	qjackctlAliases *aliases = NULL;
+	qjackctlAliases *aliases = nullptr;
 	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
 	if (canvas)
 		aliases = canvas->aliases();
-	if (aliases == NULL)
+	if (aliases == nullptr)
 		return alist; // empty!
 
 	uint item_type = 0;

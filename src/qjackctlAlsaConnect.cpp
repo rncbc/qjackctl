@@ -1,7 +1,7 @@
 // qjackctlAlsaConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2018, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -114,7 +114,7 @@ qjackctlAlsaPort *qjackctlAlsaClient::findPort ( int iAlsaPort )
 			return pPort;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -146,7 +146,7 @@ qjackctlAlsaClient *qjackctlAlsaClientList::findClient ( int iAlsaClient )
 			return pClient;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -155,8 +155,8 @@ qjackctlAlsaPort *qjackctlAlsaClientList::findClientPort ( int iAlsaClient,
 	int iAlsaPort )
 {
 	qjackctlAlsaClient *pClient = findClient(iAlsaClient);
-	if (pClient == NULL)
-		return NULL;
+	if (pClient == nullptr)
+		return nullptr;
 
 	return pClient->findPort(iAlsaPort);
 }
@@ -166,11 +166,11 @@ qjackctlAlsaPort *qjackctlAlsaClientList::findClientPort ( int iAlsaClient,
 int qjackctlAlsaClientList::updateClientPorts (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return 0;
 
 	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
-	if (pAlsaSeq == NULL)
+	if (pAlsaSeq == nullptr)
 		return 0;
 
 	int iDirtyCount = 0;
@@ -292,7 +292,7 @@ void qjackctlAlsaConnect::deleteIconPixmaps (void)
 	for (int i = 0; i < QJACKCTL_ALSA_PIXMAPS; i++) {
 		if (m_apPixmaps[i])
 			delete m_apPixmaps[i];
-		m_apPixmaps[i] = NULL;
+		m_apPixmaps[i] = nullptr;
 	}
 }
 
@@ -304,11 +304,11 @@ bool qjackctlAlsaConnect::connectPorts (
 #ifdef CONFIG_ALSA_SEQ
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return false;
 
 	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
-	if (pAlsaSeq == NULL)
+	if (pAlsaSeq == nullptr)
 		return false;
 
 	qjackctlAlsaPort *pOAlsa = static_cast<qjackctlAlsaPort *> (pOPort);
@@ -344,11 +344,11 @@ bool qjackctlAlsaConnect::disconnectPorts (
 #ifdef CONFIG_ALSA_SEQ
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return false;
 
 	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
-	if (pAlsaSeq == NULL)
+	if (pAlsaSeq == nullptr)
 		return false;
 
 	qjackctlAlsaPort *pOAlsa = static_cast<qjackctlAlsaPort *> (pOPort);
@@ -383,11 +383,11 @@ void qjackctlAlsaConnect::updateConnections (void)
 #ifdef CONFIG_ALSA_SEQ
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	snd_seq_t *pAlsaSeq = pMainForm->alsaSeq();
-	if (pAlsaSeq == NULL)
+	if (pAlsaSeq == nullptr)
 		return;
 
 	snd_seq_query_subscribe_t *pAlsaSubs;

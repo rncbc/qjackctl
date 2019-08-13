@@ -59,7 +59,7 @@
 // Constructor.
 qjackctlGraphForm::qjackctlGraphForm (
 	QWidget *parent, Qt::WindowFlags wflags )
-	: QMainWindow(parent, wflags), m_config(NULL), m_jack(NULL), m_alsa(NULL)
+	: QMainWindow(parent, wflags), m_config(nullptr), m_jack(nullptr), m_alsa(nullptr)
 {
 	// Setup UI struct...
 	m_ui.setupUi(this);
@@ -445,7 +445,7 @@ void qjackctlGraphForm::viewZoomRange ( bool on )
 void qjackctlGraphForm::viewColorsAction (void)
 {
 	QAction *action = qobject_cast<QAction *> (sender());
-	if (action == NULL)
+	if (action == nullptr)
 		return;
 
 	const uint port_type = action->data().toUInt();
@@ -481,7 +481,7 @@ void qjackctlGraphForm::viewColorsReset (void)
 void qjackctlGraphForm::viewSortTypeAction (void)
 {
 	QAction *action = qobject_cast<QAction *> (sender());
-	if (action == NULL)
+	if (action == nullptr)
 		return;
 
 	const qjackctlGraphPort::SortType sort_type
@@ -495,7 +495,7 @@ void qjackctlGraphForm::viewSortTypeAction (void)
 void qjackctlGraphForm::viewSortOrderAction (void)
 {
 	QAction *action = qobject_cast<QAction *> (sender());
-	if (action == NULL)
+	if (action == nullptr)
 		return;
 
 	const qjackctlGraphPort::SortOrder sort_order
@@ -873,7 +873,7 @@ qjackctlGraphSect *qjackctlGraphForm::item_sect ( qjackctlGraphItem *item ) cons
 	#endif
 	}
 
-	return NULL; // No deal!
+	return nullptr; // No deal!
 }
 
 
@@ -988,7 +988,7 @@ int qjackctlGraphConfig::sortOrder (void) const
 // Graph main-widget state methods.
 bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 {
-	if (m_settings == NULL || widget == NULL)
+	if (m_settings == nullptr || widget == nullptr)
 		return false;
 
 	m_settings->beginGroup(ViewGroup);
@@ -1015,7 +1015,7 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 
 bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 {
-	if (m_settings == NULL || widget == NULL)
+	if (m_settings == nullptr || widget == nullptr)
 		return false;
 
 	m_settings->beginGroup(ViewGroup);

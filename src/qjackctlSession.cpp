@@ -1,7 +1,7 @@
 // qjackctlSession.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -80,18 +80,18 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 	clear();
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return false;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return false;
 
 	const QString sSessionPath = sSessionDir + '/';
 
 	// First pass: get all client/port connections, no matter what...
 	const char **ports
-		= ::jack_get_ports(pJackClient, NULL, NULL, 0);
+		= ::jack_get_ports(pJackClient, nullptr, nullptr, 0);
 	if (ports) {
 		for (int i = 0; ports[i]; ++i) {
 			const char *pszSrcClientPort = ports[i];
@@ -154,8 +154,8 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 		const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
 		const char *pszSessionPath = aSessionPath.constData();
 		jack_session_command_t *commands
-			= ::jack_session_notify(pJackClient, NULL, etype, pszSessionPath);
-		if (commands == NULL)
+			= ::jack_session_notify(pJackClient, nullptr, etype, pszSessionPath);
+		if (commands == nullptr)
 			return false;
 	
 		// Second pass...
@@ -193,7 +193,7 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 			if (sClientName == "system")
 				continue;
 			InfraClientItem *pInfraClientItem
-				= m_infra_clients.value(sClientName, NULL);
+				= m_infra_clients.value(sClientName, nullptr);
 			if (pInfraClientItem) {
 				pClientItem->client_command = pInfraClientItem->client_command;
 			} else {
@@ -228,7 +228,7 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 		if (sCommand.isEmpty()) {
 			// Maybe a registered infra-client command...
 			InfraClientItem *pInfraClientItem
-				= m_infra_clients.value(sClientName, NULL);
+				= m_infra_clients.value(sClientName, nullptr);
 			if (pInfraClientItem && !isJackClient(sClientName))
 				sCommand = pInfraClientItem->client_command;
 		}
@@ -259,11 +259,11 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 bool qjackctlSession::update (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return false;
 
 	jack_client_t *pJackClient = pMainForm->jackClient();
-	if (pJackClient == NULL)
+	if (pJackClient == nullptr)
 		return false;
 
 	// We'll count how many connection updates...
@@ -576,11 +576,11 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
 	if (::jack_get_uuid_for_client_name) {
 
 		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-		if (pMainForm == NULL)
+		if (pMainForm == nullptr)
 			return false;
 
 		jack_client_t *pJackClient = pMainForm->jackClient();
-		if (pJackClient == NULL)
+		if (pJackClient == nullptr)
 			return false;
 
 		const char *client_uuid = ::jack_get_uuid_for_client_name(
@@ -595,7 +595,7 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
 #endif
 
 	jack_client_t *pJackClient = ::jack_client_open(aClientName.constData(),
-		jack_options_t(JackNoStartServer | JackUseExactName), NULL);
+		jack_options_t(JackNoStartServer | JackUseExactName), nullptr);
 	if (pJackClient) {
 		::jack_client_close(pJackClient);
 		return true;

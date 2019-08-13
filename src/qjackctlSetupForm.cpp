@@ -72,7 +72,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 	m_ui.setupUi(this);
 
 	// No settings descriptor initially (the caller will set it).
-	m_pSetup = NULL;
+	m_pSetup = nullptr;
 
 	// Setup time-display radio-button group.
 	m_pTimeDisplayButtonGroup = new QButtonGroup(this);
@@ -105,11 +105,11 @@ qjackctlSetupForm::qjackctlSetupForm (
 	m_ui.MessagesLimitLinesComboBox->setValidator(
 		new QIntValidator(m_ui.MessagesLimitLinesComboBox));
 
-	m_ui.PresetComboBox->setCompleter(NULL);
+	m_ui.PresetComboBox->setCompleter(nullptr);
 
-	m_ui.ServerNameComboBox->setCompleter(NULL);
-	m_ui.ServerPrefixComboBox->setCompleter(NULL);
-	m_ui.ServerSuffixComboBox->setCompleter(NULL);
+	m_ui.ServerNameComboBox->setCompleter(nullptr);
+	m_ui.ServerPrefixComboBox->setCompleter(nullptr);
+	m_ui.ServerSuffixComboBox->setCompleter(nullptr);
 
 	// UI connections...
 
@@ -1495,7 +1495,7 @@ void qjackctlSetupForm::optionsChanged (void)
 void qjackctlSetupForm::accept (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {

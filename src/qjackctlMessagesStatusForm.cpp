@@ -1,7 +1,7 @@
 // qjackctlMessagesStatusForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2013, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ qjackctlMessagesStatusForm::qjackctlMessagesStatusForm (
 	m_iMessagesLines = 0;
 	setMessagesLimit(QJACKCTL_MESSAGES_MAXLINES);
 
-	m_pMessagesLog = NULL;
+	m_pMessagesLog = nullptr;
 
 	// Create the list view items 'a priori'...
 	const QString s = " ";
@@ -220,7 +220,7 @@ void qjackctlMessagesStatusForm::setMessagesLimit ( int iMessagesLimit )
 // Messages logging stuff.
 bool qjackctlMessagesStatusForm::isLogging (void) const
 {
-	return (m_pMessagesLog != NULL);
+	return (m_pMessagesLog != nullptr);
 }
 
 void qjackctlMessagesStatusForm::setLogging ( bool bEnabled, const QString& sFilename )
@@ -230,7 +230,7 @@ void qjackctlMessagesStatusForm::setLogging ( bool bEnabled, const QString& sFil
 			.arg(QDateTime::currentDateTime().toString()));
 		m_pMessagesLog->close();
 		delete m_pMessagesLog;
-		m_pMessagesLog = NULL;
+		m_pMessagesLog = nullptr;
 	}
 
 	if (bEnabled) {
@@ -240,7 +240,7 @@ void qjackctlMessagesStatusForm::setLogging ( bool bEnabled, const QString& sFil
 				.arg(QDateTime::currentDateTime().toString()));
 		} else {
 			delete m_pMessagesLog;
-			m_pMessagesLog = NULL;
+			m_pMessagesLog = nullptr;
 		}
 	}
 }

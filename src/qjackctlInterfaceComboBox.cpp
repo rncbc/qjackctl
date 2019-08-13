@@ -1,9 +1,9 @@
 // qjackctlInterfaceComboBox.cpp
 //
 /****************************************************************************
-   Copyright (C) 2013, Arnout Engelen. All rights reserved.
-   Copyright (C) 2003-2015, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
    Copyright (C) 2015, Kjetil Matheussen. (portaudio_probe_thread)
+   Copyright (C) 2013, Arnout Engelen. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -174,7 +174,7 @@ public:
 			if (i == 10) // wait 1/2 second before showing message box
 				mbox.show();
 
-			if (mbox.clickedButton() != NULL) {
+			if (mbox.clickedButton() != nullptr) {
 				bTimedOut = false;
 				break;
 			}

@@ -45,8 +45,8 @@ QString qjackctlJackGraph_prettyName (
 {
 	QString pretty_name = name;
 
-	char *value = NULL;
-	char *type  = NULL;
+	char *value = nullptr;
+	char *type  = nullptr;
 
 	if (::jack_get_property(uuid,
 			JACK_METADATA_PRETTY_NAME, &value, &type) == 0) {
@@ -68,7 +68,7 @@ void qjackctlJackGraph_setPrettyName (
 	const QByteArray value = pretty_name.toUtf8();
 
 	::jack_set_property(client, uuid,
-		JACK_METADATA_PRETTY_NAME, value.constData(), NULL);
+		JACK_METADATA_PRETTY_NAME, value.constData(), nullptr);
 }
 
 static
@@ -88,8 +88,8 @@ int qjackctlJackGraph_portIndex ( jack_uuid_t uuid, int index )
 {
 	int port_index = index;
 
-	char *value = NULL;
-	char *type  = NULL;
+	char *value = nullptr;
+	char *type  = nullptr;
 
 	if (::jack_get_property(uuid,
 			JACKEY_ORDER, &value, &type) == 0) {
@@ -120,20 +120,20 @@ void qjackctlJackGraph::connectPorts (
 	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *client = pMainForm->jackClient();
-	if (client == NULL)
+	if (client == nullptr)
 		return;
 
-	if (port1 == NULL || port2 == NULL)
+	if (port1 == nullptr || port2 == nullptr)
 		return;
 
 	const qjackctlGraphNode *node1 = port1->portNode();
 	const qjackctlGraphNode *node2 = port2->portNode();
 
-	if (node1 == NULL || node2 == NULL)
+	if (node1 == nullptr || node2 == nullptr)
 		return;
 
 	QMutexLocker locker(&g_mutex);
@@ -210,7 +210,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	qjackctlGraphNode **node, qjackctlGraphPort **port, bool add_new )
 {
 	jack_port_t *jack_port = ::jack_port_by_name(client, client_port);
-	if (jack_port == NULL)
+	if (jack_port == nullptr)
 		return false;
 
 	const QString& client_port_name
@@ -234,9 +234,9 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	qjackctlGraphItem::Mode node_mode = port_mode;
 
 	*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
-	*port = NULL;
+	*port = nullptr;
 
-	if (*node == NULL) {
+	if (*node == nullptr) {
 		const unsigned long port_flags = ::jack_port_flags(jack_port);
 		const unsigned long port_flags_mask
 			= (JackPortIsPhysical | JackPortIsTerminal);
@@ -249,13 +249,13 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	if (*node)
 		*port = (*node)->findPort(port_name, port_mode, port_type);
 
-	if (add_new && *node == NULL) {
+	if (add_new && *node == nullptr) {
 		*node = new qjackctlGraphNode(client_name, node_mode, node_type);
 		(*node)->setNodeIcon(QIcon(":/images/graphJack.png"));
 		qjackctlGraphSect::addItem(*node);
 	}
 
-	if (add_new && *port == NULL && *node) {
+	if (add_new && *port == nullptr && *node) {
 		*port = (*node)->addPort(port_name, port_mode, port_type);
 		(*port)->updatePortTypeColors(canvas());
 	}
@@ -320,11 +320,11 @@ void qjackctlJackGraph::updateItems (void)
 	QMutexLocker locker(&g_mutex);
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *client = pMainForm->jackClient();
-	if (client == NULL)
+	if (client == nullptr)
 		return;
 
 #ifdef CONFIG_DEBUG
@@ -334,14 +334,14 @@ void qjackctlJackGraph::updateItems (void)
 	// 1. Client/ports inventory...
 	//
 	const char **client_ports1
-		= ::jack_get_ports(client, NULL, NULL, 0);
-	if (client_ports1 == NULL)
+		= ::jack_get_ports(client, nullptr, nullptr, 0);
+	if (client_ports1 == nullptr)
 		return;
 
 	for (int i = 0; client_ports1[i]; ++i) {
 		const char *client_port1 = client_ports1[i];
 		jack_port_t *jack_port1 = ::jack_port_by_name(client, client_port1);
-		if (jack_port1 == NULL)
+		if (jack_port1 == nullptr)
 			continue;
 		const unsigned long port_flags1
 			= ::jack_port_flags(jack_port1);
@@ -351,8 +351,8 @@ void qjackctlJackGraph::updateItems (void)
 		else
 		if (port_flags1 & JackPortIsOutput)
 			port_mode1 = qjackctlGraphItem::Output;
-		qjackctlGraphNode *node1 = NULL;
-		qjackctlGraphPort *port1 = NULL;
+		qjackctlGraphNode *node1 = nullptr;
+		qjackctlGraphPort *port1 = nullptr;
 		if (findClientPort(client, client_port1,
 				port_mode1, &node1, &port1, true)) {
 			node1->setMarked(true);
@@ -365,7 +365,7 @@ void qjackctlJackGraph::updateItems (void)
 	for (int i = 0; client_ports1[i]; ++i) {
 		const char *client_port1 = client_ports1[i];
 		jack_port_t *jack_port1 = ::jack_port_by_name(client, client_port1);
-		if (jack_port1 == NULL)
+		if (jack_port1 == nullptr)
 			continue;
 		const unsigned long port_flags1
 			= ::jack_port_flags(jack_port1);
@@ -374,22 +374,22 @@ void qjackctlJackGraph::updateItems (void)
 				= qjackctlGraphItem::Output;
 			const char **client_ports2
 				= ::jack_port_get_all_connections(client, jack_port1);
-			if (client_ports2 == NULL)
+			if (client_ports2 == nullptr)
 				continue;
-			qjackctlGraphNode *node1 = NULL;
-			qjackctlGraphPort *port1 = NULL;
+			qjackctlGraphNode *node1 = nullptr;
+			qjackctlGraphPort *port1 = nullptr;
 			if (findClientPort(client, client_port1,
 					port_mode1, &node1, &port1, false)) {
 				for (int j = 0; client_ports2[j]; ++j) {
 					const char *client_port2 = client_ports2[j];
 					const qjackctlGraphItem::Mode port_mode2
 						= qjackctlGraphItem::Input;
-					qjackctlGraphNode *node2 = NULL;
-					qjackctlGraphPort *port2 = NULL;
+					qjackctlGraphNode *node2 = nullptr;
+					qjackctlGraphPort *port2 = nullptr;
 					if (findClientPort(client, client_port2,
 							port_mode2, &node2, &port2, false)) {
 						qjackctlGraphConnect *connect = port1->findConnect(port2);
-						if (connect == NULL) {
+						if (connect == nullptr) {
 							connect = new qjackctlGraphConnect();
 							connect->setPort1(port1);
 							connect->setPort2(port2);
@@ -447,11 +447,11 @@ QList<qjackctlAliasList *> qjackctlJackGraph::item_aliases (
 {
 	QList<qjackctlAliasList *> alist;
 
-	qjackctlAliases *aliases = NULL;
+	qjackctlAliases *aliases = nullptr;
 	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
 	if (canvas)
 		aliases = canvas->aliases();
-	if (aliases == NULL)
+	if (aliases == nullptr)
 		return alist; // empty!
 
 	uint item_type = 0;
@@ -501,15 +501,15 @@ void qjackctlJackGraph::renameItem (
 	qjackctlGraphItem *item, const QString& name )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm == NULL)
+	if (pMainForm == nullptr)
 		return;
 
 	jack_client_t *client = pMainForm->jackClient();
-	if (client == NULL)
+	if (client == nullptr)
 		return;
 
 #ifdef CONFIG_JACK_METADATA
-	qjackctlGraphNode *node = NULL;
+	qjackctlGraphNode *node = nullptr;
 	if (item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 		if (node) {

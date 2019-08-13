@@ -63,7 +63,7 @@ qjackctlGraphConnectCommand::qjackctlGraphConnectCommand ( qjackctlGraphCanvas *
 bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 {
 	qjackctlGraphCanvas *canvas = qjackctlGraphCommand::canvas();
-	if (canvas == NULL)
+	if (canvas == nullptr)
 		return false;
 
 	qjackctlGraphNode *node1
@@ -71,12 +71,12 @@ bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 			m_item.addr1.node_name,
 			qjackctlGraphItem::Duplex,
 			m_item.addr1.node_type);
-	if (node1 == NULL)
+	if (node1 == nullptr)
 		node1 = canvas->findNode(
 			m_item.addr1.node_name,
 			qjackctlGraphItem::Output,
 			m_item.addr1.node_type);
-	if (node1 == NULL)
+	if (node1 == nullptr)
 		return false;
 
 	qjackctlGraphPort *port1
@@ -84,7 +84,7 @@ bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 			m_item.addr1.port_name,
 			qjackctlGraphItem::Output,
 			m_item.addr1.port_type);
-	if (port1 == NULL)
+	if (port1 == nullptr)
 		return false;
 
 	qjackctlGraphNode *node2
@@ -92,12 +92,12 @@ bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 			m_item.addr2.node_name,
 			qjackctlGraphItem::Duplex,
 			m_item.addr2.node_type);
-	if (node2 == NULL)
+	if (node2 == nullptr)
 		node2 = canvas->findNode(
 			m_item.addr2.node_name,
 			qjackctlGraphItem::Input,
 			m_item.addr2.node_type);
-	if (node2 == NULL)
+	if (node2 == nullptr)
 		return false;
 
 	qjackctlGraphPort *port2
@@ -105,7 +105,7 @@ bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 			m_item.addr2.port_name,
 			qjackctlGraphItem::Input,
 			m_item.addr2.port_type);
-	if (port2 == NULL)
+	if (port2 == nullptr)
 		return false;
 
 	const bool is_connect
@@ -152,7 +152,7 @@ qjackctlGraphMoveCommand::~qjackctlGraphMoveCommand (void)
 bool qjackctlGraphMoveCommand::execute ( bool /* is_undo */ )
 {
 	qjackctlGraphCanvas *canvas = qjackctlGraphCommand::canvas();
-	if (canvas == NULL)
+	if (canvas == nullptr)
 		return false;
 
 	if (++m_nexec > 1) {
@@ -185,8 +185,8 @@ qjackctlGraphRenameCommand::qjackctlGraphRenameCommand ( qjackctlGraphCanvas *ca
 
 	m_item.item_type = item->type();
 
-	qjackctlGraphNode *node = NULL;
-	qjackctlGraphPort *port = NULL;
+	qjackctlGraphNode *node = nullptr;
+	qjackctlGraphPort *port = nullptr;
 
 	if (m_item.item_type == qjackctlGraphNode::Type)
 		node = static_cast<qjackctlGraphNode *> (item);
@@ -215,11 +215,11 @@ qjackctlGraphRenameCommand::qjackctlGraphRenameCommand ( qjackctlGraphCanvas *ca
 bool qjackctlGraphRenameCommand::execute ( bool /*is_undo*/ )
 {
 	qjackctlGraphCanvas *canvas = qjackctlGraphCommand::canvas();
-	if (canvas == NULL)
+	if (canvas == nullptr)
 		return false;
 
 	QString name = m_name;
-	qjackctlGraphItem *item = NULL;
+	qjackctlGraphItem *item = nullptr;
 
 	qjackctlGraphNode *node = canvas->findNode(
 		m_item.node_name, m_item.node_mode, m_item.node_type);
@@ -238,7 +238,7 @@ bool qjackctlGraphRenameCommand::execute ( bool /*is_undo*/ )
 		}
 	}
 
-	if (item == NULL)
+	if (item == nullptr)
 		return false;
 
 	canvas->emitRenamed(item, name);

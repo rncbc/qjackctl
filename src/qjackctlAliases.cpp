@@ -190,7 +190,7 @@ qjackctlAliasItem *qjackctlAliasList::findClientName (
 			return pClient;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -199,7 +199,7 @@ void qjackctlAliasList::setClientAlias (
 	const QString& sClientName, const QString& sClientAlias )
 {
 	qjackctlAliasItem *pClient = findClientName(sClientName);
-	if (pClient == NULL) {
+	if (pClient == nullptr) {
 		pClient = new qjackctlAliasItem(sClientName);
 		append(pClient);
 	}
@@ -210,7 +210,7 @@ void qjackctlAliasList::setClientAlias (
 QString qjackctlAliasList::clientAlias ( const QString& sClientName )
 {
 	qjackctlAliasItem *pClient = findClientName(sClientName);
-	if (pClient == NULL)
+	if (pClient == nullptr)
 		return sClientName;
 
 	return pClient->clientAlias();
@@ -222,7 +222,7 @@ void qjackctlAliasList::setPortAlias ( const QString& sClientName,
 	const QString& sPortName, const QString& sPortAlias )
 {
 	qjackctlAliasItem *pClient = findClientName(sClientName);
-	if (pClient == NULL) {
+	if (pClient == nullptr) {
 		pClient = new qjackctlAliasItem(sClientName);
 		append(pClient);
 	}
@@ -234,7 +234,7 @@ QString qjackctlAliasList::portAlias (
 	const QString& sClientName, const QString& sPortName )
 {
 	qjackctlAliasItem *pClient = findClientName(sClientName);
-	if (pClient == NULL)
+	if (pClient == nullptr)
 		return sPortName;
 
 	return pClient->portAlias(sPortName);

@@ -47,7 +47,7 @@ qjackctlPatchbayForm::qjackctlPatchbayForm (
 	// Setup UI struct...
 	m_ui.setupUi(this);
 
-	m_pSetup = NULL;
+	m_pSetup = nullptr;
 
 	// Create the patchbay view object.
 	m_pPatchbay = new qjackctlPatchbay(m_ui.PatchbayView);
@@ -290,7 +290,7 @@ void qjackctlPatchbayForm::stabilizeForm ( void )
 	}
 
 	// Take care that IT might be destroyed already...
-	if (m_ui.PatchbayView->binding() == NULL)
+	if (m_ui.PatchbayView->binding() == nullptr)
 		return;
 
 	bool bExpandAll = false;
