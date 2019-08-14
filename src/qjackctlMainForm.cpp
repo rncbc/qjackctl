@@ -848,6 +848,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(quitMainForm()));
 		dbus.connect(s, s, sDBusName, "preset",
 			this, SLOT(activatePreset(const QString&)));
+		dbus.connect(s, s, sDBusName, "active-patchbay",
+			this, SLOT(activatePatchbay(const QString&)));
 		// Session related slots...
 		if (m_pSessionForm) {
 			dbus.connect(s, s, sDBusName, "load",
@@ -2289,7 +2291,7 @@ void qjackctlMainForm::updateActivePatchbay (void)
 			if (m_pAlsaSeq)
 				m_iAlsaDirty++;
 		}
-	}   // We're sure there's no active patchbay...
+	}	// We're sure there's no active patchbay...
 	else appendMessages(tr("Patchbay deactivated."));
 
 	// Should refresh anyway.
@@ -4098,6 +4100,20 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 		m_pSetupForm->updateCurrentPreset();
 
 	showDirtySettingsWarning();
+}
+
+
+// Select the current active patchbay profile (by path).
+void qjackctlMainForm::activatePatchbay ( const QString& sPatchbayPath )
+{
+	if (QFileInfo(sPatchbayPath).exists() && !isActivePatchbay(sPatchbayPath)) {
+		setActivePatchbay(sPatchbayPath);
+		if (m_pPatchbayForm) {
+			m_pPatchbayForm->loadPatchbayFile(sPatchbayPath);
+			m_pPatchbayForm->updateRecentPatchbays();
+			m_pPatchbayForm->stabilizeForm();
+		}
+	}
 }
 
 

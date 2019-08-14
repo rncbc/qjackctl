@@ -145,6 +145,9 @@ public slots:
 
 	void commitData(QSessionManager& sm);
 
+	void activatePreset(const QString&);
+	void activatePatchbay(const QString&);
+
 protected slots:
 
 	void readStdout();
@@ -183,7 +186,6 @@ protected slots:
 	void transportForward();
 
 	void activatePresetsMenu(QAction *);
-	void activatePreset(const QString&);
 	void activatePreset(int);
 
 	void quitMainForm();

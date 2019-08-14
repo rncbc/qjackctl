@@ -6,6 +6,11 @@ ChangeLog
 
 GIT HEAD
 
+- Command line arguments (--start, --preset=[label] and
+  --active-patchbay=[path]) are passed and take effect
+  on the current singleton/unique application instance,
+  when enabled and already running. (EXPERIMENTAL)
+
 - System-tray icon context menu has been refactored to
   be exactly the same as the main-window context menu
   that is re-instantiated on demand. (EXPERIMENTAL)

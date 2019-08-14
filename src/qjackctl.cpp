@@ -369,7 +369,7 @@ void qjackctlApplication::readyReadSlot (void)
 	if (pSocket) {
 		const qint64 nread = pSocket->bytesAvailable();
 		if (nread > 0) {
-			QByteArray data = pSocket->read(nread);
+			const QByteArray data = pSocket->read(nread);
 			// Just make it always shows up fine...
 			m_pWidget->hide();
 			m_pWidget->show();
@@ -378,8 +378,38 @@ void qjackctlApplication::readyReadSlot (void)
 			// FIXME: Do our best speciality, although it should be
 			// done iif configuration says so, we'll do it anyway!
 			qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-			if (pMainForm)
-				pMainForm->startJack();
+			if (pMainForm) {
+				// Parse the pass-through command line arguments...
+				const QStringList& args
+					= QString::fromUtf8(data).split(' ');
+				const int argc = args.count();
+				for (int i = 1; i < argc; ++i) {
+					QString sArg = args.at(i);
+					QString sVal;
+					const int iEqual = sArg.indexOf('=');
+					if (iEqual >= 0) {
+						sVal = sArg.right(sArg.length() - iEqual - 1);
+						sArg = sArg.left(iEqual);
+					}
+					else if (i < argc - 1)
+						sVal = args.at(i + 1);
+					if (sArg == "-s" || sArg == "--start") {
+						pMainForm->startJack();
+					}
+					else if (sArg == "-p" || sArg == "--preset") {
+						if (!sVal.isEmpty())
+							pMainForm->activatePreset(sVal);
+						if (iEqual < 0)
+							++i;
+					}
+					else if (sArg == "-a" || sArg == "--active-patchbay") {
+						if (!sVal.isEmpty())
+							pMainForm->activatePatchbay(sVal);
+						if (iEqual < 0)
+							++i;
+					}
+				}
+			}
 		}
 	}
 }

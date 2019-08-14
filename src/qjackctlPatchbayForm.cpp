@@ -577,7 +577,7 @@ void qjackctlPatchbayForm::setRecentPatchbays ( const QStringList& patchbays )
 // Update patchbay MRU variables and widgets.
 void qjackctlPatchbayForm::updateRecentPatchbays (void)
 {
-	// TRye not to be reeentrant.
+	// Try not to be reeentrant.
 	if (m_iUpdate > 0)
 		return;
 

@@ -521,21 +521,21 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 {
 	QTextStream out(stderr);
 	const QString sEol = "\n\n";
+	const int argc = args.count();
 	int iCmdArgs = 0;
-	int argc = args.count();
 
-	for (int i = 1; i < argc; i++) {
+	for (int i = 1; i < argc; ++i) {
 
 		if (iCmdArgs > 0) {
 			sCmdLine += ' ';
 			sCmdLine += args.at(i);
-			iCmdArgs++;
+			++iCmdArgs;
 			continue;
 		}
 
 		QString sArg = args.at(i);
 		QString sVal;
-		int iEqual = sArg.indexOf('=');
+		const int iEqual = sArg.indexOf('=');
 		if (iEqual >= 0) {
 			sVal = sArg.right(sArg.length() - iEqual - 1);
 			sArg = sArg.left(iEqual);
@@ -553,7 +553,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 			}
 			sDefPreset = sVal;
 			if (iEqual < 0)
-				i++;
+				++i;
 		}
 		else if (sArg == "-a" || sArg == "--active-patchbay") {
 			if (sVal.isNull()) {
@@ -563,7 +563,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 			bActivePatchbay = true;
 			sActivePatchbayPath = sVal;
 			if (iEqual < 0)
-				i++;
+				++i;
 		}
 		else if (sArg == "-n" || sArg == "--server-name") {
 			if (sVal.isNull()) {
@@ -572,7 +572,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 			}
 			sServerName = sVal;
 			if (iEqual < 0)
-				i++;
+				++i;
 		}
 		else if (sArg == "-h" || sArg == "--help") {
 			print_usage(args.at(0));
@@ -593,7 +593,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		else if (sArg != "-T" && sArg != "-ndefault") {
 			// Here starts the optional command line...
 			sCmdLine += sArg;
-			iCmdArgs++;
+			++iCmdArgs;
 		}
 	}
 
