@@ -74,6 +74,11 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 	: QApplication(argc, argv),
 		m_pQtTranslator(nullptr), m_pMyTranslator(nullptr), m_pWidget(nullptr)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+	QApplication::setApplicationName(QJACKCTL_TITLE);
+	QApplication::setApplicationDisplayName(
+		QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE));
+#endif
 	// Load translation support.
 	QLocale loc;
 	if (loc.language() != QLocale::C) {
@@ -492,10 +497,11 @@ int main ( int argc, char **argv )
 	::signal(SIGBUS,  stacktrace);
 #endif
 #endif
-	qjackctlApplication app(argc, argv);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-	app.setAttribute(Qt::AA_EnableHighDpiScaling);
+	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
+	qjackctlApplication app(argc, argv);
+
 	// Construct default settings; override with command line arguments.
 	qjackctlSetup settings;
 	if (!settings.parse_args(app.arguments())) {

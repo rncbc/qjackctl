@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Fix HiDPI display screen effective support (Qt >= 5.6).
+
 - Command line arguments (--start, --preset=[label] and
   --active-patchbay=[path]) are passed and take effect
   on the current singleton/unique application instance,
