@@ -34,7 +34,7 @@
    <font/>
   </property>
   <property name="windowTitle">
-   <string>About QjackCtl</string>
+   <string>About</string>
   </property>
   <property name="windowIcon">
    <iconset resource="qjackctl.qrc">:/images/about1.png</iconset>

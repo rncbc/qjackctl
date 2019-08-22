@@ -31,7 +31,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Session - JACK Audio Connection Kit</string>
+   <string>Session</string>
   </property>
   <property name="windowIcon">
    <iconset resource="qjackctl.qrc">:/images/session1.png</iconset>

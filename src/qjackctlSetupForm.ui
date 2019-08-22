@@ -31,7 +31,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Setup - JACK Audio Connection Kit</string>
+   <string>Setup</string>
   </property>
   <property name="windowIcon">
    <iconset resource="qjackctl.qrc">:/images/setup1.png</iconset>

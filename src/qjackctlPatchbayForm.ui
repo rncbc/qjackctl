@@ -41,7 +41,7 @@
    <font/>
   </property>
   <property name="windowTitle" >
-   <string>Patchbay - JACK Audio Connection Kit</string>
+   <string>Patchbay</string>
   </property>
   <property name="windowIcon" >
    <iconset resource="qjackctl.qrc" >:/images/patchbay1.png</iconset>

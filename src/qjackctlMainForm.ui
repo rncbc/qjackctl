@@ -37,9 +37,6 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="windowTitle" >
-   <string>QjackCtl</string>
-  </property>
   <property name="windowIcon" >
    <iconset resource="qjackctl.qrc" >:/images/qjackctl.png</iconset>
   </property>

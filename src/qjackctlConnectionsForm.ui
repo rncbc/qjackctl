@@ -41,7 +41,7 @@
    <font/>
   </property>
   <property name="windowTitle" >
-   <string>Connections - JACK Audio Connection Kit</string>
+   <string>Connections</string>
   </property>
   <property name="windowIcon" >
    <iconset resource="qjackctl.qrc" >:/images/connections1.png</iconset>

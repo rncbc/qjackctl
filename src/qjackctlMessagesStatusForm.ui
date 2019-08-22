@@ -36,7 +36,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Messages / Status - JACK Audio Connection Kit</string>
+   <string>Messages / Status</string>
   </property>
   <property name="windowIcon">
    <iconset resource="qjackctl.qrc">:/images/messagesstatus1.png</iconset>
