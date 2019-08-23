@@ -76,8 +76,8 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 	QApplication::setApplicationName(QJACKCTL_TITLE);
-	QApplication::setApplicationDisplayName(
-		QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE));
+	QApplication::setApplicationDisplayName(QJACKCTL_TITLE);
+	//	QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE));
 #endif
 	// Load translation support.
 	QLocale loc;
