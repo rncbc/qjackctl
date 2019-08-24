@@ -108,7 +108,7 @@ endif ()
 find_package (PkgConfig REQUIRED)
 
 # Check for JACK libraries.
-pkg_check_modules (JACK jack REQUIRED)
+pkg_check_modules (JACK REQUIRED jack>=0.100.0)
 set (CONFIG_JACK ${JACK_FOUND})
 if (CONFIG_JACK)
   include_directories (${JACK_INCLUDE_DIRS})
@@ -154,27 +154,27 @@ endif ()
 
 # Check for ALSA libraries.
 if (CONFIG_ALSA_SEQ)
-  pkg_check_modules (ALSA alsa REQUIRED)
+  pkg_check_modules (ALSA alsa)
   set (CONFIG_ALSA_SEQ ${ALSA_FOUND})
   if (CONFIG_ALSA_SEQ)
     include_directories (${JACK_INCLUDE_DIRS})
     link_directories (${JACK_LIBRARY_DIRS})
     set (CMAKE_REQUIRED_LIBRARIES "${ALSA_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
   else ()
-    message (FATAL_ERROR "*** ALSA library not found.")
+    message (WARNING "*** ALSA library not found.")
   endif ()
 endif ()
 
 # Check for PORTAUDIO libraries.
 if (CONFIG_PORTAUDIO)
-  pkg_check_modules (PORTAUDIO portaudio-2.0 REQUIRED)
+  pkg_check_modules (PORTAUDIO portaudio-2.0)
   set (CONFIG_PORTAUDIO ${PORTAUDIO_FOUND})
   if (CONFIG_PORTAUDIO)
     include_directories (${PORTAUDIO_INCLUDE_DIRS})
     link_directories (${PORTAUDIO_LIBRARY_DIRS})
     set (CMAKE_REQUIRED_LIBRARIES "${PORTAUDIO_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
   else ()
-    message (FATAL_ERROR "*** PORTAUDIO library not found.")
+    message (WARNING "*** PORTAUDIO library not found.")
   endif ()
 endif ()
 
@@ -182,6 +182,7 @@ endif ()
 if (APPLE AND CONFIG_COREAUDIO)
   check_include_file (CoreAudio/CoreAudio.h CONFIG_COREAUDIO)
 endif ()
+
 
 add_subdirectory (src)
 
