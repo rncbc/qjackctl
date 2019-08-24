@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.6)
 
 set (VERSION "0.5.10")
 
-execute_process(
+execute_process (
   COMMAND git describe --tags --dirty --abbrev=6
   OUTPUT_VARIABLE GIT_DESCRIBE_OUTPUT
   RESULT_VARIABLE GIT_DESCRIBE_RESULT
@@ -15,7 +15,7 @@ if (GIT_DESCRIBE_RESULT EQUAL 0)
   string (REGEX REPLACE "^[_vV]+"  "" VERSION "${VERSION}")
   string (REGEX REPLACE "-g"   "git." VERSION "${VERSION}")
   string (REGEX REPLACE "[_|-]+"  "." VERSION "${VERSION}")
-  execute_process(
+  execute_process (
     COMMAND git rev-parse --abbrev-ref HEAD
     OUTPUT_VARIABLE GIT_REVPARSE_OUTPUT
     RESULT_VARIABLE GIT_REVPARSE_RESULT
@@ -199,9 +199,8 @@ macro (SHOW_OPTION text value)
   endif ()
 endmacro ()
 
-message ("\n  ${PACKAGE_NAME} ${PACKAGE_VERSION}")
-message ("\n  Build target . . . . . . . . . . . . . . . . . . .: ${CONFIG_BUILD_TYPE}\n")
-
+message (  "\n  ${PACKAGE_NAME} ${PACKAGE_VERSION}")
+message (  "\n  Build target . . . . . . . . . . . . . . . . . . .: ${CONFIG_BUILD_TYPE}\n")
 show_option ("  JACK Audio Connection Kit support  . . . . . . . ." CONFIG_JACK)
 show_option ("  JACK Realtime support  . . . . . . . . . . . . . ." CONFIG_JACK_REALTIME)
 show_option ("  JACK Transport support . . . . . . . . . . . . . ." CONFIG_JACK_TRANSPORT)
@@ -217,10 +216,9 @@ show_option ("  System tray icon support . . . . . . . . . . . . ." CONFIG_SYSTE
 show_option ("  D-Bus interface support  . . . . . . . . . . . . ." CONFIG_DBUS)
 show_option ("  PortAudio interface support  . . . . . . . . . . ." CONFIG_PORTAUDIO)
 show_option ("  CoreAudio interface support  . . . . . . . . . . ." CONFIG_COREAUDIO)
-message ( "\n" )
+message ("")
 show_option ("  System tray icon support . . . . . . . . . . . . ." CONFIG_SYSTEM_TRAY)
 show_option ("  Unique/Single instance support . . . . . . . . . ." CONFIG_XUNIQUE)
 show_option ("  Debugger stack-trace (gdb) . . . . . . . . . . . ." CONFIG_STACKTRACE)
 message (  "\n  Install prefix . . . . . . . . . . . . . . . . . . ${CMAKE_INSTALL_PREFIX}")
-
 message (  "\nNow type 'make', followed by 'make install' as root.\n")
