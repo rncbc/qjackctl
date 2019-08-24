@@ -1,0 +1,226 @@
+project(QJACKCTL)
+
+cmake_minimum_required(VERSION 2.6)
+
+set (VERSION "0.5.10")
+
+execute_process(
+  COMMAND git describe --tags --dirty --abbrev=6
+  OUTPUT_VARIABLE GIT_DESCRIBE_OUTPUT
+  RESULT_VARIABLE GIT_DESCRIBE_RESULT
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+if (GIT_DESCRIBE_RESULT EQUAL 0)
+  set (VERSION "${GIT_DESCRIBE_OUTPUT}")
+  string (REGEX REPLACE "^[^_vV]+" "" VERSION "${VERSION}")
+  string (REGEX REPLACE "^[_vV]+"  "" VERSION "${VERSION}")
+  string (REGEX REPLACE "-g"   "git." VERSION "${VERSION}")
+  string (REGEX REPLACE "[_|-]+"  "." VERSION "${VERSION}")
+  execute_process(
+    COMMAND git rev-parse --abbrev-ref HEAD
+    OUTPUT_VARIABLE GIT_REVPARSE_OUTPUT
+    RESULT_VARIABLE GIT_REVPARSE_RESULT
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+  if (GIT_REVPARSE_RESULT EQUAL 0 AND NOT GIT_REVPARSE_OUTPUT STREQUAL "master")
+    set (VERSION "${VERSION} [${GIT_REVPARSE_OUTPUT}]")
+  endif ()  
+endif ()
+
+set (PACKAGE_NAME "QjackCtl")
+set (PACKAGE_VERSION "${VERSION}")
+set (PACKAGE_BUGREPORT "rncbc@rncbc.org")
+set (PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
+set (PACKAGE_TARNAME "qjackctl")
+
+set (CONFIG_BUILD_VERSION "${PACKAGE_VERSION}")
+
+if (CMAKE_BUILD_TYPE)
+  set (CONFIG_BUILD_TYPE CMAKE_BUILD_TYPE)
+else ()
+  set (CONFIG_BUILD_TYPE "release")
+endif ()
+
+set (CONFIG_DEBUG)
+if (CONFIG_BUILD_TYPE MATCHES "debug")
+  set(CONFIG_DEBUG 1)
+endif ()
+set (CONFIG_PREFIX "${CMAKE_INSTALL_PREFIX}")
+
+
+# Disable system tray argument option.
+option (CONFIG_SYSTEM_TRAY "Enable system tray (default=yes)" 1)
+
+# Disable JACK MIDI support option.
+option (CONFIG_JACK_MIDI "Enable JACK MIDI support (default=yes)" 1)
+
+# Enable JACK session support.
+option (CONFIG_JACK_SESSION "Enable JACK session support (default=yes)" 1)
+
+# Enable JACK port aliases support.
+option (CONFIG_JACK_PORT_ALIASES "Enable JACK port aliases support (default=yes)" 1)
+
+# Enable JACK metadata support.
+option (CONFIG_JACK_METADATA "Enable JACK metadata support (default=yes)" 1)
+
+# Enable JACK version support.
+option (CONFIG_JACK_VERSION "Enable JACK version support (default=no)" 0)
+
+# Enable ALSA sequencer support option.
+option (CONFIG_ALSA_SEQ "Enable ALSA/MIDI sequencer support (default=yes)" 1)
+
+# Enable PortAudio argument option.
+option (CONFIG_PORTAUDIO "Enable PortAudio interface (default=yes)" 1)
+
+# Enable D-Bus argument option.
+option (CONFIG_DBUS "Enable D-Bus interface (default=yes)" 1)
+
+# Enable unique/single instance.
+option (CONFIG_XUNIQUE "Enable unique/single instance (default=yes)" 1)
+
+# Enable debugger stack-trace option (assumes --enable-debug).
+option (CONFIG_STACKTRACE "Enable debugger stack-trace (default=no)" 0)
+
+# Fix for new CMAKE_REQUIRED_LIBRARIES policy.
+if (POLICY CMP0075)
+  cmake_policy (SET CMP0075 NEW)
+endif ()
+
+# Check for Qt
+find_package (Qt5 REQUIRED NO_MODULE COMPONENTS Core Gui Widgets Network Xml)
+if (CONFIG_DBUS)
+  find_package (Qt5 REQUIRED NO_MODULE COMPONENTS DBus)
+endif ()
+find_package (Qt5LinguistTools)
+
+include (GNUInstallDirs)
+include (CheckIncludeFile)
+include (CheckIncludeFiles)
+include (CheckFunctionExists)
+include (CheckLibraryExists)
+
+
+# Checks for header files.
+if (UNIX AND NOT APPLE)
+  check_include_files ("fcntl.h;unistd.h;signal.h" HAVE_SIGNAL_H)
+endif ()
+
+
+# Find package modules
+find_package (PkgConfig REQUIRED)
+
+# Check for JACK libraries.
+pkg_check_modules (JACK jack REQUIRED)
+set (CONFIG_JACK ${JACK_FOUND})
+if (CONFIG_JACK)
+  include_directories (${JACK_INCLUDE_DIRS})
+  link_directories (${JACK_LIBRARY_DIRS})
+  set (CMAKE_REQUIRED_LIBRARIES "${JACK_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
+  # Check for jack/statistics.h header.
+  check_include_file (jack/statistics.h CONFIG_JACK_STATISTICS)
+  # Check for JACK MIDI headers availability.
+  if (CONFIG_JACK_MIDI)
+    check_include_file (jack/midiport.h CONFIG_JACK_MIDI)
+  endif ()
+  # Check for JACK session headers availability.
+  if (CONFIG_JACK_SESSION)
+    check_include_file (jack/session.h CONFIG_JACK_SESSION)
+  endif ()
+  # Check for JACK metadata headers availability.
+  if (CONFIG_JACK_METADATA)
+    check_include_file (jack/metadata.h CONFIG_JACK_METADATA)
+  endif ()
+  # Check for jack_transport_query function.
+  check_function_exists (jack_transport_query CONFIG_JACK_TRANSPORT)
+  # Check for jack_is_realtime function.
+  check_function_exists (jack_is_realtime CONFIG_JACK_REALTIME)
+  # Check for jack_get_xrun_delayed_usecs function.
+  check_function_exists (jack_get_xrun_delayed_usecs CONFIG_JACK_XRUN_DELAY)
+  # Check for jack_get_max_delayed_usecs function.
+  check_function_exists (jack_get_max_delayed_usecs CONFIG_JACK_MAX_DELAY)
+  # Check for jack_set_port_rename_callback
+  check_function_exists (jack_set_port_rename_callback CONFIG_JACK_PORT_RENAME)
+  # Check for jack_port_get_aliases function.
+  if (CONFIG_JACK_PORT_ALIASES)
+    check_function_exists (jack_port_get_aliases CONFIG_JACK_PORT_ALIASES)
+  endif ()
+  # Check for jack_get_version_string function.
+  if (CONFIG_JACK_VERSION)
+    check_function_exists (jack_get_version_string CONFIG_JACK_VERSION)
+  endif ()
+  # Check for jack_free function.
+  check_function_exists (jack_free CONFIG_JACK_FREE)
+else ()
+  message (FATAL_ERROR "*** JACK library not found.")
+endif ()
+
+# Check for ALSA libraries.
+if (CONFIG_ALSA_SEQ)
+  pkg_check_modules (ALSA alsa REQUIRED)
+  set (CONFIG_ALSA_SEQ ${ALSA_FOUND})
+  if (CONFIG_ALSA_SEQ)
+    include_directories (${JACK_INCLUDE_DIRS})
+    link_directories (${JACK_LIBRARY_DIRS})
+    set (CMAKE_REQUIRED_LIBRARIES "${ALSA_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
+  else ()
+    message (FATAL_ERROR "*** ALSA library not found.")
+  endif ()
+endif ()
+
+# Check for PORTAUDIO libraries.
+if (CONFIG_PORTAUDIO)
+  pkg_check_modules (PORTAUDIO portaudio-2.0 REQUIRED)
+  set (CONFIG_PORTAUDIO ${PORTAUDIO_FOUND})
+  if (CONFIG_PORTAUDIO)
+    include_directories (${PORTAUDIO_INCLUDE_DIRS})
+    link_directories (${PORTAUDIO_LIBRARY_DIRS})
+    set (CMAKE_REQUIRED_LIBRARIES "${PORTAUDIO_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
+  else ()
+    message (FATAL_ERROR "*** PORTAUDIO library not found.")
+  endif ()
+endif ()
+
+
+if (APPLE AND CONFIG_COREAUDIO)
+  check_include_file (CoreAudio/CoreAudio.h CONFIG_COREAUDIO)
+endif ()
+
+add_subdirectory (src)
+
+configure_file (qjackctl.spec.in qjackctl.spec IMMEDIATE @ONLY)
+
+install (FILES qjackctl.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+install (FILES qjackctl.fr.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/fr/man1 RENAME qjackctl.1)
+
+# Configuration status
+macro (SHOW_OPTION text value)
+  if (${value})
+    message( "${text}: yes" )
+  else ()
+    message( "${text}: no" )
+  endif ()
+endmacro ()
+
+message ("\n  ${PACKAGE_NAME} ${PACKAGE_VERSION}")
+message ("\n  Build target . . . . . . . . . . . . . . . . . . .: ${CONFIG_BUILD_TYPE}\n")
+
+show_option ("  JACK Audio Connection Kit support  . . . . . . . ." CONFIG_JACK)
+show_option ("  JACK Realtime support  . . . . . . . . . . . . . ." CONFIG_JACK_REALTIME)
+show_option ("  JACK Transport support . . . . . . . . . . . . . ." CONFIG_JACK_TRANSPORT)
+show_option ("  JACK XRUN delay support  . . . . . . . . . . . . ." CONFIG_JACK_XRUN_DELAY)
+show_option ("  JACK Maximum scheduling delay support  . . . . . ." CONFIG_JACK_MAX_DELAY)
+show_option ("  JACK Port aliases support  . . . . . . . . . . . ." CONFIG_JACK_PORT_ALIASES)
+show_option ("  JACK Metadata support  . . . . . . . . . . . . . ." CONFIG_JACK_METADATA)
+show_option ("  JACK MIDI support  . . . . . . . . . . . . . . . ." CONFIG_JACK_MIDI)
+show_option ("  JACK Session support . . . . . . . . . . . . . . ." CONFIG_JACK_SESSION)
+show_option ("  JACK Version support (JACK2) . . . . . . . . . . ." CONFIG_JACK_VERSION)
+show_option ("  ALSA MIDI Sequencer support  . . . . . . . . . . ." CONFIG_ALSA_SEQ)
+show_option ("  System tray icon support . . . . . . . . . . . . ." CONFIG_SYSTEM_TRAY)
+show_option ("  D-Bus interface support  . . . . . . . . . . . . ." CONFIG_DBUS)
+show_option ("  PortAudio interface support  . . . . . . . . . . ." CONFIG_PORTAUDIO)
+show_option ("  CoreAudio interface support  . . . . . . . . . . ." CONFIG_COREAUDIO)
+message ( "\n" )
+show_option ("  System tray icon support . . . . . . . . . . . . ." CONFIG_SYSTEM_TRAY)
+show_option ("  Unique/Single instance support . . . . . . . . . ." CONFIG_XUNIQUE)
+show_option ("  Debugger stack-trace (gdb) . . . . . . . . . . . ." CONFIG_STACKTRACE)
+message (  "\n  Install prefix . . . . . . . . . . . . . . . . . . ${CMAKE_INSTALL_PREFIX}")
+
+message (  "\nNow type 'make', followed by 'make install' as root.\n")

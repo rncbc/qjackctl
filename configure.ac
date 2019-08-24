@@ -114,7 +114,7 @@ AC_ARG_ENABLE(jack_version,
   [ac_jack_version="$enableval"],
   [ac_jack_version="no"])
 
-# Disable ALSA sequencer support option.
+# Enable ALSA sequencer support option.
 AC_ARG_ENABLE(alsa_seq,
   AS_HELP_STRING([--enable-alsa-seq], [enable ALSA/MIDI sequencer support (default=yes)]),
   [ac_alsa_seq="$enableval"],
@@ -349,11 +349,6 @@ AC_CHECK_LIB(m, main)
 AC_CHECK_LIB(X11, main)
 AC_CHECK_LIB(Xext, main)
 
-# Check for round math function.
-AC_CHECK_LIB(m, lroundf, [ac_round="yes"], [ac_round="no"])
-if test "x$ac_round" = "xyes"; then
-   AC_DEFINE(CONFIG_ROUND, 1, [Define if round is available.])
-fi
 
 # Check for JACK libraries.
 PKG_CHECK_MODULES([JACK], [jack >= 0.100.0], [ac_jack_lib="yes"], [ac_jack_lib="no"])
