@@ -3,17 +3,27 @@ include_directories (
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${QT_INCLUDES}
-  ${JACK_INCLUDEDIR}
 )
-
-if (CONFIG_ALSA_SEQ)
-  include_directories ( ${ALSA_INCLUDEDIR} )
-endif ()
 
 link_directories (
   ${CMAKE_CURRENT_BINARY_DIR}
   ${QT_LIBRARY_DIR}
 )
+
+if (CONFIG_JACK)
+  include_directories (${JACK_INCLUDE_DIRS})
+  link_directories (${JACK_LIBRARY_DIRS})
+endif ()
+
+if (CONFIG_ALSA_SEQ)
+  include_directories (${ALSA_INCLUDE_DIRS})
+  link_directories (${ALSA_LIBRARY_DIRS})
+endif ()
+
+if (CONFIG_PORTAUDIO)
+  include_directories (${PORTAUDIO_INCLUDE_DIRS})
+  link_directories (${PORTAUDIO_LIBRARY_DIRS})
+endif ()
 
 configure_file (cmake_config.h ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
