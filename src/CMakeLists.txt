@@ -129,21 +129,25 @@ if (CONFIG_PORTAUDIO)
   target_link_libraries (qjackctl ${PORTAUDIO_LIBRARIES})
 endif ()
 
-qt5_use_modules (qjackctl Core Gui Widgets Network Xml)
+qt5_use_modules (qjackctl Core Gui Widgets Xml)
+
+if (CONFIG_XUNIQUE)
+  qt5_use_modules (qjackctl Network)
+endif ()
 
 if (CONFIG_DBUS)
   qt5_use_modules (qjackctl DBus)
 endif ()
 
 if (UNIX AND NOT APPLE)
-  install (TARGETS qjackctl
-     RUNTIME DESTINATION bin)
+  install (TARGETS qjackctl RUNTIME
+     DESTINATION ${CMAKE_INSTALL_BINDIR})
   install (FILES ${QM_FILES}
-     DESTINATION share/qjackctl/translations)
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/qjackctl/translations)
   install (FILES ${CMAKE_CURRENT_BINARY_DIR}/qjackctl.desktop
-     DESTINATION share/applications)
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
   install (FILES images/qjackctl.png
-     DESTINATION share/icons/hicolor/32x32/apps)
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
   install (FILES appdata/qjackctl.appdata.xml
-     DESTINATION share/metainfo)
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
 endif ()
