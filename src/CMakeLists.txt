@@ -12,8 +12,6 @@ link_directories (
 
 configure_file (cmake_config.h ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
-set (ac_prefix ${CMAKE_INSTALL_PREFIX})
-
 configure_file (qjackctl.desktop ${CMAKE_CURRENT_BINARY_DIR}/qjackctl.desktop)
 
 set (HEADERS
@@ -116,28 +114,28 @@ add_executable (qjackctl
   ${SOURCES}
 )
 
-target_link_libraries (qjackctl
-  ${QT_LIBRARIES}
-  ${JACK_LIBRARIES}
-)
-
-if (CONFIG_ALSA_SEQ)
-  target_link_libraries (qjackctl ${ALSA_LIBRARIES})
-endif ()
-
-if (CONFIG_PORTAUDIO)
-  target_link_libraries (qjackctl ${PORTAUDIO_LIBRARIES})
-endif ()
-
-qt5_use_modules (qjackctl Core Gui Widgets Xml)
+target_link_libraries (qjackctl PRIVATE Qt5::Widgets Qt5::Xml)
 
 if (CONFIG_XUNIQUE)
-  qt5_use_modules (qjackctl Network)
+  target_link_libraries (qjackctl PRIVATE Qt5::Network)
 endif ()
 
 if (CONFIG_DBUS)
-  qt5_use_modules (qjackctl DBus)
+  target_link_libraries (qjackctl PRIVATE Qt5::DBus)
 endif ()
+
+if (CONFIG_JACK)
+  target_link_libraries (qjackctl PRIVATE ${JACK_LIBRARIES})
+endif ()
+
+if (CONFIG_ALSA_SEQ)
+  target_link_libraries (qjackctl PRIVATE ${ALSA_LIBRARIES})
+endif ()
+
+if (CONFIG_PORTAUDIO)
+  target_link_libraries (qjackctl PRIVATE ${PORTAUDIO_LIBRARIES})
+endif ()
+
 
 if (UNIX AND NOT APPLE)
   install (TARGETS qjackctl RUNTIME

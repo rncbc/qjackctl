@@ -1,15 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-/* Define to the build version of this package. */
-#cmakedefine CONFIG_BUILD_VERSION "@CONFIG_BUILD_VERSION@"
-
-/* Default installation prefix. */
-#cmakedefine CONFIG_PREFIX "@CONFIG_PREFIX@"
-
-/* Define if debugging is enabled. */
-#cmakedefine CONFIG_DEBUG @CONFIG_DEBUG@
-
 /* Define to the full name of this package. */
 #cmakedefine PACKAGE_NAME "@PACKAGE_NAME@"
 
@@ -24,6 +15,24 @@
 
 /* Define to the one symbol short name of this package. */
 #cmakedefine PACKAGE_TARNAME "@PACKAGE_TARNAME@"
+
+/* Define to the version of this package. */
+#cmakedefine CONFIG_VERSION "@CONFIG_VERSION@"
+
+/* Define to the build version of this package. */
+#cmakedefine CONFIG_BUILD_VERSION "@CONFIG_BUILD_VERSION@"
+
+/* Default installation prefix. */
+#cmakedefine CONFIG_PREFIX "@CONFIG_PREFIX@"
+
+/* Define to target installation dirs. */
+#cmakedefine CONFIG_BINDIR "@CONFIG_BINDIR@"
+#cmakedefine CONFIG_LIBDIR "@CONFIG_LIBDIR@"
+#cmakedefine CONFIG_DATADIR "@CONFIG_DATADIR@"
+#cmakedefine CONFIG_MANDIR "@CONFIG_MANDIR@"
+
+/* Define if debugging is enabled. */
+#cmakedefine CONFIG_DEBUG @CONFIG_DEBUG@
 
 /* Define to 1 if you have the <signal.h> header file. */
 #cmakedefine HAVE_SIGNAL_H @HAVE_SIGNAL_H@

@@ -1,9 +1,10 @@
 project(QJACKCTL)
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.1)
 
 set (VERSION "0.5.10")
 
+set (CONFIG_VERSION ${VERSION})
 execute_process (
   COMMAND git describe --tags --dirty --abbrev=6
   OUTPUT_VARIABLE GIT_DESCRIBE_OUTPUT
@@ -43,7 +44,14 @@ set (CONFIG_DEBUG)
 if (CONFIG_BUILD_TYPE MATCHES "debug")
   set(CONFIG_DEBUG 1)
 endif ()
+
 set (CONFIG_PREFIX "${CMAKE_INSTALL_PREFIX}")
+
+include (GNUInstallDirs)
+set (CONFIG_BINDIR  "${CONFIG_PREFIX}/${CMAKE_INSTALL_BINDIR}")
+set (CONFIG_LIBDIR  "${CONFIG_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set (CONFIG_DATADIR "${CONFIG_PREFIX}/${CMAKE_INSTALL_DATADIR}")
+set (CONFIG_MANDIR  "${CONFIG_PREFIX}/${CMAKE_INSTALL_MANDIR}")
 
 
 # Disable system tray argument option.
@@ -97,7 +105,6 @@ endif ()
 
 find_package (Qt5LinguistTools)
 
-include (GNUInstallDirs)
 include (CheckIncludeFile)
 include (CheckIncludeFiles)
 include (CheckIncludeFileCXX)
