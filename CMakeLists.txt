@@ -94,14 +94,14 @@ if (POLICY CMP0075)
 endif ()
 
 # Check for Qt
-find_package (Qt5 REQUIRED NO_MODULE COMPONENTS Core Gui Widgets Xml)
+find_package (Qt5 REQUIRED COMPONENTS Core Gui Widgets Xml)
 
 if (CONFIG_XUNIQUE)
-  find_package (Qt5 REQUIRED NO_MODULE COMPONENTS Network)
+  find_package (Qt5 REQUIRED COMPONENTS Network)
 endif ()
 
 if (CONFIG_DBUS)
-  find_package (Qt5 REQUIRED NO_MODULE COMPONENTS DBus)
+  find_package (Qt5 REQUIRED COMPONENTS DBus)
 endif ()
 
 find_package (Qt5LinguistTools)

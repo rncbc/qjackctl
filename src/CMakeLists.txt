@@ -7,8 +7,6 @@ include_directories (
 
 configure_file (cmake_config.h ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
-configure_file (${NAME}.desktop ${CMAKE_CURRENT_BINARY_DIR}/${NAME}.desktop)
-
 set (HEADERS
   qjackctl.h
   qjackctlAbout.h
@@ -169,7 +167,7 @@ if (UNIX AND NOT APPLE)
      DESTINATION ${CMAKE_INSTALL_BINDIR})
   install (FILES ${QM_FILES}
      DESTINATION ${CMAKE_INSTALL_DATADIR}/${NAME}/translations)
-  install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${NAME}.desktop
+  install (FILES ${NAME}.desktop
      DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
   install (FILES images/${NAME}.png
      DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
