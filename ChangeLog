@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- An 'Apply' button as been added to the Setup dialog.
+  (EXPERIMENTAL)
+
 - Added alternate yet non-official CMake build option.
   (EXPERIMENTAL)
 
