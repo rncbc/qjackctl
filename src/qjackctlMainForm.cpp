@@ -4044,7 +4044,7 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 		else
 	#endif
 		QMessageBox::warning(this, sTitle, sText);
-	}   // Otherwise, it will be just as convenient to update status...
+	}	// Otherwise, it will be just as convenient to update status...
 	else updateTitleStatus();
 
 	updateContextMenu();
