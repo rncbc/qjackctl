@@ -29,6 +29,7 @@ class qjackctlSetup;
 class qjackctlPreset;
 
 class QButtonGroup;
+class QAbstractButton;
 
 
 //----------------------------------------------------------------------------
@@ -80,8 +81,12 @@ protected slots:
 	void settingsChanged();
 	void optionsChanged();
 
+	void apply();
+
 	void accept();
 	void reject();
+
+	void buttonClicked(QAbstractButton *);
 
 protected:
 

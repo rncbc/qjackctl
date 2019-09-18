@@ -431,14 +431,18 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.BaseFontSizeComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(optionsChanged()));
-
+#if 0
 	QObject::connect(m_ui.DialogButtonBox,
 		SIGNAL(accepted()),
 		SLOT(accept()));
 	QObject::connect(m_ui.DialogButtonBox,
 		SIGNAL(rejected()),
 		SLOT(reject()));
-
+#else
+	QObject::connect(m_ui.DialogButtonBox,
+		SIGNAL(clicked(QAbstractButton *)),
+		SLOT(buttonClicked(QAbstractButton *)));
+#endif
 	// Try to restore old window positioning.
 	adjustSize();
 }
@@ -1225,6 +1229,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
 
+	m_ui.DialogButtonBox->button(QDialogButtonBox::Apply)->setEnabled(bValid);
 	m_ui.DialogButtonBox->button(QDialogButtonBox::Ok)->setEnabled(bValid);
 }
 
@@ -1491,8 +1496,8 @@ void qjackctlSetupForm::optionsChanged (void)
 }
 
 
-// Accept settings (OK button slot).
-void qjackctlSetupForm::accept (void)
+// Apply settings (Apply button slot).
+void qjackctlSetupForm::apply (void)
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm == nullptr)
@@ -1683,7 +1688,17 @@ void qjackctlSetupForm::accept (void)
 	m_iDirtySettings = 0;
 	m_iDirtyOptions = 0;
 
+	// Make it stable anyway...
+	stabilizeForm();
+}
+
+
+// Accept settings (OK button slot).
+void qjackctlSetupForm::accept (void)
+{
 	// Just go with dialog acceptance.
+	apply();
+
 	QDialog::accept();
 }
 
@@ -1693,6 +1708,29 @@ void qjackctlSetupForm::reject (void)
 {
 	if (queryClose())
 		QDialog::reject();
+}
+
+
+// Dialog bos button slot.
+void qjackctlSetupForm::buttonClicked ( QAbstractButton *pButton )
+{
+#ifdef CONFIG_DEBUG
+	qDebug("qjackctlSetupForm::buttonClicked(%p)", pButton);
+#endif
+
+	switch (m_ui.DialogButtonBox->buttonRole(pButton)) {
+	case QDialogButtonBox::AcceptRole:
+		accept();
+		break;
+	case QDialogButtonBox::ApplyRole:
+		apply();
+		break;
+	case QDialogButtonBox::RejectRole:
+		reject();
+		// Fall-thru...
+	default:
+		break;
+	}
 }
 
 
