@@ -3600,16 +3600,6 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <translation>Spojení</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3438"/>
-        <source>Whether to ask for confirmation on JACK audio server shutdown / restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3441"/>
-        <source>Confirm server sh&amp;utdown / restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3598"/>
         <source>Whether to enable JACK D-Bus interface</source>
         <translation>Zda povolit rozhraní D-Bus JACJ</translation>
@@ -3956,6 +3946,16 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
         <location filename="../qjackctlSetupForm.ui" line="3425"/>
         <source>&amp;Confirm application close</source>
         <translation>&amp;Potvrdit ukončení aplikace</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3438"/>
+        <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3441"/>
+        <source>Confirm server sh&amp;utdown and/or restart</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3455"/>

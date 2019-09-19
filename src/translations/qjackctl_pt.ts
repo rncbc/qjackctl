@@ -4048,6 +4048,16 @@ Você quer aplicar as mudanças?</translation>
         <translation>Ativar&amp; nomes customizados (metadata) de clientes/portas JACK</translation>
     </message>
     <message>
+        <location filename="../qjackctlSetupForm.ui" line="3438"/>
+        <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3441"/>
+        <source>Confirm server sh&amp;utdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetupForm.ui" line="3487"/>
         <source>Whether to show system tray message on main window close</source>
         <translation>Mostrar mensagem da bandeja do sistema na janela principal fechar</translation>
@@ -4080,16 +4090,6 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="640"/>
         <source>&amp;Use server synchronous mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3438"/>
-        <source>Whether to ask for confirmation on JACK audio server shutdown / restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3441"/>
-        <source>Confirm server sh&amp;utdown / restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

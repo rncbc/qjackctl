@@ -119,7 +119,7 @@ void qjackctlSetup::loadSetup (void)
 	sConnectionsFont         = m_settings.value("/ConnectionsFont").toString();
 	bQueryClose              = m_settings.value("/QueryClose", true).toBool();
 	bQueryShutdown           = m_settings.value("/QueryShutdown", true).toBool();
-	bQueryRestart            = m_settings.value("/QueryRestart", true).toBool();
+	bQueryRestart            = m_settings.value("/QueryRestart", false).toBool();
 	bKeepOnTop               = m_settings.value("/KeepOnTop", false).toBool();
 	bSystemTray              = m_settings.value("/SystemTray", false).toBool();
 	bSystemTrayQueryClose    = m_settings.value("/SystemTrayQueryClose", true).toBool();

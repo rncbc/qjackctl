@@ -4173,6 +4173,16 @@ Voulez-vous appliquer les changements ?</translation>
         <translation>Activer les « jolis-noms » (métadonnées) de client/port JA&amp;CK</translation>
     </message>
     <message>
+        <location filename="../qjackctlSetupForm.ui" line="3438"/>
+        <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3441"/>
+        <source>Confirm server sh&amp;utdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetupForm.ui" line="3487"/>
         <source>Whether to show system tray message on main window close</source>
         <translation>Afficher on non les messages de la zone de notification système lors de la fermeture de la fenêtre principale</translation>
@@ -4216,16 +4226,6 @@ Voulez-vous appliquer les changements ?</translation>
         <location filename="../qjackctlSetupForm.ui" line="640"/>
         <source>&amp;Use server synchronous mode</source>
         <translation>&amp;Utiliser le mode synchrone de serveur</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3438"/>
-        <source>Whether to ask for confirmation on JACK audio server shutdown / restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3441"/>
-        <source>Confirm server sh&amp;utdown / restart</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3569"/>

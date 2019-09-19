@@ -3620,16 +3620,6 @@ Are you sure to overwrite the existing folder?</source>
         <translation>アクティブなパッチベイ切断時に警告(&amp;W)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="3438"/>
-        <source>Whether to ask for confirmation on JACK audio server shutdown / restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3441"/>
-        <source>Confirm server sh&amp;utdown / restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3598"/>
         <source>Whether to enable JACK D-Bus interface</source>
         <translation>JACK D-Busインターフェイスを有効にするかどうか</translation>
@@ -4051,6 +4041,16 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="3529"/>
         <source>Whether to save the JACK server command-line configuration into a local file (auto-start)</source>
         <translation>JACKサーバーのコマンドライン設定をローカルファイルに保存するかどうか(自動で保存されます)</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3438"/>
+        <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3441"/>
+        <source>Confirm server sh&amp;utdown and/or restart</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3532"/>

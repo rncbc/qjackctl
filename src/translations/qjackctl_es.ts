@@ -4040,6 +4040,16 @@ Do you want to apply the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetupForm.ui" line="3438"/>
+        <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetupForm.ui" line="3441"/>
+        <source>Confirm server sh&amp;utdown and/or restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlSetupForm.ui" line="3487"/>
         <source>Whether to show system tray message on main window close</source>
         <translation type="unfinished"></translation>
@@ -4072,16 +4082,6 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="640"/>
         <source>&amp;Use server synchronous mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3438"/>
-        <source>Whether to ask for confirmation on JACK audio server shutdown / restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetupForm.ui" line="3441"/>
-        <source>Confirm server sh&amp;utdown / restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

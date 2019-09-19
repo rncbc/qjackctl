@@ -3435,10 +3435,10 @@
                </font>
               </property>
               <property name="toolTip">
-               <string>Whether to ask for confirmation on JACK audio server shutdown / restart</string>
+               <string>Whether to ask for confirmation on JACK audio server shutdown and/or restart</string>
               </property>
               <property name="text">
-               <string>Confirm server sh&amp;utdown / restart</string>
+               <string>Confirm server sh&amp;utdown and/or restart</string>
               </property>
              </widget>
             </item>
