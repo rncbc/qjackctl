@@ -157,6 +157,7 @@ public:
 	QString sConnectionsFont;
 	bool    bQueryClose;
 	bool    bQueryShutdown;
+	bool    bQueryRestart;
 	bool    bKeepOnTop;
 	bool    bSystemTray;
 	bool    bSystemTrayQueryClose;

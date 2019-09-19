@@ -412,12 +412,14 @@ qjackctlMainForm::qjackctlMainForm (
 
 	m_iServerState = QJACKCTL_INACTIVE;
 
-	m_pJack           = nullptr;
-	m_pJackClient     = nullptr;
-	m_bJackDetach     = false;
-	m_bJackShutdown   = false;
-	m_bJackStopped    = false;
-	m_pAlsaSeq        = nullptr;
+	m_pJack         = nullptr;
+	m_pJackClient   = nullptr;
+	m_bJackDetach   = false;
+	m_bJackShutdown = false;
+	m_bJackRestart  = false;
+
+	m_pAlsaSeq      = nullptr;
+
 #ifdef CONFIG_DBUS
 	m_pDBusControl  = nullptr;
 	m_pDBusConfig   = nullptr;
@@ -922,7 +924,7 @@ bool qjackctlMainForm::queryClose (void)
 		m_pSetup->saveWidgetGeometry(this, true);
 		if (m_pSetup->bSystemTrayQueryClose) {
 			const QString& sTitle
-				= tr("Information") + " - " QJACKCTL_SUBTITLE1;
+				= tr("Information");
 			const QString& sText
 				= tr("The program will keep running in the system tray.\n\n"
 					"To terminate the program, please choose \"Quit\"\n"
@@ -930,7 +932,8 @@ bool qjackctlMainForm::queryClose (void)
 		#if 0//QJACKCTL_SYSTEM_TRAY_QUERY_CLOSE
 			if (QSystemTrayIcon::supportsMessages()) {
 				m_pSystemTray->showMessage(
-					sTitle, sText, QSystemTrayIcon::Information);
+					sTitle + " - " QJACKCTL_SUBTITLE1,
+					sText, QSystemTrayIcon::Information);
 			}
 			else
 			QMessageBox::information(this, sTitle, sText);
@@ -1526,7 +1529,7 @@ void qjackctlMainForm::stopJack (void)
 		&& (m_pConnectionsForm->isAudioConnected() ||
 			m_pConnectionsForm->isMidiConnected())) {
 		const QString& sTitle
-			= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
+			= tr("Warning");
 		const QString& sText
 			= tr("Some client audio applications\n"
 				"are still active and connected.\n\n"
@@ -1587,7 +1590,6 @@ void qjackctlMainForm::stopJackServer (void)
 			// Jack classic server backend...
 			if (m_pJack) {
 				appendMessages(tr("JACK is stopping..."));
-				m_bJackStopped = true;
 			#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 				// Try harder...
 				m_pJack->kill();
@@ -1896,25 +1898,26 @@ void qjackctlMainForm::stdoutNotifySlot ( int fd )
 
 
 // Messages output methods.
-void qjackctlMainForm::appendMessages ( const QString& s )
+void qjackctlMainForm::appendMessages ( const QString& sText )
 {
 	if (m_pMessagesStatusForm)
-		m_pMessagesStatusForm->appendMessages(s);
+		m_pMessagesStatusForm->appendMessages(sText);
 }
 
-void qjackctlMainForm::appendMessagesColor ( const QString& s, const QString& c )
+void qjackctlMainForm::appendMessagesColor (
+	const QString& sText, const QString& sColor )
 {
 	if (m_pMessagesStatusForm)
-		m_pMessagesStatusForm->appendMessagesColor(s, c);
+		m_pMessagesStatusForm->appendMessagesColor(sText, sColor);
 }
 
-void qjackctlMainForm::appendMessagesText ( const QString& s )
+void qjackctlMainForm::appendMessagesText ( const QString& sText )
 {
 	if (m_pMessagesStatusForm)
-		m_pMessagesStatusForm->appendMessagesText(s);
+		m_pMessagesStatusForm->appendMessagesText(sText);
 }
 
-void qjackctlMainForm::appendMessagesError ( const QString& s )
+void qjackctlMainForm::appendMessagesError ( const QString& sText )
 {
 	if (m_pMessagesStatusForm) {
 		m_pMessagesStatusForm->setTabPage(
@@ -1922,16 +1925,19 @@ void qjackctlMainForm::appendMessagesError ( const QString& s )
 		m_pMessagesStatusForm->show();
 	}
 
-	appendMessagesColor(s.simplified(), "#ff0000");
+	appendMessagesColor(sText.simplified(), "#ff0000");
 
-	const QString& sTitle = tr("Error") + " - " QJACKCTL_SUBTITLE1;
+	const QString& sTitle
+		= tr("Error");
 #ifdef CONFIG_SYSTEM_TRAY
 	if (m_pSetup->bSystemTray && m_pSystemTray
 		&& QSystemTrayIcon::supportsMessages())
-		m_pSystemTray->showMessage(sTitle, s, QSystemTrayIcon::Critical);
+		m_pSystemTray->showMessage(
+			sTitle + " - " QJACKCTL_SUBTITLE1,
+			sText, QSystemTrayIcon::Critical);
 	else
 #endif
-	QMessageBox::critical(this, sTitle, s, QMessageBox::Cancel);
+	QMessageBox::critical(this, sTitle, sText, QMessageBox::Cancel);
 }
 
 
@@ -2668,6 +2674,12 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 // Timer callback funtion.
 void qjackctlMainForm::timerSlot (void)
 {
+	// Is it about to restart?
+	if (m_bJackRestart && m_pJack == nullptr) {
+		m_bJackRestart = false;
+		startJack();
+	}
+
 	// Is it the first shot on server start after a few delay?
 	if (m_iTimerDelay < m_iStartDelay) {
 		m_iTimerDelay += QJACKCTL_TIMER_MSECS;
@@ -4031,19 +4043,54 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 	// If client service is currently running,
 	// prompt the effective warning...
 	if (m_pJackClient) {
+		bool bQueryRestart = m_pSetup->bQueryRestart;
 		const QString& sTitle
-			= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
+			= tr("Warning");
 		const QString& sText
 			= tr("Server settings will be only effective after\n"
 				"restarting the JACK audio server.");
-	#ifdef CONFIG_SYSTEM_TRAY
-		if (m_pSetup->bSystemTray && m_pSystemTray
-			&& QSystemTrayIcon::supportsMessages()) {
-			m_pSystemTray->showMessage(sTitle, sText, QSystemTrayIcon::Warning);
+		if (m_pSetup->bQueryShutdown) {
+			// Should ask user whether to restart
+			// the JACK audio server immediately...
+			const QString& sQueryText = sText + "\n\n"
+				+ tr("Do you want to restart the JACK audio server?");
+		#if 0//QJACKCTL_QUERY_RESTART
+			bQueryRestart = (QMessageBox::warning(this, sTitle, sQueryText,
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+		#else
+			QMessageBox mbox(this);
+			mbox.setIcon(QMessageBox::Warning);
+			mbox.setWindowTitle(sTitle);
+			mbox.setText(sQueryText);
+			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+			QCheckBox cbox(tr("Don't ask this again"));
+			cbox.setChecked(false);
+			cbox.blockSignals(true);
+			mbox.addButton(&cbox, QMessageBox::ActionRole);
+			bQueryRestart = (mbox.exec() == QMessageBox::Ok);
+			if (cbox.isChecked()) {
+				m_pSetup->bQueryRestart = bQueryRestart;
+				m_pSetup->bQueryShutdown = false;
+			}
+		#endif
 		}
-		else
-	#endif
-		QMessageBox::warning(this, sTitle, sText);
+		// Whether to restart immediately
+		// or just show a warning message...
+		if (bQueryRestart) {
+			stopJack();
+			m_bJackRestart = true;
+		} else {
+		#ifdef CONFIG_SYSTEM_TRAY
+			if (m_pSetup->bSystemTray && m_pSystemTray
+				&& QSystemTrayIcon::supportsMessages()) {
+				m_pSystemTray->showMessage(
+					sTitle + " - " QJACKCTL_SUBTITLE1,
+					sText, QSystemTrayIcon::Warning);
+			}
+			else
+		#endif
+			QMessageBox::warning(this, sTitle, sText);
+		}
 	}	// Otherwise, it will be just as convenient to update status...
 	else updateTitleStatus();
 
@@ -4055,14 +4102,16 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 void qjackctlMainForm::showDirtySetupWarning (void)
 {
 	const QString& sTitle
-		= tr("Information") + " - " QJACKCTL_SUBTITLE1;
+		= tr("Information");
 	const QString& sText
 		= tr("Some settings will be only effective\n"
 			"the next time you start this program.");
 #ifdef CONFIG_SYSTEM_TRAY
 	if (m_pSetup->bSystemTray && m_pSystemTray
 		&& QSystemTrayIcon::supportsMessages()) {
-		m_pSystemTray->showMessage(sTitle, sText, QSystemTrayIcon::Information);
+		m_pSystemTray->showMessage(
+			sTitle + " - " QJACKCTL_SUBTITLE1,
+			sText, QSystemTrayIcon::Information);
 	}
 	else
 #endif

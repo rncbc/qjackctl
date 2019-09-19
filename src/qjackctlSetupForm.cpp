@@ -1503,7 +1503,14 @@ void qjackctlSetupForm::apply (void)
 	if (pMainForm == nullptr)
 		return;
 
-	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
+	if (m_iDirtySettings > 0) {
+		// Save current preset selection.
+		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
+		// Always save current settings...
+		savePreset(m_pSetup->sDefPreset);
+	}
+
+	if (m_iDirtyOptions > 0) {
 		// To track down deferred or immediate changes.
 		const bool    bOldMessagesLog         = m_pSetup->bMessagesLog;
 		const QString sOldMessagesLogPath     = m_pSetup->sMessagesLogPath;
@@ -1537,10 +1544,6 @@ void qjackctlSetupForm::apply (void)
 		const bool    bOldTextLabels          = m_pSetup->bTextLabels;
 		const bool    bOldGraphButton         = m_pSetup->bGraphButton;
 		const int     iOldBaseFontSize        = m_pSetup->iBaseFontSize;
-		// Save current preset selection.
-		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
-		// Always save current settings...
-		savePreset(m_pSetup->sDefPreset);
 		// Save Options...
 		m_pSetup->bStartupScript           = m_ui.StartupScriptCheckBox->isChecked();
 		m_pSetup->sStartupScriptShell      = m_ui.StartupScriptShellComboBox->currentText();
@@ -1663,9 +1666,6 @@ void qjackctlSetupForm::apply (void)
 		#endif
 			(iOldBaseFontSize     !=  m_pSetup->iBaseFontSize))
 			pMainForm->showDirtySetupWarning();
-		// If server is currently running, warn user...
-		if (m_iDirtySettings > 0)
-			pMainForm->showDirtySettingsWarning();
 	}
 
 	// Save combobox history...
@@ -1683,6 +1683,10 @@ void qjackctlSetupForm::apply (void)
 
 	// Save/commit to disk.
 	m_pSetup->saveSetup();
+
+	// If server is currently running, warn user...
+	if (m_iDirtySettings > 0)
+		pMainForm->showDirtySettingsWarning();
 
 	// Reset dirty flags.
 	m_iDirtySettings = 0;

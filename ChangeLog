@@ -6,8 +6,9 @@ ChangeLog
 
 GIT HEAD
 
-- An 'Apply' button as been added to the Setup dialog.
-  (EXPERIMENTAL)
+- An 'Apply' button as been added to the Setup dialog;
+  ask whether to restart the JACK audio server, if any
+  settings are changed. (EXPERIMENTAL)
 
 - Added alternate yet non-official CMake build option.
   (EXPERIMENTAL)
