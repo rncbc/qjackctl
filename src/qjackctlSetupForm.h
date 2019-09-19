@@ -78,6 +78,8 @@ protected slots:
 	void chooseMessagesFont();
 	void chooseConnectionsFont();
 
+	void buffSizeChanged();
+
 	void settingsChanged();
 	void optionsChanged();
 
@@ -126,6 +128,7 @@ private:
 	QButtonGroup *m_pTimeDisplayButtonGroup;
 
 	int m_iDirtySetup;
+	int m_iDirtyBuffSize;
 	int m_iDirtySettings;
 	int m_iDirtyOptions;
 

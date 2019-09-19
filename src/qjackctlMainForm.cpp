@@ -4695,4 +4695,17 @@ void qjackctlMainForm::commitData ( QSessionManager& sm )
 }
 
 
+// Some settings that are special someway...
+bool qjackctlMainForm::resetBuffSize ( jack_nframes_t nframes ) const
+{
+	if (m_pJackClient == nullptr)
+		return false;
+
+	if (g_buffsize == nframes)
+		return true;
+
+	return (jack_set_buffer_size(m_pJackClient, nframes) == 0);
+}
+
+
 // end of qjackctlMainForm.cpp

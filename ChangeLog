@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Changing current JACK buffer size from Setup dialog
+  (cf. Settings / Frames/Period) may now take effect
+  just immediately ;) (EXPERIMENTAL)
+
 - An 'Apply' button as been added to the Setup dialog;
   ask whether to restart the JACK audio server, if any
   settings are changed. (EXPERIMENTAL)

@@ -84,6 +84,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 
 	// Initialize dirty control state.
 	m_iDirtySetup = 0;
+	m_iDirtyBuffSize = 0;
 	m_iDirtySettings = 0;
 	m_iDirtyOptions = 0;
 
@@ -173,7 +174,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.FramesComboBox,
 		SIGNAL(editTextChanged(const QString&)),
-		SLOT(settingsChanged()));
+		SLOT(buffSizeChanged()));
 	QObject::connect(m_ui.SampleRateComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(settingsChanged()));
@@ -1229,6 +1230,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
 
+	bValid = (bValid || m_iDirtyBuffSize > 0);
 	m_ui.DialogButtonBox->button(QDialogButtonBox::Apply)->setEnabled(bValid);
 	m_ui.DialogButtonBox->button(QDialogButtonBox::Ok)->setEnabled(bValid);
 }
@@ -1295,7 +1297,7 @@ void qjackctlSetupForm::symbolPostShutdownScript (void)
 
 
 // Startup script browse slot.
-void qjackctlSetupForm::browseStartupScript()
+void qjackctlSetupForm::browseStartupScript (void)
 {
 	QString sFileName = QFileDialog::getOpenFileName(
 		this,												// Parent.
@@ -1312,7 +1314,7 @@ void qjackctlSetupForm::browseStartupScript()
 
 
 // Post-startup script browse slot.
-void qjackctlSetupForm::browsePostStartupScript()
+void qjackctlSetupForm::browsePostStartupScript (void)
 {
 	QString sFileName = QFileDialog::getOpenFileName(
 		this,												// Parent.
@@ -1329,7 +1331,7 @@ void qjackctlSetupForm::browsePostStartupScript()
 
 
 // Shutdown script browse slot.
-void qjackctlSetupForm::browseShutdownScript()
+void qjackctlSetupForm::browseShutdownScript (void)
 {
 	QString sFileName = QFileDialog::getOpenFileName(
 		this,												// Parent.
@@ -1346,7 +1348,7 @@ void qjackctlSetupForm::browseShutdownScript()
 
 
 // Post-shutdown script browse slot.
-void qjackctlSetupForm::browsePostShutdownScript()
+void qjackctlSetupForm::browsePostShutdownScript (void)
 {
 	QString sFileName = QFileDialog::getOpenFileName(
 		this,												// Parent.
@@ -1363,7 +1365,7 @@ void qjackctlSetupForm::browsePostShutdownScript()
 
 
 // Active Patchbay path browse slot.
-void qjackctlSetupForm::browseActivePatchbayPath()
+void qjackctlSetupForm::browseActivePatchbayPath (void)
 {
 	QString sFileName = QFileDialog::getOpenFileName(
 		this,											// Parent.
@@ -1381,7 +1383,7 @@ void qjackctlSetupForm::browseActivePatchbayPath()
 
 
 // Messages log path browse slot.
-void qjackctlSetupForm::browseMessagesLogPath()
+void qjackctlSetupForm::browseMessagesLogPath (void)
 {
 	QString sFileName = QFileDialog::getSaveFileName(
 		this,											// Parent.
@@ -1399,7 +1401,7 @@ void qjackctlSetupForm::browseMessagesLogPath()
 
 
 // The display font 1 (big time) selection dialog.
-void qjackctlSetupForm::chooseDisplayFont1()
+void qjackctlSetupForm::chooseDisplayFont1 (void)
 {
 	bool  bOk  = false;
 	QFont font = QFontDialog::getFont(&bOk,
@@ -1414,7 +1416,7 @@ void qjackctlSetupForm::chooseDisplayFont1()
 
 
 // The display font 2 (normal time et al.) selection dialog.
-void qjackctlSetupForm::chooseDisplayFont2()
+void qjackctlSetupForm::chooseDisplayFont2 (void)
 {
 	bool  bOk  = false;
 	QFont font = QFontDialog::getFont(&bOk,
@@ -1475,6 +1477,17 @@ void qjackctlSetupForm::chooseConnectionsFont (void)
 }
 
 
+// Brag about any buffer-size (frames/period) changes...
+void qjackctlSetupForm::buffSizeChanged (void)
+{
+	if (m_iDirtySetup > 0)
+		return;
+
+	++m_iDirtyBuffSize;
+	stabilizeForm();
+}
+
+
 // Mark that some server preset settings have changed.
 void qjackctlSetupForm::settingsChanged (void)
 {
@@ -1484,6 +1497,7 @@ void qjackctlSetupForm::settingsChanged (void)
 	++m_iDirtySettings;
 	stabilizeForm();
 }
+
 
 // Mark that some program options have changed.
 void qjackctlSetupForm::optionsChanged (void)
@@ -1508,6 +1522,13 @@ void qjackctlSetupForm::apply (void)
 		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
 		// Always save current settings...
 		savePreset(m_pSetup->sDefPreset);
+	}
+	else
+	if (m_iDirtyBuffSize > 0) {
+		// Just change JACK buffer size immediately...
+		if (pMainForm->resetBuffSize(jack_nframes_t(
+				m_ui.FramesComboBox->currentText().toUInt())))
+			m_iDirtyBuffSize = 0;
 	}
 
 	if (m_iDirtyOptions > 0) {
@@ -1685,8 +1706,11 @@ void qjackctlSetupForm::apply (void)
 	m_pSetup->saveSetup();
 
 	// If server is currently running, warn user...
-	if (m_iDirtySettings > 0)
+	if (m_iDirtySettings > 0) {
 		pMainForm->showDirtySettingsWarning();
+		// Maybe something changed on the way up?...
+		m_ui.QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
+	}
 
 	// Reset dirty flags.
 	m_iDirtySettings = 0;

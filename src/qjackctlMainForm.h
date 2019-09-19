@@ -132,6 +132,9 @@ public:
 	void showDirtySettingsWarning();
 	void showDirtySetupWarning();
 
+	// Some settings that are special someway...
+	bool resetBuffSize(jack_nframes_t nframes) const;
+
 public slots:
 
 	void startJack();
