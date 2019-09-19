@@ -1641,9 +1641,9 @@ void qjackctlMainForm::readStdout (void)
 
 
 // Stdout buffer handler -- now splitted by complete new-lines...
-void qjackctlMainForm::appendStdoutBuffer ( const QString& s )
+void qjackctlMainForm::appendStdoutBuffer ( const QString& sText )
 {
-	m_sStdoutBuffer.append(s);
+	m_sStdoutBuffer.append(sText);
 
 	const int iLength = m_sStdoutBuffer.lastIndexOf('\n');
 	if (iLength > 0) {
