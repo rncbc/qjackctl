@@ -4049,9 +4049,9 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 		const QString& sText
 			= tr("Server settings will be only effective after\n"
 				"restarting the JACK audio server.");
+		// Should ask the user whether to
+		// restart the JACK audio server...
 		if (m_pSetup->bQueryShutdown) {
-			// Should ask user whether to restart
-			// the JACK audio server immediately...
 			const QString& sQueryText = sText + "\n\n"
 				+ tr("Do you want to restart the JACK audio server?");
 		#if 0//QJACKCTL_QUERY_RESTART
@@ -4074,12 +4074,9 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 			}
 		#endif
 		}
-		// Whether to restart immediately
-		// or just show a warning message...
-		if (bQueryRestart) {
-			stopJack();
-			m_bJackRestart = true;
-		} else {
+		else
+		// Show the old warning message...
+		if (!bQueryRestart) {
 		#ifdef CONFIG_SYSTEM_TRAY
 			if (m_pSetup->bSystemTray && m_pSystemTray
 				&& QSystemTrayIcon::supportsMessages()) {
@@ -4090,6 +4087,11 @@ void qjackctlMainForm::showDirtySettingsWarning (void)
 			else
 		#endif
 			QMessageBox::warning(this, sTitle, sText);
+		}
+		// Or restart immediately!...
+		if (bQueryRestart) {
+			stopJackServer();
+			m_bJackRestart = true;
 		}
 	}	// Otherwise, it will be just as convenient to update status...
 	else updateTitleStatus();
