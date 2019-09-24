@@ -4698,7 +4698,7 @@ void qjackctlMainForm::commitData ( QSessionManager& sm )
 
 
 // Some settings that are special someway...
-bool qjackctlMainForm::resetBuffSize ( jack_nframes_t nframes ) const
+bool qjackctlMainForm::resetBuffSize ( jack_nframes_t nframes )
 {
 	if (m_pJackClient == nullptr)
 		return false;
@@ -4706,6 +4706,10 @@ bool qjackctlMainForm::resetBuffSize ( jack_nframes_t nframes ) const
 	if (g_buffsize == nframes)
 		return true;
 
+	// Should we ask to reset some stats first?
+	resetXrunStats();
+
+	// Meh...
 	return (jack_set_buffer_size(m_pJackClient, nframes) == 0);
 }
 
