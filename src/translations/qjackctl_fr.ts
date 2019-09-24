@@ -108,7 +108,7 @@
     <message>
         <location filename="../qjackctlAboutForm.ui" line="37"/>
         <source>About</source>
-        <translation type="unfinished">À propos</translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.ui" line="87"/>
@@ -340,7 +340,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="44"/>
         <source>Connections</source>
-        <translation type="unfinished">Connexions</translation>
+        <translation>Connexions</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="153"/>
@@ -447,7 +447,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="33"/>
         <source>Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graphe</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="63"/>
@@ -1921,7 +1921,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4056"/>
         <source>Do you want to restart the JACK audio server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous redémarrer le serveur audio JACK ?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4392"/>
@@ -1996,7 +1996,7 @@ Voulez-vous enlever la connexion de la baie de brassage ?</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="39"/>
         <source>Messages / Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Messages / status</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="55"/>
@@ -2216,7 +2216,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="44"/>
         <source>Patchbay</source>
-        <translation type="unfinished"></translation>
+        <translation>Baie de brassage</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="374"/>
@@ -2554,7 +2554,7 @@ pour créer une définition de baie de brassage ?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="34"/>
         <source>Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Session</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="45"/>
@@ -4175,12 +4175,12 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3438"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;il faut demander la confirmation de l&apos;arrêt et/ou du redémarrage du serveur audio de JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3441"/>
         <source>Confirm server sh&amp;utdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmer l&apos;arrêt et/ou redémarrage d&amp;u serveur</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3487"/>
@@ -4215,7 +4215,7 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="34"/>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="637"/>
@@ -4399,7 +4399,7 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="33"/>
         <source>Socket</source>
-        <translation type="unfinished">Prise</translation>
+        <translation>Socket</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="189"/>
