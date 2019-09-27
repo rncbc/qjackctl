@@ -1796,10 +1796,21 @@ void qjackctlGraphCanvas::connectItems (void)
 			iter1.toFront();
 		if (!iter2.hasNext())
 			iter2.toFront();
-		// Submit command; notify eventual observers...
 		qjackctlGraphPort *port1 = iter1.next();
 		qjackctlGraphPort *port2 = iter2.next();
-		if (port1 && port2 && port1->portType() == port2->portType())
+		// Skip over non-matching port-types...
+		bool wrapped = false;
+		while (port1 && port2 && port1->portType() != port2->portType()) {
+			if (!iter2.hasNext()) {
+				if (wrapped)
+					break;
+				iter2.toFront();
+				wrapped = true;
+			}
+			port2 = iter2.next();
+		}
+		// Submit command; notify eventual observers...
+		if (!wrapped && port1 && port2 && port1->portNode() != port2->portNode())
 			connectPorts(port1, port2, true);
 	}
 

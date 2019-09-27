@@ -6,6 +6,11 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: avoid self-connecting over their own ports
+  when client nodes are selected as a whole group;
+  also try to match port-types in a oderly fashion
+  when connecting multiple selected ports.
+
 - Changing current JACK buffer size from Setup dialog
   (cf. Settings / Frames/Period) may now take effect
   just immediately ;) (EXPERIMENTAL)

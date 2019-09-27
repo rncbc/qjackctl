@@ -446,7 +446,7 @@ Sei sicuro?</translation>
         <translation>Connetti</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1826"/>
+        <location filename="../qjackctlGraph.cpp" line="1837"/>
         <source>Disconnect</source>
         <translation>Disconnetti</translation>
     </message>
@@ -976,37 +976,37 @@ Sei sicuro?</translation>
         <translation>Mostra informazioni a proposito del kit di strumenti Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="74"/>
+        <location filename="../qjackctlGraphForm.cpp" line="73"/>
         <source>&amp;Undo</source>
         <translation>&amp;Annulla</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="79"/>
+        <location filename="../qjackctlGraphForm.cpp" line="78"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ripeti</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="76"/>
+        <location filename="../qjackctlGraphForm.cpp" line="75"/>
         <source>Undo last edit action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="81"/>
+        <location filename="../qjackctlGraphForm.cpp" line="80"/>
         <source>Redo last edit action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="97"/>
+        <location filename="../qjackctlGraphForm.cpp" line="96"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="381"/>
+        <location filename="../qjackctlGraphForm.cpp" line="380"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="457"/>
+        <location filename="../qjackctlGraphForm.cpp" line="454"/>
         <source>Colors - %1</source>
         <translation type="unfinished"></translation>
     </message>

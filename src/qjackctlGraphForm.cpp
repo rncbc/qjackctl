@@ -31,7 +31,6 @@
 
 #include "qjackctlSetup.h"
 
-//#include <QTimer>
 #include <QMenu>
 
 #include <QMessageBox>
@@ -383,8 +382,6 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	// Trigger refresh cycle...
 	jack_changed();
 	alsa_changed();
-
-//	QTimer::singleShot(300, this, SLOT(refresh()));
 }
 
 
@@ -694,7 +691,6 @@ void qjackctlGraphForm::refresh (void)
 		stabilize();
 	}
 #endif
-//	QTimer::singleShot(300, this, SLOT(refresh()));
 }
 
 
