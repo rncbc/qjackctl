@@ -254,9 +254,9 @@ void qjackctlInterfaceComboBox::populateModel (void)
 	// FIXME: Only valid for ALSA, Sun and OSS devices,
 	// for the time being... and also CoreAudio ones too.
 	const QString& sDriver = m_pDriverComboBox->currentText();
-	const bool bAlsa      = (sDriver == "alsa");
-	const bool bSun       = (sDriver == "sun");
-	const bool bOss       = (sDriver == "oss");
+	const bool bAlsa = (sDriver == "alsa");
+	const bool bSun  = (sDriver == "sun");
+	const bool bOss  = (sDriver == "oss");
 #ifdef CONFIG_COREAUDIO
 	const bool bCoreaudio = (sDriver == "coreaudio");
 	std::map<QString, AudioDeviceID> coreaudioIdMap;

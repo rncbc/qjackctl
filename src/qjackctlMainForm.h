@@ -280,7 +280,7 @@ protected:
 	// from current parameter values.
 	bool getDBusParameters(qjackctlPreset& preset);
 
-	// D-BUS: Set parameter values.
+	// D-BUS: Get parameter values.
 	QVariant getDBusEngineParameter(const QString& param);
 	QVariant getDBusDriverParameter(const QString& param);
 	QVariant getDBusParameter(const QStringList& path);

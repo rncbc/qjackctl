@@ -790,8 +790,8 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 	qjackctlPreset preset;
 	if (m_pSetup->loadPreset(preset, sPreset)) {
 		setCurrentPreset(preset);
-		// Reset dirty flag.
-		m_iDirtySettings = 0;
+		// Reset dirty flag?
+		++m_iDirtySettings;
 	}
 
 	// Set current preset name..
@@ -1505,7 +1505,7 @@ void qjackctlSetupForm::optionsChanged (void)
 	if (m_iDirtySetup > 0)
 		return;
 
-	m_iDirtyOptions++;
+	++m_iDirtyOptions;
 	stabilizeForm();
 }
 

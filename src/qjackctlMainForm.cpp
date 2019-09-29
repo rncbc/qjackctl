@@ -473,7 +473,7 @@ qjackctlMainForm::qjackctlMainForm (
 	// Avoid extra transport toggles (play/stop)
 	m_iTransportPlay = 0;
 
-	// Whether to update conext menu on next status refresh.
+	// Whether to update context menu on next status refresh.
 	m_iMenuRefresh = 0;
 
 	// Whether we've Qt::Tool flag (from bKeepOnTop),
@@ -701,7 +701,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	// Maybe time to load default preset aliases?
 	m_pSetup->loadAliases();
 
-	// Check out some initial nullptrities(tm)...
+	// Check out some initial nullities(tm)...
 	if (m_pSetup->sMessagesFont.isEmpty() && m_pMessagesStatusForm)
 		m_pSetup->sMessagesFont = m_pMessagesStatusForm->messagesFont().toString();
 	if (m_pSetup->sDisplayFont1.isEmpty())
