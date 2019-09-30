@@ -3843,7 +3843,7 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="872"/>
         <location filename="../qjackctlSetupForm.cpp" line="925"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1773"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1777"/>
         <source>Warning</source>
         <translation>Opgelet</translation>
     </message>
@@ -3998,7 +3998,7 @@ Are you sure?</source>
 Bent u zeker?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1774"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1778"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

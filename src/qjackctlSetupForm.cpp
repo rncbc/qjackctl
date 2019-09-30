@@ -791,7 +791,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 	if (m_pSetup->loadPreset(preset, sPreset)) {
 		setCurrentPreset(preset);
 		// Reset dirty flag?
-		++m_iDirtySettings;
+		m_iDirtySettings = 0;
 	}
 
 	// Set current preset name..
@@ -1525,10 +1525,14 @@ void qjackctlSetupForm::apply (void)
 	}
 	else
 	if (m_iDirtyBuffSize > 0) {
-		// Just change JACK buffer size immediately...
-		if (pMainForm->resetBuffSize(jack_nframes_t(
-				m_ui.FramesComboBox->currentText().toUInt())))
-			m_iDirtyBuffSize = 0;
+		// Change JACK buffer size immediately...
+		if (!pMainForm->resetBuffSize(jack_nframes_t(
+				m_ui.FramesComboBox->currentText().toUInt()))) {
+			// Make up a settings change instead...
+			++m_iDirtySettings;
+		}
+		// We're not dirty anymore...
+		m_iDirtyBuffSize = 0;
 	}
 
 	if (m_iDirtyOptions > 0) {

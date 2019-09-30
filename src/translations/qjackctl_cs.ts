@@ -4065,7 +4065,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="872"/>
         <location filename="../qjackctlSetupForm.cpp" line="925"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1773"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1777"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
@@ -4186,7 +4186,7 @@ Jste si jistý?</translation>
         <translation>Soubory se zápisy</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1774"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1778"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

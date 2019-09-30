@@ -4706,11 +4706,12 @@ bool qjackctlMainForm::resetBuffSize ( jack_nframes_t nframes )
 	if (g_buffsize == nframes)
 		return true;
 
-	// Should we ask to reset some stats first?
-	resetXrunStats();
+	if (jack_set_buffer_size(m_pJackClient, nframes) != 0)
+		return false;
 
-	// Meh...
-	return (jack_set_buffer_size(m_pJackClient, nframes) == 0);
+	// May reset some stats...
+	resetXrunStats();
+	return true;
 }
 
 

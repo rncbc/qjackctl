@@ -3756,7 +3756,7 @@ Está seguro de sobreescribir esta carpeta?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="872"/>
         <location filename="../qjackctlSetupForm.cpp" line="925"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1773"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1777"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
@@ -3872,7 +3872,7 @@ Está seguro?</translation>
         <translation>Archivos de registros</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1774"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1778"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
