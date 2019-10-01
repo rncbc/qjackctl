@@ -108,7 +108,7 @@
     <message>
         <location filename="../qjackctlAboutForm.ui" line="37"/>
         <source>About</source>
-        <translation type="unfinished">O programu</translation>
+        <translation>O programu</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.ui" line="77"/>
@@ -293,7 +293,7 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="44"/>
         <source>Connections</source>
-        <translation type="unfinished">Spojení</translation>
+        <translation>Spojení</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="63"/>
@@ -447,7 +447,7 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="33"/>
         <source>Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graf</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="63"/>
@@ -1948,7 +1948,7 @@ novém spuštění serveru JACK.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4056"/>
         <source>Do you want to restart the JACK audio server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcete zvukový server JACK spustit znovu?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4392"/>
@@ -1999,7 +1999,7 @@ když příště spustíte tento program.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="39"/>
         <source>Messages / Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlášení/Stav</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="55"/>
@@ -2189,7 +2189,7 @@ Jste si jistýr?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="44"/>
         <source>Patchbay</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapojovací deska</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="105"/>
@@ -2557,7 +2557,7 @@ všech skutečných klientských spojení?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="34"/>
         <source>Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Sezení</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="45"/>
@@ -3662,12 +3662,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2579"/>
         <source>Whether to activate a messages logging to file.</source>
-        <translation>Spustit provádění zápisu hlášení do souboru.</translation>
+        <translation>Zapnout provádění zápisu hlášení do souboru.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="34"/>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="637"/>
@@ -3950,12 +3950,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3438"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeptat se na potvrzení při vypnutí zvukového serveru JACK a/nebo jeho restartování</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3441"/>
         <source>Confirm server sh&amp;utdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrdit &amp;vypnutí serveru a/nebo jeho restartování</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3455"/>
@@ -4337,7 +4337,7 @@ Chcete použít změny?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="33"/>
         <source>Socket</source>
-        <translation type="unfinished">Zásuvka</translation>
+        <translation>Zásuvka</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="52"/>
