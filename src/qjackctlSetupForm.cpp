@@ -84,6 +84,7 @@ qjackctlSetupForm::qjackctlSetupForm (
 
 	// Initialize dirty control state.
 	m_iDirtySetup = 0;
+	m_iDirtyPreset = 0;
 	m_iDirtyBuffSize = 0;
 	m_iDirtySettings = 0;
 	m_iDirtyOptions = 0;
@@ -792,6 +793,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 		setCurrentPreset(preset);
 		// Reset dirty flag?
 		m_iDirtySettings = 0;
+		++m_iDirtyPreset;
 	}
 
 	// Set current preset name..
@@ -1517,7 +1519,7 @@ void qjackctlSetupForm::apply (void)
 	if (pMainForm == nullptr)
 		return;
 
-	if (m_iDirtySettings > 0) {
+	if (m_iDirtySettings > 0 || m_iDirtyPreset > 0) {
 		// Save current preset selection.
 		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
 		// Always save current settings...
@@ -1710,13 +1712,15 @@ void qjackctlSetupForm::apply (void)
 	m_pSetup->saveSetup();
 
 	// If server is currently running, warn user...
-	if (m_iDirtySettings > 0) {
+	if (m_iDirtySettings > 0 || m_iDirtyPreset > 0) {
+		// Maybe whether to restart the server, who knows?
 		pMainForm->showDirtySettingsWarning();
 		// Maybe something changed on the way up?...
 		m_ui.QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
 	}
 
-	// Reset dirty flags.
+	// Reset all dirty flags...
+	m_iDirtyPreset = 0;
 	m_iDirtySettings = 0;
 	m_iDirtyOptions = 0;
 

@@ -4188,14 +4188,14 @@ Are you sure to overwrite the existing folder?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="872"/>
-        <location filename="../qjackctlSetupForm.cpp" line="925"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1777"/>
+        <location filename="../qjackctlSetupForm.cpp" line="874"/>
+        <location filename="../qjackctlSetupForm.cpp" line="927"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1781"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="873"/>
+        <location filename="../qjackctlSetupForm.cpp" line="875"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -4208,7 +4208,7 @@ Do you want to save the changes?</source>
 変更を保存しますか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="926"/>
+        <location filename="../qjackctlSetupForm.cpp" line="928"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -4221,97 +4221,97 @@ Are you sure?</source>
 よろしいですか?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="959"/>
+        <location filename="../qjackctlSetupForm.cpp" line="961"/>
         <source>msec</source>
         <translation>ミリ秒</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="961"/>
+        <location filename="../qjackctlSetupForm.cpp" line="963"/>
         <source>n/a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1247"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1249"/>
         <source>&amp;Preset Name</source>
         <translation>プリセット名(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1249"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1251"/>
         <source>&amp;Server Name</source>
         <translation>サーバー名(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1250"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1252"/>
         <source>&amp;Server Path</source>
         <translation>サーバーパス(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1251"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1253"/>
         <source>&amp;Driver</source>
         <translation>ドライバー(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1252"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1254"/>
         <source>&amp;Interface</source>
         <translation>インターフェース(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1254"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1256"/>
         <source>Sample &amp;Rate</source>
         <translation>サンプルレート(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1255"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1257"/>
         <source>&amp;Frames/Period</source>
         <translation>フレーム/ピリオド(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1256"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1258"/>
         <source>Periods/&amp;Buffer</source>
         <translation>ピリオド/バッファー(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1304"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1306"/>
         <source>Startup Script</source>
         <translation>スタートアップスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1321"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1323"/>
         <source>Post-Startup Script</source>
         <translation>ポストスタートアップスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1338"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1340"/>
         <source>Shutdown Script</source>
         <translation>シャットダウンスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1355"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1357"/>
         <source>Post-Shutdown Script</source>
         <translation>ポストシャットダウンスクリプト</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1372"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1374"/>
         <source>Active Patchbay Definition</source>
         <translation>有効なパッチベイ定義</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1374"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1376"/>
         <source>Patchbay Definition files</source>
         <translation>パッチベイ定義ファイル</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1390"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1392"/>
         <source>Messages Log</source>
         <translation>メッセージログ</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1392"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1394"/>
         <source>Log files</source>
         <translation>ログファイル</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1778"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1782"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

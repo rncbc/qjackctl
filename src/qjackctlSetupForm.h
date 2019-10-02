@@ -128,6 +128,7 @@ private:
 	QButtonGroup *m_pTimeDisplayButtonGroup;
 
 	int m_iDirtySetup;
+	int m_iDirtyPreset;
 	int m_iDirtyBuffSize;
 	int m_iDirtySettings;
 	int m_iDirtyOptions;
