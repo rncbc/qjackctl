@@ -30,7 +30,7 @@
         <location filename="../qjackctlSetup.cpp" line="52"/>
         <source>(default)</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
-        <translation></translation>
+        <translation>(padrão)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="510"/>
@@ -2824,7 +2824,7 @@ Está certo de sobrescrever a pasta existente?</translation>
         <location filename="../qjackctlSetupForm.ui" line="3845"/>
         <source>(default)</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
-        <translation></translation>
+        <translation>(padrão)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="86"/>
@@ -2855,19 +2855,19 @@ Está certo de sobrescrever a pasta existente?</translation>
         <location filename="../qjackctlSetupForm.ui" line="796"/>
         <source>jackd</source>
         <translatorcomment>DO NOT TRANSLATE</translatorcomment>
-        <translation></translation>
+        <translation>jackd</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="801"/>
         <source>jackdmp</source>
         <translatorcomment>DO NOT TRANSLATE</translatorcomment>
-        <translation></translation>
+        <translation>jackdmp</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="806"/>
         <source>jackstart</source>
         <translatorcomment>DO NOT TRANSLATE</translatorcomment>
-        <translation></translation>
+        <translation>jackstart</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="153"/>
@@ -2878,43 +2878,43 @@ Está certo de sobrescrever a pasta existente?</translation>
         <location filename="../qjackctlSetupForm.ui" line="182"/>
         <source>dummy</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>dummy</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="187"/>
         <source>sun</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>sun</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="192"/>
         <source>oss</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>oss</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="197"/>
         <source>alsa</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>alsa</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="202"/>
         <source>portaudio</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>portaudio</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="207"/>
         <source>coreaudio</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>coreaudio</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="212"/>
         <source>firewire</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>firewire</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="139"/>
@@ -3910,13 +3910,13 @@ Você quer aplicar as mudanças?</translation>
         <location filename="../qjackctlSetupForm.ui" line="371"/>
         <source>raw</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>raw</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="376"/>
         <source>seq</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>seq</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="658"/>
@@ -4216,7 +4216,7 @@ Você quer aplicar as mudanças?</translation>
         <location filename="../qjackctlSetupForm.ui" line="217"/>
         <source>net</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>rede</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3582"/>
@@ -4237,7 +4237,7 @@ Você quer aplicar as mudanças?</translation>
         <location filename="../qjackctlSetupForm.ui" line="222"/>
         <source>netone</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/54</translatorcomment>
-        <translation></translation>
+        <translation>netone</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3630"/>
