@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.6.0  2019-10-17  An Autumn'19 Release.
 
 - Graph: avoid self-connecting over their own ports
   when client nodes are selected as a whole group;
@@ -13,25 +13,24 @@ GIT HEAD
 
 - Changing current JACK buffer size from Setup dialog
   (cf. Settings / Frames/Period) may now take effect
-  just immediately ;) (EXPERIMENTAL)
+  just immediately ;)
 
 - An 'Apply' button as been added to the Setup dialog;
   ask whether to restart the JACK audio server, if any
-  settings are changed. (EXPERIMENTAL)
+  settings are changed.
 
 - Added alternate yet non-official CMake build option.
-  (EXPERIMENTAL)
 
 - Fix HiDPI display screen effective support (Qt >= 5.6).
 
 - Command line arguments (--start, --preset=[label] and
   --active-patchbay=[path]) are passed and take effect
   on the current singleton/unique application instance,
-  when enabled and already running. (EXPERIMENTAL)
+  when enabled and already running.
 
 - System-tray icon context menu has been refactored to
   be exactly the same as the main-window context menu
-  that is re-instantiated on demand. (EXPERIMENTAL)
+  that is re-instantiated on demand.
 
 - Make sure compiler flags comply to c++11 as standard.
 
