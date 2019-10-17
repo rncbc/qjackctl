@@ -488,6 +488,9 @@ public:
 	// Clear all selection.
 	void clearSelection();
 
+	// Clear all state.
+	void clear();
+
 	// Client/port aliases accessors.
 	void setAliases(qjackctlAliases *aliases);
 	qjackctlAliases *aliases() const;

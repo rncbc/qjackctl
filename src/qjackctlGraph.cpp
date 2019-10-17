@@ -1133,6 +1133,8 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 // Destructor.
 qjackctlGraphCanvas::~qjackctlGraphCanvas (void)
 {
+	clear();
+
 	delete m_editor;
 	delete m_commands;
 	delete m_scene;
@@ -1731,28 +1733,9 @@ void qjackctlGraphCanvas::wheelEvent ( QWheelEvent *event )
 void qjackctlGraphCanvas::keyPressEvent ( QKeyEvent *event )
 {
 	if (event->key() == Qt::Key_Escape) {
-		m_selected_nodes = 0;
 		m_scene->clearSelection();
-		if (m_rubberband) {
-			delete m_rubberband;
-			m_rubberband = nullptr;
-			m_selected.clear();
-		}
-		if (m_connect) {
-			delete m_connect;
-			m_connect = nullptr;
-		}
-		if (m_state == DragScroll)
-			QGraphicsView::setDragMode(QGraphicsView::NoDrag);
-		m_state = DragNone;
-		m_item = nullptr;
-		m_edit_item = nullptr;
-		m_editor->setEnabled(false);
-		m_editor->hide();
-		m_edited = 0;
+		clear();
 		emit changed();
-		// Reset cursor...
-		QGraphicsView::setCursor(Qt::ArrowCursor);
 	}
 }
 
@@ -2201,6 +2184,33 @@ void qjackctlGraphCanvas::clearSelection (void)
 	m_editor->setEnabled(false);
 	m_editor->hide();
 	m_edited = 0;
+}
+
+
+// Clear all state.
+void qjackctlGraphCanvas::clear (void)
+{
+	m_selected_nodes = 0;
+	if (m_rubberband) {
+		delete m_rubberband;
+		m_rubberband = nullptr;
+		m_selected.clear();
+	}
+	if (m_connect) {
+		delete m_connect;
+		m_connect = nullptr;
+	}
+	if (m_state == DragScroll)
+		QGraphicsView::setDragMode(QGraphicsView::NoDrag);
+	m_state = DragNone;
+	m_item = nullptr;
+	m_edit_item = nullptr;
+	m_editor->setEnabled(false);
+	m_editor->hide();
+	m_edited = 0;
+
+	// Reset cursor...
+	QGraphicsView::setCursor(Qt::ArrowCursor);
 }
 
 
