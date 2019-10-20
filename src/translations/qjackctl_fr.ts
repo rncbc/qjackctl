@@ -596,7 +596,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="293"/>
         <source>&amp;Rename...</source>
-        <translation>&amp;Renommer...</translation>
+        <translation>&amp;Renommer…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="296"/>
@@ -798,7 +798,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="524"/>
         <source>JACK &amp;Audio...</source>
-        <translation>JACK &amp;audio...</translation>
+        <translation>JACK &amp;audio…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="527"/>
@@ -810,7 +810,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="541"/>
         <source>JACK &amp;MIDI...</source>
-        <translation>JACK &amp;MIDI...</translation>
+        <translation>JACK &amp;MIDI…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="544"/>
@@ -826,7 +826,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="558"/>
         <source>&amp;ALSA MIDI...</source>
-        <translation>&amp;ALSA MIDI...</translation>
+        <translation>&amp;ALSA MIDI…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="561"/>
@@ -929,12 +929,12 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="677"/>
         <source>&amp;About...</source>
-        <translation>À &amp;propos...</translation>
+        <translation>À &amp;propos…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="680"/>
         <source>About...</source>
-        <translation>À propos...</translation>
+        <translation>À propos…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="683"/>
@@ -949,12 +949,12 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="694"/>
         <source>About &amp;Qt...</source>
-        <translation>À propos de &amp;Qt...</translation>
+        <translation>À propos de &amp;Qt…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="697"/>
         <source>About Qt...</source>
-        <translation>À propos de Qt...</translation>
+        <translation>À propos de Qt…</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="700"/>
@@ -1233,7 +1233,7 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1260"/>
         <source>Startup script...</source>
-        <translation>Script de démarrage...</translation>
+        <translation>Script de démarrage…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1261"/>
@@ -1243,7 +1243,7 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1494"/>
         <source>JACK is starting...</source>
-        <translation>JACK démarre...</translation>
+        <translation>JACK démarre…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2610"/>
@@ -1257,12 +1257,12 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1592"/>
         <source>JACK is stopping...</source>
-        <translation>JACK s&apos;arrête...</translation>
+        <translation>JACK s&apos;arrête…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1585"/>
         <source>Shutdown script...</source>
-        <translation>Script d&apos;extinction...</translation>
+        <translation>Script d&apos;extinction…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="984"/>
@@ -1280,7 +1280,7 @@ Désolé.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1771"/>
         <source>Post-shutdown script...</source>
-        <translation>Script post-extinction...</translation>
+        <translation>Script post-extinction…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1772"/>
@@ -1403,7 +1403,7 @@ Voulez-vous sauvegarder les changements ?</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3097"/>
         <source>Post-startup script...</source>
-        <translation>Script post-démarrage...</translation>
+        <translation>Script post-démarrage…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3098"/>
@@ -1413,7 +1413,7 @@ Voulez-vous sauvegarder les changements ?</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3106"/>
         <source>Command line argument...</source>
-        <translation>Argument de ligne de commande...</translation>
+        <translation>Argument de ligne de commande…</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3107"/>
