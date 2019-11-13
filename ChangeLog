@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Second attempt to fix the yet non-official though
+  CMake build configuration. (EXPERIMENTAL)
+
 - When using autotools and ./configure --with-qt=...,
   it is also necessary to adjust the PKG_CONFIG_PATH
   environment variable (after a merge request by plcl

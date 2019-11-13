@@ -131,18 +131,22 @@ if (CONFIG_JACK)
 # link_libraries (${JACK_LIBRARIES})
   set (CMAKE_REQUIRED_LIBRARIES "${JACK_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
   # Check for jack/statistics.h header.
-  check_include_file (jack/statistics.h CONFIG_JACK_STATISTICS)
+  check_include_file (jack/statistics.h HAVE_JACK_STATISTICS_H)
+  set (CONFIG_JACK_STATISTICS ${HAVE_JACK_STATISTICS_H})
   # Check for JACK MIDI headers availability.
   if (CONFIG_JACK_MIDI)
-    check_include_file (jack/midiport.h CONFIG_JACK_MIDI)
+    check_include_file (jack/midiport.h HAVE_JACK_MIDIPORT_H)
+    set (CONFIG_JACK_MIDI, ${HAVE_JACK_MIDIPORT_H})
   endif ()
   # Check for JACK session headers availability.
   if (CONFIG_JACK_SESSION)
-    check_include_file (jack/session.h CONFIG_JACK_SESSION)
+    check_include_file (jack/session.h HAVE_JACK_SESSION_H)
+    set (CONFIG_JACK_SESSION, ${HAVE_JACK_SESSION_H})
   endif ()
   # Check for JACK metadata headers availability.
   if (CONFIG_JACK_METADATA)
-    check_include_file (jack/metadata.h CONFIG_JACK_METADATA)
+    check_include_file (jack/metadata.h HAVE_JACK_METADATA_H)
+    set (CONFIG_JACK_METADATA, ${HAVE_JACK_METADATA_H})
   endif ()
   # Check for jack_transport_query function.
   check_function_exists (jack_transport_query CONFIG_JACK_TRANSPORT)
@@ -198,7 +202,8 @@ endif ()
 
 
 if (APPLE AND CONFIG_COREAUDIO)
-  check_include_file (CoreAudio/CoreAudio.h CONFIG_COREAUDIO)
+  check_include_file (CoreAudio/CoreAudio.h HAVE_COREAUDIO_H)
+  set (CONFIG_COREAUDIO ${HAVE_COREAUDIO_H})
 endif ()
 
 
