@@ -134,6 +134,8 @@ if (CONFIG_JACK)
   check_include_file (jack/statistics.h HAVE_JACK_STATISTICS_H)
   if (NOT HAVE_JACK_STATISTICS_H)
     set (CONFIG_JACK_STATISTICS 0)
+  else ()
+    set (CONFIG_JACK_STATISTICS 1)
   endif ()
   # Check for JACK MIDI headers availability.
   if (CONFIG_JACK_MIDI)
