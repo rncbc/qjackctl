@@ -586,13 +586,13 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		else if (sArg == "-v" || sArg == "--version") {
 			out << QString("Qt: %1\n")
 				.arg(qVersion());
-			out << QString("%1: %2\n")
-				.arg(QJACKCTL_TITLE)
-				.arg(CONFIG_BUILD_VERSION);
 		#ifdef CONFIG_JACK_VERSION
 			out << QString("JACK: %1\n")
 				.arg(jack_get_version_string());
 		#endif
+			out << QString("%1: %2\n")
+				.arg(QJACKCTL_TITLE)
+				.arg(CONFIG_BUILD_VERSION);
 			return false;
 		}	// FIXME: Avoid auto-start jackd stuffed args!
 		else if (sArg != "-T" && sArg != "-ndefault") {
