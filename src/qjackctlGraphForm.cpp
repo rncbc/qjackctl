@@ -783,7 +783,7 @@ void qjackctlGraphForm::showEvent ( QShowEvent *pShowEvent )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 
 	QWidget::showEvent(pShowEvent);
 }
@@ -796,7 +796,7 @@ void qjackctlGraphForm::hideEvent ( QHideEvent *pHideEvent )
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 }
 
 
@@ -818,7 +818,6 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 
 	QMainWindow::closeEvent(pCloseEvent);
 }
-
 
 
 // Special port-type color methods.

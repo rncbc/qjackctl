@@ -96,6 +96,7 @@ public:
 	void setRecentPatchbays(const QStringList& patchbays);
 
 	void stabilizeForm();
+	void stabilizeFormEx();
 
 	void stabilize(int msecs);
 

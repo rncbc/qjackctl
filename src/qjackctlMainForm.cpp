@@ -2346,6 +2346,14 @@ void qjackctlMainForm::stabilizeForm (void)
 }
 
 
+void qjackctlMainForm::stabilizeFormEx (void)
+{
+	updateContextMenu();
+
+	stabilizeForm();
+}
+
+
 // Stabilize current business over the application event loop.
 void qjackctlMainForm::stabilize ( int msecs )
 {

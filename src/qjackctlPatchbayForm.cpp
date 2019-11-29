@@ -162,7 +162,7 @@ void qjackctlPatchbayForm::showEvent ( QShowEvent *pShowEvent )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 
 	stabilizeForm();
 
@@ -177,12 +177,12 @@ void qjackctlPatchbayForm::hideEvent ( QHideEvent *pHideEvent )
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 }
 
 
 // Just about to notify main-window that we're closing.
-void qjackctlPatchbayForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+void qjackctlPatchbayForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
 	if (m_pSetup) {
 		const QString& sPatchbayPath = patchbayPath();
@@ -190,11 +190,7 @@ void qjackctlPatchbayForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 			m_pSetup->sPatchbayPath = sPatchbayPath;
 	}
 
-	QWidget::hide();
-
-	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm)
-		pMainForm->stabilizeForm();
+	QWidget::closeEvent(pCloseEvent);
 }
 
 

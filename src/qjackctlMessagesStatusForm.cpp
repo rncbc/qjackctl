@@ -152,7 +152,7 @@ void qjackctlMessagesStatusForm::showEvent ( QShowEvent *pShowEvent )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 
 	QWidget::showEvent(pShowEvent);
 }
@@ -164,17 +164,7 @@ void qjackctlMessagesStatusForm::hideEvent ( QHideEvent *pHideEvent )
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
-}
-
-// Just about to notify main-window that we're closing.
-void qjackctlMessagesStatusForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
-{
-	QWidget::hide();
-
-	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 }
 
 

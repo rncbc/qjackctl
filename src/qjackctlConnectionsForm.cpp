@@ -213,7 +213,7 @@ void qjackctlConnectionsForm::showEvent ( QShowEvent *pShowEvent )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 
 	audioRefresh();
 	midiRefresh();
@@ -231,12 +231,12 @@ void qjackctlConnectionsForm::hideEvent ( QHideEvent *pHideEvent )
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 }
 
 
 // Just about to notify main-window that we're closing.
-void qjackctlConnectionsForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+void qjackctlConnectionsForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
 	// Save current tab page and splitter sizes...
 	if (m_pSetup) {
@@ -246,11 +246,7 @@ void qjackctlConnectionsForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
 		m_pSetup->saveSplitterSizes(m_ui.AlsaConnectView);
 	}
 
-	QWidget::hide();
-
-	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm)
-		pMainForm->stabilizeForm();
+	QWidget::closeEvent(pCloseEvent);
 }
 
 

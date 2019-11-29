@@ -426,7 +426,7 @@ void qjackctlSessionForm::showEvent ( QShowEvent *pShowEvent )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 
 	QWidget::showEvent(pShowEvent);
 }
@@ -439,23 +439,19 @@ void qjackctlSessionForm::hideEvent ( QHideEvent *pHideEvent )
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
-		pMainForm->stabilizeForm();
+		pMainForm->stabilizeFormEx();
 }
 
 
 // Just about to notify main-window that we're closing.
-void qjackctlSessionForm::closeEvent ( QCloseEvent * /*pCloseEvent*/ )
+void qjackctlSessionForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
 	if (m_pSetup) {
 		m_pSetup->sessionDirs = sessionDirs();
 		m_pSetup->bSessionSaveVersion = isSaveSessionVersion();
 	}
 
-	QWidget::hide();
-
-	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-	if (pMainForm)
-		pMainForm->stabilizeForm();
+	QWidget::closeEvent(pCloseEvent);
 }
 
 
