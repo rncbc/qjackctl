@@ -36,6 +36,7 @@ HEADERS += config.h \
 	qjackctlPatchbayForm.h \
 	qjackctlSessionForm.h \
 	qjackctlSetupForm.h \
+	qjackctlPaletteForm.h \
 	qjackctlSocketForm.h
 
 SOURCES += \
@@ -63,6 +64,7 @@ SOURCES += \
 	qjackctlPatchbayForm.cpp \
 	qjackctlSessionForm.cpp \
 	qjackctlSetupForm.cpp \
+	qjackctlPaletteForm.cpp \
 	qjackctlSocketForm.cpp
 
 FORMS += \
@@ -74,6 +76,7 @@ FORMS += \
 	qjackctlPatchbayForm.ui \
 	qjackctlSessionForm.ui \
 	qjackctlSetupForm.ui \
+	qjackctlPaletteForm.ui \
 	qjackctlSocketForm.ui
 
 RESOURCES += \

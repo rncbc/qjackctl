@@ -24,6 +24,12 @@
 #include "qjackctlSetup.h"
 #include "qjackctlMainForm.h"
 
+#include "qjackctlPaletteForm.h"
+
+#include <QDir>
+
+ #include <QStyleFactory>
+ 
 #include <QLibraryInfo>
 #include <QTranslator>
 #include <QLocale>
@@ -42,6 +48,20 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #ifndef CONFIG_DATADIR
 #define CONFIG_DATADIR	CONFIG_PREFIX "/share"
+#endif
+
+#ifndef CONFIG_LIBDIR
+#if defined(__x86_64__)
+#define CONFIG_LIBDIR	CONFIG_PREFIX "/lib64"
+#else
+#define CONFIG_LIBDIR	CONFIG_PREFIX "/lib"
+#endif
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#define CONFIG_PLUGINSDIR CONFIG_LIBDIR "/qt4/plugins"
+#else
+#define CONFIG_PLUGINSDIR CONFIG_LIBDIR "/qt5/plugins"
 #endif
 
 
@@ -503,65 +523,48 @@ int main ( int argc, char **argv )
 	qjackctlApplication app(argc, argv);
 
 	// Construct default settings; override with command line arguments.
-	qjackctlSetup settings;
-	if (!settings.parse_args(app.arguments())) {
+	qjackctlSetup setup;
+	if (!setup.parse_args(app.arguments())) {
 		app.quit();
 		return 1;
 	}
 
 	// Check if we'll just start an external program...
-	if (!settings.sCmdLine.isEmpty()) {
+	if (!setup.sCmdLine.isEmpty()) {
 		jack_client_t *pJackClient
 			= jack_client_open("qjackctl-start", JackNoStartServer, nullptr);
 		if (pJackClient) {
 			jack_client_close(pJackClient);
 			const int iExitStatus
-				= ::system(settings.sCmdLine.toUtf8().constData());
+				= ::system(setup.sCmdLine.toUtf8().constData());
 			app.quit();
 			return iExitStatus;
 		}
 	}
 
 	// Have another instance running?
-	if (settings.bSingleton) {
-		if (app.setup(settings.sServerName)) {
+	if (setup.bSingleton) {
+		if (app.setup(setup.sServerName)) {
 			app.quit();
 			return 2;
 		}
 	}
 
-	// Dark themes grayed/disabled color group fix...
-	QPalette pal(app.palette());
-	if (pal.base().color().value() < 0x7f) {
-	#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-		const QColor& color = pal.window().color();
-		const int iGroups = int(QPalette::Active | QPalette::Inactive) + 1;
-		for (int i = 0; i < iGroups; ++i) {
-			const QPalette::ColorGroup group = QPalette::ColorGroup(i);
-			pal.setBrush(group, QPalette::Light,    color.lighter(150));
-			pal.setBrush(group, QPalette::Midlight, color.lighter(120));
-			pal.setBrush(group, QPalette::Dark,     color.darker(150));
-			pal.setBrush(group, QPalette::Mid,      color.darker(120));
-			pal.setBrush(group, QPalette::Shadow,   color.darker(200));
-		}
-	//	pal.setColor(QPalette::Disabled, QPalette::ButtonText, pal.mid().color());
-	#endif
-		pal.setColorGroup(QPalette::Disabled,
-			pal.windowText().color().darker(),
-			pal.button(),
-			pal.light(),
-			pal.dark(),
-			pal.mid(),
-			pal.text().color().darker(),
-			pal.text().color().lighter(),
-			pal.base(),
-			pal.window());
-		app.setPalette(pal);
-	}
+	// Special custom styles...
+ 	if (QDir(CONFIG_PLUGINSDIR).exists())
+		app.addLibraryPath(CONFIG_PLUGINSDIR);
+ 	if (!setup.sCustomStyleTheme.isEmpty())
+		app.setStyle(QStyleFactory::create(setup.sCustomStyleTheme));
 
+	// Custom color theme (eg. "KXStudio")...
+	QPalette pal(app.palette());
+	if (qjackctlPaletteForm::namedPalette(
+			&setup.settings(), setup.sCustomColorTheme, pal))
+		app.setPalette(pal);
+ 
 	// Set default base font...
-	if (settings.iBaseFontSize > 0)
-		app.setFont(QFont(app.font().family(), settings.iBaseFontSize));
+	if (setup.iBaseFontSize > 0)
+		app.setFont(QFont(app.font().family(), setup.iBaseFontSize));
 
 	// What style do we create these forms?
 	Qt::WindowFlags wflags = Qt::Window
@@ -570,13 +573,13 @@ int main ( int argc, char **argv )
 		| Qt::WindowSystemMenuHint
 		| Qt::WindowMinMaxButtonsHint
 		| Qt::WindowCloseButtonHint;
-	if (settings.bKeepOnTop)
+	if (setup.bKeepOnTop)
 		wflags |= Qt::Tool;
 	// Construct the main form, and show it to the world.
 	qjackctlMainForm w(0, wflags);
-	w.setup(&settings);
+	w.setup(&setup);
 	// If we have a systray icon, we'll skip this.
-	if (!settings.bSystemTray) {
+	if (!setup.bSystemTray) {
 		w.show();
 		w.adjustSize();
 	}

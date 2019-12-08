@@ -110,6 +110,10 @@
   <file>images/xstarting1.png</file>
   <file>images/xstopped1.png</file>
   <file>images/xstopping1.png</file>
+  <file>images/formOpen.png</file>
+  <file>images/formRemove.png</file>
+  <file>images/formSave.png</file>
+  <file>images/itemReset.png</file>
   <file>images/qtlogo1.png</file>
  </qresource>
 </RCC>

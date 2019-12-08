@@ -78,6 +78,8 @@ protected slots:
 	void chooseMessagesFont();
 	void chooseConnectionsFont();
 
+	void editCustomColorThemes();
+
 	void buffSizeChanged();
 
 	void settingsChanged();
@@ -110,6 +112,10 @@ protected:
 	void changeDriverUpdate( const QString& sDriver, bool bUpdate );
 
 	void symbolMenu(QLineEdit * pLineEdit, QToolButton * pToolButton );
+
+	// Custom color/style themes settlers.
+	void resetCustomColorThemes(const QString& sCustomColorTheme);
+	void resetCustomStyleThemes(const QString& sCustomStyleTheme);
 
 	void stabilizeForm();
 

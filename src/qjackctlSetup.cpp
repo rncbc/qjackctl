@@ -113,6 +113,8 @@ void qjackctlSetup::loadSetup (void)
 	sDisplayFont2            = m_settings.value("/DisplayFont2").toString();
 	bDisplayEffect           = m_settings.value("/DisplayEffect", true).toBool();
 	bDisplayBlink            = m_settings.value("/DisplayBlink", true).toBool();
+	sCustomColorTheme        = m_settings.value("/CustomColorTheme").toString();
+	sCustomStyleTheme        = m_settings.value("/CustomStyleTheme").toString();
 	iJackClientPortAlias     = m_settings.value("/JackClientPortAlias", 0).toInt();
 	bJackClientPortMetadata  = m_settings.value("/JackClientPortMetadata", false).toBool();
 	iConnectionsIconSize     = m_settings.value("/ConnectionsIconSize", QJACKCTL_ICON_16X16).toInt();
@@ -225,6 +227,8 @@ void qjackctlSetup::saveSetup (void)
 	m_settings.setValue("/DisplayFont2",            sDisplayFont2);
 	m_settings.setValue("/DisplayEffect",           bDisplayEffect);
 	m_settings.setValue("/DisplayBlink",            bDisplayBlink);
+	m_settings.setValue("/CustomColorTheme",        sCustomColorTheme);
+	m_settings.setValue("/CustomStyleTheme",        sCustomStyleTheme);
 	m_settings.setValue("/JackClientPortAlias",     iJackClientPortAlias);
 	m_settings.setValue("/JackClientPortMetadata",  bJackClientPortMetadata);
 	m_settings.setValue("/ConnectionsIconSize",     iConnectionsIconSize);

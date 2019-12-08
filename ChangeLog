@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Custom color (palette) theme editor introduced; color
+  (palette) theme changes are now effective immediately,
+  except on default. (EXPERIMENTAL)
+
 - Second attempt to fix the yet non-official though
   CMake build configuration. (EXPERIMENTAL)
 

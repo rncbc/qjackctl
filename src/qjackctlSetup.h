@@ -151,6 +151,8 @@ public:
 	QString sDisplayFont2;
 	bool    bDisplayEffect;
 	bool    bDisplayBlink;
+	QString sCustomColorTheme;
+	QString sCustomStyleTheme;
 	int     iJackClientPortAlias;
 	bool    bJackClientPortMetadata;
 	int     iConnectionsIconSize;

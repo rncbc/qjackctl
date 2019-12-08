@@ -34,6 +34,7 @@ set (HEADERS
   qjackctlPatchbayForm.h
   qjackctlSessionForm.h
   qjackctlSetupForm.h
+  qjackctlPaletteForm.h
   qjackctlSocketForm.h
 )
 
@@ -62,6 +63,7 @@ set (SOURCES
   qjackctlPatchbayForm.cpp
   qjackctlSessionForm.cpp
   qjackctlSetupForm.cpp
+  qjackctlPaletteForm.cpp
   qjackctlSocketForm.cpp
 )
 
@@ -74,6 +76,7 @@ set (FORMS
   qjackctlPatchbayForm.ui
   qjackctlSessionForm.ui
   qjackctlSetupForm.ui
+  qjackctlPaletteForm.ui
   qjackctlSocketForm.ui
 )
 

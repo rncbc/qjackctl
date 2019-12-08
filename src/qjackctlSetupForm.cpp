@@ -24,6 +24,8 @@
 
 #include "qjackctlMainForm.h"
 
+#include "qjackctlPaletteForm.h"
+
 #include "qjackctlSetup.h"
 
 #include <QValidator>
@@ -36,6 +38,8 @@
 #include <QMenu>
 
 #include <QButtonGroup>
+
+#include <QStyleFactory>
 
 #ifdef CONFIG_SYSTEM_TRAY
 #include <QSystemTrayIcon>
@@ -58,6 +62,10 @@
 #ifdef CONFIG_ALSA_SEQ
 #include <alsa/asoundlib.h>
 #endif
+
+
+// Default (empty/blank) name.
+static const char *g_pszDefName = QT_TR_NOOP("(default)");
 
 
 //----------------------------------------------------------------------------
@@ -330,6 +338,15 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.DisplayBlinkCheckBox,
 		SIGNAL(toggled(bool)),
 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.CustomColorThemeComboBox,
+		SIGNAL(activated(int)),
+		SLOT(optionsChanged()));
+	QObject::connect(m_ui.CustomColorThemeToolButton,
+		SIGNAL(clicked()),
+		SLOT(editCustomColorThemes()));
+ 	QObject::connect(m_ui.CustomStyleThemeComboBox,
+ 		SIGNAL(activated(int)),
+ 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.DisplayFont1PushButton,
 		SIGNAL(clicked()),
 		SLOT(chooseDisplayFont1()));
@@ -622,6 +639,10 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 		m_ui.BaseFontSizeComboBox->setEditText(QString::number(m_pSetup->iBaseFontSize));
 	else
 		m_ui.BaseFontSizeComboBox->setCurrentIndex(0);
+
+	// Custom display options...
+	resetCustomColorThemes(m_pSetup->sCustomColorTheme);
+	resetCustomStyleThemes(m_pSetup->sCustomStyleTheme);
 
 #ifdef CONFIG_SYSTEM_TRAY
 	const bool bSystemTray = QSystemTrayIcon::isSystemTrayAvailable();
@@ -1479,6 +1500,70 @@ void qjackctlSetupForm::chooseConnectionsFont (void)
 }
 
 
+// Custom color palette theme manager.
+void qjackctlSetupForm::editCustomColorThemes (void)
+{
+	qjackctlPaletteForm form(this);
+	form.setSettings(&m_pSetup->settings());
+
+	QString sCustomColorTheme;
+	int iDirtyCustomColorTheme = 0;
+
+	const int iCustomColorTheme
+		= m_ui.CustomColorThemeComboBox->currentIndex();
+	if (iCustomColorTheme > 0) {
+		sCustomColorTheme = m_ui.CustomColorThemeComboBox->itemText(
+			iCustomColorTheme);
+		form.setPaletteName(sCustomColorTheme);
+	}
+
+	if (form.exec() == QDialog::Accepted) {
+		sCustomColorTheme = form.paletteName();
+		++iDirtyCustomColorTheme;
+	}
+
+	if (iDirtyCustomColorTheme > 0 || form.isDirty()) {
+		resetCustomColorThemes(sCustomColorTheme);
+		optionsChanged();
+	}
+}
+
+
+// Custom color palette themes settler.
+void qjackctlSetupForm::resetCustomColorThemes (
+	const QString& sCustomColorTheme )
+{
+	m_ui.CustomColorThemeComboBox->clear();
+	m_ui.CustomColorThemeComboBox->addItem(
+		tr(g_pszDefName));
+	m_ui.CustomColorThemeComboBox->addItems(
+		qjackctlPaletteForm::namedPaletteList(&m_pSetup->settings()));
+
+	int iCustomColorTheme = 0;
+	if (!sCustomColorTheme.isEmpty())
+		iCustomColorTheme = m_ui.CustomColorThemeComboBox->findText(
+			sCustomColorTheme);
+	m_ui.CustomColorThemeComboBox->setCurrentIndex(iCustomColorTheme);
+}
+
+
+// Custom widget style themes settler.
+void qjackctlSetupForm::resetCustomStyleThemes (
+	const QString& sCustomStyleTheme )
+{
+	m_ui.CustomStyleThemeComboBox->clear();
+	m_ui.CustomStyleThemeComboBox->addItem(
+		tr(g_pszDefName));
+	m_ui.CustomStyleThemeComboBox->addItems(QStyleFactory::keys());
+
+	int iCustomStyleTheme = 0;
+	if (!sCustomStyleTheme.isEmpty())
+		iCustomStyleTheme = m_ui.CustomStyleThemeComboBox->findText(
+			sCustomStyleTheme);
+	m_ui.CustomStyleThemeComboBox->setCurrentIndex(iCustomStyleTheme);
+}
+
+
 // Brag about any buffer-size (frames/period) changes...
 void qjackctlSetupForm::buffSizeChanged (void)
 {
@@ -1626,6 +1711,45 @@ void qjackctlSetupForm::apply (void)
 		m_pSetup->bTextLabels              = !m_ui.TextLabelsCheckBox->isChecked();
 		m_pSetup->bGraphButton             = m_ui.GraphButtonCheckBox->isChecked();
 		m_pSetup->iBaseFontSize            = m_ui.BaseFontSizeComboBox->currentText().toInt();
+		// Custom color/style theme options...
+		const QString sOldCustomStyleTheme = m_pSetup->sCustomStyleTheme;
+ 		if (m_ui.CustomStyleThemeComboBox->currentIndex() > 0)
+ 			m_pSetup->sCustomStyleTheme = m_ui.CustomStyleThemeComboBox->currentText();
+ 		else
+ 			m_pSetup->sCustomStyleTheme.clear();
+		const QString sOldCustomColorTheme = m_pSetup->sCustomColorTheme;
+		if (m_ui.CustomColorThemeComboBox->currentIndex() > 0)
+			m_pSetup->sCustomColorTheme = m_ui.CustomColorThemeComboBox->currentText();
+		else
+			m_pSetup->sCustomColorTheme.clear();
+		// Check whether restart is needed or whether
+		// custom options maybe set up immediately...
+		int iNeedRestart = 0;
+		if (m_pSetup->sCustomStyleTheme != sOldCustomStyleTheme) {
+			if (m_pSetup->sCustomStyleTheme.isEmpty()) {
+				++iNeedRestart;
+			} else {
+				QApplication::setStyle(
+					QStyleFactory::create(m_pSetup->sCustomStyleTheme));
+			}
+		}
+		if (m_pSetup->sCustomColorTheme != sOldCustomColorTheme) {
+			if (m_pSetup->sCustomColorTheme.isEmpty()) {
+				++iNeedRestart;
+			} else {
+				QPalette pal;
+				if (qjackctlPaletteForm::namedPalette(
+						&m_pSetup->settings(), m_pSetup->sCustomColorTheme, pal))
+					QApplication::setPalette(pal);
+			}
+		}
+		// Show restart message if needed...
+		if (iNeedRestart > 0) {
+			QMessageBox::information(this,
+				tr("Information"),
+				tr("Some settings may be only effective\n"
+				"next time you start this application."));
+		}
 		// Check wheather something immediate has changed.
 		if (( bOldMessagesLog && !m_pSetup->bMessagesLog) ||
 			(!bOldMessagesLog &&  m_pSetup->bMessagesLog) ||
