@@ -2154,92 +2154,92 @@ Please check the messages window for more info.</source>
 <context>
     <name>qjackctlPaletteForm</name>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="39"/>
+        <location filename="../qjackctlPaletteForm.ui" line="40"/>
         <source>Color Themes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="45"/>
+        <location filename="../qjackctlPaletteForm.ui" line="46"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="63"/>
+        <location filename="../qjackctlPaletteForm.ui" line="64"/>
         <source>Current color palette name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="76"/>
+        <location filename="../qjackctlPaletteForm.ui" line="77"/>
         <source>Save current color palette name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="79"/>
+        <location filename="../qjackctlPaletteForm.ui" line="80"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="89"/>
+        <location filename="../qjackctlPaletteForm.ui" line="90"/>
         <source>Delete current color palette name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="92"/>
+        <location filename="../qjackctlPaletteForm.ui" line="93"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="105"/>
+        <location filename="../qjackctlPaletteForm.ui" line="106"/>
         <source>Palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="117"/>
+        <location filename="../qjackctlPaletteForm.ui" line="118"/>
         <source>Current color palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="127"/>
+        <location filename="../qjackctlPaletteForm.ui" line="128"/>
         <source>Generate:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="143"/>
+        <location filename="../qjackctlPaletteForm.ui" line="144"/>
         <source>Base color to generate palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="150"/>
+        <location filename="../qjackctlPaletteForm.ui" line="151"/>
         <source>Reset all current palette colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="153"/>
+        <location filename="../qjackctlPaletteForm.ui" line="154"/>
         <source> Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="176"/>
+        <location filename="../qjackctlPaletteForm.ui" line="177"/>
         <source>Import a custom color theme (palette) from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="179"/>
+        <location filename="../qjackctlPaletteForm.ui" line="180"/>
         <source>Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="189"/>
+        <location filename="../qjackctlPaletteForm.ui" line="190"/>
         <source>Export a custom color theme (palette) to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="192"/>
+        <location filename="../qjackctlPaletteForm.ui" line="193"/>
         <source>Export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.ui" line="215"/>
+        <location filename="../qjackctlPaletteForm.ui" line="216"/>
         <source>Show Details</source>
         <translation type="unfinished"></translation>
     </message>
