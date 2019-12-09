@@ -39,6 +39,8 @@
 
 #if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 #define DEFAULT_DRIVER "portaudio"
+#elif defined(__APPLE__)
+#define DEFAULT_DRIVER "coreaudio"
 #else
 #define DEFAULT_DRIVER "alsa"
 #endif

@@ -1309,6 +1309,9 @@ void qjackctlMainForm::startJack (void)
 	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 		paths = paths << "C:\\Program Files\\Jack" << "C:\\Program Files (x86)\\Jack";
 	#endif
+        #if defined(__APPLE__)
+                paths = paths << "/usr/local/bin/";
+        #endif
 		QStringListIterator iter(paths);
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
