@@ -28,7 +28,7 @@
 
 #include <QDir>
 
- #include <QStyleFactory>
+#include <QStyleFactory>
  
 #include <QLibraryInfo>
 #include <QTranslator>
