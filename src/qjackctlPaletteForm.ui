@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <comment>qjackctl - Qt XG Editor.
+ <author>rncbc aka Rui Nuno Capela</author>
+ <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
    Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
