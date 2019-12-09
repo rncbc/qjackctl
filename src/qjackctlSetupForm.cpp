@@ -682,6 +682,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	// Load preset list...
 	resetPresets();
 	updateCurrentPreset();
+	// Make sure initial preset is not dirty...
+	m_iDirtyPreset = 0;
 
 	// We're clean now.
 	--m_iDirtySetup;
