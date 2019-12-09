@@ -344,9 +344,9 @@ qjackctlSetupForm::qjackctlSetupForm (
 	QObject::connect(m_ui.CustomColorThemeToolButton,
 		SIGNAL(clicked()),
 		SLOT(editCustomColorThemes()));
- 	QObject::connect(m_ui.CustomStyleThemeComboBox,
- 		SIGNAL(activated(int)),
- 		SLOT(optionsChanged()));
+	QObject::connect(m_ui.CustomStyleThemeComboBox,
+		SIGNAL(activated(int)),
+		SLOT(optionsChanged()));
 	QObject::connect(m_ui.DisplayFont1PushButton,
 		SIGNAL(clicked()),
 		SLOT(chooseDisplayFont1()));
@@ -1715,10 +1715,10 @@ void qjackctlSetupForm::apply (void)
 		m_pSetup->iBaseFontSize            = m_ui.BaseFontSizeComboBox->currentText().toInt();
 		// Custom color/style theme options...
 		const QString sOldCustomStyleTheme = m_pSetup->sCustomStyleTheme;
- 		if (m_ui.CustomStyleThemeComboBox->currentIndex() > 0)
- 			m_pSetup->sCustomStyleTheme = m_ui.CustomStyleThemeComboBox->currentText();
- 		else
- 			m_pSetup->sCustomStyleTheme.clear();
+		if (m_ui.CustomStyleThemeComboBox->currentIndex() > 0)
+			m_pSetup->sCustomStyleTheme = m_ui.CustomStyleThemeComboBox->currentText();
+		else
+			m_pSetup->sCustomStyleTheme.clear();
 		const QString sOldCustomColorTheme = m_pSetup->sCustomColorTheme;
 		if (m_ui.CustomColorThemeComboBox->currentIndex() > 0)
 			m_pSetup->sCustomColorTheme = m_ui.CustomColorThemeComboBox->currentText();
