@@ -64,13 +64,8 @@
 #endif
 
 
-// Translatable macro contextualizer.
-#undef  _TR
-#define _TR(x) QT_TR_NOOP(x)
-
-
 // Default (empty/blank) name.
-static const char *g_pszDefName = _TR("(default)");
+static const char *g_pszDefName = QT_TRANSLATE_NOOP("qjackctlSetupForm", "(default)");
 
 
 //----------------------------------------------------------------------------
