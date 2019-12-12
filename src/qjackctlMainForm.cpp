@@ -2451,12 +2451,15 @@ QString qjackctlMainForm::formatTime ( float secs ) const
 	}
 
 	// Raw milliseconds
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 	QString sTemp;
-
 	sTemp.sprintf("%02u:%02u:%02u.%03u",
 		hh, mm, ss, (unsigned int) (secs * 1000.0f));
-
 	return sTemp;
+#else
+	return QString::asprintf("%02u:%02u:%02u.%03u",
+		hh, mm, ss, (unsigned int) (secs * 1000.0f));
+#endif
 }
 
 
@@ -3544,8 +3547,13 @@ void qjackctlMainForm::refreshStatus (void)
 	//		updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
 		// Transport barcode position (bar:beat.tick)
 		if (tpos.valid & JackPositionBBT) {
+		#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 			updateStatusItem(STATUS_TRANSPORT_BBT,
 				QString().sprintf("%u.%u.%03u", tpos.bar, tpos.beat, tpos.tick));
+		#else
+			updateStatusItem(STATUS_TRANSPORT_BBT,
+				QString::asprintf("%u.%u.%03u", tpos.bar, tpos.beat, tpos.tick));
+		#endif
 			updateStatusItem(STATUS_TRANSPORT_BPM,
 				QString::number(tpos.beats_per_minute, 'g', 4));
 		} else {
