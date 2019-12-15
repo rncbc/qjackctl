@@ -13,7 +13,8 @@ status of the audio server. With time, this primordial interface has
 become richer by including a enhanced patchbay and connection control
 features.
 
-Homepage: http://qjackctl.sourceforge.net
+Homepage: https://qjackctl.sourceforge.io
+          http://qjackctl.sourceforge.net
 
 License: GNU General Public License (GPL)
 
@@ -27,15 +28,15 @@ The software requirements for build and runtime are listed as follows:
 
   - Qt framework, C++ class library and tools for
         cross-platform application and UI development
-        http://qt.io/
+        https://qt.io/
 
   - JACK Audio Connection Kit
-        http://jackaudio.org/
+        https://jackaudio.org/
 
   Optional (opted-in at build time):
 
   - ALSA, Advanced Linux Sound Architecture
-        http://www.alsa-project.org/
+        https://www.alsa-project.org/
 
 
 Installation
@@ -92,10 +93,10 @@ Support
 QjackCtl is open source free software. For bug reports, feature
 requests, discussion forums, mailling lists, or any other matter
 related to the development of this piece of software, please use the
-Sourceforge project page (http://sourceforge.net/projects/qjackctl).
+Sourceforge project page (https://sourceforge.net/projects/qjackctl).
 
 You can also find timely and closer contact information on my personal
-web site (http://www.rncbc.org).
+web site (https://www.rncbc.org).
 
 
 Acknowledgments
@@ -142,4 +143,4 @@ Thanks to you all.
 --
 rncbc aka Rui Nuno Capela
 rncbc at rncbc dot org
-http://www.rncbc.org
+https://www.rncbc.org
