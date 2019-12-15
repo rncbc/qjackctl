@@ -2169,116 +2169,116 @@ Voulez-vous enlever la connexion de la baie de brassage ?</translation>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="40"/>
         <source>Color Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Thèmes de couleur</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="46"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="64"/>
         <source>Current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de la palette de couleur actuelle</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="77"/>
         <source>Save current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder le nom de la palette de couleur actuelle</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="80"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="90"/>
         <source>Delete current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le nom de la palette de couleur actuelle</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="93"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="106"/>
         <source>Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Palette</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="118"/>
         <source>Current color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Palette de couleur actuelle</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="128"/>
         <source>Generate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Générer :</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="144"/>
         <source>Base color to generate palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur de base pour générer la palette</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="151"/>
         <source>Reset all current palette colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser toutes les couleurs de la palette actuelle</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="154"/>
         <source> Reset</source>
-        <translation type="unfinished"></translation>
+        <translation> Réinitialiser</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="177"/>
         <source>Import a custom color theme (palette) from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer un thème (palette) de couleur personnalisé depuis un fichier</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="180"/>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="190"/>
         <source>Export a custom color theme (palette) to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter un thème (palette) de couleur personnalisé vers un fichier</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="193"/>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="216"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les détails</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="320"/>
         <source>Import File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer le fichier - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="323"/>
         <location filename="../qjackctlPaletteForm.cpp" line="389"/>
         <source>Palette files (*.%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers de palette (*.%1)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="324"/>
         <location filename="../qjackctlPaletteForm.cpp" line="390"/>
         <source>All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les fichiers (*.*)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="376"/>
         <location filename="../qjackctlPaletteForm.cpp" line="799"/>
         <location filename="../qjackctlPaletteForm.cpp" line="807"/>
         <source>Warning - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="377"/>
@@ -2287,19 +2287,25 @@ Voulez-vous enlever la connexion de la baie de brassage ?</translation>
 %1
 
 Sorry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d'importer depuis le fichier :
+
+%1
+
+Navré.</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="386"/>
         <source>Export File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter le fichier - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="800"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Certains paramètres ont été modifié.
+
+Souhaitez-vous abandonner les modifications ?</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="808"/>
@@ -2308,7 +2314,11 @@ Do you want to discard the changes?</source>
 &quot;%1&quot;.
 
 Do you want to save the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Certains paramètres ont été modifié.
+
+&quot;%1&quot;.
+
+Souhaitez-vous sauvegarder les modifications ?</translation>
     </message>
 </context>
 <context>
@@ -2316,22 +2326,22 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1039"/>
         <source>Color Role</source>
-        <translation type="unfinished"></translation>
+        <translation>Role de couleur</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1042"/>
         <source>Active</source>
-        <translation type="unfinished">Actif</translation>
+         <translation>Actif</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1045"/>
         <source>Inactive</source>
-        <translation type="unfinished">Inactif</translation>
+        <translation>Inactif</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1048"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactivé</translation>
     </message>
 </context>
 <context>
@@ -4162,13 +4172,14 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1757"/>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Informations</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1758"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Certains paramètres peuvent n&apos;être effectifs
+qu&apos;après le prochain démarrage de cette application.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1914"/>
@@ -4415,42 +4426,42 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2927"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnalisé</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2948"/>
         <source>&amp;Color palette theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème de palette de &amp;couleur :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2967"/>
         <source>Custom color palette theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Theme de palette de couleur personnalisé</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2979"/>
         <source>Wonton Soup</source>
-        <translation type="unfinished"></translation>
+        <translation>Soupe Wonton</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2984"/>
         <source>KXStudio</source>
-        <translation type="unfinished"></translation>
+        <translation>KXstudio</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3013"/>
         <source>Manage custom color palette themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Gérer les thèmes de palette de couleur personnalisés</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3042"/>
         <source>&amp;Widget style theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème de style de &amp;widget :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3058"/>
         <source>Custom widget style theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème de style de widget personnalisé :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3737"/>
