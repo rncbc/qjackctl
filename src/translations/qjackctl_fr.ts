@@ -2287,7 +2287,7 @@ Voulez-vous enlever la connexion de la baie de brassage ?</translation>
 %1
 
 Sorry.</source>
-        <translation>Impossible d'importer depuis le fichier :
+        <translation>Impossible d&apos;importer depuis le fichier :
 
 %1
 
@@ -2331,7 +2331,7 @@ Souhaitez-vous sauvegarder les modifications ?</translation>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1042"/>
         <source>Active</source>
-         <translation>Actif</translation>
+        <translation>Actif</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1045"/>
