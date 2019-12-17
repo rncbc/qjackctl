@@ -2172,116 +2172,116 @@ když příště spustíte tento program.</translation>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="40"/>
         <source>Color Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Barevné motivy</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="46"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="64"/>
         <source>Current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název nynější palety barev</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="77"/>
         <source>Save current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit název nynější palety barev</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="80"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="90"/>
         <source>Delete current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat název nynější palety barev</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="93"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="106"/>
         <source>Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="118"/>
         <source>Current color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Nynější paleta barev</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="128"/>
         <source>Generate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit:</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="144"/>
         <source>Base color to generate palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní barva pro vytvoření palety</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="151"/>
         <source>Reset all current palette colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit všechny barvy palety barev na výchozí</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="154"/>
         <source> Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit výchozí</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="177"/>
         <source>Import a custom color theme (palette) from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavést vlastní barevný motiv (paleta) ze souboru</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="180"/>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavést...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="190"/>
         <source>Export a custom color theme (palette) to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést vlastní barevný motiv (paleta) do souboru</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="193"/>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="216"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat podrobnosti</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="320"/>
         <source>Import File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavést soubor - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="323"/>
         <location filename="../qjackctlPaletteForm.cpp" line="389"/>
         <source>Palette files (*.%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory s paletami (*.%1)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="324"/>
         <location filename="../qjackctlPaletteForm.cpp" line="390"/>
         <source>All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny soubory (*.*)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="376"/>
         <location filename="../qjackctlPaletteForm.cpp" line="799"/>
         <location filename="../qjackctlPaletteForm.cpp" line="807"/>
         <source>Warning - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Varování - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="377"/>
@@ -2290,19 +2290,25 @@ když příště spustíte tento program.</translation>
 %1
 
 Sorry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se zavést ze souboru.
+
+%1
+
+Promiňte.</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="386"/>
         <source>Export File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést soubor - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="800"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Některá nastavení byla změněna.
+
+Chcete zahodit změny?</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="808"/>
@@ -2311,7 +2317,11 @@ Do you want to discard the changes?</source>
 &quot;%1&quot;.
 
 Do you want to save the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Některá nastavení byla změněna:
+
+&quot;%1&quot;
+
+Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
@@ -2319,22 +2329,22 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1039"/>
         <source>Color Role</source>
-        <translation type="unfinished"></translation>
+        <translation>Barevná role</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1042"/>
         <source>Active</source>
-        <translation type="unfinished">Činný</translation>
+        <translation>Činné</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1045"/>
         <source>Inactive</source>
-        <translation type="unfinished">Nečinný</translation>
+        <translation>Nečinné</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1048"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakázáno</translation>
     </message>
 </context>
 <context>
@@ -3974,42 +3984,44 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2927"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastní</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2948"/>
         <source>&amp;Color palette theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Motiv palety barev:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2967"/>
         <source>Custom color palette theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastní motiv palety barev</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2979"/>
         <source>Wonton Soup</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2984"/>
         <source>KXStudio</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3013"/>
         <source>Manage custom color palette themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Spravovat vlastní motivy palety barev</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3042"/>
         <source>&amp;Widget style theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Motiv stylu &amp;prvku:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3058"/>
         <source>Custom widget style theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastní motiv stylu prvku</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3095"/>
@@ -4402,13 +4414,14 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1757"/>
         <source>Information</source>
-        <translation type="unfinished">Informace</translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1758"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Některá nastavení se projeví až tehdy,
+když příště spustíte tento program.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1914"/>

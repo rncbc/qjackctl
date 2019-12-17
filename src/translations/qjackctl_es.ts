@@ -4287,12 +4287,14 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2979"/>
         <source>Wonton Soup</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2984"/>
         <source>KXStudio</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3013"/>
