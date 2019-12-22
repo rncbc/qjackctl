@@ -17,7 +17,7 @@
 
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 39
+%define release 40
 
 %define _prefix	@ac_prefix@
 
@@ -91,6 +91,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/man1/%{name}*.1.gz
 
 %changelog
+* Sun Dec 22 2019 Rui Nuno Capela <rncbc@rncbc.org> 0.6.1
+- Winter'19 release.
 * Thu Oct 17 2019 Rui Nuno Capela <rncbc@rncbc.org> 0.6.0
 - Autumn'19 release.
 * Fri Jul 12 2019 Rui Nuno Capela <rncbc@rncbc.org> 0.5.9

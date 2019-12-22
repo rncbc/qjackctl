@@ -4,20 +4,20 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.6.1  2019-12-22  The Winter'19 Release.
 
 - Custom color (palette) theme editor introduced; color
   (palette) theme changes are now effective immediately,
-  except on default. (EXPERIMENTAL)
+  except on default.
 
 - Second attempt to fix the yet non-official though
-  CMake build configuration. (EXPERIMENTAL)
+  CMake build configuration.
 
 - When using autotools and ./configure --with-qt=...,
   it is also necessary to adjust the PKG_CONFIG_PATH
   environment variable (after a merge request by plcl
   aka. Pedro López-Cabanillas, while on qmidinet,
-  thanks). (EXPERIMENTAL)
+  thanks).
 
 
 0.6.0  2019-10-17  An Autumn'19 Release.
