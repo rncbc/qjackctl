@@ -27,9 +27,9 @@
 #include "qjackctlSetup.h"
 
 #include <QProcess>
-#include <QDateTime>
+#include <QTime>
 #include <QMenu>
-
+#include <QElapsedTimer>
 #include <QSessionManager>
 
 #include <jack/jack.h>
@@ -224,7 +224,8 @@ protected:
 	void updateXrunCount();
 
 	QString formatTime(float secs) const;
-	QString formatElapsedTime(int iStatusItem, const QTime& t, bool bElapsed) const;
+	QString formatElapsedTime(int iStatusItem,
+		const QTime& time, const QElapsedTimer& timer) const;
 	void updateElapsedTimes();
 
 	void updateContextMenu();
@@ -348,8 +349,12 @@ private:
 	float m_fXrunMax;
 	float m_fXrunMin;
 	float m_fXrunLast;
-	QTime m_tXrunLast;
-	QTime m_tResetLast;
+
+	QTime m_timeXrunLast;
+	QTime m_timeResetLast;
+
+	QElapsedTimer m_timerXrunLast;
+	QElapsedTimer m_timerResetLast;
 
 	qjackctlMessagesStatusForm *m_pMessagesStatusForm;
 	qjackctlSessionForm     *m_pSessionForm;

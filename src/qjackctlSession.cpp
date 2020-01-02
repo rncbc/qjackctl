@@ -1,7 +1,7 @@
 // qjackctlSession.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@
 
 #include <QApplication>
 #include <QProcess>
-#include <QTime>
+#include <QElapsedTimer>
 
 
 //----------------------------------------------------------------------------
@@ -241,8 +241,8 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 		}
 		// Launch command and wait a litle bit before continue...
 		if (!sCommand.isEmpty() && QProcess::startDetached(sCommand)) {
-			QTime time; time.start();
-			while (time.elapsed() < 200)
+			QElapsedTimer timer; timer.start();
+			while (timer.elapsed() < 200)
 				QApplication::processEvents();
 		}
 	}

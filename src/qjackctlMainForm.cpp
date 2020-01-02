@@ -60,6 +60,7 @@
 #include <QContextMenuEvent>
 #include <QCloseEvent>
 
+#include <QElapsedTimer>
 
 #if QT_VERSION < QT_VERSION_CHECK(4, 5, 0)
 namespace Qt {
@@ -2360,9 +2361,9 @@ void qjackctlMainForm::stabilizeFormEx (void)
 // Stabilize current business over the application event loop.
 void qjackctlMainForm::stabilize ( int msecs )
 {
-	QTime t;
-	t.start();
-	while (t.elapsed() < msecs)
+	QElapsedTimer timer;
+	timer.start();
+	while (timer.elapsed() < msecs)
 		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 }
 
@@ -2370,7 +2371,8 @@ void qjackctlMainForm::stabilize ( int msecs )
 // Reset XRUN cache items.
 void qjackctlMainForm::resetXrunStats (void)
 {
-	m_tResetLast = QTime::currentTime();
+	m_timeResetLast = QTime::currentTime();
+	m_timerResetLast.start();
 
 	m_iXrunStats = 0;
 	m_iXrunCount = 0;
@@ -2379,7 +2381,8 @@ void qjackctlMainForm::resetXrunStats (void)
 	m_fXrunMax   = 0.0f;
 	m_fXrunLast  = 0.0f;
 
-	m_tXrunLast.setHMS(0, 0, 0);
+	m_timeXrunLast.setHMS(0, 0, 0);
+	m_timerXrunLast.start();
 
 	m_iXrunCallbacks = 0;
 	m_iXrunSkips     = 0;
@@ -2464,20 +2467,20 @@ QString qjackctlMainForm::formatTime ( float secs ) const
 
 
 // Update the XRUN last/elapsed time item.
-QString qjackctlMainForm::formatElapsedTime ( int iStatusItem,
-	const QTime& t, bool bElapsed ) const
+QString qjackctlMainForm::formatElapsedTime (
+	int iStatusItem, const QTime& time, const QElapsedTimer& timer ) const
 {
 	QString sTemp = c_szTimeDashes;
 	QString sText;
 
 	// Compute and format elapsed time.
-	if (t.isNull()) {
+	if (time.isNull() || time.msec() < 1) {
 		sText = sTemp;
 	} else {
-		sText = t.toString();
+		sText = time.toString();
 		if (m_pJackClient) {
-			float secs = float(t.elapsed()) / 1000.0f;
-			if (bElapsed && secs > 0) {
+			const float secs = float(timer.elapsed()) / 1000.0f;
+			if (secs > 0) {
 				sTemp = formatTime(secs);
 				sText += " (" + sTemp + ")";
 			}
@@ -2506,10 +2509,10 @@ void qjackctlMainForm::updateElapsedTimes (void)
 	} else {
 		updateStatusItem(STATUS_RESET_TIME,
 			formatElapsedTime(STATUS_RESET_TIME,
-				m_tResetLast, true));
+				m_timeResetLast, m_timerResetLast));
 		updateStatusItem(STATUS_XRUN_TIME,
 			formatElapsedTime(STATUS_XRUN_TIME,
-				m_tXrunLast, ((m_iXrunCount + m_iXrunCallbacks) > 0)));
+				m_timeXrunLast, m_timerXrunLast));
 	}
 }
 
@@ -2565,7 +2568,7 @@ void qjackctlMainForm::xrunNotifyEvent (void)
 	m_iXrunSkips++;
 
 	// Report rate must be under one second...
-	if (m_tXrunLast.restart() < 1000)
+	if (m_timerXrunLast.restart() < 1000)
 		return;
 
 #ifdef CONFIG_JACK_XRUN_DELAY
@@ -3668,7 +3671,7 @@ void qjackctlMainForm::refreshStatus (void)
 		// XRUN: blink the system-tray icon backgroung...
 		if (m_pSystemTray && m_iXrunCallbacks > 0
 			&& m_pSetup && m_pSetup->bDisplayBlink) {
-			const int iElapsed = m_tXrunLast.elapsed();
+			const int iElapsed = m_timerXrunLast.elapsed();
 			if (iElapsed > 0x7ff) { // T=2048ms.
 				QColor color(m_pSystemTray->background());
 				color.setAlpha(0x0ff - ((iElapsed >> 3) & 0x0ff));
