@@ -4,6 +4,14 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Ditching deprecated QTime methods for QElapsedTimer's
+  (in compliance to Qt >= 5.14.0). (EXPERIMENTAL)
+
+- Bumped copyright headers into the New Year (2020).
+
+
 0.6.1  2019-12-22  The Winter'19 Release.
 
 - Custom color (palette) theme editor introduced; color
