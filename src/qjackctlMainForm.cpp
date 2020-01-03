@@ -2571,6 +2571,9 @@ void qjackctlMainForm::xrunNotifyEvent (void)
 	if (m_timerXrunLast.restart() < 1000)
 		return;
 
+	// Mark this one...
+	m_timeXrunLast = QTime::currentTime();
+
 #ifdef CONFIG_JACK_XRUN_DELAY
 	// We have an official XRUN delay value (convert usecs to msecs)...
 	updateXrunStats(0.001f * jack_get_xrun_delayed_usecs(m_pJackClient));
