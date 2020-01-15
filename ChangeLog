@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Make man page compression reproducible (after request
+  by Jelle van der Waa, while on the Vee-Ones, thanks).
+
 - Ditching deprecated QTime methods for QElapsedTimer's
   (in compliance to Qt >= 5.14.0). (EXPERIMENTAL)
 
