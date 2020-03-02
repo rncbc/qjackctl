@@ -199,6 +199,8 @@ protected:
 	bool queryClose();
 	bool queryClosePreset();
 
+	void showEvent(QShowEvent *pShowEvent);
+	void hideEvent(QHideEvent *pHideEvent);
 	void closeEvent(QCloseEvent *pCloseEvent);
 	void customEvent(QEvent *pEvent);
 

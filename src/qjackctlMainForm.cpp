@@ -1088,6 +1088,20 @@ bool qjackctlMainForm::queryClosePreset (void)
 }
 
 
+void qjackctlMainForm::showEvent ( QShowEvent *pShowEvent )
+{
+	QWidget::showEvent(pShowEvent);
+	updateContextMenu();
+}
+
+
+void qjackctlMainForm::hideEvent ( QHideEvent *pHideEvent )
+{
+	QWidget::hideEvent(pHideEvent);
+	updateContextMenu();
+}
+
+
 void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
 	// Let's be sure about that...
@@ -3245,15 +3259,19 @@ void qjackctlMainForm::refreshPatchbay (void)
 // Main form visibility requester slot.
 void qjackctlMainForm::toggleMainForm (void)
 {
+	if (m_pSetup == nullptr)
+		return;
+
 	m_pSetup->saveWidgetGeometry(this, true);
 
-	if (isVisible()) {
+	if (isVisible() && !isMinimized()) {
 	#ifdef CONFIG_SYSTEM_TRAY
 		if (m_pSetup->bSystemTray && m_pSystemTray) {
 			// Hide away from sight, if not active...
 			if (isActiveWindow()) {
 				hide();
 			} else {
+				showNormal();
 				raise();
 				activateWindow();
 			}
@@ -3263,12 +3281,12 @@ void qjackctlMainForm::toggleMainForm (void)
 		// Minimize (iconify) normally.
 		showMinimized();
 	} else {
-		show();
+		showNormal();
 		raise();
 		activateWindow();
 	}
 
-	updateContextMenu();
+//	updateContextMenu();
 }
 
 
@@ -3914,7 +3932,7 @@ void qjackctlMainForm::updateContextMenu (void)
 		sShowRestore  = tr("S&how");
 	}
 #endif
-	pAction = m_menu.addAction(isVisible()
+	pAction = m_menu.addAction(isVisible() && !isMinimized()
 		? sHideMinimize : sShowRestore, this, SLOT(toggleMainForm()));
 	m_menu.addSeparator();
 
