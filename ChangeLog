@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- A scalable (.svg) icon version has been added.
+
 - Make man page compression reproducible (after request
   by Jelle van der Waa, while on the Vee-Ones, thanks).
 
