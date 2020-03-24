@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.6.2  2020-03-24  A Spring'20 Release.
 
 - A scalable (.svg) icon version has been added.
 
@@ -12,7 +12,7 @@ GIT HEAD
   by Jelle van der Waa, while on the Vee-Ones, thanks).
 
 - Ditching deprecated QTime methods for QElapsedTimer's
-  (in compliance to Qt >= 5.14.0). (EXPERIMENTAL)
+  (in compliance to Qt >= 5.14.0).
 
 - Bumped copyright headers into the New Year (2020).
 
