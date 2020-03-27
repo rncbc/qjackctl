@@ -16,11 +16,11 @@ branches:
 
 before_install:
 - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-- sudo add-apt-repository --yes ppa:beineri/opt-qt-5.12.7-xenial
+- sudo add-apt-repository --yes ppa:beineri/opt-qt-5.14.1-xenial
 - sudo apt-get update -qq
 
 install:
-- sudo apt-get install -qq qt512base qt512tools libgl-dev; source /opt/qt512/bin/qt512-env.sh
+- sudo apt-get install -qq qt514base qt514tools qt514x11extras libgl-dev; source /opt/qt514/bin/qt514-env.sh
 - sudo apt-get install -qq libjack-dev libasound2-dev portaudio19-dev
 
 before_script:
