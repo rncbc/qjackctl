@@ -1,7 +1,7 @@
 // qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1255,9 +1255,9 @@ void qjackctlSetupForm::stabilizeForm (void)
 
 	changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
 
-	bValid = (bValid || m_iDirtyBuffSize > 0);
-	m_ui.DialogButtonBox->button(QDialogButtonBox::Apply)->setEnabled(bValid);
-	m_ui.DialogButtonBox->button(QDialogButtonBox::Ok)->setEnabled(bValid);
+	bEnabled = (bValid || m_iDirtyBuffSize > 0);
+	m_ui.DialogButtonBox->button(QDialogButtonBox::Apply)->setEnabled(bEnabled);
+	m_ui.DialogButtonBox->button(QDialogButtonBox::Ok)->setEnabled(bEnabled);
 }
 
 
@@ -1908,7 +1908,7 @@ bool qjackctlSetupForm::queryClose (void)
 	bool bQueryClose = true;
 
 	// Check if there's any pending changes...
-	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0) {
+	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0 || m_iDirtyBuffSize > 0) {
 		switch (QMessageBox::warning(isVisible() ? this : parentWidget(),
 			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
 			tr("Some settings have been changed.\n\n"
@@ -1917,12 +1917,9 @@ bool qjackctlSetupForm::queryClose (void)
 			QMessageBox::Discard |
 			QMessageBox::Cancel)) {
 		case QMessageBox::Apply:
-			accept();
+			apply();
 			// Fall thru...
 		case QMessageBox::Discard:
-			// Reset dirty flags...
-			m_iDirtySettings = 0;
-			m_iDirtyOptions = 0;
 			break;
 		default:    // Cancel.
 			bQueryClose = false;

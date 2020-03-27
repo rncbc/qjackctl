@@ -4,6 +4,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Fixed Setup dialog Cancel (or close) behavior when
+  Settings > Parameters > Frames/Period (aka. buffer-
+  size) it's the only setting that's changed.
+
+  
 0.6.2  2020-03-24  A Spring'20 Release.
 
 - A scalable (.svg) icon version has been added.
