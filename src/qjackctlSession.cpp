@@ -240,10 +240,15 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 			sCommand.replace("${SESSION_DIR}", sClientDir);
 		}
 		// Launch command and wait a litle bit before continue...
-		if (!sCommand.isEmpty() && QProcess::startDetached(sCommand)) {
-			QElapsedTimer timer; timer.start();
-			while (timer.elapsed() < 200)
-				QApplication::processEvents();
+		if (!sCommand.isEmpty()) {
+			QStringList cmd_args = sCommand.split(' ');
+			sCommand = cmd_args.at(0);
+			cmd_args.removeAt(0);
+			if (QProcess::startDetached(sCommand, cmd_args)) {
+				QElapsedTimer timer; timer.start();
+				while (timer.elapsed() < 200)
+					QApplication::processEvents();
+			}
 		}
 	}
 
@@ -504,7 +509,7 @@ bool qjackctlSession::saveFile ( const QString& sFilename )
 		return false;
 
 	QTextStream ts(&file);
-	ts << doc.toString() << endl;
+	ts << doc.toString() << Qt::endl;
 	file.close();
 
 	return true;

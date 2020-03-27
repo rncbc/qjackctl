@@ -1,7 +1,7 @@
 // qjackctlSessionForm.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -123,7 +123,8 @@ class qjackctlSessionForm : public QWidget
 public:
 
 	// Constructor.
-	qjackctlSessionForm(QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
+	qjackctlSessionForm(QWidget *pParent = nullptr,
+		Qt::WindowFlags wflags = Qt::WindowFlags());
 	// Destructor.
 	~qjackctlSessionForm();
 

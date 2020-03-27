@@ -1,7 +1,7 @@
 // qjackctlGraphForm.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -60,8 +60,8 @@ class qjackctlGraphForm : public QMainWindow
 public:
 
 	// Constructor.
-	qjackctlGraphForm(QWidget *parent = 0, Qt::WindowFlags wflags = 0);
-
+	qjackctlGraphForm(QWidget *parent = nullptr,
+		Qt::WindowFlags wflags = Qt::WindowFlags());
 	// Destructor.
 	~qjackctlGraphForm();
 

@@ -121,82 +121,82 @@
         <translation>&amp;Fermer</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="86"/>
+        <location filename="../qjackctlAboutForm.cpp" line="85"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="95"/>
+        <location filename="../qjackctlAboutForm.cpp" line="94"/>
         <source>Using: JACK %1</source>
         <translation>Utilisation de : JACK %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="45"/>
+        <location filename="../qjackctlAboutForm.cpp" line="44"/>
         <source>Debugging option enabled.</source>
         <translation>Option de débogage activée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="48"/>
+        <location filename="../qjackctlAboutForm.cpp" line="47"/>
         <source>System tray disabled.</source>
         <translation>Zone de notification système désactivée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="51"/>
+        <location filename="../qjackctlAboutForm.cpp" line="50"/>
         <source>Transport status control disabled.</source>
         <translation>Contrôle du statut du déplacement désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="54"/>
+        <location filename="../qjackctlAboutForm.cpp" line="53"/>
         <source>Realtime status disabled.</source>
         <translation>Statut temps réel désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="57"/>
+        <location filename="../qjackctlAboutForm.cpp" line="56"/>
         <source>XRUN delay status disabled.</source>
         <translation>Statut du délai de désynchronisation (XRUN) désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="60"/>
+        <location filename="../qjackctlAboutForm.cpp" line="59"/>
         <source>Maximum delay status disabled.</source>
         <translation>Statut du délai maximal désactivé.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="69"/>
+        <location filename="../qjackctlAboutForm.cpp" line="68"/>
         <source>JACK Session support disabled.</source>
         <translation>Prise en charge de session JACK désactivée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="73"/>
+        <location filename="../qjackctlAboutForm.cpp" line="72"/>
         <source>ALSA/MIDI sequencer support disabled.</source>
         <translation>Prise en charge du séquenceur ALSA/MIDI désactivée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="99"/>
+        <location filename="../qjackctlAboutForm.cpp" line="98"/>
         <source>Website</source>
         <translation>Site web</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="104"/>
+        <location filename="../qjackctlAboutForm.cpp" line="103"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Ce programme est libre; vous pouvez le redistribuer et/ou le modifier</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="105"/>
+        <location filename="../qjackctlAboutForm.cpp" line="104"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>selon les termes de la Licence Publique Générale GNU version 2 ou ultérieure.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="66"/>
+        <location filename="../qjackctlAboutForm.cpp" line="65"/>
         <source>JACK MIDI support disabled.</source>
         <translation>Prise en charge de JACK MIDI désactivée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="63"/>
+        <location filename="../qjackctlAboutForm.cpp" line="62"/>
         <source>JACK Port aliases support disabled.</source>
         <translation>Prise en charge des alias de port JACK désactivée.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="78"/>
+        <location filename="../qjackctlAboutForm.cpp" line="77"/>
         <source>D-Bus interface support disabled.</source>
         <translation>Prise en charge de l&apos;interface D-Bus désactivée.</translation>
     </message>
@@ -4013,89 +4013,89 @@ Are you sure to overwrite the existing folder?</source>
         <translation>Cacher le texte des boutons sur la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="897"/>
-        <location filename="../qjackctlSetupForm.cpp" line="950"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
+        <location filename="../qjackctlSetupForm.cpp" line="896"/>
+        <location filename="../qjackctlSetupForm.cpp" line="949"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="984"/>
+        <location filename="../qjackctlSetupForm.cpp" line="983"/>
         <source>msec</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="986"/>
+        <location filename="../qjackctlSetupForm.cpp" line="985"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1272"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1271"/>
         <source>&amp;Preset Name</source>
         <translation>&amp;Nom du préréglage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1274"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1273"/>
         <source>&amp;Server Name</source>
         <translation>Nom du &amp;serveur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1275"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1274"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Chemin du serveur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1276"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1275"/>
         <source>&amp;Driver</source>
         <translation>Pilot&amp;e</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1277"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1276"/>
         <source>&amp;Interface</source>
         <translation>&amp;Interface</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1279"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1278"/>
         <source>Sample &amp;Rate</source>
         <translation>&amp;Fréquence d&apos;échantillonnage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1280"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1279"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Échantillons/Période</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1281"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1280"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Périodes/&amp;Tampon</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1329"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1328"/>
         <source>Startup Script</source>
         <translation>Script de démarrage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1346"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1345"/>
         <source>Post-Startup Script</source>
         <translation>Script post-démarrage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1363"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1362"/>
         <source>Shutdown Script</source>
         <translation>Script d&apos;extinction</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1380"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1379"/>
         <source>Post-Shutdown Script</source>
         <translation>Script post-extinction</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1399"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1398"/>
         <source>Patchbay Definition files</source>
         <translation>Fichiers de définition de baie de brassage</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1397"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1396"/>
         <source>Active Patchbay Definition</source>
         <translation>Définition de baie de brassage à activer</translation>
     </message>
@@ -4144,7 +4144,7 @@ Are you sure to overwrite the existing folder?</source>
         <translation>plughw:0</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="898"/>
+        <location filename="../qjackctlSetupForm.cpp" line="897"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -4157,7 +4157,7 @@ Do you want to save the changes?</source>
 Voulez-vous sauvegarder les changements ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="951"/>
+        <location filename="../qjackctlSetupForm.cpp" line="950"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -4170,19 +4170,19 @@ Are you sure?</source>
 Êtes-vous certain ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1757"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1756"/>
         <source>Information</source>
         <translation>Informations</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1758"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1757"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation>Certains paramètres peuvent n&apos;être effectifs
 qu&apos;après le prochain démarrage de cette application.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1914"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4191,12 +4191,12 @@ Do you want to apply the changes?</source>
 Voulez-vous appliquer les changements ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1415"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1414"/>
         <source>Messages Log</source>
         <translation>Journal des messages</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1417"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1416"/>
         <source>Log files</source>
         <translation>Fichiers du journal</translation>
     </message>
@@ -4700,47 +4700,47 @@ Voulez-vous appliquer les changements ?</translation>
         <translation>Type de prise MIDI (ALSA)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="159"/>
+        <location filename="../qjackctlSocketForm.cpp" line="158"/>
         <source>Plugs / Ports</source>
         <translation>Fiches / Ports</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="529"/>
+        <location filename="../qjackctlSocketForm.cpp" line="528"/>
         <source>Add Plug</source>
         <translation>Ajouter une Fiche</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="546"/>
+        <location filename="../qjackctlSocketForm.cpp" line="545"/>
         <source>Remove</source>
         <translation>Enlever</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="543"/>
+        <location filename="../qjackctlSocketForm.cpp" line="542"/>
         <source>Edit</source>
         <translation>Éditer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="342"/>
+        <location filename="../qjackctlSocketForm.cpp" line="341"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="343"/>
+        <location filename="../qjackctlSocketForm.cpp" line="342"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation>Une prise nommée « %1 » existe déjà.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="550"/>
+        <location filename="../qjackctlSocketForm.cpp" line="549"/>
         <source>Move Up</source>
         <translation>Vers le haut</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="553"/>
+        <location filename="../qjackctlSocketForm.cpp" line="552"/>
         <source>Move Down</source>
         <translation>Vers le bas</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="735"/>
+        <location filename="../qjackctlSocketForm.cpp" line="734"/>
         <source>(None)</source>
         <translation>(Aucun)</translation>
     </message>
@@ -4760,12 +4760,12 @@ Voulez-vous appliquer les changements ?</translation>
         <translation>Déplacer vers le haut la fiche actuellement sélectionnée dans la liste des prises</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="362"/>
+        <location filename="../qjackctlSocketForm.cpp" line="361"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="363"/>
+        <location filename="../qjackctlSocketForm.cpp" line="362"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

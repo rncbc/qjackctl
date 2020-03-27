@@ -76,7 +76,8 @@ class qjackctlMainForm : public QWidget
 public:
 
 	// Constructor.
-	qjackctlMainForm(QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
+	qjackctlMainForm(QWidget *pParent = nullptr,
+		Qt::WindowFlags wflags = Qt::WindowFlags());
 	// Destructor.
 	~qjackctlMainForm();
 

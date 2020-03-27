@@ -3077,7 +3077,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 			+ '/' + m_pSetup->sServerConfigName;
 		QFile file(sFilename);
 		if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-			QTextStream(&file) << m_sJackCmdLine << endl;
+			QTextStream(&file) << m_sJackCmdLine << Qt::endl;
 			file.close();
 			appendMessagesColor(
 				tr("Server configuration saved to \"%1\".")

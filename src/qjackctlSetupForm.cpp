@@ -72,9 +72,8 @@ static const char *g_pszDefName = QT_TRANSLATE_NOOP("qjackctlSetupForm", "(defau
 // qjackctlSetupForm -- UI wrapper form.
 
 // Constructor.
-qjackctlSetupForm::qjackctlSetupForm (
-	QWidget *pParent, Qt::WindowFlags wflags )
-	: QDialog(pParent, wflags)
+qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
+	: QDialog(pParent)
 {
 	// Setup UI struct...
 	m_ui.setupUi(this);

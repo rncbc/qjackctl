@@ -10,6 +10,8 @@ GIT HEAD
   Settings > Parameters > Frames/Period (aka. buffer-
   size) it's the only setting that's changed.
 
+- Early fixing to build for Qt >= 5.15.0.
+
   
 0.6.2  2020-03-24  A Spring'20 Release.
 

@@ -42,7 +42,7 @@ class qjackctlSetupForm : public QDialog
 public:
 
 	// Constructor.
-	qjackctlSetupForm(QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
+	qjackctlSetupForm(QWidget *pParent = nullptr);
 	// Destructor.
 	~qjackctlSetupForm();
 
