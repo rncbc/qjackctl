@@ -39,6 +39,11 @@
 #include <QProcess>
 #include <QElapsedTimer>
 
+// Deprecated QTextStreamFunctions/Qt namespaces workaround.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#define endl	Qt::endl
+#endif
+
 
 //----------------------------------------------------------------------------
 // qjackctlSession -- JACK session container.
@@ -509,7 +514,7 @@ bool qjackctlSession::saveFile ( const QString& sFilename )
 		return false;
 
 	QTextStream ts(&file);
-	ts << doc.toString() << Qt::endl;
+	ts << doc.toString() << endl;
 	file.close();
 
 	return true;

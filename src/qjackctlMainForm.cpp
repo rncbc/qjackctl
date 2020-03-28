@@ -68,6 +68,11 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 }
 #endif
 
+// Deprecated QTextStreamFunctions/Qt namespaces workaround.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#define endl	Qt::endl
+#endif
+
 
 #ifdef CONFIG_DBUS
 #include <QDBusInterface>
@@ -3077,7 +3082,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 			+ '/' + m_pSetup->sServerConfigName;
 		QFile file(sFilename);
 		if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-			QTextStream(&file) << m_sJackCmdLine << Qt::endl;
+			QTextStream(&file) << m_sJackCmdLine << endl;
 			file.close();
 			appendMessagesColor(
 				tr("Server configuration saved to \"%1\".")

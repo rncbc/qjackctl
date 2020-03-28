@@ -37,9 +37,13 @@
 #include <QShowEvent>
 #include <QHideEvent>
 
-
 // The maximum number of message lines.
 #define QJACKCTL_MESSAGES_MAXLINES  1000
+
+// Deprecated QTextStreamFunctions/Qt namespaces workaround.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#define endl	Qt::endl
+#endif
 
 
 //----------------------------------------------------------------------------
@@ -240,7 +244,7 @@ void qjackctlMessagesStatusForm::setLogging ( bool bEnabled, const QString& sFil
 void qjackctlMessagesStatusForm::appendMessagesLog ( const QString& s )
 {
 	if (m_pMessagesLog) {
-		QTextStream(m_pMessagesLog) << s << Qt::endl;
+		QTextStream(m_pMessagesLog) << s << endl;
 		m_pMessagesLog->flush();
 	}
 }
