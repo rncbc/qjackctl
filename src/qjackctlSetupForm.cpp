@@ -1735,7 +1735,7 @@ void qjackctlSetupForm::apply (void)
 		if (m_pSetup->sCustomStyleTheme != sOldCustomStyleTheme) {
 		#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 			++iNeedRestart;
-		#else		
+		#else
 			if (m_pSetup->sCustomStyleTheme.isEmpty()) {
 				++iNeedRestart;
 			} else {
