@@ -2260,31 +2260,31 @@ když příště spustíte tento program.</translation>
         <translation>Ukázat podrobnosti</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="323"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="316"/>
         <source>Import File - %1</source>
         <translation>Zavést soubor - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="326"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="392"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="319"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="385"/>
         <source>Palette files (*.%1)</source>
         <translation>Soubory s paletami (*.%1)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="327"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="393"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="320"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="386"/>
         <source>All files (*.*)</source>
         <translation>Všechny soubory (*.*)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="379"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="812"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="820"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="372"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="805"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="813"/>
         <source>Warning - %1</source>
         <translation>Varování - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="380"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="373"/>
         <source>Could not import from file:
 
 %1
@@ -2297,12 +2297,12 @@ Sorry.</source>
 Promiňte.</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="389"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="382"/>
         <source>Export File - %1</source>
         <translation>Vyvést soubor - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="813"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="806"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
@@ -2311,7 +2311,7 @@ Do you want to discard the changes?</source>
 Chcete zahodit změny?</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="821"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="814"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;.
@@ -2327,22 +2327,22 @@ Chcete uložit změny?</translation>
 <context>
     <name>qjackctlPaletteForm::PaletteModel</name>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1052"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1045"/>
         <source>Color Role</source>
         <translation>Barevná role</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1055"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1048"/>
         <source>Active</source>
         <translation>Činné</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1058"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1051"/>
         <source>Inactive</source>
         <translation>Nečinné</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1061"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1054"/>
         <source>Disabled</source>
         <translation>Zakázáno</translation>
     </message>
@@ -4291,7 +4291,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="896"/>
         <location filename="../qjackctlSetupForm.cpp" line="949"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1920"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
@@ -4412,19 +4412,19 @@ Jste si jistý?</translation>
         <translation>Soubory se zápisy</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1764"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1756"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1765"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1757"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation>Některá nastavení se projeví až tehdy,
 když příště spustíte tento program.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1921"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

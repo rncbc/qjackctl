@@ -1733,21 +1733,14 @@ void qjackctlSetupForm::apply (void)
 		// custom options maybe set up immediately...
 		int iNeedRestart = 0;
 		if (m_pSetup->sCustomStyleTheme != sOldCustomStyleTheme) {
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-			++iNeedRestart;
-		#else
 			if (m_pSetup->sCustomStyleTheme.isEmpty()) {
 				++iNeedRestart;
 			} else {
 				QApplication::setStyle(
 					QStyleFactory::create(m_pSetup->sCustomStyleTheme));
 			}
-		#endif
 		}
 		if (m_pSetup->sCustomColorTheme != sOldCustomColorTheme) {
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-			++iNeedRestart;
-		#else
 			if (m_pSetup->sCustomColorTheme.isEmpty()) {
 				++iNeedRestart;
 			} else {
@@ -1756,7 +1749,6 @@ void qjackctlSetupForm::apply (void)
 						&m_pSetup->settings(), m_pSetup->sCustomColorTheme, pal))
 					QApplication::setPalette(pal);
 			}
-		#endif
 		}
 		// Show restart message if needed...
 		if (iNeedRestart > 0) {

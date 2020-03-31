@@ -2266,31 +2266,31 @@ Disabilitato.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="323"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="316"/>
         <source>Import File - %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="326"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="392"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="319"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="385"/>
         <source>Palette files (*.%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="327"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="393"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="320"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="386"/>
         <source>All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="379"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="812"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="820"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="372"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="805"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="813"/>
         <source>Warning - %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="380"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="373"/>
         <source>Could not import from file:
 
 %1
@@ -2299,19 +2299,19 @@ Sorry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="389"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="382"/>
         <source>Export File - %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="813"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="806"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="821"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="814"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;.
@@ -2323,22 +2323,22 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlPaletteForm::PaletteModel</name>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1052"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1045"/>
         <source>Color Role</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1055"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1048"/>
         <source>Active</source>
         <translation type="unfinished">Attivo</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1058"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1051"/>
         <source>Inactive</source>
         <translation type="unfinished">Inattivo</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1061"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1054"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3955,7 +3955,7 @@ Sovrascrivo la cartella?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="896"/>
         <location filename="../qjackctlSetupForm.cpp" line="949"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1920"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
         <source>Warning</source>
         <translation>Attenzione</translation>
     </message>
@@ -4071,18 +4071,18 @@ Sei sicuro?</translation>
         <translation>Files di log</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1764"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1756"/>
         <source>Information</source>
         <translation type="unfinished">Informazioni</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1765"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1757"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1921"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
