@@ -4015,7 +4015,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="896"/>
         <location filename="../qjackctlSetupForm.cpp" line="949"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1911"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -4170,19 +4170,19 @@ Are you sure?</source>
 Êtes-vous certain ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1756"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1754"/>
         <source>Information</source>
         <translation>Informations</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1757"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1755"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation>Certains paramètres peuvent n&apos;être effectifs
 qu&apos;après le prochain démarrage de cette application.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

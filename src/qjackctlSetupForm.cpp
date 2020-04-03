@@ -1611,13 +1611,6 @@ void qjackctlSetupForm::apply (void)
 	if (pMainForm == nullptr)
 		return;
 
-	if (m_iDirtySettings > 0 || m_iDirtyPreset > 0) {
-		// Save current preset selection.
-		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
-		// Always save current settings...
-		savePreset(m_pSetup->sDefPreset);
-	}
-	else
 	if (m_iDirtyBuffSize > 0) {
 		// Change JACK buffer size immediately...
 		if (!pMainForm->resetBuffSize(jack_nframes_t(
@@ -1625,8 +1618,13 @@ void qjackctlSetupForm::apply (void)
 			// Make up a settings change instead...
 			++m_iDirtySettings;
 		}
-		// We're not dirty anymore...
-		m_iDirtyBuffSize = 0;
+	}
+
+	if (m_iDirtySettings > 0 || m_iDirtyPreset > 0 || m_iDirtyBuffSize > 0) {
+		// Save current preset selection.
+		m_pSetup->sDefPreset = m_ui.PresetComboBox->currentText();
+		// Always save current settings...
+		savePreset(m_pSetup->sDefPreset);
 	}
 
 	if (m_iDirtyOptions > 0) {
@@ -1853,6 +1851,7 @@ void qjackctlSetupForm::apply (void)
 	// Reset all dirty flags...
 	m_iDirtyPreset = 0;
 	m_iDirtySettings = 0;
+	m_iDirtyBuffSize = 0;
 	m_iDirtyOptions = 0;
 
 	// Make it stable anyway...

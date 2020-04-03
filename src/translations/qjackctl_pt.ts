@@ -3936,7 +3936,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="896"/>
         <location filename="../qjackctlSetupForm.cpp" line="949"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1911"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
@@ -4052,18 +4052,18 @@ Está certo disto?</translation>
         <translation>Arquivos de registros</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1756"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1754"/>
         <source>Information</source>
         <translation type="unfinished">Informação</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1757"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1755"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
