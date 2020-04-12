@@ -1,7 +1,7 @@
 // qjackctlGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -39,6 +39,8 @@
 
 #include <QPainter>
 #include <QPalette>
+
+#include <QLinearGradient>
 
 #include <QGraphicsProxyWidget>
 #include <QLineEdit>
@@ -318,10 +320,13 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 {
 	const QPalette& pal = option->palette;
 
+	const QRectF& port_rect = QGraphicsPathItem::boundingRect();
+	QLinearGradient port_grad(0, port_rect.top(), 0, port_rect.bottom());
+	QColor port_color;
 	if (QGraphicsPathItem::isSelected()) {
 		m_text->setDefaultTextColor(pal.highlightedText().color());
 		painter->setPen(pal.highlightedText().color());
-		painter->setBrush(pal.highlight().color());
+		port_color = pal.highlight().color();
 	} else {
 		const QColor& foreground
 			= qjackctlGraphItem::foreground();
@@ -334,12 +339,15 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 			: foreground.darker());
 		if (qjackctlGraphItem::isHighlight() || QGraphicsPathItem::isUnderMouse()) {
 			painter->setPen(foreground.lighter());
-			painter->setBrush(background.lighter());
+			port_color = background.lighter();
 		} else {
 			painter->setPen(foreground);
-			painter->setBrush(background);
+			port_color = background;
 		}
 	}
+	port_grad.setColorAt(0.0, port_color);
+	port_grad.setColorAt(1.0, port_color.darker(120));
+	painter->setBrush(port_grad);
 
 	painter->drawPath(QGraphicsPathItem::path());
 }
@@ -808,13 +816,14 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 {
 	const QPalette& pal = option->palette;
 
+	const QRectF& node_rect = QGraphicsPathItem::boundingRect();
+	QLinearGradient node_grad(0, node_rect.top(), 0, node_rect.bottom());
+	QColor node_color;
 	if (QGraphicsPathItem::isSelected()) {
 		const QColor& hilitetext_color = pal.highlightedText().color();
 		m_text->setDefaultTextColor(hilitetext_color);
 		painter->setPen(hilitetext_color);
-		QColor hilite_color(pal.highlight().color());
-		hilite_color.setAlpha(180);
-		painter->setBrush(hilite_color);
+		node_color = pal.highlight().color();
 	} else {
 		const QColor& foreground
 			= qjackctlGraphItem::foreground();
@@ -826,12 +835,15 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 			? foreground.lighter()
 			: foreground.darker());
 		painter->setPen(foreground);
-		painter->setBrush(background);
+		node_color = background;
 	}
+	node_color.setAlpha(180);
+	node_grad.setColorAt(0.6, node_color);
+	node_grad.setColorAt(1.0, node_color.darker(120));
+	painter->setBrush(node_grad);
 
 	painter->drawPath(QGraphicsPathItem::path());
 
-	const QRectF& node_rect = QGraphicsPathItem::boundingRect();
 	m_pixmap->setPos(node_rect.x() + 4, node_rect.y() + 4);
 
 	const QRectF& text_rect = m_text->boundingRect();

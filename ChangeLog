@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph nodes and ports are now presented with some
+  gradient background.
+
 - Fixed Setup dialog Cancel (or close) behavior when
   Settings > Parameters > Frames/Period (aka. buffer-
   size) it's the only setting that's changed.

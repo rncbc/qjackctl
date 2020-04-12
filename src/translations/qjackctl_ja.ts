@@ -431,13 +431,13 @@ Are you sure?</source>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1646"/>
-        <location filename="../qjackctlGraph.cpp" line="1773"/>
+        <location filename="../qjackctlGraph.cpp" line="1658"/>
+        <location filename="../qjackctlGraph.cpp" line="1785"/>
         <source>Connect</source>
         <translation>接続</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1820"/>
+        <location filename="../qjackctlGraph.cpp" line="1832"/>
         <source>Disconnect</source>
         <translation>切断</translation>
     </message>

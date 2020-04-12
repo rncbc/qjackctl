@@ -431,13 +431,13 @@ de toutes les applications clientes.
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1646"/>
-        <location filename="../qjackctlGraph.cpp" line="1773"/>
+        <location filename="../qjackctlGraph.cpp" line="1658"/>
+        <location filename="../qjackctlGraph.cpp" line="1785"/>
         <source>Connect</source>
         <translation>Connecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1820"/>
+        <location filename="../qjackctlGraph.cpp" line="1832"/>
         <source>Disconnect</source>
         <translation>Déconnecter</translation>
     </message>
