@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Left-clicking on the system-tray icon now simply
+  toggles the main widget visibility, disregarding
+  if already hidden undercover to other windows.
+
 - Graph nodes and ports are now presented with some
   gradient background.
 
