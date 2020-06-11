@@ -59,7 +59,7 @@
       </attribute>
       <layout class="QGridLayout">
        <item row="0" column="0">
-        <widget class="QTextEdit" name="MessagesTextView">
+        <widget class="QTextBrowser" name="MessagesTextView">
          <property name="minimumSize">
           <size>
            <width>320</width>

@@ -1188,7 +1188,7 @@ void qjackctlMainForm::shellExecute ( const QString& sShellCommand,
 	sTemp.replace("%n", QString::number(m_preset.iPeriods));
 
 	appendMessages(sStartMessage);
-	appendMessagesColor(sTemp.trimmed(), "#990099");
+	appendMessagesColor(sTemp.trimmed(), Qt::darkMagenta);
 	stabilize(QJACKCTL_TIMER_MSECS);
 
 	// Execute and set exit status message...
@@ -1515,7 +1515,7 @@ void qjackctlMainForm::startJack (void)
 		SLOT(jackFinished()));
 
 	appendMessages(tr("JACK is starting..."));
-	appendMessagesColor(m_sJackCmdLine, "#990099");
+	appendMessagesColor(m_sJackCmdLine, Qt::darkMagenta);
 
 #if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 	const QString& sCurrentDir = QFileInfo(sCommand).dir().absolutePath();
@@ -1664,10 +1664,15 @@ void qjackctlMainForm::readStdout (void)
 
 
 // Stdout buffer handler -- now splitted by complete new-lines...
-void qjackctlMainForm::appendStdoutBuffer ( const QString& sText )
+void qjackctlMainForm::appendStdoutBuffer ( const QString& s )
 {
-	m_sStdoutBuffer.append(sText);
+	m_sStdoutBuffer.append(s);
 
+	processStdoutBuffer();
+}
+
+void qjackctlMainForm::processStdoutBuffer (void)
+{
 	const int iLength = m_sStdoutBuffer.lastIndexOf('\n');
 	if (iLength > 0) {
 		QString sTemp = m_sStdoutBuffer.left(iLength);
@@ -1691,7 +1696,7 @@ void qjackctlMainForm::appendStdoutBuffer ( const QString& sText )
 void qjackctlMainForm::flushStdoutBuffer (void)
 {
 	if (!m_sStdoutBuffer.isEmpty()) {
-		appendMessagesText(detectXrun(m_sStdoutBuffer));
+		processStdoutBuffer();
 		m_sStdoutBuffer.clear();
 	}
 }
@@ -1921,26 +1926,26 @@ void qjackctlMainForm::stdoutNotifySlot ( int fd )
 
 
 // Messages output methods.
-void qjackctlMainForm::appendMessages ( const QString& sText )
+void qjackctlMainForm::appendMessages ( const QString& s )
 {
 	if (m_pMessagesStatusForm)
-		m_pMessagesStatusForm->appendMessages(sText);
+		m_pMessagesStatusForm->appendMessages(s);
 }
 
 void qjackctlMainForm::appendMessagesColor (
-	const QString& sText, const QString& sColor )
+	const QString& s, const QColor& rgb )
 {
 	if (m_pMessagesStatusForm)
-		m_pMessagesStatusForm->appendMessagesColor(sText, sColor);
+		m_pMessagesStatusForm->appendMessagesColor(s, rgb);
 }
 
-void qjackctlMainForm::appendMessagesText ( const QString& sText )
+void qjackctlMainForm::appendMessagesText ( const QString& s )
 {
 	if (m_pMessagesStatusForm)
-		m_pMessagesStatusForm->appendMessagesText(sText);
+		m_pMessagesStatusForm->appendMessagesText(s);
 }
 
-void qjackctlMainForm::appendMessagesError ( const QString& sText )
+void qjackctlMainForm::appendMessagesError ( const QString& s )
 {
 	if (m_pMessagesStatusForm) {
 		m_pMessagesStatusForm->setTabPage(
@@ -1948,7 +1953,7 @@ void qjackctlMainForm::appendMessagesError ( const QString& sText )
 		m_pMessagesStatusForm->show();
 	}
 
-	appendMessagesColor(sText.simplified(), "#ff0000");
+	appendMessagesColor(s.simplified(), Qt::red);
 
 	const QString& sTitle
 		= tr("Error");
@@ -1957,10 +1962,10 @@ void qjackctlMainForm::appendMessagesError ( const QString& sText )
 		&& QSystemTrayIcon::supportsMessages())
 		m_pSystemTray->showMessage(
 			sTitle + " - " QJACKCTL_SUBTITLE1,
-			sText, QSystemTrayIcon::Critical);
+			s, QSystemTrayIcon::Critical);
 	else
 #endif
-	QMessageBox::critical(this, sTitle, sText, QMessageBox::Cancel);
+	QMessageBox::critical(this, sTitle, s, QMessageBox::Cancel);
 }
 
 

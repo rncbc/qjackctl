@@ -205,7 +205,8 @@ protected:
 	void closeEvent(QCloseEvent *pCloseEvent);
 	void customEvent(QEvent *pEvent);
 
-	void appendStdoutBuffer(const QString& sText);
+	void appendStdoutBuffer(const QString& s);
+	void processStdoutBuffer();
 	void flushStdoutBuffer();
 
 	bool stdoutBlock(int fd, bool bBlock) const;
@@ -220,9 +221,9 @@ protected:
 	QString& detectXrun(QString& s);
 	void updateXrunStats(float fXrunLast);
 
-	void appendMessagesColor(const QString& sText, const QString& sColor);
-	void appendMessagesText(const QString& sText);
-	void appendMessagesError(const QString& sText);
+	void appendMessagesColor(const QString& s, const QColor& rgb);
+	void appendMessagesText(const QString& s);
+	void appendMessagesError(const QString& s);
 
 	void updateXrunCount();
 

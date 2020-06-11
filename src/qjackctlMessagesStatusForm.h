@@ -59,7 +59,7 @@ public:
 	void setLogging(bool bEnabled, const QString& sFilename = QString());
 
 	void appendMessages(const QString& s);
-	void appendMessagesColor(const QString& s, const QString& c);
+	void appendMessagesColor(const QString& s, const QColor& rgb);
 	void appendMessagesText(const QString& s);
 
 	void updateStatusItem(int iStatusItem, const QString& sText);

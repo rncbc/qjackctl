@@ -190,7 +190,7 @@ QFont qjackctlMessagesStatusForm::messagesFont (void) const
 	return m_ui.MessagesTextView->font();
 }
 
-void qjackctlMessagesStatusForm::setMessagesFont ( const QFont & font )
+void qjackctlMessagesStatusForm::setMessagesFont ( const QFont& font )
 {
 	m_ui.MessagesTextView->setFont(font);
 }
@@ -275,14 +275,14 @@ void qjackctlMessagesStatusForm::appendMessagesLine ( const QString& s )
 
 void qjackctlMessagesStatusForm::appendMessages ( const QString& s )
 {
-	appendMessagesColor(s, "#999999");
+	appendMessagesColor(s, Qt::gray);
 }
 
-void qjackctlMessagesStatusForm::appendMessagesColor ( const QString& s, const QString& c )
+void qjackctlMessagesStatusForm::appendMessagesColor ( const QString& s, const QColor& rgb )
 {
-	QString sText = QTime::currentTime().toString("hh:mm:ss.zzz") + ' ' + s;
-	
-	appendMessagesLine("<font color=\"" + c + "\">" + sText + "</font>");
+	const QString& sText
+		= QTime::currentTime().toString("hh:mm:ss.zzz") + ' ' + s;
+	appendMessagesLine("<font color=\"" + rgb.name() + "\">" + sText + "</font>");
 	appendMessagesLog(sText);
 }
 
