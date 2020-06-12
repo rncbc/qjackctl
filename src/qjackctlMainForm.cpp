@@ -3274,7 +3274,7 @@ void qjackctlMainForm::toggleMainForm (void)
 
 	m_pSetup->saveWidgetGeometry(this, true);
 
-	if (isVisible() && !isMinimized()) {
+	if (isVisible() && !isMinimized() && isActiveWindow()) {
 	#ifdef CONFIG_SYSTEM_TRAY
 		// Hide away from sight, totally...
 		if (m_pSetup->bSystemTray && m_pSystemTray)
