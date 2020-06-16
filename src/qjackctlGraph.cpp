@@ -2065,7 +2065,7 @@ bool qjackctlGraphCanvas::restoreState (void)
 		return false;
 
 	m_settings->beginGroup(ColorsGroup);
-	const QRegExp rx("^0x");
+	const QRegularExpression rx("^0x");
 	QStringListIterator key(m_settings->childKeys());
 	while (key.hasNext()) {
 		const QString& sKey = key.next();

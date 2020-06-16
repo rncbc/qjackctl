@@ -96,7 +96,7 @@ qjackctlGraphForm::qjackctlGraphForm (
 	zoom_widget->setToolTip(tr("Zoom"));
 
 	QHBoxLayout *zoom_layout = new QHBoxLayout();
-	zoom_layout->setMargin(0);
+	zoom_layout->setContentsMargins(0, 0, 0, 0);
 	zoom_layout->setSpacing(2);
 
 	QToolButton *zoom_out = new QToolButton();

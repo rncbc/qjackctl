@@ -47,9 +47,9 @@
 
 #include <QApplication>
 #include <QSocketNotifier>
+#include <QRegularExpression>
 #include <QMessageBox>
 #include <QTextStream>
-#include <QRegExp>
 #include <QMenu>
 #include <QTimer>
 #include <QLabel>
@@ -327,7 +327,7 @@ public:
 		// Constructor.
 		LineEvent(QEvent::Type eType, const QString& sLine)
 			: QEvent(eType), m_sLine(sLine)
-			{ m_sLine.remove(QRegExp("\\x1B\\[[0-9|;]+m")); }
+			{ m_sLine.remove(QRegularExpression("\\x1B\\[[0-9|;]+m")); }
 		// Accessor.
 		const QString& line() const
 			{ return m_sLine; }
@@ -1224,7 +1224,7 @@ void qjackctlMainForm::startJack (void)
 
 	// Stabilize emerging server state...
 	QPalette pal;
-	pal.setColor(QPalette::Foreground, Qt::yellow);
+	pal.setColor(QPalette::WindowText, Qt::yellow);
 	m_ui.ServerStateTextLabel->setPalette(pal);
 	m_ui.StartToolButton->setEnabled(false);
 	updateServerState(QJACKCTL_ACTIVATING);
@@ -1812,7 +1812,7 @@ void qjackctlMainForm::jackCleanup (void)
 void qjackctlMainForm::jackStabilize (void)
 {
 	QPalette pal;
-	pal.setColor(QPalette::Foreground,
+	pal.setColor(QPalette::WindowText,
 		m_pJackClient == nullptr ? Qt::darkYellow : Qt::yellow);
 	m_ui.ServerStateTextLabel->setPalette(pal);
 	m_ui.StartToolButton->setEnabled(m_pJackClient == nullptr);
@@ -2070,9 +2070,9 @@ void qjackctlMainForm::updateDisplayEffect (void)
 	QPalette pal;
 	if (m_pSetup->bDisplayEffect) {
 		QPixmap pm(":/images/displaybg1.png");
-		pal.setBrush(QPalette::Background, QBrush(pm));
+		pal.setBrush(QPalette::Window, QBrush(pm));
 	} else {
-		pal.setColor(QPalette::Background, Qt::black);
+		pal.setColor(QPalette::Window, Qt::black);
 	}
 	m_ui.StatusDisplayFrame->setPalette(pal);
 }
@@ -2447,7 +2447,7 @@ void qjackctlMainForm::updateXrunCount (void)
 	#endif
 
 	QPalette pal;
-	pal.setColor(QPalette::Foreground, color);
+	pal.setColor(QPalette::WindowText, color);
 	m_ui.XrunCountTextLabel->setPalette(pal);
 
 	QString sText = QString::number(m_iXrunCount);
@@ -3106,13 +3106,13 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 
 	// All displays are highlighted from now on.
 	QPalette pal;
-	pal.setColor(QPalette::Foreground, Qt::yellow);
+	pal.setColor(QPalette::WindowText, Qt::yellow);
 	m_ui.ServerStateTextLabel->setPalette(pal);
 	m_ui.DspLoadTextLabel->setPalette(pal);
 	m_ui.ServerModeTextLabel->setPalette(pal);
-	pal.setColor(QPalette::Foreground, Qt::darkYellow);
+	pal.setColor(QPalette::WindowText, Qt::darkYellow);
 	m_ui.SampleRateTextLabel->setPalette(pal);
-	pal.setColor(QPalette::Foreground, Qt::green);
+	pal.setColor(QPalette::WindowText, Qt::green);
 	m_ui.TimeDisplayTextLabel->setPalette(pal);
 	m_ui.TransportStateTextLabel->setPalette(pal);
 	m_ui.TransportBpmTextLabel->setPalette(pal);
@@ -3189,11 +3189,11 @@ void qjackctlMainForm::stopJackClient (void)
 
 	// Displays are dimmed again.
 	QPalette pal;
-	pal.setColor(QPalette::Foreground, Qt::darkYellow);
+	pal.setColor(QPalette::WindowText, Qt::darkYellow);
 	m_ui.ServerModeTextLabel->setPalette(pal);
 	m_ui.DspLoadTextLabel->setPalette(pal);
 	m_ui.SampleRateTextLabel->setPalette(pal);
-	pal.setColor(QPalette::Foreground, Qt::darkGreen);
+	pal.setColor(QPalette::WindowText, Qt::darkGreen);
 	m_ui.TimeDisplayTextLabel->setPalette(pal);
 	m_ui.TransportStateTextLabel->setPalette(pal);
 	m_ui.TransportBpmTextLabel->setPalette(pal);
@@ -3617,7 +3617,7 @@ void qjackctlMainForm::refreshStatus (void)
 			// Blink server mode indicator?...
 			if (m_pSetup && m_pSetup->bDisplayBlink) {
 				QPalette pal;
-				pal.setColor(QPalette::Foreground,
+				pal.setColor(QPalette::WindowText,
 					(++m_iStatusBlink % 2) ? Qt::darkYellow: Qt::yellow);
 				m_ui.ServerModeTextLabel->setPalette(pal);
 			}
