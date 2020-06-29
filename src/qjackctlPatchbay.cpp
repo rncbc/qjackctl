@@ -883,7 +883,11 @@ void qjackctlSocketListView::dragEnterEvent ( QDragEnterEvent *pDragEnterEvent )
 {
 	if (pDragEnterEvent->source() != this &&
 		pDragEnterEvent->mimeData()->hasText() &&
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		dragDropItem(pDragEnterEvent->position().toPoint())) {
+	#else
 		dragDropItem(pDragEnterEvent->pos())) {
+	#endif
 		pDragEnterEvent->accept();
 	} else {
 		pDragEnterEvent->ignore();
@@ -895,7 +899,11 @@ void qjackctlSocketListView::dragMoveEvent ( QDragMoveEvent *pDragMoveEvent )
 {
 	if (pDragMoveEvent->source() != this &&
 		pDragMoveEvent->mimeData()->hasText() &&
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		dragDropItem(pDragMoveEvent->position().toPoint())) {
+	#else
 		dragDropItem(pDragMoveEvent->pos())) {
+	#endif
 		pDragMoveEvent->accept();
 	} else {
 		pDragMoveEvent->ignore();
@@ -915,7 +923,11 @@ void qjackctlSocketListView::dropEvent ( QDropEvent *pDropEvent )
 {
 	if (pDropEvent->source() != this &&
 		pDropEvent->mimeData()->hasText() &&
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		dragDropItem(pDropEvent->position().toPoint())) {
+	#else
 		dragDropItem(pDropEvent->pos())) {
+	#endif
 		const QString sText = pDropEvent->mimeData()->text();
 		qjackctlPatchbay *pPatchbay = m_pPatchbayView->binding();
 		if (!sText.isEmpty() && pPatchbay)

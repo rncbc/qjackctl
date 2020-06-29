@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -31,7 +31,10 @@
 #include <QFileInfo>
 
 #include <QApplication>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QDesktopWidget>
+#endif
 
 #ifdef CONFIG_JACK_VERSION
 #include <jack/jack.h>
@@ -737,8 +740,10 @@ void qjackctlSetup::loadWidgetGeometry ( QWidget *pWidget, bool bVisible )
 			QWidget *pParent = pWidget->parentWidget();
 			if (pParent)
 				pParent = pParent->window();
+		#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 			if (pParent == nullptr)
 				pParent = QApplication::desktop();
+		#endif
 			if (pParent) {
 				QRect wrect(pWidget->geometry());
 				wrect.moveCenter(pParent->geometry().center());

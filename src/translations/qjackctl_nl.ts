@@ -27,63 +27,63 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="54"/>
+        <location filename="../qjackctlSetup.cpp" line="57"/>
         <source>(default)</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="516"/>
+        <location filename="../qjackctlSetup.cpp" line="519"/>
         <source>Start JACK audio server immediately</source>
         <translation>De JACK audio server onmiddlijk starten</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="524"/>
+        <location filename="../qjackctlSetup.cpp" line="527"/>
         <source>Show help about command line options</source>
         <translation>Toon hulp over command line opties</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="526"/>
+        <location filename="../qjackctlSetup.cpp" line="529"/>
         <source>Show version information</source>
         <translation>Toon versie informatie</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="562"/>
+        <location filename="../qjackctlSetup.cpp" line="565"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Optie -p vereist een argument (preset).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="511"/>
+        <location filename="../qjackctlSetup.cpp" line="514"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>Gebruik: %1 [opties] [commandos-en-args]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="514"/>
+        <location filename="../qjackctlSetup.cpp" line="517"/>
         <source>Options:</source>
         <translation>Opties:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="520"/>
+        <location filename="../qjackctlSetup.cpp" line="523"/>
         <source>Set active patchbay definition file</source>
         <translation>Kies het actieve patchbay definition bestand</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="522"/>
+        <location filename="../qjackctlSetup.cpp" line="525"/>
         <source>Set default JACK audio server name</source>
         <translation>Kies de standaard JACK audio server naam</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="571"/>
+        <location filename="../qjackctlSetup.cpp" line="574"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Optie -a vereist een argument (pad).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="581"/>
+        <location filename="../qjackctlSetup.cpp" line="584"/>
         <source>Option -n requires an argument (name).</source>
         <translation>Optie -n vereist een argument (naam).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="518"/>
+        <location filename="../qjackctlSetup.cpp" line="521"/>
         <source>Set default settings preset name</source>
         <translation>Kies standaard instellingen preset naam</translation>
     </message>
@@ -204,60 +204,60 @@
 <context>
     <name>qjackctlClientListView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1095"/>
+        <location filename="../qjackctlConnect.cpp" line="1107"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1096"/>
+        <location filename="../qjackctlConnect.cpp" line="1108"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translatorcomment>Koppelen</translatorcomment>
         <translation>Alt+K</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1099"/>
+        <location filename="../qjackctlConnect.cpp" line="1111"/>
         <source>&amp;Disconnect</source>
         <translation>Af&amp;Koppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1100"/>
+        <location filename="../qjackctlConnect.cpp" line="1112"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translatorcomment>Afkoppelen</translatorcomment>
         <translation>Alt+K</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1103"/>
+        <location filename="../qjackctlConnect.cpp" line="1115"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Alles afkoppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1104"/>
+        <location filename="../qjackctlConnect.cpp" line="1116"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translatorcomment>Alles afkoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1109"/>
+        <location filename="../qjackctlConnect.cpp" line="1121"/>
         <source>Re&amp;name</source>
         <translation>Her&amp;noemen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1110"/>
+        <location filename="../qjackctlConnect.cpp" line="1122"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
         <translatorcomment>Hernoemen</translatorcomment>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1116"/>
+        <location filename="../qjackctlConnect.cpp" line="1128"/>
         <source>&amp;Refresh</source>
         <translation>Ve&amp;rversen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1117"/>
+        <location filename="../qjackctlConnect.cpp" line="1129"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translatorcomment>Verversen</translatorcomment>
@@ -277,12 +277,12 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1924"/>
+        <location filename="../qjackctlConnect.cpp" line="1936"/>
         <source>Warning</source>
         <translation>Opgelet</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1925"/>
+        <location filename="../qjackctlConnect.cpp" line="1937"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -389,48 +389,48 @@ Bent u zeker?</translation>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1294"/>
+        <location filename="../qjackctlConnect.cpp" line="1306"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1295"/>
+        <location filename="../qjackctlConnect.cpp" line="1307"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translatorcomment>Verbinden</translatorcomment>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1298"/>
+        <location filename="../qjackctlConnect.cpp" line="1310"/>
         <source>&amp;Disconnect</source>
         <translation>Af&amp;Koppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1299"/>
+        <location filename="../qjackctlConnect.cpp" line="1311"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translatorcomment>Afkoppelen - Knippen</translatorcomment>
         <translation>Alt+K</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1302"/>
+        <location filename="../qjackctlConnect.cpp" line="1314"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Alles afkoppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1303"/>
+        <location filename="../qjackctlConnect.cpp" line="1315"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translatorcomment>Alles afkoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1308"/>
+        <location filename="../qjackctlConnect.cpp" line="1320"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Verversen</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1309"/>
+        <location filename="../qjackctlConnect.cpp" line="1321"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translatorcomment>Verversen</translatorcomment>
@@ -2345,12 +2345,12 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlPatchbay</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1677"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1689"/>
         <source>Warning</source>
         <translation>Opgelet</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1678"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1690"/>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
@@ -2638,93 +2638,93 @@ van alle huidige client verbindingen?</translation>
 <context>
     <name>qjackctlPatchbayView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1231"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1243"/>
         <source>Add...</source>
         <translation>Voeg toe…</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1233"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1245"/>
         <source>Edit...</source>
         <translation>Bewerk…</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1236"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1248"/>
         <source>Copy...</source>
         <translation>Kopieer…</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1239"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1251"/>
         <source>Remove</source>
         <translation>Verwijder</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1243"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1255"/>
         <source>Exclusive</source>
         <translation>Exclusief</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1288"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1300"/>
         <source>(None)</source>
         <translation>(Geen)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1249"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1261"/>
         <source>Forward</source>
         <translation>Vooruit</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1302"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1314"/>
         <source>Move Up</source>
         <translation>Omhoog</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1305"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1317"/>
         <source>Move Down</source>
         <translation>Omlaag</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1311"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1323"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbind</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1312"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1324"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translatorcomment>Verbind</translatorcomment>
         <translation>Alt+V</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1315"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1327"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Loskoppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1316"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1328"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translatorcomment>Loskoppelen</translatorcomment>
         <translation>Alt+L</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1319"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1331"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Alle loskoppelen</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1320"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1332"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translatorcomment>Alle loskoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1325"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1337"/>
         <source>&amp;Refresh</source>
         <translation>Ve&amp;rvers</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1326"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1338"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translatorcomment>Ververs</translatorcomment>

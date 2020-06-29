@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1005,7 +1005,11 @@ void qjackctlClientListView::dragEnterEvent ( QDragEnterEvent *pDragEnterEvent )
 {
 	if (pDragEnterEvent->source() != this &&
 		pDragEnterEvent->mimeData()->hasText() &&
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		dragDropItem(pDragEnterEvent->position().toPoint())) {
+	#else
 		dragDropItem(pDragEnterEvent->pos())) {
+	#endif
 		pDragEnterEvent->accept();
 	} else {
 		pDragEnterEvent->ignore();
@@ -1017,7 +1021,11 @@ void qjackctlClientListView::dragMoveEvent ( QDragMoveEvent *pDragMoveEvent )
 {
 	if (pDragMoveEvent->source() != this &&
 		pDragMoveEvent->mimeData()->hasText() &&
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		dragDropItem(pDragMoveEvent->position().toPoint())) {
+	#else
 		dragDropItem(pDragMoveEvent->pos())) {
+	#endif
 		pDragMoveEvent->accept();
 	} else {
 		pDragMoveEvent->ignore();
@@ -1037,7 +1045,11 @@ void qjackctlClientListView::dropEvent( QDropEvent *pDropEvent )
 {
 	if (pDropEvent->source() != this &&
 		pDropEvent->mimeData()->hasText() &&
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		dragDropItem(pDropEvent->position().toPoint())) {
+	#else
 		dragDropItem(pDropEvent->pos())) {
+	#endif
 		const QString sText = pDropEvent->mimeData()->text();
 		qjackctlConnect *pConnect = m_pConnectView->binding();
 		if (!sText.isEmpty() && pConnect)
