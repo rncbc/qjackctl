@@ -81,7 +81,7 @@ qjackctlPlugItem::qjackctlPlugItem ( qjackctlSocketItem *pSocket,
 // Default destructor.
 qjackctlPlugItem::~qjackctlPlugItem (void)
 {
-	int iPlug = m_pSocket->plugs().indexOf(this);
+	const int iPlug = m_pSocket->plugs().indexOf(this);
 	if (iPlug >= 0)
 		m_pSocket->plugs().removeAt(iPlug);
 }
@@ -140,7 +140,7 @@ qjackctlSocketItem::~qjackctlSocketItem (void)
 	m_connects.clear();
 	m_plugs.clear();
 
-	int iSocket = m_pSocketList->sockets().indexOf(this);
+	const int iSocket = m_pSocketList->sockets().indexOf(this);
 	if (iSocket >= 0)
 		m_pSocketList->sockets().removeAt(iSocket);
 }
@@ -267,7 +267,9 @@ const QList<qjackctlSocketItem *>& qjackctlSocketItem::connects (void) const
 // Plug list cleaner.
 void qjackctlSocketItem::clear (void)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	qDeleteAll(m_plugs);
+#endif
 	m_plugs.clear();
 }
 
@@ -406,7 +408,9 @@ const QString& qjackctlSocketList::socketCaption (void) const
 // Socket list cleaner.
 void qjackctlSocketList::clear (void)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	qDeleteAll(m_sockets);
+#endif
 	m_sockets.clear();
 }
 
@@ -655,7 +659,7 @@ bool qjackctlSocketList::moveUpSocketItem (void)
 
 	qjackctlSocketItem *pSocketItem = selectedSocketItem();
 	if (pSocketItem) {
-		int iItem = m_pListView->indexOfTopLevelItem(pSocketItem);
+		const int iItem = m_pListView->indexOfTopLevelItem(pSocketItem);
 		if (iItem > 0) {
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
@@ -681,8 +685,8 @@ bool qjackctlSocketList::moveDownSocketItem (void)
 
 	qjackctlSocketItem *pSocketItem = selectedSocketItem();
 	if (pSocketItem) {
-		int iItem = m_pListView->indexOfTopLevelItem(pSocketItem);
-		int iItemCount = m_pListView->topLevelItemCount();
+		const int iItem = m_pListView->indexOfTopLevelItem(pSocketItem);
+		const int iItemCount = m_pListView->topLevelItemCount();
 		if (iItem < iItemCount - 1) {
 			QTreeWidgetItem *pItem = m_pListView->takeTopLevelItem(iItem);
 			if (pItem) {
@@ -1291,7 +1295,7 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 					QIcon(ISocketList()->pixmap(iPixmap)), sSocketName);
 				pAction->setChecked(pSocketItem->forward() == sSocketName);
 				pAction->setData(iIndex);
-				iIndex++;
+				++iIndex;
 			}
 			// nullptr forward always present,
 			// and has invalid index parameter (-1)...
@@ -1308,8 +1312,8 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 		}
 		pForwardMenu->setEnabled(iIndex > 0);
 		menu.addSeparator();
-		int iItem = (pSocketList->listView())->indexOfTopLevelItem(pSocketItem);
-		int iItemCount = (pSocketList->listView())->topLevelItemCount();
+		const int iItem = (pSocketList->listView())->indexOfTopLevelItem(pSocketItem);
+		const int iItemCount = (pSocketList->listView())->topLevelItemCount();
 		pAction = menu.addAction(QIcon(":/images/up1.png"),
 			tr("Move Up"), pSocketList, SLOT(moveUpSocketItem()));
 		pAction->setEnabled(bEnabled && iItem > 0);

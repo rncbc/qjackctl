@@ -305,7 +305,9 @@ qjackctlClientItem::qjackctlClientItem ( qjackctlClientList *pClientList )
 // Default destructor.
 qjackctlClientItem::~qjackctlClientItem (void)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	qDeleteAll(m_ports);
+#endif
 	m_ports.clear();
 
 	const int iClient = m_pClientList->clients().indexOf(this);
@@ -452,7 +454,7 @@ int qjackctlClientItem::cleanClientPorts ( int iMark )
 		if (pPort->portMark() == iMark) {
 			iter.remove();
 			delete pPort;
-			iDirtyCount++;
+			++iDirtyCount;
 		}
 	}
 	
@@ -536,7 +538,9 @@ qjackctlClientList::~qjackctlClientList (void)
 // Do proper contents cleanup.
 void qjackctlClientList::clear (void)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	qDeleteAll(m_clients);
+#endif
 	m_clients.clear();
 
 	if (m_pListView)
@@ -563,7 +567,7 @@ qjackctlPortItem *qjackctlClientList::findClientPort (
 	const QString& sClientPort )
 {
 	qjackctlPortItem *pPort = 0;
-	int iColon = sClientPort.indexOf(':');
+	const int iColon = sClientPort.indexOf(':');
 	if (iColon >= 0) {
 		qjackctlClientItem *pClient = findClient(sClientPort.left(iColon));
 		if (pClient) {
@@ -616,7 +620,7 @@ int qjackctlClientList::cleanClientPorts ( int iMark )
 		if (pClient->clientMark() == iMark) {
 			iter.remove();
 			delete pClient;
-			iDirtyCount++;
+			++iDirtyCount;
 		} else {
 			iDirtyCount += pClient->cleanClientPorts(iMark);
 		}
@@ -1998,11 +2002,11 @@ void qjackctlConnect::updateContents ( bool bClear )
 		// Add (newer) client:ports and respective connections...
 		if (m_pOClientList->updateClientPorts() > 0) {
 			m_pOClientList->refresh();
-			iDirtyCount++;
+			++iDirtyCount;
 		}
 		if (m_pIClientList->updateClientPorts() > 0) {
 			m_pIClientList->refresh();
-			iDirtyCount++;
+			++iDirtyCount;
 		}			
 		updateConnections();
 		endMutex();

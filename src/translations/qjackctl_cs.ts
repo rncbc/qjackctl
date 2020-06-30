@@ -204,66 +204,66 @@
 <context>
     <name>qjackctlClientListView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="793"/>
+        <location filename="../qjackctlConnect.cpp" line="797"/>
         <source>Readable Clients / Output Ports</source>
         <translation>Čitelné přípojky pro klienty/výstupy</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="795"/>
+        <location filename="../qjackctlConnect.cpp" line="799"/>
         <source>Writable Clients / Input Ports</source>
         <translation>Zapisovatelné přípojky pro klienty/výstupy</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1107"/>
+        <location filename="../qjackctlConnect.cpp" line="1111"/>
         <source>&amp;Connect</source>
         <translation>&amp;Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1108"/>
+        <location filename="../qjackctlConnect.cpp" line="1112"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1111"/>
+        <location filename="../qjackctlConnect.cpp" line="1115"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Rozpojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1112"/>
+        <location filename="../qjackctlConnect.cpp" line="1116"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1115"/>
+        <location filename="../qjackctlConnect.cpp" line="1119"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Rozpojit vše</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1116"/>
+        <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1121"/>
+        <location filename="../qjackctlConnect.cpp" line="1125"/>
         <source>Re&amp;name</source>
         <translation>&amp;Přejmenovat</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1122"/>
+        <location filename="../qjackctlConnect.cpp" line="1126"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1128"/>
+        <location filename="../qjackctlConnect.cpp" line="1132"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Obnovit</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1129"/>
+        <location filename="../qjackctlConnect.cpp" line="1133"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+R</translation>
@@ -272,12 +272,12 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1936"/>
+        <location filename="../qjackctlConnect.cpp" line="1940"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1937"/>
+        <location filename="../qjackctlConnect.cpp" line="1941"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -384,45 +384,45 @@ Jste si jistý?</translation>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1306"/>
+        <location filename="../qjackctlConnect.cpp" line="1310"/>
         <source>&amp;Connect</source>
         <translation>&amp;Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1307"/>
+        <location filename="../qjackctlConnect.cpp" line="1311"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1310"/>
+        <location filename="../qjackctlConnect.cpp" line="1314"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Rozpojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1311"/>
+        <location filename="../qjackctlConnect.cpp" line="1315"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1314"/>
+        <location filename="../qjackctlConnect.cpp" line="1318"/>
         <source>Disconnect &amp;All</source>
         <translation>Rozpojit &amp;vše</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1315"/>
+        <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1320"/>
+        <location filename="../qjackctlConnect.cpp" line="1324"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Obnovit</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1321"/>
+        <location filename="../qjackctlConnect.cpp" line="1325"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+R</translation>
@@ -2350,12 +2350,12 @@ Chcete uložit změny?</translation>
 <context>
     <name>qjackctlPatchbay</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1689"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1693"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1690"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1694"/>
         <source>This will disconnect all sockets.
 
 Are you sure?</source>
@@ -2643,90 +2643,90 @@ všech skutečných klientských spojení?</translation>
 <context>
     <name>qjackctlPatchbayView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1243"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1247"/>
         <source>Add...</source>
         <translation>Přidat...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1245"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1249"/>
         <source>Edit...</source>
         <translation>Upravit...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1248"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1252"/>
         <source>Copy...</source>
         <translation>Kopírovat...</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1251"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1255"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1255"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1259"/>
         <source>Exclusive</source>
         <translation>Výhradní</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1261"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1265"/>
         <source>Forward</source>
         <translation>Dopředu</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1300"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1304"/>
         <source>(None)</source>
         <translation>(Žádný)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1314"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1318"/>
         <source>Move Up</source>
         <translation>Přesunout nahoru</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1317"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1321"/>
         <source>Move Down</source>
         <translation>Přesunout dolů</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1323"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1327"/>
         <source>&amp;Connect</source>
         <translation>&amp;Spojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1324"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1328"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1327"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1331"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Rozpojit</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1328"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1332"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Alt+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1331"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1335"/>
         <source>Disconnect &amp;All</source>
         <translation>&amp;Rozpojit vše</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1332"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1336"/>
         <source>Alt+A</source>
         <comment>Disconect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1337"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1341"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Obnovit</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="1338"/>
+        <location filename="../qjackctlPatchbay.cpp" line="1342"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+R</translation>
@@ -4790,32 +4790,32 @@ Chcete použít změny?</translation>
 <context>
     <name>qjackctlSocketList</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="326"/>
+        <location filename="../qjackctlPatchbay.cpp" line="328"/>
         <source>Output</source>
         <translation>Výstup</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="336"/>
+        <location filename="../qjackctlPatchbay.cpp" line="338"/>
         <source>Input</source>
         <translation>Vstup</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="349"/>
+        <location filename="../qjackctlPatchbay.cpp" line="351"/>
         <source>Socket</source>
         <translation>Zásuvka</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="460"/>
+        <location filename="../qjackctlPatchbay.cpp" line="464"/>
         <source>&lt;New&gt; - %1</source>
         <translation>&lt;Nový&gt; %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="507"/>
+        <location filename="../qjackctlPatchbay.cpp" line="511"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="508"/>
+        <location filename="../qjackctlPatchbay.cpp" line="512"/>
         <source>%1 about to be removed:
 
 &quot;%2&quot;
@@ -4828,7 +4828,7 @@ Are you sure?</source>
 Jste si jistý?</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="593"/>
+        <location filename="../qjackctlPatchbay.cpp" line="597"/>
         <source>%1 &lt;Copy&gt; - %2</source>
         <translation>%1 &lt;Kopírovat&gt; - %2</translation>
     </message>
@@ -4836,12 +4836,12 @@ Jste si jistý?</translation>
 <context>
     <name>qjackctlSocketListView</name>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="754"/>
+        <location filename="../qjackctlPatchbay.cpp" line="758"/>
         <source>Output Sockets / Plugs</source>
         <translation>Výstupní zásuvky/zástrčky</translation>
     </message>
     <message>
-        <location filename="../qjackctlPatchbay.cpp" line="756"/>
+        <location filename="../qjackctlPatchbay.cpp" line="760"/>
         <source>Input Sockets / Plugs</source>
         <translation>Vstupní zásuvky/zástrčky</translation>
     </message>
