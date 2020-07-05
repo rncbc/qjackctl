@@ -15,7 +15,6 @@ branches:
   - master
 
 before_install:
-- sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
 - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.14.2-bionic
 - sudo apt-get update -qq
 
