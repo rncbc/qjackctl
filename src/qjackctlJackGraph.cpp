@@ -1,7 +1,7 @@
 // qjackctlJackGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -34,74 +34,127 @@ QMutex qjackctlJackGraph::g_mutex;
 
 #ifdef CONFIG_JACK_METADATA
 
-// JACK client/port metad-ata property helpers.
+// JACK client/port meta-data property helpers.
 //
 #include <jack/metadata.h>
 #include <jack/uuid.h>
 
 static
-QString qjackctlJackGraph_prettyName (
-	jack_uuid_t uuid, const QString& name )
+QString qjackctlJackGraph_get_property (
+	jack_uuid_t uuid, const char *key, const QString& name )
 {
-	QString pretty_name = name;
+	QString property = name;
 
 	char *value = nullptr;
 	char *type  = nullptr;
 
-	if (::jack_get_property(uuid,
-			JACK_METADATA_PRETTY_NAME, &value, &type) == 0) {
+	if (::jack_get_property(uuid, key, &value, &type) == 0) {
 		if (value) {
-			pretty_name = QString::fromUtf8(value);
+			property = QString::fromUtf8(value);
 			::jack_free(value);
 		}
 		if (type)
 			::jack_free(type);
 	}
 
-	return pretty_name;
+	return property;
 }
 
 static
-void qjackctlJackGraph_setPrettyName (
+void qjackctlJackGraph_set_property ( jack_client_t *client,
+	jack_uuid_t uuid, const char *key, const QString& property )
+{
+	const char *value = property.toUtf8().constData();
+
+	::jack_set_property(client, uuid, key, value, NULL);
+}
+
+static
+void qjackctlJackGraph_remove_property (
+	jack_client_t *client, jack_uuid_t uuid, const char *key )
+{
+	::jack_remove_property(client, uuid, key);
+}
+
+
+// Pretty-name property accessors.
+//
+static
+QString qjackctlJackGraph_pretty_name (
+	jack_uuid_t uuid, const QString& pretty_name )
+{
+	return qjackctlJackGraph_get_property(uuid,
+		JACK_METADATA_PRETTY_NAME, pretty_name);
+}
+
+static
+void qjackctlJackGraph_set_pretty_name (
 	jack_client_t *client, jack_uuid_t uuid, const QString& pretty_name )
 {
-	const QByteArray value = pretty_name.toUtf8();
-
-	::jack_set_property(client, uuid,
-		JACK_METADATA_PRETTY_NAME, value.constData(), nullptr);
+	qjackctlJackGraph_set_property(client, uuid,
+		JACK_METADATA_PRETTY_NAME, pretty_name);
 }
 
 static
-void qjackctlJackGraph_removePrettyName (
+void qjackctlJackGraph_remove_pretty_name (
 	jack_client_t *client, jack_uuid_t uuid )
 {
-	::jack_remove_property(client, uuid, JACK_METADATA_PRETTY_NAME);
+	qjackctlJackGraph_remove_property(client, uuid,
+		JACK_METADATA_PRETTY_NAME);
 }
 
 
+// Port-index property accessors.
+//
 #ifndef JACKEY_ORDER
 #define JACKEY_ORDER "http://jackaudio.org/metadata/order"
 #endif
 
 static
-int qjackctlJackGraph_portIndex ( jack_uuid_t uuid, int index )
+int qjackctlJackGraph_port_index ( jack_uuid_t uuid, int index )
 {
-	int port_index = index;
+	return qjackctlJackGraph_get_property(uuid,
+		JACKEY_ORDER, QString::number(index)).toInt();
+}
 
-	char *value = nullptr;
-	char *type  = nullptr;
 
-	if (::jack_get_property(uuid,
-			JACKEY_ORDER, &value, &type) == 0) {
-		if (value) {
-			port_index = QString::fromUtf8(value).toInt();
-			::jack_free(value);
-		}
-		if (type)
-			::jack_free(type);
-	}
+// Event-types property accessors (MIDI|"osc").
+//
+#ifndef JACKEY_EVENT_TYPES
+#define JACKEY_EVENT_TYPES "http://jackaudio.org/metadata/event-types"
+#endif
 
-	return port_index;
+static
+QStringList qjackctlJackGraph_event_types ( jack_uuid_t uuid )
+{
+	return qjackctlJackGraph_get_property(uuid,
+		JACKEY_EVENT_TYPES, QString("midi")).toLower().split(',');
+}
+
+static
+bool qjackctlJackGraph_port_is_osc ( jack_uuid_t uuid )
+{
+	return qjackctlJackGraph_event_types(uuid).contains("osc");
+}
+
+
+// Signal-type property accessors (audio|"cv").
+//
+#ifndef JACKEY_SIGNAL_TYPE
+#define JACKEY_SIGNAL_TYPE "http://jackaudio.org/metadata/signal-type"
+#endif
+
+static
+QString qjackctlJackGraph_signal_type ( jack_uuid_t uuid )
+{
+	return qjackctlJackGraph_get_property(uuid,
+		JACKEY_SIGNAL_TYPE, QString()).toLower();
+}
+
+static
+bool qjackctlJackGraph_port_is_cv ( jack_uuid_t uuid )
+{
+	return qjackctlJackGraph_signal_type(uuid) == "cv";
 }
 
 #endif	// CONFIG_JACK_METADATA
@@ -273,7 +326,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(client_uuid_name, &client_uuid);
 			const QString& pretty_name
-				= qjackctlJackGraph_prettyName(client_uuid, client_name);
+				= qjackctlJackGraph_pretty_name(client_uuid, client_name);
 			if (!pretty_name.isEmpty())
 				node_title = pretty_name;
 			::jack_free((void *) client_uuid_name);
@@ -291,11 +344,11 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 			const jack_uuid_t port_uuid
 				= ::jack_port_uuid(jack_port);
 			const QString& pretty_name
-				= qjackctlJackGraph_prettyName(port_uuid, port_name);
+				= qjackctlJackGraph_pretty_name(port_uuid, port_name);
 			if (!pretty_name.isEmpty())
 				port_title = pretty_name;
 			const int port_index
-				= qjackctlJackGraph_portIndex(port_uuid, 0);
+				= qjackctlJackGraph_port_index(port_uuid, 0);
 			if ((*port)->portIndex() != port_index) {
 				(*port)->setPortIndex(port_index);
 				++nchanged;
@@ -523,9 +576,9 @@ void qjackctlJackGraph::renameItem (
 				jack_uuid_t client_uuid = 0;
 				::jack_uuid_parse(client_uuid_name, &client_uuid);
 				if (name.isEmpty())
-					qjackctlJackGraph_removePrettyName(client, client_uuid);
+					qjackctlJackGraph_remove_pretty_name(client, client_uuid);
 				else
-					qjackctlJackGraph_setPrettyName(client, client_uuid, name);
+					qjackctlJackGraph_set_pretty_name(client, client_uuid, name);
 				::jack_free((void *) client_uuid_name);
 			}
 		}
@@ -547,9 +600,9 @@ void qjackctlJackGraph::renameItem (
 			if (jack_port) {
 				jack_uuid_t port_uuid = ::jack_port_uuid(jack_port);
 				if (name.isEmpty())
-					qjackctlJackGraph_removePrettyName(client, port_uuid);
+					qjackctlJackGraph_remove_pretty_name(client, port_uuid);
 				else
-					qjackctlJackGraph_setPrettyName(client, port_uuid, name);
+					qjackctlJackGraph_set_pretty_name(client, port_uuid, name);
 			}
 		}
 	}
