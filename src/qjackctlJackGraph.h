@@ -61,6 +61,9 @@ public:
 	// JACK port types.
 	static uint audioPortType();
 	static uint midiPortType();
+	// JACK port (meta-data provided) types.
+	static uint cvPortType();
+	static uint oscPortType();
 
 	// Client/port renaming method (virtual override).
 	void renameItem(qjackctlGraphItem *item, const QString& name);

@@ -233,27 +233,31 @@ uint qjackctlJackGraph::nodeType (void)
 // JACK port type(s) inquirer. (static)
 bool qjackctlJackGraph::isPortType ( uint port_type )
 {
-	return (port_type == audioPortType() || port_type == midiPortType());
+	return port_type == audioPortType()
+		|| port_type == midiPortType()
+		|| port_type == cvPortType()
+		|| port_type == oscPortType();
 }
 
 
 uint qjackctlJackGraph::audioPortType (void)
 {
-	static
-	const uint JackAudioPortType
-		= qjackctlGraphItem::itemType(JACK_DEFAULT_AUDIO_TYPE);
-
-	return JackAudioPortType;
+	return qjackctlGraphItem::itemType(JACK_DEFAULT_AUDIO_TYPE);
 }
-
 
 uint qjackctlJackGraph::midiPortType (void)
 {
-	static
-	const uint JackMidiPortType
-		= qjackctlGraphItem::itemType(JACK_DEFAULT_MIDI_TYPE);
+	return qjackctlGraphItem::itemType(JACK_DEFAULT_MIDI_TYPE);
+}
 
-	return JackMidiPortType;
+uint qjackctlJackGraph::cvPortType (void)
+{
+	return qjackctlGraphItem::itemType("JACK_SIGNAL_TYPE_CV");
+}
+
+uint qjackctlJackGraph::oscPortType (void)
+{
+	return qjackctlGraphItem::itemType("JACK_EVENT_TYPE_OSC");
 }
 
 
@@ -281,9 +285,19 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 		= qjackctlJackGraph::nodeType();
 	const char *port_type_name
 		= ::jack_port_type(jack_port);
-	const uint port_type
+	uint port_type
 		= qjackctlGraphItem::itemType(port_type_name);
-
+#ifdef CONFIG_JACK_METADATA
+	const jack_uuid_t port_uuid
+		= ::jack_port_uuid(jack_port);
+	if (port_type == audioPortType()
+		&& qjackctlJackGraph_port_is_cv(port_uuid))
+		port_type = cvPortType();
+	else
+	if (port_type == midiPortType()
+		&& qjackctlJackGraph_port_is_osc(port_uuid))
+		port_type = oscPortType();
+#endif
 	qjackctlGraphItem::Mode node_mode = port_mode;
 
 	*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
@@ -341,8 +355,6 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 			foreach (qjackctlAliasList *port_aliases, item_aliases(*port))
 				port_title = port_aliases->portAlias(client_name, port_name);
 		#ifdef CONFIG_JACK_METADATA
-			const jack_uuid_t port_uuid
-				= ::jack_port_uuid(jack_port);
 			const QString& pretty_name
 				= qjackctlJackGraph_pretty_name(port_uuid, port_name);
 			if (!pretty_name.isEmpty())
