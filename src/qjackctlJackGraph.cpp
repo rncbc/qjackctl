@@ -502,6 +502,12 @@ void qjackctlJackGraph::resetPortTypeColors (void)
 		canvas->setPortTypeColor(
 			qjackctlJackGraph::midiPortType(),
 			QColor(Qt::darkRed).darker(120));
+		canvas->setPortTypeColor(
+			qjackctlJackGraph::cvPortType(),
+			QColor(Qt::darkCyan).darker(120));
+		canvas->setPortTypeColor(
+			qjackctlJackGraph::oscPortType(),
+			QColor(Qt::darkYellow).darker(120));
 	}
 }
 

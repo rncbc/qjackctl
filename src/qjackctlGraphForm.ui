@@ -103,6 +103,8 @@
      </property>
      <addaction name="viewColorsJackAudioAction"/>
      <addaction name="viewColorsJackMidiAction"/>
+     <addaction name="viewColorsJackCvAction"/>
+     <addaction name="viewColorsJackOscAction"/>
      <addaction name="viewColorsAlsaMidiAction"/>
      <addaction name="separator"/>
      <addaction name="viewColorsResetAction"/>
@@ -565,6 +567,40 @@
    </property>
    <property name="statusTip">
     <string>ALSA MIDI color</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewColorsJackCvAction">
+   <property name="text">
+    <string>JACK &amp;CV...</string>
+   </property>
+   <property name="iconText">
+    <string>JACK CV color</string>
+   </property>
+   <property name="toolTip">
+    <string>JACK CV color</string>
+   </property>
+   <property name="statusTip">
+    <string>JACK CV color</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="viewColorsJackOscAction">
+   <property name="text">
+    <string>JACK &amp;OSC...</string>
+   </property>
+   <property name="iconText">
+    <string>JACK OSC</string>
+   </property>
+   <property name="toolTip">
+    <string>JACK OSC color</string>
+   </property>
+   <property name="statusTip">
+    <string>JACK OSC color</string>
    </property>
    <property name="shortcut">
     <string/>

@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Added preliminary support for JACK CV signal-type
+  ports and JACK OSC event-type ports (Graph only).
+
 - Left-clicking on the system-tray icon now simply
   toggles the main widget visibility, disregarding
   if already hidden undercover to other windows.
