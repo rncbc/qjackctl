@@ -52,14 +52,20 @@
 /* Define if CoreAudio/CoreAudio.h is available (Mac OS X). */
 #cmakedefine CONFIG_COREAUDIO @CONFIG_COREAUDIO@
 
-/* Define if JACK MIDI support is available. */
-#cmakedefine CONFIG_JACK_MIDI @CONFIG_JACK_MIDI@
-
 /* Define if JACK session support is available. */
 #cmakedefine CONFIG_JACK_SESSION @CONFIG_JACK_SESSION@
 
 /* Define if JACK metadata support is available. */
 #cmakedefine CONFIG_JACK_METADATA @CONFIG_JACK_METADATA@
+
+/* Define if JACK MIDI support is available. */
+#cmakedefine CONFIG_JACK_MIDI @CONFIG_JACK_MIDI@
+
+/* Define if JACK CV support is available. */
+#cmakedefine CONFIG_JACK_CV @CONFIG_JACK_CV@
+
+/* Define if JACK OSC support is available. */
+#cmakedefine CONFIG_JACK_OSC @CONFIG_JACK_OSC@
 
 /* Define if D-Bus interface is enabled. */
 #cmakedefine CONFIG_DBUS @CONFIG_DBUS@

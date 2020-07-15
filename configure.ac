@@ -84,12 +84,6 @@ AC_ARG_ENABLE(system_tray,
   [ac_system_tray="$enableval"],
   [ac_system_tray="yes"])
 
-# Disable JACK MIDI support option.
-AC_ARG_ENABLE(jack_midi,
-  AS_HELP_STRING([--enable-jack-midi], [enable JACK MIDI support (default=yes)]),
-  [ac_jack_midi="$enableval"],
-  [ac_jack_midi="yes"])
-
 # Enable JACK session support.
 AC_ARG_ENABLE(jack_session,
   AS_HELP_STRING([--enable-jack-session], [enable JACK session support (default=yes)]),
@@ -107,6 +101,24 @@ AC_ARG_ENABLE(jack_metadata,
   AS_HELP_STRING([--enable-jack-metadata], [enable JACK metadata support (default=yes)]),
   [ac_jack_metadata="$enableval"],
   [ac_jack_metadata="yes"])
+
+# Enable JACK MIDI support option.
+AC_ARG_ENABLE(jack_midi,
+  AS_HELP_STRING([--enable-jack-midi], [enable JACK MIDI support (default=yes)]),
+  [ac_jack_midi="$enableval"],
+  [ac_jack_midi="yes"])
+
+# Enable JACK CV support.
+AC_ARG_ENABLE(jack_cv,
+  AS_HELP_STRING([--enable-jack-cv], [enable JACK CV support (default=no)]),
+  [ac_jack_cv="$enableval"],
+  [ac_jack_cv="no"])
+
+# Enable JACK OSC support.
+AC_ARG_ENABLE(jack_osc,
+  AS_HELP_STRING([--enable-jack-osc], [enable JACK OSC support (default=no)]),
+  [ac_jack_osc="$enableval"],
+  [ac_jack_osc="no"])
 
 # Enable JACK version support.
 AC_ARG_ENABLE(jack_version,
@@ -465,6 +477,19 @@ if test "x$ac_jack_metadata" = "xyes"; then
    fi
 fi
 
+# Check for JACK metadata availability.
+if test "x$ac_jack_metadata" = "xyes"; then
+   if test "x$ac_jack_cv" = "xyes"; then
+      AC_DEFINE(CONFIG_JACK_CV, 1, [Define if JACK CV support is available.])
+   fi
+   if test "x$ac_jack_osc" = "xyes"; then
+      AC_DEFINE(CONFIG_JACK_OSC, 1, [Define if JACK OSC support is available.])
+   fi
+else
+   ac_jack_cv="no"
+   ac_jack_osc="no"
+fi
+
 # Check D-Bus interface support.
 if test "x$ac_dbus" = "xyes"; then
    PKG_CHECK_MODULES([QT5DBUS], [Qt5DBus], [ac_dbus="yes"], [ac_dbus="no"])
@@ -589,6 +614,8 @@ echo "  JACK Maximum scheduling delay support  . . . . . .: $ac_jack_max_delay"
 echo "  JACK Port aliases support  . . . . . . . . . . . .: $ac_jack_port_aliases"
 echo "  JACK Metadata support  . . . . . . . . . . . . . .: $ac_jack_metadata"
 echo "  JACK MIDI support  . . . . . . . . . . . . . . . .: $ac_jack_midi"
+echo "  JACK CV support  . . . . . . . . . . . . . . . . .: $ac_jack_cv"
+echo "  JACK OSC support . . . . . . . . . . . . . . . . .: $ac_jack_osc"
 echo "  JACK Session support . . . . . . . . . . . . . . .: $ac_jack_session"
 echo "  JACK Version support (JACK2) . . . . . . . . . . .: $ac_jack_version"
 echo "  ALSA MIDI Sequencer support  . . . . . . . . . . .: $ac_alsa_seq"

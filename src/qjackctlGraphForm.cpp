@@ -229,8 +229,10 @@ qjackctlGraphForm::qjackctlGraphForm (
 #ifdef CONFIG_ALSA_SEQ
 	m_ui.viewColorsAlsaMidiAction->setData(qjackctlAlsaGraph::midiPortType());
 #endif
-#ifdef CONFIG_JACK_METADATA
+#ifdef CONFIG_JACK_CV
 	m_ui.viewColorsJackCvAction->setData(qjackctlJackGraph::cvPortType());
+#endif
+#ifdef CONFIG_JACK_OSC
 	m_ui.viewColorsJackOscAction->setData(qjackctlJackGraph::oscPortType());
 #endif
 
@@ -248,17 +250,20 @@ qjackctlGraphForm::qjackctlGraphForm (
 	m_ui.viewColorsMenu->removeAction(m_ui.viewColorsAlsaMidiAction);
 	m_ui.viewColorsAlsaMidiAction->setDisabled(true);
 #endif
-#ifdef CONFIG_JACK_METADATA
+#ifdef CONFIG_JACK_CV
 	QObject::connect(m_ui.viewColorsJackCvAction,
-		SIGNAL(triggered(bool)),
-		SLOT(viewColorsAction()));
-	QObject::connect(m_ui.viewColorsJackOscAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewColorsAction()));
 #else
 	m_ui.viewColorsMenu->removeAction(m_ui.viewColorsJackCvAction);
-	m_ui.viewColorsMenu->removeAction(m_ui.viewColorsJackOscAction);
 	m_ui.viewColorsJackCvAction->setDisabled(true);
+#endif
+#ifdef CONFIG_JACK_OSC
+	QObject::connect(m_ui.viewColorsJackOscAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewColorsAction()));
+#else
+	m_ui.viewColorsMenu->removeAction(m_ui.viewColorsJackOscAction);
 	m_ui.viewColorsJackOscAction->setDisabled(true);
 #endif
 	QObject::connect(m_ui.viewColorsResetAction,
@@ -866,8 +871,10 @@ void qjackctlGraphForm::updateViewColors (void)
 #ifdef CONFIG_ALSA_SEQ
 	updateViewColorsAction(m_ui.viewColorsAlsaMidiAction);
 #endif
-#ifdef CONFIG_JACK_METADATA
+#ifdef CONFIG_JACK_CV
 	updateViewColorsAction(m_ui.viewColorsJackCvAction);
+#endif
+#ifdef CONFIG_JACK_OSC
 	updateViewColorsAction(m_ui.viewColorsJackOscAction);
 #endif
 }

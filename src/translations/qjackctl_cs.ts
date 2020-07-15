@@ -1020,12 +1020,12 @@ Jste si jistý?</translation>
         <translation>Zvětšení</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="402"/>
+        <location filename="../qjackctlGraphForm.cpp" line="407"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="476"/>
+        <location filename="../qjackctlGraphForm.cpp" line="481"/>
         <source>Colors - %1</source>
         <translation>Barvy - %1</translation>
     </message>

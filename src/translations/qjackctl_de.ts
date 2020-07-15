@@ -1019,12 +1019,12 @@ Sind Sie sicher?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="402"/>
+        <location filename="../qjackctlGraphForm.cpp" line="407"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="476"/>
+        <location filename="../qjackctlGraphForm.cpp" line="481"/>
         <source>Colors - %1</source>
         <translation type="unfinished"></translation>
     </message>

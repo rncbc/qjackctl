@@ -57,9 +57,6 @@ set (CONFIG_MANDIR  "${CONFIG_PREFIX}/${CMAKE_INSTALL_MANDIR}")
 # Disable system tray argument option.
 option (CONFIG_SYSTEM_TRAY "Enable system tray (default=yes)" 1)
 
-# Disable JACK MIDI support option.
-option (CONFIG_JACK_MIDI "Enable JACK MIDI support (default=yes)" 1)
-
 # Enable JACK session support.
 option (CONFIG_JACK_SESSION "Enable JACK session support (default=yes)" 1)
 
@@ -68,6 +65,15 @@ option (CONFIG_JACK_PORT_ALIASES "Enable JACK port aliases support (default=yes)
 
 # Enable JACK metadata support.
 option (CONFIG_JACK_METADATA "Enable JACK metadata support (default=yes)" 1)
+
+# Enable JACK MIDI support option.
+option (CONFIG_JACK_MIDI "Enable JACK MIDI support (default=yes)" 1)
+
+# Enable JACK CV support option.
+option (CONFIG_JACK_CV "Enable JACK CV support (default=no)" 0)
+
+# Enable JACK OSC support option.
+option (CONFIG_JACK_OSC "Enable JACK OSC support (default=no)" 0)
 
 # Enable JACK version support.
 option (CONFIG_JACK_VERSION "Enable JACK version support (default=no)" 0)
@@ -158,6 +164,10 @@ if (JACK_FOUND)
       set (CONFIG_JACK_METADATA 0)
     endif ()
   endif ()
+  if (NOT CONFIG_JACK_METADATA)
+      set (CONFIG_JACK_CV  0)
+      set (CONFIG_JACK_OSC 0)
+  endif ()
   # Check for jack_transport_query function.
   check_function_exists (jack_transport_query CONFIG_JACK_TRANSPORT)
   # Check for jack_is_realtime function.
@@ -247,6 +257,8 @@ show_option ("  JACK Maximum scheduling delay support  . . . . . ." CONFIG_JACK_
 show_option ("  JACK Port aliases support  . . . . . . . . . . . ." CONFIG_JACK_PORT_ALIASES)
 show_option ("  JACK Metadata support  . . . . . . . . . . . . . ." CONFIG_JACK_METADATA)
 show_option ("  JACK MIDI support  . . . . . . . . . . . . . . . ." CONFIG_JACK_MIDI)
+show_option ("  JACK CV support  . . . . . . . . . . . . . . . . ." CONFIG_JACK_CV)
+show_option ("  JACK OSC support . . . . . . . . . . . . . . . . ." CONFIG_JACK_OSC)
 show_option ("  JACK Session support . . . . . . . . . . . . . . ." CONFIG_JACK_SESSION)
 show_option ("  JACK Version support (JACK2) . . . . . . . . . . ." CONFIG_JACK_VERSION)
 show_option ("  ALSA MIDI Sequencer support  . . . . . . . . . . ." CONFIG_ALSA_SEQ)

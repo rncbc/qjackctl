@@ -118,25 +118,7 @@ int qjackctlJackGraph_port_index ( jack_uuid_t uuid, int index )
 }
 
 
-// Event-types property accessors (MIDI|"osc").
-//
-#ifndef JACKEY_EVENT_TYPES
-#define JACKEY_EVENT_TYPES "http://jackaudio.org/metadata/event-types"
-#endif
-
-static
-QStringList qjackctlJackGraph_event_types ( jack_uuid_t uuid )
-{
-	return qjackctlJackGraph_get_property(uuid,
-		JACKEY_EVENT_TYPES, QString("midi")).toLower().split(',');
-}
-
-static
-bool qjackctlJackGraph_port_is_osc ( jack_uuid_t uuid )
-{
-	return qjackctlJackGraph_event_types(uuid).contains("osc");
-}
-
+#ifdef CONFIG_JACK_CV
 
 // Signal-type property accessors (audio|"cv").
 //
@@ -156,6 +138,31 @@ bool qjackctlJackGraph_port_is_cv ( jack_uuid_t uuid )
 {
 	return qjackctlJackGraph_signal_type(uuid) == "cv";
 }
+
+#endif	// CONFIG_JACK_CV
+
+#ifdef CONFIG_JACK_OSC
+
+// Event-types property accessors (MIDI|"osc").
+//
+#ifndef JACKEY_EVENT_TYPES
+#define JACKEY_EVENT_TYPES "http://jackaudio.org/metadata/event-types"
+#endif
+
+static
+QStringList qjackctlJackGraph_event_types ( jack_uuid_t uuid )
+{
+	return qjackctlJackGraph_get_property(uuid,
+		JACKEY_EVENT_TYPES, QString("midi")).toLower().split(',');
+}
+
+static
+bool qjackctlJackGraph_port_is_osc ( jack_uuid_t uuid )
+{
+	return qjackctlJackGraph_event_types(uuid).contains("osc");
+}
+
+#endif	// CONFIG_JACK_OSC
 
 #endif	// CONFIG_JACK_METADATA
 
@@ -235,8 +242,13 @@ bool qjackctlJackGraph::isPortType ( uint port_type )
 {
 	return port_type == audioPortType()
 		|| port_type == midiPortType()
+	#ifdef CONFIG_JACK_CV
 		|| port_type == cvPortType()
-		|| port_type == oscPortType();
+	#endif
+	#ifdef CONFIG_JACK_OSC
+		|| port_type == oscPortType()
+	#endif
+	;
 }
 
 
@@ -290,14 +302,17 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 #ifdef CONFIG_JACK_METADATA
 	const jack_uuid_t port_uuid
 		= ::jack_port_uuid(jack_port);
+#ifdef CONFIG_JACK_CV
 	if (port_type == audioPortType()
 		&& qjackctlJackGraph_port_is_cv(port_uuid))
 		port_type = cvPortType();
-	else
+#endif
+#ifdef CONFIG_JACK_OSC
 	if (port_type == midiPortType()
 		&& qjackctlJackGraph_port_is_osc(port_uuid))
 		port_type = oscPortType();
 #endif
+#endif	// CONFIG_JACK_METADATA
 	qjackctlGraphItem::Mode node_mode = port_mode;
 
 	*node = qjackctlGraphSect::findNode(client_name, node_mode, node_type);
@@ -502,12 +517,16 @@ void qjackctlJackGraph::resetPortTypeColors (void)
 		canvas->setPortTypeColor(
 			qjackctlJackGraph::midiPortType(),
 			QColor(Qt::darkRed).darker(120));
+	#ifdef CONFIG_JACK_CV
 		canvas->setPortTypeColor(
 			qjackctlJackGraph::cvPortType(),
 			QColor(Qt::darkCyan).darker(120));
+	#endif
+	#ifdef CONFIG_JACK_OSC
 		canvas->setPortTypeColor(
 			qjackctlJackGraph::oscPortType(),
 			QColor(Qt::darkYellow).darker(120));
+	#endif
 	}
 }
 
