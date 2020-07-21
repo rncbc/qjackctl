@@ -81,6 +81,7 @@ struct qjackctlPreset
 	int     iPortMax;
 	QString sMidiDriver;
 	QString sServerSuffix;
+	uchar   ucSelfConnectMode;
 };
 
 // Common settings profile class.

@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Self connect restriction option has been added to
+  Setup / Settings / Parameters (only in effect when
+  JACK D-BUS control interface is enabled).
+
 - Added preliminary support for JACK CV signal-type
   ports and JACK OSC event-type ports (Graph only).
 

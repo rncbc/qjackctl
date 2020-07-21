@@ -89,6 +89,24 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_pTimeDisplayButtonGroup->addButton(m_ui.ElapsedXrunRadioButton,   3);
 	m_pTimeDisplayButtonGroup->setExclusive(true);
 
+	// Setup self-connect-mode combo-box.
+	m_ui.SelfConnectModeComboBox->clear();
+	m_ui.SelfConnectModeComboBox->addItem(
+		tr("Don't restrict self connect requests (default)"),
+		QVariant::fromValue<uchar> (' '));
+	m_ui.SelfConnectModeComboBox->addItem(
+		tr("Fail self connect requests to external ports only"),
+		QVariant::fromValue<uchar> ('E'));
+	m_ui.SelfConnectModeComboBox->addItem(
+		tr("Ignore self connect requests to external ports only"),
+		QVariant::fromValue<uchar> ('e'));
+	m_ui.SelfConnectModeComboBox->addItem(
+		tr("Fail all self connect requests"),
+		QVariant::fromValue<uchar> ('A'));
+	m_ui.SelfConnectModeComboBox->addItem(
+		tr("Ignore all self connect requests"),
+		QVariant::fromValue<uchar> ('a'));
+
 	// Initialize dirty control state.
 	m_iDirtySetup = 0;
 	m_iDirtyPreset = 0;
@@ -170,6 +188,9 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.UnlockMemCheckBox,
 		SIGNAL(stateChanged(int)),
+		SLOT(settingsChanged()));
+	QObject::connect(m_ui.SelfConnectModeComboBox,
+		SIGNAL(activated(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.SyncCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -491,6 +512,21 @@ void qjackctlSetupForm::setComboBoxCurrentText (
 }
 
 
+// A combo-box text data setter helper.
+void qjackctlSetupForm::setComboBoxCurrentData (
+	QComboBox *pComboBox, const QVariant& data ) const
+{
+	if (pComboBox->isEditable()) {
+		pComboBox->setEditText(data.toString());
+	} else {
+		int iIndex = pComboBox->findData(data);
+		if (iIndex < 0)
+			iIndex = 0;
+		pComboBox->setCurrentIndex(iIndex);
+	}
+}
+
+
 // Populate (setup) dialog controls from settings descriptors.
 void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 {
@@ -741,6 +777,8 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 	m_ui.OutLatencySpinBox->setValue(preset.iOutLatency);
 	m_ui.StartDelaySpinBox->setValue(preset.iStartDelay);
 	m_ui.SyncCheckBox->setChecked(preset.bSync);
+	setComboBoxCurrentData(m_ui.SelfConnectModeComboBox,
+		QVariant::fromValue<uchar> (preset.ucSelfConnectMode));
 	m_ui.VerboseCheckBox->setChecked(preset.bVerbose);
 	setComboBoxCurrentText(m_ui.PortMaxComboBox,
 		QString::number(preset.iPortMax));
@@ -799,6 +837,11 @@ bool qjackctlSetupForm::getCurrentPreset ( qjackctlPreset& preset )
 		preset.sInDevice.clear();
 	if (preset.sOutDevice == m_pSetup->sDefPresetName)
 		preset.sOutDevice.clear();
+
+	preset.ucSelfConnectMode = ' ';
+	const int iIndex = m_ui.SelfConnectModeComboBox->currentIndex();
+	if (iIndex >= 0)
+		preset.ucSelfConnectMode = m_ui.SelfConnectModeComboBox->itemData(iIndex).value<uchar> ();
 
 	return true;
 }
@@ -1072,6 +1115,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 #endif
 
 	m_ui.SyncCheckBox->setEnabled(bJackDBus);
+	m_ui.SelfConnectModeComboBox->setEnabled(bJackDBus);
 
 	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio && !bJackDBus);
 	m_ui.UnlockMemCheckBox->setEnabled(!bCoreaudio && !bJackDBus

@@ -94,9 +94,11 @@ protected slots:
 
 protected:
 
-	// A combo-box text item setter helper.
+	// A combo-box text/data item setter helper.
 	void setComboBoxCurrentText (
 		QComboBox *pComboBox, const QString& sText ) const;
+	void setComboBoxCurrentData (
+		QComboBox *pComboBox, const QVariant& data ) const;
 
 	void setCurrentPreset(const qjackctlPreset& preset);
 	bool getCurrentPreset(qjackctlPreset& preset);
