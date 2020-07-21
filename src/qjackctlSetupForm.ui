@@ -626,56 +626,33 @@
             </spacer>
            </item>
            <item>
-            <layout class="QHBoxLayout">
-             <item>
-              <widget class="QCheckBox" name="SyncCheckBox">
-               <property name="font">
-                <font>
-                 <weight>50</weight>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="toolTip">
-                <string>Whether to use server synchronous mode</string>
-               </property>
-               <property name="text">
-                <string>&amp;Use server synchronous mode</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint">
-                <size>
-                 <width>20</width>
-                 <height>8</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QComboBox" name="SelfConnectModeComboBox">
-               <property name="font">
-                <font>
-                 <weight>50</weight>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="toolTip">
-                <string>Whether to restrict client self-connections</string>
-               </property>
-               <property name="editable">
-                <bool>false</bool>
-               </property>
-               <property name="currentIndex">
-                <number>0</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <widget class="QCheckBox" name="SyncCheckBox">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Whether to use server synchronous mode</string>
+             </property>
+             <property name="text">
+              <string>&amp;Use server synchronous mode</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint">
+              <size>
+               <width>20</width>
+               <height>8</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <layout class="QHBoxLayout">
@@ -1834,6 +1811,71 @@
             </spacer>
            </item>
            <item row="5" column="0" colspan="5">
+            <layout class="QHBoxLayout">
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint">
+                <size>
+                 <width>20</width>
+                 <height>8</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="SelfConnectModeTextLabel">
+               <property name="font">
+                <font>
+                 <weight>50</weight>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>S&amp;elf connect mode:</string>
+               </property>
+               <property name="buddy">
+                <cstring>SelfConnectModeComboBox</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="SelfConnectModeComboBox">
+               <property name="font">
+                <font>
+                 <weight>50</weight>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="toolTip">
+                <string>Whether to restrict client self-connections</string>
+               </property>
+               <property name="editable">
+                <bool>false</bool>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint">
+                <size>
+                 <width>20</width>
+                 <height>8</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item row="6" column="0" colspan="5">
             <spacer>
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1841,12 +1883,12 @@
              <property name="sizeHint">
               <size>
                <width>20</width>
-               <height>8</height>
+               <height>4</height>
               </size>
              </property>
             </spacer>
            </item>
-           <item row="6" column="0" colspan="5">
+           <item row="7" column="0" colspan="5">
             <layout class="QHBoxLayout">
              <item>
               <widget class="QLabel" name="ServerSuffixTextLabel">
@@ -4126,7 +4168,6 @@
   <tabstop>FramesComboBox</tabstop>
   <tabstop>PeriodsSpinBox</tabstop>
   <tabstop>MidiDriverComboBox</tabstop>
-  <tabstop>SelfConnectModeComboBox</tabstop>
   <tabstop>SyncCheckBox</tabstop>
   <tabstop>VerboseCheckBox</tabstop>
   <tabstop>ServerPrefixComboBox</tabstop>
@@ -4152,6 +4193,7 @@
   <tabstop>OutChannelsSpinBox</tabstop>
   <tabstop>InLatencySpinBox</tabstop>
   <tabstop>OutLatencySpinBox</tabstop>
+  <tabstop>SelfConnectModeComboBox</tabstop>
   <tabstop>ServerSuffixComboBox</tabstop>
   <tabstop>StartDelaySpinBox</tabstop>
   <tabstop>StartupScriptCheckBox</tabstop>

@@ -1115,6 +1115,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 #endif
 
 	m_ui.SyncCheckBox->setEnabled(bJackDBus);
+	m_ui.SelfConnectModeTextLabel->setEnabled(bJackDBus);
 	m_ui.SelfConnectModeComboBox->setEnabled(bJackDBus);
 
 	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio && !bJackDBus);
