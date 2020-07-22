@@ -94,6 +94,13 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_pTimeDisplayButtonGroup->addButton(m_ui.ElapsedXrunRadioButton,   3);
 	m_pTimeDisplayButtonGroup->setExclusive(true);
 
+	// Setup clock-source combo-box.
+	m_ui.ClockSourceComboBox->clear();
+	m_ui.ClockSourceComboBox->addItem(tr("None"),   uint(0));
+	m_ui.ClockSourceComboBox->addItem(tr("System"), uint('s'));
+	m_ui.ClockSourceComboBox->addItem(tr("Cycle"),  uint('c'));
+	m_ui.ClockSourceComboBox->addItem(tr("HPET"),   uint('h'));
+
 	// Setup self-connect-mode combo-box.
 	m_ui.SelfConnectModeComboBox->clear();
 	m_ui.SelfConnectModeComboBox->addItem(
@@ -193,6 +200,9 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.UnlockMemCheckBox,
 		SIGNAL(stateChanged(int)),
+		SLOT(settingsChanged()));
+	QObject::connect(m_ui.ClockSourceComboBox,
+		SIGNAL(activated(int)),
 		SLOT(settingsChanged()));
 	QObject::connect(m_ui.SelfConnectModeComboBox,
 		SIGNAL(activated(int)),
@@ -768,6 +778,8 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 	m_ui.DitherComboBox->setCurrentIndex(preset.iDither);
 	setComboBoxCurrentText(m_ui.TimeoutComboBox,
 		QString::number(preset.iTimeout));
+	setComboBoxCurrentData(m_ui.ClockSourceComboBox,
+		uint(preset.uClockSource));
 	setComboBoxCurrentText(m_ui.InDeviceComboBox,
 		preset.sInDevice.isEmpty()
 			? m_pSetup->sDefPresetName
@@ -843,8 +855,13 @@ bool qjackctlSetupForm::getCurrentPreset ( qjackctlPreset& preset )
 	if (preset.sOutDevice == m_pSetup->sDefPresetName)
 		preset.sOutDevice.clear();
 
+	preset.uClockSource = 0;
+	int iIndex = m_ui.ClockSourceComboBox->currentIndex();
+	if (iIndex >= 0)
+		preset.uClockSource = m_ui.ClockSourceComboBox->itemData(iIndex).toUInt();
+
 	preset.ucSelfConnectMode = ' ';
-	const int iIndex = m_ui.SelfConnectModeComboBox->currentIndex();
+	iIndex = m_ui.SelfConnectModeComboBox->currentIndex();
 	if (iIndex >= 0)
 		preset.ucSelfConnectMode = m_ui.SelfConnectModeComboBox->itemData(iIndex).value<uchar> ();
 
@@ -1120,6 +1137,10 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 #endif
 
 	m_ui.SyncCheckBox->setEnabled(bJackDBus);
+
+	m_ui.ClockSourceTextLabel->setEnabled(bJackDBus);
+	m_ui.ClockSourceComboBox->setEnabled(bJackDBus);
+
 	m_ui.SelfConnectModeTextLabel->setEnabled(bJackDBus);
 	m_ui.SelfConnectModeComboBox->setEnabled(bJackDBus);
 

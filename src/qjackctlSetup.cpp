@@ -422,6 +422,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 	preset.iPortMax     = m_settings.value("/PortMax", 256).toInt();
 	preset.sMidiDriver  = m_settings.value("/MidiDriver").toString();
 	preset.sServerSuffix = m_settings.value("/ServerSuffix").toString();
+	preset.uClockSource = m_settings.value("/ClockSource", 0).toUInt();
 	preset.ucSelfConnectMode = m_settings.value("/SelfConnectMode", ' ').value<uchar>();
 	m_settings.endGroup();
 
@@ -480,6 +481,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 	m_settings.setValue("/PortMax",     preset.iPortMax);
 	m_settings.setValue("/MidiDriver",  preset.sMidiDriver);
 	m_settings.setValue("/ServerSuffix", preset.sServerSuffix);
+	m_settings.setValue("/ClockSource", preset.uClockSource);
 	m_settings.setValue("/SelfConnectMode", preset.ucSelfConnectMode);
 	m_settings.endGroup();
 

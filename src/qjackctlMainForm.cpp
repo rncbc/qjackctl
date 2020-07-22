@@ -4275,8 +4275,10 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 	setDBusEngineParameter("client-timeout",
 		preset.iTimeout,
 		preset.iTimeout > 0 && preset.iTimeout != 500);
+	setDBusEngineParameter("clock-source",
+		uint(preset.uClockSource));
 	setDBusEngineParameter("self-connect-mode",
-		QVariant::fromValue<uchar>(preset.ucSelfConnectMode));
+		QVariant::fromValue<uchar> (preset.ucSelfConnectMode));
 //	setDBusEngineParameter("no-mem-lock", preset.bNoMemLock);
 //	setDBusEngineParameter("libs-unlock",
 //		preset.bUnlockMem,
@@ -4534,6 +4536,11 @@ bool qjackctlMainForm::getDBusParameters ( qjackctlPreset& preset )
 	preset.bUnlockMem = false;
 //	var = getDBusEngineParameter("libs-unlock",
 //		preset.bUnlockMem = var.toBool();
+
+	preset.ucSelfConnectMode = ' ';
+	var = getDBusEngineParameter("self-connect-mode");
+	if (var.isValid())
+		preset.uClockSource = var.toUInt();
 
 	preset.ucSelfConnectMode = ' ';
 	var = getDBusEngineParameter("self-connect-mode");

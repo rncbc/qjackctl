@@ -6,9 +6,10 @@ ChangeLog
 
 GIT HEAD
 
-- Self connect restriction option has been added to
-  Setup / Settings / Advanced (only in effect when
-  JACK D-BUS control interface is enabled).
+- Clock source and Self connect restriction options
+  have been added to Setup / Settings / Advanced 
+  (only enabled when JACK D-BUS control interface
+  is in effect).
 
 - Added preliminary support for JACK CV signal-type
   ports and JACK OSC event-type ports (Graph only).
