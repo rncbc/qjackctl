@@ -3501,7 +3501,6 @@ Está certo de sobrescrever a pasta existente?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1522"/>
-        <location filename="../qjackctlSetupForm.cpp" line="99"/>
         <source>None</source>
         <translation>Nenhum</translation>
     </message>

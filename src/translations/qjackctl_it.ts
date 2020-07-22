@@ -3520,7 +3520,6 @@ Sovrascrivo la cartella?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1522"/>
-        <location filename="../qjackctlSetupForm.cpp" line="99"/>
         <source>None</source>
         <translation>Nessuno</translation>
     </message>

@@ -3495,7 +3495,6 @@ Está seguro de sobreescribir esta carpeta?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1522"/>
-        <location filename="../qjackctlSetupForm.cpp" line="99"/>
         <source>None</source>
         <translation>Ninguno</translation>
     </message>

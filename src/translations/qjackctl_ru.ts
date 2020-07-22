@@ -3217,7 +3217,6 @@ Are you sure to overwrite the existing folder?</source>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1522"/>
-        <location filename="../qjackctlSetupForm.cpp" line="99"/>
         <source>None</source>
         <translation>Нет</translation>
     </message>

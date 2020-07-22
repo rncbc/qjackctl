@@ -3352,7 +3352,6 @@ Soll das existierende Verzeichnis überschrieben werden?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1522"/>
-        <location filename="../qjackctlSetupForm.cpp" line="99"/>
         <source>None</source>
         <translation>Keiner</translation>
     </message>

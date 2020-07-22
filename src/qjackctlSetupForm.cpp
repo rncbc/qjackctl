@@ -96,7 +96,7 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 
 	// Setup clock-source combo-box.
 	m_ui.ClockSourceComboBox->clear();
-	m_ui.ClockSourceComboBox->addItem(tr("None"),   uint(0));
+	m_ui.ClockSourceComboBox->addItem(g_pszDefName, uint(0));
 	m_ui.ClockSourceComboBox->addItem(tr("System"), uint('s'));
 	m_ui.ClockSourceComboBox->addItem(tr("Cycle"),  uint('c'));
 	m_ui.ClockSourceComboBox->addItem(tr("HPET"),   uint('h'));

@@ -3537,7 +3537,6 @@ Bent u zeker dat u de bestaande map wil vervangen ?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1522"/>
-        <location filename="../qjackctlSetupForm.cpp" line="99"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>

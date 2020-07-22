@@ -3404,7 +3404,6 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1522"/>
-        <location filename="../qjackctlSetupForm.cpp" line="99"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
