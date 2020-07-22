@@ -4535,6 +4535,11 @@ bool qjackctlMainForm::getDBusParameters ( qjackctlPreset& preset )
 //	var = getDBusEngineParameter("libs-unlock",
 //		preset.bUnlockMem = var.toBool();
 
+	preset.ucSelfConnectMode = ' ';
+	var = getDBusEngineParameter("self-connect-mode");
+	if (var.isValid())
+		preset.ucSelfConnectMode = var.value<uchar> ();
+
 	preset.sDriver.clear();
 	var = getDBusEngineParameter("driver");
 	if (var.isValid())

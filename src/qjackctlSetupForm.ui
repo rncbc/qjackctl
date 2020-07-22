@@ -620,7 +620,7 @@
              <property name="sizeHint">
               <size>
                <width>20</width>
-               <height>8</height>
+               <height>4</height>
               </size>
              </property>
             </spacer>
@@ -754,14 +754,41 @@
           </attribute>
           <layout class="QGridLayout">
            <item row="0" column="0" colspan="5">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Please do not touch these settings unless you know what you are doing.</string>
-             </property>
+            <layout class="QHBoxLayout">
              <property name="margin">
               <number>8</number>
              </property>
-            </widget>
+             <item>
+              <widget class="QLabel" name="AdvancedIconLabel">
+               <property name="maximumSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="AdvancedTextLabel">
+               <property name="text">
+                <string>Please do not touch these settings unless you know what you are doing.</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint">
+                <size>
+                 <width>20</width>
+                 <height>8</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </item>
            <item row="1" column="0" colspan="5">
             <layout class="QHBoxLayout">
@@ -880,7 +907,7 @@
              <property name="sizeHint">
               <size>
                <width>20</width>
-               <height>8</height>
+               <height>4</height>
               </size>
              </property>
             </spacer>
@@ -1797,7 +1824,7 @@
              </item>
             </layout>
            </item>
-           <item row="4" column="2" colspan="3">
+           <item row="4" column="0" colspan="5">
             <spacer>
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1805,7 +1832,7 @@
              <property name="sizeHint">
               <size>
                <width>20</width>
-               <height>8</height>
+               <height>4</height>
               </size>
              </property>
             </spacer>
@@ -2625,7 +2652,7 @@
          <property name="sizeHint">
           <size>
            <width>20</width>
-           <height>8</height>
+           <height>4</height>
           </size>
          </property>
         </spacer>
@@ -3330,7 +3357,7 @@
          <property name="sizeHint">
           <size>
            <width>20</width>
-           <height>8</height>
+           <height>4</height>
           </size>
          </property>
         </spacer>
@@ -3486,7 +3513,7 @@
             <property name="sizeHint">
              <size>
               <width>20</width>
-              <height>8</height>
+              <height>4</height>
              </size>
             </property>
            </spacer>
@@ -3890,7 +3917,7 @@
             <property name="sizeHint">
              <size>
               <width>20</width>
-              <height>8</height>
+              <height>4</height>
              </size>
             </property>
            </spacer>
@@ -3993,7 +4020,7 @@
               <property name="sizeHint">
                <size>
                 <width>20</width>
-                <height>8</height>
+                <height>4</height>
                </size>
               </property>
              </spacer>
@@ -4048,7 +4075,7 @@
             <property name="sizeHint">
              <size>
               <width>20</width>
-              <height>8</height>
+              <height>4</height>
              </size>
             </property>
            </spacer>

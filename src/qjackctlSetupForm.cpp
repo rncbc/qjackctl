@@ -81,6 +81,11 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	// No settings descriptor initially (the caller will set it).
 	m_pSetup = nullptr;
 
+	QMessageBox mbox;
+	mbox.setIcon(QMessageBox::Warning);
+	m_ui.AdvancedIconLabel->setPixmap(
+		mbox.iconPixmap().scaledToHeight(16, Qt::SmoothTransformation));
+
 	// Setup time-display radio-button group.
 	m_pTimeDisplayButtonGroup = new QButtonGroup(this);
 	m_pTimeDisplayButtonGroup->addButton(m_ui.TransportTimeRadioButton, 0);
