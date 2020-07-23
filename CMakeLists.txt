@@ -70,10 +70,10 @@ option (CONFIG_JACK_METADATA "Enable JACK metadata support (default=yes)" 1)
 option (CONFIG_JACK_MIDI "Enable JACK MIDI support (default=yes)" 1)
 
 # Enable JACK CV support option.
-option (CONFIG_JACK_CV "Enable JACK CV support (default=no)" 0)
+option (CONFIG_JACK_CV "Enable JACK CV support (default=yes)" 1)
 
 # Enable JACK OSC support option.
-option (CONFIG_JACK_OSC "Enable JACK OSC support (default=no)" 0)
+option (CONFIG_JACK_OSC "Enable JACK OSC support (default=yes)" 1)
 
 # Enable JACK version support.
 option (CONFIG_JACK_VERSION "Enable JACK version support (default=no)" 0)

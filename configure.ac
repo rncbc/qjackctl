@@ -110,15 +110,15 @@ AC_ARG_ENABLE(jack_midi,
 
 # Enable JACK CV support.
 AC_ARG_ENABLE(jack_cv,
-  AS_HELP_STRING([--enable-jack-cv], [enable JACK CV support (default=no)]),
+  AS_HELP_STRING([--enable-jack-cv], [enable JACK CV support (default=yes)]),
   [ac_jack_cv="$enableval"],
-  [ac_jack_cv="no"])
+  [ac_jack_cv="yes"])
 
 # Enable JACK OSC support.
 AC_ARG_ENABLE(jack_osc,
-  AS_HELP_STRING([--enable-jack-osc], [enable JACK OSC support (default=no)]),
+  AS_HELP_STRING([--enable-jack-osc], [enable JACK OSC support (default=yes)]),
   [ac_jack_osc="$enableval"],
-  [ac_jack_osc="no"])
+  [ac_jack_osc="yes"])
 
 # Enable JACK version support.
 AC_ARG_ENABLE(jack_version,

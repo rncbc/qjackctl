@@ -103,9 +103,10 @@
      </property>
      <addaction name="viewColorsJackAudioAction"/>
      <addaction name="viewColorsJackMidiAction"/>
+     <addaction name="viewColorsAlsaMidiAction"/>
+     <addaction name="separator"/>
      <addaction name="viewColorsJackCvAction"/>
      <addaction name="viewColorsJackOscAction"/>
-     <addaction name="viewColorsAlsaMidiAction"/>
      <addaction name="separator"/>
      <addaction name="viewColorsResetAction"/>
     </widget>
