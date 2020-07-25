@@ -842,30 +842,30 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="578"/>
         <source>JACK &amp;CV...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;CV...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="581"/>
         <location filename="../qjackctlGraphForm.ui" line="584"/>
         <location filename="../qjackctlGraphForm.ui" line="587"/>
         <source>JACK CV color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur JACK CV</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="595"/>
         <source>JACK &amp;OSC...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;OSC...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="598"/>
         <source>JACK OSC</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK OSC</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="601"/>
         <location filename="../qjackctlGraphForm.ui" line="604"/>
         <source>JACK OSC color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur JACK OSC</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="612"/>
@@ -4226,42 +4226,42 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="100"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Système</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="101"/>
         <source>Cycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Cycle</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="102"/>
         <source>HPET</source>
-        <translation type="unfinished"></translation>
+        <translation>HPET</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="107"/>
         <source>Don&apos;t restrict self connect requests (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas restreindre les demandes de connexion automatique (défaut)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="110"/>
         <source>Fail self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêche les demandes d&apos;auto-connexion aux ports externes uniquement</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="113"/>
         <source>Ignore self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer les demandes d&apos;auto-connexion aux ports externes uniquement</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="116"/>
         <source>Fail all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Empêche toutes les demandes d&apos;auto-connexion</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="119"/>
         <source>Ignore all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer toutes les demandes d&apos;auto-connexion</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1487"/>
@@ -4484,7 +4484,7 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1904"/>
         <source>Whether to restrict client self-connections</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;il faut limiter les auto-connexions des clients</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="631"/>
@@ -4499,17 +4499,17 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1376"/>
         <source>Cloc&amp;k source:</source>
-        <translation type="unfinished"></translation>
+        <translation>Source d&apos;&amp;horloge :</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1398"/>
         <source>Clock source</source>
-        <translation type="unfinished"></translation>
+        <translation>Source d&apos;horloge</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1888"/>
         <source>S&amp;elf connect mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode d&apos;auto-conn&amp;exion</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3056"/>
