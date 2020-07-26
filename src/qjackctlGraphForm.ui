@@ -107,7 +107,6 @@
      <addaction name="separator"/>
      <addaction name="viewColorsJackCvAction"/>
      <addaction name="viewColorsJackOscAction"/>
-     <addaction name="separator"/>
      <addaction name="viewColorsResetAction"/>
     </widget>
     <widget class="QMenu" name="viewSortMenu">

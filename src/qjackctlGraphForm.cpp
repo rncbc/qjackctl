@@ -229,12 +229,18 @@ qjackctlGraphForm::qjackctlGraphForm (
 #ifdef CONFIG_ALSA_SEQ
 	m_ui.viewColorsAlsaMidiAction->setData(qjackctlAlsaGraph::midiPortType());
 #endif
+
+	int iAddSeparator = 0;
 #ifdef CONFIG_JACK_CV
 	m_ui.viewColorsJackCvAction->setData(qjackctlJackGraph::cvPortType());
+	++iAddSeparator;
 #endif
 #ifdef CONFIG_JACK_OSC
 	m_ui.viewColorsJackOscAction->setData(qjackctlJackGraph::oscPortType());
+	++iAddSeparator;
 #endif
+	if (iAddSeparator > 0)
+		m_ui.viewColorsMenu->insertSeparator(m_ui.viewColorsResetAction);
 
 	QObject::connect(m_ui.viewColorsJackAudioAction,
 		SIGNAL(triggered(bool)),
