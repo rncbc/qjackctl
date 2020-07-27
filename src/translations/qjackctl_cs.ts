@@ -842,30 +842,30 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="577"/>
         <source>JACK &amp;CV...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;CV...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="580"/>
         <location filename="../qjackctlGraphForm.ui" line="583"/>
         <location filename="../qjackctlGraphForm.ui" line="586"/>
         <source>JACK CV color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva JACK CV</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="594"/>
         <source>JACK &amp;OSC...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;OSC...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="597"/>
         <source>JACK OSC</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK OSC</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="600"/>
         <location filename="../qjackctlGraphForm.ui" line="603"/>
         <source>JACK OSC color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva JACK OSC</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="611"/>
@@ -3884,7 +3884,7 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1904"/>
         <source>Whether to restrict client self-connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Zda omezit vlastní spojení klienta</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="631"/>
@@ -3909,17 +3909,17 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1376"/>
         <source>Cloc&amp;k source:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdroj &amp;hodin:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1398"/>
         <source>Clock source</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdroj hodin</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1888"/>
         <source>S&amp;elf connect mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim &amp;vlastního spojení:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1978"/>
@@ -4339,42 +4339,42 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="100"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Systém</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="101"/>
         <source>Cycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolo</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="102"/>
         <source>HPET</source>
-        <translation type="unfinished"></translation>
+        <translation>HPET</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="107"/>
         <source>Don&apos;t restrict self connect requests (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Neomezovat požadavky na vlastní spojení (výchozí)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="110"/>
         <source>Fail self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>Nesplnit požadavky na vlastní spojení jen pro vnější přípojky</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="113"/>
         <source>Ignore self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehlížet požadavky na vlastní spojení jen pro vnější přípojky</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="116"/>
         <source>Fail all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Nesplnit všechny požadavky na vlastní spojení</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="119"/>
         <source>Ignore all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehlížet všechny požadavky na vlastní spojení</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="961"/>
