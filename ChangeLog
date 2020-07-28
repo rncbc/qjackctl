@@ -4,7 +4,7 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.6.3  2020-07-31  A Summer'20 Release.
 
 - Clock source and Self connect restriction options
   have been added to Setup / Settings / Advanced 
