@@ -90,17 +90,17 @@
     <message>
         <location filename="../qjackctlJackConnect.cpp" line="178"/>
         <source>%1 (%2 frames)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 quadros)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="131"/>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="184"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomear</translation>
     </message>
 </context>
 <context>
@@ -108,7 +108,7 @@
     <message>
         <location filename="../qjackctlAboutForm.ui" line="37"/>
         <source>About</source>
-        <translation type="unfinished">Sobre...</translation>
+        <translation>Sobre</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.ui" line="87"/>
@@ -354,7 +354,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="44"/>
         <source>Connections</source>
-        <translation type="unfinished">Conexões</translation>
+        <translation>Conexões</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="198"/>
@@ -447,7 +447,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="33"/>
         <source>Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Gráfico</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="63"/>
@@ -472,12 +472,12 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="99"/>
         <source>Co&amp;lors</source>
-        <translation type="unfinished"></translation>
+        <translation>Co&amp;res</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="114"/>
         <source>S&amp;ort</source>
-        <translation type="unfinished"></translation>
+        <translation>C&amp;lassificar</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="139"/>
@@ -596,18 +596,18 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="295"/>
         <source>&amp;Rename...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Renomear...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="298"/>
         <source>Rename item</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomear item</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="301"/>
         <location filename="../qjackctlGraphForm.ui" line="304"/>
         <source>Rename Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomear Item</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="315"/>
@@ -1550,7 +1550,7 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3648"/>
         <source>Looping</source>
-        <translation>Ciclando</translation>
+        <translation>Em loop</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3685"/>
@@ -2342,7 +2342,11 @@ Deseja descartar as mudanças?</translation>
 &quot;%1&quot;.
 
 Do you want to save the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Algumas opções foram mudadas:
+
+&quot;%1&quot;.
+
+Deseja manter as mudanças?</translation>
     </message>
 </context>
 <context>
@@ -2350,22 +2354,22 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1045"/>
         <source>Color Role</source>
-        <translation type="unfinished"></translation>
+        <translation>Papel da cor</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1048"/>
         <source>Active</source>
-        <translation type="unfinished">Ativo</translation>
+        <translation>Ativo</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1051"/>
         <source>Inactive</source>
-        <translation type="unfinished">Inativo</translation>
+        <translation>Inativo</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1054"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Desabilitado</translation>
     </message>
 </context>
 <context>
@@ -2538,7 +2542,7 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="44"/>
         <source>Patchbay</source>
-        <translation type="unfinished"></translation>
+        <translation>Patchbay</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="228"/>
@@ -2917,7 +2921,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="34"/>
         <source>Session</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessão</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="84"/>
@@ -2977,7 +2981,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="213"/>
         <source>Edit infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar infra-client</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="216"/>
@@ -4049,42 +4053,42 @@ Deseja salvá-las?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="100"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistema</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="101"/>
         <source>Cycle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclo</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="102"/>
         <source>HPET</source>
-        <translation type="unfinished"></translation>
+        <translation>HPET</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="107"/>
         <source>Don&apos;t restrict self connect requests (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Não restrinja os pedidos de auto-conexão (padrão)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="110"/>
         <source>Fail self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha nas solicitações de auto-conexão apenas para portas externas</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="113"/>
         <source>Ignore self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar solicitações de auto-conexão apenas para portas externas</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="116"/>
         <source>Fail all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha em todos os pedidos de auto-conexão</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="119"/>
         <source>Ignore all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar todos os pedidos de auto-conexão</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1015"/>
@@ -4137,13 +4141,14 @@ Está certo disto?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1825"/>
         <source>Information</source>
-        <translation type="unfinished">Informação</translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1826"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algumas configurações podem ser eficazes apenas
+na próxima vez que você iniciar este aplicativo.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1983"/>
@@ -4318,12 +4323,12 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3735"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitar confirmação de desligamento e/ou reinicialização do servidor de áudio JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3738"/>
         <source>Confirm server sh&amp;utdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Confirme o desligamento e/ou reinício do servidor</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3784"/>
@@ -4348,52 +4353,52 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="34"/>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1904"/>
         <source>Whether to restrict client self-connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Se deve restringir as auto-conexões do cliente</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="631"/>
         <source>Whether to use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Se deve usar o modo síncrono do servidor</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="634"/>
         <source>&amp;Use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Use o modo síncrono do servidor</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1376"/>
         <source>Cloc&amp;k source:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cloc&amp;k source:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1398"/>
         <source>Clock source</source>
-        <translation type="unfinished"></translation>
+        <translation>Clock source</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1888"/>
         <source>S&amp;elf connect mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>M&amp;odo de auto-conexão:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3056"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3077"/>
         <source>&amp;Color palette theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tema de paleta de cor:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3096"/>
         <source>Custom color palette theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema de paleta de cor personalizado</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3108"/>
@@ -4410,17 +4415,17 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3142"/>
         <source>Manage custom color palette themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerenciar temas de paleta de cor personalizada</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3171"/>
         <source>&amp;Widget style theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tema de estilo de widget:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3187"/>
         <source>Custom widget style theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema customizado de estilo de widget:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3863"/>
@@ -4490,12 +4495,12 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4061"/>
         <source>Whether to replace Connections with Graph button on the main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Substituir Conexões pelo botão Gráfico na janela principal</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4064"/>
         <source>Replace Connections with &amp;Graph button</source>
-        <translation type="unfinished"></translation>
+        <translation>Substitua Conexões pelo botão &amp;Gráfico</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4082"/>
@@ -4720,7 +4725,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="33"/>
         <source>Socket</source>
-        <translation type="unfinished">Soquete</translation>
+        <translation>Soquete</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="189"/>
