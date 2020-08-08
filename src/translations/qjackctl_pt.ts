@@ -798,161 +798,161 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="526"/>
         <source>JACK &amp;Audio...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;áudio...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="529"/>
         <location filename="../qjackctlGraphForm.ui" line="532"/>
         <location filename="../qjackctlGraphForm.ui" line="535"/>
         <source>JACK Audio color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor JACK Áudio</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="543"/>
         <source>JACK &amp;MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;MIDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="546"/>
         <source>JACK MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="549"/>
         <location filename="../qjackctlGraphForm.ui" line="552"/>
         <source>JACK MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor de JACK MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="560"/>
         <source>&amp;ALSA MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ALSA MIDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="563"/>
         <source>ALSA MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="566"/>
         <location filename="../qjackctlGraphForm.ui" line="569"/>
         <source>ALSA MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor ALSA MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="577"/>
         <source>JACK &amp;CV...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;CV...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="580"/>
         <location filename="../qjackctlGraphForm.ui" line="583"/>
         <location filename="../qjackctlGraphForm.ui" line="586"/>
         <source>JACK CV color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor JACK CV</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="594"/>
         <source>JACK &amp;OSC...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK &amp;OSC...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="597"/>
         <source>JACK OSC</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK OSC</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="600"/>
         <location filename="../qjackctlGraphForm.ui" line="603"/>
         <source>JACK OSC color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor JACK OSC</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="611"/>
         <source>&amp;Reset</source>
-        <translation type="unfinished">&amp;Reset</translation>
+        <translation>&amp;Redefinir</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="614"/>
         <location filename="../qjackctlGraphForm.ui" line="617"/>
         <location filename="../qjackctlGraphForm.ui" line="620"/>
         <source>Reset colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir cores</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="631"/>
         <source>Port &amp;Name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nome da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="634"/>
         <source>Port name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="637"/>
         <source>Sort by port name</source>
-        <translation type="unfinished"></translation>
+        <translation>Classificar por nome de porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="648"/>
         <source>Port &amp;Title</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp; Título da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="651"/>
         <source>Port title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="654"/>
         <source>Sort by port title</source>
-        <translation type="unfinished"></translation>
+        <translation>Classificar por título da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="665"/>
         <source>Port &amp;Index</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp; Índice da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="668"/>
         <source>Port index</source>
-        <translation type="unfinished"></translation>
+        <translation>Índice da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="671"/>
         <source>Sort by port index</source>
-        <translation type="unfinished"></translation>
+        <translation>Classificar por índice da porta</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="682"/>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ascendente</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="685"/>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascendente</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="688"/>
         <source>Ascending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>Classificar por ordem ascendente</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="699"/>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Descendente</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="702"/>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Descendente</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="705"/>
         <source>Descending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>Classificar por ordem descendente</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="713"/>
@@ -1007,12 +1007,12 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="75"/>
         <source>Undo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfazer última ação</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="80"/>
         <source>Redo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>Refazer última ação</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="96"/>
@@ -1027,7 +1027,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="487"/>
         <source>Colors - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores - %1</translation>
     </message>
 </context>
 <context>
@@ -1144,12 +1144,12 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="536"/>
         <source>Show/hide the graph window</source>
-        <translation type="unfinished"></translation>
+        <translation>Esconder/mostrar janela gráfica</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="570"/>
         <source>Show/hide the connections window</source>
-        <translation type="unfinished"></translation>
+        <translation>Esconder/mostrar janela de conexões</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="666"/>
@@ -1342,7 +1342,7 @@ Desculpe</translation>
 &quot;%1&quot;
 
 Do you want to save the changes?</source>
-        <translation type="unfinished">Os aliases predefinidos foram alterados:
+        <translation>Os aliases predefinidos foram alterados:
 
 &quot;%1&quot;
 
@@ -1411,12 +1411,12 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2640"/>
         <source>Freewheel started...</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo roda-livre começou...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2641"/>
         <source>Freewheel exited.</source>
-        <translation type="unfinished"></translation>
+        <translation>Roda-livre saiu.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2686"/>
@@ -1535,22 +1535,22 @@ Deseja salvar as alterações??</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3632"/>
         <source>FW</source>
-        <translation type="unfinished"></translation>
+        <translation>FW</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3635"/>
         <source>RT</source>
-        <translation>RT</translation>
+        <translation>TR</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3645"/>
         <source>Rolling</source>
-        <translation>Rolling</translation>
+        <translation>Rolando</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3648"/>
         <source>Looping</source>
-        <translation>Looping</translation>
+        <translation>Ciclando</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3685"/>
@@ -1624,7 +1624,7 @@ após a reinicialização do servidor de áudio JACK.</translation>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4102"/>
         <source>Do you want to restart the JACK audio server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Deseja reiniciar o servidor de audio do JACK?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4442"/>
@@ -1632,7 +1632,10 @@ após a reinicialização do servidor de áudio JACK.</translation>
 
 %3.
 (%4)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
+
+%3.
+(%4)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4473"/>
@@ -1640,7 +1643,10 @@ após a reinicialização do servidor de áudio JACK.</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: ResetParameterValue(&apos;%1&apos;):
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4713"/>
@@ -1648,7 +1654,10 @@ após a reinicialização do servidor de áudio JACK.</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: GetParameterValue(&apos;%1&apos;):
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="933"/>
@@ -2015,7 +2024,7 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="39"/>
         <source>Messages / Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagens / Status</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="55"/>
@@ -2188,116 +2197,116 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="40"/>
         <source>Color Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Temas de cores</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="46"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="64"/>
         <source>Current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta de cor atual</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="77"/>
         <source>Save current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar paleta de cor atual</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="80"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="90"/>
         <source>Delete current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover nome da paleta de cor atual</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="93"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="106"/>
         <source>Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="118"/>
         <source>Current color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta de cor atual</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="128"/>
         <source>Generate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerar:</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="144"/>
         <source>Base color to generate palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor base para gerar paleta</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="151"/>
         <source>Reset all current palette colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir as paletas de cores atuais</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="154"/>
         <source> Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="177"/>
         <source>Import a custom color theme (palette) from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar paleta de cor personalizada de arquivo</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="180"/>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="190"/>
         <source>Export a custom color theme (palette) to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar paleta de cor personalizada para arquivo</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="193"/>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="216"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar detalhes</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="316"/>
         <source>Import File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar arquivo - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="319"/>
         <location filename="../qjackctlPaletteForm.cpp" line="385"/>
         <source>Palette files (*.%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivos de paletas (*.%1)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="320"/>
         <location filename="../qjackctlPaletteForm.cpp" line="386"/>
         <source>All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os arquivos (*.*)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="372"/>
         <location filename="../qjackctlPaletteForm.cpp" line="805"/>
         <location filename="../qjackctlPaletteForm.cpp" line="813"/>
         <source>Warning - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="373"/>
@@ -2306,19 +2315,25 @@ Foi desabilitado.</translation>
 %1
 
 Sorry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossível importar de:
+
+%1
+
+Desculpe.</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="382"/>
         <source>Export File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar para arquivo - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="806"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Algumas opções foram mudadas.
+
+Deseja descartar as mudanças?</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="814"/>
