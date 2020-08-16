@@ -1,7 +1,7 @@
 language: cpp
 
 sudo: required
-dist: bionic
+dist: focal
 
 notifications: 
   email:
@@ -15,11 +15,11 @@ branches:
   - master
 
 before_install:
-- sudo add-apt-repository --yes ppa:beineri/opt-qt-5.14.2-bionic
+- sudo add-apt-repository --yes ppa:beineri/opt-qt-5.15.0-focal
 - sudo apt-get update -qq
 
 install:
-- sudo apt-get install -qq qt514base qt514tools qt514x11extras libgl-dev; source /opt/qt514/bin/qt514-env.sh
+- sudo apt-get install -qq qt515base qt515tools qt515x11extras libgl-dev; source /opt/qt515/bin/qt515-env.sh
 - sudo apt-get install -qq libjack-dev libasound2-dev portaudio19-dev
 
 before_script:
