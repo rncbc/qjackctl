@@ -1846,7 +1846,7 @@ QString& qjackctlMainForm::detectXrun ( QString& s )
 		s.insert(iPos + rx.matchedLength(), "</font>");
 		s.insert(iPos, "<font color=\"#cc0000\">");
 	#ifndef CONFIG_JACK_XRUN_DELAY
-		m_tXrunLast.restart();
+		m_fXrunLast = 0.0f;
 		updateXrunStats(rx.cap(1).toFloat());
 		refreshXrunStats();
 	#endif
@@ -2655,9 +2655,6 @@ void qjackctlMainForm::exitNotifyEvent (void)
 		jackFinished();
 		break;
 	case QProcess::Crashed:
-	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-		if (!m_bJackStopped)
-	#endif
 		appendMessagesColor(tr("JACK has crashed."), "#cc3366");
 		break;
 	case QProcess::Timedout:
@@ -3572,7 +3569,7 @@ void qjackctlMainForm::refreshStatus (void)
 			updateStatusItem(STATUS_TRANSPORT_TIME,
 				formatTime(float(tpos.frame) / float(tpos.frame_rate)));
 	//	else
-	//		updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
+	//		updateStatusItem(STATUS_TRANSPORT_TIME, c_szTimeDashes);
 		// Transport barcode position (bar:beat.tick)
 		if (tpos.valid & JackPositionBBT) {
 		#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -3671,7 +3668,7 @@ void qjackctlMainForm::refreshStatus (void)
 			m_ui.PauseToolButton->setEnabled(false);
 			m_ui.ForwardToolButton->setEnabled(false);
 			transportPlayStatus(false);
-			updateStatusItem(STATUS_TRANSPORT_TIME, m_sTimeDashes);
+			updateStatusItem(STATUS_TRANSPORT_TIME, c_szTimeDashes);
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
 		#endif // !CONFIG_JACK_TRANSPORT
