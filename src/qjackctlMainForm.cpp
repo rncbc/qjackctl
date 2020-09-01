@@ -1840,14 +1840,15 @@ QString& qjackctlMainForm::detectXrun ( QString& s )
 {
 	if (m_iXrunSkips > 1)
 		return s;
-	QRegExp rx(m_pSetup->sXrunRegex);
-	int iPos = rx.indexIn(s);
-	if (iPos >= 0) {
-		s.insert(iPos + rx.matchedLength(), "</font>");
+	QRegularExpression rx(m_pSetup->sXrunRegex);
+	QRegularExpressionMatch match(rx.match(s));
+	if (match.hasMatch()) {
+		const int iPos = match.capturedStart(0);
+		s.insert(iPos + match.capturedLength(0), "</font>");
 		s.insert(iPos, "<font color=\"#cc0000\">");
 	#ifndef CONFIG_JACK_XRUN_DELAY
 		m_fXrunLast = 0.0f;
-		updateXrunStats(rx.cap(1).toFloat());
+		updateXrunStats(match.captured(1).toFloat());
 		refreshXrunStats();
 	#endif
 	}

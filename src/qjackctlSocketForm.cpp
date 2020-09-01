@@ -799,7 +799,8 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 	const QString sClientName = m_ui.ClientNameComboBox->currentText();
 	if (sClientName.isEmpty())
 		return;
-	QRegExp rxClientName(sClientName);
+
+	QRegularExpression rxClientName(sClientName);
 
 	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[iPixmap]);
@@ -809,16 +810,18 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 	if (ppszClientPorts) {
 		int iClientPort = 0;
 		while (ppszClientPorts[iClientPort]) {
-			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
+			const QString sClientPort
+				= QString::fromUtf8(ppszClientPorts[iClientPort]);
 			const int iColon = sClientPort.indexOf(':');
-			if (iColon >= 0 && rxClientName.exactMatch(sClientPort.left(iColon))) {
-				QString sPort
+			if (iColon >= 0
+				&& rxClientName.match(sClientPort.left(iColon)).hasMatch()) {
+				const QString sPort
 					= qjackctlAliasItem::escapeRegExpDigits(
 						sClientPort.right(sClientPort.length() - iColon - 1));
 				if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())
 					m_ui.PlugNameComboBox->addItem(icon, sPort);
 			}
-			iClientPort++;
+			++iClientPort;
 		}
 		::free(ppszClientPorts);
 	}
@@ -844,7 +847,8 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 	const QString sClientName = m_ui.ClientNameComboBox->currentText();
 	if (sClientName.isEmpty())
 		return;
-	QRegExp rxClientName(sClientName);
+
+	QRegularExpression rxClientName(sClientName);
 
 	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG]);
@@ -863,9 +867,9 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 	snd_seq_client_info_set_client(pClientInfo, -1);
 	while (snd_seq_query_next_client(pAlsaSeq, pClientInfo) >= 0) {
 		const int iAlsaClient = snd_seq_client_info_get_client(pClientInfo);
-		QString sClient = QString::fromUtf8(
+		const QString sClient = QString::fromUtf8(
 			snd_seq_client_info_get_name(pClientInfo));
-		if (iAlsaClient > 0 && rxClientName.exactMatch(sClient)) {
+		if (iAlsaClient > 0 && rxClientName.match(sClient).hasMatch()) {
 			snd_seq_port_info_set_client(pPortInfo, iAlsaClient);
 			snd_seq_port_info_set_port(pPortInfo, -1);
 			while (snd_seq_query_next_port(pAlsaSeq, pPortInfo) >= 0) {
@@ -873,7 +877,7 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 					= snd_seq_port_info_get_capability(pPortInfo);
 				if (((uiPortCapability & uiAlsaFlags) == uiAlsaFlags) &&
 					((uiPortCapability & SND_SEQ_PORT_CAP_NO_EXPORT) == 0)) {
-					QString sPort
+					const QString sPort
 						= qjackctlAliasItem::escapeRegExpDigits(
 							QString::fromUtf8(snd_seq_port_info_get_name(pPortInfo)));
 					if (m_ui.PlugListView->findItems(sPort, Qt::MatchExactly).isEmpty())

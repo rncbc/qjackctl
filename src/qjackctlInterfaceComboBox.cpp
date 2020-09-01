@@ -1,7 +1,7 @@
 // qjackctlInterfaceComboBox.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
    Copyright (C) 2015, Kjetil Matheussen. (portaudio_probe_thread)
    Copyright (C) 2013, Arnout Engelen. All rights reserved.
 
@@ -340,12 +340,14 @@ void qjackctlInterfaceComboBox::populateModel (void)
 		if (file.open(QIODevice::ReadOnly)) {
 			QTextStream stream(&file);
 			QString sLine;
-			QRegExp rxDevice("audio([0-9]) at (.*)");
+			QRegularExpression rxDevice("audio([0-9]) at (.*)");
+			QRegularExpressionMatch match;
 			while (!stream.atEnd()) {
 				sLine = stream.readLine();
-				if (rxDevice.exactMatch(sLine)) {
-					sName = "/dev/audio" + rxDevice.cap(1);
-					addCard(sName, rxDevice.cap(2));
+				match = rxDevice.match(sLine);
+				if (match.hasMatch()) {
+					sName = "/dev/audio" + match.captured(1);
+					addCard(sName, match.captured(2));
 					if (sCurName == sName)
 						iCurCard = iCards;
 					++iCards;
@@ -362,22 +364,27 @@ void qjackctlInterfaceComboBox::populateModel (void)
 			QTextStream stream(&file);
 			QString sLine;
 			bool bAudioDevices = false;
-			QRegExp rxHeader("Audio devices.*", Qt::CaseInsensitive);
-			QRegExp rxDevice("([0-9]+):[ ]+(.*)");
+			QRegularExpression rxHeader("Audio devices.*",
+				QRegularExpression::CaseInsensitiveOption);
+			QRegularExpression rxDevice("([0-9]+):[ ]+(.*)");
+			QRegularExpressionMatch match;
 			while (!stream.atEnd()) {
 				sLine = stream.readLine();
 				if (bAudioDevices) {
-					if (rxDevice.exactMatch(sLine)) {
-						sName = "/dev/dsp" + rxDevice.cap(1);
-						addCard(sName, rxDevice.cap(2));
+					match = rxDevice.match(sLine);
+					if (match.hasMatch()) {
+						sName = "/dev/dsp" + match.captured(1);
+						addCard(sName, match.captured(2));
 						if (sCurName == sName)
 							iCurCard = iCards;
 						++iCards;
 					}
 					else break;
+				} else {
+					match = rxHeader.match(sLine);
+					if (match.hasMatch())
+						bAudioDevices = true;
 				}
-				else if (rxHeader.exactMatch(sLine))
-					bAudioDevices = true;
 			}
 			file.close();
 		}

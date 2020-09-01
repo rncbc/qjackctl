@@ -132,7 +132,7 @@ add_executable (${NAME}
   ${SOURCES}
 )
 
-set_target_properties (${NAME} PROPERTIES CXX_STANDARD 11)
+set_target_properties (${NAME} PROPERTIES CXX_STANDARD 17)
 
 if (WIN32)
   set_target_properties (${NAME} PROPERTIES WIN32_EXECUTABLE true)

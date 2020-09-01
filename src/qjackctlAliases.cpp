@@ -1,7 +1,7 @@
 // qjackctlAliases.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ QString qjackctlAliasItem::clientName (void) const
 // Client name matcher.
 bool qjackctlAliasItem::matchClientName ( const QString& sClientName ) const
 {
-	return m_rxClientName.exactMatch(sClientName);
+	return m_rxClientName.match(sClientName).hasMatch();
 }
 
 
@@ -125,7 +125,7 @@ QString qjackctlAliasItem::escapeRegExpDigits (
 	const QString& s, int iThreshold )
 {
 	const QString& sEscape
-		= QRegExp::escape(s);
+		= QRegularExpression::escape(s);
 
 	QString sDigits;
 	QString sResult;

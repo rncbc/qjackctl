@@ -1,7 +1,7 @@
 // qjackctlAliases.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #define __qjackctlAliases_h
 
 #include <QSettings>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QMap>
 
 
@@ -65,7 +65,8 @@ public:
 private:
 
 	// Client name regexp.
-	QRegExp m_rxClientName;
+	QRegularExpression m_rxClientName;
+
 	// Client alias.
 	QString m_sClientAlias;
 

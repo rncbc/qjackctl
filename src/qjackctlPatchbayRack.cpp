@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -80,7 +80,8 @@ public:
 		QListIterator<qjackctlPatchbaySocket *> iter(socketlist);
 		while (iter.hasNext()) {
 			qjackctlPatchbaySocket *pSocket = iter.next();
-			if (QRegExp(pSocket->clientName()).exactMatch(sClientName)
+			QRegularExpression rxSocket(pSocket->clientName());
+			if (rxSocket.match(sClientName).hasMatch() 
 				&& pSocket->type() == iSocketType) {
 				return pSocket;
 			}
@@ -115,7 +116,8 @@ public:
 		QListIterator<qjackctlPatchbaySocket *> iter(socketlist);
 		while (iter.hasNext()) {
 			pSocket = iter.next();
-			if (QRegExp(pSocket->clientName()).exactMatch(sClientName)
+			QRegularExpression rxSocket(pSocket->clientName());
+			if (rxSocket.match(sClientName).hasMatch()
 				&& pSocket->type() == iSocketType) {
 				QStringListIterator plug_iter(pSocket->pluglist());
 				QStringListIterator port_iter(ports);
@@ -124,7 +126,8 @@ public:
 					&& plug_iter.hasNext() && port_iter.hasNext()) {
 					const QString& sPlug = plug_iter.next();
 					const QString& sPort = port_iter.next();
-					bMatch = (QRegExp(sPlug).exactMatch(sPort));
+					QRegularExpression rxPlug(sPlug);
+					bMatch = (rxPlug.match(sPort).hasMatch());
 				}
 				if (bMatch)
 					return pSocket;
@@ -591,14 +594,14 @@ qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 		if (pOSocket->type() != iSocketType)
 			continue;
 		// Output socket client name match?
-		if (!QRegExp(sPrefix + pOSocket->clientName())
-			.exactMatch(sOClientName))
+		QRegularExpression rxOSocket(sPrefix + pOSocket->clientName());
+		if (!rxOSocket.match(sOClientName).hasMatch())
 			continue;
 		// Output plug port names match?
 		QStringListIterator oplug(pOSocket->pluglist());
 		while (oplug.hasNext()) {
-			if (!QRegExp(sPrefix + oplug.next())
-				.exactMatch(sOPortName))
+			QRegularExpression rxOPlug(sPrefix + oplug.next());
+			if (!rxOPlug.match(sOPortName).hasMatch())
 				continue;
 			// Scan for output-socket cable...
 			QListIterator<qjackctlPatchbayCable *> cable(m_cablelist);
@@ -608,15 +611,15 @@ qjackctlPatchbayCable *qjackctlPatchbayRack::findCable (
 					continue;
 				qjackctlPatchbaySocket *pISocket = pCable->inputSocket();
 				// Input socket client name match?
-				if (!QRegExp(sPrefix + pISocket->clientName())
-					.exactMatch(sIClientName))
+				QRegularExpression rxISocket(sPrefix + pISocket->clientName());
+				if (!rxISocket.match(sIClientName).hasMatch())
 					continue;
 				// Input plug port names match?
 				QStringListIterator iplug(pISocket->pluglist());
 				while (iplug.hasNext()) {
 					// Found it?
-					if (QRegExp(sPrefix + iplug.next())
-						.exactMatch(sIPortName))
+					QRegularExpression rxIPlug(sPrefix + iplug.next());
+					if (rxIPlug.match(sIPortName).hasMatch())
 						return pCable;
 				}
 			}
@@ -678,23 +681,24 @@ QList<qjackctlPatchbayCable *>& qjackctlPatchbayRack::cablelist (void)
 const char *qjackctlPatchbayRack::findJackPort ( const char **ppszJackPorts,
 	const QString& sClientName, const QString& sPortName, int n )
 {
-	QRegExp rxClientName(sClientName);
-	QRegExp rxPortName(sPortName);
+	QRegularExpression rxClientName(sClientName);
+	QRegularExpression rxPortName(sPortName);
 
 	int i = 0;
 	int iClientPort = 0;
 	while (ppszJackPorts[iClientPort]) {
-		QString sClientPort = QString::fromUtf8(ppszJackPorts[iClientPort]);
-		int iColon = sClientPort.indexOf(':');
+		const QString sClientPort
+			= QString::fromUtf8(ppszJackPorts[iClientPort]);
+		const int iColon = sClientPort.indexOf(':');
 		if (iColon >= 0) {
-			if (rxClientName.exactMatch(sClientPort.left(iColon)) &&
-				rxPortName.exactMatch(sClientPort.right(
-					sClientPort.length() - iColon - 1))) {
+			if (rxClientName.match(sClientPort.left(iColon)).hasMatch() &&
+				rxPortName.match(sClientPort.right(
+					sClientPort.length() - iColon - 1)).hasMatch()) {
 				if (++i > n)
 					return ppszJackPorts[iClientPort];
 			}
 		}
-		iClientPort++;
+		++iClientPort;
 	}
 
 	return nullptr;
@@ -987,16 +991,16 @@ qjackctlAlsaMidiPort *qjackctlPatchbayRack::findAlsaPort (
 	QList<qjackctlAlsaMidiPort *>& midiports,
 	const QString& sClientName, const QString& sPortName, int n )
 {
-	QRegExp rxClientName(sClientName);
-	QRegExp rxPortName(sPortName);
+	QRegularExpression rxClientName(sClientName);
+	QRegularExpression rxPortName(sPortName);
 
 	int i = 0;
 	// For each port...
 	QListIterator<qjackctlAlsaMidiPort *> iter(midiports);
 	while (iter.hasNext()) {
 		qjackctlAlsaMidiPort *pMidiPort = iter.next();
-		if (rxClientName.exactMatch(pMidiPort->sClientName) &&
-			rxPortName.exactMatch(pMidiPort->sPortName)) {
+		if (rxClientName.match(pMidiPort->sClientName).hasMatch() &&
+			rxPortName.match(pMidiPort->sPortName).hasMatch()) {
 			if (++i > n)
 				return pMidiPort;
 		}
