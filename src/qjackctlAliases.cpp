@@ -26,6 +26,14 @@
 #include <algorithm>
 
 
+// QRegularExpression exact match pattern wrapper.
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#define EXACT_PATTERN(s)	('^' + s + '$')
+#else
+#define EXACT_PATTERN(s)	QRegularExpression::anchoredPattern(s)
+#endif
+
+
 //----------------------------------------------------------------------
 // class qjackctlAliasItem -- Client/port item alias map.
 
@@ -34,10 +42,10 @@ qjackctlAliasItem::qjackctlAliasItem (
 	const QString& sClientName, const QString& sClientAlias )
 {
 	if (sClientAlias.isEmpty()) {
-		m_rxClientName.setPattern(escapeRegExpDigits(sClientName));
+		m_rxClientName.setPattern(EXACT_PATTERN(escapeRegExpDigits(sClientName)));
 		m_sClientAlias = sClientName;
 	} else {
-		m_rxClientName.setPattern(sClientName);
+		m_rxClientName.setPattern(EXACT_PATTERN(sClientName));
 		m_sClientAlias = sClientAlias;
 	}
 }

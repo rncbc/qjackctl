@@ -4789,47 +4789,47 @@ Wil u de veranderingen toepassen?</translation>
         <translation>MIDI socket type (ALSA)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="158"/>
+        <location filename="../qjackctlSocketForm.cpp" line="166"/>
         <source>Plugs / Ports</source>
         <translation>Plugs / Poorten</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="528"/>
+        <location filename="../qjackctlSocketForm.cpp" line="536"/>
         <source>Add Plug</source>
         <translation>Plug toevoegen</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="545"/>
+        <location filename="../qjackctlSocketForm.cpp" line="553"/>
         <source>Remove</source>
         <translation>Verwijder</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="542"/>
+        <location filename="../qjackctlSocketForm.cpp" line="550"/>
         <source>Edit</source>
         <translation>Bewerken</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="341"/>
+        <location filename="../qjackctlSocketForm.cpp" line="349"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="342"/>
+        <location filename="../qjackctlSocketForm.cpp" line="350"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation>Een socket genaamd « %1 » bestaat al.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="549"/>
+        <location filename="../qjackctlSocketForm.cpp" line="557"/>
         <source>Move Up</source>
         <translation>Omhoog</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="552"/>
+        <location filename="../qjackctlSocketForm.cpp" line="560"/>
         <source>Move Down</source>
         <translation>Omlaag</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="734"/>
+        <location filename="../qjackctlSocketForm.cpp" line="742"/>
         <source>(None)</source>
         <translation>(Geen)</translation>
     </message>
@@ -4849,12 +4849,12 @@ Wil u de veranderingen toepassen?</translation>
         <translation>Verplaats geselecteerde plug omhoog in socket plug lijst</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="361"/>
+        <location filename="../qjackctlSocketForm.cpp" line="369"/>
         <source>Warning</source>
         <translation>Opgelet</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="362"/>
+        <location filename="../qjackctlSocketForm.cpp" line="370"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

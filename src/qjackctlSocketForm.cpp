@@ -35,6 +35,14 @@
 #include <QMenu>
 
 
+// QRegularExpression exact match pattern wrapper.
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#define EXACT_PATTERN(s)	('^' + s + '$')
+#else
+#define EXACT_PATTERN(s)	QRegularExpression::anchoredPattern(s)
+#endif
+
+
 //----------------------------------------------------------------------------
 // qjackctlSocketForm -- UI wrapper form.
 
@@ -800,7 +808,7 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 	if (sClientName.isEmpty())
 		return;
 
-	QRegularExpression rxClientName(sClientName);
+	QRegularExpression rxClientName(EXACT_PATTERN(sClientName));
 
 	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[iPixmap]);
@@ -848,7 +856,7 @@ void qjackctlSocketForm::updateAlsaPlugs ( int iSocketType )
 	if (sClientName.isEmpty())
 		return;
 
-	QRegularExpression rxClientName(sClientName);
+	QRegularExpression rxClientName(EXACT_PATTERN(sClientName));
 
 	const bool bReadable = m_pSocketList->isReadable();
 	const QIcon icon(*m_ppPixmaps[QJACKCTL_XPM_MIDI_PLUG]);

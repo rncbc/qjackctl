@@ -4816,27 +4816,27 @@ Chcete použít změny?</translation>
         <translation>AL&amp;SA-MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="158"/>
+        <location filename="../qjackctlSocketForm.cpp" line="166"/>
         <source>Plugs / Ports</source>
         <translation>Zástrčky/Přípojky</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="341"/>
+        <location filename="../qjackctlSocketForm.cpp" line="349"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="342"/>
+        <location filename="../qjackctlSocketForm.cpp" line="350"/>
         <source>A socket named &quot;%1&quot; already exists.</source>
         <translation>Zásuvka s názvem &quot;%1&quot; již existuje.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="361"/>
+        <location filename="../qjackctlSocketForm.cpp" line="369"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="362"/>
+        <location filename="../qjackctlSocketForm.cpp" line="370"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4845,32 +4845,32 @@ Do you want to apply the changes?</source>
 Chcete použít změny?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="528"/>
+        <location filename="../qjackctlSocketForm.cpp" line="536"/>
         <source>Add Plug</source>
         <translation>Přidat zástrčku</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="542"/>
+        <location filename="../qjackctlSocketForm.cpp" line="550"/>
         <source>Edit</source>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="545"/>
+        <location filename="../qjackctlSocketForm.cpp" line="553"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="549"/>
+        <location filename="../qjackctlSocketForm.cpp" line="557"/>
         <source>Move Up</source>
         <translation>Přesunout nahoru</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="552"/>
+        <location filename="../qjackctlSocketForm.cpp" line="560"/>
         <source>Move Down</source>
         <translation>Přesunout dolů</translation>
     </message>
     <message>
-        <location filename="../qjackctlSocketForm.cpp" line="734"/>
+        <location filename="../qjackctlSocketForm.cpp" line="742"/>
         <source>(None)</source>
         <translation>(Žádný)</translation>
     </message>
