@@ -105,7 +105,11 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 		// Try own Qt translation...
 		m_pQtTranslator = new QTranslator(this);
 		QString sLocName = "qt_" + loc.name();
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		QString sLocPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+	#else
 		QString sLocPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+	#endif
 		if (m_pQtTranslator->load(sLocName, sLocPath)) {
 			QApplication::installTranslator(m_pQtTranslator);
 		} else {
@@ -518,7 +522,9 @@ int main ( int argc, char **argv )
 #endif
 #endif
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION <  QT_VERSION_CHECK(6, 0, 0)
 	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 #endif
 	qjackctlApplication app(argc, argv);
 

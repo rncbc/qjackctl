@@ -4234,7 +4234,7 @@ void qjackctlMainForm::contextMenuEvent ( QContextMenuEvent *pEvent )
 
 void qjackctlMainForm::mousePressEvent(QMouseEvent *pMouseEvent)
 {
-	if (pMouseEvent->button() == Qt::MidButton &&
+	if (pMouseEvent->button() == Qt::MiddleButton &&
 		m_ui.StatusDisplayFrame->geometry().contains(pMouseEvent->pos())) {
 		resetXrunStats();
 	}
