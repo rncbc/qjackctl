@@ -2306,8 +2306,8 @@ když příště spustíte tento program.</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="387"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="818"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="826"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="820"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="828"/>
         <source>Warning - %1</source>
         <translation>Varování - %1</translation>
     </message>
@@ -2330,7 +2330,7 @@ Promiňte.</translation>
         <translation>Vyvést soubor - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="819"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="821"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
@@ -2339,7 +2339,7 @@ Do you want to discard the changes?</source>
 Chcete zahodit změny?</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="827"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="829"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;.
@@ -2355,22 +2355,22 @@ Chcete uložit změny?</translation>
 <context>
     <name>qjackctlPaletteForm::PaletteModel</name>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1070"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1072"/>
         <source>Color Role</source>
         <translation>Barevná role</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1073"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1075"/>
         <source>Active</source>
         <translation>Činné</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1076"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1078"/>
         <source>Inactive</source>
         <translation>Nečinné</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1079"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1081"/>
         <source>Disabled</source>
         <translation>Zakázáno</translation>
     </message>

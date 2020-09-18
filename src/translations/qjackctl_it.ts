@@ -2312,8 +2312,8 @@ Disabilitato.</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="387"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="818"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="826"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="820"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="828"/>
         <source>Warning - %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2332,14 +2332,14 @@ Sorry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="819"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="821"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="827"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="829"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;.
@@ -2351,22 +2351,22 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlPaletteForm::PaletteModel</name>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1070"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1072"/>
         <source>Color Role</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1073"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1075"/>
         <source>Active</source>
         <translation type="unfinished">Attivo</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1076"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1078"/>
         <source>Inactive</source>
         <translation type="unfinished">Inattivo</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1079"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1081"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
