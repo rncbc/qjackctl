@@ -198,6 +198,7 @@ protected slots:
 protected:
 
 	bool queryClose();
+	bool queryCloseJack();
 	bool queryClosePreset();
 
 	void showEvent(QShowEvent *pShowEvent);
