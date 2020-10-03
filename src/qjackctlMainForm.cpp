@@ -1039,8 +1039,11 @@ bool qjackctlMainForm::queryCloseJack (void)
 {
 	bool bQueryClose = true;
 
-	if (m_pJack && m_pJack->state() == QProcess::Running
-		&& (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
+	if (((m_pJack && m_pJack->state() == QProcess::Running)
+	#ifdef CONFIG_DBUS
+		|| (m_pDBusControl && m_bDBusStarted)
+	#endif
+	) && (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
 		show();
 		raise();
 		activateWindow();
@@ -1071,39 +1074,8 @@ bool qjackctlMainForm::queryCloseJack (void)
 		}
 	}
 
-	// Check if we're allowed to stop (shutdown)...
-	if (bQueryClose && m_pSetup->bQueryShutdown
-		&& m_pConnectionsForm
-		&& (m_pConnectionsForm->isAudioConnected() ||
-			m_pConnectionsForm->isMidiConnected())) {
-		const QString& sTitle
-			= tr("Warning");
-		const QString& sText
-			= tr("Some client audio applications\n"
-				"are still active and connected.\n\n"
-				"Do you want to stop the JACK audio server?");
-		#if 0//QJACKCTL_QUERY_SHUTDOWN
-			bQueryClose = (QMessageBox::warning(this, sTitle, sText,
-				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
-		#else
-			QMessageBox mbox(this);
-			mbox.setIcon(QMessageBox::Warning);
-			mbox.setWindowTitle(sTitle);
-			mbox.setText(sText);
-			QCheckBox cbox(tr("Don't ask this again"));
-			cbox.setChecked(false);
-			cbox.blockSignals(true);
-			mbox.addButton(&cbox, QMessageBox::ActionRole);
-			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-			bQueryClose = (mbox.exec() == QMessageBox::Ok);
-			if (bQueryClose && cbox.isChecked())
-				m_pSetup->bQueryShutdown = false;
-		#endif
-	}
-
 	return bQueryClose;
 }
-
 
 // Query whether current preset can be closed.
 bool qjackctlMainForm::queryClosePreset (void)
@@ -1131,6 +1103,45 @@ bool qjackctlMainForm::queryClosePreset (void)
 	}
 
 	return bQueryClose;
+}
+
+
+// Query whether to stop the JACK service.
+bool qjackctlMainForm::queryShutdown (void)
+{
+	bool bQueryShutdown = true;
+
+	// Check if we're allowed to stop (shutdown)...
+	if (m_pJackClient && m_pSetup->bQueryShutdown
+		&& m_pConnectionsForm
+		&& (m_pConnectionsForm->isAudioConnected() ||
+			m_pConnectionsForm->isMidiConnected())) {
+		const QString& sTitle
+			= tr("Warning");
+		const QString& sText
+			= tr("Some client audio applications\n"
+				"are still active and connected.\n\n"
+				"Do you want to stop the JACK audio server?");
+		#if 0//QJACKCTL_QUERY_SHUTDOWN
+			bQueryShutdown = (QMessageBox::warning(this, sTitle, sText,
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+		#else
+			QMessageBox mbox(this);
+			mbox.setIcon(QMessageBox::Warning);
+			mbox.setWindowTitle(sTitle);
+			mbox.setText(sText);
+			QCheckBox cbox(tr("Don't ask this again"));
+			cbox.setChecked(false);
+			cbox.blockSignals(true);
+			mbox.addButton(&cbox, QMessageBox::ActionRole);
+			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+			bQueryShutdown = (mbox.exec() == QMessageBox::Ok);
+			if (bQueryShutdown && cbox.isChecked())
+				m_pSetup->bQueryShutdown = false;
+		#endif
+	}
+
+	return bQueryShutdown;
 }
 
 
@@ -1591,7 +1602,7 @@ void qjackctlMainForm::startJack (void)
 void qjackctlMainForm::stopJack (void)
 {
 	// Stop the server conditionally...
-	if (queryCloseJack())
+	if (queryShutdown())
 		stopJackServer();
 }
 
@@ -1608,12 +1619,11 @@ void qjackctlMainForm::stopJackServer (void)
 	stopJackClient();
 
 	// And try to stop server.
-#ifdef CONFIG_DBUS
 	if ((m_pJack && m_pJack->state() == QProcess::Running)
-		|| (m_pDBusControl && m_bDBusStarted)) {
-#else
-	if (m_pJack && m_pJack->state() == QProcess::Running) {
-#endif
+	#ifdef CONFIG_DBUS
+		|| (m_pDBusControl && m_bDBusStarted)
+	#endif
+	) {
 		updateServerState(QJACKCTL_STOPPING);
 		// Do we have any pre-shutdown script?...
 		if (m_pSetup->bShutdownScript

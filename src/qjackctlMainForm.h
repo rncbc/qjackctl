@@ -200,6 +200,7 @@ protected:
 	bool queryClose();
 	bool queryCloseJack();
 	bool queryClosePreset();
+	bool queryShutdown();
 
 	void showEvent(QShowEvent *pShowEvent);
 	void hideEvent(QHideEvent *pHideEvent);
