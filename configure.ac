@@ -417,7 +417,7 @@ if test "x$ac_portaudio" = "xyes"; then
    PKG_CHECK_MODULES([PORTAUDIO], [portaudio-2.0], [ac_portaudio="yes"], [ac_portaudio="no"])
 fi
 if test "x$ac_portaudio" = "xyes"; then
-   AC_DEFINE(CONFIG_PORTAUDIO 1, [Define if PORTAUDIO library is available.])
+   AC_DEFINE(CONFIG_PORTAUDIO, 1, [Define if PORTAUDIO library is available.])
    ac_cflags="$ac_cflags $PORTAUDIO_CFLAGS"
    ac_libs="$ac_libs $PORTAUDIO_LIBS"
 else
