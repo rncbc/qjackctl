@@ -385,7 +385,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 
 	m_settings.beginGroup("/Settings" + sSuffix);
 #if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-	preset.sServerPrefix = m_settings.value("/Server", "jackd -S").toString();
+	preset.sServerPrefix = m_settings.value("/Server", "jackd -S -X winmme").toString();
 #else
 	preset.sServerPrefix = m_settings.value("/Server", "jackd").toString();
 #endif
