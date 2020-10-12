@@ -1383,7 +1383,8 @@ void qjackctlMainForm::startJack (void)
 		const QString sPath = QString::fromUtf8(::getenv("PATH"));
 		QStringList paths = sPath.split(chPathSep);
 	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-		paths = paths << "C:\\Program Files\\Jack" << "C:\\Program Files (x86)\\Jack";
+		paths = paths << QString("%1\\JACK2").arg(getenv("PROGRAMFILES"))
+		              << QString("%1\\JACK2").arg(getenv("PROGRAMFILES(x86)"));
 	#endif
         #if defined(__APPLE__)
                 paths = paths << "/usr/local/bin/";
