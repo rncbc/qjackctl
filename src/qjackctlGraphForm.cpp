@@ -784,7 +784,7 @@ void qjackctlGraphForm::orientationChanged ( Qt::Orientation orientation )
 // Context-menu event handler.
 void qjackctlGraphForm::contextMenuEvent ( QContextMenuEvent *pContextMenuEvent )
 {
-	m_ui.graphCanvas->clear();
+//	m_ui.graphCanvas->clear();
 
 	stabilize();
 
