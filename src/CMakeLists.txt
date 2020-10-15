@@ -94,6 +94,7 @@ set (TRANSLATIONS
 	translations/qjackctl_nl.ts
 	translations/qjackctl_pt.ts
 	translations/qjackctl_ru.ts
+	translations/qjackctl_sk.ts
 )
 
 qt5_add_translation ( QM_FILES ${TRANSLATIONS} )
