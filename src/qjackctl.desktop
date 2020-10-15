@@ -11,6 +11,7 @@ Comment[de]=Grafisches Werkzeug zur Steuerung des JACK-Audio-Systems
 Comment[fr]=QjackCtl est une interface graphique Qt pour le kit de connexion audio JACK
 Comment[it]=QjackCtl è un'interfaccia di controllo per JACK basata su Qt
 Comment[ru]=Программа для управления звуковым сервером JACK
+Comment[sk]=QjackCtl je grafické rozhranie (Qt) na ovládanie zvukového servera JACK
 Exec=qjackctl
 Icon=qjackctl
 Categories=Audio;AudioVideo;Midi;X-Alsa;X-Jack;Qt;
