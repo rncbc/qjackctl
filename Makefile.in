@@ -88,7 +88,8 @@ translations_sources = \
 	src/translations/qjackctl_ja.ts \
 	src/translations/qjackctl_nl.ts \
 	src/translations/qjackctl_pt.ts \
-	src/translations/qjackctl_ru.ts
+	src/translations/qjackctl_ru.ts \
+	src/translations/qjackctl_sk.ts
 
 translations_targets = \
 	src/translations/qjackctl_cs.qm \
@@ -99,7 +100,8 @@ translations_targets = \
 	src/translations/qjackctl_ja.qm \
 	src/translations/qjackctl_nl.qm \
 	src/translations/qjackctl_pt.qm \
-	src/translations/qjackctl_ru.qm
+	src/translations/qjackctl_ru.qm \
+	src/translations/qjackctl_sk.qm
 
 
 export datadir = @ac_datadir@
