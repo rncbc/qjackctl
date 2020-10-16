@@ -77,6 +77,11 @@ void qjackctlSession::clear (void)
 }
 
 
+#ifdef CONFIG_JACK_SESSION
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 // Critical methods.
 bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 {
@@ -263,6 +268,10 @@ bool qjackctlSession::load ( const QString& sSessionDir )
 	// Formerly successful.
 	return true;
 }
+
+#ifdef CONFIG_JACK_SESSION
+#pragma GCC diagnostic pop
+#endif
 
 
 // Update (re)connections utility method.
