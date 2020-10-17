@@ -28,8 +28,8 @@
  </description>
  <launchable type="desktop-id">qjackctl.desktop</launchable>
  <provides>
-​  <binary>qjackctl</binary>
-​ </provides>
+  <binary>qjackctl</binary>
+ </provides>
  <screenshots>
   <screenshot type="default">
    <image>https://qjackctl.sourceforge.io/image/qjackctl-screenshot1.png</image>
