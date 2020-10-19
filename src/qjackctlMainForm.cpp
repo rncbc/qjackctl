@@ -1739,7 +1739,11 @@ void qjackctlMainForm::jackStarted (void)
 	// Show startup results...
 	if (m_pJack) {
 		appendMessages(tr("JACK was started with PID=%1.")
+		#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 			.arg(quint64(m_pJack->pid())));
+		#else
+			.arg(quint64(m_pJack->processId())));
+		#endif
 	}
 
 #ifdef CONFIG_DBUS
