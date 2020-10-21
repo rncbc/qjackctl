@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Get rid of those "JACK has crashed" red-herrings
+  from latest Windows(tm) builds. (EXPERIMENTAL)
+
 - Early fixing to build for Qt >= 6.0.0 and comply
   with c++17 standard.
 

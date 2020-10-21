@@ -433,6 +433,9 @@ qjackctlMainForm::qjackctlMainForm (
 	m_bDBusStarted  = false;
 	m_bDBusDetach   = false;
 #endif
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+	m_bJackKilled  = false;
+#endif
 	m_iStartDelay   = 0;
 	m_iTimerDelay   = 0;
 	m_iTimerRefresh = 0;
@@ -1273,6 +1276,9 @@ void qjackctlMainForm::startJack (void)
 			"Maybe JACK audio server is already started."),
 			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok) {
 			m_pJack->terminate();
+		#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+			m_bJackKilled = true;
+		#endif
 			m_pJack->kill();
 		}
 		return;
@@ -1293,6 +1299,9 @@ void qjackctlMainForm::startJack (void)
 	// Now we're sure it ain't detached.
 	m_bJackShutdown = false;
 	m_bJackDetach = false;
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+	m_bJackKilled = false;
+#endif
 
 	// Load primary/default server preset...
 	if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
@@ -1640,6 +1649,7 @@ void qjackctlMainForm::stopJackServer (void)
 				appendMessages(tr("JACK is stopping..."));
 			#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 				// Try harder...
+				m_bJackKilled = true;
 				m_pJack->kill();
 			#else
 				// Try softly...
@@ -1791,6 +1801,9 @@ void qjackctlMainForm::jackCleanup (void)
 	if (m_pJack) {
 		if (m_pJack->state() != QProcess::NotRunning) {
 			appendMessages(tr("JACK is being forced..."));
+		#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+			m_bJackKilled = true;
+		#endif
 			// Force final server shutdown...
 			m_pJack->kill();
 			// Give it some time to terminate gracefully and stabilize...
@@ -2685,6 +2698,9 @@ void qjackctlMainForm::exitNotifyEvent (void)
 		jackFinished();
 		break;
 	case QProcess::Crashed:
+	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+		if (!m_bJackKilled)
+	#endif
 		appendMessagesColor(tr("JACK has crashed."), "#cc3366");
 		break;
 	case QProcess::Timedout:

@@ -328,6 +328,10 @@ private:
 	bool m_bDBusDetach;
 #endif
 
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+	bool m_bJackKilled;
+#endif
+
 	int m_iStartDelay;
 	int m_iTimerDelay;
 	int m_iTimerRefresh;
