@@ -1165,7 +1165,7 @@ Are you sure?</source>
         <translation>С&amp;ообщения</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4087"/>
+        <location filename="../qjackctlMainForm.cpp" line="4091"/>
         <source>Patch&amp;bay</source>
         <translation>&amp;Коммутатор</translation>
     </message>
@@ -1175,7 +1175,7 @@ Are you sure?</source>
         <translation>Показать/скрыть окно коммутатора</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4083"/>
+        <location filename="../qjackctlMainForm.cpp" line="4087"/>
         <source>&amp;Connections</source>
         <translation>Сое&amp;динения</translation>
     </message>
@@ -1735,7 +1735,7 @@ Do you want to remove the patchbay connection?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
-        <location filename="../qjackctlMainForm.cpp" line="4091"/>
+        <location filename="../qjackctlMainForm.cpp" line="4083"/>
         <source>&amp;Graph</source>
         <translation>&amp;Граф</translation>
     </message>

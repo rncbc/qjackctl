@@ -1091,7 +1091,7 @@ Está seguro?</translation>
         <translation>&amp;Mensajes</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4087"/>
+        <location filename="../qjackctlMainForm.cpp" line="4091"/>
         <source>Patch&amp;bay</source>
         <translation>Patch&amp;bay</translation>
     </message>
@@ -1606,7 +1606,7 @@ Desea guardar los cambios?</translation>
         <translation>&amp;Reset</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4083"/>
+        <location filename="../qjackctlMainForm.cpp" line="4087"/>
         <source>&amp;Connections</source>
         <translation>&amp;Conexiones</translation>
     </message>
@@ -1878,7 +1878,7 @@ Por favor revise la ventana de mensajes para mas información.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
-        <location filename="../qjackctlMainForm.cpp" line="4091"/>
+        <location filename="../qjackctlMainForm.cpp" line="4083"/>
         <source>&amp;Graph</source>
         <translation>&amp;Gráfico</translation>
     </message>

@@ -1612,18 +1612,18 @@ Wil u deze aanpassingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4083"/>
+        <location filename="../qjackctlMainForm.cpp" line="4087"/>
         <source>&amp;Connections</source>
         <translation>&amp;Verbindingen</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4087"/>
+        <location filename="../qjackctlMainForm.cpp" line="4091"/>
         <source>Patch&amp;bay</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
-        <location filename="../qjackctlMainForm.cpp" line="4091"/>
+        <location filename="../qjackctlMainForm.cpp" line="4083"/>
         <source>&amp;Graph</source>
         <translation type="unfinished"></translation>
     </message>

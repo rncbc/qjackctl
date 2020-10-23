@@ -4079,6 +4079,10 @@ void qjackctlMainForm::updateContextMenu (void)
 	pAction->setChecked(m_pMessagesStatusForm
 		&& m_pMessagesStatusForm->isVisible()
 		&& m_pMessagesStatusForm->tabPage() == qjackctlMessagesStatusForm::StatusTab);
+	pAction = m_menu.addAction(QIcon(":/images/graph1.png"),
+		tr("&Graph"), this, SLOT(toggleGraphForm()));
+	pAction->setCheckable(true);
+	pAction->setChecked(m_pGraphForm && m_pGraphForm->isVisible());
 	pAction = m_menu.addAction(QIcon(":/images/connections1.png"),
 		tr("&Connections"), this, SLOT(toggleConnectionsForm()));
 	pAction->setCheckable(true);
@@ -4087,10 +4091,6 @@ void qjackctlMainForm::updateContextMenu (void)
 		tr("Patch&bay"), this, SLOT(togglePatchbayForm()));
 	pAction->setCheckable(true);
 	pAction->setChecked(m_pPatchbayForm && m_pPatchbayForm->isVisible());
-	pAction = m_menu.addAction(QIcon(":/images/graph1.png"),
-		tr("&Graph"), this, SLOT(toggleGraphForm()));
-	pAction->setCheckable(true);
-	pAction->setChecked(m_pGraphForm && m_pGraphForm->isVisible());
 	m_menu.addSeparator();
 
 	QMenu *pTransportMenu = m_menu.addMenu(tr("&Transport"));

@@ -1,7 +1,7 @@
 // qjackctlAlsaGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -227,7 +227,7 @@ void qjackctlAlsaGraph::updateItems (void)
 	if (seq == nullptr)
 		return;
 
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlAlsaGraph::updateItems()");
 #endif
 
@@ -363,7 +363,7 @@ void qjackctlAlsaGraph::clearItems (void)
 {
 	QMutexLocker locker(&g_mutex);
 
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlAlsaGraph::clearItems()");
 #endif
 

@@ -407,7 +407,7 @@ void qjackctlJackGraph::updateItems (void)
 	if (client == nullptr)
 		return;
 
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlJackGraph::updateItems()");
 #endif
 
@@ -498,7 +498,7 @@ void qjackctlJackGraph::clearItems (void)
 {
 	QMutexLocker locker(&g_mutex);
 
-#ifdef CONFIG_DEBUG
+#ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlJackGraph::clearItems()");
 #endif
 

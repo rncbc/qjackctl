@@ -1946,18 +1946,18 @@ Please check the messages window for more info.</source>
         <translation>Uložiť ako ša&amp;blónu...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4083"/>
+        <location filename="../qjackctlMainForm.cpp" line="4087"/>
         <source>&amp;Connections</source>
         <translation>&amp;Spojenia</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4087"/>
+        <location filename="../qjackctlMainForm.cpp" line="4091"/>
         <source>Patch&amp;bay</source>
         <translation>&amp;Zapájacia doska</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="539"/>
-        <location filename="../qjackctlMainForm.cpp" line="4091"/>
+        <location filename="../qjackctlMainForm.cpp" line="4083"/>
         <source>&amp;Graph</source>
         <translation>&amp;Graf</translation>
     </message>
