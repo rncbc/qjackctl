@@ -398,12 +398,14 @@ QList<qjackctlAliasList *> qjackctlAlsaGraph::item_aliases (
 
 	uint item_type = 0;
 	qjackctlGraphItem::Mode item_mode = qjackctlGraphItem::None;
+	bool is_node = false;
 
 	if (item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
-		if (node) {
+		if (node && qjackctlAlsaGraph::isNodeType(node->nodeType())) {
 			item_type = node->nodeType();
 			item_mode = node->nodeMode();
+			is_node = true;
 		}
 	}
 	else
@@ -418,7 +420,7 @@ QList<qjackctlAliasList *> qjackctlAlsaGraph::item_aliases (
 	if (!item_type || !item_mode)
 		return alist; // empty again!
 
-	if (item_type == qjackctlAlsaGraph::midiPortType()) {
+	if (is_node || item_type == qjackctlAlsaGraph::midiPortType()) {
 		// ALSA MIDI type...
 		if (item_mode & qjackctlGraphItem::Input)
 			alist.append(&(aliases->alsaInputs));

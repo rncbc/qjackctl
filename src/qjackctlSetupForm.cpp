@@ -1914,7 +1914,7 @@ void qjackctlSetupForm::apply (void)
 	// If server is currently running, warn user...
 	if (m_iDirtySettings > 0 || m_iDirtyPreset > 0) {
 		// Maybe whether to restart the server, who knows?
-		pMainForm->showDirtySettingsWarning();
+		pMainForm->restartJack();
 		// Maybe something changed on the way up?...
 		m_ui.QueryShutdownCheckBox->setChecked(m_pSetup->bQueryShutdown);
 	}

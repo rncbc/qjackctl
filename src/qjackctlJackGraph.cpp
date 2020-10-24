@@ -546,12 +546,14 @@ QList<qjackctlAliasList *> qjackctlJackGraph::item_aliases (
 
 	uint item_type = 0;
 	qjackctlGraphItem::Mode item_mode = qjackctlGraphItem::None;
+	bool is_node = false;
 
 	if (item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
-		if (node) {
+		if (node && qjackctlJackGraph::isNodeType(node->nodeType())) {
 			item_type = node->nodeType();
 			item_mode = node->nodeMode();
+			is_node = true;
 		}
 	}
 	else
@@ -566,15 +568,15 @@ QList<qjackctlAliasList *> qjackctlJackGraph::item_aliases (
 	if (!item_type || !item_mode)
 		return alist; // empty again!
 
-	if (item_type == qjackctlJackGraph::audioPortType()) {
+	if (is_node || item_type == qjackctlJackGraph::audioPortType()) {
 		// JACK audio type...
 		if (item_mode & qjackctlGraphItem::Input)
 			alist.append(&(aliases->audioInputs));
 		if (item_mode & qjackctlGraphItem::Output)
 			alist.append(&(aliases->audioOutputs));
 	}
-	else
-	if (item_type == qjackctlJackGraph::midiPortType()) {
+
+	if (is_node || item_type == qjackctlJackGraph::midiPortType()) {
 		// JACK MIDI type...
 		if (item_mode & qjackctlGraphItem::Input)
 			alist.append(&(aliases->midiInputs));

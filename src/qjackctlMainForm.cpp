@@ -1112,7 +1112,7 @@ bool qjackctlMainForm::queryClosePreset (void)
 // Query whether to stop the JACK service.
 bool qjackctlMainForm::queryShutdown (void)
 {
-	bool bQueryShutdown = true;
+	bool bQueryShutdown = queryClosePreset();
 
 	// Check if we're allowed to stop (shutdown)...
 	if (m_pJackClient && m_pSetup->bQueryShutdown
@@ -1614,6 +1614,15 @@ void qjackctlMainForm::stopJack (void)
 	// Stop the server conditionally...
 	if (queryShutdown())
 		stopJackServer();
+}
+
+
+// Restart jack audio service.
+void qjackctlMainForm::restartJack (void)
+{
+	// Stop the server conditionally...
+	if (queryClosePreset())
+		showDirtySettingsWarning();
 }
 
 

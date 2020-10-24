@@ -137,6 +137,9 @@ public:
 	// Some settings that are special someway...
 	bool resetBuffSize(jack_nframes_t nframes);
 
+	// Restart JACk audio service.
+	void restartJack();
+
 public slots:
 
 	void startJack();
