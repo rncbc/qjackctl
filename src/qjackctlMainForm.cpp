@@ -1109,14 +1109,72 @@ bool qjackctlMainForm::queryClosePreset (void)
 }
 
 
+// Query whether to restart the JACK service.
+bool qjackctlMainForm::queryRestart (void)
+{
+	bool bQueryRestart = queryClosePreset();
+
+	// If client service is currently running,
+	// prompt the effective warning...
+	if (bQueryRestart
+		&& m_pSetup->bQueryRestart
+		&& m_pJackClient) {
+		const QString& sTitle
+			= tr("Warning");
+		const QString& sText
+			= tr("Server settings will be only effective after\n"
+				"restarting the JACK audio server.");
+		// Should ask the user whether to
+		// restart the JACK audio server...
+		if (m_pSetup->bQueryShutdown) {
+			const QString& sQueryText = sText + "\n\n"
+				+ tr("Do you want to restart the JACK audio server?");
+		#if 0//QJACKCTL_QUERY_RESTART
+			bQueryRestart = (QMessageBox::warning(this, sTitle, sQueryText,
+				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+		#else
+			QMessageBox mbox(this);
+			mbox.setIcon(QMessageBox::Warning);
+			mbox.setWindowTitle(sTitle);
+			mbox.setText(sQueryText);
+			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+			QCheckBox cbox(tr("Don't ask this again"));
+			cbox.setChecked(false);
+			cbox.blockSignals(true);
+			mbox.addButton(&cbox, QMessageBox::ActionRole);
+			bQueryRestart = (mbox.exec() == QMessageBox::Ok);
+			if (cbox.isChecked()) {
+				m_pSetup->bQueryRestart = bQueryRestart;
+				m_pSetup->bQueryShutdown = false;
+			}
+		#endif
+		} else {
+			// Show the old warning message...
+		#ifdef CONFIG_SYSTEM_TRAY
+			if (m_pSetup->bSystemTray && m_pSystemTray
+				&& QSystemTrayIcon::supportsMessages()) {
+				m_pSystemTray->showMessage(
+					sTitle + " - " QJACKCTL_SUBTITLE1,
+					sText, QSystemTrayIcon::Warning);
+			}
+			else
+		#endif
+			QMessageBox::warning(this, sTitle, sText);
+		}
+	}
+
+	return bQueryRestart;
+}
+
+
 // Query whether to stop the JACK service.
 bool qjackctlMainForm::queryShutdown (void)
 {
 	bool bQueryShutdown = queryClosePreset();
 
 	// Check if we're allowed to stop (shutdown)...
-	if (m_pJackClient && m_pSetup->bQueryShutdown
-		&& m_pConnectionsForm
+	if (bQueryShutdown && m_pSetup->bQueryShutdown
+		&& m_pJackClient && m_pConnectionsForm
 		&& (m_pConnectionsForm->isAudioConnected() ||
 			m_pConnectionsForm->isMidiConnected())) {
 		const QString& sTitle
@@ -1621,8 +1679,13 @@ void qjackctlMainForm::stopJack (void)
 void qjackctlMainForm::restartJack (void)
 {
 	// Stop the server conditionally...
-	if (queryClosePreset())
-		showDirtySettingsWarning();
+	if (queryRestart()) {
+		stopJackServer();
+		m_bJackRestart = true;
+	}
+
+	updateTitleStatus();
+	updateContextMenu();
 }
 
 
@@ -4136,69 +4199,6 @@ void qjackctlMainForm::updateContextMenu (void)
 }
 
 
-// Server settings change warning.
-void qjackctlMainForm::showDirtySettingsWarning (void)
-{
-	// If client service is currently running,
-	// prompt the effective warning...
-	if (m_pJackClient) {
-		bool bQueryRestart = m_pSetup->bQueryRestart;
-		const QString& sTitle
-			= tr("Warning");
-		const QString& sText
-			= tr("Server settings will be only effective after\n"
-				"restarting the JACK audio server.");
-		// Should ask the user whether to
-		// restart the JACK audio server...
-		if (m_pSetup->bQueryShutdown) {
-			const QString& sQueryText = sText + "\n\n"
-				+ tr("Do you want to restart the JACK audio server?");
-		#if 0//QJACKCTL_QUERY_RESTART
-			bQueryRestart = (QMessageBox::warning(this, sTitle, sQueryText,
-				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
-		#else
-			QMessageBox mbox(this);
-			mbox.setIcon(QMessageBox::Warning);
-			mbox.setWindowTitle(sTitle);
-			mbox.setText(sQueryText);
-			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-			QCheckBox cbox(tr("Don't ask this again"));
-			cbox.setChecked(false);
-			cbox.blockSignals(true);
-			mbox.addButton(&cbox, QMessageBox::ActionRole);
-			bQueryRestart = (mbox.exec() == QMessageBox::Ok);
-			if (cbox.isChecked()) {
-				m_pSetup->bQueryRestart = bQueryRestart;
-				m_pSetup->bQueryShutdown = false;
-			}
-		#endif
-		}
-		else
-		// Show the old warning message...
-		if (!bQueryRestart) {
-		#ifdef CONFIG_SYSTEM_TRAY
-			if (m_pSetup->bSystemTray && m_pSystemTray
-				&& QSystemTrayIcon::supportsMessages()) {
-				m_pSystemTray->showMessage(
-					sTitle + " - " QJACKCTL_SUBTITLE1,
-					sText, QSystemTrayIcon::Warning);
-			}
-			else
-		#endif
-			QMessageBox::warning(this, sTitle, sText);
-		}
-		// Or restart immediately!...
-		if (bQueryRestart) {
-			stopJackServer();
-			m_bJackRestart = true;
-		}
-	}	// Otherwise, it will be just as convenient to update status...
-	else updateTitleStatus();
-
-	updateContextMenu();
-}
-
-
 // Setup otions change warning.
 void qjackctlMainForm::showDirtySetupWarning (void)
 {
@@ -4237,9 +4237,6 @@ void qjackctlMainForm::activatePreset ( const QString& sPreset )
 // Select the current default preset (by index).
 void qjackctlMainForm::activatePreset ( int iPreset )
 {
-	if (!queryClosePreset())
-		return;
-
 	if (iPreset >= 0 && iPreset < m_pSetup->presets.count())
 		m_pSetup->sDefPreset = m_pSetup->presets.at(iPreset);
 	else
@@ -4249,7 +4246,7 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 	if (m_pSetupForm)
 		m_pSetupForm->updateCurrentPreset();
 
-	showDirtySettingsWarning();
+	restartJack();
 }
 
 

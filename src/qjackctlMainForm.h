@@ -131,7 +131,6 @@ public:
 #ifdef CONFIG_SYSTEM_TRAY
 	void updateSystemTray();
 #endif
-	void showDirtySettingsWarning();
 	void showDirtySetupWarning();
 
 	// Some settings that are special someway...
@@ -203,6 +202,8 @@ protected:
 	bool queryClose();
 	bool queryCloseJack();
 	bool queryClosePreset();
+
+	bool queryRestart();
 	bool queryShutdown();
 
 	void showEvent(QShowEvent *pShowEvent);
