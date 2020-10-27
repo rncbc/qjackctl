@@ -1632,7 +1632,11 @@ void qjackctlMainForm::startJack (void)
 		SIGNAL(started()),
 		SLOT(jackStarted()));
 	QObject::connect(m_pJack,
+	#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
 		SIGNAL(error(QProcess::ProcessError)),
+	#else
+		SIGNAL(errorOccurred(QProcess::ProcessError)),
+	#endif
 		SLOT(jackError(QProcess::ProcessError)));
 	QObject::connect(m_pJack,
 		SIGNAL(finished(int, QProcess::ExitStatus)),
