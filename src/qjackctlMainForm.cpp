@@ -1112,13 +1112,11 @@ bool qjackctlMainForm::queryClosePreset (void)
 // Query whether to restart the JACK service.
 bool qjackctlMainForm::queryRestart (void)
 {
-	bool bQueryRestart = queryClosePreset();
+	bool bQueryRestart = (m_pJackClient && queryClosePreset());
 
 	// If client service is currently running,
 	// prompt the effective warning...
-	if (bQueryRestart
-		&& m_pSetup->bQueryRestart
-		&& m_pJackClient) {
+	if (bQueryRestart && m_pSetup->bQueryRestart) {
 		const QString& sTitle
 			= tr("Warning");
 		const QString& sText
