@@ -1168,11 +1168,11 @@ bool qjackctlMainForm::queryRestart (void)
 // Query whether to stop the JACK service.
 bool qjackctlMainForm::queryShutdown (void)
 {
-	bool bQueryShutdown = queryClosePreset();
+	bool bQueryShutdown = (m_pJackClient && queryClosePreset());
 
 	// Check if we're allowed to stop (shutdown)...
 	if (bQueryShutdown && m_pSetup->bQueryShutdown
-		&& m_pJackClient && m_pConnectionsForm
+		&&  m_pConnectionsForm
 		&& (m_pConnectionsForm->isAudioConnected() ||
 			m_pConnectionsForm->isMidiConnected())) {
 		const QString& sTitle
