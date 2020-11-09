@@ -114,7 +114,7 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 			QApplication::installTranslator(m_pQtTranslator);
 		} else {
 			delete m_pQtTranslator;
-			m_pQtTranslator = 0;
+			m_pQtTranslator = nullptr;
 		#ifdef CONFIG_DEBUG
 			qWarning("Warning: no translation found for '%s' locale: %s/%s.qm",
 				loc.name().toUtf8().constData(),
@@ -133,7 +133,7 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 				QApplication::installTranslator(m_pMyTranslator);
 			} else {
 				delete m_pMyTranslator;
-				m_pMyTranslator = 0;
+				m_pMyTranslator = nullptr;
 			#ifdef CONFIG_DEBUG
 				qWarning("Warning: no translation found for '%s' locale: %s/%s.qm",
 					loc.name().toUtf8().constData(),
