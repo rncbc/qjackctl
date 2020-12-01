@@ -126,11 +126,6 @@
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="94"/>
-        <source>Using: JACK %1</source>
-        <translation>Používá se: JACK %1</translation>
-    </message>
-    <message>
         <location filename="../qjackctlAboutForm.cpp" line="44"/>
         <source>Debugging option enabled.</source>
         <translation>Povolena volba pro ladění.</translation>
@@ -176,17 +171,27 @@
         <translation>ALSA/MIDI řadič (sequencer) není podporován.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="98"/>
+        <location filename="../qjackctlAboutForm.cpp" line="93"/>
+        <source>Using: Qt %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="99"/>
+        <source>JACK %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="103"/>
         <source>Website</source>
         <translation>Stránky</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="103"/>
+        <location filename="../qjackctlAboutForm.cpp" line="108"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Tento program je svobodným programem. Můžete jej šířit a/nebo upravit</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="104"/>
+        <location filename="../qjackctlAboutForm.cpp" line="109"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>za podmínek GNU General Public License ve verzi 2 nebo pozdější.</translation>
     </message>

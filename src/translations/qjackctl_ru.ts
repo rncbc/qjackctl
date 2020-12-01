@@ -126,11 +126,6 @@
         <translation>Версия</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="94"/>
-        <source>Using: JACK %1</source>
-        <translation>Используется JACK %1</translation>
-    </message>
-    <message>
         <location filename="../qjackctlAboutForm.cpp" line="50"/>
         <source>Transport status control disabled.</source>
         <translation>Статус управления транспортом отключён.</translation>
@@ -146,18 +141,28 @@
         <translation>Поддержка JACK Session отключена.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="98"/>
+        <location filename="../qjackctlAboutForm.cpp" line="93"/>
+        <source>Using: Qt %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="99"/>
+        <source>JACK %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="103"/>
         <source>Website</source>
         <translation>Домашняя страница</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="103"/>
+        <location filename="../qjackctlAboutForm.cpp" line="108"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Это программа является свободной; вы можете распространять 
 и/или изменять её без ограничений</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="104"/>
+        <location filename="../qjackctlAboutForm.cpp" line="109"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>на условиях лицензии GNU General Public License версии 2 или более новой.</translation>
     </message>

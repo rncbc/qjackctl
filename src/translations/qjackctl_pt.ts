@@ -161,17 +161,27 @@
         <translation>Suporte ao sequenciador ALSA/MIDI desativado.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="98"/>
+        <location filename="../qjackctlAboutForm.cpp" line="93"/>
+        <source>Using: Qt %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="99"/>
+        <source>JACK %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="103"/>
         <source>Website</source>
         <translation>Website</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="103"/>
+        <location filename="../qjackctlAboutForm.cpp" line="108"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Este programa é software livre; você pode redistribuí-lo e / ou modificá-lo</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="104"/>
+        <location filename="../qjackctlAboutForm.cpp" line="109"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>sob os termos da GNU General Public License versão 2 ou posterior.</translation>
     </message>
@@ -194,11 +204,6 @@
         <location filename="../qjackctlAboutForm.cpp" line="68"/>
         <source>JACK Session support disabled.</source>
         <translation>Suporte para sessão JACK desativado.</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlAboutForm.cpp" line="94"/>
-        <source>Using: JACK %1</source>
-        <translation>Usando: JACK %1</translation>
     </message>
 </context>
 <context>

@@ -126,11 +126,6 @@
         <translation>Verzia</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="94"/>
-        <source>Using: JACK %1</source>
-        <translation>Používa sa: JACK %1</translation>
-    </message>
-    <message>
         <location filename="../qjackctlAboutForm.cpp" line="44"/>
         <source>Debugging option enabled.</source>
         <translation>Povolená voľba pre ladenie.</translation>
@@ -176,17 +171,27 @@
         <translation>Podpora pre ALSA/MIDI radič (sequencer) bola vypnutá.</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="98"/>
+        <location filename="../qjackctlAboutForm.cpp" line="93"/>
+        <source>Using: Qt %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="99"/>
+        <source>JACK %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlAboutForm.cpp" line="103"/>
         <source>Website</source>
         <translation>Webová stránka</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="103"/>
+        <location filename="../qjackctlAboutForm.cpp" line="108"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Tento program je slobodným softvérom. Môžete ho šíriť a/alebo upravovať</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="104"/>
+        <location filename="../qjackctlAboutForm.cpp" line="109"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>pri dodržaní podmienok licencie GNU General Public License verzie 2 alebo neskoršej.</translation>
     </message>

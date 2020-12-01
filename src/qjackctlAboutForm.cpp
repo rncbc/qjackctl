@@ -89,11 +89,16 @@ qjackctlAboutForm::qjackctlAboutForm ( QWidget *pParent )
 		sText += list.join("<br />\n");
 		sText += "</font></small>";
 	}
-#ifdef CONFIG_JACK_VERSION
 	sText += "<br />\n";
-	sText += tr("Using: JACK %1").arg(jack_get_version_string());
-	sText += "<br />\n";
+	sText += tr("Using: Qt %1").arg(qVersion());
+#if defined(QT_STATIC)
+	sText += "-static";
 #endif
+#ifdef CONFIG_JACK_VERSION
+	sText += ", ";
+	sText += tr("JACK %1").arg(jack_get_version_string());
+#endif
+	sText += "<br />\n";
 	sText += "<br />\n";
 	sText += tr("Website") + ": <a href=\"" QJACKCTL_WEBSITE "\">" QJACKCTL_WEBSITE "</a><br />\n";
 	sText += "<br />\n";
