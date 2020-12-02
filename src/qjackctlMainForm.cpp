@@ -3700,7 +3700,7 @@ void qjackctlMainForm::refreshStatus (void)
 				QString::asprintf("%u.%u.%03u", tpos.bar, tpos.beat, tpos.tick));
 		#endif
 			updateStatusItem(STATUS_TRANSPORT_BPM,
-				QString::number(tpos.beats_per_minute, 'g', 4));
+				QString::number(tpos.beats_per_minute));
 		} else {
 			updateStatusItem(STATUS_TRANSPORT_BBT, b);
 			updateStatusItem(STATUS_TRANSPORT_BPM, n);
