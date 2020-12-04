@@ -139,6 +139,10 @@ public:
 	// Restart JACk audio service.
 	void restartJack();
 
+#ifdef CONFIG_DBUS
+	QStringList getDBusEngineDrivers();
+#endif
+
 public slots:
 
 	void startJack();
@@ -296,6 +300,8 @@ protected:
 	QVariant getDBusEngineParameter(const QString& param);
 	QVariant getDBusDriverParameter(const QString& param);
 	QVariant getDBusParameter(const QStringList& path);
+
+	QStringList getDBusParameterValues(const QStringList& path);
 
 #endif
 

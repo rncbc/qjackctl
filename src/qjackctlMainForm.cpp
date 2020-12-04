@@ -76,6 +76,7 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #ifdef CONFIG_DBUS
 #include <QDBusInterface>
+#include <QDBusArgument>
 #include <QThread>
 #endif
 
@@ -4773,6 +4774,47 @@ QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 		= qvariant_cast<QDBusVariant> (dbusm.arguments().at(2));
 	return dbusv.variant();
 }
+
+
+QStringList qjackctlMainForm::getDBusParameterValues ( const QStringList& path )
+{
+	if (m_pDBusConfig == nullptr)
+		return QStringList();
+
+	QDBusMessage dbusm = m_pDBusConfig->call("GetParameterConstraint", path);
+
+	if (dbusm.type() == QDBusMessage::ErrorMessage) {
+		appendMessagesError(
+			tr("D-BUS: GetParameterConstraint('%1'):\n\n"
+			"%2.\n(%3)").arg(path.join(":"))
+			.arg(dbusm.errorMessage())
+			.arg(dbusm.errorName()));
+		return QStringList();
+	}
+
+	const QDBusArgument& dbusa
+		= qvariant_cast<QDBusArgument> (dbusm.arguments().at(3));
+//	return qdbus_cast<QStringList> (dbusa);
+	QStringList list;
+	dbusa.beginArray();
+	while (!dbusa.atEnd()) {
+		QVariant var;
+		dbusa >> var;
+		const QDBusVariant& dbusv
+			= qvariant_cast<QDBusVariant> (var);
+		list.append(dbusv.variant().toString());
+	}
+	dbusa.endArray();
+	return list;
+}
+
+
+// D-BUS: List all supported engine/drivers.
+QStringList qjackctlMainForm::getDBusEngineDrivers (void)
+{
+	return getDBusParameterValues(QStringList() << "engine" << "driver");
+}
+
 
 #endif	// CONFIG_DBUS
 

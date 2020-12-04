@@ -57,6 +57,8 @@ protected slots:
 	void saveCurrentPreset();
 	void deleteCurrentPreset();
 
+	void changeDrivers();
+
 	void changeAudio(int);
 	void changeDriver(int);
 
@@ -81,7 +83,6 @@ protected slots:
 	void editCustomColorThemes();
 
 	void buffSizeChanged();
-
 	void settingsChanged();
 	void optionsChanged();
 
@@ -108,12 +109,14 @@ protected:
 	bool deletePreset(const QString& sPreset);
 	void resetPresets();
 
+	void updateDrivers();
+
 	void computeLatency();
 
-	void changeDriverAudio( const QString& sDriver, int iAudio );
-	void changeDriverUpdate( const QString& sDriver, bool bUpdate );
+	void changeDriverAudio(const QString& sDriver, int iAudio);
+	void changeDriverUpdate(const QString& sDriver, bool bUpdate);
 
-	void symbolMenu(QLineEdit * pLineEdit, QToolButton * pToolButton );
+	void symbolMenu(QLineEdit * pLineEdit, QToolButton * pToolButton);
 
 	// Custom color/style themes settlers.
 	void resetCustomColorThemes(const QString& sCustomColorTheme);
@@ -141,6 +144,8 @@ private:
 	int m_iDirtyOptions;
 
 	QString m_sPreset;
+
+	QStringList m_drivers;
 };
 
 

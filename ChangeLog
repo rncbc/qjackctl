@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- List only available backend drivers when JACK D-BUS
+  is enabled. (EXPERIMENTAL)
+
 - Graph client-name / node-title aliases persistence
   have been hopefully fixed. (EXPERIMENTAL)
 

@@ -126,6 +126,13 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_iDirtySettings = 0;
 	m_iDirtyOptions = 0;
 
+	// Save original hard-coded driver names, only really
+	// useful when (changing (dis)enabling JACK D-BUS...
+	m_drivers.clear();
+	const int iDriverCount = m_ui.DriverComboBox->count();
+	for (int i = 0; i < iDriverCount; ++i)
+		m_drivers.append(m_ui.DriverComboBox->itemText(i));
+
 	// Set dialog validators...
 	m_ui.PresetComboBox->setValidator(
 		new QRegularExpressionValidator(QRegularExpression("[\\w-]+"), m_ui.PresetComboBox));
@@ -371,7 +378,7 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 		SIGNAL(toggled(bool)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.DisplayBlinkCheckBox,
-		SIGNAL(toggled(bool)),
+		SIGNAL(stateChanged(int)),
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.CustomColorThemeComboBox,
 		SIGNAL(activated(int)),
@@ -465,7 +472,7 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 		SLOT(optionsChanged()));
 	QObject::connect(m_ui.JackDBusEnabledCheckBox,
 		SIGNAL(stateChanged(int)),
-		SLOT(optionsChanged()));
+		SLOT(changeDrivers()));
 #endif
 	QObject::connect(m_ui.LeftButtonsCheckBox,
 		SIGNAL(stateChanged(int)),
@@ -1299,12 +1306,6 @@ void qjackctlSetupForm::stabilizeForm (void)
 	m_ui.StartMinimizedCheckBox->setEnabled(bEnabled);
 #endif
 
-	m_ui.StopJackCheckBox->setEnabled(
-		m_ui.JackDBusEnabledCheckBox->isChecked());
-	if (!m_ui.JackDBusEnabledCheckBox->isChecked()) {
-		m_ui.StopJackCheckBox->setChecked(true);
-	}
-
 	bEnabled = !m_ui.JackDBusEnabledCheckBox->isChecked();
 	m_ui.ServerConfigCheckBox->setEnabled(bEnabled);
 	if (bEnabled)
@@ -1650,6 +1651,40 @@ void qjackctlSetupForm::buffSizeChanged (void)
 
 	++m_iDirtyBuffSize;
 	stabilizeForm();
+}
+
+
+// Mark that JACK D-BUS has been (dis)enabled.
+void qjackctlSetupForm::updateDrivers (void)
+{
+	const bool bBlockSignals
+		= m_ui.DriverComboBox->blockSignals(true);
+	const QString sDriver
+		= m_ui.DriverComboBox->currentText();
+
+	m_ui.DriverComboBox->clear();
+	QStringList drivers;
+#ifdef CONFIG_DBUS
+	if (m_ui.JackDBusEnabledCheckBox->isChecked()) {
+		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+		if (pMainForm)
+			drivers = pMainForm->getDBusEngineDrivers();
+	}
+#endif
+	if (drivers.isEmpty())
+		drivers = m_drivers; // Restore the original list...
+	m_ui.DriverComboBox->addItems(drivers);
+
+	setComboBoxCurrentText(m_ui.DriverComboBox, sDriver);
+	m_ui.DriverComboBox->blockSignals(bBlockSignals);
+
+}
+
+
+void qjackctlSetupForm::changeDrivers (void)
+{
+	updateDrivers();
+	optionsChanged();
 }
 
 
@@ -2006,6 +2041,10 @@ void qjackctlSetupForm::showEvent ( QShowEvent *pShowEvent )
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pMainForm->stabilizeFormEx();
+
+#ifdef CONFIG_DBUS
+	updateDrivers();
+#endif
 
 	stabilizeForm();
 
