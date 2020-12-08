@@ -1,4 +1,4 @@
-project(QJACKCTL)
+project(qjackctl)
 
 cmake_minimum_required(VERSION 3.1)
 
