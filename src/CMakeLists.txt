@@ -95,6 +95,7 @@ set (TRANSLATIONS
 	translations/qjackctl_pt.ts
 	translations/qjackctl_ru.ts
 	translations/qjackctl_sk.ts
+	translations/qjackctl_uk.ts
 )
 
 qt_wrap_ui (UI_SOURCES ${FORMS})
