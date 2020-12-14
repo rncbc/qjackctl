@@ -168,17 +168,17 @@
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="93"/>
         <source>Using: Qt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisant : Qt %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="99"/>
         <source>JACK %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="103"/>
         <source>Website</source>
-        <translation>Site web</translation>
+        <translation>Site ouèbe</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="108"/>
@@ -1569,7 +1569,10 @@ Voulez-vous sauvegarder les changements ?</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS : GetParameterConstraint(&apos;%1&apos;) :
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4049"/>
