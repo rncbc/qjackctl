@@ -4,16 +4,16 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.0  2020-12-17  A Winter'20 Release.
 
 - List only available backend drivers when JACK D-BUS
-  is enabled. (EXPERIMENTAL)
+  is enabled.
 
 - Graph client-name / node-title aliases persistence
-  have been hopefully fixed. (EXPERIMENTAL)
+  have been hopefully fixed.
 
 - Get rid of those "JACK has crashed" red-herrings
-  from latest Windows(tm) builds. (EXPERIMENTAL)
+  from latest Windows(tm) builds.
 
 - Early fixing to build for Qt >= 6.0.0 and comply
   with C++17 standard.

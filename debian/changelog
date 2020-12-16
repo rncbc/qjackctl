@@ -1,3 +1,9 @@
+qjackctl (0.9.0-44) unstable; urgency=low
+
+  * Winter'20 release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Thu, 17 Dec 2020 20:00:00 +0000
+
 qjackctl (0.6.3-43) unstable; urgency=low
 
   * Summer'20 release.
