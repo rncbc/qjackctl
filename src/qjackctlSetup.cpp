@@ -40,14 +40,6 @@
 #include <jack/jack.h>
 #endif
 
-#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-#define DEFAULT_DRIVER "portaudio"
-#elif defined(__APPLE__)
-#define DEFAULT_DRIVER "coreaudio"
-#else
-#define DEFAULT_DRIVER "alsa"
-#endif
-
 
 // Constructor.
 qjackctlSetup::qjackctlSetup (void)
@@ -371,6 +363,170 @@ bool qjackctlSetup::saveAliases (void)
 
 
 //---------------------------------------------------------------------------
+// Preset struct methods.
+
+void qjackctlPreset::clear (void)
+{
+	sServerPrefix.clear();
+	sServerName  .clear();
+	bRealtime    = true;
+	bSoftMode    = false;
+	bMonitor     = false;
+	bShorts      = false;
+	bNoMemLock   = false;
+	bUnlockMem   = false;
+	bHWMeter     = false;
+	bIgnoreHW    = false;
+	iPriority    = 0;
+	iFrames      = 0;
+	iSampleRate  = 0;
+	iPeriods     = 0;
+	iWordLength  = 0;
+	iWait        = 0;
+	iChan        = 0;
+	sDriver      .clear();
+	sInterface   .clear();
+	iAudio       = 0;
+	iDither      = 0;
+	iTimeout     = 0;
+	sInDevice    .clear();
+	sOutDevice   .clear();
+	iInChannels  = 0;
+	iOutChannels = 0;
+	iInLatency   = 0;
+	iOutLatency  = 0;
+	iStartDelay  = 2;
+	bSync        = false;
+	bVerbose     = false;
+	iPortMax     = 0;
+	sMidiDriver  .clear();
+	sServerSuffix.clear();
+	uClockSource = 0;
+	ucSelfConnectMode = ' ';
+
+	fixup();
+}
+
+
+void qjackctlPreset::load ( QSettings& settings, const QString& sSuffix )
+{
+	settings.beginGroup("/Settings" + sSuffix);
+
+	sServerPrefix = settings.value("/Server",       sServerPrefix).toString();
+	sServerName   = settings.value("/ServerName",   sServerName).toString();
+	bRealtime     = settings.value("/Realtime",     bRealtime).toBool();
+	bSoftMode     = settings.value("/SoftMode",     bSoftMode).toBool();
+	bMonitor      = settings.value("/Monitor",      bMonitor).toBool();
+	bShorts       = settings.value("/Shorts",       bShorts).toBool();
+	bNoMemLock    = settings.value("/NoMemLock",    bNoMemLock).toBool();
+	bUnlockMem    = settings.value("/UnlockMem",    bUnlockMem).toBool();
+	bHWMeter      = settings.value("/HWMeter",      bHWMeter).toBool();
+	bIgnoreHW     = settings.value("/IgnoreHW",     bIgnoreHW).toBool();
+	iPriority     = settings.value("/Priority",     iPriority).toInt();
+	iFrames       = settings.value("/Frames",       iFrames).toInt();
+	iSampleRate   = settings.value("/SampleRate",   iSampleRate).toInt();
+	iPeriods      = settings.value("/Periods",      iPeriods).toInt();
+	iWordLength   = settings.value("/WordLength",   iWordLength).toInt();
+	iWait         = settings.value("/Wait",         iWait).toInt();
+	iChan         = settings.value("/Chan",         iChan).toInt();
+	sDriver       = settings.value("/Driver",       sDriver).toString();
+	sInterface    = settings.value("/Interface",    sInterface).toString();
+	iAudio        = settings.value("/Audio",        iAudio).toInt();
+	iDither       = settings.value("/Dither",       iDither).toInt();
+	iTimeout      = settings.value("/Timeout",      iTimeout).toInt();
+	sInDevice     = settings.value("/InDevice",     sInDevice).toString();
+	sOutDevice    = settings.value("/OutDevice",    sOutDevice).toString();
+	iInChannels   = settings.value("/InChannels",   iInChannels).toInt();
+	iOutChannels  = settings.value("/OutChannels",  iOutChannels).toInt();
+	iInLatency    = settings.value("/InLatency",    iInLatency).toInt();
+	iOutLatency   = settings.value("/OutLatency",   iOutLatency).toInt();
+	iStartDelay   = settings.value("/StartDelay",   iStartDelay).toInt();
+	bSync         = settings.value("/Sync",         bSync).toBool();
+	bVerbose      = settings.value("/Verbose",      bVerbose).toBool();
+	iPortMax      = settings.value("/PortMax",      iPortMax).toInt();
+	sMidiDriver   = settings.value("/MidiDriver",   sMidiDriver).toString();
+	sServerSuffix = settings.value("/ServerSuffix", sServerSuffix).toString();
+	uClockSource  = settings.value("/ClockSource",  uClockSource).toUInt();
+	ucSelfConnectMode = settings.value("/SelfConnectMode", ucSelfConnectMode).value<uchar>();
+
+	settings.endGroup();
+
+	fixup();
+}
+
+void qjackctlPreset::save ( QSettings& settings, const QString& sSuffix )
+{
+	settings.beginGroup("/Settings" + sSuffix);
+
+	settings.setValue("/Server",       sServerPrefix);
+	settings.setValue("/ServerName",   sServerName);
+	settings.setValue("/Realtime",     bRealtime);
+	settings.setValue("/SoftMode",     bSoftMode);
+	settings.setValue("/Monitor",      bMonitor);
+	settings.setValue("/Shorts",       bShorts);
+	settings.setValue("/NoMemLock",    bNoMemLock);
+	settings.setValue("/UnlockMem",    bUnlockMem);
+	settings.setValue("/HWMeter",      bHWMeter);
+	settings.setValue("/IgnoreHW",     bIgnoreHW);
+	settings.setValue("/Priority",     iPriority);
+	settings.setValue("/Frames",       iFrames);
+	settings.setValue("/SampleRate",   iSampleRate);
+	settings.setValue("/Periods",      iPeriods);
+	settings.setValue("/WordLength",   iWordLength);
+	settings.setValue("/Wait",         iWait);
+	settings.setValue("/Chan",         iChan);
+	settings.setValue("/Driver",       sDriver);
+	settings.setValue("/Interface",    sInterface);
+	settings.setValue("/Audio",        iAudio);
+	settings.setValue("/Dither",       iDither);
+	settings.setValue("/Timeout",      iTimeout);
+	settings.setValue("/InDevice",     sInDevice);
+	settings.setValue("/OutDevice",    sOutDevice);
+	settings.setValue("/InChannels",   iInChannels);
+	settings.setValue("/OutChannels",  iOutChannels);
+	settings.setValue("/InLatency",    iInLatency);
+	settings.setValue("/OutLatency",   iOutLatency);
+	settings.setValue("/StartDelay",   iStartDelay);
+	settings.setValue("/Sync",         bSync);
+	settings.setValue("/Verbose",      bVerbose);
+	settings.setValue("/PortMax",      iPortMax);
+	settings.setValue("/MidiDriver",   sMidiDriver);
+	settings.setValue("/ServerSuffix", sServerSuffix);
+	settings.setValue("/ClockSource",  uClockSource);
+	settings.setValue("/SelfConnectMode", ucSelfConnectMode);
+
+	settings.endGroup();
+}
+
+void qjackctlPreset::fixup (void)
+{
+	if (sServerPrefix.isEmpty()) {
+		sServerPrefix = "jackd";
+	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+		sServerPrefix += " -S -X winmme";
+	#endif
+	}
+
+	if (sDriver.isEmpty()) {
+	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+		sDriver =  "portaudio";
+	#elif defined(__APPLE__)
+		sDriver = "coreaudio";
+	#else
+		sDriver = "alsa";
+	#endif
+	}
+
+#ifdef CONFIG_JACK_MIDI
+	if (!sMidiDriver.isEmpty()
+		&& sMidiDriver != "raw"
+		&& sMidiDriver != "seq")
+		sMidiDriver.clear();
+#endif
+}
+
+
+//---------------------------------------------------------------------------
 // Preset management methods.
 
 bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset )
@@ -383,56 +539,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 			return false;
 	}
 
-	m_settings.beginGroup("/Settings" + sSuffix);
-#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-	preset.sServerPrefix = m_settings.value("/Server", "jackd -S -X winmme").toString();
-#else
-	preset.sServerPrefix = m_settings.value("/Server", "jackd").toString();
-#endif
-	preset.sServerName  = m_settings.value("/ServerName").toString();
-	preset.bRealtime    = m_settings.value("/Realtime", true).toBool();
-	preset.bSoftMode    = m_settings.value("/SoftMode", false).toBool();
-	preset.bMonitor     = m_settings.value("/Monitor", false).toBool();
-	preset.bShorts      = m_settings.value("/Shorts", false).toBool();
-	preset.bNoMemLock   = m_settings.value("/NoMemLock", false).toBool();
-	preset.bUnlockMem   = m_settings.value("/UnlockMem", false).toBool();
-	preset.bHWMeter     = m_settings.value("/HWMeter", false).toBool();
-	preset.bIgnoreHW    = m_settings.value("/IgnoreHW", false).toBool();
-	preset.iPriority    = m_settings.value("/Priority", 0).toInt();
-	preset.iFrames      = m_settings.value("/Frames", 1024).toInt();
-	preset.iSampleRate  = m_settings.value("/SampleRate", 48000).toInt();
-	preset.iPeriods     = m_settings.value("/Periods", 2).toInt();
-	preset.iWordLength  = m_settings.value("/WordLength", 16).toInt();
-	preset.iWait        = m_settings.value("/Wait", 21333).toInt();
-	preset.iChan        = m_settings.value("/Chan", 0).toInt();
-	preset.sDriver      = m_settings.value("/Driver", DEFAULT_DRIVER).toString();
-	preset.sInterface   = m_settings.value("/Interface").toString();
-	preset.iAudio       = m_settings.value("/Audio", 0).toInt();
-	preset.iDither      = m_settings.value("/Dither", 0).toInt();
-	preset.iTimeout     = m_settings.value("/Timeout", 500).toInt();
-	preset.sInDevice    = m_settings.value("/InDevice").toString();
-	preset.sOutDevice   = m_settings.value("/OutDevice").toString();
-	preset.iInChannels  = m_settings.value("/InChannels", 0).toInt();
-	preset.iOutChannels = m_settings.value("/OutChannels", 0).toInt();
-	preset.iInLatency   = m_settings.value("/InLatency", 0).toInt();
-	preset.iOutLatency  = m_settings.value("/OutLatency", 0).toInt();
-	preset.iStartDelay  = m_settings.value("/StartDelay", 2).toInt();
-	preset.bSync        = m_settings.value("/Sync", false).toBool();
-	preset.bVerbose     = m_settings.value("/Verbose", false).toBool();
-	preset.iPortMax     = m_settings.value("/PortMax", 256).toInt();
-	preset.sMidiDriver  = m_settings.value("/MidiDriver").toString();
-	preset.sServerSuffix = m_settings.value("/ServerSuffix").toString();
-	preset.uClockSource = m_settings.value("/ClockSource", 0).toUInt();
-	preset.ucSelfConnectMode = m_settings.value("/SelfConnectMode", ' ').value<uchar>();
-	m_settings.endGroup();
-
-#ifdef CONFIG_JACK_MIDI
-	if (!preset.sMidiDriver.isEmpty() &&
-		preset.sMidiDriver != "raw" &&
-		preset.sMidiDriver != "seq")
-		preset.sMidiDriver.clear();
-#endif
-
+	preset.load(m_settings, sSuffix);
 	return true;
 }
 
@@ -446,45 +553,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 			presets.prepend(sPreset);
 	}
 
-	m_settings.beginGroup("/Settings" + sSuffix);
-	m_settings.setValue("/Server",      preset.sServerPrefix);
-	m_settings.setValue("/ServerName",  preset.sServerName);
-	m_settings.setValue("/Realtime",    preset.bRealtime);
-	m_settings.setValue("/SoftMode",    preset.bSoftMode);
-	m_settings.setValue("/Monitor",     preset.bMonitor);
-	m_settings.setValue("/Shorts",      preset.bShorts);
-	m_settings.setValue("/NoMemLock",   preset.bNoMemLock);
-	m_settings.setValue("/UnlockMem",   preset.bUnlockMem);
-	m_settings.setValue("/HWMeter",     preset.bHWMeter);
-	m_settings.setValue("/IgnoreHW",    preset.bIgnoreHW);
-	m_settings.setValue("/Priority",    preset.iPriority);
-	m_settings.setValue("/Frames",      preset.iFrames);
-	m_settings.setValue("/SampleRate",  preset.iSampleRate);
-	m_settings.setValue("/Periods",     preset.iPeriods);
-	m_settings.setValue("/WordLength",  preset.iWordLength);
-	m_settings.setValue("/Wait",        preset.iWait);
-	m_settings.setValue("/Chan",        preset.iChan);
-	m_settings.setValue("/Driver",      preset.sDriver);
-	m_settings.setValue("/Interface",   preset.sInterface);
-	m_settings.setValue("/Audio",       preset.iAudio);
-	m_settings.setValue("/Dither",      preset.iDither);
-	m_settings.setValue("/Timeout",     preset.iTimeout);
-	m_settings.setValue("/InDevice",    preset.sInDevice);
-	m_settings.setValue("/OutDevice",   preset.sOutDevice);
-	m_settings.setValue("/InChannels",  preset.iInChannels);
-	m_settings.setValue("/OutChannels", preset.iOutChannels);
-	m_settings.setValue("/InLatency",   preset.iInLatency);
-	m_settings.setValue("/OutLatency",  preset.iOutLatency);
-	m_settings.setValue("/StartDelay",  preset.iStartDelay);
-	m_settings.setValue("/Sync",        preset.bSync);
-	m_settings.setValue("/Verbose",     preset.bVerbose);
-	m_settings.setValue("/PortMax",     preset.iPortMax);
-	m_settings.setValue("/MidiDriver",  preset.sMidiDriver);
-	m_settings.setValue("/ServerSuffix", preset.sServerSuffix);
-	m_settings.setValue("/ClockSource", preset.uClockSource);
-	m_settings.setValue("/SelfConnectMode", preset.ucSelfConnectMode);
-	m_settings.endGroup();
-
+	preset.save(m_settings, sSuffix);
 	return true;
 }
 
@@ -493,13 +562,15 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
 	QString sSuffix;
 	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
 		sSuffix = '/' + sPreset;
-		int iPreset = presets.indexOf(sPreset);
+		const int iPreset = presets.indexOf(sPreset);
 		if (iPreset < 0)
 			return false;
 		presets.removeAt(iPreset);
-		m_settings.remove("/Settings" + sSuffix);
-		m_settings.remove("/Aliases" + sSuffix);
 	}
+
+	m_settings.remove("/Settings" + sSuffix);
+	m_settings.remove("/Aliases" + sSuffix);
+
 	return true;
 }
 

@@ -1449,12 +1449,11 @@ void qjackctlMainForm::startJack (void)
 		const QString sPath = QString::fromUtf8(::getenv("PATH"));
 		QStringList paths = sPath.split(chPathSep);
 	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
-		paths = paths << QString("%1\\JACK2").arg(getenv("PROGRAMFILES"))
-		              << QString("%1\\JACK2").arg(getenv("PROGRAMFILES(x86)"));
+		paths.append(QString("%1\\JACK2").arg(::getenv("PROGRAMFILES")));
+		paths.append(QString("%1\\JACK2").arg(::getenv("PROGRAMFILES(x86)")));
+	#elif defined(__APPLE__)
+		paths.append("/usr/local/bin/");
 	#endif
-        #if defined(__APPLE__)
-                paths = paths << "/usr/local/bin/";
-        #endif
 		QStringListIterator iter(paths);
 		while (iter.hasNext()) {
 			const QString& sDirectory = iter.next();
@@ -1514,7 +1513,7 @@ void qjackctlMainForm::startJack (void)
 	if (m_preset.iFrames > 0 && !bNet)
 		args.append("-p" + QString::number(m_preset.iFrames));
 	if (bAlsa || bSun || bOss || bFirewire) {
-		if (m_preset.iPeriods > 0)
+		if (m_preset.iPeriods > 1)
 			args.append("-n" + QString::number(m_preset.iPeriods));
 	}
 	if (bAlsa) {
@@ -1570,7 +1569,7 @@ void qjackctlMainForm::startJack (void)
 	else if (bOss || bSun) {
 		if (m_preset.bIgnoreHW)
 			args.append("-b");
-		if (m_preset.iWordLength > 0)
+		if (m_preset.iWordLength > 0 && m_preset.iWordLength != 16)
 			args.append("-w" + QString::number(m_preset.iWordLength));
 		if (!m_preset.sInDevice.isEmpty()  && m_preset.iAudio != QJACKCTL_PLAYBACK)
 			args.append("-C" + formatQuoted(m_preset.sInDevice));
@@ -4365,7 +4364,7 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 	if (bAlsa || bSun || bOss || bFirewire) {
 		setDBusDriverParameter("nperiods",
 			(unsigned int) preset.iPeriods,
-			preset.iPeriods > 0);
+			preset.iPeriods > 1);
 	}
 	if (bAlsa) {
 		setDBusDriverParameter("softmode", preset.bSoftMode);
@@ -4436,7 +4435,7 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 			!sOutDevice.isEmpty() && preset.iAudio != QJACKCTL_CAPTURE);
 		setDBusDriverParameter("inchannels",
 			(unsigned int) preset.iInChannels,
-			preset.iInChannels > 0  && preset.iAudio != QJACKCTL_PLAYBACK);
+			preset.iInChannels > 0 && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
 			(unsigned int) preset.iOutChannels,
 			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
@@ -4444,7 +4443,7 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 	else if (bCoreaudio || bFirewire || bNet) {
 		setDBusDriverParameter("inchannels",
 			(unsigned int) preset.iInChannels,
-			preset.iInChannels > 0  && preset.iAudio != QJACKCTL_PLAYBACK);
+			preset.iInChannels > 0 && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
 			(unsigned int) preset.iOutChannels,
 			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
@@ -4452,7 +4451,7 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 	if (bDummy) {
 		setDBusDriverParameter("wait",
 			(unsigned int) preset.iWait,
-			preset.iWait > 0);
+			preset.iWait > 0 && preset.iWait != 21333);
 	}
 	else
 	if (!bNet) {

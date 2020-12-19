@@ -95,8 +95,9 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_pTimeDisplayButtonGroup->setExclusive(true);
 
 	// Setup clock-source combo-box.
+	const QString& sDefName = tr(g_pszDefName);
 	m_ui.ClockSourceComboBox->clear();
-	m_ui.ClockSourceComboBox->addItem(g_pszDefName, uint(0));
+	m_ui.ClockSourceComboBox->addItem(sDefName, uint(0));
 	m_ui.ClockSourceComboBox->addItem(tr("System"), uint('s'));
 	m_ui.ClockSourceComboBox->addItem(tr("Cycle"),  uint('c'));
 	m_ui.ClockSourceComboBox->addItem(tr("HPET"),   uint('h'));
@@ -157,11 +158,28 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_ui.ServerPrefixComboBox->setCompleter(nullptr);
 	m_ui.ServerSuffixComboBox->setCompleter(nullptr);
 
+	m_ui.PrioritySpinBox->setSpecialValueText(sDefName);
+	m_ui.SampleRateComboBox->insertItem(0, sDefName);
+	m_ui.FramesComboBox->insertItem(0, sDefName);
+	m_ui.PeriodsSpinBox->setSpecialValueText(sDefName);
+	m_ui.PortMaxComboBox->insertItem(0, sDefName);
+	m_ui.TimeoutComboBox->insertItem(0, sDefName);
+	m_ui.WaitComboBox->insertItem(0, sDefName);
+	m_ui.WordLengthComboBox->insertItem(0, sDefName);
+	m_ui.ChanSpinBox->setSpecialValueText(sDefName);
+	m_ui.InChannelsSpinBox->setSpecialValueText(sDefName);
+	m_ui.OutChannelsSpinBox->setSpecialValueText(sDefName);
+	m_ui.InLatencySpinBox->setSpecialValueText(sDefName);
+	m_ui.OutLatencySpinBox->setSpecialValueText(sDefName);
+
 	// UI connections...
 
 	QObject::connect(m_ui.PresetComboBox,
 		SIGNAL(editTextChanged(const QString&)),
 		SLOT(changeCurrentPreset(const QString&)));
+	QObject::connect(m_ui.PresetClearPushButton,
+		SIGNAL(clicked()),
+		SLOT(clearCurrentPreset()));
 	QObject::connect(m_ui.PresetSavePushButton,
 		SIGNAL(clicked()),
 		SLOT(saveCurrentPreset()));
@@ -766,15 +784,24 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 	m_ui.HWMeterCheckBox->setChecked(preset.bHWMeter);
 	m_ui.IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
 	m_ui.PrioritySpinBox->setValue(preset.iPriority);
+	const QString& sDefName = tr(g_pszDefName);
 	setComboBoxCurrentText(m_ui.FramesComboBox,
-		QString::number(preset.iFrames));
+		preset.iFrames > 0
+			? QString::number(preset.iFrames)
+			: sDefName);
 	setComboBoxCurrentText(m_ui.SampleRateComboBox,
-		QString::number(preset.iSampleRate));
+		preset.iSampleRate > 0
+			? QString::number(preset.iSampleRate)
+			: sDefName);
 	m_ui.PeriodsSpinBox->setValue(preset.iPeriods);
 	setComboBoxCurrentText(m_ui.WordLengthComboBox,
-		QString::number(preset.iWordLength));
+		preset.iWordLength > 0 && preset.iWordLength != 16
+			? QString::number(preset.iWordLength)
+			: sDefName);
 	setComboBoxCurrentText(m_ui.WaitComboBox,
-	QString::number(preset.iWait));
+		preset.iWait > 0 &&	preset.iWait != 21333
+			? QString::number(preset.iWait)
+			: sDefName);
 	m_ui.ChanSpinBox->setValue(preset.iChan);
 	setComboBoxCurrentText(m_ui.DriverComboBox, preset.sDriver);
 	setComboBoxCurrentText(m_ui.InterfaceComboBox,
@@ -784,7 +811,9 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 	m_ui.AudioComboBox->setCurrentIndex(preset.iAudio);
 	m_ui.DitherComboBox->setCurrentIndex(preset.iDither);
 	setComboBoxCurrentText(m_ui.TimeoutComboBox,
-		QString::number(preset.iTimeout));
+		preset.iTimeout > 0 && preset.iTimeout != 500
+			? QString::number(preset.iTimeout)
+			: sDefName);
 	setComboBoxCurrentData(m_ui.ClockSourceComboBox,
 		uint(preset.uClockSource));
 	setComboBoxCurrentText(m_ui.InDeviceComboBox,
@@ -805,7 +834,9 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 		QVariant::fromValue<uchar> (preset.ucSelfConnectMode));
 	m_ui.VerboseCheckBox->setChecked(preset.bVerbose);
 	setComboBoxCurrentText(m_ui.PortMaxComboBox,
-		QString::number(preset.iPortMax));
+		preset.iPortMax > 0 && preset.iPortMax != 256
+			? QString::number(preset.iPortMax)
+			: sDefName);
 #ifdef CONFIG_JACK_MIDI
 	setComboBoxCurrentText(m_ui.MidiDriverComboBox,
 		preset.sMidiDriver);
@@ -994,6 +1025,16 @@ void qjackctlSetupForm::changeCurrentPreset ( const QString& sPreset )
 	changePreset(sPreset);
 	optionsChanged();
 }
+
+
+void qjackctlSetupForm::clearCurrentPreset (void)
+{
+	// Clear current settings...
+	qjackctlPreset preset;
+	setCurrentPreset(preset);
+	settingsChanged();
+}
+
 
 void qjackctlSetupForm::saveCurrentPreset (void)
 {

@@ -4,6 +4,18 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Add Clear preset button to Setup dialog (refactored
+  from an original patch by kmatheussen #113)
+
+- Use default values for most preset parameters: sample
+  rate, frames/period (aka. buffer-size), periods/buffer,
+  realtime priority, port maximum, client timeout, word
+  length, wait time, channel maximum (refactored from an
+  original patch by kmatheussen #112)
+
+
 0.9.0  2020-12-17  A Winter'20 Release.
 
 - List only available backend drivers when JACK D-BUS

@@ -96,6 +96,22 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="PresetClearPushButton">
+           <property name="toolTip">
+            <string>Clear settings of current preset name</string>
+           </property>
+           <property name="text">
+            <string>Clea&amp;r</string>
+           </property>
+           <property name="icon">
+            <iconset resource="qjackctl.qrc">:/images/clear1.png</iconset>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="PresetSavePushButton">
            <property name="toolTip">
             <string>Save settings as current preset name</string>
@@ -597,10 +613,13 @@
                 <string>Number of periods in the hardware buffer</string>
                </property>
                <property name="minimum">
-                <number>2</number>
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>999</number>
+               </property>
+               <property name="value">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -1064,9 +1083,6 @@
                <property name="toolTip">
                 <string>Scheduler priority when running realtime</string>
                </property>
-               <property name="specialValueText">
-                <string>(default)</string>
-               </property>
                <property name="singleStep">
                 <number>1</number>
                </property>
@@ -1074,7 +1090,7 @@
                 <number>5</number>
                </property>
                <property name="maximum">
-                <number>99</number>
+                <number>95</number>
                </property>
               </widget>
              </item>
@@ -1107,9 +1123,6 @@
                  <weight>50</weight>
                  <bold>false</bold>
                 </font>
-               </property>
-               <property name="acceptDrops">
-                <bool>false</bool>
                </property>
                <property name="toolTip">
                 <string>Word length</string>
@@ -1165,9 +1178,6 @@
                  <bold>false</bold>
                 </font>
                </property>
-               <property name="acceptDrops">
-                <bool>false</bool>
-               </property>
                <property name="toolTip">
                 <string>Number of microseconds to wait between engine processes (dummy)</string>
                </property>
@@ -1217,9 +1227,6 @@
                <property name="toolTip">
                 <string>Maximum number of audio channels to allocate</string>
                </property>
-               <property name="specialValueText">
-                <string>(default)</string>
-               </property>
                <property name="maximum">
                 <number>999</number>
                </property>
@@ -1268,7 +1275,7 @@
                 <bool>true</bool>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+				<number>0</number>
                </property>
                <item>
                 <property name="text">
@@ -1330,7 +1337,7 @@
                 <bool>true</bool>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+				<number>0</number>
                </property>
                <item>
                 <property name="text">
@@ -1355,11 +1362,6 @@
                <item>
                 <property name="text">
                  <string>5000</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>10000</string>
                 </property>
                </item>
               </widget>
@@ -1710,9 +1712,6 @@
                <property name="toolTip">
                 <string>Maximum input audio hardware channels to allocate</string>
                </property>
-               <property name="specialValueText">
-                <string>(default)</string>
-               </property>
                <property name="maximum">
                 <number>999</number>
                </property>
@@ -1740,9 +1739,6 @@
                </property>
                <property name="toolTip">
                 <string>Maximum output audio hardware channels to allocate</string>
-               </property>
-               <property name="specialValueText">
-                <string>(default)</string>
                </property>
                <property name="maximum">
                 <number>999</number>
@@ -1794,9 +1790,6 @@
                <property name="toolTip">
                 <string>External input latency (frames)</string>
                </property>
-               <property name="specialValueText">
-                <string>(default)</string>
-               </property>
                <property name="maximum">
                 <number>9999999</number>
                </property>
@@ -1824,9 +1817,6 @@
                </property>
                <property name="toolTip">
                 <string>External output latency (frames)</string>
-               </property>
-               <property name="specialValueText">
-                <string>(default)</string>
                </property>
                <property name="maximum">
                 <number>9999999</number>
@@ -4209,6 +4199,7 @@
  <tabstops>
   <tabstop>SetupTabWidget</tabstop>
   <tabstop>PresetComboBox</tabstop>
+  <tabstop>PresetClearPushButton</tabstop>
   <tabstop>PresetSavePushButton</tabstop>
   <tabstop>PresetDeletePushButton</tabstop>
   <tabstop>SettingsTabWidget</tabstop>

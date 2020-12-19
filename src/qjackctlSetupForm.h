@@ -54,6 +54,7 @@ public:
 protected slots:
 
 	void changeCurrentPreset(const QString&);
+	void clearCurrentPreset();
 	void saveCurrentPreset();
 	void deleteCurrentPreset();
 

@@ -47,6 +47,13 @@ class QSplitter;
 // Server settings preset struct.
 struct qjackctlPreset
 {
+	qjackctlPreset() { clear(); }
+
+	void clear();
+	void load(QSettings& settings, const QString& sSuffix);
+	void save(QSettings& settings, const QString& sSuffix);
+	void fixup();
+
 	QString sServerPrefix;
 	QString sServerName;
 	bool    bRealtime;
