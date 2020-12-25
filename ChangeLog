@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Customize the Graph zoom slider widget to reset upon
+  mouse middle-button click.
+
 - Add Clear preset button to Setup dialog (refactored
   from an original patch by kmatheussen #113)
 

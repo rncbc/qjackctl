@@ -1296,8 +1296,8 @@ void qjackctlGraphCanvas::setZoom ( qreal zoom )
 	if (zoom < 0.1)
 		zoom = 0.1;
 	else
-	if (zoom > 2.0)
-		zoom = 2.0;
+	if (zoom > 1.9)
+		zoom = 1.9;
 
 	const qreal scale = zoom / m_zoom;
 	QGraphicsView::scale(scale, scale);

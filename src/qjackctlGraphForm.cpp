@@ -53,6 +53,35 @@
 
 
 //----------------------------------------------------------------------------
+// qjackctlGraphZoomSlider -- Custom slider widget.
+
+#include <QMouseEvent>
+
+class qjackctlGraphZoomSlider : public QSlider
+{
+public:
+
+	qjackctlGraphZoomSlider() : QSlider(Qt::Horizontal)
+	{
+		QSlider::setMinimum(10);
+		QSlider::setMaximum(190);
+		QSlider::setTickInterval(90);
+		QSlider::setTickPosition(QSlider::TicksBothSides);
+	}
+
+protected:
+
+	void mousePressEvent(QMouseEvent *ev)
+	{
+		QSlider::mousePressEvent(ev);
+
+		if (ev->button() == Qt::MiddleButton)
+			QSlider::setValue(100);
+	}
+};
+
+
+//----------------------------------------------------------------------------
 // qjackctlGraphForm -- UI wrapper form.
 
 // Constructor.
@@ -104,12 +133,8 @@ qjackctlGraphForm::qjackctlGraphForm (
 	zoom_out->setFixedSize(22, 22);
 	zoom_layout->addWidget(zoom_out);
 
-	m_zoom_slider = new QSlider(Qt::Horizontal);
+	m_zoom_slider = new qjackctlGraphZoomSlider();
 	m_zoom_slider->setFixedHeight(22);
-	m_zoom_slider->setMinimum(10);
-	m_zoom_slider->setMaximum(200);
-	m_zoom_slider->setTickInterval(100);
-	m_zoom_slider->setTickPosition(QSlider::TicksBothSides);
 	zoom_layout->addWidget(m_zoom_slider);
 
 	QToolButton *zoom_in = new QToolButton();
@@ -754,7 +779,7 @@ void qjackctlGraphForm::stabilize (void)
 #endif
 	const qreal zoom = canvas->zoom();
 	m_ui.viewCenterAction->setEnabled(is_contained);
-	m_ui.viewZoomInAction->setEnabled(zoom < 2.0);
+	m_ui.viewZoomInAction->setEnabled(zoom < 1.9);
 	m_ui.viewZoomOutAction->setEnabled(zoom > 0.1);
 	m_ui.viewZoomFitAction->setEnabled(is_contained);
 	m_ui.viewZoomResetAction->setEnabled(zoom != 1.0);
