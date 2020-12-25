@@ -964,13 +964,17 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 	const QPointF pos1 = (is_out0 ? pos0 : pos);
 	const QPointF pos4 = (is_out0 ? pos : pos0);
 
+	const qreal d2 = (is_out0 ? +2.0 : -2.0);
+	const QPointF pos1_2(pos1.x() + d2, pos1.y());
+	const QPointF pos3_4(pos4.x() - d2, pos4.y());
+
 	qjackctlGraphNode *node1 = m_port1->portNode();
 	const QRectF& rect1 = node1->boundingRect();
-	const qreal dx = pos4.x() - pos1.x();
+	const qreal dx = pos3_4.x() - pos1_2.x();
 	const qreal dy = pos0.y() - node1->scenePos().y() - 0.5 * rect1.height();
 	const qreal y_max = rect1.height() + rect1.width();
 	const qreal y_min = qMin(y_max, qAbs(dx));
-	const qreal x_offset = (dx > 0.0 ? 0.5 : 1.0) * y_min;
+	const qreal x_offset = (dx > 0.0 ? 0.5 : 1.5) * y_min;
 	const qreal y_offset = (dx > 0.0 ? 0.0 : (dy > 0.0 ? +y_min : -y_min));
 
 	const QPointF pos2(pos1.x() + x_offset, pos1.y() + y_offset);
@@ -978,10 +982,14 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 
 	QPainterPath path;
 	path.moveTo(pos1);
-	path.cubicTo(pos2, pos3, pos4);
+	path.lineTo(pos1_2);
+	path.cubicTo(pos2, pos3, pos3_4);
+	path.lineTo(pos4);
 	const qreal arrow_angle = path.angleAtPercent(0.5) * M_PI / 180.0;
 	const QPointF arrow_pos0 = path.pointAtPercent(0.5);
-	path.cubicTo(pos3, pos2, pos1);
+	path.lineTo(pos3_4);
+	path.cubicTo(pos3, pos2, pos1_2);
+	path.lineTo(pos1);
 	const qreal arrow_size = 12.0;
 	QVector<QPointF> arrow;
 	arrow.append(arrow_pos0);

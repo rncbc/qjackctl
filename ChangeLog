@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Add a little but straight horizontal line-gap to the
+  Graph connections.
+
 - Customize the Graph zoom slider widget to reset upon
   mouse middle-button click.
 
