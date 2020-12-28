@@ -173,12 +173,12 @@
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="93"/>
         <source>Using: Qt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Používající: Qt %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="99"/>
         <source>JACK %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="103"/>
@@ -1889,7 +1889,11 @@ Další informace hledejte, prosím, v okně s hlášením.</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: Získat omezení parametru
+GetParameterConstraint(&apos;%1&apos;):
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4049"/>
