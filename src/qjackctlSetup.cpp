@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -566,10 +566,9 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
 		if (iPreset < 0)
 			return false;
 		presets.removeAt(iPreset);
+		m_settings.remove("/Settings" + sSuffix);
+		m_settings.remove("/Aliases" + sSuffix);
 	}
-
-	m_settings.remove("/Settings" + sSuffix);
-	m_settings.remove("/Aliases" + sSuffix);
 
 	return true;
 }
