@@ -608,6 +608,9 @@ private:
 	// Original node position (for move command).
 	QPointF m_pos1;
 
+	// Make current node is always-on-top.
+	qreal m_zvalue;
+
 	// Client/port aliases database.
 	qjackctlAliases *m_aliases;
 };
