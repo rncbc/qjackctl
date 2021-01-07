@@ -103,10 +103,31 @@ bool qjackctlGraphItem::isMarked (void) const
 }
 
 
+// Highlighted item z-value (dynamic always-on-top).
+qreal qjackctlGraphItem::g_zvalue = 0.0;
+
 // Highlighting methods.
 void qjackctlGraphItem::setHighlight ( bool hilite )
 {
 	m_hilite = hilite;
+
+	if (m_hilite) {
+		switch (type()) {
+		case  qjackctlGraphPort::Type: {
+			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (this);
+			if (port) {
+				qjackctlGraphNode *node = port->portNode();
+				if (node)
+					node->setZValue(g_zvalue += 0.002);
+			}
+			break;
+		}
+		case qjackctlGraphConnect::Type:
+		default:
+			setZValue(g_zvalue += 0.001);
+			break;
+		}
+	}
 
 	QGraphicsPathItem::update();
 }
@@ -1109,7 +1130,7 @@ static const char *CanvasZoomKey = "/CanvasZoom";
 
 static const char *NodePosGroup  = "/GraphNodePos";
 
-static const char *ColorsGroup      = "/GraphColors";
+static const char *ColorsGroup   = "/GraphColors";
 
 
 // Constructor.
@@ -1119,7 +1140,7 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 		m_zoom(1.0), m_zoomrange(false),
 		m_commands(nullptr), m_settings(nullptr),
 		m_selected_nodes(0), m_edit_item(nullptr),
-		m_editor(nullptr), m_edited(0), m_zvalue(0.0),
+		m_editor(nullptr), m_edited(0),
 		m_aliases(nullptr)
 {
 	m_scene = new QGraphicsScene();
@@ -1451,11 +1472,8 @@ void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 	m_pos = QGraphicsView::mapToScene(event->pos());
 
 	qjackctlGraphItem *item = itemAt(m_pos);
-	if (item && item->type() >= QGraphicsItem::UserType) {
+	if (item && item->type() >= QGraphicsItem::UserType)
 		m_item = static_cast<qjackctlGraphItem *> (item);
-		if (m_item && m_item->type() == qjackctlGraphNode::Type)
-			m_item->setZValue(m_zvalue += 0.01);
-	}
 
 	if (event->button() == Qt::LeftButton)
 		m_state = DragStart;

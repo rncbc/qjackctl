@@ -139,6 +139,9 @@ private:
 
 	bool m_marked;
 	bool m_hilite;
+
+	// Highlighted item z-value (dynamic always-on-top).
+	static qreal g_zvalue;
 };
 
 
@@ -607,9 +610,6 @@ private:
 
 	// Original node position (for move command).
 	QPointF m_pos1;
-
-	// Make current node is always-on-top.
-	qreal m_zvalue;
 
 	// Client/port aliases database.
 	qjackctlAliases *m_aliases;
