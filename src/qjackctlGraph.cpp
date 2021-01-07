@@ -103,31 +103,13 @@ bool qjackctlGraphItem::isMarked (void) const
 }
 
 
-// Highlighted item z-value (dynamic always-on-top).
-qreal qjackctlGraphItem::g_zvalue = 0.0;
-
 // Highlighting methods.
 void qjackctlGraphItem::setHighlight ( bool hilite )
 {
 	m_hilite = hilite;
 
-	if (m_hilite) {
-		switch (type()) {
-		case  qjackctlGraphPort::Type: {
-			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (this);
-			if (port) {
-				qjackctlGraphNode *node = port->portNode();
-				if (node)
-					node->setZValue(g_zvalue += 0.002);
-			}
-			break;
-		}
-		case qjackctlGraphConnect::Type:
-		default:
-			setZValue(g_zvalue += 0.001);
-			break;
-		}
-	}
+	if (m_hilite)
+		raise();
 
 	QGraphicsPathItem::update();
 }
@@ -136,6 +118,29 @@ void qjackctlGraphItem::setHighlight ( bool hilite )
 bool qjackctlGraphItem::isHighlight (void) const
 {
 	return m_hilite;
+}
+
+
+// Raise item z-value (dynamic always-on-top).
+void qjackctlGraphItem::raise (void)
+{
+	static qreal s_zvalue = 0.0;
+
+	switch (type()) {
+	case  qjackctlGraphPort::Type: {
+		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (this);
+		if (port) {
+			qjackctlGraphNode *node = port->portNode();
+			if (node)
+				node->setZValue(s_zvalue += 0.002);
+		}
+		break;
+	}
+	case qjackctlGraphConnect::Type:
+	default:
+		setZValue(s_zvalue += 0.001);
+		break;
+	}
 }
 
 
@@ -618,6 +623,8 @@ qjackctlGraphNode::qjackctlGraphNode (
 	effect->setBlurRadius(is_darkest ? 8 : 16);
 	effect->setOffset(is_darkest ? 0 : 2);
 	QGraphicsPathItem::setGraphicsEffect(effect);
+
+	qjackctlGraphItem::raise();
 }
 
 
@@ -917,6 +924,8 @@ qjackctlGraphConnect::qjackctlGraphConnect (void)
 	QGraphicsPathItem::setGraphicsEffect(effect);
 
 	QGraphicsPathItem::setAcceptHoverEvents(true);
+
+	qjackctlGraphItem::raise();
 }
 
 

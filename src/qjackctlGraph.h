@@ -83,6 +83,9 @@ public:
 	void setHighlight(bool hilite);
 	bool isHighlight() const;
 
+	// Raise item z-value (dynamic always-on-top).
+	void raise();
+
 	// Item modes.
 	enum Mode { None = 0,
 		Input = 1, Output = 2,
@@ -139,9 +142,6 @@ private:
 
 	bool m_marked;
 	bool m_hilite;
-
-	// Highlighted item z-value (dynamic always-on-top).
-	static qreal g_zvalue;
 };
 
 

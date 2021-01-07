@@ -6,8 +6,8 @@ ChangeLog
 
 GIT HEAD
 
-- Graph items are automatically moved to top when high-
-  lighted (dynamic z-value). (EXPERIMENTAL)
+- Graph items are automatically raised when created or
+  high-lighted (incremental z-value). (EXPERIMENTAL)
 
 - Add a little but straight horizontal line-gap to the
   Graph connections.
