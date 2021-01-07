@@ -1,7 +1,7 @@
 // qjackctlGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -69,12 +69,12 @@ bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 	qjackctlGraphNode *node1
 		= canvas->findNode(
 			m_item.addr1.node_name,
-			qjackctlGraphItem::Duplex,
+			qjackctlGraphItem::Output,
 			m_item.addr1.node_type);
 	if (node1 == nullptr)
 		node1 = canvas->findNode(
 			m_item.addr1.node_name,
-			qjackctlGraphItem::Output,
+			qjackctlGraphItem::Duplex,
 			m_item.addr1.node_type);
 	if (node1 == nullptr)
 		return false;
@@ -90,12 +90,12 @@ bool qjackctlGraphConnectCommand::execute ( bool is_undo )
 	qjackctlGraphNode *node2
 		= canvas->findNode(
 			m_item.addr2.node_name,
-			qjackctlGraphItem::Duplex,
+			qjackctlGraphItem::Input,
 			m_item.addr2.node_type);
 	if (node2 == nullptr)
 		node2 = canvas->findNode(
 			m_item.addr2.node_name,
-			qjackctlGraphItem::Input,
+			qjackctlGraphItem::Duplex,
 			m_item.addr2.node_type);
 	if (node2 == nullptr)
 		return false;
