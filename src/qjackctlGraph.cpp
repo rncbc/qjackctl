@@ -128,6 +128,7 @@ void qjackctlGraphItem::raise (void)
 
 	switch (type()) {
 	case  qjackctlGraphPort::Type: {
+		QGraphicsPathItem::setZValue(s_zvalue += 0.003);
 		qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (this);
 		if (port) {
 			qjackctlGraphNode *node = port->portNode();
@@ -138,7 +139,7 @@ void qjackctlGraphItem::raise (void)
 	}
 	case qjackctlGraphConnect::Type:
 	default:
-		setZValue(s_zvalue += 0.001);
+		QGraphicsPathItem::setZValue(s_zvalue += 0.001);
 		break;
 	}
 }
@@ -168,7 +169,7 @@ qjackctlGraphPort::qjackctlGraphPort ( qjackctlGraphNode *node,
 		m_name(name), m_mode(mode), m_type(type), m_index(0),
 		m_selectx(0), m_hilitex(0)
 {
-	QGraphicsPathItem::setZValue(+1);
+	QGraphicsPathItem::setZValue(+1.0);
 
 	const QPalette pal;
 	setForeground(pal.buttonText().color());
@@ -586,7 +587,7 @@ qjackctlGraphNode::qjackctlGraphNode (
 	: qjackctlGraphItem(nullptr),
 		m_name(name), m_mode(mode), m_type(type)
 {
-	QGraphicsPathItem::setZValue(0);
+	QGraphicsPathItem::setZValue(0.0);
 
 	const QPalette pal;
 	const int base_value = pal.base().color().value();
@@ -906,7 +907,7 @@ QRectF qjackctlGraphNode::editorRect (void) const
 qjackctlGraphConnect::qjackctlGraphConnect (void)
 	: qjackctlGraphItem(nullptr), m_port1(nullptr), m_port2(nullptr)
 {
-	QGraphicsPathItem::setZValue(-1);
+	QGraphicsPathItem::setZValue(-1.0);
 
 	QGraphicsPathItem::setFlag(QGraphicsItem::ItemIsSelectable);
 
@@ -1519,6 +1520,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 						m_connect = new qjackctlGraphConnect();
 						m_connect->setPort1(port);
 						m_connect->setSelected(true);
+						m_connect->setZValue(-1.0);
 						m_scene->addItem(m_connect);
 						m_item = nullptr;
 						++m_selected_nodes;
