@@ -228,6 +228,8 @@ private:
 				if (PortAudioProber::names.isEmpty()) {
 					for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
 						PaDeviceInfo *pDeviceInfo = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
+						if (strcmp(pDeviceInfo->name, "JackRouter") == 0)
+							continue;
 #ifdef WIN32
 						MultiByteToWideChar(CP_UTF8, 0, pDeviceInfo->name, -1, wideDeviceName, MAX_PATH-1);
 						const QString sName = hostNames[pDeviceInfo->hostApi] + "::" + QString::fromWCharArray(wideDeviceName);
