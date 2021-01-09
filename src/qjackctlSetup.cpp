@@ -80,6 +80,12 @@ void qjackctlSetup::loadSetup (void)
 	}
 	m_settings.endGroup();
 
+#ifdef __APPLE__
+	// alternative custom defaults, as the mac theme does not look good with our custom widgets
+	sCustomColorTheme = "KXStudio";
+	sCustomStyleTheme = "Fusion";
+#endif
+
 	m_settings.beginGroup("/Options");
 	bSingleton               = m_settings.value("/Singleton", true).toBool();
 //	sServerName              = m_settings.value("/ServerName").toString();
@@ -110,8 +116,8 @@ void qjackctlSetup::loadSetup (void)
 	sDisplayFont2            = m_settings.value("/DisplayFont2").toString();
 	bDisplayEffect           = m_settings.value("/DisplayEffect", true).toBool();
 	bDisplayBlink            = m_settings.value("/DisplayBlink", true).toBool();
-	sCustomColorTheme        = m_settings.value("/CustomColorTheme").toString();
-	sCustomStyleTheme        = m_settings.value("/CustomStyleTheme").toString();
+	sCustomColorTheme        = m_settings.value("/CustomColorTheme", sCustomColorTheme).toString();
+	sCustomStyleTheme        = m_settings.value("/CustomStyleTheme", sCustomStyleTheme).toString();
 	iJackClientPortAlias     = m_settings.value("/JackClientPortAlias", 0).toInt();
 	bJackClientPortMetadata  = m_settings.value("/JackClientPortMetadata", false).toBool();
 	iConnectionsIconSize     = m_settings.value("/ConnectionsIconSize", QJACKCTL_ICON_16X16).toInt();

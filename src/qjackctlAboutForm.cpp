@@ -68,12 +68,12 @@ qjackctlAboutForm::qjackctlAboutForm ( QWidget *pParent )
 	list << tr("JACK Session support disabled.");
 #endif
 #ifndef CONFIG_ALSA_SEQ
-#if !defined(__WIN32__) && !defined(_WIN32) && !defined(WIN32)
+#if !defined(__WIN32__) && !defined(_WIN32) && !defined(WIN32) && !defined(__APPLE__)
 	list << tr("ALSA/MIDI sequencer support disabled.");
 #endif
 #endif
 #ifndef CONFIG_DBUS
-#if !defined(__WIN32__) && !defined(_WIN32) && !defined(WIN32)
+#if !defined(__WIN32__) && !defined(_WIN32) && !defined(WIN32) && !defined(__APPLE__)
 	list << tr("D-Bus interface support disabled.");
 #endif
 #endif

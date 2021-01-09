@@ -584,6 +584,26 @@ qjackctlMainForm::qjackctlMainForm (
 	QObject::connect(m_ui.ForwardToolButton,
 		SIGNAL(clicked()),
 		SLOT(transportForward()));
+
+#ifdef __APPLE__
+	// Setup macOS menu bar
+	QMenuBar* const menuBar = new QMenuBar(nullptr);
+	menuBar->setNativeMenuBar(true);
+
+	QMenu* const menu = menuBar->addMenu("QjackCtl");
+
+	QAction* const actQuit = menu->addAction(tr("&Quit"));
+	actQuit->setMenuRole(QAction::QuitRole);
+	QObject::connect(actQuit, SIGNAL(triggered()), SLOT(quitMainForm()));
+
+	QAction* const actPreferences = menu->addAction(tr("Set&up..."));
+	actPreferences->setMenuRole(QAction::PreferencesRole);
+	QObject::connect(actPreferences, SIGNAL(triggered()), SLOT(showSetupForm()));
+
+	QAction* const actAbout = menu->addAction(tr("Ab&out..."));
+	actAbout->setMenuRole(QAction::AboutRole);
+	QObject::connect(actAbout, SIGNAL(triggered()), SLOT(showAboutForm()));
+#endif
 }
 
 
@@ -905,6 +925,11 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
 	// Register the first timer slot.
 	QTimer::singleShot(QJACKCTL_TIMER_MSECS, this, SLOT(timerSlot()));
+
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__APPLE__)
+	// increazing height make UI look ugly and it is not really useful
+	setFixedHeight(height());
+#endif
 
 	// We're ready to go...
 	return true;
