@@ -127,6 +127,29 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_iDirtySettings = 0;
 	m_iDirtyOptions = 0;
 
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__APPLE__)
+	// Remove useless drivers for some systems
+	for (int i = m_ui.DriverComboBox->count(); --i >= 0;)
+	{
+		const QString itemText = m_ui.DriverComboBox->itemText(i);
+		if (itemText == "dummy")
+			continue;
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+		if (itemText == "portaudio")
+			continue;
+#endif
+#ifdef __APPLE__
+		if (itemText == "coreaudio")
+			continue;
+#endif
+		if (itemText == "net")
+			continue;
+		if (itemText == "netone")
+			continue;
+		m_ui.DriverComboBox->removeItem(i);
+	}
+#endif
+
 	// Save original hard-coded driver names, only really
 	// useful when (changing (dis)enabling JACK D-BUS...
 	m_drivers.clear();
