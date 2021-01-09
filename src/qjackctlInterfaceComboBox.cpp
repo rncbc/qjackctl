@@ -47,6 +47,9 @@
 #include <iostream>
 #include <cstring>
 #include <portaudio.h>
+#ifdef WIN32
+#include <windows.h>
+#endif
 #endif
 
 #ifdef CONFIG_ALSA_SEQ
@@ -218,11 +221,21 @@ private:
 			const PaDeviceIndex iNumDevice = Pa_GetDeviceCount();
 
 			{
+#ifdef WIN32
+				wchar_t wideDeviceName[MAX_PATH];
+#endif
 				QMutexLocker locker(&PortAudioProber::mutex);
 				if (PortAudioProber::names.isEmpty()) {
 					for (PaDeviceIndex i = 0; i < iNumDevice; ++i) {
 						PaDeviceInfo *pDeviceInfo = const_cast<PaDeviceInfo *> (Pa_GetDeviceInfo(i));
+						if (strcmp(pDeviceInfo->name, "JackRouter") == 0)
+							continue;
+#ifdef WIN32
+						MultiByteToWideChar(CP_UTF8, 0, pDeviceInfo->name, -1, wideDeviceName, MAX_PATH-1);
+						const QString sName = hostNames[pDeviceInfo->hostApi] + "::" + QString::fromWCharArray(wideDeviceName);
+#else
 						const QString sName = hostNames[pDeviceInfo->hostApi] + "::" + QString(pDeviceInfo->name);
+#endif
 						PortAudioProber::names.push_back(sName);
 					}
 				}
