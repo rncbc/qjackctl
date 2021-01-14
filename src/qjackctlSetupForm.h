@@ -47,7 +47,6 @@ public:
 	~qjackctlSetupForm();
 
 	void setup(qjackctlSetup *pSetup);
-	void updateCurrentPreset(const qjackctlPreset& preset);
 	void updateCurrentPreset();
 	bool queryClose();
 

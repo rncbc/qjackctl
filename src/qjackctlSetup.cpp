@@ -41,12 +41,24 @@
 #endif
 
 
+// Default (translated) preset name.
+QString qjackctlSetup::g_sDefName;
+
+// Default (translated) preset name. (static)
+const QString& qjackctlSetup::defName (void)
+{
+	if (g_sDefName.isEmpty())
+		g_sDefName = QObject::tr("(default)");
+
+	return g_sDefName;
+}
+
+
 // Constructor.
 qjackctlSetup::qjackctlSetup (void)
 	: m_settings(QJACKCTL_DOMAIN, QJACKCTL_TITLE)
 {
 	bStartJackCmd = false;
-	sDefPresetName = QObject::tr("(default)");
 
 	loadSetup();
 }
@@ -69,7 +81,7 @@ QSettings& qjackctlSetup::settings (void)
 void qjackctlSetup::loadSetup (void)
 {
 	m_settings.beginGroup("/Presets");
-	sDefPreset = m_settings.value("/DefPreset", sDefPresetName).toString();
+	sDefPreset = m_settings.value("/DefPreset", defName()).toString();
 	QString sPrefix = "/Preset%1";
 	int i = 0;
 	for (;;) {
@@ -302,7 +314,7 @@ bool qjackctlSetup::loadAliases (void)
 	QString sPreset = sDefPreset;
 
 	QString sSuffix;
-	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+	if (sPreset != defName() && !sPreset.isEmpty()) {
 		sSuffix = '/' + sPreset;
 		// Check if on list.
 		if (!presets.contains(sPreset))
@@ -337,7 +349,7 @@ bool qjackctlSetup::saveAliases (void)
 	const QString& sPreset = aliases.key;
 
 	QString sSuffix;
-	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+	if (sPreset != defName() && !sPreset.isEmpty()) {
 		sSuffix = "/" + sPreset;
 		// Append to list if not already.
 		if (!presets.contains(sPreset))
@@ -538,7 +550,7 @@ void qjackctlPreset::fixup (void)
 bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset )
 {
 	QString sSuffix;
-	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+	if (sPreset != defName() && !sPreset.isEmpty()) {
 		sSuffix = '/' + sPreset;
 		// Check if on list.
 		if (!presets.contains(sPreset))
@@ -552,7 +564,7 @@ bool qjackctlSetup::loadPreset ( qjackctlPreset& preset, const QString& sPreset 
 bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset )
 {
 	QString sSuffix;
-	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+	if (sPreset != defName() && !sPreset.isEmpty()) {
 		sSuffix = '/' + sPreset;
 		// Append to list if not already.
 		if (!presets.contains(sPreset))
@@ -566,7 +578,7 @@ bool qjackctlSetup::savePreset ( qjackctlPreset& preset, const QString& sPreset 
 bool qjackctlSetup::deletePreset ( const QString& sPreset )
 {
 	QString sSuffix;
-	if (sPreset != sDefPresetName && !sPreset.isEmpty()) {
+	if (sPreset != defName() && !sPreset.isEmpty()) {
 		sSuffix = '/' + sPreset;
 		const int iPreset = presets.indexOf(sPreset);
 		if (iPreset < 0)

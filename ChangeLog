@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Warning to confirm application close is now back in
+  business when functioning as client only (Active).
+  (EXPERIMENTAL)
+
 - Always keep the main window to a minimum fixed size.
   (EXPERIMENTAL)
 

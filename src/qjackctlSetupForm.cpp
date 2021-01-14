@@ -1,4 +1,4 @@
-// qjackctlSetupForm.cpp
+﻿// qjackctlSetupForm.cpp
 //
 /****************************************************************************
    Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
@@ -64,10 +64,6 @@
 #endif
 
 
-// Default (empty/blank) name.
-static const char *g_pszDefName = QT_TRANSLATE_NOOP("qjackctlSetupForm", "(default)");
-
-
 //----------------------------------------------------------------------------
 // qjackctlSetupForm -- UI wrapper form.
 
@@ -95,7 +91,7 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_pTimeDisplayButtonGroup->setExclusive(true);
 
 	// Setup clock-source combo-box.
-	const QString& sDefName = tr(g_pszDefName);
+	const QString& sDefName = qjackctlSetup::defName();
 	m_ui.ClockSourceComboBox->clear();
 	m_ui.ClockSourceComboBox->addItem(sDefName, uint(0));
 	m_ui.ClockSourceComboBox->addItem(tr("System"), uint('s'));
@@ -612,12 +608,13 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	m_pSetup->loadComboBoxHistory(m_ui.MessagesLogPathComboBox);
 	m_pSetup->loadComboBoxHistory(m_ui.ServerConfigNameComboBox);
 
+	const QString& sDefName = qjackctlSetup::defName();
 	m_ui.InterfaceComboBox->setup(
-		m_ui.DriverComboBox, QJACKCTL_DUPLEX, m_pSetup->sDefPresetName);
+		m_ui.DriverComboBox, QJACKCTL_DUPLEX, sDefName);
 	m_ui.InDeviceComboBox->setup(
-		m_ui.DriverComboBox, QJACKCTL_CAPTURE, m_pSetup->sDefPresetName);
+		m_ui.DriverComboBox, QJACKCTL_CAPTURE, sDefName);
 	m_ui.OutDeviceComboBox->setup(
-		m_ui.DriverComboBox, QJACKCTL_PLAYBACK, m_pSetup->sDefPresetName);
+		m_ui.DriverComboBox, QJACKCTL_PLAYBACK, sDefName);
 
 	// Load Options...
 	m_ui.StartupScriptCheckBox->setChecked(m_pSetup->bStartupScript);
@@ -792,12 +789,13 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 // Set form widgets from preset values...
 void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 {
+	const QString& sDefName = qjackctlSetup::defName();
 	setComboBoxCurrentText(m_ui.ServerPrefixComboBox,
 		preset.sServerPrefix);
 	setComboBoxCurrentText(m_ui.ServerNameComboBox,
 		preset.sServerName.isEmpty()
-		? m_pSetup->sDefPresetName
-		: preset.sServerName);
+			? sDefName
+			: preset.sServerName);
 	m_ui.RealtimeCheckBox->setChecked(preset.bRealtime);
 	m_ui.SoftModeCheckBox->setChecked(preset.bSoftMode);
 	m_ui.MonitorCheckBox->setChecked(preset.bMonitor);
@@ -807,7 +805,6 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 	m_ui.HWMeterCheckBox->setChecked(preset.bHWMeter);
 	m_ui.IgnoreHWCheckBox->setChecked(preset.bIgnoreHW);
 	m_ui.PrioritySpinBox->setValue(preset.iPriority);
-	const QString& sDefName = tr(g_pszDefName);
 	setComboBoxCurrentText(m_ui.FramesComboBox,
 		preset.iFrames > 0
 			? QString::number(preset.iFrames)
@@ -829,7 +826,7 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 	setComboBoxCurrentText(m_ui.DriverComboBox, preset.sDriver);
 	setComboBoxCurrentText(m_ui.InterfaceComboBox,
 		preset.sInterface.isEmpty()
-			? m_pSetup->sDefPresetName
+			? sDefName
 			: preset.sInterface);
 	m_ui.AudioComboBox->setCurrentIndex(preset.iAudio);
 	m_ui.DitherComboBox->setCurrentIndex(preset.iDither);
@@ -841,11 +838,11 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 		uint(preset.uClockSource));
 	setComboBoxCurrentText(m_ui.InDeviceComboBox,
 		preset.sInDevice.isEmpty()
-			? m_pSetup->sDefPresetName
+			? sDefName
 			: preset.sInDevice);
 	setComboBoxCurrentText(m_ui.OutDeviceComboBox,
 		preset.sOutDevice.isEmpty()
-			? m_pSetup->sDefPresetName
+			? sDefName
 			: preset.sOutDevice);
 	m_ui.InChannelsSpinBox->setValue(preset.iInChannels);
 	m_ui.OutChannelsSpinBox->setValue(preset.iOutChannels);
@@ -907,13 +904,14 @@ bool qjackctlSetupForm::getCurrentPreset ( qjackctlPreset& preset )
 	preset.sMidiDriver  = m_ui.MidiDriverComboBox->currentText();
 #endif
 	preset.sServerSuffix = m_ui.ServerSuffixComboBox->currentText();
-	if (preset.sServerName == m_pSetup->sDefPresetName)
+	const QString& sDefName = qjackctlSetup::defName();
+	if (preset.sServerName == sDefName)
 		preset.sServerName.clear();
-	if (preset.sInterface == m_pSetup->sDefPresetName)
+	if (preset.sInterface == sDefName)
 		preset.sInterface.clear();
-	if (preset.sInDevice == m_pSetup->sDefPresetName)
+	if (preset.sInDevice == sDefName)
 		preset.sInDevice.clear();
-	if (preset.sOutDevice == m_pSetup->sDefPresetName)
+	if (preset.sOutDevice == sDefName)
 		preset.sOutDevice.clear();
 
 	preset.uClockSource = 0;
@@ -939,7 +937,7 @@ void qjackctlSetupForm::changePreset ( const QString& sPreset )
 	qjackctlPreset preset;
 	if (m_pSetup->loadPreset(preset, sPreset)) {
 		setCurrentPreset(preset);
-		// Reset dirty flag?
+		// Reset dirty flags?
 		m_iDirtySettings = 0;
 		++m_iDirtyPreset;
 	}
@@ -979,23 +977,7 @@ void qjackctlSetupForm::resetPresets (void)
 {
 	m_ui.PresetComboBox->clear();
 	m_ui.PresetComboBox->addItems(m_pSetup->presets);
-	m_ui.PresetComboBox->addItem(m_pSetup->sDefPresetName);
-}
-
-
-void qjackctlSetupForm::updateCurrentPreset ( const qjackctlPreset& preset )
-{
-	// Current preset changed for sure...
-	if (m_pSetup) {
-		++m_iDirtySetup;
-		setComboBoxCurrentText(m_ui.PresetComboBox, m_pSetup->sDefPreset);
-		setCurrentPreset(preset);
-		--m_iDirtySetup;
-		// Set current preset name..
-		m_sPreset = m_ui.PresetComboBox->currentText();
-		// Set dirty flag anyway...
-		++m_iDirtySettings;
-	}
+	m_ui.PresetComboBox->addItem(qjackctlSetup::defName());
 }
 
 
@@ -1153,13 +1135,13 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 	m_ui.InDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.InDeviceComboBox->setEnabled(bEnabled);
 	if (!bEnabled)
-		setComboBoxCurrentText(m_ui.InDeviceComboBox, m_pSetup->sDefPresetName);
+		setComboBoxCurrentText(m_ui.InDeviceComboBox, qjackctlSetup::defName());
 
 	bEnabled = (bOutEnabled && (bAlsa || bSun || bOss || bPortaudio));
 	m_ui.OutDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.OutDeviceComboBox->setEnabled(bEnabled);
 	if (!bEnabled)
-		setComboBoxCurrentText(m_ui.OutDeviceComboBox, m_pSetup->sDefPresetName);
+		setComboBoxCurrentText(m_ui.OutDeviceComboBox, qjackctlSetup::defName());
 
 	m_ui.InOutChannelsTextLabel->setEnabled(bInEnabled || (bAlsa || bFirewire));
 	m_ui.InChannelsSpinBox->setEnabled(bInEnabled
@@ -1262,15 +1244,15 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	if (bEnabled && iAudio == QJACKCTL_DUPLEX) {
 		const QString& sInDevice  = m_ui.InDeviceComboBox->currentText();
 		const QString& sOutDevice = m_ui.OutDeviceComboBox->currentText();
-		bEnabled = (sInDevice.isEmpty()  || sInDevice  == m_pSetup->sDefPresetName ||
-					sOutDevice.isEmpty() || sOutDevice == m_pSetup->sDefPresetName);
+		bEnabled = (sInDevice.isEmpty()  || sInDevice  == qjackctlSetup::defName() ||
+					sOutDevice.isEmpty() || sOutDevice == qjackctlSetup::defName());
 	}
 
 	const bool bInterface = (bEnabled || bCoreaudio || bFirewire);
 	m_ui.InterfaceTextLabel->setEnabled(bInterface);
 	m_ui.InterfaceComboBox->setEnabled(bInterface);
 	if (!bInterface)
-		setComboBoxCurrentText(m_ui.InterfaceComboBox, m_pSetup->sDefPresetName);
+		setComboBoxCurrentText(m_ui.InterfaceComboBox, qjackctlSetup::defName());
 
 	m_ui.DitherTextLabel->setEnabled(bAlsa || bPortaudio);
 	m_ui.DitherComboBox->setEnabled(bAlsa || bPortaudio);
@@ -1300,7 +1282,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 	if (!sPreset.isEmpty()) {
 		const bool bPreset = (m_pSetup->presets.contains(sPreset));
 		m_ui.PresetSavePushButton->setEnabled(m_iDirtySettings > 0
-			|| (!bPreset && sPreset != m_pSetup->sDefPresetName));
+			|| (!bPreset && sPreset != qjackctlSetup::defName()));
 		m_ui.PresetDeletePushButton->setEnabled(bPreset);
 	} else {
 		m_ui.PresetSavePushButton->setEnabled(false);
@@ -1672,7 +1654,7 @@ void qjackctlSetupForm::resetCustomColorThemes (
 {
 	m_ui.CustomColorThemeComboBox->clear();
 	m_ui.CustomColorThemeComboBox->addItem(
-		tr(g_pszDefName));
+		qjackctlSetup::defName());
 	m_ui.CustomColorThemeComboBox->addItems(
 		qjackctlPaletteForm::namedPaletteList(&m_pSetup->settings()));
 
@@ -1693,7 +1675,7 @@ void qjackctlSetupForm::resetCustomStyleThemes (
 {
 	m_ui.CustomStyleThemeComboBox->clear();
 	m_ui.CustomStyleThemeComboBox->addItem(
-		tr(g_pszDefName));
+		qjackctlSetup::defName());
 	m_ui.CustomStyleThemeComboBox->addItems(QStyleFactory::keys());
 
 	int iCustomStyleTheme = 0;
@@ -2050,10 +2032,6 @@ void qjackctlSetupForm::reject (void)
 // Dialog bos button slot.
 void qjackctlSetupForm::buttonClicked ( QAbstractButton *pButton )
 {
-#ifdef CONFIG_DEBUG
-	qDebug("qjackctlSetupForm::buttonClicked(%p)", pButton);
-#endif
-
 	switch (m_ui.DialogButtonBox->buttonRole(pButton)) {
 	case QDialogButtonBox::AcceptRole:
 		accept();

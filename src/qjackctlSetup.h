@@ -115,7 +115,7 @@ public:
 	void print_usage(const QString& arg0);
 
 	// Default (translated) preset name.
-	QString sDefPresetName;
+	static const QString& defName();
 
 	// Immediate server start options.
 	bool bStartJack;
@@ -230,6 +230,9 @@ private:
 
 	// Our proper settings profile.
 	QSettings m_settings;
+
+	// Default (translated) preset name.
+	static QString g_sDefName;
 };
 
 

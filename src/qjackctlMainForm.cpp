@@ -988,9 +988,46 @@ bool qjackctlMainForm::queryClose (void)
 	}
 #endif
 
-	// Check if JACK daemon is currently running...
-	if (bQueryClose && !m_bQuitForce)
-		bQueryClose = queryCloseJack();
+	// Check if we really want to quit...
+	if (bQueryClose && !m_bQuitForce && m_pSetup->bQueryClose) {
+		show();
+		raise();
+		activateWindow();
+		updateContextMenu();
+		const QString& sTitle
+			= tr("Warning");
+		QString sText;
+		// Check if JACK daemon is currently running...
+		if (((m_pJack && m_pJack->state() == QProcess::Running)
+		#ifdef CONFIG_DBUS
+			|| (m_pDBusControl && m_bDBusStarted)
+		#endif
+		) && m_pSetup->bQueryShutdown) {
+			sText = tr("JACK is currently running.\n\n"
+				"Do you want to terminate the JACK audio server?");
+		} else {
+			sText = QJACKCTL_TITLE + ' ' + tr("is about to terminate.\n\n"
+				"Are you sure?");
+		}
+	#if 0//QJACKCTL_QUERY_CLOSE
+		bQueryClose = (QMessageBox::warning(this, sTitle, sText,
+			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
+	#else
+		QMessageBox mbox(this);
+		mbox.setIcon(QMessageBox::Warning);
+		mbox.setWindowTitle(sTitle);
+		mbox.setText(sText);
+		mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+		QCheckBox cbox(tr("Don't ask this again"));
+		cbox.setChecked(false);
+		cbox.blockSignals(true);
+		mbox.addButton(&cbox, QMessageBox::ActionRole);
+		bQueryClose = (mbox.exec() == QMessageBox::Ok);
+		if (bQueryClose && cbox.isChecked())
+			m_pSetup->bQueryClose = false;
+	#endif
+
+	}
 
 	// Try to save current aliases default settings.
 	if (bQueryClose && !m_bQuitForce)
@@ -1058,49 +1095,6 @@ bool qjackctlMainForm::queryClose (void)
 }
 
 
-// Query whether to close/stop the JACK servervice.
-bool qjackctlMainForm::queryCloseJack (void)
-{
-	bool bQueryClose = true;
-
-	if (((m_pJack && m_pJack->state() == QProcess::Running)
-	#ifdef CONFIG_DBUS
-		|| (m_pDBusControl && m_bDBusStarted)
-	#endif
-	) && (m_pSetup->bQueryClose || m_pSetup->bQueryShutdown)) {
-		show();
-		raise();
-		activateWindow();
-		updateContextMenu();
-		if (m_pSetup->bQueryClose) {
-			const QString& sTitle
-				= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
-			const QString& sText
-				= tr("JACK is currently running.\n\n"
-					"Do you want to terminate the JACK audio server?");
-		#if 0//QJACKCTL_QUERY_CLOSE
-			bQueryClose = (QMessageBox::warning(this, sTitle, sText,
-				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok);
-		#else
-			QMessageBox mbox(this);
-			mbox.setIcon(QMessageBox::Warning);
-			mbox.setWindowTitle(sTitle);
-			mbox.setText(sText);
-			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-			QCheckBox cbox(tr("Don't ask this again"));
-			cbox.setChecked(false);
-			cbox.blockSignals(true);
-			mbox.addButton(&cbox, QMessageBox::ActionRole);
-			bQueryClose = (mbox.exec() == QMessageBox::Ok);
-			if (bQueryClose && cbox.isChecked())
-				m_pSetup->bQueryClose = false;
-		#endif
-		}
-	}
-
-	return bQueryClose;
-}
-
 // Query whether current preset can be closed.
 bool qjackctlMainForm::queryClosePreset (void)
 {
@@ -1133,7 +1127,10 @@ bool qjackctlMainForm::queryClosePreset (void)
 // Query whether to restart the JACK service.
 bool qjackctlMainForm::queryRestart (void)
 {
-	bool bQueryRestart = (m_pJackClient && queryClosePreset());
+	bool bQueryRestart = (m_pJackClient && m_iServerState != QJACKCTL_ACTIVE);
+
+	if (bQueryRestart)
+		bQueryRestart = queryClosePreset();
 
 	// If client service is currently running,
 	// prompt the effective warning...
@@ -1383,7 +1380,7 @@ void qjackctlMainForm::startJack (void)
 	// Load primary/default server preset...
 	if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
 		appendMessagesError(tr("Could not load preset \"%1\".\n\nRetrying with default.").arg(m_pSetup->sDefPreset));
-		m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
+		m_pSetup->sDefPreset = qjackctlSetup::defName();
 		if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
 			appendMessagesError(tr("Could not load default preset.\n\nSorry."));
 			jackCleanup();
@@ -3217,19 +3214,24 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	if (m_pSessionForm)
 		m_pSessionForm->stabilizeForm(true);
 
-#ifdef CONFIG_DBUS
-	// Current D-BUS configuration makes it the default preset always...
-	if (m_pDBusConfig && !m_bDBusDetach) {
-		const QString& sPreset = m_pSetup->sDefPresetName;
-		if (m_pSetup->loadPreset(m_preset, sPreset)
-			&& getDBusParameters(m_preset)) {
+	if (bDetach
+	#ifdef CONFIG_DBUS
+		// Current D-BUS configuration makes it the default preset always...
+		|| (m_pDBusConfig && !m_bDBusDetach)
+	#endif
+	) {
+		const QString& sPreset = qjackctlSetup::defName();
+		if (m_pSetup->loadPreset(m_preset, sPreset)) {
+		#ifdef CONFIG_DBUS
+			if (!m_bDBusDetach)
+				getDBusParameters(m_preset);
+		#endif
 			m_pSetup->sDefPreset = sPreset;
 			// Have current preset changed anyhow?
 			if (m_pSetupForm)
-				m_pSetupForm->updateCurrentPreset(m_preset);
+				m_pSetupForm->updateCurrentPreset();
 		}
 	}
-#endif
 
 	// Save server configuration file.
 	if (m_pSetup->bServerConfig && !m_sJackCmdLine.isEmpty()) {
@@ -4011,7 +4013,7 @@ void qjackctlMainForm::updateTitleStatus (void)
 	if (sTitle.isEmpty())
 		sTitle = QString::fromUtf8(::getenv("JACK_DEFAULT_SERVER"));
 	if (sTitle.isEmpty())
-		sTitle = m_pSetup->sDefPresetName;
+		sTitle = qjackctlSetup::defName();
 	updateStatusItem(STATUS_SERVER_NAME, sTitle);
 }
 
@@ -4120,9 +4122,11 @@ void qjackctlMainForm::updateContextMenu (void)
 	// Default preset always present, and has invalid index parameter (-1)...
 	if (iPreset > 0)
 		pPresetsMenu->addSeparator();
-	pAction = pPresetsMenu->addAction(m_pSetup->sDefPresetName);
+	pAction = pPresetsMenu->addAction(qjackctlSetup::defName());
 	pAction->setCheckable(true);
-	pAction->setChecked(m_pSetup->sDefPresetName == m_pSetup->sDefPreset);
+	pAction->setChecked(
+		m_pSetup->sDefPreset.isEmpty() ||
+		m_pSetup->sDefPreset == qjackctlSetup::defName());
 	pAction->setData(-1);
 	QObject::connect(pPresetsMenu,
 		SIGNAL(triggered(QAction*)),
@@ -4276,7 +4280,7 @@ void qjackctlMainForm::activatePreset ( int iPreset )
 	if (iPreset >= 0 && iPreset < m_pSetup->presets.count())
 		m_pSetup->sDefPreset = m_pSetup->presets.at(iPreset);
 	else
-		m_pSetup->sDefPreset = m_pSetup->sDefPresetName;
+		m_pSetup->sDefPreset = qjackctlSetup::defName();
 
 	// Have current preset changed anyhow?
 	if (m_pSetupForm)

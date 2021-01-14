@@ -204,7 +204,6 @@ protected slots:
 protected:
 
 	bool queryClose();
-	bool queryCloseJack();
 	bool queryClosePreset();
 
 	bool queryRestart();
