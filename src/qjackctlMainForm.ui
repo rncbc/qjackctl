@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -91,7 +91,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -392,7 +392,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -423,7 +423,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -457,7 +457,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -491,7 +491,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -525,7 +525,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -559,7 +559,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -593,7 +593,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>
@@ -784,7 +784,7 @@
      </property>
      <property name="maximumSize" >
       <size>
-       <width>32767</width>
+       <width>128</width>
        <height>28</height>
       </size>
      </property>

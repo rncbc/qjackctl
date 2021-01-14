@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -742,9 +742,9 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 		m_pSetup->sConnectionsFont = m_pConnectionsForm->connectionsFont().toString();
 
 	// Set the patchbay cable connection notification signal/slot.
-	QObject::connect(
-		m_pPatchbayRack, SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
-		this, SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
+	QObject::connect(m_pPatchbayRack,
+		SIGNAL(cableConnected(const QString&, const QString&, unsigned int)),
+		SLOT(cableConnectSlot(const QString&, const QString&, unsigned int)));
 
 	// Try to restore old window positioning and appearence.
 	m_pSetup->loadWidgetGeometry(this, true);
@@ -925,11 +925,6 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 
 	// Register the first timer slot.
 	QTimer::singleShot(QJACKCTL_TIMER_MSECS, this, SLOT(timerSlot()));
-
-#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__APPLE__)
-	// increazing height make UI look ugly and it is not really useful
-	setFixedHeight(height());
-#endif
 
 	// We're ready to go...
 	return true;
@@ -2340,7 +2335,21 @@ void qjackctlMainForm::updateButtons (void)
 	m_ui.SetupToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.AboutToolButton->setToolButtonStyle(toolButtonStyle);
 
+	// Resizing the main-window might look ugly
+	// and it is not that really useful, anyway...
+	const bool bVisible = isVisible();
+	if (bVisible)
+		hide();
+
+	setMinimumSize(0, 0);
+	setMaximumSize(640, 480);
+
 	adjustSize();
+
+	setFixedSize(size());
+
+	if (bVisible)
+		show();
 }
 
 

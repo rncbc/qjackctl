@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Always keep the main window to a minimum fixed size.
+  (EXPERIMENTAL)
+
 - Graph items are automatically raised when created or
   high-lighted (incremental z-value). (EXPERIMENTAL)
 
