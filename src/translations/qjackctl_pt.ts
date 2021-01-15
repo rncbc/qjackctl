@@ -1343,13 +1343,6 @@ Desculpe</translation>
         <translation>D-BUS: O servidor JACK foi iniciado (%1 aka jackdbus).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1009"/>
-        <source>is about to terminate.
-
-Are you sure?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="1106"/>
         <source>The preset aliases have been changed:
 
@@ -1731,6 +1724,13 @@ Do you want to stop the JACK audio server?</source>
 estão ativas e conectadas.
 
 Deseja parar o servidor de áudio JACK?</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlMainForm.cpp" line="1009"/>
+        <source>%1 is about to terminate.
+
+Are you sure?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1842"/>

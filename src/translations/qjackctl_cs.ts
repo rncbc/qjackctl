@@ -1412,6 +1412,13 @@ Promiňte</translation>
         <translation>JACK byl puštěn s PID = %1.</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="1009"/>
+        <source>%1 is about to terminate.
+
+Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlMainForm.cpp" line="1854"/>
         <source>D-BUS: JACK server was started (%1 aka jackdbus).</source>
         <translation>D-BUS: Server JACK byl spuštěn (%1 aka jackdbus).</translation>
@@ -1601,13 +1608,6 @@ v související nabídce vyskakující z ikony v oznamovací
         <location filename="../qjackctlMainForm.cpp" line="976"/>
         <source>Don&apos;t show this message again</source>
         <translation>Toto hlášení neukazovat znovu</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlMainForm.cpp" line="1009"/>
-        <source>is about to terminate.
-
-Are you sure?</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1106"/>

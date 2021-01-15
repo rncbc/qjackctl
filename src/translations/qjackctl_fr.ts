@@ -1329,13 +1329,6 @@ Désolé.</translation>
         <translation>JACK a été arrêté</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="1009"/>
-        <source>is about to terminate.
-
-Are you sure?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlMainForm.cpp" line="1106"/>
         <source>The preset aliases have been changed:
 
@@ -1764,6 +1757,13 @@ Do you want to stop the JACK audio server?</source>
 sont encore actives et connectées.
 
 Voulez-vous arrêter le serveur audio JACK ?</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlMainForm.cpp" line="1009"/>
+        <source>%1 is about to terminate.
+
+Are you sure?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1756"/>

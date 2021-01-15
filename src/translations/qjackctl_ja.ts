@@ -1300,6 +1300,13 @@ Do you want to terminate the JACK audio server?</source>
 JACKオーディオサーバーを終了しますか？</translation>
     </message>
     <message>
+        <location filename="../qjackctlMainForm.cpp" line="1009"/>
+        <source>%1 is about to terminate.
+
+Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlMainForm.cpp" line="1300"/>
         <source>successfully</source>
         <translation>成功</translation>
@@ -1452,13 +1459,6 @@ Sorry</source>
         <location filename="../qjackctlMainForm.cpp" line="3068"/>
         <source>Don&apos;t ask this again</source>
         <translation>この質問を繰り返さない</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlMainForm.cpp" line="1009"/>
-        <source>is about to terminate.
-
-Are you sure?</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1106"/>
