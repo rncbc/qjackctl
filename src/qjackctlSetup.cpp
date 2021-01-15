@@ -19,7 +19,6 @@
 
 *****************************************************************************/
 
-#include "qjackctlAbout.h"
 #include "qjackctlSetup.h"
 
 #include <QComboBox>

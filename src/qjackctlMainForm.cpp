@@ -19,7 +19,6 @@
 
 *****************************************************************************/
 
-#include "qjackctlAbout.h"
 #include "qjackctlMainForm.h"
 
 #include "qjackctlStatus.h"

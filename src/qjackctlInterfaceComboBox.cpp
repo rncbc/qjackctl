@@ -1,7 +1,7 @@
 // qjackctlInterfaceComboBox.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
    Copyright (C) 2015, Kjetil Matheussen. (portaudio_probe_thread)
    Copyright (C) 2013, Arnout Engelen. All rights reserved.
 
@@ -21,7 +21,6 @@
 
 *****************************************************************************/
 
-#include "qjackctlAbout.h"
 #include "qjackctlInterfaceComboBox.h"
 
 #include "qjackctlSetup.h"

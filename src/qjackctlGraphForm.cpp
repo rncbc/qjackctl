@@ -19,17 +19,12 @@
 
 *****************************************************************************/
 
-#include "qjackctlAbout.h"
 #include "qjackctlGraphForm.h"
 
 #include "qjackctlJackGraph.h"
 #include "qjackctlAlsaGraph.h"
 
-#include "qjackctlSetup.h"
-
 #include "qjackctlMainForm.h"
-
-#include "qjackctlSetup.h"
 
 #include <QMenu>
 

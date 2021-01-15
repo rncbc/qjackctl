@@ -19,14 +19,11 @@
 
 *****************************************************************************/
 
-#include "qjackctlAbout.h"
 #include "qjackctlSetupForm.h"
 
 #include "qjackctlMainForm.h"
 
 #include "qjackctlPaletteForm.h"
-
-#include "qjackctlSetup.h"
 
 #include <QValidator>
 #include <QMessageBox>
@@ -1856,7 +1853,7 @@ void qjackctlSetupForm::apply (void)
 		m_pSetup->bServerConfig            = m_ui.ServerConfigCheckBox->isChecked();
 		m_pSetup->sServerConfigName        = m_ui.ServerConfigNameComboBox->currentText();
 		m_pSetup->bAlsaSeqEnabled          = m_ui.AlsaSeqEnabledCheckBox->isChecked();
-	#if CONFIG_DBUS
+	#ifdef CONFIG_DBUS
 		m_pSetup->bDBusEnabled             = m_ui.DBusEnabledCheckBox->isChecked();
 		m_pSetup->bJackDBusEnabled         = m_ui.JackDBusEnabledCheckBox->isChecked();
 	#endif

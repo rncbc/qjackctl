@@ -22,6 +22,7 @@
 #ifndef __qjackctlSetup_h
 #define __qjackctlSetup_h
 
+#include "qjackctlAbout.h"
 #include "qjackctlAliases.h"
 
 #include <QStringList>
