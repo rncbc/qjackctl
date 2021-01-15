@@ -1006,8 +1006,8 @@ bool qjackctlMainForm::queryClose (void)
 			sText = tr("JACK is currently running.\n\n"
 				"Do you want to terminate the JACK audio server?");
 		} else {
-			sText = QJACKCTL_TITLE + ' ' + tr("is about to terminate.\n\n"
-				"Are you sure?");
+			sText = tr("%1 is about to terminate.\n\n"
+				"Are you sure?").arg(QJACKCTL_TITLE);
 		}
 	#if 0//QJACKCTL_QUERY_CLOSE
 		bQueryClose = (QMessageBox::warning(this, sTitle, sText,
