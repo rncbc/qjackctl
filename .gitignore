@@ -16,3 +16,4 @@ qrc_*.cpp
 .obj
 .ui
 qjackctl
+build/

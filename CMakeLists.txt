@@ -1,6 +1,6 @@
-project(qjackctl)
+cmake_minimum_required(VERSION 3.10)
 
-cmake_minimum_required(VERSION 3.1)
+project(qjackctl)
 
 set (VERSION "0.9.1")
 
@@ -129,7 +129,7 @@ endif ()
 find_package (PkgConfig REQUIRED)
 
 # Check for JACK libraries.
-pkg_check_modules (JACK REQUIRED jack>=0.100.0)
+pkg_check_modules (JACK REQUIRED IMPORTED_TARGET jack>=0.100.0)
 if (JACK_FOUND)
   set (CONFIG_JACK 1)
   include_directories (${JACK_INCLUDE_DIRS})
@@ -195,7 +195,7 @@ endif ()
 
 # Check for ALSA libraries.
 if (CONFIG_ALSA_SEQ)
-  pkg_check_modules (ALSA alsa)
+  pkg_check_modules (ALSA IMPORTED_TARGET alsa)
   if (ALSA_FOUND)
     include_directories (${ALSA_INCLUDE_DIRS})
     link_directories (${ALSA_LIBRARY_DIRS})
@@ -209,7 +209,7 @@ endif ()
 
 # Check for PORTAUDIO libraries.
 if (CONFIG_PORTAUDIO)
-  pkg_check_modules (PORTAUDIO portaudio-2.0)
+  pkg_check_modules (PORTAUDIO IMPORTED_TARGET portaudio-2.0)
   if (PORTAUDIO_FOUND)
     include_directories (${PORTAUDIO_INCLUDE_DIRS})
     link_directories (${PORTAUDIO_LIBRARY_DIRS})
