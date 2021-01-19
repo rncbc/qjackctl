@@ -1,7 +1,7 @@
 // qjackctlPatchbayRack.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -905,6 +905,86 @@ void qjackctlPatchbayRack::connectJackScan ( jack_client_t *pJackClient )
 }
 
 
+// JACK socket/ports forwarding scan...
+void qjackctlPatchbayRack::connectJackForwardPorts (
+	const char *pszPort, const char *pszPortForward )
+{
+	// Check for outputs from forwarded input...
+	const char **ppszOutputPorts = jack_port_get_all_connections(
+		m_pJackClient, jack_port_by_name(m_pJackClient, pszPortForward));
+	if (ppszOutputPorts) {
+		// Grab current connections of target port...
+		const char **ppszPorts = jack_port_get_all_connections(
+			m_pJackClient, jack_port_by_name(m_pJackClient, pszPort));
+		for (int i = 0 ; ppszOutputPorts[i]; i++) {
+			// Need to lookup if already connected...
+			bool bConnected = false;
+			for (int j = 0; ppszPorts && ppszPorts[j]; j++) {
+				if (strcmp(ppszOutputPorts[i], ppszPorts[j]) == 0) {
+					bConnected = true;
+					break;
+				}
+			}
+			// Make or just report the connection...
+			if (bConnected) {
+				checkJackPorts(ppszOutputPorts[i], pszPort);
+			} else {
+				connectJackPorts(ppszOutputPorts[i], pszPort);
+			}
+		}
+		// Free provided arrays...
+		if (ppszPorts)
+			::free(ppszPorts);
+		::free(ppszOutputPorts);
+	}
+}
+
+void qjackctlPatchbayRack::connectJackForward (
+	qjackctlPatchbaySocket *pSocket, qjackctlPatchbaySocket *pSocketForward )
+{
+	if (pSocket == nullptr || pSocketForward == nullptr)
+		return;
+	if (pSocket->type() != pSocketForward->type())
+		return;
+
+	const char **ppszOutputPorts = nullptr;
+	const char **ppszInputPorts  = nullptr;
+	if (pSocket->type() == QJACKCTL_SOCKETTYPE_JACK_AUDIO) {
+		ppszOutputPorts = m_ppszOAudioPorts;
+		ppszInputPorts  = m_ppszIAudioPorts;
+	}
+	else
+	if (pSocket->type() == QJACKCTL_SOCKETTYPE_JACK_MIDI) {
+		ppszOutputPorts = m_ppszOMidiPorts;
+		ppszInputPorts  = m_ppszIMidiPorts;
+	}
+
+	if (ppszOutputPorts == nullptr || ppszInputPorts == nullptr)
+		return;
+
+	QStringListIterator iterPlug(pSocket->pluglist());
+	QStringListIterator iterPlugForward(pSocketForward->pluglist());
+	while (iterPlug.hasNext() && iterPlugForward.hasNext()) {
+		// Check audio port connection sequentially...
+		const QString& sPlug = iterPlug.next();
+		const QString& sPlugForward = iterPlugForward.next();
+		const char *pszPortForward = findJackPort(ppszInputPorts,
+			pSocketForward->clientName(), sPlugForward, 0);
+		if (pszPortForward) {
+			const char *pszPort = findJackPort(ppszInputPorts,
+				pSocket->clientName(), sPlug, 0);
+			if (pszPort)
+				connectJackForwardPorts(pszPort, pszPortForward);
+		}
+	}
+}
+
+
+#ifndef CONFIG_ALSA_SEQ
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
+
 // Load all midi available midi ports of a given type.
 void qjackctlPatchbayRack::loadAlsaPorts (
 	QList<qjackctlAlsaMidiPort *>& midiports, bool bReadable )
@@ -1271,81 +1351,6 @@ void qjackctlPatchbayRack::connectAlsaScan ( snd_seq_t *pAlsaSeq )
 }
 
 
-// JACK socket/ports forwarding scan...
-void qjackctlPatchbayRack::connectJackForwardPorts (
-	const char *pszPort, const char *pszPortForward )
-{
-	// Check for outputs from forwarded input...
-	const char **ppszOutputPorts = jack_port_get_all_connections(
-		m_pJackClient, jack_port_by_name(m_pJackClient, pszPortForward));
-	if (ppszOutputPorts) {
-		// Grab current connections of target port...
-		const char **ppszPorts = jack_port_get_all_connections(
-			m_pJackClient, jack_port_by_name(m_pJackClient, pszPort));
-		for (int i = 0 ; ppszOutputPorts[i]; i++) {
-			// Need to lookup if already connected...
-			bool bConnected = false;
-			for (int j = 0; ppszPorts && ppszPorts[j]; j++) {
-				if (strcmp(ppszOutputPorts[i], ppszPorts[j]) == 0) {
-					bConnected = true;
-					break;
-				}
-			}
-			// Make or just report the connection...
-			if (bConnected) {
-				checkJackPorts(ppszOutputPorts[i], pszPort);
-			} else {
-				connectJackPorts(ppszOutputPorts[i], pszPort);
-			}
-		}
-		// Free provided arrays...
-		if (ppszPorts)
-			::free(ppszPorts);
-		::free(ppszOutputPorts);
-	}
-}
-
-void qjackctlPatchbayRack::connectJackForward (
-	qjackctlPatchbaySocket *pSocket, qjackctlPatchbaySocket *pSocketForward )
-{
-	if (pSocket == nullptr || pSocketForward == nullptr)
-		return;
-	if (pSocket->type() != pSocketForward->type())
-		return;
-
-	const char **ppszOutputPorts = nullptr;
-	const char **ppszInputPorts  = nullptr;
-	if (pSocket->type() == QJACKCTL_SOCKETTYPE_JACK_AUDIO) {
-		ppszOutputPorts = m_ppszOAudioPorts;
-		ppszInputPorts  = m_ppszIAudioPorts;
-	}
-	else
-	if (pSocket->type() == QJACKCTL_SOCKETTYPE_JACK_MIDI) {
-		ppszOutputPorts = m_ppszOMidiPorts;
-		ppszInputPorts  = m_ppszIMidiPorts;
-	}
-
-	if (ppszOutputPorts == nullptr || ppszInputPorts == nullptr)
-		return;
-
-	QStringListIterator iterPlug(pSocket->pluglist());
-	QStringListIterator iterPlugForward(pSocketForward->pluglist());
-	while (iterPlug.hasNext() && iterPlugForward.hasNext()) {
-		// Check audio port connection sequentially...
-		const QString& sPlug = iterPlug.next();
-		const QString& sPlugForward = iterPlugForward.next();
-		const char *pszPortForward = findJackPort(ppszInputPorts,
-			pSocketForward->clientName(), sPlugForward, 0);
-		if (pszPortForward) {
-			const char *pszPort = findJackPort(ppszInputPorts,
-				pSocket->clientName(), sPlug, 0);
-			if (pszPort)
-				connectJackForwardPorts(pszPort, pszPortForward);
-		}
-	}
-}
-
-
 // ALSA socket/ports forwarding scan...
 void qjackctlPatchbayRack::connectAlsaForwardPorts (
 	qjackctlAlsaMidiPort *pPort, qjackctlAlsaMidiPort *pPortForward )
@@ -1398,6 +1403,7 @@ void qjackctlPatchbayRack::connectAlsaForwardPorts (
 #endif	// CONFIG_ALSA_SEQ
 }
 
+
 void qjackctlPatchbayRack::connectAlsaForward (
 	qjackctlPatchbaySocket *pSocket, qjackctlPatchbaySocket *pSocketForward )
 {
@@ -1423,6 +1429,10 @@ void qjackctlPatchbayRack::connectAlsaForward (
 		}
 	}
 }
+
+#ifndef CONFIG_ALSA_SEQ
+#pragma GCC diagnostic pop
+#endif
 
 
 // Common socket forwrading scan...

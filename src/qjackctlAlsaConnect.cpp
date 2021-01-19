@@ -1,7 +1,7 @@
 // qjackctlAlsaConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -297,6 +297,11 @@ void qjackctlAlsaConnect::deleteIconPixmaps (void)
 }
 
 
+#ifndef CONFIG_ALSA_SEQ
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
+
 // Connection primitive.
 bool qjackctlAlsaConnect::connectPorts (
 	qjackctlPortItem *pOPort, qjackctlPortItem *pIPort )
@@ -438,6 +443,10 @@ void qjackctlAlsaConnect::updateConnections (void)
 
 #endif	// CONFIG_ALSA_SEQ
 }
+
+#ifndef CONFIG_ALSA_SEQ
+#pragma GCC diagnostic pop
+#endif
 
 
 // Update icon size implementation.

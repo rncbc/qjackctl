@@ -2019,6 +2019,11 @@ void qjackctlMainForm::sigtermNotifySlot ( int /* fd */ )
 }
 
 
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
+
 // Set stdout/stderr blocking mode.
 bool qjackctlMainForm::stdoutBlock ( int fd, bool bBlock ) const
 {
@@ -2056,6 +2061,10 @@ void qjackctlMainForm::stdoutNotifySlot ( int fd )
 		appendStdoutBuffer(sTemp);
 #endif	
 }
+
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+#pragma GCC diagnostic pop
+#endif
 
 
 // Messages output methods.

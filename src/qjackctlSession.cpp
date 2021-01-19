@@ -1,7 +1,7 @@
 // qjackctlSession.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -149,46 +149,43 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 #ifdef CONFIG_JACK_SESSION
 
 	// Second pass: get all session client commands...
-	if (::jack_session_notify) {
-	
-		jack_session_event_type_t etype = JackSessionSave;
-		switch (iSessionType) {
-		case 1:
-			etype = JackSessionSaveAndQuit;
-			break;
-		case 2:
-			etype = JackSessionSaveTemplate;
-			break;
-		}
-	
-		const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
-		const char *pszSessionPath = aSessionPath.constData();
-		jack_session_command_t *commands
-			= ::jack_session_notify(pJackClient, nullptr, etype, pszSessionPath);
-		if (commands == nullptr)
-			return false;
-	
-		// Second pass...
-		for (int k = 0; commands[k].uuid; ++k) {
-			jack_session_command_t *pCommand = &commands[k];
-			const QString sClientName
-				= QString::fromLocal8Bit(pCommand->client_name);
-			ClientItem *pClientItem;
-			if (m_clients.contains(sClientName)) {
-				pClientItem = m_clients.value(sClientName);
-			} else {
-				pClientItem = new ClientItem;
-				pClientItem->client_name = sClientName;
-				m_clients.insert(pClientItem->client_name, pClientItem);
-			}
-			pClientItem->client_uuid
-				= QString::fromLocal8Bit(pCommand->uuid);
-			pClientItem->client_command
-				= QString::fromLocal8Bit(pCommand->command);
-		}
-	
-		::jack_session_commands_free(commands);
+	jack_session_event_type_t etype = JackSessionSave;
+	switch (iSessionType) {
+	case 1:
+		etype = JackSessionSaveAndQuit;
+		break;
+	case 2:
+		etype = JackSessionSaveTemplate;
+		break;
 	}
+
+	const QByteArray aSessionPath = sSessionPath.toLocal8Bit();
+	const char *pszSessionPath = aSessionPath.constData();
+	jack_session_command_t *commands
+		= ::jack_session_notify(pJackClient, nullptr, etype, pszSessionPath);
+	if (commands == nullptr)
+		return false;
+
+	// Second pass...
+	for (int k = 0; commands[k].uuid; ++k) {
+		jack_session_command_t *pCommand = &commands[k];
+		const QString sClientName
+			= QString::fromLocal8Bit(pCommand->client_name);
+		ClientItem *pClientItem;
+		if (m_clients.contains(sClientName)) {
+			pClientItem = m_clients.value(sClientName);
+		} else {
+			pClientItem = new ClientItem;
+			pClientItem->client_name = sClientName;
+			m_clients.insert(pClientItem->client_name, pClientItem);
+		}
+		pClientItem->client_uuid
+			= QString::fromLocal8Bit(pCommand->uuid);
+		pClientItem->client_command
+			= QString::fromLocal8Bit(pCommand->command);
+	}
+
+	::jack_session_commands_free(commands);
 
 #endif	// CONFIG_JACK_SESSION
 
@@ -592,31 +589,29 @@ bool qjackctlSession::isJackClient ( const QString& sClientName ) const
 
 #ifdef CONFIG_JACK_SESSION
 
-	if (::jack_get_uuid_for_client_name) {
-
-		qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
-		if (pMainForm == nullptr)
-			return false;
-
-		jack_client_t *pJackClient = pMainForm->jackClient();
-		if (pJackClient == nullptr)
-			return false;
-
-		const char *client_uuid = ::jack_get_uuid_for_client_name(
-			pJackClient, aClientName.constData());
-		if (client_uuid) {
-			::jack_free((void *) client_uuid);
-			return true;
-		}
-
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == nullptr)
 		return false;
+
+	jack_client_t *pJackClient = pMainForm->jackClient();
+	if (pJackClient == nullptr)
+		return false;
+
+	const char *client_uuid = ::jack_get_uuid_for_client_name(
+		pJackClient, aClientName.constData());
+	if (client_uuid) {
+		::jack_free((void *) client_uuid);
+		return true;
 	}
+
+	return false;
+
 #endif
 
-	jack_client_t *pJackClient = ::jack_client_open(aClientName.constData(),
+	jack_client_t *pIsJackClient = ::jack_client_open(aClientName.constData(),
 		jack_options_t(JackNoStartServer | JackUseExactName), nullptr);
-	if (pJackClient) {
-		::jack_client_close(pJackClient);
+	if (pIsJackClient) {
+		::jack_client_close(pIsJackClient);
 		return true;
 	}
 
