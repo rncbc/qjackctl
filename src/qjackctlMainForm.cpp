@@ -2340,21 +2340,27 @@ void qjackctlMainForm::updateButtons (void)
 	m_ui.SetupToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.AboutToolButton->setToolButtonStyle(toolButtonStyle);
 
-	// Resizing the main-window might look ugly
-	// and it is not that really useful, anyway...
+#if 0// Main-window fixed size (pre-adjust)
 	const bool bVisible = isVisible();
 	if (bVisible)
 		hide();
-
 	setMinimumSize(0, 0);
 	setMaximumSize(640, 480);
+#endif
 
 	adjustSize();
 
+#if 0// Main-window fixed size (post-adjust)
 	setFixedSize(size());
-
 	if (bVisible)
 		show();
+#else
+#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__APPLE__)
+	// Resizing main-window height might look ugly
+	// and is not that really useful, anyway...
+	setFixedHeight(height());
+#endif
+#endif
 }
 
 
