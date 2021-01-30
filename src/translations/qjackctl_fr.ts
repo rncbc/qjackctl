@@ -1763,7 +1763,10 @@ Voulez-vous arrêter le serveur audio JACK ?</translation>
         <source>%1 is about to terminate.
 
 Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 est sur le point de se terminer.
+
+Êtes-vous certain ?</source>
+        </translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1763"/>
@@ -4508,12 +4511,12 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Clear settings of current preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer les paramètres du nom du préréglage actuel</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="104"/>
         <source>Clea&amp;r</source>
-        <translation type="unfinished"></translation>
+        <translation>Efface&amp;r</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="653"/>
