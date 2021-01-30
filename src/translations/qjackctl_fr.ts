@@ -1765,8 +1765,7 @@ Voulez-vous arrêter le serveur audio JACK ?</translation>
 Are you sure?</source>
         <translation>%1 est sur le point de se terminer.
 
-Êtes-vous certain ?</source>
-        </translation>
+Êtes-vous certain ?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1763"/>
