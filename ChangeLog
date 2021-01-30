@@ -6,12 +6,13 @@ ChangeLog
 
 GIT HEAD
 
+- Main window is now freely resizable, while keeping
+  all the buttons stretched to the same aspect ratio.
+  (EXPERIMENTAL)
+
 - Warning to confirm application close is now back in
   business when functioning as client only (Active).
   (EXPERIMENTAL)
-
-- Always keep the main window to a minimum fixed height,
-  on non-GNU/Linux systems only. (EXPERIMENTAL)
 
 - Graph items are automatically raised when created or
   high-lighted (incremental z-value). (EXPERIMENTAL)

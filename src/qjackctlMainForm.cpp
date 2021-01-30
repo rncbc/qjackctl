@@ -1251,6 +1251,14 @@ void qjackctlMainForm::closeEvent ( QCloseEvent *pCloseEvent )
 }
 
 
+void qjackctlMainForm::resizeEvent ( QResizeEvent *pResizeEvent )
+{
+	updateDisplayEffect();
+
+	QWidget::resizeEvent(pResizeEvent);
+}
+
+
 void qjackctlMainForm::customEvent ( QEvent *pEvent )
 {
 	switch (int(pEvent->type())) {
@@ -2211,8 +2219,10 @@ void qjackctlMainForm::updateDisplayEffect (void)
 	// Set the main background...
 	QPalette pal;
 	if (m_pSetup->bDisplayEffect) {
-		QPixmap pm(":/images/displaybg1.png");
-		pal.setBrush(QPalette::Window, QBrush(pm));
+		const QImage img(":/images/displaybg1.png");
+		pal.setBrush(QPalette::Window,
+			QBrush(img.scaled(m_ui.StatusDisplayFrame->size(),
+				Qt::IgnoreAspectRatio, Qt::SmoothTransformation)));
 	} else {
 		pal.setColor(QPalette::Window, Qt::black);
 	}
@@ -2340,7 +2350,7 @@ void qjackctlMainForm::updateButtons (void)
 	m_ui.SetupToolButton->setToolButtonStyle(toolButtonStyle);
 	m_ui.AboutToolButton->setToolButtonStyle(toolButtonStyle);
 
-#if 0// Main-window fixed size (pre-adjust)
+#if 0// Main-window fixed size (pre-adjustment...)
 	const bool bVisible = isVisible();
 	if (bVisible)
 		hide();
@@ -2350,16 +2360,10 @@ void qjackctlMainForm::updateButtons (void)
 
 	adjustSize();
 
-#if 0// Main-window fixed size (post-adjust)
+#if 0// Main-window fixed size (post-adjustmment...)
 	setFixedSize(size());
 	if (bVisible)
 		show();
-#else
-#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(__APPLE__)
-	// Resizing main-window height might look ugly
-	// and is not that really useful, anyway...
-	setFixedHeight(height());
-#endif
 #endif
 }
 

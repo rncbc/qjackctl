@@ -212,6 +212,7 @@ protected:
 	void showEvent(QShowEvent *pShowEvent);
 	void hideEvent(QHideEvent *pHideEvent);
 	void closeEvent(QCloseEvent *pCloseEvent);
+	void resizeEvent(QResizeEvent *pResizeEvent);
 	void customEvent(QEvent *pEvent);
 
 	void appendStdoutBuffer(const QString& s);
