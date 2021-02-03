@@ -319,9 +319,9 @@ void qjackctlGraphPort::removeConnects (void)
 {
 	foreach (qjackctlGraphConnect *connect, m_connects) {
 		if (connect->port1() != this)
-			connect->setPort1(0);
+			connect->setPort1(nullptr);
 		if (connect->port2() != this)
-			connect->setPort2(0);
+			connect->setPort2(nullptr);
 	}
 
 	// Do not delete connects here as they are owned elsewhere...
@@ -339,6 +339,13 @@ qjackctlGraphConnect *qjackctlGraphPort::findConnect ( qjackctlGraphPort *port )
 	}
 
 	return nullptr;
+}
+
+
+// Connect-list accessor.
+const QList<qjackctlGraphConnect *>& qjackctlGraphPort::connects (void) const
+{
+	return m_connects;
 }
 
 
@@ -765,6 +772,13 @@ qjackctlGraphPort *qjackctlGraphNode::findPort (
 {
 	return static_cast<qjackctlGraphPort *> (
 		m_portkeys.value(qjackctlGraphPort::ItemKey(name, mode, type), nullptr));
+}
+
+
+// Port-list accessor.
+const QList<qjackctlGraphPort *>& qjackctlGraphNode::ports (void) const
+{
+	return m_ports;
 }
 
 
@@ -1310,8 +1324,18 @@ bool qjackctlGraphCanvas::canConnect (void) const
 bool qjackctlGraphCanvas::canDisconnect (void) const
 {
 	foreach (QGraphicsItem *item, m_scene->selectedItems()) {
-		if (item->type() == qjackctlGraphConnect::Type)
+		switch (item->type()) {
+		case qjackctlGraphConnect::Type:
 			return true;
+		case qjackctlGraphPort::Type: {
+			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+			if (!port->connects().isEmpty())
+				return true;
+			// Fall-thru...;
+		}
+		default:
+			break;
+		}
 	}
 
 	return false;
@@ -1859,10 +1883,23 @@ void qjackctlGraphCanvas::disconnectItems (void)
 	QList<qjackctlGraphConnect *> connects;
 
 	foreach (QGraphicsItem *item, m_scene->selectedItems()) {
-		if (item->type() == qjackctlGraphConnect::Type) {
+		switch (item->type()) {
+		case qjackctlGraphConnect::Type: {
 			qjackctlGraphConnect *connect = static_cast<qjackctlGraphConnect *> (item);
-			if (connect)
+			if (!connects.contains(connect))
 				connects.append(connect);
+			break;
+		}
+		case qjackctlGraphPort::Type: {
+			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
+			foreach (qjackctlGraphConnect *connect, port->connects()) {
+				if (!connects.contains(connect))
+					connects.append(connect);
+			}
+			// Fall-thru...
+		}
+		default:
+			break;
 		}
 	}
 

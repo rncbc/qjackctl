@@ -201,6 +201,9 @@ public:
 
 	qjackctlGraphConnect *findConnect(qjackctlGraphPort *port) const;
 
+	// Connect-list accessor.
+	const QList<qjackctlGraphConnect *>& connects() const;
+
 	// Selection propagation method...
 	void setSelectedEx(bool is_selected);
 
@@ -324,6 +327,9 @@ public:
 
 	// Port finder (by name, mode and type)
 	qjackctlGraphPort *findPort(const QString& name, Mode mode, uint type = 0);
+
+	// Port-list accessor.
+	const QList<qjackctlGraphPort *>& ports() const;
 
 	// Reset port markings, destroy if unmarked.
 	void resetMarkedPorts();

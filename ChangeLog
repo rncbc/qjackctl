@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph Disconnect now applies to all selected ports
+  and connections (gracefully implements #123).
+
 - Main window is now freely resizable, while keeping
   all the buttons stretched to the same aspect ratio.
   (EXPERIMENTAL)
