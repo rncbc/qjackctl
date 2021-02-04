@@ -981,8 +981,10 @@ void qjackctlPatchbayRack::connectJackForward (
 
 
 #ifndef CONFIG_ALSA_SEQ
+#if defined(Q_CC_GNU) || defined(Q_CC_MINGW)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 #endif
 
 // Load all midi available midi ports of a given type.
@@ -1431,7 +1433,9 @@ void qjackctlPatchbayRack::connectAlsaForward (
 }
 
 #ifndef CONFIG_ALSA_SEQ
+#if defined(Q_CC_GNU) || defined(Q_CC_MINGW)
 #pragma GCC diagnostic pop
+#endif
 #endif
 
 

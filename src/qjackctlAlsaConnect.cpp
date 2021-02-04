@@ -298,8 +298,10 @@ void qjackctlAlsaConnect::deleteIconPixmaps (void)
 
 
 #ifndef CONFIG_ALSA_SEQ
+#if defined(Q_CC_GNU) || defined(Q_CC_MINGW)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 #endif
 
 // Connection primitive.
@@ -445,7 +447,9 @@ void qjackctlAlsaConnect::updateConnections (void)
 }
 
 #ifndef CONFIG_ALSA_SEQ
+#if defined(Q_CC_GNU) || defined(Q_CC_MINGW)
 #pragma GCC diagnostic pop
+#endif
 #endif
 
 
