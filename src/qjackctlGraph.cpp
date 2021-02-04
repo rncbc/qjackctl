@@ -1544,7 +1544,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 						m_connect = new qjackctlGraphConnect();
 						m_connect->setPort1(port);
 						m_connect->setSelected(true);
-						m_connect->setZValue(-1.0);
+						m_connect->raise();
 						m_scene->addItem(m_connect);
 						m_item = nullptr;
 						++m_selected_nodes;
@@ -1647,6 +1647,8 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 		else
 		if (m_connect) {
 			// Hovering ports high-lighting...
+			const qreal zval = m_connect->zValue();
+			m_connect->setZValue(-1.0);
 			QGraphicsItem *item = itemAt(pos);
 			if (item && item->type() == qjackctlGraphPort::Type) {
 				qjackctlGraphPort *port1 = m_connect->port1();
@@ -1657,6 +1659,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					port2->update();
 				}
 			}
+			 m_connect->setZValue(zval);
 		}
 		break;
 	case DragScroll:
@@ -1697,6 +1700,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 	case DragMove:
 		// Close new connection line...
 		if (m_connect) {
+			 m_connect->setZValue(-1.0);
 			const QPointF& pos
 				= QGraphicsView::mapToScene(event->pos());
 			qjackctlGraphItem *item = itemAt(pos);
@@ -1725,10 +1729,9 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 					++nchanged;
 				}
 			}
-			if (m_connect) {
-				delete m_connect;
-				m_connect = nullptr;
-			}
+			// Done with the hovering connection...
+			delete m_connect;
+			m_connect = nullptr;
 		}
 		// Maybe some node(s) were moved...
 		if (m_item && m_item->type() == qjackctlGraphNode::Type) {
