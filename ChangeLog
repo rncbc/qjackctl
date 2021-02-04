@@ -4,21 +4,19 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.1  2021-02-07  A Winter'21 Release.
 
 - Graph Disconnect now applies to all selected ports
-  and connections (gracefully implements #123).
+  and connections.
 
 - Main window is now freely resizable, while keeping
   all the buttons stretched to the same aspect ratio.
-  (EXPERIMENTAL)
 
 - Warning to confirm application close is now back in
   business when functioning as client only (Active).
-  (EXPERIMENTAL)
 
 - Graph items are automatically raised when created or
-  high-lighted (incremental z-value). (EXPERIMENTAL)
+  high-lighted (incremental z-value).
 
 - Add a little but straight horizontal line-gap to the
   Graph connections.
@@ -26,14 +24,12 @@ GIT HEAD
 - Customize the Graph zoom slider widget to reset upon
   mouse middle-button click.
 
-- Add Clear preset button to Setup dialog (refactored
-  from an original patch by kmatheussen #113)
+- Add Clear preset button to Setup dialog.
 
 - Use default values for most preset parameters: sample
   rate, frames/period (aka. buffer-size), periods/buffer,
   realtime priority, port maximum, client timeout, word
-  length, wait time, channel maximum (refactored from an
-  original patch by kmatheussen #112)
+  length, wait time, channel maximum.
 
 
 0.9.0  2020-12-17  A Winter'20 Release.
