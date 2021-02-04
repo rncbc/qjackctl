@@ -260,7 +260,7 @@
     <message>
         <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translatorcomment>Disconnetti Tutto</translatorcomment>
         <translation>Alt+A</translation>
     </message>
@@ -430,7 +430,7 @@ Sei sicuro?</translation>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translatorcomment>Disconnetti Tutto</translatorcomment>
         <translation>Alt+A</translation>
     </message>
@@ -2775,7 +2775,7 @@ dalle connessioni attuali?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1336"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translatorcomment>Disconnetti Tutto</translatorcomment>
         <translation>Alt+A</translation>
     </message>

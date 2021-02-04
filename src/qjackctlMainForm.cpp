@@ -2462,7 +2462,7 @@ void qjackctlMainForm::updateActivePatchbay (void)
 
 	// Time to load the active patchbay rack profiler?
 	if (m_pSetup->bActivePatchbay && !m_pSetup->sActivePatchbayPath.isEmpty()) {
-		// Check whether to reset/disconect-all on patchbay activation...
+		// Check whether to reset/disconnect-all on patchbay activation...
 		if (m_pSetup->bActivePatchbayReset) {
 			if (m_pJackClient) {
 				m_pPatchbayRack->disconnectAllJackPorts(m_pJackClient);

@@ -1117,7 +1117,7 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 	pAction->setEnabled(pConnect->canDisconnectSelected());
 	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
 		tr("Disconnect &All"), pConnect, SLOT(disconnectAll()),
-		tr("Alt+A", "Disconect All"));
+		tr("Alt+A", "Disconnect All"));
 	pAction->setEnabled(pConnect->canDisconnectAll());
 	if (m_bRenameEnabled) {
 		menu.addSeparator();
@@ -1316,7 +1316,7 @@ void qjackctlConnectorView::contextMenuEvent (
 	pAction->setEnabled(pConnect->canDisconnectSelected());
 	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
 		tr("Disconnect &All"), pConnect, SLOT(disconnectAll()),
-		tr("Alt+A", "Disconect All"));
+		tr("Alt+A", "Disconnect All"));
 	pAction->setEnabled(pConnect->canDisconnectAll());
 
 	menu.addSeparator();

@@ -247,7 +247,7 @@
     <message>
         <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
@@ -417,7 +417,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
@@ -2769,7 +2769,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1336"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
