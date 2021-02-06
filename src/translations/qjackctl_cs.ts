@@ -1416,7 +1416,9 @@ Promiňte</translation>
         <source>%1 is about to terminate.
 
 Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 má být skončen.
+
+Jste si jistý?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1861"/>
@@ -3909,12 +3911,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Clear settings of current preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyprázdnit nastavení nynějšího názvu přednastavení</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="104"/>
         <source>Clea&amp;r</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vymazat</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="653"/>
