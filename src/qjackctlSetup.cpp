@@ -529,6 +529,8 @@ void qjackctlPreset::fixup (void)
 		sDriver =  "portaudio";
 	#elif defined(__APPLE__)
 		sDriver = "coreaudio";
+	#elif defined(__FreeBSD__)
+		sDriver = "oss";
 	#else
 		sDriver = "alsa";
 	#endif
