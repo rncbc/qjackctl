@@ -1,4 +1,4 @@
-QjackCtl - JACK Audio Connection Kit Qt GUI Interface
+QjackCtl - JACK Audio Connection Kit Qt GUI Interface 
 -----------------------------------------------------
 
 ChangeLog
@@ -6,69 +6,67 @@ ChangeLog
 
 0.9.1  2021-02-07  A Winter'21 Release.
 
-- Graph Disconnect now applies to all selected ports
-  and connections.
+- Graph Disconnect now applies to all selected ports and 
+  connections.
 
-- Main window is now freely resizable, while keeping
-  all the buttons stretched to the same aspect ratio.
+- Main window is now freely resizable, while keeping all the buttons 
+  stretched to the same aspect ratio.
 
-- Warning to confirm application close is now back in
-  business when functioning as client only (Active).
+- Warning to confirm application close is now back in business when 
+  functioning as client only (Active).
 
-- Graph items are automatically raised when created or
-  high-lighted (incremental z-value).
+- Graph items are automatically raised when created or high-lighted 
+  (incremental z-value).
 
-- Add a little but straight horizontal line-gap to the
-  Graph connections.
+- Add a little but straight horizontal line-gap to the Graph 
+  connections.
 
-- Customize the Graph zoom slider widget to reset upon
-  mouse middle-button click.
+- Customize the Graph zoom slider widget to reset upon mouse 
+  middle-button click.
 
 - Add Clear preset button to Setup dialog.
 
-- Use default values for most preset parameters: sample
-  rate, frames/period (aka. buffer-size), periods/buffer,
-  realtime priority, port maximum, client timeout, word
-  length, wait time, channel maximum.
+- Use default values for most preset parameters: sample rate, 
+  frames/period (aka. buffer-size), periods/buffer, realtime
+  priority, port maximum, client timeout, word length, wait time,
+  channel maximum.
 
 - Early preparations for the New Year develop(ment) cycle.
 
 
 0.9.0  2020-12-17  A Winter'20 Release.
 
-- List only available backend drivers when JACK D-BUS
-  is enabled.
+- List only available backend drivers when JACK D-BUS is enabled.
 
-- Graph client-name / node-title aliases persistence
-  have been hopefully fixed.
+- Graph client-name / node-title aliases persistence have been 
+  hopefully fixed.
 
-- Get rid of those "JACK has crashed" red-herrings
-  from latest Windows(tm) builds.
+- Get rid of those "JACK has crashed" red-herrings from latest 
+  Windows(tm) builds.
 
-- Early fixing to build for Qt >= 6.0.0 and comply
-  with C++17 standard.
+- Early fixing to build for Qt >= 6.0.0 and comply with C++17 
+  standard.
 
 
 0.6.3  2020-07-31  A Summer'20 Release.
 
-- Clock source and Self connect restriction options
-  have been added to Setup / Settings / Advanced 
-  (only enabled when JACK D-BUS control interface
-  is in effect).
+- Clock source and Self connect restriction options have been added 
+  to Setup / Settings / Advanced (only enabled when JACK D-BUS control 
+  interface is in effect).
 
-- Added preliminary support for JACK CV signal-type
-  ports and JACK OSC event-type ports (Graph only).
+- Added preliminary support for JACK CV signal-type ports and JACK 
+  OSC event-type ports (Graph only).
 
-- Left-clicking on the system-tray icon now simply
-  toggles the main widget visibility, disregarding
-  if already hidden undercover to other windows.
+- Left-clicking on the system-tray icon now simply toggles the main 
+  widget visibility, disregarding if already hidden undercover to 
+  other windows.
 
-- Graph nodes and ports are now presented with some
-  gradient background.
+- Graph nodes and ports are now presented with some gradient 
+  background.
 
-- Fixed Setup dialog Cancel (or close) behavior when
-  Settings > Parameters > Frames/Period (aka. buffer-
-  size) it's the only setting that's changed.
+- Fixed Setup dialog Cancel (or close) behavior when Settings > 
+  Parameters > Frames/Period (aka. buffer- size) it's the only
+  setting that's changed.
 
 - Early fixing to build for Qt >= 5.15.0.
 
@@ -77,58 +75,53 @@ ChangeLog
 
 - A scalable (.svg) icon version has been added.
 
-- Make man page compression reproducible (after request
-  by Jelle van der Waa, while on the Vee-Ones, thanks).
+- Make man page compression reproducible (after request by Jelle
+  van der Waa, while on the Vee-Ones, thanks).
 
-- Ditching deprecated QTime methods for QElapsedTimer's
-  (in compliance to Qt >= 5.14.0).
+- Ditching deprecated QTime methods for QElapsedTimer's (in 
+  compliance to Qt >= 5.14.0).
 
 - Bumped copyright headers into the New Year (2020).
 
 
 0.6.1  2019-12-22  The Winter'19 Release.
 
-- Custom color (palette) theme editor introduced; color
-  (palette) theme changes are now effective immediately,
-  except on default.
+- Custom color (palette) theme editor introduced; color (palette) 
+  theme changes are now effective immediately, except on default.
 
-- Second attempt to fix the yet non-official though
-  CMake build configuration.
+- Second attempt to fix the yet non-official though CMake build 
+  configuration.
 
-- When using autotools and ./configure --with-qt=...,
-  it is also necessary to adjust the PKG_CONFIG_PATH
-  environment variable (after a merge request by plcl
-  aka. Pedro López-Cabanillas, while on qmidinet,
-  thanks).
+- When using autotools and ./configure --with-qt=..., it is also 
+  necessary to adjust the PKG_CONFIG_PATH environment variable
+  (after a merge request by plcl aka. Pedro López-Cabanillas,
+  while on qmidinet, thanks).
 
 
 0.6.0  2019-10-17  An Autumn'19 Release.
 
-- Graph: avoid self-connecting over their own ports
-  when client nodes are selected as a whole group;
-  also try to match port-types in a oderly fashion
-  when connecting multiple selected ports.
+- Graph: avoid self-connecting over their own ports when client 
+  nodes are selected as a whole group; also try to match port-types
+  in a oderly fashion when connecting multiple selected ports.
 
-- Changing current JACK buffer size from Setup dialog
-  (cf. Settings / Frames/Period) may now take effect
-  just immediately ;)
+- Changing current JACK buffer size from Setup dialog (cf. Settings 
+  /Frames/Period) may now take effect just immediately ;)
 
-- An 'Apply' button as been added to the Setup dialog;
-  ask whether to restart the JACK audio server, if any
-  settings are changed.
+- An 'Apply' button as been added to the Setup dialog; ask whether 
+  to restart the JACK audio server, if any settings are changed.
 
 - Added alternate yet non-official CMake build option.
 
 - Fix HiDPI display screen effective support (Qt >= 5.6).
 
-- Command line arguments (--start, --preset=[label] and
-  --active-patchbay=[path]) are passed and take effect
-  on the current singleton/unique application instance,
-  when enabled and already running.
+- Command line arguments (--start, --preset=[label] and --active
+  -patchbay=[path]) are passed and take effect on the current 
+  singleton/unique application instance, when enabled and already 
+  running.
 
-- System-tray icon context menu has been refactored to
-  be exactly the same as the main-window context menu
-  that is re-instantiated on demand.
+- System-tray icon context menu has been refactored to be exactly 
+  the same as the main-window context menu that is re-instantiated
+  on demand.
 
 - Make sure compiler flags comply to c++11 as standard.
 
@@ -143,23 +136,22 @@ ChangeLog
 
 0.5.8  2019-05-25  A Spring'19 Release.
 
-- When enabled the current default preset settings are
-  now read from the last known JACK D-BUS configuration.
+- When enabled the current default preset settings are now read
+  from the last known JACK D-BUS configuration.
 
 - Minor update to Debian packaging control file.
 
-- Removed all the remaining leftovers of old pre-FFADO
-  'freebob' driver support.
+- Removed all the remaining leftovers of old pre-FFADO 'freebob' 
+  driver support.
 
 
 0.5.7  2019-03-11  A Spring-Break'19 Release.
 
-- Graph node and port title renaming and nodes position
-  move changes are now undo/redo-able.
+- Graph node and port title renaming and nodes position move changes 
+  are now undo/redo-able.
 
-- Graph client and port title in-place renaming is now
-  integrated to native aliases and JACK metadata (aka.
-  pretty-names).
+- Graph client and port title in-place renaming is now integrated to 
+  native aliases and JACK metadata (aka. pretty-names).
   
 - Refactored all native client/port name aliases.
 
@@ -168,20 +160,18 @@ ChangeLog
 
 0.5.6  2019-03-11  Pre-LAC2019 Release Frenzy.
 
-- Refactored all singleton/unique application instance
-  setup logic away from X11/Xcb hackery.
+- Refactored all singleton/unique application instance setup logic 
+  away from X11/Xcb hackery.
 
-- At last, JACK freewheel mode is now being detected
-  as to postpone any active patchbay scans as much as
-  possible.
+- At last, JACK freewheel mode is now being detected as to postpone 
+  any active patchbay scans as much as possible.
   
 - Removed old pre-FFADO 'freebob' driver support.
 
 - HiDPI display screen support (Qt >= 5.6).
 
-- Graph port temporary highlighting while hovering,
-  if and only if connecting ports of same type and
-  complementary modes.
+- Graph port temporary highlighting while hovering, if and only if 
+  connecting ports of same type and complementary modes.
 
 - Bumped copyright headers into the New Year (2019).
 
@@ -192,50 +182,46 @@ ChangeLog
 
 - Graph port sort options added as View / Sort menu.
 
-- System tray options now subject to current desktop
-  environment availability.
+- System tray options now subject to current desktop environment 
+  availability.
 
-- Also disable Setup / Misc / Other / Save JACK server
-  configuration to (.jackdrc) when JACK D-Bus interface
-  is enabled.
+- Also disable Setup / Misc / Other / Save JACK server configuration 
+  to (.jackdrc) when JACK D-Bus interface is enabled.
 
-- Whether to use server synchronous mode option added
-  to Setup / Settings / Parameters (only applied when
-  JACK D-BUS interface is enabled).
+- Whether to use server synchronous mode option added to Setup / 
+  Settings / Parameters (only applied when JACK D-BUS interface is 
+  enabled).
 
-- Disable some Setup / Settings / Advanced parameters 
-  when JACK D-Bus interface is enabled and vice-versa.
+- Disable some Setup / Settings / Advanced parameters when JACK 
+  D-Bus interface is enabled and vice-versa.
 
 - Attempt to power-cycle JACK D-Bus service on demand;
 
-- Marked as probably useless anyway, old "H/W Monitor"
-  option (-H) is now being ditched from Setup / Settings
-  / Advanced tab.
+- Marked as probably useless anyway, old "H/W Monitor" option (-H) 
+  is now being ditched from Setup / Settings / Advanced tab.
 
 - Graph port/connections highlighting.
 
 
 0.5.4  2018-09-24  An Early Autumn'18 Release.
 
-- Graph port-type colors are now configurable (cf. menu
-  View > Colors.
+- Graph port-type colors are now configurable (cf. menu View > 
+  Colors.
 
-- Make Graph nodes (ie. client boxes) transparent for yet
-  some eye-candiness ;). Also keep the (Graph) current
-  selection across port (dis)connections.
+- Make Graph nodes (ie. client boxes) transparent for yet some 
+  eye-candiness ;). Also keep the (Graph) current selection across 
+  port (dis)connections.
 
-- Drawing patchbay connector lines as (bezier) curves is
-  now a difinitive and fixed feature (as long as no more
-  remains from the so called "Cambric explosion era" are
-  still lurking in there).
+- Drawing patchbay connector lines as (bezier) curves is now a 
+  difinitive and fixed feature (as long as no more remains from the
+  so called "Cambric explosion era" are still lurking in there).
 
-- AppStream metadata updated to be the most compliant with
-  latest freedesktop.org specification and recommendation.
+- AppStream metadata updated to be the most compliant with latest 
+  freedesktop.org specification and recommendation.
 
 - Graph auto-layout improvement for brand new node clients.
 
-- Avoid showing setup warning when no server settings have
-  changed.
+- Avoid showing setup warning when no server settings have changed.
 
 - Fixed JACK D-Bus settings for MIDI driver parameter.
 
@@ -244,14 +230,14 @@ ChangeLog
 
 - Portuguese (pt) translation added (by Heitor Rocha).
 
-- AppData/AppStream metadata is now settled under an all
-  permisssive license (FSFAP).
+- AppData/AppStream metadata is now settled under an all permisssive 
+  license (FSFAP).
 
-- Improved Graph rubberband add (Shift) and toggle (Ctrl)
-  multiple (de)selections.
+- Improved Graph rubberband add (Shift) and toggle (Ctrl) multiple 
+  (de)selections.
 
-- Added user preference option: Setup / Misc / Buttons /
-  Replace Connections with Graph button (on main window).
+- Added user preference option: Setup / Misc / Buttons / Replace 
+  Connections with Graph button (on main window).
 
 - Added a zoom slider control to the Graph view status bar.
 
@@ -260,70 +246,69 @@ ChangeLog
 
 - Respect ALSA Sequencer support option also on Graph view.
 
-- Regression to new Graph node/ports sorting comparator;
-  also fixed multiple and many port removals, most probably
-  causing it to crash due to double-free/delete potential.
+- Regression to new Graph node/ports sorting comparator; also fixed 
+  multiple and many port removals, most probably causing it to crash 
+  due to double-free/delete potential.
 
-- Fixed the automatic aggregation of new Graph client nodes
-  that are split as either input or output only (ie. system,
-  terminal, physical or otherwise non-duplex nodes).
+- Fixed the automatic aggregation of new Graph client nodes that are 
+  split as either input or output only (ie. system, terminal, physical 
+  or otherwise non-duplex nodes).
 
 - Added View/Zoom Range mode option to Graph tool.
 
 
 0.5.1  2018-05-21  Pre-LAC2018 release frenzy.
 
-- Half a decade later, recent new custom entries may now get
-  removed from Session Infra-client list.
+- Half a decade later, recent new custom entries may now get removed 
+  from Session Infra-client list.
 
-- Some rather old, better said "Cambric explosion era", user
-  preference options have been ditched altogether: Display /
-  Time Format; Display / Shiny glass light effect; Display /
-  Connections/Draw connections and patchbay lines as Bezier
-  curves; Misc/Configure as temporary server.
+- Some rather old, better said "Cambric explosion era", user 
+  preference options have been ditched altogether: Display / Time 
+  Format; Display / Shiny glass light effect; Display / 
+  Connections/Draw connections and patchbay lines as Bezier curves; 
+  Misc/Configure as temporary server.
 
-- A brand new and way long overdue connections Graph widget
-  is finally introduced, only to be accessible through the
-  context menu at this time.
+- A brand new and way long overdue connections Graph widget is 
+  finally introduced, only to be accessible through the context menu 
+  at this time.
 
-- Extended multi-selection is now supported on all Connections
-  client/port lists, allowing for multiple (dis)connections at
-  once.
+- Extended multi-selection is now supported on all Connections 
+  client/port lists, allowing for multiple (dis)connections at once.
 
-- Disable singleton/unique application instance setup logic
-  when the display server platform is not X11.
+- Disable singleton/unique application instance setup logic when the 
+  display server platform is not X11.
 
 - A little hardening on the configure (autoconf) macro side.
 
 
 0.5.0  2017-12-16  End of Autum'17 release.
 
-- Current preset is always taken into account if ever changes
-  while the Setup dialog is hidden (eg. via context menu).
+- Current preset is always taken into account if ever changes while 
+  the Setup dialog is hidden (eg. via context menu).
 
-- Desktop entry specification file is now finally independent
-  from build/configure template chains.
+- Desktop entry specification file is now finally independent from 
+  build/configure template chains.
 
-- Updated target path for freedesktop.org's AppStream metainfo
-  file (formerly AppData).
+- Updated target path for freedesktop.org's AppStream metainfo file 
+  (formerly AppData).
 
 
 0.4.5  2017-04-27  Pre-LAC2017 release frenzy.
 
-- On some desktop-shells, the system tray icon blinking on
-  XRUN ocurrences, have been found responsible to excessive
-  CPU usage, an "eye-candy" effect which is now optional as
-  far as Setup/Display/Blink server mode indicator goes.
+- On some desktop-shells, the system tray icon blinking on XRUN 
+  ocurrences, have been found responsible to excessive CPU usage,
+  an "eye-candy" effect which is now optional as far as  Setup/
+  Display/Blink server mode indicator goes.
 
 - Added French man page (by Olivier Humbert, thanks).
 
-- Make builds reproducible byte for byte, by getting rid of
-  the configure build date and time stamps.
+- Make builds reproducible byte for byte, by getting rid of the 
+  configure build date and time stamps.
 
 
 0.4.4  2016-11-14  A Fall'16 release.
 
-- Fixed an early crash when the singleton/unique application
+- Fixed an early crash when the singleton/unique application 
   instance setup option is turned off.
 
 - Almost complete overhaul on the configure script command
@@ -341,35 +326,35 @@ ChangeLog
 
 - Old "Start minimized to system tray" option returns to setup.
 
-- Dropped the --enable-qt5 from configure as found redundant
-  given that's the build default anyway (suggestion by Guido
-  Scholz, while for Qtractor, thanks).
+- Dropped the --enable-qt5 from configure as found redundant given 
+  that's the build default anyway (suggestion by Guido Scholz, while 
+  for Qtractor, thanks).
 
-- Late again French (fr) translation update (by Olivier Humbert
-  aka. trebmuh, thanks).
+- Late again French (fr) translation update (by Olivier Humbert aka. 
+  trebmuh, thanks).
 
 
 0.4.2  2016-04-05  Spring'16 release frenzy.
 
-- Added a brand new "Enable JACK D-BUS interface" option, split
-  from the old common "Enable D-BUS interface" setup option which
-  now refers to its own self D-BUS interface exclusively.
+- Added a brand new "Enable JACK D-BUS interface" option, split from 
+  the old common "Enable D-BUS interface" setup option which now 
+  refers to its own self D-BUS interface exclusively.
 
 - Dropped old "Start minimized to system tray" option from setup.
 
-- Add double-click action (toggle start/stop) to systray (a pull
+- Add double-click action (toggle start/stop) to systray (a pull 
   request by Joel Moberg, thanks).
 
 - Added application keywords to freedesktop.org's AppData.
 
-- System-tray icon context menu has been fixed/hacked to show up
+- System-tray icon context menu has been fixed/hacked to show up 
   again on Plasma 5 (aka. KDE5) notification status area.
 
-- Switched column entries in the unified interface device combo-
-  box to make it work for macosx/coreaudio again.
+- Switched column entries in the unified interface device combo- box 
+  to make it work for macosx/coreaudio again.
 
-- Blind fix to a FTBFS on macosx/coreaudio platforms, a leftover
-  from the unified interface device selection combo-box inception,
+- Blind fix to a FTBFS on macosx/coreaudio platforms, a leftover 
+  from the unified interface device selection combo-box inception, 
   almost two years ago.
 
 - Prevent x11extras module from use on non-X11/Unix plaforms.
@@ -379,28 +364,28 @@ ChangeLog
 
 0.4.1  2015-10-28  A Fall'15 release.
 
-- Probing portaudio audio device in a separate thread (by Kjetil
+- Probing portaudio audio device in a separate thread (by Kjetil 
   Matheussen, thanks).
 
-- Messages standard output capture has been improved again, now
-  in both ways a non-blocking pipe may get.
+- Messages standard output capture has been improved again, now in 
+  both ways a non-blocking pipe may get.
 
 - Regression fix for invalid system-tray icon dimensions reported
   by some desktop environment frameworks.
 
-- New hi-res application icon (by Uttrup Renzel, Max Christian
+- New hi-res application icon (by Uttrup Renzel, Max Christian 
   Pohle, thanks).
 
 - System tray icon red background now blinks when a XRUN occurs.
 
-- Desktop environment session shutdown/logout management has been
+- Desktop environment session shutdown/logout management has been 
   also adapted to Qt5 framework.
 
 - Single/unique application instance control adapted to Qt5/X11.
 
 - Prefer Qt5 over Qt4 by default with configure script.
 
-- Overrideable tooltips with latency info (re. Connections JACK
+- Overrideable tooltips with latency info (re. Connections JACK 
   client/ports: patch by Xavier Mendez, thanks).
 
 - Complete rewrite of Qt4 vs. Qt5 configure builds.
@@ -412,22 +397,22 @@ ChangeLog
 
 - Some windows fixes added (patch by Kjetil Matheussen, thanks).
 
-- Most advanced Setup/Settings are moved into new Setup/Advanced
-  settings tab; limit range for the real-time priority setting,
-  now having 6 as absolute minimum valid value (after patches by
-  Robin Gareus, thanks).
+- Most advanced Setup/Settings are moved into new Setup/Advanced 
+  settings tab; limit range for the real-time priority setting, now 
+  having 6 as absolute minimum valid value (after patches by Robin 
+  Gareus, thanks).
 
-- A new top-level widget window geometry state save and restore
+- A new top-level widget window geometry state save and restore 
   sub-routine is now in effect.
 
-- Delayed geometry setup for widget windows upon startup has
-  been deprecated and scrapped altogether.
+- Delayed geometry setup for widget windows upon startup has been 
+  deprecated and scrapped altogether.
 
-- Setup/settings dialog tab is going into some layout changes;
-  also got rid of old patchbay auto-refresh timer cruft, which
-  was previously hidden/disabled.
+- Setup/settings dialog tab is going into some layout changes; also 
+  got rid of old patchbay auto-refresh timer cruft, which was 
+  previously hidden/disabled.
 
-- New socket names are now automatically inferred from selected
+- New socket names are now automatically inferred from selected 
   client names while on the Patchbay widget, Socket dialog.
 
 - Fixed for some strict tests for Qt4 vs. Qt5 configure builds.
@@ -441,57 +426,55 @@ ChangeLog
 
 - Setup dialog form is now modeless.
 
-- Introducing brand new active patchbay reset/disconnect-all
-  user preference option.
+- Introducing brand new active patchbay reset/disconnect-all user 
+  preference option.
 
-- Current highlighted client/port connections are now drawn
-  with thicker connector lines.
+- Current highlighted client/port connections are now drawn with 
+  thicker connector lines.
 
-- New user preference option on whether to show the nagging
-  'program will keep running in the system tray' message, on
-  main window close.
+- New user preference option on whether to show the nagging 'program 
+  will keep running in the system tray' message, on main window close.
 
-- Connections lines now drawn with anti-aliasing; connections
+- Connections lines now drawn with anti-aliasing; connections 
   splitter handles width is now reduced.
 
-- Drop missing or non-existent patchbay definition files from
-  the most recent used list.
+- Drop missing or non-existent patchbay definition files from the 
+  most recent used list.
 
 
 0.3.12  2014-10-19  JACK Pretty-names aliasing.
 
-- JACK client/port pretty-name (metadata) support is being
-  introduced and seamlessly integrated with old Connections
+- JACK client/port pretty-name (metadata) support is being 
+  introduced and seamlessly integrated with old Connections 
   client/port aliases editing (rename) (refactored from an
   original patch by Paul Davis, thanks).
 
-- Application close confirm warning is now raising the main
-  window as visible and active for due top level display,
-  especially applicable when minimized to the system tray.
+- Application close confirm warning is now raising the main window 
+  as visible and active for due top level display, especially 
+  applicable when minimized to the system tray.
 
-- Messages standard output capture has been slightly improved
-  as for non-blocking i/o, whenever available.
+- Messages standard output capture has been slightly improved as
+  for non-blocking i/o, whenever available.
 
 - Translations install directory change.
 
 - Allow the build system to include an user specified LDFLAGS.
 
-- Missing input/output-latency parameter settings now settled
-  for the D-BUS controlled JACK server and firewire back-end
-  driver.
+- Missing input/output-latency parameter settings now settled for 
+  the D-BUS controlled JACK server and firewire back-end driver.
 
 
 0.3.11  2013-12-31  A fifth of a Jubilee.
 
 - More preparations for Qt5 configure build.
 
-- Interface device selection is now unified, by moving the old 
-  '>' pop-up menu into the customized combo-box drop-down list
-  showing all available card/device names and descriptions (on
-  a patch by Arnout Engelen, thanks).
+- Interface device selection is now unified, by moving the old '>' 
+  pop-up menu into the customized combo-box drop-down list showing all 
+  available card/device names and descriptions (on a patch by Arnout 
+  Engelen, thanks).
 
-- Added include <unistd.h> to shut up gcc 4.7 build failures
-  (patch by Alexis Ballier, thanks).
+- Added include <unistd.h> to shut up gcc 4.7 build failures (patch 
+  by Alexis Ballier, thanks).
 
 
 0.3.10  2013-04-01  The singing swan rehersal.
@@ -502,243 +485,239 @@ ChangeLog
 
 - Transport tempo (BPM) precision display fixed to 4 digits.
 
-- Color-candy (dang old ANSI terminal?) escape sequences are
-  now silently stripped from jackdbus messages captured log
-  (onliner from original patch by Brendan Jones, thanks).
+- Color-candy (dang old ANSI terminal?) escape sequences are now 
+  silently stripped from jackdbus messages captured log (onliner
+  from original patch by Brendan Jones, thanks).
 
-- List ALSA device card id. string instead of device number,
-  while on setup dialog.
+- List ALSA device card id. string instead of device number, while 
+  on setup dialog.
 
 - Japanese (ja) translation added (by Takashi Sakamoto).
 
 
 0.3.9  2012-05-18  The last of the remnants.
 
-- Killing D-BUS controlled JACK server is now made optional,
-  cf. Setup/Misc/Stop JACK audio server on application exit.
-  (a patch by Roland Mas, thanks).
+- Killing D-BUS controlled JACK server is now made optional, cf. 
+  Setup/Misc/Stop JACK audio server on application exit. (a patch by 
+  Roland Mas, thanks).
 
 - Added include <unistd.h> to shut up gcc 4.7 build failures.
 
 - Make(ing) -jN parallel builds now available for the masses.
 
-- A mis-quoting bug at the command line argument string may
-  have been crippling the (unmaintained) Windows port since
-  ever, leaving its main function to start jackd dead in the
-  water, belly down :) now hopefully fixed (following a mail
-  transaction with Stephane Letz and Mathias Nagorni, thanks).
+- A mis-quoting bug at the command line argument string may have 
+  been crippling the (unmaintained) Windows port since ever, leaving 
+  its main function to start jackd dead in the water, belly down :) 
+  now hopefully fixed (following a mail transaction with Stephane
+  Letz and Mathias Nagorni, thanks).
 
-- Currently a JACK2-only feature, the JACK version string
-  display at the About dialog box, must now be explicitly
-  enabled on configure time (--enable-jack-version).
+- Currently a JACK2-only feature, the JACK version string display at 
+  the About dialog box, must now be explicitly enabled on configure 
+  time (--enable-jack-version).
 
-- A new so called "Server Suffix" parameter option appears
-  to rescue on the situations where QjackCtl falls short on
-  extra, exquisite and/or esoteric command line options eg.
-  (net)jack1/2 differences.
+- A new so called "Server Suffix" parameter option appears to rescue 
+  on the situations where QjackCtl falls short on extra, exquisite 
+  and/or esoteric command line options eg. (net)jack1/2 differences.
 
-- Fixed D-Bus Input/Output device parameter settings, filled
-  when either interface is selected for Capture/Playback only.
-  (probable fix for bug #3441860).
+- Fixed D-Bus Input/Output device parameter settings, filled when 
+  either interface is selected for Capture/Playback only. (probable 
+  fix for bug #3441860).
 
-- Fixed Makefile.in handling of installation directories to
-  the configure script eg. --datadir, --localedir, --mandir.
-  (after an original patch from h3xx, thanks).
+- Fixed Makefile.in handling of installation directories to the 
+  configure script eg. --datadir, --localedir, --mandir. (after an 
+  original patch from h3xx, thanks).
 
-- Main window is now brought to front and (re)activated when
+- Main window is now brought to front and (re)activated when 
   clicking on the system tray icon instead of just hiding it.
 
-- Add current xrun count to the system tray icon tooltip, if
-  not zero (after patch #3314633 by Colin Fletcher, thanks).
+- Add current xrun count to the system tray icon tooltip, if not 
+  zero (after patch #3314633 by Colin Fletcher, thanks).
 
 
 0.3.8  2011-07-01  JACK Session versioning.
 
 - Debugging stacktrace now applies to all working threads.
 
-- Session "Save" button now a drop-down menu, replacing the
-  session save type combo-box/drop-down list selection. Also,
-  an early session directory versioning/numbering scheme is
-  now in place, although optional.
+- Session "Save" button now a drop-down menu, replacing the session 
+  save type combo-box/drop-down list selection. Also, an early session 
+  directory versioning/numbering scheme is now in place, although 
+  optional.
 
-- Probable fix to debian bug report #624198 - segfault when
-  pressing the stop button (by Grant Adrian Diffey, after a
-  patch from Adrian Knoth, thanks).
+- Probable fix to debian bug report #624198 - segfault when pressing 
+  the stop button (by Grant Adrian Diffey, after a patch from Adrian 
+  Knoth, thanks).
 
-- Desktop environment session shutdown (eg. logout) is now
-  tapped for graceful application exit, even though the main
-  window is active (visible) and minimizing to system tray
-  is enabled. Both were causing first shutdown/logout attempt
-  to abort. Not anymore, hopefully ;).
+- Desktop environment session shutdown (eg. logout) is now tapped 
+  for graceful application exit, even though the main window is
+  active (visible) and minimizing to system tray is enabled. Both
+  were causing first shutdown/logout attempt to abort. Not anymore, 
+  hopefully ;).
 
-- Make sure all activated patchbay definition files are in
-  their complete and absolute directory path forms.
+- Make sure all activated patchbay definition files are in their 
+  complete and absolute directory path forms.
 
-- Connections refresh button now does an immediate and true
-  reconstruction of all clients and their respective ports
-  and connections, unconditionally.
+- Connections refresh button now does an immediate and true 
+  reconstruction of all clients and their respective ports and 
+  connections, unconditionally.
 
-- Command line server start option (-s, --start) is now made
-  independent from configuration setup option (cf. Setup/Misc
-  /Start JACK audio server on application startup).
+- Command line server start option (-s, --start) is now made 
+  independent from configuration setup option (cf. Setup/Misc/Start 
+  JACK audio server on application startup).
 
-- Now handling cable socket types properly to let patchbay
-  definitions work correctly, whenever having sockets with
-  the very same literal name (twisted from patch #3183467,
-  by Karsten, thanks;).
+- Now handling cable socket types properly to let patchbay 
+  definitions work correctly, whenever having sockets with the very 
+  same literal name (twisted from patch #3183467, by Karsten, 
+  thanks;).
 
-- Abrupt focus behavior when any of the keyboard modifiers
-  (Shift, Ctrl, Alt, Caps Lock) is hit while on Connections
-  client/port aliases editing (rename) has been fixed.
+- Abrupt focus behavior when any of the keyboard modifiers (Shift, 
+  Ctrl, Alt, Caps Lock) is hit while on Connections client/port 
+  aliases editing (rename) has been fixed.
 
 - Russian (ru) translation updated (by Alexandre Prokoudine).
 
-- Added include "errno.h" alegedly missing for BSD style
-  systems (applying patch for bug #3126091).
+- Added include "errno.h" alegedly missing for BSD style systems 
+  (applying patch for bug #3126091).
 
 
 0.3.7  2010-11-30  JACK Session managerism.
 
 - Session widget has session save type preserved as well.
 
-- Connections and the new Messages/Status widgets now have
-  their last open tab preserved across program run-cycles.
+- Connections and the new Messages/Status widgets now have their 
+  last open tab preserved across program run-cycles.
 
-- Connections and Patchbay widgets have been finally given
-  up on an old feature request: an Expand All items button.
+- Connections and Patchbay widgets have been finally given up on
+  an old feature request: an Expand All items button.
 
-- A significant UI layout has been made: the Messages and
-  Status widgets were merged into one, giving space to the
-  brand new Session wigdet to be easy accessible from the
-  main panel control window.
+- A significant UI layout has been made: the Messages and Status 
+  widgets were merged into one, giving space to the brand new Session 
+  wigdet to be easy accessible from the main panel control window.
 
-- libX11 is now being added explicitly to the build link
-  phase, as seen necessary on some bleeding-edge distros
-  eg. Fedora 13, Debian 6. (closing bug #3050915).
+- libX11 is now being added explicitly to the build link phase, as 
+  seen necessary on some bleeding-edge distros eg. Fedora 13, Debian 
+  6. (closing bug #3050915).
 
-- Input/Output latency options were missing but now finally
-  enabled for the firewire back-end.
+- Input/Output latency options were missing but now finally enabled 
+  for the firewire back-end.
 
 - General standard dialog buttons layout is now in place.
 
-- Avoid pre-loading a stalled patchbay definition filename
-  and its nagging error on startup (fixes bug #3017078).
+- Avoid pre-loading a stalled patchbay definition filename and its 
+  nagging error on startup (fixes bug #3017078).
 
-- Client connection retrial logic scrapped. Being a leftover
-  from early ages, when machines were slower and JACK server
-  startup times were longer... now, if it can't connect first
-  time as client, it will tear down the server whether it's
-  starting up still or not at all. (cf. Setup/Settings/Start
-  Delay for the rescue).
+- Client connection retrial logic scrapped. Being a leftover from 
+  early ages, when machines were slower and JACK server startup times 
+  were longer... now, if it can't connect first time as client, it 
+  will tear down the server whether it's starting up still or not at 
+  all. (cf. Setup/Settings/Start Delay for the rescue).
 
-- Server name is finally part of the server settings presets,
-  thanks to Fons Adriaensen for the heads-up.
+- Server name is finally part of the server settings presets, thanks 
+  to Fons Adriaensen for the heads-up.
 
-- As a workaround regarding issues switching jack2's backends,
-  Robin Gareus sends us yet another D-Bus method slot: "preset",
-  (dbus-send --system / org.rncbc.qjackctl.preset string:PRESET).
-  Thanks again.
+- As a workaround regarding issues switching jack2's backends, Robin 
+  Gareus sends us yet another D-Bus method slot: "preset", (dbus-send 
+--system / org.rncbc.qjackctl.preset string:PRESET). Thanks again.
 
-- Another D-Bus interface slot makes it through implementation:
-  "quit" (eg. usage: dbus-send --system / org.rncbc.qjackctl.quit).
-  Besides, there's also these new JACK session management actions
+- Another D-Bus interface slot makes it through implementation: 
+  "quit" (eg. usage: dbus-send --system / org.rncbc.qjackctl.quit). 
+  Besides, there's also these new JACK session management actions 
   which were being overlooked as well: "load", "save", "savequit"
   and "savetemplate" are also available as D-Bus method slots.
 
-- Make sure that Patchbay socket names are unique when adding
-  or copying, fixing previous patch by Dominic Sacre.
+- Make sure that Patchbay socket names are unique when adding or 
+  copying, fixing previous patch by Dominic Sacre.
 
 - JACK version is now being shown on the About box (jack2).
 
-- Slight Connections widget behavioral change: (dis)connecting a
-  client (from) to one single port, (dis)connections will be
-  applied in sequence from (to) all client output ports to (from)
-  as many input ports there are in below, one by one (satisfying
-  a 5 year old request from Yann Orlarey, thanks:).
+- Slight Connections widget behavioral change: (dis)connecting a 
+  client (from) to one single port, (dis)connections will be applied 
+  in sequence from (to) all client output ports to (from) as many 
+  input ports there are in below, one by one (satisfying a 5 year
+  old request from Yann Orlarey, thanks:).
 
 - JACK session support is being introduced.
 
 - Ignore first XRUN occurrence option dropped from statistics.
 
-- Initial widget geometry and visibility persistence logic has
-  been slightly revised as much to avoid crash failures due to
-  wrong main widget hidden state.
+- Initial widget geometry and visibility persistence logic has been 
+  slightly revised as much to avoid crash failures due to wrong main 
+  widget hidden state.
 
-- Double-quotes are now being added to device names which include
-  blank characters and were rendering invalid all command line
-  invocation of the classic JACK server (eg. specially due for
+- Double-quotes are now being added to device names which include 
+  blank characters and were rendering invalid all command line 
+  invocation of the classic JACK server (eg. specially due for 
   Portaudio device names on Windows).
   
-- Transport play (rolling) status is now being guarded to avoid
+- Transport play (rolling) status is now being guarded to avoid 
   backfiring from extraneous transport state changes.
 
 - General source tree layout and build configuration change.
 
 - Italian (it) translation added (by Sergio Atzori).
 
-- Post-shutdown script invocation logic slightly refactored in
+- Post-shutdown script invocation logic slightly refactored in 
   attempt to enforce its execution on application quit.
 
 
 0.3.6  2010-03-09  Full D-Busification!
 
-- Make sure socket names are unique on each side of the Patchbay
+- Make sure socket names are unique on each side of the Patchbay 
   (another patch from Dominic Sacre, thanks).
 
-- A bunch of primitive D-Bus interface slots have been added,
-  allowing shortcut access to most of main applications actions
-  like toggling Messages, Status, Connections, Patchbay widget
-  pop-ups, reset stats, transport and so on. New bindings are
-  given eg. via dbus-send --system / org.rncbc.qjackctl.(main, 
-  messages, status, connections, patchbay, setup, about, reset,
-  rewind, backward, play, pause, forward). (from an original
-  idea from Sebastian Gutsfeld, thanks).
+- A bunch of primitive D-Bus interface slots have been added, 
+  allowing shortcut access to most of main applications actions like 
+  toggling Messages, Status, Connections, Patchbay widget pop-ups, 
+  reset stats, transport and so on. New bindings are given eg. via 
+  dbus-send --system / org.rncbc.qjackctl.(main, messages, status, 
+  connections, patchbay, setup, about, reset, rewind, backward, play, 
+  pause, forward). (from an original idea from Sebastian Gutsfeld, 
+  thanks).
 
-- Patchbay snapshot now tolerates JACK client port strings that
-  have more than one semi-colon in it, honoring just the first
-  one exactly as everywhere else eg. Connections. (a glitch as
-  reported by Geoff Beasley while using a2jmidid).
+- Patchbay snapshot now tolerates JACK client port strings that have 
+  more than one semi-colon in it, honoring just the first one exactly 
+  as everywhere else eg. Connections. (a glitch as reported by Geoff 
+  Beasley while using a2jmidid).
 
-- Most modal message dialog boxes (eg. critical errors) are now
-  replaced by system tray icon bubble messages where available
+- Most modal message dialog boxes (eg. critical errors) are now 
+  replaced by system tray icon bubble messages where available 
   (mitigating feature request #2936455).
 
-- Comply with jackd >= 0.118.0 which nowruns in real-time mode by
-  default; use of -R is now deprecated from the jackd command line
+- Comply with jackd >= 0.118.0 which nowruns in real-time mode by 
+  default; use of -R is now deprecated from the jackd command line 
   interface options; use -r to run in non-real-time-scheduling.
 
 - A man page has beed added.
 
-- Got rid of a pretty old and never really useful "jackd-realtime"
+- Got rid of a pretty old and never really useful "jackd-realtime" 
   server path option--actually, it was only seen available on the
   now defunct old Mandrake Linux distro.
 
-- D-Bus support, as provided by org.jackaudio.service aka jackdbus,
-  is now being introduced and used wherever available and whenever
-  enabled. Configuring, starting, stopping and logging the JACK
+- D-Bus support, as provided by org.jackaudio.service aka jackdbus, 
+  is now being introduced and used wherever available and whenever 
+  enabled. Configuring, starting, stopping and logging the JACK 
   back-end server through the "infamous" jackdbus service is now
   being seamlessly exploited.
 
-- Global configuration state is now explicitly saved/committed to
+- Global configuration state is now explicitly saved/committed to 
   disk when Setup dialog changes are accepted and applied.
 
 - Server name command line option added (-n, --server-name).
 
 - Single application instance restriction option added (X11).
 
-- Setup for the netjack (slave) "net" driver has now sample-rate
-  and frames per buffer (period size) settings disabled and/or
-  ignored, as those are pretty much auto-detected by default;
-  also, a new "netone" backend driver option has been introduced
-  (as suggested by Torben Hohn).
+- Setup for the netjack (slave) "net" driver has now sample-rate and 
+  frames per buffer (period size) settings disabled and/or ignored, as 
+  those are pretty much auto-detected by default; also, a new "netone" 
+  backend driver option has been introduced (as suggested by Torben 
+  Hohn).
 
 - Czech (cs) translation added (by Pavel Fric).
 
-- Fixed some main window keyboard shortcuts. Escape key now closes
-  Connections, Patchbay, Status and Messages widgets as usual (bug
+- Fixed some main window keyboard shortcuts. Escape key now closes 
+  Connections, Patchbay, Status and Messages widgets as usual (bug 
   #2871548).
 
-- Fixed glitch on configure portaudio support, specially when the
+- Fixed glitch on configure portaudio support, specially when the 
   library is not detected as available.
 
 
@@ -746,58 +725,60 @@ ChangeLog
 
 - Late support for UTF-8 encoded client/port names.
 
-- Allow only one single patchbay connection to or from an exclusive
+- Allow only one single patchbay connection to or from an exclusive 
   socket (mitigating bug #2859119).
 
-- Automatic crash-dump reports, debugger stack-traces (gdb), back-
-  traces, whatever, are being introduced as a brand new configure
-  option (--enable-stacktrace) and default enabled on debug build
+- Automatic crash-dump reports, debugger stack-traces (gdb), back- 
+  traces, whatever, are being introduced as a brand new configure 
+  option (--enable-stacktrace) and default enabled on debug build 
   targets (--enable-debug).
 
-- Probable fix on the audio connections with regard to client/port
+- Probable fix on the audio connections with regard to client/port 
   (re)name changes (an ancient bug reported by Fons Adriaensen).
 
-- Portaudio device selector is now available (after a patch handed
+- Portaudio device selector is now available (after a patch handed 
   by Torben Hohn and Stephane Letz).
 
-- A couple of primitive D-Bus interface slots have been introduced,
-  giving the option to start/stop the jackd server from the system
-  bus eg. via dbus-send --system / org.rncbc.qjackctl.start (.stop), 
-  (a nice addition supplied by Robin Gareus, thanks).
+- A couple of primitive D-Bus interface slots have been introduced, 
+  giving the option to start/stop the jackd server from the system bus 
+  eg. via dbus-send --system / org.rncbc.qjackctl.start (.stop), (a 
+  nice addition supplied by Robin Gareus, thanks).
 
-- New command line option (-a, --active-patchbay=[path]) to specify
-  and activate a given patchbay definition file (a simple patch sent
+- New command line option (-a, --active-patchbay=[path]) to specify 
+  and activate a given patchbay definition file (a simple patch sent 
   by John Schneiderman, thanks).
 
 - Added one significant digit to DSP Load percentage status display.
 
-- Tentative support for netjack (slave) by adding the "net" driver to
-  the existing backend driver options on the Setup/Settings section.
+- Tentative support for netjack (slave) by adding the "net" driver 
+  to the existing backend driver options on the Setup/Settings 
+  section.
 
 - Converted obsolete QMessageBox forms to standard buttons.
 
-- New patchbay snapshot now raises the dirty flag and allows for the
+- New patchbay snapshot now raises the dirty flag and allows for the 
   immediate salvage of patchbay definition profile.
 
 - Conditional build for JACK port aliases support (JACK >= 0.109.2).
 
-- Alternate icon sizes other than default 16x16, are now effective to
-  the Connections widget (Setup/Dislay/Connections Window/Icon size).
+- Alternate icon sizes other than default 16x16, are now effective 
+  to the Connections widget (Setup/Dislay/Connections Window/Icon 
+  size).
 
 
 0.3.4  2008-12-05  Patchbay snapshot revamp.
 
-- Introducing the very first and complete translations in-package:
+- Introducing the very first and complete translations in-package: 
   German (de), Spanish (es), French (fr) and Russian (ru); credits
   in TRANSLATORS.
 
-- At last, after years of retarded procrastination, the old infamous
-  patchbay snapshot feature has been the subject of a almost complete
-  rewrite and it does try to give a way better mapping of all actual
-  and current running client/port connections, both JACK (audio, MIDI)
+- At last, after years of retarded procrastination, the old infamous 
+  patchbay snapshot feature has been the subject of a almost complete 
+  rewrite and it does try to give a way better mapping of all actual 
+  and current running client/port connections, both JACK (audio, MIDI) 
   and ALSA MIDI, of course ;)
 
-- On Setup/Settings/Parameters dialog, all device selection options
+- On Setup/Settings/Parameters dialog, all device selection options 
   are now reset to default when disabled interactively.
 
 - Grayed/disabled palette color group fix for dark color themes.
@@ -806,599 +787,632 @@ ChangeLog
 
 - Fait-divers: desktop menu file touched to openSUSE conventions.
 
-- ALSA PCM devices now only listed/enumerated iif strictly compliant
-  with the audio mode criteria (Duplex, Capture-only or Playback-only)
+- ALSA PCM devices now only listed/enumerated iif strictly compliant 
+  with the audio mode criteria (Duplex, Capture-only or Playback-only) 
   as kindly suggested by Nedko Ardaunov.
 
-- JACK client/port aliases may now be displayed as a global user option
-  (see Setup/Display/Connections/JACK client/port aliases).
+- JACK client/port aliases may now be displayed as a global user 
+  option (see Setup/Display/Connections/JACK client/port aliases).
 
-- Lighten up the connections line and highlight colors, as seen to fit
-  best on some darker background themes.
+- Lighten up the connections line and highlight colors, as seen to 
+  fit best on some darker background themes.
 
-- Patchbay snapshot fixed to differentiate socket clients according
-  to its type (Audio, MIDI or ALSA-Seq), avoiding the mess and gross
+- Patchbay snapshot fixed to differentiate socket clients according 
+  to its type (Audio, MIDI or ALSA-Seq), avoiding the mess and gross 
   mistake of hanging disparate type ports under the same client item.
 
-- JACK_DEFAULT_SERVER environment variable is now appended to the X11
-  unique application identifier, allowing for having multiple instances
-  each controlling its own JACK server, besides the default one.
+- JACK_DEFAULT_SERVER environment variable is now appended to the 
+  X11 unique application identifier, allowing for having multiple 
+  instances each controlling its own JACK server, besides the default 
+  one.
 
-- Due to some trouble with newer Qt >= 4.4 applications regarding font
-  size configuration, a new global user option is now available to the
-  rescue: Setup/Misc/Defaults/Base font size (default is no-op).
+- Due to some trouble with newer Qt >= 4.4 applications regarding 
+  font size configuration, a new global user option is now available 
+  to the rescue: Setup/Misc/Defaults/Base font size (default is 
+  no-op).
 
 
 0.3.3  2008-06-07  Patchbay JACK-MIDI, file logging and X11 uniqueness.
 
-- Attempt to load Qt's own translation support and get rid of
-  the ever warning startup message, unless built in debug mode.
+- Attempt to load Qt's own translation support and get rid of the 
+  ever warning startup message, unless built in debug mode. 
   (transaction by Guido Scholz, while on qsynth-devel, thanks).
 
-- Messages file logging makes its first long overdue appearance,
+- Messages file logging makes its first long overdue appearance, 
   with user configurable settings in Setup/Options/Logging.
 
-- Only one application instance is now allowed to be up and running,
-  with immediate but graceful termination upon startup iif an already
-  running instance is detected, which will see its main widget shown
+- Only one application instance is now allowed to be up and running, 
+  with immediate but graceful termination upon startup iif an already 
+  running instance is detected, which will see its main widget shown 
   up and the server started automatically (Qt/X11 platform only).
 
-- Finally, full JACK MIDI support sneaks into the patchbay; socket
-  types now differ in Audio, MIDI and ALSA, following the very same
+- Finally, full JACK MIDI support sneaks into the patchbay; socket 
+  types now differ in Audio, MIDI and ALSA, following the very same 
   nomenclature as found on the Connections widget tabs.
 
 - Sun driver support (by Jacob Meuser).
 
-- Delay window positioning at startup option is now being disabled,
+- Delay window positioning at startup option is now being disabled, 
   on the Setup/Misc tab, when Minimize to system tray is enabled.
 
-- Cosmetic fix: Setup/Settings tab, 'Input Device' text label was
-  using a slightly smaller font than the rest of the application
+- Cosmetic fix: Setup/Settings tab, 'Input Device' text label was 
+  using a slightly smaller font than the rest of the application 
   (bug#1872545, reported by Jouni Rinne).
 
 
 0.3.2  2007-12-20  Patchbay heads-up with season greetings.
 
-- Patchbay port matching has been slightly extended, this time
-  allowing for the multiple or as many-to-many connections between
-  socket plugs, provided these are specified in proper regex form
+- Patchbay port matching has been slightly extended, this time 
+  allowing for the multiple or as many-to-many connections between 
+  socket plugs, provided these are specified in proper regex form 
   (after a patch proposed by Dave Moore, thanks).
 
-- A new option to start the program minimized when the system tray
-  icon is enabled, is now available from Setup/Misc/Start minimized
-  to system tray (as kindly suggested by Marc-Olivier Barre).
+- A new option to start the program minimized when the system tray 
+  icon is enabled, is now available from Setup/Misc/Start minimized to 
+  system tray (as kindly suggested by Marc-Olivier Barre).
 
-- Regression from QSystemTrayIcon (Qt4 >= 4.2) implementation, at
-  least on X11 environments: while the main application widget was
-  minimized to the system-tray, closing any other top-level widget
-  was causing the immediate and unexpected application shutdown.
+- Regression from QSystemTrayIcon (Qt4 >= 4.2) implementation, at 
+  least on X11 environments: while the main application widget was 
+  minimized to the system-tray, closing any other top-level widget was 
+  causing the immediate and unexpected application shutdown.
 
-- Some portaudio backend settings are now being enabled, specially
+- Some portaudio backend settings are now being enabled, specially 
   suited for the jackdmp flavouring.
 
-- Server mode display blinking, usually shown as the RT indicator,
-  is now an option (Setup/Display/Blink server mode indicator when
+- Server mode display blinking, usually shown as the RT indicator, 
+  is now an option (Setup/Display/Blink server mode indicator when 
   started). 
 
 - Tool/child windows position and size preservation fixed.
 
-- The connections/patchbay auto-refresh option has been finally
-  removed due to several user requests, although deprecated for
-  quite some time now it has been the probable cause of some
-  periodic xrun occurrences due to graph-locking in jackd (while
-  making Geoff Beasley angry in the process:).
+- The connections/patchbay auto-refresh option has been finally 
+  removed due to several user requests, although deprecated for quite 
+  some time now it has been the probable cause of some periodic xrun 
+  occurrences due to graph-locking in jackd (while making Geoff 
+  Beasley angry in the process:).
 
 - Messages line limit was not being checked, now honored.
 
-- Simple as it could ever be, the build executive summary report
-  is now given on configure.
+- Simple as it could ever be, the build executive summary report is 
+  now given on configure.
 
 - Patchbay snapshot ot its socket and port ordering back.
 
-- ALSA Sequencer support is now an optional feature on setup,
-  preventing the annoying "MIDI patchbay will be not available"
-  warning message, ruining window placement on Linux systems
-  where the snd-midi-seq kernel module is not loaded or not
-  favorable (eg. OSS) at startup (by request from Jussi Laako).
+- ALSA Sequencer support is now an optional feature on setup, 
+  preventing the annoying "MIDI patchbay will be not available" 
+  warning message, ruining window placement on Linux systems where the 
+  snd-midi-seq kernel module is not loaded or not favorable (eg. OSS) 
+  at startup (by request from Jussi Laako).
 
-- Get configure to try and detect the correct qmake location and
-  insert it the search order, so let the qt4 tools take precedence
-  when --with-qt option is given and older qt3 ones coexist and
-  are found located ahead in the PATH.
+- Get configure to try and detect the correct qmake location and 
+  insert it the search order, so let the qt4 tools take precedence 
+  when --with-qt option is given and older qt3 ones coexist and are 
+  found located ahead in the PATH.
 
-- The connections widget is now being properly refreshed, due to
-  some quirk in the QTreeWidget which was preventing some items,
-  specially the expanded ones, to disappear in the void. Meanwhile,
-  with a hand from Stephane Letz, the client/port lookup method was
+- The connections widget is now being properly refreshed, due to 
+  some quirk in the QTreeWidget which was preventing some items, 
+  specially the expanded ones, to disappear in the void. Meanwhile, 
+  with a hand from Stephane Letz, the client/port lookup method was 
   changed to prevent duplicated, missing entries or worse, crashes
   due to weird behaved windows applications.
 
-- The xrun count stats can now be reset simply by middle clicking
-  on the systray icon or the main window's display area (thanks to
-  patch sent by Dominic Sacre).
+- The xrun count stats can now be reset simply by middle clicking on 
+  the systray icon or the main window's display area (thanks to patch 
+  sent by Dominic Sacre).
 
-- An improved version of the "shiny" background image was issued.
-  The original somehow looked like two different images put together,
+- An improved version of the "shiny" background image was issued. 
+  The original somehow looked like two different images put together, 
   probably most apparent on a bright TFT screen (by Dominic Sacre).
 
-- A warning is now being issued, asking whether one wants to remove
-  a corresponding Patchbay connection, when client/ports are being
-  disconnected over the Connections window, thus avoiding automatic
+- A warning is now being issued, asking whether one wants to remove 
+a corresponding Patchbay connection, when client/ports are being 
+  disconnected over the Connections window, thus avoiding automatic 
   reconnection annoyance due to normal active Patchbay behavior.
 
-- The infamous "Keep child windows always on top" global option is
+- The infamous "Keep child windows always on top" global option is 
   now supposed to behave a little better when disabled, layering
   child windows as naturally as far the window manager dictates.
 
-- Input/Output Channel setting is now allowed to be greater than 32;
-  the special default text is now displayed, also on Input/Output
+- Input/Output Channel setting is now allowed to be greater than 32; 
+  the special default text is now displayed, also on Input/Output 
   Latency and Priority settings spin-boxes. 
 
-- Andreas Persson just sent a patch that makes it possible to compile
-  and run qjackctl with Qt version 4.1. Applied without hesitation,
-  thanks.
+- Andreas Persson just sent a patch that makes it possible to 
+  compile and run qjackctl with Qt version 4.1. Applied without 
+  hesitation, thanks.
 
 
 0.3.1a  2007-07-19  System-tray tooltip icon crash fix.
 
-- An immediate showstopper crash upon client start was irradicated,
-  which was affecting those with the system-tray icon disabled,
-  as is the default (thanks to Ken Ellinwood for first reporting
-  this sloppy one).
+- An immediate showstopper crash upon client start was irradicated, 
+  which was affecting those with the system-tray icon disabled, as is 
+  the default (thanks to Ken Ellinwood for first reporting this sloppy 
+  one).
 
 
-0.3.1   2007-07-18  Shallowed bug-fix release.
+0.3.1  2007-07-18  Shallowed bug-fix release.
 
-- The current DSP load percentage activity is now also displayed on
+- The current DSP load percentage activity is now also displayed on 
   the system-tray icon tooltip.
 
-- An illusive but nasty Connections/Patchbay item tooltip crash bug
+- An illusive but nasty Connections/Patchbay item tooltip crash bug 
   has been hopefully fixed (Qt >= 4.3).
 
-- Now using QSystemTrayIcon class facility if available (Qt4 >= 4.2)
-  making the system-tray option available on most platforms, notably
+- Now using QSystemTrayIcon class facility if available (Qt4 >= 4.2) 
+  making the system-tray option available on most platforms, notably 
   on Windows and Mac OS X.
 
-- Usage of QProcess class has been severely refactored, now using
-  QProcess::start() instead of QProcess::startDetached(), giving
-  much tighter control over the started jackd(mp) process. Downside
-  is that QjackCtl lost its ability and option to leave the process
-  detached upon quitting the application. Too bad.
+- Usage of QProcess class has been severely refactored, now using 
+  QProcess::start() instead of QProcess::startDetached(), giving much 
+  tighter control over the started jackd(mp) process. Downside is that 
+  QjackCtl lost its ability and option to leave the process detached 
+  upon quitting the application. Too bad.
 
 - A new eye-candy bit has sneaked in: server mode display, that is 
   the RT indicator, now blinks when server/client is started/active.
 
-- Combo-box setup history has been corrected on restore, which was
+- Combo-box setup history has been corrected on restore, which was 
   discarding the very initial default (factory) contents.
 
-- Now that Qt4 is accessible to open-source Windows appplications,
-  there's some experimental stuff sneaking in for jackdmp support
-  on win32 (http://www.grame.fr/~letz/jackdmp.html). 
+- Now that Qt4 is accessible to open-source Windows appplications, 
+  there's some experimental stuff sneaking in for jackdmp support on 
+  win32 (http://www.grame.fr/~letz/jackdmp.html). 
 
-- Connections list items were initially sorted in descending order
+- Connections list items were initially sorted in descending order 
   by default. Fixed. Client items are now naturally sorted, again.
 
 
-0.3.0   2007-07-10  Qt4 migration was complete.
+0.3.0  2007-07-10  Qt4 migration was complete.
 
-- Qt4 migration was complete. Care must be taken with this new
-  configuration file and location: this release starts a new one
-  from scratch and won't reuse any of the previous existing ones,
-  although cut and paste might help if you know what you're doing :)
+- Qt4 migration was complete. Care must be taken with this new 
+  configuration file and location: this release starts a new one from 
+  scratch and won't reuse any of the previous existing ones, although 
+  cut and paste might help if you know what you're doing :)
 
-- On a last-minute addition, the "firewire" audio backend driver
-  option has been also included, supporting the ffado.org project
-  which is evolving where "freebob" is leaving (thanks to Klaus
+- On a last-minute addition, the "firewire" audio backend driver 
+  option has been also included, supporting the ffado.org project 
+  which is evolving where "freebob" is leaving (thanks to Klaus 
   Zimmermann for this one).
 
 
-0.2.23   2007-07-02  JACK MIDI support debut.
+0.2.23  2007-07-02  JACK MIDI support debut.
 
-- JACK MIDI support is now being introduced. Connections window
-  now has a brand new MIDI tab, the older being renamed to ALSA,
-  as for the ALSA/MIDI sequencer conveniency. The server settings
-  now include the MIDI driver setup option (ALSA backend only).
+- JACK MIDI support is now being introduced. Connections window now 
+  has a brand new MIDI tab, the older being renamed to ALSA, as for 
+  the ALSA/MIDI sequencer conveniency. The server settings now include 
+  the MIDI driver setup option (ALSA backend only).
 
-- Application icon is now installed to ${prefix}/share/pixmaps;
+- Application icon is now installed to ${prefix}/share/pixmaps; 
   application desktop entry file is now included in installation;
-  spec file (RPM) is now a bit more openSUSE compliant; initial
+  spec file (RPM) is now a bit more openSUSE compliant; initial 
   debianization.
 
 - Invalidation of the JACK client handle is now forced right on 
-  jack_shutdown notification, preventing a most probable fatal
-  crash due to jack_deactivate and/or jack_client_close being
-  called after the jack_watchdog kicks in.
+  jack_shutdown notification, preventing a most probable fatal crash 
+  due to jack_deactivate and/or jack_client_close being called after 
+  the jack_watchdog kicks in.
 
-- Default font option names were adjusted to "Sans Serif" and
+- Default font option names were adjusted to "Sans Serif" and 
   "Monospace", wherever available.
 
-- The "keep child windows always on top" option is not set as
-  default anymore, because window focus behavior gets tricky
-  on some desktop environments (eg. Mac OS X, Gnome).
+- The "keep child windows always on top" option is not set as 
+  default anymore, because window focus behavior gets tricky on some 
+  desktop environments (eg. Mac OS X, Gnome).
 
 - Autoconf (configure) scripting gets an update.
 
 
-0.2.22   2007-03-31  Long overdue but better late than never.
+0.2.22  2007-03-31  Long overdue but better late than never.
 
 - Fixed default settings for the freebob backend (JACK >= 0.103.0).
 
 - CPU Load status label now says correctly DSP Load.
 
-- The most recently used patchbay definitions can now be correctly
+- The most recently used patchbay definitions can now be correctly 
   selected in round-robin fashion from its drop-down list widget.
 
-- Avoid mixing JACK MIDI ports with regular audio ports on the
+- Avoid mixing JACK MIDI ports with regular audio ports on the 
   Connections and Patchbay widgets; strictly list only audio ports.
 
-- Added 192k sample rate to setup settings drop down list (as kindly
+- Added 192k sample rate to setup settings drop down list (as kindly 
   reminded by Klaus Zimmermann, thanks).
 
-- Most top-level widgets were missing the normal-widget flag, which
+- Most top-level widgets were missing the normal-widget flag, which 
   were causing some sticky size behavior on some window managers.
 
 
-0.2.21   2006-10-07  Shrinking on screen real-estate.
+0.2.21  2006-10-07  Shrinking on screen real-estate.
 
 - GPL address update.
 
-- All window captions can now be set smaller as tool-widgets. This
+- All window captions can now be set smaller as tool-widgets. This 
   option takes effect when child windows are kept always on top.
 
-- For the brave of heart, specially the ones brave enough to try with
-  Stephane Letz's jackdmp, a win32 build should be now possible.
+- For the brave of heart, specially the ones brave enough to try 
+  with Stephane Letz's jackdmp, a win32 build should be now possible.
 
-- The main window button text labels are now optional (after a kind
+- The main window button text labels are now optional (after a kind 
   suggestion by Geoff Beasley, thanks).
 
 - Increse default maximum number of ports setting from 128 to 256.
 
-- Initial freebob backend driver support. Also changed the coreaudio
+- Initial freebob backend driver support. Also changed the coreaudio 
   backend driver command line device name/id parameter.
 
-- Closing the main window while not as an active JACK client, nor under
-  a server running state, will just quit the whole application, even
-  though the system-tray icon option is in effect.
+- Closing the main window while not as an active JACK client, nor 
+  under a server running state, will just quit the whole application, 
+  even though the system-tray icon option is in effect.
 
-- The most relevant transport commands (Rewind, Play and Pause) are now
-  made available on the main window context popup menu.
+- The most relevant transport commands (Rewind, Play and Pause) are 
+  now made available on the main window context popup menu.
 
-- The post-shutdown script is now also being called when using the Stop
-  button, whether the jackd server has been started internally or not.
-  The initial hard-coded default is now on and set to `killall jackd`
-  (as a workaround to an old request from Stephane Letz).
+- The post-shutdown script is now also being called when using the 
+  Stop button, whether the jackd server has been started internally or 
+  not. The initial hard-coded default is now on and set to `killall 
+  jackd` (as a workaround to an old request from Stephane Letz).
 
-- The main window buttons display are now optional. One can choose
-  whether the left, right and/or transport buttons are hidden, making
-  it for a total of six different modes for the main window presentation
-  (after a much simpler suggestion from Paul Davis and Stephane Letz).
+- The main window buttons display are now optional. One can choose 
+  whether the left, right and/or transport buttons are hidden, making 
+  it for a total of six different modes for the main window 
+  presentation (after a much simpler suggestion from Paul Davis and 
+  Stephane Letz).
 
 - Added configure support for x86_64 libraries (UNTESTED).
 
 
-0.2.20   2006-03-05  Featuring patchbay socket forwarding.
+0.2.20  2006-03-05  Featuring patchbay socket forwarding.
 
-- Server path setting now accepts custom command line parameters
+- Server path setting now accepts custom command line parameters 
   (after a kind suggestion from Jussi Laako).
 
-- The internal XRUN callback notification statistics and reporting has
-  been changed to be a bit less intrusive.
+- The internal XRUN callback notification statistics and reporting 
+  has been changed to be a bit less intrusive.
 
-- Patchbay socket dialog gets some more eye-candy as icons have been
+- Patchbay socket dialog gets some more eye-candy as icons have been 
   added to the client and plug selection (combobox) widgets.
 
-- Connections and patchbay lines coloring has changed just slightly :)
+- Connections and patchbay lines coloring has changed just slightly 
+  :)
 
-- New patchbay socket forwarding feature. Any patchbay socket can now
-  be set to have all its connections replicated (i.e. forwarded) to
-  another one, which will behave actively as a clone of the former.
-  Forward connections are shown by vertical directed colored lines,
-  and can be selected either on socket dialog or from context menu
+- New patchbay socket forwarding feature. Any patchbay socket can 
+  now be set to have all its connections replicated (i.e. forwarded) 
+  to another one, which will behave actively as a clone of the former. 
+  Forward connections are shown by vertical directed colored lines, 
+  and can be selected either on socket dialog or from context menu 
   (currently experimental, only applicable to input/writable sockets).
 
-- Optional specification of alternate JACK and/or ALSA installation
-  paths on configure time (after a patch from Lucas Brasilino, thanks).
+- Optional specification of alternate JACK and/or ALSA installation 
+  paths on configure time (after a patch from Lucas Brasilino, 
+  thanks).
 
 
 0.2.19a  2005-11-28  MIDI aliases are back in town.
 
-- ALSA sequencer client/port name aliases are functional again; all
-  actual MIDI sequencer client/port numerical identifier prefixes are
+- ALSA sequencer client/port name aliases are functional again; all 
+  actual MIDI sequencer client/port numerical identifier prefixes are 
   also back in business.
 
 
-0.2.19   2005-11-19  MRU patchbay selection, Mac OS X and other fixes.
+0.2.19  2005-11-19  MRU patchbay selection, Mac OS X and other fixes.
 
-- Connections widget views are now properly refreshed after renaming
+- Connections widget views are now properly refreshed after renaming 
   client/ports (aliases).
 
-- Disabled system tray and ALSA sequencer support on configure time,
+- Disabled system tray and ALSA sequencer support on configure time, 
   whenever building for MacOSX as default.
 
-- Fixed the major issues with selecting an audio interface on Mac OSX;
-  the button the right of the interface combo is now much better
-  looking than it was before; input/output channel counts are also
+- Fixed the major issues with selecting an audio interface on Mac 
+  OSX; the button the right of the interface combo is now much better 
+  looking than it was before; input/output channel counts are also 
   updated automatically now (thanks to Jesse Chappell for the patch).
 
-- Prevent the setting of the coreaudio device id on the jackd command
-  line (-n) whenever the default interface is being selected.
+- Prevent the setting of the coreaudio device id on the jackd 
+  command line (-n) whenever the default interface is being selected.
 
-- The connections and patchbay windows are now allowed to have a wider
-  connection lines frame panel; splitter width sizes are now persistent
-  across application sessions (thanks to Filipe Tomas for the hint).
+- The connections and patchbay windows are now allowed to have a 
+  wider connection lines frame panel; splitter width sizes are now 
+  persistent across application sessions (thanks to Filipe Tomas for 
+  the hint).
 
-- Activation toggling feedback on the patchbay widget has been fixed;
-  additionally and as found convenient, the most recently used patchbay
-  definitions can now be loaded immediately by selecting from a drop-down
-  list widget, which replaces the old static patchbay name status text,
-  and adds a lil'icon too :)
+- Activation toggling feedback on the patchbay widget has been 
+  fixed; additionally and as found convenient, the most recently used 
+  patchbay definitions can now be loaded immediately by selecting from 
+a drop-down list widget, which replaces the old static patchbay name 
+  status text, and adds a lil'icon too :)
 
-- All widget captions changed to include proper application title prefix.
+- All widget captions changed to include proper application title 
+  prefix.
 
-- Attempt to bring those aging autoconf templates to date; sample SPEC file
-  for RPM build is now being included and generated at configure time.
+- Attempt to bring those aging autoconf templates to date; sample 
+  SPEC file for RPM build is now being included and generated at 
+  configure time.
 
-- The current selected device is now shown with a checkmark on the
+- The current selected device is now shown with a checkmark on the 
   device selection menu(s), while on the settings dialog.
 
-- Set to use QApplication::setMainWidget() instead of registering the 
-  traditional lastWindowClosed() signal to quit() slot, just to let
-  the -geometry command line argument have some effect on X11.
+- Set to use QApplication::setMainWidget() instead of registering 
+  the traditional lastWindowClosed() signal to quit() slot, just to 
+  let the -geometry command line argument have some effect on X11.
 
 
-0.2.18   2005-07-18  The mantra of bugfixes stays on.
+0.2.18  2005-07-18  The mantra of bugfixes stays on.
 
-- A freezing and endless loop condition on the patchbay socket item
+- A freezing and endless loop condition on the patchbay socket item 
   duplication (copy) has been fixed.
 
-- Fixed output disability when messages limit option is turned off
+- Fixed output disability when messages limit option is turned off 
   (thanks again to Wolfgang Woehl for spotting this one).
 
 
-0.2.17   2005-06-17  Systemic I/O Latency settings are in.
+0.2.17  2005-06-17  Systemic I/O Latency settings are in.
 
-- Systemic I/O Latency settings are now featured for the alsa, oss and
-  coreaudio backends, letting you specify the known latency of external
-  hardware for client aware compensation purposes (thanks to Wolfgang Woehl,
-  for the reminder).
+- Systemic I/O Latency settings are now featured for the alsa, oss 
+  and coreaudio backends, letting you specify the known latency of 
+  external hardware for client aware compensation purposes (thanks to 
+  Wolfgang Woehl, for the reminder).
 
-- Update on last backstage changes to the coreaudio backend options
+- Update on last backstage changes to the coreaudio backend options 
   (due to Stephane Letz. Thanks).
 
 
-0.2.16   2005-06-13  OSS device name selection and Mac OS X breakthrough.
+0.2.16  2005-06-13  OSS device name selection and Mac OS X breakthrough.
 
-- ALSA sequencer client/port name changes are now properly detected on the
-  MIDI connections widget (as noted by Chris Cannam. Thanks).
+- ALSA sequencer client/port name changes are now properly detected 
+  on the MIDI connections widget (as noted by Chris Cannam. Thanks).
 
-- Long overdue transport buttons (rewind, backward and forward) finally 
-  landed onto the main control window, at last :).
+- Long overdue transport buttons (rewind, backward and forward) 
+  finally landed onto the main control window, at last :).
 
 - Duplication (copy) of patchbay socket items was added.
 
-- Do not ever try to start the JACK server if there's one already found
-  running, on which case the client-only mode of operation is then activated
-  (as kindly suggested by Orm Finnendahl, thanks).
+- Do not ever try to start the JACK server if there's one already 
+  found running, on which case the client-only mode of operation is 
+  then activated (as kindly suggested by Orm Finnendahl, thanks).
 
-- After several Mac OS X user requests, ALSA/MIDI sequencer support is
-  now an option, otherwise detected at configure time and conditionally
-  compiled in if, and only if, ALSA is found available (which has been
-  a primordial assumption on Linux systems:). Ah, and that just makes
-  for the blind inclusion of another backend driver option: coreaudio.
+- After several Mac OS X user requests, ALSA/MIDI sequencer support 
+  is now an option, otherwise detected at configure time and 
+  conditionally compiled in if, and only if, ALSA is found available 
+  (which has been a primordial assumption on Linux systems:). Ah, and 
+  that just makes for the blind inclusion of another backend driver 
+  option: coreaudio.
 
-- Actual OSS device selection menu now featured on setup dialog; these
-  adds to the device selection button menus for the OSS driver settings.
+- Actual OSS device selection menu now featured on setup dialog; 
+  these adds to the device selection button menus for the OSS driver 
+  settings.
 
-- Delayed geometry setup of windows upon startup was added as an optional
-  workaround to subtle problems due to window decoration information not
-  being available at window creation time on some window managers (as patch
-  proposed by Dirk Jagdmann. Thanks).
+- Delayed geometry setup of windows upon startup was added as an 
+  optional workaround to subtle problems due to window decoration 
+  information not being available at window creation time on some 
+  window managers (as patch proposed by Dirk Jagdmann. Thanks).
 
-- Fixed some minor but rather old bug that was quitting the application
-  abruptly, when one switches off the system tray icon while the main
-  application widget is hidden.
+- Fixed some minor but rather old bug that was quitting the 
+  application abruptly, when one switches off the system tray icon 
+  while the main application widget is hidden.
 
 - Cancel is now an option when creating a new patchbay definition.
 
 - Context menus are finally littered with icons.
 
-- Minor configure and Makefile install fixes, as Debian and Mac OS X
-  specialties. Also, install does the right thing with target file modes
-  (thanks to Matt Flax and Ebrahim Mayat, for pointing these out).
+- Minor configure and Makefile install fixes, as Debian and Mac OS X 
+  specialties. Also, install does the right thing with target file 
+  modes (thanks to Matt Flax and Ebrahim Mayat, for pointing these 
+  out).
 
 
 0.2.15a  2005-02-09  Return of the paranoid.
 
-- Regression from 0.2.13, of the not so stupid pseudo-mutex guards on the
-  connections management framework, after fixing some crash reports from
-  Fernando Pablo Lopez-Lezcano and Dave Phillips (thanks!); it pays to be
-  such a paranoid after all :).
+- Regression from 0.2.13, of the not so stupid pseudo-mutex guards 
+  on the connections management framework, after fixing some crash 
+  reports from Fernando Pablo Lopez-Lezcano and Dave Phillips 
+  (thanks!); it pays to be such a paranoid after all :).
 
 
-0.2.15   2005-02-06  Client/port names aliasing and other minors.
+0.2.15  2005-02-06  Client/port names aliasing and other minors.
 
-- JACK/ALSA client and port name aliasing (renaming) is now an optional
-  feature for the connections window; all client/port aliases are saved
-  on a per preset basis (as proposed for Lionstracs' Mediastation).
+- JACK/ALSA client and port name aliasing (renaming) is now an 
+  optional feature for the connections window; all client/port
+  aliases are saved on a per preset basis (as proposed for
+  Lionstracs' Mediastation).
 
-- Server state now shown (back gain) on the system tray icon tooltip; 
-  speaking of which, tooltips are now also featured on connections, status
-  and patchbay windows.
+- Server state now shown (back gain) on the system tray icon 
+  tooltip; speaking of which, tooltips are now also featured on 
+  connections, status and patchbay windows.
 
-- New actual hardware device selection menu featured on setup dialog; these
-  new button menus are only available for the ALSA driver settings.
+- New actual hardware device selection menu featured on setup 
+  dialog; these new button menus are only available for the ALSA 
+  driver settings.
 
-- Server path factory default to jackd instead of jackstart; preset setup
-  button icons are back.
+- Server path factory default to jackd instead of jackstart; preset 
+  setup button icons are back.
 
-- Fixed rare connection port item removal/disconnection dangling pointer bug.
+- Fixed rare connection port item removal/disconnection dangling 
+  pointer bug.
 
 
-0.2.14   2005-01-23  More progressive optimizations.
+0.2.14  2005-01-23  More progressive optimizations.
 
-- Put a limit on XRUN callback messages and statistics report rate, preventing
-  the potential hosing of the GUI due to a XRUN cascade storm. The maximum
-  reasonable report rate has been fixed to be one XRUN callback occurrence 
-  per second.
+- Put a limit on XRUN callback messages and statistics report rate, 
+  preventing the potential hosing of the GUI due to a XRUN cascade 
+  storm. The maximum reasonable report rate has been fixed to be one 
+  XRUN callback occurrence per second.
 
-- Set to ignore the SIGPIPE ("Broken pipe") signal, where available, as the
-  default handler is usually fatal when a JACK client is zombified abruptly.
+- Set to ignore the SIGPIPE ("Broken pipe") signal, where available, 
+  as the default handler is usually fatal when a JACK client is 
+  zombified abruptly.
 
-- All conection view items are now sorted in natural case insensitive order,
-  not just as audio port names as was before.
+- All conection view items are now sorted in natural case 
+  insensitive order, not just as audio port names as was before.
 
-- Got rid of those nonsense paranoid and rather stupid pseudo-mutex guards on 
-  the connections management framework and event notifications (nuff said :).
+- Got rid of those nonsense paranoid and rather stupid pseudo-mutex 
+  guards on the connections management framework and event 
+  notifications (nuff said :).
 
-- Optional confirmation warning on audio server shutdown, if there's some
-  audio clients still active and connected (as suggested by Sampo Savolainen).
+- Optional confirmation warning on audio server shutdown, if there's 
+  some audio clients still active and connected (as suggested by Sampo 
+  Savolainen).
 
 - Check for <jack/statistics.h> on configure time (as of JACK 0.99.42+ CVS).
 
-- "Unlock memory" server setup option was added, allowing the release
-  of memory used by common toolkit libraries (GTK+, Qt, FLTK, Wine) that
-  were being superfluously locked on every GUI JACK client; number of periods
-  has now the minimum allowed value of 2; server start delay widget converted
-  to spinbox; setup dialog layout slighly changed.
+- "Unlock memory" server setup option was added, allowing the 
+  release of memory used by common toolkit libraries (GTK+, Qt, FLTK, 
+  Wine) that were being superfluously locked on every GUI JACK client; 
+  number of periods has now the minimum allowed value of 2; server 
+  start delay widget converted to spinbox; setup dialog layout slighly 
+  changed.
 
-- Removed stand-alone usx2y driver support. Since JACK 0.99.41+ CVS, the
-  special "rawusb" support on the Tascam US-122/224/428 USB Audio/MIDI
-  interface controllers have been merged and properly integrated into the
-  regular alsa backend driver. Being still experimental, this special mode
-  of operation is now triggered only when "hw:N,2" is specified as the alsa
-  device name (N = soundcard index of snd-usb-usx2y module).
+- Removed stand-alone usx2y driver support. Since JACK 0.99.41+ CVS, 
+  the special "rawusb" support on the Tascam US-122/224/428 USB 
+  Audio/MIDI interface controllers have been merged and properly 
+  integrated into the regular alsa backend driver. Being still 
+  experimental, this special mode of operation is now triggered only 
+  when "hw:N,2" is specified as the alsa device name (N = soundcard 
+  index of snd-usb-usx2y module).
 
-- Messages window limit is now enforced only when the line count exceeds
-  in one third the user configured line count maximum; if Qt 3.2.0+ is in use,
-  the QTextView widget is otherwise set to the optimized Qt::LogText format.
+- Messages window limit is now enforced only when the line count 
+  exceeds in one third the user configured line count maximum; if Qt 
+  3.2.0+ is in use, the QTextView widget is otherwise set to the 
+  optimized Qt::LogText format.
 
-- XRUN status items are kept double-dashed if none has been detected.
+- XRUN status items are kept double-dashed if none has been 
+  detected.
 
 
-0.2.13   2004-11-21  Retouches and minor optimizations.
+0.2.13  2004-11-21  Retouches and minor optimizations.
 
-- Main window is now properly minimized instead of simply hidden when
-  the system tray icon is not available nor opted in (as suggested
-  by Florian Schmidt).
+- Main window is now properly minimized instead of simply hidden 
+  when the system tray icon is not available nor opted in (as 
+  suggested by Florian Schmidt).
 
-- Some informational status items are now updated 10 times less frequently
-  (e.g. CPU Load, Sample Rate, Buffer Size, Realtime Mode, etc.), lowering
-  the CPU burden of most probably redundant status updates.
+- Some informational status items are now updated 10 times less 
+  frequently (e.g. CPU Load, Sample Rate, Buffer Size, Realtime Mode, 
+  etc.), lowering the CPU burden of most probably redundant status 
+  updates.
 
-- XRUN detection and statistics are being conditionally included if
+- XRUN detection and statistics are being conditionally included if 
   jack_get_xrun_delayed_usecs() is available (as of JACK 0.99.7+ CVS).
 
-- Fixed ancient bug on client shutdown event handling, which was
+- Fixed ancient bug on client shutdown event handling, which was 
   invoking the xrun notification handler by mistake.
 
-- Support for maximum scheduling delay status added; this status relies
-  on jack_get_max_delayed_usecs() function availability at configure time,
-  depending on a Lee Revell's non-official JACK patch.
+- Support for maximum scheduling delay status added; this status 
+  relies on jack_get_max_delayed_usecs() function availability at 
+  configure time, depending on a Lee Revell's non-official JACK patch.
 
-- Patchbay Activate button is now a toggle button widget, allowing the
-  deactivation of the current patchbay profile.
+- Patchbay Activate button is now a toggle button widget, allowing 
+  the deactivation of the current patchbay profile.
 
-- Reset-status icon has been changed to a simple red circle instead of
-  previous one which was much like a power-switch symbol.
+- Reset-status icon has been changed to a simple red circle instead 
+  of previous one which was much like a power-switch symbol.
 
 - Preset selection has been added to the context menu.
 
 
 0.2.12a  2004-10-11  Audio connections now naturally sorted.
 
-- Client port list on audio connections are now hopefully fixed for good;
-  the sort comparison function now takes full natural order into account.
+- Client port list on audio connections are now hopefully fixed for 
+  good; the sort comparison function now takes full natural order into 
+  account.
 
 
-0.2.12   2004-10-08  Larger icons and font option on connections/patchbay.
+0.2.12  2004-10-08  Larger icons and font option on connections/patchbay.
 
-- Fixed some old and slow memory-leak due to redundand and repetitive call
-  to jack_port_by_name() (discovered and solved, thanks to Jesse Chappell);
-  some other free() and configure fixes were also applied.
+- Fixed some old and slow memory-leak due to redundand and 
+  repetitive call to jack_port_by_name() (discovered and solved, 
+  thanks to Jesse Chappell); some other free() and configure fixes 
+  were also applied.
 
-- Shiny display effect toggling has immediate feedback on setup dialog.
+- Shiny display effect toggling has immediate feedback on setup 
+  dialog.
 
 - Added new usx2y driver support.
 
-- New scaled connections/patchbay icons were added; meanwhile, all inline
-  XPM icons were removed and brainlessly converted to PNG format.
+- New scaled connections/patchbay icons were added; meanwhile, all 
+  inline XPM icons were removed and brainlessly converted to PNG 
+  format.
 
-- New setup options as for the connections/patchbay view apprearence: larger
-  icon sizes and font selection are now possible, to better ease manipulation
-  on a touchscreen (feature requested for Lionstracs' Mediastation).
+- New setup options as for the connections/patchbay view 
+  apprearence: larger icon sizes and font selection are now possible, 
+  to better ease manipulation on a touchscreen (feature requested for 
+  Lionstracs' Mediastation).
 
 - Connection line width follows icon size in discrete proportion.
 
-- "Other" setup options moved to a new dialog tab, "Misc"; new extreme item
-  values, 32 and 16 frames, added to the drop-down list of the Frames/Buffer
-  setting (as suggested by Mark Knetch).
+- "Other" setup options moved to a new dialog tab, "Misc"; new 
+  extreme item values, 32 and 16 frames, added to the drop-down list 
+  of the Frames/Buffer setting (as suggested by Mark Knetch).
 
 
-0.2.11   2004-09-10  Shiny display now optional and other fixes.
+0.2.11  2004-09-10  Shiny display now optional and other fixes.
 
-- Fixed Input/Output channels settings, being now either enabled when
-  the ALSA driver is selected for Capture/Playback only.
+- Fixed Input/Output channels settings, being now either enabled 
+  when the ALSA driver is selected for Capture/Playback only.
 
 - Shiny display effect: after some conservative user complaints this 
   pure cosmetic feature is now made optional ;)
 
 
-0.2.10   2004-09-04  Shiny display and curved connections.
+0.2.10  2004-09-04  Shiny display and curved connections.
 
-- New pre-shutdown script setup option, allowing to specify a shell-script
-  to be run before the JACK server daemon is shutted-down. This overrides
-  any previous shutdown script setting, which should be now moved onto the
-  existing post-shutdown script option, as to keep old procedural behaviour.
+- New pre-shutdown script setup option, allowing to specify a 
+  shell-script to be run before the JACK server daemon is 
+  shutted-down. This overrides any previous shutdown script setting, 
+  which should be now moved onto the existing post-shutdown script 
+  option, as to keep old procedural behaviour.
 
-- Avoid stopping JACK prematurely with QProcess::kill() (oneliner fix);
-  stopping JACK will now take a little bit longer, but hopefully will take
-  the time to cleanup properly (thanks to Kjetil Matheussen).
+- Avoid stopping JACK prematurely with QProcess::kill() (oneliner 
+  fix); stopping JACK will now take a little bit longer, but hopefully 
+  will take the time to cleanup properly (thanks to Kjetil 
+  Matheussen).
 
-- ALSA driver Duplex mode accepts alternate Input or Output device name.
+- ALSA driver Duplex mode accepts alternate Input or Output device 
+  name.
 
-- Context menu reset option is now always enabled (yet another suggestion
-  from Sampo Savolainen).
+- Context menu reset option is now always enabled (yet another 
+  suggestion from Sampo Savolainen).
 
-- Main display background gets shinny effect; adjusted system tray background 
-  palette color mode.
+- Main display background gets shinny effect; adjusted system tray 
+  background palette color mode.
 
 - Priority and setup control is now a spinbox ranging from 0..89 (as 
   suggested by Florian Schmidt). Same for Periods/Buffer.
 
-- Patchbay connection lines are now drawn correctly when items are
-  scrolled out of view. Additionally, the connection lines can now be
-  optionally drawn as bezier spline curves (big thanks to Wilfried Huss).
+- Patchbay connection lines are now drawn correctly when items are 
+  scrolled out of view. Additionally, the connection lines can now be 
+  optionally drawn as bezier spline curves (big thanks to Wilfried 
+  Huss).
 
 
-0.2.9   2004-07-04  Sloppy boy fixes and minor featuritis.
+0.2.9  2004-07-04  Sloppy boy fixes and minor featuritis.
 
-- Patchbay socket dialog client and plug list option items are now
+- Patchbay socket dialog client and plug list option items are now 
   properly escaped as regular expressions.
 
-- JACK callbacks are now internally mapped to QCustomeEvent's instead
-  of using the traditional pipe notifications.
+- JACK callbacks are now internally mapped to QCustomeEvent's 
+  instead of using the traditional pipe notifications.
   
-- The system tray popup menu is now featured as a context menu on the
-  main application window too.
+- The system tray popup menu is now featured as a context menu on 
+  the main application window too.
 
-- The reset status option is now included in the system tray popup menu.
+- The reset status option is now included in the system tray popup 
+  menu.
 
-- Server stop command button now enabled during client startup interval;
-  this makes it possible to stop the server just in case the client 
-  can't be activated for any reason.
+- Server stop command button now enabled during client startup 
+  interval; this makes it possible to stop the server just in case
+  the client can't be activated for any reason.
 
-- Top level sub-windows are now always raised and set with active focus
-  when shown to visibility.
+- Top level sub-windows are now always raised and set with active 
+  focus when shown to visibility.
 
 
-0.2.8   2004-04-30  System tray icon and menu option.
+0.2.8  2004-04-30  System tray icon and menu option.
 
-- New option for system tray icon and menu, which is known to be effective
-  on KDE enabled desktops; support for freedesktop.org's system tray protocol
-  specification has been included so this maybe also effective on Gnome2.
+- New option for system tray icon and menu, which is known to be 
+  effective on KDE enabled desktops; support for freedesktop.org's 
+  system tray protocol specification has been included so this maybe 
+  also effective on Gnome2.
 
-- Capture or Playback-only optional alternate device interface name may now
-  be specified for the ALSA audio driver server settings.
+- Capture or Playback-only optional alternate device interface name 
+  may now be specified for the ALSA audio driver server settings.
 
 - Maximum number of ports setting was added to server setup.
 
@@ -1407,128 +1421,142 @@ ChangeLog
 
 0.2.7b  2004-04-05  OSS driver setup fix.
 
-- OSS driver halfduplex setup operation is now fixed, thanks to
+- OSS driver halfduplex setup operation is now fixed, thanks to 
   Jussi Laako.
 
 
 0.2.7a  2004-04-05  Compilation fix for Qt 3.1.
 
-- QSplitter::setChildrenCollapsible call is now conditionally compiled, 
-  applied only on Qt 3.2+.
+- QSplitter::setChildrenCollapsible call is now conditionally 
+  compiled, applied only on Qt 3.2+.
 
 
-0.2.7   2004-04-04  User-interface refinements and OSS driver support.
+0.2.7  2004-04-04  User-interface refinements and OSS driver support.
 
-- Connections and patchbay windows horizontal layout are now user
+- Connections and patchbay windows horizontal layout are now user 
   configurable via splitter widgets.
 
-- Refresh on connections window now take effect on both tabs, Audio
+- Refresh on connections window now take effect on both tabs, Audio 
   (JACK) and MIDI (ALSA).
 
-- OSS driver support and no-mlock option added to server settings, setup
-  dialog (as of JACK 0.95.7+).
+- OSS driver support and no-mlock option added to server settings, 
+  setup dialog (as of JACK 0.95.7+).
 
-- Temporary server configuration option added, applicable to the auto-start
-  server feature on client applications, whether the server shall exit once
-  all clients are closed.
+- Temporary server configuration option added, applicable to the 
+  auto-start server feature on client applications, whether the
+  server shall exit once all clients are closed.
 
 - Server mode (RT) status display added.
 
-- Warning messages are now prompted to the user when there are any pending
-  changes not saved nor applied while on the setup dialog.
+- Warning messages are now prompted to the user when there are any 
+  pending changes not saved nor applied while on the setup dialog.
 
 - Translation support for the default preset name "(default)".
 
-- Messages window pops up whenever a critical error message is issued.
+- Messages window pops up whenever a critical error message is 
+  issued.
 
 
-0.2.6   2004-02-29  More work in progress.
+0.2.6  2004-02-29  More work in progress.
 
-- Message window line limit is now a configurable option on setup, as is
-  whether the command-line local configuration file gets saved at all;
-  the first argument of the command-line configuration is stuffed
-  to be the executable server command absolute path, when possible. 
+- Message window line limit is now a configurable option on setup, 
+  as is whether the command-line local configuration file gets saved 
+  at all; the first argument of the command-line configuration is 
+  stuffed to be the executable server command absolute path, when 
+  possible. 
 
-- Warning message issued if ALSA sequencer is not available on startup;
-  also if server settings are changed while client is currently active.
+- Warning message issued if ALSA sequencer is not available on 
+  startup; also if server settings are changed while client is 
+  currently active.
 
-- Server autostart magic is locally disabled by forcing the environment 
-  variable JACK_NO_START_SERVER at startup; with any luck this will
-  maintain qjackctl's behaviour whether the JACK server is already 
-  started or not.
+- Server autostart magic is locally disabled by forcing the 
+  environment variable JACK_NO_START_SERVER at startup; with any luck 
+  this will maintain qjackctl's behaviour whether the JACK server is 
+  already started or not.
 
 - Makefile.cvs makes its late entrance on the build toolset.
 
 
 0.2.5  2004-02-16  Server survival option and command-line wrapper feature.
 
-- New option on application exit for leaving the JACK server daemon running,
-  surviving the parent process; the confirmation prompt on application close
-  now features a "Terminate", "Leave" and "Cancel" button options.
+- New option on application exit for leaving the JACK server daemon 
+  running, surviving the parent process; the confirmation prompt on 
+  application close now features a "Terminate", "Leave" and "Cancel" 
+  button options.
 
-- New command-line wrapper feature for JACK client applications, thus
-  giving a convenient head start for the JACK audio server as needed
-  (as suggested by Fernando Pablo Lopez-Lezcano, of Planet CCRMA fame).
+- New command-line wrapper feature for JACK client applications, 
+  thus giving a convenient head start for the JACK audio server as 
+  needed (as suggested by Fernando Pablo Lopez-Lezcano, of Planet 
+  CCRMA fame).
 
-- Messages, Status, Connections and Patchbay pop-up windows are not hinted 
-  as dialogs anymore and thus are not centered relative to parent main window 
-  which has become a strict Qt dialog widget behaviour (as of Qt 3.3+).
+- Messages, Status, Connections and Patchbay pop-up windows are not 
+  hinted as dialogs anymore and thus are not centered relative to 
+  parent main window which has become a strict Qt dialog widget 
+  behaviour (as of Qt 3.3+).
 
-- Patchbay window content changes are now properly updated, without the need
-  for a later manual refresh to redraw stalled connection lines.
+- Patchbay window content changes are now properly updated, without 
+  the need for a later manual refresh to redraw stalled connection 
+  lines.
 
-- The snapshot option for creating a new patchbay definition from current
-  actual connections now takes client and port names as regular expressions
-  and smart enough when regarding more than two contiguous decimal digits :)
+- The snapshot option for creating a new patchbay definition from 
+  current actual connections now takes client and port names as 
+  regular expressions and smart enough when regarding more than two 
+  contiguous decimal digits :)
 
-- Patchbay socket list view ordering is now properly preserved; socket
-  dialog gets plug list handling ehancements; active patchbay gets reloaded
-  when commited and saved to file; connections redraw on socket removal has
-  been fixed.
+- Patchbay socket list view ordering is now properly preserved; 
+  socket dialog gets plug list handling ehancements; active patchbay 
+  gets reloaded when commited and saved to file; connections redraw
+  on socket removal has been fixed.
 
-- Server literal command-line is now saved into local configuration file
-  (~/.jackdrc) for convenience of future auto-start client applications.
+- Server literal command-line is now saved into local configuration 
+  file (~/.jackdrc) for convenience of future auto-start client 
+  applications.
 
-- New setup option on whether all child windows are kept on top of the main
-  window, or otherwise floating with probable taskbar entries of their own.
+- New setup option on whether all child windows are kept on top of 
+  the main window, or otherwise floating with probable taskbar entries 
+  of their own.
 
-- Setup changes that are only effective next time the program is run gets
-  an informational message box shown to the user.
+- Setup changes that are only effective next time the program is run 
+  gets an informational message box shown to the user.
 
 
 0.2.4  2004-02-01  Exclusive patchbay sockets.
 
-- Patchbay definitions may now be configured with exclusive sockets;
-  this way, only one defined connection is allowed as soon as it's available,
-  being all others immediatelly disconnected whenever attempted.
+- Patchbay definitions may now be configured with exclusive sockets; 
+  this way, only one defined connection is allowed as soon as it's 
+  available, being all others immediatelly disconnected whenever 
+  attempted.
 
-- On the connections view, current connected client ports are now slightly
-  highlighted (blue) whenever a client or port is selected on the opposite
-  column (as suggested by Lawrie Abbott).
+- On the connections view, current connected client ports are now 
+  slightly highlighted (blue) whenever a client or port is selected on 
+  the opposite column (as suggested by Lawrie Abbott).
 
-- Connections and patchbay drag and drop feature is now bilateral; you can
-  now drag and drop an item from right to left to establish the connection.
+- Connections and patchbay drag and drop feature is now bilateral; 
+  you can now drag and drop an item from right to left to establish 
+  the connection.
 
 
-0.2.3a 2004-01-19  Time format combo-box tooltip fix.
+0.2.3a  2004-01-19  Time format combo-box tooltip fix.
 
-- A qt-designer copy-paste leftover has been fixed; sloppy boy I am ;)
+- A qt-designer copy-paste leftover has been fixed; sloppy boy I am 
+  ;)
 
 
 0.2.3  2004-01-19  Tenths, hundredths, milliseconds, whatever.
 
-- Custom time format setup for all elapsed times, allowing the display
-  of tenths, hundredths or even milliseconds instead of just hundredths
-  of second for transport time code.
+- Custom time format setup for all elapsed times, allowing the 
+  display of tenths, hundredths or even milliseconds instead of just 
+  hundredths of second for transport time code.
 
 
-0.2.2   2004-01-16  Hundredths are back.
+0.2.2  2004-01-16  Hundredths are back.
 
-- Transport time is now shown with hundredths of second (hh:mm:ss.dd),
-  as it was once before but not constant zero.
+- Transport time is now shown with hundredths of second 
+  (hh:mm:ss.dd), as it was once before but not constant zero.
 
-- Client start delay now configurable on setup; this may be of help for
-  slow machines or unusual long server driver startups (e.g. portaudio).
+- Client start delay now configurable on setup; this may be of help 
+  for slow machines or unusual long server driver startups (e.g. 
+  portaudio).
 
 - Client-only mode restart has been fixed.
 
@@ -1537,56 +1565,62 @@ ChangeLog
 - Popup menus memory leak fixed.
 
 
-0.2.1   2003-12-29  The fix of fixes.
+0.2.1  2003-12-29  The fix of fixes.
 
-- Fixed jackstart/jackd command line parameter argument concatenation.
+- Fixed jackstart/jackd command line parameter argument 
+  concatenation.
 
 - Front panel status display font can now be customized.
 
-- Some connection graph changes were being silently missed, now fixed.
+- Some connection graph changes were being silently missed, now 
+  fixed.
 
-- Messages window fallback fix; stdout handling has been retouched to
-  be more line buffer oriented.
+- Messages window fallback fix; stdout handling has been retouched 
+  to be more line buffer oriented.
 
 
-0.2.0   2003-12-12  ALSA sequencer patchbay entrance.
+0.2.0  2003-12-12  ALSA sequencer patchbay entrance.
 
-- ALSA sequencer subscription patchbay feature, complementing current
-  audio service with a MIDI application connection graph, gracefuly
-  included on the same front-end.
+- ALSA sequencer subscription patchbay feature, complementing 
+  current audio service with a MIDI application connection graph, 
+  gracefuly included on the same front-end.
 
-- Current preset name is shown on main window caption title. New button
-  and form icons. Messages window blankness rendering fix.
+- Current preset name is shown on main window caption title. New 
+  button and form icons. Messages window blankness rendering fix.
 
-- Immediate server startup option was made persistent and therefore
+- Immediate server startup option was made persistent and therefore 
   remembered across sessions.
 
 - Standard output/error stream capture setup option.
 
 
-0.1.3   2003-11-26  Server settings profile/preset feature.
+0.1.3  2003-11-26  Server settings profile/preset feature.
 
-- Server setup settings can now be profiled, named and saved as presets.
-  Command line preset name option and scripting argument meta-symbols are
-  also featured for convenience (kindly suggested by Sampo Savolainen).
+- Server setup settings can now be profiled, named and saved as 
+  presets. Command line preset name option and scripting argument 
+  meta-symbols are also featured for convenience (kindly suggested by 
+  Sampo Savolainen).
 
 - New configure time argument debugging support (--enable-debug).
 
 
-0.1.2   2003-11-16  More work in progress.
+0.1.2  2003-11-16  More work in progress.
 
-- Qmake project file (qjackctl.pro) now generated by configure (autoconf),
-  introducing the explicit binding support to libqt-mt (multi-thread).
+- Qmake project file (qjackctl.pro) now generated by configure 
+  (autoconf), introducing the explicit binding support to libqt-mt 
+  (multi-thread).
 
-- Main window is not hinted as a dialog anymore, giving room to the minimize
-  button on some other window managers; application close confirm warning is
-  now an option.
+- Main window is not hinted as a dialog anymore, giving room to the 
+  minimize button on some other window managers; application close 
+  confirm warning is now an option.
 
-- Removed deprecated settings options: temporary directory and ASIO mode;
-  new available settings for the ALSA driver: force 16bit format, maximum
-  input channels and output channels (as of JACK 0.90.x).
+- Removed deprecated settings options: temporary directory and ASIO 
+  mode; new available settings for the ALSA driver: force 16bit 
+  format, maximum input channels and output channels (as of JACK 
+0.90.x).
 
-- Transport time display looses static hundredth seconds decimal digits.
+- Transport time display looses static hundredth seconds decimal 
+  digits.
 
 
 0.1.1a  2003-11-01  Whatever happened to OK button icons.
@@ -1594,50 +1628,55 @@ ChangeLog
 - Restored missing OK button icons.
 
 
-0.1.1   2003-10-29  Minor feature enhancements and bugfixes.
+0.1.1  2003-10-29  Minor feature enhancements and bugfixes.
 
-- Main window display items are now made fixed in width, at least those more
-  prone to change frequently and thus caused some display jitter.
+- Main window display items are now made fixed in width, at least 
+  those more prone to change frequently and thus caused some display 
+  jitter.
 
-- Messages, status, connections and patchbay module windows are now reopened
-  automagicaly on startup as they were on previous session.
+- Messages, status, connections and patchbay module windows are now 
+  reopened automagicaly on startup as they were on previous session.
 
-- New patchbay definition snapshot option from current actual connections;
-  current active patchbay filename status indication on title.
+- New patchbay definition snapshot option from current actual 
+  connections; current active patchbay filename status indication on 
+  title.
 
-- New icons patchbay editor window and socket dialogs; own stdout/stdin is
-  now properly captured and shown on messages log window.
+- New icons patchbay editor window and socket dialogs; own 
+  stdout/stdin is now properly captured and shown on messages log 
+  window.
 
-- Fixed an obvious patchbay connection scan freezing bug; default .xml file
-  extension enforcement on save.
+- Fixed an obvious patchbay connection scan freezing bug; default 
+  .xml file extension enforcement on save.
 
 
-0.1.0   2003-10-22  Major user interface redesign.
+0.1.0  2003-10-22  Major user interface redesign.
 
-- Main application window complete redesign, now more like a multimedia/LCD
-  control panel -- old main window dialog tabs are now splitted in separate
-  pop-up windows/dialogs; big time display options. In other words, this sums
-  up to a nice complete application rewrite.
+- Main application window complete redesign, now more like a 
+  multimedia/LCD control panel -- old main window dialog tabs are now 
+  splitted in separate pop-up windows/dialogs; big time display 
+  options. In other words, this sums up to a nice complete application 
+  rewrite.
 
-- Deprecated options for forcing aRTs and jackd daemons are no longer
-  available; this functionality can be officially superceded by the more
-  generic startup/shutdown script options.
+- Deprecated options for forcing aRTs and jackd daemons are no 
+  longer available; this functionality can be officially superceded
+  by the more generic startup/shutdown script options.
 
-- Seamless support for externally started JACK server, providing a client-only
-  mode of operation; if the JACK daemon is already started, qjackctl enters in
-  client detached mode automagically.
+- Seamless support for externally started JACK server, providing a 
+  client-only mode of operation; if the JACK daemon is already 
+  started, qjackctl enters in client detached mode automagically.
 
-- Messages window font is configurable and saved across sessions (by Jack
-  O'Quin's humble request). Some colorization has been introduced on some
-  event messages.
+- Messages window font is configurable and saved across sessions (by 
+  Jack O'Quin's humble request). Some colorization has been introduced 
+  on some event messages.
 
-- Preliminary patchbay persistence feature is under way. A patchbay definition
-  editor is already included, following an alternative socket-plug patchbay
-  model that aliases and is a direct map to the client-port JACK connections
-  model. The patchbay definitions are stored as text/xml files.
+- Preliminary patchbay persistence feature is under way. A patchbay 
+  definition editor is already included, following an alternative 
+  socket-plug patchbay model that aliases and is a direct map to the 
+  client-port JACK connections model. The patchbay definitions are 
+  stored as text/xml files.
 
-- New post-startup script option; immediate JACK server startup command line
-  option (as suggested by Kasper Souren).
+- New post-startup script option; immediate JACK server startup 
+  command line option (as suggested by Kasper Souren).
 
 
 0.0.9a  2003-10-03  Tiny bugfixes.
@@ -1646,114 +1685,123 @@ ChangeLog
 
 - Dummy driver wait parameter is now properly set on startup.
 
-- Confirmation warning on disconnecting all ports (as suggested by Robert
-  Jonsson).
+- Confirmation warning on disconnecting all ports (as suggested by 
+  Robert Jonsson).
 
 
-0.0.9   2003-09-25  Work in progress.
+0.0.9  2003-09-25  Work in progress.
 
-- New connection port item pixmaps that distinguishes physical from
+- New connection port item pixmaps that distinguishes physical from 
   logical ports.
 
-- History of most recently used values gets saved for some settings
+- History of most recently used values gets saved for some settings 
   and options comboboxes widgets.
 
-- New startup and shutdown script options, intended to supersede the
-  mess of forcing artsd and jackd itself, in a near future ;) this way,
-  one can also include the operation of the LADCCA daemon (following a
-  suggestion from Kasper Souren).
+- New startup and shutdown script options, intended to supersede the 
+  mess of forcing artsd and jackd itself, in a near future ;) this 
+  way, one can also include the operation of the LADCCA daemon 
+  (following a suggestion from Kasper Souren).
 
-- Connections command buttons are now shortly disabled after clicking,
-  avoiding accidental duplicated connections.
+- Connections command buttons are now shortly disabled after 
+  clicking, avoiding accidental duplicated connections.
 
 
-0.0.8   2003-09-19  Preliminary transport and buffer size status control.
+0.0.8  2003-09-19  Preliminary transport and buffer size status control.
 
 - Transport status and control introduced (requires JACK 0.80.0+);
 
-- Statistics tab renamed to Status, where the transport state info and
-  simple play/pause control buttons are now placed;
+- Statistics tab renamed to Status, where the transport state info 
+  and simple play/pause control buttons are now placed;
 
 - Buffer size status is yet another item on the list view.
 
 
-0.0.7   2003-09-15  Minor bugfixes.
+0.0.7  2003-09-15  Minor bugfixes.
 
 - Inverse alphabetic ordering fixed on Connections port listing.
 
-- Verbose option added; messages view font size fix; about Qt dialog;
-  logo pixmap retouched.
+- Verbose option added; messages view font size fix; about Qt 
+  dialog; logo pixmap retouched.
 
 - Configure script now checks for Qt 3.1.1 or greater.
 
 
-0.0.6   2003-09-12  Drag-n-drop and more feature enhancements and bufixes.
+0.0.6  2003-09-12  Drag-n-drop and more feature enhancements and bugfixes.
 
-- Patchbay connection user interface handling has been fairly rewritten;
-  (features new bugs while fixing old ones ;-)
+- Patchbay connection user interface handling has been fairly 
+  rewritten; (features new bugs while fixing old ones ;-)
 
-- Reset XRUN statistics button added; reset time recorded on statistics;
-  calculated latency is now shown on settings; ASIO mode disables
-  Periods/Buffer setting (all suggestions by Lawrie Abbott).
+- Reset XRUN statistics button added; reset time recorded on 
+  statistics; calculated latency is now shown on settings; ASIO mode 
+  disables Periods/Buffer setting (all suggestions by Lawrie Abbott).
 
-- Context popup menu introduced for port connection handling; includes
-  new command for disconnecting all currently connected ports.
+- Context popup menu introduced for port connection handling; 
+  includes new command for disconnecting all currently connected 
+  ports.
 
-- Closing the application while JACK is running, is now presented with a
-  warning confirmation message (preventing accidental Esc key press? :).
+- Closing the application while JACK is running, is now presented 
+  with a warning confirmation message (preventing accidental Esc key 
+  press? :).
 
-- Patchbay port lists ordering are now more numerical-friendly than ever,
-  taking account for sub-numbering port names (following yet another
-  suggestion from Lawrie).
+- Patchbay port lists ordering are now more numerical-friendly than 
+  ever, taking account for sub-numbering port names (following yet 
+  another suggestion from Lawrie).
 
-- Connection drag-and-drop is now featured after many, many requests.
+- Connection drag-and-drop is now featured after many, many 
+  requests.
 
-- Corrected the configure script to properly recognize Qt 3.0.1 or greater.
+- Corrected the configure script to properly recognize Qt 3.0.1 or 
+  greater.
 
 
-0.0.5   2003-09-05  Minor feature enhancements and bugfixes.
+0.0.5  2003-09-05  Minor feature enhancements and bugfixes.
 
-- Internationalization support added; future qjackctl_${LANG}.qm translation
-  files are located on ${prefix}/share/locale .
+- Internationalization support added; future qjackctl_${LANG}.qm 
+  translation files are located on ${prefix}/share/locale .
 
-- New dummy and portaudio driver support (as of JACK release 0.80.0+).
+- New dummy and portaudio driver support (as of JACK release 
+0.80.0+).
 
 - A couple of silent memory leak bugs have been corrected.
 
 
-0.0.4   2003-08-29  Minor changes and bugfixes.
+0.0.4  2003-08-29  Minor changes and bugfixes.
 
-- The patchbay port lists are now sorted in a more numerical friendly manner
-  (as suggested by Steve Harris); the sort code has been "borrowed" from
-  qjackconnect, yet again.
+- The patchbay port lists are now sorted in a more numerical 
+  friendly manner (as suggested by Steve Harris); the sort code has 
+  been "borrowed" from qjackconnect, yet again.
 
-- Patchbay port connection lines are now always visible, even if their
-  respective connected port items aren't.
+- Patchbay port connection lines are now always visible, even if 
+  their respective connected port items aren't.
 
-- Multiple simultaneous port connections can now be handled when a client
-  application item is selected for connection/disconnection (again, suggested
-  by Steve Harris), replicating and extending qjackconnect's similar behaviour.
+- Multiple simultaneous port connections can now be handled when a 
+  client application item is selected for connection/disconnection 
+  (again, suggested by Steve Harris), replicating and extending 
+  qjackconnect's similar behaviour.
 
-- An auto-refresh option for the patchbay connections is now available,
-  for those cases when client code just can't handle properly some callbacks.
+- An auto-refresh option for the patchbay connections is now 
+  available, for those cases when client code just can't handle 
+  properly some callbacks.
 
-- Window positioning and sizing is now almost persistent across sessions;
-  as before, position is saved for the minimal view mode; but now, the details
-  dialog view mode gets its position and size independantly saved also.
-
-
-0.0.3   2003-08-07  Integrated visual patchbay.
-
-- A patchbay for jack port connections is now integrated, much like the
-  greatest Mathias Nagorni's qjackconnect (http://www.suse.de/~mana/jack.html).
+- Window positioning and sizing is now almost persistent across 
+  sessions; as before, position is saved for the minimal view mode; 
+  but now, the details dialog view mode gets its position and size 
+  independantly saved also.
 
 
-0.0.2   2003-08-02  Client code features introduced.
+0.0.3  2003-08-07  Integrated visual patchbay.
+
+- A patchbay for jack port connections is now integrated, much like 
+  the greatest Mathias Nagorni's qjackconnect 
+  (http://www.suse.de/~mana/jack.html).
+
+
+0.0.2  2003-08-02  Client code features introduced.
 
 - JACK library and header files are checked on configure.
 
-- Server CPU load, sample rate and time elapsed since last XRUN
+- Server CPU load, sample rate and time elapsed since last XRUN 
   detected, are now displayed on statistics.
 
 
-0.0.1   2003-07-26  Initial release.
+0.0.1  2003-07-26  Initial release.
