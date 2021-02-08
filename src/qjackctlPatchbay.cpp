@@ -1333,7 +1333,7 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 	pAction->setEnabled(pPatchbay->canDisconnectSelected());
 	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
 		tr("Disconnect &All"), pPatchbay, SLOT(disconnectAll()),
-		tr("Alt+A", "Disconect All"));
+		tr("Alt+A", "Disconnect All"));
 	pAction->setEnabled(pPatchbay->canDisconnectAll());
 
 	menu.addSeparator();

@@ -238,7 +238,7 @@
     <message>
         <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>
@@ -418,7 +418,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>
@@ -444,7 +444,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraph.cpp" line="1912"/>
         <source>Disconnect</source>
-        <translation>Disconectar</translation>
+        <translation>Disconnectar</translation>
     </message>
 </context>
 <context>
@@ -2755,7 +2755,7 @@ de todas as conexões atuais do cliente??</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1336"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>

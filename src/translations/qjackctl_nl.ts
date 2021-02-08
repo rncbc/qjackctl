@@ -240,7 +240,7 @@
     <message>
         <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translatorcomment>Alles afkoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>
@@ -425,7 +425,7 @@ Bent u zeker?</translation>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translatorcomment>Alles afkoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>
@@ -2765,7 +2765,7 @@ van alle huidige client verbindingen?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1336"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translatorcomment>Alle loskoppelen</translatorcomment>
         <translation>Alt+A</translation>
     </message>

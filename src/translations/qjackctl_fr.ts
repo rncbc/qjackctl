@@ -238,7 +238,7 @@
     <message>
         <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>
@@ -418,7 +418,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>
@@ -2770,7 +2770,7 @@ pour créer une définition de baie de brassage ?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1336"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+T</translation>
     </message>
     <message>

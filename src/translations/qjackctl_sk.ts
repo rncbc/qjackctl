@@ -248,7 +248,7 @@
     <message>
         <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
@@ -418,7 +418,7 @@ Ste si istý?</translation>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
@@ -2771,7 +2771,7 @@ všetkých súčasných klientskych spojení?</translation>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1336"/>
         <source>Alt+A</source>
-        <comment>Disconect All</comment>
+        <comment>Disconnect All</comment>
         <translation>Alt+A</translation>
     </message>
     <message>
