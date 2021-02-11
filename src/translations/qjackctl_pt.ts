@@ -163,12 +163,12 @@
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="93"/>
         <source>Using: Qt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Usando: Qt %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="99"/>
         <source>JACK %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="103"/>
@@ -1596,7 +1596,10 @@ Deseja salvar as alterações??</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: GetParameterConstraint(&apos;%1&apos;):
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4102"/>
@@ -1730,7 +1733,9 @@ Deseja parar o servidor de áudio JACK?</translation>
         <source>%1 is about to terminate.
 
 Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>% 1 está prestes a terminar.
+
+Você tem certeza?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1849"/>
@@ -4379,12 +4384,12 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Clear settings of current preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar configurações do nome da predefinição atual</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="104"/>
         <source>Clea&amp;r</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpa&amp;r</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="653"/>
