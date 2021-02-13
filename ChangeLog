@@ -4,10 +4,15 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Graph Disconnect now applies to selected nodes and connections
+  only (REGRESSION: not to selected ports anymore; GH issue #123).
+
+
 0.9.1  2021-02-07  A Winter'21 Release.
 
-- Graph Disconnect now applies to all selected ports and 
-  connections.
+- Graph Disconnect now applies to all selected ports and connections.
 
 - Main window is now freely resizable, while keeping all the buttons 
   stretched to the same aspect ratio.

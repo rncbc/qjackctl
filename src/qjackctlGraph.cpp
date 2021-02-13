@@ -1327,11 +1327,21 @@ bool qjackctlGraphCanvas::canDisconnect (void) const
 		switch (item->type()) {
 		case qjackctlGraphConnect::Type:
 			return true;
+	#if 0
 		case qjackctlGraphPort::Type: {
 			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
 			if (!port->connects().isEmpty())
 				return true;
-			// Fall-thru...;
+			break;
+		}
+	#endif
+		case qjackctlGraphNode::Type: {
+			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+			foreach (qjackctlGraphPort *port, node->ports()) {
+				if (!port->connects().isEmpty())
+					return true;
+			}
+			// Fall thru...
 		}
 		default:
 			break;
@@ -1893,13 +1903,25 @@ void qjackctlGraphCanvas::disconnectItems (void)
 				connects.append(connect);
 			break;
 		}
+	#if 0
 		case qjackctlGraphPort::Type: {
 			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
 			foreach (qjackctlGraphConnect *connect, port->connects()) {
 				if (!connects.contains(connect))
 					connects.append(connect);
 			}
-			// Fall-thru...
+			break;
+		}
+	#endif
+		case qjackctlGraphNode::Type: {
+			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+			foreach (qjackctlGraphPort *port, node->ports()) {
+				foreach (qjackctlGraphConnect *connect, port->connects()) {
+					if (!connects.contains(connect))
+						connects.append(connect);
+				}
+			}
+			// Fall thru...
 		}
 		default:
 			break;
