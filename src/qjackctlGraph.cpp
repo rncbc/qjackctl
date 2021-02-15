@@ -1327,14 +1327,6 @@ bool qjackctlGraphCanvas::canDisconnect (void) const
 		switch (item->type()) {
 		case qjackctlGraphConnect::Type:
 			return true;
-	#if 0
-		case qjackctlGraphPort::Type: {
-			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
-			if (!port->connects().isEmpty())
-				return true;
-			break;
-		}
-	#endif
 		case qjackctlGraphNode::Type: {
 			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 			foreach (qjackctlGraphPort *port, node->ports()) {
@@ -1894,6 +1886,7 @@ void qjackctlGraphCanvas::connectItems (void)
 void qjackctlGraphCanvas::disconnectItems (void)
 {
 	QList<qjackctlGraphConnect *> connects;
+	QList<qjackctlGraphNode *> nodes;
 
 	foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 		switch (item->type()) {
@@ -1903,30 +1896,27 @@ void qjackctlGraphCanvas::disconnectItems (void)
 				connects.append(connect);
 			break;
 		}
-	#if 0
-		case qjackctlGraphPort::Type: {
-			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
-			foreach (qjackctlGraphConnect *connect, port->connects()) {
-				if (!connects.contains(connect))
-					connects.append(connect);
-			}
+		case qjackctlGraphNode::Type:
+			nodes.append(static_cast<qjackctlGraphNode *> (item));
+			// Fall thru...
+		default:
 			break;
 		}
-	#endif
-		case qjackctlGraphNode::Type: {
-			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
+	}
+
+	if (connects.isEmpty()) {
+		foreach (qjackctlGraphNode *node, nodes) {
 			foreach (qjackctlGraphPort *port, node->ports()) {
 				foreach (qjackctlGraphConnect *connect, port->connects()) {
 					if (!connects.contains(connect))
 						connects.append(connect);
 				}
 			}
-			// Fall thru...
-		}
-		default:
-			break;
 		}
 	}
+
+	if (connects.isEmpty())
+		return;
 
 //	m_selected_nodes = 0;
 //	m_scene->clearSelection();

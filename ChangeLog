@@ -6,8 +6,8 @@ ChangeLog
 
 GIT HEAD
 
-- Graph Disconnect now applies to selected nodes and connections
-  only (REGRESSION: not to selected ports anymore; GH issue #123).
+- Graph Disconnect now applies to selected connections or nodes
+  only (REGRESSION: not also to selected ports anymore; GH #123).
 
 
 0.9.1  2021-02-07  A Winter'21 Release.
