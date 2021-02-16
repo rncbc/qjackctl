@@ -1521,10 +1521,10 @@ void qjackctlMainForm::startJack (void)
 		args.append("-u");
 	if (m_preset.bSync)
 		args.append("-S");
-	if (m_preset.uClockSource > 0)
-		args.append("-c" + QString(uchar(m_preset.uClockSource)));
-	if (m_preset.ucSelfConnectMode != ' ')
-		args.append("-a" + QString(uchar(m_preset.ucSelfConnectMode)));
+	if (m_preset.ucClockSource > 0 && m_preset.ucClockSource != ' ')
+		args.append("-c" + QString(char(m_preset.ucClockSource)));
+	if (m_preset.ucSelfConnectMode > 0 && m_preset.ucSelfConnectMode != ' ')
+		args.append("-a" + QString(char(m_preset.ucSelfConnectMode)));
 
 	args.append("-d" + m_preset.sDriver);
 	if ((bAlsa || bPortaudio) && (m_preset.iAudio != QJACKCTL_DUPLEX ||
@@ -4391,11 +4391,11 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 		preset.iTimeout,
 		preset.iTimeout > 0 && preset.iTimeout != 500);
 	setDBusEngineParameter("clock-source",
-		uint(preset.uClockSource),
-		preset.uClockSource > 0);
+		QVariant::fromValue<uchar> (preset.ucClockSource),
+		preset.ucClockSource > 0 && preset.ucClockSource != ' ');
 	setDBusEngineParameter("self-connect-mode",
 		QVariant::fromValue<uchar> (preset.ucSelfConnectMode),
-		preset.ucSelfConnectMode != ' ');
+		preset.ucSelfConnectMode > 0 && preset.ucSelfConnectMode != ' ');
 //	setDBusEngineParameter("no-mem-lock",
 //		preset.bNoMemLock,
 //		!preset.bNoMemLock);
@@ -4666,12 +4666,12 @@ bool qjackctlMainForm::getDBusParameters ( qjackctlPreset& preset )
 //	var = getDBusEngineParameter("libs-unlock",
 //		preset.bUnlockMem = var.toBool();
 
-	preset.ucSelfConnectMode = ' ';
+	preset.ucSelfConnectMode = 0;
 	var = getDBusEngineParameter("self-connect-mode");
 	if (var.isValid())
-		preset.uClockSource = var.toUInt();
+		preset.ucClockSource = var.value<uchar> ();
 
-	preset.ucSelfConnectMode = ' ';
+	preset.ucSelfConnectMode = 0;
 	var = getDBusEngineParameter("self-connect-mode");
 	if (var.isValid())
 		preset.ucSelfConnectMode = var.value<uchar> ();

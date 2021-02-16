@@ -832,7 +832,7 @@ void qjackctlSetupForm::setCurrentPreset ( const qjackctlPreset& preset )
 			? QString::number(preset.iTimeout)
 			: sDefName);
 	setComboBoxCurrentData(m_ui.ClockSourceComboBox,
-		uint(preset.uClockSource));
+		QVariant::fromValue<uchar> (preset.ucClockSource));
 	setComboBoxCurrentText(m_ui.InDeviceComboBox,
 		preset.sInDevice.isEmpty()
 			? sDefName
@@ -911,12 +911,12 @@ bool qjackctlSetupForm::getCurrentPreset ( qjackctlPreset& preset )
 	if (preset.sOutDevice == sDefName)
 		preset.sOutDevice.clear();
 
-	preset.uClockSource = 0;
+	preset.ucClockSource = 0;
 	int iIndex = m_ui.ClockSourceComboBox->currentIndex();
 	if (iIndex >= 0)
-		preset.uClockSource = m_ui.ClockSourceComboBox->itemData(iIndex).toUInt();
+		preset.ucClockSource = m_ui.ClockSourceComboBox->itemData(iIndex).value<uchar> ();
 
-	preset.ucSelfConnectMode = ' ';
+	preset.ucSelfConnectMode = 0;
 	iIndex = m_ui.SelfConnectModeComboBox->currentIndex();
 	if (iIndex >= 0)
 		preset.ucSelfConnectMode = m_ui.SelfConnectModeComboBox->itemData(iIndex).value<uchar> ();

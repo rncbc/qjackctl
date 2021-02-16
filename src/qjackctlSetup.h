@@ -89,7 +89,7 @@ struct qjackctlPreset
 	int     iPortMax;
 	QString sMidiDriver;
 	QString sServerSuffix;
-	uint    uClockSource;
+	uchar   ucClockSource;
 	uchar   ucSelfConnectMode;
 };
 

@@ -418,8 +418,8 @@ void qjackctlPreset::clear (void)
 	iPortMax     = 0;
 	sMidiDriver  .clear();
 	sServerSuffix.clear();
-	uClockSource = 0;
-	ucSelfConnectMode = ' ';
+	ucClockSource = 0;
+	ucSelfConnectMode = 0;
 
 	fixup();
 }
@@ -463,7 +463,7 @@ void qjackctlPreset::load ( QSettings& settings, const QString& sSuffix )
 	iPortMax      = settings.value("/PortMax",      iPortMax).toInt();
 	sMidiDriver   = settings.value("/MidiDriver",   sMidiDriver).toString();
 	sServerSuffix = settings.value("/ServerSuffix", sServerSuffix).toString();
-	uClockSource  = settings.value("/ClockSource",  uClockSource).toUInt();
+	ucClockSource  = settings.value("/ClockSource",  ucClockSource).value<uchar>();
 	ucSelfConnectMode = settings.value("/SelfConnectMode", ucSelfConnectMode).value<uchar>();
 
 	settings.endGroup();
@@ -509,7 +509,7 @@ void qjackctlPreset::save ( QSettings& settings, const QString& sSuffix )
 	settings.setValue("/PortMax",      iPortMax);
 	settings.setValue("/MidiDriver",   sMidiDriver);
 	settings.setValue("/ServerSuffix", sServerSuffix);
-	settings.setValue("/ClockSource",  uClockSource);
+	settings.setValue("/ClockSource",  ucClockSource);
 	settings.setValue("/SelfConnectMode", ucSelfConnectMode);
 
 	settings.endGroup();
