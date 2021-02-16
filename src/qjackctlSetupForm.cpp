@@ -1186,13 +1186,13 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	const bool bJackDBus  = false;
 #endif
 
-	m_ui.SyncCheckBox->setEnabled(bJackDBus);
+//	m_ui.SyncCheckBox->setEnabled(bJackDBus);
 
-	m_ui.ClockSourceTextLabel->setEnabled(bJackDBus);
-	m_ui.ClockSourceComboBox->setEnabled(bJackDBus);
+//	m_ui.ClockSourceTextLabel->setEnabled(bJackDBus);
+//	m_ui.ClockSourceComboBox->setEnabled(bJackDBus);
 
-	m_ui.SelfConnectModeTextLabel->setEnabled(bJackDBus);
-	m_ui.SelfConnectModeComboBox->setEnabled(bJackDBus);
+//	m_ui.SelfConnectModeTextLabel->setEnabled(bJackDBus);
+//	m_ui.SelfConnectModeComboBox->setEnabled(bJackDBus);
 
 	m_ui.NoMemLockCheckBox->setEnabled(!bCoreaudio && !bJackDBus);
 	m_ui.UnlockMemCheckBox->setEnabled(!bCoreaudio && !bJackDBus

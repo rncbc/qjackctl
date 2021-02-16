@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Clock source, Self-connect mode and Server synchronous mode 
+  options are now always enabled on the Setup / Settings dialog,
+  although only available or effective to jackd2. (EXPERIMENTAL)
+  
 - Graph Disconnect now applies to selected connections or nodes
   only (REGRESSION: not also to selected ports anymore; GH #123).
 
@@ -35,8 +39,6 @@ GIT HEAD
   frames/period (aka. buffer-size), periods/buffer, realtime
   priority, port maximum, client timeout, word length, wait time,
   channel maximum.
-
-- Early preparations for the New Year develop(ment) cycle.
 
 - Early preparations for the New Year develop(ment) cycle.
 

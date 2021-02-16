@@ -160,7 +160,7 @@ static void qjackctl_sigterm_handler ( int /* signo */ )
 {
 	char c = 1;
 
-	(::write(g_fdSigterm[0], &c, sizeof(c)) > 0);
+	(void) (::write(g_fdSigterm[0], &c, sizeof(c)) > 0);
 }
 
 #endif	// HAVE_SIGNAL_H
@@ -1519,6 +1519,13 @@ void qjackctlMainForm::startJack (void)
 		args.append("-m");
 	else if (m_preset.bUnlockMem)
 		args.append("-u");
+	if (m_preset.bSync)
+		args.append("-S");
+	if (m_preset.uClockSource > 0)
+		args.append("-c" + QString(uchar(m_preset.uClockSource)));
+	if (m_preset.ucSelfConnectMode != ' ')
+		args.append("-a" + QString(uchar(m_preset.ucSelfConnectMode)));
+
 	args.append("-d" + m_preset.sDriver);
 	if ((bAlsa || bPortaudio) && (m_preset.iAudio != QJACKCTL_DUPLEX ||
 		m_preset.sInDevice.isEmpty() || m_preset.sOutDevice.isEmpty())) {
@@ -4378,16 +4385,20 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 		preset.iPriority,
 		preset.bRealtime && preset.iPriority > 5);
 	setDBusEngineParameter("port-max",
-		(unsigned int) preset.iPortMax,
+		uint(preset.iPortMax),
 		preset.iPortMax > 0 && preset.iPortMax != 256);
 	setDBusEngineParameter("client-timeout",
 		preset.iTimeout,
 		preset.iTimeout > 0 && preset.iTimeout != 500);
 	setDBusEngineParameter("clock-source",
-		uint(preset.uClockSource));
+		uint(preset.uClockSource),
+		preset.uClockSource > 0);
 	setDBusEngineParameter("self-connect-mode",
-		QVariant::fromValue<uchar> (preset.ucSelfConnectMode));
-//	setDBusEngineParameter("no-mem-lock", preset.bNoMemLock);
+		QVariant::fromValue<uchar> (preset.ucSelfConnectMode),
+		preset.ucSelfConnectMode != ' ');
+//	setDBusEngineParameter("no-mem-lock",
+//		preset.bNoMemLock,
+//		!preset.bNoMemLock);
 //	setDBusEngineParameter("libs-unlock",
 //		preset.bUnlockMem,
 //		!preset.bNoMemLock);
@@ -4397,11 +4408,13 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 		QString sInterface = preset.sInterface;
 		if (bAlsa && sInterface.isEmpty())
 			sInterface = "hw:0";
-		setDBusDriverParameter("device", sInterface);
+		setDBusDriverParameter("device",
+			sInterface,
+			!sInterface.isEmpty());
 	}
 	if (bPortaudio) {
 		setDBusDriverParameter("channel",
-			(unsigned int) preset.iChan,
+			uint(preset.iChan),
 			preset.iChan > 0);
 	}
 	if (bCoreaudio || bFirewire) {
@@ -4411,22 +4424,30 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 	}
 	if (!bNet) {
 		setDBusDriverParameter("rate",
-			(unsigned int) preset.iSampleRate,
+			uint(preset.iSampleRate),
 			preset.iSampleRate > 0);
 		setDBusDriverParameter("period",
-			(unsigned int) preset.iFrames,
+			uint(preset.iFrames),
 			preset.iFrames > 0);
 	}
 	if (bAlsa || bSun || bOss || bFirewire) {
 		setDBusDriverParameter("nperiods",
-			(unsigned int) preset.iPeriods,
+			uint(preset.iPeriods),
 			preset.iPeriods > 1);
 	}
 	if (bAlsa) {
-		setDBusDriverParameter("softmode", preset.bSoftMode);
-		setDBusDriverParameter("monitor", preset.bMonitor);
-		setDBusDriverParameter("shorts", preset.bShorts);
-		setDBusDriverParameter("hwmeter", preset.bHWMeter);
+		setDBusDriverParameter("softmode",
+			preset.bSoftMode,
+			!preset.bSoftMode);
+		setDBusDriverParameter("monitor",
+			preset.bMonitor,
+			!preset.bMonitor);
+		setDBusDriverParameter("shorts",
+			preset.bShorts,
+			!preset.bShorts);
+		setDBusDriverParameter("hwmeter",
+			preset.bHWMeter,
+			!preset.bShorts);
 	#ifdef CONFIG_JACK_MIDI
 		setDBusDriverParameter("midi-driver",
 			preset.sMidiDriver,
@@ -4461,12 +4482,12 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 			break;
 		}
 		setDBusDriverParameter("inchannels",
-			(unsigned int) preset.iInChannels,
+			uint(preset.iInChannels),
 			preset.iInChannels > 0 && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
-			(unsigned int) preset.iOutChannels,
+			uint(preset.iOutChannels),
 			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
-		unsigned char dither = 0;
+		uchar dither = 0;
 		switch (preset.iDither) {
 		case 0: dither = 'n'; break;
 		case 1: dither = 'r'; break;
@@ -4490,32 +4511,32 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 			sOutDevice,
 			!sOutDevice.isEmpty() && preset.iAudio != QJACKCTL_CAPTURE);
 		setDBusDriverParameter("inchannels",
-			(unsigned int) preset.iInChannels,
+			uint(preset.iInChannels),
 			preset.iInChannels > 0 && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
-			(unsigned int) preset.iOutChannels,
+			uint(preset.iOutChannels),
 			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
 	}
 	else if (bCoreaudio || bFirewire || bNet) {
 		setDBusDriverParameter("inchannels",
-			(unsigned int) preset.iInChannels,
+			uint(preset.iInChannels),
 			preset.iInChannels > 0 && preset.iAudio != QJACKCTL_PLAYBACK);
 		setDBusDriverParameter("outchannels",
-			(unsigned int) preset.iOutChannels,
+			uint(preset.iOutChannels),
 			preset.iOutChannels > 0 && preset.iAudio != QJACKCTL_CAPTURE);
 	}
 	if (bDummy) {
 		setDBusDriverParameter("wait",
-			(unsigned int) preset.iWait,
+			uint(preset.iWait),
 			preset.iWait > 0 && preset.iWait != 21333);
 	}
 	else
 	if (!bNet) {
 		setDBusDriverParameter("input-latency",
-			(unsigned int) preset.iInLatency,
+			uint(preset.iInLatency),
 			preset.iInLatency > 0);
 		setDBusDriverParameter("output-latency",
-			(unsigned int) preset.iOutLatency,
+			uint(preset.iOutLatency),
 			preset.iOutLatency > 0);
 	}
 }
