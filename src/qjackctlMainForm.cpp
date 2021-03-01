@@ -1815,12 +1815,9 @@ void qjackctlMainForm::processStdoutBuffer (void)
 {
 	const int iLength = m_sStdoutBuffer.lastIndexOf('\n');
 	if (iLength > 0) {
-		QString sTemp = m_sStdoutBuffer.left(iLength);
-		m_sStdoutBuffer.remove(0, iLength + 1);
-		QStringList list = sTemp.split('\n');
-		QStringListIterator iter(list);
+		QStringListIterator iter(m_sStdoutBuffer.left(iLength).split('\n'));
 		while (iter.hasNext()) {
-			sTemp = iter.next();
+			QString sTemp = iter.next();
 			if (!sTemp.isEmpty())
 			#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
 				appendMessagesText(detectXrun(sTemp).trimmed());
@@ -1828,6 +1825,7 @@ void qjackctlMainForm::processStdoutBuffer (void)
 				appendMessagesText(detectXrun(sTemp));
 			#endif
 		}
+		m_sStdoutBuffer.remove(0, iLength + 1);
 	}
 }
 
@@ -1835,8 +1833,14 @@ void qjackctlMainForm::processStdoutBuffer (void)
 // Stdout flusher -- show up any unfinished line...
 void qjackctlMainForm::flushStdoutBuffer (void)
 {
+	processStdoutBuffer();
+
 	if (!m_sStdoutBuffer.isEmpty()) {
-		processStdoutBuffer();
+	#if defined(__WIN32__) || defined(_WIN32) || defined(WIN32)
+		appendMessagesText(detectXrun(m_sStdoutBuffer).trimmed());
+	#else
+		appendMessagesText(detectXrun(m_sStdoutBuffer));
+	#endif
 		m_sStdoutBuffer.clear();
 	}
 }
