@@ -1,7 +1,7 @@
 // qjackctlJackGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -64,7 +64,10 @@ static
 void qjackctlJackGraph_set_property ( jack_client_t *client,
 	jack_uuid_t uuid, const char *key, const QString& property )
 {
-	const char *value = property.toUtf8().constData();
+	const QByteArray aValue
+		= property.toUtf8();
+	const char *value
+		= aValue.constData();
 
 	::jack_set_property(client, uuid, key, value, NULL);
 }
