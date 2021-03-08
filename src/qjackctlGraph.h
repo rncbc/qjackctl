@@ -365,6 +365,8 @@ private:
 
 	QIcon   m_icon;
 
+	QString m_title;
+
 	QGraphicsPixmapItem *m_pixmap;
 	QGraphicsTextItem   *m_text;
 

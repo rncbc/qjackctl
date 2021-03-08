@@ -707,13 +707,22 @@ void qjackctlGraphNode::setNodeTitle ( const QString& title )
 {
 	const QFont& font = m_text->font();
 	m_text->setFont(QFont(font.family(), font.pointSize(), QFont::Bold));
-	m_text->setPlainText(title.isEmpty() ? m_name : title);
+	m_title = (title.isEmpty() ? m_name : title);
+
+	static const int MAX_TITLE_LENGTH = 29;
+	static const QString ellipsis(3, '.');
+
+	QString text = m_title;
+	if (text.length() >= MAX_TITLE_LENGTH  + ellipsis.length())
+		text = text.left(MAX_TITLE_LENGTH) + ellipsis;
+
+	m_text->setPlainText(text);
 }
 
 
 QString qjackctlGraphNode::nodeTitle (void) const
 {
-	return m_text->toPlainText();
+	return m_title;	// m_text->toPlainText();
 }
 
 
