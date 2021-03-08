@@ -37,13 +37,16 @@ Packager:	rncbc.org
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-%if %{defined fedora}
+BuildRequires:	coreutils
 BuildRequires:	pkgconfig
+BuildRequires:	glibc-devel
+BuildRequires:	gcc-c++
+BuildRequires:	autoconf automake
+%if %{defined fedora}
 BuildRequires:	qt5-qtbase-devel >= 5.1, qt5-linguist
 BuildRequires:	qt5-qtsvg-devel, qt5-qtwayland-devel
 BuildRequires:	alsa-lib-devel
 %else
-BuildRequires:	pkg-config
 BuildRequires:	libqt5-qtbase-devel >= 5.1, libqt5-linguist
 BuildRequires:	libqt5-qtsvg-devel, libqt5-qtwayland-devel
 BuildRequires:	alsa-devel
