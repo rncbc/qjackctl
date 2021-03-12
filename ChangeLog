@@ -10,8 +10,8 @@ GIT HEAD
   options are now always enabled on the Setup / Settings dialog,
   although only available or effective to jackd2. (EXPERIMENTAL)
   
-- Graph Disconnect now applies to selected connections or nodes
-  only (REGRESSION: not also to selected ports anymore; GH #123).
+- Graph Disconnect now applies to selected connections or nodes only.
+  (REGRESSION: not also to selected ports anymore; GH #123).
 
 
 0.9.1  2021-02-07  A Winter'21 Release.
