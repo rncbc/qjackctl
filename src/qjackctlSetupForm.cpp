@@ -1223,7 +1223,7 @@ void qjackctlSetupForm::changeDriverUpdate ( const QString& sDriver, bool bUpdat
 	m_ui.PeriodsTextLabel->setEnabled(bAlsa || bSun || bOss || bFirewire);
 	m_ui.PeriodsSpinBox->setEnabled(bAlsa || bSun || bOss || bFirewire);
 
-	if (bUpdate && (bFirewire) && m_ui.PeriodsSpinBox->value() < 3)
+	if (bUpdate && bFirewire && m_ui.PeriodsSpinBox->value() < 3)
 		m_ui.PeriodsSpinBox->setValue(3);
 
 	m_ui.WordLengthTextLabel->setEnabled((bSun || bOss) && !bJackDBus);

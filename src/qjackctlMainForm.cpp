@@ -3252,7 +3252,7 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 		const QString& sPreset = qjackctlSetup::defName();
 		if (m_pSetup->loadPreset(m_preset, sPreset)) {
 		#ifdef CONFIG_DBUS
-			if (!m_bDBusDetach)
+			if (m_pDBusConfig && !m_bDBusDetach)
 				getDBusParameters(m_preset);
 		#endif
 			m_pSetup->sDefPreset = sPreset;
