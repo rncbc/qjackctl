@@ -4,14 +4,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.2  2021-03-14  An End-of-Winter'21 Release.
 
 - Clock source, Self-connect mode and Server synchronous mode 
   options are now always enabled on the Setup / Settings dialog,
-  although only available or effective to jackd2. (EXPERIMENTAL)
+  although only available or effective to jackd2.
   
 - Graph Disconnect now applies to selected connections or nodes only.
-  (REGRESSION: not also to selected ports anymore; GH #123).
 
 
 0.9.1  2021-02-07  A Winter'21 Release.

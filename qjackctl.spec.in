@@ -17,7 +17,7 @@
 
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 45
+%define release 46
 
 %define _prefix	@ac_prefix@
 
@@ -102,6 +102,8 @@ including a enhanced patchbay and connection control features.
 %{_datadir}/man/fr/man1/%{name}.1.gz
 
 %changelog
+* Sun Mar 14 2021 Rui Nuno Capela <rncbc@rncbc.org> 0.9.2
+- End-of-Winter'21 release.
 * Sun Feb  7 2021 Rui Nuno Capela <rncbc@rncbc.org> 0.9.1
 - Winter'21 release.
 * Thu Dec 17 2020 Rui Nuno Capela <rncbc@rncbc.org> 0.9.0
