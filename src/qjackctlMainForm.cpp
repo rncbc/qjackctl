@@ -4395,7 +4395,7 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 		preset.iTimeout,
 		preset.iTimeout > 0 && preset.iTimeout != 500);
 	setDBusEngineParameter("clock-source",
-		QVariant::fromValue<uchar> (preset.ucClockSource),
+		uint(preset.ucClockSource),
 		preset.ucClockSource > 0 && preset.ucClockSource != ' ');
 	setDBusEngineParameter("self-connect-mode",
 		QVariant::fromValue<uchar> (preset.ucSelfConnectMode),
