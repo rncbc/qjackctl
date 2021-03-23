@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Fixed default preset/aliases switching and reloading when entering 
+  pure-client mode (ie. "Active" status). (EXPERIMENTAL)
+
+
 0.9.2  2021-03-14  An End-of-Winter'21 Release.
 
 - Clock source, Self-connect mode and Server synchronous mode 

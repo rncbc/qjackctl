@@ -3142,10 +3142,6 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	if (m_pSetup == nullptr)
 		return false;
 
-	// Time to (re)load current preset aliases?
-	if (!m_pSetup->loadAliases())
-		return false;
-
 	// Make sure all status(es) will be updated ASAP.
 	m_iStatusRefresh += QJACKCTL_STATUS_CYCLE;
 	m_iStatusBlink = 0;
@@ -3276,6 +3272,9 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 				.arg(sFilename), "#999933");
 		}
 	}
+
+	// Time to (re)load current preset aliases?
+	m_pSetup->loadAliases();
 
 	 // We'll flag that we've been detached!
 	if (bDetach)

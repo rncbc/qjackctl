@@ -357,7 +357,7 @@ bool qjackctlSetup::saveAliases (void)
 
 	// Save preset aliases...
 	const QString sAliasesKey = "/Aliases" + sSuffix;
-	m_settings.remove(sAliasesKey);
+//	m_settings.remove(sAliasesKey);
 	m_settings.beginGroup(sAliasesKey);
 	m_settings.beginGroup("/Jack");	// FIXME: Audio
 	aliases.audioOutputs.saveSettings(m_settings, "/Outputs");
