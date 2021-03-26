@@ -63,11 +63,10 @@ server. With time, this primordial interface has become richer by
 including a enhanced patchbay and connection control features.
 
 %prep
-%setup
-[ -x ./autogen.sh ] && ./autogen.sh
+%setup -q
 
 %build
-%configure
+cmake -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %__make %{?_smp_mflags}
 
 %install

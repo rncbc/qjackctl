@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- All packaging builds switching to CMake. (EXPERIMENTAL)
+
 - Fixed default preset/aliases switching and reloading when entering 
   pure-client mode (ie. "Active" status). (EXPERIMENTAL)
 
