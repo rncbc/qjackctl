@@ -592,12 +592,12 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 
 	switch (node->nodeMode()) {
 	case qjackctlGraphItem::Input:
-		++m_ins;
+		++m_ins &= 0x0f;
 		x += w;
 		y += 0.33 * h * (m_ins & 1 ? +m_ins : -m_ins);
 		break;
 	case qjackctlGraphItem::Output:
-		++m_outs;
+		++m_outs &= 0x0f;
 		x -= w;
 		y += 0.33 * h * (m_outs & 1 ? +m_outs : -m_outs);
 		break;
@@ -612,7 +612,7 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 		}
 		x += 0.33 * w * qreal(dx);
 		y += 0.33 * h * qreal(dy);
-		++m_mids;
+		++m_mids &= 0x1f;
 		break;
 	}}
 
