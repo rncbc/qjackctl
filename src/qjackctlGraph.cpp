@@ -159,6 +159,22 @@ QRectF qjackctlGraphItem::editorRect (void) const
 }
 
 
+// Path and bounding rectangle override.
+void qjackctlGraphItem::setPath ( const QPainterPath& path )
+{
+	m_rect = path.controlPointRect();
+
+	QGraphicsPathItem::setPath(path);
+}
+
+
+// Bounding rectangle accessor.
+const QRectF& qjackctlGraphItem::itemRect (void) const
+{
+	return m_rect;
+}
+
+
 //----------------------------------------------------------------------------
 // qjackctlGraphPort -- Port graphics item.
 
@@ -266,7 +282,7 @@ void qjackctlGraphPort::setPortTitle ( const QString& title )
 	const QRectF& rect
 		= m_text->boundingRect().adjusted(0, +2, 0, -2);
 	path.addRoundedRect(rect, 5, 5);
-	QGraphicsPathItem::setPath(path);
+	/*QGraphicsPathItem::*/setPath(path);
 }
 
 
@@ -292,8 +308,7 @@ QPointF qjackctlGraphPort::portPos (void) const
 {
 	QPointF pos = QGraphicsPathItem::scenePos();
 
-	const QRectF& rect
-		= QGraphicsPathItem::boundingRect();
+	const QRectF& rect = itemRect();
 	if (m_mode == Output)
 		pos.setX(pos.x() + rect.width());
 	pos.setY(pos.y() + rect.height() / 2);
@@ -354,7 +369,7 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 {
 	const QPalette& pal = option->palette;
 
-	const QRectF& port_rect = QGraphicsPathItem::boundingRect();
+	const QRectF& port_rect = itemRect();
 	QLinearGradient port_grad(0, port_rect.top(), 0, port_rect.bottom());
 	QColor port_color;
 	if (QGraphicsPathItem::isSelected()) {
@@ -820,7 +835,7 @@ void qjackctlGraphNode::updatePath (void)
 	int wi, wo;
 	wi = wo = width;
 	foreach (qjackctlGraphPort *port, m_ports) {
-		const int w = port->boundingRect().width();
+		const int w = port->itemRect().width();
 		if (port->isOutput()) {
 			if (wo < w) wo = w;
 		} else {
@@ -836,7 +851,7 @@ void qjackctlGraphNode::updatePath (void)
 	int yi, yo;
 	yi = yo = height;
 	foreach (qjackctlGraphPort *port, m_ports) {
-		const QRectF& port_rect = port->boundingRect();
+		const QRectF& port_rect = port->itemRect();
 		const int w = port_rect.width();
 		const int h = port_rect.height() + 1;
 		if (type - port->portType()) {
@@ -859,7 +874,7 @@ void qjackctlGraphNode::updatePath (void)
 
 	QPainterPath path;
 	path.addRoundedRect(-width / 2, 0, width, height + 6, 5, 5);
-	QGraphicsPathItem::setPath(path);
+	/*QGraphicsPathItem::*/setPath(path);
 }
 
 
@@ -868,7 +883,7 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 {
 	const QPalette& pal = option->palette;
 
-	const QRectF& node_rect = QGraphicsPathItem::boundingRect();
+	const QRectF& node_rect = itemRect();
 	QLinearGradient node_grad(0, node_rect.top(), 0, node_rect.bottom());
 	QColor node_color;
 	if (QGraphicsPathItem::isSelected()) {
@@ -1023,7 +1038,7 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 	const QPointF pos3_4(pos4.x() - d2, pos4.y());
 
 	qjackctlGraphNode *node1 = m_port1->portNode();
-	const QRectF& rect1 = node1->boundingRect();
+	const QRectF& rect1 = node1->itemRect();
 	const qreal dx = pos3_4.x() - pos1_2.x();
 	const qreal dy = pos0.y() - node1->scenePos().y() - 0.5 * rect1.height();
 	const qreal y_max = rect1.height() + rect1.width();
@@ -1039,6 +1054,7 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 	path.lineTo(pos1_2);
 	path.cubicTo(pos2, pos3, pos3_4);
 	path.lineTo(pos4);
+
 	const qreal arrow_angle = path.angleAtPercent(0.5) * M_PI / 180.0;
 	const QPointF arrow_pos0 = path.pointAtPercent(0.5);
 	path.lineTo(pos3_4);
@@ -1056,7 +1072,7 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 	arrow.append(arrow_pos0);
 	path.addPolygon(QPolygonF(arrow));
 
-	QGraphicsPathItem::setPath(path);
+	/*QGraphicsPathItem::*/setPath(path);
 }
 
 

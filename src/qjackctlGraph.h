@@ -134,6 +134,12 @@ public:
 	// Rectangular editor extents.
 	virtual QRectF editorRect() const;
 
+	// Path and bounding rectangle override.
+	void setPath(const QPainterPath& path);
+
+	// Bounding rectangle accessor.
+	const QRectF& itemRect() const;
+
 private:
 
 	// Instance variables.
@@ -142,6 +148,8 @@ private:
 
 	bool m_marked;
 	bool m_hilite;
+
+	QRectF m_rect;
 };
 
 
