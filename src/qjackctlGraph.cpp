@@ -1057,18 +1057,15 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 
 	const qreal arrow_angle = path.angleAtPercent(0.5) * M_PI / 180.0;
 	const QPointF arrow_pos0 = path.pointAtPercent(0.5);
-	path.lineTo(pos3_4);
-	path.cubicTo(pos3, pos2, pos1_2);
-	path.lineTo(pos1);
-	const qreal arrow_size = 12.0;
+	const qreal arrow_size = 8.0;
 	QVector<QPointF> arrow;
 	arrow.append(arrow_pos0);
 	arrow.append(arrow_pos0 - QPointF(
-		::sin(arrow_angle + M_PI / 2.3) * arrow_size,
-		::cos(arrow_angle + M_PI / 2.3) * arrow_size));
+		::sin(arrow_angle + M_PI / 2.25) * arrow_size,
+		::cos(arrow_angle + M_PI / 2.25) * arrow_size));
 	arrow.append(arrow_pos0 - QPointF(
-		::sin(arrow_angle + M_PI - M_PI / 2.3) * arrow_size,
-		::cos(arrow_angle + M_PI - M_PI / 2.3) * arrow_size));
+		::sin(arrow_angle + M_PI - M_PI / 2.25) * arrow_size,
+		::cos(arrow_angle + M_PI - M_PI / 2.25) * arrow_size));
 	arrow.append(arrow_pos0);
 	path.addPolygon(QPolygonF(arrow));
 
@@ -1085,23 +1082,17 @@ void qjackctlGraphConnect::updatePath (void)
 void qjackctlGraphConnect::paint ( QPainter *painter,
 	const QStyleOptionGraphicsItem *option, QWidget */*widget*/ )
 {
-	if (QGraphicsPathItem::isSelected()) {
-		const QPalette& pal
-			= option->palette;
-		const QColor& color
-			= pal.highlight().color();
-		painter->setPen(QPen(color, 2));
-		painter->setBrush(color);
-	} else {
-		const QColor& color
-			= qjackctlGraphItem::foreground();
-		if (qjackctlGraphItem::isHighlight() || QGraphicsPathItem::isUnderMouse())
-			painter->setPen(color.lighter());
-		else
-			painter->setPen(color);
-		painter->setBrush(qjackctlGraphItem::background());
-	}
+	QColor color;
+	if (QGraphicsPathItem::isSelected())
+		color = option->palette.highlight().color();
+	else
+	if (qjackctlGraphItem::isHighlight() || QGraphicsPathItem::isUnderMouse())
+		color = qjackctlGraphItem::foreground().lighter();
+	else
+		color = qjackctlGraphItem::foreground();
 
+	painter->setPen(QPen(color, 2));
+	painter->setBrush(Qt::NoBrush);
 	painter->drawPath(QGraphicsPathItem::path());
 }
 
