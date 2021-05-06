@@ -182,7 +182,8 @@ const QRectF& qjackctlGraphItem::itemRect (void) const
 qjackctlGraphPort::qjackctlGraphPort ( qjackctlGraphNode *node,
 	const QString& name, qjackctlGraphItem::Mode mode, uint type )
 	: qjackctlGraphItem(node), m_node(node),
-		m_name(name), m_mode(mode), m_type(type), m_index(0),
+		m_name(name), m_mode(mode), m_type(type),
+		m_index(node->ports().count()),
 		m_selectx(0), m_hilitex(0)
 {
 	QGraphicsPathItem::setZValue(+1.0);
