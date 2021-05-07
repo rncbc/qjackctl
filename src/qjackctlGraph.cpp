@@ -956,13 +956,16 @@ qjackctlGraphConnect::qjackctlGraphConnect (void)
 	const bool is_darkest = (pal.base().color().value() < 24);
 	QColor shadow_color = (is_darkest ? Qt::white : Qt::black);
 	shadow_color.setAlpha(220);
-
+#if 0
+	// WARNING: Expect some lag when redrawing and
+	// moving highly connected nodes, most especially
+	// ones with plenty of backward curved connections...
 	QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
 	effect->setColor(shadow_color);
 	effect->setBlurRadius(is_darkest ? 4 : 8);
 	effect->setOffset(is_darkest ? 0 : 1);
 	QGraphicsPathItem::setGraphicsEffect(effect);
-
+#endif
 	QGraphicsPathItem::setAcceptHoverEvents(true);
 
 	qjackctlGraphItem::raise();
