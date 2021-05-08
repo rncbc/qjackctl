@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Optimize and disable Graph connection lines drop-shadow eye-candy,
+  improving a lot on moving highly-connected nodes, especially the
+  ones with plenty of backward-curved connections. (EXPERIMENTAL)
+
 - All packaging builds switching to CMake. (EXPERIMENTAL)
 
 - Fixed default preset/aliases switching and reloading when entering 
