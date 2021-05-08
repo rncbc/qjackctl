@@ -659,7 +659,7 @@ qjackctlGraphNode::~qjackctlGraphNode (void)
 
 	// No actual need to destroy any children here...
 	//
-	//	QGraphicsPathItem::setGraphicsEffect(0);
+	//QGraphicsPathItem::setGraphicsEffect(nullptr);
 
 	//	delete m_text;
 	//	delete m_pixmap;
@@ -952,14 +952,11 @@ qjackctlGraphConnect::qjackctlGraphConnect (void)
 
 	qjackctlGraphItem::setBackground(qjackctlGraphItem::foreground());
 
+#if 0//Disable drop-shadow effect...
 	const QPalette pal;
 	const bool is_darkest = (pal.base().color().value() < 24);
 	QColor shadow_color = (is_darkest ? Qt::white : Qt::black);
 	shadow_color.setAlpha(220);
-#if 0
-	// WARNING: Expect some lag when redrawing and
-	// moving highly connected nodes, most especially
-	// ones with plenty of backward curved connections...
 	QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
 	effect->setColor(shadow_color);
 	effect->setBlurRadius(is_darkest ? 4 : 8);
@@ -982,7 +979,7 @@ qjackctlGraphConnect::~qjackctlGraphConnect (void)
 
 	// No actual need to destroy any children here...
 	//
-	//	QGraphicsPathItem::setGraphicsEffect(0);
+	//QGraphicsPathItem::setGraphicsEffect(nullptr);
 }
 
 
@@ -1095,9 +1092,18 @@ void qjackctlGraphConnect::paint ( QPainter *painter,
 	else
 		color = qjackctlGraphItem::foreground();
 
-	painter->setPen(QPen(color, 2));
+	const QPalette pal;
+	const bool is_darkest = (pal.base().color().value() < 24);
+	QColor shadow_color = (is_darkest ? Qt::white : Qt::black);
+	shadow_color.setAlpha(120);
+
+	const QPainterPath& path
+		= QGraphicsPathItem::path();
 	painter->setBrush(Qt::NoBrush);
-	painter->drawPath(QGraphicsPathItem::path());
+	painter->setPen(QPen(shadow_color, 3));
+	painter->drawPath(path.translated(+1.0, +1.0));
+	painter->setPen(QPen(color, 2));
+	painter->drawPath(path);
 }
 
 

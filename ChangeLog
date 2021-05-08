@@ -6,7 +6,7 @@ ChangeLog
 
 GIT HEAD
 
-- Optimize and disable Graph connection lines drop-shadow eye-candy,
+- Graph connection lines drop-shadow eye-candy has been optimized,
   improving a lot on moving highly-connected nodes, especially the
   ones with plenty of backward-curved connections. (EXPERIMENTAL)
 
