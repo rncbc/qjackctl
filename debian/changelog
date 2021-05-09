@@ -1,3 +1,9 @@
+qjackctl (0.9.3-47) unstable; urgency=low
+
+  * Spring'21 release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Tue, 11 May 2021 20:00:00 +0100
+
 qjackctl (0.9.2-46) unstable; urgency=low
 
   * End-of-Winter'21 release.
