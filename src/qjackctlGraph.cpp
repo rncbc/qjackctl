@@ -1095,7 +1095,7 @@ void qjackctlGraphConnect::paint ( QPainter *painter,
 	const QPalette pal;
 	const bool is_darkest = (pal.base().color().value() < 24);
 	QColor shadow_color = (is_darkest ? Qt::white : Qt::black);
-	shadow_color.setAlpha(120);
+	shadow_color.setAlpha(80);
 
 	const QPainterPath& path
 		= QGraphicsPathItem::path();
