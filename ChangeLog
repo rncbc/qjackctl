@@ -4,6 +4,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- All builds default to Qt6 (Qt >= 6.1) where available.
+
+- CMake is now the official build system.
+
+
 0.9.3  2021-05-11  A Spring'21 Release.
 
 - Graph connection lines drop-shadow eye-candy has been optimized,
