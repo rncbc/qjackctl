@@ -145,6 +145,11 @@ include (CheckIncludeFileCXX)
 include (CheckFunctionExists)
 include (CheckLibraryExists)
 
+# Add some debug flags.
+if (CONFIG_DEBUG)
+  add_compile_options (-g -fsanitize=address -fno-omit-frame-pointer)
+  link_libraries (asan)
+endif ()
 
 # Checks for header files.
 if (UNIX AND NOT APPLE)

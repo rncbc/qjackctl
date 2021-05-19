@@ -79,12 +79,12 @@ AC_ARG_ENABLE(qt6,
 if test "x$ac_debug" = "xyes"; then
    AC_DEFINE(CONFIG_DEBUG, 1, [Define if debugging is enabled.])
    ac_stacktrace="yes"
-   ac_debug="debug"
+   ac_build_type="debug"
 else
    ac_stacktrace="no"
-   ac_debug="release"
+   ac_build_type="release"
 fi
-AC_SUBST(ac_debug)
+AC_SUBST(ac_build_type)
 
 
 # Disable system tray argument option.
@@ -423,6 +423,10 @@ if test "x$ac_lrelease" = "xno"; then
 fi
 AC_SUBST(ac_lrelease)
 
+if test "x$ac_debug" = "xyes"; then
+  ac_cflags="-g -fsanitize=address -fno-omit-frame-pointer $ac_cflags"
+  ac_libs="$ac_libs -lasan"
+fi
 
 # Checks for libraries.
 AC_CHECK_LIB(m, main)
@@ -436,9 +440,6 @@ if test "x$ac_jack_lib" = "xyes"; then
    AC_DEFINE(CONFIG_JACK, 1, [Define if JACK library is available.])
    ac_cflags="$ac_cflags $JACK_CFLAGS"
    ac_libs="$ac_libs $JACK_LIBS"
-   CFLAGS="$CFLAGS $JACK_CFLAGS"
-   CPPFLAGS="$CPPFLAGS $JACK_CFLAGS"
-   LIBS="$LIBS $JACK_LIBS"
 else
    AC_MSG_ERROR([*** JACK library not found.])
 fi
@@ -660,7 +661,7 @@ AC_OUTPUT
 echo
 echo "  $PACKAGE_NAME $ac_build_version (Qt $ac_qt_version)"
 echo
-echo "  Build target . . . . . . . . . . . . . . . . . . .: $ac_debug"
+echo "  Build target . . . . . . . . . . . . . . . . . . .: $ac_build_type"
 echo
 echo "  JACK Audio Connection Kit support  . . . . . . . .: $ac_jack_lib"
 echo "  JACK Realtime support  . . . . . . . . . . . . . .: $ac_jack_realtime"
