@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required (VERSION 3.13)
 
-project(qjackctl
+project (qjackctl
   VERSION 0.9.4
   DESCRIPTION "JACK Audio Connection Kit Qt GUI Interface"
   LANGUAGES C CXX)
@@ -144,12 +144,6 @@ include (CheckIncludeFiles)
 include (CheckIncludeFileCXX)
 include (CheckFunctionExists)
 include (CheckLibraryExists)
-
-# Add some debug flags.
-if (CONFIG_DEBUG)
-  add_compile_options (-g -fsanitize=address -fno-omit-frame-pointer)
-  link_libraries (asan)
-endif ()
 
 # Checks for header files.
 if (UNIX AND NOT APPLE)
