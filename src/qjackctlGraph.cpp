@@ -1031,12 +1031,14 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 {
 	const bool is_out0 = m_port1->isOutput();
 	const QPointF pos0 = m_port1->portPos();
-	const QPointF pos1 = (is_out0 ? pos0 : pos);
-	const QPointF pos4 = (is_out0 ? pos : pos0);
 
-	const qreal d2 = (is_out0 ? +2.0 : -2.0);
-	const QPointF pos1_2(pos1.x() + d2, pos1.y());
-	const QPointF pos3_4(pos4.x() - d2, pos4.y());
+	const QPointF d1(1.0, 0.0);
+	const QPointF pos1 = (is_out0 ? pos0 + d1 : pos  - d1);
+	const QPointF pos4 = (is_out0 ? pos  - d1 : pos0 + d1);
+
+	const QPointF d2(2.0, 0.0);
+	const QPointF pos1_2(is_out0 ? pos1 + d2 : pos1 - d2);
+	const QPointF pos3_4(is_out0 ? pos4 - d2 : pos4 + d2);
 
 	qjackctlGraphNode *node1 = m_port1->portNode();
 	const QRectF& rect1 = node1->itemRect();
