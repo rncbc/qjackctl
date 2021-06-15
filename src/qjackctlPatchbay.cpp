@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -267,9 +267,7 @@ const QList<qjackctlSocketItem *>& qjackctlSocketItem::connects (void) const
 // Plug list cleaner.
 void qjackctlSocketItem::clear (void)
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	qDeleteAll(m_plugs);
-#endif
 	m_plugs.clear();
 }
 
@@ -408,9 +406,7 @@ const QString& qjackctlSocketList::socketCaption (void) const
 // Socket list cleaner.
 void qjackctlSocketList::clear (void)
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	qDeleteAll(m_sockets);
-#endif
 	m_sockets.clear();
 }
 
