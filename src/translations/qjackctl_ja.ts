@@ -35,72 +35,72 @@
     <message>
         <location filename="../qjackctlSetup.cpp" line="607"/>
         <source>Usage: %1 [options] [command-and-args]</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="610"/>
         <source>Options:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="612"/>
         <source>Start JACK audio server immediately</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="614"/>
         <source>Set default settings preset name</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="616"/>
         <source>Set active patchbay definition file</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="618"/>
         <source>Set default JACK audio server name</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="620"/>
         <source>Show help about command line options</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="622"/>
         <source>Show version information</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="658"/>
         <source>Option -p requires an argument (preset).</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="667"/>
         <source>Option -a requires an argument (path).</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="677"/>
         <source>Option -n requires an argument (name).</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlJackConnect.cpp" line="178"/>
         <source>%1 (%2 frames)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="131"/>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphCommand.cpp" line="184"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -108,7 +108,7 @@
     <message>
         <location filename="../qjackctlAboutForm.ui" line="37"/>
         <source>About</source>
-        <translation type="unfinished">QjackCtlについて</translation>
+        <translation>QjackCtlについて</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.ui" line="77"/>
@@ -183,12 +183,12 @@
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="93"/>
         <source>Using: Qt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt %1 を使用</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="99"/>
         <source>JACK %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="103"/>
@@ -227,7 +227,7 @@
         <location filename="../qjackctlConnect.cpp" line="1112"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1115"/>
@@ -238,7 +238,7 @@
         <location filename="../qjackctlConnect.cpp" line="1116"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1119"/>
@@ -249,18 +249,18 @@
         <location filename="../qjackctlConnect.cpp" line="1120"/>
         <source>Alt+A</source>
         <comment>Disconnect All</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1125"/>
         <source>Re&amp;name</source>
-        <translation type="unfinished">リネーム(&amp;N)</translation>
+        <translation>リネーム(&amp;N)</translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1126"/>
         <source>Alt+N</source>
         <comment>Rename</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1132"/>
@@ -271,7 +271,7 @@
         <location filename="../qjackctlConnect.cpp" line="1133"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -298,7 +298,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="44"/>
         <source>Connections</source>
-        <translation type="unfinished">接続</translation>
+        <translation>接続</translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="63"/>
@@ -378,12 +378,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="198"/>
         <source>MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnectionsForm.ui" line="333"/>
         <source>ALSA</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -397,7 +397,7 @@ Are you sure?</source>
         <location filename="../qjackctlConnect.cpp" line="1311"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1314"/>
@@ -408,7 +408,7 @@ Are you sure?</source>
         <location filename="../qjackctlConnect.cpp" line="1315"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1318"/>
@@ -419,7 +419,7 @@ Are you sure?</source>
         <location filename="../qjackctlConnect.cpp" line="1319"/>
         <source>Alt+A</source>
         <comment>Disconnect All</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlConnect.cpp" line="1324"/>
@@ -430,7 +430,7 @@ Are you sure?</source>
         <location filename="../qjackctlConnect.cpp" line="1325"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -452,7 +452,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="33"/>
         <source>Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>グラフ</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="63"/>
@@ -477,12 +477,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="99"/>
         <source>Co&amp;lors</source>
-        <translation type="unfinished"></translation>
+        <translation>色(&amp;L)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="114"/>
         <source>S&amp;ort</source>
-        <translation type="unfinished"></translation>
+        <translation>並べ替え(&amp;O)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="139"/>
@@ -508,7 +508,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="199"/>
         <source>Ins</source>
-        <translation type="unfinished"></translation>
+        <translation>Insキー</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="207"/>
@@ -529,23 +529,23 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="219"/>
         <source>Del</source>
-        <translation>削除</translation>
+        <translation>Delキー</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="224"/>
         <source>Cl&amp;ose</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる(&amp;O)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="227"/>
         <location filename="../qjackctlGraphForm.ui" line="230"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="233"/>
         <source>Close this application window</source>
-        <translation type="unfinished"></translation>
+        <translation>このウィンドウを終了します</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="241"/>
@@ -562,7 +562,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="253"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="258"/>
@@ -579,7 +579,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="270"/>
         <source>Ctrl+Shift+A</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="275"/>
@@ -596,23 +596,23 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="287"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="295"/>
         <source>&amp;Rename...</source>
-        <translation type="unfinished"></translation>
+        <translation>アイテム名の変更(&amp;R)...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="298"/>
         <source>Rename item</source>
-        <translation type="unfinished"></translation>
+        <translation>アイテム名を変更します</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="301"/>
         <location filename="../qjackctlGraphForm.ui" line="304"/>
         <source>Rename Item</source>
-        <translation type="unfinished"></translation>
+        <translation>アイテム名の変更</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="315"/>
@@ -628,12 +628,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="324"/>
         <source>Show/hide the main program window menubar</source>
-        <translation>メインプログラムウィンドウのメニューバーを表示したり隠したりします</translation>
+        <translation>メインプログラムウィンドウのメニューバーの表示を切り替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="327"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="335"/>
@@ -649,7 +649,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="344"/>
         <source>Show/hide main program window file toolbar</source>
-        <translation>メインプログラムウィンドウのツールバーを表示したり隠したりします</translation>
+        <translation>メインプログラムウィンドウのツールバーの表示を切り替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="352"/>
@@ -718,7 +718,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="418"/>
         <source>F5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="426"/>
@@ -735,7 +735,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="438"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="446"/>
@@ -752,7 +752,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="458"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="466"/>
@@ -769,7 +769,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="478"/>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="486"/>
@@ -786,178 +786,178 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="498"/>
         <source>Ctrl+1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="509"/>
         <source>&amp;Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>選択範囲の拡大(&amp;Z)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="512"/>
         <location filename="../qjackctlGraphForm.ui" line="515"/>
         <location filename="../qjackctlGraphForm.ui" line="518"/>
         <source>Zoom Range</source>
-        <translation type="unfinished"></translation>
+        <translation>選択範囲を拡大します</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="526"/>
         <source>JACK &amp;Audio...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK Audio (&amp;A)...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="529"/>
         <location filename="../qjackctlGraphForm.ui" line="532"/>
         <location filename="../qjackctlGraphForm.ui" line="535"/>
         <source>JACK Audio color</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK Audioの色</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="543"/>
         <source>JACK &amp;MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK MIDI (&amp;M)...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="546"/>
         <source>JACK MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="549"/>
         <location filename="../qjackctlGraphForm.ui" line="552"/>
         <source>JACK MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK MIDIの色</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="560"/>
         <source>&amp;ALSA MIDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA MIDI (&amp;A)...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="563"/>
         <source>ALSA MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA MIDI</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="566"/>
         <location filename="../qjackctlGraphForm.ui" line="569"/>
         <source>ALSA MIDI color</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA MIDIの色</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="577"/>
         <source>JACK &amp;CV...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK CV (&amp;C)...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="580"/>
         <location filename="../qjackctlGraphForm.ui" line="583"/>
         <location filename="../qjackctlGraphForm.ui" line="586"/>
         <source>JACK CV color</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK CVの色</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="594"/>
         <source>JACK &amp;OSC...</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK OSC(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="597"/>
         <source>JACK OSC</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK OSC</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="600"/>
         <location filename="../qjackctlGraphForm.ui" line="603"/>
         <source>JACK OSC color</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK OSCの色</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="611"/>
         <source>&amp;Reset</source>
-        <translation type="unfinished">リセット(&amp;R)</translation>
+        <translation>リセット(&amp;R)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="614"/>
         <location filename="../qjackctlGraphForm.ui" line="617"/>
         <location filename="../qjackctlGraphForm.ui" line="620"/>
         <source>Reset colors</source>
-        <translation type="unfinished"></translation>
+        <translation>配色のリセット</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="631"/>
         <source>Port &amp;Name</source>
-        <translation type="unfinished"></translation>
+        <translation>ポート名(&amp;N)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="634"/>
         <source>Port name</source>
-        <translation type="unfinished"></translation>
+        <translation>ポート名</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="637"/>
         <source>Sort by port name</source>
-        <translation type="unfinished"></translation>
+        <translation>ポート名で並べ替え</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="648"/>
         <source>Port &amp;Title</source>
-        <translation type="unfinished"></translation>
+        <translation>ポートタイトル(&amp;T)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="651"/>
         <source>Port title</source>
-        <translation type="unfinished"></translation>
+        <translation>ポートタイトル</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="654"/>
         <source>Sort by port title</source>
-        <translation type="unfinished"></translation>
+        <translation>ポートタイトルで並べ替え</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="665"/>
         <source>Port &amp;Index</source>
-        <translation type="unfinished"></translation>
+        <translation>ポートインデックス(&amp;I)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="668"/>
         <source>Port index</source>
-        <translation type="unfinished"></translation>
+        <translation>ポートインデックス</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="671"/>
         <source>Sort by port index</source>
-        <translation type="unfinished"></translation>
+        <translation>ポートインデックスで並べ替え</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="682"/>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>昇順(&amp;A)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="685"/>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>昇順で並べ替え</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="688"/>
         <source>Ascending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>昇順で並べ替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="699"/>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>降順(&amp;D)</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="702"/>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>降順で並べ替え</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="705"/>
         <source>Descending sort order</source>
-        <translation type="unfinished"></translation>
+        <translation>降順で並べ替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="713"/>
@@ -1012,27 +1012,27 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="99"/>
         <source>Undo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>直前の作業を取り消します</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="104"/>
         <source>Redo last edit action</source>
-        <translation type="unfinished"></translation>
+        <translation>取り消した作業をやり直します</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="120"/>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>拡大率</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="433"/>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>準備できました</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.cpp" line="507"/>
         <source>Colors - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>色 - %1</translation>
     </message>
 </context>
 <context>
@@ -1118,7 +1118,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="418"/>
         <source>Show/hide the session management window</source>
-        <translation>セッション管理ウィンドウを表示したり隠したりします</translation>
+        <translation>セッション管理ウィンドウの表示を切り替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="421"/>
@@ -1152,12 +1152,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="520"/>
         <source>Show/hide the graph window</source>
-        <translation type="unfinished"></translation>
+        <translation>グラフウィンドウの表示を切り替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="554"/>
         <source>Show/hide the connections window</source>
-        <translation type="unfinished"></translation>
+        <translation>接続ウィンドウの表示を切り替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="557"/>
@@ -1167,7 +1167,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="588"/>
         <source>Show/hide the patchbay editor window</source>
-        <translation>パッチベイ編集ウィンドウを表示したり隠したりします</translation>
+        <translation>パッチベイ編集ウィンドウの表示を切り替えます</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="591"/>
@@ -1304,7 +1304,9 @@ JACKオーディオサーバーを終了しますか？</translation>
         <source>%1 is about to terminate.
 
 Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1を終了しようとしています:
+
+よろしいですか?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1307"/>
@@ -1467,7 +1469,7 @@ Sorry</source>
 &quot;%1&quot;
 
 Do you want to save the changes?</source>
-        <translation type="unfinished">プリセットのエイリアス名が変更されています:
+        <translation>プリセットのエイリアス名が変更されています:
 
 &quot;%1&quot;
 
@@ -1476,12 +1478,12 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2267"/>
         <source>Transport BBT (bar.beat.ticks)</source>
-        <translation type="unfinished"></translation>
+        <translation>トランスポートのBBT(bar: beat, ticks)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2268"/>
         <source>Transport time code</source>
-        <translation type="unfinished"></translation>
+        <translation>トランスポートのタイムコード</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2279"/>
@@ -1554,12 +1556,12 @@ Disabled.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2817"/>
         <source>Freewheel started...</source>
-        <translation type="unfinished"></translation>
+        <translation>Freewheelで開始しました...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2818"/>
         <source>Freewheel exited.</source>
-        <translation type="unfinished"></translation>
+        <translation>Freewheelで終了しました。</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="2831"/>
@@ -1806,27 +1808,27 @@ Please check the messages window for more info.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3782"/>
         <source>%1 (%2%)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3786"/>
         <source>%1 (%2%, %3 xruns)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3794"/>
         <source>%1 %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3796"/>
         <source>%1 Hz</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3798"/>
         <source>%1 frames</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 フレーム</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3809"/>
@@ -1841,12 +1843,12 @@ Please check the messages window for more info.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3814"/>
         <source>FW</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3817"/>
         <source>RT</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="3827"/>
@@ -1900,7 +1902,7 @@ Please check the messages window for more info.</source>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4112"/>
@@ -1999,7 +2001,7 @@ restarting the JACK audio server.</source>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1146"/>
         <source>Do you want to restart the JACK audio server?</source>
-        <translation type="unfinished"></translation>
+        <translation>JACKオーディオサーバーを再起動しますか?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4276"/>
@@ -2014,7 +2016,7 @@ the next time you start this program.</source>
 
 %3.
 (%4)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4605"/>
@@ -2022,7 +2024,7 @@ the next time you start this program.</source>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4845"/>
@@ -2030,7 +2032,7 @@ the next time you start this program.</source>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2038,7 +2040,7 @@ the next time you start this program.</source>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="39"/>
         <source>Messages / Status</source>
-        <translation type="unfinished"></translation>
+        <translation>メッセージ/ステータス</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.ui" line="55"/>
@@ -2198,12 +2200,12 @@ the next time you start this program.</source>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="221"/>
         <source>Logging stopped --- %1 ---</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="231"/>
         <source>Logging started --- %1 ---</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2211,116 +2213,116 @@ the next time you start this program.</source>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="40"/>
         <source>Color Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>配色のテーマ</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="46"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名前</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="64"/>
         <source>Current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>現在の色パレット名</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="77"/>
         <source>Save current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>現在の色パレット名を保存します</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="80"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="90"/>
         <source>Delete current color palette name</source>
-        <translation type="unfinished"></translation>
+        <translation>現在の色パレット名を削除します</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="93"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>削除</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="106"/>
         <source>Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>パレット</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="118"/>
         <source>Current color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>現在の色パレット</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="128"/>
         <source>Generate:</source>
-        <translation type="unfinished"></translation>
+        <translation>作成:</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="144"/>
         <source>Base color to generate palette</source>
-        <translation type="unfinished"></translation>
+        <translation>パレットを作成するベースとなる色</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="151"/>
         <source>Reset all current palette colors</source>
-        <translation type="unfinished"></translation>
+        <translation>現在の色パレット名を全てリセットします</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="154"/>
         <source> Reset</source>
-        <translation type="unfinished"></translation>
+        <translation> リセット</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="177"/>
         <source>Import a custom color theme (palette) from file</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルからカスタム色テーマ(パレット)をインポートします</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="180"/>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>インポート...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="190"/>
         <source>Export a custom color theme (palette) to file</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルへカスタム色テーマ(パレット)をエクスポートします</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="193"/>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート...</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.ui" line="216"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>詳細表示</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="323"/>
         <source>Import File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルのインポート - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="326"/>
         <location filename="../qjackctlPaletteForm.cpp" line="400"/>
         <source>Palette files (*.%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>パレットファイル (*.%1)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="327"/>
         <location filename="../qjackctlPaletteForm.cpp" line="401"/>
         <source>All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>全ファイル (*.*)</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="387"/>
         <location filename="../qjackctlPaletteForm.cpp" line="820"/>
         <location filename="../qjackctlPaletteForm.cpp" line="828"/>
         <source>Warning - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>警告 - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="388"/>
@@ -2329,19 +2331,25 @@ the next time you start this program.</source>
 %1
 
 Sorry.</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルからインポートできませんでした:
+
+%1
+
+ごめんなさい。</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="397"/>
         <source>Export File - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルのエクスポート - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="821"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>設定が変更されています。
+
+変更を破棄しますか?</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="829"/>
@@ -2350,7 +2358,11 @@ Do you want to discard the changes?</source>
 &quot;%1&quot;.
 
 Do you want to save the changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>設定の一部が変更されています:
+
+&quot;%1&quot;。
+
+変更を保存しますか?</translation>
     </message>
 </context>
 <context>
@@ -2358,22 +2370,22 @@ Do you want to save the changes?</source>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1072"/>
         <source>Color Role</source>
-        <translation type="unfinished"></translation>
+        <translation>色の役割</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1075"/>
         <source>Active</source>
-        <translation type="unfinished">有効</translation>
+        <translation>有効</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1078"/>
         <source>Inactive</source>
-        <translation type="unfinished">無効</translation>
+        <translation>無効</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="1081"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>使用不可</translation>
     </message>
 </context>
 <context>
@@ -2398,7 +2410,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="44"/>
         <source>Patchbay</source>
-        <translation type="unfinished"></translation>
+        <translation>パッチベイ</translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbayForm.ui" line="105"/>
@@ -2725,7 +2737,7 @@ of all actual client connections?</source>
         <location filename="../qjackctlPatchbay.cpp" line="1324"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1327"/>
@@ -2736,7 +2748,7 @@ of all actual client connections?</source>
         <location filename="../qjackctlPatchbay.cpp" line="1328"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1331"/>
@@ -2747,7 +2759,7 @@ of all actual client connections?</source>
         <location filename="../qjackctlPatchbay.cpp" line="1332"/>
         <source>Alt+A</source>
         <comment>Disconnect All</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlPatchbay.cpp" line="1337"/>
@@ -2758,7 +2770,7 @@ of all actual client connections?</source>
         <location filename="../qjackctlPatchbay.cpp" line="1338"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2766,7 +2778,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="34"/>
         <source>Session</source>
-        <translation type="unfinished"></translation>
+        <translation>セッション</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="45"/>
@@ -2837,7 +2849,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="157"/>
         <source>UUID</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="162"/>
@@ -2847,22 +2859,22 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="171"/>
         <source>Infra-clients / commands</source>
-        <translation type="unfinished"></translation>
+        <translation>インフラクライアント/コマンド</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="187"/>
         <source>Infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>インフラクライアント</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="192"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>インフラコマンド</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="200"/>
         <source>Add infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>インフラクライアントを追加します</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="203"/>
@@ -2873,7 +2885,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="213"/>
         <source>Edit infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>インフラクライアントを編集します</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="216"/>
@@ -2884,7 +2896,7 @@ of all actual client connections?</source>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="226"/>
         <source>Remove infra-client</source>
-        <translation type="unfinished"></translation>
+        <translation>インフラクライアントを削除します</translation>
     </message>
     <message>
         <location filename="../qjackctlSessionForm.ui" line="229"/>
@@ -3015,7 +3027,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSessionForm.cpp" line="137"/>
         <source>Infra-command</source>
-        <translation type="unfinished"></translation>
+        <translation>インフラコマンド</translation>
     </message>
 </context>
 <context>
@@ -3178,7 +3190,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="382"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="387"/>
@@ -3362,28 +3374,28 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="1587"/>
         <location filename="../qjackctlSetupForm.ui" line="1650"/>
         <source>hw:0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="310"/>
         <location filename="../qjackctlSetupForm.ui" line="1592"/>
         <location filename="../qjackctlSetupForm.ui" line="1655"/>
         <source>plughw:0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="315"/>
         <location filename="../qjackctlSetupForm.ui" line="1597"/>
         <location filename="../qjackctlSetupForm.ui" line="1660"/>
         <source>/dev/audio</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="320"/>
         <location filename="../qjackctlSetupForm.ui" line="1602"/>
         <location filename="../qjackctlSetupForm.ui" line="1665"/>
         <source>/dev/dsp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2150"/>
@@ -3391,7 +3403,7 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="2296"/>
         <location filename="../qjackctlSetupForm.ui" line="2396"/>
         <source>&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1638"/>
@@ -3421,22 +3433,22 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1524"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1529"/>
         <source>Rectangular</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1534"/>
         <source>Shaped</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1539"/>
         <source>Triangular</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="613"/>
@@ -3462,53 +3474,53 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="537"/>
         <location filename="../qjackctlSetupForm.ui" line="1135"/>
         <source>16</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="542"/>
         <location filename="../qjackctlSetupForm.ui" line="1140"/>
         <source>32</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="547"/>
         <location filename="../qjackctlSetupForm.ui" line="1145"/>
         <source>64</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="552"/>
         <location filename="../qjackctlSetupForm.ui" line="1282"/>
         <source>128</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="557"/>
         <location filename="../qjackctlSetupForm.ui" line="1287"/>
         <source>256</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="562"/>
         <location filename="../qjackctlSetupForm.ui" line="1292"/>
         <source>512</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="567"/>
         <location filename="../qjackctlSetupForm.ui" line="1297"/>
         <source>1024</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="572"/>
         <source>2048</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="577"/>
         <source>4096</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1244"/>
@@ -3528,7 +3540,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1189"/>
         <source>21333</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="444"/>
@@ -3538,37 +3550,37 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="451"/>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="456"/>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="461"/>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="466"/>
         <source>48000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="471"/>
         <source>88200</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="476"/>
         <source>96000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="481"/>
         <source>192000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1084"/>
@@ -3623,70 +3635,70 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="34"/>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>セットアップ</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1894"/>
         <source>Whether to restrict client self-connections</source>
-        <translation type="unfinished"></translation>
+        <translation>クライアントのセルフ接続モードを制限するかどうか</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="650"/>
         <source>Whether to use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>サーバーのsynchronousモードを使用するかどうか</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="653"/>
         <source>&amp;Use server synchronous mode</source>
-        <translation type="unfinished"></translation>
+        <translation>サーバーのsynchronousモードを使用する(&amp;U)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="781"/>
         <source>Please do not touch these settings unless you know what you are doing.</source>
-        <translation type="unfinished"></translation>
+        <translation>何をしようとしているか知っている場合に限りこれらの設定を変更してください。</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1344"/>
         <source>200</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1349"/>
         <location filename="../qjackctlSetupForm.ui" line="3343"/>
         <source>500</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1354"/>
         <location filename="../qjackctlSetupForm.ui" line="3348"/>
         <source>1000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1359"/>
         <source>2000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1364"/>
         <location filename="../qjackctlSetupForm.ui" line="3358"/>
         <source>5000</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1378"/>
         <source>Cloc&amp;k source:</source>
-        <translation type="unfinished"></translation>
+        <translation>クロックソース(&amp;K):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1400"/>
         <source>Clock source</source>
-        <translation type="unfinished"></translation>
+        <translation>クロックソース</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1878"/>
         <source>S&amp;elf connect mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>セルフ接続モード(&amp;E):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2029"/>
@@ -3755,7 +3767,7 @@ Are you sure to overwrite the existing folder?</source>
         <location filename="../qjackctlSetupForm.ui" line="2754"/>
         <location filename="../qjackctlSetupForm.ui" line="3135"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2200"/>
@@ -3825,7 +3837,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2534"/>
         <source>xrun of at least ([0-9|\.]+) msecs</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2551"/>
@@ -3855,17 +3867,17 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3046"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタム</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3067"/>
         <source>&amp;Color palette theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>色パレットテーマ(&amp;C):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3086"/>
         <source>Custom color palette theme</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタム色パレットテーマ</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3098"/>
@@ -3882,17 +3894,17 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3132"/>
         <source>Manage custom color palette themes</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタム色パレットテーマを管理します</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3161"/>
         <source>&amp;Widget style theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>ウィジェットスタイルテーマ(&amp;W):</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3177"/>
         <source>Custom widget style theme</source>
-        <translation type="unfinished"></translation>
+        <translation>カスタムウィジェットスタイルテーマ</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3885"/>
@@ -3907,17 +3919,17 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4051"/>
         <source>Whether to replace Connections with Graph button on the main window</source>
-        <translation type="unfinished"></translation>
+        <translation>メインウィンドウの接続ボタンをグラフボタンと置き換えるかどうか</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4054"/>
         <source>Replace Connections with &amp;Graph button</source>
-        <translation type="unfinished"></translation>
+        <translation>接続ボタンをグラフボタンと置き換える(&amp;G)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4157"/>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2588"/>
@@ -3997,7 +4009,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2009"/>
         <source> secs</source>
-        <translation>秒</translation>
+        <translation> 秒</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="744"/>
@@ -4007,12 +4019,12 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Clear settings of current preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>現在のプリセット名の設定をクリアします</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="104"/>
         <source>Clea&amp;r</source>
-        <translation type="unfinished"></translation>
+        <translation>クリア(&amp;R)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2701"/>
@@ -4130,17 +4142,17 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3333"/>
         <source>100</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3338"/>
         <source>250</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3353"/>
         <source>2500</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3388"/>
@@ -4170,17 +4182,17 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3507"/>
         <source>16 x 16</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3512"/>
         <source>32 x 32</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3517"/>
         <source>64 x 64</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3544"/>
@@ -4330,12 +4342,12 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3725"/>
         <source>Whether to ask for confirmation on JACK audio server shutdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>JACKオーディオサーバーのシャットダウンと再起動時に確認するかどうか</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3728"/>
         <source>Confirm server sh&amp;utdown and/or restart</source>
-        <translation type="unfinished"></translation>
+        <translation>サーバーのシャットダウンと再起動の確認(&amp;U)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3819"/>
@@ -4445,72 +4457,72 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4137"/>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4142"/>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4147"/>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4152"/>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4162"/>
         <source>11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="4167"/>
         <source>12</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="94"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="95"/>
         <source>Cycle</source>
-        <translation type="unfinished"></translation>
+        <translation>サイクル</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="96"/>
         <source>HPET</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="101"/>
         <source>Don&apos;t restrict self connect requests (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>セルフ接続の要求を制限しない(デフォルト)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="104"/>
         <source>Fail self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>外部ポートに対してのみセルフ接続の要求を失敗させる</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="107"/>
         <source>Ignore self connect requests to external ports only</source>
-        <translation type="unfinished"></translation>
+        <translation>外部ポートに対するセルフ接続の要求を無視する</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="110"/>
         <source>Fail all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>セルフ接続のすべての要求を失敗させます</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="113"/>
         <source>Ignore all self connect requests</source>
-        <translation type="unfinished"></translation>
+        <translation>セルフ接続のすべての要求を無視します</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1001"/>
@@ -4553,7 +4565,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1100"/>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1386"/>
@@ -4638,13 +4650,14 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1903"/>
         <source>Information</source>
-        <translation type="unfinished">情報</translation>
+        <translation>情報</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1904"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>いくつかの設定はこのプログラムを
+次回に起動した時に有効となります。</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="2057"/>
@@ -4661,7 +4674,7 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="33"/>
         <source>Socket</source>
-        <translation type="unfinished">ソケット</translation>
+        <translation>ソケット</translation>
     </message>
     <message>
         <location filename="../qjackctlSocketForm.ui" line="52"/>
