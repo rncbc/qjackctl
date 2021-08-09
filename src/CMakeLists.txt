@@ -95,6 +95,7 @@ set (TRANSLATIONS
 	translations/qjackctl_fr.ts
 	translations/qjackctl_it.ts
 	translations/qjackctl_ja.ts
+	translations/qjackctl_ko.ts
 	translations/qjackctl_nl.ts
 	translations/qjackctl_pt.ts
 	translations/qjackctl_ru.ts
