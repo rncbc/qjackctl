@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Korean (ko) translation added (by JungHee Lee).
+
+
 0.9.4  2021-07-04  An Early-Summer'21 Release.
 
 - All builds default to Qt6 (Qt >= 6.1) where available.
