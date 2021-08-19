@@ -67,13 +67,13 @@ if(PC_PortAudio_FOUND)
 	set(PortAudio_LIBRARIES ${PC_PortAudio_LIBRARIES} CACHE FILEPATH "PortAudio libraries" )
 
 	find_package_handle_standard_args(PortAudio
-		REQUIRED_VARS PortAudio_INCLUDE_DIRS PortAudio_LIBRARIES
+		REQUIRED_VARS PortAudio_LIBRARIES PortAudio_INCLUDE_DIRS
 		VERSION_VAR PortAudio_VERSION
 	)
 else()
 	set(PortAudio_LIBRARIES ${PortAudio_LIBRARY} CACHE FILEPATH "PortAudio libraries" )
 	find_package_handle_standard_args(PortAudio
-		REQUIRED_VARS PortAudio_INCLUDE_DIRS PortAudio_LIBRARIES)
+		REQUIRED_VARS PortAudio_LIBRARIES PortAudio_INCLUDE_DIRS)
 endif()
 
 if(PortAudio_FOUND)

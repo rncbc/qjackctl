@@ -77,7 +77,7 @@ mark_as_advanced(Jack_LIBRARY)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(Jack
-	REQUIRED_VARS Jack_INCLUDE_DIR Jack_LIBRARY)
+	REQUIRED_VARS Jack_LIBRARY Jack_INCLUDE_DIR)
 
 # Create the imported target
 if(Jack_FOUND)
