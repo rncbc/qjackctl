@@ -5,6 +5,8 @@ project (qjackctl
   DESCRIPTION "JACK Audio Connection Kit Qt GUI Interface"
   LANGUAGES C CXX)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
 set (CONFIG_VERSION ${PROJECT_VERSION})
 execute_process (
   COMMAND git describe --tags --dirty --abbrev=6
@@ -152,82 +154,70 @@ endif ()
 
 
 # Find package modules
-include (FindPkgConfig)
-
-# Check for JACK libraries.
-pkg_check_modules (JACK REQUIRED IMPORTED_TARGET jack>=0.100.0)
-if (JACK_FOUND)
-  find_library(JACK_LIBRARY NAMES ${JACK_LIBRARIES} HINTS ${JACK_LIBDIR})
-endif ()
-if (JACK_LIBRARY)
-  set (CONFIG_JACK 1)
-  set (CMAKE_REQUIRED_LIBRARIES "${JACK_LIBRARY};${CMAKE_REQUIRED_LIBRARIES}")
-  # Check for jack/statistics.h header.
-  check_include_file (jack/statistics.h HAVE_JACK_STATISTICS_H)
-  if (NOT HAVE_JACK_STATISTICS_H)
-    set (CONFIG_JACK_STATISTICS 0)
-  else ()
-    set (CONFIG_JACK_STATISTICS 1)
-  endif ()
-  # Check for JACK MIDI headers availability.
-  if (CONFIG_JACK_MIDI)
-    check_include_file (jack/midiport.h HAVE_JACK_MIDIPORT_H)
-    if (NOT HAVE_JACK_MIDIPORT_H)
-      set (CONFIG_JACK_MIDI 0)
-    endif ()
-  endif ()
-  # Check for JACK session headers availability.
-  if (CONFIG_JACK_SESSION)
-    check_include_file (jack/session.h HAVE_JACK_SESSION_H)
-    if (NOT HAVE_JACK_SESSION_H)
-      set (CONFIG_JACK_SESSION 0)
-    endif ()
-  endif ()
-  # Check for JACK metadata headers availability.
-  if (CONFIG_JACK_METADATA)
-    check_include_file (jack/metadata.h HAVE_JACK_METADATA_H)
-    if (NOT HAVE_JACK_METADATA_H)
-      set (CONFIG_JACK_METADATA 0)
-    endif ()
-  endif ()
-  if (NOT CONFIG_JACK_METADATA)
-      set (CONFIG_JACK_CV  0)
-      set (CONFIG_JACK_OSC 0)
-  endif ()
-  # Check for jack_transport_query function.
-  check_function_exists (jack_transport_query CONFIG_JACK_TRANSPORT)
-  # Check for jack_is_realtime function.
-  check_function_exists (jack_is_realtime CONFIG_JACK_REALTIME)
-  # Check for jack_get_xrun_delayed_usecs function.
-  check_function_exists (jack_get_xrun_delayed_usecs CONFIG_JACK_XRUN_DELAY)
-  # Check for jack_get_max_delayed_usecs function.
-  check_function_exists (jack_get_max_delayed_usecs CONFIG_JACK_MAX_DELAY)
-  # Check for jack_set_port_rename_callback
-  check_function_exists (jack_set_port_rename_callback CONFIG_JACK_PORT_RENAME)
-  # Check for jack_port_get_aliases function.
-  if (CONFIG_JACK_PORT_ALIASES)
-    check_function_exists (jack_port_get_aliases CONFIG_JACK_PORT_ALIASES)
-  endif ()
-  # Check for jack_get_version_string function.
-  if (CONFIG_JACK_VERSION)
-    check_function_exists (jack_get_version_string CONFIG_JACK_VERSION)
-  endif ()
-  # Check for jack_free function.
-  check_function_exists (jack_free CONFIG_JACK_FREE)
+find_package (Jack REQUIRED)
+set (CONFIG_JACK 1)
+set (CMAKE_REQUIRED_LIBRARIES "${Jack_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
+set (CMAKE_REQUIRED_INCLUDES "${Jack_INCLUDE_DIRS};${CMAKE_REQUIRED_INCLUDES}")
+# Check for jack/statistics.h header.
+check_include_file (jack/statistics.h HAVE_JACK_STATISTICS_H)
+if (NOT HAVE_JACK_STATISTICS_H)
+  set (CONFIG_JACK_STATISTICS 0)
 else ()
-  message (FATAL_ERROR "*** JACK library not found.")
-  set (CONFIG_JACK 0)
+  set (CONFIG_JACK_STATISTICS 1)
 endif ()
+# Check for JACK MIDI headers availability.
+if (CONFIG_JACK_MIDI)
+  check_include_file (jack/midiport.h HAVE_JACK_MIDIPORT_H)
+  if (NOT HAVE_JACK_MIDIPORT_H)
+    set (CONFIG_JACK_MIDI 0)
+  endif ()
+endif ()
+# Check for JACK session headers availability.
+if (CONFIG_JACK_SESSION)
+  check_include_file (jack/session.h HAVE_JACK_SESSION_H)
+  if (NOT HAVE_JACK_SESSION_H)
+    set (CONFIG_JACK_SESSION 0)
+  endif ()
+endif ()
+# Check for JACK metadata headers availability.
+if (CONFIG_JACK_METADATA)
+  check_include_file (jack/metadata.h HAVE_JACK_METADATA_H)
+  if (NOT HAVE_JACK_METADATA_H)
+    set (CONFIG_JACK_METADATA 0)
+  endif ()
+endif ()
+if (NOT CONFIG_JACK_METADATA)
+  set (CONFIG_JACK_CV  0)
+  set (CONFIG_JACK_OSC 0)
+endif ()
+# Check for jack_transport_query function.
+check_function_exists (jack_transport_query CONFIG_JACK_TRANSPORT)
+# Check for jack_is_realtime function.
+check_function_exists (jack_is_realtime CONFIG_JACK_REALTIME)
+# Check for jack_get_xrun_delayed_usecs function.
+check_function_exists (jack_get_xrun_delayed_usecs CONFIG_JACK_XRUN_DELAY)
+# Check for jack_get_max_delayed_usecs function.
+check_function_exists (jack_get_max_delayed_usecs CONFIG_JACK_MAX_DELAY)
+# Check for jack_set_port_rename_callback
+check_function_exists (jack_set_port_rename_callback CONFIG_JACK_PORT_RENAME)
+# Check for jack_port_get_aliases function.
+if (CONFIG_JACK_PORT_ALIASES)
+  check_function_exists (jack_port_get_aliases CONFIG_JACK_PORT_ALIASES)
+endif ()
+# Check for jack_get_version_string function.
+if (CONFIG_JACK_VERSION)
+  check_function_exists (jack_get_version_string CONFIG_JACK_VERSION)
+endif ()
+# Check for jack_free function.
+check_function_exists (jack_free CONFIG_JACK_FREE)
 
 # Check for ALSA libraries.
 if (CONFIG_ALSA_SEQ)
-  pkg_check_modules (ALSA IMPORTED_TARGET alsa)
+  find_package (ALSA)
   if (ALSA_FOUND)
-    find_library(ALSA_LIBRARY NAMES ${ALSA_LIBRARIES} HINTS ${ALSA_LIBDIR})
-  endif ()
-  if (ALSA_LIBRARY)
     set (CONFIG_ALSA_SEQ 1)
-    set (CMAKE_REQUIRED_LIBRARIES "${ALSA_LIBRARY};${CMAKE_REQUIRED_LIBRARIES}")
+    set (CMAKE_REQUIRED_LIBRARIES "${ALSA_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
+    set (CMAKE_REQUIRED_INCLUDES "${ALSA_INCLUDE_DIRS};${CMAKE_REQUIRED_INCLUDES}")
   else ()
     message (WARNING "*** ALSA library not found.")
     set (CONFIG_ALSA_SEQ 0)
@@ -236,11 +226,8 @@ endif ()
 
 # Check for PORTAUDIO libraries.
 if (CONFIG_PORTAUDIO)
-  pkg_check_modules (PORTAUDIO IMPORTED_TARGET portaudio-2.0)
-  if (PORTAUDIO_FOUND)
-    find_library(PORTAUDIO_LIBRARY NAMES ${PORTAUDIO_LIBRARIES} HINTS ${PORTAUDIO_LIBDIR})
-  endif ()
-  if (PORTAUDIO_LIBRARY)
+  find_package (PortAudio)
+  if (PortAudio_FOUND)
     set (CONFIG_PORTAUDIO 1)
    #set (CMAKE_REQUIRED_LIBRARIES "${PORTAUDIO_LIBRARY};${CMAKE_REQUIRED_LIBRARIES}")
   else ()

@@ -111,28 +111,6 @@ endif ()
 
 add_custom_target (translations ALL DEPENDS ${QM_FILES})
 
-if (WIN32)
-  set (RC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/win32/${PROJECT_NAME}.rc)
-  set (RES_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.res.obj)
-  find_program (WINDRES_EXECUTABLE NAMES windres mingw32-windres i686-mingw32-windres)
-  if (MINGW)
-    exec_program (${WINDRES_EXECUTABLE}
-      ARGS "-i ${RC_FILE} -o ${RES_FILE} --include-dir=${CMAKE_CURRENT_SOURCE_DIR}/images")
-    list (APPEND SOURCES ${RES_FILE})
-  else ()
-    list (APPEND SOURCES ${RC_FILE})
-  endif ()
-endif ()
-
-if (APPLE)
-  set (ICON_FILE ${CMAKE_CURRENT_SOURCE_DIR}/images/${PROJECT_NAME}.icns)
-  list (APPEND SOURCES ${ICON_FILE})
-  set (MACOSX_BUNDLE_ICON_FILE ${PROJECT_NAME}.icns)
-  set_source_files_properties (${ICON_FILE} PROPERTIES
-    MACOSX_PACKAGE_LOCATION Resources)
-endif ()
-
-
 add_executable (${PROJECT_NAME}
   ${HEADERS}
   ${SOURCES}
@@ -150,6 +128,7 @@ set_target_properties (${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
 
 if (WIN32)
   set_target_properties (${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE true)
+  target_compile_definitions (${PROJECT_NAME} PUBLIC _USE_MATH_DEFINES)
 endif ()
 
 if (APPLE)
@@ -167,37 +146,32 @@ if (CONFIG_DBUS)
 endif ()
 
 if (CONFIG_JACK)
-  target_link_libraries (${PROJECT_NAME} PRIVATE PkgConfig::JACK)
+  target_link_libraries (${PROJECT_NAME} PRIVATE Jack::Jack)
 endif ()
 
 if (CONFIG_ALSA_SEQ)
-  target_link_libraries (${PROJECT_NAME} PRIVATE PkgConfig::ALSA)
+  target_link_libraries (${PROJECT_NAME} PRIVATE ALSA::ALSA)
 endif ()
 
 if (CONFIG_PORTAUDIO)
-  target_link_libraries (${PROJECT_NAME} PRIVATE PkgConfig::PORTAUDIO)
+  target_link_libraries (${PROJECT_NAME} PRIVATE PortAudio::PortAudio)
 endif ()
 
 
-if (UNIX AND NOT APPLE)
+if (NOT APPLE)
   install (TARGETS ${PROJECT_NAME} RUNTIME
      DESTINATION ${CMAKE_INSTALL_BINDIR})
   install (FILES ${QM_FILES}
      DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations)
-  install (FILES ${PROJECT_NAME}.desktop
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
-  install (FILES images/${PROJECT_NAME}.png
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
-  install (FILES images/${PROJECT_NAME}.svg
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
-  install (FILES appdata/${PROJECT_NAME}.appdata.xml
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
-endif ()
 
-if (WIN32)
-   install (TARGETS ${PROJECT_NAME} RUNTIME
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-   install (FILES ${QM_FILES}
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations)
+  if (NOT WIN32)
+    install (FILES ${PROJECT_NAME}.desktop
+       DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+    install (FILES images/${PROJECT_NAME}.png
+       DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
+    install (FILES images/${PROJECT_NAME}.svg
+       DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+    install (FILES appdata/${PROJECT_NAME}.appdata.xml
+       DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
+  endif ()
 endif ()
-
