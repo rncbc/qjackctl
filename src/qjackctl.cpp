@@ -32,6 +32,7 @@
 #include <QLibraryInfo>
 #include <QTranslator>
 #include <QLocale>
+#include <QCoreApplication>
 
 #include <QSessionManager>
 
@@ -127,7 +128,11 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 		if (m_pMyTranslator->load(sLocName, sLocPath)) {
 			QApplication::installTranslator(m_pMyTranslator);
 		} else {
+#ifndef _WIN32
 			sLocPath = CONFIG_DATADIR "/qjackctl/translations";
+#else
+			sLocPath = QCoreApplication::applicationDirPath() + "/translations";
+#endif
 			if (m_pMyTranslator->load(sLocName, sLocPath)) {
 				QApplication::installTranslator(m_pMyTranslator);
 			} else {

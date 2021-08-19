@@ -112,6 +112,9 @@ option (CONFIG_STACKTRACE "Enable debugger stack-trace (default=no)" 0)
 # Enable Qt6 build preference.
 option (CONFIG_QT6 "Enable Qt6 build (default=yes)" 1)
 
+# Enable install QT DLLs for Windows targets using windeployqt.
+option (CONFIG_INSTALL_QT_DLLS "Install QT DLLs for Windows targets (default=no)" 0)
+
 
 # Fix for new CMAKE_REQUIRED_LIBRARIES policy.
 if (POLICY CMP0075)
@@ -270,10 +273,13 @@ endif ()
 
 add_subdirectory (src)
 
-configure_file (qjackctl.spec.in qjackctl.spec IMMEDIATE @ONLY)
+if (NOT WIN32)
+  configure_file (qjackctl.spec.in qjackctl.spec IMMEDIATE @ONLY)
 
-install (FILES qjackctl.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
-install (FILES qjackctl.fr.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/fr/man1 RENAME qjackctl.1)
+  install (FILES qjackctl.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+  install (FILES qjackctl.fr.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/fr/man1 RENAME qjackctl.1)
+endif ()
+
 
 # Configuration status
 macro (SHOW_OPTION text value)
@@ -308,5 +314,7 @@ message     ("")
 show_option ("  System tray icon support . . . . . . . . . . . . ." CONFIG_SYSTEM_TRAY)
 show_option ("  Unique/Single instance support . . . . . . . . . ." CONFIG_XUNIQUE)
 show_option ("  Debugger stack-trace (gdb) . . . . . . . . . . . ." CONFIG_STACKTRACE)
+show_option ("  Install Qt DLLs on Windows . . . . . . . . . . . ." CONFIG_INSTALL_QT_DLLS)
 message   ("\n  Install prefix . . . . . . . . . . . . . . . . . .: ${CONFIG_PREFIX}")
 message   ("\nNow type 'make', followed by 'make install' as root.\n")
+
