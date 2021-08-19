@@ -88,7 +88,7 @@ option (CONFIG_JACK_CV "Enable JACK CV support (default=yes)" 1)
 option (CONFIG_JACK_OSC "Enable JACK OSC support (default=yes)" 1)
 
 # Enable JACK version support.
-option (CONFIG_JACK_VERSION "Enable JACK version support (default=no)" 0)
+option (CONFIG_JACK_VERSION "Enable JACK version support (default=yes)" 1)
 
 # Enable ALSA sequencer support option.
 option (CONFIG_ALSA_SEQ "Enable ALSA/MIDI sequencer support (default=yes)" 1)
