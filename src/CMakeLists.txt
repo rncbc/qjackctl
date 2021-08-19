@@ -7,7 +7,7 @@ set (CMAKE_AUTOMOC ON)
 set (CMAKE_AUTORCC ON)
 
 if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
-    file (REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
+  file (REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/config.h)
 endif ()
 configure_file (cmake_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
@@ -162,20 +162,57 @@ if (CONFIG_COREAUDIO)
 endif ()
 
 
-if (NOT APPLE)
+if (UNIX AND NOT APPLE)
   install (TARGETS ${PROJECT_NAME} RUNTIME
      DESTINATION ${CMAKE_INSTALL_BINDIR})
   install (FILES ${QM_FILES}
      DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations)
+  install (FILES ${PROJECT_NAME}.desktop
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+  install (FILES images/${PROJECT_NAME}.png
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
+  install (FILES images/${PROJECT_NAME}.svg
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+  install (FILES appdata/${PROJECT_NAME}.appdata.xml
+     DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
+endif ()
 
-  if (NOT WIN32)
-    install (FILES ${PROJECT_NAME}.desktop
-       DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
-    install (FILES images/${PROJECT_NAME}.png
-       DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
-    install (FILES images/${PROJECT_NAME}.svg
-       DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
-    install (FILES appdata/${PROJECT_NAME}.appdata.xml
-       DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
+if (WIN32)
+  install (TARGETS ${PROJECT_NAME} RUNTIME
+     DESTINATION .)
+  # Use same path as windeployqt for translations
+  install (FILES ${QM_FILES}
+     DESTINATION translations)
+endif ()
+
+if (WIN32 AND CONFIG_INSTALL_QT_DLLS)
+  get_target_property (_qt_qmake_location Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
+  get_filename_component (_qt_bin_dir "${_qt_qmake_location}" DIRECTORY)
+  set (QT_WINDEPLOYQT "${_qt_bin_dir}/windeployqt.exe")
+
+  if (EXISTS ${QT_WINDEPLOYQT})
+    # execute windeployqt in a tmp directory after build
+    add_custom_command (TARGET ${PROJECT_NAME}
+      POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_BINARY_DIR}/windeployqt"
+      COMMAND set PATH=${_qt_bin_dir}$<SEMICOLON>%PATH%
+      COMMAND "${QT_WINDEPLOYQT}"
+        --dir "${CMAKE_CURRENT_BINARY_DIR}/windeployqt"
+        --no-quick-import
+        --no-opengl-sw
+        --no-virtualkeyboard
+        --no-webkit2
+        --no-angle
+        --no-svg
+        "$<TARGET_FILE:${PROJECT_NAME}>"
+      USES_TERMINAL
+    )
+
+    # copy deployment directory during installation
+    install (
+      DIRECTORY
+      "${CMAKE_CURRENT_BINARY_DIR}/windeployqt/"
+      DESTINATION .
+    )
   endif ()
 endif ()
