@@ -157,6 +157,10 @@ if (CONFIG_PORTAUDIO)
   target_link_libraries (${PROJECT_NAME} PRIVATE PortAudio::PortAudio)
 endif ()
 
+if (CONFIG_COREAUDIO)
+  target_link_libraries (${PROJECT_NAME} PRIVATE ${CORE_FOUNDATION_LIBRARY} ${CORE_AUDIO_LIBRARY})
+endif ()
+
 
 if (NOT APPLE)
   install (TARGETS ${PROJECT_NAME} RUNTIME

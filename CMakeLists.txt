@@ -96,6 +96,9 @@ option (CONFIG_ALSA_SEQ "Enable ALSA/MIDI sequencer support (default=yes)" 1)
 # Enable PortAudio argument option.
 option (CONFIG_PORTAUDIO "Enable PortAudio interface (default=yes)" 1)
 
+# Enable CoreAudio argument option.
+option (CONFIG_COREAUDIO "Enable CoreAudio interface (default=yes)" 1)
+
 # Enable D-Bus argument option.
 option (CONFIG_DBUS "Enable D-Bus interface (default=yes)" 1)
 
@@ -253,9 +256,13 @@ if (CONFIG_PORTAUDIO)
 endif ()
 
 
-if (APPLE AND CONFIG_COREAUDIO)
-  check_include_file (CoreAudio/CoreAudio.h HAVE_COREAUDIO_H)
-  if (NOT HAVE_COREAUDIO_H)
+if (CONFIG_COREAUDIO)
+  if (APPLE)
+    check_include_file ("CoreAudio/CoreAudio.h" HAVE_COREAUDIO_H)
+    find_library(CORE_FOUNDATION_LIBRARY CoreFoundation)
+    find_library(CORE_AUDIO_LIBRARY CoreAudio)
+  endif ()
+  if (NOT APPLE OR NOT HAVE_COREAUDIO_H OR NOT CORE_FOUNDATION_LIBRARY OR NOT CORE_AUDIO_LIBRARY)
     set (CONFIG_COREAUDIO 0)
   endif ()
 endif ()
