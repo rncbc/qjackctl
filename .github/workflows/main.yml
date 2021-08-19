@@ -1,0 +1,141 @@
+# This is a basic workflow to help you get started with Actions
+
+name: main
+
+# Controls when the workflow will run
+# Triggers the workflow on push or pull request events
+on: [ push, pull_request ]
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Linux build
+  linux:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # do builds with both Jack 1 and Jack 2
+    strategy:
+      matrix:
+        jack_package:
+          - libjack-jackd2-dev
+          - libjack-dev
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential ninja-build cmake qttools5-dev qtbase5-dev libasound2-dev portaudio19-dev ${{ matrix.jack_package }}
+
+      # Runs a set of commands using the runners shell
+      - name: Build
+        run: |
+          git submodule -q update --init --recursive
+          mkdir build
+          mkdir qjackctl-install
+          cmake -S . -B build -GNinja -DCMAKE_INSTALL_PREFIX=/usr
+          DESTDIR=$PWD/qjackctl-install cmake --build build --target install --config RelWithDebInfo
+          tar -czf qjackctl-build.tar.gz qjackctl-install
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: "qjackctl-${{ runner.os }}-${{ github.job }}-${{ matrix.jack_package }}.tar.gz" # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: qjackctl-build.tar.gz
+
+  # MacOS build
+  macos:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          brew install cmake ninja qt jack
+
+      # Runs a set of commands using the runners shell
+      - name: Build
+        run: |
+          git submodule -q update --init --recursive
+          mkdir build
+          mkdir qjackctl-install
+          cmake -S . -B build -GNinja -DCMAKE_INSTALL_PREFIX=/usr
+          DESTDIR=$PWD/qjackctl-install cmake --build build --target install --config RelWithDebInfo
+          tar -czf qjackctl-build.tar.gz qjackctl-install
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: "qjackctl-${{ runner.os }}-${{ github.job }}.tar.gz" # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: qjackctl-build.tar.gz
+          
+  # Windows 32 and 64 bits build
+  windows:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        config:
+          - arch: 32
+            choco_opts: "--forceX86"
+          - arch: 64
+            choco_opts: ""
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Install dependencies
+        run: |
+          $JACK_VERSION="v1.9.19"
+          echo "Downloading Jack win${{ matrix.config.arch }} $JACK_VERSION ..."
+          $exePath = "$($env:TEMP)\jack2_installer.exe"
+          (New-Object Net.WebClient).DownloadFile("https://github.com/jackaudio/jack2-releases/releases/download/$JACK_VERSION/jack2-win${{ matrix.config.arch }}-$JACK_VERSION.exe", $exePath)
+          echo "Installing..."
+          cmd /c start /wait $exePath /SILENT /NORESTART /NOICONS /TYPE=full
+          echo "Done installing Jack win${{ matrix.config.arch }} $JACK_VERSION"
+          
+          choco install qt5-default --version=5.15.2 ${{ matrix.config.choco_opts }}
+          if ( ${{ matrix.config.arch }} -eq 32 ) { choco install mingw --force --version=8.1.0 ${{ matrix.config.choco_opts }} }
+
+      # Runs a set of commands using the runners shell
+      - name: Build
+        run: |
+          $env:CC="gcc.exe"
+          $env:CXX="g++.exe"
+          $env:PATH="C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw${{ matrix.config.arch }}\bin;$env:PATH"
+          $env:DESTDIR="$PWD/qjackctl-install"
+          git submodule -q update --init --recursive
+          mkdir build
+          mkdir qjackctl-install
+          
+          cmake -S . -B build "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=C:\Qt\5.15.2\mingw81_${{ matrix.config.arch }}\lib\cmake" "-DCMAKE_INSTALL_PREFIX="
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
+          cmake --build build --target install --config RelWithDebInfo -- -j4
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
+          tar -czf qjackctl-build.tar.gz qjackctl-install
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: "qjackctl-${{ runner.os }}-${{ github.job }}${{ matrix.config.arch }}.tar.gz" # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: qjackctl-build.tar.gz
