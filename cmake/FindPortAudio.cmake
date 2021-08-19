@@ -52,16 +52,18 @@ mark_as_advanced(PortAudio_INCLUDE_DIR)
 # Look for the necessary library
 set(CMAKE_FIND_LIBRARY_PREFIXES "lib" "")
 find_library(PortAudio_LIBRARY
-	NAMES ${PC_JACK_LIBRARIES} portaudio
+	NAMES ${PC_PortAudio_LIBRARIES} portaudio
 	NAMES_PER_DIR
 	HINTS
 		${PC_PortAudio_LIBRARY_DIRS}
 )
 mark_as_advanced(PortAudio_LIBRARY)
+	
+set(PortAudio_INCLUDE_DIRS ${PortAudio_INCLUDE_DIR} CACHE PATH "PortAudio include directories")
 
 if(PC_PortAudio_FOUND)
-	# Use pkg-config data
-	set(PortAudio_INCLUDE_DIRS ${PC_PortAudio_INCLUDE_DIRS} CACHE PATH "PortAudio include directories")
+	# Use pkg-config data as it might have additional transitive dependencies of portaudio
+	# itself in case of using the static lib.
 	set(PortAudio_LIBRARIES ${PC_PortAudio_LIBRARIES} CACHE FILEPATH "PortAudio libraries" )
 
 	find_package_handle_standard_args(PortAudio
@@ -69,7 +71,6 @@ if(PC_PortAudio_FOUND)
 		VERSION_VAR PortAudio_VERSION
 	)
 else()
-	set(PortAudio_INCLUDE_DIRS ${PortAudio_INCLUDE_DIR} CACHE PATH "PortAudio include directories")
 	set(PortAudio_LIBRARIES ${PortAudio_LIBRARY} CACHE FILEPATH "PortAudio libraries" )
 	find_package_handle_standard_args(PortAudio
 		REQUIRED_VARS PortAudio_INCLUDE_DIRS PortAudio_LIBRARIES)
