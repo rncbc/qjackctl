@@ -152,8 +152,8 @@ find_package (Qt${QT_VERSION_MAJOR}LinguistTools)
 include (CheckIncludeFile)
 include (CheckIncludeFiles)
 include (CheckIncludeFileCXX)
-include (CheckFunctionExists)
 include (CheckLibraryExists)
+include (CheckSymbolExists)
 
 # Checks for header files.
 if (UNIX AND NOT APPLE)
@@ -198,26 +198,34 @@ if (NOT CONFIG_JACK_METADATA)
   set (CONFIG_JACK_CV  0)
   set (CONFIG_JACK_OSC 0)
 endif ()
-# Check for jack_transport_query function.
-check_function_exists (jack_transport_query CONFIG_JACK_TRANSPORT)
 # Check for jack_is_realtime function.
-check_function_exists (jack_is_realtime CONFIG_JACK_REALTIME)
-# Check for jack_get_xrun_delayed_usecs function.
-check_function_exists (jack_get_xrun_delayed_usecs CONFIG_JACK_XRUN_DELAY)
-# Check for jack_get_max_delayed_usecs function.
-check_function_exists (jack_get_max_delayed_usecs CONFIG_JACK_MAX_DELAY)
+check_symbol_exists (jack_is_realtime "jack/jack.h" CONFIG_JACK_REALTIME)
+# Check for jack_free function.
+check_symbol_exists (jack_free "jack/jack.h" CONFIG_JACK_FREE)
 # Check for jack_set_port_rename_callback
-check_function_exists (jack_set_port_rename_callback CONFIG_JACK_PORT_RENAME)
+check_symbol_exists (jack_set_port_rename_callback "jack/jack.h" CONFIG_JACK_PORT_RENAME)
+# Check for jack_transport_query function.
+check_symbol_exists (jack_transport_query "jack/transport.h" CONFIG_JACK_TRANSPORT)
+# Check for jack_get_xrun_delayed_usecs function.
+check_symbol_exists (jack_get_xrun_delayed_usecs "jack/statistics.h" CONFIG_JACK_XRUN_DELAY)
+# Check for jack_get_max_delayed_usecs function.
+check_symbol_exists (jack_get_max_delayed_usecs "jack/statistics.h" CONFIG_JACK_MAX_DELAY)
+
 # Check for jack_port_get_aliases function.
 if (CONFIG_JACK_PORT_ALIASES)
-  check_function_exists (jack_port_get_aliases CONFIG_JACK_PORT_ALIASES)
+  check_symbol_exists (jack_port_get_aliases "jack/jack.h" HAVE_JACK_PORT_ALIASES)
+  if (NOT HAVE_JACK_PORT_ALIASES)
+    set (CONFIG_JACK_PORT_ALIASES 0)
+  endif ()
 endif ()
+
 # Check for jack_get_version_string function.
 if (CONFIG_JACK_VERSION)
-  check_function_exists (jack_get_version_string CONFIG_JACK_VERSION)
+  check_symbol_exists (jack_get_version_string "jack/jack.h" HAVE_JACK_VERSION)
+  if (NOT HAVE_JACK_VERSION)
+    set (CONFIG_JACK_VERSION 0)
+  endif ()
 endif ()
-# Check for jack_free function.
-check_function_exists (jack_free CONFIG_JACK_FREE)
 
 # Check for ALSA libraries.
 if (CONFIG_ALSA_SEQ)
