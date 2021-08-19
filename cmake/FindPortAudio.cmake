@@ -31,10 +31,15 @@ This module will set the following variables if found:
 
 #]=======================================================================]
 
+include(FindPackageHandleStandardArgs)
+
+# Use hints from pkg-config if available
 find_package (PkgConfig QUIET)
 if(PKG_CONFIG_FOUND)
-  pkg_check_modules(PC_PortAudio portaudio-2.0)
+	pkg_check_modules(PC_PortAudio portaudio-2.0)
 endif()
+
+find_package(Threads QUIET)
 
 # Look for the necessary header
 find_path(PortAudio_INCLUDE_DIR
@@ -45,31 +50,47 @@ find_path(PortAudio_INCLUDE_DIR
 mark_as_advanced(PortAudio_INCLUDE_DIR)
 
 # Look for the necessary library
+set(CMAKE_FIND_LIBRARY_PREFIXES "lib" "")
 find_library(PortAudio_LIBRARY
-	NAMES portaudio ${PC_PortAudio_LIBRARIES} libportaudio.dll.a
+	NAMES ${PC_JACK_LIBRARIES} portaudio
 	NAMES_PER_DIR
 	HINTS
 		${PC_PortAudio_LIBRARY_DIRS}
 )
 mark_as_advanced(PortAudio_LIBRARY)
 
-include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(PortAudio
-	REQUIRED_VARS PortAudio_INCLUDE_DIR PortAudio_LIBRARY)
+if(PC_PortAudio_FOUND)
+	# Use pkg-config data
+	set(PortAudio_INCLUDE_DIRS ${PC_PortAudio_INCLUDE_DIRS} CACHE PATH "PortAudio include directories")
+	set(PortAudio_LIBRARIES ${PC_PortAudio_LIBRARIES} CACHE FILEPATH "PortAudio libraries" )
 
-# Create the imported target
+	find_package_handle_standard_args(PortAudio
+		REQUIRED_VARS PortAudio_INCLUDE_DIRS PortAudio_LIBRARIES
+		VERSION_VAR PortAudio_VERSION
+	)
+else()
+	set(PortAudio_INCLUDE_DIRS ${PortAudio_INCLUDE_DIR} CACHE PATH "PortAudio include directories")
+	set(PortAudio_LIBRARIES ${PortAudio_LIBRARY} CACHE FILEPATH "PortAudio libraries" )
+	find_package_handle_standard_args(PortAudio
+		REQUIRED_VARS PortAudio_INCLUDE_DIRS PortAudio_LIBRARIES)
+endif()
+
 if(PortAudio_FOUND)
-	set(PortAudio_INCLUDE_DIRS ${PortAudio_INCLUDE_DIR})
-	set(PortAudio_LIBRARIES ${PortAudio_LIBRARY})
+	# Create the imported target
 	if(NOT TARGET PortAudio::PortAudio)
 		add_library(PortAudio::PortAudio UNKNOWN IMPORTED)
 		set_target_properties(PortAudio::PortAudio PROPERTIES IMPORTED_LOCATION "${PortAudio_LIBRARY}")
-		target_include_directories(PortAudio::PortAudio INTERFACE "${PortAudio_INCLUDE_DIR}")
-		if(PKG_CONFIG_FOUND)
-			target_compile_options(PortAudio::PortAudio INTERFACE ${PC_PortAudio_CFLAGS_OTHER})
-			target_link_options(PortAudio::PortAudio INTERFACE ${PC_PortAudio_LDFLAGS_OTHER})
-		elseif(WIN32)
+		target_include_directories(PortAudio::PortAudio INTERFACE ${PortAudio_INCLUDE_DIRS})
+		target_link_libraries(PortAudio::PortAudio INTERFACE ${PortAudio_LIBRARIES})
+		if(WIN32 AND NOT PC_PortAudio_FOUND)
+			# Needed when building against the static library
 			target_link_libraries(PortAudio::PortAudio INTERFACE dsound setupapi winmm ole32 uuid)
 		endif()
+		if(Threads_FOUND)
+			# Needed when building against the static library
+			target_link_libraries(PortAudio::PortAudio INTERFACE Threads::Threads)
+		endif()
 	endif()
+else()
+	message(STATUS "Set PortAudio_ROOT cmake or environment variable to the PortAudio install root directory to use a specific PortAudio installation.")
 endif()
