@@ -92,6 +92,9 @@ jobs:
         config:
           - arch: 32
           - arch: 64
+        jack_version:
+          - "$jack_latest_version"
+          - "$jack_previous_version"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
