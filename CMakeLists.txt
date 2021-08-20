@@ -280,6 +280,14 @@ if (NOT WIN32)
   install (FILES qjackctl.fr.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/fr/man1 RENAME qjackctl.1)
 endif ()
 
+if (WIN32)
+  set(CPACK_GENERATOR ZIP)
+else ()
+  set(CPACK_GENERATOR TGZ)
+endif ()
+
+include(CPack)
+
 
 # Configuration status
 macro (SHOW_OPTION text value)
