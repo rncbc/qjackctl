@@ -87,6 +87,7 @@ jobs:
     runs-on: windows-latest
 
     strategy:
+      fail-fast: false
       matrix:
         config:
           - arch: 32
