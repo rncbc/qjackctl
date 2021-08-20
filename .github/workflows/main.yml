@@ -87,27 +87,43 @@ jobs:
     runs-on: windows-latest
 
     strategy:
+      fail-fast: false
       matrix:
         config:
           - arch: 32
             choco_opts: "--forceX86"
           - arch: 64
             choco_opts: ""
+        jack_version:
+          - "$jack_latest_version"
+          - "$jack_previous_version"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      # Use ::set-output to reuse the jack version in artifact name
       - name: Install dependencies
+        id: dependencies
         run: |
-          $JACK_VERSION="v1.9.19"
-          echo "Downloading Jack win${{ matrix.config.arch }} $JACK_VERSION ..."
+          echo "Checking latest version of Jack ..."
+          $JACK_RELEASES_URL = "https://api.github.com/repos/jackaudio/jack2/releases"
+          $jack_releases = Invoke-WebRequest $JACK_RELEASES_URL | ConvertFrom-Json
+          $jack_latest_version = $jack_releases[0].tag_name
+          $jack_previous_version = $jack_releases[1].tag_name
+          
+          echo "Downloading Jack win${{ matrix.config.arch }} ${{ matrix.jack_version }} ..."
+          $downloadUrl = "https://github.com/jackaudio/jack2-releases/releases/download/${{ matrix.jack_version }}/jack2-win${{ matrix.config.arch }}-${{ matrix.jack_version }}.exe"
           $exePath = "$($env:TEMP)\jack2_installer.exe"
-          (New-Object Net.WebClient).DownloadFile("https://github.com/jackaudio/jack2-releases/releases/download/$JACK_VERSION/jack2-win${{ matrix.config.arch }}-$JACK_VERSION.exe", $exePath)
+          
+          echo "Downloading from $downloadUrl"
+          (New-Object Net.WebClient).DownloadFile($downloadUrl, $exePath)
           echo "Installing..."
           cmd /c start /wait $exePath /SILENT /NORESTART /NOICONS /TYPE=full
-          echo "Done installing Jack win${{ matrix.config.arch }} $JACK_VERSION"
+          echo "Done installing Jack win${{ matrix.config.arch }} ${{ matrix.jack_version }}"
+          
+          echo "::set-output name=JACK_VERSION::${{ matrix.jack_version }}"
           
           choco install qt5-default --version=5.15.2 ${{ matrix.config.choco_opts }}
           if ( ${{ matrix.config.arch }} -eq 32 ) { choco install mingw --force --version=8.1.0 ${{ matrix.config.choco_opts }} }
@@ -136,6 +152,6 @@ jobs:
         uses: actions/upload-artifact@v2.2.4
         with:
           # Artifact name
-          name: "qjackctl-${{ runner.os }}-${{ github.job }}${{ matrix.config.arch }}.tar.gz" # optional, default is artifact
+          name: "qjackctl-${{ runner.os }}-${{ github.job }}${{ matrix.config.arch }}-jack-${{ steps.dependencies.outputs.JACK_VERSION }}.tar.gz" # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
           path: qjackctl-build.tar.gz
