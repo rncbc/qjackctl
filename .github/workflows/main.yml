@@ -36,10 +36,8 @@ jobs:
         run: |
           git submodule -q update --init --recursive
           mkdir build
-          mkdir qjackctl-install
-          cmake -S . -B build -GNinja -DCMAKE_INSTALL_PREFIX=/usr
-          DESTDIR=$PWD/qjackctl-install cmake --build build --target install --config RelWithDebInfo
-          tar -czf qjackctl-build.tar.gz qjackctl-install
+          cmake -S . -B build -GNinja
+          cmake --build build --target package --config RelWithDebInfo
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -47,7 +45,7 @@ jobs:
           # Artifact name
           name: "qjackctl-${{ runner.os }}-${{ github.job }}-${{ matrix.jack_package }}.tar.gz" # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: qjackctl-build.tar.gz
+          path: build/qjackctl*.tar.gz
 
   # MacOS build
   macos:
@@ -68,10 +66,8 @@ jobs:
         run: |
           git submodule -q update --init --recursive
           mkdir build
-          mkdir qjackctl-install
-          cmake -S . -B build -GNinja -DCMAKE_INSTALL_PREFIX=/usr
-          DESTDIR=$PWD/qjackctl-install cmake --build build --target install --config RelWithDebInfo
-          tar -czf qjackctl-build.tar.gz qjackctl-install
+          cmake -S . -B build -GNinja
+          cmake --build build --target package --config RelWithDebInfo
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -79,7 +75,7 @@ jobs:
           # Artifact name
           name: "qjackctl-${{ runner.os }}-${{ github.job }}.tar.gz" # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: qjackctl-build.tar.gz
+          path: build/qjackctl*.tar.gz
           
   # Windows 32 and 64 bits build
   windows:
@@ -133,13 +129,26 @@ jobs:
             # Latest 32 bits version of qt is 5.x branch as 6.x dropped 32 bits versions
             $qt_latest_version = python3 -m aqt list-qt windows desktop --spec 5 --latest-version
           }
+          
           echo "Installing Qt $qt_latest_version"
-          python3 -m aqt install-qt -O c:\Qt windows desktop $qt_latest_version win${{ matrix.config.arch }}_mingw81
-          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          $cnt = 0
+          do {
+              $cnt++
+              python3 -m aqt install-qt -O c:\Qt windows desktop $qt_latest_version win${{ matrix.config.arch }}_mingw81
+              if ($lastexitcode -ne 0 -and $cnt -ge 5) {
+                exit $lastexitcode
+              }
+          } while ($lastexitcode -ne 0)
           
           echo "Installing win${{ matrix.config.arch }}_mingw810"
-          python3 -m aqt install-tool -O c:\Qt windows desktop tools_mingw qt.tools.win${{ matrix.config.arch }}_mingw810
-          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          $cnt = 0
+          do {
+              $cnt++
+              python3 -m aqt install-tool -O c:\Qt windows desktop tools_mingw qt.tools.win${{ matrix.config.arch }}_mingw810
+              if ($lastexitcode -ne 0 -and $cnt -ge 5) {
+                exit $lastexitcode
+              }
+          } while ($lastexitcode -ne 0)
           
           echo "::set-output name=QT_PATH::C:\Qt\$qt_latest_version\mingw81_${{ matrix.config.arch }}"
           echo "::set-output name=MINGW_PATH::C:\Qt\Tools\mingw810_${{ matrix.config.arch }}"
@@ -153,24 +162,19 @@ jobs:
           $env:CC="gcc.exe"
           $env:CXX="g++.exe"
           $env:PATH="${{ steps.dependencies.outputs.MINGW_PATH }}\bin;$env:PATH"
-          $env:DESTDIR="$PWD/qjackctl-install"
           git submodule -q update --init --recursive
           mkdir build
-          mkdir qjackctl-install
           
-          cmake -S . -B build "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=${{ steps.dependencies.outputs.QT_PATH }}\lib\cmake" "-DCMAKE_INSTALL_PREFIX="
+          cmake -S . -B build "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=${{ steps.dependencies.outputs.QT_PATH }}\lib\cmake" -DCONFIG_INSTALL_QT_DLLS=ON
           if ($lastexitcode -ne 0) { exit $lastexitcode }
           
-          cmake --build build --target install --config RelWithDebInfo -- -j4
-          if ($lastexitcode -ne 0) { exit $lastexitcode }
-          
-          tar -czf qjackctl-build.tar.gz qjackctl-install
+          cmake --build build --target package --config RelWithDebInfo -- -j4
           if ($lastexitcode -ne 0) { exit $lastexitcode }
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           # Artifact name
-          name: "qjackctl-${{ runner.os }}-${{ github.job }}${{ matrix.config.arch }}-jack-${{ steps.dependencies.outputs.JACK_VERSION }}.tar.gz" # optional, default is artifact
+          name: "qjackctl-${{ runner.os }}-${{ github.job }}${{ matrix.config.arch }}-jack-${{ steps.dependencies.outputs.JACK_VERSION }}.zip" # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: qjackctl-build.tar.gz
+          path: build/qjackctl*.zip
