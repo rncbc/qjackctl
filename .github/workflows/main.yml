@@ -91,12 +91,7 @@ jobs:
       matrix:
         config:
           - arch: 32
-            choco_opts: "--forceX86"
           - arch: 64
-            choco_opts: ""
-        jack_version:
-          - "$jack_latest_version"
-          - "$jack_previous_version"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -125,21 +120,42 @@ jobs:
           
           echo "::set-output name=JACK_VERSION::${{ matrix.jack_version }}"
           
-          choco install qt5-default --version=5.15.2 ${{ matrix.config.choco_opts }}
-          if ( ${{ matrix.config.arch }} -eq 32 ) { choco install mingw --force --version=8.1.0 ${{ matrix.config.choco_opts }} }
+          pip install -U pip
+          pip install --pre aqtinstall
+          pip show aqtinstall
+          
+          if ( ${{ matrix.config.arch }} -eq 64 ) {
+            $qt_latest_version = python3 -m aqt list-qt windows desktop --latest-version
+          } else {
+            # Latest 32 bits version of qt is 5.x branch as 6.x dropped 32 bits versions
+            $qt_latest_version = python3 -m aqt list-qt windows desktop --spec 5 --latest-version
+          }
+          echo "Installing Qt $qt_latest_version"
+          python3 -m aqt install-qt -O c:\Qt windows desktop $qt_latest_version win${{ matrix.config.arch }}_mingw81
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
+          echo "Installing win${{ matrix.config.arch }}_mingw810"
+          python3 -m aqt install-tool -O c:\Qt windows desktop tools_mingw qt.tools.win${{ matrix.config.arch }}_mingw810
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
+          echo "::set-output name=QT_PATH::C:\Qt\$qt_latest_version\mingw81_${{ matrix.config.arch }}"
+          echo "::set-output name=MINGW_PATH::C:\Qt\Tools\mingw810_${{ matrix.config.arch }}"
 
       # Runs a set of commands using the runners shell
       - name: Build
         run: |
+          echo "Using MinGW at ${{ steps.dependencies.outputs.MINGW_PATH }}"
+          echo "Using Qt at ${{ steps.dependencies.outputs.QT_PATH }}"
+          
           $env:CC="gcc.exe"
           $env:CXX="g++.exe"
-          $env:PATH="C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw${{ matrix.config.arch }}\bin;$env:PATH"
+          $env:PATH="${{ steps.dependencies.outputs.MINGW_PATH }}\bin;$env:PATH"
           $env:DESTDIR="$PWD/qjackctl-install"
           git submodule -q update --init --recursive
           mkdir build
           mkdir qjackctl-install
           
-          cmake -S . -B build "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=C:\Qt\5.15.2\mingw81_${{ matrix.config.arch }}\lib\cmake" "-DCMAKE_INSTALL_PREFIX="
+          cmake -S . -B build "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=${{ steps.dependencies.outputs.QT_PATH }}\lib\cmake" "-DCMAKE_INSTALL_PREFIX="
           if ($lastexitcode -ne 0) { exit $lastexitcode }
           
           cmake --build build --target install --config RelWithDebInfo -- -j4
