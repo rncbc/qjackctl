@@ -383,7 +383,7 @@ int qjackctlJackClientList::updateClientPorts (void)
 					pPort->markClientPort(1);
 			}
 		}
-		::free(ppszClientPorts);
+		jack_free(ppszClientPorts);
 	}
 
 	iDirtyCount += cleanClientPorts(0);
@@ -605,7 +605,7 @@ void qjackctlJackConnect::updateConnections (void)
 							pIPort->addConnect(pOPort);
 						}
 					}
-					::free(ppszClientPorts);
+					jack_free(ppszClientPorts);
 				}
 			}
 		}

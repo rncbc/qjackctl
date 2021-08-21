@@ -485,11 +485,11 @@ void qjackctlJackGraph::updateItems (void)
 					}
 				}
 			}
-			::free(client_ports2);
+			jack_free(client_ports2);
 		}
 	}
 
-	::free(client_ports1);
+	jack_free(client_ports1);
 
 	// 3. Clean-up all un-marked items...
 	//

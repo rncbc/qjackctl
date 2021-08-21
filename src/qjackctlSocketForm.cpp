@@ -609,7 +609,7 @@ void qjackctlSocketForm::updateJackClients ( int iSocketType )
 			}
 			iClientPort++;
 		}
-		::free(ppszClientPorts);
+		jack_free(ppszClientPorts);
 	}
 }
 
@@ -831,7 +831,7 @@ void qjackctlSocketForm::updateJackPlugs ( int iSocketType )
 			}
 			++iClientPort;
 		}
-		::free(ppszClientPorts);
+		jack_free(ppszClientPorts);
 	}
 }
 

@@ -766,7 +766,7 @@ void qjackctlPatchbayRack::connectJackSocketPorts (
 			else if (pOutputSocket->isExclusive())
 				disconnectJackPorts(pszOutputPort, ppszInputPorts[i]);
 		}
-		::free(ppszInputPorts);
+		jack_free(ppszInputPorts);
 	}
 
 	// Check for outputs from input, if the input socket is on exclusive mode...
@@ -780,7 +780,7 @@ void qjackctlPatchbayRack::connectJackSocketPorts (
 				else
 					disconnectJackPorts(ppszOutputPorts[i], pszInputPort);
 			}
-			::free(ppszOutputPorts);
+			jack_free(ppszOutputPorts);
 		}
 	}
 
@@ -887,14 +887,14 @@ void qjackctlPatchbayRack::connectJackScan ( jack_client_t *pJackClient )
 
 	// Free client-ports caches...
 	if (m_ppszOAudioPorts)
-		::free(m_ppszOAudioPorts);
+		jack_free(m_ppszOAudioPorts);
 	if (m_ppszIAudioPorts)
-		::free(m_ppszIAudioPorts);
+		jack_free(m_ppszIAudioPorts);
 #ifdef CONFIG_JACK_MIDI
 	if (m_ppszOMidiPorts)
-		::free(m_ppszOMidiPorts);
+		jack_free(m_ppszOMidiPorts);
 	if (m_ppszIMidiPorts)
-		::free(m_ppszIMidiPorts);
+		jack_free(m_ppszIMidiPorts);
 #endif
 	// Reset cached pointers.
 	m_ppszOAudioPorts = nullptr;
@@ -934,8 +934,8 @@ void qjackctlPatchbayRack::connectJackForwardPorts (
 		}
 		// Free provided arrays...
 		if (ppszPorts)
-			::free(ppszPorts);
-		::free(ppszOutputPorts);
+			jack_free(ppszPorts);
+		jack_free(ppszOutputPorts);
 	}
 }
 
@@ -1501,7 +1501,7 @@ void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
 			qjackctlPatchbaySnapshot::add_socket(
 				isocketlist(), sIClient, sIPort, iSocketType);
 		}
-		::free(ppszInputPorts);
+		jack_free(ppszInputPorts);
 	}
 
 	const char **ppszOutputPorts = jack_get_ports(m_pJackClient,
@@ -1530,9 +1530,9 @@ void qjackctlPatchbayRack::connectJackSnapshotEx ( int iSocketType )
 			const QString& sIPort   = sInputPort.section(':', 1);
 			snapshot.append(sOClient, sOPort, sIClient, sIPort);
 		}
-		::free(ppszInputPorts);
+		jack_free(ppszInputPorts);
 	}
-	::free(ppszOutputPorts);
+	jack_free(ppszOutputPorts);
 
 	snapshot.commit(this, iSocketType);
 }
@@ -1643,9 +1643,9 @@ void qjackctlPatchbayRack::disconnectAllJackPortsEx ( int iSocketType )
 				const char *pszInputPort = ppszInputPorts[j];
 				jack_disconnect(m_pJackClient, pszOutputPort, pszInputPort);
 			}
-			::free(ppszInputPorts);
+			jack_free(ppszInputPorts);
 		}
-		::free(ppszOutputPorts);
+		jack_free(ppszOutputPorts);
 	}
 }
 
