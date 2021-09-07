@@ -192,6 +192,11 @@ if (WIN32 AND CONFIG_INSTALL_QT_DLLS)
 
   if (EXISTS ${QT_WINDEPLOYQT})
     # execute windeployqt in a tmp directory after build
+    if (QT_VERSION_MAJOR MATCHES "5")
+      # These options are not available with Qt6
+      set (WINDEPLOYQT_EXTRA_OPTIONS --no-webkit2 --no-angle)
+    endif ()
+
     add_custom_command (TARGET ${PROJECT_NAME}
       POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_BINARY_DIR}/windeployqt"
@@ -201,9 +206,8 @@ if (WIN32 AND CONFIG_INSTALL_QT_DLLS)
         --no-quick-import
         --no-opengl-sw
         --no-virtualkeyboard
-        --no-webkit2
-        --no-angle
         --no-svg
+        ${WINDEPLOYQT_EXTRA_OPTIONS}
         "$<TARGET_FILE:${PROJECT_NAME}>"
       USES_TERMINAL
     )
