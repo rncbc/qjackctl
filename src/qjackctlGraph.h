@@ -411,7 +411,6 @@ public:
 	// Path/shaper updaters.
 	void updatePathTo(const QPointF& pos);
 	void updatePath();
-	virtual QPainterPath shape() const;
 
 	// Selection propagation method...
 	void setSelectedEx(qjackctlGraphPort *port, bool is_selected);
@@ -428,6 +427,8 @@ protected:
 		const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	QVariant itemChange(GraphicsItemChange change, const QVariant& value);
+
+	QPainterPath shape() const;
 
 private:
 

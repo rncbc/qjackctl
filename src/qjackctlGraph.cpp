@@ -1108,11 +1108,6 @@ void qjackctlGraphConnect::paint ( QPainter *painter,
 	painter->drawPath(path);
 }
 
-QPainterPath qjackctlGraphConnect::shape() const
-{
-	QPainterPathStroker stroker = QPainterPathStroker(QPen(QColor(),2));
-	return stroker.createStroke(path());
-}
 
 QVariant qjackctlGraphConnect::itemChange (
 	GraphicsItemChange change, const QVariant& value )
@@ -1127,6 +1122,14 @@ QVariant qjackctlGraphConnect::itemChange (
 	}
 
 	return value;
+}
+
+
+QPainterPath qjackctlGraphConnect::shape (void) const
+{
+	const QPainterPathStroker stroker
+		= QPainterPathStroker(QPen(QColor(), 2));
+	return stroker.createStroke(path());
 }
 
 
