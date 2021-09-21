@@ -197,7 +197,7 @@ elseif (WIN32)
 endif ()
 
 
-if (WIN32 AND CONFIG_INSTALL_QT_DLLS)
+if (WIN32 AND CONFIG_INSTALL_QT)
   get_target_property (_qt_qmake_location Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
   get_filename_component (_qt_bin_dir "${_qt_qmake_location}" DIRECTORY)
   set (QT_WINDEPLOYQT "${_qt_bin_dir}/windeployqt.exe")
@@ -229,6 +229,20 @@ if (WIN32 AND CONFIG_INSTALL_QT_DLLS)
       DIRECTORY
       "${CMAKE_CURRENT_BINARY_DIR}/windeployqt/"
       DESTINATION .
+    )
+  endif ()
+endif ()
+
+if (APPLE AND CONFIG_INSTALL_QT)
+  get_target_property (_qt_qmake_location Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
+  get_filename_component (_qt_bin_dir "${_qt_qmake_location}" DIRECTORY)
+  find_program(QT_MACDEPLOYQT macdeployqt HINTS "${_qt_bin_dir}")
+
+  if (EXISTS ${QT_MACDEPLOYQT})
+    add_custom_command (TARGET ${PROJECT_NAME}
+      POST_BUILD
+      COMMAND "${QT_MACDEPLOYQT}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/../.."
+      USES_TERMINAL
     )
   endif ()
 endif ()
