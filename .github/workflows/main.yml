@@ -68,6 +68,10 @@ jobs:
           mkdir build
           cmake -S . -B build -GNinja
           cmake --build build --target package --config RelWithDebInfo
+          echo "otool -L"
+          otool -L build/src/QjackCtl.app/Contents/MacOS/QjackCtl
+          echo "otool -l"
+          otool -l build/src/QjackCtl.app/Contents/MacOS/QjackCtl
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
