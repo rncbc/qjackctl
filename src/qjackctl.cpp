@@ -60,8 +60,10 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #define CONFIG_PLUGINSDIR CONFIG_LIBDIR "/qt4/plugins"
-#else
+#elif QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #define CONFIG_PLUGINSDIR CONFIG_LIBDIR "/qt5/plugins"
+#else
+#define CONFIG_PLUGINSDIR CONFIG_LIBDIR "/qt6/plugins"
 #endif
 
 
