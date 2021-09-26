@@ -113,7 +113,7 @@ option (CONFIG_STACKTRACE "Enable debugger stack-trace (default=no)" 0)
 option (CONFIG_QT6 "Enable Qt6 build (default=yes)" 1)
 
 # Enable install QT DLLs for Windows targets using windeployqt.
-option (CONFIG_INSTALL_QT_DLLS "Install QT DLLs for Windows targets (default=no)" 0)
+option (CONFIG_INSTALL_QT "Install Qt for MacOS and Windows targets (default=no)" 0)
 
 
 # Fix for new CMAKE_REQUIRED_LIBRARIES policy.
@@ -321,7 +321,7 @@ message     ("")
 show_option ("  System tray icon support . . . . . . . . . . . . ." CONFIG_SYSTEM_TRAY)
 show_option ("  Unique/Single instance support . . . . . . . . . ." CONFIG_XUNIQUE)
 show_option ("  Debugger stack-trace (gdb) . . . . . . . . . . . ." CONFIG_STACKTRACE)
-show_option ("  Install Qt DLLs on Windows . . . . . . . . . . . ." CONFIG_INSTALL_QT_DLLS)
+show_option ("  Install Qt on MacOS / Windows  . . . . . . . . . ." CONFIG_INSTALL_QT)
 message   ("\n  Install prefix . . . . . . . . . . . . . . . . . .: ${CONFIG_PREFIX}")
 message   ("\nNow type 'make', followed by 'make install' as root.\n")
 

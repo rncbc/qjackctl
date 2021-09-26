@@ -175,9 +175,20 @@ if (UNIX AND NOT APPLE)
      DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
   install (FILES appdata/${PROJECT_NAME}.appdata.xml
      DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
-endif ()
-
-if (WIN32)
+elseif (APPLE)
+  # Generate bundle on MacOS with QjackCtl.icns as the icon and a custom Info.plist file.
+  target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/images/QjackCtl.icns)
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/images/QjackCtl.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    MACOSX_BUNDLE True
+    OUTPUT_NAME QjackCtl
+    MACOSX_RPATH ON
+    INSTALL_RPATH @executable_path/../Frameworks
+    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/appdata/Info.plist
+  )
+  install (TARGETS ${PROJECT_NAME} BUNDLE
+     DESTINATION ${CMAKE_INSTALL_BINDIR})
+elseif (WIN32)
   install (TARGETS ${PROJECT_NAME} RUNTIME
      DESTINATION .)
   # Use same path as windeployqt for translations
@@ -185,7 +196,8 @@ if (WIN32)
      DESTINATION translations)
 endif ()
 
-if (WIN32 AND CONFIG_INSTALL_QT_DLLS)
+
+if (WIN32 AND CONFIG_INSTALL_QT)
   get_target_property (_qt_qmake_location Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
   get_filename_component (_qt_bin_dir "${_qt_qmake_location}" DIRECTORY)
   set (QT_WINDEPLOYQT "${_qt_bin_dir}/windeployqt.exe")
@@ -217,6 +229,20 @@ if (WIN32 AND CONFIG_INSTALL_QT_DLLS)
       DIRECTORY
       "${CMAKE_CURRENT_BINARY_DIR}/windeployqt/"
       DESTINATION .
+    )
+  endif ()
+endif ()
+
+if (APPLE AND CONFIG_INSTALL_QT)
+  get_target_property (_qt_qmake_location Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
+  get_filename_component (_qt_bin_dir "${_qt_qmake_location}" DIRECTORY)
+  find_program(QT_MACDEPLOYQT macdeployqt HINTS "${_qt_bin_dir}")
+
+  if (EXISTS ${QT_MACDEPLOYQT})
+    add_custom_command (TARGET ${PROJECT_NAME}
+      POST_BUILD
+      COMMAND "${QT_MACDEPLOYQT}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/../.."
+      USES_TERMINAL
     )
   endif ()
 endif ()
