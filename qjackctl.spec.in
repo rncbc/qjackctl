@@ -17,7 +17,7 @@
 
 %define name    @PACKAGE_TARNAME@
 %define version @PACKAGE_VERSION@
-%define release 48.1
+%define release 49.1
 
 %define _prefix	@ac_prefix@
 
@@ -130,6 +130,8 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} -Wno-dev -B build -S .
 %{_datadir}/man/fr/man1/%{name}.1.gz
 
 %changelog
+* Tue Oct  5 2021 Rui Nuno Capela <rncbc@rncbc.org> 0.9.5
+- Autumn'21 release.
 * Sun Jul  4 2021 Rui Nuno Capela <rncbc@rncbc.org> 0.9.4
 - Early-Summer'21 release.
 * Tue May 11 2021 Rui Nuno Capela <rncbc@rncbc.org> 0.9.3

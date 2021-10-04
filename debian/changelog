@@ -1,8 +1,14 @@
+qjackctl (0.9.5-49.1) unstable; urgency=low
+
+  * Autumn'21 release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Tue,  5 Oct 2021 12:00:00 +0100
+
 qjackctl (0.9.4-48.1) unstable; urgency=low
 
   * Early-Summer'21 release.
 
- -- Rui Nuno Capela <rncbc@rncbc.org>  Sun,  4 May 2021 20:00:00 +0100
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Sun,  4 Jul 2021 20:00:00 +0100
 
 qjackctl (0.9.3-47.1) unstable; urgency=low
 
