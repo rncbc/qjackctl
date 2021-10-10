@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.13)
 
 project (qjackctl
-  VERSION 0.9.5
+  VERSION 0.9.6
   DESCRIPTION "JACK Audio Connection Kit Qt GUI Interface"
   LANGUAGES C CXX)
 

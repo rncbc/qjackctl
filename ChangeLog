@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Conditional fix to MacOSX and FreeBSD builds. (EXPERIMENTAL)
+
+
+
 0.9.5  2021-10-05  An Autumn'21 Release.
 
 - Streamlined Windows and MacOSX deliverables (by Alexis Murzeau).
