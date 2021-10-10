@@ -1127,9 +1127,13 @@ QVariant qjackctlGraphConnect::itemChange (
 
 QPainterPath qjackctlGraphConnect::shape (void) const
 {
+#if defined(__APPLE__) || defined(__FreeBSD__)
+	return QGraphicsPathItem::shape();
+#else
 	const QPainterPathStroker stroker
 		= QPainterPathStroker(QPen(QColor(), 2));
 	return stroker.createStroke(path());
+#endif
 }
 
 
