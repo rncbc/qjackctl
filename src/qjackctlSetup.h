@@ -128,8 +128,9 @@ public:
 	// User supplied command line.
 	QString sCmdLine;
 
-	// Current (default) preset name.
+	// Current/previous (default) preset name.
 	QString sDefPreset;
+	QString sOldPreset;
 
 	// Available presets list.
 	QStringList presets;

@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Whenever possible, adopt the previous namedd default preset,
+  when starting the JACK-server on premises. (EXPERIMENTAL)  
+
 - Conditional fix to MacOSX and FreeBSD builds. (EXPERIMENTAL)
 
 

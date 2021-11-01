@@ -81,6 +81,7 @@ void qjackctlSetup::loadSetup (void)
 {
 	m_settings.beginGroup("/Presets");
 	sDefPreset = m_settings.value("/DefPreset", defName()).toString();
+	sOldPreset = m_settings.value("/OldPreset").toString();
 	QString sPrefix = "/Preset%1";
 	int i = 0;
 	for (;;) {
@@ -200,6 +201,7 @@ void qjackctlSetup::saveSetup (void)
 
 	m_settings.beginGroup("/Presets");
 	m_settings.setValue("/DefPreset", sDefPreset);
+	m_settings.setValue("/OldPreset", sOldPreset);
 	// Save last preset list.
 	QString sPrefix = "/Preset%1";
 	int i = 0;

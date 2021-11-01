@@ -1384,6 +1384,14 @@ void qjackctlMainForm::startJack (void)
 	m_bJackKilled = false;
 #endif
 
+	// Check whether we had any previous preset but default...
+	if ((m_pSetup->sDefPreset.isEmpty()
+		|| qjackctlSetup::defName() == qjackctlSetup::defName())
+			&& !m_pSetup->sOldPreset.isEmpty()) {
+		m_pSetup->sDefPreset = m_pSetup->sOldPreset;
+	//	m_pSetup->sOldPreset.clear();
+	}
+
 	// Load primary/default server preset...
 	if (!m_pSetup->loadPreset(m_preset, m_pSetup->sDefPreset)) {
 		appendMessagesError(tr("Could not load preset \"%1\".\n\nRetrying with default.").arg(m_pSetup->sDefPreset));
@@ -3251,8 +3259,12 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 			if (m_pDBusConfig && !m_bDBusDetach)
 				getDBusParameters(m_preset);
 		#endif
-			m_pSetup->sDefPreset = sPreset;
+			// Save current preset if not the default already...
+			if (!m_pSetup->sDefPreset.isEmpty()
+				&& m_pSetup->sDefPreset != qjackctlSetup::defName())
+				m_pSetup->sOldPreset = m_pSetup->sDefPreset;
 			// Have current preset changed anyhow?
+			m_pSetup->sDefPreset = sPreset;
 			if (m_pSetupForm)
 				m_pSetupForm->updateCurrentPreset();
 		}
@@ -3970,11 +3982,13 @@ void qjackctlMainForm::updateTitleStatus (void)
 		sTitle = QJACKCTL_SUBTITLE1;
 	}
 
-	sTitle += " [" + m_pSetup->sDefPreset + "] ";
+	sTitle += ' ';
+	sTitle += '[' + m_pSetup->sDefPreset + ']';
+	sTitle += ' ';
 
 	QString sState;
-	QString sDots = ".";
-	const QString s = "..";
+	QString sDots('.');
+	const QString s(2, '.');
 	switch (m_iServerState) {
 	case QJACKCTL_STARTING:
 		sState = tr("Starting");
