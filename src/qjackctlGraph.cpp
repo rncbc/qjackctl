@@ -1127,7 +1127,7 @@ QVariant qjackctlGraphConnect::itemChange (
 
 QPainterPath qjackctlGraphConnect::shape (void) const
 {
-#if defined(__APPLE__) || defined(__FreeBSD__)
+#if (QT_VERSION < QT_VERSION_CHECK(6, 1, 0)) && (__cplusplus < 201703L)
 	return QGraphicsPathItem::shape();
 #else
 	const QPainterPathStroker stroker
