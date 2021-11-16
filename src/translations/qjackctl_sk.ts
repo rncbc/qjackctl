@@ -436,13 +436,13 @@ Ste si istý?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1768"/>
-        <location filename="../qjackctlGraph.cpp" line="1894"/>
+        <location filename="../qjackctlGraph.cpp" line="1776"/>
+        <location filename="../qjackctlGraph.cpp" line="1902"/>
         <source>Connect</source>
         <translation>Spojiť</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1964"/>
+        <location filename="../qjackctlGraph.cpp" line="1972"/>
         <source>Disconnect</source>
         <translation>Rozpojiť</translation>
     </message>
