@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.13)
+cmake_minimum_required (VERSION 3.15)
 
 project (qjackctl
   VERSION 0.9.6
