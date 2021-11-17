@@ -442,7 +442,7 @@ Ste si istý?</translation>
         <translation>Spojiť</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1972"/>
+        <location filename="../qjackctlGraph.cpp" line="1974"/>
         <source>Disconnect</source>
         <translation>Rozpojiť</translation>
     </message>

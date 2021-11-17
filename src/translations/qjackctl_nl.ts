@@ -451,7 +451,7 @@ Bent u zeker?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1972"/>
+        <location filename="../qjackctlGraph.cpp" line="1974"/>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>

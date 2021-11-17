@@ -451,7 +451,7 @@ Sei sicuro?</translation>
         <translation>Connetti</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1972"/>
+        <location filename="../qjackctlGraph.cpp" line="1974"/>
         <source>Disconnect</source>
         <translation>Disconnetti</translation>
     </message>

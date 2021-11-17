@@ -442,7 +442,7 @@ de toutes les applications clientes.
         <translation>Connecter</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1972"/>
+        <location filename="../qjackctlGraph.cpp" line="1974"/>
         <source>Disconnect</source>
         <translation>Déconnecter</translation>
     </message>

@@ -441,7 +441,7 @@ Are you sure?</source>
         <translation>З&apos;єднати</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1972"/>
+        <location filename="../qjackctlGraph.cpp" line="1974"/>
         <source>Disconnect</source>
         <translation>Від’єднати</translation>
     </message>

@@ -442,7 +442,7 @@ Are you sure?</source>
         <translation>연결하기</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1972"/>
+        <location filename="../qjackctlGraph.cpp" line="1974"/>
         <source>Disconnect</source>
         <translation>연결해제</translation>
     </message>
