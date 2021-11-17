@@ -1966,8 +1966,8 @@ void qjackctlGraphCanvas::disconnectItems (void)
 	if (connects.isEmpty())
 		return;
 
-	m_selected_nodes = 0;
-	m_scene->clearSelection();
+//	m_selected_nodes = 0;
+//	m_scene->clearSelection();
 
 	m_item = nullptr;
 
