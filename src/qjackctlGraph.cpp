@@ -1568,8 +1568,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 {
 	int nchanged = 0;
 
-	const QPointF& pos
-		= QGraphicsView::mapToScene(event->pos());
+	QPointF pos = QGraphicsView::mapToScene(event->pos());
 
 	switch (m_state) {
 	case DragStart:
@@ -1629,8 +1628,11 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 		break;
 	case DragMove:
 		// Allow auto-scroll only if within allowed margins/limits...
-		if (m_rect1.contains(pos))
-			QGraphicsView::ensureVisible(QRectF(pos, QSizeF(2, 2)), 8, 8);
+		if (!m_rect1.contains(pos)) {
+			pos.setX(qBound(m_rect1.left(), pos.x(), m_rect1.right()));
+			pos.setY(qBound(m_rect1.top(),  pos.y(), m_rect1.bottom()));
+		}
+		QGraphicsView::ensureVisible(QRectF(pos, QSizeF(2, 2)), 8, 8);
 		// Move new connection line...
 		if (m_connect)
 			m_connect->updatePathTo(pos);
@@ -1681,10 +1683,9 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 		}
 		// Move current selected nodes...
 		if (m_item && m_item->type() == qjackctlGraphNode::Type) {
-			QPointF pos2 = pos;
-			pos2.setX(4.0 * ::round(0.25 * pos2.x()));
-			pos2.setY(4.0 * ::round(0.25 * pos2.y()));
-			const QPointF delta = (pos2 - m_pos);
+			pos.setX(4.0 * ::round(0.25 * pos.x()));
+			pos.setY(4.0 * ::round(0.25 * pos.y()));
+			const QPointF delta = (pos - m_pos);
 			foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 				if (item->type() == qjackctlGraphNode::Type) {
 					qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
@@ -1692,7 +1693,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 						node->setPos(node->pos() + delta);
 				}
 			}
-			m_pos = pos2;
+			m_pos = pos;
 		}
 		else
 		if (m_connect) {
