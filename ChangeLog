@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Dropped autotools (autoconf, automake, etc.) build system.
+
 - Limit or mitigate fast auto-scrolling when moving Graph client
   nodes off the viewport. (EXPERIMENTAL)
 
