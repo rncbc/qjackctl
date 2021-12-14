@@ -4454,17 +4454,13 @@ void qjackctlMainForm::setDBusParameters ( const qjackctlPreset& preset )
 	}
 	if (bAlsa) {
 		setDBusDriverParameter("softmode",
-			preset.bSoftMode,
-			!preset.bSoftMode);
+			preset.bSoftMode);
 		setDBusDriverParameter("monitor",
-			preset.bMonitor,
-			!preset.bMonitor);
+			preset.bMonitor);
 		setDBusDriverParameter("shorts",
-			preset.bShorts,
-			!preset.bShorts);
+			preset.bShorts);
 		setDBusDriverParameter("hwmeter",
-			preset.bHWMeter,
-			!preset.bShorts);
+			preset.bHWMeter);
 	#ifdef CONFIG_JACK_MIDI
 		setDBusDriverParameter("midi-driver",
 			preset.sMidiDriver,
