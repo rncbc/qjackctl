@@ -11,7 +11,7 @@ GIT HEAD
 - Limit or mitigate fast auto-scrolling when moving Graph client
   nodes off the viewport. (EXPERIMENTAL)
 
-- Whenever possible, adopt the previous namedd default preset,
+- Whenever possible, adopt the previous named default preset,
   when starting the JACK-server on premises. (EXPERIMENTAL)  
 
 - Conditional fix to MacOSX and FreeBSD builds. (EXPERIMENTAL)

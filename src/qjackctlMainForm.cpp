@@ -1389,7 +1389,7 @@ void qjackctlMainForm::startJack (void)
 		|| qjackctlSetup::defName() == qjackctlSetup::defName())
 			&& !m_pSetup->sOldPreset.isEmpty()) {
 		m_pSetup->sDefPreset = m_pSetup->sOldPreset;
-	//	m_pSetup->sOldPreset.clear();
+		m_pSetup->sOldPreset.clear();
 	}
 
 	// Load primary/default server preset...
