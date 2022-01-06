@@ -9,12 +9,12 @@ ChangeLog
 - Dropped autotools (autoconf, automake, etc.) build system.
 
 - Limit or mitigate fast auto-scrolling when moving Graph client
-  nodes off the viewport. (EXPERIMENTAL)
+  nodes off the viewport.
 
 - Whenever possible, adopt the previous named default preset,
-  when starting the JACK-server on premises. (EXPERIMENTAL)  
+  when starting the JACK-server on premises.
 
-- Conditional fix to MacOSX and FreeBSD builds. (EXPERIMENTAL)
+- Conditional fix to MacOSX and FreeBSD builds.
 
 
 
