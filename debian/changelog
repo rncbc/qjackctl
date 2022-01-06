@@ -1,3 +1,9 @@
+qjackctl (0.9.6-50.1) unstable; urgency=low
+
+  * A Winter'22 release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Sun,  9 Jan 2022 19:00:00 +0000
+
 qjackctl (0.9.5-49.1) unstable; urgency=low
 
   * Autumn'21 release.
