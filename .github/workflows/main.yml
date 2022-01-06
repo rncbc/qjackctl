@@ -127,12 +127,7 @@ jobs:
           pip install --pre aqtinstall
           pip show aqtinstall
           
-         #if ( ${{ matrix.config.arch }} -eq 64 ) {
-         #  $qt_latest_version = python3 -m aqt list-qt windows desktop --latest-version
-         #} else {
-         #  # Latest 32 bits version of qt is 5.x branch as 6.x dropped 32 bits versions
-            $qt_latest_version = python3 -m aqt list-qt windows desktop --spec 5 --latest-version
-         #}
+          $qt_latest_version = python3 -m aqt list-qt windows desktop --spec 5 --latest-version
           
           echo "Installing Qt $qt_latest_version"
           $cnt = 0
