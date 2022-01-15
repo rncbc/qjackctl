@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Fixed translations path to be relative to application runtime.
+
+
 0.9.6  2022-01-09  A Winter'22 Release.
 
 - Dropped autotools (autoconf, automake, etc.) build system.
