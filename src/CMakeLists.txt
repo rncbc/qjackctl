@@ -164,17 +164,17 @@ endif ()
 
 if (UNIX AND NOT APPLE)
   install (TARGETS ${PROJECT_NAME} RUNTIME
-     DESTINATION ${CMAKE_INSTALL_BINDIR})
+    DESTINATION ${CMAKE_INSTALL_BINDIR})
   install (FILES ${QM_FILES}
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations)
-  install (FILES org.rncbc.${PROJECT_NAME}.desktop
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/translations)
   install (FILES images/${PROJECT_NAME}.png
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps)
   install (FILES images/${PROJECT_NAME}.svg
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+  install (FILES appdata/org.rncbc.${PROJECT_NAME}.desktop
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
   install (FILES appdata/org.rncbc.${PROJECT_NAME}.metainfo.xml
-     DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
 elseif (APPLE)
   # Generate bundle on MacOS with QjackCtl.icns as the icon and a custom Info.plist file.
   target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/images/QjackCtl.icns)
