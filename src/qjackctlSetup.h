@@ -115,6 +115,7 @@ public:
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
 	void show_error(const QString& msg);
 #else
+	// Command line usage helper.
 	void print_usage(const QString& arg0);
 #endif
 
