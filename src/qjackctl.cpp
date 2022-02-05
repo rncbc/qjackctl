@@ -104,6 +104,17 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 	QApplication::setApplicationName(QJACKCTL_TITLE);
 	QApplication::setApplicationDisplayName(QJACKCTL_TITLE);
 	//	QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE));
+	QString sVersion(CONFIG_BUILD_VERSION);
+	sVersion += '\n';
+	sVersion += QString("Qt: %1").arg(qVersion());
+#if defined(QT_STATIC)
+	sVersion += "-static";
+#endif
+	sVersion += '\n';
+#ifdef CONFIG_JACK_VERSION
+	sVersion += tr("JACK: %1").arg(jack_get_version_string());
+#endif
+	QApplication::setApplicationVersion(sVersion);
 #endif
 	// Load translation support.
 	QLocale loc;

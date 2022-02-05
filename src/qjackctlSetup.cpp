@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -30,6 +30,14 @@
 #include <QFileInfo>
 
 #include <QApplication>
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#if defined(Q_OS_WINDOWS)
+#include <QMessageBox>
+#endif
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QDesktopWidget>
@@ -599,6 +607,20 @@ bool qjackctlSetup::deletePreset ( const QString& sPreset )
 // Command-line argument stuff.
 //
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+
+void qjackctlSetup::show_error( const QString& msg )
+{
+#if defined(Q_OS_WINDOWS)
+	QMessageBox::information(nullptr, QApplication::applicationName(), msg);
+#else
+	const QByteArray tmp = msg.toUtf8() + '\n';
+	::fputs(tmp.constData(), stderr);
+#endif
+}
+
+#else
+
 // Help about command line options.
 void qjackctlSetup::print_usage ( const QString& arg0 )
 {
@@ -624,14 +646,81 @@ void qjackctlSetup::print_usage ( const QString& arg0 )
 		QObject::tr("Show version information") + sEol;
 }
 
+#endif
+
 
 // Parse command line arguments into m_settings.
 bool qjackctlSetup::parse_args ( const QStringList& args )
 {
+	int iCmdArgs = 0;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+
+	QCommandLineParser parser;
+	parser.setApplicationDescription(
+		QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE));
+
+	parser.addOption({{"s", "start"},
+		QObject::tr("Start JACK audio server immediately.")});
+	parser.addOption({{"p", "preset"},
+		QObject::tr("Set default settings preset name."), "label"});
+	parser.addOption({{"a", "active-patchbay"},
+		QObject::tr("Set active patchbay definition file."), "path"});
+	parser.addOption({{"n", "server-name"},
+		QObject::tr("Set default JACK audio server name."), "name"});
+	parser.addHelpOption();
+	parser.addVersionOption();
+	parser.addPositionalArgument("command-and-args",
+		QObject::tr("Launch command with arguments."),
+		QObject::tr("[command-and-args]"));
+	parser.process(args);
+
+	if (parser.isSet("start")) {
+		bStartJackCmd = true;
+	}
+
+	if (parser.isSet("preset")) {
+		const QString& sVal = parser.value("preset");
+		if (sVal.isEmpty()) {
+			show_error(QObject::tr("Option -p requires an argument (preset)."));
+			return false;
+		}
+		sDefPreset = sVal;
+	}
+
+	if (parser.isSet("active-patchbay")) {
+		const QString& sVal = parser.value("active-patchbay");
+		if (sVal.isEmpty()) {
+			show_error(QObject::tr("Option -a requires an argument (path)."));
+			return false;
+		}
+		bActivePatchbay = true;
+		sActivePatchbayPath = sVal;
+	}
+
+	if (parser.isSet("server-name")) {
+		const QString& sVal = parser.value("server-name");
+		if (sVal.isEmpty()) {
+			show_error(QObject::tr("Option -n requires an argument (name)."));
+			return false;
+		}
+		sServerName = sVal;
+	}
+
+	foreach(const QString& sArg, parser.positionalArguments()) {
+		if (sArg != "-T" && sArg != "-ndefault") {
+			if (iCmdArgs > 0)
+				sCmdLine += ' ';
+			sCmdLine += sArg;
+			++iCmdArgs;
+		}
+	}
+
+#else
+
 	QTextStream out(stderr);
 	const QString sEol = "\n\n";
 	const int argc = args.count();
-	int iCmdArgs = 0;
 
 	for (int i = 1; i < argc; ++i) {
 
@@ -709,9 +798,13 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		}
 	}
 
+#endif
+
 	// HACK: If there's a command line, it must be spawned on background...
-	if (iCmdArgs > 0)
-		sCmdLine += " &";
+	if (iCmdArgs > 0) {
+		sCmdLine += ' ';
+		sCmdLine += '&';
+	}
 
 	// Alright with argument parsing.
 	return true;

@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Migrated command line parsing to QCommandLineParser/Option
+  (Qt >= 5.2) (EXPERIMENTAL)
+
 - Fixed translations path to be relative to application runtime.
 
 

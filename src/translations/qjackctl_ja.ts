@@ -27,63 +27,96 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="50"/>
+        <location filename="../qjackctlSetup.cpp" line="58"/>
         <source>(default)</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="609"/>
+        <location filename="../qjackctlSetup.cpp" line="631"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="612"/>
+        <location filename="../qjackctlSetup.cpp" line="634"/>
         <source>Options:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="614"/>
+        <location filename="../qjackctlSetup.cpp" line="636"/>
         <source>Start JACK audio server immediately</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="616"/>
+        <location filename="../qjackctlSetup.cpp" line="638"/>
         <source>Set default settings preset name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="618"/>
+        <location filename="../qjackctlSetup.cpp" line="640"/>
         <source>Set active patchbay definition file</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="620"/>
+        <location filename="../qjackctlSetup.cpp" line="642"/>
         <source>Set default JACK audio server name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="622"/>
+        <location filename="../qjackctlSetup.cpp" line="644"/>
         <source>Show help about command line options</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="624"/>
+        <location filename="../qjackctlSetup.cpp" line="646"/>
         <source>Show version information</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="660"/>
+        <location filename="../qjackctlSetup.cpp" line="664"/>
+        <source>Start JACK audio server immediately.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="666"/>
+        <source>Set default settings preset name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="668"/>
+        <source>Set active patchbay definition file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="670"/>
+        <source>Set default JACK audio server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="674"/>
+        <source>Launch command with arguments.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="675"/>
+        <source>[command-and-args]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="685"/>
+        <location filename="../qjackctlSetup.cpp" line="749"/>
         <source>Option -p requires an argument (preset).</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="669"/>
+        <location filename="../qjackctlSetup.cpp" line="694"/>
+        <location filename="../qjackctlSetup.cpp" line="758"/>
         <source>Option -a requires an argument (path).</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="679"/>
+        <location filename="../qjackctlSetup.cpp" line="704"/>
+        <location filename="../qjackctlSetup.cpp" line="768"/>
         <source>Option -n requires an argument (name).</source>
         <translation></translation>
     </message>
@@ -204,6 +237,14 @@
         <location filename="../qjackctlAboutForm.cpp" line="109"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>条件の元で、あなたはこのプログラムを再配布かつ/あるいは変更できます。</translation>
+    </message>
+</context>
+<context>
+    <name>qjackctlApplication</name>
+    <message>
+        <location filename="../qjackctl.cpp" line="115"/>
+        <source>JACK: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

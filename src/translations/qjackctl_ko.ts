@@ -27,63 +27,96 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="50"/>
+        <location filename="../qjackctlSetup.cpp" line="58"/>
         <source>(default)</source>
         <translatorcomment>DO NOT TRANSLATE - https://github.com/rncbc/qjackctl/issues/38</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="609"/>
+        <location filename="../qjackctlSetup.cpp" line="631"/>
         <source>Usage: %1 [options] [command-and-args]</source>
         <translation>사용법: %1 [옵션] [명령-및-인수]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="612"/>
+        <location filename="../qjackctlSetup.cpp" line="634"/>
         <source>Options:</source>
         <translation>옵션:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="614"/>
+        <location filename="../qjackctlSetup.cpp" line="636"/>
         <source>Start JACK audio server immediately</source>
         <translation>JACK 오디오 서버 즉시 시작</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="616"/>
+        <location filename="../qjackctlSetup.cpp" line="638"/>
         <source>Set default settings preset name</source>
         <translation>기본 설정 사전설정 이름 지정</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="618"/>
+        <location filename="../qjackctlSetup.cpp" line="640"/>
         <source>Set active patchbay definition file</source>
         <translation>활성 패치베이 정의 파일 지정</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="620"/>
+        <location filename="../qjackctlSetup.cpp" line="642"/>
         <source>Set default JACK audio server name</source>
         <translation>기본 JACK 오디오 서버 이름 지정</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="622"/>
+        <location filename="../qjackctlSetup.cpp" line="644"/>
         <source>Show help about command line options</source>
         <translation>명령줄 옵션에 대한 도움말 표시</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="624"/>
+        <location filename="../qjackctlSetup.cpp" line="646"/>
         <source>Show version information</source>
         <translation>버전 정보 표시</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="660"/>
+        <location filename="../qjackctlSetup.cpp" line="664"/>
+        <source>Start JACK audio server immediately.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="666"/>
+        <source>Set default settings preset name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="668"/>
+        <source>Set active patchbay definition file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="670"/>
+        <source>Set default JACK audio server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="674"/>
+        <source>Launch command with arguments.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="675"/>
+        <source>[command-and-args]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="685"/>
+        <location filename="../qjackctlSetup.cpp" line="749"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>옵션 -p에는 인수(사전설정)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="669"/>
+        <location filename="../qjackctlSetup.cpp" line="694"/>
+        <location filename="../qjackctlSetup.cpp" line="758"/>
         <source>Option -a requires an argument (path).</source>
         <translation>옵션 -a에는 인수(경로)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="679"/>
+        <location filename="../qjackctlSetup.cpp" line="704"/>
+        <location filename="../qjackctlSetup.cpp" line="768"/>
         <source>Option -n requires an argument (name).</source>
         <translation>옵션 -n에는 인수(이름)가 필요합니다.</translation>
     </message>
@@ -204,6 +237,14 @@
         <location filename="../qjackctlAboutForm.cpp" line="109"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>버전 2 이상의 조건에 따라 재분배 및/또는 수정할 수 있습니다.&lt;br&gt;&lt;br&gt;한국어 번역: 이정희 &amp;lt;daemul72@gmail.com&amp;gt;.</translation>
+    </message>
+</context>
+<context>
+    <name>qjackctlApplication</name>
+    <message>
+        <location filename="../qjackctl.cpp" line="115"/>
+        <source>JACK: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
