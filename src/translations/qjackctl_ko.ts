@@ -44,52 +44,36 @@
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="636"/>
-        <source>Start JACK audio server immediately</source>
-        <translation>JACK 오디오 서버 즉시 시작</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="638"/>
-        <source>Set default settings preset name</source>
-        <translation>기본 설정 사전설정 이름 지정</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="640"/>
-        <source>Set active patchbay definition file</source>
-        <translation>활성 패치베이 정의 파일 지정</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="642"/>
-        <source>Set default JACK audio server name</source>
-        <translation>기본 JACK 오디오 서버 이름 지정</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="644"/>
-        <source>Show help about command line options</source>
-        <translation>명령줄 옵션에 대한 도움말 표시</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="646"/>
-        <source>Show version information</source>
-        <translation>버전 정보 표시</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="644"/>
+        <source>Show help about command line options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="646"/>
+        <source>Show version information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -242,7 +226,7 @@
 <context>
     <name>qjackctlApplication</name>
     <message>
-        <location filename="../qjackctl.cpp" line="115"/>
+        <location filename="../qjackctl.cpp" line="120"/>
         <source>JACK: %1</source>
         <translation type="unfinished"></translation>
     </message>

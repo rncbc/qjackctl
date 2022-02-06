@@ -44,37 +44,36 @@
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="636"/>
-        <source>Start JACK audio server immediately</source>
-        <translation>JACK audioserver spustit okamžitě</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="644"/>
-        <source>Show help about command line options</source>
-        <translation>Ukázat nápovědu k volbám (argumentům) příkazového řádku</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="646"/>
-        <source>Show version information</source>
-        <translation>Ukázat informace o verzi</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="644"/>
+        <source>Show help about command line options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="646"/>
+        <source>Show version information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -94,25 +93,10 @@
         <translation>Volba -p vyžaduje argument (preset, přednastavení).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="638"/>
-        <source>Set default settings preset name</source>
-        <translation>Určit název přednastavení výchozího nastavení</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="640"/>
-        <source>Set active patchbay definition file</source>
-        <translation>Nastavit soubor s vymezením činné zapojovací desky</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetup.cpp" line="694"/>
         <location filename="../qjackctlSetup.cpp" line="758"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Volba -a vyžaduje argument (cesta).</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="642"/>
-        <source>Set default JACK audio server name</source>
-        <translation>Nastavit výchozí název pro zvukový server JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="704"/>
@@ -242,7 +226,7 @@
 <context>
     <name>qjackctlApplication</name>
     <message>
-        <location filename="../qjackctl.cpp" line="115"/>
+        <location filename="../qjackctl.cpp" line="120"/>
         <source>JACK: %1</source>
         <translation type="unfinished"></translation>
     </message>

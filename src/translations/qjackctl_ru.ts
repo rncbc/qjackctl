@@ -27,21 +27,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="644"/>
-        <source>Show help about command line options</source>
-        <translation>Показать справку по использованию параметров командной строки</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="636"/>
-        <source>Start JACK audio server immediately</source>
-        <translation>Немедленно запустить сервер JACK</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="646"/>
-        <source>Show version information</source>
-        <translation>Показать информацию о версии</translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
         <location filename="../qjackctlSetup.cpp" line="749"/>
         <source>Option -p requires an argument (preset).</source>
@@ -64,33 +49,37 @@
         <translation>Ключи:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="638"/>
-        <source>Set default settings preset name</source>
-        <translation>Указать название профиля с параметрами по умолчанию</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="640"/>
-        <source>Set active patchbay definition file</source>
-        <translation>Указать файл описания активного коммутатора</translation>
-    </message>
-    <message>
+        <location filename="../qjackctlSetup.cpp" line="636"/>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="644"/>
+        <source>Show help about command line options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="646"/>
+        <source>Show version information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -108,11 +97,6 @@
         <location filename="../qjackctlSetup.cpp" line="758"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Ключу -a необходим аргумент (расположение)</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlSetup.cpp" line="642"/>
-        <source>Set default JACK audio server name</source>
-        <translation>Установить используемое по умолчанию название сервера JACK</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="704"/>
@@ -243,7 +227,7 @@
 <context>
     <name>qjackctlApplication</name>
     <message>
-        <location filename="../qjackctl.cpp" line="115"/>
+        <location filename="../qjackctl.cpp" line="120"/>
         <source>JACK: %1</source>
         <translation type="unfinished"></translation>
     </message>

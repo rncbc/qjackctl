@@ -633,17 +633,17 @@ void qjackctlSetup::print_usage ( const QString& arg0 )
 	out << QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE) + sEol;
 	out << QObject::tr("Options:") + sEol;
 	out << "  -s, --start" + sEot +
-		QObject::tr("Start JACK audio server immediately") + sEol;
+		QObject::tr("Start JACK audio server immediately.") + sEol;
 	out << "  -p, --preset=[label]" + sEot +
-		QObject::tr("Set default settings preset name") + sEol;
+		QObject::tr("Set default settings preset name.") + sEol;
 	out << "  -a, --active-patchbay=[path]" + sEot +
-		QObject::tr("Set active patchbay definition file") + sEol;
+		QObject::tr("Set active patchbay definition file.") + sEol;
 	out << "  -n, --server-name=[label]" + sEot +
-		QObject::tr("Set default JACK audio server name") + sEol;
+		QObject::tr("Set default JACK audio server name.") + sEol;
 	out << "  -h, --help" + sEot +
-		QObject::tr("Show help about command line options") + sEol;
+		QObject::tr("Show help about command line options.") + sEol;
 	out << "  -v, --version" + sEot +
-		QObject::tr("Show version information") + sEol;
+		QObject::tr("Show version information.") + sEol;
 }
 
 #endif

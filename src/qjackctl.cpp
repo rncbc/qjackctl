@@ -32,9 +32,14 @@
 #include <QLibraryInfo>
 #include <QTranslator>
 #include <QLocale>
-#include <QCoreApplication>
 
 #include <QSessionManager>
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+#ifdef CONFIG_JACK_VERSION
+#include <jack/jack.h>
+#endif
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(4, 5, 0)
 namespace Qt {

@@ -111,7 +111,6 @@ public:
 
 	// Command line arguments parser.
 	bool parse_args(const QStringList& args);
-	// Command line usage helper.
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
 	void show_error(const QString& msg);
 #else
