@@ -134,7 +134,7 @@ void qjackctlSetup::loadSetup (void)
 	iMessagesLimitLines      = m_settings.value("/MessagesLimitLines", 1000).toInt();
 	sDisplayFont1            = m_settings.value("/DisplayFont1").toString();
 	sDisplayFont2            = m_settings.value("/DisplayFont2").toString();
-	bDisplayEffect           = m_settings.value("/DisplayEffect", true).toBool();
+	bDisplayEffect           = m_settings.value("/DisplayEffect", false).toBool();
 	bDisplayBlink            = m_settings.value("/DisplayBlink", true).toBool();
 	sCustomColorTheme        = m_settings.value("/CustomColorTheme", sCustomColorTheme).toString();
 	sCustomStyleTheme        = m_settings.value("/CustomStyleTheme", sCustomStyleTheme).toString();
