@@ -1,6 +1,7 @@
 <RCC version="1.0">
  <qresource>
   <file>images/qjackctl.png</file>
+  <file>images/qjackctl.svg</file>
   <file>images/about1.png</file>
   <file>images/accept1.png</file>
   <file>images/aclienti.png</file>

@@ -30,7 +30,7 @@
    </rect>
   </property>
   <property name="windowIcon" >
-   <iconset resource="qjackctl.qrc" >:/images/qjackctl.png</iconset>
+   <iconset resource="qjackctl.qrc" >:/images/qjackctl.svg</iconset>
   </property>
   <layout class="QGridLayout" >
    <property name="margin" >
