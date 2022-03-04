@@ -408,6 +408,9 @@ public:
 	void setPort2(qjackctlGraphPort *port);
 	qjackctlGraphPort *port2() const;
 
+	// Active disconnection.
+	void disconnect();
+
 	// Path/shaper updaters.
 	void updatePathTo(const QPointF& pos);
 	void updatePath();

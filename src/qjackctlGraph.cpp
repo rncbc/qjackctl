@@ -972,11 +972,6 @@ qjackctlGraphConnect::qjackctlGraphConnect (void)
 // Destructor.
 qjackctlGraphConnect::~qjackctlGraphConnect (void)
 {
-	if (m_port1)
-		m_port1->removeConnect(this);
-	if (m_port2)
-		m_port2->removeConnect(this);
-
 	// No actual need to destroy any children here...
 	//
 	//QGraphicsPathItem::setGraphicsEffect(nullptr);
@@ -1023,6 +1018,21 @@ void qjackctlGraphConnect::setPort2 ( qjackctlGraphPort *port )
 qjackctlGraphPort *qjackctlGraphConnect::port2 (void) const
 {
 	return m_port2;
+}
+
+
+// Active disconnection.
+void qjackctlGraphConnect::disconnect (void)
+{
+	if (m_port1) {
+		m_port1->removeConnect(this);
+		m_port1 = nullptr;
+	}
+
+	if (m_port2) {
+		m_port2->removeConnect(this);
+		m_port2 = nullptr;
+	}
 }
 
 
@@ -1781,6 +1791,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 				}
 			}
 			// Done with the hovering connection...
+			m_connect->disconnect();
 			delete m_connect;
 			m_connect = nullptr;
 		}
@@ -2352,6 +2363,7 @@ void qjackctlGraphCanvas::clear (void)
 		m_selected.clear();
 	}
 	if (m_connect) {
+		m_connect->disconnect();
 		delete m_connect;
 		m_connect = nullptr;
 	}
@@ -2442,8 +2454,10 @@ void qjackctlGraphSect::removeItem ( qjackctlGraphItem *item )
 {
 	if (item->type() == qjackctlGraphConnect::Type) {
 		qjackctlGraphConnect *connect = static_cast<qjackctlGraphConnect *> (item);
-		if (connect)
+		if (connect) {
+			connect->disconnect();
 			m_connects.removeAll(connect);
+		}
 	}
 
 	m_canvas->removeItem(item);
