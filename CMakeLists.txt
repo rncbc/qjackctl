@@ -275,12 +275,11 @@ endif ()
 
 add_subdirectory (src)
 
-if (NOT WIN32)
-  configure_file (qjackctl.spec.in qjackctl.spec IMMEDIATE @ONLY)
 
-  install (FILES qjackctl.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
-  install (FILES qjackctl.fr.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/fr/man1 RENAME qjackctl.1)
+if (UNIX AND NOT APPLE)
+  configure_file (${PROJECT_NAME}.spec.in ${PROJECT_NAME}.spec IMMEDIATE @ONLY)
 endif ()
+
 
 if (WIN32)
   set(CPACK_GENERATOR ZIP)
