@@ -1069,7 +1069,7 @@ Are you sure?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="63"/>
-        <location filename="../qjackctlMainForm.cpp" line="4140"/>
+        <location filename="../qjackctlMainForm.cpp" line="4144"/>
         <source>&amp;Start</source>
         <translation>시작(&amp;S)</translation>
     </message>
@@ -1136,7 +1136,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="390"/>
         <location filename="../qjackctlMainForm.cpp" line="594"/>
-        <location filename="../qjackctlMainForm.cpp" line="4280"/>
+        <location filename="../qjackctlMainForm.cpp" line="4284"/>
         <source>&amp;Quit</source>
         <translation>종료(&amp;Q)</translation>
     </message>
@@ -1147,7 +1147,7 @@ Are you sure?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="421"/>
-        <location filename="../qjackctlMainForm.cpp" line="4180"/>
+        <location filename="../qjackctlMainForm.cpp" line="4184"/>
         <source>S&amp;ession</source>
         <translation>세션(&amp;E)</translation>
     </message>
@@ -1158,7 +1158,7 @@ Are you sure?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="455"/>
-        <location filename="../qjackctlMainForm.cpp" line="4225"/>
+        <location filename="../qjackctlMainForm.cpp" line="4229"/>
         <source>&amp;Messages</source>
         <translation>메시지(&amp;M)</translation>
     </message>
@@ -1170,7 +1170,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="489"/>
         <location filename="../qjackctlMainForm.cpp" line="598"/>
-        <location filename="../qjackctlMainForm.cpp" line="4269"/>
+        <location filename="../qjackctlMainForm.cpp" line="4273"/>
         <source>Set&amp;up...</source>
         <translation>설정(&amp;U)...</translation>
     </message>
@@ -1206,7 +1206,7 @@ Are you sure?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="625"/>
-        <location filename="../qjackctlMainForm.cpp" line="4252"/>
+        <location filename="../qjackctlMainForm.cpp" line="4256"/>
         <source>&amp;Rewind</source>
         <translation>되감기(&amp;R)</translation>
     </message>
@@ -1227,7 +1227,7 @@ Are you sure?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="684"/>
-        <location filename="../qjackctlMainForm.cpp" line="4258"/>
+        <location filename="../qjackctlMainForm.cpp" line="4262"/>
         <source>&amp;Play</source>
         <translation>재생하기(&amp;P)</translation>
     </message>
@@ -1238,7 +1238,7 @@ Are you sure?</source>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="715"/>
-        <location filename="../qjackctlMainForm.cpp" line="4261"/>
+        <location filename="../qjackctlMainForm.cpp" line="4265"/>
         <source>Pa&amp;use</source>
         <translation>일시 중지(&amp;U)</translation>
     </message>
@@ -1260,7 +1260,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlMainForm.ui" line="774"/>
         <location filename="../qjackctlMainForm.cpp" line="602"/>
-        <location filename="../qjackctlMainForm.cpp" line="4275"/>
+        <location filename="../qjackctlMainForm.cpp" line="4279"/>
         <source>Ab&amp;out...</source>
         <translation>정보(&amp;O)...</translation>
     </message>
@@ -1285,7 +1285,7 @@ ALSA MIDI 패치베이는 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="956"/>
-        <location filename="../qjackctlMainForm.cpp" line="4288"/>
+        <location filename="../qjackctlMainForm.cpp" line="4292"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
@@ -1752,177 +1752,177 @@ Please check the messages window for more info.</source>
 자세한 내용은 메시지 창을 확인하세요.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3283"/>
+        <location filename="../qjackctlMainForm.cpp" line="3287"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
         <translation>서버 구성이 &quot;%1&quot;에 저장되었습니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3323"/>
+        <location filename="../qjackctlMainForm.cpp" line="3327"/>
         <source>Client activated.</source>
         <translation>클라이언트가 활성화되었습니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3334"/>
+        <location filename="../qjackctlMainForm.cpp" line="3338"/>
         <source>Post-startup script...</source>
         <translation>스타트업 후 스크립트...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3335"/>
+        <location filename="../qjackctlMainForm.cpp" line="3339"/>
         <source>Post-startup script terminated</source>
         <translation>스타트업 후 스크립트 종료됨</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3343"/>
+        <location filename="../qjackctlMainForm.cpp" line="3347"/>
         <source>Command line argument...</source>
         <translation>명령줄 인수...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3344"/>
+        <location filename="../qjackctlMainForm.cpp" line="3348"/>
         <source>Command line argument started</source>
         <translation>명령줄 인수 시작됨</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3366"/>
+        <location filename="../qjackctlMainForm.cpp" line="3370"/>
         <source>Client deactivated.</source>
         <translation>클라이언트가 비활성화되었습니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3645"/>
+        <location filename="../qjackctlMainForm.cpp" line="3649"/>
         <source>Transport rewind.</source>
         <translation>트랜스포트 되감기.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3666"/>
+        <location filename="../qjackctlMainForm.cpp" line="3670"/>
         <source>Transport backward.</source>
         <translation>트랜스포트 역방향.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3695"/>
-        <location filename="../qjackctlMainForm.cpp" line="3836"/>
-        <location filename="../qjackctlMainForm.cpp" line="3994"/>
+        <location filename="../qjackctlMainForm.cpp" line="3699"/>
+        <location filename="../qjackctlMainForm.cpp" line="3840"/>
+        <location filename="../qjackctlMainForm.cpp" line="3998"/>
         <source>Starting</source>
         <translation>시작하는 중</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3697"/>
+        <location filename="../qjackctlMainForm.cpp" line="3701"/>
         <source>Transport start.</source>
         <translation>트랜스포트 시작.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3711"/>
-        <location filename="../qjackctlMainForm.cpp" line="4001"/>
+        <location filename="../qjackctlMainForm.cpp" line="3715"/>
+        <location filename="../qjackctlMainForm.cpp" line="4005"/>
         <source>Stopping</source>
         <translation>중지하는 중</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3713"/>
+        <location filename="../qjackctlMainForm.cpp" line="3717"/>
         <source>Transport stop.</source>
         <translation>트랜스포트 정지.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3734"/>
+        <location filename="../qjackctlMainForm.cpp" line="3738"/>
         <source>Transport forward.</source>
         <translation>트랜스포트 정방향.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3751"/>
-        <location filename="../qjackctlMainForm.cpp" line="4005"/>
+        <location filename="../qjackctlMainForm.cpp" line="3755"/>
+        <location filename="../qjackctlMainForm.cpp" line="4009"/>
         <source>Stopped</source>
         <translation>중지됨</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3794"/>
+        <location filename="../qjackctlMainForm.cpp" line="3798"/>
         <source>%1 (%2%)</source>
         <translation>%1 (%2%)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3798"/>
+        <location filename="../qjackctlMainForm.cpp" line="3802"/>
         <source>%1 (%2%, %3 xruns)</source>
         <translation>%1 (%2%, %3 xruns)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3806"/>
+        <location filename="../qjackctlMainForm.cpp" line="3810"/>
         <source>%1 %</source>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3808"/>
+        <location filename="../qjackctlMainForm.cpp" line="3812"/>
         <source>%1 Hz</source>
         <translation>%1 Hz</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3810"/>
+        <location filename="../qjackctlMainForm.cpp" line="3814"/>
         <source>%1 frames</source>
         <translation>%1 프레임</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3821"/>
+        <location filename="../qjackctlMainForm.cpp" line="3825"/>
         <source>Yes</source>
         <translation>예</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3821"/>
+        <location filename="../qjackctlMainForm.cpp" line="3825"/>
         <source>No</source>
         <translation>아니오</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3826"/>
+        <location filename="../qjackctlMainForm.cpp" line="3830"/>
         <source>FW</source>
         <translation>FW</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3829"/>
+        <location filename="../qjackctlMainForm.cpp" line="3833"/>
         <source>RT</source>
         <translation>RT</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3839"/>
+        <location filename="../qjackctlMainForm.cpp" line="3843"/>
         <source>Rolling</source>
         <translation>롤링</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3842"/>
+        <location filename="../qjackctlMainForm.cpp" line="3846"/>
         <source>Looping</source>
         <translation>루핑</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3872"/>
+        <location filename="../qjackctlMainForm.cpp" line="3876"/>
         <source>%1 msec</source>
         <translation>%1 ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3879"/>
+        <location filename="../qjackctlMainForm.cpp" line="3883"/>
         <source>XRUN callback (%1 skipped).</source>
         <translation>XRUN 콜백 (%1 건너뜀).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3998"/>
+        <location filename="../qjackctlMainForm.cpp" line="4002"/>
         <source>Started</source>
         <translation>시작됨</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4008"/>
+        <location filename="../qjackctlMainForm.cpp" line="4012"/>
         <source>Active</source>
         <translation>활성</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4011"/>
+        <location filename="../qjackctlMainForm.cpp" line="4015"/>
         <source>Activating</source>
         <translation>활성 상태</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4016"/>
+        <location filename="../qjackctlMainForm.cpp" line="4020"/>
         <source>Inactive</source>
         <translation>비활성</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4130"/>
-        <location filename="../qjackctlMainForm.cpp" line="4185"/>
+        <location filename="../qjackctlMainForm.cpp" line="4134"/>
+        <location filename="../qjackctlMainForm.cpp" line="4189"/>
         <source>&amp;Hide</source>
         <translation>숨김(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4881"/>
+        <location filename="../qjackctlMainForm.cpp" line="4885"/>
         <source>D-BUS: GetParameterConstraint(&apos;%1&apos;):
 
 %2.
@@ -1933,89 +1933,89 @@ Please check the messages window for more info.</source>
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4126"/>
+        <location filename="../qjackctlMainForm.cpp" line="4130"/>
         <source>Mi&amp;nimize</source>
         <translation>최소화(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4131"/>
-        <location filename="../qjackctlMainForm.cpp" line="4185"/>
+        <location filename="../qjackctlMainForm.cpp" line="4135"/>
+        <location filename="../qjackctlMainForm.cpp" line="4189"/>
         <source>S&amp;how</source>
         <translation>표시(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4127"/>
+        <location filename="../qjackctlMainForm.cpp" line="4131"/>
         <source>Rest&amp;ore</source>
         <translation>복원(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4143"/>
+        <location filename="../qjackctlMainForm.cpp" line="4147"/>
         <source>&amp;Stop</source>
         <translation>중지(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4146"/>
+        <location filename="../qjackctlMainForm.cpp" line="4150"/>
         <source>&amp;Reset</source>
         <translation>재설정(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4152"/>
+        <location filename="../qjackctlMainForm.cpp" line="4156"/>
         <source>&amp;Presets</source>
         <translation>사전설정(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4189"/>
+        <location filename="../qjackctlMainForm.cpp" line="4193"/>
         <source>&amp;Load...</source>
         <translation>불러오기(&amp;L)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4197"/>
+        <location filename="../qjackctlMainForm.cpp" line="4201"/>
         <source>&amp;Save...</source>
         <translation>저장(&amp;S)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4202"/>
+        <location filename="../qjackctlMainForm.cpp" line="4206"/>
         <source>Save and &amp;Quit...</source>
         <translation>저장 후 종료(&amp;Q)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4206"/>
+        <location filename="../qjackctlMainForm.cpp" line="4210"/>
         <source>Save &amp;Template...</source>
         <translation>탬플릿 저장(&amp;T)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4212"/>
+        <location filename="../qjackctlMainForm.cpp" line="4216"/>
         <source>&amp;Versioning</source>
         <translation>버전 관리(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4219"/>
+        <location filename="../qjackctlMainForm.cpp" line="4223"/>
         <source>Re&amp;fresh</source>
         <translation>새로 고침(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4231"/>
+        <location filename="../qjackctlMainForm.cpp" line="4235"/>
         <source>St&amp;atus</source>
         <translation>상태(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4241"/>
+        <location filename="../qjackctlMainForm.cpp" line="4245"/>
         <source>&amp;Connections</source>
         <translation>연결(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4245"/>
+        <location filename="../qjackctlMainForm.cpp" line="4249"/>
         <source>Patch&amp;bay</source>
         <translation>패치베이(&amp;B)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="523"/>
-        <location filename="../qjackctlMainForm.cpp" line="4237"/>
+        <location filename="../qjackctlMainForm.cpp" line="4241"/>
         <source>&amp;Graph</source>
         <translation>그래프(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4250"/>
+        <location filename="../qjackctlMainForm.cpp" line="4254"/>
         <source>&amp;Transport</source>
         <translation>트랜스포트(&amp;T)</translation>
     </message>
@@ -2032,14 +2032,14 @@ restarting the JACK audio server.</source>
         <translation>JACK 오디오 서버를 다시 시작하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4290"/>
+        <location filename="../qjackctlMainForm.cpp" line="4294"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
         <translation>일부 설정은 다음에 이 프로그램을 
 시작할 때만 유효합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4588"/>
+        <location filename="../qjackctlMainForm.cpp" line="4592"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -2050,7 +2050,7 @@ the next time you start this program.</source>
 (%4)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4619"/>
+        <location filename="../qjackctlMainForm.cpp" line="4623"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -2061,7 +2061,7 @@ the next time you start this program.</source>
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4859"/>
+        <location filename="../qjackctlMainForm.cpp" line="4863"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.

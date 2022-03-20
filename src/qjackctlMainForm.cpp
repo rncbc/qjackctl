@@ -3203,6 +3203,10 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 				tr("Could not connect to JACK server as client.\n"
 				"- %1\nPlease check the messages window for more info.")
 				.arg(errs.join("\n- ")));
+			// To stop timed client initialization delay...
+			m_iTimerDelay += (m_iStartDelay + 1);
+			// Refresh status (with dashes?)
+			refreshStatus();
 		}
 		return false;
 	}
