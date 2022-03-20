@@ -1,7 +1,7 @@
 // qjackctlGraphForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -246,21 +246,29 @@ qjackctlGraphForm::qjackctlGraphForm (
 
 	m_ui.viewColorsJackAudioAction->setData(qjackctlJackGraph::audioPortType());
 	m_ui.viewColorsJackMidiAction->setData(qjackctlJackGraph::midiPortType());
-#ifdef CONFIG_ALSA_SEQ
-	m_ui.viewColorsAlsaMidiAction->setData(qjackctlAlsaGraph::midiPortType());
-#endif
 
 	int iAddSeparator = 0;
 #ifdef CONFIG_JACK_CV
 	m_ui.viewColorsJackCvAction->setData(qjackctlJackGraph::cvPortType());
+	m_ui.viewColorsMenu->insertAction(
+		m_ui.viewColorsResetAction, m_ui.viewColorsJackCvAction);
 	++iAddSeparator;
 #endif
 #ifdef CONFIG_JACK_OSC
 	m_ui.viewColorsJackOscAction->setData(qjackctlJackGraph::oscPortType());
+	m_ui.viewColorsMenu->insertAction(
+		m_ui.viewColorsResetAction, m_ui.viewColorsJackOscAction);
 	++iAddSeparator;
 #endif
 	if (iAddSeparator > 0)
 		m_ui.viewColorsMenu->insertSeparator(m_ui.viewColorsResetAction);
+
+#ifdef CONFIG_ALSA_SEQ
+	m_ui.viewColorsAlsaMidiAction->setData(qjackctlAlsaGraph::midiPortType());
+	m_ui.viewColorsMenu->insertAction(
+		m_ui.viewColorsResetAction, m_ui.viewColorsAlsaMidiAction);
+	m_ui.viewColorsMenu->insertSeparator(m_ui.viewColorsResetAction);
+#endif
 
 	QObject::connect(m_ui.viewColorsJackAudioAction,
 		SIGNAL(triggered(bool)),
@@ -268,29 +276,20 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QObject::connect(m_ui.viewColorsJackMidiAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewColorsAction()));
-#ifdef CONFIG_ALSA_SEQ
-	QObject::connect(m_ui.viewColorsAlsaMidiAction,
-		SIGNAL(triggered(bool)),
-		SLOT(viewColorsAction()));
-#else
-	m_ui.viewColorsMenu->removeAction(m_ui.viewColorsAlsaMidiAction);
-	m_ui.viewColorsAlsaMidiAction->setDisabled(true);
-#endif
 #ifdef CONFIG_JACK_CV
 	QObject::connect(m_ui.viewColorsJackCvAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewColorsAction()));
-#else
-	m_ui.viewColorsMenu->removeAction(m_ui.viewColorsJackCvAction);
-	m_ui.viewColorsJackCvAction->setDisabled(true);
 #endif
 #ifdef CONFIG_JACK_OSC
 	QObject::connect(m_ui.viewColorsJackOscAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewColorsAction()));
-#else
-	m_ui.viewColorsMenu->removeAction(m_ui.viewColorsJackOscAction);
-	m_ui.viewColorsJackOscAction->setDisabled(true);
+#endif
+#ifdef CONFIG_ALSA_SEQ
+	QObject::connect(m_ui.viewColorsAlsaMidiAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewColorsAction()));
 #endif
 	QObject::connect(m_ui.viewColorsResetAction,
 		SIGNAL(triggered(bool)),

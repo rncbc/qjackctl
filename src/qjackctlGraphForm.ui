@@ -2,7 +2,7 @@
  <author>rncbc aka Rui Nuno Capela</author>
  <comment>JACK Audio Connection Kit - Qt GUI Interface.
 
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -103,10 +103,7 @@
      </property>
      <addaction name="viewColorsJackAudioAction"/>
      <addaction name="viewColorsJackMidiAction"/>
-     <addaction name="viewColorsAlsaMidiAction"/>
      <addaction name="separator"/>
-     <addaction name="viewColorsJackCvAction"/>
-     <addaction name="viewColorsJackOscAction"/>
      <addaction name="viewColorsResetAction"/>
     </widget>
     <widget class="QMenu" name="viewSortMenu">
@@ -557,7 +554,7 @@
   </action>
   <action name="viewColorsAlsaMidiAction">
    <property name="text">
-    <string>&amp;ALSA MIDI...</string>
+    <string>ALSA M&amp;IDI...</string>
    </property>
    <property name="iconText">
     <string>ALSA MIDI</string>
