@@ -1,7 +1,7 @@
 // qjackctlGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1088,7 +1088,8 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 
 void qjackctlGraphConnect::updatePath (void)
 {
-	updatePathTo(m_port2->portPos());
+	if (m_port2)
+		updatePathTo(m_port2->portPos());
 }
 
 
