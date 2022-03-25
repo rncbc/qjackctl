@@ -1,7 +1,7 @@
 // qjackctlSystemTray.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -41,7 +41,11 @@ qjackctlSystemTray::qjackctlSystemTray ( QWidget *pParent )
 {
 	// Set things inherited...
 	if (pParent) {
+	#if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
+		m_icon = QIcon(":/images/qjackctl.png");
+	#else
 		m_icon = pParent->windowIcon();
+	#endif
 		setBackground(Qt::transparent); // also updates pixmap.
 		QSystemTrayIcon::setIcon(m_icon);
 		QSystemTrayIcon::setToolTip(pParent->windowTitle());
