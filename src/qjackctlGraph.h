@@ -492,6 +492,9 @@ public:
 	qjackctlGraphNode *findNode(
 		const QString& name, qjackctlGraphItem::Mode mode, uint type = 0) const;
 
+	// Whether it's in the middle of something...
+	bool isBusy() const;
+
 	// Port (dis)connections notifiers.
 	void emitConnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void emitDisconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);

@@ -728,11 +728,16 @@ void qjackctlGraphForm::alsa_changed (void)
 // Graph refreshner.
 void qjackctlGraphForm::refresh (void)
 {
+	if (m_ui.graphCanvas->isBusy())
+		return;
+
+	int nchanged = 0;
+
 	if (m_jack_changed > 0) {
 		m_jack_changed = 0;
 		if (m_jack)
 			m_jack->updateItems();
-		stabilize();
+		++nchanged;
 	}
 #ifdef CONFIG_ALSA_SEQ
 	else
@@ -740,9 +745,12 @@ void qjackctlGraphForm::refresh (void)
 		m_alsa_changed = 0;
 		if (m_alsa)
 			m_alsa->updateItems();
-		stabilize();
+		++nchanged;
 	}
 #endif
+
+	if (nchanged > 0)
+		stabilize();
 }
 
 
