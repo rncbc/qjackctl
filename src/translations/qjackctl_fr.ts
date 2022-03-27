@@ -52,45 +52,45 @@
         <location filename="../qjackctlSetup.cpp" line="636"/>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrez le serveur audio JACK immédiatement.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir le nom de la présélection des paramètres par défaut.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètre le fichier de définition de patchbay actif.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètre le fichier de définition de baie de brassage active.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="644"/>
         <source>Show help about command line options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche l&apos;aide à propos des options en ligne de commande.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="646"/>
         <source>Show version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les informations de version.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="674"/>
         <source>Launch command with arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer la commande avec des arguments.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="675"/>
         <source>[command-and-args]</source>
-        <translation type="unfinished"></translation>
+        <translation>[commande-et-arguments]</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="694"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../qjackctl.cpp" line="124"/>
         <source>JACK: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK : %1</translation>
     </message>
 </context>
 <context>
@@ -856,7 +856,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="557"/>
         <source>ALSA M&amp;IDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA M&amp;IDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="560"/>
