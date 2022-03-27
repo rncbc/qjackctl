@@ -64,7 +64,7 @@
         <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
-        <translation>Définit le fichier de définition de patchbay actif.</translation>
+        <translation>Paramètre le fichier de définition de patchbay actif.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../qjackctl.cpp" line="124"/>
         <source>JACK: %1</source>
-        <translation>JACK : %1/translation>
+        <translation>JACK : %1</translation>
     </message>
 </context>
 <context>
