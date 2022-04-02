@@ -1496,7 +1496,8 @@ qjackctlGraphNode *qjackctlGraphCanvas::findNode (
 // Whether it's in the middle of something...
 bool qjackctlGraphCanvas::isBusy (void) const
 {
-	return (m_connect != nullptr || m_edit_item != nullptr);
+	return (m_state != DragNone || m_connect   != nullptr
+		||  m_item  != nullptr  || m_edit_item != nullptr);
 }
 
 
