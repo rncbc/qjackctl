@@ -46,45 +46,45 @@
         <location filename="../qjackctlSetup.cpp" line="636"/>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit zvukový server JACK okamžitě.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit název přednastavení výchozího nastavení.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit soubor s vymezením činné zapojovací desky.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit výchozí název zvukového serveru JACK.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="644"/>
         <source>Show help about command line options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat nápovědu k volbám příkazového řádku.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="646"/>
         <source>Show version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat informace o verzi.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="674"/>
         <source>Launch command with arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit příkaz s argumenty.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="675"/>
         <source>[command-and-args]</source>
-        <translation type="unfinished"></translation>
+        <translation>[příkaz a argumenty]</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../qjackctl.cpp" line="124"/>
         <source>JACK: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK: %1</translation>
     </message>
 </context>
 <context>
@@ -856,7 +856,7 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="557"/>
         <source>ALSA M&amp;IDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA M&amp;IDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="560"/>
@@ -1666,7 +1666,7 @@ Chcete uložit změny?</translation>
 &quot;%1&quot;
 
 Disabled.</source>
-        <translation>Nepodařilo se nahrát vymezení aktivní zapojovací desky.
+        <translation>Nepodařilo se nahrát vymezení činné zapojovací desky.
 
 &quot;%1&quot;
 
@@ -3991,12 +3991,12 @@ Jste si jistý, že chcete přepsat stávající složku?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2651"/>
         <source>Whether to issue a warning on active patchbay port disconnections.</source>
-        <translation>Vydat varování při odpojení činných přípojek zapojovací desky.</translation>
+        <translation>Vydat varování při odpojení přípojek činné zapojovací desky.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2654"/>
         <source>&amp;Warn on active patchbay disconnections</source>
-        <translation>&amp;Varovat při odpojení činných přípojek zapojovací desky</translation>
+        <translation>&amp;Varovat při odpojení činné zapojovací desky</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="2701"/>
@@ -4534,7 +4534,7 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1511"/>
         <source>Active Patchbay Definition</source>
-        <translation>Činné vymezení zapojovací desky</translation>
+        <translation>Vymezení činné zapojovací desky</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1513"/>
