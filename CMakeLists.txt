@@ -137,7 +137,7 @@ else ()
   find_package (QT QUIET NAMES Qt5)
 endif ()
 
-find_package (Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui Widgets Xml)
+find_package (Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui Widgets Xml Svg)
 
 if (CONFIG_XUNIQUE)
   find_package (Qt${QT_VERSION_MAJOR} COMPONENTS Network)
