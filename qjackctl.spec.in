@@ -81,6 +81,7 @@ BuildRequires:	libqt5-linguist-devel
 BuildRequires:	libjack-devel
 BuildRequires:	alsa-devel
 %endif
+BuildRequires:  patchelf
 
 %description
 JACK Audio Connection Kit - Qt GUI Interface: A simple Qt application
@@ -101,6 +102,7 @@ cmake --build build %{?_smp_mflags}
 %install
 DESTDIR="%{buildroot}" \
 cmake --install build
+patchelf --add-rpath %{_libdir}/pulseaudio %{buildroot}/%{_bindir}/%{name}
 
 %clean
 [ -d "%{buildroot}" -a "%{buildroot}" != "/" ] && %__rm -rf "%{buildroot}"
