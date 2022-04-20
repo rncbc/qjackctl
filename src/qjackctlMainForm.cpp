@@ -1569,7 +1569,7 @@ void qjackctlMainForm::startJack (void)
 			args.append("-X" + formatQuoted(m_preset.sMidiDriver));
 	#endif
 	}
-	if (bAlsa || bPortaudio) {
+	if (bAlsa || bCoreaudio || bPortaudio) {
 		switch (m_preset.iAudio) {
 		case QJACKCTL_DUPLEX:
 			if (!m_preset.sInDevice.isEmpty() || !m_preset.sOutDevice.isEmpty())
