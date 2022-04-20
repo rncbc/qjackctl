@@ -1128,13 +1128,13 @@ void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 		break;
 	}
 
-	bEnabled = (bInEnabled && (bAlsa || bSun || bOss || bPortaudio));
+	bEnabled = (bInEnabled && (bAlsa || bSun || bOss || bCoreaudio || bPortaudio));
 	m_ui.InDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.InDeviceComboBox->setEnabled(bEnabled);
 	if (!bEnabled)
 		setComboBoxCurrentText(m_ui.InDeviceComboBox, qjackctlSetup::defName());
 
-	bEnabled = (bOutEnabled && (bAlsa || bSun || bOss || bPortaudio));
+	bEnabled = (bOutEnabled && (bAlsa || bSun || bOss || bCoreaudio || bPortaudio));
 	m_ui.OutDeviceTextLabel->setEnabled(bEnabled);
 	m_ui.OutDeviceComboBox->setEnabled(bEnabled);
 	if (!bEnabled)
