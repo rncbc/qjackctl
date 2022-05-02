@@ -36,45 +36,45 @@
         <location filename="../qjackctlSetup.cpp" line="636"/>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrancar servidor de audio JACK inmediatamente.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer nombre preset configuración predeterminada.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer archivo definición patchbay activo.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer nombre servidor de audio JACK predeterminado.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="644"/>
         <source>Show help about command line options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar ayuda sobre opciones línea de comandos.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="646"/>
         <source>Show version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar información de versión.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="674"/>
         <source>Launch command with arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lanzar comando con argumentos.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="675"/>
         <source>[command-and-args]</source>
-        <translation type="unfinished"></translation>
+        <translation>[comando-y-args]</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
@@ -180,12 +180,12 @@
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="95"/>
         <source>Using: Qt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Usando: Qt %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="101"/>
         <source>JACK %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK %1</translation>
     </message>
     <message>
         <location filename="../qjackctlAboutForm.cpp" line="105"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../qjackctl.cpp" line="124"/>
         <source>JACK: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK: %1</translation>
     </message>
 </context>
 <context>
@@ -855,7 +855,7 @@ Está seguro?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="557"/>
         <source>ALSA M&amp;IDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA M&amp;IDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="560"/>
@@ -1617,7 +1617,10 @@ Desea guardar los cambios?</translation>
 
 %2.
 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>D-BUS: GetParameterConstraint(&apos;%1&apos;):
+
+%2.
+(%3)</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4132"/>
@@ -1742,7 +1745,9 @@ Desea detener el servidor de audio JACK?</translation>
         <source>%1 is about to terminate.
 
 Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 va a cerrarse.
+
+¿Está seguro?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="1870"/>
@@ -3086,7 +3091,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="117"/>
         <source>Save settings as current preset name</source>
-        <translation>Guardar configuraciones en el preset actual</translation>
+        <translation>Guardar configuración en el preset actual</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="136"/>
@@ -4388,12 +4393,12 @@ Do you want to apply the changes?</source>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="101"/>
         <source>Clear settings of current preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaciar configuración preset actual</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="104"/>
         <source>Clea&amp;r</source>
-        <translation type="unfinished"></translation>
+        <translation>Vacia&amp;r</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="653"/>
