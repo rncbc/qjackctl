@@ -16,9 +16,9 @@ Standards-Version: 3.9.7
 
 Package: qjackctl
 Architecture: any
-Depends: libjack0 | libjack-jackd2-0,
-  ${shlibs:Depends},
-  ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends},
+  qt6-qpa-plugins | libqt5opengl5,
+  libjack0 | libjack-jackd2-0
 Description: JACK Audio Connection Kit Qt GUI Interface.
   QjackCtl is a simple Qt application to control the JACK sound server
   (http://jackaudio.org), for the Linux Audio infrastructure.
