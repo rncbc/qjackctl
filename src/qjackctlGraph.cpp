@@ -1325,11 +1325,17 @@ qjackctlGraphItem *qjackctlGraphCanvas::currentItem (void) const
 {
 	qjackctlGraphItem *item = m_item;
 
-	if (item == nullptr) {
-		const QList<QGraphicsItem *>& list
-			= m_scene->selectedItems();
-		if (!list.isEmpty())
-			item = static_cast<qjackctlGraphItem *> (list.first());
+	if (item && item->type() == qjackctlGraphConnect::Type)
+		item = nullptr;
+
+ 	if (item == nullptr) {
+		foreach (QGraphicsItem *item2, m_scene->selectedItems()) {
+			if (item2->type() == qjackctlGraphConnect::Type)
+				continue;
+			item = static_cast<qjackctlGraphItem *> (item2);
+			if (item2->type() == qjackctlGraphNode::Type)
+				break;
+		}
 	}
 
 	return item;
@@ -2092,6 +2098,9 @@ void qjackctlGraphCanvas::renameItem (void)
 		}
 	}
 	else return;
+
+	m_selected_nodes = 0;
+	m_scene->clearSelection();
 
 	m_editor->show();
 	m_editor->setEnabled(true);

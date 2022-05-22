@@ -460,13 +460,13 @@ Sind Sie sicher?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1795"/>
-        <location filename="../qjackctlGraph.cpp" line="1922"/>
+        <location filename="../qjackctlGraph.cpp" line="1801"/>
+        <location filename="../qjackctlGraph.cpp" line="1928"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1994"/>
+        <location filename="../qjackctlGraph.cpp" line="2000"/>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -530,11 +530,6 @@ Sind Sie sicher?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="196"/>
-        <source>Ins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qjackctlGraphForm.ui" line="204"/>
         <source>&amp;Disconnect</source>
         <translation type="unfinished">&amp;Trennen</translation>
@@ -551,8 +546,13 @@ Sind Sie sicher?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qjackctlGraphForm.ui" line="196"/>
+        <source>Ctrl+C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qjackctlGraphForm.ui" line="216"/>
-        <source>Del</source>
+        <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -636,6 +636,11 @@ Sind Sie sicher?</translation>
         <location filename="../qjackctlGraphForm.ui" line="298"/>
         <location filename="../qjackctlGraphForm.ui" line="301"/>
         <source>Rename Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="304"/>
+        <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
