@@ -1064,12 +1064,12 @@ Bent u zeker?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="432"/>
+        <location filename="../qjackctlGraphForm.cpp" line="443"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="506"/>
+        <location filename="../qjackctlGraphForm.cpp" line="517"/>
         <source>Colors - %1</source>
         <translation type="unfinished"></translation>
     </message>

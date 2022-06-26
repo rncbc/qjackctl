@@ -1055,12 +1055,12 @@ Tem certeza?</translation>
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="432"/>
+        <location filename="../qjackctlGraphForm.cpp" line="443"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="506"/>
+        <location filename="../qjackctlGraphForm.cpp" line="517"/>
         <source>Colors - %1</source>
         <translation>Cores - %1</translation>
     </message>

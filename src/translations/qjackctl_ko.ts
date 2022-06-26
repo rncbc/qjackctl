@@ -1055,12 +1055,12 @@ Are you sure?</source>
         <translation>확대/축소</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="432"/>
+        <location filename="../qjackctlGraphForm.cpp" line="443"/>
         <source>Ready</source>
         <translation>준비 완료</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="506"/>
+        <location filename="../qjackctlGraphForm.cpp" line="517"/>
         <source>Colors - %1</source>
         <translation>색상 - %1</translation>
     </message>
