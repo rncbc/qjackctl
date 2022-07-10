@@ -240,6 +240,13 @@ bool qjackctlApplication::setup ( const QString& sServerName )
 	m_pDisplay = QX11Info::display();
 	if (m_pDisplay) {
 		QString sUnique = QJACKCTL_XUNIQUE;
+		QString sUserName = QString::fromUtf8(::getenv("USER"));
+		if (sUserName.isEmpty())
+			sUserName = QString::fromUtf8(::getenv("USERNAME"));
+		if (!sUserName.isEmpty()) {
+			sUnique += ':';
+			sUnique += sUserName;
+		}
 		if (sServerName.isEmpty()) {
 			const char *pszServerName = ::getenv("JACK_DEFAULT_SERVER");
 			if (pszServerName && ::strcmp("default", pszServerName)) {
@@ -303,6 +310,13 @@ bool qjackctlApplication::setup ( const QString& sServerName )
 	if (!sServerName.isEmpty()) {
 		m_sUnique += '-';
 		m_sUnique += sServerName;
+	}
+	QString sUserName = QString::fromUtf8(::getenv("USER"));
+	if (sUserName.isEmpty())
+		sUserName = QString::fromUtf8(::getenv("USERNAME"));
+	if (!sUserName.isEmpty()) {
+		m_sUnique += ':';
+		m_sUnique += sUserName;
 	}
 	m_sUnique += '@';
 	m_sUnique += QHostInfo::localHostName();

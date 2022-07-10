@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Add current system user-name to the singleton/unique application
+  instance identifier. (EXPERIMENTAL)
+
 - Graph/Connect and Disconnect keyboard shortcuts added to existing
   [Ins] and [Del], as [Ctrl+C] and [Ctrl+D] respectively; also added
   [F2] as brand new keyboard shortcut for Edit/Rename...
