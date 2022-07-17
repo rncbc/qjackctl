@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Avoid nagging on D-BUS error messsage windows (or bubbles) when
+  trying to start in pure JACK client mode (Active). (EXPERIMENTAL)
+
 - Add current system user-name to the singleton/unique application
   instance identifier. (EXPERIMENTAL)
 

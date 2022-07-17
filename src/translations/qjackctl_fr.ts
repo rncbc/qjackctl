@@ -1597,7 +1597,7 @@ Voulez-vous sauvegarder les changements ?</translation>
         <translation>Cac&amp;her</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4887"/>
+        <location filename="../qjackctlMainForm.cpp" line="4894"/>
         <source>D-BUS: GetParameterConstraint(&apos;%1&apos;):
 
 %2.
@@ -2010,7 +2010,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
         <translation>Voulez-vous redémarrer le serveur audio JACK ?</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4594"/>
+        <location filename="../qjackctlMainForm.cpp" line="4595"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -2021,7 +2021,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
 (%4)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4625"/>
+        <location filename="../qjackctlMainForm.cpp" line="4628"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -2032,7 +2032,7 @@ Veuillez consulter la fenêtre des messages pour plus d&apos;informations.</tran
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4865"/>
+        <location filename="../qjackctlMainForm.cpp" line="4870"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.

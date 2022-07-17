@@ -4590,11 +4590,13 @@ bool qjackctlMainForm::setDBusParameter (
 		"SetParameterValue", path, QVariant::fromValue(QDBusVariant(value)));
 
 	if (dbusm.type() == QDBusMessage::ErrorMessage) {
-		appendMessagesError(
-			tr("D-BUS: SetParameterValue('%1', '%2'):\n\n"
-			"%3.\n(%4)").arg(path.join(":")).arg(value.toString())
-			.arg(dbusm.errorMessage())
-			.arg(dbusm.errorName()));
+		if (m_bDBusDetach) {
+			appendMessagesError(
+				tr("D-BUS: SetParameterValue('%1', '%2'):\n\n"
+				"%3.\n(%4)").arg(path.join(":")).arg(value.toString())
+				.arg(dbusm.errorMessage())
+				.arg(dbusm.errorName()));
+		}
 		return false;
 	}
 
@@ -4621,11 +4623,13 @@ bool qjackctlMainForm::resetDBusParameter ( const QStringList& path )
 	QDBusMessage dbusm = m_pDBusConfig->call("ResetParameterValue", path);
 
 	if (dbusm.type() == QDBusMessage::ErrorMessage) {
-		appendMessagesError(
-			tr("D-BUS: ResetParameterValue('%1'):\n\n"
-			"%2.\n(%3)").arg(path.join(":"))
-			.arg(dbusm.errorMessage())
-			.arg(dbusm.errorName()));
+		if (m_bDBusDetach) {
+			appendMessagesError(
+				tr("D-BUS: ResetParameterValue('%1'):\n\n"
+				"%2.\n(%3)").arg(path.join(":"))
+				.arg(dbusm.errorMessage())
+				.arg(dbusm.errorName()));
+		}
 		return false;
 	}
 
@@ -4861,11 +4865,13 @@ QVariant qjackctlMainForm::getDBusParameter ( const QStringList& path )
 	QDBusMessage dbusm = m_pDBusConfig->call("GetParameterValue", path);
 
 	if (dbusm.type() == QDBusMessage::ErrorMessage) {
-		appendMessagesError(
-			tr("D-BUS: GetParameterValue('%1'):\n\n"
-			"%2.\n(%3)").arg(path.join(":"))
-			.arg(dbusm.errorMessage())
-			.arg(dbusm.errorName()));
+		if (m_bDBusDetach) {
+			appendMessagesError(
+				tr("D-BUS: GetParameterValue('%1'):\n\n"
+				"%2.\n(%3)").arg(path.join(":"))
+				.arg(dbusm.errorMessage())
+				.arg(dbusm.errorName()));
+		}
 		return QVariant();
 	}
 
@@ -4883,11 +4889,13 @@ QStringList qjackctlMainForm::getDBusParameterValues ( const QStringList& path )
 	QDBusMessage dbusm = m_pDBusConfig->call("GetParameterConstraint", path);
 
 	if (dbusm.type() == QDBusMessage::ErrorMessage) {
-		appendMessagesError(
-			tr("D-BUS: GetParameterConstraint('%1'):\n\n"
-			"%2.\n(%3)").arg(path.join(":"))
-			.arg(dbusm.errorMessage())
-			.arg(dbusm.errorName()));
+		if (m_bDBusDetach) {
+			appendMessagesError(
+				tr("D-BUS: GetParameterConstraint('%1'):\n\n"
+				"%2.\n(%3)").arg(path.join(":"))
+				.arg(dbusm.errorMessage())
+				.arg(dbusm.errorName()));
+		}
 		return QStringList();
 	}
 
