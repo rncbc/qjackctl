@@ -1,7 +1,7 @@
 // qjackctlConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1107,6 +1107,32 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 	QMenu menu(this);
 	QAction *pAction;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+	pAction = menu.addAction(QIcon(":/images/connect1.png"),
+		tr("&Connect"), tr("Alt+C", "Connect"),
+		pConnect, SLOT(connectSelected()));
+	pAction->setEnabled(pConnect->canConnectSelected());
+	pAction = menu.addAction(QIcon(":/images/disconnect1.png"),
+		tr("&Disconnect"), tr("Alt+D", "Disconnect"),
+		pConnect, SLOT(disconnectSelected()));
+	pAction->setEnabled(pConnect->canDisconnectSelected());
+	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
+		tr("Disconnect &All"), tr("Alt+A", "Disconnect All"),
+		pConnect, SLOT(disconnectAll()));
+	pAction->setEnabled(pConnect->canDisconnectAll());
+	if (m_bRenameEnabled) {
+		menu.addSeparator();
+		pAction = menu.addAction(QIcon(":/images/edit1.png"),
+			tr("Re&name"), tr("Alt+N", "Rename"),
+			this, SLOT(startRenameSlot()));
+		QTreeWidgetItem *pItem = QTreeWidget::currentItem();
+		pAction->setEnabled(pItem && (pItem->flags() & Qt::ItemIsEditable));
+	}
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
+		tr("&Refresh"), tr("Alt+R", "Refresh"),
+		pConnect, SLOT(refresh()));
+#else
 	pAction = menu.addAction(QIcon(":/images/connect1.png"),
 		tr("&Connect"), pConnect, SLOT(connectSelected()),
 		tr("Alt+C", "Connect"));
@@ -1123,7 +1149,7 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 		menu.addSeparator();
 		pAction = menu.addAction(QIcon(":/images/edit1.png"),
 			tr("Re&name"), this, SLOT(startRenameSlot()),
-			tr("Alt+N", "Rename"));
+			 tr("Alt+N", "Rename"));
 		QTreeWidgetItem *pItem = QTreeWidget::currentItem();
 		pAction->setEnabled(pItem && (pItem->flags() & Qt::ItemIsEditable));
 	}
@@ -1131,7 +1157,7 @@ void qjackctlClientListView::contextMenuEvent ( QContextMenuEvent *pContextMenuE
 	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
 		tr("&Refresh"), pConnect, SLOT(refresh()),
 		tr("Alt+R", "Refresh"));
-
+#endif
 	menu.exec(pContextMenuEvent->globalPos());
 }
 
@@ -1306,9 +1332,27 @@ void qjackctlConnectorView::contextMenuEvent (
 	QMenu menu(this);
 	QAction *pAction;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+	pAction = menu.addAction(QIcon(":/images/connect1.png"),
+		tr("&Connect"), tr("Alt+C", "Connect"),
+		pConnect, SLOT(connectSelected()));
+	pAction->setEnabled(pConnect->canConnectSelected());
+	pAction = menu.addAction(QIcon(":/images/disconnect1.png"),
+		tr("&Disconnect"), tr("Alt+D", "Disconnect"),
+		pConnect, SLOT(disconnectSelected()));
+	pAction->setEnabled(pConnect->canDisconnectSelected());
+	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
+		tr("Disconnect &All"), tr("Alt+A", "Disconnect All"),
+		pConnect, SLOT(disconnectAll()));
+	pAction->setEnabled(pConnect->canDisconnectAll());
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
+		tr("&Refresh"), tr("Alt+R", "Refresh"),
+		pConnect, SLOT(refresh()));
+#else
 	pAction = menu.addAction(QIcon(":/images/connect1.png"),
 		tr("&Connect"), pConnect, SLOT(connectSelected()),
-		tr("Alt+C", "Connect"));
+		 tr("Alt+C", "Connect"));
 	pAction->setEnabled(pConnect->canConnectSelected());
 	pAction = menu.addAction(QIcon(":/images/disconnect1.png"),
 		tr("&Disconnect"), pConnect, SLOT(disconnectSelected()),
@@ -1318,12 +1362,11 @@ void qjackctlConnectorView::contextMenuEvent (
 		tr("Disconnect &All"), pConnect, SLOT(disconnectAll()),
 		tr("Alt+A", "Disconnect All"));
 	pAction->setEnabled(pConnect->canDisconnectAll());
-
 	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
 		tr("&Refresh"), pConnect, SLOT(refresh()),
 		tr("Alt+R", "Refresh"));
-
+#endif
 	menu.exec(pContextMenuEvent->globalPos());
 }
 

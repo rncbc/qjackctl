@@ -1,7 +1,7 @@
 // qjackctlPatchbay.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1319,6 +1319,24 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 		menu.addSeparator();
 	}
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+	pAction = menu.addAction(QIcon(":/images/connect1.png"),
+		tr("&Connect"), tr("Alt+C", "Connect"),
+		pPatchbay, SLOT(connectSelected()));
+	pAction->setEnabled(pPatchbay->canConnectSelected());
+	pAction = menu.addAction(QIcon(":/images/disconnect1.png"),
+		tr("&Disconnect"), tr("Alt+D", "Disconnect"),
+		pPatchbay, SLOT(disconnectSelected()));
+	pAction->setEnabled(pPatchbay->canDisconnectSelected());
+	pAction = menu.addAction(QIcon(":/images/disconnectall1.png"),
+		tr("Disconnect &All"), tr("Alt+A", "Disconnect All"),
+		pPatchbay, SLOT(disconnectAll()));
+	pAction->setEnabled(pPatchbay->canDisconnectAll());
+	menu.addSeparator();
+	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
+		tr("&Refresh"), tr("Alt+R", "Refresh"),
+		pPatchbay, SLOT(refresh()));
+#else
 	pAction = menu.addAction(QIcon(":/images/connect1.png"),
 		tr("&Connect"), pPatchbay, SLOT(connectSelected()),
 		tr("Alt+C", "Connect"));
@@ -1331,12 +1349,11 @@ void qjackctlPatchbayView::contextMenu ( const QPoint& pos,
 		tr("Disconnect &All"), pPatchbay, SLOT(disconnectAll()),
 		tr("Alt+A", "Disconnect All"));
 	pAction->setEnabled(pPatchbay->canDisconnectAll());
-
 	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
 		tr("&Refresh"), pPatchbay, SLOT(refresh()),
 		tr("Alt+R", "Refresh"));
-
+#endif
 	menu.exec(pos);
 }
 
