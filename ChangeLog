@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: View / Repel Overlapping Nodes option added. (EXPERIMENTAL)
+
 - Avoid nagging on D-BUS error messsage windows (or bubbles) when
   trying to start in pure JACK client mode (Active). (EXPERIMENTAL)
 

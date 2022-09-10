@@ -39,6 +39,7 @@ class qjackctlGraphNode;
 class qjackctlGraphPort;
 class qjackctlGraphConnect;
 class qjackctlGraphCommand;
+class qjackctlGraphMoveCommand;
 
 class qjackctlAliases;
 class qjackctlAliasList;
@@ -506,6 +507,14 @@ public:
 	bool restoreState();
 	bool saveState() const;
 
+	// Repel overlapping nodes...
+	void setRepelOverlappingNodes(bool on);
+	bool isRepelOverlappingNodes() const;
+	void repelOverlappingNodes(qjackctlGraphNode *node,
+		qjackctlGraphMoveCommand *move_command = nullptr);
+	void repelOverlappingNodesAll(
+		qjackctlGraphMoveCommand *move_command = nullptr);
+
 	// Graph colors management.
 	void setPortTypeColor(uint port_type, const QColor& color);
 	const QColor& portTypeColor(uint port_type);
@@ -623,6 +632,8 @@ private:
 
 	QList<QGraphicsItem *> m_selected;
 	int m_selected_nodes;
+
+	bool m_repel_overlapping_nodes;
 
 	// Graph port colors.
 	QHash<uint, QColor> m_port_colors;

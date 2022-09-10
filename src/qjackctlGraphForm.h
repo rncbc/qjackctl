@@ -115,6 +115,8 @@ protected slots:
 	void viewColorsAction();
 	void viewColorsReset();
 
+	void viewRepelOverlappingNodes(bool on);
+
 	void helpAbout();
 	void helpAboutQt();
 
@@ -156,6 +158,8 @@ private:
 	int m_alsa_changed;
 
 	int m_ins, m_mids, m_outs;
+
+	int m_repel_overlapping_nodes;
 
 	QSlider  *m_zoom_slider;
 	QSpinBox *m_zoom_spinbox;
@@ -199,6 +203,9 @@ public:
 	void setSortOrder(int sortorder);
 	int sortOrder() const;
 
+	void setRepelOverlappingNodes(bool repelnodes);
+	bool isRepelOverlappingNodes() const;
+
 	// Graph main-widget state methods.
 	bool restoreState(QMainWindow *widget);
 	bool saveState(QMainWindow *widget) const;
@@ -215,6 +222,8 @@ private:
 	bool       m_zoomrange;
 	int        m_sorttype;
 	int        m_sortorder;
+
+	bool       m_repelnodes;
 };
 
 

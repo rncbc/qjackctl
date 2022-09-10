@@ -1,7 +1,7 @@
 // qjackctlGraphCommand.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -151,6 +151,9 @@ public:
 	// Destructor.
 	~qjackctlGraphMoveCommand();
 
+	// Add/replace (an already moved) node position for undo/redo...
+	void addItem(qjackctlGraphNode *node, const QPointF& pos1, const QPointF& pos2);
+
 protected:
 
 	// Command item descriptor
@@ -159,6 +162,8 @@ protected:
 		QString node_name;
 		qjackctlGraphItem::Mode node_mode;
 		uint node_type;
+		QPointF node_pos1;
+		QPointF node_pos2;
 	};
 
 	// Command executive method.
@@ -167,10 +172,7 @@ protected:
 private:
 
 	// Command arguments.
-	QList<Item *> m_items;
-
-	QPointF m_pos1;
-	QPointF m_pos2;
+	QHash<qjackctlGraphNode *, Item *> m_items;
 
 	int m_nexec;
 };

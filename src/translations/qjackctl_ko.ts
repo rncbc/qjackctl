@@ -110,12 +110,12 @@
         <translation>%1 (%2 프레임)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphCommand.cpp" line="131"/>
+        <location filename="../qjackctlGraphCommand.cpp" line="130"/>
         <source>Move</source>
         <translation>이동</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphCommand.cpp" line="184"/>
+        <location filename="../qjackctlGraphCommand.cpp" line="215"/>
         <source>Rename</source>
         <translation>이름변경</translation>
     </message>
@@ -528,557 +528,573 @@ Are you sure?</source>
         <translation>정렬(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="136"/>
+        <location filename="../qjackctlGraphForm.ui" line="138"/>
         <source>&amp;Help</source>
         <translation>도움말(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="184"/>
+        <location filename="../qjackctlGraphForm.ui" line="186"/>
         <source>&amp;Connect</source>
         <translation>연결하기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="187"/>
-        <location filename="../qjackctlGraphForm.ui" line="190"/>
+        <location filename="../qjackctlGraphForm.ui" line="189"/>
+        <location filename="../qjackctlGraphForm.ui" line="192"/>
         <source>Connect</source>
         <translation>연결하기</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="193"/>
+        <location filename="../qjackctlGraphForm.ui" line="195"/>
         <source>Connect selected ports</source>
         <translation>선택한 포트 연결하기</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="204"/>
+        <location filename="../qjackctlGraphForm.ui" line="206"/>
         <source>&amp;Disconnect</source>
         <translation>연결해제(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="207"/>
-        <location filename="../qjackctlGraphForm.ui" line="210"/>
+        <location filename="../qjackctlGraphForm.ui" line="209"/>
+        <location filename="../qjackctlGraphForm.ui" line="212"/>
         <source>Disconnect</source>
         <translation>연결해제</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="213"/>
+        <location filename="../qjackctlGraphForm.ui" line="215"/>
         <source>Disconnect selected ports</source>
         <translation>선택한 포트 연결해제</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="196"/>
+        <location filename="../qjackctlGraphForm.ui" line="198"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="216"/>
+        <location filename="../qjackctlGraphForm.ui" line="218"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="221"/>
+        <location filename="../qjackctlGraphForm.ui" line="223"/>
         <source>Cl&amp;ose</source>
         <translation>닫기(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="224"/>
-        <location filename="../qjackctlGraphForm.ui" line="227"/>
+        <location filename="../qjackctlGraphForm.ui" line="226"/>
+        <location filename="../qjackctlGraphForm.ui" line="229"/>
         <source>Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="230"/>
+        <location filename="../qjackctlGraphForm.ui" line="232"/>
         <source>Close this application window</source>
         <translation>이 응용프로그램 창 닫기</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="238"/>
+        <location filename="../qjackctlGraphForm.ui" line="240"/>
         <source>Select &amp;All</source>
         <translation>모두 선택(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="241"/>
-        <location filename="../qjackctlGraphForm.ui" line="244"/>
-        <location filename="../qjackctlGraphForm.ui" line="247"/>
+        <location filename="../qjackctlGraphForm.ui" line="243"/>
+        <location filename="../qjackctlGraphForm.ui" line="246"/>
+        <location filename="../qjackctlGraphForm.ui" line="249"/>
         <source>Select All</source>
         <translation>모두 선택</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="250"/>
+        <location filename="../qjackctlGraphForm.ui" line="252"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="255"/>
+        <location filename="../qjackctlGraphForm.ui" line="257"/>
         <source>Select &amp;None</source>
         <translation>없음 선택(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="258"/>
-        <location filename="../qjackctlGraphForm.ui" line="261"/>
-        <location filename="../qjackctlGraphForm.ui" line="264"/>
+        <location filename="../qjackctlGraphForm.ui" line="260"/>
+        <location filename="../qjackctlGraphForm.ui" line="263"/>
+        <location filename="../qjackctlGraphForm.ui" line="266"/>
         <source>Select None</source>
         <translation>없음 선택</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="267"/>
+        <location filename="../qjackctlGraphForm.ui" line="269"/>
         <source>Ctrl+Shift+A</source>
         <translation>Ctrl+Shift+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="272"/>
+        <location filename="../qjackctlGraphForm.ui" line="274"/>
         <source>Select &amp;Invert</source>
         <translation>반전 선택(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="275"/>
-        <location filename="../qjackctlGraphForm.ui" line="278"/>
-        <location filename="../qjackctlGraphForm.ui" line="281"/>
+        <location filename="../qjackctlGraphForm.ui" line="277"/>
+        <location filename="../qjackctlGraphForm.ui" line="280"/>
+        <location filename="../qjackctlGraphForm.ui" line="283"/>
         <source>Select Invert</source>
         <translation>반전 선택</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="284"/>
+        <location filename="../qjackctlGraphForm.ui" line="286"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="292"/>
+        <location filename="../qjackctlGraphForm.ui" line="294"/>
         <source>&amp;Rename...</source>
         <translation>이름변경(&amp;R)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="295"/>
+        <location filename="../qjackctlGraphForm.ui" line="297"/>
         <source>Rename item</source>
         <translation>항목 이름변경</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="298"/>
-        <location filename="../qjackctlGraphForm.ui" line="301"/>
+        <location filename="../qjackctlGraphForm.ui" line="300"/>
+        <location filename="../qjackctlGraphForm.ui" line="303"/>
         <source>Rename Item</source>
         <translation>항목 이름변경</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="304"/>
+        <location filename="../qjackctlGraphForm.ui" line="306"/>
         <source>F2</source>
         <translation type="unfinished">F2</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="312"/>
+        <location filename="../qjackctlGraphForm.ui" line="314"/>
         <source>&amp;Menubar</source>
         <translation>메뉴모음(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="315"/>
-        <location filename="../qjackctlGraphForm.ui" line="318"/>
+        <location filename="../qjackctlGraphForm.ui" line="317"/>
+        <location filename="../qjackctlGraphForm.ui" line="320"/>
         <source>Menubar</source>
         <translation>메뉴모음</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="321"/>
+        <location filename="../qjackctlGraphForm.ui" line="323"/>
         <source>Show/hide the main program window menubar</source>
         <translation>기본 프로그램 창 메뉴모음 표시/숨김</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="324"/>
+        <location filename="../qjackctlGraphForm.ui" line="326"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="332"/>
+        <location filename="../qjackctlGraphForm.ui" line="334"/>
         <source>&amp;Toolbar</source>
         <translation>도구모음(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="335"/>
-        <location filename="../qjackctlGraphForm.ui" line="338"/>
+        <location filename="../qjackctlGraphForm.ui" line="337"/>
+        <location filename="../qjackctlGraphForm.ui" line="340"/>
         <source>Toolbar</source>
         <translation>도구모음</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="341"/>
+        <location filename="../qjackctlGraphForm.ui" line="343"/>
         <source>Show/hide main program window file toolbar</source>
         <translation>기본 프로그램 창 파일 도구모음 표시/숨김</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="349"/>
+        <location filename="../qjackctlGraphForm.ui" line="351"/>
         <source>&amp;Statusbar</source>
         <translation>상태 표시줄(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="352"/>
-        <location filename="../qjackctlGraphForm.ui" line="355"/>
+        <location filename="../qjackctlGraphForm.ui" line="354"/>
+        <location filename="../qjackctlGraphForm.ui" line="357"/>
         <source>Statusbar</source>
         <translation>상태 표시줄</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="358"/>
+        <location filename="../qjackctlGraphForm.ui" line="360"/>
         <source>Show/hide the main program window statusbar</source>
         <translation>기본 프로그램 창 상태 표시줄 표시/숨김</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="369"/>
+        <location filename="../qjackctlGraphForm.ui" line="371"/>
         <source>Text Beside &amp;Icons</source>
         <translation>아이콘 옆에 텍스트(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="372"/>
-        <location filename="../qjackctlGraphForm.ui" line="375"/>
+        <location filename="../qjackctlGraphForm.ui" line="374"/>
+        <location filename="../qjackctlGraphForm.ui" line="377"/>
         <source>Text beside icons</source>
         <translation>아이콘 옆에 텍스트</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="378"/>
+        <location filename="../qjackctlGraphForm.ui" line="380"/>
         <source>Show/hide text beside icons</source>
         <translation>아이콘 옆에 텍스트 표시/숨김</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="386"/>
+        <location filename="../qjackctlGraphForm.ui" line="388"/>
         <source>&amp;Center</source>
         <translation>중앙(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="389"/>
-        <location filename="../qjackctlGraphForm.ui" line="392"/>
+        <location filename="../qjackctlGraphForm.ui" line="391"/>
+        <location filename="../qjackctlGraphForm.ui" line="394"/>
         <source>Center</source>
         <translation>중앙</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="395"/>
+        <location filename="../qjackctlGraphForm.ui" line="397"/>
         <source>Center view</source>
         <translation>중앙 보기</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="403"/>
+        <location filename="../qjackctlGraphForm.ui" line="405"/>
         <source>&amp;Refresh</source>
         <translation>새로 고침(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="406"/>
-        <location filename="../qjackctlGraphForm.ui" line="409"/>
+        <location filename="../qjackctlGraphForm.ui" line="408"/>
+        <location filename="../qjackctlGraphForm.ui" line="411"/>
         <source>Refresh</source>
         <translation>새로 고침</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="412"/>
+        <location filename="../qjackctlGraphForm.ui" line="414"/>
         <source>Refresh view</source>
         <translation>보기 새로 고침</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="415"/>
+        <location filename="../qjackctlGraphForm.ui" line="417"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="423"/>
+        <location filename="../qjackctlGraphForm.ui" line="425"/>
         <source>Zoom &amp;In</source>
         <translation>확대(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="426"/>
-        <location filename="../qjackctlGraphForm.ui" line="429"/>
-        <location filename="../qjackctlGraphForm.ui" line="432"/>
+        <location filename="../qjackctlGraphForm.ui" line="428"/>
+        <location filename="../qjackctlGraphForm.ui" line="431"/>
+        <location filename="../qjackctlGraphForm.ui" line="434"/>
         <source>Zoom In</source>
         <translation>확대</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="435"/>
+        <location filename="../qjackctlGraphForm.ui" line="437"/>
         <source>Ctrl++</source>
         <translation>Ctrl++</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="443"/>
+        <location filename="../qjackctlGraphForm.ui" line="445"/>
         <source>Zoom &amp;Out</source>
         <translation>축소(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="446"/>
-        <location filename="../qjackctlGraphForm.ui" line="449"/>
-        <location filename="../qjackctlGraphForm.ui" line="452"/>
+        <location filename="../qjackctlGraphForm.ui" line="448"/>
+        <location filename="../qjackctlGraphForm.ui" line="451"/>
+        <location filename="../qjackctlGraphForm.ui" line="454"/>
         <source>Zoom Out</source>
         <translation>축소</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="455"/>
+        <location filename="../qjackctlGraphForm.ui" line="457"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="463"/>
+        <location filename="../qjackctlGraphForm.ui" line="465"/>
         <source>Zoom &amp;Fit</source>
         <translation>창에 맞춤(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="466"/>
-        <location filename="../qjackctlGraphForm.ui" line="469"/>
-        <location filename="../qjackctlGraphForm.ui" line="472"/>
+        <location filename="../qjackctlGraphForm.ui" line="468"/>
+        <location filename="../qjackctlGraphForm.ui" line="471"/>
+        <location filename="../qjackctlGraphForm.ui" line="474"/>
         <source>Zoom Fit</source>
         <translation>창에 맞춤</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="475"/>
+        <location filename="../qjackctlGraphForm.ui" line="477"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="483"/>
+        <location filename="../qjackctlGraphForm.ui" line="485"/>
         <source>Zoom &amp;Reset</source>
         <translation>확대/축소 재설정(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="486"/>
-        <location filename="../qjackctlGraphForm.ui" line="489"/>
-        <location filename="../qjackctlGraphForm.ui" line="492"/>
+        <location filename="../qjackctlGraphForm.ui" line="488"/>
+        <location filename="../qjackctlGraphForm.ui" line="491"/>
+        <location filename="../qjackctlGraphForm.ui" line="494"/>
         <source>Zoom Reset</source>
         <translation>확대/축소 재설정</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="495"/>
+        <location filename="../qjackctlGraphForm.ui" line="497"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="506"/>
+        <location filename="../qjackctlGraphForm.ui" line="508"/>
         <source>&amp;Zoom Range</source>
         <translation>확대/축소 범위(&amp;Z)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="509"/>
-        <location filename="../qjackctlGraphForm.ui" line="512"/>
-        <location filename="../qjackctlGraphForm.ui" line="515"/>
+        <location filename="../qjackctlGraphForm.ui" line="511"/>
+        <location filename="../qjackctlGraphForm.ui" line="514"/>
+        <location filename="../qjackctlGraphForm.ui" line="517"/>
         <source>Zoom Range</source>
         <translation>확대/축소 범위</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="523"/>
+        <location filename="../qjackctlGraphForm.ui" line="525"/>
         <source>JACK &amp;Audio...</source>
         <translation>JACK Audio(&amp;A)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="526"/>
-        <location filename="../qjackctlGraphForm.ui" line="529"/>
-        <location filename="../qjackctlGraphForm.ui" line="532"/>
+        <location filename="../qjackctlGraphForm.ui" line="528"/>
+        <location filename="../qjackctlGraphForm.ui" line="531"/>
+        <location filename="../qjackctlGraphForm.ui" line="534"/>
         <source>JACK Audio color</source>
         <translation>JACK 오디오 색상</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="540"/>
+        <location filename="../qjackctlGraphForm.ui" line="542"/>
         <source>JACK &amp;MIDI...</source>
         <translation>JACK MIDI(&amp;M)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="543"/>
+        <location filename="../qjackctlGraphForm.ui" line="545"/>
         <source>JACK MIDI</source>
         <translation>JACK MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="546"/>
-        <location filename="../qjackctlGraphForm.ui" line="549"/>
+        <location filename="../qjackctlGraphForm.ui" line="548"/>
+        <location filename="../qjackctlGraphForm.ui" line="551"/>
         <source>JACK MIDI color</source>
         <translation>JACK MIDI 색상</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="557"/>
+        <location filename="../qjackctlGraphForm.ui" line="559"/>
         <source>ALSA M&amp;IDI...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="560"/>
+        <location filename="../qjackctlGraphForm.ui" line="562"/>
         <source>ALSA MIDI</source>
         <translation>ALSA MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="563"/>
-        <location filename="../qjackctlGraphForm.ui" line="566"/>
+        <location filename="../qjackctlGraphForm.ui" line="565"/>
+        <location filename="../qjackctlGraphForm.ui" line="568"/>
         <source>ALSA MIDI color</source>
         <translation>ALSA MIDI 색상</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="574"/>
+        <location filename="../qjackctlGraphForm.ui" line="576"/>
         <source>JACK &amp;CV...</source>
         <translation>JACK CV(&amp;C)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="577"/>
-        <location filename="../qjackctlGraphForm.ui" line="580"/>
-        <location filename="../qjackctlGraphForm.ui" line="583"/>
+        <location filename="../qjackctlGraphForm.ui" line="579"/>
+        <location filename="../qjackctlGraphForm.ui" line="582"/>
+        <location filename="../qjackctlGraphForm.ui" line="585"/>
         <source>JACK CV color</source>
         <translation>JACK CV 색상</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="591"/>
+        <location filename="../qjackctlGraphForm.ui" line="593"/>
         <source>JACK &amp;OSC...</source>
         <translation>JACK OSC(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="594"/>
+        <location filename="../qjackctlGraphForm.ui" line="596"/>
         <source>JACK OSC</source>
         <translation>JACK OSC</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="597"/>
-        <location filename="../qjackctlGraphForm.ui" line="600"/>
+        <location filename="../qjackctlGraphForm.ui" line="599"/>
+        <location filename="../qjackctlGraphForm.ui" line="602"/>
         <source>JACK OSC color</source>
         <translation>JACK OSC 색상</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="608"/>
+        <location filename="../qjackctlGraphForm.ui" line="610"/>
         <source>&amp;Reset</source>
         <translation>재설정(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="611"/>
-        <location filename="../qjackctlGraphForm.ui" line="614"/>
-        <location filename="../qjackctlGraphForm.ui" line="617"/>
+        <location filename="../qjackctlGraphForm.ui" line="613"/>
+        <location filename="../qjackctlGraphForm.ui" line="616"/>
+        <location filename="../qjackctlGraphForm.ui" line="619"/>
         <source>Reset colors</source>
         <translation>색상 재설정</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="628"/>
+        <location filename="../qjackctlGraphForm.ui" line="630"/>
         <source>Port &amp;Name</source>
         <translation>포트 이름(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="631"/>
+        <location filename="../qjackctlGraphForm.ui" line="633"/>
         <source>Port name</source>
         <translation>포트 이름</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="634"/>
+        <location filename="../qjackctlGraphForm.ui" line="636"/>
         <source>Sort by port name</source>
         <translation>포트 이름으로 정렬</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="645"/>
+        <location filename="../qjackctlGraphForm.ui" line="647"/>
         <source>Port &amp;Title</source>
         <translation>포트 제목(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="648"/>
+        <location filename="../qjackctlGraphForm.ui" line="650"/>
         <source>Port title</source>
         <translation>포트 제목</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="651"/>
+        <location filename="../qjackctlGraphForm.ui" line="653"/>
         <source>Sort by port title</source>
         <translation>포트 제목으로 정렬</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="662"/>
+        <location filename="../qjackctlGraphForm.ui" line="664"/>
         <source>Port &amp;Index</source>
         <translation>포트 인덱스(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="665"/>
+        <location filename="../qjackctlGraphForm.ui" line="667"/>
         <source>Port index</source>
         <translation>포트 인덱스</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="668"/>
+        <location filename="../qjackctlGraphForm.ui" line="670"/>
         <source>Sort by port index</source>
         <translation>포트 인덱스로 정렬</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="679"/>
+        <location filename="../qjackctlGraphForm.ui" line="681"/>
         <source>&amp;Ascending</source>
         <translation>오름차순(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="682"/>
+        <location filename="../qjackctlGraphForm.ui" line="684"/>
         <source>Ascending</source>
         <translation>오름차순</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="685"/>
+        <location filename="../qjackctlGraphForm.ui" line="687"/>
         <source>Ascending sort order</source>
         <translation>오름차순 정렬</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="696"/>
+        <location filename="../qjackctlGraphForm.ui" line="698"/>
         <source>&amp;Descending</source>
         <translation>내림차순(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="699"/>
+        <location filename="../qjackctlGraphForm.ui" line="701"/>
         <source>Descending</source>
         <translation>내림차순</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="702"/>
+        <location filename="../qjackctlGraphForm.ui" line="704"/>
         <source>Descending sort order</source>
         <translation>내림차순 정렬</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="710"/>
+        <location filename="../qjackctlGraphForm.ui" line="715"/>
+        <source>Repel &amp;Overlapping Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="718"/>
+        <source>Repel nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="721"/>
+        <location filename="../qjackctlGraphForm.ui" line="724"/>
+        <source>Repel overlapping nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="732"/>
         <source>&amp;About...</source>
         <translation>QjackCtl 정보(&amp;A)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="713"/>
+        <location filename="../qjackctlGraphForm.ui" line="735"/>
         <source>About...</source>
         <translation>QjackCtl 정보...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="716"/>
+        <location filename="../qjackctlGraphForm.ui" line="738"/>
         <source>About</source>
         <translation>QjackCtl 정보</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="719"/>
+        <location filename="../qjackctlGraphForm.ui" line="741"/>
         <source>Show information about this application program</source>
         <translation>이 응용프로그램에 대한 정보 표시</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="727"/>
+        <location filename="../qjackctlGraphForm.ui" line="749"/>
         <source>About &amp;Qt...</source>
         <translation>Qt 정보(&amp;Q)...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="730"/>
+        <location filename="../qjackctlGraphForm.ui" line="752"/>
         <source>About Qt...</source>
         <translation>Qt 정보...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="733"/>
+        <location filename="../qjackctlGraphForm.ui" line="755"/>
         <source>About Qt</source>
         <translation>Qt 정보</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="736"/>
+        <location filename="../qjackctlGraphForm.ui" line="758"/>
         <source>Show information about the Qt toolkit</source>
         <translation>Qt 툴킷에 대한 정보 표시</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="97"/>
+        <location filename="../qjackctlGraphForm.cpp" line="99"/>
         <source>&amp;Undo</source>
         <translation>실행 취소(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="102"/>
+        <location filename="../qjackctlGraphForm.cpp" line="104"/>
         <source>&amp;Redo</source>
         <translation>다시 실행(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="99"/>
+        <location filename="../qjackctlGraphForm.cpp" line="101"/>
         <source>Undo last edit action</source>
         <translation>마지막 편집 작업 실행 취소</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="104"/>
+        <location filename="../qjackctlGraphForm.cpp" line="106"/>
         <source>Redo last edit action</source>
         <translation>마지막 편집 작업 다시 실행</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="120"/>
+        <location filename="../qjackctlGraphForm.cpp" line="122"/>
         <source>Zoom</source>
         <translation>확대/축소</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="443"/>
+        <location filename="../qjackctlGraphForm.cpp" line="451"/>
         <source>Ready</source>
         <translation>준비 완료</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="517"/>
+        <location filename="../qjackctlGraphForm.cpp" line="528"/>
         <source>Colors - %1</source>
         <translation>색상 - %1</translation>
     </message>
