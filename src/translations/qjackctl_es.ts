@@ -478,13 +478,13 @@ Está seguro?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1801"/>
-        <location filename="../qjackctlGraph.cpp" line="1928"/>
+        <location filename="../qjackctlGraph.cpp" line="1803"/>
+        <location filename="../qjackctlGraph.cpp" line="1930"/>
         <source>Connect</source>
         <translation>Conectar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2000"/>
+        <location filename="../qjackctlGraph.cpp" line="2002"/>
         <source>Disconnect</source>
         <translation>Desconectar</translation>
     </message>
@@ -1088,12 +1088,12 @@ Está seguro?</translation>
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="451"/>
+        <location filename="../qjackctlGraphForm.cpp" line="454"/>
         <source>Ready</source>
         <translation>Preparado</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="528"/>
+        <location filename="../qjackctlGraphForm.cpp" line="531"/>
         <source>Colors - %1</source>
         <translation>Colores - %1</translation>
     </message>
