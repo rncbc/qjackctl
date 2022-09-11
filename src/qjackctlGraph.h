@@ -535,6 +535,7 @@ signals:
 
 	// Node factory notifications.
 	void added(qjackctlGraphNode *node);
+	void updated(qjackctlGraphNode *node);
 	void removed(qjackctlGraphNode *node);
 
 	// Port (dis)connection notifications.
@@ -603,8 +604,8 @@ protected:
 	void zoomFitRange(const QRectF& range_rect);
 
 	// Graph node position state methods.
-	bool restoreNodePos(qjackctlGraphNode *node);
-	bool saveNodePos(qjackctlGraphNode *node) const;
+	bool restoreNode(qjackctlGraphNode *node);
+	bool saveNode(qjackctlGraphNode *node) const;
 
 	// Renaming editor position and size updater.
 	void updateEditorGeometry();

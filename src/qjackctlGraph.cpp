@@ -1292,7 +1292,9 @@ void qjackctlGraphCanvas::addItem ( qjackctlGraphItem *item )
 		if (node) {
 			m_nodes.append(node);
 			m_nodekeys.insert(qjackctlGraphNode::NodeKey(node), node);
-			if (!restoreNodePos(node))
+			if (restoreNode(node))
+				emit updated(node);
+			else
 				emit added(node);
 		}
 	}
@@ -1305,7 +1307,7 @@ void qjackctlGraphCanvas::removeItem ( qjackctlGraphItem *item )
 
 	if (item->type() == qjackctlGraphNode::Type) {
 		qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
-		if (node && saveNodePos(node)) {
+		if (node && saveNode(node)) {
 			emit removed(node);
 			node->removePorts();
 			m_nodekeys.remove(qjackctlGraphNode::NodeKey(node));
@@ -2199,7 +2201,7 @@ void qjackctlGraphCanvas::zoomFitRange ( const QRectF& range_rect )
 
 
 // Graph node position methods.
-bool qjackctlGraphCanvas::restoreNodePos ( qjackctlGraphNode *node )
+bool qjackctlGraphCanvas::restoreNode ( qjackctlGraphNode *node )
 {
 	if (m_settings == nullptr || node == nullptr)
 		return false;
@@ -2217,7 +2219,7 @@ bool qjackctlGraphCanvas::restoreNodePos ( qjackctlGraphNode *node )
 }
 
 
-bool qjackctlGraphCanvas::saveNodePos ( qjackctlGraphNode *node ) const
+bool qjackctlGraphCanvas::saveNode ( qjackctlGraphNode *node ) const
 {
 	if (m_settings == nullptr || node == nullptr)
 		return false;

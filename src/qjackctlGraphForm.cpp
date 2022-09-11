@@ -161,6 +161,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SIGNAL(added(qjackctlGraphNode *)),
 		SLOT(added(qjackctlGraphNode *)));
 	QObject::connect(m_ui.graphCanvas,
+		SIGNAL(updated(qjackctlGraphNode *)),
+		SLOT(updated(qjackctlGraphNode *)));
+	QObject::connect(m_ui.graphCanvas,
 		SIGNAL(removed(qjackctlGraphNode *)),
 		SLOT(removed(qjackctlGraphNode *)));
 
@@ -649,10 +652,14 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 
 	node->setPos(x, y);
 
+	updated(node);
+}
+
+
+void qjackctlGraphForm::updated ( qjackctlGraphNode */*node*/ )
+{
 	if (m_ui.graphCanvas->isRepelOverlappingNodes())
 		++m_repel_overlapping_nodes;
-
-	stabilize();
 }
 
 

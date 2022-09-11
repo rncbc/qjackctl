@@ -82,6 +82,7 @@ protected slots:
 
 	// Node life-cycle slots
 	void added(qjackctlGraphNode *node);
+	void updated(qjackctlGraphNode *node);
 	void removed(qjackctlGraphNode *node);
 
 	// Port (dis)connection slots.
