@@ -2580,8 +2580,8 @@ bool qjackctlGraphCanvas::isRepelOverlappingNodes (void) const
 }
 
 
-void qjackctlGraphCanvas::repelOverlappingNodes (
-	qjackctlGraphNode *node, qjackctlGraphMoveCommand *move_command )
+void qjackctlGraphCanvas::repelOverlappingNodes ( qjackctlGraphNode *node,
+	qjackctlGraphMoveCommand *move_command, const QPointF& delta )
 {
 	const qreal MIN_NODE_GAP = 8.0f;
 
@@ -2603,31 +2603,35 @@ void qjackctlGraphCanvas::repelOverlappingNodes (
 		const QRectF& recti
 			= rect2.intersected(rect1);
 		if (!recti.isNull()) {
-			const QPointF delta
-				= rect2.center() - rect1.center();
+			const QPointF delta2
+				= (delta.isNull() ? rect2.center() - rect1.center() : delta);
 			if (recti.width() < (1.5 * recti.height())) {
 				qreal dx = recti.width();
-				if (recti.width() >= rect1.width() ||
-					recti.width() >= rect2.width()) {
-					if (delta.x() < 0.0)
-						dx += qAbs(rect2.right() - rect1.right());
-					else
-						dx += qAbs(rect2.left() - rect1.left());
+				if ((delta2.x() < 0.0 && recti.width() >= rect1.width()) ||
+					(delta2.x() > 0.0 && recti.width() >= rect2.width())) {
+					dx += qAbs(rect2.right() - rect1.right());
 				}
-				if (delta.x() < 0.0)
+				else
+				if ((delta2.x() > 0.0 && recti.width() >= rect1.width()) ||
+					(delta2.x() < 0.0 && recti.width() >= rect2.width())) {
+					dx += qAbs(rect2.left() - rect1.left());
+				}
+				if (delta2.x() < 0.0)
 					pos2.setX(pos1.x() - dx);
 				else
 					pos2.setX(pos1.x() + dx);
 			} else {
 				qreal dy = recti.height();
-				if (recti.height() >= rect1.height() ||
-					recti.height() >= rect2.height()) {
-					if (delta.y() < 0.0)
-						dy += qAbs(rect2.bottom() - rect1.bottom());
-					else
-						dy += qAbs(rect2.top() - rect1.top());
+				if ((delta2.y() < 0.0 && recti.height() >= rect1.height()) ||
+					(delta2.y() > 0.0 && recti.height() >= rect2.height())) {
+					dy += qAbs(rect2.bottom() - rect1.bottom());
 				}
-				if (delta.y() < 0.0)
+				else
+				if ((delta2.y() > 0.0 && recti.height() >= rect1.height()) ||
+					(delta2.y() < 0.0 && recti.height() >= rect2.height())) {
+					dy += qAbs(rect2.top() - rect1.top());
+				}
+				if (delta2.y() < 0.0)
 					pos2.setY(pos1.y() - dy);
 				else
 					pos2.setY(pos1.y() + dy);
@@ -2638,7 +2642,7 @@ void qjackctlGraphCanvas::repelOverlappingNodes (
 			if (move_command)
 				move_command->addItem(node2, pos1, pos2);
 			// Repel this node neighbors, if any...
-			repelOverlappingNodes(node2, move_command);
+			repelOverlappingNodes(node2, move_command, delta2);
 		}
 	}
 

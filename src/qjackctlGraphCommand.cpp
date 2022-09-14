@@ -158,7 +158,8 @@ qjackctlGraphMoveCommand::~qjackctlGraphMoveCommand (void)
 
 
 // Add/replace (an already moved) node position for undo/redo...
-void qjackctlGraphMoveCommand::addItem ( qjackctlGraphNode *node, const QPointF& pos1, const QPointF& pos2 )
+void qjackctlGraphMoveCommand::addItem (
+	qjackctlGraphNode *node, const QPointF& pos1, const QPointF& pos2 )
 {
 	Item *item = m_items.value(node, nullptr);
 	if (item) {

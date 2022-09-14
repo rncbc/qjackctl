@@ -511,7 +511,8 @@ public:
 	void setRepelOverlappingNodes(bool on);
 	bool isRepelOverlappingNodes() const;
 	void repelOverlappingNodes(qjackctlGraphNode *node,
-		qjackctlGraphMoveCommand *move_command = nullptr);
+		qjackctlGraphMoveCommand *move_command = nullptr,
+		const QPointF& delta = QPointF());
 	void repelOverlappingNodesAll(
 		qjackctlGraphMoveCommand *move_command = nullptr);
 
