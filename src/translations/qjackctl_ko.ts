@@ -115,7 +115,7 @@
         <translation>이동</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphCommand.cpp" line="215"/>
+        <location filename="../qjackctlGraphCommand.cpp" line="216"/>
         <source>Rename</source>
         <translation>이름변경</translation>
     </message>
