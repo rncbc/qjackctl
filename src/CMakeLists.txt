@@ -208,14 +208,12 @@ if (WIN32 AND CONFIG_INSTALL_QT)
   get_target_property (_qt_qmake_location Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
   get_filename_component (_qt_bin_dir "${_qt_qmake_location}" DIRECTORY)
   set (QT_WINDEPLOYQT "${_qt_bin_dir}/windeployqt.exe")
-
   if (EXISTS ${QT_WINDEPLOYQT})
     # execute windeployqt in a tmp directory after build
     if (QT_VERSION_MAJOR MATCHES "5")
       # These options are not available with Qt6
       set (WINDEPLOYQT_EXTRA_OPTIONS --no-webkit2 --no-angle)
     endif ()
-
     add_custom_command (TARGET ${PROJECT_NAME}
       POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_BINARY_DIR}/windeployqt"
@@ -230,7 +228,6 @@ if (WIN32 AND CONFIG_INSTALL_QT)
         "$<TARGET_FILE:${PROJECT_NAME}>"
       USES_TERMINAL
     )
-
     # copy deployment directory during installation
     install (
       DIRECTORY
@@ -244,7 +241,6 @@ if (APPLE AND CONFIG_INSTALL_QT)
   get_target_property (_qt_qmake_location Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
   get_filename_component (_qt_bin_dir "${_qt_qmake_location}" DIRECTORY)
   find_program(QT_MACDEPLOYQT macdeployqt HINTS "${_qt_bin_dir}")
-
   if (EXISTS ${QT_MACDEPLOYQT})
     add_custom_command (TARGET ${PROJECT_NAME}
       POST_BUILD

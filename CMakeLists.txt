@@ -276,19 +276,6 @@ endif ()
 add_subdirectory (src)
 
 
-if (UNIX AND NOT APPLE)
-  configure_file (${PROJECT_NAME}.spec.in ${PROJECT_NAME}.spec IMMEDIATE @ONLY)
-endif ()
-
-
-if (WIN32)
-  set(CPACK_GENERATOR ZIP)
-else ()
-  set(CPACK_GENERATOR TGZ)
-endif ()
-
-include(CPack)
-
 # Configuration status
 macro (SHOW_OPTION text value)
   if (${value})
