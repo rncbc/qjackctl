@@ -4,15 +4,15 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.8  2022-10-03  An Early-Autumn'22 release.
 
-- Graph: View / Repel Overlapping Nodes option added. (EXPERIMENTAL)
+- Graph: View / Repel Overlapping Nodes option added.
 
 - Avoid nagging on D-BUS error messsage windows (or bubbles) when
-  trying to start in pure JACK client mode (Active). (EXPERIMENTAL)
+  trying to start in pure JACK client mode (Active).
 
 - Add current system user-name to the singleton/unique application
-  instance identifier. (EXPERIMENTAL)
+  instance identifier.
 
 - Graph/Connect and Disconnect keyboard shortcuts added to existing
   [Ins] and [Del], as [Ctrl+C] and [Ctrl+D] respectively; also added

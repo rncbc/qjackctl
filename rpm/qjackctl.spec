@@ -16,8 +16,8 @@
 #
 
 %define name    qjackctl
-%define version 0.9.7
-%define release 51.2
+%define version 0.9.8
+%define release 52.1
 
 %define _prefix	@ac_prefix@
 
@@ -149,6 +149,8 @@ patchelf --set-rpath %{_libdir}/pulseaudio %{buildroot}%{_bindir}/%{name}
 %{_datadir}/man/fr/man1/%{name}.1.gz
 
 %changelog
+* Mon Oct  3 2022 Rui Nuno Capela <rncbc@rncbc.org> 0.9.8
+- An Early-Autumn'22 Release.
 * Sat Apr  2 2022 Rui Nuno Capela <rncbc@rncbc.org> 0.9.7
 - A Spring'22 Release.
 * Sun Jan  9 2022 Rui Nuno Capela <rncbc@rncbc.org> 0.9.6
