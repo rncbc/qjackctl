@@ -19,7 +19,7 @@
 %define version 0.9.8
 %define release 52.1
 
-%define _prefix	@ac_prefix@
+%define _prefix	/usr
 
 %if %{defined fedora}
 %define debug_package %{nil}
@@ -93,8 +93,6 @@ BuildRequires:	libjack-devel
 BuildRequires:	alsa-devel
 %endif
 
-BuildRequires:	patchelf
-
 %description
 JACK Audio Connection Kit - Qt GUI Interface: A simple Qt application
 to control the JACK server. Written in C++ around the Qt framework
@@ -118,7 +116,6 @@ cmake --build build %{?_smp_mflags}
 %install
 DESTDIR="%{buildroot}" \
 cmake --install build
-patchelf --set-rpath %{_libdir}/pulseaudio %{buildroot}%{_bindir}/%{name}
 
 %clean
 [ -d "%{buildroot}" -a "%{buildroot}" != "/" ] && %__rm -rf "%{buildroot}"
