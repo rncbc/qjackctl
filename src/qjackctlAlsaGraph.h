@@ -45,7 +45,7 @@ public:
 
 	// ALSA port (dis)connection.
 	void connectPorts(
-		qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect);
+		qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect);
 
 	// ALSA graph updaters.
 	void updateItems();

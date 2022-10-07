@@ -2,10 +2,15 @@
 
 name: main
 
-# Controls when the workflow will run
-# Triggers the workflow on push or pull request events
-on: [ push, pull_request ]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,7 +29,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install dependencies
         run: |
@@ -36,16 +41,21 @@ jobs:
         run: |
           git submodule -q update --init --recursive
           mkdir build
-          cmake -S . -B build -GNinja
-          cmake --build build --target package --config RelWithDebInfo
+          
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
+          cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
 
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          # Artifact name
-          name: "qjackctl-${{ runner.os }}-${{ github.job }}-${{ matrix.jack_package }}.tar.gz" # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: build/qjackctl*.tar.gz
+#     - name: Upload a Build Artifact
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         # Artifact name
+#         name: "qjackctl-${{ runner.os }}-${{ github.job }}-${{ matrix.jack_package }}.tar.gz" # optional, default is artifact
+#         # A file, directory or wildcard pattern that describes what to upload
+#         path: build/qjackctl*.tar.gz
 
   # MacOS build
   macos:
@@ -55,7 +65,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install dependencies
         run: |
@@ -66,20 +76,25 @@ jobs:
         run: |
           git submodule -q update --init --recursive
           mkdir build
-          cmake -S . -B build -GNinja -DCONFIG_INSTALL_QT=ON
-          cmake --build build --target package --config RelWithDebInfo
+          
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCONFIG_INSTALL_QT=ON
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
+          cmake --build ${{github.workspace}}/build --target package --config ${{env.BUILD_TYPE}}
+          if ($lastexitcode -ne 0) { exit $lastexitcode }
+          
           echo "otool -L"
           otool -L build/src/QjackCtl.app/Contents/MacOS/QjackCtl
           echo "otool -l"
           otool -l build/src/QjackCtl.app/Contents/MacOS/QjackCtl
 
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          # Artifact name
-          name: "qjackctl-${{ runner.os }}-${{ github.job }}.tar.gz" # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: build/qjackctl*.tar.gz
+#     - name: Upload a Build Artifact
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         # Artifact name
+#         name: "qjackctl-${{ runner.os }}-${{ github.job }}.tar.gz" # optional, default is artifact
+#         # A file, directory or wildcard pattern that describes what to upload
+#         path: build/qjackctl*.tar.gz
           
   # Windows 32 and 64 bits build
   windows:
@@ -99,7 +114,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       # Use ::set-output to reuse the jack version in artifact name
       - name: Install dependencies
@@ -143,7 +158,7 @@ jobs:
           $cnt = 0
           do {
               $cnt++
-              python3 -m aqt install-tool -O c:\Qt windows desktop tools_mingw qt.tools.win${{ matrix.config.arch }}_mingw810
+              python3 -m aqt install-tool -O C:\Qt windows desktop tools_mingw qt.tools.win${{ matrix.config.arch }}_mingw810
               if ($lastexitcode -ne 0 -and $cnt -ge 5) {
                 exit $lastexitcode
               }
@@ -164,16 +179,16 @@ jobs:
           git submodule -q update --init --recursive
           mkdir build
           
-          cmake -S . -B build "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=${{ steps.dependencies.outputs.QT_PATH }}\lib\cmake" -DCONFIG_INSTALL_QT=ON
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=${{steps.dependencies.outputs.QT_PATH}}\lib\cmake" -DCONFIG_INSTALL_QT=ON
           if ($lastexitcode -ne 0) { exit $lastexitcode }
           
-          cmake --build build --target package --config RelWithDebInfo -- -j4
+          cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -- -j4
           if ($lastexitcode -ne 0) { exit $lastexitcode }
 
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          # Artifact name
-          name: "qjackctl-${{ runner.os }}-${{ github.job }}${{ matrix.config.arch }}-jack-${{ steps.dependencies.outputs.JACK_VERSION }}.zip" # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: build/qjackctl*.zip
+#     - name: Upload a Build Artifact
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         # Artifact name
+#         name: "qjackctl-${{ runner.os }}-${{ github.job }}${{ matrix.config.arch }}-jack-${{ steps.dependencies.outputs.JACK_VERSION }}.zip" # optional, default is artifact
+#         # A file, directory or wildcard pattern that describes what to upload
+#         path: build/qjackctl*.zip

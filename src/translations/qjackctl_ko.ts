@@ -479,13 +479,13 @@ Are you sure?</source>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1803"/>
-        <location filename="../qjackctlGraph.cpp" line="1930"/>
+        <location filename="../qjackctlGraph.cpp" line="1806"/>
+        <location filename="../qjackctlGraph.cpp" line="1935"/>
         <source>Connect</source>
         <translation>연결하기</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2002"/>
+        <location filename="../qjackctlGraph.cpp" line="2007"/>
         <source>Disconnect</source>
         <translation>연결해제</translation>
     </message>
@@ -1089,12 +1089,12 @@ Are you sure?</source>
         <translation>확대/축소</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="454"/>
+        <location filename="../qjackctlGraphForm.cpp" line="458"/>
         <source>Ready</source>
         <translation>준비 완료</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="531"/>
+        <location filename="../qjackctlGraphForm.cpp" line="535"/>
         <source>Colors - %1</source>
         <translation>색상 - %1</translation>
     </message>

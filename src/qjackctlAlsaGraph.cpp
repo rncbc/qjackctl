@@ -45,7 +45,7 @@ qjackctlAlsaGraph::qjackctlAlsaGraph ( qjackctlGraphCanvas *canvas )
 
 // ALSA port (dis)connection.
 void qjackctlAlsaGraph::connectPorts (
-	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect )
+	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm == nullptr)
@@ -78,7 +78,7 @@ void qjackctlAlsaGraph::connectPorts (
 
 #ifdef CONFIG_DEBUG
 	qDebug("qjackctlAlsaGraph::connectPorts(%d:%d, %d:%d, %d)",
-		client_id1, port_id1, client_id2, port_id2, connect);
+		client_id1, port_id1, client_id2, port_id2, is_connect);
 #endif
 
 	snd_seq_port_subscribe_t *seq_subs;
@@ -94,7 +94,7 @@ void qjackctlAlsaGraph::connectPorts (
 	seq_addr.port = port_id2;
 	snd_seq_port_subscribe_set_dest(seq_subs, &seq_addr);
 
-	if (connect) {
+	if (is_connect) {
 		snd_seq_subscribe_port(seq, seq_subs);
 	} else {
 		snd_seq_unsubscribe_port(seq, seq_subs);
@@ -185,7 +185,7 @@ bool qjackctlAlsaGraph::findClientPort (
 
 	if (add_new && *port == nullptr && *node) {
 		*port = (*node)->addPort(port_name, port_mode, port_type);
-		(*port)->updatePortTypeColors(canvas());
+		(*port)->updatePortTypeColors(qjackctlGraphSect::canvas());
 	}
 
 	if (add_new && *node) {

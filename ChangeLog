@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Make up visual immediate feedback connectlons. (EXPERIMENTAL)
+
+
 0.9.8  2022-10-03  An Early-Autumn'22 release.
 
 - Graph: View / Repel Overlapping Nodes option added.

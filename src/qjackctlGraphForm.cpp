@@ -175,6 +175,10 @@ qjackctlGraphForm::qjackctlGraphForm (
 		SLOT(disconnected(qjackctlGraphPort *, qjackctlGraphPort *)));
 
 	QObject::connect(m_ui.graphCanvas,
+		SIGNAL(connected(qjackctlGraphConnect *)),
+		SLOT(connected(qjackctlGraphConnect *)));
+
+	QObject::connect(m_ui.graphCanvas,
 		SIGNAL(renamed(qjackctlGraphItem *, const QString&)),
 		SLOT(renamed(qjackctlGraphItem *, const QString&)));
 
@@ -727,6 +731,26 @@ void qjackctlGraphForm::disconnected (
 #endif
 
 	stabilize();
+}
+
+
+void qjackctlGraphForm::connected ( qjackctlGraphConnect *connect )
+{
+	qjackctlGraphPort *port1 = connect->port1();
+	if (port1 == nullptr)
+		return;
+
+	if (qjackctlJackGraph::isPortType(port1->portType())) {
+		if (m_jack)
+			m_jack->addItem(connect, false);
+	}
+#ifdef CONFIG_ALSA_SEQ
+	else
+	if (qjackctlAlsaGraph::isPortType(port1->portType())) {
+		if (m_alsa)
+			m_alsa->addItem(connect, false);
+	}
+#endif
 }
 
 

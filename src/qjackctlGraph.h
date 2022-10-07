@@ -543,6 +543,8 @@ signals:
 	void connected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void disconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 
+	void connected(qjackctlGraphConnect *connect);
+
 	// Generic change notification.
 	void changed();
 
@@ -673,7 +675,7 @@ public:
 	qjackctlGraphCanvas *canvas() const;
 
 	// Generic sect/graph methods.
-	void addItem(qjackctlGraphItem *item);
+	void addItem(qjackctlGraphItem *item, bool is_new = true);
 	void removeItem(qjackctlGraphItem *item);
 
 	// Clean-up all un-marked items...

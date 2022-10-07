@@ -42,7 +42,7 @@ public:
 
 	// JACK port (dis)connection.
 	void connectPorts(
-		qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect);
+		qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect);
 
 	// JACK graph updaters.
 	void updateItems();

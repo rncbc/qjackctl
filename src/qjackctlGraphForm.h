@@ -33,6 +33,7 @@ class qjackctlAlsaGraph;
 class qjackctlJackGraph;
 
 class qjackctlGraphPort;
+class qjackctlGraphConnect;
 
 class qjackctlSetup;
 
@@ -88,6 +89,8 @@ protected slots:
 	// Port (dis)connection slots.
 	void connected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void disconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
+
+	void connected(qjackctlGraphConnect *connect);
 
 	// Item renaming slot.
 	void renamed(qjackctlGraphItem *item, const QString& name);

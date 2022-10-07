@@ -180,7 +180,7 @@ qjackctlJackGraph::qjackctlJackGraph ( qjackctlGraphCanvas *canvas )
 
 // JACK port (dis)connection.
 void qjackctlJackGraph::connectPorts (
-	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool connect )
+	qjackctlGraphPort *port1, qjackctlGraphPort *port2, bool is_connect )
 {
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm == nullptr)
@@ -211,10 +211,10 @@ void qjackctlJackGraph::connectPorts (
 
 #ifdef CONFIG_DEBUG
 	qDebug("qjackctlJackGraph::connectPorts(\"%s\", \"%s\", %d)",
-		client_port_name1, client_port_name2, connect);
+		client_port_name1, client_port_name2, is_connect);
 #endif
 
-	if (connect) {
+	if (is_connect) {
 		::jack_connect(client, client_port_name1, client_port_name2);
 	} else {
 		::jack_disconnect(client, client_port_name1, client_port_name2);
@@ -342,7 +342,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 
 	if (add_new && *port == nullptr && *node) {
 		*port = (*node)->addPort(port_name, port_mode, port_type);
-		(*port)->updatePortTypeColors(canvas());
+		(*port)->updatePortTypeColors(qjackctlGraphSect::canvas());
 	}
 
 	if (add_new && *node) {
