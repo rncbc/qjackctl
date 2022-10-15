@@ -39,16 +39,12 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build
         run: |
-          git submodule -q update --init --recursive
-          mkdir build
+          git submodule -q update --init --recursive          
           
           cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-          if ($lastexitcode -ne 0) { exit $lastexitcode }
           
           cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-          if ($lastexitcode -ne 0) { exit $lastexitcode }
           
-
 #     - name: Upload a Build Artifact
 #       uses: actions/upload-artifact@v2.2.4
 #       with:
@@ -75,18 +71,15 @@ jobs:
       - name: Build
         run: |
           git submodule -q update --init --recursive
-          mkdir build
           
           cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCONFIG_INSTALL_QT=ON
-          if ($lastexitcode -ne 0) { exit $lastexitcode }
           
           cmake --build ${{github.workspace}}/build --target package --config ${{env.BUILD_TYPE}}
-          if ($lastexitcode -ne 0) { exit $lastexitcode }
           
           echo "otool -L"
-          otool -L build/src/QjackCtl.app/Contents/MacOS/QjackCtl
+          otool -L ${{github.workspace}}/build/src/QjackCtl.app/Contents/MacOS/QjackCtl
           echo "otool -l"
-          otool -l build/src/QjackCtl.app/Contents/MacOS/QjackCtl
+          otool -l ${{github.workspace}}/build/src/QjackCtl.app/Contents/MacOS/QjackCtl
 
 #     - name: Upload a Build Artifact
 #       uses: actions/upload-artifact@v2.2.4
@@ -177,7 +170,6 @@ jobs:
           $env:CXX="g++.exe"
           $env:PATH="${{ steps.dependencies.outputs.MINGW_PATH }}\bin;$env:PATH"
           git submodule -q update --init --recursive
-          mkdir build
           
           cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} "-GMinGW Makefiles" "-DCMAKE_PREFIX_PATH=${{steps.dependencies.outputs.QT_PATH}}\lib\cmake" -DCONFIG_INSTALL_QT=ON
           if ($lastexitcode -ne 0) { exit $lastexitcode }
