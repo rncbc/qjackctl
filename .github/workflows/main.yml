@@ -74,7 +74,7 @@ jobs:
           
           cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCONFIG_INSTALL_QT=ON
           
-          cmake --build ${{github.workspace}}/build --target package --config ${{env.BUILD_TYPE}}
+          cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
           
           echo "otool -L"
           otool -L ${{github.workspace}}/build/src/QjackCtl.app/Contents/MacOS/QjackCtl
