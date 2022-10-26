@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: Allow middle mouse button for grabbing and dragging the
+  main canvas. (EXPERIMENTAL)
+
 - Make up visual immediate feedback connectlons. (EXPERIMENTAL)
 
 
