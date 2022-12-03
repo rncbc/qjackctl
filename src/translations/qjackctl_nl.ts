@@ -1018,7 +1018,7 @@ Bent u zeker?</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="715"/>
-        <source>Repel &amp;Overlapping Nodes</source>
+        <source>Repel O&amp;verlapping Nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
