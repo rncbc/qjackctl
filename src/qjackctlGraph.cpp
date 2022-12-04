@@ -1051,7 +1051,7 @@ void qjackctlGraphConnect::updatePathTo ( const QPointF& pos )
 	const QPointF pos1_2(is_out0 ? pos1 + d2 : pos1 - d2);
 	const QPointF pos3_4(is_out0 ? pos4 - d2 : pos4 + d2);
 
-	qpwgraph_node *node1 = m_port1->portNode();
+	qjackctlGraphNode *node1 = m_port1->portNode();
 	const QRectF& rect1 = node1->itemRect();
 	const qreal h1 = 0.5 * rect1.height();
 	const qreal dh = pos0.y() - node1->scenePos().y() - h1;
