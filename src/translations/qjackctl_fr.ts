@@ -660,7 +660,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="306"/>
         <source>F2</source>
-        <translation type="unfinished">F2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="314"/>
@@ -1010,18 +1010,18 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="715"/>
         <source>Repel O&amp;verlapping Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repousser les nœuds qui se che&amp;vauchent</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="718"/>
         <source>Repel nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repousser les nœuds</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="721"/>
         <location filename="../qjackctlGraphForm.ui" line="724"/>
         <source>Repel overlapping nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repousser les nœuds qui se chevauchent</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="732"/>
