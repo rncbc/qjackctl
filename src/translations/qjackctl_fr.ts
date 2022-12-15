@@ -660,7 +660,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="306"/>
         <source>F2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F2</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="314"/>
