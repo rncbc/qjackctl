@@ -60,45 +60,45 @@
         <location filename="../qjackctlSetup.cpp" line="636"/>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити звуковий сервер JACK негайно.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити назву набору типових параметрів.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити активний файл визначення комутації.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити типову назву звукового сервера JACK.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="644"/>
         <source>Show help about command line options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати довідку щодо параметрів командного рядка.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="646"/>
         <source>Show version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати відомості щодо версії.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="674"/>
         <source>Launch command with arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустити команду з аргументами.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="675"/>
         <source>[command-and-args]</source>
-        <translation type="unfinished"></translation>
+        <translation>[команда-з-аргументами]</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
@@ -227,7 +227,7 @@
     <message>
         <location filename="../qjackctl.cpp" line="124"/>
         <source>JACK: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK: %1</translation>
     </message>
 </context>
 <context>
@@ -566,12 +566,12 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="199"/>
         <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="219"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="224"/>
@@ -659,7 +659,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="307"/>
         <source>F2</source>
-        <translation type="unfinished">F2</translation>
+        <translation>F2</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="315"/>
@@ -878,7 +878,7 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="560"/>
         <source>ALSA M&amp;IDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA M&amp;IDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="563"/>
@@ -1009,38 +1009,38 @@ Are you sure?</source>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="716"/>
         <source>Repel O&amp;verlapping Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Від&amp;кинути вузли з перекриттям</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="719"/>
         <source>Repel nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкинути вузли</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="722"/>
         <location filename="../qjackctlGraphForm.ui" line="725"/>
         <source>Repel overlapping nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкинути вузли з перекриттям</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="736"/>
         <source>Connect Thro&amp;ugh Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>З&apos;єднати &amp;через вузли</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="739"/>
         <source>Connect Through Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>З&apos;єднати через вузли</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="742"/>
         <source>Connect through nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>З&apos;єднати через вузли</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="745"/>
         <source>Whether to draw connectors through or around nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Визначає, слід малювати з&apos;єднання через вузли чи навколо вузлів</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="753"/>
