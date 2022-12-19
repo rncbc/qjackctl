@@ -120,6 +120,7 @@ protected slots:
 	void viewColorsReset();
 
 	void viewRepelOverlappingNodes(bool on);
+	void viewConnectThroughNodes(bool on);
 
 	void helpAbout();
 	void helpAboutQt();
@@ -210,6 +211,9 @@ public:
 	void setRepelOverlappingNodes(bool repelnodes);
 	bool isRepelOverlappingNodes() const;
 
+	void setConnectThroughNodes(bool repelnodes);
+	bool isConnectThroughNodes() const;
+
 	// Graph main-widget state methods.
 	bool restoreState(QMainWindow *widget);
 	bool saveState(QMainWindow *widget) const;
@@ -228,6 +232,7 @@ private:
 	int        m_sortorder;
 
 	bool       m_repelnodes;
+	bool       m_cthrunodes;
 };
 
 

@@ -257,6 +257,10 @@ public:
 	// Rectangular editor extents.
 	QRectF editorRect() const;
 
+	// Connector curve draw style (through vs. around nodes)
+	static void setConnectThroughNodes(bool on);
+	static bool isConnectThroughNodes();
+
 protected:
 
 	void paint(QPainter *painter,
@@ -425,6 +429,10 @@ public:
 	// Special port-type color business.
 	void updatePortTypeColors();
 
+	// Connector curve draw style (through vs. around nodes)
+	static void setConnectThroughNodes(bool on);
+	static bool isConnectThroughNodes();
+
 protected:
 
 	void paint(QPainter *painter,
@@ -439,6 +447,9 @@ private:
 	// Instance variables.
 	qjackctlGraphPort *m_port1;
 	qjackctlGraphPort *m_port2;
+
+	// Connector curve draw style (through vs. around nodes)
+	static bool g_connect_through_nodes;
 };
 
 
@@ -573,6 +584,9 @@ public slots:
 
 	// Update all nodes.
 	void updateNodes();
+
+	// Update all connectors.
+	void updateConnects();
 
 protected slots:
 

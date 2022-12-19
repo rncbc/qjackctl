@@ -267,6 +267,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QObject::connect(m_ui.viewRepelOverlappingNodesAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewRepelOverlappingNodes(bool)));
+	QObject::connect(m_ui.viewConnectThroughNodesAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewConnectThroughNodes(bool)));
 
 	m_ui.viewColorsJackAudioAction->setData(qjackctlJackGraph::audioPortType());
 	m_ui.viewColorsJackMidiAction->setData(qjackctlJackGraph::midiPortType());
@@ -410,6 +413,7 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	m_ui.viewTextBesideIconsAction->setChecked(m_config->isTextBesideIcons());
 	m_ui.viewZoomRangeAction->setChecked(m_config->isZoomRange());
 	m_ui.viewRepelOverlappingNodesAction->setChecked(m_config->isRepelOverlappingNodes());
+	m_ui.viewConnectThroughNodesAction->setChecked(m_config->isConnectThroughNodes());
 
 	const qjackctlGraphPort::SortType sort_type
 		= qjackctlGraphPort::SortType(m_config->sortType());
@@ -447,6 +451,7 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	viewTextBesideIcons(m_config->isTextBesideIcons());
 	viewZoomRange(m_config->isZoomRange());
 	viewRepelOverlappingNodes(m_config->isRepelOverlappingNodes());
+	viewConnectThroughNodes(m_config->isConnectThroughNodes());
 
 	m_ui.graphCanvas->restoreState();
 
@@ -588,6 +593,13 @@ void qjackctlGraphForm::viewRepelOverlappingNodes ( bool on )
 {
 	m_ui.graphCanvas->setRepelOverlappingNodes(on);
 	if (on) ++m_repel_overlapping_nodes;
+}
+
+
+void qjackctlGraphForm::viewConnectThroughNodes ( bool on )
+{
+	qjackctlGraphConnect::setConnectThroughNodes(on);
+	m_ui.graphCanvas->updateConnects();
 }
 
 
@@ -935,6 +947,7 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 	m_ui.graphCanvas->saveState();
 
 	if (m_config && QMainWindow::isVisible()) {
+		m_config->setConnectThroughNodes(m_ui.viewConnectThroughNodesAction->isChecked());
 		m_config->setRepelOverlappingNodes(m_ui.viewRepelOverlappingNodesAction->isChecked());
 		m_config->setSortOrder(int(qjackctlGraphPort::sortOrder()));
 		m_config->setSortType(int(qjackctlGraphPort::sortType()));
@@ -1032,6 +1045,7 @@ static const char *ViewZoomRangeKey = "/ZoomRange";
 static const char *ViewSortTypeKey  = "/SortType";
 static const char *ViewSortOrderKey = "/SortOrder";
 static const char *ViewRepelOverlappingNodesKey = "/RepelOverlappingNodes";
+static const char *ViewConnectThroughNodesKey = "/ConnectThroughNodes";
 
 
 // Constructors.
@@ -1039,7 +1053,8 @@ qjackctlGraphConfig::qjackctlGraphConfig ( QSettings *settings )
 	: m_settings(settings), m_menubar(false),
 		m_toolbar(false), m_statusbar(false),
 		m_texticons(false), m_zoomrange(false),
-		m_sorttype(0), m_sortorder(0)
+		m_sorttype(0), m_sortorder(0),
+		m_repelnodes(false), m_cthrunodes(false)
 {
 }
 
@@ -1139,6 +1154,18 @@ bool qjackctlGraphConfig::isRepelOverlappingNodes (void) const
 }
 
 
+void qjackctlGraphConfig::setConnectThroughNodes ( bool cthrunodes )
+{
+	m_cthrunodes = cthrunodes;
+}
+
+
+bool qjackctlGraphConfig::isConnectThroughNodes (void) const
+{
+	return m_cthrunodes;
+}
+
+
 // Graph main-widget state methods.
 bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 {
@@ -1154,6 +1181,7 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 	m_sorttype  = m_settings->value(ViewSortTypeKey, 0).toInt();
 	m_sortorder = m_settings->value(ViewSortOrderKey, 0).toInt();
 	m_repelnodes = m_settings->value(ViewRepelOverlappingNodesKey, false).toBool();
+	m_cthrunodes = m_settings->value(ViewConnectThroughNodesKey, false).toBool();
 	m_settings->endGroup();
 
 	m_settings->beginGroup(LayoutGroup);
@@ -1182,6 +1210,7 @@ bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 	m_settings->setValue(ViewSortTypeKey, m_sorttype);
 	m_settings->setValue(ViewSortOrderKey, m_sortorder);
 	m_settings->setValue(ViewRepelOverlappingNodesKey, m_repelnodes);
+	m_settings->setValue(ViewConnectThroughNodesKey, m_cthrunodes);
 	m_settings->endGroup();
 
 	m_settings->beginGroup(LayoutGroup);

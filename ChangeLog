@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: whether to draw connectors through or around nodes is a
+  new user preference option (cf. View > Connect Through Nodes).
+  (EXPERIMENTAL)
+
 - Graph: Allow middle mouse button for grabbing and dragging the
   main canvas. (EXPERIMENTAL)
 
