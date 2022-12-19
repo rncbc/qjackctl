@@ -660,7 +660,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="307"/>
         <source>F2</source>
-        <translation type="unfinished">F2</translation>
+        <translation>F2</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="315"/>
@@ -1026,22 +1026,22 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="736"/>
         <source>Connect Thro&amp;ugh Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion par les nœ&amp;uds</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="739"/>
         <source>Connect Through Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion par les nœuds</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="742"/>
         <source>Connect through nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion par les nœuds</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="745"/>
         <source>Whether to draw connectors through or around nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Si les connecteurs doivent être dessinés à travers ou autour des nœuds</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="753"/>
