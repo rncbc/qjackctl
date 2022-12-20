@@ -4,16 +4,15 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.9  2022-12-28  An End-of-Year'22 Release.
 
 - Graph: whether to draw connectors through or around nodes is a
   new user preference option (cf. View > Connect Through Nodes).
-  (EXPERIMENTAL)
 
 - Graph: Allow middle mouse button for grabbing and dragging the
-  main canvas. (EXPERIMENTAL)
+  main canvas.
 
-- Make up visual immediate feedback connectlons. (EXPERIMENTAL)
+- Make up visual immediate feedback connectlons.
 
 
 0.9.8  2022-10-03  An Early-Autumn'22 release.
