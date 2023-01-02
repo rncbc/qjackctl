@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Bumping copyright headers to the brand new year.
+
+
 0.9.9  2022-12-28  An End-of-Year'22 Release.
 
 - Graph: whether to draw connectors through or around nodes is a
