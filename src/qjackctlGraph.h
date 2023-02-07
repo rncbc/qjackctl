@@ -1,7 +1,7 @@
 // qjackctlGraph.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -31,6 +31,9 @@
 
 #include <QList>
 #include <QHash>
+
+class QGestureEvent;
+class QPinchGesture;
 
 
 // Forward decls.
@@ -614,6 +617,11 @@ protected:
 	// Keyboard event handler.
 	void keyPressEvent(QKeyEvent *event);
 
+	// Gesture event handlers.
+	bool event(QEvent *event);
+	bool gestureEvent(QGestureEvent *event);
+	void pinchGesture(QPinchGesture *pinch);
+
 	// Graph node key helper.
 	QString nodeKey(qjackctlGraphNode *node) const;
 
@@ -641,6 +649,7 @@ private:
 	QRubberBand          *m_rubberband;
 	qreal                 m_zoom;
 	bool                  m_zoomrange;
+	bool                  m_gesture;
 
 	qjackctlGraphNode::ItemKeys m_nodekeys;
 	QList<qjackctlGraphNode *>  m_nodes;

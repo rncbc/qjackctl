@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: introducing touch pinch-gesture for zooming. (EXPERIMENTAL)
+
 - Bumping copyright headers to the brand new year.
 
 
