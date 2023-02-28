@@ -281,7 +281,17 @@ void qjackctlGraphPort::setPortTitle ( const QString& title )
 {
 	m_title = (title.isEmpty() ? m_name : title);
 
-	m_text->setPlainText(m_title);
+	static const int MAX_TITLE_LENGTH = 29;
+	static const QString ellipsis(3, '.');
+
+	QString text = m_title;
+	const int nlength = text.indexOf(':');
+	if (nlength >= 0)
+		text.remove(0, nlength + 1);
+	if (text.length() >= MAX_TITLE_LENGTH + ellipsis.length())
+		text = ellipsis + text.right(MAX_TITLE_LENGTH);
+
+	m_text->setPlainText(text);
 
 	QPainterPath path;
 	const QRectF& rect

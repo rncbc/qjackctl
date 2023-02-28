@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: Attempt to make port labels as short as possible. (EXPERIMENTAL)
+
 - Graph: introducing touch pinch-gesture for zooming. (EXPERIMENTAL)
 
 - Bumping copyright headers to the brand new year.
