@@ -4619,7 +4619,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1001"/>
         <location filename="../qjackctlSetupForm.cpp" line="1064"/>
-        <location filename="../qjackctlSetupForm.cpp" line="2056"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2069"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
@@ -4752,7 +4752,7 @@ next time you start this application.</source>
 次回に起動した時に有効となります。</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="2057"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2070"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

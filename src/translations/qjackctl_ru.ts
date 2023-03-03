@@ -3985,7 +3985,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1001"/>
         <location filename="../qjackctlSetupForm.cpp" line="1064"/>
-        <location filename="../qjackctlSetupForm.cpp" line="2056"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2069"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -4067,7 +4067,7 @@ next time you start this application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="2057"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2070"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

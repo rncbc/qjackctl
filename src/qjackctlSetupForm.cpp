@@ -1,7 +1,7 @@
 ﻿// qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -2008,6 +2008,19 @@ void qjackctlSetupForm::apply (void)
 }
 
 
+// Discard/revert settings (Discard button slot).
+void qjackctlSetupForm::discard (void)
+{
+	// Load settings...
+	qjackctlPreset preset;
+	if (m_pSetup->loadPreset(preset, m_sPreset)) {
+		setCurrentPreset(preset);
+		// Reset dirty flags?
+		m_iDirtySettings = 0;
+	}
+}
+
+
 // Accept settings (OK button slot).
 void qjackctlSetupForm::accept (void)
 {
@@ -2061,10 +2074,11 @@ bool qjackctlSetupForm::queryClose (void)
 			QMessageBox::Cancel)) {
 		case QMessageBox::Apply:
 			apply();
-			// Fall thru...
-		case QMessageBox::Discard:
 			break;
-		default:    // Cancel.
+		case QMessageBox::Discard:
+			discard();
+			break;
+		default: // Cancel.
 			bQueryClose = false;
 			break;
 		}

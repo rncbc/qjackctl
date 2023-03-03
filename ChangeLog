@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Setup: revert to previous settings when dismissing the dialog.
+
 - Graph: Attempt to make port labels as short as possible. (EXPERIMENTAL)
 
 - Graph: introducing touch pinch-gesture for zooming. (EXPERIMENTAL)
