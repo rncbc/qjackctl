@@ -16,8 +16,8 @@
 #
 
 %define name    qjackctl
-%define version 0.9.9
-%define release 53.1
+%define version 0.9.10
+%define release 54.1
 
 %define _prefix	/usr
 
@@ -146,6 +146,8 @@ cmake --install build
 %{_datadir}/man/fr/man1/%{name}.1.gz
 
 %changelog
+* Wed Mar 23 2023 Rui Nuno Capela <rncbc@rncbc.org> 0.9.10
+- An Early-Spring'23 Release.
 * Wed Dec 28 2022 Rui Nuno Capela <rncbc@rncbc.org> 0.9.9
 - An End-of-Year'22 Release.
 * Mon Oct  3 2022 Rui Nuno Capela <rncbc@rncbc.org> 0.9.8

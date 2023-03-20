@@ -4,15 +4,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.10  2023-03-23  An Early-Spring'23 Release.
 
 - Setup: revert to previous settings when dismissing the dialog.
 
-- Graph: Attempt to make port labels as short as possible. (EXPERIMENTAL)
+- Graph: Attempt to make port labels as short as possible.
 
-- Graph: introducing touch pinch-gesture for zooming. (EXPERIMENTAL)
-
-- Bumping copyright headers to the brand new year.
+- Graph: introducing touch pinch-gesture for zooming.
 
 
 0.9.9  2022-12-28  An End-of-Year'22 Release.
