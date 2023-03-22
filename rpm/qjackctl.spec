@@ -146,7 +146,7 @@ cmake --install build
 %{_datadir}/man/fr/man1/%{name}.1.gz
 
 %changelog
-* Wed Mar 23 2023 Rui Nuno Capela <rncbc@rncbc.org> 0.9.10
+* Thu Mar 23 2023 Rui Nuno Capela <rncbc@rncbc.org> 0.9.10
 - An Early-Spring'23 Release.
 * Wed Dec 28 2022 Rui Nuno Capela <rncbc@rncbc.org> 0.9.9
 - An End-of-Year'22 Release.
