@@ -566,12 +566,12 @@ Está seguro?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="199"/>
         <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="219"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="224"/>
@@ -659,7 +659,7 @@ Está seguro?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="307"/>
         <source>F2</source>
-        <translation type="unfinished">F2</translation>
+        <translation>F2</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="315"/>
@@ -1009,38 +1009,38 @@ Está seguro?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="716"/>
         <source>Repel O&amp;verlapping Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repeler Nodos S&amp;uperpuestos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="719"/>
         <source>Repel nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repeler nodos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="722"/>
         <location filename="../qjackctlGraphForm.ui" line="725"/>
         <source>Repel overlapping nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repeler nodos superpuestos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="736"/>
         <source>Connect Thro&amp;ugh Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar a Tra&amp;vés de Nodos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="739"/>
         <source>Connect Through Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar a Través de Nodos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="742"/>
         <source>Connect through nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar a través de nodos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="745"/>
         <source>Whether to draw connectors through or around nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Trazar conectores a través de o alrededor de nodos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="753"/>
