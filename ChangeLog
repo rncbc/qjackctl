@@ -4,10 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.11  2023-06-01  A Spring'23 Release.
 
 - Graph: Soft incremental bounds constraints now imposed to all
-  new and old nodes positioning. (EXPERIMENTAL)
+  new and old nodes positioning.
+
 - Prepping into the next development cycle (with Qt >= 6.5).
 
 
