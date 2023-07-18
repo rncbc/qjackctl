@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: Click-dragging with the mouse middle-button is now used
+  for panning only, not to start a selection anymore. (EXPERIMENTAL)
+
 - Preppings to next development cycle (Qt >= 6.6)
 
 
