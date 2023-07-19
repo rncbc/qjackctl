@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: Ctrl+left or middle-button click-dragging for panning, is
+  now a lot smoother, hopefully. (EXPERIMENTAL)
+
 - Graph: Click-dragging with the mouse middle-button is now used
   for panning only, not to start a selection anymore. (EXPERIMENTAL)
 

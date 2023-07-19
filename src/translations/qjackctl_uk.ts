@@ -225,7 +225,7 @@
 <context>
     <name>qjackctlApplication</name>
     <message>
-        <location filename="../qjackctl.cpp" line="124"/>
+        <location filename="../qjackctl.cpp" line="127"/>
         <source>JACK: %1</source>
         <translation>JACK: %1</translation>
     </message>
@@ -478,13 +478,13 @@ Are you sure?</source>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1856"/>
-        <location filename="../qjackctlGraph.cpp" line="1983"/>
+        <location filename="../qjackctlGraph.cpp" line="1868"/>
+        <location filename="../qjackctlGraph.cpp" line="2001"/>
         <source>Connect</source>
         <translation>З&apos;єднати</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2055"/>
+        <location filename="../qjackctlGraph.cpp" line="2073"/>
         <source>Disconnect</source>
         <translation>Від’єднати</translation>
     </message>
