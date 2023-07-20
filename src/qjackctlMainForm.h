@@ -103,8 +103,8 @@ public:
 
 	void refreshXrunStats();
 
-	void refreshJackConnections();
-	void refreshAlsaConnections();
+	void refreshJackConnections(bool bClear = false);
+	void refreshAlsaConnections(bool bClear = false);
 
 	void refreshPatchbay();
 
@@ -352,10 +352,9 @@ private:
 	int m_iStatusBlink;
 	int m_iStatusRefresh;
 	int m_iPatchbayRefresh;
-	
-#ifdef CONFIG_JACK_METADATA
-	int m_iJackPropertyChange;
-#endif
+
+	int m_iJackRefreshClear;
+	int m_iAlsaRefreshClear;
 
 	QSocketNotifier *m_pStdoutNotifier;
 	QSocketNotifier *m_pSigtermNotifier;
