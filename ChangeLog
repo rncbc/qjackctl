@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Connections: Fixed an old JACK client/ports aliases malfunction,
+  hopefully. (cf. GH issue #196) (EXPERIMENTAL)
+
 - Graph: Ctrl+left or middle-button click-dragging for panning, is
   now a lot smoother, hopefully. (EXPERIMENTAL)
 
