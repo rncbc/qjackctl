@@ -415,13 +415,15 @@ int qjackctlJackClientList::updateClientPorts (void)
 						sPortName = sClientPort.right(sClientPort.length() - iColon - 1);
 					}
 				}
-				if (pClient && pClient->clientText() != sClientName)  {
-					pClient->setClientText(sClientName, false);
-					++iDirtyCount;
-				}
-				if (pPort && pPort->portText() != sPortName)  {
-					pPort->setPortText(sPortName, false);
-					++iDirtyCount;
+				if (!g_bJackClientPortMetadata) {
+					if (pClient && pClient->clientText() != sClientName)  {
+						pClient->setClientText(sClientName, false);
+						++iDirtyCount;
+					}
+					if (pPort && pPort->portText() != sPortName)  {
+						pPort->setPortText(sPortName, false);
+						++iDirtyCount;
+					}
 				}
 			#endif
 				if (pPort)
