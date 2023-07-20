@@ -105,7 +105,7 @@
         <translation>Option -n benötigt ein Argument (Name).</translation>
     </message>
     <message>
-        <location filename="../qjackctlJackConnect.cpp" line="178"/>
+        <location filename="../qjackctlJackConnect.cpp" line="204"/>
         <source>%1 (%2 frames)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -478,13 +478,13 @@ Sind Sie sicher?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1868"/>
-        <location filename="../qjackctlGraph.cpp" line="2001"/>
+        <location filename="../qjackctlGraph.cpp" line="1872"/>
+        <location filename="../qjackctlGraph.cpp" line="2005"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2073"/>
+        <location filename="../qjackctlGraph.cpp" line="2077"/>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>

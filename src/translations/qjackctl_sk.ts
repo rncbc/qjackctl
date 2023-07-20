@@ -105,7 +105,7 @@
         <translation>Možnosť -n vyžaduje argument (názov).</translation>
     </message>
     <message>
-        <location filename="../qjackctlJackConnect.cpp" line="178"/>
+        <location filename="../qjackctlJackConnect.cpp" line="204"/>
         <source>%1 (%2 frames)</source>
         <translation>%1 (%2 snímkov)</translation>
     </message>
@@ -479,13 +479,13 @@ Ste si istý?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1868"/>
-        <location filename="../qjackctlGraph.cpp" line="2001"/>
+        <location filename="../qjackctlGraph.cpp" line="1872"/>
+        <location filename="../qjackctlGraph.cpp" line="2005"/>
         <source>Connect</source>
         <translation>Spojiť</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2073"/>
+        <location filename="../qjackctlGraph.cpp" line="2077"/>
         <source>Disconnect</source>
         <translation>Rozpojiť</translation>
     </message>
