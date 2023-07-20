@@ -1634,7 +1634,11 @@ void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 		// always fake a left-button press...
 		QGraphicsView::setDragMode(ScrollHandDrag);
 		QMouseEvent event2(event->type(),
+		#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 			event->position(), event->globalPosition(),
+		#else
+			event->localPos(), event->globalPos(),
+		#endif
 			Qt::LeftButton, Qt::LeftButton,
 			event->modifiers() | Qt::ControlModifier);
 		QGraphicsView::mousePressEvent(&event2);
