@@ -105,7 +105,7 @@
         <translation>옵션 -n에는 인수(이름)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlJackConnect.cpp" line="204"/>
+        <location filename="../qjackctlJackConnect.cpp" line="178"/>
         <source>%1 (%2 frames)</source>
         <translation>%1 (%2 프레임)</translation>
     </message>

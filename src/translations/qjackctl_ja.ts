@@ -105,7 +105,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlJackConnect.cpp" line="204"/>
+        <location filename="../qjackctlJackConnect.cpp" line="178"/>
         <source>%1 (%2 frames)</source>
         <translation></translation>
     </message>
