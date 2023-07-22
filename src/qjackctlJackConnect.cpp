@@ -115,38 +115,12 @@ qjackctlJackPort::~qjackctlJackPort (void)
 // Pretty/display name method (virtual override).
 void qjackctlJackPort::updatePortName ( bool bRename )
 {
+#ifdef CONFIG_JACK_METADATA
 	jack_client_t *pJackClient = nullptr;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pJackClient = pMainForm->jackClient();
-	if (pJackClient == nullptr)
-		return;
-
-#ifdef CONFIG_JACK_PORT_ALIASES
-	const int iJackClientPortAlias
-		= qjackctlJackClientList::jackClientPortAlias();
-	if (iJackClientPortAlias > 0) {
-		char *aliases[2];
-		const unsigned short alias_size = jack_port_name_size() + 1;
-		aliases[0] = new char [alias_size];
-		aliases[1] = new char [alias_size];
-		QString sPortName = portName();
-		QString sClientPort = clientName() + ':' + sPortName;
-		const QByteArray aClientPort = sClientPort.toUtf8();
-		const char *pszClientPort = aClientPort.constData();
-		jack_port_t *pJackPort = jack_port_by_name(pJackClient, pszClientPort);
-		if (pJackPort && jack_port_get_aliases(pJackPort, aliases) >= iJackClientPortAlias) {
-			sClientPort = QString::fromUtf8(aliases[iJackClientPortAlias - 1]);
-			sPortName = sClientPort.section(':', 1);
-		}
-		delete [] aliases[0];
-		delete [] aliases[1];
-		setPortText(sPortName, false);
-	}
-	else
-#endif
-#ifdef CONFIG_JACK_METADATA
-	if (qjackctlJackClientList::isJackClientPortMetadata()) {
+	if (pJackClient && qjackctlJackClientList::isJackClientPortMetadata()) {
 		bool bRenameEnabled = false;
 		QString sPortNameEx = portNameAlias(&bRenameEnabled);
 		const QString& sPortName = portName();
@@ -170,8 +144,8 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 				&& !sPrettyName.isEmpty() && bRename) {
 				removePrettyName(pJackClient, port_uuid);
 			}
+			setPortText(sPortNameEx, bRenameEnabled);
 		}
-		setPortText(sPortNameEx, bRenameEnabled);
 	}
 	else
 #endif
@@ -257,15 +231,12 @@ qjackctlJackPort *qjackctlJackClient::findJackPort ( const QString& sPortName )
 // Pretty/display name method (virtual override).
 void qjackctlJackClient::updateClientName ( bool bRename )
 {
+#ifdef CONFIG_JACK_METADATA
 	jack_client_t *pJackClient = nullptr;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pJackClient = pMainForm->jackClient();
-	if (pJackClient == nullptr)
-		return;
-
-#ifdef CONFIG_JACK_METADATA
-	if (qjackctlJackClientList::isJackClientPortMetadata()) {
+	if (pJackClient && qjackctlJackClientList::isJackClientPortMetadata()) {
 		bool bRenameEnabled = false;
 		QString sClientNameEx = clientNameAlias(&bRenameEnabled);
 		const QString& sClientName = clientName();
@@ -386,9 +357,14 @@ int qjackctlJackClientList::updateClientPorts (void)
 			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
 			qjackctlJackClient *pClient = nullptr;
 			qjackctlJackPort *pPort = nullptr;
-			const char *pszClientPort = ppszClientPorts[iClientPort];
-			jack_port_t *pJackPort = jack_port_by_name(pJackClient, pszClientPort);
-			int iColon = sClientPort.indexOf(':');
+			jack_port_t *pJackPort = jack_port_by_name(pJackClient,
+				ppszClientPorts[iClientPort]);
+		#ifdef CONFIG_JACK_PORT_ALIASES
+			if (g_iJackClientPortAlias > 0 &&
+				jack_port_get_aliases(pJackPort, aliases) >= g_iJackClientPortAlias)
+				sClientPort = QString::fromUtf8(aliases[g_iJackClientPortAlias - 1]);
+		#endif
+			const int iColon = sClientPort.indexOf(':');
 			if (pJackPort && iColon >= 0) {
 				QString sClientName = sClientPort.left(iColon);
 				QString sPortName = sClientPort.right(sClientPort.length() - iColon - 1);
@@ -405,27 +381,6 @@ int qjackctlJackClientList::updateClientPorts (void)
 					pPort->setPortName(sPortName);
 					++iDirtyCount;
 				}
-			#ifdef CONFIG_JACK_PORT_ALIASES
-				if (g_iJackClientPortAlias > 0 &&
-					jack_port_get_aliases(pJackPort, aliases) >= g_iJackClientPortAlias) {
-					sClientPort = QString::fromUtf8(aliases[g_iJackClientPortAlias - 1]);
-					iColon = sClientPort.indexOf(':');
-					if (iColon >= 0) {
-						sClientName = sClientPort.left(iColon);
-						sPortName = sClientPort.right(sClientPort.length() - iColon - 1);
-					}
-				}
-				if (!g_bJackClientPortMetadata) {
-					if (pClient && pClient->clientText() != sClientName)  {
-						pClient->setClientText(sClientName, false);
-						++iDirtyCount;
-					}
-					if (pPort && pPort->portText() != sPortName)  {
-						pPort->setPortText(sPortName, false);
-						++iDirtyCount;
-					}
-				}
-			#endif
 				if (pPort)
 					pPort->markClientPort(1);
 			}
@@ -618,6 +573,9 @@ void qjackctlJackConnect::updateConnections (void)
 	if (pIClientList == nullptr)
 		return;
 
+#ifdef CONFIG_JACK_PORT_ALIASES
+	const int iJackClientPortAlias = qjackctlJackClientList::jackClientPortAlias();
+#endif
 	// For each output client item...
 	QListIterator<qjackctlClientItem *> oclient(OClientList()->clients());
 	while (oclient.hasNext()) {
@@ -646,9 +604,31 @@ void qjackctlJackConnect::updateConnections (void)
 					// Now, for each input client port...
 					for (int iClientPort = 0;
 							ppszClientPorts[iClientPort]; ++iClientPort) {
-						qjackctlPortItem *pIPort
-							= pIClientList->findJackClientPort(
+						qjackctlPortItem *pIPort = nullptr;
+					#ifdef CONFIG_JACK_PORT_ALIASES
+						if (iJackClientPortAlias > 0) {
+							// If Jack aliases are in effect, look for those if present -ag
+							jack_port_t *pIJackPort
+								= jack_port_by_name(pJackClient, ppszClientPorts[iClientPort]);
+							if (pIJackPort) {
+								char *aliases[2];
+								const unsigned short alias_size = jack_port_name_size() + 1;
+								aliases[0] = new char [alias_size];
+								aliases[1] = new char [alias_size];
+								if (jack_port_get_aliases(pIJackPort, aliases) >= iJackClientPortAlias) {
+									pIPort = pIClientList->findJackClientPort(aliases[iJackClientPortAlias - 1]);
+								}
+								delete [] aliases[0];
+								delete [] aliases[1];
+							}
+							// Otherwise we fall through to the default case below
+							// which looks for the port under its real name
+						}
+					#endif
+						if (!pIPort) {
+							pIPort = pIClientList->findJackClientPort(
 								ppszClientPorts[iClientPort]);
+						}
 						if (pIPort) {
 							pOPort->addConnect(pIPort);
 							pIPort->addConnect(pOPort);

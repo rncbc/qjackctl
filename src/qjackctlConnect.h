@@ -99,6 +99,8 @@ public:
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
 
+protected:
+
 	// Port name display name accessors.
 	void setPortText(const QString& sPortText, bool bRenameEnabled);
 	QString portText() const;
@@ -171,6 +173,8 @@ public:
 	// Proxy sort override method.
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
+
+protected:
 
 	// Client name display name accessors.
 	void setClientText(const QString& sClientText, bool bRenameEnabled);
