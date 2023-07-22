@@ -600,25 +600,31 @@ void qjackctlJackConnect::updateConnections (void)
 					// Now, for each input client port...
 					for (int iClientPort = 0;
 							ppszClientPorts[iClientPort]; ++iClientPort) {
-						qjackctlPortItem *pIPort
-							= pIClientList->findJackClientPort(
-								ppszClientPorts[iClientPort]);
+						qjackctlPortItem *pIPort = nullptr;
 #ifdef CONFIG_JACK_PORT_ALIASES
-						if (!pIPort) {
-						  // if the port can't be found by its proper name, look for an alias -ag
+						if (iJackClientPortAlias > 0) {
+						  // if Jack aliases are in effect, look for those if present -ag
 						  jack_port_t *pIJackPort
 						    = jack_port_by_name(pJackClient, ppszClientPorts[iClientPort]);
-						  char *aliases[2];
-						  const unsigned short alias_size = jack_port_name_size() + 1;
-						  aliases[0] = new char [alias_size];
-						  aliases[1] = new char [alias_size];
-						  if (pIJackPort && jack_port_get_aliases(pIJackPort, aliases) >= iJackClientPortAlias) {
-						    pIPort = pIClientList->findJackClientPort(aliases[iJackClientPortAlias - 1]);
+						  if (pIJackPort) {
+						    char *aliases[2];
+						    const unsigned short alias_size = jack_port_name_size() + 1;
+						    aliases[0] = new char [alias_size];
+						    aliases[1] = new char [alias_size];
+						    if (jack_port_get_aliases(pIJackPort, aliases) >= iJackClientPortAlias) {
+						      pIPort = pIClientList->findJackClientPort(aliases[iJackClientPortAlias - 1]);
+						    }
+						    delete [] aliases[0];
+						    delete [] aliases[1];
 						  }
-						  delete [] aliases[0];
-						  delete [] aliases[1];
+						  // otherwise we fall through to the default case below which
+						  // looks for the port under its real name
 						}
 #endif
+						if (!pIPort) {
+							pIPort = pIClientList->findJackClientPort(
+									ppszClientPorts[iClientPort]);
+						}
 						if (pIPort) {
 							pOPort->addConnect(pIPort);
 							pIPort->addConnect(pOPort);
