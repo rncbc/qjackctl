@@ -451,8 +451,9 @@ qjackctlMainForm::qjackctlMainForm (
 
 	m_iPatchbayRefresh = 0;
 
-	m_iJackRefreshClear = 0;
-	m_iAlsaRefreshClear = 0;
+#ifdef CONFIG_JACK_METADATA
+	m_iJackPropertyChange = 0;
+#endif
 
 	m_pStdoutNotifier = nullptr;
 	m_pAlsaNotifier = nullptr;
@@ -2026,10 +2027,10 @@ void qjackctlMainForm::updateXrunStats ( float fXrunLast )
 			m_fXrunMin = m_fXrunLast;
 		if (m_fXrunLast > m_fXrunMax || m_iXrunCount == 0)
 			m_fXrunMax = m_fXrunLast;
-		++m_iXrunCount;
+		m_iXrunCount++;
 	//	refreshXrunStats();
 	}
-	++m_iXrunStats;
+	m_iXrunStats++;
 }
 
 
@@ -2214,7 +2215,7 @@ void qjackctlMainForm::updateJackClientPortAlias (void)
 
 	qjackctlJackClientList::setJackClientPortAlias(m_pSetup->iJackClientPortAlias);
 
-	refreshJackConnections(true);
+	refreshJackConnections();
 }
 
 
@@ -2226,7 +2227,7 @@ void qjackctlMainForm::updateJackClientPortMetadata (void)
 
 	qjackctlJackClientList::setJackClientPortMetadata(m_pSetup->bJackClientPortMetadata);
 
-	refreshJackConnections(true);
+	refreshJackConnections();
 }
 
 
@@ -2507,15 +2508,15 @@ void qjackctlMainForm::updateActivePatchbay (void)
 			appendMessages(tr("Patchbay activated."));
 			// If we're up and running, make it dirty :)
 			if (m_pJackClient)
-				++m_iJackDirty;
+				m_iJackDirty++;
 			if (m_pAlsaSeq)
-				++m_iAlsaDirty;
+				m_iAlsaDirty++;
 		}
 	}	// We're sure there's no active patchbay...
 	else appendMessages(tr("Patchbay deactivated."));
 
 	// Should refresh anyway.
-	++m_iPatchbayRefresh;
+	m_iPatchbayRefresh++;
 }
 
 // Toggle active patchbay setting.
@@ -2764,7 +2765,7 @@ void qjackctlMainForm::portNotifyEvent (void)
 	// Do what has to be done.
 	refreshJackConnections();
 	// We'll be dirty too...
-	++m_iJackDirty;
+	m_iJackDirty++;
 }
 
 
@@ -2772,10 +2773,10 @@ void qjackctlMainForm::portNotifyEvent (void)
 void qjackctlMainForm::xrunNotifyEvent (void)
 {
 	// Just increment callback counter.
-	++m_iXrunCallbacks;
+	m_iXrunCallbacks++;
 
 	// Skip this one? Maybe we're under some kind of storm...
-	++m_iXrunSkips;
+	m_iXrunSkips++;
 
 	// Report rate must be under one second...
 	if (m_timerXrunLast.restart() < 1000)
@@ -2870,10 +2871,12 @@ void qjackctlMainForm::propNotifyEvent (void)
 	// Log some message here, if new.
 	if (m_iJackRefresh == 0)
 		appendMessagesColor(tr("JACK property change."), "#993366");
+	// Special refresh mode...
+	m_iJackPropertyChange++;
 	// Do what has to be done.
-	refreshJackConnections(true);
+	refreshJackConnections();
 	// We'll be dirty too...
-	++m_iJackDirty;
+	m_iJackDirty++;
 }
 #endif
 
@@ -2895,7 +2898,7 @@ void qjackctlMainForm::alsaNotifySlot ( int /*fd*/ )
 	// Do what has to be done.
 	refreshAlsaConnections();
 	// We'll be dirty too...
-	++m_iAlsaDirty;
+	m_iAlsaDirty++;
 }
 
 
@@ -2946,17 +2949,20 @@ void qjackctlMainForm::timerSlot (void)
 		}
 		// Are we about to refresh it, really?
 		if (m_iJackRefresh > 0 && m_pJackClient != nullptr) {
-			const bool bClear = (m_iJackRefreshClear > 0);
-			m_iJackRefreshClear = 0;
 			m_iJackRefresh = 0;
+		#ifdef CONFIG_JACK_METADATA
+			const bool bClear = (m_iJackPropertyChange > 0);
+			m_iJackPropertyChange = 0;
 			m_pConnectionsForm->refreshAudio(true, bClear);
 			m_pConnectionsForm->refreshMidi(true, bClear);
+		#else
+			m_pConnectionsForm->refreshAudio(true);
+			m_pConnectionsForm->refreshMidi(true);
+		#endif
 		}
 		if (m_iAlsaRefresh > 0 && m_pAlsaSeq != nullptr) {
-			const bool bClear = (m_iAlsaRefreshClear > 0);
-			m_iAlsaRefreshClear = 0;
 			m_iAlsaRefresh = 0;
-			m_pConnectionsForm->refreshAlsa(true, bClear);
+			m_pConnectionsForm->refreshAlsa(true);
 		}
 	}
 
@@ -3419,7 +3425,7 @@ void qjackctlMainForm::refreshConnections (void)
 }
 
 
-void qjackctlMainForm::refreshJackConnections ( bool bClear )
+void qjackctlMainForm::refreshJackConnections (void)
 {
 	// Hack this as for a while...
 	if (m_pGraphForm)
@@ -3432,14 +3438,11 @@ void qjackctlMainForm::refreshJackConnections ( bool bClear )
 #endif
 	// Just increment our intentions; it will be deferred
 	// to be executed just on timer slot processing...
-	++m_iJackRefresh;
-
-	if (bClear)
-		++m_iJackRefreshClear;
+	m_iJackRefresh++;
 }
 
 
-void qjackctlMainForm::refreshAlsaConnections ( bool bClear )
+void qjackctlMainForm::refreshAlsaConnections (void)
 {
 	// Hack this as for a while...
 	if (m_pGraphForm)
@@ -3450,10 +3453,7 @@ void qjackctlMainForm::refreshAlsaConnections ( bool bClear )
 #endif
 	// Just increment our intentions; it will be deferred
 	// to be executed just on timer slot processing...
-	++m_iAlsaRefresh;
-
-	if (bClear)
-		++m_iAlsaRefreshClear;
+	m_iAlsaRefresh++;
 }
 
 
@@ -3461,7 +3461,7 @@ void qjackctlMainForm::refreshPatchbay (void)
 {
 	// Just increment our intentions; it will be deferred
 	// to be executed just on timer slot processing...
-	++m_iPatchbayRefresh;
+	m_iPatchbayRefresh++;
 }
 
 

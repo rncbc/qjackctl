@@ -1,7 +1,7 @@
 // qjackctlJackConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2019, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -115,38 +115,12 @@ qjackctlJackPort::~qjackctlJackPort (void)
 // Pretty/display name method (virtual override).
 void qjackctlJackPort::updatePortName ( bool bRename )
 {
+#ifdef CONFIG_JACK_METADATA
 	jack_client_t *pJackClient = nullptr;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pJackClient = pMainForm->jackClient();
-	if (pJackClient == nullptr)
-		return;
-
-#ifdef CONFIG_JACK_PORT_ALIASES
-	const int iJackClientPortAlias
-		= qjackctlJackClientList::jackClientPortAlias();
-	if (iJackClientPortAlias > 0) {
-		char *aliases[2];
-		const unsigned short alias_size = jack_port_name_size() + 1;
-		aliases[0] = new char [alias_size];
-		aliases[1] = new char [alias_size];
-		QString sPortName = portName();
-		QString sClientPort = clientName() + ':' + sPortName;
-		const QByteArray aClientPort = sClientPort.toUtf8();
-		const char *pszClientPort = aClientPort.constData();
-		jack_port_t *pJackPort = jack_port_by_name(pJackClient, pszClientPort);
-		if (pJackPort && jack_port_get_aliases(pJackPort, aliases) >= iJackClientPortAlias) {
-			sClientPort = QString::fromUtf8(aliases[iJackClientPortAlias - 1]);
-			sPortName = sClientPort.section(':', 1);
-		}
-		delete [] aliases[0];
-		delete [] aliases[1];
-		setPortText(sPortName, false);
-	}
-	else
-#endif
-#ifdef CONFIG_JACK_METADATA
-	if (qjackctlJackClientList::isJackClientPortMetadata()) {
+	if (pJackClient && qjackctlJackClientList::isJackClientPortMetadata()) {
 		bool bRenameEnabled = false;
 		QString sPortNameEx = portNameAlias(&bRenameEnabled);
 		const QString& sPortName = portName();
@@ -170,10 +144,10 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 				&& !sPrettyName.isEmpty() && bRename) {
 				removePrettyName(pJackClient, port_uuid);
 			}
+			setPortText(sPortNameEx, bRenameEnabled);
+			return;
 		}
-		setPortText(sPortNameEx, bRenameEnabled);
 	}
-	else
 #endif
 	qjackctlPortItem::updatePortName(bRename);
 }
@@ -257,15 +231,12 @@ qjackctlJackPort *qjackctlJackClient::findJackPort ( const QString& sPortName )
 // Pretty/display name method (virtual override).
 void qjackctlJackClient::updateClientName ( bool bRename )
 {
+#ifdef CONFIG_JACK_METADATA
 	jack_client_t *pJackClient = nullptr;
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm)
 		pJackClient = pMainForm->jackClient();
-	if (pJackClient == nullptr)
-		return;
-
-#ifdef CONFIG_JACK_METADATA
-	if (qjackctlJackClientList::isJackClientPortMetadata()) {
+	if (pJackClient && qjackctlJackClientList::isJackClientPortMetadata()) {
 		bool bRenameEnabled = false;
 		QString sClientNameEx = clientNameAlias(&bRenameEnabled);
 		const QString& sClientName = clientName();
@@ -366,14 +337,12 @@ int qjackctlJackClientList::updateClientPorts (void)
 		pszJackType = JACK_DEFAULT_MIDI_TYPE;
 #endif
 
-#ifdef CONFIG_JACK_PORT_ALIASES
 	char *aliases[2];
 	if (g_iJackClientPortAlias > 0) {
 		const unsigned short alias_size = jack_port_name_size() + 1;
 		aliases[0] = new char [alias_size];
 		aliases[1] = new char [alias_size];
 	}
-#endif
 
 	int iDirtyCount = 0;
 
@@ -386,46 +355,30 @@ int qjackctlJackClientList::updateClientPorts (void)
 			QString sClientPort = QString::fromUtf8(ppszClientPorts[iClientPort]);
 			qjackctlJackClient *pClient = nullptr;
 			qjackctlJackPort *pPort = nullptr;
-			const char *pszClientPort = ppszClientPorts[iClientPort];
-			jack_port_t *pJackPort = jack_port_by_name(pJackClient, pszClientPort);
-			int iColon = sClientPort.indexOf(':');
+			jack_port_t *pJackPort = jack_port_by_name(pJackClient,
+				ppszClientPorts[iClientPort]);
+		#ifdef CONFIG_JACK_PORT_ALIASES
+			if (g_iJackClientPortAlias > 0 &&
+				jack_port_get_aliases(pJackPort, aliases) >= g_iJackClientPortAlias)
+				sClientPort = QString::fromUtf8(aliases[g_iJackClientPortAlias - 1]);
+		#endif
+			const int iColon = sClientPort.indexOf(':');
 			if (pJackPort && iColon >= 0) {
 				QString sClientName = sClientPort.left(iColon);
 				QString sPortName = sClientPort.right(sClientPort.length() - iColon - 1);
 				pClient = static_cast<qjackctlJackClient *> (findClient(sClientName));
 				if (pClient)
 					pPort = static_cast<qjackctlJackPort *> (pClient->findPort(sPortName));
-				if (pClient == nullptr) {
+				if (pClient == 0) {
 					pClient = new qjackctlJackClient(this);
 					pClient->setClientName(sClientName);
-					++iDirtyCount;
+					iDirtyCount++;
 				}
-				if (pClient && pPort == nullptr) {
+				if (pClient && pPort == 0) {
 					pPort = new qjackctlJackPort(pClient, jack_port_flags(pJackPort));
 					pPort->setPortName(sPortName);
-					++iDirtyCount;
+					iDirtyCount++;
 				}
-			#ifdef CONFIG_JACK_PORT_ALIASES
-				if (g_iJackClientPortAlias > 0 &&
-					jack_port_get_aliases(pJackPort, aliases) >= g_iJackClientPortAlias) {
-					sClientPort = QString::fromUtf8(aliases[g_iJackClientPortAlias - 1]);
-					iColon = sClientPort.indexOf(':');
-					if (iColon >= 0) {
-						sClientName = sClientPort.left(iColon);
-						sPortName = sClientPort.right(sClientPort.length() - iColon - 1);
-					}
-				}
-				if (!g_bJackClientPortMetadata) {
-					if (pClient && pClient->clientText() != sClientName)  {
-						pClient->setClientText(sClientName, false);
-						++iDirtyCount;
-					}
-					if (pPort && pPort->portText() != sPortName)  {
-						pPort->setPortText(sPortName, false);
-						++iDirtyCount;
-					}
-				}
-			#endif
 				if (pPort)
 					pPort->markClientPort(1);
 			}
@@ -435,12 +388,10 @@ int qjackctlJackClientList::updateClientPorts (void)
 
 	iDirtyCount += cleanClientPorts(0);
 
-#ifdef CONFIG_JACK_PORT_ALIASES
 	if (g_iJackClientPortAlias > 0) {
 		delete [] aliases[0];
 		delete [] aliases[1];
 	}
-#endif
 
 	return iDirtyCount;
 }

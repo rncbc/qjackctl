@@ -1,7 +1,7 @@
 // qjackctlConnect.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -99,6 +99,8 @@ public:
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
 
+protected:
+
 	// Port name display name accessors.
 	void setPortText(const QString& sPortText, bool bRenameEnabled);
 	QString portText() const;
@@ -171,6 +173,8 @@ public:
 	// Proxy sort override method.
 	// - Natural decimal sorting comparator.
 	bool operator< (const QTreeWidgetItem& other) const;
+
+protected:
 
 	// Client name display name accessors.
 	void setClientText(const QString& sClientText, bool bRenameEnabled);
