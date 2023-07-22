@@ -569,6 +569,9 @@ void qjackctlJackConnect::updateConnections (void)
 	if (pIClientList == nullptr)
 		return;
 
+#ifdef CONFIG_JACK_PORT_ALIASES
+	const int iJackClientPortAlias = qjackctlJackClientList::jackClientPortAlias();
+#endif
 	// For each output client item...
 	QListIterator<qjackctlClientItem *> oclient(OClientList()->clients());
 	while (oclient.hasNext()) {
@@ -600,6 +603,22 @@ void qjackctlJackConnect::updateConnections (void)
 						qjackctlPortItem *pIPort
 							= pIClientList->findJackClientPort(
 								ppszClientPorts[iClientPort]);
+#ifdef CONFIG_JACK_PORT_ALIASES
+						if (!pIPort) {
+						  // if the port can't be found by its proper name, look for an alias -ag
+						  jack_port_t *pIJackPort
+						    = jack_port_by_name(pJackClient, ppszClientPorts[iClientPort]);
+						  char *aliases[2];
+						  const unsigned short alias_size = jack_port_name_size() + 1;
+						  aliases[0] = new char [alias_size];
+						  aliases[1] = new char [alias_size];
+						  if (pIJackPort && jack_port_get_aliases(pIJackPort, aliases) >= iJackClientPortAlias) {
+						    pIPort = pIClientList->findJackClientPort(aliases[iJackClientPortAlias - 1]);
+						  }
+						  delete [] aliases[0];
+						  delete [] aliases[1];
+						}
+#endif
 						if (pIPort) {
 							pOPort->addConnect(pIPort);
 							pIPort->addConnect(pOPort);
