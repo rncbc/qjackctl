@@ -131,7 +131,7 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 		if (pJackPort) {
 			jack_uuid_t port_uuid = ::jack_port_uuid(pJackPort);
 			const QString& sPrettyName = prettyName(port_uuid);
-			if (sPortNameEx != sPortName && sPortNameEx != sPrettyName) {
+			if (sPortNameEx != sPortName || sPortNameEx != sPrettyName) {
 				if (sPrettyName.isEmpty() || bRename) {
 					setPrettyName(pJackClient, port_uuid, sPortNameEx);
 				} else {
