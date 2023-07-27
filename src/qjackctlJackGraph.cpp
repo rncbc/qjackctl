@@ -348,8 +348,6 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 	if (add_new && *node) {
 		int nchanged = 0;
 		QString node_title = (*node)->nodeTitle();
-		foreach (qjackctlAliasList *node_aliases, item_aliases(*node))
-			node_title = node_aliases->clientAlias(client_name);
 	#ifdef CONFIG_JACK_METADATA
 		const char *client_uuid_name
 			= ::jack_get_uuid_for_client_name(client,
@@ -364,14 +362,14 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 			::jack_free((void *) client_uuid_name);
 		}
 	#endif	// CONFIG_JACK_METADATA
+		foreach (qjackctlAliasList *node_aliases, item_aliases(*node))
+			node_title = node_aliases->clientAlias(client_name);
 		if ((*node)->nodeTitle() != node_title) {
 			(*node)->setNodeTitle(node_title);
 			++nchanged;
 		}
 		if (*port) {
 			QString port_title = (*port)->portTitle();
-			foreach (qjackctlAliasList *port_aliases, item_aliases(*port))
-				port_title = port_aliases->portAlias(client_name, port_name);
 		#ifdef CONFIG_JACK_METADATA
 			const QString& pretty_name
 				= qjackctlJackGraph_pretty_name(port_uuid, port_name);
@@ -384,6 +382,8 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 				++nchanged;
 			}
 		#endif	// CONFIG_JACK_METADATA
+			foreach (qjackctlAliasList *port_aliases, item_aliases(*port))
+				port_title = port_aliases->portAlias(client_name, port_name);
 			if ((*port)->portTitle() != port_title) {
 				(*port)->setPortTitle(port_title);
 				++nchanged;
