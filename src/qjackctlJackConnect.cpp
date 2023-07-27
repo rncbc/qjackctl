@@ -247,7 +247,7 @@ void qjackctlJackClient::updateClientName ( bool bRename )
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(pszClientUuid, &client_uuid);
 			const QString& sPrettyName = prettyName(client_uuid);
-			if (sClientNameEx != sClientName && sClientNameEx != sPrettyName) {
+			if (sClientNameEx != sClientName || sClientNameEx != sPrettyName) {
 				if (sPrettyName.isEmpty() || bRename) {
 					setPrettyName(pJackClient, client_uuid, sClientNameEx);
 				} else {
