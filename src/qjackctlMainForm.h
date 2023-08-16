@@ -143,6 +143,9 @@ public:
 	QStringList getDBusEngineDrivers();
 #endif
 
+	// Whether detached as client only.
+	bool isJackDetach() const;
+
 public slots:
 
 	void startJack();

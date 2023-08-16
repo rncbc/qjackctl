@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Setup: disable Settings page altogether if running in 'Active' or
+  pure-client mode (eg. under PipeWire's pw-jack substitution).
+
 - Connections: Fixed an old JACK client/ports aliases malfunction,
   hopefully. (cf. GH issue #196) (EXPERIMENTAL)
 

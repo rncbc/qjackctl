@@ -4635,7 +4635,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1001"/>
         <location filename="../qjackctlSetupForm.cpp" line="1064"/>
-        <location filename="../qjackctlSetupForm.cpp" line="2069"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2078"/>
         <source>Warning</source>
         <translation>경고</translation>
     </message>
@@ -4676,99 +4676,99 @@ Are you sure?</source>
         <translation>해당 없음</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1386"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1395"/>
         <source>&amp;Preset Name</source>
         <translation>사전설정 이름(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1388"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1397"/>
         <source>&amp;Server Name</source>
         <translation>서버 이름(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1389"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1398"/>
         <source>&amp;Server Path</source>
         <translation>서버 경로(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1390"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1399"/>
         <source>&amp;Driver</source>
         <translation>드라이버(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1391"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1400"/>
         <source>&amp;Interface</source>
         <translation>인터페이스(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1393"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1402"/>
         <source>Sample &amp;Rate</source>
         <translation>샘플 레이트(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1394"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1403"/>
         <source>&amp;Frames/Period</source>
         <translation>프레임/기간(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1395"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1404"/>
         <source>Periods/&amp;Buffer</source>
         <translation>기간/버퍼(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1443"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1452"/>
         <source>Startup Script</source>
         <translation>스타트업 스크립트</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1460"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1469"/>
         <source>Post-Startup Script</source>
         <translation>스타트업 후 스크립트</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1477"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1486"/>
         <source>Shutdown Script</source>
         <translation>일시종료 스크립트</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1494"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1503"/>
         <source>Post-Shutdown Script</source>
         <translation>일시종료 후 스크립트</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1511"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1520"/>
         <source>Active Patchbay Definition</source>
         <translation>활성 패치베이 정의</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1513"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1522"/>
         <source>Patchbay Definition files</source>
         <translation>패치베이 정의 파일</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1529"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1538"/>
         <source>Messages Log</source>
         <translation>메시지 로그</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1531"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1540"/>
         <source>Log files</source>
         <translation>로그 파일</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1903"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
         <source>Information</source>
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1904"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation>일부 설정은 다음에 이 응용프로그램을 
 시작할 때만 유효할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="2070"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2079"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

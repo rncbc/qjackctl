@@ -4613,7 +4613,7 @@ Are you sure to overwrite the existing folder?</source>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1001"/>
         <location filename="../qjackctlSetupForm.cpp" line="1064"/>
-        <location filename="../qjackctlSetupForm.cpp" line="2069"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2078"/>
         <source>Warning</source>
         <translation>Попередження</translation>
     </message>
@@ -4654,99 +4654,99 @@ Are you sure?</source>
         <translation>н/д</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1386"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1395"/>
         <source>&amp;Preset Name</source>
         <translation>Назва н&amp;абору параметрів</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1388"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1397"/>
         <source>&amp;Server Name</source>
         <translation>Назва с&amp;ервера</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1389"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1398"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Шлях до сервера</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1390"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1399"/>
         <source>&amp;Driver</source>
         <translation>Д&amp;райвер</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1391"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1400"/>
         <source>&amp;Interface</source>
         <translation>&amp;Інтерфейс</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1393"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1402"/>
         <source>Sample &amp;Rate</source>
         <translation>&amp;Частота дискретизації</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1394"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1403"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Кадри/Період</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1395"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1404"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Періоди/&amp;Буфер</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1443"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1452"/>
         <source>Startup Script</source>
         <translation>Скрипт запуску</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1460"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1469"/>
         <source>Post-Startup Script</source>
         <translation>Скрипт після запуску</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1477"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1486"/>
         <source>Shutdown Script</source>
         <translation>Скрипт при вимиканні</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1494"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1503"/>
         <source>Post-Shutdown Script</source>
         <translation>Скрипт після вимикання</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1511"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1520"/>
         <source>Active Patchbay Definition</source>
         <translation>Активне визначення комутації</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1513"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1522"/>
         <source>Patchbay Definition files</source>
         <translation>файли визначень комутацій</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1529"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1538"/>
         <source>Messages Log</source>
         <translation>Журнал повідомлень</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1531"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1540"/>
         <source>Log files</source>
         <translation>файли журналу</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1903"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
         <source>Information</source>
         <translation>Інформація</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1904"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation>Деякі параметри набудуть чинності лише
 після перезапуску програми.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="2070"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2079"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

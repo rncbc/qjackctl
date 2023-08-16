@@ -4926,6 +4926,13 @@ QStringList qjackctlMainForm::getDBusEngineDrivers (void)
 #endif	// CONFIG_DBUS
 
 
+// Whether detached as client only.
+bool qjackctlMainForm::isJackDetach (void) const
+{
+	return m_bJackDetach;
+}
+
+
 // Quotes string with embedded whitespace.
 QString qjackctlMainForm::formatQuoted ( const QString& s ) const
 {

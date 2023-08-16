@@ -1275,15 +1275,24 @@ void qjackctlSetupForm::stabilizeForm (void)
 {
 	bool bValid = (m_iDirtySettings > 0 || m_iDirtyOptions > 0);
 
-	QString sPreset = m_ui.PresetComboBox->currentText();
-	if (!sPreset.isEmpty()) {
-		const bool bPreset = (m_pSetup->presets.contains(sPreset));
-		m_ui.PresetSavePushButton->setEnabled(m_iDirtySettings > 0
-			|| (!bPreset && sPreset != qjackctlSetup::defName()));
-		m_ui.PresetDeletePushButton->setEnabled(bPreset);
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm && !pMainForm->isJackDetach()) {
+		m_ui.PresetTextLabel->setEnabled(true);
+		m_ui.PresetComboBox->setEnabled(true);
+		m_ui.PresetClearPushButton->setEnabled(true);
+		QString sPreset = m_ui.PresetComboBox->currentText();
+		if (!sPreset.isEmpty()) {
+			const bool bPreset = (m_pSetup->presets.contains(sPreset));
+			m_ui.PresetSavePushButton->setEnabled(m_iDirtySettings > 0
+				|| (!bPreset && sPreset != qjackctlSetup::defName()));
+			m_ui.PresetDeletePushButton->setEnabled(bPreset);
+		} else {
+			m_ui.PresetSavePushButton->setEnabled(false);
+			m_ui.PresetDeletePushButton->setEnabled(false);
+		}
+		m_ui.SettingsTabPage->setEnabled(true);
 	} else {
-		m_ui.PresetSavePushButton->setEnabled(false);
-		m_ui.PresetDeletePushButton->setEnabled(false);
+		m_ui.SettingsTabPage->setEnabled(false);
 	}
 
 	bool bEnabled = m_ui.StartupScriptCheckBox->isChecked();
