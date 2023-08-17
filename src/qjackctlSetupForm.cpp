@@ -774,6 +774,8 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	// Load preset list...
 	resetPresets();
 	updateCurrentPreset();
+	updateBuffSize();
+
 	// Make sure initial preset is not dirty...
 	m_iDirtyPreset = 0;
 
@@ -1103,13 +1105,13 @@ void qjackctlSetupForm::computeLatency (void)
 
 void qjackctlSetupForm::changeDriverAudio ( const QString& sDriver, int iAudio )
 {
-	const bool bSun        = (sDriver == "sun");
-	const bool bOss        = (sDriver == "oss");
-	const bool bAlsa       = (sDriver == "alsa");
-	const bool bCoreaudio  = (sDriver == "coreaudio");
-	const bool bPortaudio  = (sDriver == "portaudio");
-	const bool bFirewire   = (sDriver == "firewire");
-	const bool bNet        = (sDriver == "net" || sDriver == "netone");
+	const bool bSun       = (sDriver == "sun");
+	const bool bOss       = (sDriver == "oss");
+	const bool bAlsa      = (sDriver == "alsa");
+	const bool bCoreaudio = (sDriver == "coreaudio");
+	const bool bPortaudio = (sDriver == "portaudio");
+	const bool bFirewire  = (sDriver == "firewire");
+	const bool bNet       = (sDriver == "net" || sDriver == "netone");
 
 	bool bInEnabled  = false;
 	bool bOutEnabled = false;
@@ -1280,7 +1282,7 @@ void qjackctlSetupForm::stabilizeForm (void)
 		m_ui.PresetTextLabel->setEnabled(true);
 		m_ui.PresetComboBox->setEnabled(true);
 		m_ui.PresetClearPushButton->setEnabled(true);
-		QString sPreset = m_ui.PresetComboBox->currentText();
+		const QString& sPreset = m_ui.PresetComboBox->currentText();
 		if (!sPreset.isEmpty()) {
 			const bool bPreset = (m_pSetup->presets.contains(sPreset));
 			m_ui.PresetSavePushButton->setEnabled(m_iDirtySettings > 0
@@ -1290,9 +1292,52 @@ void qjackctlSetupForm::stabilizeForm (void)
 			m_ui.PresetSavePushButton->setEnabled(false);
 			m_ui.PresetDeletePushButton->setEnabled(false);
 		}
-		m_ui.SettingsTabPage->setEnabled(true);
+		m_ui.DriverTextLabel->setEnabled(true);
+		m_ui.DriverComboBox->setEnabled(true);
+		m_ui.RealtimeCheckBox->setEnabled(true);
+		m_ui.InterfaceTextLabel->setEnabled(true);
+		m_ui.InterfaceComboBox->setEnabled(true);
+		m_ui.SampleRateTextLabel->setEnabled(true);
+		m_ui.SampleRateComboBox->setEnabled(true);
+	//	m_ui.FramesTextLabel->setEnabled(true);
+	//	m_ui.FramesComboBox->setEnabled(true);
+		m_ui.PeriodsTextLabel->setEnabled(true);
+		m_ui.PeriodsSpinBox->setEnabled(true);
+		m_ui.MidiDriverTextLabel->setEnabled(true);
+		m_ui.MidiDriverComboBox->setEnabled(true);
+		m_ui.SyncCheckBox->setEnabled(true);
+		m_ui.VerboseCheckBox->setEnabled(true);
+	//	m_ui.LatencyTextLabel->setEnabled(true);
+	//	m_ui.LatencyTextValue->setEnabled(true);
+		m_ui.AdvancedTab->setEnabled(true);
+		changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
 	} else {
-		m_ui.SettingsTabPage->setEnabled(false);
+		m_ui.PresetTextLabel->setEnabled(false);
+		m_ui.PresetComboBox->setEnabled(false);
+		m_ui.PresetClearPushButton->setEnabled(false);
+		m_ui.PresetSavePushButton->setEnabled(false);
+		m_ui.PresetDeletePushButton->setEnabled(false);
+		m_ui.DriverTextLabel->setEnabled(false);
+		m_ui.DriverComboBox->setEnabled(false);
+		m_ui.RealtimeCheckBox->setEnabled(false);
+		m_ui.InterfaceTextLabel->setEnabled(false);
+		m_ui.InterfaceComboBox->setEnabled(false);
+		m_ui.SampleRateTextLabel->setEnabled(false);
+		m_ui.SampleRateComboBox->setEnabled(false);
+	//	m_ui.FramesTextLabel->setEnabled(false);
+	//	m_ui.FramesComboBox->setEnabled(false);
+		m_ui.PeriodsTextLabel->setEnabled(false);
+		m_ui.PeriodsSpinBox->setEnabled(false);
+		m_ui.MidiDriverTextLabel->setEnabled(false);
+		m_ui.MidiDriverComboBox->setEnabled(false);
+		m_ui.SyncCheckBox->setEnabled(false);
+		m_ui.VerboseCheckBox->setEnabled(false);
+	//	m_ui.LatencyTextLabel->setEnabled(false);
+	//	m_ui.LatencyTextValue->setEnabled(false);
+		m_ui.AdvancedTab->setEnabled(false);
+		m_ui.InterfaceComboBox->setCurrentIndex(0);
+		m_ui.PeriodsSpinBox->setValue(0);
+		computeLatency();
 	}
 
 	bool bEnabled = m_ui.StartupScriptCheckBox->isChecked();
@@ -1376,8 +1421,6 @@ void qjackctlSetupForm::stabilizeForm (void)
 	m_ui.GraphButtonCheckBox->setEnabled(
 		!m_ui.LeftButtonsCheckBox->isChecked());
 
-	changeDriverUpdate(m_ui.DriverComboBox->currentText(), false);
-
 	bEnabled = (bValid || m_iDirtyBuffSize > 0);
 	m_ui.DialogButtonBox->button(QDialogButtonBox::Apply)->setEnabled(bEnabled);
 	m_ui.DialogButtonBox->button(QDialogButtonBox::Ok)->setEnabled(bEnabled);
@@ -1448,9 +1491,9 @@ void qjackctlSetupForm::symbolPostShutdownScript (void)
 void qjackctlSetupForm::browseStartupScript (void)
 {
 	QString sFileName = QFileDialog::getOpenFileName(
-		this,												// Parent.
-		tr("Startup Script"),								// Caption.
-		m_ui.StartupScriptShellComboBox->currentText() 		// Start here.
+		this,											// Parent.
+		tr("Startup Script"),							// Caption.
+		m_ui.StartupScriptShellComboBox->currentText()	// Start here.
 	);
 
 	if (!sFileName.isEmpty()) {
@@ -1467,7 +1510,7 @@ void qjackctlSetupForm::browsePostStartupScript (void)
 	QString sFileName = QFileDialog::getOpenFileName(
 		this,												// Parent.
 		tr("Post-Startup Script"),							// Caption.
-		m_ui.PostStartupScriptShellComboBox->currentText() 	// Start here.
+		m_ui.PostStartupScriptShellComboBox->currentText()	// Start here.
 	);
 
 	if (!sFileName.isEmpty()) {
@@ -1482,9 +1525,9 @@ void qjackctlSetupForm::browsePostStartupScript (void)
 void qjackctlSetupForm::browseShutdownScript (void)
 {
 	QString sFileName = QFileDialog::getOpenFileName(
-		this,												// Parent.
-		tr("Shutdown Script"),								// Caption.
-		m_ui.ShutdownScriptShellComboBox->currentText() 	// Start here.
+		this,											// Parent.
+		tr("Shutdown Script"),							// Caption.
+		m_ui.ShutdownScriptShellComboBox->currentText()	// Start here.
 	);
 
 	if (!sFileName.isEmpty()) {
@@ -1535,9 +1578,9 @@ void qjackctlSetupForm::browseMessagesLogPath (void)
 {
 	QString sFileName = QFileDialog::getSaveFileName(
 		this,											// Parent.
-		tr("Messages Log"),				                // Caption.
+		tr("Messages Log"),								// Caption.
 		m_ui.MessagesLogPathComboBox->currentText(),	// Start here.
-		tr("Log files") + " (*.log)"	                // Filter (log files)
+		tr("Log files") + " (*.log)"					// Filter (log files)
 	);
 
 	if (!sFileName.isEmpty()) {
@@ -1706,6 +1749,33 @@ void qjackctlSetupForm::buffSizeChanged (void)
 }
 
 
+// Get actual sample-rate and buffer-size when in pure-client mode...
+void qjackctlSetupForm::updateBuffSize (void)
+{
+	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
+	if (pMainForm == nullptr || pMainForm->isJackDetach()) {
+		++m_iDirtySetup;
+		m_ui.InterfaceComboBox->setCurrentIndex(0);
+		jack_client_t *pJackClient = nullptr;
+		if (pMainForm)
+			pJackClient = pMainForm->jackClient();
+		if (pJackClient) {
+			m_ui.SampleRateComboBox->setCurrentText(
+				QString::number(jack_get_sample_rate(pJackClient)));
+			m_ui.FramesComboBox->setCurrentText(
+				QString::number(jack_get_buffer_size(pJackClient)));
+		} else {
+			m_ui.SampleRateComboBox->setCurrentIndex(0);
+			m_ui.FramesComboBox->setCurrentIndex(0);
+		}
+		m_ui.PeriodsSpinBox->setValue(0);
+		m_iDirtySettings = 0;
+		m_iDirtyBuffSize = 0;
+		--m_iDirtySetup;
+	}
+}
+
+
 // Mark that JACK D-BUS has been (dis)enabled.
 void qjackctlSetupForm::updateDrivers (void)
 {
@@ -1787,38 +1857,38 @@ void qjackctlSetupForm::apply (void)
 
 	if (m_iDirtyOptions > 0) {
 		// To track down deferred or immediate changes.
-		const bool    bOldMessagesLog         = m_pSetup->bMessagesLog;
-		const QString sOldMessagesLogPath     = m_pSetup->sMessagesLogPath;
-		const QString sOldMessagesFont        = m_pSetup->sMessagesFont;
-		const QString sOldDisplayFont1        = m_pSetup->sDisplayFont1;
-		const QString sOldDisplayFont2        = m_pSetup->sDisplayFont2;
-		const QString sOldConnectionsFont     = m_pSetup->sConnectionsFont;
+		const bool    bOldMessagesLog      = m_pSetup->bMessagesLog;
+		const QString sOldMessagesLogPath  = m_pSetup->sMessagesLogPath;
+		const QString sOldMessagesFont     = m_pSetup->sMessagesFont;
+		const QString sOldDisplayFont1     = m_pSetup->sDisplayFont1;
+		const QString sOldDisplayFont2     = m_pSetup->sDisplayFont2;
+		const QString sOldConnectionsFont  = m_pSetup->sConnectionsFont;
 		const int     iOldConnectionsIconSize = m_pSetup->iConnectionsIconSize;
 		const int     iOldJackClientPortAlias = m_pSetup->iJackClientPortAlias;
 		const bool    bOldJackClientPortMetadata = m_pSetup->bJackClientPortMetadata;
-		const int     iOldTimeDisplay         = m_pSetup->iTimeDisplay;
-		const bool    bOldActivePatchbay      = m_pSetup->bActivePatchbay;
-		const QString sOldActivePatchbayPath  = m_pSetup->sActivePatchbayPath;
-		const bool    bOldStdoutCapture       = m_pSetup->bStdoutCapture;
-		const bool    bOldKeepOnTop           = m_pSetup->bKeepOnTop;
+		const int     iOldTimeDisplay      = m_pSetup->iTimeDisplay;
+		const bool    bOldActivePatchbay   = m_pSetup->bActivePatchbay;
+		const QString sOldActivePatchbayPath = m_pSetup->sActivePatchbayPath;
+		const bool    bOldStdoutCapture    = m_pSetup->bStdoutCapture;
+		const bool    bOldKeepOnTop        = m_pSetup->bKeepOnTop;
 	#ifdef CONFIG_SYSTEM_TRAY
-		const bool    bOldSystemTray          = m_pSetup->bSystemTray;
+		const bool    bOldSystemTray       = m_pSetup->bSystemTray;
 	#endif
-		const int     bOldMessagesLimit       = m_pSetup->bMessagesLimit;
-		const int     iOldMessagesLimitLines  = m_pSetup->iMessagesLimitLines;
-		const bool    bOldAlsaSeqEnabled      = m_pSetup->bAlsaSeqEnabled;
+		const int     bOldMessagesLimit    = m_pSetup->bMessagesLimit;
+		const int     iOldMessagesLimitLines = m_pSetup->iMessagesLimitLines;
+		const bool    bOldAlsaSeqEnabled   = m_pSetup->bAlsaSeqEnabled;
 	#ifdef CONFIG_DBUS
-		const bool    bOldDBusEnabled         = m_pSetup->bDBusEnabled;
-		const bool    bOldJackDBusEnabled     = m_pSetup->bJackDBusEnabled;
+		const bool    bOldDBusEnabled      = m_pSetup->bDBusEnabled;
+		const bool    bOldJackDBusEnabled  = m_pSetup->bJackDBusEnabled;
 	#endif
-		const bool    bOldAliasesEnabled      = m_pSetup->bAliasesEnabled;
-		const bool    bOldAliasesEditing      = m_pSetup->bAliasesEditing;
-		const bool    bOldLeftButtons         = m_pSetup->bLeftButtons;
-		const bool    bOldRightButtons        = m_pSetup->bRightButtons;
-		const bool    bOldTransportButtons    = m_pSetup->bTransportButtons;
-		const bool    bOldTextLabels          = m_pSetup->bTextLabels;
-		const bool    bOldGraphButton         = m_pSetup->bGraphButton;
-		const int     iOldBaseFontSize        = m_pSetup->iBaseFontSize;
+		const bool    bOldAliasesEnabled   = m_pSetup->bAliasesEnabled;
+		const bool    bOldAliasesEditing   = m_pSetup->bAliasesEditing;
+		const bool    bOldLeftButtons      = m_pSetup->bLeftButtons;
+		const bool    bOldRightButtons     = m_pSetup->bRightButtons;
+		const bool    bOldTransportButtons = m_pSetup->bTransportButtons;
+		const bool    bOldTextLabels       = m_pSetup->bTextLabels;
+		const bool    bOldGraphButton      = m_pSetup->bGraphButton;
+		const int     iOldBaseFontSize     = m_pSetup->iBaseFontSize;
 		// Save Options...
 		m_pSetup->bStartupScript           = m_ui.StartupScriptCheckBox->isChecked();
 		m_pSetup->sStartupScriptShell      = m_ui.StartupScriptShellComboBox->currentText();
@@ -1968,17 +2038,17 @@ void qjackctlSetupForm::apply (void)
 			pMainForm->updateJackDBus();
 	#endif
 		// Warn if something will be only effective on next run.
-		if (( bOldStdoutCapture   && !m_pSetup->bStdoutCapture)  ||
-			(!bOldStdoutCapture   &&  m_pSetup->bStdoutCapture)  ||
-			( bOldKeepOnTop       && !m_pSetup->bKeepOnTop)      ||
-			(!bOldKeepOnTop       &&  m_pSetup->bKeepOnTop)      ||
-			( bOldAlsaSeqEnabled  && !m_pSetup->bAlsaSeqEnabled) ||
-			(!bOldAlsaSeqEnabled  &&  m_pSetup->bAlsaSeqEnabled) ||
+		if (( bOldStdoutCapture  && !m_pSetup->bStdoutCapture)  ||
+			(!bOldStdoutCapture  &&  m_pSetup->bStdoutCapture)  ||
+			( bOldKeepOnTop      && !m_pSetup->bKeepOnTop)      ||
+			(!bOldKeepOnTop      &&  m_pSetup->bKeepOnTop)      ||
+			( bOldAlsaSeqEnabled && !m_pSetup->bAlsaSeqEnabled) ||
+			(!bOldAlsaSeqEnabled &&  m_pSetup->bAlsaSeqEnabled) ||
 		#ifdef CONFIG_DBUS
-			( bOldDBusEnabled     && !m_pSetup->bDBusEnabled)    ||
-			(!bOldDBusEnabled     &&  m_pSetup->bDBusEnabled)    ||
+			( bOldDBusEnabled    && !m_pSetup->bDBusEnabled)    ||
+			(!bOldDBusEnabled    &&  m_pSetup->bDBusEnabled)    ||
 		#endif
-			(iOldBaseFontSize     !=  m_pSetup->iBaseFontSize))
+			(iOldBaseFontSize    !=  m_pSetup->iBaseFontSize))
 			pMainForm->showDirtySetupWarning();
 	}
 
@@ -2104,9 +2174,8 @@ void qjackctlSetupForm::showEvent ( QShowEvent *pShowEvent )
 	if (pMainForm)
 		pMainForm->stabilizeFormEx();
 
-#ifdef CONFIG_DBUS
+	updateBuffSize();
 	updateDrivers();
-#endif
 
 	stabilizeForm();
 

@@ -4089,64 +4089,64 @@ Está certo de sobrescrever a pasta existente?</translation>
         <translation>O nome do arquivo local de configuração do servidor (início automático)</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1001"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1064"/>
-        <location filename="../qjackctlSetupForm.cpp" line="2078"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1003"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1066"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2148"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1098"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1100"/>
         <source>msec</source>
         <translation>mseg</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1100"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1102"/>
         <source>n/a</source>
         <translation>n/d</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1395"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1438"/>
         <source>&amp;Preset Name</source>
         <translation>Nome do &amp;Preset</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1398"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1441"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Caminho do Servidor</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1399"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1442"/>
         <source>&amp;Driver</source>
         <translation>&amp;Driver</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1400"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1443"/>
         <source>&amp;Interface</source>
         <translation>&amp;Interface</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1402"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1445"/>
         <source>Sample &amp;Rate</source>
         <translation>&amp;Taxa de Amostragem</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1403"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1446"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Quadros/Período</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1404"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1447"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Períodos/&amp;Buffer</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1522"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1565"/>
         <source>Patchbay Definition files</source>
         <translation>Arquivos de definição do patchbay</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1002"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1004"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -4199,7 +4199,7 @@ Deseja salvá-las?</translation>
         <translation>Ignorar todos os pedidos de auto-conexão</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1065"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1067"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -4212,54 +4212,54 @@ Are you sure?</source>
 Está certo disto?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1452"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1495"/>
         <source>Startup Script</source>
         <translation>Script de Inicialização</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1469"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1512"/>
         <source>Post-Startup Script</source>
         <translation>Script de Post-Inicialização</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1486"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1529"/>
         <source>Shutdown Script</source>
         <translation>Script de Desligamento</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1503"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1546"/>
         <source>Post-Shutdown Script</source>
         <translation>Script de Pós-Desligamento</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1520"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1563"/>
         <source>Active Patchbay Definition</source>
         <translation>Definição Ativa de Patchbay</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1538"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1581"/>
         <source>Messages Log</source>
         <translation>Registro de Mensagens</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1540"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1583"/>
         <source>Log files</source>
         <translation>Arquivos de registros</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1912"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1982"/>
         <source>Information</source>
         <translation>Informação</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1913"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1983"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation>Algumas configurações podem ser eficazes apenas
 na próxima vez que você iniciar este aplicativo.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="2079"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2149"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>
@@ -4713,7 +4713,7 @@ Você quer aplicar as mudanças?</translation>
         <translation>O nome do servidor de áudio do JACK Audio Connection Kit</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1397"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1440"/>
         <source>&amp;Server Name</source>
         <translation>Nome do &amp;Servidor</translation>
     </message>

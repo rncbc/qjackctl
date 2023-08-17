@@ -112,7 +112,7 @@ protected:
 	void resetPresets();
 
 	void updateDrivers();
-
+	void updateBuffSize();
 	void computeLatency();
 
 	void changeDriverAudio(const QString& sDriver, int iAudio);
