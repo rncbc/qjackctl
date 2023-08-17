@@ -1391,6 +1391,8 @@ void qjackctlMainForm::startJack (void)
 			&& !m_pSetup->sOldPreset.isEmpty()) {
 		m_pSetup->sDefPreset = m_pSetup->sOldPreset;
 		m_pSetup->sOldPreset.clear();
+		if (m_pSetupForm)
+			m_pSetupForm->updateCurrentPreset();
 	}
 
 	// Load primary/default server preset...
