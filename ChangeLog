@@ -4,20 +4,20 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+0.9.12  2023-09-09  An End-of-Summer'23 Release.
 
 - Setup: disable Settings parameters altogether, except frames/period
   (aka. buffer-size) if running in the so called 'Active' pure-client
-  mode (eg. under PipeWire's pw-jack substitution). (EXPERIMENTAL)
+  mode (eg. under PipeWire's pw-jack substitution).
 
 - Connections: Fixed an old JACK client/ports aliases malfunction,
-  hopefully. (cf. GH issue #196) (EXPERIMENTAL)
+  hopefully.
 
 - Graph: Ctrl+left or middle-button click-dragging for panning, is
-  now a lot smoother, hopefully. (EXPERIMENTAL)
+  now a lot smoother, hopefully.
 
 - Graph: Click-dragging with the mouse middle-button is now used
-  for panning only, not to start a selection anymore. (EXPERIMENTAL)
+  for panning only, not to start a selection anymore.
 
 - Preppings to next development cycle (Qt >= 6.6)
 
