@@ -86,11 +86,10 @@ BuildRequires:	pkgconfig(Qt5DBus)
 %endif
 %if %{defined fedora}
 BuildRequires:	jack-audio-connection-kit-devel
-BuildRequires:	alsa-lib-devel
 %else
-BuildRequires:	libjack-devel
-BuildRequires:	alsa-devel
+BuildRequires:	pkgconfig(jack)
 %endif
+BuildRequires:	pkgconfig(alsa)
 
 %description
 JACK Audio Connection Kit - Qt GUI Interface: A simple Qt application

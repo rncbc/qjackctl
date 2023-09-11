@@ -131,8 +131,8 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 		if (pJackPort) {
 			jack_uuid_t port_uuid = ::jack_port_uuid(pJackPort);
 			const QString& sPrettyName = prettyName(port_uuid);
-			if (sPortNameEx != sPortName && sPortNameEx != sPrettyName) {
-				if (sPrettyName.isEmpty() || bRename) {
+			if (sPortNameEx != sPortName || sPortNameEx != sPrettyName) {
+				if (sPrettyName.isEmpty() || sPortNameEx != sPortName || bRename) {
 					setPrettyName(pJackClient, port_uuid, sPortNameEx);
 				} else {
 					sPortNameEx = sPrettyName;
@@ -247,8 +247,8 @@ void qjackctlJackClient::updateClientName ( bool bRename )
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(pszClientUuid, &client_uuid);
 			const QString& sPrettyName = prettyName(client_uuid);
-			if (sClientNameEx != sClientName && sClientNameEx != sPrettyName) {
-				if (sPrettyName.isEmpty() || bRename) {
+			if (sClientNameEx != sClientName || sClientNameEx != sPrettyName) {
+				if (sPrettyName.isEmpty() || sClientNameEx != sClientName || bRename) {
 					setPrettyName(pJackClient, client_uuid, sClientNameEx);
 				} else {
 					sClientNameEx = sPrettyName;

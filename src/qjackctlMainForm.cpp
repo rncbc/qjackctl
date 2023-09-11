@@ -2216,7 +2216,7 @@ void qjackctlMainForm::updateJackClientPortAlias (void)
 
 	qjackctlJackClientList::setJackClientPortAlias(m_pSetup->iJackClientPortAlias);
 
-	refreshJackConnections(true);
+	refreshJackConnections();
 }
 
 
@@ -2228,7 +2228,7 @@ void qjackctlMainForm::updateJackClientPortMetadata (void)
 
 	qjackctlJackClientList::setJackClientPortMetadata(m_pSetup->bJackClientPortMetadata);
 
-	refreshJackConnections(true);
+	refreshJackConnections();
 }
 
 
