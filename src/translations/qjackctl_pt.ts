@@ -36,45 +36,45 @@
         <location filename="../qjackctlSetup.cpp" line="636"/>
         <location filename="../qjackctlSetup.cpp" line="664"/>
         <source>Start JACK audio server immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicie o servidor de áudio JACK imediatamente</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="638"/>
         <location filename="../qjackctlSetup.cpp" line="666"/>
         <source>Set default settings preset name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Defina o nome da predefinição das configurações padrão.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="640"/>
         <location filename="../qjackctlSetup.cpp" line="668"/>
         <source>Set active patchbay definition file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir arquivo de definição do patchbay ativo.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
         <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Set default JACK audio server name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Defina o nome do servidor de áudio JACK padrão.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="644"/>
         <source>Show help about command line options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostre ajuda sobre opções de linha de comando.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="646"/>
         <source>Show version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar informações da versão.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="674"/>
         <source>Launch command with arguments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Execute o comando com argumentos.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="675"/>
         <source>[command-and-args]</source>
-        <translation type="unfinished"></translation>
+        <translation>[comando-e-args]</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../qjackctl.cpp" line="127"/>
         <source>JACK: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>JACK %1</translation>
     </message>
 </context>
 <context>
@@ -567,12 +567,12 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="199"/>
         <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="219"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="224"/>
@@ -660,7 +660,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="307"/>
         <source>F2</source>
-        <translation type="unfinished">F2</translation>
+        <translation>F2</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="315"/>
@@ -879,7 +879,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="560"/>
         <source>ALSA M&amp;IDI...</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA M&amp;IDI...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="563"/>
@@ -1010,38 +1010,38 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="716"/>
         <source>Repel O&amp;verlapping Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repelir Nós S&amp;obrepostos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="719"/>
         <source>Repel nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repelir nós</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="722"/>
         <location filename="../qjackctlGraphForm.ui" line="725"/>
         <source>Repel overlapping nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Repelir nós sobrepostos</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="736"/>
         <source>Connect Thro&amp;ugh Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Conecte-se A&amp;través de nós</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="739"/>
         <source>Connect Through Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Conecte-se Através de Nós</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="742"/>
         <source>Connect through nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Conecte-se através de nós</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="745"/>
         <source>Whether to draw connectors through or around nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Desenhar conectores através ou ao redor dos nós</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="753"/>
