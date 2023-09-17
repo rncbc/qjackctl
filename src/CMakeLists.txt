@@ -100,6 +100,7 @@ set (TRANSLATIONS
 	translations/qjackctl_pt.ts
 	translations/qjackctl_ru.ts
 	translations/qjackctl_sk.ts
+	translations/qjackctl_tr.ts
 	translations/qjackctl_uk.ts
 )
 

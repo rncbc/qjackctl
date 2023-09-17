@@ -3,6 +3,10 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
+GIT HEAD
+
+- Turkish (tr) translation added (by Orkun Arapoglu, thanks).
+
 
 0.9.12  2023-09-09  An End-of-Summer'23 Release.
 
