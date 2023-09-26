@@ -226,7 +226,7 @@
 <context>
     <name>qjackctlApplication</name>
     <message>
-        <location filename="../qjackctl.cpp" line="141"/>
+        <location filename="../qjackctl.cpp" line="142"/>
         <source>JACK: %1</source>
         <translation>JACK %1</translation>
     </message>

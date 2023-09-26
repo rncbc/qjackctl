@@ -82,13 +82,16 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 
 #ifdef CONFIG_XUNIQUE
 
-#define QJACKCTL_XUNIQUE "qjackctlApplication"
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #ifdef CONFIG_X11
+
+#define QJACKCTL_XUNIQUE "qjackctlApplication"
+
 #include <unistd.h> /* for gethostname() */
+
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+
 #endif	// CONFIG_X11
 #else
 #include <QSharedMemory>
@@ -107,20 +110,18 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 	: QApplication(argc, argv),
 		m_pQtTranslator(nullptr), m_pMyTranslator(nullptr), m_pWidget(nullptr)
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #ifdef CONFIG_XUNIQUE
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #ifdef CONFIG_X11
 	, m_pDisplay(nullptr)
 	, m_aUnique(0)
 	, m_wOwner(0)
 #endif	// CONFIG_X11
-#endif	// CONFIG_XUNIQUE
 #else
-#ifdef CONFIG_XUNIQUE
 	, m_pMemory(nullptr)
 	, m_pServer(nullptr)
-#endif	// CONFIG_XUNIQUE
 #endif
+#endif	// CONFIG_XUNIQUE
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 	QApplication::setApplicationName(QJACKCTL_TITLE);
