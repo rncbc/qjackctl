@@ -107,6 +107,20 @@ const WindowFlags WindowCloseButtonHint = WindowFlags(0x08000000);
 qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 	: QApplication(argc, argv),
 		m_pQtTranslator(nullptr), m_pMyTranslator(nullptr), m_pWidget(nullptr)
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+#ifdef CONFIG_XUNIQUE
+#ifdef CONFIG_X11
+	, m_pDisplay(nullptr)
+	, m_aUnique(0)
+	, m_wOwner(0)
+#endif	// CONFIG_X11
+#endif	// CONFIG_XUNIQUE
+#else
+#ifdef CONFIG_XUNIQUE
+	, m_pMemory(nullptr)
+	, m_pServer(nullptr)
+#endif	// CONFIG_XUNIQUE
+#endif
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 	QApplication::setApplicationName(QJACKCTL_TITLE);
@@ -178,18 +192,6 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 			}
 		}
 	}
-#ifdef CONFIG_XUNIQUE
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-#ifdef CONFIG_X11
-	m_pDisplay = nullptr;
-	m_aUnique = 0;
-	m_wOwner = 0;
-#endif	// CONFIG_X11
-#else
-	m_pMemory = nullptr;
-	m_pServer = nullptr;
-#endif
-#endif	// CONFIG_XUNIQUE
 }
 
 
@@ -198,15 +200,7 @@ qjackctlApplication::~qjackctlApplication (void)
 {
 #ifdef CONFIG_XUNIQUE
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-	if (m_pServer) {
-		m_pServer->close();
-		delete m_pServer;
-		m_pServer = nullptr;
-	}
-	if (m_pMemory) {
-		delete m_pMemory;
-		m_pMemory = nullptr;
-	}
+	clearServer();
 #endif
 #endif	// CONFIG_XUNIQUE
 	if (m_pMyTranslator) delete m_pMyTranslator;
@@ -238,6 +232,7 @@ void qjackctlApplication::setMainWidget ( QWidget *pWidget )
 bool qjackctlApplication::setup ( const QString& sServerName )
 {
 #ifdef CONFIG_XUNIQUE
+	m_sServerName = sServerName;
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #ifdef CONFIG_X11
 	m_pDisplay = QX11Info::display();
@@ -309,72 +304,7 @@ bool qjackctlApplication::setup ( const QString& sServerName )
 #endif	// CONFIG_X11
 	return false;
 #else
-	m_sUnique = QCoreApplication::applicationName();
-	if (!sServerName.isEmpty()) {
-		m_sUnique += '-';
-		m_sUnique += sServerName;
-	}
-	QString sUserName = QString::fromUtf8(::getenv("USER"));
-	if (sUserName.isEmpty())
-		sUserName = QString::fromUtf8(::getenv("USERNAME"));
-	if (!sUserName.isEmpty()) {
-		m_sUnique += ':';
-		m_sUnique += sUserName;
-	}
-	m_sUnique += '@';
-	m_sUnique += QHostInfo::localHostName();
-#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
-	const QNativeIpcKey nativeKey
-		= QSharedMemory::legacyNativeKey(m_sUnique);
-	m_pMemory = new QSharedMemory(nativeKey);
-#else
-#if defined(Q_OS_UNIX)
-	m_pMemory = new QSharedMemory(m_sUnique);
-	m_pMemory->attach();
-	delete m_pMemory;
-#endif
-	m_pMemory = new QSharedMemory(m_sUnique);
-#endif
-	bool bServer = false;
-	const qint64 pid = QCoreApplication::applicationPid();
-	struct Data { qint64 pid; };
-	if (m_pMemory->create(sizeof(Data))) {
-		m_pMemory->lock();
-		Data *pData = static_cast<Data *> (m_pMemory->data());
-		if (pData) {
-			pData->pid = pid;
-			bServer = true;
-		}
-		m_pMemory->unlock();
-	}
-	else
-	if (m_pMemory->attach()) {
-		m_pMemory->lock(); // maybe not necessary?
-		Data *pData = static_cast<Data *> (m_pMemory->data());
-		if (pData)
-			bServer = (pData->pid == pid);
-		m_pMemory->unlock();
-	}
-	if (bServer) {
-		QLocalServer::removeServer(m_sUnique);
-		m_pServer = new QLocalServer();
-		m_pServer->setSocketOptions(QLocalServer::UserAccessOption);
-		m_pServer->listen(m_sUnique);
-		QObject::connect(m_pServer,
-			SIGNAL(newConnection()),
-			SLOT(newConnectionSlot()));
-	} else {
-		QLocalSocket socket;
-		socket.connectToServer(m_sUnique);
-		if (socket.state() == QLocalSocket::ConnectingState)
-			socket.waitForConnected(200);
-		if (socket.state() == QLocalSocket::ConnectedState) {
-			socket.write(QCoreApplication::arguments().join(' ').toUtf8());
-			socket.flush();
-			socket.waitForBytesWritten(200);
-		}
-	}
-	return !bServer;
+	return setupServer();
 #endif
 #else
 	return false;
@@ -437,6 +367,106 @@ bool qjackctlApplication::x11EventFilter ( XEvent *pEv )
 #endif	// CONFIG_X11
 #else
 
+// Local server/shmem setup.
+bool qjackctlApplication::setupServer (void)
+{
+	clearServer();
+
+	m_sUnique = QCoreApplication::applicationName();
+	if (!m_sServerName.isEmpty()) {
+		m_sUnique += '-';
+		m_sUnique += m_sServerName;
+	}
+	QString sUserName = QString::fromUtf8(::getenv("USER"));
+	if (sUserName.isEmpty())
+		sUserName = QString::fromUtf8(::getenv("USERNAME"));
+	if (!sUserName.isEmpty()) {
+		m_sUnique += ':';
+		m_sUnique += sUserName;
+	}
+	m_sUnique += '@';
+	m_sUnique += QHostInfo::localHostName();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+	const QNativeIpcKey nativeKey
+		= QSharedMemory::legacyNativeKey(m_sUnique);
+#if defined(Q_OS_UNIX)
+	m_pMemory = new QSharedMemory(nativeKey);
+	m_pMemory->attach();
+	delete m_pMemory;
+#endif
+	m_pMemory = new QSharedMemory(nativeKey);
+#else
+#if defined(Q_OS_UNIX)
+	m_pMemory = new QSharedMemory(m_sUnique);
+	m_pMemory->attach();
+	delete m_pMemory;
+#endif
+	m_pMemory = new QSharedMemory(m_sUnique);
+#endif
+
+	bool bServer = false;
+	const qint64 pid = QCoreApplication::applicationPid();
+	struct Data { qint64 pid; };
+	if (m_pMemory->create(sizeof(Data))) {
+		m_pMemory->lock();
+		Data *pData = static_cast<Data *> (m_pMemory->data());
+		if (pData) {
+			pData->pid = pid;
+			bServer = true;
+		}
+		m_pMemory->unlock();
+	}
+	else
+	if (m_pMemory->attach()) {
+		m_pMemory->lock(); // maybe not necessary?
+		Data *pData = static_cast<Data *> (m_pMemory->data());
+		if (pData)
+			bServer = (pData->pid == pid);
+		m_pMemory->unlock();
+	}
+
+	if (bServer) {
+		QLocalServer::removeServer(m_sUnique);
+		m_pServer = new QLocalServer();
+		m_pServer->setSocketOptions(QLocalServer::UserAccessOption);
+		m_pServer->listen(m_sUnique);
+		QObject::connect(m_pServer,
+			SIGNAL(newConnection()),
+			SLOT(newConnectionSlot()));
+	} else {
+		QLocalSocket socket;
+		socket.connectToServer(m_sUnique);
+		if (socket.state() == QLocalSocket::ConnectingState)
+			socket.waitForConnected(200);
+		if (socket.state() == QLocalSocket::ConnectedState) {
+			socket.write(QCoreApplication::arguments().join(' ').toUtf8());
+			socket.flush();
+			socket.waitForBytesWritten(200);
+		}
+	}
+
+	return !bServer;
+}
+
+
+// Local server/shmem cleanup.
+void qjackctlApplication::clearServer (void)
+{
+	if (m_pServer) {
+		m_pServer->close();
+		delete m_pServer;
+		m_pServer = nullptr;
+	}
+
+	if (m_pMemory) {
+		delete m_pMemory;
+		m_pMemory = nullptr;
+	}
+
+	m_sUnique.clear();
+}
+
+
 // Local server conection slot.
 void qjackctlApplication::newConnectionSlot (void)
 {
@@ -495,6 +525,8 @@ void qjackctlApplication::readyReadSlot (void)
 					}
 				}
 			}
+			// Reset the server...
+			setupServer();
 		}
 	}
 }
