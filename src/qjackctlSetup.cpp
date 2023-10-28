@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -707,7 +707,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		sServerName = sVal;
 	}
 
-	foreach(const QString& sArg, parser.positionalArguments()) {
+	for (const QString& sArg : parser.positionalArguments()) {
 		if (sArg != "-T" && sArg != "-ndefault") {
 			if (iCmdArgs > 0)
 				sCmdLine += ' ';

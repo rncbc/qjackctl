@@ -1,7 +1,7 @@
 // qjackctlGraphCommand.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2022, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -131,7 +131,7 @@ qjackctlGraphMoveCommand::qjackctlGraphMoveCommand ( qjackctlGraphCanvas *canvas
 
 	const QPointF delta = (pos1 - pos2);
 
-	foreach (qjackctlGraphNode *node, nodes) {
+	for (qjackctlGraphNode *node : nodes) {
 		Item *item = new Item;
 		item->node_name = node->nodeName();
 		item->node_mode = node->nodeMode();
@@ -143,7 +143,7 @@ qjackctlGraphMoveCommand::qjackctlGraphMoveCommand ( qjackctlGraphCanvas *canvas
 	}
 
 	if (canvas && canvas->isRepelOverlappingNodes()) {
-		foreach (qjackctlGraphNode *node, nodes)
+		for (qjackctlGraphNode *node : nodes)
 			canvas->repelOverlappingNodes(node, this);
 	}
 }
@@ -186,7 +186,7 @@ bool qjackctlGraphMoveCommand::execute ( bool /* is_undo */ )
 		return false;
 
 	if (++m_nexec > 1) {
-		foreach (qjackctlGraphNode *key, m_items.keys()) {
+		for (qjackctlGraphNode *key : m_items.keys()) {
 			Item *item = m_items.value(key, nullptr);
 			if (item) {
 				qjackctlGraphNode *node = canvas->findNode(

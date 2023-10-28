@@ -1,7 +1,7 @@
 // qjackctlAlsaGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -191,7 +191,7 @@ bool qjackctlAlsaGraph::findClientPort (
 	if (add_new && *node) {
 		int nchanged = 0;
 		QString node_title = (*node)->nodeTitle();
-		foreach (qjackctlAliasList *node_aliases, item_aliases(*node))
+		for (qjackctlAliasList *node_aliases : item_aliases(*node))
 			node_title = node_aliases->clientAlias(client_name);
 		if ((*node)->nodeTitle() != node_title) {
 			(*node)->setNodeTitle(node_title);
@@ -199,7 +199,7 @@ bool qjackctlAlsaGraph::findClientPort (
 		}
 		if (*port) {
 			QString port_title = (*port)->portTitle();
-			foreach (qjackctlAliasList *port_aliases, item_aliases(*port))
+			for (qjackctlAliasList *port_aliases : item_aliases(*port))
 				port_title = port_aliases->portAlias(client_name, port_name);
 			if ((*port)->portTitle() != port_title) {
 				(*port)->setPortTitle(port_title);

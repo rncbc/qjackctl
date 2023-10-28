@@ -1,7 +1,7 @@
 // qjackctlJackGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -362,7 +362,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 			::jack_free((void *) client_uuid_name);
 		}
 	#endif	// CONFIG_JACK_METADATA
-		foreach (qjackctlAliasList *node_aliases, item_aliases(*node))
+		for (qjackctlAliasList *node_aliases : item_aliases(*node))
 			node_title = node_aliases->clientAlias(client_name);
 		if ((*node)->nodeTitle() != node_title) {
 			(*node)->setNodeTitle(node_title);
@@ -382,7 +382,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 				++nchanged;
 			}
 		#endif	// CONFIG_JACK_METADATA
-			foreach (qjackctlAliasList *port_aliases, item_aliases(*port))
+			for (qjackctlAliasList *port_aliases : item_aliases(*port))
 				port_title = port_aliases->portAlias(client_name, port_name);
 			if ((*port)->portTitle() != port_title) {
 				(*port)->setPortTitle(port_title);
