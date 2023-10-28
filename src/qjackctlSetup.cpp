@@ -709,9 +709,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 
 	for (const QString& sArg : parser.positionalArguments()) {
 		if (sArg != "-T" && sArg != "-ndefault") {
-			if (iCmdArgs > 0)
-				sCmdLine += ' ';
-			sCmdLine += sArg;
+			cmdLine.append(sArg);
 			++iCmdArgs;
 		}
 	}
@@ -724,14 +722,14 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 
 	for (int i = 1; i < argc; ++i) {
 
+		QString sArg = args.at(i);
+
 		if (iCmdArgs > 0) {
-			sCmdLine += ' ';
-			sCmdLine += args.at(i);
+			sCmdArgs.append(sArg);
 			++iCmdArgs;
 			continue;
 		}
 
-		QString sArg = args.at(i);
 		QString sVal;
 		const int iEqual = sArg.indexOf('=');
 		if (iEqual >= 0) {
@@ -793,7 +791,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		}	// FIXME: Avoid auto-start jackd stuffed args!
 		else if (sArg != "-T" && sArg != "-ndefault") {
 			// Here starts the optional command line...
-			sCmdLine += sArg;
+			cmdLine.append(sArg);
 			++iCmdArgs;
 		}
 	}
@@ -801,10 +799,8 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 #endif
 
 	// HACK: If there's a command line, it must be spawned on background...
-	if (iCmdArgs > 0) {
-		sCmdLine += ' ';
-		sCmdLine += '&';
-	}
+	if (iCmdArgs > 0)
+		cmdLine.append("&");
 
 	// Alright with argument parsing.
 	return true;

@@ -88,19 +88,19 @@
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
-        <location filename="../qjackctlSetup.cpp" line="749"/>
+        <location filename="../qjackctlSetup.cpp" line="747"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>옵션 -p에는 인수(사전설정)가 필요합니다.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="694"/>
-        <location filename="../qjackctlSetup.cpp" line="758"/>
+        <location filename="../qjackctlSetup.cpp" line="756"/>
         <source>Option -a requires an argument (path).</source>
         <translation>옵션 -a에는 인수(경로)가 필요합니다.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="704"/>
-        <location filename="../qjackctlSetup.cpp" line="768"/>
+        <location filename="../qjackctlSetup.cpp" line="766"/>
         <source>Option -n requires an argument (name).</source>
         <translation>옵션 -n에는 인수(이름)가 필요합니다.</translation>
     </message>

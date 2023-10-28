@@ -918,7 +918,7 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 	jackStabilize();
 
 	// Look for immediate server startup?...
-	if (m_pSetup->bStartJack || !m_pSetup->sCmdLine.isEmpty())
+	if (m_pSetup->bStartJack || !m_pSetup->cmdLine.isEmpty())
 		m_pSetup->bStartJackCmd = true;
 	if (m_pSetup->bStartJackCmd)
 		startJack();
@@ -3339,13 +3339,13 @@ bool qjackctlMainForm::startJackClient ( bool bDetach )
 	}
 
 	// Have we an initial command-line to start away?
-	if (!m_pSetup->sCmdLine.isEmpty()) {
+	if (!m_pSetup->cmdLine.isEmpty()) {
 		// Run it dettached...
-		shellExecute(m_pSetup->sCmdLine,
+		shellExecute(m_pSetup->cmdLine.join(' '),
 			tr("Command line argument..."),
 			tr("Command line argument started"));
 		// And reset it forever more...
-		m_pSetup->sCmdLine.clear();
+		m_pSetup->cmdLine.clear();
 	}
 
 	// Remember to schedule an initial connection refreshment.

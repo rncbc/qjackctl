@@ -88,19 +88,19 @@
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
-        <location filename="../qjackctlSetup.cpp" line="749"/>
+        <location filename="../qjackctlSetup.cpp" line="747"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Seçenek -p bir bağımsız değişken (ön ayar) gerektirir.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="694"/>
-        <location filename="../qjackctlSetup.cpp" line="758"/>
+        <location filename="../qjackctlSetup.cpp" line="756"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Seçenek -a bir argüman (yol) gerektirir.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="704"/>
-        <location filename="../qjackctlSetup.cpp" line="768"/>
+        <location filename="../qjackctlSetup.cpp" line="766"/>
         <source>Option -n requires an argument (name).</source>
         <translation>Seçenek -n bir argüman (isim) gerektirir.</translation>
     </message>

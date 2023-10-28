@@ -88,19 +88,19 @@
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="685"/>
-        <location filename="../qjackctlSetup.cpp" line="749"/>
+        <location filename="../qjackctlSetup.cpp" line="747"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Možnosť -p vyžaduje argument (prednastavenie).</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="694"/>
-        <location filename="../qjackctlSetup.cpp" line="758"/>
+        <location filename="../qjackctlSetup.cpp" line="756"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Možnost -a vyžaduje argument (cesta).</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="704"/>
-        <location filename="../qjackctlSetup.cpp" line="768"/>
+        <location filename="../qjackctlSetup.cpp" line="766"/>
         <source>Option -n requires an argument (name).</source>
         <translation>Možnosť -n vyžaduje argument (názov).</translation>
     </message>

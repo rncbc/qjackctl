@@ -129,7 +129,7 @@ public:
 	bool bStopJack;
 
 	// User supplied command line.
-	QString sCmdLine;
+	QStringList cmdLine;
 
 	// Current/previous (default) preset name.
 	QString sDefPreset;

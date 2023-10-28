@@ -628,13 +628,13 @@ int main ( int argc, char **argv )
 	}
 
 	// Check if we'll just start an external program...
-	if (!setup.sCmdLine.isEmpty()) {
+	if (!setup.cmdLine.isEmpty()) {
 		jack_client_t *pJackClient
 			= jack_client_open("qjackctl-start", JackNoStartServer, nullptr);
 		if (pJackClient) {
 			jack_client_close(pJackClient);
 			const int iExitStatus
-				= ::system(setup.sCmdLine.toUtf8().constData());
+				= ::system(setup.cmdLine.join(' ').toUtf8().constData());
 			app.quit();
 			return iExitStatus;
 		}
