@@ -32,9 +32,6 @@
 //----------------------------------------------------------------------------
 // qjackctlAlsaGraph -- ALSA graph driver
 
-QMutex qjackctlAlsaGraph::g_mutex;
-
-
 // Constructor.
 qjackctlAlsaGraph::qjackctlAlsaGraph ( qjackctlGraphCanvas *canvas )
 	: qjackctlGraphSect(canvas)
@@ -64,7 +61,7 @@ void qjackctlAlsaGraph::connectPorts (
 	if (node1 == nullptr || node2 == nullptr)
 		return;
 
-	QMutexLocker locker(&g_mutex);
+	QMutexLocker locker(&m_mutex);
 
 	const int client_id1
 		= node1->nodeName().section(':', 0, 0).toInt();
@@ -217,7 +214,7 @@ bool qjackctlAlsaGraph::findClientPort (
 // ALSA graph updater.
 void qjackctlAlsaGraph::updateItems (void)
 {
-	QMutexLocker locker(&g_mutex);
+	QMutexLocker locker(&m_mutex);
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm == nullptr)
@@ -361,7 +358,7 @@ void qjackctlAlsaGraph::updateItems (void)
 
 void qjackctlAlsaGraph::clearItems (void)
 {
-	QMutexLocker locker(&g_mutex);
+	QMutexLocker locker(&m_mutex);
 
 #ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlAlsaGraph::clearItems()");

@@ -29,9 +29,6 @@
 //----------------------------------------------------------------------------
 // qjackctlJackGraph -- JACK graph driver
 
-QMutex qjackctlJackGraph::g_mutex;
-
-
 #ifdef CONFIG_JACK_METADATA
 
 // JACK client/port meta-data property helpers.
@@ -199,7 +196,7 @@ void qjackctlJackGraph::connectPorts (
 	if (node1 == nullptr || node2 == nullptr)
 		return;
 
-	QMutexLocker locker(&g_mutex);
+	QMutexLocker locker(&m_mutex);
 
 	const QByteArray client_port1
 		= QString(node1->nodeName() + ':' + port1->portName()).toUtf8();
@@ -400,7 +397,7 @@ bool qjackctlJackGraph::findClientPort ( jack_client_t *client,
 // JACK graph updaters.
 void qjackctlJackGraph::updateItems (void)
 {
-	QMutexLocker locker(&g_mutex);
+	QMutexLocker locker(&m_mutex);
 
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm == nullptr)
@@ -499,7 +496,7 @@ void qjackctlJackGraph::updateItems (void)
 
 void qjackctlJackGraph::clearItems (void)
 {
-	QMutexLocker locker(&g_mutex);
+	QMutexLocker locker(&m_mutex);
 
 #ifdef CONFIG_DEBUG_0
 	qDebug("qjackctlJackGraph::clearItems()");

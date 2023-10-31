@@ -77,7 +77,7 @@ protected:
 private:
 
 	// Notifier sanity mutex.
-	static QMutex g_mutex;
+	QMutex m_mutex;
 };
 
 

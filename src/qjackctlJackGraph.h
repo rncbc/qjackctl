@@ -81,7 +81,7 @@ protected:
 private:
 
 	// Callback sanity mutex.
-	static QMutex g_mutex;
+	QMutex m_mutex;
 };
 
 
