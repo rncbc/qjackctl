@@ -347,7 +347,7 @@ void qjackctlGraphPort::removeConnect ( qjackctlGraphConnect *connect )
 
 void qjackctlGraphPort::removeConnects (void)
 {
-	for (qjackctlGraphConnect *connect : m_connects) {
+	foreach (qjackctlGraphConnect *connect, m_connects) {
 		if (connect->port1() != this)
 			connect->setPort1(nullptr);
 		if (connect->port2() != this)
@@ -363,7 +363,7 @@ void qjackctlGraphPort::removeConnects (void)
 
 qjackctlGraphConnect *qjackctlGraphPort::findConnect ( qjackctlGraphPort *port ) const
 {
-	for (qjackctlGraphConnect *connect : m_connects) {
+	foreach (qjackctlGraphConnect *connect, m_connects) {
 		if (connect->port1() == port || connect->port2() == port)
 			return connect;
 	}
@@ -421,7 +421,7 @@ QVariant qjackctlGraphPort::itemChange (
 	GraphicsItemChange change, const QVariant& value )
 {
 	if (change == QGraphicsItem::ItemScenePositionHasChanged) {
-		for (qjackctlGraphConnect *connect : m_connects) {
+		foreach (qjackctlGraphConnect *connect, m_connects) {
 			connect->updatePath();
 		}
 	}
@@ -429,7 +429,7 @@ QVariant qjackctlGraphPort::itemChange (
 	if (change == QGraphicsItem::ItemSelectedHasChanged && m_selectx < 1) {
 		const bool is_selected = value.toBool();
 		setHighlightEx(is_selected);
-		for (qjackctlGraphConnect *connect : m_connects)
+		foreach (qjackctlGraphConnect *connect, m_connects)
 			connect->setSelectedEx(this, is_selected);
 	}
 
@@ -441,7 +441,7 @@ QVariant qjackctlGraphPort::itemChange (
 void qjackctlGraphPort::setSelectedEx ( bool is_selected )
 {
 	if (!is_selected) {
-		for (qjackctlGraphConnect *connect : m_connects) {
+		foreach (qjackctlGraphConnect *connect, m_connects) {
 			if (connect->isSelected()) {
 				setHighlightEx(true);
 				return;
@@ -470,7 +470,7 @@ void qjackctlGraphPort::setHighlightEx ( bool is_highlight )
 
 	qjackctlGraphItem::setHighlight(is_highlight);
 
-	for (qjackctlGraphConnect *connect : m_connects)
+	foreach (qjackctlGraphConnect *connect, m_connects)
 		connect->setHighlightEx(this, is_highlight);
 
 	--m_hilitex;
@@ -489,7 +489,7 @@ void qjackctlGraphPort::updatePortTypeColors ( qjackctlGraphCanvas *canvas )
 				: color.darker());
 			qjackctlGraphItem::setBackground(color);
 			if (m_mode & Output) {
-				for (qjackctlGraphConnect *connect : m_connects) {
+				foreach (qjackctlGraphConnect *connect, m_connects) {
 					connect->updatePortTypeColors();
 					connect->update();
 				}
@@ -794,7 +794,7 @@ void qjackctlGraphNode::removePort ( qjackctlGraphPort *port )
 
 void qjackctlGraphNode::removePorts (void)
 {
-	for (qjackctlGraphPort *port : m_ports)
+	foreach (qjackctlGraphPort *port, m_ports)
 		port->removeConnects();
 
 	// Do not delete ports here as they are node's child items...
@@ -826,7 +826,7 @@ void qjackctlGraphNode::resetMarkedPorts (void)
 {
 	QList<qjackctlGraphPort *> ports;
 
-	for (qjackctlGraphPort *port : m_ports) {
+	foreach (qjackctlGraphPort *port, m_ports) {
 		if (port->isMarked()) {
 			port->setMarked(false);
 		} else {
@@ -834,7 +834,7 @@ void qjackctlGraphNode::resetMarkedPorts (void)
 		}
 	}
 
-	for (qjackctlGraphPort *port : ports) {
+	foreach (qjackctlGraphPort *port, ports) {
 		port->removeConnects();
 		removePort(port);
 		delete port;
@@ -849,7 +849,7 @@ void qjackctlGraphNode::updatePath (void)
 	int width = rect.width() / 2 + 24;
 	int wi, wo;
 	wi = wo = width;
-	for (qjackctlGraphPort *port : m_ports) {
+	foreach (qjackctlGraphPort *port, m_ports) {
 		const int w = port->itemRect().width();
 		if (port->isOutput()) {
 			if (wo < w) wo = w;
@@ -865,7 +865,7 @@ void qjackctlGraphNode::updatePath (void)
 	int type = 0;
 	int yi, yo;
 	yi = yo = height;
-	for (qjackctlGraphPort *port : m_ports) {
+	foreach (qjackctlGraphPort *port, m_ports) {
 		const QRectF& port_rect = port->itemRect();
 		const int w = port_rect.width();
 		const int h = port_rect.height() + 1;
@@ -938,7 +938,7 @@ QVariant qjackctlGraphNode::itemChange (
 {
 	if (change == QGraphicsItem::ItemSelectedHasChanged) {
 		const bool is_selected = value.toBool();
-		for (qjackctlGraphPort *port : m_ports)
+		foreach (qjackctlGraphPort *port, m_ports)
 			port->setSelected(is_selected);
 	}
 
@@ -1373,7 +1373,7 @@ qjackctlGraphItem *qjackctlGraphCanvas::currentItem (void) const
 		item = nullptr;
 
  	if (item == nullptr) {
-		for (QGraphicsItem *item2 : m_scene->selectedItems()) {
+		foreach (QGraphicsItem *item2, m_scene->selectedItems()) {
 			if (item2->type() == qjackctlGraphConnect::Type)
 				continue;
 			item = static_cast<qjackctlGraphItem *> (item2);
@@ -1392,7 +1392,7 @@ bool qjackctlGraphCanvas::canConnect (void) const
 	int nins = 0;
 	int nouts = 0;
 
-	for (QGraphicsItem *item : m_scene->selectedItems()) {
+	foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 		if (item->type() == qjackctlGraphNode::Type) {
 			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 			if (node) {
@@ -1424,13 +1424,13 @@ bool qjackctlGraphCanvas::canConnect (void) const
 
 bool qjackctlGraphCanvas::canDisconnect (void) const
 {
-	for (QGraphicsItem *item : m_scene->selectedItems()) {
+	foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 		switch (item->type()) {
 		case qjackctlGraphConnect::Type:
 			return true;
 		case qjackctlGraphNode::Type: {
 			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
-			for (qjackctlGraphPort *port : node->ports()) {
+			foreach (qjackctlGraphPort *port, node->ports()) {
 				if (!port->connects().isEmpty())
 					return true;
 			}
@@ -1502,7 +1502,7 @@ void qjackctlGraphCanvas::resetNodes ( uint node_type )
 {
 	QList<qjackctlGraphNode *> nodes;
 
-	for (qjackctlGraphNode *node : m_nodes) {
+	foreach (qjackctlGraphNode *node, m_nodes) {
 		if (node->nodeType() == node_type) {
 			if (node->isMarked()) {
 				node->resetMarkedPorts();
@@ -1522,7 +1522,7 @@ void qjackctlGraphCanvas::clearNodes ( uint node_type )
 {
 	QList<qjackctlGraphNode *> nodes;
 
-	for (qjackctlGraphNode *node : m_nodes) {
+	foreach (qjackctlGraphNode *node, m_nodes) {
 		if (node->nodeType() == node_type) {
 			m_nodekeys.remove(qjackctlGraphNode::NodeKey(node));
 			m_nodes.removeAll(node);
@@ -1579,7 +1579,7 @@ qjackctlGraphItem *qjackctlGraphCanvas::itemAt ( const QPointF& pos ) const
 	const QList<QGraphicsItem *>& items
 		= m_scene->items(QRectF(pos - QPointF(2, 2), QSizeF(5, 5)));
 
-	for (QGraphicsItem *item : items) {
+	foreach (QGraphicsItem *item, items) {
 		if (item->type() >= QGraphicsItem::UserType)
 			return static_cast<qjackctlGraphItem *> (item);
 	}
@@ -1726,7 +1726,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 			if (!m_zoomrange) {
 				if (event->modifiers()
 					& (Qt::ControlModifier | Qt::ShiftModifier)) {
-					for (QGraphicsItem *item : m_selected) {
+					foreach (QGraphicsItem *item, m_selected) {
 						item->setSelected(!item->isSelected());
 						++nchanged;
 					}
@@ -1737,7 +1737,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 					++nchanged;
 				}
 				const QRectF range_rect(m_pos, pos);
-				for (QGraphicsItem *item :
+				foreach (QGraphicsItem *item,
 						m_scene->items(range_rect.normalized())) {
 					if (item->type() >= QGraphicsItem::UserType) {
 						if (item->type() != qjackctlGraphNode::Type)
@@ -1765,7 +1765,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 		if (m_item && m_item->type() == qjackctlGraphNode::Type) {
 			snapPos(pos);
 			const QPointF delta = (pos - m_pos);
-			for (QGraphicsItem *item : m_scene->selectedItems()) {
+			foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 				if (item->type() == qjackctlGraphNode::Type) {
 					qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 					if (node)
@@ -1887,7 +1887,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 			const QPointF& pos
 				= QGraphicsView::mapToScene(event->pos());
 			QList<qjackctlGraphNode *> nodes;
-			for (QGraphicsItem *item : m_scene->selectedItems()) {
+			foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 				if (item->type() == qjackctlGraphNode::Type) {
 					qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 					if (node)
@@ -1978,7 +1978,7 @@ void qjackctlGraphCanvas::connectItems (void)
 	QList<qjackctlGraphPort *> outs;
 	QList<qjackctlGraphPort *> ins;
 
-	for (QGraphicsItem *item : m_scene->selectedItems()) {
+	foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 		if (item->type() == qjackctlGraphPort::Type) {
 			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
 			if (port) {
@@ -2039,7 +2039,7 @@ void qjackctlGraphCanvas::disconnectItems (void)
 	QList<qjackctlGraphConnect *> connects;
 	QList<qjackctlGraphNode *> nodes;
 
-	for (QGraphicsItem *item : m_scene->selectedItems()) {
+	foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 		switch (item->type()) {
 		case qjackctlGraphConnect::Type: {
 			qjackctlGraphConnect *connect = static_cast<qjackctlGraphConnect *> (item);
@@ -2056,9 +2056,9 @@ void qjackctlGraphCanvas::disconnectItems (void)
 	}
 
 	if (connects.isEmpty()) {
-		for (qjackctlGraphNode *node : nodes) {
-			for (qjackctlGraphPort *port : node->ports()) {
-				for (qjackctlGraphConnect *connect : port->connects()) {
+		foreach (qjackctlGraphNode *node, nodes) {
+			foreach (qjackctlGraphPort *port, node->ports()) {
+				foreach (qjackctlGraphConnect *connect, port->connects()) {
 					if (!connects.contains(connect))
 						connects.append(connect);
 				}
@@ -2076,7 +2076,7 @@ void qjackctlGraphCanvas::disconnectItems (void)
 
 	m_commands->beginMacro(tr("Disconnect"));
 
-	for (qjackctlGraphConnect *connect : connects) {
+	foreach (qjackctlGraphConnect *connect, connects) {
 		// Submit command; notify eventual observers...
 		qjackctlGraphPort *port1 = connect->port1();
 		qjackctlGraphPort *port2 = connect->port2();
@@ -2091,7 +2091,7 @@ void qjackctlGraphCanvas::disconnectItems (void)
 // Select actions.
 void qjackctlGraphCanvas::selectAll (void)
 {
-	for (QGraphicsItem *item : m_scene->items()) {
+	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphNode::Type)
 			item->setSelected(true);
 		else
@@ -2113,7 +2113,7 @@ void qjackctlGraphCanvas::selectNone (void)
 
 void qjackctlGraphCanvas::selectInvert (void)
 {
-	for (QGraphicsItem *item : m_scene->items()) {
+	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphNode::Type)
 			item->setSelected(!item->isSelected());
 		else
@@ -2237,7 +2237,7 @@ void qjackctlGraphCanvas::zoomReset (void)
 // Update all nodes.
 void qjackctlGraphCanvas::updateNodes (void)
 {
-	for (QGraphicsItem *item : m_scene->items()) {
+	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphNode::Type) {
 			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 			if (node)
@@ -2250,7 +2250,7 @@ void qjackctlGraphCanvas::updateNodes (void)
 // Update all connectors.
 void qjackctlGraphCanvas::updateConnects (void)
 {
-	for (QGraphicsItem *item : m_scene->items()) {
+	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphConnect::Type) {
 			qjackctlGraphConnect *connect = static_cast<qjackctlGraphConnect *> (item);
 			if (connect)
@@ -2362,7 +2362,7 @@ bool qjackctlGraphCanvas::saveState (void) const
 
 	m_settings->beginGroup(NodePosGroup);
 	const QList<QGraphicsItem *> items(m_scene->items());
-	for (QGraphicsItem *item : items) {
+	foreach (QGraphicsItem *item, items) {
 		if (item->type() == qjackctlGraphNode::Type) {
 			qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 			if (node)
@@ -2428,7 +2428,7 @@ const QColor& qjackctlGraphCanvas::portTypeColor ( uint port_type )
 
 void qjackctlGraphCanvas::updatePortTypeColors ( uint port_type )
 {
-	for (QGraphicsItem *item : m_scene->items()) {
+	foreach (QGraphicsItem *item, m_scene->items()) {
 		if (item->type() == qjackctlGraphPort::Type) {
 			qjackctlGraphPort *port = static_cast<qjackctlGraphPort *> (item);
 			if (port && (0 >= port_type || port->portType() == port_type)) {
@@ -2577,7 +2577,7 @@ void qjackctlGraphSect::resetItems ( uint node_type )
 {
 	const QList<qjackctlGraphConnect *> connects(m_connects);
 
-	for (qjackctlGraphConnect *connect : connects) {
+	foreach (qjackctlGraphConnect *connect, connects) {
 		if (connect->isMarked()) {
 			connect->setMarked(false);
 		} else {
@@ -2622,7 +2622,7 @@ void qjackctlGraphSect::renameItem (
 		if (node) {
 			node->setNodeTitle(name);
 			const QString& node_title = node->nodeTitle();
-			for (qjackctlAliasList *node_aliases : item_aliases(item)) {
+			foreach (qjackctlAliasList *node_aliases, item_aliases(item)) {
 				node_aliases->setClientAlias(node->nodeName(), node_title);
 				++nchanged;
 			}
@@ -2635,7 +2635,7 @@ void qjackctlGraphSect::renameItem (
 			node = port->portNode();
 		if (port && node) {
 			port->setPortTitle(name);
-			for (qjackctlAliasList *port_aliases : item_aliases(item)) {
+			foreach (qjackctlAliasList *port_aliases, item_aliases(item)) {
 				port_aliases->setPortAlias(
 					node->nodeName(), port->portName(), name);
 				++nchanged;
@@ -2681,7 +2681,7 @@ void qjackctlGraphCanvas::repelOverlappingNodes ( qjackctlGraphNode *node,
 		-2.0 * MIN_NODE_GAP, -MIN_NODE_GAP,
 		+2.0 * MIN_NODE_GAP, +MIN_NODE_GAP);
 
-	for (qjackctlGraphNode *node2 : m_nodes) {
+	foreach (qjackctlGraphNode *node2, m_nodes) {
 		if (node2->isMarked())
 			continue;
 		const QPointF& pos1
@@ -2742,7 +2742,7 @@ void qjackctlGraphCanvas::repelOverlappingNodes ( qjackctlGraphNode *node,
 void qjackctlGraphCanvas::repelOverlappingNodesAll (
 	qjackctlGraphMoveCommand *move_command )
 {
-	for (qjackctlGraphNode *node : m_nodes)
+	foreach (qjackctlGraphNode *node, m_nodes)
 		repelOverlappingNodes(node, move_command);
 }
 

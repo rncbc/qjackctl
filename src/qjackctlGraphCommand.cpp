@@ -131,7 +131,7 @@ qjackctlGraphMoveCommand::qjackctlGraphMoveCommand ( qjackctlGraphCanvas *canvas
 
 	const QPointF delta = (pos1 - pos2);
 
-	for (qjackctlGraphNode *node : nodes) {
+	foreach (qjackctlGraphNode *node, nodes) {
 		Item *item = new Item;
 		item->node_name = node->nodeName();
 		item->node_mode = node->nodeMode();
@@ -143,7 +143,7 @@ qjackctlGraphMoveCommand::qjackctlGraphMoveCommand ( qjackctlGraphCanvas *canvas
 	}
 
 	if (canvas && canvas->isRepelOverlappingNodes()) {
-		for (qjackctlGraphNode *node : nodes)
+		foreach (qjackctlGraphNode *node, nodes)
 			canvas->repelOverlappingNodes(node, this);
 	}
 }
@@ -186,7 +186,7 @@ bool qjackctlGraphMoveCommand::execute ( bool /* is_undo */ )
 		return false;
 
 	if (++m_nexec > 1) {
-		for (qjackctlGraphNode *key : m_items.keys()) {
+		foreach (qjackctlGraphNode *key, m_items.keys()) {
 			Item *item = m_items.value(key, nullptr);
 			if (item) {
 				qjackctlGraphNode *node = canvas->findNode(

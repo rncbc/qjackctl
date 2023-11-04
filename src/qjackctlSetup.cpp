@@ -707,7 +707,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		sServerName = sVal;
 	}
 
-	for (const QString& sArg : parser.positionalArguments()) {
+	foreach (const QString& sArg, parser.positionalArguments()) {
 		if (sArg != "-T" && sArg != "-ndefault") {
 			cmdLine.append(sArg);
 			++iCmdArgs;
