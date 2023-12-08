@@ -148,7 +148,7 @@ if (CONFIG_DBUS)
 endif ()
 
 if (CONFIG_JACK)
-  target_link_libraries (${PROJECT_NAME} PRIVATE Jack::Jack)
+  target_link_libraries (${PROJECT_NAME} PRIVATE PkgConfig::JACK)
 endif ()
 
 if (CONFIG_ALSA_SEQ)

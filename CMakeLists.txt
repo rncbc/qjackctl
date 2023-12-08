@@ -164,10 +164,24 @@ endif ()
 
 
 # Find package modules
-find_package (Jack REQUIRED)
-set (CONFIG_JACK 1)
-set (CMAKE_REQUIRED_LIBRARIES "${Jack_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
-set (CMAKE_REQUIRED_INCLUDES "${Jack_INCLUDE_DIRS};${CMAKE_REQUIRED_INCLUDES}")
+include (FindPkgConfig)
+
+pkg_check_modules (JACK IMPORTED_TARGET jack>=0.100.0)
+if (JACK_FOUND)
+  find_library (JACK_LIBRARY NAMES ${JACK_LIBRARIES} HINTS ${JACK_LIBDIR})
+  if (JACK_LIBRARY)
+    set (CONFIG_JACK 1)
+    set (CMAKE_REQUIRED_LIBRARIES "${JACK_LIBRARIES};${CMAKE_REQUIRED_LIBRARIES}")
+    set (CMAKE_REQUIRED_INCLUDES "${JACK_INCLUDE_DIRS};${CMAKE_REQUIRED_INCLUDES}")
+  else ()
+    message (FATAL_ERROR "*** JACK library not found.")
+    set (CONFIG_JACK 0)
+  endif ()
+else ()
+  message (FATAL_ERROR "*** JACK package not found.")
+  set (CONFIG_JACK 0)
+endif ()
+
 # Check for jack/statistics.h header.
 check_include_file (jack/statistics.h HAVE_JACK_STATISTICS_H)
 if (NOT HAVE_JACK_STATISTICS_H)
