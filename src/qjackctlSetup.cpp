@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -204,7 +204,7 @@ void qjackctlSetup::saveSetup (void)
 {
 	// Save all settings and options...
 	m_settings.beginGroup("/Program");
-	m_settings.setValue("/Version", CONFIG_BUILD_VERSION);
+	m_settings.setValue("/Version", PROJECT_VERSION);
 	m_settings.endGroup();
 
 	m_settings.beginGroup("/Presets");
@@ -786,7 +786,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		#endif
 			out << QString("%1: %2\n")
 				.arg(QJACKCTL_TITLE)
-				.arg(CONFIG_BUILD_VERSION);
+				.arg(PROJECT_VERSION);
 			return false;
 		}	// FIXME: Avoid auto-start jackd stuffed args!
 		else if (sArg != "-T" && sArg != "-ndefault") {

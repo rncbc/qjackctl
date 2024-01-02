@@ -1,10 +1,13 @@
 cmake_minimum_required (VERSION 3.15)
 
-project (qjackctl
+project (QjackCtl
   VERSION 0.9.13
   DESCRIPTION "JACK Audio Connection Kit - Qt GUI Interface"
   HOMEPAGE_URL "https://qjackctl.sourceforge.io"
   LANGUAGES C CXX)
+
+set (PROJECT_TITLE "${PROJECT_NAME}")
+string (TOLOWER "${PROJECT_TITLE}" PROJECT_NAME)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
@@ -285,8 +288,7 @@ macro (SHOW_OPTION text value)
   endif ()
 endmacro ()
 
-
-message   ("\n  ${PACKAGE_NAME} ${PACKAGE_VERSION} (Qt ${QT_VERSION})")
+message   ("\n  ${PROJECT_TITLE} ${PROJECT_VERSION} (Qt ${QT_VERSION})")
 message   ("\n  Build target . . . . . . . . . . . . . . . . . . .: ${CONFIG_BUILD_TYPE}\n")
 show_option ("  JACK Audio Connection Kit support  . . . . . . . ." CONFIG_JACK)
 show_option ("  JACK Realtime support  . . . . . . . . . . . . . ." CONFIG_JACK_REALTIME)
