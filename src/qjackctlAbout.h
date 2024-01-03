@@ -33,8 +33,8 @@
 #define QJACKCTL_SUBTITLE   PROJECT_DESCRIPTION
 #define QJACKCTL_WEBSITE    PROJECT_HOMEPAGE_URL
 
-#define QJACKCTL_COPYRIGHT  "Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved."
-#define QJACKCTL_DOMAIN     "rncbc.org"
+#define QJACKCTL_COPYRIGHT  PROJECT_COPYRIGHT
+#define QJACKCTL_DOMAIN     PROJECT_DOMAIN
 
 #endif  // __qjackctlAbout_h
 
