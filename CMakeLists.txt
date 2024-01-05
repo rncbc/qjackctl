@@ -9,6 +9,9 @@ project (QjackCtl
 set (PROJECT_TITLE "${PROJECT_NAME}")
 string (TOLOWER "${PROJECT_TITLE}" PROJECT_NAME)
 
+set (PROJECT_COPYRIGHT "Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.")
+set (PROJECT_DOMAIN    "rncbc.org")
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 execute_process (
@@ -35,9 +38,6 @@ if (GIT_DESCRIBE_RESULT EQUAL 0)
   endif ()
   set (PROJECT_VERSION "${GIT_VERSION}")
 endif ()
-
-set (PROJECT_COPYRIGHT "Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.")
-set (PROJECT_DOMAIN    "rncbc.org")
 
 
 if (CMAKE_BUILD_TYPE MATCHES "Debug")
