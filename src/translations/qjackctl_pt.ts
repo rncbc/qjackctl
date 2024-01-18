@@ -479,13 +479,13 @@ Tem certeza?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1872"/>
-        <location filename="../qjackctlGraph.cpp" line="2005"/>
+        <location filename="../qjackctlGraph.cpp" line="1876"/>
+        <location filename="../qjackctlGraph.cpp" line="2009"/>
         <source>Connect</source>
         <translation>Conectar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2077"/>
+        <location filename="../qjackctlGraph.cpp" line="2081"/>
         <source>Disconnect</source>
         <translation>Disconnectar</translation>
     </message>

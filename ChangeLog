@@ -5,6 +5,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: Make the main canvas background to mid-gray, when on
+  non-dark color themes. (EXPERIMENTAL)
+
 - Turkish (tr) translation added (by Orkun Arapoglu, thanks).
 
 - Updated copyright headers into the New Year (2024).
