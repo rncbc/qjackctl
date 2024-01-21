@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ" sourcelanguage="en">
+<TS version="2.1" language="cs_CZ" sourcelanguage="en_US">
 <context>
     <name>PortAudioProber</name>
     <message>
@@ -1026,22 +1026,22 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="736"/>
         <source>Connect Thro&amp;ugh Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit &amp;přes uzly</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="739"/>
         <source>Connect Through Nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit přes uzly</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="742"/>
         <source>Connect through nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit přes uzly</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="745"/>
         <source>Whether to draw connectors through or around nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zda kreslit konektory skrz nebo kolem uzlů</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="753"/>
