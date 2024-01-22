@@ -3,12 +3,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 
 ChangeLog
 
-GIT HEAD
+
+0.9.13  2024-01-24  A Winter'24 Release.
 
 - Graph: Make the main canvas background to mid-gray, when on
-  non-dark color themes. (EXPERIMENTAL)
+  non-dark color themes.
 
-- Turkish (tr) translation added (by Orkun Arapoglu, thanks).
+- Turkish (tr) translation added.
 
 - Updated copyright headers into the New Year (2024).
 
