@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -3980,34 +3980,20 @@ void qjackctlMainForm::updateStatusItem( int iStatusItem, const QString& sText )
 // Main window caption title and system tray icon and tooltip update.
 void qjackctlMainForm::updateTitleStatus (void)
 {
-	QString sTitle;
-
-	if (!m_pSetup->bLeftButtons  ||
-		!m_pSetup->bRightButtons ||
-		!m_pSetup->bTextLabels) {
-		sTitle = QJACKCTL_SUBTITLE0;
-	} else {
-		sTitle = QJACKCTL_SUBTITLE1;
-	}
-
-	sTitle += ' ';
-	sTitle += '[' + m_pSetup->sDefPreset + ']';
-	sTitle += ' ';
-
+	QString sTitle = m_pSetup->sDefPreset;
 	QString sState;
-	QString sDots('.');
-	const QString s(2, '.');
+	const QString sDots(3, '.');
 	switch (m_iServerState) {
 	case QJACKCTL_STARTING:
 		sState = tr("Starting");
-		sDots += s;
+		sState += sDots;
 		break;
 	case QJACKCTL_STARTED:
 		sState = tr("Started");
 		break;
 	case QJACKCTL_STOPPING:
 		sState = tr("Stopping");
-		sDots += s;
+		sState += sDots;
 		break;
 	case QJACKCTL_STOPPED:
 		sState = tr("Stopped");
@@ -4017,14 +4003,15 @@ void qjackctlMainForm::updateTitleStatus (void)
 		break;
 	case QJACKCTL_ACTIVATING:
 		sState = tr("Activating");
-		sDots += s;
+		sState += sDots;
 		break;
 	case QJACKCTL_INACTIVE:
 	default:
 		sState = tr("Inactive");
 		break;
 	}
-	sTitle += sState + sDots;
+	sTitle += ' ';
+	sTitle += sState;
 	setWindowTitle(sTitle);
 
 	updateStatusItem(STATUS_SERVER_STATE, sState);
@@ -4059,12 +4046,12 @@ void qjackctlMainForm::updateTitleStatus (void)
 	}
 #endif
 
-	sTitle = m_pSetup->sServerName;
-	if (sTitle.isEmpty())
-		sTitle = QString::fromUtf8(::getenv("JACK_DEFAULT_SERVER"));
-	if (sTitle.isEmpty())
-		sTitle = qjackctlSetup::defName();
-	updateStatusItem(STATUS_SERVER_NAME, sTitle);
+	QString sServerName = m_pSetup->sServerName;
+	if (sServerName.isEmpty())
+		sServerName = QString::fromUtf8(::getenv("JACK_DEFAULT_SERVER"));
+	if (sServerName.isEmpty())
+		sServerName = qjackctlSetup::defName();
+	updateStatusItem(STATUS_SERVER_NAME, sServerName);
 }
 
 

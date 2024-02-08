@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Simplified and shortened the main window title. (EXPERIMENTAL)
+
+
 0.9.13  2024-01-24  A Winter'24 Release.
 
 - Graph: Make the main canvas background to mid-gray, when on
