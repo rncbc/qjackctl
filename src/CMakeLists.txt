@@ -97,7 +97,7 @@ set (TRANSLATIONS
 	translations/qjackctl_ja.ts
 	translations/qjackctl_ko.ts
 	translations/qjackctl_nl.ts
-	translations/qjackctl_pt.ts
+	translations/qjackctl_pt_BR.ts
 	translations/qjackctl_ru.ts
 	translations/qjackctl_sk.ts
 	translations/qjackctl_tr.ts

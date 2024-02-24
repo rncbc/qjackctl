@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Old generic "Portuguese" translation (pt) has been corrected to  
+  the more proper "Portuguese (Brazil)" locale (pt_BR).
+
 - Simplified and shortened the main window title. (EXPERIMENTAL)
 
 
