@@ -2397,38 +2397,38 @@ the next time you start this program.</source>
         <translation>세부 정보 표시</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="343"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="344"/>
         <source>Import File - %1</source>
         <translation>파일 가져오기 - %1</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="259"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="346"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="391"/>
-        <source>Palette files (*.%1)</source>
-        <translation>팔레트 파일  (*.%1)</translation>
-    </message>
-    <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="257"/>
-        <source>Save Palette - %1</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="260"/>
         <location filename="../qjackctlPaletteForm.cpp" line="347"/>
         <location filename="../qjackctlPaletteForm.cpp" line="392"/>
+        <source>Palette files (*.%1)</source>
+        <translation>팔레트 파일  (*.%1)</translation>
+    </message>
+    <message>
+        <location filename="../qjackctlPaletteForm.cpp" line="258"/>
+        <source>Save Palette - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlPaletteForm.cpp" line="261"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="348"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="393"/>
         <source>All files (*.*)</source>
         <translation>모든 파일 (*.*)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="378"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="754"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="762"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="379"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="755"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="763"/>
         <source>Warning - %1</source>
         <translation>경고 - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="379"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="380"/>
         <source>Could not import from file:
 
 %1
@@ -2441,12 +2441,12 @@ Sorry.</source>
 죄송합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="388"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="389"/>
         <source>Export File - %1</source>
         <translation>파일 내보내기 - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="755"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="756"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
@@ -2455,7 +2455,7 @@ Do you want to discard the changes?</source>
 변경 내용을 취소하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="763"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="764"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;.
@@ -2471,22 +2471,22 @@ Do you want to save the changes?</source>
 <context>
     <name>qjackctlPaletteForm::PaletteModel</name>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1006"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1007"/>
         <source>Color Role</source>
         <translation>색상 역할</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1009"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1010"/>
         <source>Active</source>
         <translation>활성</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1012"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1013"/>
         <source>Inactive</source>
         <translation>비활성</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1015"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1016"/>
         <source>Disabled</source>
         <translation>비활성화됨</translation>
     </message>
