@@ -183,6 +183,8 @@ if (MINGW OR (UNIX AND NOT APPLE))
     DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
   install (FILES man1/${PROJECT_NAME}.fr.1
     DESTINATION ${CMAKE_INSTALL_MANDIR}/fr/man1 RENAME ${PROJECT_NAME}.1)
+  install (FILES palette/KXStudio.conf palette/Wonton\ Soup.conf
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/palette)
 elseif (APPLE)
   # Generate bundle on MacOS with QjackCtl.icns as the icon and a custom Info.plist file.
   target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/images/QjackCtl.icns)

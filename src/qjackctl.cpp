@@ -655,6 +655,29 @@ int main ( int argc, char **argv )
 		app.setStyle(QStyleFactory::create(setup.sCustomStyleTheme));
 
 	// Custom color theme (eg. "KXStudio")...
+	const QChar sep = QDir::separator();
+	QString sPalettePath = QApplication::applicationDirPath();
+	sPalettePath.remove(CONFIG_BINDIR);
+	sPalettePath.append(CONFIG_DATADIR);
+	sPalettePath.append(sep);
+	sPalettePath.append(PROJECT_NAME);
+	sPalettePath.append(sep);
+	sPalettePath.append("palette");
+	if (QDir(sPalettePath).exists()) {
+		QStringList names;
+		names.append("KXStudio");
+		names.append("Wonton Soup");
+		QStringListIterator name_iter(names);
+		while (name_iter.hasNext()) {
+			const QString& name = name_iter.next();
+			const QFileInfo fi(sPalettePath, name + ".conf");
+			if (fi.isReadable()) {
+				qjackctlPaletteForm::addNamedPaletteConf(
+					&setup.settings(), name, fi.absoluteFilePath());
+			}
+		}
+	}
+
 	QPalette pal(app.palette());
 	if (qjackctlPaletteForm::namedPalette(
 			&setup.settings(), setup.sCustomColorTheme, pal))

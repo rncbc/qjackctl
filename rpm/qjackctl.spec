@@ -129,6 +129,7 @@ cmake --install build
 %dir %{_datadir}/icons/hicolor/scalable/apps
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/translations
+%dir %{_datadir}/%{name}/palette
 %dir %{_datadir}/metainfo
 #dir %{_datadir}/man
 #dir %{_datadir}/man/man1
@@ -142,6 +143,7 @@ cmake --install build
 %{_datadir}/metainfo/org.rncbc.%{name}.metainfo.xml
 %{_datadir}/man/man1/%{name}.1.gz
 %{_datadir}/man/fr/man1/%{name}.1.gz
+%{_datadir}/%{name}/palette/*.conf
 
 %changelog
 * Wed Jan 24 2024 Rui Nuno Capela <rncbc@rncbc.org> 0.9.13

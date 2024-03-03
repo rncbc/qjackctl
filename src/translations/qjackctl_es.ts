@@ -2385,31 +2385,38 @@ Ha sido deshabilitado.</translation>
         <translation>Mostrar Detalles</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="323"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="343"/>
         <source>Import File - %1</source>
         <translation>Importar Archivo - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="326"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="400"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="259"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="346"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="391"/>
         <source>Palette files (*.%1)</source>
         <translation>Archivos de paleta (*.%1)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="327"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="401"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="257"/>
+        <source>Save Palette - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlPaletteForm.cpp" line="260"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="347"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="392"/>
         <source>All files (*.*)</source>
         <translation>Todos los archivos (*.*)</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="387"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="820"/>
-        <location filename="../qjackctlPaletteForm.cpp" line="828"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="378"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="754"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="762"/>
         <source>Warning - %1</source>
         <translation>Advertencia - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="388"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="379"/>
         <source>Could not import from file:
 
 %1
@@ -2422,12 +2429,12 @@ Sorry.</source>
 Disculpe.</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="397"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="388"/>
         <source>Export File - %1</source>
         <translation>Exportar archivo - %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="821"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="755"/>
         <source>Some settings have been changed.
 
 Do you want to discard the changes?</source>
@@ -2436,7 +2443,7 @@ Do you want to discard the changes?</source>
 ¿Desea descartar los cambios?</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="829"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="763"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;.
@@ -2452,22 +2459,22 @@ Desea guardarlos?</translation>
 <context>
     <name>qjackctlPaletteForm::PaletteModel</name>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1072"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1006"/>
         <source>Color Role</source>
         <translation>Rol Color</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1075"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1009"/>
         <source>Active</source>
         <translation>Activo</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1078"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1012"/>
         <source>Inactive</source>
         <translation>Inactivo</translation>
     </message>
     <message>
-        <location filename="../qjackctlPaletteForm.cpp" line="1081"/>
+        <location filename="../qjackctlPaletteForm.cpp" line="1015"/>
         <source>Disabled</source>
         <translation>Desactivado</translation>
     </message>
