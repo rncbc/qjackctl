@@ -284,12 +284,12 @@ void qjackctlGraphPort::setPortTitle ( const QString& title )
 	static const int MAX_TITLE_LENGTH = 29;
 	static const QString ellipsis(3, '.');
 
-	QString text = m_title;
+	QString text = m_title.simplified();
 	const int nlength = text.indexOf(':');
 	if (nlength >= 0)
 		text.remove(0, nlength + 1);
 	if (text.length() >= MAX_TITLE_LENGTH + ellipsis.length())
-		text = ellipsis + text.right(MAX_TITLE_LENGTH);
+		text = ellipsis + text.right(MAX_TITLE_LENGTH).trimmed();
 
 	m_text->setPlainText(text);
 
@@ -742,9 +742,9 @@ void qjackctlGraphNode::setNodeTitle ( const QString& title )
 	static const int MAX_TITLE_LENGTH = 29;
 	static const QString ellipsis(3, '.');
 
-	QString text = m_title;
+	QString text = m_title.simplified();
 	if (text.length() >= MAX_TITLE_LENGTH  + ellipsis.length())
-		text = text.left(MAX_TITLE_LENGTH) + ellipsis;
+		text = text.left(MAX_TITLE_LENGTH).trimmed() + ellipsis;
 
 	m_text->setPlainText(text);
 }
