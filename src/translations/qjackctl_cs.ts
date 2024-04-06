@@ -2415,7 +2415,7 @@ když příště spustíte tento program.</translation>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="258"/>
         <source>Save Palette - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit paletu - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="261"/>
