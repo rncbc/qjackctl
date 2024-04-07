@@ -14,7 +14,7 @@ ChangeLog
 - Old generic "Portuguese" translation (pt) has been corrected to  
   the more proper "Portuguese (Brazil)" locale (pt_BR).
 
-- Simplified and shortened the main window title. (EXPERIMENTAL)
+- Simplified and shortened the main window title.
 
 
 0.9.13  2024-01-24  A Winter'24 Release.
