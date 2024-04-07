@@ -16,8 +16,8 @@
 #
 
 %define name    qjackctl
-%define version 0.9.13
-%define release 57.1
+%define version 0.9.90
+%define release 1.1
 
 %define _prefix	/usr
 
@@ -146,6 +146,8 @@ cmake --install build
 %{_datadir}/%{name}/palette/*.conf
 
 %changelog
+* Wed Apr 10 2024 Rui Nuno Capela <rncbc@rncbc.org> 0.9.90
+- A Spring'24 Release Candidate.
 * Wed Jan 24 2024 Rui Nuno Capela <rncbc@rncbc.org> 0.9.13
 - A Winter'24 Release.
 * Sat Sep  9 2023 Rui Nuno Capela <rncbc@rncbc.org> 0.9.12
