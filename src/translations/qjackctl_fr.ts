@@ -2411,7 +2411,7 @@ Voulez-vous enlever la connexion de la baie de brassage ?</translation>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="258"/>
         <source>Save Palette - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder la palette - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="261"/>
