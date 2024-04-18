@@ -94,6 +94,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 
 	m_repel_overlapping_nodes = 0;
 
+	m_thumb = nullptr;
+	m_thumb_update = 0;
+
 	QUndoStack *commands = m_ui.graphCanvas->commands();
 
 	QAction *undo_action = commands->createUndoAction(this, tr("&Undo"));
@@ -184,7 +187,7 @@ qjackctlGraphForm::qjackctlGraphForm (
 
 	QObject::connect(m_ui.graphCanvas,
 		SIGNAL(changed()),
-		SLOT(stabilize()));
+		SLOT(changed()));
 
 	// Some actions surely need those
 	// shortcuts firmly attached...
@@ -235,6 +238,36 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QObject::connect(m_ui.viewToolbarAction,
 		SIGNAL(triggered(bool)),
 		SLOT(viewToolbar(bool)));
+
+	m_thumb_mode = new QActionGroup(this);
+	m_thumb_mode->setExclusive(true);
+	m_thumb_mode->addAction(m_ui.viewThumbviewTopLeftAction);
+	m_thumb_mode->addAction(m_ui.viewThumbviewTopRightAction);
+	m_thumb_mode->addAction(m_ui.viewThumbviewBottomLeftAction);
+	m_thumb_mode->addAction(m_ui.viewThumbviewBottomRightAction);
+	m_thumb_mode->addAction(m_ui.viewThumbviewNoneAction);
+
+	m_ui.viewThumbviewTopLeftAction->setData(qjackctlGraphThumb::TopLeft);
+	m_ui.viewThumbviewTopRightAction->setData(qjackctlGraphThumb::TopRight);
+	m_ui.viewThumbviewBottomLeftAction->setData(qjackctlGraphThumb::BottomLeft);
+	m_ui.viewThumbviewBottomRightAction->setData(qjackctlGraphThumb::BottomRight);
+	m_ui.viewThumbviewNoneAction->setData(qjackctlGraphThumb::None);
+
+	QObject::connect(m_ui.viewThumbviewTopLeftAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewThumbviewAction()));
+	QObject::connect(m_ui.viewThumbviewTopRightAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewThumbviewAction()));
+	QObject::connect(m_ui.viewThumbviewBottomLeftAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewThumbviewAction()));
+	QObject::connect(m_ui.viewThumbviewBottomRightAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewThumbviewAction()));
+	QObject::connect(m_ui.viewThumbviewNoneAction,
+		SIGNAL(triggered(bool)),
+		SLOT(viewThumbviewAction()));
 
 	QObject::connect(m_ui.viewTextBesideIconsAction,
 		SIGNAL(triggered(bool)),
@@ -373,6 +406,11 @@ qjackctlGraphForm::qjackctlGraphForm (
 // Destructor.
 qjackctlGraphForm::~qjackctlGraphForm (void)
 {
+	if (m_thumb)
+		delete m_thumb;
+
+	delete m_thumb_mode;
+
 	delete m_sort_order;
 	delete m_sort_type;
 
@@ -409,6 +447,27 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	m_ui.viewMenubarAction->setChecked(m_config->isMenubar());
 	m_ui.viewToolbarAction->setChecked(m_config->isToolbar());
 	m_ui.viewStatusbarAction->setChecked(m_config->isStatusbar());
+
+	const qjackctlGraphThumb::Position position
+		= qjackctlGraphThumb::Position(m_config->thumbview());
+	switch (position) {
+	case qjackctlGraphThumb::TopLeft:
+		m_ui.viewThumbviewTopLeftAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::TopRight:
+		m_ui.viewThumbviewTopRightAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::BottomLeft:
+		m_ui.viewThumbviewBottomLeftAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::BottomRight:
+		m_ui.viewThumbviewBottomRightAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::None:
+	default:
+		m_ui.viewThumbviewNoneAction->setChecked(true);
+		break;
+	}
 
 	m_ui.viewTextBesideIconsAction->setChecked(m_config->isTextBesideIcons());
 	m_ui.viewZoomRangeAction->setChecked(m_config->isZoomRange());
@@ -448,6 +507,8 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	viewToolbar(m_config->isToolbar());
 	viewStatusbar(m_config->isStatusbar());
 
+	viewThumbview(m_config->thumbview());
+
 	viewTextBesideIcons(m_config->isTextBesideIcons());
 	viewZoomRange(m_config->isZoomRange());
 	viewRepelOverlappingNodes(m_config->isRepelOverlappingNodes());
@@ -472,21 +533,58 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 void qjackctlGraphForm::viewMenubar ( bool on )
 {
 	m_ui.MenuBar->setVisible(on);
+
+	++m_thumb_update;
 }
 
 
 void qjackctlGraphForm::viewToolbar ( bool on )
 {
 	m_ui.ToolBar->setVisible(on);
+
+	++m_thumb_update;
 }
 
 
 void qjackctlGraphForm::viewStatusbar ( bool on )
 {
 	m_ui.StatusBar->setVisible(on);
+
+	++m_thumb_update;
 }
 
 
+void qjackctlGraphForm::viewThumbviewAction (void)
+{
+	QAction *action = qobject_cast<QAction *> (sender());
+	if (action)
+		viewThumbview(action->data().toInt());
+}
+
+
+void qjackctlGraphForm::viewThumbview ( int thumbview )
+{
+	const qjackctlGraphThumb::Position position
+		= qjackctlGraphThumb::Position(thumbview);
+	if (position == qjackctlGraphThumb::None) {
+		if (m_thumb) {
+			m_thumb->hide();
+			delete m_thumb;
+			m_thumb = nullptr;
+			m_thumb_update = 0;
+		}
+	} else {
+		if (m_thumb) {
+			m_thumb->setPosition(position);
+		} else {
+			m_thumb = new qjackctlGraphThumb(m_ui.graphCanvas, position);
+			m_thumb->show();
+			++m_thumb_update;
+		}
+	}
+}
+ 
+ 
 void qjackctlGraphForm::viewTextBesideIcons ( bool on )
 {
 	if (on) {
@@ -494,6 +592,8 @@ void qjackctlGraphForm::viewTextBesideIcons ( bool on )
 	} else {
 		m_ui.ToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 	}
+
+	++m_thumb_update;
 }
 
 
@@ -514,6 +614,8 @@ void qjackctlGraphForm::viewRefresh (void)
 
 	if (m_ui.graphCanvas->isRepelOverlappingNodes())
 		++m_repel_overlapping_nodes; // fake nodes added!
+
+	++m_thumb_update;
 
 	refresh();
 }
@@ -543,6 +645,8 @@ void qjackctlGraphForm::viewColorsAction (void)
 		m_ui.graphCanvas->updatePortTypeColors(port_type);
 		updateViewColorsAction(action);
 	}
+
+	++m_thumb_update;
 }
 
 
@@ -775,6 +879,15 @@ void qjackctlGraphForm::renamed ( qjackctlGraphItem *item, const QString& name )
 }
 
 
+// Graph view change slot.
+void qjackctlGraphForm::changed (void)
+{
+	++m_thumb_update;
+
+	stabilize();
+}
+
+
 // Graph section slots.
 void qjackctlGraphForm::jack_shutdown (void)
 {
@@ -831,6 +944,13 @@ void qjackctlGraphForm::refresh (void)
 		m_repel_overlapping_nodes = 0;
 		m_ui.graphCanvas->repelOverlappingNodesAll();
 		stabilize();
+		++nchanged;
+	}
+
+	if (m_thumb_update > 0 || nchanged > 0) {
+		m_thumb_update = 0;
+		if (m_thumb)
+			m_thumb->updateView();
 	}
 }
 
@@ -915,6 +1035,8 @@ void qjackctlGraphForm::resizeEvent ( QResizeEvent *pResizeEvent )
 {
 	QMainWindow::resizeEvent(pResizeEvent);
 
+	++m_thumb_update;
+
 	stabilize();
 }
 
@@ -947,6 +1069,7 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 	m_ui.graphCanvas->saveState();
 
 	if (m_config && QMainWindow::isVisible()) {
+		m_config->setThumbview(m_thumb ? m_thumb->position() : qjackctlGraphThumb::None);
 		m_config->setConnectThroughNodes(m_ui.viewConnectThroughNodesAction->isChecked());
 		m_config->setRepelOverlappingNodes(m_ui.viewRepelOverlappingNodesAction->isChecked());
 		m_config->setSortOrder(int(qjackctlGraphPort::sortOrder()));
@@ -957,12 +1080,6 @@ void qjackctlGraphForm::closeEvent ( QCloseEvent *pCloseEvent )
 		m_config->setToolbar(m_ui.ToolBar->isVisible());
 		m_config->setMenubar(m_ui.MenuBar->isVisible());
 		m_config->saveState(this);
-	}
-	else
-	if (m_repel_overlapping_nodes > 0) {
-		m_repel_overlapping_nodes = 0;
-		m_ui.graphCanvas->repelOverlappingNodesAll();
-		stabilize();
 	}
 
 	QMainWindow::closeEvent(pCloseEvent);
@@ -1040,6 +1157,7 @@ static const char *ViewGroup        = "/GraphView";
 static const char *ViewMenubarKey   = "/Menubar";
 static const char *ViewToolbarKey   = "/Toolbar";
 static const char *ViewStatusbarKey = "/Statusbar";
+static const char *ViewThumbviewKey = "/Thumbview";
 static const char *ViewTextBesideIconsKey = "/TextBesideIcons";
 static const char *ViewZoomRangeKey = "/ZoomRange";
 static const char *ViewSortTypeKey  = "/SortType";
@@ -1052,7 +1170,7 @@ static const char *ViewConnectThroughNodesKey = "/ConnectThroughNodes";
 qjackctlGraphConfig::qjackctlGraphConfig ( QSettings *settings )
 	: m_settings(settings), m_menubar(false),
 		m_toolbar(false), m_statusbar(false),
-		m_texticons(false), m_zoomrange(false),
+		m_thumbview(0), m_texticons(false), m_zoomrange(false),
 		m_sorttype(0), m_sortorder(0),
 		m_repelnodes(false), m_cthrunodes(false)
 {
@@ -1095,6 +1213,17 @@ void qjackctlGraphConfig::setStatusbar ( bool statusbar )
 bool qjackctlGraphConfig::isStatusbar (void) const
 {
 	return m_statusbar;
+}
+
+
+void qjackctlGraphConfig::setThumbview ( int thumbview )
+{
+	m_thumbview = thumbview;
+}
+
+int qjackctlGraphConfig::thumbview (void) const
+{
+	return m_thumbview;
 }
 
 
@@ -1176,6 +1305,7 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 	m_menubar = m_settings->value(ViewMenubarKey, true).toBool();
 	m_toolbar = m_settings->value(ViewToolbarKey, true).toBool();
 	m_statusbar = m_settings->value(ViewStatusbarKey, true).toBool();
+	m_thumbview = m_settings->value(ViewThumbviewKey, 0).toInt();
 	m_texticons = m_settings->value(ViewTextBesideIconsKey, true).toBool();
 	m_zoomrange = m_settings->value(ViewZoomRangeKey, false).toBool();
 	m_sorttype  = m_settings->value(ViewSortTypeKey, 0).toInt();
@@ -1205,6 +1335,7 @@ bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 	m_settings->setValue(ViewMenubarKey, m_menubar);
 	m_settings->setValue(ViewToolbarKey, m_toolbar);
 	m_settings->setValue(ViewStatusbarKey, m_statusbar);
+	m_settings->setValue(ViewThumbviewKey, m_thumbview);
 	m_settings->setValue(ViewTextBesideIconsKey, m_texticons);
 	m_settings->setValue(ViewZoomRangeKey, m_zoomrange);
 	m_settings->setValue(ViewSortTypeKey, m_sorttype);

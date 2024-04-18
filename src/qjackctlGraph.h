@@ -26,6 +26,8 @@
 
 #include <QGraphicsPathItem>
 
+#include <QFrame>
+
 #include <QColor>
 #include <QIcon>
 
@@ -514,8 +516,11 @@ public:
 	void emitConnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 	void emitDisconnected(qjackctlGraphPort *port1, qjackctlGraphPort *port2);
 
-	// Rename notifiers.
+	// Rename notifier.
 	void emitRenamed(qjackctlGraphItem *item, const QString& name);
+
+	// Other generic notifier.
+	void emitChanged();
 
 	// Graph canvas state methods.
 	bool restoreState();
@@ -734,6 +739,52 @@ private:
 	qjackctlGraphCanvas *m_canvas;
 
 	QList<qjackctlGraphConnect *> m_connects;
+};
+
+
+//----------------------------------------------------------------------------
+// qjackctlGraphThumb -- Thumb graphics scene/view.
+
+class qjackctlGraphThumb : public QFrame
+{
+	Q_OBJECT
+
+public:
+
+	// Corner position.
+	enum Position { None = 0, TopLeft, TopRight, BottomLeft, BottomRight };
+
+	// Constructor.
+	qjackctlGraphThumb(qjackctlGraphCanvas *canvas, Position position = BottomLeft);
+
+	// Destructor.
+	~qjackctlGraphThumb();
+
+	// Accessors.
+	qjackctlGraphCanvas *canvas() const;
+
+	void setPosition(Position position);
+	Position position() const;
+
+public slots:
+
+	// Update view slot.
+	void updateView();
+
+protected:
+
+	// Update position.
+	void updatePosition();
+
+	// Forward decl.
+	class View;
+
+private:
+
+	// Inatance members.
+	qjackctlGraphCanvas *m_canvas;
+	Position m_position;
+	View *m_view;
 };
 
 

@@ -34,6 +34,7 @@ class qjackctlJackGraph;
 
 class qjackctlGraphPort;
 class qjackctlGraphConnect;
+class qjackctlGraphThumb;
 
 class qjackctlSetup;
 
@@ -71,6 +72,9 @@ public:
 
 public slots:
 
+	// Graph view change slot.
+	void changed();
+
 	// Graph section slots.
 	void jack_shutdown();
 	void jack_changed();
@@ -105,6 +109,9 @@ protected slots:
 	void viewMenubar(bool on);
 	void viewToolbar(bool on);
 	void viewStatusbar(bool on);
+
+	void viewThumbviewAction();
+	void viewThumbview(int thumbview);
 
 	void viewTextBesideIcons(bool on);
 
@@ -171,6 +178,10 @@ private:
 
 	QActionGroup *m_sort_type;
 	QActionGroup *m_sort_order;
+
+	QActionGroup *m_thumb_mode;
+	qjackctlGraphThumb *m_thumb;
+	int m_thumb_update;
 };
 
 
@@ -195,6 +206,9 @@ public:
 
 	void setStatusbar(bool statusbar);
 	bool isStatusbar() const;
+
+	void setThumbview(int thumbview);
+	int thumbview() const;
 
 	void setTextBesideIcons(bool texticons);
 	bool isTextBesideIcons() const;
@@ -226,6 +240,7 @@ private:
 	bool       m_menubar;
 	bool       m_toolbar;
 	bool       m_statusbar;
+	int        m_thumbview;
 	bool       m_texticons;
 	bool       m_zoomrange;
 	int        m_sorttype;
