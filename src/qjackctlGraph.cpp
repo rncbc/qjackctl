@@ -2908,10 +2908,7 @@ protected:
 
 		if (event->button() == Qt::LeftButton) {
 			m_drag_pos = event->pos();
-			if (viewRect().contains(m_drag_pos))
-				m_drag_state = DragStart;
-			else
-				m_drag_state = DragClick;
+			m_drag_state = DragStart;
 		}
 	}
 
@@ -2919,16 +2916,15 @@ protected:
 	{
 		QGraphicsView::mouseMoveEvent(event);
 
-		const QPoint& pos = event->pos();
 		if (m_drag_state == DragStart
-			&& (pos - m_drag_pos).manhattanLength()
+			&& (event->pos() - m_drag_pos).manhattanLength()
 				> QApplication::startDragDistance()) {
 			m_drag_state = DragMove;
 		}
-		else
+
 		if (m_drag_state == DragMove) {
 			m_canvas->centerOn(
-				QGraphicsView::mapToScene(pos));
+				QGraphicsView::mapToScene(event->pos()));
 		}
 	}
 
@@ -2948,7 +2944,7 @@ private:
 	// Instance members.
 	qjackctlGraphCanvas *m_canvas;
 
-	enum { DragNone = 0, DragStart, DragMove, DragClick } m_drag_state;
+	enum { DragNone = 0, DragStart, DragMove } m_drag_state;
 
 	QPoint m_drag_pos;
 };
