@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Prepping next release candidate (aka. v1.0.0-rc2) (Qt >= 6.7)
+
 - Graph: Introducing the View/Thumbview option as a whole graph
   thumbnail overview helper. (EXPERIMENTAL)
 
