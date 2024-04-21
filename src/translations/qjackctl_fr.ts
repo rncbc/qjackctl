@@ -572,7 +572,7 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="86"/>
         <source>T&amp;humbview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vue d&apos;ensemble</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="232"/>
@@ -723,90 +723,90 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="385"/>
         <source>&amp;Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Hau&amp;t gauche</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="388"/>
         <location filename="../qjackctlGraphForm.ui" line="391"/>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut gauche</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="394"/>
         <source>Show the thumbnail overview on the top-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;aperçu des vignettes en haut à gauche</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="405"/>
         <source>Top &amp;Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut d&amp;roit</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="408"/>
         <location filename="../qjackctlGraphForm.ui" line="411"/>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut droit</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="414"/>
         <source>Show the thumbnail overview on the top-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;aperçu des vignettes en haut à droite</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="425"/>
         <source>Bottom &amp;Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas gauc&amp;he</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="428"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas gauche</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="431"/>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas gauche</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="434"/>
         <source>Show the thumbnail overview on the bottom-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;aperçu des vignettes en bas à gauche</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="445"/>
         <source>&amp;Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bas droite</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="448"/>
         <location filename="../qjackctlGraphForm.ui" line="451"/>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas droite</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="454"/>
         <source>Show the thumbnail overview on the bottom-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;aperçu des vignettes en bas à droite</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="465"/>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucu&amp;n</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="468"/>
         <source>None</source>
-        <translation type="unfinished">Aucun</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="471"/>
         <source>Hide thumbview</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher l&apos;affichage des vignettes</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="474"/>
         <source>Hide the thumbnail overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer l&apos;aperçu des vignettes</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="485"/>
