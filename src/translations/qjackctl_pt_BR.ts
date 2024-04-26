@@ -572,7 +572,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="86"/>
         <source>T&amp;humbview</source>
-        <translation type="unfinished"></translation>
+        <translation>M&amp;iniatura</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="232"/>
@@ -723,90 +723,90 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="385"/>
         <source>&amp;Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Superior Esquerdo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="388"/>
         <location filename="../qjackctlGraphForm.ui" line="391"/>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>Superior esquerdo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="394"/>
         <source>Show the thumbnail overview on the top-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar a visão geral das miniaturas no canto superior esquerdo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="405"/>
         <source>Top &amp;Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Superior &amp;Direito</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="408"/>
         <location filename="../qjackctlGraphForm.ui" line="411"/>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>Superior Direito</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="414"/>
         <source>Show the thumbnail overview on the top-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar a visão geral das miniaturas no canto superior direito</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="425"/>
         <source>Bottom &amp;Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Inferior &amp;Esquerdo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="428"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Inferior Esquerdo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="431"/>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>Inferior Esquedo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="434"/>
         <source>Show the thumbnail overview on the bottom-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar a visão geral das miniaturas no canto inferior esquerdo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="445"/>
         <source>&amp;Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Inferior Direito</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="448"/>
         <location filename="../qjackctlGraphForm.ui" line="451"/>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>Inferior Direito</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="454"/>
         <source>Show the thumbnail overview on the bottom-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar a visão geral das miniaturas no canto inferior direito</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="465"/>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nenhum</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="468"/>
         <source>None</source>
-        <translation type="unfinished">Nenhum</translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="471"/>
         <source>Hide thumbview</source>
-        <translation type="unfinished"></translation>
+        <translation>Esconder miniaturas</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="474"/>
         <source>Hide the thumbnail overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar a visão geral das miniaturas</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="485"/>
@@ -2504,7 +2504,7 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="258"/>
         <source>Save Palette - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar Paleta - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="261"/>
