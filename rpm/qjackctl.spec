@@ -11,37 +11,25 @@
 # case the license is the MIT License). An "Open Source License" is a
 # license that conforms to the Open Source Definition (Version 1.9)
 # published by the Open Source Initiative.
-#
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-%define name    qjackctl
-%define version 0.9.90
-%define release 1.1
-
-%define _prefix	/usr
-
-%if %{defined fedora}
-%define debug_package %{nil}
-%endif
+Summary:	JACK Audio Connection Kit Qt GUI Interface
+Name:		qjackctl
+Version:	0.9.90
+Release:	1.1
+License:	GPL-2.0-or-later
+Group:		Productivity/Multimedia/Sound/Utilities
+Source:		%{name}-%{version}.tar.gz
+URL:		https://qjackctl.sourceforge.io/
+#Packager:	rncbc.org
 
 %if 0%{?fedora_version} >= 34 || 0%{?suse_version} > 1500 || ( 0%{?sle_version} == 150200 && 0%{?is_opensuse} )
 %define qt_major_version  6
 %else
 %define qt_major_version  5
 %endif
-
-Summary:	JACK Audio Connection Kit Qt GUI Interface
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-License:	GPL-2.0+
-Group:		Productivity/Multimedia/Sound/Utilities
-Source0:	%{name}-%{version}.tar.gz
-URL:		http://qjackctl.sourceforge.net/
-Packager:	rncbc.org
-
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires:	coreutils
 BuildRequires:	pkgconfig
@@ -99,6 +87,7 @@ saved between sessions, and a way control of the status of the audio
 server. With time, this primordial interface has become richer by 
 including a enhanced patchbay and connection control features.
 
+
 %prep
 %setup -q
 
@@ -114,11 +103,8 @@ cmake --build build %{?_smp_mflags}
 DESTDIR="%{buildroot}" \
 cmake --install build
 
-%clean
-[ -d "%{buildroot}" -a "%{buildroot}" != "/" ] && %__rm -rf "%{buildroot}"
 
 %files
-%defattr(-,root,root)
 %license LICENSE
 %doc README TRANSLATORS ChangeLog
 #dir %{_datadir}/applications
@@ -144,6 +130,7 @@ cmake --install build
 %{_datadir}/man/man1/%{name}.1.gz
 %{_datadir}/man/fr/man1/%{name}.1.gz
 %{_datadir}/%{name}/palette/*.conf
+
 
 %changelog
 * Wed Apr 10 2024 Rui Nuno Capela <rncbc@rncbc.org> 0.9.90
