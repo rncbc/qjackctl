@@ -4667,7 +4667,7 @@ Voulez-vous appliquer les changements ?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3793"/>
         <source>Start minimi&amp;zed to system tray</source>
-        <translation>Démarrer minimisé dans la zone de notifications (&amp;z)</translation>
+        <translation>Démarrer minimisé dans la &amp;zone de notifications</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3917"/>
