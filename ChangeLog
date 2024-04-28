@@ -6,10 +6,12 @@ ChangeLog
 
 GIT HEAD
 
-- Prepping next release candidate (aka. v1.0.0-rc2) (Qt >= 6.7)
+- Prepping the unthinkable (aka. v1.0.0-rc2)
 
 - Graph: Introducing the View/Thumbview option as a whole graph
-  thumbnail overview helper. (EXPERIMENTAL)
+  thumbnail overview helper.
+
+- Updated to latest framework level (Qt >= 6.7)
 
 
 0.9.90  2024-04-10  A Spring'24 Release Candidate.
