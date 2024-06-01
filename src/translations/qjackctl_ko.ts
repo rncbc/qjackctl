@@ -1207,7 +1207,7 @@ Are you sure?</source>
         <translation>준비 완료</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="642"/>
+        <location filename="../qjackctlGraphForm.cpp" line="646"/>
         <source>Colors - %1</source>
         <translation>색상 - %1</translation>
     </message>

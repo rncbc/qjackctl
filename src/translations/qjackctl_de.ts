@@ -1206,7 +1206,7 @@ Sind Sie sicher?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="642"/>
+        <location filename="../qjackctlGraphForm.cpp" line="646"/>
         <source>Colors - %1</source>
         <translation type="unfinished"></translation>
     </message>

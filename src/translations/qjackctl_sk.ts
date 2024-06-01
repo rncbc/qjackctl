@@ -1207,7 +1207,7 @@ Ste si istý?</translation>
         <translation>Pripravený</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="642"/>
+        <location filename="../qjackctlGraphForm.cpp" line="646"/>
         <source>Colors - %1</source>
         <translation>Farby - %1</translation>
     </message>

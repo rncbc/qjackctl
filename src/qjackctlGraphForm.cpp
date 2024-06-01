@@ -578,6 +578,10 @@ void qjackctlGraphForm::viewThumbview ( int thumbview )
 			m_thumb->setPosition(position);
 		} else {
 			m_thumb = new qjackctlGraphThumb(m_ui.graphCanvas, position);
+			QObject::connect(m_thumb,
+				SIGNAL(contextMenuRequested(const QPoint&)),
+				SLOT(thumbviewContextMenu(const QPoint&)),
+				Qt::QueuedConnection);
 			m_thumb->show();
 			++m_thumb_update;
 		}
@@ -718,6 +722,21 @@ void qjackctlGraphForm::helpAbout (void)
 void qjackctlGraphForm::helpAboutQt (void)
 {
 	QMessageBox::aboutQt(this);
+}
+
+
+void qjackctlGraphForm::thumbviewContextMenu ( const QPoint& pos )
+{
+	stabilize();
+
+	QMenu menu(this);
+	menu.addMenu(m_ui.viewThumbviewMenu);
+	menu.addSeparator();
+	menu.addMenu(m_ui.viewZoomMenu);
+
+	menu.exec(pos);
+
+	stabilize();
 }
 
 

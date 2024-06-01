@@ -2860,9 +2860,9 @@ class qjackctlGraphThumb::View : public QGraphicsView
 public:
 
 	// Constructor.
-	View(qjackctlGraphCanvas *canvas)
-		: QGraphicsView(canvas->viewport()),
-			m_canvas(canvas), m_drag_state(DragNone)
+	View(qjackctlGraphThumb *thumb)
+		: QGraphicsView(thumb->canvas()->viewport()),
+			m_thumb(thumb), m_drag_state(DragNone)
 	{
 		QGraphicsView::setInteractive(false);
 
@@ -2872,15 +2872,16 @@ public:
 		QGraphicsView::setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		QGraphicsView::setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-		QPalette pal = m_canvas->palette();
+		qjackctlGraphCanvas *canvas = m_thumb->canvas();
+		QPalette pal = canvas->palette();
 		const QPalette::ColorRole role
-			= m_canvas->backgroundRole();
+			= canvas->backgroundRole();
 		const QColor& color = pal.color(role);
 		pal.setColor(role, color.darker(120));
 		QGraphicsView::setPalette(pal);
 		QGraphicsView::setBackgroundRole(role);
 
-		QGraphicsView::setScene(m_canvas->scene());
+		QGraphicsView::setScene(canvas->scene());
 	}
 
 protected:
@@ -2888,11 +2889,12 @@ protected:
 	// Compute the view(port) rectangle.
 	QRect viewRect() const
 	{
+		qjackctlGraphCanvas *canvas = m_thumb->canvas();
 		const QRect& vrect
-			= m_canvas->viewport()->rect();
+			= canvas->viewport()->rect();
 		const QRectF srect(
-			m_canvas->mapToScene(vrect.topLeft()),
-			m_canvas->mapToScene(vrect.bottomRight()));
+			canvas->mapToScene(vrect.topLeft()),
+			canvas->mapToScene(vrect.bottomRight()));
 		return QGraphicsView::viewport()->rect().intersected(QRect(
 			QGraphicsView::mapFromScene(srect.topLeft()),
 			QGraphicsView::mapFromScene(srect.bottomRight())))
@@ -2957,7 +2959,7 @@ protected:
 		}
 
 		if (m_drag_state == DragMove) {
-			m_canvas->centerOn(
+			m_thumb->canvas()->centerOn(
 				QGraphicsView::mapToScene(event->pos()));
 		}
 	}
@@ -2967,7 +2969,7 @@ protected:
 		QGraphicsView::mouseReleaseEvent(event);
 
 		if (m_drag_state != DragNone) {
-			m_canvas->centerOn(
+			m_thumb->canvas()->centerOn(
 				QGraphicsView::mapToScene(event->pos()));
 			m_drag_state = DragNone;
 		}
@@ -2975,10 +2977,15 @@ protected:
 
 	void wheelEvent(QWheelEvent *) {} // Ignore wheel events.
 
+	void contextMenuEvent(QContextMenuEvent *event)
+	{
+		m_thumb->contextMenu(event->globalPos());
+	}
+
 private:
 
 	// Instance members.
-	qjackctlGraphCanvas *m_canvas;
+	qjackctlGraphThumb *m_thumb;
 
 	enum { DragNone = 0, DragStart, DragMove } m_drag_state;
 
@@ -2993,7 +3000,7 @@ private:
 qjackctlGraphThumb::qjackctlGraphThumb ( qjackctlGraphCanvas *canvas, Position position )
 	: QFrame(canvas), m_canvas(canvas), m_position(position), m_view(nullptr)
 {
-	m_view = new View(m_canvas);
+	m_view = new View(this);
 
 	QVBoxLayout *layout = new QVBoxLayout();
 	layout->setSpacing(0);
@@ -3035,6 +3042,13 @@ void qjackctlGraphThumb::setPosition ( Position position )
 qjackctlGraphThumb::Position qjackctlGraphThumb::position (void) const
 {
 	return m_position;
+}
+
+
+// Emit context-menu request.
+void qjackctlGraphThumb::contextMenu ( const QPoint& pos )
+{
+	emit contextMenuRequested(pos);
 }
 
 

@@ -132,6 +132,8 @@ protected slots:
 	void helpAbout();
 	void helpAboutQt();
 
+	void thumbviewContextMenu(const QPoint& pos);
+
 	void zoomValueChanged(int zoom_value);
 
 protected:
