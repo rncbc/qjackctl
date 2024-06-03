@@ -85,6 +85,9 @@
      <property name="title">
       <string>T&amp;humbview</string>
      </property>
+     <property name="icon">
+      <iconset resource="qjackctl.qrc">:/images/graphThumbview.png</iconset>
+     </property>
      <addaction name="viewThumbviewTopLeftAction"/>
      <addaction name="viewThumbviewTopRightAction"/>
      <addaction name="viewThumbviewBottomLeftAction"/>
