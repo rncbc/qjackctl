@@ -1644,8 +1644,7 @@ void qjackctlGraphCanvas::mousePressEvent ( QMouseEvent *event )
 	if (m_item == nullptr
 		&& (((event->button() == Qt::LeftButton)
 		  && (event->modifiers() & Qt::ControlModifier))
-		  || (event->button() == Qt::MiddleButton))
-		&& m_scene->selectedItems().isEmpty()) {
+		  || (event->button() == Qt::MiddleButton))) {
 	#if 1//NEW_DRAG_SCROLL_MODE
 		// HACK: When about to drag-scroll,
 		// always fake a left-button press...
