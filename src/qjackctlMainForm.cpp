@@ -972,17 +972,18 @@ bool qjackctlMainForm::queryClose (void)
 			mbox.setIcon(QMessageBox::Information);
 			mbox.setWindowTitle(sTitle);
 			mbox.setText(sText);
-			mbox.setStandardButtons(QMessageBox::Ok);
+			mbox.setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
 			QCheckBox cbox(tr("Don't show this message again"));
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
-			mbox.exec();
+			bQueryClose = (mbox.exec() == QMessageBox::Ok);
 			if (cbox.isChecked())
 				m_pSetup->bSystemTrayQueryClose = false;
 		#endif
 		}
-		hide();
+		if (bQueryClose)
+			hide();
 		updateContextMenu();
 		bQueryClose = false;
 	}

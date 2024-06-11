@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Cancel button option added to close to system-tray icon message.
+
 - Graph: Introducing thumbview context-menu.
 
 
