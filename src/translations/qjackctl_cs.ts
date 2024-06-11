@@ -572,7 +572,7 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="86"/>
         <source>T&amp;humbview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Náhled</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="235"/>
@@ -723,90 +723,90 @@ Jste si jistý?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="388"/>
         <source>&amp;Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nahoře vlevo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="391"/>
         <location filename="../qjackctlGraphForm.ui" line="394"/>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahoře vlevo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="397"/>
         <source>Show the thumbnail overview on the top-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit přehled náhledů v levém horním rohu</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="408"/>
         <source>Top &amp;Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahoře v&amp;pravo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="411"/>
         <location filename="../qjackctlGraphForm.ui" line="414"/>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahoře vpravo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="417"/>
         <source>Show the thumbnail overview on the top-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit přehled náhledů v pravém horním rohu</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="428"/>
         <source>Bottom &amp;Left</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dole vlevo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="431"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Dole vlevo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="434"/>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>Dole vlevo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="437"/>
         <source>Show the thumbnail overview on the bottom-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit přehled náhledů v levém dolním rohu</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="448"/>
         <source>&amp;Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dole vpravo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="451"/>
         <location filename="../qjackctlGraphForm.ui" line="454"/>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>Dole vpravo</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="457"/>
         <source>Show the thumbnail overview on the bottom-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit přehled náhledů v pravém dolním rohu</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="468"/>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>Žá&amp;dný</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="471"/>
         <source>None</source>
-        <translation type="unfinished">Žádný</translation>
+        <translation>Žádný</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="474"/>
         <source>Hide thumbview</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt náhled</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="477"/>
         <source>Hide the thumbnail overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt přehled náhledů</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="488"/>
