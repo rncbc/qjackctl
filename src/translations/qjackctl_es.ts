@@ -571,7 +571,7 @@ Está seguro?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="86"/>
         <source>T&amp;humbview</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista pre&amp;via</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="235"/>
@@ -722,90 +722,90 @@ Está seguro?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="388"/>
         <source>&amp;Top Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Par&amp;te Superior Izquierda</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="391"/>
         <location filename="../qjackctlGraphForm.ui" line="394"/>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte superior izquierda</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="397"/>
         <source>Show the thumbnail overview on the top-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra la vista previa en la parte superior izquierda</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="408"/>
         <source>Top &amp;Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Pa&amp;rte Superior Derecha</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="411"/>
         <location filename="../qjackctlGraphForm.ui" line="414"/>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte superior derecha</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="417"/>
         <source>Show the thumbnail overview on the top-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra la vista previa en la parte superior derecha</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="428"/>
         <source>Bottom &amp;Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte In&amp;ferior Izquierda</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="431"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte Inferior Izquierda</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="434"/>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte inferior izquierda</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="437"/>
         <source>Show the thumbnail overview on the bottom-left</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra la vista previa en la parte inferior izquierda</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="448"/>
         <source>&amp;Bottom Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte I&amp;nferior Derecha</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="451"/>
         <location filename="../qjackctlGraphForm.ui" line="454"/>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>Parte inferior derecha</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="457"/>
         <source>Show the thumbnail overview on the bottom-right</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra la vista previa en la parte inferior derecha</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="468"/>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ninguno</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="471"/>
         <source>None</source>
-        <translation type="unfinished">Ninguno</translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="474"/>
         <source>Hide thumbview</source>
-        <translation type="unfinished"></translation>
+        <translation>Oculta vista previa</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="477"/>
         <source>Hide the thumbnail overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Oculta la vista previa</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="488"/>
@@ -2492,7 +2492,7 @@ Ha sido deshabilitado.</translation>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="258"/>
         <source>Save Palette - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Guarda Paleta - %1</translation>
     </message>
     <message>
         <location filename="../qjackctlPaletteForm.cpp" line="261"/>
