@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Graph: fixed a potential use-after-free issue on canvas nodes
+  refresh and recycle. (EXPERIMENTAL)
+
+
 1.0.0  2024-06-19  An Unthinkable Release.
 
 - Making up the unthinkable (aka. v1.0.0)

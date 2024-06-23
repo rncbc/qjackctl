@@ -1518,11 +1518,13 @@ void qjackctlGraphCanvas::resetNodes ( uint node_type )
 				node->resetMarkedPorts();
 				node->setMarked(false);
 			} else {
-				removeItem(node);
 				nodes.append(node);
 			}
 		}
 	}
+
+	foreach (qjackctlGraphNode *node, nodes)
+		removeItem(node);
 
 	qDeleteAll(nodes);
 }
@@ -1533,11 +1535,13 @@ void qjackctlGraphCanvas::clearNodes ( uint node_type )
 	QList<qjackctlGraphNode *> nodes;
 
 	foreach (qjackctlGraphNode *node, m_nodes) {
-		if (node->nodeType() == node_type) {
-			m_nodekeys.remove(qjackctlGraphNode::NodeKey(node));
-			m_nodes.removeAll(node);
+		if (node->nodeType() == node_type)
 			nodes.append(node);
-		}
+	}
+
+	foreach (qjackctlGraphNode *node, nodes) {
+		m_nodekeys.remove(qjackctlGraphNode::NodeKey(node));
+		m_nodes.removeAll(node);
 	}
 
 	qDeleteAll(nodes);
