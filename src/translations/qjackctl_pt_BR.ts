@@ -479,13 +479,13 @@ Tem certeza?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1888"/>
-        <location filename="../qjackctlGraph.cpp" line="2022"/>
+        <location filename="../qjackctlGraph.cpp" line="1910"/>
+        <location filename="../qjackctlGraph.cpp" line="2051"/>
         <source>Connect</source>
         <translation>Conectar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2094"/>
+        <location filename="../qjackctlGraph.cpp" line="2123"/>
         <source>Disconnect</source>
         <translation>Disconnectar</translation>
     </message>
@@ -508,671 +508,692 @@ Tem certeza?</translation>
         <translation>&amp;Editar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="82"/>
+        <location filename="../qjackctlGraphForm.ui" line="83"/>
         <source>&amp;View</source>
         <translation>&amp;Visualizar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="100"/>
+        <location filename="../qjackctlGraphForm.ui" line="101"/>
         <source>&amp;Zoom</source>
         <translation>&amp;Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="113"/>
+        <location filename="../qjackctlGraphForm.ui" line="114"/>
         <source>Co&amp;lors</source>
         <translation>Co&amp;res</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="125"/>
+        <location filename="../qjackctlGraphForm.ui" line="126"/>
         <source>S&amp;ort</source>
         <translation>C&amp;lassificar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="155"/>
+        <location filename="../qjackctlGraphForm.ui" line="156"/>
         <source>&amp;Help</source>
         <translation>&amp;Ajuda</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="203"/>
+        <location filename="../qjackctlGraphForm.ui" line="204"/>
         <source>&amp;Connect</source>
         <translation>&amp;Conectar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="206"/>
-        <location filename="../qjackctlGraphForm.ui" line="209"/>
+        <location filename="../qjackctlGraphForm.ui" line="207"/>
+        <location filename="../qjackctlGraphForm.ui" line="210"/>
         <source>Connect</source>
         <translation>Conectar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="212"/>
+        <location filename="../qjackctlGraphForm.ui" line="213"/>
         <source>Connect selected ports</source>
         <translation>Conectar portas selecionadas</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="223"/>
+        <location filename="../qjackctlGraphForm.ui" line="224"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Desconectar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="226"/>
-        <location filename="../qjackctlGraphForm.ui" line="229"/>
+        <location filename="../qjackctlGraphForm.ui" line="227"/>
+        <location filename="../qjackctlGraphForm.ui" line="230"/>
         <source>Disconnect</source>
         <translation>Desconectar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="232"/>
+        <location filename="../qjackctlGraphForm.ui" line="233"/>
         <source>Disconnect selected ports</source>
         <translation>Desconectar portas selecionadas</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="215"/>
+        <location filename="../qjackctlGraphForm.ui" line="216"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="86"/>
+        <location filename="../qjackctlGraphForm.ui" line="87"/>
         <source>T&amp;humbview</source>
         <translation>M&amp;iniatura</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="235"/>
+        <location filename="../qjackctlGraphForm.ui" line="236"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="240"/>
+        <location filename="../qjackctlGraphForm.ui" line="241"/>
         <source>Cl&amp;ose</source>
         <translation>Fe&amp;char</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="243"/>
-        <location filename="../qjackctlGraphForm.ui" line="246"/>
+        <location filename="../qjackctlGraphForm.ui" line="244"/>
+        <location filename="../qjackctlGraphForm.ui" line="247"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="249"/>
+        <location filename="../qjackctlGraphForm.ui" line="250"/>
         <source>Close this application window</source>
         <translation>Feche esta janela da aplicação</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="257"/>
+        <location filename="../qjackctlGraphForm.ui" line="258"/>
         <source>Select &amp;All</source>
         <translation>Selecionar &amp;Tudo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="260"/>
-        <location filename="../qjackctlGraphForm.ui" line="263"/>
-        <location filename="../qjackctlGraphForm.ui" line="266"/>
+        <location filename="../qjackctlGraphForm.ui" line="261"/>
+        <location filename="../qjackctlGraphForm.ui" line="264"/>
+        <location filename="../qjackctlGraphForm.ui" line="267"/>
         <source>Select All</source>
         <translation>Selecionar Tudo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="269"/>
+        <location filename="../qjackctlGraphForm.ui" line="270"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="274"/>
+        <location filename="../qjackctlGraphForm.ui" line="275"/>
         <source>Select &amp;None</source>
         <translation>Selecionar &amp;Nenhum</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="277"/>
-        <location filename="../qjackctlGraphForm.ui" line="280"/>
-        <location filename="../qjackctlGraphForm.ui" line="283"/>
+        <location filename="../qjackctlGraphForm.ui" line="278"/>
+        <location filename="../qjackctlGraphForm.ui" line="281"/>
+        <location filename="../qjackctlGraphForm.ui" line="284"/>
         <source>Select None</source>
         <translation>Selecionar Nenhum</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="286"/>
+        <location filename="../qjackctlGraphForm.ui" line="287"/>
         <source>Ctrl+Shift+A</source>
         <translation>Ctrl+Shift+A</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="291"/>
+        <location filename="../qjackctlGraphForm.ui" line="292"/>
         <source>Select &amp;Invert</source>
         <translation>Selecionar &amp;Inverter</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="294"/>
-        <location filename="../qjackctlGraphForm.ui" line="297"/>
-        <location filename="../qjackctlGraphForm.ui" line="300"/>
+        <location filename="../qjackctlGraphForm.ui" line="295"/>
+        <location filename="../qjackctlGraphForm.ui" line="298"/>
+        <location filename="../qjackctlGraphForm.ui" line="301"/>
         <source>Select Invert</source>
         <translation>Selecionar Inverter</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="303"/>
+        <location filename="../qjackctlGraphForm.ui" line="304"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="311"/>
+        <location filename="../qjackctlGraphForm.ui" line="312"/>
         <source>&amp;Rename...</source>
         <translation>&amp;Renomear...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="314"/>
+        <location filename="../qjackctlGraphForm.ui" line="315"/>
         <source>Rename item</source>
         <translation>Renomear item</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="317"/>
-        <location filename="../qjackctlGraphForm.ui" line="320"/>
+        <location filename="../qjackctlGraphForm.ui" line="318"/>
+        <location filename="../qjackctlGraphForm.ui" line="321"/>
         <source>Rename Item</source>
         <translation>Renomear Item</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="323"/>
+        <location filename="../qjackctlGraphForm.ui" line="324"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="331"/>
+        <location filename="../qjackctlGraphForm.ui" line="332"/>
+        <source>&amp;Find...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="335"/>
+        <source>Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="338"/>
+        <location filename="../qjackctlGraphForm.ui" line="341"/>
+        <source>Find nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="344"/>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlGraphForm.ui" line="352"/>
         <source>&amp;Menubar</source>
         <translation>&amp;Barra de menu</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="334"/>
-        <location filename="../qjackctlGraphForm.ui" line="337"/>
+        <location filename="../qjackctlGraphForm.ui" line="355"/>
+        <location filename="../qjackctlGraphForm.ui" line="358"/>
         <source>Menubar</source>
         <translation>Barra de menu</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="340"/>
+        <location filename="../qjackctlGraphForm.ui" line="361"/>
         <source>Show/hide the main program window menubar</source>
         <translation>Mostrar/ocultar a barra de menus da janela principal do programa</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="343"/>
+        <location filename="../qjackctlGraphForm.ui" line="364"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="351"/>
+        <location filename="../qjackctlGraphForm.ui" line="372"/>
         <source>&amp;Toolbar</source>
         <translation>&amp;Barra de ferramentas</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="354"/>
-        <location filename="../qjackctlGraphForm.ui" line="357"/>
+        <location filename="../qjackctlGraphForm.ui" line="375"/>
+        <location filename="../qjackctlGraphForm.ui" line="378"/>
         <source>Toolbar</source>
         <translation>Barra de ferramentas</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="360"/>
+        <location filename="../qjackctlGraphForm.ui" line="381"/>
         <source>Show/hide main program window file toolbar</source>
         <translation>Mostrar/ocultar a barra de ferramentas do arquivo da janela principal do programa</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="368"/>
+        <location filename="../qjackctlGraphForm.ui" line="389"/>
         <source>&amp;Statusbar</source>
         <translation>&amp;Barra de status</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="371"/>
-        <location filename="../qjackctlGraphForm.ui" line="374"/>
+        <location filename="../qjackctlGraphForm.ui" line="392"/>
+        <location filename="../qjackctlGraphForm.ui" line="395"/>
         <source>Statusbar</source>
         <translation>Barra de status</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="377"/>
+        <location filename="../qjackctlGraphForm.ui" line="398"/>
         <source>Show/hide the main program window statusbar</source>
         <translation>Mostrar/ocultar a barra de status da janela principal do programa</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="388"/>
+        <location filename="../qjackctlGraphForm.ui" line="409"/>
         <source>&amp;Top Left</source>
         <translation>&amp;Superior Esquerdo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="391"/>
-        <location filename="../qjackctlGraphForm.ui" line="394"/>
+        <location filename="../qjackctlGraphForm.ui" line="412"/>
+        <location filename="../qjackctlGraphForm.ui" line="415"/>
         <source>Top left</source>
         <translation>Superior esquerdo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="397"/>
+        <location filename="../qjackctlGraphForm.ui" line="418"/>
         <source>Show the thumbnail overview on the top-left</source>
         <translation>Mostrar a visão geral das miniaturas no canto superior esquerdo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="408"/>
+        <location filename="../qjackctlGraphForm.ui" line="429"/>
         <source>Top &amp;Right</source>
         <translation>Superior &amp;Direito</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="411"/>
-        <location filename="../qjackctlGraphForm.ui" line="414"/>
+        <location filename="../qjackctlGraphForm.ui" line="432"/>
+        <location filename="../qjackctlGraphForm.ui" line="435"/>
         <source>Top right</source>
         <translation>Superior Direito</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="417"/>
+        <location filename="../qjackctlGraphForm.ui" line="438"/>
         <source>Show the thumbnail overview on the top-right</source>
         <translation>Mostrar a visão geral das miniaturas no canto superior direito</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="428"/>
+        <location filename="../qjackctlGraphForm.ui" line="449"/>
         <source>Bottom &amp;Left</source>
         <translation>Inferior &amp;Esquerdo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="431"/>
+        <location filename="../qjackctlGraphForm.ui" line="452"/>
         <source>Bottom Left</source>
         <translation>Inferior Esquerdo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="434"/>
+        <location filename="../qjackctlGraphForm.ui" line="455"/>
         <source>Bottom left</source>
         <translation>Inferior Esquedo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="437"/>
+        <location filename="../qjackctlGraphForm.ui" line="458"/>
         <source>Show the thumbnail overview on the bottom-left</source>
         <translation>Mostrar a visão geral das miniaturas no canto inferior esquerdo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="448"/>
+        <location filename="../qjackctlGraphForm.ui" line="469"/>
         <source>&amp;Bottom Right</source>
         <translation>&amp;Inferior Direito</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="451"/>
-        <location filename="../qjackctlGraphForm.ui" line="454"/>
+        <location filename="../qjackctlGraphForm.ui" line="472"/>
+        <location filename="../qjackctlGraphForm.ui" line="475"/>
         <source>Bottom right</source>
         <translation>Inferior Direito</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="457"/>
+        <location filename="../qjackctlGraphForm.ui" line="478"/>
         <source>Show the thumbnail overview on the bottom-right</source>
         <translation>Mostrar a visão geral das miniaturas no canto inferior direito</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="468"/>
+        <location filename="../qjackctlGraphForm.ui" line="489"/>
         <source>&amp;None</source>
         <translation>&amp;Nenhum</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="471"/>
+        <location filename="../qjackctlGraphForm.ui" line="492"/>
         <source>None</source>
         <translation>Nenhum</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="474"/>
+        <location filename="../qjackctlGraphForm.ui" line="495"/>
         <source>Hide thumbview</source>
         <translation>Esconder miniaturas</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="477"/>
+        <location filename="../qjackctlGraphForm.ui" line="498"/>
         <source>Hide the thumbnail overview</source>
         <translation>Ocultar a visão geral das miniaturas</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="488"/>
+        <location filename="../qjackctlGraphForm.ui" line="509"/>
         <source>Text Beside &amp;Icons</source>
         <translation>Texto ao lado de &amp;ícones</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="491"/>
-        <location filename="../qjackctlGraphForm.ui" line="494"/>
+        <location filename="../qjackctlGraphForm.ui" line="512"/>
+        <location filename="../qjackctlGraphForm.ui" line="515"/>
         <source>Text beside icons</source>
         <translation>Texto ao lado de ícones</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="497"/>
+        <location filename="../qjackctlGraphForm.ui" line="518"/>
         <source>Show/hide text beside icons</source>
         <translation>Mostrar/ocultar texto ao lado de ícones</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="505"/>
+        <location filename="../qjackctlGraphForm.ui" line="526"/>
         <source>&amp;Center</source>
         <translation>&amp;Centro</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="508"/>
-        <location filename="../qjackctlGraphForm.ui" line="511"/>
+        <location filename="../qjackctlGraphForm.ui" line="529"/>
+        <location filename="../qjackctlGraphForm.ui" line="532"/>
         <source>Center</source>
         <translation>Centro</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="514"/>
+        <location filename="../qjackctlGraphForm.ui" line="535"/>
         <source>Center view</source>
         <translation>Visão central</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="522"/>
+        <location filename="../qjackctlGraphForm.ui" line="543"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Atualizar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="525"/>
-        <location filename="../qjackctlGraphForm.ui" line="528"/>
+        <location filename="../qjackctlGraphForm.ui" line="546"/>
+        <location filename="../qjackctlGraphForm.ui" line="549"/>
         <source>Refresh</source>
         <translation>Atualizar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="531"/>
+        <location filename="../qjackctlGraphForm.ui" line="552"/>
         <source>Refresh view</source>
         <translation>Atualizar visualização</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="534"/>
+        <location filename="../qjackctlGraphForm.ui" line="555"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="542"/>
+        <location filename="../qjackctlGraphForm.ui" line="563"/>
         <source>Zoom &amp;In</source>
         <translation>Ampli&amp;ar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="545"/>
-        <location filename="../qjackctlGraphForm.ui" line="548"/>
-        <location filename="../qjackctlGraphForm.ui" line="551"/>
+        <location filename="../qjackctlGraphForm.ui" line="566"/>
+        <location filename="../qjackctlGraphForm.ui" line="569"/>
+        <location filename="../qjackctlGraphForm.ui" line="572"/>
         <source>Zoom In</source>
         <translation>Ampliar</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="554"/>
+        <location filename="../qjackctlGraphForm.ui" line="575"/>
         <source>Ctrl++</source>
         <translation>Ctrl++</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="562"/>
+        <location filename="../qjackctlGraphForm.ui" line="583"/>
         <source>Zoom &amp;Out</source>
         <translation>Diminu&amp;ir</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="565"/>
-        <location filename="../qjackctlGraphForm.ui" line="568"/>
-        <location filename="../qjackctlGraphForm.ui" line="571"/>
+        <location filename="../qjackctlGraphForm.ui" line="586"/>
+        <location filename="../qjackctlGraphForm.ui" line="589"/>
+        <location filename="../qjackctlGraphForm.ui" line="592"/>
         <source>Zoom Out</source>
         <translation>Diminuir</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="574"/>
+        <location filename="../qjackctlGraphForm.ui" line="595"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="582"/>
+        <location filename="../qjackctlGraphForm.ui" line="603"/>
         <source>Zoom &amp;Fit</source>
         <translation>Ajuste de &amp;Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="585"/>
-        <location filename="../qjackctlGraphForm.ui" line="588"/>
-        <location filename="../qjackctlGraphForm.ui" line="591"/>
+        <location filename="../qjackctlGraphForm.ui" line="606"/>
+        <location filename="../qjackctlGraphForm.ui" line="609"/>
+        <location filename="../qjackctlGraphForm.ui" line="612"/>
         <source>Zoom Fit</source>
         <translation>Ajuste de Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="594"/>
+        <location filename="../qjackctlGraphForm.ui" line="615"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="602"/>
+        <location filename="../qjackctlGraphForm.ui" line="623"/>
         <source>Zoom &amp;Reset</source>
         <translation>Redefinir &amp;Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="605"/>
-        <location filename="../qjackctlGraphForm.ui" line="608"/>
-        <location filename="../qjackctlGraphForm.ui" line="611"/>
+        <location filename="../qjackctlGraphForm.ui" line="626"/>
+        <location filename="../qjackctlGraphForm.ui" line="629"/>
+        <location filename="../qjackctlGraphForm.ui" line="632"/>
         <source>Zoom Reset</source>
         <translation>Redefinir Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="614"/>
+        <location filename="../qjackctlGraphForm.ui" line="635"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="625"/>
+        <location filename="../qjackctlGraphForm.ui" line="646"/>
         <source>&amp;Zoom Range</source>
         <translation>&amp;Alcance de Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="628"/>
-        <location filename="../qjackctlGraphForm.ui" line="631"/>
-        <location filename="../qjackctlGraphForm.ui" line="634"/>
+        <location filename="../qjackctlGraphForm.ui" line="649"/>
+        <location filename="../qjackctlGraphForm.ui" line="652"/>
+        <location filename="../qjackctlGraphForm.ui" line="655"/>
         <source>Zoom Range</source>
         <translation>Alcance de Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="642"/>
+        <location filename="../qjackctlGraphForm.ui" line="663"/>
         <source>JACK &amp;Audio...</source>
         <translation>JACK &amp;áudio...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="645"/>
-        <location filename="../qjackctlGraphForm.ui" line="648"/>
-        <location filename="../qjackctlGraphForm.ui" line="651"/>
+        <location filename="../qjackctlGraphForm.ui" line="666"/>
+        <location filename="../qjackctlGraphForm.ui" line="669"/>
+        <location filename="../qjackctlGraphForm.ui" line="672"/>
         <source>JACK Audio color</source>
         <translation>Cor JACK Áudio</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="659"/>
+        <location filename="../qjackctlGraphForm.ui" line="680"/>
         <source>JACK &amp;MIDI...</source>
         <translation>JACK &amp;MIDI...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="662"/>
+        <location filename="../qjackctlGraphForm.ui" line="683"/>
         <source>JACK MIDI</source>
         <translation>JACK MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="665"/>
-        <location filename="../qjackctlGraphForm.ui" line="668"/>
+        <location filename="../qjackctlGraphForm.ui" line="686"/>
+        <location filename="../qjackctlGraphForm.ui" line="689"/>
         <source>JACK MIDI color</source>
         <translation>Cor de JACK MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="676"/>
+        <location filename="../qjackctlGraphForm.ui" line="697"/>
         <source>ALSA M&amp;IDI...</source>
         <translation>ALSA M&amp;IDI...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="679"/>
+        <location filename="../qjackctlGraphForm.ui" line="700"/>
         <source>ALSA MIDI</source>
         <translation>ALSA MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="682"/>
-        <location filename="../qjackctlGraphForm.ui" line="685"/>
+        <location filename="../qjackctlGraphForm.ui" line="703"/>
+        <location filename="../qjackctlGraphForm.ui" line="706"/>
         <source>ALSA MIDI color</source>
         <translation>Cor ALSA MIDI</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="693"/>
+        <location filename="../qjackctlGraphForm.ui" line="714"/>
         <source>JACK &amp;CV...</source>
         <translation>JACK &amp;CV...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="696"/>
-        <location filename="../qjackctlGraphForm.ui" line="699"/>
-        <location filename="../qjackctlGraphForm.ui" line="702"/>
+        <location filename="../qjackctlGraphForm.ui" line="717"/>
+        <location filename="../qjackctlGraphForm.ui" line="720"/>
+        <location filename="../qjackctlGraphForm.ui" line="723"/>
         <source>JACK CV color</source>
         <translation>Cor JACK CV</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="710"/>
+        <location filename="../qjackctlGraphForm.ui" line="731"/>
         <source>JACK &amp;OSC...</source>
         <translation>JACK &amp;OSC...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="713"/>
+        <location filename="../qjackctlGraphForm.ui" line="734"/>
         <source>JACK OSC</source>
         <translation>JACK OSC</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="716"/>
-        <location filename="../qjackctlGraphForm.ui" line="719"/>
+        <location filename="../qjackctlGraphForm.ui" line="737"/>
+        <location filename="../qjackctlGraphForm.ui" line="740"/>
         <source>JACK OSC color</source>
         <translation>Cor JACK OSC</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="727"/>
+        <location filename="../qjackctlGraphForm.ui" line="748"/>
         <source>&amp;Reset</source>
         <translation>&amp;Redefinir</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="730"/>
-        <location filename="../qjackctlGraphForm.ui" line="733"/>
-        <location filename="../qjackctlGraphForm.ui" line="736"/>
+        <location filename="../qjackctlGraphForm.ui" line="751"/>
+        <location filename="../qjackctlGraphForm.ui" line="754"/>
+        <location filename="../qjackctlGraphForm.ui" line="757"/>
         <source>Reset colors</source>
         <translation>Redefinir cores</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="747"/>
+        <location filename="../qjackctlGraphForm.ui" line="768"/>
         <source>Port &amp;Name</source>
         <translation>&amp;Nome da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="750"/>
+        <location filename="../qjackctlGraphForm.ui" line="771"/>
         <source>Port name</source>
         <translation>Nome da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="753"/>
+        <location filename="../qjackctlGraphForm.ui" line="774"/>
         <source>Sort by port name</source>
         <translation>Classificar por nome de porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="764"/>
+        <location filename="../qjackctlGraphForm.ui" line="785"/>
         <source>Port &amp;Title</source>
         <translation>&amp; Título da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="767"/>
+        <location filename="../qjackctlGraphForm.ui" line="788"/>
         <source>Port title</source>
         <translation>Título da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="770"/>
+        <location filename="../qjackctlGraphForm.ui" line="791"/>
         <source>Sort by port title</source>
         <translation>Classificar por título da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="781"/>
+        <location filename="../qjackctlGraphForm.ui" line="802"/>
         <source>Port &amp;Index</source>
         <translation>&amp; Índice da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="784"/>
+        <location filename="../qjackctlGraphForm.ui" line="805"/>
         <source>Port index</source>
         <translation>Índice da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="787"/>
+        <location filename="../qjackctlGraphForm.ui" line="808"/>
         <source>Sort by port index</source>
         <translation>Classificar por índice da porta</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="798"/>
+        <location filename="../qjackctlGraphForm.ui" line="819"/>
         <source>&amp;Ascending</source>
         <translation>&amp;Ascendente</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="801"/>
+        <location filename="../qjackctlGraphForm.ui" line="822"/>
         <source>Ascending</source>
         <translation>Ascendente</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="804"/>
+        <location filename="../qjackctlGraphForm.ui" line="825"/>
         <source>Ascending sort order</source>
         <translation>Classificar por ordem ascendente</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="815"/>
+        <location filename="../qjackctlGraphForm.ui" line="836"/>
         <source>&amp;Descending</source>
         <translation>&amp;Descendente</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="818"/>
+        <location filename="../qjackctlGraphForm.ui" line="839"/>
         <source>Descending</source>
         <translation>Descendente</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="821"/>
+        <location filename="../qjackctlGraphForm.ui" line="842"/>
         <source>Descending sort order</source>
         <translation>Classificar por ordem descendente</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="832"/>
+        <location filename="../qjackctlGraphForm.ui" line="853"/>
         <source>Repel O&amp;verlapping Nodes</source>
         <translation>Repelir Nós S&amp;obrepostos</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="835"/>
+        <location filename="../qjackctlGraphForm.ui" line="856"/>
         <source>Repel nodes</source>
         <translation>Repelir nós</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="838"/>
-        <location filename="../qjackctlGraphForm.ui" line="841"/>
+        <location filename="../qjackctlGraphForm.ui" line="859"/>
+        <location filename="../qjackctlGraphForm.ui" line="862"/>
         <source>Repel overlapping nodes</source>
         <translation>Repelir nós sobrepostos</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="852"/>
+        <location filename="../qjackctlGraphForm.ui" line="873"/>
         <source>Connect Thro&amp;ugh Nodes</source>
         <translation>Conecte-se A&amp;través de nós</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="855"/>
+        <location filename="../qjackctlGraphForm.ui" line="876"/>
         <source>Connect Through Nodes</source>
         <translation>Conecte-se Através de Nós</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="858"/>
+        <location filename="../qjackctlGraphForm.ui" line="879"/>
         <source>Connect through nodes</source>
         <translation>Conecte-se através de nós</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="861"/>
+        <location filename="../qjackctlGraphForm.ui" line="882"/>
         <source>Whether to draw connectors through or around nodes</source>
         <translation>Desenhar conectores através ou ao redor dos nós</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="869"/>
+        <location filename="../qjackctlGraphForm.ui" line="890"/>
         <source>&amp;About...</source>
         <translation>Sobre...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="872"/>
+        <location filename="../qjackctlGraphForm.ui" line="893"/>
         <source>About...</source>
         <translation>Sobre...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="875"/>
+        <location filename="../qjackctlGraphForm.ui" line="896"/>
         <source>About</source>
         <translation>Sobre...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="878"/>
+        <location filename="../qjackctlGraphForm.ui" line="899"/>
         <source>Show information about this application program</source>
         <translation>Mostrar informações sobre este aplicativo</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="886"/>
+        <location filename="../qjackctlGraphForm.ui" line="907"/>
         <source>About &amp;Qt...</source>
         <translation>Sobre &amp;Qt...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="889"/>
+        <location filename="../qjackctlGraphForm.ui" line="910"/>
         <source>About Qt...</source>
         <translation>Sobre Qt...</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="892"/>
+        <location filename="../qjackctlGraphForm.ui" line="913"/>
         <source>About Qt</source>
         <translation>Sobre Qt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.ui" line="895"/>
+        <location filename="../qjackctlGraphForm.ui" line="916"/>
         <source>Show information about the Qt toolkit</source>
         <translation>Mostrar informações sobre as ferramentas do Qt</translation>
     </message>
@@ -1202,12 +1223,12 @@ Tem certeza?</translation>
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="524"/>
+        <location filename="../qjackctlGraphForm.cpp" line="528"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="646"/>
+        <location filename="../qjackctlGraphForm.cpp" line="650"/>
         <source>Colors - %1</source>
         <translation>Cores - %1</translation>
     </message>

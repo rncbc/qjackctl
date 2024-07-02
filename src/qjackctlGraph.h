@@ -493,6 +493,7 @@ public:
 
 	// Edit predicates.
 	bool canRenameItem() const;
+	bool canSearchItem() const;
 
 	// Zooming methods.
 	void setZoom(qreal zoom);
@@ -586,6 +587,7 @@ public slots:
 
 	// Edit actions.
 	void renameItem();
+	void searchItem();
 
 	// Discrete zooming actions.
 	void zoomIn();
@@ -602,8 +604,12 @@ public slots:
 protected slots:
 
 	// Rename item slots.
-	void textChanged(const QString&);
-	void editingFinished();
+	void renameTextChanged(const QString&);
+	void renameEditingFinished();
+
+	// Search item slots.
+	void searchTextChanged(const QString&);
+	void searchEditingFinished();
 
 protected:
 
@@ -640,8 +646,9 @@ protected:
 	bool restoreNode(qjackctlGraphNode *node);
 	bool saveNode(qjackctlGraphNode *node) const;
 
-	// Renaming editor position and size updater.
-	void updateEditorGeometry();
+	// Update editors position and size.
+	void updateRenameEditor();
+	void updateSearchEditor();
 
 	// Bounding margins/limits...
 	const QRectF& boundingRect(bool reset = false);
@@ -649,6 +656,11 @@ protected:
 
 	// Snap into position helper.
 	void snapPos(QPointF& pos) const;
+
+	// Start search editor...
+	void startSearchEditor(const QString& text = QString());
+
+	void resizeEvent(QResizeEvent *event) override;
 
 private:
 
@@ -681,15 +693,18 @@ private:
 	QHash<uint, QColor> m_port_colors;
 
 	// Item renaming stuff.
-	qjackctlGraphItem *m_edit_item;
-	QLineEdit    *m_editor;
-	int           m_edited;
+	qjackctlGraphItem *m_rename_item;
+	QLineEdit         *m_rename_editor;
+	int                m_renamed;
 
 	// Original node position (for move command).
 	QPointF m_pos1;
 
 	// Allowed auto-scroll margins/limits (for move command).
 	QRectF m_rect1;
+
+	// Item search stuff.
+	QLineEdit *m_search_editor;
 
 	// Client/port aliases database.
 	qjackctlAliases *m_aliases;

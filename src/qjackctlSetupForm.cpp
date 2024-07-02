@@ -1,7 +1,7 @@
 ﻿// qjackctlSetupForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1000,7 +1000,7 @@ void qjackctlSetupForm::changeCurrentPreset ( const QString& sPreset )
 	// Check if there's any pending changes...
 	if (m_iDirtySettings > 0 && !m_sPreset.isEmpty()) {
 		switch (QMessageBox::warning(isVisible() ? this : parentWidget(),
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Warning") + " - " QJACKCTL_TITLE,
 			tr("Some settings have been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
 			.arg(m_sPreset),
@@ -1063,7 +1063,7 @@ void qjackctlSetupForm::deleteCurrentPreset (void)
 
 	// Try to prompt user if he/she really wants this...
 	if (QMessageBox::warning(isVisible() ? this : parentWidget(),
-		tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+		tr("Warning") + " - " QJACKCTL_TITLE,
 		tr("Delete preset:\n\n"
 		"\"%1\"\n\nAre you sure?")
 		.arg(sPreset),
@@ -2145,7 +2145,7 @@ bool qjackctlSetupForm::queryClose (void)
 	// Check if there's any pending changes...
 	if (m_iDirtySettings > 0 || m_iDirtyOptions > 0 || m_iDirtyBuffSize > 0) {
 		switch (QMessageBox::warning(isVisible() ? this : parentWidget(),
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Warning") + " - " QJACKCTL_TITLE,
 			tr("Some settings have been changed.\n\n"
 			"Do you want to apply the changes?"),
 			QMessageBox::Apply |

@@ -1,7 +1,7 @@
 // qjackctlSessionForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -609,7 +609,7 @@ void qjackctlSessionForm::loadSessionDir ( const QString& sSessionDir )
 	const QDir sessionDir(sSessionDir);
 	if (!sessionDir.exists("session.xml")) {
 		QMessageBox::critical(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Warning") + " - " QJACKCTL_TITLE,
 			tr("A session could not be found in this folder:\n\n\"%1\"")
 			.arg(sSessionDir));
 		return;
@@ -655,14 +655,14 @@ void qjackctlSessionForm::saveSessionDir (
 	if (!list.isEmpty()) {
 		if (sessionDir.exists("session.xml")) {
 			if (QMessageBox::warning(this,
-				tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+				tr("Warning") + " - " QJACKCTL_TITLE,
 				tr("A session already exists in this folder:\n\n\"%1\"\n\n"
 				"Are you sure to overwrite the existing session?").arg(sSessionDir),
 				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)
 				return;
 		} else {
 			if (QMessageBox::warning(this,
-				tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+				tr("Warning") + " - " QJACKCTL_TITLE,
 				tr("This folder already exists and is not empty:\n\n\"%1\"\n\n"
 				"Are you sure to overwrite the existing folder?").arg(sSessionDir),
 				QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Cancel)

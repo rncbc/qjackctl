@@ -1258,8 +1258,8 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 		m_zoom(1.0), m_zoomrange(false), m_gesture(false),
 		m_commands(nullptr), m_settings(nullptr),
 		m_selected_nodes(0), m_repel_overlapping_nodes(false),
-		m_edit_item(nullptr), m_editor(nullptr), m_edited(0),
-		m_aliases(nullptr)
+		m_rename_item(nullptr), m_rename_editor(nullptr), m_renamed(0),
+		m_search_editor(nullptr), m_aliases(nullptr)
 {
 	m_scene = new QGraphicsScene();
 
@@ -1280,21 +1280,31 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 	QGraphicsView::setPalette(pal);
 	QGraphicsView::setBackgroundRole(role);
 
-	m_editor = new QLineEdit(this);
-	m_editor->setFrame(false);
-//	m_editor->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
+	m_rename_editor = new QLineEdit(this);
+	m_rename_editor->setFrame(false);
+	m_rename_editor->setEnabled(false);
+	m_rename_editor->hide();
 
-	QObject::connect(m_editor,
+	QObject::connect(m_rename_editor,
 		SIGNAL(textChanged(const QString&)),
-		SLOT(textChanged(const QString&)));
-	QObject::connect(m_editor,
+		SLOT(renameTextChanged(const QString&)));
+	QObject::connect(m_rename_editor,
 		SIGNAL(editingFinished()),
-		SLOT(editingFinished()));
+		SLOT(renameEditingFinished()));
 
 	QGraphicsView::grabGesture(Qt::PinchGesture);
 
-	m_editor->setEnabled(false);
-	m_editor->hide();
+	m_search_editor = new QLineEdit(this);
+	m_search_editor->setClearButtonEnabled(true);
+	m_search_editor->setEnabled(false);
+	m_search_editor->hide();
+
+	QObject::connect(m_search_editor,
+		SIGNAL(textChanged(const QString&)),
+		SLOT(searchTextChanged(const QString&)));
+	QObject::connect(m_search_editor,
+		SIGNAL(editingFinished()),
+		SLOT(searchEditingFinished()));
 }
 
 
@@ -1303,7 +1313,9 @@ qjackctlGraphCanvas::~qjackctlGraphCanvas (void)
 {
 	clear();
 
-	delete m_editor;
+	delete m_search_editor;
+	delete m_rename_editor;
+
 	delete m_commands;
 	delete m_scene;
 }
@@ -1466,6 +1478,12 @@ bool qjackctlGraphCanvas::canRenameItem (void) const
 }
 
 
+bool qjackctlGraphCanvas::canSearchItem (void) const
+{
+	return !m_nodes.isEmpty();
+}
+
+
 // Zooming methods.
 void qjackctlGraphCanvas::setZoom ( qreal zoom )
 {
@@ -1478,10 +1496,10 @@ void qjackctlGraphCanvas::setZoom ( qreal zoom )
 	const qreal scale = zoom / m_zoom;
 	QGraphicsView::scale(scale, scale);
 
-	QFont font = m_editor->font();
+	QFont font = m_rename_editor->font();
 	font.setPointSizeF(scale * font.pointSizeF());
-	m_editor->setFont(font);
-	updateEditorGeometry();
+	m_rename_editor->setFont(font);
+	updateRenameEditor();
 
 	m_zoom = zoom;
 
@@ -1560,8 +1578,8 @@ qjackctlGraphNode *qjackctlGraphCanvas::findNode (
 // Whether it's in the middle of something...
 bool qjackctlGraphCanvas::isBusy (void) const
 {
-	return (m_state != DragNone || m_connect   != nullptr
-		||  m_item  != nullptr  || m_edit_item != nullptr);
+	return (m_state != DragNone || m_connect != nullptr
+		||  m_item  != nullptr  || m_rename_item != nullptr);
 }
 
 
@@ -1987,8 +2005,15 @@ void qjackctlGraphCanvas::keyPressEvent ( QKeyEvent *event )
 {
 	if (event->key() == Qt::Key_Escape) {
 		m_scene->clearSelection();
+		m_search_editor->editingFinished();
 		clear();
 		emit changed();
+	}
+	else
+	if (!m_search_editor->isEnabled()
+		&& (event->modifiers() & Qt::ControlModifier) == 0
+		&& !event->text().trimmed().isEmpty()) {
+		startSearchEditor(event->text());
 	}
 }
 
@@ -2164,12 +2189,12 @@ void qjackctlGraphCanvas::renameItem (void)
 				: foreground.darker());
 			background.setAlpha(255);
 			pal.setColor(QPalette::Base, background);
-			m_editor->setPalette(pal);
-			QFont font = m_editor->font();
+			m_rename_editor->setPalette(pal);
+			QFont font = m_rename_editor->font();
 			font.setBold(true);
-			m_editor->setFont(font);
-			m_editor->setPlaceholderText(node->nodeName());
-			m_editor->setText(node->nodeTitle());
+			m_rename_editor->setFont(font);
+			m_rename_editor->setPlaceholderText(node->nodeName());
+			m_rename_editor->setText(node->nodeTitle());
 		}
 	}
 	else
@@ -2187,12 +2212,12 @@ void qjackctlGraphCanvas::renameItem (void)
 				? foreground.lighter()
 				: foreground.darker());
 			pal.setColor(QPalette::Base, background.lighter());
-			m_editor->setPalette(pal);
-			QFont font = m_editor->font();
+			m_rename_editor->setPalette(pal);
+			QFont font = m_rename_editor->font();
 			font.setBold(false);
-			m_editor->setFont(font);
-			m_editor->setPlaceholderText(port->portName());
-			m_editor->setText(port->portTitle());
+			m_rename_editor->setFont(font);
+			m_rename_editor->setPlaceholderText(port->portName());
+			m_rename_editor->setText(port->portTitle());
 		}
 	}
 	else return;
@@ -2200,33 +2225,53 @@ void qjackctlGraphCanvas::renameItem (void)
 	m_selected_nodes = 0;
 	m_scene->clearSelection();
 
-	m_editor->show();
-	m_editor->setEnabled(true);
-	m_editor->selectAll();
-	m_editor->setFocus();
-	m_edited = 0;
+	m_rename_editor->show();
+	m_rename_editor->setEnabled(true);
+	m_rename_editor->selectAll();
+	m_rename_editor->setFocus();
+	m_renamed = 0;
 
-	m_edit_item = item;
+	m_rename_item = item;
 
-	updateEditorGeometry();
+	updateRenameEditor();
 }
 
 
-// Renaming editor position and size updater.
-void qjackctlGraphCanvas::updateEditorGeometry (void)
+void qjackctlGraphCanvas::searchItem (void)
 {
-	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible()) {
+	if (!m_search_editor->isEnabled())
+		startSearchEditor();
+}
+
+
+// Update editors position and size.
+void qjackctlGraphCanvas::updateRenameEditor (void)
+{
+	if (m_rename_item
+		&& m_rename_editor->isEnabled()
+		&& m_rename_editor->isVisible()) {
 		const QRectF& rect
-			= m_edit_item->editorRect().adjusted(+2.0, +2.0, -2.0, -2.0);
+			= m_rename_item->editorRect().adjusted(+2.0, +2.0, -2.0, -2.0);
 		const QPoint& pos1
 			= QGraphicsView::mapFromScene(rect.topLeft());
 		const QPoint& pos2
 			= QGraphicsView::mapFromScene(rect.bottomRight());
-		m_editor->setGeometry(
+		m_rename_editor->setGeometry(
 			pos1.x(),  pos1.y(),
 			pos2.x() - pos1.x(),
 			pos2.y() - pos1.y());
 	}
+}
+
+
+void qjackctlGraphCanvas::updateSearchEditor (void)
+{
+	// Position the search editor to the bottom-right of the canvas...
+	const QSize& size = QGraphicsView::viewport()->size();
+	const QSize& hint = m_search_editor->sizeHint();
+	const int w = hint.width() * 2;
+	const int h = hint.height();
+	m_search_editor->setGeometry(size.width() - w, size.height() - h, w, h);
 }
 
 
@@ -2474,10 +2519,10 @@ void qjackctlGraphCanvas::clearSelection (void)
 	m_selected_nodes = 0;
 	m_scene->clearSelection();
 
-	m_edit_item = nullptr;
-	m_editor->setEnabled(false);
-	m_editor->hide();
-	m_edited = 0;
+	m_rename_item = nullptr;
+	m_rename_editor->setEnabled(false);
+	m_rename_editor->hide();
+	m_renamed = 0;
 }
 
 
@@ -2499,10 +2544,10 @@ void qjackctlGraphCanvas::clear (void)
 		QGraphicsView::setDragMode(QGraphicsView::NoDrag);
 	m_state = DragNone;
 	m_item = nullptr;
-	m_edit_item = nullptr;
-	m_editor->setEnabled(false);
-	m_editor->hide();
-	m_edited = 0;
+	m_rename_item = nullptr;
+	m_rename_editor->setEnabled(false);
+	m_rename_editor->hide();
+	m_renamed = 0;
 
 	// Reset cursor...
 	QGraphicsView::setCursor(Qt::ArrowCursor);
@@ -2510,27 +2555,31 @@ void qjackctlGraphCanvas::clear (void)
 
 
 // Rename item slots.
-void qjackctlGraphCanvas::textChanged ( const QString& /* text */)
+void qjackctlGraphCanvas::renameTextChanged ( const QString& /* text */)
 {
-	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible())
-		++m_edited;
+	if (m_rename_item
+		&& m_rename_editor->isEnabled()
+		&& m_rename_editor->isVisible())
+		++m_renamed;
 }
 
 
-void qjackctlGraphCanvas::editingFinished (void)
+void qjackctlGraphCanvas::renameEditingFinished (void)
 {
-	if (m_edit_item && m_editor->isEnabled() && m_editor->isVisible()) {
+	if (m_rename_item
+		&& m_rename_editor->isEnabled()
+		&& m_rename_editor->isVisible()) {
 		// If changed then notify...
-		if (m_edited > 0) {
+		if (m_renamed > 0) {
 			m_commands->push(
 				new qjackctlGraphRenameCommand(this,
-					m_edit_item, m_editor->text()));
+					m_rename_item, m_rename_editor->text()));
 		}
 		// Reset all renaming stuff...
-		m_edit_item = nullptr;
-		m_editor->setEnabled(false);
-		m_editor->hide();
-		m_edited = 0;
+		m_rename_item = nullptr;
+		m_rename_editor->setEnabled(false);
+		m_rename_editor->hide();
+		m_renamed = 0;
 	}
 }
 
@@ -2674,6 +2723,57 @@ void qjackctlGraphSect::renameItem (
 		if (aliases)
 			aliases->dirty = true;
 	}
+}
+
+
+// Search item slots.
+void qjackctlGraphCanvas::searchTextChanged ( const QString& text )
+{
+	clearSelection();
+
+	if (text.isEmpty())
+		return;
+
+	const QRegularExpression& rx
+		= QRegularExpression(text, QRegularExpression::CaseInsensitiveOption);
+	if (!rx.isValid())
+		return;
+
+	for (qjackctlGraphNode *node : m_nodes) {
+		if (rx.match(node->nodeTitle()).hasMatch()) {
+			node->setSelected(true);
+			QGraphicsView::ensureVisible(node);
+		}
+	}
+}
+
+
+void qjackctlGraphCanvas::searchEditingFinished (void)
+{
+	m_search_editor->setEnabled(false);
+	m_search_editor->hide();
+	m_search_editor->clearFocus();
+
+	QGraphicsView::setFocus();
+}
+
+
+// Start search editor...
+void qjackctlGraphCanvas::startSearchEditor ( const QString& text )
+{
+	m_search_editor->setEnabled(true);
+	m_search_editor->setText(text);
+	m_search_editor->raise();
+	m_search_editor->show();
+	m_search_editor->setFocus();
+}
+
+
+void qjackctlGraphCanvas::resizeEvent( QResizeEvent *event )
+{
+	QGraphicsView::resizeEvent(event);
+
+	updateSearchEditor();
 }
 
 

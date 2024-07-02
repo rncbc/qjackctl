@@ -962,7 +962,7 @@ bool qjackctlMainForm::queryClose (void)
 		#if 0//QJACKCTL_SYSTEM_TRAY_QUERY_CLOSE
 			if (QSystemTrayIcon::supportsMessages()) {
 				m_pSystemTray->showMessage(
-					sTitle + " - " QJACKCTL_SUBTITLE1,
+					sTitle + " - " QJACKCTL_TITLE,
 					sText, QSystemTrayIcon::Information);
 			}
 			else
@@ -1103,7 +1103,7 @@ bool qjackctlMainForm::queryClosePreset (void)
 
 	if (m_pSetup->aliases.dirty) {
 		switch (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Warning") + " - " QJACKCTL_TITLE,
 			tr("The preset aliases have been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
 			.arg(m_pSetup->aliases.key),
@@ -1171,7 +1171,7 @@ bool qjackctlMainForm::queryRestart (void)
 			if (m_pSetup->bSystemTray && m_pSystemTray
 				&& QSystemTrayIcon::supportsMessages()) {
 				m_pSystemTray->showMessage(
-					sTitle + " - " QJACKCTL_SUBTITLE1,
+					sTitle + " - " QJACKCTL_TITLE,
 					sText, QSystemTrayIcon::Warning);
 			}
 			else
@@ -1354,7 +1354,7 @@ void qjackctlMainForm::startJack (void)
 	// Is the server process instance still here?
 	if (m_pJack) {
 		if (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Warning") + " - " QJACKCTL_TITLE,
 			tr("Could not start JACK.\n\n"
 			"Maybe JACK audio server is already started."),
 			QMessageBox::Ok | QMessageBox::Cancel) == QMessageBox::Ok) {
@@ -2134,7 +2134,7 @@ void qjackctlMainForm::appendMessagesError ( const QString& s )
 	if (m_pSetup->bSystemTray && m_pSystemTray
 		&& QSystemTrayIcon::supportsMessages())
 		m_pSystemTray->showMessage(
-			sTitle + " - " QJACKCTL_SUBTITLE1,
+			sTitle + " - " QJACKCTL_TITLE,
 			s, QSystemTrayIcon::Critical);
 	else
 #endif
@@ -3084,7 +3084,7 @@ void qjackctlMainForm::queryDisconnect (
 		if (pCable) {
 			bool bQueryDisconnect = true;
 			const QString& sTitle
-				= tr("Warning") + " - " QJACKCTL_SUBTITLE1;
+				= tr("Warning") + " - " QJACKCTL_TITLE;
 			const QString& sText
 				= tr("A patchbay definition is currently active,\n"
 					"which is probable to redo this connection:\n\n"
@@ -4289,7 +4289,7 @@ void qjackctlMainForm::showDirtySetupWarning (void)
 	if (m_pSetup->bSystemTray && m_pSystemTray
 		&& QSystemTrayIcon::supportsMessages()) {
 		m_pSystemTray->showMessage(
-			sTitle + " - " QJACKCTL_SUBTITLE1,
+			sTitle + " - " QJACKCTL_TITLE,
 			sText, QSystemTrayIcon::Information);
 	}
 	else

@@ -1,7 +1,7 @@
 // qjackctlPatchbayForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -223,7 +223,7 @@ bool qjackctlPatchbayForm::queryClose (void)
 
 	if (m_ui.PatchbayView->dirty()) {
 		switch (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Warning") + " - " QJACKCTL_TITLE,
 			tr("The patchbay definition has been changed:\n\n"
 			"\"%1\"\n\nDo you want to save the changes?")
 			.arg(m_sPatchbayName),
@@ -372,7 +372,7 @@ bool qjackctlPatchbayForm::loadPatchbayFile ( const QString& sFileName )
 	// Step 1: load from file...
 	if (!qjackctlPatchbayFile::load(&rack, sFileName)) {
 		QMessageBox::critical(this,
-			tr("Error") + " - " QJACKCTL_SUBTITLE1,
+			tr("Error") + " - " QJACKCTL_TITLE,
 			tr("Could not load patchbay definition file: \n\n\"%1\"")
 			.arg(sFileName),
 			QMessageBox::Cancel);
@@ -402,7 +402,7 @@ bool qjackctlPatchbayForm::savePatchbayFile ( const QString& sFileName )
 	// Step 2: save to file...
 	if (!qjackctlPatchbayFile::save(&rack, sFileName)) {
 		QMessageBox::critical(this,
-			tr("Error") + " - " QJACKCTL_SUBTITLE1,
+			tr("Error") + " - " QJACKCTL_TITLE,
 			tr("Could not save patchbay definition file: \n\n\"%1\"")
 			.arg(sFileName),
 			QMessageBox::Cancel);
@@ -448,7 +448,7 @@ void qjackctlPatchbayForm::newPatchbay (void)
 	qjackctlMainForm *pMainForm = qjackctlMainForm::getInstance();
 	if (pMainForm && (pMainForm->jackClient() || pMainForm->alsaSeq())) {
 		switch (QMessageBox::information(this,
-			tr("New Patchbay definition") + " - " QJACKCTL_SUBTITLE1,
+			tr("New Patchbay definition") + " - " QJACKCTL_TITLE,
 			tr("Create patchbay definition as a snapshot\n"
 			"of all actual client connections?"),
 			QMessageBox::Yes |

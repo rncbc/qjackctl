@@ -192,6 +192,7 @@ qjackctlGraphForm::qjackctlGraphForm (
 	// Some actions surely need those
 	// shortcuts firmly attached...
 	addAction(m_ui.viewMenubarAction);
+	addAction(m_ui.editSearchItemAction);
 
 	// HACK: Make old Ins/Del standard shortcuts
 	// for connect/disconnect available again...
@@ -228,6 +229,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QObject::connect(m_ui.editRenameItemAction,
 		SIGNAL(triggered(bool)),
 		m_ui.graphCanvas, SLOT(renameItem()));
+	QObject::connect(m_ui.editSearchItemAction,
+		SIGNAL(triggered(bool)),
+		m_ui.graphCanvas, SLOT(searchItem()));
 
 	QObject::connect(m_ui.viewMenubarAction,
 		SIGNAL(triggered(bool)),
@@ -987,6 +991,8 @@ void qjackctlGraphForm::stabilize (void)
 		!canvas->scene()->selectedItems().isEmpty());
 	m_ui.editRenameItemAction->setEnabled(
 		canvas->canRenameItem());
+	m_ui.editSearchItemAction->setEnabled(
+		canvas->canSearchItem());
 
 #if 0
 	const QRectF& outter_rect

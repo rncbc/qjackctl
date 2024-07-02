@@ -1,7 +1,7 @@
 // qjackctlSocketForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2020, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -346,7 +346,7 @@ void qjackctlSocketForm::accept (void)
 			const QString& sSocketName = iter.next()->socketName();
 			if (m_ui.SocketNameLineEdit->text() == sSocketName) {
 				QMessageBox::critical(this,
-					tr("Error") + " - " QJACKCTL_SUBTITLE1,
+					tr("Error") + " - " QJACKCTL_TITLE,
 					tr("A socket named \"%1\" already exists.")
 					.arg(sSocketName), QMessageBox::Cancel);
 				// Reject.
@@ -366,7 +366,7 @@ void qjackctlSocketForm::reject (void)
 	// Check if there's any pending changes...
 	if (m_iDirtyCount > 0) {
 		switch (QMessageBox::warning(this,
-			tr("Warning") + " - " QJACKCTL_SUBTITLE1,
+			tr("Warning") + " - " QJACKCTL_TITLE,
 			tr("Some settings have been changed.\n\n"
 			"Do you want to apply the changes?"),
 			QMessageBox::Apply |
