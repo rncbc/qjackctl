@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: thumb-view repositions and resizes immediately when
+  visible.
+
 - Graph: Implement patchbay node search functionality: adds a
   floating text-entry field, which appears when typing in the
   canvas, selecting nodes that contains the typed text (maybe

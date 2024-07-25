@@ -1061,7 +1061,10 @@ void qjackctlGraphForm::resizeEvent ( QResizeEvent *pResizeEvent )
 {
 	QMainWindow::resizeEvent(pResizeEvent);
 
-	++m_thumb_update;
+	if (m_thumb) {
+		m_thumb_update = 0;
+		m_thumb->updateView();
+	}
 
 	stabilize();
 }
