@@ -9,10 +9,10 @@ GIT HEAD
 - Graph: Implement patchbay node search functionality: adds a
   floating text-entry field, which appears when typing in the
   canvas, selecting nodes that contains the typed text (maybe
-  regular expression). (EXPERIMENTAL)
+  regular expression).
 
 - Graph: fixed a potential use-after-free issue on canvas nodes
-  refresh and recycle. (EXPERIMENTAL)
+  refresh and recycle.
 
 
 1.0.0  2024-06-19  An Unthinkable Release.
