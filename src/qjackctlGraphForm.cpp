@@ -1077,6 +1077,8 @@ void qjackctlGraphForm::showEvent ( QShowEvent *pShowEvent )
 	if (pMainForm)
 		pMainForm->stabilizeFormEx();
 
+	++m_thumb_update;
+
 	QWidget::showEvent(pShowEvent);
 }
 
