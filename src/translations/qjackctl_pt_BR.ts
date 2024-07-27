@@ -670,23 +670,23 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="332"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Encontrar...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="335"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Encontrar</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="338"/>
         <location filename="../qjackctlGraphForm.ui" line="341"/>
         <source>Find nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Encontrar nós</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="344"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="352"/>
