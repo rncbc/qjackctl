@@ -670,18 +670,18 @@ de toutes les applications clientes.
     <message>
         <location filename="../qjackctlGraphForm.ui" line="332"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Chercher...</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="335"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Chercher</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="338"/>
         <location filename="../qjackctlGraphForm.ui" line="341"/>
         <source>Find nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>Chercher les nœuds</translation>
     </message>
     <message>
         <location filename="../qjackctlGraphForm.ui" line="344"/>
