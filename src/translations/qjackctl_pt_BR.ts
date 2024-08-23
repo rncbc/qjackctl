@@ -1283,7 +1283,7 @@ Tem certeza?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="771"/>
         <source>Show information about this application</source>
-        <translation>Mostrar informações sobre esta aplicação</translation>
+        <translation>Mostrar informações sobre o aplicativo.</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="486"/>
@@ -1415,7 +1415,7 @@ Tentando com a predefinição padrão.</translation>
         <source>Could not load default preset.
 
 Sorry.</source>
-        <translation>Não foi possível carregar predefinição
+        <translation>Não foi possível carregar predefinição.
 
 Desculpe.</translation>
     </message>
@@ -2112,7 +2112,7 @@ Por favor, verifique a janela de mensagens para mais informações.</translation
     <message>
         <location filename="../qjackctlMainForm.cpp" line="4148"/>
         <source>&amp;Presets</source>
-        <translation>&amp;Presets</translation>
+        <translation>&amp;Predefinições</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="523"/>
@@ -2380,22 +2380,22 @@ Foi desabilitado.</translation>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="116"/>
         <source>XRUN maximum</source>
-        <translation>Máximo de XRUN</translation>
+        <translation>XRUN Máximo</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="118"/>
         <source>XRUN minimum</source>
-        <translation>Mínimo de XRUN</translation>
+        <translation>XRUN Mínimo</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="120"/>
         <source>XRUN average</source>
-        <translation>Média de XRUN</translation>
+        <translation>Média de XRUNs</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="122"/>
         <source>XRUN total</source>
-        <translation>Total de XRUN</translation>
+        <translation>Total de XRUNs</translation>
     </message>
     <message>
         <location filename="../qjackctlMessagesStatusForm.cpp" line="126"/>
@@ -3265,7 +3265,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="67"/>
         <source>Preset &amp;Name:</source>
-        <translation>Nome do &amp;Preset:</translation>
+        <translation>Nome da &amp;Predefinição:</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="93"/>
@@ -3283,7 +3283,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="86"/>
         <source>Settings preset name</source>
-        <translation>Nome do preset de configurações</translation>
+        <translation>Nome da predefinição de configurações</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="120"/>
@@ -3293,7 +3293,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="117"/>
         <source>Save settings as current preset name</source>
-        <translation>Salvar configurações como nome do preset atual</translation>
+        <translation>Salvar configurações como nome da predefinição atual</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="136"/>
@@ -3303,7 +3303,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="133"/>
         <source>Delete current settings preset</source>
-        <translation>Excluir configurações atuais predefinidas</translation>
+        <translation>Excluir predefinição das configurações atuais</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="843"/>
@@ -3770,7 +3770,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1520"/>
         <source>Set dither mode</source>
-        <translation>Definir modo suavizado</translation>
+        <translation>Definir modo de suavização</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="681"/>
@@ -4077,7 +4077,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="781"/>
         <source>Please do not touch these settings unless you know what you are doing.</source>
-        <translation>Por favor, não toque nessas configurações, a menos que você saiba o que está fazendo.</translation>
+        <translation>Por favor, não altere estas configurações, a menos que você saiba o que está fazendo.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="3388"/>
@@ -4229,7 +4229,7 @@ Está certo de sobrescrever a pasta existente?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1438"/>
         <source>&amp;Preset Name</source>
-        <translation>Nome do &amp;Preset</translation>
+        <translation>Nome da &amp;Predefinição</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="1441"/>
@@ -4297,7 +4297,7 @@ Deseja salvá-las?</translation>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="101"/>
         <source>Don&apos;t restrict self connect requests (default)</source>
-        <translation>Não restrinja os pedidos de auto-conexão (padrão)</translation>
+        <translation>Não restringir os pedidos de auto-conexão (padrão)</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.cpp" line="104"/>
@@ -4326,7 +4326,7 @@ Deseja salvá-las?</translation>
 &quot;%1&quot;
 
 Are you sure?</source>
-        <translation>Deletar preset:
+        <translation>Deletar predefinição:
 
 &quot;%1&quot;
 
@@ -4617,7 +4617,7 @@ Você quer aplicar as mudanças?</translation>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1400"/>
         <source>Clock source</source>
-        <translation>Clock source</translation>
+        <translation>Fonte do Clock</translation>
     </message>
     <message>
         <location filename="../qjackctlSetupForm.ui" line="1878"/>
