@@ -1223,12 +1223,12 @@ Are you sure?</source>
         <translation>拡大率</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="528"/>
+        <location filename="../qjackctlGraphForm.cpp" line="531"/>
         <source>Ready</source>
         <translation>準備できました</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="650"/>
+        <location filename="../qjackctlGraphForm.cpp" line="653"/>
         <source>Colors - %1</source>
         <translation>色 - %1</translation>
     </message>

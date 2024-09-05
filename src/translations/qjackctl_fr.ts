@@ -1223,12 +1223,12 @@ de toutes les applications clientes.
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="528"/>
+        <location filename="../qjackctlGraphForm.cpp" line="531"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="650"/>
+        <location filename="../qjackctlGraphForm.cpp" line="653"/>
         <source>Colors - %1</source>
         <translation>Couleurs - %1</translation>
     </message>

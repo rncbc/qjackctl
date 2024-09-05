@@ -1222,12 +1222,12 @@ Sind Sie sicher?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="528"/>
+        <location filename="../qjackctlGraphForm.cpp" line="531"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="650"/>
+        <location filename="../qjackctlGraphForm.cpp" line="653"/>
         <source>Colors - %1</source>
         <translation type="unfinished"></translation>
     </message>
