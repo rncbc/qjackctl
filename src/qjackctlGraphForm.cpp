@@ -404,6 +404,9 @@ qjackctlGraphForm::qjackctlGraphForm (
 	QObject::connect(m_ui.ToolBar,
 		SIGNAL(orientationChanged(Qt::Orientation)),
 		SLOT(orientationChanged(Qt::Orientation)));
+
+	m_ui.graphCanvas->setSearchPlaceholderText(
+		m_ui.editSearchItemAction->statusTip() + QString(3, '.'));
 }
 
 

@@ -3193,4 +3193,16 @@ void qjackctlGraphThumb::updateView (void)
 }
 
 
+// Search placeholder text accessors.
+void qjackctlGraphCanvas::setSearchPlaceholderText ( const QString& text )
+{
+	m_search_editor->setPlaceholderText(text);
+}
+
+QString qjackctlGraphCanvas::searchPlaceholderText (void) const
+{
+	return m_search_editor->placeholderText();
+}
+
+
 // end of qjackctlGraph.cpp

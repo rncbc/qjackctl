@@ -555,6 +555,10 @@ public:
 	// Snap into position helper.
 	QPointF snapPos(qreal x, qreal y) const;
 
+	// Search placeholder text accessors.
+	void setSearchPlaceholderText(const QString& text);
+	QString searchPlaceholderText() const;
+
 signals:
 
 	// Node factory notifications.
