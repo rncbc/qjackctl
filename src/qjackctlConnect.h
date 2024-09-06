@@ -370,6 +370,9 @@ private:
 
 	// Local instance variables.
 	qjackctlConnectView *m_pConnectView;
+
+	// Connector line color map/persistence.
+	QHash<QString, int> m_colorMap;
 };
 
 

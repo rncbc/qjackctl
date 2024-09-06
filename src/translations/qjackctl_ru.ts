@@ -313,12 +313,12 @@
 <context>
     <name>qjackctlConnect</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1983"/>
+        <location filename="../qjackctlConnect.cpp" line="1986"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1984"/>
+        <location filename="../qjackctlConnect.cpp" line="1987"/>
         <source>This will suspend sound processing
 from all client applications.
 
@@ -425,53 +425,53 @@ Are you sure?</source>
 <context>
     <name>qjackctlConnectorView</name>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1337"/>
-        <location filename="../qjackctlConnect.cpp" line="1354"/>
+        <location filename="../qjackctlConnect.cpp" line="1340"/>
+        <location filename="../qjackctlConnect.cpp" line="1357"/>
         <source>&amp;Connect</source>
         <translation>&amp;Соединить</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1337"/>
-        <location filename="../qjackctlConnect.cpp" line="1355"/>
+        <location filename="../qjackctlConnect.cpp" line="1340"/>
+        <location filename="../qjackctlConnect.cpp" line="1358"/>
         <source>Alt+C</source>
         <comment>Connect</comment>
         <translation>Alt+с</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1341"/>
-        <location filename="../qjackctlConnect.cpp" line="1358"/>
+        <location filename="../qjackctlConnect.cpp" line="1344"/>
+        <location filename="../qjackctlConnect.cpp" line="1361"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Рассоединить</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1341"/>
-        <location filename="../qjackctlConnect.cpp" line="1359"/>
+        <location filename="../qjackctlConnect.cpp" line="1344"/>
+        <location filename="../qjackctlConnect.cpp" line="1362"/>
         <source>Alt+D</source>
         <comment>Disconnect</comment>
         <translation>Alt+р</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1345"/>
-        <location filename="../qjackctlConnect.cpp" line="1362"/>
+        <location filename="../qjackctlConnect.cpp" line="1348"/>
+        <location filename="../qjackctlConnect.cpp" line="1365"/>
         <source>Disconnect &amp;All</source>
         <translation>Рассоединить &amp;все</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1345"/>
-        <location filename="../qjackctlConnect.cpp" line="1363"/>
+        <location filename="../qjackctlConnect.cpp" line="1348"/>
+        <location filename="../qjackctlConnect.cpp" line="1366"/>
         <source>Alt+A</source>
         <comment>Disconnect All</comment>
         <translation>Alt+в</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1350"/>
-        <location filename="../qjackctlConnect.cpp" line="1367"/>
+        <location filename="../qjackctlConnect.cpp" line="1353"/>
+        <location filename="../qjackctlConnect.cpp" line="1370"/>
         <source>&amp;Refresh</source>
         <translation>&amp;Обновить</translation>
     </message>
     <message>
-        <location filename="../qjackctlConnect.cpp" line="1350"/>
-        <location filename="../qjackctlConnect.cpp" line="1368"/>
+        <location filename="../qjackctlConnect.cpp" line="1353"/>
+        <location filename="../qjackctlConnect.cpp" line="1371"/>
         <source>Alt+R</source>
         <comment>Refresh</comment>
         <translation>Alt+о</translation>
