@@ -1,7 +1,7 @@
 // qjackctlSession.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2021, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -85,7 +85,7 @@ void qjackctlSession::clear (void)
 #endif
 
 // Critical methods.
-bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
+bool qjackctlSession::save ( const QString& sSessionDir, SaveType stype )
 {
 	// We're always best to
 	// reset old session settings.
@@ -152,11 +152,14 @@ bool qjackctlSession::save ( const QString& sSessionDir, int iSessionType )
 
 	// Second pass: get all session client commands...
 	jack_session_event_type_t etype = JackSessionSave;
-	switch (iSessionType) {
-	case 1:
+	switch (stype) {
+	case SaveType::Save:
+	default:
+		break;
+	case SaveType::SaveAndQuit:
 		etype = JackSessionSaveAndQuit;
 		break;
-	case 2:
+	case SaveType::SaveTemplate:
 		etype = JackSessionSaveTemplate;
 		break;
 	}

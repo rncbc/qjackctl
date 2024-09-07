@@ -24,11 +24,12 @@
 
 #include "ui_qjackctlSessionForm.h"
 
+#include "qjackctlSession.h"
+
 #include <QItemDelegate>
 #include <QFileInfo>
 
 // Forward declarations.
-class qjackctlSession;
 class qjackctlSetup;
 
 class QMenu;
@@ -136,7 +137,9 @@ public:
 
 	// Recent session directories and save type accessors.
 	const QStringList& sessionDirs() const;
-	bool isSaveSessionVersion() const;
+
+	void setSessionSaveVersion(bool bSessionSaveVersion);
+	bool isSessionSaveVersion() const;
 
 	// Recent menu accessor.
 	QMenu *recentMenu() const;
@@ -184,10 +187,12 @@ protected:
 
 	void keyPressEvent(QKeyEvent *);
 
-	void saveSessionEx(int iSessionType = 0);
+	typedef qjackctlSession::SaveType SaveType;
+
+	void saveSessionEx(SaveType stype);
 
 	void loadSessionDir(const QString& sSessionDir);
-	void saveSessionDir(const QString& sSessionDir, int iSessionType = 0);
+	void saveSessionDir(const QString& sSessionDir, SaveType stype);
 
 	void updateRecent(const QString& sSessionDir);
 
@@ -214,6 +219,9 @@ private:
 
 	// Session directory history.
 	QStringList m_sessionDirs;
+
+	// session versioning flag.
+	bool m_bSessionSaveVersion;
 };
 
 

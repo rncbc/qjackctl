@@ -89,23 +89,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="SaveSessionVersionCheckBox">
-       <property name="toolTip">
-        <string>Save session versioning</string>
-       </property>
-       <property name="text">
-        <string>&amp;Versioning</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>220</width>
          <height>20</height>
         </size>
        </property>
@@ -257,7 +247,6 @@
   <tabstop>LoadSessionPushButton</tabstop>
   <tabstop>RecentSessionPushButton</tabstop>
   <tabstop>SaveSessionPushButton</tabstop>
-  <tabstop>SaveSessionVersionCheckBox</tabstop>
   <tabstop>UpdateSessionPushButton</tabstop>
   <tabstop>SessionTreeView</tabstop>
   <tabstop>InfraClientListView</tabstop>

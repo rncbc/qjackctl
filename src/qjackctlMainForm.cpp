@@ -4208,7 +4208,7 @@ void qjackctlMainForm::updateContextMenu (void)
 			tr("&Versioning"),
 			m_pSessionForm, SLOT(saveSessionVersion(bool)));
 		pAction->setCheckable(true);
-		pAction->setChecked(m_pSessionForm->isSaveSessionVersion());
+		pAction->setChecked(m_pSessionForm->isSessionSaveVersion());
 		pAction->setEnabled(bEnabled);
 		pSessionMenu->addSeparator();
 		pAction = pSessionMenu->addAction(QIcon(":/images/refresh1.png"),

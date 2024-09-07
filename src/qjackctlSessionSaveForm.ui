@@ -1,0 +1,197 @@
+<ui version="4.0" >
+ <author>rncbc aka Rui Nuno Capela</author>
+ <comment>qjackctl - An Audio/MIDI multi-track sequencer.
+
+   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License along
+   with this program; if not, write to the Free Software Foundation, Inc.,
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+ </comment>
+ <class>qjackctlSessionSaveForm</class>
+ <widget class="QDialog" name="qjackctlSessionSaveForm" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>180</height>
+   </rect>
+  </property>
+  <property name="focusPolicy" >
+   <enum>Qt::StrongFocus</enum>
+  </property>
+  <property name="windowTitle" >
+   <string>Session</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="qjackctl.qrc" >:/images/session1.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QLabel" name="SessionNameTextLabel" >
+     <property name="text" >
+      <string>&amp;Name:</string>
+     </property>
+     <property name="buddy" >
+      <cstring>SessionNameLineEdit</cstring>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="SessionNameLineEdit" >
+     <property name="minimumSize" >
+      <size>
+       <width>320</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip" >
+      <string>Session name</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="SessionDirTextLabel" >
+       <property name="text" >
+        <string>&amp;Directory:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>SessionDirComboBox</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>20</width>
+         <height>8</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QComboBox" name="SessionDirComboBox" >
+       <property name="minimumSize" >
+        <size>
+         <width>320</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip" >
+        <string>Session directory</string>
+       </property>
+       <property name="editable" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="SessionDirToolButton" >
+       <property name="minimumSize" >
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="focusPolicy" >
+        <enum>Qt::TabFocus</enum>
+       </property>
+       <property name="toolTip" >
+        <string>Browse for session directory</string>
+       </property>
+       <property name="text" >
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>8</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QCheckBox" name="SessionSaveVersionCheckBox">
+       <property name="toolTip">
+        <string>Save session versioning</string>
+       </property>
+       <property name="text">
+        <string>&amp;Versioning</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="DialogButtonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="4" margin="8" />
+ <tabstops>
+  <tabstop>SessionNameLineEdit</tabstop>
+  <tabstop>SessionDirComboBox</tabstop>
+  <tabstop>SessionDirToolButton</tabstop>
+  <tabstop>SessionVersioningCheckBox</tabstop>
+  <tabstop>DialogButtonBox</tabstop>
+ </tabstops>
+ <resources>
+  <include location="qjackctl.qrc" />
+ </resources>
+ <connections/>
+</ui>

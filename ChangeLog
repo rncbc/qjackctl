@@ -6,6 +6,8 @@ ChangeLog
 
 GIT HEAD
 
+- Session: introducing new session save name/dir dialog (WIP)
+
 - Connections: connector line colors are now uniquely mapped
   on a (readable/output) client name basis. (EXPERIMENTAL)
 

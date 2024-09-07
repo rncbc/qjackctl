@@ -20,7 +20,8 @@
 *****************************************************************************/
 
 #include "qjackctlSessionForm.h"
-#include "qjackctlSession.h"
+
+#include "qjackctlSessionSaveForm.h"
 
 #include "qjackctlMainForm.h"
 
@@ -235,6 +236,8 @@ qjackctlSessionForm::qjackctlSessionForm (
 
 	m_pSetup = nullptr;
 
+	m_bSessionSaveVersion = false;
+
 	// Common (sigleton) session object.
 	m_pSession = new qjackctlSession();
 
@@ -339,9 +342,9 @@ void qjackctlSessionForm::setup ( qjackctlSetup *pSetup )
 	m_pSetup = pSetup;
 
 	if (m_pSetup) {
-		m_ui.SaveSessionVersionCheckBox->setChecked(
-			m_pSetup->bSessionSaveVersion);
+		// Have recent session directories and versioning option...
 		m_sessionDirs = m_pSetup->sessionDirs;
+		m_bSessionSaveVersion = m_pSetup->bSessionSaveVersion;
 		// Setup infra-clients table view...
 		QList<int> sizes;
 		sizes.append(320);
@@ -398,12 +401,18 @@ const QStringList& qjackctlSessionForm::sessionDirs (void) const
 
 
 // Session save versioning option.
-bool qjackctlSessionForm::isSaveSessionVersion (void) const
+void qjackctlSessionForm::setSessionSaveVersion ( bool bSessionSaveVersion )
 {
-	return m_ui.SaveSessionVersionCheckBox->isChecked();
+	m_bSessionSaveVersion = bSessionSaveVersion;
 }
- 
- 
+
+
+bool qjackctlSessionForm::isSessionSaveVersion (void) const
+{
+	return m_bSessionSaveVersion;
+}
+
+
 // Recent menu accessor.
 QMenu *qjackctlSessionForm::recentMenu (void) const
 {
@@ -444,8 +453,9 @@ void qjackctlSessionForm::hideEvent ( QHideEvent *pHideEvent )
 void qjackctlSessionForm::closeEvent ( QCloseEvent *pCloseEvent )
 {
 	if (m_pSetup) {
-		m_pSetup->sessionDirs = sessionDirs();
-		m_pSetup->bSessionSaveVersion = isSaveSessionVersion();
+		// Save recent session directories and versioning option...
+		m_pSetup->sessionDirs = m_sessionDirs;
+		m_pSetup->bSessionSaveVersion = m_bSessionSaveVersion;
 	}
 
 	QWidget::closeEvent(pCloseEvent);
@@ -455,6 +465,7 @@ void qjackctlSessionForm::closeEvent ( QCloseEvent *pCloseEvent )
 // Open/load session from specific file path.
 void qjackctlSessionForm::loadSession (void)
 {
+	QString sSessionDir;
 #if 0
 	QFileDialog loadDialog(this, tr("Load Session"));
 	loadDialog.setAcceptMode(QFileDialog::AcceptOpen);
@@ -467,9 +478,8 @@ void qjackctlSessionForm::loadSession (void)
 		loadDialog.setDirectory(m_sessionDirs.first());
 	if (!loadDialog.exec())
 		return;
-	QString sSessionDir = loadDialog.selectedFiles().first();
+	sSessionDir = loadDialog.selectedFiles().first();
 #else
-	QString sSessionDir;
 	if (!m_sessionDirs.isEmpty())
 		sSessionDir = m_sessionDirs.first();
 	sSessionDir = QFileDialog::getExistingDirectory(
@@ -495,60 +505,47 @@ void qjackctlSessionForm::recentSession (void)
 // Save current session to specific file path.
 void qjackctlSessionForm::saveSessionSave (void)
 {
-	saveSessionEx(0);
+	saveSessionEx(SaveType::Save);
 }
 
 void qjackctlSessionForm::saveSessionSaveAndQuit (void)
 {
-	saveSessionEx(1);
+	saveSessionEx(SaveType::SaveAndQuit);
 }
 
 void qjackctlSessionForm::saveSessionSaveTemplate (void)
 {
-	saveSessionEx(2);
+	saveSessionEx(SaveType::SaveTemplate);
 }
 
-void qjackctlSessionForm::saveSessionEx ( int iSessionType )
+void qjackctlSessionForm::saveSessionEx ( SaveType stype )
 {
 	QString sTitle = tr("Save Session");
-	switch (iSessionType) {
-	case 1:
+	switch (stype) {
+	case SaveType::Save:
+	default:
+		break;
+	case SaveType::SaveAndQuit:
 		sTitle += ' ' + tr("and Quit");
 		break;
-	case 2:
+	case SaveType::SaveTemplate:
 		sTitle += ' ' + tr("Template");
 		break;
 	}
 
-#if 0
-	QFileDialog saveDialog(this, sTitle);
-	saveDialog.setAcceptMode(QFileDialog::AcceptSave);
-	saveDialog.setFileMode(QFileDialog::Directory);
-	saveDialog.setViewMode(QFileDialog::List);
-	saveDialog.setOptions(QFileDialog::ShowDirsOnly);
-	saveDialog.setNameFilter(tr("Session directory"));
-	saveDialog.setHistory(m_sessionDirs);
-	if (!m_sessionDirs.isEmpty())
-		saveDialog.setDirectory(m_sessionDirs.first());
-	if (!saveDialog.exec())
-		return;
-	QString sSessionDir = saveDialog.selectedFiles().first();
-#else
-	QString sSessionDir;
-	if (!m_sessionDirs.isEmpty())
-		sSessionDir = m_sessionDirs.first();
-	sSessionDir = QFileDialog::getExistingDirectory(
-		this, sTitle, sSessionDir);
-#endif
-
-	saveSessionDir(sSessionDir, iSessionType);
+	qjackctlSessionSaveForm saveForm(this, sTitle, m_sessionDirs);
+	saveForm.setSessionSaveVersion(isSessionSaveVersion());
+	if (saveForm.exec()) {
+		setSessionSaveVersion(saveForm.isSessionSaveVersion());
+		saveSessionDir(saveForm.sessionDir(), stype);
+	}
 }
 
 
 // Save current session to specific file path.
 void qjackctlSessionForm::saveSessionVersion ( bool bOn )
 {
-	m_ui.SaveSessionVersionCheckBox->setChecked(bOn);
+	setSessionSaveVersion(bOn);
 }
 
 
@@ -644,7 +641,7 @@ void qjackctlSessionForm::loadSessionDir ( const QString& sSessionDir )
 
 // Save current session to specific file path.
 void qjackctlSessionForm::saveSessionDir (
-	const QString& sSessionDir, int iSessionType )
+	const QString& sSessionDir, SaveType stype )
 {
 	if (sSessionDir.isEmpty())
 		return;
@@ -685,7 +682,7 @@ void qjackctlSessionForm::saveSessionDir (
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 	if (!list.isEmpty()) {
-		if (isSaveSessionVersion()) {
+		if (isSessionSaveVersion()) {
 			int iSessionDirNo = 0;
 			const QString sSessionDirMask = sSessionDir + ".%1";
 			QFileInfo fi(sSessionDirMask.arg(++iSessionDirNo));
@@ -700,7 +697,7 @@ void qjackctlSessionForm::saveSessionDir (
 	if (!sessionDir.exists())
 		sessionDir.mkpath(sSessionDir);
 
-	bool bSaveSession = m_pSession->save(sSessionDir, iSessionType);
+	const bool bSaveSession = m_pSession->save(sSessionDir, stype);
 	if (bSaveSession)
 		updateRecent(sSessionDir);
 
@@ -826,7 +823,7 @@ void qjackctlSessionForm::sessionViewContextMenu ( const QPoint& pos )
 	pAction = menu.addAction(
 		tr("&Versioning"), this, SLOT(saveSessionVersion(bool)));
 	pAction->setCheckable(true);
-	pAction->setChecked(isSaveSessionVersion());
+	pAction->setChecked(isSessionSaveVersion());
 	pAction->setEnabled(bEnabled);
 	menu.addSeparator();
 	pAction = menu.addAction(QIcon(":/images/refresh1.png"),
@@ -1009,7 +1006,6 @@ void qjackctlSessionForm::stabilizeForm ( bool bEnabled )
 	m_ui.LoadSessionPushButton->setEnabled(bEnabled);
 	m_ui.RecentSessionPushButton->setEnabled(bEnabled && !m_pRecentMenu->isEmpty());
 	m_ui.SaveSessionPushButton->setEnabled(bEnabled);
-	m_ui.SaveSessionVersionCheckBox->setEnabled(bEnabled);
 	m_ui.UpdateSessionPushButton->setEnabled(bEnabled);
 
 	if (!bEnabled) {
