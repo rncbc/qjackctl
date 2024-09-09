@@ -3071,34 +3071,34 @@ protected:
 				const Position position = m_thumb->position();
 				if (event->pos().x() < rect.left() - mx) {
 					if (position == TopRight)
-						m_thumb->setPosition(TopLeft);
+						m_thumb->requestPosition(TopLeft);
 					else
 					if (position == BottomRight)
-						m_thumb->setPosition(BottomLeft);
+						m_thumb->requestPosition(BottomLeft);
 				}
 				else
 				if (event->pos().x() > rect.right() + mx) {
 					if (position == TopLeft)
-						m_thumb->setPosition(TopRight);
+						m_thumb->requestPosition(TopRight);
 					else
 					if (position == BottomLeft)
-						m_thumb->setPosition(BottomRight);
+						m_thumb->requestPosition(BottomRight);
 				}
 				else
 				if (event->pos().y() < rect.top() - my) {
 					if (position == BottomLeft)
-						m_thumb->setPosition(TopLeft);
+						m_thumb->requestPosition(TopLeft);
 					else
 					if (position == BottomRight)
-						m_thumb->setPosition(TopRight);
+						m_thumb->requestPosition(TopRight);
 				}
 				else
 				if (event->pos().y() > rect.bottom() + my) {
 					if (position == TopLeft)
-						m_thumb->setPosition(BottomRight);
+						m_thumb->requestPosition(BottomRight);
 					else
 					if (position == TopRight)
-						m_thumb->setPosition(BottomLeft);
+						m_thumb->requestPosition(BottomLeft);
 				}
 			}
 		}
@@ -3120,7 +3120,7 @@ protected:
 
 	void contextMenuEvent(QContextMenuEvent *event)
 	{
-		m_thumb->contextMenu(event->globalPos());
+		m_thumb->requestContextMenu(event->globalPos());
 	}
 
 private:
@@ -3186,8 +3186,15 @@ qjackctlGraphThumb::Position qjackctlGraphThumb::position (void) const
 }
 
 
+// Request re-positioning.
+void qjackctlGraphThumb::requestPosition ( Position position )
+{
+	emit positionRequested(int(position));
+}
+
+
 // Emit context-menu request.
-void qjackctlGraphThumb::contextMenu ( const QPoint& pos )
+void qjackctlGraphThumb::requestContextMenu ( const QPoint& pos )
 {
 	emit contextMenuRequested(pos);
 }
@@ -3218,6 +3225,8 @@ void qjackctlGraphThumb::updatePosition (void)
 	default:
 		break;
 	}
+
+	QFrame::show();
 }
 
 

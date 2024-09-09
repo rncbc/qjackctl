@@ -455,27 +455,6 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	m_ui.viewToolbarAction->setChecked(m_config->isToolbar());
 	m_ui.viewStatusbarAction->setChecked(m_config->isStatusbar());
 
-	const qjackctlGraphThumb::Position position
-		= qjackctlGraphThumb::Position(m_config->thumbview());
-	switch (position) {
-	case qjackctlGraphThumb::TopLeft:
-		m_ui.viewThumbviewTopLeftAction->setChecked(true);
-		break;
-	case qjackctlGraphThumb::TopRight:
-		m_ui.viewThumbviewTopRightAction->setChecked(true);
-		break;
-	case qjackctlGraphThumb::BottomLeft:
-		m_ui.viewThumbviewBottomLeftAction->setChecked(true);
-		break;
-	case qjackctlGraphThumb::BottomRight:
-		m_ui.viewThumbviewBottomRightAction->setChecked(true);
-		break;
-	case qjackctlGraphThumb::None:
-	default:
-		m_ui.viewThumbviewNoneAction->setChecked(true);
-		break;
-	}
-
 	m_ui.viewTextBesideIconsAction->setChecked(m_config->isTextBesideIcons());
 	m_ui.viewZoomRangeAction->setChecked(m_config->isZoomRange());
 	m_ui.viewRepelOverlappingNodesAction->setChecked(m_config->isRepelOverlappingNodes());
@@ -589,9 +568,31 @@ void qjackctlGraphForm::viewThumbview ( int thumbview )
 				SIGNAL(contextMenuRequested(const QPoint&)),
 				SLOT(thumbviewContextMenu(const QPoint&)),
 				Qt::QueuedConnection);
-			m_thumb->show();
+			QObject::connect(m_thumb,
+				SIGNAL(positionRequested(int)),
+				SLOT(viewThumbview(int)),
+				Qt::QueuedConnection);
 			++m_thumb_update;
 		}
+	}
+
+	switch (position) {
+	case qjackctlGraphThumb::TopLeft:
+		m_ui.viewThumbviewTopLeftAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::TopRight:
+		m_ui.viewThumbviewTopRightAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::BottomLeft:
+		m_ui.viewThumbviewBottomLeftAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::BottomRight:
+		m_ui.viewThumbviewBottomRightAction->setChecked(true);
+		break;
+	case qjackctlGraphThumb::None:
+	default:
+		m_ui.viewThumbviewNoneAction->setChecked(true);
+		break;
 	}
 }
  

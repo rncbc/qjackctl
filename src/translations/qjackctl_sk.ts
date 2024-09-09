@@ -1223,12 +1223,12 @@ Ste si istý?</translation>
         <translation>Zväčšenie</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="531"/>
+        <location filename="../qjackctlGraphForm.cpp" line="510"/>
         <source>Ready</source>
         <translation>Pripravený</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="653"/>
+        <location filename="../qjackctlGraphForm.cpp" line="654"/>
         <source>Colors - %1</source>
         <translation>Farby - %1</translation>
     </message>

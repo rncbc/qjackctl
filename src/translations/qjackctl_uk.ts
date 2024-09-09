@@ -1222,12 +1222,12 @@ Are you sure?</source>
         <translation>Масштаб</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="531"/>
+        <location filename="../qjackctlGraphForm.cpp" line="510"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="653"/>
+        <location filename="../qjackctlGraphForm.cpp" line="654"/>
         <source>Colors - %1</source>
         <translation>Кольори – %1</translation>
     </message>
