@@ -4,10 +4,10 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+1.0.2  2024-09-17  An End-of-Summer'24 Release.
 
 - Graph: when visible the thumb-view may now be drag-moved over
-  to a different corner position anytime. (EXPERIMENTAL)
+  to a different corner position anytime.
 
 - Session: introducing new Save session name/directory dialog.
 
