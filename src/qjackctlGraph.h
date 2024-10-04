@@ -553,7 +553,7 @@ public:
 	qjackctlAliases *aliases() const;
 
 	// Snap into position helper.
-	QPointF snapPos(qreal x, qreal y) const;
+	QPointF snapPos(const QPointF& pos) const;
 
 	// Search placeholder text accessors.
 	void setSearchPlaceholderText(const QString& text);
@@ -657,9 +657,6 @@ protected:
 	// Bounding margins/limits...
 	const QRectF& boundingRect(bool reset = false);
 	void boundingPos(QPointF& pos);
-
-	// Snap into position helper.
-	void snapPos(QPointF& pos) const;
 
 	// Start search editor...
 	void startSearchEditor(const QString& text = QString());

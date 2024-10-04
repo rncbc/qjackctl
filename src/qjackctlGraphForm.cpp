@@ -798,7 +798,7 @@ void qjackctlGraphForm::added ( qjackctlGraphNode *node )
 	x -= qreal(::rand() & 0x1f);
 	y -= qreal(::rand() & 0x1f);
 
-	node->setPos(canvas->snapPos(x, y));
+	node->setPos(canvas->snapPos(QPointF(x, y)));
 
 	updated(node);
 }

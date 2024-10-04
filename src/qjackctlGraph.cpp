@@ -875,12 +875,12 @@ void qjackctlGraphNode::updatePath (void)
 			yi = yo = height;
 		}
 		if (port->isOutput()) {
-			port->setPos(+width / 2 + 6 - w, yo);
+			port->setPos(width + 6 - w, yo);
 			yo += h;
 			if (height < yo)
 				height = yo;
 		} else {
-			port->setPos(-width / 2 - 6, yi);
+			port->setPos(-6, yi);
 			yi += h;
 			if (height < yi)
 				height = yi;
@@ -888,7 +888,7 @@ void qjackctlGraphNode::updatePath (void)
 	}
 
 	QPainterPath path;
-	path.addRoundedRect(-width / 2, 0, width, height + 6, 5, 5);
+	path.addRoundedRect(0, 0, width, height + 6, 5, 5);
 	/*QGraphicsPathItem::*/setPath(path);
 }
 
@@ -929,7 +929,8 @@ void qjackctlGraphNode::paint ( QPainter *painter,
 	m_pixmap->setPos(node_rect.x() + 4, node_rect.y() + 4);
 
 	const QRectF& text_rect = m_text->boundingRect();
-	m_text->setPos(- text_rect.width() / 2, text_rect.y() + 2);
+	const qreal w2 = (node_rect.width() - text_rect.width()) / 2;
+	m_text->setPos(node_rect.x() + w2 + 4, node_rect.y() + 2);
 }
 
 
@@ -1730,8 +1731,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 						++nchanged;
 					}
 					// Original node position (for move command)...
-					m_pos1 = m_pos;
-					snapPos(m_pos1);
+					m_pos1 = snapPos(m_pos);
 				}
 				else m_item = nullptr;
 			}
@@ -1798,7 +1798,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 		}
 		// Move current selected nodes...
 		if (m_item && m_item->type() == qjackctlGraphNode::Type) {
-			snapPos(pos);
+			pos = snapPos(pos);
 			const QPointF delta = (pos - m_pos);
 			foreach (QGraphicsItem *item, m_scene->selectedItems()) {
 				if (item->type() == qjackctlGraphNode::Type) {
@@ -1930,7 +1930,7 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 				}
 			}
 			m_commands->push(
-				new qjackctlGraphMoveCommand(this, nodes, m_pos1, pos));
+				new qjackctlGraphMoveCommand(this, nodes, m_pos1, m_pos));
 			++nchanged;
 		}
 		// Close rubber-band lasso...
@@ -2937,18 +2937,11 @@ void qjackctlGraphCanvas::boundingPos ( QPointF& pos )
 
 // Snap into position helpers.
 //
-void qjackctlGraphCanvas::snapPos ( QPointF& pos ) const
+QPointF qjackctlGraphCanvas::snapPos ( const QPointF& pos ) const
 {
-	pos.setX(4.0 * ::round(0.25 * pos.x()));
-	pos.setY(4.0 * ::round(0.25 * pos.y()));
-}
-
-
-QPointF qjackctlGraphCanvas::snapPos ( qreal x, qreal y ) const
-{
-	QPointF pos(x, y);
-	snapPos(pos);
-	return pos;
+	return QPointF(
+		4.0 * ::round(0.25 * pos.x()),
+		4.0 * ::round(0.25 * pos.y()));
 }
 
 
