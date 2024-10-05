@@ -857,7 +857,7 @@ void qjackctlGraphNode::updatePath (void)
 			if (wi < w) wi = w;
 		}
 	}
-	width = wi + wo;
+	width = 4 * ((wi + wo) / 4);
 
 	std::sort(m_ports.begin(), m_ports.end(), qjackctlGraphPort::Compare());
 
@@ -1804,7 +1804,7 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 				if (item->type() == qjackctlGraphNode::Type) {
 					qjackctlGraphNode *node = static_cast<qjackctlGraphNode *> (item);
 					if (node)
-						node->setPos(node->pos() + delta);
+						node->setPos(snapPos(node->pos() + delta));
 				}
 			}
 			m_pos = pos;
