@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Long missing D-Bus method slot added: "reset" (dbus-send --system
+  / org.rncbc.qjackctl.reset).
+
 - Graph: Node reference positioning changed to the top-left corner,
   improving the base snapping-to-grid perception. (EXPERIMENTAL)
 
@@ -810,7 +813,7 @@ GIT HEAD
 
 - As a workaround regarding issues switching jack2's backends, Robin 
   Gareus sends us yet another D-Bus method slot: "preset", (dbus-send 
---system / org.rncbc.qjackctl.preset string:PRESET). Thanks again.
+  --system / org.rncbc.qjackctl.preset string:PRESET). Thanks again.
 
 - Another D-Bus interface slot makes it through implementation: 
   "quit" (eg. usage: dbus-send --system / org.rncbc.qjackctl.quit). 

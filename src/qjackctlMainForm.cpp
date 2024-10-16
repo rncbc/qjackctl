@@ -848,6 +848,8 @@ bool qjackctlMainForm::setup ( qjackctlSetup *pSetup )
 			this, SLOT(startJack()));
 		dbus.connect(s, s, sDBusName, "stop",
 			this, SLOT(stopJack()));
+		dbus.connect(s, s, sDBusName, "reset",
+			 this, SLOT(resetXrunStats()));
 		dbus.connect(s, s, sDBusName, "main",
 			this, SLOT(toggleMainForm()));
 		dbus.connect(s, s, sDBusName, "messages",
