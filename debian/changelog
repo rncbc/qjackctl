@@ -1,3 +1,9 @@
+qjackctl (1.0.3-4.1) unstable; urgency=low
+
+  * An Autumn'24 Release.
+
+ -- Rui Nuno Capela <rncbc@rncbc.org>  Thu, 29 Oct 2024 20:00:00 +0000
+
 qjackctl (1.0.2-3.1) unstable; urgency=low
 
   * An End-of-Summer'24 Release.

@@ -4,13 +4,13 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+1.0.3  2024-10-29  An Autumn'24 Release.
 
 - Long missing D-Bus method slot added: "reset" (dbus-send --system
   / org.rncbc.qjackctl.reset).
 
 - Graph: Node reference positioning changed to the top-left corner,
-  improving the base snapping-to-grid perception. (EXPERIMENTAL)
+  improving the base snapping-to-grid perception.
 
 - Prepping up next development cycle (Qt >= 6.8)
 
