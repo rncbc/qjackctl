@@ -42,6 +42,34 @@ Show help about command line options
 \fB\-v\fR, \fB\-\-version\fR
 .IP
 Show version information.
+.SH D-Bus insterface
+Enable `Setup > Misc > Other > Enable D-Bus interface` to use the D-Bus interface commands as shown below.
+.PP
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.start\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.stop\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.reset\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.main\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.messages\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.status\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.session\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.connections\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.patchbay\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.graph\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.rewind\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.backward\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.play\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.pause\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.forward\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.setup\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.about\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.quit\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.preset string\fR:[\fIlabel\fR]
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.active-patchbay string\fR:[\fIpath\fR]
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.load\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.save\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.savequit\fR
+\fB\dbus\-send \-\-system / org.rncbc.qjackctl.savetemplate\fR
+.PP
 .SH SEE ALSO
 .BR jackd (1)
 .SH FILES
