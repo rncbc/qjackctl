@@ -1271,12 +1271,7 @@ qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 	QGraphicsView::setResizeAnchor(QGraphicsView::NoAnchor);
 	QGraphicsView::setDragMode(QGraphicsView::NoDrag);
 
-	QPalette pal = QGraphicsView::palette();
-	const QPalette::ColorRole role = QPalette::Window;
-	const QColor& color = pal.color(role);
-	pal.setColor(role, color.darker(120));
-	QGraphicsView::setPalette(pal);
-	QGraphicsView::setBackgroundRole(role);
+	updatePalette();
 
 	m_rename_editor = new QLineEdit(this);
 	m_rename_editor->setFrame(false);
@@ -2954,7 +2949,7 @@ public:
 
 	// Constructor.
 	View(qjackctlGraphThumb *thumb)
-		: QGraphicsView(thumb->canvas()->viewport()),
+		: QGraphicsView((thumb->canvas())->viewport()),
 			m_thumb(thumb), m_drag_state(DragNone)
 	{
 		QGraphicsView::setInteractive(false);
@@ -2965,6 +2960,13 @@ public:
 		QGraphicsView::setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		QGraphicsView::setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+		updatePalette();
+
+		QGraphicsView::setScene((thumb->canvas())->scene());
+	}
+
+	void updatePalette()
+	{
 		qjackctlGraphCanvas *canvas = m_thumb->canvas();
 		QPalette pal = canvas->palette();
 		const QPalette::ColorRole role
@@ -2973,8 +2975,6 @@ public:
 		pal.setColor(role, color.darker(120));
 		QGraphicsView::setPalette(pal);
 		QGraphicsView::setBackgroundRole(role);
-
-		QGraphicsView::setScene(canvas->scene());
 	}
 
 protected:
@@ -3241,6 +3241,13 @@ void qjackctlGraphThumb::updateView (void)
 }
 
 
+// Update the thumb-view palette.
+void qjackctlGraphThumb::updatePalette (void)
+{
+	m_view->updatePalette();
+}
+
+
 // Search placeholder text accessors.
 void qjackctlGraphCanvas::setSearchPlaceholderText ( const QString& text )
 {
@@ -3250,6 +3257,18 @@ void qjackctlGraphCanvas::setSearchPlaceholderText ( const QString& text )
 QString qjackctlGraphCanvas::searchPlaceholderText (void) const
 {
 	return m_search_editor->placeholderText();
+}
+
+
+// Update the canvas palette.
+void qjackctlGraphCanvas::updatePalette (void)
+{
+	QPalette pal;// = QGraphicsView::palette();
+	const QPalette::ColorRole role = QPalette::Window;
+	const QColor& color = pal.color(role);
+	pal.setColor(role, color.darker(120));
+	QGraphicsView::setPalette(pal);
+	QGraphicsView::setBackgroundRole(role);
 }
 
 

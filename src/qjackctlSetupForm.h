@@ -124,6 +124,8 @@ protected:
 	void resetCustomColorThemes(const QString& sCustomColorTheme);
 	void resetCustomStyleThemes(const QString& sCustomStyleTheme);
 
+	void updatePalette();
+
 	void stabilizeForm();
 
 	void showEvent(QShowEvent *);

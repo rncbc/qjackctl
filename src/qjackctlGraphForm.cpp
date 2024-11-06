@@ -515,6 +515,18 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 }
 
 
+// Update the canvas palette.
+void qjackctlGraphForm::updatePalette (void)
+{
+	m_ui.graphCanvas->updatePalette();
+
+	if (m_thumb)
+		m_thumb->updatePalette();
+
+	viewRefresh();
+}
+
+
 // Main menu slots.
 void qjackctlGraphForm::viewMenubar ( bool on )
 {
@@ -621,6 +633,13 @@ void qjackctlGraphForm::viewCenter (void)
 
 void qjackctlGraphForm::viewRefresh (void)
 {
+	if (m_jack)
+		m_jack->clearItems();
+#ifdef CONFIG_ALSA_SEQ
+	if (m_alsa)
+		m_alsa->clearItems();
+#endif
+
 	jack_changed();
 	alsa_changed();
 

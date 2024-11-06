@@ -188,6 +188,8 @@ qjackctlSetupForm::qjackctlSetupForm ( QWidget *pParent )
 	m_ui.InLatencySpinBox->setSpecialValueText(sDefName);
 	m_ui.OutLatencySpinBox->setSpecialValueText(sDefName);
 
+	updatePalette();
+
 	// UI connections...
 
 	QObject::connect(m_ui.PresetComboBox,
@@ -648,7 +650,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	// Load font chooser samples...
 	const QString sSansSerif = "Sans Serif";
 	QFont font;
-	QPalette pal;
 
 	if (m_pSetup->sDisplayFont1.isEmpty()
 		|| !font.fromString(m_pSetup->sDisplayFont1))
@@ -667,9 +668,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	if (m_pSetup->sMessagesFont.isEmpty()
 		|| !font.fromString(m_pSetup->sMessagesFont))
 		font = QFont("Monospace", 8);
-	pal = m_ui.MessagesFontTextLabel->palette();
-	pal.setColor(QPalette::Window, pal.base().color());
-	m_ui.MessagesFontTextLabel->setPalette(pal);
 	m_ui.MessagesFontTextLabel->setFont(font);
 	m_ui.MessagesFontTextLabel->setText(
 		font.family() + ' ' + QString::number(font.pointSize()));
@@ -677,9 +675,6 @@ void qjackctlSetupForm::setup ( qjackctlSetup *pSetup )
 	if (m_pSetup->sConnectionsFont.isEmpty()
 		|| !font.fromString(m_pSetup->sConnectionsFont))
 		font = QFont(sSansSerif, 10);
-	pal = m_ui.ConnectionsFontTextLabel->palette();
-	pal.setColor(QPalette::Window, pal.base().color());
-	m_ui.ConnectionsFontTextLabel->setPalette(pal);
 	m_ui.ConnectionsFontTextLabel->setFont(font);
 	m_ui.ConnectionsFontTextLabel->setText(
 		font.family() + ' ' + QString::number(font.pointSize()));
@@ -1738,6 +1733,15 @@ void qjackctlSetupForm::resetCustomStyleThemes (
 }
 
 
+void qjackctlSetupForm::updatePalette (void)
+{
+	QPalette pal;
+	pal.setColor(QPalette::Window, pal.base().color());
+	m_ui.MessagesFontTextLabel->setPalette(pal);
+	m_ui.ConnectionsFontTextLabel->setPalette(pal);
+}
+
+
 // Brag about any buffer-size (frames/period) changes...
 void qjackctlSetupForm::buffSizeChanged (void)
 {
@@ -1972,8 +1976,11 @@ void qjackctlSetupForm::apply (void)
 			} else {
 				QPalette pal;
 				if (qjackctlPaletteForm::namedPalette(
-						&m_pSetup->settings(), m_pSetup->sCustomColorTheme, pal))
+						&m_pSetup->settings(), m_pSetup->sCustomColorTheme, pal)) {
 					QApplication::setPalette(pal);
+					pMainForm->updatePalette();
+					updatePalette();
+				}
 			}
 		}
 		// Show restart message if needed...

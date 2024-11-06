@@ -559,6 +559,9 @@ public:
 	void setSearchPlaceholderText(const QString& text);
 	QString searchPlaceholderText() const;
 
+	// Update the canvas palette.
+	void updatePalette();
+
 signals:
 
 	// Node factory notifications.
@@ -787,6 +790,9 @@ public:
 
 	// Request re-positioning.
 	void requestPosition(Position position);
+
+	// Update the thumb-view palette.
+	void updatePalette();
 
 signals:
 

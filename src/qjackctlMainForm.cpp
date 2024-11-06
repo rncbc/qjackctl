@@ -2393,6 +2393,14 @@ void qjackctlMainForm::updateButtons (void)
 }
 
 
+// Update the Graph canvas palette.
+void qjackctlMainForm::updatePalette (void)
+{
+	if (m_pGraphForm)
+		m_pGraphForm->updatePalette();
+}
+
+
 #ifdef CONFIG_DBUS
 
 void qjackctlMainForm::updateJackDBus (void)

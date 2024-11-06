@@ -479,13 +479,13 @@ Emin misin?</translation>
 <context>
     <name>qjackctlGraphCanvas</name>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="1907"/>
-        <location filename="../qjackctlGraph.cpp" line="2048"/>
+        <location filename="../qjackctlGraph.cpp" line="1902"/>
+        <location filename="../qjackctlGraph.cpp" line="2043"/>
         <source>Connect</source>
         <translation>Bağlan</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraph.cpp" line="2120"/>
+        <location filename="../qjackctlGraph.cpp" line="2115"/>
         <source>Disconnect</source>
         <translation>Bağlantıyı Kes</translation>
     </message>
@@ -1229,7 +1229,7 @@ Emin misin?</translation>
         <translation>Hazır</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="654"/>
+        <location filename="../qjackctlGraphForm.cpp" line="673"/>
         <source>Colors - %1</source>
         <translation>Renkler - %1</translation>
     </message>
@@ -1244,7 +1244,7 @@ Emin misin?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="390"/>
         <location filename="../qjackctlMainForm.cpp" line="595"/>
-        <location filename="../qjackctlMainForm.cpp" line="4278"/>
+        <location filename="../qjackctlMainForm.cpp" line="4286"/>
         <source>&amp;Quit</source>
         <translation>&amp;Çıkış</translation>
     </message>
@@ -1255,7 +1255,7 @@ Emin misin?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="63"/>
-        <location filename="../qjackctlMainForm.cpp" line="4138"/>
+        <location filename="../qjackctlMainForm.cpp" line="4146"/>
         <source>&amp;Start</source>
         <translation>&amp;Başlat</translation>
     </message>
@@ -1270,7 +1270,7 @@ Emin misin?</translation>
         <translation>&amp;Durdur</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4229"/>
+        <location filename="../qjackctlMainForm.cpp" line="4237"/>
         <source>St&amp;atus</source>
         <translation>D&amp;urum</translation>
     </message>
@@ -1282,14 +1282,14 @@ Emin misin?</translation>
     <message>
         <location filename="../qjackctlMainForm.ui" line="774"/>
         <location filename="../qjackctlMainForm.cpp" line="603"/>
-        <location filename="../qjackctlMainForm.cpp" line="4273"/>
+        <location filename="../qjackctlMainForm.cpp" line="4281"/>
         <source>Ab&amp;out...</source>
         <translation>&amp;Hakkında...</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="489"/>
         <location filename="../qjackctlMainForm.cpp" line="599"/>
-        <location filename="../qjackctlMainForm.cpp" line="4267"/>
+        <location filename="../qjackctlMainForm.cpp" line="4275"/>
         <source>Set&amp;up...</source>
         <translation>&amp;Ayarlar...</translation>
     </message>
@@ -1300,7 +1300,7 @@ Emin misin?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="455"/>
-        <location filename="../qjackctlMainForm.cpp" line="4223"/>
+        <location filename="../qjackctlMainForm.cpp" line="4231"/>
         <source>&amp;Messages</source>
         <translation>&amp;Mesajlar</translation>
     </message>
@@ -1411,7 +1411,7 @@ Emin misin?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="625"/>
-        <location filename="../qjackctlMainForm.cpp" line="4250"/>
+        <location filename="../qjackctlMainForm.cpp" line="4258"/>
         <source>&amp;Rewind</source>
         <translation>G&amp;eri sar</translation>
     </message>
@@ -1422,7 +1422,7 @@ Emin misin?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="715"/>
-        <location filename="../qjackctlMainForm.cpp" line="4259"/>
+        <location filename="../qjackctlMainForm.cpp" line="4267"/>
         <source>Pa&amp;use</source>
         <translation>&amp;Duraklat</translation>
     </message>
@@ -1433,7 +1433,7 @@ Emin misin?</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="684"/>
-        <location filename="../qjackctlMainForm.cpp" line="4256"/>
+        <location filename="../qjackctlMainForm.cpp" line="4264"/>
         <source>&amp;Play</source>
         <translation>&amp;Oynat</translation>
     </message>
@@ -1447,18 +1447,18 @@ ALSA MIDI patchbay will be not available.</source>
 ALSA MIDI bağlantı paneli kullanılamayacak.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2427"/>
+        <location filename="../qjackctlMainForm.cpp" line="2435"/>
         <source>D-BUS: Service is available (%1 aka jackdbus).</source>
         <translation>D-BUS: Servis mevcut (%1 diğer adıyla jackdbus).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2458"/>
+        <location filename="../qjackctlMainForm.cpp" line="2466"/>
         <source>D-BUS: Service not available (%1 aka jackdbus).</source>
         <translation>D-BUS: Servisi mevcut değil (%1 diğer adıyla jackdbus).</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.cpp" line="959"/>
-        <location filename="../qjackctlMainForm.cpp" line="4286"/>
+        <location filename="../qjackctlMainForm.cpp" line="4294"/>
         <source>Information</source>
         <translation>Bilgi</translation>
     </message>
@@ -1473,7 +1473,7 @@ ALSA MIDI bağlantı paneli kullanılamayacak.</translation>
         <location filename="../qjackctlMainForm.cpp" line="1142"/>
         <location filename="../qjackctlMainForm.cpp" line="1200"/>
         <location filename="../qjackctlMainForm.cpp" line="1359"/>
-        <location filename="../qjackctlMainForm.cpp" line="3089"/>
+        <location filename="../qjackctlMainForm.cpp" line="3097"/>
         <source>Warning</source>
         <translation>Uyarı</translation>
     </message>
@@ -1596,7 +1596,7 @@ menüsünden &quot;Çık&quot;ı seçin.</translation>
         <location filename="../qjackctlMainForm.cpp" line="1024"/>
         <location filename="../qjackctlMainForm.cpp" line="1160"/>
         <location filename="../qjackctlMainForm.cpp" line="1213"/>
-        <location filename="../qjackctlMainForm.cpp" line="3106"/>
+        <location filename="../qjackctlMainForm.cpp" line="3114"/>
         <source>Don&apos;t ask this again</source>
         <translation>Bunu bir daha sorma</translation>
     </message>
@@ -1693,12 +1693,12 @@ Değişiklikleri kaydetmek istiyor musunuz?</translation>
         <translation>Son XRUN&apos;dan bu yana geçen süre</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2500"/>
+        <location filename="../qjackctlMainForm.cpp" line="2508"/>
         <source>Patchbay reset.</source>
         <translation>Bağlantı paneli sıfırlandı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2508"/>
+        <location filename="../qjackctlMainForm.cpp" line="2516"/>
         <source>Could not load active patchbay definition.
 
 &quot;%1&quot;
@@ -1711,57 +1711,57 @@ Disabled.</source>
 Engellendi.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2512"/>
+        <location filename="../qjackctlMainForm.cpp" line="2520"/>
         <source>Patchbay activated.</source>
         <translation>Bağlantı Paneli etkinleştirildi.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2520"/>
+        <location filename="../qjackctlMainForm.cpp" line="2528"/>
         <source>Patchbay deactivated.</source>
         <translation>Bağlantı paneli devre dışı bırakıldı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2612"/>
+        <location filename="../qjackctlMainForm.cpp" line="2620"/>
         <source>Statistics reset.</source>
         <translation>İstatistikler sıfırlandı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2751"/>
+        <location filename="../qjackctlMainForm.cpp" line="2759"/>
         <source>msec</source>
         <translation>msec</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2768"/>
+        <location filename="../qjackctlMainForm.cpp" line="2776"/>
         <source>JACK connection graph change.</source>
         <translation>JACK bağlantı grafiği değişikliği.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2798"/>
+        <location filename="../qjackctlMainForm.cpp" line="2806"/>
         <source>XRUN callback (%1).</source>
         <translation>XRUN geri dönüşü (%1).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2808"/>
+        <location filename="../qjackctlMainForm.cpp" line="2816"/>
         <source>Buffer size change (%1).</source>
         <translation>Arabellek boyutu değişikliği (%1).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2817"/>
+        <location filename="../qjackctlMainForm.cpp" line="2825"/>
         <source>Shutdown notification.</source>
         <translation>Kapatma uyarıları.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2831"/>
+        <location filename="../qjackctlMainForm.cpp" line="2839"/>
         <source>Freewheel started...</source>
         <translation>BAşıboş hareket başlatıldı...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2832"/>
+        <location filename="../qjackctlMainForm.cpp" line="2840"/>
         <source>Freewheel exited.</source>
         <translation>Başıboş hareketten çıkeıldı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2845"/>
+        <location filename="../qjackctlMainForm.cpp" line="2853"/>
         <source>Could not start JACK.
 
 Sorry.</source>
@@ -1770,82 +1770,82 @@ Sorry.</source>
 Üzgünüm.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2852"/>
+        <location filename="../qjackctlMainForm.cpp" line="2860"/>
         <source>JACK has crashed.</source>
         <translation>JACK çöktü.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2855"/>
+        <location filename="../qjackctlMainForm.cpp" line="2863"/>
         <source>JACK timed out.</source>
         <translation>JACK zaman aşımına uğradı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2858"/>
+        <location filename="../qjackctlMainForm.cpp" line="2866"/>
         <source>JACK write error.</source>
         <translation>JACK yazma hatası.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2861"/>
+        <location filename="../qjackctlMainForm.cpp" line="2869"/>
         <source>JACK read error.</source>
         <translation>JACK okuma hatası.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2865"/>
+        <location filename="../qjackctlMainForm.cpp" line="2873"/>
         <source>Unknown JACK error (%d).</source>
         <translation>Bilinmeyen JACK hatası (%d).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2877"/>
+        <location filename="../qjackctlMainForm.cpp" line="2885"/>
         <source>JACK property change.</source>
         <translation>JACK özelliği değişikliği.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2899"/>
+        <location filename="../qjackctlMainForm.cpp" line="2907"/>
         <source>ALSA connection graph change.</source>
         <translation>ALSA bağlantı grafiği değişikliği.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2937"/>
+        <location filename="../qjackctlMainForm.cpp" line="2945"/>
         <source>JACK active patchbay scan</source>
         <translation>JACK aktif bağlantı paneli taraması</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2947"/>
+        <location filename="../qjackctlMainForm.cpp" line="2955"/>
         <source>ALSA active patchbay scan</source>
         <translation>ALSA aktif bağlantı paneli taraması</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="2991"/>
+        <location filename="../qjackctlMainForm.cpp" line="2999"/>
         <source>JACK connection change.</source>
         <translation>JACK bağlantısı değişikliği.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3000"/>
+        <location filename="../qjackctlMainForm.cpp" line="3008"/>
         <source>ALSA connection change.</source>
         <translation>ALSA bağlantı değişikliği.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3019"/>
+        <location filename="../qjackctlMainForm.cpp" line="3027"/>
         <source>checked</source>
         <translation>kontrol</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3023"/>
+        <location filename="../qjackctlMainForm.cpp" line="3031"/>
         <source>connected</source>
         <translation>bağlandı</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3027"/>
+        <location filename="../qjackctlMainForm.cpp" line="3035"/>
         <source>disconnected</source>
         <translation>bağlantıyı kesildi</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3032"/>
+        <location filename="../qjackctlMainForm.cpp" line="3040"/>
         <source>failed</source>
         <translation>başarısız</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3091"/>
+        <location filename="../qjackctlMainForm.cpp" line="3099"/>
         <source>A patchbay definition is currently active,
 which is probable to redo this connection:
 
@@ -1860,62 +1860,62 @@ bu bağlantıyı yeniden yapmak muhtemeldir:
 Patchbay bağlantısını kaldırmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3182"/>
+        <location filename="../qjackctlMainForm.cpp" line="3190"/>
         <source>Overall operation failed.</source>
         <translation>Genel işlem başarısız oldu.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3184"/>
+        <location filename="../qjackctlMainForm.cpp" line="3192"/>
         <source>Invalid or unsupported option.</source>
         <translation>Geçersiz veya desteklenmeyen seçenek.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3186"/>
+        <location filename="../qjackctlMainForm.cpp" line="3194"/>
         <source>Client name not unique.</source>
         <translation>İstemci adı benzersiz değil.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3188"/>
+        <location filename="../qjackctlMainForm.cpp" line="3196"/>
         <source>Server is started.</source>
         <translation>Sunucu başlatıldı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3190"/>
+        <location filename="../qjackctlMainForm.cpp" line="3198"/>
         <source>Unable to connect to server.</source>
         <translation>Sunucuya bağlanılamıyor.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3192"/>
+        <location filename="../qjackctlMainForm.cpp" line="3200"/>
         <source>Server communication error.</source>
         <translation>Sunucu iletişim hatası.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3194"/>
+        <location filename="../qjackctlMainForm.cpp" line="3202"/>
         <source>Client does not exist.</source>
         <translation>İstemci mevcut değil.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3196"/>
+        <location filename="../qjackctlMainForm.cpp" line="3204"/>
         <source>Unable to load internal client.</source>
         <translation>Dahili istemci yüklenemiyor.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3198"/>
+        <location filename="../qjackctlMainForm.cpp" line="3206"/>
         <source>Unable to initialize client.</source>
         <translation>İstemci başlatılamıyor.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3200"/>
+        <location filename="../qjackctlMainForm.cpp" line="3208"/>
         <source>Unable to access shared memory.</source>
         <translation>Paylaşılan belleğe erişilemiyor.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3202"/>
+        <location filename="../qjackctlMainForm.cpp" line="3210"/>
         <source>Client protocol version mismatch.</source>
         <translation>İstemci protokolü sürüm uyuşmazlığı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3204"/>
+        <location filename="../qjackctlMainForm.cpp" line="3212"/>
         <source>Could not connect to JACK server as client.
 - %1
 Please check the messages window for more info.</source>
@@ -1924,177 +1924,177 @@ Please check the messages window for more info.</source>
 Daha fazla bilgi için lütfen mesaj penceresini kontrol edin.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3288"/>
+        <location filename="../qjackctlMainForm.cpp" line="3296"/>
         <source>Server configuration saved to &quot;%1&quot;.</source>
         <translation>Sunucu yapılandırması &quot;%1&quot; dizinine kaydedildi.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3328"/>
+        <location filename="../qjackctlMainForm.cpp" line="3336"/>
         <source>Client activated.</source>
         <translation>İstemci etkinleştirildi.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3339"/>
+        <location filename="../qjackctlMainForm.cpp" line="3347"/>
         <source>Post-startup script...</source>
         <translation>Başlangıç sonrası betiği...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3340"/>
+        <location filename="../qjackctlMainForm.cpp" line="3348"/>
         <source>Post-startup script terminated</source>
         <translation>Başlangıç sonrası betiği sonlandırıldı</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3348"/>
+        <location filename="../qjackctlMainForm.cpp" line="3356"/>
         <source>Command line argument...</source>
         <translation>Komut satırı argümanı...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3349"/>
+        <location filename="../qjackctlMainForm.cpp" line="3357"/>
         <source>Command line argument started</source>
         <translation>Komut satırı argümanı başlatıldı</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3371"/>
+        <location filename="../qjackctlMainForm.cpp" line="3379"/>
         <source>Client deactivated.</source>
         <translation>İstemci devre dışı bırakıldı.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3656"/>
+        <location filename="../qjackctlMainForm.cpp" line="3664"/>
         <source>Transport rewind.</source>
         <translation>Geri sarma.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3677"/>
+        <location filename="../qjackctlMainForm.cpp" line="3685"/>
         <source>Transport backward.</source>
         <translation>Geriye.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3706"/>
-        <location filename="../qjackctlMainForm.cpp" line="3847"/>
-        <location filename="../qjackctlMainForm.cpp" line="3991"/>
+        <location filename="../qjackctlMainForm.cpp" line="3714"/>
+        <location filename="../qjackctlMainForm.cpp" line="3855"/>
+        <location filename="../qjackctlMainForm.cpp" line="3999"/>
         <source>Starting</source>
         <translation>Başlatılıyor</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3708"/>
+        <location filename="../qjackctlMainForm.cpp" line="3716"/>
         <source>Transport start.</source>
         <translation>Oynat.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3722"/>
-        <location filename="../qjackctlMainForm.cpp" line="3998"/>
+        <location filename="../qjackctlMainForm.cpp" line="3730"/>
+        <location filename="../qjackctlMainForm.cpp" line="4006"/>
         <source>Stopping</source>
         <translation>Durduruluyor</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3724"/>
+        <location filename="../qjackctlMainForm.cpp" line="3732"/>
         <source>Transport stop.</source>
         <translation>Durdur.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3745"/>
+        <location filename="../qjackctlMainForm.cpp" line="3753"/>
         <source>Transport forward.</source>
         <translation>İleriye.</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3762"/>
-        <location filename="../qjackctlMainForm.cpp" line="4002"/>
+        <location filename="../qjackctlMainForm.cpp" line="3770"/>
+        <location filename="../qjackctlMainForm.cpp" line="4010"/>
         <source>Stopped</source>
         <translation>Durduruldu</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3805"/>
+        <location filename="../qjackctlMainForm.cpp" line="3813"/>
         <source>%1 (%2%)</source>
         <translation>%1 (%2 %)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3809"/>
+        <location filename="../qjackctlMainForm.cpp" line="3817"/>
         <source>%1 (%2%, %3 xruns)</source>
         <translation>%1 (%2%, %3 xruns)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3817"/>
+        <location filename="../qjackctlMainForm.cpp" line="3825"/>
         <source>%1 %</source>
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3819"/>
+        <location filename="../qjackctlMainForm.cpp" line="3827"/>
         <source>%1 Hz</source>
         <translation>%1 Hz</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3821"/>
+        <location filename="../qjackctlMainForm.cpp" line="3829"/>
         <source>%1 frames</source>
         <translation>%1 Frames</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3832"/>
+        <location filename="../qjackctlMainForm.cpp" line="3840"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3832"/>
+        <location filename="../qjackctlMainForm.cpp" line="3840"/>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3837"/>
+        <location filename="../qjackctlMainForm.cpp" line="3845"/>
         <source>FW</source>
         <translation>FW</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3840"/>
+        <location filename="../qjackctlMainForm.cpp" line="3848"/>
         <source>RT</source>
         <translation>GZ</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3850"/>
+        <location filename="../qjackctlMainForm.cpp" line="3858"/>
         <source>Rolling</source>
         <translation>Hareket Ediyor</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3853"/>
+        <location filename="../qjackctlMainForm.cpp" line="3861"/>
         <source>Looping</source>
         <translation>Döngü</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3883"/>
+        <location filename="../qjackctlMainForm.cpp" line="3891"/>
         <source>%1 msec</source>
         <translation>%1 ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3890"/>
+        <location filename="../qjackctlMainForm.cpp" line="3898"/>
         <source>XRUN callback (%1 skipped).</source>
         <translation>XRUN geri dönüşü (%1 atlananlar).</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="3995"/>
+        <location filename="../qjackctlMainForm.cpp" line="4003"/>
         <source>Started</source>
         <translation>Başlatıldı</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4005"/>
+        <location filename="../qjackctlMainForm.cpp" line="4013"/>
         <source>Active</source>
         <translation>Aktif</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4008"/>
+        <location filename="../qjackctlMainForm.cpp" line="4016"/>
         <source>Activating</source>
         <translation>Etkinleştiriliyor</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4013"/>
+        <location filename="../qjackctlMainForm.cpp" line="4021"/>
         <source>Inactive</source>
         <translation>Etkin değil</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4128"/>
-        <location filename="../qjackctlMainForm.cpp" line="4183"/>
+        <location filename="../qjackctlMainForm.cpp" line="4136"/>
+        <location filename="../qjackctlMainForm.cpp" line="4191"/>
         <source>&amp;Hide</source>
         <translation>&amp;Gizli</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4886"/>
+        <location filename="../qjackctlMainForm.cpp" line="4894"/>
         <source>D-BUS: GetParameterConstraint(&apos;%1&apos;):
 
 %2.
@@ -2105,90 +2105,90 @@ Daha fazla bilgi için lütfen mesaj penceresini kontrol edin.</translation>
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4124"/>
+        <location filename="../qjackctlMainForm.cpp" line="4132"/>
         <source>Mi&amp;nimize</source>
         <translation>K&amp;üçült</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4129"/>
-        <location filename="../qjackctlMainForm.cpp" line="4183"/>
+        <location filename="../qjackctlMainForm.cpp" line="4137"/>
+        <location filename="../qjackctlMainForm.cpp" line="4191"/>
         <source>S&amp;how</source>
         <translation>&amp;Göster</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4125"/>
+        <location filename="../qjackctlMainForm.cpp" line="4133"/>
         <source>Rest&amp;ore</source>
         <translation>&amp;Geri Yükle</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4141"/>
+        <location filename="../qjackctlMainForm.cpp" line="4149"/>
         <source>&amp;Stop</source>
         <translation>&amp;Durdur</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4144"/>
+        <location filename="../qjackctlMainForm.cpp" line="4152"/>
         <source>&amp;Reset</source>
         <translation>&amp;Sıfırla</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4150"/>
+        <location filename="../qjackctlMainForm.cpp" line="4158"/>
         <source>&amp;Presets</source>
         <translation>&amp;Ön ayarlar</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4210"/>
+        <location filename="../qjackctlMainForm.cpp" line="4218"/>
         <source>&amp;Versioning</source>
         <translation>Sürüm &amp;oluşturma</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4217"/>
+        <location filename="../qjackctlMainForm.cpp" line="4225"/>
         <source>Re&amp;fresh</source>
         <translation>&amp;Yenile</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="421"/>
-        <location filename="../qjackctlMainForm.cpp" line="4178"/>
+        <location filename="../qjackctlMainForm.cpp" line="4186"/>
         <source>S&amp;ession</source>
         <translation>&amp;Oturum</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4187"/>
+        <location filename="../qjackctlMainForm.cpp" line="4195"/>
         <source>&amp;Load...</source>
         <translation>&amp;Yükle...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4195"/>
+        <location filename="../qjackctlMainForm.cpp" line="4203"/>
         <source>&amp;Save...</source>
         <translation>&amp;Kaydet...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4200"/>
+        <location filename="../qjackctlMainForm.cpp" line="4208"/>
         <source>Save and &amp;Quit...</source>
         <translation>Kaydet ve &amp;Cık...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4204"/>
+        <location filename="../qjackctlMainForm.cpp" line="4212"/>
         <source>Save &amp;Template...</source>
         <translation>&amp;Şablonu Kaydet...</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4239"/>
+        <location filename="../qjackctlMainForm.cpp" line="4247"/>
         <source>&amp;Connections</source>
         <translation>&amp;Bağlantılar</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4243"/>
+        <location filename="../qjackctlMainForm.cpp" line="4251"/>
         <source>Patch&amp;bay</source>
         <translation>Bağlantı &amp;Paneli</translation>
     </message>
     <message>
         <location filename="../qjackctlMainForm.ui" line="523"/>
-        <location filename="../qjackctlMainForm.cpp" line="4235"/>
+        <location filename="../qjackctlMainForm.cpp" line="4243"/>
         <source>&amp;Graph</source>
         <translation>&amp;Grafik</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4248"/>
+        <location filename="../qjackctlMainForm.cpp" line="4256"/>
         <source>&amp;Transport</source>
         <translation>&amp;Transport</translation>
     </message>
@@ -2205,7 +2205,7 @@ başlatılmasından sonra geçerli olacaktır.</translation>
         <translation>JACK ses sunucusunu yeniden başlatmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4587"/>
+        <location filename="../qjackctlMainForm.cpp" line="4595"/>
         <source>D-BUS: SetParameterValue(&apos;%1&apos;, &apos;%2&apos;):
 
 %3.
@@ -2216,7 +2216,7 @@ başlatılmasından sonra geçerli olacaktır.</translation>
 (%4)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4620"/>
+        <location filename="../qjackctlMainForm.cpp" line="4628"/>
         <source>D-BUS: ResetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -2227,7 +2227,7 @@ başlatılmasından sonra geçerli olacaktır.</translation>
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4862"/>
+        <location filename="../qjackctlMainForm.cpp" line="4870"/>
         <source>D-BUS: GetParameterValue(&apos;%1&apos;):
 
 %2.
@@ -2238,7 +2238,7 @@ başlatılmasından sonra geçerli olacaktır.</translation>
 (%3)</translation>
     </message>
     <message>
-        <location filename="../qjackctlMainForm.cpp" line="4288"/>
+        <location filename="../qjackctlMainForm.cpp" line="4296"/>
         <source>Some settings will be only effective
 the next time you start this program.</source>
         <translation>Bazı ayarlar programın bir sonraki 
@@ -4678,14 +4678,14 @@ Do you want to create it?</source>
         <translation>Tüm kendi kendine bağlanma isteklerini yoksay</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1003"/>
-        <location filename="../qjackctlSetupForm.cpp" line="1066"/>
-        <location filename="../qjackctlSetupForm.cpp" line="2148"/>
+        <location filename="../qjackctlSetupForm.cpp" line="998"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1061"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2155"/>
         <source>Warning</source>
         <translation>Uyarı</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1004"/>
+        <location filename="../qjackctlSetupForm.cpp" line="999"/>
         <source>Some settings have been changed:
 
 &quot;%1&quot;
@@ -4698,7 +4698,7 @@ Do you want to save the changes?</source>
 Değişiklikleri kaydetmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1067"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1062"/>
         <source>Delete preset:
 
 &quot;%1&quot;
@@ -4711,109 +4711,109 @@ Are you sure?</source>
 Emin misin?</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1100"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1095"/>
         <source>msec</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1102"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1097"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1438"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1433"/>
         <source>&amp;Preset Name</source>
         <translation>&amp;Ön Ayar Adı</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1440"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1435"/>
         <source>&amp;Server Name</source>
         <translation>&amp;Sunucu adı</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1441"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1436"/>
         <source>&amp;Server Path</source>
         <translation>&amp;Sunucu yolu</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1442"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1437"/>
         <source>&amp;Driver</source>
         <translation>&amp;Sürücü</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1443"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1438"/>
         <source>&amp;Interface</source>
         <translation>&amp;Arayüz</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1445"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1440"/>
         <source>Sample &amp;Rate</source>
         <translation>Örnekleme &amp;Hızı</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1446"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1441"/>
         <source>&amp;Frames/Period</source>
         <translation>&amp;Çerçeveler/Dönem</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1447"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1442"/>
         <source>Periods/&amp;Buffer</source>
         <translation>Dönemler/&amp;Tampon</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1495"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1490"/>
         <source>Startup Script</source>
         <translation>Başlangıç betiği</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1512"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1507"/>
         <source>Post-Startup Script</source>
         <translation>Başlangıç Sonrası Betiği</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1529"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1524"/>
         <source>Shutdown Script</source>
         <translation>Kapatma betiği</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1546"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1541"/>
         <source>Post-Shutdown Script</source>
         <translation>Kapatma Sonrası Betiği</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1563"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1558"/>
         <source>Active Patchbay Definition</source>
         <translation>Aktif Bağlantı Paneli Tanımı</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1565"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1560"/>
         <source>Patchbay Definition files</source>
         <translation>Bağlantı Paneli Tanım dosyaları</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1581"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1576"/>
         <source>Messages Log</source>
         <translation>Mesaj Günlüğü</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1583"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1578"/>
         <source>Log files</source>
         <translation>Günlük dosyaları</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1982"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1989"/>
         <source>Information</source>
         <translation>Bilgi</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="1983"/>
+        <location filename="../qjackctlSetupForm.cpp" line="1990"/>
         <source>Some settings may be only effective
 next time you start this application.</source>
         <translation>Bazı ayarlar yalnızca bu uygulamayı 
 bir sonraki başlatışınızda etkili olabilir.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.cpp" line="2149"/>
+        <location filename="../qjackctlSetupForm.cpp" line="2156"/>
         <source>Some settings have been changed.
 
 Do you want to apply the changes?</source>

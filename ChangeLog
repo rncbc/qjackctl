@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Graph: force an actual complete refresh on main View/Refresh...,
+  especially when changing the color theme palette on-the-fly.
+
+
 1.0.3  2024-10-29  An Autumn'24 Release.
 
 - Long missing D-Bus method slot added: "reset" (dbus-send --system

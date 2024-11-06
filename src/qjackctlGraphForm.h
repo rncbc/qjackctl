@@ -70,6 +70,9 @@ public:
 	// Initializer.
 	void setup(qjackctlSetup *pSetup);
 
+	// Update the canvas palette.
+	void updatePalette();
+
 public slots:
 
 	// Graph view change slot.
