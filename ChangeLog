@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Fixed command line parsing (QCommandLineParser/Option) to not
+  exiting the application with a segfault when showing help and
+  version information.
+
 - Graph: force an actual complete refresh on main View/Refresh...,
   especially when changing the color theme palette on-the-fly.
 

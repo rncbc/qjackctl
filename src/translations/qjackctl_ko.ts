@@ -87,20 +87,20 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="685"/>
-        <location filename="../qjackctlSetup.cpp" line="747"/>
+        <location filename="../qjackctlSetup.cpp" line="710"/>
+        <location filename="../qjackctlSetup.cpp" line="772"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>옵션 -p에는 인수(사전설정)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="694"/>
-        <location filename="../qjackctlSetup.cpp" line="756"/>
+        <location filename="../qjackctlSetup.cpp" line="719"/>
+        <location filename="../qjackctlSetup.cpp" line="781"/>
         <source>Option -a requires an argument (path).</source>
         <translation>옵션 -a에는 인수(경로)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="704"/>
-        <location filename="../qjackctlSetup.cpp" line="766"/>
+        <location filename="../qjackctlSetup.cpp" line="729"/>
+        <location filename="../qjackctlSetup.cpp" line="791"/>
         <source>Option -n requires an argument (name).</source>
         <translation>옵션 -n에는 인수(이름)가 필요합니다.</translation>
     </message>
@@ -221,14 +221,6 @@
         <location filename="../qjackctlAboutForm.cpp" line="111"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>버전 2 이상의 조건에 따라 재분배 및/또는 수정할 수 있습니다.&lt;br&gt;&lt;br&gt;한국어 번역: 이정희 &amp;lt;daemul72@gmail.com&amp;gt;.</translation>
-    </message>
-</context>
-<context>
-    <name>qjackctlApplication</name>
-    <message>
-        <location filename="../qjackctl.cpp" line="142"/>
-        <source>JACK: %1</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

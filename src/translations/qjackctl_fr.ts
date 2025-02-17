@@ -33,8 +33,8 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="685"/>
-        <location filename="../qjackctlSetup.cpp" line="747"/>
+        <location filename="../qjackctlSetup.cpp" line="710"/>
+        <location filename="../qjackctlSetup.cpp" line="772"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
@@ -93,14 +93,14 @@
         <translation>[commande-et-arguments]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="694"/>
-        <location filename="../qjackctlSetup.cpp" line="756"/>
+        <location filename="../qjackctlSetup.cpp" line="719"/>
+        <location filename="../qjackctlSetup.cpp" line="781"/>
         <source>Option -a requires an argument (path).</source>
         <translation>L&apos;option -a nécessite un argument (chemin).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="704"/>
-        <location filename="../qjackctlSetup.cpp" line="766"/>
+        <location filename="../qjackctlSetup.cpp" line="729"/>
+        <location filename="../qjackctlSetup.cpp" line="791"/>
         <source>Option -n requires an argument (name).</source>
         <translation>L&apos;option -n nécessite un argument (nom).</translation>
     </message>
@@ -221,14 +221,6 @@
         <location filename="../qjackctlAboutForm.cpp" line="79"/>
         <source>D-Bus interface support disabled.</source>
         <translation>Prise en charge de l&apos;interface D-Bus désactivée.</translation>
-    </message>
-</context>
-<context>
-    <name>qjackctlApplication</name>
-    <message>
-        <location filename="../qjackctl.cpp" line="142"/>
-        <source>JACK: %1</source>
-        <translation>JACK : %1</translation>
     </message>
 </context>
 <context>

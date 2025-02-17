@@ -77,8 +77,8 @@
         <translation>[comando-e-args]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="685"/>
-        <location filename="../qjackctlSetup.cpp" line="747"/>
+        <location filename="../qjackctlSetup.cpp" line="710"/>
+        <location filename="../qjackctlSetup.cpp" line="772"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Opção -p requer um argumento (preset).</translation>
     </message>
@@ -93,14 +93,14 @@
         <translation>Opções:</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="694"/>
-        <location filename="../qjackctlSetup.cpp" line="756"/>
+        <location filename="../qjackctlSetup.cpp" line="719"/>
+        <location filename="../qjackctlSetup.cpp" line="781"/>
         <source>Option -a requires an argument (path).</source>
         <translation>A opção -a requer um argumento (caminho).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="704"/>
-        <location filename="../qjackctlSetup.cpp" line="766"/>
+        <location filename="../qjackctlSetup.cpp" line="729"/>
+        <location filename="../qjackctlSetup.cpp" line="791"/>
         <source>Option -n requires an argument (name).</source>
         <translation>Opção -n requer um argumento (nome).</translation>
     </message>
@@ -221,14 +221,6 @@
         <location filename="../qjackctlAboutForm.cpp" line="70"/>
         <source>JACK Session support disabled.</source>
         <translation>Suporte para sessão JACK desativado.</translation>
-    </message>
-</context>
-<context>
-    <name>qjackctlApplication</name>
-    <message>
-        <location filename="../qjackctl.cpp" line="142"/>
-        <source>JACK: %1</source>
-        <translation>JACK %1</translation>
     </message>
 </context>
 <context>

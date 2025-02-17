@@ -131,17 +131,7 @@ qjackctlApplication::qjackctlApplication ( int& argc, char **argv )
 	QApplication::setDesktopFileName(
 		QString("org.rncbc.%1").arg(PROJECT_NAME));
 #endif
-	QString sVersion(PROJECT_VERSION);
-	sVersion += '\n';
-	sVersion += QString("Qt: %1").arg(qVersion());
-#if defined(QT_STATIC)
-	sVersion += "-static";
-#endif
-	sVersion += '\n';
-#ifdef CONFIG_JACK_VERSION
-	sVersion += tr("JACK: %1").arg(jack_get_version_string());
-#endif
-	QApplication::setApplicationVersion(sVersion);
+	QApplication::setApplicationVersion(PROJECT_VERSION);
 #endif
 	// Load translation support.
 	QLocale loc;

@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2025, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -668,12 +668,37 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		QObject::tr("Set active patchbay definition file."), "path"});
 	parser.addOption({{"n", "server-name"},
 		QObject::tr("Set default JACK audio server name."), "name"});
-	parser.addHelpOption();
-	parser.addVersionOption();
+	const QCommandLineOption& helpOption = parser.addHelpOption();
+	const QCommandLineOption& versionOption = parser.addVersionOption();
 	parser.addPositionalArgument("command-and-args",
 		QObject::tr("Launch command with arguments."),
 		QObject::tr("[command-and-args]"));
-	parser.process(args);
+
+	if (!parser.parse(args)) {
+		show_error(parser.errorText());
+		return false;
+	}
+
+	if (parser.isSet(helpOption)) {
+		show_error(parser.helpText());
+		return false;
+	}
+
+	if (parser.isSet(versionOption)) {
+		QString sVersion = QString("%1 %2\n")
+			.arg(QJACKCTL_TITLE)
+			.arg(QCoreApplication::applicationVersion());
+		sVersion += QString("Qt: %1").arg(qVersion());
+	#if defined(QT_STATIC)
+		sVersion += "-static";
+	#endif
+		sVersion += '\n';
+	#ifdef CONFIG_JACK_VERSION
+		sVersion += QString("JACK: %1\n").arg(jack_get_version_string());
+	#endif
+		show_error(sVersion);
+		return false;
+	}
 
 	if (parser.isSet("start")) {
 		bStartJackCmd = true;
