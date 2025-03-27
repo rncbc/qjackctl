@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2003-2024 Rui Nuno Capela <rncbc@rncbc.org> -->
+<!-- Copyright 2003-2025 Rui Nuno Capela <rncbc@rncbc.org> -->
 <!-- Copyright 2015 Olivier Humbert <trebmuh@tuxfamily.org> for the FR translation-->
 <component type="desktop">
  <id>org.rncbc.qjackctl</id>
@@ -49,6 +49,7 @@
  <developer_name>rncbc aka. Rui Nuno Capela</developer_name>
  <update_contact>rncbc@rncbc.org</update_contact>
  <releases>
+  <release version="1.0.4" date="2024-03-27" urgency="low" />
   <release version="1.0.3" date="2024-10-29" urgency="low" />
   <release version="1.0.2" date="2024-09-17" urgency="low" />
   <release version="1.0.1" date="2024-08-01" urgency="low" />
