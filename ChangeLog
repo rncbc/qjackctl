@@ -4,6 +4,11 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Stepping up next development cycle (Qt >= 6.9)
+
+
 1.0.4  2025-03-27  An Early Spring'25 Release.
 
 - Fixed command line parsing (QCommandLineParser/Option) to not
