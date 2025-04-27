@@ -4349,12 +4349,6 @@ Do you want to create it?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetupForm.ui" line="2984"/>
-        <source></source>
-        <translatorcomment>DO NOT TRANSLATE</translatorcomment>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../qjackctlSetupForm.ui" line="3132"/>
         <source>Manage custom color palette themes</source>
         <translation>Özel renk paleti temalarını yönetin</translation>
