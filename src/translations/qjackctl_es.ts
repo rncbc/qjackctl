@@ -115,7 +115,7 @@
         <translation>Mover</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphCommand.cpp" line="217"/>
+        <location filename="../qjackctlGraphCommand.cpp" line="218"/>
         <source>Rename</source>
         <translation>Renombrar</translation>
     </message>

@@ -115,7 +115,7 @@
         <translation>Přesunout</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphCommand.cpp" line="217"/>
+        <location filename="../qjackctlGraphCommand.cpp" line="218"/>
         <source>Rename</source>
         <translation>Přejmenovat</translation>
     </message>

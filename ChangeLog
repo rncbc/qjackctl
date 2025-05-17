@@ -6,6 +6,10 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: Save node positions as soon as they taken or are moved
+  around, avoiding accidental re-positioning to the previous or
+  original state.
+
 - Stepping up next development cycle (Qt >= 6.9)
 
 

@@ -1,7 +1,7 @@
 // qjackctlGraph.h
 //
 /****************************************************************************
-   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2025, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -527,6 +527,10 @@ public:
 	bool restoreState();
 	bool saveState() const;
 
+	// Graph node/port state methods.
+	bool restoreNode(qjackctlGraphNode *node);
+	bool saveNode(qjackctlGraphNode *node) const;
+
 	// Repel overlapping nodes...
 	void setRepelOverlappingNodes(bool on);
 	bool isRepelOverlappingNodes() const;
@@ -648,10 +652,6 @@ protected:
 
 	// Zoom in rectangle range.
 	void zoomFitRange(const QRectF& range_rect);
-
-	// Graph node position state methods.
-	bool restoreNode(qjackctlGraphNode *node);
-	bool saveNode(qjackctlGraphNode *node) const;
 
 	// Update editors position and size.
 	void updateRenameEditor();
