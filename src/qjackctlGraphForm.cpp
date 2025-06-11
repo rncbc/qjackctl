@@ -1,7 +1,7 @@
 // qjackctlGraphForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2024, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2025, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -1206,8 +1206,8 @@ qjackctlGraphSect *qjackctlGraphForm::item_sect ( qjackctlGraphItem *item ) cons
 // qjackctlGraphConfig --  Canvas state memento.
 
 // Local constants.
-static const char *LayoutGroup      = "/GraphLayout";
-static const char *ViewGroup        = "/GraphView";
+static const char *GraphLayoutGroup = "/GraphLayout";
+static const char *GraphViewGroup   = "/GraphView";
 static const char *ViewMenubarKey   = "/Menubar";
 static const char *ViewToolbarKey   = "/Toolbar";
 static const char *ViewStatusbarKey = "/Statusbar";
@@ -1355,7 +1355,7 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 	if (m_settings == nullptr || widget == nullptr)
 		return false;
 
-	m_settings->beginGroup(ViewGroup);
+	m_settings->beginGroup(GraphViewGroup);
 	m_menubar = m_settings->value(ViewMenubarKey, true).toBool();
 	m_toolbar = m_settings->value(ViewToolbarKey, true).toBool();
 	m_statusbar = m_settings->value(ViewStatusbarKey, true).toBool();
@@ -1368,7 +1368,7 @@ bool qjackctlGraphConfig::restoreState ( QMainWindow *widget )
 	m_cthrunodes = m_settings->value(ViewConnectThroughNodesKey, false).toBool();
 	m_settings->endGroup();
 
-	m_settings->beginGroup(LayoutGroup);
+	m_settings->beginGroup(GraphLayoutGroup);
 	const QByteArray& layout_state
 		= m_settings->value('/' + widget->objectName()).toByteArray();
 	m_settings->endGroup();
@@ -1385,7 +1385,7 @@ bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 	if (m_settings == nullptr || widget == nullptr)
 		return false;
 
-	m_settings->beginGroup(ViewGroup);
+	m_settings->beginGroup(GraphViewGroup);
 	m_settings->setValue(ViewMenubarKey, m_menubar);
 	m_settings->setValue(ViewToolbarKey, m_toolbar);
 	m_settings->setValue(ViewStatusbarKey, m_statusbar);
@@ -1398,7 +1398,7 @@ bool qjackctlGraphConfig::saveState ( QMainWindow *widget ) const
 	m_settings->setValue(ViewConnectThroughNodesKey, m_cthrunodes);
 	m_settings->endGroup();
 
-	m_settings->beginGroup(LayoutGroup);
+	m_settings->beginGroup(GraphLayoutGroup);
 	const QByteArray& layout_state = widget->saveState();
 	m_settings->setValue('/' + widget->objectName(), layout_state);
 	m_settings->endGroup();
