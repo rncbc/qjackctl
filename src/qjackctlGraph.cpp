@@ -115,9 +115,6 @@ void qjackctlGraphItem::setHighlight ( bool hilite )
 {
 	m_hilite = hilite;
 
-	if (m_hilite)
-		raise();
-
 	QGraphicsPathItem::update();
 }
 
