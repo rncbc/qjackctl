@@ -677,6 +677,7 @@ private:
 	QPointF               m_pos;
 	qjackctlGraphItem    *m_item;
 	qjackctlGraphConnect *m_connect;
+	qjackctlGraphPort    *m_port2;
 	QRubberBand          *m_rubberband;
 	qreal                 m_zoom;
 	bool                  m_zoomrange;

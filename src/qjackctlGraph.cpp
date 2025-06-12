@@ -401,7 +401,7 @@ void qjackctlGraphPort::paint ( QPainter *painter,
 		m_text->setDefaultTextColor(is_dark
 			? foreground.lighter()
 			: foreground.darker());
-		if (qjackctlGraphItem::isHighlight() || QGraphicsPathItem::isUnderMouse()) {
+		if (qjackctlGraphItem::isHighlight()) {
 			painter->setPen(foreground.lighter());
 			port_color = background.lighter();
 		} else {
@@ -1126,7 +1126,7 @@ void qjackctlGraphConnect::paint ( QPainter *painter,
 	if (QGraphicsPathItem::isSelected())
 		color = option->palette.highlight().color();
 	else
-	if (qjackctlGraphItem::isHighlight() || QGraphicsPathItem::isUnderMouse())
+	if (qjackctlGraphItem::isHighlight())
 		color = qjackctlGraphItem::foreground().lighter();
 	else
 		color = qjackctlGraphItem::foreground();
@@ -1252,7 +1252,7 @@ static const char *ColorsGroup   = "/GraphColors";
 // Constructor.
 qjackctlGraphCanvas::qjackctlGraphCanvas ( QWidget *parent )
 	: QGraphicsView(parent), m_state(DragNone), m_item(nullptr),
-		m_connect(nullptr), m_rubberband(nullptr),
+		m_connect(nullptr), m_port2(nullptr), m_rubberband(nullptr),
 		m_zoom(1.0), m_zoomrange(false), m_gesture(false),
 		m_commands(nullptr), m_settings(nullptr),
 		m_selected_nodes(0), m_repel_overlapping_nodes(false),
@@ -1809,14 +1809,19 @@ void qjackctlGraphCanvas::mouseMoveEvent ( QMouseEvent *event )
 			// Hovering ports high-lighting...
 			const qreal zval = m_connect->zValue();
 			m_connect->setZValue(-1.0);
+			if (m_port2) {
+				m_port2->setHighlight(false);
+				m_port2 = nullptr;
+			}
 			QGraphicsItem *item = itemAt(pos);
 			if (item && item->type() == qjackctlGraphPort::Type) {
 				qjackctlGraphPort *port1 = m_connect->port1();
 				qjackctlGraphPort *port2 = static_cast<qjackctlGraphPort *> (item);
-				if (port1 && port2 &&
+				if (port1 && port2 && !port2->isHighlight() &&
 					port1->portType() == port2->portType() &&
 					port1->portMode() != port2->portMode()) {
-					port2->update();
+					m_port2 = port2;
+					m_port2->setHighlight(true);
 				}
 			}
 			 m_connect->setZValue(zval);
@@ -1906,6 +1911,10 @@ void qjackctlGraphCanvas::mouseReleaseEvent ( QMouseEvent *event )
 				}
 			}
 			// Done with the hovering connection...
+			if (m_port2) {
+				m_port2->setHighlight(false);
+				m_port2 = nullptr;
+			}
 			if (m_connect) {
 				m_connect->disconnect();
 				delete m_connect;
@@ -2526,6 +2535,10 @@ void qjackctlGraphCanvas::clear (void)
 		delete m_rubberband;
 		m_rubberband = nullptr;
 		m_selected.clear();
+	}
+	if (m_port2) {
+		m_port2->setHighlight(false);
+		m_port2 = nullptr;
 	}
 	if (m_connect) {
 		m_connect->disconnect();
