@@ -104,8 +104,5 @@
 /* Define if jack_free is available. */
 #cmakedefine CONFIG_JACK_FREE @CONFIG_JACK_FREE@
 
-/* Define if Wayland is supported */
-#cmakedefine CONFIG_WAYLAND @CONFIG_WAYLAND@
-
 
 #endif /* CONFIG_H */

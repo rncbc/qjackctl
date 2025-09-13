@@ -98,8 +98,6 @@ option (CONFIG_XUNIQUE "Enable unique/single instance (default=yes)" 1)
 # Enable debugger stack-trace option (assumes --enable-debug).
 option (CONFIG_STACKTRACE "Enable debugger stack-trace (default=no)" 0)
 
-# Enable Wayland support option.
-option (CONFIG_WAYLAND "Enable Wayland support (EXPERIMENTAL) (default=no)" 0)
 
 # Enable Qt6 build preference.
 option (CONFIG_QT6 "Enable Qt6 build (default=yes)" 1)

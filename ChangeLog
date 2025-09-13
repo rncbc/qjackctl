@@ -10,7 +10,7 @@ GIT HEAD
   around, avoiding accidental re-positioning to the previous or
   original state.
 
-- Stepping up next development cycle (Qt >= 6.9)
+- Get rid of CONFIG_WAYLAND build config option.
 
 
 1.0.4  2025-03-27  An Early Spring'25 Release.
