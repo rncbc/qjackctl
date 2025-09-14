@@ -96,6 +96,12 @@ qjackctlAboutForm::qjackctlAboutForm ( QWidget *pParent )
 #if defined(QT_STATIC)
 	sText += "-static";
 #endif
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+	sText += ' ';
+	sText += '(';
+	sText += QApplication::platformName();
+	sText += ')';
+#endif
 #ifdef CONFIG_JACK_VERSION
 	sText += ", ";
 	sText += tr("JACK %1").arg(jack_get_version_string());

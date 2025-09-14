@@ -692,6 +692,12 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 	#if defined(QT_STATIC)
 		sVersion += "-static";
 	#endif
+	#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+		sVersion += ' ';
+		sVersion += '(';
+		sVersion += QApplication::platformName();
+		sVersion += ')';
+	#endif
 		sVersion += '\n';
 	#ifdef CONFIG_JACK_VERSION
 		sVersion += QString("JACK: %1\n").arg(jack_get_version_string());
