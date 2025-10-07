@@ -87,20 +87,20 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="710"/>
-        <location filename="../qjackctlSetup.cpp" line="772"/>
+        <location filename="../qjackctlSetup.cpp" line="716"/>
+        <location filename="../qjackctlSetup.cpp" line="778"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>옵션 -p에는 인수(사전설정)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="719"/>
-        <location filename="../qjackctlSetup.cpp" line="781"/>
+        <location filename="../qjackctlSetup.cpp" line="725"/>
+        <location filename="../qjackctlSetup.cpp" line="787"/>
         <source>Option -a requires an argument (path).</source>
         <translation>옵션 -a에는 인수(경로)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="729"/>
-        <location filename="../qjackctlSetup.cpp" line="791"/>
+        <location filename="../qjackctlSetup.cpp" line="735"/>
+        <location filename="../qjackctlSetup.cpp" line="797"/>
         <source>Option -n requires an argument (name).</source>
         <translation>옵션 -n에는 인수(이름)가 필요합니다.</translation>
     </message>
@@ -203,22 +203,22 @@
         <translation>사용중: Qt %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="101"/>
+        <location filename="../qjackctlAboutForm.cpp" line="107"/>
         <source>JACK %1</source>
         <translation>JACK %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="105"/>
+        <location filename="../qjackctlAboutForm.cpp" line="111"/>
         <source>Website</source>
         <translation>웹사이트</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="110"/>
+        <location filename="../qjackctlAboutForm.cpp" line="116"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>이 프로그램은 자유 소프트웨어이므로 GNU General Public License</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="111"/>
+        <location filename="../qjackctlAboutForm.cpp" line="117"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>버전 2 이상의 조건에 따라 재분배 및/또는 수정할 수 있습니다.&lt;br&gt;&lt;br&gt;한국어 번역: 이정희 &amp;lt;daemul72@gmail.com&amp;gt;.</translation>
     </message>

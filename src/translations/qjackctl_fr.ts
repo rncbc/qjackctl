@@ -33,8 +33,8 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="710"/>
-        <location filename="../qjackctlSetup.cpp" line="772"/>
+        <location filename="../qjackctlSetup.cpp" line="716"/>
+        <location filename="../qjackctlSetup.cpp" line="778"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
@@ -93,14 +93,14 @@
         <translation>[commande-et-arguments]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="719"/>
-        <location filename="../qjackctlSetup.cpp" line="781"/>
+        <location filename="../qjackctlSetup.cpp" line="725"/>
+        <location filename="../qjackctlSetup.cpp" line="787"/>
         <source>Option -a requires an argument (path).</source>
         <translation>L&apos;option -a nécessite un argument (chemin).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="729"/>
-        <location filename="../qjackctlSetup.cpp" line="791"/>
+        <location filename="../qjackctlSetup.cpp" line="735"/>
+        <location filename="../qjackctlSetup.cpp" line="797"/>
         <source>Option -n requires an argument (name).</source>
         <translation>L&apos;option -n nécessite un argument (nom).</translation>
     </message>
@@ -188,22 +188,22 @@
         <translation>Utilisant : Qt %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="101"/>
+        <location filename="../qjackctlAboutForm.cpp" line="107"/>
         <source>JACK %1</source>
         <translation>JACK %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="105"/>
+        <location filename="../qjackctlAboutForm.cpp" line="111"/>
         <source>Website</source>
         <translation>Site ouèbe</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="110"/>
+        <location filename="../qjackctlAboutForm.cpp" line="116"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Ce programme est libre; vous pouvez le redistribuer et/ou le modifier</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="111"/>
+        <location filename="../qjackctlAboutForm.cpp" line="117"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>selon les termes de la Licence Publique Générale GNU version 2 ou ultérieure.</translation>
     </message>

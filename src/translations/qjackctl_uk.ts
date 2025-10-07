@@ -101,20 +101,20 @@
         <translation>[команда-з-аргументами]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="710"/>
-        <location filename="../qjackctlSetup.cpp" line="772"/>
+        <location filename="../qjackctlSetup.cpp" line="716"/>
+        <location filename="../qjackctlSetup.cpp" line="778"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>Разом із параметром -p слід вказати аргумент (набір параметрів).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="719"/>
-        <location filename="../qjackctlSetup.cpp" line="781"/>
+        <location filename="../qjackctlSetup.cpp" line="725"/>
+        <location filename="../qjackctlSetup.cpp" line="787"/>
         <source>Option -a requires an argument (path).</source>
         <translation>Разом із параметром -a слід вказати аргумент (шлях).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="729"/>
-        <location filename="../qjackctlSetup.cpp" line="791"/>
+        <location filename="../qjackctlSetup.cpp" line="735"/>
+        <location filename="../qjackctlSetup.cpp" line="797"/>
         <source>Option -n requires an argument (name).</source>
         <translation>Разом із параметром -n слід вказати аргумент (назву).</translation>
     </message>
@@ -202,22 +202,22 @@
         <translation>Використовуємо Qt %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="101"/>
+        <location filename="../qjackctlAboutForm.cpp" line="107"/>
         <source>JACK %1</source>
         <translation>JACK %1</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="105"/>
+        <location filename="../qjackctlAboutForm.cpp" line="111"/>
         <source>Website</source>
         <translation>Сайт</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="110"/>
+        <location filename="../qjackctlAboutForm.cpp" line="116"/>
         <source>This program is free software; you can redistribute it and/or modify it</source>
         <translation>Ця програма є вільним програмним забезпеченням, ви можете поширювати її і вносити до неї зміни</translation>
     </message>
     <message>
-        <location filename="../qjackctlAboutForm.cpp" line="111"/>
+        <location filename="../qjackctlAboutForm.cpp" line="117"/>
         <source>under the terms of the GNU General Public License version 2 or later.</source>
         <translation>за умов дотримання GNU General Public License версії 2 або новіших версій.</translation>
     </message>
