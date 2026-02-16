@@ -4,9 +4,9 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
-GIT HEAD
+1.0.5  2026-02-16  A Mid-Winter'26 Release.
 
-- Graph: Save node positions as soon as they taken or are moved
+- Graph: Save node positions as soon as they are taken or moved
   around, avoiding accidental re-positioning to the previous or
   original state.
 
