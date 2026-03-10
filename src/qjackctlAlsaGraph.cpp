@@ -1,7 +1,7 @@
 // qjackctlAlsaGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2026, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -36,7 +36,6 @@
 qjackctlAlsaGraph::qjackctlAlsaGraph ( qjackctlGraphCanvas *canvas )
 	: qjackctlGraphSect(canvas)
 {
-	resetPortTypeColors();
 }
 
 
@@ -368,10 +367,9 @@ void qjackctlAlsaGraph::clearItems (void)
 }
 
 
-// Special port-type colors defaults (virtual).
-void qjackctlAlsaGraph::resetPortTypeColors (void)
+// Special port-type colors defaults (static).
+void qjackctlAlsaGraph::resetPortTypeColors ( qjackctlGraphCanvas *canvas )
 {
-	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
 	if (canvas) {
 		canvas->setPortTypeColor(
 			qjackctlAlsaGraph::midiPortType(),

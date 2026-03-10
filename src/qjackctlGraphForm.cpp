@@ -500,6 +500,11 @@ void qjackctlGraphForm::setup ( qjackctlSetup *pSetup )
 	viewRepelOverlappingNodes(m_config->isRepelOverlappingNodes());
 	viewConnectThroughNodes(m_config->isConnectThroughNodes());
 
+	qjackctlJackGraph::resetPortTypeColors(m_ui.graphCanvas);
+#ifdef CONFIG_ALSA_SEQ
+	qjackctlAlsaGraph::resetPortTypeColors(m_ui.graphCanvas);
+#endif
+
 	m_ui.graphCanvas->restoreState();
 
 	updateViewColors();
@@ -685,10 +690,10 @@ void qjackctlGraphForm::viewColorsReset (void)
 {
 	m_ui.graphCanvas->clearPortTypeColors();
 	if (m_jack)
-		m_jack->resetPortTypeColors();
+		qjackctlJackGraph::resetPortTypeColors(m_ui.graphCanvas);
 #ifdef CONFIG_ALSA_SEQ
 	if (m_alsa)
-		m_alsa->resetPortTypeColors();
+		qjackctlAlsaGraph::resetPortTypeColors(m_ui.graphCanvas);
 #endif
 	m_ui.graphCanvas->updatePortTypeColors();
 

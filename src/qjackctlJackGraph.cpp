@@ -1,7 +1,7 @@
 // qjackctlJackGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2026, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -171,7 +171,6 @@ bool qjackctlJackGraph_port_is_osc ( jack_uuid_t uuid )
 qjackctlJackGraph::qjackctlJackGraph ( qjackctlGraphCanvas *canvas )
 	: qjackctlGraphSect(canvas)
 {
-		resetPortTypeColors();
 }
 
 
@@ -506,10 +505,9 @@ void qjackctlJackGraph::clearItems (void)
 }
 
 
-// Special port-type colors defaults (virtual).
-void qjackctlJackGraph::resetPortTypeColors (void)
+// Special port-type colors defaults (static).
+void qjackctlJackGraph::resetPortTypeColors ( qjackctlGraphCanvas *canvas )
 {
-	qjackctlGraphCanvas *canvas = qjackctlGraphSect::canvas();
 	if (canvas) {
 		canvas->setPortTypeColor(
 			qjackctlJackGraph::audioPortType(),
