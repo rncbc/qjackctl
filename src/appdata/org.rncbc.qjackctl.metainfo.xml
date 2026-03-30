@@ -47,7 +47,9 @@
  <url type="homepage">https://qjackctl.sourceforge.io</url>
  <url type="vcs-browser">https://github.com/rncbc/qjackctl</url>
  <project_group>rncbc.org</project_group>
- <developer_name>rncbc aka. Rui Nuno Capela</developer_name>
+ <developer id="rncbc.org">
+  <name>rncbc aka. Rui Nuno Capela</name>
+ </developer>
  <update_contact>rncbc@rncbc.org</update_contact>
  <releases>
   <release version="1.0.5" date="2026-02-16" urgency="low" />
