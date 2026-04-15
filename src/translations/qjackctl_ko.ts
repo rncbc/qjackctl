@@ -44,25 +44,25 @@
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="636"/>
-        <location filename="../qjackctlSetup.cpp" line="664"/>
+        <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Start JACK audio server immediately.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="638"/>
-        <location filename="../qjackctlSetup.cpp" line="666"/>
+        <location filename="../qjackctlSetup.cpp" line="672"/>
         <source>Set default settings preset name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="640"/>
-        <location filename="../qjackctlSetup.cpp" line="668"/>
+        <location filename="../qjackctlSetup.cpp" line="674"/>
         <source>Set active patchbay definition file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
-        <location filename="../qjackctlSetup.cpp" line="670"/>
+        <location filename="../qjackctlSetup.cpp" line="676"/>
         <source>Set default JACK audio server name.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -77,30 +77,35 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="674"/>
+        <location filename="../qjackctlSetup.cpp" line="678"/>
+        <source>Displays help on command-line options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="681"/>
         <source>Launch command with arguments.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="675"/>
+        <location filename="../qjackctlSetup.cpp" line="682"/>
         <source>[command-and-args]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="716"/>
-        <location filename="../qjackctlSetup.cpp" line="778"/>
+        <location filename="../qjackctlSetup.cpp" line="723"/>
+        <location filename="../qjackctlSetup.cpp" line="785"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>옵션 -p에는 인수(사전설정)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="725"/>
-        <location filename="../qjackctlSetup.cpp" line="787"/>
+        <location filename="../qjackctlSetup.cpp" line="732"/>
+        <location filename="../qjackctlSetup.cpp" line="794"/>
         <source>Option -a requires an argument (path).</source>
         <translation>옵션 -a에는 인수(경로)가 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="735"/>
-        <location filename="../qjackctlSetup.cpp" line="797"/>
+        <location filename="../qjackctlSetup.cpp" line="742"/>
+        <location filename="../qjackctlSetup.cpp" line="804"/>
         <source>Option -n requires an argument (name).</source>
         <translation>옵션 -n에는 인수(이름)가 필요합니다.</translation>
     </message>
@@ -1215,12 +1220,12 @@ Are you sure?</source>
         <translation>확대/축소</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="510"/>
+        <location filename="../qjackctlGraphForm.cpp" line="515"/>
         <source>Ready</source>
         <translation>준비 완료</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="673"/>
+        <location filename="../qjackctlGraphForm.cpp" line="678"/>
         <source>Colors - %1</source>
         <translation>색상 - %1</translation>
     </message>

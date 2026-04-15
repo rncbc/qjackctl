@@ -1,7 +1,7 @@
 // qjackctlSetup.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2025, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2026, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -660,15 +660,22 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 	parser.setApplicationDescription(
 		QJACKCTL_TITLE " - " + QObject::tr(QJACKCTL_SUBTITLE));
 
-	parser.addOption({{"s", "start"},
+	const QString s_start           = "start";
+	const QString s_preset          = "preset";
+	const QString s_active_patchbay = "active-patchbay";
+	const QString s_server_name     = "server-name";
+	const QString s_help            = "help";
+
+	parser.addOption({{"s", s_start},
 		QObject::tr("Start JACK audio server immediately.")});
-	parser.addOption({{"p", "preset"},
+	parser.addOption({{"p", s_preset},
 		QObject::tr("Set default settings preset name."), "label"});
-	parser.addOption({{"a", "active-patchbay"},
+	parser.addOption({{"a", s_active_patchbay},
 		QObject::tr("Set active patchbay definition file."), "path"});
-	parser.addOption({{"n", "server-name"},
+	parser.addOption({{"n", s_server_name},
 		QObject::tr("Set default JACK audio server name."), "name"});
-	const QCommandLineOption& helpOption = parser.addHelpOption();
+	parser.addOption({{"h", s_help},
+		QObject::tr("Displays help on command-line options.")});
 	const QCommandLineOption& versionOption = parser.addVersionOption();
 	parser.addPositionalArgument("command-and-args",
 		QObject::tr("Launch command with arguments."),
@@ -679,7 +686,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		return false;
 	}
 
-	if (parser.isSet(helpOption)) {
+	if (parser.isSet(s_help)) {
 		show_error(parser.helpText());
 		return false;
 	}
@@ -706,12 +713,12 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		return false;
 	}
 
-	if (parser.isSet("start")) {
+	if (parser.isSet(s_start)) {
 		bStartJackCmd = true;
 	}
 
-	if (parser.isSet("preset")) {
-		const QString& sVal = parser.value("preset");
+	if (parser.isSet(s_preset)) {
+		const QString& sVal = parser.value(s_preset);
 		if (sVal.isEmpty()) {
 			show_error(QObject::tr("Option -p requires an argument (preset)."));
 			return false;
@@ -719,8 +726,8 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		sDefPreset = sVal;
 	}
 
-	if (parser.isSet("active-patchbay")) {
-		const QString& sVal = parser.value("active-patchbay");
+	if (parser.isSet(s_active_patchbay)) {
+		const QString& sVal = parser.value(s_active_patchbay);
 		if (sVal.isEmpty()) {
 			show_error(QObject::tr("Option -a requires an argument (path)."));
 			return false;
@@ -729,8 +736,8 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		sActivePatchbayPath = sVal;
 	}
 
-	if (parser.isSet("server-name")) {
-		const QString& sVal = parser.value("server-name");
+	if (parser.isSet(s_server_name)) {
+		const QString& sVal = parser.value(s_server_name);
 		if (sVal.isEmpty()) {
 			show_error(QObject::tr("Option -n requires an argument (name)."));
 			return false;

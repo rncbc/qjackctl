@@ -33,8 +33,8 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="716"/>
-        <location filename="../qjackctlSetup.cpp" line="778"/>
+        <location filename="../qjackctlSetup.cpp" line="723"/>
+        <location filename="../qjackctlSetup.cpp" line="785"/>
         <source>Option -p requires an argument (preset).</source>
         <translation>L&apos;option -p nécessite un argument (préréglage).</translation>
     </message>
@@ -50,25 +50,25 @@
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="636"/>
-        <location filename="../qjackctlSetup.cpp" line="664"/>
+        <location filename="../qjackctlSetup.cpp" line="670"/>
         <source>Start JACK audio server immediately.</source>
         <translation>Démarrez le serveur audio JACK immédiatement.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="638"/>
-        <location filename="../qjackctlSetup.cpp" line="666"/>
+        <location filename="../qjackctlSetup.cpp" line="672"/>
         <source>Set default settings preset name.</source>
         <translation>Définir le nom de la présélection des paramètres par défaut.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="640"/>
-        <location filename="../qjackctlSetup.cpp" line="668"/>
+        <location filename="../qjackctlSetup.cpp" line="674"/>
         <source>Set active patchbay definition file.</source>
         <translation>Paramètre le fichier de définition de patchbay actif.</translation>
     </message>
     <message>
         <location filename="../qjackctlSetup.cpp" line="642"/>
-        <location filename="../qjackctlSetup.cpp" line="670"/>
+        <location filename="../qjackctlSetup.cpp" line="676"/>
         <source>Set default JACK audio server name.</source>
         <translation>Paramètre le fichier de définition de baie de brassage active.</translation>
     </message>
@@ -83,24 +83,29 @@
         <translation>Afficher les informations de version.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="674"/>
+        <location filename="../qjackctlSetup.cpp" line="678"/>
+        <source>Displays help on command-line options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qjackctlSetup.cpp" line="681"/>
         <source>Launch command with arguments.</source>
         <translation>Lancer la commande avec des arguments.</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="675"/>
+        <location filename="../qjackctlSetup.cpp" line="682"/>
         <source>[command-and-args]</source>
         <translation>[commande-et-arguments]</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="725"/>
-        <location filename="../qjackctlSetup.cpp" line="787"/>
+        <location filename="../qjackctlSetup.cpp" line="732"/>
+        <location filename="../qjackctlSetup.cpp" line="794"/>
         <source>Option -a requires an argument (path).</source>
         <translation>L&apos;option -a nécessite un argument (chemin).</translation>
     </message>
     <message>
-        <location filename="../qjackctlSetup.cpp" line="735"/>
-        <location filename="../qjackctlSetup.cpp" line="797"/>
+        <location filename="../qjackctlSetup.cpp" line="742"/>
+        <location filename="../qjackctlSetup.cpp" line="804"/>
         <source>Option -n requires an argument (name).</source>
         <translation>L&apos;option -n nécessite un argument (nom).</translation>
     </message>
@@ -1215,12 +1220,12 @@ de toutes les applications clientes.
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="510"/>
+        <location filename="../qjackctlGraphForm.cpp" line="515"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
     <message>
-        <location filename="../qjackctlGraphForm.cpp" line="673"/>
+        <location filename="../qjackctlGraphForm.cpp" line="678"/>
         <source>Colors - %1</source>
         <translation>Couleurs - %1</translation>
     </message>
