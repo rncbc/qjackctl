@@ -634,13 +634,13 @@ void qjackctlSetup::print_usage ( const QString& arg0 )
 	out << QObject::tr("Options:") + sEol;
 	out << "  -s, --start" + sEot +
 		QObject::tr("Start JACK audio server immediately.") + sEol;
-	out << "  -p, --preset=[label]" + sEot +
+	out << "  -p, --preset <label>" + sEot +
 		QObject::tr("Set default settings preset name.") + sEol;
-	out << "  -a, --active-patchbay=[path]" + sEot +
+	out << "  -a, --active-patchbay <path>" + sEot +
 		QObject::tr("Set active patchbay definition file.") + sEol;
-	out << "  -n, --server-name=[label]" + sEot +
+	out << "  -n, --server-name <label>" + sEot +
 		QObject::tr("Set default JACK audio server name.") + sEol;
-	out << "  -h, --help" + sEot +
+	out << "  -?, --help" + sEot +
 		QObject::tr("Show help about command line options.") + sEol;
 	out << "  -v, --version" + sEot +
 		QObject::tr("Show version information.") + sEol;
@@ -674,7 +674,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 		QObject::tr("Set active patchbay definition file."), "path"});
 	parser.addOption({{"n", s_server_name},
 		QObject::tr("Set default JACK audio server name."), "name"});
-	parser.addOption({{"h", s_help},
+	parser.addOption({{"?", s_help},
 		QObject::tr("Displays help on command-line options.")});
 	const QCommandLineOption& versionOption = parser.addVersionOption();
 	parser.addPositionalArgument("command-and-args",
@@ -808,7 +808,7 @@ bool qjackctlSetup::parse_args ( const QStringList& args )
 			if (iEqual < 0)
 				++i;
 		}
-		else if (sArg == "-h" || sArg == "--help") {
+		else if (sArg == "-?" || sArg == "--help") {
 			print_usage(args.at(0));
 			return false;
 		}
