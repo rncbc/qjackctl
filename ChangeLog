@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Fixed JACK metadata properties assignment (aka. pretty-names)
+  vs. native client/port name aliases. (EXPERIMENTAL)
+
+
 1.0.5  2026-02-16  A Mid-Winter'26 Release.
 
 - Graph: Save node positions as soon as they are taken or moved

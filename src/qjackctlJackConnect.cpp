@@ -1,7 +1,7 @@
 // qjackctlJackConnect.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2023, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2026, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -131,7 +131,7 @@ void qjackctlJackPort::updatePortName ( bool bRename )
 		if (pJackPort) {
 			jack_uuid_t port_uuid = ::jack_port_uuid(pJackPort);
 			const QString& sPrettyName = prettyName(port_uuid);
-			if (sPortNameEx != sPortName && sPortNameEx != sPrettyName) {
+			if (sPortNameEx == sPortName && sPortNameEx != sPrettyName) {
 				if (sPrettyName.isEmpty() || bRename) {
 					setPrettyName(pJackClient, port_uuid, sPortNameEx);
 				} else {
@@ -247,7 +247,7 @@ void qjackctlJackClient::updateClientName ( bool bRename )
 			jack_uuid_t client_uuid = 0;
 			::jack_uuid_parse(pszClientUuid, &client_uuid);
 			const QString& sPrettyName = prettyName(client_uuid);
-			if (sClientNameEx != sClientName && sClientNameEx != sPrettyName) {
+			if (sClientNameEx == sClientName && sClientNameEx != sPrettyName) {
 				if (sPrettyName.isEmpty() || bRename) {
 					setPrettyName(pJackClient, client_uuid, sClientNameEx);
 				} else {
