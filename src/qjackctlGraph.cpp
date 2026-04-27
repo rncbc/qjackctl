@@ -1,7 +1,7 @@
 // qjackctlGraph.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2025, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2026, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -2969,6 +2969,7 @@ public:
 
 		QGraphicsView::setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 		QGraphicsView::setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		QGraphicsView::setAutoFillBackground(true);
 
 		updatePalette();
 
