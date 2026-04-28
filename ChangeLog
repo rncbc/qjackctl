@@ -6,6 +6,9 @@ ChangeLog
 
 GIT HEAD
 
+- Graph: make sure thumb-view widget background is filled/opaque
+  (ie. not transparent)
+
 - Fixed JACK metadata properties assignment (aka. pretty-names)
   vs. native client/port name aliases. (EXPERIMENTAL)
 
