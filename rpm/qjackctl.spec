@@ -124,9 +124,9 @@ cmake --install build
 - A Mid-Winter'26 Release.
 * Thu Mar 27 2025 Rui Nuno Capela <rncbc@rncbc.org> 1.0.4
 - An Early Spring'25 Release.
-* Thu Oct 29 2024 Rui Nuno Capela <rncbc@rncbc.org> 1.0.3
+* Tue Oct 29 2024 Rui Nuno Capela <rncbc@rncbc.org> 1.0.3
 - An Autumn'24 Release.
-* Thu Sep 17 2024 Rui Nuno Capela <rncbc@rncbc.org> 1.0.2
+* Tue Sep 17 2024 Rui Nuno Capela <rncbc@rncbc.org> 1.0.2
 - An End-of-Summer'24 Release.
 * Thu Aug  1 2024 Rui Nuno Capela <rncbc@rncbc.org> 1.0.1
 - A Summer'24 Release.
