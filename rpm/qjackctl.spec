@@ -17,8 +17,8 @@
 
 Summary:	JACK Audio Connection Kit Qt GUI Interface
 Name:		qjackctl
-Version:	1.0.5
-Release:	6.1
+Version:	1.0.6
+Release:	7.1
 License:	GPL-2.0-or-later
 Group:		Productivity/Multimedia/Sound/Utilities
 Source:		%{name}-%{version}.tar.gz
@@ -118,6 +118,8 @@ cmake --install build
 
 
 %changelog
+* Thu Apr 30 2026 Rui Nuno Capela <rncbc@rncbc.org> 1.0.6
+- A Spring'26 Release.
 * Mon Feb 16 2026 Rui Nuno Capela <rncbc@rncbc.org> 1.0.5
 - A Mid-Winter'26 Release.
 * Thu Mar 27 2025 Rui Nuno Capela <rncbc@rncbc.org> 1.0.4
