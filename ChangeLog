@@ -4,6 +4,12 @@ QjackCtl - JACK Audio Connection Kit Qt GUI Interface
 ChangeLog
 
 
+GIT HEAD
+
+- Fixed crash when selecting the "Don't ask this again" option
+  on some message-box prompts. (EXPERIMENTAL)
+
+
 1.0.6  2026-04-30  A Spring'26 Release.
 
 - Graph: make sure thumb-view widget background is filled/opaque

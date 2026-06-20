@@ -1,7 +1,7 @@
 // qjackctlMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2003-2025, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2003-2026, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -979,6 +979,9 @@ bool qjackctlMainForm::queryClose (void)
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
+		#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+			mbox.setOptions(QMessageBox::Option::DontUseNativeDialog);
+		#endif
 			bQueryClose = (mbox.exec() == QMessageBox::Ok);
 			if (cbox.isChecked())
 				m_pSetup->bSystemTrayQueryClose = false;
@@ -1025,6 +1028,9 @@ bool qjackctlMainForm::queryClose (void)
 		cbox.setChecked(false);
 		cbox.blockSignals(true);
 		mbox.addButton(&cbox, QMessageBox::ActionRole);
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+		mbox.setOptions(QMessageBox::Option::DontUseNativeDialog);
+	#endif
 		bQueryClose = (mbox.exec() == QMessageBox::Ok);
 		if (bQueryClose && cbox.isChecked())
 			m_pSetup->bQueryClose = false;
@@ -1161,6 +1167,9 @@ bool qjackctlMainForm::queryRestart (void)
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
+		#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+			mbox.setOptions(QMessageBox::Option::DontUseNativeDialog);
+		#endif
 			bQueryRestart = (mbox.exec() == QMessageBox::Ok);
 			if (cbox.isChecked()) {
 				m_pSetup->bQueryRestart = bQueryRestart;
@@ -1215,6 +1224,9 @@ bool qjackctlMainForm::queryShutdown (void)
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
 			mbox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+		#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+			mbox.setOptions(QMessageBox::Option::DontUseNativeDialog);
+		#endif
 			bQueryShutdown = (mbox.exec() == QMessageBox::Ok);
 			if (bQueryShutdown && cbox.isChecked())
 				m_pSetup->bQueryShutdown = false;
@@ -3115,6 +3127,9 @@ void qjackctlMainForm::queryDisconnect (
 			cbox.setChecked(false);
 			cbox.blockSignals(true);
 			mbox.addButton(&cbox, QMessageBox::ActionRole);
+		#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+			mbox.setOptions(QMessageBox::Option::DontUseNativeDialog);
+		#endif
 			bQueryDisconnect = (mbox.exec() == QMessageBox::Ok);
 			if (bQueryDisconnect && cbox.isChecked())
 				m_pSetup->bQueryDisconnect = false;
